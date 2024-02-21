@@ -11,11 +11,14 @@
     </parent>
 
     <artifactId>code-assessment-domain</artifactId>
+    <packaging>pom</packaging>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <modules>
+        <module>code-assessment-domain-core</module>
+        <module>code-assessment-application-service</module>
+    </modules>
 
 </project>

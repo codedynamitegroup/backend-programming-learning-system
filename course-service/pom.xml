@@ -10,11 +10,17 @@
     </parent>
 
     <artifactId>course-service</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>course-application</module>
+        <module>course-container</module>
+        <module>course-dataaccess</module>
+        <module>course-domain</module>
+        <module>course-messaging</module>
+    </modules>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
 </project>
