@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system;
+package com.backend.programming.learning.system.course.service.domain;
 
 /**
  * com.backend.programming.learning.system

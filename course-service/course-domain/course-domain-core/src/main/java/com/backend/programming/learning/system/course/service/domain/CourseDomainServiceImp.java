@@ -1,7 +1,5 @@
 package com.backend.programming.learning.system.course.service.domain;
 
-import com.backend.programming.learning.system.CourseDomainService;
-
 /**
  * com.backend.programming.learning.system.course.service.domain
  * Create by Dang Ngoc Tien

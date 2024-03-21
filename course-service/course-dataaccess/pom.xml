@@ -31,6 +31,10 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.backend.programming.learning.system</groupId>
+            <artifactId>course-application-service</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
