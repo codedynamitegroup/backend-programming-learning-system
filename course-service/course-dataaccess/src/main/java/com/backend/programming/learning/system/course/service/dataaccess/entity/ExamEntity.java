@@ -1,12 +1,15 @@
-package com.backend.programming.learning.system.course.service.dataaccess.exam.entity;
+package com.backend.programming.learning.system.course.service.dataaccess.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Generated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
@@ -22,10 +25,11 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "exam")
+@Table(name = "exam", schema = "6bros_course")
 @Entity
 public class ExamEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long courseId;
     private String name;
@@ -37,7 +41,7 @@ public class ExamEntity {
     private Long timeLimit;
     private String overdueHandling;
     private Integer canRedoQuestions;
-    private Integer maxAttempts;
+    private Long maxAttempts;
     private Integer shuffleAnswers;
     private String gradeMethod;
     private LocalDateTime createdAt;

@@ -5,9 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@EnableJpaRepositories(basePackages = {"com.backend.programming.learning.system.course.service.dataaccess.exam.entity"})
-@EntityScan(basePackages = {"com.food.ordering.system.customer.service.dataaccess", "com.food.ordering.system.dataaccess"})
-@SpringBootApplication(scanBasePackages = "com.backend.programming.learning.system")
+@EnableJpaRepositories(basePackages = {"com.backend.programming.learning.system.course.service.dataaccess"})
+@EntityScan(basePackages = {"com.backend.programming.learning.system.course.service.dataaccess"})
+@SpringBootApplication(scanBasePackages = {"com.backend.programming.learning.system", "com.backend.programming.learning.system.course.service"})
 public class CourseServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(CourseServiceApplication.class, args);

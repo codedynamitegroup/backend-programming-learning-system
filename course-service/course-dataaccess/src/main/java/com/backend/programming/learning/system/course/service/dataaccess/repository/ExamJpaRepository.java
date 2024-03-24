@@ -1,8 +1,10 @@
-package com.backend.programming.learning.system.course.service.dataaccess.exam.repository;
+package com.backend.programming.learning.system.course.service.dataaccess.repository;
 
-import com.backend.programming.learning.system.course.service.dataaccess.exam.entity.ExamEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.entity.ExamEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 /**
  * com.backend.programming.learning.system.course.service.dataaccess.exam.repository
