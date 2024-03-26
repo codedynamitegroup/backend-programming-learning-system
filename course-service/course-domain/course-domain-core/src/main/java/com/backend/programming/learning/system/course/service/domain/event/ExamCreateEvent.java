@@ -17,13 +17,8 @@ public class ExamCreateEvent implements DomainEvent<Exam> {
     private final Exam exam;
     private final LocalDateTime createAt;
 
-
     public ExamCreateEvent(Exam exam, LocalDateTime createAt) {
         this.exam = exam;
         this.createAt = LocalDateTime.now();
-    }
-
-    public Exam getEvent() {
-        return exam;
     }
 }
