@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * com.backend.programming.learning.system.course.service.domain.service
  * Create by Dang Ngoc Tien
@@ -25,15 +27,43 @@ public class QuestionCreateCommandHandler {
     private final QuestionRepository questionRepository;
     private final QuestionDataMapper questionDataMapper;
     @Transactional
-    public QuestionCreateEvent createQuestion(CreateQuestionCommand createQuestionCommand) {
+    public QuestionCreateEvent createQuestion(Long examId, CreateQuestionCommand createQuestionCommand) {
         Question question = questionDataMapper.createQuestionToQuestion(createQuestionCommand);
         QuestionCreateEvent questionCreateEvent = questionDomainService.validateAndInitiateQuestion(question);
-        Question savedQuestion = questionRepository.createQuestion(questionCreateEvent.getQuestion());
+        Question savedQuestion = questionRepository.createQuestion(examId, questionCreateEvent.getQuestion());
         if (savedQuestion == null) {
             log.error("Error while saving question");
             throw new RuntimeException("Error while saving question");
         }
         log.info("Question saved successfully");
+        return questionCreateEvent;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Question> getQuestions(Long examId) {
+        return questionRepository.getQuestionsByExamId(examId);
+    }
+
+    @Transactional
+    public void deleteQuestion(Long examId, Long questionId) {
+        questionRepository.deleteQuestion(examId, questionId);
+    }
+
+    @Transactional(readOnly = true)
+    public Question getQuestion(Long questionId) {
+        return questionRepository.getQuestionById(questionId);
+    }
+
+    @Transactional
+    public QuestionCreateEvent updateQuestion(Long examId, Long questionId, CreateQuestionCommand createQuestionCommand) {
+        Question question = questionDataMapper.createQuestionToQuestion(createQuestionCommand);
+        QuestionCreateEvent questionCreateEvent = questionDomainService.validateAndUpdateQuestion(questionId, question);
+        Question savedQuestion = questionRepository.updateQuestion(examId, questionId, questionCreateEvent.getQuestion());
+        if (savedQuestion == null) {
+            log.error("Error while saving question");
+            throw new RuntimeException("Error while saving question");
+        }
+        log.info("Question updated successfully");
         return questionCreateEvent;
     }
 }

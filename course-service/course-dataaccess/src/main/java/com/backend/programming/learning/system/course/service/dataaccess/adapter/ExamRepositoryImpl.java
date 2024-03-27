@@ -48,4 +48,11 @@ public class ExamRepositoryImpl implements ExamRepository {
         return examDataAccessMapper.examEntityToExam(examJpaRepository.save(updatedExamEntity));
     }
 
+    @Override
+    public Exam getExam(Long examId) {
+        return examDataAccessMapper.examEntityToExam(
+                examJpaRepository.findById(examId)
+                        .orElseThrow(() -> new RuntimeException("Exam not found")));
+    }
+
 }

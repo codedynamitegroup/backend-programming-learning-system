@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.ports.inpu
 
 import com.backend.programming.learning.system.course.service.domain.dto.question.create.CreateQuestionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.question.create.CreateQuestionResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.question.get.QuestionResponse;
 
 /**
  * com.backend.programming.learning.system.course.service.domain.ports.input.service.question
@@ -10,5 +11,13 @@ import com.backend.programming.learning.system.course.service.domain.dto.questio
  * Description: ...
  */
 public interface QuestionApplicationService {
-    CreateQuestionResponse createQuestion(CreateQuestionCommand createQuestionCommand);
+    CreateQuestionResponse createQuestion(Long examId, CreateQuestionCommand createQuestionCommand);
+
+    QuestionResponse getQuestions(Long examId);
+
+    void deleteQuestion(Long examId, Long questionId);
+
+    CreateQuestionResponse getQuestion(Long questionId);
+
+    CreateQuestionResponse updateQuestion(Long examId, Long questionId, CreateQuestionCommand createQuestionCommand);
 }

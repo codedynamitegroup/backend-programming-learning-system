@@ -64,4 +64,9 @@ public class ExamCreateCommandHandler {
         log.info("Exam updated successfully");
         return examCreateEvent;
     }
+
+    @Transactional(readOnly = true)
+    public Exam getExam(Long examId) {
+        return examRepository.getExam(examId);
+    }
 }

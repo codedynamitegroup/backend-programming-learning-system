@@ -47,6 +47,12 @@ public class ExamController {
         CreateExamResponse response = examApplicationService.createExam(createExamCommand);
         return ResponseEntity.ok(response);
     }
+    @GetMapping("/{examId}")
+    public ResponseEntity<CreateExamResponse> getExam(@PathVariable Long examId) {
+        log.info("Getting exam with id: {}", examId);
+        CreateExamResponse response = examApplicationService.getExam(examId);
+        return ResponseEntity.ok(response);
+    }
 
     @DeleteMapping("/{examId}")
     public ResponseEntity<Void> deleteExam(@PathVariable Long examId) {

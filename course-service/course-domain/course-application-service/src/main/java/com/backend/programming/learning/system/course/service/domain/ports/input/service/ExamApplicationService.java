@@ -21,4 +21,6 @@ public interface ExamApplicationService {
     void deleteExam(Long examId);
 
     CreateExamResponse updateExam(Long examId, CreateExamCommand createExamCommand);
+
+    CreateExamResponse getExam(Long examId);
 }

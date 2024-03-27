@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.course.service.domain.ports.outp
 
 import com.backend.programming.learning.system.course.service.domain.entity.question.Question;
 
+import java.util.List;
+
 /**
  * com.backend.programming.learning.system.course.service.domain.ports.output.repository.question
  * Create by Dang Ngoc Tien
@@ -9,5 +11,14 @@ import com.backend.programming.learning.system.course.service.domain.entity.ques
  * Description: ...
  */
 public interface QuestionRepository {
-    Question createQuestion(Question question);
+    Question createQuestion(Long examId, Question question);
+
+
+    List<Question> getQuestionsByExamId(Long examId);
+
+    void deleteQuestion(Long examId, Long questionId);
+
+    Question getQuestionById(Long questionId);
+
+    Question updateQuestion(Long examId, Long questionId, Question question);
 }

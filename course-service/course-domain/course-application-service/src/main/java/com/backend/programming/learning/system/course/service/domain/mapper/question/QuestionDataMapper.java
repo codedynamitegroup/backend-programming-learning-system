@@ -2,9 +2,12 @@ package com.backend.programming.learning.system.course.service.domain.mapper.que
 
 import com.backend.programming.learning.system.course.service.domain.dto.question.create.CreateQuestionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.question.create.CreateQuestionResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.question.get.QuestionResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.question.Question;
 import com.backend.programming.learning.system.course.service.domain.event.question.QuestionCreateEvent;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * com.backend.programming.learning.system.course.service.domain.mapper.question
@@ -31,6 +34,19 @@ public class QuestionDataMapper {
     public CreateQuestionResponse mapQuestionCreateEventToCreateQuestionResponse(QuestionCreateEvent questionCreateEvent, String message) {
         return CreateQuestionResponse.builder()
                 .question(questionCreateEvent.getQuestion())
+                .message(message)
+                .build();
+    }
+
+    public QuestionResponse mapQuestionToCreateQuestionResponse(List<Question> questions, String message) {
+        return QuestionResponse.builder()
+                .questions(questions)
+                .message(message)
+                .build();
+    }
+    public CreateQuestionResponse mapQuestionToCreateQuestionResponse(Question questions, String message) {
+        return CreateQuestionResponse.builder()
+                .question(questions)
                 .message(message)
                 .build();
     }

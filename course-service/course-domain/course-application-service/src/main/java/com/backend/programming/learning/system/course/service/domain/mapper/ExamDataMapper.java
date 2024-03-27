@@ -46,4 +46,10 @@ public class ExamDataMapper {
                 .message(message)
                 .build();
     }
+    public CreateExamResponse examToCreateExamResponses(Exam exam,String message) {
+        return CreateExamResponse.builder()
+                .exam(exam)
+                .message(message)
+                .build();
+    }
 }

@@ -40,4 +40,17 @@ public class QuestionDataAccessMapper {
                 .difficulty(questionEntity.getDifficulty())
                 .build();
     }
+
+    public QuestionEntity updateQuestionEntity(QuestionEntity questionEntity, Question question) {
+        questionEntity.setOrgId(question.getOrgId());
+        questionEntity.setName(question.getName());
+        questionEntity.setQuestionText(question.getQuestionText());
+        questionEntity.setGeneralFeedback(question.getGeneralFeedback());
+        questionEntity.setDefaultMark(question.getDefaultMark());
+        questionEntity.setCreatedBy(question.getCreatedBy());
+        questionEntity.setUpdatedBy(question.getUpdatedBy());
+        questionEntity.setQtype(question.getQtype());
+        questionEntity.setDifficulty(question.getDifficulty());
+        return questionEntity;
+    }
 }

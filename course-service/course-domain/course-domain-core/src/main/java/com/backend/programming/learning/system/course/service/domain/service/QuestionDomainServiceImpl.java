@@ -19,4 +19,10 @@ public class QuestionDomainServiceImpl implements QuestionDomainService{
         log.info("validateAndInitiateQuestion");
         return new QuestionCreateEvent(question, LocalDateTime.now());
     }
+
+    @Override
+    public QuestionCreateEvent validateAndUpdateQuestion(Long questionId, Question question) {
+        log.info("validateAndUpdateQuestion");
+        return new QuestionCreateEvent(question, LocalDateTime.now());
+    }
 }

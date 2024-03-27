@@ -18,4 +18,6 @@ public interface ExamRepository {
     void deleteExam(Long examId);
 
     Exam updateExam(Long examId, Exam exam);
+
+    Exam getExam(Long examId);
 }

@@ -2,7 +2,10 @@ package com.backend.programming.learning.system.course.service.dataaccess.reposi
 
 import com.backend.programming.learning.system.course.service.dataaccess.entity.question.QuestionEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * com.backend.programming.learning.system.course.service.dataaccess.repository.question
@@ -13,4 +16,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface QuestionJpaRepository extends JpaRepository<QuestionEntity, Long> {
 
+    @Query("""
+            SELECT q
+            FROM QuestionEntity q
+            JOIN ExamQuestionEntity eq ON q.id = eq.questionId
+            WHERE eq.examId = :examId
+    """)
+    List<QuestionEntity> getQuestionsByExamId(Long examId);
 }

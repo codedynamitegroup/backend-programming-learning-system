@@ -13,4 +13,6 @@ import com.backend.programming.learning.system.course.service.domain.event.quest
 public interface QuestionDomainService {
 
     QuestionCreateEvent validateAndInitiateQuestion(Question question);
+
+    QuestionCreateEvent validateAndUpdateQuestion(Long questionId, Question question);
 }
