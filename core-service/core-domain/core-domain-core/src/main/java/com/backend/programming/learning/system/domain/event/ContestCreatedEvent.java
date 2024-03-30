@@ -1,12 +1,12 @@
 package com.backend.programming.learning.system.domain.event;
 
-import com.backend.programming.learning.system.domain.entity.CertificateCourse;
+import com.backend.programming.learning.system.domain.entity.Contest;
 
 import java.time.ZonedDateTime;
 
-public class CertificateCourseCreatedEvent extends CertificateCourseEvent {
+public class ContestCreatedEvent extends ContestEvent {
 
-    public CertificateCourseCreatedEvent(CertificateCourse certificateCourse, ZonedDateTime createdAt) {
-        super(certificateCourse, createdAt);
+    public ContestCreatedEvent(Contest contest, ZonedDateTime createdAt) {
+        super(contest, createdAt);
     }
 }
