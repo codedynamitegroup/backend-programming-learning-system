@@ -3,15 +3,15 @@ package com.backend.programming.learning.system.domain.entity;
 import com.backend.programming.learning.system.domain.valueobject.TopicId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 public class Topic extends AggregateRoot<TopicId> {
     private String name;
     private String description;
     private final UserId createdBy;
     private UserId updatedBy;
-    private final ZonedDateTime createdAt;
-    private ZonedDateTime updatedAt;
+    private final LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     private Topic(Builder builder) {
         super.setId(builder.topicId);
@@ -39,11 +39,11 @@ public class Topic extends AggregateRoot<TopicId> {
         return updatedBy;
     }
 
-    public ZonedDateTime getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public ZonedDateTime getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
@@ -53,8 +53,8 @@ public class Topic extends AggregateRoot<TopicId> {
         private String description;
         private UserId createdBy;
         private UserId updatedBy;
-        private ZonedDateTime createdAt;
-        private ZonedDateTime updatedAt;
+        private LocalDateTime createdAt;
+        private LocalDateTime updatedAt;
 
         private Builder() {
         }
@@ -88,12 +88,12 @@ public class Topic extends AggregateRoot<TopicId> {
             return this;
         }
 
-        public Builder createdAt(ZonedDateTime val) {
+        public Builder createdAt(LocalDateTime val) {
             createdAt = val;
             return this;
         }
 
-        public Builder updatedAt(ZonedDateTime val) {
+        public Builder updatedAt(LocalDateTime val) {
             updatedAt = val;
             return this;
         }

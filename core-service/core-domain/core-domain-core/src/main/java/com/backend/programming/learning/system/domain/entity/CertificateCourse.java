@@ -2,7 +2,7 @@ package com.backend.programming.learning.system.domain.entity;
 
 import com.backend.programming.learning.system.domain.valueobject.*;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,14 +12,14 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
     private SkillLevel skillLevel;
     private Float avgRating;
     private TopicId topicId;
-    private ZonedDateTime startTime;
-    private ZonedDateTime endTime;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
     private Boolean isDeleted;
     private final List<Chapter> chapters;
     private final UserId createdBy;
     private UserId updatedBy;
-    private final ZonedDateTime createdAt;
-    private ZonedDateTime updatedAt;
+    private final LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private List<String> failureMessages;
 
     public static final String FAILURE_MESSAGE_DELIMITER = ",";
@@ -74,11 +74,11 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         return topicId;
     }
 
-    public ZonedDateTime getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public ZonedDateTime getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
@@ -98,11 +98,11 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         return updatedBy;
     }
 
-    public ZonedDateTime getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public ZonedDateTime getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
@@ -117,14 +117,14 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         private SkillLevel skillLevel;
         private Float avgRating;
         private TopicId topicId;
-        private ZonedDateTime startTime;
-        private ZonedDateTime endTime;
+        private LocalDateTime startTime;
+        private LocalDateTime endTime;
         private Boolean isDeleted;
         private List<Chapter> chapters;
         private UserId createdBy;
         private UserId updatedBy;
-        private ZonedDateTime createdAt;
-        private ZonedDateTime updatedAt;
+        private LocalDateTime createdAt;
+        private LocalDateTime updatedAt;
         private List<String> failureMessages;
 
         private Builder() {
@@ -164,12 +164,12 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
             return this;
         }
 
-        public Builder startTime(ZonedDateTime val) {
+        public Builder startTime(LocalDateTime val) {
             startTime = val;
             return this;
         }
 
-        public Builder endTime(ZonedDateTime val) {
+        public Builder endTime(LocalDateTime val) {
             endTime = val;
             return this;
         }
@@ -194,12 +194,12 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
             return this;
         }
 
-        public Builder createdAt(ZonedDateTime val) {
+        public Builder createdAt(LocalDateTime val) {
             createdAt = val;
             return this;
         }
 
-        public Builder updatedAt(ZonedDateTime val) {
+        public Builder updatedAt(LocalDateTime val) {
             updatedAt = val;
             return this;
         }

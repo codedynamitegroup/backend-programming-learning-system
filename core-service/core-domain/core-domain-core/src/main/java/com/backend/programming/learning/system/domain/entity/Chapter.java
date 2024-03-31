@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.domain.valueobject.CertificateCou
 import com.backend.programming.learning.system.domain.valueobject.ChapterId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Chapter extends BaseEntity<ChapterId> {
@@ -15,8 +15,8 @@ public class Chapter extends BaseEntity<ChapterId> {
     private final List<CodeQuestion> codeQuestions;
     private final UserId createdBy;
     private UserId updatedBy;
-    private final ZonedDateTime createdAt;
-    private ZonedDateTime updatedAt;
+    private final LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     void initializeChapter(CertificateCourseId certificateCourseId, ChapterId chapterId, int no) {
         this.certificateCourseId = certificateCourseId;
@@ -65,11 +65,11 @@ public class Chapter extends BaseEntity<ChapterId> {
         return updatedBy;
     }
 
-    public ZonedDateTime getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public ZonedDateTime getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
@@ -82,8 +82,8 @@ public class Chapter extends BaseEntity<ChapterId> {
         private List<CodeQuestion> codeQuestions;
         private UserId createdBy;
         private UserId updatedBy;
-        private ZonedDateTime createdAt;
-        private ZonedDateTime updatedAt;
+        private LocalDateTime createdAt;
+        private LocalDateTime updatedAt;
 
         private Builder() {
         }
@@ -132,12 +132,12 @@ public class Chapter extends BaseEntity<ChapterId> {
             return this;
         }
 
-        public Builder createdAt(ZonedDateTime val) {
+        public Builder createdAt(LocalDateTime val) {
             createdAt = val;
             return this;
         }
 
-        public Builder updatedAt(ZonedDateTime val) {
+        public Builder updatedAt(LocalDateTime val) {
             updatedAt = val;
             return this;
         }

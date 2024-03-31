@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.domain.valueobject.CertificateCou
 import com.backend.programming.learning.system.domain.valueobject.ReviewId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 public class Review extends AggregateRoot<ReviewId> {
     private final CertificateCourseId certificateCourseId;
@@ -12,8 +12,8 @@ public class Review extends AggregateRoot<ReviewId> {
     private Float rating;
     private final UserId createdBy;
     private UserId updatedBy;
-    private final ZonedDateTime createdAt;
-    private ZonedDateTime updatedAt;
+    private final LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     private Review(Builder builder) {
         super.setId(builder.reviewId);
@@ -46,11 +46,11 @@ public class Review extends AggregateRoot<ReviewId> {
         return updatedBy;
     }
 
-    public ZonedDateTime getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public ZonedDateTime getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
@@ -61,8 +61,8 @@ public class Review extends AggregateRoot<ReviewId> {
         private Float rating;
         private UserId createdBy;
         private UserId updatedBy;
-        private ZonedDateTime createdAt;
-        private ZonedDateTime updatedAt;
+        private LocalDateTime createdAt;
+        private LocalDateTime updatedAt;
 
         private Builder() {
         }
@@ -101,12 +101,12 @@ public class Review extends AggregateRoot<ReviewId> {
             return this;
         }
 
-        public Builder createdAt(ZonedDateTime val) {
+        public Builder createdAt(LocalDateTime val) {
             createdAt = val;
             return this;
         }
 
-        public Builder updatedAt(ZonedDateTime val) {
+        public Builder updatedAt(LocalDateTime val) {
             updatedAt = val;
             return this;
         }
