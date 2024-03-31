@@ -18,8 +18,12 @@ public class Review extends AggregateRoot<ReviewId> {
     private Review(Builder builder) {
         super.setId(builder.reviewId);
         certificateCourseId = builder.certificateCourseId;
+        content = builder.content;
+        rating = builder.rating;
         createdBy = builder.createdBy;
+        updatedBy = builder.updatedBy;
         createdAt = builder.createdAt;
+        updatedAt = builder.updatedAt;
     }
 
     public CertificateCourseId getCertificateCourseId() {
@@ -53,8 +57,12 @@ public class Review extends AggregateRoot<ReviewId> {
     public static final class Builder {
         private ReviewId reviewId;
         private CertificateCourseId certificateCourseId;
+        private String content;
+        private Float rating;
         private UserId createdBy;
+        private UserId updatedBy;
         private ZonedDateTime createdAt;
+        private ZonedDateTime updatedAt;
 
         private Builder() {
         }
@@ -73,13 +81,33 @@ public class Review extends AggregateRoot<ReviewId> {
             return this;
         }
 
+        public Builder content(String val) {
+            content = val;
+            return this;
+        }
+
+        public Builder rating(Float val) {
+            rating = val;
+            return this;
+        }
+
         public Builder createdBy(UserId val) {
             createdBy = val;
             return this;
         }
 
+        public Builder updatedBy(UserId val) {
+            updatedBy = val;
+            return this;
+        }
+
         public Builder createdAt(ZonedDateTime val) {
             createdAt = val;
+            return this;
+        }
+
+        public Builder updatedAt(ZonedDateTime val) {
+            updatedAt = val;
             return this;
         }
 

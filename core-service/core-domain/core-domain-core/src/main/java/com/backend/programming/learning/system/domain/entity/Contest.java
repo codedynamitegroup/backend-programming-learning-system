@@ -17,8 +17,14 @@ public class Contest extends AggregateRoot<ContestId> {
 
     private Contest(Builder builder) {
         super.setId(builder.contestId);
+        name = builder.name;
+        description = builder.description;
+        startTime = builder.startTime;
+        endTime = builder.endTime;
         createdBy = builder.createdBy;
+        updatedBy = builder.updatedBy;
         createdAt = builder.createdAt;
+        updatedAt = builder.updatedAt;
     }
 
     public String getName() {
@@ -55,8 +61,14 @@ public class Contest extends AggregateRoot<ContestId> {
 
     public static final class Builder {
         private ContestId contestId;
+        private String name;
+        private String description;
+        private ZonedDateTime startTime;
+        private ZonedDateTime endTime;
         private UserId createdBy;
+        private UserId updatedBy;
         private ZonedDateTime createdAt;
+        private ZonedDateTime updatedAt;
 
         private Builder() {
         }
@@ -70,13 +82,43 @@ public class Contest extends AggregateRoot<ContestId> {
             return this;
         }
 
+        public Builder name(String val) {
+            name = val;
+            return this;
+        }
+
+        public Builder description(String val) {
+            description = val;
+            return this;
+        }
+
+        public Builder startTime(ZonedDateTime val) {
+            startTime = val;
+            return this;
+        }
+
+        public Builder endTime(ZonedDateTime val) {
+            endTime = val;
+            return this;
+        }
+
         public Builder createdBy(UserId val) {
             createdBy = val;
             return this;
         }
 
+        public Builder updatedBy(UserId val) {
+            updatedBy = val;
+            return this;
+        }
+
         public Builder createdAt(ZonedDateTime val) {
             createdAt = val;
+            return this;
+        }
+
+        public Builder updatedAt(ZonedDateTime val) {
+            updatedAt = val;
             return this;
         }
 
