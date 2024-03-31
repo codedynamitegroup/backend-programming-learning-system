@@ -5,16 +5,24 @@ import com.backend.programming.learning.system.domain.valueobject.ChapterId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 
 public class Chapter extends BaseEntity<ChapterId> {
-    private final CertificateCourseId certificateCourseId;
+    private CertificateCourseId certificateCourseId;
     private int no;
     private String title;
     private String description;
+    private final List<CodeQuestion> codeQuestions;
     private final UserId createdBy;
     private UserId updatedBy;
     private final ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
+
+    void initializeChapter(CertificateCourseId certificateCourseId, ChapterId chapterId, int no) {
+        this.certificateCourseId = certificateCourseId;
+        this.no = no;
+        super.setId(chapterId);
+    }
 
     private Chapter(Builder builder) {
         super.setId(builder.chapterId);
@@ -22,6 +30,7 @@ public class Chapter extends BaseEntity<ChapterId> {
         no = builder.no;
         title = builder.title;
         description = builder.description;
+        codeQuestions = builder.codeQuestions;
         createdBy = builder.createdBy;
         updatedBy = builder.updatedBy;
         createdAt = builder.createdAt;
@@ -42,6 +51,10 @@ public class Chapter extends BaseEntity<ChapterId> {
 
     public String getDescription() {
         return description;
+    }
+
+    public List<CodeQuestion> getCodeQuestions() {
+        return codeQuestions;
     }
 
     public UserId getCreatedBy() {
@@ -66,6 +79,7 @@ public class Chapter extends BaseEntity<ChapterId> {
         private int no;
         private String title;
         private String description;
+        private List<CodeQuestion> codeQuestions;
         private UserId createdBy;
         private UserId updatedBy;
         private ZonedDateTime createdAt;
@@ -100,6 +114,11 @@ public class Chapter extends BaseEntity<ChapterId> {
 
         public Builder description(String val) {
             description = val;
+            return this;
+        }
+
+        public Builder codeQuestions(List<CodeQuestion> val) {
+            codeQuestions = val;
             return this;
         }
 

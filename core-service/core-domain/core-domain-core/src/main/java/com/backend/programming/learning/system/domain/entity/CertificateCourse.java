@@ -1,11 +1,10 @@
 package com.backend.programming.learning.system.domain.entity;
 
-import com.backend.programming.learning.system.domain.valueobject.CertificateCourseId;
-import com.backend.programming.learning.system.domain.valueobject.SkillLevel;
-import com.backend.programming.learning.system.domain.valueobject.TopicId;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
+import com.backend.programming.learning.system.domain.valueobject.*;
 
 import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.UUID;
 
 public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
     private String name;
@@ -16,10 +15,26 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
     private ZonedDateTime startTime;
     private ZonedDateTime endTime;
     private Boolean isDeleted;
+    private final List<Chapter> chapters;
     private final UserId createdBy;
     private UserId updatedBy;
     private final ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
+    private List<String> failureMessages;
+
+    public static final String FAILURE_MESSAGE_DELIMITER = ",";
+
+    public void initializeCertificateCourse() {
+        setId(new CertificateCourseId(UUID.randomUUID()));
+        initializeChapters();
+    }
+
+    private void initializeChapters() {
+        int itemId = 1;
+        for (Chapter chapter: chapters) {
+            chapter.initializeChapter(super.getId(), new ChapterId(UUID.randomUUID()), itemId++);
+        }
+    }
 
     private CertificateCourse(Builder builder) {
         super.setId(builder.certificateCourseId);
@@ -31,10 +46,12 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         startTime = builder.startTime;
         endTime = builder.endTime;
         isDeleted = builder.isDeleted;
+        chapters = builder.chapters;
         createdBy = builder.createdBy;
         updatedBy = builder.updatedBy;
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
+        failureMessages = builder.failureMessages;
     }
 
     public String getName() {
@@ -69,6 +86,10 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         return isDeleted;
     }
 
+    public List<Chapter> getChapters() {
+        return chapters;
+    }
+
     public UserId getCreatedBy() {
         return createdBy;
     }
@@ -85,6 +106,10 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         return updatedAt;
     }
 
+    public List<String> getFailureMessages() {
+        return failureMessages;
+    }
+
     public static final class Builder {
         private CertificateCourseId certificateCourseId;
         private String name;
@@ -95,10 +120,12 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         private ZonedDateTime startTime;
         private ZonedDateTime endTime;
         private Boolean isDeleted;
+        private List<Chapter> chapters;
         private UserId createdBy;
         private UserId updatedBy;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
+        private List<String> failureMessages;
 
         private Builder() {
         }
@@ -152,6 +179,11 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
             return this;
         }
 
+        public Builder chapters(List<Chapter> val) {
+            chapters = val;
+            return this;
+        }
+
         public Builder createdBy(UserId val) {
             createdBy = val;
             return this;
@@ -169,6 +201,11 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
 
         public Builder updatedAt(ZonedDateTime val) {
             updatedAt = val;
+            return this;
+        }
+
+        public Builder failureMessages(List<String> val) {
+            failureMessages = val;
             return this;
         }
 
