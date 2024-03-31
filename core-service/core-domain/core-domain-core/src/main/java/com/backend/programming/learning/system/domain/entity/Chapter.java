@@ -19,8 +19,13 @@ public class Chapter extends BaseEntity<ChapterId> {
     private Chapter(Builder builder) {
         super.setId(builder.chapterId);
         certificateCourseId = builder.certificateCourseId;
+        no = builder.no;
+        title = builder.title;
+        description = builder.description;
         createdBy = builder.createdBy;
+        updatedBy = builder.updatedBy;
         createdAt = builder.createdAt;
+        updatedAt = builder.updatedAt;
     }
 
     public CertificateCourseId getCertificateCourseId() {
@@ -58,8 +63,13 @@ public class Chapter extends BaseEntity<ChapterId> {
     public static final class Builder {
         private ChapterId chapterId;
         private CertificateCourseId certificateCourseId;
+        private int no;
+        private String title;
+        private String description;
         private UserId createdBy;
+        private UserId updatedBy;
         private ZonedDateTime createdAt;
+        private ZonedDateTime updatedAt;
 
         private Builder() {
         }
@@ -78,13 +88,38 @@ public class Chapter extends BaseEntity<ChapterId> {
             return this;
         }
 
+        public Builder no(int val) {
+            no = val;
+            return this;
+        }
+
+        public Builder title(String val) {
+            title = val;
+            return this;
+        }
+
+        public Builder description(String val) {
+            description = val;
+            return this;
+        }
+
         public Builder createdBy(UserId val) {
             createdBy = val;
             return this;
         }
 
+        public Builder updatedBy(UserId val) {
+            updatedBy = val;
+            return this;
+        }
+
         public Builder createdAt(ZonedDateTime val) {
             createdAt = val;
+            return this;
+        }
+
+        public Builder updatedAt(ZonedDateTime val) {
+            updatedAt = val;
             return this;
         }
 

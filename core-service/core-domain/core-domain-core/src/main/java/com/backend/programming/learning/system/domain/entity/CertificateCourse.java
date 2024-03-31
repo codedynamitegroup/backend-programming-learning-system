@@ -23,8 +23,18 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
 
     private CertificateCourse(Builder builder) {
         super.setId(builder.certificateCourseId);
+        name = builder.name;
+        description = builder.description;
+        skillLevel = builder.skillLevel;
+        avgRating = builder.avgRating;
+        topicId = builder.topicId;
+        startTime = builder.startTime;
+        endTime = builder.endTime;
+        isDeleted = builder.isDeleted;
         createdBy = builder.createdBy;
+        updatedBy = builder.updatedBy;
         createdAt = builder.createdAt;
+        updatedAt = builder.updatedAt;
     }
 
     public String getName() {
@@ -77,8 +87,18 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
 
     public static final class Builder {
         private CertificateCourseId certificateCourseId;
+        private String name;
+        private String description;
+        private SkillLevel skillLevel;
+        private Float avgRating;
+        private TopicId topicId;
+        private ZonedDateTime startTime;
+        private ZonedDateTime endTime;
+        private Boolean isDeleted;
         private UserId createdBy;
+        private UserId updatedBy;
         private ZonedDateTime createdAt;
+        private ZonedDateTime updatedAt;
 
         private Builder() {
         }
@@ -92,13 +112,63 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
             return this;
         }
 
+        public Builder name(String val) {
+            name = val;
+            return this;
+        }
+
+        public Builder description(String val) {
+            description = val;
+            return this;
+        }
+
+        public Builder skillLevel(SkillLevel val) {
+            skillLevel = val;
+            return this;
+        }
+
+        public Builder avgRating(Float val) {
+            avgRating = val;
+            return this;
+        }
+
+        public Builder topicId(TopicId val) {
+            topicId = val;
+            return this;
+        }
+
+        public Builder startTime(ZonedDateTime val) {
+            startTime = val;
+            return this;
+        }
+
+        public Builder endTime(ZonedDateTime val) {
+            endTime = val;
+            return this;
+        }
+
+        public Builder isDeleted(Boolean val) {
+            isDeleted = val;
+            return this;
+        }
+
         public Builder createdBy(UserId val) {
             createdBy = val;
             return this;
         }
 
+        public Builder updatedBy(UserId val) {
+            updatedBy = val;
+            return this;
+        }
+
         public Builder createdAt(ZonedDateTime val) {
             createdAt = val;
+            return this;
+        }
+
+        public Builder updatedAt(ZonedDateTime val) {
+            updatedAt = val;
             return this;
         }
 

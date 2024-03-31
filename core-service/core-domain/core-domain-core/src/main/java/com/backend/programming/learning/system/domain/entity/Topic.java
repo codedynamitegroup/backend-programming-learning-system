@@ -15,8 +15,12 @@ public class Topic extends AggregateRoot<TopicId> {
 
     private Topic(Builder builder) {
         super.setId(builder.topicId);
+        name = builder.name;
+        description = builder.description;
         createdBy = builder.createdBy;
+        updatedBy = builder.updatedBy;
         createdAt = builder.createdAt;
+        updatedAt = builder.updatedAt;
     }
 
     public String getName() {
@@ -45,8 +49,12 @@ public class Topic extends AggregateRoot<TopicId> {
 
     public static final class Builder {
         private TopicId topicId;
+        private String name;
+        private String description;
         private UserId createdBy;
+        private UserId updatedBy;
         private ZonedDateTime createdAt;
+        private ZonedDateTime updatedAt;
 
         private Builder() {
         }
@@ -60,13 +68,33 @@ public class Topic extends AggregateRoot<TopicId> {
             return this;
         }
 
+        public Builder name(String val) {
+            name = val;
+            return this;
+        }
+
+        public Builder description(String val) {
+            description = val;
+            return this;
+        }
+
         public Builder createdBy(UserId val) {
             createdBy = val;
             return this;
         }
 
+        public Builder updatedBy(UserId val) {
+            updatedBy = val;
+            return this;
+        }
+
         public Builder createdAt(ZonedDateTime val) {
             createdAt = val;
+            return this;
+        }
+
+        public Builder updatedAt(ZonedDateTime val) {
+            updatedAt = val;
             return this;
         }
 
