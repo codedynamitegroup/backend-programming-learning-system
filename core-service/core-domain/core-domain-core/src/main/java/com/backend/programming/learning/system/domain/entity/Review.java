@@ -63,7 +63,7 @@ public class Review extends AggregateRoot<ReviewId> {
             return new Builder();
         }
 
-        public Builder id(ReviewId val) {
+        public Builder reviewId(ReviewId val) {
             reviewId = val;
             return this;
         }
