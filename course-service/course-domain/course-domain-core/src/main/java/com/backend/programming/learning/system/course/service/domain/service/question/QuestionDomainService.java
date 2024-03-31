@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.service;
+package com.backend.programming.learning.system.course.service.domain.service.question;
 
 import com.backend.programming.learning.system.course.service.domain.entity.question.Question;
 import com.backend.programming.learning.system.course.service.domain.event.question.QuestionCreateEvent;

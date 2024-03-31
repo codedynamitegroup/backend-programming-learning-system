@@ -1,7 +1,7 @@
-package com.backend.programming.learning.system.course.service.domain;
+package com.backend.programming.learning.system.course.service.domain.service.exam;
 
-import com.backend.programming.learning.system.course.service.domain.entity.Exam;
-import com.backend.programming.learning.system.course.service.domain.event.ExamCreateEvent;
+import com.backend.programming.learning.system.course.service.domain.entity.exam.Exam;
+import com.backend.programming.learning.system.course.service.domain.event.exam.ExamCreateEvent;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.dto.get;
 
-import com.backend.programming.learning.system.course.service.domain.entity.Exam;
+import com.backend.programming.learning.system.course.service.domain.entity.exam.Exam;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,7 +1,7 @@
-package com.backend.programming.learning.system.course.service.dataaccess.mapper;
+package com.backend.programming.learning.system.course.service.dataaccess.mapper.exam;
 
-import com.backend.programming.learning.system.course.service.dataaccess.entity.ExamEntity;
-import com.backend.programming.learning.system.course.service.domain.entity.Exam;
+import com.backend.programming.learning.system.course.service.dataaccess.entity.exam.ExamEntity;
+import com.backend.programming.learning.system.course.service.domain.entity.exam.Exam;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;

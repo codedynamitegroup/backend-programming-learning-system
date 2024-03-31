@@ -1,6 +1,6 @@
-package com.backend.programming.learning.system.course.service.domain.event;
+package com.backend.programming.learning.system.course.service.domain.event.exam;
 
-import com.backend.programming.learning.system.course.service.domain.entity.Exam;
+import com.backend.programming.learning.system.course.service.domain.entity.exam.Exam;
 import com.backend.programming.learning.system.event.DomainEvent;
 import lombok.Getter;
 

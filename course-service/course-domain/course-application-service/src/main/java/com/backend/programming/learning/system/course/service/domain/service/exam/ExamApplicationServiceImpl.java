@@ -1,10 +1,10 @@
-package com.backend.programming.learning.system.course.service.domain;
+package com.backend.programming.learning.system.course.service.domain.service.exam;
 
 import com.backend.programming.learning.system.course.service.domain.dto.create.CreateExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.create.CreateExamResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.get.ExamsResponse;
-import com.backend.programming.learning.system.course.service.domain.entity.Exam;
-import com.backend.programming.learning.system.course.service.domain.event.ExamCreateEvent;
+import com.backend.programming.learning.system.course.service.domain.entity.exam.Exam;
+import com.backend.programming.learning.system.course.service.domain.event.exam.ExamCreateEvent;
 import com.backend.programming.learning.system.course.service.domain.mapper.ExamDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.ExamApplicationService;
 import lombok.RequiredArgsConstructor;

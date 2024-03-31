@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.entity;
+package com.backend.programming.learning.system.course.service.domain.entity.exam;
 
 //import com.backend.programming.learning.system.entity.AggregateRoot;
 //import com.backend.programming.learning.system.valueobject.ExamId;

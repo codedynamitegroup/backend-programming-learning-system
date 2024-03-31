@@ -1,8 +1,7 @@
-package com.backend.programming.learning.system.course.service.dataaccess.entity;
+package com.backend.programming.learning.system.course.service.dataaccess.entity.exam;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Generated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

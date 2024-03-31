@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.ports.output.repository;
 
-import com.backend.programming.learning.system.course.service.domain.entity.Exam;
+import com.backend.programming.learning.system.course.service.domain.entity.exam.Exam;
 
 import java.util.List;
 

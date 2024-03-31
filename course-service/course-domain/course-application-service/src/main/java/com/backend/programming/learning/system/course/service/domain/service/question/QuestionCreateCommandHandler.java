@@ -5,7 +5,6 @@ import com.backend.programming.learning.system.course.service.domain.entity.ques
 import com.backend.programming.learning.system.course.service.domain.event.question.QuestionCreateEvent;
 import com.backend.programming.learning.system.course.service.domain.mapper.question.QuestionDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.question.QuestionRepository;
-import com.backend.programming.learning.system.course.service.domain.service.QuestionDomainService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

@@ -3,8 +3,8 @@ package com.backend.programming.learning.system.course.service.domain.mapper;
 import com.backend.programming.learning.system.course.service.domain.dto.create.CreateExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.create.CreateExamResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.get.ExamsResponse;
-import com.backend.programming.learning.system.course.service.domain.entity.Exam;
-import com.backend.programming.learning.system.course.service.domain.event.ExamCreateEvent;
+import com.backend.programming.learning.system.course.service.domain.entity.exam.Exam;
+import com.backend.programming.learning.system.course.service.domain.event.exam.ExamCreateEvent;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
