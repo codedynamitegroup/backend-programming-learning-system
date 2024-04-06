@@ -29,6 +29,9 @@ public class User extends AggregateRoot<UserId>{
         updatedAt = builder.updatedAt;
         failureMessage = builder.failureMessage;
     }
+    public static Builder builder() {
+        return new Builder();
+    }
 
     public String getName() {
         return name;
@@ -73,10 +76,6 @@ public class User extends AggregateRoot<UserId>{
         private List<String> failureMessage;
 
         private Builder() {
-        }
-
-        public static Builder builder() {
-            return new Builder();
         }
 
         public Builder userId(UserId val) {
