@@ -1,0 +1,6 @@
+server:
+  port: 8181
+
+logging:
+  level:
+    com.backend.programming.learning.system: DEBUG
