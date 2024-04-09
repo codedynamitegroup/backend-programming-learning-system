@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.course.service.dataaccess.entity.
 import com.backend.programming.learning.system.course.service.dataaccess.mapper.exam.ExamDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.repository.exam.ExamJpaRepository;
 import com.backend.programming.learning.system.course.service.domain.entity.exam.Exam;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.exam.ExamRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -1,22 +1,20 @@
-package com.backend.programming.learning.system.course.service.domain.dto.get;
+package com.backend.programming.learning.system.course.service.domain.dto.exam.create;
 
 import com.backend.programming.learning.system.course.service.domain.entity.exam.Exam;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.util.List;
-
 /**
- * com.backend.programming.learning.system.course.service.domain.dto.get
+ * com.backend.programming.learning.system.course.service.domain.create
  * Create by Dang Ngoc Tien
- * Date 3/24/2024 - 10:13 PM
+ * Date 3/24/2024 - 2:52 PM
  * Description: ...
  */
 @Getter
 @Builder
 @AllArgsConstructor
-public class ExamsResponse {
-    private final List<Exam> exams;
+public class CreateExamResponse {
+    private final Exam exam;
     private final String message;
 }

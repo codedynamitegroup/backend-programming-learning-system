@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.dto.create;
+package com.backend.programming.learning.system.course.service.domain.dto.exam.create;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
