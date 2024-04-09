@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.domain;
 
 import com.backend.programming.learning.system.domain.entity.Question;
-import com.backend.programming.learning.system.domain.event.QuestionCreatedEvent;
+import com.backend.programming.learning.system.domain.event.Question.QuestionCreatedEvent;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.ZoneId;

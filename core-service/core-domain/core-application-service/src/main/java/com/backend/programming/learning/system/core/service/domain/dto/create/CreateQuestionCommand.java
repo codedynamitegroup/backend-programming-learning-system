@@ -30,4 +30,14 @@ public class CreateQuestionCommand {
     private final BigDecimal defaultMark;
     @NotNull
     private final String qType;
+
+    // for code question
+    private final String dslTemplate;
+
+    // for short answer question
+    private final Boolean caseSensitive;
+
+    // for multiple choice question
+
+    // for essay question
 }

@@ -35,6 +35,46 @@ public class Question extends AggregateRoot<QuestionId> {
         }
     }
 
+    public OrganizationId getOrganizationId() {
+        return organizationId;
+    }
+
+    public QuestionDifficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getQuestionText() {
+        return questionText;
+    }
+
+    public String getGeneralFeedback() {
+        return generalFeedback;
+    }
+
+    public float getDefaultMark() {
+        return defaultMark;
+    }
+
+    public UserId getCreatedBy() {
+        return createdBy;
+    }
+
+    public UserId getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public QuestionType getqType() {
+        return qType;
+    }
+
+    public List<String> getFailureMessages() {
+        return failureMessages;
+    }
+
     public static Builder builder() {
         return new Builder();
     }

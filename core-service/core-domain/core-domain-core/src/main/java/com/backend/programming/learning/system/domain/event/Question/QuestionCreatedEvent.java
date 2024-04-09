@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.domain.event;
+package com.backend.programming.learning.system.domain.event.Question;
 
 import com.backend.programming.learning.system.domain.entity.Question;
 

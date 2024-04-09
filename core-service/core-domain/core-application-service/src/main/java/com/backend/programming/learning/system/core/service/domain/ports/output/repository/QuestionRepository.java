@@ -2,6 +2,6 @@ package com.backend.programming.learning.system.core.service.domain.ports.output
 
 import com.backend.programming.learning.system.domain.entity.Question;
 
-public interface CoreRepository {
+public interface QuestionRepository {
     Question saveQuestion(Question question);
 }

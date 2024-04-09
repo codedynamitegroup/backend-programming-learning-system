@@ -1,10 +1,11 @@
-package com.backend.programming.learning.system.domain.event;
+package com.backend.programming.learning.system.domain.event.Question;
 
 import com.backend.programming.learning.system.domain.entity.Question;
+import com.backend.programming.learning.system.domain.event.DomainEvent;
 
 import java.time.ZonedDateTime;
 
-public abstract class QuestionEvent implements DomainEvent<Question>{
+public abstract class QuestionEvent implements DomainEvent<Question> {
     private final Question question;
     private final ZonedDateTime createdAt;
 

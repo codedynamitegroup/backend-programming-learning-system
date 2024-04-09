@@ -2,14 +2,15 @@ package com.backend.programming.learning.system.core.service.domain.ports;
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.mapper.QuestionDataMapper;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.AuthRepository;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CoreRepository;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.OrganizationRepository;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeCodeQuestionRepository;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeShortanswerQuestionRepository;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QuestionRepository;
 import com.backend.programming.learning.system.domain.CoreDomainService;
-import com.backend.programming.learning.system.domain.entity.Organization;
-import com.backend.programming.learning.system.domain.entity.Question;
-import com.backend.programming.learning.system.domain.entity.User;
-import com.backend.programming.learning.system.domain.event.QuestionCreatedEvent;
+import com.backend.programming.learning.system.domain.entity.*;
+import com.backend.programming.learning.system.domain.event.Question.QuestionCreatedEvent;
 import com.backend.programming.learning.system.domain.exception.CoreDomainException;
+import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,17 +22,24 @@ import java.util.UUID;
 @Component
 public class QuestionCreateHelper {
     private final CoreDomainService coreDomainService;
-    private final CoreRepository coreRepository;
-    private final AuthRepository authRepository;
+    private final QuestionRepository questionRepository;
+    private final QtypeCodeQuestionRepository qtypeCodeQuestionRepository;
+    private final QtypeShortanswerQuestionRepository qtypeShortanswerQuestionRepository;
+    private final OrganizationRepository organizationRepository;
     private final QuestionDataMapper questionDataMapper;
 
+
     public QuestionCreateHelper(CoreDomainService coreDomainService,
-                                CoreRepository coreRepository,
-                                AuthRepository authRepository,
+                                QuestionRepository questionRepository,
+                                QtypeCodeQuestionRepository qtypeCodeQuestionRepository,
+                                QtypeShortanswerQuestionRepository qtypeShortanswerQuestionRepository,
+                                OrganizationRepository organizationRepository,
                                 QuestionDataMapper questionDataMapper) {
         this.coreDomainService = coreDomainService;
-        this.coreRepository = coreRepository;
-        this.authRepository = authRepository;
+        this.questionRepository = questionRepository;
+        this.qtypeCodeQuestionRepository = qtypeCodeQuestionRepository;
+        this.qtypeShortanswerQuestionRepository = qtypeShortanswerQuestionRepository;
+        this.organizationRepository = organizationRepository;
         this.questionDataMapper = questionDataMapper;
     }
 
@@ -45,18 +53,21 @@ public class QuestionCreateHelper {
         Question questionResult = saveQuestion(question);
 
         log.info("Question created with id: {}", event.getQuestion().getId().getValue());
+        saveQuestionType(createQuestionCommand, questionResult.getId());
+
         return event;
     }
 
     private void checkUser(UUID userId) {
-        Optional<User> user = authRepository.findUser(userId);
+        Optional<User> user = organizationRepository.findUser(userId);
         if (user.isEmpty()) {
             log.warn("User with id: {} not found", userId);
             throw new CoreDomainException("Could not find user with id: " + userId);
         }
     }
+
     private void checkOrganization(UUID organizationId) {
-        Optional<Organization> organization = authRepository.findOrganization(organizationId);
+        Optional<Organization> organization = organizationRepository.findOrganization(organizationId);
         if (organization.isEmpty()) {
             log.warn("Organization with id: {} not found", organizationId);
             throw new CoreDomainException("Could not find organization with id: " + organizationId);
@@ -64,7 +75,8 @@ public class QuestionCreateHelper {
     }
 
     private Question saveQuestion(Question question) {
-        Question savedQuestion = coreRepository.saveQuestion(question);
+        Question savedQuestion = questionRepository.saveQuestion(question);
+
         if (savedQuestion == null) {
             log.error("Could not save question");
 
@@ -72,5 +84,19 @@ public class QuestionCreateHelper {
         }
         log.info("Question saved with id: {}", savedQuestion.getId().getValue());
         return savedQuestion;
+    }
+
+    private void saveQuestionType(CreateQuestionCommand createQuestionCommand, QuestionId questionId) {
+        if(createQuestionCommand.getDslTemplate() != null) {
+            QtypeCodeQuestion question = questionDataMapper
+                    .createQuestionCommandToQtypeCodeQuestion(createQuestionCommand, questionId);
+            qtypeCodeQuestionRepository.saveQtypeCodeQuestion(question);
+            log.info("Question with id: {} saved with QtypeCodeQuestionRepository", questionId);
+        } else if (createQuestionCommand.getCaseSensitive() != null) {
+            QtypeShortAnswerQuestion question = questionDataMapper
+                    .createQuestionCommandToQtypeShortAnswerQuestion(createQuestionCommand, questionId);
+            qtypeShortanswerQuestionRepository.saveQtypeShortAnswerQuestion(question);
+            log.info("Question with id: {} saved with QtypeShortAnswerQuestion", questionId);
+        }
     }
 }
