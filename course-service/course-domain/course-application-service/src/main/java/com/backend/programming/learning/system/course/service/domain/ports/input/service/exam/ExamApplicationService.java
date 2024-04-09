@@ -1,10 +1,8 @@
-package com.backend.programming.learning.system.course.service.domain.ports.input.service;
+package com.backend.programming.learning.system.course.service.domain.ports.input.service.exam;
 
-import com.backend.programming.learning.system.course.service.domain.dto.create.CreateExamCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.create.CreateExamResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.get.ExamsResponse;
-
-import java.util.List;
+import com.backend.programming.learning.system.course.service.domain.dto.exam.create.CreateExamCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.exam.create.CreateExamResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.exam.get.ExamsResponse;
 
 /**
  * com.backend.programming.learning.system.course.service.domain.ports.input.output.service

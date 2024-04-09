@@ -1,9 +1,9 @@
 package com.backend.programming.learning.system.course.service.application.rest.exam;
 
-import com.backend.programming.learning.system.course.service.domain.dto.create.CreateExamCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.create.CreateExamResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.get.ExamsResponse;
-import com.backend.programming.learning.system.course.service.domain.ports.input.service.ExamApplicationService;
+import com.backend.programming.learning.system.course.service.domain.dto.exam.create.CreateExamCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.exam.create.CreateExamResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.exam.get.ExamsResponse;
+import com.backend.programming.learning.system.course.service.domain.ports.input.service.exam.ExamApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * com.backend.programming.learning.system.course.application.rest.exam

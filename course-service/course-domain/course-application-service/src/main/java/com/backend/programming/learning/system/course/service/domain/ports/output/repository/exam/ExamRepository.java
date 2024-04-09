@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.ports.output.repository;
+package com.backend.programming.learning.system.course.service.domain.ports.output.repository.exam;
 
 import com.backend.programming.learning.system.course.service.domain.entity.exam.Exam;
 
