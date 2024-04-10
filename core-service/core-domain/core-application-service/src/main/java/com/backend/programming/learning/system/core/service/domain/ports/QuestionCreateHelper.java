@@ -2,10 +2,7 @@ package com.backend.programming.learning.system.core.service.domain.ports;
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.mapper.QuestionDataMapper;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.OrganizationRepository;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeCodeQuestionRepository;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeShortanswerQuestionRepository;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QuestionRepository;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.domain.CoreDomainService;
 import com.backend.programming.learning.system.domain.entity.*;
 import com.backend.programming.learning.system.domain.event.Question.QuestionCreatedEvent;
@@ -25,6 +22,8 @@ public class QuestionCreateHelper {
     private final QuestionRepository questionRepository;
     private final QtypeCodeQuestionRepository qtypeCodeQuestionRepository;
     private final QtypeShortanswerQuestionRepository qtypeShortanswerQuestionRepository;
+    private final QtypeEssayQuestionRepository qtypeEssayQuestionRepository;
+    private final QtypeMultichoiceQuestionRepository qtypeMultichoiceQuestionRepository;
     private final OrganizationRepository organizationRepository;
     private final QuestionDataMapper questionDataMapper;
 
@@ -33,12 +32,16 @@ public class QuestionCreateHelper {
                                 QuestionRepository questionRepository,
                                 QtypeCodeQuestionRepository qtypeCodeQuestionRepository,
                                 QtypeShortanswerQuestionRepository qtypeShortanswerQuestionRepository,
+                                QtypeEssayQuestionRepository qtypeEssayQuestionRepository,
+                                QtypeMultichoiceQuestionRepository qtypeMultichoiceQuestionRepository,
                                 OrganizationRepository organizationRepository,
                                 QuestionDataMapper questionDataMapper) {
         this.coreDomainService = coreDomainService;
         this.questionRepository = questionRepository;
         this.qtypeCodeQuestionRepository = qtypeCodeQuestionRepository;
         this.qtypeShortanswerQuestionRepository = qtypeShortanswerQuestionRepository;
+        this.qtypeEssayQuestionRepository = qtypeEssayQuestionRepository;
+        this.qtypeMultichoiceQuestionRepository = qtypeMultichoiceQuestionRepository;
         this.organizationRepository = organizationRepository;
         this.questionDataMapper = questionDataMapper;
     }
@@ -86,17 +89,52 @@ public class QuestionCreateHelper {
         return savedQuestion;
     }
 
+    // Save Qtype question
     private void saveQuestionType(CreateQuestionCommand createQuestionCommand, QuestionId questionId) {
-        if(createQuestionCommand.getDslTemplate() != null) {
+        if(createQuestionCommand.getDslTemplate() != null) { // code question
             QtypeCodeQuestion question = questionDataMapper
                     .createQuestionCommandToQtypeCodeQuestion(createQuestionCommand, questionId);
             qtypeCodeQuestionRepository.saveQtypeCodeQuestion(question);
-            log.info("Question with id: {} saved with QtypeCodeQuestionRepository", questionId);
-        } else if (createQuestionCommand.getCaseSensitive() != null) {
+            log.info("Question with id: {} created with QtypeCodeQuestionRepository", questionId);
+        }
+        else if (createQuestionCommand.getCaseSensitive() != null) { // short answer
             QtypeShortAnswerQuestion question = questionDataMapper
                     .createQuestionCommandToQtypeShortAnswerQuestion(createQuestionCommand, questionId);
             qtypeShortanswerQuestionRepository.saveQtypeShortAnswerQuestion(question);
-            log.info("Question with id: {} saved with QtypeShortAnswerQuestion", questionId);
+            log.info("Question with id: {} created with QtypeShortAnswerQuestion", questionId);
+        }
+        else if (createQuestionCommand.getSingle() != null) { // essay question
+            QtypeEssayQuestion question = questionDataMapper
+                    .createQuestionCommandToQtypeEssayQuestion(createQuestionCommand, questionId);
+            qtypeEssayQuestionRepository.saveQtypeEssayQuestion(question);
+            log.info("Question with id: {} created with QtypeEssayQuestion", questionId);
+        }
+        else if(createQuestionCommand.getResponseFormat() != null) { // multiple choice question
+            QtypeMultiChoiceQuestion question = questionDataMapper
+                    .createQuestionCommandToQtypeMultiChoiceQuestion(createQuestionCommand, questionId);
+            qtypeMultichoiceQuestionRepository.saveQtypeMultipleChoiceQuestion(question);
+            log.info("Question with id: {} created with QtypeMultiChoiceQuestion", questionId);
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

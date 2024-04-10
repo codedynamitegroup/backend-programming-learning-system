@@ -11,12 +11,12 @@ public class QtypeEssayQuestion extends BaseEntity<QtypeEssayQuestionId> {
     private final Integer minWordLimit;
     private final Integer maxWordLimit;
     private final Integer attachment;
-    private final Integer attachmentRequired;
+    private final Integer attachmentsRequired;
     private final String graderInfo;
     private final Integer graderInfoFormat;
-    private final String responsetemplate;
+    private final String responseTemplate;
     private final Integer maxBytes;
-    private final String fileTypeList;
+    private final String fileTypesList;
 
     private QtypeEssayQuestion(Builder builder) {
         super.setId(builder.qtypeEssayQuestionId);
@@ -26,13 +26,13 @@ public class QtypeEssayQuestion extends BaseEntity<QtypeEssayQuestionId> {
         responseFieldLines = builder.responseFieldLines;
         minWordLimit = builder.minWordLimit;
         maxWordLimit = builder.maxWordLimit;
-        attachment = builder.attachment;
-        attachmentRequired = builder.attachmentRequired;
+        attachment = builder.attachments;
+        attachmentsRequired = builder.attachmentsRequired;
         graderInfo = builder.graderInfo;
         graderInfoFormat = builder.graderInfoFormat;
-        responsetemplate = builder.responsetemplate;
+        responseTemplate = builder.responseTemplate;
         maxBytes = builder.maxBytes;
-        fileTypeList = builder.fileTypeList;
+        fileTypesList = builder.fileTypesList;
     }
 
     public static Builder builder() {
@@ -47,13 +47,13 @@ public class QtypeEssayQuestion extends BaseEntity<QtypeEssayQuestionId> {
         private Integer responseFieldLines;
         private Integer minWordLimit;
         private Integer maxWordLimit;
-        private Integer attachment;
-        private Integer attachmentRequired;
+        private Integer attachments;
+        private Integer attachmentsRequired;
         private String graderInfo;
         private Integer graderInfoFormat;
-        private String responsetemplate;
+        private String responseTemplate;
         private Integer maxBytes;
-        private String fileTypeList;
+        private String fileTypesList;
 
         private Builder() {
         }
@@ -93,13 +93,13 @@ public class QtypeEssayQuestion extends BaseEntity<QtypeEssayQuestionId> {
             return this;
         }
 
-        public Builder attachment(Integer val) {
-            attachment = val;
+        public Builder attachments(Integer val) {
+            attachments = val;
             return this;
         }
 
-        public Builder attachmentRequired(Integer val) {
-            attachmentRequired = val;
+        public Builder attachmentsRequired(Integer val) {
+            attachmentsRequired = val;
             return this;
         }
 
@@ -113,8 +113,8 @@ public class QtypeEssayQuestion extends BaseEntity<QtypeEssayQuestionId> {
             return this;
         }
 
-        public Builder responsetemplate(String val) {
-            responsetemplate = val;
+        public Builder responseTemplate(String val) {
+            responseTemplate = val;
             return this;
         }
 
@@ -123,8 +123,8 @@ public class QtypeEssayQuestion extends BaseEntity<QtypeEssayQuestionId> {
             return this;
         }
 
-        public Builder fileTypeList(String val) {
-            fileTypeList = val;
+        public Builder fileTypesList(String val) {
+            fileTypesList = val;
             return this;
         }
 

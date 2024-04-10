@@ -38,6 +38,26 @@ public class CreateQuestionCommand {
     private final Boolean caseSensitive;
 
     // for multiple choice question
+    private final Integer single;
+    private final Integer shuffleAnswers;
+    private final String correctFeedback;
+    private final String partiallyCorrectFeedback;
+    private final String incorrectFeedback;
+    private final String answerNumbering;
+    private final Integer showNumCorrect;
+    private final String showStandardInstructions;
 
     // for essay question
+    private final String responseFormat;
+    private final Integer responseRequired;
+    private final Integer responseFieldLines;
+    private final Integer minWordLimit;
+    private final Integer maxWordLimit;
+    private final Integer attachments;
+    private final Integer attachmentsRequired;
+    private final String graderInfo;
+    private final Integer graderInfoFormat;
+    private final String responseTemplate;
+    private final Integer maxBytes;
+    private final String fileTypesList;
 }
