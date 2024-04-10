@@ -20,7 +20,7 @@ public class CoreController {
         this.coreApplicationService = coreApplicationService;
     }
 
-    @PostMapping("/question/create/multi-choice")
+    @PostMapping("/question/create")
     public ResponseEntity<CreateQuestionResponse> createQuestion(@RequestBody CreateQuestionCommand createQuestionCommand, @RequestBody CreateQuestionCommand crete2) {
         log.info("Creating question: {}", createQuestionCommand);
         CreateQuestionResponse createQuestionResponse = coreApplicationService.createQuestion(createQuestionCommand);
