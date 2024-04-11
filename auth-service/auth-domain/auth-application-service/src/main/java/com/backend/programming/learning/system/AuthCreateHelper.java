@@ -38,8 +38,8 @@ public class AuthCreateHelper {
     private User saveUser(User user) {
         User userResult = userRepository.save(user);
         if (userResult == null) {
-            log.error("Could not save user!");
-            throw new AuthDomainException("Could not save user!");
+            log.error("Could not save auth!");
+            throw new AuthDomainException("Could not save auth!");
         }
         log.info("User is saved with id: {}", userResult.getId().getValue());
         return userResult;
