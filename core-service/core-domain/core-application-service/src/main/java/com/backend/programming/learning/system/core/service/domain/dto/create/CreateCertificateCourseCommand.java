@@ -9,4 +9,5 @@ import lombok.Getter;
 @Builder
 @AllArgsConstructor
 public class CreateCertificateCourseCommand {
+
 }
