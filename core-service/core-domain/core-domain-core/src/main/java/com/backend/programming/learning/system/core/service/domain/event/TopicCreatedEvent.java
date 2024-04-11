@@ -9,4 +9,9 @@ public class TopicCreatedEvent extends TopicEvent {
     public TopicCreatedEvent(Topic topic, ZonedDateTime createdAt) {
         super(topic, createdAt);
     }
+
+    @Override
+    public void fire() {
+
+    }
 }

@@ -8,4 +8,9 @@ public class ExamCreatedEvent extends ExamEvent{
     public ExamCreatedEvent(Exam exam, ZonedDateTime createdAt) {
         super(exam, createdAt);
     }
+
+    @Override
+    public void fire() {
+
+    }
 }

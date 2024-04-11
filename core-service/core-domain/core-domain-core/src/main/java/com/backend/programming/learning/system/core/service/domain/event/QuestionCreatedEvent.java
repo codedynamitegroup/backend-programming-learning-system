@@ -8,4 +8,9 @@ public class QuestionCreatedEvent extends QuestionEvent {
     public QuestionCreatedEvent(Question question, ZonedDateTime createdAt) {
         super(question, createdAt);
     }
+
+    @Override
+    public void fire() {
+
+    }
 }

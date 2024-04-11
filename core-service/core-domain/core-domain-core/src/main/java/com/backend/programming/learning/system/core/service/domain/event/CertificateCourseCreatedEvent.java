@@ -9,4 +9,9 @@ public class CertificateCourseCreatedEvent extends CertificateCourseEvent {
     public CertificateCourseCreatedEvent(CertificateCourse certificateCourse, ZonedDateTime createdAt) {
         super(certificateCourse, createdAt);
     }
+
+    @Override
+    public void fire() {
+
+    }
 }

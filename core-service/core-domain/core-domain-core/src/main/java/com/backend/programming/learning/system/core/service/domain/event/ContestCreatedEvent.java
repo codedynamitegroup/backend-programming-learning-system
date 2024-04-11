@@ -9,4 +9,9 @@ public class ContestCreatedEvent extends ContestEvent {
     public ContestCreatedEvent(Contest contest, ZonedDateTime createdAt) {
         super(contest, createdAt);
     }
+
+    @Override
+    public void fire() {
+
+    }
 }

@@ -9,4 +9,9 @@ public class ReviewCreatedEvent extends ReviewEvent {
     public ReviewCreatedEvent(Review review, ZonedDateTime createdAt) {
         super(review, createdAt);
     }
+
+    @Override
+    public void fire() {
+
+    }
 }
