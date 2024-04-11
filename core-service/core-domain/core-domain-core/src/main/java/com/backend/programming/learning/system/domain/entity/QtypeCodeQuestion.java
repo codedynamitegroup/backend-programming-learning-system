@@ -13,6 +13,14 @@ public class QtypeCodeQuestion extends BaseEntity<QtypeCodeQuestionId>{
         dslTemplate = builder.dslTemplate;
     }
 
+    public QuestionId getQuestionId() {
+        return questionId;
+    }
+
+    public String getDslTemplate() {
+        return dslTemplate;
+    }
+
     public static Builder builder() {
         return new Builder();
     }

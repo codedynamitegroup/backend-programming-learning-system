@@ -25,6 +25,7 @@ public class QuestionCreateHelper {
     private final QtypeEssayQuestionRepository qtypeEssayQuestionRepository;
     private final QtypeMultichoiceQuestionRepository qtypeMultichoiceQuestionRepository;
     private final OrganizationRepository organizationRepository;
+    private final UserRepository userRepository;
     private final QuestionDataMapper questionDataMapper;
 
 
@@ -35,6 +36,7 @@ public class QuestionCreateHelper {
                                 QtypeEssayQuestionRepository qtypeEssayQuestionRepository,
                                 QtypeMultichoiceQuestionRepository qtypeMultichoiceQuestionRepository,
                                 OrganizationRepository organizationRepository,
+                                UserRepository userRepository,
                                 QuestionDataMapper questionDataMapper) {
         this.coreDomainService = coreDomainService;
         this.questionRepository = questionRepository;
@@ -43,6 +45,7 @@ public class QuestionCreateHelper {
         this.qtypeEssayQuestionRepository = qtypeEssayQuestionRepository;
         this.qtypeMultichoiceQuestionRepository = qtypeMultichoiceQuestionRepository;
         this.organizationRepository = organizationRepository;
+        this.userRepository = userRepository;
         this.questionDataMapper = questionDataMapper;
     }
 
@@ -62,7 +65,7 @@ public class QuestionCreateHelper {
     }
 
     private void checkUser(UUID userId) {
-        Optional<User> user = organizationRepository.findUser(userId);
+        Optional<User> user = userRepository.findUser(userId);
         if (user.isEmpty()) {
             log.warn("User with id: {} not found", userId);
             throw new CoreDomainException("Could not find user with id: " + userId);

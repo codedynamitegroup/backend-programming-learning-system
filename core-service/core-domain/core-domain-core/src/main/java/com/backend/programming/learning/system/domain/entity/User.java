@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.domain.entity;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 
 /***********************************
@@ -14,6 +15,7 @@ public class User extends AggregateRoot<UserId>{
     private final String name;
     private final String email;
     private final String displayName;
+    private final Date dob;
     private final String avatarUrl;
     private final ZonedDateTime createdAt;
     private final ZonedDateTime updatedAt;
@@ -24,11 +26,13 @@ public class User extends AggregateRoot<UserId>{
         name = builder.name;
         email = builder.email;
         displayName = builder.displayName;
+        dob = builder.dob;
         avatarUrl = builder.avatarUrl;
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
         failureMessage = builder.failureMessage;
     }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -43,6 +47,10 @@ public class User extends AggregateRoot<UserId>{
 
     public String getDisplayName() {
         return displayName;
+    }
+
+    public Date getDob() {
+        return dob;
     }
 
     public String getAvatarUrl() {
@@ -61,15 +69,13 @@ public class User extends AggregateRoot<UserId>{
         return failureMessage;
     }
 
-    public void setFailureMessage(List<String> failureMessage) {
-        this.failureMessage = failureMessage;
-    }
 
     public static final class Builder {
         private UserId userId;
         private String name;
         private String email;
         private String displayName;
+        private Date dob;
         private String avatarUrl;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
@@ -95,6 +101,11 @@ public class User extends AggregateRoot<UserId>{
 
         public Builder displayName(String val) {
             displayName = val;
+            return this;
+        }
+
+        public Builder dob(Date val) {
+            dob = val;
             return this;
         }
 

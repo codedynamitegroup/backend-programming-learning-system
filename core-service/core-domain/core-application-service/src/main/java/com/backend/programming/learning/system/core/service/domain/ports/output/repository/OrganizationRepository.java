@@ -12,6 +12,5 @@ import java.util.UUID;
  ************************************/
 
 public interface OrganizationRepository {
-    Optional<User> findUser(UUID userId);
     Optional<Organization> findOrganization(UUID organizationId);
 }

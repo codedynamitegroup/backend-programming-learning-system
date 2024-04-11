@@ -5,7 +5,7 @@ import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 
 public class QtypeShortAnswerQuestion extends BaseEntity<QtypeShortAnswerQuestionId> {
     private final QuestionId questionId;
-    private final boolean caseSensitive;
+    private final Boolean caseSensitive;
 
     private QtypeShortAnswerQuestion(Builder builder) {
         super.setId(builder.qtypeShortAnswerQuestionId);
@@ -17,11 +17,18 @@ public class QtypeShortAnswerQuestion extends BaseEntity<QtypeShortAnswerQuestio
         return new Builder();
     }
 
+    public QuestionId getQuestionId() {
+        return questionId;
+    }
+
+    public Boolean getCaseSensitive() {
+        return caseSensitive;
+    }
 
     public static final class Builder {
         private QtypeShortAnswerQuestionId qtypeShortAnswerQuestionId;
         private QuestionId questionId;
-        private boolean caseSensitive;
+        private Boolean caseSensitive;
 
         private Builder() {
         }
@@ -36,7 +43,7 @@ public class QtypeShortAnswerQuestion extends BaseEntity<QtypeShortAnswerQuestio
             return this;
         }
 
-        public Builder caseSensitive(boolean val) {
+        public Builder caseSensitive(Boolean val) {
             caseSensitive = val;
             return this;
         }

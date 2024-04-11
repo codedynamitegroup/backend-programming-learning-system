@@ -14,6 +14,44 @@ public class QtypeMultiChoiceQuestion extends BaseEntity<QtypeMultiChoiceQuestio
     private final Integer showNumCorrect;
     private final String showStandardInstructions;
 
+    // Getter Methods
+    public QuestionId getQuestionId() {
+        return questionId;
+    }
+
+    public Integer getSingle() {
+        return single;
+    }
+
+    public Integer getShuffleAnswers() {
+        return shuffleAnswers;
+    }
+
+    public String getCorrectFeedback() {
+        return correctFeedback;
+    }
+
+    public String getPartiallyCorrectFeedback() {
+        return partiallyCorrectFeedback;
+    }
+
+    public String getIncorrectFeedback() {
+        return incorrectFeedback;
+    }
+
+    public String getAnswerNumbering() {
+        return answerNumbering;
+    }
+
+    public Integer getShowNumCorrect() {
+        return showNumCorrect;
+    }
+
+    public String getShowStandardInstructions() {
+        return showStandardInstructions;
+    }
+
+    // Builder
     private QtypeMultiChoiceQuestion(Builder builder) {
         super.setId(builder.qtypeMultiChoiceQuestionId);
         questionId = builder.questionId;

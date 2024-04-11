@@ -10,13 +10,66 @@ public class QtypeEssayQuestion extends BaseEntity<QtypeEssayQuestionId> {
     private final Integer responseFieldLines;
     private final Integer minWordLimit;
     private final Integer maxWordLimit;
-    private final Integer attachment;
+    private final Integer attachments;
     private final Integer attachmentsRequired;
     private final String graderInfo;
     private final Integer graderInfoFormat;
     private final String responseTemplate;
     private final Integer maxBytes;
     private final String fileTypesList;
+
+    // Getter
+    public QuestionId getQuestionId() {
+        return questionId;
+    }
+
+    public String getResponseFormat() {
+        return responseFormat;
+    }
+
+    public Integer getResponseRequired() {
+        return responseRequired;
+    }
+
+    public Integer getResponseFieldLines() {
+        return responseFieldLines;
+    }
+
+    public Integer getMinWordLimit() {
+        return minWordLimit;
+    }
+
+    public Integer getMaxWordLimit() {
+        return maxWordLimit;
+    }
+
+    public Integer getAttachments() {
+        return attachments;
+    }
+
+    public Integer getAttachmentsRequired() {
+        return attachmentsRequired;
+    }
+
+    public String getGraderInfo() {
+        return graderInfo;
+    }
+
+    public Integer getGraderInfoFormat() {
+        return graderInfoFormat;
+    }
+
+    public String getResponseTemplate() {
+        return responseTemplate;
+    }
+
+    public Integer getMaxBytes() {
+        return maxBytes;
+    }
+
+    public String getFileTypesList() {
+        return fileTypesList;
+    }
 
     private QtypeEssayQuestion(Builder builder) {
         super.setId(builder.qtypeEssayQuestionId);
@@ -26,7 +79,7 @@ public class QtypeEssayQuestion extends BaseEntity<QtypeEssayQuestionId> {
         responseFieldLines = builder.responseFieldLines;
         minWordLimit = builder.minWordLimit;
         maxWordLimit = builder.maxWordLimit;
-        attachment = builder.attachments;
+        attachments = builder.attachments;
         attachmentsRequired = builder.attachmentsRequired;
         graderInfo = builder.graderInfo;
         graderInfoFormat = builder.graderInfoFormat;

@@ -24,6 +24,27 @@ public class Organization extends AggregateRoot<OrganizationId> {
         return new Builder();
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getMoodleUrl() {
+        return moodleUrl;
+    }
+
+    public ZonedDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public ZonedDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+
     public static final class Builder {
         private OrganizationId organizationId;
         private String name;
