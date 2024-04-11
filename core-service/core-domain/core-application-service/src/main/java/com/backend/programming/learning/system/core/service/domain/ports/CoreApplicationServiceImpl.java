@@ -1,5 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.ports;
 
+import com.backend.programming.learning.system.core.service.domain.dto.create.CreateCertificateCourseCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.create.CreateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.CoreApplicationService;
@@ -21,5 +23,10 @@ class CoreApplicationServiceImpl implements CoreApplicationService {
     @Override
     public CreateQuestionResponse createQuestion(CreateQuestionCommand createQuestionCommand) {
         return questionCreateCommandHandler.createQuestion(createQuestionCommand);
+    }
+
+    @Override
+    public CreateCertificateCourseResponse createCertificateCourse(CreateCertificateCourseCommand createCertificateCourseCommand) {
+        return null;
     }
 }

@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.event;
 
-import com.backend.programming.learning.system.domain.entity.Question;
+import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.domain.event.DomainEvent;
 
 import java.time.ZonedDateTime;

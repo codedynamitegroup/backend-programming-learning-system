@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.core.service.dataaccess.user.ada
 import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.user.repository.UserJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.UserRepository;
-import com.backend.programming.learning.system.domain.entity.User;
+import com.backend.programming.learning.system.core.service.domain.entity.User;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

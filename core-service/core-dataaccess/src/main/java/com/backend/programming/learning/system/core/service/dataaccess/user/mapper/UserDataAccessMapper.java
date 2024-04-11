@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.core.service.dataaccess.user.mapper;
 
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
-import com.backend.programming.learning.system.domain.entity.User;
+import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 

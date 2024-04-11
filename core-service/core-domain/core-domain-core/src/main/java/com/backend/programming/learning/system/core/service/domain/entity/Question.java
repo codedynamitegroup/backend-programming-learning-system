@@ -1,6 +1,7 @@
-package com.backend.programming.learning.system.domain.entity;
+package com.backend.programming.learning.system.core.service.domain.entity;
 
 
+import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.*;
 
 import java.util.List;

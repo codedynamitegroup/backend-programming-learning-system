@@ -1,5 +1,6 @@
-package com.backend.programming.learning.system.domain.entity;
+package com.backend.programming.learning.system.core.service.domain.entity;
 
+import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
 import java.time.ZonedDateTime;
@@ -11,7 +12,7 @@ import java.util.List;
  * Description: User aggregate root class for core service
  ************************************/
 
-public class User extends AggregateRoot<UserId>{
+public class User extends AggregateRoot<UserId> {
     private final String name;
     private final String email;
     private final String displayName;

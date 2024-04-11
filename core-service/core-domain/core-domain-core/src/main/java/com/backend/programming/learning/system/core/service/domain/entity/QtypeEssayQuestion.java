@@ -1,5 +1,6 @@
-package com.backend.programming.learning.system.domain.entity;
+package com.backend.programming.learning.system.core.service.domain.entity;
 
+import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.QtypeEssayQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 

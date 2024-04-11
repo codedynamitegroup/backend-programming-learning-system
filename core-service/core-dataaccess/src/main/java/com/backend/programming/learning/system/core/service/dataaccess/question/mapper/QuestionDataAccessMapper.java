@@ -5,7 +5,7 @@ import com.backend.programming.learning.system.core.service.dataaccess.question.
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.organization.repository.OrganizationJpaRepository;
 import com.backend.programming.learning.system.core.service.dataaccess.user.repository.UserJpaRepository;
-import com.backend.programming.learning.system.domain.entity.Question;
+import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;

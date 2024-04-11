@@ -1,9 +1,10 @@
-package com.backend.programming.learning.system.domain.entity;
+package com.backend.programming.learning.system.core.service.domain.entity;
 
+import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.QtypeCodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 
-public class QtypeCodeQuestion extends BaseEntity<QtypeCodeQuestionId>{
+public class QtypeCodeQuestion extends BaseEntity<QtypeCodeQuestionId> {
     private final QuestionId questionId;
     private final String dslTemplate;
 

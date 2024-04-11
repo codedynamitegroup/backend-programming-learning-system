@@ -4,10 +4,10 @@ import com.backend.programming.learning.system.core.service.dataaccess.question.
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QtypeEssayQuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QtypeMultichoiceQuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QtypeShortanswerQuestionEntity;
-import com.backend.programming.learning.system.domain.entity.QtypeCodeQuestion;
-import com.backend.programming.learning.system.domain.entity.QtypeEssayQuestion;
-import com.backend.programming.learning.system.domain.entity.QtypeMultiChoiceQuestion;
-import com.backend.programming.learning.system.domain.entity.QtypeShortAnswerQuestion;
+import com.backend.programming.learning.system.core.service.domain.entity.QtypeCodeQuestion;
+import com.backend.programming.learning.system.core.service.domain.entity.QtypeEssayQuestion;
+import com.backend.programming.learning.system.core.service.domain.entity.QtypeMultiChoiceQuestion;
+import com.backend.programming.learning.system.core.service.domain.entity.QtypeShortAnswerQuestion;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import org.springframework.stereotype.Component;
 

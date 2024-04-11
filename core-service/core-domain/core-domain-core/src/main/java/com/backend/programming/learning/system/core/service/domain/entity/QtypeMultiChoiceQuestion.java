@@ -1,9 +1,10 @@
-package com.backend.programming.learning.system.domain.entity;
+package com.backend.programming.learning.system.core.service.domain.entity;
 
+import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.QtypeMultiChoiceQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 
-public class QtypeMultiChoiceQuestion extends BaseEntity<QtypeMultiChoiceQuestionId>{
+public class QtypeMultiChoiceQuestion extends BaseEntity<QtypeMultiChoiceQuestionId> {
     private final QuestionId questionId;
     private final Integer single;
     private final Integer shuffleAnswers;

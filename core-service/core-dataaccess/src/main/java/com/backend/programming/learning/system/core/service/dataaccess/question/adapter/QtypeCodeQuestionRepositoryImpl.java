@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.core.service.dataaccess.question
 import com.backend.programming.learning.system.core.service.dataaccess.question.mapper.QtypeQuestionDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.question.repository.QtypeCodeQuestionJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeCodeQuestionRepository;
-import com.backend.programming.learning.system.domain.entity.QtypeCodeQuestion;
+import com.backend.programming.learning.system.core.service.domain.entity.QtypeCodeQuestion;
 import org.springframework.stereotype.Component;
 
 @Component
