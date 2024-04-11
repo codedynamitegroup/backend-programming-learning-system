@@ -1,7 +1,5 @@
 package com.backend.programming.learning.system.core.service.dataaccess.question.entity;
 
-import com.backend.programming.learning.system.domain.entity.Question;
-import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
