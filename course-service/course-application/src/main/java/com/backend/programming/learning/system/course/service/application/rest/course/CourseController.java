@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.application.rest.
 
 import com.backend.programming.learning.system.course.service.domain.dto.course.create.CreateCourseCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.course.create.CreateCourseResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.course.get.CourseResponse;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.course.CourseApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -25,9 +27,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class CourseController {
     private final CourseApplicationService courseApplicationService;
     @GetMapping
-    public String findAll() {
+    public ResponseEntity<CourseResponse> findAll(
+            @RequestParam(value = "search", required = false) String search
+    ) {
         log.info("Getting list course");
-        return "List course";
+        CourseResponse response = courseApplicationService.findAll(search);
+        return ResponseEntity.ok(response);
     }
     @PostMapping
     public ResponseEntity<CreateCourseResponse> createCourse(

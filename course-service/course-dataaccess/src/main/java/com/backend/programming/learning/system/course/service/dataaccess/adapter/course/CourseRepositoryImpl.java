@@ -7,6 +7,8 @@ import com.backend.programming.learning.system.course.service.domain.ports.outpu
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * com.backend.programming.learning.system.course.service.dataaccess.adapter.course
  * Create by Dang Ngoc Tien
@@ -23,5 +25,12 @@ public class CourseRepositoryImpl implements CourseRepository {
     public Course createCourse(Course course) {
         return courseDataAccessMapper.courseEntityToCourse(
                 courseRepository.save(courseDataAccessMapper.courseToCourseEntity(course)));
+    }
+
+    @Override
+    public List<Course> findAll(String search) {
+        return courseRepository.findAll()
+                .stream().map(courseDataAccessMapper::courseEntityToCourse)
+                .toList();
     }
 }

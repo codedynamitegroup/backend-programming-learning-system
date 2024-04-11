@@ -8,6 +8,7 @@ import com.backend.programming.learning.system.course.service.domain.event.cours
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * com.backend.programming.learning.system.course.service.domain.mapper.course
@@ -34,6 +35,13 @@ public class CourseDataMapper
                     .course(courseCreateEvent.getCourse())
                     .message(message)
                     .build();
+    }
+
+    public CourseResponse coursesToCourseResponse(List<Course> courses, String message) {
+        return CourseResponse.builder()
+                .courses(courses)
+                .message(message)
+                .build();
     }
 }
 

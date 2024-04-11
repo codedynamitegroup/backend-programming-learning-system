@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.service.course;
 
 import com.backend.programming.learning.system.course.service.domain.dto.course.create.CreateCourseCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.course.get.CourseResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.course.Course;
 import com.backend.programming.learning.system.course.service.domain.event.course.CourseCreateEvent;
 import com.backend.programming.learning.system.course.service.domain.mapper.course.CourseDataMapper;
@@ -9,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * com.backend.programming.learning.system.course.service.domain.service.course
@@ -34,5 +37,11 @@ public class CourseCreateCommandHandler {
         }
         log.info("Course saved successfully");
         return courseCreateEvent;
+    }
+
+    @Transactional(readOnly = true)
+    public CourseResponse findAll(String search) {
+        List<Course> courses = courseRepository.findAll(search);
+        return courseDataMapper.coursesToCourseResponse(courses, "Get list course successfully");
     }
 }

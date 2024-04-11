@@ -29,4 +29,9 @@ public class CourseApplicationServiceImpl implements CourseApplicationService {
         CourseCreateEvent courseCreateEvent = courseCreateCommandHandler.createCourse(createCourseCommand);
         return courseDataMapper.courseCreateEventToCourseResponse(courseCreateEvent, "Course created successfully");
     }
+
+    @Override
+    public CourseResponse findAll(String search) {
+        return courseCreateCommandHandler.findAll(search);
+    }
 }

@@ -12,4 +12,6 @@ import com.backend.programming.learning.system.course.service.domain.dto.course.
  */
 public interface CourseApplicationService {
     CreateCourseResponse createCourse(CreateCourseCommand createCourseCommand);
+
+    CourseResponse findAll(String search);
 }

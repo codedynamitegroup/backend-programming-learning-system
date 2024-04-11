@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.course.service.domain.ports.outp
 
 import com.backend.programming.learning.system.course.service.domain.entity.course.Course;
 
+import java.util.List;
+
 /**
  * com.backend.programming.learning.system.course.service.domain.ports.output.repository.course
  * Create by Dang Ngoc Tien
@@ -11,4 +13,5 @@ import com.backend.programming.learning.system.course.service.domain.entity.cour
 public interface CourseRepository {
     Course createCourse(Course course);
 
+    List<Course> findAll(String search);
 }
