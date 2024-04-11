@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.core.service.dataaccess.user.ent
 
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter.entity.ChapterEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.contest.entity.ContestEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.review.entity.ReviewEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.topic.entity.TopicEntity;
@@ -63,4 +64,10 @@ public class UserEntity {
 
     @OneToOne(mappedBy = "updatedBy")
     private ReviewEntity reviewUpdatedBy;
+
+    @OneToOne(mappedBy = "createdBy")
+    private ContestEntity contestCreatedBy;
+
+    @OneToOne(mappedBy = "updatedBy")
+    private ContestEntity contestUpdatedBy;
 }

@@ -31,7 +31,7 @@ public class CertificateCourseEntity {
     private SkillLevel skillLevel;
     private Float avgRating;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "topic_id", referencedColumnName = "id")
     private TopicEntity topic;
 

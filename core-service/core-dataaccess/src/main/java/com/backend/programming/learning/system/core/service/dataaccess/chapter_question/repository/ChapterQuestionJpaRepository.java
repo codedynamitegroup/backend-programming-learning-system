@@ -11,4 +11,5 @@ import java.util.UUID;
 @Repository
 public interface ChapterQuestionJpaRepository extends JpaRepository<ChapterQuestionEntity, UUID> {
     Optional<ChapterQuestionEntity> findById(UUID id);
+    Optional<ChapterQuestionEntity> findByChapterIdAndQuestionId(UUID chapterId, UUID questionId);
 }

@@ -8,6 +8,9 @@ import com.backend.programming.learning.system.core.service.dataaccess.user.enti
 import com.backend.programming.learning.system.core.service.dataaccess.user.repository.UserJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
+import com.backend.programming.learning.system.core.service.domain.exception.CertificateCourseNotFoundException;
+import com.backend.programming.learning.system.core.service.domain.exception.ChapterNotFoundException;
+import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ReviewId;
@@ -29,13 +32,19 @@ public class ReviewDataAccessMapper {
     public ReviewEntity reviewToReviewEntity(Review review) {
         CertificateCourseEntity certificateCourse = certificateCourseJpaRepository
                 .findById(review.getCertificateCourseId().getValue())
-                .orElseThrow();
+                .orElseThrow(() -> new CertificateCourseNotFoundException("Certificate course with id: " +
+                        review.getCertificateCourseId().getValue() + " could not be found!")
+                );
         UserEntity createdBy = userJpaRepository
                 .findById(review.getCreatedBy().getValue())
-                .orElseThrow();
+                .orElseThrow(() -> new UserNotFoundException("User with id: " +
+                        review.getCreatedBy().getValue() + " could not be found!")
+                );
         UserEntity updatedBy = userJpaRepository
                 .findById(review.getUpdatedBy().getValue())
-                .orElseThrow();
+                .orElseThrow(() -> new UserNotFoundException("User with id: " +
+                        review.getUpdatedBy().getValue() + " could not be found!")
+                );
 
         return ReviewEntity.builder()
                 .id(review.getId().getValue())

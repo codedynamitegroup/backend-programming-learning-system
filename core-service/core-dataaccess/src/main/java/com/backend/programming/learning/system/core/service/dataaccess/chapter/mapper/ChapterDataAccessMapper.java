@@ -7,6 +7,9 @@ import com.backend.programming.learning.system.core.service.dataaccess.user.enti
 import com.backend.programming.learning.system.core.service.dataaccess.user.repository.UserJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
+import com.backend.programming.learning.system.core.service.domain.exception.CertificateCourseNotFoundException;
+import com.backend.programming.learning.system.core.service.domain.exception.ChapterNotFoundException;
+import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
@@ -27,13 +30,19 @@ public class ChapterDataAccessMapper {
     public ChapterEntity chapterToChapterEntity(Chapter chapter) {
         CertificateCourseEntity certificateCourse = certificateCourseJpaRepository
                 .findById(chapter.getCertificateCourseId().getValue())
-                .orElseThrow();
+                .orElseThrow(() -> new CertificateCourseNotFoundException("Certificate course with id: " +
+                        chapter.getCertificateCourseId().getValue() + " could not be found!")
+                );
         UserEntity createdBy = userJpaRepository
                 .findById(chapter.getCreatedBy().getValue())
-                .orElseThrow();
+                .orElseThrow(() -> new UserNotFoundException("User with id: " +
+                        chapter.getCreatedBy().getValue() + " could not be found!")
+                );
         UserEntity updatedBy = userJpaRepository
                 .findById(chapter.getUpdatedBy().getValue())
-                .orElseThrow();
+                .orElseThrow(() -> new UserNotFoundException("User with id: " +
+                        chapter.getUpdatedBy().getValue() + " could not be found!")
+                );
 
 
         return ChapterEntity.builder()
