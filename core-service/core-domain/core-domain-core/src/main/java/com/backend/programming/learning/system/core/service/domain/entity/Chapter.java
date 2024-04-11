@@ -13,7 +13,7 @@ public class Chapter extends BaseEntity<ChapterId> {
     private int no;
     private String title;
     private String description;
-    private final List<CodeQuestion> codeQuestions;
+    private final List<QtypeCodeQuestion> qtypeCodeQuestions;
     private final UserId createdBy;
     private UserId updatedBy;
     private final LocalDateTime createdAt;
@@ -31,7 +31,7 @@ public class Chapter extends BaseEntity<ChapterId> {
         no = builder.no;
         title = builder.title;
         description = builder.description;
-        codeQuestions = builder.codeQuestions;
+        qtypeCodeQuestions = builder.qtypeCodeQuestions;
         createdBy = builder.createdBy;
         updatedBy = builder.updatedBy;
         createdAt = builder.createdAt;
@@ -54,8 +54,8 @@ public class Chapter extends BaseEntity<ChapterId> {
         return description;
     }
 
-    public List<CodeQuestion> getCodeQuestions() {
-        return codeQuestions;
+    public List<QtypeCodeQuestion> getQtypeCodeQuestions() {
+        return qtypeCodeQuestions;
     }
 
     public UserId getCreatedBy() {
@@ -80,7 +80,7 @@ public class Chapter extends BaseEntity<ChapterId> {
         private int no;
         private String title;
         private String description;
-        private List<CodeQuestion> codeQuestions;
+        private List<QtypeCodeQuestion> qtypeCodeQuestions;
         private UserId createdBy;
         private UserId updatedBy;
         private LocalDateTime createdAt;
@@ -118,8 +118,8 @@ public class Chapter extends BaseEntity<ChapterId> {
             return this;
         }
 
-        public Builder codeQuestions(List<CodeQuestion> val) {
-            codeQuestions = val;
+        public Builder qtypeCodeQuestions(List<QtypeCodeQuestion> val) {
+            qtypeCodeQuestions = val;
             return this;
         }
 

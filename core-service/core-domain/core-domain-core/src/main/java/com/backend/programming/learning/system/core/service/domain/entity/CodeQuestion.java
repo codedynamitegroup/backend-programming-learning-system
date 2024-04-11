@@ -1,7 +1,0 @@
-package com.backend.programming.learning.system.core.service.domain.entity;
-
-import com.backend.programming.learning.system.domain.entity.BaseEntity;
-import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
-
-public class CodeQuestion extends BaseEntity<CodeQuestionId> {
-}
