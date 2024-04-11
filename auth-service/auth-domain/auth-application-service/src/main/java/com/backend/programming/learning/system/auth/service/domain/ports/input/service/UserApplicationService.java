@@ -6,9 +6,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.query.Que
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryUserResponse;
 import jakarta.validation.Valid;
 
-import java.util.UUID;
-
-public interface AuthApplicationService {
+public interface UserApplicationService {
     CreateUserResponse createUser(@Valid CreateUserCommand createUserCommand);
     QueryUserResponse findUserById(QueryUserCommand queryUserCommand);
 }

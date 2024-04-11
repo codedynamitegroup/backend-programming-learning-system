@@ -8,4 +8,9 @@ public class PostCreatedEvent extends PostEvent{
     public PostCreatedEvent(Post post, ZonedDateTime createdAt) {
         super(post, createdAt);
     }
+
+    @Override
+    public void fire() {
+
+    }
 }
