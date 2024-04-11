@@ -14,7 +14,6 @@ import java.util.Optional;
 @Slf4j
 @Component
 public class UserCreateHelper {
-
     private final AuthDomainService authDomainService;
     private final UserRepository userRepository;
     private final AuthDataMapper authDataMapper;

@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.auth.service.domain.valueobject.O
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 public class Organization extends AggregateRoot<OrganizationId> {
     private String description;
@@ -14,8 +14,8 @@ public class Organization extends AggregateRoot<OrganizationId> {
     private String address;
     private String apiKey;
     private String moodleUrl;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private ZonedDateTime createdAt;
+    private ZonedDateTime updatedAt;
     private UserId createdBy;
     private UserId updatedBy;
     private Boolean isDeleted;
@@ -64,11 +64,11 @@ public class Organization extends AggregateRoot<OrganizationId> {
         return moodleUrl;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public ZonedDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public ZonedDateTime getUpdatedAt() {
         return updatedAt;
     }
 
@@ -93,8 +93,8 @@ public class Organization extends AggregateRoot<OrganizationId> {
         private String address;
         private String apiKey;
         private String moodleUrl;
-        private LocalDateTime createdAt;
-        private LocalDateTime updatedAt;
+        private ZonedDateTime createdAt;
+        private ZonedDateTime updatedAt;
         private UserId createdBy;
         private UserId updatedBy;
         private Boolean isDeleted;
@@ -142,12 +142,12 @@ public class Organization extends AggregateRoot<OrganizationId> {
             return this;
         }
 
-        public Builder createdAt(LocalDateTime val) {
+        public Builder createdAt(ZonedDateTime val) {
             createdAt = val;
             return this;
         }
 
-        public Builder updatedAt(LocalDateTime val) {
+        public Builder updatedAt(ZonedDateTime val) {
             updatedAt = val;
             return this;
         }

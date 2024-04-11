@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.UUID;
@@ -12,7 +12,7 @@ import java.util.UUID;
 public class User extends AggregateRoot<UserId> {
     private String email;
     private String password;
-    private LocalDateTime dob;
+    private ZonedDateTime dob;
     private String firstName;
     private String lastName;
     private String phone;
@@ -59,7 +59,7 @@ public class User extends AggregateRoot<UserId> {
         return password;
     }
 
-    public LocalDateTime getDob() {
+    public ZonedDateTime getDob() {
         return dob;
     }
 
@@ -114,7 +114,7 @@ public class User extends AggregateRoot<UserId> {
     public static final class Builder {
         private String email;
         private String password;
-        private LocalDateTime dob;
+        private ZonedDateTime dob;
         private String firstName;
         private String lastName;
         private String phone;
@@ -141,7 +141,7 @@ public class User extends AggregateRoot<UserId> {
             return this;
         }
 
-        public Builder dob(LocalDateTime val) {
+        public Builder dob(ZonedDateTime val) {
             dob = val;
             return this;
         }

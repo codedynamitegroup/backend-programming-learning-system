@@ -5,14 +5,14 @@ import com.backend.programming.learning.system.domain.valueobject.UserId;
 import com.backend.programming.learning.system.auth.service.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.auth.service.domain.valueobject.RoleId;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 public class Role extends AggregateRoot<RoleId> {
     private final OrganizationId organizationId;
     private String description;
     private String name;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private ZonedDateTime createdAt;
+    private ZonedDateTime updatedAt;
     private UserId createdBy;
     private UserId updatedBy;
 
@@ -39,11 +39,11 @@ public class Role extends AggregateRoot<RoleId> {
         return name;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public ZonedDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public ZonedDateTime getUpdatedAt() {
         return updatedAt;
     }
 
@@ -60,8 +60,8 @@ public class Role extends AggregateRoot<RoleId> {
         private OrganizationId organizationId;
         private String description;
         private String name;
-        private LocalDateTime createdAt;
-        private LocalDateTime updatedAt;
+        private ZonedDateTime createdAt;
+        private ZonedDateTime updatedAt;
         private UserId createdBy;
         private UserId updatedBy;
         private RoleId roleId;
@@ -88,12 +88,12 @@ public class Role extends AggregateRoot<RoleId> {
             return this;
         }
 
-        public Builder createdAt(LocalDateTime val) {
+        public Builder createdAt(ZonedDateTime val) {
             createdAt = val;
             return this;
         }
 
-        public Builder updatedAt(LocalDateTime val) {
+        public Builder updatedAt(ZonedDateTime val) {
             updatedAt = val;
             return this;
         }
