@@ -16,6 +16,7 @@ import java.util.UUID;
 @Entity
 public class CertificateCourseEntity {
     @Id
+    @Column(name = "id")
     private UUID id;
     private String name;
     private String description;
