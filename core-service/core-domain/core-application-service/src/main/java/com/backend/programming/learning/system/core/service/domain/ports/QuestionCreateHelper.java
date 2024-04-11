@@ -1,12 +1,18 @@
 package com.backend.programming.learning.system.core.service.domain.ports;
 
+import com.backend.programming.learning.system.core.service.domain.CoreDomainService;
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.mapper.QuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
-import com.backend.programming.learning.system.domain.CoreDomainService;
-import com.backend.programming.learning.system.domain.entity.*;
-import com.backend.programming.learning.system.domain.event.Question.QuestionCreatedEvent;
-import com.backend.programming.learning.system.domain.exception.CoreDomainException;
+import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
+import com.backend.programming.learning.system.domain.entity.Organization;
+import com.backend.programming.learning.system.domain.entity.QtypeCodeQuestion;
+import com.backend.programming.learning.system.domain.entity.QtypeEssayQuestion;
+import com.backend.programming.learning.system.domain.entity.QtypeMultiChoiceQuestion;
+import com.backend.programming.learning.system.domain.entity.QtypeShortAnswerQuestion;
+import com.backend.programming.learning.system.domain.entity.Question;
+import com.backend.programming.learning.system.domain.entity.User;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

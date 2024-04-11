@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.domain.core.service.dto.create;
+package com.backend.programming.learning.system.core.service.domain.dto.create;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

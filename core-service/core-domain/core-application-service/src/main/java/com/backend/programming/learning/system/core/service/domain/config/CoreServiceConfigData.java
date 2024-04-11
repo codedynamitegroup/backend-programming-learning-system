@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.domain.core.service.config;
+package com.backend.programming.learning.system.core.service.domain.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

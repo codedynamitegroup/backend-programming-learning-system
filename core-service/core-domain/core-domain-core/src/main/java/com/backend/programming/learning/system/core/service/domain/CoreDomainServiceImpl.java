@@ -1,13 +1,9 @@
 package com.backend.programming.learning.system.core.service.domain;
 
-<<<<<<< HEAD:core-service/core-domain/core-domain-core/src/main/java/com/backend/programming/learning/system/core/service/domain/CoreDomainServiceImpl.java
-import com.backend.programming.learning.system.core.service.domain.event.CertificateCourseCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
-=======
-import com.backend.programming.learning.system.domain.event.Question.QuestionCreatedEvent;
-import com.backend.programming.learning.system.domain.entity.CertificateCourse;
-import com.backend.programming.learning.system.domain.event.CertificateCourseCreatedEvent;
->>>>>>> origin/main:core-service/core-domain/core-domain-core/src/main/java/com/backend/programming/learning/system/domain/CoreDomainServiceImpl.java
+import com.backend.programming.learning.system.core.service.domain.event.CertificateCourseCreatedEvent;
+import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
+import com.backend.programming.learning.system.domain.entity.Question;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.ZoneId;

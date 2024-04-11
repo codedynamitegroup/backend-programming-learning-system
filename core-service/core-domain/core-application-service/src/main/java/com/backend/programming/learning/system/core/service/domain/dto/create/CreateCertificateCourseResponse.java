@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.domain.core.service.dto.create;
+package com.backend.programming.learning.system.core.service.domain.dto.create;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.create.Cr
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.mapper.QuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.create.QuestionCreatedMessagePublisher;
-import com.backend.programming.learning.system.domain.event.Question.QuestionCreatedEvent;
+import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
