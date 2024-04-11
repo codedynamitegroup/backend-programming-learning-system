@@ -1,5 +1,6 @@
-package com.backend.programming.learning.system.auth.service.dataaccess.user.entity;
+package com.backend.programming.learning.system.auth.service.dataaccess.organization.entity;
 
+import com.backend.programming.learning.system.domain.valueobject.UserId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -14,31 +15,29 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "main_user")
+@Table(name = "main_organization")
 @Entity
-public class UserEntity {
+public class OrganizationEntity {
     @Id
     private UUID id;
+    private UUID createdBy;
+    private UUID updatedBy;
+    private String description;
+    private String name;
     private String email;
-    private String password;
-    private ZonedDateTime dob;
-    private String firstName;
-    private String lastName;
     private String phone;
     private String address;
-    private String avatarUrl;
-    private String refreshToken;
-    private String lastIp;
-    private ZonedDateTime lastLogin;
+    private String apiKey;
+    private String moodleUrl;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
-    private boolean isDeleted;
+    private Boolean isDeleted;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserEntity that = (UserEntity) o;
+        OrganizationEntity that = (OrganizationEntity) o;
         return id.equals(that.id);
     }
 

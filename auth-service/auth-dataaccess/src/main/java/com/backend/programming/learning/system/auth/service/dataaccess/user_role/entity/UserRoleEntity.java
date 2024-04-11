@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.auth.service.dataaccess.user.entity;
+package com.backend.programming.learning.system.auth.service.dataaccess.user_role.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -14,31 +14,25 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "main_user")
+@Table(name = "user_role")
 @Entity
-public class UserEntity {
+public class UserRoleEntity {
     @Id
     private UUID id;
-    private String email;
-    private String password;
-    private ZonedDateTime dob;
-    private String firstName;
-    private String lastName;
-    private String phone;
-    private String address;
-    private String avatarUrl;
-    private String refreshToken;
-    private String lastIp;
-    private ZonedDateTime lastLogin;
+    private UUID userId;
+    private UUID roleId;
+    private UUID createdBy;
+    private UUID updatedBy;
+    private boolean isActive;
+    private String name;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
-    private boolean isDeleted;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserEntity that = (UserEntity) o;
+        UserRoleEntity that = (UserRoleEntity) o;
         return id.equals(that.id);
     }
 
