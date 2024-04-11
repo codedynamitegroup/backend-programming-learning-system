@@ -4,15 +4,15 @@ import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 public class Topic extends AggregateRoot<TopicId> {
     private String name;
     private String description;
     private final UserId createdBy;
     private UserId updatedBy;
-    private final LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private final ZonedDateTime createdAt;
+    private ZonedDateTime updatedAt;
 
     private Topic(Builder builder) {
         super.setId(builder.topicId);
@@ -22,6 +22,10 @@ public class Topic extends AggregateRoot<TopicId> {
         updatedBy = builder.updatedBy;
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
+    }
+
+    public static Builder builder() {
+        return new Builder();
     }
 
     public String getName() {
@@ -40,13 +44,14 @@ public class Topic extends AggregateRoot<TopicId> {
         return updatedBy;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public ZonedDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public ZonedDateTime getUpdatedAt() {
         return updatedAt;
     }
+
 
     public static final class Builder {
         private TopicId topicId;
@@ -54,17 +59,13 @@ public class Topic extends AggregateRoot<TopicId> {
         private String description;
         private UserId createdBy;
         private UserId updatedBy;
-        private LocalDateTime createdAt;
-        private LocalDateTime updatedAt;
+        private ZonedDateTime createdAt;
+        private ZonedDateTime updatedAt;
 
         private Builder() {
         }
 
-        public static Builder builder() {
-            return new Builder();
-        }
-
-        public Builder topicId(TopicId val) {
+        public Builder id(TopicId val) {
             topicId = val;
             return this;
         }
@@ -89,12 +90,12 @@ public class Topic extends AggregateRoot<TopicId> {
             return this;
         }
 
-        public Builder createdAt(LocalDateTime val) {
+        public Builder createdAt(ZonedDateTime val) {
             createdAt = val;
             return this;
         }
 
-        public Builder updatedAt(LocalDateTime val) {
+        public Builder updatedAt(ZonedDateTime val) {
             updatedAt = val;
             return this;
         }

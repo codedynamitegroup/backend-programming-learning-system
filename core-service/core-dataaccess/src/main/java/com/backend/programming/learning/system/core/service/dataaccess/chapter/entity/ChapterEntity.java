@@ -1,39 +1,35 @@
-package com.backend.programming.learning.system.core.service.dataaccess.question.entity;
+package com.backend.programming.learning.system.core.service.dataaccess.chapter.entity;
 
+import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter_question.entity.ChapterQuestionEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.organization.entity.OrganizationEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
-import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
-import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Table(name = "chapter")
 @Entity
-@Table(name = "main_question")
-public class QuestionEntity {
+public class ChapterEntity {
     @Id
+    @Column(name = "id")
     private UUID id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "org_id", referencedColumnName = "id")
-    private OrganizationEntity organization;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "certificate_course_id", referencedColumnName = "id")
+    private CertificateCourseEntity certificateCourse;
 
-    @Enumerated(EnumType.STRING)
-    private QuestionDifficulty difficulty;
-    private String name;
-    private String questionText;
-    private String generalFeedback;
-    private BigDecimal defaultMark;
+    private Integer no;
+    private String title;
+    private String description;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "created_by", referencedColumnName = "id")
@@ -43,17 +39,17 @@ public class QuestionEntity {
     @JoinColumn(name = "updated_by", referencedColumnName = "id")
     private UserEntity updatedBy;
 
-    @Enumerated(EnumType.STRING)
-    private QuestionType qType;
+    private ZonedDateTime createdAt;
+    private ZonedDateTime updatedAt;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "chapter")
     Set<ChapterQuestionEntity> chapterQuestions;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        QuestionEntity that = (QuestionEntity) o;
+        ChapterEntity that = (ChapterEntity) o;
         return Objects.equals(id, that.id);
     }
 

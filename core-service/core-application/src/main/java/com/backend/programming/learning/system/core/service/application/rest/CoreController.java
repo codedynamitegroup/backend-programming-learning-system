@@ -1,5 +1,7 @@
 package com.backend.programming.learning.system.core.service.application.rest;
 
+import com.backend.programming.learning.system.core.service.domain.dto.create.CreateCertificateCourseCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.create.CreateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.CoreApplicationService;
@@ -21,12 +23,24 @@ public class CoreController {
     }
 
     @PostMapping("/question/create")
-    public ResponseEntity<CreateQuestionResponse> createQuestion(@RequestBody CreateQuestionCommand createQuestionCommand, @RequestBody CreateQuestionCommand crete2) {
+    public ResponseEntity<CreateQuestionResponse> createQuestion(
+            @RequestBody CreateQuestionCommand createQuestionCommand) {
         log.info("Creating question: {}", createQuestionCommand);
         CreateQuestionResponse createQuestionResponse = coreApplicationService.createQuestion(createQuestionCommand);
         log.info("Question created: {}", createQuestionResponse);
 
         return ResponseEntity.ok(createQuestionResponse);
+    }
+
+    @PostMapping("/certificate-course/create")
+    public ResponseEntity<CreateCertificateCourseResponse> createCertificateCourse(
+            @RequestBody CreateCertificateCourseCommand createCertificateCourseCommand) {
+        log.info("Creating certificate course: {}", createCertificateCourseCommand);
+        CreateCertificateCourseResponse createCertificateCourseResponse =
+                coreApplicationService.createCertificateCourse(createCertificateCourseCommand);
+        log.info("Certificate course created: {}", createCertificateCourseResponse);
+
+        return ResponseEntity.ok(createCertificateCourseResponse);
     }
 
 }

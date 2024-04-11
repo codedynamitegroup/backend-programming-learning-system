@@ -4,17 +4,17 @@ import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 public class Contest extends AggregateRoot<ContestId> {
     private String name;
     private String description;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private ZonedDateTime startTime;
+    private ZonedDateTime endTime;
     private final UserId createdBy;
     private UserId updatedBy;
-    private final LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private final ZonedDateTime createdAt;
+    private ZonedDateTime updatedAt;
 
     private Contest(Builder builder) {
         super.setId(builder.contestId);
@@ -28,6 +28,10 @@ public class Contest extends AggregateRoot<ContestId> {
         updatedAt = builder.updatedAt;
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public String getName() {
         return name;
     }
@@ -36,11 +40,11 @@ public class Contest extends AggregateRoot<ContestId> {
         return description;
     }
 
-    public LocalDateTime getStartTime() {
+    public ZonedDateTime getStartTime() {
         return startTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public ZonedDateTime getEndTime() {
         return endTime;
     }
 
@@ -52,33 +56,30 @@ public class Contest extends AggregateRoot<ContestId> {
         return updatedBy;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public ZonedDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public ZonedDateTime getUpdatedAt() {
         return updatedAt;
     }
+
 
     public static final class Builder {
         private ContestId contestId;
         private String name;
         private String description;
-        private LocalDateTime startTime;
-        private LocalDateTime endTime;
+        private ZonedDateTime startTime;
+        private ZonedDateTime endTime;
         private UserId createdBy;
         private UserId updatedBy;
-        private LocalDateTime createdAt;
-        private LocalDateTime updatedAt;
+        private ZonedDateTime createdAt;
+        private ZonedDateTime updatedAt;
 
         private Builder() {
         }
 
-        public static Builder builder() {
-            return new Builder();
-        }
-
-        public Builder contestId(ContestId val) {
+        public Builder id(ContestId val) {
             contestId = val;
             return this;
         }
@@ -93,12 +94,12 @@ public class Contest extends AggregateRoot<ContestId> {
             return this;
         }
 
-        public Builder startTime(LocalDateTime val) {
+        public Builder startTime(ZonedDateTime val) {
             startTime = val;
             return this;
         }
 
-        public Builder endTime(LocalDateTime val) {
+        public Builder endTime(ZonedDateTime val) {
             endTime = val;
             return this;
         }
@@ -113,12 +114,12 @@ public class Contest extends AggregateRoot<ContestId> {
             return this;
         }
 
-        public Builder createdAt(LocalDateTime val) {
+        public Builder createdAt(ZonedDateTime val) {
             createdAt = val;
             return this;
         }
 
-        public Builder updatedAt(LocalDateTime val) {
+        public Builder updatedAt(ZonedDateTime val) {
             updatedAt = val;
             return this;
         }

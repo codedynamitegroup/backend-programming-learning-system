@@ -5,7 +5,7 @@ import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 public class Chapter extends BaseEntity<ChapterId> {
@@ -13,17 +13,11 @@ public class Chapter extends BaseEntity<ChapterId> {
     private int no;
     private String title;
     private String description;
-    private final List<QtypeCodeQuestion> qtypeCodeQuestions;
+    private final List<Question> questions;
     private final UserId createdBy;
     private UserId updatedBy;
-    private final LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-
-    void initializeChapter(CertificateCourseId certificateCourseId, ChapterId chapterId, int no) {
-        this.certificateCourseId = certificateCourseId;
-        this.no = no;
-        super.setId(chapterId);
-    }
+    private final ZonedDateTime createdAt;
+    private ZonedDateTime updatedAt;
 
     private Chapter(Builder builder) {
         super.setId(builder.chapterId);
@@ -31,11 +25,15 @@ public class Chapter extends BaseEntity<ChapterId> {
         no = builder.no;
         title = builder.title;
         description = builder.description;
-        qtypeCodeQuestions = builder.qtypeCodeQuestions;
+        questions = builder.questions;
         createdBy = builder.createdBy;
         updatedBy = builder.updatedBy;
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
+    }
+
+    public static Builder builder() {
+        return new Builder();
     }
 
     public CertificateCourseId getCertificateCourseId() {
@@ -54,8 +52,8 @@ public class Chapter extends BaseEntity<ChapterId> {
         return description;
     }
 
-    public List<QtypeCodeQuestion> getQtypeCodeQuestions() {
-        return qtypeCodeQuestions;
+    public List<Question> getQuestions() {
+        return questions;
     }
 
     public UserId getCreatedBy() {
@@ -66,11 +64,11 @@ public class Chapter extends BaseEntity<ChapterId> {
         return updatedBy;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public ZonedDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public ZonedDateTime getUpdatedAt() {
         return updatedAt;
     }
 
@@ -80,20 +78,16 @@ public class Chapter extends BaseEntity<ChapterId> {
         private int no;
         private String title;
         private String description;
-        private List<QtypeCodeQuestion> qtypeCodeQuestions;
+        private List<Question> questions;
         private UserId createdBy;
         private UserId updatedBy;
-        private LocalDateTime createdAt;
-        private LocalDateTime updatedAt;
+        private ZonedDateTime createdAt;
+        private ZonedDateTime updatedAt;
 
         private Builder() {
         }
 
-        public static Builder builder() {
-            return new Builder();
-        }
-
-        public Builder chapterId(ChapterId val) {
+        public Builder id(ChapterId val) {
             chapterId = val;
             return this;
         }
@@ -118,8 +112,8 @@ public class Chapter extends BaseEntity<ChapterId> {
             return this;
         }
 
-        public Builder qtypeCodeQuestions(List<QtypeCodeQuestion> val) {
-            qtypeCodeQuestions = val;
+        public Builder questions(List<Question> val) {
+            questions = val;
             return this;
         }
 
@@ -133,12 +127,12 @@ public class Chapter extends BaseEntity<ChapterId> {
             return this;
         }
 
-        public Builder createdAt(LocalDateTime val) {
+        public Builder createdAt(ZonedDateTime val) {
             createdAt = val;
             return this;
         }
 
-        public Builder updatedAt(LocalDateTime val) {
+        public Builder updatedAt(ZonedDateTime val) {
             updatedAt = val;
             return this;
         }

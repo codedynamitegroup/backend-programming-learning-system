@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.core.service.domain.mapper;
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
-import com.backend.programming.learning.system.domain.entity.Organization;
+import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeCodeQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeEssayQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeMultiChoiceQuestion;

@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.core.service.dataaccess.organization.mapper;
 
 import com.backend.programming.learning.system.core.service.dataaccess.organization.entity.OrganizationEntity;
-import com.backend.programming.learning.system.domain.entity.Organization;
+import com.backend.programming.learning.system.core.service.domain.entity.Organization;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import org.springframework.stereotype.Component;
 

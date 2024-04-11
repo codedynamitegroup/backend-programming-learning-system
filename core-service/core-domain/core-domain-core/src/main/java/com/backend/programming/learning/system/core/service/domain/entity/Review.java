@@ -5,7 +5,7 @@ import com.backend.programming.learning.system.core.service.domain.valueobject.R
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 public class Review extends AggregateRoot<ReviewId> {
     private final CertificateCourseId certificateCourseId;
@@ -13,8 +13,8 @@ public class Review extends AggregateRoot<ReviewId> {
     private Float rating;
     private final UserId createdBy;
     private UserId updatedBy;
-    private final LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private final ZonedDateTime createdAt;
+    private ZonedDateTime updatedAt;
 
     private Review(Builder builder) {
         super.setId(builder.reviewId);
@@ -25,6 +25,10 @@ public class Review extends AggregateRoot<ReviewId> {
         updatedBy = builder.updatedBy;
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
+    }
+
+    public static Builder builder() {
+        return new Builder();
     }
 
     public CertificateCourseId getCertificateCourseId() {
@@ -47,11 +51,11 @@ public class Review extends AggregateRoot<ReviewId> {
         return updatedBy;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public ZonedDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public ZonedDateTime getUpdatedAt() {
         return updatedAt;
     }
 
@@ -62,17 +66,13 @@ public class Review extends AggregateRoot<ReviewId> {
         private Float rating;
         private UserId createdBy;
         private UserId updatedBy;
-        private LocalDateTime createdAt;
-        private LocalDateTime updatedAt;
+        private ZonedDateTime createdAt;
+        private ZonedDateTime updatedAt;
 
         private Builder() {
         }
 
-        public static Builder builder() {
-            return new Builder();
-        }
-
-        public Builder reviewId(ReviewId val) {
+        public Builder id(ReviewId val) {
             reviewId = val;
             return this;
         }
@@ -102,12 +102,12 @@ public class Review extends AggregateRoot<ReviewId> {
             return this;
         }
 
-        public Builder createdAt(LocalDateTime val) {
+        public Builder createdAt(ZonedDateTime val) {
             createdAt = val;
             return this;
         }
 
-        public Builder updatedAt(LocalDateTime val) {
+        public Builder updatedAt(ZonedDateTime val) {
             updatedAt = val;
             return this;
         }

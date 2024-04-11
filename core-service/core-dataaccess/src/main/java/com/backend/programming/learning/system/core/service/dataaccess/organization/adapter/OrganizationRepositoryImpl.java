@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.core.service.dataaccess.organiza
 import com.backend.programming.learning.system.core.service.dataaccess.organization.mapper.OrganizationDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.organization.repository.OrganizationJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.OrganizationRepository;
-import com.backend.programming.learning.system.domain.entity.Organization;
+import com.backend.programming.learning.system.core.service.domain.entity.Organization;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
