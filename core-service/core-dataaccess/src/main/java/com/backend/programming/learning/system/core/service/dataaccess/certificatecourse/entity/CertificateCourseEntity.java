@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity;
 
+import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,7 +22,7 @@ public class CertificateCourseEntity {
     private String name;
     private String description;
     @Enumerated(EnumType.STRING)
-    private String skill_level;
+    private SkillLevel skill_level;
     private Float avg_rating;
     private UUID topic_id;
     private LocalDateTime start_time;
