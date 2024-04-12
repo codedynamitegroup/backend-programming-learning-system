@@ -5,10 +5,11 @@ import com.backend.programming.learning.system.core.service.domain.dto.create.Cr
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.CoreApplicationService;
-import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+
+import javax.validation.Valid;
 
 @Service
 @Validated

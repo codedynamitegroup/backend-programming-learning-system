@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.dataaccess.question.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 
 import java.util.UUID;

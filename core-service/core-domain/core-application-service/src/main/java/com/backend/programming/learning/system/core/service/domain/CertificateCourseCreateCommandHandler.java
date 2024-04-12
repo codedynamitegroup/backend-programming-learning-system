@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.core.service.domain.entity.Certif
 import com.backend.programming.learning.system.core.service.domain.mapper.CertificateCourseDataMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @Slf4j
@@ -19,6 +20,7 @@ public class CertificateCourseCreateCommandHandler {
         this.certificateCourseDataMapper = certificateCourseDataMapper;
     }
 
+    @Transactional
     public CreateCertificateCourseResponse createCertificateCourse(
             CreateCertificateCourseCommand createCertificateCourseCommand) {
         CertificateCourse certificateCourse = certificateCourseCreateHelper

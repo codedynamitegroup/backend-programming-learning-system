@@ -4,11 +4,12 @@ import com.backend.programming.learning.system.core.service.domain.dto.create.Cr
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateQuestionResponse;
-import jakarta.validation.Valid;
+
+import javax.validation.Valid;
 
 public interface CoreApplicationService {
     // Question
-    CreateQuestionResponse createQuestion(@Valid  CreateQuestionCommand createQuestionCommand);
+    CreateQuestionResponse createQuestion(@Valid CreateQuestionCommand createQuestionCommand);
 
     // CertificateCourse
     CreateCertificateCourseResponse createCertificateCourse(@Valid CreateCertificateCourseCommand createCertificateCourseCommand);
