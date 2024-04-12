@@ -33,6 +33,12 @@ public class TestCase extends BaseEntity<TestCaseId> {
         return isSample;
     }
 
+    void initializeTestCase(CodeQuestionId codeQuestionId, TestCaseId testCaseId) {
+        this.codeQuestionId = codeQuestionId;
+        super.setId(testCaseId);
+
+    }
+
     public static final class Builder {
         private String inputData;
         private String outputData;
