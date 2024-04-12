@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.core.service.domain.entity.Certif
 import com.backend.programming.learning.system.core.service.domain.event.CertificateCourseCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
+import com.backend.programming.learning.system.domain.DomainConstants;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.ZoneId;
@@ -13,7 +14,7 @@ import java.time.ZonedDateTime;
 public class CoreDomainServiceImpl implements CoreDomainService {
     @Override
     public CertificateCourseCreatedEvent createCertificateCourse(CertificateCourse certificateCourse) {
-        return new CertificateCourseCreatedEvent(certificateCourse, ZonedDateTime.now(ZoneId.of("Asis/Ho_Chi_Minh")));
+        return new CertificateCourseCreatedEvent(certificateCourse, ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
     @Override
     public QuestionCreatedEvent createQuestion(Question question) {

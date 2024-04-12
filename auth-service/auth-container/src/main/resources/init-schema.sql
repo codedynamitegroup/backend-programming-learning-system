@@ -1,10 +1,10 @@
-DROP SCHEMA IF EXISTS "auth_service" CASCADE;
+DROP SCHEMA IF EXISTS "public" CASCADE;
 
-CREATE SCHEMA "auth_service";
+CREATE SCHEMA "public";
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
-CREATE TABLE auth_service.main_user (
+CREATE TABLE public.main_user (
 	id uuid NOT NULL,
     email character varying COLLATE pg_catalog."default" NOT NULL,
     password character varying COLLATE pg_catalog."default" NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE auth_service.main_user (
 	PRIMARY KEY ("id")
 );
 
-CREATE TABLE auth_service.main_organization (
+CREATE TABLE public.main_organization (
 	id uuid NOT NULL,
 	description text,
 	name character varying COLLATE pg_catalog."default" NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE auth_service.main_organization (
 	PRIMARY KEY ("id")
 );
 
-CREATE TABLE auth_service.role (
+CREATE TABLE public.role (
 	id uuid NOT NULL,
 	organization_id uuid NOT NULL,
 	description text,
@@ -52,7 +52,7 @@ CREATE TABLE auth_service.role (
 	PRIMARY KEY ("id")
 );
 
-CREATE TABLE auth_service.user_role (
+CREATE TABLE public.user_role (
 	id uuid NOT NULL,
 	user_id uuid NOT NULL,
 	role_id uuid NOT NULL,
@@ -65,23 +65,23 @@ CREATE TABLE auth_service.user_role (
 	PRIMARY KEY ("id")
 );
 
-ALTER TABLE auth_service.role
+ALTER TABLE public.role
     ADD CONSTRAINT "role_fk1" FOREIGN KEY (organization_id)
-    REFERENCES "auth_service".main_organization (id) MATCH SIMPLE
+    REFERENCES "public".main_organization (id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE CASCADE
     NOT VALID;
 
-ALTER TABLE auth_service.user_role
+ALTER TABLE public.user_role
     ADD CONSTRAINT "user_role_fk1" FOREIGN KEY (user_id)
-    REFERENCES auth_service.main_user (id) MATCH SIMPLE
+    REFERENCES public.main_user (id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE CASCADE
     NOT VALID;
 
-ALTER TABLE auth_service.user_role
+ALTER TABLE public.user_role
     ADD CONSTRAINT "user_role_fk2" FOREIGN KEY (role_id)
-    REFERENCES auth_service.role (id) MATCH SIMPLE
+    REFERENCES public.role (id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE CASCADE
     NOT VALID;
