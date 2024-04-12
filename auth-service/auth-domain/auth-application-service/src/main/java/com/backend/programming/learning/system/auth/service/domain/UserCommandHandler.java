@@ -1,5 +1,7 @@
 package com.backend.programming.learning.system.auth.service.domain;
 
+import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
@@ -15,13 +17,24 @@ import java.util.Optional;
 
 @Slf4j
 @Component
-public class UserQueryCommandHandler {
-    private final UserDataMapper authDataMapper;
+public class UserCommandHandler {
+
+    private final UserCreateHelper userCreateHelper;
+
+    private final UserDataMapper userDataMapper;
     private final UserRepository userRepository;
 
-    public UserQueryCommandHandler(UserCreateHelper authCreateHelper, UserDataMapper authDataMapper, UserRepository userRepository) {
-        this.authDataMapper = authDataMapper;
+    public UserCommandHandler(UserCreateHelper userCreateHelper, UserDataMapper userDataMapper, UserRepository userRepository) {
+        this.userCreateHelper = userCreateHelper;
+        this.userDataMapper = userDataMapper;
         this.userRepository = userRepository;
+    }
+
+    public CreateUserResponse createUser(CreateUserCommand createOrderCommand) {
+        User userCreated = userCreateHelper.persistUser(createOrderCommand);
+        log.info("User is created with id: {}", userCreated.getId().getValue());
+        return userDataMapper.userToCreateUserResponse(userCreated,
+                "User created successfully");
     }
 
     @Transactional(readOnly = true)
@@ -33,7 +46,6 @@ public class UserQueryCommandHandler {
             throw new AuthNotFoundException("Could not find user with user id: " +
                     queryUserCommand.getUserId());
         }
-        return authDataMapper.userToQueryUserResponse(userResult.get());
+        return userDataMapper.userToQueryUserResponse(userResult.get());
     }
-
 }

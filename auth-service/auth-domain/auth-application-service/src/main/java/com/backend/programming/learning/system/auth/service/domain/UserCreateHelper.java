@@ -25,7 +25,7 @@ public class UserCreateHelper {
     }
 
     @Transactional
-    public User persisUser(CreateUserCommand createUserCommand) {
+    public User persistUser(CreateUserCommand createUserCommand) {
         User user = authDataMapper.createUserCommandToUser(createUserCommand);
         findUserWithEmail(user.getEmail());
         authDomainService.createUser(user);
@@ -34,7 +34,7 @@ public class UserCreateHelper {
 
     private void findUserWithEmail(String email) {
         Optional<User> userResult = userRepository.findByEmail(email);
-        if (userResult.isEmpty()) {
+        if (userResult.isPresent()) {
             log.warn("Found user with email: {}", email);
             throw new AuthDomainException("Found user with email: " + email);
         }
@@ -43,8 +43,8 @@ public class UserCreateHelper {
     private User saveUser(User user) {
         User userResult = userRepository.save(user);
         if (userResult == null) {
-            log.error("Could not save auth!");
-            throw new AuthDomainException("Could not save auth!");
+            log.error("Could not save user!");
+            throw new AuthDomainException("Could not save user!");
         }
         log.info("User is saved with id: {}", userResult.getId().getValue());
         return userResult;

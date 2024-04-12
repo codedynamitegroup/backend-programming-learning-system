@@ -1,13 +1,11 @@
 package com.backend.programming.learning.system.auth.service.domain.entity;
 
-import com.backend.programming.learning.system.auth.service.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import com.backend.programming.learning.system.auth.service.domain.valueobject.RoleId;
 import com.backend.programming.learning.system.auth.service.domain.valueobject.UserRoleId;
 
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.UUID;
