@@ -36,9 +36,6 @@ public class TopicEntity {
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
-    @OneToMany(mappedBy = "topic")
-    private List<CertificateCourseEntity> certificateCourses;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

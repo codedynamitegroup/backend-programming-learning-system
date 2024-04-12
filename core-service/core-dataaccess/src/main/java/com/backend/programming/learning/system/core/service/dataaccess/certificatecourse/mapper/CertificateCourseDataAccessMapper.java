@@ -24,26 +24,18 @@ import java.util.List;
 @Component
 public class CertificateCourseDataAccessMapper {
     private final UserJpaRepository userJpaRepository;
-    private final TopicJpaRepository topicJpaRepository;
     private final ReviewDataAccessMapper reviewDataAccessMapper;
     private final ChapterDataAccessMapper chapterDataAccessMapper;
 
     public CertificateCourseDataAccessMapper(UserJpaRepository userJpaRepository,
-                                             TopicJpaRepository topicJpaRepository,
                                              ReviewDataAccessMapper reviewDataAccessMapper,
                                              ChapterDataAccessMapper chapterDataAccessMapper) {
         this.userJpaRepository = userJpaRepository;
-        this.topicJpaRepository = topicJpaRepository;
         this.reviewDataAccessMapper = reviewDataAccessMapper;
         this.chapterDataAccessMapper = chapterDataAccessMapper;
     }
 
     public CertificateCourseEntity certificateCourseToCertificateCourseEntity(CertificateCourse certificateCourse) {
-        TopicEntity topic = topicJpaRepository
-                .findById(certificateCourse.getTopicId().getValue())
-                .orElseThrow(() -> new TopicNotFoundException("Topic with id: " +
-                        certificateCourse.getTopicId().getValue() + " could not be found!")
-                );
         UserEntity createdBy = userJpaRepository
                 .findById(certificateCourse.getCreatedBy().getValue())
                 .orElseThrow(() -> new UserNotFoundException("User with id: " +
@@ -67,7 +59,6 @@ public class CertificateCourseDataAccessMapper {
                 .description(certificateCourse.getDescription())
                 .skillLevel(certificateCourse.getSkillLevel())
                 .avgRating(certificateCourse.getAvgRating())
-                .topic(topic)
                 .reviews(reviews)
                 .chapters(chapters)
                 .startTime(certificateCourse.getStartTime())
@@ -95,7 +86,6 @@ public class CertificateCourseDataAccessMapper {
                 .description(certificateCourseEntity.getDescription())
                 .skillLevel(certificateCourseEntity.getSkillLevel())
                 .avgRating(certificateCourseEntity.getAvgRating())
-                .topicId(new TopicId(certificateCourseEntity.getTopic().getId()))
                 .reviews(reviews)
                 .chapters(chapters)
                 .startTime(certificateCourseEntity.getStartTime())

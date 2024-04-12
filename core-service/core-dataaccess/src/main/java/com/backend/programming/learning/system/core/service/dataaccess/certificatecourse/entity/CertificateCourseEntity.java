@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity;
 
+import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_programminglanguage.entity.CertificateCourseProgrammingLanguageEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter.entity.ChapterEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.chapter_question.entity.ChapterQuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.review.entity.ReviewEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.topic.entity.TopicEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
@@ -11,6 +13,7 @@ import lombok.*;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -29,10 +32,6 @@ public class CertificateCourseEntity {
     @Enumerated(EnumType.STRING)
     private SkillLevel skillLevel;
     private Float avgRating;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "topic_id", referencedColumnName = "id")
-    private TopicEntity topic;
 
     private ZonedDateTime startTime;
     private ZonedDateTime endTime;
@@ -54,7 +53,6 @@ public class CertificateCourseEntity {
 
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
-    private String failureMessages;
 
     @Override
     public boolean equals(Object o) {
