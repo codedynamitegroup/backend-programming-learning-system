@@ -6,10 +6,7 @@ import com.backend.programming.learning.system.core.service.dataaccess.contest.e
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.review.entity.ReviewEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.topic.entity.TopicEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import javax.persistence.*;
 import lombok.*;
 
 import java.time.ZonedDateTime;

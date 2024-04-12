@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.ports.output.
 import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @Slf4j
@@ -23,6 +24,7 @@ public class QuestionCreateCommandHandler {
         this.questionCreatedMessagePublisher = questionCreatedMessagePublisher;
     }
 
+    @Transactional
     public CreateQuestionResponse createQuestion(CreateQuestionCommand createQuestionCommand) {
         QuestionCreatedEvent questionCreatedEvent = questionCreateHelper.persistQuestion(createQuestionCommand);
 
