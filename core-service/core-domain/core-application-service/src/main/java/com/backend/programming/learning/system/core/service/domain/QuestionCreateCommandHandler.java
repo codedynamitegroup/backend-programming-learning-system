@@ -14,14 +14,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class QuestionCreateCommandHandler {
     private final QuestionCreateHelper questionCreateHelper;
     private final QuestionDataMapper questionDataMapper;
-    private final QuestionCreatedMessagePublisher questionCreatedMessagePublisher;
 
     public QuestionCreateCommandHandler(QuestionCreateHelper questionCreateHelper,
-                                        QuestionDataMapper questionDataMapper,
-                                        QuestionCreatedMessagePublisher questionCreatedMessagePublisher) {
+                                        QuestionDataMapper questionDataMapper) {
         this.questionCreateHelper = questionCreateHelper;
         this.questionDataMapper = questionDataMapper;
-        this.questionCreatedMessagePublisher = questionCreatedMessagePublisher;
     }
 
     @Transactional
@@ -30,7 +27,7 @@ public class QuestionCreateCommandHandler {
 
         log.info("Question created with id: {}", questionCreatedEvent.getQuestion().getId().getValue());
 
-        questionCreatedMessagePublisher.publish(questionCreatedEvent);
+//        questionCreatedMessagePublisher.publish(questionCreatedEvent);
 
         return questionDataMapper.questionToCreateQuestionResponse(questionCreatedEvent.getQuestion(),
                 "Question created successfully");
