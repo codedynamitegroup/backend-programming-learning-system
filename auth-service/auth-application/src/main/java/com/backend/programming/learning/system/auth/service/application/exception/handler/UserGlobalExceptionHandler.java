@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.auth.service.application.handler;
+package com.backend.programming.learning.system.auth.service.application.exception.handler;
 
 import com.backend.programming.learning.system.application.handler.ErrorDTO;
 import com.backend.programming.learning.system.application.handler.GlobalExceptionHandler;

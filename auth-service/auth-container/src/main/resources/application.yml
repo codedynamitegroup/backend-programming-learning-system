@@ -6,11 +6,14 @@ logging:
     com.backend.programming.learning.system: DEBUG
 
 auth-service:
+<<<<<<< HEAD
   payment-request-topic-name: payment-request
   payment-response-topic-name: payment-response
   restaurant-approval-request-topic-name: restaurant-approval-request
   restaurant-approval-response-topic-name: restaurant-approval-response
   customer-topic-name: customer
+=======
+>>>>>>> origin/main
   outbox-scheduler-fixed-rate: 10000
   outbox-scheduler-initial-delay: 10000
 
@@ -26,7 +29,11 @@ spring:
   sql:
     init:
       platform: postgres
+<<<<<<< HEAD
       schema-locations: classpath:init-schema.sql
+=======
+      schema-locations: classpath:init_schema.sql
+>>>>>>> origin/main
       mode: always
 
 kafka-config:
@@ -39,7 +46,7 @@ kafka-config:
 kafka-producer-config:
   key-serializer-class: org.apache.kafka.common.serialization.StringSerializer
   value-serializer-class: io.confluent.kafka.serializers.KafkaAvroSerializer
-  compression-type: snappy
+  compression-type: none
   acks: all
   batch-size: 16384
   batch-size-boost-factor: 100
@@ -51,6 +58,8 @@ kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
   payment-consumer-group-id: payment-topic-consumer
+  restaurant-approval-consumer-group-id: restaurant-approval-topic-consumer
+  customer-group-id: customer-topic-consumer
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
   specific-avro-reader: true

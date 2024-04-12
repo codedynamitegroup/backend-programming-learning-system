@@ -22,7 +22,7 @@ public class UserController {
         this.userApplicationService = userApplicationService;
     }
 
-    @PostMapping
+    @PostMapping("")
     public ResponseEntity<CreateUserResponse> createUser(@RequestBody CreateUserCommand createUserCommand) {
         log.info("Creating user with email: {}", createUserCommand.getEmail());
         CreateUserResponse createUserResponse = userApplicationService.createUser(createUserCommand);
