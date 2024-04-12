@@ -7,7 +7,7 @@ import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AuthDataMapper {
+public class UserDataMapper {
     public User createUserCommandToUser(CreateUserCommand createUserCommand) {
         return User.builder()
                 .email(createUserCommand.getEmail())

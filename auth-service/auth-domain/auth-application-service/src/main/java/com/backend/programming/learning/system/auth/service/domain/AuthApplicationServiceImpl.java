@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.create.Cr
 import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryUserResponse;
-import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserApplicationService;
+import com.backend.programming.learning.system.auth.service.domain.ports.input.service.AuthApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -12,12 +12,12 @@ import org.springframework.validation.annotation.Validated;
 @Slf4j
 @Validated
 @Service
-class UserApplicationServiceImpl implements UserApplicationService {
+class AuthApplicationServiceImpl implements AuthApplicationService {
     private final UserCreateCommandHandler userCreateCommandHandler;
 
     private final UserQueryCommandHandler userQueryCommandHandler;
 
-    UserApplicationServiceImpl(UserCreateCommandHandler userCreateCommandHandler, UserQueryCommandHandler userQueryCommandHandler) {
+    AuthApplicationServiceImpl(UserCreateCommandHandler userCreateCommandHandler, UserQueryCommandHandler userQueryCommandHandler) {
         this.userCreateCommandHandler = userCreateCommandHandler;
         this.userQueryCommandHandler = userQueryCommandHandler;
     }

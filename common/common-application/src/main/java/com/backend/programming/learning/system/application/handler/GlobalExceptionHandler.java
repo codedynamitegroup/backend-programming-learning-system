@@ -16,56 +16,44 @@ import java.util.stream.Collectors;
 @Slf4j
 public class GlobalExceptionHandler {
     @ResponseBody
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(value = {Exception.class})
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorDTO handleException(Exception exception) {
         log.error(exception.getMessage(), exception);
-
         return ErrorDTO.builder()
                 .code(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
-                .message("Unexpected error occurred !!")
+                .message("Unexpected error!")
                 .build();
     }
 
     @ResponseBody
+    @ExceptionHandler(value = {ValidationException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = {Exception.class})
     public ErrorDTO handleException(ValidationException validationException) {
         ErrorDTO errorDTO;
-
-        // Extract the validation errors from the exception
-        // Check if the exception is a type of ConstraintViolationException
-        if(validationException instanceof ConstraintViolationException) {
-            String violations = extractViolations((ConstraintViolationException) validationException);
-
+        if (validationException instanceof ConstraintViolationException) {
+            String violations = extractViolationsFromException((ConstraintViolationException) validationException);
             log.error(violations, validationException);
-
             errorDTO = ErrorDTO.builder()
                     .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
                     .message(violations)
                     .build();
-        }
-        else {
+        } else {
             String exceptionMessage = validationException.getMessage();
-
             log.error(exceptionMessage, validationException);
-
             errorDTO = ErrorDTO.builder()
                     .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
                     .message(exceptionMessage)
                     .build();
         }
-
         return errorDTO;
     }
 
-    // Extract the validation errors from the exception
-    // and join them using "--" then return them as a single string
-    private String extractViolations(ConstraintViolationException validationException) {
-        return validationException
-                .getConstraintViolations()
+    private String extractViolationsFromException(ConstraintViolationException validationException) {
+        return validationException.getConstraintViolations()
                 .stream()
                 .map(ConstraintViolation::getMessage)
                 .collect(Collectors.joining("--"));
     }
+
 }

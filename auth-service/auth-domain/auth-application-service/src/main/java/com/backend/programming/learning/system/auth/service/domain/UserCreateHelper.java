@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.auth.service.domain;
 import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
-import com.backend.programming.learning.system.auth.service.domain.mapper.AuthDataMapper;
+import com.backend.programming.learning.system.auth.service.domain.mapper.UserDataMapper;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -16,9 +16,9 @@ import java.util.Optional;
 public class UserCreateHelper {
     private final AuthDomainService authDomainService;
     private final UserRepository userRepository;
-    private final AuthDataMapper authDataMapper;
+    private final UserDataMapper authDataMapper;
 
-    public UserCreateHelper(AuthDomainService authDomainService, UserRepository userRepository, AuthDataMapper authDataMapper) {
+    public UserCreateHelper(AuthDomainService authDomainService, UserRepository userRepository, UserDataMapper authDataMapper) {
         this.authDomainService = authDomainService;
         this.userRepository = userRepository;
         this.authDataMapper = authDataMapper;

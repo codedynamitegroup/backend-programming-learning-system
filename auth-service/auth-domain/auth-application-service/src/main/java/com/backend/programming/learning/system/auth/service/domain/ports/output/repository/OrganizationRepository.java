@@ -1,5 +1,11 @@
 package com.backend.programming.learning.system.auth.service.domain.ports.output.repository;
 
-public interface OrganizationRepository {
+import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
+import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 
+import java.util.Optional;
+
+public interface OrganizationRepository {
+    Organization save(Organization organization);
+    Optional<Organization> findById(OrganizationId organizationId);
 }

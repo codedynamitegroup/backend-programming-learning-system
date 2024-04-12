@@ -1,10 +1,14 @@
 package com.backend.programming.learning.system.auth.service.domain.entity;
 
 import com.backend.programming.learning.system.auth.service.domain.valueobject.OrganizationId;
+import com.backend.programming.learning.system.auth.service.domain.valueobject.RoleId;
+import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 public class Organization extends AggregateRoot<OrganizationId> {
     private String description;
@@ -20,6 +24,17 @@ public class Organization extends AggregateRoot<OrganizationId> {
     private UserId updatedBy;
     private Boolean isDeleted;
 
+    public void initializeOrganization() {
+        setId(new OrganizationId(UUID.randomUUID()));
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        isDeleted = false;
+    }
+
+    public void deleteOrganization() {
+        isDeleted = true;
+    }
+
     private Organization(Builder builder) {
         super.setId(builder.organizationId);
         description = builder.description;
@@ -34,6 +49,10 @@ public class Organization extends AggregateRoot<OrganizationId> {
         createdBy = builder.createdBy;
         updatedBy = builder.updatedBy;
         isDeleted = builder.isDeleted;
+    }
+
+    public static Builder builder() {
+        return new Builder();
     }
 
     public String getDescription() {
@@ -101,10 +120,6 @@ public class Organization extends AggregateRoot<OrganizationId> {
         private OrganizationId organizationId;
 
         private Builder() {
-        }
-
-        public static Builder newBuilder() {
-            return new Builder();
         }
 
         public Builder description(String val) {

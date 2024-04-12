@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.auth.service.domain;
 import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
-import com.backend.programming.learning.system.auth.service.domain.mapper.AuthDataMapper;
+import com.backend.programming.learning.system.auth.service.domain.mapper.UserDataMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -13,9 +13,9 @@ public class UserCreateCommandHandler {
 
     private final UserCreateHelper authCreateHelper;
 
-    private final AuthDataMapper authDataMapper;
+    private final UserDataMapper authDataMapper;
 
-    public UserCreateCommandHandler(UserCreateHelper authCreateHelper, AuthDataMapper authDataMapper) {
+    public UserCreateCommandHandler(UserCreateHelper authCreateHelper, UserDataMapper authDataMapper) {
         this.authCreateHelper = authCreateHelper;
         this.authDataMapper = authDataMapper;
     }

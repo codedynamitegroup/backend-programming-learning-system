@@ -51,6 +51,10 @@ public class User extends AggregateRoot<UserId> {
         isDeleted = false;
     }
 
+    public void deleteUser() {
+        isDeleted = true;
+    }
+
     public String getEmail() {
         return email;
     }

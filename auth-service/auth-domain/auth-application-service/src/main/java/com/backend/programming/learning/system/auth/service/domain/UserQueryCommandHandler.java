@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.query.Que
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
-import com.backend.programming.learning.system.auth.service.domain.mapper.AuthDataMapper;
+import com.backend.programming.learning.system.auth.service.domain.mapper.UserDataMapper;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
@@ -16,10 +16,10 @@ import java.util.Optional;
 @Slf4j
 @Component
 public class UserQueryCommandHandler {
-    private final AuthDataMapper authDataMapper;
+    private final UserDataMapper authDataMapper;
     private final UserRepository userRepository;
 
-    public UserQueryCommandHandler(UserCreateHelper authCreateHelper, AuthDataMapper authDataMapper, UserRepository userRepository) {
+    public UserQueryCommandHandler(UserCreateHelper authCreateHelper, UserDataMapper authDataMapper, UserRepository userRepository) {
         this.authDataMapper = authDataMapper;
         this.userRepository = userRepository;
     }

@@ -1,11 +1,14 @@
 package com.backend.programming.learning.system.auth.service.domain.entity;
 
+import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import com.backend.programming.learning.system.auth.service.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.auth.service.domain.valueobject.RoleId;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 public class Role extends AggregateRoot<RoleId> {
     private final OrganizationId organizationId;
@@ -15,6 +18,13 @@ public class Role extends AggregateRoot<RoleId> {
     private ZonedDateTime updatedAt;
     private UserId createdBy;
     private UserId updatedBy;
+
+    public void initializeRole() {
+        setId(new RoleId(UUID.randomUUID()));
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+    }
+
 
     private Role(Builder builder) {
         super.setId(builder.roleId);
@@ -55,6 +65,9 @@ public class Role extends AggregateRoot<RoleId> {
         return updatedBy;
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
 
     public static final class Builder {
         private OrganizationId organizationId;
@@ -67,10 +80,6 @@ public class Role extends AggregateRoot<RoleId> {
         private RoleId roleId;
 
         private Builder() {
-        }
-
-        public static Builder newBuilder() {
-            return new Builder();
         }
 
         public Builder organizationId(OrganizationId val) {

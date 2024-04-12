@@ -6,7 +6,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.query.Que
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryUserResponse;
 import jakarta.validation.Valid;
 
-public interface UserApplicationService {
+public interface AuthApplicationService {
     CreateUserResponse createUser(@Valid CreateUserCommand createUserCommand);
     QueryUserResponse findUserById(QueryUserCommand queryUserCommand);
 }

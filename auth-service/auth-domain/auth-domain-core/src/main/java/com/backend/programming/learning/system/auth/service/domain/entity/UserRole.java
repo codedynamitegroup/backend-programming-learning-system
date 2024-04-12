@@ -1,22 +1,37 @@
 package com.backend.programming.learning.system.auth.service.domain.entity;
 
+import com.backend.programming.learning.system.auth.service.domain.valueobject.OrganizationId;
+import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import com.backend.programming.learning.system.auth.service.domain.valueobject.RoleId;
 import com.backend.programming.learning.system.auth.service.domain.valueobject.UserRoleId;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 public class UserRole extends BaseEntity<UserRoleId> {
     private final UserId userId;
     private final RoleId roleId;
     private boolean isActive;
     private String name;
-    private final ZonedDateTime createdAt;
+    private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
     private final UserId createdBy;
     private UserId updatedBy;
+
+    public void initializeUserRole() {
+        setId(new UserRoleId(UUID.randomUUID()));
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        isActive = true;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
 
     private UserRole(Builder builder) {
         super.setId(builder.userRoleId);
@@ -75,10 +90,6 @@ public class UserRole extends BaseEntity<UserRoleId> {
         private UserRoleId userRoleId;
 
         private Builder() {
-        }
-
-        public static Builder newBuilder() {
-            return new Builder();
         }
 
         public Builder userId(UserId val) {

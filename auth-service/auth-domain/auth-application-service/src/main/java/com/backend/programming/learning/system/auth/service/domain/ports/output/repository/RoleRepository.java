@@ -6,4 +6,6 @@ import com.backend.programming.learning.system.auth.service.domain.valueobject.R
 import java.util.Optional;
 
 public interface RoleRepository {
+    Role save(Role role);
+    Optional<Role> findById(RoleId roleId);
 }

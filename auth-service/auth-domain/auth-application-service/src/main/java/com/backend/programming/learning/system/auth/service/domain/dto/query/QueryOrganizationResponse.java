@@ -7,32 +7,26 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.ZonedDateTime;
-import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
-public class QueryUserResponse{
+public class QueryOrganizationResponse {
     @NotNull
     @Email
-    private final String email;
+    private String email;
 
-    private ZonedDateTime dob;
-
-    private final String firstName;
-
-    private final String lastName;
-
-    private final String phone;
-
-    private String address;
-    private String avatarUrl;
-    private String refreshToken;
-    private String lastIp;
-    private ZonedDateTime lastLogin;
+    private String description;
 
     @NotNull
-    private final ZonedDateTime createdAt;
+    private String name;
+
+    private String phone;
+    private String address;
+    private String apiKey;
+    private String moodleUrl;
+
     private ZonedDateTime updatedAt;
+    @NotNull
+    private final ZonedDateTime createdAt;
 }

@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.create.Cr
 import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryUserResponse;
-import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserApplicationService;
+import com.backend.programming.learning.system.auth.service.domain.ports.input.service.AuthApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,16 +13,16 @@ import java.util.UUID;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "/users", produces = "application/vnd.api.v1+json")
-public class UserController {
+@RequestMapping(value = "/auth", produces = "application/vnd.api.v1+json")
+public class AuthController {
 
-    private final UserApplicationService userApplicationService;
+    private final AuthApplicationService userApplicationService;
 
-    public UserController(UserApplicationService userApplicationService) {
+    public AuthController(AuthApplicationService userApplicationService) {
         this.userApplicationService = userApplicationService;
     }
 
-    @PostMapping("")
+    @PostMapping("/users")
     public ResponseEntity<CreateUserResponse> createUser(@RequestBody CreateUserCommand createUserCommand) {
         log.info("Creating user with email: {}", createUserCommand.getEmail());
         CreateUserResponse createUserResponse = userApplicationService.createUser(createUserCommand);
@@ -30,7 +30,7 @@ public class UserController {
         return ResponseEntity.ok(createUserResponse);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("users/{id}")
     public ResponseEntity<QueryUserResponse> getUserById(@PathVariable UUID id) {
         QueryUserResponse queryUserResponse =
                userApplicationService.findUserById(QueryUserCommand.builder().userId(id).build());
