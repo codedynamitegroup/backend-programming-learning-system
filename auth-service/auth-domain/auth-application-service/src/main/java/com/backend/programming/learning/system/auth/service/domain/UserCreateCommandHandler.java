@@ -13,17 +13,17 @@ public class UserCreateCommandHandler {
 
     private final UserCreateHelper authCreateHelper;
 
-    private final UserDataMapper authDataMapper;
+    private final UserDataMapper userDataMapper;
 
-    public UserCreateCommandHandler(UserCreateHelper authCreateHelper, UserDataMapper authDataMapper) {
+    public UserCreateCommandHandler(UserCreateHelper authCreateHelper, UserDataMapper userDataMapper) {
         this.authCreateHelper = authCreateHelper;
-        this.authDataMapper = authDataMapper;
+        this.userDataMapper = userDataMapper;
     }
 
     public CreateUserResponse createUser(CreateUserCommand createOrderCommand) {
-        User userCreated = authCreateHelper.persisUser(createOrderCommand);
+        User userCreated = authCreateHelper.persistUser(createOrderCommand);
         log.info("Order is created with id: {}", userCreated.getId().getValue());
-        return authDataMapper.userToCreateUserResponse(userCreated,
+        return userDataMapper.userToCreateUserResponse(userCreated,
                 "User created successfully");
     }
 

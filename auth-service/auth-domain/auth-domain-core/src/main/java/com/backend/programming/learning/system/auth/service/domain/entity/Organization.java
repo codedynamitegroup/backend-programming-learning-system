@@ -1,9 +1,8 @@
 package com.backend.programming.learning.system.auth.service.domain.entity;
 
-import com.backend.programming.learning.system.auth.service.domain.valueobject.OrganizationId;
-import com.backend.programming.learning.system.auth.service.domain.valueobject.RoleId;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
+import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
 import java.time.ZoneId;
@@ -49,10 +48,6 @@ public class Organization extends AggregateRoot<OrganizationId> {
         createdBy = builder.createdBy;
         updatedBy = builder.updatedBy;
         isDeleted = builder.isDeleted;
-    }
-
-    public static Builder builder() {
-        return new Builder();
     }
 
     public String getDescription() {
@@ -103,6 +98,9 @@ public class Organization extends AggregateRoot<OrganizationId> {
         return isDeleted;
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
 
     public static final class Builder {
         private String description;
@@ -182,7 +180,7 @@ public class Organization extends AggregateRoot<OrganizationId> {
             return this;
         }
 
-        public Builder organizationId(OrganizationId val) {
+        public Builder id(OrganizationId val) {
             organizationId = val;
             return this;
         }

@@ -3,26 +3,11 @@ server:
 
 logging:
   level:
-    com.backend.programming.learning.system: DEBUG
+    com.backend.programming.learning.system: INFO
 
 auth-service:
   outbox-scheduler-fixed-rate: 10000
   outbox-scheduler-initial-delay: 10000
-
-#spring:
-#  jpa:
-#    open-in-view: false
-#    show-sql: true
-#  datasource:
-#    url: jdbc:postgresql://localhost:5432/auth-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
-#    username: postgres
-#    password: postgres
-#    driver-class-name: org.postgresql.Driver
-#  sql:
-#    init:
-#      platform: postgres
-#      schema-locations: classpath:init-schema.sql
-#      mode: always
 
 spring:
   jpa:
