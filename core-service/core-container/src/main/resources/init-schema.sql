@@ -23,8 +23,8 @@ CREATE TABLE "core-service".user
     name text NOT NULL,
     display_name text NOT NULL,
     avatar_url text NOT NULL,
-    created_at timestamp NOT NULL,
-    updated_at timestamp NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT user_pkey PRIMARY KEY (id)
 );
 
@@ -36,9 +36,9 @@ CREATE TABLE "core-service".topic
     name text NOT NULL,
     description text NOT NULL,
     created_by uuid NOT NULL,
-    created_at timestamp NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
     updated_by uuid NOT NULL,
-    updated_at timestamp NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT topic_pkey PRIMARY KEY (id),
     CONSTRAINT topic_created_by_fkey FOREIGN KEY (created_by)
         REFERENCES "core-service".user (id) MATCH SIMPLE
@@ -59,13 +59,13 @@ CREATE TABLE "core-service".certificate_course
     skill_level skill_level NOT NULL,
     avg_rating numeric(2,1) NOT NULL,
     topic_id uuid NOT NULL,
-    start_time timestamp NOT NULL,
-    end_time timestamp NOT NULL,
+    start_time TIMESTAMP WITH TIME ZONE NOT NULL,
+    end_time TIMESTAMP WITH TIME ZONE NOT NULL,
     is_deleted bool NOT NULL,
     created_by uuid NOT NULL,
-    created_at timestamp NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
     updated_by uuid NOT NULL,
-    updated_at timestamp NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT certificate_course_pkey PRIMARY KEY (id),
     CONSTRAINT certificate_course_topic_id_fkey FOREIGN KEY (topic_id)
         REFERENCES "core-service".topic (id) MATCH SIMPLE
@@ -91,9 +91,9 @@ CREATE TABLE "core-service".chapter
     title text NOT NULL,
     description text NOT NULL,
     created_by uuid NOT NULL,
-    created_at timestamp NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
     updated_by uuid NOT NULL,
-    updated_at timestamp NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT chapter_pkey PRIMARY KEY (id),
     CONSTRAINT chapter_certificate_course_id_fkey FOREIGN KEY (certificate_course_id)
         REFERENCES "core-service".certificate_course (id) MATCH SIMPLE
@@ -117,7 +117,7 @@ CREATE TABLE "core-service".certificate_course_user
     certificate_course_id uuid NOT NULL,
     user_id uuid NOT NULL,
     is_completed bool NOT NULL,
-    completed_at timestamp NOT NULL,
+    completed_at TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT certificate_course_user_pkey PRIMARY KEY (id),
     CONSTRAINT certificate_course_user_certificate_course_id_fkey FOREIGN KEY (certificate_course_id)
         REFERENCES "core-service".certificate_course (id) MATCH SIMPLE
@@ -139,8 +139,8 @@ CREATE TABLE "core-service".review
     content text NOT NULL,
     created_by uuid NOT NULL,
     updated_by uuid NOT NULL,
-    created_at timestamp NOT NULL,
-    updated_at timestamp NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT review_pkey PRIMARY KEY (id),
     CONSTRAINT review_certificate_course_id_fkey FOREIGN KEY (certificate_course_id)
         REFERENCES "core-service".certificate_course (id) MATCH SIMPLE
@@ -197,13 +197,13 @@ CREATE TABLE "core-service".contest
     id uuid NOT NULL,
     name text NOT NULL,
     description text NOT NULL,
-    start_time timestamp NOT NULL,
-    end_time timestamp NOT NULL,
+    start_time TIMESTAMP WITH TIME ZONE NOT NULL,
+    end_time TIMESTAMP WITH TIME ZONE NOT NULL,
     is_deleted bool NOT NULL,
     created_by uuid NOT NULL,
-    created_at timestamp NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
     updated_by uuid NOT NULL,
-    updated_at timestamp NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT contest_pkey PRIMARY KEY (id),
     CONSTRAINT contest_created_by_fkey FOREIGN KEY (created_by)
         REFERENCES "core-service".user (id) MATCH SIMPLE
@@ -223,7 +223,7 @@ CREATE TABLE "core-service".user_contest
     contest_id uuid NOT NULL,
     user_id uuid NOT NULL,
     is_completed bool NOT NULL,
-    completed_at timestamp NOT NULL,
+    completed_at TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT user_contest_pkey PRIMARY KEY (id),
     CONSTRAINT user_contest_contest_id_fkey FOREIGN KEY (contest_id)
         REFERENCES "core-service".contest (id) MATCH SIMPLE
@@ -243,8 +243,8 @@ CREATE TABLE "core-service".organization
     name text NOT NULL,
     description text NOT NULL,
     moodle_url text NOT NULL,
-    created_at timestamp NOT NULL,
-    updated_at timestamp NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT organization_pkey PRIMARY KEY (id)
 );
 
@@ -261,9 +261,9 @@ CREATE TABLE "core-service".question
     default_mark numeric(2,2) NOT NULL,
     qtype qtype NOT NULL,
     created_by uuid NOT NULL,
-    created_at timestamp NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
     updated_by uuid NOT NULL,
-    updated_at timestamp NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT question_pkey PRIMARY KEY (id),
     CONSTRAINT question_org_id_fkey FOREIGN KEY (org_id)
         REFERENCES "core-service".organization (id) MATCH SIMPLE
@@ -404,9 +404,9 @@ CREATE TABLE "core-service".notification
     context_url text NOT NULL,
     context_url_name text NOT NULL,
     is_read bool NOT NULL,
-    time_read timestamp,
-    created_at timestamp NOT NULL,
-    updated_at timestamp NOT NULL,
+    time_read TIMESTAMP WITH TIME ZONE,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT notification_pkey PRIMARY KEY (id),
     CONSTRAINT notification_user_id_from_fkey FOREIGN KEY (user_id_from)
         REFERENCES "core-service".user (id) MATCH SIMPLE
