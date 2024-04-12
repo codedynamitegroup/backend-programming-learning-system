@@ -1,7 +1,6 @@
 package com.backend.programming.learning.system.auth.service.domain.dto.query;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

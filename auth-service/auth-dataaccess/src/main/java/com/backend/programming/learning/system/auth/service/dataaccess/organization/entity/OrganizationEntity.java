@@ -1,9 +1,7 @@
 package com.backend.programming.learning.system.auth.service.dataaccess.organization.entity;
 
 import com.backend.programming.learning.system.domain.valueobject.UserId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import javax.persistence.*;
 import lombok.*;
 
 import java.time.ZonedDateTime;

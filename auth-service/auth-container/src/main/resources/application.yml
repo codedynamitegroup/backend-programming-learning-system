@@ -9,20 +9,37 @@ auth-service:
   outbox-scheduler-fixed-rate: 10000
   outbox-scheduler-initial-delay: 10000
 
+#spring:
+#  jpa:
+#    open-in-view: false
+#    show-sql: true
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/auth-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
+#    username: postgres
+#    password: postgres
+#    driver-class-name: org.postgresql.Driver
+#  sql:
+#    init:
+#      platform: postgres
+#      schema-locations: classpath:init-schema.sql
+#      mode: always
+
 spring:
   jpa:
     open-in-view: false
     show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
   datasource:
     url: jdbc:postgresql://localhost:5432/auth-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: postgres
-    password: postgres
+    password: localdb
     driver-class-name: org.postgresql.Driver
-  sql:
-    init:
-      platform: postgres
-      schema-locations: classpath:init-schema.sql
-      mode: always
+    platform: postgres
+    schema: classpath:init-schema.sql
+    initialization-mode: always
 
 kafka-config:
   bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
