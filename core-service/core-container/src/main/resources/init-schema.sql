@@ -58,7 +58,7 @@ CREATE TABLE "public".certificate_course
     name text NOT NULL,
     skill_level skill_level NOT NULL,
     avg_rating numeric(2,1) NOT NULL,
-    topic_id uuid NOT NULL,
+--     topic_id uuid NOT NULL,
     start_time TIMESTAMP WITH TIME ZONE NOT NULL,
     end_time TIMESTAMP WITH TIME ZONE NOT NULL,
     is_deleted bool NOT NULL,
@@ -67,10 +67,10 @@ CREATE TABLE "public".certificate_course
     updated_by uuid NOT NULL,
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT certificate_course_pkey PRIMARY KEY (id),
-    CONSTRAINT certificate_course_topic_id_fkey FOREIGN KEY (topic_id)
-        REFERENCES "public".topic (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
+--     CONSTRAINT certificate_course_topic_id_fkey FOREIGN KEY (topic_id)
+--         REFERENCES "public".topic (id) MATCH SIMPLE
+--         ON UPDATE CASCADE
+--         ON DELETE CASCADE,
     CONSTRAINT certificate_course_created_by_fkey FOREIGN KEY (created_by)
         REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
@@ -215,21 +215,21 @@ CREATE TABLE "public".contest
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "public".user_contest CASCADE;
+DROP TABLE IF EXISTS "public".contest_user CASCADE;
 
-CREATE TABLE "public".user_contest
+CREATE TABLE "public".contest_user
 (
     id uuid NOT NULL,
     contest_id uuid NOT NULL,
     user_id uuid NOT NULL,
     is_completed bool NOT NULL,
     completed_at TIMESTAMP WITH TIME ZONE NOT NULL,
-    CONSTRAINT user_contest_pkey PRIMARY KEY (id),
-    CONSTRAINT user_contest_contest_id_fkey FOREIGN KEY (contest_id)
+    CONSTRAINT contest_user_pkey PRIMARY KEY (id),
+    CONSTRAINT contest_user_contest_id_fkey FOREIGN KEY (contest_id)
         REFERENCES "public".contest (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-    CONSTRAINT user_contest_user_id_fkey FOREIGN KEY (user_id)
+    CONSTRAINT contest_user_user_id_fkey FOREIGN KEY (user_id)
         REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
@@ -414,6 +414,24 @@ CREATE TABLE "public".notification
         ON DELETE CASCADE,
     CONSTRAINT notification_user_id_to_fkey FOREIGN KEY (user_id_to)
         REFERENCES "public".user (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS "public".certificate_course_topic CASCADE;
+
+CREATE TABLE "public".certificate_course_topic
+(
+    id uuid NOT NULL,
+    certificate_course_id uuid NOT NULL,
+    topic_id uuid NOT NULL,
+    CONSTRAINT certificate_course_topic_pkey PRIMARY KEY (id),
+    CONSTRAINT certificate_course_id_fkey FOREIGN KEY (certificate_course_id)
+        REFERENCES "public".certificate_course (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT topic_id_fkey FOREIGN KEY (topic_id)
+        REFERENCES "public".topic (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
