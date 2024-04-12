@@ -14,25 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "/core", produces = "application/vnd.api.v1+json")
-public class CoreController {
+@RequestMapping(value = "/core/certificate-courses", produces = "application/vnd.api.v1+json")
+public class CertificateCourseController {
     private final CoreApplicationService coreApplicationService;
 
-    public CoreController(CoreApplicationService coreApplicationService) {
+    public CertificateCourseController(CoreApplicationService coreApplicationService) {
         this.coreApplicationService = coreApplicationService;
     }
 
-    @PostMapping("/question/create")
-    public ResponseEntity<CreateQuestionResponse> createQuestion(
-            @RequestBody CreateQuestionCommand createQuestionCommand) {
-        log.info("Creating question: {}", createQuestionCommand);
-        CreateQuestionResponse createQuestionResponse = coreApplicationService.createQuestion(createQuestionCommand);
-        log.info("Question created: {}", createQuestionResponse);
-
-        return ResponseEntity.ok(createQuestionResponse);
-    }
-
-    @PostMapping("/certificate-course/create")
+    @PostMapping("/create")
     public ResponseEntity<CreateCertificateCourseResponse> createCertificateCourse(
             @RequestBody CreateCertificateCourseCommand createCertificateCourseCommand) {
         log.info("Creating certificate course: {}", createCertificateCourseCommand);
