@@ -30,7 +30,4 @@ public class CreateCertificateCourseCommand {
     private final UUID createdBy;
     @NotNull
     private final UUID updatedBy;
-
-    private final ZonedDateTime createdAt;
-    private final ZonedDateTime updatedAt;
 }
