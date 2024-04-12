@@ -1,6 +1,6 @@
-DROP SCHEMA IF EXISTS "core-service" CASCADE;
+DROP SCHEMA IF EXISTS "public" CASCADE;
 
-CREATE SCHEMA "core-service";
+CREATE SCHEMA "public";
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
@@ -13,9 +13,9 @@ CREATE TYPE difficulty AS ENUM ('EASY', 'MEDIUM', 'HARD');
 DROP TYPE IF EXISTS qtype;
 CREATE TYPE qtype AS ENUM ('MULTIPLE_CHOICE', 'SHORT_ANSWER', 'CODE', 'ESSAY');
 
-DROP TABLE IF EXISTS "core-service".user CASCADE;
+DROP TABLE IF EXISTS "public".user CASCADE;
 
-CREATE TABLE "core-service".user
+CREATE TABLE "public".user
 (
     id uuid NOT NULL,
     email text NOT NULL,
@@ -28,9 +28,9 @@ CREATE TABLE "core-service".user
     CONSTRAINT user_pkey PRIMARY KEY (id)
 );
 
-DROP TABLE IF EXISTS "core-service".topic CASCADE;
+DROP TABLE IF EXISTS "public".topic CASCADE;
 
-CREATE TABLE "core-service".topic
+CREATE TABLE "public".topic
 (
     id uuid NOT NULL,
     name text NOT NULL,
@@ -41,18 +41,18 @@ CREATE TABLE "core-service".topic
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT topic_pkey PRIMARY KEY (id),
     CONSTRAINT topic_created_by_fkey FOREIGN KEY (created_by)
-        REFERENCES "core-service".user (id) MATCH SIMPLE
+        REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT topic_updated_by_fkey FOREIGN KEY (updated_by)
-        REFERENCES "core-service".user (id) MATCH SIMPLE
+        REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "core-service".certificate_course CASCADE;
+DROP TABLE IF EXISTS "public".certificate_course CASCADE;
 
-CREATE TABLE "core-service".certificate_course
+CREATE TABLE "public".certificate_course
 (
     id uuid NOT NULL,
     name text NOT NULL,
@@ -68,22 +68,22 @@ CREATE TABLE "core-service".certificate_course
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT certificate_course_pkey PRIMARY KEY (id),
     CONSTRAINT certificate_course_topic_id_fkey FOREIGN KEY (topic_id)
-        REFERENCES "core-service".topic (id) MATCH SIMPLE
+        REFERENCES "public".topic (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT certificate_course_created_by_fkey FOREIGN KEY (created_by)
-        REFERENCES "core-service".user (id) MATCH SIMPLE
+        REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT certificate_course_updated_by_fkey FOREIGN KEY (updated_by)
-        REFERENCES "core-service".user (id) MATCH SIMPLE
+        REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "core-service".chapter CASCADE;
+DROP TABLE IF EXISTS "public".chapter CASCADE;
 
-CREATE TABLE "core-service".chapter
+CREATE TABLE "public".chapter
 (
     id uuid NOT NULL,
     certificate_course_id uuid NOT NULL,
@@ -96,22 +96,22 @@ CREATE TABLE "core-service".chapter
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT chapter_pkey PRIMARY KEY (id),
     CONSTRAINT chapter_certificate_course_id_fkey FOREIGN KEY (certificate_course_id)
-        REFERENCES "core-service".certificate_course (id) MATCH SIMPLE
+        REFERENCES "public".certificate_course (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT chapter_created_by_fkey FOREIGN KEY (created_by)
-        REFERENCES "core-service".user (id) MATCH SIMPLE
+        REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT chapter_updated_by_fkey FOREIGN KEY (updated_by)
-        REFERENCES "core-service".user (id) MATCH SIMPLE
+        REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "core-service".certificate_course_user CASCADE;
+DROP TABLE IF EXISTS "public".certificate_course_user CASCADE;
 
-CREATE TABLE "core-service".certificate_course_user
+CREATE TABLE "public".certificate_course_user
 (
     id uuid NOT NULL,
     certificate_course_id uuid NOT NULL,
@@ -120,18 +120,18 @@ CREATE TABLE "core-service".certificate_course_user
     completed_at TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT certificate_course_user_pkey PRIMARY KEY (id),
     CONSTRAINT certificate_course_user_certificate_course_id_fkey FOREIGN KEY (certificate_course_id)
-        REFERENCES "core-service".certificate_course (id) MATCH SIMPLE
+        REFERENCES "public".certificate_course (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT certificate_course_user_user_id_fkey FOREIGN KEY (user_id)
-        REFERENCES "core-service".user (id) MATCH SIMPLE
+        REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "core-service".review CASCADE;
+DROP TABLE IF EXISTS "public".review CASCADE;
 
-CREATE TABLE "core-service".review
+CREATE TABLE "public".review
 (
     id uuid NOT NULL,
     certificate_course_id uuid NOT NULL,
@@ -143,22 +143,22 @@ CREATE TABLE "core-service".review
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT review_pkey PRIMARY KEY (id),
     CONSTRAINT review_certificate_course_id_fkey FOREIGN KEY (certificate_course_id)
-        REFERENCES "core-service".certificate_course (id) MATCH SIMPLE
+        REFERENCES "public".certificate_course (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT review_created_by_fkey FOREIGN KEY (created_by)
-        REFERENCES "core-service".user (id) MATCH SIMPLE
+        REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT review_updated_by_fkey FOREIGN KEY (updated_by)
-        REFERENCES "core-service".user (id) MATCH SIMPLE
+        REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "core-service".programming_language CASCADE;
+DROP TABLE IF EXISTS "public".programming_language CASCADE;
 
-CREATE TABLE "core-service".programming_language
+CREATE TABLE "public".programming_language
 (
     id uuid NOT NULL,
     name text NOT NULL,
@@ -172,27 +172,27 @@ CREATE TABLE "core-service".programming_language
     CONSTRAINT programming_language_pkey PRIMARY KEY (id)
 );
 
-DROP TABLE IF EXISTS "core-service".certificate_course_programming_language CASCADE;
+DROP TABLE IF EXISTS "public".certificate_course_programming_language CASCADE;
 
-CREATE TABLE "core-service".certificate_course_programming_language
+CREATE TABLE "public".certificate_course_programming_language
 (
     id uuid NOT NULL,
     certificate_course_id uuid NOT NULL,
     programming_language_id uuid NOT NULL,
     CONSTRAINT certificate_course_programming_language_pkey PRIMARY KEY (id),
     CONSTRAINT certificate_course_id_fkey FOREIGN KEY (certificate_course_id)
-        REFERENCES "core-service".certificate_course (id) MATCH SIMPLE
+        REFERENCES "public".certificate_course (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT programming_language_id_fkey FOREIGN KEY (programming_language_id)
-        REFERENCES "core-service".programming_language (id) MATCH SIMPLE
+        REFERENCES "public".programming_language (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "core-service".contest CASCADE;
+DROP TABLE IF EXISTS "public".contest CASCADE;
 
-CREATE TABLE "core-service".contest
+CREATE TABLE "public".contest
 (
     id uuid NOT NULL,
     name text NOT NULL,
@@ -206,18 +206,18 @@ CREATE TABLE "core-service".contest
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT contest_pkey PRIMARY KEY (id),
     CONSTRAINT contest_created_by_fkey FOREIGN KEY (created_by)
-        REFERENCES "core-service".user (id) MATCH SIMPLE
+        REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT contest_updated_by_fkey FOREIGN KEY (updated_by)
-        REFERENCES "core-service".user (id) MATCH SIMPLE
+        REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "core-service".user_contest CASCADE;
+DROP TABLE IF EXISTS "public".user_contest CASCADE;
 
-CREATE TABLE "core-service".user_contest
+CREATE TABLE "public".user_contest
 (
     id uuid NOT NULL,
     contest_id uuid NOT NULL,
@@ -226,18 +226,18 @@ CREATE TABLE "core-service".user_contest
     completed_at TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT user_contest_pkey PRIMARY KEY (id),
     CONSTRAINT user_contest_contest_id_fkey FOREIGN KEY (contest_id)
-        REFERENCES "core-service".contest (id) MATCH SIMPLE
+        REFERENCES "public".contest (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT user_contest_user_id_fkey FOREIGN KEY (user_id)
-        REFERENCES "core-service".user (id) MATCH SIMPLE
+        REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "core-service".organization CASCADE;
+DROP TABLE IF EXISTS "public".organization CASCADE;
 
-CREATE TABLE "core-service".organization
+CREATE TABLE "public".organization
 (
     id uuid NOT NULL,
     name text NOT NULL,
@@ -248,9 +248,9 @@ CREATE TABLE "core-service".organization
     CONSTRAINT organization_pkey PRIMARY KEY (id)
 );
 
-DROP TABLE IF EXISTS "core-service".question CASCADE;
+DROP TABLE IF EXISTS "public".question CASCADE;
 
-CREATE TABLE "core-service".question
+CREATE TABLE "public".question
 (
     id uuid NOT NULL,
     org_id uuid NOT NULL,
@@ -266,22 +266,22 @@ CREATE TABLE "core-service".question
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT question_pkey PRIMARY KEY (id),
     CONSTRAINT question_org_id_fkey FOREIGN KEY (org_id)
-        REFERENCES "core-service".organization (id) MATCH SIMPLE
+        REFERENCES "public".organization (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT question_created_by_fkey FOREIGN KEY (created_by)
-        REFERENCES "core-service".user (id) MATCH SIMPLE
+        REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT question_updated_by_fkey FOREIGN KEY (updated_by)
-        REFERENCES "core-service".user (id) MATCH SIMPLE
+        REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "core-service".question_chapter CASCADE;
+DROP TABLE IF EXISTS "public".question_chapter CASCADE;
 
-CREATE TABLE "core-service".question_chapter
+CREATE TABLE "public".question_chapter
 (
     id uuid NOT NULL,
     question_id uuid NOT NULL,
@@ -290,18 +290,18 @@ CREATE TABLE "core-service".question_chapter
     pass bool NOT NULL,
     CONSTRAINT question_chapter_pkey PRIMARY KEY (id),
     CONSTRAINT question_id_fkey FOREIGN KEY (question_id)
-        REFERENCES "core-service".question (id) MATCH SIMPLE
+        REFERENCES "public".question (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT chapter_id_fkey FOREIGN KEY (chapter_id)
-        REFERENCES "core-service".chapter (id) MATCH SIMPLE
+        REFERENCES "public".chapter (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "core-service".answer_of_question CASCADE;
+DROP TABLE IF EXISTS "public".answer_of_question CASCADE;
 
-CREATE TABLE "core-service".answer_of_question
+CREATE TABLE "public".answer_of_question
 (
     id uuid NOT NULL,
     question_id uuid NOT NULL,
@@ -310,42 +310,42 @@ CREATE TABLE "core-service".answer_of_question
     fraction numeric(2,2) NOT NULL,
     CONSTRAINT answer_of_question_pkey PRIMARY KEY (id),
     CONSTRAINT answer_of_question_question_id_fkey FOREIGN KEY (question_id)
-        REFERENCES "core-service".question (id) MATCH SIMPLE
+        REFERENCES "public".question (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "core-service".qtype_code_question CASCADE;
+DROP TABLE IF EXISTS "public".qtype_code_question CASCADE;
 
-CREATE TABLE "core-service".qtype_code_question
+CREATE TABLE "public".qtype_code_question
 (
     id uuid NOT NULL,
     question_id uuid NOT NULL,
     dsl_template text NOT NULL,
     CONSTRAINT qtype_code_question_pkey PRIMARY KEY (id),
     CONSTRAINT qtype_code_question_question_id_fkey FOREIGN KEY (question_id)
-        REFERENCES "core-service".question (id) MATCH SIMPLE
+        REFERENCES "public".question (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "core-service".qtype_shortanswer_question CASCADE;
+DROP TABLE IF EXISTS "public".qtype_shortanswer_question CASCADE;
 
-CREATE TABLE "core-service".qtype_shortanswer_question
+CREATE TABLE "public".qtype_shortanswer_question
 (
     id uuid NOT NULL,
     question_id uuid NOT NULL,
     case_sensitive bool NOT NULL,
     CONSTRAINT qtype_shortanswer_question_pkey PRIMARY KEY (id),
     CONSTRAINT qtype_shortanswer_question_question_id_fkey FOREIGN KEY (question_id)
-        REFERENCES "core-service".question (id) MATCH SIMPLE
+        REFERENCES "public".question (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "core-service".qtype_essay_question CASCADE;
+DROP TABLE IF EXISTS "public".qtype_essay_question CASCADE;
 
-CREATE TABLE "core-service".qtype_essay_question
+CREATE TABLE "public".qtype_essay_question
 (
     id uuid NOT NULL,
     question_id uuid NOT NULL,
@@ -363,14 +363,14 @@ CREATE TABLE "core-service".qtype_essay_question
     file_types_list text NOT NULL,
     CONSTRAINT qtype_essay_question_pkey PRIMARY KEY (id),
     CONSTRAINT qtype_essay_question_question_id_fkey FOREIGN KEY (question_id)
-        REFERENCES "core-service".question (id) MATCH SIMPLE
+        REFERENCES "public".question (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "core-service".qtype_multichoice_question CASCADE;
+DROP TABLE IF EXISTS "public".qtype_multichoice_question CASCADE;
 
-CREATE TABLE "core-service".qtype_multichoice_question
+CREATE TABLE "public".qtype_multichoice_question
 (
     id uuid NOT NULL,
     question_id uuid NOT NULL,
@@ -384,14 +384,14 @@ CREATE TABLE "core-service".qtype_multichoice_question
     show_standard_instruction text NOT NULL,
     CONSTRAINT qtype_multichoice_question_pkey PRIMARY KEY (id),
     CONSTRAINT qtype_multichoice_question_question_id_fkey FOREIGN KEY (question_id)
-        REFERENCES "core-service".question (id) MATCH SIMPLE
+        REFERENCES "public".question (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "core-service".notification CASCADE;
+DROP TABLE IF EXISTS "public".notification CASCADE;
 
-CREATE TABLE "core-service".notification
+CREATE TABLE "public".notification
 (
     id uuid NOT NULL,
     user_id_from uuid NOT NULL,
@@ -409,11 +409,11 @@ CREATE TABLE "core-service".notification
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT notification_pkey PRIMARY KEY (id),
     CONSTRAINT notification_user_id_from_fkey FOREIGN KEY (user_id_from)
-        REFERENCES "core-service".user (id) MATCH SIMPLE
+        REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT notification_user_id_to_fkey FOREIGN KEY (user_id_to)
-        REFERENCES "core-service".user (id) MATCH SIMPLE
+        REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
