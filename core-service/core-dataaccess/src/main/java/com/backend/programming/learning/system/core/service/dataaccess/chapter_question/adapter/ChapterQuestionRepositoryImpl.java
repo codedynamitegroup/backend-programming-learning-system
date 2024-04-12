@@ -23,7 +23,10 @@ public class ChapterQuestionRepositoryImpl implements ChapterQuestionRepository 
 
     @Override
     public ChapterQuestion saveChapterQuestion(ChapterQuestion chapterQuestion) {
-        return null;
-
+        return chapterQuestionDataAccessMapper.chapterQuestionEntityToChapterQuestion(
+                chapterQuestionJpaRepository.save(
+                        chapterQuestionDataAccessMapper.chapterQuestionToChapterQuestionEntity(chapterQuestion)
+                )
+        );
     }
 }

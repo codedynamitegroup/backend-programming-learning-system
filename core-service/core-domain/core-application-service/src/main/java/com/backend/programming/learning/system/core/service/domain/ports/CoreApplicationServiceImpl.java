@@ -15,18 +15,21 @@ import org.springframework.validation.annotation.Validated;
 @Slf4j
 class CoreApplicationServiceImpl implements CoreApplicationService {
     private final QuestionCreateCommandHandler questionCreateCommandHandler;
+    private final CertificateCourseCreateCommandHandler certificateCourseCreateCommandHandler;
 
-    public CoreApplicationServiceImpl(QuestionCreateCommandHandler questionCreateCommandHandler) {
+    public CoreApplicationServiceImpl(QuestionCreateCommandHandler questionCreateCommandHandler,
+                                      CertificateCourseCreateCommandHandler certificateCourseCreateCommandHandler) {
         this.questionCreateCommandHandler = questionCreateCommandHandler;
+        this.certificateCourseCreateCommandHandler = certificateCourseCreateCommandHandler;
     }
 
     @Override
-    public CreateQuestionResponse createQuestion(CreateQuestionCommand createQuestionCommand) {
+    public CreateQuestionResponse createQuestion(@Valid CreateQuestionCommand createQuestionCommand) {
         return questionCreateCommandHandler.createQuestion(createQuestionCommand);
     }
 
     @Override
-    public CreateCertificateCourseResponse createCertificateCourse(CreateCertificateCourseCommand createCertificateCourseCommand) {
-        return null;
+    public CreateCertificateCourseResponse createCertificateCourse(@Valid CreateCertificateCourseCommand createCertificateCourseCommand) {
+        return certificateCourseCreateCommandHandler.createCertificateCourse(createCertificateCourseCommand);
     }
 }
