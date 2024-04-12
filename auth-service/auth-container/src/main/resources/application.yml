@@ -3,19 +3,26 @@ server:
 
 logging:
   level:
-    com.food.ordering.system: DEBUG
+    com.backend.programming.learning.system: DEBUG
+
+auth-service:
+  outbox-scheduler-fixed-rate: 10000
+  outbox-scheduler-initial-delay: 10000
 
 spring:
   jpa:
     open-in-view: false
     show-sql: true
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=auth_service&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
+    url: jdbc:postgresql://localhost:5432/auth-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
-    platform: postgres
-    initialization-mode: always
+  sql:
+    init:
+      platform: postgres
+      schema-locations: classpath:init_schema.sql
+      mode: always
 
 kafka-config:
   bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
@@ -27,7 +34,7 @@ kafka-config:
 kafka-producer-config:
   key-serializer-class: org.apache.kafka.common.serialization.StringSerializer
   value-serializer-class: io.confluent.kafka.serializers.KafkaAvroSerializer
-  compression-type: snappy
+  compression-type: none
   acks: all
   batch-size: 16384
   batch-size-boost-factor: 100
@@ -39,6 +46,8 @@ kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
   payment-consumer-group-id: payment-topic-consumer
+  restaurant-approval-consumer-group-id: restaurant-approval-topic-consumer
+  customer-group-id: customer-topic-consumer
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
   specific-avro-reader: true

@@ -1,10 +1,12 @@
-DROP SCHEMA IF EXISTS "auth_service" CASCADE;
+DROP SCHEMA IF EXISTS "public" CASCADE;
 
-CREATE SCHEMA "auth_service";
+CREATE SCHEMA "public";
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
-CREATE TABLE auth_service.main_user (
+DROP TABLE IF EXISTS "public".main_user CASCADE;
+
+CREATE TABLE "public".main_user (
 	id uuid NOT NULL,
     email character varying COLLATE pg_catalog."default" NOT NULL,
     password character varying COLLATE pg_catalog."default" NOT NULL,
@@ -23,7 +25,9 @@ CREATE TABLE auth_service.main_user (
 	PRIMARY KEY ("id")
 );
 
-CREATE TABLE auth_service.main_organization (
+DROP TABLE IF EXISTS "public".main_organization CASCADE;
+
+CREATE TABLE "public".main_organization (
 	id uuid NOT NULL,
 	description text,
 	name character varying COLLATE pg_catalog."default" NOT NULL,
@@ -40,7 +44,9 @@ CREATE TABLE auth_service.main_organization (
 	PRIMARY KEY ("id")
 );
 
-CREATE TABLE auth_service.role (
+DROP TABLE IF EXISTS "public".role CASCADE;
+
+CREATE TABLE "public".role (
 	id uuid NOT NULL,
 	organization_id uuid NOT NULL,
 	description text,
@@ -49,10 +55,16 @@ CREATE TABLE auth_service.role (
 	updated_at TIMESTAMP WITH TIME ZONE,
 	updated_by uuid,
 	created_by uuid,
-	PRIMARY KEY ("id")
+	PRIMARY KEY ("id"),
+    CONSTRAINT role_fk1 FOREIGN KEY (organization_id)
+        REFERENCES "public".main_organization (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
 );
 
-CREATE TABLE auth_service.user_role (
+DROP TABLE IF EXISTS "public".user_role CASCADE;
+
+CREATE TABLE "public".user_role (
 	id uuid NOT NULL,
 	user_id uuid NOT NULL,
 	role_id uuid NOT NULL,
@@ -62,26 +74,13 @@ CREATE TABLE auth_service.user_role (
 	updated_at TIMESTAMP WITH TIME ZONE,
 	updated_by uuid,
 	created_by uuid,
-	PRIMARY KEY ("id")
+	PRIMARY KEY ("id"),
+	CONSTRAINT user_role_fk1 FOREIGN KEY (user_id)
+        REFERENCES "public".main_user (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE,
+    CONSTRAINT user_role_fk2 FOREIGN KEY (role_id)
+        REFERENCES "public".role (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
 );
-
-ALTER TABLE auth_service.role
-    ADD CONSTRAINT "role_fk1" FOREIGN KEY (organization_id)
-    REFERENCES "auth_service".main_organization (id) MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE CASCADE
-    NOT VALID;
-
-ALTER TABLE auth_service.user_role
-    ADD CONSTRAINT "user_role_fk1" FOREIGN KEY (user_id)
-    REFERENCES auth_service.main_user (id) MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE CASCADE
-    NOT VALID;
-
-ALTER TABLE auth_service.user_role
-    ADD CONSTRAINT "user_role_fk2" FOREIGN KEY (role_id)
-    REFERENCES auth_service.role (id) MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE CASCADE
-    NOT VALID;
