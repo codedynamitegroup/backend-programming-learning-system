@@ -23,7 +23,7 @@ spring:
     password: localdb
     driver-class-name: org.postgresql.Driver
     platform: postgres
-    schema: classpath:init-schema.sql
+#    schema: classpath:init-schema.sql
     initialization-mode: always
 
 kafka-config:
