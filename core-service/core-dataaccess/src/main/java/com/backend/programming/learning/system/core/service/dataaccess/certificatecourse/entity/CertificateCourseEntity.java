@@ -1,12 +1,10 @@
 package com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity;
 
-import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_programminglanguage.entity.CertificateCourseProgrammingLanguageEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_programminglanguage.entity.CerCourseProLanguageEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_topic.entity.CertificateCourseTopicEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_user.entity.CertificateCourseUserEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter.entity.ChapterEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.chapter_question.entity.ChapterQuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.review.entity.ReviewEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.topic.entity.TopicEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
 import javax.persistence.*;
@@ -15,7 +13,6 @@ import lombok.*;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -52,7 +49,7 @@ public class CertificateCourseEntity {
     private List<CertificateCourseUserEntity> certificateCourseUsers;
 
     @OneToMany(mappedBy = "certificateCourse")
-    private List<CertificateCourseProgrammingLanguageEntity> certificateCourseProgramingLanguages;
+    private List<CerCourseProLanguageEntity> certificateCourseProgramingLanguages;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "created_by", referencedColumnName = "id")
