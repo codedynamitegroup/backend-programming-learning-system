@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.auth.service.domain;
 
 import com.backend.programming.learning.system.auth.service.domain.dto.create.*;
+import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserApplicationService;
@@ -26,5 +28,10 @@ class UserApplicationServiceImpl implements UserApplicationService {
     @Override
     public QueryUserResponse findUserById(QueryUserCommand queryUserCommand) {
         return userCommandHandler.queryUser(queryUserCommand);
+    }
+
+    @Override
+    public DeleteUserResponse deleteUserById(DeleteUserCommand deleteUserCommand) {
+        return null;
     }
 }

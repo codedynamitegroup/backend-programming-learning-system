@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.auth.service.domain;
 
 import com.backend.programming.learning.system.auth.service.domain.dto.create.*;
+import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.RoleApplicationService;
@@ -26,5 +28,10 @@ class RoleApplicationServiceImpl implements RoleApplicationService {
     @Override
     public QueryRoleResponse findRoleById(QueryRoleCommand queryRoleCommand) {
         return roleCommandHandler.queryRole(queryRoleCommand);
+    }
+
+    @Override
+    public DeleteRoleResponse deleteRoleById(DeleteRoleCommand deleteRoleCommand) {
+        return null;
     }
 }

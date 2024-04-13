@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.auth.service.domain;
 
 import com.backend.programming.learning.system.auth.service.domain.dto.create.*;
+import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteOrganizationCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.OrganizationApplicationService;
@@ -27,5 +29,10 @@ class OrganizationApplicationServiceImpl implements OrganizationApplicationServi
     @Override
     public QueryOrganizationResponse findOrganizationById(QueryOrganizationCommand queryOrganizationCommand) {
         return organizationCommandHandler.queryOrganization(queryOrganizationCommand);
+    }
+
+    @Override
+    public DeleteOrganizationResponse deleteOrganizationById(DeleteOrganizationCommand deleteOrganizationCommand) {
+        return null;
     }
 }

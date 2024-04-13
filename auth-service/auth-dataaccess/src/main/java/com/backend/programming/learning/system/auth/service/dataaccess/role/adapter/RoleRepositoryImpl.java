@@ -19,4 +19,9 @@ public class RoleRepositoryImpl implements RoleRepository {
     public Optional<Role> findById(RoleId roleId) {
         return Optional.empty();
     }
+
+    @Override
+    public void deleteById(RoleId roleId) {
+
+    }
 }

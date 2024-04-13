@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface RoleRepository {
     Role save(Role role);
     Optional<Role> findById(RoleId roleId);
+    void deleteById(RoleId roleId);
 }

@@ -130,7 +130,7 @@ public class UserRole extends BaseEntity<UserRoleId> {
             return this;
         }
 
-        public Builder userRoleId(UserRoleId val) {
+        public Builder id(UserRoleId val) {
             userRoleId = val;
             return this;
         }

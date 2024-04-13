@@ -36,7 +36,7 @@ public class OrganizationCreateHelper {
             log.error("Could not save organization!");
             throw new AuthDomainException("Could not save organization!");
         }
-        log.info("User is saved with id: {}", organizationResult.getId().getValue());
+        log.info("Organization is saved with id: {}", organizationResult.getId().getValue());
         return organizationResult;
     }
 }
