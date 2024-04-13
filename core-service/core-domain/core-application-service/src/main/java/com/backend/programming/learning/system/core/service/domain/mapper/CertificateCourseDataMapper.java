@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.core.service.domain.mapper;
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.QueryCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
@@ -28,6 +29,14 @@ public class CertificateCourseDataMapper {
         return CreateCertificateCourseResponse.builder()
                 .certificateCourse(certificateCourse)
                 .message(message)
+                .build();
+    }
+
+    public QueryCertificateCourseResponse certificateCourseToQueryCertificateCourseResponse(
+            CertificateCourse certificateCourse) {
+        return QueryCertificateCourseResponse.builder()
+                .certificateCourse(certificateCourse)
+                .message("Certificate course found successfully")
                 .build();
     }
 }

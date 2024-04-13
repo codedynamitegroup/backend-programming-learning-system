@@ -2,13 +2,14 @@ package com.backend.programming.learning.system.core.service.application.rest;
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.QueryCertificateCourseCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.query.QueryCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.CertificateCourseApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -29,6 +30,15 @@ public class CertificateCourseController {
         log.info("Certificate course created: {}", createCertificateCourseResponse);
 
         return ResponseEntity.ok(createCertificateCourseResponse);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<QueryCertificateCourseResponse> getCertificateCourseById(@PathVariable UUID id) {
+        QueryCertificateCourseResponse queryCertificateCourseResponse =
+                certificateCourseApplicationService.findCertificateCourseById(
+                        QueryCertificateCourseCommand.builder().certificateCourseId(id).build());
+        log.info("Returning certificate course: {}", queryCertificateCourseResponse.getCertificateCourse());
+        return  ResponseEntity.ok(queryCertificateCourseResponse);
     }
 
 }

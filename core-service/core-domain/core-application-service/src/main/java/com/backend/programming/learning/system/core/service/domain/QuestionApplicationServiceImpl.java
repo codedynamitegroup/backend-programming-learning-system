@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.core.service.domain;
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.QueryCertificateCourseCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.query.QueryCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.QuestionApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,4 +25,5 @@ class QuestionApplicationServiceImpl implements QuestionApplicationService {
     public CreateQuestionResponse createQuestion(@Valid CreateQuestionCommand createQuestionCommand) {
         return questionCreateCommandHandler.createQuestion(createQuestionCommand);
     }
+
 }
