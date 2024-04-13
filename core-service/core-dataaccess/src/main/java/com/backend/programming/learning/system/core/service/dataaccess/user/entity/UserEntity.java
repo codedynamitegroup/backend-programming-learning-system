@@ -35,42 +35,6 @@ public class UserEntity {
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
-    @OneToOne(mappedBy = "createdBy")
-    private QuestionEntity questionCreatedBy;
-
-    @OneToOne(mappedBy = "updatedBy")
-    private QuestionEntity questionUpdatedBy;
-
-    @OneToOne(mappedBy = "createdBy")
-    private CertificateCourseEntity certificateCourseCreatedBy;
-
-    @OneToOne(mappedBy = "updatedBy")
-    private CertificateCourseEntity certificateCourseUpdatedBy;
-
-    @OneToOne(mappedBy = "createdBy")
-    private TopicEntity topicCreatedBy;
-
-    @OneToOne(mappedBy = "updatedBy")
-    private TopicEntity topicUpdatedBy;
-
-    @OneToOne(mappedBy = "createdBy")
-    private ChapterEntity chapterCreatedBy;
-
-    @OneToOne(mappedBy = "updatedBy")
-    private ChapterEntity chapterUpdatedBy;
-
-    @OneToOne(mappedBy = "createdBy")
-    private ReviewEntity reviewCreatedBy;
-
-    @OneToOne(mappedBy = "updatedBy")
-    private ReviewEntity reviewUpdatedBy;
-
-    @OneToOne(mappedBy = "createdBy")
-    private ContestEntity contestCreatedBy;
-
-    @OneToOne(mappedBy = "updatedBy")
-    private ContestEntity contestUpdatedBy;
-
     @OneToMany(mappedBy = "user")
     private List<CertificateCourseUserEntity> certificateCourseUsers;
 }
