@@ -17,15 +17,29 @@ import java.util.Optional;
 
 @Component
 @Slf4j
-public class CertificateCourseQueryCommandHandler {
+public class CertificateCourseCommandHandler {
+    private final CertificateCourseCreateHelper certificateCourseCreateHelper;
     private final CertificateCourseDataMapper certificateCourseDataMapper;
     private final CertificateCourseRepository certificateCourseRepository;
 
-
-    public CertificateCourseQueryCommandHandler(CertificateCourseDataMapper certificateCourseDataMapper,
-                                                CertificateCourseRepository certificateCourseRepository) {
+    public CertificateCourseCommandHandler(CertificateCourseCreateHelper certificateCourseCreateHelper,
+                                           CertificateCourseDataMapper certificateCourseDataMapper,
+                                           CertificateCourseRepository certificateCourseRepository) {
+        this.certificateCourseCreateHelper = certificateCourseCreateHelper;
         this.certificateCourseDataMapper = certificateCourseDataMapper;
         this.certificateCourseRepository = certificateCourseRepository;
+    }
+
+    @Transactional
+    public CreateCertificateCourseResponse createCertificateCourse(
+            CreateCertificateCourseCommand createCertificateCourseCommand) {
+        CertificateCourse certificateCourse = certificateCourseCreateHelper
+                .persistCertificateCourse(createCertificateCourseCommand);
+
+        log.info("Certificate course created with id: {}", certificateCourse.getId().getValue());
+
+        return certificateCourseDataMapper.certificateCourseToCreateCertificateCourseResponse(certificateCourse,
+                "Certificate course created successfully");
     }
 
     @Transactional(readOnly = true)
