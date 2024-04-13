@@ -1,8 +1,8 @@
-package com.backend.programming.learning.system.core.service.domain;
+package com.backend.programming.learning.system.core.service.domain.implement.question;
 
-import com.backend.programming.learning.system.core.service.domain.dto.create.CreateQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQtypeCodeQuestionCommand;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.QtypeCodeQuestionApplicationService;
+import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QtypeCodeQuestionApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;

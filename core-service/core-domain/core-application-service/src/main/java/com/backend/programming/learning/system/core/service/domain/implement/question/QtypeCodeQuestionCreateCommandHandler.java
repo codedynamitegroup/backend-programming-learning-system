@@ -1,9 +1,9 @@
-package com.backend.programming.learning.system.core.service.domain;
+package com.backend.programming.learning.system.core.service.domain.implement.question;
 
-import com.backend.programming.learning.system.core.service.domain.dto.create.CreateQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQtypeCodeQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
-import com.backend.programming.learning.system.core.service.domain.mapper.question.QtypeCodeQuestionDataMapper;
+import com.backend.programming.learning.system.core.service.domain.mapper.QuestionDataMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -11,19 +11,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class QtypeCodeQuestionCreateCommandHandler {
     private final QtypeCodeQuestionCreateHelper qtypeCodeQuestionCreateHelper;
-    private final QtypeCodeQuestionDataMapper qtypeCodeQuestionDataMapper;
+    private final QuestionDataMapper questionDataMapper;
 
     public QtypeCodeQuestionCreateCommandHandler(QtypeCodeQuestionCreateHelper qtypeCodeQuestionCreateHelper,
-                                                 QtypeCodeQuestionDataMapper qtypeCodeQuestionDataMapper) {
+                                                 QuestionDataMapper questionDataMapper) {
         this.qtypeCodeQuestionCreateHelper = qtypeCodeQuestionCreateHelper;
-        this.qtypeCodeQuestionDataMapper = qtypeCodeQuestionDataMapper;
+        this.questionDataMapper = questionDataMapper;
     }
 
     public CreateQuestionResponse createQtypeCodeQuestion(CreateQtypeCodeQuestionCommand createQtypeCodeQuestionCommand) {
         QuestionCreatedEvent questionCreatedEvent = qtypeCodeQuestionCreateHelper.persistQtypeCodeQuestion(createQtypeCodeQuestionCommand);
 
 
-        return qtypeCodeQuestionDataMapper.qtypeCodeQuestionToCreateQuestionResponse(questionCreatedEvent.getQuestion(),
+        return questionDataMapper.questionToCreateQuestionResponse(questionCreatedEvent.getQuestion(),
                 "Qtype Code Question created successfully");
     }
 }

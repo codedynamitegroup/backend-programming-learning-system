@@ -1,10 +1,9 @@
-package com.backend.programming.learning.system.core.service.domain;
+package com.backend.programming.learning.system.core.service.domain.implement.question;
 
-import com.backend.programming.learning.system.core.service.domain.dto.create.CreateQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.CoreDomainService;
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQtypeCodeQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeCodeQuestion;
 import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
-import com.backend.programming.learning.system.core.service.domain.mapper.QuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QtypeCodeQuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeCodeQuestionRepository;
 import lombok.extern.slf4j.Slf4j;

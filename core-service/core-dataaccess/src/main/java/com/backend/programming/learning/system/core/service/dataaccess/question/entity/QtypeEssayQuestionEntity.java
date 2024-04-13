@@ -11,7 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "qtype_essay_question")
+@Table(name = "qtype_essay_question", schema = "public")
 public class QtypeEssayQuestionEntity {
     @Id
     @Column(name = "id")

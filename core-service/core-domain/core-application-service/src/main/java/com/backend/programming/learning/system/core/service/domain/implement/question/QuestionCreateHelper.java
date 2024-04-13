@@ -1,19 +1,15 @@
-package com.backend.programming.learning.system.core.service.domain;
+package com.backend.programming.learning.system.core.service.domain.implement.question;
 
-import com.backend.programming.learning.system.core.service.domain.dto.create.CreateQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.CoreDomainService;
+import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.QuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.entity.Organization;
-import com.backend.programming.learning.system.core.service.domain.entity.QtypeCodeQuestion;
-import com.backend.programming.learning.system.core.service.domain.entity.QtypeEssayQuestion;
-import com.backend.programming.learning.system.core.service.domain.entity.QtypeMultiChoiceQuestion;
-import com.backend.programming.learning.system.core.service.domain.entity.QtypeShortAnswerQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
-import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,10 +22,6 @@ import java.util.UUID;
 public class QuestionCreateHelper {
     private final CoreDomainService coreDomainService;
     private final QuestionRepository questionRepository;
-    private final QtypeCodeQuestionRepository qtypeCodeQuestionRepository;
-    private final QtypeShortanswerQuestionRepository qtypeShortanswerQuestionRepository;
-    private final QtypeEssayQuestionRepository qtypeEssayQuestionRepository;
-    private final QtypeMultichoiceQuestionRepository qtypeMultichoiceQuestionRepository;
     private final OrganizationRepository organizationRepository;
     private final UserRepository userRepository;
     private final QuestionDataMapper questionDataMapper;
@@ -37,19 +29,11 @@ public class QuestionCreateHelper {
 
     public QuestionCreateHelper(CoreDomainService coreDomainService,
                                 QuestionRepository questionRepository,
-                                QtypeCodeQuestionRepository qtypeCodeQuestionRepository,
-                                QtypeShortanswerQuestionRepository qtypeShortanswerQuestionRepository,
-                                QtypeEssayQuestionRepository qtypeEssayQuestionRepository,
-                                QtypeMultichoiceQuestionRepository qtypeMultichoiceQuestionRepository,
                                 OrganizationRepository organizationRepository,
                                 UserRepository userRepository,
                                 QuestionDataMapper questionDataMapper) {
         this.coreDomainService = coreDomainService;
         this.questionRepository = questionRepository;
-        this.qtypeCodeQuestionRepository = qtypeCodeQuestionRepository;
-        this.qtypeShortanswerQuestionRepository = qtypeShortanswerQuestionRepository;
-        this.qtypeEssayQuestionRepository = qtypeEssayQuestionRepository;
-        this.qtypeMultichoiceQuestionRepository = qtypeMultichoiceQuestionRepository;
         this.organizationRepository = organizationRepository;
         this.userRepository = userRepository;
         this.questionDataMapper = questionDataMapper;
@@ -89,7 +73,7 @@ public class QuestionCreateHelper {
     }
 
     // Save question to database
-    private Question saveQuestion(Question question) {
+    private void saveQuestion(Question question) {
         Question savedQuestion = questionRepository.saveQuestion(question);
 
         if (savedQuestion == null) {
@@ -98,7 +82,6 @@ public class QuestionCreateHelper {
             throw new CoreDomainException("Could not save question");
         }
         log.info("Question saved with id: {}", savedQuestion.getId().getValue());
-        return savedQuestion;
     }
 
 }
