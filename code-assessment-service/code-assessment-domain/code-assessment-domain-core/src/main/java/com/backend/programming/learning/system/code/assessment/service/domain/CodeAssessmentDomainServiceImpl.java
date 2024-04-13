@@ -12,14 +12,12 @@ import java.time.ZonedDateTime;
 public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainService{
     @Override
     public CodeQuestionCreatedEvent 
-    validateAndInitiateCodeQuestion(CodeQuestion codeQuestion, Question question) {
-        validateQuestion(question);
+    validateAndInitiateCodeQuestion(CodeQuestion codeQuestion) {
+
         codeQuestion.validateCodeQuestion();
         codeQuestion.initializeCodeQuestion();
         log.info("Code question with id: {} is initiated", codeQuestion.getQuestionId().getValue());
         return new CodeQuestionCreatedEvent(codeQuestion, ZonedDateTime.now(ZoneId.of("UTC")));
     }
 
-    private void validateQuestion(Question question) {
-    }
 }

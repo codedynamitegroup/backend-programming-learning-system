@@ -5,5 +5,5 @@ import com.backend.programming.learning.system.code.assessment.service.domain.en
 import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionCreatedEvent;
 
 public interface CodeAssessmentDomainService {
-    CodeQuestionCreatedEvent validateAndInitiateCodeQuestion(CodeQuestion codeQuestion, Question question);
+    CodeQuestionCreatedEvent validateAndInitiateCodeQuestion(CodeQuestion codeQuestion);
 }
