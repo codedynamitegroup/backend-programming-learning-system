@@ -1,18 +1,28 @@
 package com.backend.programming.learning.system.core.service.domain.entity;
 
+import com.backend.programming.learning.system.core.service.domain.valueobject.ReviewId;
+import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 public class Topic extends AggregateRoot<TopicId> {
     private String name;
     private String description;
     private final UserId createdBy;
     private UserId updatedBy;
-    private final ZonedDateTime createdAt;
+    private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
+
+    public void initializeTopic() {
+        setId(new TopicId(UUID.randomUUID()));
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+    }
 
     private Topic(Builder builder) {
         super.setId(builder.topicId);

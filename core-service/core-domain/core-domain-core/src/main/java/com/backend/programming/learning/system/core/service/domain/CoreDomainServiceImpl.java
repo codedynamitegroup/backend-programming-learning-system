@@ -1,9 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain;
 
-import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
-import com.backend.programming.learning.system.core.service.domain.entity.QtypeCodeQuestion;
-import com.backend.programming.learning.system.core.service.domain.entity.QtypeEssayQuestion;
-import com.backend.programming.learning.system.core.service.domain.entity.Question;
+import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,5 +34,23 @@ public class CoreDomainServiceImpl implements CoreDomainService {
     public void createCertificateCourse(CertificateCourse certificateCourse) {
         certificateCourse.initializeCertificateCourse();
         log.info("Certificate course created with id: {}", certificateCourse.getId().getValue());
+    }
+
+    @Override
+    public void createReview(Review review) {
+        review.initializeReview();
+        log.info("Review created with id: {}", review.getId().getValue());
+    }
+
+    @Override
+    public void createTopic(Topic topic) {
+        topic.initializeTopic();
+        log.info("Topic created with id: {}", topic.getId().getValue());
+    }
+
+    @Override
+    public void createContest(Contest contest) {
+        contest.initializeContest();
+        log.info("Contest created with id: {}", contest.getId().getValue());
     }
 }

@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Getter
@@ -16,8 +17,8 @@ public class CreateContestCommand {
     @NotNull
     private final String description;
     @NotNull
-    private final UUID startTime;
-    private final UUID endTime;
+    private final ZonedDateTime startTime;
+    private final ZonedDateTime endTime;
     @NotNull
     private final UUID createdBy;
     @NotNull
