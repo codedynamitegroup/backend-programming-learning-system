@@ -1,11 +1,13 @@
 package com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_topic.entity;
 
+import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.chapter.entity.ChapterEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.topic.entity.TopicEntity;
+import com.backend.programming.learning.system.core.service.domain.entity.Topic;
+import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -20,8 +22,14 @@ public class CertificateCourseTopicEntity {
     @Id
     @Column(name = "id")
     private UUID id;
-    private UUID certificateCourseId;
-    private UUID topicId;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "certificate_course_id", referencedColumnName = "id")
+    private CertificateCourseEntity certificateCourse;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "topic_id", referencedColumnName = "id")
+    private TopicEntity topic;
 
     @Override
     public boolean equals(Object o) {

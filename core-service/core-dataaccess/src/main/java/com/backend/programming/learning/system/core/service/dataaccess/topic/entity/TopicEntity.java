@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.dataaccess.topic.entity;
 
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_topic.entity.CertificateCourseTopicEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
 import javax.persistence.*;
@@ -32,6 +33,9 @@ public class TopicEntity {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "updated_by", referencedColumnName = "id")
     private UserEntity updatedBy;
+
+    @OneToMany(mappedBy = "topic")
+    private List<CertificateCourseTopicEntity> topicCertificateCourses;
 
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;

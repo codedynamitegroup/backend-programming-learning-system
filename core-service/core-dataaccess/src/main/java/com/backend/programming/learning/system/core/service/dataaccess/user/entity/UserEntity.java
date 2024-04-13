@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.dataaccess.user.entity;
 
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_user.entity.CertificateCourseUserEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter.entity.ChapterEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.contest.entity.ContestEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
@@ -11,6 +12,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -68,4 +70,7 @@ public class UserEntity {
 
     @OneToOne(mappedBy = "updatedBy")
     private ContestEntity contestUpdatedBy;
+
+    @OneToMany(mappedBy = "user")
+    private List<CertificateCourseUserEntity> certificateCourseUsers;
 }

@@ -23,8 +23,8 @@ CREATE TABLE "public".user
     first_name character varying,
     last_name character varying,
     avatar_url text,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT user_pkey PRIMARY KEY (id)
 );
 
@@ -36,9 +36,9 @@ CREATE TABLE "public".topic
     name text NOT NULL,
     description text NOT NULL,
     created_by uuid NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_by uuid NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT topic_pkey PRIMARY KEY (id),
     CONSTRAINT topic_created_by_fkey FOREIGN KEY (created_by)
         REFERENCES "public".user (id) MATCH SIMPLE
@@ -63,9 +63,9 @@ CREATE TABLE "public".certificate_course
     end_time TIMESTAMP WITH TIME ZONE,
     is_deleted bool DEFAULT FALSE NOT NULL,
     created_by uuid NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_by uuid NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT certificate_course_pkey PRIMARY KEY (id),
     CONSTRAINT certificate_course_created_by_fkey FOREIGN KEY (created_by)
         REFERENCES "public".user (id) MATCH SIMPLE
@@ -87,9 +87,9 @@ CREATE TABLE "public".chapter
     title text,
     description text,
     created_by uuid NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_by uuid NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT chapter_pkey PRIMARY KEY (id),
     CONSTRAINT chapter_certificate_course_id_fkey FOREIGN KEY (certificate_course_id)
         REFERENCES "public".certificate_course (id) MATCH SIMPLE
@@ -135,8 +135,8 @@ CREATE TABLE "public".review
     content text,
     created_by uuid NOT NULL,
     updated_by uuid NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT review_pkey PRIMARY KEY (id),
     CONSTRAINT review_certificate_course_id_fkey FOREIGN KEY (certificate_course_id)
         REFERENCES "public".certificate_course (id) MATCH SIMPLE
@@ -197,9 +197,9 @@ CREATE TABLE "public".contest
     end_time TIMESTAMP WITH TIME ZONE,
     is_deleted bool DEFAULT FALSE NOT NULL,
     created_by uuid NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_by uuid NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT contest_pkey PRIMARY KEY (id),
     CONSTRAINT contest_created_by_fkey FOREIGN KEY (created_by)
         REFERENCES "public".user (id) MATCH SIMPLE
@@ -219,7 +219,7 @@ CREATE TABLE "public".contest_user
     contest_id uuid NOT NULL,
     user_id uuid NOT NULL,
     is_completed bool DEFAULT FALSE NOT NULL,
-    completed_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    completed_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT contest_user_pkey PRIMARY KEY (id),
     CONSTRAINT contest_user_contest_id_fkey FOREIGN KEY (contest_id)
         REFERENCES "public".contest (id) MATCH SIMPLE
@@ -239,8 +239,8 @@ CREATE TABLE "public".organization
     name text,
     description text,
     moodle_url text,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT organization_pkey PRIMARY KEY (id)
 );
 
@@ -257,9 +257,9 @@ CREATE TABLE "public".question
     default_mark numeric(2,2) NOT NULL,
     qtype qtype NOT NULL,
     created_by uuid NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_by uuid NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT question_pkey PRIMARY KEY (id),
     CONSTRAINT question_org_id_fkey FOREIGN KEY (org_id)
         REFERENCES "public".organization (id) MATCH SIMPLE
@@ -401,8 +401,8 @@ CREATE TABLE "public".notification
     context_url_name text NOT NULL,
     is_read bool NOT NULL,
     time_read TIMESTAMP WITH TIME ZONE,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT notification_pkey PRIMARY KEY (id),
     CONSTRAINT notification_user_id_from_fkey FOREIGN KEY (user_id_from)
         REFERENCES "public".user (id) MATCH SIMPLE

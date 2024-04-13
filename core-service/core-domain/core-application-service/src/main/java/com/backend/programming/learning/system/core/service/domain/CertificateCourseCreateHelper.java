@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.core.service.domain;
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
+import com.backend.programming.learning.system.core.service.domain.event.CertificateCourseCreatedEvent;
+import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.CertificateCourseDataMapper;
@@ -16,13 +18,16 @@ import java.util.UUID;
 @Slf4j
 @Component
 public class CertificateCourseCreateHelper {
+    private final CoreDomainService coreDomainService;
     private final CertificateCourseRepository certificateCourseRepository;
     private final UserRepository userRepository;
     private final CertificateCourseDataMapper certificateCourseDataMapper;
 
-    public CertificateCourseCreateHelper(CertificateCourseRepository certificateCourseRepository,
+    public CertificateCourseCreateHelper(CoreDomainService coreDomainService,
+                                         CertificateCourseRepository certificateCourseRepository,
                                          UserRepository userRepository,
                                          CertificateCourseDataMapper certificateCourseDataMapper) {
+        this.coreDomainService = coreDomainService;
         this.certificateCourseRepository = certificateCourseRepository;
         this.userRepository = userRepository;
         this.certificateCourseDataMapper = certificateCourseDataMapper;
@@ -35,6 +40,7 @@ public class CertificateCourseCreateHelper {
 
         CertificateCourse certificateCourse = certificateCourseDataMapper.
                 createCertificateCourseCommandToCertificateCourse(createCertificateCourseCommand);
+        coreDomainService.createCertificateCourse(certificateCourse);
         CertificateCourse certificateCourseResult = saveCertificateCourse(certificateCourse);
 
         log.info("Question created with id: {}", certificateCourseResult.getId().getValue());
