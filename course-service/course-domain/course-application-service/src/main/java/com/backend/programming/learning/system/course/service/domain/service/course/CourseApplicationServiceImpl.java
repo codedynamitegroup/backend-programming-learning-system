@@ -34,4 +34,14 @@ public class CourseApplicationServiceImpl implements CourseApplicationService {
     public CourseResponse findAll(String search) {
         return courseCreateCommandHandler.findAll(search);
     }
+
+    @Override
+    public CreateCourseResponse findBy(Long courseId) {
+        return courseCreateCommandHandler.findBy(courseId);
+    }
+
+    @Override
+    public void deleteBy(Long courseId) {
+        courseCreateCommandHandler.deleteBy(courseId);
+    }
 }

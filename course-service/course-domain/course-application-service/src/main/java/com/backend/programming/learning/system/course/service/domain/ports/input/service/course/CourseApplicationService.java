@@ -14,4 +14,8 @@ public interface CourseApplicationService {
     CreateCourseResponse createCourse(CreateCourseCommand createCourseCommand);
 
     CourseResponse findAll(String search);
+
+    CreateCourseResponse findBy(Long courseId);
+
+    void deleteBy(Long courseId);
 }

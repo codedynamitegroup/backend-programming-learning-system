@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.exam.cr
 import com.backend.programming.learning.system.course.service.domain.dto.exam.get.ExamsResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.exam.Exam;
 import com.backend.programming.learning.system.course.service.domain.event.exam.ExamCreateEvent;
-import com.backend.programming.learning.system.course.service.domain.mapper.ExamDataMapper;
+import com.backend.programming.learning.system.course.service.domain.mapper.exam.ExamDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.exam.ExamRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

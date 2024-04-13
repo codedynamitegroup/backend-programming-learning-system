@@ -43,5 +43,12 @@ public class CourseDataMapper
                 .message(message)
                 .build();
     }
+
+    public CreateCourseResponse courseToCreateCourseResponse(Course course, String message) {
+        return CreateCourseResponse.builder()
+                .course(course)
+                .message(message)
+                .build();
+    }
 }
 

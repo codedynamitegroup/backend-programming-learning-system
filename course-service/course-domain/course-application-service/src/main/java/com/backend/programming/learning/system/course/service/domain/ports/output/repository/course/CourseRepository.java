@@ -14,4 +14,8 @@ public interface CourseRepository {
     Course createCourse(Course course);
 
     List<Course> findAll(String search);
+
+    Course findBy(Long courseId);
+
+    void deleteBy(Long courseId);
 }

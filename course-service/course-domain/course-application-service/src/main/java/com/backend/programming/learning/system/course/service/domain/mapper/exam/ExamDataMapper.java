@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.mapper;
+package com.backend.programming.learning.system.course.service.domain.mapper.exam;
 
 import com.backend.programming.learning.system.course.service.domain.dto.exam.create.CreateExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.exam.create.CreateExamResponse;

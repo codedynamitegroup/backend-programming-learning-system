@@ -33,4 +33,16 @@ public class CourseRepositoryImpl implements CourseRepository {
                 .stream().map(courseDataAccessMapper::courseEntityToCourse)
                 .toList();
     }
+
+    @Override
+    public Course findBy(Long courseId) {
+        return courseDataAccessMapper.courseEntityToCourse(
+                courseRepository.findById(courseId)
+                        .orElseThrow(() -> new RuntimeException("Course not found")));
+    }
+
+    @Override
+    public void deleteBy(Long courseId) {
+        courseRepository.deleteById(courseId);
+    }
 }

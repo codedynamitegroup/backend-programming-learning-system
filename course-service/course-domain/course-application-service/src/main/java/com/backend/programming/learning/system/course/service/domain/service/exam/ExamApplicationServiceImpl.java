@@ -5,7 +5,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.exam.cr
 import com.backend.programming.learning.system.course.service.domain.dto.exam.get.ExamsResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.exam.Exam;
 import com.backend.programming.learning.system.course.service.domain.event.exam.ExamCreateEvent;
-import com.backend.programming.learning.system.course.service.domain.mapper.ExamDataMapper;
+import com.backend.programming.learning.system.course.service.domain.mapper.exam.ExamDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.exam.ExamApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -51,6 +51,6 @@ public class ExamApplicationServiceImpl implements ExamApplicationService {
     @Override
     public CreateExamResponse getExam(Long examId) {
         Exam exam = examCreateCommandHandler.getExam(examId);
-        return examDataMapper.examToCreateExamResponses(exam, "Exam created successfully");
+        return examDataMapper.examToCreateExamResponses(exam, "Exam get successfully");
     }
 }

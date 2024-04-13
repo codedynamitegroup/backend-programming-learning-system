@@ -7,7 +7,9 @@ import com.backend.programming.learning.system.course.service.domain.ports.input
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,5 +43,17 @@ public class CourseController {
         log.info("Creating course");
         CreateCourseResponse response = courseApplicationService.createCourse(createCourseCommand);
         return ResponseEntity.ok(response);
+    }
+    @GetMapping("/{courseId}")
+    public ResponseEntity<CreateCourseResponse> findBy(@PathVariable Long courseId) {
+        log.info("Getting course with id: {}", courseId);
+        CreateCourseResponse response = courseApplicationService.findBy(courseId);
+        return ResponseEntity.ok(response);
+    }
+    @DeleteMapping("/{courseId}")
+    public ResponseEntity<Void> deleteBy(@PathVariable Long courseId) {
+        log.info("Deleting course with id: {}", courseId);
+        courseApplicationService.deleteBy(courseId);
+        return ResponseEntity.noContent().build();
     }
 }

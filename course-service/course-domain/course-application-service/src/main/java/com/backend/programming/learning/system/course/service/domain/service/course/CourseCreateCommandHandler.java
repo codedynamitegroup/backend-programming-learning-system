@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.service.course;
 
 import com.backend.programming.learning.system.course.service.domain.dto.course.create.CreateCourseCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.course.create.CreateCourseResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.course.get.CourseResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.course.Course;
 import com.backend.programming.learning.system.course.service.domain.event.course.CourseCreateEvent;
@@ -43,5 +44,16 @@ public class CourseCreateCommandHandler {
     public CourseResponse findAll(String search) {
         List<Course> courses = courseRepository.findAll(search);
         return courseDataMapper.coursesToCourseResponse(courses, "Get list course successfully");
+    }
+
+    @Transactional(readOnly = true)
+    public CreateCourseResponse findBy(Long courseId) {
+        Course course = courseRepository.findBy(courseId);
+        return courseDataMapper.courseToCreateCourseResponse(course, "Get course successfully");
+    }
+
+    @Transactional
+    public void deleteBy(Long courseId) {
+        courseRepository.deleteBy(courseId);
     }
 }
