@@ -16,9 +16,10 @@ import org.springframework.validation.annotation.Validated;
 class RoleApplicationServiceImpl implements RoleApplicationService {
     private final RoleCommandHandler roleCommandHandler;
 
-    RoleApplicationServiceImpl(RoleCommandHandler roleCommandHandler) {
+    public RoleApplicationServiceImpl(RoleCommandHandler roleCommandHandler) {
         this.roleCommandHandler = roleCommandHandler;
     }
+
 
     @Override
     public CreateRoleResponse createRole(CreateRoleCommand createRoleCommand) {
@@ -32,6 +33,6 @@ class RoleApplicationServiceImpl implements RoleApplicationService {
 
     @Override
     public DeleteRoleResponse deleteRoleById(DeleteRoleCommand deleteRoleCommand) {
-        return null;
+        return roleCommandHandler.deleteRole(deleteRoleCommand);
     }
 }

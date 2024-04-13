@@ -2,17 +2,15 @@ package com.backend.programming.learning.system.auth.service.domain;
 
 import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateRoleResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryRoleResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryUserCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.Role;
-import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
 import com.backend.programming.learning.system.auth.service.domain.mapper.RoleDataMapper;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.RoleRepository;
 import com.backend.programming.learning.system.auth.service.domain.valueobject.RoleId;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,12 +22,13 @@ import java.util.Optional;
 public class RoleCommandHandler {
 
     private final RoleCreateHelper roleCreateHelper;
-
+    private final RoleDeleteHelper roleDeleteHelper;
     private final RoleDataMapper roleDataMapper;
     private final RoleRepository roleRepository;
 
-    public RoleCommandHandler(RoleCreateHelper roleCreateHelper, RoleDataMapper roleDataMapper, RoleRepository roleRepository) {
+    public RoleCommandHandler(RoleCreateHelper roleCreateHelper, RoleDeleteHelper roleDeleteHelper, RoleDataMapper roleDataMapper, RoleRepository roleRepository) {
         this.roleCreateHelper = roleCreateHelper;
+        this.roleDeleteHelper = roleDeleteHelper;
         this.roleDataMapper = roleDataMapper;
         this.roleRepository = roleRepository;
     }
@@ -50,5 +49,13 @@ public class RoleCommandHandler {
                     queryRoleCommand.getRoleId());
         }
         return roleDataMapper.roleToQueryRoleResponse(roleResult.get());
+    }
+
+    public DeleteRoleResponse deleteRole(DeleteRoleCommand deleteRoleCommand) {
+        roleDeleteHelper.deleteRole(deleteRoleCommand);
+        log.info("Role is deleted with id: {}", deleteRoleCommand.getRoleId());
+        return DeleteRoleResponse.builder()
+                .message("Role deleted successfully")
+                .build();
     }
 }

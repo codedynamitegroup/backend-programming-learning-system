@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.auth.service.domain;
 
 import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
@@ -20,12 +22,13 @@ import java.util.Optional;
 public class UserCommandHandler {
 
     private final UserCreateHelper userCreateHelper;
-
+    private final UserDeleteHelper userDeleteHelper;
     private final UserDataMapper userDataMapper;
     private final UserRepository userRepository;
 
-    public UserCommandHandler(UserCreateHelper userCreateHelper, UserDataMapper userDataMapper, UserRepository userRepository) {
+    public UserCommandHandler(UserCreateHelper userCreateHelper, UserDeleteHelper userDeleteHelper, UserDataMapper userDataMapper, UserRepository userRepository) {
         this.userCreateHelper = userCreateHelper;
+        this.userDeleteHelper = userDeleteHelper;
         this.userDataMapper = userDataMapper;
         this.userRepository = userRepository;
     }
@@ -47,5 +50,13 @@ public class UserCommandHandler {
                     queryUserCommand.getUserId());
         }
         return userDataMapper.userToQueryUserResponse(userResult.get());
+    }
+
+    public DeleteUserResponse deleteUser(DeleteUserCommand deleteUserCommand) {
+        userDeleteHelper.deleteUser(deleteUserCommand);
+        log.info("User is deleted with id: {}", deleteUserCommand.getUserId());
+        return DeleteUserResponse.builder()
+                .message("User deleted successfully")
+                .build();
     }
 }

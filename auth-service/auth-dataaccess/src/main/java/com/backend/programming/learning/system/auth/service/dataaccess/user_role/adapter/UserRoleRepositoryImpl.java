@@ -38,6 +38,11 @@ public class UserRoleRepositoryImpl implements UserRoleRepository {
 
     @Override
     public void deleteByRoleIdAndUserId(RoleId roleId, UserId userId) {
+        userRoleJpaRepository.deleteByRoleIdAndUserId(roleId.getValue(), userId.getValue());
+    }
 
+    @Override
+    public void deleteByRoleId(RoleId roleId) {
+        userRoleJpaRepository.deleteByRoleId(roleId.getValue());
     }
 }

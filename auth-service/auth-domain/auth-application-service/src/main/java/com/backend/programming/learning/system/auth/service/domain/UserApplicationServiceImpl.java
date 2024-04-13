@@ -32,6 +32,6 @@ class UserApplicationServiceImpl implements UserApplicationService {
 
     @Override
     public DeleteUserResponse deleteUserById(DeleteUserCommand deleteUserCommand) {
-        return null;
+        return userCommandHandler.deleteUser(deleteUserCommand);
     }
 }

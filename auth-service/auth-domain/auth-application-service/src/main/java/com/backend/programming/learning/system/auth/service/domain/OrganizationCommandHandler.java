@@ -2,14 +2,14 @@ package com.backend.programming.learning.system.auth.service.domain;
 
 import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateOrganizationResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteOrganizationCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryOrganizationResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
 import com.backend.programming.learning.system.auth.service.domain.mapper.OrganizationDataMapper;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.OrganizationRepository;
-import com.backend.programming.learning.system.auth.service.domain.valueobject.RoleId;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -22,13 +22,15 @@ import java.util.Optional;
 public class OrganizationCommandHandler {
 
     private final OrganizationCreateHelper organizationCreateHelper;
+    private final OrganizationDeleteHelper organizationDeleteHelper;
     private final OrganizationDataMapper organizationDataMapper;
     private final OrganizationRepository organizationRepository;
 
-    public OrganizationCommandHandler(OrganizationCreateHelper organizationCreateHelper, OrganizationDataMapper organizationDataMapper, OrganizationRepository organizationRepository) {
+    public OrganizationCommandHandler(OrganizationCreateHelper organizationCreateHelper, OrganizationDataMapper organizationDataMapper, OrganizationRepository organizationRepository, OrganizationDeleteHelper organizationDeleteHelper) {
         this.organizationCreateHelper = organizationCreateHelper;
         this.organizationDataMapper = organizationDataMapper;
         this.organizationRepository = organizationRepository;
+        this.organizationDeleteHelper = organizationDeleteHelper;
     }
 
     public CreateOrganizationResponse createOrganization(CreateOrganizationCommand createOrganizationCommand) {
@@ -47,6 +49,14 @@ public class OrganizationCommandHandler {
             throw new AuthNotFoundException("Could not find organization with id: " +
                     queryOrganizationCommand.getOrganizationId());
         }
-        return  organizationDataMapper.organizationToQueryOrganizationResponse(organizationResult.get());
+        return organizationDataMapper.organizationToQueryOrganizationResponse(organizationResult.get());
+    }
+
+    public DeleteOrganizationResponse deleteOrganization(DeleteOrganizationCommand deleteOrganizationCommand) {
+        organizationDeleteHelper.deleteOrganization(deleteOrganizationCommand);
+        log.info("Organization is deleted with id: {}", deleteOrganizationCommand.getOrganizationId());
+        return DeleteOrganizationResponse.builder()
+                .message("Organization deleted successfully")
+                .build();
     }
 }

@@ -30,7 +30,7 @@ public class UserEntity {
     private ZonedDateTime lastLogin;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
-    private boolean isDeleted;
+    private Boolean isDeleted;
 
     @Override
     public boolean equals(Object o) {

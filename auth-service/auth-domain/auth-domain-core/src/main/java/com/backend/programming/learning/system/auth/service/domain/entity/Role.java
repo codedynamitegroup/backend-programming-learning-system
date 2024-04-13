@@ -117,7 +117,7 @@ public class Role extends AggregateRoot<RoleId> {
             return this;
         }
 
-        public Builder roleId(RoleId val) {
+        public Builder id(RoleId val) {
             roleId = val;
             return this;
         }

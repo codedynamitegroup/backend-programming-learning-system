@@ -23,7 +23,7 @@ public class User extends AggregateRoot<UserId> {
     private ZonedDateTime lastLogin;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
-    private boolean isDeleted;
+    private Boolean isDeleted;
 
     private User(Builder builder) {
         email = builder.email;
@@ -107,7 +107,7 @@ public class User extends AggregateRoot<UserId> {
         return updatedAt;
     }
 
-    public boolean isDeleted() {
+    public Boolean getDeleted() {
         return isDeleted;
     }
 

@@ -27,12 +27,12 @@ class UserRoleApplicationServiceImpl implements UserRoleApplicationService {
     }
 
     @Override
-    public QueryUserRoleResponse findUserRoleById(QueryUserRoleCommand queryOrganizationCommand) {
+    public QueryUserRoleResponse findUserRoleByRoleIdAndUserId(QueryUserRoleCommand queryOrganizationCommand) {
         return userRoleCommandHandler.queryUserRole(queryOrganizationCommand);
     }
 
     @Override
     public DeleteUserRoleResponse deleteUserRoleById(DeleteUserRoleCommand deleteUserRoleCommand) {
-        return null;
+        return userRoleCommandHandler.deleteUserRole(deleteUserRoleCommand);
     }
 }

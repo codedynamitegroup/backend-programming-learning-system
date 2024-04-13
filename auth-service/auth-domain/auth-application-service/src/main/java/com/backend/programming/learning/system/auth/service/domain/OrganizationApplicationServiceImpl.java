@@ -33,6 +33,6 @@ class OrganizationApplicationServiceImpl implements OrganizationApplicationServi
 
     @Override
     public DeleteOrganizationResponse deleteOrganizationById(DeleteOrganizationCommand deleteOrganizationCommand) {
-        return null;
+        return organizationCommandHandler.deleteOrganization(deleteOrganizationCommand);
     }
 }
