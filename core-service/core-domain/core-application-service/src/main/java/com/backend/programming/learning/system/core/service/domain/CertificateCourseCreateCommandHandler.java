@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.core.service.domain;
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.QueryCertificateCourseCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.query.QueryCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.mapper.CertificateCourseDataMapper;
 import lombok.extern.slf4j.Slf4j;
