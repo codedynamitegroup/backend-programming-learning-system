@@ -15,14 +15,11 @@ public class CertificateCourseDataMapper {
                 .name(createCertificateCourseCommand.getName())
                 .skillLevel(createCertificateCourseCommand.getSkillLevel())
                 .avgRating(createCertificateCourseCommand.getAvgRating())
-                .topicId(new TopicId(createCertificateCourseCommand.getTopicId()))
                 .startTime(createCertificateCourseCommand.getStartTime())
                 .endTime(createCertificateCourseCommand.getEndTime())
                 .isDeleted(false)
                 .createdBy(new UserId(createCertificateCourseCommand.getCreatedBy()))
                 .updatedBy(new UserId(createCertificateCourseCommand.getUpdatedBy()))
-//                .createdAt(createCertificateCourseCommand.getCreatedAt())
-//                .updatedAt(createCertificateCourseCommand.getUpdatedAt())
                 .build();
     }
 

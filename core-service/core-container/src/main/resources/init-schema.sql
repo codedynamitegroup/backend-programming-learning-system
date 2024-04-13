@@ -17,14 +17,14 @@ DROP TABLE IF EXISTS "public".user CASCADE;
 
 CREATE TABLE "public".user
 (
-    id uuid NOT NULL,
-    email text NOT NULL,
-    dob date NOT NULL,
-    name text NOT NULL,
-    display_name text NOT NULL,
-    avatar_url text NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
+    email text UNIQUE NOT NULL,
+    dob date,
+    first_name character varying,
+    last_name character varying,
+    avatar_url text,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
     CONSTRAINT user_pkey PRIMARY KEY (id)
 );
 
@@ -32,13 +32,13 @@ DROP TABLE IF EXISTS "public".topic CASCADE;
 
 CREATE TABLE "public".topic
 (
-    id uuid NOT NULL,
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
     name text NOT NULL,
     description text NOT NULL,
     created_by uuid NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_by uuid NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
     CONSTRAINT topic_pkey PRIMARY KEY (id),
     CONSTRAINT topic_created_by_fkey FOREIGN KEY (created_by)
         REFERENCES "public".user (id) MATCH SIMPLE
@@ -54,24 +54,19 @@ DROP TABLE IF EXISTS "public".certificate_course CASCADE;
 
 CREATE TABLE "public".certificate_course
 (
-    id uuid NOT NULL,
-    name text NOT NULL,
-    skill_level skill_level NOT NULL,
-    description text NOT NULL,
-    avg_rating numeric(2,1) NOT NULL,
---     topic_id uuid NOT NULL,
-    start_time TIMESTAMP WITH TIME ZONE NOT NULL,
-    end_time TIMESTAMP WITH TIME ZONE NOT NULL,
-    is_deleted bool NOT NULL,
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
+    name text,
+    skill_level skill_level,
+    description text,
+    avg_rating numeric(2,1) DEFAULT 0.0,
+    start_time TIMESTAMP WITH TIME ZONE,
+    end_time TIMESTAMP WITH TIME ZONE,
+    is_deleted bool DEFAULT FALSE NOT NULL,
     created_by uuid NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_by uuid NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
     CONSTRAINT certificate_course_pkey PRIMARY KEY (id),
---     CONSTRAINT certificate_course_topic_id_fkey FOREIGN KEY (topic_id)
---         REFERENCES "public".topic (id) MATCH SIMPLE
---         ON UPDATE CASCADE
---         ON DELETE CASCADE,
     CONSTRAINT certificate_course_created_by_fkey FOREIGN KEY (created_by)
         REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
@@ -86,15 +81,15 @@ DROP TABLE IF EXISTS "public".chapter CASCADE;
 
 CREATE TABLE "public".chapter
 (
-    id uuid NOT NULL,
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
     certificate_course_id uuid NOT NULL,
-    no int4 NOT NULL,
-    title text NOT NULL,
-    description text NOT NULL,
+    no int4,
+    title text,
+    description text,
     created_by uuid NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_by uuid NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
     CONSTRAINT chapter_pkey PRIMARY KEY (id),
     CONSTRAINT chapter_certificate_course_id_fkey FOREIGN KEY (certificate_course_id)
         REFERENCES "public".certificate_course (id) MATCH SIMPLE
@@ -114,10 +109,10 @@ DROP TABLE IF EXISTS "public".certificate_course_user CASCADE;
 
 CREATE TABLE "public".certificate_course_user
 (
-    id uuid NOT NULL,
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
     certificate_course_id uuid NOT NULL,
     user_id uuid NOT NULL,
-    is_completed bool NOT NULL,
+    is_completed bool DEFAULT FALSE NOT NULL,
     completed_at TIMESTAMP WITH TIME ZONE NOT NULL,
     CONSTRAINT certificate_course_user_pkey PRIMARY KEY (id),
     CONSTRAINT certificate_course_user_certificate_course_id_fkey FOREIGN KEY (certificate_course_id)
@@ -134,14 +129,14 @@ DROP TABLE IF EXISTS "public".review CASCADE;
 
 CREATE TABLE "public".review
 (
-    id uuid NOT NULL,
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
     certificate_course_id uuid NOT NULL,
-    rating numeric(2,1) NOT NULL,
-    content text NOT NULL,
+    rating numeric(2,1) DEFAULT 0.0 NOT NULL,
+    content text,
     created_by uuid NOT NULL,
     updated_by uuid NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
     CONSTRAINT review_pkey PRIMARY KEY (id),
     CONSTRAINT review_certificate_course_id_fkey FOREIGN KEY (certificate_course_id)
         REFERENCES "public".certificate_course (id) MATCH SIMPLE
@@ -161,15 +156,15 @@ DROP TABLE IF EXISTS "public".programming_language CASCADE;
 
 CREATE TABLE "public".programming_language
 (
-    id uuid NOT NULL,
-    name text NOT NULL,
-    compiler_api_id int8 NOT NULL,
-    time_limit int4 NOT NULL,
-    memory_limit int4 NOT NULL,
-    head_code text NOT NULL,
-    body_code text NOT NULL,
-    tail_code text NOT NULL,
-    is_active bool NOT NULL,
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
+    name text,
+    compiler_api_id int8,
+    time_limit int4,
+    memory_limit int4,
+    head_code text,
+    body_code text,
+    tail_code text,
+    is_active bool DEFAULT FALSE NOT NULL,
     CONSTRAINT programming_language_pkey PRIMARY KEY (id)
 );
 
@@ -177,7 +172,7 @@ DROP TABLE IF EXISTS "public".certificate_course_programming_language CASCADE;
 
 CREATE TABLE "public".certificate_course_programming_language
 (
-    id uuid NOT NULL,
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
     certificate_course_id uuid NOT NULL,
     programming_language_id uuid NOT NULL,
     CONSTRAINT certificate_course_programming_language_pkey PRIMARY KEY (id),
@@ -195,16 +190,16 @@ DROP TABLE IF EXISTS "public".contest CASCADE;
 
 CREATE TABLE "public".contest
 (
-    id uuid NOT NULL,
-    name text NOT NULL,
-    description text NOT NULL,
-    start_time TIMESTAMP WITH TIME ZONE NOT NULL,
-    end_time TIMESTAMP WITH TIME ZONE NOT NULL,
-    is_deleted bool NOT NULL,
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
+    name text,
+    description text,
+    start_time TIMESTAMP WITH TIME ZONE,
+    end_time TIMESTAMP WITH TIME ZONE,
+    is_deleted bool DEFAULT FALSE NOT NULL,
     created_by uuid NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_by uuid NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
     CONSTRAINT contest_pkey PRIMARY KEY (id),
     CONSTRAINT contest_created_by_fkey FOREIGN KEY (created_by)
         REFERENCES "public".user (id) MATCH SIMPLE
@@ -220,11 +215,11 @@ DROP TABLE IF EXISTS "public".contest_user CASCADE;
 
 CREATE TABLE "public".contest_user
 (
-    id uuid NOT NULL,
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
     contest_id uuid NOT NULL,
     user_id uuid NOT NULL,
-    is_completed bool NOT NULL,
-    completed_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    is_completed bool DEFAULT FALSE NOT NULL,
+    completed_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
     CONSTRAINT contest_user_pkey PRIMARY KEY (id),
     CONSTRAINT contest_user_contest_id_fkey FOREIGN KEY (contest_id)
         REFERENCES "public".contest (id) MATCH SIMPLE
@@ -240,12 +235,12 @@ DROP TABLE IF EXISTS "public".organization CASCADE;
 
 CREATE TABLE "public".organization
 (
-    id uuid NOT NULL,
-    name text NOT NULL,
-    description text NOT NULL,
-    moodle_url text NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
+    name text,
+    description text,
+    moodle_url text,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
     CONSTRAINT organization_pkey PRIMARY KEY (id)
 );
 
@@ -253,7 +248,7 @@ DROP TABLE IF EXISTS "public".question CASCADE;
 
 CREATE TABLE "public".question
 (
-    id uuid NOT NULL,
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
     org_id uuid NOT NULL,
     difficulty difficulty NOT NULL,
     name text NOT NULL,
@@ -262,9 +257,9 @@ CREATE TABLE "public".question
     default_mark numeric(2,2) NOT NULL,
     qtype qtype NOT NULL,
     created_by uuid NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_by uuid NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
     CONSTRAINT question_pkey PRIMARY KEY (id),
     CONSTRAINT question_org_id_fkey FOREIGN KEY (org_id)
         REFERENCES "public".organization (id) MATCH SIMPLE
@@ -284,11 +279,11 @@ DROP TABLE IF EXISTS "public".question_chapter CASCADE;
 
 CREATE TABLE "public".question_chapter
 (
-    id uuid NOT NULL,
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
     question_id uuid NOT NULL,
     chapter_id uuid NOT NULL,
-    grade numeric(5,2) NOT NULL,
-    pass bool NOT NULL,
+    grade numeric(5,2) DEFAULT 0.0 NOT NULL,
+    pass bool DEFAULT FALSE NOT NULL,
     CONSTRAINT question_chapter_pkey PRIMARY KEY (id),
     CONSTRAINT question_id_fkey FOREIGN KEY (question_id)
         REFERENCES "public".question (id) MATCH SIMPLE
@@ -304,11 +299,11 @@ DROP TABLE IF EXISTS "public".answer_of_question CASCADE;
 
 CREATE TABLE "public".answer_of_question
 (
-    id uuid NOT NULL,
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
     question_id uuid NOT NULL,
-    feedback text NOT NULL,
-    answer text NOT NULL,
-    fraction numeric(2,2) NOT NULL,
+    feedback text,
+    answer text,
+    fraction numeric(2,2) DEFAULT 0.0 NOT NULL,
     CONSTRAINT answer_of_question_pkey PRIMARY KEY (id),
     CONSTRAINT answer_of_question_question_id_fkey FOREIGN KEY (question_id)
         REFERENCES "public".question (id) MATCH SIMPLE
@@ -320,9 +315,9 @@ DROP TABLE IF EXISTS "public".qtype_code_question CASCADE;
 
 CREATE TABLE "public".qtype_code_question
 (
-    id uuid NOT NULL,
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
     question_id uuid NOT NULL,
-    dsl_template text NOT NULL,
+    dsl_template text,
     CONSTRAINT qtype_code_question_pkey PRIMARY KEY (id),
     CONSTRAINT qtype_code_question_question_id_fkey FOREIGN KEY (question_id)
         REFERENCES "public".question (id) MATCH SIMPLE
@@ -334,9 +329,9 @@ DROP TABLE IF EXISTS "public".qtype_shortanswer_question CASCADE;
 
 CREATE TABLE "public".qtype_shortanswer_question
 (
-    id uuid NOT NULL,
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
     question_id uuid NOT NULL,
-    case_sensitive bool NOT NULL,
+    case_sensitive bool DEFAULT FALSE NOT NULL,
     CONSTRAINT qtype_shortanswer_question_pkey PRIMARY KEY (id),
     CONSTRAINT qtype_shortanswer_question_question_id_fkey FOREIGN KEY (question_id)
         REFERENCES "public".question (id) MATCH SIMPLE
@@ -348,7 +343,7 @@ DROP TABLE IF EXISTS "public".qtype_essay_question CASCADE;
 
 CREATE TABLE "public".qtype_essay_question
 (
-    id uuid NOT NULL,
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
     question_id uuid NOT NULL,
     response_format text NOT NULL,
     response_required int4 NOT NULL,
@@ -373,7 +368,7 @@ DROP TABLE IF EXISTS "public".qtype_multichoice_question CASCADE;
 
 CREATE TABLE "public".qtype_multichoice_question
 (
-    id uuid NOT NULL,
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
     question_id uuid NOT NULL,
     single bool NOT NULL,
     shuffle_answers bool NOT NULL,
@@ -394,7 +389,7 @@ DROP TABLE IF EXISTS "public".notification CASCADE;
 
 CREATE TABLE "public".notification
 (
-    id uuid NOT NULL,
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
     user_id_from uuid NOT NULL,
     user_id_to uuid NOT NULL,
     subject text NOT NULL,
@@ -406,8 +401,8 @@ CREATE TABLE "public".notification
     context_url_name text NOT NULL,
     is_read bool NOT NULL,
     time_read TIMESTAMP WITH TIME ZONE,
-    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
     CONSTRAINT notification_pkey PRIMARY KEY (id),
     CONSTRAINT notification_user_id_from_fkey FOREIGN KEY (user_id_from)
         REFERENCES "public".user (id) MATCH SIMPLE
@@ -423,7 +418,7 @@ DROP TABLE IF EXISTS "public".certificate_course_topic CASCADE;
 
 CREATE TABLE "public".certificate_course_topic
 (
-    id uuid NOT NULL,
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
     certificate_course_id uuid NOT NULL,
     topic_id uuid NOT NULL,
     CONSTRAINT certificate_course_topic_pkey PRIMARY KEY (id),
