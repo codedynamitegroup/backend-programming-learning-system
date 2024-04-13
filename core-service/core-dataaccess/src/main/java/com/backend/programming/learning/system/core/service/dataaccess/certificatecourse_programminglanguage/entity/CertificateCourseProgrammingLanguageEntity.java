@@ -15,7 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table(name = "certificate_course_programming_language")
 @Entity
-public class CerCourseProLanguageEntity {
+public class CertificateCourseProgrammingLanguageEntity {
     @Id
     @Column(name = "id")
     private UUID id;
@@ -32,7 +32,7 @@ public class CerCourseProLanguageEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CerCourseProLanguageEntity that = (CerCourseProLanguageEntity) o;
+        CertificateCourseProgrammingLanguageEntity that = (CertificateCourseProgrammingLanguageEntity) o;
         return Objects.equals(id, that.id);
     }
 

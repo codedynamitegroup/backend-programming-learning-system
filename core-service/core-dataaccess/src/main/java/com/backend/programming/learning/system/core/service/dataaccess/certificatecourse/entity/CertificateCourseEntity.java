@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity;
 
-import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_programminglanguage.entity.CerCourseProLanguageEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_programminglanguage.entity.CertificateCourseProgrammingLanguageEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_topic.entity.CertificateCourseTopicEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_user.entity.CertificateCourseUserEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter.entity.ChapterEntity;
@@ -49,7 +49,7 @@ public class CertificateCourseEntity {
     private List<CertificateCourseUserEntity> certificateCourseUsers;
 
     @OneToMany(mappedBy = "certificateCourse")
-    private List<CerCourseProLanguageEntity> certificateCourseProgramingLanguages;
+    private List<CertificateCourseProgrammingLanguageEntity> certificateCourseProgramingLanguages;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "created_by", referencedColumnName = "id")
