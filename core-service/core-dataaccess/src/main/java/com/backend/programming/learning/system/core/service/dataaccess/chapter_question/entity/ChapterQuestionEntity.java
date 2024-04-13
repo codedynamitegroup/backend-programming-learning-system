@@ -34,9 +34,6 @@ public class ChapterQuestionEntity {
     @JoinColumn(name = "question_id", referencedColumnName = "id")
     QuestionEntity question;
 
-    private Float grade;
-    private Boolean pass;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
