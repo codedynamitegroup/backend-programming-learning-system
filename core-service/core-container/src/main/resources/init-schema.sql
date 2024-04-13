@@ -429,3 +429,23 @@ CREATE TABLE "public".certificate_course_topic
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
+
+DROP TABLE IF EXISTS "public".code_submission CASCADE;
+
+CREATE TABLE "public".code_submission
+(
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
+    user_id uuid NOT NULL,
+    code_question_id uuid NOT NULL,
+    grade numeric(2,2) DEFAULT 0.0 NOT NULL,
+    pass bool DEFAULT FALSE NOT NULL,
+    CONSTRAINT code_submission_pkey PRIMARY KEY (id),
+    CONSTRAINT code_submission_user_id_fkey FOREIGN KEY (user_id)
+        REFERENCES "public".user (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT code_submission_code_question_id_fkey FOREIGN KEY (code_question_id)
+        REFERENCES "public".qtype_code_question (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
