@@ -30,9 +30,6 @@ public class CreateQuestionCommand {
     @NotNull(message = "Question type is required")
     private final String qType;
 
-    // for code question
-    private final String dslTemplate;
-
     // for short answer question
     private final Boolean caseSensitive;
 

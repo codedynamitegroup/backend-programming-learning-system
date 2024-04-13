@@ -55,6 +55,7 @@ public class QuestionCreateHelper {
         this.questionDataMapper = questionDataMapper;
     }
 
+    // Create and save question
     @Transactional
     public QuestionCreatedEvent persistQuestion(CreateQuestionCommand createQuestionCommand) {
         checkUser(createQuestionCommand.getCreatedBy());
@@ -62,14 +63,14 @@ public class QuestionCreateHelper {
 
         Question question = questionDataMapper.createQuestionCommandToQuestion(createQuestionCommand);
         QuestionCreatedEvent event = coreDomainService.createQuestion(question);
-        Question questionResult = saveQuestion(question);
+        saveQuestion(question);
 
         log.info("Question created with id: {}", event.getQuestion().getId().getValue());
-        saveQuestionType(createQuestionCommand, questionResult.getId());
 
         return event;
     }
 
+    // Check if user exists
     private void checkUser(UUID userId) {
         Optional<User> user = userRepository.findUser(userId);
         if (user.isEmpty()) {
@@ -78,6 +79,7 @@ public class QuestionCreateHelper {
         }
     }
 
+    // Check if organization exists
     private void checkOrganization(UUID organizationId) {
         Optional<Organization> organization = organizationRepository.findOrganization(organizationId);
         if (organization.isEmpty()) {
@@ -86,6 +88,7 @@ public class QuestionCreateHelper {
         }
     }
 
+    // Save question to database
     private Question saveQuestion(Question question) {
         Question savedQuestion = questionRepository.saveQuestion(question);
 
@@ -98,36 +101,6 @@ public class QuestionCreateHelper {
         return savedQuestion;
     }
 
-    // Save Qtype question
-    private void saveQuestionType(CreateQuestionCommand createQuestionCommand, QuestionId questionId) {
-        if(createQuestionCommand.getDslTemplate() != null) { // code question
-            QtypeCodeQuestion question = questionDataMapper
-                    .createQuestionCommandToQtypeCodeQuestion(createQuestionCommand, questionId);
-
-            question.initQtypeCodeQuestion();
-            qtypeCodeQuestionRepository.saveQtypeCodeQuestion(question);
-
-            log.info("Question with id: {} created with QtypeCodeQuestionRepository", questionId);
-        }
-        else if (createQuestionCommand.getCaseSensitive() != null) { // short answer
-            QtypeShortAnswerQuestion question = questionDataMapper
-                    .createQuestionCommandToQtypeShortAnswerQuestion(createQuestionCommand, questionId);
-            qtypeShortanswerQuestionRepository.saveQtypeShortAnswerQuestion(question);
-            log.info("Question with id: {} created with QtypeShortAnswerQuestion", questionId);
-        }
-        else if (createQuestionCommand.getSingle() != null) { // essay question
-            QtypeEssayQuestion question = questionDataMapper
-                    .createQuestionCommandToQtypeEssayQuestion(createQuestionCommand, questionId);
-            qtypeEssayQuestionRepository.saveQtypeEssayQuestion(question);
-            log.info("Question with id: {} created with QtypeEssayQuestion", questionId);
-        }
-        else if(createQuestionCommand.getResponseFormat() != null) { // multiple choice question
-            QtypeMultiChoiceQuestion question = questionDataMapper
-                    .createQuestionCommandToQtypeMultiChoiceQuestion(createQuestionCommand, questionId);
-            qtypeMultichoiceQuestionRepository.saveQtypeMultipleChoiceQuestion(question);
-            log.info("Question with id: {} created with QtypeMultiChoiceQuestion", questionId);
-        }
-    }
 }
 
 

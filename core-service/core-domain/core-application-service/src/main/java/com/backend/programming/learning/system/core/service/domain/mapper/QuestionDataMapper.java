@@ -51,14 +51,6 @@ public class QuestionDataMapper {
                 .build();
     }
 
-    public QtypeCodeQuestion createQuestionCommandToQtypeCodeQuestion(CreateQuestionCommand createQuestionCommand,
-                                                                      QuestionId questionId) {
-        return QtypeCodeQuestion.builder()
-                .questionId(questionId)
-                .dslTemplate(createQuestionCommand.getDslTemplate())
-                .build();
-    }
-
     public QtypeShortAnswerQuestion createQuestionCommandToQtypeShortAnswerQuestion(CreateQuestionCommand createQuestionCommand,
                                                                                     QuestionId questionId) {
         return QtypeShortAnswerQuestion.builder()
