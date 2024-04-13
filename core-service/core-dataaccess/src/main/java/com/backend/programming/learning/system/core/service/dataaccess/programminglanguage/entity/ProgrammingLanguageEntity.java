@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.dataaccess.programminglanguage.entity;
 
-import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_programminglanguage.entity.CerCourseProLanguageEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_programminglanguage.entity.CertificateCourseProgrammingLanguageEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,7 +29,7 @@ public class ProgrammingLanguageEntity {
     private Boolean isActive;
 
     @OneToMany(mappedBy = "programmingLanguage")
-    private List<CerCourseProLanguageEntity> certificateCourseProgramingLanguages;
+    private List<CertificateCourseProgrammingLanguageEntity> certificateCourseProgramingLanguages;
 
     @Override
     public boolean equals(Object o) {

@@ -2,7 +2,7 @@ package com.backend.programming.learning.system.core.service.dataaccess.certific
 
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.repository.CertificateCourseJpaRepository;
-import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_programminglanguage.entity.CerCourseProLanguageEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_programminglanguage.entity.CertificateCourseProgrammingLanguageEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.programminglanguage.entity.ProgrammingLanguageEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.programminglanguage.repository.ProgrammingLanguageJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourseProgrammingLanguage;
@@ -13,18 +13,18 @@ import com.backend.programming.learning.system.domain.valueobject.ProgrammingLan
 import org.springframework.stereotype.Component;
 
 @Component
-public class CerCourseProLanguageDataAccessMapper {
+public class CertificateCourseProgrammingLanguageDataAccessMapper {
 
     private final CertificateCourseJpaRepository certificateCourseJpaRepository;
     private final ProgrammingLanguageJpaRepository programmingLanguageJpaRepository;
 
-    public CerCourseProLanguageDataAccessMapper(CertificateCourseJpaRepository certificateCourseJpaRepository,
-                                                ProgrammingLanguageJpaRepository programmingLanguageJpaRepository) {
+    public CertificateCourseProgrammingLanguageDataAccessMapper(CertificateCourseJpaRepository certificateCourseJpaRepository,
+                                                                ProgrammingLanguageJpaRepository programmingLanguageJpaRepository) {
         this.certificateCourseJpaRepository = certificateCourseJpaRepository;
         this.programmingLanguageJpaRepository = programmingLanguageJpaRepository;
     }
 
-    public CerCourseProLanguageEntity certificateCourseProgrammingLanguageToCertificateCourseProgrammingLanguageEntity(
+    public CertificateCourseProgrammingLanguageEntity certificateCourseProgrammingLanguageToCertificateCourseProgrammingLanguageEntity(
             CertificateCourseProgrammingLanguage certificateCourseProgrammingLanguage) {
         CertificateCourseEntity certificateCourse = certificateCourseJpaRepository
                 .findById(certificateCourseProgrammingLanguage.getCertificateCourseId().getValue())
@@ -38,16 +38,16 @@ public class CerCourseProLanguageDataAccessMapper {
                         certificateCourseProgrammingLanguage.getProgrammingLanguageId().getValue() + " could not be found!")
                 );
 
-        return CerCourseProLanguageEntity.builder()
+        return CertificateCourseProgrammingLanguageEntity.builder()
                 .certificateCourse(certificateCourse)
                 .programmingLanguage(programmingLanguage)
                 .build();
     }
 
-    public CertificateCourseProgrammingLanguage certificateCourseProgrammingLanguageEntityToCertificateCourseProgrammingLanguage(CerCourseProLanguageEntity cerCourseProLanguageEntity) {
+    public CertificateCourseProgrammingLanguage certificateCourseProgrammingLanguageEntityToCertificateCourseProgrammingLanguage(CertificateCourseProgrammingLanguageEntity certificateCourseProgrammingLanguageEntity) {
         return CertificateCourseProgrammingLanguage.builder()
-                .certificateCourseId(new CertificateCourseId(cerCourseProLanguageEntity.getCertificateCourse().getId()))
-                .programmingLanguageId(new ProgrammingLanguageId(cerCourseProLanguageEntity.getProgrammingLanguage().getId()))
+                .certificateCourseId(new CertificateCourseId(certificateCourseProgrammingLanguageEntity.getCertificateCourse().getId()))
+                .programmingLanguageId(new ProgrammingLanguageId(certificateCourseProgrammingLanguageEntity.getProgrammingLanguage().getId()))
                 .build();
     }
 }
