@@ -31,6 +31,9 @@ public class ProgrammingLanguageEntity {
     private String tailCode;
     private Boolean isActive;
 
+    @OneToMany(mappedBy = "programmingLanguage")
+    private List<CertificateCourseProgrammingLanguageEntity> certificateCourseProgramingLanguages;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

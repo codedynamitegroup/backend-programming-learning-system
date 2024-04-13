@@ -22,7 +22,8 @@ class CertificateCourseApplicationServiceImpl implements CertificateCourseApplic
     }
 
     @Override
-    public CreateCertificateCourseResponse createCertificateCourse(@Valid CreateCertificateCourseCommand createCertificateCourseCommand) {
+    public CreateCertificateCourseResponse createCertificateCourse(
+            @Valid CreateCertificateCourseCommand createCertificateCourseCommand) {
         return certificateCourseCreateCommandHandler.createCertificateCourse(createCertificateCourseCommand);
     }
 }

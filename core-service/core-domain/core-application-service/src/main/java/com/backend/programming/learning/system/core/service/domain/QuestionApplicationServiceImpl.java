@@ -15,8 +15,7 @@ import javax.validation.Valid;
 class QuestionApplicationServiceImpl implements QuestionApplicationService {
     private final QuestionCreateCommandHandler questionCreateCommandHandler;
 
-    public QuestionApplicationServiceImpl(QuestionCreateCommandHandler questionCreateCommandHandler,
-                                          CertificateCourseCreateCommandHandler certificateCourseCreateCommandHandler) {
+    public QuestionApplicationServiceImpl(QuestionCreateCommandHandler questionCreateCommandHandler) {
         this.questionCreateCommandHandler = questionCreateCommandHandler;
     }
 

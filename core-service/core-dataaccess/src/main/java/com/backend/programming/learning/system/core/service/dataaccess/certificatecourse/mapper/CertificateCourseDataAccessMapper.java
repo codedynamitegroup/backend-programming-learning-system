@@ -46,12 +46,15 @@ public class CertificateCourseDataAccessMapper {
                 .orElseThrow(() -> new UserNotFoundException("User with id: " +
                         certificateCourse.getUpdatedBy().getValue() + " could not be found!")
                 );
-        List<ReviewEntity> reviews = certificateCourse.getReviews().stream()
+        List<ReviewEntity> reviews = certificateCourse.getReviews() != null ?
+                certificateCourse.getReviews().stream()
                 .map(reviewDataAccessMapper::reviewToReviewEntity)
-                .toList();
-        List<ChapterEntity> chapters = certificateCourse.getChapters().stream()
+                .toList() : null;
+
+        List<ChapterEntity> chapters = certificateCourse.getChapters() != null ?
+                certificateCourse.getChapters().stream()
                 .map(chapterDataAccessMapper::chapterToChapterEntity)
-                .toList();
+                .toList() : null;
 
         return CertificateCourseEntity.builder()
                 .id(certificateCourse.getId().getValue())
@@ -73,12 +76,14 @@ public class CertificateCourseDataAccessMapper {
 
     public CertificateCourse certificateCourseEntityToCertificateCourse(
             CertificateCourseEntity certificateCourseEntity) {
-        List<Review> reviews = certificateCourseEntity.getReviews().stream()
+        List<Review> reviews = certificateCourseEntity.getReviews() != null ?
+                certificateCourseEntity.getReviews().stream()
                 .map(reviewDataAccessMapper::reviewEntityToReview)
-                .toList();
-        List<Chapter> chapters = certificateCourseEntity.getChapters().stream()
+                .toList() : null;
+        List<Chapter> chapters = certificateCourseEntity.getChapters() != null ?
+                certificateCourseEntity.getChapters().stream()
                 .map(chapterDataAccessMapper::chapterEntityToChapter)
-                .toList();
+                .toList() : null;
 
         return CertificateCourse.builder()
                 .id(new CertificateCourseId(certificateCourseEntity.getId()))

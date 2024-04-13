@@ -8,5 +8,6 @@ import com.backend.programming.learning.system.core.service.domain.dto.create.Cr
 import javax.validation.Valid;
 
 public interface CertificateCourseApplicationService {
-    CreateCertificateCourseResponse createCertificateCourse(@Valid CreateCertificateCourseCommand createCertificateCourseCommand);
+    CreateCertificateCourseResponse createCertificateCourse(
+            @Valid CreateCertificateCourseCommand createCertificateCourseCommand);
 }

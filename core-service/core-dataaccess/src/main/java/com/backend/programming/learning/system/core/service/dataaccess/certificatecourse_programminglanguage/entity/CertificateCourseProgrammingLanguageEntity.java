@@ -19,8 +19,14 @@ public class CertificateCourseProgrammingLanguageEntity {
     @Id
     @Column(name = "id")
     private UUID id;
-    private UUID certificateCourseId;
-    private UUID programmingLanguageId;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "certificate_course_id", referencedColumnName = "id")
+    private CertificateCourseEntity certificateCourse;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "programming_language_id", referencedColumnName = "id")
+    private ProgrammingLanguageEntity programmingLanguage;
 
     @Override
     public boolean equals(Object o) {

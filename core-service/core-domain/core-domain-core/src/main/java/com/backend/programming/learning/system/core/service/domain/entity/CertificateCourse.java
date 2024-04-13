@@ -2,7 +2,6 @@ package com.backend.programming.learning.system.core.service.domain.entity;
 
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
-import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.*;
 
@@ -15,10 +14,10 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
     private String description;
     private SkillLevel skillLevel;
     private Float avgRating;
-    private TopicId topicId;
     private ZonedDateTime startTime;
     private ZonedDateTime endTime;
     private Boolean isDeleted;
+    private final List<CertificateCourseTopic> certificateCoursecertificateCourseTopics;
     private final List<Review> reviews;
     private final List<Chapter> chapters;
     private final UserId createdBy;
@@ -37,10 +36,10 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         description = builder.description;
         skillLevel = builder.skillLevel;
         avgRating = builder.avgRating;
-        topicId = builder.topicId;
         startTime = builder.startTime;
         endTime = builder.endTime;
         isDeleted = builder.isDeleted;
+        certificateCoursecertificateCourseTopics = builder.certificateCoursecertificateCourseTopics;
         reviews = builder.reviews;
         chapters = builder.chapters;
         createdBy = builder.createdBy;
@@ -53,6 +52,7 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
     public static Builder builder() {
         return new Builder();
     }
+
 
     public String getName() {
         return name;
@@ -70,10 +70,6 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         return avgRating;
     }
 
-    public TopicId getTopicId() {
-        return topicId;
-    }
-
     public ZonedDateTime getStartTime() {
         return startTime;
     }
@@ -84,6 +80,10 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
 
     public Boolean getDeleted() {
         return isDeleted;
+    }
+
+    public List<CertificateCourseTopic> getCertificateCoursecertificateCourseTopics() {
+        return certificateCoursecertificateCourseTopics;
     }
 
     public List<Review> getReviews() {
@@ -114,17 +114,16 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         return failureMessages;
     }
 
-
     public static final class Builder {
         private CertificateCourseId certificateCourseId;
         private String name;
         private String description;
         private SkillLevel skillLevel;
         private Float avgRating;
-        private TopicId topicId;
         private ZonedDateTime startTime;
         private ZonedDateTime endTime;
         private Boolean isDeleted;
+        private List<CertificateCourseTopic> certificateCoursecertificateCourseTopics;
         private List<Review> reviews;
         private List<Chapter> chapters;
         private UserId createdBy;
@@ -161,11 +160,6 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
             return this;
         }
 
-        public Builder topicId(TopicId val) {
-            topicId = val;
-            return this;
-        }
-
         public Builder startTime(ZonedDateTime val) {
             startTime = val;
             return this;
@@ -178,6 +172,11 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
 
         public Builder isDeleted(Boolean val) {
             isDeleted = val;
+            return this;
+        }
+
+        public Builder certificateCoursecertificateCourseTopics(List<CertificateCourseTopic> val) {
+            certificateCoursecertificateCourseTopics = val;
             return this;
         }
 
