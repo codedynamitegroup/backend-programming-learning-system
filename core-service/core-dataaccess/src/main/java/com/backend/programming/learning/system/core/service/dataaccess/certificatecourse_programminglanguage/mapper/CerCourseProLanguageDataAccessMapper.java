@@ -13,13 +13,13 @@ import com.backend.programming.learning.system.domain.valueobject.ProgrammingLan
 import org.springframework.stereotype.Component;
 
 @Component
-public class CertificateCourseProgrammingLanguageDataAccessMapper {
+public class CerCourseProLanguageDataAccessMapper {
 
     private final CertificateCourseJpaRepository certificateCourseJpaRepository;
     private final ProgrammingLanguageJpaRepository programmingLanguageJpaRepository;
 
-    public CertificateCourseProgrammingLanguageDataAccessMapper(CertificateCourseJpaRepository certificateCourseJpaRepository,
-                                                                 ProgrammingLanguageJpaRepository programmingLanguageJpaRepository) {
+    public CerCourseProLanguageDataAccessMapper(CertificateCourseJpaRepository certificateCourseJpaRepository,
+                                                ProgrammingLanguageJpaRepository programmingLanguageJpaRepository) {
         this.certificateCourseJpaRepository = certificateCourseJpaRepository;
         this.programmingLanguageJpaRepository = programmingLanguageJpaRepository;
     }

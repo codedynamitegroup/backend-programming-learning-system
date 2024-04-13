@@ -8,6 +8,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface CertificateCourseProgrammingLanguageJpaRepository extends JpaRepository<CerCourseProLanguageEntity, UUID> {
+public interface CerCourseProLanguageJpaRepository extends JpaRepository<CerCourseProLanguageEntity, UUID> {
     Optional<CerCourseProLanguageEntity> findById(UUID id);
 }
