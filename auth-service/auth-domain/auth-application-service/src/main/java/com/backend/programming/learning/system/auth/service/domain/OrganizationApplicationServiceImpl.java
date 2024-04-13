@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.List;
+
 @Slf4j
 @Validated
 @Service
@@ -29,6 +31,11 @@ class OrganizationApplicationServiceImpl implements OrganizationApplicationServi
     @Override
     public QueryOrganizationResponse findOrganizationById(QueryOrganizationCommand queryOrganizationCommand) {
         return organizationCommandHandler.queryOrganization(queryOrganizationCommand);
+    }
+
+    @Override
+    public List<QueryOrganizationResponse> findAllOrganizations() {
+        return organizationCommandHandler.queryAllOrganizations();
     }
 
     @Override

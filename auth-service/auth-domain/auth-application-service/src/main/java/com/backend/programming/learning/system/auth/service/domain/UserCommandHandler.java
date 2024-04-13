@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -51,6 +52,14 @@ public class UserCommandHandler {
         }
         return userDataMapper.userToQueryUserResponse(userResult.get());
     }
+
+    @Transactional(readOnly = true)
+    public List<QueryUserResponse> queryAllUsers() {
+        return userRepository.findAll().stream()
+                .map(userDataMapper::userToQueryUserResponse)
+                .toList();
+    }
+
 
     public DeleteUserResponse deleteUser(DeleteUserCommand deleteUserCommand) {
         userDeleteHelper.deleteUser(deleteUserCommand);

@@ -32,7 +32,7 @@ class UserRoleApplicationServiceImpl implements UserRoleApplicationService {
     }
 
     @Override
-    public DeleteUserRoleResponse deleteUserRoleById(DeleteUserRoleCommand deleteUserRoleCommand) {
+    public DeleteUserRoleResponse deleteUserRoleByRoleIdAndUserId(DeleteUserRoleCommand deleteUserRoleCommand) {
         return userRoleCommandHandler.deleteUserRole(deleteUserRoleCommand);
     }
 }
