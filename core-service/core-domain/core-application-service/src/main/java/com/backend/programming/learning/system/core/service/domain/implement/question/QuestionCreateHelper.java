@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.core.service.domain.CoreDomainSer
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
-import com.backend.programming.learning.system.core.service.domain.mapper.QuestionDataMapper;
+import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.entity.Organization;

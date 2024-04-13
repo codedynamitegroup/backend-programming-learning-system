@@ -2,10 +2,13 @@ package com.backend.programming.learning.system.core.service.domain.entity;
 
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ReviewId;
+import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 public class Review extends AggregateRoot<ReviewId> {
     private final CertificateCourseId certificateCourseId;
@@ -13,8 +16,14 @@ public class Review extends AggregateRoot<ReviewId> {
     private Float rating;
     private final UserId createdBy;
     private UserId updatedBy;
-    private final ZonedDateTime createdAt;
+    private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
+
+    public void initializeReview() {
+        setId(new ReviewId(UUID.randomUUID()));
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+    }
 
     private Review(Builder builder) {
         super.setId(builder.reviewId);

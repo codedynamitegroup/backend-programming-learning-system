@@ -1,9 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain;
 
-import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
-import com.backend.programming.learning.system.core.service.domain.entity.QtypeCodeQuestion;
-import com.backend.programming.learning.system.core.service.domain.entity.QtypeEssayQuestion;
-import com.backend.programming.learning.system.core.service.domain.entity.Question;
+import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
 
 public interface CoreDomainService {
@@ -11,4 +8,7 @@ public interface CoreDomainService {
     void createQtypeCodeQuestion(QtypeCodeQuestion qtypeCodeQuestion);
     void createQtypeEssayQuestion(QtypeEssayQuestion qtypeEssayQuestion);
     void createCertificateCourse(CertificateCourse certificateCourse);
+    void createReview(Review review);
+    void createTopic(Topic topic);
+    void createContest(Contest contest);
 }

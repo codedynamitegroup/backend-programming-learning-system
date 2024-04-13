@@ -1,10 +1,14 @@
 package com.backend.programming.learning.system.core.service.domain.entity;
 
+import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
+import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 public class Contest extends AggregateRoot<ContestId> {
     private String name;
@@ -13,8 +17,14 @@ public class Contest extends AggregateRoot<ContestId> {
     private ZonedDateTime endTime;
     private final UserId createdBy;
     private UserId updatedBy;
-    private final ZonedDateTime createdAt;
+    private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
+
+    public void initializeContest() {
+        setId(new ContestId(UUID.randomUUID()));
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+    }
 
     private Contest(Builder builder) {
         super.setId(builder.contestId);

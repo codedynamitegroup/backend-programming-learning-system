@@ -1,10 +1,10 @@
 package com.backend.programming.learning.system.core.service.application.rest;
 
-import com.backend.programming.learning.system.core.service.domain.dto.create.CreateCertificateCourseCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.CreateCertificateCourseResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.QueryCertificateCourseCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.query.QueryCertificateCourseResponse;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.CertificateCourseApplicationService;
+import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse.CreateCertificateCourseCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse.CreateCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse.CertificateCourseApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
