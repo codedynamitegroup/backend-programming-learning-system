@@ -2,9 +2,7 @@ package com.backend.programming.learning.system.core.service.application.rest;
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateCertificateCourseResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.create.CreateQuestionCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.CreateQuestionResponse;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.CoreApplicationService;
+import com.backend.programming.learning.system.core.service.domain.ports.input.service.CertificateCourseApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/core/certificate-courses", produces = "application/vnd.api.v1+json")
 public class CertificateCourseController {
-    private final CoreApplicationService coreApplicationService;
+    private final CertificateCourseApplicationService certificateCourseApplicationService;
 
-    public CertificateCourseController(CoreApplicationService coreApplicationService) {
-        this.coreApplicationService = coreApplicationService;
+    public CertificateCourseController(CertificateCourseApplicationService certificateCourseApplicationService) {
+        this.certificateCourseApplicationService = certificateCourseApplicationService;
     }
 
     @PostMapping("/create")
@@ -27,7 +25,7 @@ public class CertificateCourseController {
             @RequestBody CreateCertificateCourseCommand createCertificateCourseCommand) {
         log.info("Creating certificate course: {}", createCertificateCourseCommand);
         CreateCertificateCourseResponse createCertificateCourseResponse =
-                coreApplicationService.createCertificateCourse(createCertificateCourseCommand);
+                certificateCourseApplicationService.createCertificateCourse(createCertificateCourseCommand);
         log.info("Certificate course created: {}", createCertificateCourseResponse);
 
         return ResponseEntity.ok(createCertificateCourseResponse);
