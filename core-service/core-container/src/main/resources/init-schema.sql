@@ -275,16 +275,14 @@ CREATE TABLE "public".question
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "public".question_chapter CASCADE;
+DROP TABLE IF EXISTS "public".chapter_question CASCADE;
 
-CREATE TABLE "public".question_chapter
+CREATE TABLE "public".chapter_question
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
     question_id uuid NOT NULL,
     chapter_id uuid NOT NULL,
-    grade numeric(5,2) DEFAULT 0.0 NOT NULL,
-    pass bool DEFAULT FALSE NOT NULL,
-    CONSTRAINT question_chapter_pkey PRIMARY KEY (id),
+    CONSTRAINT chapter_question_pkey PRIMARY KEY (id),
     CONSTRAINT question_id_fkey FOREIGN KEY (question_id)
         REFERENCES "public".question (id) MATCH SIMPLE
         ON UPDATE CASCADE

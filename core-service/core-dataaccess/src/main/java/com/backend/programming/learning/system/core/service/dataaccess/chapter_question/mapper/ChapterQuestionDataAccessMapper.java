@@ -42,8 +42,6 @@ public class ChapterQuestionDataAccessMapper {
                 .id(chapterQuestion.getId().getValue())
                 .chapter(chapterEntity)
                 .question(questionEntity)
-                .grade(chapterQuestion.getGrade())
-                .pass(chapterQuestion.getPass())
                 .build();
     }
 
@@ -53,8 +51,6 @@ public class ChapterQuestionDataAccessMapper {
                 .id(new ChapterQuestionId(chapterQuestionEntity.getId()))
                 .chapterId(new ChapterId(chapterQuestionEntity.getChapter().getId()))
                 .questionId(new QuestionId(chapterQuestionEntity.getQuestion().getId()))
-                .grade(chapterQuestionEntity.getGrade())
-                .pass(chapterQuestionEntity.getPass())
                 .build();
     }
 }
