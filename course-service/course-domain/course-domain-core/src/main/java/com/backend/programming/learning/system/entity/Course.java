@@ -60,6 +60,10 @@ public class Course extends AggregateRoot<CourseId> {
         updatedAt = builder.updatedAt;
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public String getName() {
         return name;
     }
