@@ -43,8 +43,8 @@ spring:
     password: localdb
     driver-class-name: org.postgresql.Driver
     platform: postgres
-    schema: classpath:init-schema.sql
-    initialization-mode: always
+#    schema: classpath:init-schema.sql
+#    initialization-mode: always
 
 kafka-config:
   bootstrap-servers: localhost:19092, localhost:29092, localhost:39092

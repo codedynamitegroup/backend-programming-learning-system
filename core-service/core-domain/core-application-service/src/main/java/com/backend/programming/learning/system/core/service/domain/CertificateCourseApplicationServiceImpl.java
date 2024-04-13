@@ -17,23 +17,20 @@ import javax.validation.Valid;
 @Validated
 @Slf4j
 class CertificateCourseApplicationServiceImpl implements CertificateCourseApplicationService {
-    private final CertificateCourseCreateCommandHandler certificateCourseCreateCommandHandler;
-    private final CertificateCourseQueryCommandHandler certificateCourseQueryCommandHandler;
+    private final CertificateCourseCommandHandler certificateCourseCommandHandler;
 
-    public CertificateCourseApplicationServiceImpl(CertificateCourseCreateCommandHandler certificateCourseCreateCommandHandler,
-                                                    CertificateCourseQueryCommandHandler certificateCourseQueryCommandHandler) {
-        this.certificateCourseCreateCommandHandler = certificateCourseCreateCommandHandler;
-        this.certificateCourseQueryCommandHandler = certificateCourseQueryCommandHandler;
+    public CertificateCourseApplicationServiceImpl(CertificateCourseCommandHandler certificateCourseCommandHandler) {
+        this.certificateCourseCommandHandler = certificateCourseCommandHandler;
     }
 
     @Override
     public CreateCertificateCourseResponse createCertificateCourse(
             @Valid CreateCertificateCourseCommand createCertificateCourseCommand) {
-        return certificateCourseCreateCommandHandler.createCertificateCourse(createCertificateCourseCommand);
+        return certificateCourseCommandHandler.createCertificateCourse(createCertificateCourseCommand);
     }
 
     @Override
     public QueryCertificateCourseResponse findCertificateCourseById(QueryCertificateCourseCommand queryCertificateCourseCommand) {
-        return certificateCourseQueryCommandHandler.findCertificateCourseById(queryCertificateCourseCommand);
+        return certificateCourseCommandHandler.findCertificateCourseById(queryCertificateCourseCommand);
     }
 }
