@@ -1,13 +1,11 @@
-package com.backend.programming.learning.system.core.service.domain.dto.create;
+package com.backend.programming.learning.system.core.service.domain.dto.create.question;
 
-import com.backend.programming.learning.system.domain.valueobject.*;
+import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
-import java.util.UUID;
 
 @Getter
 @Builder

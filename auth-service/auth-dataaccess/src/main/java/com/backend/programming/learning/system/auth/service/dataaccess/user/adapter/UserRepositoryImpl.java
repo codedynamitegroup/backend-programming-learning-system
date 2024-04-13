@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.domain.valueobject.UserId;
 import com.backend.programming.learning.system.auth.service.dataaccess.user.mapper.UserDataAccessMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -36,5 +37,13 @@ public class UserRepositoryImpl implements UserRepository {
     public Optional<User> findByEmail(String email) {
         return userJpaRepository.findByEmail(email)
                 .map(userDataAccessMapper::userEntityToUser);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userJpaRepository.findAll()
+                .stream()
+                .map(userDataAccessMapper::userEntityToUser)
+                .toList();
     }
 }

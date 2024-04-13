@@ -4,6 +4,8 @@ import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.QtypeEssayQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 
+import java.util.UUID;
+
 public class QtypeEssayQuestion extends BaseEntity<QtypeEssayQuestionId> {
     private final QuestionId questionId;
     private final String responseFormat;
@@ -18,6 +20,10 @@ public class QtypeEssayQuestion extends BaseEntity<QtypeEssayQuestionId> {
     private final String responseTemplate;
     private final Integer maxBytes;
     private final String fileTypesList;
+
+    public void initQtypeEssayQuestion() {
+        setId(new QtypeEssayQuestionId(UUID.randomUUID()));
+    }
 
     // Getter
     public QuestionId getQuestionId() {

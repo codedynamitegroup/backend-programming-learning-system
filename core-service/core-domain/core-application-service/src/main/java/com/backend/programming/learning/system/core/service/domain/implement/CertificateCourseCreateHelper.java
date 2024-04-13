@@ -1,9 +1,8 @@
-package com.backend.programming.learning.system.core.service.domain;
+package com.backend.programming.learning.system.core.service.domain.implement;
 
+import com.backend.programming.learning.system.core.service.domain.CoreDomainService;
 import com.backend.programming.learning.system.core.service.domain.dto.create.CreateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
-import com.backend.programming.learning.system.core.service.domain.event.CertificateCourseCreatedEvent;
-import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.CertificateCourseDataMapper;

@@ -1,32 +1,45 @@
 package com.backend.programming.learning.system.core.service.application.rest;
 
-import com.backend.programming.learning.system.core.service.domain.dto.create.CreateQuestionCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.CreateQuestionResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.QueryCertificateCourseCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.query.QueryCertificateCourseResponse;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.QuestionApplicationService;
+import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQtypeEssayQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQtypeCodeQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QtypeCodeQuestionApplicationService;
+import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QtypeEssayQuestionApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
 
 @Slf4j
 @RestController
 @RequestMapping(value = "/core/questions", produces = "application/vnd.api.v1+json")
 public class QuestionController {
-    private final QuestionApplicationService questionApplicationService;
+    private final QtypeCodeQuestionApplicationService qtypeCodeQuestionApplicationService;
+    private final QtypeEssayQuestionApplicationService qtypeEssayQuestionApplicationService;
 
-    public QuestionController(QuestionApplicationService questionApplicationService) {
-        this.questionApplicationService = questionApplicationService;
+    public QuestionController(QtypeCodeQuestionApplicationService qtypeCodeQuestionApplicationService,
+                              QtypeEssayQuestionApplicationService qtypeEssayQuestionApplicationService) {
+        this.qtypeCodeQuestionApplicationService = qtypeCodeQuestionApplicationService;
+        this.qtypeEssayQuestionApplicationService = qtypeEssayQuestionApplicationService;
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<CreateQuestionResponse> createQuestion(
-            @RequestBody CreateQuestionCommand createQuestionCommand) {
-        log.info("Creating question: {}", createQuestionCommand);
-        CreateQuestionResponse createQuestionResponse = questionApplicationService.createQuestion(createQuestionCommand);
-        log.info("Question created: {}", createQuestionResponse);
+    @PostMapping("/create/code-question")
+    public ResponseEntity<CreateQuestionResponse> createQtypeCodeQuestion(
+            @RequestBody CreateQtypeCodeQuestionCommand createQtypeCodeQuestionCommand) {
+        log.info("Creating code question: {}", createQtypeCodeQuestionCommand);
+        CreateQuestionResponse createQuestionResponse = qtypeCodeQuestionApplicationService
+                .createQtypeCodeQuestion(createQtypeCodeQuestionCommand);
+        log.info("Question code created: {}", createQuestionResponse);
+
+        return ResponseEntity.ok(createQuestionResponse);
+    }
+
+    @PostMapping("/create/essay-question")
+    public ResponseEntity<CreateQuestionResponse> createQtypeEssayQuestion(
+            @RequestBody CreateQtypeEssayQuestionCommand createQtypeEssayQuestionCommand) {
+        log.info("Creating essay question: {}", createQtypeEssayQuestionCommand);
+        CreateQuestionResponse createQuestionResponse = qtypeEssayQuestionApplicationService
+                .createQtypeEssayQuestion(createQtypeEssayQuestionCommand);
+        log.info("Question essay created: {}", createQuestionResponse);
 
         return ResponseEntity.ok(createQuestionResponse);
     }

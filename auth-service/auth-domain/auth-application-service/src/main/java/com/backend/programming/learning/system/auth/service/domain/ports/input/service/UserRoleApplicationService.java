@@ -12,5 +12,5 @@ import javax.validation.Valid;
 public interface UserRoleApplicationService {
     CreateUserRoleResponse createUserRole(@Valid CreateUserRoleCommand createUserRoleCommand);
     QueryUserRoleResponse findUserRoleByRoleIdAndUserId(@Valid QueryUserRoleCommand queryOrganizationCommand);
-    DeleteUserRoleResponse deleteUserRoleById(@Valid DeleteUserRoleCommand deleteUserRoleCommand);
+    DeleteUserRoleResponse deleteUserRoleByRoleIdAndUserId(@Valid DeleteUserRoleCommand deleteUserRoleCommand);
 }

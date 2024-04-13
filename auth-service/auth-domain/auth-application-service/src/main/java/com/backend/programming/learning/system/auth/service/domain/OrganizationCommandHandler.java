@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.delete.De
 import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryOrganizationResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
 import com.backend.programming.learning.system.auth.service.domain.mapper.OrganizationDataMapper;
@@ -15,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -52,6 +54,14 @@ public class OrganizationCommandHandler {
         return organizationDataMapper.organizationToQueryOrganizationResponse(organizationResult.get());
     }
 
+    @Transactional(readOnly = true)
+    public List<QueryOrganizationResponse> queryAllOrganizations() {
+        return organizationRepository.findAll().stream()
+                .map(organizationDataMapper::organizationToQueryOrganizationResponse)
+                .toList();
+    }
+
+
     public DeleteOrganizationResponse deleteOrganization(DeleteOrganizationCommand deleteOrganizationCommand) {
         organizationDeleteHelper.deleteOrganization(deleteOrganizationCommand);
         log.info("Organization is deleted with id: {}", deleteOrganizationCommand.getOrganizationId());
@@ -59,4 +69,5 @@ public class OrganizationCommandHandler {
                 .message("Organization deleted successfully")
                 .build();
     }
+
 }

@@ -28,7 +28,6 @@ public class RoleDeleteHelper {
         this.userRoleRepository = userRoleRepository;
     }
 
-
     @Transactional
     public void deleteRole(DeleteRoleCommand deleteRoleCommand) {
         Optional<Role> roleResult =

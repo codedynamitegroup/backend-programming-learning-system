@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.create.Cr
 import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteRoleResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryRoleByOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.Role;
@@ -11,10 +12,12 @@ import com.backend.programming.learning.system.auth.service.domain.exception.Aut
 import com.backend.programming.learning.system.auth.service.domain.mapper.RoleDataMapper;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.RoleRepository;
 import com.backend.programming.learning.system.auth.service.domain.valueobject.RoleId;
+import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -49,6 +52,13 @@ public class RoleCommandHandler {
                     queryRoleCommand.getRoleId());
         }
         return roleDataMapper.roleToQueryRoleResponse(roleResult.get());
+    }
+
+    @Transactional(readOnly = true)
+    public List<QueryRoleResponse> queryRolesByOrganizationId(QueryRoleByOrganizationCommand queryAllRolesCommand) {
+        return roleRepository.findByOrganizationId(new OrganizationId(queryAllRolesCommand.getOrganizationId())).stream()
+                .map(roleDataMapper::roleToQueryRoleResponse)
+                .toList();
     }
 
     public DeleteRoleResponse deleteRole(DeleteRoleCommand deleteRoleCommand) {

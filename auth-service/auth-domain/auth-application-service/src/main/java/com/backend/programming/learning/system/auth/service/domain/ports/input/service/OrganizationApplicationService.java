@@ -6,9 +6,11 @@ import com.backend.programming.learning.system.auth.service.domain.dto.delete.De
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryOrganizationResponse;
 import javax.validation.Valid;
+import java.util.List;
 
 public interface OrganizationApplicationService {
     CreateOrganizationResponse createOrganization(@Valid CreateOrganizationCommand createOrganizationCommand);
     QueryOrganizationResponse findOrganizationById(@Valid QueryOrganizationCommand queryOrganizationCommand);
+    List<QueryOrganizationResponse> findAllOrganizations();
     DeleteOrganizationResponse deleteOrganizationById(@Valid DeleteOrganizationCommand deleteOrganizationCommand);
 }

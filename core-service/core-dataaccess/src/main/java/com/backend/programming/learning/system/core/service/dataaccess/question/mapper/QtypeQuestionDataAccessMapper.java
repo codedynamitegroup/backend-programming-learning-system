@@ -9,6 +9,7 @@ import com.backend.programming.learning.system.core.service.domain.entity.QtypeE
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeMultiChoiceQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeShortAnswerQuestion;
 import com.backend.programming.learning.system.domain.valueobject.QtypeCodeQuestionId;
+import com.backend.programming.learning.system.domain.valueobject.QtypeEssayQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import org.springframework.stereotype.Component;
 
@@ -77,6 +78,7 @@ public class QtypeQuestionDataAccessMapper {
     // essay
     public QtypeEssayQuestionEntity qtypeEssayQuestionToQtypeEssayQuestionEntity(QtypeEssayQuestion qtypeEssayQuestion) {
         return QtypeEssayQuestionEntity.builder()
+                .id(qtypeEssayQuestion.getId().getValue())
                 .questionId(qtypeEssayQuestion.getQuestionId().getValue())
                 .responseFormat(qtypeEssayQuestion.getResponseFormat())
                 .responseRequired(qtypeEssayQuestion.getResponseRequired())
@@ -95,6 +97,7 @@ public class QtypeQuestionDataAccessMapper {
 
     public QtypeEssayQuestion qtypeEssayQuestionEntityToQtypeEssayQuestion(QtypeEssayQuestionEntity qtypeEssayQuestionEntity) {
         return QtypeEssayQuestion.builder()
+                .id(new QtypeEssayQuestionId(qtypeEssayQuestionEntity.getId()))
                 .questionId(new QuestionId(qtypeEssayQuestionEntity.getQuestionId()))
                 .responseFormat(qtypeEssayQuestionEntity.getResponseFormat())
                 .responseRequired(qtypeEssayQuestionEntity.getResponseRequired())

@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.auth.service.domain.ports.output.
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -30,5 +31,13 @@ public class OrganizationRepositoryImpl implements OrganizationRepository {
     public Optional<Organization> findById(OrganizationId organizationId) {
         return organizationJpaRepository.findById(organizationId.getValue())
                 .map(organizationDataAccessMapper::organizationEntityToOrganization);
+    }
+
+    @Override
+    public List<Organization> findAll() {
+        return organizationJpaRepository.findAll()
+                .stream()
+                .map(organizationDataAccessMapper::organizationEntityToOrganization)
+                .toList();
     }
 }

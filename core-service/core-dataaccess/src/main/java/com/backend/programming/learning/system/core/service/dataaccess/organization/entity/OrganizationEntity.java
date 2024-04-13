@@ -24,6 +24,6 @@ public class OrganizationEntity {
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
-    @OneToOne(mappedBy = "organization")
-    private QuestionEntity question;
+//    @OneToOne(mappedBy = "organization")
+//    private QuestionEntity question;
 }
