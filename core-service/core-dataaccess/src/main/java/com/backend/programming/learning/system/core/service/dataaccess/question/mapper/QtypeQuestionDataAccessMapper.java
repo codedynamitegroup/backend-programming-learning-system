@@ -8,6 +8,7 @@ import com.backend.programming.learning.system.core.service.domain.entity.QtypeC
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeEssayQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeMultiChoiceQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeShortAnswerQuestion;
+import com.backend.programming.learning.system.domain.valueobject.QtypeCodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import org.springframework.stereotype.Component;
 
@@ -16,12 +17,14 @@ public class QtypeQuestionDataAccessMapper {
     // code
     public QtypeCodeQuestionEntity qtypeCodeQuestionToQtypeCodeQuestionEntity(QtypeCodeQuestion qtypeCodeQuestion) {
         return QtypeCodeQuestionEntity.builder()
+                .id(qtypeCodeQuestion.getId().getValue())
                 .questionId(qtypeCodeQuestion.getQuestionId().getValue())
                 .dslTemplate(qtypeCodeQuestion.getDslTemplate())
                 .build();
     }
     public QtypeCodeQuestion qtypeCodeQuestionEntityToQtypeCodeQuestion(QtypeCodeQuestionEntity qtypeCodeQuestionEntity) {
         return QtypeCodeQuestion.builder()
+                .id(new QtypeCodeQuestionId(qtypeCodeQuestionEntity.getId()))
                 .questionId(new QuestionId(qtypeCodeQuestionEntity.getQuestionId()))
                 .dslTemplate(qtypeCodeQuestionEntity.getDslTemplate())
                 .build();

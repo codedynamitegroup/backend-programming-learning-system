@@ -12,6 +12,8 @@ import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.domain.valueobject.*;
 import org.springframework.stereotype.Component;
 
+import java.time.ZonedDateTime;
+
 @Component
 public class QuestionDataMapper {
     public User createQuestionCommandToUser(CreateQuestionCommand createQuestionCommand) {
@@ -35,8 +37,10 @@ public class QuestionDataMapper {
                 .defaultMark(createQuestionCommand.getDefaultMark().floatValue())
                 .difficulty(QuestionDifficulty.valueOf(createQuestionCommand.getDifficulty()))
                 .createdBy(new UserId(createQuestionCommand.getCreatedBy()))
-                .updatedBy(new UserId(createQuestionCommand.getUpdatedBy()))
-                .qType(QuestionType.valueOf(createQuestionCommand.getQType()))
+                .updatedBy(new UserId(createQuestionCommand.getCreatedBy()))
+                .qtype(QuestionType.valueOf(createQuestionCommand.getQType()))
+                .createdAt(ZonedDateTime.now())
+                .updatedAt(ZonedDateTime.now())
                 .build();
     }
 

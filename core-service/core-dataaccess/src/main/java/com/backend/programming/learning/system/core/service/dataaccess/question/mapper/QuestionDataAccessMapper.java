@@ -46,7 +46,9 @@ public class QuestionDataAccessMapper {
                 .defaultMark(BigDecimal.valueOf(question.getDefaultMark()))
                 .createdBy(createdBy)
                 .updatedBy(updatedBy)
-                .qType(question.getqType())
+                .qtype(question.getqtype())
+                .createdAt(question.getCreatedAt())
+                .updatedAt(question.getUpdatedAt())
                 .build();
     }
 
@@ -62,8 +64,10 @@ public class QuestionDataAccessMapper {
                 .defaultMark(questionEntity.getDefaultMark().floatValue())
                 .createdBy(new UserId(questionEntity.getCreatedBy().getId()))
                 .updatedBy(new UserId(questionEntity.getUpdatedBy().getId()))
-                .qType(questionEntity.getQType())
+                .qtype(questionEntity.getQtype())
                 .failureMessages(null)
+                .createdAt(questionEntity.getCreatedAt())
+                .updatedAt(questionEntity.getUpdatedAt())
                 .build();
     }
 }

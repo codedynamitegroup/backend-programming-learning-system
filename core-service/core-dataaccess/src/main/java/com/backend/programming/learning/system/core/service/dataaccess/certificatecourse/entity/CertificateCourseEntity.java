@@ -21,7 +21,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "certificate_course")
+@Table(name = "certificate_course", schema = "public")
 @Entity
 public class CertificateCourseEntity {
     @Id

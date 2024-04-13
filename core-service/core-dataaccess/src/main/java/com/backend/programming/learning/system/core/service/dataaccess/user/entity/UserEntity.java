@@ -6,9 +6,9 @@ import com.backend.programming.learning.system.core.service.dataaccess.contest.e
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.review.entity.ReviewEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.topic.entity.TopicEntity;
-import javax.persistence.*;
 import lombok.*;
 
+import javax.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.UUID;
@@ -19,14 +19,15 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "user")
+@Table(name = "user", schema = "public")
 public class UserEntity {
     @Id
+    @Column(name = "id")
     private UUID id;
 
     private String email;
     private String name;
-    private Date date;
+    private Date dob;
     private String displayName;
     private String avatarUrl;
     private ZonedDateTime createdAt;

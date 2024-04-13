@@ -4,10 +4,15 @@ import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.QtypeCodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 
+import java.util.UUID;
+
 public class QtypeCodeQuestion extends BaseEntity<QtypeCodeQuestionId> {
     private final QuestionId questionId;
     private final String dslTemplate;
 
+    public void initQtypeCodeQuestion() {
+        setId(new QtypeCodeQuestionId(UUID.randomUUID()));
+    }
     private QtypeCodeQuestion(Builder builder) {
         super.setId(builder.qtypeCodeQuestionId);
         questionId = builder.questionId;

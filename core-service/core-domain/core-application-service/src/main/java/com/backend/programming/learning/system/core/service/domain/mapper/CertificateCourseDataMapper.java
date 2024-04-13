@@ -21,8 +21,8 @@ public class CertificateCourseDataMapper {
                 .isDeleted(false)
                 .createdBy(new UserId(createCertificateCourseCommand.getCreatedBy()))
                 .updatedBy(new UserId(createCertificateCourseCommand.getUpdatedBy()))
-                .createdAt(createCertificateCourseCommand.getCreatedAt())
-                .updatedAt(createCertificateCourseCommand.getUpdatedAt())
+//                .createdAt(createCertificateCourseCommand.getCreatedAt())
+//                .updatedAt(createCertificateCourseCommand.getUpdatedAt())
                 .build();
     }
 

@@ -57,6 +57,7 @@ CREATE TABLE "public".certificate_course
     id uuid NOT NULL,
     name text NOT NULL,
     skill_level skill_level NOT NULL,
+    description text NOT NULL,
     avg_rating numeric(2,1) NOT NULL,
 --     topic_id uuid NOT NULL,
     start_time TIMESTAMP WITH TIME ZONE NOT NULL,
@@ -286,7 +287,7 @@ CREATE TABLE "public".question_chapter
     id uuid NOT NULL,
     question_id uuid NOT NULL,
     chapter_id uuid NOT NULL,
-    grade numeric(2,2) NOT NULL,
+    grade numeric(5,2) NOT NULL,
     pass bool NOT NULL,
     CONSTRAINT question_chapter_pkey PRIMARY KEY (id),
     CONSTRAINT question_id_fkey FOREIGN KEY (question_id)

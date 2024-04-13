@@ -104,7 +104,10 @@ public class QuestionCreateHelper {
         if(createQuestionCommand.getDslTemplate() != null) { // code question
             QtypeCodeQuestion question = questionDataMapper
                     .createQuestionCommandToQtypeCodeQuestion(createQuestionCommand, questionId);
+
+            question.initQtypeCodeQuestion();
             qtypeCodeQuestionRepository.saveQtypeCodeQuestion(question);
+
             log.info("Question with id: {} created with QtypeCodeQuestionRepository", questionId);
         }
         else if (createQuestionCommand.getCaseSensitive() != null) { // short answer

@@ -9,6 +9,7 @@ import javax.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -19,9 +20,10 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "main_question")
+@Table(name = "question")
 public class QuestionEntity {
     @Id
+    @Column(name = "id")
     private UUID id;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -35,6 +37,9 @@ public class QuestionEntity {
     private String generalFeedback;
     private BigDecimal defaultMark;
 
+    private ZonedDateTime createdAt;
+    private ZonedDateTime updatedAt;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "created_by", referencedColumnName = "id")
     private UserEntity createdBy;
@@ -44,7 +49,7 @@ public class QuestionEntity {
     private UserEntity updatedBy;
 
     @Enumerated(EnumType.STRING)
-    private QuestionType qType;
+    private QuestionType qtype;
 
     @OneToMany(mappedBy = "question")
     Set<ChapterQuestionEntity> chapterQuestions;

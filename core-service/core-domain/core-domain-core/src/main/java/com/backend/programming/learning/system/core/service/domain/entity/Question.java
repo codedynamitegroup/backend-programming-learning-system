@@ -4,6 +4,7 @@ package com.backend.programming.learning.system.core.service.domain.entity;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.*;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,8 +17,31 @@ public class Question extends AggregateRoot<QuestionId> {
     private float defaultMark;
     private final UserId createdBy;
     private UserId updatedBy;
-    private final QuestionType qType;
+    private final QuestionType qtype;
     private List<String> failureMessages;
+
+    private ZonedDateTime createdAt;
+    private ZonedDateTime updatedAt;
+
+    private Question(Builder builder) {
+        super.setId(builder.questionId);
+        organizationId = builder.organizationId;
+        difficulty = builder.difficulty;
+        name = builder.name;
+        questionText = builder.questionText;
+        generalFeedback = builder.generalFeedback;
+        defaultMark = builder.defaultMark;
+        createdBy = builder.createdBy;
+        updatedBy = builder.updatedBy;
+        qtype = builder.qtype;
+        failureMessages = builder.failureMessages;
+        createdAt = builder.createdAt;
+        updatedAt = builder.updatedAt;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
 
     public void initializeQuestion() {
         setId(new QuestionId(UUID.randomUUID()));
@@ -68,30 +92,20 @@ public class Question extends AggregateRoot<QuestionId> {
         return updatedBy;
     }
 
-    public QuestionType getqType() {
-        return qType;
+    public QuestionType getqtype() {
+        return qtype;
     }
 
     public List<String> getFailureMessages() {
         return failureMessages;
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public ZonedDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    private Question(Builder builder) {
-        super.setId(builder.questionId);
-        organizationId = builder.organizationId;
-        difficulty = builder.difficulty;
-        name = builder.name;
-        questionText = builder.questionText;
-        generalFeedback = builder.generalFeedback;
-        defaultMark = builder.defaultMark;
-        createdBy = builder.createdBy;
-        updatedBy = builder.updatedBy;
-        qType = builder.qType;
-        failureMessages = builder.failureMessages;
+    public ZonedDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
     public static final class Builder {
@@ -104,8 +118,10 @@ public class Question extends AggregateRoot<QuestionId> {
         private float defaultMark;
         private UserId createdBy;
         private UserId updatedBy;
-        private QuestionType qType;
+        private QuestionType qtype;
         private List<String> failureMessages;
+        private ZonedDateTime createdAt;
+        private ZonedDateTime updatedAt;
 
         private Builder() {
         }
@@ -155,13 +171,23 @@ public class Question extends AggregateRoot<QuestionId> {
             return this;
         }
 
+        public Builder qtype(QuestionType val) {
+            qtype = val;
+            return this;
+        }
+
         public Builder failureMessages(List<String> val) {
             failureMessages = val;
             return this;
         }
 
-        public Builder qType(QuestionType val) {
-            qType = val;
+        public Builder createdAt(ZonedDateTime val) {
+            createdAt = val;
+            return this;
+        }
+
+        public Builder updatedAt(ZonedDateTime val) {
+            updatedAt = val;
             return this;
         }
 
