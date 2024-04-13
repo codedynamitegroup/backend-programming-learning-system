@@ -26,9 +26,9 @@ public class UserEntity {
     private UUID id;
 
     private String email;
-    private String name;
+    private String firstName;
+    private String lastName;
     private Date dob;
-    private String displayName;
     private String avatarUrl;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;

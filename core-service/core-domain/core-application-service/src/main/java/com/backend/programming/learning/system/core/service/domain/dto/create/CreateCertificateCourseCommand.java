@@ -19,8 +19,6 @@ public class CreateCertificateCourseCommand {
     private final SkillLevel skillLevel;
     @NotNull
     private final Float avgRating;
-    @NotNull
-    private final UUID topicId;
 
     @NotNull
     private final ZonedDateTime startTime;

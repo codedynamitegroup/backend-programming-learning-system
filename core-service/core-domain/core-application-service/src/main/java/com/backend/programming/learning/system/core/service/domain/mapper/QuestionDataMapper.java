@@ -18,7 +18,7 @@ import java.time.ZonedDateTime;
 public class QuestionDataMapper {
     public User createQuestionCommandToUser(CreateQuestionCommand createQuestionCommand) {
         return User.builder()
-                .userId(new UserId(createQuestionCommand.getCreatedBy()))
+                .id(new UserId(createQuestionCommand.getCreatedBy()))
                 .build();
     }
 

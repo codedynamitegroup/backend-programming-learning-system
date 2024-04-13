@@ -15,7 +15,8 @@ import java.util.List;
 public class User extends AggregateRoot<UserId> {
     private final String name;
     private final String email;
-    private final String displayName;
+    private final String firstName;
+    private final String lastName;
     private final Date dob;
     private final String avatarUrl;
     private final ZonedDateTime createdAt;
@@ -26,7 +27,8 @@ public class User extends AggregateRoot<UserId> {
         super.setId(builder.userId);
         name = builder.name;
         email = builder.email;
-        displayName = builder.displayName;
+        firstName = builder.firstName;
+        lastName = builder.lastName;
         dob = builder.dob;
         avatarUrl = builder.avatarUrl;
         createdAt = builder.createdAt;
@@ -38,6 +40,7 @@ public class User extends AggregateRoot<UserId> {
         return new Builder();
     }
 
+
     public String getName() {
         return name;
     }
@@ -46,8 +49,12 @@ public class User extends AggregateRoot<UserId> {
         return email;
     }
 
-    public String getDisplayName() {
-        return displayName;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public Date getDob() {
@@ -70,12 +77,12 @@ public class User extends AggregateRoot<UserId> {
         return failureMessage;
     }
 
-
     public static final class Builder {
         private UserId userId;
         private String name;
         private String email;
-        private String displayName;
+        private String firstName;
+        private String lastName;
         private Date dob;
         private String avatarUrl;
         private ZonedDateTime createdAt;
@@ -85,7 +92,7 @@ public class User extends AggregateRoot<UserId> {
         private Builder() {
         }
 
-        public Builder userId(UserId val) {
+        public Builder id(UserId val) {
             userId = val;
             return this;
         }
@@ -100,8 +107,13 @@ public class User extends AggregateRoot<UserId> {
             return this;
         }
 
-        public Builder displayName(String val) {
-            displayName = val;
+        public Builder firstName(String val) {
+            firstName = val;
+            return this;
+        }
+
+        public Builder lastName(String val) {
+            lastName = val;
             return this;
         }
 
