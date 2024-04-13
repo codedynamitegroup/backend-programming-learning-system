@@ -437,7 +437,7 @@ CREATE TABLE "public".code_submission
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
     user_id uuid NOT NULL,
     code_question_id uuid NOT NULL,
-    grade numeric(2,2) DEFAULT 0.0 NOT NULL,
+    grade numeric(5,2) DEFAULT 0.0 NOT NULL,
     pass bool DEFAULT FALSE NOT NULL,
     CONSTRAINT code_submission_pkey PRIMARY KEY (id),
     CONSTRAINT code_submission_user_id_fkey FOREIGN KEY (user_id)
