@@ -24,10 +24,6 @@ public class ProgrammingLanguageEntity {
     private Integer compilerApiId;
     private Float timeLimit;
     private Float memoryLimit;
-    private String headCode;
-    private String bodyCode;
-    private String tailCode;
-    private Boolean isActive;
 
     @OneToMany(mappedBy = "programmingLanguage")
     private List<TopicProgrammingLanguageEntity> topicProgrammingLanguages;

@@ -168,10 +168,6 @@ CREATE TABLE "public".programming_language
     compiler_api_id int8,
     time_limit int4,
     memory_limit int4,
-    head_code text,
-    body_code text,
-    tail_code text,
-    is_active bool DEFAULT FALSE NOT NULL,
     CONSTRAINT programming_language_pkey PRIMARY KEY (id)
 );
 
