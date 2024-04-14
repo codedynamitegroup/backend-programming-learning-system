@@ -23,10 +23,10 @@ public class CodeQuestionDataMaper {
                 .isDeleted(command.getIsDeleted())
                 .build();
     }
-    public CreateCodeQuestionResponse codeQuestionToCreateCodeQuestionReponse(CodeQuestion codeQuestion){
+    public CreateCodeQuestionResponse codeQuestionToCreateCodeQuestionReponse(CodeQuestion codeQuestion, String message){
         return CreateCodeQuestionResponse.builder()
                 .codeQuestionId(codeQuestion.getId())
-                .message("create code question success fully")
+                .message(message)
                 .build();
     }
 

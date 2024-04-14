@@ -16,7 +16,7 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
 
         codeQuestion.validateCodeQuestion();
         codeQuestion.initializeCodeQuestion();
-        log.info("Code question with id: {} is initiated", codeQuestion.getQuestionId().getValue());
+        log.info("Code question with id: {} is initiated", codeQuestion.getId().getValue());
         return new CodeQuestionCreatedEvent(codeQuestion, ZonedDateTime.now(ZoneId.of("UTC")));
     }
 
