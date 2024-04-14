@@ -1,9 +1,7 @@
 package com.backend.programming.learning.system.core.service.dataaccess.topic.entity;
 
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_topic.entity.CertificateCourseTopicEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
-import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
 import javax.persistence.*;
 import lombok.*;
 
@@ -35,7 +33,7 @@ public class TopicEntity {
     private UserEntity updatedBy;
 
     @OneToMany(mappedBy = "topic")
-    private List<CertificateCourseTopicEntity> topicCertificateCourses;
+    private List<CertificateCourseEntity> certificateCourses;
 
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;

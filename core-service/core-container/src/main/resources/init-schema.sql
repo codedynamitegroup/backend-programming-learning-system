@@ -55,6 +55,7 @@ DROP TABLE IF EXISTS "public".certificate_course CASCADE;
 CREATE TABLE "public".certificate_course
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
+    topic_id uuid NOT NULL,
     name text,
     skill_level skill_level,
     description text,
@@ -73,6 +74,10 @@ CREATE TABLE "public".certificate_course
         ON DELETE CASCADE,
     CONSTRAINT certificate_course_updated_by_fkey FOREIGN KEY (updated_by)
         REFERENCES "public".user (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT certificate_course_topic_id_fkey FOREIGN KEY (topic_id)
+        REFERENCES "public".topic (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
@@ -169,23 +174,23 @@ CREATE TABLE "public".programming_language
     CONSTRAINT programming_language_pkey PRIMARY KEY (id)
 );
 
-DROP TABLE IF EXISTS "public".certificate_course_programming_language CASCADE;
+DROP TABLE IF EXISTS "public".topic_programming_language CASCADE;
 
-CREATE TABLE "public".certificate_course_programming_language
+CREATE TABLE "public".topic_programming_language
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
-    certificate_course_id uuid NOT NULL,
+    topic_id uuid NOT NULL,
     programming_language_id uuid NOT NULL,
     CONSTRAINT certificate_course_programming_language_pkey PRIMARY KEY (id),
-    CONSTRAINT certificate_course_id_fkey FOREIGN KEY (certificate_course_id)
-        REFERENCES "public".certificate_course (id) MATCH SIMPLE
+    CONSTRAINT certificate_course_id_fkey FOREIGN KEY (topic_id)
+        REFERENCES "public".topic (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT programming_language_id_fkey FOREIGN KEY (programming_language_id)
         REFERENCES "public".programming_language (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-    CONSTRAINT certificate_course_id_programming_language_id_key UNIQUE (certificate_course_id, programming_language_id)
+    CONSTRAINT topic_id_programming_language_id_key UNIQUE (topic_id, programming_language_id)
 );
 
 DROP TABLE IF EXISTS "public".contest CASCADE;
@@ -414,25 +419,6 @@ CREATE TABLE "public".notification
         REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
-);
-
-DROP TABLE IF EXISTS "public".certificate_course_topic CASCADE;
-
-CREATE TABLE "public".certificate_course_topic
-(
-    id uuid DEFAULT uuid_generate_v4() NOT NULL,
-    certificate_course_id uuid NOT NULL,
-    topic_id uuid NOT NULL,
-    CONSTRAINT certificate_course_topic_pkey PRIMARY KEY (id),
-    CONSTRAINT certificate_course_id_fkey FOREIGN KEY (certificate_course_id)
-        REFERENCES "public".certificate_course (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    CONSTRAINT topic_id_fkey FOREIGN KEY (topic_id)
-        REFERENCES "public".topic (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    CONSTRAINT certificate_course_topic_certificate_course_id_topic_id_key UNIQUE (certificate_course_id, topic_id)
 );
 
 DROP TABLE IF EXISTS "public".code_submission CASCADE;

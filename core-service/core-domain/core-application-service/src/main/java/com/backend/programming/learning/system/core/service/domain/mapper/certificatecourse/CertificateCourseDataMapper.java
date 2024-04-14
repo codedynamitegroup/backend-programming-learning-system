@@ -18,9 +18,12 @@ import java.util.UUID;
 @Component
 public class CertificateCourseDataMapper {
     private final UserRepository userRepository;
+    private final TopicRepository topicRepository;
 
-    public CertificateCourseDataMapper(UserRepository userRepository) {
+    public CertificateCourseDataMapper(UserRepository userRepository,
+                                        TopicRepository topicRepository) {
         this.userRepository = userRepository;
+        this.topicRepository = topicRepository;
     }
 
     public CertificateCourse createCertificateCourseCommandToCertificateCourse(
@@ -31,13 +34,16 @@ public class CertificateCourseDataMapper {
         User updatedBy = userRepository.findUser(new UserId(createCertificateCourseCommand.getUpdatedBy()).getValue())
                 .orElseThrow(() -> new TopicNotFoundException("User not found with id: " +
                         createCertificateCourseCommand.getUpdatedBy()));
+        Topic topic = topicRepository.findByID(new TopicId(createCertificateCourseCommand.getTopicId()))
+                .orElseThrow(() -> new TopicNotFoundException("Topic not found with id: " +
+                        createCertificateCourseCommand.getTopicId()));
         return CertificateCourse.builder()
                 .name(createCertificateCourseCommand.getName())
                 .skillLevel(createCertificateCourseCommand.getSkillLevel())
                 .avgRating(createCertificateCourseCommand.getAvgRating())
                 .startTime(createCertificateCourseCommand.getStartTime())
                 .endTime(createCertificateCourseCommand.getEndTime())
-                .topics(new ArrayList<>())
+                .topic(topic)
                 .chapters(new ArrayList<>())
                 .reviews(new ArrayList<>())
                 .registeredUsers(new ArrayList<>())

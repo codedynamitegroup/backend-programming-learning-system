@@ -20,7 +20,7 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
     private ZonedDateTime startTime;
     private ZonedDateTime endTime;
     private Boolean isDeleted;
-    private final List<Topic> topics;
+    private final Topic topic;
     private final List<Review> reviews;
     private final List<Chapter> chapters;
     private final List<User> registeredUsers;
@@ -38,7 +38,7 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         startTime = builder.startTime;
         endTime = builder.endTime;
         isDeleted = builder.isDeleted;
-        topics = builder.topics;
+        topic = builder.topic;
         reviews = builder.reviews;
         chapters = builder.chapters;
         registeredUsers = builder.registeredUsers;
@@ -56,10 +56,6 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         setId(new CertificateCourseId(UUID.randomUUID()));
         createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
         updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
-    }
-
-    public void addTopic(Topic topic) {
-        topics.add(topic);
     }
 
 
@@ -91,8 +87,8 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         return isDeleted;
     }
 
-    public List<Topic> getTopics() {
-        return topics;
+    public Topic getTopic() {
+        return topic;
     }
 
     public List<Review> getReviews() {
@@ -132,7 +128,7 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         private ZonedDateTime startTime;
         private ZonedDateTime endTime;
         private Boolean isDeleted;
-        private List<Topic> topics;
+        private Topic topic;
         private List<Review> reviews;
         private List<Chapter> chapters;
         private List<User> registeredUsers;
@@ -184,8 +180,8 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
             return this;
         }
 
-        public Builder topics(List<Topic> val) {
-            topics = val;
+        public Builder topic(Topic val) {
+            topic = val;
             return this;
         }
 

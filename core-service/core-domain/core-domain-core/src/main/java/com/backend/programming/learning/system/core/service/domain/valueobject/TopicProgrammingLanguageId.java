@@ -4,8 +4,8 @@ import com.backend.programming.learning.system.domain.valueobject.BaseId;
 
 import java.util.UUID;
 
-public class CertificateCourseProgrammingLanguageId extends BaseId<UUID> {
-    public CertificateCourseProgrammingLanguageId(UUID value) {
+public class TopicProgrammingLanguageId extends BaseId<UUID> {
+    public TopicProgrammingLanguageId(UUID value) {
         super(value);
     }
 }

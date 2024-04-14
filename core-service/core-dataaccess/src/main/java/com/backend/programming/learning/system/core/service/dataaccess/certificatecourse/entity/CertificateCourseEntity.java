@@ -1,10 +1,9 @@
 package com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity;
 
-import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_programminglanguage.entity.CertificateCourseProgrammingLanguageEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_topic.entity.CertificateCourseTopicEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_user.entity.CertificateCourseUserEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter.entity.ChapterEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.review.entity.ReviewEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.topic.entity.TopicEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
 import javax.persistence.*;
@@ -42,14 +41,12 @@ public class CertificateCourseEntity {
     @OneToMany(mappedBy = "certificateCourse")
     private List<ChapterEntity> chapters;
 
-    @OneToMany(mappedBy = "certificateCourse")
-    private List<CertificateCourseTopicEntity> certificateCourseTopics;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "topic_id", referencedColumnName = "id")
+    private TopicEntity topic;
 
     @OneToMany(mappedBy = "certificateCourse")
     private List<CertificateCourseUserEntity> certificateCourseUsers;
-
-    @OneToMany(mappedBy = "certificateCourse")
-    private List<CertificateCourseProgrammingLanguageEntity> certificateCourseProgramingLanguages;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "created_by", referencedColumnName = "id")

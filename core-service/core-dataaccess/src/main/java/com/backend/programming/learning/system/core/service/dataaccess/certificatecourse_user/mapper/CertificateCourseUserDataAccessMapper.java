@@ -2,17 +2,13 @@ package com.backend.programming.learning.system.core.service.dataaccess.certific
 
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.repository.CertificateCourseJpaRepository;
-import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_topic.entity.CertificateCourseTopicEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_user.entity.CertificateCourseUserEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.repository.UserJpaRepository;
-import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourseTopic;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourseUser;
 import com.backend.programming.learning.system.core.service.domain.exception.CertificateCourseNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseTopicId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
