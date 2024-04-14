@@ -10,4 +10,5 @@ import java.util.UUID;
 @Repository
 public interface CertificateCourseTopicJpaRepository extends JpaRepository<CertificateCourseTopicEntity, UUID> {
     Optional<CertificateCourseTopicEntity> findById(UUID id);
+    Optional<CertificateCourseTopicEntity> findByCertificateCourseIdAndTopicId(UUID certificateCourseId, UUID topicId);
 }

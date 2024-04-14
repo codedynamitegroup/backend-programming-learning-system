@@ -4,12 +4,21 @@ import com.backend.programming.learning.system.core.service.domain.valueobject.C
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseProgrammingLanguageId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseTopicId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
+import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
+
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.UUID;
 
 public class CertificateCourseTopic extends AggregateRoot<CertificateCourseTopicId> {
     private CertificateCourseId certificateCourseId;
     private TopicId topicId;
+
+    public void initializeCertificateCourse() {
+        setId(new CertificateCourseTopicId(UUID.randomUUID()));
+    }
 
     private CertificateCourseTopic(Builder builder) {
         super.setId(builder.certificateCourseTopicId);

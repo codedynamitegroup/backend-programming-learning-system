@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.mapper;
 
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_topic.entity.CertificateCourseTopicEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter.entity.ChapterEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter.mapper.ChapterDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.review.entity.ReviewEntity;
@@ -12,6 +13,7 @@ import com.backend.programming.learning.system.core.service.dataaccess.user.repo
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
+import com.backend.programming.learning.system.core.service.domain.entity.Topic;
 import com.backend.programming.learning.system.core.service.domain.exception.TopicNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
@@ -19,6 +21,7 @@ import com.backend.programming.learning.system.core.service.domain.valueobject.T
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -46,15 +49,6 @@ public class CertificateCourseDataAccessMapper {
                 .orElseThrow(() -> new UserNotFoundException("User with id: " +
                         certificateCourse.getUpdatedBy().getValue() + " could not be found!")
                 );
-        List<ReviewEntity> reviews = certificateCourse.getReviews() != null ?
-                certificateCourse.getReviews().stream()
-                .map(reviewDataAccessMapper::reviewToReviewEntity)
-                .toList() : null;
-
-        List<ChapterEntity> chapters = certificateCourse.getChapters() != null ?
-                certificateCourse.getChapters().stream()
-                .map(chapterDataAccessMapper::chapterToChapterEntity)
-                .toList() : null;
 
         return CertificateCourseEntity.builder()
                 .id(certificateCourse.getId().getValue())
@@ -62,8 +56,10 @@ public class CertificateCourseDataAccessMapper {
                 .description(certificateCourse.getDescription())
                 .skillLevel(certificateCourse.getSkillLevel())
                 .avgRating(certificateCourse.getAvgRating())
-                .reviews(reviews)
-                .chapters(chapters)
+                .certificateCourseTopics(new ArrayList<>())
+                .certificateCourseUsers(new ArrayList<>())
+                .reviews(new ArrayList<>())
+                .chapters(new ArrayList<>())
                 .startTime(certificateCourse.getStartTime())
                 .endTime(certificateCourse.getEndTime())
                 .isDeleted(certificateCourse.getDeleted())
@@ -76,23 +72,16 @@ public class CertificateCourseDataAccessMapper {
 
     public CertificateCourse certificateCourseEntityToCertificateCourse(
             CertificateCourseEntity certificateCourseEntity) {
-        List<Review> reviews = certificateCourseEntity.getReviews() != null ?
-                certificateCourseEntity.getReviews().stream()
-                .map(reviewDataAccessMapper::reviewEntityToReview)
-                .toList() : null;
-        List<Chapter> chapters = certificateCourseEntity.getChapters() != null ?
-                certificateCourseEntity.getChapters().stream()
-                .map(chapterDataAccessMapper::chapterEntityToChapter)
-                .toList() : null;
-
         return CertificateCourse.builder()
                 .id(new CertificateCourseId(certificateCourseEntity.getId()))
                 .name(certificateCourseEntity.getName())
                 .description(certificateCourseEntity.getDescription())
                 .skillLevel(certificateCourseEntity.getSkillLevel())
                 .avgRating(certificateCourseEntity.getAvgRating())
-                .reviews(reviews)
-                .chapters(chapters)
+                .topics(new ArrayList<>())
+                .reviews(new ArrayList<>())
+                .chapters(new ArrayList<>())
+                .registeredUsers(new ArrayList<>())
                 .startTime(certificateCourseEntity.getStartTime())
                 .endTime(certificateCourseEntity.getEndTime())
                 .isDeleted(certificateCourseEntity.getIsDeleted())

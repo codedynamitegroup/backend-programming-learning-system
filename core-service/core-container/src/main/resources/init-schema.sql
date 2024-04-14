@@ -122,7 +122,8 @@ CREATE TABLE "public".certificate_course_user
     CONSTRAINT certificate_course_user_user_id_fkey FOREIGN KEY (user_id)
         REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT certificate_course_user_certificate_course_id_user_id_key UNIQUE (certificate_course_id, user_id)
 );
 
 DROP TABLE IF EXISTS "public".review CASCADE;
@@ -183,7 +184,8 @@ CREATE TABLE "public".certificate_course_programming_language
     CONSTRAINT programming_language_id_fkey FOREIGN KEY (programming_language_id)
         REFERENCES "public".programming_language (id) MATCH SIMPLE
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT certificate_course_id_programming_language_id_key UNIQUE (certificate_course_id, programming_language_id)
 );
 
 DROP TABLE IF EXISTS "public".contest CASCADE;
@@ -228,7 +230,8 @@ CREATE TABLE "public".contest_user
     CONSTRAINT contest_user_user_id_fkey FOREIGN KEY (user_id)
         REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT contest_user_contest_id_user_id_key UNIQUE (contest_id, user_id)
 );
 
 DROP TABLE IF EXISTS "public".organization CASCADE;
@@ -290,7 +293,8 @@ CREATE TABLE "public".chapter_question
     CONSTRAINT chapter_id_fkey FOREIGN KEY (chapter_id)
         REFERENCES "public".chapter (id) MATCH SIMPLE
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT chapter_question_question_id_chapter_id_key UNIQUE (question_id, chapter_id)
 );
 
 DROP TABLE IF EXISTS "public".answer_of_question CASCADE;
@@ -427,7 +431,8 @@ CREATE TABLE "public".certificate_course_topic
     CONSTRAINT topic_id_fkey FOREIGN KEY (topic_id)
         REFERENCES "public".topic (id) MATCH SIMPLE
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT certificate_course_topic_certificate_course_id_topic_id_key UNIQUE (certificate_course_id, topic_id)
 );
 
 DROP TABLE IF EXISTS "public".code_submission CASCADE;

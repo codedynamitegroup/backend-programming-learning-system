@@ -7,6 +7,7 @@ import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -19,6 +20,9 @@ public class CreateCertificateCourseCommand {
     private final SkillLevel skillLevel;
     @NotNull
     private final Float avgRating;
+
+    @NotNull
+    private final List<UUID> topicIds;
 
     @NotNull
     private final ZonedDateTime startTime;
