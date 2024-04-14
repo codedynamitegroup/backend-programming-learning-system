@@ -1,18 +1,16 @@
 package com.backend.programming.learning.system.core.service.dataaccess.question.mapper;
 
 import com.backend.programming.learning.system.core.service.dataaccess.organization.entity.OrganizationEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.organization.mapper.OrganizationDataAccessMapper;
+import com.backend.programming.learning.system.core.service.dataaccess.organization.repository.OrganizationJpaRepository;
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.organization.repository.OrganizationJpaRepository;
+import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.user.repository.UserJpaRepository;
-import com.backend.programming.learning.system.core.service.domain.entity.Organization;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
-import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.exception.OrganizationNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
-import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -21,11 +19,17 @@ import java.math.BigDecimal;
 public class QuestionDataAccessMapper {
     private final OrganizationJpaRepository organizationJpaRepository;
     private final UserJpaRepository userJpaRepository;
+    private final UserDataAccessMapper userDataAccessMapper;
+    private final OrganizationDataAccessMapper organizationDataAccessMapper;
 
     public QuestionDataAccessMapper(OrganizationJpaRepository organizationJpaRepository,
-                                    UserJpaRepository userJpaRepository) {
+                                    UserJpaRepository userJpaRepository,
+                                    UserDataAccessMapper userDataAccessMapper,
+                                    OrganizationDataAccessMapper organizationDataAccessMapper) {
         this.organizationJpaRepository = organizationJpaRepository;
         this.userJpaRepository = userJpaRepository;
+        this.userDataAccessMapper = userDataAccessMapper;
+        this.organizationDataAccessMapper = organizationDataAccessMapper;
     }
 
     public QuestionEntity questionToQuestionEntity(Question question) {
@@ -34,9 +38,7 @@ public class QuestionDataAccessMapper {
                 .orElseThrow(
                         () -> new OrganizationNotFoundException("Organization with id: " + question
                                 .getOrganization()
-                                .getId().getValue() + " could not be found!")
-                );
-
+                                .getId().getValue() + " could not be found!"));
         UserEntity createdBy = userJpaRepository
                 .findById(question.getCreatedBy().getId().getValue())
                 .orElseThrow(() ->
@@ -72,41 +74,18 @@ public class QuestionDataAccessMapper {
         // TODO: add failure messages
         return Question.builder()
                 .questionId(new QuestionId(questionEntity.getId()))
-                .organization(organizationEntityToOrganization(questionEntity.getOrganization()))
+                .organization(organizationDataAccessMapper.organizationEntityToOrganization(questionEntity.getOrganization()))
                 .difficulty(questionEntity.getDifficulty())
                 .name(questionEntity.getName())
                 .questionText(questionEntity.getQuestionText())
                 .generalFeedback(questionEntity.getGeneralFeedback())
                 .defaultMark(questionEntity.getDefaultMark().floatValue())
-                .createdBy(userEntityToUser(questionEntity.getCreatedBy()))
-                .updatedBy(userEntityToUser(questionEntity.getCreatedBy()))
+                .createdBy(userDataAccessMapper.userEntityToUser(questionEntity.getCreatedBy()))
+                .updatedBy(userDataAccessMapper.userEntityToUser(questionEntity.getCreatedBy()))
                 .qtype(questionEntity.getQtype())
                 .failureMessages(null)
                 .createdAt(questionEntity.getCreatedAt())
                 .updatedAt(questionEntity.getUpdatedAt())
-                .build();
-    }
-
-    private Organization organizationEntityToOrganization(OrganizationEntity organizationEntity) {
-        return Organization.builder()
-                .organizationId(new OrganizationId(organizationEntity.getId()))
-                .name(organizationEntity.getName())
-                .description(organizationEntity.getDescription())
-                .moodleUrl(organizationEntity.getMoodleUrl())
-                .createdAt(organizationEntity.getCreatedAt())
-                .updatedAt(organizationEntity.getUpdatedAt())
-                .build();
-    }
-
-    private User userEntityToUser(UserEntity userEntity) {
-        return User.builder()
-                .id(new UserId(userEntity.getId()))
-                .firstName(userEntity.getFirstName())
-                .lastName(userEntity.getLastName())
-                .email(userEntity.getEmail())
-                .avatarUrl(userEntity.getAvatarUrl())
-                .createdAt(userEntity.getCreatedAt())
-                .updatedAt(userEntity.getUpdatedAt())
                 .build();
     }
 }
