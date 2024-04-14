@@ -9,11 +9,9 @@ import com.backend.programming.learning.system.core.service.dataaccess.review.ma
 import com.backend.programming.learning.system.core.service.dataaccess.topic.entity.TopicEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.topic.repository.TopicJpaRepository;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.user.repository.UserJpaRepository;
-import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
-import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
-import com.backend.programming.learning.system.core.service.domain.entity.Review;
-import com.backend.programming.learning.system.core.service.domain.entity.Topic;
+import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.exception.TopicNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
@@ -29,25 +27,28 @@ public class CertificateCourseDataAccessMapper {
     private final UserJpaRepository userJpaRepository;
     private final ReviewDataAccessMapper reviewDataAccessMapper;
     private final ChapterDataAccessMapper chapterDataAccessMapper;
+    private final UserDataAccessMapper userDataAccessMapper;
 
     public CertificateCourseDataAccessMapper(UserJpaRepository userJpaRepository,
                                              ReviewDataAccessMapper reviewDataAccessMapper,
-                                             ChapterDataAccessMapper chapterDataAccessMapper) {
+                                             ChapterDataAccessMapper chapterDataAccessMapper,
+                                             UserDataAccessMapper userDataAccessMapper) {
         this.userJpaRepository = userJpaRepository;
         this.reviewDataAccessMapper = reviewDataAccessMapper;
         this.chapterDataAccessMapper = chapterDataAccessMapper;
+        this.userDataAccessMapper = userDataAccessMapper;
     }
 
     public CertificateCourseEntity certificateCourseToCertificateCourseEntity(CertificateCourse certificateCourse) {
         UserEntity createdBy = userJpaRepository
-                .findById(certificateCourse.getCreatedBy().getValue())
+                .findById(certificateCourse.getCreatedBy().getId().getValue())
                 .orElseThrow(() -> new UserNotFoundException("User with id: " +
-                        certificateCourse.getCreatedBy().getValue() + " could not be found!")
+                        certificateCourse.getCreatedBy().getId().getValue() + " could not be found!")
                 );
         UserEntity updatedBy = userJpaRepository
-                .findById(certificateCourse.getUpdatedBy().getValue())
+                .findById(certificateCourse.getUpdatedBy().getId().getValue())
                 .orElseThrow(() -> new UserNotFoundException("User with id: " +
-                        certificateCourse.getUpdatedBy().getValue() + " could not be found!")
+                        certificateCourse.getUpdatedBy().getId().getValue() + " could not be found!")
                 );
 
         return CertificateCourseEntity.builder()
@@ -72,6 +73,9 @@ public class CertificateCourseDataAccessMapper {
 
     public CertificateCourse certificateCourseEntityToCertificateCourse(
             CertificateCourseEntity certificateCourseEntity) {
+        User createdBy = userDataAccessMapper.userEntityToUser(certificateCourseEntity.getCreatedBy());
+        User updatedBy = userDataAccessMapper.userEntityToUser(certificateCourseEntity.getUpdatedBy());
+
         return CertificateCourse.builder()
                 .id(new CertificateCourseId(certificateCourseEntity.getId()))
                 .name(certificateCourseEntity.getName())
@@ -85,8 +89,8 @@ public class CertificateCourseDataAccessMapper {
                 .startTime(certificateCourseEntity.getStartTime())
                 .endTime(certificateCourseEntity.getEndTime())
                 .isDeleted(certificateCourseEntity.getIsDeleted())
-                .createdBy(new UserId(certificateCourseEntity.getCreatedBy().getId()))
-                .updatedBy(new UserId(certificateCourseEntity.getUpdatedBy().getId()))
+                .createdBy(createdBy)
+                .updatedBy(updatedBy)
                 .createdAt(certificateCourseEntity.getCreatedAt())
                 .updatedAt(certificateCourseEntity.getUpdatedAt())
                 .build();

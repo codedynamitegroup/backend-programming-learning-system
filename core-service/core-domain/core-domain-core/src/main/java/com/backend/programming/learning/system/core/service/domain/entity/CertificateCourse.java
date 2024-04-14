@@ -24,11 +24,10 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
     private final List<Review> reviews;
     private final List<Chapter> chapters;
     private final List<User> registeredUsers;
-    private final UserId createdBy;
-    private UserId updatedBy;
+    private final User createdBy;
+    private User updatedBy;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
-    private List<String> failureMessages;
 
     private CertificateCourse(Builder builder) {
         super.setId(builder.certificateCourseId);
@@ -47,7 +46,6 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         updatedBy = builder.updatedBy;
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
-        failureMessages = builder.failureMessages;
     }
 
     public static Builder builder() {
@@ -109,11 +107,11 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         return registeredUsers;
     }
 
-    public UserId getCreatedBy() {
+    public User getCreatedBy() {
         return createdBy;
     }
 
-    public UserId getUpdatedBy() {
+    public User getUpdatedBy() {
         return updatedBy;
     }
 
@@ -123,10 +121,6 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
 
     public ZonedDateTime getUpdatedAt() {
         return updatedAt;
-    }
-
-    public List<String> getFailureMessages() {
-        return failureMessages;
     }
 
     public static final class Builder {
@@ -142,11 +136,10 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         private List<Review> reviews;
         private List<Chapter> chapters;
         private List<User> registeredUsers;
-        private UserId createdBy;
-        private UserId updatedBy;
+        private User createdBy;
+        private User updatedBy;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
-        private List<String> failureMessages;
 
         private Builder() {
         }
@@ -211,12 +204,12 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
             return this;
         }
 
-        public Builder createdBy(UserId val) {
+        public Builder createdBy(User val) {
             createdBy = val;
             return this;
         }
 
-        public Builder updatedBy(UserId val) {
+        public Builder updatedBy(User val) {
             updatedBy = val;
             return this;
         }
@@ -228,11 +221,6 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
 
         public Builder updatedAt(ZonedDateTime val) {
             updatedAt = val;
-            return this;
-        }
-
-        public Builder failureMessages(List<String> val) {
-            failureMessages = val;
             return this;
         }
 
