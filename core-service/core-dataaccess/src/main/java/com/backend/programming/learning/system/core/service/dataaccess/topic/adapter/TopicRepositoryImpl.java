@@ -4,7 +4,10 @@ import com.backend.programming.learning.system.core.service.dataaccess.topic.map
 import com.backend.programming.learning.system.core.service.dataaccess.topic.repository.TopicJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.entity.Topic;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.TopicRepository;
+import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 public class TopicRepositoryImpl implements TopicRepository {
@@ -22,5 +25,11 @@ public class TopicRepositoryImpl implements TopicRepository {
         return topicDataAccessMapper.topicEntityToTopic(topicJpaRepository
                 .save(topicDataAccessMapper
                         .topicToTopicEntity(topic)));
+    }
+
+    @Override
+    public Optional<Topic> findByID(TopicId topicId) {
+        return topicJpaRepository.findById(topicId.getValue())
+                .map(topicDataAccessMapper::topicEntityToTopic);
     }
 }

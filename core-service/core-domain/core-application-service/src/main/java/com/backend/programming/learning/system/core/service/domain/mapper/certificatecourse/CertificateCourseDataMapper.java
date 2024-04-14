@@ -4,8 +4,22 @@ import com.backend.programming.learning.system.core.service.domain.dto.create.ce
 import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse.CreateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
+import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourseTopic;
+import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
+import com.backend.programming.learning.system.core.service.domain.entity.Topic;
+import com.backend.programming.learning.system.core.service.domain.exception.TopicNotFoundException;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseTopicRepository;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ChapterRepository;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ReviewRepository;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.TopicRepository;
+import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Component
 public class CertificateCourseDataMapper {
@@ -17,6 +31,10 @@ public class CertificateCourseDataMapper {
                 .avgRating(createCertificateCourseCommand.getAvgRating())
                 .startTime(createCertificateCourseCommand.getStartTime())
                 .endTime(createCertificateCourseCommand.getEndTime())
+                .topics(new ArrayList<>())
+                .chapters(new ArrayList<>())
+                .reviews(new ArrayList<>())
+                .registeredUsers(new ArrayList<>())
                 .isDeleted(false)
                 .createdBy(new UserId(createCertificateCourseCommand.getCreatedBy()))
                 .updatedBy(new UserId(createCertificateCourseCommand.getUpdatedBy()))
