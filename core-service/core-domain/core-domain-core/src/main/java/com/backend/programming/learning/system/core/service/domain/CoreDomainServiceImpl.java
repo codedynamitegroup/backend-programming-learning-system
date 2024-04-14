@@ -65,4 +65,16 @@ public class CoreDomainServiceImpl implements CoreDomainService {
         contest.initializeContest();
         log.info("Contest created with id: {}", contest.getId().getValue());
     }
+
+    @Override
+    public void createNotification(Notification notification) {
+        notification.initializeNotification();
+        log.info("Notification created with id: {}", notification.getId().getValue());
+    }
+
+    @Override
+    public void createChapter(Chapter chapter) {
+        chapter.initializeChapter();
+        log.info("Chapter created with id: {}", chapter.getId().getValue());
+    }
 }
