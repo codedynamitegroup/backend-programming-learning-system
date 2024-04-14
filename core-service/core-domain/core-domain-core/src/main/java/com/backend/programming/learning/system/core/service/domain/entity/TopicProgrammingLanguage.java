@@ -7,13 +7,13 @@ import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 
 public class TopicProgrammingLanguage extends AggregateRoot<TopicProgrammingLanguageId> {
-    private TopicId topicId;
-    private ProgrammingLanguageId programmingLanguageId;
+    private Topic topic;
+    private ProgrammingLanguage programmingLanguage;
 
     private TopicProgrammingLanguage(Builder builder) {
         super.setId(builder.topicProgrammingLanguageId);
-        topicId = builder.topicId;
-        programmingLanguageId = builder.programmingLanguageId;
+        topic = builder.topic;
+        programmingLanguage = builder.programmingLanguage;
     }
 
     public static Builder builder() {
@@ -21,18 +21,18 @@ public class TopicProgrammingLanguage extends AggregateRoot<TopicProgrammingLang
     }
 
 
-    public TopicId getTopicId() {
-        return topicId;
+    public Topic getTopic() {
+        return topic;
     }
 
-    public ProgrammingLanguageId getProgrammingLanguageId() {
-        return programmingLanguageId;
+    public ProgrammingLanguage getProgrammingLanguage() {
+        return programmingLanguage;
     }
 
     public static final class Builder {
         private TopicProgrammingLanguageId topicProgrammingLanguageId;
-        private TopicId topicId;
-        private ProgrammingLanguageId programmingLanguageId;
+        private Topic topic;
+        private ProgrammingLanguage programmingLanguage;
 
         private Builder() {
         }
@@ -42,13 +42,13 @@ public class TopicProgrammingLanguage extends AggregateRoot<TopicProgrammingLang
             return this;
         }
 
-        public Builder topicId(TopicId val) {
-            topicId = val;
+        public Builder topic(Topic val) {
+            topic = val;
             return this;
         }
 
-        public Builder programmingLanguageId(ProgrammingLanguageId val) {
-            programmingLanguageId = val;
+        public Builder programmingLanguage(ProgrammingLanguage val) {
+            programmingLanguage = val;
             return this;
         }
 

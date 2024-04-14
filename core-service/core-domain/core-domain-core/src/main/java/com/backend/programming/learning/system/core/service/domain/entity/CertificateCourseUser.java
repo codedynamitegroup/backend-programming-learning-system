@@ -12,25 +12,29 @@ import java.util.UUID;
 public class CertificateCourseUser extends AggregateRoot<CertificateCourseUserId> {
     private CertificateCourse certificateCourse;
     private User user;
-    private ZonedDateTime startTime;
     private Boolean isCompleted;
     private ZonedDateTime completedAt;
-
-    public void initializeCertificateCourseUser() {
-        setId(new CertificateCourseUserId(UUID.randomUUID()));
-    }
+    private ZonedDateTime createdAt;
+    private ZonedDateTime updatedAt;
 
     private CertificateCourseUser(Builder builder) {
         super.setId(builder.certificateCourseUserId);
         certificateCourse = builder.certificateCourse;
         user = builder.user;
-        startTime = builder.startTime;
         isCompleted = builder.isCompleted;
         completedAt = builder.completedAt;
+        createdAt = builder.createdAt;
+        updatedAt = builder.updatedAt;
     }
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    public void initializeCertificateCourseUser() {
+        setId(new CertificateCourseUserId(UUID.randomUUID()));
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
     }
 
 
@@ -42,10 +46,6 @@ public class CertificateCourseUser extends AggregateRoot<CertificateCourseUserId
         return user;
     }
 
-    public ZonedDateTime getStartTime() {
-        return startTime;
-    }
-
     public Boolean getCompleted() {
         return isCompleted;
     }
@@ -54,13 +54,22 @@ public class CertificateCourseUser extends AggregateRoot<CertificateCourseUserId
         return completedAt;
     }
 
+    public ZonedDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public ZonedDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
     public static final class Builder {
         private CertificateCourseUserId certificateCourseUserId;
         private CertificateCourse certificateCourse;
         private User user;
-        private ZonedDateTime startTime;
         private Boolean isCompleted;
         private ZonedDateTime completedAt;
+        private ZonedDateTime createdAt;
+        private ZonedDateTime updatedAt;
 
         private Builder() {
         }
@@ -80,11 +89,6 @@ public class CertificateCourseUser extends AggregateRoot<CertificateCourseUserId
             return this;
         }
 
-        public Builder startTime(ZonedDateTime val) {
-            startTime = val;
-            return this;
-        }
-
         public Builder isCompleted(Boolean val) {
             isCompleted = val;
             return this;
@@ -92,6 +96,16 @@ public class CertificateCourseUser extends AggregateRoot<CertificateCourseUserId
 
         public Builder completedAt(ZonedDateTime val) {
             completedAt = val;
+            return this;
+        }
+
+        public Builder createdAt(ZonedDateTime val) {
+            createdAt = val;
+            return this;
+        }
+
+        public Builder updatedAt(ZonedDateTime val) {
+            updatedAt = val;
             return this;
         }
 

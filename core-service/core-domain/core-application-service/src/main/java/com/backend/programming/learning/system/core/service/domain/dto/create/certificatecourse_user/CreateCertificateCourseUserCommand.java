@@ -16,6 +16,4 @@ public class CreateCertificateCourseUserCommand {
     private final UUID certificateCourseId;
     @NotNull
     private final UUID userId;
-    @NotNull
-    private final ZonedDateTime startTime;
 }
