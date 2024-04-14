@@ -22,7 +22,7 @@ public class CreateCertificateCourseCommand {
     private final Float avgRating;
 
     @NotNull
-    private final List<UUID> topicIds;
+    private final UUID topicId;
 
     @NotNull
     private final ZonedDateTime startTime;

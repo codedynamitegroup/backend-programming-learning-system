@@ -1,15 +1,10 @@
 package com.backend.programming.learning.system.core.service.domain.entity;
 
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseProgrammingLanguageId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseTopicId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
-import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
-import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.UUID;
 
 public class CertificateCourseTopic extends AggregateRoot<CertificateCourseTopicId> {

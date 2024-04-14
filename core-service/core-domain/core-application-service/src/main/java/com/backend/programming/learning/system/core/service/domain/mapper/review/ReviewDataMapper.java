@@ -7,19 +7,34 @@ import com.backend.programming.learning.system.core.service.domain.dto.create.re
 import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
+import com.backend.programming.learning.system.core.service.domain.entity.User;
+import com.backend.programming.learning.system.core.service.domain.exception.TopicNotFoundException;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ReviewDataMapper {
+    private final UserRepository userRepository;
+
+    public ReviewDataMapper(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     public Review createReviewCommandToReview(CreateReviewCommand createReviewCommand) {
+        User createdBy = userRepository.findUser(new UserId(createReviewCommand.getCreatedBy()).getValue())
+                .orElseThrow(() -> new TopicNotFoundException("User not found with id: " +
+                        createReviewCommand.getCreatedBy()));
+        User updatedBy = userRepository.findUser(new UserId(createReviewCommand.getUpdatedBy()).getValue())
+                .orElseThrow(() -> new TopicNotFoundException("User not found with id: " +
+                        createReviewCommand.getUpdatedBy()));
         return Review.builder()
                 .certificateCourseId(new CertificateCourseId(createReviewCommand.getCertificateCourseId()))
                 .rating(createReviewCommand.getRating())
                 .content(createReviewCommand.getContent())
-                .createdBy(new UserId(createReviewCommand.getCreatedBy()))
-                .updatedBy(new UserId(createReviewCommand.getUpdatedBy()))
+                .createdBy(createdBy)
+                .updatedBy(updatedBy)
                 .build();
     }
 

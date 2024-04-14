@@ -2,7 +2,9 @@ package com.backend.programming.learning.system.core.service.application.rest;
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse.CreateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse.CreateCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.create.chapter.CreateChapterCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.chapter.CreateChapterResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.create.contest.CreateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.create.notification.CreateNotificationCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseResponse;
@@ -26,8 +28,13 @@ public class ChapterController {
 
     @PostMapping("/create")
     public ResponseEntity<CreateChapterResponse> createChapter(
-            @RequestBody CreateNotificationCommand createNotificationCommand) {
-        return null;
+            @RequestBody CreateChapterCommand createChapterCommand) {
+        log.info("Creating chapter: {}", createChapterCommand);
+        CreateChapterResponse createChapterResponse =
+                chapterApplicationService.createChapter(createChapterCommand);
+        log.info("Chapter created: {}", createChapterResponse);
+
+        return ResponseEntity.ok(createChapterResponse);
     }
 
 }

@@ -1,12 +1,10 @@
 package com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.mapper;
 
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_topic.entity.CertificateCourseTopicEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.chapter.entity.ChapterEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter.mapper.ChapterDataAccessMapper;
-import com.backend.programming.learning.system.core.service.dataaccess.review.entity.ReviewEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.review.mapper.ReviewDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.topic.entity.TopicEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.topic.mapper.TopicDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.topic.repository.TopicJpaRepository;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
@@ -15,8 +13,6 @@ import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.exception.TopicNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -25,18 +21,24 @@ import java.util.List;
 @Component
 public class CertificateCourseDataAccessMapper {
     private final UserJpaRepository userJpaRepository;
+    private final TopicJpaRepository topicJpaRepository;
     private final ReviewDataAccessMapper reviewDataAccessMapper;
     private final ChapterDataAccessMapper chapterDataAccessMapper;
     private final UserDataAccessMapper userDataAccessMapper;
+    private final TopicDataAccessMapper topicDataAccessMapper;
 
     public CertificateCourseDataAccessMapper(UserJpaRepository userJpaRepository,
+                                             TopicJpaRepository topicJpaRepository,
                                              ReviewDataAccessMapper reviewDataAccessMapper,
                                              ChapterDataAccessMapper chapterDataAccessMapper,
-                                             UserDataAccessMapper userDataAccessMapper) {
+                                             UserDataAccessMapper userDataAccessMapper,
+                                             TopicDataAccessMapper topicDataAccessMapper) {
         this.userJpaRepository = userJpaRepository;
+        this.topicJpaRepository = topicJpaRepository;
         this.reviewDataAccessMapper = reviewDataAccessMapper;
         this.chapterDataAccessMapper = chapterDataAccessMapper;
         this.userDataAccessMapper = userDataAccessMapper;
+        this.topicDataAccessMapper = topicDataAccessMapper;
     }
 
     public CertificateCourseEntity certificateCourseToCertificateCourseEntity(CertificateCourse certificateCourse) {
@@ -50,6 +52,11 @@ public class CertificateCourseDataAccessMapper {
                 .orElseThrow(() -> new UserNotFoundException("User with id: " +
                         certificateCourse.getUpdatedBy().getId().getValue() + " could not be found!")
                 );
+        TopicEntity topic = topicJpaRepository
+                .findById(certificateCourse.getTopic().getId().getValue())
+                .orElseThrow(() -> new TopicNotFoundException("Topic with id: " +
+                        certificateCourse.getTopic().getId().getValue() + " could not be found!")
+                );
 
         return CertificateCourseEntity.builder()
                 .id(certificateCourse.getId().getValue())
@@ -57,7 +64,7 @@ public class CertificateCourseDataAccessMapper {
                 .description(certificateCourse.getDescription())
                 .skillLevel(certificateCourse.getSkillLevel())
                 .avgRating(certificateCourse.getAvgRating())
-                .certificateCourseTopics(new ArrayList<>())
+                .topic(topic)
                 .certificateCourseUsers(new ArrayList<>())
                 .reviews(new ArrayList<>())
                 .chapters(new ArrayList<>())
@@ -75,6 +82,7 @@ public class CertificateCourseDataAccessMapper {
             CertificateCourseEntity certificateCourseEntity) {
         User createdBy = userDataAccessMapper.userEntityToUser(certificateCourseEntity.getCreatedBy());
         User updatedBy = userDataAccessMapper.userEntityToUser(certificateCourseEntity.getUpdatedBy());
+        Topic topic = topicDataAccessMapper.topicEntityToTopic(certificateCourseEntity.getTopic());
 
         return CertificateCourse.builder()
                 .id(new CertificateCourseId(certificateCourseEntity.getId()))
@@ -82,7 +90,7 @@ public class CertificateCourseDataAccessMapper {
                 .description(certificateCourseEntity.getDescription())
                 .skillLevel(certificateCourseEntity.getSkillLevel())
                 .avgRating(certificateCourseEntity.getAvgRating())
-                .topics(new ArrayList<>())
+                .topic(topic)
                 .reviews(new ArrayList<>())
                 .chapters(new ArrayList<>())
                 .registeredUsers(new ArrayList<>())

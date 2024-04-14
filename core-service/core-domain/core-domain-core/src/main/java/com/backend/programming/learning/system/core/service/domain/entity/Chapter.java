@@ -18,8 +18,8 @@ public class Chapter extends BaseEntity<ChapterId> {
     private String title;
     private String description;
     private final List<Question> questions;
-    private final UserId createdBy;
-    private UserId updatedBy;
+    private final User createdBy;
+    private User updatedBy;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
@@ -36,15 +36,16 @@ public class Chapter extends BaseEntity<ChapterId> {
         updatedAt = builder.updatedAt;
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public void initializeChapter() {
         setId(new ChapterId(UUID.randomUUID()));
         createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
         updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
     }
 
-    public static Builder builder() {
-        return new Builder();
-    }
 
     public CertificateCourseId getCertificateCourseId() {
         return certificateCourseId;
@@ -66,11 +67,11 @@ public class Chapter extends BaseEntity<ChapterId> {
         return questions;
     }
 
-    public UserId getCreatedBy() {
+    public User getCreatedBy() {
         return createdBy;
     }
 
-    public UserId getUpdatedBy() {
+    public User getUpdatedBy() {
         return updatedBy;
     }
 
@@ -89,8 +90,8 @@ public class Chapter extends BaseEntity<ChapterId> {
         private String title;
         private String description;
         private List<Question> questions;
-        private UserId createdBy;
-        private UserId updatedBy;
+        private User createdBy;
+        private User updatedBy;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
 
@@ -127,12 +128,12 @@ public class Chapter extends BaseEntity<ChapterId> {
             return this;
         }
 
-        public Builder createdBy(UserId val) {
+        public Builder createdBy(User val) {
             createdBy = val;
             return this;
         }
 
-        public Builder updatedBy(UserId val) {
+        public Builder updatedBy(User val) {
             updatedBy = val;
             return this;
         }

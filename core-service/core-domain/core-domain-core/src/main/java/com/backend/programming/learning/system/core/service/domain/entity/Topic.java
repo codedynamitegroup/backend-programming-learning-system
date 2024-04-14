@@ -13,8 +13,8 @@ import java.util.UUID;
 public class Topic extends AggregateRoot<TopicId> {
     private String name;
     private String description;
-    private final UserId createdBy;
-    private UserId updatedBy;
+    private final User createdBy;
+    private User updatedBy;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
@@ -46,11 +46,11 @@ public class Topic extends AggregateRoot<TopicId> {
         return description;
     }
 
-    public UserId getCreatedBy() {
+    public User getCreatedBy() {
         return createdBy;
     }
 
-    public UserId getUpdatedBy() {
+    public User getUpdatedBy() {
         return updatedBy;
     }
 
@@ -67,8 +67,8 @@ public class Topic extends AggregateRoot<TopicId> {
         private TopicId topicId;
         private String name;
         private String description;
-        private UserId createdBy;
-        private UserId updatedBy;
+        private User createdBy;
+        private User updatedBy;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
 
@@ -90,12 +90,12 @@ public class Topic extends AggregateRoot<TopicId> {
             return this;
         }
 
-        public Builder createdBy(UserId val) {
+        public Builder createdBy(User val) {
             createdBy = val;
             return this;
         }
 
-        public Builder updatedBy(UserId val) {
+        public Builder updatedBy(User val) {
             updatedBy = val;
             return this;
         }
