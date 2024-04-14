@@ -49,47 +49,4 @@ public class QuestionDataMapper {
                 .message(message)
                 .build();
     }
-
-//
-//    public QtypeShortAnswerQuestion createQuestionCommandToQtypeShortAnswerQuestion(CreateQuestionCommand createQuestionCommand,
-//                                                                                    QuestionId questionId) {
-//        return QtypeShortAnswerQuestion.builder()
-//                .questionId(questionId)
-//                .caseSensitive(createQuestionCommand.getCaseSensitive())
-//                .build();
-//    }
-//
-//    public QtypeEssayQuestion createQuestionCommandToQtypeEssayQuestion(CreateQuestionCommand createQuestionCommand,
-//                                                                        QuestionId questionId) {
-//        return QtypeEssayQuestion.builder()
-//                .questionId(questionId)
-//                .responseFormat(createQuestionCommand.getResponseFormat())
-//                .responseRequired(createQuestionCommand.getResponseRequired())
-//                .responseFieldLines(createQuestionCommand.getResponseFieldLines())
-//                .minWordLimit(createQuestionCommand.getMinWordLimit())
-//                .maxWordLimit(createQuestionCommand.getMaxWordLimit())
-//                .attachments(createQuestionCommand.getAttachments())
-//                .attachmentsRequired(createQuestionCommand.getAttachmentsRequired())
-//                .graderInfo(createQuestionCommand.getGraderInfo())
-//                .graderInfoFormat(createQuestionCommand.getGraderInfoFormat())
-//                .responseTemplate(createQuestionCommand.getResponseTemplate())
-//                .maxBytes(createQuestionCommand.getMaxBytes())
-//                .fileTypesList(createQuestionCommand.getFileTypesList())
-//                .build();
-//    }
-//
-//    public QtypeMultiChoiceQuestion createQuestionCommandToQtypeMultiChoiceQuestion(CreateQuestionCommand createQuestionCommand,
-//                                                                                    QuestionId questionId) {
-//        return QtypeMultiChoiceQuestion.builder()
-//                .questionId(questionId)
-//                .single(createQuestionCommand.getSingle())
-//                .shuffleAnswers(createQuestionCommand.getShuffleAnswers())
-//                .correctFeedback(createQuestionCommand.getCorrectFeedback())
-//                .partiallyCorrectFeedback(createQuestionCommand.getPartiallyCorrectFeedback())
-//                .incorrectFeedback(createQuestionCommand.getIncorrectFeedback())
-//                .answerNumbering(createQuestionCommand.getAnswerNumbering())
-//                .showNumCorrect(createQuestionCommand.getShowNumCorrect())
-//                .showStandardInstructions(createQuestionCommand.getShowStandardInstructions())
-//                .build();
-//    }
 }

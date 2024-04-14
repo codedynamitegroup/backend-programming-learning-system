@@ -4,10 +4,12 @@ import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.QtypeMultiChoiceQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 
+import java.util.UUID;
+
 public class QtypeMultiChoiceQuestion extends BaseEntity<QtypeMultiChoiceQuestionId> {
     private final QuestionId questionId;
-    private final Integer single;
-    private final Integer shuffleAnswers;
+    private final Boolean single;
+    private final Boolean shuffleAnswers;
     private final String correctFeedback;
     private final String partiallyCorrectFeedback;
     private final String incorrectFeedback;
@@ -20,11 +22,11 @@ public class QtypeMultiChoiceQuestion extends BaseEntity<QtypeMultiChoiceQuestio
         return questionId;
     }
 
-    public Integer getSingle() {
+    public Boolean getSingle() {
         return single;
     }
 
-    public Integer getShuffleAnswers() {
+    public Boolean getShuffleAnswers() {
         return shuffleAnswers;
     }
 
@@ -70,11 +72,15 @@ public class QtypeMultiChoiceQuestion extends BaseEntity<QtypeMultiChoiceQuestio
         return new Builder();
     }
 
+    public void initQtypeMultipleChoiceQuestion() {
+        setId(new QtypeMultiChoiceQuestionId(UUID.randomUUID()));
+    }
+
     public static final class Builder {
         private QtypeMultiChoiceQuestionId qtypeMultiChoiceQuestionId;
         private QuestionId questionId;
-        private Integer single;
-        private Integer shuffleAnswers;
+        private Boolean single;
+        private Boolean shuffleAnswers;
         private String correctFeedback;
         private String partiallyCorrectFeedback;
         private String incorrectFeedback;
@@ -95,12 +101,12 @@ public class QtypeMultiChoiceQuestion extends BaseEntity<QtypeMultiChoiceQuestio
             return this;
         }
 
-        public Builder single(Integer val) {
+        public Builder single(Boolean val) {
             single = val;
             return this;
         }
 
-        public Builder shuffleAnswers(Integer val) {
+        public Builder shuffleAnswers(Boolean val) {
             shuffleAnswers = val;
             return this;
         }

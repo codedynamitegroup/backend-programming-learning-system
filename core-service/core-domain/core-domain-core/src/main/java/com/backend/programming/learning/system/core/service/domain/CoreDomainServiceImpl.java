@@ -31,6 +31,18 @@ public class CoreDomainServiceImpl implements CoreDomainService {
     }
 
     @Override
+    public void createQtypeShortAnswerQuestion(QtypeShortAnswerQuestion qtypeEssayQuestion) {
+        qtypeEssayQuestion.initQtypeShortAnswerQuestion();
+        log.info("Qtype short answer question created with id: {}", qtypeEssayQuestion.getId().getValue());
+    }
+
+    @Override
+    public void createQtypeMultipleChoiceQuestion(QtypeMultiChoiceQuestion qtypeMultipleChoiceQuestion) {
+        qtypeMultipleChoiceQuestion.initQtypeMultipleChoiceQuestion();
+        log.info("Qtype multiple choice question created with id: {}", qtypeMultipleChoiceQuestion.getId().getValue());
+    }
+
+    @Override
     public void createCertificateCourse(CertificateCourse certificateCourse) {
         certificateCourse.initializeCertificateCourse();
         log.info("Certificate course created with id: {}", certificateCourse.getId().getValue());

@@ -254,7 +254,7 @@ CREATE TABLE "public".question
     name text NOT NULL,
     question_text text NOT NULL,
     general_feedback text NOT NULL,
-    default_mark numeric(2,2) NOT NULL,
+    default_mark numeric(5,2) NOT NULL,
     qtype qtype NOT NULL,
     created_by uuid NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
