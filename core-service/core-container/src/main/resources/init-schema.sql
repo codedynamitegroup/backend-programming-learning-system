@@ -117,9 +117,10 @@ CREATE TABLE "public".certificate_course_user
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
     certificate_course_id uuid NOT NULL,
     user_id uuid NOT NULL,
-    start_time TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     is_completed bool DEFAULT FALSE,
     completed_at TIMESTAMP WITH TIME ZONE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT certificate_course_user_pkey PRIMARY KEY (id),
     CONSTRAINT certificate_course_user_certificate_course_id_fkey FOREIGN KEY (certificate_course_id)
         REFERENCES "public".certificate_course (id) MATCH SIMPLE
@@ -224,6 +225,8 @@ CREATE TABLE "public".contest_user
     user_id uuid NOT NULL,
     is_completed bool DEFAULT FALSE NOT NULL,
     completed_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT contest_user_pkey PRIMARY KEY (id),
     CONSTRAINT contest_user_contest_id_fkey FOREIGN KEY (contest_id)
         REFERENCES "public".contest (id) MATCH SIMPLE

@@ -19,8 +19,7 @@ public class TopicProgrammingLanguageRepositoryImpl implements TopicProgrammingL
     }
 
     @Override
-    public TopicProgrammingLanguage saveCertificateCourseProgrammingLanguage(
-            TopicProgrammingLanguage topicProgrammingLanguage) {
+    public TopicProgrammingLanguage saveTopicProgrammingLanguage(TopicProgrammingLanguage topicProgrammingLanguage) {
         return topicProgrammingLanguageDataAccessMapper.
                 topicProgrammingLanguageEntityToTopicProgrammingLanguage(
                 topicProgrammingLanguageJpaRepository

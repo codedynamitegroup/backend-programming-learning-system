@@ -27,7 +27,6 @@ public class CertificateCourseUserDataMapper {
                 .user(User.builder()
                         .id(new UserId(createCertificateCourseUserCommand.getUserId()))
                         .build())
-                .startTime(createCertificateCourseUserCommand.getStartTime())
                 .isCompleted(false)
                 .build();
     }

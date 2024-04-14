@@ -1,7 +1,11 @@
 package com.backend.programming.learning.system.core.service.application.rest;
 
+import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse_user.CreateCertificateCourseUserCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse_user.CreateCertificateCourseUserResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.create.contest.CreateContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.contest.CreateContestResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.create.contest_user.CreateContestUserCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.create.contest_user.CreateContestUserResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest.ContestApplicationService;
@@ -32,6 +36,12 @@ public class ContestController {
         log.info("Contest created: {}", createContestResponse);
 
         return ResponseEntity.ok(createContestResponse);
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<CreateContestUserResponse> registerContest(
+            @RequestBody CreateContestUserCommand createContestUserCommand) {
+        return null;
     }
 
 }

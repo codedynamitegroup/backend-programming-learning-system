@@ -29,9 +29,10 @@ public class CertificateCourseUserEntity {
     @JoinColumn(name = "certificate_course_id", referencedColumnName = "id")
     private CertificateCourseEntity certificateCourse;
 
-    private ZonedDateTime startTime;
     private Boolean isCompleted;
     private ZonedDateTime completedAt;
+    private ZonedDateTime createdAt;
+    private ZonedDateTime updatedAt;
 
     @Override
     public boolean equals(Object o) {
