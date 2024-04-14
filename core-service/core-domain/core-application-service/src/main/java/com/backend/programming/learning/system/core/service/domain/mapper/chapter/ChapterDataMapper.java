@@ -14,25 +14,20 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ChapterDataMapper {
-    private final UserRepository userRepository;
-
-    public ChapterDataMapper(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     public Chapter createChapterCommandToChapter(CreateChapterCommand createChapterCommand) {
-        User createdBy = userRepository.findUser(new UserId(createChapterCommand.getCreatedBy()).getValue())
-                .orElseThrow(() -> new TopicNotFoundException("User not found with id: " +
-                        createChapterCommand.getCreatedBy()));
-        User updatedBy = userRepository.findUser(new UserId(createChapterCommand.getUpdatedBy()).getValue())
-                .orElseThrow(() -> new TopicNotFoundException("User not found with id: " +
-                        createChapterCommand.getUpdatedBy()));
         return Chapter.builder()
                 .no(createChapterCommand.getNo())
                 .title(createChapterCommand.getTitle())
                 .description(createChapterCommand.getDescription())
-                .createdBy(createdBy)
-                .updatedBy(updatedBy)
+                .createdBy(User
+                        .builder()
+                        .id(new UserId(createChapterCommand.getCreatedBy()))
+                        .build())
+                .updatedBy(User
+                        .builder()
+                        .id(new UserId(createChapterCommand.getUpdatedBy()))
+                        .build())
                 .build();
     }
 

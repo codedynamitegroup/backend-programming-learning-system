@@ -15,26 +15,21 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ContestDataMapper {
-    private final UserRepository userRepository;
-
-    public ContestDataMapper(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     public Contest createContestCommandToContest(CreateContestCommand createContestCommand) {
-        User createdBy = userRepository.findUser(new UserId(createContestCommand.getCreatedBy()).getValue())
-                .orElseThrow(() -> new TopicNotFoundException("User not found with id: " +
-                        createContestCommand.getCreatedBy()));
-        User updatedBy = userRepository.findUser(new UserId(createContestCommand.getUpdatedBy()).getValue())
-                .orElseThrow(() -> new TopicNotFoundException("User not found with id: " +
-                        createContestCommand.getUpdatedBy()));
         return Contest.builder()
                 .name(createContestCommand.getName())
                 .description(createContestCommand.getDescription())
                 .startTime(createContestCommand.getStartTime())
                 .endTime(createContestCommand.getEndTime())
-                .createdBy(createdBy)
-                .updatedBy(updatedBy)
+                .createdBy(User
+                        .builder()
+                        .id(new UserId(createContestCommand.getCreatedBy()))
+                        .build())
+                .updatedBy(User
+                        .builder()
+                        .id(new UserId(createContestCommand.getUpdatedBy()))
+                        .build())
                 .build();
     }
 

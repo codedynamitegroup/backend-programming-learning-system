@@ -15,24 +15,19 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TopicDataMapper {
-    private final UserRepository userRepository;
-
-    public TopicDataMapper(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     public Topic createTopicCommandToTopic(CreateTopicCommand createTopicCommand) {
-        User createdBy = userRepository.findUser(new UserId(createTopicCommand.getCreatedBy()).getValue())
-                .orElseThrow(() -> new TopicNotFoundException("User not found with id: " +
-                        createTopicCommand.getCreatedBy()));
-        User updatedBy = userRepository.findUser(new UserId(createTopicCommand.getUpdatedBy()).getValue())
-                .orElseThrow(() -> new TopicNotFoundException("User not found with id: " +
-                        createTopicCommand.getUpdatedBy()));
         return Topic.builder()
                 .name(createTopicCommand.getName())
                 .description(createTopicCommand.getDescription())
-                .createdBy(createdBy)
-                .updatedBy(updatedBy)
+                .createdBy(User
+                        .builder()
+                        .id(new UserId(createTopicCommand.getCreatedBy()))
+                        .build())
+                .updatedBy(User
+                        .builder()
+                        .id(new UserId(createTopicCommand.getUpdatedBy()))
+                        .build())
                 .build();
     }
 
