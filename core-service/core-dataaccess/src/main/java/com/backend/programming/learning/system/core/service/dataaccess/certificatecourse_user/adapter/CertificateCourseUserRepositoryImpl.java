@@ -12,7 +12,8 @@ public class CertificateCourseUserRepositoryImpl implements CertificateCourseUse
     private final CertificateCourseUserJpaRepository certificateCourseUserJpaRepository;
     private final CertificateCourseUserDataAccessMapper certificateCourseUserDataAccessMapper;
 
-    public CertificateCourseUserRepositoryImpl(CertificateCourseUserJpaRepository certificateCourseUserJpaRepository, CertificateCourseUserDataAccessMapper certificateCourseUserDataAccessMapper) {
+    public CertificateCourseUserRepositoryImpl(CertificateCourseUserJpaRepository certificateCourseUserJpaRepository,
+                                               CertificateCourseUserDataAccessMapper certificateCourseUserDataAccessMapper) {
         this.certificateCourseUserJpaRepository = certificateCourseUserJpaRepository;
         this.certificateCourseUserDataAccessMapper = certificateCourseUserDataAccessMapper;
     }
@@ -22,7 +23,8 @@ public class CertificateCourseUserRepositoryImpl implements CertificateCourseUse
         return certificateCourseUserDataAccessMapper.
             certificateCourseUserEntityToCertificateCourseUser(
                 certificateCourseUserJpaRepository.save(
-                        certificateCourseUserDataAccessMapper.certificateCourseUserToCertificateCourseUserEntity(certificateCourseUser)
+                        certificateCourseUserDataAccessMapper.
+                                certificateCourseUserToCertificateCourseUserEntity(certificateCourseUser)
                 )
             );
     }
