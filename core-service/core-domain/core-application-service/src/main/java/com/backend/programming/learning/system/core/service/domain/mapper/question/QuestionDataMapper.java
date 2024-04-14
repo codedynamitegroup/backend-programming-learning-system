@@ -20,14 +20,23 @@ public class QuestionDataMapper {
     // create question command to question
     public Question createQuestionCommandToQuestion(CreateQuestionCommand createQuestionCommand) {
         return Question.builder()
-                .organizationId(new OrganizationId(createQuestionCommand.getOrganizationId()))
+                .organization(Organization
+                        .builder()
+                        .organizationId(new OrganizationId(createQuestionCommand.getOrganizationId()))
+                        .build())
                 .name(createQuestionCommand.getName())
                 .questionText(createQuestionCommand.getQuestionText())
                 .generalFeedback(createQuestionCommand.getGeneralFeedback())
                 .defaultMark(createQuestionCommand.getDefaultMark().floatValue())
                 .difficulty(QuestionDifficulty.valueOf(createQuestionCommand.getDifficulty()))
-                .createdBy(new UserId(createQuestionCommand.getCreatedBy()))
-                .updatedBy(new UserId(createQuestionCommand.getCreatedBy()))
+                .createdBy(User
+                        .builder()
+                        .id(new UserId(createQuestionCommand.getCreatedBy()))
+                        .build())
+                .updatedBy(User
+                        .builder()
+                        .id(new UserId(createQuestionCommand.getCreatedBy()))
+                        .build())
                 .qtype(QuestionType.valueOf(createQuestionCommand.getQType()))
                 .createdAt(ZonedDateTime.now())
                 .updatedAt(ZonedDateTime.now())
@@ -39,13 +48,6 @@ public class QuestionDataMapper {
         return CreateQuestionResponse.builder()
                 .questionId(question.getId())
                 .message(message)
-                .build();
-    }
-
-    // query question by id command to question
-    public Question queryQuestionByIdCommandToQuestion(QueryQuestionByIdCommand queryQuestionByIdCommand) {
-        return Question.builder()
-
                 .build();
     }
 

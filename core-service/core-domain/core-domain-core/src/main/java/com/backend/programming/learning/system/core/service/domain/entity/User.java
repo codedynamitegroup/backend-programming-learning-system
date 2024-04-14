@@ -13,7 +13,6 @@ import java.util.List;
  ************************************/
 
 public class User extends AggregateRoot<UserId> {
-    private final String name;
     private final String email;
     private final String firstName;
     private final String lastName;
@@ -25,7 +24,6 @@ public class User extends AggregateRoot<UserId> {
 
     private User(Builder builder) {
         super.setId(builder.userId);
-        name = builder.name;
         email = builder.email;
         firstName = builder.firstName;
         lastName = builder.lastName;
@@ -38,11 +36,6 @@ public class User extends AggregateRoot<UserId> {
 
     public static Builder builder() {
         return new Builder();
-    }
-
-
-    public String getName() {
-        return name;
     }
 
     public String getEmail() {
@@ -79,7 +72,6 @@ public class User extends AggregateRoot<UserId> {
 
     public static final class Builder {
         private UserId userId;
-        private String name;
         private String email;
         private String firstName;
         private String lastName;
@@ -94,11 +86,6 @@ public class User extends AggregateRoot<UserId> {
 
         public Builder id(UserId val) {
             userId = val;
-            return this;
-        }
-
-        public Builder name(String val) {
-            name = val;
             return this;
         }
 

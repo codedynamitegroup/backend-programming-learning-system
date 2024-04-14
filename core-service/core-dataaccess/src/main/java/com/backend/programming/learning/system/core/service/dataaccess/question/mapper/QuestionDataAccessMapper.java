@@ -5,7 +5,9 @@ import com.backend.programming.learning.system.core.service.dataaccess.question.
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.organization.repository.OrganizationJpaRepository;
 import com.backend.programming.learning.system.core.service.dataaccess.user.repository.UserJpaRepository;
+import com.backend.programming.learning.system.core.service.domain.entity.Organization;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
+import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.exception.OrganizationNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
@@ -28,24 +30,26 @@ public class QuestionDataAccessMapper {
 
     public QuestionEntity questionToQuestionEntity(Question question) {
         OrganizationEntity organization = organizationJpaRepository
-                .findById(question.getOrganizationId().getValue())
+                .findById(question.getOrganization().getId().getValue())
                 .orElseThrow(
                         () -> new OrganizationNotFoundException("Organization with id: " + question
-                                .getOrganizationId()
-                                .getValue() + " could not be found!")
+                                .getOrganization()
+                                .getId().getValue() + " could not be found!")
                 );
 
         UserEntity createdBy = userJpaRepository
-                .findById(question.getCreatedBy().getValue())
+                .findById(question.getCreatedBy().getId().getValue())
                 .orElseThrow(() ->
                         new UserNotFoundException("User with id: " + question
                                 .getCreatedBy()
+                                .getId()
                                 .getValue() + " could not be found!"));
         UserEntity updatedBy = userJpaRepository
-                .findById(question.getUpdatedBy().getValue())
+                .findById(question.getUpdatedBy().getId().getValue())
                 .orElseThrow(() ->
                         new UserNotFoundException("User with id: " + question
                                 .getUpdatedBy()
+                                .getId()
                                 .getValue() + " could not be found!"));
 
         return QuestionEntity.builder()
@@ -68,18 +72,41 @@ public class QuestionDataAccessMapper {
         // TODO: add failure messages
         return Question.builder()
                 .questionId(new QuestionId(questionEntity.getId()))
-                .organizationId(new OrganizationId(questionEntity.getOrganization().getId()))
+                .organization(organizationEntityToOrganization(questionEntity.getOrganization()))
                 .difficulty(questionEntity.getDifficulty())
                 .name(questionEntity.getName())
                 .questionText(questionEntity.getQuestionText())
                 .generalFeedback(questionEntity.getGeneralFeedback())
                 .defaultMark(questionEntity.getDefaultMark().floatValue())
-                .createdBy(new UserId(questionEntity.getCreatedBy().getId()))
-                .updatedBy(new UserId(questionEntity.getUpdatedBy().getId()))
+                .createdBy(userEntityToUser(questionEntity.getCreatedBy()))
+                .updatedBy(userEntityToUser(questionEntity.getCreatedBy()))
                 .qtype(questionEntity.getQtype())
                 .failureMessages(null)
                 .createdAt(questionEntity.getCreatedAt())
                 .updatedAt(questionEntity.getUpdatedAt())
+                .build();
+    }
+
+    private Organization organizationEntityToOrganization(OrganizationEntity organizationEntity) {
+        return Organization.builder()
+                .organizationId(new OrganizationId(organizationEntity.getId()))
+                .name(organizationEntity.getName())
+                .description(organizationEntity.getDescription())
+                .moodleUrl(organizationEntity.getMoodleUrl())
+                .createdAt(organizationEntity.getCreatedAt())
+                .updatedAt(organizationEntity.getUpdatedAt())
+                .build();
+    }
+
+    private User userEntityToUser(UserEntity userEntity) {
+        return User.builder()
+                .id(new UserId(userEntity.getId()))
+                .firstName(userEntity.getFirstName())
+                .lastName(userEntity.getLastName())
+                .email(userEntity.getEmail())
+                .avatarUrl(userEntity.getAvatarUrl())
+                .createdAt(userEntity.getCreatedAt())
+                .updatedAt(userEntity.getUpdatedAt())
                 .build();
     }
 }
