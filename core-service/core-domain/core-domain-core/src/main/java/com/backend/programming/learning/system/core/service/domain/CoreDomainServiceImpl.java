@@ -13,7 +13,7 @@ public class CoreDomainServiceImpl implements CoreDomainService {
     public QuestionCreatedEvent createQuestion(Question question) {
         question.initializeQuestion();
 
-        log.info("Question created with id: {}", question.getId().getValue());
+        log.info("Question initialized with id: {}", question.getId().getValue());
 
         return new QuestionCreatedEvent(question, ZonedDateTime.now(ZoneId.of("UTC")));
     }

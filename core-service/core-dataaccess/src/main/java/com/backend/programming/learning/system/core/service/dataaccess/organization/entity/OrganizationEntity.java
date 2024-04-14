@@ -1,9 +1,11 @@
 package com.backend.programming.learning.system.core.service.dataaccess.organization.entity;
 
-import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 

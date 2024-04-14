@@ -23,7 +23,9 @@ public class QuestionQueryHelper {
     }
 
     public QueryQuestionResponse queryQuestionById(UUID questionId) {
-        Question question = questionRepository.getQuestionById(questionId).orElseThrow(() ->
+        Question question = questionRepository
+                .getQuestionById(questionId)
+                .orElseThrow(() ->
                         new QuestionNotFoundException("Question with id " + questionId + " not found"));
         QueryQuestionResponse queryQuestionResponse = questionDataMapper
                 .questionToQueryQuestionResponse(question);
