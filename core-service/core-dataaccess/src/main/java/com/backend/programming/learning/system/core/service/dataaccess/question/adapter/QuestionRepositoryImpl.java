@@ -6,6 +6,9 @@ import com.backend.programming.learning.system.core.service.domain.ports.output.
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Component
 public class QuestionRepositoryImpl implements QuestionRepository {
     private final QuestionJpaRepository questionJpaRepository;
@@ -22,5 +25,11 @@ public class QuestionRepositoryImpl implements QuestionRepository {
         return questionDataAccessMapper.questionEntityToQuestion(questionJpaRepository
                 .save(questionDataAccessMapper
                         .questionToQuestionEntity(question)));
+    }
+
+    @Override
+    public Optional<Question> getQuestionById(UUID id) {
+        return questionJpaRepository.findById(id)
+                .map(questionDataAccessMapper::questionEntityToQuestion);
     }
 }

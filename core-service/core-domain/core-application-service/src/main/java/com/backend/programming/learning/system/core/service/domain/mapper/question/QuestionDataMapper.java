@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.core.service.domain.mapper.quest
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQuestionByIdCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.Organization;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
@@ -15,18 +17,7 @@ import java.time.ZonedDateTime;
 
 @Component
 public class QuestionDataMapper {
-    public User createQuestionCommandToUser(CreateQuestionCommand createQuestionCommand) {
-        return User.builder()
-                .id(new UserId(createQuestionCommand.getCreatedBy()))
-                .build();
-    }
-
-    public Organization createQuestionCommandToOrganization(CreateQuestionCommand createQuestionCommand) {
-        return Organization.builder()
-                .organizationId(new OrganizationId(createQuestionCommand.getOrganizationId()))
-                .build();
-    }
-
+    // create question command to question
     public Question createQuestionCommandToQuestion(CreateQuestionCommand createQuestionCommand) {
         return Question.builder()
                 .organizationId(new OrganizationId(createQuestionCommand.getOrganizationId()))
@@ -43,10 +34,25 @@ public class QuestionDataMapper {
                 .build();
     }
 
+    // question to create question response
     public CreateQuestionResponse questionToCreateQuestionResponse(Question question, String message) {
         return CreateQuestionResponse.builder()
                 .questionId(question.getId())
                 .message(message)
+                .build();
+    }
+
+    // query question by id command to question
+    public Question queryQuestionByIdCommandToQuestion(QueryQuestionByIdCommand queryQuestionByIdCommand) {
+        return Question.builder()
+
+                .build();
+    }
+
+    // question to query question response
+    public QueryQuestionResponse questionToQueryQuestionResponse(Question question) {
+        return QueryQuestionResponse.builder()
+                .question(question)
                 .build();
     }
 }

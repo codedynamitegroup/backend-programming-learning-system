@@ -1,13 +1,13 @@
 package com.backend.programming.learning.system.core.service.application.rest;
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.*;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QtypeCodeQuestionApplicationService;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QtypeEssayQuestionApplicationService;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QtypeMultichoiceQuestionApplicationService;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QtypeShortanswerQuestionApplicationService;
+import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -17,15 +17,18 @@ public class QuestionController {
     private final QtypeEssayQuestionApplicationService qtypeEssayQuestionApplicationService;
     private final QtypeShortanswerQuestionApplicationService qtypeShortanswerQuestionApplicationService;
     private final QtypeMultichoiceQuestionApplicationService qtypeMultichoiceQuestionApplicationService;
+    private final QuestionApplicationService questionApplicationService;
 
     public QuestionController(QtypeCodeQuestionApplicationService qtypeCodeQuestionApplicationService,
                               QtypeEssayQuestionApplicationService qtypeEssayQuestionApplicationService,
                               QtypeShortanswerQuestionApplicationService qtypeShortanswerQuestionApplicationService,
-                              QtypeMultichoiceQuestionApplicationService qtypeMultichoiceQuestionApplicationService) {
+                              QtypeMultichoiceQuestionApplicationService qtypeMultichoiceQuestionApplicationService,
+                              QuestionApplicationService questionApplicationService) {
         this.qtypeCodeQuestionApplicationService = qtypeCodeQuestionApplicationService;
         this.qtypeEssayQuestionApplicationService = qtypeEssayQuestionApplicationService;
         this.qtypeShortanswerQuestionApplicationService = qtypeShortanswerQuestionApplicationService;
         this.qtypeMultichoiceQuestionApplicationService = qtypeMultichoiceQuestionApplicationService;
+        this.questionApplicationService = questionApplicationService;
     }
 
     @PostMapping("/create/code-question")
@@ -70,5 +73,14 @@ public class QuestionController {
         log.info("Question multichoice created: {}", createQuestionResponse);
 
         return ResponseEntity.ok(createQuestionResponse);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<QueryQuestionResponse> getQuestion(@PathVariable UUID id) {
+        log.info("Getting question with id: {}", id);
+        QueryQuestionResponse queryQuestionResponse = questionApplicationService.queryQuestionById(id);
+        log.info("Question retrieved: {}", queryQuestionResponse);
+
+        return ResponseEntity.ok(queryQuestionResponse);
     }
 }
