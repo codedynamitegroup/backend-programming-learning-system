@@ -1,12 +1,16 @@
 package com.backend.programming.learning.system.core.service.domain.entity;
 
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.ReviewId;
+import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.UUID;
 
 public class Chapter extends BaseEntity<ChapterId> {
     private CertificateCourseId certificateCourseId;
@@ -16,7 +20,7 @@ public class Chapter extends BaseEntity<ChapterId> {
     private final List<Question> questions;
     private final UserId createdBy;
     private UserId updatedBy;
-    private final ZonedDateTime createdAt;
+    private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
     private Chapter(Builder builder) {
@@ -30,6 +34,12 @@ public class Chapter extends BaseEntity<ChapterId> {
         updatedBy = builder.updatedBy;
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
+    }
+
+    public void initializeChapter() {
+        setId(new ChapterId(UUID.randomUUID()));
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
     }
 
     public static Builder builder() {

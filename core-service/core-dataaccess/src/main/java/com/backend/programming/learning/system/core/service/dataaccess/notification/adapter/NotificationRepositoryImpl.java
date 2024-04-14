@@ -23,6 +23,9 @@ public class NotificationRepositoryImpl implements NotificationRepository {
 
     @Override
     public Notification saveNotification(Notification notification) {
-        return null;
+        return notificationDataAccessMapper.notificationEntityToNotification(
+                notificationJpaRepository
+                        .save(notificationDataAccessMapper
+                                .notificationToNotificationEntity(notification)));
     }
 }

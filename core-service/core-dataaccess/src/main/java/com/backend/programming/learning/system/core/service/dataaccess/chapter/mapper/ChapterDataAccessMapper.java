@@ -44,7 +44,6 @@ public class ChapterDataAccessMapper {
                         chapter.getUpdatedBy().getValue() + " could not be found!")
                 );
 
-
         return ChapterEntity.builder()
                 .id(chapter.getId().getValue())
                 .certificateCourse(certificateCourse)

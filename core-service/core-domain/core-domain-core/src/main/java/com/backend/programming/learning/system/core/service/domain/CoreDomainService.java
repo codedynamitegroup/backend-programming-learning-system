@@ -11,4 +11,6 @@ public interface CoreDomainService {
     void createReview(Review review);
     void createTopic(Topic topic);
     void createContest(Contest contest);
+    void createNotification(Notification notification);
+    void createChapter(Chapter chapter);
 }
