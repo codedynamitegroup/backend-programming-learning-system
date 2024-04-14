@@ -8,9 +8,11 @@ import com.backend.programming.learning.system.core.service.domain.entity.QtypeC
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeEssayQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeMultiChoiceQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeShortAnswerQuestion;
+import com.backend.programming.learning.system.domain.valueobject.*;
 import com.backend.programming.learning.system.domain.valueobject.QtypeCodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.QtypeEssayQuestionId;
-import com.backend.programming.learning.system.domain.valueobject.QuestionId;
+import com.backend.programming.learning.system.domain.valueobject.QtypeMultiChoiceQuestionId;
+import com.backend.programming.learning.system.domain.valueobject.QtypeShortAnswerQuestionId;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -34,6 +36,7 @@ public class QtypeQuestionDataAccessMapper {
     // short answer
     public QtypeShortanswerQuestionEntity qtypeShortanswerQuestionToQtypeShortanswerQuestionEntity(QtypeShortAnswerQuestion qtypeShortanswerQuestion) {
         return QtypeShortanswerQuestionEntity.builder()
+                .id(qtypeShortanswerQuestion.getId().getValue())
                 .questionId(qtypeShortanswerQuestion.getQuestionId().getValue())
                 .caseSensitive(qtypeShortanswerQuestion.getCaseSensitive())
                 .build();
@@ -41,6 +44,7 @@ public class QtypeQuestionDataAccessMapper {
 
     public QtypeShortAnswerQuestion qtypeShortanswerQuestionEntityToQtypeShortanswerQuestion(QtypeShortanswerQuestionEntity qtypeShortanswerQuestionEntity) {
         return QtypeShortAnswerQuestion.builder()
+                .id(new QtypeShortAnswerQuestionId(qtypeShortanswerQuestionEntity.getId()))
                 .questionId(new QuestionId(qtypeShortanswerQuestionEntity.getQuestionId()))
                 .caseSensitive(qtypeShortanswerQuestionEntity.getCaseSensitive())
                 .build();
@@ -49,6 +53,7 @@ public class QtypeQuestionDataAccessMapper {
     // multiple choice
     public QtypeMultichoiceQuestionEntity qtypeMultichoiceQuestionToQtypeMultichoiceQuestionEntity(QtypeMultiChoiceQuestion qtypeMultichoiceQuestion) {
         return QtypeMultichoiceQuestionEntity.builder()
+                .id(qtypeMultichoiceQuestion.getId().getValue())
                 .questionId(qtypeMultichoiceQuestion.getQuestionId().getValue())
                 .single(qtypeMultichoiceQuestion.getSingle())
                 .shuffleAnswers(qtypeMultichoiceQuestion.getShuffleAnswers())
@@ -63,6 +68,7 @@ public class QtypeQuestionDataAccessMapper {
 
     public QtypeMultiChoiceQuestion qtypeMultichoiceQuestionEntityToQtypeMultichoiceQuestion(QtypeMultichoiceQuestionEntity qtypeMultichoiceQuestionEntity) {
         return QtypeMultiChoiceQuestion.builder()
+                .id(new QtypeMultiChoiceQuestionId(qtypeMultichoiceQuestionEntity.getId()))
                 .questionId(new QuestionId(qtypeMultichoiceQuestionEntity.getQuestionId()))
                 .single(qtypeMultichoiceQuestionEntity.getSingle())
                 .shuffleAnswers(qtypeMultichoiceQuestionEntity.getShuffleAnswers())

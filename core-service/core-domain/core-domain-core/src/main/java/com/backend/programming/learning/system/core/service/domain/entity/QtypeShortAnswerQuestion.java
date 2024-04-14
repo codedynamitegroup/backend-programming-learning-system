@@ -4,6 +4,8 @@ import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.QtypeShortAnswerQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 
+import java.util.UUID;
+
 public class QtypeShortAnswerQuestion extends BaseEntity<QtypeShortAnswerQuestionId> {
     private final QuestionId questionId;
     private final Boolean caseSensitive;
@@ -24,6 +26,10 @@ public class QtypeShortAnswerQuestion extends BaseEntity<QtypeShortAnswerQuestio
 
     public Boolean getCaseSensitive() {
         return caseSensitive;
+    }
+
+    public void initQtypeShortAnswerQuestion() {
+        setId(new QtypeShortAnswerQuestionId(UUID.randomUUID()));
     }
 
     public static final class Builder {

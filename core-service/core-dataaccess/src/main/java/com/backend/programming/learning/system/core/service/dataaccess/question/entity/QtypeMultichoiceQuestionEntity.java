@@ -16,8 +16,8 @@ public class QtypeMultichoiceQuestionEntity {
     @Id
     private UUID id;
     private UUID questionId;
-    private Integer single;
-    private Integer shuffleAnswers;
+    private Boolean single;
+    private Boolean shuffleAnswers;
     private String correctFeedback;
     private String partiallyCorrectFeedback;
     private String incorrectFeedback;

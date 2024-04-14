@@ -6,6 +6,8 @@ import com.backend.programming.learning.system.core.service.dataaccess.user.enti
 import com.backend.programming.learning.system.core.service.dataaccess.organization.repository.OrganizationJpaRepository;
 import com.backend.programming.learning.system.core.service.dataaccess.user.repository.UserJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
+import com.backend.programming.learning.system.core.service.domain.exception.OrganizationNotFoundException;
+import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
@@ -27,14 +29,24 @@ public class QuestionDataAccessMapper {
     public QuestionEntity questionToQuestionEntity(Question question) {
         OrganizationEntity organization = organizationJpaRepository
                 .findById(question.getOrganizationId().getValue())
-                .orElseThrow();
+                .orElseThrow(
+                        () -> new OrganizationNotFoundException("Organization with id: " + question
+                                .getOrganizationId()
+                                .getValue() + " could not be found!")
+                );
 
         UserEntity createdBy = userJpaRepository
                 .findById(question.getCreatedBy().getValue())
-                .orElseThrow();
+                .orElseThrow(() ->
+                        new UserNotFoundException("User with id: " + question
+                                .getCreatedBy()
+                                .getValue() + " could not be found!"));
         UserEntity updatedBy = userJpaRepository
                 .findById(question.getUpdatedBy().getValue())
-                .orElseThrow();
+                .orElseThrow(() ->
+                        new UserNotFoundException("User with id: " + question
+                                .getUpdatedBy()
+                                .getValue() + " could not be found!"));
 
         return QuestionEntity.builder()
                 .id(question.getId().getValue())
