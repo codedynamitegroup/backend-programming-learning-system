@@ -1,25 +1,29 @@
 package com.backend.programming.learning.system.core.service.domain.entity;
 
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseTopicId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseUserId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.*;
+import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 public class CertificateCourseUser extends AggregateRoot<CertificateCourseUserId> {
-    private CertificateCourseId certificateCourseId;
-    private UserId userId;
+    private CertificateCourse certificateCourse;
+    private User user;
     private ZonedDateTime startTime;
     private Boolean isCompleted;
     private ZonedDateTime completedAt;
 
+    public void initializeCertificateCourseUser() {
+        setId(new CertificateCourseUserId(UUID.randomUUID()));
+    }
+
     private CertificateCourseUser(Builder builder) {
         super.setId(builder.certificateCourseUserId);
-        certificateCourseId = builder.certificateCourseId;
-        userId = builder.userId;
+        certificateCourse = builder.certificateCourse;
+        user = builder.user;
         startTime = builder.startTime;
         isCompleted = builder.isCompleted;
         completedAt = builder.completedAt;
@@ -30,12 +34,12 @@ public class CertificateCourseUser extends AggregateRoot<CertificateCourseUserId
     }
 
 
-    public CertificateCourseId getCertificateCourseId() {
-        return certificateCourseId;
+    public CertificateCourse getCertificateCourse() {
+        return certificateCourse;
     }
 
-    public UserId getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
     public ZonedDateTime getStartTime() {
@@ -52,8 +56,8 @@ public class CertificateCourseUser extends AggregateRoot<CertificateCourseUserId
 
     public static final class Builder {
         private CertificateCourseUserId certificateCourseUserId;
-        private CertificateCourseId certificateCourseId;
-        private UserId userId;
+        private CertificateCourse certificateCourse;
+        private User user;
         private ZonedDateTime startTime;
         private Boolean isCompleted;
         private ZonedDateTime completedAt;
@@ -66,13 +70,13 @@ public class CertificateCourseUser extends AggregateRoot<CertificateCourseUserId
             return this;
         }
 
-        public Builder certificateCourseId(CertificateCourseId val) {
-            certificateCourseId = val;
+        public Builder certificateCourse(CertificateCourse val) {
+            certificateCourse = val;
             return this;
         }
 
-        public Builder userId(UserId val) {
-            userId = val;
+        public Builder user(User val) {
+            user = val;
             return this;
         }
 

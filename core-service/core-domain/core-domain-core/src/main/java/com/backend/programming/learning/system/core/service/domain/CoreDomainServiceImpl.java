@@ -77,4 +77,10 @@ public class CoreDomainServiceImpl implements CoreDomainService {
         chapter.initializeChapter();
         log.info("Chapter created with id: {}", chapter.getId().getValue());
     }
+
+    @Override
+    public void createCertificateCourseUser(CertificateCourseUser certificateCourseUser) {
+        certificateCourseUser.initializeCertificateCourseUser();
+        log.info("Certificate course user created with id: {}", certificateCourseUser.getId().getValue());
+    }
 }

@@ -14,7 +14,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "certificate_course_programming_language")
+@Table(name = "topic_programming_language")
 @Entity
 public class TopicProgrammingLanguageEntity {
     @Id

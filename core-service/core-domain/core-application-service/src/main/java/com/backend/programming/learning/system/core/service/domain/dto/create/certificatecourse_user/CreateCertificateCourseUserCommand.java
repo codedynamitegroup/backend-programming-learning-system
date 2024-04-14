@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Getter
@@ -15,4 +16,6 @@ public class CreateCertificateCourseUserCommand {
     private final UUID certificateCourseId;
     @NotNull
     private final UUID userId;
+    @NotNull
+    private final ZonedDateTime startTime;
 }
