@@ -26,10 +26,6 @@ public class ProgrammingLanguageDataAccessMapper {
                 .compilerApiId(programmingLanguage.getCompilerApiId())
                 .timeLimit(programmingLanguage.getTimeLimit())
                 .memoryLimit(programmingLanguage.getMemoryLimit())
-                .headCode(programmingLanguage.getHeadCode())
-                .bodyCode(programmingLanguage.getBodyCode())
-                .tailCode(programmingLanguage.getTailCode())
-                .isActive(programmingLanguage.getActive())
                 .build();
     }
 
@@ -41,10 +37,6 @@ public class ProgrammingLanguageDataAccessMapper {
                 .compilerApiId(programmingLanguageEntity.getCompilerApiId())
                 .timeLimit(programmingLanguageEntity.getTimeLimit())
                 .memoryLimit(programmingLanguageEntity.getMemoryLimit())
-                .headCode(programmingLanguageEntity.getHeadCode())
-                .bodyCode(programmingLanguageEntity.getBodyCode())
-                .tailCode(programmingLanguageEntity.getTailCode())
-                .isActive(programmingLanguageEntity.getIsActive())
                 .build();
     }
 }
