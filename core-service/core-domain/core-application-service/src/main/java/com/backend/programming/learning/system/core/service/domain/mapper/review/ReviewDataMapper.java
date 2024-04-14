@@ -16,25 +16,20 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ReviewDataMapper {
-    private final UserRepository userRepository;
-
-    public ReviewDataMapper(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     public Review createReviewCommandToReview(CreateReviewCommand createReviewCommand) {
-        User createdBy = userRepository.findUser(new UserId(createReviewCommand.getCreatedBy()).getValue())
-                .orElseThrow(() -> new TopicNotFoundException("User not found with id: " +
-                        createReviewCommand.getCreatedBy()));
-        User updatedBy = userRepository.findUser(new UserId(createReviewCommand.getUpdatedBy()).getValue())
-                .orElseThrow(() -> new TopicNotFoundException("User not found with id: " +
-                        createReviewCommand.getUpdatedBy()));
         return Review.builder()
                 .certificateCourseId(new CertificateCourseId(createReviewCommand.getCertificateCourseId()))
                 .rating(createReviewCommand.getRating())
                 .content(createReviewCommand.getContent())
-                .createdBy(createdBy)
-                .updatedBy(updatedBy)
+                .createdBy(User
+                        .builder()
+                        .id(new UserId(createReviewCommand.getCreatedBy()))
+                        .build())
+                .updatedBy(User
+                        .builder()
+                        .id(new UserId(createReviewCommand.getUpdatedBy()))
+                        .build())
                 .build();
     }
 
