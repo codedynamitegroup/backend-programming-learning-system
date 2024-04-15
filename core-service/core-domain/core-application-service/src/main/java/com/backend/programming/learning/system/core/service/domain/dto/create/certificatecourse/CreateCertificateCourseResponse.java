@@ -6,13 +6,16 @@ import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
 public class CreateCertificateCourseResponse {
     @NotNull
-    private final CertificateCourse certificateCourse;
+    private final UUID certificateCourseId;
+    @NotNull
+    private final String name;
     @NotNull
     private final String message;
 }
