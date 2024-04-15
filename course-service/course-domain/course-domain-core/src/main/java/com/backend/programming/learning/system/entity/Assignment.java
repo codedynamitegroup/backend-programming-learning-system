@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.valueobject.AssignmentId;
 import com.backend.programming.learning.system.valueobject.CourseId;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 public class Assignment extends AggregateRoot<AssignmentId> {
 
@@ -14,8 +15,8 @@ public class Assignment extends AggregateRoot<AssignmentId> {
     private Float scores;
 
     private Float maxScores;
-    private final LocalDateTime time_open;
-    private LocalDateTime time_close;
+    private final ZonedDateTime time_open;
+    private ZonedDateTime time_close;
     private Integer time_limit;
     private Integer type;
     private Boolean visible;
@@ -32,6 +33,10 @@ public class Assignment extends AggregateRoot<AssignmentId> {
         time_limit = builder.time_limit;
         type = builder.type;
         visible = builder.visible;
+    }
+
+    public static Builder builder() {
+        return new Builder();
     }
 
     public CourseId getCourseId() {
@@ -54,11 +59,11 @@ public class Assignment extends AggregateRoot<AssignmentId> {
         return maxScores;
     }
 
-    public LocalDateTime getTime_open() {
+    public ZonedDateTime getTime_open() {
         return time_open;
     }
 
-    public LocalDateTime getTime_close() {
+    public ZonedDateTime getTime_close() {
         return time_close;
     }
 
@@ -87,8 +92,8 @@ public class Assignment extends AggregateRoot<AssignmentId> {
         private String intro;
         private Float scores;
         private Float maxScores;
-        private LocalDateTime time_open;
-        private LocalDateTime time_close;
+        private ZonedDateTime time_open;
+        private ZonedDateTime time_close;
         private Integer time_limit;
         private Integer type;
         private Boolean visible;
@@ -100,7 +105,7 @@ public class Assignment extends AggregateRoot<AssignmentId> {
             return new Builder();
         }
 
-        public Builder assignmentId(AssignmentId val) {
+        public Builder id(AssignmentId val) {
             assignmentId = val;
             return this;
         }
@@ -130,12 +135,12 @@ public class Assignment extends AggregateRoot<AssignmentId> {
             return this;
         }
 
-        public Builder time_open(LocalDateTime val) {
+        public Builder time_open(ZonedDateTime val) {
             time_open = val;
             return this;
         }
 
-        public Builder time_close(LocalDateTime val) {
+        public Builder time_close(ZonedDateTime val) {
             time_close = val;
             return this;
         }

@@ -39,7 +39,7 @@ public class AssignmentSubmissionOnlineText extends AggregateRoot<AssignmentSubm
             return new Builder();
         }
 
-        public Builder assignmentSubmissionOnlineTextId(AssignmentSubmissionOnlineTextId val) {
+        public Builder id(AssignmentSubmissionOnlineTextId val) {
             assignmentSubmissionOnlineTextId = val;
             return this;
         }

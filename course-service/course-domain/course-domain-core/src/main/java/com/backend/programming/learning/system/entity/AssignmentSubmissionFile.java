@@ -38,7 +38,7 @@ public class AssignmentSubmissionFile extends AggregateRoot<AssignmentSubmission
             return new Builder();
         }
 
-        public Builder assignmentSubmissionFileId(AssignmentSubmissionFileId val) {
+        public Builder id(AssignmentSubmissionFileId val) {
             assignmentSubmissionFileId = val;
             return this;
         }
