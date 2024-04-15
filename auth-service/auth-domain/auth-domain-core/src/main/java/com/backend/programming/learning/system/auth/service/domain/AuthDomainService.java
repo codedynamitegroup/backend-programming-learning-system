@@ -4,10 +4,15 @@ import com.backend.programming.learning.system.auth.service.domain.entity.Organi
 import com.backend.programming.learning.system.auth.service.domain.entity.Role;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.entity.UserRole;
+import com.backend.programming.learning.system.auth.service.domain.event.UserCreatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.UserDeletedEvent;
+import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
 
 public interface AuthDomainService {
-    void createUser(User user);
-    void deleteUser(User user);
+    UserCreatedEvent createUser(User user, DomainEventPublisher<UserCreatedEvent>
+            userCreatedEventDomainEventPublisher);
+    UserDeletedEvent deleteUser(User user, DomainEventPublisher<UserDeletedEvent>
+            userDeletedEventDomainEventPublisher);
     void createOrganization(Organization organization);
     void deleteOrganization(Organization organization);
     void createUserRole(UserRole userRole);
