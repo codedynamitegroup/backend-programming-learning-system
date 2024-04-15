@@ -39,7 +39,7 @@ public class ExamQuestion extends AggregateRoot<ExamQuestionId> {
             return new Builder();
         }
 
-        public Builder examQuestion(ExamQuestionId val) {
+        public Builder id(ExamQuestionId val) {
             examQuestionId = val;
             return this;
         }

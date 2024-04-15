@@ -37,6 +37,10 @@ public class Post extends AggregateRoot<PostId> {
         updatedAt = builder.updatedAt;
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public CourseId getCourseId() {
         return courseId;
     }
@@ -92,7 +96,7 @@ public class Post extends AggregateRoot<PostId> {
             return new Builder();
         }
 
-        public Builder postId(PostId val) {
+        public Builder id(PostId val) {
             postId = val;
             return this;
         }

@@ -33,6 +33,38 @@ public class QuestionSubmission extends AggregateRoot<QuestionSubmissionId> {
         return new Builder();
     }
 
+    public UserId getUserId() {
+        return userId;
+    }
+
+    public ExamSubmissionId getExamSubmissionId() {
+        return examSubmissionId;
+    }
+
+    public QuestionId getQuestionId() {
+        return questionId;
+    }
+
+    public Integer getPass_status() {
+        return pass_status;
+    }
+
+    public Float getGrade() {
+        return grade;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public String getRightAnswer() {
+        return rightAnswer;
+    }
+
+    public Integer getNum_file() {
+        return num_file;
+    }
+
     public static final class Builder {
         private QuestionSubmissionId questionSubmissionId;
         private UserId userId;
@@ -87,7 +119,7 @@ public class QuestionSubmission extends AggregateRoot<QuestionSubmissionId> {
             return num_file;
         }
 
-        public Builder questionSubmissionId(QuestionSubmissionId val) {
+        public Builder id(QuestionSubmissionId val) {
             questionSubmissionId = val;
             return this;
         }

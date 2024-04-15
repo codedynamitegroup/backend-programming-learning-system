@@ -15,6 +15,10 @@ public class CourseUser extends AggregateRoot<CourseUserId> {
         courseId = builder.courseId;
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
 
     public static final class Builder {
         private CourseUserId courseUserId;
@@ -28,7 +32,7 @@ public class CourseUser extends AggregateRoot<CourseUserId> {
             return new Builder();
         }
 
-        public Builder courseUserId(CourseUserId val) {
+        public Builder id(CourseUserId val) {
             courseUserId = val;
             return this;
         }

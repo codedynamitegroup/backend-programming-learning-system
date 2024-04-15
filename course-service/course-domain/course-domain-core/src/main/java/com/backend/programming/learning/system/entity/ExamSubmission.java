@@ -54,7 +54,7 @@ public class ExamSubmission extends AggregateRoot<ExamSubmissionId> {
             return new Builder();
         }
 
-        public Builder examSubmissionId(ExamSubmissionId val) {
+        public Builder id(ExamSubmissionId val) {
             examSubmissionId = val;
             return this;
         }

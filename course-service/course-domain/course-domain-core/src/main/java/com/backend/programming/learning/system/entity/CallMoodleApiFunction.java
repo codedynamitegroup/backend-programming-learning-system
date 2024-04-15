@@ -45,7 +45,7 @@ public class CallMoodleApiFunction extends AggregateRoot<CallMoodleApiFunctionId
             return new Builder();
         }
 
-        public Builder callMoodleApiFunctionId(CallMoodleApiFunctionId val) {
+        public Builder id(CallMoodleApiFunctionId val) {
             callMoodleApiFunctionId = val;
             return this;
         }

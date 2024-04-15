@@ -126,7 +126,7 @@ public class Course extends AggregateRoot<CourseId> {
             return new Builder();
         }
 
-        public Builder courseId(CourseId val) {
+        public Builder id(CourseId val) {
             courseId = val;
             return this;
         }
