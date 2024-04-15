@@ -17,4 +17,5 @@ public interface CoreDomainService {
     void createNotification(Notification notification);
     void createChapter(Chapter chapter);
     void createCertificateCourseUser(CertificateCourseUser certificateCourseUser);
+    void createContestUser(ContestUser contestUser);
 }
