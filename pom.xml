@@ -11,7 +11,8 @@
 		<module>background-service</module>
 		<module>core-service</module>
 		<module>infrastructure</module>
-	</modules>
+        <module>code-assessment-service/code-assessment-domain/code-assessment-application-service</module>
+    </modules>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -200,6 +201,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<version>1.18.30</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
