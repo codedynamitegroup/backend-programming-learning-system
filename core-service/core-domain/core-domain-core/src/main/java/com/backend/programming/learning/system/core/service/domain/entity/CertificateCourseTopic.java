@@ -4,10 +4,11 @@ import com.backend.programming.learning.system.core.service.domain.valueobject.C
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseTopicId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
+import com.backend.programming.learning.system.domain.entity.BaseEntity;
 
 import java.util.UUID;
 
-public class CertificateCourseTopic extends AggregateRoot<CertificateCourseTopicId> {
+public class CertificateCourseTopic extends BaseEntity<CertificateCourseTopicId> {
     private CertificateCourseId certificateCourseId;
     private TopicId topicId;
 

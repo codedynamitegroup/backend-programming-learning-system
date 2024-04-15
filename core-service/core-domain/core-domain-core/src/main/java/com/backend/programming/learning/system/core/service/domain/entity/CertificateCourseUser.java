@@ -3,13 +3,14 @@ package com.backend.programming.learning.system.core.service.domain.entity;
 import com.backend.programming.learning.system.core.service.domain.valueobject.*;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
+import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
-public class CertificateCourseUser extends AggregateRoot<CertificateCourseUserId> {
+public class CertificateCourseUser extends BaseEntity<CertificateCourseUserId> {
     private CertificateCourse certificateCourse;
     private User user;
     private Boolean isCompleted;

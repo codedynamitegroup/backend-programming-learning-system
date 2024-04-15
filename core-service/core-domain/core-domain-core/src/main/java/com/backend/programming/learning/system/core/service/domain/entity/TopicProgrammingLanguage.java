@@ -4,9 +4,10 @@ import com.backend.programming.learning.system.core.service.domain.valueobject.C
 import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.TopicProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
+import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 
-public class TopicProgrammingLanguage extends AggregateRoot<TopicProgrammingLanguageId> {
+public class TopicProgrammingLanguage extends BaseEntity<TopicProgrammingLanguageId> {
     private Topic topic;
     private ProgrammingLanguage programmingLanguage;
 

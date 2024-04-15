@@ -5,9 +5,10 @@ import com.backend.programming.learning.system.core.service.domain.valueobject.C
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestQuestionId;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
+import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 
-public class ContestQuestion extends AggregateRoot<ContestQuestionId> {
+public class ContestQuestion extends BaseEntity<ContestQuestionId> {
     private final QuestionId questionId;
     private final ContestId contestId;
 
