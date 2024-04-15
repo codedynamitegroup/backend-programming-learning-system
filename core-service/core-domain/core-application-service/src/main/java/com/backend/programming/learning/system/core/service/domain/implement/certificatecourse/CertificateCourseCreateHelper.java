@@ -39,33 +39,39 @@ public class CertificateCourseCreateHelper {
 
     @Transactional
     public CertificateCourse persistCertificateCourse(CreateCertificateCourseCommand createCertificateCourseCommand) {
-        checkUser(createCertificateCourseCommand.getCreatedBy());
-        checkUser(createCertificateCourseCommand.getUpdatedBy());
-        checkTopic(createCertificateCourseCommand.getTopicId());
+        User createdBy = getUser(createCertificateCourseCommand.getCreatedBy());
+        User updatedBy = getUser(createCertificateCourseCommand.getUpdatedBy());
+        Topic topic = getTopic(createCertificateCourseCommand.getTopicId());
 
         CertificateCourse certificateCourse = certificateCourseDataMapper.
                 createCertificateCourseCommandToCertificateCourse(createCertificateCourseCommand);
         coreDomainService.createCertificateCourse(certificateCourse);
+        certificateCourse.setCreatedBy(createdBy);
+        certificateCourse.setUpdatedBy(updatedBy);
+        certificateCourse.setTopic(topic);
+
         CertificateCourse certificateCourseResult = saveCertificateCourse(certificateCourse);
 
         log.info("Certificate course created with id: {}", certificateCourseResult.getId().getValue());
         return certificateCourseResult;
     }
 
-    private void checkUser(UUID userId) {
+    private User getUser(UUID userId) {
         Optional<User> user = userRepository.findUser(userId);
         if (user.isEmpty()) {
             log.warn("User with id: {} not found", userId);
             throw new UserNotFoundException("Could not find user with id: " + userId);
         }
+        return user.get();
     }
 
-    private void checkTopic(UUID topicId) {
+    private Topic getTopic(UUID topicId) {
         Optional<Topic> topic = topicRepository.findByID(new TopicId(topicId));
         if (topic.isEmpty()) {
             log.warn("Topic with id: {} not found", topicId);
             throw new TopicNotFoundException("Could not find topic with id: " + topicId);
         }
+        return topic.get();
     }
 
     private CertificateCourse saveCertificateCourse(CertificateCourse certificateCourse) {

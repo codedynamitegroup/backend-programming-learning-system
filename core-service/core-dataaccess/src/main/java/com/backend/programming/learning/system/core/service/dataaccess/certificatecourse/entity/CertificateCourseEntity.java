@@ -41,18 +41,18 @@ public class CertificateCourseEntity {
     @OneToMany(mappedBy = "certificateCourse")
     private List<ChapterEntity> chapters;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     @JoinColumn(name = "topic_id", referencedColumnName = "id")
     private TopicEntity topic;
 
     @OneToMany(mappedBy = "certificateCourse")
     private List<CertificateCourseUserEntity> certificateCourseUsers;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     @JoinColumn(name = "created_by", referencedColumnName = "id")
     private UserEntity createdBy;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     @JoinColumn(name = "updated_by", referencedColumnName = "id")
     private UserEntity updatedBy;
 

@@ -18,7 +18,7 @@ public class Chapter extends BaseEntity<ChapterId> {
     private String title;
     private String description;
     private final List<Question> questions;
-    private final User createdBy;
+    private User createdBy;
     private User updatedBy;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
@@ -81,6 +81,38 @@ public class Chapter extends BaseEntity<ChapterId> {
 
     public ZonedDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public void setCertificateCourseId(CertificateCourseId certificateCourseId) {
+        this.certificateCourseId = certificateCourseId;
+    }
+
+    public void setNo(int no) {
+        this.no = no;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public void setUpdatedBy(User updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public void setCreatedAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(ZonedDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public static final class Builder {

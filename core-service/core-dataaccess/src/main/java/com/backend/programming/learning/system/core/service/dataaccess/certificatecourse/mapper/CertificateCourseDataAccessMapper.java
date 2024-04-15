@@ -20,43 +20,19 @@ import java.util.List;
 
 @Component
 public class CertificateCourseDataAccessMapper {
-    private final UserJpaRepository userJpaRepository;
-    private final TopicJpaRepository topicJpaRepository;
-    private final ReviewDataAccessMapper reviewDataAccessMapper;
-    private final ChapterDataAccessMapper chapterDataAccessMapper;
     private final UserDataAccessMapper userDataAccessMapper;
     private final TopicDataAccessMapper topicDataAccessMapper;
 
-    public CertificateCourseDataAccessMapper(UserJpaRepository userJpaRepository,
-                                             TopicJpaRepository topicJpaRepository,
-                                             ReviewDataAccessMapper reviewDataAccessMapper,
-                                             ChapterDataAccessMapper chapterDataAccessMapper,
-                                             UserDataAccessMapper userDataAccessMapper,
+    public CertificateCourseDataAccessMapper(UserDataAccessMapper userDataAccessMapper,
                                              TopicDataAccessMapper topicDataAccessMapper) {
-        this.userJpaRepository = userJpaRepository;
-        this.topicJpaRepository = topicJpaRepository;
-        this.reviewDataAccessMapper = reviewDataAccessMapper;
-        this.chapterDataAccessMapper = chapterDataAccessMapper;
         this.userDataAccessMapper = userDataAccessMapper;
         this.topicDataAccessMapper = topicDataAccessMapper;
     }
 
     public CertificateCourseEntity certificateCourseToCertificateCourseEntity(CertificateCourse certificateCourse) {
-        UserEntity createdBy = userJpaRepository
-                .findById(certificateCourse.getCreatedBy().getId().getValue())
-                .orElseThrow(() -> new UserNotFoundException("User with id: " +
-                        certificateCourse.getCreatedBy().getId().getValue() + " could not be found!")
-                );
-        UserEntity updatedBy = userJpaRepository
-                .findById(certificateCourse.getUpdatedBy().getId().getValue())
-                .orElseThrow(() -> new UserNotFoundException("User with id: " +
-                        certificateCourse.getUpdatedBy().getId().getValue() + " could not be found!")
-                );
-        TopicEntity topic = topicJpaRepository
-                .findById(certificateCourse.getTopic().getId().getValue())
-                .orElseThrow(() -> new TopicNotFoundException("Topic with id: " +
-                        certificateCourse.getTopic().getId().getValue() + " could not be found!")
-                );
+        TopicEntity topic = topicDataAccessMapper.topicToTopicEntity(certificateCourse.getTopic());
+        UserEntity createdBy = userDataAccessMapper.userToUserEntity(certificateCourse.getCreatedBy());
+        UserEntity updatedBy = userDataAccessMapper.userToUserEntity(certificateCourse.getUpdatedBy());
 
         return CertificateCourseEntity.builder()
                 .id(certificateCourse.getId().getValue())

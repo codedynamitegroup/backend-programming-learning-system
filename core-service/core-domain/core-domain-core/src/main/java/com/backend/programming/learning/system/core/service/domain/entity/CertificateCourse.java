@@ -20,11 +20,12 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
     private ZonedDateTime startTime;
     private ZonedDateTime endTime;
     private Boolean isDeleted;
-    private final Topic topic;
-    private final List<Review> reviews;
-    private final List<Chapter> chapters;
-    private final List<User> registeredUsers;
-    private final User createdBy;
+
+    private Topic topic;
+    private List<Review> reviews;
+    private List<Chapter> chapters;
+    private List<User> registeredUsers;
+    private User createdBy;
     private User updatedBy;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
@@ -117,6 +118,66 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
 
     public ZonedDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setSkillLevel(SkillLevel skillLevel) {
+        this.skillLevel = skillLevel;
+    }
+
+    public void setAvgRating(Float avgRating) {
+        this.avgRating = avgRating;
+    }
+
+    public void setStartTime(ZonedDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(ZonedDateTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public void setUpdatedBy(User updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public void setCreatedAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(ZonedDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public void setChapters(List<Chapter> chapters) {
+        this.chapters = chapters;
+    }
+
+    public void setRegisteredUsers(List<User> registeredUsers) {
+        this.registeredUsers = registeredUsers;
     }
 
     public static final class Builder {
