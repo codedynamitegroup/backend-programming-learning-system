@@ -20,4 +20,10 @@ public class CreateUserRoleCommand {
 
     @NotNull
     private String name;
+
+    @NotNull
+    private final UUID createdBy;
+
+    @NotNull
+    private final UUID updatedBy;
 }

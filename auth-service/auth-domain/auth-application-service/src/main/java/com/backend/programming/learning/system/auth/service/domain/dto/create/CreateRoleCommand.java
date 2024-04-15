@@ -17,4 +17,10 @@ public class CreateRoleCommand {
 
     @NotNull
     private final String name;
+
+    @NotNull
+    private final UUID createdBy;
+
+    @NotNull
+    private final UUID updatedBy;
 }

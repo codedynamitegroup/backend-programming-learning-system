@@ -6,11 +6,15 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
 public class QueryOrganizationResponse {
+    @NotNull
+    private UUID id;
+
     @NotNull
     @Email
     private String email;
@@ -24,6 +28,7 @@ public class QueryOrganizationResponse {
     private String address;
     private String apiKey;
     private String moodleUrl;
+    private Boolean isDeleted;
 
     private ZonedDateTime updatedAt;
     @NotNull

@@ -6,11 +6,14 @@ import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
 public class QueryUserRoleResponse {
+    @NotNull
+    private UUID id;
     @NotNull
     private String name;
 

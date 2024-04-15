@@ -14,6 +14,9 @@ import java.util.UUID;
 @AllArgsConstructor
 public class QueryUserResponse{
     @NotNull
+    private UUID id;
+
+    @NotNull
     @Email
     private final String email;
 
@@ -30,6 +33,7 @@ public class QueryUserResponse{
     private String refreshToken;
     private String lastIp;
     private ZonedDateTime lastLogin;
+    private Boolean isDeleted;
 
     @NotNull
     private final ZonedDateTime createdAt;
