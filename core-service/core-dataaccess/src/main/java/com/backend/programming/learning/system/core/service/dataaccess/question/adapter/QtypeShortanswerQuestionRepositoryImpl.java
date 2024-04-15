@@ -6,6 +6,9 @@ import com.backend.programming.learning.system.core.service.domain.ports.output.
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeShortAnswerQuestion;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Component
 public class QtypeShortanswerQuestionRepositoryImpl implements QtypeShortanswerQuestionRepository {
     private final QtypeShortanswerQuestionJpaRepository qtypeShortAnswerQuestionJpaRepository;
@@ -22,5 +25,11 @@ public class QtypeShortanswerQuestionRepositoryImpl implements QtypeShortanswerQ
         return qtypeQuestionDataAccessMapper.qtypeShortanswerQuestionEntityToQtypeShortanswerQuestion(qtypeShortAnswerQuestionJpaRepository
                 .save(qtypeQuestionDataAccessMapper
                         .qtypeShortanswerQuestionToQtypeShortanswerQuestionEntity(question)));
+    }
+
+    @Override
+    public Optional<QtypeShortAnswerQuestion> findQtypeShortAnswerQuestion(UUID qtShortAnswerQuestionId) {
+        return qtypeShortAnswerQuestionJpaRepository.findById(qtShortAnswerQuestionId)
+                .map(qtypeQuestionDataAccessMapper::qtypeShortanswerQuestionEntityToQtypeShortanswerQuestion);
     }
 }

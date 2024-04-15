@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.core.service.domain.CoreDomainSer
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQtypeCodeQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeCodeQuestion;
 import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
+import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QtypeCodeQuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeCodeQuestionRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -32,14 +33,25 @@ public class QtypeCodeQuestionCreateHelper {
         QuestionCreatedEvent questionCreatedEvent = questionCreateHelper.persistQuestion(createQtypeCodeQuestionCommand);
         QtypeCodeQuestion qtypeCodeQuestion = qtypeCodeQuestionDataMapper
                 .createQuestionCommandToQtypeCodeQuestion(createQtypeCodeQuestionCommand,
-                        questionCreatedEvent.getQuestion().getId());
+                        questionCreatedEvent.getQuestion());
 
         // init QtypeCodeQuestion
         coreDomainService.createQtypeCodeQuestion(qtypeCodeQuestion);
-        qtypeCodeQuestionRepository.saveQtypeCodeQuestion(qtypeCodeQuestion);
+        saveQtypeCodeQuestion(qtypeCodeQuestion);
 
-        log.info("Qtype Code Question created with id: {}", qtypeCodeQuestion.getQuestionId().getValue());
+        log.info("Qtype Code Question created with id: {}", qtypeCodeQuestion.getQuestion().getId().getValue());
 
         return questionCreatedEvent;
+    }
+
+    private void saveQtypeCodeQuestion(QtypeCodeQuestion qtypeCodeQuestion) {
+        QtypeCodeQuestion savedQuestion = qtypeCodeQuestionRepository.saveQtypeCodeQuestion(qtypeCodeQuestion);
+
+        if (savedQuestion == null) {
+            log.error("Qtype Code Question not saved with id: {}", qtypeCodeQuestion.getQuestion().getId().getValue());
+
+            throw new CoreDomainException("Qtype Code Question not saved with id: " + qtypeCodeQuestion.getQuestion().getId().getValue());
+        }
+        log.info("Qtype Code Question saved with id: {}", qtypeCodeQuestion.getQuestion().getId().getValue());
     }
 }

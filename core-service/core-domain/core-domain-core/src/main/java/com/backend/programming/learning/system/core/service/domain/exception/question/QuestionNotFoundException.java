@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.core.service.domain.exception;
+package com.backend.programming.learning.system.core.service.domain.exception.question;
 
 import com.backend.programming.learning.system.domain.exception.DomainException;
 

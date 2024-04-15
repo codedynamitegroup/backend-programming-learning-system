@@ -2,13 +2,13 @@ package com.backend.programming.learning.system.core.service.application.rest.qu
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQtypeShortanswerQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQtypeShortanswerQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QtypeShortanswerQuestionApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @Slf4j
@@ -29,5 +29,16 @@ public class QtypeShortanswerQuestionController {
         log.info("Question shortanswer created: {}", createQuestionResponse);
 
         return ResponseEntity.ok(createQuestionResponse);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<QueryQtypeShortanswerQuestionResponse> queryQtypeShortanswerQuestionById(
+            @PathVariable("id") UUID qtShortanswerQuestionId) {
+        log.info("Querying shortanswer question by id: {}", qtShortanswerQuestionId);
+        QueryQtypeShortanswerQuestionResponse queryQtypeShortanswerQuestionResponse = qtypeShortanswerQuestionApplicationService
+                .queryQtypeShortanswerQuestionById(qtShortanswerQuestionId);
+        log.info("Question shortanswer queried: {}", queryQtypeShortanswerQuestionResponse);
+
+        return ResponseEntity.ok(queryQtypeShortanswerQuestionResponse);
     }
 }

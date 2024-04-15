@@ -2,11 +2,14 @@ package com.backend.programming.learning.system.core.service.domain.implement.qu
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQtypeMultichoiceQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQtypeMultichoiceQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.implement.question.handler.QtypeMultichoiceQuestionCommandHandler;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QtypeMultichoiceQuestionApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+
+import java.util.UUID;
 
 @Service
 @Slf4j
@@ -22,5 +25,10 @@ public class QtypeMultichoiceQuestionApplicationServiceImpl implements QtypeMult
     public CreateQuestionResponse createQtypeMultichoiceQuestion(CreateQtypeMultichoiceQuestionCommand createQtypeMultichoiceQuestionCommand) {
         return qtypeMultichoiceQuestionCommandHandler
                 .createQtypeMultichoiceQuestion(createQtypeMultichoiceQuestionCommand);
+    }
+
+    @Override
+    public QueryQtypeMultichoiceQuestionResponse queryQtypeMultichoiceQuestionById(UUID qtMultichoiceQuestionId) {
+        return qtypeMultichoiceQuestionCommandHandler.queryQtypeMultichoiceQuestionById(qtMultichoiceQuestionId);
     }
 }

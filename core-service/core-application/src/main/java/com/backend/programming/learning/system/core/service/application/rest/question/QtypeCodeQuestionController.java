@@ -2,7 +2,7 @@ package com.backend.programming.learning.system.core.service.application.rest.qu
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQtypeCodeQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQuestionResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQtypeCodeQuestionByIdResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQtypeCodeQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QtypeCodeQuestionApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -32,9 +32,9 @@ public class QtypeCodeQuestionController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<QueryQtypeCodeQuestionByIdResponse> getQtypeCodeQuestion(@PathVariable UUID id) {
+    public ResponseEntity<QueryQtypeCodeQuestionResponse> getQtypeCodeQuestion(@PathVariable UUID id) {
         log.info("Getting code question with id: {}", id);
-        QueryQtypeCodeQuestionByIdResponse queryQuestionResponse = qtypeCodeQuestionApplicationService
+        QueryQtypeCodeQuestionResponse queryQuestionResponse = qtypeCodeQuestionApplicationService
                 .queryQtypeCodeQuestionById(id);
         log.info("Code question retrieved: {}", queryQuestionResponse);
 

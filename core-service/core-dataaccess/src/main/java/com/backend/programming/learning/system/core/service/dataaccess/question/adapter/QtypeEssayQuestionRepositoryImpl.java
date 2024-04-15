@@ -6,6 +6,9 @@ import com.backend.programming.learning.system.core.service.domain.ports.output.
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeEssayQuestion;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Component
 public class QtypeEssayQuestionRepositoryImpl implements QtypeEssayQuestionRepository {
     private final QtypeEssayQuestionJpaRepository qtypeEssayQuestionJpaRepository;
@@ -22,5 +25,11 @@ public class QtypeEssayQuestionRepositoryImpl implements QtypeEssayQuestionRepos
         return qtypeQuestionDataAccessMapper.qtypeEssayQuestionEntityToQtypeEssayQuestion(qtypeEssayQuestionJpaRepository
                 .save(qtypeQuestionDataAccessMapper
                         .qtypeEssayQuestionToQtypeEssayQuestionEntity(question)));
+    }
+
+    @Override
+    public Optional<QtypeEssayQuestion> findQtypeEssayQuestion(UUID qtEssayQuestionId) {
+        return qtypeEssayQuestionJpaRepository.findById(qtEssayQuestionId)
+                .map(qtypeQuestionDataAccessMapper::qtypeEssayQuestionEntityToQtypeEssayQuestion);
     }
 }

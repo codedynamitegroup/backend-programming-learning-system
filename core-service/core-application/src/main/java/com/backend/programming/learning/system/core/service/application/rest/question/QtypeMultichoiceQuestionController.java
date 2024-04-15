@@ -2,13 +2,13 @@ package com.backend.programming.learning.system.core.service.application.rest.qu
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQtypeMultichoiceQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQtypeMultichoiceQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QtypeMultichoiceQuestionApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -31,4 +31,13 @@ public class QtypeMultichoiceQuestionController {
         return ResponseEntity.ok(createQuestionResponse);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<QueryQtypeMultichoiceQuestionResponse> queryQtypeMultichoiceQuestionById(@PathVariable("id") UUID id) {
+        log.info("Querying multichoice question by id: {}", id);
+        QueryQtypeMultichoiceQuestionResponse queryQtypeMultichoiceQuestionResponse = qtypeMultichoiceQuestionApplicationService
+                .queryQtypeMultichoiceQuestionById(id);
+        log.info("Question multichoice queried: {}", queryQtypeMultichoiceQuestionResponse);
+
+        return ResponseEntity.ok(queryQtypeMultichoiceQuestionResponse);
+    }
 }

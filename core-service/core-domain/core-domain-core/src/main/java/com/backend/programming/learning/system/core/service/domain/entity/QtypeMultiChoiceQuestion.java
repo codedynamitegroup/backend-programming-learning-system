@@ -2,12 +2,11 @@ package com.backend.programming.learning.system.core.service.domain.entity;
 
 import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.QtypeMultiChoiceQuestionId;
-import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 
 import java.util.UUID;
 
 public class QtypeMultiChoiceQuestion extends BaseEntity<QtypeMultiChoiceQuestionId> {
-    private final QuestionId questionId;
+    private final Question question;
     private final Boolean single;
     private final Boolean shuffleAnswers;
     private final String correctFeedback;
@@ -18,8 +17,8 @@ public class QtypeMultiChoiceQuestion extends BaseEntity<QtypeMultiChoiceQuestio
     private final String showStandardInstructions;
 
     // Getter Methods
-    public QuestionId getQuestionId() {
-        return questionId;
+    public Question getQuestion() {
+        return question;
     }
 
     public Boolean getSingle() {
@@ -57,7 +56,7 @@ public class QtypeMultiChoiceQuestion extends BaseEntity<QtypeMultiChoiceQuestio
     // Builder
     private QtypeMultiChoiceQuestion(Builder builder) {
         super.setId(builder.qtypeMultiChoiceQuestionId);
-        questionId = builder.questionId;
+        question = builder.question;
         single = builder.single;
         shuffleAnswers = builder.shuffleAnswers;
         correctFeedback = builder.correctFeedback;
@@ -78,7 +77,7 @@ public class QtypeMultiChoiceQuestion extends BaseEntity<QtypeMultiChoiceQuestio
 
     public static final class Builder {
         private QtypeMultiChoiceQuestionId qtypeMultiChoiceQuestionId;
-        private QuestionId questionId;
+        private Question question;
         private Boolean single;
         private Boolean shuffleAnswers;
         private String correctFeedback;
@@ -96,8 +95,8 @@ public class QtypeMultiChoiceQuestion extends BaseEntity<QtypeMultiChoiceQuestio
             return this;
         }
 
-        public Builder questionId(QuestionId val) {
-            questionId = val;
+        public Builder question(Question val) {
+            question = val;
             return this;
         }
 

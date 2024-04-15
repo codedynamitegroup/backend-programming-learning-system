@@ -2,13 +2,13 @@ package com.backend.programming.learning.system.core.service.application.rest.qu
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQtypeEssayQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQtypeEssayQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QtypeEssayQuestionApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @Slf4j
@@ -29,5 +29,15 @@ public class QtypeEssayQuestionController {
         log.info("Question essay created: {}", createQuestionResponse);
 
         return ResponseEntity.ok(createQuestionResponse);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<QueryQtypeEssayQuestionResponse> queryQtypeEssayQuestionById(@PathVariable UUID id) {
+        log.info("Getting essay question with id: {}", id);
+        QueryQtypeEssayQuestionResponse queryQuestionResponse = qtypeEssayQuestionApplicationService
+                .queryQtypeEssayQuestionById(id);
+        log.info("Essay question retrieved: {}", queryQuestionResponse);
+
+        return ResponseEntity.ok(queryQuestionResponse);
     }
 }
