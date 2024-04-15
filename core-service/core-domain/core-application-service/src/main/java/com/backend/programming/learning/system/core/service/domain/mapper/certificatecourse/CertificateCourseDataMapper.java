@@ -21,7 +21,6 @@ public class CertificateCourseDataMapper {
         return CertificateCourse.builder()
                 .name(createCertificateCourseCommand.getName())
                 .skillLevel(createCertificateCourseCommand.getSkillLevel())
-                .avgRating(createCertificateCourseCommand.getAvgRating())
                 .startTime(createCertificateCourseCommand.getStartTime())
                 .endTime(createCertificateCourseCommand.getEndTime())
                 .topic(Topic
@@ -46,7 +45,8 @@ public class CertificateCourseDataMapper {
     public CreateCertificateCourseResponse certificateCourseToCreateCertificateCourseResponse(
             CertificateCourse certificateCourse, String message) {
         return CreateCertificateCourseResponse.builder()
-                .certificateCourse(certificateCourse)
+                .certificateCourseId(certificateCourse.getId().getValue())
+                .name(certificateCourse.getName())
                 .message(message)
                 .build();
     }

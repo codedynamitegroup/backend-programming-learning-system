@@ -18,8 +18,6 @@ public class CreateCertificateCourseCommand {
     private final String name;
     @NotNull
     private final SkillLevel skillLevel;
-    @NotNull
-    private final Float avgRating;
 
     @NotNull
     private final UUID topicId;
