@@ -431,6 +431,8 @@ CREATE TABLE "public".code_submission
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
     user_id uuid NOT NULL,
     code_question_id uuid NOT NULL,
+    programming_language_id uuid NOT NULL,
+    source_code text,
     grade numeric(5,2) DEFAULT 0.0 NOT NULL,
     pass bool DEFAULT FALSE NOT NULL,
     CONSTRAINT code_submission_pkey PRIMARY KEY (id),
@@ -440,6 +442,10 @@ CREATE TABLE "public".code_submission
         ON DELETE CASCADE,
     CONSTRAINT code_submission_code_question_id_fkey FOREIGN KEY (code_question_id)
         REFERENCES "public".qtype_code_question (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT code_submission_programming_language_id_fkey FOREIGN KEY (programming_language_id)
+        REFERENCES "public".programming_language (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
