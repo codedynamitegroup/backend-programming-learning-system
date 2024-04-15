@@ -42,10 +42,11 @@ public class QuestionCreateHelper {
     // Create and save question
     @Transactional
     public QuestionCreatedEvent persistQuestion(CreateQuestionCommand createQuestionCommand) {
-        checkUser(createQuestionCommand.getCreatedBy());
-        checkOrganization(createQuestionCommand.getOrganizationId());
+        User createdBy =  getUser(createQuestionCommand.getCreatedBy());
+        User updatedBy = getUser(createQuestionCommand.getUpdatedBy());
+        Organization organization = getOrganization(createQuestionCommand.getOrganizationId());
 
-        Question question = questionDataMapper.createQuestionCommandToQuestion(createQuestionCommand);
+        Question question = questionDataMapper.createQuestionCommandToQuestion(createQuestionCommand, organization, createdBy, updatedBy);
         QuestionCreatedEvent event = coreDomainService.createQuestion(question);
         saveQuestion(question);
 
@@ -55,21 +56,23 @@ public class QuestionCreateHelper {
     }
 
     // Check if user exists
-    private void checkUser(UUID userId) {
+    private User getUser(UUID userId) {
         Optional<User> user = userRepository.findUser(userId);
         if (user.isEmpty()) {
             log.warn("User with id: {} not found", userId);
             throw new UserNotFoundException("Could not find user with id: " + userId);
         }
+        return user.get();
     }
 
     // Check if organization exists
-    private void checkOrganization(UUID organizationId) {
+    private Organization getOrganization(UUID organizationId) {
         Optional<Organization> organization = organizationRepository.findOrganization(organizationId);
         if (organization.isEmpty()) {
             log.warn("Organization with id: {} not found", organizationId);
             throw new CoreDomainException("Could not find organization with id: " + organizationId);
         }
+        return organization.get();
     }
 
     // Save question to database

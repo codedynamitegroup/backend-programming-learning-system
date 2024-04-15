@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.core.service.domain.implement.question.method.query;
 
-import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQuestionByIdCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.exception.QuestionNotFoundException;
@@ -24,7 +23,7 @@ public class QuestionQueryHelper {
 
     public QueryQuestionResponse queryQuestionById(UUID questionId) {
         Question question = questionRepository
-                .getQuestionById(questionId)
+                .findQuestion(questionId)
                 .orElseThrow(() ->
                         new QuestionNotFoundException("Question with id " + questionId + " not found"));
         QueryQuestionResponse queryQuestionResponse = questionDataMapper

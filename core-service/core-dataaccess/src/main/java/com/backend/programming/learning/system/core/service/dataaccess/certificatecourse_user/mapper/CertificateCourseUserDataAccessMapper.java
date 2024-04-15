@@ -12,10 +12,7 @@ import com.backend.programming.learning.system.core.service.domain.entity.Certif
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.exception.CertificateCourseNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
-import com.backend.programming.learning.system.core.service.domain.mapper.certificatecourse_user.CertificateCourseUserDataMapper;
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseUserId;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -53,7 +50,7 @@ public class CertificateCourseUserDataAccessMapper {
                 .id(certificateCourseUser.getId().getValue())
                 .certificateCourse(certificateCourse)
                 .user(user)
-                .startTime(certificateCourseUser.getStartTime())
+//                .startTime(certificateCourseUser.getStartTime())
                 .isCompleted(certificateCourseUser.getCompleted())
                 .completedAt(certificateCourseUser.getCompletedAt())
                 .build();
@@ -68,7 +65,7 @@ public class CertificateCourseUserDataAccessMapper {
                 .id(new CertificateCourseUserId(certificateCourseUserEntity.getId()))
                 .certificateCourse(certificateCourse)
                 .user(user)
-                .startTime(certificateCourseUserEntity.getStartTime())
+//                .startTime(certificateCourseUserEntity.getStartTime())
                 .isCompleted(certificateCourseUserEntity.getIsCompleted())
                 .completedAt(certificateCourseUserEntity.getCompletedAt())
                 .build();

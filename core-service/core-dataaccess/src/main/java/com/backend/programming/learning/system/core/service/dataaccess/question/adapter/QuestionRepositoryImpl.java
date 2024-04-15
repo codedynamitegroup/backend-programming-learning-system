@@ -28,7 +28,7 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     }
 
     @Override
-    public Optional<Question> getQuestionById(UUID id) {
+    public Optional<Question> findQuestion(UUID id) {
         return questionJpaRepository.findById(id)
                 .map(questionDataAccessMapper::questionEntityToQuestion);
     }

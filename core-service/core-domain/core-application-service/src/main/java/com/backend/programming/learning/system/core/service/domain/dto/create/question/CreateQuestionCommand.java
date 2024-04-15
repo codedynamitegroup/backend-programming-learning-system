@@ -17,6 +17,8 @@ public class CreateQuestionCommand {
     @NotNull(message = "Created by is required")
     private final UUID createdBy;
     @NotNull(message = "Updated by is required")
+    private final UUID updatedBy;
+    @NotNull(message = "Updated by is required")
     private final String difficulty;
     @NotNull(message = "Name is required")
     private final String name;

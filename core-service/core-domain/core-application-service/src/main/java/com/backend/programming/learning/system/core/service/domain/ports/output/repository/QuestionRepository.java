@@ -8,5 +8,5 @@ import java.util.UUID;
 public interface QuestionRepository {
     Question saveQuestion(Question question);
 
-    Optional<Question> getQuestionById(UUID id);
+    Optional<Question> findQuestion(UUID id);
 }

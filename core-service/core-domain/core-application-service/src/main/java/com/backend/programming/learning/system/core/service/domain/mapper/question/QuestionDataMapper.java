@@ -2,15 +2,12 @@ package com.backend.programming.learning.system.core.service.domain.mapper.quest
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQuestionResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQuestionByIdCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.Organization;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
-import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
 import com.backend.programming.learning.system.domain.valueobject.QuestionType;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
@@ -18,25 +15,19 @@ import java.time.ZonedDateTime;
 @Component
 public class QuestionDataMapper {
     // create question command to question
-    public Question createQuestionCommandToQuestion(CreateQuestionCommand createQuestionCommand) {
+    public Question createQuestionCommandToQuestion(CreateQuestionCommand createQuestionCommand,
+                                                    Organization organization,
+                                                    User createdBy,
+                                                    User updatedBy) {
         return Question.builder()
-                .organization(Organization
-                        .builder()
-                        .organizationId(new OrganizationId(createQuestionCommand.getOrganizationId()))
-                        .build())
+                .organization(organization)
                 .name(createQuestionCommand.getName())
                 .questionText(createQuestionCommand.getQuestionText())
                 .generalFeedback(createQuestionCommand.getGeneralFeedback())
                 .defaultMark(createQuestionCommand.getDefaultMark().floatValue())
                 .difficulty(QuestionDifficulty.valueOf(createQuestionCommand.getDifficulty()))
-                .createdBy(User
-                        .builder()
-                        .id(new UserId(createQuestionCommand.getCreatedBy()))
-                        .build())
-                .updatedBy(User
-                        .builder()
-                        .id(new UserId(createQuestionCommand.getCreatedBy()))
-                        .build())
+                .createdBy(createdBy)
+                .updatedBy(updatedBy)
                 .qtype(QuestionType.valueOf(createQuestionCommand.getQType()))
                 .createdAt(ZonedDateTime.now())
                 .updatedAt(ZonedDateTime.now())
