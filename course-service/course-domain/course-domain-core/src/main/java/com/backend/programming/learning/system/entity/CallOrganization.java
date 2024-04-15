@@ -40,7 +40,7 @@ public class CallOrganization extends AggregateRoot<CallOrganizationId> {
             return new Builder();
         }
 
-        public Builder callOrganizationId(CallOrganizationId val) {
+        public Builder id(CallOrganizationId val) {
             callOrganizationId = val;
             return this;
         }

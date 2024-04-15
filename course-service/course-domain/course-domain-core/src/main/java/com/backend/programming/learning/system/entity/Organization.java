@@ -9,6 +9,7 @@ public class Organization extends AggregateRoot<OrganizationId> {
     private final String name;
     private final String description;
     private final String moodleUrl;
+    private final String apiKey;
     private final ZonedDateTime createdAt;
     private final ZonedDateTime updatedAt;
 
@@ -17,6 +18,7 @@ public class Organization extends AggregateRoot<OrganizationId> {
         name = builder.name;
         description = builder.description;
         moodleUrl = builder.moodleUrl;
+        apiKey = builder.apiKey;
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
     }
@@ -27,6 +29,10 @@ public class Organization extends AggregateRoot<OrganizationId> {
 
     public String getName() {
         return name;
+    }
+
+    public String getApiKey() {
+        return apiKey;
     }
 
     public String getDescription() {
@@ -51,13 +57,14 @@ public class Organization extends AggregateRoot<OrganizationId> {
         private String name;
         private String description;
         private String moodleUrl;
+        private String apiKey;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
 
         private Builder() {
         }
 
-        public Builder organizationId(OrganizationId val) {
+        public Builder id(OrganizationId val) {
             organizationId = val;
             return this;
         }
@@ -74,6 +81,11 @@ public class Organization extends AggregateRoot<OrganizationId> {
 
         public Builder moodleUrl(String val) {
             moodleUrl = val;
+            return this;
+        }
+
+        public Builder apiKey(String val) {
+            apiKey = val;
             return this;
         }
 

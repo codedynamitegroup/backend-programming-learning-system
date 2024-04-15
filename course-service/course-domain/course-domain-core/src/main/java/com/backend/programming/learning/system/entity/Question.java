@@ -126,7 +126,7 @@ public class Question extends AggregateRoot<QuestionId> {
         private Builder() {
         }
 
-        public Builder questionId(QuestionId val) {
+        public Builder id(QuestionId val) {
             questionId = val;
             return this;
         }
