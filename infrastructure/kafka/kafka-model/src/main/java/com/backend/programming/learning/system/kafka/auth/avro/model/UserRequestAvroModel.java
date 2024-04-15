@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -2982499435375655500L;
+  private static final long serialVersionUID = -3200301746082108324L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"avatarUrl\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"displayName\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"dob\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"email\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"avatarUrl\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"displayName\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"dob\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"email\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"isActive\",\"type\":\"boolean\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -85,6 +85,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
   private java.lang.String displayName;
   private java.time.Instant dob;
   private java.lang.String email;
+  private boolean isActive;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -103,8 +104,9 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
    * @param displayName The new value for displayName
    * @param dob The new value for dob
    * @param email The new value for email
+   * @param isActive The new value for isActive
    */
-  public UserRequestAvroModel(java.util.UUID id, java.util.UUID sagaId, java.util.UUID userId, java.lang.String avatarUrl, java.time.Instant createdAt, java.lang.String displayName, java.time.Instant dob, java.lang.String email) {
+  public UserRequestAvroModel(java.util.UUID id, java.util.UUID sagaId, java.util.UUID userId, java.lang.String avatarUrl, java.time.Instant createdAt, java.lang.String displayName, java.time.Instant dob, java.lang.String email, java.lang.Boolean isActive) {
     this.id = id;
     this.sagaId = sagaId;
     this.userId = userId;
@@ -113,6 +115,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
     this.displayName = displayName;
     this.dob = dob.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
     this.email = email;
+    this.isActive = isActive;
   }
 
   @Override
@@ -133,6 +136,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
     case 5: return displayName;
     case 6: return dob;
     case 7: return email;
+    case 8: return isActive;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -146,6 +150,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
       new org.apache.avro.data.TimeConversions.TimestampMillisConversion(),
       null,
       new org.apache.avro.data.TimeConversions.TimestampMillisConversion(),
+      null,
       null,
       null
   };
@@ -168,6 +173,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
     case 5: displayName = value$ != null ? value$.toString() : null; break;
     case 6: dob = (java.time.Instant)value$; break;
     case 7: email = value$ != null ? value$.toString() : null; break;
+    case 8: isActive = (java.lang.Boolean)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -309,6 +315,23 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
   }
 
   /**
+   * Gets the value of the 'isActive' field.
+   * @return The value of the 'isActive' field.
+   */
+  public boolean getIsActive() {
+    return isActive;
+  }
+
+
+  /**
+   * Sets the value of the 'isActive' field.
+   * @param value the value to set.
+   */
+  public void setIsActive(boolean value) {
+    this.isActive = value;
+  }
+
+  /**
    * Creates a new UserRequestAvroModel RecordBuilder.
    * @return A new UserRequestAvroModel RecordBuilder
    */
@@ -357,6 +380,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
     private java.lang.String displayName;
     private java.time.Instant dob;
     private java.lang.String email;
+    private boolean isActive;
 
     /** Creates a new Builder */
     private Builder() {
@@ -401,6 +425,10 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
         this.email = data().deepCopy(fields()[7].schema(), other.email);
         fieldSetFlags()[7] = other.fieldSetFlags()[7];
       }
+      if (isValidValue(fields()[8], other.isActive)) {
+        this.isActive = data().deepCopy(fields()[8].schema(), other.isActive);
+        fieldSetFlags()[8] = other.fieldSetFlags()[8];
+      }
     }
 
     /**
@@ -440,6 +468,10 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
       if (isValidValue(fields()[7], other.email)) {
         this.email = data().deepCopy(fields()[7].schema(), other.email);
         fieldSetFlags()[7] = true;
+      }
+      if (isValidValue(fields()[8], other.isActive)) {
+        this.isActive = data().deepCopy(fields()[8].schema(), other.isActive);
+        fieldSetFlags()[8] = true;
       }
     }
 
@@ -761,6 +793,45 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
       return this;
     }
 
+    /**
+      * Gets the value of the 'isActive' field.
+      * @return The value.
+      */
+    public boolean getIsActive() {
+      return isActive;
+    }
+
+
+    /**
+      * Sets the value of the 'isActive' field.
+      * @param value The value of 'isActive'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.auth.avro.model.UserRequestAvroModel.Builder setIsActive(boolean value) {
+      validate(fields()[8], value);
+      this.isActive = value;
+      fieldSetFlags()[8] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'isActive' field has been set.
+      * @return True if the 'isActive' field has been set, false otherwise.
+      */
+    public boolean hasIsActive() {
+      return fieldSetFlags()[8];
+    }
+
+
+    /**
+      * Clears the value of the 'isActive' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.auth.avro.model.UserRequestAvroModel.Builder clearIsActive() {
+      fieldSetFlags()[8] = false;
+      return this;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public UserRequestAvroModel build() {
@@ -774,6 +845,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
         record.displayName = fieldSetFlags()[5] ? this.displayName : (java.lang.String) defaultValue(fields()[5]);
         record.dob = fieldSetFlags()[6] ? this.dob : (java.time.Instant) defaultValue(fields()[6]);
         record.email = fieldSetFlags()[7] ? this.email : (java.lang.String) defaultValue(fields()[7]);
+        record.isActive = fieldSetFlags()[8] ? this.isActive : (java.lang.Boolean) defaultValue(fields()[8]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;

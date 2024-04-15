@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class UserResponseAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 3924616245832826290L;
+  private static final long serialVersionUID = -8199526464014474335L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserResponseAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"avatarUrl\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"displayName\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"dob\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"email\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserResponseAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"avatarUrl\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"displayName\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"dob\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"email\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}},{\"name\":\"isActive\",\"type\":\"boolean\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -86,6 +86,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
   private java.time.Instant dob;
   private java.lang.String email;
   private java.util.List<java.lang.String> failureMessages;
+  private boolean isActive;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -105,8 +106,9 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
    * @param dob The new value for dob
    * @param email The new value for email
    * @param failureMessages The new value for failureMessages
+   * @param isActive The new value for isActive
    */
-  public UserResponseAvroModel(java.util.UUID id, java.util.UUID sagaId, java.util.UUID userId, java.lang.String avatarUrl, java.time.Instant createdAt, java.lang.String displayName, java.time.Instant dob, java.lang.String email, java.util.List<java.lang.String> failureMessages) {
+  public UserResponseAvroModel(java.util.UUID id, java.util.UUID sagaId, java.util.UUID userId, java.lang.String avatarUrl, java.time.Instant createdAt, java.lang.String displayName, java.time.Instant dob, java.lang.String email, java.util.List<java.lang.String> failureMessages, java.lang.Boolean isActive) {
     this.id = id;
     this.sagaId = sagaId;
     this.userId = userId;
@@ -116,6 +118,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
     this.dob = dob.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
     this.email = email;
     this.failureMessages = failureMessages;
+    this.isActive = isActive;
   }
 
   @Override
@@ -137,6 +140,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
     case 6: return dob;
     case 7: return email;
     case 8: return failureMessages;
+    case 9: return isActive;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -150,6 +154,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
       new org.apache.avro.data.TimeConversions.TimestampMillisConversion(),
       null,
       new org.apache.avro.data.TimeConversions.TimestampMillisConversion(),
+      null,
       null,
       null,
       null
@@ -174,6 +179,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
     case 6: dob = (java.time.Instant)value$; break;
     case 7: email = value$ != null ? value$.toString() : null; break;
     case 8: failureMessages = (java.util.List<java.lang.String>)value$; break;
+    case 9: isActive = (java.lang.Boolean)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -332,6 +338,23 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
   }
 
   /**
+   * Gets the value of the 'isActive' field.
+   * @return The value of the 'isActive' field.
+   */
+  public boolean getIsActive() {
+    return isActive;
+  }
+
+
+  /**
+   * Sets the value of the 'isActive' field.
+   * @param value the value to set.
+   */
+  public void setIsActive(boolean value) {
+    this.isActive = value;
+  }
+
+  /**
    * Creates a new UserResponseAvroModel RecordBuilder.
    * @return A new UserResponseAvroModel RecordBuilder
    */
@@ -381,6 +404,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
     private java.time.Instant dob;
     private java.lang.String email;
     private java.util.List<java.lang.String> failureMessages;
+    private boolean isActive;
 
     /** Creates a new Builder */
     private Builder() {
@@ -429,6 +453,10 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
         this.failureMessages = data().deepCopy(fields()[8].schema(), other.failureMessages);
         fieldSetFlags()[8] = other.fieldSetFlags()[8];
       }
+      if (isValidValue(fields()[9], other.isActive)) {
+        this.isActive = data().deepCopy(fields()[9].schema(), other.isActive);
+        fieldSetFlags()[9] = other.fieldSetFlags()[9];
+      }
     }
 
     /**
@@ -472,6 +500,10 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
       if (isValidValue(fields()[8], other.failureMessages)) {
         this.failureMessages = data().deepCopy(fields()[8].schema(), other.failureMessages);
         fieldSetFlags()[8] = true;
+      }
+      if (isValidValue(fields()[9], other.isActive)) {
+        this.isActive = data().deepCopy(fields()[9].schema(), other.isActive);
+        fieldSetFlags()[9] = true;
       }
     }
 
@@ -833,6 +865,45 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
       return this;
     }
 
+    /**
+      * Gets the value of the 'isActive' field.
+      * @return The value.
+      */
+    public boolean getIsActive() {
+      return isActive;
+    }
+
+
+    /**
+      * Sets the value of the 'isActive' field.
+      * @param value The value of 'isActive'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder setIsActive(boolean value) {
+      validate(fields()[9], value);
+      this.isActive = value;
+      fieldSetFlags()[9] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'isActive' field has been set.
+      * @return True if the 'isActive' field has been set, false otherwise.
+      */
+    public boolean hasIsActive() {
+      return fieldSetFlags()[9];
+    }
+
+
+    /**
+      * Clears the value of the 'isActive' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder clearIsActive() {
+      fieldSetFlags()[9] = false;
+      return this;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public UserResponseAvroModel build() {
@@ -847,6 +918,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
         record.dob = fieldSetFlags()[6] ? this.dob : (java.time.Instant) defaultValue(fields()[6]);
         record.email = fieldSetFlags()[7] ? this.email : (java.lang.String) defaultValue(fields()[7]);
         record.failureMessages = fieldSetFlags()[8] ? this.failureMessages : (java.util.List<java.lang.String>) defaultValue(fields()[8]);
+        record.isActive = fieldSetFlags()[9] ? this.isActive : (java.lang.Boolean) defaultValue(fields()[9]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;

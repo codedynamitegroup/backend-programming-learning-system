@@ -58,6 +58,10 @@
           "type": "string"
         }
       }
+    },
+    {
+      "name": "isActive",
+      "type": "boolean"
     }
   ]
 }
