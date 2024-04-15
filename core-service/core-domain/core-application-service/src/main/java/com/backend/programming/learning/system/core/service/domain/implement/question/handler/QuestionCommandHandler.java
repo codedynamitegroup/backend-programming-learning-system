@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.core.service.domain.implement.que
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -19,5 +20,10 @@ public class QuestionCommandHandler {
     public QueryQuestionResponse queryQuestionById(UUID questionId) {
         return questionQueryHelper
                 .queryQuestionById(questionId);
+    }
+
+    public List<QueryQuestionResponse> queryAllQuestion() {
+        return questionQueryHelper
+                .queryAllQuestion();
     }
 }

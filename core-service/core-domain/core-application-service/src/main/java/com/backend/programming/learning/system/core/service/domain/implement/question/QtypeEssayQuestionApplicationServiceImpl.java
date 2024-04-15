@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -30,5 +31,10 @@ public class QtypeEssayQuestionApplicationServiceImpl implements QtypeEssayQuest
     @Override
     public QueryQtypeEssayQuestionResponse queryQtypeEssayQuestionById(UUID qtEssayQuestionId) {
         return qtypeEssayQuestionCommandHandler.queryQtypeEssayQuestionById(qtEssayQuestionId);
+    }
+
+    @Override
+    public List<QueryQtypeEssayQuestionResponse> queryAllQtypeEssayQuestion() {
+        return qtypeEssayQuestionCommandHandler.queryAllQtypeEssayQuestion();
     }
 }

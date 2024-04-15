@@ -8,6 +8,7 @@ import com.backend.programming.learning.system.core.service.domain.ports.output.
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -37,5 +38,13 @@ public class QuestionQueryHelper {
         log.info("Query question with id: {}", question.get().getId().getValue());
 
         return queryQuestionResponse;
+    }
+
+    public List<QueryQuestionResponse> queryAllQuestion() {
+        List<Question> questions = questionRepository.findAllQuestion();
+
+        log.info("Query all questions");
+
+        return questionDataMapper.questionListToQueryQuestionResponseList(questions);
     }
 }

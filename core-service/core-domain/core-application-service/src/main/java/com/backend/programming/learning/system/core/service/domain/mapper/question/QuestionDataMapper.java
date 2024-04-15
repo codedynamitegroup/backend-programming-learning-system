@@ -11,6 +11,7 @@ import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 
 @Component
 public class QuestionDataMapper {
@@ -47,5 +48,11 @@ public class QuestionDataMapper {
         return QueryQuestionResponse.builder()
                 .question(question)
                 .build();
+    }
+
+    public List<QueryQuestionResponse> questionListToQueryQuestionResponseList(List<Question> questions) {
+        return List.of(questions.stream()
+                .map(this::questionToQueryQuestionResponse)
+                .toArray(QueryQuestionResponse[]::new));
     }
 }

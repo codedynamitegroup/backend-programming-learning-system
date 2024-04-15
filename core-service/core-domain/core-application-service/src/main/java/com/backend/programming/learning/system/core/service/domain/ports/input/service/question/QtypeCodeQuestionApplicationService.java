@@ -5,9 +5,11 @@ import com.backend.programming.learning.system.core.service.domain.dto.create.qu
 import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQtypeCodeQuestionResponse;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.UUID;
 
 public interface QtypeCodeQuestionApplicationService {
     CreateQuestionResponse createQtypeCodeQuestion(@Valid CreateQtypeCodeQuestionCommand createQtypeCodeQuestionCommand);
     QueryQtypeCodeQuestionResponse queryQtypeCodeQuestionById(UUID qtCodeQuestionId);
+    List<QueryQtypeCodeQuestionResponse> queryAllQtypeCodeQuestions();
 }

@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.core.service.domain.ports.output.
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeCodeQuestion;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -31,5 +32,14 @@ public class QtypeCodeQuestionRepositoryImpl implements QtypeCodeQuestionReposit
     public Optional<QtypeCodeQuestion> findQtypeCodeQuestion(UUID qtCodeQuestionId) {
         return qtypeCodeQuestionJpaRepository.findById(qtCodeQuestionId)
                 .map(qtypeQuestionDataAccessMapper::qtypeCodeQuestionEntityToQtypeCodeQuestion);
+    }
+
+    @Override
+    public List<QtypeCodeQuestion> findAllQtypeCodeQuestions() {
+        return qtypeCodeQuestionJpaRepository
+                .findAll()
+                .stream()
+                .map(qtypeQuestionDataAccessMapper::qtypeCodeQuestionEntityToQtypeCodeQuestion)
+                .toList();
     }
 }

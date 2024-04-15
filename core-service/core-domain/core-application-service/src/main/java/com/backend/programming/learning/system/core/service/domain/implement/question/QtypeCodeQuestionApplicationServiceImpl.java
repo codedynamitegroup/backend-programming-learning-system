@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -29,5 +30,10 @@ public class QtypeCodeQuestionApplicationServiceImpl implements QtypeCodeQuestio
     @Override
     public QueryQtypeCodeQuestionResponse queryQtypeCodeQuestionById(UUID qtCodeQuestionId) {
         return qtypeCodeQuestionCommandHandler.queryQtypeCodeQuestionById(qtCodeQuestionId);
+    }
+
+    @Override
+    public List<QueryQtypeCodeQuestionResponse> queryAllQtypeCodeQuestions() {
+        return qtypeCodeQuestionCommandHandler.queryAllQtypeCodeQuestion();
     }
 }

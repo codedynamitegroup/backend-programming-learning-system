@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -38,6 +39,15 @@ public class QtypeShortanswerQuestionController {
         QueryQtypeShortanswerQuestionResponse queryQtypeShortanswerQuestionResponse = qtypeShortanswerQuestionApplicationService
                 .queryQtypeShortanswerQuestionById(qtShortanswerQuestionId);
         log.info("Question shortanswer queried: {}", queryQtypeShortanswerQuestionResponse);
+
+        return ResponseEntity.ok(queryQtypeShortanswerQuestionResponse);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<QueryQtypeShortanswerQuestionResponse>> queryAllQtypeShortanswerQuestions() {
+        log.info("Querying all shortanswer questions");
+        List<QueryQtypeShortanswerQuestionResponse> queryQtypeShortanswerQuestionResponse = qtypeShortanswerQuestionApplicationService.queryAllQtypeShortanswerQuestions();
+        log.info("Questions shortanswer queried: {}", queryQtypeShortanswerQuestionResponse);
 
         return ResponseEntity.ok(queryQtypeShortanswerQuestionResponse);
     }

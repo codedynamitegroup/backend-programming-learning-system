@@ -10,6 +10,7 @@ import com.backend.programming.learning.system.core.service.domain.mapper.questi
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -36,5 +37,9 @@ public class QtypeCodeQuestionCommandHandler {
 
     public QueryQtypeCodeQuestionResponse queryQtypeCodeQuestionById(UUID qtypeCodeQuestionId) {
         return qtypeCodeQuestionQueryHelper.queryQtypeCodeQuestionById(qtypeCodeQuestionId);
+    }
+
+    public List<QueryQtypeCodeQuestionResponse> queryAllQtypeCodeQuestion() {
+        return qtypeCodeQuestionQueryHelper.queryAllQtypeCodeQuestions();
     }
 }

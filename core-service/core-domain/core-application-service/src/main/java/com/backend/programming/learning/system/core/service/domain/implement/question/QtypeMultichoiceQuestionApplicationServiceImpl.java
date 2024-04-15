@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -30,5 +31,10 @@ public class QtypeMultichoiceQuestionApplicationServiceImpl implements QtypeMult
     @Override
     public QueryQtypeMultichoiceQuestionResponse queryQtypeMultichoiceQuestionById(UUID qtMultichoiceQuestionId) {
         return qtypeMultichoiceQuestionCommandHandler.queryQtypeMultichoiceQuestionById(qtMultichoiceQuestionId);
+    }
+
+    @Override
+    public List<QueryQtypeMultichoiceQuestionResponse> queryAllQtypeMultichoiceQuestion() {
+        return qtypeMultichoiceQuestionCommandHandler.queryAllQtypeMultichoiceQuestion();
     }
 }

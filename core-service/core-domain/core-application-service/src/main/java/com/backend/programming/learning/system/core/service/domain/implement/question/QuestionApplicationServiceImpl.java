@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -22,5 +23,10 @@ public class QuestionApplicationServiceImpl implements QuestionApplicationServic
     @Override
     public QueryQuestionResponse queryQuestionById(UUID questionId) {
         return questionQueryCommandHandler.queryQuestionById(questionId);
+    }
+
+    @Override
+    public List<QueryQuestionResponse> queryAllQuestion() {
+        return questionQueryCommandHandler.queryAllQuestion();
     }
 }

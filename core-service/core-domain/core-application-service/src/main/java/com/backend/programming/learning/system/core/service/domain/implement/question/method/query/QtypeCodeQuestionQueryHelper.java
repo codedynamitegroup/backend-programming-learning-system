@@ -8,6 +8,7 @@ import com.backend.programming.learning.system.core.service.domain.ports.output.
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -33,10 +34,16 @@ public class QtypeCodeQuestionQueryHelper {
         }
 
         QueryQtypeCodeQuestionResponse queryQtypeCodeQuestionResponse = qtypeCodeQuestionDataMapper
-                .qtypeCodeQuestionToQueryQtypeCodeQuestionByIdResponse(qtypeCodeQuestion.get());
+                .qtypeCodeQuestionToQueryQtypeCodeQuestionResponse(qtypeCodeQuestion.get());
 
         log.info("Query Qtype Code Question with id: {}", qtypeCodeQuestion.get().getId().getValue());
 
         return queryQtypeCodeQuestionResponse;
+    }
+
+    public List<QueryQtypeCodeQuestionResponse> queryAllQtypeCodeQuestions() {
+        List<QtypeCodeQuestion> qtypeCodeQuestions = qtypeCodeQuestionRepository.findAllQtypeCodeQuestions();
+
+        return qtypeCodeQuestionDataMapper.qtypeCodeQuestionsToQueryQtypeCodeQuestionResponses(qtypeCodeQuestions);
     }
 }

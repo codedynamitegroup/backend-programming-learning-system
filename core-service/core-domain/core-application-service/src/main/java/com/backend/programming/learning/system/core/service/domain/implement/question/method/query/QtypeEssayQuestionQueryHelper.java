@@ -8,6 +8,7 @@ import com.backend.programming.learning.system.core.service.domain.ports.output.
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -33,10 +34,18 @@ public class QtypeEssayQuestionQueryHelper {
         }
 
         QueryQtypeEssayQuestionResponse queryQtypeEssayQuestionByIdResponse = qtypeEssayQuestionDataMapper
-                .qtypeEssayQuestionToQueryQtypeEssayQuestionByIdResponse(qtypeEssayQuestion.get());
+                .qtypeEssayQuestionToQueryQtypeEssayQuestionResponse(qtypeEssayQuestion.get());
 
         log.info("Query Qtype Essay Question with id: {}", qtypeEssayQuestion.get().getId().getValue());
 
         return queryQtypeEssayQuestionByIdResponse;
+    }
+
+    public List<QueryQtypeEssayQuestionResponse> queryAllQtypeEssayQuestion() {
+        List<QtypeEssayQuestion> qtypeEssayQuestions = qtypeEssayQuestionRepository.findAllQtypeEssayQuestion();
+
+        log.info("Query all Qtype Essay Questions");
+
+        return qtypeEssayQuestionDataMapper.qtypeEssayQuestionsToQueryQtypeEssayQuestionResponses(qtypeEssayQuestions);
     }
 }

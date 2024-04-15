@@ -8,6 +8,7 @@ import com.backend.programming.learning.system.core.service.domain.ports.output.
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -33,10 +34,18 @@ public class QtypeMultichoiceQuestionQueryHelper {
         }
 
         QueryQtypeMultichoiceQuestionResponse queryQtypeMultichoiceQuestionResponse = qtypeMultichoiceQuestionDataMapper
-                .qtypeMultichoiceQuestionToQueryQtypeMultichoiceQuestionByIdResponse(qtypeMultichoiceQuestion.get());
+                .qtypeMultichoiceQuestionToQueryQtypeMultichoiceQuestionResponse(qtypeMultichoiceQuestion.get());
 
         log.info("Query Qtype Multichoice Question with id: {}", qtypeMultichoiceQuestion.get().getId().getValue());
 
         return queryQtypeMultichoiceQuestionResponse;
+    }
+
+    public List<QueryQtypeMultichoiceQuestionResponse> queryAllQtypeMultichoiceQuestion() {
+        List<QtypeMultiChoiceQuestion> qtypeMultichoiceQuestions = qtypeMultichoiceQuestionRepository.findAllQtypeMultipleChoiceQuestion();
+
+        log.info("Query all Qtype Multichoice Questions");
+
+        return qtypeMultichoiceQuestionDataMapper.qtypeMultichoiceQuestionsToQueryQtypeMultichoiceQuestionResponse(qtypeMultichoiceQuestions);
     }
 }

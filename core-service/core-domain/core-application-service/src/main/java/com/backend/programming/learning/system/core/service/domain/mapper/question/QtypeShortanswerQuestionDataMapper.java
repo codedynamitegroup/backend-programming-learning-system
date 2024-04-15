@@ -6,6 +6,8 @@ import com.backend.programming.learning.system.core.service.domain.entity.QtypeS
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class QtypeShortanswerQuestionDataMapper {
         public QtypeShortAnswerQuestion createQuestionCommandToQtypeShortAnswerQuestion(CreateQtypeShortanswerQuestionCommand createQtypeShortanswerQuestionCommand,
@@ -16,9 +18,15 @@ public class QtypeShortanswerQuestionDataMapper {
                     .build();
         }
 
-        public QueryQtypeShortanswerQuestionResponse qtypeShortanswerQuestionToQueryQtypeShortanswerQuestionByIdResponse(QtypeShortAnswerQuestion qtypeShortanswerQuestion) {
+        public QueryQtypeShortanswerQuestionResponse qtypeShortanswerQuestionToQueryQtypeShortanswerQuestionResponse(QtypeShortAnswerQuestion qtypeShortanswerQuestion) {
             return QueryQtypeShortanswerQuestionResponse.builder()
                     .qtypeShortAnswerQuestion(qtypeShortanswerQuestion)
                     .build();
         }
+
+    public List<QueryQtypeShortanswerQuestionResponse> qtypeShortanswerQuestionsListToQueryQtypeShortanswerQuestionResponseList(List<QtypeShortAnswerQuestion> qtypeShortanswerQuestions) {
+        return List.of(qtypeShortanswerQuestions.stream()
+                .map(this::qtypeShortanswerQuestionToQueryQtypeShortanswerQuestionResponse)
+                .toArray(QueryQtypeShortanswerQuestionResponse[]::new));
+    }
 }

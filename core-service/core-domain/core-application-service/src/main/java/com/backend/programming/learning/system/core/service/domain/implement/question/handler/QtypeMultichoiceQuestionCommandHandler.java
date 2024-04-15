@@ -10,6 +10,7 @@ import com.backend.programming.learning.system.core.service.domain.mapper.questi
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -36,5 +37,9 @@ public class QtypeMultichoiceQuestionCommandHandler {
 
     public QueryQtypeMultichoiceQuestionResponse queryQtypeMultichoiceQuestionById(UUID qtMultichoiceQuestionId) {
         return qtypeMultichoiceQuestionQueryHelper.queryQtypeMultichoiceQuestionById(qtMultichoiceQuestionId);
+    }
+
+    public List<QueryQtypeMultichoiceQuestionResponse> queryAllQtypeMultichoiceQuestion() {
+        return qtypeMultichoiceQuestionQueryHelper.queryAllQtypeMultichoiceQuestion();
     }
 }

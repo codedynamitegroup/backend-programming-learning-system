@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -37,6 +38,16 @@ public class QtypeMultichoiceQuestionController {
         QueryQtypeMultichoiceQuestionResponse queryQtypeMultichoiceQuestionResponse = qtypeMultichoiceQuestionApplicationService
                 .queryQtypeMultichoiceQuestionById(id);
         log.info("Question multichoice queried: {}", queryQtypeMultichoiceQuestionResponse);
+
+        return ResponseEntity.ok(queryQtypeMultichoiceQuestionResponse);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<QueryQtypeMultichoiceQuestionResponse>> queryAllQtypeMultichoiceQuestion() {
+        log.info("Querying all multichoice questions");
+        List<QueryQtypeMultichoiceQuestionResponse> queryQtypeMultichoiceQuestionResponse = qtypeMultichoiceQuestionApplicationService
+                .queryAllQtypeMultichoiceQuestion();
+        log.info("Questions multichoice queried: {}", queryQtypeMultichoiceQuestionResponse);
 
         return ResponseEntity.ok(queryQtypeMultichoiceQuestionResponse);
     }

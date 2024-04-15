@@ -10,6 +10,7 @@ import com.backend.programming.learning.system.core.service.domain.mapper.questi
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -36,5 +37,9 @@ public class QtypeShortanswerQuestionCommandHandler {
 
     public QueryQtypeShortanswerQuestionResponse queryQtypeShortanswerQuestionById(UUID qtShortanswerQuestionId) {
         return qtypeShortanswerQuestionQueryHelper.queryQtypeShortanswerQuestionById(qtShortanswerQuestionId);
+    }
+
+    public List<QueryQtypeShortanswerQuestionResponse> queryAllQtypeShortanswerQuestions() {
+        return qtypeShortanswerQuestionQueryHelper.queryAllQtypeShortanswerQuestions();
     }
 }

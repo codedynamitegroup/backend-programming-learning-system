@@ -8,6 +8,7 @@ import com.backend.programming.learning.system.core.service.domain.ports.output.
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -34,10 +35,19 @@ public class QtypeShortanswerQuestionQueryHelper {
         }
 
         QueryQtypeShortanswerQuestionResponse queryQtypeShortanswerQuestionResponse = qtypeShortanswerQuestionDataMapper
-                .qtypeShortanswerQuestionToQueryQtypeShortanswerQuestionByIdResponse(qtypeShortanswerQuestion.get());
+                .qtypeShortanswerQuestionToQueryQtypeShortanswerQuestionResponse(qtypeShortanswerQuestion.get());
 
         log.info("Query Qtype Shortanswer Question with id: {}", qtypeShortanswerQuestion.get().getId().getValue());
 
         return queryQtypeShortanswerQuestionResponse;
+    }
+
+    public List<QueryQtypeShortanswerQuestionResponse> queryAllQtypeShortanswerQuestions() {
+        List<QtypeShortAnswerQuestion> qtypeShortanswerQuestions = qtypeShortanswerQuestionRepository.findAllQtypeShortAnswerQuestions();
+
+        log.info("Query all Qtype Shortanswer Questions");
+
+        return qtypeShortanswerQuestionDataMapper
+                .qtypeShortanswerQuestionsListToQueryQtypeShortanswerQuestionResponseList(qtypeShortanswerQuestions);
     }
 }

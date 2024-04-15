@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -37,6 +38,16 @@ public class QtypeEssayQuestionController {
         QueryQtypeEssayQuestionResponse queryQuestionResponse = qtypeEssayQuestionApplicationService
                 .queryQtypeEssayQuestionById(id);
         log.info("Essay question retrieved: {}", queryQuestionResponse);
+
+        return ResponseEntity.ok(queryQuestionResponse);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<QueryQtypeEssayQuestionResponse>> queryAllQtypeEssayQuestion() {
+        log.info("Getting all essay questions");
+        List<QueryQtypeEssayQuestionResponse> queryQuestionResponse = qtypeEssayQuestionApplicationService
+                .queryAllQtypeEssayQuestion();
+        log.info("Essay questions retrieved: {}", queryQuestionResponse);
 
         return ResponseEntity.ok(queryQuestionResponse);
     }

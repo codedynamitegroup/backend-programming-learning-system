@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -19,6 +20,15 @@ public class QuestionController {
 
     public QuestionController(QuestionApplicationService questionApplicationService) {
         this.questionApplicationService = questionApplicationService;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<QueryQuestionResponse>> getAllQuestions() {
+        log.info("Getting all questions");
+        List<QueryQuestionResponse> queryQuestionResponse = questionApplicationService.queryAllQuestion();
+        log.info("Questions retrieved: {}", queryQuestionResponse);
+
+        return ResponseEntity.ok(queryQuestionResponse);
     }
 
     @GetMapping("/{id}")

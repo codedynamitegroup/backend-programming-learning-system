@@ -6,6 +6,8 @@ import com.backend.programming.learning.system.core.service.domain.entity.QtypeE
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class QtypeEssayQuestionDataMapper {
     public QtypeEssayQuestion createQtypeEssayQuestionCommandToQtypeEssayQuestion(CreateQtypeEssayQuestionCommand createQtypeEssayQuestionCommand,
@@ -27,9 +29,15 @@ public class QtypeEssayQuestionDataMapper {
                 .build();
     }
 
-    public QueryQtypeEssayQuestionResponse qtypeEssayQuestionToQueryQtypeEssayQuestionByIdResponse(QtypeEssayQuestion qtypeEssayQuestion) {
+    public QueryQtypeEssayQuestionResponse qtypeEssayQuestionToQueryQtypeEssayQuestionResponse(QtypeEssayQuestion qtypeEssayQuestion) {
         return QueryQtypeEssayQuestionResponse.builder()
                 .qtypeEssayQuestion(qtypeEssayQuestion)
                 .build();
+    }
+
+    public List<QueryQtypeEssayQuestionResponse> qtypeEssayQuestionsToQueryQtypeEssayQuestionResponses(List<QtypeEssayQuestion> qtypeEssayQuestions) {
+        return List.of(qtypeEssayQuestions.stream()
+                .map(this::qtypeEssayQuestionToQueryQtypeEssayQuestionResponse)
+                .toArray(QueryQtypeEssayQuestionResponse[]::new));
     }
 }
