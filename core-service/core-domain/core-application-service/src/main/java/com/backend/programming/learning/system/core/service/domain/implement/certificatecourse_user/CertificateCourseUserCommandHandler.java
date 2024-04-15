@@ -26,14 +26,11 @@ import java.util.Optional;
 public class CertificateCourseUserCommandHandler {
     private final CertificateCourseUserCreateHelper certificateCourseUserCreateHelper;
     private final CertificateCourseUserDataMapper certificateCourseUserDataMapper;
-    private final CertificateCourseUserRepository certificateCourseUserRepository;
 
     public CertificateCourseUserCommandHandler(CertificateCourseUserCreateHelper certificateCourseUserCreateHelper,
-                                               CertificateCourseUserDataMapper certificateCourseUserDataMapper,
-                                               CertificateCourseUserRepository certificateCourseUserRepository) {
+                                               CertificateCourseUserDataMapper certificateCourseUserDataMapper) {
         this.certificateCourseUserCreateHelper = certificateCourseUserCreateHelper;
         this.certificateCourseUserDataMapper = certificateCourseUserDataMapper;
-        this.certificateCourseUserRepository = certificateCourseUserRepository;
     }
 
     @Transactional

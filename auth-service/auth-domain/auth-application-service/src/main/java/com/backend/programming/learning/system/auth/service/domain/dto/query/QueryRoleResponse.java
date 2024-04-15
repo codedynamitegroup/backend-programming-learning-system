@@ -6,11 +6,15 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
 public class QueryRoleResponse {
+    @NotNull
+    private UUID id;
+
     private String description;
     private String name;
 

@@ -11,7 +11,7 @@ public class AssignmentSubmission extends AggregateRoot<AssignmentSubmissionId> 
 
     private UserId userId;
     private AssignmentId assignmentId;
-    private Boolean pass_status;
+    private Integer pass_status;
     private Float grade;
     private String content;
     private ZonedDateTime submittedAt;
@@ -38,7 +38,7 @@ public class AssignmentSubmission extends AggregateRoot<AssignmentSubmissionId> 
         return assignmentId;
     }
 
-    public Boolean getPass_status() {
+    public Integer getPass_status() {
         return pass_status;
     }
 
@@ -58,7 +58,7 @@ public class AssignmentSubmission extends AggregateRoot<AssignmentSubmissionId> 
         private AssignmentSubmissionId assignmentSubmissionId;
         private UserId userId;
         private AssignmentId assignmentId;
-        private Boolean pass_status;
+        private Integer pass_status;
         private Float grade;
         private String content;
         private ZonedDateTime submittedAt;
@@ -71,7 +71,7 @@ public class AssignmentSubmission extends AggregateRoot<AssignmentSubmissionId> 
             return new Builder();
         }
 
-        public Builder assignmentSubmission(AssignmentSubmissionId val) {
+        public Builder id(AssignmentSubmissionId val) {
             assignmentSubmissionId = val;
             return this;
         }
@@ -86,7 +86,7 @@ public class AssignmentSubmission extends AggregateRoot<AssignmentSubmissionId> 
             return this;
         }
 
-        public Builder pass_status(Boolean val) {
+        public Builder pass_status(Integer val) {
             pass_status = val;
             return this;
         }

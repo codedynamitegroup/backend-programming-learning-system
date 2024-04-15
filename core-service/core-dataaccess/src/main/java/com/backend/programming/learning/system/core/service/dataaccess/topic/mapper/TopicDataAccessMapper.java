@@ -20,30 +20,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TopicDataAccessMapper {
-
-    private final CertificateCourseJpaRepository certificateCourseJpaRepository;
-    private final UserJpaRepository userJpaRepository;
     private final UserDataAccessMapper userDataAccessMapper;
 
-    public TopicDataAccessMapper(CertificateCourseJpaRepository certificateCourseJpaRepository,
-                                 UserJpaRepository userJpaRepository,
-                                 UserDataAccessMapper userDataAccessMapper) {
-        this.certificateCourseJpaRepository = certificateCourseJpaRepository;
-        this.userJpaRepository = userJpaRepository;
+    public TopicDataAccessMapper(UserDataAccessMapper userDataAccessMapper) {
         this.userDataAccessMapper = userDataAccessMapper;
     }
 
     public TopicEntity topicToTopicEntity(Topic topic) {
-        UserEntity createdBy = userJpaRepository
-                .findById(topic.getCreatedBy().getId().getValue())
-                .orElseThrow(() -> new UserNotFoundException("User with id: " +
-                        topic.getCreatedBy().getId().getValue() + " could not be found!")
-                );
-        UserEntity updatedBy = userJpaRepository
-                .findById(topic.getUpdatedBy().getId().getValue())
-                .orElseThrow(() -> new UserNotFoundException("User with id: " +
-                        topic.getUpdatedBy().getId().getValue() + " could not be found!")
-                );
+        UserEntity createdBy = userDataAccessMapper.userToUserEntity(topic.getCreatedBy());
+        UserEntity updatedBy = userDataAccessMapper.userToUserEntity(topic.getUpdatedBy());
 
         return TopicEntity.builder()
                 .id(topic.getId().getValue())

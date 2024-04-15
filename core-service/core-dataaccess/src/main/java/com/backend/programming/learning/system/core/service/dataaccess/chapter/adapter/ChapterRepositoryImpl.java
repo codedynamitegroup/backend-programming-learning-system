@@ -8,7 +8,11 @@ import com.backend.programming.learning.system.core.service.domain.entity.Certif
 import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ChapterRepository;
+import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class ChapterRepositoryImpl implements ChapterRepository {
@@ -27,5 +31,11 @@ public class ChapterRepositoryImpl implements ChapterRepository {
                 chapterJpaRepository
                         .save(chapterDataAccessMapper
                                 .chapterToChapterEntity(chapter)));
+    }
+
+    @Override
+    public List<Chapter> findAllByCertificateCourseId(CertificateCourseId certificateCourseId) {
+        return chapterDataAccessMapper.chapterEntityListToChapterList(
+                chapterJpaRepository.findAllByCertificateCourseId(certificateCourseId.getValue()));
     }
 }

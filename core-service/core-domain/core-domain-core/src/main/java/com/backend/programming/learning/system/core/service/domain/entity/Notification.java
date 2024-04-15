@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.entity;
 
 import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.NotificationEventType;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.NotificationId;
@@ -17,7 +18,7 @@ public class Notification extends AggregateRoot<NotificationId> {
     private String fullMessage;
     private String smallMessage;
     private String component;
-    private String eventType;
+    private NotificationEventType eventType;
     private String contextUrl;
     private String contextUrlName;
     private Boolean isRead;
@@ -76,7 +77,7 @@ public class Notification extends AggregateRoot<NotificationId> {
         return component;
     }
 
-    public String getEventType() {
+    public NotificationEventType getEventType() {
         return eventType;
     }
 
@@ -112,7 +113,7 @@ public class Notification extends AggregateRoot<NotificationId> {
         private String fullMessage;
         private String smallMessage;
         private String component;
-        private String eventType;
+        private NotificationEventType eventType;
         private String contextUrl;
         private String contextUrlName;
         private Boolean isRead;
@@ -158,7 +159,7 @@ public class Notification extends AggregateRoot<NotificationId> {
             return this;
         }
 
-        public Builder eventType(String val) {
+        public Builder eventType(NotificationEventType val) {
             eventType = val;
             return this;
         }

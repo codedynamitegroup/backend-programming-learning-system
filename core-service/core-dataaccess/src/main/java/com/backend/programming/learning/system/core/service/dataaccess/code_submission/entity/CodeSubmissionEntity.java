@@ -19,6 +19,8 @@ public class CodeSubmissionEntity {
     private UUID id;
     private UUID codeQuestionId;
     private UUID userId;
+    private UUID programmingLanguageId;
+    private String sourceCode;
     private Float grade;
     private Boolean pass;
 

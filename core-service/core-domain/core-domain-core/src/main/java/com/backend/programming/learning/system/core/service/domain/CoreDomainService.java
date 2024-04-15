@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.core.service.domain;
 
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
+import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 
 public interface CoreDomainService {
     QuestionCreatedEvent createQuestion(Question question);
@@ -16,4 +17,5 @@ public interface CoreDomainService {
     void createNotification(Notification notification);
     void createChapter(Chapter chapter);
     void createCertificateCourseUser(CertificateCourseUser certificateCourseUser);
+    void createContestUser(ContestUser contestUser);
 }

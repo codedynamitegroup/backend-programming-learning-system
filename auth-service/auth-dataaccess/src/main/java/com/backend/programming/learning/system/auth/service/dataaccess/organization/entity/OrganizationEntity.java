@@ -1,10 +1,13 @@
 package com.backend.programming.learning.system.auth.service.dataaccess.organization.entity;
 
+import com.backend.programming.learning.system.auth.service.dataaccess.role.entity.RoleEntity;
+import com.backend.programming.learning.system.auth.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import javax.persistence.*;
 import lombok.*;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -18,8 +21,15 @@ import java.util.UUID;
 public class OrganizationEntity {
     @Id
     private UUID id;
-    private UUID createdBy;
-    private UUID updatedBy;
+
+    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @JoinColumn(name = "created_by", referencedColumnName = "id")
+    private UserEntity createdBy;
+
+    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @JoinColumn(name = "updated_by", referencedColumnName = "id")
+    private UserEntity updatedBy;
+
     private String description;
     private String name;
     private String email;
@@ -30,6 +40,9 @@ public class OrganizationEntity {
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
     private Boolean isDeleted;
+
+    @OneToMany(mappedBy = "organization")
+    private List<RoleEntity> roles;
 
     @Override
     public boolean equals(Object o) {

@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.dataaccess.notification.entity;
 
+import com.backend.programming.learning.system.core.service.domain.valueobject.NotificationEventType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,7 +25,10 @@ public class NotificationEntity {
     private String fullMessage;
     private String smallMessage;
     private String component;
-    private String eventType;
+    
+    @Enumerated(EnumType.STRING)
+    private NotificationEventType eventType;
+
     private String contextUrl;
     private String contextUrlName;
     private Boolean isRead;

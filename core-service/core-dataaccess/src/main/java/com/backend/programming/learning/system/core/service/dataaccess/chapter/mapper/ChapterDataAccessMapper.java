@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.dataaccess.chapter.mapper;
 
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.mapper.CertificateCourseDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.repository.CertificateCourseJpaRepository;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter.entity.ChapterEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
@@ -18,37 +19,23 @@ import com.backend.programming.learning.system.core.service.domain.valueobject.C
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class ChapterDataAccessMapper {
-
-    private final CertificateCourseJpaRepository certificateCourseJpaRepository;
-    private final UserJpaRepository userJpaRepository;
     private final UserDataAccessMapper userDataAccessMapper;
 
-    public ChapterDataAccessMapper(CertificateCourseJpaRepository certificateCourseJpaRepository,
-                                   UserJpaRepository userJpaRepository,
-                                   UserDataAccessMapper userDataAccessMapper) {
-        this.certificateCourseJpaRepository = certificateCourseJpaRepository;
-        this.userJpaRepository = userJpaRepository;
+    public ChapterDataAccessMapper(UserDataAccessMapper userDataAccessMapper) {
         this.userDataAccessMapper = userDataAccessMapper;
     }
 
     public ChapterEntity chapterToChapterEntity(Chapter chapter) {
-        CertificateCourseEntity certificateCourse = certificateCourseJpaRepository
-                .findById(chapter.getCertificateCourseId().getValue())
-                .orElseThrow(() -> new CertificateCourseNotFoundException("Certificate course with id: " +
-                        chapter.getCertificateCourseId().getValue() + " could not be found!")
-                );
-        UserEntity createdBy = userJpaRepository
-                .findById(chapter.getCreatedBy().getId().getValue())
-                .orElseThrow(() -> new UserNotFoundException("User with id: " +
-                        chapter.getCreatedBy().getId().getValue() + " could not be found!")
-                );
-        UserEntity updatedBy = userJpaRepository
-                .findById(chapter.getUpdatedBy().getId().getValue())
-                .orElseThrow(() -> new UserNotFoundException("User with id: " +
-                        chapter.getUpdatedBy().getId().getValue() + " could not be found!")
-                );
+        CertificateCourseEntity certificateCourse = CertificateCourseEntity.builder()
+                .id(chapter.getCertificateCourseId().getValue())
+                .build();
+        UserEntity createdBy = userDataAccessMapper.userToUserEntity(chapter.getCreatedBy());
+        UserEntity updatedBy = userDataAccessMapper.userToUserEntity(chapter.getUpdatedBy());
 
         return ChapterEntity.builder()
                 .id(chapter.getId().getValue())
@@ -65,6 +52,7 @@ public class ChapterDataAccessMapper {
     public Chapter chapterEntityToChapter(ChapterEntity chapterEntity) {
         User createdBy = userDataAccessMapper.userEntityToUser(chapterEntity.getCreatedBy());
         User updatedBy = userDataAccessMapper.userEntityToUser(chapterEntity.getUpdatedBy());
+
         return Chapter.builder()
                 .id(new ChapterId(chapterEntity.getId()))
                 .certificateCourseId(new CertificateCourseId(chapterEntity.getCertificateCourse().getId()))
@@ -75,5 +63,13 @@ public class ChapterDataAccessMapper {
                 .createdAt(chapterEntity.getCreatedAt())
                 .updatedAt(chapterEntity.getUpdatedAt())
                 .build();
+    }
+
+    public List<Chapter> chapterEntityListToChapterList(List<ChapterEntity> chapterEntities) {
+        List<Chapter> chapters = new ArrayList<>();
+        for (ChapterEntity chapterEntity : chapterEntities) {
+            chapters.add(chapterEntityToChapter(chapterEntity));
+        }
+        return chapters;
     }
 }

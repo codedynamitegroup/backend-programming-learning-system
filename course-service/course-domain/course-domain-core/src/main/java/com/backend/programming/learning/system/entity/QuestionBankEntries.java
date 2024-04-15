@@ -9,6 +9,7 @@ public class QuestionBankEntries extends AggregateRoot<QuestionBankEntriesId> {
     private QuestionId questionId;
     private QuestionBankCategoryId questionBankCategoryId;
 
+
     private QuestionBankEntries(Builder builder) {
         super.setId(builder.questionBankEntriesId);
         questionId = builder.questionId;

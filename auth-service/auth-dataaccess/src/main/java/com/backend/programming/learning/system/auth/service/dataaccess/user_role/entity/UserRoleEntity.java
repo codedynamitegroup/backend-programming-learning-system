@@ -1,6 +1,10 @@
 package com.backend.programming.learning.system.auth.service.dataaccess.user_role.entity;
 
 import javax.persistence.*;
+
+import com.backend.programming.learning.system.auth.service.dataaccess.role.entity.RoleEntity;
+import com.backend.programming.learning.system.auth.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.auth.service.domain.entity.Role;
 import lombok.*;
 
 import java.time.ZonedDateTime;
@@ -17,10 +21,23 @@ import java.util.UUID;
 public class UserRoleEntity {
     @Id
     private UUID id;
-    private UUID userId;
-    private UUID roleId;
-    private UUID createdBy;
-    private UUID updatedBy;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private UserEntity user;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private RoleEntity role;
+
+    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @JoinColumn(name = "created_by", referencedColumnName = "id")
+    private UserEntity createdBy;
+
+    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @JoinColumn(name = "updated_by", referencedColumnName = "id")
+    private UserEntity updatedBy;
+
     private boolean isActive;
     private String name;
     private ZonedDateTime createdAt;

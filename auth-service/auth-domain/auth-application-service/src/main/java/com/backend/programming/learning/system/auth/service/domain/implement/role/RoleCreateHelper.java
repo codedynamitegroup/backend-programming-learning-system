@@ -4,12 +4,15 @@ import com.backend.programming.learning.system.auth.service.domain.AuthDomainSer
 import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.entity.Role;
+import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
 import com.backend.programming.learning.system.auth.service.domain.mapper.RoleDataMapper;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.OrganizationRepository;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.RoleRepository;
+import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
+import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,17 +27,21 @@ public class RoleCreateHelper {
     private final RoleRepository roleRepository;
     private final OrganizationRepository organizationRepository;
     private final RoleDataMapper roleDataMapper;
+    private final UserRepository userRepository;
 
-    public RoleCreateHelper(AuthDomainService authDomainService, RoleRepository roleRepository, OrganizationRepository organizationRepository, RoleDataMapper roleDataMapper) {
+    public RoleCreateHelper(AuthDomainService authDomainService, RoleRepository roleRepository, OrganizationRepository organizationRepository, RoleDataMapper roleDataMapper, UserRepository userRepository) {
         this.authDomainService = authDomainService;
         this.roleRepository = roleRepository;
         this.organizationRepository = organizationRepository;
         this.roleDataMapper = roleDataMapper;
+        this.userRepository = userRepository;
     }
 
     @Transactional
     public Role persistRole(CreateRoleCommand createRoleCommand) {
         Role role = roleDataMapper.createRoleCommandToRole(createRoleCommand);
+        checkUserExist(role.getCreatedBy().getValue());
+        checkUserExist(role.getUpdatedBy().getValue());
         checkOrganization(role.getOrganizationId().getValue());
         authDomainService.createRole(role);
         return saveRole(role);
@@ -47,6 +54,15 @@ public class RoleCreateHelper {
             throw new AuthNotFoundException("Could not find organization with id: " + organizationId);
         }
     }
+
+    private void checkUserExist(UUID userId) {
+        Optional<User> user = userRepository.findById(new UserId(userId));
+        if (user.isEmpty()) {
+            log.error("User with id: {} could not be found!", userId);
+            throw new AuthDomainException("User with id: " + userId + " could not be found!");
+        }
+    }
+
 
     private Role saveRole(Role role) {
         Role roleResult = roleRepository.save(role);

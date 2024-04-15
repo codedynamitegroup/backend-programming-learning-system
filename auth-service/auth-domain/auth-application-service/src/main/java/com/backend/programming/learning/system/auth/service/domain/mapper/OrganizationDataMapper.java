@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.create.Cr
 import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
+import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,11 +16,14 @@ public class OrganizationDataMapper {
                 .name(createOrganizationCommand.getName())
                 .phone(createOrganizationCommand.getPhone())
                 .address(createOrganizationCommand.getAddress())
+                .createdBy(new UserId(createOrganizationCommand.getCreatedBy()))
+                .updatedBy(new UserId(createOrganizationCommand.getUpdatedBy()))
                 .build();
     }
 
     public CreateOrganizationResponse OrganizationToCreateOrganizationResponse(Organization organization, String message) {
         return CreateOrganizationResponse.builder()
+                .id(organization.getId().getValue())
                 .email(organization.getEmail())
                 .description(organization.getDescription())
                 .name(organization.getName())
@@ -31,6 +35,7 @@ public class OrganizationDataMapper {
 
     public QueryOrganizationResponse organizationToQueryOrganizationResponse(Organization organization) {
         return QueryOrganizationResponse.builder()
+                .id(organization.getId().getValue())
                 .email(organization.getEmail())
                 .description(organization.getDescription())
                 .name(organization.getName())
@@ -40,6 +45,7 @@ public class OrganizationDataMapper {
                 .moodleUrl(organization.getMoodleUrl())
                 .createdAt(organization.getCreatedAt())
                 .updatedAt(organization.getUpdatedAt())
+                .isDeleted(organization.getDeleted())
                 .build();
     }
 }

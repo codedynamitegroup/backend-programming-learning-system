@@ -49,6 +49,10 @@
     {
       "name": "email",
       "type": "string"
+    },
+    {
+      "name": "isActive",
+      "type": "boolean"
     }
   ]
 }

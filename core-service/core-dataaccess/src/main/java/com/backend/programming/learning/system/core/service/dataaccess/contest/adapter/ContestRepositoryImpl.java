@@ -8,7 +8,10 @@ import com.backend.programming.learning.system.core.service.domain.entity.Chapte
 import com.backend.programming.learning.system.core.service.domain.entity.Contest;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ChapterRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ContestRepository;
+import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 public class ContestRepositoryImpl implements ContestRepository {
@@ -27,5 +30,11 @@ public class ContestRepositoryImpl implements ContestRepository {
                 contestJpaRepository
                         .save(contestDataAccessMapper
                                 .contestToContestEntity(contest)));
+    }
+
+    @Override
+    public Optional<Contest> findById(ContestId contestId) {
+        return contestJpaRepository.findById(contestId.getValue())
+                .map(contestDataAccessMapper::contestEntityToContest);
     }
 }

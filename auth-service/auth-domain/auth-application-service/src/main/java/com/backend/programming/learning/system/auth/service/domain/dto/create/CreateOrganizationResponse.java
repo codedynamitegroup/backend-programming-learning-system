@@ -6,11 +6,15 @@ import lombok.Getter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
 public class CreateOrganizationResponse {
+    @NotNull
+    private UUID id;
+
     @NotNull
     @Email
     private String email;

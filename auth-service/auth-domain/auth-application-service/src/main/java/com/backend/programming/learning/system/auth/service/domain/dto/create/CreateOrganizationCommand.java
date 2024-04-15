@@ -6,6 +6,7 @@ import lombok.Getter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @Getter
 @Builder
@@ -22,4 +23,10 @@ public class CreateOrganizationCommand {
 
     private final String phone;
     private final String address;
+
+    @NotNull
+    private final UUID createdBy;
+
+    @NotNull
+    private final UUID updatedBy;
 }

@@ -39,7 +39,7 @@ public class WebhookFunctionOrganization extends AggregateRoot<WebhookFunctionOr
             return new Builder();
         }
 
-        public Builder webhookFunctionOrrganizationId(WebhookFunctionOrganizationId val) {
+        public Builder id(WebhookFunctionOrganizationId val) {
             webhookFunctionOrganizationId = val;
             return this;
         }

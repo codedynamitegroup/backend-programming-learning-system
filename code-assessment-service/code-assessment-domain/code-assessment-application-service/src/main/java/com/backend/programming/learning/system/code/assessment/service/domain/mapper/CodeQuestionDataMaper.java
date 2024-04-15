@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.mapper;
 
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.create.CreateCodeQuestionCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.create.CreateCodeQuestionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.create.codequestion.CreateCodeQuestionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.create.codequestion.CreateCodeQuestionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.TestCase;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
@@ -31,7 +31,7 @@ public class CodeQuestionDataMaper {
     }
 
     private List<TestCase> testCaseToTestCaseEntities(
-            List<com.backend.programming.learning.system.code.assessment.service.domain.dto.create.TestCase> testCases) {
+            List<com.backend.programming.learning.system.code.assessment.service.domain.dto.create.commandentity.TestCase> testCases) {
         if(testCases == null) return null;
         return testCases.stream().map(testCase->
                                         TestCase.builder()

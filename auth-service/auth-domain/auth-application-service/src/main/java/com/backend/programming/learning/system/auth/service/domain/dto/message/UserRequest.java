@@ -19,4 +19,5 @@ public class UserRequest {
     private String avatarUrl;
     private Date dob;
     private Instant createdAt;
+    private Boolean isDeleted;
 }
