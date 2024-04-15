@@ -7,17 +7,20 @@ import com.backend.programming.learning.system.domain.valueobject.CodeSubmission
 import com.backend.programming.learning.system.domain.valueobject.SubmissionPassStatus;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
+import java.util.List;
+
 public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
     private final CodeQuestionId codeQuestionId;
     private final UserId userId;
     private final LanguageId languageId;
-    private double grade;
-    private double runTime;
-    private double memory;
+    private Double grade;
+    private Double runTime;
+    private Double memory;
     private String sourceCode;
     private SubmissionPassStatus submissionPassStatus;
     private String aiAssessment;
     private String sonaqueAssessment;
+    private List<CodeSubmissionTestCase> codeSubmissionTestCaseList;
 
     private CodeSubmission(Builder builder) {
         codeQuestionId = builder.codeQuestionId;
@@ -30,6 +33,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         submissionPassStatus = builder.submissionPassStatus;
         aiAssessment = builder.aiAssessment;
         sonaqueAssessment = builder.sonaqueAssessment;
+        codeSubmissionTestCaseList = builder.codeSubmissionTestCaseList;
         super.setId(builder.id);
     }
 
@@ -37,7 +41,9 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         return new Builder();
     }
 
-
+    public List<CodeSubmissionTestCase> getCodeSubmissionTestCaseList() {
+        return codeSubmissionTestCaseList;
+    }
     public CodeQuestionId getCodeQuestionId() {
         return codeQuestionId;
     }
@@ -50,15 +56,15 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         return languageId;
     }
 
-    public double getGrade() {
+    public Double getGrade() {
         return grade;
     }
 
-    public double getRunTime() {
+    public Double getRunTime() {
         return runTime;
     }
 
-    public double getMemory() {
+    public Double getMemory() {
         return memory;
     }
 
@@ -82,13 +88,14 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         private CodeQuestionId codeQuestionId;
         private UserId userId;
         private LanguageId languageId;
-        private double grade;
-        private double runTime;
-        private double memory;
+        private Double grade;
+        private Double runTime;
+        private Double memory;
         private String sourceCode;
         private SubmissionPassStatus submissionPassStatus;
         private String aiAssessment;
         private String sonaqueAssessment;
+        private List<CodeSubmissionTestCase> codeSubmissionTestCaseList;
         private CodeSubmissionId id;
 
         private Builder() {
@@ -109,17 +116,17 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
             return this;
         }
 
-        public Builder grade(double val) {
+        public Builder grade(Double val) {
             grade = val;
             return this;
         }
 
-        public Builder runTime(double val) {
+        public Builder runTime(Double val) {
             runTime = val;
             return this;
         }
 
-        public Builder memory(double val) {
+        public Builder memory(Double val) {
             memory = val;
             return this;
         }
@@ -143,6 +150,12 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
             sonaqueAssessment = val;
             return this;
         }
+
+        public Builder codeSubmissionTestCaseList(List<CodeSubmissionTestCase> val) {
+            codeSubmissionTestCaseList = val;
+            return this;
+        }
+
 
         public Builder id(CodeSubmissionId val) {
             id = val;
