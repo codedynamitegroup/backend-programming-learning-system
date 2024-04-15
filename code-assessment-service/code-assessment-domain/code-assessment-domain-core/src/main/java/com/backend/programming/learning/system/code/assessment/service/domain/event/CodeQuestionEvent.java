@@ -22,5 +22,6 @@ public abstract class CodeQuestionEvent implements DomainEvent<CodeQuestion> {
     public ZonedDateTime getCreatedAt() {
         return createdAt;
     }
+    public void fire(){}
 
 }

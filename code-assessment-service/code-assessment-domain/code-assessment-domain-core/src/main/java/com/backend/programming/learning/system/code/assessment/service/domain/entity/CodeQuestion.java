@@ -31,10 +31,9 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     }
 
     private void intializeTestCases() {
-        long tcId = 1;
         if(testCases != null)
             for(TestCase testCase: testCases){
-                testCase.initializeTestCase(super.getId(), new TestCaseId(tcId++));
+                testCase.initializeTestCase(super.getId(), new TestCaseId(UUID.randomUUID()));
             }
     }
 

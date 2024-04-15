@@ -4,8 +4,8 @@ import com.backend.programming.learning.system.domain.valueobject.BaseId;
 
 import java.util.UUID;
 
-public class TestCaseId extends BaseId<UUID> {
-    public TestCaseId(UUID value) {
+public class LanguageId extends BaseId<UUID> {
+    public LanguageId(UUID value) {
         super(value);
     }
 }

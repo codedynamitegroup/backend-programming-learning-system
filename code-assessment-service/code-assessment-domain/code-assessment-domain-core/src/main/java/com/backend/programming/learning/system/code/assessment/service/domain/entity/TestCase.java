@@ -4,16 +4,20 @@ import com.backend.programming.learning.system.code.assessment.service.domain.va
 import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 
+import java.util.List;
+
 public class TestCase extends BaseEntity<TestCaseId> {
     private CodeQuestionId codeQuestionId;
     private final String inputData;
     private final String outputData;
     private final boolean isSample;
+    private List<CodeSubmissionTestCase> codeSubmissionTestCaseList;
 
     private TestCase(Builder builder) {
         inputData = builder.inputData;
         outputData = builder.outputData;
         isSample = builder.isSample;
+        codeSubmissionTestCaseList = builder.codeSubmissionTestCaseList;
         super.setId(builder.id);
     }
 
@@ -38,22 +42,28 @@ public class TestCase extends BaseEntity<TestCaseId> {
         super.setId(testCaseId);
 
     }
+    public static Builder builder() {
+        return new Builder();
+    }
+
 
     public static final class Builder {
         private String inputData;
         private String outputData;
         private boolean isSample;
         private TestCaseId id;
+        private List<CodeSubmissionTestCase> codeSubmissionTestCaseList;
 
         private Builder() {
         }
 
-        public static Builder builder() {
-            return new Builder();
-        }
 
         public Builder inputData(String val) {
             inputData = val;
+            return this;
+        }
+        public Builder codeSubmissionTestCaseList(List<CodeSubmissionTestCase> val) {
+            codeSubmissionTestCaseList = val;
             return this;
         }
 

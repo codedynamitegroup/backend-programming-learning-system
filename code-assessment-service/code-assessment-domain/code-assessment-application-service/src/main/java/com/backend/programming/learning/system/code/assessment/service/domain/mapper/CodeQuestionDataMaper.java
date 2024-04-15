@@ -34,7 +34,7 @@ public class CodeQuestionDataMaper {
             List<com.backend.programming.learning.system.code.assessment.service.domain.dto.create.TestCase> testCases) {
         if(testCases == null) return null;
         return testCases.stream().map(testCase->
-                                        TestCase.Builder.builder()
+                                        TestCase.builder()
                                             .inputData(testCase.getInputData())
                                             .outputData(testCase.getOutputData())
                                             .isSample(testCase.isSample())

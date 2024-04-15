@@ -1,17 +1,9 @@
 package com.backend.programming.learning.system.core.service.domain.entity;
 
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.CodeSubmissionId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
-import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
+import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
 import com.backend.programming.learning.system.domain.valueobject.QtypeCodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
-
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.List;
-import java.util.UUID;
 
 public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
     private final QtypeCodeQuestionId codeQuestionId;

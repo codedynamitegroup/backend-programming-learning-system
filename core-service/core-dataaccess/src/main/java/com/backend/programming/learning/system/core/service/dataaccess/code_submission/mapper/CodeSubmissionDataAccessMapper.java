@@ -12,6 +12,7 @@ import com.backend.programming.learning.system.core.service.domain.exception.Cer
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterId;
+import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
 import com.backend.programming.learning.system.domain.valueobject.QtypeCodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
@@ -32,7 +33,7 @@ public class CodeSubmissionDataAccessMapper {
 
     public CodeSubmission codeSubmissionEntityToCodeSubmission(CodeSubmissionEntity codeSubmissionEntity) {
         return CodeSubmission.builder()
-                .id(new com.backend.programming.learning.system.core.service.domain.valueobject.CodeSubmissionId(codeSubmissionEntity.getId()))
+                .id(new CodeSubmissionId(codeSubmissionEntity.getId()))
                 .codeQuestionId(new QtypeCodeQuestionId(codeSubmissionEntity.getCodeQuestionId()))
                 .userId(new UserId(codeSubmissionEntity.getUserId()))
                 .grade(codeSubmissionEntity.getGrade())

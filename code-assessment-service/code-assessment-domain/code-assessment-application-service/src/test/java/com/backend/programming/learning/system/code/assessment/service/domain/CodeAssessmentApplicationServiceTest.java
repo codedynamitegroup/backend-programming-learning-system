@@ -43,14 +43,16 @@ public class CodeAssessmentApplicationServiceTest {
     public void init(){
         command = CreateCodeQuestionCommand.builder()
                 .questionId(QUESTION_ID)
-                .testCases(null)
                 .dslTemplate("haha")
                 .isDeleted(false)
                 .problemStatement("haa")
                 .inputFormat("ha")
                 .outputFormat("hah")
                 .build();
-        Question question = new Question(new QuestionId(QUESTION_ID));
+        Question question = Question.builder()
+                .questionId(new QuestionId(QUESTION_ID))
+                .generalFeedback("haha")
+                .build();
         CodeQuestion codeQuestion = codeQuestionDataMaper.createCodeQuestionCommandToCodeQuestion(command);
         codeQuestion.setId(new CodeQuestionId(CODEQUESTION_ID));
         when(questionRepository.findQuestionInformation(QUESTION_ID)).thenReturn(Optional.of(question));
