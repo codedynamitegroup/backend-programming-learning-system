@@ -19,15 +19,15 @@ import java.util.Optional;
 @Slf4j
 public class CertificateCourseCommandHandler {
     private final CertificateCourseCreateHelper certificateCourseCreateHelper;
+    private final CertificateCourseQueryHelper certificateCourseQueryHelper;
     private final CertificateCourseDataMapper certificateCourseDataMapper;
-    private final CertificateCourseRepository certificateCourseRepository;
 
     public CertificateCourseCommandHandler(CertificateCourseCreateHelper certificateCourseCreateHelper,
-                                           CertificateCourseDataMapper certificateCourseDataMapper,
-                                           CertificateCourseRepository certificateCourseRepository) {
+                                           CertificateCourseQueryHelper certificateCourseQueryHelper,
+                                           CertificateCourseDataMapper certificateCourseDataMapper) {
         this.certificateCourseCreateHelper = certificateCourseCreateHelper;
+        this.certificateCourseQueryHelper = certificateCourseQueryHelper;
         this.certificateCourseDataMapper = certificateCourseDataMapper;
-        this.certificateCourseRepository = certificateCourseRepository;
     }
 
     @Transactional
@@ -45,16 +45,11 @@ public class CertificateCourseCommandHandler {
     @Transactional(readOnly = true)
     public QueryCertificateCourseResponse findCertificateCourseById(
             QueryCertificateCourseCommand queryCertificateCourseCommand) {
-        Optional<CertificateCourse> certificateCourseResult =
-                certificateCourseRepository.findById(new CertificateCourseId(
-                        queryCertificateCourseCommand.getCertificateCourseId()));
-        if (certificateCourseResult.isEmpty()) {
-            log.warn("Could not find certificate course with id: {}",
-                    queryCertificateCourseCommand.getCertificateCourseId());
-            throw new CertificateCourseNotFoundException("Could not find certificate course with id: " +
-                    queryCertificateCourseCommand.getCertificateCourseId());
-        }
-        return certificateCourseDataMapper.certificateCourseToQueryCertificateCourseResponse(
-                certificateCourseResult.get());
+        CertificateCourse certificateCourse = certificateCourseQueryHelper
+                .getCertificateCourse(queryCertificateCourseCommand);
+
+        log.info("Certificate course found with id: {}", certificateCourse.getId().getValue());
+
+        return certificateCourseDataMapper.certificateCourseToQueryCertificateCourseResponse(certificateCourse);
     }
 }

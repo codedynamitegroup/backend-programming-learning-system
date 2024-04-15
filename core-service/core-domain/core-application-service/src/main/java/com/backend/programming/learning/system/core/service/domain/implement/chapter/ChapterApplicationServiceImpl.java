@@ -27,6 +27,6 @@ class ChapterApplicationServiceImpl implements ChapterApplicationService {
 
     @Override
     public CreateChapterResponse createChapter(CreateChapterCommand createChapterCommand) {
-        return null;
+        return chapterCommandHandler.createChapterResponse(createChapterCommand);
     }
 }

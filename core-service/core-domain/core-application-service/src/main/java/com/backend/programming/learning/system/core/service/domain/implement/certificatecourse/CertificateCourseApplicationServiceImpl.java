@@ -28,7 +28,8 @@ class CertificateCourseApplicationServiceImpl implements CertificateCourseApplic
     }
 
     @Override
-    public QueryCertificateCourseResponse findCertificateCourseById(QueryCertificateCourseCommand queryCertificateCourseCommand) {
+    public QueryCertificateCourseResponse findCertificateCourseById(
+            @Valid QueryCertificateCourseCommand queryCertificateCourseCommand) {
         return certificateCourseCommandHandler.findCertificateCourseById(queryCertificateCourseCommand);
     }
 }
