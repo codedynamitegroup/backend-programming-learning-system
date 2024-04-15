@@ -13,6 +13,9 @@ CREATE TYPE difficulty AS ENUM ('EASY', 'MEDIUM', 'HARD');
 DROP TYPE IF EXISTS qtype;
 CREATE TYPE qtype AS ENUM ('MULTIPLE_CHOICE', 'SHORT_ANSWER', 'CODE', 'ESSAY');
 
+DROP TYPE IF EXISTS notification_event_type;
+CREATE TYPE notification_event_type AS ENUM ('USER', 'COURSE');
+
 DROP TABLE IF EXISTS "public".user CASCADE;
 
 CREATE TABLE "public".user
@@ -403,7 +406,7 @@ CREATE TABLE "public".notification
     full_message text,
     small_message text,
     component text,
-    event_type text NOT NULL,
+    event_type notification_event_type NOT NULL,
     context_url text,
     context_url_name text,
     is_read bool DEFAULT FALSE NOT NULL,
