@@ -32,13 +32,13 @@ public class QtypeShortanswerQuestionCreateHelper {
         QuestionCreatedEvent questionCreatedEvent = questionCreateHelper.persistQuestion(createQtypeShortanswerQuestionCommand);
         QtypeShortAnswerQuestion qtypeShortAnswerQuestion = qtypeShortanswerQuestionDataMapper
                 .createQuestionCommandToQtypeShortAnswerQuestion(createQtypeShortanswerQuestionCommand,
-                        questionCreatedEvent.getQuestion().getId());
+                        questionCreatedEvent.getQuestion());
 
         // init QtypeShortAnswerQuestion
         coreDomainService.createQtypeShortAnswerQuestion(qtypeShortAnswerQuestion);
         qtypeShortanswerQuestionRepository.saveQtypeShortAnswerQuestion(qtypeShortAnswerQuestion);
 
-        log.info("Qtype Short Answer Question created with id: {}", qtypeShortAnswerQuestion.getQuestionId().getValue());
+        log.info("Qtype Short Answer Question created with id: {}", qtypeShortAnswerQuestion.getId().getValue());
         return questionCreatedEvent;
     }
 }

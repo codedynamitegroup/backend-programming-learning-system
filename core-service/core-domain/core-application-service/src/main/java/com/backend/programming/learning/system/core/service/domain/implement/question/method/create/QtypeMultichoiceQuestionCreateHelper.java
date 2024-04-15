@@ -31,13 +31,13 @@ public class QtypeMultichoiceQuestionCreateHelper {
         QuestionCreatedEvent questionCreatedEvent = questionCreateHelper.persistQuestion(createQtypeMultichoiceQuestionCommand);
         QtypeMultiChoiceQuestion qtypeMultiChoiceQuestion = qtypeMultichoiceQuestionDataMapper
                 .createQuestionCommandToQtypeMultiChoiceQuestion(createQtypeMultichoiceQuestionCommand,
-                        questionCreatedEvent.getQuestion().getId());
+                        questionCreatedEvent.getQuestion());
 
         // init QtypeMultiChoiceQuestion
         coreDomainService.createQtypeMultipleChoiceQuestion(qtypeMultiChoiceQuestion);
         qtypeMultichoiceQuestionRepository.saveQtypeMultipleChoiceQuestion(qtypeMultiChoiceQuestion);
 
-        log.info("Qtype Multi Choice Question created with id: {}", qtypeMultiChoiceQuestion.getQuestionId().getValue());
+        log.info("Qtype Multi Choice Question created with id: {}", qtypeMultiChoiceQuestion.getId().getValue());
         return questionCreatedEvent;
     }
 }

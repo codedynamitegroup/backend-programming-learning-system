@@ -16,6 +16,10 @@ import java.util.UUID;
 public class QtypeShortanswerQuestionEntity {
     @Id
     private UUID id;
-    private UUID questionId;
+
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinColumn(name = "question_id", referencedColumnName = "id")
+    private QuestionEntity question;
+
     private Boolean caseSensitive;
 }

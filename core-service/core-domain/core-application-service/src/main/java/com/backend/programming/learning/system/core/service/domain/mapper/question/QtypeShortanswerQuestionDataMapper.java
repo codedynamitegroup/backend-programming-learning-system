@@ -1,18 +1,24 @@
 package com.backend.programming.learning.system.core.service.domain.mapper.question;
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQtypeShortanswerQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQtypeShortanswerQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeShortAnswerQuestion;
-import com.backend.programming.learning.system.domain.valueobject.QuestionId;
-import lombok.extern.slf4j.Slf4j;
+import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import org.springframework.stereotype.Component;
 
 @Component
 public class QtypeShortanswerQuestionDataMapper {
         public QtypeShortAnswerQuestion createQuestionCommandToQtypeShortAnswerQuestion(CreateQtypeShortanswerQuestionCommand createQtypeShortanswerQuestionCommand,
-                                                                                        QuestionId questionId) {
+                                                                                        Question question) {
             return QtypeShortAnswerQuestion.builder()
-                    .questionId(questionId)
+                    .question(question)
                     .caseSensitive(createQtypeShortanswerQuestionCommand.getCaseSensitive())
+                    .build();
+        }
+
+        public QueryQtypeShortanswerQuestionResponse qtypeShortanswerQuestionToQueryQtypeShortanswerQuestionByIdResponse(QtypeShortAnswerQuestion qtypeShortanswerQuestion) {
+            return QueryQtypeShortanswerQuestionResponse.builder()
+                    .qtypeShortAnswerQuestion(qtypeShortanswerQuestion)
                     .build();
         }
 }

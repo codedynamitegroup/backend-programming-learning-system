@@ -31,13 +31,13 @@ public class QtypeEssayQuestionCreateHelper {
         QuestionCreatedEvent questionCreatedEvent = questionCreateHelper.persistQuestion(createQtypeEssayQuestionCommand);
         QtypeEssayQuestion qtypeEssayQuestion = qtypeEssayQuestionDataMapper
                 .createQtypeEssayQuestionCommandToQtypeEssayQuestion(createQtypeEssayQuestionCommand,
-                        questionCreatedEvent.getQuestion().getId());
+                        questionCreatedEvent.getQuestion());
 
         // init QtypeEssayQuestion
         coreDomainService.createQtypeEssayQuestion(qtypeEssayQuestion);
         qtypeEssayQuestionRepository.saveQtypeEssayQuestion(qtypeEssayQuestion);
 
-        log.info("Qtype Essay Question created with id: {}", qtypeEssayQuestion.getQuestionId().getValue());
+        log.info("Qtype Essay Question created with id: {}", qtypeEssayQuestion.getId().getValue());
 
         return questionCreatedEvent;
     }

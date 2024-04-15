@@ -10,5 +10,5 @@ import lombok.Getter;
 @Builder
 @AllArgsConstructor
 public class QueryQuestionResponse {
-    Question question;
+    private final Question question;
 }

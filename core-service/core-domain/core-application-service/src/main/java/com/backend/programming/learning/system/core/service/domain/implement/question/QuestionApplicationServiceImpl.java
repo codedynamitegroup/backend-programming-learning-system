@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.core.service.domain.implement.question;
 
-import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQuestionByIdCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.implement.question.handler.QuestionCommandHandler;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QuestionApplicationService;

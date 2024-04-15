@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.core.service.dataaccess.question.entity;
 
 import javax.persistence.*;
+
+import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import lombok.*;
 
 import java.util.UUID;
@@ -16,6 +18,9 @@ public class QtypeCodeQuestionEntity {
     @Id
     @Column(name = "id")
     private UUID id;
-    private UUID questionId;
+
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinColumn(name = "question_id", referencedColumnName = "id")
+    private QuestionEntity question;
     private String dslTemplate;
 }

@@ -16,7 +16,11 @@ public class QtypeEssayQuestionEntity {
     @Id
     @Column(name = "id")
     private UUID id;
-    private UUID questionId;
+
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinColumn(name = "question_id", referencedColumnName = "id")
+    private QuestionEntity question;
+
     private String responseFormat;
     private Integer responseRequired;
     private Integer responseFieldLines;

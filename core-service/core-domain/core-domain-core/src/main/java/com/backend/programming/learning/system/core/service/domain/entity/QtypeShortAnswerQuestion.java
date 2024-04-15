@@ -2,17 +2,16 @@ package com.backend.programming.learning.system.core.service.domain.entity;
 
 import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.QtypeShortAnswerQuestionId;
-import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 
 import java.util.UUID;
 
 public class QtypeShortAnswerQuestion extends BaseEntity<QtypeShortAnswerQuestionId> {
-    private final QuestionId questionId;
+    private final Question question;
     private final Boolean caseSensitive;
 
     private QtypeShortAnswerQuestion(Builder builder) {
         super.setId(builder.qtypeShortAnswerQuestionId);
-        questionId = builder.questionId;
+        question = builder.question;
         caseSensitive = builder.caseSensitive;
     }
 
@@ -20,8 +19,8 @@ public class QtypeShortAnswerQuestion extends BaseEntity<QtypeShortAnswerQuestio
         return new Builder();
     }
 
-    public QuestionId getQuestionId() {
-        return questionId;
+    public Question getQuestion() {
+        return question;
     }
 
     public Boolean getCaseSensitive() {
@@ -34,7 +33,7 @@ public class QtypeShortAnswerQuestion extends BaseEntity<QtypeShortAnswerQuestio
 
     public static final class Builder {
         private QtypeShortAnswerQuestionId qtypeShortAnswerQuestionId;
-        private QuestionId questionId;
+        private Question question;
         private Boolean caseSensitive;
 
         private Builder() {
@@ -45,8 +44,8 @@ public class QtypeShortAnswerQuestion extends BaseEntity<QtypeShortAnswerQuestio
             return this;
         }
 
-        public Builder questionId(QuestionId val) {
-            questionId = val;
+        public Builder question(Question val) {
+            question = val;
             return this;
         }
 
