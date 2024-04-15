@@ -1,0 +1,9 @@
+INSERT INTO public.user(id, email, first_name, last_name)
+VALUES ('d215b5f8-0249-4dc5-89a3-51fd148cfb45', 'khanhndq2002@gmail.com', 'Khanh', 'Nguyen');
+
+INSERT INTO public.topic(id, name, description, created_by, updated_by)
+VALUES
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb45', 'Learn Python', 'Python is a versatile and user-friendly programming language known for its readability and efficiency. It''s widely used for web development, data analysis, artificial intelligence, and more.', 'd215b5f8-0249-4dc5-89a3-51fd148cfb45', 'd215b5f8-0249-4dc5-89a3-51fd148cfb45'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb46', 'Learn Java', 'Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible. It is a general-purpose programming language intended to let application developers write once, run anywhere (WORA), meaning that compiled Java code can run on all platforms that support Java without the need for recompilation.', 'd215b5f8-0249-4dc5-89a3-51fd148cfb45', 'd215b5f8-0249-4dc5-89a3-51fd148cfb45'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb47', 'Learn JavaScript', 'JavaScript is a programming language that conforms to the ECMAScript specification. JavaScript is high-level, often just-in-time compiled, and multi-paradigm. It has curly-bracket syntax, dynamic typing, prototype-based object-orientation, and first-class functions.', 'd215b5f8-0249-4dc5-89a3-51fd148cfb45', 'd215b5f8-0249-4dc5-89a3-51fd148cfb45'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', 'Data structures and Algorithms', 'Explore the fundamental building blocks of computer science through our comprehensive courses on Data Structures and Algorithms. Gain a solid understanding of both theory and practical application.','d215b5f8-0249-4dc5-89a3-51fd148cfb45', 'd215b5f8-0249-4dc5-89a3-51fd148cfb45' );
