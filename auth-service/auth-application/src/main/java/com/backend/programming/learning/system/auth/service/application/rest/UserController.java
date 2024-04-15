@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -38,6 +39,13 @@ public class UserController {
                userApplicationService.findUserById(QueryUserCommand.builder().userId(id).build());
        log.info("Returning user with email: {}", queryUserResponse.getEmail());
        return  ResponseEntity.ok(queryUserResponse);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<QueryUserResponse>> getAllUsers() {
+        List<QueryUserResponse> queryUserResponse = userApplicationService.findAllUsers();
+        log.info("Returning all users");
+        return ResponseEntity.ok(queryUserResponse);
     }
 
     @DeleteMapping("/{id}")
