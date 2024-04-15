@@ -21,11 +21,11 @@ public class TopicProgrammingLanguageEntity {
     @Column(name = "id")
     private UUID id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     @JoinColumn(name = "topic_id", referencedColumnName = "id")
     private TopicEntity topic;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     @JoinColumn(name = "programming_language_id", referencedColumnName = "id")
     private ProgrammingLanguageEntity programmingLanguage;
 

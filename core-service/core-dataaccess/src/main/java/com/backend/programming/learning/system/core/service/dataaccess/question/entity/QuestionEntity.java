@@ -26,7 +26,7 @@ public class QuestionEntity {
     @Column(name = "id")
     private UUID id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     @JoinColumn(name = "org_id", referencedColumnName = "id")
     private OrganizationEntity organization;
 
