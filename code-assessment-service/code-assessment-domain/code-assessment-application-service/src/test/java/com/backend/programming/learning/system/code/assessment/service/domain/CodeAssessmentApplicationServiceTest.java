@@ -48,6 +48,7 @@ public class CodeAssessmentApplicationServiceTest {
                 .problemStatement("haa")
                 .inputFormat("ha")
                 .outputFormat("hah")
+                .constraints("haha")
                 .build();
         Question question = Question.builder()
                 .questionId(new QuestionId(QUESTION_ID))

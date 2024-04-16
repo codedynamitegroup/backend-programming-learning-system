@@ -10,15 +10,26 @@ public class TestCase extends BaseEntity<TestCaseId> {
     private CodeQuestionId codeQuestionId;
     private final String inputData;
     private final String outputData;
-    private final boolean isSample;
+    private final Boolean isSample;
+    private final Double score;
     private List<CodeSubmissionTestCase> codeSubmissionTestCaseList;
 
     private TestCase(Builder builder) {
+        codeQuestionId = builder.codeQuestionId;
         inputData = builder.inputData;
         outputData = builder.outputData;
         isSample = builder.isSample;
+        score = builder.score;
         codeSubmissionTestCaseList = builder.codeSubmissionTestCaseList;
         super.setId(builder.id);
+    }
+
+    public Double getScore() {
+        return score;
+    }
+
+    public List<CodeSubmissionTestCase> getCodeSubmissionTestCaseList() {
+        return codeSubmissionTestCaseList;
     }
 
     public CodeQuestionId getCodeQuestionId() {
@@ -50,9 +61,11 @@ public class TestCase extends BaseEntity<TestCaseId> {
     public static final class Builder {
         private String inputData;
         private String outputData;
-        private boolean isSample;
-        private TestCaseId id;
+        private Boolean isSample;
+        private Double score;
         private List<CodeSubmissionTestCase> codeSubmissionTestCaseList;
+        private TestCaseId id;
+        private CodeQuestionId codeQuestionId;
 
         private Builder() {
         }
@@ -62,13 +75,25 @@ public class TestCase extends BaseEntity<TestCaseId> {
             inputData = val;
             return this;
         }
+
         public Builder codeSubmissionTestCaseList(List<CodeSubmissionTestCase> val) {
             codeSubmissionTestCaseList = val;
             return this;
         }
 
+
         public Builder outputData(String val) {
             outputData = val;
+            return this;
+        }
+
+        public Builder isSample(Boolean val) {
+            isSample = val;
+            return this;
+        }
+
+        public Builder score(Double val) {
+            score = val;
             return this;
         }
 
@@ -77,13 +102,18 @@ public class TestCase extends BaseEntity<TestCaseId> {
             return this;
         }
 
-        public Builder testCaseId(TestCaseId val) {
+        public Builder id(TestCaseId val) {
             id = val;
             return this;
         }
 
         public TestCase build() {
             return new TestCase(this);
+        }
+
+        public Builder codeQuestionId(CodeQuestionId val) {
+            codeQuestionId = val;
+            return this;
         }
     }
 }

@@ -7,7 +7,7 @@ import com.backend.programming.learning.system.core.service.dataaccess.question.
 import com.backend.programming.learning.system.core.service.dataaccess.question.repository.QuestionJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.entity.ChapterQuestion;
 import com.backend.programming.learning.system.core.service.domain.exception.ChapterNotFoundException;
-import com.backend.programming.learning.system.core.service.domain.exception.question.QuestionNotFoundException;
+import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;

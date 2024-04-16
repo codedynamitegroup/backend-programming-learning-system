@@ -16,8 +16,8 @@
         <module>code-assessment-application</module>
         <module>code-assessment-domain</module>
         <module>code-assessment-container</module>
-        <module>code-assessment-dataaccess</module>
         <module>code-assessment-messaging</module>
+        <module>code-assessment-dataaccess</module>
     </modules>
 
     <dependencies>

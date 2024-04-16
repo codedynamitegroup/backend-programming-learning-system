@@ -27,4 +27,6 @@ public class CreateCodeQuestionCommand {
     private final String outputFormat;
     @NotNull
     private final Boolean isDeleted;
+    @NotNull
+    private final String constraints;
 }

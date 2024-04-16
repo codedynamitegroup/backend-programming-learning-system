@@ -15,8 +15,13 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     private final String problemStatement;
     private final String inputFormat;
     private final String outputFormat;
+    private final String constraints;
     private final Boolean isDeleted;
     private List<String> failureMessages;
+
+    public static Builder builder() {
+        return new Builder();
+    }
 
     public void initializeCodeQuestion(){
         setId(new CodeQuestionId(UUID.randomUUID()));
@@ -35,6 +40,10 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
             for(TestCase testCase: testCases){
                 testCase.initializeTestCase(super.getId(), new TestCaseId(UUID.randomUUID()));
             }
+    }
+
+    public String getConstraints() {
+        return constraints;
     }
 
     public String getProblemStatement() {
@@ -68,6 +77,7 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     public List<String> getFailureMessages() {
         return failureMessages;
     }
+
     private CodeQuestion(Builder builder) {
         questionId = builder.questionId;
         testCases = builder.testCases;
@@ -75,6 +85,7 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         problemStatement = builder.problemStatement;
         inputFormat = builder.inputFormat;
         outputFormat = builder.outputFormat;
+        constraints = builder.constraints;
         isDeleted = builder.isDeleted;
         failureMessages = builder.failureMessages;
         super.setId(builder.id);
@@ -87,15 +98,12 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         private String problemStatement;
         private String inputFormat;
         private String outputFormat;
+        private String constraints;
         private Boolean isDeleted;
         private List<String> failureMessages;
         private CodeQuestionId id;
 
         private Builder() {
-        }
-
-        public static Builder builder() {
-            return new Builder();
         }
 
         public Builder questionId(QuestionId val) {
@@ -125,6 +133,11 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
 
         public Builder outputFormat(String val) {
             outputFormat = val;
+            return this;
+        }
+
+        public Builder constraints(String val) {
+            constraints = val;
             return this;
         }
 
