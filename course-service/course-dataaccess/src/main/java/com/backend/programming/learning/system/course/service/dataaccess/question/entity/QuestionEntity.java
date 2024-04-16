@@ -35,8 +35,8 @@ public class QuestionEntity {
     private String generalFeedback;
     private Float defaultMark;
 
-    private ZonedDateTime createdAt;
-    private ZonedDateTime updatedAt;
+//    private ZonedDateTime createdAt;
+//    private ZonedDateTime updatedAt;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "created_by", referencedColumnName = "id")
@@ -49,8 +49,8 @@ public class QuestionEntity {
     @Enumerated(EnumType.STRING)
     private QuestionType qtype;
 
-    @Enumerated(EnumType.STRING)
-    private QuestionDifficulty qdifficulty;
+//    @Enumerated(EnumType.STRING)
+//    private QuestionDifficulty qdifficulty;
 
 
     @Override

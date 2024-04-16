@@ -4,7 +4,10 @@ import com.backend.programming.learning.system.course.service.dataaccess.exam.ma
 import com.backend.programming.learning.system.course.service.dataaccess.exam.repository.ExamJpaRepository;
 import com.backend.programming.learning.system.entity.Exam;
 import com.backend.programming.learning.system.ports.output.repository.ExamRepository;
+import com.backend.programming.learning.system.valueobject.ExamId;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class ExamRepositoryImpl implements ExamRepository {
@@ -22,5 +25,27 @@ public class ExamRepositoryImpl implements ExamRepository {
         return examDataAccessMapper.examEntityToExam(examJpaRepository
                 .save(examDataAccessMapper
                         .examToExamEntity(exam)));
+    }
+
+    @Override
+    public Exam save(Exam exam) {
+
+        return examDataAccessMapper.examEntityToExam(
+                examJpaRepository.save(examDataAccessMapper.examToExamEntity(exam)));
+    }
+
+    @Override
+    public Exam findBy(ExamId examId) {
+        return examJpaRepository.findById(examId.getValue())
+                .map(examDataAccessMapper::examEntityToExam)
+                .orElseThrow(() -> new RuntimeException("Exam not found"));
+    }
+
+    @Override
+    public List<Exam> findAll(String search) {
+        return examJpaRepository.findAll() // chưa bỏ search vào và paging
+                .stream()
+                .map(examDataAccessMapper::examEntityToExam)
+                .toList();
     }
 }

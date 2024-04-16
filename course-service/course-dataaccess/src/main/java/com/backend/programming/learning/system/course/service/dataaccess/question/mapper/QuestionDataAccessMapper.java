@@ -15,7 +15,7 @@ public class QuestionDataAccessMapper {
               .generalFeedback(question.getGeneralFeedback())
               .defaultMark(question.getDefaultMark())
               .qtype(question.getqtype())
-              .qdifficulty(question.getDifficulty())
+//              .qdifficulty(question.getDifficulty())
               .build();
     }
 
