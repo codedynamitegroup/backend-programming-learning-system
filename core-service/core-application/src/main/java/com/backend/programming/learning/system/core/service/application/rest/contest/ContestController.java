@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.core.service.application.rest;
+package com.backend.programming.learning.system.core.service.application.rest.contest;
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse_user.CreateCertificateCourseUserCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse_user.CreateCertificateCourseUserResponse;

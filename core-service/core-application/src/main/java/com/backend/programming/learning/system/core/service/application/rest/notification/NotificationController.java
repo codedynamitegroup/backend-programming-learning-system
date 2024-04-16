@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.core.service.application.rest;
+package com.backend.programming.learning.system.core.service.application.rest.notification;
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.contest.CreateContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.contest.CreateContestResponse;

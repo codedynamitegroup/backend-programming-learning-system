@@ -20,7 +20,6 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
     private ZonedDateTime startTime;
     private ZonedDateTime endTime;
     private Boolean isDeleted;
-
     private Topic topic;
     private List<Review> reviews;
     private List<Chapter> chapters;

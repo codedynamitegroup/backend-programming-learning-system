@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.core.service.application.rest;
+package com.backend.programming.learning.system.core.service.application.rest.topic;
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewResponse;

@@ -2,6 +2,10 @@ package com.backend.programming.learning.system.core.service.domain.implement.ce
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse.CreateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse.CreateCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.certificatecourse.DeleteCertificateCourseCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.certificatecourse.DeleteCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryAllCertificateCoursesCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryAllCertificateCoursesResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse.CertificateCourseApplicationService;
@@ -10,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
+import java.util.UUID;
 
 @Service
 @Validated
@@ -28,8 +33,19 @@ class CertificateCourseApplicationServiceImpl implements CertificateCourseApplic
     }
 
     @Override
-    public QueryCertificateCourseResponse findCertificateCourseById(
+    public QueryCertificateCourseResponse queryCertificateCourse(
             @Valid QueryCertificateCourseCommand queryCertificateCourseCommand) {
         return certificateCourseCommandHandler.findCertificateCourseById(queryCertificateCourseCommand);
+    }
+
+    @Override
+    public QueryAllCertificateCoursesResponse queryAllCertificateCourses(
+            QueryAllCertificateCoursesCommand queryAllCertificateCoursesCommand) {
+        return certificateCourseCommandHandler.findAllCertificateCourses(queryAllCertificateCoursesCommand);
+    }
+
+    @Override
+    public DeleteCertificateCourseResponse deleteCertificateCourse(DeleteCertificateCourseCommand deleteCertificateCourseCommand) {
+        return certificateCourseCommandHandler.deleteCertificateCourse(deleteCertificateCourseCommand);
     }
 }
