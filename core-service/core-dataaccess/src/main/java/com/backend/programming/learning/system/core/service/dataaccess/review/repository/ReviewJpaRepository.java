@@ -5,8 +5,10 @@ import com.backend.programming.learning.system.core.service.domain.entity.Review
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -16,4 +18,7 @@ public interface ReviewJpaRepository extends PagingAndSortingRepository<ReviewEn
     Optional<ReviewEntity> findById(UUID id);
     Page<ReviewEntity> findAllByCertificateCourseId(UUID certificateCourseId, Pageable pageable);
 
+    @Transactional(readOnly = true)
+    @Query("SELECT AVG(r.rating) FROM ReviewEntity r WHERE r.certificateCourse.id = :certificateCourseId")
+    Float getAvgRatingOfAllReviewsByCertificateCourseId(UUID certificateCourseId);
 }

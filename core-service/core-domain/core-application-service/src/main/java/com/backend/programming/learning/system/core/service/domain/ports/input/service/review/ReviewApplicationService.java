@@ -15,7 +15,7 @@ public interface ReviewApplicationService {
     CreateReviewResponse createReview(
             @Valid CreateReviewCommand createReviewCommand);
 
-    QueryAllReviewsResponse queryAllReviews(
+    QueryAllReviewsResponse queryAllReviewsByCertificateCourseId(
             @Valid QueryAllReviewsCommand queryAllReviewsCommand);
 
     QueryReviewResponse queryReview(

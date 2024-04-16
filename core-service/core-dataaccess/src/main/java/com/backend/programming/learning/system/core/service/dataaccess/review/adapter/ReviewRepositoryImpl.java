@@ -51,4 +51,9 @@ public class ReviewRepositoryImpl implements ReviewRepository {
     public void deleteReviewById(UUID reviewId) {
         reviewJpaRepository.deleteById(reviewId);
     }
+
+    @Override
+    public Float getAvgRatingOfAllReviewsByCertificateCourseId(UUID certificateCourseId) {
+        return reviewJpaRepository.getAvgRatingOfAllReviewsByCertificateCourseId(certificateCourseId);
+    }
 }
