@@ -9,4 +9,5 @@ import java.util.List;
 public interface ChapterRepository {
     Chapter saveChapter(Chapter chapter);
     List<Chapter> findAllByCertificateCourseId(CertificateCourseId certificateCourseId);
+    Integer findTopNoByCertificateCourseId(CertificateCourseId certificateCourseId);
 }
