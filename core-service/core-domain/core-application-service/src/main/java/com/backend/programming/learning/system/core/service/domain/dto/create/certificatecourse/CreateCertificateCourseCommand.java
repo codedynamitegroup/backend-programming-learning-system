@@ -1,13 +1,13 @@
 package com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse;
 
 import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
+import com.backend.programming.learning.system.dataaccess.validator.EnumValidator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -16,8 +16,9 @@ import java.util.UUID;
 public class CreateCertificateCourseCommand {
     @NotNull
     private final String name;
-    @NotNull
-    private final SkillLevel skillLevel;
+
+    @EnumValidator(enumClass = SkillLevel.class)
+    private final String skillLevel;
 
     @NotNull
     private final UUID topicId;

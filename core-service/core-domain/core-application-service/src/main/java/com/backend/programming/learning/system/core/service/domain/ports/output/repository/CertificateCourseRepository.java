@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface CertificateCourseRepository {
     CertificateCourse saveCertificateCourse(CertificateCourse certificateCourse);
     Optional<CertificateCourse> findById(CertificateCourseId certificateCourseId);
+    Optional<CertificateCourse> findByName(String name);
 }

@@ -34,7 +34,8 @@ public class CertificateCourseUserDataMapper {
     public CreateCertificateCourseUserResponse certificateCourseUserToCreateCertificateCourseUserResponse(
             CertificateCourseUser certificateCourseUser, String message) {
         return CreateCertificateCourseUserResponse.builder()
-                .certificateCourseUserId(certificateCourseUser.getId())
+                .certificateCourseId(certificateCourseUser.getCertificateCourse().getId().getValue())
+                .userId(certificateCourseUser.getUser().getId().getValue())
                 .message(message)
                 .build();
     }

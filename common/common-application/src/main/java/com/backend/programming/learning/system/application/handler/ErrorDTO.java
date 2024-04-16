@@ -8,6 +8,7 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class ErrorDTO {
+    private final Integer status;
     private final String code;
     private final String message;
 }

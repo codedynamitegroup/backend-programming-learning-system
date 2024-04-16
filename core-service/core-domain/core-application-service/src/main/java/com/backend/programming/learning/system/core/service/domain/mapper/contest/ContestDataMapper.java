@@ -35,7 +35,7 @@ public class ContestDataMapper {
 
     public CreateContestResponse contestToCreateContestResponse(Contest contest, String message) {
         return CreateContestResponse.builder()
-                .contest(contest)
+                .contestId(contest.getId().getValue())
                 .message(message)
                 .build();
     }

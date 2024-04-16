@@ -15,9 +15,11 @@ import com.backend.programming.learning.system.core.service.domain.ports.input.s
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.chapter.ChapterApplicationService;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.review.ReviewApplicationService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.UUID;
 
 @Slf4j
@@ -44,7 +46,7 @@ public class CertificateCourseController {
                 certificateCourseApplicationService.createCertificateCourse(createCertificateCourseCommand);
         log.info("Certificate course created: {}", createCertificateCourseResponse);
 
-        return ResponseEntity.ok(createCertificateCourseResponse);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createCertificateCourseResponse);
     }
 
     @PostMapping("/register")
@@ -55,18 +57,18 @@ public class CertificateCourseController {
                 certificateCourseUserApplicationService.createCertificateCourseUser(createCertificateCourseUserCommand);
         log.info("Certificate course User created: {}", createCertificateCourseUserResponse);
 
-        return ResponseEntity.ok(createCertificateCourseUserResponse);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createCertificateCourseUserResponse);
     }
 
     @PostMapping("/chapters/create")
     public ResponseEntity<CreateChapterResponse> createChapter(
             @RequestBody CreateChapterCommand createChapterCommand) {
-        log.info("Creating chapter: {}", createChapterCommand);
+        log.info("Creating chapter of certificate course: {}", createChapterCommand);
         CreateChapterResponse createChapterResponse =
                 chapterApplicationService.createChapter(createChapterCommand);
-        log.info("Chapter created: {}", createChapterResponse);
+        log.info("Chapter of certificate course created: {}", createChapterResponse);
 
-        return ResponseEntity.ok(createChapterResponse);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createChapterResponse);
     }
 
     @GetMapping("/{id}")

@@ -1,19 +1,20 @@
 package com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse_user;
 
-import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourseUser;
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseUserId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
 public class CreateCertificateCourseUserResponse {
     @NotNull
-    private final CertificateCourseUserId certificateCourseUserId;
+    private final UUID certificateCourseId;
+    @NotNull
+    private final UUID userId;
     @NotNull
     private final String message;
 }

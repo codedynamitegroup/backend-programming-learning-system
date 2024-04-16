@@ -33,4 +33,10 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
         return certificateCourseJpaRepository.findById(certificateCourseId.getValue())
                 .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse);
     }
+
+    @Override
+    public Optional<CertificateCourse> findByName(String name) {
+        return certificateCourseJpaRepository.findByName(name)
+                .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse);
+    }
 }

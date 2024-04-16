@@ -33,7 +33,7 @@ public class NotificationDataMapper {
     public CreateNotificationResponse notificationToCreateNotificationResponse(
             Notification notification, String message) {
         return CreateNotificationResponse.builder()
-                .notification(notification)
+                .notificationId(notification.getId().getValue())
                 .message(message)
                 .build();
     }

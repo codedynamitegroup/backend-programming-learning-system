@@ -7,13 +7,14 @@ import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
 public class CreateReviewResponse {
     @NotNull
-    private final Review review;
+    private final UUID reviewId;
     @NotNull
     private final String message;
 }
