@@ -11,7 +11,7 @@ import com.backend.programming.learning.system.domain.valueobject.UserId;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-public class ChapterQuestion extends AggregateRoot<ChapterQuestionId> {
+public class ChapterQuestion extends BaseEntity<ChapterQuestionId> {
     private final QuestionId questionId;
     private final ChapterId chapterId;
 

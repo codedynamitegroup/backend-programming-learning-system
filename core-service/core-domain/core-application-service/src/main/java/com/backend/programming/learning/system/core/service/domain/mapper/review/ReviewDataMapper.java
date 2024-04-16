@@ -7,19 +7,29 @@ import com.backend.programming.learning.system.core.service.domain.dto.create.re
 import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
+import com.backend.programming.learning.system.core.service.domain.entity.User;
+import com.backend.programming.learning.system.core.service.domain.exception.TopicNotFoundException;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ReviewDataMapper {
+
     public Review createReviewCommandToReview(CreateReviewCommand createReviewCommand) {
         return Review.builder()
                 .certificateCourseId(new CertificateCourseId(createReviewCommand.getCertificateCourseId()))
                 .rating(createReviewCommand.getRating())
                 .content(createReviewCommand.getContent())
-                .createdBy(new UserId(createReviewCommand.getCreatedBy()))
-                .updatedBy(new UserId(createReviewCommand.getUpdatedBy()))
+                .createdBy(User
+                        .builder()
+                        .id(new UserId(createReviewCommand.getCreatedBy()))
+                        .build())
+                .updatedBy(User
+                        .builder()
+                        .id(new UserId(createReviewCommand.getUpdatedBy()))
+                        .build())
                 .build();
     }
 

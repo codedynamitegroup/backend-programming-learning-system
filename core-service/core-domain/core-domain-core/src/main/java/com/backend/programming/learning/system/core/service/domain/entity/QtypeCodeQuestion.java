@@ -2,12 +2,11 @@ package com.backend.programming.learning.system.core.service.domain.entity;
 
 import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.QtypeCodeQuestionId;
-import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 
 import java.util.UUID;
 
 public class QtypeCodeQuestion extends BaseEntity<QtypeCodeQuestionId> {
-    private final QuestionId questionId;
+    private final Question question;
     private final String dslTemplate;
 
     public void initQtypeCodeQuestion() {
@@ -15,12 +14,12 @@ public class QtypeCodeQuestion extends BaseEntity<QtypeCodeQuestionId> {
     }
     private QtypeCodeQuestion(Builder builder) {
         super.setId(builder.qtypeCodeQuestionId);
-        questionId = builder.questionId;
+        question = builder.question;
         dslTemplate = builder.dslTemplate;
     }
 
-    public QuestionId getQuestionId() {
-        return questionId;
+    public Question getQuestion() {
+        return question;
     }
 
     public String getDslTemplate() {
@@ -33,7 +32,7 @@ public class QtypeCodeQuestion extends BaseEntity<QtypeCodeQuestionId> {
 
     public static final class Builder {
         private QtypeCodeQuestionId qtypeCodeQuestionId;
-        private QuestionId questionId;
+        private Question question;
         private String dslTemplate;
 
         private Builder() {
@@ -44,8 +43,8 @@ public class QtypeCodeQuestion extends BaseEntity<QtypeCodeQuestionId> {
             return this;
         }
 
-        public Builder questionId(QuestionId val) {
-            questionId = val;
+        public Builder question(Question val) {
+            question = val;
             return this;
         }
 

@@ -13,7 +13,7 @@ public class CoreDomainServiceImpl implements CoreDomainService {
     public QuestionCreatedEvent createQuestion(Question question) {
         question.initializeQuestion();
 
-        log.info("Question created with id: {}", question.getId().getValue());
+        log.info("Question initialized with id: {}", question.getId().getValue());
 
         return new QuestionCreatedEvent(question, ZonedDateTime.now(ZoneId.of("UTC")));
     }
@@ -28,6 +28,18 @@ public class CoreDomainServiceImpl implements CoreDomainService {
     public void createQtypeEssayQuestion(QtypeEssayQuestion qtypeEssayQuestion) {
         qtypeEssayQuestion.initQtypeEssayQuestion();
         log.info("Qtype essay question created with id: {}", qtypeEssayQuestion.getId().getValue());
+    }
+
+    @Override
+    public void createQtypeShortAnswerQuestion(QtypeShortAnswerQuestion qtypeEssayQuestion) {
+        qtypeEssayQuestion.initQtypeShortAnswerQuestion();
+        log.info("Qtype short answer question created with id: {}", qtypeEssayQuestion.getId().getValue());
+    }
+
+    @Override
+    public void createQtypeMultipleChoiceQuestion(QtypeMultiChoiceQuestion qtypeMultipleChoiceQuestion) {
+        qtypeMultipleChoiceQuestion.initQtypeMultipleChoiceQuestion();
+        log.info("Qtype multiple choice question created with id: {}", qtypeMultipleChoiceQuestion.getId().getValue());
     }
 
     @Override
@@ -52,5 +64,29 @@ public class CoreDomainServiceImpl implements CoreDomainService {
     public void createContest(Contest contest) {
         contest.initializeContest();
         log.info("Contest created with id: {}", contest.getId().getValue());
+    }
+
+    @Override
+    public void createNotification(Notification notification) {
+        notification.initializeNotification();
+        log.info("Notification created with id: {}", notification.getId().getValue());
+    }
+
+    @Override
+    public void createChapter(Chapter chapter) {
+        chapter.initializeChapter();
+        log.info("Chapter created with id: {}", chapter.getId().getValue());
+    }
+
+    @Override
+    public void createCertificateCourseUser(CertificateCourseUser certificateCourseUser) {
+        certificateCourseUser.initializeCertificateCourseUser();
+        log.info("Certificate course user created with id: {}", certificateCourseUser.getId().getValue());
+    }
+
+    @Override
+    public void createContestUser(ContestUser contestUser) {
+        contestUser.initializeContestUser();
+        log.info("Contest user created with id: {}", contestUser.getId().getValue());
     }
 }

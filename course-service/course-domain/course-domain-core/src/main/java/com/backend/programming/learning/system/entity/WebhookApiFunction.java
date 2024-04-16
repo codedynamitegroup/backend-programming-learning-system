@@ -44,7 +44,7 @@ public class WebhookApiFunction extends AggregateRoot<WebhookApiFunctionId> {
                 return new Builder();
             }
 
-            public Builder webhookApiFunctionId(WebhookApiFunctionId val) {
+            public Builder id(WebhookApiFunctionId val) {
                 webhookApiFunctionId = val;
                 return this;
             }

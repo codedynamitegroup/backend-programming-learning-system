@@ -2,9 +2,13 @@ package com.backend.programming.learning.system.core.service.dataaccess.question
 
 import com.backend.programming.learning.system.core.service.dataaccess.question.mapper.QuestionDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.question.repository.QuestionJpaRepository;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QuestionRepository;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QuestionRepository;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Component
 public class QuestionRepositoryImpl implements QuestionRepository {
@@ -22,5 +26,20 @@ public class QuestionRepositoryImpl implements QuestionRepository {
         return questionDataAccessMapper.questionEntityToQuestion(questionJpaRepository
                 .save(questionDataAccessMapper
                         .questionToQuestionEntity(question)));
+    }
+
+    @Override
+    public Optional<Question> findQuestion(UUID id) {
+        return questionJpaRepository.findById(id)
+                .map(questionDataAccessMapper::questionEntityToQuestion);
+    }
+
+    @Override
+    public List<Question> findAllQuestion() {
+        return questionJpaRepository
+                .findAll()
+                .stream()
+                .map(questionDataAccessMapper::questionEntityToQuestion)
+                .toList();
     }
 }

@@ -4,20 +4,31 @@ import com.backend.programming.learning.system.auth.service.domain.entity.Organi
 import com.backend.programming.learning.system.auth.service.domain.entity.Role;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.entity.UserRole;
+import com.backend.programming.learning.system.auth.service.domain.event.UserCreatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.UserDeletedEvent;
+import com.backend.programming.learning.system.domain.DomainConstants;
+import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
 import lombok.extern.slf4j.Slf4j;
+
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 @Slf4j
 public class AuthDomainServiceImpl implements AuthDomainService {
     @Override
-    public void createUser(User user) {
+    public UserCreatedEvent createUser(User user, DomainEventPublisher<UserCreatedEvent>
+            userCreatedEventDomainEventPublisher) {
         user.initializeUser();
         log.info("User with id: {} is initiated", user.getId().getValue());
+        return new UserCreatedEvent(user, ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)), userCreatedEventDomainEventPublisher);
     }
 
     @Override
-    public void deleteUser(User user) {
+    public UserDeletedEvent deleteUser(User user, DomainEventPublisher<UserDeletedEvent>
+            userDeletedEventDomainEventPublisher) {
         user.deleteUser();
         log.info("User with id: {} is deleted", user.getId().getValue());
+        return new UserDeletedEvent(user, ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)), userDeletedEventDomainEventPublisher);
     }
 
     @Override

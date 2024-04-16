@@ -15,9 +15,12 @@ import java.util.UUID;
 public class QtypeMultichoiceQuestionEntity {
     @Id
     private UUID id;
-    private UUID questionId;
-    private Integer single;
-    private Integer shuffleAnswers;
+
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinColumn(name = "question_id", referencedColumnName = "id")
+    private QuestionEntity question;
+    private Boolean single;
+    private Boolean shuffleAnswers;
     private String correctFeedback;
     private String partiallyCorrectFeedback;
     private String incorrectFeedback;

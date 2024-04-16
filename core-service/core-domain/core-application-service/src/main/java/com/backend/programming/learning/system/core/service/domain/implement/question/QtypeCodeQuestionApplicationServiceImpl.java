@@ -2,23 +2,38 @@ package com.backend.programming.learning.system.core.service.domain.implement.qu
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQtypeCodeQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQtypeCodeQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.implement.question.handler.QtypeCodeQuestionCommandHandler;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QtypeCodeQuestionApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.List;
+import java.util.UUID;
+
 @Service
 @Validated
 @Slf4j
 public class QtypeCodeQuestionApplicationServiceImpl implements QtypeCodeQuestionApplicationService {
-    private final QtypeCodeQuestionCreateCommandHandler qtypeCodeQuestionCreateCommandHandler;
+    private final QtypeCodeQuestionCommandHandler qtypeCodeQuestionCommandHandler;
 
-    public QtypeCodeQuestionApplicationServiceImpl(QtypeCodeQuestionCreateCommandHandler qtypeCodeQuestionCreateCommandHandler) {
-        this.qtypeCodeQuestionCreateCommandHandler = qtypeCodeQuestionCreateCommandHandler;
+    public QtypeCodeQuestionApplicationServiceImpl(QtypeCodeQuestionCommandHandler qtypeCodeQuestionCommandHandler) {
+        this.qtypeCodeQuestionCommandHandler = qtypeCodeQuestionCommandHandler;
     }
 
     @Override
     public CreateQuestionResponse createQtypeCodeQuestion(CreateQtypeCodeQuestionCommand createQtypeCodeQuestionCommand) {
-        return qtypeCodeQuestionCreateCommandHandler.createQtypeCodeQuestion(createQtypeCodeQuestionCommand);
+        return qtypeCodeQuestionCommandHandler.createQtypeCodeQuestion(createQtypeCodeQuestionCommand);
+    }
+
+    @Override
+    public QueryQtypeCodeQuestionResponse queryQtypeCodeQuestionById(UUID qtCodeQuestionId) {
+        return qtypeCodeQuestionCommandHandler.queryQtypeCodeQuestionById(qtCodeQuestionId);
+    }
+
+    @Override
+    public List<QueryQtypeCodeQuestionResponse> queryAllQtypeCodeQuestions() {
+        return qtypeCodeQuestionCommandHandler.queryAllQtypeCodeQuestion();
     }
 }

@@ -26,11 +26,11 @@ public class ChapterQuestionEntity {
     @Column(name = "id")
     private UUID id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     @JoinColumn(name = "chapter_id", referencedColumnName = "id")
     ChapterEntity chapter;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     @JoinColumn(name = "question_id", referencedColumnName = "id")
     QuestionEntity question;
 

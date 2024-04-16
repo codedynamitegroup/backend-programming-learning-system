@@ -11,9 +11,9 @@ import java.util.UUID;
 @Setter
 public class CreateQtypeMultichoiceQuestionCommand extends CreateQuestionCommand{
     @NotNull
-    private final Integer single;
+    private final Boolean single;
     @NotNull
-    private final Integer shuffleAnswers;
+    private final Boolean shuffleAnswers;
     @NotNull
     private final String correctFeedback;
     @NotNull
@@ -29,21 +29,22 @@ public class CreateQtypeMultichoiceQuestionCommand extends CreateQuestionCommand
 
     public CreateQtypeMultichoiceQuestionCommand(@NotNull(message = "Organization ID is required") UUID organizationId,
                                                  @NotNull(message = "Created by is required") UUID createdBy,
-                                                 @NotNull(message = "Updated by is required") String difficulty,
+                                                 @NotNull(message = "Updated by is required") UUID updatedBy,
+                                                 @NotNull(message = "Difficulty by is required") String difficulty,
                                                  @NotNull(message = "Name is required") String name,
                                                  @NotNull(message = "Question text is required") String questionText,
                                                  @NotNull(message = "General feedback is required") String generalFeedback,
                                                  @NotNull(message = "Default mark is required") BigDecimal defaultMark,
                                                  @NotNull(message = "Question type is required") String qType,
-                                                 Integer single,
-                                                 Integer shuffleAnswers,
+                                                 Boolean single,
+                                                 Boolean shuffleAnswers,
                                                  String correctFeedback,
                                                  String partiallyCorrectFeedback,
                                                  String incorrectFeedback,
                                                  String answerNumbering,
                                                  Integer showNumCorrect,
                                                  String showStandardInstructions) {
-        super(organizationId, createdBy, difficulty, name, questionText, generalFeedback, defaultMark, qType);
+        super(organizationId, createdBy, updatedBy, difficulty, name, questionText, generalFeedback, defaultMark, qType);
         this.single = single;
         this.shuffleAnswers = shuffleAnswers;
         this.correctFeedback = correctFeedback;

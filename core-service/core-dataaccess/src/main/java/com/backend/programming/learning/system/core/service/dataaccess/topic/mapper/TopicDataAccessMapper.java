@@ -5,9 +5,11 @@ import com.backend.programming.learning.system.core.service.dataaccess.certifica
 import com.backend.programming.learning.system.core.service.dataaccess.review.entity.ReviewEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.topic.entity.TopicEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.user.repository.UserJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
 import com.backend.programming.learning.system.core.service.domain.entity.Topic;
+import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.exception.CertificateCourseNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
@@ -18,27 +20,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TopicDataAccessMapper {
+    private final UserDataAccessMapper userDataAccessMapper;
 
-    private final CertificateCourseJpaRepository certificateCourseJpaRepository;
-    private final UserJpaRepository userJpaRepository;
-
-    public TopicDataAccessMapper(CertificateCourseJpaRepository certificateCourseJpaRepository,
-                                 UserJpaRepository userJpaRepository) {
-        this.certificateCourseJpaRepository = certificateCourseJpaRepository;
-        this.userJpaRepository = userJpaRepository;
+    public TopicDataAccessMapper(UserDataAccessMapper userDataAccessMapper) {
+        this.userDataAccessMapper = userDataAccessMapper;
     }
 
     public TopicEntity topicToTopicEntity(Topic topic) {
-        UserEntity createdBy = userJpaRepository
-                .findById(topic.getCreatedBy().getValue())
-                .orElseThrow(() -> new UserNotFoundException("User with id: " +
-                        topic.getCreatedBy().getValue() + " could not be found!")
-                );
-        UserEntity updatedBy = userJpaRepository
-                .findById(topic.getUpdatedBy().getValue())
-                .orElseThrow(() -> new UserNotFoundException("User with id: " +
-                        topic.getUpdatedBy().getValue() + " could not be found!")
-                );
+        UserEntity createdBy = userDataAccessMapper.userToUserEntity(topic.getCreatedBy());
+        UserEntity updatedBy = userDataAccessMapper.userToUserEntity(topic.getUpdatedBy());
 
         return TopicEntity.builder()
                 .id(topic.getId().getValue())
@@ -52,12 +42,15 @@ public class TopicDataAccessMapper {
     }
 
     public Topic topicEntityToTopic(TopicEntity topicEntity) {
+        User createdBy = userDataAccessMapper.userEntityToUser(topicEntity.getCreatedBy());
+        User updatedBy = userDataAccessMapper.userEntityToUser(topicEntity.getUpdatedBy());
+
         return Topic.builder()
                 .id(new TopicId(topicEntity.getId()))
                 .name(topicEntity.getName())
                 .description(topicEntity.getDescription())
-                .createdBy(new UserId(topicEntity.getCreatedBy().getId()))
-                .updatedBy(new UserId(topicEntity.getUpdatedBy().getId()))
+                .createdBy(createdBy)
+                .updatedBy(updatedBy)
                 .createdAt(topicEntity.getCreatedAt())
                 .updatedAt(topicEntity.getUpdatedAt())
                 .build();

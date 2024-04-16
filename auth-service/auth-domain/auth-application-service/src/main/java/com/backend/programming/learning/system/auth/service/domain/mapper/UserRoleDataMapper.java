@@ -23,11 +23,14 @@ public class UserRoleDataMapper {
                 .roleId(new RoleId(createUserRoleCommand.getRoleId()))
                 .userId(new UserId(createUserRoleCommand.getUserId()))
                 .name(createUserRoleCommand.getName())
+                .createdBy(new UserId(createUserRoleCommand.getCreatedBy()))
+                .updatedBy(new UserId(createUserRoleCommand.getUpdatedBy()))
                 .build();
     }
 
     public CreateUserRoleResponse userRoleToCreateUserRoleResponse(UserRole userRole, String message) {
         return CreateUserRoleResponse.builder()
+                .id(userRole.getId().getValue())
                 .name(userRole.getName())
                 .createdAt(userRole.getCreatedAt())
                 .message(message)
@@ -36,6 +39,7 @@ public class UserRoleDataMapper {
 
     public QueryUserRoleResponse userRoleToQueryUserRoleResponse(UserRole userRole) {
         return QueryUserRoleResponse.builder()
+                .id(userRole.getId().getValue())
                 .name(userRole.getName())
                 .createdAt(userRole.getCreatedAt())
                 .build();

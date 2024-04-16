@@ -20,6 +20,7 @@ public class UserDataMapper {
 
     public CreateUserResponse userToCreateUserResponse(User user, String message) {
         return CreateUserResponse.builder()
+                .id(user.getId().getValue())
                 .email(user.getEmail())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
@@ -31,11 +32,13 @@ public class UserDataMapper {
 
     public QueryUserResponse userToQueryUserResponse(User user) {
         return QueryUserResponse.builder()
+                .id(user.getId().getValue())
                 .email(user.getEmail())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .phone(user.getPhone())
                 .createdAt(user.getCreatedAt())
+                .isDeleted(user.getDeleted())
                 .build();
     }
 }

@@ -1,12 +1,16 @@
 package com.backend.programming.learning.system.core.service.domain.entity;
 
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.ReviewId;
+import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.UUID;
 
 public class Chapter extends BaseEntity<ChapterId> {
     private CertificateCourseId certificateCourseId;
@@ -14,9 +18,9 @@ public class Chapter extends BaseEntity<ChapterId> {
     private String title;
     private String description;
     private final List<Question> questions;
-    private final UserId createdBy;
-    private UserId updatedBy;
-    private final ZonedDateTime createdAt;
+    private User createdBy;
+    private User updatedBy;
+    private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
     private Chapter(Builder builder) {
@@ -35,6 +39,13 @@ public class Chapter extends BaseEntity<ChapterId> {
     public static Builder builder() {
         return new Builder();
     }
+
+    public void initializeChapter() {
+        setId(new ChapterId(UUID.randomUUID()));
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+    }
+
 
     public CertificateCourseId getCertificateCourseId() {
         return certificateCourseId;
@@ -56,11 +67,11 @@ public class Chapter extends BaseEntity<ChapterId> {
         return questions;
     }
 
-    public UserId getCreatedBy() {
+    public User getCreatedBy() {
         return createdBy;
     }
 
-    public UserId getUpdatedBy() {
+    public User getUpdatedBy() {
         return updatedBy;
     }
 
@@ -72,6 +83,38 @@ public class Chapter extends BaseEntity<ChapterId> {
         return updatedAt;
     }
 
+    public void setCertificateCourseId(CertificateCourseId certificateCourseId) {
+        this.certificateCourseId = certificateCourseId;
+    }
+
+    public void setNo(int no) {
+        this.no = no;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public void setUpdatedBy(User updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public void setCreatedAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(ZonedDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     public static final class Builder {
         private ChapterId chapterId;
         private CertificateCourseId certificateCourseId;
@@ -79,8 +122,8 @@ public class Chapter extends BaseEntity<ChapterId> {
         private String title;
         private String description;
         private List<Question> questions;
-        private UserId createdBy;
-        private UserId updatedBy;
+        private User createdBy;
+        private User updatedBy;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
 
@@ -117,12 +160,12 @@ public class Chapter extends BaseEntity<ChapterId> {
             return this;
         }
 
-        public Builder createdBy(UserId val) {
+        public Builder createdBy(User val) {
             createdBy = val;
             return this;
         }
 
-        public Builder updatedBy(UserId val) {
+        public Builder updatedBy(User val) {
             updatedBy = val;
             return this;
         }

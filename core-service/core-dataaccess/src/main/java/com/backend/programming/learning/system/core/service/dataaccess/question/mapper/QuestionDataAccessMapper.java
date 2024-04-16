@@ -1,51 +1,38 @@
 package com.backend.programming.learning.system.core.service.dataaccess.question.mapper;
 
-import com.backend.programming.learning.system.core.service.dataaccess.organization.entity.OrganizationEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.organization.mapper.OrganizationDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.organization.repository.OrganizationJpaRepository;
+import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.user.repository.UserJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
-import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
 @Component
 public class QuestionDataAccessMapper {
-    private final OrganizationJpaRepository organizationJpaRepository;
-    private final UserJpaRepository userJpaRepository;
+    private final UserDataAccessMapper userDataAccessMapper;
+    private final OrganizationDataAccessMapper organizationDataAccessMapper;
 
-    public QuestionDataAccessMapper(OrganizationJpaRepository organizationJpaRepository,
-                                    UserJpaRepository userJpaRepository) {
-        this.organizationJpaRepository = organizationJpaRepository;
-        this.userJpaRepository = userJpaRepository;
+    public QuestionDataAccessMapper(UserDataAccessMapper userDataAccessMapper,
+                                    OrganizationDataAccessMapper organizationDataAccessMapper) {
+        this.userDataAccessMapper = userDataAccessMapper;
+        this.organizationDataAccessMapper = organizationDataAccessMapper;
     }
 
     public QuestionEntity questionToQuestionEntity(Question question) {
-        OrganizationEntity organization = organizationJpaRepository
-                .findById(question.getOrganizationId().getValue())
-                .orElseThrow();
-
-        UserEntity createdBy = userJpaRepository
-                .findById(question.getCreatedBy().getValue())
-                .orElseThrow();
-        UserEntity updatedBy = userJpaRepository
-                .findById(question.getUpdatedBy().getValue())
-                .orElseThrow();
-
         return QuestionEntity.builder()
                 .id(question.getId().getValue())
-                .organization(organization)
+                .organization(organizationDataAccessMapper.organizationToOrganizationEntity(question.getOrganization()))
                 .difficulty(question.getDifficulty())
                 .name(question.getName())
                 .questionText(question.getQuestionText())
                 .generalFeedback(question.getGeneralFeedback())
                 .defaultMark(BigDecimal.valueOf(question.getDefaultMark()))
-                .createdBy(createdBy)
-                .updatedBy(updatedBy)
+                .createdBy(userDataAccessMapper.userToUserEntity(question.getCreatedBy()))
+                .updatedBy(userDataAccessMapper.userToUserEntity(question.getUpdatedBy()))
                 .qtype(question.getqtype())
                 .createdAt(question.getCreatedAt())
                 .updatedAt(question.getUpdatedAt())
@@ -56,14 +43,14 @@ public class QuestionDataAccessMapper {
         // TODO: add failure messages
         return Question.builder()
                 .questionId(new QuestionId(questionEntity.getId()))
-                .organizationId(new OrganizationId(questionEntity.getOrganization().getId()))
+                .organization(organizationDataAccessMapper.organizationEntityToOrganization(questionEntity.getOrganization()))
                 .difficulty(questionEntity.getDifficulty())
                 .name(questionEntity.getName())
                 .questionText(questionEntity.getQuestionText())
                 .generalFeedback(questionEntity.getGeneralFeedback())
                 .defaultMark(questionEntity.getDefaultMark().floatValue())
-                .createdBy(new UserId(questionEntity.getCreatedBy().getId()))
-                .updatedBy(new UserId(questionEntity.getUpdatedBy().getId()))
+                .createdBy(userDataAccessMapper.userEntityToUser(questionEntity.getCreatedBy()))
+                .updatedBy(userDataAccessMapper.userEntityToUser(questionEntity.getCreatedBy()))
                 .qtype(questionEntity.getQtype())
                 .failureMessages(null)
                 .createdAt(questionEntity.getCreatedAt())

@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.valueobject.CourseId;
 import com.backend.programming.learning.system.valueobject.ExamId;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 public class Exam extends AggregateRoot<ExamId> {
 
@@ -13,9 +14,9 @@ public class Exam extends AggregateRoot<ExamId> {
     private Float scores;
     private Float maxScores;
 
-    private final LocalDateTime time_open;
-    private LocalDateTime time_close;
-    private Integer time_limit;
+    private final ZonedDateTime time_open;
+    private ZonedDateTime time_close;
+    private ZonedDateTime time_limit;
 
     private String intro;
     private String overdue_handing;
@@ -24,8 +25,8 @@ public class Exam extends AggregateRoot<ExamId> {
 
     private Boolean shuffle_answers;
     private String grade_method;
-    private final LocalDateTime created_at;
-    private LocalDateTime updated_at;
+    private final ZonedDateTime created_at;
+    private ZonedDateTime updated_at;
 
     private Exam(Builder builder) {
         super.setId(builder.examId);;
@@ -46,6 +47,9 @@ public class Exam extends AggregateRoot<ExamId> {
         updated_at = builder.updated_at;
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
     public CourseId getCourseId() {
         return courseId;
     }
@@ -62,15 +66,15 @@ public class Exam extends AggregateRoot<ExamId> {
         return maxScores;
     }
 
-    public LocalDateTime getTime_open() {
+    public ZonedDateTime getTime_open() {
         return time_open;
     }
 
-    public LocalDateTime getTime_close() {
+    public ZonedDateTime getTime_close() {
         return time_close;
     }
 
-    public Integer getTime_limit() {
+    public ZonedDateTime getTime_limit() {
         return time_limit;
     }
 
@@ -98,11 +102,11 @@ public class Exam extends AggregateRoot<ExamId> {
         return grade_method;
     }
 
-    public LocalDateTime getCreated_at() {
+    public ZonedDateTime getCreated_at() {
         return created_at;
     }
 
-    public LocalDateTime getUpdated_at() {
+    public ZonedDateTime getUpdated_at() {
         return updated_at;
     }
 
@@ -118,17 +122,17 @@ public class Exam extends AggregateRoot<ExamId> {
         private String name;
         private Float scores;
         private Float maxScores;
-        private LocalDateTime time_open;
-        private LocalDateTime time_close;
-        private Integer time_limit;
+        private ZonedDateTime time_open;
+        private ZonedDateTime time_close;
+        private ZonedDateTime time_limit;
         private String intro;
         private String overdue_handing;
         private Boolean can_redo_questions;
         private Integer max_attempts;
         private Boolean shuffle_answers;
         private String grade_method;
-        private LocalDateTime created_at;
-        private LocalDateTime updated_at;
+        private ZonedDateTime created_at;
+        private ZonedDateTime updated_at;
 
         private Builder() {
         }
@@ -137,7 +141,7 @@ public class Exam extends AggregateRoot<ExamId> {
             return new Builder();
         }
 
-        public Builder examId(ExamId val) {
+        public Builder id(ExamId val) {
             examId = val;
             return this;
         }
@@ -162,17 +166,17 @@ public class Exam extends AggregateRoot<ExamId> {
             return this;
         }
 
-        public Builder time_open(LocalDateTime val) {
+        public Builder time_open(ZonedDateTime val) {
             time_open = val;
             return this;
         }
 
-        public Builder time_close(LocalDateTime val) {
+        public Builder time_close(ZonedDateTime val) {
             time_close = val;
             return this;
         }
 
-        public Builder time_limit(Integer val) {
+        public Builder time_limit(ZonedDateTime val) {
             time_limit = val;
             return this;
         }
@@ -207,12 +211,12 @@ public class Exam extends AggregateRoot<ExamId> {
             return this;
         }
 
-        public Builder created_at(LocalDateTime val) {
+        public Builder created_at(ZonedDateTime val) {
             created_at = val;
             return this;
         }
 
-        public Builder updated_at(LocalDateTime val) {
+        public Builder updated_at(ZonedDateTime val) {
             updated_at = val;
             return this;
         }

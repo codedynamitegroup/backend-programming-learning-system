@@ -38,7 +38,7 @@ public class QuestionBankCategory extends AggregateRoot<QuestionBankCategoryId> 
             return new Builder();
         }
 
-        public Builder questionBankCategoryId(QuestionBankCategoryId val) {
+        public Builder id(QuestionBankCategoryId val) {
             questionBankCategoryId = val;
             return this;
         }

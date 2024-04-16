@@ -2,12 +2,11 @@ package com.backend.programming.learning.system.core.service.domain.entity;
 
 import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.QtypeEssayQuestionId;
-import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 
 import java.util.UUID;
 
 public class QtypeEssayQuestion extends BaseEntity<QtypeEssayQuestionId> {
-    private final QuestionId questionId;
+    private final Question question;
     private final String responseFormat;
     private final Integer responseRequired;
     private final Integer responseFieldLines;
@@ -26,8 +25,8 @@ public class QtypeEssayQuestion extends BaseEntity<QtypeEssayQuestionId> {
     }
 
     // Getter
-    public QuestionId getQuestionId() {
-        return questionId;
+    public Question getQuestion() {
+        return question;
     }
 
     public String getResponseFormat() {
@@ -80,7 +79,7 @@ public class QtypeEssayQuestion extends BaseEntity<QtypeEssayQuestionId> {
 
     private QtypeEssayQuestion(Builder builder) {
         super.setId(builder.qtypeEssayQuestionId);
-        questionId = builder.questionId;
+        question = builder.question;
         responseFormat = builder.responseFormat;
         responseRequired = builder.responseRequired;
         responseFieldLines = builder.responseFieldLines;
@@ -101,7 +100,7 @@ public class QtypeEssayQuestion extends BaseEntity<QtypeEssayQuestionId> {
 
     public static final class Builder {
         private QtypeEssayQuestionId qtypeEssayQuestionId;
-        private QuestionId questionId;
+        private Question question;
         private String responseFormat;
         private Integer responseRequired;
         private Integer responseFieldLines;
@@ -123,8 +122,8 @@ public class QtypeEssayQuestion extends BaseEntity<QtypeEssayQuestionId> {
             return this;
         }
 
-        public Builder questionId(QuestionId val) {
-            questionId = val;
+        public Builder question(Question val) {
+            question = val;
             return this;
         }
 

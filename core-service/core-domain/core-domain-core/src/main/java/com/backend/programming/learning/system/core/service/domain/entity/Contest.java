@@ -15,8 +15,8 @@ public class Contest extends AggregateRoot<ContestId> {
     private String description;
     private ZonedDateTime startTime;
     private ZonedDateTime endTime;
-    private final UserId createdBy;
-    private UserId updatedBy;
+    private final User createdBy;
+    private User updatedBy;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
@@ -58,11 +58,11 @@ public class Contest extends AggregateRoot<ContestId> {
         return endTime;
     }
 
-    public UserId getCreatedBy() {
+    public User getCreatedBy() {
         return createdBy;
     }
 
-    public UserId getUpdatedBy() {
+    public User getUpdatedBy() {
         return updatedBy;
     }
 
@@ -81,8 +81,8 @@ public class Contest extends AggregateRoot<ContestId> {
         private String description;
         private ZonedDateTime startTime;
         private ZonedDateTime endTime;
-        private UserId createdBy;
-        private UserId updatedBy;
+        private User createdBy;
+        private User updatedBy;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
 
@@ -114,12 +114,12 @@ public class Contest extends AggregateRoot<ContestId> {
             return this;
         }
 
-        public Builder createdBy(UserId val) {
+        public Builder createdBy(User val) {
             createdBy = val;
             return this;
         }
 
-        public Builder updatedBy(UserId val) {
+        public Builder updatedBy(User val) {
             updatedBy = val;
             return this;
         }

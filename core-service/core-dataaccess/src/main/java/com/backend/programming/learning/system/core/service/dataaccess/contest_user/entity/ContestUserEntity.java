@@ -23,9 +23,10 @@ public class ContestUserEntity {
     private UUID id;
     private UUID userId;
     private UUID contestId;
-    private ZonedDateTime registeredAt;
     private Boolean isCompleted;
     private ZonedDateTime completedAt;
+    private ZonedDateTime createdAt;
+    private ZonedDateTime updatedAt;
 
     @Override
     public boolean equals(Object o) {

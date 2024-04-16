@@ -6,18 +6,28 @@ import com.backend.programming.learning.system.core.service.domain.dto.create.to
 import com.backend.programming.learning.system.core.service.domain.dto.create.topic.CreateTopicResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
 import com.backend.programming.learning.system.core.service.domain.entity.Topic;
+import com.backend.programming.learning.system.core.service.domain.entity.User;
+import com.backend.programming.learning.system.core.service.domain.exception.TopicNotFoundException;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TopicDataMapper {
+
     public Topic createTopicCommandToTopic(CreateTopicCommand createTopicCommand) {
         return Topic.builder()
                 .name(createTopicCommand.getName())
                 .description(createTopicCommand.getDescription())
-                .createdBy(new UserId(createTopicCommand.getCreatedBy()))
-                .updatedBy(new UserId(createTopicCommand.getUpdatedBy()))
+                .createdBy(User
+                        .builder()
+                        .id(new UserId(createTopicCommand.getCreatedBy()))
+                        .build())
+                .updatedBy(User
+                        .builder()
+                        .id(new UserId(createTopicCommand.getUpdatedBy()))
+                        .build())
                 .build();
     }
 

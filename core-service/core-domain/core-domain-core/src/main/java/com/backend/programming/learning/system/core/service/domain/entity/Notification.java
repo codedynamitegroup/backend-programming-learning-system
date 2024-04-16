@@ -1,10 +1,15 @@
 package com.backend.programming.learning.system.core.service.domain.entity;
 
+import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.NotificationEventType;
+import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.NotificationId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 public class Notification extends AggregateRoot<NotificationId> {
     private UserId userIdFrom;
@@ -13,13 +18,19 @@ public class Notification extends AggregateRoot<NotificationId> {
     private String fullMessage;
     private String smallMessage;
     private String component;
-    private String eventType;
+    private NotificationEventType eventType;
     private String contextUrl;
     private String contextUrlName;
     private Boolean isRead;
     private ZonedDateTime timeRead;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
+
+    public void initializeNotification() {
+        setId(new NotificationId(UUID.randomUUID()));
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+    }
 
     private Notification(Builder builder) {
         super.setId(builder.notificationId);
@@ -66,7 +77,7 @@ public class Notification extends AggregateRoot<NotificationId> {
         return component;
     }
 
-    public String getEventType() {
+    public NotificationEventType getEventType() {
         return eventType;
     }
 
@@ -102,7 +113,7 @@ public class Notification extends AggregateRoot<NotificationId> {
         private String fullMessage;
         private String smallMessage;
         private String component;
-        private String eventType;
+        private NotificationEventType eventType;
         private String contextUrl;
         private String contextUrlName;
         private Boolean isRead;
@@ -148,7 +159,7 @@ public class Notification extends AggregateRoot<NotificationId> {
             return this;
         }
 
-        public Builder eventType(String val) {
+        public Builder eventType(NotificationEventType val) {
             eventType = val;
             return this;
         }

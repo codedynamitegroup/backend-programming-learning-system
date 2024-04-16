@@ -39,7 +39,7 @@ public class QuestionBank extends AggregateRoot<QuestionBankId> {
             return new Builder();
         }
 
-        public Builder questionBank(QuestionBankId val) {
+        public Builder id(QuestionBankId val) {
             questionBankId = val;
             return this;
         }

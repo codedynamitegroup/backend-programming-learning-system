@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
-import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -17,6 +17,8 @@ public class CreateTopicCommand {
     private final String name;
     @NotNull
     private final String description;
+    @NotNull
+    private final List<UUID> programmingLanguageIds;
     @NotNull
     private final UUID createdBy;
     @NotNull

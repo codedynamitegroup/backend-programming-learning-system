@@ -4,30 +4,32 @@ import com.backend.programming.learning.system.core.service.domain.valueobject.R
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
+import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 public class Topic extends AggregateRoot<TopicId> {
     private String name;
     private String description;
-    private final UserId createdBy;
-    private UserId updatedBy;
+    private List<ProgrammingLanguage> programmingLanguages;
+    private final User createdBy;
+    private User updatedBy;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
-    public void initializeTopic() {
-        setId(new TopicId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
-        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+    public void addProgrammingLanguage(ProgrammingLanguage programmingLanguage) {
+        programmingLanguages.add(programmingLanguage);
     }
 
     private Topic(Builder builder) {
         super.setId(builder.topicId);
         name = builder.name;
         description = builder.description;
+        programmingLanguages = builder.programmingLanguages;
         createdBy = builder.createdBy;
         updatedBy = builder.updatedBy;
         createdAt = builder.createdAt;
@@ -38,6 +40,13 @@ public class Topic extends AggregateRoot<TopicId> {
         return new Builder();
     }
 
+    public void initializeTopic() {
+        setId(new TopicId(UUID.randomUUID()));
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+    }
+
+
     public String getName() {
         return name;
     }
@@ -46,11 +55,15 @@ public class Topic extends AggregateRoot<TopicId> {
         return description;
     }
 
-    public UserId getCreatedBy() {
+    public List<ProgrammingLanguage> getProgrammingLanguages() {
+        return programmingLanguages;
+    }
+
+    public User getCreatedBy() {
         return createdBy;
     }
 
-    public UserId getUpdatedBy() {
+    public User getUpdatedBy() {
         return updatedBy;
     }
 
@@ -62,13 +75,13 @@ public class Topic extends AggregateRoot<TopicId> {
         return updatedAt;
     }
 
-
     public static final class Builder {
         private TopicId topicId;
         private String name;
         private String description;
-        private UserId createdBy;
-        private UserId updatedBy;
+        private List<ProgrammingLanguage> programmingLanguages;
+        private User createdBy;
+        private User updatedBy;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
 
@@ -90,12 +103,17 @@ public class Topic extends AggregateRoot<TopicId> {
             return this;
         }
 
-        public Builder createdBy(UserId val) {
+        public Builder programmingLanguages(List<ProgrammingLanguage> val) {
+            programmingLanguages = val;
+            return this;
+        }
+
+        public Builder createdBy(User val) {
             createdBy = val;
             return this;
         }
 
-        public Builder updatedBy(UserId val) {
+        public Builder updatedBy(User val) {
             updatedBy = val;
             return this;
         }

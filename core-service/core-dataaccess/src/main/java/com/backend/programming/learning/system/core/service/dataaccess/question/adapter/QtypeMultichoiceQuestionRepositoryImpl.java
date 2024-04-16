@@ -6,6 +6,10 @@ import com.backend.programming.learning.system.core.service.domain.ports.output.
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeMultiChoiceQuestion;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 @Component
 public class QtypeMultichoiceQuestionRepositoryImpl implements QtypeMultichoiceQuestionRepository {
     private final QtypeMultichoiceQuestionJpaRepository qtypeMultichoiceQuestionJpaRepository;
@@ -24,4 +28,17 @@ public class QtypeMultichoiceQuestionRepositoryImpl implements QtypeMultichoiceQ
                         .qtypeMultichoiceQuestionToQtypeMultichoiceQuestionEntity(qtypeMultichoiceQuestion)));
     }
 
+    @Override
+    public Optional<QtypeMultiChoiceQuestion> findQtypeMultipleChoiceQuestion(UUID qtMultipleChoiceQuestionId) {
+        return qtypeMultichoiceQuestionJpaRepository.findById(qtMultipleChoiceQuestionId)
+                .map(qtypeQuestionDataAccessMapper::qtypeMultichoiceQuestionEntityToQtypeMultichoiceQuestion);
+    }
+
+    @Override
+    public List<QtypeMultiChoiceQuestion> findAllQtypeMultipleChoiceQuestion() {
+        return qtypeMultichoiceQuestionJpaRepository
+                .findAll()
+                .stream().map(qtypeQuestionDataAccessMapper::qtypeMultichoiceQuestionEntityToQtypeMultichoiceQuestion)
+                .toList();
+    }
 }

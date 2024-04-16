@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.entity;
 
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseTopicId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
@@ -19,20 +20,15 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
     private ZonedDateTime startTime;
     private ZonedDateTime endTime;
     private Boolean isDeleted;
-    private final List<CertificateCourseTopic> certificateCoursecertificateCourseTopics;
-    private final List<Review> reviews;
-    private final List<Chapter> chapters;
-    private final UserId createdBy;
-    private UserId updatedBy;
+
+    private Topic topic;
+    private List<Review> reviews;
+    private List<Chapter> chapters;
+    private List<User> registeredUsers;
+    private User createdBy;
+    private User updatedBy;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
-    private List<String> failureMessages;
-
-    public void initializeCertificateCourse() {
-        setId(new CertificateCourseId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
-        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
-    }
 
     private CertificateCourse(Builder builder) {
         super.setId(builder.certificateCourseId);
@@ -43,18 +39,24 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         startTime = builder.startTime;
         endTime = builder.endTime;
         isDeleted = builder.isDeleted;
-        certificateCoursecertificateCourseTopics = builder.certificateCoursecertificateCourseTopics;
+        topic = builder.topic;
         reviews = builder.reviews;
         chapters = builder.chapters;
+        registeredUsers = builder.registeredUsers;
         createdBy = builder.createdBy;
         updatedBy = builder.updatedBy;
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
-        failureMessages = builder.failureMessages;
     }
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    public void initializeCertificateCourse() {
+        setId(new CertificateCourseId(UUID.randomUUID()));
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
     }
 
 
@@ -86,8 +88,8 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         return isDeleted;
     }
 
-    public List<CertificateCourseTopic> getCertificateCoursecertificateCourseTopics() {
-        return certificateCoursecertificateCourseTopics;
+    public Topic getTopic() {
+        return topic;
     }
 
     public List<Review> getReviews() {
@@ -98,11 +100,15 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         return chapters;
     }
 
-    public UserId getCreatedBy() {
+    public List<User> getRegisteredUsers() {
+        return registeredUsers;
+    }
+
+    public User getCreatedBy() {
         return createdBy;
     }
 
-    public UserId getUpdatedBy() {
+    public User getUpdatedBy() {
         return updatedBy;
     }
 
@@ -114,8 +120,64 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         return updatedAt;
     }
 
-    public List<String> getFailureMessages() {
-        return failureMessages;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setSkillLevel(SkillLevel skillLevel) {
+        this.skillLevel = skillLevel;
+    }
+
+    public void setAvgRating(Float avgRating) {
+        this.avgRating = avgRating;
+    }
+
+    public void setStartTime(ZonedDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(ZonedDateTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public void setUpdatedBy(User updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public void setCreatedAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(ZonedDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public void setChapters(List<Chapter> chapters) {
+        this.chapters = chapters;
+    }
+
+    public void setRegisteredUsers(List<User> registeredUsers) {
+        this.registeredUsers = registeredUsers;
     }
 
     public static final class Builder {
@@ -127,14 +189,14 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         private ZonedDateTime startTime;
         private ZonedDateTime endTime;
         private Boolean isDeleted;
-        private List<CertificateCourseTopic> certificateCoursecertificateCourseTopics;
+        private Topic topic;
         private List<Review> reviews;
         private List<Chapter> chapters;
-        private UserId createdBy;
-        private UserId updatedBy;
+        private List<User> registeredUsers;
+        private User createdBy;
+        private User updatedBy;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
-        private List<String> failureMessages;
 
         private Builder() {
         }
@@ -179,8 +241,8 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
             return this;
         }
 
-        public Builder certificateCoursecertificateCourseTopics(List<CertificateCourseTopic> val) {
-            certificateCoursecertificateCourseTopics = val;
+        public Builder topic(Topic val) {
+            topic = val;
             return this;
         }
 
@@ -194,12 +256,17 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
             return this;
         }
 
-        public Builder createdBy(UserId val) {
+        public Builder registeredUsers(List<User> val) {
+            registeredUsers = val;
+            return this;
+        }
+
+        public Builder createdBy(User val) {
             createdBy = val;
             return this;
         }
 
-        public Builder updatedBy(UserId val) {
+        public Builder updatedBy(User val) {
             updatedBy = val;
             return this;
         }
@@ -211,11 +278,6 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
 
         public Builder updatedAt(ZonedDateTime val) {
             updatedAt = val;
-            return this;
-        }
-
-        public Builder failureMessages(List<String> val) {
-            failureMessages = val;
             return this;
         }
 

@@ -10,23 +10,30 @@ import com.backend.programming.learning.system.core.service.domain.entity.QtypeM
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeShortAnswerQuestion;
 import com.backend.programming.learning.system.domain.valueobject.QtypeCodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.QtypeEssayQuestionId;
-import com.backend.programming.learning.system.domain.valueobject.QuestionId;
+import com.backend.programming.learning.system.domain.valueobject.QtypeMultiChoiceQuestionId;
+import com.backend.programming.learning.system.domain.valueobject.QtypeShortAnswerQuestionId;
 import org.springframework.stereotype.Component;
 
 @Component
 public class QtypeQuestionDataAccessMapper {
+    private final QuestionDataAccessMapper questionDataAccessMapper;
+
+    public QtypeQuestionDataAccessMapper(QuestionDataAccessMapper questionDataAccessMapper) {
+        this.questionDataAccessMapper = questionDataAccessMapper;
+    }
+
     // code
     public QtypeCodeQuestionEntity qtypeCodeQuestionToQtypeCodeQuestionEntity(QtypeCodeQuestion qtypeCodeQuestion) {
         return QtypeCodeQuestionEntity.builder()
                 .id(qtypeCodeQuestion.getId().getValue())
-                .questionId(qtypeCodeQuestion.getQuestionId().getValue())
+                .question(questionDataAccessMapper.questionToQuestionEntity(qtypeCodeQuestion.getQuestion()))
                 .dslTemplate(qtypeCodeQuestion.getDslTemplate())
                 .build();
     }
     public QtypeCodeQuestion qtypeCodeQuestionEntityToQtypeCodeQuestion(QtypeCodeQuestionEntity qtypeCodeQuestionEntity) {
         return QtypeCodeQuestion.builder()
                 .id(new QtypeCodeQuestionId(qtypeCodeQuestionEntity.getId()))
-                .questionId(new QuestionId(qtypeCodeQuestionEntity.getQuestionId()))
+                .question(questionDataAccessMapper.questionEntityToQuestion(qtypeCodeQuestionEntity.getQuestion()))
                 .dslTemplate(qtypeCodeQuestionEntity.getDslTemplate())
                 .build();
     }
@@ -34,14 +41,16 @@ public class QtypeQuestionDataAccessMapper {
     // short answer
     public QtypeShortanswerQuestionEntity qtypeShortanswerQuestionToQtypeShortanswerQuestionEntity(QtypeShortAnswerQuestion qtypeShortanswerQuestion) {
         return QtypeShortanswerQuestionEntity.builder()
-                .questionId(qtypeShortanswerQuestion.getQuestionId().getValue())
+                .id(qtypeShortanswerQuestion.getId().getValue())
+                .question(questionDataAccessMapper.questionToQuestionEntity(qtypeShortanswerQuestion.getQuestion()))
                 .caseSensitive(qtypeShortanswerQuestion.getCaseSensitive())
                 .build();
     }
 
     public QtypeShortAnswerQuestion qtypeShortanswerQuestionEntityToQtypeShortanswerQuestion(QtypeShortanswerQuestionEntity qtypeShortanswerQuestionEntity) {
         return QtypeShortAnswerQuestion.builder()
-                .questionId(new QuestionId(qtypeShortanswerQuestionEntity.getQuestionId()))
+                .id(new QtypeShortAnswerQuestionId(qtypeShortanswerQuestionEntity.getId()))
+                .question(questionDataAccessMapper.questionEntityToQuestion(qtypeShortanswerQuestionEntity.getQuestion()))
                 .caseSensitive(qtypeShortanswerQuestionEntity.getCaseSensitive())
                 .build();
     }
@@ -49,7 +58,8 @@ public class QtypeQuestionDataAccessMapper {
     // multiple choice
     public QtypeMultichoiceQuestionEntity qtypeMultichoiceQuestionToQtypeMultichoiceQuestionEntity(QtypeMultiChoiceQuestion qtypeMultichoiceQuestion) {
         return QtypeMultichoiceQuestionEntity.builder()
-                .questionId(qtypeMultichoiceQuestion.getQuestionId().getValue())
+                .id(qtypeMultichoiceQuestion.getId().getValue())
+                .question(questionDataAccessMapper.questionToQuestionEntity(qtypeMultichoiceQuestion.getQuestion()))
                 .single(qtypeMultichoiceQuestion.getSingle())
                 .shuffleAnswers(qtypeMultichoiceQuestion.getShuffleAnswers())
                 .correctFeedback(qtypeMultichoiceQuestion.getCorrectFeedback())
@@ -63,7 +73,8 @@ public class QtypeQuestionDataAccessMapper {
 
     public QtypeMultiChoiceQuestion qtypeMultichoiceQuestionEntityToQtypeMultichoiceQuestion(QtypeMultichoiceQuestionEntity qtypeMultichoiceQuestionEntity) {
         return QtypeMultiChoiceQuestion.builder()
-                .questionId(new QuestionId(qtypeMultichoiceQuestionEntity.getQuestionId()))
+                .id(new QtypeMultiChoiceQuestionId(qtypeMultichoiceQuestionEntity.getId()))
+                .question(questionDataAccessMapper.questionEntityToQuestion(qtypeMultichoiceQuestionEntity.getQuestion()))
                 .single(qtypeMultichoiceQuestionEntity.getSingle())
                 .shuffleAnswers(qtypeMultichoiceQuestionEntity.getShuffleAnswers())
                 .correctFeedback(qtypeMultichoiceQuestionEntity.getCorrectFeedback())
@@ -79,7 +90,7 @@ public class QtypeQuestionDataAccessMapper {
     public QtypeEssayQuestionEntity qtypeEssayQuestionToQtypeEssayQuestionEntity(QtypeEssayQuestion qtypeEssayQuestion) {
         return QtypeEssayQuestionEntity.builder()
                 .id(qtypeEssayQuestion.getId().getValue())
-                .questionId(qtypeEssayQuestion.getQuestionId().getValue())
+                .question(questionDataAccessMapper.questionToQuestionEntity(qtypeEssayQuestion.getQuestion()))
                 .responseFormat(qtypeEssayQuestion.getResponseFormat())
                 .responseRequired(qtypeEssayQuestion.getResponseRequired())
                 .responseFieldLines(qtypeEssayQuestion.getResponseFieldLines())
@@ -98,7 +109,7 @@ public class QtypeQuestionDataAccessMapper {
     public QtypeEssayQuestion qtypeEssayQuestionEntityToQtypeEssayQuestion(QtypeEssayQuestionEntity qtypeEssayQuestionEntity) {
         return QtypeEssayQuestion.builder()
                 .id(new QtypeEssayQuestionId(qtypeEssayQuestionEntity.getId()))
-                .questionId(new QuestionId(qtypeEssayQuestionEntity.getQuestionId()))
+                .question(questionDataAccessMapper.questionEntityToQuestion(qtypeEssayQuestionEntity.getQuestion()))
                 .responseFormat(qtypeEssayQuestionEntity.getResponseFormat())
                 .responseRequired(qtypeEssayQuestionEntity.getResponseRequired())
                 .responseFieldLines(qtypeEssayQuestionEntity.getResponseFieldLines())

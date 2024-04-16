@@ -13,7 +13,6 @@ import java.util.List;
  ************************************/
 
 public class User extends AggregateRoot<UserId> {
-    private final String name;
     private final String email;
     private final String firstName;
     private final String lastName;
@@ -21,11 +20,9 @@ public class User extends AggregateRoot<UserId> {
     private final String avatarUrl;
     private final ZonedDateTime createdAt;
     private final ZonedDateTime updatedAt;
-    private List<String> failureMessage;
 
     private User(Builder builder) {
         super.setId(builder.userId);
-        name = builder.name;
         email = builder.email;
         firstName = builder.firstName;
         lastName = builder.lastName;
@@ -33,16 +30,10 @@ public class User extends AggregateRoot<UserId> {
         avatarUrl = builder.avatarUrl;
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
-        failureMessage = builder.failureMessage;
     }
 
     public static Builder builder() {
         return new Builder();
-    }
-
-
-    public String getName() {
-        return name;
     }
 
     public String getEmail() {
@@ -73,13 +64,8 @@ public class User extends AggregateRoot<UserId> {
         return updatedAt;
     }
 
-    public List<String> getFailureMessage() {
-        return failureMessage;
-    }
-
     public static final class Builder {
         private UserId userId;
-        private String name;
         private String email;
         private String firstName;
         private String lastName;
@@ -87,18 +73,12 @@ public class User extends AggregateRoot<UserId> {
         private String avatarUrl;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
-        private List<String> failureMessage;
 
         private Builder() {
         }
 
         public Builder id(UserId val) {
             userId = val;
-            return this;
-        }
-
-        public Builder name(String val) {
-            name = val;
             return this;
         }
 
@@ -134,11 +114,6 @@ public class User extends AggregateRoot<UserId> {
 
         public Builder updatedAt(ZonedDateTime val) {
             updatedAt = val;
-            return this;
-        }
-
-        public Builder failureMessage(List<String> val) {
-            failureMessage = val;
             return this;
         }
 

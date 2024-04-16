@@ -21,17 +21,18 @@ public class CertificateCourseUserEntity {
     @Column(name = "id")
     private UUID id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     @JoinColumn(name = "certificate_course_id", referencedColumnName = "id")
     private CertificateCourseEntity certificateCourse;
 
-    private ZonedDateTime startTime;
     private Boolean isCompleted;
     private ZonedDateTime completedAt;
+    private ZonedDateTime createdAt;
+    private ZonedDateTime updatedAt;
 
     @Override
     public boolean equals(Object o) {

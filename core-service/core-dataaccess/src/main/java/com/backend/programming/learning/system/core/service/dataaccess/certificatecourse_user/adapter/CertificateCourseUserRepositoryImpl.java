@@ -1,13 +1,8 @@
 package com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_user.adapter;
 
-import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_topic.mapper.CertificateCourseTopicDataAccessMapper;
-import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_topic.repository.CertificateCourseTopicJpaRepository;
-import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_user.entity.CertificateCourseUserEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_user.mapper.CertificateCourseUserDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_user.repository.CertificateCourseUserJpaRepository;
-import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourseTopic;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourseUser;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseTopicRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseUserRepository;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +12,8 @@ public class CertificateCourseUserRepositoryImpl implements CertificateCourseUse
     private final CertificateCourseUserJpaRepository certificateCourseUserJpaRepository;
     private final CertificateCourseUserDataAccessMapper certificateCourseUserDataAccessMapper;
 
-    public CertificateCourseUserRepositoryImpl(CertificateCourseUserJpaRepository certificateCourseUserJpaRepository, CertificateCourseUserDataAccessMapper certificateCourseUserDataAccessMapper) {
+    public CertificateCourseUserRepositoryImpl(CertificateCourseUserJpaRepository certificateCourseUserJpaRepository,
+                                               CertificateCourseUserDataAccessMapper certificateCourseUserDataAccessMapper) {
         this.certificateCourseUserJpaRepository = certificateCourseUserJpaRepository;
         this.certificateCourseUserDataAccessMapper = certificateCourseUserDataAccessMapper;
     }
@@ -27,7 +23,8 @@ public class CertificateCourseUserRepositoryImpl implements CertificateCourseUse
         return certificateCourseUserDataAccessMapper.
             certificateCourseUserEntityToCertificateCourseUser(
                 certificateCourseUserJpaRepository.save(
-                        certificateCourseUserDataAccessMapper.certificateCourseUserToCertificateCourseUserEntity(certificateCourseUser)
+                        certificateCourseUserDataAccessMapper.
+                                certificateCourseUserToCertificateCourseUserEntity(certificateCourseUser)
                 )
             );
     }

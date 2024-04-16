@@ -1,6 +1,9 @@
 package com.backend.programming.learning.system.auth.service.dataaccess.role.entity;
 
 import javax.persistence.*;
+
+import com.backend.programming.learning.system.auth.service.dataaccess.organization.entity.OrganizationEntity;
+import com.backend.programming.learning.system.auth.service.dataaccess.user.entity.UserEntity;
 import lombok.*;
 
 import java.time.ZonedDateTime;
@@ -17,9 +20,19 @@ import java.util.UUID;
 public class RoleEntity {
     @Id
     private UUID id;
-    private UUID organizationId;
-    private UUID createdBy;
-    private UUID updatedBy;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @JoinColumn(name = "organization_id", referencedColumnName = "id")
+    private OrganizationEntity organization;
+
+    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @JoinColumn(name = "created_by", referencedColumnName = "id")
+    private UserEntity createdBy;
+
+    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @JoinColumn(name = "updated_by", referencedColumnName = "id")
+    private UserEntity updatedBy;
+
     private String description;
     private String name;
     private ZonedDateTime createdAt;

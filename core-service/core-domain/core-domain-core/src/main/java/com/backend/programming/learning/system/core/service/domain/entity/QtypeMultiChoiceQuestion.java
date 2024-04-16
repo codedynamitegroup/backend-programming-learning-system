@@ -2,12 +2,13 @@ package com.backend.programming.learning.system.core.service.domain.entity;
 
 import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.QtypeMultiChoiceQuestionId;
-import com.backend.programming.learning.system.domain.valueobject.QuestionId;
+
+import java.util.UUID;
 
 public class QtypeMultiChoiceQuestion extends BaseEntity<QtypeMultiChoiceQuestionId> {
-    private final QuestionId questionId;
-    private final Integer single;
-    private final Integer shuffleAnswers;
+    private final Question question;
+    private final Boolean single;
+    private final Boolean shuffleAnswers;
     private final String correctFeedback;
     private final String partiallyCorrectFeedback;
     private final String incorrectFeedback;
@@ -16,15 +17,15 @@ public class QtypeMultiChoiceQuestion extends BaseEntity<QtypeMultiChoiceQuestio
     private final String showStandardInstructions;
 
     // Getter Methods
-    public QuestionId getQuestionId() {
-        return questionId;
+    public Question getQuestion() {
+        return question;
     }
 
-    public Integer getSingle() {
+    public Boolean getSingle() {
         return single;
     }
 
-    public Integer getShuffleAnswers() {
+    public Boolean getShuffleAnswers() {
         return shuffleAnswers;
     }
 
@@ -55,7 +56,7 @@ public class QtypeMultiChoiceQuestion extends BaseEntity<QtypeMultiChoiceQuestio
     // Builder
     private QtypeMultiChoiceQuestion(Builder builder) {
         super.setId(builder.qtypeMultiChoiceQuestionId);
-        questionId = builder.questionId;
+        question = builder.question;
         single = builder.single;
         shuffleAnswers = builder.shuffleAnswers;
         correctFeedback = builder.correctFeedback;
@@ -70,11 +71,15 @@ public class QtypeMultiChoiceQuestion extends BaseEntity<QtypeMultiChoiceQuestio
         return new Builder();
     }
 
+    public void initQtypeMultipleChoiceQuestion() {
+        setId(new QtypeMultiChoiceQuestionId(UUID.randomUUID()));
+    }
+
     public static final class Builder {
         private QtypeMultiChoiceQuestionId qtypeMultiChoiceQuestionId;
-        private QuestionId questionId;
-        private Integer single;
-        private Integer shuffleAnswers;
+        private Question question;
+        private Boolean single;
+        private Boolean shuffleAnswers;
         private String correctFeedback;
         private String partiallyCorrectFeedback;
         private String incorrectFeedback;
@@ -90,17 +95,17 @@ public class QtypeMultiChoiceQuestion extends BaseEntity<QtypeMultiChoiceQuestio
             return this;
         }
 
-        public Builder questionId(QuestionId val) {
-            questionId = val;
+        public Builder question(Question val) {
+            question = val;
             return this;
         }
 
-        public Builder single(Integer val) {
+        public Builder single(Boolean val) {
             single = val;
             return this;
         }
 
-        public Builder shuffleAnswers(Integer val) {
+        public Builder shuffleAnswers(Boolean val) {
             shuffleAnswers = val;
             return this;
         }

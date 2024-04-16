@@ -14,8 +14,8 @@ public class Review extends AggregateRoot<ReviewId> {
     private final CertificateCourseId certificateCourseId;
     private String content;
     private Float rating;
-    private final UserId createdBy;
-    private UserId updatedBy;
+    private final User createdBy;
+    private User updatedBy;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
@@ -52,11 +52,11 @@ public class Review extends AggregateRoot<ReviewId> {
         return rating;
     }
 
-    public UserId getCreatedBy() {
+    public User getCreatedBy() {
         return createdBy;
     }
 
-    public UserId getUpdatedBy() {
+    public User getUpdatedBy() {
         return updatedBy;
     }
 
@@ -73,8 +73,8 @@ public class Review extends AggregateRoot<ReviewId> {
         private CertificateCourseId certificateCourseId;
         private String content;
         private Float rating;
-        private UserId createdBy;
-        private UserId updatedBy;
+        private User createdBy;
+        private User updatedBy;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
 
@@ -101,12 +101,12 @@ public class Review extends AggregateRoot<ReviewId> {
             return this;
         }
 
-        public Builder createdBy(UserId val) {
+        public Builder createdBy(User val) {
             createdBy = val;
             return this;
         }
 
-        public Builder updatedBy(UserId val) {
+        public Builder updatedBy(User val) {
             updatedBy = val;
             return this;
         }
