@@ -17,7 +17,6 @@ public class ReviewController {
         this.reviewApplicationService = reviewApplicationService;
     }
 
-
     @PostMapping("/create")
     public ResponseEntity<CreateReviewResponse> createReview(
             @RequestBody CreateReviewCommand createReviewCommand) {

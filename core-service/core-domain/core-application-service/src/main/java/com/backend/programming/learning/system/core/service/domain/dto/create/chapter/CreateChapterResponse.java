@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.dto.create.chapter;
 
+import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
 import lombok.AllArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -23,6 +25,8 @@ public class CreateChapterResponse {
     private final String title;
     @NotNull
     private final String description;
+    @NotNull
+    private final List<QueryQuestionResponse> questions;
     @NotNull
     private final String message;
 }

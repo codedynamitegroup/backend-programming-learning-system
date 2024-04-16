@@ -8,6 +8,8 @@ import com.backend.programming.learning.system.core.service.domain.dto.create.ch
 import com.backend.programming.learning.system.core.service.domain.dto.create.chapter.CreateChapterResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.delete.certificatecourse.DeleteCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.delete.certificatecourse.DeleteCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.chapter.DeleteChapterCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.chapter.DeleteChapterResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryAllCertificateCoursesCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryAllCertificateCoursesResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseCommand;
@@ -28,14 +30,11 @@ import java.util.UUID;
 public class CertificateCourseController {
     private final CertificateCourseApplicationService certificateCourseApplicationService;
     private final CertificateCourseUserApplicationService certificateCourseUserApplicationService;
-    private final ChapterApplicationService chapterApplicationService;
 
     public CertificateCourseController(CertificateCourseApplicationService certificateCourseApplicationService,
-                                       CertificateCourseUserApplicationService certificateCourseUserApplicationService,
-                                       ChapterApplicationService chapterApplicationService) {
+                                       CertificateCourseUserApplicationService certificateCourseUserApplicationService) {
         this.certificateCourseApplicationService = certificateCourseApplicationService;
         this.certificateCourseUserApplicationService = certificateCourseUserApplicationService;
-        this.chapterApplicationService = chapterApplicationService;
     }
 
     @PostMapping("/create")
@@ -58,17 +57,6 @@ public class CertificateCourseController {
         log.info("Certificate course User created: {}", createCertificateCourseUserResponse);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createCertificateCourseUserResponse);
-    }
-
-    @PostMapping("/chapters/create")
-    public ResponseEntity<CreateChapterResponse> createChapter(
-            @RequestBody CreateChapterCommand createChapterCommand) {
-        log.info("Creating chapter of certificate course: {}", createChapterCommand);
-        CreateChapterResponse createChapterResponse =
-                chapterApplicationService.createChapter(createChapterCommand);
-        log.info("Chapter of certificate course created: {}", createChapterResponse);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(createChapterResponse);
     }
 
     @GetMapping("/{id}")

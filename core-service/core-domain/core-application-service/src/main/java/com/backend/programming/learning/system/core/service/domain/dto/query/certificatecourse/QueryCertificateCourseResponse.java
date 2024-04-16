@@ -35,12 +35,6 @@ public class QueryCertificateCourseResponse {
     @NotNull
     private final QueryTopicResponse topic;
     @NotNull
-    private final List<QueryChapterResponse> chapters;
-    @NotNull
-    private final List<QueryReviewResponse> reviews;
-    @NotNull
-    private final List<QueryUserResponse> registeredUsers;
-    @NotNull
     private final Boolean isDeleted;
     @NotNull
     private final QueryUserResponse createdBy;
