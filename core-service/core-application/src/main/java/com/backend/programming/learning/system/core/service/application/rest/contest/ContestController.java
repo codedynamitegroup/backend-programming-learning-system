@@ -8,15 +8,23 @@ import com.backend.programming.learning.system.core.service.domain.dto.create.co
 import com.backend.programming.learning.system.core.service.domain.dto.create.contest_user.CreateContestUserResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.chapter.DeleteChapterCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.chapter.DeleteChapterResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.contest.DeleteContestResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.chapter.QueryAllChaptersCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.query.chapter.QueryAllChaptersResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.chapter.QueryChapterCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.query.chapter.QueryChapterResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.contest.QueryAllContestsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.contest.QueryContestResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest.ContestApplicationService;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest_user.ContestUserApplicationService;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.review.ReviewApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -51,6 +59,24 @@ public class ContestController {
         log.info("Contest User created: {}", createContestUserCommand);
 
         return ResponseEntity.ok(createContestUserResponse);
+    }
+
+    @GetMapping
+    public ResponseEntity<QueryAllContestsResponse> getAllContests(
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize
+    ) {
+        return null;
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<QueryContestResponse> getContest(@PathVariable UUID id) {
+        return null;
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<DeleteContestResponse> deleteContest(@PathVariable UUID id) {
+        return null;
     }
 
 }
