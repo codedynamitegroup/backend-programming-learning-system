@@ -38,4 +38,9 @@ public class ChapterRepositoryImpl implements ChapterRepository {
         return chapterDataAccessMapper.chapterEntityListToChapterList(
                 chapterJpaRepository.findAllByCertificateCourseId(certificateCourseId.getValue()));
     }
+
+    @Override
+    public Integer findTopNoByCertificateCourseId(CertificateCourseId certificateCourseId) {
+        return chapterJpaRepository.findTopNoByCertificateCourseId(certificateCourseId.getValue());
+    }
 }

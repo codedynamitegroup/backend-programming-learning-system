@@ -18,5 +18,11 @@ public class CreateChapterResponse {
     @NotNull
     private final UUID certificateCourseId;
     @NotNull
+    private final Integer no;
+    @NotNull
+    private final String title;
+    @NotNull
+    private final String description;
+    @NotNull
     private final String message;
 }

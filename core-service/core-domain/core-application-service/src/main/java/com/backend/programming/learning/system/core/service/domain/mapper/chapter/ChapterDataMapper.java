@@ -17,7 +17,6 @@ public class ChapterDataMapper {
 
     public Chapter createChapterCommandToChapter(CreateChapterCommand createChapterCommand) {
         return Chapter.builder()
-                .no(createChapterCommand.getNo())
                 .title(createChapterCommand.getTitle())
                 .description(createChapterCommand.getDescription())
                 .createdBy(User
@@ -35,6 +34,9 @@ public class ChapterDataMapper {
         return CreateChapterResponse.builder()
                 .chapterId(chapter.getId().getValue())
                 .certificateCourseId(chapter.getCertificateCourseId().getValue())
+                .no(chapter.getNo())
+                .title(chapter.getTitle())
+                .description(chapter.getDescription())
                 .message(message)
                 .build();
     }

@@ -46,6 +46,7 @@ public class ChapterCreateHelper {
         User createdBy = getUser(createChapterCommand.getCreatedBy());
         User updatedBy = getUser(createChapterCommand.getUpdatedBy());
         checkCertificateCourse(createChapterCommand.getCertificateCourseId());
+        Integer topNo = findTopNoOfChapterByCertificateCourseId(createChapterCommand.getCertificateCourseId());
 
         Chapter chapter = chapterDataMapper.
                 createChapterCommandToChapter(createChapterCommand);
@@ -53,6 +54,7 @@ public class ChapterCreateHelper {
         chapter.setCreatedBy(createdBy);
         chapter.setUpdatedBy(updatedBy);
         chapter.setCertificateCourseId(new CertificateCourseId(createChapterCommand.getCertificateCourseId()));
+        chapter.setNo(topNo + 1);
 
         Chapter chapterResult = saveChapter(chapter);
 
@@ -76,6 +78,10 @@ public class ChapterCreateHelper {
             log.warn("Certificate course with id: {} not found", certificateCourseId);
             throw new CertificateCourseNotFoundException("Could not find certificate course with id: " + certificateCourseId);
         }
+    }
+
+    private Integer findTopNoOfChapterByCertificateCourseId(UUID certificateCourseId) {
+        return chapterRepository.findTopNoByCertificateCourseId(new CertificateCourseId(certificateCourseId));
     }
 
     private Chapter saveChapter(Chapter chapter) {
