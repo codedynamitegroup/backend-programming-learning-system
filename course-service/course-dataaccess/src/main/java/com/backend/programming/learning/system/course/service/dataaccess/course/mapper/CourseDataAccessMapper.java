@@ -21,6 +21,7 @@ public class CourseDataAccessMapper {
         return Course.builder()
                 .id(new CourseId(courseEntity.getId()))
                 .name(courseEntity.getName())
+//                .key(courseEntity.getKey())
                 .visible(courseEntity.getVisible())
                 .createdAt(courseEntity.getCreatedAt())
                 .updatedAt(courseEntity.getUpdatedAt())

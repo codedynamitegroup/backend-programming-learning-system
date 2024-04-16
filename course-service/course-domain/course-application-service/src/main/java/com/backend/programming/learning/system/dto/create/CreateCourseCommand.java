@@ -26,8 +26,8 @@ public class CreateCourseCommand {
     private final ZonedDateTime startTime;
     private final ZonedDateTime endTime;
 
-    @NotNull
-    private final UUID createdBy;
-    @NotNull
-    private final UUID updatedBy;
+//    @NotNull
+//    private final UUID createdBy;
+//    @NotNull
+//    private final UUID updatedBy;
 }

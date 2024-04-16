@@ -19,7 +19,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "user")
+@Table(name = "user", schema = "course")
 public class UserEntity {
     @Id
     @Column(name = "id")

@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.entity;
 
+import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import com.backend.programming.learning.system.valueobject.AssignmentId;
@@ -7,6 +8,7 @@ import com.backend.programming.learning.system.valueobject.CourseId;
 import com.backend.programming.learning.system.valueobject.ExamId;
 import com.backend.programming.learning.system.valueobject.PostId;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -22,12 +24,17 @@ public class Course extends AggregateRoot<CourseId> {
 
     private final List<Assignment> assignments;
     private UserId updatedBy;
-    private final ZonedDateTime createdAt;
+    private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
     public void initializeCourse(CourseId courseId) {
         setId(new CourseId(UUID.randomUUID()));
 
+    }
+    public void initializeCourse() {
+        setId(new CourseId(UUID.randomUUID()));
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
     }
 
     private void initializePost(PostId postId) {
