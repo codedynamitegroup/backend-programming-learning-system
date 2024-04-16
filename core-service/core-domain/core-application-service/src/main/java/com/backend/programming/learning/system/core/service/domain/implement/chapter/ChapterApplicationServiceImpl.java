@@ -2,6 +2,12 @@ package com.backend.programming.learning.system.core.service.domain.implement.ch
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.chapter.CreateChapterCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.chapter.CreateChapterResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.chapter.DeleteChapterCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.chapter.DeleteChapterResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.chapter.QueryAllChaptersCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.query.chapter.QueryAllChaptersResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.chapter.QueryChapterCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.query.chapter.QueryChapterResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.chapter.ChapterApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,5 +26,20 @@ class ChapterApplicationServiceImpl implements ChapterApplicationService {
     @Override
     public CreateChapterResponse createChapter(CreateChapterCommand createChapterCommand) {
         return chapterCommandHandler.createChapterResponse(createChapterCommand);
+    }
+
+    @Override
+    public DeleteChapterResponse deleteChapter(DeleteChapterCommand deleteChapterCommand) {
+        return chapterCommandHandler.deleteChapterResponse(deleteChapterCommand);
+    }
+
+    @Override
+    public QueryAllChaptersResponse queryAllChapters(QueryAllChaptersCommand queryAllChaptersCommand) {
+        return chapterCommandHandler.queryAllChaptersResponse(queryAllChaptersCommand);
+    }
+
+    @Override
+    public QueryChapterResponse queryChapter(QueryChapterCommand queryChapterCommand) {
+        return chapterCommandHandler.queryChapterResponse(queryChapterCommand);
     }
 }

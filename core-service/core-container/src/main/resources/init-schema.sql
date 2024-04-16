@@ -37,10 +37,10 @@ CREATE TABLE "public".topic
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
     name text UNIQUE NOT NULL,
-    description text NOT NULL,
-    created_by uuid NOT NULL,
+    description text,
+    created_by uuid,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    updated_by uuid NOT NULL,
+    updated_by uuid,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT topic_pkey PRIMARY KEY (id),
     CONSTRAINT topic_created_by_fkey FOREIGN KEY (created_by)

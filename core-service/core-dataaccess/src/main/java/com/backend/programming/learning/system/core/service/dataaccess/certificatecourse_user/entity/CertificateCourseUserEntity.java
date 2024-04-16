@@ -21,11 +21,11 @@ public class CertificateCourseUserEntity {
     @Column(name = "id")
     private UUID id;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @ManyToOne
     @JoinColumn(name = "certificate_course_id", referencedColumnName = "id")
     private CertificateCourseEntity certificateCourse;
 

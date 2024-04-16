@@ -25,17 +25,11 @@ import java.util.List;
 @Component
 public class CertificateCourseDataMapper {
     private final TopicDataMapper topicDataMapper;
-    private final ChapterDataMapper chapterDataMapper;
-    private final ReviewDataMapper reviewDataMapper;
     private final UserDataMapper userDataMapper;
 
     public CertificateCourseDataMapper(TopicDataMapper topicDataMapper,
-                                       ChapterDataMapper chapterDataMapper,
-                                       ReviewDataMapper reviewDataMapper,
                                        UserDataMapper userDataMapper) {
         this.topicDataMapper = topicDataMapper;
-        this.chapterDataMapper = chapterDataMapper;
-        this.reviewDataMapper = reviewDataMapper;
         this.userDataMapper = userDataMapper;
     }
 
@@ -50,9 +44,6 @@ public class CertificateCourseDataMapper {
                         .builder()
                         .id(new TopicId(createCertificateCourseCommand.getTopicId()))
                         .build())
-                .chapters(new ArrayList<>())
-                .reviews(new ArrayList<>())
-                .registeredUsers(new ArrayList<>())
                 .isDeleted(false)
                 .createdBy(User
                         .builder()
@@ -78,14 +69,6 @@ public class CertificateCourseDataMapper {
             CertificateCourse certificateCourse) {
         QueryTopicResponse queryTopicResponse = topicDataMapper.
                 topicToQueryTopicResponse(certificateCourse.getTopic());
-        List<QueryChapterResponse> queryChapterResponses = new ArrayList<>();
-        for (Chapter chapter : certificateCourse.getChapters()) {
-            queryChapterResponses.add(chapterDataMapper.chapterToQueryChapterResponse(chapter));
-        }
-        List<QueryReviewResponse> queryReviewResponses = new ArrayList<>();
-        for (Review review : certificateCourse.getReviews()) {
-            queryReviewResponses.add(reviewDataMapper.reviewToQueryReviewResponse(review));
-        }
         QueryUserResponse createdByResponse = userDataMapper.userToQueryUserResponse(certificateCourse.getCreatedBy());
         QueryUserResponse updatedByResponse = userDataMapper.userToQueryUserResponse(certificateCourse.getUpdatedBy());
 
@@ -98,9 +81,6 @@ public class CertificateCourseDataMapper {
                 .startTime(certificateCourse.getStartTime())
                 .endTime(certificateCourse.getEndTime())
                 .topic(queryTopicResponse)
-                .chapters(queryChapterResponses)
-                .reviews(queryReviewResponses)
-                .registeredUsers(new ArrayList<>())
                 .isDeleted(certificateCourse.getDeleted())
                 .createdBy(createdByResponse)
                 .updatedBy(updatedByResponse)
