@@ -42,4 +42,9 @@ public class QtypeShortanswerQuestionRepositoryImpl implements QtypeShortanswerQ
                 .map(qtypeQuestionDataAccessMapper::qtypeShortanswerQuestionEntityToQtypeShortanswerQuestion)
                 .toList();
     }
+
+    @Override
+    public void deleteQtypeShortAnswerQuestion(UUID qtShortAnswerQuestionId) {
+        qtypeShortAnswerQuestionJpaRepository.deleteById(qtShortAnswerQuestionId);
+    }
 }

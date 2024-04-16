@@ -1,10 +1,9 @@
 package com.backend.programming.learning.system.core.service.dataaccess.question.mapper;
 
 import com.backend.programming.learning.system.core.service.dataaccess.organization.mapper.OrganizationDataAccessMapper;
-import com.backend.programming.learning.system.core.service.dataaccess.organization.repository.OrganizationJpaRepository;
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
-import com.backend.programming.learning.system.core.service.dataaccess.user.repository.UserJpaRepository;
+import com.backend.programming.learning.system.core.service.domain.dto.query.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import org.springframework.stereotype.Component;
@@ -15,11 +14,14 @@ import java.math.BigDecimal;
 public class QuestionDataAccessMapper {
     private final UserDataAccessMapper userDataAccessMapper;
     private final OrganizationDataAccessMapper organizationDataAccessMapper;
+    private final AnswerOfQuestionDataAccessMapper answerOfQuestionDataAccessMapper;
 
     public QuestionDataAccessMapper(UserDataAccessMapper userDataAccessMapper,
-                                    OrganizationDataAccessMapper organizationDataAccessMapper) {
+                                    OrganizationDataAccessMapper organizationDataAccessMapper,
+                                    AnswerOfQuestionDataAccessMapper answerOfQuestionDataAccessMapper) {
         this.userDataAccessMapper = userDataAccessMapper;
         this.organizationDataAccessMapper = organizationDataAccessMapper;
+        this.answerOfQuestionDataAccessMapper = answerOfQuestionDataAccessMapper;
     }
 
     public QuestionEntity questionToQuestionEntity(Question question) {
@@ -55,6 +57,24 @@ public class QuestionDataAccessMapper {
                 .failureMessages(null)
                 .createdAt(questionEntity.getCreatedAt())
                 .updatedAt(questionEntity.getUpdatedAt())
+                .build();
+    }
+
+    public QuestionResponseEntity questionEntityToQuestionResponseEntity(QuestionEntity questionEntity) {
+        return QuestionResponseEntity.builder()
+                .organization(organizationDataAccessMapper.organizationEntityToOrganization(questionEntity.getOrganization()))
+                .difficulty(questionEntity.getDifficulty())
+                .name(questionEntity.getName())
+                .questionText(questionEntity.getQuestionText())
+                .generalFeedback(questionEntity.getGeneralFeedback())
+                .defaultMark(questionEntity.getDefaultMark().floatValue())
+                .createdBy(userDataAccessMapper.userEntityToUser(questionEntity.getCreatedBy()))
+                .updatedBy(userDataAccessMapper.userEntityToUser(questionEntity.getUpdatedBy()))
+                .qtype(questionEntity.getQtype())
+                .failureMessages(null)
+                .createdAt(questionEntity.getCreatedAt())
+                .updatedAt(questionEntity.getUpdatedAt())
+                .answers(answerOfQuestionDataAccessMapper.answerOfQuestionEntityListToAnswerOfQuestionList(questionEntity.getAnswerOfQuestions()))
                 .build();
     }
 }

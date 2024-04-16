@@ -10,4 +10,5 @@ public interface QtypeMultichoiceQuestionRepository {
     QtypeMultiChoiceQuestion saveQtypeMultipleChoiceQuestion(QtypeMultiChoiceQuestion question);
     Optional<QtypeMultiChoiceQuestion> findQtypeMultipleChoiceQuestion(UUID qtMultipleChoiceQuestionId);
     List<QtypeMultiChoiceQuestion> findAllQtypeMultipleChoiceQuestion();
+    void deleteQtypeMultipleChoiceQuestion(UUID qtMultipleChoiceQuestionId);
 }

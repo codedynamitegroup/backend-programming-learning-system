@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.ports.output.
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class AnswerOfQuestionRepositoryImpl implements AnswerOfQuestionRepository {
@@ -34,5 +35,10 @@ public class AnswerOfQuestionRepositoryImpl implements AnswerOfQuestionRepositor
                 .stream()
                 .map(answerOfQuestionDataAccessMapper::answerOfQuestionEntityToAnswerOfQuestion)
                 .toList();
+    }
+
+    @Override
+    public void deleteAnswerOfQuestion(UUID answerId) {
+        answerOfQuestionJpaRepository.deleteById(answerId);
     }
 }

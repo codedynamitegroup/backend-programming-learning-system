@@ -42,4 +42,9 @@ public class QtypeEssayQuestionRepositoryImpl implements QtypeEssayQuestionRepos
                 .map(qtypeQuestionDataAccessMapper::qtypeEssayQuestionEntityToQtypeEssayQuestion)
                 .toList();
     }
+
+    @Override
+    public void deleteQtypeEssayQuestion(UUID qtEssayQuestionId) {
+
+    }
 }

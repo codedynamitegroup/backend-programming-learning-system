@@ -3,22 +3,17 @@ package com.backend.programming.learning.system.core.service.dataaccess.question
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.AnswerOfQuestionEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.AnswerOfQuestion;
 import com.backend.programming.learning.system.core.service.domain.valueobject.AnswerId;
+import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
 public class AnswerOfQuestionDataAccessMapper {
-    private final QuestionDataAccessMapper questionDataAccessMapper;
-
-    public AnswerOfQuestionDataAccessMapper(QuestionDataAccessMapper questionDataAccessMapper) {
-        this.questionDataAccessMapper = questionDataAccessMapper;
-    }
-
     public AnswerOfQuestion answerOfQuestionEntityToAnswerOfQuestion(AnswerOfQuestionEntity answerOfQuestionEntity) {
         return AnswerOfQuestion.builder()
                 .id(new AnswerId(answerOfQuestionEntity.getId()))
-                .question(questionDataAccessMapper.questionEntityToQuestion(answerOfQuestionEntity.getQuestion()))
+                .questionId(new QuestionId(answerOfQuestionEntity.getQuestionId()))
                 .feedback(answerOfQuestionEntity.getFeedback())
                 .answer(answerOfQuestionEntity.getAnswer())
                 .fraction(answerOfQuestionEntity.getFraction())
@@ -28,7 +23,7 @@ public class AnswerOfQuestionDataAccessMapper {
     public AnswerOfQuestionEntity answerOfQuestionToAnswerOfQuestionEntity(AnswerOfQuestion answerOfQuestion) {
         return AnswerOfQuestionEntity.builder()
                 .id(answerOfQuestion.getId().getValue())
-                .question(questionDataAccessMapper.questionToQuestionEntity(answerOfQuestion.getQuestion()))
+                .questionId(answerOfQuestion.getQuestionId().getValue())
                 .feedback(answerOfQuestion.getFeedback())
                 .answer(answerOfQuestion.getAnswer())
                 .fraction(answerOfQuestion.getFraction())
@@ -36,6 +31,14 @@ public class AnswerOfQuestionDataAccessMapper {
     }
 
     public List<AnswerOfQuestionEntity> answerOfQuestionListToAnswerOfQuestionEntityList(List<AnswerOfQuestion> answerOfQuestionList) {
-        return null;
+        return List.of(answerOfQuestionList.stream()
+                .map(this::answerOfQuestionToAnswerOfQuestionEntity)
+                .toArray(AnswerOfQuestionEntity[]::new));
+    }
+
+    public List<AnswerOfQuestion> answerOfQuestionEntityListToAnswerOfQuestionList(List<AnswerOfQuestionEntity> answerOfQuestionEntityList) {
+        return List.of(answerOfQuestionEntityList.stream()
+                .map(this::answerOfQuestionEntityToAnswerOfQuestion)
+                .toArray(AnswerOfQuestion[]::new));
     }
 }

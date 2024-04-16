@@ -41,4 +41,9 @@ public class QtypeMultichoiceQuestionRepositoryImpl implements QtypeMultichoiceQ
                 .stream().map(qtypeQuestionDataAccessMapper::qtypeMultichoiceQuestionEntityToQtypeMultichoiceQuestion)
                 .toList();
     }
+
+    @Override
+    public void deleteQtypeMultipleChoiceQuestion(UUID qtMultipleChoiceQuestionId) {
+
+    }
 }

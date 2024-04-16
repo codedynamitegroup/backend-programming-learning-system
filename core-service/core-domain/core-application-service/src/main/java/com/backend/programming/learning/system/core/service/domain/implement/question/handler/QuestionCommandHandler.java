@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.implement.question.handler;
 
-import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.implement.question.method.query.QuestionQueryHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -17,12 +17,12 @@ public class QuestionCommandHandler {
         this.questionQueryHelper = questionQueryHelper;
     }
 
-    public QueryQuestionResponse queryQuestionById(UUID questionId) {
+    public QuestionResponseEntity queryQuestionById(UUID questionId) {
         return questionQueryHelper
                 .queryQuestionById(questionId);
     }
 
-    public List<QueryQuestionResponse> queryAllQuestion() {
+    public List<QuestionResponseEntity> queryAllQuestion() {
         return questionQueryHelper
                 .queryAllQuestion();
     }

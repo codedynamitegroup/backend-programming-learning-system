@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.application.rest.question;
 
-import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QuestionApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -23,20 +23,20 @@ public class QuestionController {
     }
 
     @GetMapping
-    public ResponseEntity<List<QueryQuestionResponse>> getAllQuestions() {
+    public ResponseEntity<List<QuestionResponseEntity>> getAllQuestions() {
         log.info("Getting all questions");
-        List<QueryQuestionResponse> queryQuestionResponse = questionApplicationService.queryAllQuestion();
-        log.info("Questions retrieved: {}", queryQuestionResponse);
+        List<QuestionResponseEntity> questionResponseEntity = questionApplicationService.queryAllQuestion();
+        log.info("Questions retrieved: {}", questionResponseEntity);
 
-        return ResponseEntity.ok(queryQuestionResponse);
+        return ResponseEntity.ok(questionResponseEntity);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<QueryQuestionResponse> getQuestion(@PathVariable UUID id) {
+    public ResponseEntity<QuestionResponseEntity> getQuestion(@PathVariable UUID id) {
         log.info("Getting question with id: {}", id);
-        QueryQuestionResponse queryQuestionResponse = questionApplicationService.queryQuestionById(id);
-        log.info("Question retrieved: {}", queryQuestionResponse);
+        QuestionResponseEntity questionResponseEntity = questionApplicationService.queryQuestionById(id);
+        log.info("Question retrieved: {}", questionResponseEntity);
 
-        return ResponseEntity.ok(queryQuestionResponse);
+        return ResponseEntity.ok(questionResponseEntity);
     }
 }

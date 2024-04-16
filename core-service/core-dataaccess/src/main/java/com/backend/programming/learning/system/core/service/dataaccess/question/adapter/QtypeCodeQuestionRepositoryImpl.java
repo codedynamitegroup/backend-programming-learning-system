@@ -42,4 +42,9 @@ public class QtypeCodeQuestionRepositoryImpl implements QtypeCodeQuestionReposit
                 .map(qtypeQuestionDataAccessMapper::qtypeCodeQuestionEntityToQtypeCodeQuestion)
                 .toList();
     }
+
+    @Override
+    public void deleteQtypeCodeQuestion(UUID qtCodeQuestionId) {
+
+    }
 }
