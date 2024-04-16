@@ -3,11 +3,13 @@ package com.backend.programming.learning.system.core.service.domain.mapper.quest
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.entity.AnswerOfQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.Organization;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
+import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import org.springframework.stereotype.Component;
 
@@ -35,6 +37,18 @@ public class QuestionDataMapper {
                 .createdAt(ZonedDateTime.now())
                 .updatedAt(ZonedDateTime.now())
                 .build();
+    }
+
+    public List<AnswerOfQuestion> answerOfQuestionListToAnswerOfQuestionEntityList(List<com.backend.programming.learning.system.core.service.domain.dto.create.question.AnswerOfQuestion> answerOfQuestions
+            , Question question) {
+        return List.of(answerOfQuestions.stream()
+                .map(answerOfQuestion -> AnswerOfQuestion.builder()
+                        .question(question)
+                        .answer(answerOfQuestion.getAnswer())
+                        .fraction(answerOfQuestion.getFraction())
+                        .feedback(answerOfQuestion.getFeedback())
+                        .build())
+                .toArray(AnswerOfQuestion[]::new));
     }
 
     // question to create question response

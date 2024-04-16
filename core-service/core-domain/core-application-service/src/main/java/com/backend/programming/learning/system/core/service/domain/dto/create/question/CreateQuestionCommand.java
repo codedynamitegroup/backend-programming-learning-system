@@ -6,6 +6,7 @@ import lombok.Getter;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @Builder
@@ -40,4 +41,7 @@ public class CreateQuestionCommand {
 
     @NotNull(message = "Question type is required")
     private final String qType;
+
+    @NotNull(message = "Answers is required")
+    private List<AnswerOfQuestion> answers;
 }

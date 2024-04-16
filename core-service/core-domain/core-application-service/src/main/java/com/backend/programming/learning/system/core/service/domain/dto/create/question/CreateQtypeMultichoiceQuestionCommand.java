@@ -7,6 +7,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -47,6 +48,7 @@ public class CreateQtypeMultichoiceQuestionCommand extends CreateQuestionCommand
             @NotNull(message = "General feedback is required") String generalFeedback,
             @NotNull(message = "Default mark is required") @DecimalMin(value = "0.0", inclusive = false, message = "Default mark must be greater than 0") @Digits(integer = 5, fraction = 2, message = "Default mark must have up to 5 digits and 2 decimals") BigDecimal defaultMark,
             @NotNull(message = "Question type is required") String qType,
+            @NotNull(message = "Answers is required") List<AnswerOfQuestion> answers,
             Boolean single,
             Boolean shuffleAnswers,
             String correctFeedback,
@@ -63,7 +65,8 @@ public class CreateQtypeMultichoiceQuestionCommand extends CreateQuestionCommand
                 questionText,
                 generalFeedback,
                 defaultMark,
-                qType);
+                qType,
+                answers);
         this.single = single;
         this.shuffleAnswers = shuffleAnswers;
         this.correctFeedback = correctFeedback;

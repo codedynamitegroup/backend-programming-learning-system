@@ -10,6 +10,7 @@ public interface CoreDomainService {
     QuestionCreatedEvent createQtypeEssayQuestion(Question question, QtypeEssayQuestion qtypeEssayQuestion);
     QuestionCreatedEvent createQtypeShortAnswerQuestion(Question question, QtypeShortAnswerQuestion qtypeEssayQuestion);
     QuestionCreatedEvent createQtypeMultipleChoiceQuestion(Question question, QtypeMultiChoiceQuestion qtypeMultipleChoiceQuestion);
+    void createAnswerOfQuestion(AnswerOfQuestion answerOfQuestion);
     void createCertificateCourse(CertificateCourse certificateCourse);
     void createReview(Review review);
     void createTopic(Topic topic);
