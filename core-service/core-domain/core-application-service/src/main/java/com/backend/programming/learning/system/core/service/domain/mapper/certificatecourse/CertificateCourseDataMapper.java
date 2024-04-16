@@ -21,7 +21,7 @@ public class CertificateCourseDataMapper {
             CreateCertificateCourseCommand createCertificateCourseCommand) {
         return CertificateCourse.builder()
                 .name(createCertificateCourseCommand.getName())
-                .skillLevel(SkillLevel.valueOf(createCertificateCourseCommand.getSkillLevel()))
+                .skillLevel(SkillLevel.valueOf(createCertificateCourseCommand.getSkillLevel().toUpperCase()))
                 .startTime(createCertificateCourseCommand.getStartTime())
                 .endTime(createCertificateCourseCommand.getEndTime())
                 .topic(Topic
