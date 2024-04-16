@@ -15,7 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "exam_entity")
+@Table(name = "exam")
 public class ExamEntity {
     @Id
     @Column(name = "id")
@@ -35,7 +35,7 @@ public class ExamEntity {
     private String overdueHandling;
     private Boolean canRedoQuestions;
     private Integer maxAttempts;
-    private Boolean shuffleQuestions;
+//    private Boolean shuffleQuestions;
     private String gradeMethod;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;

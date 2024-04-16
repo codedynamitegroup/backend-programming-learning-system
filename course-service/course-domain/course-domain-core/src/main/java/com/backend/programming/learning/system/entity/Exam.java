@@ -1,11 +1,14 @@
 package com.backend.programming.learning.system.entity;
 
+import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.valueobject.CourseId;
 import com.backend.programming.learning.system.valueobject.ExamId;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 public class Exam extends AggregateRoot<ExamId> {
 
@@ -25,7 +28,7 @@ public class Exam extends AggregateRoot<ExamId> {
 
     private Boolean shuffle_answers;
     private String grade_method;
-    private final ZonedDateTime created_at;
+    private ZonedDateTime created_at;
     private ZonedDateTime updated_at;
 
     private Exam(Builder builder) {
@@ -113,6 +116,12 @@ public class Exam extends AggregateRoot<ExamId> {
     public void initializeExam(CourseId courseId, ExamId examId) {
         this.courseId = courseId;
         this.setId(examId);
+    }
+
+    public void initializeExam() {
+        setId(new ExamId(UUID.randomUUID()));
+        created_at = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        updated_at = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
     }
 
 
