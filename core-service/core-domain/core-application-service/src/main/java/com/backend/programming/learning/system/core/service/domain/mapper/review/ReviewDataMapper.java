@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.create.ce
 import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.review.QueryReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
@@ -37,6 +38,17 @@ public class ReviewDataMapper {
         return CreateReviewResponse.builder()
                 .reviewId(review.getId().getValue())
                 .message(message)
+                .build();
+    }
+
+    public QueryReviewResponse reviewToQueryReviewResponse(Review review) {
+        return QueryReviewResponse.builder()
+                .reviewId(review.getId().getValue())
+                .certificateCourseId(review.getCertificateCourseId().getValue())
+                .rating(review.getRating())
+                .content(review.getContent())
+                .createdAt(review.getCreatedAt())
+                .updatedAt(review.getUpdatedAt())
                 .build();
     }
 }

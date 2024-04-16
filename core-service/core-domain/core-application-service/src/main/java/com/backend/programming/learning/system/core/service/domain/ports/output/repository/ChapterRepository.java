@@ -5,8 +5,13 @@ import com.backend.programming.learning.system.core.service.domain.entity.Chapte
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public interface ChapterRepository {
     Chapter saveChapter(Chapter chapter);
+    Optional<Chapter> findById(UUID chapterId);
     List<Chapter> findAllByCertificateCourseId(CertificateCourseId certificateCourseId);
+    Integer findTopNoByCertificateCourseId(CertificateCourseId certificateCourseId);
+    void deleteChapter(UUID chapterId);
 }

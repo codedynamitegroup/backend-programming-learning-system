@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.core.service.domain.dto.query.notification;
+package com.backend.programming.learning.system.core.service.domain.dto.delete.chapter;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,5 +10,7 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class QueryAllNotificationCommand {
+public class DeleteChapterCommand {
+    @NotNull
+    private final UUID chapterId;
 }

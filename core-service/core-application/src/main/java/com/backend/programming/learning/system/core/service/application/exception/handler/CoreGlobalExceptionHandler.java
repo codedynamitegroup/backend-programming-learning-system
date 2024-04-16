@@ -2,10 +2,7 @@ package com.backend.programming.learning.system.core.service.application.excepti
 
 import com.backend.programming.learning.system.application.handler.ErrorDTO;
 import com.backend.programming.learning.system.application.handler.GlobalExceptionHandler;
-import com.backend.programming.learning.system.core.service.domain.exception.CertificateCourseNotFoundException;
-import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
-import com.backend.programming.learning.system.core.service.domain.exception.OrganizationNotFoundException;
-import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
+import com.backend.programming.learning.system.core.service.domain.exception.*;
 import com.backend.programming.learning.system.core.service.domain.exception.question.QuestionNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -74,6 +71,18 @@ public class CoreGlobalExceptionHandler extends GlobalExceptionHandler {
                 .status(HttpStatus.NOT_FOUND.value())
                 .code(HttpStatus.NOT_FOUND.getReasonPhrase())
                 .message(organizationNotFoundException.getMessage())
+                .build();
+    }
+
+    @ResponseBody
+    @ExceptionHandler(value = {ChapterNotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorDTO handleException(ChapterNotFoundException chapterNotFoundException) {
+        log.error(chapterNotFoundException.getMessage(), chapterNotFoundException);
+        return ErrorDTO.builder()
+                .status(HttpStatus.NOT_FOUND.value())
+                .code(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .message(chapterNotFoundException.getMessage())
                 .build();
     }
 }

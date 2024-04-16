@@ -24,15 +24,15 @@ public class TopicEntity {
     private String name;
     private String description;
 
-    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @ManyToOne
     @JoinColumn(name = "created_by", referencedColumnName = "id")
     private UserEntity createdBy;
 
-    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @ManyToOne
     @JoinColumn(name = "updated_by", referencedColumnName = "id")
     private UserEntity updatedBy;
 
-    @OneToMany(mappedBy = "topic")
+    @OneToMany(mappedBy = "topic", cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     private List<CertificateCourseEntity> certificateCourses;
 
     private ZonedDateTime createdAt;

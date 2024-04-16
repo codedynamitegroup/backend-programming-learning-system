@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Component
 public class ChapterRepositoryImpl implements ChapterRepository {
@@ -34,8 +36,24 @@ public class ChapterRepositoryImpl implements ChapterRepository {
     }
 
     @Override
+    public Optional<Chapter> findById(UUID chapterId) {
+        return chapterJpaRepository.findById(chapterId)
+                .map(chapterDataAccessMapper::chapterEntityToChapter);
+    }
+
+    @Override
     public List<Chapter> findAllByCertificateCourseId(CertificateCourseId certificateCourseId) {
         return chapterDataAccessMapper.chapterEntityListToChapterList(
                 chapterJpaRepository.findAllByCertificateCourseId(certificateCourseId.getValue()));
+    }
+
+    @Override
+    public Integer findTopNoByCertificateCourseId(CertificateCourseId certificateCourseId) {
+        return chapterJpaRepository.findTopNoByCertificateCourseId(certificateCourseId.getValue());
+    }
+
+    @Override
+    public void deleteChapter(UUID chapterId) {
+        chapterJpaRepository.deleteById(chapterId);
     }
 }

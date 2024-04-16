@@ -65,7 +65,6 @@ public class CertificateCourseUserDataAccessMapper {
                 .id(new CertificateCourseUserId(certificateCourseUserEntity.getId()))
                 .certificateCourse(certificateCourse)
                 .user(user)
-//                .startTime(certificateCourseUserEntity.getStartTime())
                 .isCompleted(certificateCourseUserEntity.getIsCompleted())
                 .completedAt(certificateCourseUserEntity.getCompletedAt())
                 .build();

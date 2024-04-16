@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.core.service.domain.entity;
 
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseTopicId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseUserId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
@@ -20,11 +21,7 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
     private ZonedDateTime startTime;
     private ZonedDateTime endTime;
     private Boolean isDeleted;
-
     private Topic topic;
-    private List<Review> reviews;
-    private List<Chapter> chapters;
-    private List<User> registeredUsers;
     private User createdBy;
     private User updatedBy;
     private ZonedDateTime createdAt;
@@ -40,9 +37,6 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         endTime = builder.endTime;
         isDeleted = builder.isDeleted;
         topic = builder.topic;
-        reviews = builder.reviews;
-        chapters = builder.chapters;
-        registeredUsers = builder.registeredUsers;
         createdBy = builder.createdBy;
         updatedBy = builder.updatedBy;
         createdAt = builder.createdAt;
@@ -92,18 +86,6 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         return topic;
     }
 
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public List<Chapter> getChapters() {
-        return chapters;
-    }
-
-    public List<User> getRegisteredUsers() {
-        return registeredUsers;
-    }
-
     public User getCreatedBy() {
         return createdBy;
     }
@@ -151,7 +133,6 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
     public void setTopic(Topic topic) {
         this.topic = topic;
     }
-
     public void setCreatedBy(User createdBy) {
         this.createdBy = createdBy;
     }
@@ -168,18 +149,6 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         this.updatedAt = updatedAt;
     }
 
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
-
-    public void setChapters(List<Chapter> chapters) {
-        this.chapters = chapters;
-    }
-
-    public void setRegisteredUsers(List<User> registeredUsers) {
-        this.registeredUsers = registeredUsers;
-    }
-
     public static final class Builder {
         private CertificateCourseId certificateCourseId;
         private String name;
@@ -190,9 +159,6 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         private ZonedDateTime endTime;
         private Boolean isDeleted;
         private Topic topic;
-        private List<Review> reviews;
-        private List<Chapter> chapters;
-        private List<User> registeredUsers;
         private User createdBy;
         private User updatedBy;
         private ZonedDateTime createdAt;
@@ -243,21 +209,6 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
 
         public Builder topic(Topic val) {
             topic = val;
-            return this;
-        }
-
-        public Builder reviews(List<Review> val) {
-            reviews = val;
-            return this;
-        }
-
-        public Builder chapters(List<Chapter> val) {
-            chapters = val;
-            return this;
-        }
-
-        public Builder registeredUsers(List<User> val) {
-            registeredUsers = val;
             return this;
         }
 

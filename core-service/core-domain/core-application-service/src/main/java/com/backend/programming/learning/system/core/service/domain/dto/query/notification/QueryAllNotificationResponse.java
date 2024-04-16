@@ -14,6 +14,4 @@ import java.util.List;
 public class QueryAllNotificationResponse {
     @NotNull
     private final List<Notification> notifications;
-    @NotNull
-    private final String message;
 }

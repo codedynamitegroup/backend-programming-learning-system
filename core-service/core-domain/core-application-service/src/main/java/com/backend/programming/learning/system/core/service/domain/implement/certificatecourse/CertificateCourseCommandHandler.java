@@ -2,31 +2,37 @@ package com.backend.programming.learning.system.core.service.domain.implement.ce
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse.CreateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse.CreateCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.certificatecourse.DeleteCertificateCourseCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.certificatecourse.DeleteCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryAllCertificateCoursesCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryAllCertificateCoursesResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
-import com.backend.programming.learning.system.core.service.domain.exception.CertificateCourseNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.certificatecourse.CertificateCourseDataMapper;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseRepository;
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.List;
+import java.util.UUID;
 
 @Component
 @Slf4j
 public class CertificateCourseCommandHandler {
     private final CertificateCourseCreateHelper certificateCourseCreateHelper;
     private final CertificateCourseQueryHelper certificateCourseQueryHelper;
+    private final CertificateCourseDeleteHelper certificateCourseDeleteHelper;
     private final CertificateCourseDataMapper certificateCourseDataMapper;
 
     public CertificateCourseCommandHandler(CertificateCourseCreateHelper certificateCourseCreateHelper,
                                            CertificateCourseQueryHelper certificateCourseQueryHelper,
+                                             CertificateCourseDeleteHelper certificateCourseDeleteHelper,
                                            CertificateCourseDataMapper certificateCourseDataMapper) {
         this.certificateCourseCreateHelper = certificateCourseCreateHelper;
         this.certificateCourseQueryHelper = certificateCourseQueryHelper;
+        this.certificateCourseDeleteHelper = certificateCourseDeleteHelper;
         this.certificateCourseDataMapper = certificateCourseDataMapper;
     }
 
@@ -46,10 +52,32 @@ public class CertificateCourseCommandHandler {
     public QueryCertificateCourseResponse findCertificateCourseById(
             QueryCertificateCourseCommand queryCertificateCourseCommand) {
         CertificateCourse certificateCourse = certificateCourseQueryHelper
-                .getCertificateCourse(queryCertificateCourseCommand);
+                .queryCertificateCourseById(queryCertificateCourseCommand.getCertificateCourseId());
 
         log.info("Certificate course found with id: {}", certificateCourse.getId().getValue());
 
         return certificateCourseDataMapper.certificateCourseToQueryCertificateCourseResponse(certificateCourse);
+    }
+
+    @Transactional(readOnly = true)
+    public QueryAllCertificateCoursesResponse findAllCertificateCourses(
+            QueryAllCertificateCoursesCommand queryAllCertificateCoursesCommand) {
+        Page<CertificateCourse> certificateCourses = certificateCourseQueryHelper
+                .queryAllCertificateCourses(queryAllCertificateCoursesCommand.getPageNo(), queryAllCertificateCoursesCommand.getPageSize());
+
+        return certificateCourseDataMapper
+                .certificateCoursesToQueryAllCertificateCoursesResponse(certificateCourses);
+    }
+
+    @Transactional
+    public DeleteCertificateCourseResponse deleteCertificateCourse(
+            DeleteCertificateCourseCommand deleteCertificateCourseCommand) {
+        certificateCourseDeleteHelper.deleteCertificateCourseById(
+                deleteCertificateCourseCommand.getCertificateCourseId());
+
+        return DeleteCertificateCourseResponse.builder()
+                .certificateCourseId(deleteCertificateCourseCommand.getCertificateCourseId())
+                .message("Certificate course deleted successfully")
+                .build();
     }
 }

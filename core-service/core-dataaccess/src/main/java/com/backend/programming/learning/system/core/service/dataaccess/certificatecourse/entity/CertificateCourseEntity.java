@@ -35,24 +35,15 @@ public class CertificateCourseEntity {
     private ZonedDateTime endTime;
     private Boolean isDeleted;
 
-    @OneToMany(mappedBy = "certificateCourse")
-    private List<ReviewEntity> reviews;
-
-    @OneToMany(mappedBy = "certificateCourse")
-    private List<ChapterEntity> chapters;
-
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @ManyToOne
     @JoinColumn(name = "topic_id", referencedColumnName = "id")
     private TopicEntity topic;
 
-    @OneToMany(mappedBy = "certificateCourse")
-    private List<CertificateCourseUserEntity> certificateCourseUsers;
-
-    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @ManyToOne
     @JoinColumn(name = "created_by", referencedColumnName = "id")
     private UserEntity createdBy;
 
-    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @ManyToOne
     @JoinColumn(name = "updated_by", referencedColumnName = "id")
     private UserEntity updatedBy;
 

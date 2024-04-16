@@ -1,24 +1,15 @@
 package com.backend.programming.learning.system.core.service.domain.implement.certificatecourse;
 
-import com.backend.programming.learning.system.core.service.domain.CoreDomainService;
-import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse.CreateCertificateCourseCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
+import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourseUser;
 import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
-import com.backend.programming.learning.system.core.service.domain.entity.Topic;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.exception.CertificateCourseNotFoundException;
-import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
-import com.backend.programming.learning.system.core.service.domain.exception.TopicNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
-import com.backend.programming.learning.system.core.service.domain.mapper.certificatecourse.CertificateCourseDataMapper;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseRepository;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ChapterRepository;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.TopicRepository;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.UserRepository;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,49 +20,39 @@ import java.util.UUID;
 @Slf4j
 @Component
 public class CertificateCourseQueryHelper {
-    private final CoreDomainService coreDomainService;
     private final CertificateCourseRepository certificateCourseRepository;
     private final UserRepository userRepository;
-    private final TopicRepository topicRepository;
     private final ChapterRepository chapterRepository;
-    private final CertificateCourseDataMapper certificateCourseDataMapper;
 
-    public CertificateCourseQueryHelper(CoreDomainService coreDomainService,
-                                        CertificateCourseRepository certificateCourseRepository,
+    public CertificateCourseQueryHelper(CertificateCourseRepository certificateCourseRepository,
                                         UserRepository userRepository,
-                                        TopicRepository topicRepository,
-                                        ChapterRepository chapterRepository,
-                                        CertificateCourseDataMapper certificateCourseDataMapper) {
-        this.coreDomainService = coreDomainService;
+                                        ChapterRepository chapterRepository) {
         this.certificateCourseRepository = certificateCourseRepository;
         this.userRepository = userRepository;
-        this.topicRepository = topicRepository;
         this.chapterRepository = chapterRepository;
-        this.certificateCourseDataMapper = certificateCourseDataMapper;
     }
 
     @Transactional(readOnly = true)
-    public CertificateCourse getCertificateCourse(QueryCertificateCourseCommand queryCertificateCourseCommand) {
+    public CertificateCourse queryCertificateCourseById(UUID certificateCourseId) {
         Optional<CertificateCourse> certificateCourseResult =
-                certificateCourseRepository.findById(new CertificateCourseId(
-                        queryCertificateCourseCommand.getCertificateCourseId()));
+                certificateCourseRepository.findById(new CertificateCourseId(certificateCourseId));
         if (certificateCourseResult.isEmpty()) {
             log.warn("Could not find certificate course with id: {}",
-                    queryCertificateCourseCommand.getCertificateCourseId());
+                    certificateCourseId);
             throw new CertificateCourseNotFoundException("Could not find certificate course with id: " +
-                    queryCertificateCourseCommand.getCertificateCourseId());
+                    certificateCourseId);
         }
         User createdBy = getUser(certificateCourseResult.get().getCreatedBy().getId().getValue());
         User updatedBy = getUser(certificateCourseResult.get().getUpdatedBy().getId().getValue());
-        List<Chapter> chapters = getAllChaptersByCertificateCourseId(
-                certificateCourseResult.get().getId().getValue());
+//        List<Chapter> chapters = getAllChaptersByCertificateCourseId(
+//                certificateCourseResult.get().getId().getValue());
 
         CertificateCourse certificateCourse = certificateCourseResult.get();
         certificateCourse.setCreatedBy(createdBy);
         certificateCourse.setUpdatedBy(updatedBy);
-        certificateCourse.setChapters(chapters);
+//        certificateCourse.setChapters(chapters);
 
-        log.info("Query certificate course with id: {}", certificateCourseResult.get().getId().getValue());
+        log.info("Certificate course queried with id: {}", certificateCourseResult.get().getId().getValue());
         return certificateCourseResult.get();
     }
 
@@ -87,6 +68,13 @@ public class CertificateCourseQueryHelper {
     private List<Chapter> getAllChaptersByCertificateCourseId(UUID certificateCourseId) {
         return chapterRepository.findAllByCertificateCourseId(
                 new CertificateCourseId(certificateCourseId));
+    }
+
+    @Transactional(readOnly = true)
+    public Page<CertificateCourse> queryAllCertificateCourses(
+            Integer pageNo, Integer pageSize
+    ) {
+        return certificateCourseRepository.findAll(pageNo, pageSize);
     }
 
 }

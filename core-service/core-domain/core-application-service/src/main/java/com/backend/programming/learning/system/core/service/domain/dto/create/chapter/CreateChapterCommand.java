@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
@@ -13,8 +14,6 @@ import java.util.UUID;
 public class CreateChapterCommand {
     @NotNull
     private final UUID certificateCourseId;
-    @NotNull
-    private final Integer no;
     @NotNull
     private final String title;
     @NotNull

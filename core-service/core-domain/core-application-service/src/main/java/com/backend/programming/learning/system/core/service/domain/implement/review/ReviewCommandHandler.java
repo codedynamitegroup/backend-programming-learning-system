@@ -1,25 +1,13 @@
 package com.backend.programming.learning.system.core.service.domain.implement.review;
 
-import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse.CreateCertificateCourseCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse.CreateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseResponse;
-import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
-import com.backend.programming.learning.system.core.service.domain.exception.CertificateCourseNotFoundException;
-import com.backend.programming.learning.system.core.service.domain.implement.certificatecourse.CertificateCourseCreateHelper;
-import com.backend.programming.learning.system.core.service.domain.mapper.certificatecourse.CertificateCourseDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.review.ReviewDataMapper;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ReviewRepository;
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Component
 @Slf4j
