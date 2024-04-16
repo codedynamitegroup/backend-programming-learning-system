@@ -43,6 +43,8 @@ public class CertificateCourseCreateHelper {
         User updatedBy = getUser(createCertificateCourseCommand.getUpdatedBy());
         Topic topic = getTopic(createCertificateCourseCommand.getTopicId());
 
+        checkCertificateCourseByNameExists(createCertificateCourseCommand.getName());
+
         CertificateCourse certificateCourse = certificateCourseDataMapper.
                 createCertificateCourseCommandToCertificateCourse(createCertificateCourseCommand);
         coreDomainService.createCertificateCourse(certificateCourse);
@@ -54,6 +56,14 @@ public class CertificateCourseCreateHelper {
 
         log.info("Certificate course created with id: {}", certificateCourseResult.getId().getValue());
         return certificateCourseResult;
+    }
+
+    private void checkCertificateCourseByNameExists(String name) {
+        Optional<CertificateCourse> certificateCourse = certificateCourseRepository.findByName(name);
+        if (certificateCourse.isPresent()) {
+            log.warn("Certificate course with name: {} is already exists", name);
+            throw new CoreDomainException("Certificate course with name: " + name + " is already exists");
+        }
     }
 
     private User getUser(UUID userId) {

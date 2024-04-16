@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.query.cer
 import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
 import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
@@ -20,7 +21,7 @@ public class CertificateCourseDataMapper {
             CreateCertificateCourseCommand createCertificateCourseCommand) {
         return CertificateCourse.builder()
                 .name(createCertificateCourseCommand.getName())
-                .skillLevel(createCertificateCourseCommand.getSkillLevel())
+                .skillLevel(SkillLevel.valueOf(createCertificateCourseCommand.getSkillLevel()))
                 .startTime(createCertificateCourseCommand.getStartTime())
                 .endTime(createCertificateCourseCommand.getEndTime())
                 .topic(Topic

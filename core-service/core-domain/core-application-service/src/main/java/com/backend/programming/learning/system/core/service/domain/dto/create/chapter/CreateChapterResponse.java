@@ -7,13 +7,16 @@ import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
 public class CreateChapterResponse {
     @NotNull
-    private final Chapter chapter;
+    private final UUID chapterId;
+    @NotNull
+    private final UUID certificateCourseId;
     @NotNull
     private final String message;
 }

@@ -21,7 +21,8 @@ public class ContestUserDataMapper {
     public CreateContestUserResponse contestUserToCreateContestUserResponse(
             ContestUser contestUser, String message) {
         return CreateContestUserResponse.builder()
-                .contestUserId(contestUser.getId())
+                .contestId(contestUser.getContestId().getValue())
+                .userId(contestUser.getUserId().getValue())
                 .message(message)
                 .build();
     }

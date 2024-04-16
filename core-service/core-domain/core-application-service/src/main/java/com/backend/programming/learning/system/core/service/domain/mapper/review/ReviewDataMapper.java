@@ -35,7 +35,7 @@ public class ReviewDataMapper {
 
     public CreateReviewResponse reviewToCreateReviewResponse(Review review, String message) {
         return CreateReviewResponse.builder()
-                .review(review)
+                .reviewId(review.getId().getValue())
                 .message(message)
                 .build();
     }

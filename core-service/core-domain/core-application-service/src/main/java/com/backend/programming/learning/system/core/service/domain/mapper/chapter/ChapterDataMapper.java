@@ -33,7 +33,8 @@ public class ChapterDataMapper {
 
     public CreateChapterResponse chapterToCreateChapterResponse(Chapter chapter, String message) {
         return CreateChapterResponse.builder()
-                .chapter(chapter)
+                .chapterId(chapter.getId().getValue())
+                .certificateCourseId(chapter.getCertificateCourseId().getValue())
                 .message(message)
                 .build();
     }

@@ -19,6 +19,7 @@ public class GlobalExceptionHandler {
     public ErrorDTO handleException(Exception exception) {
         log.error(exception.getMessage(), exception);
         return ErrorDTO.builder()
+                .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .code(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
                 .message(exception.getMessage())
                 .build();
@@ -33,6 +34,7 @@ public class GlobalExceptionHandler {
             String violations = extractViolationsFromException((ConstraintViolationException) validationException);
             log.error(violations, validationException);
             errorDTO = ErrorDTO.builder()
+                    .status(HttpStatus.BAD_REQUEST.value())
                     .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
                     .message(violations)
                     .build();
@@ -40,6 +42,7 @@ public class GlobalExceptionHandler {
             String exceptionMessage = validationException.getMessage();
             log.error(exceptionMessage, validationException);
             errorDTO = ErrorDTO.builder()
+                    .status(HttpStatus.BAD_REQUEST.value())
                     .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
                     .message(exceptionMessage)
                     .build();

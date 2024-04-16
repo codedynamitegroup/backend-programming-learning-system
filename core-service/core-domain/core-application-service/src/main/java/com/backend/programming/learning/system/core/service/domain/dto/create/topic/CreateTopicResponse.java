@@ -7,13 +7,14 @@ import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
 public class CreateTopicResponse {
     @NotNull
-    private final Topic topic;
+    private final UUID topicId;
     @NotNull
     private final String message;
 }

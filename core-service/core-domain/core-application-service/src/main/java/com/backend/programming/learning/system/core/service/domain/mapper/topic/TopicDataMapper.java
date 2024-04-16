@@ -33,7 +33,7 @@ public class TopicDataMapper {
 
     public CreateTopicResponse topicToCreateTopicResponse(Topic topic, String message) {
         return CreateTopicResponse.builder()
-                .topic(topic)
+                .topicId(topic.getId().getValue())
                 .message(message)
                 .build();
     }

@@ -23,6 +23,7 @@ public class CoreGlobalExceptionHandler extends GlobalExceptionHandler {
     public ErrorDTO handleException(CoreDomainException orderDomainException) {
         log.error(orderDomainException.getMessage(), orderDomainException);
         return ErrorDTO.builder()
+                .status(HttpStatus.BAD_REQUEST.value())
                 .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
                 .message(orderDomainException.getMessage())
                 .build();
@@ -34,6 +35,7 @@ public class CoreGlobalExceptionHandler extends GlobalExceptionHandler {
     public ErrorDTO handleException(QuestionNotFoundException questionNotFoundException) {
         log.error(questionNotFoundException.getMessage(), questionNotFoundException);
         return ErrorDTO.builder()
+                .status(HttpStatus.NOT_FOUND.value())
                 .code(HttpStatus.NOT_FOUND.getReasonPhrase())
                 .message(questionNotFoundException.getMessage())
                 .build();
@@ -45,6 +47,7 @@ public class CoreGlobalExceptionHandler extends GlobalExceptionHandler {
     public ErrorDTO handleException(CertificateCourseNotFoundException certificateCourseNotFoundException) {
         log.error(certificateCourseNotFoundException.getMessage(), certificateCourseNotFoundException);
         return ErrorDTO.builder()
+                .status(HttpStatus.NOT_FOUND.value())
                 .code(HttpStatus.NOT_FOUND.getReasonPhrase())
                 .message(certificateCourseNotFoundException.getMessage())
                 .build();
@@ -56,6 +59,7 @@ public class CoreGlobalExceptionHandler extends GlobalExceptionHandler {
     public ErrorDTO handleException(UserNotFoundException userNotFoundException) {
         log.error(userNotFoundException.getMessage(), userNotFoundException);
         return ErrorDTO.builder()
+                .status(HttpStatus.NOT_FOUND.value())
                 .code(HttpStatus.NOT_FOUND.getReasonPhrase())
                 .message(userNotFoundException.getMessage())
                 .build();
@@ -67,6 +71,7 @@ public class CoreGlobalExceptionHandler extends GlobalExceptionHandler {
     public ErrorDTO handleException(OrganizationNotFoundException organizationNotFoundException) {
         log.error(organizationNotFoundException.getMessage(), organizationNotFoundException);
         return ErrorDTO.builder()
+                .status(HttpStatus.NOT_FOUND.value())
                 .code(HttpStatus.NOT_FOUND.getReasonPhrase())
                 .message(organizationNotFoundException.getMessage())
                 .build();

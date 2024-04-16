@@ -59,7 +59,7 @@ CREATE TABLE "public".certificate_course
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
     topic_id uuid NOT NULL,
-    name text,
+    name text UNIQUE,
     skill_level skill_level,
     description text,
     avg_rating numeric(2,1) DEFAULT 0.0,

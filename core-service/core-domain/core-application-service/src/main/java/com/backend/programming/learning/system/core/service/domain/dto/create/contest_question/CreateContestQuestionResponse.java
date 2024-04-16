@@ -7,13 +7,16 @@ import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
 public class CreateContestQuestionResponse {
     @NotNull
-    private final ContestQuestion contestQuestion;
+    private final UUID contestId;
+    @NotNull
+    private final UUID questionId;
     @NotNull
     private final String message;
 }
