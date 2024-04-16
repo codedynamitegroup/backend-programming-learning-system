@@ -38,7 +38,7 @@ public class QuestionDataMapper {
     // question to create question response
     public CreateQuestionResponse questionToCreateQuestionResponse(Question question, String message) {
         return CreateQuestionResponse.builder()
-                .questionId(question.getId())
+                .questionId(question.getId().getValue())
                 .message(message)
                 .build();
     }
