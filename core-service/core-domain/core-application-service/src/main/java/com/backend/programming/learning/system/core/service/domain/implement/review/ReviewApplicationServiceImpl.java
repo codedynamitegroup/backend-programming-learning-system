@@ -1,13 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.implement.review;
 
-import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse.CreateCertificateCourseCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse.CreateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseResponse;
-import com.backend.programming.learning.system.core.service.domain.implement.certificatecourse.CertificateCourseCommandHandler;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse.CertificateCourseApplicationService;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.review.ReviewApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

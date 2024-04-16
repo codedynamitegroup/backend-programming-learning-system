@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.create.re
 import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.create.topic.CreateTopicCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.topic.CreateTopicResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.topic.QueryTopicResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
 import com.backend.programming.learning.system.core.service.domain.entity.Topic;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
@@ -35,6 +36,16 @@ public class TopicDataMapper {
         return CreateTopicResponse.builder()
                 .topicId(topic.getId().getValue())
                 .message(message)
+                .build();
+    }
+
+    public QueryTopicResponse topicToQueryTopicResponse(Topic topic) {
+        return QueryTopicResponse.builder()
+                .topicId(topic.getId().getValue())
+                .name(topic.getName())
+                .description(topic.getDescription())
+                .createdAt(topic.getCreatedAt())
+                .updatedAt(topic.getUpdatedAt())
                 .build();
     }
 

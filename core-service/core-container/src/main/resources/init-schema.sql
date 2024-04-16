@@ -36,7 +36,7 @@ DROP TABLE IF EXISTS "public".topic CASCADE;
 CREATE TABLE "public".topic
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
-    name text NOT NULL,
+    name text UNIQUE NOT NULL,
     description text NOT NULL,
     created_by uuid NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,

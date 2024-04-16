@@ -1,29 +1,33 @@
-package com.backend.programming.learning.system.core.service.domain.dto.query.contest;
+package com.backend.programming.learning.system.core.service.domain.dto.query.chapter;
 
+import com.backend.programming.learning.system.core.service.domain.dto.query.topic.QueryTopicResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.query.user.QueryUserResponse;
-import com.backend.programming.learning.system.core.service.domain.entity.Contest;
-import com.backend.programming.learning.system.core.service.domain.entity.Topic;
+import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
-public class QueryContestResponse {
+public class QueryChapterResponse {
     @NotNull
-    private final UUID contestId;
+    private final UUID chapterId;
     @NotNull
-    private final String name;
+    private final UUID certificateCourseId;
+    @NotNull
+    private final int no;
+    @NotNull
+    private final String title;
     @NotNull
     private final String description;
     @NotNull
-    private final ZonedDateTime startTime;
-    private final ZonedDateTime endTime;
+    private final List<Question> questions;
     @NotNull
     private final QueryUserResponse createdBy;
     @NotNull
@@ -32,4 +36,5 @@ public class QueryContestResponse {
     private final ZonedDateTime createdAt;
     @NotNull
     private final ZonedDateTime updatedAt;
+
 }

@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.create.ch
 import com.backend.programming.learning.system.core.service.domain.dto.create.chapter.CreateChapterResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.create.contest.CreateContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.contest.CreateContestResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.chapter.QueryChapterResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
 import com.backend.programming.learning.system.core.service.domain.entity.Contest;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
@@ -11,6 +12,8 @@ import com.backend.programming.learning.system.core.service.domain.exception.Top
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
 
 @Component
 public class ChapterDataMapper {
@@ -38,6 +41,19 @@ public class ChapterDataMapper {
                 .title(chapter.getTitle())
                 .description(chapter.getDescription())
                 .message(message)
+                .build();
+    }
+
+    public QueryChapterResponse chapterToQueryChapterResponse(Chapter chapter) {
+        return QueryChapterResponse.builder()
+                .chapterId(chapter.getId().getValue())
+                .certificateCourseId(chapter.getCertificateCourseId().getValue())
+                .no(chapter.getNo())
+                .title(chapter.getTitle())
+                .description(chapter.getDescription())
+                .questions(new ArrayList<>())
+                .createdAt(chapter.getCreatedAt())
+                .updatedAt(chapter.getUpdatedAt())
                 .build();
     }
 

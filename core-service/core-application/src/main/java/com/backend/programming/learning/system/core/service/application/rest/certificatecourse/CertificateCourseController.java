@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.core.service.application.rest;
+package com.backend.programming.learning.system.core.service.application.rest.certificatecourse;
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse.CreateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse.CreateCertificateCourseResponse;
@@ -6,20 +6,20 @@ import com.backend.programming.learning.system.core.service.domain.dto.create.ce
 import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse_user.CreateCertificateCourseUserResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.create.chapter.CreateChapterCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.chapter.CreateChapterResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.certificatecourse.DeleteCertificateCourseCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.certificatecourse.DeleteCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryAllCertificateCoursesCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryAllCertificateCoursesResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse.CertificateCourseApplicationService;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse_user.CertificateCourseUserApplicationService;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.chapter.ChapterApplicationService;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.review.ReviewApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.UUID;
 
 @Slf4j
@@ -74,10 +74,36 @@ public class CertificateCourseController {
     @GetMapping("/{id}")
     public ResponseEntity<QueryCertificateCourseResponse> getCertificateCourseById(@PathVariable UUID id) {
         QueryCertificateCourseResponse queryCertificateCourseResponse =
-                certificateCourseApplicationService.findCertificateCourseById(
-                        QueryCertificateCourseCommand.builder().certificateCourseId(id).build());
-        log.info("Returning certificate course: {}", queryCertificateCourseResponse.getCertificateCourse());
+                certificateCourseApplicationService.queryCertificateCourse(QueryCertificateCourseCommand
+                        .builder()
+                        .certificateCourseId(id)
+                        .build());
+        log.info("Returning certificate course: {}", queryCertificateCourseResponse.getCertificateCourseId());
         return  ResponseEntity.ok(queryCertificateCourseResponse);
     }
 
+    @GetMapping
+    public ResponseEntity<QueryAllCertificateCoursesResponse> getAllCertificateCourses(
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize) {
+        QueryAllCertificateCoursesResponse queryAllCertificateCoursesResponse =
+                certificateCourseApplicationService.queryAllCertificateCourses(QueryAllCertificateCoursesCommand
+                        .builder()
+                        .pageNo(pageNo)
+                        .pageSize(pageSize)
+                        .build());
+        log.info("Returning all certificate courses");
+        return ResponseEntity.ok(queryAllCertificateCoursesResponse);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<DeleteCertificateCourseResponse> deleteCertificateCourse(@PathVariable UUID id) {
+        DeleteCertificateCourseResponse deleteCertificateCourseResponse =
+                certificateCourseApplicationService.deleteCertificateCourse(DeleteCertificateCourseCommand
+                .builder()
+                .certificateCourseId(id)
+                .build());
+        log.info("Certificate course deleted: {}", id);
+        return ResponseEntity.ok(deleteCertificateCourseResponse);
+    }
 }
