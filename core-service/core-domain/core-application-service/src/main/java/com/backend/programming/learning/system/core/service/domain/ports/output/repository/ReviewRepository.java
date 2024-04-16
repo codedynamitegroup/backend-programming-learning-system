@@ -17,4 +17,6 @@ public interface ReviewRepository {
 
     void deleteReviewById(UUID reviewId);
 
+    Float getAvgRatingOfAllReviewsByCertificateCourseId(UUID certificateCourseId);
+
 }

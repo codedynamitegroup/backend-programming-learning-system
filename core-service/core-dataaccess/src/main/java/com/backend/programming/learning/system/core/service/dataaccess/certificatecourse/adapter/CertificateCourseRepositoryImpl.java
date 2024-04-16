@@ -55,4 +55,9 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
     public int deleteCertificateCourse(UUID certificateCourseId) {
         return certificateCourseJpaRepository.deleteById(true, certificateCourseId);
     }
+
+    @Override
+    public int updateAvgRating(CertificateCourseId certificateCourseId, Float avgRating) {
+        return certificateCourseJpaRepository.updateAvgRating(avgRating, certificateCourseId.getValue());
+    }
 }

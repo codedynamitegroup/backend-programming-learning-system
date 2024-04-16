@@ -31,7 +31,7 @@ class ReviewApplicationServiceImpl implements ReviewApplicationService {
     }
 
     @Override
-    public QueryAllReviewsResponse queryAllReviews(QueryAllReviewsCommand queryAllReviewsCommand) {
+    public QueryAllReviewsResponse queryAllReviewsByCertificateCourseId(QueryAllReviewsCommand queryAllReviewsCommand) {
         return reviewCommandHandler.findAllReviewsResponse(queryAllReviewsCommand);
     }
 

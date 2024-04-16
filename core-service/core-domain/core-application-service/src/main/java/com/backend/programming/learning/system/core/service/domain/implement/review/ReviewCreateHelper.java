@@ -52,8 +52,23 @@ public class ReviewCreateHelper {
         coreDomainService.createReview(review);
         Review reviewResult = saveReview(review);
 
+        Float avgRating = getAvgRatingOfAllReviewsByCertificateCourseId(
+                createReviewCommand.getCertificateCourseId());
+        int updatedRows = certificateCourseRepository.updateAvgRating(
+                new CertificateCourseId(createReviewCommand.getCertificateCourseId()), avgRating);
+        if (updatedRows == 0) {
+            log.error("Could not update avg rating for certificate course with id: {}",
+                    createReviewCommand.getCertificateCourseId());
+            throw new CoreDomainException("Could not update avg rating for certificate course with id: " +
+                    createReviewCommand.getCertificateCourseId());
+        }
+
         log.info("Review created with id: {}", reviewResult.getId().getValue());
         return reviewResult;
+    }
+
+    private Float getAvgRatingOfAllReviewsByCertificateCourseId(UUID certificateCourseId) {
+        return reviewRepository.getAvgRatingOfAllReviewsByCertificateCourseId(certificateCourseId);
     }
 
     private void checkUser(UUID userId) {

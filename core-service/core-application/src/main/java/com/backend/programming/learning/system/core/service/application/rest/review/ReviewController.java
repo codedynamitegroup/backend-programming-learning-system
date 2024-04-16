@@ -41,12 +41,12 @@ public class ReviewController {
     }
 
     @GetMapping
-    public ResponseEntity<QueryAllReviewsResponse> getAllReviews(
+    public ResponseEntity<QueryAllReviewsResponse> getAllReviewsByCertificateCourseId(
             @RequestParam UUID certificateCourseId,
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize) {
         QueryAllReviewsResponse queryAllReviewsResponse =
-                reviewApplicationService.queryAllReviews(QueryAllReviewsCommand
+                reviewApplicationService.queryAllReviewsByCertificateCourseId(QueryAllReviewsCommand
                         .builder()
                         .certificateCourseId(certificateCourseId)
                         .pageNo(pageNo)
