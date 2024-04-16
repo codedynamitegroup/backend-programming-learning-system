@@ -14,7 +14,7 @@ public class Review extends AggregateRoot<ReviewId> {
     private final CertificateCourseId certificateCourseId;
     private String content;
     private Float rating;
-    private final User createdBy;
+    private User createdBy;
     private User updatedBy;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
@@ -66,6 +66,30 @@ public class Review extends AggregateRoot<ReviewId> {
 
     public ZonedDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setRating(Float rating) {
+        this.rating = rating;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public void setUpdatedBy(User updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public void setCreatedAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(ZonedDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public static final class Builder {

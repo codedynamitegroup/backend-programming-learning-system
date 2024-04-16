@@ -12,13 +12,13 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 public class ChapterQuestion extends BaseEntity<ChapterQuestionId> {
-    private final QuestionId questionId;
-    private final ChapterId chapterId;
+    private final Question question;
+    private final Chapter chapter;
 
     private ChapterQuestion(Builder builder) {
         super.setId(builder.chapterQuestionId);
-        questionId = builder.questionId;
-        chapterId = builder.chapterId;
+        question = builder.question;
+        chapter = builder.chapter;
     }
 
     public static Builder builder() {
@@ -26,18 +26,18 @@ public class ChapterQuestion extends BaseEntity<ChapterQuestionId> {
     }
 
 
-    public QuestionId getQuestionId() {
-        return questionId;
+    public Question getQuestion() {
+        return question;
     }
 
-    public ChapterId getChapterId() {
-        return chapterId;
+    public Chapter getChapter() {
+        return chapter;
     }
 
     public static final class Builder {
         private ChapterQuestionId chapterQuestionId;
-        private QuestionId questionId;
-        private ChapterId chapterId;
+        private Question question;
+        private Chapter chapter;
 
         private Builder() {
         }
@@ -47,13 +47,13 @@ public class ChapterQuestion extends BaseEntity<ChapterQuestionId> {
             return this;
         }
 
-        public Builder questionId(QuestionId val) {
-            questionId = val;
+        public Builder question(Question val) {
+            question = val;
             return this;
         }
 
-        public Builder chapterId(ChapterId val) {
-            chapterId = val;
+        public Builder chapter(Chapter val) {
+            chapter = val;
             return this;
         }
 

@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
@@ -14,6 +16,8 @@ public class CreateReviewCommand {
     @NotNull
     private final UUID certificateCourseId;
     @NotNull
+    @Min(0)
+    @Max(5)
     private final Float rating;
     @NotNull
     private final String content;

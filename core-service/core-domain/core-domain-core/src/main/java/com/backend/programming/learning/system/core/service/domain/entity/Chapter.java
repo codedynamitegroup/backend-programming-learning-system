@@ -17,7 +17,7 @@ public class Chapter extends BaseEntity<ChapterId> {
     private int no;
     private String title;
     private String description;
-    private final List<Question> questions;
+    private List<Question> questions;
     private User createdBy;
     private User updatedBy;
     private ZonedDateTime createdAt;
@@ -113,6 +113,10 @@ public class Chapter extends BaseEntity<ChapterId> {
 
     public void setUpdatedAt(ZonedDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 
     public static final class Builder {

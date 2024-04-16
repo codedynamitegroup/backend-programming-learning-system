@@ -22,14 +22,11 @@ import java.util.UUID;
 public class CertificateCourseQueryHelper {
     private final CertificateCourseRepository certificateCourseRepository;
     private final UserRepository userRepository;
-    private final ChapterRepository chapterRepository;
 
     public CertificateCourseQueryHelper(CertificateCourseRepository certificateCourseRepository,
-                                        UserRepository userRepository,
-                                        ChapterRepository chapterRepository) {
+                                        UserRepository userRepository) {
         this.certificateCourseRepository = certificateCourseRepository;
         this.userRepository = userRepository;
-        this.chapterRepository = chapterRepository;
     }
 
     @Transactional(readOnly = true)
@@ -44,13 +41,10 @@ public class CertificateCourseQueryHelper {
         }
         User createdBy = getUser(certificateCourseResult.get().getCreatedBy().getId().getValue());
         User updatedBy = getUser(certificateCourseResult.get().getUpdatedBy().getId().getValue());
-//        List<Chapter> chapters = getAllChaptersByCertificateCourseId(
-//                certificateCourseResult.get().getId().getValue());
 
         CertificateCourse certificateCourse = certificateCourseResult.get();
         certificateCourse.setCreatedBy(createdBy);
         certificateCourse.setUpdatedBy(updatedBy);
-//        certificateCourse.setChapters(chapters);
 
         log.info("Certificate course queried with id: {}", certificateCourseResult.get().getId().getValue());
         return certificateCourseResult.get();
@@ -63,11 +57,6 @@ public class CertificateCourseQueryHelper {
             throw new UserNotFoundException("Could not find user with id: " + userId);
         }
         return user.get();
-    }
-
-    private List<Chapter> getAllChaptersByCertificateCourseId(UUID certificateCourseId) {
-        return chapterRepository.findAllByCertificateCourseId(
-                new CertificateCourseId(certificateCourseId));
     }
 
     @Transactional(readOnly = true)

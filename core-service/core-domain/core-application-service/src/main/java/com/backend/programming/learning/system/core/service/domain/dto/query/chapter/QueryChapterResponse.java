@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.dto.query.chapter;
 
+import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.query.topic.QueryTopicResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.query.user.QueryUserResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
@@ -27,7 +28,7 @@ public class QueryChapterResponse {
     @NotNull
     private final String description;
     @NotNull
-    private final List<Question> questions;
+    private final List<QueryQuestionResponse> questions;
     @NotNull
     private final QueryUserResponse createdBy;
     @NotNull

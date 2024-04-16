@@ -2,6 +2,12 @@ package com.backend.programming.learning.system.core.service.domain.implement.re
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.review.DeleteReviewCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.review.DeleteReviewResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.review.QueryAllReviewsCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.query.review.QueryAllReviewsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.review.QueryReviewCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.query.review.QueryReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.review.ReviewApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,5 +28,20 @@ class ReviewApplicationServiceImpl implements ReviewApplicationService {
     @Override
     public CreateReviewResponse createReview(@Valid CreateReviewCommand createReviewCommand) {
         return reviewCommandHandler.createReviewResponse(createReviewCommand);
+    }
+
+    @Override
+    public QueryAllReviewsResponse queryAllReviews(QueryAllReviewsCommand queryAllReviewsCommand) {
+        return reviewCommandHandler.findAllReviewsResponse(queryAllReviewsCommand);
+    }
+
+    @Override
+    public QueryReviewResponse queryReview(QueryReviewCommand queryReviewCommand) {
+        return reviewCommandHandler.findReviewResponseById(queryReviewCommand);
+    }
+
+    @Override
+    public DeleteReviewResponse deleteReview(DeleteReviewCommand deleteReviewCommand) {
+        return reviewCommandHandler.deleteReviewResponse(deleteReviewCommand);
     }
 }

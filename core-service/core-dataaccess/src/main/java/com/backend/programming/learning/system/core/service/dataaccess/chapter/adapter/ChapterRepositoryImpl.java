@@ -53,7 +53,7 @@ public class ChapterRepositoryImpl implements ChapterRepository {
     }
 
     @Override
-    public void deleteChapter(UUID chapterId) {
+    public void deleteChapterById(UUID chapterId) {
         chapterJpaRepository.deleteById(chapterId);
     }
 }
