@@ -4,8 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.UUID;
 
@@ -14,15 +13,12 @@ import java.util.UUID;
 @Getter
 public class CreateQuestionCommand {
     @NotNull(message = "Organization ID is required")
-    @Size(min = 36, max = 36, message = "Organization ID of organization must have 36 digits including \"-\" ")
     private final UUID organizationId;
 
     @NotNull(message = "Created by is required")
-    @Size(min = 36, max = 36, message = "User ID of createdBy must have 36 digits including \"-\"")
     private final UUID createdBy;
 
     @NotNull(message = "Updated by is required")
-    @Size(min = 36, max = 36, message = "User ID of updatedBy must have 36 digits including \"-\"")
     private final UUID updatedBy;
 
     @NotNull(message = "Difficulty by is required")
@@ -38,7 +34,8 @@ public class CreateQuestionCommand {
     private final String generalFeedback;
 
     @NotNull(message = "Default mark is required")
-    @Size(min = 0, message = "Default mark must be between 0 and your input number")
+    @DecimalMin(value = "0.0", inclusive = false, message = "Default mark must be greater than 0")
+    @Digits(integer = 5, fraction = 2, message = "Default mark must have up to 5 digits and 2 decimals")
     private final BigDecimal defaultMark;
 
     @NotNull(message = "Question type is required")

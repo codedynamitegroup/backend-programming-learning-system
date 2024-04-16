@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.core.service.domain.implement.qu
 import com.backend.programming.learning.system.core.service.domain.CoreDomainService;
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQtypeCodeQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeCodeQuestion;
+import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QtypeCodeQuestionDataMapper;
@@ -30,13 +31,12 @@ public class QtypeCodeQuestionCreateHelper {
     }
 
     public QuestionCreatedEvent persistQtypeCodeQuestion(CreateQtypeCodeQuestionCommand createQtypeCodeQuestionCommand) {
-        QuestionCreatedEvent questionCreatedEvent = questionCreateHelper.persistQuestion(createQtypeCodeQuestionCommand);
+        Question createdQuestion = questionCreateHelper.persistQuestion(createQtypeCodeQuestionCommand);
         QtypeCodeQuestion qtypeCodeQuestion = qtypeCodeQuestionDataMapper
-                .createQuestionCommandToQtypeCodeQuestion(createQtypeCodeQuestionCommand,
-                        questionCreatedEvent.getQuestion());
+                .createQuestionCommandToQtypeCodeQuestion(createQtypeCodeQuestionCommand, createdQuestion);
 
         // init QtypeCodeQuestion
-        coreDomainService.createQtypeCodeQuestion(qtypeCodeQuestion);
+        QuestionCreatedEvent questionCreatedEvent = coreDomainService.createQtypeCodeQuestion(createdQuestion, qtypeCodeQuestion);
         saveQtypeCodeQuestion(qtypeCodeQuestion);
 
         log.info("Qtype Code Question created with id: {}", qtypeCodeQuestion.getQuestion().getId().getValue());

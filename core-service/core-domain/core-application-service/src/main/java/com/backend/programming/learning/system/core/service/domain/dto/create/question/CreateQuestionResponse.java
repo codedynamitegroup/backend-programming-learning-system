@@ -16,5 +16,7 @@ public class CreateQuestionResponse {
     @NotNull
     private final UUID questionId;
     @NotNull
+    private final UUID qtypeId;
+    @NotNull
     private final String message;
 }

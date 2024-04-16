@@ -31,8 +31,7 @@ public class QtypeShortanswerQuestionCommandHandler {
     public CreateQuestionResponse createQtypeShortanswerQuestion(CreateQtypeShortanswerQuestionCommand createQtypeShortanswerQuestionCommand) {
         QuestionCreatedEvent questionCreatedEvent = qtypeShortanswerCreateHelper.persistQtypeShortanswerQuestion(createQtypeShortanswerQuestionCommand);
 
-        return questionDataMapper.questionToCreateQuestionResponse(questionCreatedEvent.getQuestion(),
-                "Qtype Shortanswer Question created successfully");
+        return questionDataMapper.questionCreatedEventToCreateQuestionResponse(questionCreatedEvent, "Qtype Shortanswer Question created successfully");
     }
 
     public QueryQtypeShortanswerQuestionResponse queryQtypeShortanswerQuestionById(UUID qtShortanswerQuestionId) {

@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.core.service.domain.implement.qu
 import com.backend.programming.learning.system.core.service.domain.CoreDomainService;
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQtypeShortanswerQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeShortAnswerQuestion;
+import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QtypeShortanswerQuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeShortanswerQuestionRepository;
@@ -29,13 +30,12 @@ public class QtypeShortanswerQuestionCreateHelper {
     }
 
     public QuestionCreatedEvent persistQtypeShortanswerQuestion(CreateQtypeShortanswerQuestionCommand createQtypeShortanswerQuestionCommand) {
-        QuestionCreatedEvent questionCreatedEvent = questionCreateHelper.persistQuestion(createQtypeShortanswerQuestionCommand);
+        Question createdQuestion = questionCreateHelper.persistQuestion(createQtypeShortanswerQuestionCommand);
         QtypeShortAnswerQuestion qtypeShortAnswerQuestion = qtypeShortanswerQuestionDataMapper
-                .createQuestionCommandToQtypeShortAnswerQuestion(createQtypeShortanswerQuestionCommand,
-                        questionCreatedEvent.getQuestion());
+                .createQuestionCommandToQtypeShortAnswerQuestion(createQtypeShortanswerQuestionCommand, createdQuestion);
 
         // init QtypeShortAnswerQuestion
-        coreDomainService.createQtypeShortAnswerQuestion(qtypeShortAnswerQuestion);
+        QuestionCreatedEvent questionCreatedEvent = coreDomainService.createQtypeShortAnswerQuestion(createdQuestion, qtypeShortAnswerQuestion);
         qtypeShortanswerQuestionRepository.saveQtypeShortAnswerQuestion(qtypeShortAnswerQuestion);
 
         log.info("Qtype Short Answer Question created with id: {}", qtypeShortAnswerQuestion.getId().getValue());

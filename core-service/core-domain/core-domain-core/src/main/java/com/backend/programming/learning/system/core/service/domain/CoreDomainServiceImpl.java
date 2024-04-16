@@ -10,36 +10,37 @@ import java.time.ZonedDateTime;
 @Slf4j
 public class CoreDomainServiceImpl implements CoreDomainService {
     @Override
-    public QuestionCreatedEvent createQuestion(Question question) {
+    public void createQuestion(Question question) {
         question.initializeQuestion();
-
         log.info("Question initialized with id: {}", question.getId().getValue());
-
-        return new QuestionCreatedEvent(question, ZonedDateTime.now(ZoneId.of("UTC")));
     }
 
     @Override
-    public void createQtypeCodeQuestion(QtypeCodeQuestion qtypeCodeQuestion) {
+    public QuestionCreatedEvent createQtypeCodeQuestion(Question question, QtypeCodeQuestion qtypeCodeQuestion) {
         qtypeCodeQuestion.initQtypeCodeQuestion();
         log.info("Qtype code question created with id: {}", qtypeCodeQuestion.getId().getValue());
+        return new QuestionCreatedEvent(question, qtypeCodeQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of("UTC")));
     }
 
     @Override
-    public void createQtypeEssayQuestion(QtypeEssayQuestion qtypeEssayQuestion) {
+    public QuestionCreatedEvent createQtypeEssayQuestion(Question question, QtypeEssayQuestion qtypeEssayQuestion) {
         qtypeEssayQuestion.initQtypeEssayQuestion();
         log.info("Qtype essay question created with id: {}", qtypeEssayQuestion.getId().getValue());
+        return new QuestionCreatedEvent(question, qtypeEssayQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of("UTC")));
     }
 
     @Override
-    public void createQtypeShortAnswerQuestion(QtypeShortAnswerQuestion qtypeEssayQuestion) {
+    public QuestionCreatedEvent createQtypeShortAnswerQuestion(Question question, QtypeShortAnswerQuestion qtypeEssayQuestion) {
         qtypeEssayQuestion.initQtypeShortAnswerQuestion();
         log.info("Qtype short answer question created with id: {}", qtypeEssayQuestion.getId().getValue());
+        return new QuestionCreatedEvent(question, qtypeEssayQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of("UTC")));
     }
 
     @Override
-    public void createQtypeMultipleChoiceQuestion(QtypeMultiChoiceQuestion qtypeMultipleChoiceQuestion) {
+    public QuestionCreatedEvent createQtypeMultipleChoiceQuestion(Question question, QtypeMultiChoiceQuestion qtypeMultipleChoiceQuestion) {
         qtypeMultipleChoiceQuestion.initQtypeMultipleChoiceQuestion();
         log.info("Qtype multiple choice question created with id: {}", qtypeMultipleChoiceQuestion.getId().getValue());
+        return new QuestionCreatedEvent(question, qtypeMultipleChoiceQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of("UTC")));
     }
 
     @Override

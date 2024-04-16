@@ -5,11 +5,11 @@ import com.backend.programming.learning.system.core.service.domain.event.Questio
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 
 public interface CoreDomainService {
-    QuestionCreatedEvent createQuestion(Question question);
-    void createQtypeCodeQuestion(QtypeCodeQuestion qtypeCodeQuestion);
-    void createQtypeEssayQuestion(QtypeEssayQuestion qtypeEssayQuestion);
-    void createQtypeShortAnswerQuestion(QtypeShortAnswerQuestion qtypeEssayQuestion);
-     void createQtypeMultipleChoiceQuestion(QtypeMultiChoiceQuestion qtypeMultipleChoiceQuestion);
+    void createQuestion(Question question);
+    QuestionCreatedEvent createQtypeCodeQuestion(Question question, QtypeCodeQuestion qtypeCodeQuestion);
+    QuestionCreatedEvent createQtypeEssayQuestion(Question question, QtypeEssayQuestion qtypeEssayQuestion);
+    QuestionCreatedEvent createQtypeShortAnswerQuestion(Question question, QtypeShortAnswerQuestion qtypeEssayQuestion);
+    QuestionCreatedEvent createQtypeMultipleChoiceQuestion(Question question, QtypeMultiChoiceQuestion qtypeMultipleChoiceQuestion);
     void createCertificateCourse(CertificateCourse certificateCourse);
     void createReview(Review review);
     void createTopic(Topic topic);

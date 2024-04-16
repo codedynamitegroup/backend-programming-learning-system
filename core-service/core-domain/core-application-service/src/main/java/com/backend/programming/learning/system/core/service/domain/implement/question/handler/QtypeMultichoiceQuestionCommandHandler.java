@@ -31,8 +31,7 @@ public class QtypeMultichoiceQuestionCommandHandler {
     public CreateQuestionResponse createQtypeMultichoiceQuestion(CreateQtypeMultichoiceQuestionCommand createQtypeMultichoiceQuestionCommand) {
         QuestionCreatedEvent questionCreatedEvent = qtypeMultichoiceQuestionCreateHelper.persistQtypeMultichoiceQuestion(createQtypeMultichoiceQuestionCommand);
 
-        return questionDataMapper.questionToCreateQuestionResponse(questionCreatedEvent.getQuestion(),
-                "Qtype Multichoice Question created successfully");
+        return questionDataMapper.questionCreatedEventToCreateQuestionResponse(questionCreatedEvent, "Qtype Multichoice Question created successfully");
     }
 
     public QueryQtypeMultichoiceQuestionResponse queryQtypeMultichoiceQuestionById(UUID qtMultichoiceQuestionId) {

@@ -3,6 +3,8 @@ package com.backend.programming.learning.system.core.service.domain.dto.create.q
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
@@ -51,14 +53,14 @@ public class CreateQtypeEssayQuestionCommand extends CreateQuestionCommand{
 
 
     public CreateQtypeEssayQuestionCommand(
-            @NotNull(message = "Organization ID is required") @Size(min = 36, max = 36, message = "Organization ID of organization must have 36 digits including \"-\" ") UUID organizationId,
-            @NotNull(message = "Created by is required") @Size(min = 36, max = 36, message = "User ID of createdBy must have 36 digits including \"-\"") UUID createdBy,
-            @NotNull(message = "Updated by is required") @Size(min = 36, max = 36, message = "User ID of updatedBy must have 36 digits including \"-\"") UUID updatedBy,
+            @NotNull(message = "Organization ID is required") UUID organizationId,
+            @NotNull(message = "Created by is required") UUID createdBy,
+            @NotNull(message = "Updated by is required") UUID updatedBy,
             @NotNull(message = "Difficulty by is required") String difficulty,
             @NotNull(message = "Name is required") String name,
             @NotNull(message = "Question text is required") String questionText,
             @NotNull(message = "General feedback is required") String generalFeedback,
-            @NotNull(message = "Default mark is required") @Size(min = 1, message = "Default mark must be between 1 and 5") BigDecimal defaultMark,
+            @NotNull(message = "Default mark is required") @DecimalMin(value = "0.0", inclusive = false, message = "Default mark must be greater than 0") @Digits(integer = 5, fraction = 2, message = "Default mark must have up to 5 digits and 2 decimals") BigDecimal defaultMark,
             @NotNull(message = "Question type is required") String qType,
             String responseFormat,
             Integer responseRequired,
@@ -81,7 +83,6 @@ public class CreateQtypeEssayQuestionCommand extends CreateQuestionCommand{
                 generalFeedback,
                 defaultMark,
                 qType);
-
         this.responseFormat = responseFormat;
         this.responseRequired = responseRequired;
         this.responseFieldLines = responseFieldLines;

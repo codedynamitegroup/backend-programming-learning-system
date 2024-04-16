@@ -41,18 +41,18 @@ public class QuestionCreateHelper {
 
     // Create and save question
     @Transactional
-    public QuestionCreatedEvent persistQuestion(CreateQuestionCommand createQuestionCommand) {
+    public Question persistQuestion(CreateQuestionCommand createQuestionCommand) {
         User createdBy =  getUser(createQuestionCommand.getCreatedBy());
         User updatedBy = getUser(createQuestionCommand.getUpdatedBy());
         Organization organization = getOrganization(createQuestionCommand.getOrganizationId());
 
         Question question = questionDataMapper.createQuestionCommandToQuestion(createQuestionCommand, organization, createdBy, updatedBy);
-        QuestionCreatedEvent event = coreDomainService.createQuestion(question);
+        coreDomainService.createQuestion(question);
         saveQuestion(question);
 
-        log.info("Question created with id: {}", event.getQuestion().getId().getValue());
+        log.info("Question created with id: {}", question.getId().getValue());
 
-        return event;
+        return question;
     }
 
     // Check if user exists

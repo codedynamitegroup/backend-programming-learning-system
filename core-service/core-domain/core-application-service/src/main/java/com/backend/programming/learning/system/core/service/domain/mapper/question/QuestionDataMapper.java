@@ -6,12 +6,14 @@ import com.backend.programming.learning.system.core.service.domain.dto.query.que
 import com.backend.programming.learning.system.core.service.domain.entity.Organization;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
+import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
 import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class QuestionDataMapper {
@@ -36,9 +38,10 @@ public class QuestionDataMapper {
     }
 
     // question to create question response
-    public CreateQuestionResponse questionToCreateQuestionResponse(Question question, String message) {
+    public CreateQuestionResponse questionCreatedEventToCreateQuestionResponse(QuestionCreatedEvent questionCreatedEvent, String message) {
         return CreateQuestionResponse.builder()
-                .questionId(question.getId().getValue())
+                .questionId(questionCreatedEvent.getQuestion().getId().getValue())
+                .qtypeId(questionCreatedEvent.getQtypeID())
                 .message(message)
                 .build();
     }
