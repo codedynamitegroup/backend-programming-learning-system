@@ -13,5 +13,5 @@ public interface ChapterRepository {
     Optional<Chapter> findById(UUID chapterId);
     List<Chapter> findAllByCertificateCourseId(CertificateCourseId certificateCourseId);
     Integer findTopNoByCertificateCourseId(CertificateCourseId certificateCourseId);
-    void deleteChapter(UUID chapterId);
+    void deleteChapterById(UUID chapterId);
 }

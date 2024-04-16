@@ -85,5 +85,17 @@ public class CoreGlobalExceptionHandler extends GlobalExceptionHandler {
                 .message(chapterNotFoundException.getMessage())
                 .build();
     }
+
+    @ResponseBody
+    @ExceptionHandler(value = {ReviewNotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorDTO handleException(ReviewNotFoundException reviewNotFoundException) {
+        log.error(reviewNotFoundException.getMessage(), reviewNotFoundException);
+        return ErrorDTO.builder()
+                .status(HttpStatus.NOT_FOUND.value())
+                .code(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .message(reviewNotFoundException.getMessage())
+                .build();
+    }
 }
 

@@ -10,6 +10,9 @@ import com.backend.programming.learning.system.core.service.domain.ports.output.
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ChapterRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.UUID;
+
 @Component
 public class ChapterQuestionRepositoryImpl implements ChapterQuestionRepository {
     private final ChapterQuestionJpaRepository chapterQuestionJpaRepository;
@@ -27,6 +30,13 @@ public class ChapterQuestionRepositoryImpl implements ChapterQuestionRepository 
                 chapterQuestionJpaRepository.save(
                         chapterQuestionDataAccessMapper.chapterQuestionToChapterQuestionEntity(chapterQuestion)
                 )
+        );
+    }
+
+    @Override
+    public List<ChapterQuestion> findAllChapterQuestionsByChapterId(UUID chapterId) {
+        return chapterQuestionDataAccessMapper.chapterQuestionEntityListToChapterQuestionList(
+                chapterQuestionJpaRepository.findAllChapterQuestionsByChapterId(chapterId)
         );
     }
 }

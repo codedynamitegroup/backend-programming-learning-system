@@ -21,10 +21,8 @@ public class ChapterDeleteHelper {
 
     @Transactional(readOnly = true)
     public void deleteChapterById(UUID chapterId) {
-//        checkChapterExists(chapterId);
-        log.info("1");
-        chapterRepository.deleteChapter(chapterId);
-        log.info("2");
+        checkChapterExists(chapterId);
+        chapterRepository.deleteChapterById(chapterId);
     }
 
     private void checkChapterExists(UUID chapterId) {

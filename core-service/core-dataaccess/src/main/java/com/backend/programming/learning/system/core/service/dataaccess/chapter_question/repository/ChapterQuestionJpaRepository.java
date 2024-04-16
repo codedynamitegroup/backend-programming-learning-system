@@ -5,11 +5,12 @@ import com.backend.programming.learning.system.core.service.dataaccess.chapter_q
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface ChapterQuestionJpaRepository extends JpaRepository<ChapterQuestionEntity, UUID> {
     Optional<ChapterQuestionEntity> findById(UUID id);
-    Optional<ChapterQuestionEntity> findByChapterIdAndQuestionId(UUID chapterId, UUID questionId);
+    List<ChapterQuestionEntity> findAllChapterQuestionsByChapterId(UUID chapterId);
 }
