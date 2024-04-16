@@ -40,6 +40,9 @@ public class QuestionEntity {
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
+    @OneToMany(mappedBy = "question", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private Set<AnswerOfQuestionEntity> answerOfQuestions;
+
     @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     @JoinColumn(name = "created_by", referencedColumnName = "id")
     private UserEntity createdBy;

@@ -31,8 +31,7 @@ public class QtypeCodeQuestionCommandHandler {
     public CreateQuestionResponse createQtypeCodeQuestion(CreateQtypeCodeQuestionCommand createQtypeCodeQuestionCommand) {
         QuestionCreatedEvent questionCreatedEvent = qtypeCodeQuestionCreateHelper.persistQtypeCodeQuestion(createQtypeCodeQuestionCommand);
 
-        return questionDataMapper.questionToCreateQuestionResponse(questionCreatedEvent.getQuestion(),
-                "Qtype Code Question created successfully");
+        return questionDataMapper.questionCreatedEventToCreateQuestionResponse(questionCreatedEvent, "Qtype Code Question created successfully");
     }
 
     public QueryQtypeCodeQuestionResponse queryQtypeCodeQuestionById(UUID qtypeCodeQuestionId) {

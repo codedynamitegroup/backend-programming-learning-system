@@ -6,13 +6,17 @@ import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
 public class CreateQuestionResponse {
     @NotNull
-    private final QuestionId questionId;
+    private final UUID questionId;
+    @NotNull
+    private final UUID qtypeId;
     @NotNull
     private final String message;
 }

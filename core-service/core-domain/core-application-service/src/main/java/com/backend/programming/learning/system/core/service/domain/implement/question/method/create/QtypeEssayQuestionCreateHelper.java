@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.core.service.domain.implement.qu
 import com.backend.programming.learning.system.core.service.domain.CoreDomainService;
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQtypeEssayQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeEssayQuestion;
+import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QtypeEssayQuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeEssayQuestionRepository;
@@ -28,13 +29,12 @@ public class QtypeEssayQuestionCreateHelper {
     }
 
     public QuestionCreatedEvent persistQtypeEssayQuestion(CreateQtypeEssayQuestionCommand createQtypeEssayQuestionCommand) {
-        QuestionCreatedEvent questionCreatedEvent = questionCreateHelper.persistQuestion(createQtypeEssayQuestionCommand);
+        Question createdQuestion = questionCreateHelper.persistQuestion(createQtypeEssayQuestionCommand);
         QtypeEssayQuestion qtypeEssayQuestion = qtypeEssayQuestionDataMapper
-                .createQtypeEssayQuestionCommandToQtypeEssayQuestion(createQtypeEssayQuestionCommand,
-                        questionCreatedEvent.getQuestion());
+                .createQtypeEssayQuestionCommandToQtypeEssayQuestion(createQtypeEssayQuestionCommand, createdQuestion);
 
         // init QtypeEssayQuestion
-        coreDomainService.createQtypeEssayQuestion(qtypeEssayQuestion);
+        QuestionCreatedEvent questionCreatedEvent = coreDomainService.createQtypeEssayQuestion(createdQuestion, qtypeEssayQuestion);
         qtypeEssayQuestionRepository.saveQtypeEssayQuestion(qtypeEssayQuestion);
 
         log.info("Qtype Essay Question created with id: {}", qtypeEssayQuestion.getId().getValue());

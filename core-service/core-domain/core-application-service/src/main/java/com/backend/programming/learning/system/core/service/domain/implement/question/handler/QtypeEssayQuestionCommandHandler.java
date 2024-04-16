@@ -32,8 +32,7 @@ public class QtypeEssayQuestionCommandHandler {
     public CreateQuestionResponse createQtypeEssayQuestion(CreateQtypeEssayQuestionCommand createQtypeEssayQuestionCommand) {
         QuestionCreatedEvent questionCreatedEvent = qtypeEssayQuestionCreateHelper.persistQtypeEssayQuestion(createQtypeEssayQuestionCommand);
 
-        return questionDataMapper.questionToCreateQuestionResponse(questionCreatedEvent.getQuestion(),
-                "Qtype Essay Question created successfully");
+        return questionDataMapper.questionCreatedEventToCreateQuestionResponse(questionCreatedEvent, "Qtype Essay Question created successfully");
     }
 
     public QueryQtypeEssayQuestionResponse queryQtypeEssayQuestionById(UUID qtEssayQuestionId) {
