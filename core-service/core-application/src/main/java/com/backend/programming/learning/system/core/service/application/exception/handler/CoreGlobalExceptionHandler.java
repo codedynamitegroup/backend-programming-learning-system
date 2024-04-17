@@ -109,5 +109,17 @@ public class CoreGlobalExceptionHandler extends GlobalExceptionHandler {
                 .message(contestNotFoundException.getMessage())
                 .build();
     }
+
+    @ResponseBody
+    @ExceptionHandler(value = {NotificationNotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorDTO handleException(NotificationNotFoundException notificationNotFoundException) {
+        log.error(notificationNotFoundException.getMessage(), notificationNotFoundException);
+        return ErrorDTO.builder()
+                .status(HttpStatus.NOT_FOUND.value())
+                .code(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .message(notificationNotFoundException.getMessage())
+                .build();
+    }
 }
 

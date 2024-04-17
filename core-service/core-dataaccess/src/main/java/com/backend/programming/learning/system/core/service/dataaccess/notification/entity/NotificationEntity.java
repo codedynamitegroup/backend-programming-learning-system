@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.dataaccess.notification.entity;
 
+import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.core.service.domain.valueobject.NotificationEventType;
 import lombok.*;
 

@@ -26,7 +26,7 @@ public class CreateNotificationCommand {
 
     @NotNull(message = "eventType is required")
     @EnumValidator(enumClass = NotificationEventType.class, message = "eventType is invalid")
-    private final NotificationEventType eventType;
+    private final String eventType;
 
     private final String contextUrl;
     private final String contextUrlName;

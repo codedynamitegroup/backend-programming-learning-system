@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.dto.query.notification;
 
 import com.backend.programming.learning.system.core.service.domain.dto.query.user.QueryUserResponse;
+import com.backend.programming.learning.system.core.service.domain.valueobject.NotificationEventType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,18 +15,29 @@ import java.util.UUID;
 @AllArgsConstructor
 public class QueryNotificationResponse {
     @NotNull
-    private final UUID contestId;
+    private final UUID notificationId;
     @NotNull
-    private final String name;
+    private final QueryUserResponse userFrom;
     @NotNull
-    private final String description;
+    private final QueryUserResponse userTo;
     @NotNull
-    private final ZonedDateTime startTime;
-    private final ZonedDateTime endTime;
+    private final String subject;
     @NotNull
-    private final QueryUserResponse createdBy;
+    private final String fullMessage;
     @NotNull
-    private final QueryUserResponse updatedBy;
+    private final String smallMessage;
+    @NotNull
+    private final String component;
+    @NotNull
+    private final NotificationEventType eventType;
+    @NotNull
+    private final String contextUrl;
+    @NotNull
+    private final String contextUrlName;
+    @NotNull
+    private final Boolean isRead;
+    @NotNull
+    private final ZonedDateTime timeRead;
     @NotNull
     private final ZonedDateTime createdAt;
     @NotNull

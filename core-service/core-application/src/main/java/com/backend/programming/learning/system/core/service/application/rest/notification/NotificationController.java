@@ -6,10 +6,20 @@ import com.backend.programming.learning.system.core.service.domain.dto.create.no
 import com.backend.programming.learning.system.core.service.domain.dto.create.notification.CreateNotificationResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.delete.contest.DeleteContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.delete.contest.DeleteContestResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.notification.DeleteNotificationCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.notification.DeleteNotificationResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.review.DeleteReviewCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.review.DeleteReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.query.contest.QueryAllContestsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.query.contest.QueryAllContestsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.query.contest.QueryContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.query.contest.QueryContestResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.notification.QueryAllNotificationsCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.query.notification.QueryAllNotificationsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.review.QueryAllReviewsCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.query.review.QueryAllReviewsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.update.notification.MarkReadNotificationCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.update.notification.MarkReadNotificationResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest.ContestApplicationService;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.notification.NotificationApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -40,17 +50,46 @@ public class NotificationController {
     }
 
     @GetMapping
-    public ResponseEntity<QueryAllContestsResponse> getAllNotifications(
+    public ResponseEntity<QueryAllNotificationsResponse> getAllNotifications(
             @RequestParam UUID userIdTo,
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize
     ) {
-        return null;
+        QueryAllNotificationsResponse queryAllNotificationsResponse =
+                notificationApplicationService.queryAllNotificationsResponse(QueryAllNotificationsCommand
+                        .builder()
+                        .userIdTo(userIdTo)
+                        .pageNo(pageNo)
+                        .pageSize(pageSize)
+                        .build());
+        log.info("Returning all notifications: {}", queryAllNotificationsResponse);
+        return ResponseEntity.ok(queryAllNotificationsResponse);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<MarkReadNotificationResponse> markReadNotification(
+            @PathVariable UUID id
+    ) {
+        log.info("Marking notification as read: {}", id);
+        MarkReadNotificationResponse markReadNotificationResponse =
+                notificationApplicationService.markReadNotificationResponse(MarkReadNotificationCommand
+                        .builder()
+                        .notificationId(id)
+                        .build());
+        log.info("Notification marked as read: {}", markReadNotificationResponse);
+
+        return ResponseEntity.ok(markReadNotificationResponse);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<DeleteContestResponse> deleteContest(@PathVariable UUID id) {
-        return null;
+    public ResponseEntity<DeleteNotificationResponse> deleteNotification(@PathVariable UUID id) {
+        DeleteNotificationResponse deleteNotificationResponse =
+                notificationApplicationService.deleteNotificationResponse(DeleteNotificationCommand
+                        .builder()
+                        .notificationId(id)
+                        .build());
+        log.info("Review notification: {}", id);
+        return ResponseEntity.ok(deleteNotificationResponse);
     }
 
 }
