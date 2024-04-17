@@ -44,10 +44,10 @@ public class CodeAssessmentApplicationServiceTest {
         command = CreateCodeQuestionCommand.builder()
                 .questionId(QUESTION_ID)
                 .dslTemplate("haha")
-                .isDeleted(false)
                 .problemStatement("haa")
                 .inputFormat("ha")
                 .outputFormat("hah")
+                .constraints("haha")
                 .build();
         Question question = Question.builder()
                 .questionId(new QuestionId(QUESTION_ID))

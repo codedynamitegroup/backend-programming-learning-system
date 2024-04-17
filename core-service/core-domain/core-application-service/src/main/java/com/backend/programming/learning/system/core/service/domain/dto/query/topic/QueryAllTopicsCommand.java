@@ -15,6 +15,5 @@ public class QueryAllTopicsCommand {
     private final int pageNo;
     @NotNull
     private final int pageSize;
-    @NotNull
     private final Boolean fetchAll;
 }

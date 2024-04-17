@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.d
 
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,4 +16,6 @@ public class CreateCodeQuestionResponse {
     private final String message;
     @NonNull
     private final CodeQuestionId codeQuestionId;
+    @NonNull
+    private final CopyState state;
 }

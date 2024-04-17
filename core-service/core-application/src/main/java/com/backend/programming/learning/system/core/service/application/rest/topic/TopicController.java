@@ -1,16 +1,19 @@
 package com.backend.programming.learning.system.core.service.application.rest.topic;
 
-import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.create.topic.CreateTopicCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.topic.CreateTopicResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.contest.DeleteContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.delete.contest.DeleteContestResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.topic.DeleteTopicCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.delete.topic.DeleteTopicResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.contest.QueryAllContestsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.query.contest.QueryAllContestsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.contest.QueryContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.query.contest.QueryContestResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.review.QueryAllTopicsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.topic.QueryAllTopicsCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.query.topic.QueryAllTopicsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.topic.QueryTopicCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.query.topic.QueryTopicResponse;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.review.ReviewApplicationService;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.topic.TopicApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -45,17 +48,36 @@ public class TopicController {
             @RequestParam(defaultValue = "10") Integer pageSize,
             @RequestParam Boolean fetchAll
     ) {
-        return null;
+        QueryAllTopicsResponse queryAllTopicsResponse =
+                topicApplicationService.queryAllTopics(QueryAllTopicsCommand
+                        .builder()
+                        .pageNo(pageNo)
+                        .pageSize(pageSize)
+                        .fetchAll(fetchAll)
+                        .build());
+        log.info("Returning all topics: {}", queryAllTopicsResponse.getTopics());
+        return ResponseEntity.ok(queryAllTopicsResponse);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<QueryTopicResponse> getTopic(@PathVariable UUID id) {
-        return null;
+        QueryTopicResponse queryTopicResponse =
+                topicApplicationService.queryTopic(QueryTopicCommand
+                        .builder()
+                        .topicId(id)
+                        .build());
+        log.info("Returning topic: {}", queryTopicResponse.getTopicId());
+        return  ResponseEntity.ok(queryTopicResponse);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<DeleteTopicResponse> deleteTopic(@PathVariable UUID id) {
-        return null;
+        DeleteTopicResponse deleteTopicResponse =
+                topicApplicationService.deleteTopic(DeleteTopicCommand
+                        .builder()
+                        .topicId(id)
+                        .build());
+        log.info("Topic deleted: {}", id);
+        return ResponseEntity.ok(deleteTopicResponse);
     }
-
 }

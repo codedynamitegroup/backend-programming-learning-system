@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.core.service.application.excepti
 import com.backend.programming.learning.system.application.handler.ErrorDTO;
 import com.backend.programming.learning.system.application.handler.GlobalExceptionHandler;
 import com.backend.programming.learning.system.core.service.domain.exception.*;
-import com.backend.programming.learning.system.core.service.domain.exception.question.QuestionNotFoundException;
+import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -95,6 +95,18 @@ public class CoreGlobalExceptionHandler extends GlobalExceptionHandler {
                 .status(HttpStatus.NOT_FOUND.value())
                 .code(HttpStatus.NOT_FOUND.getReasonPhrase())
                 .message(reviewNotFoundException.getMessage())
+                .build();
+    }
+
+    @ResponseBody
+    @ExceptionHandler(value = {ContestNotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorDTO handleException(ContestNotFoundException contestNotFoundException) {
+        log.error(contestNotFoundException.getMessage(), contestNotFoundException);
+        return ErrorDTO.builder()
+                .status(HttpStatus.NOT_FOUND.value())
+                .code(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .message(contestNotFoundException.getMessage())
                 .build();
     }
 }

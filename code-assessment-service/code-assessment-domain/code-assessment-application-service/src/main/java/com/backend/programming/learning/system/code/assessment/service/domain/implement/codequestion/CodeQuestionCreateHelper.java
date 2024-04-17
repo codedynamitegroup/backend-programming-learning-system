@@ -5,7 +5,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Question;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionCreatedEvent;
-import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.codequestion.CodeQuestionDomainException;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.CodeQuestionDataMaper;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.CodeQuestionRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.QuestionRepository;
@@ -49,14 +49,14 @@ public class CodeQuestionCreateHelper {
         Optional<Question> question = questionRepository.findQuestionInformation(questionId);
         if(question.isEmpty()){
             log.warn("Could not find question id: {}", questionId);
-            throw new CodeAssessmentDomainException("Could not find question id: " + questionId);
+            throw new CodeQuestionDomainException("Could not find question id: " + questionId);
         }
     }
     private CodeQuestion saveCodeQuestion(CodeQuestion codeQuestion){
         CodeQuestion codeQuestionResult = codeQuestionRepository.save(codeQuestion);
         if(codeQuestionResult == null){
             log.error("Can not save code question id");
-            throw new CodeAssessmentDomainException("Can not save code question");
+            throw new CodeQuestionDomainException("Can not save code question");
         }
         log.info("Code question is save with id: {}", codeQuestionResult.getId().getValue());
         return codeQuestionResult;

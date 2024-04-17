@@ -16,7 +16,7 @@ public class Topic extends AggregateRoot<TopicId> {
     private String name;
     private String description;
     private List<ProgrammingLanguage> programmingLanguages;
-    private final User createdBy;
+    private User createdBy;
     private User updatedBy;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
@@ -73,6 +73,34 @@ public class Topic extends AggregateRoot<TopicId> {
 
     public ZonedDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setProgrammingLanguages(List<ProgrammingLanguage> programmingLanguages) {
+        this.programmingLanguages = programmingLanguages;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public void setUpdatedBy(User updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public void setCreatedAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(ZonedDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public static final class Builder {
