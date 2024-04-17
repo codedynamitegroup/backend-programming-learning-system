@@ -63,6 +63,30 @@ public class CertificateCourseUser extends BaseEntity<CertificateCourseUserId> {
         return updatedAt;
     }
 
+    public void setCertificateCourse(CertificateCourse certificateCourse) {
+        this.certificateCourse = certificateCourse;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setCompleted(Boolean completed) {
+        isCompleted = completed;
+    }
+
+    public void setCompletedAt(ZonedDateTime completedAt) {
+        this.completedAt = completedAt;
+    }
+
+    public void setCreatedAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(ZonedDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     public static final class Builder {
         private CertificateCourseUserId certificateCourseUserId;
         private CertificateCourse certificateCourse;

@@ -15,8 +15,8 @@ import java.time.ZonedDateTime;
 import java.util.UUID;
 
 public class ContestUser extends BaseEntity<ContestUserId> {
-    private final UserId userId;
-    private final ContestId contestId;
+    private final User user;
+    private final Contest contest;
     private Boolean isCompleted;
     private ZonedDateTime completedAt;
     private ZonedDateTime createdAt;
@@ -24,18 +24,18 @@ public class ContestUser extends BaseEntity<ContestUserId> {
 
     public void initializeContestUser() {
         setId(new ContestUserId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
-        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        setCreatedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+        setUpdatedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     private ContestUser(Builder builder) {
         super.setId(builder.contestUserId);
-        userId = builder.userId;
-        contestId = builder.contestId;
+        user = builder.user;
+        contest = builder.contest;
         isCompleted = builder.isCompleted;
-        completedAt = builder.completedAt;
-        createdAt = builder.createdAt;
-        updatedAt = builder.updatedAt;
+        setCompletedAt(builder.completedAt);
+        setCreatedAt(builder.createdAt);
+        setUpdatedAt(builder.updatedAt);
     }
 
     public static Builder builder() {
@@ -43,34 +43,50 @@ public class ContestUser extends BaseEntity<ContestUserId> {
     }
 
 
-    public UserId getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public ContestId getContestId() {
-        return contestId;
+    public Contest getContest() {
+        return contest;
     }
 
     public Boolean getCompleted() {
         return isCompleted;
     }
 
+    public void setCompleted(Boolean completed) {
+        isCompleted = completed;
+    }
+
     public ZonedDateTime getCompletedAt() {
         return completedAt;
+    }
+
+    public void setCompletedAt(ZonedDateTime completedAt) {
+        this.completedAt = completedAt;
     }
 
     public ZonedDateTime getCreatedAt() {
         return createdAt;
     }
 
+    public void setCreatedAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public ZonedDateTime getUpdatedAt() {
         return updatedAt;
     }
 
+    public void setUpdatedAt(ZonedDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     public static final class Builder {
         private ContestUserId contestUserId;
-        private UserId userId;
-        private ContestId contestId;
+        private User user;
+        private Contest contest;
         private Boolean isCompleted;
         private ZonedDateTime completedAt;
         private ZonedDateTime createdAt;
@@ -84,13 +100,13 @@ public class ContestUser extends BaseEntity<ContestUserId> {
             return this;
         }
 
-        public Builder userId(UserId val) {
-            userId = val;
+        public Builder user(User val) {
+            user = val;
             return this;
         }
 
-        public Builder contestId(ContestId val) {
-            contestId = val;
+        public Builder contest(Contest val) {
+            contest = val;
             return this;
         }
 

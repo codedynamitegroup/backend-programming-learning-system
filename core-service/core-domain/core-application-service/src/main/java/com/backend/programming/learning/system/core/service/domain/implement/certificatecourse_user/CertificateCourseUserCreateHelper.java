@@ -44,33 +44,38 @@ public class CertificateCourseUserCreateHelper {
     @Transactional
     public CertificateCourseUser persistCertificateCourseUser(
             CreateCertificateCourseUserCommand createCertificateCourseUserCommand) {
-        checkUser(createCertificateCourseUserCommand.getUserId());
-        checkCertificateCourse(createCertificateCourseUserCommand.getCertificateCourseId());
+        User user = getUser(createCertificateCourseUserCommand.getUserId());
+        CertificateCourse certificateCourse =
+                getCertificateCourse(createCertificateCourseUserCommand.getCertificateCourseId());
 
         CertificateCourseUser certificateCourseUser = certificateCourseUserDataMapper.
                 createCertificateCourseUserCommandToCertificateCourseUser(createCertificateCourseUserCommand);
         coreDomainService.createCertificateCourseUser(certificateCourseUser);
+        certificateCourseUser.setCertificateCourse(certificateCourse);
+        certificateCourseUser.setUser(user);
         CertificateCourseUser certificateCourseUserResult = saveCertificateCourseUser(certificateCourseUser);
 
         log.info("Certificate course user created with id: {}", certificateCourseUserResult.getId().getValue());
         return certificateCourseUserResult;
     }
 
-    private void checkUser(UUID userId) {
+    private User getUser(UUID userId) {
         Optional<User> user = userRepository.findUser(userId);
         if (user.isEmpty()) {
             log.warn("User with id: {} not found", userId);
             throw new UserNotFoundException("Could not find user with id: " + userId);
         }
+        return user.get();
     }
 
-    private void checkCertificateCourse(UUID certificateCourseId) {
+    private CertificateCourse getCertificateCourse(UUID certificateCourseId) {
         Optional<CertificateCourse> certificateCourse = certificateCourseRepository
                 .findById(new CertificateCourseId(certificateCourseId));
         if (certificateCourse.isEmpty()) {
             log.warn("Certificate course with id: {} not found", certificateCourseId);
             throw new TopicNotFoundException("Could not find Certificate course with id: " + certificateCourseId);
         }
+        return certificateCourse.get();
     }
 
     private CertificateCourseUser saveCertificateCourseUser(CertificateCourseUser certificateCourseUser) {

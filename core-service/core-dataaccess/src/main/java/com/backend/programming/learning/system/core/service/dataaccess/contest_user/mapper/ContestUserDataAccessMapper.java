@@ -1,7 +1,13 @@
 package com.backend.programming.learning.system.core.service.dataaccess.contest_user.mapper;
 
+import com.backend.programming.learning.system.core.service.dataaccess.contest.entity.ContestEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.contest.mapper.ContestDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.contest_user.entity.ContestUserEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
+import com.backend.programming.learning.system.core.service.domain.entity.Contest;
 import com.backend.programming.learning.system.core.service.domain.entity.ContestUser;
+import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestUserId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
@@ -9,26 +15,38 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ContestUserDataAccessMapper {
+    private final ContestDataAccessMapper contestDataAccessMapper;
+    private final UserDataAccessMapper userDataAccessMapper;
+
+    public ContestUserDataAccessMapper(
+            ContestDataAccessMapper contestDataAccessMapper, UserDataAccessMapper userDataAccessMapper) {
+        this.contestDataAccessMapper = contestDataAccessMapper;
+        this.userDataAccessMapper = userDataAccessMapper;
+    }
 
     public ContestUserEntity contestUserToContestUserEntity(ContestUser contestUser) {
+        UserEntity user = userDataAccessMapper.userToUserEntity(contestUser.getUser());
+        ContestEntity contest = contestDataAccessMapper.contestToContestEntity(contestUser.getContest());
         return ContestUserEntity.builder()
                 .id(contestUser.getId().getValue())
-                .userId(contestUser.getUserId().getValue())
-                .contestId(contestUser.getContestId().getValue())
-//                .registeredAt(contestUser.getRegisteredAt())
+                .user(user)
+                .contest(contest)
                 .isCompleted(contestUser.getCompleted())
                 .completedAt(contestUser.getCompletedAt())
+                .createdAt(contestUser.getCreatedAt())
                 .build();
     }
 
     public ContestUser contestUserEntityToContestUser(ContestUserEntity contestUserEntity) {
+        User user = userDataAccessMapper.userEntityToUser(contestUserEntity.getUser());
+        Contest contest = contestDataAccessMapper.contestEntityToContest(contestUserEntity.getContest());
         return ContestUser.builder()
                 .id(new ContestUserId(contestUserEntity.getId()))
-                .userId(new UserId(contestUserEntity.getUserId()))
-                .contestId(new ContestId(contestUserEntity.getContestId()))
-//                .registeredAt(contestUserEntity.getRegisteredAt())
+                .user(user)
+                .contest(contest)
                 .isCompleted(contestUserEntity.getIsCompleted())
                 .completedAt(contestUserEntity.getCompletedAt())
+                .createdAt(contestUserEntity.getCreatedAt())
                 .build();
     }
 }

@@ -60,10 +60,8 @@ public class CertificateCourseUserDataMapper {
     public QueryAllCertificateCourseUsersResponse certificateCourseUsersToQueryAllCertificateCourseUsersResponse(
             Page<CertificateCourseUser> certificateCourseUsers) {
         List<CertificateCourseUserResponseEntity> certificateCourseUserResponseEntities = new ArrayList<>();
-        for (CertificateCourseUser certificateCourseUser : certificateCourseUsers) {
-            certificateCourseUserResponseEntities.add(
-                    certificateCourseUserToCertificateCourseUserResponseEntity(certificateCourseUser));
-        }
+        certificateCourseUsers.forEach(certificateCourseUser -> certificateCourseUserResponseEntities.add(
+                certificateCourseUserToCertificateCourseUserResponseEntity(certificateCourseUser)));
         return QueryAllCertificateCourseUsersResponse.builder()
                 .certificateCourseUsers(certificateCourseUserResponseEntities)
                 .currentPage(certificateCourseUsers.getNumber())

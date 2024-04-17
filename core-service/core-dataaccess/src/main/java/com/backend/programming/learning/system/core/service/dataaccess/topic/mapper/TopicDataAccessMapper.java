@@ -29,12 +29,9 @@ import java.util.List;
 @Component
 public class TopicDataAccessMapper {
     private final UserDataAccessMapper userDataAccessMapper;
-    private final ProgrammingLanguageDataAccessMapper programmingLanguageDataAccessMapper;
 
-    public TopicDataAccessMapper(UserDataAccessMapper userDataAccessMapper,
-                                 ProgrammingLanguageDataAccessMapper programmingLanguageDataAccessMapper) {
+    public TopicDataAccessMapper(UserDataAccessMapper userDataAccessMapper) {
         this.userDataAccessMapper = userDataAccessMapper;
-        this.programmingLanguageDataAccessMapper = programmingLanguageDataAccessMapper;
     }
 
     public TopicEntity topicToTopicEntity(Topic topic) {

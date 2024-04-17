@@ -1,11 +1,10 @@
 package com.backend.programming.learning.system.core.service.dataaccess.contest_user.entity;
 
+import com.backend.programming.learning.system.core.service.dataaccess.contest.entity.ContestEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
@@ -21,8 +20,15 @@ public class ContestUserEntity {
     @Id
     @Column(name = "id")
     private UUID id;
-    private UUID userId;
-    private UUID contestId;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private UserEntity user;
+
+    @ManyToOne
+    @JoinColumn(name = "contest_id", referencedColumnName = "id")
+    private ContestEntity contest;
+
     private Boolean isCompleted;
     private ZonedDateTime completedAt;
     private ZonedDateTime createdAt;
