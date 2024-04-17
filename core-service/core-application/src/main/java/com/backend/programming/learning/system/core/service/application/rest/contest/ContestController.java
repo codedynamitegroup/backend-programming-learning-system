@@ -68,9 +68,9 @@ public class ContestController {
         return ResponseEntity.ok(queryAllContestsResponse);
     }
 
-    @GetMapping("/users")
+    @GetMapping("/{id}/users")
     public ResponseEntity<QueryAllContestUsersResponse> getAllUsersOfContest(
-            @RequestParam UUID contestId,
+            @PathVariable UUID id,
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize,
             @RequestParam(defaultValue = "false") Boolean fetchAll) {

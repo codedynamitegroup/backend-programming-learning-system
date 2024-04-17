@@ -77,9 +77,9 @@ public class CertificateCourseController {
         return ResponseEntity.ok(queryAllCertificateCoursesResponse);
     }
 
-    @GetMapping("/users")
+    @GetMapping("/{id}/users")
     public ResponseEntity<QueryAllCertificateCourseUsersResponse> getAllUsersOfCertificateCourse(
-            @RequestParam UUID certificateCourseId,
+            @PathVariable UUID id,
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize,
             @RequestParam(defaultValue = "false") Boolean fetchAll) {
@@ -87,12 +87,12 @@ public class CertificateCourseController {
                 certificateCourseUserApplicationService.queryAllCertificateCourseUsers(
                         QueryAllCertificateCourseUsersCommand
                         .builder()
-                        .certificateCourseId(certificateCourseId)
+                        .certificateCourseId(id)
                         .pageNo(pageNo)
                         .pageSize(pageSize)
                         .fetchAll(fetchAll)
                         .build());
-        log.info("Returning all users of certificate course: {}", certificateCourseId);
+        log.info("Returning all users of certificate course: {}", id);
         return ResponseEntity.ok(queryAllCertificateCourseUsersResponse);
     }
 
