@@ -88,6 +88,8 @@ CREATE TABLE "public".certificate_course
         ON DELETE CASCADE
 );
 
+CREATE INDEX certificate_course_name_idx ON "public".certificate_course (name);
+
 DROP TABLE IF EXISTS "public".chapter CASCADE;
 
 CREATE TABLE "public".chapter
@@ -221,6 +223,8 @@ CREATE TABLE "public".contest
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
+
+CREATE INDEX contest_name_idx ON "public".contest (name);
 
 DROP TABLE IF EXISTS "public".contest_user CASCADE;
 
