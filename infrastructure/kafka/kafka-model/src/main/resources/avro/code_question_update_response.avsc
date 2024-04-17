@@ -1,5 +1,5 @@
 {
-  "name": "CodeQuestionUpdateRequestAvroModel",
+  "name": "CodeQuestionUpdateResponseAvroModel",
   "namespace": "com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model",
   "type": "record",
   "fields": [
@@ -43,6 +43,10 @@
     {
       "name": "constraints",
       "type": "string"
+    },
+    {
+      "name": "updateSuccess",
+      "type": "boolean"
     }
   ]
 }

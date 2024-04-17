@@ -7,8 +7,11 @@ import com.backend.programming.learning.system.code.assessment.service.domain.en
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TestCaseId;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
+import org.aspectj.apache.bcel.classfile.Code;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,9 +24,10 @@ public class CodeQuestionDataAccessMapper {
                 .dslTemplate(codeQuestion.getDslTemplate())
                 .inputFormat(codeQuestion.getInputFormat())
                 .outputFormat(codeQuestion.getOutputFormat())
-                .isDeleted(codeQuestion.getIsDeleted())
                 .constraints(codeQuestion.getConstraints())
                 .testCases(testCasesToTestCaseEntities(codeQuestion.getTestCases()))
+                .failureMessages(codeQuestion.getFailureMessages() != null ?
+                        String.join(CodeQuestion.FAILURE_MESSAGE_DELIMITER, codeQuestion.getFailureMessages()) : "")
                 .build();
         if(codeQuestionEntity.getTestCases() != null)
             codeQuestionEntity.getTestCases()
@@ -38,8 +42,10 @@ public class CodeQuestionDataAccessMapper {
                 .constraints(codeQuestionEntity.getConstraints())
                 .inputFormat(codeQuestionEntity.getInputFormat())
                 .outputFormat(codeQuestionEntity.getOutputFormat())
-                .isDeleted(codeQuestionEntity.getIsDeleted())
                 .testCases(testCaseEntitiesToTestCases(codeQuestionEntity.getTestCases()))
+                .failureMessages(codeQuestionEntity.getFailureMessages().isEmpty() ? new ArrayList<>() :
+                        new ArrayList<>(Arrays.asList(codeQuestionEntity.getFailureMessages()
+                                .split(CodeQuestion.FAILURE_MESSAGE_DELIMITER))))
                 .build();
         return codeQuestion;
     }

@@ -44,7 +44,6 @@ public class CodeAssessmentApplicationServiceTest {
         command = CreateCodeQuestionCommand.builder()
                 .questionId(QUESTION_ID)
                 .dslTemplate("haha")
-                .isDeleted(false)
                 .problemStatement("haa")
                 .inputFormat("ha")
                 .outputFormat("hah")

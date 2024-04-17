@@ -1,33 +1,30 @@
 package com.backend.programming.learning.system.code.assessment.messaging.publisher.kafka;
 
-import com.backend.programming.learning.system.code.assessment.messaging.mapper.CodeAssessmentDataMapper;
+import com.backend.programming.learning.system.code.assessment.messaging.mapper.CodeQuestionMessagingDataMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.config.CodeAssessmentServiceConfigData;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionCreatedEvent;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.message.publisher.codequestion.CodeQuestionCreateMessagePublisher;
-import com.backend.programming.learning.system.kafka.code.assessment.avro.model.CodeQuestionUpdateRequestAvroModel;
+import com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.stereotype.Component;
-import org.apache.kafka.clients.producer.RecordMetadata;
-import org.springframework.kafka.support.SendResult;
-import org.springframework.util.concurrent.ListenableFutureCallback;
 
 
 @Component
 @Slf4j
 public class CreateCodeQuestionKafkaMessagePublisher implements CodeQuestionCreateMessagePublisher {
-    private final CodeAssessmentDataMapper codeAssessmentDataMapper;
+    private final CodeQuestionMessagingDataMapper codeQuestionMessagingDataMapper;
     private final CodeAssessmentServiceConfigData codeAssessmentServiceConfigData;
     private final KafkaProducer<String, CodeQuestionUpdateRequestAvroModel> kafkaProducer;
     private final CodeQuestionKafkaMessageHelper  codeQuestionKafkaMessageHelper;
 
     public CreateCodeQuestionKafkaMessagePublisher
-            (CodeAssessmentDataMapper codeAssessmentDataMapper,
+            (CodeQuestionMessagingDataMapper codeQuestionMessagingDataMapper,
              CodeAssessmentServiceConfigData codeAssessmentServiceConfigData,
              KafkaProducer<String, CodeQuestionUpdateRequestAvroModel> kafkaProducer,
              CodeQuestionKafkaMessageHelper codeQuestionKafkaMessageHelper) {
-        this.codeAssessmentDataMapper = codeAssessmentDataMapper;
+        this.codeQuestionMessagingDataMapper = codeQuestionMessagingDataMapper;
         this.codeAssessmentServiceConfigData = codeAssessmentServiceConfigData;
         this.kafkaProducer = kafkaProducer;
         this.codeQuestionKafkaMessageHelper = codeQuestionKafkaMessageHelper;
@@ -41,7 +38,7 @@ public class CreateCodeQuestionKafkaMessagePublisher implements CodeQuestionCrea
                 , codeQuestionId);
         try {
             CodeQuestionUpdateRequestAvroModel codeQuestionUpdateRequestAvroModel
-                    = codeAssessmentDataMapper
+                    = codeQuestionMessagingDataMapper
                     .codeQuestionCreatedEventToCodeQuestionUpdateRequestAvroModel(domainEvent);
 
             kafkaProducer.send(topicName,

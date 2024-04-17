@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.TestCase;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,8 +24,11 @@ public class CodeQuestionEntity {
     private String problemStatement;
     private String inputFormat;
     private String outputFormat;
-    private Boolean isDeleted;
+
+    @Enumerated(EnumType.STRING)
+    private CopyState state;
     private String constraints;
+    private String failureMessages;
 
     @OneToMany(mappedBy = "codeQuestion", cascade = CascadeType.ALL)
     private List<TestCaseEntity> testCases;

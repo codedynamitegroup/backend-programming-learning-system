@@ -20,13 +20,13 @@ public class CodeQuestionDataMaper {
                 .problemStatement(command.getProblemStatement())
                 .inputFormat(command.getInputFormat())
                 .outputFormat(command.getOutputFormat())
-                .isDeleted(command.getIsDeleted())
                 .constraints(command.getConstraints())
                 .build();
     }
     public CreateCodeQuestionResponse codeQuestionToCreateCodeQuestionReponse(CodeQuestion codeQuestion, String message){
         return CreateCodeQuestionResponse.builder()
                 .codeQuestionId(codeQuestion.getId())
+                .state(codeQuestion.getCopyState())
                 .message(message)
                 .build();
     }
