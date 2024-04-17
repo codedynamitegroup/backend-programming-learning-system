@@ -84,7 +84,7 @@ public class CertificateCourseController {
             @RequestParam(defaultValue = "10") Integer pageSize,
             @RequestParam(defaultValue = "false") Boolean fetchAll) {
         QueryAllCertificateCourseUsersResponse queryAllCertificateCourseUsersResponse =
-                certificateCourseApplicationService.queryAllCertificateCourseUsers(
+                certificateCourseUserApplicationService.queryAllCertificateCourseUsers(
                         QueryAllCertificateCourseUsersCommand
                         .builder()
                         .certificateCourseId(certificateCourseId)

@@ -21,7 +21,4 @@ public interface CertificateCourseApplicationService {
     DeleteCertificateCourseResponse deleteCertificateCourse(
             @Valid DeleteCertificateCourseCommand deleteCertificateCourseCommand);
 
-    QueryAllCertificateCourseUsersResponse queryAllCertificateCourseUsers(
-            @Valid QueryAllCertificateCourseUsersCommand queryAllCertificateCourseUsersCommand);
-
 }

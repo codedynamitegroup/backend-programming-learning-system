@@ -16,7 +16,4 @@ public interface CertificateCourseRepository {
     Page<CertificateCourse> findAll(Integer page, Integer size);
     int deleteCertificateCourse(UUID certificateCourseId);
     int updateAvgRating(CertificateCourseId certificateCourseId, Float avgRating);
-
-    Page<CertificateCourseUser> findAllByCertificateCourseId(
-            UUID certificateCourseId, Integer pageNo, Integer pageSize, Boolean fetchAll);
 }

@@ -4,7 +4,12 @@ import com.backend.programming.learning.system.core.service.dataaccess.certifica
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_user.repository.CertificateCourseUserJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourseUser;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseUserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+
+import java.util.UUID;
 
 @Component
 public class CertificateCourseUserRepositoryImpl implements CertificateCourseUserRepository {
@@ -27,5 +32,13 @@ public class CertificateCourseUserRepositoryImpl implements CertificateCourseUse
                                 certificateCourseUserToCertificateCourseUserEntity(certificateCourseUser)
                 )
             );
+    }
+
+    @Override
+    public Page<CertificateCourseUser> findAllByCertificateCourseId(
+            UUID certificateCourseId, Integer pageNo, Integer pageSize, Boolean fetchAll) {
+        Pageable paging = fetchAll ? Pageable.unpaged() : PageRequest.of(pageNo, pageSize);
+        return certificateCourseUserJpaRepository.findAllByCertificateCourseId(certificateCourseId, paging)
+                .map(certificateCourseUserDataAccessMapper::certificateCourseUserEntityToCertificateCourseUser);
     }
 }

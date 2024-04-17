@@ -69,11 +69,4 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
     public int updateAvgRating(CertificateCourseId certificateCourseId, Float avgRating) {
         return certificateCourseJpaRepository.updateAvgRating(avgRating, certificateCourseId.getValue());
     }
-
-    @Override
-    public Page<CertificateCourseUser> findAllByCertificateCourseId(UUID certificateCourseId, Integer pageNo, Integer pageSize, Boolean fetchAll) {
-        Pageable paging = fetchAll ? Pageable.unpaged() : PageRequest.of(pageNo, pageSize);
-        return certificateCourseUserJpaRepository.findAllByCertificateCourseId(certificateCourseId, paging)
-                .map(certificateCourseUserDataAccessMapper::certificateCourseUserEntityToCertificateCourseUser);
-    }
 }

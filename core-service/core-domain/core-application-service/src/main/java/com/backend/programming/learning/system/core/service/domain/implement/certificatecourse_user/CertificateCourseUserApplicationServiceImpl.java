@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.core.service.domain.implement.ce
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse_user.CreateCertificateCourseUserCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse_user.CreateCertificateCourseUserResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCourseUsersCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCourseUsersResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse_user.CertificateCourseUserApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,5 +22,10 @@ class CertificateCourseUserApplicationServiceImpl implements CertificateCourseUs
     @Override
     public CreateCertificateCourseUserResponse createCertificateCourseUser(CreateCertificateCourseUserCommand createCertificateCourseUserCommand) {
         return certificateCourseUserCommandHandler.createCertificateCourseUser(createCertificateCourseUserCommand);
+    }
+
+    @Override
+    public QueryAllCertificateCourseUsersResponse queryAllCertificateCourseUsers(QueryAllCertificateCourseUsersCommand queryAllCertificateCourseUsersCommand) {
+        return certificateCourseUserCommandHandler.findAllCertificateCourseUsers(queryAllCertificateCourseUsersCommand);
     }
 }

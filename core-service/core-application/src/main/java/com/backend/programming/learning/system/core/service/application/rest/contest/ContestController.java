@@ -6,9 +6,9 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest_user.CreateContestUserResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.DeleteContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.DeleteContestResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryContestCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCourseUsersCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCourseUsersResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.*;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest.ContestApplicationService;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest_user.ContestUserApplicationService;
@@ -66,6 +66,26 @@ public class ContestController {
                         .build());
         log.info("Returning all contests: {}", queryAllContestsResponse.getContests());
         return ResponseEntity.ok(queryAllContestsResponse);
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<QueryAllContestUsersResponse> getAllUsersOfContest(
+            @RequestParam UUID contestId,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "false") Boolean fetchAll) {
+//        QueryAllContestUsersResponse queryAllContestUsersResponse =
+//                contestApplicationService.queryAllContestUsers(
+//                        QueryAllContestUsersCommand
+//                                .builder()
+//                                .contestId(contestId)
+//                                .pageNo(pageNo)
+//                                .pageSize(pageSize)
+//                                .fetchAll(fetchAll)
+//                                .build());
+//        log.info("Returning all users of contest: {}", contestId);
+//        return ResponseEntity.ok(queryAllContestUsersResponse);
+        return null;
     }
 
     @GetMapping("/{id}")
