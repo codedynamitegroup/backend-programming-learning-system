@@ -1,23 +1,18 @@
 package com.backend.programming.learning.system.core.service.domain.implement.certificatecourse_user;
 
 import com.backend.programming.learning.system.core.service.domain.CoreDomainService;
-import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse.CreateCertificateCourseCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse_user.CreateCertificateCourseUserCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse_user.CreateCertificateCourseUserCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourseUser;
-import com.backend.programming.learning.system.core.service.domain.entity.Topic;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.exception.TopicNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
-import com.backend.programming.learning.system.core.service.domain.mapper.certificatecourse.CertificateCourseDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.certificatecourse_user.CertificateCourseUserDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseUserRepository;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.TopicRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

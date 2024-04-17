@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.implement.question.method.create;
 
 import com.backend.programming.learning.system.core.service.domain.CoreDomainService;
-import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQtypeEssayQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQtypeEssayQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeEssayQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;

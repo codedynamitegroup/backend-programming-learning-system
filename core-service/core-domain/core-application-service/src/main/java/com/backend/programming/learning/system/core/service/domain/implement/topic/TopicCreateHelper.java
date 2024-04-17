@@ -1,16 +1,12 @@
 package com.backend.programming.learning.system.core.service.domain.implement.topic;
 
 import com.backend.programming.learning.system.core.service.domain.CoreDomainService;
-import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.topic.CreateTopicCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.topic.CreateTopicCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
-import com.backend.programming.learning.system.core.service.domain.exception.CertificateCourseNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
-import com.backend.programming.learning.system.core.service.domain.mapper.review.ReviewDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.topic.TopicDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.TopicProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 import lombok.extern.slf4j.Slf4j;

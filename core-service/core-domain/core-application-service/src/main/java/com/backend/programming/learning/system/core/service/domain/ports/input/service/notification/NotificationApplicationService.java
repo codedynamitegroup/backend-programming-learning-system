@@ -1,11 +1,11 @@
 package com.backend.programming.learning.system.core.service.domain.ports.input.service.notification;
 
-import com.backend.programming.learning.system.core.service.domain.dto.create.notification.CreateNotificationCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.notification.CreateNotificationResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.delete.notification.DeleteNotificationCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.delete.notification.DeleteNotificationResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.notification.QueryAllNotificationsCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.query.notification.QueryAllNotificationsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.notification.CreateNotificationCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.notification.CreateNotificationResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.notification.DeleteNotificationCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.notification.DeleteNotificationResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.notification.QueryAllNotificationsCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.notification.QueryAllNotificationsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.update.notification.MarkReadNotificationCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.update.notification.MarkReadNotificationResponse;
 

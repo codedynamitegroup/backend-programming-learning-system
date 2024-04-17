@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.implement.question.handler;
 
-import com.backend.programming.learning.system.core.service.domain.dto.delete.question.QuestionDeleteResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.question.QuestionResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.question.QuestionDeleteResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseEntity.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
 import com.backend.programming.learning.system.core.service.domain.implement.question.method.delete.QuestionDeleteHelper;
 import com.backend.programming.learning.system.core.service.domain.implement.question.method.query.QuestionQueryHelper;

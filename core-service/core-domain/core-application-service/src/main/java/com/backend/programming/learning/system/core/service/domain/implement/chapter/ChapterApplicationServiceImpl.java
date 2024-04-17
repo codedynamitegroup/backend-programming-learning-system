@@ -1,13 +1,13 @@
 package com.backend.programming.learning.system.core.service.domain.implement.chapter;
 
-import com.backend.programming.learning.system.core.service.domain.dto.create.chapter.CreateChapterCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.chapter.CreateChapterResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.delete.chapter.DeleteChapterCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.delete.chapter.DeleteChapterResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.chapter.QueryAllChaptersCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.query.chapter.QueryAllChaptersResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.chapter.QueryChapterCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.query.chapter.QueryChapterResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter.CreateChapterCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter.CreateChapterResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.chapter.DeleteChapterCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.chapter.DeleteChapterResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryChapterCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryChapterResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.chapter.ChapterApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

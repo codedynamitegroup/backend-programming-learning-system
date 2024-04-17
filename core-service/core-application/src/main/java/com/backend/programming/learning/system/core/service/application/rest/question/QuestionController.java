@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.core.service.application.rest.question;
 
-import com.backend.programming.learning.system.core.service.domain.dto.delete.question.QuestionDeleteResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.question.QuestionResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.question.QuestionDeleteResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseEntity.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QuestionApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

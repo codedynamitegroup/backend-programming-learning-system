@@ -1,16 +1,12 @@
 package com.backend.programming.learning.system.core.service.domain.mapper.certificatecourse;
 
-import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse.CreateCertificateCourseCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse.CreateCertificateCourseResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryAllCertificateCoursesResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.chapter.QueryChapterResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.review.QueryReviewResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.topic.QueryTopicResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.user.QueryUserResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryTopicResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.user.QueryUserResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
-import com.backend.programming.learning.system.core.service.domain.mapper.chapter.ChapterDataMapper;
-import com.backend.programming.learning.system.core.service.domain.mapper.review.ReviewDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.topic.TopicDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
 import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;

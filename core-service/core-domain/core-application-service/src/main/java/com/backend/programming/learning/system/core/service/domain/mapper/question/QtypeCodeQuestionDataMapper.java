@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.mapper.question;
 
-import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQtypeCodeQuestionCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQtypeCodeQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQtypeCodeQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryQtypeCodeQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeCodeQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import org.springframework.stereotype.Component;

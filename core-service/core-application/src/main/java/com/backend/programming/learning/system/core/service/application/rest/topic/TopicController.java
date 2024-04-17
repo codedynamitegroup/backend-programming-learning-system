@@ -1,19 +1,13 @@
 package com.backend.programming.learning.system.core.service.application.rest.topic;
 
-import com.backend.programming.learning.system.core.service.domain.dto.create.topic.CreateTopicCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.topic.CreateTopicResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.delete.contest.DeleteContestCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.delete.contest.DeleteContestResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.delete.topic.DeleteTopicCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.delete.topic.DeleteTopicResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.contest.QueryAllContestsCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.query.contest.QueryAllContestsResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.contest.QueryContestCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.query.contest.QueryContestResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.topic.QueryAllTopicsCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.query.topic.QueryAllTopicsResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.topic.QueryTopicCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.query.topic.QueryTopicResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.topic.CreateTopicCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.topic.CreateTopicResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.topic.DeleteTopicCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.topic.DeleteTopicResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryTopicCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryTopicResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.topic.TopicApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

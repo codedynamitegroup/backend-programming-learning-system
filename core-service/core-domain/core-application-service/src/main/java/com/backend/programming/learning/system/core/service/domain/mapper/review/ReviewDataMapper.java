@@ -1,19 +1,13 @@
 package com.backend.programming.learning.system.core.service.domain.mapper.review;
 
-import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse.CreateCertificateCourseCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse.CreateCertificateCourseResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.review.QueryAllReviewsResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.review.QueryReviewResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.user.QueryUserResponse;
-import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.review.CreateReviewCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.review.CreateReviewResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryReviewResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.user.QueryUserResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
-import com.backend.programming.learning.system.core.service.domain.exception.TopicNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;

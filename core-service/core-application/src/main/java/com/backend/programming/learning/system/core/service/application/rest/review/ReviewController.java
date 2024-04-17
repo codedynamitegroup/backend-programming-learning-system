@@ -1,17 +1,13 @@
 package com.backend.programming.learning.system.core.service.application.rest.review;
 
-import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.delete.chapter.DeleteChapterCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.delete.chapter.DeleteChapterResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.delete.review.DeleteReviewCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.delete.review.DeleteReviewResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.chapter.QueryAllChaptersCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.query.chapter.QueryAllChaptersResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.review.QueryAllReviewsCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.query.review.QueryAllReviewsResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.review.QueryReviewCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.query.review.QueryReviewResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.review.CreateReviewCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.review.CreateReviewResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.review.DeleteReviewCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.review.DeleteReviewResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryReviewCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.review.ReviewApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

@@ -1,14 +1,10 @@
 package com.backend.programming.learning.system.core.service.domain.mapper.notification;
 
-import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse.CreateCertificateCourseCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse.CreateCertificateCourseResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.create.notification.CreateNotificationCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.notification.CreateNotificationResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.notification.QueryAllNotificationsResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.notification.QueryNotificationResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.user.QueryUserResponse;
-import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.notification.CreateNotificationCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.notification.CreateNotificationResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.notification.QueryAllNotificationsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.notification.QueryNotificationResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.user.QueryUserResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.Notification;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
@@ -16,8 +12,6 @@ import com.backend.programming.learning.system.core.service.domain.valueobject.N
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
 
 @Component
 public class NotificationDataMapper {

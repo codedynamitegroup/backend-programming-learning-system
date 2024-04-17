@@ -1,8 +1,8 @@
 package com.backend.programming.learning.system.core.service.domain.mapper.question;
 
-import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQuestionCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQuestionResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.question.QuestionResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseEntity.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.AnswerOfQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.Organization;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
@@ -38,7 +38,7 @@ public class QuestionDataMapper {
                 .build();
     }
 
-    public List<AnswerOfQuestion> answerOfQuestionListToAnswerOfQuestionEntityList(List<com.backend.programming.learning.system.core.service.domain.dto.create.question.AnswerOfQuestion> answerOfQuestions
+    public List<AnswerOfQuestion> answerOfQuestionListToAnswerOfQuestionEntityList(List<com.backend.programming.learning.system.core.service.domain.dto.method.create.question.AnswerOfQuestion> answerOfQuestions
             , QuestionId questionId) {
         return List.of(answerOfQuestions.stream()
                 .map(answerOfQuestion -> AnswerOfQuestion.builder()

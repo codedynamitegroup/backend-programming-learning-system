@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.implement.question.method.query;
 
-import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQtypeCodeQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryQtypeCodeQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeCodeQuestion;
 import com.backend.programming.learning.system.core.service.domain.exception.question.QtypeCodeQuestionNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QtypeCodeQuestionDataMapper;

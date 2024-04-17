@@ -1,15 +1,13 @@
 package com.backend.programming.learning.system.core.service.domain.implement.contest_user;
 
 import com.backend.programming.learning.system.core.service.domain.CoreDomainService;
-import com.backend.programming.learning.system.core.service.domain.dto.create.contest.CreateContestCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.contest_user.CreateContestUserCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest_user.CreateContestUserCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.Contest;
 import com.backend.programming.learning.system.core.service.domain.entity.ContestUser;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.exception.ContestNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
-import com.backend.programming.learning.system.core.service.domain.mapper.contest.ContestDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.contest_user.ContestUserDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ContestRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ContestUserRepository;

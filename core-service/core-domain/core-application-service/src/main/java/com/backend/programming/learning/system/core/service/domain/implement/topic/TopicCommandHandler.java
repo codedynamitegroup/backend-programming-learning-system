@@ -1,30 +1,19 @@
 package com.backend.programming.learning.system.core.service.domain.implement.topic;
 
-import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.create.topic.CreateTopicCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.topic.CreateTopicResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.delete.contest.DeleteContestResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.delete.topic.DeleteTopicCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.delete.topic.DeleteTopicResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.topic.QueryAllTopicsCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.query.topic.QueryAllTopicsResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.topic.QueryTopicCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.query.topic.QueryTopicResponse;
-import com.backend.programming.learning.system.core.service.domain.entity.Contest;
-import com.backend.programming.learning.system.core.service.domain.entity.Review;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.topic.CreateTopicCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.topic.CreateTopicResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.topic.DeleteTopicCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.topic.DeleteTopicResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryTopicCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryTopicResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.Topic;
-import com.backend.programming.learning.system.core.service.domain.implement.review.ReviewCreateHelper;
-import com.backend.programming.learning.system.core.service.domain.mapper.review.ReviewDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.topic.TopicDataMapper;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ReviewRepository;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.TopicRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Component
 @Slf4j
