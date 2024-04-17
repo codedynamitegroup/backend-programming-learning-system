@@ -13,6 +13,7 @@ import com.backend.programming.learning.system.core.service.domain.entity.TopicP
 import com.backend.programming.learning.system.core.service.domain.exception.ProgrammingLanguageNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.TopicNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.TopicProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 import org.springframework.stereotype.Component;
 
@@ -20,37 +21,23 @@ import java.util.List;
 
 @Component
 public class TopicProgrammingLanguageDataAccessMapper {
-
-    private final TopicJpaRepository topicJpaRepository;
-    private final ProgrammingLanguageJpaRepository programmingLanguageJpaRepository;
     private final TopicDataAccessMapper topicDataAccessMapper;
     private final ProgrammingLanguageDataAccessMapper programmingLanguageDataAccessMapper;
 
-    public TopicProgrammingLanguageDataAccessMapper(TopicJpaRepository topicJpaRepository,
-                                                    ProgrammingLanguageJpaRepository programmingLanguageJpaRepository,
-                                                    TopicDataAccessMapper topicDataAccessMapper,
+    public TopicProgrammingLanguageDataAccessMapper(TopicDataAccessMapper topicDataAccessMapper,
                                                     ProgrammingLanguageDataAccessMapper programmingLanguageDataAccessMapper) {
-        this.topicJpaRepository = topicJpaRepository;
-        this.programmingLanguageJpaRepository = programmingLanguageJpaRepository;
         this.topicDataAccessMapper = topicDataAccessMapper;
         this.programmingLanguageDataAccessMapper = programmingLanguageDataAccessMapper;
     }
 
     public TopicProgrammingLanguageEntity topicProgrammingLanguageToTopicProgrammingLanguageEntity(
             TopicProgrammingLanguage topicProgrammingLanguage) {
-        TopicEntity topic = topicJpaRepository
-                .findById(topicProgrammingLanguage.getTopic().getId().getValue())
-                .orElseThrow(() -> new TopicNotFoundException("Topic with id: " +
-                        topicProgrammingLanguage.getTopic().getId().getValue() + " could not be found!")
-                );
-
-        ProgrammingLanguageEntity programmingLanguage = programmingLanguageJpaRepository
-                .findById(topicProgrammingLanguage.getProgrammingLanguage().getId().getValue())
-                .orElseThrow(() -> new ProgrammingLanguageNotFoundException("Programming language with id: " +
-                        topicProgrammingLanguage.getProgrammingLanguage().getId().getValue() + " could not be found!")
-                );
+        TopicEntity topic = topicDataAccessMapper.topicToTopicEntity(topicProgrammingLanguage.getTopic());
+        ProgrammingLanguageEntity programmingLanguage = programmingLanguageDataAccessMapper
+                .programmingLanguageToProgrammingLanguageEntity(topicProgrammingLanguage.getProgrammingLanguage());
 
         return TopicProgrammingLanguageEntity.builder()
+                .id(topicProgrammingLanguage.getId().getValue())
                 .topic(topic)
                 .programmingLanguage(programmingLanguage)
                 .build();
@@ -62,6 +49,7 @@ public class TopicProgrammingLanguageDataAccessMapper {
         ProgrammingLanguage programmingLanguage = programmingLanguageDataAccessMapper
                 .programmingLanguageEntityToProgrammingLanguage(topicProgrammingLanguageEntity.getProgrammingLanguage());
         return TopicProgrammingLanguage.builder()
+                .id(new TopicProgrammingLanguageId(topicProgrammingLanguageEntity.getId()))
                 .topic(topic)
                 .programmingLanguage(programmingLanguage)
                 .build();

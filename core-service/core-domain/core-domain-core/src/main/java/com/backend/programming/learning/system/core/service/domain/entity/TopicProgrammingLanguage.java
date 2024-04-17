@@ -7,6 +7,8 @@ import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 
+import java.util.UUID;
+
 public class TopicProgrammingLanguage extends BaseEntity<TopicProgrammingLanguageId> {
     private Topic topic;
     private ProgrammingLanguage programmingLanguage;
@@ -15,6 +17,10 @@ public class TopicProgrammingLanguage extends BaseEntity<TopicProgrammingLanguag
         super.setId(builder.topicProgrammingLanguageId);
         topic = builder.topic;
         programmingLanguage = builder.programmingLanguage;
+    }
+
+    public void initializeTopicProgrammingLanguage() {
+        setId(new TopicProgrammingLanguageId(UUID.randomUUID()));
     }
 
     public static Builder builder() {
