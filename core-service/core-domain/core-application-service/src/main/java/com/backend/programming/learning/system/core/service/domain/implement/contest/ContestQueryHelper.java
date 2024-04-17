@@ -11,6 +11,7 @@ import com.backend.programming.learning.system.core.service.domain.ports.output.
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.ContestStartTimeFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -63,9 +64,11 @@ public class ContestQueryHelper {
 
     @Transactional(readOnly = true)
     public Page<Contest> queryAllContests(
-            Integer pageNo, Integer pageSize
+            String searchName, String startTimeFilter, Integer pageNo, Integer pageSize
     ) {
-        return contestRepository.findAll(pageNo, pageSize);
+        log.info("Querying all contests with searchName: {}, startTimeFilter: {}, pageNo: {}, pageSize: {}",
+                searchName, startTimeFilter, pageNo, pageSize);
+        return contestRepository.findAll(searchName, startTimeFilter, pageNo, pageSize);
     }
 }
 

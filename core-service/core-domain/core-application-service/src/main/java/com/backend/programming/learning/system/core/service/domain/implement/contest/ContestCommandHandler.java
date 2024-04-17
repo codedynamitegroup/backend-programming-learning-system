@@ -51,8 +51,12 @@ public class ContestCommandHandler {
     ) {
         Page<Contest> contests = contestQueryHelper
                 .queryAllContests(
+                        queryAllContestsCommand.getSearchName(),
+                        queryAllContestsCommand.getStartTimeFilter(),
                         queryAllContestsCommand.getPageNo(),
                         queryAllContestsCommand.getPageSize());
+
+        log.info("Returning all contests: {}", contests);
 
         return contestDataMapper.contestsToQueryAllContestsResponse(contests);
     }

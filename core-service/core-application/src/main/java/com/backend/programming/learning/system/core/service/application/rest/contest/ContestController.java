@@ -12,6 +12,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.qu
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest.ContestApplicationService;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest_user.ContestUserApplicationService;
+import com.backend.programming.learning.system.core.service.domain.valueobject.ContestStartTimeFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -55,6 +56,8 @@ public class ContestController {
 
     @GetMapping
     public ResponseEntity<QueryAllContestsResponse> getAllContests(
+            @RequestParam(defaultValue = "") String searchName,
+            @RequestParam(defaultValue = "UPCOMING") String startTimeFilter,
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize
     ) {
@@ -63,6 +66,8 @@ public class ContestController {
                         .builder()
                         .pageNo(pageNo)
                         .pageSize(pageSize)
+                        .searchName(searchName)
+                        .startTimeFilter(startTimeFilter)
                         .build());
         log.info("Returning all contests: {}", queryAllContestsResponse.getContests());
         return ResponseEntity.ok(queryAllContestsResponse);

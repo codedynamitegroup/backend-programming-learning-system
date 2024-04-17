@@ -42,6 +42,7 @@ public class ContestDataMapper {
     public CreateContestResponse contestToCreateContestResponse(Contest contest, String message) {
         return CreateContestResponse.builder()
                 .contestId(contest.getId().getValue())
+                .name(contest.getName())
                 .message(message)
                 .build();
     }
@@ -58,6 +59,8 @@ public class ContestDataMapper {
                 .endTime(contest.getEndTime())
                 .createdBy(createdByResponse)
                 .updatedBy(updatedByResponse)
+                .createdAt(contest.getCreatedAt())
+                .updatedAt(contest.getUpdatedAt())
                 .build();
     }
 
@@ -66,6 +69,9 @@ public class ContestDataMapper {
                 .contests(contests.stream()
                         .map(this::contestToQueryContestResponse)
                         .collect(Collectors.toList()))
+                .currentPage(contests.getNumber())
+                .totalPages(contests.getTotalPages())
+                .totalItems(contests.getTotalElements())
                 .build();
     }
 

@@ -36,24 +36,27 @@ public class ContestCreateHelper {
 
     @Transactional
     public Contest persistContest(CreateContestCommand createContestCommand) {
-        checkUser(createContestCommand.getCreatedBy());
-        checkUser(createContestCommand.getUpdatedBy());
+        User createdBy = getUser(createContestCommand.getCreatedBy());
+        User updatedBy = getUser(createContestCommand.getUpdatedBy());
 
         Contest contest = contestDataMapper.
                 createContestCommandToContest(createContestCommand);
         coreDomainService.createContest(contest);
+        contest.setCreatedBy(createdBy);
+        contest.setUpdatedBy(updatedBy);
         Contest contestResult = saveContest(contest);
 
         log.info("Contest created with id: {}", contestResult.getId().getValue());
         return contestResult;
     }
 
-    private void checkUser(UUID userId) {
+    private User getUser(UUID userId) {
         Optional<User> user = userRepository.findUser(userId);
         if (user.isEmpty()) {
             log.warn("User with id: {} not found", userId);
             throw new UserNotFoundException("Could not find user with id: " + userId);
         }
+        return user.get();
     }
 
     private Contest saveContest(Contest contest) {
