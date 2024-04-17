@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.core.service.domain.ports.output
 
 import com.backend.programming.learning.system.core.service.domain.dto.query.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
+import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,4 +13,5 @@ public interface QuestionRepository {
     Optional<Question> findQuestion(UUID id);
     List<QuestionResponseEntity> findAllQuestion();
     void deleteQuestion(UUID id);
+    QuestionType getQtype(UUID id);
 }

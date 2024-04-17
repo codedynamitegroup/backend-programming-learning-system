@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.core.service.domain.CoreDomainSer
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQtypeEssayQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeEssayQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
-import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
+import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QtypeEssayQuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeEssayQuestionRepository;
 import lombok.extern.slf4j.Slf4j;

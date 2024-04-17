@@ -9,4 +9,5 @@ public interface AnswerOfQuestionRepository {
     AnswerOfQuestion saveAnswerOfQuestion(AnswerOfQuestion answerOfQuestion);
     List<AnswerOfQuestion> saveAllAnswerOfQuestion(List<AnswerOfQuestion> answerOfQuestionList);
     void deleteAnswerOfQuestion(UUID answerId);
+    void deleteAllAnswerOfQuestionByQuestionId(UUID questionId);
 }

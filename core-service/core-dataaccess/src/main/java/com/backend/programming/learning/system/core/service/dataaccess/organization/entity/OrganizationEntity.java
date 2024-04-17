@@ -1,12 +1,11 @@
 package com.backend.programming.learning.system.core.service.dataaccess.organization.entity;
 
+import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -26,6 +25,9 @@ public class OrganizationEntity {
     private String moodleUrl;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
+
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.REMOVE)
+    private List<QuestionEntity> questions;
 
     @Override
     public boolean equals(Object o) {

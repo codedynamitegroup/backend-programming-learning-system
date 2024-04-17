@@ -47,4 +47,9 @@ public class QtypeEssayQuestionRepositoryImpl implements QtypeEssayQuestionRepos
     public void deleteQtypeEssayQuestion(UUID qtEssayQuestionId) {
 
     }
+
+    @Override
+    public UUID getId(UUID questionId) {
+        return qtypeEssayQuestionJpaRepository.getId(questionId);
+    }
 }

@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.core.service.dataaccess.question.
 import com.backend.programming.learning.system.core.service.domain.dto.query.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QuestionRepository;
+import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -47,5 +48,10 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     @Override
     public void deleteQuestion(UUID id) {
         questionJpaRepository.deleteById(id);
+    }
+
+    @Override
+    public QuestionType getQtype(UUID id) {
+        return QuestionType.valueOf(questionJpaRepository.getQtype(id));
     }
 }

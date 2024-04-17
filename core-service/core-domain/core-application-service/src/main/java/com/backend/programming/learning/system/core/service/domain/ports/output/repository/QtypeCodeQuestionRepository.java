@@ -10,5 +10,5 @@ public interface QtypeCodeQuestionRepository {
     QtypeCodeQuestion saveQtypeCodeQuestion(QtypeCodeQuestion qtypeCodeQuestion);
     Optional<QtypeCodeQuestion> findQtypeCodeQuestion(UUID qtCodeQuestionId);
     List<QtypeCodeQuestion> findAllQtypeCodeQuestions();
-    void deleteQtypeCodeQuestion(UUID qtCodeQuestionId);
+    UUID getId(UUID questionId);
 }

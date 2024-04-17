@@ -7,7 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.entity.Answer
 import com.backend.programming.learning.system.core.service.domain.entity.Organization;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
-import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
+import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionType;
@@ -62,6 +62,7 @@ public class QuestionDataMapper {
     // question to query question response
     public QuestionResponseEntity questionToQuestionResponseEntity(Question question) {
         return QuestionResponseEntity.builder()
+                .id(question.getId().getValue().toString())
                 .organization(question.getOrganization())
                 .name(question.getName())
                 .questionText(question.getQuestionText())

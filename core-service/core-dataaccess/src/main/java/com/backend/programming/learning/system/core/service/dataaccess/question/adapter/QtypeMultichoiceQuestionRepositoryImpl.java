@@ -46,4 +46,9 @@ public class QtypeMultichoiceQuestionRepositoryImpl implements QtypeMultichoiceQ
     public void deleteQtypeMultipleChoiceQuestion(UUID qtMultipleChoiceQuestionId) {
 
     }
+
+    @Override
+    public UUID getId(UUID questionId) {
+        return qtypeMultichoiceQuestionJpaRepository.getId(questionId);
+    }
 }

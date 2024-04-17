@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.core.service.dataaccess.user.mapp
 import com.backend.programming.learning.system.core.service.domain.dto.query.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
+import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -62,6 +63,7 @@ public class QuestionDataAccessMapper {
 
     public QuestionResponseEntity questionEntityToQuestionResponseEntity(QuestionEntity questionEntity) {
         return QuestionResponseEntity.builder()
+                .id(questionEntity.getId().toString())
                 .organization(organizationDataAccessMapper.organizationEntityToOrganization(questionEntity.getOrganization()))
                 .difficulty(questionEntity.getDifficulty())
                 .name(questionEntity.getName())

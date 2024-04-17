@@ -44,7 +44,7 @@ public class QtypeCodeQuestionRepositoryImpl implements QtypeCodeQuestionReposit
     }
 
     @Override
-    public void deleteQtypeCodeQuestion(UUID qtCodeQuestionId) {
-
+    public UUID getId(UUID questionId) {
+        return qtypeCodeQuestionJpaRepository.getId(questionId);
     }
 }

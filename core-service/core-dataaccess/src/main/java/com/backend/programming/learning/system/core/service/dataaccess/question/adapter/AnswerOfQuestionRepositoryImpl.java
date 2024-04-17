@@ -41,4 +41,9 @@ public class AnswerOfQuestionRepositoryImpl implements AnswerOfQuestionRepositor
     public void deleteAnswerOfQuestion(UUID answerId) {
         answerOfQuestionJpaRepository.deleteById(answerId);
     }
+
+    @Override
+    public void deleteAllAnswerOfQuestionByQuestionId(UUID questionId) {
+        answerOfQuestionJpaRepository.deleteByQuestionId(questionId);
+    }
 }

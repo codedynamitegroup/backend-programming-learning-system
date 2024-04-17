@@ -12,6 +12,7 @@ import lombok.Getter;
 
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.UUID;
 
 
 @Getter
@@ -19,6 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 public class QuestionResponseEntity {
 //    private final Question question;
+    private final String id;
     private final Organization organization;
     private final QuestionDifficulty difficulty;
     private final String name;

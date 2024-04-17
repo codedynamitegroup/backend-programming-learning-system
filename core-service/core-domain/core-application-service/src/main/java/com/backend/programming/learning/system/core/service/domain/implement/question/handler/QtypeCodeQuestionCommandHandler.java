@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.core.service.domain.implement.qu
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQtypeCodeQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQtypeCodeQuestionResponse;
-import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
+import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.implement.question.method.create.QtypeCodeQuestionCreateHelper;
 import com.backend.programming.learning.system.core.service.domain.implement.question.method.query.QtypeCodeQuestionQueryHelper;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
