@@ -1,8 +1,11 @@
 package com.backend.programming.learning.system.core.service.dataaccess.topic.entity;
 
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.topic_programminglanguage.entity.TopicProgrammingLanguageEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import javax.persistence.*;
+
+import com.backend.programming.learning.system.core.service.domain.entity.TopicProgrammingLanguage;
 import lombok.*;
 
 import java.time.ZonedDateTime;
@@ -34,6 +37,9 @@ public class TopicEntity {
 
     @OneToMany(mappedBy = "topic", cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     private List<CertificateCourseEntity> certificateCourses;
+
+//    @OneToMany(mappedBy = "topic", cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+//    private List<TopicProgrammingLanguageEntity> topicProgrammingLanguages;
 
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;

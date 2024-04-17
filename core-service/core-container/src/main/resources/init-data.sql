@@ -12,3 +12,9 @@ INSERT INTO public.organization(id, name, description)
 VALUES
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb45', 'Codecademy', 'Codecademy is an American online interactive platform that offers free coding classes in 12 different programming languages including Python, Java, JavaScript (jQuery, AngularJS, React.js), Ruby, SQL, and Sass, as well as markup languages HTML and CSS.'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb46', 'Coursera', 'Coursera is an American massive open online course provider founded in 2012 by Stanford University computer science professors Andrew Ng and Daphne Koller that offers massive open online courses, specializations, degrees, professional and mastertrack courses.');
+
+INSERT INTO public.programming_language(id, name, compiler_api_id)
+VALUES
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb47', 'Python (2.7.17)', 70),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', 'Java (OpenJDK 13.0.1)', 62),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb49', 'C++ (GCC 9.2.0)', 54);

@@ -55,15 +55,12 @@ public class TopicCreateHelper {
         Topic topicResult = saveTopic(topic);
 
         for (UUID programmingLanguageId : createTopicCommand.getProgrammingLanguageIds()) {
-            checkProgrammingLanguage(programmingLanguageId);
+            ProgrammingLanguage programmingLanguage = getProgrammingLanguage(programmingLanguageId);
             TopicProgrammingLanguage topicProgrammingLanguage =
                     TopicProgrammingLanguage.builder()
                             .id(new TopicProgrammingLanguageId(UUID.randomUUID()))
-                            .topic(Topic.builder().id(topicResult.getId()).build())
-                            .programmingLanguage(
-                                    ProgrammingLanguage.builder().id(
-                                            new ProgrammingLanguageId(programmingLanguageId))
-                                            .build())
+                            .topic(topicResult)
+                            .programmingLanguage(programmingLanguage)
                             .build();
             TopicProgrammingLanguage topicProgrammingLanguageResult =
                     saveTopicProgrammingLanguage(topicProgrammingLanguage);
@@ -82,13 +79,14 @@ public class TopicCreateHelper {
         }
     }
 
-    private void checkProgrammingLanguage(UUID programmingLanguageId) {
+    private ProgrammingLanguage getProgrammingLanguage(UUID programmingLanguageId) {
         Optional<ProgrammingLanguage> programmingLanguage = programmingLanguageRepository.
                 findById(new ProgrammingLanguageId(programmingLanguageId));
         if (programmingLanguage.isEmpty()) {
             log.warn("Programming language with id: {} not found", programmingLanguageId);
             throw new UserNotFoundException("Could not find programming language with id: " + programmingLanguageId);
         }
+        return programmingLanguage.get();
     }
 
     private Topic saveTopic(Topic topic) {

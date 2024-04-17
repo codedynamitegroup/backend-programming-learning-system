@@ -26,8 +26,7 @@ public class TopicRepositoryImpl implements TopicRepository {
     @Override
     public Topic saveTopic(Topic topic) {
         return topicDataAccessMapper.topicEntityToTopic(topicJpaRepository
-                .save(topicDataAccessMapper
-                        .topicToTopicEntity(topic)));
+                .save(topicDataAccessMapper.topicToTopicEntity(topic)));
     }
 
     @Override
