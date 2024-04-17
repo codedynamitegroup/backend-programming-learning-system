@@ -97,5 +97,17 @@ public class CoreGlobalExceptionHandler extends GlobalExceptionHandler {
                 .message(reviewNotFoundException.getMessage())
                 .build();
     }
+
+    @ResponseBody
+    @ExceptionHandler(value = {ContestNotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorDTO handleException(ContestNotFoundException contestNotFoundException) {
+        log.error(contestNotFoundException.getMessage(), contestNotFoundException);
+        return ErrorDTO.builder()
+                .status(HttpStatus.NOT_FOUND.value())
+                .code(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .message(contestNotFoundException.getMessage())
+                .build();
+    }
 }
 

@@ -15,7 +15,7 @@ public class Contest extends AggregateRoot<ContestId> {
     private String description;
     private ZonedDateTime startTime;
     private ZonedDateTime endTime;
-    private final User createdBy;
+    private User createdBy;
     private User updatedBy;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
@@ -72,6 +72,38 @@ public class Contest extends AggregateRoot<ContestId> {
 
     public ZonedDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setStartTime(ZonedDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(ZonedDateTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public void setUpdatedBy(User updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public void setCreatedAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(ZonedDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
 

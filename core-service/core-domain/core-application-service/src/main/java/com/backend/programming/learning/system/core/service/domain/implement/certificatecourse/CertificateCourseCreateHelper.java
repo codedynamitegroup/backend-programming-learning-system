@@ -76,7 +76,7 @@ public class CertificateCourseCreateHelper {
     }
 
     private Topic getTopic(UUID topicId) {
-        Optional<Topic> topic = topicRepository.findByID(new TopicId(topicId));
+        Optional<Topic> topic = topicRepository.findById(new TopicId(topicId));
         if (topic.isEmpty()) {
             log.warn("Topic with id: {} not found", topicId);
             throw new TopicNotFoundException("Could not find topic with id: " + topicId);

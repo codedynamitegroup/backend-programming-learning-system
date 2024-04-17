@@ -16,6 +16,8 @@ import com.backend.programming.learning.system.core.service.domain.valueobject.T
 import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class TopicProgrammingLanguageDataAccessMapper {
 
@@ -63,5 +65,12 @@ public class TopicProgrammingLanguageDataAccessMapper {
                 .topic(topic)
                 .programmingLanguage(programmingLanguage)
                 .build();
+    }
+
+    public List<TopicProgrammingLanguage> topicProgrammingLanguageEntityListToTopicProgrammingLanguageList(
+            List<TopicProgrammingLanguageEntity> topicProgrammingLanguageEntities) {
+        return topicProgrammingLanguageEntities.stream()
+                .map(this::topicProgrammingLanguageEntityToTopicProgrammingLanguage)
+                .toList();
     }
 }
