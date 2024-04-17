@@ -4,11 +4,10 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.certificatecourse.DeleteCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.certificatecourse.DeleteCertificateCourseResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryCertificateCourseCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.*;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
+import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourseUser;
 import com.backend.programming.learning.system.core.service.domain.mapper.certificatecourse.CertificateCourseDataMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -76,5 +75,20 @@ public class CertificateCourseCommandHandler {
                 .certificateCourseId(deleteCertificateCourseCommand.getCertificateCourseId())
                 .message("Certificate course deleted successfully")
                 .build();
+    }
+
+    @Transactional(readOnly = true)
+    public QueryAllCertificateCourseUsersResponse findAllCertificateCourseUsers(
+            QueryAllCertificateCourseUsersCommand queryAllCertificateCourseUsersCommand) {
+        Page<CertificateCourseUser> certificateCourseUsers = certificateCourseQueryHelper
+                .queryAllCertificateCourseUsers(
+                        queryAllCertificateCourseUsersCommand.getCertificateCourseId(),
+                        queryAllCertificateCourseUsersCommand.getPageNo(),
+                        queryAllCertificateCourseUsersCommand.getPageSize(),
+                        queryAllCertificateCourseUsersCommand.getFetchAll());
+
+        return certificateCourseDataMapper
+                .certificateCourseUsersToQueryAllCertificateCourseUsersResponse(
+                        certificateCourseUsers);
     }
 }

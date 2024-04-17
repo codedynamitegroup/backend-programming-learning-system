@@ -40,7 +40,7 @@ public class TopicController {
     public ResponseEntity<QueryAllTopicsResponse> getAllTopics(
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize,
-            @RequestParam Boolean fetchAll
+            @RequestParam(defaultValue = "false") Boolean fetchAll
     ) {
         QueryAllTopicsResponse queryAllTopicsResponse =
                 topicApplicationService.queryAllTopics(QueryAllTopicsCommand

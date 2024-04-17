@@ -17,7 +17,7 @@ DROP TYPE IF EXISTS notification_event_type;
 CREATE TYPE notification_event_type AS ENUM ('USER', 'COURSE');
 
 DROP TYPE IF EXISTS plagiarism_detection_report_status;
-CREATE TYPE plagiarism_detection_report_status AS ENUM ('PENDING', 'PROCESSING', 'COMPLETED', 'FAILED');
+CREATE TYPE plagiarism_detection_report_status AS ENUM ('PROCESSING', 'COMPLETED', 'FAILED');
 
 DROP TABLE IF EXISTS "public".user CASCADE;
 
@@ -461,7 +461,7 @@ CREATE TABLE "public".calendar_event
     name text,
     description text,
     event_type notification_event_type NOT NULL,
-    start_time TIMESTAMP WITH TIME ZONE,
+    start_time TIMESTAMP WITH TIME ZONE NOT NULL,
     end_time TIMESTAMP WITH TIME ZONE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT calendar_event_pkey PRIMARY KEY (id)

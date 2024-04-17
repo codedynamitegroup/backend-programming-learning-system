@@ -47,8 +47,8 @@ public class ContestDataMapper {
     }
 
     public ContestResponseEntity contestToQueryContestResponse(Contest contest) {
-        UserResponseEntity createdByResponse = userDataMapper.userToQueryUserResponse(contest.getCreatedBy());
-        UserResponseEntity updatedByResponse = userDataMapper.userToQueryUserResponse(contest.getUpdatedBy());
+        UserResponseEntity createdByResponse = userDataMapper.userToUserResponseEntity(contest.getCreatedBy());
+        UserResponseEntity updatedByResponse = userDataMapper.userToUserResponseEntity(contest.getUpdatedBy());
 
         return ContestResponseEntity.builder()
                 .contestId(contest.getId().getValue())

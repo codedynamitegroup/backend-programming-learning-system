@@ -52,9 +52,9 @@ public class NotificationDataMapper {
 
     public NotificationResponseEntity notificationToQueryNotificationResponse(Notification notification) {
         UserResponseEntity userFromResponse = notification.getUserFrom() != null
-                ? userDataMapper.userToQueryUserResponse(notification.getUserFrom())
+                ? userDataMapper.userToUserResponseEntity(notification.getUserFrom())
                 : null;
-        UserResponseEntity userToResponse = userDataMapper.userToQueryUserResponse(notification.getUserTo());
+        UserResponseEntity userToResponse = userDataMapper.userToUserResponseEntity(notification.getUserTo());
 
         return NotificationResponseEntity.builder()
                 .notificationId(notification.getId().getValue())

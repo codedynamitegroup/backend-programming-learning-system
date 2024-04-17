@@ -2,15 +2,22 @@ package com.backend.programming.learning.system.core.service.domain.mapper.certi
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse_user.CreateCertificateCourseUserCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse_user.CreateCertificateCourseUserResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseUserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourseUser;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
+import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CertificateCourseUserDataMapper {
+    private final UserDataMapper userDataMapper;
+
+    public CertificateCourseUserDataMapper(UserDataMapper userDataMapper) {
+        this.userDataMapper = userDataMapper;
+    }
     public CertificateCourseUser createCertificateCourseUserCommandToCertificateCourseUser(
             CreateCertificateCourseUserCommand createCertificateCourseUserCommand) {
         return CertificateCourseUser.builder()
@@ -30,6 +37,18 @@ public class CertificateCourseUserDataMapper {
                 .certificateCourseId(certificateCourseUser.getCertificateCourse().getId().getValue())
                 .userId(certificateCourseUser.getUser().getId().getValue())
                 .message(message)
+                .build();
+    }
+
+    public CertificateCourseUserResponseEntity certificateCourseUserToCertificateCourseUserResponseEntity(
+            CertificateCourseUser certificateCourseUser) {
+        return CertificateCourseUserResponseEntity.builder()
+                .certificateCourseId(certificateCourseUser.getCertificateCourse().getId().getValue())
+                .user(userDataMapper.userToUserResponseEntity(certificateCourseUser.getUser()))
+                .isCompleted(certificateCourseUser.getCompleted())
+                .completedAt(certificateCourseUser.getCompletedAt())
+                .createdAt(certificateCourseUser.getCreatedAt())
+                .updatedAt(certificateCourseUser.getUpdatedAt())
                 .build();
     }
 }

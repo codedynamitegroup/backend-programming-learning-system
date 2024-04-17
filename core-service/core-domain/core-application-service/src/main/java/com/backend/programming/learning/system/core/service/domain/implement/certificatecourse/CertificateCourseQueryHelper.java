@@ -66,6 +66,15 @@ public class CertificateCourseQueryHelper {
         return certificateCourseRepository.findAll(pageNo, pageSize);
     }
 
+    @Transactional(readOnly = true)
+    public Page<CertificateCourseUser> queryAllCertificateCourseUsers(
+            UUID certificateCourseId,
+            Integer pageNo,
+            Integer pageSize,
+            Boolean fetchAll) {
+        return certificateCourseRepository.findAllByCertificateCourseId(certificateCourseId, pageNo, pageSize, fetchAll);
+    }
+
 }
 
 
