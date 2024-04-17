@@ -19,6 +19,7 @@ public class CourseRepositoryImpl implements CourseRepository {
         this.courseJpaRepository = courseJpaRepository;
         this.courseDataAccessMapper = courseDataAccessMapper;
     }
+
     @Override
     public Course saveCourse(Course course) {
         return courseDataAccessMapper.courseEntityToCourse(courseJpaRepository
