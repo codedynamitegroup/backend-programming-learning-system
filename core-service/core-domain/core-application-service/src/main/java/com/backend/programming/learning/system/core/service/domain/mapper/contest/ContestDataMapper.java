@@ -3,8 +3,8 @@ package com.backend.programming.learning.system.core.service.domain.mapper.conte
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest.CreateContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest.CreateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryContestResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.user.QueryUserResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Contest;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
@@ -46,11 +46,11 @@ public class ContestDataMapper {
                 .build();
     }
 
-    public QueryContestResponse contestToQueryContestResponse(Contest contest) {
-        QueryUserResponse createdByResponse = userDataMapper.userToQueryUserResponse(contest.getCreatedBy());
-        QueryUserResponse updatedByResponse = userDataMapper.userToQueryUserResponse(contest.getUpdatedBy());
+    public ContestResponseEntity contestToQueryContestResponse(Contest contest) {
+        UserResponseEntity createdByResponse = userDataMapper.userToQueryUserResponse(contest.getCreatedBy());
+        UserResponseEntity updatedByResponse = userDataMapper.userToQueryUserResponse(contest.getUpdatedBy());
 
-        return QueryContestResponse.builder()
+        return ContestResponseEntity.builder()
                 .contestId(contest.getId().getValue())
                 .name(contest.getName())
                 .description(contest.getDescription())

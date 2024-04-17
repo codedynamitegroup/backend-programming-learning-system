@@ -7,7 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryCertificateCourseCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse.CertificateCourseApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ class CertificateCourseApplicationServiceImpl implements CertificateCourseApplic
     }
 
     @Override
-    public QueryCertificateCourseResponse queryCertificateCourse(
+    public CertificateCourseResponseEntity queryCertificateCourse(
             @Valid QueryCertificateCourseCommand queryCertificateCourseCommand) {
         return certificateCourseCommandHandler.findCertificateCourseById(queryCertificateCourseCommand);
     }

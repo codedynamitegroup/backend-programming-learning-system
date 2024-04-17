@@ -7,7 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryChapterCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryChapterResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
 import com.backend.programming.learning.system.core.service.domain.mapper.chapter.ChapterDataMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -72,7 +72,7 @@ public class ChapterCommandHandler {
     }
 
     @Transactional(readOnly = true)
-    public QueryChapterResponse queryChapterResponse(
+    public ChapterResponseEntity queryChapterResponse(
             QueryChapterCommand queryChapterCommand) {
         Chapter chapter = chapterQueryHelper
                 .queryChapterById(queryChapterCommand.getChapterId());

@@ -3,9 +3,9 @@ package com.backend.programming.learning.system.core.service.domain.mapper.chapt
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter.CreateChapterCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter.CreateChapterResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryChapterResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.responseEntity.QuestionResponseEntity;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.user.QueryUserResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.QuestionResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
@@ -56,17 +56,17 @@ private final QuestionDataMapper questionDataMapper;
                 .build();
     }
 
-    public QueryChapterResponse chapterToQueryChapterResponse(Chapter chapter) {
+    public ChapterResponseEntity chapterToQueryChapterResponse(Chapter chapter) {
         List<QuestionResponseEntity> queryQuestionResponses = new ArrayList<>();
         for (Question question : chapter.getQuestions()) {
             queryQuestionResponses.add(
                     questionDataMapper.questionToQuestionResponseEntity(question));
         }
 
-        QueryUserResponse createdByResponse = userDataMapper.userToQueryUserResponse(chapter.getCreatedBy());
-        QueryUserResponse updatedByResponse = userDataMapper.userToQueryUserResponse(chapter.getUpdatedBy());
+        UserResponseEntity createdByResponse = userDataMapper.userToQueryUserResponse(chapter.getCreatedBy());
+        UserResponseEntity updatedByResponse = userDataMapper.userToQueryUserResponse(chapter.getUpdatedBy());
 
-        return QueryChapterResponse.builder()
+        return ChapterResponseEntity.builder()
                 .chapterId(chapter.getId().getValue())
                 .certificateCourseId(chapter.getCertificateCourseId().getValue())
                 .no(chapter.getNo())
@@ -81,12 +81,12 @@ private final QuestionDataMapper questionDataMapper;
     }
 
     public QueryAllChaptersResponse chaptersToQueryAllChaptersResponse(List<Chapter> chapters) {
-        List<QueryChapterResponse> queryChapterResponses = new ArrayList<>();
+        List<ChapterResponseEntity> chapterResponsEntities = new ArrayList<>();
         for (Chapter chapter : chapters) {
-            queryChapterResponses.add(chapterToQueryChapterResponse(chapter));
+            chapterResponsEntities.add(chapterToQueryChapterResponse(chapter));
         }
         return QueryAllChaptersResponse.builder()
-                .chapters(queryChapterResponses)
+                .chapters(chapterResponsEntities)
                 .build();
     }
 

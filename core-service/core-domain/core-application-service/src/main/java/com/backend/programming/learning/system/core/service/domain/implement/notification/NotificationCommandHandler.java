@@ -6,8 +6,8 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.notification.DeleteNotificationResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.notification.QueryAllNotificationsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.notification.QueryAllNotificationsResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.update.notification.MarkReadNotificationCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.update.notification.MarkReadNotificationResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.notification.MarkReadNotificationCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.notification.MarkReadNotificationResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.Notification;
 import com.backend.programming.learning.system.core.service.domain.mapper.notification.NotificationDataMapper;
 import lombok.extern.slf4j.Slf4j;

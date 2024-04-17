@@ -16,6 +16,9 @@ CREATE TYPE qtype AS ENUM ('MULTIPLE_CHOICE', 'SHORT_ANSWER', 'CODE', 'ESSAY');
 DROP TYPE IF EXISTS notification_event_type;
 CREATE TYPE notification_event_type AS ENUM ('USER', 'COURSE');
 
+DROP TYPE IF EXISTS plagiarism_detection_report_status;
+CREATE TYPE plagiarism_detection_report_status AS ENUM ('PENDING', 'PROCESSING', 'COMPLETED', 'FAILED');
+
 DROP TABLE IF EXISTS "public".user CASCADE;
 
 CREATE TABLE "public".user
@@ -446,6 +449,43 @@ CREATE TABLE "public".code_submission
         ON DELETE CASCADE,
     CONSTRAINT code_submission_programming_language_id_fkey FOREIGN KEY (programming_language_id)
         REFERENCES "public".programming_language (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS "public".calendar_event CASCADE;
+
+CREATE TABLE "public".calendar_event
+(
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
+    name text,
+    description text,
+    event_type notification_event_type NOT NULL,
+    start_time TIMESTAMP WITH TIME ZONE,
+    end_time TIMESTAMP WITH TIME ZONE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT calendar_event_pkey PRIMARY KEY (id)
+);
+
+DROP TABLE IF EXISTS "public".plagiarism_detection_report CASCADE;
+
+CREATE TABLE "public".plagiarism_detection_report
+(
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
+    programming_language_id uuid NOT NULL,
+    exam_id uuid NOT NULL,
+    question_id uuid NOT NULL,
+    name text,
+    status plagiarism_detection_report_status NOT NULL,
+    pairs_json_content text,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT plagiarism_detection_report_pkey PRIMARY KEY (id),
+    CONSTRAINT plagiarism_detection_report_programming_language_id_fkey FOREIGN KEY (programming_language_id)
+        REFERENCES "public".programming_language (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT plagiarism_detection_report_question_id_fkey FOREIGN KEY (question_id)
+        REFERENCES "public".question (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );

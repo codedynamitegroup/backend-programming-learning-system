@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.core.service.domain.dto.method.query.programminglanguage;
+package com.backend.programming.learning.system.core.service.domain.dto.responseentity.programminglanguage;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +10,7 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class QueryProgrammingLanguageResponse {
+public class ProgrammingLanguageResponseEntity {
     @NotNull
     private final UUID programmingLanguageId;
     @NotNull

@@ -7,7 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryTopicCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryTopicResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.topic.TopicApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -54,14 +54,14 @@ public class TopicController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<QueryTopicResponse> getTopic(@PathVariable UUID id) {
-        QueryTopicResponse queryTopicResponse =
+    public ResponseEntity<TopicResponseEntity> getTopic(@PathVariable UUID id) {
+        TopicResponseEntity topicResponseEntity =
                 topicApplicationService.queryTopic(QueryTopicCommand
                         .builder()
                         .topicId(id)
                         .build());
-        log.info("Returning topic: {}", queryTopicResponse.getTopicId());
-        return  ResponseEntity.ok(queryTopicResponse);
+        log.info("Returning topic: {}", topicResponseEntity.getTopicId());
+        return  ResponseEntity.ok(topicResponseEntity);
     }
 
     @DeleteMapping("/{id}")

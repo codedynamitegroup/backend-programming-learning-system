@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse;
 
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class QueryAllCertificateCoursesResponse {
     @NotNull
-    private final List<QueryCertificateCourseResponse> certificateCourses;
+    private final List<CertificateCourseResponseEntity> certificateCourses;
     @NotNull
     private final int currentPage;
     @NotNull

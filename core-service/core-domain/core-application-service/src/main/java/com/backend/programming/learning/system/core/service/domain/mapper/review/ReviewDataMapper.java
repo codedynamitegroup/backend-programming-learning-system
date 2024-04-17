@@ -3,8 +3,8 @@ package com.backend.programming.learning.system.core.service.domain.mapper.revie
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.review.CreateReviewCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.review.CreateReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryReviewResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.user.QueryUserResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.review.ReviewResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
@@ -44,11 +44,11 @@ public class ReviewDataMapper {
                 .build();
     }
 
-    public QueryReviewResponse reviewToQueryReviewResponse(Review review) {
-        QueryUserResponse createdByResponse = userDataMapper.userToQueryUserResponse(review.getCreatedBy());
-        QueryUserResponse updatedByResponse = userDataMapper.userToQueryUserResponse(review.getUpdatedBy());
+    public ReviewResponseEntity reviewToQueryReviewResponse(Review review) {
+        UserResponseEntity createdByResponse = userDataMapper.userToQueryUserResponse(review.getCreatedBy());
+        UserResponseEntity updatedByResponse = userDataMapper.userToQueryUserResponse(review.getUpdatedBy());
 
-        return QueryReviewResponse.builder()
+        return ReviewResponseEntity.builder()
                 .reviewId(review.getId().getValue())
                 .certificateCourseId(review.getCertificateCourseId().getValue())
                 .rating(review.getRating())

@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.core.service.domain.dto.responseEntity;
+package com.backend.programming.learning.system.core.service.domain.dto.responseentity;
 
 import com.backend.programming.learning.system.core.service.domain.entity.AnswerOfQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.Organization;

@@ -7,7 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryChapterCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryChapterResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.chapter.ChapterApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -50,14 +50,14 @@ public class ChapterController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<QueryChapterResponse> getChapter(@PathVariable UUID id) {
-        QueryChapterResponse queryChapterResponse =
+    public ResponseEntity<ChapterResponseEntity> getChapter(@PathVariable UUID id) {
+        ChapterResponseEntity chapterResponseEntity =
                 chapterApplicationService.queryChapter(QueryChapterCommand
                         .builder()
                         .chapterId(id)
                         .build());
-        log.info("Returning chapter: {}", queryChapterResponse);
-        return ResponseEntity.ok(queryChapterResponse);
+        log.info("Returning chapter: {}", chapterResponseEntity);
+        return ResponseEntity.ok(chapterResponseEntity);
     }
 
     @DeleteMapping("/{id}")

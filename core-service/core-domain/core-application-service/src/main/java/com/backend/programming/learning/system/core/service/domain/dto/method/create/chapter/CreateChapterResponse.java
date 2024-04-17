@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter;
 
-import com.backend.programming.learning.system.core.service.domain.dto.responseEntity.QuestionResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.QuestionResponseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -7,7 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryChapterCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryChapterResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResponseEntity;
 
 import javax.validation.Valid;
 
@@ -20,6 +20,6 @@ public interface ChapterApplicationService {
     QueryAllChaptersResponse queryAllChapters(
             @Valid QueryAllChaptersCommand queryAllChaptersCommand);
 
-    QueryChapterResponse queryChapter(
+    ChapterResponseEntity queryChapter(
             @Valid QueryChapterCommand queryChapterCommand);
 }

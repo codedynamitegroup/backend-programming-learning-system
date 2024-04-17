@@ -9,7 +9,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryCertificateCourseCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse.CertificateCourseApplicationService;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse_user.CertificateCourseUserApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -55,14 +55,14 @@ public class CertificateCourseController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<QueryCertificateCourseResponse> getCertificateCourseById(@PathVariable UUID id) {
-        QueryCertificateCourseResponse queryCertificateCourseResponse =
+    public ResponseEntity<CertificateCourseResponseEntity> getCertificateCourseById(@PathVariable UUID id) {
+        CertificateCourseResponseEntity certificateCourseResponseEntity =
                 certificateCourseApplicationService.queryCertificateCourse(QueryCertificateCourseCommand
                         .builder()
                         .certificateCourseId(id)
                         .build());
-        log.info("Returning certificate course: {}", queryCertificateCourseResponse.getCertificateCourseId());
-        return  ResponseEntity.ok(queryCertificateCourseResponse);
+        log.info("Returning certificate course: {}", certificateCourseResponseEntity.getCertificateCourseId());
+        return  ResponseEntity.ok(certificateCourseResponseEntity);
     }
 
     @GetMapping

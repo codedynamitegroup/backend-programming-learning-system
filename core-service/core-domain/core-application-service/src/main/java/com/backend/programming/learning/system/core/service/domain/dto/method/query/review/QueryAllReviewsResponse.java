@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.dto.method.query.review;
 
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.review.ReviewResponseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class QueryAllReviewsResponse {
     @NotNull
-    private final List<QueryReviewResponse> reviews;
+    private final List<ReviewResponseEntity> reviews;
     @NotNull
     private final int currentPage;
     @NotNull

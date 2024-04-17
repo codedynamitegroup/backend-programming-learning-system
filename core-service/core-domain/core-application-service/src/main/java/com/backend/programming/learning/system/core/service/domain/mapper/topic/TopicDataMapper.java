@@ -2,10 +2,10 @@ package com.backend.programming.learning.system.core.service.domain.mapper.topic
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.topic.CreateTopicCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.topic.CreateTopicResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.programminglanguage.QueryProgrammingLanguageResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.programminglanguage.ProgrammingLanguageResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryTopicResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.user.QueryUserResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.ProgrammingLanguage;
 import com.backend.programming.learning.system.core.service.domain.entity.Topic;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
@@ -64,13 +64,13 @@ public class TopicDataMapper {
                 .build();
     }
 
-    public QueryTopicResponse topicToQueryTopicResponse(Topic topic) {
-        List<QueryProgrammingLanguageResponse> programmingLanguages = programmingLanguageDataMapper
+    public TopicResponseEntity topicToQueryTopicResponse(Topic topic) {
+        List<ProgrammingLanguageResponseEntity> programmingLanguages = programmingLanguageDataMapper
                 .programmingLanguagesToQueryProgrammingLanguageResponses(topic.getProgrammingLanguages());
-        QueryUserResponse createdByResponse = userDataMapper.userToQueryUserResponse(topic.getCreatedBy());
-        QueryUserResponse updatedByResponse = userDataMapper.userToQueryUserResponse(topic.getUpdatedBy());
+        UserResponseEntity createdByResponse = userDataMapper.userToQueryUserResponse(topic.getCreatedBy());
+        UserResponseEntity updatedByResponse = userDataMapper.userToQueryUserResponse(topic.getUpdatedBy());
 
-        return QueryTopicResponse.builder()
+        return TopicResponseEntity.builder()
                 .topicId(topic.getId().getValue())
                 .name(topic.getName())
                 .description(topic.getDescription())

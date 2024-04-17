@@ -7,7 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryTopicCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryTopicResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.topic.TopicApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -36,7 +36,7 @@ class TopicApplicationServiceImpl implements TopicApplicationService {
     }
 
     @Override
-    public QueryTopicResponse queryTopic(QueryTopicCommand queryTopicCommand) {
+    public TopicResponseEntity queryTopic(QueryTopicCommand queryTopicCommand) {
         return topicCommandHandler.queryTopicResponse(queryTopicCommand);
     }
 

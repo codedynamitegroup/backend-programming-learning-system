@@ -1,7 +1,7 @@
-package com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter;
+package com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter;
 
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.user.QueryUserResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.responseEntity.QuestionResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.QuestionResponseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,7 +14,7 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class QueryChapterResponse {
+public class ChapterResponseEntity {
     @NotNull
     private final UUID chapterId;
     @NotNull
@@ -28,9 +28,9 @@ public class QueryChapterResponse {
     @NotNull
     private final List<QuestionResponseEntity> questions;
     @NotNull
-    private final QueryUserResponse createdBy;
+    private final UserResponseEntity createdBy;
     @NotNull
-    private final QueryUserResponse updatedBy;
+    private final UserResponseEntity updatedBy;
     @NotNull
     private final ZonedDateTime createdAt;
     @NotNull

@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.ports.input.service.question;
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.question.QuestionDeleteResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.responseEntity.QuestionResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.QuestionResponseEntity;
 
 import java.util.List;
 import java.util.UUID;

@@ -7,7 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryReviewCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryReviewResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.review.ReviewResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.review.ReviewApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -53,15 +53,15 @@ public class ReviewController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<QueryReviewResponse> getReview(
+    public ResponseEntity<ReviewResponseEntity> getReview(
             @PathVariable UUID id) {
-        QueryReviewResponse queryReviewResponse =
+        ReviewResponseEntity reviewResponseEntity =
                 reviewApplicationService.queryReview(QueryReviewCommand
                         .builder()
                         .reviewId(id)
                         .build());
-        log.info("Returning review: {}", queryReviewResponse);
-        return ResponseEntity.ok(queryReviewResponse);
+        log.info("Returning review: {}", reviewResponseEntity);
+        return ResponseEntity.ok(reviewResponseEntity);
     }
 
     @DeleteMapping("/{id}")
