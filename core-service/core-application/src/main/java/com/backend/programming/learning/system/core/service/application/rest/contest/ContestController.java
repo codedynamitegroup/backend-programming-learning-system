@@ -10,12 +10,19 @@ import com.backend.programming.learning.system.core.service.domain.dto.create.re
 import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.delete.chapter.DeleteChapterCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.delete.chapter.DeleteChapterResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.contest.DeleteContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.delete.contest.DeleteContestResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryAllCertificateCoursesCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryAllCertificateCoursesResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.query.chapter.QueryAllChaptersCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.query.chapter.QueryAllChaptersResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.query.chapter.QueryChapterCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.query.chapter.QueryChapterResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.contest.QueryAllContestsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.query.contest.QueryAllContestsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.contest.QueryContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.query.contest.QueryContestResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest.ContestApplicationService;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest_user.ContestUserApplicationService;
@@ -66,17 +73,36 @@ public class ContestController {
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize
     ) {
-        return null;
+        QueryAllContestsResponse queryAllContestsResponse =
+                contestApplicationService.queryAllContests(QueryAllContestsCommand
+                        .builder()
+                        .pageNo(pageNo)
+                        .pageSize(pageSize)
+                        .build());
+        log.info("Returning all contests: {}", queryAllContestsResponse.getContests());
+        return ResponseEntity.ok(queryAllContestsResponse);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<QueryContestResponse> getContest(@PathVariable UUID id) {
-        return null;
+        QueryContestResponse queryContestResponse =
+                contestApplicationService.queryContest(QueryContestCommand
+                        .builder()
+                        .contestId(id)
+                        .build());
+        log.info("Returning contest: {}", queryContestResponse.getContestId());
+        return  ResponseEntity.ok(queryContestResponse);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<DeleteContestResponse> deleteContest(@PathVariable UUID id) {
-        return null;
+        DeleteContestResponse deleteContestResponse =
+                contestApplicationService.deleteContest(DeleteContestCommand
+                        .builder()
+                        .contestId(id)
+                        .build());
+        log.info("Contest deleted: {}", id);
+        return ResponseEntity.ok(deleteContestResponse);
     }
 
 }

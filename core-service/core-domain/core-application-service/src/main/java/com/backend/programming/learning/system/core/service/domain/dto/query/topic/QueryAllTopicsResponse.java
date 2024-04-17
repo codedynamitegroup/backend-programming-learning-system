@@ -1,7 +1,6 @@
-package com.backend.programming.learning.system.core.service.domain.dto.query.review;
+package com.backend.programming.learning.system.core.service.domain.dto.query.topic;
 
-import com.backend.programming.learning.system.core.service.domain.dto.query.certificatecourse.QueryCertificateCourseResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.topic.QueryTopicResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.review.QueryReviewResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

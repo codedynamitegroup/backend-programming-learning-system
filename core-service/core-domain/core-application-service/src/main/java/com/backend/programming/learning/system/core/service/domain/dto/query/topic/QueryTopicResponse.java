@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.dto.query.topic;
 
+import com.backend.programming.learning.system.core.service.domain.dto.query.programminglanguage.QueryProgrammingLanguageResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.query.user.QueryUserResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.Topic;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -20,6 +22,8 @@ public class QueryTopicResponse {
     private final String name;
     @NotNull
     private final String description;
+    @NotNull
+    private final List<QueryProgrammingLanguageResponse> programmingLanguages;
     @NotNull
     private final QueryUserResponse createdBy;
     @NotNull

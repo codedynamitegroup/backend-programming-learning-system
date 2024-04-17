@@ -4,6 +4,14 @@ import com.backend.programming.learning.system.core.service.domain.dto.create.re
 import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.create.topic.CreateTopicCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.topic.CreateTopicResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.contest.DeleteContestResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.topic.DeleteTopicCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.topic.DeleteTopicResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.topic.QueryAllTopicsCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.query.topic.QueryAllTopicsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.topic.QueryTopicCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.query.topic.QueryTopicResponse;
+import com.backend.programming.learning.system.core.service.domain.entity.Contest;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
 import com.backend.programming.learning.system.core.service.domain.entity.Topic;
 import com.backend.programming.learning.system.core.service.domain.implement.review.ReviewCreateHelper;
@@ -12,22 +20,38 @@ import com.backend.programming.learning.system.core.service.domain.mapper.topic.
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ReviewRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.TopicRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Component
 @Slf4j
 public class TopicCommandHandler {
     private final TopicCreateHelper topicCreateHelper;
+    private final TopicQueryHelper topicQueryHelper;
+    private final TopicDeleteHelper topicDeleteHelper;
     private final TopicDataMapper topicDataMapper;
-    private final TopicRepository topicRepository;
 
     public TopicCommandHandler(TopicCreateHelper topicCreateHelper,
-                               TopicDataMapper topicDataMapper,
-                               TopicRepository topicRepository) {
+                               TopicQueryHelper topicQueryHelper,
+                               TopicDeleteHelper topicDeleteHelper,
+                               TopicDataMapper topicDataMapper) {
         this.topicCreateHelper = topicCreateHelper;
+        this.topicQueryHelper = topicQueryHelper;
+        this.topicDeleteHelper = topicDeleteHelper;
         this.topicDataMapper = topicDataMapper;
-        this.topicRepository = topicRepository;
+    }
+
+    @Transactional(readOnly = true)
+    public QueryTopicResponse queryTopicResponse(
+            QueryTopicCommand queryTopicCommand) {
+        Topic topic = topicQueryHelper.queryTopicById(queryTopicCommand.getTopicId());
+
+        log.info("Topic found with id: {}", topic.getId().getValue());
+
+        return topicDataMapper.topicToQueryTopicResponse(topic);
     }
 
     @Transactional
@@ -39,6 +63,30 @@ public class TopicCommandHandler {
 
         return topicDataMapper.topicToCreateTopicResponse(topic,
                 "Topic created successfully");
+    }
+
+    @Transactional(readOnly = true)
+    public QueryAllTopicsResponse queryAllTopicsResponse(
+            QueryAllTopicsCommand queryAllTopicsCommand) {
+        Page<Topic> topics = topicQueryHelper
+                .queryAllTopics(
+                        queryAllTopicsCommand.getPageNo(),
+                        queryAllTopicsCommand.getPageSize(),
+                        queryAllTopicsCommand.getFetchAll());
+
+        return topicDataMapper.topicsToQueryAllTopicsResponse(topics);
+    }
+
+    @Transactional
+    public DeleteTopicResponse deleteTopicResponse(
+            DeleteTopicCommand deleteTopicCommand) {
+        topicDeleteHelper.deleteTopicById(
+                deleteTopicCommand.getTopicId());
+
+        return DeleteTopicResponse.builder()
+                .topicId(deleteTopicCommand.getTopicId())
+                .message("Topic deleted successfully")
+                .build();
     }
 
 }
