@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.code.assessment.messaging.mapper;
+package com.backend.programming.learning.system.code.assessment.service.messaging.mapper;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.message.CodeQuestionUpdateResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;

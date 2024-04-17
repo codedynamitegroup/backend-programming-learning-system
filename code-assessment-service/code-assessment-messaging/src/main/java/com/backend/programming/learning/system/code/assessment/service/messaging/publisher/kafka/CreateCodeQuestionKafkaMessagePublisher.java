@@ -1,6 +1,6 @@
-package com.backend.programming.learning.system.code.assessment.messaging.publisher.kafka;
+package com.backend.programming.learning.system.code.assessment.service.messaging.publisher.kafka;
 
-import com.backend.programming.learning.system.code.assessment.messaging.mapper.CodeQuestionMessagingDataMapper;
+import com.backend.programming.learning.system.code.assessment.service.messaging.mapper.CodeQuestionMessagingDataMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.config.CodeAssessmentServiceConfigData;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionCreatedEvent;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.message.publisher.codequestion.CodeQuestionCreateMessagePublisher;

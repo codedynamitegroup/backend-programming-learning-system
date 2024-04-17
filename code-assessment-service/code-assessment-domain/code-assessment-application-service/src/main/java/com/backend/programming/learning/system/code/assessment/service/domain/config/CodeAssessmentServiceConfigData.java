@@ -8,6 +8,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "code-assessment-service")
 public class CodeAssessmentServiceConfigData {
-    private String codeQuestionCreateRequestTopicName;
-    private String codeQuestionCreateResponseTopicName;
+    private String codeQuestionCreateRequestToCoreServiceTopicName;
+    private String codeQuestionCreateResponseFromCoreServiceTopicName;
 }

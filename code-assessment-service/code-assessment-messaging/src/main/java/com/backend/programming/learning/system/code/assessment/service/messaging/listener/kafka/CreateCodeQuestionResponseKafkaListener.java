@@ -1,11 +1,10 @@
-package com.backend.programming.learning.system.code.assessment.messaging.listener.kafka;
+package com.backend.programming.learning.system.code.assessment.service.messaging.listener.kafka;
 
-import com.backend.programming.learning.system.code.assessment.messaging.mapper.CodeQuestionMessagingDataMapper;
+import com.backend.programming.learning.system.code.assessment.service.messaging.mapper.CodeQuestionMessagingDataMapper;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.message.listener.CodeQuestionUpdateResponseMessageListener;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel;
-import com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState;
 import com.backend.programming.learning.system.kafka.consumer.KafkaConsumer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
