@@ -7,17 +7,29 @@ import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import java.util.UUID;
 
 public class AnswerOfQuestion extends BaseEntity<AnswerId> {
-    private final Question question;
+    private final QuestionId questionId;
     private final String feedback;
     private final String answer;
     private final float fraction;
+
+    private AnswerOfQuestion(Builder builder) {
+        super.setId(builder.answerId);
+        questionId = builder.questionId;
+        feedback = builder.feedback;
+        answer = builder.answer;
+        fraction = builder.fraction;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
 
     public void initializeAnswerOfQuestion() {
         setId(new AnswerId(UUID.randomUUID()));
     }
 
-    public Question getQuestion() {
-        return question;
+    public QuestionId getQuestionId() {
+        return questionId;
     }
 
     public String getFeedback() {
@@ -32,22 +44,10 @@ public class AnswerOfQuestion extends BaseEntity<AnswerId> {
         return fraction;
     }
 
-    private AnswerOfQuestion(Builder builder) {
-        super.setId(builder.answerId);
-        question = builder.question;
-        feedback = builder.feedback;
-        answer = builder.answer;
-        fraction = builder.fraction;
-    }
-
-    public static Builder builder() {
-        return new Builder();
-    }
-
 
     public static final class Builder {
         private AnswerId answerId;
-        private Question question;
+        private QuestionId questionId;
         private String feedback;
         private String answer;
         private float fraction;
@@ -60,8 +60,8 @@ public class AnswerOfQuestion extends BaseEntity<AnswerId> {
             return this;
         }
 
-        public Builder question(Question val) {
-            question = val;
+        public Builder questionId(QuestionId val) {
+            questionId = val;
             return this;
         }
 

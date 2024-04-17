@@ -2,12 +2,12 @@ package com.backend.programming.learning.system.core.service.domain.mapper.quest
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.question.CreateQuestionResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.AnswerOfQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.Organization;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
-import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
+import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionType;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Component
 public class QuestionDataMapper {
@@ -40,10 +39,10 @@ public class QuestionDataMapper {
     }
 
     public List<AnswerOfQuestion> answerOfQuestionListToAnswerOfQuestionEntityList(List<com.backend.programming.learning.system.core.service.domain.dto.create.question.AnswerOfQuestion> answerOfQuestions
-            , Question question) {
+            , QuestionId questionId) {
         return List.of(answerOfQuestions.stream()
                 .map(answerOfQuestion -> AnswerOfQuestion.builder()
-                        .question(question)
+                        .questionId(questionId)
                         .answer(answerOfQuestion.getAnswer())
                         .fraction(answerOfQuestion.getFraction())
                         .feedback(answerOfQuestion.getFeedback())
@@ -61,15 +60,26 @@ public class QuestionDataMapper {
     }
 
     // question to query question response
-    public QueryQuestionResponse questionToQueryQuestionResponse(Question question) {
-        return QueryQuestionResponse.builder()
-                .question(question)
+    public QuestionResponseEntity questionToQuestionResponseEntity(Question question) {
+        return QuestionResponseEntity.builder()
+                .id(question.getId().getValue().toString())
+                .organization(question.getOrganization())
+                .name(question.getName())
+                .questionText(question.getQuestionText())
+                .generalFeedback(question.getGeneralFeedback())
+                .defaultMark(question.getDefaultMark())
+                .difficulty(question.getDifficulty())
+                .createdBy(question.getCreatedBy())
+                .updatedBy(question.getUpdatedBy())
+                .qtype(question.getqtype())
+                .createdAt(ZonedDateTime.now())
+                .updatedAt(ZonedDateTime.now())
                 .build();
     }
 
-    public List<QueryQuestionResponse> questionListToQueryQuestionResponseList(List<Question> questions) {
+    public List<QuestionResponseEntity> questionListToQueryQuestionResponseList(List<Question> questions) {
         return List.of(questions.stream()
-                .map(this::questionToQueryQuestionResponse)
-                .toArray(QueryQuestionResponse[]::new));
+                .map(this::questionToQuestionResponseEntity)
+                .toArray(QuestionResponseEntity[]::new));
     }
 }

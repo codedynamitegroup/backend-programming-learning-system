@@ -1,13 +1,11 @@
 package com.backend.programming.learning.system.core.service.application.rest.question;
 
-import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.question.QuestionDeleteResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QuestionApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -23,20 +21,29 @@ public class QuestionController {
     }
 
     @GetMapping
-    public ResponseEntity<List<QueryQuestionResponse>> getAllQuestions() {
+    public ResponseEntity<List<QuestionResponseEntity>> getAllQuestions() {
         log.info("Getting all questions");
-        List<QueryQuestionResponse> queryQuestionResponse = questionApplicationService.queryAllQuestion();
-        log.info("Questions retrieved: {}", queryQuestionResponse);
+        List<QuestionResponseEntity> questionResponseEntity = questionApplicationService.queryAllQuestion();
+        log.info("Questions retrieved: {}", questionResponseEntity);
 
-        return ResponseEntity.ok(queryQuestionResponse);
+        return ResponseEntity.ok(questionResponseEntity);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<QueryQuestionResponse> getQuestion(@PathVariable UUID id) {
+    public ResponseEntity<QuestionResponseEntity> getQuestion(@PathVariable UUID id) {
         log.info("Getting question with id: {}", id);
-        QueryQuestionResponse queryQuestionResponse = questionApplicationService.queryQuestionById(id);
-        log.info("Question retrieved: {}", queryQuestionResponse);
+        QuestionResponseEntity questionResponseEntity = questionApplicationService.queryQuestionById(id);
+        log.info("Question retrieved: {}", questionResponseEntity);
 
-        return ResponseEntity.ok(queryQuestionResponse);
+        return ResponseEntity.ok(questionResponseEntity);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<QuestionDeleteResponse> deleteQuestion(@PathVariable UUID id) {
+        log.info("Deleting question with id: {}", id);
+        QuestionDeleteResponse questionDeleteResponse = questionApplicationService.deleteQuestionById(id);
+        log.info("Question deleted");
+
+        return ResponseEntity.ok(questionDeleteResponse);
     }
 }

@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.dataaccess.user.entity;
 
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_user.entity.CertificateCourseUserEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -32,6 +33,12 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "user")
     private List<CertificateCourseUserEntity> certificateCourseUsers;
+
+    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.REMOVE)
+    private List<QuestionEntity> questionsCreatedBy;
+
+    @OneToMany(mappedBy = "updatedBy", cascade = CascadeType.REMOVE)
+    private List<QuestionEntity> questionsUpdatedBy;
 
     @Override
     public boolean equals(Object o) {

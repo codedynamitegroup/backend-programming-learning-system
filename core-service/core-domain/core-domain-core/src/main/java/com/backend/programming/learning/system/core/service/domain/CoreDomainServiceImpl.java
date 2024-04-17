@@ -1,11 +1,13 @@
 package com.backend.programming.learning.system.core.service.domain;
 
 import com.backend.programming.learning.system.core.service.domain.entity.*;
-import com.backend.programming.learning.system.core.service.domain.event.QuestionCreatedEvent;
+import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
+import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 @Slf4j
 public class CoreDomainServiceImpl implements CoreDomainService {
@@ -41,6 +43,11 @@ public class CoreDomainServiceImpl implements CoreDomainService {
         qtypeMultipleChoiceQuestion.initQtypeMultipleChoiceQuestion();
         log.info("Qtype multiple choice question initiated with id: {}", qtypeMultipleChoiceQuestion.getId().getValue());
         return new QuestionCreatedEvent(question, qtypeMultipleChoiceQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of("UTC")));
+    }
+
+    @Override
+    public QuestionDeletedEvent deleteQuestion(Question question, UUID qtypeId) {
+        return new QuestionDeletedEvent(question, qtypeId, ZonedDateTime.now(ZoneId.of("UTC")));
     }
 
     @Override

@@ -55,7 +55,7 @@ public class QuestionCreateHelper {
         saveQuestion(question);
 
         // save answer
-        List<AnswerOfQuestion> answerEntityList = questionDataMapper.answerOfQuestionListToAnswerOfQuestionEntityList(createQuestionCommand.getAnswers(), question);
+        List<AnswerOfQuestion> answerEntityList = questionDataMapper.answerOfQuestionListToAnswerOfQuestionEntityList(createQuestionCommand.getAnswers(), question.getId());
 
         for (AnswerOfQuestion answerOfQuestion : answerEntityList) {
             coreDomainService.createAnswerOfQuestion(answerOfQuestion);
@@ -108,7 +108,7 @@ public class QuestionCreateHelper {
 
             throw new CoreDomainException("Could not save answer");
         }
-        log.info("Answer saved with id {} and questionId {}", savedAnswer.getId().getValue(), savedAnswer.getQuestion().getId().getValue());
+        log.info("Answer saved with id {} and questionId {}", savedAnswer.getId().getValue(), savedAnswer.getId().getValue());
     }
 }
 

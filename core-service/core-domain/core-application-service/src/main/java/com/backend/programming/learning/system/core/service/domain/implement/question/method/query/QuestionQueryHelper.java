@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.implement.question.method.query;
 
-import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
@@ -23,7 +23,7 @@ public class QuestionQueryHelper {
         this.questionRepository = questionRepository;
     }
 
-    public QueryQuestionResponse queryQuestionById(UUID questionId) {
+    public QuestionResponseEntity queryQuestionById(UUID questionId) {
         Optional<Question> question = questionRepository.findQuestion(questionId);
 
         if (question.isEmpty()) {
@@ -32,19 +32,19 @@ public class QuestionQueryHelper {
             throw new QuestionNotFoundException("Question with id " + questionId + " not found");
         }
 
-        QueryQuestionResponse queryQuestionResponse = questionDataMapper
-                .questionToQueryQuestionResponse(question.get());
+        QuestionResponseEntity questionResponseEntity = questionDataMapper
+                .questionToQuestionResponseEntity(question.get());
 
         log.info("Query question with id: {}", question.get().getId().getValue());
 
-        return queryQuestionResponse;
+        return questionResponseEntity;
     }
 
-    public List<QueryQuestionResponse> queryAllQuestion() {
-        List<Question> questions = questionRepository.findAllQuestion();
+    public List<QuestionResponseEntity> queryAllQuestion() {
+        List<QuestionResponseEntity> questions = questionRepository.findAllQuestion();
 
         log.info("Query all questions");
 
-        return questionDataMapper.questionListToQueryQuestionResponseList(questions);
+        return questions;
     }
 }

@@ -18,9 +18,8 @@ public class AnswerOfQuestionEntity {
     @Column(name = "id")
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name = "question_id", referencedColumnName = "id")
-    private QuestionEntity question;
+    @Column(name = "question_id")
+    private UUID questionId;
     private String answer;
     private String feedback;
     private float fraction;

@@ -1,8 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.dto.create.chapter;
 
-import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQuestionResponse;
-import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
-import com.backend.programming.learning.system.core.service.domain.entity.Review;
+import com.backend.programming.learning.system.core.service.domain.dto.query.question.QuestionResponseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,7 +24,7 @@ public class CreateChapterResponse {
     @NotNull
     private final String description;
     @NotNull
-    private final List<QueryQuestionResponse> questions;
+    private final List<QuestionResponseEntity> questions;
     @NotNull
     private final String message;
 }

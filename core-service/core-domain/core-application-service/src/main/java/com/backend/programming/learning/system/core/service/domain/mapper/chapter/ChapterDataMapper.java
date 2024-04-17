@@ -2,27 +2,20 @@ package com.backend.programming.learning.system.core.service.domain.mapper.chapt
 
 import com.backend.programming.learning.system.core.service.domain.dto.create.chapter.CreateChapterCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.chapter.CreateChapterResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.create.contest.CreateContestCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.contest.CreateContestResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.delete.chapter.DeleteChapterResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.query.chapter.QueryAllChaptersResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.query.chapter.QueryChapterResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.query.user.QueryUserResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
-import com.backend.programming.learning.system.core.service.domain.entity.Contest;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
-import com.backend.programming.learning.system.core.service.domain.exception.TopicNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Component
 public class ChapterDataMapper {
@@ -64,10 +57,10 @@ private final QuestionDataMapper questionDataMapper;
     }
 
     public QueryChapterResponse chapterToQueryChapterResponse(Chapter chapter) {
-        List<QueryQuestionResponse> queryQuestionResponses = new ArrayList<>();
+        List<QuestionResponseEntity> queryQuestionResponses = new ArrayList<>();
         for (Question question : chapter.getQuestions()) {
             queryQuestionResponses.add(
-                    questionDataMapper.questionToQueryQuestionResponse(question));
+                    questionDataMapper.questionToQuestionResponseEntity(question));
         }
 
         QueryUserResponse createdByResponse = userDataMapper.userToQueryUserResponse(chapter.getCreatedBy());
