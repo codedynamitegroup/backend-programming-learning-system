@@ -76,19 +76,4 @@ public class CertificateCourseCommandHandler {
                 .message("Certificate course deleted successfully")
                 .build();
     }
-
-    @Transactional(readOnly = true)
-    public QueryAllCertificateCourseUsersResponse findAllCertificateCourseUsers(
-            QueryAllCertificateCourseUsersCommand queryAllCertificateCourseUsersCommand) {
-        Page<CertificateCourseUser> certificateCourseUsers = certificateCourseQueryHelper
-                .queryAllCertificateCourseUsers(
-                        queryAllCertificateCourseUsersCommand.getCertificateCourseId(),
-                        queryAllCertificateCourseUsersCommand.getPageNo(),
-                        queryAllCertificateCourseUsersCommand.getPageSize(),
-                        queryAllCertificateCourseUsersCommand.getFetchAll());
-
-        return certificateCourseDataMapper
-                .certificateCourseUsersToQueryAllCertificateCourseUsersResponse(
-                        certificateCourseUsers);
-    }
 }

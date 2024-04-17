@@ -25,14 +25,11 @@ import java.util.List;
 public class CertificateCourseDataMapper {
     private final TopicDataMapper topicDataMapper;
     private final UserDataMapper userDataMapper;
-    private final CertificateCourseUserDataMapper certificateCourseUserDataMapper;
 
     public CertificateCourseDataMapper(TopicDataMapper topicDataMapper,
-                                       UserDataMapper userDataMapper,
-                                       CertificateCourseUserDataMapper certificateCourseUserDataMapper) {
+                                       UserDataMapper userDataMapper) {
         this.topicDataMapper = topicDataMapper;
         this.userDataMapper = userDataMapper;
-        this.certificateCourseUserDataMapper = certificateCourseUserDataMapper;
     }
 
     public CertificateCourse createCertificateCourseCommandToCertificateCourse(
@@ -102,21 +99,6 @@ public class CertificateCourseDataMapper {
                 .currentPage(certificateCourses.getNumber())
                 .totalPages(certificateCourses.getTotalPages())
                 .totalItems(certificateCourses.getTotalElements())
-                .build();
-    }
-
-    public QueryAllCertificateCourseUsersResponse certificateCourseUsersToQueryAllCertificateCourseUsersResponse(
-            Page<CertificateCourseUser> certificateCourseUsers) {
-        List<CertificateCourseUserResponseEntity> certificateCourseUserResponseEntities = new ArrayList<>();
-        for (CertificateCourseUser certificateCourseUser : certificateCourseUsers) {
-            certificateCourseUserResponseEntities.add(certificateCourseUserDataMapper
-                    .certificateCourseUserToCertificateCourseUserResponseEntity(certificateCourseUser));
-        }
-        return QueryAllCertificateCourseUsersResponse.builder()
-                .certificateCourseUsers(certificateCourseUserResponseEntities)
-                .currentPage(certificateCourseUsers.getNumber())
-                .totalPages(certificateCourseUsers.getTotalPages())
-                .totalItems(certificateCourseUsers.getTotalElements())
                 .build();
     }
 }
