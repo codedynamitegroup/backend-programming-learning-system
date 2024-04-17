@@ -74,18 +74,17 @@ public class ContestController {
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize,
             @RequestParam(defaultValue = "false") Boolean fetchAll) {
-//        QueryAllContestUsersResponse queryAllContestUsersResponse =
-//                contestApplicationService.queryAllContestUsers(
-//                        QueryAllContestUsersCommand
-//                                .builder()
-//                                .contestId(contestId)
-//                                .pageNo(pageNo)
-//                                .pageSize(pageSize)
-//                                .fetchAll(fetchAll)
-//                                .build());
-//        log.info("Returning all users of contest: {}", contestId);
-//        return ResponseEntity.ok(queryAllContestUsersResponse);
-        return null;
+        QueryAllContestUsersResponse queryAllContestUsersResponse =
+                contestUserApplicationService.queryAllContestUsers(
+                        QueryAllContestUsersCommand
+                                .builder()
+                                .contestId(id)
+                                .pageNo(pageNo)
+                                .pageSize(pageSize)
+                                .fetchAll(fetchAll)
+                                .build());
+        log.info("Returning all users of contest: {}", id);
+        return ResponseEntity.ok(queryAllContestUsersResponse);
     }
 
     @GetMapping("/{id}")

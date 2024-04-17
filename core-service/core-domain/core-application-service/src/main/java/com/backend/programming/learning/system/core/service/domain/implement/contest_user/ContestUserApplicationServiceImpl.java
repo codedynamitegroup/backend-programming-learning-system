@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.core.service.domain.implement.co
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest_user.CreateContestUserCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest_user.CreateContestUserResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestUsersCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestUsersResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest_user.ContestUserApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,5 +23,10 @@ class ContestUserApplicationServiceImpl implements ContestUserApplicationService
     @Override
     public CreateContestUserResponse createContestUser(CreateContestUserCommand createContestUserCommand) {
         return contestUserCommandHandler.createContestUserResponse(createContestUserCommand);
+    }
+
+    @Override
+    public QueryAllContestUsersResponse queryAllContestUsers(QueryAllContestUsersCommand queryAllContestUsersCommand) {
+        return contestUserCommandHandler.findAllContestUsersResponse(queryAllContestUsersCommand);
     }
 }
