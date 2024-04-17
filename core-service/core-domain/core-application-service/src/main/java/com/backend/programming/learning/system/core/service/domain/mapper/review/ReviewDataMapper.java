@@ -45,8 +45,8 @@ public class ReviewDataMapper {
     }
 
     public ReviewResponseEntity reviewToQueryReviewResponse(Review review) {
-        UserResponseEntity createdByResponse = userDataMapper.userToQueryUserResponse(review.getCreatedBy());
-        UserResponseEntity updatedByResponse = userDataMapper.userToQueryUserResponse(review.getUpdatedBy());
+        UserResponseEntity createdByResponse = userDataMapper.userToUserResponseEntity(review.getCreatedBy());
+        UserResponseEntity updatedByResponse = userDataMapper.userToUserResponseEntity(review.getUpdatedBy());
 
         return ReviewResponseEntity.builder()
                 .reviewId(review.getId().getValue())

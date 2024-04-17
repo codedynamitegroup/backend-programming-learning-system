@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserDataMapper {
 
-    public UserResponseEntity userToQueryUserResponse(User user) {
+    public UserResponseEntity userToUserResponseEntity(User user) {
         return UserResponseEntity.builder()
                 .userId(user.getId().getValue())
                 .email(user.getEmail())

@@ -6,9 +6,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse_user.CreateCertificateCourseUserResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.certificatecourse.DeleteCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.certificatecourse.DeleteCertificateCourseResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryCertificateCourseCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.*;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse.CertificateCourseApplicationService;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse_user.CertificateCourseUserApplicationService;
@@ -77,6 +75,25 @@ public class CertificateCourseController {
                         .build());
         log.info("Returning all certificate courses");
         return ResponseEntity.ok(queryAllCertificateCoursesResponse);
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<QueryAllCertificateCourseUsersResponse> getAllUsersOfCertificateCourse(
+            @RequestParam UUID certificateCourseId,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "false") Boolean fetchAll) {
+        QueryAllCertificateCourseUsersResponse queryAllCertificateCourseUsersResponse =
+                certificateCourseApplicationService.queryAllCertificateCourseUsers(
+                        QueryAllCertificateCourseUsersCommand
+                        .builder()
+                        .certificateCourseId(certificateCourseId)
+                        .pageNo(pageNo)
+                        .pageSize(pageSize)
+                        .fetchAll(fetchAll)
+                        .build());
+        log.info("Returning all users of certificate course: {}", certificateCourseId);
+        return ResponseEntity.ok(queryAllCertificateCourseUsersResponse);
     }
 
     @DeleteMapping("/{id}")

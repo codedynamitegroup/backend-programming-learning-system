@@ -67,8 +67,8 @@ public class TopicDataMapper {
     public TopicResponseEntity topicToQueryTopicResponse(Topic topic) {
         List<ProgrammingLanguageResponseEntity> programmingLanguages = programmingLanguageDataMapper
                 .programmingLanguagesToQueryProgrammingLanguageResponses(topic.getProgrammingLanguages());
-        UserResponseEntity createdByResponse = userDataMapper.userToQueryUserResponse(topic.getCreatedBy());
-        UserResponseEntity updatedByResponse = userDataMapper.userToQueryUserResponse(topic.getUpdatedBy());
+        UserResponseEntity createdByResponse = userDataMapper.userToUserResponseEntity(topic.getCreatedBy());
+        UserResponseEntity updatedByResponse = userDataMapper.userToUserResponseEntity(topic.getUpdatedBy());
 
         return TopicResponseEntity.builder()
                 .topicId(topic.getId().getValue())

@@ -17,42 +17,29 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CertificateCourseUserDataAccessMapper {
-
-    private final CertificateCourseJpaRepository certificateCourseJpaRepository;
-    private final UserJpaRepository userJpaRepository;
     private final CertificateCourseDataAccessMapper certificateCourseDataAccessMapper;
     private final UserDataAccessMapper userDataAccessMapper;
 
-    public CertificateCourseUserDataAccessMapper(CertificateCourseJpaRepository certificateCourseJpaRepository,
-                                                 UserJpaRepository userJpaRepository,
-                                                 CertificateCourseDataAccessMapper certificateCourseDataAccessMapper,
+    public CertificateCourseUserDataAccessMapper(CertificateCourseDataAccessMapper certificateCourseDataAccessMapper,
                                                  UserDataAccessMapper userDataAccessMapper) {
-        this.certificateCourseJpaRepository = certificateCourseJpaRepository;
-        this.userJpaRepository = userJpaRepository;
         this.certificateCourseDataAccessMapper = certificateCourseDataAccessMapper;
         this.userDataAccessMapper = userDataAccessMapper;
     }
 
     public CertificateCourseUserEntity certificateCourseUserToCertificateCourseUserEntity(
             CertificateCourseUser certificateCourseUser) {
-        CertificateCourseEntity certificateCourse = certificateCourseJpaRepository
-                .findById(certificateCourseUser.getCertificateCourse().getId().getValue())
-                .orElseThrow(() -> new CertificateCourseNotFoundException("Certificate course with id: " +
-                        certificateCourseUser.getCertificateCourse().getId().getValue() + " could not be found!")
-                );
-        UserEntity user = userJpaRepository
-                .findById(certificateCourseUser.getUser().getId().getValue())
-                .orElseThrow(() -> new UserNotFoundException("User with id: " +
-                        certificateCourseUser.getUser().getId().getValue() + " could not be found!")
-                );
+        CertificateCourseEntity certificateCourse = certificateCourseDataAccessMapper
+                .certificateCourseToCertificateCourseEntity(certificateCourseUser.getCertificateCourse());
+        UserEntity user = userDataAccessMapper.userToUserEntity(certificateCourseUser.getUser());
 
         return CertificateCourseUserEntity.builder()
                 .id(certificateCourseUser.getId().getValue())
                 .certificateCourse(certificateCourse)
                 .user(user)
-//                .startTime(certificateCourseUser.getStartTime())
                 .isCompleted(certificateCourseUser.getCompleted())
                 .completedAt(certificateCourseUser.getCompletedAt())
+                .createdAt(certificateCourseUser.getCreatedAt())
+                .updatedAt(certificateCourseUser.getUpdatedAt())
                 .build();
     }
 
@@ -67,6 +54,8 @@ public class CertificateCourseUserDataAccessMapper {
                 .user(user)
                 .isCompleted(certificateCourseUserEntity.getIsCompleted())
                 .completedAt(certificateCourseUserEntity.getCompletedAt())
+                .createdAt(certificateCourseUserEntity.getCreatedAt())
+                .updatedAt(certificateCourseUserEntity.getUpdatedAt())
                 .build();
     }
 }

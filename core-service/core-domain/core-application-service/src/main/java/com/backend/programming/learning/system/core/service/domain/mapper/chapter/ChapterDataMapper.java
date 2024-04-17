@@ -63,8 +63,8 @@ private final QuestionDataMapper questionDataMapper;
                     questionDataMapper.questionToQuestionResponseEntity(question));
         }
 
-        UserResponseEntity createdByResponse = userDataMapper.userToQueryUserResponse(chapter.getCreatedBy());
-        UserResponseEntity updatedByResponse = userDataMapper.userToQueryUserResponse(chapter.getUpdatedBy());
+        UserResponseEntity createdByResponse = userDataMapper.userToUserResponseEntity(chapter.getCreatedBy());
+        UserResponseEntity updatedByResponse = userDataMapper.userToUserResponseEntity(chapter.getUpdatedBy());
 
         return ChapterResponseEntity.builder()
                 .chapterId(chapter.getId().getValue())

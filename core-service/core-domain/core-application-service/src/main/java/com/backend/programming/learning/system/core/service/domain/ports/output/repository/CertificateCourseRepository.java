@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.ports.output.repository;
 
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
+import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourseUser;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import org.springframework.data.domain.Page;
 
@@ -15,4 +16,7 @@ public interface CertificateCourseRepository {
     Page<CertificateCourse> findAll(Integer page, Integer size);
     int deleteCertificateCourse(UUID certificateCourseId);
     int updateAvgRating(CertificateCourseId certificateCourseId, Float avgRating);
+
+    Page<CertificateCourseUser> findAllByCertificateCourseId(
+            UUID certificateCourseId, Integer pageNo, Integer pageSize, Boolean fetchAll);
 }

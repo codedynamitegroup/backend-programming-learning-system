@@ -4,9 +4,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.certificatecourse.DeleteCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.certificatecourse.DeleteCertificateCourseResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryCertificateCourseCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.*;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
 
 import javax.validation.Valid;
@@ -22,5 +20,8 @@ public interface CertificateCourseApplicationService {
 
     DeleteCertificateCourseResponse deleteCertificateCourse(
             @Valid DeleteCertificateCourseCommand deleteCertificateCourseCommand);
+
+    QueryAllCertificateCourseUsersResponse queryAllCertificateCourseUsers(
+            @Valid QueryAllCertificateCourseUsersCommand queryAllCertificateCourseUsersCommand);
 
 }

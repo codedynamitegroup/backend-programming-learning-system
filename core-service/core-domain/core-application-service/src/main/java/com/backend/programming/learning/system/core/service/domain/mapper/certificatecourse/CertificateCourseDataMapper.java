@@ -2,11 +2,14 @@ package com.backend.programming.learning.system.core.service.domain.mapper.certi
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCourseUsersResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseUserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
+import com.backend.programming.learning.system.core.service.domain.mapper.certificatecourse_user.CertificateCourseUserDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.topic.TopicDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
 import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
@@ -22,11 +25,14 @@ import java.util.List;
 public class CertificateCourseDataMapper {
     private final TopicDataMapper topicDataMapper;
     private final UserDataMapper userDataMapper;
+    private final CertificateCourseUserDataMapper certificateCourseUserDataMapper;
 
     public CertificateCourseDataMapper(TopicDataMapper topicDataMapper,
-                                       UserDataMapper userDataMapper) {
+                                       UserDataMapper userDataMapper,
+                                       CertificateCourseUserDataMapper certificateCourseUserDataMapper) {
         this.topicDataMapper = topicDataMapper;
         this.userDataMapper = userDataMapper;
+        this.certificateCourseUserDataMapper = certificateCourseUserDataMapper;
     }
 
     public CertificateCourse createCertificateCourseCommandToCertificateCourse(
@@ -65,8 +71,8 @@ public class CertificateCourseDataMapper {
             CertificateCourse certificateCourse) {
         TopicResponseEntity topicResponseEntity = topicDataMapper.
                 topicToQueryTopicResponse(certificateCourse.getTopic());
-        UserResponseEntity createdByResponse = userDataMapper.userToQueryUserResponse(certificateCourse.getCreatedBy());
-        UserResponseEntity updatedByResponse = userDataMapper.userToQueryUserResponse(certificateCourse.getUpdatedBy());
+        UserResponseEntity createdByResponse = userDataMapper.userToUserResponseEntity(certificateCourse.getCreatedBy());
+        UserResponseEntity updatedByResponse = userDataMapper.userToUserResponseEntity(certificateCourse.getUpdatedBy());
 
         return CertificateCourseResponseEntity.builder()
                 .certificateCourseId(certificateCourse.getId().getValue())
@@ -96,6 +102,21 @@ public class CertificateCourseDataMapper {
                 .currentPage(certificateCourses.getNumber())
                 .totalPages(certificateCourses.getTotalPages())
                 .totalItems(certificateCourses.getTotalElements())
+                .build();
+    }
+
+    public QueryAllCertificateCourseUsersResponse certificateCourseUsersToQueryAllCertificateCourseUsersResponse(
+            Page<CertificateCourseUser> certificateCourseUsers) {
+        List<CertificateCourseUserResponseEntity> certificateCourseUserResponseEntities = new ArrayList<>();
+        for (CertificateCourseUser certificateCourseUser : certificateCourseUsers) {
+            certificateCourseUserResponseEntities.add(certificateCourseUserDataMapper
+                    .certificateCourseUserToCertificateCourseUserResponseEntity(certificateCourseUser));
+        }
+        return QueryAllCertificateCourseUsersResponse.builder()
+                .certificateCourseUsers(certificateCourseUserResponseEntities)
+                .currentPage(certificateCourseUsers.getNumber())
+                .totalPages(certificateCourseUsers.getTotalPages())
+                .totalItems(certificateCourseUsers.getTotalElements())
                 .build();
     }
 }
