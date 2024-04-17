@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.implement.question.method.query;
 
-import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQtypeShortanswerQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryQtypeShortanswerQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeShortAnswerQuestion;
 import com.backend.programming.learning.system.core.service.domain.exception.question.QtypeShortanswerQuestionNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QtypeShortanswerQuestionDataMapper;

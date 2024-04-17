@@ -1,19 +1,13 @@
 package com.backend.programming.learning.system.core.service.domain.mapper.contest;
 
-import com.backend.programming.learning.system.core.service.domain.dto.create.contest.CreateContestCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.contest.CreateContestResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.contest.QueryAllContestsResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.contest.QueryContestResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.user.QueryUserResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest.CreateContestCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest.CreateContestResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryContestResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.user.QueryUserResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.Contest;
-import com.backend.programming.learning.system.core.service.domain.entity.Review;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
-import com.backend.programming.learning.system.core.service.domain.exception.TopicNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.UserRepository;
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;

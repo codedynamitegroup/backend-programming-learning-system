@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.mapper.contest_user;
 
-import com.backend.programming.learning.system.core.service.domain.dto.create.contest_user.CreateContestUserCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.contest_user.CreateContestUserResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest_user.CreateContestUserCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest_user.CreateContestUserResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.ContestUser;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;

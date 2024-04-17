@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.ports.input.message.listener.auth;
 
-import com.backend.programming.learning.system.core.service.domain.dto.message.UserResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.message.UserResponse;
 
 /***********************************
  * Created by TGT on 31/03/2024.

@@ -1,17 +1,12 @@
 package com.backend.programming.learning.system.core.service.domain.implement.notification;
 
 import com.backend.programming.learning.system.core.service.domain.CoreDomainService;
-import com.backend.programming.learning.system.core.service.domain.dto.create.certificatecourse.CreateCertificateCourseCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.notification.CreateNotificationCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.notification.CreateNotificationResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.notification.CreateNotificationCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
-import com.backend.programming.learning.system.core.service.domain.exception.TopicNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
-import com.backend.programming.learning.system.core.service.domain.mapper.certificatecourse.CertificateCourseDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.notification.NotificationDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
-import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

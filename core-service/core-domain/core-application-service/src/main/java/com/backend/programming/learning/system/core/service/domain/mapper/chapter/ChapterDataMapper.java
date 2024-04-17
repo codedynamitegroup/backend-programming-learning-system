@@ -1,11 +1,11 @@
 package com.backend.programming.learning.system.core.service.domain.mapper.chapter;
 
-import com.backend.programming.learning.system.core.service.domain.dto.create.chapter.CreateChapterCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.create.chapter.CreateChapterResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.chapter.QueryAllChaptersResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.chapter.QueryChapterResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.query.question.QuestionResponseEntity;
-import com.backend.programming.learning.system.core.service.domain.dto.query.user.QueryUserResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter.CreateChapterCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter.CreateChapterResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryChapterResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseEntity.QuestionResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.user.QueryUserResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.entity.User;

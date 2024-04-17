@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.implement.review;
 
 import com.backend.programming.learning.system.core.service.domain.CoreDomainService;
-import com.backend.programming.learning.system.core.service.domain.dto.create.review.CreateReviewCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.review.CreateReviewCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
