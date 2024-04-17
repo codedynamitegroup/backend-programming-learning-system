@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.core.service.domain.mapper.quest
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.question.AnswerOfQuestionDeleteResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.AnswerOfQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.Organization;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class QuestionDataMapper {
@@ -81,5 +83,12 @@ public class QuestionDataMapper {
         return List.of(questions.stream()
                 .map(this::questionToQuestionResponseEntity)
                 .toArray(QuestionResponseEntity[]::new));
+    }
+
+    public AnswerOfQuestionDeleteResponse answerOfQuestionToAnswerOfQuestionDeleteResponse(UUID answerId) {
+        return AnswerOfQuestionDeleteResponse.builder()
+                .answerId(answerId)
+                .message("Answer deleted successfully")
+                .build();
     }
 }

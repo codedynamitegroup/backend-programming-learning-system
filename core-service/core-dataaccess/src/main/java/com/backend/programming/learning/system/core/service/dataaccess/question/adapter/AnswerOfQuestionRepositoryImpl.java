@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.ports.output.
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -45,5 +46,11 @@ public class AnswerOfQuestionRepositoryImpl implements AnswerOfQuestionRepositor
     @Override
     public void deleteAllAnswerOfQuestionByQuestionId(UUID questionId) {
         answerOfQuestionJpaRepository.deleteByQuestionId(questionId);
+    }
+
+    @Override
+    public Optional<AnswerOfQuestion> getAnswerOfQuestionById(UUID answerId) {
+        return answerOfQuestionJpaRepository.findById(answerId)
+                .map(answerOfQuestionDataAccessMapper::answerOfQuestionEntityToAnswerOfQuestion);
     }
 }
