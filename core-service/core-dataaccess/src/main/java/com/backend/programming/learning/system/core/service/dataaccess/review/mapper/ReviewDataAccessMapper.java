@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.core.service.dataaccess.review.en
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.user.repository.UserJpaRepository;
+import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
@@ -21,43 +22,26 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ReviewDataAccessMapper {
-
-    private final CertificateCourseJpaRepository certificateCourseJpaRepository;
-    private final UserJpaRepository userJpaRepository;
     private final UserDataAccessMapper userDataAccessMapper;
 
-    public ReviewDataAccessMapper(CertificateCourseJpaRepository certificateCourseJpaRepository,
-                                  UserJpaRepository userJpaRepository,
-                                  UserDataAccessMapper userDataAccessMapper) {
-        this.certificateCourseJpaRepository = certificateCourseJpaRepository;
-        this.userJpaRepository = userJpaRepository;
+    public ReviewDataAccessMapper(UserDataAccessMapper userDataAccessMapper) {
         this.userDataAccessMapper = userDataAccessMapper;
     }
 
     public ReviewEntity reviewToReviewEntity(Review review) {
-        CertificateCourseEntity certificateCourse = certificateCourseJpaRepository
-                .findById(review.getCertificateCourseId().getValue())
-                .orElseThrow(() -> new CertificateCourseNotFoundException("Certificate course with id: " +
-                        review.getCertificateCourseId().getValue() + " could not be found!")
-                );
-        UserEntity createdBy = userJpaRepository
-                .findById(review.getCreatedBy().getId().getValue())
-                .orElseThrow(() -> new UserNotFoundException("User with id: " +
-                        review.getCreatedBy().getId().getValue() + " could not be found!")
-                );
-        UserEntity updatedBy = userJpaRepository
-                .findById(review.getUpdatedBy().getId().getValue())
-                .orElseThrow(() -> new UserNotFoundException("User with id: " +
-                        review.getUpdatedBy().getId().getValue() + " could not be found!")
-                );
-
         return ReviewEntity.builder()
                 .id(review.getId().getValue())
                 .rating(review.getRating())
                 .content(review.getContent())
-                .certificateCourse(certificateCourse)
-                .createdBy(createdBy)
-                .updatedBy(updatedBy)
+                .certificateCourse(CertificateCourseEntity.builder()
+                        .id(review.getCertificateCourseId().getValue())
+                        .build())
+                .createdBy(UserEntity.builder()
+                        .id(review.getCreatedBy().getId().getValue())
+                        .build())
+                .updatedBy(UserEntity.builder()
+                        .id(review.getUpdatedBy().getId().getValue())
+                        .build())
                 .createdAt(review.getCreatedAt())
                 .updatedAt(review.getUpdatedAt())
                 .build();

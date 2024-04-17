@@ -3,8 +3,8 @@ package com.backend.programming.learning.system.core.service.domain.implement.qu
 import com.backend.programming.learning.system.core.service.domain.CoreDomainService;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
-import com.backend.programming.learning.system.core.service.domain.exception.question.QuestionNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
+import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
 import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

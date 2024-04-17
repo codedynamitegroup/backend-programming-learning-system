@@ -4,6 +4,12 @@ import com.backend.programming.learning.system.core.service.domain.dto.create.co
 import com.backend.programming.learning.system.core.service.domain.dto.create.contest.CreateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.create.notification.CreateNotificationCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.create.notification.CreateNotificationResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.notification.DeleteNotificationCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.delete.notification.DeleteNotificationResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.query.notification.QueryAllNotificationsCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.query.notification.QueryAllNotificationsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.update.notification.MarkReadNotificationCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.update.notification.MarkReadNotificationResponse;
 import com.backend.programming.learning.system.core.service.domain.implement.contest.ContestCommandHandler;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest.ContestApplicationService;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.notification.NotificationApplicationService;
@@ -26,5 +32,20 @@ class NotificationApplicationServiceImpl implements NotificationApplicationServi
     @Override
     public CreateNotificationResponse createNotificationResponse(CreateNotificationCommand createNotificationCommand) {
         return notificationCommandHandler.createNotificationResponse(createNotificationCommand);
+    }
+
+    @Override
+    public QueryAllNotificationsResponse queryAllNotificationsResponse(QueryAllNotificationsCommand queryAllNotificationsCommand) {
+        return notificationCommandHandler.queryAllNotificationsByUserIdTo(queryAllNotificationsCommand);
+    }
+
+    @Override
+    public DeleteNotificationResponse deleteNotificationResponse(DeleteNotificationCommand deleteNotificationCommand) {
+        return notificationCommandHandler.deleteNotification(deleteNotificationCommand);
+    }
+
+    @Override
+    public MarkReadNotificationResponse markReadNotificationResponse(MarkReadNotificationCommand markReadNotificationCommand) {
+        return notificationCommandHandler.markReadNotification(markReadNotificationCommand);
     }
 }

@@ -12,8 +12,8 @@ import java.time.ZonedDateTime;
 import java.util.UUID;
 
 public class Notification extends AggregateRoot<NotificationId> {
-    private UserId userIdFrom;
-    private UserId userIdTo;
+    private User userFrom;
+    private User userTo;
     private String subject;
     private String fullMessage;
     private String smallMessage;
@@ -26,89 +26,142 @@ public class Notification extends AggregateRoot<NotificationId> {
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
-    public void initializeNotification() {
-        setId(new NotificationId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
-        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
-    }
-
     private Notification(Builder builder) {
         super.setId(builder.notificationId);
-        userIdFrom = builder.userIdFrom;
-        userIdTo = builder.userIdTo;
-        subject = builder.subject;
-        fullMessage = builder.fullMessage;
-        smallMessage = builder.smallMessage;
-        component = builder.component;
-        eventType = builder.eventType;
-        contextUrl = builder.contextUrl;
-        contextUrlName = builder.contextUrlName;
+        setUserFrom(builder.userFrom);
+        setUserTo(builder.userTo);
+        setSubject(builder.subject);
+        setFullMessage(builder.fullMessage);
+        setSmallMessage(builder.smallMessage);
+        setComponent(builder.component);
+        setEventType(builder.eventType);
+        setContextUrl(builder.contextUrl);
+        setContextUrlName(builder.contextUrlName);
         isRead = builder.isRead;
-        timeRead = builder.timeRead;
-        createdAt = builder.createdAt;
-        updatedAt = builder.updatedAt;
+        setTimeRead(builder.timeRead);
+        setCreatedAt(builder.createdAt);
+        setUpdatedAt(builder.updatedAt);
     }
 
     public static Builder builder() {
         return new Builder();
     }
 
-    public UserId getUserIdFrom() {
-        return userIdFrom;
+    public void initializeNotification() {
+        setId(new NotificationId(UUID.randomUUID()));
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
     }
 
-    public UserId getUserIdTo() {
-        return userIdTo;
+
+    public User getUserFrom() {
+        return userFrom;
+    }
+
+    public void setUserFrom(User userFrom) {
+        this.userFrom = userFrom;
+    }
+
+    public User getUserTo() {
+        return userTo;
+    }
+
+    public void setUserTo(User userTo) {
+        this.userTo = userTo;
     }
 
     public String getSubject() {
         return subject;
     }
 
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
     public String getFullMessage() {
         return fullMessage;
+    }
+
+    public void setFullMessage(String fullMessage) {
+        this.fullMessage = fullMessage;
     }
 
     public String getSmallMessage() {
         return smallMessage;
     }
 
+    public void setSmallMessage(String smallMessage) {
+        this.smallMessage = smallMessage;
+    }
+
     public String getComponent() {
         return component;
+    }
+
+    public void setComponent(String component) {
+        this.component = component;
     }
 
     public NotificationEventType getEventType() {
         return eventType;
     }
 
+    public void setEventType(NotificationEventType eventType) {
+        this.eventType = eventType;
+    }
+
     public String getContextUrl() {
         return contextUrl;
+    }
+
+    public void setContextUrl(String contextUrl) {
+        this.contextUrl = contextUrl;
     }
 
     public String getContextUrlName() {
         return contextUrlName;
     }
 
+    public void setContextUrlName(String contextUrlName) {
+        this.contextUrlName = contextUrlName;
+    }
+
     public Boolean getRead() {
         return isRead;
+    }
+
+    public void setRead(Boolean read) {
+        isRead = read;
     }
 
     public ZonedDateTime getTimeRead() {
         return timeRead;
     }
 
+    public void setTimeRead(ZonedDateTime timeRead) {
+        this.timeRead = timeRead;
+    }
+
     public ZonedDateTime getCreatedAt() {
         return createdAt;
+    }
+
+    public void setCreatedAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
     public ZonedDateTime getUpdatedAt() {
         return updatedAt;
     }
 
+    public void setUpdatedAt(ZonedDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     public static final class Builder {
         private NotificationId notificationId;
-        private UserId userIdFrom;
-        private UserId userIdTo;
+        private User userFrom;
+        private User userTo;
         private String subject;
         private String fullMessage;
         private String smallMessage;
@@ -129,13 +182,13 @@ public class Notification extends AggregateRoot<NotificationId> {
             return this;
         }
 
-        public Builder userIdFrom(UserId val) {
-            userIdFrom = val;
+        public Builder userFrom(User val) {
+            userFrom = val;
             return this;
         }
 
-        public Builder userIdTo(UserId val) {
-            userIdTo = val;
+        public Builder userTo(User val) {
+            userTo = val;
             return this;
         }
 
