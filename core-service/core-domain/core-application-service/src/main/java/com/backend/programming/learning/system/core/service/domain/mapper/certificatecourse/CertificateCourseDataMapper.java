@@ -3,9 +3,9 @@ package com.backend.programming.learning.system.core.service.domain.mapper.certi
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryCertificateCourseResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryTopicResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.user.QueryUserResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.mapper.topic.TopicDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
@@ -61,14 +61,14 @@ public class CertificateCourseDataMapper {
                 .build();
     }
 
-    public QueryCertificateCourseResponse certificateCourseToQueryCertificateCourseResponse(
+    public CertificateCourseResponseEntity certificateCourseToQueryCertificateCourseResponse(
             CertificateCourse certificateCourse) {
-        QueryTopicResponse queryTopicResponse = topicDataMapper.
+        TopicResponseEntity topicResponseEntity = topicDataMapper.
                 topicToQueryTopicResponse(certificateCourse.getTopic());
-        QueryUserResponse createdByResponse = userDataMapper.userToQueryUserResponse(certificateCourse.getCreatedBy());
-        QueryUserResponse updatedByResponse = userDataMapper.userToQueryUserResponse(certificateCourse.getUpdatedBy());
+        UserResponseEntity createdByResponse = userDataMapper.userToQueryUserResponse(certificateCourse.getCreatedBy());
+        UserResponseEntity updatedByResponse = userDataMapper.userToQueryUserResponse(certificateCourse.getUpdatedBy());
 
-        return QueryCertificateCourseResponse.builder()
+        return CertificateCourseResponseEntity.builder()
                 .certificateCourseId(certificateCourse.getId().getValue())
                 .name(certificateCourse.getName())
                 .description(certificateCourse.getDescription())
@@ -76,7 +76,7 @@ public class CertificateCourseDataMapper {
                 .avgRating(certificateCourse.getAvgRating())
                 .startTime(certificateCourse.getStartTime())
                 .endTime(certificateCourse.getEndTime())
-                .topic(queryTopicResponse)
+                .topic(topicResponseEntity)
                 .isDeleted(certificateCourse.getDeleted())
                 .createdBy(createdByResponse)
                 .updatedBy(updatedByResponse)
@@ -87,12 +87,12 @@ public class CertificateCourseDataMapper {
 
     public QueryAllCertificateCoursesResponse certificateCoursesToQueryAllCertificateCoursesResponse(
             Page<CertificateCourse> certificateCourses) {
-        List<QueryCertificateCourseResponse> queryCertificateCourseResponses = new ArrayList<>();
+        List<CertificateCourseResponseEntity> certificateCourseResponsEntities = new ArrayList<>();
         for (CertificateCourse certificateCourse : certificateCourses) {
-            queryCertificateCourseResponses.add(certificateCourseToQueryCertificateCourseResponse(certificateCourse));
+            certificateCourseResponsEntities.add(certificateCourseToQueryCertificateCourseResponse(certificateCourse));
         }
         return QueryAllCertificateCoursesResponse.builder()
-                .certificateCourses(queryCertificateCourseResponses)
+                .certificateCourses(certificateCourseResponsEntities)
                 .currentPage(certificateCourses.getNumber())
                 .totalPages(certificateCourses.getTotalPages())
                 .totalItems(certificateCourses.getTotalElements())

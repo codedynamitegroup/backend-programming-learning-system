@@ -9,7 +9,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryContestCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryContestResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest.ContestApplicationService;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest_user.ContestUserApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -69,14 +69,14 @@ public class ContestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<QueryContestResponse> getContest(@PathVariable UUID id) {
-        QueryContestResponse queryContestResponse =
+    public ResponseEntity<ContestResponseEntity> getContest(@PathVariable UUID id) {
+        ContestResponseEntity contestResponseEntity =
                 contestApplicationService.queryContest(QueryContestCommand
                         .builder()
                         .contestId(id)
                         .build());
-        log.info("Returning contest: {}", queryContestResponse.getContestId());
-        return  ResponseEntity.ok(queryContestResponse);
+        log.info("Returning contest: {}", contestResponseEntity.getContestId());
+        return  ResponseEntity.ok(contestResponseEntity);
     }
 
     @DeleteMapping("/{id}")

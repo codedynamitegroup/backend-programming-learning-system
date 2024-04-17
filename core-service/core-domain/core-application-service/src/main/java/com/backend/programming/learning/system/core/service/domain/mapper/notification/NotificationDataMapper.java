@@ -3,8 +3,8 @@ package com.backend.programming.learning.system.core.service.domain.mapper.notif
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.notification.CreateNotificationCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.notification.CreateNotificationResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.notification.QueryAllNotificationsResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.notification.QueryNotificationResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.user.QueryUserResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.notification.NotificationResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Notification;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
@@ -50,13 +50,13 @@ public class NotificationDataMapper {
                 .build();
     }
 
-    public QueryNotificationResponse notificationToQueryNotificationResponse(Notification notification) {
-        QueryUserResponse userFromResponse = notification.getUserFrom() != null
+    public NotificationResponseEntity notificationToQueryNotificationResponse(Notification notification) {
+        UserResponseEntity userFromResponse = notification.getUserFrom() != null
                 ? userDataMapper.userToQueryUserResponse(notification.getUserFrom())
                 : null;
-        QueryUserResponse userToResponse = userDataMapper.userToQueryUserResponse(notification.getUserTo());
+        UserResponseEntity userToResponse = userDataMapper.userToQueryUserResponse(notification.getUserTo());
 
-        return QueryNotificationResponse.builder()
+        return NotificationResponseEntity.builder()
                 .notificationId(notification.getId().getValue())
                 .userFrom(userFromResponse)
                 .userTo(userToResponse)

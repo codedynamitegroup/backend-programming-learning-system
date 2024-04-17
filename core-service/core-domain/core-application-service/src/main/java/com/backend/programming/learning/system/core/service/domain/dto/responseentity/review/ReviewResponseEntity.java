@@ -1,6 +1,6 @@
-package com.backend.programming.learning.system.core.service.domain.dto.method.query.review;
+package com.backend.programming.learning.system.core.service.domain.dto.responseentity.review;
 
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.user.QueryUserResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class QueryReviewResponse {
+public class ReviewResponseEntity {
     @NotNull
     private final UUID reviewId;
     @NotNull
@@ -22,9 +22,9 @@ public class QueryReviewResponse {
     @NotNull
     private final Float rating;
     @NotNull
-    private final QueryUserResponse createdBy;
+    private final UserResponseEntity createdBy;
     @NotNull
-    private final QueryUserResponse updatedBy;
+    private final UserResponseEntity updatedBy;
     @NotNull
     private final ZonedDateTime createdAt;
     @NotNull

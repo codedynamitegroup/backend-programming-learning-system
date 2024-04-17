@@ -7,7 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryTopicCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryTopicResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Topic;
 import com.backend.programming.learning.system.core.service.domain.mapper.topic.TopicDataMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +34,7 @@ public class TopicCommandHandler {
     }
 
     @Transactional(readOnly = true)
-    public QueryTopicResponse queryTopicResponse(
+    public TopicResponseEntity queryTopicResponse(
             QueryTopicCommand queryTopicCommand) {
         Topic topic = topicQueryHelper.queryTopicById(queryTopicCommand.getTopicId());
 

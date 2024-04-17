@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.core.service.dataaccess.question
 import com.backend.programming.learning.system.core.service.dataaccess.organization.mapper.OrganizationDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
-import com.backend.programming.learning.system.core.service.domain.dto.responseEntity.QuestionResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import org.springframework.stereotype.Component;

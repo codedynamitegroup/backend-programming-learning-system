@@ -7,7 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryReviewCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryReviewResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.review.ReviewResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.review.ReviewApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -36,7 +36,7 @@ class ReviewApplicationServiceImpl implements ReviewApplicationService {
     }
 
     @Override
-    public QueryReviewResponse queryReview(QueryReviewCommand queryReviewCommand) {
+    public ReviewResponseEntity queryReview(QueryReviewCommand queryReviewCommand) {
         return reviewCommandHandler.findReviewResponseById(queryReviewCommand);
     }
 

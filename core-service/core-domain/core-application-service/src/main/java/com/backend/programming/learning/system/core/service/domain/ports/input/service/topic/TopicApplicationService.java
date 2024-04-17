@@ -7,7 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryTopicCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryTopicResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
 
 import javax.validation.Valid;
 
@@ -18,7 +18,7 @@ public interface TopicApplicationService {
     QueryAllTopicsResponse queryAllTopics(
             @Valid QueryAllTopicsCommand queryAllTopicsCommand);
 
-    QueryTopicResponse queryTopic(
+    TopicResponseEntity queryTopic(
             @Valid QueryTopicCommand queryTopicCommand);
 
     DeleteTopicResponse deleteTopic(

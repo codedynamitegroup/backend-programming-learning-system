@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.dto.method.query.contest;
 
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestResponseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class QueryAllContestsResponse {
     @NotNull
-    private final List<QueryContestResponse> contests;
+    private final List<ContestResponseEntity> contests;
     @NotNull
     private final int currentPage;
     @NotNull

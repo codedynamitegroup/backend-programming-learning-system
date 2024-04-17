@@ -7,7 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryCertificateCourseCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.mapper.certificatecourse.CertificateCourseDataMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -46,7 +46,7 @@ public class CertificateCourseCommandHandler {
     }
 
     @Transactional(readOnly = true)
-    public QueryCertificateCourseResponse findCertificateCourseById(
+    public CertificateCourseResponseEntity findCertificateCourseById(
             QueryCertificateCourseCommand queryCertificateCourseCommand) {
         CertificateCourse certificateCourse = certificateCourseQueryHelper
                 .queryCertificateCourseById(queryCertificateCourseCommand.getCertificateCourseId());

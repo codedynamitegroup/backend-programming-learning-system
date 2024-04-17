@@ -1,6 +1,6 @@
-package com.backend.programming.learning.system.core.service.domain.dto.method.query.contest;
+package com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest;
 
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.user.QueryUserResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class QueryContestResponse {
+public class ContestResponseEntity {
     @NotNull
     private final UUID contestId;
     @NotNull
@@ -23,9 +23,9 @@ public class QueryContestResponse {
     private final ZonedDateTime startTime;
     private final ZonedDateTime endTime;
     @NotNull
-    private final QueryUserResponse createdBy;
+    private final UserResponseEntity createdBy;
     @NotNull
-    private final QueryUserResponse updatedBy;
+    private final UserResponseEntity updatedBy;
     @NotNull
     private final ZonedDateTime createdAt;
     @NotNull

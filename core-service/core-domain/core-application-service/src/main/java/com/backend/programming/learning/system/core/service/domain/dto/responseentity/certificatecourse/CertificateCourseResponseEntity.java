@@ -1,7 +1,7 @@
-package com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse;
+package com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse;
 
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryTopicResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.user.QueryUserResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class QueryCertificateCourseResponse {
+public class CertificateCourseResponseEntity {
     @NotNull
     private final UUID certificateCourseId;
     @NotNull
@@ -29,13 +29,13 @@ public class QueryCertificateCourseResponse {
     @NotNull
     private final ZonedDateTime endTime;
     @NotNull
-    private final QueryTopicResponse topic;
+    private final TopicResponseEntity topic;
     @NotNull
     private final Boolean isDeleted;
     @NotNull
-    private final QueryUserResponse createdBy;
+    private final UserResponseEntity createdBy;
     @NotNull
-    private final QueryUserResponse updatedBy;
+    private final UserResponseEntity updatedBy;
     @NotNull
     private final ZonedDateTime createdAt;
     @NotNull

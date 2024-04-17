@@ -7,14 +7,14 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryCertificateCourseCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
 
 import javax.validation.Valid;
 
 public interface CertificateCourseApplicationService {
     CreateCertificateCourseResponse createCertificateCourse(
             @Valid CreateCertificateCourseCommand createCertificateCourseCommand);
-    QueryCertificateCourseResponse queryCertificateCourse(
+    CertificateCourseResponseEntity queryCertificateCourse(
             @Valid QueryCertificateCourseCommand queryCertificateCourseCommand);
 
     QueryAllCertificateCoursesResponse queryAllCertificateCourses(

@@ -2,7 +2,7 @@ package com.backend.programming.learning.system.core.service.domain.mapper.quest
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.responseEntity.QuestionResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.AnswerOfQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.Organization;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;

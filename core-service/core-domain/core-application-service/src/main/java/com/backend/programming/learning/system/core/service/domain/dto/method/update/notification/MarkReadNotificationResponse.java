@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.core.service.domain.dto.update.notification;
+package com.backend.programming.learning.system.core.service.domain.dto.method.update.notification;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

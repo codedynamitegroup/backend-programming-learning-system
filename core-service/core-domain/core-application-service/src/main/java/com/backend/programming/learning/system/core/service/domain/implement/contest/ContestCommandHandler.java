@@ -7,7 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryContestCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryContestResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Contest;
 import com.backend.programming.learning.system.core.service.domain.mapper.contest.ContestDataMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -58,7 +58,7 @@ public class ContestCommandHandler {
     }
 
     @Transactional(readOnly = true)
-    public QueryContestResponse queryContestResponse(
+    public ContestResponseEntity queryContestResponse(
             QueryContestCommand queryContestCommand
     ) {
         Contest contest = contestQueryHelper

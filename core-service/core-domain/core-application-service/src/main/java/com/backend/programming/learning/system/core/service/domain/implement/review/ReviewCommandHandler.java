@@ -7,7 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryReviewCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryReviewResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.review.ReviewResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
 import com.backend.programming.learning.system.core.service.domain.mapper.review.ReviewDataMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -59,7 +59,7 @@ public class ReviewCommandHandler {
     }
 
     @Transactional(readOnly = true)
-    public QueryReviewResponse findReviewResponseById(
+    public ReviewResponseEntity findReviewResponseById(
             QueryReviewCommand queryReviewCommand
     ) {
         Review review = reviewQueryHelper

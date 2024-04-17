@@ -1,6 +1,6 @@
-package com.backend.programming.learning.system.core.service.domain.dto.method.query.notification;
+package com.backend.programming.learning.system.core.service.domain.dto.responseentity.notification;
 
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.user.QueryUserResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.valueobject.NotificationEventType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,13 +13,13 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class QueryNotificationResponse {
+public class NotificationResponseEntity {
     @NotNull
     private final UUID notificationId;
     @NotNull
-    private final QueryUserResponse userFrom;
+    private final UserResponseEntity userFrom;
     @NotNull
-    private final QueryUserResponse userTo;
+    private final UserResponseEntity userTo;
     @NotNull
     private final String subject;
     @NotNull
