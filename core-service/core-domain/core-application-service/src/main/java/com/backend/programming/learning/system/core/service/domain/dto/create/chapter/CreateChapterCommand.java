@@ -12,14 +12,14 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class CreateChapterCommand {
-    @NotNull
+    @NotNull(message = "CertificateCourseId is required")
     private final UUID certificateCourseId;
-    @NotNull
+    @NotNull(message = "Title is required")
     private final String title;
-    @NotNull
+    @NotNull(message = "Description is required")
     private final String description;
-    @NotNull
+    @NotNull(message = "CreatedBy is required")
     private final UUID createdBy;
-    @NotNull
+    @NotNull(message = "UpdatedBy is required")
     private final UUID updatedBy;
 }

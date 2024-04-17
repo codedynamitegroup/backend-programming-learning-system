@@ -11,6 +11,6 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class DeleteTopicCommand {
-    @NotNull
+    @NotNull(message = "topicId is required")
     private final UUID topicId;
 }

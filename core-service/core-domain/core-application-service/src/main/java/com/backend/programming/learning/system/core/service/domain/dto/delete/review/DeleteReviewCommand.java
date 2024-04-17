@@ -11,6 +11,6 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class DeleteReviewCommand {
-    @NotNull
+    @NotNull(message = "reviewId is required")
     private final UUID reviewId;
 }

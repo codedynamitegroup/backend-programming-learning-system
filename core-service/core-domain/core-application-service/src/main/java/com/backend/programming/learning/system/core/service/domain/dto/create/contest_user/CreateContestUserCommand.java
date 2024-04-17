@@ -11,9 +11,9 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class CreateContestUserCommand {
-    @NotNull
+    @NotNull(message = "UserId is required")
     private final UUID userId;
-    @NotNull
+    @NotNull(message = "ContestId is required")
     private final UUID contestId;
 
 }

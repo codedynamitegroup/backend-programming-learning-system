@@ -11,8 +11,8 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class CreateChapterQuestionCommand {
-    @NotNull
+    @NotNull(message = "QuestionId is required")
     private final UUID questionId;
-    @NotNull
+    @NotNull(message = "ChapterId is required")
     private final UUID chapterId;
 }

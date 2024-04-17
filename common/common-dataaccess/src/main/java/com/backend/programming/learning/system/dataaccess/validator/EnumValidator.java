@@ -13,7 +13,6 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = EnumValidatorImpl.class)
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-@NotNull
 @ReportAsSingleViolation
 public @interface EnumValidator {
 

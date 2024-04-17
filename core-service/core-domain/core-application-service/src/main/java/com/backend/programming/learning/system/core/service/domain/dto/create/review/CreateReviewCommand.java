@@ -13,16 +13,16 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class CreateReviewCommand {
-    @NotNull
+    @NotNull(message = "certificateCourseId is required")
     private final UUID certificateCourseId;
-    @NotNull
+    @NotNull(message = "rating is required")
     @Min(0)
     @Max(5)
     private final Float rating;
-    @NotNull
+    @NotNull(message = "content is required")
     private final String content;
-    @NotNull
+    @NotNull(message = "createdBy is required")
     private final UUID createdBy;
-    @NotNull
+    @NotNull(message = "updatedBy is required")
     private final UUID updatedBy;
 }

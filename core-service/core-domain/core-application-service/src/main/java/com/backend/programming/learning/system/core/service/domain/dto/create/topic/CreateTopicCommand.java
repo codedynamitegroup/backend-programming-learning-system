@@ -13,14 +13,14 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class CreateTopicCommand {
-    @NotNull
+    @NotNull(message = "name is required")
     private final String name;
-    @NotNull
+    @NotNull(message = "skillLevel is required")
     private final String description;
-    @NotNull
+    @NotNull(message = "programmingLanguageIds is required")
     private final List<UUID> programmingLanguageIds;
-    @NotNull
+    @NotNull(message = "createdBy is required")
     private final UUID createdBy;
-    @NotNull
+    @NotNull(message = "updatedBy is required")
     private final UUID updatedBy;
 }
