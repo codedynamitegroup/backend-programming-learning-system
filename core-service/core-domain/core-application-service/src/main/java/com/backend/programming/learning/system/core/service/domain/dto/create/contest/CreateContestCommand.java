@@ -12,15 +12,15 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class CreateContestCommand {
-    @NotNull
+    @NotNull(message = "Name is required")
     private final String name;
-    @NotNull
+    @NotNull(message = "Description is required")
     private final String description;
-    @NotNull
+    @NotNull(message = "Start time is required")
     private final ZonedDateTime startTime;
     private final ZonedDateTime endTime;
-    @NotNull
+    @NotNull(message = "CreatedBy is required")
     private final UUID createdBy;
-    @NotNull
+    @NotNull(message = "UpdatedBy is required")
     private final UUID updatedBy;
 }

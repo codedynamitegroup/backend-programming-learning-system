@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.dto.create.notification;
 
 import com.backend.programming.learning.system.core.service.domain.valueobject.NotificationEventType;
+import com.backend.programming.learning.system.dataaccess.validator.EnumValidator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,17 +14,20 @@ import java.util.UUID;
 @AllArgsConstructor
 public class CreateNotificationCommand {
     private final UUID userIdFrom;
-    @NotNull
+    @NotNull(message = "userIdTo is required")
     private final UUID userIdTo;
-    @NotNull
+    @NotNull(message = "subject is required")
     private final String subject;
-    @NotNull
+    @NotNull(message = "fullMessage is required")
     private final String fullMessage;
-    @NotNull
+    @NotNull(message = "smallMessage is required")
     private final String smallMessage;
     private final String component;
-    @NotNull
+
+    @NotNull(message = "eventType is required")
+    @EnumValidator(enumClass = NotificationEventType.class, message = "eventType is invalid")
     private final NotificationEventType eventType;
+
     private final String contextUrl;
     private final String contextUrlName;
 }

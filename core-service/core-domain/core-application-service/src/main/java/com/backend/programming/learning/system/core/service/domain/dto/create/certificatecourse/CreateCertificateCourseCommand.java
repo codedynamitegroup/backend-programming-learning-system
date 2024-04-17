@@ -14,21 +14,22 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class CreateCertificateCourseCommand {
-    @NotNull
+    @NotNull(message = "Name is required")
     private final String name;
 
-    @EnumValidator(enumClass = SkillLevel.class)
+    @NotNull(message = "SkillLevel is required")
+    @EnumValidator(enumClass = SkillLevel.class, message = "SkillLevel is invalid")
     private final String skillLevel;
 
-    @NotNull
+    @NotNull(message = "TopicId is required")
     private final UUID topicId;
 
-    @NotNull
+    @NotNull(message = "StartTime is required")
     private final ZonedDateTime startTime;
     private final ZonedDateTime endTime;
 
-    @NotNull
+    @NotNull(message = "CreatedBy is required")
     private final UUID createdBy;
-    @NotNull
+    @NotNull(message = "UpdatedBy is required")
     private final UUID updatedBy;
 }

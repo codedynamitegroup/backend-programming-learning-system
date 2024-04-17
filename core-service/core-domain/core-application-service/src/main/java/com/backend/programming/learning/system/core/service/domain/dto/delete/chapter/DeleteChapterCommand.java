@@ -11,6 +11,6 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class DeleteChapterCommand {
-    @NotNull
+    @NotNull(message = "chapterId is required")
     private final UUID chapterId;
 }

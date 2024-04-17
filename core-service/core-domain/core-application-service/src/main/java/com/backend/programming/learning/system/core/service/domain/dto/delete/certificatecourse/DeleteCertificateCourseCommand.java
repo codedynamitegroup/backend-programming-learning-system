@@ -11,6 +11,6 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class DeleteCertificateCourseCommand {
-    @NotNull
+    @NotNull(message = "certificateCourseId is required")
     private final UUID certificateCourseId;
 }

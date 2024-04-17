@@ -11,6 +11,6 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class DeleteContestCommand {
-    @NotNull
+    @NotNull(message = "contestId is required")
     private final UUID contestId;
 }
