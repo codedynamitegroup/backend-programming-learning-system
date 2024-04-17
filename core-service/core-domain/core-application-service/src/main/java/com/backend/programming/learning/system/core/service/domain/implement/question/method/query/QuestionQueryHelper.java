@@ -2,7 +2,7 @@ package com.backend.programming.learning.system.core.service.domain.implement.qu
 
 import com.backend.programming.learning.system.core.service.domain.dto.query.question.QueryQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
-import com.backend.programming.learning.system.core.service.domain.exception.question.QuestionNotFoundException;
+import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QuestionRepository;
 import lombok.extern.slf4j.Slf4j;

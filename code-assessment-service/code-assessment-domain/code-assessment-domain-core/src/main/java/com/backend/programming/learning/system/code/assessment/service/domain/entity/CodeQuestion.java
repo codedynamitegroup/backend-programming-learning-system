@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.e
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TestCaseId;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 
 import java.util.List;
@@ -15,11 +16,18 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     private final String problemStatement;
     private final String inputFormat;
     private final String outputFormat;
-    private final Boolean isDeleted;
+    private final String constraints;
+    private CopyState copyState;
     private List<String> failureMessages;
+    public static final String FAILURE_MESSAGE_DELIMITER = ",";
+
+    public static Builder builder() {
+        return new Builder();
+    }
 
     public void initializeCodeQuestion(){
         setId(new CodeQuestionId(UUID.randomUUID()));
+        copyState = CopyState.CREATING;
         intializeTestCases();
     }
     public void validateCodeQuestion(){
@@ -37,6 +45,10 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
             }
     }
 
+    public String getConstraints() {
+        return constraints;
+    }
+
     public String getProblemStatement() {
         return problemStatement;
     }
@@ -49,8 +61,8 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         return outputFormat;
     }
 
-    public Boolean getIsDeleted() {
-        return isDeleted;
+    public CopyState getCopyState() {
+        return copyState;
     }
 
     public QuestionId getQuestionId() {
@@ -68,6 +80,7 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     public List<String> getFailureMessages() {
         return failureMessages;
     }
+
     private CodeQuestion(Builder builder) {
         questionId = builder.questionId;
         testCases = builder.testCases;
@@ -75,7 +88,8 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         problemStatement = builder.problemStatement;
         inputFormat = builder.inputFormat;
         outputFormat = builder.outputFormat;
-        isDeleted = builder.isDeleted;
+        constraints = builder.constraints;
+        copyState = builder.copyState;
         failureMessages = builder.failureMessages;
         super.setId(builder.id);
     }
@@ -87,15 +101,13 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         private String problemStatement;
         private String inputFormat;
         private String outputFormat;
+        private String constraints;
+        private CopyState copyState;
         private Boolean isDeleted;
         private List<String> failureMessages;
         private CodeQuestionId id;
 
         private Builder() {
-        }
-
-        public static Builder builder() {
-            return new Builder();
         }
 
         public Builder questionId(QuestionId val) {
@@ -128,6 +140,16 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
             return this;
         }
 
+        public Builder constraints(String val) {
+            constraints = val;
+            return this;
+        }
+
+        public Builder copyState(CopyState val) {
+            copyState = val;
+            return this;
+        }
+
         public Builder isDeleted(Boolean val) {
             isDeleted = val;
             return this;
@@ -137,6 +159,7 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
             failureMessages = val;
             return this;
         }
+
 
         public Builder codeQuestionId(CodeQuestionId val) {
             id = val;

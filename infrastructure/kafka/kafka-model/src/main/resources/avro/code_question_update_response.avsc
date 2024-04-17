@@ -1,0 +1,52 @@
+{
+  "name": "CodeQuestionUpdateResponseAvroModel",
+  "namespace": "com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model",
+  "type": "record",
+  "fields": [
+    {
+      "name": "id",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "sagaId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "questionId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "problemStatement",
+      "type": "string"
+    },
+    {
+      "name": "inputFormat",
+      "type": "string"
+    },
+    {
+      "name": "outputFormat",
+      "type": "string"
+    },
+    {
+      "name": "isDeleted",
+      "type": "boolean"
+    },
+    {
+      "name": "constraints",
+      "type": "string"
+    },
+    {
+      "name": "updateSuccess",
+      "type": "boolean"
+    }
+  ]
+}

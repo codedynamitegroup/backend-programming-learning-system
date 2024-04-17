@@ -2,8 +2,11 @@ package com.backend.programming.learning.system.core.service.application.excepti
 
 import com.backend.programming.learning.system.application.handler.ErrorDTO;
 import com.backend.programming.learning.system.application.handler.GlobalExceptionHandler;
-import com.backend.programming.learning.system.core.service.domain.exception.*;
-import com.backend.programming.learning.system.core.service.domain.exception.question.QuestionNotFoundException;
+import com.backend.programming.learning.system.core.service.domain.exception.CertificateCourseNotFoundException;
+import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
+import com.backend.programming.learning.system.core.service.domain.exception.OrganizationNotFoundException;
+import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
+import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

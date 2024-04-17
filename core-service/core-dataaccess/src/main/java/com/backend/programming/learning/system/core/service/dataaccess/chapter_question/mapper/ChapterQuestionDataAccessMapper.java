@@ -11,8 +11,7 @@ import com.backend.programming.learning.system.core.service.domain.entity.Chapte
 import com.backend.programming.learning.system.core.service.domain.entity.ChapterQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.exception.ChapterNotFoundException;
-import com.backend.programming.learning.system.core.service.domain.exception.question.QuestionNotFoundException;
-import com.backend.programming.learning.system.core.service.domain.mapper.chapter.ChapterDataMapper;
+import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;

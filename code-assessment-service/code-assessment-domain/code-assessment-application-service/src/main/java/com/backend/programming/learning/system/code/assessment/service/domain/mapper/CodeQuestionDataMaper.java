@@ -13,19 +13,20 @@ import java.util.stream.Collectors;
 @Component
 public class CodeQuestionDataMaper {
     public CodeQuestion createCodeQuestionCommandToCodeQuestion(CreateCodeQuestionCommand command){
-        return CodeQuestion.Builder.builder()
+        return CodeQuestion.builder()
                 .questionId(new QuestionId(command.getQuestionId()))
                 .testCases(testCaseToTestCaseEntities(command.getTestCases()))
                 .dslTemplate(command.getDslTemplate())
                 .problemStatement(command.getProblemStatement())
                 .inputFormat(command.getInputFormat())
                 .outputFormat(command.getOutputFormat())
-                .isDeleted(command.getIsDeleted())
+                .constraints(command.getConstraints())
                 .build();
     }
     public CreateCodeQuestionResponse codeQuestionToCreateCodeQuestionReponse(CodeQuestion codeQuestion, String message){
         return CreateCodeQuestionResponse.builder()
                 .codeQuestionId(codeQuestion.getId())
+                .state(codeQuestion.getCopyState())
                 .message(message)
                 .build();
     }
