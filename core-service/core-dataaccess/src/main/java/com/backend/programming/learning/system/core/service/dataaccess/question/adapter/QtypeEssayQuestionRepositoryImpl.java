@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.dataaccess.question.adapter;
 
-import com.backend.programming.learning.system.core.service.dataaccess.question.mapper.QtypeQuestionDataAccessMapper;
+import com.backend.programming.learning.system.core.service.dataaccess.question.mapper.QtypeEssayQuestionDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.question.repository.QtypeEssayQuestionJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeEssayQuestionRepository;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeEssayQuestion;
@@ -13,25 +13,25 @@ import java.util.UUID;
 @Component
 public class QtypeEssayQuestionRepositoryImpl implements QtypeEssayQuestionRepository {
     private final QtypeEssayQuestionJpaRepository qtypeEssayQuestionJpaRepository;
-    private final QtypeQuestionDataAccessMapper qtypeQuestionDataAccessMapper;
+    private final QtypeEssayQuestionDataAccessMapper qtypeEssayQuestionDataAccessMapper;
 
     public QtypeEssayQuestionRepositoryImpl(QtypeEssayQuestionJpaRepository qtypeEssayQuestionJpaRepository,
-                                            QtypeQuestionDataAccessMapper qtypeQuestionDataAccessMapper) {
+                                            QtypeEssayQuestionDataAccessMapper qtypeEssayQuestionDataAccessMapper) {
         this.qtypeEssayQuestionJpaRepository = qtypeEssayQuestionJpaRepository;
-        this.qtypeQuestionDataAccessMapper = qtypeQuestionDataAccessMapper;
+        this.qtypeEssayQuestionDataAccessMapper = qtypeEssayQuestionDataAccessMapper;
     }
 
     @Override
     public QtypeEssayQuestion saveQtypeEssayQuestion(QtypeEssayQuestion question) {
-        return qtypeQuestionDataAccessMapper.qtypeEssayQuestionEntityToQtypeEssayQuestion(qtypeEssayQuestionJpaRepository
-                .save(qtypeQuestionDataAccessMapper
+        return qtypeEssayQuestionDataAccessMapper.qtypeEssayQuestionEntityToQtypeEssayQuestion(qtypeEssayQuestionJpaRepository
+                .save(qtypeEssayQuestionDataAccessMapper
                         .qtypeEssayQuestionToQtypeEssayQuestionEntity(question)));
     }
 
     @Override
     public Optional<QtypeEssayQuestion> findQtypeEssayQuestion(UUID qtEssayQuestionId) {
         return qtypeEssayQuestionJpaRepository.findById(qtEssayQuestionId)
-                .map(qtypeQuestionDataAccessMapper::qtypeEssayQuestionEntityToQtypeEssayQuestion);
+                .map(qtypeEssayQuestionDataAccessMapper::qtypeEssayQuestionEntityToQtypeEssayQuestion);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class QtypeEssayQuestionRepositoryImpl implements QtypeEssayQuestionRepos
         return qtypeEssayQuestionJpaRepository
                 .findAll()
                 .stream()
-                .map(qtypeQuestionDataAccessMapper::qtypeEssayQuestionEntityToQtypeEssayQuestion)
+                .map(qtypeEssayQuestionDataAccessMapper::qtypeEssayQuestionEntityToQtypeEssayQuestion)
                 .toList();
     }
 

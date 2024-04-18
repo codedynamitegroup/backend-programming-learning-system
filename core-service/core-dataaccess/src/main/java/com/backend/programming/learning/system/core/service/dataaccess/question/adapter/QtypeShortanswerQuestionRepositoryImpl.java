@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.dataaccess.question.adapter;
 
-import com.backend.programming.learning.system.core.service.dataaccess.question.mapper.QtypeQuestionDataAccessMapper;
+import com.backend.programming.learning.system.core.service.dataaccess.question.mapper.QtypeShortanswerQuestionDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.question.repository.QtypeShortanswerQuestionJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeShortanswerQuestionRepository;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeShortAnswerQuestion;
@@ -13,25 +13,25 @@ import java.util.UUID;
 @Component
 public class QtypeShortanswerQuestionRepositoryImpl implements QtypeShortanswerQuestionRepository {
     private final QtypeShortanswerQuestionJpaRepository qtypeShortAnswerQuestionJpaRepository;
-    private final QtypeQuestionDataAccessMapper qtypeQuestionDataAccessMapper;
+    private final QtypeShortanswerQuestionDataAccessMapper qtypeShortanswerQuestionDataAccessMapper;
 
     public QtypeShortanswerQuestionRepositoryImpl(QtypeShortanswerQuestionJpaRepository qtypeShortAnswerQuestionJpaRepository,
-                                                  QtypeQuestionDataAccessMapper qtypeQuestionDataAccessMapper) {
+                                                  QtypeShortanswerQuestionDataAccessMapper qtypeShortanswerQuestionDataAccessMapper) {
         this.qtypeShortAnswerQuestionJpaRepository = qtypeShortAnswerQuestionJpaRepository;
-        this.qtypeQuestionDataAccessMapper = qtypeQuestionDataAccessMapper;
+        this.qtypeShortanswerQuestionDataAccessMapper = qtypeShortanswerQuestionDataAccessMapper;
     }
 
     @Override
     public QtypeShortAnswerQuestion saveQtypeShortAnswerQuestion(QtypeShortAnswerQuestion question) {
-        return qtypeQuestionDataAccessMapper.qtypeShortanswerQuestionEntityToQtypeShortanswerQuestion(qtypeShortAnswerQuestionJpaRepository
-                .save(qtypeQuestionDataAccessMapper
+        return qtypeShortanswerQuestionDataAccessMapper.qtypeShortanswerQuestionEntityToQtypeShortanswerQuestion(qtypeShortAnswerQuestionJpaRepository
+                .save(qtypeShortanswerQuestionDataAccessMapper
                         .qtypeShortanswerQuestionToQtypeShortanswerQuestionEntity(question)));
     }
 
     @Override
     public Optional<QtypeShortAnswerQuestion> findQtypeShortAnswerQuestion(UUID qtShortAnswerQuestionId) {
         return qtypeShortAnswerQuestionJpaRepository.findById(qtShortAnswerQuestionId)
-                .map(qtypeQuestionDataAccessMapper::qtypeShortanswerQuestionEntityToQtypeShortanswerQuestion);
+                .map(qtypeShortanswerQuestionDataAccessMapper::qtypeShortanswerQuestionEntityToQtypeShortanswerQuestion);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class QtypeShortanswerQuestionRepositoryImpl implements QtypeShortanswerQ
         return qtypeShortAnswerQuestionJpaRepository
                 .findAll()
                 .stream()
-                .map(qtypeQuestionDataAccessMapper::qtypeShortanswerQuestionEntityToQtypeShortanswerQuestion)
+                .map(qtypeShortanswerQuestionDataAccessMapper::qtypeShortanswerQuestionEntityToQtypeShortanswerQuestion)
                 .toList();
     }
 
