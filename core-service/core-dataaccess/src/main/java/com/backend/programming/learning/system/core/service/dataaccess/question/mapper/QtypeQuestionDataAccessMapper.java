@@ -24,12 +24,30 @@ public class QtypeQuestionDataAccessMapper {
 
     // code
     public QtypeCodeQuestionEntity qtypeCodeQuestionToQtypeCodeQuestionEntity(QtypeCodeQuestion qtypeCodeQuestion) {
-        return QtypeCodeQuestionEntity.builder()
-                .id(qtypeCodeQuestion.getId().getValue())
-                .question(questionDataAccessMapper.questionToQuestionEntity(qtypeCodeQuestion.getQuestion()))
-                .dslTemplate(qtypeCodeQuestion.getDslTemplate())
-                .build();
+        QtypeCodeQuestionEntity.QtypeCodeQuestionEntityBuilder builder = QtypeCodeQuestionEntity.builder();
+
+        if (qtypeCodeQuestion.getId() != null)
+            builder.id(qtypeCodeQuestion.getId().getValue());
+        if (qtypeCodeQuestion.getQuestion() != null)
+            builder.question(questionDataAccessMapper.questionToQuestionEntity(qtypeCodeQuestion.getQuestion()));
+        if (qtypeCodeQuestion.getDslTemplate() != null)
+            builder.dslTemplate(qtypeCodeQuestion.getDslTemplate());
+
+        return builder.build();
     }
+
+    public QtypeCodeQuestionEntity setQtypeCodeQuestionEntity(QtypeCodeQuestionEntity qtypeCodeQuestionEntity,
+                                                              QtypeCodeQuestion qtypeCodeQuestion) {
+        if (qtypeCodeQuestion.getId() != null)
+            qtypeCodeQuestionEntity.setId(qtypeCodeQuestion.getId().getValue());
+        if (qtypeCodeQuestion.getQuestion() != null)
+            qtypeCodeQuestionEntity.setQuestion(questionDataAccessMapper.setQuestionEntity(qtypeCodeQuestionEntity.getQuestion(), qtypeCodeQuestion.getQuestion()));
+        if (qtypeCodeQuestion.getDslTemplate() != null)
+            qtypeCodeQuestionEntity.setDslTemplate(qtypeCodeQuestion.getDslTemplate());
+
+        return qtypeCodeQuestionEntity;
+    }
+
     public QtypeCodeQuestion qtypeCodeQuestionEntityToQtypeCodeQuestion(QtypeCodeQuestionEntity qtypeCodeQuestionEntity) {
         return QtypeCodeQuestion.builder()
                 .id(new QtypeCodeQuestionId(qtypeCodeQuestionEntity.getId()))

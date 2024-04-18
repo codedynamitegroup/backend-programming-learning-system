@@ -2,8 +2,10 @@ package com.backend.programming.learning.system.core.service.domain.mapper.quest
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQtypeCodeQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryQtypeCodeQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeCodeQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeCodeQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
+import com.backend.programming.learning.system.domain.valueobject.QtypeCodeQuestionId;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -28,5 +30,14 @@ public class QtypeCodeQuestionDataMapper {
         return List.of(qtypeCodeQuestions.stream()
                 .map(this::qtypeCodeQuestionToQueryQtypeCodeQuestionResponse)
                 .toArray(QueryQtypeCodeQuestionResponse[]::new));
+    }
+
+    public QtypeCodeQuestion updateQtypeCodeQuestionCommandToQtypeCodeQuestion(UpdateQtypeCodeQuestionCommand updateQtypeCodeQuestionCommand) {
+
+        return QtypeCodeQuestion.builder()
+                .id(new QtypeCodeQuestionId(updateQtypeCodeQuestionCommand.getQtCodeQuestionId()))
+                .dslTemplate(updateQtypeCodeQuestionCommand.getDslTemplate())
+                .question(null)
+                .build();
     }
 }
