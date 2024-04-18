@@ -34,8 +34,8 @@ public class AssignmentEntity {
     private Float maxScore;
     private ZonedDateTime timeOpen;
     private ZonedDateTime timeClose;
-    private Integer timeLimit;
-    private Integer type;
+    private ZonedDateTime timeLimit;
+    private String type;
     private Boolean visible;
 
     @Override

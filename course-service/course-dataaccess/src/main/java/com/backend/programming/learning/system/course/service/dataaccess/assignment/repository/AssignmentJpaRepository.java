@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.ports.output.repository.Assignmen
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -12,4 +13,7 @@ import java.util.UUID;
 public interface AssignmentJpaRepository extends JpaRepository<AssignmentEntity, UUID>
 {
     Optional<AssignmentEntity> findById(UUID id);
+
+    List<AssignmentEntity> findAllByCourseId(UUID courseId);
+
 }

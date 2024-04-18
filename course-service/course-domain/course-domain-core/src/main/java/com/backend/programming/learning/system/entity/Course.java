@@ -48,11 +48,6 @@ public class Course extends AggregateRoot<CourseId> {
         }
     }
 
-    private void initializeAssignment(AssignmentId assignmentId) {
-        for(Assignment assignment: assignments){
-            assignment.initializeAssignment(super.getId(), new AssignmentId(UUID.randomUUID()));
-        }
-    }
     private Course(Builder builder) {
         super.setId(builder.courseId);
         name = builder.name;
