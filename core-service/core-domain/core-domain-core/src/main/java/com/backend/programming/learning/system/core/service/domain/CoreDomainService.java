@@ -32,4 +32,5 @@ public interface CoreDomainService {
     void createChapter(Chapter chapter);
     void createCertificateCourseUser(CertificateCourseUser certificateCourseUser);
     void createContestUser(ContestUser contestUser);
+    void createCalendarEvent(CalendarEvent calendarEvent);
 }
