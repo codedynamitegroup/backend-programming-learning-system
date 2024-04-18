@@ -9,5 +9,4 @@ import java.util.UUID;
 
 @Repository
 public interface OrganizationJpaRepository extends JpaRepository<OrganizationEntity, UUID> {
-    Optional<OrganizationEntity> findById(UUID id);
 }

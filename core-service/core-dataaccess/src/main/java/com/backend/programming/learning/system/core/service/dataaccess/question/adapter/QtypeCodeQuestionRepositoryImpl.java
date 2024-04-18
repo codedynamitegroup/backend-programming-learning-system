@@ -1,7 +1,9 @@
 package com.backend.programming.learning.system.core.service.dataaccess.question.adapter;
 
+import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QtypeCodeQuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.question.mapper.QtypeQuestionDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.question.repository.QtypeCodeQuestionJpaRepository;
+import com.backend.programming.learning.system.core.service.domain.exception.question.QtypeCodeQuestionNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeCodeQuestionRepository;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeCodeQuestion;
 import org.springframework.stereotype.Component;
@@ -47,4 +49,17 @@ public class QtypeCodeQuestionRepositoryImpl implements QtypeCodeQuestionReposit
     public UUID getId(UUID questionId) {
         return qtypeCodeQuestionJpaRepository.getId(questionId);
     }
+
+    @Override
+    public void updateQtypeCodeQuestion(QtypeCodeQuestion qtypeCodeQuestion) {
+        Optional<QtypeCodeQuestionEntity> qtypeCodeQuestionEntity = qtypeCodeQuestionJpaRepository.findById(qtypeCodeQuestion.getId().getValue());
+
+        if (qtypeCodeQuestionEntity.isEmpty()) {
+            throw new QtypeCodeQuestionNotFoundException("Qtype Code Question not found with id: " + qtypeCodeQuestion.getId().getValue());
+        }
+
+        QtypeCodeQuestionEntity savingQtypeCodeQuestionEntity = qtypeQuestionDataAccessMapper.setQtypeCodeQuestionEntity(qtypeCodeQuestionEntity.get(), qtypeCodeQuestion);
+        qtypeCodeQuestionJpaRepository.save(savingQtypeCodeQuestionEntity);
+    }
+
 }

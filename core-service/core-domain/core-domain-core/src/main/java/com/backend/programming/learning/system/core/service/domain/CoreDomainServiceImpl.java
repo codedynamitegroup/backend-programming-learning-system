@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.core.service.domain;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
+import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.ZoneId;
@@ -48,6 +49,30 @@ public class CoreDomainServiceImpl implements CoreDomainService {
     @Override
     public QuestionDeletedEvent deleteQuestion(Question question, UUID qtypeId) {
         return new QuestionDeletedEvent(question, qtypeId, ZonedDateTime.now(ZoneId.of("UTC")));
+    }
+
+    @Override
+    public QuestionUpdatedEvent updateQtypeCodeQuestion(Question question, QtypeCodeQuestion qtypeCodeQuestion) {
+        return new QuestionUpdatedEvent(question, qtypeCodeQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of("UTC")));
+    }
+
+    @Override
+    public QuestionUpdatedEvent updateQtypeEssayQuestion(Question question, QtypeEssayQuestion qtypeEssayQuestion) {
+        return new QuestionUpdatedEvent(question, qtypeEssayQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of("UTC")));
+    }
+
+    @Override
+    public QuestionUpdatedEvent updateQtypeShortAnswerQuestion(
+            Question question,
+            QtypeShortAnswerQuestion qtypeShortAnswerQuestion) {
+        return new QuestionUpdatedEvent(question, qtypeShortAnswerQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of("UTC")));
+    }
+
+    @Override
+    public QuestionUpdatedEvent updateQtypeMultipleChoiceQuestion(
+            Question question,
+            QtypeMultiChoiceQuestion qtypeMultiChoiceQuestion) {
+        return new QuestionUpdatedEvent(question, qtypeMultiChoiceQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of("UTC")));
     }
 
     @Override

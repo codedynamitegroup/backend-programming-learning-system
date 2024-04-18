@@ -41,9 +41,7 @@ public class QuestionEntity {
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
-    @OneToMany(cascade = {CascadeType.ALL},
-            fetch = FetchType.EAGER,
-            orphanRemoval = true)
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinColumn(name = "question_id")
     private List<AnswerOfQuestionEntity> answerOfQuestions;
 

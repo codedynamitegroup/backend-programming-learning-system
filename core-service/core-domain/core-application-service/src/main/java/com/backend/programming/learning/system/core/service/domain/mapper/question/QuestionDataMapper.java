@@ -3,20 +3,25 @@ package com.backend.programming.learning.system.core.service.domain.mapper.quest
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.question.AnswerOfQuestionDeleteResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.AnswerOfQuestionUpdateEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQuestionUpdateEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.AnswerOfQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.Organization;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
-import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
-import com.backend.programming.learning.system.domain.valueobject.QuestionId;
-import com.backend.programming.learning.system.domain.valueobject.QuestionType;
+import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
+import com.backend.programming.learning.system.core.service.domain.valueobject.AnswerId;
+import com.backend.programming.learning.system.domain.valueobject.*;
 import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 public class QuestionDataMapper {
@@ -76,19 +81,64 @@ public class QuestionDataMapper {
                 .qtype(question.getqtype())
                 .createdAt(ZonedDateTime.now())
                 .updatedAt(ZonedDateTime.now())
+                .answers(question.getAnswers())
                 .build();
-    }
-
-    public List<QuestionResponseEntity> questionListToQueryQuestionResponseList(List<Question> questions) {
-        return List.of(questions.stream()
-                .map(this::questionToQuestionResponseEntity)
-                .toArray(QuestionResponseEntity[]::new));
     }
 
     public AnswerOfQuestionDeleteResponse answerOfQuestionToAnswerOfQuestionDeleteResponse(UUID answerId) {
         return AnswerOfQuestionDeleteResponse.builder()
                 .answerId(answerId)
                 .message("Answer deleted successfully")
+                .build();
+    }
+
+    public Question updateQuestionEntityToQuestion(UpdateQuestionUpdateEntity updateQuestionUpdateEntity,
+                                                   Organization organization,
+                                                   QuestionType qtype,
+                                                   User createdBy,
+                                                   List<AnswerOfQuestion> answers) {
+        if (updateQuestionUpdateEntity == null) return null;
+
+//        if (updateQuestionUpdateEntity.getAnswers() != null) {
+//            answers = updateQuestionUpdateEntity.getAnswers()
+//                    .stream()
+//                    .map(this::answerOfQuestionUpdateEntityToAnswerOfQuestion)
+//                    .toList();
+//        }
+
+        return Question.builder()
+                .questionId(new QuestionId(updateQuestionUpdateEntity.getQuestionId()))
+                .organization(organization)
+                .name(updateQuestionUpdateEntity.getName())
+                .questionText(updateQuestionUpdateEntity.getQuestionText())
+                .generalFeedback(updateQuestionUpdateEntity.getGeneralFeedback())
+                .defaultMark(updateQuestionUpdateEntity.getDefaultMark())
+                .difficulty(updateQuestionUpdateEntity.getDifficulty())
+                .updatedBy(User.builder()
+                        .id(new UserId(updateQuestionUpdateEntity.getUpdatedBy()))
+                        .build())
+                .updatedAt(ZonedDateTime.now())
+                .answers(answers)
+                .qtype(qtype)
+                .createdBy(createdBy)
+                .build();
+    }
+
+    public AnswerOfQuestion answerOfQuestionUpdateEntityToAnswerOfQuestion(AnswerOfQuestionUpdateEntity answerOfQuestionUpdateEntity) {
+        return AnswerOfQuestion.builder()
+                .id(new AnswerId(answerOfQuestionUpdateEntity.getAnswerId()))
+                .questionId(new QuestionId(answerOfQuestionUpdateEntity.getQuestionId()))
+                .answer(answerOfQuestionUpdateEntity.getAnswer())
+                .fraction(answerOfQuestionUpdateEntity.getFraction())
+                .feedback(answerOfQuestionUpdateEntity.getFeedback())
+                .build();
+    }
+
+    public UpdateQuestionResponse questionUpdatedEventToUpdateQuestionRespond(QuestionUpdatedEvent questionUpdatedEvent, String qtypeCodeQuestionUpdatedSuccessfully) {
+        return UpdateQuestionResponse.builder()
+                .questionId(questionUpdatedEvent.getQuestion().getId().getValue())
+                .qtypeId(questionUpdatedEvent.getQtypeID())
+                .message(qtypeCodeQuestionUpdatedSuccessfully)
                 .build();
     }
 }

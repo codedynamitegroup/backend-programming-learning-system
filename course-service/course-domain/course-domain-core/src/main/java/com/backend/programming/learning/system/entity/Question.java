@@ -9,14 +9,14 @@ import java.util.List;
 import java.util.UUID;
 
 public class Question extends AggregateRoot<QuestionId> {
-    private final OrganizationId organizationId;
+    private Organization organization;
     private QuestionDifficulty difficulty;
     private String name;
     private String questionText;
     private String generalFeedback;
     private float defaultMark;
-    private final UserId createdBy;
-    private UserId updatedBy;
+    private final User createdBy;
+    private User updatedBy;
     private final QuestionType qtype;
     private List<String> failureMessages;
 
@@ -25,7 +25,7 @@ public class Question extends AggregateRoot<QuestionId> {
 
     private Question(Builder builder) {
         super.setId(builder.questionId);
-        organizationId = builder.organizationId;
+        organization = builder.organization;
         difficulty = builder.difficulty;
         name = builder.name;
         questionText = builder.questionText;
@@ -60,8 +60,8 @@ public class Question extends AggregateRoot<QuestionId> {
         }
     }
 
-    public OrganizationId getOrganizationId() {
-        return organizationId;
+    public Organization getOrganization() {
+        return organization;
     }
 
     public QuestionDifficulty getDifficulty() {
@@ -84,11 +84,11 @@ public class Question extends AggregateRoot<QuestionId> {
         return defaultMark;
     }
 
-    public UserId getCreatedBy() {
+    public User getCreatedBy() {
         return createdBy;
     }
 
-    public UserId getUpdatedBy() {
+    public User getUpdatedBy() {
         return updatedBy;
     }
 
@@ -110,14 +110,14 @@ public class Question extends AggregateRoot<QuestionId> {
 
     public static final class Builder {
         private QuestionId questionId;
-        private OrganizationId organizationId;
+        private Organization organization;
         private QuestionDifficulty difficulty;
         private String name;
         private String questionText;
         private String generalFeedback;
         private float defaultMark;
-        private UserId createdBy;
-        private UserId updatedBy;
+        private User createdBy;
+        private User updatedBy;
         private QuestionType qtype;
         private List<String> failureMessages;
         private ZonedDateTime createdAt;
@@ -131,8 +131,8 @@ public class Question extends AggregateRoot<QuestionId> {
             return this;
         }
 
-        public Builder organizationId(OrganizationId val) {
-            organizationId = val;
+        public Builder organization(Organization val) {
+            organization = val;
             return this;
         }
 
@@ -161,12 +161,12 @@ public class Question extends AggregateRoot<QuestionId> {
             return this;
         }
 
-        public Builder createdBy(UserId val) {
+        public Builder createdBy(User val) {
             createdBy = val;
             return this;
         }
 
-        public Builder updatedBy(UserId val) {
+        public Builder updatedBy(User val) {
             updatedBy = val;
             return this;
         }
