@@ -2,8 +2,10 @@ package com.backend.programming.learning.system.auth.service.application.rest.co
 
 import com.backend.programming.learning.system.dto.method.create.course.CreateCourseCommand;
 import com.backend.programming.learning.system.dto.method.create.course.CreateCourseResponse;
+import com.backend.programming.learning.system.dto.method.query.course.QueryAllCourseCommand;
+import com.backend.programming.learning.system.dto.method.query.course.QueryAllCourseResponse;
 import com.backend.programming.learning.system.dto.method.query.course.QueryCourseCommand;
-import com.backend.programming.learning.system.dto.method.query.course.QueryCourseResponse;
+import com.backend.programming.learning.system.dto.responseentity.course.CourseResponseEntity;
 import com.backend.programming.learning.system.ports.input.service.course.CourseApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,19 +45,28 @@ public class CourseController {
     }
 
     @GetMapping
-    public ResponseEntity<List<QueryCourseResponse>> findAll(
-            @RequestParam(value = "search", required = false) String search
+    public ResponseEntity<QueryAllCourseResponse> findAll(
+            @RequestParam(defaultValue = "") String search,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize
     ) {
         log.info("Getting list course");
-        List<QueryCourseResponse> response = courseApplicationService.findAll(search);
+        QueryAllCourseCommand queryAllCourseCommand = QueryAllCourseCommand.builder()
+                .search(search)
+                .pageNo(pageNo)
+                .pageSize(pageSize)
+                .build();
+
+        QueryAllCourseResponse response = courseApplicationService.findAll(queryAllCourseCommand);
+        log.info("Returning all courses: {}", response);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{courseId}")
-    public ResponseEntity<QueryCourseResponse> findBy(@PathVariable UUID courseId) {
+    public ResponseEntity<CourseResponseEntity> findBy(@PathVariable UUID courseId) {
         log.info("Getting course with id: {}", courseId);
         QueryCourseCommand queryCourseCommand = QueryCourseCommand.builder().courseId(courseId).build();
-        QueryCourseResponse response = courseApplicationService.findBy(courseId);
+        CourseResponseEntity response = courseApplicationService.findBy(queryCourseCommand);
         return ResponseEntity.ok(response);
     }
 }

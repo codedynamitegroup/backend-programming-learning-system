@@ -16,16 +16,11 @@ public class CreateCourseCommand {
     @NotNull
     private final String name;
 
-    @NotNull
+//    @NotNull
     private final String key;
 
     @NotNull
     private final Boolean visible;
-
-    @NotNull
-    private final ZonedDateTime startTime;
-    private final ZonedDateTime endTime;
-
 //    @NotNull
 //    private final UUID createdBy;
 //    @NotNull

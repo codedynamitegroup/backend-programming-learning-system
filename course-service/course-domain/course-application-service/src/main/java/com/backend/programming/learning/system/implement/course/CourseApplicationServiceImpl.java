@@ -2,14 +2,16 @@ package com.backend.programming.learning.system.implement.course;
 
 import com.backend.programming.learning.system.dto.method.create.course.CreateCourseCommand;
 import com.backend.programming.learning.system.dto.method.create.course.CreateCourseResponse;
-import com.backend.programming.learning.system.dto.method.query.course.QueryCourseResponse;
+import com.backend.programming.learning.system.dto.method.query.course.QueryAllCourseCommand;
+import com.backend.programming.learning.system.dto.method.query.course.QueryAllCourseResponse;
+import com.backend.programming.learning.system.dto.method.query.course.QueryCourseCommand;
+import com.backend.programming.learning.system.dto.responseentity.course.CourseResponseEntity;
 import com.backend.programming.learning.system.ports.input.service.course.CourseApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -41,12 +43,12 @@ public class CourseApplicationServiceImpl implements CourseApplicationService {
     }
 
     @Override
-    public List<QueryCourseResponse> findAll(String search) {
-        return courseCommandHandler.findAll(search);
+    public QueryAllCourseResponse findAll(QueryAllCourseCommand queryAllCourseCommand) {
+        return courseCommandHandler.findAll(queryAllCourseCommand);
     }
 
     @Override
-    public QueryCourseResponse findBy(UUID courseId) {
-        return courseCommandHandler.findBy(courseId);
+    public CourseResponseEntity findBy(QueryCourseCommand queryCourseCommand) {
+        return courseCommandHandler.findBy(queryCourseCommand);
     }
 }
