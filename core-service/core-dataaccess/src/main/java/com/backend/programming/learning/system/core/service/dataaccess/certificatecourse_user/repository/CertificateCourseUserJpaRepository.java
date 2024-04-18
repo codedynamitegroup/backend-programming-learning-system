@@ -16,4 +16,7 @@ public interface CertificateCourseUserJpaRepository extends PagingAndSortingRepo
 
     Page<CertificateCourseUserEntity> findAllByCertificateCourseId(
             UUID certificateCourseId, Pageable pageable);
+
+    Optional<CertificateCourseUserEntity> findByCertificateCourseIdAndUserId(
+            UUID certificateCourseId, UUID userId);
 }

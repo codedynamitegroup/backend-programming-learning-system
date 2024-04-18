@@ -63,7 +63,7 @@ public class ContestController {
             @PathVariable UUID id,
             @RequestBody UpdateContestCommand updateContestCommand) {
         log.info("Updating contest: {}", id);
-        UpdateContestResponse UpdateContestResponse =
+        UpdateContestResponse updateContestResponse =
                 contestApplicationService.updateContest(UpdateContestCommand
                         .builder()
                         .contestId(id)
@@ -73,8 +73,8 @@ public class ContestController {
                         .endTime(updateContestCommand.getEndTime())
                         .updatedBy(updateContestCommand.getUpdatedBy())
                         .build());
-        log.info("Contest updated: {}", UpdateContestResponse.getContestId());
-        return ResponseEntity.ok(UpdateContestResponse);
+        log.info("Contest updated: {}", updateContestResponse.getContestId());
+        return ResponseEntity.ok(updateContestResponse);
     }
 
     @GetMapping

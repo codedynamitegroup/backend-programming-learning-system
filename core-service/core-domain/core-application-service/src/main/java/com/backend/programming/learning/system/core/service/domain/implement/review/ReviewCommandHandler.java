@@ -7,9 +7,13 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryReviewCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.review.ReviewResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
 import com.backend.programming.learning.system.core.service.domain.mapper.review.ReviewDataMapper;
+import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.ReviewId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -21,15 +25,18 @@ public class ReviewCommandHandler {
     private final ReviewCreateHelper reviewCreateHelper;
     private final ReviewQueryHelper reviewQueryHelper;
     private final ReviewDeleteHelper reviewDeleteHelper;
+    private final ReviewUpdateHelper reviewUpdateHelper;
     private final ReviewDataMapper reviewDataMapper;
 
     public ReviewCommandHandler(ReviewCreateHelper reviewCreateHelper,
                                 ReviewQueryHelper reviewQueryHelper,
                                 ReviewDeleteHelper reviewDeleteHelper,
+                                ReviewUpdateHelper reviewUpdateHelper,
                                 ReviewDataMapper reviewDataMapper) {
         this.reviewCreateHelper = reviewCreateHelper;
         this.reviewQueryHelper = reviewQueryHelper;
         this.reviewDeleteHelper = reviewDeleteHelper;
+        this.reviewUpdateHelper = reviewUpdateHelper;
         this.reviewDataMapper = reviewDataMapper;
     }
 
@@ -74,8 +81,7 @@ public class ReviewCommandHandler {
     public DeleteReviewResponse deleteReviewResponse(
             DeleteReviewCommand deleteReviewCommand
     ) {
-        reviewDeleteHelper
-                .deleteReviewById(deleteReviewCommand.getReviewId());
+        reviewDeleteHelper.deleteReviewById(deleteReviewCommand);
 
         log.info("Review deleted with id: {}", deleteReviewCommand.getReviewId());
 
@@ -83,6 +89,19 @@ public class ReviewCommandHandler {
                 .reviewId(deleteReviewCommand.getReviewId())
                 .message("Review deleted successfully")
                 .build();
+    }
+
+    @Transactional
+    public UpdateReviewResponse updateReviewResponse(
+            UpdateReviewCommand updateReviewCommand
+    ) {
+        reviewUpdateHelper.persistReview(updateReviewCommand);
+
+        log.info("Review updated with id: {}", updateReviewCommand.getReviewId());
+
+        return reviewDataMapper.reviewToUpdateReviewResponse(
+                new ReviewId(updateReviewCommand.getReviewId()),
+                "Review updated successfully");
     }
 
 }
