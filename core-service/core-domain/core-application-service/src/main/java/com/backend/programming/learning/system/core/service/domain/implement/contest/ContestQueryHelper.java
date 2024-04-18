@@ -81,13 +81,8 @@ public class ContestQueryHelper {
         for (Contest contest : contests) {
             User createdBy = getUser(contest.getCreatedBy().getId().getValue());
             User updatedBy = getUser(contest.getUpdatedBy().getId().getValue());
-            List<ContestQuestion> contestQuestions = getAllContestQuestionsForContest(contest.getId().getValue());
-            List<Question> questions = contestQuestions.stream()
-                    .map(ContestQuestion::getQuestion)
-                    .toList();
             contest.setCreatedBy(createdBy);
             contest.setUpdatedBy(updatedBy);
-            contest.setQuestions(questions);
         }
 
         return contests;
