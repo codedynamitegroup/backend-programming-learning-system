@@ -5,8 +5,8 @@ logging:
     com.backend.programming.learning.system: DEBUG
 
 code-assessment-service:
-  code-question-create-request-to-core-service-topic-name: code-question-create-request-to-core-service
   code-question-create-response-from-core-service-topic-name: code-question-create-response-from-core-service
+  code-question-create-request-to-core-service-topic-name: code-question-create-request-to-core-service
 
 spring:
   jpa:
@@ -26,6 +26,7 @@ spring:
       platform: postgres
       schema-locations: classpath:init-schema.sql
       mode: always
+      data-locations: classpath:init-data.sql
 
 kafka-config:
   bootstrap-servers: localhost:19092, localhost:29092, localhost:39092

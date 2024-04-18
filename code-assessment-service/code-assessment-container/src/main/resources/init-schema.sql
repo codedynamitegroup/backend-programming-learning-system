@@ -21,33 +21,7 @@ CREATE TYPE difficulty AS ENUM ('EASY', 'MEDIUM', 'HARD');
 DROP TYPE IF EXISTS qtype;
 CREATE TYPE qtype AS ENUM ('MULTIPLE_CHOICE', 'SHORT_ANSWER', 'CODE', 'ESSAY');
 
-DROP TABLE IF EXISTS qtype_code_questions CASCADE;
-CREATE TABLE qtype_code_questions(
-    id uuid UNIQUE NOT NULL,
-    question_id uuid UNIQUE NOT NULL,
-    dsl_template text,
-    problem_statement text,
-    input_format text,
-    output_format text,
-    copy_state CopyState,
-    failure_messages text,
-    CONSTRAINT qtype_code_questions_pk PRIMARY KEY (id));
-
-DROP TABLE IF EXISTS test_cases CASCADE;
-CREATE TABLE test_cases(
-    id uuid UNIQUE NOT NULL ,
-    code_question_id uuid UNIQUE NOT NULL ,
-    input_data text,
-    output_data text,
-    is_sample boolean,
-    score double precision,
-    CONSTRAINT qcq_tc_fk FOREIGN KEY (code_question_id)
-                       REFERENCES qtype_code_questions (id) MATCH SIMPLE
-                        ON DELETE CASCADE ON UPDATE NO ACTION
-);
-
 DROP TABLE IF EXISTS questions CASCADE;
-
 CREATE TABLE questions
 (
     id uuid UNIQUE NOT NULL,
@@ -76,3 +50,37 @@ CREATE TABLE questions
 --         ON UPDATE CASCADE
 --         ON DELETE CASCADE
 );
+
+DROP TABLE IF EXISTS qtype_code_questions CASCADE;
+CREATE TABLE qtype_code_questions(
+    id uuid UNIQUE NOT NULL,
+    question_id uuid UNIQUE NOT NULL,
+    dsl_template text,
+    problem_statement text,
+    input_format text,
+    output_format text,
+    copy_state CopyState,
+    failure_messages text,
+    constraints text,
+    CONSTRAINT qtype_code_questions_pk PRIMARY KEY (id),
+        CONSTRAINT qtype_code_questions_questions_id_fk FOREIGN KEY (question_id)
+        REFERENCES questions (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+    );
+
+DROP TABLE IF EXISTS test_cases CASCADE;
+CREATE TABLE test_cases(
+    id uuid UNIQUE NOT NULL ,
+    code_question_id uuid UNIQUE NOT NULL ,
+    input_data text,
+    output_data text,
+    is_sample boolean,
+    score double precision,
+    CONSTRAINT qcq_tc_fk FOREIGN KEY (code_question_id)
+                       REFERENCES qtype_code_questions (id) MATCH SIMPLE
+                        ON DELETE CASCADE ON UPDATE NO ACTION
+);
+
+
+

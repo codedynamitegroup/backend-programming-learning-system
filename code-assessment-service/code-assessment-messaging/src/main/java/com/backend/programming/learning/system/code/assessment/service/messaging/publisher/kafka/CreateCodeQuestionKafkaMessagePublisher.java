@@ -33,7 +33,7 @@ public class CreateCodeQuestionKafkaMessagePublisher implements CodeQuestionCrea
     @Override
     public void publish(CodeQuestionCreatedEvent domainEvent) {
         String codeQuestionId = domainEvent.getCodeQuestion().getQuestionId().getValue().toString();
-        String topicName = codeAssessmentServiceConfigData.getCodeQuestionCreateRequestTopicName();
+        String topicName = codeAssessmentServiceConfigData.getCodeQuestionCreateRequestToCoreServiceTopicName();
         log.info("received CodeQuestionCreateEvent for code question id: {}"
                 , codeQuestionId);
         try {

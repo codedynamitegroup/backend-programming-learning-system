@@ -29,7 +29,7 @@ public class CodeQuestionCreateCommandHandler {
     public CreateCodeQuestionResponse createCodeQuestion(CreateCodeQuestionCommand command){
         CodeQuestionCreatedEvent codeQuestionCreatedEvent
                 = codeQuestionCreateHelper.persistCodeQuestion(command);
-        codeQuestionCreateMessagePublisher.publish(codeQuestionCreatedEvent);
+//        codeQuestionCreateMessagePublisher.publish(codeQuestionCreatedEvent);
         return codeQuestionDataMaper
                 .codeQuestionToCreateCodeQuestionReponse
                         (codeQuestionCreatedEvent.getCodeQuestion()
