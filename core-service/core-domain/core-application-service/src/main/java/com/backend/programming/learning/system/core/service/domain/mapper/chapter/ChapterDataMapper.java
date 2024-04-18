@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.core.service.domain.mapper.chapt
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter.CreateChapterCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter.CreateChapterResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.chapter.UpdateChapterResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
@@ -11,6 +12,7 @@ import com.backend.programming.learning.system.core.service.domain.entity.Questi
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
+import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
@@ -90,4 +92,11 @@ private final QuestionDataMapper questionDataMapper;
                 .build();
     }
 
+
+    public UpdateChapterResponse chapterToUpdateChapterResponse(ChapterId chapterId, String message) {
+        return UpdateChapterResponse.builder()
+                .chapterId(chapterId.getValue())
+                .message(message)
+                .build();
+    }
 }

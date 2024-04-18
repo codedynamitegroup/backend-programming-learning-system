@@ -4,9 +4,15 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter.CreateChapterResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.chapter.DeleteChapterCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.chapter.DeleteChapterResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCourseUsersCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCourseUsersResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryChapterCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.chapter.UpdateChapterCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.chapter.UpdateChapterResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.topic.UpdateTopicCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.topic.UpdateTopicResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.chapter.ChapterApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +41,23 @@ public class ChapterController {
         log.info("Chapter created: {}", createChapterResponse);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createChapterResponse);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UpdateChapterResponse> updateChapter(
+            @PathVariable UUID id,
+            @RequestBody UpdateChapterCommand updateChapterCommand) {
+        log.info("Updating chapter: {}", id);
+        UpdateChapterResponse updateChapterResponse =
+                chapterApplicationService.updateChapter(UpdateChapterCommand
+                        .builder()
+                        .no(updateChapterCommand.getNo())
+                        .chapterId(id)
+                        .title(updateChapterCommand.getTitle())
+                        .description(updateChapterCommand.getDescription())
+                        .build());
+        log.info("Chapter updated: {}", updateChapterResponse.getChapterId());
+        return ResponseEntity.ok(updateChapterResponse);
     }
 
     @GetMapping

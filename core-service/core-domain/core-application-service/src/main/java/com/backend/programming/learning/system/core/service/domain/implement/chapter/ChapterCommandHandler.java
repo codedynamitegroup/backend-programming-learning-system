@@ -7,9 +7,13 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryChapterCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.chapter.UpdateChapterCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.chapter.UpdateChapterResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
 import com.backend.programming.learning.system.core.service.domain.mapper.chapter.ChapterDataMapper;
+import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.ReviewId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,15 +26,18 @@ public class ChapterCommandHandler {
     private final ChapterCreateHelper chapterCreateHelper;
     private final ChapterDeleteHelper chapterDeleteHelper;
     private final ChapterQueryHelper chapterQueryHelper;
+    private final ChapterUpdateHelper chapterUpdateHelper;
     private final ChapterDataMapper chapterDataMapper;
 
     public ChapterCommandHandler(ChapterCreateHelper chapterCreateHelper,
                                  ChapterDeleteHelper chapterDeleteHelper,
                                  ChapterQueryHelper chapterQueryHelper,
+                                 ChapterUpdateHelper chapterUpdateHelper,
                                  ChapterDataMapper chapterDataMapper) {
         this.chapterCreateHelper = chapterCreateHelper;
         this.chapterDeleteHelper = chapterDeleteHelper;
         this.chapterQueryHelper = chapterQueryHelper;
+        this.chapterUpdateHelper = chapterUpdateHelper;
         this.chapterDataMapper = chapterDataMapper;
     }
 
@@ -80,6 +87,18 @@ public class ChapterCommandHandler {
         log.info("Returning chapter: {}", chapter);
 
         return chapterDataMapper.chapterToQueryChapterResponse(chapter);
+    }
+
+    @Transactional
+    public UpdateChapterResponse updateChapterResponse(
+            UpdateChapterCommand updateChapterCommand) {
+        chapterUpdateHelper.persistChapter(updateChapterCommand);
+
+        log.info("Chapter updated with id: {}", updateChapterCommand.getChapterId());
+
+        return chapterDataMapper.chapterToUpdateChapterResponse(
+                new ChapterId(updateChapterCommand.getChapterId()),
+                "Chapter updated successfully");
     }
 
 }
