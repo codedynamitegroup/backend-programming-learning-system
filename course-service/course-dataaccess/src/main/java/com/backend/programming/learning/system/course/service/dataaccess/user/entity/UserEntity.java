@@ -37,23 +37,12 @@ public class UserEntity {
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
-    @OneToOne(mappedBy = "createdBy")
-    private CourseEntity courseCreatedBy;
+    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.REMOVE)
+    private List<CourseEntity> courseCreatedBy;
 
-    @OneToOne(mappedBy = "updatedBy")
-    private CourseEntity courseUpdatedBy;
+    @OneToMany(mappedBy = "updatedBy", cascade = CascadeType.REMOVE)
+    private List<CourseEntity> courseUpdatedBy;
 
-    @OneToOne(mappedBy = "createdBy")
-    private PostEntity postCreatedBy;
-
-    @OneToOne(mappedBy = "updatedBy")
-    private PostEntity postUpdatedBy;
-
-    @OneToOne(mappedBy = "createdBy")
-    private QuestionEntity questionCreatedBy;
-
-    @OneToOne(mappedBy = "updatedBy")
-    private QuestionEntity questionUpdatedBy;
 
 
 }

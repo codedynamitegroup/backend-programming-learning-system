@@ -5,8 +5,10 @@ import com.backend.programming.learning.system.course.service.dataaccess.assignm
 import com.backend.programming.learning.system.course.service.dataaccess.assignment.repository.AssignmentJpaRepository;
 import com.backend.programming.learning.system.entity.Assignment;
 import com.backend.programming.learning.system.ports.output.repository.AssignmentRepository;
+import com.backend.programming.learning.system.valueobject.CourseId;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -28,5 +30,21 @@ public class AssignmentRepositoryImpl implements AssignmentRepository {
         return assignmentDataAccessMapper.assignmentEntityToAssignment(assignmentJpaRepository
                 .save(assignmentDataAccessMapper
                         .assignmentToAssignmentEntity(assignment)));
+    }
+
+    @Override
+    public Optional<Assignment> findById(UUID assignmentId) {
+        return assignmentJpaRepository.findById(assignmentId).map(assignmentDataAccessMapper::assignmentEntityToAssignment);
+    }
+
+    @Override
+    public List<Assignment> findAllByCourseId(CourseId courseId) {
+        return assignmentDataAccessMapper.assignmentEntityListToAssignmentList(
+                assignmentJpaRepository.findAllByCourseId(courseId.getValue()));
+    }
+
+    @Override
+    public void deleteAssignmentById(UUID assignmentId) {
+
     }
 }
