@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 4828848301102840983L;
+  private static final long serialVersionUID = 1718377745890136752L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CodeQuestionUpdateRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"questionId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"problemStatement\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"inputFormat\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"outputFormat\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"isDeleted\",\"type\":\"boolean\"},{\"name\":\"constraints\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CodeQuestionUpdateRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"questionId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"problemStatement\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"inputFormat\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"outputFormat\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"DELETING_FAIL\",\"UPDATING_FAIL\",\"CREATING_FAIL\"]}},{\"name\":\"constraints\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -82,7 +82,7 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
   private java.lang.String problemStatement;
   private java.lang.String inputFormat;
   private java.lang.String outputFormat;
-  private boolean isDeleted;
+  private com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState copyState;
   private java.lang.String constraints;
 
   /**
@@ -100,17 +100,17 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
    * @param problemStatement The new value for problemStatement
    * @param inputFormat The new value for inputFormat
    * @param outputFormat The new value for outputFormat
-   * @param isDeleted The new value for isDeleted
+   * @param copyState The new value for copyState
    * @param constraints The new value for constraints
    */
-  public CodeQuestionUpdateRequestAvroModel(java.util.UUID id, java.util.UUID sagaId, java.util.UUID questionId, java.lang.String problemStatement, java.lang.String inputFormat, java.lang.String outputFormat, java.lang.Boolean isDeleted, java.lang.String constraints) {
+  public CodeQuestionUpdateRequestAvroModel(java.util.UUID id, java.util.UUID sagaId, java.util.UUID questionId, java.lang.String problemStatement, java.lang.String inputFormat, java.lang.String outputFormat, com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState copyState, java.lang.String constraints) {
     this.id = id;
     this.sagaId = sagaId;
     this.questionId = questionId;
     this.problemStatement = problemStatement;
     this.inputFormat = inputFormat;
     this.outputFormat = outputFormat;
-    this.isDeleted = isDeleted;
+    this.copyState = copyState;
     this.constraints = constraints;
   }
 
@@ -130,7 +130,7 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
     case 3: return problemStatement;
     case 4: return inputFormat;
     case 5: return outputFormat;
-    case 6: return isDeleted;
+    case 6: return copyState;
     case 7: return constraints;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
@@ -165,7 +165,7 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
     case 3: problemStatement = value$ != null ? value$.toString() : null; break;
     case 4: inputFormat = value$ != null ? value$.toString() : null; break;
     case 5: outputFormat = value$ != null ? value$.toString() : null; break;
-    case 6: isDeleted = (java.lang.Boolean)value$; break;
+    case 6: copyState = (com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState)value$; break;
     case 7: constraints = value$ != null ? value$.toString() : null; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
@@ -274,20 +274,20 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
   }
 
   /**
-   * Gets the value of the 'isDeleted' field.
-   * @return The value of the 'isDeleted' field.
+   * Gets the value of the 'copyState' field.
+   * @return The value of the 'copyState' field.
    */
-  public boolean getIsDeleted() {
-    return isDeleted;
+  public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState getCopyState() {
+    return copyState;
   }
 
 
   /**
-   * Sets the value of the 'isDeleted' field.
+   * Sets the value of the 'copyState' field.
    * @param value the value to set.
    */
-  public void setIsDeleted(boolean value) {
-    this.isDeleted = value;
+  public void setCopyState(com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState value) {
+    this.copyState = value;
   }
 
   /**
@@ -354,7 +354,7 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
     private java.lang.String problemStatement;
     private java.lang.String inputFormat;
     private java.lang.String outputFormat;
-    private boolean isDeleted;
+    private com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState copyState;
     private java.lang.String constraints;
 
     /** Creates a new Builder */
@@ -392,8 +392,8 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
         this.outputFormat = data().deepCopy(fields()[5].schema(), other.outputFormat);
         fieldSetFlags()[5] = other.fieldSetFlags()[5];
       }
-      if (isValidValue(fields()[6], other.isDeleted)) {
-        this.isDeleted = data().deepCopy(fields()[6].schema(), other.isDeleted);
+      if (isValidValue(fields()[6], other.copyState)) {
+        this.copyState = data().deepCopy(fields()[6].schema(), other.copyState);
         fieldSetFlags()[6] = other.fieldSetFlags()[6];
       }
       if (isValidValue(fields()[7], other.constraints)) {
@@ -432,8 +432,8 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
         this.outputFormat = data().deepCopy(fields()[5].schema(), other.outputFormat);
         fieldSetFlags()[5] = true;
       }
-      if (isValidValue(fields()[6], other.isDeleted)) {
-        this.isDeleted = data().deepCopy(fields()[6].schema(), other.isDeleted);
+      if (isValidValue(fields()[6], other.copyState)) {
+        this.copyState = data().deepCopy(fields()[6].schema(), other.copyState);
         fieldSetFlags()[6] = true;
       }
       if (isValidValue(fields()[7], other.constraints)) {
@@ -683,40 +683,41 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
     }
 
     /**
-      * Gets the value of the 'isDeleted' field.
+      * Gets the value of the 'copyState' field.
       * @return The value.
       */
-    public boolean getIsDeleted() {
-      return isDeleted;
+    public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState getCopyState() {
+      return copyState;
     }
 
 
     /**
-      * Sets the value of the 'isDeleted' field.
-      * @param value The value of 'isDeleted'.
+      * Sets the value of the 'copyState' field.
+      * @param value The value of 'copyState'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel.Builder setIsDeleted(boolean value) {
+    public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel.Builder setCopyState(com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState value) {
       validate(fields()[6], value);
-      this.isDeleted = value;
+      this.copyState = value;
       fieldSetFlags()[6] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'isDeleted' field has been set.
-      * @return True if the 'isDeleted' field has been set, false otherwise.
+      * Checks whether the 'copyState' field has been set.
+      * @return True if the 'copyState' field has been set, false otherwise.
       */
-    public boolean hasIsDeleted() {
+    public boolean hasCopyState() {
       return fieldSetFlags()[6];
     }
 
 
     /**
-      * Clears the value of the 'isDeleted' field.
+      * Clears the value of the 'copyState' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel.Builder clearIsDeleted() {
+    public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel.Builder clearCopyState() {
+      copyState = null;
       fieldSetFlags()[6] = false;
       return this;
     }
@@ -772,7 +773,7 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
         record.problemStatement = fieldSetFlags()[3] ? this.problemStatement : (java.lang.String) defaultValue(fields()[3]);
         record.inputFormat = fieldSetFlags()[4] ? this.inputFormat : (java.lang.String) defaultValue(fields()[4]);
         record.outputFormat = fieldSetFlags()[5] ? this.outputFormat : (java.lang.String) defaultValue(fields()[5]);
-        record.isDeleted = fieldSetFlags()[6] ? this.isDeleted : (java.lang.Boolean) defaultValue(fields()[6]);
+        record.copyState = fieldSetFlags()[6] ? this.copyState : (com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState) defaultValue(fields()[6]);
         record.constraints = fieldSetFlags()[7] ? this.constraints : (java.lang.String) defaultValue(fields()[7]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {

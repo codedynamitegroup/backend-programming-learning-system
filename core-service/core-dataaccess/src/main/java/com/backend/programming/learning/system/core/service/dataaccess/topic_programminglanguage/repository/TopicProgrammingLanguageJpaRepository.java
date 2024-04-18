@@ -12,4 +12,7 @@ import java.util.UUID;
 public interface TopicProgrammingLanguageJpaRepository extends JpaRepository<TopicProgrammingLanguageEntity, UUID> {
     Optional<TopicProgrammingLanguageEntity> findById(UUID id);
     List<TopicProgrammingLanguageEntity> findAllByTopicId(UUID topicId);
+    Optional<TopicProgrammingLanguageEntity> findByTopicIdAndProgrammingLanguageId(UUID topicId, UUID programmingLanguageId);
+
+    void deleteAllByTopicId(UUID topicId);
 }

@@ -11,7 +11,6 @@
 		<module>background-service</module>
 		<module>core-service</module>
 		<module>infrastructure</module>
-        <module>code-assessment-service/code-assessment-domain/code-assessment-application-service</module>
     </modules>
 
 	<parent>

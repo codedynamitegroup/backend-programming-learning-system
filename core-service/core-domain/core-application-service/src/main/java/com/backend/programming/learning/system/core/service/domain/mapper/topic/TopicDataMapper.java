@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.core.service.domain.mapper.topic
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.topic.CreateTopicCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.topic.CreateTopicResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.topic.UpdateTopicResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.programminglanguage.ProgrammingLanguageResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
@@ -11,6 +12,7 @@ import com.backend.programming.learning.system.core.service.domain.entity.Topic;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.mapper.programminglanguage.ProgrammingLanguageDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
+import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
 import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
@@ -90,6 +92,13 @@ public class TopicDataMapper {
                 .currentPage(topics.getNumber())
                 .totalPages(topics.getTotalPages())
                 .totalItems(topics.getTotalElements())
+                .build();
+    }
+
+    public UpdateTopicResponse topicToUpdateTopicResponse(TopicId topicId, String message) {
+        return UpdateTopicResponse.builder()
+                .topicId(topicId.getValue())
+                .message("Topic updated successfully")
                 .build();
     }
 

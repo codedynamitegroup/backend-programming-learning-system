@@ -13,7 +13,6 @@ import java.util.UUID;
 public class CodeQuestionUpdateResponse {
     private UUID id;
     private UUID questionId;
-    private String dslTemplate;
     private String problemStatement;
     private String inputFormat;
     private String outputFormat;

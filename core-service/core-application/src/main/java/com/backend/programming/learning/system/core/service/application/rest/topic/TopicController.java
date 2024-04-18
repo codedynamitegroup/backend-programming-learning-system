@@ -7,6 +7,10 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryTopicCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.topic.UpdateTopicCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.topic.UpdateTopicResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.topic.TopicApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +38,20 @@ public class TopicController {
         log.info("Topic created: {}", createTopicResponse);
 
         return ResponseEntity.ok(createTopicResponse);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UpdateTopicResponse> updateTopic(
+            @PathVariable UUID id,
+            @RequestBody UpdateTopicCommand updateTopicCommand) {
+        log.info("Updating topic: {}", id);
+        UpdateTopicResponse updateTopicResponse =
+                topicApplicationService.updateTopic(UpdateTopicCommand
+                        .builder()
+                        .topicId(id)
+                        .build());
+        log.info("Topic updated: {}", updateTopicResponse.getTopicId());
+        return ResponseEntity.ok(updateTopicResponse);
     }
 
     @GetMapping

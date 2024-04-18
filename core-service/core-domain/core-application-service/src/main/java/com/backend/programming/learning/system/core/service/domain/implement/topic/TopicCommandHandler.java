@@ -7,9 +7,13 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryTopicCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.topic.UpdateTopicCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.topic.UpdateTopicResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Topic;
 import com.backend.programming.learning.system.core.service.domain.mapper.topic.TopicDataMapper;
+import com.backend.programming.learning.system.core.service.domain.valueobject.ReviewId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -21,15 +25,18 @@ public class TopicCommandHandler {
     private final TopicCreateHelper topicCreateHelper;
     private final TopicQueryHelper topicQueryHelper;
     private final TopicDeleteHelper topicDeleteHelper;
+    private final TopicUpdateHelper topicUpdateHelper;
     private final TopicDataMapper topicDataMapper;
 
     public TopicCommandHandler(TopicCreateHelper topicCreateHelper,
                                TopicQueryHelper topicQueryHelper,
                                TopicDeleteHelper topicDeleteHelper,
+                                 TopicUpdateHelper topicUpdateHelper,
                                TopicDataMapper topicDataMapper) {
         this.topicCreateHelper = topicCreateHelper;
         this.topicQueryHelper = topicQueryHelper;
         this.topicDeleteHelper = topicDeleteHelper;
+        this.topicUpdateHelper = topicUpdateHelper;
         this.topicDataMapper = topicDataMapper;
     }
 
@@ -76,6 +83,18 @@ public class TopicCommandHandler {
                 .topicId(deleteTopicCommand.getTopicId())
                 .message("Topic deleted successfully")
                 .build();
+    }
+
+    @Transactional
+    public UpdateTopicResponse updateTopicResponse(
+            UpdateTopicCommand updateTopicCommand) {
+        topicUpdateHelper.persistTopic(updateTopicCommand);
+
+        log.info("Topic updated with id: {}", updateTopicCommand.getTopicId());
+
+        return topicDataMapper.topicToUpdateTopicResponse(
+                new TopicId(updateTopicCommand.getTopicId()),
+                "Topic updated successfully");
     }
 
 }

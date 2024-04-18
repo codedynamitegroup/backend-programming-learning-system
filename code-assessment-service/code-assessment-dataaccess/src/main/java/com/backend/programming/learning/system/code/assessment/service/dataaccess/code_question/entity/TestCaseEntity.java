@@ -18,7 +18,7 @@ public class TestCaseEntity {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name="CodeQuestionId")
+    @JoinColumn(name="code_question_id", referencedColumnName = "id")
     private CodeQuestionEntity codeQuestion;
 
     private String inputData;
