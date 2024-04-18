@@ -3,12 +3,15 @@ package com.backend.programming.learning.system.core.service.domain.mapper.certi
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.mapper.topic.TopicDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
+import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
 import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
@@ -33,6 +36,7 @@ public class CertificateCourseDataMapper {
             CreateCertificateCourseCommand createCertificateCourseCommand) {
         return CertificateCourse.builder()
                 .name(createCertificateCourseCommand.getName())
+                .description(createCertificateCourseCommand.getDescription())
                 .skillLevel(SkillLevel.valueOf(createCertificateCourseCommand.getSkillLevel().toUpperCase()))
                 .startTime(createCertificateCourseCommand.getStartTime())
                 .endTime(createCertificateCourseCommand.getEndTime())
@@ -96,6 +100,30 @@ public class CertificateCourseDataMapper {
                 .currentPage(certificateCourses.getNumber())
                 .totalPages(certificateCourses.getTotalPages())
                 .totalItems(certificateCourses.getTotalElements())
+                .build();
+    }
+
+    public UpdateCertificateCourseResponse certificateCourseToUpdateCertificateCourseResponse(
+            CertificateCourseId certificateCourseId, String message) {
+        return UpdateCertificateCourseResponse.builder()
+                .certificateCourseId(certificateCourseId.getValue())
+                .message(message)
+                .build();
+    }
+
+    public CertificateCourse updateCertificateCourseCommandToCertificateCourse(
+            UpdateCertificateCourseCommand updateCertificateCourseCommand) {
+        return CertificateCourse.builder()
+                .id(new CertificateCourseId(updateCertificateCourseCommand.getCertificateCourseId()))
+                .name(updateCertificateCourseCommand.getName())
+                .description(updateCertificateCourseCommand.getDescription())
+                .skillLevel(SkillLevel.valueOf(updateCertificateCourseCommand.getSkillLevel().toUpperCase()))
+                .startTime(updateCertificateCourseCommand.getStartTime())
+                .endTime(updateCertificateCourseCommand.getEndTime())
+                .updatedBy(User
+                        .builder()
+                        .id(new UserId(updateCertificateCourseCommand.getUpdatedBy()))
+                        .build())
                 .build();
     }
 }

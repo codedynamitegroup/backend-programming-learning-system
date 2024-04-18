@@ -84,7 +84,6 @@ public class ContestRepositoryImpl implements ContestRepository {
                 return contestJpaRepository.findAllContainsSearchName(searchName, paging)
                         .map(contestDataAccessMapper::contestEntityToContest);
             }
-
         }
     }
 

@@ -7,6 +7,8 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.certificatecourse.DeleteCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.certificatecourse.DeleteCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.*;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse.CertificateCourseApplicationService;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse_user.CertificateCourseUserApplicationService;
@@ -50,6 +52,25 @@ public class CertificateCourseController {
         log.info("Certificate course User created: {}", createCertificateCourseUserResponse);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createCertificateCourseUserResponse);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UpdateCertificateCourseResponse> updateCertificateCourse(
+            @PathVariable UUID id,
+            @RequestBody UpdateCertificateCourseCommand updateCertificateCourseCommand) {
+        log.info("Updating certificate course: {}", id);
+        UpdateCertificateCourseResponse updateCertificateCourseResponse =
+                certificateCourseApplicationService.updateCertificateCourse(UpdateCertificateCourseCommand
+                        .builder()
+                        .certificateCourseId(id)
+                        .name(updateCertificateCourseCommand.getName())
+                        .skillLevel(updateCertificateCourseCommand.getSkillLevel())
+                        .topicId(updateCertificateCourseCommand.getTopicId())
+                        .startTime(updateCertificateCourseCommand.getStartTime())
+                        .endTime(updateCertificateCourseCommand.getEndTime())
+                        .build());
+        log.info("Certificate course updated: {}", updateCertificateCourseResponse.getCertificateCourseId());
+        return ResponseEntity.ok(updateCertificateCourseResponse);
     }
 
     @GetMapping("/{id}")

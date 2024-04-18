@@ -1,11 +1,14 @@
 package com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse;
 
+import com.backend.programming.learning.system.core.service.domain.dto.validator.CreateCertificateCourseCommandStartTimeAndEndTimeValidator;
 import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
 import com.backend.programming.learning.system.dataaccess.validator.EnumValidator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 import java.util.UUID;
@@ -13,9 +16,13 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
+@CreateCertificateCourseCommandStartTimeAndEndTimeValidator
 public class CreateCertificateCourseCommand {
     @NotNull(message = "Name is required")
     private final String name;
+
+    @NotNull(message = "Description is required")
+    private final String description;
 
     @NotNull(message = "SkillLevel is required")
     @EnumValidator(enumClass = SkillLevel.class, message = "SkillLevel is invalid")

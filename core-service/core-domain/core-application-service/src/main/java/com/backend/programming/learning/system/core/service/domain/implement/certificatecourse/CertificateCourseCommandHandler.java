@@ -5,10 +5,13 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.certificatecourse.DeleteCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.certificatecourse.DeleteCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.*;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourseUser;
 import com.backend.programming.learning.system.core.service.domain.mapper.certificatecourse.CertificateCourseDataMapper;
+import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -20,15 +23,18 @@ public class CertificateCourseCommandHandler {
     private final CertificateCourseCreateHelper certificateCourseCreateHelper;
     private final CertificateCourseQueryHelper certificateCourseQueryHelper;
     private final CertificateCourseDeleteHelper certificateCourseDeleteHelper;
+    private final CertificateCourseUpdateHelper certificateCourseUpdateHelper;
     private final CertificateCourseDataMapper certificateCourseDataMapper;
 
     public CertificateCourseCommandHandler(CertificateCourseCreateHelper certificateCourseCreateHelper,
                                            CertificateCourseQueryHelper certificateCourseQueryHelper,
-                                             CertificateCourseDeleteHelper certificateCourseDeleteHelper,
+                                           CertificateCourseDeleteHelper certificateCourseDeleteHelper,
+                                           CertificateCourseUpdateHelper certificateCourseUpdateHelper,
                                            CertificateCourseDataMapper certificateCourseDataMapper) {
         this.certificateCourseCreateHelper = certificateCourseCreateHelper;
         this.certificateCourseQueryHelper = certificateCourseQueryHelper;
         this.certificateCourseDeleteHelper = certificateCourseDeleteHelper;
+        this.certificateCourseUpdateHelper = certificateCourseUpdateHelper;
         this.certificateCourseDataMapper = certificateCourseDataMapper;
     }
 
@@ -42,6 +48,19 @@ public class CertificateCourseCommandHandler {
 
         return certificateCourseDataMapper.certificateCourseToCreateCertificateCourseResponse(certificateCourse,
                 "Certificate course created successfully");
+    }
+
+    @Transactional
+    public UpdateCertificateCourseResponse updateCertificateCourse(
+            UpdateCertificateCourseCommand updateCertificateCourseCommand) {
+        certificateCourseUpdateHelper
+                .persistCertificateCourse(updateCertificateCourseCommand);
+
+        log.info("Certificate course updated with id: {}", updateCertificateCourseCommand.getCertificateCourseId());
+
+        return certificateCourseDataMapper.certificateCourseToUpdateCertificateCourseResponse(
+                new CertificateCourseId(updateCertificateCourseCommand.getCertificateCourseId()),
+                "Certificate course updated successfully");
     }
 
     @Transactional(readOnly = true)

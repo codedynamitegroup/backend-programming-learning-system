@@ -5,6 +5,8 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.certificatecourse.DeleteCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.certificatecourse.DeleteCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.*;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
 
 import javax.validation.Valid;
@@ -12,6 +14,10 @@ import javax.validation.Valid;
 public interface CertificateCourseApplicationService {
     CreateCertificateCourseResponse createCertificateCourse(
             @Valid CreateCertificateCourseCommand createCertificateCourseCommand);
+
+    UpdateCertificateCourseResponse updateCertificateCourse(
+            @Valid UpdateCertificateCourseCommand updateCertificateCourseCommand);
+
     CertificateCourseResponseEntity queryCertificateCourse(
             @Valid QueryCertificateCourseCommand queryCertificateCourseCommand);
 
