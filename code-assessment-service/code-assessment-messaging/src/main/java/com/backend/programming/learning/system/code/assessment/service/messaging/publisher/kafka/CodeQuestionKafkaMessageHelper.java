@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.code.assessment.messaging.publisher.kafka;
+package com.backend.programming.learning.system.code.assessment.service.messaging.publisher.kafka;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.RecordMetadata;

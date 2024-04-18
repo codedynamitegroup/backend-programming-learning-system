@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.code.assessment.service.domain.implement.codequestion;
+package com.backend.programming.learning.system.code.assessment.service.domain.implement.service.codequestion;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.CodeAssessmentDomainService;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.create.codequestion.CreateCodeQuestionCommand;
@@ -23,20 +23,29 @@ public class CodeQuestionCreateHelper {
 
 
     private final CodeQuestionRepository codeQuestionRepository;
-    private final QuestionRepository   questionRepository;
+//    private final QuestionRepository   questionRepository;
     private final CodeQuestionDataMaper codeQuestionDataMaper;
 
-    public CodeQuestionCreateHelper
-            (CodeAssessmentDomainService codeAssessmentDomainService, CodeQuestionRepository codeQuestionRepository, QuestionRepository questionRepository,
-                                    CodeQuestionDataMaper codeQuestionDataMaper) {
+    public CodeQuestionCreateHelper(
+            CodeAssessmentDomainService codeAssessmentDomainService,
+            CodeQuestionRepository codeQuestionRepository,
+            CodeQuestionDataMaper codeQuestionDataMaper) {
         this.codeAssessmentDomainService = codeAssessmentDomainService;
         this.codeQuestionRepository = codeQuestionRepository;
-        this.questionRepository = questionRepository;
         this.codeQuestionDataMaper = codeQuestionDataMaper;
     }
+
+    //    public CodeQuestionCreateHelper
+//            (CodeAssessmentDomainService codeAssessmentDomainService, CodeQuestionRepository codeQuestionRepository, QuestionRepository questionRepository,
+//                                    CodeQuestionDataMaper codeQuestionDataMaper) {
+//        this.codeAssessmentDomainService = codeAssessmentDomainService;
+//        this.codeQuestionRepository = codeQuestionRepository;
+//        this.questionRepository = questionRepository;
+//        this.codeQuestionDataMaper = codeQuestionDataMaper;
+//    }
     @Transactional
     public CodeQuestionCreatedEvent persistCodeQuestion(CreateCodeQuestionCommand command){
-        checkQuestion(command.getQuestionId());
+//        checkQuestion(command.getQuestionId());
         CodeQuestion codeQuestion = codeQuestionDataMaper.createCodeQuestionCommandToCodeQuestion(command);
         CodeQuestionCreatedEvent codeQuestionCreatedEvent
                 = codeAssessmentDomainService.validateAndInitiateCodeQuestion(codeQuestion);
@@ -45,13 +54,13 @@ public class CodeQuestionCreateHelper {
 
         return codeQuestionCreatedEvent;
     }
-    private void checkQuestion(UUID questionId) {
-        Optional<Question> question = questionRepository.findQuestionInformation(questionId);
-        if(question.isEmpty()){
-            log.warn("Could not find question id: {}", questionId);
-            throw new CodeQuestionDomainException("Could not find question id: " + questionId);
-        }
-    }
+//    private void checkQuestion(UUID questionId) {
+//        Optional<Question> question = questionRepository.findQuestionInformation(questionId);
+//        if(question.isEmpty()){
+//            log.warn("Could not find question id: {}", questionId);
+//            throw new CodeQuestionDomainException("Could not find question id: " + questionId);
+//        }
+//    }
     private CodeQuestion saveCodeQuestion(CodeQuestion codeQuestion){
         CodeQuestion codeQuestionResult = codeQuestionRepository.save(codeQuestion);
         if(codeQuestionResult == null){
