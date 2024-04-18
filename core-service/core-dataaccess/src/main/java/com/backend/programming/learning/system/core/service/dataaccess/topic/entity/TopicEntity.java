@@ -35,8 +35,8 @@ public class TopicEntity {
     @JoinColumn(name = "updated_by", referencedColumnName = "id")
     private UserEntity updatedBy;
 
-    @OneToMany(mappedBy = "topic", cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
-    private List<CertificateCourseEntity> certificateCourses;
+//    @OneToMany(mappedBy = "topic", cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+//    private List<CertificateCourseEntity> certificateCourses;
 
 //    @OneToMany(mappedBy = "topic", cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
 //    private List<TopicProgrammingLanguageEntity> topicProgrammingLanguages;

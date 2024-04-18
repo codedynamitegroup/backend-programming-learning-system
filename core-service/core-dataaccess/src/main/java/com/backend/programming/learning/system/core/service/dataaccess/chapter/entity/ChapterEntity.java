@@ -42,8 +42,8 @@ public class ChapterEntity {
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
-    @OneToMany(mappedBy = "chapter", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    Set<ChapterQuestionEntity> chapterQuestions;
+//    @OneToMany(mappedBy = "chapter", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+//    Set<ChapterQuestionEntity> chapterQuestions;
 
     @Override
     public boolean equals(Object o) {
