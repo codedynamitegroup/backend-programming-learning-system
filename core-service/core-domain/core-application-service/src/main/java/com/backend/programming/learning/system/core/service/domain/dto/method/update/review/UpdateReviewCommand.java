@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 import java.util.UUID;
@@ -13,7 +15,10 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class UpdateReviewCommand {
+    @NotNull
     private final UUID reviewId;
+    @Min(0)
+    @Max(5)
     private final Float rating;
     private final String content;
     @NotNull
