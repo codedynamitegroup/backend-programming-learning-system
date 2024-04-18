@@ -15,6 +15,7 @@ import java.util.UUID;
 public class UpdateChapterCommand {
     @NotNull
     private final UUID chapterId;
+    @Min(1)
     private final Integer no;
     private final String title;
     private final String description;

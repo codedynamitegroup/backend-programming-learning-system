@@ -486,8 +486,13 @@ CREATE TABLE "public".calendar_event
     event_type notification_event_type NOT NULL,
     start_time TIMESTAMP WITH TIME ZONE NOT NULL,
     end_time TIMESTAMP WITH TIME ZONE,
+    user_id_to uuid NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT calendar_event_pkey PRIMARY KEY (id)
+    CONSTRAINT calendar_event_pkey PRIMARY KEY (id),
+    CONSTRAINT calendar_event_created_by_fkey FOREIGN KEY (user_id_to)
+        REFERENCES "public".user (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS "public".plagiarism_detection_report CASCADE;

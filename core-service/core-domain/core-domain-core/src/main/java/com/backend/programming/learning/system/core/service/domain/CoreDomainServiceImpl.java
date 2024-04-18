@@ -128,4 +128,10 @@ public class CoreDomainServiceImpl implements CoreDomainService {
         contestUser.initializeContestUser();
         log.info("Contest user created with id: {}", contestUser.getId().getValue());
     }
+
+    @Override
+    public void createCalendarEvent(CalendarEvent calendarEvent) {
+        calendarEvent.initializeCalendarEvent();
+        log.info("Calendar event created with id: {}", calendarEvent.getId().getValue());
+    }
 }

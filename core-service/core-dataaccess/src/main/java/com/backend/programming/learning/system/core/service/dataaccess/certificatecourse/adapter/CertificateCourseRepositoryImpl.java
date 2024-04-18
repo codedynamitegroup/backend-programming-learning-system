@@ -23,22 +23,16 @@ import java.util.UUID;
 @Component
 public class CertificateCourseRepositoryImpl implements CertificateCourseRepository {
     private final CertificateCourseJpaRepository certificateCourseJpaRepository;
-    private final CertificateCourseUserJpaRepository certificateCourseUserJpaRepository;
     private final CertificateCourseDataAccessMapper certificateCourseDataAccessMapper;
-    private final CertificateCourseUserDataAccessMapper certificateCourseUserDataAccessMapper;
     private final TopicDataAccessMapper topicDataAccessMapper;
     private final UserDataAccessMapper userDataAccessMapper;
 
     public CertificateCourseRepositoryImpl(CertificateCourseJpaRepository certificateCourseJpaRepository,
-                                           CertificateCourseUserJpaRepository certificateCourseUserJpaRepository,
                                            CertificateCourseDataAccessMapper certificateCourseDataAccessMapper,
-                                           CertificateCourseUserDataAccessMapper certificateCourseUserDataAccessMapper,
                                            TopicDataAccessMapper topicDataAccessMapper,
                                            UserDataAccessMapper userDataAccessMapper) {
         this.certificateCourseJpaRepository = certificateCourseJpaRepository;
-        this.certificateCourseUserJpaRepository = certificateCourseUserJpaRepository;
         this.certificateCourseDataAccessMapper = certificateCourseDataAccessMapper;
-        this.certificateCourseUserDataAccessMapper = certificateCourseUserDataAccessMapper;
         this.topicDataAccessMapper = topicDataAccessMapper;
         this.userDataAccessMapper = userDataAccessMapper;
     }
