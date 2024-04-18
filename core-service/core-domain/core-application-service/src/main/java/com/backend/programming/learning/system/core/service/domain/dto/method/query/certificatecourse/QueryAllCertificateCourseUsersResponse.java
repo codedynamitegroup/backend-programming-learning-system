@@ -1,7 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse;
 
-import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseUserResponseEntity;
-import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse_user.CertificateCourseUserResponseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

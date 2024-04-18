@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.core.service.domain.mapper.conte
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest_user.CreateContestUserCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest_user.CreateContestUserResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestUsersResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestUserResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest_user.ContestUserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Contest;
 import com.backend.programming.learning.system.core.service.domain.entity.ContestUser;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
