@@ -338,7 +338,7 @@ CREATE TABLE "public".answer_of_question
     question_id uuid NOT NULL,
     feedback text,
     answer text,
-    fraction numeric(2,2) DEFAULT 0.0 NOT NULL,
+    fraction numeric(5,2) DEFAULT 0.0 NOT NULL,
     CONSTRAINT answer_of_question_pkey PRIMARY KEY (id),
     CONSTRAINT answer_of_question_question_id_fkey FOREIGN KEY (question_id)
         REFERENCES "public".question (id) MATCH SIMPLE
