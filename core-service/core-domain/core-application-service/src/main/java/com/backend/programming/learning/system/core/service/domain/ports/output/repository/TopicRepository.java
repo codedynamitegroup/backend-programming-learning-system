@@ -13,4 +13,5 @@ public interface TopicRepository {
     Optional<Topic> findById(TopicId topicId);
     Page<Topic> findAll(Integer page, Integer size, Boolean fetchAll);
     void deleteTopicById(TopicId topicId);
+    int updateTopic(Topic topic);
 }
