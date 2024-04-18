@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.ports.input.message.listener.auth;
 
 
-import com.backend.programming.learning.system.dto.message.UserAuthResponse;
+import com.backend.programming.learning.system.dto.method.message.UserAuthResponse;
 
 /***********************************
  * Created by TGT on 31/03/2024.
