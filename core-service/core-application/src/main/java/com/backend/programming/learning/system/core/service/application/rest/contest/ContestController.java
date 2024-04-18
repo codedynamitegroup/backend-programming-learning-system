@@ -9,6 +9,10 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCourseUsersCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCourseUsersResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.*;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest.ContestApplicationService;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest_user.ContestUserApplicationService;
@@ -52,6 +56,25 @@ public class ContestController {
         log.info("Contest User created: {}", createContestUserCommand);
 
         return ResponseEntity.ok(createContestUserResponse);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UpdateContestResponse> updateContest(
+            @PathVariable UUID id,
+            @RequestBody UpdateContestCommand updateContestCommand) {
+        log.info("Updating contest: {}", id);
+        UpdateContestResponse UpdateContestResponse =
+                contestApplicationService.updateContest(UpdateContestCommand
+                        .builder()
+                        .contestId(id)
+                        .name(updateContestCommand.getName())
+                        .description(updateContestCommand.getDescription())
+                        .startTime(updateContestCommand.getStartTime())
+                        .endTime(updateContestCommand.getEndTime())
+                        .updatedBy(updateContestCommand.getUpdatedBy())
+                        .build());
+        log.info("Contest updated: {}", UpdateContestResponse.getContestId());
+        return ResponseEntity.ok(UpdateContestResponse);
     }
 
     @GetMapping

@@ -1,8 +1,7 @@
-package com.backend.programming.learning.system.core.service.domain.dto.validator;
+package com.backend.programming.learning.system.core.service.domain.dto.validator.certificatecourse;
 
 
-import com.backend.programming.learning.system.core.service.domain.dto.validator.implement.CreateCertificateCourseCommandStartTimeAndEndTimeValidatorImpl;
-import com.backend.programming.learning.system.core.service.domain.dto.validator.implement.UpdateCertificateCourseCommandStartTimeAndEndTimeValidatorImpl;
+import com.backend.programming.learning.system.core.service.domain.dto.validator.implement.certificatecourse.UpdateCertificateCourseCommandStartTimeAndEndTimeValidatorImpl;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

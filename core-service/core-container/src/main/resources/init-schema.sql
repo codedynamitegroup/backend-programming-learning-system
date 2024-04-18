@@ -208,7 +208,6 @@ CREATE TABLE "public".contest
     description text,
     start_time TIMESTAMP WITH TIME ZONE,
     end_time TIMESTAMP WITH TIME ZONE,
-    is_deleted bool DEFAULT FALSE NOT NULL,
     created_by uuid NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_by uuid NOT NULL,

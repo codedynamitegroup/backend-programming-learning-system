@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse;
 
-import com.backend.programming.learning.system.core.service.domain.dto.validator.UpdateCertificateCourseCommandStartTimeAndEndTimeValidator;
+import com.backend.programming.learning.system.core.service.domain.dto.validator.certificatecourse.UpdateCertificateCourseCommandStartTimeAndEndTimeValidator;
 import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
 import com.backend.programming.learning.system.dataaccess.validator.EnumValidator;
 import lombok.AllArgsConstructor;

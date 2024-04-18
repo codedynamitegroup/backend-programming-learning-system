@@ -64,10 +64,12 @@ public class CertificateCourseController {
                         .builder()
                         .certificateCourseId(id)
                         .name(updateCertificateCourseCommand.getName())
+                        .description(updateCertificateCourseCommand.getDescription())
                         .skillLevel(updateCertificateCourseCommand.getSkillLevel())
                         .topicId(updateCertificateCourseCommand.getTopicId())
                         .startTime(updateCertificateCourseCommand.getStartTime())
                         .endTime(updateCertificateCourseCommand.getEndTime())
+                        .updatedBy(updateCertificateCourseCommand.getUpdatedBy())
                         .build());
         log.info("Certificate course updated: {}", updateCertificateCourseResponse.getCertificateCourseId());
         return ResponseEntity.ok(updateCertificateCourseResponse);

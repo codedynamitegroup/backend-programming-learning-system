@@ -1,14 +1,12 @@
 package com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse;
 
-import com.backend.programming.learning.system.core.service.domain.dto.validator.CreateCertificateCourseCommandStartTimeAndEndTimeValidator;
+import com.backend.programming.learning.system.core.service.domain.dto.validator.certificatecourse.CreateCertificateCourseCommandStartTimeAndEndTimeValidator;
 import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
 import com.backend.programming.learning.system.dataaccess.validator.EnumValidator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import javax.validation.constraints.Future;
-import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 import java.util.UUID;

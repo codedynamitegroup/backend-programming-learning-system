@@ -4,6 +4,8 @@ import com.backend.programming.learning.system.core.service.dataaccess.chapter.m
 import com.backend.programming.learning.system.core.service.dataaccess.chapter.repository.ChapterJpaRepository;
 import com.backend.programming.learning.system.core.service.dataaccess.contest.mapper.ContestDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.contest.repository.ContestJpaRepository;
+import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
 import com.backend.programming.learning.system.core.service.domain.entity.Contest;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ChapterRepository;
@@ -25,11 +27,13 @@ import java.util.UUID;
 public class ContestRepositoryImpl implements ContestRepository {
     private final ContestJpaRepository contestJpaRepository;
     private final ContestDataAccessMapper contestDataAccessMapper;
-
+    private final UserDataAccessMapper userDataAccessMapper;
     public ContestRepositoryImpl(ContestJpaRepository contestJpaRepository,
-                                  ContestDataAccessMapper contestDataAccessMapper) {
+                                  ContestDataAccessMapper contestDataAccessMapper,
+                                  UserDataAccessMapper userDataAccessMapper) {
         this.contestJpaRepository = contestJpaRepository;
         this.contestDataAccessMapper = contestDataAccessMapper;
+        this.userDataAccessMapper = userDataAccessMapper;
     }
 
     @Override
@@ -90,5 +94,18 @@ public class ContestRepositoryImpl implements ContestRepository {
     @Override
     public void deleteContestById(UUID contestId) {
         contestJpaRepository.deleteById(contestId);
+    }
+
+    @Override
+    public int updateContest(Contest contest) {
+        UserEntity userEntity = userDataAccessMapper.userToUserEntity(contest.getUpdatedBy());
+        return contestJpaRepository.updateContestById(
+                contest.getName(),
+                contest.getDescription(),
+                contest.getStartTime(),
+                contest.getEndTime(),
+                userEntity,
+                contest.getUpdatedAt(),
+                contest.getId().getValue());
     }
 }

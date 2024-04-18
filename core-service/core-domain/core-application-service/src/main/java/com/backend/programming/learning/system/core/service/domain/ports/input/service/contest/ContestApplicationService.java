@@ -7,6 +7,8 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryContestCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestResponseEntity;
 
 import javax.validation.Valid;
@@ -23,4 +25,7 @@ public interface ContestApplicationService {
 
     DeleteContestResponse deleteContest(
             @Valid DeleteContestCommand deleteContestCommand);
+
+    UpdateContestResponse updateContest(
+            @Valid UpdateContestCommand updateContestCommand);
 }
