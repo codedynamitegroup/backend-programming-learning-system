@@ -22,34 +22,19 @@ import java.util.List;
 
 @Component
 public class ChapterQuestionDataAccessMapper {
-
-    private final ChapterJpaRepository chapterJpaRepository;
-    private final QuestionJpaRepository questionJpaRepository;
     private final ChapterDataAccessMapper chapterDataAccessMapper;
     private final QuestionDataAccessMapper questionDataAccessMapper;
 
-    public ChapterQuestionDataAccessMapper(ChapterJpaRepository chapterJpaRepository,
-                                           QuestionJpaRepository questionJpaRepository,
-                                           ChapterDataAccessMapper chapterDataAccessMapper,
+    public ChapterQuestionDataAccessMapper(ChapterDataAccessMapper chapterDataAccessMapper,
                                            QuestionDataAccessMapper questionDataAccessMapper) {
-        this.chapterJpaRepository = chapterJpaRepository;
-        this.questionJpaRepository = questionJpaRepository;
         this.chapterDataAccessMapper = chapterDataAccessMapper;
         this.questionDataAccessMapper = questionDataAccessMapper;
     }
 
     public ChapterQuestionEntity chapterQuestionToChapterQuestionEntity(
             ChapterQuestion chapterQuestion) {
-        ChapterEntity chapterEntity = chapterJpaRepository
-                .findById(chapterQuestion.getChapter().getId().getValue())
-                .orElseThrow(() -> new ChapterNotFoundException("Chapter with id: " +
-                        chapterQuestion.getChapter().getId().getValue() + " could not be found!")
-                );
-        QuestionEntity questionEntity = questionJpaRepository
-                .findById(chapterQuestion.getQuestion().getId().getValue())
-                .orElseThrow(() -> new QuestionNotFoundException("Question with id: " +
-                        chapterQuestion.getQuestion().getId().getValue() + " could not be found!")
-                );
+        ChapterEntity chapterEntity = chapterDataAccessMapper.chapterToChapterEntity(chapterQuestion.getChapter());
+        QuestionEntity questionEntity = questionDataAccessMapper.questionToQuestionEntity(chapterQuestion.getQuestion());
 
         return ChapterQuestionEntity.builder()
                 .id(chapterQuestion.getId().getValue())

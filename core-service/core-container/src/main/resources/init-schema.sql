@@ -312,6 +312,25 @@ CREATE TABLE "public".chapter_question
     CONSTRAINT chapter_question_question_id_chapter_id_key UNIQUE (question_id, chapter_id)
 );
 
+DROP TABLE IF EXISTS "public".contest_question CASCADE;
+
+CREATE TABLE "public".contest_question
+(
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
+    contest_id uuid NOT NULL,
+    question_id uuid NOT NULL,
+    CONSTRAINT contest_question_pkey PRIMARY KEY (id),
+    CONSTRAINT contest_question_contest_id_fkey FOREIGN KEY (contest_id)
+        REFERENCES "public".contest (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT contest_question_question_id_fkey FOREIGN KEY (question_id)
+        REFERENCES "public".question (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT contest_question_contest_id_question_id_key UNIQUE (contest_id, question_id)
+);
+
 DROP TABLE IF EXISTS "public".answer_of_question CASCADE;
 
 CREATE TABLE "public".answer_of_question

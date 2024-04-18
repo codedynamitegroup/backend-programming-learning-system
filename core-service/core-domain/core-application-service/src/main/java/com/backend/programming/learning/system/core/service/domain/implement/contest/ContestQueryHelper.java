@@ -1,12 +1,11 @@
 package com.backend.programming.learning.system.core.service.domain.implement.contest;
 
-import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
-import com.backend.programming.learning.system.core.service.domain.entity.Contest;
-import com.backend.programming.learning.system.core.service.domain.entity.User;
+import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.exception.CertificateCourseNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.ContestNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseRepository;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ContestQuestionRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ContestRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
@@ -17,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,11 +25,14 @@ import java.util.UUID;
 public class ContestQueryHelper {
     private final ContestRepository contestRepository;
     private final UserRepository userRepository;
+    private final ContestQuestionRepository contestQuestionRepository;
 
     public ContestQueryHelper(ContestRepository contestRepository,
-                              UserRepository userRepository) {
+                              UserRepository userRepository,
+                              ContestQuestionRepository contestQuestionRepository) {
         this.contestRepository = contestRepository;
         this.userRepository = userRepository;
+        this.contestQuestionRepository = contestQuestionRepository;
     }
 
     @Transactional(readOnly = true)
@@ -44,10 +47,15 @@ public class ContestQueryHelper {
         }
         User createdBy = getUser(contestResult.get().getCreatedBy().getId().getValue());
         User updatedBy = getUser(contestResult.get().getUpdatedBy().getId().getValue());
+        List<ContestQuestion> contestQuestions = getAllContestQuestionsForContest(contestId);
+        List<Question> questions = contestQuestions.stream()
+                .map(ContestQuestion::getQuestion)
+                .toList();
 
         Contest contest = contestResult.get();
         contest.setCreatedBy(createdBy);
         contest.setUpdatedBy(updatedBy);
+        contest.setQuestions(questions);
 
         log.info("Contest queried with id: {}", contest.getId().getValue());
         return contest;
@@ -68,7 +76,29 @@ public class ContestQueryHelper {
     ) {
         log.info("Querying all contests with searchName: {}, startTimeFilter: {}, pageNo: {}, pageSize: {}",
                 searchName, startTimeFilter, pageNo, pageSize);
-        return contestRepository.findAll(searchName, startTimeFilter, pageNo, pageSize);
+        Page<Contest> contests = contestRepository.findAll(searchName, startTimeFilter, pageNo, pageSize);
+
+        for (Contest contest : contests) {
+            User createdBy = getUser(contest.getCreatedBy().getId().getValue());
+            User updatedBy = getUser(contest.getUpdatedBy().getId().getValue());
+            List<ContestQuestion> contestQuestions = getAllContestQuestionsForContest(contest.getId().getValue());
+            List<Question> questions = contestQuestions.stream()
+                    .map(ContestQuestion::getQuestion)
+                    .toList();
+            contest.setCreatedBy(createdBy);
+            contest.setUpdatedBy(updatedBy);
+            contest.setQuestions(questions);
+        }
+
+        return contests;
+    }
+
+    private List<ContestQuestion> getAllContestQuestionsForContest(UUID contestId) {
+        List<ContestQuestion> contestQuestion = contestQuestionRepository
+                .findAllContestQuestionsByContestId(contestId);
+
+        log.info("All questions queried for contest with id: {}", contestId);
+        return contestQuestion;
     }
 }
 

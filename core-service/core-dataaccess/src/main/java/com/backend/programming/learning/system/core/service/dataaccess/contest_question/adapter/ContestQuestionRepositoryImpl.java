@@ -6,6 +6,9 @@ import com.backend.programming.learning.system.core.service.domain.entity.Contes
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ContestQuestionRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.UUID;
+
 @Component
 public class ContestQuestionRepositoryImpl implements ContestQuestionRepository {
     private final ContestQuestionJpaRepository contestQuestionJpaRepository;
@@ -22,6 +25,13 @@ public class ContestQuestionRepositoryImpl implements ContestQuestionRepository 
                 contestQuestionJpaRepository.save(
                         contestQuestionDataAccessMapper.contestQuestionToContestQuestionEntity(contestQuestion)
                 )
+        );
+    }
+
+    @Override
+    public List<ContestQuestion> findAllContestQuestionsByContestId(UUID contestId) {
+        return contestQuestionDataAccessMapper.contestQuestionEntityListToContestQuestionList(
+                contestQuestionJpaRepository.findAllContestQuestionsByContestId(contestId)
         );
     }
 }
