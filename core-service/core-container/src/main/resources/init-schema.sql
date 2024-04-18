@@ -115,7 +115,8 @@ CREATE TABLE "public".chapter
     CONSTRAINT chapter_updated_by_fkey FOREIGN KEY (updated_by)
         REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT chapter_certificate_course_id_no_key UNIQUE (certificate_course_id, no)
 );
 
 DROP TABLE IF EXISTS "public".certificate_course_user CASCADE;
@@ -509,5 +510,6 @@ CREATE TABLE "public".plagiarism_detection_report
     CONSTRAINT plagiarism_detection_report_question_id_fkey FOREIGN KEY (question_id)
         REFERENCES "public".question (id) MATCH SIMPLE
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT unique_plagiarism_detection_report UNIQUE (programming_language_id, exam_id, question_id)
 );

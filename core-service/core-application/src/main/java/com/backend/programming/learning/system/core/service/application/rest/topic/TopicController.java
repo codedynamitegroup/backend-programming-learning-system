@@ -49,6 +49,10 @@ public class TopicController {
                 topicApplicationService.updateTopic(UpdateTopicCommand
                         .builder()
                         .topicId(id)
+                        .name(updateTopicCommand.getName())
+                        .description(updateTopicCommand.getDescription())
+                        .programmingLanguageIds(updateTopicCommand.getProgrammingLanguageIds())
+                        .updatedBy(updateTopicCommand.getUpdatedBy())
                         .build());
         log.info("Topic updated: {}", updateTopicResponse.getTopicId());
         return ResponseEntity.ok(updateTopicResponse);

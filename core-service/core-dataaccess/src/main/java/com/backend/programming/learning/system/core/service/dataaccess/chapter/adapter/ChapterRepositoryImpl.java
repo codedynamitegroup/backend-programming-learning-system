@@ -4,6 +4,8 @@ import com.backend.programming.learning.system.core.service.dataaccess.certifica
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.repository.CertificateCourseJpaRepository;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter.mapper.ChapterDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter.repository.ChapterJpaRepository;
+import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseRepository;
@@ -20,11 +22,14 @@ import java.util.UUID;
 public class ChapterRepositoryImpl implements ChapterRepository {
     private final ChapterJpaRepository chapterJpaRepository;
     private final ChapterDataAccessMapper chapterDataAccessMapper;
+    private final UserDataAccessMapper userDataAccessMapper;
 
     public ChapterRepositoryImpl(ChapterJpaRepository chapterJpaRepository,
-                                  ChapterDataAccessMapper chapterDataAccessMapper) {
+                                  ChapterDataAccessMapper chapterDataAccessMapper,
+                                  UserDataAccessMapper userDataAccessMapper) {
         this.chapterJpaRepository = chapterJpaRepository;
         this.chapterDataAccessMapper = chapterDataAccessMapper;
+        this.userDataAccessMapper = userDataAccessMapper;
     }
 
     @Override
@@ -55,5 +60,17 @@ public class ChapterRepositoryImpl implements ChapterRepository {
     @Override
     public void deleteChapterById(UUID chapterId) {
         chapterJpaRepository.deleteById(chapterId);
+    }
+
+    @Override
+    public int updateChapter(Chapter chapter) {
+        UserEntity userEntity = userDataAccessMapper.userToUserEntity(chapter.getUpdatedBy());
+        return chapterJpaRepository.updateChapterById(
+                chapter.getNo(),
+                chapter.getTitle(),
+                chapter.getDescription(),
+                userEntity,
+                chapter.getUpdatedAt(),
+                chapter.getId().getValue());
     }
 }
