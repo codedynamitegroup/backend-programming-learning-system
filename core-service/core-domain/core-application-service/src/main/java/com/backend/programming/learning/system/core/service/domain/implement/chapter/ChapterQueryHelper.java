@@ -46,8 +46,7 @@ public class ChapterQueryHelper {
 
     @Transactional(readOnly = true)
     public Chapter queryChapterById(UUID chapterId) {
-        Optional<Chapter> chapter = chapterRepository.
-                findById(new CertificateCourseId(chapterId).getValue());
+        Optional<Chapter> chapter = chapterRepository.findById(chapterId);
 
         if (chapter.isEmpty()) {
             log.error("Chapter not found with id: {}", chapterId);

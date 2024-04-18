@@ -9,13 +9,13 @@ import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 
 public class ContestQuestion extends BaseEntity<ContestQuestionId> {
-    private final QuestionId questionId;
-    private final ContestId contestId;
+    private final Question question;
+    private final Contest contest;
 
     private ContestQuestion(Builder builder) {
         super.setId(builder.contestQuestionId);
-        questionId = builder.questionId;
-        contestId = builder.contestId;
+        question = builder.question;
+        contest = builder.contest;
     }
 
     public static Builder builder() {
@@ -23,18 +23,18 @@ public class ContestQuestion extends BaseEntity<ContestQuestionId> {
     }
 
 
-    public QuestionId getQuestionId() {
-        return questionId;
+    public Question getQuestion() {
+        return question;
     }
 
-    public ContestId getContestId() {
-        return contestId;
+    public Contest getContest() {
+        return contest;
     }
 
     public static final class Builder {
         private ContestQuestionId contestQuestionId;
-        private QuestionId questionId;
-        private ContestId contestId;
+        private Question question;
+        private Contest contest;
 
         private Builder() {
         }
@@ -44,13 +44,13 @@ public class ContestQuestion extends BaseEntity<ContestQuestionId> {
             return this;
         }
 
-        public Builder questionId(QuestionId val) {
-            questionId = val;
+        public Builder question(Question val) {
+            question = val;
             return this;
         }
 
-        public Builder contestId(ContestId val) {
-            contestId = val;
+        public Builder contest(Contest val) {
+            contest = val;
             return this;
         }
 

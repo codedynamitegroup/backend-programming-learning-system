@@ -4,6 +4,10 @@ import com.backend.programming.learning.system.core.service.dataaccess.certifica
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.repository.CertificateCourseJpaRepository;
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_user.mapper.CertificateCourseUserDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_user.repository.CertificateCourseUserJpaRepository;
+import com.backend.programming.learning.system.core.service.dataaccess.topic.entity.TopicEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.topic.mapper.TopicDataAccessMapper;
+import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourseUser;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseRepository;
@@ -22,15 +26,21 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
     private final CertificateCourseUserJpaRepository certificateCourseUserJpaRepository;
     private final CertificateCourseDataAccessMapper certificateCourseDataAccessMapper;
     private final CertificateCourseUserDataAccessMapper certificateCourseUserDataAccessMapper;
+    private final TopicDataAccessMapper topicDataAccessMapper;
+    private final UserDataAccessMapper userDataAccessMapper;
 
     public CertificateCourseRepositoryImpl(CertificateCourseJpaRepository certificateCourseJpaRepository,
                                            CertificateCourseUserJpaRepository certificateCourseUserJpaRepository,
                                            CertificateCourseDataAccessMapper certificateCourseDataAccessMapper,
-                                           CertificateCourseUserDataAccessMapper certificateCourseUserDataAccessMapper) {
+                                           CertificateCourseUserDataAccessMapper certificateCourseUserDataAccessMapper,
+                                           TopicDataAccessMapper topicDataAccessMapper,
+                                           UserDataAccessMapper userDataAccessMapper) {
         this.certificateCourseJpaRepository = certificateCourseJpaRepository;
         this.certificateCourseUserJpaRepository = certificateCourseUserJpaRepository;
         this.certificateCourseDataAccessMapper = certificateCourseDataAccessMapper;
         this.certificateCourseUserDataAccessMapper = certificateCourseUserDataAccessMapper;
+        this.topicDataAccessMapper = topicDataAccessMapper;
+        this.userDataAccessMapper = userDataAccessMapper;
     }
 
     @Override
@@ -68,5 +78,21 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
     @Override
     public int updateAvgRating(CertificateCourseId certificateCourseId, Float avgRating) {
         return certificateCourseJpaRepository.updateAvgRating(avgRating, certificateCourseId.getValue());
+    }
+
+    @Override
+    public int updateCertificateCourse(CertificateCourse certificateCourse) {
+        TopicEntity topicEntity = topicDataAccessMapper.topicToTopicEntity(certificateCourse.getTopic());
+        UserEntity userEntity = userDataAccessMapper.userToUserEntity(certificateCourse.getUpdatedBy());
+        return certificateCourseJpaRepository.updateCertificateCourseById(
+                certificateCourse.getName(),
+                certificateCourse.getDescription(),
+                certificateCourse.getSkillLevel(),
+                certificateCourse.getStartTime(),
+                certificateCourse.getEndTime(),
+                topicEntity,
+                userEntity,
+                certificateCourse.getUpdatedAt(),
+                certificateCourse.getId().getValue());
     }
 }

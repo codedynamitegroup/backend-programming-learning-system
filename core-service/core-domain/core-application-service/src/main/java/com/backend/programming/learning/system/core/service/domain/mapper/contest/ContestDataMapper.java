@@ -3,11 +3,13 @@ package com.backend.programming.learning.system.core.service.domain.mapper.conte
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest.CreateContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest.CreateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Contest;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
+import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -72,6 +74,13 @@ public class ContestDataMapper {
                 .currentPage(contests.getNumber())
                 .totalPages(contests.getTotalPages())
                 .totalItems(contests.getTotalElements())
+                .build();
+    }
+
+    public UpdateContestResponse contestToUpdateContestResponse(ContestId contestId, String message) {
+        return UpdateContestResponse.builder()
+                .contestId(contestId.getValue())
+                .message(message)
                 .build();
     }
 
