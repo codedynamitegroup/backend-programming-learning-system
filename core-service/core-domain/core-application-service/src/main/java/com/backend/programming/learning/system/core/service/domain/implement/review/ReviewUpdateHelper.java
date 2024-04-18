@@ -1,78 +1,95 @@
 package com.backend.programming.learning.system.core.service.domain.implement.review;
 
-import com.backend.programming.learning.system.core.service.domain.CoreDomainService;
-import com.backend.programming.learning.system.core.service.domain.dto.method.create.review.CreateReviewCommand;
-import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourseUser;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
-import com.backend.programming.learning.system.core.service.domain.exception.CertificateCourseNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
+import com.backend.programming.learning.system.core.service.domain.exception.ReviewNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
-import com.backend.programming.learning.system.core.service.domain.mapper.review.ReviewDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseUserRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ReviewRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.UserRepository;
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
+import com.backend.programming.learning.system.domain.DomainConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
 @Component
-public class ReviewCreateHelper {
-    private final CoreDomainService coreDomainService;
+public class ReviewUpdateHelper {
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
     private final CertificateCourseRepository certificateCourseRepository;
     private final CertificateCourseUserRepository certificateCourseUserRepository;
-    private final ReviewDataMapper reviewDataMapper;
 
-    public ReviewCreateHelper(CoreDomainService coreDomainService,
-                              ReviewRepository reviewRepository,
+    public ReviewUpdateHelper(ReviewRepository reviewRepository,
                               UserRepository userRepository,
                               CertificateCourseRepository certificateCourseRepository,
-                              CertificateCourseUserRepository certificateCourseUserRepository,
-                              ReviewDataMapper reviewDataMapper) {
-        this.coreDomainService = coreDomainService;
+                              CertificateCourseUserRepository certificateCourseUserRepository) {
         this.reviewRepository = reviewRepository;
         this.userRepository = userRepository;
         this.certificateCourseRepository = certificateCourseRepository;
         this.certificateCourseUserRepository = certificateCourseUserRepository;
-        this.reviewDataMapper = reviewDataMapper;
     }
 
     @Transactional
-    public Review persistReview(CreateReviewCommand createReviewCommand) {
-        checkUser(createReviewCommand.getCreatedBy());
-        checkUser(createReviewCommand.getUpdatedBy());
-        checkCertificateCourse(createReviewCommand.getCertificateCourseId());
-        checkCertificateCourseUserByCertificateCourseIdAndUserId(
-                createReviewCommand.getCertificateCourseId(),
-                createReviewCommand.getCreatedBy());
+    public void persistReview(UpdateReviewCommand updateReviewCommand) {
+        checkUser(updateReviewCommand.getUpdatedBy());
+        Review review = getReview(updateReviewCommand.getReviewId());
 
-        Review review = reviewDataMapper.
-                createReviewCommandToReview(createReviewCommand);
-        coreDomainService.createReview(review);
-        Review reviewResult = saveReview(review);
+        checkUserIsAllowedToUpdateReview(updateReviewCommand, review);
 
-        Float avgRating = getAvgRatingOfAllReviewsByCertificateCourseId(
-                createReviewCommand.getCertificateCourseId());
-        int updatedRows = certificateCourseRepository.updateAvgRating(
-                new CertificateCourseId(createReviewCommand.getCertificateCourseId()), avgRating);
-        if (updatedRows == 0) {
-            log.error("Could not update avg rating for certificate course with id: {}",
-                    createReviewCommand.getCertificateCourseId());
-            throw new CoreDomainException("Could not update avg rating for certificate course with id: " +
-                    createReviewCommand.getCertificateCourseId());
+        review.setUpdatedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+
+        if (updateReviewCommand.getRating() != null) {
+            review.setRating(updateReviewCommand.getRating());
         }
 
-        log.info("Review created with id: {}", reviewResult.getId().getValue());
-        return reviewResult;
+        if (updateReviewCommand.getContent() != null) {
+            review.setContent(updateReviewCommand.getContent());
+        }
+
+        updateReview(review);
+        log.info("Review updated with id: {}", review.getId().getValue());
+
+        Float avgRating = getAvgRatingOfAllReviewsByCertificateCourseId(
+                review.getCertificateCourseId().getValue());
+
+        int updatedRows = certificateCourseRepository.updateAvgRating(
+                review.getCertificateCourseId(), avgRating);
+        if (updatedRows == 0) {
+            log.error("Could not update avg rating for certificate course with id: {}",
+                    review.getCertificateCourseId());
+            throw new CoreDomainException("Could not update avg rating for certificate course with id: " +
+                    review.getCertificateCourseId());
+        }
+        log.info("Avg rating updated for certificate course with id: {}", review.getCertificateCourseId());
+    }
+
+    private void checkUserIsAllowedToUpdateReview(
+            UpdateReviewCommand updateReviewCommand, Review review) {
+        // Check if user is a creator of the review
+        checkUserOwnsReview(review, updateReviewCommand.getUpdatedBy());
+
+        // Check if user registered for the certificate course
+        checkCertificateCourseUserByCertificateCourseIdAndUserId(
+                review.getCertificateCourseId().getValue(), updateReviewCommand.getUpdatedBy());
+    }
+
+    private void checkUserOwnsReview(Review review, UUID userId) {
+        if (!review.getCreatedBy().getId().getValue().equals(userId)) {
+            log.error("User with id: {} is not allowed to update review with id: {}",
+                    userId, review.getId().getValue());
+            throw new CoreDomainException("User with id: " + userId +
+                    " is not allowed to update review with id: " + review.getId().getValue());
+        }
     }
 
     private void checkCertificateCourseUserByCertificateCourseIdAndUserId(
@@ -91,6 +108,15 @@ public class ReviewCreateHelper {
         return reviewRepository.getAvgRatingOfAllReviewsByCertificateCourseId(certificateCourseId);
     }
 
+    private Review getReview(UUID reviewId) {
+        Optional<Review> review = reviewRepository.findById(reviewId);
+        if (review.isEmpty()) {
+            log.warn("Review with id: {} not found", reviewId);
+            throw new ReviewNotFoundException("Could not find review with id: " + reviewId);
+        }
+        return review.get();
+    }
+
     private void checkUser(UUID userId) {
         Optional<User> user = userRepository.findUser(userId);
         if (user.isEmpty()) {
@@ -99,28 +125,15 @@ public class ReviewCreateHelper {
         }
     }
 
-    private void checkCertificateCourse(UUID certificateCourseId) {
-        Optional<CertificateCourse> certificateCourse = certificateCourseRepository.findById(
-                new CertificateCourseId(certificateCourseId)
-        );
-        if (certificateCourse.isEmpty()) {
-            log.warn("Certificate course with id: {} not found", certificateCourseId);
-            throw new CertificateCourseNotFoundException(
-                    "Could not find certificate course with id: " + certificateCourseId);
+    private void updateReview(Review review) {
+        int updatedRows = reviewRepository.updateReview(review);
+
+        if (updatedRows == 0) {
+            log.error("Could not update review with id: {}", review.getId().getValue());
+
+            throw new CoreDomainException("Could not update review with id: " + review.getId().getValue());
         }
-    }
-
-    private Review saveReview(Review review) {
-        Review savedReview = reviewRepository
-                .saveReview(review);
-
-        if (savedReview == null) {
-            log.error("Could not save review");
-
-            throw new CoreDomainException("Could not save review");
-        }
-        log.info("Review saved with id: {}", savedReview.getId().getValue());
-        return savedReview;
+        log.info("Review updated with id: {}", review.getId().getValue());
     }
 }
 

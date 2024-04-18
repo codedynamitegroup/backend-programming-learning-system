@@ -3,12 +3,14 @@ package com.backend.programming.learning.system.core.service.domain.mapper.revie
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.review.CreateReviewCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.review.CreateReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.review.ReviewResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.ReviewId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -66,6 +68,13 @@ public class ReviewDataMapper {
                 .currentPage(reviews.getNumber())
                 .totalItems(reviews.getTotalElements())
                 .totalPages(reviews.getTotalPages())
+                .build();
+    }
+
+    public UpdateReviewResponse reviewToUpdateReviewResponse(ReviewId reviewId, String message) {
+        return UpdateReviewResponse.builder()
+                .reviewId(reviewId.getValue())
+                .message(message)
                 .build();
     }
 }

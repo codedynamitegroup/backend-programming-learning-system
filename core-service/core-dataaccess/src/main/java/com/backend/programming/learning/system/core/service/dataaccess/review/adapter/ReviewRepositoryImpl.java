@@ -1,12 +1,8 @@
 package com.backend.programming.learning.system.core.service.dataaccess.review.adapter;
 
-import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.mapper.CertificateCourseDataAccessMapper;
-import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.repository.CertificateCourseJpaRepository;
 import com.backend.programming.learning.system.core.service.dataaccess.review.mapper.ReviewDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.review.repository.ReviewJpaRepository;
-import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ReviewRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -55,5 +51,14 @@ public class ReviewRepositoryImpl implements ReviewRepository {
     @Override
     public Float getAvgRatingOfAllReviewsByCertificateCourseId(UUID certificateCourseId) {
         return reviewJpaRepository.getAvgRatingOfAllReviewsByCertificateCourseId(certificateCourseId);
+    }
+
+    @Override
+    public int updateReview(Review review) {
+        return reviewJpaRepository.updateReviewById(
+                review.getRating(),
+                review.getContent(),
+                review.getUpdatedAt(),
+                review.getId().getValue());
     }
 }
