@@ -5,6 +5,8 @@ import com.backend.programming.learning.system.course.service.dataaccess.exam.re
 import com.backend.programming.learning.system.entity.Exam;
 import com.backend.programming.learning.system.ports.output.repository.ExamRepository;
 import com.backend.programming.learning.system.valueobject.ExamId;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -42,10 +44,8 @@ public class ExamRepositoryImpl implements ExamRepository {
     }
 
     @Override
-    public List<Exam> findAll(String search) {
-        return examJpaRepository.findAll() // chưa bỏ search vào và paging
-                .stream()
-                .map(examDataAccessMapper::examEntityToExam)
-                .toList();
+    public Page<Exam> findAll(String search, Integer pageNo, Integer pageSize) {
+        return examJpaRepository.findAll(PageRequest.of(pageNo, pageSize))
+                .map(examDataAccessMapper::examEntityToExam);
     }
 }

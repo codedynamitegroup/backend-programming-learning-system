@@ -54,5 +54,4 @@ public class CourseRepositoryImpl implements CourseRepository {
                 .findById(courseId)
                 .orElseThrow(() -> new RuntimeException("Course not found")));
     }
-
 }
