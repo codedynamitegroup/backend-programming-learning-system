@@ -37,11 +37,11 @@ public class Course extends AggregateRoot<CourseId> {
         updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
     }
 
-    private void initializePost(PostId postId) {
-        for(Post post: posts){
-            post.initializePost(super.getId(), new PostId(UUID.randomUUID()));
-        }
-    }
+//    private void initializePost(PostId postId) {
+//        for(Post post: posts){
+//            post.initializePost(super.getId(), new PostId(UUID.randomUUID()));
+//        }
+//    }
     private void initializeExam(ExamId examId) {
         for(Exam exam: exams){
             exam.initializeExam(super.getId(), new ExamId(UUID.randomUUID()));

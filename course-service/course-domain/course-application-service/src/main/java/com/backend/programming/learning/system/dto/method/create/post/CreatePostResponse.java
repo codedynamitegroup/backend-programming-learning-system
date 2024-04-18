@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.dto.method.create.post;
 
-import com.backend.programming.learning.system.entity.Post;
+import com.backend.programming.learning.system.valueobject.CourseId;
+import com.backend.programming.learning.system.valueobject.PostId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,6 +16,11 @@ import lombok.Getter;
 @Builder
 @AllArgsConstructor
 public class CreatePostResponse {
-    private final Post post;
-    private final String message;
+    private PostId id;
+    private CourseId courseId;
+    private String title;
+    private String content;
+    private String summary;
+    private Boolean isPublished;
+    private String message;
 }

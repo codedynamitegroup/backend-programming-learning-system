@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.dto.method.create.question;
 
-import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
 import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import lombok.Builder;
@@ -25,5 +24,4 @@ public class CreateQuestionCommand {
     private final Float defaultMark;
     private final QuestionType qtype;
     private final UUID createdBy;
-    private final UUID updatedBy;
 }

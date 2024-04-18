@@ -3,11 +3,9 @@ package com.backend.programming.learning.system;
 import com.backend.programming.learning.system.entity.Assignment;
 import com.backend.programming.learning.system.entity.Course;
 import com.backend.programming.learning.system.entity.Exam;
+import com.backend.programming.learning.system.entity.Post;
 import com.backend.programming.learning.system.entity.Question;
-import com.backend.programming.learning.system.valueobject.CourseId;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.UUID;
 
 @Slf4j
 public class CourseDomainServiceImpl implements CourseDomainService{
@@ -24,10 +22,9 @@ public class CourseDomainServiceImpl implements CourseDomainService{
     }
 
     @Override
-    public Question createQuestion(Question question) {
+    public void createQuestion(Question question) {
         question.initializeQuestion();
         log.info("Question with id: {} is initiated", question.getId().getValue());
-        return question;
     }
 
     @Override
@@ -35,5 +32,11 @@ public class CourseDomainServiceImpl implements CourseDomainService{
         assignment.initializeAssignment();
         log.info("Assignment with id: {} is initiated", assignment.getId().getValue());
 
+    }
+
+    @Override
+    public void createPost(Post post) {
+        post.initializePost();
+        log.info("Post with id: {} is initiated", post.getId().getValue());
     }
 }

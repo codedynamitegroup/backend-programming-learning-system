@@ -17,9 +17,12 @@ import javax.validation.Valid;
  */
 public interface ExamApplicationService {
 
-    CreateExamResponse createExam(@Valid CreateExamCommand createExamCommand);
+    CreateExamResponse createExam(
+            @Valid CreateExamCommand createExamCommand);
 
-    ExamResponseEntity findBy(QueryExamCommand queryExamCommand);
+    ExamResponseEntity findBy(
+            @Valid QueryExamCommand queryExamCommand);
 
-    QueryAllExamResponse findAll(QueryAllExamCommand queryAllExamCommand);
+    QueryAllExamResponse findAll(
+            @Valid QueryAllExamCommand queryAllExamCommand);
 }

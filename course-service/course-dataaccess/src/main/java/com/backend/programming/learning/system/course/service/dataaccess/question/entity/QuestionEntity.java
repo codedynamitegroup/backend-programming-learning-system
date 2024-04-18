@@ -7,8 +7,6 @@ import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import lombok.*;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
-import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -38,11 +36,11 @@ public class QuestionEntity {
 //    private ZonedDateTime createdAt;
 //    private ZonedDateTime updatedAt;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "created_by", referencedColumnName = "id")
     private UserEntity createdBy;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "updated_by", referencedColumnName = "id")
     private UserEntity updatedBy;
 

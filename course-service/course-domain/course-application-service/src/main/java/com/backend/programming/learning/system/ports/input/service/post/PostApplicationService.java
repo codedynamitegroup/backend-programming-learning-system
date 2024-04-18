@@ -2,6 +2,10 @@ package com.backend.programming.learning.system.ports.input.service.post;
 
 import com.backend.programming.learning.system.dto.method.create.post.CreatePostCommand;
 import com.backend.programming.learning.system.dto.method.create.post.CreatePostResponse;
+import com.backend.programming.learning.system.dto.method.query.post.QueryAllPostCommand;
+import com.backend.programming.learning.system.dto.method.query.post.QueryAllPostResponse;
+import com.backend.programming.learning.system.dto.method.query.post.QueryPostCommand;
+import com.backend.programming.learning.system.dto.responseentity.post.PostResponseEntity;
 
 import javax.validation.Valid;
 
@@ -14,4 +18,10 @@ import javax.validation.Valid;
 public interface PostApplicationService {
     CreatePostResponse createPost(
             @Valid CreatePostCommand createPostCommand);
+
+    QueryAllPostResponse findAll(
+            @Valid QueryAllPostCommand queryAllPostCommand);
+
+    PostResponseEntity findById(
+            @Valid QueryPostCommand createPostCommand);
 }

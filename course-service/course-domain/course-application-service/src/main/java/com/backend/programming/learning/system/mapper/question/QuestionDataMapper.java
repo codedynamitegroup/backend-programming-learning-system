@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.mapper.question;
 
-import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.dto.method.create.question.CreateQuestionCommand;
 import com.backend.programming.learning.system.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.dto.method.query.question.QueryAllQuestionResponse;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * com.backend.programming.learning.system.mapper.question
@@ -25,7 +23,6 @@ import java.util.UUID;
 public class QuestionDataMapper {
     public Question createQuestionCommandToQuestion(Organization organization,
                                                     User createdBy,
-                                                    User updatedBy,
                                                     CreateQuestionCommand createQuestionCommand) {
         return Question.builder()
                 .organization(organization)
@@ -36,7 +33,7 @@ public class QuestionDataMapper {
                 .defaultMark(createQuestionCommand.getDefaultMark())
                 .qtype(createQuestionCommand.getQtype())
                 .createdBy(createdBy)
-                .updatedBy(updatedBy)
+                .updatedBy(createdBy)
                 .build();
     }
 
@@ -64,7 +61,7 @@ public class QuestionDataMapper {
                 .build();
     }
 
-    private QuestionResponseEntity questionToQueryQuestionResponse(Question question) {
+    public QuestionResponseEntity questionToQueryQuestionResponse(Question question) {
         return QuestionResponseEntity.builder()
                 .questionId(question.getId())
                 .organizationId(question.getOrganization().getId())

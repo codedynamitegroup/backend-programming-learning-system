@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.dto.method.query.question;
+package com.backend.programming.learning.system.dto.method.query.post;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,15 +7,15 @@ import lombok.Getter;
 import javax.validation.constraints.NotNull;
 
 /**
- * com.backend.programming.learning.system.dto.method.query.question
+ * com.backend.programming.learning.system.dto.method.query.post
  * Create by Dang Ngoc Tien
- * Date 4/18/2024 - 2:23 AM
+ * Date 4/19/2024 - 1:31 AM
  * Description: ...
  */
 @Getter
 @Builder
 @AllArgsConstructor
-public class QueryAllQuestionCommand {
+public class QueryAllPostCommand {
     @NotNull
     private final int pageNo;
     @NotNull

@@ -2,6 +2,10 @@ package com.backend.programming.learning.system.implement.post;
 
 import com.backend.programming.learning.system.dto.method.create.post.CreatePostCommand;
 import com.backend.programming.learning.system.dto.method.create.post.CreatePostResponse;
+import com.backend.programming.learning.system.dto.method.query.post.QueryAllPostCommand;
+import com.backend.programming.learning.system.dto.method.query.post.QueryAllPostResponse;
+import com.backend.programming.learning.system.dto.method.query.post.QueryPostCommand;
+import com.backend.programming.learning.system.dto.responseentity.post.PostResponseEntity;
 import com.backend.programming.learning.system.ports.input.service.post.PostApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,5 +27,15 @@ public class PostApplicationServiceImpl implements PostApplicationService {
     @Override
     public CreatePostResponse createPost(CreatePostCommand createPostCommand) {
         return postCommandHandler.createPost(createPostCommand);
+    }
+
+    @Override
+    public QueryAllPostResponse findAll(QueryAllPostCommand queryAllPostCommand) {
+        return postCommandHandler.findAll(queryAllPostCommand);
+    }
+
+    @Override
+    public PostResponseEntity findById(QueryPostCommand createPostCommand) {
+        return postCommandHandler.findById(createPostCommand);
     }
 }

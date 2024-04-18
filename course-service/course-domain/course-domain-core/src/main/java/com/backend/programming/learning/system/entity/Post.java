@@ -1,32 +1,38 @@
 package com.backend.programming.learning.system.entity;
 
+import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
-import com.backend.programming.learning.system.valueobject.CourseId;
 import com.backend.programming.learning.system.valueobject.PostId;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 public class Post extends AggregateRoot<PostId> {
-    private CourseId courseId;
+    private Course course;
     private String title;
     private String content;
     private String summary;
     private Boolean isPublished;
 
-    private final UserId createdBy;
-    private UserId updatedBy;
+    private final User createdBy;
+    private User updatedBy;
 
-    private final ZonedDateTime createdAt;
+    private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
-    void initializePost(CourseId courseId, PostId postId) {
-        this.courseId = courseId;
+    void initializePost(Course course, PostId postId) {
+        this.course = course;
         this.setId(postId);
+    }
+    public void initializePost() {
+        setId(new PostId(UUID.randomUUID()));
+        createdAt =  ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
     }
     private Post(Builder builder) {
         super.setId(builder.postId);
-        courseId = builder.courseId;
+        course = builder.course;
         title = builder.title;
         content = builder.content;
         summary = builder.summary;
@@ -41,8 +47,8 @@ public class Post extends AggregateRoot<PostId> {
         return new Builder();
     }
 
-    public CourseId getCourseId() {
-        return courseId;
+    public Course getCourse() {
+        return course;
     }
 
     public String getTitle() {
@@ -61,11 +67,11 @@ public class Post extends AggregateRoot<PostId> {
         return isPublished;
     }
 
-    public UserId getCreatedBy() {
+    public User getCreatedBy() {
         return createdBy;
     }
 
-    public UserId getUpdatedBy() {
+    public User getUpdatedBy() {
         return updatedBy;
     }
 
@@ -79,13 +85,13 @@ public class Post extends AggregateRoot<PostId> {
 
     public static final class Builder {
         private PostId postId;
-        private CourseId courseId;
+        private Course course;
         private String title;
         private String content;
         private String summary;
         private Boolean isPublished;
-        private UserId createdBy;
-        private UserId updatedBy;
+        private User createdBy;
+        private User updatedBy;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
 
@@ -101,8 +107,8 @@ public class Post extends AggregateRoot<PostId> {
             return this;
         }
 
-        public Builder courseId(CourseId val) {
-            courseId = val;
+        public Builder course(Course val) {
+            course = val;
             return this;
         }
 
@@ -126,12 +132,12 @@ public class Post extends AggregateRoot<PostId> {
             return this;
         }
 
-        public Builder createdBy(UserId val) {
+        public Builder createdBy(User val) {
             createdBy = val;
             return this;
         }
 
-        public Builder updatedBy(UserId val) {
+        public Builder updatedBy(User val) {
             updatedBy = val;
             return this;
         }
