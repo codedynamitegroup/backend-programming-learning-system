@@ -5,9 +5,11 @@ import com.backend.programming.learning.system.core.service.dataaccess.topic_pro
 import com.backend.programming.learning.system.core.service.domain.entity.TopicProgrammingLanguage;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.TopicProgrammingLanguageRepository;
 import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
+import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class TopicProgrammingLanguageRepositoryImpl implements TopicProgrammingLanguageRepository {
@@ -37,5 +39,17 @@ public class TopicProgrammingLanguageRepositoryImpl implements TopicProgrammingL
                 .topicProgrammingLanguageEntityListToTopicProgrammingLanguageList(
                         topicProgrammingLanguageJpaRepository
                                 .findAllByTopicId(topicId.getValue()));
+    }
+
+    @Override
+    public Optional<TopicProgrammingLanguage> findByTopicIdAndProgrammingLanguageId(TopicId topicId, ProgrammingLanguageId programmingLanguageId) {
+        return topicProgrammingLanguageJpaRepository
+                .findByTopicIdAndProgrammingLanguageId(topicId.getValue(), programmingLanguageId.getValue())
+                .map(topicProgrammingLanguageDataAccessMapper::topicProgrammingLanguageEntityToTopicProgrammingLanguage);
+    }
+
+    @Override
+    public void deleteAllTopicProgrammingLanguagesByTopicId(TopicId topicId) {
+        topicProgrammingLanguageJpaRepository.deleteAllByTopicId(topicId.getValue());
     }
 }
