@@ -2,8 +2,10 @@ package com.backend.programming.learning.system.implement.exam;
 
 import com.backend.programming.learning.system.dto.method.create.exam.CreateExamCommand;
 import com.backend.programming.learning.system.dto.method.create.exam.CreateExamResponse;
+import com.backend.programming.learning.system.dto.method.query.exam.QueryAllExamCommand;
+import com.backend.programming.learning.system.dto.method.query.exam.QueryAllExamResponse;
 import com.backend.programming.learning.system.dto.method.query.exam.QueryExamCommand;
-import com.backend.programming.learning.system.dto.method.query.exam.QueryExamResponse;
+import com.backend.programming.learning.system.dto.responseentity.exam.ExamResponseEntity;
 import com.backend.programming.learning.system.ports.input.service.exam.ExamApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,12 +33,12 @@ public class ExamApplicationServiceImpl implements ExamApplicationService {
     }
 
     @Override
-    public QueryExamResponse findBy(QueryExamCommand queryExamCommand) {
+    public ExamResponseEntity findBy(QueryExamCommand queryExamCommand) {
         return examCommandHandler.findBy(queryExamCommand);
     }
 
     @Override
-    public List<QueryExamResponse> findAll(String search) {
-        return examCommandHandler.findAll(search);
+    public QueryAllExamResponse findAll(QueryAllExamCommand queryAllExamCommand) {
+        return examCommandHandler.findAll(queryAllExamCommand);
     }
 }

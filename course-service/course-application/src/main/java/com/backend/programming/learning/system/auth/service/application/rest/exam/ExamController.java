@@ -2,8 +2,10 @@ package com.backend.programming.learning.system.auth.service.application.rest.ex
 
 import com.backend.programming.learning.system.dto.method.create.exam.CreateExamCommand;
 import com.backend.programming.learning.system.dto.method.create.exam.CreateExamResponse;
+import com.backend.programming.learning.system.dto.method.query.exam.QueryAllExamCommand;
+import com.backend.programming.learning.system.dto.method.query.exam.QueryAllExamResponse;
 import com.backend.programming.learning.system.dto.method.query.exam.QueryExamCommand;
-import com.backend.programming.learning.system.dto.method.query.exam.QueryExamResponse;
+import com.backend.programming.learning.system.dto.responseentity.exam.ExamResponseEntity;
 import com.backend.programming.learning.system.ports.input.service.exam.ExamApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -33,11 +34,18 @@ public class ExamController {
     private final ExamApplicationService examApplicationService;
 
     @GetMapping
-    public ResponseEntity<List<QueryExamResponse>> findAll(
-            @RequestParam(value = "search", required = false) String search
+    public ResponseEntity<QueryAllExamResponse> findAll(
+            @RequestParam(defaultValue = "") String search,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize
     ) {
         log.info("Getting list exam");
-        List<QueryExamResponse> response = examApplicationService.findAll(search);
+        QueryAllExamCommand queryAllExamCommand = QueryAllExamCommand.builder()
+                .search(search)
+                .pageNo(pageNo)
+                .pageSize(pageSize)
+                .build();
+        QueryAllExamResponse response = examApplicationService.findAll(queryAllExamCommand);
         return ResponseEntity.ok(response);
     }
 
@@ -48,10 +56,10 @@ public class ExamController {
         return ResponseEntity.ok(response);
     }
     @GetMapping("/{examId}")
-    public ResponseEntity<QueryExamResponse> findBy(@PathVariable UUID examId) {
+    public ResponseEntity<ExamResponseEntity> findBy(@PathVariable UUID examId) {
         QueryExamCommand queryExamCommand = QueryExamCommand.builder().examId(examId).build();
         log.info("Getting exam with id: {}", examId);
-        QueryExamResponse response = examApplicationService.findBy(queryExamCommand);
+        ExamResponseEntity response = examApplicationService.findBy(queryExamCommand);
         return ResponseEntity.ok(response);
     }
 }

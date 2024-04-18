@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 /**
  * com.backend.programming.learning.system.implement.course
  * Create by Dang Ngoc Tien
@@ -23,5 +25,11 @@ public class CourseQueryHelper {
         Page<Course> courses = courseRepository.findAll(search, pageNo, pageSize);
         log.info("Courses found successfully");
         return courses;
+    }
+
+    public Course findById(UUID courseId) {
+        Course course = courseRepository.findBy(courseId);
+        log.info("Course found successfully");
+        return course;
     }
 }

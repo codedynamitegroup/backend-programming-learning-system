@@ -49,7 +49,7 @@ public class CourseCommandHandler {
 
     @Transactional(readOnly = true)
     public CourseResponseEntity findBy(QueryCourseCommand queryCourseCommand) {
-        Course course = courseRepository.findById(queryCourseCommand.getCourseId());
+        Course course = courseQueryHelper.findById(queryCourseCommand.getCourseId());
         log.info("Returning course: {}", course);
         return courseDataMapper.courseToQueryCourseResponse(course);
     }

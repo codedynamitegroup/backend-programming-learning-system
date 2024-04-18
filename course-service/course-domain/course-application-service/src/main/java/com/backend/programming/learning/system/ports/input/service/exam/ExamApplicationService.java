@@ -2,11 +2,12 @@ package com.backend.programming.learning.system.ports.input.service.exam;
 
 import com.backend.programming.learning.system.dto.method.create.exam.CreateExamCommand;
 import com.backend.programming.learning.system.dto.method.create.exam.CreateExamResponse;
+import com.backend.programming.learning.system.dto.method.query.exam.QueryAllExamCommand;
+import com.backend.programming.learning.system.dto.method.query.exam.QueryAllExamResponse;
 import com.backend.programming.learning.system.dto.method.query.exam.QueryExamCommand;
-import com.backend.programming.learning.system.dto.method.query.exam.QueryExamResponse;
+import com.backend.programming.learning.system.dto.responseentity.exam.ExamResponseEntity;
 
 import javax.validation.Valid;
-import java.util.List;
 
 /**
  * com.backend.programming.learning.system.ports.input.service
@@ -18,7 +19,7 @@ public interface ExamApplicationService {
 
     CreateExamResponse createExam(@Valid CreateExamCommand createExamCommand);
 
-    QueryExamResponse findBy(QueryExamCommand queryExamCommand);
+    ExamResponseEntity findBy(QueryExamCommand queryExamCommand);
 
-    List<QueryExamResponse> findAll(String search);
+    QueryAllExamResponse findAll(QueryAllExamCommand queryAllExamCommand);
 }

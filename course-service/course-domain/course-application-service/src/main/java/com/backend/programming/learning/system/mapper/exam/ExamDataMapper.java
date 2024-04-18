@@ -2,12 +2,14 @@ package com.backend.programming.learning.system.mapper.exam;
 
 import com.backend.programming.learning.system.dto.method.create.exam.CreateExamCommand;
 import com.backend.programming.learning.system.dto.method.create.exam.CreateExamResponse;
+import com.backend.programming.learning.system.dto.method.query.exam.QueryAllExamResponse;
 import com.backend.programming.learning.system.dto.method.query.exam.QueryExamResponse;
+import com.backend.programming.learning.system.dto.responseentity.exam.ExamResponseEntity;
 import com.backend.programming.learning.system.entity.Exam;
 import com.backend.programming.learning.system.valueobject.CourseId;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 
 /**
  * com.backend.programming.learning.system.mapper
@@ -80,27 +82,35 @@ public class ExamDataMapper {
                 .build();
     }
 
-    public List<QueryExamResponse> examsToQueryExamResponse(List<Exam> exams) {
-        return exams.stream()
-                .map(exam -> QueryExamResponse.builder()
-                        .id(exam.getId().getValue())
-                        .courseId(exam.getCourseId())
-                        .name(exam.getName())
-                        .scores(exam.getScores())
-                        .maxScores(exam.getMaxScores())
-                        .timeOpen(exam.getTime_open())
-                        .timeClose(exam.getTime_close())
-                        .timeLimit(exam.getTime_limit())
-                        .intro(exam.getIntro())
-                        .overdueHanding(exam.getOverdue_handing())
-                        .canRedoQuestions(exam.getCan_redo_questions())
-                        .maxAttempts(exam.getMax_attempts())
-                        .shuffleAnswers(exam.getShuffle_answers())
-                        .gradeMethod(exam.getGrade_method())
-                        .createdAt(exam.getCreated_at())
-                        .updatedAt(exam.getUpdated_at())
-                        .message("Exams found successfully")
-                        .build())
-                .toList();
+    public ExamResponseEntity examToQueryExamResponse(Exam exam) {
+        return ExamResponseEntity.builder()
+                .id(exam.getId().getValue())
+                .courseId(exam.getCourseId())
+                .name(exam.getName())
+                .scores(exam.getScores())
+                .maxScores(exam.getMaxScores())
+                .timeOpen(exam.getTime_open())
+                .timeClose(exam.getTime_close())
+                .timeLimit(exam.getTime_limit())
+                .intro(exam.getIntro())
+                .overdueHanding(exam.getOverdue_handing())
+                .canRedoQuestions(exam.getCan_redo_questions())
+                .maxAttempts(exam.getMax_attempts())
+                .shuffleAnswers(exam.getShuffle_answers())
+                .gradeMethod(exam.getGrade_method())
+                .createdAt(exam.getCreated_at())
+                .updatedAt(exam.getUpdated_at())
+                .build();
+    }
+
+    public QueryAllExamResponse examsToQueryAllExamResponse(Page<Exam> exams) {
+        return QueryAllExamResponse.builder()
+                .exams(exams.stream()
+                        .map(this::examToQueryExamResponse)
+                        .toList())
+                .currentPage(exams.getNumber())
+                .totalPages(exams.getTotalPages())
+                .totalItems(exams.getTotalElements())
+                .build();
     }
 }

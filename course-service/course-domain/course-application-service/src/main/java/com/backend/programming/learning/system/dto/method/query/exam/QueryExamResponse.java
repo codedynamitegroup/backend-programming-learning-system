@@ -17,7 +17,7 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class QueryExamResponse {
+public class QueryExamResponse { // xiu delete sau
     private UUID id;
     private CourseId courseId;
     private String name;

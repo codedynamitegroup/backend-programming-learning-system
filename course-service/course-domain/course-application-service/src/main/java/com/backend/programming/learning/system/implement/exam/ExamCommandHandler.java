@@ -2,18 +2,20 @@ package com.backend.programming.learning.system.implement.exam;
 
 import com.backend.programming.learning.system.dto.method.create.exam.CreateExamCommand;
 import com.backend.programming.learning.system.dto.method.create.exam.CreateExamResponse;
+import com.backend.programming.learning.system.dto.method.query.exam.QueryAllExamCommand;
+import com.backend.programming.learning.system.dto.method.query.exam.QueryAllExamResponse;
 import com.backend.programming.learning.system.dto.method.query.exam.QueryExamCommand;
-import com.backend.programming.learning.system.dto.method.query.exam.QueryExamResponse;
+import com.backend.programming.learning.system.dto.responseentity.exam.ExamResponseEntity;
 import com.backend.programming.learning.system.entity.Exam;
 import com.backend.programming.learning.system.mapper.exam.ExamDataMapper;
 import com.backend.programming.learning.system.ports.output.repository.ExamRepository;
 import com.backend.programming.learning.system.valueobject.ExamId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 
 /**
  * com.backend.programming.learning.system.implemtent.exam
@@ -26,6 +28,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ExamCommandHandler {
     private final ExamCreateHelper examCreateHelper;
+    private final ExamQueryHelper examQueryHelper;
     private final ExamDeleteHelper examDeleteHelper;
     private final ExamDataMapper examDataMapper;
     private final ExamRepository examRepository;
@@ -36,18 +39,18 @@ public class ExamCommandHandler {
     }
 
     @Transactional(readOnly = true)
-    public QueryExamResponse findBy(QueryExamCommand queryExamCommand) {
-        Exam exam = examRepository.findBy(new ExamId(queryExamCommand.getExamId()));
-        if (exam == null) {
-            log.error("Exam not found with id: {}", queryExamCommand.getExamId());
-            throw new RuntimeException("Exam not found with id: " + queryExamCommand.getExamId());
-        }
-        return examDataMapper.examToQueryExamResponse(exam, "Exam found successfully");
+    public ExamResponseEntity findBy(QueryExamCommand queryExamCommand) {
+        Exam exam = examQueryHelper.findBy(new ExamId(queryExamCommand.getExamId()));
+        log.info("Returning exam: {}", exam);
+        return examDataMapper.examToQueryExamResponse(exam);
     }
 
     @Transactional(readOnly = true)
-    public List<QueryExamResponse> findAll(String search) {
-        List<Exam> exams = examRepository.findAll(search);
-        return examDataMapper.examsToQueryExamResponse(exams);
+    public QueryAllExamResponse findAll(QueryAllExamCommand queryAllExamCommand) {
+        Page<Exam> exams = examQueryHelper.findAll(
+                queryAllExamCommand.getSearch(),
+                queryAllExamCommand.getPageNo(),
+                queryAllExamCommand.getPageSize());
+        return examDataMapper.examsToQueryAllExamResponse(exams);
     }
 }
