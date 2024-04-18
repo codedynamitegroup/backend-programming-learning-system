@@ -4,9 +4,10 @@ import com.backend.programming.learning.system.dto.method.create.question.Create
 import com.backend.programming.learning.system.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.dto.method.query.question.QueryAllQuestionCommand;
 import com.backend.programming.learning.system.dto.method.query.question.QueryAllQuestionResponse;
+import com.backend.programming.learning.system.dto.method.query.question.QueryQuestionCommand;
+import com.backend.programming.learning.system.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.entity.Question;
 import com.backend.programming.learning.system.mapper.question.QuestionDataMapper;
-import com.backend.programming.learning.system.ports.output.repository.QuestionRepository;
 import org.springframework.data.domain.Page;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +29,6 @@ public class QuestionCommandHandler {
     private final QuestionCreateHelper questionCreateHelper;
     private final QuestionQueryHelper questionQueryHelper;
     private final QuestionDataMapper questionDataMapper;
-    private final QuestionRepository questionRepository;
 
     @Transactional
     public CreateQuestionResponse createQuestion(CreateQuestionCommand createQuestionCommand) {
@@ -41,5 +41,11 @@ public class QuestionCommandHandler {
     public QueryAllQuestionResponse findAllQuestions(QueryAllQuestionCommand queryAllQuestionCommand) {
         Page<Question> questions = questionQueryHelper.findAllQuestions(queryAllQuestionCommand);
         return questionDataMapper.questionsToQueryAllQuestionResponse(questions);
+    }
+
+    @Transactional(readOnly = true)
+    public QuestionResponseEntity findById(QueryQuestionCommand queryQuestionCommand) {
+        Question question = questionQueryHelper.findById(queryQuestionCommand.getQuestionId());
+        return questionDataMapper.questionToQueryQuestionResponse(question);
     }
 }

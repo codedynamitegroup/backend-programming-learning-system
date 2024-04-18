@@ -43,6 +43,8 @@ public class UserEntity {
     @OneToMany(mappedBy = "updatedBy", cascade = CascadeType.REMOVE)
     private List<CourseEntity> courseUpdatedBy;
 
-
-
+    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.REMOVE)
+    private List<QuestionEntity> questionsCreatedBy;
+    @OneToMany(mappedBy = "updatedBy", cascade = CascadeType.REMOVE)
+    private List<QuestionEntity> questionsUpdatedBy;
 }

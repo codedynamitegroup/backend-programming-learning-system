@@ -4,6 +4,8 @@ import com.backend.programming.learning.system.dto.method.create.question.Create
 import com.backend.programming.learning.system.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.dto.method.query.question.QueryAllQuestionCommand;
 import com.backend.programming.learning.system.dto.method.query.question.QueryAllQuestionResponse;
+import com.backend.programming.learning.system.dto.method.query.question.QueryQuestionCommand;
+import com.backend.programming.learning.system.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.ports.input.service.question.QuestionApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,5 +35,10 @@ public class QuestionApplicationServiceImpl implements QuestionApplicationServic
     @Override
     public QueryAllQuestionResponse findAllQuestions(QueryAllQuestionCommand queryAllQuestionCommand) {
         return questionCommandHandler.findAllQuestions(queryAllQuestionCommand);
+    }
+
+    @Override
+    public QuestionResponseEntity findById(QueryQuestionCommand queryQuestionCommand) {
+        return questionCommandHandler.findById(queryQuestionCommand);
     }
 }

@@ -21,7 +21,6 @@ public class QuestionDataAccessMapper {
     public QuestionEntity questionToQuestionEntity(Question question) {
         OrganizationEntity organizationEntity = organizationDataAccessMapper.organizationToOrganizationEntity(question.getOrganization());
         UserEntity createdBy = userDataAccessMapper.userToUserEntity(question.getCreatedBy());
-        UserEntity updatedBy = userDataAccessMapper.userToUserEntity(question.getUpdatedBy());
         return QuestionEntity.builder()
                 .id(question.getId().getValue())
                 .organization(organizationEntity)
@@ -32,7 +31,7 @@ public class QuestionDataAccessMapper {
                 .qtype(question.getqtype())
                 .difficulty(question.getDifficulty())
                 .createdBy(createdBy)
-                .updatedBy(updatedBy)
+                .updatedBy(createdBy)
                 .build();
     }
 

@@ -2,18 +2,13 @@ package com.backend.programming.learning.system.implement.question;
 
 import com.backend.programming.learning.system.CourseDomainService;
 import com.backend.programming.learning.system.dto.method.create.question.CreateQuestionCommand;
-import com.backend.programming.learning.system.dto.method.query.exam.QueryExamCommand;
-import com.backend.programming.learning.system.entity.Exam;
 import com.backend.programming.learning.system.entity.Organization;
 import com.backend.programming.learning.system.entity.Question;
 import com.backend.programming.learning.system.entity.User;
-import com.backend.programming.learning.system.implement.exam.ExamCommandHandler;
 import com.backend.programming.learning.system.mapper.question.QuestionDataMapper;
-import com.backend.programming.learning.system.ports.output.repository.ExamRepository;
 import com.backend.programming.learning.system.ports.output.repository.OrganizationRepository;
 import com.backend.programming.learning.system.ports.output.repository.QuestionRepository;
 import com.backend.programming.learning.system.ports.output.repository.UserRepository;
-import com.backend.programming.learning.system.valueobject.ExamId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -39,10 +34,9 @@ public class QuestionCreateHelper {
 
     public Question createQuestion(CreateQuestionCommand createQuestionCommand) {
         User createdBy =  getUser(createQuestionCommand.getCreatedBy());
-        User updatedBy = getUser(createQuestionCommand.getUpdatedBy());
         Organization organization = getOrganization(createQuestionCommand.getOrganizationId());
 
-        Question question = questionDataMapper.createQuestionCommandToQuestion(organization, createdBy, updatedBy, createQuestionCommand);
+        Question question = questionDataMapper.createQuestionCommandToQuestion(organization, createdBy, createQuestionCommand);
         courseDomainService.createQuestion(question);
 
         Question questionResult = saveQuestion(question);

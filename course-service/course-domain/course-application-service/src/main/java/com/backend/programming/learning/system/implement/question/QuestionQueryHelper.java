@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 /**
  * com.backend.programming.learning.system.implement.question
  * Create by Dang Ngoc Tien
@@ -23,5 +25,10 @@ public class QuestionQueryHelper {
     @Transactional(readOnly = true)
     public Page<Question> findAllQuestions(QueryAllQuestionCommand queryAllQuestionCommand) {
         return questionRepository.findAll(queryAllQuestionCommand.getPageNo(), queryAllQuestionCommand.getPageSize());
+    }
+
+    @Transactional(readOnly = true)
+    public Question findById(UUID questionId) {
+        return questionRepository.findById(questionId);
     }
 }

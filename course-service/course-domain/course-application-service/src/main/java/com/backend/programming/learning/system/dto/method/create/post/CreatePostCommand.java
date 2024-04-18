@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.UUID;
+
 /**
  * com.backend.programming.learning.system.course.service.domain.dto.post.create
  * Create by Dang Ngoc Tien
@@ -15,9 +17,10 @@ import lombok.Getter;
 @Builder
 @AllArgsConstructor
 public class CreatePostCommand {
-    private CourseId courseId;
+    private UUID courseId;
     private String title;
     private String content;
     private String summary;
     private Boolean isPublished;
+    private UUID createdBy;
 }

@@ -21,7 +21,9 @@ public interface CourseApplicationService {
     CreateCourseResponse createCourse(
             @Valid CreateCourseCommand createCourseCommand);
 
-    QueryAllCourseResponse findAll(QueryAllCourseCommand queryAllCourseCommand);
+    QueryAllCourseResponse findAll(
+            @Valid QueryAllCourseCommand queryAllCourseCommand);
 
-    CourseResponseEntity findBy(QueryCourseCommand queryCourseCommand);
+    CourseResponseEntity findBy(
+            @Valid QueryCourseCommand queryCourseCommand);
 }

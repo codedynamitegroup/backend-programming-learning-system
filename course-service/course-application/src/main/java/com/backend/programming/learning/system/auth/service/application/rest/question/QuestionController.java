@@ -4,8 +4,9 @@ import com.backend.programming.learning.system.dto.method.create.question.Create
 import com.backend.programming.learning.system.dto.method.create.question.CreateQuestionCommand;
 import com.backend.programming.learning.system.dto.method.query.question.QueryAllQuestionCommand;
 import com.backend.programming.learning.system.dto.method.query.question.QueryAllQuestionResponse;
+import com.backend.programming.learning.system.dto.method.query.question.QueryQuestionCommand;
+import com.backend.programming.learning.system.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.ports.input.service.question.QuestionApplicationService;
-import com.backend.programming.learning.system.valueobject.ExamId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -43,15 +44,24 @@ public class QuestionController {
 
     @GetMapping
     public ResponseEntity<QueryAllQuestionResponse> findAllQuestions(
+            @RequestParam(defaultValue = "") String search,
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize
     ) {
         QueryAllQuestionCommand queryAllQuestionCommand = QueryAllQuestionCommand.builder()
+                .search(search)
                 .pageNo(pageNo)
                 .pageSize(pageSize)
                 .build();
         QueryAllQuestionResponse response = questionApplicationService.findAllQuestions(queryAllQuestionCommand);
         log.info("Get all questions");
+        return ResponseEntity.ok(response);
+    }
+    @GetMapping("/{questionId}")
+    public ResponseEntity<QuestionResponseEntity> findById(@PathVariable UUID questionId) {
+        log.info("Get question by id: {}", questionId);
+        QueryQuestionCommand queryQuestionCommand = QueryQuestionCommand.builder().questionId(questionId).build();
+        QuestionResponseEntity response = questionApplicationService.findById(queryQuestionCommand);
         return ResponseEntity.ok(response);
     }
 }

@@ -4,6 +4,8 @@ import com.backend.programming.learning.system.dto.method.create.question.Create
 import com.backend.programming.learning.system.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.dto.method.query.question.QueryAllQuestionCommand;
 import com.backend.programming.learning.system.dto.method.query.question.QueryAllQuestionResponse;
+import com.backend.programming.learning.system.dto.method.query.question.QueryQuestionCommand;
+import com.backend.programming.learning.system.dto.responseentity.question.QuestionResponseEntity;
 
 import javax.validation.Valid;
 import java.util.UUID;
@@ -20,4 +22,7 @@ public interface QuestionApplicationService {
 
     QueryAllQuestionResponse findAllQuestions(
             @Valid QueryAllQuestionCommand queryAllQuestionCommand);
+
+    QuestionResponseEntity findById(
+            @Valid QueryQuestionCommand queryQuestionCommand);
 }
