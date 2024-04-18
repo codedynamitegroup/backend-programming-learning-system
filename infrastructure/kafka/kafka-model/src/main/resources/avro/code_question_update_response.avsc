@@ -37,16 +37,33 @@
       "type": "string"
     },
     {
-      "name": "isDeleted",
-      "type": "boolean"
+      "name": "copyState",
+      "type": {
+        "type": "enum",
+        "name": "CopyState",
+        "symbols": ["CREATING",
+          "CREATED",
+          "UPDATING",
+          "UPDATED",
+          "DELETING",
+          "DELETED",
+          "DELETING_FAIL",
+          "UPDATING_FAIL",
+          "CREATING_FAIL"]
+      }
     },
     {
       "name": "constraints",
       "type": "string"
     },
     {
-      "name": "updateSuccess",
-      "type": "boolean"
+      "name": "failureMessages",
+      "type": {
+        "type": "array",
+        "items":{
+          "type":"string"
+        }
+      }
     }
   ]
 }

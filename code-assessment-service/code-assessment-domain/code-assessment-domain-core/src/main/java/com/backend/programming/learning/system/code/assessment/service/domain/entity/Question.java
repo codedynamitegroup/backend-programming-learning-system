@@ -8,19 +8,23 @@ import java.util.List;
 import java.util.UUID;
 
 public class Question extends AggregateRoot<QuestionId> {
-    private final OrganizationId organizationId;
+    private OrganizationId organizationId;
     private QuestionDifficulty difficulty;
     private String name;
     private String questionText;
     private String generalFeedback;
     private float defaultMark;
-    private final UserId createdBy;
+    private UserId createdBy;
     private UserId updatedBy;
-    private final QuestionType qtype;
+    private QuestionType qtype;
     private List<String> failureMessages;
 
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
+
+    public Question(QuestionId id){
+        super.setId(id);
+    }
 
     private Question(Builder builder) {
         super.setId(builder.questionId);

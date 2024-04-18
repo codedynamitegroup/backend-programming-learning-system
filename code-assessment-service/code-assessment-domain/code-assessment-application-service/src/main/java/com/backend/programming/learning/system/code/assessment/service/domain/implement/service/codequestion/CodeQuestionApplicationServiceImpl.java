@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.code.assessment.service.domain.implement.codequestion;
+package com.backend.programming.learning.system.code.assessment.service.domain.implement.service.codequestion;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.create.codequestion.CreateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.create.codequestion.CreateCodeQuestionResponse;
