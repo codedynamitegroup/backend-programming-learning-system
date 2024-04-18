@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.dataaccess.question.adapter;
 
-import com.backend.programming.learning.system.core.service.dataaccess.question.mapper.QtypeQuestionDataAccessMapper;
+import com.backend.programming.learning.system.core.service.dataaccess.question.mapper.QtypeMultichoiceQuestionDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.question.repository.QtypeMultichoiceQuestionJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeMultichoiceQuestionRepository;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeMultiChoiceQuestion;
@@ -13,32 +13,32 @@ import java.util.UUID;
 @Component
 public class QtypeMultichoiceQuestionRepositoryImpl implements QtypeMultichoiceQuestionRepository {
     private final QtypeMultichoiceQuestionJpaRepository qtypeMultichoiceQuestionJpaRepository;
-    private final QtypeQuestionDataAccessMapper qtypeQuestionDataAccessMapper;
+    private final QtypeMultichoiceQuestionDataAccessMapper qtypeMultichoiceQuestionDataAccessMapper;
 
     public QtypeMultichoiceQuestionRepositoryImpl(QtypeMultichoiceQuestionJpaRepository qtypeMultichoiceQuestionJpaRepository,
-                                                  QtypeQuestionDataAccessMapper qtypeQuestionDataAccessMapper) {
+                                                  QtypeMultichoiceQuestionDataAccessMapper qtypeMultichoiceQuestionDataAccessMapper) {
         this.qtypeMultichoiceQuestionJpaRepository = qtypeMultichoiceQuestionJpaRepository;
-        this.qtypeQuestionDataAccessMapper = qtypeQuestionDataAccessMapper;
+        this.qtypeMultichoiceQuestionDataAccessMapper = qtypeMultichoiceQuestionDataAccessMapper;
     }
 
     @Override
     public QtypeMultiChoiceQuestion saveQtypeMultipleChoiceQuestion(QtypeMultiChoiceQuestion qtypeMultichoiceQuestion) {
-        return qtypeQuestionDataAccessMapper.qtypeMultichoiceQuestionEntityToQtypeMultichoiceQuestion(qtypeMultichoiceQuestionJpaRepository
-                .save(qtypeQuestionDataAccessMapper
+        return qtypeMultichoiceQuestionDataAccessMapper.qtypeMultichoiceQuestionEntityToQtypeMultichoiceQuestion(qtypeMultichoiceQuestionJpaRepository
+                .save(qtypeMultichoiceQuestionDataAccessMapper
                         .qtypeMultichoiceQuestionToQtypeMultichoiceQuestionEntity(qtypeMultichoiceQuestion)));
     }
 
     @Override
     public Optional<QtypeMultiChoiceQuestion> findQtypeMultipleChoiceQuestion(UUID qtMultipleChoiceQuestionId) {
         return qtypeMultichoiceQuestionJpaRepository.findById(qtMultipleChoiceQuestionId)
-                .map(qtypeQuestionDataAccessMapper::qtypeMultichoiceQuestionEntityToQtypeMultichoiceQuestion);
+                .map(qtypeMultichoiceQuestionDataAccessMapper::qtypeMultichoiceQuestionEntityToQtypeMultichoiceQuestion);
     }
 
     @Override
     public List<QtypeMultiChoiceQuestion> findAllQtypeMultipleChoiceQuestion() {
         return qtypeMultichoiceQuestionJpaRepository
                 .findAll()
-                .stream().map(qtypeQuestionDataAccessMapper::qtypeMultichoiceQuestionEntityToQtypeMultichoiceQuestion)
+                .stream().map(qtypeMultichoiceQuestionDataAccessMapper::qtypeMultichoiceQuestionEntityToQtypeMultichoiceQuestion)
                 .toList();
     }
 
