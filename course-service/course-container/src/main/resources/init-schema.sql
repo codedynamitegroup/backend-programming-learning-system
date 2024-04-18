@@ -71,8 +71,8 @@ DROP TABLE IF EXISTS "public".course CASCADE;
 CREATE TABLE "public".course
 (
 	id uuid DEFAULT uuid_generate_v4() NOT NULL,
-	name text NOT NULL UNIQUE,
-	visible boolean NOT NULL DEFAULT '1',
+	name text UNIQUE,
+	visible boolean DEFAULT '1',
 	created_by uuid,
 	updated_by uuid,
 	created_at TIMESTAMP WITH TIME ZONE,

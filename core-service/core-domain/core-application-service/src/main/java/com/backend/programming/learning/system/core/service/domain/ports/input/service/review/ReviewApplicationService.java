@@ -7,6 +7,8 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryReviewCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.review.ReviewResponseEntity;
 
 import javax.validation.Valid;
@@ -23,5 +25,8 @@ public interface ReviewApplicationService {
 
     DeleteReviewResponse deleteReview(
             @Valid DeleteReviewCommand deleteReviewCommand);
+
+    UpdateReviewResponse updateReview(
+            @Valid UpdateReviewCommand updateReviewCommand);
 
 }

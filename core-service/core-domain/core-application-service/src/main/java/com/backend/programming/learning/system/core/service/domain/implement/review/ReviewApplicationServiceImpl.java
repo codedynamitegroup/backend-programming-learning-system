@@ -7,6 +7,8 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryReviewCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.review.ReviewResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.review.ReviewApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -43,5 +45,10 @@ class ReviewApplicationServiceImpl implements ReviewApplicationService {
     @Override
     public DeleteReviewResponse deleteReview(DeleteReviewCommand deleteReviewCommand) {
         return reviewCommandHandler.deleteReviewResponse(deleteReviewCommand);
+    }
+
+    @Override
+    public UpdateReviewResponse updateReview(UpdateReviewCommand updateReviewCommand) {
+        return reviewCommandHandler.updateReviewResponse(updateReviewCommand);
     }
 }

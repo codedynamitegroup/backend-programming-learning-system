@@ -6,9 +6,9 @@ import com.backend.programming.learning.system.valueobject.CourseId;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 public class Assignment extends AggregateRoot<AssignmentId> {
-
     private CourseId courseId;
     private String title;
     private String intro;
@@ -17,8 +17,8 @@ public class Assignment extends AggregateRoot<AssignmentId> {
     private Float maxScores;
     private final ZonedDateTime time_open;
     private ZonedDateTime time_close;
-    private Integer time_limit;
-    private Integer type;
+    private ZonedDateTime time_limit;
+    private String type;
     private Boolean visible;
 
     private Assignment(Builder builder) {
@@ -67,11 +67,11 @@ public class Assignment extends AggregateRoot<AssignmentId> {
         return time_close;
     }
 
-    public Integer getTime_limit() {
+    public ZonedDateTime getTime_limit() {
         return time_limit;
     }
 
-    public Integer getType() {
+    public String getType() {
         return type;
     }
 
@@ -79,10 +79,46 @@ public class Assignment extends AggregateRoot<AssignmentId> {
         return visible;
     }
 
-    public void initializeAssignment(CourseId couresId, AssignmentId assignmentId) {
-        this.courseId = couresId;
-        super.setId(assignmentId);
+    public void setCourseId(CourseId courseId) {
+        this.courseId = courseId;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setIntro(String intro) {
+        this.intro = intro;
+    }
+
+    public void setScores(Float scores) {
+        this.scores = scores;
+    }
+
+    public void setMaxScores(Float maxScores) {
+        this.maxScores = maxScores;
+    }
+
+    public void setTime_close(ZonedDateTime time_close) {
+        this.time_close = time_close;
+    }
+
+    public void setTime_limit(ZonedDateTime time_limit) {
+        this.time_limit = time_limit;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setVisible(Boolean visible) {
+        this.visible = visible;
+    }
+
+    public void initializeAssignment() {
+        super.setId(new AssignmentId(UUID.randomUUID()));
+    }
+
 
 
     public static final class Builder {
@@ -94,8 +130,8 @@ public class Assignment extends AggregateRoot<AssignmentId> {
         private Float maxScores;
         private ZonedDateTime time_open;
         private ZonedDateTime time_close;
-        private Integer time_limit;
-        private Integer type;
+        private ZonedDateTime time_limit;
+        private String type;
         private Boolean visible;
 
         private Builder() {
@@ -145,12 +181,12 @@ public class Assignment extends AggregateRoot<AssignmentId> {
             return this;
         }
 
-        public Builder time_limit(Integer val) {
+        public Builder time_limit(ZonedDateTime val) {
             time_limit = val;
             return this;
         }
 
-        public Builder type(Integer val) {
+        public Builder type(String val) {
             type = val;
             return this;
         }

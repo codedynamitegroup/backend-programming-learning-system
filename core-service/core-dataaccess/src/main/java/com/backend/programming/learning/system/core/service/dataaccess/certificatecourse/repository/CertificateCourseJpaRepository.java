@@ -2,7 +2,10 @@ package com.backend.programming.learning.system.core.service.dataaccess.certific
 
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.organization.entity.OrganizationEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.topic.entity.TopicEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
+import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,6 +15,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -30,4 +34,23 @@ public interface CertificateCourseJpaRepository extends PagingAndSortingReposito
     @Modifying
     @Query("update CertificateCourseEntity c set c.avgRating = ?1 where c.id = ?2")
     int updateAvgRating(Float avgRating, UUID id);
+
+    @Transactional
+    @Modifying
+    @Query("""
+            update CertificateCourseEntity c
+            set c.name = ?1,
+            c.description = ?2,
+            c.skillLevel = ?3,
+            c.startTime = ?3,
+            c.endTime = ?4,
+            c.topic = ?5,
+            c.updatedBy = ?5,
+            c.updatedAt = ?6
+            where c.id = ?7""")
+    int updateCertificateCourseById(String name, String description,
+                                    SkillLevel skillLevel,
+                                    ZonedDateTime startTime, ZonedDateTime endTime,
+                                    TopicEntity topicEntity, UserEntity userEntity,
+                                    ZonedDateTime updatedAt, UUID id);
 }

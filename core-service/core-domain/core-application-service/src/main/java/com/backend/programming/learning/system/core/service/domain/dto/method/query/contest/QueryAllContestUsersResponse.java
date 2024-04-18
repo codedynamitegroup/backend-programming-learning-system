@@ -1,7 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.dto.method.query.contest;
 
-import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseUserResponseEntity;
-import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestUserResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest_user.ContestUserResponseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

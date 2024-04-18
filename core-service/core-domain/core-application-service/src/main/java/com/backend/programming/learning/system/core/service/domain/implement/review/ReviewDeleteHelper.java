@@ -1,5 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.implement.review;
 
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.review.DeleteReviewCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
 import com.backend.programming.learning.system.core.service.domain.exception.ChapterNotFoundException;
@@ -28,11 +30,13 @@ public class ReviewDeleteHelper {
         this.certificateCourseRepository = certificateCourseRepository;
     }
 
-    @Transactional(readOnly = true)
-    public void deleteReviewById(UUID reviewId) {
-        Review review = getReview(reviewId);
-        reviewRepository.deleteReviewById(reviewId);
-        log.info("Review with id: {} deleted successfully", reviewId);
+    @Transactional
+    public void deleteReviewById(DeleteReviewCommand deleteReviewCommand) {
+        Review review = getReview(deleteReviewCommand.getReviewId());
+        checkUserIsAllowedToDeleteReview(deleteReviewCommand, review);
+
+        reviewRepository.deleteReviewById(deleteReviewCommand.getReviewId());
+        log.info("Review with id: {} deleted successfully", deleteReviewCommand.getReviewId());
         Float avgRating = getAvgRatingOfAllReviewsByCertificateCourseId(review.getCertificateCourseId().getValue());
         int updatedRows = certificateCourseRepository.updateAvgRating(
                 new CertificateCourseId(review.getCertificateCourseId().getValue()), avgRating);
@@ -41,6 +45,21 @@ public class ReviewDeleteHelper {
                     review.getCertificateCourseId().getValue());
             throw new CoreDomainException("Could not update avg rating for certificate course with id: " +
                     review.getCertificateCourseId().getValue());
+        }
+    }
+
+    private void checkUserIsAllowedToDeleteReview(
+            DeleteReviewCommand deleteReviewCommand, Review review) {
+        // Check if user is a creator of the review
+        checkUserOwnsReview(review, deleteReviewCommand.getDeletedBy());
+    }
+
+    private void checkUserOwnsReview(Review review, UUID userId) {
+        if (!review.getCreatedBy().getId().getValue().equals(userId)) {
+            log.error("User with id: {} is not allowed to update review with id: {}",
+                    userId, review.getId().getValue());
+            throw new CoreDomainException("User with id: " + userId +
+                    " is not allowed to update review with id: " + review.getId().getValue());
         }
     }
 

@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.dataaccess.contest_question.entity;
 
 import com.backend.programming.learning.system.core.service.dataaccess.chapter.entity.ChapterEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.contest.entity.ContestEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
 import lombok.*;
 
@@ -19,8 +20,14 @@ public class ContestQuestionEntity {
     @Id
     @Column(name = "id")
     private UUID id;
-    private UUID contestId;
-    private UUID questionId;
+
+    @ManyToOne
+    @JoinColumn(name = "contest_id", referencedColumnName = "id")
+    private ContestEntity contest;
+
+    @ManyToOne
+    @JoinColumn(name = "question_id", referencedColumnName = "id")
+    private QuestionEntity question;
 
     @Override
     public boolean equals(Object o) {

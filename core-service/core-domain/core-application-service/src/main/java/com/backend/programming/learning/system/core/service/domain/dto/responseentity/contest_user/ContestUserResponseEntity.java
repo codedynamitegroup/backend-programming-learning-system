@@ -1,6 +1,5 @@
-package com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse;
+package com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest_user;
 
-import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,11 +12,11 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class CertificateCourseUserResponseEntity {
+public class ContestUserResponseEntity {
     @NotNull
     private final UserResponseEntity user;
     @NotNull
-    private final UUID certificateCourseId;
+    private final UUID contestId;
     @NotNull
     private final Boolean isCompleted;
     @NotNull

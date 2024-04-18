@@ -7,6 +7,8 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryContestCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest.ContestApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -43,5 +45,10 @@ class ContestApplicationServiceImpl implements ContestApplicationService {
     @Override
     public DeleteContestResponse deleteContest(DeleteContestCommand deleteContestCommand) {
         return contestCommandHandler.deleteContestResponse(deleteContestCommand);
+    }
+
+    @Override
+    public UpdateContestResponse updateContest(UpdateContestCommand updateContestCommand) {
+        return contestCommandHandler.updateContestResponse(updateContestCommand);
     }
 }

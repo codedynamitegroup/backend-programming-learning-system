@@ -2,13 +2,21 @@ package com.backend.programming.learning.system.course.service.dataaccess.assign
 
 
 import com.backend.programming.learning.system.course.service.dataaccess.assignment.entity.AssignmentEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
 import com.backend.programming.learning.system.entity.Assignment;
+import com.backend.programming.learning.system.ports.output.repository.CourseRepository;
 import com.backend.programming.learning.system.valueobject.AssignmentId;
+import com.backend.programming.learning.system.valueobject.CourseId;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+
 @Component
 public class AssignmentDataAccessMapper {
     public AssignmentEntity assignmentToAssignmentEntity(Assignment assignment) {
+        CourseEntity courseEntity = CourseEntity.builder().id(assignment.getCourseId().getValue()).build();
        return AssignmentEntity.builder()
+               .course(courseEntity)
                .id(assignment.getId().getValue())
                .title(assignment.getTitle())
                .intro(assignment.getIntro())
@@ -25,6 +33,7 @@ public class AssignmentDataAccessMapper {
     public Assignment assignmentEntityToAssignment(AssignmentEntity assignmentEntity) {
         return Assignment.builder()
                 .id(new AssignmentId(assignmentEntity.getId()))
+                .courseId(new CourseId(assignmentEntity.getCourse().getId()))
                 .title(assignmentEntity.getTitle())
                 .intro(assignmentEntity.getIntro())
                 .scores(assignmentEntity.getScore())
@@ -35,6 +44,10 @@ public class AssignmentDataAccessMapper {
                 .type(assignmentEntity.getType())
                 .visible(assignmentEntity.getVisible())
                 .build();
+    }
+
+    public List<Assignment> assignmentEntityListToAssignmentList (List<AssignmentEntity> assignmentEntityList) {
+        return assignmentEntityList.stream().map(this::assignmentEntityToAssignment).toList();
     }
 
 

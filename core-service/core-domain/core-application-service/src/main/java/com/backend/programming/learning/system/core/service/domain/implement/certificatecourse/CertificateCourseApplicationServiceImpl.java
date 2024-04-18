@@ -5,6 +5,8 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.certificatecourse.DeleteCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.certificatecourse.DeleteCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.*;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse.CertificateCourseApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +29,11 @@ class CertificateCourseApplicationServiceImpl implements CertificateCourseApplic
     public CreateCertificateCourseResponse createCertificateCourse(
             @Valid CreateCertificateCourseCommand createCertificateCourseCommand) {
         return certificateCourseCommandHandler.createCertificateCourse(createCertificateCourseCommand);
+    }
+
+    @Override
+    public UpdateCertificateCourseResponse updateCertificateCourse(UpdateCertificateCourseCommand updateCertificateCourseCommand) {
+        return certificateCourseCommandHandler.updateCertificateCourse(updateCertificateCourseCommand);
     }
 
     @Override

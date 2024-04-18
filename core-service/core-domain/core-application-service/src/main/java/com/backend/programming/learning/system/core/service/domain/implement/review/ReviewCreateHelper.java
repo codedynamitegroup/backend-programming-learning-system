@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.core.service.domain.implement.re
 import com.backend.programming.learning.system.core.service.domain.CoreDomainService;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.review.CreateReviewCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
+import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourseUser;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.exception.CertificateCourseNotFoundException;
@@ -10,6 +11,7 @@ import com.backend.programming.learning.system.core.service.domain.exception.Cor
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.review.ReviewDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseRepository;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseUserRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ReviewRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
@@ -27,17 +29,20 @@ public class ReviewCreateHelper {
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
     private final CertificateCourseRepository certificateCourseRepository;
+    private final CertificateCourseUserRepository certificateCourseUserRepository;
     private final ReviewDataMapper reviewDataMapper;
 
     public ReviewCreateHelper(CoreDomainService coreDomainService,
                               ReviewRepository reviewRepository,
                               UserRepository userRepository,
                               CertificateCourseRepository certificateCourseRepository,
+                              CertificateCourseUserRepository certificateCourseUserRepository,
                               ReviewDataMapper reviewDataMapper) {
         this.coreDomainService = coreDomainService;
         this.reviewRepository = reviewRepository;
         this.userRepository = userRepository;
         this.certificateCourseRepository = certificateCourseRepository;
+        this.certificateCourseUserRepository = certificateCourseUserRepository;
         this.reviewDataMapper = reviewDataMapper;
     }
 
@@ -46,6 +51,9 @@ public class ReviewCreateHelper {
         checkUser(createReviewCommand.getCreatedBy());
         checkUser(createReviewCommand.getUpdatedBy());
         checkCertificateCourse(createReviewCommand.getCertificateCourseId());
+        checkCertificateCourseUserByCertificateCourseIdAndUserId(
+                createReviewCommand.getCertificateCourseId(),
+                createReviewCommand.getCreatedBy());
 
         Review review = reviewDataMapper.
                 createReviewCommandToReview(createReviewCommand);
@@ -65,6 +73,18 @@ public class ReviewCreateHelper {
 
         log.info("Review created with id: {}", reviewResult.getId().getValue());
         return reviewResult;
+    }
+
+    private void checkCertificateCourseUserByCertificateCourseIdAndUserId(
+            UUID certificateCourseId, UUID userId) {
+        Optional<CertificateCourseUser> certificateCourseUser = certificateCourseUserRepository
+                .findByCertificateCourseIdAndUserId(certificateCourseId, userId);
+        if (certificateCourseUser.isEmpty()) {
+            log.error("User with id: {} is not registered for certificate course with id: {}",
+                    userId, certificateCourseId);
+            throw new CoreDomainException("User with id: " + userId +
+                    " is not registered for certificate course with id: " + certificateCourseId);
+        }
     }
 
     private Float getAvgRatingOfAllReviewsByCertificateCourseId(UUID certificateCourseId) {

@@ -7,6 +7,8 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryReviewCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.review.ReviewResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.review.ReviewApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +36,23 @@ public class ReviewController {
         log.info("Review created: {}", createReviewResponse);
 
         return ResponseEntity.ok(createReviewResponse);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UpdateReviewResponse> updateReview(
+            @PathVariable UUID id,
+            @RequestBody UpdateReviewCommand updateReviewCommand) {
+        log.info("Updating review: {}", id);
+        UpdateReviewResponse updateReviewResponse =
+                reviewApplicationService.updateReview(UpdateReviewCommand
+                        .builder()
+                        .reviewId(id)
+                        .rating(updateReviewCommand.getRating())
+                        .content(updateReviewCommand.getContent())
+                        .updatedBy(updateReviewCommand.getUpdatedBy())
+                        .build());
+        log.info("Review updated: {}", updateReviewResponse.getReviewId());
+        return ResponseEntity.ok(updateReviewResponse);
     }
 
     @GetMapping
@@ -66,11 +85,13 @@ public class ReviewController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<DeleteReviewResponse> deleteReview(
-            @PathVariable UUID id) {
+            @PathVariable UUID id,
+            @RequestParam UUID deletedBy) {
         DeleteReviewResponse deleteReviewResponse =
                 reviewApplicationService.deleteReview(DeleteReviewCommand
                         .builder()
                         .reviewId(id)
+                        .deletedBy(deletedBy)
                         .build());
         log.info("Review deleted: {}", id);
         return ResponseEntity.ok(deleteReviewResponse);
