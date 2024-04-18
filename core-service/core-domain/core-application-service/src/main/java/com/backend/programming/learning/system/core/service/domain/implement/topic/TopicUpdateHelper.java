@@ -52,16 +52,18 @@ public class TopicUpdateHelper {
 
         updateTopic(topic);
 
-        deleteAllTopicProgrammingLanguagesForTopic(topic.getId().getValue());
-        List<UUID> programmingLanguageIds = updateTopicCommand.getProgrammingLanguageIds();
-        programmingLanguageIds.forEach(programmingLanguageId -> {
-            saveTopicProgrammingLanguage(TopicProgrammingLanguage.builder()
-                    .programmingLanguage(ProgrammingLanguage.builder()
-                            .id(new ProgrammingLanguageId(programmingLanguageId))
-                            .build())
-                    .topic(topic)
-                    .build());
-        });
+        if (updateTopicCommand.getProgrammingLanguageIds() != null) {
+            deleteAllTopicProgrammingLanguagesForTopic(topic.getId().getValue());
+            List<UUID> programmingLanguageIds = updateTopicCommand.getProgrammingLanguageIds();
+            programmingLanguageIds.forEach(programmingLanguageId -> {
+                saveTopicProgrammingLanguage(TopicProgrammingLanguage.builder()
+                        .programmingLanguage(ProgrammingLanguage.builder()
+                                .id(new ProgrammingLanguageId(programmingLanguageId))
+                                .build())
+                        .topic(topic)
+                        .build());
+            });
+        }
 
         log.info("Topic updated with id: {}", topic.getId().getValue());
     }
