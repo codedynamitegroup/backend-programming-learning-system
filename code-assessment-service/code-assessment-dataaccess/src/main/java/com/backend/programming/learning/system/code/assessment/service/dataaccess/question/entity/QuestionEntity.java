@@ -18,7 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "question")
+@Table(name = "questions")
 public class QuestionEntity {
     @Id
     @Column(name = "id")
@@ -34,7 +34,7 @@ public class QuestionEntity {
     private String name;
     private String questionText;
     private String generalFeedback;
-    private BigDecimal defaultMark;
+    private Double defaultMark;
 
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;

@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = "com.backend.programming.learning.system.code.assessment.service.dataaccess")
 @SpringBootApplication(scanBasePackages = "com.backend.programming.learning.system")
 public class CodeAssessmentServiceApplication {
-    public static void main(String args[]){
+    public static void main(String[] args){
         SpringApplication.run(CodeAssessmentServiceApplication.class, args);
     }
 }
