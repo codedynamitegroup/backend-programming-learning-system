@@ -7,8 +7,8 @@ public enum CopyState {
     UPDATED,
     DELETING,
     DELETED,
-    DELETING_FAIL,
-    UPDATING_FAIL,
-    CREATING_FAIL
+    DELETE_FAILED,
+    UPDATE_FAILED,
+    CREATE_FAILED
 
 }
