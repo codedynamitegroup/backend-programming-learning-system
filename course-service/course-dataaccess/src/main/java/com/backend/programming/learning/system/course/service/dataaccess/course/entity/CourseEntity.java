@@ -29,25 +29,11 @@ public class CourseEntity {
     private String name;
     private Boolean visible;
 
-    @OneToMany(mappedBy = "course")
-    List<AssignmentEntity> assignments;
-
-    @OneToMany(mappedBy = "course")
-    List<ExamEntity> exams;
-
-    @OneToMany(mappedBy = "course")
-    List<PostEntity> posts;
-
-    @OneToMany(mappedBy = "course")
-    List<CourseUserEntity> courseUsers;
-
-
-
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "created_by", referencedColumnName = "id")
     private UserEntity createdBy;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "updated_by", referencedColumnName = "id")
     private UserEntity updatedBy;
 
