@@ -19,6 +19,7 @@ public class SocketIOServerComponent {
         Configuration config = new com.corundumstudio.socketio.Configuration();
         config.setHostname(socketConfigData.getHost());
         config.setPort(socketConfigData.getPort());
+        config.setOrigin("*");
         return new com.corundumstudio.socketio.SocketIOServer(config);
     }
 }
