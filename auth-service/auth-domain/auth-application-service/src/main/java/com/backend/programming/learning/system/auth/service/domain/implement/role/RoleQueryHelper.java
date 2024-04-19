@@ -29,7 +29,7 @@ public class RoleQueryHelper {
                 roleRepository.findById(new RoleId(roleId));
         if (roleResult.isEmpty()) {
             log.warn("Could not find role with id: {}", roleId);
-            throw new AuthNotFoundException("Could not find user with user id: " +
+            throw new AuthNotFoundException("Could not find role with role id: " +
                     roleId);
         }
         return roleResult.get();
