@@ -12,26 +12,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ContestDataAccessMapper {
-    private final UserJpaRepository userJpaRepository;
     private final UserDataAccessMapper userDataAccessMapper;
 
-    public ContestDataAccessMapper(UserJpaRepository userJpaRepository,
-                                   UserDataAccessMapper userDataAccessMapper) {
-        this.userJpaRepository = userJpaRepository;
+    public ContestDataAccessMapper(UserDataAccessMapper userDataAccessMapper) {
         this.userDataAccessMapper = userDataAccessMapper;
     }
 
     public ContestEntity contestToContestEntity(Contest contest) {
-        UserEntity createdBy = userJpaRepository
-                .findById(contest.getCreatedBy().getId().getValue())
-                .orElseThrow(() -> new UserNotFoundException("User with id: " +
-                        contest.getCreatedBy().getId().getValue() + " could not be found!")
-                );
-        UserEntity updatedBy = userJpaRepository
-                .findById(contest.getUpdatedBy().getId().getValue())
-                .orElseThrow(() -> new UserNotFoundException("User with id: " +
-                        contest.getUpdatedBy().getId().getValue() + " could not be found!")
-                );
+        UserEntity createdBy = userDataAccessMapper.userToUserEntity(contest.getCreatedBy());
+        UserEntity updatedBy = userDataAccessMapper.userToUserEntity(contest.getUpdatedBy());
 
         return ContestEntity.builder()
                 .id(contest.getId().getValue())

@@ -5,18 +5,21 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.backend.programming.learning.system</groupId>
-        <artifactId>backend-programming-learning-system</artifactId>
+        <artifactId>socket</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>infrastructure</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>socket-emitter</artifactId>
 
-    <modules>
-        <module>saga</module>
-        <module>outbox</module>
-        <module>kafka</module>
-        <module>socket</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>com.backend.programming.learning.system</groupId>
+            <artifactId>socket-config-data</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.corundumstudio.socketio</groupId>
+            <artifactId>netty-socketio</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

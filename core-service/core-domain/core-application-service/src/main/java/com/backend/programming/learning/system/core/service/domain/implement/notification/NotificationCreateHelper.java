@@ -2,11 +2,13 @@ package com.backend.programming.learning.system.core.service.domain.implement.no
 
 import com.backend.programming.learning.system.core.service.domain.CoreDomainService;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.notification.CreateNotificationCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.notification.NotificationResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.notification.NotificationDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
+import com.backend.programming.learning.system.core.service.socket.emitter.message.NotificationMessageEmitter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,15 +23,19 @@ public class NotificationCreateHelper {
     private final UserRepository userRepository;
     private final NotificationRepository notificationRepository;
     private final NotificationDataMapper notificationDataMapper;
+    private final NotificationMessageEmitter<NotificationResponseEntity> notificationMessageEmitter;
 
     public NotificationCreateHelper(CoreDomainService coreDomainService,
                                     UserRepository userRepository,
                                     NotificationRepository notificationRepository,
-                                    NotificationDataMapper notificationDataMapper) {
+                                    NotificationDataMapper notificationDataMapper,
+                                    NotificationMessageEmitter<NotificationResponseEntity>
+                                            notificationMessageEmitter) {
         this.coreDomainService = coreDomainService;
         this.userRepository = userRepository;
         this.notificationRepository = notificationRepository;
         this.notificationDataMapper = notificationDataMapper;
+        this.notificationMessageEmitter = notificationMessageEmitter;
     }
 
     @Transactional
@@ -45,6 +51,14 @@ public class NotificationCreateHelper {
         Notification notificationResult = saveNotification(notification);
 
         log.info("Notification created with id: {}", notificationResult.getId().getValue());
+
+        NotificationResponseEntity queryNotificationResponse =
+                notificationDataMapper.notificationToQueryNotificationResponse(notificationResult);
+        log.info("Emitting notification to user: {}", queryNotificationResponse);
+        String room = "user_" + createNotificationCommand.getUserIdTo();
+        notificationMessageEmitter.emit(room, "get_message", queryNotificationResponse);
+        log.info("Notification emitted to user: {}", queryNotificationResponse);
+
         return notificationResult;
     }
 

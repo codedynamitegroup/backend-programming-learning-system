@@ -12,8 +12,6 @@
     <artifactId>core-container</artifactId>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -36,6 +34,10 @@
         <dependency>
             <groupId>com.backend.programming.learning.system</groupId>
             <artifactId>core-messaging</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.backend.programming.learning.system</groupId>
+            <artifactId>core-socket</artifactId>
         </dependency>
         <dependency>
             <groupId>com.backend.programming.learning.system</groupId>

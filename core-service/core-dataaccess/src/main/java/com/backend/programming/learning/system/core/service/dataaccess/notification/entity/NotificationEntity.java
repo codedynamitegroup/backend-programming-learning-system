@@ -20,8 +20,15 @@ public class NotificationEntity {
     @Id
     @Column(name = "id")
     private UUID id;
-    private UUID userIdFrom;
-    private UUID userIdTo;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id_from", referencedColumnName = "id")
+    private UserEntity userFrom;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id_to", referencedColumnName = "id")
+    private UserEntity userTo;
+
     private String subject;
     private String fullMessage;
     private String smallMessage;
