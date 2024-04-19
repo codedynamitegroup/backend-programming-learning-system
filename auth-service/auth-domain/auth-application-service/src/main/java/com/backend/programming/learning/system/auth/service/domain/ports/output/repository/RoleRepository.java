@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.auth.service.domain.ports.output.repository;
 
-import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.entity.Role;
 import com.backend.programming.learning.system.auth.service.domain.valueobject.RoleId;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;

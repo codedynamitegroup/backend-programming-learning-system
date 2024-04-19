@@ -1,12 +1,13 @@
 package com.backend.programming.learning.system.auth.service.dataaccess.user_role.mapper;
 
+import com.backend.programming.learning.system.auth.service.dataaccess.role.entity.RoleEntity;
 import com.backend.programming.learning.system.auth.service.dataaccess.role.mapper.RoleDataAccessMapper;
 import com.backend.programming.learning.system.auth.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.auth.service.dataaccess.user_role.entity.UserRoleEntity;
+import com.backend.programming.learning.system.auth.service.domain.entity.Role;
 import com.backend.programming.learning.system.auth.service.domain.entity.UserRole;
 import com.backend.programming.learning.system.auth.service.domain.valueobject.RoleId;
 import com.backend.programming.learning.system.auth.service.domain.valueobject.UserRoleId;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -22,7 +23,11 @@ public class UserRoleDataAccessMapper {
     public UserRoleEntity userRoleToUserRoleEntity(UserRole userRole) {
         return UserRoleEntity.builder()
                 .id(userRole.getId().getValue())
-                .role(roleDataAccessMapper.roleToRoleEntity(userRole.getRole()))
+                .role(
+                        RoleEntity.builder()
+                                .id(userRole.getRole().getId().getValue())
+                                .build()
+                )
                 .user(userDataAccessMapper.userToUserEntity(userRole.getUser()))
                 .createdAt(userRole.getCreatedAt())
                 .updatedAt(userRole.getUpdatedAt())

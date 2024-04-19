@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.auth.service.dataaccess.role.mapper;
 
+import com.backend.programming.learning.system.auth.service.dataaccess.organization.entity.OrganizationEntity;
 import com.backend.programming.learning.system.auth.service.dataaccess.organization.mapper.OrganizationDataAccessMapper;
 import com.backend.programming.learning.system.auth.service.dataaccess.role.entity.RoleEntity;
 import com.backend.programming.learning.system.auth.service.dataaccess.user.mapper.UserDataAccessMapper;
@@ -22,7 +23,11 @@ public class RoleDataAccessMapper {
     public RoleEntity roleToRoleEntity(Role role) {
         return RoleEntity.builder()
                 .id(role.getId().getValue())
-                .organization(organizationDataAccessMapper.organizationToOrganizationEntity(role.getOrganization()))
+                .organization(
+                        OrganizationEntity.builder()
+                                .id(role.getOrganization().getId().getValue())
+                                .build()
+                )
                 .createdBy(userDataAccessMapper.userToUserEntity(role.getCreatedBy()))
                 .updatedBy(userDataAccessMapper.userToUserEntity(role.getUpdatedBy()))
                 .description(role.getDescription())
