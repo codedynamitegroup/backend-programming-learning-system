@@ -4,13 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
 public class UpdateQtypeCodeQuestionCommand {
+    @NotNull
     private final UUID qtCodeQuestionId;
     private final String dslTemplate;
-    private final UpdateQuestionUpdateEntity question;
+
+    @NotNull
+    private final UpdateQuestionEntity question;
 }

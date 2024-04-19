@@ -104,7 +104,8 @@ public class QuestionDataAccessMapper {
         if (question.getqtype() != null)
             questionEntity.setQtype(question.getqtype());
         if (question.getAnswers() != null)
-            questionEntity.setAnswerOfQuestions(answerOfQuestionDataAccessMapper.answerOfQuestionListToAnswerOfQuestionEntityList(question.getAnswers()));
+            questionEntity.setAnswerOfQuestions(answerOfQuestionDataAccessMapper
+                    .setAnswerOfQuestionEntityList(questionEntity.getAnswerOfQuestions(), question.getAnswers()));
 
         return questionEntity;
     }

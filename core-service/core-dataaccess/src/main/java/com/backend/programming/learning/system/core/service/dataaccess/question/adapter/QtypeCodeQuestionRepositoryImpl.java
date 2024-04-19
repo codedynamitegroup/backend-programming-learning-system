@@ -58,7 +58,8 @@ public class QtypeCodeQuestionRepositoryImpl implements QtypeCodeQuestionReposit
             throw new QtypeCodeQuestionNotFoundException("Qtype Code Question not found with id: " + qtypeCodeQuestion.getId().getValue());
         }
 
-        QtypeCodeQuestionEntity savingQtypeCodeQuestionEntity = qtypeCodeQuestionDataAccessMapper.setQtypeCodeQuestionEntity(qtypeCodeQuestionEntity.get(), qtypeCodeQuestion);
+        QtypeCodeQuestionEntity savingQtypeCodeQuestionEntity = qtypeCodeQuestionDataAccessMapper
+                .setQtypeCodeQuestionEntity(qtypeCodeQuestionEntity.get(), qtypeCodeQuestion);
         qtypeCodeQuestionJpaRepository.save(savingQtypeCodeQuestionEntity);
     }
 

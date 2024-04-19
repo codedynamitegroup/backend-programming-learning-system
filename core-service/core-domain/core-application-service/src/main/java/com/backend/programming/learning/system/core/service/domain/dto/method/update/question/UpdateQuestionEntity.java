@@ -5,11 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 
 /**********************************************************************
- * UpdateQuestionUpdateEntity
+ * UpdateQuestionEntity
  * Description: This class represents the Question entity when updating
  * Scope: Only for update method of Question and Qtype Question
  **********************************************************************/
@@ -17,13 +18,16 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @Getter
-public class UpdateQuestionUpdateEntity {
+public class UpdateQuestionEntity {
+    @NotNull
     private final UUID questionId;
     private final QuestionDifficulty difficulty;
     private final String name;
     private final String questionText;
     private final String generalFeedback;
     private final float defaultMark;
+
+    @NotNull
     private final UUID updatedBy;
     private final List<AnswerOfQuestionUpdateEntity> answers;
 }

@@ -57,6 +57,7 @@ public class QuestionRepositoryImpl implements QuestionRepository {
         return QuestionType.valueOf(questionJpaRepository.getQtype(id));
     }
 
+    // Update Question and Answer of Question
     @Override
     public void updateQuestion(Question question) {
         Optional<QuestionEntity> questionEntity = questionJpaRepository.findById(question.getId().getValue());
@@ -65,6 +66,6 @@ public class QuestionRepositoryImpl implements QuestionRepository {
             throw new QuestionNotFoundException("Question not found with id: " + question.getId().getValue());
         }
 
-        questionJpaRepository.save(questionDataAccessMapper.questionToQuestionEntity(question));
+        questionJpaRepository.save(questionDataAccessMapper.setQuestionEntity(questionEntity.get(), question));
     }
 }

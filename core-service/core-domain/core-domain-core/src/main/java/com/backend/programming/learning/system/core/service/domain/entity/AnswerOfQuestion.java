@@ -10,7 +10,7 @@ public class AnswerOfQuestion extends BaseEntity<AnswerId> {
     private final QuestionId questionId;
     private final String feedback;
     private final String answer;
-    private final float fraction;
+    private final Float fraction;
 
     private AnswerOfQuestion(Builder builder) {
         super.setId(builder.answerId);
@@ -40,7 +40,7 @@ public class AnswerOfQuestion extends BaseEntity<AnswerId> {
         return answer;
     }
 
-    public float getFraction() {
+    public Float getFraction() {
         return fraction;
     }
 
@@ -50,7 +50,7 @@ public class AnswerOfQuestion extends BaseEntity<AnswerId> {
         private QuestionId questionId;
         private String feedback;
         private String answer;
-        private float fraction;
+        private Float fraction;
 
         private Builder() {
         }
@@ -75,7 +75,7 @@ public class AnswerOfQuestion extends BaseEntity<AnswerId> {
             return this;
         }
 
-        public Builder fraction(float val) {
+        public Builder fraction(Float val) {
             fraction = val;
             return this;
         }

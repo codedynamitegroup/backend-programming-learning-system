@@ -12,4 +12,5 @@ public interface AnswerOfQuestionRepository {
     void deleteAnswerOfQuestion(UUID answerId);
     void deleteAllAnswerOfQuestionByQuestionId(UUID questionId);
     Optional<AnswerOfQuestion> getAnswerOfQuestionById(UUID answerId);
+    List<AnswerOfQuestion> updateAllAnswerOfQuestion(List<AnswerOfQuestion> answerOfQuestionList);
 }

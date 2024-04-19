@@ -12,6 +12,12 @@ import java.util.List;
 
 @Component
 public class QtypeCodeQuestionDataMapper {
+    private final QuestionDataMapper questionDataMapper;
+
+    public QtypeCodeQuestionDataMapper(QuestionDataMapper questionDataMapper) {
+        this.questionDataMapper = questionDataMapper;
+    }
+
     public QtypeCodeQuestion createQuestionCommandToQtypeCodeQuestion(CreateQtypeCodeQuestionCommand createQtypeCodeQuestionCommand,
                                                                       Question question) {
         return QtypeCodeQuestion.builder()
@@ -32,12 +38,13 @@ public class QtypeCodeQuestionDataMapper {
                 .toArray(QueryQtypeCodeQuestionResponse[]::new));
     }
 
-    public QtypeCodeQuestion updateQtypeCodeQuestionCommandToQtypeCodeQuestion(UpdateQtypeCodeQuestionCommand updateQtypeCodeQuestionCommand) {
+    public QtypeCodeQuestion updateQtypeCodeQuestionCommandToQtypeCodeQuestion(UpdateQtypeCodeQuestionCommand updateQtypeCodeQuestionCommand,
+                                                                               QtypeCodeQuestion qtypeCodeQuestion) {
 
         return QtypeCodeQuestion.builder()
                 .id(new QtypeCodeQuestionId(updateQtypeCodeQuestionCommand.getQtCodeQuestionId()))
                 .dslTemplate(updateQtypeCodeQuestionCommand.getDslTemplate())
-                .question(null)
+                .question(questionDataMapper.updateQuestionEntityToQuestion(updateQtypeCodeQuestionCommand.getQuestion(), qtypeCodeQuestion))
                 .build();
     }
 }
