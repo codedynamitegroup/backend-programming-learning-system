@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface UserRoleRepository {
     UserRole save(UserRole userRole);
     Optional<UserRole> findByRoleIdAndUserId(RoleId roleId, UserId userId);
+
     void deleteByRoleIdAndUserId(RoleId roleId, UserId userId);
     void deleteByRoleId(RoleId roleId);
 

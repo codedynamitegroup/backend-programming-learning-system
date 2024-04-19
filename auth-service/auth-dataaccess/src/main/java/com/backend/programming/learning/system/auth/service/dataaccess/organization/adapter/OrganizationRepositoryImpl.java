@@ -5,6 +5,9 @@ import com.backend.programming.learning.system.auth.service.dataaccess.organizat
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.OrganizationRepository;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -34,10 +37,9 @@ public class OrganizationRepositoryImpl implements OrganizationRepository {
     }
 
     @Override
-    public List<Organization> findAll() {
-        return organizationJpaRepository.findAll()
-                .stream()
-                .map(organizationDataAccessMapper::organizationEntityToOrganization)
-                .toList();
+    public Page<Organization> findAll(Integer page, Integer size) {
+        Pageable paging = PageRequest.of(page, size);
+        return organizationJpaRepository.findAllByIsDeletedFalse(paging)
+                .map(organizationDataAccessMapper::organizationEntityToOrganization);
     }
 }

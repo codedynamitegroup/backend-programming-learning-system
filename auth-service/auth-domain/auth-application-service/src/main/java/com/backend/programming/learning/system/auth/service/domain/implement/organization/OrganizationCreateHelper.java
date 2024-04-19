@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.organization;
 
 import com.backend.programming.learning.system.auth.service.domain.AuthDomainService;
-import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateOrganizationCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.CreateOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
@@ -35,8 +35,8 @@ public class OrganizationCreateHelper {
     @Transactional
     public Organization persistOrganization(CreateOrganizationCommand createOrganizationCommand) {
         Organization organization = organizationDataMapper.createOrganizationCommandToOrganization(createOrganizationCommand);
-        checkUserExist(organization.getCreatedBy().getValue());
-        checkUserExist(organization.getUpdatedBy().getValue());
+        checkUserExist(organization.getCreatedBy().getId().getValue());
+        checkUserExist(organization.getUpdatedBy().getId().getValue());
 
         authDomainService.createOrganization(organization);
         return saveOrganization(organization);

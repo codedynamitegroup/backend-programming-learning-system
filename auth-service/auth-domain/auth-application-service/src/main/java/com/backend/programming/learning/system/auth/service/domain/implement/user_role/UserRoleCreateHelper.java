@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.user_role;
 
 import com.backend.programming.learning.system.auth.service.domain.AuthDomainService;
-import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateUserRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.CreateUserRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.entity.UserRole;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
@@ -35,8 +35,8 @@ public class UserRoleCreateHelper {
     @Transactional
     public UserRole persistUserRole(CreateUserRoleCommand createUserRoleCommand) {
         UserRole userRole = userRoleDataMapper.createUserRoleCommandToUserRole(createUserRoleCommand);
-        checkUserExist(userRole.getCreatedBy().getValue());
-        checkUserExist(userRole.getUpdatedBy().getValue());
+        checkUserExist(userRole.getCreatedBy().getId().getValue());
+        checkUserExist(userRole.getUpdatedBy().getId().getValue());
         authDomainService.createUserRole(userRole);
         return saveUserRole(userRole);
     }

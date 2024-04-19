@@ -3,7 +3,6 @@ package com.backend.programming.learning.system.auth.service.domain.entity;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -19,8 +18,8 @@ public class Organization extends AggregateRoot<OrganizationId> {
     private String moodleUrl;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
-    private UserId createdBy;
-    private UserId updatedBy;
+    private User createdBy;
+    private User updatedBy;
     private Boolean isDeleted;
 
     public void initializeOrganization() {
@@ -86,11 +85,11 @@ public class Organization extends AggregateRoot<OrganizationId> {
         return updatedAt;
     }
 
-    public UserId getCreatedBy() {
+    public User getCreatedBy() {
         return createdBy;
     }
 
-    public UserId getUpdatedBy() {
+    public User getUpdatedBy() {
         return updatedBy;
     }
 
@@ -112,8 +111,8 @@ public class Organization extends AggregateRoot<OrganizationId> {
         private String moodleUrl;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
-        private UserId createdBy;
-        private UserId updatedBy;
+        private User createdBy;
+        private User updatedBy;
         private Boolean isDeleted;
         private OrganizationId organizationId;
 
@@ -165,12 +164,12 @@ public class Organization extends AggregateRoot<OrganizationId> {
             return this;
         }
 
-        public Builder createdBy(UserId val) {
+        public Builder createdBy(User val) {
             createdBy = val;
             return this;
         }
 
-        public Builder updatedBy(UserId val) {
+        public Builder updatedBy(User val) {
             updatedBy = val;
             return this;
         }
