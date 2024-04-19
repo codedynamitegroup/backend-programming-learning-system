@@ -96,9 +96,9 @@ public class TopicUpdateHelper {
     }
 
     private void updateTopic(Topic topic) {
-        int updatedRows = topicRepository.updateTopic(topic);
+        Topic updatedTopic = topicRepository.saveTopic(topic);
 
-        if (updatedRows == 0) {
+        if (updatedTopic == null) {
             log.error("Could not update topic with id: {}", topic.getId().getValue());
 
             throw new CoreDomainException("Could not update topic with id: " + topic.getId().getValue());

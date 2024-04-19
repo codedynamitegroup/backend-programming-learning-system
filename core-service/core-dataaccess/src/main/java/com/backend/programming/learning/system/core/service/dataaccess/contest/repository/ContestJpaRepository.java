@@ -51,19 +51,4 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
 
     @Query("select c from ContestEntity c where upper(c.name) like upper(concat('%', ?1, '%'))")
     Page<ContestEntity> findAllContainsSearchName(String name, Pageable pageable);
-
-    @Transactional
-    @Modifying
-    @Query("""
-            update ContestEntity c
-            set c.name = ?1,
-            c.description = ?2,
-            c.startTime = ?3,
-            c.endTime = ?4,
-            c.updatedBy = ?5,
-            c.updatedAt = ?6
-            where c.id = ?7""")
-    int updateContestById(String name, String description,
-                          ZonedDateTime startTime, ZonedDateTime endTime,
-                          UserEntity userEntity, ZonedDateTime updatedAt, UUID id);
 }

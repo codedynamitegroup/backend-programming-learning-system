@@ -75,9 +75,9 @@ public class ChapterUpdateHelper {
     }
 
     private void updateChapter(Chapter chapter) {
-        int updatedRows = chapterRepository.updateChapter(chapter);
+        Chapter updatedChapter = chapterRepository.saveChapter(chapter);
 
-        if (updatedRows == 0) {
+        if (updatedChapter == null) {
             log.error("Could not update chapter with id: {}", chapter.getId().getValue());
 
             throw new CoreDomainException("Could not update chapter with id: " + chapter.getId().getValue());

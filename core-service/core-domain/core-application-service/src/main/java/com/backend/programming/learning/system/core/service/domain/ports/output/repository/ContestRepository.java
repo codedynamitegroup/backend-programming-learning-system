@@ -15,5 +15,4 @@ public interface ContestRepository {
     Page<Contest> findAll(String searchName, String startTimeFilter, Integer page, Integer size);
 
     void deleteContestById(UUID contestId);
-    int updateContest(Contest contest);
 }

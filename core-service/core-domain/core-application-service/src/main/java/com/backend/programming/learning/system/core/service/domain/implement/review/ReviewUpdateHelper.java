@@ -126,9 +126,9 @@ public class ReviewUpdateHelper {
     }
 
     private void updateReview(Review review) {
-        int updatedRows = reviewRepository.updateReview(review);
+        Review updatedReview = reviewRepository.saveReview(review);
 
-        if (updatedRows == 0) {
+        if (updatedReview == null) {
             log.error("Could not update review with id: {}", review.getId().getValue());
 
             throw new CoreDomainException("Could not update review with id: " + review.getId().getValue());

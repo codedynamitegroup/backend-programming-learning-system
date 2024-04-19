@@ -52,13 +52,4 @@ public class ReviewRepositoryImpl implements ReviewRepository {
     public Float getAvgRatingOfAllReviewsByCertificateCourseId(UUID certificateCourseId) {
         return reviewJpaRepository.getAvgRatingOfAllReviewsByCertificateCourseId(certificateCourseId);
     }
-
-    @Override
-    public int updateReview(Review review) {
-        return reviewJpaRepository.updateReviewById(
-                review.getRating(),
-                review.getContent(),
-                review.getUpdatedAt(),
-                review.getId().getValue());
-    }
 }
