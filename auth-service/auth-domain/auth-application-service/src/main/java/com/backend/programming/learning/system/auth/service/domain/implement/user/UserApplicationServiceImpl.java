@@ -1,16 +1,18 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.user;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.create.*;
-import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteUserCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteUserResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryUserCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryUserByIdCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-
-import java.util.List;
 
 @Slf4j
 @Validated
@@ -28,13 +30,18 @@ class UserApplicationServiceImpl implements UserApplicationService {
     }
 
     @Override
-    public QueryUserResponse findUserById(QueryUserCommand queryUserCommand) {
+    public UserEntityResponse findUserById(QueryUserByIdCommand queryUserCommand) {
         return userCommandHandler.queryUser(queryUserCommand);
     }
 
     @Override
-    public List<QueryUserResponse> findAllUsers() {
-        return userCommandHandler.queryAllUsers();
+    public QueryAllUsersResponse findAllUsers(QueryAllUsersCommand queryAllUsersCommand) {
+        return userCommandHandler.queryAllUsers(queryAllUsersCommand);
+    }
+
+    @Override
+    public UpdateUserResponse updateUser(CreateUserCommand createUserCommand) {
+        return null;
     }
 
     @Override

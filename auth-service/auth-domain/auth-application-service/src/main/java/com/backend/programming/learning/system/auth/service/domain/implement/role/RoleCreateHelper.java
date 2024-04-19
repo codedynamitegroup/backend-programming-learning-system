@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.role;
 
 import com.backend.programming.learning.system.auth.service.domain.AuthDomainService;
-import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.role.CreateRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.entity.Role;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
@@ -40,9 +40,9 @@ public class RoleCreateHelper {
     @Transactional
     public Role persistRole(CreateRoleCommand createRoleCommand) {
         Role role = roleDataMapper.createRoleCommandToRole(createRoleCommand);
-        checkUserExist(role.getCreatedBy().getValue());
-        checkUserExist(role.getUpdatedBy().getValue());
-        checkOrganization(role.getOrganizationId().getValue());
+        checkUserExist(role.getCreatedBy().getId().getValue());
+        checkUserExist(role.getUpdatedBy().getId().getValue());
+        checkOrganization(role.getOrganization().getId().getValue());
         authDomainService.createRole(role);
         return saveRole(role);
     }

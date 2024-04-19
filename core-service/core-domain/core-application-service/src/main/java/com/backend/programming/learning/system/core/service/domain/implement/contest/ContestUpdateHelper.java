@@ -85,10 +85,10 @@ public class ContestUpdateHelper {
     }
 
     private void updateContest(Contest contest) {
-        int updatedRows = contestRepository
-                .updateContest(contest);
+        Contest updatedContest = contestRepository
+                .saveContest(contest);
 
-        if (updatedRows == 0) {
+        if (updatedContest == null) {
             log.error("Could not update contest with id: {}", contest.getId().getValue());
 
             throw new CoreDomainException("Could not update contest with id: " + contest.getId().getValue());

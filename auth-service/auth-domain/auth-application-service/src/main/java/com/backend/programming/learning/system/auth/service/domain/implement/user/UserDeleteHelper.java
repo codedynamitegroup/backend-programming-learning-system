@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.user;
 
 import com.backend.programming.learning.system.auth.service.domain.AuthDomainService;
-import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.UserDeletedEvent;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;

@@ -5,6 +5,10 @@ logging:
   level:
     com.backend.programming.learning.system: DEBUG
 
+socket-config:
+  port: 8085
+  host: 192.168.1.8
+
 core-service:
   payment-request-topic-name: payment-request
   payment-response-topic-name: payment-response
@@ -88,3 +92,4 @@ kafka-consumer-config:
   max-partition-fetch-bytes-default: 1048576
   max-partition-fetch-bytes-boost-factor: 1
   poll-timeout-ms: 150
+

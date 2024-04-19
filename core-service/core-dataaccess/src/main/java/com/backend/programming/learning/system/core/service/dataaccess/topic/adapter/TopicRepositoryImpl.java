@@ -46,13 +46,4 @@ public class TopicRepositoryImpl implements TopicRepository {
     public void deleteTopicById(TopicId topicId) {
         topicJpaRepository.deleteById(topicId.getValue());
     }
-
-    @Override
-    public int updateTopic(Topic topic) {
-        return topicJpaRepository.updateNameAndDescriptionById(
-                topic.getName(),
-                topic.getDescription(),
-                topic.getId().getValue()
-        );
-    }
 }

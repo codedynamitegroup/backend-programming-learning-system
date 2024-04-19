@@ -13,9 +13,4 @@ import java.util.UUID;
 @Repository
 public interface TopicJpaRepository extends JpaRepository<TopicEntity, UUID> {
     Optional<TopicEntity> findById(UUID id);
-
-    @Transactional
-    @Modifying
-    @Query("update TopicEntity t set t.name = ?1, t.description = ?2 where t.id = ?3")
-    int updateNameAndDescriptionById(String name, String description, UUID id);
 }

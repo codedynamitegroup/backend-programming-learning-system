@@ -53,6 +53,10 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.backend.programming.learning.system</groupId>
+            <artifactId>common-dataaccess</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

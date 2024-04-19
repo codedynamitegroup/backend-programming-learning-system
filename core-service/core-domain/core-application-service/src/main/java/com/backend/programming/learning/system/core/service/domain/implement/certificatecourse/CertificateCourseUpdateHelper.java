@@ -119,15 +119,15 @@ public class CertificateCourseUpdateHelper {
     }
 
     private void updateCertificateCourse(CertificateCourse certificateCourse) {
-        int updatedRows = certificateCourseRepository
-                .updateCertificateCourse(certificateCourse);
+        CertificateCourse updatedCertificateCourse = certificateCourseRepository
+                .saveCertificateCourse(certificateCourse);
 
-        if (updatedRows == 0) {
+        if (updatedCertificateCourse == null) {
             log.error("Could not update certificate course");
 
             throw new CoreDomainException("Could not update certificate course");
         }
-        log.info("Certificate course updated with id: {}", certificateCourse.getId().getValue());
+        log.info("Certificate course updated with id: {}", updatedCertificateCourse.getId().getValue());
     }
 }
 

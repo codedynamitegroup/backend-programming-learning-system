@@ -22,10 +22,14 @@ public class NotificationDataAccessMapper {
     }
 
     public NotificationEntity notificationToNotificationEntity(Notification notification) {
+        UserEntity userFrom = notification.getUserFrom() != null
+                ? userDataAccessMapper.userToUserEntity(notification.getUserFrom())
+                : null;
+        UserEntity userTo = userDataAccessMapper.userToUserEntity(notification.getUserTo());
         return NotificationEntity.builder()
                 .id(notification.getId().getValue())
-                .userIdFrom(notification.getUserFrom() != null ? notification.getUserFrom().getId().getValue() : null)
-                .userIdTo(notification.getUserTo().getId().getValue())
+                .userFrom(userFrom)
+                .userTo(userTo)
                 .subject(notification.getSubject())
                 .fullMessage(notification.getFullMessage())
                 .smallMessage(notification.getSmallMessage())
@@ -41,12 +45,10 @@ public class NotificationDataAccessMapper {
     }
 
     public Notification notificationEntityToNotification(NotificationEntity notificationEntity) {
-        User userFrom = notificationEntity.getUserIdFrom() != null
-                ? User.builder().id(new UserId(notificationEntity.getUserIdFrom())).build()
+        User userFrom = notificationEntity.getUserFrom() != null
+                ? userDataAccessMapper.userEntityToUser(notificationEntity.getUserFrom())
                 : null;
-        User userTo = userDataAccessMapper.userEntityToUser(
-                UserEntity.builder().id(notificationEntity.getUserIdTo()).build()
-        );
+        User userTo = userDataAccessMapper.userEntityToUser(notificationEntity.getUserTo());
 
         return Notification.builder()
                 .id(new NotificationId(notificationEntity.getId()))

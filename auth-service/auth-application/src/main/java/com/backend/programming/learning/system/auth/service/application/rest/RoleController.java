@@ -1,19 +1,19 @@
 package com.backend.programming.learning.system.auth.service.application.rest;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateRoleCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateRoleResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateUserCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateUserResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteRoleCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteRoleResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.query.*;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.role.CreateRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.role.CreateRoleResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.role.DeleteRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.role.DeleteRoleResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesByOrganizationCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryRoleByIdCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesByOrganizationResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.role.RoleEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.RoleApplicationService;
-import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserApplicationService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -32,22 +32,29 @@ public class RoleController {
         log.info("Creating role with name: {}", createRoleCommand.getName());
         CreateRoleResponse createRoleResponse = roleApplicationService.createRole(createRoleCommand);
         log.info("Role created with email: {}", createRoleResponse.getName());
-        return ResponseEntity.ok(createRoleResponse);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createRoleResponse);
     }
 
     @GetMapping("/organization/{id}")
-    public ResponseEntity<List<QueryRoleResponse>> getRolesByOrganizationId(@PathVariable UUID id) {
+    public ResponseEntity<QueryAllRolesByOrganizationResponse> getRolesByOrganizationId(
+            @PathVariable UUID id,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize) {
         log.info("Getting roles by organization id: {}", id);
-        List<QueryRoleResponse> roles = roleApplicationService
-                .findByOrganizationId(QueryRoleByOrganizationCommand.builder().organizationId(id).build());
+        QueryAllRolesByOrganizationResponse roles = roleApplicationService
+                .findByOrganizationId(QueryAllRolesByOrganizationCommand.builder()
+                        .organizationId(id)
+                        .pageNo(pageNo)
+                        .pageSize(pageSize)
+                        .build());
         return ResponseEntity.ok(roles);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<QueryRoleResponse> getRoleById(@PathVariable UUID id) {
-        QueryRoleResponse queryRoleResponse =
-               roleApplicationService.findRoleById(QueryRoleCommand.builder().roleId(id).build());
-       log.info("Returning user with name: {}", queryRoleResponse.getName());
+    public ResponseEntity<RoleEntityResponse> getRoleById(@PathVariable UUID id) {
+        RoleEntityResponse queryRoleResponse =
+               roleApplicationService.findRoleById(QueryRoleByIdCommand.builder().roleId(id).build());
+       log.info("Returning role with id: {}", queryRoleResponse.getRoleId());
        return  ResponseEntity.ok(queryRoleResponse);
     }
 

@@ -3,7 +3,6 @@ package com.backend.programming.learning.system.auth.service.domain.entity;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -19,8 +18,8 @@ public class Organization extends AggregateRoot<OrganizationId> {
     private String moodleUrl;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
-    private UserId createdBy;
-    private UserId updatedBy;
+    private User createdBy;
+    private User updatedBy;
     private Boolean isDeleted;
 
     public void initializeOrganization() {
@@ -86,16 +85,64 @@ public class Organization extends AggregateRoot<OrganizationId> {
         return updatedAt;
     }
 
-    public UserId getCreatedBy() {
+    public User getCreatedBy() {
         return createdBy;
     }
 
-    public UserId getUpdatedBy() {
+    public User getUpdatedBy() {
         return updatedBy;
     }
 
     public Boolean getDeleted() {
         return isDeleted;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
+
+    public void setMoodleUrl(String moodleUrl) {
+        this.moodleUrl = moodleUrl;
+    }
+
+    public void setCreatedAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(ZonedDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public void setUpdatedBy(User updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
     }
 
     public static Builder builder() {
@@ -112,8 +159,8 @@ public class Organization extends AggregateRoot<OrganizationId> {
         private String moodleUrl;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
-        private UserId createdBy;
-        private UserId updatedBy;
+        private User createdBy;
+        private User updatedBy;
         private Boolean isDeleted;
         private OrganizationId organizationId;
 
@@ -165,12 +212,12 @@ public class Organization extends AggregateRoot<OrganizationId> {
             return this;
         }
 
-        public Builder createdBy(UserId val) {
+        public Builder createdBy(User val) {
             createdBy = val;
             return this;
         }
 
-        public Builder updatedBy(UserId val) {
+        public Builder updatedBy(User val) {
             updatedBy = val;
             return this;
         }

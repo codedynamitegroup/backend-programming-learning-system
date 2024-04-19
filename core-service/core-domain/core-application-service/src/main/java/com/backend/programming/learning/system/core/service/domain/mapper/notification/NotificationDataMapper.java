@@ -68,9 +68,9 @@ public class NotificationDataMapper {
                 .contextUrl(notification.getContextUrl())
                 .contextUrlName(notification.getContextUrlName())
                 .isRead(notification.getRead())
-                .timeRead(notification.getTimeRead())
-                .createdAt(notification.getCreatedAt())
-                .updatedAt(notification.getUpdatedAt())
+                .timeRead(notification.getTimeRead() != null ? notification.getTimeRead().toString() : null)
+                .createdAt(notification.getCreatedAt().toString())
+                .updatedAt(notification.getUpdatedAt().toString())
                 .build();
     }
 

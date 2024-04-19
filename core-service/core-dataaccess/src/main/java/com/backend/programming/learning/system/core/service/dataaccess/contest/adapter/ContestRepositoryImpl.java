@@ -27,13 +27,10 @@ import java.util.UUID;
 public class ContestRepositoryImpl implements ContestRepository {
     private final ContestJpaRepository contestJpaRepository;
     private final ContestDataAccessMapper contestDataAccessMapper;
-    private final UserDataAccessMapper userDataAccessMapper;
     public ContestRepositoryImpl(ContestJpaRepository contestJpaRepository,
-                                  ContestDataAccessMapper contestDataAccessMapper,
-                                  UserDataAccessMapper userDataAccessMapper) {
+                                  ContestDataAccessMapper contestDataAccessMapper) {
         this.contestJpaRepository = contestJpaRepository;
         this.contestDataAccessMapper = contestDataAccessMapper;
-        this.userDataAccessMapper = userDataAccessMapper;
     }
 
     @Override
@@ -94,18 +91,5 @@ public class ContestRepositoryImpl implements ContestRepository {
     @Override
     public void deleteContestById(UUID contestId) {
         contestJpaRepository.deleteById(contestId);
-    }
-
-    @Override
-    public int updateContest(Contest contest) {
-        UserEntity userEntity = userDataAccessMapper.userToUserEntity(contest.getUpdatedBy());
-        return contestJpaRepository.updateContestById(
-                contest.getName(),
-                contest.getDescription(),
-                contest.getStartTime(),
-                contest.getEndTime(),
-                userEntity,
-                contest.getUpdatedAt(),
-                contest.getId().getValue());
     }
 }
