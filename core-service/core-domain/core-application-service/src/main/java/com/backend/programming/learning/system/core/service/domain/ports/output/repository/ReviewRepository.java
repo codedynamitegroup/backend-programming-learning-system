@@ -19,6 +19,4 @@ public interface ReviewRepository {
 
     Float getAvgRatingOfAllReviewsByCertificateCourseId(UUID certificateCourseId);
 
-    int updateReview(Review review);
-
 }

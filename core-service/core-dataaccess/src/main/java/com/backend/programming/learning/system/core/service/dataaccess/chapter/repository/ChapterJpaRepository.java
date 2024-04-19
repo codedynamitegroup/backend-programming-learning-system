@@ -21,18 +21,4 @@ public interface ChapterJpaRepository extends JpaRepository<ChapterEntity, UUID>
     @Query(value = "SELECT COALESCE(MAX(no),0) FROM chapter WHERE certificate_course_id = :certificateCourseId",
             nativeQuery = true)
     Integer findTopNoByCertificateCourseId(UUID certificateCourseId);
-
-    @Transactional
-    @Modifying
-    @Query("""
-            update ChapterEntity c
-            set c.no = ?1,
-            c.title = ?2,
-            c.description = ?3,
-            c.updatedBy = ?4,
-            c.updatedAt = ?5
-            where c.id = ?6
-            """)
-    int updateChapterById(
-            Integer no, String title, String description, UserEntity userEntity, ZonedDateTime updatedAt, UUID id);
 }
