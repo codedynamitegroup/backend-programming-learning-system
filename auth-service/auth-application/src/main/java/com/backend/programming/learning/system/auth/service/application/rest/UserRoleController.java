@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.auth.service.application.rest;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.method.create.CreateUserRoleCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.create.CreateUserRoleResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user_role.CreateUserRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user_role.CreateUserRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user_role.DeleteUserRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user_role.DeleteUserRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user_role.QueryUserRoleCommand;

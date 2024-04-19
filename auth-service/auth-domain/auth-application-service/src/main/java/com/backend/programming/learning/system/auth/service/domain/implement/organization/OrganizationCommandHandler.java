@@ -1,12 +1,14 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.organization;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.method.create.CreateOrganizationCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.create.CreateOrganizationResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.organization.CreateOrganizationCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.organization.CreateOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.organization.DeleteOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.organization.DeleteOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.organization.QueryAllOrganizationsCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.organization.QueryAllOrganizationsResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.organization.QueryOrganizationByIdCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.organization.UpdateOrganizationCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.organization.UpdateOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.organization.OrganizationEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.mapper.OrganizationDataMapper;
@@ -22,13 +24,15 @@ public class OrganizationCommandHandler {
     private final OrganizationCreateHelper organizationCreateHelper;
     private final OrganizationDeleteHelper organizationDeleteHelper;
     private final OrganizationQueryHelper organizationQueryHelper;
+    private final OrganizationUpdateHelper organizationUpdateHelper;
     private final OrganizationDataMapper organizationDataMapper;
 
-    public OrganizationCommandHandler(OrganizationCreateHelper organizationCreateHelper, OrganizationDataMapper organizationDataMapper, OrganizationQueryHelper organizationQueryHelper, OrganizationDeleteHelper organizationDeleteHelper) {
+    public OrganizationCommandHandler(OrganizationCreateHelper organizationCreateHelper, OrganizationDataMapper organizationDataMapper, OrganizationQueryHelper organizationQueryHelper, OrganizationDeleteHelper organizationDeleteHelper, OrganizationUpdateHelper organizationUpdateHelper) {
         this.organizationCreateHelper = organizationCreateHelper;
         this.organizationDataMapper = organizationDataMapper;
         this.organizationQueryHelper = organizationQueryHelper;
         this.organizationDeleteHelper = organizationDeleteHelper;
+        this.organizationUpdateHelper = organizationUpdateHelper;
     }
 
     @Transactional
@@ -51,6 +55,16 @@ public class OrganizationCommandHandler {
         Page<Organization> organizations = organizationQueryHelper.queryAllOrganizations(queryAllOrganizationsCommand.getPageNo(), queryAllOrganizationsCommand.getPageSize());
         log.info("All organizations are queried");
         return organizationDataMapper.organizationsToQueryAllOrganizationsResponse(organizations);
+    }
+
+    @Transactional
+    public UpdateOrganizationResponse updateOrganization(UpdateOrganizationCommand updateOrganizationCommand) {
+        Organization organizationUpdated = organizationUpdateHelper.persistOrganization(updateOrganizationCommand);
+        log.info("Organization is updated with id: {}", organizationUpdated.getId().getValue());
+        return UpdateOrganizationResponse.builder()
+                .organizationId(organizationUpdated.getId().getValue())
+                .message("Organization updated successfully")
+                .build();
     }
 
     @Transactional

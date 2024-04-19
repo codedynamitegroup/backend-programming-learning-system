@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.user;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.method.create.CreateUserCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.create.CreateUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersCommand;

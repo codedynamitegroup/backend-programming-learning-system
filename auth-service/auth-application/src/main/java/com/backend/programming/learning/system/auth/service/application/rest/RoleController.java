@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.auth.service.application.rest;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.method.create.CreateRoleCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.create.CreateRoleResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.role.CreateRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.role.CreateRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.role.DeleteRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.role.DeleteRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesByOrganizationCommand;
@@ -14,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @Slf4j

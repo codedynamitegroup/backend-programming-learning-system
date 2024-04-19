@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.auth.service.domain.dto.method.create;
+package com.backend.programming.learning.system.auth.service.domain.dto.method.create.user_role;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,18 +11,15 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class CreateOrganizationCommand {
+public class CreateUserRoleCommand {
     @NotNull
-    @Email
-    private final String email;
-
-    private final String description;
+    private final UUID roleId;
 
     @NotNull
-    private final String name;
+    private final UUID userId;
 
-    private final String phone;
-    private final String address;
+    @NotNull
+    private String name;
 
     @NotNull
     private final UUID createdBy;

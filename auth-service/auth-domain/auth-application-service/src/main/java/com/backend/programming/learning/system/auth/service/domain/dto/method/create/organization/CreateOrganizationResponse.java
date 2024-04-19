@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.auth.service.domain.dto.method.create;
+package com.backend.programming.learning.system.auth.service.domain.dto.method.create.organization;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,10 +1,11 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.user_role;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.method.create.CreateUserRoleCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.create.CreateUserRoleResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user_role.CreateUserRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user_role.CreateUserRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user_role.DeleteUserRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user_role.DeleteUserRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user_role.QueryUserRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user_role.UpdateUserRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user_role.UserRoleEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserRoleApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +30,11 @@ class UserRoleApplicationServiceImpl implements UserRoleApplicationService {
     @Override
     public UserRoleEntityResponse findUserRoleByRoleIdAndUserId(QueryUserRoleCommand queryOrganizationCommand) {
         return userRoleCommandHandler.queryUserRole(queryOrganizationCommand);
+    }
+
+    @Override
+    public UpdateUserRoleResponse updateUserRole(CreateUserRoleCommand createUserRoleCommand) {
+        return null;
     }
 
     @Override

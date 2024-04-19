@@ -1,19 +1,17 @@
 package com.backend.programming.learning.system.auth.service.domain.mapper;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.method.create.CreateUserCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.create.CreateUserResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesByOrganizationResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.role.RoleEntityResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
+import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Component
 public class UserDataMapper {
@@ -61,6 +59,19 @@ public class UserDataMapper {
                 .currentPage(users.getNumber())
                 .totalPages(users.getTotalPages())
                 .totalItems(users.getTotalElements())
+                .build();
+    }
+
+    public User updateUserCommandToUser(UpdateUserCommand updateUserCommand) {
+        return User.builder()
+                .id(new UserId(updateUserCommand.getUserId()))
+                .email(updateUserCommand.getEmail())
+                .dob(updateUserCommand.getDob())
+                .firstName(updateUserCommand.getFirstName())
+                .lastName(updateUserCommand.getLastName())
+                .phone(updateUserCommand.getPhone())
+                .address(updateUserCommand.getAddress())
+                .avatarUrl(updateUserCommand.getAvatarUrl())
                 .build();
     }
 }

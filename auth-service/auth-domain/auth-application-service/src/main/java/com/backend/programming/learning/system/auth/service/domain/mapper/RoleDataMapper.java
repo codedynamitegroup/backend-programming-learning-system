@@ -1,15 +1,16 @@
 package com.backend.programming.learning.system.auth.service.domain.mapper;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.method.create.CreateRoleCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.create.CreateRoleResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.organization.QueryAllOrganizationsResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.role.CreateRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.role.CreateRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesByOrganizationResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.role.UpdateRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.organization.OrganizationEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.role.RoleEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.entity.Role;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
+import com.backend.programming.learning.system.auth.service.domain.valueobject.RoleId;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
@@ -78,6 +79,18 @@ public class RoleDataMapper {
                 .currentPage(roles.getNumber())
                 .totalPages(roles.getTotalPages())
                 .totalItems(roles.getTotalElements())
+                .build();
+    }
+
+    public Role updateRoleCommandToRole(UpdateRoleCommand updateRoleCommand) {
+        return Role.builder()
+                .id(new RoleId(updateRoleCommand.getRoleId()))
+                .name(updateRoleCommand.getName())
+                .description(updateRoleCommand.getDescription())
+                .updatedBy(User
+                        .builder()
+                        .id(new UserId(updateRoleCommand.getUpdatedBy()))
+                        .build())
                 .build();
     }
 }
