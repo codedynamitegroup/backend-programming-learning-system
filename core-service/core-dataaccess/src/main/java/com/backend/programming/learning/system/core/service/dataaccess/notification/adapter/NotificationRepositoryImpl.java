@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.core.service.dataaccess.contest_u
 import com.backend.programming.learning.system.core.service.dataaccess.contest_user.repository.ContestUserJpaRepository;
 import com.backend.programming.learning.system.core.service.dataaccess.notification.mapper.NotificationDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.notification.repository.NotificationJpaRepository;
+import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.ContestUser;
 import com.backend.programming.learning.system.core.service.domain.entity.Notification;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ContestUserRepository;
@@ -38,7 +39,7 @@ public class NotificationRepositoryImpl implements NotificationRepository {
     @Override
     public Page<Notification> findAllByUserIdTo(UUID userIdTo, Integer pageNo, Integer pageSize) {
         Pageable paging = PageRequest.of(pageNo, pageSize);
-        return notificationJpaRepository.findAllByUserIdTo(userIdTo, paging)
+        return notificationJpaRepository.findAllByUserTo(UserEntity.builder().id(userIdTo).build(), paging)
                 .map(notificationDataAccessMapper::notificationEntityToNotification);
     }
 
