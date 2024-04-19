@@ -48,6 +48,9 @@ public class AnswerOfQuestionDataAccessMapper {
     }
 
     public List<AnswerOfQuestion> answerOfQuestionEntityListToAnswerOfQuestionList(List<AnswerOfQuestionEntity> answerOfQuestionEntityList) {
+        if(answerOfQuestionEntityList == null)
+            return List.of();
+
         return List.of(answerOfQuestionEntityList.stream()
                 .map(this::answerOfQuestionEntityToAnswerOfQuestion)
                 .toArray(AnswerOfQuestion[]::new));
