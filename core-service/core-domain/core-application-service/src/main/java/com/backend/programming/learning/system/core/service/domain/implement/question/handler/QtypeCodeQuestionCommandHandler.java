@@ -50,7 +50,7 @@ public class QtypeCodeQuestionCommandHandler {
     }
 
     public UpdateQuestionResponse updateQtypeCodeQuestion(UpdateQtypeCodeQuestionCommand updateQtypeCodeQuestionCommand) {
-        QuestionUpdatedEvent questionUpdatedEvent = qtypeCodeQuestionUpdateHelper.updateQtypeCodeQuestion(updateQtypeCodeQuestionCommand);
+        QuestionUpdatedEvent questionUpdatedEvent = qtypeCodeQuestionUpdateHelper.updateQtypeCodeQuestionInDb(updateQtypeCodeQuestionCommand);
 
         return questionDataMapper.questionUpdatedEventToUpdateQuestionRespond(questionUpdatedEvent, "Qtype Code Question updated successfully");
     }

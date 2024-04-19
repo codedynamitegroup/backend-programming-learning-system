@@ -3,6 +3,8 @@ package com.backend.programming.learning.system.core.service.domain.implement.qu
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQtypeEssayQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryQtypeEssayQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeEssayQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.implement.question.handler.QtypeEssayQuestionCommandHandler;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QtypeEssayQuestionApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -36,5 +38,10 @@ public class QtypeEssayQuestionApplicationServiceImpl implements QtypeEssayQuest
     @Override
     public List<QueryQtypeEssayQuestionResponse> queryAllQtypeEssayQuestion() {
         return qtypeEssayQuestionCommandHandler.queryAllQtypeEssayQuestion();
+    }
+
+    @Override
+    public UpdateQuestionResponse updateQtypeEssayQuestion(UpdateQtypeEssayQuestionCommand updateQtypeEssayQuestionCommand) {
+        return qtypeEssayQuestionCommandHandler.updateQtypeEssayQuestion(updateQtypeEssayQuestionCommand);
     }
 }

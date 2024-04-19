@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.core.service.dataaccess.question.
 import com.backend.programming.learning.system.core.service.domain.exception.question.QtypeCodeQuestionNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeCodeQuestionRepository;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeCodeQuestion;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Component
+@Slf4j
 public class QtypeCodeQuestionRepositoryImpl implements QtypeCodeQuestionRepository {
     private final QtypeCodeQuestionJpaRepository qtypeCodeQuestionJpaRepository;
     private final QtypeCodeQuestionDataAccessMapper qtypeCodeQuestionDataAccessMapper;
@@ -55,6 +57,7 @@ public class QtypeCodeQuestionRepositoryImpl implements QtypeCodeQuestionReposit
         Optional<QtypeCodeQuestionEntity> qtypeCodeQuestionEntity = qtypeCodeQuestionJpaRepository.findById(qtypeCodeQuestion.getId().getValue());
 
         if (qtypeCodeQuestionEntity.isEmpty()) {
+            log.error("Qtype Code Question not found with id: {}", qtypeCodeQuestion.getId().getValue());
             throw new QtypeCodeQuestionNotFoundException("Qtype Code Question not found with id: " + qtypeCodeQuestion.getId().getValue());
         }
 

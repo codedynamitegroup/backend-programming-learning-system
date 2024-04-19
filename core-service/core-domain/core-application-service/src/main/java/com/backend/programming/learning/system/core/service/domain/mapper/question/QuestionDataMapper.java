@@ -87,9 +87,13 @@ public class QuestionDataMapper {
                 .build();
     }
 
-    public Question updateQuestionEntityToQuestion(UpdateQuestionEntity updateQuestionEntity, QtypeCodeQuestion qtypeCodeQuestion) {
+    public Question updateQuestionEntityToQuestion(UpdateQuestionEntity updateQuestionEntity,
+                                                   QuestionId questionId,
+                                                   Organization organization,
+                                                   User createdBy,
+                                                   QuestionType qtype,
+                                                   List<AnswerOfQuestion> answers) {
         if (updateQuestionEntity == null) return null;
-        List<AnswerOfQuestion> answers = qtypeCodeQuestion.getQuestion().getAnswers();
 
         if (updateQuestionEntity.getAnswers() != null) {
             answers = updateQuestionEntity.getAnswers()
@@ -100,8 +104,8 @@ public class QuestionDataMapper {
         }
 
         return Question.builder()
-                .questionId(qtypeCodeQuestion.getQuestion().getId())
-                .organization(qtypeCodeQuestion.getQuestion().getOrganization())
+                .questionId(questionId)
+                .organization(organization)
                 .name(updateQuestionEntity.getName())
                 .questionText(updateQuestionEntity.getQuestionText())
                 .generalFeedback(updateQuestionEntity.getGeneralFeedback())
@@ -112,8 +116,8 @@ public class QuestionDataMapper {
                         .build())
                 .updatedAt(ZonedDateTime.now())
                 .answers(answers)
-                .qtype(qtypeCodeQuestion.getQuestion().getqtype())
-                .createdBy(qtypeCodeQuestion.getQuestion().getCreatedBy())
+                .qtype(qtype)
+                .createdBy(createdBy)
                 .build();
     }
 

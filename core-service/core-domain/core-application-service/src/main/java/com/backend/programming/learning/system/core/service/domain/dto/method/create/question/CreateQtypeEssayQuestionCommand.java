@@ -41,7 +41,7 @@ public class CreateQtypeEssayQuestionCommand extends CreateQuestionCommand{
     private final String graderInfo;
 
     @NotNull(message = "Grader info format is required")
-    private final Integer graderInfoFormat;
+    private final String graderInfoFormat;
 
     @NotNull(message = "Response template is required")
     private final String responseTemplate;
@@ -72,7 +72,7 @@ public class CreateQtypeEssayQuestionCommand extends CreateQuestionCommand{
             Integer attachments,
             Integer attachmentsRequired,
             String graderInfo,
-            Integer graderInfoFormat,
+            String graderInfoFormat,
             String responseTemplate,
             Integer maxBytes,
             String fileTypesList) {

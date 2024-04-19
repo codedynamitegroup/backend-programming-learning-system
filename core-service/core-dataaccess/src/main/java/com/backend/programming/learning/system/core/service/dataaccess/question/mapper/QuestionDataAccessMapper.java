@@ -78,11 +78,6 @@ public class QuestionDataAccessMapper {
     }
 
     public QuestionEntity setQuestionEntity(QuestionEntity questionEntity, Question question) {
-//        List<AnswerOfQuestionEntity> answerOfQuestionEntityList = questionEntity.getAnswerOfQuestions();
-//
-//        questionEntity.getAnswerOfQuestions().clear();
-//        questionEntity.getAnswerOfQuestions().addAll(answerOfQuestionEntityList);
-
         if (question.getId() != null)
             questionEntity.setId(question.getId().getValue());
         if (question.getOrganization() != null)

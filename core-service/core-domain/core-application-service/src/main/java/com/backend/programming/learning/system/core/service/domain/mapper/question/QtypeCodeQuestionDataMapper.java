@@ -44,7 +44,13 @@ public class QtypeCodeQuestionDataMapper {
         return QtypeCodeQuestion.builder()
                 .id(new QtypeCodeQuestionId(updateQtypeCodeQuestionCommand.getQtCodeQuestionId()))
                 .dslTemplate(updateQtypeCodeQuestionCommand.getDslTemplate())
-                .question(questionDataMapper.updateQuestionEntityToQuestion(updateQtypeCodeQuestionCommand.getQuestion(), qtypeCodeQuestion))
+                .question(questionDataMapper
+                        .updateQuestionEntityToQuestion(updateQtypeCodeQuestionCommand.getQuestion(),
+                                qtypeCodeQuestion.getQuestion().getId(),
+                                qtypeCodeQuestion.getQuestion().getOrganization(),
+                                qtypeCodeQuestion.getQuestion().getCreatedBy(),
+                                qtypeCodeQuestion.getQuestion().getqtype(),
+                                qtypeCodeQuestion.getQuestion().getAnswers()))
                 .build();
     }
 }

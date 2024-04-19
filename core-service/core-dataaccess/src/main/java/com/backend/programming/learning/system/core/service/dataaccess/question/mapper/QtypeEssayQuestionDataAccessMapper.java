@@ -50,4 +50,39 @@ public class QtypeEssayQuestionDataAccessMapper {
                 .fileTypesList(qtypeEssayQuestionEntity.getFileTypesList())
                 .build();
     }
+
+    public QtypeEssayQuestionEntity setQtypeEssayQuestionEntity(QtypeEssayQuestionEntity qtypeEssayQuestionEntity,
+                                                                QtypeEssayQuestion qtypeEssayQuestion) {
+        // TODO: Check if should i set Id
+        if(qtypeEssayQuestion.getId() != null)
+            qtypeEssayQuestionEntity.setId(qtypeEssayQuestion.getId().getValue());
+        if(qtypeEssayQuestion.getQuestion() != null)
+            qtypeEssayQuestionEntity.setQuestion(questionDataAccessMapper.setQuestionEntity(qtypeEssayQuestionEntity.getQuestion(), qtypeEssayQuestion.getQuestion()));
+        if(qtypeEssayQuestion.getResponseFormat() != null)
+            qtypeEssayQuestionEntity.setResponseFormat(qtypeEssayQuestion.getResponseFormat());
+        if(qtypeEssayQuestion.getResponseRequired() != null)
+            qtypeEssayQuestionEntity.setResponseRequired(qtypeEssayQuestion.getResponseRequired());
+        if(qtypeEssayQuestion.getResponseFieldLines() != null)
+            qtypeEssayQuestionEntity.setResponseFieldLines(qtypeEssayQuestion.getResponseFieldLines());
+        if(qtypeEssayQuestion.getMinWordLimit() != null)
+            qtypeEssayQuestionEntity.setMinWordLimit(qtypeEssayQuestion.getMinWordLimit());
+        if(qtypeEssayQuestion.getMaxWordLimit() != null)
+            qtypeEssayQuestionEntity.setMaxWordLimit(qtypeEssayQuestion.getMaxWordLimit());
+        if(qtypeEssayQuestion.getAttachments() != null)
+            qtypeEssayQuestionEntity.setAttachments(qtypeEssayQuestion.getAttachments());
+        if(qtypeEssayQuestion.getAttachmentsRequired() != null)
+            qtypeEssayQuestionEntity.setAttachmentsRequired(qtypeEssayQuestion.getAttachmentsRequired());
+        if(qtypeEssayQuestion.getGraderInfo() != null)
+            qtypeEssayQuestionEntity.setGraderInfo(qtypeEssayQuestion.getGraderInfo());
+        if(qtypeEssayQuestion.getGraderInfoFormat() != null)
+            qtypeEssayQuestionEntity.setGraderInfoFormat(qtypeEssayQuestion.getGraderInfoFormat());
+        if(qtypeEssayQuestion.getResponseTemplate() != null)
+            qtypeEssayQuestionEntity.setResponseTemplate(qtypeEssayQuestion.getResponseTemplate());
+        if(qtypeEssayQuestion.getMaxBytes() != null)
+            qtypeEssayQuestionEntity.setMaxBytes(qtypeEssayQuestion.getMaxBytes());
+        if(qtypeEssayQuestion.getFileTypesList() != null)
+            qtypeEssayQuestionEntity.setFileTypesList(qtypeEssayQuestion.getFileTypesList());
+
+        return qtypeEssayQuestionEntity;
+    }
 }

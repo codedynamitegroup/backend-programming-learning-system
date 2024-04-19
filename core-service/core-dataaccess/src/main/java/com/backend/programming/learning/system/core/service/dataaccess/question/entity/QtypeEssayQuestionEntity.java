@@ -29,7 +29,7 @@ public class QtypeEssayQuestionEntity {
     private Integer attachments;
     private Integer attachmentsRequired;
     private String graderInfo;
-    private Integer graderInfoFormat;
+    private String graderInfoFormat;
     private String responseTemplate;
     private Integer maxBytes;
     private String fileTypesList;

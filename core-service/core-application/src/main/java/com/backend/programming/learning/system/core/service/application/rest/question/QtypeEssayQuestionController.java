@@ -3,6 +3,8 @@ package com.backend.programming.learning.system.core.service.application.rest.qu
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQtypeEssayQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryQtypeEssayQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeEssayQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QtypeEssayQuestionApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -50,5 +52,16 @@ public class QtypeEssayQuestionController {
         log.info("Essay questions retrieved: {}", queryQuestionResponse);
 
         return ResponseEntity.ok(queryQuestionResponse);
+    }
+
+    @PutMapping
+    public ResponseEntity<UpdateQuestionResponse> updateQtypeEssayQuestion(
+            @RequestBody UpdateQtypeEssayQuestionCommand updateQtypeEssayQuestionCommand) {
+        log.info("Updating essay question: {}", updateQtypeEssayQuestionCommand);
+        UpdateQuestionResponse updateQuestionResponse = qtypeEssayQuestionApplicationService
+                .updateQtypeEssayQuestion(updateQtypeEssayQuestionCommand);
+        log.info("Essay question updated: {}", updateQuestionResponse);
+
+        return ResponseEntity.ok(updateQuestionResponse);
     }
 }
