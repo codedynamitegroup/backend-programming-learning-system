@@ -1,22 +1,19 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.organization;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateOrganizationCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateOrganizationResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteOrganizationCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteOrganizationResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryOrganizationCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryOrganizationResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.CreateOrganizationCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.CreateOrganizationResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.organization.DeleteOrganizationCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.organization.DeleteOrganizationResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.organization.QueryAllOrganizationsCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.organization.QueryAllOrganizationsResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.organization.QueryOrganizationByIdCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.organization.OrganizationEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
-import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
 import com.backend.programming.learning.system.auth.service.domain.mapper.OrganizationDataMapper;
-import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.OrganizationRepository;
-import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Component
@@ -24,47 +21,44 @@ public class OrganizationCommandHandler {
 
     private final OrganizationCreateHelper organizationCreateHelper;
     private final OrganizationDeleteHelper organizationDeleteHelper;
+    private final OrganizationQueryHelper organizationQueryHelper;
     private final OrganizationDataMapper organizationDataMapper;
-    private final OrganizationRepository organizationRepository;
 
-    public OrganizationCommandHandler(OrganizationCreateHelper organizationCreateHelper, OrganizationDataMapper organizationDataMapper, OrganizationRepository organizationRepository, OrganizationDeleteHelper organizationDeleteHelper) {
+    public OrganizationCommandHandler(OrganizationCreateHelper organizationCreateHelper, OrganizationDataMapper organizationDataMapper, OrganizationQueryHelper organizationQueryHelper, OrganizationDeleteHelper organizationDeleteHelper) {
         this.organizationCreateHelper = organizationCreateHelper;
         this.organizationDataMapper = organizationDataMapper;
-        this.organizationRepository = organizationRepository;
+        this.organizationQueryHelper = organizationQueryHelper;
         this.organizationDeleteHelper = organizationDeleteHelper;
     }
 
+    @Transactional
     public CreateOrganizationResponse createOrganization(CreateOrganizationCommand createOrganizationCommand) {
         Organization organizationCreated = organizationCreateHelper.persistOrganization(createOrganizationCommand);
         log.info("Organization is created with id: {}", organizationCreated.getId().getValue());
-        return organizationDataMapper.OrganizationToCreateOrganizationResponse(organizationCreated,
+        return organizationDataMapper.organizationToCreateOrganizationResponse(organizationCreated,
                 "Organization created successfully");
     }
 
     @Transactional(readOnly = true)
-    public QueryOrganizationResponse queryOrganization(QueryOrganizationCommand queryOrganizationCommand) {
-        Optional<Organization> organizationResult =
-                organizationRepository.findById(new OrganizationId(queryOrganizationCommand.getOrganizationId()));
-        if (organizationResult.isEmpty()) {
-            log.warn("Could not find organization with id: {}", queryOrganizationCommand.getOrganizationId());
-            throw new AuthNotFoundException("Could not find organization with id: " +
-                    queryOrganizationCommand.getOrganizationId());
-        }
-        return organizationDataMapper.organizationToQueryOrganizationResponse(organizationResult.get());
+    public OrganizationEntityResponse queryOrganizationById(QueryOrganizationByIdCommand queryOrganizationCommand) {
+        Organization organization = organizationQueryHelper.queryOrganization(queryOrganizationCommand.getOrganizationId());
+        log.info("Organization is queried with id: {}", queryOrganizationCommand.getOrganizationId());
+        return organizationDataMapper.organizationToOrganizationEntityResponse(organization);
     }
 
     @Transactional(readOnly = true)
-    public List<QueryOrganizationResponse> queryAllOrganizations() {
-        return organizationRepository.findAll().stream()
-                .map(organizationDataMapper::organizationToQueryOrganizationResponse)
-                .toList();
+    public QueryAllOrganizationsResponse queryAllOrganizations(QueryAllOrganizationsCommand queryAllOrganizationsCommand) {
+        Page<Organization> organizations = organizationQueryHelper.queryAllOrganizations(queryAllOrganizationsCommand.getPageNo(), queryAllOrganizationsCommand.getPageSize());
+        log.info("All organizations are queried");
+        return organizationDataMapper.organizationsToQueryAllOrganizationsResponse(organizations);
     }
 
-
+    @Transactional
     public DeleteOrganizationResponse deleteOrganization(DeleteOrganizationCommand deleteOrganizationCommand) {
         organizationDeleteHelper.deleteOrganization(deleteOrganizationCommand);
         log.info("Organization is deleted with id: {}", deleteOrganizationCommand.getOrganizationId());
         return DeleteOrganizationResponse.builder()
+                .organizationId(deleteOrganizationCommand.getOrganizationId())
                 .message("Organization deleted successfully")
                 .build();
     }

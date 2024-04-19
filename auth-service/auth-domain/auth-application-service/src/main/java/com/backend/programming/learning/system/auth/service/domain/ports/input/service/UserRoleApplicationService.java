@@ -1,16 +1,16 @@
 package com.backend.programming.learning.system.auth.service.domain.ports.input.service;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateUserRoleCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateUserRoleResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteUserRoleCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteUserRoleResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryUserRoleCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryUserRoleResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.CreateUserRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.CreateUserRoleResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user_role.DeleteUserRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user_role.DeleteUserRoleResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user_role.QueryUserRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user_role.UserRoleEntityResponse;
 
 import javax.validation.Valid;
 
 public interface UserRoleApplicationService {
     CreateUserRoleResponse createUserRole(@Valid CreateUserRoleCommand createUserRoleCommand);
-    QueryUserRoleResponse findUserRoleByRoleIdAndUserId(@Valid QueryUserRoleCommand queryOrganizationCommand);
+    UserRoleEntityResponse findUserRoleByRoleIdAndUserId(@Valid QueryUserRoleCommand queryOrganizationCommand);
     DeleteUserRoleResponse deleteUserRoleByRoleIdAndUserId(@Valid DeleteUserRoleCommand deleteUserRoleCommand);
 }
