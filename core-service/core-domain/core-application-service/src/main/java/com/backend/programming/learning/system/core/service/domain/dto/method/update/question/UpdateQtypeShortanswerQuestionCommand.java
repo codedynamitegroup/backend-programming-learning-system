@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.dto.method.update.question;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -7,14 +8,14 @@ import lombok.Getter;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
+@Getter
 @Builder
 @AllArgsConstructor
-@Getter
-public class AnswerOfQuestionUpdateEntity {
-    @NotNull(message = "Answer ID is required")
-    private final UUID answerId;
+public class UpdateQtypeShortanswerQuestionCommand {
+    @NotNull
+    private final UUID qtShortanswerQuestionId;
+    private Boolean caseSensitive;
 
-    private final String feedback;
-    private final String answer;
-    private final float fraction;
+    @NotNull
+    private final UpdateQuestionEntity question;
 }

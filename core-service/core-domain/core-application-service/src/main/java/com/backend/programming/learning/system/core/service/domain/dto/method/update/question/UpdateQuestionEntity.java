@@ -19,8 +19,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter
 public class UpdateQuestionEntity {
-    @NotNull
-    private final UUID questionId;
     private final QuestionDifficulty difficulty;
     private final String name;
     private final String questionText;

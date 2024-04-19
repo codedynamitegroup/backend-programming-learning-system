@@ -28,8 +28,8 @@ public class QtypeCodeQuestionDataAccessMapper {
 
     public QtypeCodeQuestionEntity setQtypeCodeQuestionEntity(QtypeCodeQuestionEntity qtypeCodeQuestionEntity,
                                                               QtypeCodeQuestion qtypeCodeQuestion) {
-        if (qtypeCodeQuestion.getId() != null)
-            qtypeCodeQuestionEntity.setId(qtypeCodeQuestion.getId().getValue());
+//        if (qtypeCodeQuestion.getId() != null)
+//            qtypeCodeQuestionEntity.setId(qtypeCodeQuestion.getId().getValue());
         if (qtypeCodeQuestion.getQuestion() != null)
             qtypeCodeQuestionEntity.setQuestion(questionDataAccessMapper.setQuestionEntity(qtypeCodeQuestionEntity.getQuestion(), qtypeCodeQuestion.getQuestion()));
         if (qtypeCodeQuestion.getDslTemplate() != null)

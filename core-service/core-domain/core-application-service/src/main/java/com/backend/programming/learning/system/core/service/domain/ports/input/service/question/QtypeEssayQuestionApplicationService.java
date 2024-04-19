@@ -6,12 +6,13 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.qu
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeEssayQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQuestionResponse;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
 public interface QtypeEssayQuestionApplicationService {
-    CreateQuestionResponse createQtypeEssayQuestion(CreateQtypeEssayQuestionCommand createQtypeEssayQuestionCommand);
+    CreateQuestionResponse createQtypeEssayQuestion(@Valid CreateQtypeEssayQuestionCommand createQtypeEssayQuestionCommand);
     QueryQtypeEssayQuestionResponse queryQtypeEssayQuestionById(UUID qtEssayQuestionId);
     List<QueryQtypeEssayQuestionResponse> queryAllQtypeEssayQuestion();
-    UpdateQuestionResponse updateQtypeEssayQuestion(UpdateQtypeEssayQuestionCommand updateQtypeEssayQuestionCommand);
+    UpdateQuestionResponse updateQtypeEssayQuestion(@Valid UpdateQtypeEssayQuestionCommand updateQtypeEssayQuestionCommand);
 }

@@ -3,6 +3,8 @@ package com.backend.programming.learning.system.core.service.domain.implement.qu
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQtypeShortanswerQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryQtypeShortanswerQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeShortanswerQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.implement.question.handler.QtypeShortanswerQuestionCommandHandler;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QtypeShortanswerQuestionApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -36,5 +38,10 @@ public class QtypeShortanswerApplicationServiceImpl implements QtypeShortanswerQ
     @Override
     public List<QueryQtypeShortanswerQuestionResponse> queryAllQtypeShortanswerQuestions() {
         return qtypeShortanswerQuestionCommandHandler.queryAllQtypeShortanswerQuestions();
+    }
+
+    @Override
+    public UpdateQuestionResponse updateQtypeShortanswerQuestion(UpdateQtypeShortanswerQuestionCommand updateQtypeShortanswerQuestionCommand) {
+        return qtypeShortanswerQuestionCommandHandler.updateQtypeShortanswerQuestion(updateQtypeShortanswerQuestionCommand);
     }
 }

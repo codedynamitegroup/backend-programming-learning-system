@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.dataaccess.question.adapter;
 
+import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QtypeMultichoiceQuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.question.mapper.QtypeMultichoiceQuestionDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.question.repository.QtypeMultichoiceQuestionJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeMultichoiceQuestionRepository;
@@ -50,5 +51,12 @@ public class QtypeMultichoiceQuestionRepositoryImpl implements QtypeMultichoiceQ
     @Override
     public UUID getId(UUID questionId) {
         return qtypeMultichoiceQuestionJpaRepository.getId(questionId);
+    }
+
+    @Override
+    public void updateQtypeMultichoiceQuestion(QtypeMultiChoiceQuestion qtypeMultichoiceQuestion) {
+        Optional<QtypeMultichoiceQuestionEntity> qtypeMultichoiceQuestionEntity = qtypeMultichoiceQuestionJpaRepository.findById(qtypeMultichoiceQuestion.getId().getValue());
+        qtypeMultichoiceQuestionJpaRepository.save(qtypeMultichoiceQuestionDataAccessMapper
+                .setQtypeMultichoiceQuestionEntity(qtypeMultichoiceQuestionEntity.get(), qtypeMultichoiceQuestion));
     }
 }

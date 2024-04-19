@@ -14,5 +14,5 @@ public interface QtypeCodeQuestionApplicationService {
     CreateQuestionResponse createQtypeCodeQuestion(@Valid CreateQtypeCodeQuestionCommand createQtypeCodeQuestionCommand);
     QueryQtypeCodeQuestionResponse queryQtypeCodeQuestionById(UUID qtCodeQuestionId);
     List<QueryQtypeCodeQuestionResponse> queryAllQtypeCodeQuestions();
-    UpdateQuestionResponse updateQtypeCodeQuestion(UpdateQtypeCodeQuestionCommand updateQtypeCodeQuestionCommand);
+    UpdateQuestionResponse updateQtypeCodeQuestion(@Valid UpdateQtypeCodeQuestionCommand updateQtypeCodeQuestionCommand);
 }

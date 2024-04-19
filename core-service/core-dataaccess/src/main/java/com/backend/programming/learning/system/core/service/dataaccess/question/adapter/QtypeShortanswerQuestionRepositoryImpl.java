@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.dataaccess.question.adapter;
 
+import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QtypeShortanswerQuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.question.mapper.QtypeShortanswerQuestionDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.question.repository.QtypeShortanswerQuestionJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeShortanswerQuestionRepository;
@@ -51,5 +52,13 @@ public class QtypeShortanswerQuestionRepositoryImpl implements QtypeShortanswerQ
     @Override
     public UUID getId(UUID questionId) {
         return qtypeShortAnswerQuestionJpaRepository.getId(questionId);
+    }
+
+    @Override
+    public void updateQtypeShortAnswerQuestion(QtypeShortAnswerQuestion qtypeShortAnswerQuestion) {
+        Optional<QtypeShortanswerQuestionEntity> qtypeShortAnswerQuestionEntity = qtypeShortAnswerQuestionJpaRepository.findById(qtypeShortAnswerQuestion.getId().getValue());
+
+        qtypeShortAnswerQuestionJpaRepository.save(qtypeShortanswerQuestionDataAccessMapper
+                .setQtypeShortAnswerQuestionEntity(qtypeShortAnswerQuestionEntity.get(), qtypeShortAnswerQuestion));
     }
 }

@@ -96,10 +96,15 @@ public class QuestionDataMapper {
         if (updateQuestionEntity == null) return null;
 
         if (updateQuestionEntity.getAnswers() != null) {
+//            answers = updateQuestionEntity.getAnswers()
+//                    .stream()
+//                    .map(answer -> answerOfQuestionUpdateEntityToAnswerOfQuestion(answer, new QuestionId(
+//                            updateQuestionEntity.getQuestionId())))
+//                    .toList();
+
             answers = updateQuestionEntity.getAnswers()
                     .stream()
-                    .map(answer -> answerOfQuestionUpdateEntityToAnswerOfQuestion(answer, new QuestionId(
-                            updateQuestionEntity.getQuestionId())))
+                    .map(answer -> answerOfQuestionUpdateEntityToAnswerOfQuestion(answer, new QuestionId(UUID.randomUUID())))
                     .toList();
         }
 
@@ -121,10 +126,11 @@ public class QuestionDataMapper {
                 .build();
     }
 
-    public AnswerOfQuestion answerOfQuestionUpdateEntityToAnswerOfQuestion(AnswerOfQuestionUpdateEntity answerOfQuestionUpdateEntity, QuestionId questionId) {
+    public AnswerOfQuestion answerOfQuestionUpdateEntityToAnswerOfQuestion(AnswerOfQuestionUpdateEntity answerOfQuestionUpdateEntity,
+                                                                           QuestionId questionId) {
         return AnswerOfQuestion.builder()
                 .id(new AnswerId(answerOfQuestionUpdateEntity.getAnswerId()))
-                .questionId(questionId)
+//                .questionId(questionId)
                 .answer(answerOfQuestionUpdateEntity.getAnswer())
                 .fraction(answerOfQuestionUpdateEntity.getFraction())
                 .feedback(answerOfQuestionUpdateEntity.getFeedback())

@@ -3,9 +3,13 @@ package com.backend.programming.learning.system.core.service.domain.implement.qu
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQtypeMultichoiceQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryQtypeMultichoiceQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeMultichoiceQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
+import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
 import com.backend.programming.learning.system.core.service.domain.implement.question.method.create.QtypeMultichoiceQuestionCreateHelper;
 import com.backend.programming.learning.system.core.service.domain.implement.question.method.query.QtypeMultichoiceQuestionQueryHelper;
+import com.backend.programming.learning.system.core.service.domain.implement.question.method.update.QtypeMultichoiceQuestionUpdateHelper;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -18,13 +22,16 @@ import java.util.UUID;
 public class QtypeMultichoiceQuestionCommandHandler {
     private final QtypeMultichoiceQuestionCreateHelper qtypeMultichoiceQuestionCreateHelper;
     private final QtypeMultichoiceQuestionQueryHelper qtypeMultichoiceQuestionQueryHelper;
+    private final QtypeMultichoiceQuestionUpdateHelper qtypeMultichoiceQuestionUpdateHelper;
     private final QuestionDataMapper questionDataMapper;
 
     public QtypeMultichoiceQuestionCommandHandler(QtypeMultichoiceQuestionCreateHelper qtypeMultichoiceQuestionCreateHelper,
                                                   QtypeMultichoiceQuestionQueryHelper qtypeMultichoiceQuestionQueryHelper,
+                                                  QtypeMultichoiceQuestionUpdateHelper qtypeMultichoiceQuestionUpdateHelper,
                                                   QuestionDataMapper questionDataMapper) {
         this.qtypeMultichoiceQuestionCreateHelper = qtypeMultichoiceQuestionCreateHelper;
         this.qtypeMultichoiceQuestionQueryHelper = qtypeMultichoiceQuestionQueryHelper;
+        this.qtypeMultichoiceQuestionUpdateHelper = qtypeMultichoiceQuestionUpdateHelper;
         this.questionDataMapper = questionDataMapper;
     }
 
@@ -40,5 +47,12 @@ public class QtypeMultichoiceQuestionCommandHandler {
 
     public List<QueryQtypeMultichoiceQuestionResponse> queryAllQtypeMultichoiceQuestion() {
         return qtypeMultichoiceQuestionQueryHelper.queryAllQtypeMultichoiceQuestion();
+    }
+
+    public UpdateQuestionResponse updateQtypeMultichoiceQuestion(UpdateQtypeMultichoiceQuestionCommand updateQtypeMultichoiceQuestionCommand) {
+        QuestionUpdatedEvent questionUpdatedEvent = qtypeMultichoiceQuestionUpdateHelper.updateQtypeMultichoiceQuestionInDb(updateQtypeMultichoiceQuestionCommand);
+
+        return questionDataMapper.questionUpdatedEventToUpdateQuestionRespond(questionUpdatedEvent,
+                "Qtype Multichoice Question updated successfully");
     }
 }
