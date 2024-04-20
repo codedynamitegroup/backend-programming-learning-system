@@ -7,19 +7,14 @@ import com.backend.programming.learning.system.dto.method.delete.course.DeleteCo
 import com.backend.programming.learning.system.dto.method.query.course.QueryAllCourseCommand;
 import com.backend.programming.learning.system.dto.method.query.course.QueryAllCourseResponse;
 import com.backend.programming.learning.system.dto.method.query.course.QueryCourseCommand;
+import com.backend.programming.learning.system.dto.method.update.course.UpdateCourseCommand;
+import com.backend.programming.learning.system.dto.method.update.course.UpdateCourseResponse;
 import com.backend.programming.learning.system.dto.responseentity.course.CourseResponseEntity;
+import com.backend.programming.learning.system.valueobject.CourseId;
 
 import javax.validation.Valid;
-import java.util.List;
-import java.util.UUID;
 
 public interface CourseApplicationService {
-    // Question
-    CreateCourseResponse createQuestion(@Valid CreateCourseCommand createCourseCommand);
-
-    // CertificateCourse
-    CreateCourseResponse createCertificateCourse(@Valid CreateCourseCommand createCourseCommand);
-
     CreateCourseResponse createCourse(
             @Valid CreateCourseCommand createCourseCommand);
 
@@ -31,4 +26,8 @@ public interface CourseApplicationService {
 
     DeleteCourseResponse deleteCourse(
             @Valid DeleteCourseCommand deleteCourseCommand);
+
+    UpdateCourseResponse updateCourse(
+            CourseId courseId,
+            @Valid UpdateCourseCommand updateCourseCommand);
 }

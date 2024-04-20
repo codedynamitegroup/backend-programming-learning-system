@@ -7,14 +7,15 @@ import com.backend.programming.learning.system.dto.method.delete.course.DeleteCo
 import com.backend.programming.learning.system.dto.method.query.course.QueryAllCourseCommand;
 import com.backend.programming.learning.system.dto.method.query.course.QueryAllCourseResponse;
 import com.backend.programming.learning.system.dto.method.query.course.QueryCourseCommand;
+import com.backend.programming.learning.system.dto.method.update.course.UpdateCourseCommand;
+import com.backend.programming.learning.system.dto.method.update.course.UpdateCourseResponse;
 import com.backend.programming.learning.system.dto.responseentity.course.CourseResponseEntity;
 import com.backend.programming.learning.system.ports.input.service.course.CourseApplicationService;
+import com.backend.programming.learning.system.valueobject.CourseId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-
-import java.util.UUID;
 
 /**
  * com.backend.programming.learning.system.implemtent.course
@@ -28,16 +29,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CourseApplicationServiceImpl implements CourseApplicationService {
     private final CourseCommandHandler courseCommandHandler;
-
-    @Override
-    public CreateCourseResponse createQuestion(CreateCourseCommand createCourseCommand) {
-        return null;
-    }
-
-    @Override
-    public CreateCourseResponse createCertificateCourse(CreateCourseCommand createCourseCommand) {
-        return null;
-    }
 
     @Override
     public CreateCourseResponse createCourse(CreateCourseCommand createCourseCommand) {
@@ -57,5 +48,10 @@ public class CourseApplicationServiceImpl implements CourseApplicationService {
     @Override
     public DeleteCourseResponse deleteCourse(DeleteCourseCommand deleteCourseCommand) {
         return courseCommandHandler.deleteCourse(deleteCourseCommand);
+    }
+
+    @Override
+    public UpdateCourseResponse updateCourse(CourseId courseId, UpdateCourseCommand updateCourseCommand) {
+        return courseCommandHandler.updateCourse(courseId, updateCourseCommand);
     }
 }
