@@ -15,11 +15,22 @@ CREATE TYPE CopyState AS ENUM ('CREATING',
     'UPDATING_FAIL',
     'CREATING_FAIL');
 
+DROP TYPE IF EXISTS saga_status;
+CREATE TYPE saga_status AS ENUM ('STARTED', 'FAILED', 'SUCCEEDED', 'PROCESSING', 'COMPENSATING', 'COMPENSATED');
+
+DROP TYPE IF EXISTS outbox_status;
+CREATE TYPE outbox_status AS ENUM ('STARTED', 'COMPLETED', 'FAILED');
+
 DROP TYPE IF EXISTS difficulty;
 CREATE TYPE difficulty AS ENUM ('EASY', 'MEDIUM', 'HARD');
 
 DROP TYPE IF EXISTS qtype;
 CREATE TYPE qtype AS ENUM ('MULTIPLE_CHOICE', 'SHORT_ANSWER', 'CODE', 'ESSAY');
+
+
+
+
+
 
 DROP TABLE IF EXISTS questions CASCADE;
 CREATE TABLE questions
@@ -81,6 +92,31 @@ CREATE TABLE test_cases(
                        REFERENCES qtype_code_questions (id) MATCH SIMPLE
                         ON DELETE CASCADE ON UPDATE NO ACTION
 );
+
+DROP TABLE IF EXISTS code_questions_update_outbox CASCADE;
+CREATE TABLE code_questions_update_outbox
+(
+    id uuid NOT NULL,
+    saga_id uuid NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    processed_at TIMESTAMP WITH TIME ZONE,
+    type character varying COLLATE pg_catalog."default" NOT NULL,
+    payload jsonb NOT NULL,
+    outbox_status outbox_status NOT NULL,
+    saga_status saga_status NOT NULL,
+    copy_state copy_state NOT NULL,
+    version integer NOT NULL,
+    CONSTRAINT cquo_pk PRIMARY KEY (id)
+);
+
+CREATE INDEX "code_questions_update_outbox_saga_status"
+ON code_questions_update_outbox
+(type, outbox_status, saga_status);
+CREATE INDEX "code_questions_update_outbox_saga_id"
+ON code_questions_update_outbox
+    (type, saga_id, saga_status);
+
+
 
 
 

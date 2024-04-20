@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.entity;
 
-import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TestCaseId;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
@@ -11,7 +10,6 @@ import java.util.UUID;
 
 public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     private final QuestionId questionId;
-    private final List<TestCase> testCases;
     private final String dslTemplate;
     private final String problemStatement;
     private final String inputFormat;
@@ -28,7 +26,6 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     public void initializeCodeQuestion(){
         setId(new CodeQuestionId(UUID.randomUUID()));
         copyState = CopyState.CREATING;
-        intializeTestCases();
     }
     public void validateCodeQuestion(){
         validateInitialCodeQuestion();
@@ -38,12 +35,6 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     private void validateInitialCodeQuestion() {
     }
 
-    private void intializeTestCases() {
-        if(testCases != null)
-            for(TestCase testCase: testCases){
-                testCase.initializeTestCase(super.getId(), new TestCaseId(UUID.randomUUID()));
-            }
-    }
 
     public String getConstraints() {
         return constraints;
@@ -69,10 +60,6 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         return questionId;
     }
 
-    public List<TestCase> getTestCases() {
-        return testCases;
-    }
-
     public String getDslTemplate() {
         return dslTemplate;
     }
@@ -83,7 +70,6 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
 
     private CodeQuestion(Builder builder) {
         questionId = builder.questionId;
-        testCases = builder.testCases;
         dslTemplate = builder.dslTemplate;
         problemStatement = builder.problemStatement;
         inputFormat = builder.inputFormat;
@@ -96,14 +82,12 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
 
     public static final class Builder {
         private QuestionId questionId;
-        private List<TestCase> testCases;
         private String dslTemplate;
         private String problemStatement;
         private String inputFormat;
         private String outputFormat;
         private String constraints;
         private CopyState copyState;
-        private Boolean isDeleted;
         private List<String> failureMessages;
         private CodeQuestionId id;
 
@@ -112,11 +96,6 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
 
         public Builder questionId(QuestionId val) {
             questionId = val;
-            return this;
-        }
-
-        public Builder testCases(List<TestCase> val) {
-            testCases = val;
             return this;
         }
 
@@ -147,11 +126,6 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
 
         public Builder copyState(CopyState val) {
             copyState = val;
-            return this;
-        }
-
-        public Builder isDeleted(Boolean val) {
-            isDeleted = val;
             return this;
         }
 

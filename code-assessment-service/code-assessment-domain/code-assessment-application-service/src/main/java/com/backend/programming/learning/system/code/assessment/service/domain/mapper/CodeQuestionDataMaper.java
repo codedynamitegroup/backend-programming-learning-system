@@ -15,7 +15,6 @@ public class CodeQuestionDataMaper {
     public CodeQuestion createCodeQuestionCommandToCodeQuestion(CreateCodeQuestionCommand command){
         return CodeQuestion.builder()
                 .questionId(new QuestionId(command.getQuestionId()))
-                .testCases(testCaseToTestCaseEntities(command.getTestCases()))
                 .dslTemplate(command.getDslTemplate())
                 .problemStatement(command.getProblemStatement())
                 .inputFormat(command.getInputFormat())
@@ -29,17 +28,6 @@ public class CodeQuestionDataMaper {
                 .state(codeQuestion.getCopyState())
                 .message(message)
                 .build();
-    }
-
-    private List<TestCase> testCaseToTestCaseEntities(
-            List<com.backend.programming.learning.system.code.assessment.service.domain.dto.create.commandentity.TestCase> testCases) {
-        if(testCases == null) return null;
-        return testCases.stream().map(testCase->
-                                        TestCase.builder()
-                                            .inputData(testCase.getInputData())
-                                            .outputData(testCase.getOutputData())
-                                            .isSample(testCase.isSample())
-                                            .build()).collect(Collectors.toList());
     }
 
 

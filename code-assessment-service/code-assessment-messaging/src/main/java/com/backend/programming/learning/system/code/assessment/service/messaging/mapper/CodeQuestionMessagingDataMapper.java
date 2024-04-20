@@ -8,6 +8,8 @@ import com.backend.programming.learning.system.kafka.code.assessment.code.questi
 import com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 
 public class CodeQuestionMessagingDataMapper {
@@ -18,6 +20,7 @@ public class CodeQuestionMessagingDataMapper {
         CodeQuestion codeQuestion = codeQuestionCreatedEvent.getCodeQuestion();
         return CodeQuestionUpdateRequestAvroModel.newBuilder()
                 .setId(codeQuestion.getId().getValue())
+                .setSagaId(UUID.randomUUID())
                 .setQuestionId(codeQuestion.getQuestionId().getValue())
                 .setConstraints(codeQuestion.getConstraints())
                 .setInputFormat(codeQuestion.getInputFormat())

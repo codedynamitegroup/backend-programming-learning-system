@@ -15,8 +15,6 @@ import java.util.UUID;
 public class CreateCodeQuestionCommand {
     @NotNull
     private final UUID questionId;
-    private final List<TestCase> testCases;
-
     @NotNull
     private final String dslTemplate;
     @NotNull

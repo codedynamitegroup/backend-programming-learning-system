@@ -37,9 +37,6 @@ public class CodeQuestionEntity {
     private String constraints;
     private String failureMessages;
 
-    @OneToMany(mappedBy = "codeQuestion", cascade = CascadeType.ALL)
-    private List<TestCaseEntity> testCases;
-
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;

@@ -5,7 +5,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionCreatedEvent;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.CodeQuestionDataMaper;
 
-import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.message.publisher.codequestion.CodeQuestionCreateMessagePublisher;
+import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.message.publisher.codequestion.CodeQuestionsUpdateMessagePublisher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -15,21 +15,21 @@ import org.springframework.stereotype.Component;
 public class CodeQuestionCreateCommandHandler {
     private final CodeQuestionCreateHelper codeQuestionCreateHelper;
     private final CodeQuestionDataMaper codeQuestionDataMaper;
-    private final CodeQuestionCreateMessagePublisher codeQuestionCreateMessagePublisher;
+    private final CodeQuestionsUpdateMessagePublisher codeQuestionsUpdateMessagePublisher;
 
     public CodeQuestionCreateCommandHandler
             (CodeQuestionCreateHelper codeQuestionCreateHelper,
              CodeQuestionDataMaper codeQuestionDataMaper,
-             CodeQuestionCreateMessagePublisher codeQuestionCreateMessagePublisher) {
+             CodeQuestionsUpdateMessagePublisher codeQuestionsUpdateMessagePublisher) {
         this.codeQuestionCreateHelper = codeQuestionCreateHelper;
         this.codeQuestionDataMaper = codeQuestionDataMaper;
-        this.codeQuestionCreateMessagePublisher = codeQuestionCreateMessagePublisher;
+        this.codeQuestionsUpdateMessagePublisher = codeQuestionsUpdateMessagePublisher;
     }
 
     public CreateCodeQuestionResponse createCodeQuestion(CreateCodeQuestionCommand command){
         CodeQuestionCreatedEvent codeQuestionCreatedEvent
                 = codeQuestionCreateHelper.persistCodeQuestion(command);
-//        codeQuestionCreateMessagePublisher.publish(codeQuestionCreatedEvent);
+//        codeQuestionsUpdateMessagePublisher.publish(codeQuestionCreatedEvent);
         return codeQuestionDataMaper
                 .codeQuestionToCreateCodeQuestionReponse
                         (codeQuestionCreatedEvent.getCodeQuestion()

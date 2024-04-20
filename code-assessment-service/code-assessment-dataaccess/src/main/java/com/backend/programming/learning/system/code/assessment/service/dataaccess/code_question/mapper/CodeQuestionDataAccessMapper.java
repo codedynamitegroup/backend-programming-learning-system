@@ -37,13 +37,9 @@ public class CodeQuestionDataAccessMapper {
                 .outputFormat(codeQuestion.getOutputFormat())
                 .constraints(codeQuestion.getConstraints())
                 .copyState(codeQuestion.getCopyState())
-                .testCases(testCasesToTestCaseEntities(codeQuestion.getTestCases()))
                 .failureMessages(codeQuestion.getFailureMessages() != null ?
                         String.join(CodeQuestion.FAILURE_MESSAGE_DELIMITER, codeQuestion.getFailureMessages()) : "")
                 .build();
-        if(codeQuestionEntity.getTestCases() != null)
-            codeQuestionEntity.getTestCases()
-                    .forEach(testCaseEntity -> testCaseEntity.setCodeQuestion(codeQuestionEntity));
         return codeQuestionEntity;
     }
     public CodeQuestion codeQuestionEntityToCodeQuestion(CodeQuestionEntity codeQuestionEntity){
@@ -56,39 +52,10 @@ public class CodeQuestionDataAccessMapper {
                 .inputFormat(codeQuestionEntity.getInputFormat())
                 .outputFormat(codeQuestionEntity.getOutputFormat())
                 .copyState(codeQuestionEntity.getCopyState())
-                .testCases(testCaseEntitiesToTestCases(codeQuestionEntity.getTestCases()))
                 .failureMessages(codeQuestionEntity.getFailureMessages().isEmpty() ? new ArrayList<>() :
                         new ArrayList<>(Arrays.asList(codeQuestionEntity.getFailureMessages()
                                 .split(CodeQuestion.FAILURE_MESSAGE_DELIMITER))))
                 .build();
         return codeQuestion;
-    }
-
-    private List<TestCase> testCaseEntitiesToTestCases(List<TestCaseEntity> testCaseEntities) {
-        if(testCaseEntities == null) return null;
-        return testCaseEntities.stream()
-                .map(testCaseEntity -> TestCase.builder()
-                        .id(new TestCaseId(testCaseEntity.getId()))
-                        .inputData(testCaseEntity.getInputData())
-                        .outputData(testCaseEntity.getOutputData())
-                        .isSample(testCaseEntity.getIsSample())
-                        .score(testCaseEntity.getScore())
-                        .build())
-                .collect(Collectors.toList());
-    }
-
-    private List<TestCaseEntity> testCasesToTestCaseEntities(List<TestCase> testCases) {
-        if(testCases == null)
-            return null;
-        return testCases.stream()
-                .map(testCase ->
-                        TestCaseEntity.builder()
-                                .id(testCase.getId().getValue())
-                                .inputData(testCase.getInputData())
-                                .outputData(testCase.getOutputData())
-                                .isSample(testCase.getIsSample())
-                                .score(testCase.getScore())
-                                .build()
-                ).collect(Collectors.toList());
     }
 }
