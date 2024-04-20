@@ -2,8 +2,10 @@ package com.backend.programming.learning.system.auth.service.domain.mapper;
 
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.role.CreateRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.role.CreateRoleResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.role.DeleteRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesByOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.role.UpdateRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.role.UpdateRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.organization.OrganizationEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.role.RoleEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
@@ -17,6 +19,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class RoleDataMapper {
@@ -31,23 +34,12 @@ public class RoleDataMapper {
     public Role createRoleCommandToRole(CreateRoleCommand createRoleCommand) {
         return Role.builder()
                 .name(createRoleCommand.getName())
-                .organization(Organization.builder()
-                        .id(new OrganizationId(createRoleCommand.getOrganizationId()))
-                        .build())
-                .createdBy(User
-                        .builder()
-                        .id(new UserId(createRoleCommand.getCreatedBy()))
-                        .build())
-                .updatedBy(User
-                        .builder()
-                        .id(new UserId(createRoleCommand.getCreatedBy()))
-                        .build())
                 .build();
     }
 
     public CreateRoleResponse roleToCreateRoleResponse(Role role, String message) {
         return CreateRoleResponse.builder()
-                .id(role.getId().getValue())
+                .roleId(role.getId().getValue())
                 .name(role.getName())
                 .message(message)
                 .build();
@@ -87,10 +79,20 @@ public class RoleDataMapper {
                 .id(new RoleId(updateRoleCommand.getRoleId()))
                 .name(updateRoleCommand.getName())
                 .description(updateRoleCommand.getDescription())
-                .updatedBy(User
-                        .builder()
-                        .id(new UserId(updateRoleCommand.getUpdatedBy()))
-                        .build())
+                .build();
+    }
+
+    public UpdateRoleResponse roleToUpdateRoleResponse(Role roleUpdated, String message) {
+        return UpdateRoleResponse.builder()
+                .roleId(roleUpdated.getId().getValue())
+                .message(message)
+                .build();
+    }
+
+    public DeleteRoleResponse roleToDeleteRoleResponse(UUID roleId, String message) {
+        return DeleteRoleResponse.builder()
+                .roleId(roleId)
+                .message(message)
                 .build();
     }
 }

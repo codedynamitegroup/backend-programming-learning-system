@@ -1,7 +1,6 @@
 package com.backend.programming.learning.system.course.service.dataaccess.exam.entity;
 
 import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
-import com.backend.programming.learning.system.course.service.dataaccess.course_user.entity.CourseUserEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,13 +14,13 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "exam")
+@Table(name = "exam", schema = "public")
 public class ExamEntity {
     @Id
     @Column(name = "id")
     private UUID id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     private CourseEntity course;
 

@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.ports.input.service.post;
 
 import com.backend.programming.learning.system.dto.method.create.post.CreatePostCommand;
 import com.backend.programming.learning.system.dto.method.create.post.CreatePostResponse;
+import com.backend.programming.learning.system.dto.method.delete.post.DeletePostCommand;
+import com.backend.programming.learning.system.dto.method.delete.post.DeletePostResponse;
 import com.backend.programming.learning.system.dto.method.query.post.QueryAllPostCommand;
 import com.backend.programming.learning.system.dto.method.query.post.QueryAllPostResponse;
 import com.backend.programming.learning.system.dto.method.query.post.QueryPostCommand;
@@ -24,4 +26,7 @@ public interface PostApplicationService {
 
     PostResponseEntity findById(
             @Valid QueryPostCommand createPostCommand);
+
+    DeletePostResponse deleteById(
+            @Valid DeletePostCommand deletePostCommand);
 }

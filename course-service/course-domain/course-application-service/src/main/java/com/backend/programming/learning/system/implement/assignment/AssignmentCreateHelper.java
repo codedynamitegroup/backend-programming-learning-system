@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.implement.assignment;
 
 import com.backend.programming.learning.system.CourseDomainService;
-import com.backend.programming.learning.system.dto.create.assignment.CreateAssignmentCommand;
+import com.backend.programming.learning.system.dto.method.create.assignment.CreateAssignmentCommand;
 import com.backend.programming.learning.system.entity.Assignment;
 import com.backend.programming.learning.system.mapper.assignment.AssignmentDataMapper;
 import com.backend.programming.learning.system.ports.output.repository.AssignmentRepository;

@@ -9,7 +9,7 @@ import java.time.ZonedDateTime;
 import java.util.UUID;
 
 public class Role extends AggregateRoot<RoleId> {
-    private final Organization organization;
+    private Organization organization;
     private String description;
     private String name;
     private ZonedDateTime createdAt;
@@ -61,6 +61,34 @@ public class Role extends AggregateRoot<RoleId> {
 
     public User getUpdatedBy() {
         return updatedBy;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCreatedAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(ZonedDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public void setUpdatedBy(User updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
     }
 
     public static Builder builder() {

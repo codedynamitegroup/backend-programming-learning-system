@@ -16,7 +16,7 @@ public class UpdateUserRoleCommand {
 
     private String name;
 
-    private boolean isActive;
+    private Boolean isActive;
 
     @NotNull
     private final UUID updatedBy;

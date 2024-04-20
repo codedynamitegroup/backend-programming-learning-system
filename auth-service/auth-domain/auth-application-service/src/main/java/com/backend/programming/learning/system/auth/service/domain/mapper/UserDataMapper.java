@@ -2,8 +2,10 @@ package com.backend.programming.learning.system.auth.service.domain.mapper;
 
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class UserDataMapper {
@@ -27,7 +30,7 @@ public class UserDataMapper {
 
     public CreateUserResponse userToCreateUserResponse(User user, String message) {
         return CreateUserResponse.builder()
-                .id(user.getId().getValue())
+                .userId(user.getId().getValue())
                 .email(user.getEmail())
                 .message(message)
                 .build();
@@ -65,13 +68,26 @@ public class UserDataMapper {
     public User updateUserCommandToUser(UpdateUserCommand updateUserCommand) {
         return User.builder()
                 .id(new UserId(updateUserCommand.getUserId()))
-                .email(updateUserCommand.getEmail())
                 .dob(updateUserCommand.getDob())
                 .firstName(updateUserCommand.getFirstName())
                 .lastName(updateUserCommand.getLastName())
                 .phone(updateUserCommand.getPhone())
                 .address(updateUserCommand.getAddress())
                 .avatarUrl(updateUserCommand.getAvatarUrl())
+                .build();
+    }
+
+    public DeleteUserResponse deleteUserResponse(UUID userId, String message) {
+        return DeleteUserResponse.builder()
+                .userId(userId)
+                .message(message)
+                .build();
+    }
+
+    public UpdateUserResponse userToUpdateUserResponse(User userUpdated, String message) {
+        return UpdateUserResponse.builder()
+                .userId(userUpdated.getId().getValue())
+                .message(message)
                 .build();
     }
 }

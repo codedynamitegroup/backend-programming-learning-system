@@ -7,6 +7,8 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.de
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryUserByIdCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.UserCreatedEvent;
@@ -27,19 +29,22 @@ public class UserCommandHandler {
     private final UserDeleteHelper userDeleteHelper;
     private final UserDataMapper userDataMapper;
     private final UserQueryHelper userQueryHelper;
+    private final UserUpdateHelper userUpdateHelper;
     private final UserCreatedMessagePublisher userCreatedMessagePublisher;
     private final UserDeletedMessagePublisher userDeletedMessagePublisher;
 
-    public UserCommandHandler(UserCreateHelper userCreateHelper, UserDeleteHelper userDeleteHelper, UserDataMapper userDataMapper, UserQueryHelper userQueryHelper, UserCreatedMessagePublisher userCreatedMessagePublisher, UserDeletedMessagePublisher userDeletedMessagePublisher) {
+    public UserCommandHandler(UserCreateHelper userCreateHelper, UserDeleteHelper userDeleteHelper, UserDataMapper userDataMapper, UserQueryHelper userQueryHelper, UserUpdateHelper userUpdateHelper, UserCreatedMessagePublisher userCreatedMessagePublisher, UserDeletedMessagePublisher userDeletedMessagePublisher) {
         this.userCreateHelper = userCreateHelper;
         this.userDeleteHelper = userDeleteHelper;
         this.userDataMapper = userDataMapper;
         this.userQueryHelper = userQueryHelper;
+        this.userUpdateHelper = userUpdateHelper;
         this.userCreatedMessagePublisher = userCreatedMessagePublisher;
         this.userDeletedMessagePublisher = userDeletedMessagePublisher;
     }
 
 
+    @Transactional
     public CreateUserResponse createUser(CreateUserCommand createOrderCommand) {
         UserCreatedEvent userCreatedEvent = userCreateHelper.persistUser(createOrderCommand);
         log.info("User is created with id: {}", userCreatedEvent.getUser().getId().getValue());
@@ -62,14 +67,20 @@ public class UserCommandHandler {
         return userDataMapper.usersToQueryAllUsers(users);
     }
 
+    @Transactional
+    public UpdateUserResponse updateUser(UpdateUserCommand updateUserCommand) {
+        User userUpdated = userUpdateHelper.persistUser(updateUserCommand);
+        log.info("User is updated with id: {}", userUpdated.getId().getValue());
+        return userDataMapper.userToUpdateUserResponse(userUpdated, "User updated successfully");
+    }
 
+
+    @Transactional
     public DeleteUserResponse deleteUser(DeleteUserCommand deleteUserCommand) {
         UserDeletedEvent userDeletedEvent = userDeleteHelper.deleteUser(deleteUserCommand);
         log.info("User is deleted with id: {}", deleteUserCommand.getUserId());
         userDeletedMessagePublisher.publish(userDeletedEvent);
-        return DeleteUserResponse.builder()
-                .userId(deleteUserCommand.getUserId())
-                .message("User deleted successfully")
-                .build();
+        return userDataMapper.deleteUserResponse(deleteUserCommand.getUserId(),
+                "User deleted successfully");
     }
 }

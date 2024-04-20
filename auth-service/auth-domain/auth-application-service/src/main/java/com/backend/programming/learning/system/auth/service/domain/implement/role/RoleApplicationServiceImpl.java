@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.de
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesByOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryRoleByIdCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesByOrganizationResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.role.UpdateRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.role.UpdateRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.role.RoleEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.RoleApplicationService;
@@ -41,8 +42,8 @@ class RoleApplicationServiceImpl implements RoleApplicationService {
     }
 
     @Override
-    public UpdateRoleResponse updateRole(CreateRoleCommand createRoleCommand) {
-        return null;
+    public UpdateRoleResponse updateRole(UpdateRoleCommand updateRoleCommand) {
+        return roleCommandHandler.updateRole(updateRoleCommand);
     }
 
     @Override

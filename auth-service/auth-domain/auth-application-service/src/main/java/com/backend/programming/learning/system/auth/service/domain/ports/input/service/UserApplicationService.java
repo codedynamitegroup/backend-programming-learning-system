@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.de
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryUserByIdCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 
@@ -16,6 +17,6 @@ public interface UserApplicationService {
     CreateUserResponse createUser(@Valid CreateUserCommand createUserCommand);
     UserEntityResponse findUserById(@Valid QueryUserByIdCommand queryUserCommand);
     QueryAllUsersResponse findAllUsers(QueryAllUsersCommand queryAllUsersCommand);
-    UpdateUserResponse updateUser(@Valid CreateUserCommand createUserCommand);
+    UpdateUserResponse updateUser(@Valid UpdateUserCommand updateUserCommand);
     DeleteUserResponse deleteUserById(@Valid DeleteUserCommand deleteUserCommand);
 }

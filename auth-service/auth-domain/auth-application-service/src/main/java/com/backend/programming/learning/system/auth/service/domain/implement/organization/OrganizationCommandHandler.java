@@ -61,20 +61,16 @@ public class OrganizationCommandHandler {
     public UpdateOrganizationResponse updateOrganization(UpdateOrganizationCommand updateOrganizationCommand) {
         Organization organizationUpdated = organizationUpdateHelper.persistOrganization(updateOrganizationCommand);
         log.info("Organization is updated with id: {}", organizationUpdated.getId().getValue());
-        return UpdateOrganizationResponse.builder()
-                .organizationId(organizationUpdated.getId().getValue())
-                .message("Organization updated successfully")
-                .build();
+        return organizationDataMapper.organizationToUpdateOrganizationResponse(organizationUpdated,
+                "Organization updated successfully");
     }
 
     @Transactional
     public DeleteOrganizationResponse deleteOrganization(DeleteOrganizationCommand deleteOrganizationCommand) {
         organizationDeleteHelper.deleteOrganization(deleteOrganizationCommand);
         log.info("Organization is deleted with id: {}", deleteOrganizationCommand.getOrganizationId());
-        return DeleteOrganizationResponse.builder()
-                .organizationId(deleteOrganizationCommand.getOrganizationId())
-                .message("Organization deleted successfully")
-                .build();
+        return organizationDataMapper.deleteOrganizationResponse(deleteOrganizationCommand.getOrganizationId(),
+                "Organization deleted successfully");
     }
 
 }

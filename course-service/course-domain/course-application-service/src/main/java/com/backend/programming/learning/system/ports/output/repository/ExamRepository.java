@@ -13,4 +13,6 @@ public interface ExamRepository {
     Exam findBy(ExamId examId);
 
     Page<Exam> findAll(String search, Integer pageNo, Integer pageSize);
+
+    void deleteById(ExamId examId);
 }

@@ -5,6 +5,8 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.cr
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user_role.DeleteUserRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user_role.DeleteUserRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user_role.QueryUserRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user_role.UpdateUserRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user_role.UpdateUserRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user_role.UserRoleEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.UserRole;
 import com.backend.programming.learning.system.auth.service.domain.mapper.UserRoleDataMapper;
@@ -20,14 +22,17 @@ public class UserRoleCommandHandler {
     private final UserRoleDeleteHelper userRoleDeleteHelper;
     private final UserRoleDataMapper userRoleDataMapper;
     private final UserRoleQueryHelper userRoleQueryHelper;
+    private final UserRoleUpdateHelper userRoleUpdateHelper;
 
-    public UserRoleCommandHandler(UserRoleCreateHelper userRoleCreateHelper, UserRoleDeleteHelper userRoleDeleteHelper, UserRoleDataMapper userRoleDataMapper, UserRoleQueryHelper userRoleQueryHelper) {
+    public UserRoleCommandHandler(UserRoleCreateHelper userRoleCreateHelper, UserRoleDeleteHelper userRoleDeleteHelper, UserRoleDataMapper userRoleDataMapper, UserRoleQueryHelper userRoleQueryHelper, UserRoleUpdateHelper userRoleUpdateHelper) {
         this.userRoleCreateHelper = userRoleCreateHelper;
         this.userRoleDeleteHelper = userRoleDeleteHelper;
         this.userRoleDataMapper = userRoleDataMapper;
         this.userRoleQueryHelper = userRoleQueryHelper;
+        this.userRoleUpdateHelper = userRoleUpdateHelper;
     }
 
+    @Transactional
     public CreateUserRoleResponse createUserRole(CreateUserRoleCommand createUserRoleCommand) {
         UserRole userRoleCreated = userRoleCreateHelper.persistUserRole(createUserRoleCommand);
         log.info("User role is created with id: {}", userRoleCreated.getId().getValue());
@@ -43,14 +48,20 @@ public class UserRoleCommandHandler {
         return userRoleDataMapper.userRoleToUserRoleResponse(userRole);
     }
 
+    @Transactional
+    public UpdateUserRoleResponse updateUserRole(UpdateUserRoleCommand updateUserRoleCommand) {
+        UserRole userRoleUpdated = userRoleUpdateHelper.persistUserRole(updateUserRoleCommand);
+        log.info("User role is updated with id: {}", userRoleUpdated.getId().getValue());
+        return userRoleDataMapper.userRoleToUpdateUserRoleResponse(userRoleUpdated,
+                "User role updated successfully");
+    }
+
+    @Transactional
     public DeleteUserRoleResponse deleteUserRole(DeleteUserRoleCommand deleteUserRoleCommand) {
         userRoleDeleteHelper.deleteUserRole(deleteUserRoleCommand);
         log.info("User role is deleted with role id: {} and user id: {}",
                 deleteUserRoleCommand.getRoleId(), deleteUserRoleCommand.getUserId());
-        return DeleteUserRoleResponse.builder()
-                .userId(deleteUserRoleCommand.getUserId())
-                .roleId(deleteUserRoleCommand.getRoleId())
-                .message("User role deleted successfully")
-                .build();
+        return userRoleDataMapper.deleteUserRoleResponse(deleteUserRoleCommand.getRoleId(), deleteUserRoleCommand.getUserId(),
+                "User role deleted successfully");
     }
 }

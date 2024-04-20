@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.implement.question;
 
 import com.backend.programming.learning.system.dto.method.create.question.CreateQuestionCommand;
 import com.backend.programming.learning.system.dto.method.create.question.CreateQuestionResponse;
+import com.backend.programming.learning.system.dto.method.delete.question.DeleteQuestionCommand;
 import com.backend.programming.learning.system.dto.method.query.question.QueryAllQuestionCommand;
 import com.backend.programming.learning.system.dto.method.query.question.QueryAllQuestionResponse;
 import com.backend.programming.learning.system.dto.method.query.question.QueryQuestionCommand;
@@ -40,5 +41,10 @@ public class QuestionApplicationServiceImpl implements QuestionApplicationServic
     @Override
     public QuestionResponseEntity findById(QueryQuestionCommand queryQuestionCommand) {
         return questionCommandHandler.findById(queryQuestionCommand);
+    }
+
+    @Override
+    public void deleteById(DeleteQuestionCommand deleteQuestionCommand) {
+        questionCommandHandler.deleteById(deleteQuestionCommand);
     }
 }

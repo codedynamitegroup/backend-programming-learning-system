@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.auth.service.application.rest.co
 
 import com.backend.programming.learning.system.dto.method.create.course.CreateCourseCommand;
 import com.backend.programming.learning.system.dto.method.create.course.CreateCourseResponse;
+import com.backend.programming.learning.system.dto.method.delete.course.DeleteCourseCommand;
+import com.backend.programming.learning.system.dto.method.delete.course.DeleteCourseResponse;
 import com.backend.programming.learning.system.dto.method.query.course.QueryAllCourseCommand;
 import com.backend.programming.learning.system.dto.method.query.course.QueryAllCourseResponse;
 import com.backend.programming.learning.system.dto.method.query.course.QueryCourseCommand;
@@ -11,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,6 +70,13 @@ public class CourseController {
         log.info("Getting course with id: {}", courseId);
         QueryCourseCommand queryCourseCommand = QueryCourseCommand.builder().courseId(courseId).build();
         CourseResponseEntity response = courseApplicationService.findBy(queryCourseCommand);
+        return ResponseEntity.ok(response);
+    }
+    @DeleteMapping("/{courseId}")
+    public ResponseEntity<DeleteCourseResponse> deleteCourse(@PathVariable UUID courseId) {
+        log.info("Deleting course with id: {}", courseId);
+        DeleteCourseCommand deleteCourseCommand = DeleteCourseCommand.builder().courseId(courseId).build();
+        DeleteCourseResponse response = courseApplicationService.deleteCourse(deleteCourseCommand);
         return ResponseEntity.ok(response);
     }
 }

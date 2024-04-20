@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.auth.service.application.rest.po
 
 import com.backend.programming.learning.system.dto.method.create.post.CreatePostCommand;
 import com.backend.programming.learning.system.dto.method.create.post.CreatePostResponse;
+import com.backend.programming.learning.system.dto.method.delete.post.DeletePostCommand;
+import com.backend.programming.learning.system.dto.method.delete.post.DeletePostResponse;
 import com.backend.programming.learning.system.dto.method.query.post.QueryAllPostCommand;
 import com.backend.programming.learning.system.dto.method.query.post.QueryAllPostResponse;
 import com.backend.programming.learning.system.dto.method.query.post.QueryPostCommand;
@@ -10,6 +12,7 @@ import com.backend.programming.learning.system.ports.input.service.post.PostAppl
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,6 +66,16 @@ public class PostController {
                 .postId(postId)
                 .build();
         PostResponseEntity response = postApplicationService.findById(createPostCommand);
+        return ResponseEntity.ok(response);
+    }
+    @DeleteMapping("/{postId}")
+    public ResponseEntity<DeletePostResponse> deleteById(
+            @PathVariable UUID postId) {
+        log.info("Deleting post by id: {}", postId);
+        DeletePostCommand deletePostCommand = DeletePostCommand.builder()
+                .postId(postId)
+                .build();
+        DeletePostResponse response = postApplicationService.deleteById(deletePostCommand);
         return ResponseEntity.ok(response);
     }
 }

@@ -7,6 +7,8 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.de
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.organization.QueryAllOrganizationsCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.organization.QueryAllOrganizationsResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.organization.QueryOrganizationByIdCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.organization.UpdateOrganizationCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.organization.UpdateOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.organization.OrganizationEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.OrganizationApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -56,6 +58,29 @@ public class OrganizationController {
                 organizationApplicationService.findOrganizationById(QueryOrganizationByIdCommand.builder().organizationId(id).build());
        log.info("Returning organization with id: {}", queryOrganizationResponse.getOrganizationId());
        return  ResponseEntity.ok(queryOrganizationResponse);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UpdateOrganizationResponse> updateOrganizationById(
+            @PathVariable UUID id,
+            @RequestBody UpdateOrganizationCommand updateOrganizationCommand
+    ) {
+        log.info("Updating organization with id: {}", id);
+        UpdateOrganizationResponse updateOrganizationResponse = organizationApplicationService.updateOrganization(
+                UpdateOrganizationCommand.builder()
+                        .organizationId(id)
+                        .email(updateOrganizationCommand.getEmail())
+                        .name(updateOrganizationCommand.getName())
+                        .description(updateOrganizationCommand.getDescription())
+                        .phone(updateOrganizationCommand.getPhone())
+                        .address(updateOrganizationCommand.getAddress())
+                        .apiKey(updateOrganizationCommand.getApiKey())
+                        .moodleUrl(updateOrganizationCommand.getMoodleUrl())
+                        .updatedBy(updateOrganizationCommand.getUpdatedBy())
+                        .build()
+        );
+        log.info("Organization updated with id: {}", id);
+        return ResponseEntity.ok(updateOrganizationResponse);
     }
 
     @DeleteMapping("/{id}")

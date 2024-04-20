@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.implement.post;
 
 import com.backend.programming.learning.system.dto.method.create.post.CreatePostCommand;
 import com.backend.programming.learning.system.dto.method.create.post.CreatePostResponse;
+import com.backend.programming.learning.system.dto.method.delete.post.DeletePostCommand;
+import com.backend.programming.learning.system.dto.method.delete.post.DeletePostResponse;
 import com.backend.programming.learning.system.dto.method.query.post.QueryAllPostCommand;
 import com.backend.programming.learning.system.dto.method.query.post.QueryAllPostResponse;
 import com.backend.programming.learning.system.dto.method.query.post.QueryPostCommand;
@@ -26,6 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class PostCommandHandler {
     private final PostCreateHelper postCreateHelper;
     private final PostQueryHelper postQueryHelper;
+    private final PostDeleteHelper postDeleteHelper;
 
     private final PostDataMapper postDataMapper;
 
@@ -48,5 +51,11 @@ public class PostCommandHandler {
         Post post = postQueryHelper.findById(createPostCommand);
         log.info("Found post with id: {}", post.getId());
         return postDataMapper.postToPostResponseEntity(post);
+    }
+
+    @Transactional
+    public DeletePostResponse deleteById(DeletePostCommand deletePostCommand) {
+        postDeleteHelper.deleteById(deletePostCommand);
+        return DeletePostResponse.builder().message("Post deleted successfully").build();
     }
 }

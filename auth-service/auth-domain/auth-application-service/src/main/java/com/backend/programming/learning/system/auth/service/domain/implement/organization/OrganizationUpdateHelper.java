@@ -25,12 +25,10 @@ import java.util.UUID;
 @Component
 public class OrganizationUpdateHelper {
     private final OrganizationRepository organizationRepository;
-    private final OrganizationDataMapper organizationDataMapper;
     private final UserRepository userRepository;
 
-    public OrganizationUpdateHelper(OrganizationRepository organizationRepository, OrganizationDataMapper organizationDataMapper, UserRepository userRepository) {
+    public OrganizationUpdateHelper(OrganizationRepository organizationRepository, UserRepository userRepository) {
         this.organizationRepository = organizationRepository;
-        this.organizationDataMapper = organizationDataMapper;
         this.userRepository = userRepository;
     }
 

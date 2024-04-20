@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.auth.service.application.rest.qu
 
 import com.backend.programming.learning.system.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.dto.method.create.question.CreateQuestionCommand;
+import com.backend.programming.learning.system.dto.method.delete.question.DeleteQuestionCommand;
 import com.backend.programming.learning.system.dto.method.query.question.QueryAllQuestionCommand;
 import com.backend.programming.learning.system.dto.method.query.question.QueryAllQuestionResponse;
 import com.backend.programming.learning.system.dto.method.query.question.QueryQuestionCommand;
@@ -10,6 +11,7 @@ import com.backend.programming.learning.system.ports.input.service.question.Ques
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,5 +65,12 @@ public class QuestionController {
         QueryQuestionCommand queryQuestionCommand = QueryQuestionCommand.builder().questionId(questionId).build();
         QuestionResponseEntity response = questionApplicationService.findById(queryQuestionCommand);
         return ResponseEntity.ok(response);
+    }
+    @DeleteMapping("/{questionId}")
+    public ResponseEntity<String> deleteById(@PathVariable UUID questionId) {
+        log.info("Delete question by id: {}", questionId);
+        DeleteQuestionCommand deleteQuestionCommand = DeleteQuestionCommand.builder().questionId(questionId).build();
+        questionApplicationService.deleteById(deleteQuestionCommand);
+        return ResponseEntity.ok("Question deleted successfully");
     }
 }

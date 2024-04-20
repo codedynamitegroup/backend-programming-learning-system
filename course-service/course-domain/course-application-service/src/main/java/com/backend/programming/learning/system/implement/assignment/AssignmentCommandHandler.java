@@ -1,13 +1,13 @@
 package com.backend.programming.learning.system.implement.assignment;
 
-import com.backend.programming.learning.system.dto.create.assignment.CreateAssignmentCommand;
-import com.backend.programming.learning.system.dto.create.assignment.CreateAssignmentResponse;
-import com.backend.programming.learning.system.dto.delete.assignment.DeleteAssignmentCommand;
-import com.backend.programming.learning.system.dto.delete.assignment.DeleteAssignmentResponse;
-import com.backend.programming.learning.system.dto.query.assignment.QueryAllAssignmentsCommand;
-import com.backend.programming.learning.system.dto.query.assignment.QueryAllAssignmentsResponse;
-import com.backend.programming.learning.system.dto.query.assignment.QueryAssignmentCommand;
-import com.backend.programming.learning.system.dto.query.assignment.QueryAssignmentResponse;
+import com.backend.programming.learning.system.dto.method.create.assignment.CreateAssignmentCommand;
+import com.backend.programming.learning.system.dto.method.create.assignment.CreateAssignmentResponse;
+import com.backend.programming.learning.system.dto.method.delete.assignment.DeleteAssignmentCommand;
+import com.backend.programming.learning.system.dto.method.delete.assignment.DeleteAssignmentResponse;
+import com.backend.programming.learning.system.dto.method.query.assignment.QueryAllAssignmentsCommand;
+import com.backend.programming.learning.system.dto.method.query.assignment.QueryAllAssignmentsResponse;
+import com.backend.programming.learning.system.dto.method.query.assignment.QueryAssignmentCommand;
+import com.backend.programming.learning.system.dto.method.query.assignment.QueryAssignmentResponse;
 import com.backend.programming.learning.system.dto.update.assignment.UpdateAssignmentCommand;
 import com.backend.programming.learning.system.dto.update.assignment.UpdateAssignmentResponse;
 import com.backend.programming.learning.system.entity.Assignment;

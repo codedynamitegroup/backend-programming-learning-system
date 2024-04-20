@@ -11,4 +11,6 @@ public interface PostRepository {
     Page<Post> findAll(Integer pageNo, Integer pageSize);
 
     Post findById(UUID postId);
+
+    void deleteById(UUID postId);
 }

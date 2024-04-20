@@ -13,10 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class UpdateUserResponse {
     @NotNull
-    private UUID id;
-    @NotNull
-    @Email
-    private final String email;
+    private UUID userId;
 
     @NotNull
     private final String message;
