@@ -4,8 +4,12 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.calendarevent.CreateCalendarEventResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.calendarevent.DeleteCalendarEventCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.calendarevent.DeleteCalendarEventResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.certificatecourse.DeleteCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.certificatecourse.DeleteCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.calendarevent.QueryAllCalendarEventsCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.calendarevent.QueryAllCalendarEventsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryCertificateCourseCommand;
@@ -30,11 +34,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class CalendarEventCommandHandler {
     private final CalendarEventCreateHelper calendarEventCreateHelper;
+    private final CalendarEventQueryHelper calendarEventQueryHelper;
+    private final CalendarEventDeleteHelper calendarEventDeleteHelper;
     private final CalendarEventDataMapper calendarEventDataMapper;
 
     public CalendarEventCommandHandler(CalendarEventCreateHelper calendarEventCreateHelper,
+                                       CalendarEventQueryHelper calendarEventQueryHelper,
+                                       CalendarEventDeleteHelper calendarEventDeleteHelper,
                                        CalendarEventDataMapper calendarEventDataMapper) {
         this.calendarEventCreateHelper = calendarEventCreateHelper;
+        this.calendarEventQueryHelper = calendarEventQueryHelper;
+        this.calendarEventDeleteHelper = calendarEventDeleteHelper;
         this.calendarEventDataMapper = calendarEventDataMapper;
     }
 
@@ -48,6 +58,29 @@ public class CalendarEventCommandHandler {
 
         return calendarEventDataMapper.calendarEventToCreateCalendarEventResponse(calendarEvent,
                 "Calendar event created successfully");
+    }
+
+    @Transactional(readOnly = true)
+    public QueryAllCalendarEventsResponse queryAllCalendarEvents(
+            QueryAllCalendarEventsCommand queryAllCalendarEventsCommand) {
+        Page<CalendarEvent> calendarEvents = calendarEventQueryHelper
+                .findAllCalendarEvents(queryAllCalendarEventsCommand);
+
+        log.info("Returning all calendar events: {}", calendarEvents);
+
+        return calendarEventDataMapper.pageCalendarEventToQueryAllCalendarEventsResponse(calendarEvents);
+    }
+
+    @Transactional
+    public DeleteCalendarEventResponse deleteCalendarEvent(DeleteCalendarEventCommand deleteCalendarEventCommand) {
+        calendarEventDeleteHelper.deleteCalendarEventById(deleteCalendarEventCommand.getCalendarEventId());
+
+        log.info("Calendar event deleted with id: {}", deleteCalendarEventCommand.getCalendarEventId());
+
+        return DeleteCalendarEventResponse.builder()
+                .calendarEventId(deleteCalendarEventCommand.getCalendarEventId())
+                .message("Calendar event deleted successfully")
+                .build();
     }
 
 
