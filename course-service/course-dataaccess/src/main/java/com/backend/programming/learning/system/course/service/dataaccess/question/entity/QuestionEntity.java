@@ -22,7 +22,7 @@ public class QuestionEntity {
     @Column(name = "id")
     private UUID id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "org_id", referencedColumnName = "id")
     private OrganizationEntity organization;
 
@@ -36,11 +36,11 @@ public class QuestionEntity {
 //    private ZonedDateTime createdAt;
 //    private ZonedDateTime updatedAt;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "created_by", referencedColumnName = "id")
     private UserEntity createdBy;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "updated_by", referencedColumnName = "id")
     private UserEntity updatedBy;
 

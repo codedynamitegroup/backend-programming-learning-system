@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.dataaccess.exam.adapter;
 
+import com.backend.programming.learning.system.course.service.dataaccess.exam.entity.ExamEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.exam.mapper.ExamDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.exam.repository.ExamJpaRepository;
 import com.backend.programming.learning.system.entity.Exam;
@@ -8,8 +9,6 @@ import com.backend.programming.learning.system.valueobject.ExamId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public class ExamRepositoryImpl implements ExamRepository {
@@ -51,6 +50,8 @@ public class ExamRepositoryImpl implements ExamRepository {
 
     @Override
     public void deleteById(ExamId examId) {
-        examJpaRepository.deleteById(examId.getValue());
+        ExamEntity examEntity = examJpaRepository.findById(examId.getValue())
+                .orElseThrow(() -> new RuntimeException("Exam not found"));
+        examJpaRepository.delete(examEntity);
     }
 }
