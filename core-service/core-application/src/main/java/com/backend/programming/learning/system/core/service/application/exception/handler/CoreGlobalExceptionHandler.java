@@ -134,5 +134,17 @@ public class CoreGlobalExceptionHandler extends GlobalExceptionHandler {
                 .message(notificationNotFoundException.getMessage())
                 .build();
     }
+
+    @ResponseBody
+    @ExceptionHandler(value = {CalendarEventNotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorDTO handleException(CalendarEventNotFoundException calendarEventNotFoundException) {
+        log.error(calendarEventNotFoundException.getMessage(), calendarEventNotFoundException);
+        return ErrorDTO.builder()
+                .status(HttpStatus.NOT_FOUND.value())
+                .code(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .message(calendarEventNotFoundException.getMessage())
+                .build();
+    }
 }
 
