@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.dto.query.assignment;
+package com.backend.programming.learning.system.dto.method.query.assignment;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +10,8 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class QueryAssignmentCommand {
-    @NotNull
-    private final UUID assignmentId;
+public class QueryAllAssignmentsCommand {
+
+    private final UUID courseId;
+
 }

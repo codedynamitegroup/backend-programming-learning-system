@@ -49,16 +49,4 @@ public class AssignmentRepositoryImpl implements AssignmentRepository {
 
     }
 
-    @Override
-    public int updateAssignment(Assignment assignment) {
-        return assignmentJpaRepository.updateAssignmentById(assignment.getTitle(),
-                assignment.getIntro(),
-                assignment.getScores(),
-                assignment.getMaxScores(),
-                assignment.getTime_close(),
-                assignment.getTime_limit(),
-                assignment.getType(),
-                assignment.getVisible(),
-                assignment.getId().getValue());
-    }
 }

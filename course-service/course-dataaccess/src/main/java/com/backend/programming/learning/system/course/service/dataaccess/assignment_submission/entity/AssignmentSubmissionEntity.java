@@ -15,18 +15,18 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "assignment_submission")
+@Table(name = "submission_assignment")
 @Entity
 public class AssignmentSubmissionEntity {
     @Id
     @Column(name = "id")
     private UUID id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "assignment_id", referencedColumnName = "id")
     private AssignmentEntity assignment;
 

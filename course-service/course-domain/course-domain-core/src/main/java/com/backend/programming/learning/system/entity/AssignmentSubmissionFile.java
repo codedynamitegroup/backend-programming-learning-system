@@ -2,15 +2,15 @@ package com.backend.programming.learning.system.entity;
 
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.valueobject.AssignmentSubmissionFileId;
-import com.backend.programming.learning.system.valueobject.AssignmentSubmissionId;
+import com.backend.programming.learning.system.valueobject.SubmissionAssignmentId;
 
 public class AssignmentSubmissionFile extends AggregateRoot<AssignmentSubmissionFileId> {
-    private AssignmentSubmissionId assignmentSubmissionId;
+    private SubmissionAssignmentId submissionAssignmentId;
     private Integer num_file;
 
     private AssignmentSubmissionFile(Builder builder) {
         super.setId(builder.assignmentSubmissionFileId);
-        assignmentSubmissionId = builder.assignmentSubmissionId;
+        submissionAssignmentId = builder.submissionAssignmentId;
         num_file = builder.num_file;
     }
 
@@ -18,8 +18,8 @@ public class AssignmentSubmissionFile extends AggregateRoot<AssignmentSubmission
         return new Builder();
     }
 
-    public AssignmentSubmissionId getAssignmentSubmissionId() {
-        return assignmentSubmissionId;
+    public SubmissionAssignmentId getAssignmentSubmissionId() {
+        return submissionAssignmentId;
     }
 
     public Integer getNum_file() {
@@ -28,7 +28,7 @@ public class AssignmentSubmissionFile extends AggregateRoot<AssignmentSubmission
 
     public static final class Builder {
         private AssignmentSubmissionFileId assignmentSubmissionFileId;
-        private AssignmentSubmissionId assignmentSubmissionId;
+        private SubmissionAssignmentId submissionAssignmentId;
         private Integer num_file;
 
         private Builder() {
@@ -43,8 +43,8 @@ public class AssignmentSubmissionFile extends AggregateRoot<AssignmentSubmission
             return this;
         }
 
-        public Builder assignmentSubmissionId(AssignmentSubmissionId val) {
-            assignmentSubmissionId = val;
+        public Builder assignmentSubmissionId(SubmissionAssignmentId val) {
+            submissionAssignmentId = val;
             return this;
         }
 

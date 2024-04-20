@@ -1,13 +1,13 @@
 package com.backend.programming.learning.system.mapper.assignment;
 
 
-import com.backend.programming.learning.system.dto.create.assignment.CreateAssignmentCommand;
-import com.backend.programming.learning.system.dto.create.assignment.CreateAssignmentResponse;
-import com.backend.programming.learning.system.dto.delete.assignment.DeleteAssignmentResponse;
-import com.backend.programming.learning.system.dto.query.assignment.QueryAllAssignmentsResponse;
-import com.backend.programming.learning.system.dto.query.assignment.QueryAssignmentResponse;
+import com.backend.programming.learning.system.dto.method.create.assignment.CreateAssignmentCommand;
+import com.backend.programming.learning.system.dto.method.create.assignment.CreateAssignmentResponse;
+import com.backend.programming.learning.system.dto.method.delete.assignment.DeleteAssignmentResponse;
+import com.backend.programming.learning.system.dto.method.query.assignment.QueryAllAssignmentsResponse;
+import com.backend.programming.learning.system.dto.method.query.assignment.QueryAssignmentResponse;
 import com.backend.programming.learning.system.entity.Assignment;
-import org.springframework.data.domain.Page;
+import com.backend.programming.learning.system.valueobject.Type;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class AssignmentDataMapper {
                 .time_open(createAssignmentCommand.getTimeOpen())
                 .time_close(createAssignmentCommand.getTimeClose())
                 .time_limit(createAssignmentCommand.getTimeLimit())
-                .type(createAssignmentCommand.getType())
+                .type(Type.valueOf(createAssignmentCommand.getType().toUpperCase()))
                 .visible(createAssignmentCommand.getVisible())
                 .build();
     }
@@ -48,7 +48,7 @@ public class AssignmentDataMapper {
                 .timeOpen(assignment.getTime_open())
                 .timeClose(assignment.getTime_close())
                 .timeLimit(assignment.getTime_limit())
-                .type(assignment.getType())
+                .type(assignment.getType().name())
                 .visible(assignment.getVisible())
                 .build();
     }

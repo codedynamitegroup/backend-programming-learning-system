@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.entity;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.valueobject.AssignmentId;
 import com.backend.programming.learning.system.valueobject.CourseId;
+import com.backend.programming.learning.system.valueobject.Type;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
@@ -18,7 +19,7 @@ public class Assignment extends AggregateRoot<AssignmentId> {
     private final ZonedDateTime time_open;
     private ZonedDateTime time_close;
     private ZonedDateTime time_limit;
-    private String type;
+    private Type type;
     private Boolean visible;
 
     private Assignment(Builder builder) {
@@ -71,7 +72,7 @@ public class Assignment extends AggregateRoot<AssignmentId> {
         return time_limit;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
@@ -107,7 +108,7 @@ public class Assignment extends AggregateRoot<AssignmentId> {
         this.time_limit = time_limit;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
@@ -131,7 +132,7 @@ public class Assignment extends AggregateRoot<AssignmentId> {
         private ZonedDateTime time_open;
         private ZonedDateTime time_close;
         private ZonedDateTime time_limit;
-        private String type;
+        private Type type;
         private Boolean visible;
 
         private Builder() {
@@ -186,7 +187,7 @@ public class Assignment extends AggregateRoot<AssignmentId> {
             return this;
         }
 
-        public Builder type(String val) {
+        public Builder type(Type val) {
             type = val;
             return this;
         }

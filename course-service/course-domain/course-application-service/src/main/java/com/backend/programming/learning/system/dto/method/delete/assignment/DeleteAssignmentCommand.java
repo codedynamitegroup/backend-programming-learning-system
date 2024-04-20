@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.dto.delete.assignment;
+package com.backend.programming.learning.system.dto.method.delete.assignment;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

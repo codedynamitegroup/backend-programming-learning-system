@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.entity.Assignment;
 import com.backend.programming.learning.system.exception.AssignmentNotFoundException;
 import com.backend.programming.learning.system.ports.output.repository.AssignmentRepository;
 import com.backend.programming.learning.system.valueobject.AssignmentId;
+import com.backend.programming.learning.system.valueobject.Type;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,7 +58,7 @@ public class AssignmentUpdateHelper {
 
         if(updateAssignmentCommand.getType() != null)
         {
-            assignment.setType(updateAssignmentCommand.getType());
+            assignment.setType(Type.valueOf(updateAssignmentCommand.getType().toUpperCase()));
         }
 
         if(updateAssignmentCommand.getVisible() != null)
@@ -78,9 +79,9 @@ public class AssignmentUpdateHelper {
 
     private void updateAssignment(Assignment assignment)
     {
-        int updatedRows = assignmentRepository.updateAssignment(assignment);
+       Assignment updateedAssignment = assignmentRepository.saveAssignment(assignment);
 
-        if (updatedRows == 0) {
+        if (updateedAssignment == null) {
             log.error("Failed to update assignment with id: {}", assignment.getId());
             throw new AssignmentNotFoundException("Failed to update assignment with id: " + assignment.getId());
         }

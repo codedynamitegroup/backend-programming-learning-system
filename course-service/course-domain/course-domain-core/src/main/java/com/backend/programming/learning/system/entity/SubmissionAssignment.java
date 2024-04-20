@@ -3,39 +3,56 @@ package com.backend.programming.learning.system.entity;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import com.backend.programming.learning.system.valueobject.AssignmentId;
-import com.backend.programming.learning.system.valueobject.AssignmentSubmissionId;
+import com.backend.programming.learning.system.valueobject.SubmissionAssignmentId;
 
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
-public class AssignmentSubmission extends AggregateRoot<AssignmentSubmissionId> {
+public class SubmissionAssignment extends AggregateRoot<SubmissionAssignmentId> {
 
-    private UserId userId;
-    private AssignmentId assignmentId;
+    private User user;
+    private Assignment assignment;
     private Integer pass_status;
     private Float grade;
     private String content;
     private ZonedDateTime submittedAt;
 
-    private AssignmentSubmission(Builder builder) {
-        super.setId(builder.assignmentSubmissionId);
-        userId = builder.userId;
-        assignmentId = builder.assignmentId;
+    private SubmissionAssignment(Builder builder) {
+        super.setId(builder.submissionAssignmentId);
+        user = builder.user;
+        assignment = builder.assignment;
         pass_status = builder.pass_status;
         grade = builder.grade;
         content = builder.content;
         submittedAt = builder.submittedAt;
     }
 
+    public void setPass_status(Integer pass_status) {
+        this.pass_status = pass_status;
+    }
+
+    public void setGrade(Float grade) {
+        this.grade = grade;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setSubmittedAt(ZonedDateTime submittedAt) {
+        this.submittedAt = submittedAt;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
-    public UserId getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public AssignmentId getAssignmentId() {
-        return assignmentId;
+    public Assignment getAssignment() {
+        return assignment;
     }
 
     public Integer getPass_status() {
@@ -54,10 +71,22 @@ public class AssignmentSubmission extends AggregateRoot<AssignmentSubmissionId> 
         return submittedAt;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setAssignment(Assignment assignment) {
+        this.assignment = assignment;
+    }
+
+    public void initializeAssignmentSubmission() {
+        setId(new SubmissionAssignmentId(UUID.randomUUID()));
+    }
+
     public static final class Builder {
-        private AssignmentSubmissionId assignmentSubmissionId;
-        private UserId userId;
-        private AssignmentId assignmentId;
+        private SubmissionAssignmentId submissionAssignmentId;
+        private User user;
+        private Assignment assignment;
         private Integer pass_status;
         private Float grade;
         private String content;
@@ -71,18 +100,18 @@ public class AssignmentSubmission extends AggregateRoot<AssignmentSubmissionId> 
             return new Builder();
         }
 
-        public Builder id(AssignmentSubmissionId val) {
-            assignmentSubmissionId = val;
+        public Builder id(SubmissionAssignmentId val) {
+            submissionAssignmentId = val;
             return this;
         }
 
-        public Builder userId(UserId val) {
-            userId = val;
+        public Builder user(User val) {
+            user = val;
             return this;
         }
 
-        public Builder assignmentId(AssignmentId val) {
-            assignmentId = val;
+        public Builder assignment(Assignment val) {
+            assignment = val;
             return this;
         }
 
@@ -106,8 +135,8 @@ public class AssignmentSubmission extends AggregateRoot<AssignmentSubmissionId> 
             return this;
         }
 
-        public AssignmentSubmission build() {
-            return new AssignmentSubmission(this);
+        public SubmissionAssignment build() {
+            return new SubmissionAssignment(this);
         }
     }
 }

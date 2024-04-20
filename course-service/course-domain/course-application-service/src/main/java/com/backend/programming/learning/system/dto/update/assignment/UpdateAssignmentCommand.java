@@ -1,5 +1,7 @@
 package com.backend.programming.learning.system.dto.update.assignment;
 
+import com.backend.programming.learning.system.dataaccess.validator.EnumValidator;
+import com.backend.programming.learning.system.valueobject.Type;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,7 +33,8 @@ public class UpdateAssignmentCommand {
     @NotNull
     private final ZonedDateTime timeLimit;
 
-    @NotNull
+    @NotNull(message = "type is required")
+    @EnumValidator(enumClass = Type.class, message = "Type is invalid")
     private final String type;
 
     @NotNull
