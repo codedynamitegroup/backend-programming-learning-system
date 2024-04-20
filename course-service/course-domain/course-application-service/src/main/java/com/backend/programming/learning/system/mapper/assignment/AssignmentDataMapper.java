@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.mapper.assignment;
 
 import com.backend.programming.learning.system.dto.create.assignment.CreateAssignmentCommand;
 import com.backend.programming.learning.system.dto.create.assignment.CreateAssignmentResponse;
+import com.backend.programming.learning.system.dto.delete.assignment.DeleteAssignmentResponse;
 import com.backend.programming.learning.system.dto.query.assignment.QueryAllAssignmentsResponse;
 import com.backend.programming.learning.system.dto.query.assignment.QueryAssignmentResponse;
 import com.backend.programming.learning.system.entity.Assignment;
@@ -38,6 +39,7 @@ public class AssignmentDataMapper {
 
     public QueryAssignmentResponse assignmentToQueryAssignmentResponse(Assignment assignment) {
         return QueryAssignmentResponse.builder()
+                .assignmentId(assignment.getId().getValue())
                 .courseId(assignment.getCourseId().getValue())
                 .title(assignment.getTitle())
                 .intro(assignment.getIntro())
@@ -57,6 +59,13 @@ public class AssignmentDataMapper {
                .collect(Collectors.toList());
         return QueryAllAssignmentsResponse.builder()
                 .assignments(queryAssignmentResponses)
+                .build();
+    }
+
+    public DeleteAssignmentResponse assignmentIdToDeleteAssignmentResponse(Assignment assignment) {
+        return DeleteAssignmentResponse.builder()
+                .assignmentId(assignment.getId().getValue())
+                .message("Assignment deleted successfully")
                 .build();
     }
 

@@ -25,7 +25,7 @@ public class AssignmentEntity {
     @OneToMany(mappedBy = "assignment")
     private List<AssignmentSubmissionEntity> assignmentSubmissions;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     private CourseEntity course;
     private String title;
