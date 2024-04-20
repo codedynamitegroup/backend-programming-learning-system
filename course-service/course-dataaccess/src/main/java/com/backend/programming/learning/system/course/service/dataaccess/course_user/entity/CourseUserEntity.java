@@ -1,9 +1,7 @@
 package com.backend.programming.learning.system.course.service.dataaccess.course_user.entity;
 
-import com.backend.programming.learning.system.course.service.dataaccess.call_organization.entity.CallOrganizationEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,11 +21,11 @@ public class CourseUserEntity {
     @Column(name = "id")
     private UUID id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     private CourseEntity course;
 

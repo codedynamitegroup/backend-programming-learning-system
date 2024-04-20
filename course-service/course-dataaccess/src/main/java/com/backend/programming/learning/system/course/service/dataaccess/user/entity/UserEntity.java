@@ -1,11 +1,8 @@
 package com.backend.programming.learning.system.course.service.dataaccess.user.entity;
 
 import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
-import com.backend.programming.learning.system.course.service.dataaccess.exam.entity.ExamEntity;
-import com.backend.programming.learning.system.course.service.dataaccess.post.entity.PostEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.question.entity.QuestionEntity;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;

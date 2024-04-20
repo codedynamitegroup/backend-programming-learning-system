@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 
 @Slf4j
 @ControllerAdvice
-public class AuthGlobalExceptionHandler extends GlobalExceptionHandler {
+public class CourseGlobalExceptionHandler extends GlobalExceptionHandler {
 }
 
