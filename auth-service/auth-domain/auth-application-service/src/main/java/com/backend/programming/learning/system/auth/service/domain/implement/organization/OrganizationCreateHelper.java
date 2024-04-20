@@ -34,20 +34,21 @@ public class OrganizationCreateHelper {
 
     @Transactional
     public Organization persistOrganization(CreateOrganizationCommand createOrganizationCommand) {
+        User createdBy = getUser(createOrganizationCommand.getCreatedBy());
         Organization organization = organizationDataMapper.createOrganizationCommandToOrganization(createOrganizationCommand);
-        checkUserExist(organization.getCreatedBy().getId().getValue());
-        checkUserExist(organization.getUpdatedBy().getId().getValue());
-
+        organization.setCreatedBy(createdBy);
+        organization.setUpdatedBy(createdBy);
         authDomainService.createOrganization(organization);
         return saveOrganization(organization);
     }
 
-    private void checkUserExist(UUID userId) {
+    private User getUser(UUID userId) {
         Optional<User> user = userRepository.findById(new UserId(userId));
         if (user.isEmpty()) {
             log.error("User with id: {} could not be found!", userId);
             throw new AuthDomainException("User with id: " + userId + " could not be found!");
         }
+        return user.get();
     }
 
     private Organization saveOrganization(Organization organization) {

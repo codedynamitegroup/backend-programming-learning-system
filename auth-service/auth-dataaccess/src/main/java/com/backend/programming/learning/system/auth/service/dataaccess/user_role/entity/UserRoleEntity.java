@@ -22,19 +22,19 @@ public class UserRoleEntity {
     @Id
     private UUID id;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private RoleEntity role;
 
-    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @OneToOne
     @JoinColumn(name = "created_by", referencedColumnName = "id")
     private UserEntity createdBy;
 
-    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @OneToOne
     @JoinColumn(name = "updated_by", referencedColumnName = "id")
     private UserEntity updatedBy;
 

@@ -9,13 +9,13 @@ import java.time.ZonedDateTime;
 import java.util.UUID;
 
 public class UserRole extends BaseEntity<UserRoleId> {
-    private final User user;
-    private final Role role;
+    private User user;
+    private Role role;
     private boolean isActive;
     private String name;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
-    private final User createdBy;
+    private User createdBy;
     private User updatedBy;
 
     public void initializeUserRole() {
@@ -73,6 +73,37 @@ public class UserRole extends BaseEntity<UserRoleId> {
         return updatedBy;
     }
 
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCreatedAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(ZonedDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public void setUpdatedBy(User updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
 
     public static final class Builder {
         private User user;

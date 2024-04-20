@@ -7,6 +7,10 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.de
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryUserByIdCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.role.UpdateRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.role.UpdateRoleResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Slf4j
@@ -54,6 +59,23 @@ public class UserController {
                 .build());
         log.info("Returning all users");
         return ResponseEntity.ok(users);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UpdateUserResponse> updateUserById(@PathVariable UUID id, @RequestBody UpdateUserCommand updateUserCommand) {
+        log.info("Updating user with id: {}", id);
+        UpdateUserResponse updateUserResponse = userApplicationService.updateUser(UpdateUserCommand.builder()
+                .userId(id)
+                .dob(updateUserCommand.getDob())
+                .firstName(updateUserCommand.getFirstName())
+                .lastName(updateUserCommand.getLastName())
+                .phone(updateUserCommand.getPhone())
+                .address(updateUserCommand.getAddress())
+                .avatarUrl(updateUserCommand.getAvatarUrl())
+                .build());
+
+        log.info("User updated with id: {}", id);
+        return ResponseEntity.ok(updateUserResponse);
     }
 
     @DeleteMapping("/{id}")

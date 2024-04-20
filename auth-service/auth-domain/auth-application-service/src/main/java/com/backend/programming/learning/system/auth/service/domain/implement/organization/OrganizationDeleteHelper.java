@@ -34,11 +34,6 @@ public class OrganizationDeleteHelper {
         }
 
         Organization organization = organizationResult.get();
-        if (Boolean.TRUE.equals(organization.getDeleted())) {
-            log.warn("Organization with id: {} is already deleted", deleteOrganizationCommand.getOrganizationId());
-            throw new AuthNotFoundException("Organization with id: " + deleteOrganizationCommand.getOrganizationId() +
-                    " is already deleted");
-        }
 
         authDomainService.deleteOrganization(organization);
         organizationRepository.save(organization);

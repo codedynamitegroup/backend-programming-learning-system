@@ -14,7 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class CreateUserResponse {
     @NotNull
-    private UUID id;
+    private UUID userId;
     @NotNull
     @Email
     private final String email;

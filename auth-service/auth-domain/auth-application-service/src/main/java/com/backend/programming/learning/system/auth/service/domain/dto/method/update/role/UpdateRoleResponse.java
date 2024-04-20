@@ -12,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class UpdateRoleResponse {
     @NotNull
-    private UUID id;
+    private UUID roleId;
 
     @NotNull
     private final String message;

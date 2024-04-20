@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.auth.service.domain.entity.UserRo
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.OrganizationRepository;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRoleRepository;
 import com.backend.programming.learning.system.auth.service.domain.valueobject.RoleId;
+import com.backend.programming.learning.system.auth.service.domain.valueobject.UserRoleId;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
@@ -44,5 +45,11 @@ public class UserRoleRepositoryImpl implements UserRoleRepository {
     @Override
     public void deleteByRoleId(RoleId roleId) {
         userRoleJpaRepository.deleteByRoleId(roleId.getValue());
+    }
+
+    @Override
+    public Optional<UserRole> findById(UserRoleId userRoleId) {
+        return userRoleJpaRepository.findById(userRoleId.getValue())
+                .map(userRoleDataAccessMapper::userRoleEntityToUserRole);
     }
 }

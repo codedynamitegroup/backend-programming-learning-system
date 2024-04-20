@@ -5,6 +5,10 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.cr
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user_role.DeleteUserRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user_role.DeleteUserRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user_role.QueryUserRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user_role.UpdateUserRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user_role.UpdateUserRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user_role.UserRoleEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserRoleApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -48,6 +52,21 @@ public class UserRoleController {
                roleId, userId);
        return ResponseEntity.ok(userRole);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UpdateUserRoleResponse> updateUserRoleById(@PathVariable UUID id,
+                                                                     @RequestBody UpdateUserRoleCommand updateUserRoleCommand) {
+        log.info("Updating user role with id: {}", id);
+        UpdateUserRoleResponse updateUserRoleResponse = userRoleApplicationService.updateUserRole(UpdateUserRoleCommand.builder()
+                .userRoleId(id)
+                .name(updateUserRoleCommand.getName())
+                .isActive(updateUserRoleCommand.getIsActive())
+                .updatedBy(updateUserRoleCommand.getUpdatedBy())
+                .build());
+        log.info("User role updated with id: {}", id);
+        return ResponseEntity.ok(updateUserRoleResponse);
+    }
+
 
     @DeleteMapping("/deleteByRoleIdAndUserId")
     public ResponseEntity<DeleteUserRoleResponse> deleteUserRoleByRoleIdAndUserId(
