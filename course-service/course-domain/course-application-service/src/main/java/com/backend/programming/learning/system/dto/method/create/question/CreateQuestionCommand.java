@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import lombok.Builder;
 import lombok.Getter;
 
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 /**
@@ -16,12 +17,16 @@ import java.util.UUID;
 @Getter
 @Builder
 public class CreateQuestionCommand {
-    private final UUID organizationId;
-    private final QuestionDifficulty difficulty;
-    private final String name;
-    private final String questionText;
-    private final String generalFeedback;
-    private final Float defaultMark;
-    private final QuestionType qtype;
-    private final UUID createdBy;
+    private UUID organizationId;
+    @NotNull(message = "Question difficulty is required")
+    private QuestionDifficulty difficulty;
+    @NotNull(message = "Question name is required")
+    private String name;
+    private String questionText;
+    private String generalFeedback;
+    private Float defaultMark;
+    @NotNull(message = "Question type is required")
+    private QuestionType qtype;
+    @NotNull(message = "Created by is required")
+    private UUID createdBy;
 }

@@ -20,17 +20,8 @@ public class ExamRepositoryImpl implements ExamRepository {
         this.examDataAccessMapper = examDataAccessMapper;
     }
 
-
-    @Override
-    public Exam saveExam(Exam exam) {
-        return examDataAccessMapper.examEntityToExam(examJpaRepository
-                .save(examDataAccessMapper
-                        .examToExamEntity(exam)));
-    }
-
     @Override
     public Exam save(Exam exam) {
-
         return examDataAccessMapper.examEntityToExam(
                 examJpaRepository.save(examDataAccessMapper.examToExamEntity(exam)));
     }

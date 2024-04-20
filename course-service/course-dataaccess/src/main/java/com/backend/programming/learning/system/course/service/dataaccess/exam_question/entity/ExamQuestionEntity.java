@@ -2,8 +2,6 @@ package com.backend.programming.learning.system.course.service.dataaccess.exam_q
 
 import com.backend.programming.learning.system.course.service.dataaccess.exam.entity.ExamEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.question.entity.QuestionEntity;
-import com.backend.programming.learning.system.entity.Exam;
-import com.backend.programming.learning.system.entity.Question;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,11 +21,11 @@ public class ExamQuestionEntity {
     @Column(name = "id")
     private UUID id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "exam_id", referencedColumnName = "id")
     private ExamEntity exam;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "question_id", referencedColumnName = "id")
     private QuestionEntity question;
 

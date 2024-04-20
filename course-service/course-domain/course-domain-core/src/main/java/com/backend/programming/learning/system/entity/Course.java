@@ -2,28 +2,29 @@ package com.backend.programming.learning.system.entity;
 
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
-import com.backend.programming.learning.system.valueobject.AssignmentId;
 import com.backend.programming.learning.system.valueobject.CourseId;
 import com.backend.programming.learning.system.valueobject.ExamId;
-import com.backend.programming.learning.system.valueobject.PostId;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
+@Getter
+@Setter
 public class Course extends AggregateRoot<CourseId> {
 
     private String name;
     private String key;
     private Boolean visible;
-    private final UserId createdBy;
+    private User createdBy;
     private final List<Post> posts;
     private final List<Exam> exams;
 
     private final List<Assignment> assignments;
-    private UserId updatedBy;
+    private User updatedBy;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
@@ -37,16 +38,11 @@ public class Course extends AggregateRoot<CourseId> {
         updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
     }
 
-//    private void initializePost(PostId postId) {
-//        for(Post post: posts){
-//            post.initializePost(super.getId(), new PostId(UUID.randomUUID()));
+//    private void initializeExam(ExamId examId) {
+//        for(Exam exam: exams){
+//            exam.initializeExam(super.getId(), new ExamId(UUID.randomUUID()));
 //        }
 //    }
-    private void initializeExam(ExamId examId) {
-        for(Exam exam: exams){
-            exam.initializeExam(super.getId(), new ExamId(UUID.randomUUID()));
-        }
-    }
 
     private Course(Builder builder) {
         super.setId(builder.courseId);
@@ -90,11 +86,11 @@ public class Course extends AggregateRoot<CourseId> {
         return assignments;
     }
 
-    public UserId getCreatedBy() {
+    public User getCreatedBy() {
         return createdBy;
     }
 
-    public UserId getUpdatedBy() {
+    public User getUpdatedBy() {
         return updatedBy;
     }
 
@@ -116,8 +112,8 @@ public class Course extends AggregateRoot<CourseId> {
         private List<Post> posts;
         private List<Exam> exams;
         private List<Assignment> assignments;
-        private UserId createdBy;
-        private UserId updatedBy;
+        private User createdBy;
+        private User updatedBy;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
 
@@ -158,12 +154,12 @@ public class Course extends AggregateRoot<CourseId> {
             return this;
         }
 
-        public Builder createdBy(UserId val) {
+        public Builder createdBy(User val) {
             createdBy = val;
             return this;
         }
 
-        public Builder updatedBy(UserId val) {
+        public Builder updatedBy(User val) {
             updatedBy = val;
             return this;
         }

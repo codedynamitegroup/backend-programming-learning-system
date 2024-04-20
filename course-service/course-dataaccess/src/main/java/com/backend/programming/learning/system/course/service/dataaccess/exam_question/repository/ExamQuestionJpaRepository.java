@@ -4,9 +4,12 @@ import com.backend.programming.learning.system.course.service.dataaccess.exam_qu
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 @Repository
 public interface ExamQuestionJpaRepository extends JpaRepository<ExamQuestionEntity, UUID> {
     Optional<ExamQuestionEntity> findById(UUID id);
+
+    void deleteByExamIdAndQuestionIdIn(UUID examId, List<UUID> questionIds);
 }
