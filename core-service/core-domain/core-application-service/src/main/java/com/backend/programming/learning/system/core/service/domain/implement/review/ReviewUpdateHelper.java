@@ -1,9 +1,11 @@
 package com.backend.programming.learning.system.core.service.domain.implement.review;
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewCommand;
+import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourseUser;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
+import com.backend.programming.learning.system.core.service.domain.exception.CertificateCourseNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.exception.ReviewNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
@@ -11,6 +13,7 @@ import com.backend.programming.learning.system.core.service.domain.ports.output.
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseUserRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ReviewRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.UserRepository;
+import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -46,6 +49,8 @@ public class ReviewUpdateHelper {
 
         checkUserIsAllowedToUpdateReview(updateReviewCommand, review);
 
+        CertificateCourse certificateCourse = getCertificateCourse(review.getCertificateCourseId().getValue());
+
         review.setUpdatedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
 
         if (updateReviewCommand.getRating() != null) {
@@ -61,15 +66,7 @@ public class ReviewUpdateHelper {
 
         Float avgRating = getAvgRatingOfAllReviewsByCertificateCourseId(
                 review.getCertificateCourseId().getValue());
-
-        int updatedRows = certificateCourseRepository.updateAvgRating(
-                review.getCertificateCourseId(), avgRating);
-        if (updatedRows == 0) {
-            log.error("Could not update avg rating for certificate course with id: {}",
-                    review.getCertificateCourseId());
-            throw new CoreDomainException("Could not update avg rating for certificate course with id: " +
-                    review.getCertificateCourseId());
-        }
+        updateAvgRating(certificateCourse, avgRating);
         log.info("Avg rating updated for certificate course with id: {}", review.getCertificateCourseId());
     }
 
@@ -122,6 +119,30 @@ public class ReviewUpdateHelper {
         if (user.isEmpty()) {
             log.warn("User with id: {} not found", userId);
             throw new UserNotFoundException("Could not find user with id: " + userId);
+        }
+    }
+
+    private CertificateCourse getCertificateCourse(UUID certificateCourseId) {
+        Optional<CertificateCourse> certificateCourse = certificateCourseRepository.findById(
+                new CertificateCourseId(certificateCourseId));
+        if (certificateCourse.isEmpty()) {
+            log.warn("Certificate course with id: {} not found", certificateCourseId);
+            throw new CertificateCourseNotFoundException("Could not find certificate course with id: " +
+                    certificateCourseId);
+        }
+        return certificateCourse.get();
+    }
+
+    private void updateAvgRating(CertificateCourse certificateCourse, Float avgRating) {
+        certificateCourse.setAvgRating(avgRating);
+        CertificateCourse updatedCertificateCourse =
+                certificateCourseRepository.saveCertificateCourse(certificateCourse);
+
+        if (updatedCertificateCourse == null) {
+            log.error("Could not update avg rating for certificate course with id: {}",
+                    certificateCourse.getId().getValue());
+            throw new CoreDomainException("Could not update avg rating for certificate course with id: "
+                    + certificateCourse.getId().getValue());
         }
     }
 
