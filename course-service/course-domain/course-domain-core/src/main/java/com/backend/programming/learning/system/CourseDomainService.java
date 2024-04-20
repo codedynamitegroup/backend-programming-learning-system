@@ -2,6 +2,13 @@ package com.backend.programming.learning.system;
 
 import com.backend.programming.learning.system.entity.*;
 
+
+import java.util.List;
+import java.util.UUID;
+import com.backend.programming.learning.system.entity.Question;
+
+import java.util.UUID;
+
 public interface CourseDomainService {
     void createExam(Exam exam);
 
@@ -14,4 +21,6 @@ public interface CourseDomainService {
     void createPost(Post post);
 
     void createSubmissionAssignment(SubmissionAssignment submissionAssignment);
+    
+    void createCourseUsers(List<CourseUser> courseUsers);
 }

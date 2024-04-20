@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.implement.post;
 
 import com.backend.programming.learning.system.dto.method.create.post.CreatePostCommand;
 import com.backend.programming.learning.system.dto.method.create.post.CreatePostResponse;
+import com.backend.programming.learning.system.dto.method.delete.post.DeletePostCommand;
+import com.backend.programming.learning.system.dto.method.delete.post.DeletePostResponse;
 import com.backend.programming.learning.system.dto.method.query.post.QueryAllPostCommand;
 import com.backend.programming.learning.system.dto.method.query.post.QueryAllPostResponse;
 import com.backend.programming.learning.system.dto.method.query.post.QueryPostCommand;
@@ -37,5 +39,10 @@ public class PostApplicationServiceImpl implements PostApplicationService {
     @Override
     public PostResponseEntity findById(QueryPostCommand createPostCommand) {
         return postCommandHandler.findById(createPostCommand);
+    }
+
+    @Override
+    public DeletePostResponse deleteById(DeletePostCommand deletePostCommand) {
+        return postCommandHandler.deleteById(deletePostCommand);
     }
 }

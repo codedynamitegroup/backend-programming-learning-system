@@ -38,4 +38,9 @@ public class QuestionRepositoryImpl implements QuestionRepository {
                         .findById(questionId)
                         .orElseThrow(() -> new RuntimeException("Question not found")));
     }
+
+    @Override
+    public void deleteById(UUID questionId) {
+        questionJpaRepository.deleteById(questionId);
+    }
 }
