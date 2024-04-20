@@ -2,8 +2,10 @@ package com.backend.programming.learning.system.core.service.domain.implement.re
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.review.DeleteReviewCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewCommand;
+import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
+import com.backend.programming.learning.system.core.service.domain.exception.CertificateCourseNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.ChapterNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.exception.ReviewNotFoundException;
@@ -34,17 +36,35 @@ public class ReviewDeleteHelper {
     public void deleteReviewById(DeleteReviewCommand deleteReviewCommand) {
         Review review = getReview(deleteReviewCommand.getReviewId());
         checkUserIsAllowedToDeleteReview(deleteReviewCommand, review);
+        CertificateCourse certificateCourse = getCertificateCourse(review.getCertificateCourseId().getValue());
 
         reviewRepository.deleteReviewById(deleteReviewCommand.getReviewId());
         log.info("Review with id: {} deleted successfully", deleteReviewCommand.getReviewId());
         Float avgRating = getAvgRatingOfAllReviewsByCertificateCourseId(review.getCertificateCourseId().getValue());
-        int updatedRows = certificateCourseRepository.updateAvgRating(
-                new CertificateCourseId(review.getCertificateCourseId().getValue()), avgRating);
-        if (updatedRows == 0) {
+        updateAvgRating(certificateCourse, avgRating);
+    }
+
+    private CertificateCourse getCertificateCourse(UUID certificateCourseId) {
+        Optional<CertificateCourse> certificateCourse = certificateCourseRepository.findById(
+                new CertificateCourseId(certificateCourseId));
+        if (certificateCourse.isEmpty()) {
+            log.warn("Certificate course with id: {} not found", certificateCourseId);
+            throw new CertificateCourseNotFoundException("Could not find certificate course with id: " +
+                    certificateCourseId);
+        }
+        return certificateCourse.get();
+    }
+
+    private void updateAvgRating(CertificateCourse certificateCourse, Float avgRating) {
+        certificateCourse.setAvgRating(avgRating);
+        CertificateCourse updatedCertificateCourse =
+                certificateCourseRepository.saveCertificateCourse(certificateCourse);
+
+        if (updatedCertificateCourse == null) {
             log.error("Could not update avg rating for certificate course with id: {}",
-                    review.getCertificateCourseId().getValue());
-            throw new CoreDomainException("Could not update avg rating for certificate course with id: " +
-                    review.getCertificateCourseId().getValue());
+                    certificateCourse.getId().getValue());
+            throw new CoreDomainException("Could not update avg rating for certificate course with id: "
+                    + certificateCourse.getId().getValue());
         }
     }
 

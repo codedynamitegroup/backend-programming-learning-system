@@ -50,10 +50,12 @@ public class ReviewCreateHelper {
     public Review persistReview(CreateReviewCommand createReviewCommand) {
         checkUser(createReviewCommand.getCreatedBy());
         checkUser(createReviewCommand.getUpdatedBy());
-        checkCertificateCourse(createReviewCommand.getCertificateCourseId());
         checkCertificateCourseUserByCertificateCourseIdAndUserId(
                 createReviewCommand.getCertificateCourseId(),
                 createReviewCommand.getCreatedBy());
+
+
+        CertificateCourse certificateCourse = getCertificateCourse(createReviewCommand.getCertificateCourseId());
 
         Review review = reviewDataMapper.
                 createReviewCommandToReview(createReviewCommand);
@@ -62,14 +64,8 @@ public class ReviewCreateHelper {
 
         Float avgRating = getAvgRatingOfAllReviewsByCertificateCourseId(
                 createReviewCommand.getCertificateCourseId());
-        int updatedRows = certificateCourseRepository.updateAvgRating(
-                new CertificateCourseId(createReviewCommand.getCertificateCourseId()), avgRating);
-        if (updatedRows == 0) {
-            log.error("Could not update avg rating for certificate course with id: {}",
-                    createReviewCommand.getCertificateCourseId());
-            throw new CoreDomainException("Could not update avg rating for certificate course with id: " +
-                    createReviewCommand.getCertificateCourseId());
-        }
+
+        updateAvgRating(certificateCourse, avgRating);
 
         log.info("Review created with id: {}", reviewResult.getId().getValue());
         return reviewResult;
@@ -99,14 +95,26 @@ public class ReviewCreateHelper {
         }
     }
 
-    private void checkCertificateCourse(UUID certificateCourseId) {
+    private CertificateCourse getCertificateCourse(UUID certificateCourseId) {
         Optional<CertificateCourse> certificateCourse = certificateCourseRepository.findById(
-                new CertificateCourseId(certificateCourseId)
-        );
+                new CertificateCourseId(certificateCourseId));
         if (certificateCourse.isEmpty()) {
             log.warn("Certificate course with id: {} not found", certificateCourseId);
-            throw new CertificateCourseNotFoundException(
-                    "Could not find certificate course with id: " + certificateCourseId);
+            throw new CertificateCourseNotFoundException("Could not find certificate course with id: " + certificateCourseId);
+        }
+        return certificateCourse.get();
+    }
+
+    private void updateAvgRating(CertificateCourse certificateCourse, Float avgRating) {
+        certificateCourse.setAvgRating(avgRating);
+        CertificateCourse updatedCertificateCourse =
+                certificateCourseRepository.saveCertificateCourse(certificateCourse);
+
+        if (updatedCertificateCourse == null) {
+            log.error("Could not update avg rating for certificate course with id: {}",
+                    certificateCourse.getId().getValue());
+            throw new CoreDomainException("Could not update avg rating for certificate course with id: "
+                    + certificateCourse.getId().getValue());
         }
     }
 
