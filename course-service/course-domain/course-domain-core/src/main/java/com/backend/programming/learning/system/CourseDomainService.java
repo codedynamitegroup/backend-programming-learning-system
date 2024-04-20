@@ -1,14 +1,6 @@
 package com.backend.programming.learning.system;
 
-import com.backend.programming.learning.system.entity.Assignment;
-import com.backend.programming.learning.system.entity.Course;
-import com.backend.programming.learning.system.entity.Exam;
-import com.backend.programming.learning.system.entity.Post;
-
-import java.util.UUID;
-import com.backend.programming.learning.system.entity.Question;
-
-import java.util.UUID;
+import com.backend.programming.learning.system.entity.*;
 
 public interface CourseDomainService {
     void createExam(Exam exam);
@@ -20,4 +12,6 @@ public interface CourseDomainService {
     void createAssignment(Assignment assignment);
 
     void createPost(Post post);
+
+    void createSubmissionAssignment(SubmissionAssignment submissionAssignment);
 }

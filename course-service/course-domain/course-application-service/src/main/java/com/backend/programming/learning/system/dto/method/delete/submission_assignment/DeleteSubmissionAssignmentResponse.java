@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.dto.create.assignment;
+package com.backend.programming.learning.system.dto.method.delete.submission_assignment;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,12 +10,9 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class CreateAssignmentResponse {
+public class DeleteSubmissionAssignmentResponse {
     @NotNull
-    private final UUID assignmentId;
-
-    @NotNull
-    private final String name;
+    private final UUID submissionAssignmentId;
 
     @NotNull
     private final String message;

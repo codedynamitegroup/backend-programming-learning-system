@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.dataaccess.assign
 
 import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.entity.AssignmentSubmissionEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
+import com.backend.programming.learning.system.valueobject.Type;
 import lombok.*;
 
 import javax.persistence.*;
@@ -35,7 +36,8 @@ public class AssignmentEntity {
     private ZonedDateTime timeOpen;
     private ZonedDateTime timeClose;
     private ZonedDateTime timeLimit;
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private Type type;
     private Boolean visible;
 
     @Override

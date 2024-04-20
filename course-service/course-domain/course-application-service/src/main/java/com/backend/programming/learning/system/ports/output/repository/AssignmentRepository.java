@@ -16,6 +16,4 @@ public interface AssignmentRepository {
 
     void deleteAssignmentById(UUID assignmentId);
 
-    int updateAssignment(Assignment assignment);
-
 }

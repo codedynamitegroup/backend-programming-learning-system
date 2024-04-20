@@ -1,8 +1,10 @@
-package com.backend.programming.learning.system.dto.create.assignment;
+package com.backend.programming.learning.system.dto.method.create.assignment;
 
+import com.backend.programming.learning.system.valueobject.Type;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import com.backend.programming.learning.system.dataaccess.validator.EnumValidator;
 
 import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
@@ -36,7 +38,8 @@ public class CreateAssignmentCommand {
     @NotNull
     private final ZonedDateTime timeLimit;
 
-    @NotNull
+    @NotNull(message = "type is required")
+    @EnumValidator(enumClass = Type.class, message = "Type is invalid")
     private final String type;
 
     @NotNull
