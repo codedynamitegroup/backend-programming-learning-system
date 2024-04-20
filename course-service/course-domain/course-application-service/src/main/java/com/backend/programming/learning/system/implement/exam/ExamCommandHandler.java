@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.implement.exam;
 
 import com.backend.programming.learning.system.dto.method.create.exam.CreateExamCommand;
 import com.backend.programming.learning.system.dto.method.create.exam.CreateExamResponse;
+import com.backend.programming.learning.system.dto.method.delete.course.DeleteCourseResponse;
+import com.backend.programming.learning.system.dto.method.delete.exam.DeleteExamCommand;
 import com.backend.programming.learning.system.dto.method.query.exam.QueryAllExamCommand;
 import com.backend.programming.learning.system.dto.method.query.exam.QueryAllExamResponse;
 import com.backend.programming.learning.system.dto.method.query.exam.QueryExamCommand;
@@ -52,5 +54,11 @@ public class ExamCommandHandler {
                 queryAllExamCommand.getPageNo(),
                 queryAllExamCommand.getPageSize());
         return examDataMapper.examsToQueryAllExamResponse(exams);
+    }
+
+    @Transactional
+    public DeleteCourseResponse deleteExam(DeleteExamCommand deleteExamCommand) {
+        examDeleteHelper.deleteExam(new ExamId(deleteExamCommand.getExamId()));
+        return new DeleteCourseResponse("Exam deleted successfully");
     }
 }

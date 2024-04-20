@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.implement.question;
 
 import com.backend.programming.learning.system.dto.method.create.question.CreateQuestionCommand;
 import com.backend.programming.learning.system.dto.method.create.question.CreateQuestionResponse;
+import com.backend.programming.learning.system.dto.method.delete.question.DeleteQuestionCommand;
 import com.backend.programming.learning.system.dto.method.query.question.QueryAllQuestionCommand;
 import com.backend.programming.learning.system.dto.method.query.question.QueryAllQuestionResponse;
 import com.backend.programming.learning.system.dto.method.query.question.QueryQuestionCommand;
@@ -28,6 +29,7 @@ import java.util.UUID;
 public class QuestionCommandHandler {
     private final QuestionCreateHelper questionCreateHelper;
     private final QuestionQueryHelper questionQueryHelper;
+    private final QuestionDeleteHelper questionDeleteHelper;
     private final QuestionDataMapper questionDataMapper;
 
     @Transactional
@@ -47,5 +49,10 @@ public class QuestionCommandHandler {
     public QuestionResponseEntity findById(QueryQuestionCommand queryQuestionCommand) {
         Question question = questionQueryHelper.findById(queryQuestionCommand.getQuestionId());
         return questionDataMapper.questionToQueryQuestionResponse(question);
+    }
+
+    @Transactional
+    public void deleteById(DeleteQuestionCommand deleteQuestionCommand) {
+        questionDeleteHelper.deleteById(deleteQuestionCommand);
     }
 }

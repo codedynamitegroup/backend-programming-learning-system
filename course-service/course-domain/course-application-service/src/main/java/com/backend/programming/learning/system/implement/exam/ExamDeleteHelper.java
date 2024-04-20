@@ -1,5 +1,9 @@
 package com.backend.programming.learning.system.implement.exam;
 
+import com.backend.programming.learning.system.dto.responseentity.exam.ExamResponseEntity;
+import com.backend.programming.learning.system.ports.output.repository.ExamRepository;
+import com.backend.programming.learning.system.valueobject.ExamId;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -11,5 +15,11 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class ExamDeleteHelper {
+    private final ExamRepository examRepository;
+    public void deleteExam(ExamId examId) {
+        log.info("Exam deleted with id: {}", examId);
+        examRepository.deleteById(examId);
+    }
 }

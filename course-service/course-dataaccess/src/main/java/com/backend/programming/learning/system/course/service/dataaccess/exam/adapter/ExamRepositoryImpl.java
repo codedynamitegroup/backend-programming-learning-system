@@ -48,4 +48,9 @@ public class ExamRepositoryImpl implements ExamRepository {
         return examJpaRepository.findAll(PageRequest.of(pageNo, pageSize))
                 .map(examDataAccessMapper::examEntityToExam);
     }
+
+    @Override
+    public void deleteById(ExamId examId) {
+        examJpaRepository.deleteById(examId.getValue());
+    }
 }

@@ -11,4 +11,6 @@ public interface QuestionRepository {
     Page<Question> findAll(Integer page, Integer size);
 
     Question findById(UUID questionId);
+
+    void deleteById(UUID questionId);
 }

@@ -54,4 +54,9 @@ public class CourseRepositoryImpl implements CourseRepository {
                 .findById(courseId)
                 .orElseThrow(() -> new RuntimeException("Course not found")));
     }
+
+    @Override
+    public void deleteById(UUID courseId) {
+        courseJpaRepository.deleteById(courseId);
+    }
 }
