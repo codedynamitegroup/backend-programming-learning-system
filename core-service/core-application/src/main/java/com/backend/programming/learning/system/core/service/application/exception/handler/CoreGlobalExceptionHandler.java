@@ -146,5 +146,17 @@ public class CoreGlobalExceptionHandler extends GlobalExceptionHandler {
                 .message(calendarEventNotFoundException.getMessage())
                 .build();
     }
+
+    @ResponseBody
+    @ExceptionHandler(value = {PlagiarismDetectionReportNotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorDTO handleException(PlagiarismDetectionReportNotFoundException plagiarismDetectionReportNotFoundException) {
+        log.error(plagiarismDetectionReportNotFoundException.getMessage(), plagiarismDetectionReportNotFoundException);
+        return ErrorDTO.builder()
+                .status(HttpStatus.NOT_FOUND.value())
+                .code(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .message(plagiarismDetectionReportNotFoundException.getMessage())
+                .build();
+    }
 }
 
