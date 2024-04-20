@@ -3,9 +3,10 @@ package com.backend.programming.learning.system.mapper.exam;
 import com.backend.programming.learning.system.dto.method.create.exam.CreateExamCommand;
 import com.backend.programming.learning.system.dto.method.create.exam.CreateExamResponse;
 import com.backend.programming.learning.system.dto.method.query.exam.QueryAllExamResponse;
+import com.backend.programming.learning.system.dto.method.update.exam.UpdateExamResponse;
 import com.backend.programming.learning.system.dto.responseentity.exam.ExamResponseEntity;
+import com.backend.programming.learning.system.entity.Course;
 import com.backend.programming.learning.system.entity.Exam;
-import com.backend.programming.learning.system.valueobject.CourseId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
@@ -19,42 +20,42 @@ import org.springframework.stereotype.Component;
 @Component
 public class ExamDataMapper {
 
-    public Exam createExamCommandToExam(CreateExamCommand createExamCommand) {
+    public Exam createExamCommandToExam(Course course, CreateExamCommand createExamCommand) {
         return Exam.builder()
-                .courseId(new CourseId(createExamCommand.getCourseId()))
+                .course(course)
                 .name(createExamCommand.getName())
-                .scores(createExamCommand.getScore())
-                .maxScores(createExamCommand.getMaxScore())
-                .time_open(createExamCommand.getTimeOpen())
-                .time_close(createExamCommand.getTimeClose())
-                .time_limit(createExamCommand.getTimeLimit())
+                .score(createExamCommand.getScore())
+                .maxScore(createExamCommand.getMaxScore())
+                .timeOpen(createExamCommand.getTimeOpen())
+                .timeClose(createExamCommand.getTimeClose())
+                .timeLimit(createExamCommand.getTimeLimit())
                 .intro(createExamCommand.getIntro())
-                .overdue_handing(createExamCommand.getOverdueHandling())
-                .can_redo_questions(createExamCommand.getCanRedoQuestions())
-                .max_attempts(createExamCommand.getMaxAttempts())
-                .shuffle_answers(createExamCommand.getShuffleQuestions())
-                .grade_method(createExamCommand.getGradeMethod())
+                .overdueHanding(createExamCommand.getOverdueHandling())
+                .canRedoQuestions(createExamCommand.getCanRedoQuestions())
+                .maxAttempts(createExamCommand.getMaxAttempts())
+                .shuffleAnswers(createExamCommand.getShuffleQuestions())
+                .gradeMethod(createExamCommand.getGradeMethod())
                 .build();
     }
 
     public CreateExamResponse examToCreateExamResponse(Exam examCreated, String message) {
         return CreateExamResponse.builder()
                 .id(examCreated.getId().getValue())
-                .courseId(examCreated.getCourseId())
+                .courseId(examCreated.getCourse().getId())
                 .name(examCreated.getName())
-                .scores(examCreated.getScores())
-                .maxScores(examCreated.getMaxScores())
-                .timeOpen(examCreated.getTime_open())
-                .timeClose(examCreated.getTime_close())
-                .timeLimit(examCreated.getTime_limit())
+                .scores(examCreated.getScore())
+                .maxScores(examCreated.getMaxScore())
+                .timeOpen(examCreated.getTimeOpen())
+                .timeClose(examCreated.getTimeClose())
+                .timeLimit(examCreated.getTimeLimit())
                 .intro(examCreated.getIntro())
-                .overdueHanding(examCreated.getOverdue_handing())
-                .canRedoQuestions(examCreated.getCan_redo_questions())
-                .maxAttempts(examCreated.getMax_attempts())
-                .shuffleAnswers(examCreated.getShuffle_answers())
-                .gradeMethod(examCreated.getGrade_method())
-                .createdAt(examCreated.getCreated_at())
-                .updatedAt(examCreated.getUpdated_at())
+                .overdueHanding(examCreated.getOverdueHanding())
+                .canRedoQuestions(examCreated.getCanRedoQuestions())
+                .maxAttempts(examCreated.getMaxAttempts())
+                .shuffleAnswers(examCreated.getShuffleAnswers())
+                .gradeMethod(examCreated.getGradeMethod())
+                .createdAt(examCreated.getCreatedAt())
+                .updatedAt(examCreated.getUpdatedAt())
                 .message(message)
                 .build();
     }
@@ -62,21 +63,21 @@ public class ExamDataMapper {
     public ExamResponseEntity examToQueryExamResponse(Exam exam) {
         return ExamResponseEntity.builder()
                 .id(exam.getId().getValue())
-                .courseId(exam.getCourseId())
+                .courseId(exam.getCourse().getId())
                 .name(exam.getName())
-                .scores(exam.getScores())
-                .maxScores(exam.getMaxScores())
-                .timeOpen(exam.getTime_open())
-                .timeClose(exam.getTime_close())
-                .timeLimit(exam.getTime_limit())
+                .scores(exam.getScore())
+                .maxScores(exam.getMaxScore())
+                .timeOpen(exam.getTimeOpen())
+                .timeClose(exam.getTimeClose())
+                .timeLimit(exam.getTimeLimit())
                 .intro(exam.getIntro())
-                .overdueHanding(exam.getOverdue_handing())
-                .canRedoQuestions(exam.getCan_redo_questions())
-                .maxAttempts(exam.getMax_attempts())
-                .shuffleAnswers(exam.getShuffle_answers())
-                .gradeMethod(exam.getGrade_method())
-                .createdAt(exam.getCreated_at())
-                .updatedAt(exam.getUpdated_at())
+                .overdueHanding(exam.getOverdueHanding())
+                .canRedoQuestions(exam.getCanRedoQuestions())
+                .maxAttempts(exam.getMaxAttempts())
+                .shuffleAnswers(exam.getShuffleAnswers())
+                .gradeMethod(exam.getGradeMethod())
+                .createdAt(exam.getCreatedAt())
+                .updatedAt(exam.getUpdatedAt())
                 .build();
     }
 
@@ -88,6 +89,26 @@ public class ExamDataMapper {
                 .currentPage(exams.getNumber())
                 .totalPages(exams.getTotalPages())
                 .totalItems(exams.getTotalElements())
+                .build();
+    }
+
+    public UpdateExamResponse examToUpdateExamResponse(Exam exam, String message) {
+        return UpdateExamResponse.builder()
+                .examId((exam.getId().getValue()))
+                .courseId(exam.getCourse().getId().getValue())
+                .name(exam.getName())
+                .score(exam.getScore())
+                .maxScore(exam.getMaxScore())
+                .timeOpen(exam.getTimeOpen())
+                .timeClose(exam.getTimeClose())
+                .timeLimit(exam.getTimeLimit())
+                .intro(exam.getIntro())
+                .overdueHandling(exam.getOverdueHanding())
+                .canRedoQuestions(exam.getCanRedoQuestions())
+                .maxAttempts(exam.getMaxAttempts())
+//                .shuffleAnswers(exam.getShuffleAnswers())
+                .gradeMethod(exam.getGradeMethod())
+                .message(message)
                 .build();
     }
 }

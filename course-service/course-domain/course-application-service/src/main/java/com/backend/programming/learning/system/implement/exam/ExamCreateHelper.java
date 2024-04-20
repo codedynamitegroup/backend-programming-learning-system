@@ -2,8 +2,10 @@ package com.backend.programming.learning.system.implement.exam;
 
 import com.backend.programming.learning.system.CourseDomainService;
 import com.backend.programming.learning.system.dto.method.create.exam.CreateExamCommand;
+import com.backend.programming.learning.system.entity.Course;
 import com.backend.programming.learning.system.entity.Exam;
 import com.backend.programming.learning.system.mapper.exam.ExamDataMapper;
+import com.backend.programming.learning.system.ports.output.repository.CourseRepository;
 import com.backend.programming.learning.system.ports.output.repository.ExamRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * com.backend.programming.learning.system.implemtent.exam
@@ -25,9 +28,11 @@ public class ExamCreateHelper {
     private final CourseDomainService courseDomainService;
     private final ExamDataMapper examDataMapper;
     private final ExamRepository examRepository;
+    private final CourseRepository courseRepository;
     @Transactional
     public Exam persistExam(CreateExamCommand createExamCommand) {
-        Exam exam = examDataMapper.createExamCommandToExam(createExamCommand);
+        Course course = getCourse(createExamCommand.getCourseId());
+        Exam exam = examDataMapper.createExamCommandToExam(course, createExamCommand);
         courseDomainService.createExam(exam);
         return saveExam(exam);
     }
@@ -40,5 +45,13 @@ public class ExamCreateHelper {
         }
         log.info("Exam saved successfully with id: {}", saveExam.getId());
         return saveExam;
+    }
+    private Course getCourse(UUID courseId) {
+        Course course = courseRepository.findById(courseId);
+        if (Objects.isNull(course)) {
+            log.warn("Course with id: {} not found", courseId);
+            throw new RuntimeException("Course not found");
+        }
+        return course;
     }
 }

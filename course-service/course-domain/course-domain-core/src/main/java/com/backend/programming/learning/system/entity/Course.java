@@ -38,11 +38,11 @@ public class Course extends AggregateRoot<CourseId> {
         updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
     }
 
-    private void initializeExam(ExamId examId) {
-        for(Exam exam: exams){
-            exam.initializeExam(super.getId(), new ExamId(UUID.randomUUID()));
-        }
-    }
+//    private void initializeExam(ExamId examId) {
+//        for(Exam exam: exams){
+//            exam.initializeExam(super.getId(), new ExamId(UUID.randomUUID()));
+//        }
+//    }
 
     private Course(Builder builder) {
         super.setId(builder.courseId);

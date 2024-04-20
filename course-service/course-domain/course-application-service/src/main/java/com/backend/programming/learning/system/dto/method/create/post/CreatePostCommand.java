@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.dto.method.create.post;
 
-import com.backend.programming.learning.system.valueobject.CourseId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

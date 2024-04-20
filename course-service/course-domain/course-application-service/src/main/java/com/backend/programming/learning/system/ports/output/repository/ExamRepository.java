@@ -6,8 +6,6 @@ import org.springframework.data.domain.Page;
 
 
 public interface ExamRepository {
-    Exam saveExam(Exam exam);
-
     Exam save(Exam exam);
 
     Exam findBy(ExamId examId);

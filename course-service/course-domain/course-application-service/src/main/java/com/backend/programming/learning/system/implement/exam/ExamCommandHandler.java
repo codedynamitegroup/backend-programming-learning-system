@@ -7,10 +7,11 @@ import com.backend.programming.learning.system.dto.method.delete.exam.DeleteExam
 import com.backend.programming.learning.system.dto.method.query.exam.QueryAllExamCommand;
 import com.backend.programming.learning.system.dto.method.query.exam.QueryAllExamResponse;
 import com.backend.programming.learning.system.dto.method.query.exam.QueryExamCommand;
+import com.backend.programming.learning.system.dto.method.update.exam.UpdateExamCommand;
+import com.backend.programming.learning.system.dto.method.update.exam.UpdateExamResponse;
 import com.backend.programming.learning.system.dto.responseentity.exam.ExamResponseEntity;
 import com.backend.programming.learning.system.entity.Exam;
 import com.backend.programming.learning.system.mapper.exam.ExamDataMapper;
-import com.backend.programming.learning.system.ports.output.repository.ExamRepository;
 import com.backend.programming.learning.system.valueobject.ExamId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,8 +33,8 @@ public class ExamCommandHandler {
     private final ExamCreateHelper examCreateHelper;
     private final ExamQueryHelper examQueryHelper;
     private final ExamDeleteHelper examDeleteHelper;
+    private final ExamUpdateHelper examUpdateHelper;
     private final ExamDataMapper examDataMapper;
-    private final ExamRepository examRepository;
     public CreateExamResponse createExam(CreateExamCommand createExamCommand) {
         Exam examCreated = examCreateHelper.persistExam(createExamCommand);
         log.info("Exam is created with id: {}", examCreated.getId());
@@ -60,5 +61,10 @@ public class ExamCommandHandler {
     public DeleteCourseResponse deleteExam(DeleteExamCommand deleteExamCommand) {
         examDeleteHelper.deleteExam(new ExamId(deleteExamCommand.getExamId()));
         return new DeleteCourseResponse("Exam deleted successfully");
+    }
+
+    public UpdateExamResponse updateExam(ExamId examId, UpdateExamCommand updateExamCommand) {
+        Exam exam = examUpdateHelper.updateExam(examId, updateExamCommand);
+        return examDataMapper.examToUpdateExamResponse(exam, "Exam updated successfully");
     }
 }
