@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
@@ -18,18 +19,17 @@ import java.util.UUID;
 @AllArgsConstructor
 public class CreateExamCommand {
     private final UUID courseId;
-    private final String name;
-    private final String intro;
-    private final Float score;
-    private final Float maxScore;
-    private final ZonedDateTime timeOpen;
-    private final ZonedDateTime timeClose;
-    private final ZonedDateTime timeLimit;
-    private final String overdueHandling;
-    private final Boolean canRedoQuestions;
-    private final Integer maxAttempts;
-    private final Boolean shuffleQuestions;
-    private final String gradeMethod;
-    private final ZonedDateTime createdAt;
-    private final ZonedDateTime updatedAt;
+    @NotNull(message = "Exam name is required")
+    private String name;
+    private String intro;
+    private Float score;
+    private Float maxScore;
+    private ZonedDateTime timeOpen;
+    private ZonedDateTime timeClose;
+    private ZonedDateTime timeLimit;
+    private String overdueHandling;
+    private Boolean canRedoQuestions;
+    private Integer maxAttempts;
+    private Boolean shuffleQuestions;
+    private String gradeMethod;
 }

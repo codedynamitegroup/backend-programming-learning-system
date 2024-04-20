@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 /**
@@ -18,9 +19,12 @@ import java.util.UUID;
 @AllArgsConstructor
 public class CreatePostCommand {
     private UUID courseId;
+    @NotNull(message = "Post title is required")
     private String title;
     private String content;
     private String summary;
+    @NotNull(message = "Post type is required")
     private Boolean isPublished;
+    @NotNull(message = "Created by is required")
     private UUID createdBy;
 }
