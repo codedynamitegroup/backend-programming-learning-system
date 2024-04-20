@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.implemtent.assignment;
+package com.backend.programming.learning.system.implement.assignment;
 
 import com.backend.programming.learning.system.entity.Assignment;
 import com.backend.programming.learning.system.exception.AssignmentNotFoundException;

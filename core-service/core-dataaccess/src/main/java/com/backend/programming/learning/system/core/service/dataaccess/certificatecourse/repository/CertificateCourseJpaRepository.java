@@ -29,9 +29,4 @@ public interface CertificateCourseJpaRepository extends PagingAndSortingReposito
     @Modifying
     @Query("update CertificateCourseEntity c set c.isDeleted = ?1 where c.id = ?2")
     int deleteById(Boolean isDeleted, UUID id);
-
-    @Transactional
-    @Modifying
-    @Query("update CertificateCourseEntity c set c.avgRating = ?1 where c.id = ?2")
-    int updateAvgRating(Float avgRating, UUID id);
 }

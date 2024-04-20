@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.dto.query.assignment;
+package com.backend.programming.learning.system.dto.update.assignment;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,14 +11,8 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class QueryAssignmentResponse {
-
-    @NotNull
+public class UpdateAssignmentCommand {
     private final UUID assignmentId;
-
-    @NotNull
-    private final UUID courseId;
-
     @NotNull
     private final String title;
 
@@ -30,9 +24,6 @@ public class QueryAssignmentResponse {
 
     @NotNull
     private final Float maxScore;
-
-    @NotNull
-    private final ZonedDateTime timeOpen;
 
     @NotNull
     private final ZonedDateTime timeClose;
