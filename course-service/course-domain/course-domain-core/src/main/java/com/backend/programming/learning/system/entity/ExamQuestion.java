@@ -1,36 +1,40 @@
 package com.backend.programming.learning.system.entity;
 
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
-import com.backend.programming.learning.system.valueobject.ExamId;
 import com.backend.programming.learning.system.valueobject.ExamQuestionId;
-import com.backend.programming.learning.system.valueobject.QuestionId;
+
+import java.util.UUID;
 
 public class ExamQuestion extends AggregateRoot<ExamQuestionId> {
-    private ExamId examId;
-    private QuestionId questionId;
+    private Exam exam;
+    private Question question;
 
     private ExamQuestion(Builder builder) {
         super.setId(builder.examQuestionId);
-        examId = builder.examId;
-        questionId = builder.questionId;
+        exam = builder.exam;
+        question = builder.question;
     }
 
     public static Builder builder() {
         return new Builder();
     }
 
-    public ExamId getExamId() {
-        return examId;
+    public Exam getExam() {
+        return exam;
     }
 
-    public QuestionId getQuestionId() {
-        return questionId;
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void initializeExamQuestion() {
+        setId(new ExamQuestionId(UUID.randomUUID()));
     }
 
     public static final class Builder {
         private ExamQuestionId examQuestionId;
-        private ExamId examId;
-        private QuestionId questionId;
+        private Exam exam;
+        private Question question;
 
         private Builder() {
         }
@@ -44,13 +48,13 @@ public class ExamQuestion extends AggregateRoot<ExamQuestionId> {
             return this;
         }
 
-        public Builder examId(ExamId val) {
-            examId = val;
+        public Builder exam(Exam val) {
+            exam = val;
             return this;
         }
 
-        public Builder questionId(QuestionId val) {
-            questionId = val;
+        public Builder question(Question val) {
+            question = val;
             return this;
         }
 

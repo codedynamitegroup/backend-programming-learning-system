@@ -23,4 +23,6 @@ public interface CourseDomainService {
     void createSubmissionAssignment(SubmissionAssignment submissionAssignment);
     
     void createCourseUsers(List<CourseUser> courseUsers);
+
+    void createExamQuestions(List<ExamQuestion> examQuestions);
 }
