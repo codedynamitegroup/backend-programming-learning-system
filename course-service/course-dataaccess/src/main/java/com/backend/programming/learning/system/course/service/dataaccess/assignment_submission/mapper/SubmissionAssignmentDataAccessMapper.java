@@ -2,14 +2,12 @@ package com.backend.programming.learning.system.course.service.dataaccess.assign
 
 import com.backend.programming.learning.system.course.service.dataaccess.assignment.entity.AssignmentEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.assignment.mapper.AssignmentDataAccessMapper;
-import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.entity.AssignmentSubmissionEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.entity.SubmissionAssignmentEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.mapper.UserDataAccessMapper;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 import com.backend.programming.learning.system.entity.Assignment;
 import com.backend.programming.learning.system.entity.SubmissionAssignment;
 import com.backend.programming.learning.system.entity.User;
-import com.backend.programming.learning.system.valueobject.AssignmentId;
 import com.backend.programming.learning.system.valueobject.SubmissionAssignmentId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -18,14 +16,14 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class AssignmentSubmissionDataAccessMapper {
+public class SubmissionAssignmentDataAccessMapper {
     private final AssignmentDataAccessMapper assignmentDataAccessMapper;
     private final UserDataAccessMapper userDataAccessMapper;
-    public AssignmentSubmissionEntity assignmentSubmissionToAssignmentSubmissionEntity(SubmissionAssignment submissionAssignment) {
+    public SubmissionAssignmentEntity assignmentSubmissionToAssignmentSubmissionEntity(SubmissionAssignment submissionAssignment) {
 
         AssignmentEntity assignment = assignmentDataAccessMapper.assignmentToAssignmentEntity(submissionAssignment.getAssignment());
         UserEntity user = userDataAccessMapper.userToUserEntity(submissionAssignment.getUser());
-        return AssignmentSubmissionEntity.builder()
+        return SubmissionAssignmentEntity.builder()
                 .id(submissionAssignment.getId().getValue())
                 .assignment(assignment)
                 .user(user)
@@ -36,21 +34,21 @@ public class AssignmentSubmissionDataAccessMapper {
                 .build();
     }
 
-    public SubmissionAssignment assignmentSubmissionEntityToAssignmentSubmission(AssignmentSubmissionEntity assignmentSubmissionEntity) {
-        Assignment assignment = assignmentDataAccessMapper.assignmentEntityToAssignment(assignmentSubmissionEntity.getAssignment());
-        User user = userDataAccessMapper.userEntityToUser(assignmentSubmissionEntity.getUser());
+    public SubmissionAssignment assignmentSubmissionEntityToAssignmentSubmission(SubmissionAssignmentEntity submissionAssignmentEntity) {
+        Assignment assignment = assignmentDataAccessMapper.assignmentEntityToAssignment(submissionAssignmentEntity.getAssignment());
+        User user = userDataAccessMapper.userEntityToUser(submissionAssignmentEntity.getUser());
         return SubmissionAssignment.builder()
-                .id(new SubmissionAssignmentId(assignmentSubmissionEntity.getId()))
+                .id(new SubmissionAssignmentId(submissionAssignmentEntity.getId()))
                 .assignment(assignment)
                 .user(user)
-                .pass_status(assignmentSubmissionEntity.getPass_status())
-                .grade(assignmentSubmissionEntity.getGrade())
-                .content(assignmentSubmissionEntity.getContent())
-                .submittedAt(assignmentSubmissionEntity.getSubmitTime())
+                .pass_status(submissionAssignmentEntity.getPass_status())
+                .grade(submissionAssignmentEntity.getGrade())
+                .content(submissionAssignmentEntity.getContent())
+                .submittedAt(submissionAssignmentEntity.getSubmitTime())
                 .build();
     }
 
-    public List<SubmissionAssignment> assignmentSubmissionEntityListToAssignmentSubmissionList(List<AssignmentSubmissionEntity> assignmentSubmissionEntityList) {
-        return assignmentSubmissionEntityList.stream().map(this::assignmentSubmissionEntityToAssignmentSubmission).toList();
+    public List<SubmissionAssignment> assignmentSubmissionEntityListToAssignmentSubmissionList(List<SubmissionAssignmentEntity> submissionAssignmentEntityList) {
+        return submissionAssignmentEntityList.stream().map(this::assignmentSubmissionEntityToAssignmentSubmission).toList();
     }
 }

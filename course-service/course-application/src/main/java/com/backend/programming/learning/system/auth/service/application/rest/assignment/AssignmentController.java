@@ -10,7 +10,7 @@ import com.backend.programming.learning.system.dto.method.query.assignment.Query
 import com.backend.programming.learning.system.dto.method.query.assignment.QueryAssignmentResponse;
 import com.backend.programming.learning.system.dto.update.assignment.UpdateAssignmentCommand;
 import com.backend.programming.learning.system.dto.update.assignment.UpdateAssignmentResponse;
-import com.backend.programming.learning.system.ports.input.service.AssignmentApplicationService;
+import com.backend.programming.learning.system.ports.input.service.assignment.AssignmentApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

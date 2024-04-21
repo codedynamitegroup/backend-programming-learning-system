@@ -6,7 +6,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -17,7 +16,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table(name = "submission_assignment")
 @Entity
-public class AssignmentSubmissionEntity {
+public class SubmissionAssignmentEntity {
     @Id
     @Column(name = "id")
     private UUID id;
@@ -42,7 +41,7 @@ public class AssignmentSubmissionEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AssignmentSubmissionEntity that = (AssignmentSubmissionEntity) o;
+        SubmissionAssignmentEntity that = (SubmissionAssignmentEntity) o;
         return Objects.equals(id, that.id);
     }
 
