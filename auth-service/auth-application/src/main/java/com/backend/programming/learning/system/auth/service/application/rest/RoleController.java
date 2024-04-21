@@ -7,6 +7,8 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.de
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesByOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryRoleByIdCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesByOrganizationResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.role.UpdateRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.role.UpdateRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.role.RoleEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.RoleApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -56,6 +58,19 @@ public class RoleController {
                roleApplicationService.findRoleById(QueryRoleByIdCommand.builder().roleId(id).build());
        log.info("Returning role with id: {}", queryRoleResponse.getRoleId());
        return  ResponseEntity.ok(queryRoleResponse);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UpdateRoleResponse> updateRoleById(@PathVariable UUID id, @RequestBody UpdateRoleCommand updateRoleCommand) {
+        log.info("Updating role with id: {}", id);
+        UpdateRoleResponse updateRoleResponse = roleApplicationService.updateRole(UpdateRoleCommand.builder()
+                .roleId(id)
+                .name(updateRoleCommand.getName())
+                .description(updateRoleCommand.getDescription())
+                .updatedBy(updateRoleCommand.getUpdatedBy())
+                .build());
+        log.info("Role updated with id: {}", id);
+        return ResponseEntity.ok(updateRoleResponse);
     }
 
     @DeleteMapping("/{id}")

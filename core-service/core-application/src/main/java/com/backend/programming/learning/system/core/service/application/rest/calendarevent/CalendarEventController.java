@@ -7,8 +7,12 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse_user.CreateCertificateCourseUserCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse_user.CreateCertificateCourseUserResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.notification.CreateNotificationResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.calendarevent.DeleteCalendarEventCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.calendarevent.DeleteCalendarEventResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.certificatecourse.DeleteCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.certificatecourse.DeleteCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.calendarevent.QueryAllCalendarEventsCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.calendarevent.QueryAllCalendarEventsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.*;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseResponse;
@@ -42,5 +46,30 @@ public class CalendarEventController {
         log.info("Calendar event created: {}", createCalendarEventResponse);
 
         return ResponseEntity.ok(createCalendarEventResponse);
+    }
+
+    @GetMapping
+    public ResponseEntity<QueryAllCalendarEventsResponse> getAllCalendarEvents(
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize) {
+        QueryAllCalendarEventsResponse queryAllCalendarEventsResponse =
+                calendarEventApplicationService.queryAllCalendarEventsResponse(QueryAllCalendarEventsCommand
+                        .builder()
+                        .pageNo(pageNo)
+                        .pageSize(pageSize)
+                        .build());
+        log.info("Returning all calendar events: {}", queryAllCalendarEventsResponse);
+        return ResponseEntity.ok(queryAllCalendarEventsResponse);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<DeleteCalendarEventResponse> deleteCalendarEvent(@PathVariable UUID id) {
+        DeleteCalendarEventResponse deleteCalendarEventResponse =
+                calendarEventApplicationService.deleteCalendarEventResponse(DeleteCalendarEventCommand
+                        .builder()
+                        .calendarEventId(id)
+                        .build());
+        log.info("Calendar event deleted: {}", deleteCalendarEventResponse);
+        return ResponseEntity.ok(deleteCalendarEventResponse);
     }
 }

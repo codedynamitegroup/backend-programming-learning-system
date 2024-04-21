@@ -45,6 +45,8 @@ public class AssignmentRepositoryImpl implements AssignmentRepository {
 
     @Override
     public void deleteAssignmentById(UUID assignmentId) {
+        assignmentJpaRepository.deleteById(assignmentId);
 
     }
+
 }

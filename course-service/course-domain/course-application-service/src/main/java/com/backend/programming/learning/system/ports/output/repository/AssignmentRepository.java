@@ -15,4 +15,5 @@ public interface AssignmentRepository {
     List<Assignment> findAllByCourseId(CourseId courseId);
 
     void deleteAssignmentById(UUID assignmentId);
+
 }

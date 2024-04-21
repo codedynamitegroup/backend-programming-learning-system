@@ -5,25 +5,31 @@ import com.backend.programming.learning.system.domain.valueobject.UserId;
 import com.backend.programming.learning.system.valueobject.CourseId;
 import com.backend.programming.learning.system.valueobject.CourseUserId;
 
+import java.util.UUID;
+
 public class CourseUser extends AggregateRoot<CourseUserId> {
-    private UserId userId;
-    private CourseId courseId;
+    public User user;
+    public Course course;
 
     private CourseUser(Builder builder) {
         super.setId(builder.courseUserId);
-        userId = builder.userId;
-        courseId = builder.courseId;
+        user = builder.user;
+        course = builder.course;
     }
 
     public static Builder builder() {
         return new Builder();
     }
 
+    public void initializeCourseUser() {
+        setId(new CourseUserId(UUID.randomUUID()));
+    }
+
 
     public static final class Builder {
         private CourseUserId courseUserId;
-        private UserId userId;
-        private CourseId courseId;
+        private User user;
+        private Course course;
 
         private Builder() {
         }
@@ -37,13 +43,13 @@ public class CourseUser extends AggregateRoot<CourseUserId> {
             return this;
         }
 
-        public Builder userId(UserId val) {
-            userId = val;
+        public Builder user(User val) {
+            user = val;
             return this;
         }
 
-        public Builder courseId(CourseId val) {
-            courseId = val;
+        public Builder course(Course val) {
+            course = val;
             return this;
         }
 

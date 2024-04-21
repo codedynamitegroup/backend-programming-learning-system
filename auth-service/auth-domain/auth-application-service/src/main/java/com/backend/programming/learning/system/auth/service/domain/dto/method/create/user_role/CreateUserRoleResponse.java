@@ -14,7 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class CreateUserRoleResponse {
     @NotNull
-    private UUID id;
+    private UUID userRoleId;
     @NotNull
     private String name;
 

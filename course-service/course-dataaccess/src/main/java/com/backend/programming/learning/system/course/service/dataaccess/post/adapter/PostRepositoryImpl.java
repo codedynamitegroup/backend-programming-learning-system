@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.dataaccess.post.adapter;
 
+import com.backend.programming.learning.system.course.service.dataaccess.post.entity.PostEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.post.mapper.PostDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.post.repository.PostJpaRepository;
 import com.backend.programming.learning.system.entity.Post;
@@ -37,5 +38,12 @@ public class PostRepositoryImpl implements PostRepository {
                 .postEntityToPost(postJpaRepository
                         .findById(postId)
                         .orElseThrow(() -> new RuntimeException("Post not found")));
+    }
+
+    @Override
+    public void deleteById(UUID postId) {
+        PostEntity postEntity = postJpaRepository.findById(postId)
+                .orElseThrow(() -> new RuntimeException("Post not found"));
+        postJpaRepository.delete(postEntity);
     }
 }

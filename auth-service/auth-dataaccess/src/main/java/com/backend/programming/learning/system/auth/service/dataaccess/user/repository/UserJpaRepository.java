@@ -11,6 +11,7 @@ import java.util.UUID;
 
 @Repository
 public interface UserJpaRepository extends JpaRepository<UserEntity, UUID> {
-    Optional<UserEntity> findByEmail(String email);
+    Optional<UserEntity> findByEmailAndIsDeletedFalse(String email);
+    Optional<UserEntity> findByIdAndIsDeletedFalse(UUID id);
     Page<UserEntity> findAllByIsDeletedFalse(Pageable pageable);
 }

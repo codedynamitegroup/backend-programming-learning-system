@@ -4,9 +4,11 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.calendarevent.CreateCalendarEventResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.calendarevent.QueryAllCalendarEventsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.calendarevent.CalendarEventResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
@@ -29,6 +31,11 @@ import java.util.List;
 
 @Component
 public class CalendarEventDataMapper {
+    private final UserDataMapper userDataMapper;
+
+    public CalendarEventDataMapper(UserDataMapper userDataMapper) {
+        this.userDataMapper = userDataMapper;
+    }
 
     public CreateCalendarEventResponse calendarEventToCreateCalendarEventResponse(
             CalendarEvent calendarEvent, String message) {
@@ -48,6 +55,31 @@ public class CalendarEventDataMapper {
                 .eventType(NotificationEventType.valueOf(createCalendarEventCommand.getEventType()))
                 .startTime(createCalendarEventCommand.getStartTime())
                 .endTime(createCalendarEventCommand.getEndTime())
+                .build();
+    }
+
+    public CalendarEventResponseEntity calendarEventToCalendarEventResponseEntity(CalendarEvent calendarEvent) {
+        return CalendarEventResponseEntity.builder()
+                .calendarEventId(calendarEvent.getId().getValue())
+                .userTo(userDataMapper.userToUserResponseEntity(calendarEvent.getUserTo()))
+                .name(calendarEvent.getName())
+                .description(calendarEvent.getDescription())
+                .eventType(NotificationEventType.valueOf(calendarEvent.getEventType().name()))
+                .startTime(calendarEvent.getStartTime())
+                .endTime(calendarEvent.getEndTime())
+                .createdAt(calendarEvent.getCreatedAt())
+                .build();
+    }
+
+    public QueryAllCalendarEventsResponse pageCalendarEventToQueryAllCalendarEventsResponse(Page<CalendarEvent> calendarEvents) {
+        List<CalendarEventResponseEntity> calendarEventResponseEntities = new ArrayList<>();
+        calendarEvents.forEach(calendarEvent -> calendarEventResponseEntities.add(
+                calendarEventToCalendarEventResponseEntity(calendarEvent)));
+        return QueryAllCalendarEventsResponse.builder()
+                .calendarEvents(calendarEventResponseEntities)
+                .currentPage(calendarEvents.getNumber())
+                .totalPages(calendarEvents.getTotalPages())
+                .totalItems(calendarEvents.getTotalElements())
                 .build();
     }
 

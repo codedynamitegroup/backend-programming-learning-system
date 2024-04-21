@@ -1,7 +1,6 @@
 package com.backend.programming.learning.system.course.service.dataaccess.assignment_submission_file.entity;
 
-import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.entity.AssignmentSubmissionEntity;
-import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.entity.SubmissionAssignmentEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,16 +12,16 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "assignment_submission_file")
+@Table(name = "submission_assignment_file")
 @Entity
 public class AssignmentSubmissionFileEntity {
     @Id
     @Column(name = "id")
     private UUID id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "assignment_submission_id", referencedColumnName = "id")
-    private AssignmentSubmissionEntity assignmentSubmission;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "submission_assignment_id", referencedColumnName = "id")
+    private SubmissionAssignmentEntity assignmentSubmission;
 
     private int num_file;
 

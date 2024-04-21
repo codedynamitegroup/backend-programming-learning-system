@@ -39,11 +39,6 @@ public class UserDeleteHelper {
         }
 
         User user = userResult.get();
-        if (Boolean.TRUE.equals(user.getDeleted())) {
-            log.warn("User with id: {} is already deleted", deleteUserCommand.getUserId());
-            throw new AuthNotFoundException("User with id: " + deleteUserCommand.getUserId() +
-                    " is already deleted");
-        }
 
         UserDeletedEvent userDeletedEvent = authDomainService.deleteUser(user, userDeletedMessagePublisher);
         userRepository.save(user);

@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.auth.service.domain.implement.ro
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.entity.Role;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
+import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.OrganizationRepository;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.RoleRepository;
 import com.backend.programming.learning.system.auth.service.domain.valueobject.RoleId;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
@@ -18,9 +19,11 @@ import java.util.UUID;
 @Component
 public class RoleQueryHelper {
     private final RoleRepository roleRepository;
+    private final OrganizationRepository organizationRepository;
 
-    public RoleQueryHelper(RoleRepository roleRepository) {
+    public RoleQueryHelper(RoleRepository roleRepository, OrganizationRepository organizationRepository) {
         this.roleRepository = roleRepository;
+        this.organizationRepository = organizationRepository;
     }
 
     @Transactional(readOnly = true)
@@ -35,8 +38,18 @@ public class RoleQueryHelper {
         return roleResult.get();
     }
 
+    private void checkOrganizationExist(UUID organizationId) {
+        Optional<Organization> organization = organizationRepository.findById(new OrganizationId(organizationId));
+        if (organization.isEmpty()) {
+            log.warn("Could not find organization with id: {}", organizationId);
+            throw new AuthNotFoundException("Could not find organization with id: " + organizationId);
+        }
+    }
+
+
     @Transactional(readOnly = true)
     public Page<Role> queryAllRolesByOrganizationId(UUID organizationId ,Integer pageNo, Integer pageSize) {
+        checkOrganizationExist(organizationId);
         return roleRepository.findAllRolesByOrganizationId(new OrganizationId(organizationId), pageNo, pageSize);
     }
 

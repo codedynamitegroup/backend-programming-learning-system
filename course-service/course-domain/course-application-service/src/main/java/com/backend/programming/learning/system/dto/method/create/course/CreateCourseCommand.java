@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
-import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Getter
@@ -13,16 +12,14 @@ import java.util.UUID;
 @AllArgsConstructor
 public class CreateCourseCommand {
 
-    @NotNull
+    @NotNull(message = "Name is required")
     private final String name;
 
 //    @NotNull
     private final String key;
 
-    @NotNull
+    @NotNull(message = "Visible is required")
     private final Boolean visible;
-//    @NotNull
-//    private final UUID createdBy;
-//    @NotNull
-//    private final UUID updatedBy;
+    @NotNull(message = "Created by is required")
+    private final UUID createdBy;
 }

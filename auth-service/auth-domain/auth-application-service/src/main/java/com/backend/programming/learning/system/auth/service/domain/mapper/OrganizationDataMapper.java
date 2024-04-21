@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.auth.service.domain.mapper;
 
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.organization.CreateOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.organization.CreateOrganizationResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.organization.DeleteOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.organization.QueryAllOrganizationsResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.organization.UpdateOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.organization.UpdateOrganizationResponse;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class OrganizationDataMapper {
@@ -31,20 +33,12 @@ public class OrganizationDataMapper {
                 .name(createOrganizationCommand.getName())
                 .phone(createOrganizationCommand.getPhone())
                 .address(createOrganizationCommand.getAddress())
-                .createdBy(User
-                        .builder()
-                        .id(new UserId(createOrganizationCommand.getCreatedBy()))
-                        .build())
-                .updatedBy(User
-                        .builder()
-                        .id(new UserId(createOrganizationCommand.getUpdatedBy()))
-                        .build())
                 .build();
     }
 
     public CreateOrganizationResponse organizationToCreateOrganizationResponse(Organization organization, String message) {
         return CreateOrganizationResponse.builder()
-                .id(organization.getId().getValue())
+                .organizationId(organization.getId().getValue())
                 .email(organization.getEmail())
                 .name(organization.getName())
                 .message(message)
@@ -84,4 +78,17 @@ public class OrganizationDataMapper {
     }
 
 
+    public DeleteOrganizationResponse deleteOrganizationResponse(UUID organizationId, String message) {
+        return DeleteOrganizationResponse.builder()
+                .organizationId(organizationId)
+                .message(message)
+                .build();
+    }
+
+    public UpdateOrganizationResponse organizationToUpdateOrganizationResponse(Organization organizationUpdated, String message) {
+        return UpdateOrganizationResponse.builder()
+                .organizationId(organizationUpdated.getId().getValue())
+                .message(message)
+                .build();
+    }
 }

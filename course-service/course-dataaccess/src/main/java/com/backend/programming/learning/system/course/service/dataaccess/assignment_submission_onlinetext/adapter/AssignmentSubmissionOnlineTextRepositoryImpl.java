@@ -2,8 +2,14 @@ package com.backend.programming.learning.system.course.service.dataaccess.assign
 
 import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission_onlinetext.mapper.AssignmentSubmissionOnlineTextDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission_onlinetext.repository.AssignmentSubmissionOnlineTextJpaRepository;
-import com.backend.programming.learning.system.entity.AssignmentSubmissionOnlineText;
+import com.backend.programming.learning.system.entity.SubmissionAssignmentOnlineText;
 import com.backend.programming.learning.system.ports.output.repository.SubmissionAssignmentOnlineTextRepository;
+import org.springframework.stereotype.Component;
+
+import java.util.Optional;
+import java.util.UUID;
+
+@Component
 
 public class AssignmentSubmissionOnlineTextRepositoryImpl implements SubmissionAssignmentOnlineTextRepository {
 
@@ -17,9 +23,23 @@ public class AssignmentSubmissionOnlineTextRepositoryImpl implements SubmissionA
     }
 
     @Override
-    public AssignmentSubmissionOnlineText saveAssignmentSubmissionOnlineText(AssignmentSubmissionOnlineText assignmentSubmissionOnlineText) {
-        return assignmentSubmissionOnlineTextDataAccessMapper.assignmentSubmissionOnlineTextEntityToAssignmentSubmissionOnlineText(assignmentSubmissionOnlineTextJpaRepository
+    public SubmissionAssignmentOnlineText saveAssignmentSubmissionOnlineText(SubmissionAssignmentOnlineText submissionAssignmentOnlineText) {
+        return assignmentSubmissionOnlineTextDataAccessMapper
+                .assignmentSubmissionOnlineTextEntityToAssignmentSubmissionOnlineText(
+                        assignmentSubmissionOnlineTextJpaRepository
                 .save(assignmentSubmissionOnlineTextDataAccessMapper
-                        .assignmentSubmissionOnlineTextToAssignmentSubmissionOnlineTextEntity(assignmentSubmissionOnlineText)));
+                        .assignmentSubmissionOnlineTextToAssignmentSubmissionOnlineTextEntity(submissionAssignmentOnlineText)));
     }
+
+    @Override
+    public Optional<SubmissionAssignmentOnlineText> findById(UUID submissionAssignmentOnlineTextId) {
+        return assignmentSubmissionOnlineTextJpaRepository.findById(submissionAssignmentOnlineTextId)
+                .map(assignmentSubmissionOnlineTextDataAccessMapper::assignmentSubmissionOnlineTextEntityToAssignmentSubmissionOnlineText);
+    }
+
+    @Override
+    public void deleteSubmissionAssignmentOnlineTextById(UUID submissionAssignmentOnlineTextId) {
+        assignmentSubmissionOnlineTextJpaRepository.deleteById(submissionAssignmentOnlineTextId);
+    }
+
 }

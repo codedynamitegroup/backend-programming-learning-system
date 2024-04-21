@@ -2,17 +2,20 @@ package com.backend.programming.learning.system.implement.exam;
 
 import com.backend.programming.learning.system.dto.method.create.exam.CreateExamCommand;
 import com.backend.programming.learning.system.dto.method.create.exam.CreateExamResponse;
+import com.backend.programming.learning.system.dto.method.delete.course.DeleteCourseResponse;
+import com.backend.programming.learning.system.dto.method.delete.exam.DeleteExamCommand;
 import com.backend.programming.learning.system.dto.method.query.exam.QueryAllExamCommand;
 import com.backend.programming.learning.system.dto.method.query.exam.QueryAllExamResponse;
 import com.backend.programming.learning.system.dto.method.query.exam.QueryExamCommand;
+import com.backend.programming.learning.system.dto.method.update.exam.UpdateExamCommand;
+import com.backend.programming.learning.system.dto.method.update.exam.UpdateExamResponse;
 import com.backend.programming.learning.system.dto.responseentity.exam.ExamResponseEntity;
 import com.backend.programming.learning.system.ports.input.service.exam.ExamApplicationService;
+import com.backend.programming.learning.system.valueobject.ExamId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-
-import java.util.List;
 
 /**
  * com.backend.programming.learning.system.implemtent.exam
@@ -40,5 +43,15 @@ public class ExamApplicationServiceImpl implements ExamApplicationService {
     @Override
     public QueryAllExamResponse findAll(QueryAllExamCommand queryAllExamCommand) {
         return examCommandHandler.findAll(queryAllExamCommand);
+    }
+
+    @Override
+    public DeleteCourseResponse deleteExam(DeleteExamCommand deleteExamCommand) {
+        return examCommandHandler.deleteExam(deleteExamCommand);
+    }
+
+    @Override
+    public UpdateExamResponse updateExam(ExamId examId, UpdateExamCommand updateExamCommand) {
+        return examCommandHandler.updateExam(examId, updateExamCommand);
     }
 }

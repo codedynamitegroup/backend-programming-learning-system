@@ -19,7 +19,4 @@ public class CreateRoleCommand {
 
     @NotNull
     private final UUID createdBy;
-
-    @NotNull
-    private final UUID updatedBy;
 }

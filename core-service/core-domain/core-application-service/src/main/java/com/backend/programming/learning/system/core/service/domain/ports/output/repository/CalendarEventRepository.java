@@ -9,6 +9,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface CalendarEventRepository {
-
+    Optional<CalendarEvent> findById(UUID calendarEventId);
     CalendarEvent saveCalendarEvent(CalendarEvent calendarEvent);
+
+    Page<CalendarEvent> findAll(Integer pageNo, Integer pageSize);
+
+    void deleteCalendarEvent(UUID calendarEventId);
 }

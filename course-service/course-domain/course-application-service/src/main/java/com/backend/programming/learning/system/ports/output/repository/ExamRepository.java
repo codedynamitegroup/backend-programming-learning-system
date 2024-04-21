@@ -6,11 +6,11 @@ import org.springframework.data.domain.Page;
 
 
 public interface ExamRepository {
-    Exam saveExam(Exam exam);
-
     Exam save(Exam exam);
 
     Exam findBy(ExamId examId);
 
     Page<Exam> findAll(String search, Integer pageNo, Integer pageSize);
+
+    void deleteById(ExamId examId);
 }

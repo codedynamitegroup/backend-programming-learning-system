@@ -32,7 +32,7 @@ public class OrganizationRepositoryImpl implements OrganizationRepository {
 
     @Override
     public Optional<Organization> findById(OrganizationId organizationId) {
-        return organizationJpaRepository.findById(organizationId.getValue())
+        return organizationJpaRepository.findByIdAndIsDeletedFalse(organizationId.getValue())
                 .map(organizationDataAccessMapper::organizationEntityToOrganization);
     }
 

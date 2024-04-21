@@ -26,7 +26,4 @@ public class CreateOrganizationCommand {
 
     @NotNull
     private final UUID createdBy;
-
-    @NotNull
-    private final UUID updatedBy;
 }

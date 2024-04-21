@@ -1,11 +1,10 @@
 package com.backend.programming.learning.system;
 
-import com.backend.programming.learning.system.entity.Assignment;
-import com.backend.programming.learning.system.entity.Course;
-import com.backend.programming.learning.system.entity.Exam;
-import com.backend.programming.learning.system.entity.Post;
-import com.backend.programming.learning.system.entity.Question;
+import com.backend.programming.learning.system.entity.*;
+
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.List;
 
 @Slf4j
 public class CourseDomainServiceImpl implements CourseDomainService{
@@ -38,5 +37,47 @@ public class CourseDomainServiceImpl implements CourseDomainService{
     public void createPost(Post post) {
         post.initializePost();
         log.info("Post with id: {} is initiated", post.getId().getValue());
+    }
+
+    @Override
+    public void createSubmissionAssignment(SubmissionAssignment submissionAssignment) {
+        submissionAssignment.initializeAssignmentSubmission();
+        log.info("AssignmentSubmission with id: {} is initiated", submissionAssignment.getId().getValue());
+    }
+
+    @Override
+    public void createSubmissionAssignmentOnlineText(SubmissionAssignmentOnlineText submissionAssignmentOnlineText) {
+        submissionAssignmentOnlineText.initializeSubmissionAssignmentOnlineText();
+        log.info("SubmissionAssignmentOnlineText with id: {} is initiated", submissionAssignmentOnlineText.getId().getValue());
+    }
+
+    @Override
+    public void createSubmissionAssignmentFile(SubmissionAssignmentFile submissionAssignmentFile) {
+        submissionAssignmentFile.initializeSubmissionAssignmentFile();
+        log.info("SubmissionAssignmentFile with id: {} is initiated", submissionAssignmentFile.getId().getValue());
+
+    }
+
+    @Override
+    public void createCourseUsers(List<CourseUser> courseUsers) {
+        courseUsers.forEach(CourseUser::initializeCourseUser);
+        log.info("CourseUser is initiated");
+    }
+
+    @Override
+    public void createExamQuestions(List<ExamQuestion> examQuestions) {
+        examQuestions.forEach(ExamQuestion::initializeExamQuestion);
+        log.info("ExamQuestion is initiated");
+    }
+
+    @Override
+    public void createOrganization(Organization organization) {
+        organization.initializeOrganization();
+        log.info("Organization with id: {} is initiated", organization.getId().getValue());
+    }
+    @Override
+    public void createQuestionBank(QuestionBank questionBank) {
+        questionBank.initializeQuestionBank();
+        log.info("QuestionBank with id: {} is initiated", questionBank.getId().getValue());
     }
 }

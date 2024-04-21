@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.ports.output.repository;
 
-import com.backend.programming.learning.system.entity.AssignmentSubmissionFile;
+import com.backend.programming.learning.system.entity.SubmissionAssignmentFile;
 
 public interface SubmissionAssignmentFileRepository {
-    AssignmentSubmissionFile saveAssignmentSubmissionFile(AssignmentSubmissionFile assignmentSubmissionFile);
+    SubmissionAssignmentFile saveSubmissionAssignmentFile(SubmissionAssignmentFile submissionAssignmentFile);
 }

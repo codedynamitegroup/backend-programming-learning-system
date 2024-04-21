@@ -16,8 +16,6 @@ public class UpdateUserCommand {
     @NotNull
     private final UUID userId;
 
-    private String email;
-
     private ZonedDateTime dob;
 
     private String firstName;

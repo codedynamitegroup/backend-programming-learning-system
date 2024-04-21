@@ -516,5 +516,5 @@ CREATE TABLE "public".plagiarism_detection_report
         REFERENCES "public".question (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-    CONSTRAINT unique_plagiarism_detection_report UNIQUE (programming_language_id, exam_id, question_id)
+    CONSTRAINT unique_plagiarism_detection_report UNIQUE (exam_id, question_id)
 );

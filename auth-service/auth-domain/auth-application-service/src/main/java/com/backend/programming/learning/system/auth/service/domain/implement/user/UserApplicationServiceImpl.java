@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.de
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryUserByIdCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserApplicationService;
@@ -40,8 +41,8 @@ class UserApplicationServiceImpl implements UserApplicationService {
     }
 
     @Override
-    public UpdateUserResponse updateUser(CreateUserCommand createUserCommand) {
-        return null;
+    public UpdateUserResponse updateUser(UpdateUserCommand updateUserCommand) {
+        return userCommandHandler.updateUser(updateUserCommand);
     }
 
     @Override

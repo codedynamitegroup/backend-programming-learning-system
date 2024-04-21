@@ -13,7 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class CreateOrganizationResponse {
     @NotNull
-    private UUID id;
+    private UUID organizationId;
 
     @NotNull
     @Email

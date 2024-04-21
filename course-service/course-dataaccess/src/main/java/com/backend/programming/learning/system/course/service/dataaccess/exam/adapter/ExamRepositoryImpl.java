@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.dataaccess.exam.adapter;
 
+import com.backend.programming.learning.system.course.service.dataaccess.exam.entity.ExamEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.exam.mapper.ExamDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.exam.repository.ExamJpaRepository;
 import com.backend.programming.learning.system.entity.Exam;
@@ -8,8 +9,6 @@ import com.backend.programming.learning.system.valueobject.ExamId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public class ExamRepositoryImpl implements ExamRepository {
@@ -21,17 +20,8 @@ public class ExamRepositoryImpl implements ExamRepository {
         this.examDataAccessMapper = examDataAccessMapper;
     }
 
-
-    @Override
-    public Exam saveExam(Exam exam) {
-        return examDataAccessMapper.examEntityToExam(examJpaRepository
-                .save(examDataAccessMapper
-                        .examToExamEntity(exam)));
-    }
-
     @Override
     public Exam save(Exam exam) {
-
         return examDataAccessMapper.examEntityToExam(
                 examJpaRepository.save(examDataAccessMapper.examToExamEntity(exam)));
     }
@@ -47,5 +37,12 @@ public class ExamRepositoryImpl implements ExamRepository {
     public Page<Exam> findAll(String search, Integer pageNo, Integer pageSize) {
         return examJpaRepository.findAll(PageRequest.of(pageNo, pageSize))
                 .map(examDataAccessMapper::examEntityToExam);
+    }
+
+    @Override
+    public void deleteById(ExamId examId) {
+        ExamEntity examEntity = examJpaRepository.findById(examId.getValue())
+                .orElseThrow(() -> new RuntimeException("Exam not found"));
+        examJpaRepository.delete(examEntity);
     }
 }
