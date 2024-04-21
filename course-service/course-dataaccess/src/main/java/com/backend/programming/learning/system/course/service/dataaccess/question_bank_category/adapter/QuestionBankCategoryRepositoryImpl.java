@@ -4,24 +4,40 @@ import com.backend.programming.learning.system.course.service.dataaccess.questio
 import com.backend.programming.learning.system.course.service.dataaccess.question_bank_category.repository.QuestionBankCategoryJpaRepository;
 import com.backend.programming.learning.system.entity.QuestionBankCategory;
 import com.backend.programming.learning.system.ports.output.repository.QuestionBankCategoryRepository;
+import com.backend.programming.learning.system.valueobject.QuestionBankCategoryId;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 @Repository
+@RequiredArgsConstructor
 public class QuestionBankCategoryRepositoryImpl implements QuestionBankCategoryRepository {
     private final QuestionBankCategoryJpaRepository questionBankCategoryJpaRepository;
     private final QuestionBankCategoryDataAccessMapper questionBankCategoryDataAccessMapper;
 
-    public QuestionBankCategoryRepositoryImpl(QuestionBankCategoryJpaRepository questionBankCategoryJpaRepository, QuestionBankCategoryDataAccessMapper questionBankCategoryDataAccessMapper) {
-        this.questionBankCategoryJpaRepository = questionBankCategoryJpaRepository;
-        this.questionBankCategoryDataAccessMapper = questionBankCategoryDataAccessMapper;
-    }
-
-
     @Override
-    public QuestionBankCategory saveQuestionBankCategory(QuestionBankCategory questionBankCategory) {
+    public QuestionBankCategory save(QuestionBankCategory questionBankCategory) {
         return questionBankCategoryDataAccessMapper
                 .questionBankCategoryEntityToQuestionBankCategory(questionBankCategoryJpaRepository
                         .save(questionBankCategoryDataAccessMapper
                                 .questionBankCategoryToQuestionBankCategoryEntity(questionBankCategory)));
     }
+
+    @Override
+    public Page<QuestionBankCategory> findAll(String search, Integer pageNo, Integer pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
+        return questionBankCategoryJpaRepository.findAll(search, pageRequest)
+                .map(questionBankCategoryDataAccessMapper::questionBankCategoryEntityToQuestionBankCategory);
+    }
+
+    @Override
+    public QuestionBankCategory findById(UUID id) {
+        return questionBankCategoryDataAccessMapper
+                .questionBankCategoryEntityToQuestionBankCategory(questionBankCategoryJpaRepository.findById(id)
+                        .orElseThrow(() -> new RuntimeException("Question bank category not found")));
+    }
+
 }
