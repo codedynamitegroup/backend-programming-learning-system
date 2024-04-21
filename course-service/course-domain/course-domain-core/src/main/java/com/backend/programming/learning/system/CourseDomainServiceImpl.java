@@ -62,4 +62,10 @@ public class CourseDomainServiceImpl implements CourseDomainService{
         examQuestions.forEach(ExamQuestion::initializeExamQuestion);
         log.info("ExamQuestion is initiated");
     }
+
+    @Override
+    public void createQuestionBank(QuestionBank questionBank) {
+        questionBank.initializeQuestionBank();
+        log.info("QuestionBank with id: {} is initiated", questionBank.getId().getValue());
+    }
 }

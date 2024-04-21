@@ -26,4 +26,6 @@ public interface CourseDomainService {
     void createCourseUsers(List<CourseUser> courseUsers);
 
     void createExamQuestions(List<ExamQuestion> examQuestions);
+
+    void createQuestionBank(QuestionBank questionBank);
 }
