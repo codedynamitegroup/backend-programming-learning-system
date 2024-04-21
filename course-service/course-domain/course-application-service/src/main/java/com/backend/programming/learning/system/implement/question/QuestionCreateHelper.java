@@ -53,7 +53,7 @@ public class QuestionCreateHelper {
     }
 
     private Organization getOrganization(UUID organizationId) {
-        Optional<Organization> organization = organizationRepository.findOrganization(organizationId);
+        Optional<Organization> organization = organizationRepository.findOrganizationById(organizationId);
         if (organization.isEmpty()) {
             log.warn("Organization with id: {} not found", organizationId);
             throw new RuntimeException("Organization not found");

@@ -29,5 +29,7 @@ public interface CourseDomainService {
 
     void createExamQuestions(List<ExamQuestion> examQuestions);
 
+    void createOrganization(Organization organization);
+  
     void createQuestionBank(QuestionBank questionBank);
 }
