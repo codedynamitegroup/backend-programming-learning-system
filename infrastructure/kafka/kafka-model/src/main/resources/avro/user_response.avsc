@@ -25,18 +25,27 @@
       }
     },
     {
-      "name": "avatarUrl",
+      "name": "email",
       "type": "string"
     },
     {
-      "name": "createdAt",
-      "type": {
-        "type": "long",
-        "logicalType": "timestamp-millis"
-      }
+      "name": "firstName",
+      "type": "string"
     },
     {
-      "name": "displayName",
+      "name": "lastName",
+      "type": "string"
+    },
+    {
+      "name": "phone",
+      "type": "string"
+    },
+    {
+      "name": "address",
+      "type": "string"
+    },
+    {
+      "name": "avatarUrl",
       "type": "string"
     },
     {
@@ -47,8 +56,35 @@
       }
     },
     {
-      "name": "email",
-      "type": "string"
+      "name": "createdAt",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    },
+    {
+      "name": "updatedAt",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    },
+    {
+      "name": "userResponseStatus",
+      "type": {
+        "type": "enum",
+        "name": "UserResponseStatus",
+        "symbols": ["CREATED",
+          "CREATE_FAILED",
+          "UPDATED",
+          "UPDATE_FAILED",
+          "DELETED",
+          "DELETE_FAILED"]
+      }
+    },
+    {
+      "name": "isDeleted",
+      "type": "boolean"
     },
     {
       "name": "failureMessages",
@@ -58,10 +94,6 @@
           "type": "string"
         }
       }
-    },
-    {
-      "name": "isActive",
-      "type": "boolean"
     }
   ]
 }

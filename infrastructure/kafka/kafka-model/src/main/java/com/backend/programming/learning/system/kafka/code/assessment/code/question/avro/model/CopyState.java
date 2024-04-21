@@ -6,8 +6,8 @@
 package com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model;
 @org.apache.avro.specific.AvroGenerated
 public enum CopyState implements org.apache.avro.generic.GenericEnumSymbol<CopyState> {
-  CREATING, CREATED, UPDATING, UPDATED, DELETING, DELETED, DELETING_FAIL, UPDATING_FAIL, CREATING_FAIL  ;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"enum\",\"name\":\"CopyState\",\"namespace\":\"com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"DELETING_FAIL\",\"UPDATING_FAIL\",\"CREATING_FAIL\"]}");
+  CREATING, CREATED, UPDATING, UPDATED, DELETING, DELETED, DELETE_FAILED, UPDATE_FAILED, CREATE_FAILED  ;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"enum\",\"name\":\"CopyState\",\"namespace\":\"com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   @Override

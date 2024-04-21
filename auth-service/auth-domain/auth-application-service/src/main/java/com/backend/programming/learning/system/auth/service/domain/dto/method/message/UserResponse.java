@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.auth.service.domain.dto.method.message;
 
+import com.backend.programming.learning.system.domain.valueobject.UserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,14 +11,19 @@ import java.util.Date;
 @Getter
 @Builder
 @AllArgsConstructor
-public class UserRequest {
+public class UserResponse {
     private String id;
     private String sagaId;
     private String userId;
     private String email;
-    private String displayName;
+    private String firstName;
+    private String lastName;
+    private String phone;
+    private String address;
     private String avatarUrl;
-    private Date dob;
+    private Instant dob;
     private Instant createdAt;
+    private Instant updatedAt;
+    private UserStatus userStatus;
     private Boolean isDeleted;
 }

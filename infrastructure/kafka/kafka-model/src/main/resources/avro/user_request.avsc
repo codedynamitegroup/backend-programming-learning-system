@@ -25,18 +25,27 @@
       }
     },
     {
-      "name": "avatarUrl",
+      "name": "email",
       "type": "string"
     },
     {
-      "name": "createdAt",
-      "type": {
-        "type": "long",
-        "logicalType": "timestamp-millis"
-      }
+      "name": "firstName",
+      "type": "string"
     },
     {
-      "name": "displayName",
+      "name": "lastName",
+      "type": "string"
+    },
+    {
+      "name": "phone",
+      "type": "string"
+    },
+    {
+      "name": "address",
+      "type": "string"
+    },
+    {
+      "name": "avatarUrl",
       "type": "string"
     },
     {
@@ -47,11 +56,31 @@
       }
     },
     {
-      "name": "email",
-      "type": "string"
+      "name": "createdAt",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
     },
     {
-      "name": "isActive",
+      "name": "updatedAt",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    },
+    {
+      "name": "userRequestStatus",
+      "type": {
+        "type": "enum",
+        "name": "UserRequestStatus",
+        "symbols": ["CREATING",
+          "UPDATING",
+          "DELETING"]
+      }
+    },
+    {
+      "name": "isDeleted",
       "type": "boolean"
     }
   ]
