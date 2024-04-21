@@ -1,82 +1,53 @@
 {
-  "type": "record",
-  "name": "QuestionCreateRequest",
-  "namespace": "com.backend.programming.learning.system.kafka.core.avro.model",
-  "fields": [
-    {
-      "name": "answers",
-      "type": {
-        "type": "array",
-        "items": {
-          "type": "record",
-          "name": "AnswerOfQuestion",
-          "fields": [
-            {
-              "name": "answer",
-              "type": "string"
-            },
-            {
-              "name": "feedback",
-              "type": "string"
-            },
-            {
-              "name": "fraction",
-              "type": "float"
-            }
-          ]
-        },
-        "java-class": "java.util.List"
-      }
-    },
-    {
-      "name": "createdBy",
-      "type": {
-        "type": "string",
-        "logicalType": "UUID"
-      }
-    },
-    {
-      "name": "defaultMark",
-      "type": {
-        "type": "bytes",
-        "logicalType": "decimal",
-        "precision": 5,
-        "scale": 2
-      }
-    },
-    {
-      "name": "difficulty",
-      "type": "string"
-    },
-    {
-      "name": "generalFeedback",
-      "type": "string"
-    },
-    {
-      "name": "name",
-      "type": "string"
-    },
-    {
-      "name": "organizationId",
-      "type":  {
-        "type": "string",
-        "logicalType": "UUID"
-      }
-    },
-    {
-      "name": "qType",
-      "type": "string"
-    },
-    {
-      "name": "questionText",
-      "type": "string"
-    },
-    {
-      "name": "updatedBy",
-      "type":  {
-        "type": "string",
-        "logicalType": "UUID"
-      }
+  "type" : "record",
+  "name" : "QuestionCreateRequestAvroModel",
+  "namespace" : "com.backend.programming.learning.system.kafka.core.avro.model",
+  "fields" : [ {
+    "name" : "answers",
+    "type" : {
+      "type" : "array",
+      "items" : "string",
+      "java-class" : "java.util.List"
     }
-  ]
+  }, {
+    "name" : "createdBy",
+    "logicalType" : "UUID",
+    "type" : "string"
+  }, {
+    "name" : "defaultMark",
+    "type" : {
+      "type" : "string",
+      "java-class" : "java.math.BigDecimal"
+    }
+  }, {
+    "name" : "difficulty",
+    "type" : "string"
+  }, {
+    "name" : "generalFeedback",
+    "type" : "string"
+  }, {
+    "name" : "id",
+    "logicalType" : "UUID",
+    "type" : "string"
+  }, {
+    "name" : "name",
+    "type" : "string"
+  }, {
+    "name" : "organizationId",
+    "logicalType" : "UUID",
+    "type" : "string"
+  }, {
+    "name" : "qType",
+    "type" : "string"
+  }, {
+    "name" : "questionText",
+    "type" : "string"
+  }, {
+    "name" : "sagaId",
+    "type" : "string"
+  }, {
+    "name" : "updatedBy",
+    "logicalType" : "UUID",
+    "type" : "string"
+  } ]
 }

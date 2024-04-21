@@ -35,6 +35,8 @@ public class QuestionCommandHandler {
     public QuestionDeleteResponse deleteQuestionById(UUID questionId) {
         QuestionDeletedEvent questionDeletedEvent = questionDeleteHelper.deleteQuestionById(questionId);
 
+
+
         return QuestionDeleteResponse.builder()
                 .questionId(questionId)
                 .qtypeId(questionDeletedEvent.getQtypeID())

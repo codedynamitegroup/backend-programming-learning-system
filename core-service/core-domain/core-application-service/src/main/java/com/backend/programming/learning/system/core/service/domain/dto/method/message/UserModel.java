@@ -16,7 +16,7 @@ import java.util.List;
 @Getter
 @Builder
 @AllArgsConstructor
-public class UserResponse {
+public class UserModel {
     private String id;
     private String sagaId;
     private String userId;

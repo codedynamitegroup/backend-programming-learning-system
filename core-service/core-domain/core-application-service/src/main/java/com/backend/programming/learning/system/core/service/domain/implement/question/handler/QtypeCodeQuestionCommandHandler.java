@@ -11,6 +11,7 @@ import com.backend.programming.learning.system.core.service.domain.implement.que
 import com.backend.programming.learning.system.core.service.domain.implement.question.method.query.QtypeCodeQuestionQueryHelper;
 import com.backend.programming.learning.system.core.service.domain.implement.question.method.update.QtypeCodeQuestionUpdateHelper;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
+import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.QuestionCreatedMessagePublisher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -24,19 +25,23 @@ public class QtypeCodeQuestionCommandHandler {
     private final QtypeCodeQuestionQueryHelper qtypeCodeQuestionQueryHelper;
     private final QtypeCodeQuestionUpdateHelper qtypeCodeQuestionUpdateHelper;
     private final QuestionDataMapper questionDataMapper;
+    private final QuestionCreatedMessagePublisher questionCreatedMessagePublisher;
 
     public QtypeCodeQuestionCommandHandler(QtypeCodeQuestionCreateHelper qtypeCodeQuestionCreateHelper,
                                            QtypeCodeQuestionQueryHelper qtypeCodeQuestionQueryHelper,
                                            QtypeCodeQuestionUpdateHelper qtypeCodeQuestionUpdateHelper,
-                                           QuestionDataMapper questionDataMapper) {
+                                           QuestionDataMapper questionDataMapper,
+                                           QuestionCreatedMessagePublisher questionCreatedMessagePublisher) {
         this.qtypeCodeQuestionCreateHelper = qtypeCodeQuestionCreateHelper;
         this.qtypeCodeQuestionQueryHelper = qtypeCodeQuestionQueryHelper;
         this.qtypeCodeQuestionUpdateHelper = qtypeCodeQuestionUpdateHelper;
         this.questionDataMapper = questionDataMapper;
+        this.questionCreatedMessagePublisher = questionCreatedMessagePublisher;
     }
 
     public CreateQuestionResponse createQtypeCodeQuestion(CreateQtypeCodeQuestionCommand createQtypeCodeQuestionCommand) {
         QuestionCreatedEvent questionCreatedEvent = qtypeCodeQuestionCreateHelper.persistQtypeCodeQuestion(createQtypeCodeQuestionCommand);
+        questionCreatedMessagePublisher.publish(questionCreatedEvent);
 
         return questionDataMapper.questionCreatedEventToCreateQuestionResponse(questionCreatedEvent, "Qtype Code Question created successfully");
     }
