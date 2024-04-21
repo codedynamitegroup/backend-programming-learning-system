@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.course.service.dataaccess.course.
 import com.backend.programming.learning.system.course.service.dataaccess.course.repository.CourseJpaRepository;
 import com.backend.programming.learning.system.entity.Course;
 import com.backend.programming.learning.system.ports.output.repository.CourseRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
@@ -11,15 +12,11 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
+@RequiredArgsConstructor
 public class CourseRepositoryImpl implements CourseRepository {
 
     private final CourseJpaRepository courseJpaRepository;
     private final CourseDataAccessMapper courseDataAccessMapper;
-
-    public CourseRepositoryImpl(CourseJpaRepository courseJpaRepository, CourseDataAccessMapper courseDataAccessMapper) {
-        this.courseJpaRepository = courseJpaRepository;
-        this.courseDataAccessMapper = courseDataAccessMapper;
-    }
 
     @Override
     public Course saveCourse(Course course) {
