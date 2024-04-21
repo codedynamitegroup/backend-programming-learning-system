@@ -69,4 +69,10 @@ public class CourseDomainServiceImpl implements CourseDomainService{
         examQuestions.forEach(ExamQuestion::initializeExamQuestion);
         log.info("ExamQuestion is initiated");
     }
+
+    @Override
+    public void createOrganization(Organization organization) {
+        organization.initializeOrganization();
+        log.info("Organization with id: {} is initiated", organization.getId().getValue());
+    }
 }
