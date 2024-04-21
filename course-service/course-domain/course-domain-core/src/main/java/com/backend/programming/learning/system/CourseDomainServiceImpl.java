@@ -80,4 +80,10 @@ public class CourseDomainServiceImpl implements CourseDomainService{
         questionBank.initializeQuestionBank();
         log.info("QuestionBank with id: {} is initiated", questionBank.getId().getValue());
     }
+
+    @Override
+    public void createQuestionBankCategory(QuestionBankCategory questionBankCategory) {
+        questionBankCategory.initializeQuestionBankCategory();
+        log.info("QuestionBankCategory with id: {} is initiated", questionBankCategory.getId().getValue());
+    }
 }
