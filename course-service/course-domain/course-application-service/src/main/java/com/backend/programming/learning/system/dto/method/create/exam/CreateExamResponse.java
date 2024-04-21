@@ -24,7 +24,7 @@ public class CreateExamResponse {
     private Float scores;
     private Float maxScores;
 
-    private final ZonedDateTime timeOpen;
+    private ZonedDateTime timeOpen;
     private ZonedDateTime timeClose;
     private ZonedDateTime timeLimit;
 
@@ -32,11 +32,10 @@ public class CreateExamResponse {
     private String overdueHanding;
     private Boolean canRedoQuestions;
     private Integer maxAttempts;
-
     private Boolean shuffleAnswers;
     private String gradeMethod;
-    private final ZonedDateTime createdAt;
+    private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
-    private final String message;
+    private String message;
 }

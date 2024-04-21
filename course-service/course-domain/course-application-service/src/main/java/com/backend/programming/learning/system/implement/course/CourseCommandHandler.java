@@ -7,10 +7,13 @@ import com.backend.programming.learning.system.dto.method.delete.course.DeleteCo
 import com.backend.programming.learning.system.dto.method.query.course.QueryAllCourseCommand;
 import com.backend.programming.learning.system.dto.method.query.course.QueryAllCourseResponse;
 import com.backend.programming.learning.system.dto.method.query.course.QueryCourseCommand;
+import com.backend.programming.learning.system.dto.method.update.course.UpdateCourseCommand;
+import com.backend.programming.learning.system.dto.method.update.course.UpdateCourseResponse;
 import com.backend.programming.learning.system.dto.responseentity.course.CourseResponseEntity;
 import com.backend.programming.learning.system.entity.Course;
 import com.backend.programming.learning.system.mapper.course.CourseDataMapper;
 import com.backend.programming.learning.system.ports.output.repository.CourseRepository;
+import com.backend.programming.learning.system.valueobject.CourseId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -31,6 +34,7 @@ public class CourseCommandHandler {
     private final CourseCreateHelper courseCreateHelper;
     private final CourseQueryHelper courseQueryHelper;
     private final CourseDeleteHelper courseDeleteHelper;
+    private final CourseUpdateHelper courseUpdateHelper;
     private final CourseDataMapper courseDataMapper;
     private final CourseRepository courseRepository;
 
@@ -64,5 +68,12 @@ public class CourseCommandHandler {
         return DeleteCourseResponse.builder()
                 .message("Course is deleted successfully")
                 .build();
+    }
+
+    @Transactional
+    public UpdateCourseResponse updateCourse(CourseId courseId, UpdateCourseCommand updateCourseCommand) {
+        Course course = courseUpdateHelper.updateCourse(courseId, updateCourseCommand);
+        log.info("Course is updated with id: {}", course.getId());
+        return courseDataMapper.courseToUpdateCourseResponse(course, "Course is updated successfully");
     }
 }

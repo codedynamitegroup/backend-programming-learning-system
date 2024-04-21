@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.course.service.dataaccess.assignment.entity;
 
-import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.entity.AssignmentSubmissionEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.entity.SubmissionAssignmentEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
 import com.backend.programming.learning.system.valueobject.Type;
 import lombok.*;
@@ -24,7 +24,7 @@ public class AssignmentEntity {
     private UUID id;
 
     @OneToMany(mappedBy = "assignment")
-    private List<AssignmentSubmissionEntity> assignmentSubmissions;
+    private List<SubmissionAssignmentEntity> assignmentSubmissions;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "course_id", referencedColumnName = "id")

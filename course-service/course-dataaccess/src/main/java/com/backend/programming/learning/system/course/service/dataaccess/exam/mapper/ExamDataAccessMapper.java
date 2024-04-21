@@ -1,10 +1,10 @@
 package com.backend.programming.learning.system.course.service.dataaccess.exam.mapper;
 
 import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
-import com.backend.programming.learning.system.course.service.dataaccess.course.repository.CourseJpaRepository;
+import com.backend.programming.learning.system.course.service.dataaccess.course.mapper.CourseDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.exam.entity.ExamEntity;
+import com.backend.programming.learning.system.entity.Course;
 import com.backend.programming.learning.system.entity.Exam;
-import com.backend.programming.learning.system.valueobject.CourseId;
 import com.backend.programming.learning.system.valueobject.ExamId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -12,47 +12,48 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class ExamDataAccessMapper{
-    private final CourseJpaRepository courseJpaRepository;
+    private final CourseDataAccessMapper courseDataAccessMapper;
     public ExamEntity examToExamEntity(Exam exam) {
-        CourseEntity courseEntity = courseJpaRepository.findById(exam.getCourseId().getValue())
-                .orElseThrow(() -> new RuntimeException("Course not found"));
+        CourseEntity courseEntity = courseDataAccessMapper.courseToCourseEntity(exam.getCourse());
         return ExamEntity.builder()
                 .id(exam.getId().getValue())
                 .course(courseEntity)
                 .name(exam.getName())
                 .intro(exam.getIntro())
-                .score(exam.getScores())
-                .maxScore(exam.getMaxScores())
-                .timeOpen(exam.getTime_open())
-                .timeClose(exam.getTime_close())
-                .timeLimit(exam.getTime_limit())
-                .overdueHandling(exam.getOverdue_handing())
-                .canRedoQuestions(true)//exam.getCan_redo_questions())
-                .maxAttempts(exam.getMax_attempts())
+                .score(exam.getScore())
+                .maxScore(exam.getMaxScore())
+                .timeOpen(exam.getTimeOpen())
+                .timeClose(exam.getTimeClose())
+                .timeLimit(exam.getTimeLimit())
+                .overdueHandling(exam.getOverdueHanding())
+                .canRedoQuestions(exam.getCanRedoQuestions())
+                .maxAttempts(exam.getMaxAttempts())
 //                .shuffleQuestions(exam.getShuffle_answers())
-                .gradeMethod(exam.getGrade_method())
-                .createdAt(exam.getCreated_at())
-                .updatedAt(exam.getUpdated_at())
+                .gradeMethod(exam.getGradeMethod())
+                .createdAt(exam.getCreatedAt())
+                .updatedAt(exam.getUpdatedAt())
                 .build();
     }
     public Exam examEntityToExam(ExamEntity examEntity) {
-        return Exam.builder()
-                .id(new ExamId(examEntity.getId()))
-                .courseId(new CourseId(examEntity.getCourse().getId()))
+        Course course = courseDataAccessMapper.courseEntityToCourse(examEntity.getCourse());
+        Exam reponse =  Exam.builder()
+                .course(course)
                 .name(examEntity.getName())
                 .intro(examEntity.getIntro())
-                .scores(examEntity.getScore())
-                .maxScores(examEntity.getMaxScore())
-                .time_open(examEntity.getTimeOpen())
-                .time_close(examEntity.getTimeClose())
-                .time_limit(examEntity.getTimeLimit())
-                .overdue_handing(examEntity.getOverdueHandling())
-                .can_redo_questions(examEntity.getCanRedoQuestions())
-                .max_attempts(examEntity.getMaxAttempts())
+                .score(examEntity.getScore())
+                .maxScore(examEntity.getMaxScore())
+                .timeOpen(examEntity.getTimeOpen())
+                .timeClose(examEntity.getTimeClose())
+                .timeLimit(examEntity.getTimeLimit())
+                .overdueHanding(examEntity.getOverdueHandling())
+                .canRedoQuestions(examEntity.getCanRedoQuestions())
+                .maxAttempts(examEntity.getMaxAttempts())
 //                .shuffle_answers(examEntity.getShuffleQuestions())
-                .grade_method(examEntity.getGradeMethod())
-                .created_at(examEntity.getCreatedAt())
-                .updated_at(examEntity.getUpdatedAt())
+                .gradeMethod(examEntity.getGradeMethod())
+                .createdAt(examEntity.getCreatedAt())
+                .updatedAt(examEntity.getUpdatedAt())
                 .build();
+        reponse.setId(new ExamId(examEntity.getId()));
+        return reponse;
     }
 }

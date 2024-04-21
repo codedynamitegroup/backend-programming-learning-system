@@ -4,8 +4,8 @@ import com.backend.programming.learning.system.domain.valueobject.BaseId;
 
 import java.util.UUID;
 
-public class AssignmentSubmissionOnlineTextId extends BaseId<UUID> {
-    public AssignmentSubmissionOnlineTextId(UUID value) {
+public class SubmissionAssignmentOnlineTextId extends BaseId<UUID> {
+    public SubmissionAssignmentOnlineTextId(UUID value) {
         super(value);
     }
 }
