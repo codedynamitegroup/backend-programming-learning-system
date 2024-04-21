@@ -75,4 +75,9 @@ public class CourseDomainServiceImpl implements CourseDomainService{
         organization.initializeOrganization();
         log.info("Organization with id: {} is initiated", organization.getId().getValue());
     }
+    @Override
+    public void createQuestionBank(QuestionBank questionBank) {
+        questionBank.initializeQuestionBank();
+        log.info("QuestionBank with id: {} is initiated", questionBank.getId().getValue());
+    }
 }
