@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 @Slf4j
@@ -40,5 +41,10 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
         return codeQuestionJpaRepository
                 .findById(codeQuestionId.getValue())
                 .map(codeQuestionDataAccessMapper::codeQuestionEntityToCodeQuestion);
+    }
+
+    @Override
+    public void deleteCodeQuestionById(UUID id){
+        codeQuestionJpaRepository.deleteById(id);
     }
 }

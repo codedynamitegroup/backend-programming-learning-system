@@ -4,8 +4,10 @@ import com.backend.programming.learning.system.code.assessment.service.domain.en
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 
 import java.util.Optional;
+import java.util.UUID;
 
 public interface CodeQuestionRepository {
     CodeQuestion save(CodeQuestion codeQuestion);
     Optional<CodeQuestion> findById(CodeQuestionId codeQuestionId);
+    void deleteCodeQuestionById(UUID id);
 }

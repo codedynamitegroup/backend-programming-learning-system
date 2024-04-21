@@ -1,8 +1,8 @@
 package com.backend.programming.learning.system.code.assessment.service.messaging.mapper;
 
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.message.CodeQuestionUpdateResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.message.CodeQuestionsUpdateResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
-import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionCreatedEvent;
+import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionsUpdatedEvent;
 import com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel;
 import com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel;
 import com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState;
@@ -15,12 +15,12 @@ import java.util.UUID;
 public class CodeQuestionMessagingDataMapper {
     public CodeQuestionUpdateRequestAvroModel
     codeQuestionCreatedEventToCodeQuestionUpdateRequestAvroModel
-            (CodeQuestionCreatedEvent codeQuestionCreatedEvent){
+            (CodeQuestionsUpdatedEvent codeQuestionCreatedEvent, UUID sagaId){
 
         CodeQuestion codeQuestion = codeQuestionCreatedEvent.getCodeQuestion();
         return CodeQuestionUpdateRequestAvroModel.newBuilder()
                 .setId(codeQuestion.getId().getValue())
-                .setSagaId(UUID.randomUUID())
+                .setSagaId(sagaId)
                 .setQuestionId(codeQuestion.getQuestionId().getValue())
                 .setConstraints(codeQuestion.getConstraints())
                 .setInputFormat(codeQuestion.getInputFormat())
@@ -29,10 +29,10 @@ public class CodeQuestionMessagingDataMapper {
                 .setProblemStatement(codeQuestion.getProblemStatement())
                 .build();
     }
-    public CodeQuestionUpdateResponse
+    public CodeQuestionsUpdateResponse
             codeQuestionUpdateResponseAvroModelToCodeQuestionUpdateResponse
             (CodeQuestionUpdateResponseAvroModel model){
-        return CodeQuestionUpdateResponse.builder()
+        return CodeQuestionsUpdateResponse.builder()
                 .id(model.getId())
                 .questionId(model.getQuestionId())
                 .problemStatement(model.getProblemStatement())
@@ -42,6 +42,8 @@ public class CodeQuestionMessagingDataMapper {
                         .CopyState
                         .valueOf(model.getCopyState().toString()))
                 .constraints(model.getConstraints())
+                .failureMessages(model.getFailureMessages())
+                .sagaId(model.getSagaId())
                 .build();
     }
 }

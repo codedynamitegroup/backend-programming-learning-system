@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -29,7 +30,7 @@ public class CodeQuestionsUpdateOutboxScheduler implements OutboxScheduler {
 
     @Override
     @Transactional
-    @Scheduled(fixedDelayString = "${code-assessment-service.outbox-scheduler-fixed-rate}",
+    @Scheduled(fixedDelayString = "${cod e-assessment-service.outbox-scheduler-fixed-rate}",
                 initialDelayString = "${code-assessment-service.outbox-scheduler-initial-delay}")
     public void processOutboxMessage() {
         Optional<List<CodeQuestionsUpdateOutboxMessage>> outboxMessagesResponse =
@@ -39,5 +40,20 @@ public class CodeQuestionsUpdateOutboxScheduler implements OutboxScheduler {
                         SagaStatus.STARTED,
                         SagaStatus.COMPENSATING
                 );
+        if (outboxMessagesResponse.isPresent() && outboxMessagesResponse.get().size() > 0) {
+            List<CodeQuestionsUpdateOutboxMessage> outboxMessages = outboxMessagesResponse.get();
+            log.info("Received {} CodeQuestionsUpdateOutboxMessage with ids: {}, sending to message bus!",
+                    outboxMessages.size(),
+                    outboxMessages.stream().map(outboxMessage ->
+                            outboxMessage.getId().toString()).collect(Collectors.joining(",")));
+            outboxMessages.forEach(outboxMessage ->
+                    codeQuestionsUpdateMessagePublisher.publish(outboxMessage, this::updateOutboxStatus));
+            log.info("{} CodeQuestionsUpdateOutboxMessage sent to message bus!", outboxMessages.size());
+        }
+    }
+    private void updateOutboxStatus(CodeQuestionsUpdateOutboxMessage outboxMessage, OutboxStatus outboxStatus) {
+        outboxMessage.setOutboxStatus(outboxStatus);
+        codeQuestionsUpdateOutboxHelper.save(outboxMessage);
+        log.info("OrderPaymentOutboxMessage is updated with outbox status: {}", outboxStatus.name());
     }
 }

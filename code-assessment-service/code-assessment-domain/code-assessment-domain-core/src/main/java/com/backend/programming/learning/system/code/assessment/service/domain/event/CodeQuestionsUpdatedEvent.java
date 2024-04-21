@@ -5,9 +5,9 @@ import com.backend.programming.learning.system.code.assessment.service.domain.en
 
 import java.time.ZonedDateTime;
 
-public class CodeQuestionCreatedEvent extends CodeQuestionEvent {
+public class CodeQuestionsUpdatedEvent extends CodeQuestionsEvent {
 
-    public CodeQuestionCreatedEvent(CodeQuestion codeQuestion, ZonedDateTime createdAt) {
+    public CodeQuestionsUpdatedEvent(CodeQuestion codeQuestion, ZonedDateTime createdAt) {
         super(codeQuestion, createdAt);
     }
 }

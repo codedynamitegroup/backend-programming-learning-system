@@ -6,11 +6,11 @@ import com.backend.programming.learning.system.domain.event.DomainEvent;
 import java.time.ZonedDateTime;
 
 
-public abstract class CodeQuestionEvent implements DomainEvent<CodeQuestion> {
+public abstract class CodeQuestionsEvent implements DomainEvent<CodeQuestion> {
     private final CodeQuestion codeQuestion;
     private final ZonedDateTime createdAt;
 
-    public CodeQuestionEvent(CodeQuestion codeQuestion, ZonedDateTime createdAt) {
+    public CodeQuestionsEvent(CodeQuestion codeQuestion, ZonedDateTime createdAt) {
         this.codeQuestion = codeQuestion;
         this.createdAt = createdAt;
     }

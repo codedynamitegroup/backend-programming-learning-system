@@ -31,6 +31,9 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         validateInitialCodeQuestion();
         //code later
     }
+    public void setCopyState(CopyState state){
+        copyState = state;
+    }
 
     private void validateInitialCodeQuestion() {
     }

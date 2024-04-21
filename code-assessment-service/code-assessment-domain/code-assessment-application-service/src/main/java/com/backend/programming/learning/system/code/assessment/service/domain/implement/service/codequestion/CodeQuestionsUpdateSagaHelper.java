@@ -7,11 +7,13 @@ import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.saga.SagaStatus;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
+@Component
 public class CodeQuestionsUpdateSagaHelper {
 
     private final CodeQuestionRepository codeQuestionRepository;
@@ -31,17 +33,17 @@ public class CodeQuestionsUpdateSagaHelper {
 
     SagaStatus copyStateToSagaStatus(CopyState copyState){
         return switch (copyState){
-            case CREATING -> SagaStatus.STARTED;
-            case UPDATING -> SagaStatus.STARTED;
-            case DELETING -> SagaStatus.STARTED;//correct
+            case CREATING,UPDATING,DELETING -> SagaStatus.STARTED;
 
-            case CREATED -> SagaStatus.PROCESSING;
-            case UPDATED -> SagaStatus.PROCESSING;
-            case DELETED -> SagaStatus.PROCESSING;
+            case UPDATE_PROPAGATING,
+                    DELETE_PROPAGATING,
+                    CREATE_PROPAGATING-> SagaStatus.PROCESSING;
 
-            case CREATE_FAILED -> SagaStatus.COMPENSATED;
-            case UPDATE_FAILED -> SagaStatus.COMPENSATED;
-            case DELETE_FAILED -> SagaStatus.COMPENSATED;//correct
+            case CREATE_ROLLBACKING, DELETE_ROLLBACKING, UPDATE_ROLLBACKING-> SagaStatus.COMPENSATING;
+
+            case CREATED,UPDATED,DELETED -> SagaStatus.SUCCEEDED;
+
+            case CREATE_FAILED, UPDATE_FAILED, DELETE_FAILED -> SagaStatus.COMPENSATED;
         };
     }
 }

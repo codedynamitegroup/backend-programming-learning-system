@@ -2,7 +2,7 @@ package com.backend.programming.learning.system.code.assessment.service.messagin
 
 import com.backend.programming.learning.system.code.assessment.service.messaging.mapper.CodeQuestionMessagingDataMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.config.CodeAssessmentServiceConfigData;
-import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionCreatedEvent;
+import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionsUpdatedEvent;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.message.publisher.codequestion.CodeQuestionsUpdateMessagePublisher;
 import com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
@@ -31,7 +31,7 @@ public class CreateCodeQuestionKafkaMessagePublisher implements CodeQuestionsUpd
     }
 
     @Override
-    public void publish(CodeQuestionCreatedEvent domainEvent) {
+    public void publish(CodeQuestionsUpdatedEvent domainEvent) {
         String codeQuestionId = domainEvent.getCodeQuestion().getQuestionId().getValue().toString();
         String topicName = codeAssessmentServiceConfigData.getCodeQuestionCreateRequestToCoreServiceTopicName();
         log.info("received CodeQuestionCreateEvent for code question id: {}"

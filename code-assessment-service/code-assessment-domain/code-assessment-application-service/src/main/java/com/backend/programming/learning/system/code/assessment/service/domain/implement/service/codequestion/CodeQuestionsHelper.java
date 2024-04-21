@@ -3,22 +3,17 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 import com.backend.programming.learning.system.code.assessment.service.domain.CodeAssessmentDomainService;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.create.codequestion.CreateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
-import com.backend.programming.learning.system.code.assessment.service.domain.entity.Question;
-import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionCreatedEvent;
+import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionsUpdatedEvent;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.codequestion.CodeQuestionDomainException;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.CodeQuestionDataMaper;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.CodeQuestionRepository;
-import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.QuestionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-import java.util.UUID;
-
 @Slf4j
 @Component
-public class CodeQuestionCreateHelper {
+public class CodeQuestionsHelper {
     private final CodeAssessmentDomainService codeAssessmentDomainService;
 
 
@@ -26,7 +21,7 @@ public class CodeQuestionCreateHelper {
 //    private final QuestionRepository   questionRepository;
     private final CodeQuestionDataMaper codeQuestionDataMaper;
 
-    public CodeQuestionCreateHelper(
+    public CodeQuestionsHelper(
             CodeAssessmentDomainService codeAssessmentDomainService,
             CodeQuestionRepository codeQuestionRepository,
             CodeQuestionDataMaper codeQuestionDataMaper) {
@@ -44,10 +39,10 @@ public class CodeQuestionCreateHelper {
 //        this.codeQuestionDataMaper = codeQuestionDataMaper;
 //    }
     @Transactional
-    public CodeQuestionCreatedEvent persistCodeQuestion(CreateCodeQuestionCommand command){
+    public CodeQuestionsUpdatedEvent persistCodeQuestion(CreateCodeQuestionCommand command){
 //        checkQuestion(command.getQuestionId());
         CodeQuestion codeQuestion = codeQuestionDataMaper.createCodeQuestionCommandToCodeQuestion(command);
-        CodeQuestionCreatedEvent codeQuestionCreatedEvent
+        CodeQuestionsUpdatedEvent codeQuestionCreatedEvent
                 = codeAssessmentDomainService.validateAndInitiateCodeQuestion(codeQuestion);
         saveCodeQuestion(codeQuestion);
         log.info("Code question is created, id: {}", codeQuestionCreatedEvent.getCodeQuestion().getId().getValue());

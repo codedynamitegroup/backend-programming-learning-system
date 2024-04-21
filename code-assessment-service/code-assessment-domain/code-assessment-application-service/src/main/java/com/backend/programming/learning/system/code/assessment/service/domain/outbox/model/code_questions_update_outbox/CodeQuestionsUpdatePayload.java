@@ -11,9 +11,9 @@ import lombok.Getter;
 @Builder
 public class CodeQuestionsUpdatePayload {
     @JsonProperty
-    private final String questionId;
+    private final String id;
     @JsonProperty
-    private final String dslTemplate;
+    private final String questionId;
     @JsonProperty
     private final String problemStatement;
     @JsonProperty
@@ -23,5 +23,5 @@ public class CodeQuestionsUpdatePayload {
     @JsonProperty
     private final String constraints;
     @JsonProperty
-    private CopyState copyState;
+    private String copyState;
 }

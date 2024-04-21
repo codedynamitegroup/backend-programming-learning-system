@@ -41,12 +41,19 @@
       "type": {
         "type": "enum",
         "name": "CopyState",
-        "symbols": ["CREATING",
+        "symbols": [
+          "CREATING",
           "CREATED",
           "UPDATING",
           "UPDATED",
           "DELETING",
           "DELETED",
+          "CREATE_PROPAGATING",
+          "UPDATE_PROPAGATING",
+          "DELETE_PROPAGATING",
+          "CREATE_ROLLBACKING",
+          "UPDATE_ROLLBACKING",
+          "DELETE_ROLLBACKING",
           "DELETE_FAILED",
           "UPDATE_FAILED",
           "CREATE_FAILED"]
