@@ -12,15 +12,15 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "assignment_submission_file")
+@Table(name = "submission_assignment_file")
 @Entity
 public class AssignmentSubmissionFileEntity {
     @Id
     @Column(name = "id")
     private UUID id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "assignment_submission_id", referencedColumnName = "id")
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "submission_assignment_id", referencedColumnName = "id")
     private SubmissionAssignmentEntity assignmentSubmission;
 
     private int num_file;

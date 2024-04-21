@@ -13,13 +13,15 @@ public class AssignmentSubmissionFileRepositoryImpl implements SubmissionAssignm
 
     private final AssignmentSubmissionFileDataAccessMapper assignmentSubmissionFileDataAccessMapper;
 
+
+
     public AssignmentSubmissionFileRepositoryImpl(AssignmentSubmissionFileJpaRepository assignmentSubmissionFileJpaRepository, AssignmentSubmissionFileDataAccessMapper assignmentSubmissionFileDataAccessMapper) {
         this.assignmentSubmissionFileJpaRepository = assignmentSubmissionFileJpaRepository;
         this.assignmentSubmissionFileDataAccessMapper = assignmentSubmissionFileDataAccessMapper;
     }
 
     @Override
-    public SubmissionAssignmentFile saveAssignmentSubmissionFile(SubmissionAssignmentFile submissionAssignmentFile) {
+    public SubmissionAssignmentFile saveSubmissionAssignmentFile(SubmissionAssignmentFile submissionAssignmentFile) {
         return assignmentSubmissionFileDataAccessMapper.assignmentSubmissionFileEntityToAssignmentSubmissionFile(assignmentSubmissionFileJpaRepository
                 .save(assignmentSubmissionFileDataAccessMapper
                         .assignmentSubmissionFileToAssignmentSubmissionFileEntity(submissionAssignmentFile)));
