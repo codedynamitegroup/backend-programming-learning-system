@@ -4,13 +4,15 @@ import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.valueobject.AssignmentSubmissionFileId;
 import com.backend.programming.learning.system.valueobject.SubmissionAssignmentId;
 
+import java.util.UUID;
+
 public class SubmissionAssignmentFile extends AggregateRoot<AssignmentSubmissionFileId> {
-    private SubmissionAssignmentId submissionAssignmentId;
+    private SubmissionAssignment submissionAssignment;
     private Integer num_file;
 
     private SubmissionAssignmentFile(Builder builder) {
         super.setId(builder.assignmentSubmissionFileId);
-        submissionAssignmentId = builder.submissionAssignmentId;
+        submissionAssignment = builder.submissionAssignment;
         num_file = builder.num_file;
     }
 
@@ -18,17 +20,26 @@ public class SubmissionAssignmentFile extends AggregateRoot<AssignmentSubmission
         return new Builder();
     }
 
-    public SubmissionAssignmentId getAssignmentSubmissionId() {
-        return submissionAssignmentId;
+    public SubmissionAssignment getAssignmentSubmission() {
+        return submissionAssignment;
     }
 
     public Integer getNum_file() {
         return num_file;
     }
 
+    public void setSubmissionAssignment(SubmissionAssignment submissionAssignment) {
+
+        this.submissionAssignment = submissionAssignment;
+    }
+
+    public void initializeSubmissionAssignmentFile() {
+        setId(new AssignmentSubmissionFileId(UUID.randomUUID()));
+    }
+
     public static final class Builder {
         private AssignmentSubmissionFileId assignmentSubmissionFileId;
-        private SubmissionAssignmentId submissionAssignmentId;
+        private SubmissionAssignment submissionAssignment;
         private Integer num_file;
 
         private Builder() {
@@ -43,8 +54,8 @@ public class SubmissionAssignmentFile extends AggregateRoot<AssignmentSubmission
             return this;
         }
 
-        public Builder assignmentSubmissionId(SubmissionAssignmentId val) {
-            submissionAssignmentId = val;
+        public Builder assignmentSubmission(SubmissionAssignment val) {
+            submissionAssignment = val;
             return this;
         }
 
