@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.ports.input.service;
+package com.backend.programming.learning.system.ports.input.service.assignment;
 
 import com.backend.programming.learning.system.dto.method.create.assignment.CreateAssignmentCommand;
 import com.backend.programming.learning.system.dto.method.create.assignment.CreateAssignmentResponse;

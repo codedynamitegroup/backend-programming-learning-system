@@ -44,6 +44,13 @@ public class CourseDomainServiceImpl implements CourseDomainService{
         submissionAssignment.initializeAssignmentSubmission();
         log.info("AssignmentSubmission with id: {} is initiated", submissionAssignment.getId().getValue());
     }
+
+    @Override
+    public void createSubmissionAssignmentOnlineText(SubmissionAssignmentOnlineText submissionAssignmentOnlineText) {
+        submissionAssignmentOnlineText.initializeSubmissionAssignmentOnlineText();
+        log.info("SubmissionAssignmentOnlineText with id: {} is initiated", submissionAssignmentOnlineText.getId().getValue());
+    }
+
     @Override
     public void createCourseUsers(List<CourseUser> courseUsers) {
         courseUsers.forEach(CourseUser::initializeCourseUser);

@@ -1,18 +1,17 @@
 package com.backend.programming.learning.system.entity;
 
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
+import com.backend.programming.learning.system.valueobject.AssignmentSubmissionFileId;
 import com.backend.programming.learning.system.valueobject.SubmissionAssignmentId;
-import com.backend.programming.learning.system.valueobject.AssignmentSubmissionOnlineTextId;
 
-public class AssignmentSubmissionOnlineText extends AggregateRoot<AssignmentSubmissionOnlineTextId> {
-
+public class SubmissionAssignmentFile extends AggregateRoot<AssignmentSubmissionFileId> {
     private SubmissionAssignmentId submissionAssignmentId;
-    private String content;
+    private Integer num_file;
 
-    private AssignmentSubmissionOnlineText(Builder builder) {
-        super.setId(builder.assignmentSubmissionOnlineTextId);
+    private SubmissionAssignmentFile(Builder builder) {
+        super.setId(builder.assignmentSubmissionFileId);
         submissionAssignmentId = builder.submissionAssignmentId;
-        content = builder.content;
+        num_file = builder.num_file;
     }
 
     public static Builder builder() {
@@ -23,14 +22,14 @@ public class AssignmentSubmissionOnlineText extends AggregateRoot<AssignmentSubm
         return submissionAssignmentId;
     }
 
-    public String getContent() {
-        return content;
+    public Integer getNum_file() {
+        return num_file;
     }
 
     public static final class Builder {
-        private AssignmentSubmissionOnlineTextId assignmentSubmissionOnlineTextId;
+        private AssignmentSubmissionFileId assignmentSubmissionFileId;
         private SubmissionAssignmentId submissionAssignmentId;
-        private String content;
+        private Integer num_file;
 
         private Builder() {
         }
@@ -39,8 +38,8 @@ public class AssignmentSubmissionOnlineText extends AggregateRoot<AssignmentSubm
             return new Builder();
         }
 
-        public Builder id(AssignmentSubmissionOnlineTextId val) {
-            assignmentSubmissionOnlineTextId = val;
+        public Builder id(AssignmentSubmissionFileId val) {
+            assignmentSubmissionFileId = val;
             return this;
         }
 
@@ -49,13 +48,13 @@ public class AssignmentSubmissionOnlineText extends AggregateRoot<AssignmentSubm
             return this;
         }
 
-        public Builder content(String val) {
-            content = val;
+        public Builder num_file(Integer val) {
+            num_file = val;
             return this;
         }
 
-        public AssignmentSubmissionOnlineText build() {
-            return new AssignmentSubmissionOnlineText(this);
+        public SubmissionAssignmentFile build() {
+            return new SubmissionAssignmentFile(this);
         }
     }
 }

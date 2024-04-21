@@ -1,7 +1,6 @@
 package com.backend.programming.learning.system.course.service.dataaccess.assignment_submission_file.entity;
 
-import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.entity.AssignmentSubmissionEntity;
-import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.entity.SubmissionAssignmentEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,7 +21,7 @@ public class AssignmentSubmissionFileEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "assignment_submission_id", referencedColumnName = "id")
-    private AssignmentSubmissionEntity assignmentSubmission;
+    private SubmissionAssignmentEntity assignmentSubmission;
 
     private int num_file;
 
