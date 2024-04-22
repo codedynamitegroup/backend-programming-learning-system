@@ -37,6 +37,19 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
 
     private void validateInitialCodeQuestion() {
     }
+    public void initCancelCopy(CopyState state, List<String> failureMessages){
+        this.copyState = state;
+        updateFailureMessages(failureMessages);
+
+    }
+    private void updateFailureMessages(List<String> failureMessages) {
+        if (this.failureMessages != null && failureMessages != null) {
+            this.failureMessages.addAll(failureMessages.stream().filter(message -> !message.isEmpty()).toList());
+        }
+        if (this.failureMessages == null) {
+            this.failureMessages = failureMessages;
+        }
+    }
 
 
     public String getConstraints() {

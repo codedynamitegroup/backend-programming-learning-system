@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.implement.message.listener;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.message.CodeQuestionsUpdateResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.codequestion.CodeQuestionsUpdateSaga;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.message.listener.CodeQuestionUpdateResponseMessageListener;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import lombok.extern.slf4j.Slf4j;
@@ -12,34 +13,24 @@ import java.util.List;
 @Slf4j
 @Validated
 @Service
-public class CodeQuestionUpdateResponseMessageListenerImpl implements CodeQuestionUpdateResponseMessageListener {
+public class CodeQuestionUpdateResponseMessageListenerImpl
+        implements CodeQuestionUpdateResponseMessageListener {
+    private final CodeQuestionsUpdateSaga codeQuestionsUpdateSaga;
+
+    public CodeQuestionUpdateResponseMessageListenerImpl(
+            CodeQuestionsUpdateSaga codeQuestionsUpdateSaga) {
+        this.codeQuestionsUpdateSaga = codeQuestionsUpdateSaga;
+    }
+
     @Override
-    public void codeQuestionUpdatedFail(CodeQuestionsUpdateResponse codeQuestionsUpdateResponse, List<String> failureMessages) {
+    public void codeQuestionCreatedUpdatedOrDeletedFail(CodeQuestionsUpdateResponse codeQuestionsUpdateResponse) {
+        codeQuestionsUpdateSaga.rollback(codeQuestionsUpdateResponse);
 
     }
 
     @Override
-    public void codeQuestionUpdatedSuccess(CodeQuestionId codeQuestionId) {
-
+    public void codeQuestionCreatedUpdatedOrDeletedSuccess(CodeQuestionsUpdateResponse codeQuestionsUpdateResponse) {
+        codeQuestionsUpdateSaga.process(codeQuestionsUpdateResponse);
     }
 
-    @Override
-    public void codeQuestionCreateFail(CodeQuestionId codeQuestionId, List<String> failureMessages) {
-
-    }
-
-    @Override
-    public void codeQuestionCreateSuccess(CodeQuestionId codeQuestionId) {
-
-    }
-
-    @Override
-    public void codeQuestionDeleteFail(CodeQuestionId codeQuestionId, List<String> failureMessages) {
-
-    }
-
-    @Override
-    public void codeQuestionDeleteSuccess(CodeQuestionId codeQuestionId) {
-
-    }
 }

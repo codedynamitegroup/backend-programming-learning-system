@@ -2,10 +2,12 @@ package com.backend.programming.learning.system.code.assessment.service.domain;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionsUpdatedEvent;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.List;
 
 @Slf4j
 public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainService{
@@ -19,5 +21,9 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
         return new CodeQuestionsUpdatedEvent(codeQuestion, ZonedDateTime.now(ZoneId.of("UTC")));
     }
 
+    @Override
+    public void cancelCopyCodeQuestions(CodeQuestion codeQuestion, CopyState state, List<String> failureMessages) {
+        codeQuestion.initCancelCopy(state, failureMessages);
+    }
 
 }

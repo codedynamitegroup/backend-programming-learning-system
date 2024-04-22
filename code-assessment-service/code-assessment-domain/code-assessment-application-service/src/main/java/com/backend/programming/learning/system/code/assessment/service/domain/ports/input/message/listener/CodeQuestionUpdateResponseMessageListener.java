@@ -6,10 +6,6 @@ import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId
 import java.util.List;
 
 public interface CodeQuestionUpdateResponseMessageListener {
-    void codeQuestionUpdatedFail(CodeQuestionsUpdateResponse codeQuestionsUpdateResponse, List<String> failureMessages);
-    void codeQuestionUpdatedSuccess(CodeQuestionId codeQuestionId);
-    void codeQuestionCreateFail(CodeQuestionId codeQuestionId, List<String> failureMessages);
-    void codeQuestionCreateSuccess(CodeQuestionId codeQuestionId);
-    void codeQuestionDeleteFail(CodeQuestionId codeQuestionId,  List<String> failureMessages);
-    void codeQuestionDeleteSuccess(CodeQuestionId codeQuestionId);
+    void codeQuestionCreatedUpdatedOrDeletedFail(CodeQuestionsUpdateResponse codeQuestionsUpdateResponse);
+    void codeQuestionCreatedUpdatedOrDeletedSuccess(CodeQuestionsUpdateResponse codeQuestionsUpdateResponse);
 }

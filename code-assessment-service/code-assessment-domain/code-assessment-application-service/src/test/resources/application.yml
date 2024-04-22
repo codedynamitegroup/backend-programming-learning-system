@@ -1,0 +1,3 @@
+code-assessment-service:
+  outbox-scheduler-fixed-rate: 10000 #2000 in production
+  outbox-scheduler-initial-delay: 10000 #2000 in production

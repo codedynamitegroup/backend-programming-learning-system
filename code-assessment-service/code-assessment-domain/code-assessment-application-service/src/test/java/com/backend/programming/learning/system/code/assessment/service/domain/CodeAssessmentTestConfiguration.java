@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.message.publisher.codequestion.CodeQuestionsUpdateMessagePublisher;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.CodeQuestionRepository;
+import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.CodeQuestionsUpdateOutboxRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.QuestionRepository;
 import org.mockito.Mockito;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,6 +22,11 @@ public class CodeAssessmentTestConfiguration {
     @Bean
     public QuestionRepository  questionRepository(){
         return Mockito.mock(QuestionRepository.class);
+    }
+
+    @Bean
+    public CodeQuestionsUpdateOutboxRepository codeQuestionsUpdateOutboxRepository(){
+        return Mockito.mock(CodeQuestionsUpdateOutboxRepository.class);
     }
     @Bean
     public CodeAssessmentDomainService codeAssessmentDomainService(){

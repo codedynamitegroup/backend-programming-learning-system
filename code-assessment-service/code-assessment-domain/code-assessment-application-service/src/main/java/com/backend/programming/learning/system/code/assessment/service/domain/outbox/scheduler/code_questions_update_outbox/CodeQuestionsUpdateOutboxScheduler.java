@@ -30,7 +30,7 @@ public class CodeQuestionsUpdateOutboxScheduler implements OutboxScheduler {
 
     @Override
     @Transactional
-    @Scheduled(fixedDelayString = "${cod e-assessment-service.outbox-scheduler-fixed-rate}",
+    @Scheduled(fixedDelayString = "${code-assessment-service.outbox-scheduler-fixed-rate}",
                 initialDelayString = "${code-assessment-service.outbox-scheduler-initial-delay}")
     public void processOutboxMessage() {
         Optional<List<CodeQuestionsUpdateOutboxMessage>> outboxMessagesResponse =

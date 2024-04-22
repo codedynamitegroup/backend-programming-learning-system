@@ -9,7 +9,6 @@ import com.backend.programming.learning.system.code.assessment.service.domain.ou
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.CodeQuestionRepository;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
-import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
 import com.backend.programming.learning.system.saga.SagaStep;
 import lombok.extern.slf4j.Slf4j;
@@ -56,7 +55,7 @@ public class CodeQuestionsUpdateSaga implements SagaStep<CodeQuestionsUpdateResp
         switch (codeQuestionsUpdateResponse.getState()){
             case CREATING ->
             {
-                completeCodeQuestionUpdateOrCreate(codeQuestionsUpdateResponse, CopyState.CREATED);
+                completeCodeQuestionsUpdateOrCreate(codeQuestionsUpdateResponse, CopyState.CREATED);
                 //update outbox
                 codeQuestionsUpdateOutboxHelper.save(updateOutboxMessage(codeQuestionsUpdateOutboxMessage,
                         CopyState.CREATED, SagaStatus.SUCCEEDED
@@ -64,15 +63,20 @@ public class CodeQuestionsUpdateSaga implements SagaStep<CodeQuestionsUpdateResp
             }
             case UPDATING ->
             {
-                completeCodeQuestionUpdateOrCreate(codeQuestionsUpdateResponse, CopyState.UPDATED);
+                completeCodeQuestionsUpdateOrCreate(codeQuestionsUpdateResponse, CopyState.UPDATED);
                 codeQuestionsUpdateOutboxHelper.save(updateOutboxMessage(codeQuestionsUpdateOutboxMessage,
                         CopyState.UPDATED, SagaStatus.SUCCEEDED
                 ));
             }
-            //deleting case is can not be set due to no object found
+
             case DELETING ->
-                    codeQuestionsUpdateOutboxHelper.save(updateOutboxMessage(codeQuestionsUpdateOutboxMessage,
-                    CopyState.DELETED, SagaStatus.SUCCEEDED));
+            {
+                //actual delete
+                codeQuestionRepository.deleteCodeQuestionById(codeQuestionsUpdateResponse.getId());
+                codeQuestionsUpdateOutboxHelper.save(updateOutboxMessage(codeQuestionsUpdateOutboxMessage,
+                        CopyState.DELETED, SagaStatus.SUCCEEDED));
+            }
+
         }
 
         log.info("Code question with id {} is updated", codeQuestionsUpdateResponse.getId());
@@ -94,16 +98,65 @@ public class CodeQuestionsUpdateSaga implements SagaStep<CodeQuestionsUpdateResp
         return response.get();
     }
 
-    private void completeCodeQuestionUpdateOrCreate(CodeQuestionsUpdateResponse response, CopyState state){
+    private void completeCodeQuestionsUpdateOrCreate(CodeQuestionsUpdateResponse response, CopyState state){
         CodeQuestion codeQuestion = findCodeQuestion(response.getId());
-        log.info("Completing save code question with id to core-service: {}", response.getId());
-        codeQuestion.setCopyState(state);
+        log.info("Completing save or change code question with id to core-service: {} with state {}", response.getId(), response.getState().toString());
+        codeQuestion.setCopyState(state);//domain service should do this job but it's quite short so I set it directly
         codeQuestionRepository.save(codeQuestion);
 
     }
+    private void quitCodeQuestionsUpdateOrCreate(CodeQuestionsUpdateResponse response, CopyState state){
+        CodeQuestion codeQuestion = findCodeQuestion(response.getId());
+        log.info("Quitting save or change code question with id to core-service: {} with state {}", response.getId(), response.getState().toString());
+        codeAssessmentDomainService.cancelCopyCodeQuestions(codeQuestion, state, response.getFailureMessages());
+        codeQuestionRepository.save(codeQuestion);
+    }
 
     @Override
-    public void rollback(CodeQuestionsUpdateResponse data) {
+    @Transactional
+    public void rollback(CodeQuestionsUpdateResponse codeQuestionsUpdateResponse) {
+        //không có trờng hợp saga này ở trạng thái processing
+        Optional<CodeQuestionsUpdateOutboxMessage> codeQuestionsUpdateOutboxMessageResponse =
+                codeQuestionsUpdateOutboxHelper.getCodeQuestionsUpdateOutboxMessageBySagaIdAndSagaStatus(
+                        codeQuestionsUpdateResponse.getSagaId(),
+                        SagaStatus.STARTED);
 
+
+        if (codeQuestionsUpdateOutboxMessageResponse.isEmpty()) {
+            log.info("An outbox message with saga id: {} is already created!", codeQuestionsUpdateResponse.getSagaId());
+            return;
+        }
+        CodeQuestionsUpdateOutboxMessage codeQuestionsUpdateOutboxMessage = codeQuestionsUpdateOutboxMessageResponse.get();
+
+        //đổi state về failed, saga về COMPENSATED, outbox về FAILED
+        switch (codeQuestionsUpdateResponse.getState()){
+            case CREATING ->
+            {
+                quitCodeQuestionsUpdateOrCreate(codeQuestionsUpdateResponse, CopyState.CREATE_FAILED);
+                //update outbox
+                codeQuestionsUpdateOutboxHelper.save(updateOutboxMessage(codeQuestionsUpdateOutboxMessage,
+                        CopyState.CREATE_FAILED, SagaStatus.COMPENSATED
+                ));
+            }
+            case UPDATING ->
+            {
+                //codeQuestionsUpdateResponse sẽ chứa data cũ để lưu lại trong tác vụ này
+                quitCodeQuestionsUpdateOrCreate(codeQuestionsUpdateResponse, CopyState.UPDATE_FAILED);
+                codeQuestionsUpdateOutboxHelper.save(updateOutboxMessage(codeQuestionsUpdateOutboxMessage,
+                        CopyState.UPDATE_FAILED, SagaStatus.COMPENSATED
+                ));
+            }
+
+            case DELETING ->
+            {
+                //delete record khi success, nên khi fail, ta k cần phải rollback thật sự mà chỉ cần chỉnh copy state
+                quitCodeQuestionsUpdateOrCreate(codeQuestionsUpdateResponse, CopyState.DELETE_FAILED);
+                codeQuestionsUpdateOutboxHelper.save(updateOutboxMessage(codeQuestionsUpdateOutboxMessage,
+                        CopyState.DELETE_FAILED, SagaStatus.COMPENSATED));
+            }
+
+        }
+
+        log.info("Code question with id {} is rollbacked", codeQuestionsUpdateResponse.getId());
     }
 }
