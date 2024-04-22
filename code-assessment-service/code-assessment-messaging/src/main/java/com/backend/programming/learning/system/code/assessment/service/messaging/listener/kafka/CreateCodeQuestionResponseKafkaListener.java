@@ -53,7 +53,7 @@ public class CreateCodeQuestionResponseKafkaListener
                             .codeQuestionCreateSuccess(codeQuestionId);
                     break;
                 }
-                case CREATING_FAIL:{
+                case CREATE_FAILED:{
                     log.info("Fail to save code question to core service, id: {}",
                             codeQuestionId);
                     codeQuestionUpdateResponseMessageListener
@@ -68,7 +68,7 @@ public class CreateCodeQuestionResponseKafkaListener
                             .codeQuestionDeleteSuccess(codeQuestionId);
                     break;
                 }
-                case DELETING_FAIL:{
+                case DELETE_FAILED:{
                     log.info("Fail to delete code question from core service, id: {}",
                             codeQuestionId);
                     codeQuestionUpdateResponseMessageListener
@@ -83,7 +83,7 @@ public class CreateCodeQuestionResponseKafkaListener
                             .codeQuestionUpdatedSuccess(codeQuestionId);
                     break;
                 }
-                case UPDATING_FAIL:{
+                case UPDATE_FAILED:{
                     log.info("Fail to update code question to core service, id: {}",
                             codeQuestionId);
                     codeQuestionUpdateResponseMessageListener
