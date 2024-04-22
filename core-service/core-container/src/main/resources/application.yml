@@ -7,7 +7,7 @@ logging:
 
 socket-config:
   port: 8085
-  host: 192.168.1.8
+  host: localhost
 
 core-service:
   payment-request-topic-name: payment-request
