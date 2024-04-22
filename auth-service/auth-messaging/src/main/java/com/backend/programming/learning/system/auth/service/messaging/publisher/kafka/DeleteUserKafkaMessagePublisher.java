@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.auth.service.domain.event.UserDel
 import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.user.UserDeletedMessagePublisher;
 import com.backend.programming.learning.system.auth.service.messaging.mapper.UserMessagingDataMapper;
 import com.backend.programming.learning.system.kafka.auth.avro.model.UserRequestAvroModel;
+import com.backend.programming.learning.system.kafka.producer.KafkaMessageHelper;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -15,9 +16,9 @@ public class DeleteUserKafkaMessagePublisher implements UserDeletedMessagePublis
     private final UserMessagingDataMapper userMessagingDataMapper;
     private final AuthServiceConfigData authServiceConfigData;
     private final KafkaProducer<String, UserRequestAvroModel> kafkaProducer;
-    private final UserKafkaMessageHelper userKafkaMessageHelper;
+    private final KafkaMessageHelper userKafkaMessageHelper;
 
-    public DeleteUserKafkaMessagePublisher(UserMessagingDataMapper userMessagingDataMapper, AuthServiceConfigData authServiceConfigData, KafkaProducer<String, UserRequestAvroModel> kafkaProducer, UserKafkaMessageHelper userKafkaMessageHelper) {
+    public DeleteUserKafkaMessagePublisher(UserMessagingDataMapper userMessagingDataMapper, AuthServiceConfigData authServiceConfigData, KafkaProducer<String, UserRequestAvroModel> kafkaProducer, KafkaMessageHelper userKafkaMessageHelper) {
         this.userMessagingDataMapper = userMessagingDataMapper;
         this.authServiceConfigData = authServiceConfigData;
         this.kafkaProducer = kafkaProducer;

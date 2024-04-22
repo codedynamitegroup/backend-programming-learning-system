@@ -17,12 +17,11 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
   private static final long serialVersionUID = -2467140520202613374L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserResponseAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"email\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"firstName\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"lastName\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"phone\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"address\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"avatarUrl\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"dob\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"updatedAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"userResponseStatus\",\"type\":{\"type\":\"enum\",\"name\":\"UserResponseStatus\",\"symbols\":[\"CREATED\",\"CREATE_FAILED\",\"UPDATED\",\"UPDATE_FAILED\",\"DELETED\",\"DELETE_FAILED\"]}},{\"name\":\"isDeleted\",\"type\":\"boolean\"},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserResponseAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"email\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"firstName\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"lastName\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"phone\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"address\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"avatarUrl\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"dob\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"updatedAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"userResponseStatus\",\"type\":{\"type\":\"enum\",\"name\":\"UserResponseStatus\",\"symbols\":[\"CREATED\",\"CREATE_FAILED\",\"UPDATED\",\"UPDATE_FAILED\",\"DELETED\",\"DELETE_FAILED\"]}},{\"name\":\"isDeleted\",\"type\":\"boolean\"},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
   static {
-    MODEL$.addLogicalTypeConversion(new org.apache.avro.Conversions.UUIDConversion());
     MODEL$.addLogicalTypeConversion(new org.apache.avro.data.TimeConversions.TimestampMillisConversion());
   }
 
@@ -77,9 +76,9 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
     return DECODER.decode(b);
   }
 
-  private java.util.UUID id;
-  private java.util.UUID sagaId;
-  private java.util.UUID userId;
+  private java.lang.String id;
+  private java.lang.String sagaId;
+  private java.lang.String userId;
   private java.lang.String email;
   private java.lang.String firstName;
   private java.lang.String lastName;
@@ -118,7 +117,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
    * @param isDeleted The new value for isDeleted
    * @param failureMessages The new value for failureMessages
    */
-  public UserResponseAvroModel(java.util.UUID id, java.util.UUID sagaId, java.util.UUID userId, java.lang.String email, java.lang.String firstName, java.lang.String lastName, java.lang.String phone, java.lang.String address, java.lang.String avatarUrl, java.time.Instant dob, java.time.Instant createdAt, java.time.Instant updatedAt, com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseStatus userResponseStatus, java.lang.Boolean isDeleted, java.util.List<java.lang.String> failureMessages) {
+  public UserResponseAvroModel(java.lang.String id, java.lang.String sagaId, java.lang.String userId, java.lang.String email, java.lang.String firstName, java.lang.String lastName, java.lang.String phone, java.lang.String address, java.lang.String avatarUrl, java.time.Instant dob, java.time.Instant createdAt, java.time.Instant updatedAt, com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseStatus userResponseStatus, java.lang.Boolean isDeleted, java.util.List<java.lang.String> failureMessages) {
     this.id = id;
     this.sagaId = sagaId;
     this.userId = userId;
@@ -167,9 +166,9 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
 
   private static final org.apache.avro.Conversion<?>[] conversions =
       new org.apache.avro.Conversion<?>[] {
-      new org.apache.avro.Conversions.UUIDConversion(),
-      new org.apache.avro.Conversions.UUIDConversion(),
-      new org.apache.avro.Conversions.UUIDConversion(),
+      null,
+      null,
+      null,
       null,
       null,
       null,
@@ -195,9 +194,9 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: id = (java.util.UUID)value$; break;
-    case 1: sagaId = (java.util.UUID)value$; break;
-    case 2: userId = (java.util.UUID)value$; break;
+    case 0: id = value$ != null ? value$.toString() : null; break;
+    case 1: sagaId = value$ != null ? value$.toString() : null; break;
+    case 2: userId = value$ != null ? value$.toString() : null; break;
     case 3: email = value$ != null ? value$.toString() : null; break;
     case 4: firstName = value$ != null ? value$.toString() : null; break;
     case 5: lastName = value$ != null ? value$.toString() : null; break;
@@ -218,7 +217,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
    * Gets the value of the 'id' field.
    * @return The value of the 'id' field.
    */
-  public java.util.UUID getId() {
+  public java.lang.String getId() {
     return id;
   }
 
@@ -227,7 +226,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
    * Sets the value of the 'id' field.
    * @param value the value to set.
    */
-  public void setId(java.util.UUID value) {
+  public void setId(java.lang.String value) {
     this.id = value;
   }
 
@@ -235,7 +234,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
    * Gets the value of the 'sagaId' field.
    * @return The value of the 'sagaId' field.
    */
-  public java.util.UUID getSagaId() {
+  public java.lang.String getSagaId() {
     return sagaId;
   }
 
@@ -244,7 +243,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
    * Sets the value of the 'sagaId' field.
    * @param value the value to set.
    */
-  public void setSagaId(java.util.UUID value) {
+  public void setSagaId(java.lang.String value) {
     this.sagaId = value;
   }
 
@@ -252,7 +251,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
    * Gets the value of the 'userId' field.
    * @return The value of the 'userId' field.
    */
-  public java.util.UUID getUserId() {
+  public java.lang.String getUserId() {
     return userId;
   }
 
@@ -261,7 +260,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
    * Sets the value of the 'userId' field.
    * @param value the value to set.
    */
-  public void setUserId(java.util.UUID value) {
+  public void setUserId(java.lang.String value) {
     this.userId = value;
   }
 
@@ -510,9 +509,9 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<UserResponseAvroModel>
     implements org.apache.avro.data.RecordBuilder<UserResponseAvroModel> {
 
-    private java.util.UUID id;
-    private java.util.UUID sagaId;
-    private java.util.UUID userId;
+    private java.lang.String id;
+    private java.lang.String sagaId;
+    private java.lang.String userId;
     private java.lang.String email;
     private java.lang.String firstName;
     private java.lang.String lastName;
@@ -671,7 +670,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
       * Gets the value of the 'id' field.
       * @return The value.
       */
-    public java.util.UUID getId() {
+    public java.lang.String getId() {
       return id;
     }
 
@@ -681,7 +680,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder setId(java.util.UUID value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder setId(java.lang.String value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -711,7 +710,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
       * Gets the value of the 'sagaId' field.
       * @return The value.
       */
-    public java.util.UUID getSagaId() {
+    public java.lang.String getSagaId() {
       return sagaId;
     }
 
@@ -721,7 +720,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
       * @param value The value of 'sagaId'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder setSagaId(java.util.UUID value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder setSagaId(java.lang.String value) {
       validate(fields()[1], value);
       this.sagaId = value;
       fieldSetFlags()[1] = true;
@@ -751,7 +750,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
       * Gets the value of the 'userId' field.
       * @return The value.
       */
-    public java.util.UUID getUserId() {
+    public java.lang.String getUserId() {
       return userId;
     }
 
@@ -761,7 +760,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
       * @param value The value of 'userId'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder setUserId(java.util.UUID value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder setUserId(java.lang.String value) {
       validate(fields()[2], value);
       this.userId = value;
       fieldSetFlags()[2] = true;
@@ -1268,9 +1267,9 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
     public UserResponseAvroModel build() {
       try {
         UserResponseAvroModel record = new UserResponseAvroModel();
-        record.id = fieldSetFlags()[0] ? this.id : (java.util.UUID) defaultValue(fields()[0]);
-        record.sagaId = fieldSetFlags()[1] ? this.sagaId : (java.util.UUID) defaultValue(fields()[1]);
-        record.userId = fieldSetFlags()[2] ? this.userId : (java.util.UUID) defaultValue(fields()[2]);
+        record.id = fieldSetFlags()[0] ? this.id : (java.lang.String) defaultValue(fields()[0]);
+        record.sagaId = fieldSetFlags()[1] ? this.sagaId : (java.lang.String) defaultValue(fields()[1]);
+        record.userId = fieldSetFlags()[2] ? this.userId : (java.lang.String) defaultValue(fields()[2]);
         record.email = fieldSetFlags()[3] ? this.email : (java.lang.String) defaultValue(fields()[3]);
         record.firstName = fieldSetFlags()[4] ? this.firstName : (java.lang.String) defaultValue(fields()[4]);
         record.lastName = fieldSetFlags()[5] ? this.lastName : (java.lang.String) defaultValue(fields()[5]);

@@ -11,6 +11,8 @@ socket-config:
 
 core-service:
   question-created-request-topic-name: core-question-create-request
+  user-request-topic-name: user-request
+  user-response-topic-name: user-response
   outbox-scheduler-fixed-rate: 10000
   outbox-scheduler-initial-delay: 10000
 
@@ -72,8 +74,7 @@ kafka-producer-config:
 kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-  payment-consumer-group-id: payment-topic-consumer
-  restaurant-approval-consumer-group-id: restaurant-approval-topic-consumer
+  core-service-user-consumer-group-id: core-service-user-topic-consumer
   customer-group-id: customer-topic-consumer
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader

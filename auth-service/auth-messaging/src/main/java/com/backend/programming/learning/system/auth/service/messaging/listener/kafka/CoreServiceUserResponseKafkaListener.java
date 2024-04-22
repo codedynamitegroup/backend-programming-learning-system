@@ -39,12 +39,10 @@ public class CoreServiceUserResponseKafkaListener implements KafkaConsumer<UserR
                 offsets.toString());
 
         messages.forEach(userResponseAvroModel -> {
-            UserId userId
-                    = new UserId(userResponseAvroModel.getId());
             switch (userResponseAvroModel.getUserResponseStatus()){
                 case CREATED:{
                     log.info("Success to create user for id: {}",
-                            userId);
+                            userResponseAvroModel.getId());
                     userResponseMessageListener
                             .userCreateSuccess(userMessagingDataMapper
                                     .userResponseAvroModelToUserResponse(userResponseAvroModel));
@@ -52,7 +50,7 @@ public class CoreServiceUserResponseKafkaListener implements KafkaConsumer<UserR
                 }
                 case CREATE_FAILED:{
                     log.info("Fail to create user for id: {}",
-                            userId);
+                            userResponseAvroModel.getId());
                     userResponseMessageListener
                             .userCreateFail(userMessagingDataMapper
                                     .userResponseAvroModelToUserResponse(userResponseAvroModel));
@@ -60,7 +58,7 @@ public class CoreServiceUserResponseKafkaListener implements KafkaConsumer<UserR
                 }
                 case DELETED: {
                     log.info("Success to delete user for id: {}",
-                            userId);
+                            userResponseAvroModel.getId());
                     userResponseMessageListener
                             .userDeleteSuccess(userMessagingDataMapper
                                     .userResponseAvroModelToUserResponse(userResponseAvroModel));
@@ -68,7 +66,7 @@ public class CoreServiceUserResponseKafkaListener implements KafkaConsumer<UserR
                 }
                 case DELETE_FAILED:{
                     log.info("Fail to delete user for id: {}",
-                            userId);
+                            userResponseAvroModel.getId());
                     userResponseMessageListener
                             .userDeleteFail(userMessagingDataMapper
                                     .userResponseAvroModelToUserResponse(userResponseAvroModel));
@@ -76,7 +74,7 @@ public class CoreServiceUserResponseKafkaListener implements KafkaConsumer<UserR
                 }
                 case UPDATED:{
                     log.info("Success to update user for id: {}",
-                            userId);
+                            userResponseAvroModel.getId());
                     userResponseMessageListener
                             .userUpdatedSuccess(userMessagingDataMapper
                                     .userResponseAvroModelToUserResponse(userResponseAvroModel));
@@ -84,7 +82,7 @@ public class CoreServiceUserResponseKafkaListener implements KafkaConsumer<UserR
                 }
                 case UPDATE_FAILED:{
                     log.info("Fail to update user for id: {}",
-                            userId);
+                            userResponseAvroModel.getId());
                     userResponseMessageListener
                             .userUpdatedFail(userMessagingDataMapper
                                     .userResponseAvroModelToUserResponse(userResponseAvroModel));

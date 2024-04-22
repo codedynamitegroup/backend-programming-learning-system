@@ -24,7 +24,6 @@ public class User extends AggregateRoot<UserId> {
     private ZonedDateTime lastLogin;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
-    private UserStatus userStatus;
     private Boolean isDeleted;
 
     private User(Builder builder) {
@@ -42,7 +41,6 @@ public class User extends AggregateRoot<UserId> {
         setLastLogin(builder.lastLogin);
         createdAt = builder.createdAt;
         setUpdatedAt(builder.updatedAt);
-        userStatus = builder.userStatus;
         isDeleted = builder.isDeleted;
     }
 
@@ -158,14 +156,6 @@ public class User extends AggregateRoot<UserId> {
         this.updatedAt = updatedAt;
     }
 
-    public UserStatus getUserStatus() {
-        return userStatus;
-    }
-
-    public void setUserStatus(UserStatus userStatus) {
-        this.userStatus = userStatus;
-    }
-
     public static Builder builder() {
         return new Builder();
     }
@@ -254,11 +244,6 @@ public class User extends AggregateRoot<UserId> {
 
         public Builder updatedAt(ZonedDateTime val) {
             updatedAt = val;
-            return this;
-        }
-
-        public Builder userStatus(UserStatus val) {
-            userStatus = val;
             return this;
         }
 
