@@ -29,10 +29,6 @@ public class UserEntity {
     private String avatarUrl;
     private String refreshToken;
     private String lastIp;
-
-    @Enumerated(EnumType.STRING)
-    private UserStatus userStatus;
-
     private ZonedDateTime lastLogin;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;

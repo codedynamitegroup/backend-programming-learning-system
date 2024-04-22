@@ -11,6 +11,7 @@ import com.backend.programming.learning.system.kafka.auth.avro.model.UserRequest
 import com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel;
 import org.springframework.stereotype.Component;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @Component
@@ -18,14 +19,18 @@ public class UserMessagingDataMapper {
     public UserRequestAvroModel userCreatedToUserRequestAvroModel(UserCreatedEvent userCreatedEvent) {
         User user = userCreatedEvent.getUser();
         return UserRequestAvroModel.newBuilder()
-                .setId(UUID.fromString(UUID.randomUUID().toString()))
-                .setSagaId(UUID.fromString(""))
-                .setUserId(UUID.fromString(user.getId().getValue().toString()))
+                .setId(UUID.randomUUID().toString())
+                .setSagaId("")
+                .setUserId(user.getId().getValue().toString())
                 .setEmail(user.getEmail())
-                .setPhone(user.getPhone())
                 .setFirstName(user.getFirstName())
                 .setLastName(user.getLastName())
+                .setPhone(user.getPhone())
+                .setAddress("")
+                .setDob(user.getCreatedAt().toInstant())
+                .setAvatarUrl("")
                 .setCreatedAt(user.getCreatedAt().toInstant())
+                .setUpdatedAt(user.getUpdatedAt().toInstant())
                 .setIsDeleted(user.getDeleted())
                 .setUserRequestStatus(UserRequestStatus.CREATING)
                 .build();
@@ -34,16 +39,19 @@ public class UserMessagingDataMapper {
     public UserRequestAvroModel userUpdatedToUserRequestAvroModel(UserUpdatedEvent userUpdatedEvent) {
         User user = userUpdatedEvent.getUser();
         return UserRequestAvroModel.newBuilder()
-                .setId(UUID.fromString(UUID.randomUUID().toString()))
-                .setSagaId(UUID.fromString(""))
-                .setUserId(UUID.fromString(user.getId().getValue().toString()))
+                .setId(UUID.randomUUID().toString())
+                .setSagaId("")
+                .setUserId(user.getId().getValue().toString())
                 .setEmail(user.getEmail())
-                .setPhone(user.getPhone())
-                .setAddress(user.getAddress())
                 .setFirstName(user.getFirstName())
                 .setLastName(user.getLastName())
-                .setAvatarUrl(user.getAvatarUrl())
+                .setPhone(user.getPhone())
+                .setAddress(user.getAddress())
                 .setDob(user.getDob().toInstant())
+                .setAvatarUrl(user.getAvatarUrl())
+                .setCreatedAt(user.getCreatedAt().toInstant())
+                .setUpdatedAt(user.getUpdatedAt().toInstant())
+                .setIsDeleted(user.getDeleted())
                 .setUserRequestStatus(UserRequestStatus.UPDATING)
                 .build();
     }
@@ -51,9 +59,9 @@ public class UserMessagingDataMapper {
     public UserRequestAvroModel userDeletedToUserRequestAvroModel(UserDeletedEvent userDeletedEvent) {
         User user = userDeletedEvent.getUser();
         return UserRequestAvroModel.newBuilder()
-                .setId(UUID.fromString(UUID.randomUUID().toString()))
-                .setSagaId(UUID.fromString(""))
-                .setUserId(UUID.fromString(user.getId().getValue().toString()))
+                .setId(UUID.randomUUID().toString())
+                .setSagaId("")
+                .setUserId(user.getId().getValue().toString())
                 .setIsDeleted(user.getDeleted())
                 .setUserRequestStatus(UserRequestStatus.DELETING)
                 .build();

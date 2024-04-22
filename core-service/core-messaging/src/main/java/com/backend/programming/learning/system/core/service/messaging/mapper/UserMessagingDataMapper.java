@@ -15,9 +15,9 @@ import java.util.UUID;
 public class UserMessagingDataMapper {
     public UserResponseAvroModel userCreatedSuccessEventToUserResponseAvroModel(UserCreatedSuccessEvent userCreatedSuccessEvent) {
         return UserResponseAvroModel.newBuilder()
-                .setId(UUID.randomUUID())
-                .setSagaId(UUID.fromString(""))
-                .setUserId(userCreatedSuccessEvent.getUser().getId().getValue())
+                .setId(UUID.randomUUID().toString())
+                .setSagaId("")
+                .setUserId(userCreatedSuccessEvent.getUser().getId().getValue().toString())
                 .setEmail(userCreatedSuccessEvent.getUser().getEmail())
                 .setFirstName(userCreatedSuccessEvent.getUser().getFirstName())
                 .setLastName(userCreatedSuccessEvent.getUser().getLastName())
@@ -29,9 +29,9 @@ public class UserMessagingDataMapper {
     }
     public UserResponseAvroModel userCreatedFailEventToUserResponseAvroModel(UserCreatedFailEvent userCreatedFailEvent) {
         return UserResponseAvroModel.newBuilder()
-                .setId(UUID.randomUUID())
-                .setSagaId(UUID.fromString(""))
-                .setUserId(userCreatedFailEvent.getUser().getId().getValue())
+                .setId(UUID.randomUUID().toString().toString())
+                .setSagaId("")
+                .setUserId(userCreatedFailEvent.getUser().getId().getValue().toString())
                 .setEmail(userCreatedFailEvent.getUser().getEmail())
                 .setFirstName(userCreatedFailEvent.getUser().getFirstName())
                 .setLastName(userCreatedFailEvent.getUser().getLastName())
