@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.entity.UserRole;
 import com.backend.programming.learning.system.auth.service.domain.event.UserCreatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.UserDeletedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.UserUpdatedEvent;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +30,11 @@ public class AuthDomainServiceImpl implements AuthDomainService {
         user.deleteUser();
         log.info("User with id: {} is deleted", user.getId().getValue());
         return new UserDeletedEvent(user, ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)), userDeletedEventDomainEventPublisher);
+    }
+
+    @Override
+    public UserUpdatedEvent updateUser(User user, DomainEventPublisher<UserUpdatedEvent> userUpdatedEventDomainEventPublisher) {
+        return new UserUpdatedEvent(user, ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)), userUpdatedEventDomainEventPublisher);
     }
 
     @Override

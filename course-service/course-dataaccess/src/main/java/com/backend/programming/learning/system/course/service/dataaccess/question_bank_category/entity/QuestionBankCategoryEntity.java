@@ -20,7 +20,7 @@ public class QuestionBankCategoryEntity {
     private UUID id;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "question_bank_id", referencedColumnName = "id")
     private QuestionBankEntity questionBank;
 

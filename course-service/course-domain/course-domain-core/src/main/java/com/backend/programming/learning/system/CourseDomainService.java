@@ -32,4 +32,6 @@ public interface CourseDomainService {
     void createOrganization(Organization organization);
   
     void createQuestionBank(QuestionBank questionBank);
+
+    void createQuestionBankCategory(QuestionBankCategory questionBankCategory);
 }

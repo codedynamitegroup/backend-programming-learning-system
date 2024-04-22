@@ -1,22 +1,17 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.user;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.method.update.role.UpdateRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.AuthDomainService;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
-import com.backend.programming.learning.system.auth.service.domain.entity.Role;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
+import com.backend.programming.learning.system.auth.service.domain.event.UserUpdatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
-import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
-import com.backend.programming.learning.system.auth.service.domain.mapper.UserDataMapper;
+import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.user.UserUpdatedMessagePublisher;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
-import com.backend.programming.learning.system.auth.service.domain.valueobject.RoleId;
-import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -24,13 +19,17 @@ import java.util.UUID;
 @Component
 public class UserUpdateHelper {
     private final UserRepository userRepository;
+    private final UserUpdatedMessagePublisher userUpdatedMessagePublisher;
+    private final AuthDomainService authDomainService;
 
-    public UserUpdateHelper(UserRepository userRepository) {
+    public UserUpdateHelper(UserRepository userRepository, UserUpdatedMessagePublisher userUpdatedMessagePublisher, AuthDomainService authDomainService) {
         this.userRepository = userRepository;
+        this.userUpdatedMessagePublisher = userUpdatedMessagePublisher;
+        this.authDomainService = authDomainService;
     }
 
     @Transactional
-    public User persistUser(UpdateUserCommand updateUserCommand) {
+    public UserUpdatedEvent persistUser(UpdateUserCommand updateUserCommand) {
         User user = getUser(updateUserCommand.getUserId());
 
         if (updateUserCommand.getDob() != null) {
@@ -52,7 +51,10 @@ public class UserUpdateHelper {
             user.setAvatarUrl(updateUserCommand.getAvatarUrl());
         }
 
-        return saveUser(user);
+        UserUpdatedEvent userUpdatedEvent = authDomainService.updateUser(user, userUpdatedMessagePublisher);
+
+        saveUser(user);
+        return userUpdatedEvent;
     }
 
     private User getUser(UUID userId) {

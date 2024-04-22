@@ -13,9 +13,11 @@ import com.backend.programming.learning.system.auth.service.domain.dto.response_
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.UserCreatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.UserDeletedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.UserUpdatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.mapper.UserDataMapper;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.user.UserCreatedMessagePublisher;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.user.UserDeletedMessagePublisher;
+import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.user.UserUpdatedMessagePublisher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -32,8 +34,9 @@ public class UserCommandHandler {
     private final UserUpdateHelper userUpdateHelper;
     private final UserCreatedMessagePublisher userCreatedMessagePublisher;
     private final UserDeletedMessagePublisher userDeletedMessagePublisher;
+    private final UserUpdatedMessagePublisher userUpdatedMessagePublisher;
 
-    public UserCommandHandler(UserCreateHelper userCreateHelper, UserDeleteHelper userDeleteHelper, UserDataMapper userDataMapper, UserQueryHelper userQueryHelper, UserUpdateHelper userUpdateHelper, UserCreatedMessagePublisher userCreatedMessagePublisher, UserDeletedMessagePublisher userDeletedMessagePublisher) {
+    public UserCommandHandler(UserCreateHelper userCreateHelper, UserDeleteHelper userDeleteHelper, UserDataMapper userDataMapper, UserQueryHelper userQueryHelper, UserUpdateHelper userUpdateHelper, UserCreatedMessagePublisher userCreatedMessagePublisher, UserDeletedMessagePublisher userDeletedMessagePublisher, UserUpdatedMessagePublisher userUpdatedMessagePublisher) {
         this.userCreateHelper = userCreateHelper;
         this.userDeleteHelper = userDeleteHelper;
         this.userDataMapper = userDataMapper;
@@ -41,6 +44,7 @@ public class UserCommandHandler {
         this.userUpdateHelper = userUpdateHelper;
         this.userCreatedMessagePublisher = userCreatedMessagePublisher;
         this.userDeletedMessagePublisher = userDeletedMessagePublisher;
+        this.userUpdatedMessagePublisher = userUpdatedMessagePublisher;
     }
 
 
@@ -69,9 +73,10 @@ public class UserCommandHandler {
 
     @Transactional
     public UpdateUserResponse updateUser(UpdateUserCommand updateUserCommand) {
-        User userUpdated = userUpdateHelper.persistUser(updateUserCommand);
-        log.info("User is updated with id: {}", userUpdated.getId().getValue());
-        return userDataMapper.userToUpdateUserResponse(userUpdated, "User updated successfully");
+        UserUpdatedEvent userUpdatedEvent = userUpdateHelper.persistUser(updateUserCommand);
+        log.info("User is updated with id: {}", userUpdatedEvent.getUser().getId().getValue());
+        userUpdatedMessagePublisher.publish(userUpdatedEvent);
+        return userDataMapper.userToUpdateUserResponse(userUpdatedEvent.getUser(), "User updated successfully");
     }
 
 
