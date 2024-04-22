@@ -1,0 +1,13 @@
+{
+  "type" : "record",
+  "name" : "QuestionDeleteRequestAvroModel",
+  "namespace" : "com.backend.programming.learning.system.kafka.core.avro.model",
+  "fields" : [ {
+    "name" : "id",
+    "logicalType" : "UUID",
+    "type" : "string"
+  }, {
+    "name" : "sagaId",
+    "type" : "string"
+  }]
+}

@@ -12,6 +12,7 @@ import com.backend.programming.learning.system.core.service.domain.implement.que
 import com.backend.programming.learning.system.core.service.domain.implement.question.method.update.QtypeCodeQuestionUpdateHelper;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.QuestionCreatedMessagePublisher;
+import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.QuestionUpdatedMessagePublisher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -24,18 +25,24 @@ public class QtypeCodeQuestionCommandHandler {
     private final QtypeCodeQuestionCreateHelper qtypeCodeQuestionCreateHelper;
     private final QtypeCodeQuestionQueryHelper qtypeCodeQuestionQueryHelper;
     private final QtypeCodeQuestionUpdateHelper qtypeCodeQuestionUpdateHelper;
-    private final QuestionDataMapper questionDataMapper;
+
+    private final QuestionUpdatedMessagePublisher questionUpdatedMessagePublisher;
     private final QuestionCreatedMessagePublisher questionCreatedMessagePublisher;
+
+    private final QuestionDataMapper questionDataMapper;
+
 
     public QtypeCodeQuestionCommandHandler(QtypeCodeQuestionCreateHelper qtypeCodeQuestionCreateHelper,
                                            QtypeCodeQuestionQueryHelper qtypeCodeQuestionQueryHelper,
                                            QtypeCodeQuestionUpdateHelper qtypeCodeQuestionUpdateHelper,
                                            QuestionDataMapper questionDataMapper,
+                                           QuestionUpdatedMessagePublisher questionUpdatedMessagePublisher,
                                            QuestionCreatedMessagePublisher questionCreatedMessagePublisher) {
         this.qtypeCodeQuestionCreateHelper = qtypeCodeQuestionCreateHelper;
         this.qtypeCodeQuestionQueryHelper = qtypeCodeQuestionQueryHelper;
         this.qtypeCodeQuestionUpdateHelper = qtypeCodeQuestionUpdateHelper;
         this.questionDataMapper = questionDataMapper;
+        this.questionUpdatedMessagePublisher = questionUpdatedMessagePublisher;
         this.questionCreatedMessagePublisher = questionCreatedMessagePublisher;
     }
 
@@ -56,6 +63,8 @@ public class QtypeCodeQuestionCommandHandler {
 
     public UpdateQuestionResponse updateQtypeCodeQuestion(UpdateQtypeCodeQuestionCommand updateQtypeCodeQuestionCommand) {
         QuestionUpdatedEvent questionUpdatedEvent = qtypeCodeQuestionUpdateHelper.updateQtypeCodeQuestionInDb(updateQtypeCodeQuestionCommand);
+
+        questionUpdatedMessagePublisher.publish(questionUpdatedEvent);
 
         return questionDataMapper.questionUpdatedEventToUpdateQuestionRespond(questionUpdatedEvent, "Qtype Code Question updated successfully");
     }

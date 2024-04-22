@@ -11,6 +11,8 @@ socket-config:
 
 core-service:
   question-created-request-topic-name: core-question-create-request
+  question-deleted-request-topic-name: core-question-delete-request
+  question-updated-request-topic-name: core-question-update-request
   outbox-scheduler-fixed-rate: 10000
   outbox-scheduler-initial-delay: 10000
 

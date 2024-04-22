@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.core.service.messaging.publisher.kafka;
 
-import com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.springframework.kafka.support.SendResult;
