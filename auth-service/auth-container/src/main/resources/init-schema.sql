@@ -4,6 +4,17 @@ CREATE SCHEMA "public";
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
+DROP TYPE IF EXISTS CopyState;
+CREATE TYPE CopyState AS ENUM ('CREATING',
+    'CREATED',
+    'UPDATING',
+    'UPDATED',
+    'DELETING',
+    'DELETED',
+    'DELETING_FAIL',
+    'UPDATING_FAIL',
+    'CREATING_FAIL');
+
 DROP TABLE IF EXISTS "public".main_user CASCADE;
 
 CREATE TABLE "public".main_user (
@@ -21,6 +32,7 @@ CREATE TABLE "public".main_user (
 	last_login TIMESTAMP WITH TIME ZONE,
 	created_at TIMESTAMP WITH TIME ZONE,
 	updated_at TIMESTAMP WITH TIME ZONE,
+	copy_state CopyState,
 	is_deleted boolean NOT NULL DEFAULT false,
 	PRIMARY KEY ("id")
 );

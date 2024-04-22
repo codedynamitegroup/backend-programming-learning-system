@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.ports.input.message.listener.auth;
 
-import com.backend.programming.learning.system.core.service.domain.dto.method.message.UserResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.message.UserRequest;
 
 /***********************************
  * Created by TGT on 31/03/2024.
@@ -9,7 +9,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.me
  ************************************/
 
 public interface AuthResMessListener {
-    void userUpdated(UserResponse userAuthResponse);
-    void userCreated(UserResponse userAuthResponse);
-    void userDeleted(UserResponse userAuthResponse);
+    void userUpdated(UserRequest userAuthResponse);
+    void userCreated(UserRequest userAuthResponse);
+    void userDeleted(UserRequest userAuthResponse);
 }

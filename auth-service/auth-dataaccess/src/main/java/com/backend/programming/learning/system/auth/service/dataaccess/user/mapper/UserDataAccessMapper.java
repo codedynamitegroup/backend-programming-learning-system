@@ -23,6 +23,7 @@ public class UserDataAccessMapper {
                 .lastIp(userEntity.getLastIp())
                 .lastLogin(userEntity.getLastLogin())
                 .refreshToken(userEntity.getRefreshToken())
+                .userStatus(userEntity.getUserStatus())
                 .isDeleted(userEntity.getIsDeleted())
                 .build();
     }
@@ -43,6 +44,7 @@ public class UserDataAccessMapper {
                 .lastIp(user.getLastIp())
                 .lastLogin(user.getLastLogin())
                 .refreshToken(user.getRefreshToken())
+                .userStatus(user.getUserStatus())
                 .isDeleted(user.getDeleted())
                 .build();
     }

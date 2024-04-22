@@ -1,13 +1,11 @@
 package com.backend.programming.learning.system.core.service.domain.dto.method.message;
 
-import com.backend.programming.learning.system.domain.valueobject.UserStatus;
+import com.backend.programming.learning.system.domain.valueobject.UserRequestStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.time.Instant;
-import java.util.Date;
-import java.util.List;
 
 /***********************************
  * Created by TGT on 31/03/2024.
@@ -17,7 +15,7 @@ import java.util.List;
 @Getter
 @Builder
 @AllArgsConstructor
-public class UserResponse {
+public class UserRequest {
     private String id;
     private String sagaId;
     private String userId;
@@ -30,7 +28,6 @@ public class UserResponse {
     private Instant dob;
     private Instant createdAt;
     private Instant updatedAt;
-    private UserStatus userStatus;
+    private UserRequestStatus userRequestStatus;
     private Boolean isDeleted;
-    private List<String> failureMessages;
 }

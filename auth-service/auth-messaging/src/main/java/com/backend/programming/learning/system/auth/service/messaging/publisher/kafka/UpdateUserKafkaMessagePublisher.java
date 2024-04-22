@@ -1,8 +1,8 @@
 package com.backend.programming.learning.system.auth.service.messaging.publisher.kafka;
 
 import com.backend.programming.learning.system.auth.service.domain.config.AuthServiceConfigData;
-import com.backend.programming.learning.system.auth.service.domain.event.UserDeletedEvent;
-import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.user.UserDeletedMessagePublisher;
+import com.backend.programming.learning.system.auth.service.domain.event.UserUpdatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.user.UserUpdatedMessagePublisher;
 import com.backend.programming.learning.system.auth.service.messaging.mapper.UserMessagingDataMapper;
 import com.backend.programming.learning.system.kafka.auth.avro.model.UserRequestAvroModel;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
@@ -11,13 +11,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class DeleteUserKafkaMessagePublisher implements UserDeletedMessagePublisher {
+public class UpdateUserKafkaMessagePublisher implements UserUpdatedMessagePublisher {
     private final UserMessagingDataMapper userMessagingDataMapper;
     private final AuthServiceConfigData authServiceConfigData;
     private final KafkaProducer<String, UserRequestAvroModel> kafkaProducer;
     private final UserKafkaMessageHelper userKafkaMessageHelper;
 
-    public DeleteUserKafkaMessagePublisher(UserMessagingDataMapper userMessagingDataMapper, AuthServiceConfigData authServiceConfigData, KafkaProducer<String, UserRequestAvroModel> kafkaProducer, UserKafkaMessageHelper userKafkaMessageHelper) {
+    public UpdateUserKafkaMessagePublisher(UserMessagingDataMapper userMessagingDataMapper, AuthServiceConfigData authServiceConfigData, KafkaProducer<String, UserRequestAvroModel> kafkaProducer, UserKafkaMessageHelper userKafkaMessageHelper) {
         this.userMessagingDataMapper = userMessagingDataMapper;
         this.authServiceConfigData = authServiceConfigData;
         this.kafkaProducer = kafkaProducer;
@@ -25,13 +25,13 @@ public class DeleteUserKafkaMessagePublisher implements UserDeletedMessagePublis
     }
 
     @Override
-    public void publish(UserDeletedEvent domainEvent) {
+    public void publish(UserUpdatedEvent domainEvent) {
         String userId = domainEvent.getUser().getId().getValue().toString();
-        log.info("Received UserDeletedEvent for user id: {}", userId);
+        log.info("Received UserUpdatedEvent for user id: {}", userId);
 
         try {
             UserRequestAvroModel userRequestAvroModel = userMessagingDataMapper
-                    .userDeletedToUserRequestAvroModel(domainEvent);
+                    .userUpdatedToUserRequestAvroModel(domainEvent);
             kafkaProducer.send(authServiceConfigData.getUserRequestTopicName(),
                     userId,
                     userRequestAvroModel,
