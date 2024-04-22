@@ -26,8 +26,8 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     }
 
     @Override
-    public Page<Question> findAll(Integer page, Integer size) {
-        return questionJpaRepository.findAll(PageRequest.of(page, size))
+    public Page<Question> findAll(UUID questionBankCategoryId, Integer page, Integer size) {
+        return questionJpaRepository.findAll(questionBankCategoryId, PageRequest.of(page, size))
                 .map(questionDataAccessMapper::questionEntityToQuestion);
     }
 

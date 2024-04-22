@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.dto.method.update.question_bank_
 
 import lombok.Builder;
 
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 /**
@@ -14,7 +15,10 @@ import java.util.UUID;
 public record UpdateQuestionBankCategoryResponse(
         UUID questionBankCategoryId,
         String name,
-        UUID questionBankId,
+        UUID createdBy,
+        UUID updatedBy,
+        ZonedDateTime createdAt,
+        ZonedDateTime updatedAt,
         String message
 ) {
 }

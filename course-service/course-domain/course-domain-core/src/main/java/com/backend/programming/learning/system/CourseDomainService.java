@@ -4,10 +4,7 @@ import com.backend.programming.learning.system.entity.*;
 
 
 import java.util.List;
-import java.util.UUID;
 import com.backend.programming.learning.system.entity.Question;
-
-import java.util.UUID;
 
 public interface CourseDomainService {
     void createExam(Exam exam);
@@ -30,8 +27,6 @@ public interface CourseDomainService {
     void createExamQuestions(List<ExamQuestion> examQuestions);
 
     void createOrganization(Organization organization);
-  
-    void createQuestionBank(QuestionBank questionBank);
 
     void createQuestionBankCategory(QuestionBankCategory questionBankCategory);
 }

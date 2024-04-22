@@ -55,4 +55,11 @@ public class QuestionCommandHandler {
     public void deleteById(DeleteQuestionCommand deleteQuestionCommand) {
         questionDeleteHelper.deleteById(deleteQuestionCommand);
     }
+
+    @Transactional
+    public CreateQuestionResponse createQuestionBank(CreateQuestionCommand createQuestionCommand) {
+        Question question = questionCreateHelper.createQuestionBank(createQuestionCommand);
+        log.info("Question bank is created with id: {}", question.getId());
+        return questionDataMapper.questionToCreateQuestionResponse(question, "Question bank created successfully");
+    }
 }

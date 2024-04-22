@@ -4,15 +4,18 @@ import com.backend.programming.learning.system.CourseDomainService;
 import com.backend.programming.learning.system.dto.method.create.question.CreateQuestionCommand;
 import com.backend.programming.learning.system.entity.Organization;
 import com.backend.programming.learning.system.entity.Question;
+import com.backend.programming.learning.system.entity.QuestionBankCategory;
 import com.backend.programming.learning.system.entity.User;
 import com.backend.programming.learning.system.mapper.question.QuestionDataMapper;
 import com.backend.programming.learning.system.ports.output.repository.OrganizationRepository;
+import com.backend.programming.learning.system.ports.output.repository.QuestionBankCategoryRepository;
 import com.backend.programming.learning.system.ports.output.repository.QuestionRepository;
 import com.backend.programming.learning.system.ports.output.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -31,9 +34,10 @@ public class QuestionCreateHelper {
     private final QuestionRepository questionRepository;
     private final OrganizationRepository organizationRepository;
     private final UserRepository userRepository;
+    private final QuestionBankCategoryRepository questionBankCategoryRepository;
 
     public Question createQuestion(CreateQuestionCommand createQuestionCommand) {
-        User createdBy =  getUser(createQuestionCommand.getCreatedBy());
+        User createdBy = getUser(createQuestionCommand.getCreatedBy());
         Organization organization = getOrganization(createQuestionCommand.getOrganizationId());
 
         Question question = questionDataMapper.createQuestionCommandToQuestion(organization, createdBy, createQuestionCommand);
@@ -43,6 +47,7 @@ public class QuestionCreateHelper {
         log.info("Question is created with id: {}", questionResult.getId());
         return questionResult;
     }
+
     private User getUser(UUID userId) {
         Optional<User> user = userRepository.findUser(userId);
         if (user.isEmpty()) {
@@ -69,5 +74,24 @@ public class QuestionCreateHelper {
         }
         log.info("Question saved successfully with id: {}", savedQuestion.getId());
         return savedQuestion;
+    }
+
+    public Question createQuestionBank(CreateQuestionCommand createQuestionCommand) {
+        User createdBy = getUser(createQuestionCommand.getCreatedBy());
+        Organization organization = getOrganization(createQuestionCommand.getOrganizationId());
+
+        Question question = null;
+        if (Objects.isNull(createQuestionCommand.getQuestionBankCategoryId())) {
+            question = questionDataMapper.createQuestionCommandToQuestionBank(organization, createdBy, createQuestionCommand);
+        } else {
+            QuestionBankCategory questionBankCategory = questionBankCategoryRepository.findQuestionBankCategoryById(createQuestionCommand.getQuestionBankCategoryId())
+                    .orElseThrow(() -> new RuntimeException("Question bank category not found"));
+            question = questionDataMapper.createQuestionCommandToQuestionBank(organization, questionBankCategory, createdBy, createQuestionCommand);
+        }
+        courseDomainService.createQuestion(question);
+
+        Question questionResult = saveQuestion(question);
+        log.info("Question bank is created with id: {}", questionResult.getId());
+        return questionResult;
     }
 }

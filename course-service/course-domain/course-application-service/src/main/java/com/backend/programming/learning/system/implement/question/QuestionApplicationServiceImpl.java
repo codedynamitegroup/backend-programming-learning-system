@@ -47,4 +47,9 @@ public class QuestionApplicationServiceImpl implements QuestionApplicationServic
     public void deleteById(DeleteQuestionCommand deleteQuestionCommand) {
         questionCommandHandler.deleteById(deleteQuestionCommand);
     }
+
+    @Override
+    public CreateQuestionResponse createQuestionBank(CreateQuestionCommand createQuestionCommand) {
+        return questionCommandHandler.createQuestionBank(createQuestionCommand);
+    }
 }

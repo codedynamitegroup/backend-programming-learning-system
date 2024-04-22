@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -33,8 +34,8 @@ public class QuestionEntity {
     private String generalFeedback;
     private Float defaultMark;
 
-//    private ZonedDateTime createdAt;
-//    private ZonedDateTime updatedAt;
+    private ZonedDateTime createdAt;
+    private ZonedDateTime updatedAt;
 
     @ManyToOne
     @JoinColumn(name = "created_by", referencedColumnName = "id")
@@ -47,9 +48,7 @@ public class QuestionEntity {
     @Enumerated(EnumType.STRING)
     private QuestionType qtype;
 
-//    @Enumerated(EnumType.STRING)
-//    private QuestionDifficulty qdifficulty;
-
+    private UUID questionBankCategoryId;
 
     @Override
     public boolean equals(Object o) {

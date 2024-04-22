@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -38,6 +39,12 @@ public class QuestionBankCategoryRepositoryImpl implements QuestionBankCategoryR
         return questionBankCategoryDataAccessMapper
                 .questionBankCategoryEntityToQuestionBankCategory(questionBankCategoryJpaRepository.findById(id)
                         .orElseThrow(() -> new RuntimeException("Question bank category not found")));
+    }
+
+    @Override
+    public Optional<QuestionBankCategory> findQuestionBankCategoryById(UUID questionBankCategoryId) {
+        return questionBankCategoryJpaRepository.findById(questionBankCategoryId)
+                .map(questionBankCategoryDataAccessMapper::questionBankCategoryEntityToQuestionBankCategory);
     }
 
 }
