@@ -1,9 +1,10 @@
 package com.backend.programming.learning.system.course.service.dataaccess.question_bank_category.entity;
 
-import com.backend.programming.learning.system.course.service.dataaccess.question_bank.entity.QuestionBankEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -19,12 +20,17 @@ public class QuestionBankCategoryEntity {
     @Column(name = "id")
     private UUID id;
 
-
-    @ManyToOne
-    @JoinColumn(name = "question_bank_id", referencedColumnName = "id")
-    private QuestionBankEntity questionBank;
-
     private String name;
+    @OneToOne
+    @JoinColumn(name = "created_by", referencedColumnName = "id")
+    private UserEntity createdBy;
+
+    @OneToOne
+    @JoinColumn(name = "updated_by", referencedColumnName = "id")
+    private UserEntity updatedBy;
+
+    private ZonedDateTime createdAt;
+    private ZonedDateTime updatedAt;
 
     @Override
     public boolean equals(Object o) {

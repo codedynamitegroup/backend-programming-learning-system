@@ -25,6 +25,7 @@ public class CreateQuestionCommand {
     private String questionText;
     private String generalFeedback;
     private Float defaultMark;
+    private UUID questionBankCategoryId;
     @NotNull(message = "Question type is required")
     private QuestionType qtype;
     @NotNull(message = "Created by is required")

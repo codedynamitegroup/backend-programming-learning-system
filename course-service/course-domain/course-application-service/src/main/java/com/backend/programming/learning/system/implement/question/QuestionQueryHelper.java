@@ -24,7 +24,10 @@ public class QuestionQueryHelper {
     private final QuestionRepository questionRepository;
     @Transactional(readOnly = true)
     public Page<Question> findAllQuestions(QueryAllQuestionCommand queryAllQuestionCommand) {
-        return questionRepository.findAll(queryAllQuestionCommand.getPageNo(), queryAllQuestionCommand.getPageSize());
+        return questionRepository.findAll(
+                queryAllQuestionCommand.getQuestionBankCategoryId(),
+                queryAllQuestionCommand.getPageNo(),
+                queryAllQuestionCommand.getPageSize());
     }
 
     @Transactional(readOnly = true)

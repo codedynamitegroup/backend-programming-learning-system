@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.dto.responseentity.question_bank
 
 import lombok.Builder;
 
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 /**
@@ -13,7 +14,10 @@ import java.util.UUID;
 @Builder
 public record QuestionBankCategoryEntity(
         UUID questionBankCategoryId,
-        UUID questionBankId,
-        String name
+        String name,
+        UUID createdBy,
+        UUID updatedBy,
+        ZonedDateTime createdAt,
+        ZonedDateTime updatedAt
 ) {
 }

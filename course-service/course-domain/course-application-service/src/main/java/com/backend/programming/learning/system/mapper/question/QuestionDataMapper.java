@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.dto.method.query.question.QueryAl
 import com.backend.programming.learning.system.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.entity.Organization;
 import com.backend.programming.learning.system.entity.Question;
+import com.backend.programming.learning.system.entity.QuestionBankCategory;
 import com.backend.programming.learning.system.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -32,6 +33,7 @@ public class QuestionDataMapper {
                 .generalFeedback(createQuestionCommand.getGeneralFeedback())
                 .defaultMark(createQuestionCommand.getDefaultMark())
                 .qtype(createQuestionCommand.getQtype())
+                .isQuestionBank(false)
                 .createdBy(createdBy)
                 .updatedBy(createdBy)
                 .build();
@@ -70,6 +72,37 @@ public class QuestionDataMapper {
                 .questionText(question.getQuestionText())
                 .generalFeedback(question.getGeneralFeedback())
                 .defaultMark(question.getDefaultMark())
+                .build();
+    }
+
+    public Question createQuestionCommandToQuestionBank(Organization organization, User createdBy, CreateQuestionCommand createQuestionCommand) {
+        return Question.builder()
+                .organization(organization)
+                .questionText(createQuestionCommand.getQuestionText())
+                .difficulty(createQuestionCommand.getDifficulty())
+                .name(createQuestionCommand.getName())
+                .generalFeedback(createQuestionCommand.getGeneralFeedback())
+                .defaultMark(createQuestionCommand.getDefaultMark())
+                .qtype(createQuestionCommand.getQtype())
+                .isQuestionBank(true)
+                .createdBy(createdBy)
+                .updatedBy(createdBy)
+                .build();
+    }
+    public Question createQuestionCommandToQuestionBank(
+            Organization organization, QuestionBankCategory questionBankCategory, User createdBy, CreateQuestionCommand createQuestionCommand) {
+        return Question.builder()
+                .organization(organization)
+                .questionText(createQuestionCommand.getQuestionText())
+                .difficulty(createQuestionCommand.getDifficulty())
+                .name(createQuestionCommand.getName())
+                .generalFeedback(createQuestionCommand.getGeneralFeedback())
+                .defaultMark(createQuestionCommand.getDefaultMark())
+                .qtype(createQuestionCommand.getQtype())
+                .isQuestionBank(true)
+                .questionBankCategory(questionBankCategory)
+                .createdBy(createdBy)
+                .updatedBy(createdBy)
                 .build();
     }
 }

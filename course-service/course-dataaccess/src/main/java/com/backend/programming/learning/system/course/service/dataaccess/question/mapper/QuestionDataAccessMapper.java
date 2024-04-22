@@ -28,7 +28,7 @@ public class QuestionDataAccessMapper {
                 .questionText(question.getQuestionText())
                 .generalFeedback(question.getGeneralFeedback())
                 .defaultMark(question.getDefaultMark())
-                .qtype(question.getqtype())
+                .qtype(question.getQtype())
                 .difficulty(question.getDifficulty())
                 .createdBy(createdBy)
                 .updatedBy(createdBy)
@@ -39,8 +39,7 @@ public class QuestionDataAccessMapper {
         Organization organization = organizationDataAccessMapper.organizationEntityToOrganization(questionEntity.getOrganization());
         User createdBy = userDataAccessMapper.userEntityToUser(questionEntity.getCreatedBy());
         User updatedBy = userDataAccessMapper.userEntityToUser(questionEntity.getUpdatedBy());
-        return Question.builder()
-                .id(new QuestionId(questionEntity.getId()))
+        Question response = Question.builder()
                 .name(questionEntity.getName())
                 .questionText(questionEntity.getQuestionText())
                 .generalFeedback(questionEntity.getGeneralFeedback())
@@ -51,5 +50,7 @@ public class QuestionDataAccessMapper {
                 .createdBy(createdBy)
                 .updatedBy(updatedBy)
                 .build();
+        response.setId(new QuestionId(questionEntity.getId()));
+        return response;
     }
 }
