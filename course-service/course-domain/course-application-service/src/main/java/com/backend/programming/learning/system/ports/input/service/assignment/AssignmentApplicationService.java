@@ -8,8 +8,8 @@ import com.backend.programming.learning.system.dto.method.query.assignment.Query
 import com.backend.programming.learning.system.dto.method.query.assignment.QueryAllAssignmentsResponse;
 import com.backend.programming.learning.system.dto.method.query.assignment.QueryAssignmentCommand;
 import com.backend.programming.learning.system.dto.method.query.assignment.QueryAssignmentResponse;
-import com.backend.programming.learning.system.dto.update.assignment.UpdateAssignmentCommand;
-import com.backend.programming.learning.system.dto.update.assignment.UpdateAssignmentResponse;
+import com.backend.programming.learning.system.dto.method.update.assignment.UpdateAssignmentCommand;
+import com.backend.programming.learning.system.dto.method.update.assignment.UpdateAssignmentResponse;
 
 import javax.validation.Valid;
 

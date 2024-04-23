@@ -28,5 +28,9 @@ public interface CourseDomainService {
 
     void createOrganization(Organization organization);
 
+    void createCallMoodleApiFunction(CallMoodleApiFunction callMoodleApiFunction);
+  
+    void createQuestionBank(QuestionBank questionBank);
+
     void createQuestionBankCategory(QuestionBankCategory questionBankCategory);
 }

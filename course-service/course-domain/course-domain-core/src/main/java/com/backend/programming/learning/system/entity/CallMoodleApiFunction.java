@@ -3,6 +3,8 @@ package com.backend.programming.learning.system.entity;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.valueobject.CallMoodleApiFunctionId;
 
+import java.util.UUID;
+
 public class CallMoodleApiFunction extends AggregateRoot<CallMoodleApiFunctionId> {
 
     private String area;
@@ -30,6 +32,10 @@ public class CallMoodleApiFunction extends AggregateRoot<CallMoodleApiFunctionId
 
     public String getDescription() {
         return description;
+    }
+
+    public void initializeCallMoodleApiFunction() {
+        setId(new CallMoodleApiFunctionId(UUID.randomUUID()));
     }
 
     public static final class Builder {

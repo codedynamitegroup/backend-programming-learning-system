@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.dto.update.submission_assignment;
+package com.backend.programming.learning.system.dto.method.update.assignment;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class UpdateSubmissionAssignmentResponse {
-    private final UUID submissionId;
+public class UpdateAssignmentResponse {
+    private final UUID assignmentId;
     private final String message;
 }
