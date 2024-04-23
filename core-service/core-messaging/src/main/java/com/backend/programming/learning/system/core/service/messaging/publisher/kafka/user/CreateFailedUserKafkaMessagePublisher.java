@@ -35,7 +35,7 @@ public class CreateFailedUserKafkaMessagePublisher implements UserCreateFailedMe
         try {
             UserResponseAvroModel userResponseAvroModel = userMessagingDataMapper
                     .userCreatedFailEventToUserResponseAvroModel(domainEvent);
-            kafkaProducer.send(coreServiceConfigData.getUserRequestTopicName(),
+            kafkaProducer.send(coreServiceConfigData.getUserResponseTopicName(),
                     userId,
                     userResponseAvroModel,
                     userKafkaMessageHelper.getKafkaCallback(coreServiceConfigData.getUserResponseTopicName(),

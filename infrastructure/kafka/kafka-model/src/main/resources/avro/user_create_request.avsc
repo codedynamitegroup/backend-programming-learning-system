@@ -1,5 +1,5 @@
 {
-  "name": "UserRequestAvroModel",
+  "name": "UserCreateRequestAvroModel",
   "namespace": "com.backend.programming.learning.system.kafka.auth.avro.model",
   "type": "record",
   "fields": [
@@ -32,21 +32,6 @@
       "type": "string"
     },
     {
-      "name": "address",
-      "type": "string"
-    },
-    {
-      "name": "avatarUrl",
-      "type": "string"
-    },
-    {
-      "name": "dob",
-      "type": {
-        "type": "long",
-        "logicalType": "timestamp-millis"
-      }
-    },
-    {
       "name": "createdAt",
       "type": {
         "type": "long",
@@ -58,16 +43,6 @@
       "type": {
         "type": "long",
         "logicalType": "timestamp-millis"
-      }
-    },
-    {
-      "name": "userRequestStatus",
-      "type": {
-        "type": "enum",
-        "name": "UserRequestStatus",
-        "symbols": ["CREATING",
-          "UPDATING",
-          "DELETING"]
       }
     },
     {

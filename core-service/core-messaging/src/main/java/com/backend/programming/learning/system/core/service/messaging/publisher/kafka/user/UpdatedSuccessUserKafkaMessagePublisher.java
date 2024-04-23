@@ -2,7 +2,9 @@ package com.backend.programming.learning.system.core.service.messaging.publisher
 
 import com.backend.programming.learning.system.core.service.domain.config.CoreServiceConfigData;
 import com.backend.programming.learning.system.core.service.domain.event.user.UserCreatedSuccessEvent;
+import com.backend.programming.learning.system.core.service.domain.event.user.UserUpdatedSuccessEvent;
 import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.user.UserCreatedSuccessMessagePublisher;
+import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.user.UserUpdatedSuccessMessagePublisher;
 import com.backend.programming.learning.system.core.service.messaging.mapper.UserMessagingDataMapper;
 import com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel;
 import com.backend.programming.learning.system.kafka.producer.KafkaMessageHelper;
@@ -12,13 +14,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class CreatedSuccessUserKafkaMessagePublisher implements UserCreatedSuccessMessagePublisher {
+public class UpdatedSuccessUserKafkaMessagePublisher implements UserUpdatedSuccessMessagePublisher {
     private final UserMessagingDataMapper userMessagingDataMapper;
     private final CoreServiceConfigData coreServiceConfigData;
     private final KafkaProducer<String, UserResponseAvroModel> kafkaProducer;
     private final KafkaMessageHelper userKafkaMessageHelper;
 
-    public CreatedSuccessUserKafkaMessagePublisher(UserMessagingDataMapper userMessagingDataMapper, CoreServiceConfigData coreServiceConfigData, KafkaProducer<String, UserResponseAvroModel> kafkaProducer, KafkaMessageHelper userKafkaMessageHelper) {
+    public UpdatedSuccessUserKafkaMessagePublisher(UserMessagingDataMapper userMessagingDataMapper, CoreServiceConfigData coreServiceConfigData, KafkaProducer<String, UserResponseAvroModel> kafkaProducer, KafkaMessageHelper userKafkaMessageHelper) {
         this.userMessagingDataMapper = userMessagingDataMapper;
         this.coreServiceConfigData = coreServiceConfigData;
         this.kafkaProducer = kafkaProducer;
@@ -26,13 +28,13 @@ public class CreatedSuccessUserKafkaMessagePublisher implements UserCreatedSucce
     }
 
     @Override
-    public void publish(UserCreatedSuccessEvent domainEvent) {
+    public void publish(UserUpdatedSuccessEvent domainEvent) {
         String userId = domainEvent.getUser().getId().getValue().toString();
         log.info("Received UserCreatedSuccessEvent for user id: {}", userId);
 
         try {
             UserResponseAvroModel userResponseAvroModel = userMessagingDataMapper
-                    .userCreatedSuccessEventToUserResponseAvroModel(domainEvent);
+                    .userUpdatedSuccessEventToUserResponseAvroModel(domainEvent);
             kafkaProducer.send(coreServiceConfigData.getUserResponseTopicName(),
                     userId,
                     userResponseAvroModel,

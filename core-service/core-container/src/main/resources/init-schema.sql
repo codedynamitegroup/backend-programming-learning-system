@@ -28,9 +28,12 @@ CREATE TABLE "public".user
     dob date,
     first_name character varying,
     last_name character varying,
-    avatar_url text,
+	phone character varying,
+	address character varying,
+	avatar_url text,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+	is_deleted boolean NOT NULL DEFAULT false,
     CONSTRAINT user_pkey PRIMARY KEY (id)
 );
 

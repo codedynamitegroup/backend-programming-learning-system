@@ -4,7 +4,11 @@ import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
+import com.backend.programming.learning.system.core.service.domain.event.user.UserCreatedFailEvent;
+import com.backend.programming.learning.system.core.service.domain.event.user.UserCreatedSuccessEvent;
+import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface CoreDomainService {
@@ -33,4 +37,10 @@ public interface CoreDomainService {
     void createCertificateCourseUser(CertificateCourseUser certificateCourseUser);
     void createContestUser(ContestUser contestUser);
     void createCalendarEvent(CalendarEvent calendarEvent);
+
+    UserCreatedSuccessEvent createUserSuccess(User user,
+                                              DomainEventPublisher<UserCreatedSuccessEvent> userCreatedSuccessEventDomainEventPublisher);
+    UserCreatedFailEvent createUserFail(User user,
+                                        DomainEventPublisher<UserCreatedFailEvent> userCreatedFailEventDomainEventPublisher,
+                                        List<String> failureMessages);
 }

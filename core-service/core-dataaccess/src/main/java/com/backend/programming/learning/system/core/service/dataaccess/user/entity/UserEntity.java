@@ -26,10 +26,13 @@ public class UserEntity {
     private String email;
     private String firstName;
     private String lastName;
-    private Date dob;
+    private ZonedDateTime dob;
+    private String phone;
+    private String address;
     private String avatarUrl;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
+    private Boolean isDeleted;
 
     @OneToMany(mappedBy = "user")
     private List<CertificateCourseUserEntity> certificateCourseUsers;

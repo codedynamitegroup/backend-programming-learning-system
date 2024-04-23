@@ -26,7 +26,7 @@ public class CoreServiceUserResponseKafkaListener implements KafkaConsumer<UserR
     }
 
     @Override
-    @KafkaListener(id = "${kafka-consumer-config.core-service-user-consumer-group-id}",
+    @KafkaListener(id = "${kafka-consumer-config.core-service-user-response-group-id}",
             topics = "${auth-service.user-response-topic-name}")
     public void receive(@Payload List<UserResponseAvroModel> messages,
                         @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) List<String> keys,

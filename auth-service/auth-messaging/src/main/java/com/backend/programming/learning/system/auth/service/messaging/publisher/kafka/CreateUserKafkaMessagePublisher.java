@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.auth.service.domain.config.AuthSe
 import com.backend.programming.learning.system.auth.service.domain.event.UserCreatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.user.UserCreatedMessagePublisher;
 import com.backend.programming.learning.system.auth.service.messaging.mapper.UserMessagingDataMapper;
-import com.backend.programming.learning.system.kafka.auth.avro.model.UserRequestAvroModel;
+import com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel;
 import com.backend.programming.learning.system.kafka.producer.KafkaMessageHelper;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
 import lombok.extern.slf4j.Slf4j;
@@ -15,10 +15,10 @@ import org.springframework.stereotype.Component;
 public class CreateUserKafkaMessagePublisher implements UserCreatedMessagePublisher {
     private final UserMessagingDataMapper userMessagingDataMapper;
     private final AuthServiceConfigData authServiceConfigData;
-    private final KafkaProducer<String, UserRequestAvroModel> kafkaProducer;
+    private final KafkaProducer<String, UserCreateRequestAvroModel> kafkaProducer;
     private final KafkaMessageHelper kafkaMessageHelper;
 
-    public CreateUserKafkaMessagePublisher(UserMessagingDataMapper userMessagingDataMapper, AuthServiceConfigData authServiceConfigData, KafkaProducer<String, UserRequestAvroModel> kafkaProducer, KafkaMessageHelper kafkaMessageHelper) {
+    public CreateUserKafkaMessagePublisher(UserMessagingDataMapper userMessagingDataMapper, AuthServiceConfigData authServiceConfigData, KafkaProducer<String, UserCreateRequestAvroModel> kafkaProducer, KafkaMessageHelper kafkaMessageHelper) {
         this.userMessagingDataMapper = userMessagingDataMapper;
         this.authServiceConfigData = authServiceConfigData;
         this.kafkaProducer = kafkaProducer;
@@ -31,16 +31,16 @@ public class CreateUserKafkaMessagePublisher implements UserCreatedMessagePublis
         log.info("Received UserCreatedEvent for user id: {}", userId);
 
         try {
-            UserRequestAvroModel userRequestAvroModel = userMessagingDataMapper
-                    .userCreatedToUserRequestAvroModel(domainEvent);
-            kafkaProducer.send(authServiceConfigData.getUserRequestTopicName(),
+            UserCreateRequestAvroModel userCreateRequestAvroModel = userMessagingDataMapper
+                    .userCreatedToUserCreateRequestAvroModel(domainEvent);
+            kafkaProducer.send(authServiceConfigData.getUserCreateRequestTopicName(),
                     userId,
-                    userRequestAvroModel,
+                    userCreateRequestAvroModel,
                     kafkaMessageHelper.getKafkaCallback(authServiceConfigData.getUserResponseTopicName(),
-                            userRequestAvroModel, userId, "UserRequestAvroModel"));
-            log.info("UserRequestAvroModel sent to Kafka for user id: {}", userRequestAvroModel.getUserId());
+                            userCreateRequestAvroModel, userId, "UserCreateRequestAvroModel"));
+            log.info("UserCreateRequestAvroModel sent to Kafka for user id: {}", userCreateRequestAvroModel.getUserId());
         } catch (Exception e) {
-            log.error("Error while sending UserRequestAvroModel message" +
+            log.error("Error while sending UserCreateRequestAvroModel message" +
                     " to kafka with user id: {}, error: {}", userId, e.getMessage());
         }
 
