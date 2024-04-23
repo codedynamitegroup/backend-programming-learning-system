@@ -2,7 +2,7 @@ package com.backend.programming.learning.system.core.service.messaging.publisher
 
 import com.backend.programming.learning.system.core.service.domain.config.CoreServiceConfigData;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
-import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.QuestionDeletedMessagePublisher;
+import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.question.QuestionDeletedMessagePublisher;
 import com.backend.programming.learning.system.core.service.messaging.mapper.QuestionMessagingDataMapper;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;

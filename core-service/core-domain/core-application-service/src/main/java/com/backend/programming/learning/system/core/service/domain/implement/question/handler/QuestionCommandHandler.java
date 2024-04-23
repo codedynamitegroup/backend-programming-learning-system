@@ -5,7 +5,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.responsee
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
 import com.backend.programming.learning.system.core.service.domain.implement.question.method.delete.QuestionDeleteHelper;
 import com.backend.programming.learning.system.core.service.domain.implement.question.method.query.QuestionQueryHelper;
-import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.QuestionDeletedMessagePublisher;
+import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.question.QuestionDeletedMessagePublisher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

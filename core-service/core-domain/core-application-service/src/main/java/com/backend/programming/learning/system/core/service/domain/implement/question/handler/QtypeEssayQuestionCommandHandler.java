@@ -11,8 +11,8 @@ import com.backend.programming.learning.system.core.service.domain.implement.que
 import com.backend.programming.learning.system.core.service.domain.implement.question.method.query.QtypeEssayQuestionQueryHelper;
 import com.backend.programming.learning.system.core.service.domain.implement.question.method.update.QtypeEssayQuestionUpdateHelper;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
-import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.QuestionCreatedMessagePublisher;
-import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.QuestionUpdatedMessagePublisher;
+import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.question.QuestionCreatedMessagePublisher;
+import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.question.QuestionUpdatedMessagePublisher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

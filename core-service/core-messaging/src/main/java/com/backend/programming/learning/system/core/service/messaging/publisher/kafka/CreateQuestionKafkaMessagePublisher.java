@@ -2,7 +2,7 @@ package com.backend.programming.learning.system.core.service.messaging.publisher
 
 import com.backend.programming.learning.system.core.service.domain.config.CoreServiceConfigData;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
-import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.QuestionCreatedMessagePublisher;
+import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.question.QuestionCreatedMessagePublisher;
 import com.backend.programming.learning.system.core.service.messaging.mapper.QuestionMessagingDataMapper;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
