@@ -4,10 +4,15 @@ import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
+import com.backend.programming.learning.system.core.service.domain.event.user.UserCreatedFailEvent;
+import com.backend.programming.learning.system.core.service.domain.event.user.UserCreatedSuccessEvent;
+import com.backend.programming.learning.system.domain.DomainConstants;
+import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -133,5 +138,22 @@ public class CoreDomainServiceImpl implements CoreDomainService {
     public void createCalendarEvent(CalendarEvent calendarEvent) {
         calendarEvent.initializeCalendarEvent();
         log.info("Calendar event created with id: {}", calendarEvent.getId().getValue());
+    }
+
+    @Override
+    public UserCreatedSuccessEvent createUserSuccess(User user, DomainEventPublisher<UserCreatedSuccessEvent> userCreatedSuccessEventDomainEventPublisher) {
+        return new UserCreatedSuccessEvent(user,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                userCreatedSuccessEventDomainEventPublisher);
+    }
+
+    @Override
+    public UserCreatedFailEvent createUserFail(User user,
+                                               DomainEventPublisher<UserCreatedFailEvent> userCreatedFailEventDomainEventPublisher,
+                                               List<String> failureMessages) {
+        return new UserCreatedFailEvent(user,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                userCreatedFailEventDomainEventPublisher,
+                failureMessages);
     }
 }

@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "auth-service")
 public class AuthServiceConfigData {
-    private String userAuthRequestTopicName;
-    private String userAuthResponseTopicName;
+    private String userCreateRequestTopicName;
+    private String userUpdateRequestTopicName;
+    private String userDeleteRequestTopicName;
+    private String userResponseTopicName;
 }

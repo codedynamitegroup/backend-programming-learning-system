@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.auth.service.application.rest.question_bank_category;
 
-import com.backend.programming.learning.system.dto.method.create.question_bank.CreateQuestionBankResponse;
 import com.backend.programming.learning.system.dto.method.create.question_bank_category.CreateQuestionBankCategoryCommand;
 import com.backend.programming.learning.system.dto.method.create.question_bank_category.CreateQuestionBankCategoryResponse;
 import com.backend.programming.learning.system.dto.method.query.question_bank_category.QueryAllQuestionBankCategoryCommand;

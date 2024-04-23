@@ -5,69 +5,15 @@
   "fields": [
     {
       "name": "id",
-      "type": {
-        "type": "string",
-        "logicalType": "uuid"
-      }
+      "type": "string"
     },
     {
       "name": "sagaId",
-      "type": {
-        "type": "string",
-        "logicalType": "uuid"
-      }
+      "type": "string"
     },
     {
       "name": "userId",
-      "type": {
-        "type": "string",
-        "logicalType": "uuid"
-      }
-    },
-    {
-      "name": "email",
       "type": "string"
-    },
-    {
-      "name": "firstName",
-      "type": "string"
-    },
-    {
-      "name": "lastName",
-      "type": "string"
-    },
-    {
-      "name": "phone",
-      "type": "string"
-    },
-    {
-      "name": "address",
-      "type": "string"
-    },
-    {
-      "name": "avatarUrl",
-      "type": "string"
-    },
-    {
-      "name": "dob",
-      "type": {
-        "type": "long",
-        "logicalType": "timestamp-millis"
-      }
-    },
-    {
-      "name": "createdAt",
-      "type": {
-        "type": "long",
-        "logicalType": "timestamp-millis"
-      }
-    },
-    {
-      "name": "updatedAt",
-      "type": {
-        "type": "long",
-        "logicalType": "timestamp-millis"
-      }
     },
     {
       "name": "userResponseStatus",
@@ -81,10 +27,6 @@
           "DELETED",
           "DELETE_FAILED"]
       }
-    },
-    {
-      "name": "isDeleted",
-      "type": "boolean"
     },
     {
       "name": "failureMessages",

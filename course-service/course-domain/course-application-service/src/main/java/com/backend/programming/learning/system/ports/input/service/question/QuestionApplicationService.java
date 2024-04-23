@@ -29,4 +29,7 @@ public interface QuestionApplicationService {
 
     void deleteById(
             @Valid DeleteQuestionCommand deleteQuestionCommand);
+
+    CreateQuestionResponse createQuestionBank(
+            @Valid CreateQuestionCommand createQuestionCommand);
 }

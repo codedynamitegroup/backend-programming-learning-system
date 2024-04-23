@@ -65,7 +65,7 @@ public class QuestionCreateHelper {
         log.info("Answers for question with id {} saved", question.getId().getValue());
         log.info("Question created with id: {}", question.getId().getValue());
 
-        return question;
+        return questionDataMapper.setQuestionWithAnswers(question, answerEntityList);
     }
 
     // Check if user exists

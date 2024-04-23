@@ -40,6 +40,24 @@ public class QuestionDataMapper {
                 .build();
     }
 
+    public Question setQuestionWithAnswers(Question question, List<AnswerOfQuestion> answers) {
+        return Question.builder()
+                .questionId(question.getId())
+                .organization(question.getOrganization())
+                .name(question.getName())
+                .questionText(question.getQuestionText())
+                .generalFeedback(question.getGeneralFeedback())
+                .defaultMark(question.getDefaultMark())
+                .difficulty(question.getDifficulty())
+                .createdBy(question.getCreatedBy())
+                .updatedBy(question.getUpdatedBy())
+                .qtype(question.getqtype())
+                .createdAt(question.getCreatedAt())
+                .updatedAt(question.getUpdatedAt())
+                .answers(answers)
+                .build();
+    }
+
     public List<AnswerOfQuestion> answerOfQuestionListToAnswerOfQuestionEntityList(List<com.backend.programming.learning.system.core.service.domain.dto.method.create.question.AnswerOfQuestion> answerOfQuestions
             , QuestionId questionId) {
         return List.of(answerOfQuestions.stream()

@@ -10,6 +10,7 @@ import com.backend.programming.learning.system.dto.responseentity.question.Quest
 import com.backend.programming.learning.system.ports.input.service.question.QuestionApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,16 +42,26 @@ public class QuestionController {
     ) {
         log.info("Creating question");
         CreateQuestionResponse response = questionApplicationService.createQuestion(createQuestionCommand);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+    @PostMapping("/bank/create")
+    public ResponseEntity<CreateQuestionResponse> createQuestionBank(
+            @RequestBody CreateQuestionCommand createQuestionCommand
+    ) {
+        log.info("Creating question bank");
+        CreateQuestionResponse response = questionApplicationService.createQuestionBank(createQuestionCommand);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping
     public ResponseEntity<QueryAllQuestionResponse> findAllQuestions(
+            @RequestParam(name = "questionBankCategoryId", required = false) UUID questionBankCategoryId,
             @RequestParam(defaultValue = "") String search,
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize
     ) {
         QueryAllQuestionCommand queryAllQuestionCommand = QueryAllQuestionCommand.builder()
+                .questionBankCategoryId(questionBankCategoryId)
                 .search(search)
                 .pageNo(pageNo)
                 .pageSize(pageSize)

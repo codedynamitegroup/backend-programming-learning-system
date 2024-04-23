@@ -11,6 +11,8 @@ import com.backend.programming.learning.system.core.service.domain.implement.que
 import com.backend.programming.learning.system.core.service.domain.implement.question.method.query.QtypeEssayQuestionQueryHelper;
 import com.backend.programming.learning.system.core.service.domain.implement.question.method.update.QtypeEssayQuestionUpdateHelper;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
+import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.QuestionCreatedMessagePublisher;
+import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.QuestionUpdatedMessagePublisher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -23,21 +25,31 @@ public class QtypeEssayQuestionCommandHandler {
     private final QtypeEssayQuestionCreateHelper qtypeEssayQuestionCreateHelper;
     private final QtypeEssayQuestionQueryHelper qtypeEssayQuestionQueryHelper;
     private final QtypeEssayQuestionUpdateHelper qtypeEssayQuestionUpdateHelper;
+
+    private final QuestionUpdatedMessagePublisher questionUpdatedMessagePublisher;
+    private final QuestionCreatedMessagePublisher questionCreatedMessagePublisher;
+
     private final QuestionDataMapper questionDataMapper;
 
 
     public QtypeEssayQuestionCommandHandler(QtypeEssayQuestionCreateHelper qtypeEssayQuestionCreateHelper,
                                             QtypeEssayQuestionQueryHelper qtypeEssayQuestionQueryHelper,
                                             QtypeEssayQuestionUpdateHelper qtypeEssayQuestionUpdateHelper,
+                                            QuestionUpdatedMessagePublisher questionUpdatedMessagePublisher,
+                                            QuestionCreatedMessagePublisher questionCreatedMessagePublisher,
                                             QuestionDataMapper questionDataMapper) {
         this.qtypeEssayQuestionCreateHelper = qtypeEssayQuestionCreateHelper;
         this.qtypeEssayQuestionQueryHelper = qtypeEssayQuestionQueryHelper;
         this.qtypeEssayQuestionUpdateHelper = qtypeEssayQuestionUpdateHelper;
+        this.questionUpdatedMessagePublisher = questionUpdatedMessagePublisher;
+        this.questionCreatedMessagePublisher = questionCreatedMessagePublisher;
         this.questionDataMapper = questionDataMapper;
     }
 
     public CreateQuestionResponse createQtypeEssayQuestion(CreateQtypeEssayQuestionCommand createQtypeEssayQuestionCommand) {
         QuestionCreatedEvent questionCreatedEvent = qtypeEssayQuestionCreateHelper.persistQtypeEssayQuestion(createQtypeEssayQuestionCommand);
+
+        questionCreatedMessagePublisher.publish(questionCreatedEvent);
 
         return questionDataMapper.questionCreatedEventToCreateQuestionResponse(questionCreatedEvent, "Qtype Essay Question created successfully");
     }
@@ -52,6 +64,8 @@ public class QtypeEssayQuestionCommandHandler {
 
     public UpdateQuestionResponse updateQtypeEssayQuestion(UpdateQtypeEssayQuestionCommand updateQtypeEssayQuestionCommand) {
         QuestionUpdatedEvent questionUpdatedEvent = qtypeEssayQuestionUpdateHelper.updateQtypeEssayQuestion(updateQtypeEssayQuestionCommand);
+
+        questionUpdatedMessagePublisher.publish(questionUpdatedEvent);
 
         return questionDataMapper.questionUpdatedEventToUpdateQuestionRespond(questionUpdatedEvent, "Qtype Essay Question updated successfully");
     }

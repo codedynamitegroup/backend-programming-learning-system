@@ -4,10 +4,7 @@ import com.backend.programming.learning.system.entity.*;
 
 
 import java.util.List;
-import java.util.UUID;
 import com.backend.programming.learning.system.entity.Question;
-
-import java.util.UUID;
 
 public interface CourseDomainService {
     void createExam(Exam exam);

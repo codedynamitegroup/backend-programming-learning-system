@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 /**
  * com.backend.programming.learning.system.dto.method.query.question
@@ -16,6 +17,8 @@ import javax.validation.constraints.NotNull;
 @Builder
 @AllArgsConstructor
 public class QueryAllQuestionCommand {
+    @NotNull
+    private final UUID questionBankCategoryId;
     @NotNull
     private final int pageNo;
     @NotNull

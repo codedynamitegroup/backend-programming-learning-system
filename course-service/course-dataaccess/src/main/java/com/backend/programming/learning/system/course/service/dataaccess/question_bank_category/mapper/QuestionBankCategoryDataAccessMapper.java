@@ -1,10 +1,10 @@
 package com.backend.programming.learning.system.course.service.dataaccess.question_bank_category.mapper;
 
-import com.backend.programming.learning.system.course.service.dataaccess.question_bank.entity.QuestionBankEntity;
-import com.backend.programming.learning.system.course.service.dataaccess.question_bank.mapper.QuestionBankDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.question_bank_category.entity.QuestionBankCategoryEntity;
-import com.backend.programming.learning.system.entity.QuestionBank;
+import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.entity.QuestionBankCategory;
+import com.backend.programming.learning.system.entity.User;
 import com.backend.programming.learning.system.valueobject.QuestionBankCategoryId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -12,22 +12,29 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class QuestionBankCategoryDataAccessMapper {
-    final QuestionBankDataAccessMapper questionBankDataAccessMapper;
+    final UserDataAccessMapper userDataAccessMapper;
     public QuestionBankCategoryEntity questionBankCategoryToQuestionBankCategoryEntity(QuestionBankCategory questionBankCategory) {
-        QuestionBankEntity questionBankEntity = questionBankDataAccessMapper
-                .questionBankToQuestionBankEntity(questionBankCategory.getQuestionBank());
+        UserEntity createdBy = userDataAccessMapper.userToUserEntity(questionBankCategory.getCreatedBy());
+        UserEntity updatedBy = userDataAccessMapper.userToUserEntity(questionBankCategory.getUpdatedBy());
         return QuestionBankCategoryEntity.builder()
                 .id(questionBankCategory.getId().getValue())
-                .questionBank(questionBankEntity)
                 .name(questionBankCategory.getName())
+                .createdBy(createdBy)
+                .updatedBy(updatedBy)
+                .createdAt(questionBankCategory.getCreatedAt())
+                .updatedAt(questionBankCategory.getUpdatedAt())
                 .build();
     }
 
     public QuestionBankCategory questionBankCategoryEntityToQuestionBankCategory(QuestionBankCategoryEntity questionBankCategoryEntity) {
-        QuestionBank questionBank = questionBankDataAccessMapper.questionBankEntityToQuestionBank(questionBankCategoryEntity.getQuestionBank());
+        User createdBy = userDataAccessMapper.userEntityToUser(questionBankCategoryEntity.getCreatedBy());
+        User updatedBy = userDataAccessMapper.userEntityToUser(questionBankCategoryEntity.getUpdatedBy());
         QuestionBankCategory response = QuestionBankCategory.builder()
                 .name(questionBankCategoryEntity.getName())
-                .questionBank(questionBank)
+                .createdBy(createdBy)
+                .updatedBy(updatedBy)
+                .createdAt(questionBankCategoryEntity.getCreatedAt())
+                .updatedAt(questionBankCategoryEntity.getUpdatedAt())
                 .build();
         response.setId(new QuestionBankCategoryId(questionBankCategoryEntity.getId()));
         return response;
