@@ -30,8 +30,7 @@ public class CourseDataAccessMapper {
     public Course courseEntityToCourse(CourseEntity courseEntity) {
         User createdBy = userDataAccessMapper.userEntityToUser(courseEntity.getCreatedBy());
         User updatedBy = userDataAccessMapper.userEntityToUser(courseEntity.getUpdatedBy());
-        return Course.builder()
-                .id(new CourseId(courseEntity.getId()))
+        Course response = Course.builder()
                 .name(courseEntity.getName())
                 .visible(courseEntity.getVisible())
                 .createdBy(createdBy)
@@ -39,5 +38,7 @@ public class CourseDataAccessMapper {
                 .createdAt(courseEntity.getCreatedAt())
                 .updatedAt(courseEntity.getUpdatedAt())
                 .build();
+        response.setId(new CourseId(courseEntity.getId()));
+        return response;
     }
 }

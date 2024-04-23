@@ -83,14 +83,20 @@ public class CourseDomainServiceImpl implements CourseDomainService{
     }
 
     @Override
-    public void createQuestionBank(QuestionBank questionBank) {
-        questionBank.initializeQuestionBank();
-        log.info("QuestionBank with id: {} is initiated", questionBank.getId().getValue());
-    }
-
-    @Override
     public void createQuestionBankCategory(QuestionBankCategory questionBankCategory) {
         questionBankCategory.initializeQuestionBankCategory();
         log.info("QuestionBankCategory with id: {} is initiated", questionBankCategory.getId().getValue());
+    }
+
+    @Override
+    public void createExamSubmission(ExamSubmission examSubmission) {
+        examSubmission.initializeExamSubmission();
+        log.info("ExamSubmission with id: {} is initiated", examSubmission.getId().getValue());
+    }
+
+    @Override
+    public void createQuestionSubmission(QuestionSubmission questionSubmission) {
+        questionSubmission.initializeQuestionSubmission();
+        log.info("QuestionSubmission with id: {} is initiated", questionSubmission.getId().getValue());
     }
 }

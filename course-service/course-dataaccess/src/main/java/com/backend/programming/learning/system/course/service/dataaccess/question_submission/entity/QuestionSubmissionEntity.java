@@ -17,26 +17,24 @@ import java.util.UUID;
 @Entity
 @Table(name = "question_submission")
 public class QuestionSubmissionEntity {
-
     @Id
     @Column(name = "id")
     private UUID id;
 
-
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "exam_submission_id", referencedColumnName = "id")
     private ExamSubmissionEntity examSubmission;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "question_id", referencedColumnName = "id")
     private QuestionEntity question;
-    private Integer pass_status;
+    private Integer passStatus;
     private Float grade;
     private String content;
-    private String right_answer;
-    private Integer num_file;
+    private String rightAnswer;
+    private Integer numFile;
 
     @Override
     public boolean equals(Object o) {

@@ -10,9 +10,6 @@ import lombok.Getter;
  * Date 4/20/2024 - 10:08 AM
  * Description: ...
  */
-@Getter
 @Builder
-@AllArgsConstructor
-public class CreateCourseUserResponse {
-    private final String message;
+public record CreateCourseUserResponse(String message) {
 }
