@@ -32,7 +32,7 @@ public class CourseCreateHelper {
     private final UserRepository userRepository;
     @Transactional
     public Course createCourse(CreateCourseCommand createCourseCommand) {
-        User user = getUser(createCourseCommand.getCreatedBy());
+        User user = getUser(createCourseCommand.createdBy());
         Course course = courseDataMapper.createCourseCommandToCourse(user, createCourseCommand);
 
         courseDomainService.createCourse(course);

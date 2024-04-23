@@ -37,8 +37,8 @@ public class CourseUserCreateHelper {
 
     public void assignCourseToUser(CreateCourseUserCommand createCourseUserCommand) {
         log.info("Assign course to user");
-        Course course = getCourse(createCourseUserCommand.getCourseId());
-        List<User> users = getUsers(createCourseUserCommand.getUserIds());
+        Course course = getCourse(createCourseUserCommand.courseId());
+        List<User> users = getUsers(createCourseUserCommand.userIds());
         List<CourseUser> courseUsers = courseUserDataMapper.createCourseUserCommandToCourseUser(course, users);
         courseDomainService.createCourseUsers(courseUsers);
         courseUserRepository.saveAll(courseUsers);

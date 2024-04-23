@@ -14,12 +14,9 @@ import java.util.UUID;
  * Date 4/20/2024 - 10:07 AM
  * Description: ...
  */
-@Getter
 @Builder
-@AllArgsConstructor
-public class CreateCourseUserCommand {
-    @NotNull(message = "User ids are required")
-    private List<UUID> userIds;
-    @NotNull(message = "Course id is required")
-    private UUID courseId;
+public record CreateCourseUserCommand(
+        @NotNull(message = "User ids are required") List<UUID> userIds,
+        @NotNull(message = "Course id is required") UUID courseId
+) {
 }

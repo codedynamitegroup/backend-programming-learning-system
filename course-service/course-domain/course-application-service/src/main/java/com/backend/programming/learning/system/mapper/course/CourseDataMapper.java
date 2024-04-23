@@ -16,9 +16,9 @@ public class CourseDataMapper {
             User user,
             CreateCourseCommand createCourseCommand) {
         return Course.builder()
-                .name(createCourseCommand.getName())
-                .key(createCourseCommand.getKey())
-                .visible(createCourseCommand.getVisible())
+                .name(createCourseCommand.name())
+                .key(createCourseCommand.key())
+                .visible(createCourseCommand.visible())
                 .createdBy(user)
                 .updatedBy(user)
                 .build();
