@@ -30,6 +30,8 @@ public interface CourseDomainService {
     void createExamQuestions(List<ExamQuestion> examQuestions);
 
     void createOrganization(Organization organization);
+
+    void createCallMoodleApiFunction(CallMoodleApiFunction callMoodleApiFunction);
   
     void createQuestionBank(QuestionBank questionBank);
 

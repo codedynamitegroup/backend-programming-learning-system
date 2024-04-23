@@ -75,6 +75,13 @@ public class CourseDomainServiceImpl implements CourseDomainService{
         organization.initializeOrganization();
         log.info("Organization with id: {} is initiated", organization.getId().getValue());
     }
+
+    @Override
+    public void createCallMoodleApiFunction(CallMoodleApiFunction callMoodleApiFunction) {
+        callMoodleApiFunction.initializeCallMoodleApiFunction();
+        log.info("CallMoodleApiFunction with id: {} is initiated", callMoodleApiFunction.getId().getValue());
+    }
+
     @Override
     public void createQuestionBank(QuestionBank questionBank) {
         questionBank.initializeQuestionBank();

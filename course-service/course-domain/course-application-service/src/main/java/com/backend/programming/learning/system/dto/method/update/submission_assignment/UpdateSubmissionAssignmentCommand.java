@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.dto.update.submission_assignment;
+package com.backend.programming.learning.system.dto.method.update.submission_assignment;
 
 import com.backend.programming.learning.system.dataaccess.validator.EnumValidator;
 import com.backend.programming.learning.system.valueobject.Type;

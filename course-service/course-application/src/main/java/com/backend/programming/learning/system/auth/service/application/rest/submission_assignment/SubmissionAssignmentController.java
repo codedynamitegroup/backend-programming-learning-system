@@ -8,8 +8,8 @@ import com.backend.programming.learning.system.dto.method.query.submission_assig
 import com.backend.programming.learning.system.dto.method.query.submission_assignment.QueryAllSubmissionnAssignmentCommand;
 import com.backend.programming.learning.system.dto.method.query.submission_assignment.QuerySubmissionAssignmentCommand;
 import com.backend.programming.learning.system.dto.responseentity.submission_assignment.SubmissionAssignmentResponseEntity;
-import com.backend.programming.learning.system.dto.update.submission_assignment.UpdateSubmissionAssignmentCommand;
-import com.backend.programming.learning.system.dto.update.submission_assignment.UpdateSubmissionAssignmentResponse;
+import com.backend.programming.learning.system.dto.method.update.submission_assignment.UpdateSubmissionAssignmentCommand;
+import com.backend.programming.learning.system.dto.method.update.submission_assignment.UpdateSubmissionAssignmentResponse;
 import com.backend.programming.learning.system.ports.input.service.submission_assignment.SubmissionAssignmentApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
