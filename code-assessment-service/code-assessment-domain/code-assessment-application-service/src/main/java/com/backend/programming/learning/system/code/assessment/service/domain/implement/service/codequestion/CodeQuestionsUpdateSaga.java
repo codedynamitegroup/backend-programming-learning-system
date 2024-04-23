@@ -53,7 +53,7 @@ public class CodeQuestionsUpdateSaga implements SagaStep<CodeQuestionsUpdateResp
 
         //update code question status
         switch (codeQuestionsUpdateResponse.getState()){
-            case CREATING ->
+            case CREATED ->
             {
                 completeCodeQuestionsUpdateOrCreate(codeQuestionsUpdateResponse, CopyState.CREATED);
                 //update outbox
@@ -61,7 +61,7 @@ public class CodeQuestionsUpdateSaga implements SagaStep<CodeQuestionsUpdateResp
                         CopyState.CREATED, SagaStatus.SUCCEEDED
                 ));
             }
-            case UPDATING ->
+            case UPDATED ->
             {
                 completeCodeQuestionsUpdateOrCreate(codeQuestionsUpdateResponse, CopyState.UPDATED);
                 codeQuestionsUpdateOutboxHelper.save(updateOutboxMessage(codeQuestionsUpdateOutboxMessage,
@@ -69,7 +69,7 @@ public class CodeQuestionsUpdateSaga implements SagaStep<CodeQuestionsUpdateResp
                 ));
             }
 
-            case DELETING ->
+            case DELETED ->
             {
                 //actual delete
                 codeQuestionRepository.deleteCodeQuestionById(codeQuestionsUpdateResponse.getId());
@@ -130,7 +130,7 @@ public class CodeQuestionsUpdateSaga implements SagaStep<CodeQuestionsUpdateResp
 
         //đổi state về failed, saga về COMPENSATED, outbox về FAILED
         switch (codeQuestionsUpdateResponse.getState()){
-            case CREATING ->
+            case CREATE_FAILED ->
             {
                 quitCodeQuestionsUpdateOrCreate(codeQuestionsUpdateResponse, CopyState.CREATE_FAILED);
                 //update outbox
@@ -138,7 +138,7 @@ public class CodeQuestionsUpdateSaga implements SagaStep<CodeQuestionsUpdateResp
                         CopyState.CREATE_FAILED, SagaStatus.COMPENSATED
                 ));
             }
-            case UPDATING ->
+            case UPDATE_FAILED ->
             {
                 //codeQuestionsUpdateResponse sẽ chứa data cũ để lưu lại trong tác vụ này
                 quitCodeQuestionsUpdateOrCreate(codeQuestionsUpdateResponse, CopyState.UPDATE_FAILED);
@@ -147,7 +147,7 @@ public class CodeQuestionsUpdateSaga implements SagaStep<CodeQuestionsUpdateResp
                 ));
             }
 
-            case DELETING ->
+            case DELETE_FAILED ->
             {
                 //delete record khi success, nên khi fail, ta k cần phải rollback thật sự mà chỉ cần chỉnh copy state
                 quitCodeQuestionsUpdateOrCreate(codeQuestionsUpdateResponse, CopyState.DELETE_FAILED);

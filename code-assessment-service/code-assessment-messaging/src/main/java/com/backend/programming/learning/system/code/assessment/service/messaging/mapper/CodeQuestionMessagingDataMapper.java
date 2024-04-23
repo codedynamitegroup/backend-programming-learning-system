@@ -14,22 +14,6 @@ import java.util.UUID;
 @Component
 
 public class CodeQuestionMessagingDataMapper {
-//    public CodeQuestionUpdateRequestAvroModel
-//    codeQuestionCreatedEventToCodeQuestionUpdateRequestAvroModel
-//            (CodeQuestionsUpdatedEvent codeQuestionCreatedEvent, UUID sagaId){
-//
-//        CodeQuestion codeQuestion = codeQuestionCreatedEvent.getCodeQuestion();
-//        return CodeQuestionUpdateRequestAvroModel.newBuilder()
-//                .setId(codeQuestion.getId().getValue())
-//                .setSagaId(sagaId)
-//                .setQuestionId(codeQuestion.getQuestionId().getValue())
-//                .setConstraints(codeQuestion.getConstraints())
-//                .setInputFormat(codeQuestion.getInputFormat())
-//                .setCopyState(CopyState.valueOf(codeQuestion.getCopyState().toString()))
-//                .setOutputFormat(codeQuestion.getOutputFormat())
-//                .setProblemStatement(codeQuestion.getProblemStatement())
-//                .build();
-//    }
     public CodeQuestionsUpdateResponse
             codeQuestionUpdateResponseAvroModelToCodeQuestionUpdateResponse
             (CodeQuestionUpdateResponseAvroModel model){
