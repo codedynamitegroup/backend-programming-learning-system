@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.code.assessment.service.messagin
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.message.CodeQuestionsUpdateResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionsUpdatedEvent;
+import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.code_questions_update_outbox.CodeQuestionsUpdatePayload;
 import com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel;
 import com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel;
 import com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState;
@@ -13,22 +14,22 @@ import java.util.UUID;
 @Component
 
 public class CodeQuestionMessagingDataMapper {
-    public CodeQuestionUpdateRequestAvroModel
-    codeQuestionCreatedEventToCodeQuestionUpdateRequestAvroModel
-            (CodeQuestionsUpdatedEvent codeQuestionCreatedEvent, UUID sagaId){
-
-        CodeQuestion codeQuestion = codeQuestionCreatedEvent.getCodeQuestion();
-        return CodeQuestionUpdateRequestAvroModel.newBuilder()
-                .setId(codeQuestion.getId().getValue())
-                .setSagaId(sagaId)
-                .setQuestionId(codeQuestion.getQuestionId().getValue())
-                .setConstraints(codeQuestion.getConstraints())
-                .setInputFormat(codeQuestion.getInputFormat())
-                .setCopyState(CopyState.valueOf(codeQuestion.getCopyState().toString()))
-                .setOutputFormat(codeQuestion.getOutputFormat())
-                .setProblemStatement(codeQuestion.getProblemStatement())
-                .build();
-    }
+//    public CodeQuestionUpdateRequestAvroModel
+//    codeQuestionCreatedEventToCodeQuestionUpdateRequestAvroModel
+//            (CodeQuestionsUpdatedEvent codeQuestionCreatedEvent, UUID sagaId){
+//
+//        CodeQuestion codeQuestion = codeQuestionCreatedEvent.getCodeQuestion();
+//        return CodeQuestionUpdateRequestAvroModel.newBuilder()
+//                .setId(codeQuestion.getId().getValue())
+//                .setSagaId(sagaId)
+//                .setQuestionId(codeQuestion.getQuestionId().getValue())
+//                .setConstraints(codeQuestion.getConstraints())
+//                .setInputFormat(codeQuestion.getInputFormat())
+//                .setCopyState(CopyState.valueOf(codeQuestion.getCopyState().toString()))
+//                .setOutputFormat(codeQuestion.getOutputFormat())
+//                .setProblemStatement(codeQuestion.getProblemStatement())
+//                .build();
+//    }
     public CodeQuestionsUpdateResponse
             codeQuestionUpdateResponseAvroModelToCodeQuestionUpdateResponse
             (CodeQuestionUpdateResponseAvroModel model){
@@ -44,6 +45,21 @@ public class CodeQuestionMessagingDataMapper {
                 .constraints(model.getConstraints())
                 .failureMessages(model.getFailureMessages())
                 .sagaId(model.getSagaId())
+                .build();
+    }
+    public CodeQuestionUpdateRequestAvroModel
+        codeQuestionsUpdatePayloadToCodeQuestionUpdateRequestAvroModel(String sagaId,
+                                                                       CodeQuestionsUpdatePayload payload){
+        return CodeQuestionUpdateRequestAvroModel.newBuilder()
+                .setId(UUID.randomUUID())
+                .setSagaId(UUID.fromString(sagaId))
+                .setCodeQuestionId(UUID.fromString(payload.getId()))
+                .setQuestionId(UUID.fromString(payload.getQuestionId()))
+                .setProblemStatement(payload.getProblemStatement())
+                .setInputFormat(payload.getInputFormat())
+                .setOutputFormat(payload.getOutputFormat())
+                .setCopyState(CopyState.valueOf(payload.getCopyState()))
+                .setConstraints(payload.getConstraints())
                 .build();
     }
 }

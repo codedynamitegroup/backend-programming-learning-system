@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -6431351465453813809L;
+  private static final long serialVersionUID = 6198095481024202902L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CodeQuestionUpdateResponseAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"questionId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"problemStatement\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"inputFormat\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"outputFormat\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"DELETING_FAIL\",\"UPDATING_FAIL\",\"CREATING_FAIL\"]}},{\"name\":\"constraints\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CodeQuestionUpdateResponseAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"codeQuestionId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"questionId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"problemStatement\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"inputFormat\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"outputFormat\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"CREATE_PROPAGATING\",\"UPDATE_PROPAGATING\",\"DELETE_PROPAGATING\",\"CREATE_ROLLBACKING\",\"UPDATE_ROLLBACKING\",\"DELETE_ROLLBACKING\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}},{\"name\":\"constraints\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -77,6 +77,7 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
   }
 
   private java.util.UUID id;
+  private java.util.UUID codeQuestionId;
   private java.util.UUID sagaId;
   private java.util.UUID questionId;
   private java.lang.String problemStatement;
@@ -96,6 +97,7 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
   /**
    * All-args constructor.
    * @param id The new value for id
+   * @param codeQuestionId The new value for codeQuestionId
    * @param sagaId The new value for sagaId
    * @param questionId The new value for questionId
    * @param problemStatement The new value for problemStatement
@@ -105,8 +107,9 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
    * @param constraints The new value for constraints
    * @param failureMessages The new value for failureMessages
    */
-  public CodeQuestionUpdateResponseAvroModel(java.util.UUID id, java.util.UUID sagaId, java.util.UUID questionId, java.lang.String problemStatement, java.lang.String inputFormat, java.lang.String outputFormat, com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState copyState, java.lang.String constraints, java.util.List<java.lang.String> failureMessages) {
+  public CodeQuestionUpdateResponseAvroModel(java.util.UUID id, java.util.UUID codeQuestionId, java.util.UUID sagaId, java.util.UUID questionId, java.lang.String problemStatement, java.lang.String inputFormat, java.lang.String outputFormat, com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState copyState, java.lang.String constraints, java.util.List<java.lang.String> failureMessages) {
     this.id = id;
+    this.codeQuestionId = codeQuestionId;
     this.sagaId = sagaId;
     this.questionId = questionId;
     this.problemStatement = problemStatement;
@@ -128,20 +131,22 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return id;
-    case 1: return sagaId;
-    case 2: return questionId;
-    case 3: return problemStatement;
-    case 4: return inputFormat;
-    case 5: return outputFormat;
-    case 6: return copyState;
-    case 7: return constraints;
-    case 8: return failureMessages;
+    case 1: return codeQuestionId;
+    case 2: return sagaId;
+    case 3: return questionId;
+    case 4: return problemStatement;
+    case 5: return inputFormat;
+    case 6: return outputFormat;
+    case 7: return copyState;
+    case 8: return constraints;
+    case 9: return failureMessages;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
 
   private static final org.apache.avro.Conversion<?>[] conversions =
       new org.apache.avro.Conversion<?>[] {
+      new org.apache.avro.Conversions.UUIDConversion(),
       new org.apache.avro.Conversions.UUIDConversion(),
       new org.apache.avro.Conversions.UUIDConversion(),
       new org.apache.avro.Conversions.UUIDConversion(),
@@ -165,14 +170,15 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: id = (java.util.UUID)value$; break;
-    case 1: sagaId = (java.util.UUID)value$; break;
-    case 2: questionId = (java.util.UUID)value$; break;
-    case 3: problemStatement = value$ != null ? value$.toString() : null; break;
-    case 4: inputFormat = value$ != null ? value$.toString() : null; break;
-    case 5: outputFormat = value$ != null ? value$.toString() : null; break;
-    case 6: copyState = (com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState)value$; break;
-    case 7: constraints = value$ != null ? value$.toString() : null; break;
-    case 8: failureMessages = (java.util.List<java.lang.String>)value$; break;
+    case 1: codeQuestionId = (java.util.UUID)value$; break;
+    case 2: sagaId = (java.util.UUID)value$; break;
+    case 3: questionId = (java.util.UUID)value$; break;
+    case 4: problemStatement = value$ != null ? value$.toString() : null; break;
+    case 5: inputFormat = value$ != null ? value$.toString() : null; break;
+    case 6: outputFormat = value$ != null ? value$.toString() : null; break;
+    case 7: copyState = (com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState)value$; break;
+    case 8: constraints = value$ != null ? value$.toString() : null; break;
+    case 9: failureMessages = (java.util.List<java.lang.String>)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -192,6 +198,23 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
    */
   public void setId(java.util.UUID value) {
     this.id = value;
+  }
+
+  /**
+   * Gets the value of the 'codeQuestionId' field.
+   * @return The value of the 'codeQuestionId' field.
+   */
+  public java.util.UUID getCodeQuestionId() {
+    return codeQuestionId;
+  }
+
+
+  /**
+   * Sets the value of the 'codeQuestionId' field.
+   * @param value the value to set.
+   */
+  public void setCodeQuestionId(java.util.UUID value) {
+    this.codeQuestionId = value;
   }
 
   /**
@@ -372,6 +395,7 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
     implements org.apache.avro.data.RecordBuilder<CodeQuestionUpdateResponseAvroModel> {
 
     private java.util.UUID id;
+    private java.util.UUID codeQuestionId;
     private java.util.UUID sagaId;
     private java.util.UUID questionId;
     private java.lang.String problemStatement;
@@ -396,37 +420,41 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
         this.id = data().deepCopy(fields()[0].schema(), other.id);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
-      if (isValidValue(fields()[1], other.sagaId)) {
-        this.sagaId = data().deepCopy(fields()[1].schema(), other.sagaId);
+      if (isValidValue(fields()[1], other.codeQuestionId)) {
+        this.codeQuestionId = data().deepCopy(fields()[1].schema(), other.codeQuestionId);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.questionId)) {
-        this.questionId = data().deepCopy(fields()[2].schema(), other.questionId);
+      if (isValidValue(fields()[2], other.sagaId)) {
+        this.sagaId = data().deepCopy(fields()[2].schema(), other.sagaId);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
-      if (isValidValue(fields()[3], other.problemStatement)) {
-        this.problemStatement = data().deepCopy(fields()[3].schema(), other.problemStatement);
+      if (isValidValue(fields()[3], other.questionId)) {
+        this.questionId = data().deepCopy(fields()[3].schema(), other.questionId);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
-      if (isValidValue(fields()[4], other.inputFormat)) {
-        this.inputFormat = data().deepCopy(fields()[4].schema(), other.inputFormat);
+      if (isValidValue(fields()[4], other.problemStatement)) {
+        this.problemStatement = data().deepCopy(fields()[4].schema(), other.problemStatement);
         fieldSetFlags()[4] = other.fieldSetFlags()[4];
       }
-      if (isValidValue(fields()[5], other.outputFormat)) {
-        this.outputFormat = data().deepCopy(fields()[5].schema(), other.outputFormat);
+      if (isValidValue(fields()[5], other.inputFormat)) {
+        this.inputFormat = data().deepCopy(fields()[5].schema(), other.inputFormat);
         fieldSetFlags()[5] = other.fieldSetFlags()[5];
       }
-      if (isValidValue(fields()[6], other.copyState)) {
-        this.copyState = data().deepCopy(fields()[6].schema(), other.copyState);
+      if (isValidValue(fields()[6], other.outputFormat)) {
+        this.outputFormat = data().deepCopy(fields()[6].schema(), other.outputFormat);
         fieldSetFlags()[6] = other.fieldSetFlags()[6];
       }
-      if (isValidValue(fields()[7], other.constraints)) {
-        this.constraints = data().deepCopy(fields()[7].schema(), other.constraints);
+      if (isValidValue(fields()[7], other.copyState)) {
+        this.copyState = data().deepCopy(fields()[7].schema(), other.copyState);
         fieldSetFlags()[7] = other.fieldSetFlags()[7];
       }
-      if (isValidValue(fields()[8], other.failureMessages)) {
-        this.failureMessages = data().deepCopy(fields()[8].schema(), other.failureMessages);
+      if (isValidValue(fields()[8], other.constraints)) {
+        this.constraints = data().deepCopy(fields()[8].schema(), other.constraints);
         fieldSetFlags()[8] = other.fieldSetFlags()[8];
+      }
+      if (isValidValue(fields()[9], other.failureMessages)) {
+        this.failureMessages = data().deepCopy(fields()[9].schema(), other.failureMessages);
+        fieldSetFlags()[9] = other.fieldSetFlags()[9];
       }
     }
 
@@ -440,37 +468,41 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
         this.id = data().deepCopy(fields()[0].schema(), other.id);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.sagaId)) {
-        this.sagaId = data().deepCopy(fields()[1].schema(), other.sagaId);
+      if (isValidValue(fields()[1], other.codeQuestionId)) {
+        this.codeQuestionId = data().deepCopy(fields()[1].schema(), other.codeQuestionId);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.questionId)) {
-        this.questionId = data().deepCopy(fields()[2].schema(), other.questionId);
+      if (isValidValue(fields()[2], other.sagaId)) {
+        this.sagaId = data().deepCopy(fields()[2].schema(), other.sagaId);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.problemStatement)) {
-        this.problemStatement = data().deepCopy(fields()[3].schema(), other.problemStatement);
+      if (isValidValue(fields()[3], other.questionId)) {
+        this.questionId = data().deepCopy(fields()[3].schema(), other.questionId);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.inputFormat)) {
-        this.inputFormat = data().deepCopy(fields()[4].schema(), other.inputFormat);
+      if (isValidValue(fields()[4], other.problemStatement)) {
+        this.problemStatement = data().deepCopy(fields()[4].schema(), other.problemStatement);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.outputFormat)) {
-        this.outputFormat = data().deepCopy(fields()[5].schema(), other.outputFormat);
+      if (isValidValue(fields()[5], other.inputFormat)) {
+        this.inputFormat = data().deepCopy(fields()[5].schema(), other.inputFormat);
         fieldSetFlags()[5] = true;
       }
-      if (isValidValue(fields()[6], other.copyState)) {
-        this.copyState = data().deepCopy(fields()[6].schema(), other.copyState);
+      if (isValidValue(fields()[6], other.outputFormat)) {
+        this.outputFormat = data().deepCopy(fields()[6].schema(), other.outputFormat);
         fieldSetFlags()[6] = true;
       }
-      if (isValidValue(fields()[7], other.constraints)) {
-        this.constraints = data().deepCopy(fields()[7].schema(), other.constraints);
+      if (isValidValue(fields()[7], other.copyState)) {
+        this.copyState = data().deepCopy(fields()[7].schema(), other.copyState);
         fieldSetFlags()[7] = true;
       }
-      if (isValidValue(fields()[8], other.failureMessages)) {
-        this.failureMessages = data().deepCopy(fields()[8].schema(), other.failureMessages);
+      if (isValidValue(fields()[8], other.constraints)) {
+        this.constraints = data().deepCopy(fields()[8].schema(), other.constraints);
         fieldSetFlags()[8] = true;
+      }
+      if (isValidValue(fields()[9], other.failureMessages)) {
+        this.failureMessages = data().deepCopy(fields()[9].schema(), other.failureMessages);
+        fieldSetFlags()[9] = true;
       }
     }
 
@@ -515,6 +547,46 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
     }
 
     /**
+      * Gets the value of the 'codeQuestionId' field.
+      * @return The value.
+      */
+    public java.util.UUID getCodeQuestionId() {
+      return codeQuestionId;
+    }
+
+
+    /**
+      * Sets the value of the 'codeQuestionId' field.
+      * @param value The value of 'codeQuestionId'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder setCodeQuestionId(java.util.UUID value) {
+      validate(fields()[1], value);
+      this.codeQuestionId = value;
+      fieldSetFlags()[1] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'codeQuestionId' field has been set.
+      * @return True if the 'codeQuestionId' field has been set, false otherwise.
+      */
+    public boolean hasCodeQuestionId() {
+      return fieldSetFlags()[1];
+    }
+
+
+    /**
+      * Clears the value of the 'codeQuestionId' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder clearCodeQuestionId() {
+      codeQuestionId = null;
+      fieldSetFlags()[1] = false;
+      return this;
+    }
+
+    /**
       * Gets the value of the 'sagaId' field.
       * @return The value.
       */
@@ -529,9 +601,9 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder setSagaId(java.util.UUID value) {
-      validate(fields()[1], value);
+      validate(fields()[2], value);
       this.sagaId = value;
-      fieldSetFlags()[1] = true;
+      fieldSetFlags()[2] = true;
       return this;
     }
 
@@ -540,7 +612,7 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       * @return True if the 'sagaId' field has been set, false otherwise.
       */
     public boolean hasSagaId() {
-      return fieldSetFlags()[1];
+      return fieldSetFlags()[2];
     }
 
 
@@ -550,7 +622,7 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder clearSagaId() {
       sagaId = null;
-      fieldSetFlags()[1] = false;
+      fieldSetFlags()[2] = false;
       return this;
     }
 
@@ -569,9 +641,9 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder setQuestionId(java.util.UUID value) {
-      validate(fields()[2], value);
+      validate(fields()[3], value);
       this.questionId = value;
-      fieldSetFlags()[2] = true;
+      fieldSetFlags()[3] = true;
       return this;
     }
 
@@ -580,7 +652,7 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       * @return True if the 'questionId' field has been set, false otherwise.
       */
     public boolean hasQuestionId() {
-      return fieldSetFlags()[2];
+      return fieldSetFlags()[3];
     }
 
 
@@ -590,7 +662,7 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder clearQuestionId() {
       questionId = null;
-      fieldSetFlags()[2] = false;
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -609,9 +681,9 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder setProblemStatement(java.lang.String value) {
-      validate(fields()[3], value);
+      validate(fields()[4], value);
       this.problemStatement = value;
-      fieldSetFlags()[3] = true;
+      fieldSetFlags()[4] = true;
       return this;
     }
 
@@ -620,7 +692,7 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       * @return True if the 'problemStatement' field has been set, false otherwise.
       */
     public boolean hasProblemStatement() {
-      return fieldSetFlags()[3];
+      return fieldSetFlags()[4];
     }
 
 
@@ -630,7 +702,7 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder clearProblemStatement() {
       problemStatement = null;
-      fieldSetFlags()[3] = false;
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -649,9 +721,9 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder setInputFormat(java.lang.String value) {
-      validate(fields()[4], value);
+      validate(fields()[5], value);
       this.inputFormat = value;
-      fieldSetFlags()[4] = true;
+      fieldSetFlags()[5] = true;
       return this;
     }
 
@@ -660,7 +732,7 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       * @return True if the 'inputFormat' field has been set, false otherwise.
       */
     public boolean hasInputFormat() {
-      return fieldSetFlags()[4];
+      return fieldSetFlags()[5];
     }
 
 
@@ -670,7 +742,7 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder clearInputFormat() {
       inputFormat = null;
-      fieldSetFlags()[4] = false;
+      fieldSetFlags()[5] = false;
       return this;
     }
 
@@ -689,9 +761,9 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder setOutputFormat(java.lang.String value) {
-      validate(fields()[5], value);
+      validate(fields()[6], value);
       this.outputFormat = value;
-      fieldSetFlags()[5] = true;
+      fieldSetFlags()[6] = true;
       return this;
     }
 
@@ -700,7 +772,7 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       * @return True if the 'outputFormat' field has been set, false otherwise.
       */
     public boolean hasOutputFormat() {
-      return fieldSetFlags()[5];
+      return fieldSetFlags()[6];
     }
 
 
@@ -710,7 +782,7 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder clearOutputFormat() {
       outputFormat = null;
-      fieldSetFlags()[5] = false;
+      fieldSetFlags()[6] = false;
       return this;
     }
 
@@ -729,9 +801,9 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder setCopyState(com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState value) {
-      validate(fields()[6], value);
+      validate(fields()[7], value);
       this.copyState = value;
-      fieldSetFlags()[6] = true;
+      fieldSetFlags()[7] = true;
       return this;
     }
 
@@ -740,7 +812,7 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       * @return True if the 'copyState' field has been set, false otherwise.
       */
     public boolean hasCopyState() {
-      return fieldSetFlags()[6];
+      return fieldSetFlags()[7];
     }
 
 
@@ -750,7 +822,7 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder clearCopyState() {
       copyState = null;
-      fieldSetFlags()[6] = false;
+      fieldSetFlags()[7] = false;
       return this;
     }
 
@@ -769,9 +841,9 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder setConstraints(java.lang.String value) {
-      validate(fields()[7], value);
+      validate(fields()[8], value);
       this.constraints = value;
-      fieldSetFlags()[7] = true;
+      fieldSetFlags()[8] = true;
       return this;
     }
 
@@ -780,7 +852,7 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       * @return True if the 'constraints' field has been set, false otherwise.
       */
     public boolean hasConstraints() {
-      return fieldSetFlags()[7];
+      return fieldSetFlags()[8];
     }
 
 
@@ -790,7 +862,7 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder clearConstraints() {
       constraints = null;
-      fieldSetFlags()[7] = false;
+      fieldSetFlags()[8] = false;
       return this;
     }
 
@@ -809,9 +881,9 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder setFailureMessages(java.util.List<java.lang.String> value) {
-      validate(fields()[8], value);
+      validate(fields()[9], value);
       this.failureMessages = value;
-      fieldSetFlags()[8] = true;
+      fieldSetFlags()[9] = true;
       return this;
     }
 
@@ -820,7 +892,7 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       * @return True if the 'failureMessages' field has been set, false otherwise.
       */
     public boolean hasFailureMessages() {
-      return fieldSetFlags()[8];
+      return fieldSetFlags()[9];
     }
 
 
@@ -830,7 +902,7 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder clearFailureMessages() {
       failureMessages = null;
-      fieldSetFlags()[8] = false;
+      fieldSetFlags()[9] = false;
       return this;
     }
 
@@ -840,14 +912,15 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       try {
         CodeQuestionUpdateResponseAvroModel record = new CodeQuestionUpdateResponseAvroModel();
         record.id = fieldSetFlags()[0] ? this.id : (java.util.UUID) defaultValue(fields()[0]);
-        record.sagaId = fieldSetFlags()[1] ? this.sagaId : (java.util.UUID) defaultValue(fields()[1]);
-        record.questionId = fieldSetFlags()[2] ? this.questionId : (java.util.UUID) defaultValue(fields()[2]);
-        record.problemStatement = fieldSetFlags()[3] ? this.problemStatement : (java.lang.String) defaultValue(fields()[3]);
-        record.inputFormat = fieldSetFlags()[4] ? this.inputFormat : (java.lang.String) defaultValue(fields()[4]);
-        record.outputFormat = fieldSetFlags()[5] ? this.outputFormat : (java.lang.String) defaultValue(fields()[5]);
-        record.copyState = fieldSetFlags()[6] ? this.copyState : (com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState) defaultValue(fields()[6]);
-        record.constraints = fieldSetFlags()[7] ? this.constraints : (java.lang.String) defaultValue(fields()[7]);
-        record.failureMessages = fieldSetFlags()[8] ? this.failureMessages : (java.util.List<java.lang.String>) defaultValue(fields()[8]);
+        record.codeQuestionId = fieldSetFlags()[1] ? this.codeQuestionId : (java.util.UUID) defaultValue(fields()[1]);
+        record.sagaId = fieldSetFlags()[2] ? this.sagaId : (java.util.UUID) defaultValue(fields()[2]);
+        record.questionId = fieldSetFlags()[3] ? this.questionId : (java.util.UUID) defaultValue(fields()[3]);
+        record.problemStatement = fieldSetFlags()[4] ? this.problemStatement : (java.lang.String) defaultValue(fields()[4]);
+        record.inputFormat = fieldSetFlags()[5] ? this.inputFormat : (java.lang.String) defaultValue(fields()[5]);
+        record.outputFormat = fieldSetFlags()[6] ? this.outputFormat : (java.lang.String) defaultValue(fields()[6]);
+        record.copyState = fieldSetFlags()[7] ? this.copyState : (com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState) defaultValue(fields()[7]);
+        record.constraints = fieldSetFlags()[8] ? this.constraints : (java.lang.String) defaultValue(fields()[8]);
+        record.failureMessages = fieldSetFlags()[9] ? this.failureMessages : (java.util.List<java.lang.String>) defaultValue(fields()[9]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;

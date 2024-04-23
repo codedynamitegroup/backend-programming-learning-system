@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.kafka.producer;
 
+import com.backend.programming.learning.system.domain.exception.DomainException;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.RecordMetadata;
@@ -8,6 +10,8 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.function.BiConsumer;
 
 @Slf4j
@@ -19,11 +23,28 @@ public class KafkaMessageHelper {
     public KafkaMessageHelper(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
+    public <T,E extends DomainException> T getOrderEventPayload(String payload, Class<T> outputType,Class<E> domainException) {
+        try {
+            return objectMapper.readValue(payload, outputType);
+        } catch (JsonProcessingException e) {
+            log.error("Could not read {} object!", outputType.getName(), e);
+            try {
+                Constructor<E> ctor = domainException.getConstructor(String.class, Throwable.class);
+                throw  ctor.newInstance("Could not read " + outputType.getName() + " object!", e);
+            } catch (NoSuchMethodException | InvocationTargetException | InstantiationException |
+                     IllegalAccessException ex) {
+                throw new RuntimeException(ex);
+            }
+
+
+        }
+    }
+
 
     public <T, U> ListenableFutureCallback<SendResult<String, T>>
     getKafkaCallback(String responseTopicName, T avroModel, U outboxMessage,
                      BiConsumer<U, OutboxStatus> outboxCallback,
-                     String orderId, String avroModelName) {
+                     String objectId, String avroModelName) {
         return new ListenableFutureCallback<SendResult<String, T>>() {
             @Override
             public void onFailure(Throwable ex) {
@@ -37,7 +58,7 @@ public class KafkaMessageHelper {
                 RecordMetadata metadata = result.getRecordMetadata();
                 log.info("Received successful response from Kafka for id: {}" +
                                 " Topic: {} Partition: {} Offset: {} Timestamp: {}",
-                        orderId,
+                        objectId,
                         metadata.topic(),
                         metadata.partition(),
                         metadata.offset(),

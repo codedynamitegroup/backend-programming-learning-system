@@ -11,6 +11,13 @@
       }
     },
     {
+      "name": "codeQuestionId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
       "name": "sagaId",
       "type": {
         "type": "string",
