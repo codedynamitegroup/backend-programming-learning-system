@@ -11,6 +11,8 @@ public class CoreServiceConfigData {
     private String questionCreatedRequestTopicName;
     private String questionDeletedRequestTopicName;
     private String questionUpdatedRequestTopicName;
+    private String questionResponseTopicName;
+
     private String userRequestTopicName;
     private String userResponseTopicName;
 }

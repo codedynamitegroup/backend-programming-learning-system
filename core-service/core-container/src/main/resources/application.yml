@@ -13,6 +13,9 @@ core-service:
   question-created-request-topic-name: core-question-create-request
   question-deleted-request-topic-name: core-question-delete-request
   question-updated-request-topic-name: core-question-update-request
+
+  question-response-topic-name: core-question-response
+
   user-request-topic-name: user-request
   user-response-topic-name: user-response
   outbox-scheduler-fixed-rate: 10000
@@ -77,7 +80,9 @@ kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
   core-service-user-consumer-group-id: core-service-user-topic-consumer
-  customer-group-id: customer-topic-consumer
+
+  core-service-question-consumer-group-id: core-service-user-topic-consumer
+
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
   specific-avro-reader: true
