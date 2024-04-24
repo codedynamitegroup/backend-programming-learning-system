@@ -31,7 +31,7 @@ public class ExamCreateHelper {
     private final CourseRepository courseRepository;
     @Transactional
     public Exam persistExam(CreateExamCommand createExamCommand) {
-        Course course = getCourse(createExamCommand.getCourseId());
+        Course course = getCourse(createExamCommand.courseId());
         Exam exam = examDataMapper.createExamCommandToExam(course, createExamCommand);
         courseDomainService.createExam(exam);
         return saveExam(exam);

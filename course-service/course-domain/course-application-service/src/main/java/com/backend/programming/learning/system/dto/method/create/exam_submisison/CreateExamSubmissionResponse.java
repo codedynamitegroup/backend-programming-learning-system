@@ -1,5 +1,7 @@
 package com.backend.programming.learning.system.dto.method.create.exam_submisison;
 
+import lombok.Builder;
+
 import java.util.UUID;
 
 /**
@@ -8,6 +10,7 @@ import java.util.UUID;
  * Date 4/24/2024 - 12:15 AM
  * Description: ...
  */
+@Builder
 public record CreateExamSubmissionResponse(
         UUID examSubmissionId,
         UUID examId,

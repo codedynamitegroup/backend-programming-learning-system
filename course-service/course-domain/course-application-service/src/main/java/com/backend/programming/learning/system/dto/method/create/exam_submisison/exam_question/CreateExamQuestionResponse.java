@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.dto.method.create.exam_question;
+package com.backend.programming.learning.system.dto.method.create.exam_submisison.exam_question;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,9 +10,8 @@ import lombok.Getter;
  * Date 4/21/2024 - 2:01 AM
  * Description: ...
  */
-@Getter
 @Builder
-@AllArgsConstructor
-public class CreateExamQuestionResponse {
-    private String message;
+public record CreateExamQuestionResponse(
+        String message
+) {
 }

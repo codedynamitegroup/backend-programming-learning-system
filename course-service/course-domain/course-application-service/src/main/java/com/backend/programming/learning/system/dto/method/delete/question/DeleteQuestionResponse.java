@@ -10,9 +10,6 @@ import lombok.Getter;
  * Date 4/20/2024 - 11:27 AM
  * Description: ...
  */
-@Getter
 @Builder
-@AllArgsConstructor
-public class DeleteQuestionResponse {
-    private final String message;
+public record DeleteQuestionResponse(String message) {
 }

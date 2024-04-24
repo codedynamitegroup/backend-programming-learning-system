@@ -52,12 +52,13 @@ CREATE TABLE "public".organization
 DROP TABLE IF EXISTS "public".question_bank_category CASCADE;
 CREATE TABLE "public".question_bank_category
 (
-    id           uuid                     DEFAULT gen_random_uuid() NOT NULL,
-    name         text                                               NOT NULL,
-    "created_by" uuid                                               NOT NULL,
-    "updated_by" uuid                                               NOT NULL,
-    "created_at" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    id            uuid                     DEFAULT gen_random_uuid() NOT NULL,
+    "name"        text                                               NOT NULL,
+    "description" text,
+    "created_by"  uuid                                               NOT NULL,
+    "updated_by"  uuid                                               NOT NULL,
+    "created_at"  TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "updated_at"  TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT question_bank_category_pkey PRIMARY KEY (id),
     CONSTRAINT question_bank_category_created_by_fkey FOREIGN KEY (created_by)
         REFERENCES "public".user (id) MATCH SIMPLE
@@ -103,13 +104,14 @@ CREATE TABLE "public".question
 DROP TABLE IF EXISTS "public".course CASCADE;
 CREATE TABLE "public".course
 (
-    id         uuid    DEFAULT gen_random_uuid() NOT NULL,
-    name       text UNIQUE,
-    visible    boolean DEFAULT '1',
-    created_by uuid,
-    updated_by uuid,
-    created_at TIMESTAMP WITH TIME ZONE,
-    updated_at TIMESTAMP WITH TIME ZONE,
+    id          uuid    DEFAULT gen_random_uuid() NOT NULL,
+    name        text UNIQUE,
+    visible     boolean DEFAULT '1',
+    course_type text,
+    created_by  uuid,
+    updated_by  uuid,
+    created_at  TIMESTAMP WITH TIME ZONE,
+    updated_at  TIMESTAMP WITH TIME ZONE,
     CONSTRAINT course_pkey PRIMARY KEY (id),
     CONSTRAINT course_created_by_fkey FOREIGN KEY (created_by)
         REFERENCES "public".user (id) MATCH SIMPLE

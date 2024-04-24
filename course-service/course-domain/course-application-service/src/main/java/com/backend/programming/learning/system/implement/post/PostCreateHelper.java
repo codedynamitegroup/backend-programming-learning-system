@@ -35,8 +35,8 @@ public class PostCreateHelper {
     private final CourseRepository courseRepository;
     @Transactional
     public Post createPost(CreatePostCommand createPostCommand) {
-        Course course = getCourse(createPostCommand.getCourseId());
-        User createdBy = getUser(createPostCommand.getCreatedBy());
+        Course course = getCourse(createPostCommand.courseId());
+        User createdBy = getUser(createPostCommand.createdBy());
 
         Post post = postDataMapper.createPostCommandToPost(createPostCommand, course, createdBy);
         courseDomainService.createPost(post);

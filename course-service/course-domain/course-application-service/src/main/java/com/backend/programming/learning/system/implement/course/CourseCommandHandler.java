@@ -63,7 +63,7 @@ public class CourseCommandHandler {
 
     @Transactional
     public DeleteCourseResponse deleteCourse(DeleteCourseCommand deleteCourseCommand) {
-        courseDeleteHelper.deleteCourse(deleteCourseCommand.getCourseId());
+        courseDeleteHelper.deleteCourse(deleteCourseCommand.courseId());
         log.info("Course is deleted successfully");
         return DeleteCourseResponse.builder()
                 .message("Course is deleted successfully")

@@ -12,11 +12,10 @@ import java.util.UUID;
  * Date 4/21/2024 - 3:51 PM
  * Description: ...
  */
-@Getter
 @Builder
-@AllArgsConstructor
-public class QuestionBankResponseEntity {
-    private UUID questionBankId;
-    private UUID organizationId;
-    private String name;
+public record QuestionBankResponseEntity(
+        UUID questionBankId,
+        UUID organizationId,
+        String name
+) {
 }
