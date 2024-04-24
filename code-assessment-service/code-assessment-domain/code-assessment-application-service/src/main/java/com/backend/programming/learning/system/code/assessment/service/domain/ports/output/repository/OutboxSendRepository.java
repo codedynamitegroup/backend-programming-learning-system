@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface OutboxRepository<T> {
+public interface OutboxSendRepository<T> {
     T save(T outboxMessage);
 
     Optional<List<T>> findByTypeAndOutboxStatusAndSagaStatus(String type,

@@ -35,11 +35,11 @@ public class CreateFailedUserKafkaMessagePublisher implements UserCreateFailedMe
         try {
             UserResponseAvroModel userResponseAvroModel = userMessagingDataMapper
                     .userCreatedFailEventToUserResponseAvroModel(domainEvent);
-            kafkaProducer.send(coreServiceConfigData.getUserResponseTopicName(),
-                    userId,
-                    userResponseAvroModel,
-                    userKafkaMessageHelper.getKafkaCallback(coreServiceConfigData.getUserResponseTopicName(),
-                            userResponseAvroModel, userId, "UserResponseAvroModel"));
+//            kafkaProducer.send(coreServiceConfigData.getUserResponseTopicName(),
+//                    userId,
+//                    userResponseAvroModel,
+//                    userKafkaMessageHelper.getKafkaCallback(coreServiceConfigData.getUserResponseTopicName(),
+//                            userResponseAvroModel, userId, "UserResponseAvroModel"));
             log.info("UserResponseAvroModel sent to Kafka for user id: {}", userResponseAvroModel.getUserId());
         } catch (Exception e) {
             log.error("Error while sending UserResponseAvroModel message" +

@@ -1,7 +1,6 @@
-package com.backend.programming.learning.system.code.assessment.service.domain.outbox.scheduler.code_questions_update_outbox;
+package com.backend.programming.learning.system.core.service.domain.outbox.scheduler.code_questions;
 
-
-import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.code_questions_update_outbox.CodeQuestionsUpdateOutboxMessage;
+import com.backend.programming.learning.system.core.service.domain.outbox.model.code_questions.CodeQuestionsUpdateOutboxMessage;
 import com.backend.programming.learning.system.outbox.OutboxScheduler;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
@@ -25,26 +24,19 @@ public class CodeQuestionsUpdateOutboxCleanerScheduler implements OutboxSchedule
     }
 
     @Override
-    @Transactional
     @Scheduled(cron = "@midnight")
+    @Transactional
     public void processOutboxMessage() {
         Optional<List<CodeQuestionsUpdateOutboxMessage>> outboxMessagesResponse =
-                outboxHelper.getCodeQuestionsUpdateOutboxMessageByOutboxStatusAndSagaStatus(
-                                OutboxStatus.COMPLETED,
-                                SagaStatus.SUCCEEDED,
-                                SagaStatus.FAILED,SagaStatus.COMPENSATED
-                        );
+                outboxHelper.getCodeQuestionsUpdateOutboxMessageByOutboxStatus(OutboxStatus.COMPLETED);
+
         if (outboxMessagesResponse.isPresent()) {
             List<CodeQuestionsUpdateOutboxMessage> outboxMessages = outboxMessagesResponse.get();
             log.info("Received {} CodeQuestionsUpdateOutboxMessage for clean-up. The payloads: {}",
                     outboxMessages.size(),
                     outboxMessages.stream().map(CodeQuestionsUpdateOutboxMessage::getPayload)
                             .collect(Collectors.joining("\n")));
-            outboxHelper.deleteCodeQuestionsUpdateOutboxMessageByOutboxStatusAndSagaStatus(
-                    OutboxStatus.COMPLETED,
-                    SagaStatus.SUCCEEDED,
-                    SagaStatus.FAILED,
-                    SagaStatus.COMPENSATED);
+            outboxHelper.deleteCodeQuestionsUpdateOutboxMessageByOutboxStatus( OutboxStatus.COMPLETED);
             log.info("{} OrderPaymentOutboxMessage deleted!", outboxMessages.size());
         }
     }

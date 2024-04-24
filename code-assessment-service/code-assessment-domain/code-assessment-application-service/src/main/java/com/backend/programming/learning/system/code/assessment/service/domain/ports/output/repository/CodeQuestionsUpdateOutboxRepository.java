@@ -3,6 +3,6 @@ package com.backend.programming.learning.system.code.assessment.service.domain.p
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.code_questions_update_outbox.CodeQuestionsUpdateOutboxMessage;
 
 public interface CodeQuestionsUpdateOutboxRepository
-        extends OutboxRepository<CodeQuestionsUpdateOutboxMessage>{
+        extends OutboxSendRepository<CodeQuestionsUpdateOutboxMessage> {
 
 }

@@ -19,8 +19,25 @@ CREATE TYPE notification_event_type AS ENUM ('USER', 'COURSE');
 DROP TYPE IF EXISTS plagiarism_detection_report_status;
 CREATE TYPE plagiarism_detection_report_status AS ENUM ('PROCESSING', 'COMPLETED', 'FAILED');
 
-DROP TABLE IF EXISTS "public".user CASCADE;
+DROP TYPE IF EXISTS CopyState;
+CREATE TYPE CopyState AS ENUM (
+    'CREATING',
+    'CREATED',
+    'UPDATING',
+    'UPDATED',
+    'DELETING',
+    'DELETED',
+    'CREATE_PROPAGATING',
+    'UPDATE_PROPAGATING',
+    'DELETE_PROPAGATING',
+    'CREATE_ROLLBACKING',
+    'UPDATE_ROLLBACKING',
+    'DELETE_ROLLBACKING',
+    'DELETE_FAILED',
+    'UPDATE_FAILED',
+    'CREATE_FAILED');
 
+DROP TABLE IF EXISTS "public".user CASCADE;
 CREATE TABLE "public".user
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
@@ -38,7 +55,6 @@ CREATE TABLE "public".user
 );
 
 DROP TABLE IF EXISTS "public".topic CASCADE;
-
 CREATE TABLE "public".topic
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
@@ -60,7 +76,6 @@ CREATE TABLE "public".topic
 );
 
 DROP TABLE IF EXISTS "public".certificate_course CASCADE;
-
 CREATE TABLE "public".certificate_course
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
@@ -94,7 +109,6 @@ CREATE TABLE "public".certificate_course
 CREATE INDEX certificate_course_name_idx ON "public".certificate_course (name);
 
 DROP TABLE IF EXISTS "public".chapter CASCADE;
-
 CREATE TABLE "public".chapter
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
@@ -123,7 +137,6 @@ CREATE TABLE "public".chapter
 );
 
 DROP TABLE IF EXISTS "public".certificate_course_user CASCADE;
-
 CREATE TABLE "public".certificate_course_user
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
@@ -146,7 +159,6 @@ CREATE TABLE "public".certificate_course_user
 );
 
 DROP TABLE IF EXISTS "public".review CASCADE;
-
 CREATE TABLE "public".review
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
@@ -173,7 +185,6 @@ CREATE TABLE "public".review
 );
 
 DROP TABLE IF EXISTS "public".programming_language CASCADE;
-
 CREATE TABLE "public".programming_language
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
@@ -185,7 +196,6 @@ CREATE TABLE "public".programming_language
 );
 
 DROP TABLE IF EXISTS "public".topic_programming_language CASCADE;
-
 CREATE TABLE "public".topic_programming_language
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
@@ -204,7 +214,6 @@ CREATE TABLE "public".topic_programming_language
 );
 
 DROP TABLE IF EXISTS "public".contest CASCADE;
-
 CREATE TABLE "public".contest
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
@@ -230,7 +239,6 @@ CREATE TABLE "public".contest
 CREATE INDEX contest_name_idx ON "public".contest (name);
 
 DROP TABLE IF EXISTS "public".contest_user CASCADE;
-
 CREATE TABLE "public".contest_user
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
@@ -253,7 +261,6 @@ CREATE TABLE "public".contest_user
 );
 
 DROP TABLE IF EXISTS "public".organization CASCADE;
-
 CREATE TABLE "public".organization
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
@@ -266,7 +273,6 @@ CREATE TABLE "public".organization
 );
 
 DROP TABLE IF EXISTS "public".question CASCADE;
-
 CREATE TABLE "public".question
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
@@ -297,7 +303,6 @@ CREATE TABLE "public".question
 );
 
 DROP TABLE IF EXISTS "public".chapter_question CASCADE;
-
 CREATE TABLE "public".chapter_question
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
@@ -316,7 +321,6 @@ CREATE TABLE "public".chapter_question
 );
 
 DROP TABLE IF EXISTS "public".contest_question CASCADE;
-
 CREATE TABLE "public".contest_question
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
@@ -335,7 +339,6 @@ CREATE TABLE "public".contest_question
 );
 
 DROP TABLE IF EXISTS "public".answer_of_question CASCADE;
-
 CREATE TABLE "public".answer_of_question
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
@@ -351,7 +354,6 @@ CREATE TABLE "public".answer_of_question
 );
 
 DROP TABLE IF EXISTS "public".qtype_code_question CASCADE;
-
 CREATE TABLE "public".qtype_code_question
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
@@ -365,7 +367,6 @@ CREATE TABLE "public".qtype_code_question
 );
 
 DROP TABLE IF EXISTS "public".qtype_shortanswer_question CASCADE;
-
 CREATE TABLE "public".qtype_shortanswer_question
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
@@ -379,7 +380,6 @@ CREATE TABLE "public".qtype_shortanswer_question
 );
 
 DROP TABLE IF EXISTS "public".qtype_essay_question CASCADE;
-
 CREATE TABLE "public".qtype_essay_question
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
@@ -404,7 +404,6 @@ CREATE TABLE "public".qtype_essay_question
 );
 
 DROP TABLE IF EXISTS "public".qtype_multichoice_question CASCADE;
-
 CREATE TABLE "public".qtype_multichoice_question
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
@@ -425,7 +424,6 @@ CREATE TABLE "public".qtype_multichoice_question
 );
 
 DROP TABLE IF EXISTS "public".notification CASCADE;
-
 CREATE TABLE "public".notification
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
@@ -454,7 +452,6 @@ CREATE TABLE "public".notification
 );
 
 DROP TABLE IF EXISTS "public".code_submission CASCADE;
-
 CREATE TABLE "public".code_submission
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
@@ -480,7 +477,6 @@ CREATE TABLE "public".code_submission
 );
 
 DROP TABLE IF EXISTS "public".calendar_event CASCADE;
-
 CREATE TABLE "public".calendar_event
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
@@ -499,7 +495,6 @@ CREATE TABLE "public".calendar_event
 );
 
 DROP TABLE IF EXISTS "public".plagiarism_detection_report CASCADE;
-
 CREATE TABLE "public".plagiarism_detection_report
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
@@ -521,3 +516,25 @@ CREATE TABLE "public".plagiarism_detection_report
         ON DELETE CASCADE,
     CONSTRAINT unique_plagiarism_detection_report UNIQUE (exam_id, question_id)
 );
+
+DROP TABLE IF EXISTS "public".code_questions_update_outbox CASCADE;
+CREATE TABLE "public".code_questions_update_outbox
+(
+    id uuid NOT NULL,
+    saga_id uuid NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    processed_at TIMESTAMP WITH TIME ZONE,
+    type character varying COLLATE pg_catalog."default" NOT NULL,
+    payload jsonb NOT NULL,
+    outbox_status outbox_status NOT NULL,
+    copy_state CopyState NOT NULL,
+    version integer NOT NULL,
+    CONSTRAINT cquo_pk PRIMARY KEY (id)
+);
+
+CREATE INDEX "code_questions_update_outbox_saga_status"
+    ON code_questions_update_outbox
+        (type, outbox_status, saga_status);
+CREATE INDEX "code_questions_update_outbox_saga_id"
+    ON code_questions_update_outbox
+        (type, saga_id, saga_status);
