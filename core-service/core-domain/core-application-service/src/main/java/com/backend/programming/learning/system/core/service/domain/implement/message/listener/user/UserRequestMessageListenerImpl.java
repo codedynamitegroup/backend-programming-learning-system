@@ -13,26 +13,32 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 @Service
 public class UserRequestMessageListenerImpl implements UserRequestMessageListener {
-    private final UserRequestHelper userRequestHelper;
+    private final UserCreateRequestHelper userCreateRequestHelper;
+    private final UserUpdateRequestHelper userUpdateRequestHelper;
+    private final UserDeleteRequestHelper userDeleteRequestHelper;
 
-    public UserRequestMessageListenerImpl(UserRequestHelper userRequestHelper) {
-        this.userRequestHelper = userRequestHelper;
+    public UserRequestMessageListenerImpl(UserCreateRequestHelper userCreateRequestHelper, UserUpdateRequestHelper userUpdateRequestHelper, UserDeleteRequestHelper userDeleteRequestHelper) {
+        this.userCreateRequestHelper = userCreateRequestHelper;
+        this.userUpdateRequestHelper = userUpdateRequestHelper;
+        this.userDeleteRequestHelper = userDeleteRequestHelper;
     }
 
     @Override
     public void userCreated(UserCreateRequest userRequest) {
-        UserEvent userEvent = userRequestHelper.persistUser(userRequest);
+        UserEvent userEvent = userCreateRequestHelper.persistUser(userRequest);
         fireEvent(userEvent);
     }
 
     @Override
     public void userUpdated(UserUpdateRequest userUpdateRequest) {
-
+        UserEvent userEvent = userUpdateRequestHelper.persistUser(userUpdateRequest);
+        fireEvent(userEvent);
     }
 
     @Override
     public void userDeleted(UserDeleteRequest userDeleteRequest) {
-
+        UserEvent userEvent = userDeleteRequestHelper.persistUser(userDeleteRequest);
+        fireEvent(userEvent);
     }
 
 

@@ -17,30 +17,31 @@
     },
     {
       "name": "firstName",
-      "type": "string"
+      "type": ["string", "null"]
     },
     {
       "name": "lastName",
-      "type": "string"
+      "type": ["string", "null"]
     },
     {
       "name": "phone",
-      "type": "string"
+      "type": ["string", "null"]
     },
     {
       "name": "address",
-      "type": "string"
+      "type": ["string", "null"]
     },
     {
       "name": "avatarUrl",
-      "type": "string"
+      "type": ["string", "null"]
     },
     {
       "name": "dob",
       "type": {
         "type": "long",
         "logicalType": "timestamp-millis"
-      }
+      },
+      "default": 0
     },
     {
       "name": "updatedAt",

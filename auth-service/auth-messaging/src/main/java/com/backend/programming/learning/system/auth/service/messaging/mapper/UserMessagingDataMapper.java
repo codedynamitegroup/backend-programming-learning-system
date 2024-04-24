@@ -31,6 +31,19 @@ public class UserMessagingDataMapper {
 
     public UserUpdateRequestAvroModel userUpdatedToUserUpdateRequestAvroModel(UserUpdatedEvent userUpdatedEvent) {
         User user = userUpdatedEvent.getUser();
+        if (user.getDob() == null) {
+            return UserUpdateRequestAvroModel.newBuilder()
+                    .setId(UUID.randomUUID().toString())
+                    .setSagaId("")
+                    .setUserId(user.getId().getValue().toString())
+                    .setFirstName(user.getFirstName())
+                    .setLastName(user.getLastName())
+                    .setPhone(user.getPhone())
+                    .setAddress(user.getAddress())
+                    .setAvatarUrl(user.getAvatarUrl())
+                    .setUpdatedAt(user.getUpdatedAt().toInstant())
+                    .build();
+        }
         return UserUpdateRequestAvroModel.newBuilder()
                 .setId(UUID.randomUUID().toString())
                 .setSagaId("")

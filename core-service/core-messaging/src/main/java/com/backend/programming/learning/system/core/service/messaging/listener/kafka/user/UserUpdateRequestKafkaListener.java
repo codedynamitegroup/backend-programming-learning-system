@@ -39,7 +39,7 @@ public class UserUpdateRequestKafkaListener implements KafkaConsumer<UserUpdateR
                 offsets.toString());
 
         messages.forEach(userRequestAvroModel -> {
-            log.info("Creating user: {}",
+            log.info("Updating user: {}",
                     userRequestAvroModel);
             userRequestMessageListener
                     .userUpdated(userMessagingDataMapper

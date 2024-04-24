@@ -3,7 +3,6 @@ package com.backend.programming.learning.system.auth.service.domain.implement.sa
 import com.backend.programming.learning.system.auth.service.domain.AuthDomainService;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.message.UserResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
-import com.backend.programming.learning.system.auth.service.domain.event.UserCreatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.event.EmptyEvent;
@@ -18,11 +17,11 @@ import java.util.UUID;
 
 @Slf4j
 @Component
-public class CreateUserCoreSaga implements SagaStep<UserResponse, EmptyEvent, EmptyEvent> {
+public class CreatedUserCoreSaga implements SagaStep<UserResponse, EmptyEvent, EmptyEvent> {
     private final AuthDomainService authDomainService;
     private final UserRepository userRepository;
 
-    public CreateUserCoreSaga(AuthDomainService authDomainService, UserRepository userRepository) {
+    public CreatedUserCoreSaga(AuthDomainService authDomainService, UserRepository userRepository) {
         this.authDomainService = authDomainService;
         this.userRepository = userRepository;
     }

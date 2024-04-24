@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @Slf4j
 @Component
-public class UserRequestHelper {
+public class UserCreateRequestHelper {
     private final UserDataMapper userDataMapper;
     private final UserRepository userRepository;
     private final CoreDomainService coreDomainService;
@@ -26,7 +26,7 @@ public class UserRequestHelper {
     private final UserCreateFailedMessagePublisher userCreateFailedMessagePublisher;
 
 
-    public UserRequestHelper(UserDataMapper userDataMapper, UserRepository userRepository, CoreDomainService coreDomainService, UserCreatedSuccessMessagePublisher userCreatedSuccessMessagePublisher, UserCreateFailedMessagePublisher userCreateFailedMessagePublisher) {
+    public UserCreateRequestHelper(UserDataMapper userDataMapper, UserRepository userRepository, CoreDomainService coreDomainService, UserCreatedSuccessMessagePublisher userCreatedSuccessMessagePublisher, UserCreateFailedMessagePublisher userCreateFailedMessagePublisher) {
         this.userDataMapper = userDataMapper;
         this.userRepository = userRepository;
         this.coreDomainService = coreDomainService;
@@ -36,7 +36,7 @@ public class UserRequestHelper {
 
     @Transactional
     public UserEvent persistUser(UserCreateRequest userRequest) {
-        User user = userDataMapper.userRequestToUser(userRequest);
+        User user = userDataMapper.userCreateRequestToUser(userRequest);
         Optional<User> userResult = userRepository.findUserByEmail(user.getEmail());
         List<String> failureMessages = new ArrayList<>();
         //Find user with email

@@ -39,7 +39,7 @@ public class UserDeleteRequestKafkaListener implements KafkaConsumer<UserDeleteR
                 offsets.toString());
 
         messages.forEach(userRequestAvroModel -> {
-            log.info("Creating user: {}",
+            log.info("Deleting user: {}",
                     userRequestAvroModel);
             userRequestMessageListener
                     .userDeleted(userMessagingDataMapper
