@@ -1,16 +1,19 @@
 package com.backend.programming.learning.system.course.service.dataaccess.course.entity;
 
-import com.backend.programming.learning.system.course.service.dataaccess.assignment.entity.AssignmentEntity;
-import com.backend.programming.learning.system.course.service.dataaccess.course_user.entity.CourseUserEntity;
-import com.backend.programming.learning.system.course.service.dataaccess.exam.entity.ExamEntity;
-import com.backend.programming.learning.system.course.service.dataaccess.post.entity.PostEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -27,6 +30,7 @@ public class CourseEntity {
     private UUID id;
 
     private String name;
+    private String courseType;
     private Boolean visible;
 
     @ManyToOne

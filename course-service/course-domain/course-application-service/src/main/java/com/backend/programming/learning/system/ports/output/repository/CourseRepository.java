@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CourseRepository {
-    Course saveCourse(Course course);
-
     Course save(Course course);
 
     Page<Course> findAll(String search, Integer page, Integer size);

@@ -19,6 +19,8 @@ public class CourseUserDeleteHelper {
     private final CourseUserRepository courseUserRepository;
     public void unAssignCourseToUser(DeleteCourseUserCommand deleteCourseUserCommand) {
         log.info("Un-assigning course to user");
-        courseUserRepository.deleteByCourseIdAndUserIdIn(deleteCourseUserCommand.getCourseId(), deleteCourseUserCommand.getUserIds());
+        courseUserRepository.deleteByCourseIdAndUserIdIn(
+                deleteCourseUserCommand.courseId(),
+                deleteCourseUserCommand.userIds());
     }
 }

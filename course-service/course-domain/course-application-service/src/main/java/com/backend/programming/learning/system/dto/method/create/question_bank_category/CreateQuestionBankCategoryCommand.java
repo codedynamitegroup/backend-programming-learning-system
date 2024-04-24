@@ -12,6 +12,8 @@ import java.util.UUID;
 public record CreateQuestionBankCategoryCommand(
         @NotNull(message = "Name is required")
         String name,
+        @NotNull(message = "Description is required")
+        String description,
         @NotNull(message = "Created by is required")
         UUID createdBy,
         UUID questionBankId

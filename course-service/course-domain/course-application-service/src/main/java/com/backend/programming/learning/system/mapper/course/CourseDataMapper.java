@@ -17,6 +17,7 @@ public class CourseDataMapper {
             CreateCourseCommand createCourseCommand) {
         return Course.builder()
                 .name(createCourseCommand.name())
+                .courseType(createCourseCommand.courseType())
                 .key(createCourseCommand.key())
                 .visible(createCourseCommand.visible())
                 .createdBy(user)
@@ -28,6 +29,7 @@ public class CourseDataMapper {
         return CreateCourseResponse.builder()
                 .id(course.getId().getValue())
                 .name(course.getName())
+                .courseType(course.getCourseType())
                 .visible(course.getVisible())
                 .createdBy(course.getCreatedBy().getId())
                 .createdAt(course.getCreatedAt())
@@ -39,6 +41,7 @@ public class CourseDataMapper {
         return CourseResponseEntity.builder()
                 .id(course.getId().getValue())
                 .name(course.getName())
+                .courseType(course.getCourseType())
                 .visible(course.getVisible())
                 .createdBy(course.getCreatedBy().getId())
                 .updatedBy(course.getUpdatedBy().getId())
@@ -62,6 +65,7 @@ public class CourseDataMapper {
         return UpdateCourseResponse.builder()
                 .courseId(course.getId().getValue())
                 .name(course.getName())
+                .courseType(course.getCourseType())
                 .visible(course.getVisible())
                 .message(message)
                 .build();

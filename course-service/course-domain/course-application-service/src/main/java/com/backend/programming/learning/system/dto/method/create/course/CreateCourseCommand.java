@@ -12,8 +12,13 @@ import java.util.UUID;
  */
 @Builder
 public record CreateCourseCommand(
-        @NotNull(message = "Name is required") String name, String key,
-        @NotNull(message = "Visible is required") Boolean visible,
-        @NotNull(message = "Created by is required") UUID createdBy) {
-
+        @NotNull(message = "Name is required")
+        String name,
+        String key,
+        @NotNull(message = "Course type is required")
+        String courseType,
+        @NotNull(message = "Visible is required")
+        Boolean visible,
+        @NotNull(message = "Created by is required")
+        UUID createdBy) {
 }

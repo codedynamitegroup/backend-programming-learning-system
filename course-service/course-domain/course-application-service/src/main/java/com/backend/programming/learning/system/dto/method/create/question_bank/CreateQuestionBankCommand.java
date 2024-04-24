@@ -15,22 +15,22 @@ import java.util.UUID;
  * Date 4/21/2024 - 3:42 PM
  * Description: ...
  */
-@Getter
 @Builder
-@AllArgsConstructor
-public class CreateQuestionBankCommand {
-    private UUID organizationId;
-    @NotNull(message = "Question difficulty is required")
-    private QuestionDifficulty difficulty;
-    @NotNull(message = "Question name is required")
-    private String name;
-    private String questionText;
-    private String generalFeedback;
-    private Float defaultMark;
-    @NotNull(message = "Question type is required")
-    private QuestionType qtype;
-    @NotNull(message = "Is question bank is required")
-    private UUID questionBankCategoryId;
-    @NotNull(message = "Created by is required")
-    private UUID createdBy;
+public record CreateQuestionBankCommand(
+        @NotNull(message = "Organization id is required")
+        UUID organizationId,
+        @NotNull(message = "Question difficulty is required")
+        QuestionDifficulty difficulty,
+        @NotNull(message = "Question name is required")
+        String name,
+        String questionText,
+        String generalFeedback,
+        Float defaultMark,
+        @NotNull(message = "Question type is required")
+        QuestionType qtype,
+        @NotNull(message = "Is question bank is required")
+        UUID questionBankCategoryId,
+        @NotNull(message = "Created by is required")
+        UUID createdBy
+) {
 }

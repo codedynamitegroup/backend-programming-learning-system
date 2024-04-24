@@ -16,7 +16,9 @@ import java.util.UUID;
  */
 @Builder
 public record CreateCourseUserCommand(
-        @NotNull(message = "User ids are required") List<UUID> userIds,
-        @NotNull(message = "Course id is required") UUID courseId
+        @NotNull(message = "User ids are required")
+        List<UUID> userIds,
+        @NotNull(message = "Course id is required")
+        UUID courseId
 ) {
 }

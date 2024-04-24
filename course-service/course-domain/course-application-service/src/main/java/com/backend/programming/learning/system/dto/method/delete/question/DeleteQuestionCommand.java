@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 /**
@@ -12,9 +13,8 @@ import java.util.UUID;
  * Date 4/20/2024 - 11:27 AM
  * Description: ...
  */
-@Getter
 @Builder
-@AllArgsConstructor
-public class DeleteQuestionCommand {
-    private final UUID questionId;
+public record DeleteQuestionCommand(
+        @NotNull(message = "Question id is required")
+        UUID questionId) {
 }

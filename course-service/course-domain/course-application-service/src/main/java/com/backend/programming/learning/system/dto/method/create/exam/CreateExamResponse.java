@@ -14,28 +14,24 @@ import java.util.UUID;
  * Date 3/24/2024 - 2:52 PM
  * Description: ...
  */
-@Getter
 @Builder
-@AllArgsConstructor
-public class CreateExamResponse {
-    private UUID id;
-    private CourseId courseId;
-    private String name;
-    private Float scores;
-    private Float maxScores;
-
-    private ZonedDateTime timeOpen;
-    private ZonedDateTime timeClose;
-    private ZonedDateTime timeLimit;
-
-    private String intro;
-    private String overdueHanding;
-    private Boolean canRedoQuestions;
-    private Integer maxAttempts;
-    private Boolean shuffleAnswers;
-    private String gradeMethod;
-    private ZonedDateTime createdAt;
-    private ZonedDateTime updatedAt;
-
-    private String message;
+public record CreateExamResponse(
+        UUID id,
+        CourseId courseId,
+        String name,
+        Float scores,
+        Float maxScores,
+        ZonedDateTime timeOpen,
+        ZonedDateTime timeClose,
+        ZonedDateTime timeLimit,
+        String intro,
+        String overdueHanding,
+        Boolean canRedoQuestions,
+        Integer maxAttempts,
+        Boolean shuffleAnswers,
+        String gradeMethod,
+        ZonedDateTime createdAt,
+        ZonedDateTime updatedAt,
+        String message
+) {
 }

@@ -19,6 +19,7 @@ public class QuestionBankCategoryDataAccessMapper {
         return QuestionBankCategoryEntity.builder()
                 .id(questionBankCategory.getId().getValue())
                 .name(questionBankCategory.getName())
+                .description(questionBankCategory.getDescription())
                 .createdBy(createdBy)
                 .updatedBy(updatedBy)
                 .createdAt(questionBankCategory.getCreatedAt())
@@ -31,6 +32,7 @@ public class QuestionBankCategoryDataAccessMapper {
         User updatedBy = userDataAccessMapper.userEntityToUser(questionBankCategoryEntity.getUpdatedBy());
         QuestionBankCategory response = QuestionBankCategory.builder()
                 .name(questionBankCategoryEntity.getName())
+                .description(questionBankCategoryEntity.getDescription())
                 .createdBy(createdBy)
                 .updatedBy(updatedBy)
                 .createdAt(questionBankCategoryEntity.getCreatedAt())

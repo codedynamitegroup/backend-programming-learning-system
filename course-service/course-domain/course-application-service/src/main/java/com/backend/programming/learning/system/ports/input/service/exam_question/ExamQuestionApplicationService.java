@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.ports.input.service.exam_question;
 
-import com.backend.programming.learning.system.dto.method.create.exam_question.CreateExamQuestionCommand;
-import com.backend.programming.learning.system.dto.method.create.exam_question.CreateExamQuestionResponse;
+import com.backend.programming.learning.system.dto.method.create.exam_submisison.exam_question.CreateExamQuestionCommand;
+import com.backend.programming.learning.system.dto.method.create.exam_submisison.exam_question.CreateExamQuestionResponse;
 
 import javax.validation.Valid;
 

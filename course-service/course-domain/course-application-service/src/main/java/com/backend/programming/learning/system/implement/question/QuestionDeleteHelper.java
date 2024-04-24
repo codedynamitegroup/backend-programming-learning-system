@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 public class QuestionDeleteHelper {
     private final QuestionRepository questionRepository;
     public void deleteById(DeleteQuestionCommand deleteQuestionCommand) {
-        questionRepository.deleteById(deleteQuestionCommand.getQuestionId());
-        log.info("Question is deleted with id: {}", deleteQuestionCommand.getQuestionId());
+        questionRepository.deleteById(deleteQuestionCommand.questionId());
+        log.info("Question is deleted with id: {}", deleteQuestionCommand.questionId());
     }
 }

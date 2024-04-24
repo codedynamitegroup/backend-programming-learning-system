@@ -17,6 +17,7 @@ import java.util.UUID;
 @Builder
 public class Course extends AggregateRoot<CourseId> {
     private String name;
+    private String courseType;
     private String key;
     private Boolean visible;
     private User createdBy;

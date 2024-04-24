@@ -14,15 +14,16 @@ import java.util.UUID;
  * Date 4/18/2024 - 8:09 PM
  * Description: ...
  */
-@Getter
+
 @Builder
-@AllArgsConstructor
-public class CourseResponseEntity {
-    private UUID id;
-    private String name;
-    private Boolean visible;
-    private UserId createdBy;
-    private UserId updatedBy;
-    private ZonedDateTime createdAt;
-    private ZonedDateTime updatedAt;
+public record CourseResponseEntity(
+        UUID id,
+        String name,
+        String courseType,
+        Boolean visible,
+        UserId createdBy,
+        UserId updatedBy,
+        ZonedDateTime createdAt,
+        ZonedDateTime updatedAt
+) {
 }
