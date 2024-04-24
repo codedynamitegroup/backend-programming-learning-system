@@ -4,8 +4,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.me
 import com.backend.programming.learning.system.core.service.domain.dto.method.message.user.UserDeleteRequest;
 import com.backend.programming.learning.system.core.service.domain.dto.method.message.user.UserUpdateRequest;
 import com.backend.programming.learning.system.core.service.domain.event.user.*;
-import com.backend.programming.learning.system.domain.valueobject.UserRequestStatus;
-import com.backend.programming.learning.system.kafka.auth.avro.model.*;
+import com.backend.programming.learning.system.kafka.auth.avro.model.user.*;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;

@@ -1,6 +1,6 @@
 {
   "name": "UserCreateRequestAvroModel",
-  "namespace": "com.backend.programming.learning.system.kafka.auth.avro.model",
+  "namespace": "com.backend.programming.learning.system.kafka.auth.avro.model.user",
   "type": "record",
   "fields": [
     {

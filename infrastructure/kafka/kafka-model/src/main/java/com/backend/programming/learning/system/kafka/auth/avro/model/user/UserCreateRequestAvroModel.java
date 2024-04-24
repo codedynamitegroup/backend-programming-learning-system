@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package com.backend.programming.learning.system.kafka.auth.avro.model;
+package com.backend.programming.learning.system.kafka.auth.avro.model.user;
 
 import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class UserCreateRequestAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 4913590564542539053L;
+  private static final long serialVersionUID = -4969717955958099176L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserCreateRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"email\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"firstName\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"lastName\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"phone\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"updatedAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"isDeleted\",\"type\":\"boolean\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserCreateRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model.user\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"email\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"firstName\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"lastName\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"phone\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"updatedAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"isDeleted\",\"type\":\"boolean\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -357,8 +357,8 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
    * Creates a new UserCreateRequestAvroModel RecordBuilder.
    * @return A new UserCreateRequestAvroModel RecordBuilder
    */
-  public static com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder newBuilder() {
-    return new com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder();
+  public static com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder newBuilder() {
+    return new com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder();
   }
 
   /**
@@ -366,11 +366,11 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
    * @param other The existing builder to copy.
    * @return A new UserCreateRequestAvroModel RecordBuilder
    */
-  public static com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder newBuilder(com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder other) {
+  public static com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder newBuilder(com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder other) {
     if (other == null) {
-      return new com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder();
+      return new com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder();
     } else {
-      return new com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder(other);
+      return new com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder(other);
     }
   }
 
@@ -379,11 +379,11 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
    * @param other The existing instance to copy.
    * @return A new UserCreateRequestAvroModel RecordBuilder
    */
-  public static com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder newBuilder(com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel other) {
+  public static com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder newBuilder(com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel other) {
     if (other == null) {
-      return new com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder();
+      return new com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder();
     } else {
-      return new com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder(other);
+      return new com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder(other);
     }
   }
 
@@ -414,7 +414,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder other) {
+    private Builder(com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -462,7 +462,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
      * Creates a Builder by copying an existing UserCreateRequestAvroModel instance
      * @param other The existing instance to copy.
      */
-    private Builder(com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel other) {
+    private Builder(com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -520,7 +520,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder setId(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder setId(java.lang.String value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -540,7 +540,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder clearId() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder clearId() {
       id = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -560,7 +560,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * @param value The value of 'sagaId'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder setSagaId(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder setSagaId(java.lang.String value) {
       validate(fields()[1], value);
       this.sagaId = value;
       fieldSetFlags()[1] = true;
@@ -580,7 +580,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * Clears the value of the 'sagaId' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder clearSagaId() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder clearSagaId() {
       sagaId = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -600,7 +600,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * @param value The value of 'userId'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder setUserId(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder setUserId(java.lang.String value) {
       validate(fields()[2], value);
       this.userId = value;
       fieldSetFlags()[2] = true;
@@ -620,7 +620,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * Clears the value of the 'userId' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder clearUserId() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder clearUserId() {
       userId = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -640,7 +640,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * @param value The value of 'email'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder setEmail(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder setEmail(java.lang.String value) {
       validate(fields()[3], value);
       this.email = value;
       fieldSetFlags()[3] = true;
@@ -660,7 +660,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * Clears the value of the 'email' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder clearEmail() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder clearEmail() {
       email = null;
       fieldSetFlags()[3] = false;
       return this;
@@ -680,7 +680,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * @param value The value of 'firstName'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder setFirstName(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder setFirstName(java.lang.String value) {
       validate(fields()[4], value);
       this.firstName = value;
       fieldSetFlags()[4] = true;
@@ -700,7 +700,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * Clears the value of the 'firstName' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder clearFirstName() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder clearFirstName() {
       firstName = null;
       fieldSetFlags()[4] = false;
       return this;
@@ -720,7 +720,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * @param value The value of 'lastName'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder setLastName(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder setLastName(java.lang.String value) {
       validate(fields()[5], value);
       this.lastName = value;
       fieldSetFlags()[5] = true;
@@ -740,7 +740,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * Clears the value of the 'lastName' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder clearLastName() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder clearLastName() {
       lastName = null;
       fieldSetFlags()[5] = false;
       return this;
@@ -760,7 +760,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * @param value The value of 'phone'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder setPhone(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder setPhone(java.lang.String value) {
       validate(fields()[6], value);
       this.phone = value;
       fieldSetFlags()[6] = true;
@@ -780,7 +780,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * Clears the value of the 'phone' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder clearPhone() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder clearPhone() {
       phone = null;
       fieldSetFlags()[6] = false;
       return this;
@@ -800,7 +800,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * @param value The value of 'createdAt'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder setCreatedAt(java.time.Instant value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder setCreatedAt(java.time.Instant value) {
       validate(fields()[7], value);
       this.createdAt = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
       fieldSetFlags()[7] = true;
@@ -820,7 +820,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * Clears the value of the 'createdAt' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder clearCreatedAt() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder clearCreatedAt() {
       fieldSetFlags()[7] = false;
       return this;
     }
@@ -839,7 +839,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * @param value The value of 'updatedAt'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder setUpdatedAt(java.time.Instant value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder setUpdatedAt(java.time.Instant value) {
       validate(fields()[8], value);
       this.updatedAt = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
       fieldSetFlags()[8] = true;
@@ -859,7 +859,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * Clears the value of the 'updatedAt' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder clearUpdatedAt() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder clearUpdatedAt() {
       fieldSetFlags()[8] = false;
       return this;
     }
@@ -878,7 +878,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * @param value The value of 'isDeleted'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder setIsDeleted(boolean value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder setIsDeleted(boolean value) {
       validate(fields()[9], value);
       this.isDeleted = value;
       fieldSetFlags()[9] = true;
@@ -898,7 +898,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * Clears the value of the 'isDeleted' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel.Builder clearIsDeleted() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder clearIsDeleted() {
       fieldSetFlags()[9] = false;
       return this;
     }

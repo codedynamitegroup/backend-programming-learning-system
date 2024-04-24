@@ -1,10 +1,10 @@
-package com.backend.programming.learning.system.auth.service.messaging.publisher.kafka;
+package com.backend.programming.learning.system.auth.service.messaging.publisher.kafka.user;
 
 import com.backend.programming.learning.system.auth.service.domain.config.AuthServiceConfigData;
-import com.backend.programming.learning.system.auth.service.domain.event.UserUpdatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.user.UserUpdatedMessagePublisher;
 import com.backend.programming.learning.system.auth.service.messaging.mapper.UserMessagingDataMapper;
-import com.backend.programming.learning.system.kafka.auth.avro.model.UserUpdateRequestAvroModel;
+import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserUpdateRequestAvroModel;
 import com.backend.programming.learning.system.kafka.producer.KafkaMessageHelper;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
 import lombok.extern.slf4j.Slf4j;

@@ -2,11 +2,9 @@ package com.backend.programming.learning.system.core.service.messaging.publisher
 
 import com.backend.programming.learning.system.core.service.domain.config.CoreServiceConfigData;
 import com.backend.programming.learning.system.core.service.domain.event.user.UserCreatedFailEvent;
-import com.backend.programming.learning.system.core.service.domain.event.user.UserCreatedSuccessEvent;
 import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.user.UserCreateFailedMessagePublisher;
-import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.user.UserCreatedSuccessMessagePublisher;
 import com.backend.programming.learning.system.core.service.messaging.mapper.UserMessagingDataMapper;
-import com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel;
+import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseAvroModel;
 import com.backend.programming.learning.system.kafka.producer.KafkaMessageHelper;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
 import lombok.extern.slf4j.Slf4j;

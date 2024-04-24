@@ -1,10 +1,9 @@
-package com.backend.programming.learning.system.core.service.messaging.publisher.kafka;
+package com.backend.programming.learning.system.core.service.messaging.publisher.kafka.question;
 
 import com.backend.programming.learning.system.core.service.domain.config.CoreServiceConfigData;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
 import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.QuestionUpdatedMessagePublisher;
 import com.backend.programming.learning.system.core.service.messaging.mapper.QuestionMessagingDataMapper;
-import com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionUpdateRequestAvroModel;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
 import lombok.extern.slf4j.Slf4j;

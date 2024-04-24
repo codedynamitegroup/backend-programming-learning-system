@@ -3,11 +3,11 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package com.backend.programming.learning.system.kafka.auth.avro.model;
+package com.backend.programming.learning.system.kafka.auth.avro.model.user;
 @org.apache.avro.specific.AvroGenerated
 public enum UserResponseStatus implements org.apache.avro.generic.GenericEnumSymbol<UserResponseStatus> {
   CREATED, CREATE_FAILED, UPDATED, UPDATE_FAILED, DELETED, DELETE_FAILED  ;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"enum\",\"name\":\"UserResponseStatus\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model\",\"symbols\":[\"CREATED\",\"CREATE_FAILED\",\"UPDATED\",\"UPDATE_FAILED\",\"DELETED\",\"DELETE_FAILED\"]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"enum\",\"name\":\"UserResponseStatus\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model.user\",\"symbols\":[\"CREATED\",\"CREATE_FAILED\",\"UPDATED\",\"UPDATE_FAILED\",\"DELETED\",\"DELETE_FAILED\"]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   @Override

@@ -2,11 +2,14 @@ package com.backend.programming.learning.system.auth.service.messaging.mapper;
 
 import com.backend.programming.learning.system.auth.service.domain.dto.method.message.UserResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
-import com.backend.programming.learning.system.auth.service.domain.event.UserCreatedEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.UserDeletedEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.UserUpdatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.UserDeletedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedEvent;
 import com.backend.programming.learning.system.domain.valueobject.UserResponseStatus;
-import com.backend.programming.learning.system.kafka.auth.avro.model.*;
+import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel;
+import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserDeleteRequestAvroModel;
+import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseAvroModel;
+import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserUpdateRequestAvroModel;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -70,7 +73,7 @@ public class UserMessagingDataMapper {
 
     public UserResponse userResponseAvroModelToUserResponse(UserResponseAvroModel userResponseAvroModel) {
         return UserResponse.builder()
-                .id(userResponseAvroModel.getUserId())
+                .id(userResponseAvroModel.getId())
                 .sagaId(userResponseAvroModel.getSagaId())
                 .userId(userResponseAvroModel.getUserId())
                 .userResponseStatus(UserResponseStatus.valueOf(userResponseAvroModel.getUserResponseStatus().name()))

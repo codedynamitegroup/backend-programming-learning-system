@@ -1,11 +1,10 @@
-package com.backend.programming.learning.system.auth.service.messaging.publisher.kafka;
+package com.backend.programming.learning.system.auth.service.messaging.publisher.kafka.user;
 
 import com.backend.programming.learning.system.auth.service.domain.config.AuthServiceConfigData;
-import com.backend.programming.learning.system.auth.service.domain.event.UserDeletedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.UserDeletedEvent;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.user.UserDeletedMessagePublisher;
 import com.backend.programming.learning.system.auth.service.messaging.mapper.UserMessagingDataMapper;
-import com.backend.programming.learning.system.kafka.auth.avro.model.UserDeleteRequestAvroModel;
-import com.backend.programming.learning.system.kafka.auth.avro.model.UserUpdateRequestAvroModel;
+import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserDeleteRequestAvroModel;
 import com.backend.programming.learning.system.kafka.producer.KafkaMessageHelper;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
 import lombok.extern.slf4j.Slf4j;

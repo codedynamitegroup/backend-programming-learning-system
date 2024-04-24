@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.auth.service.domain.implement.us
 import com.backend.programming.learning.system.auth.service.domain.AuthDomainService;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
-import com.backend.programming.learning.system.auth.service.domain.event.UserCreatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.mapper.UserDataMapper;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.user.UserCreatedMessagePublisher;
@@ -35,7 +35,6 @@ public class UserCreateHelper {
         findUserWithEmail(user.getEmail());
         UserCreatedEvent userCreatedEvent = authDomainService.createUser(user, userCreatedMessagePublisher);
         saveUser(user);
-        log.info("User is created with id: {}", user.getId().getValue());
         return userCreatedEvent;
     }
 
@@ -50,10 +49,10 @@ public class UserCreateHelper {
     private User saveUser(User user) {
         User userResult = userRepository.save(user);
         if (userResult == null) {
-            log.error("Could not save user!");
-            throw new AuthDomainException("Could not save user!");
+            log.error("Could not create user!");
+            throw new AuthDomainException("Could not create user!");
         }
-        log.info("User is saved with id: {}", userResult.getId().getValue());
+        log.info("User is created with id: {}", userResult.getId().getValue());
         return userResult;
     }
 }

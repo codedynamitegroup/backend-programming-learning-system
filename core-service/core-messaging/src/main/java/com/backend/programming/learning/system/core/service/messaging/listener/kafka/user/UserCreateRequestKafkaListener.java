@@ -2,7 +2,7 @@ package com.backend.programming.learning.system.core.service.messaging.listener.
 
 import com.backend.programming.learning.system.core.service.domain.ports.input.message.listener.auth.UserRequestMessageListener;
 import com.backend.programming.learning.system.core.service.messaging.mapper.UserMessagingDataMapper;
-import com.backend.programming.learning.system.kafka.auth.avro.model.UserCreateRequestAvroModel;
+import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel;
 import com.backend.programming.learning.system.kafka.consumer.KafkaConsumer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;

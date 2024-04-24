@@ -1,12 +1,13 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.organization;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.method.create.organization.CreateOrganizationCommand;
+import com.backend.programming.learning.system.auth.service.domain.AuthDomainService;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.organization.UpdateOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
+import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationUpdatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
-import com.backend.programming.learning.system.auth.service.domain.mapper.OrganizationDataMapper;
+import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.organization.OrganizationUpdatedMessagePublisher;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.OrganizationRepository;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.DomainConstants;
@@ -26,15 +27,19 @@ import java.util.UUID;
 public class OrganizationUpdateHelper {
     private final OrganizationRepository organizationRepository;
     private final UserRepository userRepository;
+    private final AuthDomainService authDomainService;
+    private final OrganizationUpdatedMessagePublisher organizationUpdatedMessagePublisher;
 
-    public OrganizationUpdateHelper(OrganizationRepository organizationRepository, UserRepository userRepository) {
+    public OrganizationUpdateHelper(OrganizationRepository organizationRepository, UserRepository userRepository, AuthDomainService authDomainService, OrganizationUpdatedMessagePublisher organizationUpdatedMessagePublisher) {
         this.organizationRepository = organizationRepository;
         this.userRepository = userRepository;
+        this.authDomainService = authDomainService;
+        this.organizationUpdatedMessagePublisher = organizationUpdatedMessagePublisher;
     }
 
 
     @Transactional
-    public Organization persistOrganization(UpdateOrganizationCommand updateOrganizationCommand) {
+    public OrganizationUpdatedEvent persistOrganization(UpdateOrganizationCommand updateOrganizationCommand) {
         Organization organization = getOrganization(updateOrganizationCommand.getOrganizationId());
         User updateBy = getUser(updateOrganizationCommand.getUpdatedBy());
 
@@ -69,7 +74,9 @@ public class OrganizationUpdateHelper {
             organization.setMoodleUrl(updateOrganizationCommand.getMoodleUrl());
         }
 
-        return saveOrganization(organization);
+        OrganizationUpdatedEvent organizationUpdatedEvent = authDomainService.updateOrganization(organization, organizationUpdatedMessagePublisher);
+        updateOrganization(organization);
+        return organizationUpdatedEvent;
     }
 
     private User getUser(UUID userId) {
@@ -90,7 +97,7 @@ public class OrganizationUpdateHelper {
         return organization.get();
     }
 
-    private Organization saveOrganization(Organization organization) {
+    private Organization updateOrganization(Organization organization) {
         Organization organizationResult = organizationRepository.save(organization);
         if (organizationResult == null) {
             log.error("Could not update organization!");

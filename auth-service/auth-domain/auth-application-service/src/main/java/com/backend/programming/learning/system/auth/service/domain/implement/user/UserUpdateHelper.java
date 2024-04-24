@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.auth.service.domain.implement.us
 import com.backend.programming.learning.system.auth.service.domain.AuthDomainService;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
-import com.backend.programming.learning.system.auth.service.domain.event.UserUpdatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.user.UserUpdatedMessagePublisher;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;

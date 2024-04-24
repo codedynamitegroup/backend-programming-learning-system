@@ -1,7 +1,7 @@
 {
   "type": "record",
   "name": "UserResponseAvroModel",
-  "namespace": "com.backend.programming.learning.system.kafka.auth.avro.model",
+  "namespace": "com.backend.programming.learning.system.kafka.auth.avro.model.user",
   "fields": [
     {
       "name": "id",

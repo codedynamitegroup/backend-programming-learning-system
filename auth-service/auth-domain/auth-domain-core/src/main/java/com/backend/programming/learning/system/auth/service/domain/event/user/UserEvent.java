@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.auth.service.domain.event;
+package com.backend.programming.learning.system.auth.service.domain.event.user;
 
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.domain.event.DomainEvent;
