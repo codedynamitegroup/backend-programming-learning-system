@@ -36,7 +36,7 @@ public class ExamDataAccessMapper{
     }
     public Exam examEntityToExam(ExamEntity examEntity) {
         Course course = courseDataAccessMapper.courseEntityToCourse(examEntity.getCourse());
-        Exam reponse =  Exam.builder()
+        Exam response =  Exam.builder()
                 .course(course)
                 .name(examEntity.getName())
                 .intro(examEntity.getIntro())
@@ -53,7 +53,7 @@ public class ExamDataAccessMapper{
                 .createdAt(examEntity.getCreatedAt())
                 .updatedAt(examEntity.getUpdatedAt())
                 .build();
-        reponse.setId(new ExamId(examEntity.getId()));
-        return reponse;
+        response.setId(new ExamId(examEntity.getId()));
+        return response;
     }
 }

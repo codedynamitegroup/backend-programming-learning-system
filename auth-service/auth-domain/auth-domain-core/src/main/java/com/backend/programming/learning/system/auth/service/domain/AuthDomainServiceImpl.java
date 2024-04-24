@@ -4,9 +4,12 @@ import com.backend.programming.learning.system.auth.service.domain.entity.Organi
 import com.backend.programming.learning.system.auth.service.domain.entity.Role;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.entity.UserRole;
-import com.backend.programming.learning.system.auth.service.domain.event.UserCreatedEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.UserDeletedEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.UserUpdatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationCreatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationDeletedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationUpdatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.UserDeletedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedEvent;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
 import lombok.extern.slf4j.Slf4j;
@@ -38,15 +41,31 @@ public class AuthDomainServiceImpl implements AuthDomainService {
     }
 
     @Override
-    public void createOrganization(Organization organization) {
+    public OrganizationCreatedEvent createOrganization(Organization organization,
+                                                       DomainEventPublisher<OrganizationCreatedEvent> organizationCreatedEventDomainEventPublisher) {
         organization.initializeOrganization();
         log.info("Organization with id: {} is initiated", organization.getId().getValue());
+        return new OrganizationCreatedEvent(organization,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                organizationCreatedEventDomainEventPublisher);
     }
 
     @Override
-    public void deleteOrganization(Organization organization) {
+    public OrganizationDeletedEvent deleteOrganization(Organization organization,
+                                                       DomainEventPublisher<OrganizationDeletedEvent> organizationDeletedEventDomainEventPublisher) {
         organization.deleteOrganization();
         log.info("Organization with id: {} is deleted", organization.getId().getValue());
+        return new OrganizationDeletedEvent(organization,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                organizationDeletedEventDomainEventPublisher);
+    }
+
+    @Override
+    public OrganizationUpdatedEvent updateOrganization(Organization organization,
+                                                       DomainEventPublisher<OrganizationUpdatedEvent> organizationUpdatedEventDomainEventPublisher) {
+        return new OrganizationUpdatedEvent(organization,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                organizationUpdatedEventDomainEventPublisher);
     }
 
     @Override

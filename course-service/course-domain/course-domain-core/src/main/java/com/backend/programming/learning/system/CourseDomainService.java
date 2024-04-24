@@ -29,7 +29,13 @@ public interface CourseDomainService {
 
     void createOrganization(Organization organization);
 
+    void createCallMoodleApiFunction(CallMoodleApiFunction callMoodleApiFunction);
+
     void createQuestionBankCategory(QuestionBankCategory questionBankCategory);
+
+    void createExamSubmission(ExamSubmission examSubmission);
+
+    void createQuestionSubmission(QuestionSubmission questionSubmission);
 
     QuestionCreatedEvent createQuestionEvent(Question question);
     QuestionCreateFailedEvent createQuestionFailedEvent(Question question);

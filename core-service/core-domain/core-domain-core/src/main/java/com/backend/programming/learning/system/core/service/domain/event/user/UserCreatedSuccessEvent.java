@@ -7,16 +7,16 @@ import java.time.ZonedDateTime;
 import java.util.Collections;
 
 public class UserCreatedSuccessEvent extends UserEvent {
-    private final DomainEventPublisher<UserCreatedSuccessEvent> userCreatedSucessEventDomainEventPublisher;
+    private final DomainEventPublisher<UserCreatedSuccessEvent> userCreatedSuccessEventDomainEventPublisher;
     public UserCreatedSuccessEvent(User user,
                                    ZonedDateTime createdAt,
-                                   DomainEventPublisher<UserCreatedSuccessEvent> userCreatedSucessEventDomainEventPublisher) {
+                                   DomainEventPublisher<UserCreatedSuccessEvent> userCreatedSuccessEventDomainEventPublisher) {
         super(user, createdAt, Collections.emptyList());
-        this.userCreatedSucessEventDomainEventPublisher = userCreatedSucessEventDomainEventPublisher;
+        this.userCreatedSuccessEventDomainEventPublisher = userCreatedSuccessEventDomainEventPublisher;
     }
 
     @Override
     public void fire() {
-        userCreatedSucessEventDomainEventPublisher.publish(this);
+        userCreatedSuccessEventDomainEventPublisher.publish(this);
     }
 }

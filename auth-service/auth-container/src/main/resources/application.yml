@@ -6,8 +6,14 @@ logging:
     com.backend.programming.learning.system: INFO
 
 auth-service:
-  user-request-topic-name: user-request
+  user-create-request-topic-name: user-create-request
+  user-update-request-topic-name: user-update-request
+  user-delete-request-topic-name: user-delete-request
   user-response-topic-name: user-response
+  organization-create-request-topic-name: organization-create-request
+  organization-update-request-topic-name: organization-update-request
+  organization-delete-request-topic-name: organization-delete-request
+  organization-response-topic-name: organization-response
   outbox-scheduler-fixed-rate: 10000
   outbox-scheduler-initial-delay: 10000
 
@@ -50,7 +56,8 @@ kafka-producer-config:
 kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-  core-service-user-consumer-group-id: core-service-user-topic-consumer
+  core-service-user-response-group-id: core-service-user-response-topic
+  core-service-organization-response-group-id: core-service-organization-response-topic
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
   specific-avro-reader: true

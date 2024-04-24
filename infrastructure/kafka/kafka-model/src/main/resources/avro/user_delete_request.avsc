@@ -1,0 +1,23 @@
+{
+  "name": "UserDeleteRequestAvroModel",
+  "namespace": "com.backend.programming.learning.system.kafka.auth.avro.model.user",
+  "type": "record",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "sagaId",
+      "type": "string"
+    },
+    {
+      "name": "userId",
+      "type": "string"
+    },
+    {
+      "name": "isDeleted",
+      "type": "boolean"
+    }
+  ]
+}

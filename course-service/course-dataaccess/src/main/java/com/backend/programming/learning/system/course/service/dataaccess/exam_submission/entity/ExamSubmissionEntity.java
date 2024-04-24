@@ -27,13 +27,13 @@ public class ExamSubmissionEntity {
     @JoinColumn(name = "exam_id", referencedColumnName = "id")
     private ExamEntity exam;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
 
-    private Integer type;
+    private String type;
 
-    private Integer pass_status;
+    private Integer passStatus;
 
     @Override
     public boolean equals(Object o) {

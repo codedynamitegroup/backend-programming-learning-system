@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.implement.submission_assignment;
 
-import com.backend.programming.learning.system.dto.update.submission_assignment.UpdateSubmissionAssignmentCommand;
+import com.backend.programming.learning.system.dto.method.update.submission_assignment.UpdateSubmissionAssignmentCommand;
 import com.backend.programming.learning.system.entity.SubmissionAssignment;
 import com.backend.programming.learning.system.exception.SubmissionAssignmentNotFoundException;
 import com.backend.programming.learning.system.ports.output.repository.SubmissionAssignmentRepository;
@@ -9,8 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.constraints.NotNull;
-import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.UUID;
 

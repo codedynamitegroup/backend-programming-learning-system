@@ -1,7 +1,6 @@
 package com.backend.programming.learning.system.implement.assignment;
 
-import com.backend.programming.learning.system.dto.update.assignment.UpdateAssignmentCommand;
-import com.backend.programming.learning.system.dto.update.assignment.UpdateAssignmentResponse;
+import com.backend.programming.learning.system.dto.method.update.assignment.UpdateAssignmentCommand;
 import com.backend.programming.learning.system.entity.Assignment;
 import com.backend.programming.learning.system.exception.AssignmentNotFoundException;
 import com.backend.programming.learning.system.ports.output.repository.AssignmentRepository;

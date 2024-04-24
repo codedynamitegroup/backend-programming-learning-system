@@ -11,7 +11,13 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.up
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.organization.UpdateOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.organization.OrganizationEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
+import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationCreatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationDeletedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationUpdatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.mapper.OrganizationDataMapper;
+import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.organization.OrganizationCreatedMessagePublisher;
+import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.organization.OrganizationDeletedMessagePublisher;
+import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.organization.OrganizationUpdatedMessagePublisher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -26,20 +32,28 @@ public class OrganizationCommandHandler {
     private final OrganizationQueryHelper organizationQueryHelper;
     private final OrganizationUpdateHelper organizationUpdateHelper;
     private final OrganizationDataMapper organizationDataMapper;
+    private final OrganizationCreatedMessagePublisher organizationCreatedMessagePublisher;
+    private final OrganizationDeletedMessagePublisher organizationDeletedMessagePublisher;
+    private final OrganizationUpdatedMessagePublisher organizationUpdatedMessagePublisher;
 
-    public OrganizationCommandHandler(OrganizationCreateHelper organizationCreateHelper, OrganizationDataMapper organizationDataMapper, OrganizationQueryHelper organizationQueryHelper, OrganizationDeleteHelper organizationDeleteHelper, OrganizationUpdateHelper organizationUpdateHelper) {
+
+    public OrganizationCommandHandler(OrganizationCreateHelper organizationCreateHelper, OrganizationDataMapper organizationDataMapper, OrganizationQueryHelper organizationQueryHelper, OrganizationDeleteHelper organizationDeleteHelper, OrganizationUpdateHelper organizationUpdateHelper, OrganizationCreatedMessagePublisher organizationCreatedMessagePublisher, OrganizationDeletedMessagePublisher organizationDeletedMessagePublisher, OrganizationUpdatedMessagePublisher organizationUpdatedMessagePublisher) {
         this.organizationCreateHelper = organizationCreateHelper;
         this.organizationDataMapper = organizationDataMapper;
         this.organizationQueryHelper = organizationQueryHelper;
         this.organizationDeleteHelper = organizationDeleteHelper;
         this.organizationUpdateHelper = organizationUpdateHelper;
+        this.organizationCreatedMessagePublisher = organizationCreatedMessagePublisher;
+        this.organizationDeletedMessagePublisher = organizationDeletedMessagePublisher;
+        this.organizationUpdatedMessagePublisher = organizationUpdatedMessagePublisher;
     }
 
     @Transactional
     public CreateOrganizationResponse createOrganization(CreateOrganizationCommand createOrganizationCommand) {
-        Organization organizationCreated = organizationCreateHelper.persistOrganization(createOrganizationCommand);
-        log.info("Organization is created with id: {}", organizationCreated.getId().getValue());
-        return organizationDataMapper.organizationToCreateOrganizationResponse(organizationCreated,
+        OrganizationCreatedEvent organizationCreatedEvent = organizationCreateHelper.persistOrganization(createOrganizationCommand);
+        log.info("Organization is created with id: {}", organizationCreatedEvent.getOrganization().getId().getValue());
+        organizationCreatedMessagePublisher.publish(organizationCreatedEvent);
+        return organizationDataMapper.organizationToCreateOrganizationResponse(organizationCreatedEvent.getOrganization(),
                 "Organization created successfully");
     }
 
@@ -59,17 +73,19 @@ public class OrganizationCommandHandler {
 
     @Transactional
     public UpdateOrganizationResponse updateOrganization(UpdateOrganizationCommand updateOrganizationCommand) {
-        Organization organizationUpdated = organizationUpdateHelper.persistOrganization(updateOrganizationCommand);
-        log.info("Organization is updated with id: {}", organizationUpdated.getId().getValue());
-        return organizationDataMapper.organizationToUpdateOrganizationResponse(organizationUpdated,
+        OrganizationUpdatedEvent organizationUpdatedEvent = organizationUpdateHelper.persistOrganization(updateOrganizationCommand);
+        log.info("Organization is updated with id: {}", organizationUpdatedEvent.getOrganization().getId().getValue());
+        organizationUpdatedMessagePublisher.publish(organizationUpdatedEvent);
+        return organizationDataMapper.organizationToUpdateOrganizationResponse(organizationUpdatedEvent.getOrganization(),
                 "Organization updated successfully");
     }
 
     @Transactional
     public DeleteOrganizationResponse deleteOrganization(DeleteOrganizationCommand deleteOrganizationCommand) {
-        organizationDeleteHelper.deleteOrganization(deleteOrganizationCommand);
-        log.info("Organization is deleted with id: {}", deleteOrganizationCommand.getOrganizationId());
-        return organizationDataMapper.deleteOrganizationResponse(deleteOrganizationCommand.getOrganizationId(),
+        OrganizationDeletedEvent organizationDeletedEvent = organizationDeleteHelper.deleteOrganization(deleteOrganizationCommand);
+        log.info("Organization is deleted with id: {}", organizationDeletedEvent.getOrganization().getId().getValue());
+        organizationDeletedMessagePublisher.publish(organizationDeletedEvent);
+        return organizationDataMapper.deleteOrganizationResponse(organizationDeletedEvent.getOrganization().getId().getValue(),
                 "Organization deleted successfully");
     }
 

@@ -5,6 +5,8 @@ import com.backend.programming.learning.system.entity.CallMoodleApiFunction;
 import com.backend.programming.learning.system.valueobject.CallMoodleApiFunctionId;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class CallMoodleApiFunctionDataAccessMapper {
     public CallMoodleApiFunctionEntity callMoodleApiFunctionToCallMoodleApiFunctionEntity(CallMoodleApiFunction callMoodleApiFunction) {
@@ -23,5 +25,9 @@ public class CallMoodleApiFunctionDataAccessMapper {
                 .name(callMoodleApiFunctionEntity.getName())
                 .description(callMoodleApiFunctionEntity.getDescription())
                 .build();
+    }
+
+    public List<CallMoodleApiFunction> callMoodleApiFunctionEntityListToCallMoodleApiFunctionList(List<CallMoodleApiFunctionEntity> all) {
+        return all.stream().map(this::callMoodleApiFunctionEntityToCallMoodleApiFunction).toList();
     }
 }

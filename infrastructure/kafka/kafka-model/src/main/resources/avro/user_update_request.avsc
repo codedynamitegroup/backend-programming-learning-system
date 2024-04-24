@@ -1,0 +1,54 @@
+{
+  "name": "UserUpdateRequestAvroModel",
+  "namespace": "com.backend.programming.learning.system.kafka.auth.avro.model.user",
+  "type": "record",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "sagaId",
+      "type": "string"
+    },
+    {
+      "name": "userId",
+      "type": "string"
+    },
+    {
+      "name": "firstName",
+      "type": ["string", "null"]
+    },
+    {
+      "name": "lastName",
+      "type": ["string", "null"]
+    },
+    {
+      "name": "phone",
+      "type": ["string", "null"]
+    },
+    {
+      "name": "address",
+      "type": ["string", "null"]
+    },
+    {
+      "name": "avatarUrl",
+      "type": ["string", "null"]
+    },
+    {
+      "name": "dob",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      },
+      "default": 0
+    },
+    {
+      "name": "updatedAt",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    }
+  ]
+}

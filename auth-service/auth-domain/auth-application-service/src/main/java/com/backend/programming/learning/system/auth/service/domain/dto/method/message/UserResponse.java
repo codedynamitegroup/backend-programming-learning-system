@@ -16,16 +16,6 @@ public class UserResponse {
     private String id;
     private String sagaId;
     private String userId;
-    private String email;
-    private String firstName;
-    private String lastName;
-    private String phone;
-    private String address;
-    private String avatarUrl;
-    private Instant dob;
-    private Instant createdAt;
-    private Instant updatedAt;
     private UserResponseStatus userResponseStatus;
-    private Boolean isDeleted;
     private List<String> failureMessages;
 }

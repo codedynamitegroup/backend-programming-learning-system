@@ -9,15 +9,14 @@ import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
-@Getter
 @Builder
-@AllArgsConstructor
-public class CreateCourseResponse {
-    private UUID id;
-    private String name;
-    private Boolean visible;
-    private UserId createdBy;
-    private ZonedDateTime createdAt;
-    @NotNull
-    private final String message;
+public record CreateCourseResponse(
+        UUID id,
+        String name,
+        Boolean visible,
+        UserId createdBy,
+        ZonedDateTime createdAt,
+        @NotNull
+        String message
+) {
 }

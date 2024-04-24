@@ -17,6 +17,12 @@ core-service:
   question-response-topic-name: core-question-response
 
   user-request-topic-name: user-request
+  user-create-request-topic-name: user-create-request
+  user-update-request-topic-name: user-update-request
+  user-delete-request-topic-name: user-delete-request
+  user-create-response-topic-name: user-create-response
+  user-update-response-topic-name: user-update-response
+  user-delete-response-topic-name: user-delete-response
   user-response-topic-name: user-response
   outbox-scheduler-fixed-rate: 10000
   outbox-scheduler-initial-delay: 10000
@@ -83,6 +89,10 @@ kafka-consumer-config:
 
   core-service-question-consumer-group-id: core-service-question-topic-consumer
 
+  core-service-user-create-request-group-id: core-service-user-create-request-topic
+  core-service-user-update-request-group-id: core-service-user-update-request-topic
+  core-service-user-delete-request-group-id: core-service-user-delete-request-topic
+  customer-group-id: customer-topic-consumer
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
   specific-avro-reader: true

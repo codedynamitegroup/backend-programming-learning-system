@@ -1,0 +1,41 @@
+{
+  "type": "record",
+  "name": "OrganizationResponseAvroModel",
+  "namespace": "com.backend.programming.learning.system.kafka.auth.avro.model.organization",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "sagaId",
+      "type": "string"
+    },
+    {
+      "name": "organizationId",
+      "type": "string"
+    },
+    {
+      "name": "organizationResponseStatus",
+      "type": {
+        "type": "enum",
+        "name": "OrganizationResponseStatus",
+        "symbols": ["CREATED",
+          "CREATE_FAILED",
+          "UPDATED",
+          "UPDATE_FAILED",
+          "DELETED",
+          "DELETE_FAILED"]
+      }
+    },
+    {
+      "name": "failureMessages",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  ]
+}

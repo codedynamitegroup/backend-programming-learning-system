@@ -13,13 +13,17 @@ import java.util.List;
  ************************************/
 
 public class User extends AggregateRoot<UserId> {
-    private final String email;
-    private final String firstName;
-    private final String lastName;
-    private final Date dob;
-    private final String avatarUrl;
-    private final ZonedDateTime createdAt;
-    private final ZonedDateTime updatedAt;
+    private String email;
+    private String firstName;
+    private String lastName;
+    private ZonedDateTime dob;
+    private String phone;
+    private String address;
+    private String avatarUrl;
+
+    private ZonedDateTime createdAt;
+    private ZonedDateTime updatedAt;
+    private Boolean isDeleted;
 
     private User(Builder builder) {
         super.setId(builder.userId);
@@ -27,13 +31,12 @@ public class User extends AggregateRoot<UserId> {
         firstName = builder.firstName;
         lastName = builder.lastName;
         dob = builder.dob;
+        phone = builder.phone;
+        address = builder.address;
         avatarUrl = builder.avatarUrl;
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
-    }
-
-    public static Builder builder() {
-        return new Builder();
+        isDeleted = builder.isDeleted;
     }
 
     public String getEmail() {
@@ -48,7 +51,7 @@ public class User extends AggregateRoot<UserId> {
         return lastName;
     }
 
-    public Date getDob() {
+    public ZonedDateTime getDob() {
         return dob;
     }
 
@@ -64,15 +67,66 @@ public class User extends AggregateRoot<UserId> {
         return updatedAt;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setDob(ZonedDateTime dob) {
+        this.dob = dob;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    public void setUpdatedAt(ZonedDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static final class Builder {
         private UserId userId;
         private String email;
         private String firstName;
         private String lastName;
-        private Date dob;
+        private ZonedDateTime dob;
+        private String phone;
+        private String address;
         private String avatarUrl;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
+        private Boolean isDeleted;
 
         private Builder() {
         }
@@ -97,8 +151,18 @@ public class User extends AggregateRoot<UserId> {
             return this;
         }
 
-        public Builder dob(Date val) {
+        public Builder dob(ZonedDateTime val) {
             dob = val;
+            return this;
+        }
+
+        public Builder phone(String val) {
+            phone = val;
+            return this;
+        }
+
+        public Builder address(String val) {
+            address = val;
             return this;
         }
 
@@ -114,6 +178,11 @@ public class User extends AggregateRoot<UserId> {
 
         public Builder updatedAt(ZonedDateTime val) {
             updatedAt = val;
+            return this;
+        }
+
+        public Builder isDeleted(Boolean val) {
+            isDeleted = val;
             return this;
         }
 
