@@ -1,7 +1,9 @@
 package com.backend.programming.learning.system.mapper.question;
 
+import com.backend.programming.learning.system.domain.valueobject.*;
 import com.backend.programming.learning.system.dto.method.create.question.CreateQuestionCommand;
 import com.backend.programming.learning.system.dto.method.create.question.CreateQuestionResponse;
+import com.backend.programming.learning.system.dto.method.message.QuestionCreateRequest;
 import com.backend.programming.learning.system.dto.method.query.question.QueryAllQuestionResponse;
 import com.backend.programming.learning.system.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.entity.Organization;
@@ -11,8 +13,10 @@ import com.backend.programming.learning.system.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * com.backend.programming.learning.system.mapper.question
@@ -103,6 +107,29 @@ public class QuestionDataMapper {
                 .questionBankCategory(questionBankCategory)
                 .createdBy(createdBy)
                 .updatedBy(createdBy)
+                .build();
+    }
+
+    public Question questionCreateRequestToQuestion(QuestionCreateRequest questionCreateRequest) {
+        return Question.builder()
+                .id( new QuestionId(UUID.fromString(questionCreateRequest.getId())))
+                .organization(Organization.builder()
+                        .id(new OrganizationId(UUID.fromString(questionCreateRequest.getOrganizationId())))
+                        .build())
+                .createdBy(User.builder()
+                        .id(new UserId(UUID.fromString(questionCreateRequest.getCreatedBy())))
+                        .build())
+                .updatedBy(User.builder()
+                        .id(new UserId(UUID.fromString(questionCreateRequest.getUpdatedBy())))
+                        .build())
+                .questionText(questionCreateRequest.getQuestionText())
+                .difficulty(QuestionDifficulty.valueOf(questionCreateRequest.getDifficulty()))
+                .name(questionCreateRequest.getName())
+                .generalFeedback(questionCreateRequest.getGeneralFeedback())
+                .defaultMark(questionCreateRequest.getDefaultMark().floatValue())
+                .qtype(QuestionType.valueOf(questionCreateRequest.getQType()))
+                .isQuestionBank(false)
+                .answers(questionCreateRequest.getAnswers())
                 .build();
     }
 }

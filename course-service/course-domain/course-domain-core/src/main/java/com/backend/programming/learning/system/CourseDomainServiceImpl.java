@@ -1,9 +1,13 @@
 package com.backend.programming.learning.system;
 
+import com.backend.programming.learning.system.domain.valueobject.QuestionResponseStatus;
 import com.backend.programming.learning.system.entity.*;
 
+import com.backend.programming.learning.system.event.question.event.*;
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Slf4j
@@ -80,5 +84,38 @@ public class CourseDomainServiceImpl implements CourseDomainService{
     public void createQuestionBankCategory(QuestionBankCategory questionBankCategory) {
         questionBankCategory.initializeQuestionBankCategory();
         log.info("QuestionBankCategory with id: {} is initiated", questionBankCategory.getId().getValue());
+    }
+
+    @Override
+    public QuestionCreatedEvent createQuestionEvent(Question question) {
+        log.info("Question with id: {} is created with event", question.getId().getValue());
+        return new QuestionCreatedEvent(question,
+                ZonedDateTime.now(ZoneId.of("UTC")),
+                QuestionResponseStatus.CREATED);
+    }
+
+    @Override
+    public QuestionCreateFailedEvent createQuestionFailedEvent(Question question) {
+        return null;
+    }
+
+    @Override
+    public QuestionUpdatedEvent createQuestionUpdatedEvent(Question question) {
+        return null;
+    }
+
+    @Override
+    public QuestionUpdateFailedEvent createQuestionUpdateFailedEvent(Question question) {
+        return null;
+    }
+
+    @Override
+    public QuestionDeletedEvent createQuestionDeletedEvent(Question question) {
+        return null;
+    }
+
+    @Override
+    public QuestionDeleteFailedEvent createQuestionDeleteFailedEvent(Question question) {
+        return null;
     }
 }

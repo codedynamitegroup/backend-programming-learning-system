@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.entity.*;
 
 import java.util.List;
 import com.backend.programming.learning.system.entity.Question;
+import com.backend.programming.learning.system.event.question.event.*;
 
 public interface CourseDomainService {
     void createExam(Exam exam);
@@ -29,4 +30,11 @@ public interface CourseDomainService {
     void createOrganization(Organization organization);
 
     void createQuestionBankCategory(QuestionBankCategory questionBankCategory);
+
+    QuestionCreatedEvent createQuestionEvent(Question question);
+    QuestionCreateFailedEvent createQuestionFailedEvent(Question question);
+    QuestionUpdatedEvent createQuestionUpdatedEvent(Question question);
+    QuestionUpdateFailedEvent createQuestionUpdateFailedEvent(Question question);
+    QuestionDeletedEvent createQuestionDeletedEvent(Question question);
+    QuestionDeleteFailedEvent createQuestionDeleteFailedEvent(Question question);
 }
