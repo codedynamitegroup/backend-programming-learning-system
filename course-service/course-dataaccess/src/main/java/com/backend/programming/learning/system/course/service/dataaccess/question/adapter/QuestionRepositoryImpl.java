@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Repository
@@ -26,8 +27,12 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     }
 
     @Override
-    public Page<Question> findAll(UUID questionBankCategoryId, Integer page, Integer size) {
-        return questionJpaRepository.findAll(questionBankCategoryId, PageRequest.of(page, size))
+    public Page<Question> findAll(UUID questionBankCategoryId, String search, Integer page, Integer size) {
+        if(Objects.isNull(questionBankCategoryId)) {
+            return questionJpaRepository.findAll(search, PageRequest.of(page, size))
+                    .map(questionDataAccessMapper::questionEntityToQuestion);
+        }
+        return questionJpaRepository.findAll(questionBankCategoryId, search, PageRequest.of(page, size))
                 .map(questionDataAccessMapper::questionEntityToQuestion);
     }
 

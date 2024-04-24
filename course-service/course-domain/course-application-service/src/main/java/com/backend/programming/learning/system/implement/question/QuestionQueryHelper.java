@@ -26,6 +26,7 @@ public class QuestionQueryHelper {
     public Page<Question> findAllQuestions(QueryAllQuestionCommand queryAllQuestionCommand) {
         return questionRepository.findAll(
                 queryAllQuestionCommand.getQuestionBankCategoryId(),
+                queryAllQuestionCommand.getSearch(),
                 queryAllQuestionCommand.getPageNo(),
                 queryAllQuestionCommand.getPageSize());
     }
