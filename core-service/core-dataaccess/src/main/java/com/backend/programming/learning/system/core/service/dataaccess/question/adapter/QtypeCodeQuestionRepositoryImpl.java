@@ -1,9 +1,11 @@
 package com.backend.programming.learning.system.core.service.dataaccess.question.adapter;
 
-import com.backend.programming.learning.system.core.service.dataaccess.question.mapper.QtypeQuestionDataAccessMapper;
+import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QtypeCodeQuestionEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.question.mapper.QtypeCodeQuestionDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.question.repository.QtypeCodeQuestionJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeCodeQuestionRepository;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeCodeQuestion;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,27 +13,28 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Component
+@Slf4j
 public class QtypeCodeQuestionRepositoryImpl implements QtypeCodeQuestionRepository {
     private final QtypeCodeQuestionJpaRepository qtypeCodeQuestionJpaRepository;
-    private final QtypeQuestionDataAccessMapper qtypeQuestionDataAccessMapper;
+    private final QtypeCodeQuestionDataAccessMapper qtypeCodeQuestionDataAccessMapper;
 
     public QtypeCodeQuestionRepositoryImpl(QtypeCodeQuestionJpaRepository qtypeCodeQuestionJpaRepository,
-                                           QtypeQuestionDataAccessMapper qtypeQuestionDataAccessMapper) {
+                                           QtypeCodeQuestionDataAccessMapper qtypeCodeQuestionDataAccessMapper) {
         this.qtypeCodeQuestionJpaRepository = qtypeCodeQuestionJpaRepository;
-        this.qtypeQuestionDataAccessMapper = qtypeQuestionDataAccessMapper;
+        this.qtypeCodeQuestionDataAccessMapper = qtypeCodeQuestionDataAccessMapper;
     }
 
     @Override
     public QtypeCodeQuestion saveQtypeCodeQuestion(QtypeCodeQuestion qtypeCodeQuestion) {
-        return qtypeQuestionDataAccessMapper.qtypeCodeQuestionEntityToQtypeCodeQuestion(qtypeCodeQuestionJpaRepository
-                .save(qtypeQuestionDataAccessMapper
+        return qtypeCodeQuestionDataAccessMapper.qtypeCodeQuestionEntityToQtypeCodeQuestion(qtypeCodeQuestionJpaRepository
+                .save(qtypeCodeQuestionDataAccessMapper
                         .qtypeCodeQuestionToQtypeCodeQuestionEntity(qtypeCodeQuestion)));
     }
 
     @Override
     public Optional<QtypeCodeQuestion> findQtypeCodeQuestion(UUID qtCodeQuestionId) {
         return qtypeCodeQuestionJpaRepository.findById(qtCodeQuestionId)
-                .map(qtypeQuestionDataAccessMapper::qtypeCodeQuestionEntityToQtypeCodeQuestion);
+                .map(qtypeCodeQuestionDataAccessMapper::qtypeCodeQuestionEntityToQtypeCodeQuestion);
     }
 
     @Override
@@ -39,12 +42,20 @@ public class QtypeCodeQuestionRepositoryImpl implements QtypeCodeQuestionReposit
         return qtypeCodeQuestionJpaRepository
                 .findAll()
                 .stream()
-                .map(qtypeQuestionDataAccessMapper::qtypeCodeQuestionEntityToQtypeCodeQuestion)
+                .map(qtypeCodeQuestionDataAccessMapper::qtypeCodeQuestionEntityToQtypeCodeQuestion)
                 .toList();
     }
 
     @Override
     public UUID getId(UUID questionId) {
         return qtypeCodeQuestionJpaRepository.getId(questionId);
+    }
+
+    @Override
+    public void updateQtypeCodeQuestion(QtypeCodeQuestion qtypeCodeQuestion) {
+        Optional<QtypeCodeQuestionEntity> qtypeCodeQuestionEntity = qtypeCodeQuestionJpaRepository.findById(qtypeCodeQuestion.getId().getValue());
+
+        qtypeCodeQuestionJpaRepository.save(qtypeCodeQuestionDataAccessMapper
+                .setQtypeCodeQuestionEntity(qtypeCodeQuestionEntity.get(), qtypeCodeQuestion));
     }
 }

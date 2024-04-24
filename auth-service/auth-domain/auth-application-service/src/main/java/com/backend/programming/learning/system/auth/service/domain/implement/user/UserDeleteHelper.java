@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.user;
 
 import com.backend.programming.learning.system.auth.service.domain.AuthDomainService;
-import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.UserDeletedEvent;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
@@ -39,11 +39,6 @@ public class UserDeleteHelper {
         }
 
         User user = userResult.get();
-        if (Boolean.TRUE.equals(user.getDeleted())) {
-            log.warn("User with id: {} is already deleted", deleteUserCommand.getUserId());
-            throw new AuthNotFoundException("User with id: " + deleteUserCommand.getUserId() +
-                    " is already deleted");
-        }
 
         UserDeletedEvent userDeletedEvent = authDomainService.deleteUser(user, userDeletedMessagePublisher);
         userRepository.save(user);

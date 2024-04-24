@@ -5,6 +5,9 @@ import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import com.backend.programming.learning.system.auth.service.dataaccess.user.mapper.UserDataAccessMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -29,21 +32,20 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public Optional<User> findById(UserId userId) {
-        return userJpaRepository.findById(userId.getValue())
+        return userJpaRepository.findByIdAndIsDeletedFalse(userId.getValue())
                 .map(userDataAccessMapper::userEntityToUser);
     }
 
     @Override
     public Optional<User> findByEmail(String email) {
-        return userJpaRepository.findByEmail(email)
+        return userJpaRepository.findByEmailAndIsDeletedFalse(email)
                 .map(userDataAccessMapper::userEntityToUser);
     }
 
     @Override
-    public List<User> findAll() {
-        return userJpaRepository.findAll()
-                .stream()
-                .map(userDataAccessMapper::userEntityToUser)
-                .toList();
+    public Page<User> findAll(Integer page, Integer size) {
+        Pageable paging = PageRequest.of(page, size);
+        return userJpaRepository.findAllByIsDeletedFalse(paging)
+                .map(userDataAccessMapper::userEntityToUser);
     }
 }

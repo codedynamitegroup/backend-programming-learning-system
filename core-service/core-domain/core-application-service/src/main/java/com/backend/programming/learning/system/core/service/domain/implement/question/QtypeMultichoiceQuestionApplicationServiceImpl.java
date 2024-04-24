@@ -3,6 +3,8 @@ package com.backend.programming.learning.system.core.service.domain.implement.qu
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQtypeMultichoiceQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryQtypeMultichoiceQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeMultichoiceQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.implement.question.handler.QtypeMultichoiceQuestionCommandHandler;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QtypeMultichoiceQuestionApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -36,5 +38,10 @@ public class QtypeMultichoiceQuestionApplicationServiceImpl implements QtypeMult
     @Override
     public List<QueryQtypeMultichoiceQuestionResponse> queryAllQtypeMultichoiceQuestion() {
         return qtypeMultichoiceQuestionCommandHandler.queryAllQtypeMultichoiceQuestion();
+    }
+
+    @Override
+    public UpdateQuestionResponse updateQtypeMultichoiceQuestion(UpdateQtypeMultichoiceQuestionCommand updateQtypeMultichoiceQuestionCommand) {
+        return qtypeMultichoiceQuestionCommandHandler.updateQtypeMultichoiceQuestion(updateQtypeMultichoiceQuestionCommand);
     }
 }

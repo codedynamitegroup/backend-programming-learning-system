@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.auth.service.domain.entity;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
+import com.backend.programming.learning.system.domain.valueobject.UserStatus;
 
 import java.time.ZonedDateTime;
 import java.time.ZoneId;
@@ -26,21 +27,21 @@ public class User extends AggregateRoot<UserId> {
     private Boolean isDeleted;
 
     private User(Builder builder) {
+        super.setId(builder.userId);
         email = builder.email;
-        password = builder.password;
-        dob = builder.dob;
-        firstName = builder.firstName;
-        lastName = builder.lastName;
-        phone = builder.phone;
-        address = builder.address;
-        avatarUrl = builder.avatarUrl;
-        refreshToken = builder.refreshToken;
-        lastIp = builder.lastIp;
-        lastLogin = builder.lastLogin;
+        setPassword(builder.password);
+        setDob(builder.dob);
+        setFirstName(builder.firstName);
+        setLastName(builder.lastName);
+        setPhone(builder.phone);
+        setAddress(builder.address);
+        setAvatarUrl(builder.avatarUrl);
+        setRefreshToken(builder.refreshToken);
+        setLastIp(builder.lastIp);
+        setLastLogin(builder.lastLogin);
         createdAt = builder.createdAt;
-        updatedAt = builder.updatedAt;
+        setUpdatedAt(builder.updatedAt);
         isDeleted = builder.isDeleted;
-        setId(builder.userId);
     }
 
     public void initializeUser() {
@@ -111,9 +112,54 @@ public class User extends AggregateRoot<UserId> {
         return isDeleted;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setDob(ZonedDateTime dob) {
+        this.dob = dob;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
+
+    public void setLastIp(String lastIp) {
+        this.lastIp = lastIp;
+    }
+
+    public void setLastLogin(ZonedDateTime lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+    public void setUpdatedAt(ZonedDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
+
 
     public static final class Builder {
         private String email;
@@ -129,7 +175,8 @@ public class User extends AggregateRoot<UserId> {
         private ZonedDateTime lastLogin;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
-        private boolean isDeleted;
+        private UserStatus userStatus;
+        private Boolean isDeleted;
         private UserId userId;
 
         private Builder() {
@@ -200,7 +247,7 @@ public class User extends AggregateRoot<UserId> {
             return this;
         }
 
-        public Builder isDeleted(boolean val) {
+        public Builder isDeleted(Boolean val) {
             isDeleted = val;
             return this;
         }

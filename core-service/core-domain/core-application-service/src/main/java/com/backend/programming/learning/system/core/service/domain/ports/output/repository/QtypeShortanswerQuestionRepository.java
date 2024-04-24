@@ -12,4 +12,5 @@ public interface QtypeShortanswerQuestionRepository {
     List<QtypeShortAnswerQuestion> findAllQtypeShortAnswerQuestions();
     void deleteQtypeShortAnswerQuestion(UUID qtShortAnswerQuestionId);
     UUID getId(UUID questionId);
+    void updateQtypeShortAnswerQuestion(QtypeShortAnswerQuestion qtypeShortAnswerQuestion);
 }

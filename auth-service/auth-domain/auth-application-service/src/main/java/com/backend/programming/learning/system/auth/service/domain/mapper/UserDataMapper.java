@@ -1,10 +1,20 @@
 package com.backend.programming.learning.system.auth.service.domain.mapper;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateUserCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateUserResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
+import com.backend.programming.learning.system.domain.valueobject.UserId;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
+
+import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.UUID;
 
 @Component
 public class UserDataMapper {
@@ -20,25 +30,64 @@ public class UserDataMapper {
 
     public CreateUserResponse userToCreateUserResponse(User user, String message) {
         return CreateUserResponse.builder()
-                .id(user.getId().getValue())
+                .userId(user.getId().getValue())
                 .email(user.getEmail())
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .phone(user.getPhone())
-                .createdAt(user.getCreatedAt())
                 .message(message)
                 .build();
     }
 
-    public QueryUserResponse userToQueryUserResponse(User user) {
-        return QueryUserResponse.builder()
-                .id(user.getId().getValue())
+    public UserEntityResponse userToUserResponse(User user) {
+        return UserEntityResponse.builder()
+                .userId(user.getId().getValue())
                 .email(user.getEmail())
+                .dob(user.getDob())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .phone(user.getPhone())
+                .address(user.getAddress())
+                .avatarUrl(user.getAvatarUrl())
+                .lastIp(user.getLastIp())
+                .lastLogin(user.getLastLogin())
                 .createdAt(user.getCreatedAt())
+                .updatedAt(user.getUpdatedAt())
                 .isDeleted(user.getDeleted())
+                .build();
+    }
+
+    public QueryAllUsersResponse usersToQueryAllUsers(Page<User> users) {
+        List<UserEntityResponse> userEntityResponses = users
+                .map(this::userToUserResponse).getContent();
+        return QueryAllUsersResponse.builder()
+                .users(userEntityResponses)
+                .currentPage(users.getNumber())
+                .totalPages(users.getTotalPages())
+                .totalItems(users.getTotalElements())
+                .build();
+    }
+
+    public User updateUserCommandToUser(UpdateUserCommand updateUserCommand) {
+        return User.builder()
+                .id(new UserId(updateUserCommand.getUserId()))
+                .dob(updateUserCommand.getDob())
+                .firstName(updateUserCommand.getFirstName())
+                .lastName(updateUserCommand.getLastName())
+                .phone(updateUserCommand.getPhone())
+                .address(updateUserCommand.getAddress())
+                .avatarUrl(updateUserCommand.getAvatarUrl())
+                .build();
+    }
+
+    public DeleteUserResponse deleteUserResponse(UUID userId, String message) {
+        return DeleteUserResponse.builder()
+                .userId(userId)
+                .message(message)
+                .build();
+    }
+
+    public UpdateUserResponse userToUpdateUserResponse(User userUpdated, String message) {
+        return UpdateUserResponse.builder()
+                .userId(userUpdated.getId().getValue())
+                .message(message)
                 .build();
     }
 }

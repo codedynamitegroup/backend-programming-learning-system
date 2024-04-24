@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.responsee
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
 import com.backend.programming.learning.system.core.service.domain.implement.question.method.delete.QuestionDeleteHelper;
 import com.backend.programming.learning.system.core.service.domain.implement.question.method.query.QuestionQueryHelper;
+import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.QuestionDeletedMessagePublisher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -16,10 +17,13 @@ import java.util.UUID;
 public class QuestionCommandHandler {
     private final QuestionQueryHelper questionQueryHelper;
     private final QuestionDeleteHelper questionDeleteHelper;
+    private final QuestionDeletedMessagePublisher questionDeletedMessagePublisher;
 
-    public QuestionCommandHandler(QuestionQueryHelper questionQueryHelper, QuestionDeleteHelper questionDeleteHelper) {
+    public QuestionCommandHandler(QuestionQueryHelper questionQueryHelper, QuestionDeleteHelper questionDeleteHelper,
+                                  QuestionDeletedMessagePublisher questionDeletedMessagePublisher) {
         this.questionQueryHelper = questionQueryHelper;
         this.questionDeleteHelper = questionDeleteHelper;
+        this.questionDeletedMessagePublisher = questionDeletedMessagePublisher;
     }
 
     public QuestionResponseEntity queryQuestionById(UUID questionId) {
@@ -34,6 +38,8 @@ public class QuestionCommandHandler {
 
     public QuestionDeleteResponse deleteQuestionById(UUID questionId) {
         QuestionDeletedEvent questionDeletedEvent = questionDeleteHelper.deleteQuestionById(questionId);
+
+        questionDeletedMessagePublisher.publish(questionDeletedEvent);
 
         return QuestionDeleteResponse.builder()
                 .questionId(questionId)

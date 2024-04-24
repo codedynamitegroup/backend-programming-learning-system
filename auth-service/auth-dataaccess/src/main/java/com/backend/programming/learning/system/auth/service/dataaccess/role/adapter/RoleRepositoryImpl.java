@@ -6,6 +6,9 @@ import com.backend.programming.learning.system.auth.service.domain.entity.Role;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.RoleRepository;
 import com.backend.programming.learning.system.auth.service.domain.valueobject.RoleId;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -40,10 +43,9 @@ public class RoleRepositoryImpl implements RoleRepository {
     }
 
     @Override
-    public List<Role> findByOrganizationId(OrganizationId organizationId) {
-        return roleJpaRepository.findByOrganizationId(organizationId.getValue())
-                .stream()
-                .map(roleDataAccessMapper::roleEntityToRole)
-                .toList();
+    public Page<Role> findAllRolesByOrganizationId(OrganizationId organizationId, Integer page, Integer size) {
+        Pageable paging = PageRequest.of(page, size);
+        return roleJpaRepository.findAllByOrganizationId(organizationId.getValue(), paging)
+                .map(roleDataAccessMapper::roleEntityToRole);
     }
 }

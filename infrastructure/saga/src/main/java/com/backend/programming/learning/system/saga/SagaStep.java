@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.saga;
 
-public interface SagaStep<T> {
-    void process(T data);
-    void rollback(T data);
+import com.backend.programming.learning.system.domain.event.DomainEvent;
+
+public interface SagaStep<T, S extends DomainEvent, U extends DomainEvent> {
+    S process(T data);
+    U rollback(T data);
 }

@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorDTO handleException(Exception exception) {
         log.error(exception.getMessage(), exception);
-//        log.info("Exception class: {}", exception.getClass());
+        log.info("Exception class: {}", exception.getClass());
 
         return ErrorDTO.builder()
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())

@@ -33,8 +33,9 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Optional<User> findUserInformation(User user) {
-        return userJpaRepository.findById(user.getId().getValue())
-                .map(userMapper::userEntityToUser);
+    public User save(User user) {
+        return userMapper
+                .userEntityToUser(userJpaRepository
+                        .save(userMapper.userToUserEntity(user)));
     }
 }

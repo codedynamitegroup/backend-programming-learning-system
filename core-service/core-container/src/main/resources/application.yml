@@ -5,12 +5,21 @@ logging:
   level:
     com.backend.programming.learning.system: DEBUG
 
+socket-config:
+  port: 8085
+  host: localhost
+
 core-service:
-  payment-request-topic-name: payment-request
-  payment-response-topic-name: payment-response
-  restaurant-approval-request-topic-name: restaurant-approval-request
-  restaurant-approval-response-topic-name: restaurant-approval-response
-  customer-topic-name: customer
+  question-created-request-topic-name: core-question-create-request
+  question-deleted-request-topic-name: core-question-delete-request
+  question-updated-request-topic-name: core-question-update-request
+  user-create-request-topic-name: user-create-request
+  user-update-request-topic-name: user-update-request
+  user-delete-request-topic-name: user-delete-request
+  user-create-response-topic-name: user-create-response
+  user-update-response-topic-name: user-update-response
+  user-delete-response-topic-name: user-delete-response
+  user-response-topic-name: user-response
   outbox-scheduler-fixed-rate: 10000
   outbox-scheduler-initial-delay: 10000
 
@@ -72,8 +81,9 @@ kafka-producer-config:
 kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-  payment-consumer-group-id: payment-topic-consumer
-  restaurant-approval-consumer-group-id: restaurant-approval-topic-consumer
+  core-service-user-create-request-group-id: core-service-user-create-request-topic
+  core-service-user-update-request-group-id: core-service-user-update-request-topic
+  core-service-user-delete-request-group-id: core-service-user-delete-request-topic
   customer-group-id: customer-topic-consumer
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
@@ -88,3 +98,4 @@ kafka-consumer-config:
   max-partition-fetch-bytes-default: 1048576
   max-partition-fetch-bytes-boost-factor: 1
   poll-timeout-ms: 150
+

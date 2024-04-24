@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.dataaccess.question.adapter;
 
+import com.backend.programming.learning.system.core.service.dataaccess.question.entity.AnswerOfQuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.question.mapper.AnswerOfQuestionDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.question.repository.AnswerOfQuestionJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.entity.AnswerOfQuestion;
@@ -52,5 +53,20 @@ public class AnswerOfQuestionRepositoryImpl implements AnswerOfQuestionRepositor
     public Optional<AnswerOfQuestion> getAnswerOfQuestionById(UUID answerId) {
         return answerOfQuestionJpaRepository.findById(answerId)
                 .map(answerOfQuestionDataAccessMapper::answerOfQuestionEntityToAnswerOfQuestion);
+    }
+
+    @Override
+    public List<AnswerOfQuestion> updateAllAnswerOfQuestion(List<AnswerOfQuestion> answerOfQuestionList) {
+        List<AnswerOfQuestionEntity> answerOfQuestionEntityList = answerOfQuestionJpaRepository.findAllById(
+                answerOfQuestionList.stream()
+                        .map(answerOfQuestion -> answerOfQuestion.getId().getValue())
+                        .toList());
+
+        answerOfQuestionEntityList = answerOfQuestionDataAccessMapper.setAnswerOfQuestionEntityList(answerOfQuestionEntityList, answerOfQuestionList);
+
+        return answerOfQuestionJpaRepository.saveAll(answerOfQuestionEntityList)
+                .stream()
+                .map(answerOfQuestionDataAccessMapper::answerOfQuestionEntityToAnswerOfQuestion)
+                .toList();
     }
 }

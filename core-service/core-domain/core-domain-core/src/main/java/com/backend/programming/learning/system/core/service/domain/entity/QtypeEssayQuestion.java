@@ -15,7 +15,7 @@ public class QtypeEssayQuestion extends BaseEntity<QtypeEssayQuestionId> {
     private final Integer attachments;
     private final Integer attachmentsRequired;
     private final String graderInfo;
-    private final Integer graderInfoFormat;
+    private final String graderInfoFormat;
     private final String responseTemplate;
     private final Integer maxBytes;
     private final String fileTypesList;
@@ -61,7 +61,7 @@ public class QtypeEssayQuestion extends BaseEntity<QtypeEssayQuestionId> {
         return graderInfo;
     }
 
-    public Integer getGraderInfoFormat() {
+    public String getGraderInfoFormat() {
         return graderInfoFormat;
     }
 
@@ -109,7 +109,7 @@ public class QtypeEssayQuestion extends BaseEntity<QtypeEssayQuestionId> {
         private Integer attachments;
         private Integer attachmentsRequired;
         private String graderInfo;
-        private Integer graderInfoFormat;
+        private String graderInfoFormat;
         private String responseTemplate;
         private Integer maxBytes;
         private String fileTypesList;
@@ -167,7 +167,7 @@ public class QtypeEssayQuestion extends BaseEntity<QtypeEssayQuestionId> {
             return this;
         }
 
-        public Builder graderInfoFormat(Integer val) {
+        public Builder graderInfoFormat(String val) {
             graderInfoFormat = val;
             return this;
         }

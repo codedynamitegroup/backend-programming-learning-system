@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.role;
 
 import com.backend.programming.learning.system.auth.service.domain.AuthDomainService;
-import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.role.CreateRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.entity.Role;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
@@ -39,28 +39,32 @@ public class RoleCreateHelper {
 
     @Transactional
     public Role persistRole(CreateRoleCommand createRoleCommand) {
+        User createdBy = getUser(createRoleCommand.getCreatedBy());
+        Organization organization = getOrganization(createRoleCommand.getOrganizationId());
         Role role = roleDataMapper.createRoleCommandToRole(createRoleCommand);
-        checkUserExist(role.getCreatedBy().getValue());
-        checkUserExist(role.getUpdatedBy().getValue());
-        checkOrganization(role.getOrganizationId().getValue());
+        role.setOrganization(organization);
+        role.setCreatedBy(createdBy);
+        role.setUpdatedBy(createdBy);
         authDomainService.createRole(role);
         return saveRole(role);
     }
 
-    private void checkOrganization(UUID organizationId) {
+    private Organization getOrganization(UUID organizationId) {
         Optional<Organization> organization = organizationRepository.findById(new OrganizationId(organizationId));
         if (organization.isEmpty()) {
             log.warn("Could not find organization with id: {}", organizationId);
             throw new AuthNotFoundException("Could not find organization with id: " + organizationId);
         }
+        return organization.get();
     }
 
-    private void checkUserExist(UUID userId) {
+    private User getUser(UUID userId) {
         Optional<User> user = userRepository.findById(new UserId(userId));
         if (user.isEmpty()) {
             log.error("User with id: {} could not be found!", userId);
             throw new AuthDomainException("User with id: " + userId + " could not be found!");
         }
+        return user.get();
     }
 
 

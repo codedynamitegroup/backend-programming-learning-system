@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.auth.service.dataaccess.user.entity;
 
 import javax.persistence.*;
+
+import com.backend.programming.learning.system.domain.valueobject.UserStatus;
 import lombok.*;
 
 import java.time.ZonedDateTime;

@@ -15,8 +15,11 @@ public class UserDataAccessMapper {
                 .firstName(userEntity.getFirstName())
                 .lastName(userEntity.getLastName())
                 .avatarUrl(userEntity.getAvatarUrl())
+                .phone(userEntity.getPhone())
+                .address(userEntity.getAddress())
                 .createdAt(userEntity.getCreatedAt())
                 .updatedAt(userEntity.getUpdatedAt())
+                .isDeleted(userEntity.getIsDeleted())
                 .build();
     }
 
@@ -28,8 +31,11 @@ public class UserDataAccessMapper {
                 .lastName(user.getLastName())
                 .dob(user.getDob())
                 .avatarUrl(user.getAvatarUrl())
+                .phone(user.getPhone())
+                .address(user.getAddress())
                 .createdAt(user.getCreatedAt())
                 .updatedAt(user.getUpdatedAt())
+                .isDeleted(user.getDeleted())
                 .build();
     }
 }

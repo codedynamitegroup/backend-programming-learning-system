@@ -2,8 +2,6 @@ package com.backend.programming.learning.system.auth.service.domain.entity;
 
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
-import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 import com.backend.programming.learning.system.auth.service.domain.valueobject.RoleId;
 
 import java.time.ZoneId;
@@ -11,13 +9,13 @@ import java.time.ZonedDateTime;
 import java.util.UUID;
 
 public class Role extends AggregateRoot<RoleId> {
-    private final OrganizationId organizationId;
+    private Organization organization;
     private String description;
     private String name;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
-    private UserId createdBy;
-    private UserId updatedBy;
+    private User createdBy;
+    private User updatedBy;
 
     public void initializeRole() {
         setId(new RoleId(UUID.randomUUID()));
@@ -28,7 +26,7 @@ public class Role extends AggregateRoot<RoleId> {
 
     private Role(Builder builder) {
         super.setId(builder.roleId);
-        organizationId = builder.organizationId;
+        organization = builder.Organization;
         description = builder.description;
         name = builder.name;
         createdAt = builder.createdAt;
@@ -37,8 +35,8 @@ public class Role extends AggregateRoot<RoleId> {
         updatedBy = builder.updatedBy;
     }
 
-    public OrganizationId getOrganizationId() {
-        return organizationId;
+    public Organization getOrganization() {
+        return organization;
     }
 
     public String getDescription() {
@@ -57,12 +55,40 @@ public class Role extends AggregateRoot<RoleId> {
         return updatedAt;
     }
 
-    public UserId getCreatedBy() {
+    public User getCreatedBy() {
         return createdBy;
     }
 
-    public UserId getUpdatedBy() {
+    public User getUpdatedBy() {
         return updatedBy;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCreatedAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(ZonedDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public void setUpdatedBy(User updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
     }
 
     public static Builder builder() {
@@ -70,20 +96,20 @@ public class Role extends AggregateRoot<RoleId> {
     }
 
     public static final class Builder {
-        private OrganizationId organizationId;
+        private Organization Organization;
         private String description;
         private String name;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
-        private UserId createdBy;
-        private UserId updatedBy;
+        private User createdBy;
+        private User updatedBy;
         private RoleId roleId;
 
         private Builder() {
         }
 
-        public Builder organizationId(OrganizationId val) {
-            organizationId = val;
+        public Builder organization(Organization val) {
+            Organization = val;
             return this;
         }
 
@@ -107,12 +133,12 @@ public class Role extends AggregateRoot<RoleId> {
             return this;
         }
 
-        public Builder createdBy(UserId val) {
+        public Builder createdBy(User val) {
             createdBy = val;
             return this;
         }
 
-        public Builder updatedBy(UserId val) {
+        public Builder updatedBy(User val) {
             updatedBy = val;
             return this;
         }

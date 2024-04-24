@@ -1,4 +1,47 @@
 package com.backend.programming.learning.system.course.service.dataaccess.organization.adapter;
 
-public class OrganizationRepositoryImpl {
+import com.backend.programming.learning.system.course.service.dataaccess.organization.mapper.OrganizationDataAccessMapper;
+import com.backend.programming.learning.system.course.service.dataaccess.organization.repository.OrganizationJpaRepository;
+import com.backend.programming.learning.system.dto.responseentity.organization.OrganizationResponseEntity;
+import com.backend.programming.learning.system.entity.Organization;
+import com.backend.programming.learning.system.ports.output.repository.OrganizationRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+@Component
+@RequiredArgsConstructor
+public class OrganizationRepositoryImpl implements OrganizationRepository {
+    private final OrganizationJpaRepository organizationJpaRepository;
+    private final OrganizationDataAccessMapper organizationDataAccessMapper;
+    @Override
+    public Organization saveOrganization(Organization organization) {
+        return organizationDataAccessMapper.organizationEntityToOrganization(
+                organizationJpaRepository.save(
+                        organizationDataAccessMapper.organizationToOrganizationEntity(organization)
+                )
+        );
+    }
+
+    @Override
+    public Optional<Organization> findOrganizationById(UUID organizationId) {
+        return organizationJpaRepository.findById(organizationId)
+                .map(organizationDataAccessMapper::organizationEntityToOrganization);
+    }
+
+    @Override
+    public List<OrganizationResponseEntity> findAllOrganization() {
+        return organizationDataAccessMapper.organizationEntityListToOrganizationList(
+                organizationJpaRepository.findAll()
+        );
+    }
+
+    @Override
+    public void deleteOrganizationById(UUID organizationId) {
+        organizationJpaRepository.deleteById(organizationId);
+    }
 }

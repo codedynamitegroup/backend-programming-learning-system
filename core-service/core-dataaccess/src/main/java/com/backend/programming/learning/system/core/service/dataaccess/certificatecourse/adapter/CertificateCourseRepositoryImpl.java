@@ -23,24 +23,12 @@ import java.util.UUID;
 @Component
 public class CertificateCourseRepositoryImpl implements CertificateCourseRepository {
     private final CertificateCourseJpaRepository certificateCourseJpaRepository;
-    private final CertificateCourseUserJpaRepository certificateCourseUserJpaRepository;
     private final CertificateCourseDataAccessMapper certificateCourseDataAccessMapper;
-    private final CertificateCourseUserDataAccessMapper certificateCourseUserDataAccessMapper;
-    private final TopicDataAccessMapper topicDataAccessMapper;
-    private final UserDataAccessMapper userDataAccessMapper;
 
     public CertificateCourseRepositoryImpl(CertificateCourseJpaRepository certificateCourseJpaRepository,
-                                           CertificateCourseUserJpaRepository certificateCourseUserJpaRepository,
-                                           CertificateCourseDataAccessMapper certificateCourseDataAccessMapper,
-                                           CertificateCourseUserDataAccessMapper certificateCourseUserDataAccessMapper,
-                                           TopicDataAccessMapper topicDataAccessMapper,
-                                           UserDataAccessMapper userDataAccessMapper) {
+                                           CertificateCourseDataAccessMapper certificateCourseDataAccessMapper) {
         this.certificateCourseJpaRepository = certificateCourseJpaRepository;
-        this.certificateCourseUserJpaRepository = certificateCourseUserJpaRepository;
         this.certificateCourseDataAccessMapper = certificateCourseDataAccessMapper;
-        this.certificateCourseUserDataAccessMapper = certificateCourseUserDataAccessMapper;
-        this.topicDataAccessMapper = topicDataAccessMapper;
-        this.userDataAccessMapper = userDataAccessMapper;
     }
 
     @Override
@@ -73,26 +61,5 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
     @Override
     public int deleteCertificateCourse(UUID certificateCourseId) {
         return certificateCourseJpaRepository.deleteById(true, certificateCourseId);
-    }
-
-    @Override
-    public int updateAvgRating(CertificateCourseId certificateCourseId, Float avgRating) {
-        return certificateCourseJpaRepository.updateAvgRating(avgRating, certificateCourseId.getValue());
-    }
-
-    @Override
-    public int updateCertificateCourse(CertificateCourse certificateCourse) {
-        TopicEntity topicEntity = topicDataAccessMapper.topicToTopicEntity(certificateCourse.getTopic());
-        UserEntity userEntity = userDataAccessMapper.userToUserEntity(certificateCourse.getUpdatedBy());
-        return certificateCourseJpaRepository.updateCertificateCourseById(
-                certificateCourse.getName(),
-                certificateCourse.getDescription(),
-                certificateCourse.getSkillLevel(),
-                certificateCourse.getStartTime(),
-                certificateCourse.getEndTime(),
-                topicEntity,
-                userEntity,
-                certificateCourse.getUpdatedAt(),
-                certificateCourse.getId().getValue());
     }
 }

@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.organization;
 
 import com.backend.programming.learning.system.auth.service.domain.AuthDomainService;
-import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateOrganizationCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.organization.CreateOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
@@ -34,20 +34,21 @@ public class OrganizationCreateHelper {
 
     @Transactional
     public Organization persistOrganization(CreateOrganizationCommand createOrganizationCommand) {
+        User createdBy = getUser(createOrganizationCommand.getCreatedBy());
         Organization organization = organizationDataMapper.createOrganizationCommandToOrganization(createOrganizationCommand);
-        checkUserExist(organization.getCreatedBy().getValue());
-        checkUserExist(organization.getUpdatedBy().getValue());
-
+        organization.setCreatedBy(createdBy);
+        organization.setUpdatedBy(createdBy);
         authDomainService.createOrganization(organization);
         return saveOrganization(organization);
     }
 
-    private void checkUserExist(UUID userId) {
+    private User getUser(UUID userId) {
         Optional<User> user = userRepository.findById(new UserId(userId));
         if (user.isEmpty()) {
             log.error("User with id: {} could not be found!", userId);
             throw new AuthDomainException("User with id: " + userId + " could not be found!");
         }
+        return user.get();
     }
 
     private Organization saveOrganization(Organization organization) {

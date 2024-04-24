@@ -27,7 +27,7 @@ public class CertificateCourseDeleteHelper {
         this.certificateCourseRepository = certificateCourseRepository;
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public void deleteCertificateCourseById(UUID certificateCourseId) {
         int deletedRows = certificateCourseRepository.deleteCertificateCourse(certificateCourseId);
         if (deletedRows == 0) {

@@ -5,50 +5,28 @@
   "fields": [
     {
       "name": "id",
-      "type": {
-        "type": "string",
-        "logicalType": "uuid"
-      }
+      "type": "string"
     },
     {
       "name": "sagaId",
-      "type": {
-        "type": "string",
-        "logicalType": "uuid"
-      }
+      "type": "string"
     },
     {
       "name": "userId",
-      "type": {
-        "type": "string",
-        "logicalType": "uuid"
-      }
-    },
-    {
-      "name": "avatarUrl",
       "type": "string"
     },
     {
-      "name": "createdAt",
+      "name": "userResponseStatus",
       "type": {
-        "type": "long",
-        "logicalType": "timestamp-millis"
+        "type": "enum",
+        "name": "UserResponseStatus",
+        "symbols": ["CREATED",
+          "CREATE_FAILED",
+          "UPDATED",
+          "UPDATE_FAILED",
+          "DELETED",
+          "DELETE_FAILED"]
       }
-    },
-    {
-      "name": "displayName",
-      "type": "string"
-    },
-    {
-      "name": "dob",
-      "type": {
-        "type": "long",
-        "logicalType": "timestamp-millis"
-      }
-    },
-    {
-      "name": "email",
-      "type": "string"
     },
     {
       "name": "failureMessages",
@@ -58,10 +36,6 @@
           "type": "string"
         }
       }
-    },
-    {
-      "name": "isActive",
-      "type": "boolean"
     }
   ]
 }

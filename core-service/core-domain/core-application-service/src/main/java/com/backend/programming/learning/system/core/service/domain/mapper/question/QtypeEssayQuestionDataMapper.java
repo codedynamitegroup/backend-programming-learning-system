@@ -2,14 +2,22 @@ package com.backend.programming.learning.system.core.service.domain.mapper.quest
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQtypeEssayQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryQtypeEssayQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeEssayQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeEssayQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
+import com.backend.programming.learning.system.domain.valueobject.QtypeEssayQuestionId;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
 public class QtypeEssayQuestionDataMapper {
+    private final QuestionDataMapper questionDataMapper;
+
+    public QtypeEssayQuestionDataMapper(QuestionDataMapper questionDataMapper) {
+        this.questionDataMapper = questionDataMapper;
+    }
+
     public QtypeEssayQuestion createQtypeEssayQuestionCommandToQtypeEssayQuestion(CreateQtypeEssayQuestionCommand createQtypeEssayQuestionCommand,
                                                                                   Question question) {
         return QtypeEssayQuestion.builder()
@@ -40,4 +48,31 @@ public class QtypeEssayQuestionDataMapper {
                 .map(this::qtypeEssayQuestionToQueryQtypeEssayQuestionResponse)
                 .toArray(QueryQtypeEssayQuestionResponse[]::new));
     }
+
+    public QtypeEssayQuestion updateQtypeEssayQuestionCommandToQtypeEssayQuestion(
+            UpdateQtypeEssayQuestionCommand updateQtypeEssayQuestionCommand,
+            QtypeEssayQuestion qtypeEssayQuestion) {
+
+            return QtypeEssayQuestion.builder()
+                    .id(new QtypeEssayQuestionId(updateQtypeEssayQuestionCommand.getQtEssayQuestionId()))
+                    .responseFormat(updateQtypeEssayQuestionCommand.getResponseFormat())
+                    .responseRequired(updateQtypeEssayQuestionCommand.getResponseRequired())
+                    .responseFieldLines(updateQtypeEssayQuestionCommand.getResponseFieldLines())
+                    .minWordLimit(updateQtypeEssayQuestionCommand.getMinWordLimit())
+                    .maxWordLimit(updateQtypeEssayQuestionCommand.getMaxWordLimit())
+                    .attachments(updateQtypeEssayQuestionCommand.getAttachments())
+                    .attachmentsRequired(updateQtypeEssayQuestionCommand.getAttachmentsRequired())
+                    .graderInfo(updateQtypeEssayQuestionCommand.getGraderInfo())
+                    .graderInfoFormat(updateQtypeEssayQuestionCommand.getGraderInfoFormat())
+                    .responseTemplate(updateQtypeEssayQuestionCommand.getResponseTemplate())
+                    .maxBytes(updateQtypeEssayQuestionCommand.getMaxBytes())
+                    .fileTypesList(updateQtypeEssayQuestionCommand.getFileTypesList())
+                    .question(questionDataMapper.updateQuestionEntityToQuestion(updateQtypeEssayQuestionCommand.getQuestion(),
+                            qtypeEssayQuestion.getQuestion().getId(),
+                            qtypeEssayQuestion.getQuestion().getOrganization(),
+                            qtypeEssayQuestion.getQuestion().getCreatedBy(),
+                            qtypeEssayQuestion.getQuestion().getqtype(),
+                            qtypeEssayQuestion.getQuestion().getAnswers()))
+                    .build();
+        }
 }

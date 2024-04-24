@@ -3,10 +3,7 @@ package com.backend.programming.learning.system.core.service.domain.dto.method.c
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
@@ -24,11 +21,13 @@ public class CreateQtypeEssayQuestionCommand extends CreateQuestionCommand{
     private final Integer responseFieldLines;
 
     @NotNull(message = "Min word limit is required")
-    @Size(min = 1, message = "Min word limit must be between 1 and your input number")
+    @Max(value = 1000, message = "Min word limit must be between 1 and 1000")
+    @Min(value = 1, message = "Min word limit must be between 1 and 1000")
     private final Integer minWordLimit;
 
     @NotNull(message = "Max word limit is required")
-    @Size(min = 1, message = "Max word limit must be between 1 and your input number")
+    @Max(value = 1000, message = "Max word limit must be between 1 and 1000")
+    @Min(value = 1, message = "Max word limit must be between 1 and 1000")
     private final Integer maxWordLimit;
 
     @NotNull(message = "Attachments is required")
@@ -41,7 +40,7 @@ public class CreateQtypeEssayQuestionCommand extends CreateQuestionCommand{
     private final String graderInfo;
 
     @NotNull(message = "Grader info format is required")
-    private final Integer graderInfoFormat;
+    private final String graderInfoFormat;
 
     @NotNull(message = "Response template is required")
     private final String responseTemplate;
@@ -72,7 +71,7 @@ public class CreateQtypeEssayQuestionCommand extends CreateQuestionCommand{
             Integer attachments,
             Integer attachmentsRequired,
             String graderInfo,
-            Integer graderInfoFormat,
+            String graderInfoFormat,
             String responseTemplate,
             Integer maxBytes,
             String fileTypesList) {

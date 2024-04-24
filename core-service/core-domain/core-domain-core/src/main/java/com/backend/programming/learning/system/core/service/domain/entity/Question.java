@@ -14,13 +14,14 @@ public class Question extends AggregateRoot<QuestionId> {
     private String name;
     private String questionText;
     private String generalFeedback;
-    private float defaultMark;
+    private Float defaultMark;
     private final User createdBy;
     private User updatedBy;
     private final QuestionType qtype;
     private List<String> failureMessages;
+    private List<AnswerOfQuestion> answers;
 
-    private ZonedDateTime createdAt;
+    private final ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
     private Question(Builder builder) {
@@ -37,6 +38,7 @@ public class Question extends AggregateRoot<QuestionId> {
         failureMessages = builder.failureMessages;
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
+        answers = builder.answers;
     }
 
     public static Builder builder() {
@@ -60,6 +62,10 @@ public class Question extends AggregateRoot<QuestionId> {
         }
     }
 
+    public List<AnswerOfQuestion> getAnswers() {
+        return answers;
+    }
+
     public Organization getOrganization() {
         return organization;
     }
@@ -80,7 +86,7 @@ public class Question extends AggregateRoot<QuestionId> {
         return generalFeedback;
     }
 
-    public float getDefaultMark() {
+    public Float getDefaultMark() {
         return defaultMark;
     }
 
@@ -115,15 +121,21 @@ public class Question extends AggregateRoot<QuestionId> {
         private String name;
         private String questionText;
         private String generalFeedback;
-        private float defaultMark;
+        private Float defaultMark;
         private User createdBy;
         private User updatedBy;
         private QuestionType qtype;
         private List<String> failureMessages;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
+        private List<AnswerOfQuestion> answers;
 
         private Builder() {
+        }
+
+        public Builder answers(List<AnswerOfQuestion> val) {
+            answers = val;
+            return this;
         }
 
         public Builder questionId(QuestionId val) {
@@ -156,7 +168,7 @@ public class Question extends AggregateRoot<QuestionId> {
             return this;
         }
 
-        public Builder defaultMark(float val) {
+        public Builder defaultMark(Float val) {
             defaultMark = val;
             return this;
         }

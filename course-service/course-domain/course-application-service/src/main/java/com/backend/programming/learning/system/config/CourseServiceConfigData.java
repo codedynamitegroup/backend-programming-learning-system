@@ -8,4 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "course-service")
 public class CourseServiceConfigData {
+    private String questionCreatedRequestTopicName;
+    private String questionDeletedRequestTopicName;
+    private String questionUpdatedRequestTopicName;
 }

@@ -1,7 +1,6 @@
 package com.backend.programming.learning.system.course.service.dataaccess.assignment_submission_onlinetext.entity;
 
-import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.entity.AssignmentSubmissionEntity;
-import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission_file.entity.AssignmentSubmissionFileEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.entity.SubmissionAssignmentEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,7 +12,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "assignment_submission_online_text")
+@Table(name = "submission_assignment_onlinetext")
 @Entity
 public class AssignmentSubmissionOnlineTextEntity {
 
@@ -22,8 +21,8 @@ public class AssignmentSubmissionOnlineTextEntity {
     private UUID id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "assignment_submission_id", referencedColumnName = "id")
-    private AssignmentSubmissionEntity assignmentSubmission;
+    @JoinColumn(name = "submission_assignment_id", referencedColumnName = "id")
+    private SubmissionAssignmentEntity assignmentSubmission;
 
     private String content;
 

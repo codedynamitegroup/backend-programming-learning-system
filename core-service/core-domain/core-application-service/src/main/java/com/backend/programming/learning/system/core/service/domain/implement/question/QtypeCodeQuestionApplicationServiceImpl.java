@@ -3,6 +3,8 @@ package com.backend.programming.learning.system.core.service.domain.implement.qu
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQtypeCodeQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryQtypeCodeQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeCodeQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.implement.question.handler.QtypeCodeQuestionCommandHandler;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QtypeCodeQuestionApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -35,5 +37,10 @@ public class QtypeCodeQuestionApplicationServiceImpl implements QtypeCodeQuestio
     @Override
     public List<QueryQtypeCodeQuestionResponse> queryAllQtypeCodeQuestions() {
         return qtypeCodeQuestionCommandHandler.queryAllQtypeCodeQuestion();
+    }
+
+    @Override
+    public UpdateQuestionResponse updateQtypeCodeQuestion(UpdateQtypeCodeQuestionCommand updateQtypeCodeQuestionCommand) {
+        return qtypeCodeQuestionCommandHandler.updateQtypeCodeQuestion(updateQtypeCodeQuestionCommand);
     }
 }

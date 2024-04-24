@@ -48,9 +48,8 @@ public class KafkaMessageHelper {
         return new ListenableFutureCallback<SendResult<String, T>>() {
             @Override
             public void onFailure(Throwable ex) {
-                log.error("Error while sending {} with message: {} and outbox type: {} to topic {}",
-                        avroModelName, avroModel.toString(), outboxMessage.getClass().getName(), responseTopicName, ex);
-                outboxCallback.accept(outboxMessage, OutboxStatus.FAILED);
+                log.error("Error while sending " + avroModelName +
+                        " message {} to topic {}", avroModel.toString(), responseTopicName, ex);
             }
 
             @Override
@@ -63,8 +62,6 @@ public class KafkaMessageHelper {
                         metadata.partition(),
                         metadata.offset(),
                         metadata.timestamp());
-                outboxCallback.accept(outboxMessage, OutboxStatus.COMPLETED);
-
             }
         };
     }

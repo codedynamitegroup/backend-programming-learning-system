@@ -7,6 +7,8 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryChapterCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.chapter.UpdateChapterCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.chapter.UpdateChapterResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.chapter.ChapterApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -41,5 +43,10 @@ class ChapterApplicationServiceImpl implements ChapterApplicationService {
     @Override
     public ChapterResponseEntity queryChapter(QueryChapterCommand queryChapterCommand) {
         return chapterCommandHandler.queryChapterResponse(queryChapterCommand);
+    }
+
+    @Override
+    public UpdateChapterResponse updateChapter(UpdateChapterCommand updateChapterCommand) {
+        return chapterCommandHandler.updateChapterResponse(updateChapterCommand);
     }
 }

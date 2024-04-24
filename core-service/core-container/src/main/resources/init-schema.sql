@@ -28,9 +28,12 @@ CREATE TABLE "public".user
     dob date,
     first_name character varying,
     last_name character varying,
-    avatar_url text,
+	phone character varying,
+	address character varying,
+	avatar_url text,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+	is_deleted boolean NOT NULL DEFAULT false,
     CONSTRAINT user_pkey PRIMARY KEY (id)
 );
 
@@ -115,7 +118,8 @@ CREATE TABLE "public".chapter
     CONSTRAINT chapter_updated_by_fkey FOREIGN KEY (updated_by)
         REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT chapter_certificate_course_id_no_key UNIQUE (certificate_course_id, no)
 );
 
 DROP TABLE IF EXISTS "public".certificate_course_user CASCADE;
@@ -338,7 +342,7 @@ CREATE TABLE "public".answer_of_question
     question_id uuid NOT NULL,
     feedback text,
     answer text,
-    fraction numeric(2,2) DEFAULT 0.0 NOT NULL,
+    fraction numeric(5,2) DEFAULT 0.0 NOT NULL,
     CONSTRAINT answer_of_question_pkey PRIMARY KEY (id),
     CONSTRAINT answer_of_question_question_id_fkey FOREIGN KEY (question_id)
         REFERENCES "public".question (id) MATCH SIMPLE
@@ -485,8 +489,13 @@ CREATE TABLE "public".calendar_event
     event_type notification_event_type NOT NULL,
     start_time TIMESTAMP WITH TIME ZONE NOT NULL,
     end_time TIMESTAMP WITH TIME ZONE,
+    user_id_to uuid NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT calendar_event_pkey PRIMARY KEY (id)
+    CONSTRAINT calendar_event_pkey PRIMARY KEY (id),
+    CONSTRAINT calendar_event_created_by_fkey FOREIGN KEY (user_id_to)
+        REFERENCES "public".user (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS "public".plagiarism_detection_report CASCADE;
@@ -509,5 +518,6 @@ CREATE TABLE "public".plagiarism_detection_report
     CONSTRAINT plagiarism_detection_report_question_id_fkey FOREIGN KEY (question_id)
         REFERENCES "public".question (id) MATCH SIMPLE
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT unique_plagiarism_detection_report UNIQUE (exam_id, question_id)
 );

@@ -3,6 +3,8 @@ package com.backend.programming.learning.system.core.service.application.rest.qu
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQtypeMultichoiceQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryQtypeMultichoiceQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeMultichoiceQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QtypeMultichoiceQuestionApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -50,5 +52,16 @@ public class QtypeMultichoiceQuestionController {
         log.info("Questions multichoice queried: {}", queryQtypeMultichoiceQuestionResponse);
 
         return ResponseEntity.ok(queryQtypeMultichoiceQuestionResponse);
+    }
+
+    @PutMapping
+    public ResponseEntity<UpdateQuestionResponse> updateQtypeMultichoiceQuestion(
+            @RequestBody UpdateQtypeMultichoiceQuestionCommand updateQtypeMultichoiceQuestionCommand) {
+        log.info("Updating multichoice question: {}", updateQtypeMultichoiceQuestionCommand);
+        UpdateQuestionResponse createQuestionResponse = qtypeMultichoiceQuestionApplicationService
+                .updateQtypeMultichoiceQuestion(updateQtypeMultichoiceQuestionCommand);
+        log.info("Question multichoice updated: {}", createQuestionResponse);
+
+        return ResponseEntity.ok(createQuestionResponse);
     }
 }

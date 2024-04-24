@@ -1,22 +1,18 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.user_role;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateUserRoleCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateUserRoleResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteUserRoleCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteUserRoleResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryUserRoleCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryUserRoleResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user_role.CreateUserRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user_role.CreateUserRoleResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user_role.DeleteUserRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user_role.DeleteUserRoleResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user_role.QueryUserRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user_role.UpdateUserRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user_role.UpdateUserRoleResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user_role.UserRoleEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.UserRole;
-import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
 import com.backend.programming.learning.system.auth.service.domain.mapper.UserRoleDataMapper;
-import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRoleRepository;
-import com.backend.programming.learning.system.auth.service.domain.valueobject.RoleId;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Slf4j
 @Component
@@ -25,15 +21,18 @@ public class UserRoleCommandHandler {
     private final UserRoleCreateHelper userRoleCreateHelper;
     private final UserRoleDeleteHelper userRoleDeleteHelper;
     private final UserRoleDataMapper userRoleDataMapper;
-    private final UserRoleRepository userRoleRepository;
+    private final UserRoleQueryHelper userRoleQueryHelper;
+    private final UserRoleUpdateHelper userRoleUpdateHelper;
 
-    public UserRoleCommandHandler(UserRoleCreateHelper userRoleCreateHelper, UserRoleDeleteHelper userRoleDeleteHelper, UserRoleDataMapper userRoleDataMapper, UserRoleRepository userRoleRepository) {
+    public UserRoleCommandHandler(UserRoleCreateHelper userRoleCreateHelper, UserRoleDeleteHelper userRoleDeleteHelper, UserRoleDataMapper userRoleDataMapper, UserRoleQueryHelper userRoleQueryHelper, UserRoleUpdateHelper userRoleUpdateHelper) {
         this.userRoleCreateHelper = userRoleCreateHelper;
         this.userRoleDeleteHelper = userRoleDeleteHelper;
         this.userRoleDataMapper = userRoleDataMapper;
-        this.userRoleRepository = userRoleRepository;
+        this.userRoleQueryHelper = userRoleQueryHelper;
+        this.userRoleUpdateHelper = userRoleUpdateHelper;
     }
 
+    @Transactional
     public CreateUserRoleResponse createUserRole(CreateUserRoleCommand createUserRoleCommand) {
         UserRole userRoleCreated = userRoleCreateHelper.persistUserRole(createUserRoleCommand);
         log.info("User role is created with id: {}", userRoleCreated.getId().getValue());
@@ -42,24 +41,27 @@ public class UserRoleCommandHandler {
     }
 
     @Transactional(readOnly = true)
-    public QueryUserRoleResponse queryUserRole(QueryUserRoleCommand queryUserRoleCommand) {
-        Optional<UserRole> userRoleResult =
-                userRoleRepository.findByRoleIdAndUserId(new RoleId(queryUserRoleCommand.getRoleId()), new UserId(queryUserRoleCommand.getUserId()));
-        if (userRoleResult.isEmpty()) {
-            log.warn("Could not find user role with role id: {} and user id: {}",
-                    queryUserRoleCommand.getRoleId(), queryUserRoleCommand.getUserId());
-            throw new AuthNotFoundException("Could not find user role with role id: " + queryUserRoleCommand.getRoleId() +
-                    " and user id: " + queryUserRoleCommand.getUserId());
-        }
-        return  userRoleDataMapper.userRoleToQueryUserRoleResponse(userRoleResult.get());
+    public UserRoleEntityResponse queryUserRole(QueryUserRoleCommand queryUserRoleCommand) {
+        UserRole userRole = userRoleQueryHelper.queryUserRole(queryUserRoleCommand.getRoleId(), queryUserRoleCommand.getUserId());
+        log.info("User role is queried with role id: {} and user id: {}",
+                queryUserRoleCommand.getRoleId(), queryUserRoleCommand.getUserId());
+        return userRoleDataMapper.userRoleToUserRoleResponse(userRole);
     }
 
+    @Transactional
+    public UpdateUserRoleResponse updateUserRole(UpdateUserRoleCommand updateUserRoleCommand) {
+        UserRole userRoleUpdated = userRoleUpdateHelper.persistUserRole(updateUserRoleCommand);
+        log.info("User role is updated with id: {}", userRoleUpdated.getId().getValue());
+        return userRoleDataMapper.userRoleToUpdateUserRoleResponse(userRoleUpdated,
+                "User role updated successfully");
+    }
+
+    @Transactional
     public DeleteUserRoleResponse deleteUserRole(DeleteUserRoleCommand deleteUserRoleCommand) {
         userRoleDeleteHelper.deleteUserRole(deleteUserRoleCommand);
         log.info("User role is deleted with role id: {} and user id: {}",
                 deleteUserRoleCommand.getRoleId(), deleteUserRoleCommand.getUserId());
-        return DeleteUserRoleResponse.builder()
-                .message("User role deleted successfully")
-                .build();
+        return userRoleDataMapper.deleteUserRoleResponse(deleteUserRoleCommand.getRoleId(), deleteUserRoleCommand.getUserId(),
+                "User role deleted successfully");
     }
 }

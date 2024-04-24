@@ -14,17 +14,13 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class UserResponseAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -8199526464014474335L;
+  private static final long serialVersionUID = -4163593139756758074L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserResponseAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"avatarUrl\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"displayName\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"dob\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"email\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}},{\"name\":\"isActive\",\"type\":\"boolean\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserResponseAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"userResponseStatus\",\"type\":{\"type\":\"enum\",\"name\":\"UserResponseStatus\",\"symbols\":[\"CREATED\",\"CREATE_FAILED\",\"UPDATED\",\"UPDATE_FAILED\",\"DELETED\",\"DELETE_FAILED\"]}},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
-  static {
-    MODEL$.addLogicalTypeConversion(new org.apache.avro.Conversions.UUIDConversion());
-    MODEL$.addLogicalTypeConversion(new org.apache.avro.data.TimeConversions.TimestampMillisConversion());
-  }
 
   private static final BinaryMessageEncoder<UserResponseAvroModel> ENCODER =
       new BinaryMessageEncoder<>(MODEL$, SCHEMA$);
@@ -77,16 +73,11 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
     return DECODER.decode(b);
   }
 
-  private java.util.UUID id;
-  private java.util.UUID sagaId;
-  private java.util.UUID userId;
-  private java.lang.String avatarUrl;
-  private java.time.Instant createdAt;
-  private java.lang.String displayName;
-  private java.time.Instant dob;
-  private java.lang.String email;
+  private java.lang.String id;
+  private java.lang.String sagaId;
+  private java.lang.String userId;
+  private com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseStatus userResponseStatus;
   private java.util.List<java.lang.String> failureMessages;
-  private boolean isActive;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -100,25 +91,15 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
    * @param id The new value for id
    * @param sagaId The new value for sagaId
    * @param userId The new value for userId
-   * @param avatarUrl The new value for avatarUrl
-   * @param createdAt The new value for createdAt
-   * @param displayName The new value for displayName
-   * @param dob The new value for dob
-   * @param email The new value for email
+   * @param userResponseStatus The new value for userResponseStatus
    * @param failureMessages The new value for failureMessages
-   * @param isActive The new value for isActive
    */
-  public UserResponseAvroModel(java.util.UUID id, java.util.UUID sagaId, java.util.UUID userId, java.lang.String avatarUrl, java.time.Instant createdAt, java.lang.String displayName, java.time.Instant dob, java.lang.String email, java.util.List<java.lang.String> failureMessages, java.lang.Boolean isActive) {
+  public UserResponseAvroModel(java.lang.String id, java.lang.String sagaId, java.lang.String userId, com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseStatus userResponseStatus, java.util.List<java.lang.String> failureMessages) {
     this.id = id;
     this.sagaId = sagaId;
     this.userId = userId;
-    this.avatarUrl = avatarUrl;
-    this.createdAt = createdAt.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
-    this.displayName = displayName;
-    this.dob = dob.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
-    this.email = email;
+    this.userResponseStatus = userResponseStatus;
     this.failureMessages = failureMessages;
-    this.isActive = isActive;
   }
 
   @Override
@@ -134,35 +115,10 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
     case 0: return id;
     case 1: return sagaId;
     case 2: return userId;
-    case 3: return avatarUrl;
-    case 4: return createdAt;
-    case 5: return displayName;
-    case 6: return dob;
-    case 7: return email;
-    case 8: return failureMessages;
-    case 9: return isActive;
+    case 3: return userResponseStatus;
+    case 4: return failureMessages;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
-  }
-
-  private static final org.apache.avro.Conversion<?>[] conversions =
-      new org.apache.avro.Conversion<?>[] {
-      new org.apache.avro.Conversions.UUIDConversion(),
-      new org.apache.avro.Conversions.UUIDConversion(),
-      new org.apache.avro.Conversions.UUIDConversion(),
-      null,
-      new org.apache.avro.data.TimeConversions.TimestampMillisConversion(),
-      null,
-      new org.apache.avro.data.TimeConversions.TimestampMillisConversion(),
-      null,
-      null,
-      null,
-      null
-  };
-
-  @Override
-  public org.apache.avro.Conversion<?> getConversion(int field) {
-    return conversions[field];
   }
 
   // Used by DatumReader.  Applications should not call.
@@ -170,16 +126,11 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: id = (java.util.UUID)value$; break;
-    case 1: sagaId = (java.util.UUID)value$; break;
-    case 2: userId = (java.util.UUID)value$; break;
-    case 3: avatarUrl = value$ != null ? value$.toString() : null; break;
-    case 4: createdAt = (java.time.Instant)value$; break;
-    case 5: displayName = value$ != null ? value$.toString() : null; break;
-    case 6: dob = (java.time.Instant)value$; break;
-    case 7: email = value$ != null ? value$.toString() : null; break;
-    case 8: failureMessages = (java.util.List<java.lang.String>)value$; break;
-    case 9: isActive = (java.lang.Boolean)value$; break;
+    case 0: id = value$ != null ? value$.toString() : null; break;
+    case 1: sagaId = value$ != null ? value$.toString() : null; break;
+    case 2: userId = value$ != null ? value$.toString() : null; break;
+    case 3: userResponseStatus = (com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseStatus)value$; break;
+    case 4: failureMessages = (java.util.List<java.lang.String>)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -188,7 +139,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
    * Gets the value of the 'id' field.
    * @return The value of the 'id' field.
    */
-  public java.util.UUID getId() {
+  public java.lang.String getId() {
     return id;
   }
 
@@ -197,7 +148,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
    * Sets the value of the 'id' field.
    * @param value the value to set.
    */
-  public void setId(java.util.UUID value) {
+  public void setId(java.lang.String value) {
     this.id = value;
   }
 
@@ -205,7 +156,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
    * Gets the value of the 'sagaId' field.
    * @return The value of the 'sagaId' field.
    */
-  public java.util.UUID getSagaId() {
+  public java.lang.String getSagaId() {
     return sagaId;
   }
 
@@ -214,7 +165,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
    * Sets the value of the 'sagaId' field.
    * @param value the value to set.
    */
-  public void setSagaId(java.util.UUID value) {
+  public void setSagaId(java.lang.String value) {
     this.sagaId = value;
   }
 
@@ -222,7 +173,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
    * Gets the value of the 'userId' field.
    * @return The value of the 'userId' field.
    */
-  public java.util.UUID getUserId() {
+  public java.lang.String getUserId() {
     return userId;
   }
 
@@ -231,93 +182,25 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
    * Sets the value of the 'userId' field.
    * @param value the value to set.
    */
-  public void setUserId(java.util.UUID value) {
+  public void setUserId(java.lang.String value) {
     this.userId = value;
   }
 
   /**
-   * Gets the value of the 'avatarUrl' field.
-   * @return The value of the 'avatarUrl' field.
+   * Gets the value of the 'userResponseStatus' field.
+   * @return The value of the 'userResponseStatus' field.
    */
-  public java.lang.String getAvatarUrl() {
-    return avatarUrl;
+  public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseStatus getUserResponseStatus() {
+    return userResponseStatus;
   }
 
 
   /**
-   * Sets the value of the 'avatarUrl' field.
+   * Sets the value of the 'userResponseStatus' field.
    * @param value the value to set.
    */
-  public void setAvatarUrl(java.lang.String value) {
-    this.avatarUrl = value;
-  }
-
-  /**
-   * Gets the value of the 'createdAt' field.
-   * @return The value of the 'createdAt' field.
-   */
-  public java.time.Instant getCreatedAt() {
-    return createdAt;
-  }
-
-
-  /**
-   * Sets the value of the 'createdAt' field.
-   * @param value the value to set.
-   */
-  public void setCreatedAt(java.time.Instant value) {
-    this.createdAt = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
-  }
-
-  /**
-   * Gets the value of the 'displayName' field.
-   * @return The value of the 'displayName' field.
-   */
-  public java.lang.String getDisplayName() {
-    return displayName;
-  }
-
-
-  /**
-   * Sets the value of the 'displayName' field.
-   * @param value the value to set.
-   */
-  public void setDisplayName(java.lang.String value) {
-    this.displayName = value;
-  }
-
-  /**
-   * Gets the value of the 'dob' field.
-   * @return The value of the 'dob' field.
-   */
-  public java.time.Instant getDob() {
-    return dob;
-  }
-
-
-  /**
-   * Sets the value of the 'dob' field.
-   * @param value the value to set.
-   */
-  public void setDob(java.time.Instant value) {
-    this.dob = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
-  }
-
-  /**
-   * Gets the value of the 'email' field.
-   * @return The value of the 'email' field.
-   */
-  public java.lang.String getEmail() {
-    return email;
-  }
-
-
-  /**
-   * Sets the value of the 'email' field.
-   * @param value the value to set.
-   */
-  public void setEmail(java.lang.String value) {
-    this.email = value;
+  public void setUserResponseStatus(com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseStatus value) {
+    this.userResponseStatus = value;
   }
 
   /**
@@ -335,23 +218,6 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
    */
   public void setFailureMessages(java.util.List<java.lang.String> value) {
     this.failureMessages = value;
-  }
-
-  /**
-   * Gets the value of the 'isActive' field.
-   * @return The value of the 'isActive' field.
-   */
-  public boolean getIsActive() {
-    return isActive;
-  }
-
-
-  /**
-   * Sets the value of the 'isActive' field.
-   * @param value the value to set.
-   */
-  public void setIsActive(boolean value) {
-    this.isActive = value;
   }
 
   /**
@@ -395,16 +261,11 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<UserResponseAvroModel>
     implements org.apache.avro.data.RecordBuilder<UserResponseAvroModel> {
 
-    private java.util.UUID id;
-    private java.util.UUID sagaId;
-    private java.util.UUID userId;
-    private java.lang.String avatarUrl;
-    private java.time.Instant createdAt;
-    private java.lang.String displayName;
-    private java.time.Instant dob;
-    private java.lang.String email;
+    private java.lang.String id;
+    private java.lang.String sagaId;
+    private java.lang.String userId;
+    private com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseStatus userResponseStatus;
     private java.util.List<java.lang.String> failureMessages;
-    private boolean isActive;
 
     /** Creates a new Builder */
     private Builder() {
@@ -429,33 +290,13 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
         this.userId = data().deepCopy(fields()[2].schema(), other.userId);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
-      if (isValidValue(fields()[3], other.avatarUrl)) {
-        this.avatarUrl = data().deepCopy(fields()[3].schema(), other.avatarUrl);
+      if (isValidValue(fields()[3], other.userResponseStatus)) {
+        this.userResponseStatus = data().deepCopy(fields()[3].schema(), other.userResponseStatus);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
-      if (isValidValue(fields()[4], other.createdAt)) {
-        this.createdAt = data().deepCopy(fields()[4].schema(), other.createdAt);
+      if (isValidValue(fields()[4], other.failureMessages)) {
+        this.failureMessages = data().deepCopy(fields()[4].schema(), other.failureMessages);
         fieldSetFlags()[4] = other.fieldSetFlags()[4];
-      }
-      if (isValidValue(fields()[5], other.displayName)) {
-        this.displayName = data().deepCopy(fields()[5].schema(), other.displayName);
-        fieldSetFlags()[5] = other.fieldSetFlags()[5];
-      }
-      if (isValidValue(fields()[6], other.dob)) {
-        this.dob = data().deepCopy(fields()[6].schema(), other.dob);
-        fieldSetFlags()[6] = other.fieldSetFlags()[6];
-      }
-      if (isValidValue(fields()[7], other.email)) {
-        this.email = data().deepCopy(fields()[7].schema(), other.email);
-        fieldSetFlags()[7] = other.fieldSetFlags()[7];
-      }
-      if (isValidValue(fields()[8], other.failureMessages)) {
-        this.failureMessages = data().deepCopy(fields()[8].schema(), other.failureMessages);
-        fieldSetFlags()[8] = other.fieldSetFlags()[8];
-      }
-      if (isValidValue(fields()[9], other.isActive)) {
-        this.isActive = data().deepCopy(fields()[9].schema(), other.isActive);
-        fieldSetFlags()[9] = other.fieldSetFlags()[9];
       }
     }
 
@@ -477,33 +318,13 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
         this.userId = data().deepCopy(fields()[2].schema(), other.userId);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.avatarUrl)) {
-        this.avatarUrl = data().deepCopy(fields()[3].schema(), other.avatarUrl);
+      if (isValidValue(fields()[3], other.userResponseStatus)) {
+        this.userResponseStatus = data().deepCopy(fields()[3].schema(), other.userResponseStatus);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.createdAt)) {
-        this.createdAt = data().deepCopy(fields()[4].schema(), other.createdAt);
+      if (isValidValue(fields()[4], other.failureMessages)) {
+        this.failureMessages = data().deepCopy(fields()[4].schema(), other.failureMessages);
         fieldSetFlags()[4] = true;
-      }
-      if (isValidValue(fields()[5], other.displayName)) {
-        this.displayName = data().deepCopy(fields()[5].schema(), other.displayName);
-        fieldSetFlags()[5] = true;
-      }
-      if (isValidValue(fields()[6], other.dob)) {
-        this.dob = data().deepCopy(fields()[6].schema(), other.dob);
-        fieldSetFlags()[6] = true;
-      }
-      if (isValidValue(fields()[7], other.email)) {
-        this.email = data().deepCopy(fields()[7].schema(), other.email);
-        fieldSetFlags()[7] = true;
-      }
-      if (isValidValue(fields()[8], other.failureMessages)) {
-        this.failureMessages = data().deepCopy(fields()[8].schema(), other.failureMessages);
-        fieldSetFlags()[8] = true;
-      }
-      if (isValidValue(fields()[9], other.isActive)) {
-        this.isActive = data().deepCopy(fields()[9].schema(), other.isActive);
-        fieldSetFlags()[9] = true;
       }
     }
 
@@ -511,7 +332,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
       * Gets the value of the 'id' field.
       * @return The value.
       */
-    public java.util.UUID getId() {
+    public java.lang.String getId() {
       return id;
     }
 
@@ -521,7 +342,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder setId(java.util.UUID value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder setId(java.lang.String value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -551,7 +372,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
       * Gets the value of the 'sagaId' field.
       * @return The value.
       */
-    public java.util.UUID getSagaId() {
+    public java.lang.String getSagaId() {
       return sagaId;
     }
 
@@ -561,7 +382,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
       * @param value The value of 'sagaId'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder setSagaId(java.util.UUID value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder setSagaId(java.lang.String value) {
       validate(fields()[1], value);
       this.sagaId = value;
       fieldSetFlags()[1] = true;
@@ -591,7 +412,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
       * Gets the value of the 'userId' field.
       * @return The value.
       */
-    public java.util.UUID getUserId() {
+    public java.lang.String getUserId() {
       return userId;
     }
 
@@ -601,7 +422,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
       * @param value The value of 'userId'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder setUserId(java.util.UUID value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder setUserId(java.lang.String value) {
       validate(fields()[2], value);
       this.userId = value;
       fieldSetFlags()[2] = true;
@@ -628,200 +449,42 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
     }
 
     /**
-      * Gets the value of the 'avatarUrl' field.
+      * Gets the value of the 'userResponseStatus' field.
       * @return The value.
       */
-    public java.lang.String getAvatarUrl() {
-      return avatarUrl;
+    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseStatus getUserResponseStatus() {
+      return userResponseStatus;
     }
 
 
     /**
-      * Sets the value of the 'avatarUrl' field.
-      * @param value The value of 'avatarUrl'.
+      * Sets the value of the 'userResponseStatus' field.
+      * @param value The value of 'userResponseStatus'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder setAvatarUrl(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder setUserResponseStatus(com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseStatus value) {
       validate(fields()[3], value);
-      this.avatarUrl = value;
+      this.userResponseStatus = value;
       fieldSetFlags()[3] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'avatarUrl' field has been set.
-      * @return True if the 'avatarUrl' field has been set, false otherwise.
+      * Checks whether the 'userResponseStatus' field has been set.
+      * @return True if the 'userResponseStatus' field has been set, false otherwise.
       */
-    public boolean hasAvatarUrl() {
+    public boolean hasUserResponseStatus() {
       return fieldSetFlags()[3];
     }
 
 
     /**
-      * Clears the value of the 'avatarUrl' field.
+      * Clears the value of the 'userResponseStatus' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder clearAvatarUrl() {
-      avatarUrl = null;
+    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder clearUserResponseStatus() {
+      userResponseStatus = null;
       fieldSetFlags()[3] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'createdAt' field.
-      * @return The value.
-      */
-    public java.time.Instant getCreatedAt() {
-      return createdAt;
-    }
-
-
-    /**
-      * Sets the value of the 'createdAt' field.
-      * @param value The value of 'createdAt'.
-      * @return This builder.
-      */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder setCreatedAt(java.time.Instant value) {
-      validate(fields()[4], value);
-      this.createdAt = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
-      fieldSetFlags()[4] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'createdAt' field has been set.
-      * @return True if the 'createdAt' field has been set, false otherwise.
-      */
-    public boolean hasCreatedAt() {
-      return fieldSetFlags()[4];
-    }
-
-
-    /**
-      * Clears the value of the 'createdAt' field.
-      * @return This builder.
-      */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder clearCreatedAt() {
-      fieldSetFlags()[4] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'displayName' field.
-      * @return The value.
-      */
-    public java.lang.String getDisplayName() {
-      return displayName;
-    }
-
-
-    /**
-      * Sets the value of the 'displayName' field.
-      * @param value The value of 'displayName'.
-      * @return This builder.
-      */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder setDisplayName(java.lang.String value) {
-      validate(fields()[5], value);
-      this.displayName = value;
-      fieldSetFlags()[5] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'displayName' field has been set.
-      * @return True if the 'displayName' field has been set, false otherwise.
-      */
-    public boolean hasDisplayName() {
-      return fieldSetFlags()[5];
-    }
-
-
-    /**
-      * Clears the value of the 'displayName' field.
-      * @return This builder.
-      */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder clearDisplayName() {
-      displayName = null;
-      fieldSetFlags()[5] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'dob' field.
-      * @return The value.
-      */
-    public java.time.Instant getDob() {
-      return dob;
-    }
-
-
-    /**
-      * Sets the value of the 'dob' field.
-      * @param value The value of 'dob'.
-      * @return This builder.
-      */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder setDob(java.time.Instant value) {
-      validate(fields()[6], value);
-      this.dob = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
-      fieldSetFlags()[6] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'dob' field has been set.
-      * @return True if the 'dob' field has been set, false otherwise.
-      */
-    public boolean hasDob() {
-      return fieldSetFlags()[6];
-    }
-
-
-    /**
-      * Clears the value of the 'dob' field.
-      * @return This builder.
-      */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder clearDob() {
-      fieldSetFlags()[6] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'email' field.
-      * @return The value.
-      */
-    public java.lang.String getEmail() {
-      return email;
-    }
-
-
-    /**
-      * Sets the value of the 'email' field.
-      * @param value The value of 'email'.
-      * @return This builder.
-      */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder setEmail(java.lang.String value) {
-      validate(fields()[7], value);
-      this.email = value;
-      fieldSetFlags()[7] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'email' field has been set.
-      * @return True if the 'email' field has been set, false otherwise.
-      */
-    public boolean hasEmail() {
-      return fieldSetFlags()[7];
-    }
-
-
-    /**
-      * Clears the value of the 'email' field.
-      * @return This builder.
-      */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder clearEmail() {
-      email = null;
-      fieldSetFlags()[7] = false;
       return this;
     }
 
@@ -840,9 +503,9 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder setFailureMessages(java.util.List<java.lang.String> value) {
-      validate(fields()[8], value);
+      validate(fields()[4], value);
       this.failureMessages = value;
-      fieldSetFlags()[8] = true;
+      fieldSetFlags()[4] = true;
       return this;
     }
 
@@ -851,7 +514,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
       * @return True if the 'failureMessages' field has been set, false otherwise.
       */
     public boolean hasFailureMessages() {
-      return fieldSetFlags()[8];
+      return fieldSetFlags()[4];
     }
 
 
@@ -861,46 +524,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
       */
     public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder clearFailureMessages() {
       failureMessages = null;
-      fieldSetFlags()[8] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'isActive' field.
-      * @return The value.
-      */
-    public boolean getIsActive() {
-      return isActive;
-    }
-
-
-    /**
-      * Sets the value of the 'isActive' field.
-      * @param value The value of 'isActive'.
-      * @return This builder.
-      */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder setIsActive(boolean value) {
-      validate(fields()[9], value);
-      this.isActive = value;
-      fieldSetFlags()[9] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'isActive' field has been set.
-      * @return True if the 'isActive' field has been set, false otherwise.
-      */
-    public boolean hasIsActive() {
-      return fieldSetFlags()[9];
-    }
-
-
-    /**
-      * Clears the value of the 'isActive' field.
-      * @return This builder.
-      */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseAvroModel.Builder clearIsActive() {
-      fieldSetFlags()[9] = false;
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -909,16 +533,11 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
     public UserResponseAvroModel build() {
       try {
         UserResponseAvroModel record = new UserResponseAvroModel();
-        record.id = fieldSetFlags()[0] ? this.id : (java.util.UUID) defaultValue(fields()[0]);
-        record.sagaId = fieldSetFlags()[1] ? this.sagaId : (java.util.UUID) defaultValue(fields()[1]);
-        record.userId = fieldSetFlags()[2] ? this.userId : (java.util.UUID) defaultValue(fields()[2]);
-        record.avatarUrl = fieldSetFlags()[3] ? this.avatarUrl : (java.lang.String) defaultValue(fields()[3]);
-        record.createdAt = fieldSetFlags()[4] ? this.createdAt : (java.time.Instant) defaultValue(fields()[4]);
-        record.displayName = fieldSetFlags()[5] ? this.displayName : (java.lang.String) defaultValue(fields()[5]);
-        record.dob = fieldSetFlags()[6] ? this.dob : (java.time.Instant) defaultValue(fields()[6]);
-        record.email = fieldSetFlags()[7] ? this.email : (java.lang.String) defaultValue(fields()[7]);
-        record.failureMessages = fieldSetFlags()[8] ? this.failureMessages : (java.util.List<java.lang.String>) defaultValue(fields()[8]);
-        record.isActive = fieldSetFlags()[9] ? this.isActive : (java.lang.Boolean) defaultValue(fields()[9]);
+        record.id = fieldSetFlags()[0] ? this.id : (java.lang.String) defaultValue(fields()[0]);
+        record.sagaId = fieldSetFlags()[1] ? this.sagaId : (java.lang.String) defaultValue(fields()[1]);
+        record.userId = fieldSetFlags()[2] ? this.userId : (java.lang.String) defaultValue(fields()[2]);
+        record.userResponseStatus = fieldSetFlags()[3] ? this.userResponseStatus : (com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseStatus) defaultValue(fields()[3]);
+        record.failureMessages = fieldSetFlags()[4] ? this.failureMessages : (java.util.List<java.lang.String>) defaultValue(fields()[4]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -946,6 +565,104 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
     READER$.read(this, SpecificData.getDecoder(in));
   }
 
+  @Override protected boolean hasCustomCoders() { return true; }
+
+  @Override public void customEncode(org.apache.avro.io.Encoder out)
+    throws java.io.IOException
+  {
+    out.writeString(this.id);
+
+    out.writeString(this.sagaId);
+
+    out.writeString(this.userId);
+
+    out.writeEnum(this.userResponseStatus.ordinal());
+
+    long size0 = this.failureMessages.size();
+    out.writeArrayStart();
+    out.setItemCount(size0);
+    long actualSize0 = 0;
+    for (java.lang.String e0: this.failureMessages) {
+      actualSize0++;
+      out.startItem();
+      out.writeString(e0);
+    }
+    out.writeArrayEnd();
+    if (actualSize0 != size0)
+      throw new java.util.ConcurrentModificationException("Array-size written was " + size0 + ", but element count was " + actualSize0 + ".");
+
+  }
+
+  @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
+    throws java.io.IOException
+  {
+    org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
+    if (fieldOrder == null) {
+      this.id = in.readString();
+
+      this.sagaId = in.readString();
+
+      this.userId = in.readString();
+
+      this.userResponseStatus = com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseStatus.values()[in.readEnum()];
+
+      long size0 = in.readArrayStart();
+      java.util.List<java.lang.String> a0 = this.failureMessages;
+      if (a0 == null) {
+        a0 = new SpecificData.Array<java.lang.String>((int)size0, SCHEMA$.getField("failureMessages").schema());
+        this.failureMessages = a0;
+      } else a0.clear();
+      SpecificData.Array<java.lang.String> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.String>)a0 : null);
+      for ( ; 0 < size0; size0 = in.arrayNext()) {
+        for ( ; size0 != 0; size0--) {
+          java.lang.String e0 = (ga0 != null ? ga0.peek() : null);
+          e0 = in.readString();
+          a0.add(e0);
+        }
+      }
+
+    } else {
+      for (int i = 0; i < 5; i++) {
+        switch (fieldOrder[i].pos()) {
+        case 0:
+          this.id = in.readString();
+          break;
+
+        case 1:
+          this.sagaId = in.readString();
+          break;
+
+        case 2:
+          this.userId = in.readString();
+          break;
+
+        case 3:
+          this.userResponseStatus = com.backend.programming.learning.system.kafka.auth.avro.model.UserResponseStatus.values()[in.readEnum()];
+          break;
+
+        case 4:
+          long size0 = in.readArrayStart();
+          java.util.List<java.lang.String> a0 = this.failureMessages;
+          if (a0 == null) {
+            a0 = new SpecificData.Array<java.lang.String>((int)size0, SCHEMA$.getField("failureMessages").schema());
+            this.failureMessages = a0;
+          } else a0.clear();
+          SpecificData.Array<java.lang.String> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.String>)a0 : null);
+          for ( ; 0 < size0; size0 = in.arrayNext()) {
+            for ( ; size0 != 0; size0--) {
+              java.lang.String e0 = (ga0 != null ? ga0.peek() : null);
+              e0 = in.readString();
+              a0.add(e0);
+            }
+          }
+          break;
+
+        default:
+          throw new java.io.IOException("Corrupt ResolvingDecoder.");
+        }
+      }
+    }
+  }
 }
 
 

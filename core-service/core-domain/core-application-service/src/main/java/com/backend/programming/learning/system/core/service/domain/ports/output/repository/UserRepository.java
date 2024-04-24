@@ -8,5 +8,5 @@ import java.util.UUID;
 public interface UserRepository {
     Optional<User> findUser(UUID userId);
     Optional<User> findUserByEmail(String email);
-    Optional<User> findUserInformation(User user);
+    User save(User user);
 }

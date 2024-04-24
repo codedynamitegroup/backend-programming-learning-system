@@ -3,6 +3,8 @@ package com.backend.programming.learning.system.core.service.application.rest.qu
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQtypeCodeQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryQtypeCodeQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeCodeQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QtypeCodeQuestionApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -50,5 +52,16 @@ public class QtypeCodeQuestionController {
         log.info("Code questions retrieved: {}", queryQuestionResponse);
 
         return ResponseEntity.ok(queryQuestionResponse);
+    }
+
+    @PutMapping
+    public ResponseEntity<UpdateQuestionResponse> updateQtypeCodeQuestion(
+            @RequestBody UpdateQtypeCodeQuestionCommand updateQtypeCodeQuestionCommand) {
+        log.info("Updating code question: {}", updateQtypeCodeQuestionCommand);
+        UpdateQuestionResponse updateQuestionResponse = qtypeCodeQuestionApplicationService
+                .updateQtypeCodeQuestion(updateQtypeCodeQuestionCommand);
+        log.info("Code question updated: {}", updateQuestionResponse);
+
+        return ResponseEntity.ok(updateQuestionResponse);
     }
 }

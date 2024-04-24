@@ -14,4 +14,7 @@ public interface QuestionRepository {
     List<QuestionResponseEntity> findAllQuestion();
     void deleteQuestion(UUID id);
     QuestionType getQtype(UUID id);
+
+    // Update Question and Answer of Question
+    void updateQuestion(Question question);
 }

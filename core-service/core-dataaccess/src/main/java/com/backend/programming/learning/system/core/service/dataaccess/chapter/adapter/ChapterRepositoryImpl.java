@@ -4,6 +4,8 @@ import com.backend.programming.learning.system.core.service.dataaccess.certifica
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.repository.CertificateCourseJpaRepository;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter.mapper.ChapterDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter.repository.ChapterJpaRepository;
+import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseRepository;

@@ -4,14 +4,15 @@ import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 public class Organization extends AggregateRoot<OrganizationId> {
-    private final String name;
-    private final String description;
-    private final String moodleUrl;
-    private final String apiKey;
-    private final ZonedDateTime createdAt;
-    private final ZonedDateTime updatedAt;
+    private String name;
+    private String description;
+    private String moodleUrl;
+    private String apiKey;
+    private ZonedDateTime createdAt;
+    private ZonedDateTime updatedAt;
 
     private Organization(Builder builder) {
         super.setId(builder.organizationId);
@@ -22,6 +23,7 @@ public class Organization extends AggregateRoot<OrganizationId> {
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
     }
+
 
     public static Builder builder() {
         return new Builder();
@@ -51,6 +53,33 @@ public class Organization extends AggregateRoot<OrganizationId> {
         return updatedAt;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setMoodleUrl(String moodleUrl) {
+        this.moodleUrl = moodleUrl;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
+
+    public void setCreatedAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(ZonedDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public void initializeOrganization() {
+        setId(new OrganizationId(UUID.randomUUID()));
+    }
 
     public static final class Builder {
         private OrganizationId organizationId;

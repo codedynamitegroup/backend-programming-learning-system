@@ -16,7 +16,6 @@ import java.util.UUID;
 public class NotificationResponseEntity {
     @NotNull
     private final UUID notificationId;
-    @NotNull
     private final UserResponseEntity userFrom;
     @NotNull
     private final UserResponseEntity userTo;
@@ -30,16 +29,13 @@ public class NotificationResponseEntity {
     private final String component;
     @NotNull
     private final NotificationEventType eventType;
-    @NotNull
     private final String contextUrl;
-    @NotNull
     private final String contextUrlName;
     @NotNull
     private final Boolean isRead;
+    private final String timeRead;
     @NotNull
-    private final ZonedDateTime timeRead;
+    private final String createdAt;
     @NotNull
-    private final ZonedDateTime createdAt;
-    @NotNull
-    private final ZonedDateTime updatedAt;
+    private final String updatedAt;
 }

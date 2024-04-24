@@ -26,22 +26,6 @@
         </dependency>
         <dependency>
             <groupId>com.backend.programming.learning.system</groupId>
-            <artifactId>auth-domain-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.backend.programming.learning.system</groupId>
-            <artifactId>course-domain-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.backend.programming.learning.system</groupId>
-            <artifactId>core-domain-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.backend.programming.learning.system</groupId>
-            <artifactId>code-assessment-domain-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.backend.programming.learning.system</groupId>
             <artifactId>common-domain</artifactId>
         </dependency>
         <dependency>

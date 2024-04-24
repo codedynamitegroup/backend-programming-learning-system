@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.course.service.dataaccess.organization.entity;
 
-import com.backend.programming.learning.system.course.service.dataaccess.exam_submission.entity.ExamSubmissionEntity;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -17,7 +16,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "organization")
+@Table(name = "organization", schema = "public")
 public class OrganizationEntity {
     @Id
     @Column(name = "id")

@@ -1,13 +1,9 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.organization;
 
 import com.backend.programming.learning.system.auth.service.domain.AuthDomainService;
-import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateOrganizationCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteOrganizationCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteOrganizationResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.organization.DeleteOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
-import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
-import com.backend.programming.learning.system.auth.service.domain.mapper.OrganizationDataMapper;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.OrganizationRepository;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import lombok.extern.slf4j.Slf4j;
@@ -38,11 +34,6 @@ public class OrganizationDeleteHelper {
         }
 
         Organization organization = organizationResult.get();
-        if (Boolean.TRUE.equals(organization.getDeleted())) {
-            log.warn("Organization with id: {} is already deleted", deleteOrganizationCommand.getOrganizationId());
-            throw new AuthNotFoundException("Organization with id: " + deleteOrganizationCommand.getOrganizationId() +
-                    " is already deleted");
-        }
 
         authDomainService.deleteOrganization(organization);
         organizationRepository.save(organization);

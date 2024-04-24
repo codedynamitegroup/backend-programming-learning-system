@@ -1,7 +1,8 @@
 package com.backend.programming.learning.system.course.service.dataaccess.assignment.entity;
 
-import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.entity.AssignmentSubmissionEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.entity.SubmissionAssignmentEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
+import com.backend.programming.learning.system.valueobject.Type;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,9 +24,9 @@ public class AssignmentEntity {
     private UUID id;
 
     @OneToMany(mappedBy = "assignment")
-    private List<AssignmentSubmissionEntity> assignmentSubmissions;
+    private List<SubmissionAssignmentEntity> assignmentSubmissions;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     private CourseEntity course;
     private String title;
@@ -35,7 +36,8 @@ public class AssignmentEntity {
     private ZonedDateTime timeOpen;
     private ZonedDateTime timeClose;
     private ZonedDateTime timeLimit;
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private Type type;
     private Boolean visible;
 
     @Override

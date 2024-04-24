@@ -25,8 +25,8 @@ public class ProgrammingLanguageEntity {
     private Float timeLimit;
     private Float memoryLimit;
 
-    @OneToMany(mappedBy = "programmingLanguage", cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
-    private List<TopicProgrammingLanguageEntity> topicProgrammingLanguages;
+//    @OneToMany(mappedBy = "programmingLanguage", cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+//    private List<TopicProgrammingLanguageEntity> topicProgrammingLanguages;
 
     @Override
     public boolean equals(Object o) {

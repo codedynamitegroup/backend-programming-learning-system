@@ -2,14 +2,22 @@ package com.backend.programming.learning.system.core.service.domain.mapper.quest
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQtypeShortanswerQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryQtypeShortanswerQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeShortanswerQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeShortAnswerQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
+import com.backend.programming.learning.system.domain.valueobject.QtypeShortAnswerQuestionId;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
 public class QtypeShortanswerQuestionDataMapper {
+    private final QuestionDataMapper questionDataMapper;
+
+    public QtypeShortanswerQuestionDataMapper(QuestionDataMapper questionDataMapper) {
+        this.questionDataMapper = questionDataMapper;
+    }
+
         public QtypeShortAnswerQuestion createQuestionCommandToQtypeShortAnswerQuestion(CreateQtypeShortanswerQuestionCommand createQtypeShortanswerQuestionCommand,
                                                                                         Question question) {
             return QtypeShortAnswerQuestion.builder()
@@ -28,5 +36,21 @@ public class QtypeShortanswerQuestionDataMapper {
         return List.of(qtypeShortanswerQuestions.stream()
                 .map(this::qtypeShortanswerQuestionToQueryQtypeShortanswerQuestionResponse)
                 .toArray(QueryQtypeShortanswerQuestionResponse[]::new));
+    }
+
+    public QtypeShortAnswerQuestion updateQtypeShortanswerQuestionCommandToQtypeShortAnswerQuestion(
+            UpdateQtypeShortanswerQuestionCommand updateQtypeShortanswerQuestionCommand,
+            QtypeShortAnswerQuestion qtypeShortAnswerQuestion) {
+        return QtypeShortAnswerQuestion.builder()
+                .id(new QtypeShortAnswerQuestionId(updateQtypeShortanswerQuestionCommand.getQtShortanswerQuestionId()))
+                .caseSensitive(updateQtypeShortanswerQuestionCommand.getCaseSensitive())
+                .question(questionDataMapper
+                        .updateQuestionEntityToQuestion(updateQtypeShortanswerQuestionCommand.getQuestion(),
+                                qtypeShortAnswerQuestion.getQuestion().getId(),
+                                qtypeShortAnswerQuestion.getQuestion().getOrganization(),
+                                qtypeShortAnswerQuestion.getQuestion().getCreatedBy(),
+                                qtypeShortAnswerQuestion.getQuestion().getqtype(),
+                                qtypeShortAnswerQuestion.getQuestion().getAnswers()))
+                .build();
     }
 }

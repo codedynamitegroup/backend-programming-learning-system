@@ -1,8 +1,6 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.user_role;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteRoleCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteUserRoleCommand;
-import com.backend.programming.learning.system.auth.service.domain.entity.Role;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user_role.DeleteUserRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.entity.UserRole;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRoleRepository;
@@ -35,6 +33,6 @@ public class UserRoleDeleteHelper {
         }
 
         UserRole userRole = userRoleResult.get();
-        userRoleRepository.deleteByRoleIdAndUserId(userRole.getRoleId(), userRole.getUserId());
+        userRoleRepository.deleteByRoleIdAndUserId(userRole.getRole().getId(), userRole.getUser().getId());
     }
 }

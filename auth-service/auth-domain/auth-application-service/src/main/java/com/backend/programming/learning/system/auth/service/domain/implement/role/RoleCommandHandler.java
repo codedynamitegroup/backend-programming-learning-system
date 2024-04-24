@@ -1,24 +1,21 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.role;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateRoleCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.create.CreateRoleResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteRoleCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.delete.DeleteRoleResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryRoleByOrganizationCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryRoleCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.query.QueryRoleResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.role.CreateRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.role.CreateRoleResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.role.DeleteRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.role.DeleteRoleResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesByOrganizationCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryRoleByIdCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesByOrganizationResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.role.UpdateRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.role.UpdateRoleResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.role.RoleEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.Role;
-import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
 import com.backend.programming.learning.system.auth.service.domain.mapper.RoleDataMapper;
-import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.RoleRepository;
-import com.backend.programming.learning.system.auth.service.domain.valueobject.RoleId;
-import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Component
@@ -27,15 +24,18 @@ public class RoleCommandHandler {
     private final RoleCreateHelper roleCreateHelper;
     private final RoleDeleteHelper roleDeleteHelper;
     private final RoleDataMapper roleDataMapper;
-    private final RoleRepository roleRepository;
+    private final RoleQueryHelper roleQueryHelper;
+    private final RoleUpdateHelper roleUpdateHelper;
 
-    public RoleCommandHandler(RoleCreateHelper roleCreateHelper, RoleDeleteHelper roleDeleteHelper, RoleDataMapper roleDataMapper, RoleRepository roleRepository) {
+    public RoleCommandHandler(RoleCreateHelper roleCreateHelper, RoleDeleteHelper roleDeleteHelper, RoleDataMapper roleDataMapper, RoleQueryHelper roleQueryHelper, RoleUpdateHelper roleUpdateHelper) {
         this.roleCreateHelper = roleCreateHelper;
         this.roleDeleteHelper = roleDeleteHelper;
         this.roleDataMapper = roleDataMapper;
-        this.roleRepository = roleRepository;
+        this.roleQueryHelper = roleQueryHelper;
+        this.roleUpdateHelper = roleUpdateHelper;
     }
 
+    @Transactional
     public CreateRoleResponse createRole(CreateRoleCommand createRoleCommand) {
         Role roleCreated = roleCreateHelper.persistRole(createRoleCommand);
         log.info("Role is created with id: {}", roleCreated.getId().getValue());
@@ -43,29 +43,31 @@ public class RoleCommandHandler {
     }
 
     @Transactional(readOnly = true)
-    public QueryRoleResponse queryRole(QueryRoleCommand queryRoleCommand) {
-        Optional<Role> roleResult =
-                roleRepository.findById(new RoleId(queryRoleCommand.getRoleId()));
-        if (roleResult.isEmpty()) {
-            log.warn("Could not find role with id: {}", queryRoleCommand.getRoleId());
-            throw new AuthNotFoundException("Could not find user with user id: " +
-                    queryRoleCommand.getRoleId());
-        }
-        return roleDataMapper.roleToQueryRoleResponse(roleResult.get());
+    public RoleEntityResponse queryRole(QueryRoleByIdCommand queryRoleCommand) {
+        Role role = roleQueryHelper.queryRole(queryRoleCommand.getRoleId());
+        log.info("Role is queried with id: {}", queryRoleCommand.getRoleId());
+        return roleDataMapper.roleToRoleResponse(role);
     }
 
     @Transactional(readOnly = true)
-    public List<QueryRoleResponse> queryRolesByOrganizationId(QueryRoleByOrganizationCommand queryAllRolesCommand) {
-        return roleRepository.findByOrganizationId(new OrganizationId(queryAllRolesCommand.getOrganizationId())).stream()
-                .map(roleDataMapper::roleToQueryRoleResponse)
-                .toList();
+    public QueryAllRolesByOrganizationResponse queryRolesByOrganizationId(QueryAllRolesByOrganizationCommand queryAllRolesCommand) {
+        Page<Role> roles = roleQueryHelper.queryAllRolesByOrganizationId(queryAllRolesCommand.getOrganizationId(),
+                queryAllRolesCommand.getPageNo(), queryAllRolesCommand.getPageSize());
+        log.info("All roles are queried");
+        return roleDataMapper.rolesToQueryAllRolesByOrganizationResponse(roles);
     }
 
+    @Transactional
+    public UpdateRoleResponse updateRole(UpdateRoleCommand updateRoleCommand) {
+        Role roleUpdated = roleUpdateHelper.persistRole(updateRoleCommand);
+        log.info("Role is updated with id: {}", roleUpdated.getId().getValue());
+        return roleDataMapper.roleToUpdateRoleResponse(roleUpdated, "Role updated successfully");
+    }
+
+    @Transactional
     public DeleteRoleResponse deleteRole(DeleteRoleCommand deleteRoleCommand) {
         roleDeleteHelper.deleteRole(deleteRoleCommand);
         log.info("Role is deleted with id: {}", deleteRoleCommand.getRoleId());
-        return DeleteRoleResponse.builder()
-                .message("Role deleted successfully")
-                .build();
+        return roleDataMapper.roleToDeleteRoleResponse(deleteRoleCommand.getRoleId(), "Role deleted successfully");
     }
 }

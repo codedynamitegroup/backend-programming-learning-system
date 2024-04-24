@@ -3,6 +3,8 @@ package com.backend.programming.learning.system.core.service.application.rest.qu
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQtypeShortanswerQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryQtypeShortanswerQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeShortanswerQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QtypeShortanswerQuestionApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -50,5 +52,16 @@ public class QtypeShortanswerQuestionController {
         log.info("Questions shortanswer queried: {}", queryQtypeShortanswerQuestionResponse);
 
         return ResponseEntity.ok(queryQtypeShortanswerQuestionResponse);
+    }
+
+    @PutMapping
+    public ResponseEntity<UpdateQuestionResponse> updateQtypeShortanswerQuestion(
+            @RequestBody UpdateQtypeShortanswerQuestionCommand updateQtypeShortanswerQuestionCommand) {
+        log.info("Updating shortanswer question: {}", updateQtypeShortanswerQuestionCommand);
+        UpdateQuestionResponse createQuestionResponse = qtypeShortanswerQuestionApplicationService
+                .updateQtypeShortanswerQuestion(updateQtypeShortanswerQuestionCommand);
+        log.info("Question shortanswer updated: {}", createQuestionResponse);
+
+        return ResponseEntity.ok(createQuestionResponse);
     }
 }

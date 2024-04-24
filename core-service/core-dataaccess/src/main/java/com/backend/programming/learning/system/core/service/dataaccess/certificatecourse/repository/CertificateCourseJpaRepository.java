@@ -29,28 +29,4 @@ public interface CertificateCourseJpaRepository extends PagingAndSortingReposito
     @Modifying
     @Query("update CertificateCourseEntity c set c.isDeleted = ?1 where c.id = ?2")
     int deleteById(Boolean isDeleted, UUID id);
-
-    @Transactional
-    @Modifying
-    @Query("update CertificateCourseEntity c set c.avgRating = ?1 where c.id = ?2")
-    int updateAvgRating(Float avgRating, UUID id);
-
-    @Transactional
-    @Modifying
-    @Query("""
-            update CertificateCourseEntity c
-            set c.name = ?1,
-            c.description = ?2,
-            c.skillLevel = ?3,
-            c.startTime = ?3,
-            c.endTime = ?4,
-            c.topic = ?5,
-            c.updatedBy = ?5,
-            c.updatedAt = ?6
-            where c.id = ?7""")
-    int updateCertificateCourseById(String name, String description,
-                                    SkillLevel skillLevel,
-                                    ZonedDateTime startTime, ZonedDateTime endTime,
-                                    TopicEntity topicEntity, UserEntity userEntity,
-                                    ZonedDateTime updatedAt, UUID id);
 }

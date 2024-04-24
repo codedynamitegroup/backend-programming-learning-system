@@ -1,10 +1,9 @@
 package com.backend.programming.learning.system.auth.service.dataaccess.role.mapper;
 
 import com.backend.programming.learning.system.auth.service.dataaccess.organization.entity.OrganizationEntity;
-import com.backend.programming.learning.system.auth.service.dataaccess.organization.repository.OrganizationJpaRepository;
+import com.backend.programming.learning.system.auth.service.dataaccess.organization.mapper.OrganizationDataAccessMapper;
 import com.backend.programming.learning.system.auth.service.dataaccess.role.entity.RoleEntity;
-import com.backend.programming.learning.system.auth.service.dataaccess.user.entity.UserEntity;
-import com.backend.programming.learning.system.auth.service.dataaccess.user.repository.UserJpaRepository;
+import com.backend.programming.learning.system.auth.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.auth.service.domain.entity.Role;
 import com.backend.programming.learning.system.auth.service.domain.valueobject.RoleId;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
@@ -13,26 +12,24 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RoleDataAccessMapper {
-    private final OrganizationJpaRepository organizationJpaRepository;
-    private final UserJpaRepository userJpaRepository;
+    private final UserDataAccessMapper userDataAccessMapper;
+    private final OrganizationDataAccessMapper organizationDataAccessMapper;
 
-    public RoleDataAccessMapper(OrganizationJpaRepository organizationJpaRepository, UserJpaRepository userJpaRepository) {
-        this.organizationJpaRepository = organizationJpaRepository;
-        this.userJpaRepository = userJpaRepository;
+    public RoleDataAccessMapper(UserDataAccessMapper userDataAccessMapper, OrganizationDataAccessMapper organizationDataAccessMapper) {
+        this.userDataAccessMapper = userDataAccessMapper;
+        this.organizationDataAccessMapper = organizationDataAccessMapper;
     }
 
     public RoleEntity roleToRoleEntity(Role role) {
-        OrganizationEntity organization = organizationJpaRepository.findById(role.getOrganizationId().getValue())
-                .orElseThrow(() -> new RuntimeException("Organization with id: " + role.getOrganizationId().getValue() + " could not be found!"));
-        UserEntity createdBy = userJpaRepository.findById(role.getCreatedBy().getValue())
-                .orElseThrow(() -> new RuntimeException("User with id: " + role.getCreatedBy().getValue() + " could not be found!"));
-        UserEntity updatedBy = userJpaRepository.findById(role.getUpdatedBy().getValue())
-                .orElseThrow(() -> new RuntimeException("User with id: " + role.getUpdatedBy().getValue() + " could not be found!"));
         return RoleEntity.builder()
                 .id(role.getId().getValue())
-                .organization(organization)
-                .createdBy(createdBy)
-                .updatedBy(updatedBy)
+                .organization(
+                        OrganizationEntity.builder()
+                                .id(role.getOrganization().getId().getValue())
+                                .build()
+                )
+                .createdBy(userDataAccessMapper.userToUserEntity(role.getCreatedBy()))
+                .updatedBy(userDataAccessMapper.userToUserEntity(role.getUpdatedBy()))
                 .description(role.getDescription())
                 .name(role.getName())
                 .createdAt(role.getCreatedAt())
@@ -43,9 +40,9 @@ public class RoleDataAccessMapper {
     public Role roleEntityToRole(RoleEntity roleEntity) {
         return Role.builder()
                 .id(new RoleId(roleEntity.getId()))
-                .organizationId(new OrganizationId(roleEntity.getOrganization().getId()))
-                .createdBy(new UserId(roleEntity.getCreatedBy().getId()))
-                .updatedBy(new UserId(roleEntity.getUpdatedBy().getId()))
+                .organization(organizationDataAccessMapper.organizationEntityToOrganization(roleEntity.getOrganization()))
+                .createdBy(userDataAccessMapper.userEntityToUser(roleEntity.getCreatedBy()))
+                .updatedBy(userDataAccessMapper.userEntityToUser(roleEntity.getUpdatedBy()))
                 .description(roleEntity.getDescription())
                 .name(roleEntity.getName())
                 .createdAt(roleEntity.getCreatedAt())
