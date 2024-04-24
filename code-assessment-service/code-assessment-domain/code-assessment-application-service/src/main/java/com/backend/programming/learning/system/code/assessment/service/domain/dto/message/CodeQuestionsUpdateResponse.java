@@ -12,6 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class CodeQuestionsUpdateResponse {
     private UUID id;
+    private UUID codeQuestionId;
     private UUID questionId;
     private String problemStatement;
     private String inputFormat;

@@ -28,10 +28,8 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
     @Override
     public CodeQuestion save(CodeQuestion codeQuestion) {
         CodeQuestionEntity codeQuestionEntity = codeQuestionDataAccessMapper.codeQuestionToCodeQuestionEntity(codeQuestion);
-        log.info("Code qu id {}",codeQuestionEntity.getId());
         CodeQuestionEntity codeQuestionEntityRes = codeQuestionJpaRepository
                 .save(codeQuestionEntity);
-        log.info("xyzzz");
         return
         codeQuestionDataAccessMapper.codeQuestionEntityToCodeQuestion(codeQuestionEntityRes);
     }

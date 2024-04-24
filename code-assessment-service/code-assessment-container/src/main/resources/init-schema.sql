@@ -111,7 +111,7 @@ CREATE TABLE code_questions_update_outbox
     payload jsonb NOT NULL,
     outbox_status outbox_status NOT NULL,
     saga_status saga_status NOT NULL,
-    copy_state copy_state NOT NULL,
+    copy_state CopyState NOT NULL,
     version integer NOT NULL,
     CONSTRAINT cquo_pk PRIMARY KEY (id)
 );

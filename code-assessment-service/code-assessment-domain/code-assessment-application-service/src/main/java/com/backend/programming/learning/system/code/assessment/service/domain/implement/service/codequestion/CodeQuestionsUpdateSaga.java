@@ -99,14 +99,14 @@ public class CodeQuestionsUpdateSaga implements SagaStep<CodeQuestionsUpdateResp
     }
 
     private void completeCodeQuestionsUpdateOrCreate(CodeQuestionsUpdateResponse response, CopyState state){
-        CodeQuestion codeQuestion = findCodeQuestion(response.getId());
+        CodeQuestion codeQuestion = findCodeQuestion(response.getCodeQuestionId());
         log.info("Completing save or change code question with id to core-service: {} with state {}", response.getId(), response.getState().toString());
         codeQuestion.setCopyState(state);//domain service should do this job but it's quite short so I set it directly
         codeQuestionRepository.save(codeQuestion);
 
     }
     private void quitCodeQuestionsUpdateOrCreate(CodeQuestionsUpdateResponse response, CopyState state){
-        CodeQuestion codeQuestion = findCodeQuestion(response.getId());
+        CodeQuestion codeQuestion = findCodeQuestion(response.getCodeQuestionId());
         log.info("Quitting save or change code question with id to core-service: {} with state {}", response.getId(), response.getState().toString());
         codeAssessmentDomainService.cancelCopyCodeQuestions(codeQuestion, state, response.getFailureMessages());
         codeQuestionRepository.save(codeQuestion);
@@ -120,7 +120,6 @@ public class CodeQuestionsUpdateSaga implements SagaStep<CodeQuestionsUpdateResp
                 codeQuestionsUpdateOutboxHelper.getCodeQuestionsUpdateOutboxMessageBySagaIdAndSagaStatus(
                         codeQuestionsUpdateResponse.getSagaId(),
                         SagaStatus.STARTED);
-
 
         if (codeQuestionsUpdateOutboxMessageResponse.isEmpty()) {
             log.info("An outbox message with saga id: {} is already created!", codeQuestionsUpdateResponse.getSagaId());

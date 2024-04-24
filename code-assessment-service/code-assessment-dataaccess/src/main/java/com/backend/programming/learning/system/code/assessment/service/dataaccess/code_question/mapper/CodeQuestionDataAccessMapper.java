@@ -52,7 +52,7 @@ public class CodeQuestionDataAccessMapper {
                 .inputFormat(codeQuestionEntity.getInputFormat())
                 .outputFormat(codeQuestionEntity.getOutputFormat())
                 .copyState(codeQuestionEntity.getCopyState())
-                .failureMessages(codeQuestionEntity.getFailureMessages().isEmpty() ? new ArrayList<>() :
+                .failureMessages(codeQuestionEntity.getFailureMessages()==null || codeQuestionEntity.getFailureMessages().isEmpty() ? new ArrayList<>() :
                         new ArrayList<>(Arrays.asList(codeQuestionEntity.getFailureMessages()
                                 .split(CodeQuestion.FAILURE_MESSAGE_DELIMITER))))
                 .build();

@@ -17,6 +17,7 @@ public class CodeQuestionsUpdateOutboxMapper {
                 .type(codeQuestionsUpdateOutboxMessage.getType())
                 .payload(codeQuestionsUpdateOutboxMessage.getPayload())
                 .copyState(codeQuestionsUpdateOutboxMessage.getCopyState())
+                .sagaStatus(codeQuestionsUpdateOutboxMessage.getSagaStatus())
                 .outboxStatus(codeQuestionsUpdateOutboxMessage.getOutboxStatus())
                 .version(codeQuestionsUpdateOutboxMessage.getVersion())
                 .build();
@@ -32,6 +33,7 @@ public class CodeQuestionsUpdateOutboxMapper {
                 .payload(entity.getPayload())
                 .copyState(entity.getCopyState())
                 .outboxStatus(entity.getOutboxStatus())
+                .sagaStatus(entity.getSagaStatus())
                 .version(entity.getVersion())
                 .build();
     }

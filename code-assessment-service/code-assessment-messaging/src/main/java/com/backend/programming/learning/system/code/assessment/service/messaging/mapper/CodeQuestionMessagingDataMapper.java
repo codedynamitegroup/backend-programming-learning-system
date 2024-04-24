@@ -19,6 +19,7 @@ public class CodeQuestionMessagingDataMapper {
             (CodeQuestionUpdateResponseAvroModel model){
         return CodeQuestionsUpdateResponse.builder()
                 .id(model.getId())
+                .codeQuestionId(model.getCodeQuestionId())
                 .questionId(model.getQuestionId())
                 .problemStatement(model.getProblemStatement())
                 .inputFormat(model.getInputFormat())
