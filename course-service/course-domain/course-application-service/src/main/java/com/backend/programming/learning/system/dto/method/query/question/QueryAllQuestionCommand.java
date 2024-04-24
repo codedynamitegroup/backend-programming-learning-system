@@ -17,7 +17,6 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class QueryAllQuestionCommand {
-    @NotNull
     private final UUID questionBankCategoryId;
     @NotNull
     private final int pageNo;
