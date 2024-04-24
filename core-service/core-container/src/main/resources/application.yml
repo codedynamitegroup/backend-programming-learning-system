@@ -81,7 +81,7 @@ kafka-consumer-config:
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
   core-service-user-consumer-group-id: core-service-user-topic-consumer
 
-  core-service-question-consumer-group-id: core-service-user-topic-consumer
+  core-service-question-consumer-group-id: core-service-question-topic-consumer
 
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader

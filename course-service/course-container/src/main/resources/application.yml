@@ -9,6 +9,9 @@ course-service:
   question-created-request-topic-name: core-question-create-request
   question-deleted-request-topic-name: core-question-delete-request
   question-updated-request-topic-name: core-question-update-request
+
+  question-response-topic-name: core-question-response
+
   outbox-scheduler-fixed-rate: 10000
   outbox-scheduler-initial-delay: 10000
 
@@ -50,9 +53,11 @@ kafka-producer-config:
 kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+
   question-create-consumer-group-id: question-create-topic-consumer
   question-delete-consumer-group-id: question-delete-topic-consumer
   question-update-consumer-group-id: question-update-topic-consumer
+
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
   specific-avro-reader: true
