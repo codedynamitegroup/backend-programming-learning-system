@@ -20,6 +20,17 @@ public class QuestionMessagingMapper {
     public QuestionDeleteRequest questionDeleteRequestAvroModelToQuestionDeleteRequest(QuestionDeleteRequestAvroModel questionDeleteRequestAvroModel) {
         return QuestionDeleteRequest.builder()
                 .id(questionDeleteRequestAvroModel.getId())
+                .sagaId(questionDeleteRequestAvroModel.getSagaId())
+                .organizationId(questionDeleteRequestAvroModel.getOrganizationId())
+                .createdBy(questionDeleteRequestAvroModel.getCreatedBy())
+                .updatedBy(questionDeleteRequestAvroModel.getUpdatedBy())
+                .difficulty(questionDeleteRequestAvroModel.getDifficulty())
+                .name(questionDeleteRequestAvroModel.getName())
+                .questionText(questionDeleteRequestAvroModel.getQuestionText())
+                .generalFeedback(questionDeleteRequestAvroModel.getGeneralFeedback())
+                .defaultMark(questionDeleteRequestAvroModel.getDefaultMark())
+                .qType(questionDeleteRequestAvroModel.getQType())
+                .answers(questionDeleteRequestAvroModel.getAnswers())
                 .build();
     }
 

@@ -22,7 +22,7 @@ public class QuestionResponseKafkaListener implements KafkaConsumer<QuestionResp
                         @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) List<String> keys,
                         @Header(KafkaHeaders.RECEIVED_PARTITION_ID) List<Integer> partitions,
                         @Header(KafkaHeaders.OFFSET) List<Long> offsets) {
-        log.info("{} number of user requests received with keys:{}, partitions:{} and offsets: {}",
+        log.info("{} number of question response received with keys:{}, partitions:{} and offsets: {}",
                 messages.size(),
                 keys.toString(),
                 partitions.toString(),

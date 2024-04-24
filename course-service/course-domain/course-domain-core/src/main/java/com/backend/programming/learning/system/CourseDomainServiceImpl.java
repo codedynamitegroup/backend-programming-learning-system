@@ -96,26 +96,41 @@ public class CourseDomainServiceImpl implements CourseDomainService{
 
     @Override
     public QuestionCreateFailedEvent createQuestionFailedEvent(Question question) {
-        return null;
+        log.info("Question with id: {} is failed to create with event", question.getId().getValue());
+        return new QuestionCreateFailedEvent(question,
+                ZonedDateTime.now(ZoneId.of("UTC")),
+                QuestionResponseStatus.CREATE_FAILED);
     }
 
     @Override
     public QuestionUpdatedEvent createQuestionUpdatedEvent(Question question) {
-        return null;
+        log.info("Question with id: {} is updated with event", question.getId().getValue());
+        return new QuestionUpdatedEvent(question,
+                ZonedDateTime.now(ZoneId.of("UTC")),
+                QuestionResponseStatus.UPDATED);
     }
 
     @Override
     public QuestionUpdateFailedEvent createQuestionUpdateFailedEvent(Question question) {
-        return null;
+        log.info("Question with id: {} is failed to update with event", question.getId().getValue());
+        return new QuestionUpdateFailedEvent(question,
+                ZonedDateTime.now(ZoneId.of("UTC")),
+                QuestionResponseStatus.UPDATE_FAILED);
     }
 
     @Override
     public QuestionDeletedEvent createQuestionDeletedEvent(Question question) {
-        return null;
+        log.info("Question with id: {} is deleted with event", question.getId().getValue());
+        return new QuestionDeletedEvent(question,
+                ZonedDateTime.now(ZoneId.of("UTC")),
+                QuestionResponseStatus.DELETED);
     }
 
     @Override
     public QuestionDeleteFailedEvent createQuestionDeleteFailedEvent(Question question) {
-        return null;
+        log.info("Question with id: {} is failed to delete with event", question.getId().getValue());
+        return new QuestionDeleteFailedEvent(question,
+                ZonedDateTime.now(ZoneId.of("UTC")),
+                QuestionResponseStatus.DELETE_FAILED);
     }
 }

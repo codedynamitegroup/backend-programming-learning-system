@@ -6,6 +6,8 @@ import com.backend.programming.learning.system.dto.method.message.QuestionCreate
 import com.backend.programming.learning.system.dto.method.message.QuestionDeleteRequest;
 import com.backend.programming.learning.system.dto.method.message.QuestionUpdateRequest;
 import com.backend.programming.learning.system.event.question.event.QuestionCreatedEvent;
+import com.backend.programming.learning.system.event.question.event.QuestionDeletedEvent;
+import com.backend.programming.learning.system.event.question.event.QuestionUpdatedEvent;
 import com.backend.programming.learning.system.mapper.question.QuestionDataMapper;
 import com.backend.programming.learning.system.ports.input.message.listener.question.QuestionMessageListener;
 import com.backend.programming.learning.system.ports.output.message.publisher.question.*;
@@ -19,25 +21,25 @@ import org.springframework.validation.annotation.Validated;
 public class QuestionMessageListenerImpl implements QuestionMessageListener {
     private final QuestionCreatedResponseMessagePublisher questionCreatedResponseMessagePublisher;
 //    private final QuestionCreateFailedResponseMessagePublisher questionCreateFailedResponseMessagePublisher;
-//    private final QuestionDeletedResponseMessagePublisher questionDeletedResponseMessagePublisher;
+    private final QuestionDeletedResponseMessagePublisher questionDeletedResponseMessagePublisher;
 //    private final QuestionDeleteFailedResponseMessagePublisher questionDeleteFailedResponseMessagePublisher;
-//    private final QuestionUpdatedResponseMessagePublisher questionUpdatedResponseMessagePublisher;
+    private final QuestionUpdatedResponseMessagePublisher questionUpdatedResponseMessagePublisher;
 //    private final QuestionUpdateFailedResponseMessagePublisher questionUpdateFailedResponseMessagePublisher;
     private final QuestionDataMapper questionDataMapper;
     private final CourseDomainService courseDomainService;
 
     public QuestionMessageListenerImpl(QuestionCreatedResponseMessagePublisher questionCreatedResponseMessagePublisher,
 //                                       QuestionCreateFailedResponseMessagePublisher questionCreateFailedResponseMessagePublisher,
-//                                       QuestionDeletedResponseMessagePublisher questionDeletedResponseMessagePublisher,
+                                       QuestionDeletedResponseMessagePublisher questionDeletedResponseMessagePublisher,
 //                                       QuestionDeleteFailedResponseMessagePublisher questionDeleteFailedResponseMessagePublisher,
-//                                       QuestionUpdatedResponseMessagePublisher questionUpdatedResponseMessagePublisher,
+                                       QuestionUpdatedResponseMessagePublisher questionUpdatedResponseMessagePublisher,
 //                                       QuestionUpdateFailedResponseMessagePublisher questionUpdateFailedResponseMessagePublisher,
                                        QuestionDataMapper questionDataMapper, CourseDomainService courseDomainService) {
         this.questionCreatedResponseMessagePublisher = questionCreatedResponseMessagePublisher;
 //        this.questionCreateFailedResponseMessagePublisher = questionCreateFailedResponseMessagePublisher;
-//        this.questionDeletedResponseMessagePublisher = questionDeletedResponseMessagePublisher;
+        this.questionDeletedResponseMessagePublisher = questionDeletedResponseMessagePublisher;
 //        this.questionDeleteFailedResponseMessagePublisher = questionDeleteFailedResponseMessagePublisher;
-//        this.questionUpdatedResponseMessagePublisher = questionUpdatedResponseMessagePublisher;
+        this.questionUpdatedResponseMessagePublisher = questionUpdatedResponseMessagePublisher;
 //        this.questionUpdateFailedResponseMessagePublisher = questionUpdateFailedResponseMessagePublisher;
         this.questionDataMapper = questionDataMapper;
         this.courseDomainService = courseDomainService;
@@ -52,11 +54,15 @@ public class QuestionMessageListenerImpl implements QuestionMessageListener {
 
     @Override
     public void updateQuestion(QuestionUpdateRequest questionUpdateRequest) {
-
+        QuestionUpdatedEvent questionUpdatedEvent = courseDomainService
+                .createQuestionUpdatedEvent(questionDataMapper.questionUpdateRequestToQuestion(questionUpdateRequest));
+        questionUpdatedResponseMessagePublisher.publish(questionUpdatedEvent);
     }
 
     @Override
     public void deleteQuestion(QuestionDeleteRequest questionDeleteRequest) {
-
+        QuestionDeletedEvent questionDeletedEvent = courseDomainService
+                .createQuestionDeletedEvent(questionDataMapper.questionDeleteRequestToQuestion(questionDeleteRequest));
+        questionDeletedResponseMessagePublisher.publish(questionDeletedEvent);
     }
 }

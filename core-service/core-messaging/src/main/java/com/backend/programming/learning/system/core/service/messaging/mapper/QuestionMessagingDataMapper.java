@@ -42,6 +42,16 @@ public class QuestionMessagingDataMapper {
         return QuestionDeleteRequestAvroModel.newBuilder()
                 .setId(question.getId().getValue().toString())
                 .setSagaId(UUID.randomUUID().toString())
+                .setOrganizationId(question.getOrganization().getId().getValue().toString())
+                .setCreatedBy(question.getCreatedBy().getId().getValue().toString())
+                .setUpdatedBy(question.getUpdatedBy().getId().getValue().toString())
+                .setDifficulty(question.getDifficulty().toString())
+                .setName(question.getName())
+                .setQuestionText(question.getQuestionText())
+                .setGeneralFeedback(question.getGeneralFeedback())
+                .setDefaultMark(BigDecimal.valueOf(question.getDefaultMark()))
+                .setQType(question.getqtype().toString())
+                .setAnswers(answerListToAnswerIdList(question.getAnswers()))
                 .build();
     }
 
@@ -52,8 +62,8 @@ public class QuestionMessagingDataMapper {
                 .setId(question.getId().getValue().toString())
                 .setSagaId(UUID.randomUUID().toString())
                 .setOrganizationId(question.getOrganization().getId().getValue().toString())
-                .setCreatedBy(question.getCreatedBy().getId().toString())
-                .setUpdatedBy(question.getUpdatedBy().getId().toString())
+                .setCreatedBy(question.getCreatedBy().getId().getValue().toString())
+                .setUpdatedBy(question.getUpdatedBy().getId().getValue().toString())
                 .setDifficulty(question.getDifficulty().toString())
                 .setName(question.getName())
                 .setQuestionText(question.getQuestionText())

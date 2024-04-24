@@ -4,6 +4,8 @@ import com.backend.programming.learning.system.domain.valueobject.*;
 import com.backend.programming.learning.system.dto.method.create.question.CreateQuestionCommand;
 import com.backend.programming.learning.system.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.dto.method.message.QuestionCreateRequest;
+import com.backend.programming.learning.system.dto.method.message.QuestionDeleteRequest;
+import com.backend.programming.learning.system.dto.method.message.QuestionUpdateRequest;
 import com.backend.programming.learning.system.dto.method.query.question.QueryAllQuestionResponse;
 import com.backend.programming.learning.system.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.entity.Organization;
@@ -130,6 +132,52 @@ public class QuestionDataMapper {
                 .qtype(QuestionType.valueOf(questionCreateRequest.getQType()))
                 .isQuestionBank(false)
                 .answers(questionCreateRequest.getAnswers())
+                .build();
+    }
+
+    public Question questionUpdateRequestToQuestion(QuestionUpdateRequest questionUpdateRequest) {
+        return Question.builder()
+                .id(new QuestionId(UUID.fromString(questionUpdateRequest.getId())))
+                .organization(Organization.builder()
+                        .id(new OrganizationId(UUID.fromString(questionUpdateRequest.getOrganizationId())))
+                        .build())
+                .createdBy(User.builder()
+                        .id(new UserId(UUID.fromString(questionUpdateRequest.getCreatedBy())))
+                        .build())
+                .updatedBy(User.builder()
+                        .id(new UserId(UUID.fromString(questionUpdateRequest.getUpdatedBy())))
+                        .build())
+                .questionText(questionUpdateRequest.getQuestionText())
+                .difficulty(QuestionDifficulty.valueOf(questionUpdateRequest.getDifficulty()))
+                .name(questionUpdateRequest.getName())
+                .generalFeedback(questionUpdateRequest.getGeneralFeedback())
+                .defaultMark(questionUpdateRequest.getDefaultMark().floatValue())
+                .qtype(QuestionType.valueOf(questionUpdateRequest.getQType()))
+                .isQuestionBank(false)
+                .answers(questionUpdateRequest.getAnswers())
+                .build();
+    }
+
+    public Question questionDeleteRequestToQuestion(QuestionDeleteRequest questionDeleteRequest) {
+        return Question.builder()
+                .id(new QuestionId(UUID.fromString(questionDeleteRequest.getId())))
+                .organization(Organization.builder()
+                        .id(new OrganizationId(UUID.fromString(questionDeleteRequest.getOrganizationId())))
+                        .build())
+                .createdBy(User.builder()
+                        .id(new UserId(UUID.fromString(questionDeleteRequest.getCreatedBy())))
+                        .build())
+                .updatedBy(User.builder()
+                        .id(new UserId(UUID.fromString(questionDeleteRequest.getUpdatedBy())))
+                        .build())
+                .questionText(questionDeleteRequest.getQuestionText())
+                .difficulty(QuestionDifficulty.valueOf(questionDeleteRequest.getDifficulty()))
+                .name(questionDeleteRequest.getName())
+                .generalFeedback(questionDeleteRequest.getGeneralFeedback())
+                .defaultMark(questionDeleteRequest.getDefaultMark().floatValue())
+                .qtype(QuestionType.valueOf(questionDeleteRequest.getQType()))
+                .isQuestionBank(false)
+                .answers(questionDeleteRequest.getAnswers())
                 .build();
     }
 }

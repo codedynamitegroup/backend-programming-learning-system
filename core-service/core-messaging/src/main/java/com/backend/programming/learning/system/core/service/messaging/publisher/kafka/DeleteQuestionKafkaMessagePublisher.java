@@ -48,7 +48,7 @@ public class DeleteQuestionKafkaMessagePublisher implements QuestionDeletedMessa
             log.info("QuestionDeleteRequestAvroModel sent to kafka for question id: {}", questionId);
         }
         catch (Exception e) {
-            log.error("Error while sending message to topic: {} with message: {}", coreServiceConfigData.getQuestionDeletedRequestTopicName(), domainEvent, e);
+            log.error("Error while sending message to topic: {} with message: {}", coreServiceConfigData.getQuestionDeletedRequestTopicName(), e.getMessage());
         }
     }
 }

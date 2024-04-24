@@ -5,6 +5,4 @@ import com.backend.programming.learning.system.domain.event.publisher.DomainEven
 import com.backend.programming.learning.system.event.question.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.event.question.event.QuestionEvent;
 
-public interface QuestionCreatedResponseMessagePublisher extends DomainEventPublisher<QuestionCreatedEvent> {
-
-}
+public interface QuestionCreatedResponseMessagePublisher extends DomainEventPublisher<QuestionCreatedEvent> { }

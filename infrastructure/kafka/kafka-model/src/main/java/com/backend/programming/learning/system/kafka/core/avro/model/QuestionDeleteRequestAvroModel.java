@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class QuestionDeleteRequestAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -7002698749625687449L;
+  private static final long serialVersionUID = -7006892869273227256L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"QuestionDeleteRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.core.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"QuestionDeleteRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.core.avro.model\",\"fields\":[{\"name\":\"answers\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"java-class\":\"java.util.List\"}},{\"name\":\"createdBy\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"defaultMark\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\",\"java-class\":\"java.math.BigDecimal\"}},{\"name\":\"difficulty\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"generalFeedback\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"organizationId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"qType\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"questionText\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"updatedBy\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -73,8 +73,18 @@ public class QuestionDeleteRequestAvroModel extends org.apache.avro.specific.Spe
     return DECODER.decode(b);
   }
 
+  private java.util.List<java.lang.String> answers;
+  private java.lang.String createdBy;
+  private java.math.BigDecimal defaultMark;
+  private java.lang.String difficulty;
+  private java.lang.String generalFeedback;
   private java.lang.String id;
+  private java.lang.String name;
+  private java.lang.String organizationId;
+  private java.lang.String qType;
+  private java.lang.String questionText;
   private java.lang.String sagaId;
+  private java.lang.String updatedBy;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -85,12 +95,32 @@ public class QuestionDeleteRequestAvroModel extends org.apache.avro.specific.Spe
 
   /**
    * All-args constructor.
+   * @param answers The new value for answers
+   * @param createdBy The new value for createdBy
+   * @param defaultMark The new value for defaultMark
+   * @param difficulty The new value for difficulty
+   * @param generalFeedback The new value for generalFeedback
    * @param id The new value for id
+   * @param name The new value for name
+   * @param organizationId The new value for organizationId
+   * @param qType The new value for qType
+   * @param questionText The new value for questionText
    * @param sagaId The new value for sagaId
+   * @param updatedBy The new value for updatedBy
    */
-  public QuestionDeleteRequestAvroModel(java.lang.String id, java.lang.String sagaId) {
+  public QuestionDeleteRequestAvroModel(java.util.List<java.lang.String> answers, java.lang.String createdBy, java.math.BigDecimal defaultMark, java.lang.String difficulty, java.lang.String generalFeedback, java.lang.String id, java.lang.String name, java.lang.String organizationId, java.lang.String qType, java.lang.String questionText, java.lang.String sagaId, java.lang.String updatedBy) {
+    this.answers = answers;
+    this.createdBy = createdBy;
+    this.defaultMark = defaultMark;
+    this.difficulty = difficulty;
+    this.generalFeedback = generalFeedback;
     this.id = id;
+    this.name = name;
+    this.organizationId = organizationId;
+    this.qType = qType;
+    this.questionText = questionText;
     this.sagaId = sagaId;
+    this.updatedBy = updatedBy;
   }
 
   @Override
@@ -103,8 +133,18 @@ public class QuestionDeleteRequestAvroModel extends org.apache.avro.specific.Spe
   @Override
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return id;
-    case 1: return sagaId;
+    case 0: return answers;
+    case 1: return createdBy;
+    case 2: return defaultMark;
+    case 3: return difficulty;
+    case 4: return generalFeedback;
+    case 5: return id;
+    case 6: return name;
+    case 7: return organizationId;
+    case 8: return qType;
+    case 9: return questionText;
+    case 10: return sagaId;
+    case 11: return updatedBy;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -114,10 +154,105 @@ public class QuestionDeleteRequestAvroModel extends org.apache.avro.specific.Spe
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: id = value$ != null ? value$.toString() : null; break;
-    case 1: sagaId = value$ != null ? value$.toString() : null; break;
+    case 0: answers = (java.util.List<java.lang.String>)value$; break;
+    case 1: createdBy = value$ != null ? value$.toString() : null; break;
+    case 2: defaultMark = (java.math.BigDecimal)value$; break;
+    case 3: difficulty = value$ != null ? value$.toString() : null; break;
+    case 4: generalFeedback = value$ != null ? value$.toString() : null; break;
+    case 5: id = value$ != null ? value$.toString() : null; break;
+    case 6: name = value$ != null ? value$.toString() : null; break;
+    case 7: organizationId = value$ != null ? value$.toString() : null; break;
+    case 8: qType = value$ != null ? value$.toString() : null; break;
+    case 9: questionText = value$ != null ? value$.toString() : null; break;
+    case 10: sagaId = value$ != null ? value$.toString() : null; break;
+    case 11: updatedBy = value$ != null ? value$.toString() : null; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
+  }
+
+  /**
+   * Gets the value of the 'answers' field.
+   * @return The value of the 'answers' field.
+   */
+  public java.util.List<java.lang.String> getAnswers() {
+    return answers;
+  }
+
+
+  /**
+   * Sets the value of the 'answers' field.
+   * @param value the value to set.
+   */
+  public void setAnswers(java.util.List<java.lang.String> value) {
+    this.answers = value;
+  }
+
+  /**
+   * Gets the value of the 'createdBy' field.
+   * @return The value of the 'createdBy' field.
+   */
+  public java.lang.String getCreatedBy() {
+    return createdBy;
+  }
+
+
+  /**
+   * Sets the value of the 'createdBy' field.
+   * @param value the value to set.
+   */
+  public void setCreatedBy(java.lang.String value) {
+    this.createdBy = value;
+  }
+
+  /**
+   * Gets the value of the 'defaultMark' field.
+   * @return The value of the 'defaultMark' field.
+   */
+  public java.math.BigDecimal getDefaultMark() {
+    return defaultMark;
+  }
+
+
+  /**
+   * Sets the value of the 'defaultMark' field.
+   * @param value the value to set.
+   */
+  public void setDefaultMark(java.math.BigDecimal value) {
+    this.defaultMark = value;
+  }
+
+  /**
+   * Gets the value of the 'difficulty' field.
+   * @return The value of the 'difficulty' field.
+   */
+  public java.lang.String getDifficulty() {
+    return difficulty;
+  }
+
+
+  /**
+   * Sets the value of the 'difficulty' field.
+   * @param value the value to set.
+   */
+  public void setDifficulty(java.lang.String value) {
+    this.difficulty = value;
+  }
+
+  /**
+   * Gets the value of the 'generalFeedback' field.
+   * @return The value of the 'generalFeedback' field.
+   */
+  public java.lang.String getGeneralFeedback() {
+    return generalFeedback;
+  }
+
+
+  /**
+   * Sets the value of the 'generalFeedback' field.
+   * @param value the value to set.
+   */
+  public void setGeneralFeedback(java.lang.String value) {
+    this.generalFeedback = value;
   }
 
   /**
@@ -138,6 +273,74 @@ public class QuestionDeleteRequestAvroModel extends org.apache.avro.specific.Spe
   }
 
   /**
+   * Gets the value of the 'name' field.
+   * @return The value of the 'name' field.
+   */
+  public java.lang.String getName() {
+    return name;
+  }
+
+
+  /**
+   * Sets the value of the 'name' field.
+   * @param value the value to set.
+   */
+  public void setName(java.lang.String value) {
+    this.name = value;
+  }
+
+  /**
+   * Gets the value of the 'organizationId' field.
+   * @return The value of the 'organizationId' field.
+   */
+  public java.lang.String getOrganizationId() {
+    return organizationId;
+  }
+
+
+  /**
+   * Sets the value of the 'organizationId' field.
+   * @param value the value to set.
+   */
+  public void setOrganizationId(java.lang.String value) {
+    this.organizationId = value;
+  }
+
+  /**
+   * Gets the value of the 'qType' field.
+   * @return The value of the 'qType' field.
+   */
+  public java.lang.String getQType() {
+    return qType;
+  }
+
+
+  /**
+   * Sets the value of the 'qType' field.
+   * @param value the value to set.
+   */
+  public void setQType(java.lang.String value) {
+    this.qType = value;
+  }
+
+  /**
+   * Gets the value of the 'questionText' field.
+   * @return The value of the 'questionText' field.
+   */
+  public java.lang.String getQuestionText() {
+    return questionText;
+  }
+
+
+  /**
+   * Sets the value of the 'questionText' field.
+   * @param value the value to set.
+   */
+  public void setQuestionText(java.lang.String value) {
+    this.questionText = value;
+  }
+
+  /**
    * Gets the value of the 'sagaId' field.
    * @return The value of the 'sagaId' field.
    */
@@ -152,6 +355,23 @@ public class QuestionDeleteRequestAvroModel extends org.apache.avro.specific.Spe
    */
   public void setSagaId(java.lang.String value) {
     this.sagaId = value;
+  }
+
+  /**
+   * Gets the value of the 'updatedBy' field.
+   * @return The value of the 'updatedBy' field.
+   */
+  public java.lang.String getUpdatedBy() {
+    return updatedBy;
+  }
+
+
+  /**
+   * Sets the value of the 'updatedBy' field.
+   * @param value the value to set.
+   */
+  public void setUpdatedBy(java.lang.String value) {
+    this.updatedBy = value;
   }
 
   /**
@@ -195,8 +415,18 @@ public class QuestionDeleteRequestAvroModel extends org.apache.avro.specific.Spe
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<QuestionDeleteRequestAvroModel>
     implements org.apache.avro.data.RecordBuilder<QuestionDeleteRequestAvroModel> {
 
+    private java.util.List<java.lang.String> answers;
+    private java.lang.String createdBy;
+    private java.math.BigDecimal defaultMark;
+    private java.lang.String difficulty;
+    private java.lang.String generalFeedback;
     private java.lang.String id;
+    private java.lang.String name;
+    private java.lang.String organizationId;
+    private java.lang.String qType;
+    private java.lang.String questionText;
     private java.lang.String sagaId;
+    private java.lang.String updatedBy;
 
     /** Creates a new Builder */
     private Builder() {
@@ -209,13 +439,53 @@ public class QuestionDeleteRequestAvroModel extends org.apache.avro.specific.Spe
      */
     private Builder(com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.id)) {
-        this.id = data().deepCopy(fields()[0].schema(), other.id);
+      if (isValidValue(fields()[0], other.answers)) {
+        this.answers = data().deepCopy(fields()[0].schema(), other.answers);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
-      if (isValidValue(fields()[1], other.sagaId)) {
-        this.sagaId = data().deepCopy(fields()[1].schema(), other.sagaId);
+      if (isValidValue(fields()[1], other.createdBy)) {
+        this.createdBy = data().deepCopy(fields()[1].schema(), other.createdBy);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
+      }
+      if (isValidValue(fields()[2], other.defaultMark)) {
+        this.defaultMark = data().deepCopy(fields()[2].schema(), other.defaultMark);
+        fieldSetFlags()[2] = other.fieldSetFlags()[2];
+      }
+      if (isValidValue(fields()[3], other.difficulty)) {
+        this.difficulty = data().deepCopy(fields()[3].schema(), other.difficulty);
+        fieldSetFlags()[3] = other.fieldSetFlags()[3];
+      }
+      if (isValidValue(fields()[4], other.generalFeedback)) {
+        this.generalFeedback = data().deepCopy(fields()[4].schema(), other.generalFeedback);
+        fieldSetFlags()[4] = other.fieldSetFlags()[4];
+      }
+      if (isValidValue(fields()[5], other.id)) {
+        this.id = data().deepCopy(fields()[5].schema(), other.id);
+        fieldSetFlags()[5] = other.fieldSetFlags()[5];
+      }
+      if (isValidValue(fields()[6], other.name)) {
+        this.name = data().deepCopy(fields()[6].schema(), other.name);
+        fieldSetFlags()[6] = other.fieldSetFlags()[6];
+      }
+      if (isValidValue(fields()[7], other.organizationId)) {
+        this.organizationId = data().deepCopy(fields()[7].schema(), other.organizationId);
+        fieldSetFlags()[7] = other.fieldSetFlags()[7];
+      }
+      if (isValidValue(fields()[8], other.qType)) {
+        this.qType = data().deepCopy(fields()[8].schema(), other.qType);
+        fieldSetFlags()[8] = other.fieldSetFlags()[8];
+      }
+      if (isValidValue(fields()[9], other.questionText)) {
+        this.questionText = data().deepCopy(fields()[9].schema(), other.questionText);
+        fieldSetFlags()[9] = other.fieldSetFlags()[9];
+      }
+      if (isValidValue(fields()[10], other.sagaId)) {
+        this.sagaId = data().deepCopy(fields()[10].schema(), other.sagaId);
+        fieldSetFlags()[10] = other.fieldSetFlags()[10];
+      }
+      if (isValidValue(fields()[11], other.updatedBy)) {
+        this.updatedBy = data().deepCopy(fields()[11].schema(), other.updatedBy);
+        fieldSetFlags()[11] = other.fieldSetFlags()[11];
       }
     }
 
@@ -225,14 +495,254 @@ public class QuestionDeleteRequestAvroModel extends org.apache.avro.specific.Spe
      */
     private Builder(com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel other) {
       super(SCHEMA$, MODEL$);
-      if (isValidValue(fields()[0], other.id)) {
-        this.id = data().deepCopy(fields()[0].schema(), other.id);
+      if (isValidValue(fields()[0], other.answers)) {
+        this.answers = data().deepCopy(fields()[0].schema(), other.answers);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.sagaId)) {
-        this.sagaId = data().deepCopy(fields()[1].schema(), other.sagaId);
+      if (isValidValue(fields()[1], other.createdBy)) {
+        this.createdBy = data().deepCopy(fields()[1].schema(), other.createdBy);
         fieldSetFlags()[1] = true;
       }
+      if (isValidValue(fields()[2], other.defaultMark)) {
+        this.defaultMark = data().deepCopy(fields()[2].schema(), other.defaultMark);
+        fieldSetFlags()[2] = true;
+      }
+      if (isValidValue(fields()[3], other.difficulty)) {
+        this.difficulty = data().deepCopy(fields()[3].schema(), other.difficulty);
+        fieldSetFlags()[3] = true;
+      }
+      if (isValidValue(fields()[4], other.generalFeedback)) {
+        this.generalFeedback = data().deepCopy(fields()[4].schema(), other.generalFeedback);
+        fieldSetFlags()[4] = true;
+      }
+      if (isValidValue(fields()[5], other.id)) {
+        this.id = data().deepCopy(fields()[5].schema(), other.id);
+        fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.name)) {
+        this.name = data().deepCopy(fields()[6].schema(), other.name);
+        fieldSetFlags()[6] = true;
+      }
+      if (isValidValue(fields()[7], other.organizationId)) {
+        this.organizationId = data().deepCopy(fields()[7].schema(), other.organizationId);
+        fieldSetFlags()[7] = true;
+      }
+      if (isValidValue(fields()[8], other.qType)) {
+        this.qType = data().deepCopy(fields()[8].schema(), other.qType);
+        fieldSetFlags()[8] = true;
+      }
+      if (isValidValue(fields()[9], other.questionText)) {
+        this.questionText = data().deepCopy(fields()[9].schema(), other.questionText);
+        fieldSetFlags()[9] = true;
+      }
+      if (isValidValue(fields()[10], other.sagaId)) {
+        this.sagaId = data().deepCopy(fields()[10].schema(), other.sagaId);
+        fieldSetFlags()[10] = true;
+      }
+      if (isValidValue(fields()[11], other.updatedBy)) {
+        this.updatedBy = data().deepCopy(fields()[11].schema(), other.updatedBy);
+        fieldSetFlags()[11] = true;
+      }
+    }
+
+    /**
+      * Gets the value of the 'answers' field.
+      * @return The value.
+      */
+    public java.util.List<java.lang.String> getAnswers() {
+      return answers;
+    }
+
+
+    /**
+      * Sets the value of the 'answers' field.
+      * @param value The value of 'answers'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder setAnswers(java.util.List<java.lang.String> value) {
+      validate(fields()[0], value);
+      this.answers = value;
+      fieldSetFlags()[0] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'answers' field has been set.
+      * @return True if the 'answers' field has been set, false otherwise.
+      */
+    public boolean hasAnswers() {
+      return fieldSetFlags()[0];
+    }
+
+
+    /**
+      * Clears the value of the 'answers' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder clearAnswers() {
+      answers = null;
+      fieldSetFlags()[0] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'createdBy' field.
+      * @return The value.
+      */
+    public java.lang.String getCreatedBy() {
+      return createdBy;
+    }
+
+
+    /**
+      * Sets the value of the 'createdBy' field.
+      * @param value The value of 'createdBy'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder setCreatedBy(java.lang.String value) {
+      validate(fields()[1], value);
+      this.createdBy = value;
+      fieldSetFlags()[1] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'createdBy' field has been set.
+      * @return True if the 'createdBy' field has been set, false otherwise.
+      */
+    public boolean hasCreatedBy() {
+      return fieldSetFlags()[1];
+    }
+
+
+    /**
+      * Clears the value of the 'createdBy' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder clearCreatedBy() {
+      createdBy = null;
+      fieldSetFlags()[1] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'defaultMark' field.
+      * @return The value.
+      */
+    public java.math.BigDecimal getDefaultMark() {
+      return defaultMark;
+    }
+
+
+    /**
+      * Sets the value of the 'defaultMark' field.
+      * @param value The value of 'defaultMark'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder setDefaultMark(java.math.BigDecimal value) {
+      validate(fields()[2], value);
+      this.defaultMark = value;
+      fieldSetFlags()[2] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'defaultMark' field has been set.
+      * @return True if the 'defaultMark' field has been set, false otherwise.
+      */
+    public boolean hasDefaultMark() {
+      return fieldSetFlags()[2];
+    }
+
+
+    /**
+      * Clears the value of the 'defaultMark' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder clearDefaultMark() {
+      defaultMark = null;
+      fieldSetFlags()[2] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'difficulty' field.
+      * @return The value.
+      */
+    public java.lang.String getDifficulty() {
+      return difficulty;
+    }
+
+
+    /**
+      * Sets the value of the 'difficulty' field.
+      * @param value The value of 'difficulty'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder setDifficulty(java.lang.String value) {
+      validate(fields()[3], value);
+      this.difficulty = value;
+      fieldSetFlags()[3] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'difficulty' field has been set.
+      * @return True if the 'difficulty' field has been set, false otherwise.
+      */
+    public boolean hasDifficulty() {
+      return fieldSetFlags()[3];
+    }
+
+
+    /**
+      * Clears the value of the 'difficulty' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder clearDifficulty() {
+      difficulty = null;
+      fieldSetFlags()[3] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'generalFeedback' field.
+      * @return The value.
+      */
+    public java.lang.String getGeneralFeedback() {
+      return generalFeedback;
+    }
+
+
+    /**
+      * Sets the value of the 'generalFeedback' field.
+      * @param value The value of 'generalFeedback'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder setGeneralFeedback(java.lang.String value) {
+      validate(fields()[4], value);
+      this.generalFeedback = value;
+      fieldSetFlags()[4] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'generalFeedback' field has been set.
+      * @return True if the 'generalFeedback' field has been set, false otherwise.
+      */
+    public boolean hasGeneralFeedback() {
+      return fieldSetFlags()[4];
+    }
+
+
+    /**
+      * Clears the value of the 'generalFeedback' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder clearGeneralFeedback() {
+      generalFeedback = null;
+      fieldSetFlags()[4] = false;
+      return this;
     }
 
     /**
@@ -250,9 +760,9 @@ public class QuestionDeleteRequestAvroModel extends org.apache.avro.specific.Spe
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder setId(java.lang.String value) {
-      validate(fields()[0], value);
+      validate(fields()[5], value);
       this.id = value;
-      fieldSetFlags()[0] = true;
+      fieldSetFlags()[5] = true;
       return this;
     }
 
@@ -261,7 +771,7 @@ public class QuestionDeleteRequestAvroModel extends org.apache.avro.specific.Spe
       * @return True if the 'id' field has been set, false otherwise.
       */
     public boolean hasId() {
-      return fieldSetFlags()[0];
+      return fieldSetFlags()[5];
     }
 
 
@@ -271,7 +781,167 @@ public class QuestionDeleteRequestAvroModel extends org.apache.avro.specific.Spe
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder clearId() {
       id = null;
-      fieldSetFlags()[0] = false;
+      fieldSetFlags()[5] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'name' field.
+      * @return The value.
+      */
+    public java.lang.String getName() {
+      return name;
+    }
+
+
+    /**
+      * Sets the value of the 'name' field.
+      * @param value The value of 'name'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder setName(java.lang.String value) {
+      validate(fields()[6], value);
+      this.name = value;
+      fieldSetFlags()[6] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'name' field has been set.
+      * @return True if the 'name' field has been set, false otherwise.
+      */
+    public boolean hasName() {
+      return fieldSetFlags()[6];
+    }
+
+
+    /**
+      * Clears the value of the 'name' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder clearName() {
+      name = null;
+      fieldSetFlags()[6] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'organizationId' field.
+      * @return The value.
+      */
+    public java.lang.String getOrganizationId() {
+      return organizationId;
+    }
+
+
+    /**
+      * Sets the value of the 'organizationId' field.
+      * @param value The value of 'organizationId'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder setOrganizationId(java.lang.String value) {
+      validate(fields()[7], value);
+      this.organizationId = value;
+      fieldSetFlags()[7] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'organizationId' field has been set.
+      * @return True if the 'organizationId' field has been set, false otherwise.
+      */
+    public boolean hasOrganizationId() {
+      return fieldSetFlags()[7];
+    }
+
+
+    /**
+      * Clears the value of the 'organizationId' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder clearOrganizationId() {
+      organizationId = null;
+      fieldSetFlags()[7] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'qType' field.
+      * @return The value.
+      */
+    public java.lang.String getQType() {
+      return qType;
+    }
+
+
+    /**
+      * Sets the value of the 'qType' field.
+      * @param value The value of 'qType'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder setQType(java.lang.String value) {
+      validate(fields()[8], value);
+      this.qType = value;
+      fieldSetFlags()[8] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'qType' field has been set.
+      * @return True if the 'qType' field has been set, false otherwise.
+      */
+    public boolean hasQType() {
+      return fieldSetFlags()[8];
+    }
+
+
+    /**
+      * Clears the value of the 'qType' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder clearQType() {
+      qType = null;
+      fieldSetFlags()[8] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'questionText' field.
+      * @return The value.
+      */
+    public java.lang.String getQuestionText() {
+      return questionText;
+    }
+
+
+    /**
+      * Sets the value of the 'questionText' field.
+      * @param value The value of 'questionText'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder setQuestionText(java.lang.String value) {
+      validate(fields()[9], value);
+      this.questionText = value;
+      fieldSetFlags()[9] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'questionText' field has been set.
+      * @return True if the 'questionText' field has been set, false otherwise.
+      */
+    public boolean hasQuestionText() {
+      return fieldSetFlags()[9];
+    }
+
+
+    /**
+      * Clears the value of the 'questionText' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder clearQuestionText() {
+      questionText = null;
+      fieldSetFlags()[9] = false;
       return this;
     }
 
@@ -290,9 +960,9 @@ public class QuestionDeleteRequestAvroModel extends org.apache.avro.specific.Spe
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder setSagaId(java.lang.String value) {
-      validate(fields()[1], value);
+      validate(fields()[10], value);
       this.sagaId = value;
-      fieldSetFlags()[1] = true;
+      fieldSetFlags()[10] = true;
       return this;
     }
 
@@ -301,7 +971,7 @@ public class QuestionDeleteRequestAvroModel extends org.apache.avro.specific.Spe
       * @return True if the 'sagaId' field has been set, false otherwise.
       */
     public boolean hasSagaId() {
-      return fieldSetFlags()[1];
+      return fieldSetFlags()[10];
     }
 
 
@@ -311,7 +981,47 @@ public class QuestionDeleteRequestAvroModel extends org.apache.avro.specific.Spe
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder clearSagaId() {
       sagaId = null;
-      fieldSetFlags()[1] = false;
+      fieldSetFlags()[10] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'updatedBy' field.
+      * @return The value.
+      */
+    public java.lang.String getUpdatedBy() {
+      return updatedBy;
+    }
+
+
+    /**
+      * Sets the value of the 'updatedBy' field.
+      * @param value The value of 'updatedBy'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder setUpdatedBy(java.lang.String value) {
+      validate(fields()[11], value);
+      this.updatedBy = value;
+      fieldSetFlags()[11] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'updatedBy' field has been set.
+      * @return True if the 'updatedBy' field has been set, false otherwise.
+      */
+    public boolean hasUpdatedBy() {
+      return fieldSetFlags()[11];
+    }
+
+
+    /**
+      * Clears the value of the 'updatedBy' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel.Builder clearUpdatedBy() {
+      updatedBy = null;
+      fieldSetFlags()[11] = false;
       return this;
     }
 
@@ -320,8 +1030,18 @@ public class QuestionDeleteRequestAvroModel extends org.apache.avro.specific.Spe
     public QuestionDeleteRequestAvroModel build() {
       try {
         QuestionDeleteRequestAvroModel record = new QuestionDeleteRequestAvroModel();
-        record.id = fieldSetFlags()[0] ? this.id : (java.lang.String) defaultValue(fields()[0]);
-        record.sagaId = fieldSetFlags()[1] ? this.sagaId : (java.lang.String) defaultValue(fields()[1]);
+        record.answers = fieldSetFlags()[0] ? this.answers : (java.util.List<java.lang.String>) defaultValue(fields()[0]);
+        record.createdBy = fieldSetFlags()[1] ? this.createdBy : (java.lang.String) defaultValue(fields()[1]);
+        record.defaultMark = fieldSetFlags()[2] ? this.defaultMark : (java.math.BigDecimal) defaultValue(fields()[2]);
+        record.difficulty = fieldSetFlags()[3] ? this.difficulty : (java.lang.String) defaultValue(fields()[3]);
+        record.generalFeedback = fieldSetFlags()[4] ? this.generalFeedback : (java.lang.String) defaultValue(fields()[4]);
+        record.id = fieldSetFlags()[5] ? this.id : (java.lang.String) defaultValue(fields()[5]);
+        record.name = fieldSetFlags()[6] ? this.name : (java.lang.String) defaultValue(fields()[6]);
+        record.organizationId = fieldSetFlags()[7] ? this.organizationId : (java.lang.String) defaultValue(fields()[7]);
+        record.qType = fieldSetFlags()[8] ? this.qType : (java.lang.String) defaultValue(fields()[8]);
+        record.questionText = fieldSetFlags()[9] ? this.questionText : (java.lang.String) defaultValue(fields()[9]);
+        record.sagaId = fieldSetFlags()[10] ? this.sagaId : (java.lang.String) defaultValue(fields()[10]);
+        record.updatedBy = fieldSetFlags()[11] ? this.updatedBy : (java.lang.String) defaultValue(fields()[11]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -354,9 +1074,40 @@ public class QuestionDeleteRequestAvroModel extends org.apache.avro.specific.Spe
   @Override public void customEncode(org.apache.avro.io.Encoder out)
     throws java.io.IOException
   {
+    long size0 = this.answers.size();
+    out.writeArrayStart();
+    out.setItemCount(size0);
+    long actualSize0 = 0;
+    for (java.lang.String e0: this.answers) {
+      actualSize0++;
+      out.startItem();
+      out.writeString(e0);
+    }
+    out.writeArrayEnd();
+    if (actualSize0 != size0)
+      throw new java.util.ConcurrentModificationException("Array-size written was " + size0 + ", but element count was " + actualSize0 + ".");
+
+    out.writeString(this.createdBy);
+
+    out.writeString(this.defaultMark.toString());
+
+    out.writeString(this.difficulty);
+
+    out.writeString(this.generalFeedback);
+
     out.writeString(this.id);
 
+    out.writeString(this.name);
+
+    out.writeString(this.organizationId);
+
+    out.writeString(this.qType);
+
+    out.writeString(this.questionText);
+
     out.writeString(this.sagaId);
+
+    out.writeString(this.updatedBy);
 
   }
 
@@ -365,19 +1116,105 @@ public class QuestionDeleteRequestAvroModel extends org.apache.avro.specific.Spe
   {
     org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
     if (fieldOrder == null) {
+      long size0 = in.readArrayStart();
+      java.util.List<java.lang.String> a0 = this.answers;
+      if (a0 == null) {
+        a0 = new SpecificData.Array<java.lang.String>((int)size0, SCHEMA$.getField("answers").schema());
+        this.answers = a0;
+      } else a0.clear();
+      SpecificData.Array<java.lang.String> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.String>)a0 : null);
+      for ( ; 0 < size0; size0 = in.arrayNext()) {
+        for ( ; size0 != 0; size0--) {
+          java.lang.String e0 = (ga0 != null ? ga0.peek() : null);
+          e0 = in.readString();
+          a0.add(e0);
+        }
+      }
+
+      this.createdBy = in.readString();
+
+      this.defaultMark = new java.math.BigDecimal(in.readString());
+
+      this.difficulty = in.readString();
+
+      this.generalFeedback = in.readString();
+
       this.id = in.readString();
+
+      this.name = in.readString();
+
+      this.organizationId = in.readString();
+
+      this.qType = in.readString();
+
+      this.questionText = in.readString();
 
       this.sagaId = in.readString();
 
+      this.updatedBy = in.readString();
+
     } else {
-      for (int i = 0; i < 2; i++) {
+      for (int i = 0; i < 12; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
-          this.id = in.readString();
+          long size0 = in.readArrayStart();
+          java.util.List<java.lang.String> a0 = this.answers;
+          if (a0 == null) {
+            a0 = new SpecificData.Array<java.lang.String>((int)size0, SCHEMA$.getField("answers").schema());
+            this.answers = a0;
+          } else a0.clear();
+          SpecificData.Array<java.lang.String> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.String>)a0 : null);
+          for ( ; 0 < size0; size0 = in.arrayNext()) {
+            for ( ; size0 != 0; size0--) {
+              java.lang.String e0 = (ga0 != null ? ga0.peek() : null);
+              e0 = in.readString();
+              a0.add(e0);
+            }
+          }
           break;
 
         case 1:
+          this.createdBy = in.readString();
+          break;
+
+        case 2:
+          this.defaultMark = new java.math.BigDecimal(in.readString());
+          break;
+
+        case 3:
+          this.difficulty = in.readString();
+          break;
+
+        case 4:
+          this.generalFeedback = in.readString();
+          break;
+
+        case 5:
+          this.id = in.readString();
+          break;
+
+        case 6:
+          this.name = in.readString();
+          break;
+
+        case 7:
+          this.organizationId = in.readString();
+          break;
+
+        case 8:
+          this.qType = in.readString();
+          break;
+
+        case 9:
+          this.questionText = in.readString();
+          break;
+
+        case 10:
           this.sagaId = in.readString();
+          break;
+
+        case 11:
+          this.updatedBy = in.readString();
           break;
 
         default:
