@@ -4,9 +4,12 @@ import com.backend.programming.learning.system.course.service.dataaccess.exam.en
 import com.backend.programming.learning.system.course.service.dataaccess.exam_question.entity.ExamQuestionEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.entity.User;
+import com.backend.programming.learning.system.valueobject.Status;
+import com.backend.programming.learning.system.valueobject.Type;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -31,9 +34,12 @@ public class ExamSubmissionEntity {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
 
-    private String type;
+    private Integer submitCount;
+    private ZonedDateTime startTime;
+    private ZonedDateTime submitTime;
 
-    private Integer passStatus;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @Override
     public boolean equals(Object o) {

@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.dto.method.create.exam;
 
+import com.backend.programming.learning.system.valueobject.OverdueHandling;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,9 +28,9 @@ public record CreateExamCommand(
         Float maxScore,
         ZonedDateTime timeOpen,
         ZonedDateTime timeClose,
-        ZonedDateTime timeLimit,
+        Integer timeLimit,
         @NotNull(message = "Exam overdue handling is required")
-        String overdueHandling,
+        OverdueHandling overdueHandling,
         @NotNull(message = "Exam can redo questions is required")
         Boolean canRedoQuestions,
         @NotNull(message = "Exam max attempts is required")

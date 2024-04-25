@@ -30,6 +30,7 @@ public class ExamDataMapper {
                 .timeClose(createExamCommand.timeClose())
                 .timeLimit(createExamCommand.timeLimit())
                 .intro(createExamCommand.intro())
+                .overdueHandling(createExamCommand.overdueHandling())
                 .overdueHanding(createExamCommand.overdueHandling())
                 .canRedoQuestions(createExamCommand.canRedoQuestions())
                 .maxAttempts(createExamCommand.maxAttempts())

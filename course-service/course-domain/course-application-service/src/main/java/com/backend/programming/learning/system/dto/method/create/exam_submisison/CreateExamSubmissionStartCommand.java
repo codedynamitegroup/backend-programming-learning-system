@@ -1,25 +1,22 @@
 package com.backend.programming.learning.system.dto.method.create.exam_submisison;
 
-import com.backend.programming.learning.system.valueobject.Status;
 import com.backend.programming.learning.system.valueobject.Type;
 import lombok.Builder;
 
-import java.time.ZonedDateTime;
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 /**
  * com.backend.programming.learning.system.dto.method.create.exam_submisison
  * Create by Dang Ngoc Tien
- * Date 4/24/2024 - 12:15 AM
+ * Date 4/26/2024 - 12:13 AM
  * Description: ...
  */
 @Builder
-public record CreateExamSubmissionResponse(
-        UUID examSubmissionId,
+public record CreateExamSubmissionStartCommand(
+        @NotNull(message = "Exam id is required")
         UUID examId,
-        UUID userId,
-        ZonedDateTime startTime,
-        ZonedDateTime submitTime,
-        Status status
+        @NotNull(message = "User id is required")
+        UUID userId
 ) {
 }
