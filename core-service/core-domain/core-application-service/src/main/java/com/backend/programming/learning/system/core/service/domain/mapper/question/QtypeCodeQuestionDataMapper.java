@@ -32,7 +32,7 @@ public class QtypeCodeQuestionDataMapper {
                 .dslTemplate(null)
                 .build();
     }
-    public CodeQuestionsUpdatePayload codeQuestionsUpdateRequestToCodeQuestionsUpdatePayload(CodeQuestionsUpdateRequest request, CopyState copyState){
+    public CodeQuestionsUpdatePayload codeQuestionsUpdateRequestToCodeQuestionsUpdatePayload(CodeQuestionsUpdateRequest request){
         return CodeQuestionsUpdatePayload.builder()
                 .id(request.getId())
                 .codeQuestionId(request.getCodeQuestionId())
@@ -42,7 +42,6 @@ public class QtypeCodeQuestionDataMapper {
                 .inputFormat(request.getInputFormat())
                 .outputFormat(request.getOutputFormat())
                 .constraints(request.getConstraints())
-                .state(copyState.name())
                 .build();
     }
 

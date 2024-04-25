@@ -37,6 +37,9 @@ CREATE TYPE CopyState AS ENUM (
     'UPDATE_FAILED',
     'CREATE_FAILED');
 
+DROP TYPE IF EXISTS outbox_status;
+CREATE TYPE outbox_status AS ENUM ('STARTED', 'COMPLETED', 'FAILED');
+
 DROP TABLE IF EXISTS "public".user CASCADE;
 CREATE TABLE "public".user
 (
@@ -534,7 +537,7 @@ CREATE TABLE "public".code_questions_update_outbox
 
 CREATE INDEX "code_questions_update_outbox_saga_status"
     ON code_questions_update_outbox
-        (type, outbox_status, saga_status);
-CREATE INDEX "code_questions_update_outbox_saga_id"
+        (type, outbox_status);
+CREATE UNIQUE INDEX "code_questions_update_outbox_saga_id"
     ON code_questions_update_outbox
-        (type, saga_id, saga_status);
+        (type, saga_id, copy_state, outbox_status);

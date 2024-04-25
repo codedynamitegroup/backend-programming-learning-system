@@ -23,7 +23,7 @@ public class KafkaMessageHelper {
     public KafkaMessageHelper(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
-    public <T,E extends DomainException> T getOrderEventPayload(String payload, Class<T> outputType,Class<E> domainException) {
+    public <T,E extends DomainException> T getObjectEventPayload(String payload, Class<T> outputType, Class<E> domainException) {
         try {
             return objectMapper.readValue(payload, outputType);
         } catch (JsonProcessingException e) {

@@ -5,8 +5,8 @@ logging:
     com.backend.programming.learning.system: DEBUG
 
 code-assessment-service:
-  code-question-create-response-from-core-service-topic-name: code-question-create-response-from-core-service
-  code-question-create-request-to-core-service-topic-name: code-question-create-request-to-core-service
+  code-question-update-response-from-core-service-topic-name: code-question-update-response-from-core-service
+  code-question-update-request-to-core-service-topic-name: code-question-update-request-to-core-service
   outbox-scheduler-fixed-rate: 10000 #2000 in production
   outbox-scheduler-initial-delay: 10000 #2000 in production
 

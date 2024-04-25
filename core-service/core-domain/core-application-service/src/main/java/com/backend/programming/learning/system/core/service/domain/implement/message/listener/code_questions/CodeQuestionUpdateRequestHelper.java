@@ -12,6 +12,7 @@ import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -42,6 +43,7 @@ public class CodeQuestionUpdateRequestHelper {
         }
         return false;
     }
+    @Transactional
     public void persistCodeQuestion(CodeQuestionsUpdateRequest codeQuestionsUpdateRequest){
 
         if (publishIfOutboxMessageUpdatingForCodeQuestion(codeQuestionsUpdateRequest, CopyState.CREATED)) {
@@ -49,87 +51,105 @@ public class CodeQuestionUpdateRequestHelper {
                     codeQuestionsUpdateRequest.getSagaId());
             return;
         }
-        CodeQuestionsUpdatePayload payload = codeQuestionDataMapper.codeQuestionsUpdateRequestToCodeQuestionsUpdatePayload(codeQuestionsUpdateRequest, CopyState.CREATED);
-        boolean saveSucceed = false;
-        try {
-            QtypeCodeQuestion codeQuestion = codeQuestionDataMapper.codeQuestionsUpdateRequestToQtypeCodeQuestion(codeQuestionsUpdateRequest);
-            codeQuestionRepository.saveQtypeCodeQuestion(codeQuestion);
-            saveSucceed = true;
+        CodeQuestionsUpdatePayload payload = codeQuestionDataMapper.codeQuestionsUpdateRequestToCodeQuestionsUpdatePayload(codeQuestionsUpdateRequest);
 
-        } catch (Exception e) {
-            log.error("an error occur in CodeQuestionUpdateRequestHelper {}", e.getMessage());
-            payload.setFailureMessages(Collections.singletonList(e.getMessage()));
-        }
-        CopyState copyState = CopyState.CREATED;
-        if(!saveSucceed)
-            copyState = CopyState.CREATE_FAILED;
+//        boolean saveSucceed = false;
+//        try {
+//            QtypeCodeQuestion codeQuestion = codeQuestionDataMapper.codeQuestionsUpdateRequestToQtypeCodeQuestion(codeQuestionsUpdateRequest);
+//            codeQuestionRepository.saveQtypeCodeQuestion(codeQuestion);
+//            saveSucceed = true;
+//
+//        } catch (Exception e) {
+//            log.error("an error occur in CodeQuestionUpdateRequestHelper {}", e.getMessage());
+//            payload.setFailureMessages(Collections.singletonList(e.getMessage()));
+//        }
+//        CopyState copyState = CopyState.CREATED;
+//        if(!saveSucceed)
+//            copyState = CopyState.CREATE_FAILED;
+//        payload.setState(copyState.name());
+
+        QtypeCodeQuestion codeQuestion = codeQuestionDataMapper.codeQuestionsUpdateRequestToQtypeCodeQuestion(codeQuestionsUpdateRequest);
+        codeQuestionRepository.saveQtypeCodeQuestion(codeQuestion);
+        payload.setState(CopyState.CREATED.name());
 
         codeQuestionsUpdateOutboxHelper.saveCodeQuestionsUpdateOutboxMessage(
                 payload,
-                copyState,
+                CopyState.CREATED,
                 OutboxStatus.STARTED,
                 UUID.fromString(codeQuestionsUpdateRequest.getSagaId())
         );
         log.info("Received CodeQuestionsUpdateRequest for code question id: {}", codeQuestionsUpdateRequest.getCodeQuestionId());
 
     }
-    void updateCodeQuestion(CodeQuestionsUpdateRequest codeQuestionsUpdateRequest){
+    @Transactional
+    public void updateCodeQuestion(CodeQuestionsUpdateRequest codeQuestionsUpdateRequest){
         if (publishIfOutboxMessageUpdatingForCodeQuestion(codeQuestionsUpdateRequest, CopyState.UPDATED)) {
             log.info("An outbox message with saga id: {} is already saved to database!",
                     codeQuestionsUpdateRequest.getSagaId());
             return;
         }
         //this gonna change if we actually have updated cases
-        CodeQuestionsUpdatePayload payload = codeQuestionDataMapper.codeQuestionsUpdateRequestToCodeQuestionsUpdatePayload(codeQuestionsUpdateRequest, CopyState.UPDATED);
+        CodeQuestionsUpdatePayload payload = codeQuestionDataMapper.codeQuestionsUpdateRequestToCodeQuestionsUpdatePayload(codeQuestionsUpdateRequest);
 
-        boolean saveSucceed = false;
-        try {
-            QtypeCodeQuestion codeQuestion = codeQuestionDataMapper.codeQuestionsUpdateRequestToQtypeCodeQuestion(codeQuestionsUpdateRequest);
-            codeQuestionRepository.saveQtypeCodeQuestion(codeQuestion);
-            saveSucceed = true;
+//        boolean saveSucceed = false;
+//        try {
+//            QtypeCodeQuestion codeQuestion = codeQuestionDataMapper.codeQuestionsUpdateRequestToQtypeCodeQuestion(codeQuestionsUpdateRequest);
+//            codeQuestionRepository.saveQtypeCodeQuestion(codeQuestion);
+//            saveSucceed = true;
+//
+//        } catch (Exception e) {
+//            log.error("an error occur in CodeQuestionUpdateRequestHelper {}", e.getMessage());
+//            payload.setFailureMessages(Collections.singletonList(e.getMessage()));
+//        }
+//        CopyState copyState = CopyState.UPDATED;
+//        if(!saveSucceed)
+//            copyState = CopyState.UPDATE_FAILED;
+//        payload.setState(copyState.name());
 
-        } catch (Exception e) {
-            log.error("an error occur in CodeQuestionUpdateRequestHelper {}", e.getMessage());
-            payload.setFailureMessages(Collections.singletonList(e.getMessage()));
-        }
-        CopyState copyState = CopyState.UPDATED;
-        if(!saveSucceed)
-            copyState = CopyState.UPDATE_FAILED;
+        QtypeCodeQuestion codeQuestion = codeQuestionDataMapper.codeQuestionsUpdateRequestToQtypeCodeQuestion(codeQuestionsUpdateRequest);
+        codeQuestionRepository.saveQtypeCodeQuestion(codeQuestion);
+        payload.setState(CopyState.UPDATED.name());
+
 
         codeQuestionsUpdateOutboxHelper.saveCodeQuestionsUpdateOutboxMessage(
                 payload,
-                copyState,
+                CopyState.UPDATED,
                 OutboxStatus.STARTED,
                 UUID.fromString(codeQuestionsUpdateRequest.getSagaId())
         );
         log.info("Received CodeQuestionsUpdateRequest for code question id: {}", codeQuestionsUpdateRequest.getCodeQuestionId());
 
     }
-    void deleteCodeQuestion(CodeQuestionsUpdateRequest codeQuestionsUpdateRequest){
+    @Transactional
+    public void deleteCodeQuestion(CodeQuestionsUpdateRequest codeQuestionsUpdateRequest){
         if (publishIfOutboxMessageUpdatingForCodeQuestion(codeQuestionsUpdateRequest, CopyState.DELETED)) {
             log.info("An outbox message with saga id: {} is already saved to database!",
                     codeQuestionsUpdateRequest.getSagaId());
             return;
         }
 
-        CodeQuestionsUpdatePayload payload = codeQuestionDataMapper.codeQuestionsUpdateRequestToCodeQuestionsUpdatePayload(codeQuestionsUpdateRequest, CopyState.DELETED);
+        CodeQuestionsUpdatePayload payload = codeQuestionDataMapper.codeQuestionsUpdateRequestToCodeQuestionsUpdatePayload(codeQuestionsUpdateRequest);
 
-        boolean saveSucceed = false;
-        try {
-            codeQuestionRepository.deleteById(UUID.fromString(payload.getCodeQuestionId()));
-            saveSucceed = true;
+//        boolean saveSucceed = false;
+//        try {
+//            codeQuestionRepository.deleteById(UUID.fromString(payload.getCodeQuestionId()));
+//            saveSucceed = true;
+//
+//        } catch (Exception e) {
+//            log.error("an error occur in CodeQuestionUpdateRequestHelper {}", e.getMessage());
+//            payload.setFailureMessages(Collections.singletonList(e.getMessage()));
+//        }
+//        CopyState copyState = CopyState.DELETED;
+//        if(!saveSucceed)
+//            copyState = CopyState.DELETE_FAILED;
+//        payload.setState(copyState.name());
 
-        } catch (Exception e) {
-            log.error("an error occur in CodeQuestionUpdateRequestHelper {}", e.getMessage());
-            payload.setFailureMessages(Collections.singletonList(e.getMessage()));
-        }
-        CopyState copyState = CopyState.DELETED;
-        if(!saveSucceed)
-            copyState = CopyState.DELETE_FAILED;
+        codeQuestionRepository.deleteById(UUID.fromString(payload.getCodeQuestionId()));
+        payload.setState(CopyState.DELETED.name());
 
         codeQuestionsUpdateOutboxHelper.saveCodeQuestionsUpdateOutboxMessage(
                 payload,
-                copyState,
+                CopyState.DELETED,
                 OutboxStatus.STARTED,
                 UUID.fromString(codeQuestionsUpdateRequest.getSagaId())
         );

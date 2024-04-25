@@ -36,4 +36,8 @@ public class CodeQuestionsUpdatePayload {
     public void setFailureMessages(List<String> failureMessages) {
         this.failureMessages = failureMessages;
     }
+
+    public void setState(String state) {
+        this.state = state;
+    }
 }

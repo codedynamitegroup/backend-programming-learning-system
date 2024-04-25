@@ -44,7 +44,7 @@ public class CodeQuestionsUpdateMessageKafkaPublisher
     public void publish(CodeQuestionsUpdateOutboxMessage codeQuestionsUpdateOutboxMessage,
                         BiConsumer<CodeQuestionsUpdateOutboxMessage, OutboxStatus> outboxCallback) {
         CodeQuestionsUpdatePayload codeQuestionsUpdatePayload =
-                kafkaMessageHelper.getOrderEventPayload(
+                kafkaMessageHelper.getObjectEventPayload(
                         codeQuestionsUpdateOutboxMessage.getPayload(),
                         CodeQuestionsUpdatePayload.class,
                         CodeQuestionDomainException.class
@@ -62,11 +62,11 @@ public class CodeQuestionsUpdateMessageKafkaPublisher
                     codeQuestionMessagingDataMapper
                             .codeQuestionsUpdatePayloadToCodeQuestionUpdateRequestAvroModel(sagaId, codeQuestionsUpdatePayload);
 
-            kafkaProducer.send(codeAssessmentServiceConfigData.getCodeQuestionCreateRequestToCoreServiceTopicName(),
+            kafkaProducer.send(codeAssessmentServiceConfigData.getCodeQuestionUpdateRequestToCoreServiceTopicName(),
                     sagaId,
                     avroModel,
                     kafkaMessageHelper.getKafkaCallback(
-                            codeAssessmentServiceConfigData.getCodeQuestionCreateRequestToCoreServiceTopicName(),
+                            codeAssessmentServiceConfigData.getCodeQuestionUpdateRequestToCoreServiceTopicName(),
                             avroModel,
                             codeQuestionsUpdateOutboxMessage,
                             outboxCallback,

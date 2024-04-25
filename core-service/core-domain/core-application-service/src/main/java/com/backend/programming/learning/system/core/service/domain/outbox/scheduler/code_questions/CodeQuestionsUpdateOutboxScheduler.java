@@ -37,7 +37,7 @@ public class CodeQuestionsUpdateOutboxScheduler implements OutboxScheduler {
         codeQuestionsUpdateOutboxHelper
                 .getCodeQuestionsUpdateOutboxMessageByOutboxStatus(OutboxStatus.STARTED);
 
-        if (outboxMessagesResponse.isPresent() && outboxMessagesResponse.get().size() > 0) {
+        if (outboxMessagesResponse.isPresent() && !outboxMessagesResponse.get().isEmpty()) {
             List<CodeQuestionsUpdateOutboxMessage> outboxMessages = outboxMessagesResponse.get();
             log.info("Received {} CodeQuestionsUpdateOutboxMessage with ids: {}, sending to message bus!",
                     outboxMessages.size(),

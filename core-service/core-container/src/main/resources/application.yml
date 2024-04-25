@@ -10,6 +10,8 @@ socket-config:
   host: localhost
 
 core-service:
+  code-question-update-response-from-core-service-topic-name: code-question-update-response-from-core-service
+  code-question-update-request-to-core-service-topic-name: code-question-update-request-to-core-service
   question-created-request-topic-name: core-question-create-request
   question-deleted-request-topic-name: core-question-delete-request
   question-updated-request-topic-name: core-question-update-request
@@ -53,7 +55,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/core-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: postgres
-    password: localdb
+    password: postgres
     driver-class-name: org.postgresql.Driver
     platform: postgres
     schema: classpath:init-schema.sql
@@ -85,6 +87,7 @@ kafka-consumer-config:
   core-service-user-update-request-group-id: core-service-user-update-request-topic
   core-service-user-delete-request-group-id: core-service-user-delete-request-topic
   customer-group-id: customer-topic-consumer
+  code-question-update-consumer-group-id: code-question-update-topic-consumer
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
   specific-avro-reader: true
