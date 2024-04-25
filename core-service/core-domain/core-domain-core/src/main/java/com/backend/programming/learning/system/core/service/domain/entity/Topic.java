@@ -42,8 +42,8 @@ public class Topic extends AggregateRoot<TopicId> {
 
     public void initializeTopic() {
         setId(new TopicId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
-        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        createdAt = ZonedDateTime.now();
+        updatedAt = ZonedDateTime.now();
     }
 
 

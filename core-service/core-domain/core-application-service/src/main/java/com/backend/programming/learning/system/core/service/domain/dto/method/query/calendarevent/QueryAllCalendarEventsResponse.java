@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Getter
@@ -14,10 +15,4 @@ import java.util.List;
 public class QueryAllCalendarEventsResponse {
     @NotNull
     private final List<CalendarEventResponseEntity> calendarEvents;
-    @NotNull
-    private final int currentPage;
-    @NotNull
-    private final long totalItems;
-    @NotNull
-    private final int totalPages;
 }

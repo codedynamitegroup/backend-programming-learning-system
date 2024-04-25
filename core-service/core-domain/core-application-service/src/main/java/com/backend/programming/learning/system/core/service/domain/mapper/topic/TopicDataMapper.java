@@ -18,6 +18,7 @@ import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -56,6 +57,8 @@ public class TopicDataMapper {
                         .builder()
                         .id(new UserId(createTopicCommand.getUpdatedBy()))
                         .build())
+                .createdAt(ZonedDateTime.now())
+                .updatedAt(ZonedDateTime.now())
                 .build();
     }
 

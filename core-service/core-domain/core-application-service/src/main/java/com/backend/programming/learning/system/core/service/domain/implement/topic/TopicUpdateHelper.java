@@ -48,7 +48,7 @@ public class TopicUpdateHelper {
             topic.setDescription(updateTopicCommand.getDescription());
         }
         topic.setUpdatedBy(updatedBy);
-        topic.setUpdatedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+        topic.setUpdatedAt(ZonedDateTime.now());
 
         updateTopic(topic);
 

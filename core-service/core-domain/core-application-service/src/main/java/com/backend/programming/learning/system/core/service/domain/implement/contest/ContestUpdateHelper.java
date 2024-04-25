@@ -43,7 +43,7 @@ public class ContestUpdateHelper {
 
         User updatedBy = getUser(updateContestCommand.getUpdatedBy());
         contest.setUpdatedBy(updatedBy);
-        contest.setUpdatedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+        contest.setUpdatedAt(ZonedDateTime.now());
 
         if (updateContestCommand.getName() != null) {
             contest.setName(updateContestCommand.getName());

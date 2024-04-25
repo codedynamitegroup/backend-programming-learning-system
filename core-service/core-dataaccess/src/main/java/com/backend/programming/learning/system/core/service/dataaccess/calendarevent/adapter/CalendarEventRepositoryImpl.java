@@ -9,6 +9,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -16,6 +18,7 @@ import java.util.UUID;
 public class CalendarEventRepositoryImpl implements CalendarEventRepository {
     private final CalendarEventJpaRepository calendarEventJpaRepository;
     private final CalendarEventDataAccessMapper calendarEventDataAccessMapper;
+    private CalendarEventJpaRepository calendarEventJpaRepository1;
 
     public CalendarEventRepositoryImpl(CalendarEventJpaRepository calendarEventJpaRepository,
                                        CalendarEventDataAccessMapper calendarEventDataAccessMapper) {
@@ -37,10 +40,11 @@ public class CalendarEventRepositoryImpl implements CalendarEventRepository {
     }
 
     @Override
-    public Page<CalendarEvent> findAll(Integer pageNo, Integer pageSize) {
-        Pageable paging = PageRequest.of(pageNo, pageSize);
-        return calendarEventJpaRepository.findAll(paging)
-                .map(calendarEventDataAccessMapper::calendarEventEntityToCalendarEvent);
+    public List<CalendarEvent> findAllBetweenFromTimeAndToTime(ZonedDateTime fromTime, ZonedDateTime toTime) {
+        return calendarEventJpaRepository.findAllBetweenFromTimeAndToTime(fromTime, toTime)
+                .stream()
+                .map(calendarEventDataAccessMapper::calendarEventEntityToCalendarEvent)
+                .toList();
     }
 
     @Override

@@ -38,7 +38,7 @@ public class ChapterUpdateHelper {
         Chapter chapter = getChapter(updateChapterCommand.getChapterId());
 
         chapter.setUpdatedBy(updatedByUser);
-        chapter.setUpdatedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+        chapter.setUpdatedAt(ZonedDateTime.now());
 
         if (updateChapterCommand.getNo() != null) {
             chapter.setNo(updateChapterCommand.getNo());

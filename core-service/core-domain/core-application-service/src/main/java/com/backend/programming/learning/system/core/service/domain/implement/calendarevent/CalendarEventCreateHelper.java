@@ -38,7 +38,7 @@ public class CalendarEventCreateHelper {
 
     @Transactional
     public CalendarEvent persistCalendarEvent(CreateCalendarEventCommand createCalendarEventCommand) {
-        checkUser(createCalendarEventCommand.getUserIdTo());
+        checkUser(createCalendarEventCommand.getUserId());
 
         CalendarEvent calendarEvent = calendarEventDataMapper
                 .createCalendarEventCommandToCalendarEvent(createCalendarEventCommand);

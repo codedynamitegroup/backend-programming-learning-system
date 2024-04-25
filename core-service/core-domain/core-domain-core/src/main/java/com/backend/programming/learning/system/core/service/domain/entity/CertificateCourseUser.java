@@ -34,8 +34,8 @@ public class CertificateCourseUser extends BaseEntity<CertificateCourseUserId> {
 
     public void initializeCertificateCourseUser() {
         setId(new CertificateCourseUserId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
-        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        createdAt = ZonedDateTime.now();
+        updatedAt = ZonedDateTime.now();
     }
 
 

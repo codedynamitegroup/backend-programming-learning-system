@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.core.service.domain.entity;
 
 import com.backend.programming.learning.system.core.service.domain.valueobject.CalendarEventId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.NotificationEventType;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
@@ -15,13 +16,15 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
     private String description;
     private NotificationEventType eventType;
     private ZonedDateTime startTime;
-    private User userTo;
     private ZonedDateTime endTime;
+    private User user;
+    private UUID courseId;
+    private String component;
     private ZonedDateTime createdAt;
 
     public void initializeCalendarEvent() {
         setId(new CalendarEventId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        createdAt = ZonedDateTime.now();
     }
 
     private CalendarEvent(Builder builder) {
@@ -30,8 +33,10 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
         setDescription(builder.description);
         setEventType(builder.eventType);
         setStartTime(builder.startTime);
-        setUserTo(builder.userTo);
         setEndTime(builder.endTime);
+        setUser(builder.user);
+        setCourseId(builder.courseId);
+        setComponent(builder.component);
         setCreatedAt(builder.createdAt);
     }
 
@@ -72,20 +77,36 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
         this.startTime = startTime;
     }
 
-    public User getUserTo() {
-        return userTo;
-    }
-
-    public void setUserTo(User userTo) {
-        this.userTo = userTo;
-    }
-
     public ZonedDateTime getEndTime() {
         return endTime;
     }
 
     public void setEndTime(ZonedDateTime endTime) {
         this.endTime = endTime;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public UUID getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(UUID courseId) {
+        this.courseId = courseId;
+    }
+
+    public String getComponent() {
+        return component;
+    }
+
+    public void setComponent(String component) {
+        this.component = component;
     }
 
     public ZonedDateTime getCreatedAt() {
@@ -102,8 +123,10 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
         private String description;
         private NotificationEventType eventType;
         private ZonedDateTime startTime;
-        private User userTo;
         private ZonedDateTime endTime;
+        private User user;
+        private UUID courseId;
+        private String component;
         private ZonedDateTime createdAt;
 
         private Builder() {
@@ -134,13 +157,23 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
             return this;
         }
 
-        public Builder userTo(User val) {
-            userTo = val;
+        public Builder endTime(ZonedDateTime val) {
+            endTime = val;
             return this;
         }
 
-        public Builder endTime(ZonedDateTime val) {
-            endTime = val;
+        public Builder user(User val) {
+            user = val;
+            return this;
+        }
+
+        public Builder courseId(UUID val) {
+            courseId = val;
+            return this;
+        }
+
+        public Builder component(String val) {
+            component = val;
             return this;
         }
 
