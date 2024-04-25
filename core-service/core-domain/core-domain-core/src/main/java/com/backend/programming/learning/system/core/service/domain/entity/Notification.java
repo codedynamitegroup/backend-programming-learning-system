@@ -49,8 +49,8 @@ public class Notification extends AggregateRoot<NotificationId> {
 
     public void initializeNotification() {
         setId(new NotificationId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
-        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        createdAt = ZonedDateTime.now();
+        updatedAt = ZonedDateTime.now();
     }
 
 

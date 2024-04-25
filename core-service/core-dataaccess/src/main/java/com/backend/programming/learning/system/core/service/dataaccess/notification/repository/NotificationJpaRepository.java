@@ -13,6 +13,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -24,6 +25,6 @@ public interface NotificationJpaRepository extends PagingAndSortingRepository<No
 
     @Transactional
     @Modifying
-    @Query("update NotificationEntity n set n.isRead = ?1 where n.id = ?2")
-    int markReadNotificationById(Boolean isRead, UUID id);
+    @Query("update NotificationEntity n set n.isRead = ?1, n.updatedAt = ?2 where n.id = ?3")
+    int markReadNotificationById(Boolean isRead, ZonedDateTime updatedAt, UUID id);
 }

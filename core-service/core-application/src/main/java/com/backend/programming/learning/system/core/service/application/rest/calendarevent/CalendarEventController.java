@@ -25,6 +25,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Slf4j
@@ -50,13 +51,13 @@ public class CalendarEventController {
 
     @GetMapping
     public ResponseEntity<QueryAllCalendarEventsResponse> getAllCalendarEvents(
-            @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "10") Integer pageSize) {
+            @RequestParam ZonedDateTime fromTime,
+            @RequestParam ZonedDateTime toTime) {
         QueryAllCalendarEventsResponse queryAllCalendarEventsResponse =
                 calendarEventApplicationService.queryAllCalendarEventsResponse(QueryAllCalendarEventsCommand
                         .builder()
-                        .pageNo(pageNo)
-                        .pageSize(pageSize)
+                        .fromTime(fromTime)
+                        .toTime(toTime)
                         .build());
         log.info("Returning all calendar events: {}", queryAllCalendarEventsResponse);
         return ResponseEntity.ok(queryAllCalendarEventsResponse);

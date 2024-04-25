@@ -30,6 +30,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Component
 @Slf4j
 public class CalendarEventCommandHandler {
@@ -63,12 +65,12 @@ public class CalendarEventCommandHandler {
     @Transactional(readOnly = true)
     public QueryAllCalendarEventsResponse queryAllCalendarEvents(
             QueryAllCalendarEventsCommand queryAllCalendarEventsCommand) {
-        Page<CalendarEvent> calendarEvents = calendarEventQueryHelper
+        List<CalendarEvent> calendarEvents = calendarEventQueryHelper
                 .findAllCalendarEvents(queryAllCalendarEventsCommand);
 
         log.info("Returning all calendar events: {}", calendarEvents);
 
-        return calendarEventDataMapper.pageCalendarEventToQueryAllCalendarEventsResponse(calendarEvents);
+        return calendarEventDataMapper.calendarEventsToQueryAllCalendarEventsResponse(calendarEvents);
     }
 
     @Transactional

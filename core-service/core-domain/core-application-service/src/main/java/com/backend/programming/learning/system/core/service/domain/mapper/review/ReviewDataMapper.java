@@ -15,6 +15,8 @@ import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import java.time.ZonedDateTime;
+
 @Component
 public class ReviewDataMapper {
     private final UserDataMapper userDataMapper;
@@ -36,6 +38,8 @@ public class ReviewDataMapper {
                         .builder()
                         .id(new UserId(createReviewCommand.getUpdatedBy()))
                         .build())
+                .createdAt(ZonedDateTime.now())
+                .updatedAt(ZonedDateTime.now())
                 .build();
     }
 

@@ -5,13 +5,14 @@ import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
+import java.time.ZonedDateTime;
 
 @Getter
 @Builder
 @AllArgsConstructor
 public class QueryAllCalendarEventsCommand {
     @NotNull
-    private final int pageNo;
+    private final ZonedDateTime fromTime;
     @NotNull
-    private final int pageSize;
+    private final ZonedDateTime toTime;
 }

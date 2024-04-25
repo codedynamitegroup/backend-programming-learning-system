@@ -42,8 +42,8 @@ public class Chapter extends BaseEntity<ChapterId> {
 
     public void initializeChapter() {
         setId(new ChapterId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
-        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        createdAt = ZonedDateTime.now();
+        updatedAt = ZonedDateTime.now();
     }
 
 

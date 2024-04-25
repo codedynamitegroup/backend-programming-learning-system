@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -56,6 +57,6 @@ public class NotificationRepositoryImpl implements NotificationRepository {
 
     @Override
     public int markReadNotificationById(UUID notificationId) {
-        return notificationJpaRepository.markReadNotificationById(true, notificationId);
+        return notificationJpaRepository.markReadNotificationById(true, ZonedDateTime.now(), notificationId);
     }
 }
