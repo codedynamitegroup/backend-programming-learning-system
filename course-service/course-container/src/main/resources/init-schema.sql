@@ -20,6 +20,12 @@ CREATE TYPE grade_method AS ENUM ('QUIZ_GRADEHIGHEST', 'QUIZ_GRADEAVERAGE', 'QUI
 DROP TYPE IF EXISTS type;
 CREATE TYPE type AS ENUM ('TEXT_ONLINE', 'FILE', 'BOTH');
 
+DROP TYPE IF EXISTS overdue_handling;
+CREATE TYPE overdue_handling AS ENUM ('AUTOSUBMIT', 'GRACEPERIOD', 'AUTOABANDON');
+
+DROP TYPE IF EXISTS status;
+CREATE TYPE status AS ENUM ('SUBMITTED', 'NOT_SUBMITTED');
+
 DROP TABLE IF EXISTS "public".user CASCADE;
 CREATE TABLE "public".user
 (
@@ -180,7 +186,7 @@ CREATE TABLE "public".exam
     time_open          TIMESTAMP WITH TIME ZONE,
     time_close         TIMESTAMP WITH TIME ZONE,
     time_limit         TIMESTAMP WITH TIME ZONE,
-    overdue_handling   text             NOT NULL DEFAULT 'autoabandon',
+    overdue_handling   overdue_handling NOT NULL DEFAULT 'AUTOABANDON',
     can_redo_questions boolean          NOT NULL DEFAULT '0',
     max_attempts       bigint           NOT NULL DEFAULT '0',
     shuffle_answers    boolean          NOT NULL DEFAULT '0',
@@ -217,8 +223,10 @@ CREATE TABLE "public".exam_submission
     id          uuid            DEFAULT gen_random_uuid() NOT NULL,
     exam_id     uuid   NOT NULL,
     user_id     uuid   NOT NULL,
-    type        type   NOT NULL,
-    pass_status bigint NOT NULL DEFAULT '0',
+    submit_count bigint NOT NULL DEFAULT '0',
+    start_time  TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    submit_time TIMESTAMP WITH TIME ZONE DEFAULT NULL,
+    status status NOT NULL DEFAULT 'NOT_SUBMITTED',
     CONSTRAINT exam_submission_pkey PRIMARY KEY (id),
     CONSTRAINT exam_submission_exam_id_fkey FOREIGN KEY (exam_id)
         REFERENCES "public".exam (id) MATCH SIMPLE
@@ -226,6 +234,30 @@ CREATE TABLE "public".exam_submission
         ON DELETE CASCADE,
     CONSTRAINT exam_submission_user_id_fkey FOREIGN KEY (user_id)
         REFERENCES "public".user (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS "public".exam_question_submission CASCADE;
+CREATE TABLE "public".exam_question_submission
+(
+    id                 uuid                      DEFAULT gen_random_uuid() NOT NULL,
+    user_id            uuid             NOT NULL,
+    exam_question_id uuid             NOT NULL,
+    AI_assessment text,
+    pass_status        bigint           NOT NULL DEFAULT '0',
+    grade              double precision NOT NULL,
+    content            text,
+    right_answer       text             NOT NULL,
+    num_file           bigint           NOT NULL,
+    status bigint NOT NULL DEFAULT '0',
+    CONSTRAINT exam_question_submission_pkey PRIMARY KEY (id),
+    CONSTRAINT exam_question_submission_user_id_fkey FOREIGN KEY (user_id)
+        REFERENCES "public".USER (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT exam_question_submission_exam_submission_id_fkey FOREIGN KEY (exam_question_id)
+        REFERENCES "public".exam_question (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
