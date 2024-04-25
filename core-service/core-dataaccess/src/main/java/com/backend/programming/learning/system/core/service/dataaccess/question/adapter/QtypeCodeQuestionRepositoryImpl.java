@@ -58,4 +58,9 @@ public class QtypeCodeQuestionRepositoryImpl implements QtypeCodeQuestionReposit
         qtypeCodeQuestionJpaRepository.save(qtypeCodeQuestionDataAccessMapper
                 .setQtypeCodeQuestionEntity(qtypeCodeQuestionEntity.get(), qtypeCodeQuestion));
     }
+
+    @Override
+    public void deleteById(UUID id) {
+        qtypeCodeQuestionJpaRepository.deleteById(id);
+    }
 }

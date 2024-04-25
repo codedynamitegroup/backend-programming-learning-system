@@ -99,5 +99,11 @@ public class CodeQuestionsUpdateOutboxHelper {
                     payload.getId(), e);
         }
     }
+    @Transactional
+    public void updateOutboxMessage(CodeQuestionsUpdateOutboxMessage outboxMessage, OutboxStatus outboxStatus) {
+        outboxMessage.setOutboxStatus(outboxStatus);
+        save(outboxMessage);
+        log.info("code question outbox table status is updated as: {}", outboxStatus.name());
+    }
 
 }

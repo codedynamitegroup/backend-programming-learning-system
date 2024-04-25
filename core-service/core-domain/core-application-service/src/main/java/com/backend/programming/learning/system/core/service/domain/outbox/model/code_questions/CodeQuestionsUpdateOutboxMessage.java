@@ -28,10 +28,6 @@ public class CodeQuestionsUpdateOutboxMessage {
         this.processedAt = processedAt;
     }
 
-    public void setSagaStatus(SagaStatus sagaStatus) {
-        this.sagaStatus = sagaStatus;
-    }
-
     public void setCopyState(CopyState copyState) {
         this.copyState = copyState;
     }

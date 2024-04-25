@@ -29,7 +29,11 @@ public class CodeQuestionsUpdatePayload {
     @JsonProperty
     private final String constraints;
     @JsonProperty
-    private String state;
+    private String state;//copy state
     @JsonProperty
     private List<String> failureMessages;
+
+    public void setFailureMessages(List<String> failureMessages) {
+        this.failureMessages = failureMessages;
+    }
 }

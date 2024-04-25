@@ -107,6 +107,7 @@ public class CodeQuestionsUpdateSaga implements SagaStep<CodeQuestionsUpdateResp
     }
     private void quitCodeQuestionsUpdateOrCreate(CodeQuestionsUpdateResponse response, CopyState state){
         CodeQuestion codeQuestion = findCodeQuestion(response.getCodeQuestionId());
+        //codeQuestion attributes should be reassign by the value of the response since there is no update case in core service, we don't have to do that
         log.info("Quitting save or change code question with id to core-service: {} with state {}", response.getId(), response.getState().toString());
         codeAssessmentDomainService.cancelCopyCodeQuestions(codeQuestion, state, response.getFailureMessages());
         codeQuestionRepository.save(codeQuestion);

@@ -12,4 +12,5 @@ public interface QtypeCodeQuestionRepository {
     List<QtypeCodeQuestion> findAllQtypeCodeQuestions();
     UUID getId(UUID questionId);
     void updateQtypeCodeQuestion(QtypeCodeQuestion qtypeCodeQuestion);
+    void deleteById(UUID id);
 }
