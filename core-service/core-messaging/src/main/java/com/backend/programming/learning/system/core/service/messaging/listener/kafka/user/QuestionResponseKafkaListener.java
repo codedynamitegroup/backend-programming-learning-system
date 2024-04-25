@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.core.service.messaging.listener.kafka.user;
 
-import com.backend.programming.learning.system.kafka.auth.avro.model.UserRequestAvroModel;
 import com.backend.programming.learning.system.kafka.consumer.KafkaConsumer;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel;
 import lombok.extern.slf4j.Slf4j;
