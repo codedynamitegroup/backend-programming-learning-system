@@ -5,20 +5,19 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.backend.programming.learning.system</groupId>
-        <artifactId>backend-programming-learning-system</artifactId>
+        <artifactId>background-service</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>background-service</artifactId>
+    <artifactId>background-domain</artifactId>
     <packaging>pom</packaging>
-
-    <modules>
-        <module>background-application</module>
-        <module>background-domain</module>
-        <module>background-dataaccess</module>
-    </modules>
 
     <properties>
     </properties>
+
+    <modules>
+        <module>background-domain-core</module>
+        <module>background-application-service</module>
+    </modules>
 
 </project>
