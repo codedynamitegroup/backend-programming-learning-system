@@ -151,4 +151,10 @@ public class CourseDomainServiceImpl implements CourseDomainService{
                 ZonedDateTime.now(ZoneId.of("UTC")),
                 QuestionResponseStatus.DELETE_FAILED);
     }
+
+    @Override
+    public void createStartExamSubmission(ExamSubmission examSubmission) {
+        examSubmission.initializeStartExamSubmission();
+        log.info("StartExamSubmission with id: {} is initiated", examSubmission.getId().getValue());
+    }
 }

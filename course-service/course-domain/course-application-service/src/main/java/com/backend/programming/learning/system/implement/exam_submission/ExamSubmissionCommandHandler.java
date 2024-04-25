@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.implement.exam_submission;
 
 import com.backend.programming.learning.system.dto.method.create.exam_submisison.CreateExamSubmissionCommand;
 import com.backend.programming.learning.system.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
+import com.backend.programming.learning.system.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
 import com.backend.programming.learning.system.entity.ExamSubmission;
 import com.backend.programming.learning.system.mapper.exam_submission.ExamSubmissionDataMapper;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,12 @@ public class ExamSubmissionCommandHandler {
     @Transactional
     public CreateExamSubmissionResponse submitExam(CreateExamSubmissionCommand createExamSubmissionCommand) {
         ExamSubmission examSubmission = examSubmissionCreateHelper.createExamSubmission(createExamSubmissionCommand);
+        return examSubmissionDataMapper.mapToCreateExamSubmissionResponse(examSubmission);
+    }
+
+    @Transactional
+    public CreateExamSubmissionResponse startExam(CreateExamSubmissionStartCommand createExamSubmissionStartCommand) {
+        ExamSubmission examSubmission = examSubmissionCreateHelper.createStartExamSubmission(createExamSubmissionStartCommand);
         return examSubmissionDataMapper.mapToCreateExamSubmissionResponse(examSubmission);
     }
 }

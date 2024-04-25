@@ -2,9 +2,11 @@ package com.backend.programming.learning.system.mapper.exam_submission;
 
 import com.backend.programming.learning.system.dto.method.create.exam_submisison.CreateExamSubmissionCommand;
 import com.backend.programming.learning.system.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
+import com.backend.programming.learning.system.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
 import com.backend.programming.learning.system.entity.Exam;
 import com.backend.programming.learning.system.entity.ExamSubmission;
 import com.backend.programming.learning.system.entity.User;
+import com.backend.programming.learning.system.valueobject.Status;
 import org.springframework.stereotype.Component;
 
 /**
@@ -19,8 +21,8 @@ public class ExamSubmissionDataMapper {
         return ExamSubmission.builder()
                 .exam(exam)
                 .user(user)
-                .type(createExamSubmissionCommand.type())
-                .passStatus(createExamSubmissionCommand.passStatus())
+//                .type(createExamSubmissionCommand.type())
+//                .passStatus(createExamSubmissionCommand.passStatus())
                 .build();
     }
 
@@ -29,8 +31,22 @@ public class ExamSubmissionDataMapper {
                 examSubmission.getId().getValue(),
                 examSubmission.getExam().getId().getValue(),
                 examSubmission.getUser().getId().getValue(),
-                examSubmission.getType(),
-                examSubmission.getPassStatus()
+                examSubmission.getStartTime(),
+                examSubmission.getSubmitTime(),
+                examSubmission.status()
         );
+    }
+
+    public ExamSubmission createStartExamSubmissionCommandToExamSubmission(
+            Exam exam,
+            User user,
+            Integer submissionCount,
+            CreateExamSubmissionStartCommand createExamSubmissionStartCommand) {
+        return ExamSubmission.builder()
+                .exam(exam)
+                .user(user)
+                .submissionCount(submissionCount)
+                .status(Status.NOT_SUBMITTED)
+                .build();
     }
 }

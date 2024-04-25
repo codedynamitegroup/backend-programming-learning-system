@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.dto.responseentity.exam;
 
 import com.backend.programming.learning.system.valueobject.CourseId;
+import com.backend.programming.learning.system.valueobject.OverdueHandling;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,9 +24,9 @@ public record ExamResponseEntity(
         Float maxScores,
         ZonedDateTime timeOpen,
         ZonedDateTime timeClose,
-        ZonedDateTime timeLimit,
+        Integer timeLimit,
         String intro,
-        String overdueHanding,
+        OverdueHandling overdueHanding,
         Boolean canRedoQuestions,
         Integer maxAttempts,
         Boolean shuffleAnswers,
