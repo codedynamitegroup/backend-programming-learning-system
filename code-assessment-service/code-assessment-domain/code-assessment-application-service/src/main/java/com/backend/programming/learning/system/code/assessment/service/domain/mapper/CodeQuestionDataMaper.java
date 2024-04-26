@@ -43,6 +43,7 @@ public class CodeQuestionDataMaper {
                 .inputFormat(codeQuestion.getInputFormat())
                 .outputFormat(codeQuestion.getOutputFormat())
                 .copyState(state.toString())
+//                .constraints(codeQuestion.getConstraints())
                 .build();
     }
 

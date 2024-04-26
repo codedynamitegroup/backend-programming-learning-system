@@ -56,12 +56,11 @@ public class CodeQuestionsUpdateMessageKafkaPublisher
         log.info("Received CodeQuestionsUpdateOutboxMessage for order id: {} and saga id: {}",
                 codeQuestionsUpdatePayload.getId(),
                 sagaId);
+        CodeQuestionUpdateRequestAvroModel avroModel =
+                codeQuestionMessagingDataMapper
+                        .codeQuestionsUpdatePayloadToCodeQuestionUpdateRequestAvroModel(sagaId, codeQuestionsUpdatePayload);
 
         try {
-            CodeQuestionUpdateRequestAvroModel avroModel =
-                    codeQuestionMessagingDataMapper
-                            .codeQuestionsUpdatePayloadToCodeQuestionUpdateRequestAvroModel(sagaId, codeQuestionsUpdatePayload);
-
             kafkaProducer.send(codeAssessmentServiceConfigData.getCodeQuestionUpdateRequestToCoreServiceTopicName(),
                     sagaId,
                     avroModel,
@@ -77,7 +76,7 @@ public class CodeQuestionsUpdateMessageKafkaPublisher
                     codeQuestionsUpdatePayload.getId(), sagaId);
         } catch (Exception e) {
             log.error("Error while sending CodeQuestionsUpdatePayload" +
-                            " to kafka with order id: {} and saga id: {}, error: {}",
+                            " to kafka with code question id: {} and saga id: {}, error: {}",
                     codeQuestionsUpdatePayload.getId(), sagaId, e.getMessage());
         }
     }

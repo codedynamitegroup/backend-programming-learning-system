@@ -41,7 +41,7 @@ public class QtypeCodeQuestionDataMapper {
                 .problemStatement(request.getProblemStatement())
                 .inputFormat(request.getInputFormat())
                 .outputFormat(request.getOutputFormat())
-                .constraints(request.getConstraints())
+//                .constraints(request.getConstraints())
                 .build();
     }
 

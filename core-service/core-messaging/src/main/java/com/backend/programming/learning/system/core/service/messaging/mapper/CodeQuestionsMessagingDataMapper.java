@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.kafka.code.assessment.code.questi
 import com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 @Component
@@ -21,22 +22,22 @@ public class CodeQuestionsMessagingDataMapper {
                 .setProblemStatement(payload.getProblemStatement())
                 .setInputFormat(payload.getInputFormat())
                 .setOutputFormat(payload.getOutputFormat())
-                .setConstraints(payload.getConstraints())
+//                .setConstraints(payload.getConstraints())
                 .setCopyState(CopyState.valueOf(payload.getState()))
-                .setFailureMessages(payload.getFailureMessages())
+                .setFailureMessages(payload.getFailureMessages()==null?new ArrayList<>():payload.getFailureMessages())
                 .build();
     }
     public CodeQuestionsUpdateRequest
         codeQuestionUpdateRequestAvroModelToCodeQuestionsUpdateRequest(CodeQuestionUpdateRequestAvroModel model){
         return CodeQuestionsUpdateRequest.builder()
                 .id(model.getId().toString())
-                .codeQuestionId(model.getQuestionId().toString())
+                .codeQuestionId(model.getCodeQuestionId().toString())
                 .sagaId(model.getSagaId().toString())
                 .questionId(model.getQuestionId().toString())
                 .problemStatement(model.getProblemStatement())
                 .inputFormat(model.getInputFormat())
                 .outputFormat(model.getOutputFormat())
-                .constraints(model.getConstraints())
+//                .constraints(model.getConstraints())
                 .state(model.getCopyState().toString())
                 .build();
     }

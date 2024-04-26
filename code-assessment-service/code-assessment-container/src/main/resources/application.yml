@@ -33,7 +33,7 @@ spring:
 kafka-config:
   bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
   schema-registry-url-key: schema.registry.url
-  schema-registry-url: http://192.168.1.20:8081
+  schema-registry-url: http://192.168.1.21:8081
   num-of-partitions: 3
   replication-factor: 3
 

@@ -18,6 +18,6 @@ public class CodeQuestionsUpdateRequest {
     private final String problemStatement;
     private final String inputFormat;
     private final String outputFormat;
-    private final String constraints;
+//    private final String constraints;
     private String state;//copy state
 }

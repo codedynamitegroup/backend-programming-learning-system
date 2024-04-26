@@ -43,7 +43,7 @@ DROP TABLE IF EXISTS questions CASCADE;
 CREATE TABLE questions
 (
     id uuid UNIQUE NOT NULL,
-    org_id uuid UNIQUE NOT NULL,
+    org_id uuid NOT NULL,
     difficulty difficulty NOT NULL,
     name text NOT NULL,
     question_text text,

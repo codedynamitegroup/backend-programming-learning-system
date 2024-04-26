@@ -27,7 +27,7 @@ public class CodeQuestionMessagingDataMapper {
                 .state(com.backend.programming.learning.system.domain.valueobject
                         .CopyState
                         .valueOf(model.getCopyState().toString()))
-                .constraints(model.getConstraints())
+//                .constraints(model.getConstraints())
                 .failureMessages(model.getFailureMessages())
                 .sagaId(model.getSagaId())
                 .build();
@@ -44,7 +44,7 @@ public class CodeQuestionMessagingDataMapper {
                 .setInputFormat(payload.getInputFormat())
                 .setOutputFormat(payload.getOutputFormat())
                 .setCopyState(CopyState.valueOf(payload.getCopyState()))
-                .setConstraints(payload.getConstraints())
+//                .setConstraints(payload.getConstraints())
                 .build();
     }
 }

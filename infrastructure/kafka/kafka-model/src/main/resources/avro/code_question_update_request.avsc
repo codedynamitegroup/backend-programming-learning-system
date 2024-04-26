@@ -65,10 +65,10 @@
           "UPDATE_FAILED",
           "CREATE_FAILED"]
       }
-    },
-    {
-      "name": "constraints",
-      "type": "string"
     }
+//    {
+//      "name": "constraints",
+//      "type": "string"
+//    }
   ]
 }
