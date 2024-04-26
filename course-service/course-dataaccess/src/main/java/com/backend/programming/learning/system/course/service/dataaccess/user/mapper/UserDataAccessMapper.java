@@ -2,7 +2,7 @@ package com.backend.programming.learning.system.course.service.dataaccess.user.m
 
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
-import com.backend.programming.learning.system.entity.User;
+import com.backend.programming.learning.system.course.service.domain.entity.User;
 import org.springframework.stereotype.Component;
 
 @Component

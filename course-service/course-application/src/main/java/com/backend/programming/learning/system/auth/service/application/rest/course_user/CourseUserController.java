@@ -1,9 +1,9 @@
 package com.backend.programming.learning.system.auth.service.application.rest.course_user;
 
-import com.backend.programming.learning.system.dto.method.create.course_user.CreateCourseUserCommand;
-import com.backend.programming.learning.system.dto.method.create.course_user.CreateCourseUserResponse;
-import com.backend.programming.learning.system.dto.method.delete.course_user.DeleteCourseUserCommand;
-import com.backend.programming.learning.system.ports.input.service.course_user.CourseUserApplicationService;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.course_user.CreateCourseUserCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.course_user.CreateCourseUserResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.delete.course_user.DeleteCourseUserCommand;
+import com.backend.programming.learning.system.course.service.domain.ports.input.service.course_user.CourseUserApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

@@ -13,8 +13,8 @@ CREATE TYPE difficulty AS ENUM ('EASY', 'MEDIUM', 'HARD');
 DROP TYPE IF EXISTS qtype;
 CREATE TYPE qtype AS ENUM ('MULTIPLE_CHOICE', 'SHORT_ANSWER', 'CODE', 'ESSAY');
 
-DROP TYPE IF EXISTS notification_event_type;
-CREATE TYPE notification_event_type AS ENUM ('USER', 'COURSE');
+-- DROP TYPE IF EXISTS notification_event_type;
+-- CREATE TYPE notification_event_type AS ENUM ('USER', 'COURSE');
 
 DROP TYPE IF EXISTS plagiarism_detection_report_status;
 CREATE TYPE plagiarism_detection_report_status AS ENUM ('PROCESSING', 'COMPLETED', 'FAILED');
@@ -424,35 +424,6 @@ CREATE TABLE "public".qtype_multichoice_question
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "public".notification CASCADE;
-
-CREATE TABLE "public".notification
-(
-    id uuid DEFAULT uuid_generate_v4() NOT NULL,
-    user_id_from uuid,
-    user_id_to uuid NOT NULL,
-    subject text,
-    full_message text,
-    small_message text,
-    component text,
-    event_type notification_event_type NOT NULL,
-    context_url text,
-    context_url_name text,
-    is_read bool DEFAULT FALSE NOT NULL,
-    time_read TIMESTAMP WITH TIME ZONE,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT notification_pkey PRIMARY KEY (id),
-    CONSTRAINT notification_user_id_from_fkey FOREIGN KEY (user_id_from)
-        REFERENCES "public".user (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    CONSTRAINT notification_user_id_to_fkey FOREIGN KEY (user_id_to)
-        REFERENCES "public".user (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
-
 DROP TABLE IF EXISTS "public".code_submission CASCADE;
 
 CREATE TABLE "public".code_submission
@@ -479,26 +450,55 @@ CREATE TABLE "public".code_submission
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "public".calendar_event CASCADE;
-
-CREATE TABLE "public".calendar_event
-(
-    id uuid DEFAULT uuid_generate_v4() NOT NULL,
-    name text,
-    description text,
-    event_type notification_event_type NOT NULL,
-    start_time TIMESTAMP WITH TIME ZONE NOT NULL,
-    end_time TIMESTAMP WITH TIME ZONE,
-    user_id uuid NOT NULL,
-    course_id uuid,
-    component text,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT calendar_event_pkey PRIMARY KEY (id),
-    CONSTRAINT calendar_event_created_by_fkey FOREIGN KEY (user_id)
-        REFERENCES "public".user (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
+-- DROP TABLE IF EXISTS "public".notification CASCADE;
+--
+-- CREATE TABLE "public".notification
+-- (
+--     id uuid DEFAULT uuid_generate_v4() NOT NULL,
+--     user_id_from uuid,
+--     user_id_to uuid NOT NULL,
+--     subject text,
+--     full_message text,
+--     small_message text,
+--     component text,
+--     event_type notification_event_type NOT NULL,
+--     context_url text,
+--     context_url_name text,
+--     is_read bool DEFAULT FALSE NOT NULL,
+--     time_read TIMESTAMP WITH TIME ZONE,
+--     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+--     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+--     CONSTRAINT notification_pkey PRIMARY KEY (id),
+--     CONSTRAINT notification_user_id_from_fkey FOREIGN KEY (user_id_from)
+--         REFERENCES "public".user (id) MATCH SIMPLE
+--         ON UPDATE CASCADE
+--         ON DELETE CASCADE,
+--     CONSTRAINT notification_user_id_to_fkey FOREIGN KEY (user_id_to)
+--         REFERENCES "public".user (id) MATCH SIMPLE
+--         ON UPDATE CASCADE
+--         ON DELETE CASCADE
+-- );
+--
+-- DROP TABLE IF EXISTS "public".calendar_event CASCADE;
+--
+-- CREATE TABLE "public".calendar_event
+-- (
+--     id uuid DEFAULT uuid_generate_v4() NOT NULL,
+--     name text,
+--     description text,
+--     event_type notification_event_type NOT NULL,
+--     start_time TIMESTAMP WITH TIME ZONE NOT NULL,
+--     end_time TIMESTAMP WITH TIME ZONE,
+--     user_id uuid NOT NULL,
+--     course_id uuid,
+--     component text,
+--     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+--     CONSTRAINT calendar_event_pkey PRIMARY KEY (id),
+--     CONSTRAINT calendar_event_created_by_fkey FOREIGN KEY (user_id)
+--         REFERENCES "public".user (id) MATCH SIMPLE
+--         ON UPDATE CASCADE
+--         ON DELETE CASCADE
+-- );
 
 DROP TABLE IF EXISTS "public".plagiarism_detection_report CASCADE;
 

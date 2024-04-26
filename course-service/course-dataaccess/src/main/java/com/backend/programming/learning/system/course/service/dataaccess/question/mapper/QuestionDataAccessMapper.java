@@ -7,10 +7,10 @@ import com.backend.programming.learning.system.course.service.dataaccess.questio
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
-import com.backend.programming.learning.system.entity.Organization;
-import com.backend.programming.learning.system.entity.Question;
-import com.backend.programming.learning.system.entity.User;
-import com.backend.programming.learning.system.valueobject.QuestionBankCategoryId;
+import com.backend.programming.learning.system.course.service.domain.entity.Organization;
+import com.backend.programming.learning.system.course.service.domain.entity.Question;
+import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.valueobject.QuestionBankCategoryId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

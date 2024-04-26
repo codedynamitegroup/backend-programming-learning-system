@@ -7,14 +7,13 @@ import com.backend.programming.learning.system.course.service.dataaccess.exam_su
 import com.backend.programming.learning.system.course.service.dataaccess.exam_submission.repository.ExamSubmissionJpaRepository;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.mapper.UserDataAccessMapper;
-import com.backend.programming.learning.system.entity.Exam;
-import com.backend.programming.learning.system.entity.ExamSubmission;
-import com.backend.programming.learning.system.entity.User;
-import com.backend.programming.learning.system.ports.output.repository.ExamSubmissionRepository;
+import com.backend.programming.learning.system.course.service.domain.entity.Exam;
+import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
+import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamSubmissionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 

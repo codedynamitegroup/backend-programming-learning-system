@@ -3,9 +3,9 @@ package com.backend.programming.learning.system.course.service.dataaccess.questi
 import com.backend.programming.learning.system.course.service.dataaccess.question_bank_category.entity.QuestionBankCategoryEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.mapper.UserDataAccessMapper;
-import com.backend.programming.learning.system.entity.QuestionBankCategory;
-import com.backend.programming.learning.system.entity.User;
-import com.backend.programming.learning.system.valueobject.QuestionBankCategoryId;
+import com.backend.programming.learning.system.course.service.domain.entity.QuestionBankCategory;
+import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.valueobject.QuestionBankCategoryId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

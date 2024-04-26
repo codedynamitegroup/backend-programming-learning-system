@@ -2,8 +2,8 @@ package com.backend.programming.learning.system.course.service.dataaccess.course
 
 import com.backend.programming.learning.system.course.service.dataaccess.course.mapper.CourseDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.course.repository.CourseJpaRepository;
-import com.backend.programming.learning.system.entity.Course;
-import com.backend.programming.learning.system.ports.output.repository.CourseRepository;
+import com.backend.programming.learning.system.course.service.domain.entity.Course;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

@@ -2,8 +2,8 @@ package com.backend.programming.learning.system.course.service.dataaccess.exam_q
 
 import com.backend.programming.learning.system.course.service.dataaccess.exam_question.mapper.ExamQuestionDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.exam_question.repository.ExamQuestionJpaRepository;
-import com.backend.programming.learning.system.entity.ExamQuestion;
-import com.backend.programming.learning.system.ports.output.repository.ExamQuestionRepository;
+import com.backend.programming.learning.system.course.service.domain.entity.ExamQuestion;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamQuestionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

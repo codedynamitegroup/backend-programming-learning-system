@@ -8,6 +8,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.responsee
 import com.backend.programming.learning.system.core.service.domain.entity.Notification;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
+import com.backend.programming.learning.system.core.service.domain.valueobject.NotificationComponentType;
 import com.backend.programming.learning.system.core.service.domain.valueobject.NotificationEventType;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
@@ -36,7 +37,7 @@ public class NotificationDataMapper {
                 .subject(createNotificationCommand.getSubject())
                 .fullMessage(createNotificationCommand.getFullMessage())
                 .smallMessage(createNotificationCommand.getSmallMessage())
-                .component(createNotificationCommand.getComponent())
+                .component(NotificationComponentType.valueOf(createNotificationCommand.getComponent()))
                 .eventType(NotificationEventType.valueOf(createNotificationCommand.getEventType()))
                 .contextUrl(createNotificationCommand.getContextUrl())
                 .contextUrlName(createNotificationCommand.getContextUrlName())
@@ -67,7 +68,7 @@ public class NotificationDataMapper {
                 .subject(notification.getSubject())
                 .fullMessage(notification.getFullMessage())
                 .smallMessage(notification.getSmallMessage())
-                .component(notification.getComponent())
+                .component(notification.getComponent().name())
                 .eventType(notification.getEventType())
                 .contextUrl(notification.getContextUrl())
                 .contextUrlName(notification.getContextUrlName())

@@ -2,8 +2,8 @@ package com.backend.programming.learning.system.course.service.dataaccess.call_o
 
 import com.backend.programming.learning.system.course.service.dataaccess.call_organization.mapper.CallOrganizationDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.call_organization.repository.CallOrganizationJpaRepository;
-import com.backend.programming.learning.system.entity.CallOrganization;
-import com.backend.programming.learning.system.ports.output.repository.CallOrganizationRepository;
+import com.backend.programming.learning.system.course.service.domain.entity.CallOrganization;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CallOrganizationRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository

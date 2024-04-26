@@ -2,8 +2,8 @@ package com.backend.programming.learning.system.course.service.dataaccess.user.a
 
 import com.backend.programming.learning.system.course.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.user.repository.UserJpaRepository;
-import com.backend.programming.learning.system.entity.User;
-import com.backend.programming.learning.system.ports.output.repository.UserRepository;
+import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

@@ -2,8 +2,8 @@ package com.backend.programming.learning.system.course.service.dataaccess.organi
 
 import com.backend.programming.learning.system.course.service.dataaccess.organization.entity.OrganizationEntity;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
-import com.backend.programming.learning.system.dto.responseentity.organization.OrganizationResponseEntity;
-import com.backend.programming.learning.system.entity.Organization;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.organization.OrganizationResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.entity.Organization;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

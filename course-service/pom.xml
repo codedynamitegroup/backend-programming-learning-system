@@ -18,6 +18,7 @@
         <module>course-dataaccess</module>
         <module>course-domain</module>
         <module>course-messaging</module>
+        <module>course-socket</module>
     </modules>
 
     <properties>

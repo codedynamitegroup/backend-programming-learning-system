@@ -100,6 +100,11 @@
 				<artifactId>course-messaging</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.backend.programming.learning.system</groupId>
+				<artifactId>course-socket</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>com.backend.programming.learning.system</groupId>
@@ -124,11 +129,6 @@
 			<dependency>
 				<groupId>com.backend.programming.learning.system</groupId>
 				<artifactId>core-messaging</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.backend.programming.learning.system</groupId>
-				<artifactId>core-socket</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 

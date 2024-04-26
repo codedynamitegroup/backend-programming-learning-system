@@ -1,13 +1,13 @@
 package com.backend.programming.learning.system.auth.service.application.rest.question;
 
-import com.backend.programming.learning.system.dto.method.create.question.CreateQuestionResponse;
-import com.backend.programming.learning.system.dto.method.create.question.CreateQuestionCommand;
-import com.backend.programming.learning.system.dto.method.delete.question.DeleteQuestionCommand;
-import com.backend.programming.learning.system.dto.method.query.question.QueryAllQuestionCommand;
-import com.backend.programming.learning.system.dto.method.query.question.QueryAllQuestionResponse;
-import com.backend.programming.learning.system.dto.method.query.question.QueryQuestionCommand;
-import com.backend.programming.learning.system.dto.responseentity.question.QuestionResponseEntity;
-import com.backend.programming.learning.system.ports.input.service.question.QuestionApplicationService;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.question.CreateQuestionResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.question.CreateQuestionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.delete.question.DeleteQuestionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QueryAllQuestionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QueryAllQuestionResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QueryQuestionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.question.QuestionResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.ports.input.service.question.QuestionApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

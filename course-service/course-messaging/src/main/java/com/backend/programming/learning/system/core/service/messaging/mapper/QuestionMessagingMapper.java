@@ -1,12 +1,11 @@
 package com.backend.programming.learning.system.core.service.messaging.mapper;
 
 import com.backend.programming.learning.system.domain.valueobject.QuestionResponseStatus;
-import com.backend.programming.learning.system.dto.method.message.QuestionCreateRequest;
-import com.backend.programming.learning.system.dto.method.message.QuestionDeleteRequest;
-import com.backend.programming.learning.system.dto.method.message.QuestionResponse;
-import com.backend.programming.learning.system.dto.method.message.QuestionUpdateRequest;
-import com.backend.programming.learning.system.entity.Question;
-import com.backend.programming.learning.system.event.question.event.QuestionEvent;
+import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionCreateRequest;
+import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionDeleteRequest;
+import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionUpdateRequest;
+import com.backend.programming.learning.system.course.service.domain.event.question.event.QuestionEvent;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel;

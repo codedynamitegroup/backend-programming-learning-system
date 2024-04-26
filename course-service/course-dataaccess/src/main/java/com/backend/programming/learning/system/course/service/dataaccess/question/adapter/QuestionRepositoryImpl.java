@@ -2,8 +2,8 @@ package com.backend.programming.learning.system.course.service.dataaccess.questi
 
 import com.backend.programming.learning.system.course.service.dataaccess.question.mapper.QuestionDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.question.repository.QuestionJpaRepository;
-import com.backend.programming.learning.system.entity.Question;
-import com.backend.programming.learning.system.ports.output.repository.QuestionRepository;
+import com.backend.programming.learning.system.course.service.domain.entity.Question;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

@@ -18,10 +18,7 @@ import com.backend.programming.learning.system.core.service.domain.entity.Topic;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.mapper.topic.TopicDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.NotificationEventType;
-import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
-import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.*;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -57,7 +54,7 @@ public class CalendarEventDataMapper {
                     .id(new UserId(createCalendarEventCommand.getUserId()))
                     .build())
                 .courseId(createCalendarEventCommand.getCourseId())
-                .component(createCalendarEventCommand.getComponent())
+                .component(NotificationComponentType.valueOf(createCalendarEventCommand.getComponent()))
                 .createdAt(ZonedDateTime.now())
                 .build();
     }
@@ -72,7 +69,7 @@ public class CalendarEventDataMapper {
                 .startTime(calendarEvent.getStartTime())
                 .endTime(calendarEvent.getEndTime())
                 .courseId(calendarEvent.getCourseId())
-                .component(calendarEvent.getComponent())
+                .component(calendarEvent.getComponent().name())
                 .createdAt(calendarEvent.getCreatedAt())
                 .build();
     }

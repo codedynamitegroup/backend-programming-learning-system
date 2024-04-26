@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.core.service.messaging.listener.
 import com.backend.programming.learning.system.core.service.messaging.mapper.QuestionMessagingMapper;
 import com.backend.programming.learning.system.kafka.consumer.KafkaConsumer;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel;
-import com.backend.programming.learning.system.ports.input.message.listener.question.QuestionMessageListener;
+import com.backend.programming.learning.system.course.service.domain.ports.input.message.listener.question.QuestionMessageListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.KafkaHeaders;

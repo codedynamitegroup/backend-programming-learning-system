@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.course.service.dataaccess.exam.entity;
 
 import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
-import com.backend.programming.learning.system.valueobject.OverdueHandling;
+import com.backend.programming.learning.system.course.service.domain.valueobject.OverdueHandling;
 import lombok.*;
 
 import javax.persistence.*;

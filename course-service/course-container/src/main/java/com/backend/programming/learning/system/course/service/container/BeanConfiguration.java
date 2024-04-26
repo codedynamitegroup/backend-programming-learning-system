@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.course.service.container;
 
-import com.backend.programming.learning.system.CourseDomainService;
-import com.backend.programming.learning.system.CourseDomainServiceImpl;
+import com.backend.programming.learning.system.course.service.domain.CourseDomainService;
+import com.backend.programming.learning.system.course.service.domain.CourseDomainServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

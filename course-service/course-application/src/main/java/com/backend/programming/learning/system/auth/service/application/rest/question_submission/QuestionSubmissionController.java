@@ -1,8 +1,8 @@
 package com.backend.programming.learning.system.auth.service.application.rest.question_submission;
 
-import com.backend.programming.learning.system.dto.method.create.question_submission.CreateQuestionSubmissionCommand;
-import com.backend.programming.learning.system.dto.method.create.question_submission.CreateQuestionSubmissionResponse;
-import com.backend.programming.learning.system.ports.input.service.question_submission.QuestionSubmissionApplicationService;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionResponse;
+import com.backend.programming.learning.system.course.service.domain.ports.input.service.question_submission.QuestionSubmissionApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

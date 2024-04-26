@@ -5,10 +5,6 @@ logging:
   level:
     com.backend.programming.learning.system: DEBUG
 
-socket-config:
-  port: 8085
-  host: localhost
-
 core-service:
   question-created-request-topic-name: core-question-create-request
   question-deleted-request-topic-name: core-question-delete-request

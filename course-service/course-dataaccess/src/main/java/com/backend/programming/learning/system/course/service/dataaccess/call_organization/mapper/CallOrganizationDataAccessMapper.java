@@ -1,8 +1,8 @@
 package com.backend.programming.learning.system.course.service.dataaccess.call_organization.mapper;
 
 import com.backend.programming.learning.system.course.service.dataaccess.call_organization.entity.CallOrganizationEntity;
-import com.backend.programming.learning.system.entity.CallOrganization;
-import com.backend.programming.learning.system.valueobject.CallOrganizationId;
+import com.backend.programming.learning.system.course.service.domain.entity.CallOrganization;
+import com.backend.programming.learning.system.course.service.domain.valueobject.CallOrganizationId;
 import org.springframework.stereotype.Component;
 
 @Component

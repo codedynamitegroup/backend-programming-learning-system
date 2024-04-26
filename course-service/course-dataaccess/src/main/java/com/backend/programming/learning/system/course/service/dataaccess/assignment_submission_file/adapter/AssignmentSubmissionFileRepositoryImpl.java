@@ -2,8 +2,8 @@ package com.backend.programming.learning.system.course.service.dataaccess.assign
 
 import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission_file.mapper.AssignmentSubmissionFileDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission_file.repository.AssignmentSubmissionFileJpaRepository;
-import com.backend.programming.learning.system.entity.SubmissionAssignmentFile;
-import com.backend.programming.learning.system.ports.output.repository.SubmissionAssignmentFileRepository;
+import com.backend.programming.learning.system.course.service.domain.entity.SubmissionAssignmentFile;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionAssignmentFileRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository

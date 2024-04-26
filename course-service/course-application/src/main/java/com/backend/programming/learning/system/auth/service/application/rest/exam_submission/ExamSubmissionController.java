@@ -1,9 +1,9 @@
 package com.backend.programming.learning.system.auth.service.application.rest.exam_submission;
 
-import com.backend.programming.learning.system.dto.method.create.exam_submisison.CreateExamSubmissionCommand;
-import com.backend.programming.learning.system.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
-import com.backend.programming.learning.system.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
-import com.backend.programming.learning.system.ports.input.service.exam_submission.ExamSubmissionApplicationService;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
+import com.backend.programming.learning.system.course.service.domain.ports.input.service.exam_submission.ExamSubmissionApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

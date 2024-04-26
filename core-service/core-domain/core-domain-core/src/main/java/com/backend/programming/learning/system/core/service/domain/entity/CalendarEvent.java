@@ -1,9 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.entity;
 
-import com.backend.programming.learning.system.core.service.domain.valueobject.CalendarEventId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.NotificationEventType;
+import com.backend.programming.learning.system.core.service.domain.valueobject.*;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 
@@ -19,7 +16,7 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
     private ZonedDateTime endTime;
     private User user;
     private UUID courseId;
-    private String component;
+    private NotificationComponentType component;
     private ZonedDateTime createdAt;
 
     public void initializeCalendarEvent() {
@@ -101,11 +98,11 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
         this.courseId = courseId;
     }
 
-    public String getComponent() {
+    public NotificationComponentType getComponent() {
         return component;
     }
 
-    public void setComponent(String component) {
+    public void setComponent(NotificationComponentType component) {
         this.component = component;
     }
 
@@ -126,7 +123,7 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
         private ZonedDateTime endTime;
         private User user;
         private UUID courseId;
-        private String component;
+        private NotificationComponentType component;
         private ZonedDateTime createdAt;
 
         private Builder() {
@@ -172,7 +169,7 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
             return this;
         }
 
-        public Builder component(String val) {
+        public Builder component(NotificationComponentType val) {
             component = val;
             return this;
         }

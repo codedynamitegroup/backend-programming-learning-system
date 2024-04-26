@@ -18,7 +18,6 @@
         <module>core-container</module>
         <module>core-dataaccess</module>
         <module>core-messaging</module>
-        <module>core-socket</module>
     </modules>
 
     <properties>

@@ -1,14 +1,14 @@
 package com.backend.programming.learning.system.auth.service.application.rest.post;
 
-import com.backend.programming.learning.system.dto.method.create.post.CreatePostCommand;
-import com.backend.programming.learning.system.dto.method.create.post.CreatePostResponse;
-import com.backend.programming.learning.system.dto.method.delete.post.DeletePostCommand;
-import com.backend.programming.learning.system.dto.method.delete.post.DeletePostResponse;
-import com.backend.programming.learning.system.dto.method.query.post.QueryAllPostCommand;
-import com.backend.programming.learning.system.dto.method.query.post.QueryAllPostResponse;
-import com.backend.programming.learning.system.dto.method.query.post.QueryPostCommand;
-import com.backend.programming.learning.system.dto.responseentity.post.PostResponseEntity;
-import com.backend.programming.learning.system.ports.input.service.post.PostApplicationService;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.post.CreatePostCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.post.CreatePostResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.delete.post.DeletePostCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.delete.post.DeletePostResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryAllPostCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryAllPostResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryPostCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.post.PostResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.ports.input.service.post.PostApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

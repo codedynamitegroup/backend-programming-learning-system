@@ -1,8 +1,8 @@
 package com.backend.programming.learning.system.course.service.dataaccess.webhook_api_function.mapper;
 
 import com.backend.programming.learning.system.course.service.dataaccess.webhook_api_function.entity.WebhookApiFunctionEntity;
-import com.backend.programming.learning.system.entity.WebhookApiFunction;
-import com.backend.programming.learning.system.valueobject.WebhookApiFunctionId;
+import com.backend.programming.learning.system.course.service.domain.entity.WebhookApiFunction;
+import com.backend.programming.learning.system.course.service.domain.valueobject.WebhookApiFunctionId;
 import org.springframework.stereotype.Component;
 
 @Component

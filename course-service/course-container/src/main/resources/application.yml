@@ -5,6 +5,11 @@ logging:
   level:
     com.backend.programming.learning.system: INFO
 
+
+socket-config:
+  port: 8085
+  host: localhost
+
 course-service:
   question-created-request-topic-name: core-question-create-request
   question-deleted-request-topic-name: core-question-delete-request

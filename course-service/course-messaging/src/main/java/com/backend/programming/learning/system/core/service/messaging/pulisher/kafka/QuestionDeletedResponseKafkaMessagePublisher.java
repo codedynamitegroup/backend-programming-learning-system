@@ -1,13 +1,11 @@
 package com.backend.programming.learning.system.core.service.messaging.pulisher.kafka;
 
-import com.backend.programming.learning.system.config.CourseServiceConfigData;
+import com.backend.programming.learning.system.course.service.domain.config.CourseServiceConfigData;
 import com.backend.programming.learning.system.core.service.messaging.mapper.QuestionMessagingMapper;
-import com.backend.programming.learning.system.event.question.event.QuestionCreatedEvent;
-import com.backend.programming.learning.system.event.question.event.QuestionDeletedEvent;
+import com.backend.programming.learning.system.course.service.domain.event.question.event.QuestionDeletedEvent;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
-import com.backend.programming.learning.system.ports.output.message.publisher.question.QuestionCreatedResponseMessagePublisher;
-import com.backend.programming.learning.system.ports.output.message.publisher.question.QuestionDeletedResponseMessagePublisher;
+import com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.question.QuestionDeletedResponseMessagePublisher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

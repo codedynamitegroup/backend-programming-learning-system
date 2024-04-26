@@ -1,11 +1,8 @@
 package com.backend.programming.learning.system.course.service.dataaccess.exam_submission.entity;
 
 import com.backend.programming.learning.system.course.service.dataaccess.exam.entity.ExamEntity;
-import com.backend.programming.learning.system.course.service.dataaccess.exam_question.entity.ExamQuestionEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
-import com.backend.programming.learning.system.entity.User;
-import com.backend.programming.learning.system.valueobject.Status;
-import com.backend.programming.learning.system.valueobject.Type;
+import com.backend.programming.learning.system.course.service.domain.valueobject.Status;
 import lombok.*;
 
 import javax.persistence.*;

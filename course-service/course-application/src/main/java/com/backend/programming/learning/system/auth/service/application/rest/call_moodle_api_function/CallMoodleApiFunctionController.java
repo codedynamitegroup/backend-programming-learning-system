@@ -1,10 +1,10 @@
 package com.backend.programming.learning.system.auth.service.application.rest.call_moodle_api_function;
 
-import com.backend.programming.learning.system.dto.method.create.call_moodle_api_function.CreateCallMoodleApiFunctionCommand;
-import com.backend.programming.learning.system.dto.method.create.call_moodle_api_function.CreateCallMoodleApiFunctionResponse;
-import com.backend.programming.learning.system.dto.method.query.call_moodle_api_function.QueryAllCallMoodleApiFunctionResponse;
-import com.backend.programming.learning.system.dto.responseentity.call_moodle_api_function.CallMoodleApiFunctionResponseEntity;
-import com.backend.programming.learning.system.ports.input.service.call_moodle_api_function.CallMoodleApiFunctionApplicationService;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.call_moodle_api_function.CreateCallMoodleApiFunctionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.call_moodle_api_function.CreateCallMoodleApiFunctionResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.call_moodle_api_function.QueryAllCallMoodleApiFunctionResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.call_moodle_api_function.CallMoodleApiFunctionResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.ports.input.service.call_moodle_api_function.CallMoodleApiFunctionApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

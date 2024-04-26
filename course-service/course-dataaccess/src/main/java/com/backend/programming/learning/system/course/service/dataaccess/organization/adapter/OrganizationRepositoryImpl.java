@@ -2,12 +2,11 @@ package com.backend.programming.learning.system.course.service.dataaccess.organi
 
 import com.backend.programming.learning.system.course.service.dataaccess.organization.mapper.OrganizationDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.organization.repository.OrganizationJpaRepository;
-import com.backend.programming.learning.system.dto.responseentity.organization.OrganizationResponseEntity;
-import com.backend.programming.learning.system.entity.Organization;
-import com.backend.programming.learning.system.ports.output.repository.OrganizationRepository;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.organization.OrganizationResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.entity.Organization;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.OrganizationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;

@@ -2,8 +2,8 @@ package com.backend.programming.learning.system.course.service.dataaccess.assign
 
 import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission_onlinetext.mapper.AssignmentSubmissionOnlineTextDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission_onlinetext.repository.AssignmentSubmissionOnlineTextJpaRepository;
-import com.backend.programming.learning.system.entity.SubmissionAssignmentOnlineText;
-import com.backend.programming.learning.system.ports.output.repository.SubmissionAssignmentOnlineTextRepository;
+import com.backend.programming.learning.system.course.service.domain.entity.SubmissionAssignmentOnlineText;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionAssignmentOnlineTextRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
