@@ -14,16 +14,15 @@ import lombok.Getter;
  * Date 3/25/2024 - 11:06 PM
  * Description: ...
  */
-@Getter
 @Builder
-@AllArgsConstructor
-public class CreateQuestionResponse {
-    private QuestionId questionId;
-    private OrganizationId organizationId;
-    private QuestionDifficulty difficulty;
-    private String name;
-    private String questionText;
-    private String generalFeedback;
-    private float defaultMark;
-    private String message;
+public record CreateQuestionResponse(
+        QuestionId questionId,
+        OrganizationId organizationId,
+        QuestionDifficulty difficulty,
+        String name,
+        String questionText,
+        String generalFeedback,
+        float defaultMark,
+        String message
+) {
 }

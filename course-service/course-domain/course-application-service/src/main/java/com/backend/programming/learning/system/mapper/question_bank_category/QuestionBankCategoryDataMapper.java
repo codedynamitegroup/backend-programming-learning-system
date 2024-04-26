@@ -22,6 +22,7 @@ public class QuestionBankCategoryDataMapper {
             User user, CreateQuestionBankCategoryCommand createQuestionBankCategoryCommand) {
         return QuestionBankCategory.builder()
                 .name(createQuestionBankCategoryCommand.name())
+                .description(createQuestionBankCategoryCommand.description())
                 .createdBy(user)
                 .updatedBy(user)
                 .build();
@@ -31,6 +32,7 @@ public class QuestionBankCategoryDataMapper {
         return CreateQuestionBankCategoryResponse.builder()
                 .questionBankCategoryId(questionBankCategory.getId().getValue())
                 .name(questionBankCategory.getName())
+                .description(questionBankCategory.getDescription())
                 .createdBy(questionBankCategory.getCreatedBy().getId().getValue())
                 .updatedBy(questionBankCategory.getUpdatedBy().getId().getValue())
                 .createdAt(questionBankCategory.getCreatedAt())
@@ -50,6 +52,7 @@ public class QuestionBankCategoryDataMapper {
         return QuestionBankCategoryEntity.builder()
                 .questionBankCategoryId(questionBankCategory.getId().getValue())
                 .name(questionBankCategory.getName())
+                .description(questionBankCategory.getDescription())
                 .createdBy(questionBankCategory.getCreatedBy().getId().getValue())
                 .updatedBy(questionBankCategory.getUpdatedBy().getId().getValue())
                 .createdAt(questionBankCategory.getCreatedAt())
@@ -61,6 +64,7 @@ public class QuestionBankCategoryDataMapper {
         return UpdateQuestionBankCategoryResponse.builder()
                 .questionBankCategoryId(questionBankCategory.getId().getValue())
                 .name(questionBankCategory.getName())
+                .description(questionBankCategory.getDescription())
                 .createdBy(questionBankCategory.getCreatedBy().getId().getValue())
                 .updatedBy(questionBankCategory.getUpdatedBy().getId().getValue())
                 .createdAt(questionBankCategory.getCreatedAt())

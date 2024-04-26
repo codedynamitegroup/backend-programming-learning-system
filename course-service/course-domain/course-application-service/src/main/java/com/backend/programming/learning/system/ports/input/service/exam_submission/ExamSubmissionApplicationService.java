@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.ports.input.service.exam_submiss
 
 import com.backend.programming.learning.system.dto.method.create.exam_submisison.CreateExamSubmissionCommand;
 import com.backend.programming.learning.system.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
+import com.backend.programming.learning.system.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
 
 import javax.validation.Valid;
 
@@ -14,4 +15,7 @@ import javax.validation.Valid;
 public interface ExamSubmissionApplicationService {
     CreateExamSubmissionResponse submitExam(
             @Valid CreateExamSubmissionCommand createExamSubmissionCommand);
+
+    CreateExamSubmissionResponse startExam(
+            @Valid CreateExamSubmissionStartCommand createExamSubmissionStartCommand);
 }

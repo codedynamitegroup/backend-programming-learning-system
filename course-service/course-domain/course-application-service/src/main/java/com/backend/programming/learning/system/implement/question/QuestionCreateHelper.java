@@ -37,8 +37,8 @@ public class QuestionCreateHelper {
     private final QuestionBankCategoryRepository questionBankCategoryRepository;
 
     public Question createQuestion(CreateQuestionCommand createQuestionCommand) {
-        User createdBy = getUser(createQuestionCommand.getCreatedBy());
-        Organization organization = getOrganization(createQuestionCommand.getOrganizationId());
+        User createdBy = getUser(createQuestionCommand.createdBy());
+        Organization organization = getOrganization(createQuestionCommand.organizationId());
 
         Question question = questionDataMapper.createQuestionCommandToQuestion(organization, createdBy, createQuestionCommand);
         courseDomainService.createQuestion(question);
@@ -77,14 +77,15 @@ public class QuestionCreateHelper {
     }
 
     public Question createQuestionBank(CreateQuestionCommand createQuestionCommand) {
-        User createdBy = getUser(createQuestionCommand.getCreatedBy());
-        Organization organization = getOrganization(createQuestionCommand.getOrganizationId());
+        User createdBy = getUser(createQuestionCommand.createdBy());
+        Organization organization = getOrganization(createQuestionCommand.organizationId());
 
         Question question = null;
-        if (Objects.isNull(createQuestionCommand.getQuestionBankCategoryId())) {
+        if (Objects.isNull(createQuestionCommand.questionBankCategoryId())) {
             question = questionDataMapper.createQuestionCommandToQuestionBank(organization, createdBy, createQuestionCommand);
         } else {
-            QuestionBankCategory questionBankCategory = questionBankCategoryRepository.findQuestionBankCategoryById(createQuestionCommand.getQuestionBankCategoryId())
+            QuestionBankCategory questionBankCategory = questionBankCategoryRepository
+                    .findQuestionBankCategoryById(createQuestionCommand.questionBankCategoryId())
                     .orElseThrow(() -> new RuntimeException("Question bank category not found"));
             question = questionDataMapper.createQuestionCommandToQuestionBank(organization, questionBankCategory, createdBy, createQuestionCommand);
         }

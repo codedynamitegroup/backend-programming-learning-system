@@ -28,7 +28,9 @@ public class CalendarEventResponseEntity {
     @NotNull
     private final ZonedDateTime endTime;
     @NotNull
-    private final UserResponseEntity userTo;
+    private final UserResponseEntity user;
+    private final UUID courseId;
+    private final String component;
     @NotNull
     private final ZonedDateTime createdAt;
 }

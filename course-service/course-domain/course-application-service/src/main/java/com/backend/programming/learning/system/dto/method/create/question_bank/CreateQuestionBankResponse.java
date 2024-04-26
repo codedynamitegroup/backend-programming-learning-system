@@ -15,18 +15,17 @@ import java.util.UUID;
  * Date 4/21/2024 - 3:42 PM
  * Description: ...
  */
-@Getter
 @Builder
-@AllArgsConstructor
-public class CreateQuestionBankResponse {
-    private UUID organizationId;
-    private QuestionDifficulty difficulty;
-    private String name;
-    private String questionText;
-    private String generalFeedback;
-    private Float defaultMark;
-    private QuestionType qtype;
-    private UUID questionBankCategoryId;
-    private UUID createdBy;
-    private String message;
+public record CreateQuestionBankResponse(
+        UUID organizationId,
+        QuestionDifficulty difficulty,
+        String name,
+        String questionText,
+        String generalFeedback,
+        Float defaultMark,
+        QuestionType qtype,
+        UUID questionBankCategoryId,
+        UUID createdBy,
+        String message
+) {
 }

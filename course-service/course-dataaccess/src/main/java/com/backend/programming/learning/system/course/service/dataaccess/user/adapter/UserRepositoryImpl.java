@@ -4,21 +4,17 @@ import com.backend.programming.learning.system.course.service.dataaccess.user.ma
 import com.backend.programming.learning.system.course.service.dataaccess.user.repository.UserJpaRepository;
 import com.backend.programming.learning.system.entity.User;
 import com.backend.programming.learning.system.ports.output.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 import java.util.UUID;
 
 @Repository
+@RequiredArgsConstructor
 public class UserRepositoryImpl implements UserRepository {
     private final UserJpaRepository userJpaRepository;
     private final UserDataAccessMapper userDataAccessMapper;
-
-    public UserRepositoryImpl(UserJpaRepository userJpaRepository, UserDataAccessMapper userDataAccessMapper) {
-        this.userJpaRepository = userJpaRepository;
-        this.userDataAccessMapper = userDataAccessMapper;
-    }
-
 
     @Override
     public User saveUser(User user) {

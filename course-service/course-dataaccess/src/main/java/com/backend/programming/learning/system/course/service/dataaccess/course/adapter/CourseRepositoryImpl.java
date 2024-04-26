@@ -19,13 +19,6 @@ public class CourseRepositoryImpl implements CourseRepository {
     private final CourseDataAccessMapper courseDataAccessMapper;
 
     @Override
-    public Course saveCourse(Course course) {
-        return courseDataAccessMapper.courseEntityToCourse(courseJpaRepository
-                .save(courseDataAccessMapper
-                        .courseToCourseEntity(course)));
-    }
-
-    @Override
     public Course save(Course course) {
         return courseDataAccessMapper.courseEntityToCourse(courseJpaRepository
                 .save(courseDataAccessMapper

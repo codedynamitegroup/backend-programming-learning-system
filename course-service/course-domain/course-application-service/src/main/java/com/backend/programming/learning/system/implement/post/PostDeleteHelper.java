@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 public class PostDeleteHelper {
     private final PostRepository postRepository;
     public void deleteById(DeletePostCommand deletePostCommand) {
-        log.info("Delete post by id: {}", deletePostCommand.getPostId());
-        postRepository.deleteById(deletePostCommand.getPostId());
+        log.info("Delete post by id: {}", deletePostCommand.postId());
+        postRepository.deleteById(deletePostCommand.postId());
     }
 }

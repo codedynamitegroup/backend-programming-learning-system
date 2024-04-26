@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.dto.method.create.exam_question;
+package com.backend.programming.learning.system.dto.method.create.exam_submisison.exam_question;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,12 +14,11 @@ import java.util.UUID;
  * Date 4/21/2024 - 2:00 AM
  * Description: ...
  */
-@Getter
 @Builder
-@AllArgsConstructor
-public class CreateExamQuestionCommand {
-    @NotNull(message = "Exam id is required")
-    private UUID examId;
-    @NotNull(message = "Question ids are required")
-    private List<UUID> questionIds;
+public record CreateExamQuestionCommand(
+        @NotNull(message = "Exam id is required")
+        UUID examId,
+        @NotNull(message = "Question ids are required")
+        List<UUID> questionIds
+) {
 }

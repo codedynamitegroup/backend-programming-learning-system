@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.dto.method.update.exam;
 
+import com.backend.programming.learning.system.valueobject.OverdueHandling;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,7 +32,7 @@ public class UpdateExamCommand {
     private ZonedDateTime timeClose;
     private ZonedDateTime timeLimit;
     @NotNull(message = "Exam overdue handling is required")
-    private String overdueHandling;
+    private OverdueHandling overdueHandling;
 //    @NotNull(message = "Exam can redo questions is required")
     private Boolean canRedoQuestions;
     @NotNull(message = "Exam max attempts is required")

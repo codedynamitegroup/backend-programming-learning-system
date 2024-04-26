@@ -160,6 +160,27 @@
 
 			<dependency>
 				<groupId>com.backend.programming.learning.system</groupId>
+				<artifactId>background-domain-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.backend.programming.learning.system</groupId>
+				<artifactId>background-application-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.backend.programming.learning.system</groupId>
+				<artifactId>background-application</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.backend.programming.learning.system</groupId>
+				<artifactId>background-dataaccess</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.backend.programming.learning.system</groupId>
 				<artifactId>common-domain</artifactId>
 				<version>${project.version}</version>
 			</dependency>

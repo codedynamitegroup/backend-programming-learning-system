@@ -29,8 +29,10 @@ public class CalendarEventEntity {
     private ZonedDateTime startTime;
     private ZonedDateTime endTime;
     @ManyToOne
-    @JoinColumn(name = "user_id_to", referencedColumnName = "id")
-    private UserEntity userTo;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private UserEntity user;
+    private UUID courseId;
+    private String component;
     private ZonedDateTime createdAt;
 
     @Override

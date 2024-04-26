@@ -14,20 +14,21 @@ import java.util.UUID;
  * Date 3/25/2024 - 11:05 PM
  * Description: ...
  */
-@Getter
 @Builder
-public class CreateQuestionCommand {
-    private UUID organizationId;
-    @NotNull(message = "Question difficulty is required")
-    private QuestionDifficulty difficulty;
-    @NotNull(message = "Question name is required")
-    private String name;
-    private String questionText;
-    private String generalFeedback;
-    private Float defaultMark;
-    private UUID questionBankCategoryId;
-    @NotNull(message = "Question type is required")
-    private QuestionType qtype;
-    @NotNull(message = "Created by is required")
-    private UUID createdBy;
+public record CreateQuestionCommand(
+        @NotNull(message = "Organization id is required")
+        UUID organizationId,
+        @NotNull(message = "Question difficulty is required")
+        QuestionDifficulty difficulty,
+        @NotNull(message = "Question name is required")
+        String name,
+        String questionText,
+        String generalFeedback,
+        Float defaultMark,
+        UUID questionBankCategoryId,
+        @NotNull(message = "Question type is required")
+        QuestionType qtype,
+        @NotNull(message = "Created by is required")
+        UUID createdBy
+) {
 }

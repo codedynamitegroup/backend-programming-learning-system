@@ -59,7 +59,7 @@ public class ExamCommandHandler {
 
     @Transactional
     public DeleteCourseResponse deleteExam(DeleteExamCommand deleteExamCommand) {
-        examDeleteHelper.deleteExam(new ExamId(deleteExamCommand.getExamId()));
+        examDeleteHelper.deleteExam(new ExamId(deleteExamCommand.examId()));
         return new DeleteCourseResponse("Exam deleted successfully");
     }
 

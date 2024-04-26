@@ -15,6 +15,7 @@ import java.util.UUID;
 public record UpdateQuestionBankCategoryResponse(
         UUID questionBankCategoryId,
         String name,
+        String description,
         UUID createdBy,
         UUID updatedBy,
         ZonedDateTime createdAt,

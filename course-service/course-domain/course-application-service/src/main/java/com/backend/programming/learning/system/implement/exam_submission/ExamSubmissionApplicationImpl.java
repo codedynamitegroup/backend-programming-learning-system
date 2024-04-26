@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.implement.exam_submission;
 
 import com.backend.programming.learning.system.dto.method.create.exam_submisison.CreateExamSubmissionCommand;
 import com.backend.programming.learning.system.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
+import com.backend.programming.learning.system.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
 import com.backend.programming.learning.system.ports.input.service.exam_submission.ExamSubmissionApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,5 +24,10 @@ public class ExamSubmissionApplicationImpl implements ExamSubmissionApplicationS
     @Override
     public CreateExamSubmissionResponse submitExam(CreateExamSubmissionCommand createExamSubmissionCommand) {
         return examSubmissionCommandHandler.submitExam(createExamSubmissionCommand);
+    }
+
+    @Override
+    public CreateExamSubmissionResponse startExam(CreateExamSubmissionStartCommand createExamSubmissionCommand) {
+        return examSubmissionCommandHandler.startExam(createExamSubmissionCommand);
     }
 }

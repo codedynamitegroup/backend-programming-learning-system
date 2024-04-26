@@ -51,7 +51,7 @@ public class ReviewUpdateHelper {
 
         CertificateCourse certificateCourse = getCertificateCourse(review.getCertificateCourseId().getValue());
 
-        review.setUpdatedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+        review.setUpdatedAt(ZonedDateTime.now());
 
         if (updateReviewCommand.getRating() != null) {
             review.setRating(updateReviewCommand.getRating());

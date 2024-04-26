@@ -43,4 +43,6 @@ public interface CourseDomainService {
     QuestionUpdateFailedEvent updateQuestionFailedEvent(Question question);
     QuestionDeletedEvent deleteQuestionEvent(Question question);
     QuestionDeleteFailedEvent deleteQuestionFailedEvent(Question question);
+
+    void createStartExamSubmission(ExamSubmission examSubmission);
 }

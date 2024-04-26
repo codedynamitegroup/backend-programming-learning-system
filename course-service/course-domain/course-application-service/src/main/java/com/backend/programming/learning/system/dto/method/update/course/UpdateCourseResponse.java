@@ -18,6 +18,7 @@ import java.util.UUID;
 public class UpdateCourseResponse {
     private UUID courseId;
     private String name;
+    private String courseType;
     private Boolean visible;
     private String message;
 }

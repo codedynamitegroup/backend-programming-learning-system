@@ -13,12 +13,11 @@ import java.util.List;
  * Date 4/18/2024 - 9:00 PM
  * Description: ...
  */
-@Getter
 @Builder
-@AllArgsConstructor
-public class QueryAllExamResponse {
-    private final List<ExamResponseEntity> exams;
-    private final int currentPage;
-    private final long totalItems;
-    private final int totalPages;
+public record QueryAllExamResponse(
+        List<ExamResponseEntity> exams,
+        int currentPage,
+        long totalItems,
+        int totalPages
+) {
 }

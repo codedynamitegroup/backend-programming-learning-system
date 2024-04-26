@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -28,11 +29,11 @@ public class CalendarEventQueryHelper {
     }
 
     @Transactional(readOnly = true)
-    public Page<CalendarEvent> findAllCalendarEvents(
+    public List<CalendarEvent> findAllCalendarEvents(
             QueryAllCalendarEventsCommand queryAllCalendarEventsCommand
     ) {
-        return calendarEventRepository.findAll(queryAllCalendarEventsCommand.getPageNo(),
-                queryAllCalendarEventsCommand.getPageSize());
+        return calendarEventRepository.findAllBetweenFromTimeAndToTime(queryAllCalendarEventsCommand.getFromTime(),
+                queryAllCalendarEventsCommand.getToTime());
     }
 }
 

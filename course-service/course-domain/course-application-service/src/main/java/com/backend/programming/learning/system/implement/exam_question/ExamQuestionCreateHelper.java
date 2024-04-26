@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.implement.exam_question;
 
 import com.backend.programming.learning.system.CourseDomainService;
-import com.backend.programming.learning.system.dto.method.create.exam_question.CreateExamQuestionCommand;
+import com.backend.programming.learning.system.dto.method.create.exam_submisison.exam_question.CreateExamQuestionCommand;
 import com.backend.programming.learning.system.entity.Exam;
 import com.backend.programming.learning.system.entity.ExamQuestion;
 import com.backend.programming.learning.system.entity.Question;
@@ -34,9 +34,9 @@ public class ExamQuestionCreateHelper {
     private final ExamQuestionDataMapper examQuestionDataMapper;
     public void assignExamToQuestions(CreateExamQuestionCommand createExamQuestionCommand) {
         log.info("Create exam question");
-        Exam exam = examRepository.findBy(new ExamId(createExamQuestionCommand.getExamId()));
+        Exam exam = examRepository.findBy(new ExamId(createExamQuestionCommand.examId()));
         List<Question> questions = new ArrayList<>();
-        createExamQuestionCommand.getQuestionIds().forEach(questionId -> {
+        createExamQuestionCommand.questionIds().forEach(questionId -> {
             Question question = questionRepository.findById(questionId);
             questions.add(question);
         });

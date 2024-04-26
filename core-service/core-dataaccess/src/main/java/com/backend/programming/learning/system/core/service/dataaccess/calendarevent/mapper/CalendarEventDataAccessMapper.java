@@ -24,7 +24,7 @@ public class CalendarEventDataAccessMapper {
     }
 
     public CalendarEvent calendarEventEntityToCalendarEvent(CalendarEventEntity calendarEventEntity) {
-        User userTo = userDataAccessMapper.userEntityToUser(calendarEventEntity.getUserTo());
+        User user= userDataAccessMapper.userEntityToUser(calendarEventEntity.getUser());
         return CalendarEvent.builder()
                 .id(new CalendarEventId(calendarEventEntity.getId()))
                 .name(calendarEventEntity.getName())
@@ -32,13 +32,15 @@ public class CalendarEventDataAccessMapper {
                 .eventType(calendarEventEntity.getEventType())
                 .startTime(calendarEventEntity.getStartTime())
                 .endTime(calendarEventEntity.getEndTime())
-                .userTo(userTo)
+                .user(user)
+                .courseId(calendarEventEntity.getCourseId())
+                .component(calendarEventEntity.getComponent())
                 .createdAt(calendarEventEntity.getCreatedAt())
                 .build();
     }
 
     public CalendarEventEntity calendarEventToCalendarEventEntity(CalendarEvent calendarEvent) {
-        UserEntity userTo = userDataAccessMapper.userToUserEntity(calendarEvent.getUserTo());
+        UserEntity userEntity = userDataAccessMapper.userToUserEntity(calendarEvent.getUser());
         return CalendarEventEntity.builder()
                 .id(calendarEvent.getId().getValue())
                 .name(calendarEvent.getName())
@@ -46,7 +48,9 @@ public class CalendarEventDataAccessMapper {
                 .eventType(calendarEvent.getEventType())
                 .startTime(calendarEvent.getStartTime())
                 .endTime(calendarEvent.getEndTime())
-                .userTo(userTo)
+                .user(userEntity)
+                .courseId(calendarEvent.getCourseId())
+                .component(calendarEvent.getComponent())
                 .createdAt(calendarEvent.getCreatedAt())
                 .build();
     }

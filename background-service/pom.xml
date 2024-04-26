@@ -10,11 +10,15 @@
     </parent>
 
     <artifactId>background-service</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>background-application</module>
+        <module>background-domain</module>
+        <module>background-dataaccess</module>
+    </modules>
 
     <properties>
     </properties>
-
-    <dependencies>
-    </dependencies>
 
 </project>

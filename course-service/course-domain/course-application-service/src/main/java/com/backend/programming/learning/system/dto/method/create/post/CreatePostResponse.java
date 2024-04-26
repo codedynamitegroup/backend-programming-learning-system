@@ -12,15 +12,14 @@ import lombok.Getter;
  * Date 4/14/2024 - 1:14 AM
  * Description: ...
  */
-@Getter
 @Builder
-@AllArgsConstructor
-public class CreatePostResponse {
-    private PostId id;
-    private CourseId courseId;
-    private String title;
-    private String content;
-    private String summary;
-    private Boolean isPublished;
-    private String message;
+public record CreatePostResponse(
+        PostId id,
+        CourseId courseId,
+        String title,
+        String content,
+        String summary,
+        Boolean isPublished,
+        String message
+) {
 }

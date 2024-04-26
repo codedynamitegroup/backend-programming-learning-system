@@ -45,7 +45,7 @@ public class ExamDataAccessMapper{
                 .timeOpen(examEntity.getTimeOpen())
                 .timeClose(examEntity.getTimeClose())
                 .timeLimit(examEntity.getTimeLimit())
-                .overdueHanding(examEntity.getOverdueHandling())
+                .overdueHandling(examEntity.getOverdueHandling())
                 .canRedoQuestions(examEntity.getCanRedoQuestions())
                 .maxAttempts(examEntity.getMaxAttempts())
 //                .shuffle_answers(examEntity.getShuffleQuestions())

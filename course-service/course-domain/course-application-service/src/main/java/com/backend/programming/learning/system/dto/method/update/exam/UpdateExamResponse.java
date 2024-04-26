@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.dto.method.update.exam;
 
+import com.backend.programming.learning.system.valueobject.OverdueHandling;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,8 +26,8 @@ public class UpdateExamResponse {
     private Float maxScore;
     private ZonedDateTime timeOpen;
     private ZonedDateTime timeClose;
-    private ZonedDateTime timeLimit;
-    private String overdueHandling;
+    private Integer timeLimit;
+    private OverdueHandling overdueHandling;
     private Boolean canRedoQuestions;
     private Integer maxAttempts;
     private Boolean shuffleQuestions;

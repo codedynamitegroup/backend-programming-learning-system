@@ -21,10 +21,10 @@ public class PostDataMapper {
     public Post createPostCommandToPost(CreatePostCommand createPostCommand, Course course, User createdBy) {
         return Post.builder()
                 .course(course)
-                .title(createPostCommand.getTitle())
-                .content(createPostCommand.getContent())
-                .summary(createPostCommand.getSummary())
-                .isPublished(createPostCommand.getIsPublished())
+                .title(createPostCommand.title())
+                .content(createPostCommand.content())
+                .summary(createPostCommand.summary())
+                .isPublished(createPostCommand.isPublished())
                 .createdBy(createdBy)
                 .build();
     }

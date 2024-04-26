@@ -1,9 +1,8 @@
 package com.backend.programming.learning.system.dto.method.delete.post;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
 
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 /**
@@ -12,9 +11,9 @@ import java.util.UUID;
  * Date 4/20/2024 - 11:26 AM
  * Description: ...
  */
-@Getter
 @Builder
-@AllArgsConstructor
-public class DeletePostCommand {
-    private final UUID postId;
+public record DeletePostCommand(
+        @NotNull(message = "Post id is required")
+        UUID postId
+) {
 }

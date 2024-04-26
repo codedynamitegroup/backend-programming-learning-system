@@ -13,6 +13,8 @@ import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import java.time.ZonedDateTime;
+
 @Component
 public class NotificationDataMapper {
     private final UserDataMapper userDataMapper;
@@ -39,6 +41,8 @@ public class NotificationDataMapper {
                 .contextUrl(createNotificationCommand.getContextUrl())
                 .contextUrlName(createNotificationCommand.getContextUrlName())
                 .isRead(false)
+                .createdAt(ZonedDateTime.now())
+                .updatedAt(ZonedDateTime.now())
                 .build();
     }
 

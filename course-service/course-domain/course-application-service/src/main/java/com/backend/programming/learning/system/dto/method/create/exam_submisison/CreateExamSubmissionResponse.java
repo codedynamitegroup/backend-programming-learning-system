@@ -1,5 +1,10 @@
 package com.backend.programming.learning.system.dto.method.create.exam_submisison;
 
+import com.backend.programming.learning.system.valueobject.Status;
+import com.backend.programming.learning.system.valueobject.Type;
+import lombok.Builder;
+
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 /**
@@ -8,11 +13,13 @@ import java.util.UUID;
  * Date 4/24/2024 - 12:15 AM
  * Description: ...
  */
+@Builder
 public record CreateExamSubmissionResponse(
         UUID examSubmissionId,
         UUID examId,
         UUID userId,
-        String type,
-        Integer passStatus
+        ZonedDateTime startTime,
+        ZonedDateTime submitTime,
+        Status status
 ) {
 }

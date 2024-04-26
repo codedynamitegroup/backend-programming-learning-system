@@ -1,9 +1,8 @@
 package com.backend.programming.learning.system.dto.method.delete.exam;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
 
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 /**
@@ -12,9 +11,9 @@ import java.util.UUID;
  * Date 4/20/2024 - 11:18 AM
  * Description: ...
  */
-@Getter
 @Builder
-@AllArgsConstructor
-public class DeleteExamCommand {
-    private final UUID examId;
+public record DeleteExamCommand(
+        @NotNull(message = "Exam id is required")
+        UUID examId
+) {
 }
