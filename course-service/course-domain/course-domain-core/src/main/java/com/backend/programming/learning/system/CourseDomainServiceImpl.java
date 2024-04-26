@@ -121,7 +121,7 @@ public class CourseDomainServiceImpl implements CourseDomainService{
     }
 
     @Override
-    public QuestionUpdatedEvent createQuestionUpdatedEvent(Question question) {
+    public QuestionUpdatedEvent updateQuestionEvent(Question question) {
         log.info("Question with id: {} is updated with event", question.getId().getValue());
         return new QuestionUpdatedEvent(question,
                 ZonedDateTime.now(ZoneId.of("UTC")),
@@ -129,7 +129,7 @@ public class CourseDomainServiceImpl implements CourseDomainService{
     }
 
     @Override
-    public QuestionUpdateFailedEvent createQuestionUpdateFailedEvent(Question question) {
+    public QuestionUpdateFailedEvent updateQuestionFailedEvent(Question question) {
         log.info("Question with id: {} is failed to update with event", question.getId().getValue());
         return new QuestionUpdateFailedEvent(question,
                 ZonedDateTime.now(ZoneId.of("UTC")),
@@ -137,7 +137,7 @@ public class CourseDomainServiceImpl implements CourseDomainService{
     }
 
     @Override
-    public QuestionDeletedEvent createQuestionDeletedEvent(Question question) {
+    public QuestionDeletedEvent deleteQuestionEvent(Question question) {
         log.info("Question with id: {} is deleted with event", question.getId().getValue());
         return new QuestionDeletedEvent(question,
                 ZonedDateTime.now(ZoneId.of("UTC")),
@@ -145,7 +145,7 @@ public class CourseDomainServiceImpl implements CourseDomainService{
     }
 
     @Override
-    public QuestionDeleteFailedEvent createQuestionDeleteFailedEvent(Question question) {
+    public QuestionDeleteFailedEvent deleteQuestionFailedEvent(Question question) {
         log.info("Question with id: {} is failed to delete with event", question.getId().getValue());
         return new QuestionDeleteFailedEvent(question,
                 ZonedDateTime.now(ZoneId.of("UTC")),

@@ -1,13 +1,10 @@
 package com.backend.programming.learning.system.implement.question.message;
 
 import com.backend.programming.learning.system.CourseDomainService;
-import com.backend.programming.learning.system.domain.valueobject.QuestionResponseStatus;
 import com.backend.programming.learning.system.dto.method.message.QuestionCreateRequest;
 import com.backend.programming.learning.system.dto.method.message.QuestionDeleteRequest;
 import com.backend.programming.learning.system.dto.method.message.QuestionUpdateRequest;
-import com.backend.programming.learning.system.event.question.event.QuestionCreatedEvent;
-import com.backend.programming.learning.system.event.question.event.QuestionDeletedEvent;
-import com.backend.programming.learning.system.event.question.event.QuestionUpdatedEvent;
+import com.backend.programming.learning.system.event.question.event.*;
 import com.backend.programming.learning.system.mapper.question.QuestionDataMapper;
 import com.backend.programming.learning.system.ports.input.message.listener.question.QuestionMessageListener;
 import com.backend.programming.learning.system.ports.output.message.publisher.question.*;
@@ -20,49 +17,78 @@ import org.springframework.validation.annotation.Validated;
 @Service
 public class QuestionMessageListenerImpl implements QuestionMessageListener {
     private final QuestionCreatedResponseMessagePublisher questionCreatedResponseMessagePublisher;
-//    private final QuestionCreateFailedResponseMessagePublisher questionCreateFailedResponseMessagePublisher;
+    private final QuestionCreateFailedResponseMessagePublisher questionCreateFailedResponseMessagePublisher;
     private final QuestionDeletedResponseMessagePublisher questionDeletedResponseMessagePublisher;
-//    private final QuestionDeleteFailedResponseMessagePublisher questionDeleteFailedResponseMessagePublisher;
+    private final QuestionDeleteFailedResponseMessagePublisher questionDeleteFailedResponseMessagePublisher;
     private final QuestionUpdatedResponseMessagePublisher questionUpdatedResponseMessagePublisher;
-//    private final QuestionUpdateFailedResponseMessagePublisher questionUpdateFailedResponseMessagePublisher;
+    private final QuestionUpdateFailedResponseMessagePublisher questionUpdateFailedResponseMessagePublisher;
     private final QuestionDataMapper questionDataMapper;
     private final CourseDomainService courseDomainService;
 
     public QuestionMessageListenerImpl(QuestionCreatedResponseMessagePublisher questionCreatedResponseMessagePublisher,
-//                                       QuestionCreateFailedResponseMessagePublisher questionCreateFailedResponseMessagePublisher,
+                                       QuestionCreateFailedResponseMessagePublisher questionCreateFailedResponseMessagePublisher,
                                        QuestionDeletedResponseMessagePublisher questionDeletedResponseMessagePublisher,
-//                                       QuestionDeleteFailedResponseMessagePublisher questionDeleteFailedResponseMessagePublisher,
+                                       QuestionDeleteFailedResponseMessagePublisher questionDeleteFailedResponseMessagePublisher,
                                        QuestionUpdatedResponseMessagePublisher questionUpdatedResponseMessagePublisher,
-//                                       QuestionUpdateFailedResponseMessagePublisher questionUpdateFailedResponseMessagePublisher,
+                                       QuestionUpdateFailedResponseMessagePublisher questionUpdateFailedResponseMessagePublisher,
                                        QuestionDataMapper questionDataMapper, CourseDomainService courseDomainService) {
         this.questionCreatedResponseMessagePublisher = questionCreatedResponseMessagePublisher;
-//        this.questionCreateFailedResponseMessagePublisher = questionCreateFailedResponseMessagePublisher;
+        this.questionCreateFailedResponseMessagePublisher = questionCreateFailedResponseMessagePublisher;
         this.questionDeletedResponseMessagePublisher = questionDeletedResponseMessagePublisher;
-//        this.questionDeleteFailedResponseMessagePublisher = questionDeleteFailedResponseMessagePublisher;
+        this.questionDeleteFailedResponseMessagePublisher = questionDeleteFailedResponseMessagePublisher;
         this.questionUpdatedResponseMessagePublisher = questionUpdatedResponseMessagePublisher;
-//        this.questionUpdateFailedResponseMessagePublisher = questionUpdateFailedResponseMessagePublisher;
+        this.questionUpdateFailedResponseMessagePublisher = questionUpdateFailedResponseMessagePublisher;
         this.questionDataMapper = questionDataMapper;
         this.courseDomainService = courseDomainService;
     }
 
     @Override
     public void createQuestion(QuestionCreateRequest questionCreateRequest) {
-        QuestionCreatedEvent questionCreatedEvent = courseDomainService
-                .createQuestionEvent(questionDataMapper.questionCreateRequestToQuestion(questionCreateRequest));
-        questionCreatedResponseMessagePublisher.publish(questionCreatedEvent);
+        try {
+            QuestionCreatedEvent questionCreatedEvent = courseDomainService
+                    .createQuestionEvent(questionDataMapper.questionCreateRequestToQuestion(questionCreateRequest));
+            questionCreatedResponseMessagePublisher.publish(questionCreatedEvent);
+        }
+        catch (Exception e) {
+            log.error("Error while sending message to topic: {} with message: {}", questionCreateRequest, e.getMessage());
+
+            QuestionCreateFailedEvent questionCreateFailedEvent = courseDomainService
+                    .createQuestionFailedEvent(questionDataMapper.questionCreateRequestToQuestion(questionCreateRequest));
+            questionCreateFailedResponseMessagePublisher.publish(questionCreateFailedEvent);
+        }
+
     }
 
     @Override
     public void updateQuestion(QuestionUpdateRequest questionUpdateRequest) {
-        QuestionUpdatedEvent questionUpdatedEvent = courseDomainService
-                .createQuestionUpdatedEvent(questionDataMapper.questionUpdateRequestToQuestion(questionUpdateRequest));
-        questionUpdatedResponseMessagePublisher.publish(questionUpdatedEvent);
+        try {
+            QuestionUpdatedEvent questionUpdatedEvent = courseDomainService
+                    .updateQuestionEvent(questionDataMapper.questionUpdateRequestToQuestion(questionUpdateRequest));
+            questionUpdatedResponseMessagePublisher.publish(questionUpdatedEvent);
+        }
+        catch (Exception e) {
+            log.error("Error while sending message to topic: {} with message: {}", questionUpdateRequest, e.getMessage());
+
+            QuestionUpdateFailedEvent questionUpdateFailedEvent = courseDomainService
+                    .updateQuestionFailedEvent(questionDataMapper.questionUpdateRequestToQuestion(questionUpdateRequest));
+            questionUpdateFailedResponseMessagePublisher.publish(questionUpdateFailedEvent);
+        }
     }
 
     @Override
     public void deleteQuestion(QuestionDeleteRequest questionDeleteRequest) {
-        QuestionDeletedEvent questionDeletedEvent = courseDomainService
-                .createQuestionDeletedEvent(questionDataMapper.questionDeleteRequestToQuestion(questionDeleteRequest));
-        questionDeletedResponseMessagePublisher.publish(questionDeletedEvent);
+        try {
+            QuestionDeletedEvent questionDeletedEvent = courseDomainService
+                    .deleteQuestionEvent(questionDataMapper.questionDeleteRequestToQuestion(questionDeleteRequest));
+            questionDeletedResponseMessagePublisher.publish(questionDeletedEvent);
+        }
+        catch (Exception e) {
+            log.error("Error while sending message to topic: {} with message: {}", questionDeleteRequest, e.getMessage());
+
+            QuestionDeleteFailedEvent questionDeleteFailedEvent = courseDomainService
+                    .deleteQuestionFailedEvent(questionDataMapper.questionDeleteRequestToQuestion(questionDeleteRequest));
+            questionDeleteFailedResponseMessagePublisher.publish(questionDeleteFailedEvent);
+        }
+
     }
 }

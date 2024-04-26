@@ -2,22 +2,21 @@ package com.backend.programming.learning.system.core.service.messaging.pulisher.
 
 import com.backend.programming.learning.system.config.CourseServiceConfigData;
 import com.backend.programming.learning.system.core.service.messaging.mapper.QuestionMessagingMapper;
-import com.backend.programming.learning.system.event.question.event.QuestionCreatedEvent;
+import com.backend.programming.learning.system.event.question.event.QuestionCreateFailedEvent;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
-import com.backend.programming.learning.system.ports.output.message.publisher.question.QuestionCreatedResponseMessagePublisher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class QuestionCreatedResponseKafkaMessagePublisher implements QuestionCreatedResponseMessagePublisher {
+public class QuestionCreateFailedResponseMessagePublisher implements com.backend.programming.learning.system.ports.output.message.publisher.question.QuestionCreateFailedResponseMessagePublisher {
     private final QuestionMessagingMapper questionMessagingDataMapper;
     private final CourseServiceConfigData courseServiceConfigData;
     private final KafkaProducer<String, QuestionResponseAvroModel> kafkaProducer;
     private final QuestionKafkaMessageHelper questionKafkaMessageHelper;
 
-    public QuestionCreatedResponseKafkaMessagePublisher(
+    public QuestionCreateFailedResponseMessagePublisher(
             QuestionMessagingMapper questionMessagingDataMapper,
             CourseServiceConfigData courseServiceConfigData,
             KafkaProducer<String, QuestionResponseAvroModel> kafkaProducer,
@@ -28,12 +27,11 @@ public class QuestionCreatedResponseKafkaMessagePublisher implements QuestionCre
         this.questionKafkaMessageHelper = questionKafkaMessageHelper;
     }
 
-
     @Override
-    public void publish(QuestionCreatedEvent domainEvent) {
+    public void publish(QuestionCreateFailedEvent domainEvent) {
         String questionId = domainEvent.getQuestion().getId().getValue().toString();
 
-        log.info("Received question created event for question id: {}", questionId);
+        log.info("Received question create failed event for question id: {}", questionId);
 
         try {
             QuestionResponseAvroModel questionResponseAvroModel = questionMessagingDataMapper
@@ -49,5 +47,6 @@ public class QuestionCreatedResponseKafkaMessagePublisher implements QuestionCre
                     domainEvent,
                     e);
         }
+
     }
 }
