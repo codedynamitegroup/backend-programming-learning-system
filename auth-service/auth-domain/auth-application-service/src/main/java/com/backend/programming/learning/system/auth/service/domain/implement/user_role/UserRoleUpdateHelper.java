@@ -38,7 +38,7 @@ public class UserRoleUpdateHelper {
         User updateBy = getUser(updateUserRoleCommand.getUpdatedBy());
 
         userRole.setUpdatedBy(updateBy);
-        userRole.setUpdatedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+        userRole.setUpdatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
 
         if (updateUserRoleCommand.getName() != null) {
             userRole.setName(updateUserRoleCommand.getName());

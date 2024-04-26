@@ -53,6 +53,6 @@ public class NotificationRepositoryImpl implements NotificationRepository {
 
     @Override
     public int markReadNotificationById(UUID notificationId) {
-        return notificationJpaRepository.markReadNotificationById(true, ZonedDateTime.now(), notificationId);
+        return notificationJpaRepository.markReadNotificationById(true, ZonedDateTime.now(ZoneId.of("UTC")), notificationId);
     }
 }

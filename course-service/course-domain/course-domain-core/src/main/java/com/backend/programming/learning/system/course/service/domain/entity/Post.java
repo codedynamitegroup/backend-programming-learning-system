@@ -27,8 +27,8 @@ public class Post extends AggregateRoot<PostId> {
     }
     public void initializePost() {
         setId(new PostId(UUID.randomUUID()));
-        createdAt =  ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
-        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        createdAt =  ZonedDateTime.now(ZoneId.of("UTC"));
+        updatedAt = ZonedDateTime.now(ZoneId.of("UTC"));
     }
     private Post(Builder builder) {
         super.setId(builder.postId);

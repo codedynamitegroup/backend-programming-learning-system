@@ -46,9 +46,9 @@ public class User extends AggregateRoot<UserId> {
 
     public void initializeUser() {
         setId(new UserId(UUID.randomUUID()));
-        lastLogin = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
-        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
-        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        lastLogin = ZonedDateTime.now(ZoneId.of("UTC"));
+        createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
+        updatedAt = ZonedDateTime.now(ZoneId.of("UTC"));
         isDeleted = false;
     }
 

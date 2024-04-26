@@ -30,7 +30,7 @@ public class Course extends AggregateRoot<CourseId> {
 
     public void initializeCourse() {
         setId(new CourseId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
-        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
+        updatedAt = ZonedDateTime.now(ZoneId.of("UTC"));
     }
 }

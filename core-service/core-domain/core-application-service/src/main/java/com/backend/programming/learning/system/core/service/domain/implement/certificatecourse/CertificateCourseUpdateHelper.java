@@ -49,7 +49,7 @@ public class CertificateCourseUpdateHelper {
 
         User updatedBy = getUser(updateCertificateCourseCommand.getUpdatedBy());
         certificateCourse.setUpdatedBy(updatedBy);
-        certificateCourse.setUpdatedAt(ZonedDateTime.now());
+        certificateCourse.setUpdatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
 
         if (updateCertificateCourseCommand.getName() != null) {
             checkCertificateCourseByNameExists(updateCertificateCourseCommand.getName());

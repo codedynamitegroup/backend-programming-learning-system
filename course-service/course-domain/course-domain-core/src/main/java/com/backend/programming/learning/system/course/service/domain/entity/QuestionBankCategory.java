@@ -21,7 +21,7 @@ public class QuestionBankCategory extends AggregateRoot<QuestionBankCategoryId> 
     private ZonedDateTime updatedAt;
     public void initializeQuestionBankCategory() {
         this.setId(new QuestionBankCategoryId(UUID.randomUUID()));
-        this.setCreatedAt(ZonedDateTime.now());
-        this.setUpdatedAt(ZonedDateTime.now());
+        this.setCreatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
+        this.setUpdatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
     }
 }

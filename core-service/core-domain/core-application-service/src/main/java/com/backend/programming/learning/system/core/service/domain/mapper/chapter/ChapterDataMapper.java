@@ -16,6 +16,7 @@ import com.backend.programming.learning.system.core.service.domain.valueobject.C
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +45,8 @@ private final QuestionDataMapper questionDataMapper;
                         .builder()
                         .id(new UserId(createChapterCommand.getUpdatedBy()))
                         .build())
-                .createdAt(ZonedDateTime.now())
-                .updatedAt(ZonedDateTime.now())
+                .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
+                .updatedAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .build();
     }
 

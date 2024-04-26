@@ -21,8 +21,8 @@ public class Review extends AggregateRoot<ReviewId> {
 
     public void initializeReview() {
         setId(new ReviewId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
-        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
+        updatedAt = ZonedDateTime.now(ZoneId.of("UTC"));
     }
 
     private Review(Builder builder) {

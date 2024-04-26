@@ -44,7 +44,7 @@ public class OrganizationUpdateHelper {
         User updateBy = getUser(updateOrganizationCommand.getUpdatedBy());
 
         organization.setUpdatedBy(updateBy);
-        organization.setUpdatedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+        organization.setUpdatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
 
         if (updateOrganizationCommand.getName() != null) {
             organization.setName(updateOrganizationCommand.getName());

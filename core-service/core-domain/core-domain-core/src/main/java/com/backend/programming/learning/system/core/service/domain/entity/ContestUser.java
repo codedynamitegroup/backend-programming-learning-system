@@ -24,8 +24,8 @@ public class ContestUser extends BaseEntity<ContestUserId> {
 
     public void initializeContestUser() {
         setId(new ContestUserId(UUID.randomUUID()));
-        setCreatedAt(ZonedDateTime.now());
-        setUpdatedAt(ZonedDateTime.now());
+        setCreatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
+        setUpdatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
     }
 
     private ContestUser(Builder builder) {

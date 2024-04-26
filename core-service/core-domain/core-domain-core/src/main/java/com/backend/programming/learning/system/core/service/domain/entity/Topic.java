@@ -42,8 +42,8 @@ public class Topic extends AggregateRoot<TopicId> {
 
     public void initializeTopic() {
         setId(new TopicId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now();
-        updatedAt = ZonedDateTime.now();
+        createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
+        updatedAt = ZonedDateTime.now(ZoneId.of("UTC"));
     }
 
 

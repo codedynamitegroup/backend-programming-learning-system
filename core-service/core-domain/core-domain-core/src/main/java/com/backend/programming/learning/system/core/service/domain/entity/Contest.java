@@ -41,8 +41,8 @@ public class Contest extends AggregateRoot<ContestId> {
 
     public void initializeContest() {
         setId(new ContestId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now();
-        updatedAt = ZonedDateTime.now();
+        createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
+        updatedAt = ZonedDateTime.now(ZoneId.of("UTC"));
     }
 
 
