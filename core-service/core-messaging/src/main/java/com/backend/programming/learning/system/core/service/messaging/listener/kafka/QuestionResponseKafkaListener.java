@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.core.service.messaging.listener.kafka.user;
+package com.backend.programming.learning.system.core.service.messaging.listener.kafka;
 
 import com.backend.programming.learning.system.core.service.domain.ports.input.message.listener.question.course.QuestionResponseMessageListener;
 import com.backend.programming.learning.system.core.service.messaging.mapper.QuestionMessagingDataMapper;

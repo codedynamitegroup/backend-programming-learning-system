@@ -1,0 +1,35 @@
+{
+  "name": "ContestUserCreateRequestAvroModel",
+  "namespace": "com.backend.programming.learning.system.kafka.course.contest.avro.model",
+  "type": "record",
+  "fields": [
+    {
+      "name": "id",
+      "type": {
+          "type": "string",
+          "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "sagaId",
+      "type": {
+          "type": "string",
+          "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "contestId",
+      "type": {
+          "type": "string",
+          "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "userId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    }
+  ]
+}
