@@ -16,6 +16,10 @@
             <groupId>com.backend.programming.learning.system</groupId>
             <artifactId>socket-emitter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.backend.programming.learning.system</groupId>
+            <artifactId>course-application-service</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
