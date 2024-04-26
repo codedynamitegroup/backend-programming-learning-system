@@ -4,5 +4,6 @@ public enum NotificationComponentType {
     ASSIGNMENT,
     EXAM,
     POST,
+    CONTEST,
     REMINDER,
 }

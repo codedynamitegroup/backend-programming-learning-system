@@ -1,20 +1,13 @@
 package com.backend.programming.learning.system.core.service.domain.entity;
 
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseUserId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.ContestQuestionId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestUserId;
-import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
-import com.backend.programming.learning.system.domain.entity.BaseEntity;
-import com.backend.programming.learning.system.domain.valueobject.QuestionId;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
-public class ContestUser extends BaseEntity<ContestUserId> {
+public class ContestUser extends AggregateRoot<ContestUserId> {
     private final User user;
     private final Contest contest;
     private Boolean isCompleted;

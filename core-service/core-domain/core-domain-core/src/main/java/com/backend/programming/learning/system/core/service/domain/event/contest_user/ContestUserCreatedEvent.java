@@ -5,10 +5,10 @@ import com.backend.programming.learning.system.core.service.domain.entity.Contes
 import java.time.ZonedDateTime;
 import java.util.List;
 
-public class ContestUserCalendarEventCreateEvent extends ContestUserEvent {
-    public ContestUserCalendarEventCreateEvent(
-            ContestUser contestUser, ZonedDateTime createdAt, List<String> failureMessages) {
-        super(contestUser, createdAt, failureMessages);
+public class ContestUserCreatedEvent extends ContestUserEvent {
+    public ContestUserCreatedEvent(
+            ContestUser contestUser, List<String> failureMessages) {
+        super(contestUser, failureMessages);
     }
 
     @Override
