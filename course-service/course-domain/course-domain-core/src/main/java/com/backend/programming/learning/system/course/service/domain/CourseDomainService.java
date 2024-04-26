@@ -38,10 +38,10 @@ public interface CourseDomainService {
 
     QuestionCreatedEvent createQuestionEvent(Question question);
     QuestionCreateFailedEvent createQuestionFailedEvent(Question question);
-    QuestionUpdatedEvent createQuestionUpdatedEvent(Question question);
-    QuestionUpdateFailedEvent createQuestionUpdateFailedEvent(Question question);
-    QuestionDeletedEvent createQuestionDeletedEvent(Question question);
-    QuestionDeleteFailedEvent createQuestionDeleteFailedEvent(Question question);
+    QuestionUpdatedEvent updateQuestionEvent(Question question);
+    QuestionUpdateFailedEvent updateQuestionFailedEvent(Question question);
+    QuestionDeletedEvent deleteQuestionEvent(Question question);
+    QuestionDeleteFailedEvent deleteQuestionFailedEvent(Question question);
 
     void createStartExamSubmission(ExamSubmission examSubmission);
     void createCalendarEvent(CalendarEvent calendarEvent);

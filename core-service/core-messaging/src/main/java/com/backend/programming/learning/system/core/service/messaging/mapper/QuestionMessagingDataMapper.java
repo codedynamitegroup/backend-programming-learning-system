@@ -1,12 +1,15 @@
 package com.backend.programming.learning.system.core.service.messaging.mapper;
 
+import com.backend.programming.learning.system.core.service.domain.dto.method.message.QuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.AnswerOfQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
+import com.backend.programming.learning.system.domain.valueobject.QuestionResponseStatus;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel;
+import com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionUpdateRequestAvroModel;
 import org.springframework.stereotype.Component;
 
@@ -78,5 +81,23 @@ public class QuestionMessagingDataMapper {
         return answers.stream()
                 .map(answer -> answer.getId().getValue().toString())
                 .collect(Collectors.toList());
+    }
+
+    public QuestionResponse questionResponseAvroModelToQuestionResponse(QuestionResponseAvroModel questionResponseAvroModel) {
+        return QuestionResponse.builder()
+                .id(questionResponseAvroModel.getId())
+                .sagaId(UUID.randomUUID().toString())
+                .organizationId(questionResponseAvroModel.getOrganizationId())
+                .createdBy(questionResponseAvroModel.getCreatedBy())
+                .updatedBy(questionResponseAvroModel.getUpdatedBy())
+                .difficulty(questionResponseAvroModel.getDifficulty())
+                .name(questionResponseAvroModel.getName())
+                .questionText(questionResponseAvroModel.getQuestionText())
+                .generalFeedback(questionResponseAvroModel.getGeneralFeedback())
+                .defaultMark(questionResponseAvroModel.getDefaultMark())
+                .qType(questionResponseAvroModel.getQType())
+                .answers(questionResponseAvroModel.getAnswers())
+                .questionResponseStatus(QuestionResponseStatus.valueOf(questionResponseAvroModel.getQuestionResponseStatus().toString()))
+                .build();
     }
 }
