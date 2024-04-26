@@ -53,7 +53,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/core-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: postgres
-    password: admin
+    password: localdb
     driver-class-name: org.postgresql.Driver
     platform: postgres
     schema: classpath:init-schema.sql

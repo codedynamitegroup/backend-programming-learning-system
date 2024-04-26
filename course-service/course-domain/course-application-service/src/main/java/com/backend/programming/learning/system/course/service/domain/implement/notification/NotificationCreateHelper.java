@@ -10,7 +10,7 @@ import com.backend.programming.learning.system.course.service.domain.exception.U
 import com.backend.programming.learning.system.course.service.domain.mapper.notification.NotificationDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.NotificationRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
-import com.backend.programming.learning.system.course.service.socket.emitter.message.NotificationMessageEmitter;
+import com.backend.programming.learning.system.course.service.domain.ports.output.socket.message.emitter.NotificationMessageEmitter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
