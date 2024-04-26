@@ -34,7 +34,7 @@ public class UserUpdateHelper {
     @Transactional
     public UserUpdatedEvent persistUser(UpdateUserCommand updateUserCommand) {
         User user = getUser(updateUserCommand.getUserId());
-        user.setUpdatedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+        user.setUpdatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
 
         if (updateUserCommand.getDob() != null) {
             user.setDob(updateUserCommand.getDob());

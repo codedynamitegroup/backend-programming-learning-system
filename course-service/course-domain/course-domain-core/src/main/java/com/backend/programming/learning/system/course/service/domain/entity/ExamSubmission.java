@@ -62,13 +62,13 @@ public class ExamSubmission extends AggregateRoot<ExamSubmissionId> {
 
     public void initializeExamSubmission() {
         status = Status.SUBMITTED;
-        submitTime = ZonedDateTime.now();
+        submitTime = ZonedDateTime.now(ZoneId.of("UTC"));
     }
 
     public void initializeStartExamSubmission() {
         setId(new ExamSubmissionId(UUID.randomUUID()));
         status = Status.NOT_SUBMITTED;
-        startTime = ZonedDateTime.now();
+        startTime = ZonedDateTime.now(ZoneId.of("UTC"));
     }
 
     public static final class Builder {

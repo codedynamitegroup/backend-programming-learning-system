@@ -24,7 +24,7 @@ public class AuthDomainServiceImpl implements AuthDomainService {
             userCreatedEventDomainEventPublisher) {
         user.initializeUser();
         log.info("User with id: {} is initiated", user.getId().getValue());
-        return new UserCreatedEvent(user, ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)), userCreatedEventDomainEventPublisher);
+        return new UserCreatedEvent(user, ZonedDateTime.now(ZoneId.of("UTC")), userCreatedEventDomainEventPublisher);
     }
 
     @Override
@@ -32,12 +32,12 @@ public class AuthDomainServiceImpl implements AuthDomainService {
             userDeletedEventDomainEventPublisher) {
         user.deleteUser();
         log.info("User with id: {} is deleted", user.getId().getValue());
-        return new UserDeletedEvent(user, ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)), userDeletedEventDomainEventPublisher);
+        return new UserDeletedEvent(user, ZonedDateTime.now(ZoneId.of("UTC")), userDeletedEventDomainEventPublisher);
     }
 
     @Override
     public UserUpdatedEvent updateUser(User user, DomainEventPublisher<UserUpdatedEvent> userUpdatedEventDomainEventPublisher) {
-        return new UserUpdatedEvent(user, ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)), userUpdatedEventDomainEventPublisher);
+        return new UserUpdatedEvent(user, ZonedDateTime.now(ZoneId.of("UTC")), userUpdatedEventDomainEventPublisher);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class AuthDomainServiceImpl implements AuthDomainService {
         organization.initializeOrganization();
         log.info("Organization with id: {} is initiated", organization.getId().getValue());
         return new OrganizationCreatedEvent(organization,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                ZonedDateTime.now(ZoneId.of("UTC")),
                 organizationCreatedEventDomainEventPublisher);
     }
 
@@ -56,7 +56,7 @@ public class AuthDomainServiceImpl implements AuthDomainService {
         organization.deleteOrganization();
         log.info("Organization with id: {} is deleted", organization.getId().getValue());
         return new OrganizationDeletedEvent(organization,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                ZonedDateTime.now(ZoneId.of("UTC")),
                 organizationDeletedEventDomainEventPublisher);
     }
 
@@ -64,7 +64,7 @@ public class AuthDomainServiceImpl implements AuthDomainService {
     public OrganizationUpdatedEvent updateOrganization(Organization organization,
                                                        DomainEventPublisher<OrganizationUpdatedEvent> organizationUpdatedEventDomainEventPublisher) {
         return new OrganizationUpdatedEvent(organization,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                ZonedDateTime.now(ZoneId.of("UTC")),
                 organizationUpdatedEventDomainEventPublisher);
     }
 

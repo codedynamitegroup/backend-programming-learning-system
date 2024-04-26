@@ -48,7 +48,7 @@ public class TopicUpdateHelper {
             topic.setDescription(updateTopicCommand.getDescription());
         }
         topic.setUpdatedBy(updatedBy);
-        topic.setUpdatedAt(ZonedDateTime.now());
+        topic.setUpdatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
 
         updateTopic(topic);
 

@@ -49,8 +49,8 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
 
     public void initializeCertificateCourse() {
         setId(new CertificateCourseId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now();
-        updatedAt = ZonedDateTime.now();
+        createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
+        updatedAt = ZonedDateTime.now(ZoneId.of("UTC"));
     }
 
 

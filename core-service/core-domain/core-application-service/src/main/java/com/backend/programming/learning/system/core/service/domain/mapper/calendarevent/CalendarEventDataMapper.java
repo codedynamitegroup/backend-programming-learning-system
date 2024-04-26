@@ -23,6 +23,7 @@ import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +56,7 @@ public class CalendarEventDataMapper {
                     .build())
                 .courseId(createCalendarEventCommand.getCourseId())
                 .component(NotificationComponentType.valueOf(createCalendarEventCommand.getComponent()))
-                .createdAt(ZonedDateTime.now())
+                .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .build();
     }
 

@@ -42,8 +42,8 @@ public class NotificationDataMapper {
                 .contextUrl(createNotificationCommand.getContextUrl())
                 .contextUrlName(createNotificationCommand.getContextUrlName())
                 .isRead(false)
-                .createdAt(ZonedDateTime.now())
-                .updatedAt(ZonedDateTime.now())
+                .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
+                .updatedAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .build();
     }
 

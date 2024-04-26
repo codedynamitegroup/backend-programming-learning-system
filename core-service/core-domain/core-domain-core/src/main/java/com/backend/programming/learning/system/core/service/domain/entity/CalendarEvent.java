@@ -21,7 +21,7 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
 
     public void initializeCalendarEvent() {
         setId(new CalendarEventId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now();
+        createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
     }
 
     private CalendarEvent(Builder builder) {

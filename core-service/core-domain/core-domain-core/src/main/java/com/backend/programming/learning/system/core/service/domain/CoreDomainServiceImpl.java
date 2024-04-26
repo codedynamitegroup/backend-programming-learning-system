@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain;
 
 import com.backend.programming.learning.system.core.service.domain.entity.*;
+import com.backend.programming.learning.system.core.service.domain.event.contest.ContestEndTimeEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
@@ -142,7 +143,7 @@ public class CoreDomainServiceImpl implements CoreDomainService {
     @Override
     public UserCreatedSuccessEvent createUserSuccess(User user, DomainEventPublisher<UserCreatedSuccessEvent> userCreatedSuccessEventDomainEventPublisher) {
         return new UserCreatedSuccessEvent(user,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                ZonedDateTime.now(ZoneId.of("UTC")),
                 userCreatedSuccessEventDomainEventPublisher);
     }
 
@@ -151,7 +152,7 @@ public class CoreDomainServiceImpl implements CoreDomainService {
                                                DomainEventPublisher<UserCreatedFailEvent> userCreatedFailEventDomainEventPublisher,
                                                List<String> failureMessages) {
         return new UserCreatedFailEvent(user,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                ZonedDateTime.now(ZoneId.of("UTC")),
                 userCreatedFailEventDomainEventPublisher,
                 failureMessages);
     }
@@ -159,14 +160,14 @@ public class CoreDomainServiceImpl implements CoreDomainService {
     @Override
     public UserUpdatedSuccessEvent updateUserSuccess(User user, DomainEventPublisher<UserUpdatedSuccessEvent> userUpdatedSuccessEventDomainEventPublisher) {
         return new UserUpdatedSuccessEvent(user,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                ZonedDateTime.now(ZoneId.of("UTC")),
                 userUpdatedSuccessEventDomainEventPublisher);
     }
 
     @Override
     public UserUpdatedFailEvent updateUserFail(User user, DomainEventPublisher<UserUpdatedFailEvent> userUpdatedFailEventDomainEventPublisher, List<String> failureMessages) {
         return new UserUpdatedFailEvent(user,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                ZonedDateTime.now(ZoneId.of("UTC")),
                 userUpdatedFailEventDomainEventPublisher,
                 failureMessages);
     }
@@ -174,14 +175,14 @@ public class CoreDomainServiceImpl implements CoreDomainService {
     @Override
     public UserDeletedSuccessEvent deletedUserSuccess(User user, DomainEventPublisher<UserDeletedSuccessEvent> userDeletedSuccessEventDomainEventPublisher) {
         return new UserDeletedSuccessEvent(user,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                ZonedDateTime.now(ZoneId.of("UTC")),
                 userDeletedSuccessEventDomainEventPublisher);
     }
 
     @Override
     public UserDeletedFailEvent deletedUserFail(User user, DomainEventPublisher<UserDeletedFailEvent> userDeletedFailEventDomainEventPublisher, List<String> failureMessages) {
         return new UserDeletedFailEvent(user,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                ZonedDateTime.now(ZoneId.of("UTC")),
                 userDeletedFailEventDomainEventPublisher,
                 failureMessages);
     }

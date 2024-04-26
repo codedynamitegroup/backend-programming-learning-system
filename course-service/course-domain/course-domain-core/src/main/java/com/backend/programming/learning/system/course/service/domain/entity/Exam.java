@@ -120,8 +120,8 @@ public class Exam extends AggregateRoot<ExamId> {
 
     public void initializeExam() {
         setId(new ExamId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
-        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
+        updatedAt = ZonedDateTime.now(ZoneId.of("UTC"));
     }
 
     public void setCourse(Course course) {

@@ -44,7 +44,7 @@ public class CalendarEventDataMapper {
                     .build())
                 .courseId(createCalendarEventCommand.getCourseId())
                 .component(NotificationComponentType.valueOf(createCalendarEventCommand.getComponent()))
-                .createdAt(ZonedDateTime.now())
+                .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .build();
     }
 
