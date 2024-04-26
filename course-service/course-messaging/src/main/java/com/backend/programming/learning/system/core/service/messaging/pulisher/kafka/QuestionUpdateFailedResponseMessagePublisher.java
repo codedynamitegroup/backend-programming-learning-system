@@ -1,8 +1,8 @@
 package com.backend.programming.learning.system.core.service.messaging.pulisher.kafka;
 
-import com.backend.programming.learning.system.config.CourseServiceConfigData;
+import com.backend.programming.learning.system.course.service.domain.config.CourseServiceConfigData;
 import com.backend.programming.learning.system.core.service.messaging.mapper.QuestionMessagingMapper;
-import com.backend.programming.learning.system.event.question.event.QuestionUpdateFailedEvent;
+import com.backend.programming.learning.system.course.service.domain.event.question.event.QuestionUpdateFailedEvent;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class QuestionUpdateFailedResponseMessagePublisher implements com.backend.programming.learning.system.ports.output.message.publisher.question.QuestionUpdateFailedResponseMessagePublisher {
+public class QuestionUpdateFailedResponseMessagePublisher implements com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.question.QuestionUpdateFailedResponseMessagePublisher {
     private final QuestionMessagingMapper questionMessagingDataMapper;
     private final CourseServiceConfigData courseServiceConfigData;
     private final KafkaProducer<String, QuestionResponseAvroModel> kafkaProducer;

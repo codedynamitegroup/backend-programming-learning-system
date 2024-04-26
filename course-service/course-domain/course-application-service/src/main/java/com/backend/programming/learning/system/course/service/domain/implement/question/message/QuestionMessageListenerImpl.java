@@ -8,7 +8,6 @@ import com.backend.programming.learning.system.course.service.domain.event.quest
 import com.backend.programming.learning.system.course.service.domain.mapper.question.QuestionDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.input.message.listener.question.QuestionMessageListener;
 import com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.question.*;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
