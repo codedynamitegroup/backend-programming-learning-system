@@ -30,7 +30,7 @@ DROP TYPE IF EXISTS notification_event_type;
 CREATE TYPE notification_event_type AS ENUM ('USER', 'COURSE');
 
 DROP TYPE IF EXISTS notification_component_type;
-CREATE TYPE notification_component_type AS ENUM ('ASSIGNMENT', 'EXAM', 'POST', 'REMINDER');
+CREATE TYPE notification_component_type AS ENUM ('ASSIGNMENT', 'EXAM', 'POST', 'CONTEST', 'REMINDER');
 
 DROP TABLE IF EXISTS "public".user CASCADE;
 CREATE TABLE "public".user

@@ -8,21 +8,15 @@ import java.util.List;
 
 public abstract class ContestUserEvent implements DomainEvent<ContestUser> {
     private final ContestUser contestUser;
-    private final ZonedDateTime createdAt;
     private final List<String> failureMessages;
 
-    protected ContestUserEvent(ContestUser contestUser, ZonedDateTime createdAt, List<String> failureMessages) {
+    protected ContestUserEvent(ContestUser contestUser, List<String> failureMessages) {
         this.contestUser = contestUser;
-        this.createdAt = createdAt;
         this.failureMessages = failureMessages;
     }
 
     public ContestUser getContestUser() {
         return contestUser;
-    }
-
-    public ZonedDateTime getCreatedAt() {
-        return createdAt;
     }
 
     public List<String> getFailureMessages() {
