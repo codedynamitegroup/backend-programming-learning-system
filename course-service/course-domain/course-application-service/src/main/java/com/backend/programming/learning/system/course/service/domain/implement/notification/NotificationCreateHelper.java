@@ -11,7 +11,6 @@ import com.backend.programming.learning.system.course.service.domain.mapper.noti
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.NotificationRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.socket.message.emitter.NotificationMessageEmitter;
-import com.backend.programming.learning.system.course.service.socket.emitter.message.NotificationMessageEmitterImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

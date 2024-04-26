@@ -29,10 +29,6 @@
         </dependency>
         <dependency>
             <groupId>com.backend.programming.learning.system</groupId>
-            <artifactId>course-socket</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.backend.programming.learning.system</groupId>
             <artifactId>common-domain</artifactId>
         </dependency>
         <dependency>
