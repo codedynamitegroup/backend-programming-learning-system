@@ -18,6 +18,13 @@
       }
     },
     {
+      "name": "calendarEventId",
+      "type": {
+          "type": "string",
+          "logicalType": "uuid"
+      }
+    },
+    {
       "name": "userId",
       "type": {
         "type": "string",
