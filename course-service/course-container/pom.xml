@@ -47,6 +47,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.backend.programming.learning.system</groupId>
+            <artifactId>course-socket</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

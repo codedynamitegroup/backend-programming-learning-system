@@ -13,4 +13,6 @@ public class CourseServiceConfigData {
     private String questionUpdatedRequestTopicName;
 
     private String questionResponseTopicName;
+
+    private String userResponseTopicName;
 }

@@ -4,9 +4,12 @@ import com.backend.programming.learning.system.course.service.domain.ports.outpu
 import com.backend.programming.learning.system.socket.emitter.SocketEmitterHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 @Slf4j
 @Component
+@Validated
 public class NotificationMessageEmitterImpl<T> implements NotificationMessageEmitter<T> {
 
     private final SocketEmitterHelper<T> socketEmitterHelper;
