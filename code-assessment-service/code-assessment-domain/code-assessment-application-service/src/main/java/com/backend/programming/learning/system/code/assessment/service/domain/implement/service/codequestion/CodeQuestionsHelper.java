@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.implement.service.codequestion;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.CodeAssessmentDomainService;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.create.codequestion.CreateCodeQuestionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.codequestion.CreateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionsUpdatedEvent;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.codequestion.CodeQuestionDomainException;
@@ -30,14 +30,6 @@ public class CodeQuestionsHelper {
         this.codeQuestionDataMaper = codeQuestionDataMaper;
     }
 
-    //    public CodeQuestionCreateHelper
-//            (CodeAssessmentDomainService codeAssessmentDomainService, CodeQuestionRepository codeQuestionRepository, QuestionRepository questionRepository,
-//                                    CodeQuestionDataMaper codeQuestionDataMaper) {
-//        this.codeAssessmentDomainService = codeAssessmentDomainService;
-//        this.codeQuestionRepository = codeQuestionRepository;
-//        this.questionRepository = questionRepository;
-//        this.codeQuestionDataMaper = codeQuestionDataMaper;
-//    }
     @Transactional
     public CodeQuestionsUpdatedEvent persistCodeQuestion(CreateCodeQuestionCommand command){
 //        checkQuestion(command.getQuestionId());

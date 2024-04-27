@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 @Builder
 @AllArgsConstructor
-public class ErrorDTO {
+public class ErrorDTO<T> {
     private final Integer status;
     private final String code;
-    private final String message;
+    private final T message;
 }

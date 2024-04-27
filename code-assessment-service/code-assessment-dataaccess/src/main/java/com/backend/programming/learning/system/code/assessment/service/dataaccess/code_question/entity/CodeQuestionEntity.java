@@ -21,11 +21,9 @@ import java.util.UUID;
 public class CodeQuestionEntity {
     @Id
     private UUID id;
+    private UUID questionId;
 
-    @OneToOne
-    @JoinColumn(name = "question_id", referencedColumnName = "id")
-    private QuestionEntity question;
-
+    private String name;
     private String dslTemplate;
     private String problemStatement;
     private String inputFormat;

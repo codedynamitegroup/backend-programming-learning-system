@@ -27,9 +27,11 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
 
     @Override
     public CodeQuestion save(CodeQuestion codeQuestion) {
+
         CodeQuestionEntity codeQuestionEntity = codeQuestionDataAccessMapper.codeQuestionToCodeQuestionEntity(codeQuestion);
         CodeQuestionEntity codeQuestionEntityRes = codeQuestionJpaRepository
                 .save(codeQuestionEntity);
+
         return
         codeQuestionDataAccessMapper.codeQuestionEntityToCodeQuestion(codeQuestionEntityRes);
     }

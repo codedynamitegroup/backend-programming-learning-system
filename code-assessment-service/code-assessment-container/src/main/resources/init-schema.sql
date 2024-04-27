@@ -72,19 +72,20 @@ CREATE TABLE questions
 DROP TABLE IF EXISTS qtype_code_questions CASCADE;
 CREATE TABLE qtype_code_questions(
     id uuid UNIQUE NOT NULL,
-    question_id uuid UNIQUE NOT NULL,
+    question_id uuid NOT NULL,
     dsl_template text,
+    name text NOT NULL,
     problem_statement text,
     input_format text,
     output_format text,
     copy_state CopyState,
     failure_messages text,
     constraints text,
-    CONSTRAINT qtype_code_questions_pk PRIMARY KEY (id),
-        CONSTRAINT qtype_code_questions_questions_id_fk FOREIGN KEY (question_id)
-        REFERENCES questions (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
+    CONSTRAINT qtype_code_questions_pk PRIMARY KEY (id)
+--         CONSTRAINT qtype_code_questions_questions_id_fk FOREIGN KEY (question_id)
+--         REFERENCES questions (id) MATCH SIMPLE
+--         ON UPDATE CASCADE
+--         ON DELETE CASCADE
     );
 
 DROP TABLE IF EXISTS test_cases CASCADE;

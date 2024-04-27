@@ -12,6 +12,9 @@ import org.springframework.dao.InvalidDataAccessApiUsageException;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
@@ -42,7 +45,7 @@ public class GlobalExceptionHandler {
         return ErrorDTO.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
                 .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
-                .message(badRequestException.getMessage())
+                .<String>message(badRequestException.getMessage())
                 .build();
     }
 
@@ -52,8 +55,8 @@ public class GlobalExceptionHandler {
     public ErrorDTO handleException(ValidationException validationException) {
         ErrorDTO errorDTO;
         if (validationException instanceof ConstraintViolationException) {
-            String violations = extractViolationsFromException((ConstraintViolationException) validationException);
-            log.error(violations, validationException);
+            List<String> violations = extractViolationsFromException((ConstraintViolationException) validationException);
+            log.error(violations.toString(), validationException);
             errorDTO = ErrorDTO.builder()
                     .status(HttpStatus.BAD_REQUEST.value())
                     .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
@@ -71,11 +74,11 @@ public class GlobalExceptionHandler {
         return errorDTO;
     }
 
-    private String extractViolationsFromException(ConstraintViolationException validationException) {
+    private List<String> extractViolationsFromException(ConstraintViolationException validationException) {
         return validationException.getConstraintViolations()
                 .stream()
                 .map(ConstraintViolation::getMessage)
-                .collect(Collectors.joining("--"));
+                .collect(Collectors.toList());
     }
 
 }

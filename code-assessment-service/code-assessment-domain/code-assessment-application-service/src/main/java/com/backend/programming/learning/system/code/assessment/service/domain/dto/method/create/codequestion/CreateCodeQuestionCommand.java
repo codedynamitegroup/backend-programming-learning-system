@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.code.assessment.service.domain.dto.create.codequestion;
+package com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.codequestion;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.create.commandentity.TestCase;
 import lombok.AllArgsConstructor;
@@ -13,16 +13,18 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class CreateCodeQuestionCommand {
-    @NotNull
+    @NotNull(message = "questionId must not be null")
     private final UUID questionId;
-    @NotNull
+
     private final String dslTemplate;
-    @NotNull
+    @NotNull(message = "name must not be null")
+    private final String name;
+    @NotNull(message = "problemStatement must not be null")
     private final String problemStatement;
-    @NotNull
+    @NotNull(message = "inputFormat must not be null")
     private final String inputFormat;
-    @NotNull
+    @NotNull(message = "outputFormat must not be null")
     private final String outputFormat;
-    @NotNull
+    @NotNull(message = "constraints must not be null")
     private final String constraints;
 }

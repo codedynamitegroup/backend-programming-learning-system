@@ -1,18 +1,14 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.implement.service.codequestion;
 
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.create.codequestion.CreateCodeQuestionCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.create.codequestion.CreateCodeQuestionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.codequestion.CreateCodeQuestionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.codequestion.CreateCodeQuestionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionsUpdatedEvent;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.CodeQuestionDataMaper;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.scheduler.code_questions_update_outbox.CodeQuestionsUpdateOutboxHelper;
-import com.backend.programming.learning.system.domain.valueobject.CopyState;
-import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.UUID;
 
 
 @Component
@@ -38,15 +34,15 @@ public class CodeQuestionCreateCommandHandler {
     public CreateCodeQuestionResponse createCodeQuestion(CreateCodeQuestionCommand command){
         CodeQuestionsUpdatedEvent codeQuestionsUpdatedEvent
                 = codeQuestionsHelper.persistCodeQuestion(command);
-        codeQuestionsUpdateOutboxHelper.saveCodeQuestionsUpdateOutboxMessage(
-                codeQuestionDataMaper.codeQuestionsUpdatedEventToCodeQuestionsUpdatePayload(
-                        codeQuestionsUpdatedEvent, CopyState.CREATING
-                ),
-                codeQuestionsUpdatedEvent.getCodeQuestion().getCopyState(),
-                codeQuestionsUpdateSagaHelper.copyStateToSagaStatus(CopyState.CREATING),
-                OutboxStatus.STARTED,
-                UUID.randomUUID()
-        );
+//        codeQuestionsUpdateOutboxHelper.saveCodeQuestionsUpdateOutboxMessage(
+//                codeQuestionDataMaper.codeQuestionsUpdatedEventToCodeQuestionsUpdatePayload(
+//                        codeQuestionsUpdatedEvent, CopyState.CREATING
+//                ),
+//                codeQuestionsUpdatedEvent.getCodeQuestion().getCopyState(),
+//                codeQuestionsUpdateSagaHelper.copyStateToSagaStatus(CopyState.CREATING),
+//                OutboxStatus.STARTED,
+//                UUID.randomUUID()
+//        );
         return codeQuestionDataMaper
                 .codeQuestionToCreateCodeQuestionReponse
                         (codeQuestionsUpdatedEvent.getCodeQuestion()

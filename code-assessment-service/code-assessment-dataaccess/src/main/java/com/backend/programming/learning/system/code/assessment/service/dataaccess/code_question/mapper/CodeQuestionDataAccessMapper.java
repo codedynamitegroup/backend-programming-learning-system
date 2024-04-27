@@ -30,9 +30,11 @@ public class CodeQuestionDataAccessMapper {
     public CodeQuestionEntity codeQuestionToCodeQuestionEntity(CodeQuestion codeQuestion){
         CodeQuestionEntity codeQuestionEntity = CodeQuestionEntity.builder()
                 .id(codeQuestion.getId().getValue())
-//                .questionId(codeQuestion.getQuestionId().getValue())
-                .question(questionDataAssessMapper.questionToQuestionEntity(new Question(codeQuestion.getQuestionId())))
+                .questionId(codeQuestion.getQuestionId().getValue())
+//                .question(questionDataAssessMapper.questionToQuestionEntity(new Question(codeQuestion.getQuestionId())))
+                .name(codeQuestion.getName())
                 .dslTemplate(codeQuestion.getDslTemplate())
+                .problemStatement(codeQuestion.getProblemStatement())
                 .inputFormat(codeQuestion.getInputFormat())
                 .outputFormat(codeQuestion.getOutputFormat())
                 .constraints(codeQuestion.getConstraints())
@@ -44,9 +46,10 @@ public class CodeQuestionDataAccessMapper {
     }
     public CodeQuestion codeQuestionEntityToCodeQuestion(CodeQuestionEntity codeQuestionEntity){
         CodeQuestion codeQuestion = CodeQuestion.builder()
-                .questionId(new QuestionId(codeQuestionEntity.getQuestion().getId()))
-//                .questionId(new QuestionId(codeQuestionEntity.getQuestionId()))
+//                .questionId(new QuestionId(codeQuestionEntity.getQuestion().getId()))
+                .questionId(new QuestionId(codeQuestionEntity.getQuestionId()))
                 .codeQuestionId(new CodeQuestionId(codeQuestionEntity.getId()))
+                .name(codeQuestionEntity.getName())
                 .dslTemplate(codeQuestionEntity.getDslTemplate())
                 .constraints(codeQuestionEntity.getConstraints())
                 .inputFormat(codeQuestionEntity.getInputFormat())
