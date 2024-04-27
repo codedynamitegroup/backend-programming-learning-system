@@ -19,6 +19,18 @@ CREATE TYPE qtype AS ENUM ('MULTIPLE_CHOICE', 'SHORT_ANSWER', 'CODE', 'ESSAY');
 DROP TYPE IF EXISTS plagiarism_detection_report_status;
 CREATE TYPE plagiarism_detection_report_status AS ENUM ('PROCESSING', 'COMPLETED', 'FAILED');
 
+DROP TYPE IF EXISTS update_state;
+CREATE TYPE update_state AS ENUM (
+    'CREATING',
+    'CREATED',
+    'UPDATING',
+    'UPDATED',
+    'DELETING',
+    'DELETED',
+    'DELETE_FAILED',
+    'UPDATE_FAILED',
+    'CREATE_FAILED');
+
 DROP TABLE IF EXISTS "public".user CASCADE;
 
 CREATE TABLE "public".user
@@ -236,6 +248,7 @@ CREATE TABLE "public".contest_user
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
     contest_id uuid NOT NULL,
     user_id uuid NOT NULL,
+    update_calendar_event_state update_state,
     is_completed bool DEFAULT FALSE NOT NULL,
     completed_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,

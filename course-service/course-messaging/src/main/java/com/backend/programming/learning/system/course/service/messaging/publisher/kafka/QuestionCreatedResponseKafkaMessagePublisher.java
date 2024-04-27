@@ -1,23 +1,23 @@
-package com.backend.programming.learning.system.core.service.messaging.pulisher.kafka;
+package com.backend.programming.learning.system.course.service.messaging.publisher.kafka;
 
 import com.backend.programming.learning.system.course.service.domain.config.CourseServiceConfigData;
-import com.backend.programming.learning.system.core.service.messaging.mapper.QuestionMessagingMapper;
-import com.backend.programming.learning.system.course.service.domain.event.question.event.QuestionUpdatedEvent;
+import com.backend.programming.learning.system.course.service.messaging.mapper.QuestionMessagingMapper;
+import com.backend.programming.learning.system.course.service.domain.event.question.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
-import com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.question.QuestionUpdatedResponseMessagePublisher;
+import com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.question.QuestionCreatedResponseMessagePublisher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class QuestionUpdatedResponseKafkaMessagePublisher  implements QuestionUpdatedResponseMessagePublisher {
+public class QuestionCreatedResponseKafkaMessagePublisher implements QuestionCreatedResponseMessagePublisher {
     private final QuestionMessagingMapper questionMessagingDataMapper;
     private final CourseServiceConfigData courseServiceConfigData;
     private final KafkaProducer<String, QuestionResponseAvroModel> kafkaProducer;
     private final QuestionKafkaMessageHelper questionKafkaMessageHelper;
 
-    public QuestionUpdatedResponseKafkaMessagePublisher(
+    public QuestionCreatedResponseKafkaMessagePublisher(
             QuestionMessagingMapper questionMessagingDataMapper,
             CourseServiceConfigData courseServiceConfigData,
             KafkaProducer<String, QuestionResponseAvroModel> kafkaProducer,
@@ -28,8 +28,9 @@ public class QuestionUpdatedResponseKafkaMessagePublisher  implements QuestionUp
         this.questionKafkaMessageHelper = questionKafkaMessageHelper;
     }
 
+
     @Override
-    public void publish(QuestionUpdatedEvent domainEvent) {
+    public void publish(QuestionCreatedEvent domainEvent) {
         String questionId = domainEvent.getQuestion().getId().getValue().toString();
 
         log.info("Received question created event for question id: {}", questionId);

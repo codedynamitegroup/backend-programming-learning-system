@@ -1,7 +1,7 @@
-package com.backend.programming.learning.system.core.service.messaging.pulisher.kafka;
+package com.backend.programming.learning.system.course.service.messaging.publisher.kafka;
 
 import com.backend.programming.learning.system.course.service.domain.config.CourseServiceConfigData;
-import com.backend.programming.learning.system.core.service.messaging.mapper.QuestionMessagingMapper;
+import com.backend.programming.learning.system.course.service.messaging.mapper.QuestionMessagingMapper;
 import com.backend.programming.learning.system.course.service.domain.event.question.event.QuestionDeleteFailedEvent;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;

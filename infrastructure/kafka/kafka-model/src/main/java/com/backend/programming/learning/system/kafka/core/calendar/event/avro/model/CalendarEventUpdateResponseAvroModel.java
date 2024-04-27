@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class CalendarEventUpdateResponseAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 2696451200087514561L;
+  private static final long serialVersionUID = -6074619284391167023L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CalendarEventUpdateResponseAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.core.calendar.event.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"courseId\",\"type\":[\"null\",{\"type\":\"string\",\"logicalType\":\"uuid\"}]},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"description\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"eventType\",\"type\":{\"type\":\"enum\",\"name\":\"NotificationEventType\",\"symbols\":[\"USER\",\"COURSE\"]}},{\"name\":\"startTime\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"endTime\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"component\",\"type\":{\"type\":\"enum\",\"name\":\"NotificationComponentType\",\"symbols\":[\"ASSIGNMENT\",\"EXAM\",\"POST\",\"CONTEST\",\"REMINDER\"]}},{\"name\":\"updateState\",\"type\":{\"type\":\"enum\",\"name\":\"UpdateState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CalendarEventUpdateResponseAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.core.calendar.event.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"courseId\",\"type\":[\"null\",{\"type\":\"string\",\"logicalType\":\"uuid\"}]},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"description\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"eventType\",\"type\":{\"type\":\"enum\",\"name\":\"NotificationEventType\",\"symbols\":[\"USER\",\"COURSE\"]}},{\"name\":\"startTime\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"endTime\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"component\",\"type\":{\"type\":\"enum\",\"name\":\"NotificationComponentType\",\"symbols\":[\"ASSIGNMENT\",\"EXAM\",\"POST\",\"CONTEST\",\"REMINDER\"]}},{\"name\":\"updateCalendarEventState\",\"type\":{\"type\":\"enum\",\"name\":\"UpdateState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -87,7 +87,7 @@ public class CalendarEventUpdateResponseAvroModel extends org.apache.avro.specif
   private java.time.Instant startTime;
   private java.time.Instant endTime;
   private com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.NotificationComponentType component;
-  private com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.UpdateState updateState;
+  private com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.UpdateState updateCalendarEventState;
   private java.util.List<java.lang.String> failureMessages;
 
   /**
@@ -109,10 +109,10 @@ public class CalendarEventUpdateResponseAvroModel extends org.apache.avro.specif
    * @param startTime The new value for startTime
    * @param endTime The new value for endTime
    * @param component The new value for component
-   * @param updateState The new value for updateState
+   * @param updateCalendarEventState The new value for updateCalendarEventState
    * @param failureMessages The new value for failureMessages
    */
-  public CalendarEventUpdateResponseAvroModel(java.util.UUID id, java.util.UUID sagaId, java.util.UUID userId, java.util.UUID courseId, java.lang.String name, java.lang.String description, com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.NotificationEventType eventType, java.time.Instant startTime, java.time.Instant endTime, com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.NotificationComponentType component, com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.UpdateState updateState, java.util.List<java.lang.String> failureMessages) {
+  public CalendarEventUpdateResponseAvroModel(java.util.UUID id, java.util.UUID sagaId, java.util.UUID userId, java.util.UUID courseId, java.lang.String name, java.lang.String description, com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.NotificationEventType eventType, java.time.Instant startTime, java.time.Instant endTime, com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.NotificationComponentType component, com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.UpdateState updateCalendarEventState, java.util.List<java.lang.String> failureMessages) {
     this.id = id;
     this.sagaId = sagaId;
     this.userId = userId;
@@ -123,7 +123,7 @@ public class CalendarEventUpdateResponseAvroModel extends org.apache.avro.specif
     this.startTime = startTime.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
     this.endTime = endTime.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
     this.component = component;
-    this.updateState = updateState;
+    this.updateCalendarEventState = updateCalendarEventState;
     this.failureMessages = failureMessages;
   }
 
@@ -147,7 +147,7 @@ public class CalendarEventUpdateResponseAvroModel extends org.apache.avro.specif
     case 7: return startTime;
     case 8: return endTime;
     case 9: return component;
-    case 10: return updateState;
+    case 10: return updateCalendarEventState;
     case 11: return failureMessages;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
@@ -190,7 +190,7 @@ public class CalendarEventUpdateResponseAvroModel extends org.apache.avro.specif
     case 7: startTime = (java.time.Instant)value$; break;
     case 8: endTime = (java.time.Instant)value$; break;
     case 9: component = (com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.NotificationComponentType)value$; break;
-    case 10: updateState = (com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.UpdateState)value$; break;
+    case 10: updateCalendarEventState = (com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.UpdateState)value$; break;
     case 11: failureMessages = (java.util.List<java.lang.String>)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
@@ -367,20 +367,20 @@ public class CalendarEventUpdateResponseAvroModel extends org.apache.avro.specif
   }
 
   /**
-   * Gets the value of the 'updateState' field.
-   * @return The value of the 'updateState' field.
+   * Gets the value of the 'updateCalendarEventState' field.
+   * @return The value of the 'updateCalendarEventState' field.
    */
-  public com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.UpdateState getUpdateState() {
-    return updateState;
+  public com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.UpdateState getUpdateCalendarEventState() {
+    return updateCalendarEventState;
   }
 
 
   /**
-   * Sets the value of the 'updateState' field.
+   * Sets the value of the 'updateCalendarEventState' field.
    * @param value the value to set.
    */
-  public void setUpdateState(com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.UpdateState value) {
-    this.updateState = value;
+  public void setUpdateCalendarEventState(com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.UpdateState value) {
+    this.updateCalendarEventState = value;
   }
 
   /**
@@ -451,7 +451,7 @@ public class CalendarEventUpdateResponseAvroModel extends org.apache.avro.specif
     private java.time.Instant startTime;
     private java.time.Instant endTime;
     private com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.NotificationComponentType component;
-    private com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.UpdateState updateState;
+    private com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.UpdateState updateCalendarEventState;
     private java.util.List<java.lang.String> failureMessages;
 
     /** Creates a new Builder */
@@ -505,8 +505,8 @@ public class CalendarEventUpdateResponseAvroModel extends org.apache.avro.specif
         this.component = data().deepCopy(fields()[9].schema(), other.component);
         fieldSetFlags()[9] = other.fieldSetFlags()[9];
       }
-      if (isValidValue(fields()[10], other.updateState)) {
-        this.updateState = data().deepCopy(fields()[10].schema(), other.updateState);
+      if (isValidValue(fields()[10], other.updateCalendarEventState)) {
+        this.updateCalendarEventState = data().deepCopy(fields()[10].schema(), other.updateCalendarEventState);
         fieldSetFlags()[10] = other.fieldSetFlags()[10];
       }
       if (isValidValue(fields()[11], other.failureMessages)) {
@@ -561,8 +561,8 @@ public class CalendarEventUpdateResponseAvroModel extends org.apache.avro.specif
         this.component = data().deepCopy(fields()[9].schema(), other.component);
         fieldSetFlags()[9] = true;
       }
-      if (isValidValue(fields()[10], other.updateState)) {
-        this.updateState = data().deepCopy(fields()[10].schema(), other.updateState);
+      if (isValidValue(fields()[10], other.updateCalendarEventState)) {
+        this.updateCalendarEventState = data().deepCopy(fields()[10].schema(), other.updateCalendarEventState);
         fieldSetFlags()[10] = true;
       }
       if (isValidValue(fields()[11], other.failureMessages)) {
@@ -970,41 +970,41 @@ public class CalendarEventUpdateResponseAvroModel extends org.apache.avro.specif
     }
 
     /**
-      * Gets the value of the 'updateState' field.
+      * Gets the value of the 'updateCalendarEventState' field.
       * @return The value.
       */
-    public com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.UpdateState getUpdateState() {
-      return updateState;
+    public com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.UpdateState getUpdateCalendarEventState() {
+      return updateCalendarEventState;
     }
 
 
     /**
-      * Sets the value of the 'updateState' field.
-      * @param value The value of 'updateState'.
+      * Sets the value of the 'updateCalendarEventState' field.
+      * @param value The value of 'updateCalendarEventState'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.CalendarEventUpdateResponseAvroModel.Builder setUpdateState(com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.UpdateState value) {
+    public com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.CalendarEventUpdateResponseAvroModel.Builder setUpdateCalendarEventState(com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.UpdateState value) {
       validate(fields()[10], value);
-      this.updateState = value;
+      this.updateCalendarEventState = value;
       fieldSetFlags()[10] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'updateState' field has been set.
-      * @return True if the 'updateState' field has been set, false otherwise.
+      * Checks whether the 'updateCalendarEventState' field has been set.
+      * @return True if the 'updateCalendarEventState' field has been set, false otherwise.
       */
-    public boolean hasUpdateState() {
+    public boolean hasUpdateCalendarEventState() {
       return fieldSetFlags()[10];
     }
 
 
     /**
-      * Clears the value of the 'updateState' field.
+      * Clears the value of the 'updateCalendarEventState' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.CalendarEventUpdateResponseAvroModel.Builder clearUpdateState() {
-      updateState = null;
+    public com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.CalendarEventUpdateResponseAvroModel.Builder clearUpdateCalendarEventState() {
+      updateCalendarEventState = null;
       fieldSetFlags()[10] = false;
       return this;
     }
@@ -1064,7 +1064,7 @@ public class CalendarEventUpdateResponseAvroModel extends org.apache.avro.specif
         record.startTime = fieldSetFlags()[7] ? this.startTime : (java.time.Instant) defaultValue(fields()[7]);
         record.endTime = fieldSetFlags()[8] ? this.endTime : (java.time.Instant) defaultValue(fields()[8]);
         record.component = fieldSetFlags()[9] ? this.component : (com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.NotificationComponentType) defaultValue(fields()[9]);
-        record.updateState = fieldSetFlags()[10] ? this.updateState : (com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.UpdateState) defaultValue(fields()[10]);
+        record.updateCalendarEventState = fieldSetFlags()[10] ? this.updateCalendarEventState : (com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.UpdateState) defaultValue(fields()[10]);
         record.failureMessages = fieldSetFlags()[11] ? this.failureMessages : (java.util.List<java.lang.String>) defaultValue(fields()[11]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {

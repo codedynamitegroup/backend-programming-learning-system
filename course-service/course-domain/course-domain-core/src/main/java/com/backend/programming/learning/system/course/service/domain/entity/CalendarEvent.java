@@ -17,13 +17,9 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
     private ZonedDateTime endTime;
     private User user;
     private UUID courseId;
+    private UUID contestId;
     private NotificationComponentType component;
     private ZonedDateTime createdAt;
-
-    public void initializeCalendarEvent() {
-        setId(new CalendarEventId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
-    }
 
     private CalendarEvent(Builder builder) {
         super.setId(builder.calendarEventId);
@@ -34,12 +30,18 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
         setEndTime(builder.endTime);
         setUser(builder.user);
         setCourseId(builder.courseId);
+        setContestId(builder.contestId);
         setComponent(builder.component);
         setCreatedAt(builder.createdAt);
     }
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    public void initializeCalendarEvent() {
+        setId(new CalendarEventId(UUID.randomUUID()));
+        createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
     }
 
 
@@ -99,6 +101,14 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
         this.courseId = courseId;
     }
 
+    public UUID getContestId() {
+        return contestId;
+    }
+
+    public void setContestId(UUID contestId) {
+        this.contestId = contestId;
+    }
+
     public NotificationComponentType getComponent() {
         return component;
     }
@@ -124,6 +134,7 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
         private ZonedDateTime endTime;
         private User user;
         private UUID courseId;
+        private UUID contestId;
         private NotificationComponentType component;
         private ZonedDateTime createdAt;
 
@@ -167,6 +178,11 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
 
         public Builder courseId(UUID val) {
             courseId = val;
+            return this;
+        }
+
+        public Builder contestId(UUID val) {
+            contestId = val;
             return this;
         }
 
