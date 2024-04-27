@@ -32,6 +32,13 @@
       }
     },
     {
+      "name": "contestId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid" //Logical type is part of the 'string' type definition
+      }
+    },
+    {
       "name": "courseId",
       "type": [
         "null",
