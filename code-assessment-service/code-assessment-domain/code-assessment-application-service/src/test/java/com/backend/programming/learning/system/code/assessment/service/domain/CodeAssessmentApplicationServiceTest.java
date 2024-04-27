@@ -4,8 +4,8 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.codequestion.CreateCodeQuestionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Question;
-import com.backend.programming.learning.system.code.assessment.service.domain.exeption.codequestion.CodeQuestionDomainException;
-import com.backend.programming.learning.system.code.assessment.service.domain.mapper.CodeQuestionDataMaper;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
+import com.backend.programming.learning.system.code.assessment.service.domain.mapper.code_question.CodeQuestionDataMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.code_questions_update_outbox.CodeQuestionsUpdateOutboxMessage;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.code_questions_update_outbox.CodeQuestionsUpdatePayload;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.CodeQuestionApplicationService;
@@ -40,7 +40,7 @@ public class CodeAssessmentApplicationServiceTest {
     @Autowired
     private CodeQuestionApplicationService codeQuestionApplicationService;
     @Autowired
-    private CodeQuestionDataMaper codeQuestionDataMaper;
+    private CodeQuestionDataMapper codeQuestionDataMaper;
     @Autowired
     private QuestionRepository questionRepository;
     @Autowired
@@ -105,7 +105,7 @@ public class CodeAssessmentApplicationServiceTest {
         try {
             return objectMapper.writeValueAsString(payload);
         } catch (JsonProcessingException e) {
-            throw new CodeQuestionDomainException("Cannot create CodeQuestionsUpdatePayload object!");
+            throw new CodeAssessmentDomainException("Cannot create CodeQuestionsUpdatePayload object!");
         }
     }
     @Test

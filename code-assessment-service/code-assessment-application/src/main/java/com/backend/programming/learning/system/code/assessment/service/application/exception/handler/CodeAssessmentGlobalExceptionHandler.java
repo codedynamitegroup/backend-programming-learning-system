@@ -2,7 +2,7 @@ package com.backend.programming.learning.system.code.assessment.service.applicat
 
 import com.backend.programming.learning.system.application.handler.ErrorDTO;
 import com.backend.programming.learning.system.application.handler.GlobalExceptionHandler;
-import com.backend.programming.learning.system.code.assessment.service.domain.exeption.codequestion.CodeQuestionDomainException;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
 import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.*;
 public class CodeAssessmentGlobalExceptionHandler extends GlobalExceptionHandler {
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = {CodeQuestionDomainException.class})
-    public ErrorDTO handleException(CodeQuestionDomainException codeQuestionDomainException){
-        log.error(codeQuestionDomainException.getMessage(), codeQuestionDomainException);
+    @ExceptionHandler(value = {CodeAssessmentDomainException.class})
+    public ErrorDTO handleException(CodeAssessmentDomainException codeAssessmentDomainException){
+        log.error(codeAssessmentDomainException.getMessage(), codeAssessmentDomainException);
         return ErrorDTO.builder()
-                .message(codeQuestionDomainException.getMessage())
+                .message(codeAssessmentDomainException.getMessage())
                 .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
                 .build();
     }

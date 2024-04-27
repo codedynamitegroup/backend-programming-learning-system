@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.messaging.publisher.kafka;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.config.CodeAssessmentServiceConfigData;
-import com.backend.programming.learning.system.code.assessment.service.domain.exeption.codequestion.CodeQuestionDomainException;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.code_questions_update_outbox.CodeQuestionsUpdateOutboxMessage;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.code_questions_update_outbox.CodeQuestionsUpdatePayload;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.message.publisher.codequestion.CodeQuestionsUpdateMessagePublisher;
@@ -47,7 +47,7 @@ public class CodeQuestionsUpdateMessageKafkaPublisher
                 kafkaMessageHelper.getObjectEventPayload(
                         codeQuestionsUpdateOutboxMessage.getPayload(),
                         CodeQuestionsUpdatePayload.class,
-                        CodeQuestionDomainException.class
+                        CodeAssessmentDomainException.class
                 );
 //                getCodeQuestionsUpdatePayload(codeQuestionsUpdateOutboxMessage.getPayload());
 
@@ -86,7 +86,7 @@ public class CodeQuestionsUpdateMessageKafkaPublisher
             return objectMapper.readValue(payload, CodeQuestionsUpdatePayload.class);
         } catch (JsonProcessingException e) {
             log.error("Could not read CodeQuestionsUpdatePayload object",e);
-            throw new CodeQuestionDomainException("Could not read CodeQuestionsUpdatePayload object",e);
+            throw new CodeAssessmentDomainException("Could not read CodeQuestionsUpdatePayload object",e);
         }
     }
 }

@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.codequestion.CreateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.codequestion.CreateCodeQuestionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionsUpdatedEvent;
-import com.backend.programming.learning.system.code.assessment.service.domain.mapper.CodeQuestionDataMaper;
+import com.backend.programming.learning.system.code.assessment.service.domain.mapper.code_question.CodeQuestionDataMapper;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.scheduler.code_questions_update_outbox.CodeQuestionsUpdateOutboxHelper;
 import lombok.extern.slf4j.Slf4j;
@@ -15,13 +15,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class CodeQuestionCreateCommandHandler {
     private final CodeQuestionsHelper codeQuestionsHelper;
-    private final CodeQuestionDataMaper codeQuestionDataMaper;
+    private final CodeQuestionDataMapper codeQuestionDataMaper;
     private final CodeQuestionsUpdateOutboxHelper codeQuestionsUpdateOutboxHelper;
     private final CodeQuestionsUpdateSagaHelper codeQuestionsUpdateSagaHelper;
 
     public CodeQuestionCreateCommandHandler(
             CodeQuestionsHelper codeQuestionsHelper,
-            CodeQuestionDataMaper codeQuestionDataMaper,
+            CodeQuestionDataMapper codeQuestionDataMaper,
             CodeQuestionsUpdateOutboxHelper codeQuestionsUpdateOutboxHelper,
             CodeQuestionsUpdateSagaHelper codeQuestionsUpdateSagaHelper) {
         this.codeQuestionsHelper = codeQuestionsHelper;

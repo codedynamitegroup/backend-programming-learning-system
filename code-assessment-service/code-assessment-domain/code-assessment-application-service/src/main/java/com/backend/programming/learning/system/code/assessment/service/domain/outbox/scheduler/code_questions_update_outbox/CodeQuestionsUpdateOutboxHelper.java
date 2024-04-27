@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.outbox.scheduler.code_questions_update_outbox;
 
-import com.backend.programming.learning.system.code.assessment.service.domain.exeption.codequestion.CodeQuestionDomainException;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.code_questions_update_outbox.CodeQuestionsUpdateOutboxMessage;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.code_questions_update_outbox.CodeQuestionsUpdatePayload;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.CodeQuestionsUpdateOutboxRepository;
@@ -57,7 +57,7 @@ public class CodeQuestionsUpdateOutboxHelper {
 
         if(response == null){
             log.error("Could not save CodeQuestionsUpdateOutboxMessage with outbox id: {}", outboxMessage.getId());
-            throw new CodeQuestionDomainException("Could not save CodeQuestionsUpdateOutboxMessage with outbox id: {}"+ outboxMessage.getId());
+            throw new CodeAssessmentDomainException("Could not save CodeQuestionsUpdateOutboxMessage with outbox id: {}"+ outboxMessage.getId());
         }
         log.info("Save CodeQuestionsUpdateOutboxMessage with outbox id: {}", outboxMessage.getId());
     }
@@ -93,7 +93,7 @@ public class CodeQuestionsUpdateOutboxHelper {
         } catch (JsonProcessingException e) {
             log.error("Could not create CodeQuestionsUpdatePayload object for id: {}",
                     payload.getId(), e);
-            throw new CodeQuestionDomainException("Could not create CodeQuestionsUpdatePayload object for id: " +
+            throw new CodeAssessmentDomainException("Could not create CodeQuestionsUpdatePayload object for id: " +
                     payload.getId(), e);
         }
     }

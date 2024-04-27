@@ -4,8 +4,8 @@ import com.backend.programming.learning.system.code.assessment.service.domain.Co
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.codequestion.CreateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionsUpdatedEvent;
-import com.backend.programming.learning.system.code.assessment.service.domain.exeption.codequestion.CodeQuestionDomainException;
-import com.backend.programming.learning.system.code.assessment.service.domain.mapper.CodeQuestionDataMaper;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
+import com.backend.programming.learning.system.code.assessment.service.domain.mapper.code_question.CodeQuestionDataMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.CodeQuestionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -16,15 +16,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class CodeQuestionsHelper {
     private final CodeAssessmentDomainService codeAssessmentDomainService;
 
-
     private final CodeQuestionRepository codeQuestionRepository;
 //    private final QuestionRepository   questionRepository;
-    private final CodeQuestionDataMaper codeQuestionDataMaper;
+    private final CodeQuestionDataMapper codeQuestionDataMaper;
 
     public CodeQuestionsHelper(
             CodeAssessmentDomainService codeAssessmentDomainService,
             CodeQuestionRepository codeQuestionRepository,
-            CodeQuestionDataMaper codeQuestionDataMaper) {
+            CodeQuestionDataMapper codeQuestionDataMaper) {
         this.codeAssessmentDomainService = codeAssessmentDomainService;
         this.codeQuestionRepository = codeQuestionRepository;
         this.codeQuestionDataMaper = codeQuestionDataMaper;
@@ -52,7 +51,7 @@ public class CodeQuestionsHelper {
         CodeQuestion codeQuestionResult = codeQuestionRepository.save(codeQuestion);
         if(codeQuestionResult == null){
             log.error("Can not save code question id");
-            throw new CodeQuestionDomainException("Can not save code question");
+            throw new CodeAssessmentDomainException("Can not save code question");
         }
         log.info("Code question is save with id: {}", codeQuestionResult.getId().getValue());
         return codeQuestionResult;

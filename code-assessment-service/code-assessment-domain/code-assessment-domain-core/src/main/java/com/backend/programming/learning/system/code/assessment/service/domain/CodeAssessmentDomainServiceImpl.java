@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.domain;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.TestCase;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionsUpdatedEvent;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,12 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
         codeQuestion.initializeCodeQuestion();
         log.info("Code question with id: {} is initiated", codeQuestion.getId().getValue());
         return new CodeQuestionsUpdatedEvent(codeQuestion, ZonedDateTime.now(ZoneId.of("UTC")));
+    }
+
+    @Override
+    public List<TestCase> initiateTestCases(List<TestCase> testCases) {
+        testCases.forEach(TestCase::initiate);
+        return testCases;
     }
 
     @Override

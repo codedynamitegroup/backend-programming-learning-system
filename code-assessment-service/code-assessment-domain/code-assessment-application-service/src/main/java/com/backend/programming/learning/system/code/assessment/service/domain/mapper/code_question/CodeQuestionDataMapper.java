@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.code.assessment.service.domain.mapper;
+package com.backend.programming.learning.system.code.assessment.service.domain.mapper.code_question;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.codequestion.CreateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.codequestion.CreateCodeQuestionResponse;
@@ -10,7 +10,7 @@ import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CodeQuestionDataMaper {
+public class CodeQuestionDataMapper {
     public CodeQuestion createCodeQuestionCommandToCodeQuestion(CreateCodeQuestionCommand command){
         return CodeQuestion.builder()
                 .questionId(new QuestionId(command.getQuestionId()))

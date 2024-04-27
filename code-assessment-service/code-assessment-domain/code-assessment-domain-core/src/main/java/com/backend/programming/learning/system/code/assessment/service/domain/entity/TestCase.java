@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 
 import java.util.List;
+import java.util.UUID;
 
 public class TestCase extends AggregateRoot<TestCaseId> {
     private CodeQuestionId codeQuestionId;
@@ -23,6 +24,9 @@ public class TestCase extends AggregateRoot<TestCaseId> {
         super.setId(builder.id);
     }
 
+    public void initiate(){
+        setId(new TestCaseId(UUID.randomUUID()));
+    }
     public Double getScore() {
         return score;
     }

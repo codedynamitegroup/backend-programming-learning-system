@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.core.service.messaging.publisher.kafka.code_question;
 
 import com.backend.programming.learning.system.core.service.domain.config.CoreServiceConfigData;
-import com.backend.programming.learning.system.core.service.domain.exception.question.QtypeCodeQuestionDomainException;
+import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.code_questions.CodeQuestionsUpdateOutboxMessage;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.code_questions.CodeQuestionsUpdatePayload;
 import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.code_questions.CodeQuestionsUpdateResponseMessagePublisher;
@@ -37,7 +37,7 @@ public class CodeQuestionsUpdateResponseMessageKafkaPublisher
         CodeQuestionsUpdatePayload payload = kafkaMessageHelper.getObjectEventPayload(
                 outboxMessage.getPayload(),
                 CodeQuestionsUpdatePayload.class,
-                QtypeCodeQuestionDomainException.class
+                CoreDomainException.class
         );
         String sagaId = outboxMessage.getSagaId().toString();
         log.info("Received CodeQuestionsUpdateOutboxMessage for CodeQuestions id: {} and saga id: {}",
