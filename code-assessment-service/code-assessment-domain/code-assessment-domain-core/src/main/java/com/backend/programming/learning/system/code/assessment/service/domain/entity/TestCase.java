@@ -1,18 +1,18 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.entity;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TestCaseId;
+import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 
 import java.util.List;
 
-public class TestCase extends BaseEntity<TestCaseId> {
+public class TestCase extends AggregateRoot<TestCaseId> {
     private CodeQuestionId codeQuestionId;
     private final String inputData;
     private final String outputData;
     private final Boolean isSample;
     private final Double score;
-    private List<CodeSubmissionTestCase> codeSubmissionTestCaseList;
 
     private TestCase(Builder builder) {
         codeQuestionId = builder.codeQuestionId;
@@ -20,16 +20,11 @@ public class TestCase extends BaseEntity<TestCaseId> {
         outputData = builder.outputData;
         isSample = builder.isSample;
         score = builder.score;
-        codeSubmissionTestCaseList = builder.codeSubmissionTestCaseList;
         super.setId(builder.id);
     }
 
     public Double getScore() {
         return score;
-    }
-
-    public List<CodeSubmissionTestCase> getCodeSubmissionTestCaseList() {
-        return codeSubmissionTestCaseList;
     }
 
     public CodeQuestionId getCodeQuestionId() {
@@ -63,7 +58,6 @@ public class TestCase extends BaseEntity<TestCaseId> {
         private String outputData;
         private Boolean isSample;
         private Double score;
-        private List<CodeSubmissionTestCase> codeSubmissionTestCaseList;
         private TestCaseId id;
         private CodeQuestionId codeQuestionId;
 
@@ -73,11 +67,6 @@ public class TestCase extends BaseEntity<TestCaseId> {
 
         public Builder inputData(String val) {
             inputData = val;
-            return this;
-        }
-
-        public Builder codeSubmissionTestCaseList(List<CodeSubmissionTestCase> val) {
-            codeSubmissionTestCaseList = val;
             return this;
         }
 

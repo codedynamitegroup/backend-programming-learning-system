@@ -1,5 +1,6 @@
-package com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity;
+package com.backend.programming.learning.system.code.assessment.service.dataaccess.test_case.entity;
 
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.CodeQuestionEntity;
 import lombok.*;
 
 import javax.persistence.*;

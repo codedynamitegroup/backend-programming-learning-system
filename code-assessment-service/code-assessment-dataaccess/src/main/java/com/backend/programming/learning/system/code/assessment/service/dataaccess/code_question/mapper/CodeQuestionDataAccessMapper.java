@@ -1,22 +1,14 @@
 package com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.mapper;
 
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.CodeQuestionEntity;
-import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.TestCaseEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.question.mapper.QuestionDataAssessMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
-import com.backend.programming.learning.system.code.assessment.service.domain.entity.Question;
-import com.backend.programming.learning.system.code.assessment.service.domain.entity.TestCase;
-import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TestCaseId;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
-import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
-import org.aspectj.apache.bcel.classfile.Code;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class CodeQuestionDataAccessMapper {

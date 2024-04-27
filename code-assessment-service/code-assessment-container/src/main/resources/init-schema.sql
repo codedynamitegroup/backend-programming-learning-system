@@ -91,14 +91,15 @@ CREATE TABLE qtype_code_questions(
 DROP TABLE IF EXISTS test_cases CASCADE;
 CREATE TABLE test_cases(
     id uuid UNIQUE NOT NULL ,
-    code_question_id uuid UNIQUE NOT NULL ,
-    input_data text,
-    output_data text,
-    is_sample boolean,
-    score double precision,
+    code_question_id uuid NOT NULL ,
+    input_data text not null ,
+    output_data text not null ,
+    is_sample boolean default false,
+    score double precision default 1.0,
     CONSTRAINT qcq_tc_fk FOREIGN KEY (code_question_id)
-                       REFERENCES qtype_code_questions (id) MATCH SIMPLE
-                        ON DELETE CASCADE ON UPDATE NO ACTION
+        REFERENCES qtype_code_questions (id) MATCH SIMPLE
+        ON DELETE CASCADE
+        ON UPDATE NO ACTION
 );
 
 DROP TABLE IF EXISTS code_questions_update_outbox CASCADE;
