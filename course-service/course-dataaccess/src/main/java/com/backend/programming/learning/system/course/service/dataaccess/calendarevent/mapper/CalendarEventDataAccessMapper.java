@@ -27,6 +27,7 @@ public class CalendarEventDataAccessMapper {
                 .endTime(calendarEventEntity.getEndTime())
                 .user(user)
                 .courseId(calendarEventEntity.getCourseId())
+                .contestId(calendarEventEntity.getContestId())
                 .component(calendarEventEntity.getComponent())
                 .createdAt(calendarEventEntity.getCreatedAt())
                 .build();
@@ -43,6 +44,7 @@ public class CalendarEventDataAccessMapper {
                 .endTime(calendarEvent.getEndTime())
                 .user(userEntity)
                 .courseId(calendarEvent.getCourseId())
+                .contestId(calendarEvent.getContestId())
                 .component(calendarEvent.getComponent())
                 .createdAt(calendarEvent.getCreatedAt())
                 .build();

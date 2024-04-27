@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.entity;
 
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestUserId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.UpdateState;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 
 import java.time.ZoneId;
@@ -10,21 +11,17 @@ import java.util.UUID;
 public class ContestUser extends AggregateRoot<ContestUserId> {
     private final User user;
     private final Contest contest;
+    private UpdateState updateCalendarEventState;
     private Boolean isCompleted;
     private ZonedDateTime completedAt;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
-    public void initializeContestUser() {
-        setId(new ContestUserId(UUID.randomUUID()));
-        setCreatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
-        setUpdatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
-    }
-
     private ContestUser(Builder builder) {
         super.setId(builder.contestUserId);
         user = builder.user;
         contest = builder.contest;
+        setUpdateCalendarEventState(builder.updateCalendarEventState);
         isCompleted = builder.isCompleted;
         setCompletedAt(builder.completedAt);
         setCreatedAt(builder.createdAt);
@@ -35,6 +32,12 @@ public class ContestUser extends AggregateRoot<ContestUserId> {
         return new Builder();
     }
 
+    public void initializeContestUser() {
+        setId(new ContestUserId(UUID.randomUUID()));
+        setCreatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
+        setUpdatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
+    }
+
 
     public User getUser() {
         return user;
@@ -42,6 +45,14 @@ public class ContestUser extends AggregateRoot<ContestUserId> {
 
     public Contest getContest() {
         return contest;
+    }
+
+    public UpdateState getUpdateCalendarEventState() {
+        return updateCalendarEventState;
+    }
+
+    public void setUpdateCalendarEventState(UpdateState updateCalendarEventState) {
+        this.updateCalendarEventState = updateCalendarEventState;
     }
 
     public Boolean getCompleted() {
@@ -80,6 +91,7 @@ public class ContestUser extends AggregateRoot<ContestUserId> {
         private ContestUserId contestUserId;
         private User user;
         private Contest contest;
+        private UpdateState updateCalendarEventState;
         private Boolean isCompleted;
         private ZonedDateTime completedAt;
         private ZonedDateTime createdAt;
@@ -100,6 +112,11 @@ public class ContestUser extends AggregateRoot<ContestUserId> {
 
         public Builder contest(Contest val) {
             contest = val;
+            return this;
+        }
+
+        public Builder updateCalendarEventState(UpdateState val) {
+            updateCalendarEventState = val;
             return this;
         }
 

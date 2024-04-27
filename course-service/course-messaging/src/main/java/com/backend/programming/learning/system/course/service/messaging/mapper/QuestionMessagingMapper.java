@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.core.service.messaging.mapper;
+package com.backend.programming.learning.system.course.service.messaging.mapper;
 
 import com.backend.programming.learning.system.domain.valueobject.QuestionResponseStatus;
 import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionCreateRequest;

@@ -9,6 +9,7 @@ import com.backend.programming.learning.system.core.service.domain.entity.Contes
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.UpdateState;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,7 @@ public class ContestUserDataMapper {
     public ContestUserDataMapper(UserDataMapper userDataMapper) {
         this.userDataMapper = userDataMapper;
     }
+
     public ContestUser createContestUserCommandToContestUser(
             CreateContestUserCommand createContestUserCommand) {
         return ContestUser.builder()

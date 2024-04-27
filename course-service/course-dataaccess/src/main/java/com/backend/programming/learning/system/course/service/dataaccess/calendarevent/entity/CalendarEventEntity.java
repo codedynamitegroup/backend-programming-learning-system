@@ -31,6 +31,7 @@ public class CalendarEventEntity {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
     private UUID courseId;
+    private UUID contestId;
     @Enumerated(EnumType.STRING)
     private NotificationComponentType component;
     private ZonedDateTime createdAt;

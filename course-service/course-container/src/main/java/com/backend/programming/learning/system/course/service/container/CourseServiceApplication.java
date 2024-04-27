@@ -11,6 +11,5 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class CourseServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(CourseServiceApplication.class, args);
-        System.out.println("Hello world!");
     }
 }

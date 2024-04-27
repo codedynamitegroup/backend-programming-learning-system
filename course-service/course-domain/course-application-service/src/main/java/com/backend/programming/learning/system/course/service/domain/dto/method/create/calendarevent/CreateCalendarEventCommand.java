@@ -30,6 +30,7 @@ public class CreateCalendarEventCommand {
     @NotNull(message = "UserId is required")
     private final UUID userId;
     private final UUID courseId;
+    private final UUID contestId;
     @EnumValidator(enumClass = NotificationComponentType.class, message = "Component is invalid")
     private final String component;
 }

@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.course.service.socket.emitter.message;
 
-import com.backend.programming.learning.system.course.service.domain.ports.output.socket.message.emitter.NotificationMessageEmitter;
+import com.backend.programming.learning.system.course.service.domain.ports.output.socket.emitter.message.NotificationMessageEmitter;
 import com.backend.programming.learning.system.socket.emitter.SocketEmitterHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.core.service.dataaccess.contest_
 
 import com.backend.programming.learning.system.core.service.dataaccess.contest.entity.ContestEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.core.service.domain.valueobject.UpdateState;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,6 +30,8 @@ public class ContestUserEntity {
     @JoinColumn(name = "contest_id", referencedColumnName = "id")
     private ContestEntity contest;
 
+    @Enumerated(EnumType.STRING)
+    private UpdateState updateCalendarEventState;
     private Boolean isCompleted;
     private ZonedDateTime completedAt;
     private ZonedDateTime createdAt;

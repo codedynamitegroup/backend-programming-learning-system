@@ -10,7 +10,7 @@ import com.backend.programming.learning.system.course.service.domain.exception.U
 import com.backend.programming.learning.system.course.service.domain.mapper.notification.NotificationDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.NotificationRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
-import com.backend.programming.learning.system.course.service.domain.ports.output.socket.message.emitter.NotificationMessageEmitter;
+import com.backend.programming.learning.system.course.service.domain.ports.output.socket.emitter.message.NotificationMessageEmitter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,8 +31,7 @@ public class NotificationCreateHelper {
                                     UserRepository userRepository,
                                     NotificationRepository notificationRepository,
                                     NotificationDataMapper notificationDataMapper,
-                                    NotificationMessageEmitter<NotificationResponseEntity>
-                                            notificationMessageEmitter) {
+                                    NotificationMessageEmitter<NotificationResponseEntity> notificationMessageEmitter) {
         this.courseDomainService = courseDomainService;
         this.userRepository = userRepository;
         this.notificationRepository = notificationRepository;

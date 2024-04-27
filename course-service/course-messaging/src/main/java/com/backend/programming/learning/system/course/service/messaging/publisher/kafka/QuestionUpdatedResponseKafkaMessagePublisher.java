@@ -1,23 +1,23 @@
-package com.backend.programming.learning.system.core.service.messaging.pulisher.kafka;
+package com.backend.programming.learning.system.course.service.messaging.publisher.kafka;
 
 import com.backend.programming.learning.system.course.service.domain.config.CourseServiceConfigData;
-import com.backend.programming.learning.system.core.service.messaging.mapper.QuestionMessagingMapper;
-import com.backend.programming.learning.system.course.service.domain.event.question.event.QuestionDeletedEvent;
+import com.backend.programming.learning.system.course.service.messaging.mapper.QuestionMessagingMapper;
+import com.backend.programming.learning.system.course.service.domain.event.question.event.QuestionUpdatedEvent;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
-import com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.question.QuestionDeletedResponseMessagePublisher;
+import com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.question.QuestionUpdatedResponseMessagePublisher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class QuestionDeletedResponseKafkaMessagePublisher  implements QuestionDeletedResponseMessagePublisher {
+public class QuestionUpdatedResponseKafkaMessagePublisher  implements QuestionUpdatedResponseMessagePublisher {
     private final QuestionMessagingMapper questionMessagingDataMapper;
     private final CourseServiceConfigData courseServiceConfigData;
     private final KafkaProducer<String, QuestionResponseAvroModel> kafkaProducer;
     private final QuestionKafkaMessageHelper questionKafkaMessageHelper;
 
-    public QuestionDeletedResponseKafkaMessagePublisher(
+    public QuestionUpdatedResponseKafkaMessagePublisher(
             QuestionMessagingMapper questionMessagingDataMapper,
             CourseServiceConfigData courseServiceConfigData,
             KafkaProducer<String, QuestionResponseAvroModel> kafkaProducer,
@@ -29,10 +29,10 @@ public class QuestionDeletedResponseKafkaMessagePublisher  implements QuestionDe
     }
 
     @Override
-    public void publish(QuestionDeletedEvent domainEvent) {
+    public void publish(QuestionUpdatedEvent domainEvent) {
         String questionId = domainEvent.getQuestion().getId().getValue().toString();
 
-        log.info("Received question deleted event for question id: {}", questionId);
+        log.info("Received question created event for question id: {}", questionId);
 
         try {
             QuestionResponseAvroModel questionResponseAvroModel = questionMessagingDataMapper

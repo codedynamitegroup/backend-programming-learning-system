@@ -1,8 +1,8 @@
-package com.backend.programming.learning.system.core.service.messaging.pulisher.kafka;
+package com.backend.programming.learning.system.course.service.messaging.publisher.kafka;
 
 import com.backend.programming.learning.system.course.service.domain.config.CourseServiceConfigData;
-import com.backend.programming.learning.system.core.service.messaging.mapper.QuestionMessagingMapper;
-import com.backend.programming.learning.system.course.service.domain.event.question.event.QuestionCreateFailedEvent;
+import com.backend.programming.learning.system.course.service.messaging.mapper.QuestionMessagingMapper;
+import com.backend.programming.learning.system.course.service.domain.event.question.event.QuestionUpdateFailedEvent;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
 import lombok.extern.slf4j.Slf4j;
@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class QuestionCreateFailedResponseMessagePublisher implements com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.question.QuestionCreateFailedResponseMessagePublisher {
+public class QuestionUpdateFailedResponseMessagePublisher implements com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.question.QuestionUpdateFailedResponseMessagePublisher {
     private final QuestionMessagingMapper questionMessagingDataMapper;
     private final CourseServiceConfigData courseServiceConfigData;
     private final KafkaProducer<String, QuestionResponseAvroModel> kafkaProducer;
     private final QuestionKafkaMessageHelper questionKafkaMessageHelper;
 
-    public QuestionCreateFailedResponseMessagePublisher(
+    public QuestionUpdateFailedResponseMessagePublisher(
             QuestionMessagingMapper questionMessagingDataMapper,
             CourseServiceConfigData courseServiceConfigData,
             KafkaProducer<String, QuestionResponseAvroModel> kafkaProducer,
@@ -28,10 +28,10 @@ public class QuestionCreateFailedResponseMessagePublisher implements com.backend
     }
 
     @Override
-    public void publish(QuestionCreateFailedEvent domainEvent) {
+    public void publish(QuestionUpdateFailedEvent domainEvent) {
         String questionId = domainEvent.getQuestion().getId().getValue().toString();
 
-        log.info("Received question create failed event for question id: {}", questionId);
+        log.info("Received question update failed event for question id: {}", questionId);
 
         try {
             QuestionResponseAvroModel questionResponseAvroModel = questionMessagingDataMapper
@@ -47,6 +47,5 @@ public class QuestionCreateFailedResponseMessagePublisher implements com.backend
                     domainEvent,
                     e);
         }
-
     }
 }

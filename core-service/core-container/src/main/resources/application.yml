@@ -20,6 +20,10 @@ core-service:
   user-update-response-topic-name: user-update-response
   user-delete-response-topic-name: user-delete-response
   user-response-topic-name: user-response
+
+  calendar-event-update-request-topic-name: calendar-event-update-request
+  calendar-event-update-response-topic-name: calendar-event-update-response
+
   outbox-scheduler-fixed-rate: 10000
   outbox-scheduler-initial-delay: 10000
 

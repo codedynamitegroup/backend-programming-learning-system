@@ -44,6 +44,7 @@ public class CalendarEventDataMapper {
                     .id(new UserId(createCalendarEventCommand.getUserId()))
                     .build())
                 .courseId(createCalendarEventCommand.getCourseId())
+                .contestId(createCalendarEventCommand.getContestId())
                 .component(NotificationComponentType.valueOf(createCalendarEventCommand.getComponent()))
                 .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .build();
@@ -59,6 +60,7 @@ public class CalendarEventDataMapper {
                 .startTime(calendarEvent.getStartTime())
                 .endTime(calendarEvent.getEndTime())
                 .courseId(calendarEvent.getCourseId())
+                .contestId(calendarEvent.getContestId())
                 .component(calendarEvent.getComponent())
                 .createdAt(calendarEvent.getCreatedAt())
                 .build();
