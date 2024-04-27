@@ -9,18 +9,18 @@ import java.util.List;
 
 
 public class User extends AggregateRoot<UserId> {
-    private final String name;
-    private final String email;
-    private final Date dob;
-    private final String firstName;
-    private final String lastName;
-    private final String phone;
-    private final String address;
-    private final String avatarUrl;
-    private final ZonedDateTime lastLogin;
-    private final Boolean isDeleted;
+    private  String name;
+    private String email;
+    private ZonedDateTime dob;
+    private String firstName;
+    private String lastName;
+    private String phone;
+    private String address;
+    private String avatarUrl;
+    private ZonedDateTime lastLogin;
+    private Boolean isDeleted;
     private final ZonedDateTime createdAt;
-    private final ZonedDateTime updatedAt;
+    private  ZonedDateTime updatedAt;
     private List<String> failureMessage;
 
     private User(Builder builder) {
@@ -40,6 +40,50 @@ public class User extends AggregateRoot<UserId> {
         failureMessage = builder.failureMessage;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setDob(ZonedDateTime dob) {
+        this.dob = dob;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    public void setLastLogin(ZonedDateTime lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+    public void setUpdatedAt(ZonedDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public void setFailureMessage(List<String> failureMessage) {
+        this.failureMessage = failureMessage;
+    }
+
     public String getName() {
         return name;
     }
@@ -48,7 +92,7 @@ public class User extends AggregateRoot<UserId> {
         return email;
     }
 
-    public Date getDob() {
+    public ZonedDateTime getDob() {
         return dob;
     }
 
@@ -96,11 +140,15 @@ public class User extends AggregateRoot<UserId> {
         return new Builder();
     }
 
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
+
     public static final class Builder {
         private UserId userId;
         private String name;
         private String email;
-        private Date dob;
+        private ZonedDateTime dob;
         private String firstName;
         private String lastName;
         private String phone;
@@ -134,7 +182,7 @@ public class User extends AggregateRoot<UserId> {
             return this;
         }
 
-        public Builder dob(Date val) {
+        public Builder dob(ZonedDateTime val) {
             dob = val;
             return this;
         }

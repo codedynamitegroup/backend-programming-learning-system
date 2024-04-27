@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.course.service.domain;
 
 import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.event.question.event.*;
+import com.backend.programming.learning.system.course.service.domain.event.user.*;
+import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
 import com.backend.programming.learning.system.domain.valueobject.QuestionResponseStatus;
 
 import lombok.extern.slf4j.Slf4j;
@@ -168,5 +170,52 @@ public class CourseDomainServiceImpl implements CourseDomainService {
     public void createNotification(Notification notification) {
         notification.initializeNotification();
         log.info("Notification with id: {} is initiated", notification.getId().getValue());
+    }
+
+    @Override
+    public UserCreatedSuccessEvent createUserSuccess(User user, DomainEventPublisher<UserCreatedSuccessEvent> userCreatedSuccessEventDomainEventPublisher) {
+        return new UserCreatedSuccessEvent(user,
+                ZonedDateTime.now(ZoneId.of("UTC")),
+                userCreatedSuccessEventDomainEventPublisher);
+    }
+
+    @Override
+    public UserCreatedFailEvent createUserFail(User user,
+                                               DomainEventPublisher<UserCreatedFailEvent> userCreatedFailEventDomainEventPublisher,
+                                               List<String> failureMessages) {
+        return new UserCreatedFailEvent(user,
+                ZonedDateTime.now(ZoneId.of("UTC")),
+                userCreatedFailEventDomainEventPublisher,
+                failureMessages);
+    }
+
+    @Override
+    public UserUpdatedSuccessEvent updateUserSuccess(User user, DomainEventPublisher<UserUpdatedSuccessEvent> userUpdatedSuccessEventDomainEventPublisher) {
+        return new UserUpdatedSuccessEvent(user,
+                ZonedDateTime.now(ZoneId.of("UTC")),
+                userUpdatedSuccessEventDomainEventPublisher);
+    }
+
+    @Override
+    public UserUpdatedFailEvent updateUserFail(User user, DomainEventPublisher<UserUpdatedFailEvent> userUpdatedFailEventDomainEventPublisher, List<String> failureMessages) {
+        return new UserUpdatedFailEvent(user,
+                ZonedDateTime.now(ZoneId.of("UTC")),
+                userUpdatedFailEventDomainEventPublisher,
+                failureMessages);
+    }
+
+    @Override
+    public UserDeletedSuccessEvent deletedUserSuccess(User user, DomainEventPublisher<UserDeletedSuccessEvent> userDeletedSuccessEventDomainEventPublisher) {
+        return new UserDeletedSuccessEvent(user,
+                ZonedDateTime.now(ZoneId.of("UTC")),
+                userDeletedSuccessEventDomainEventPublisher);
+    }
+
+    @Override
+    public UserDeletedFailEvent deletedUserFail(User user, DomainEventPublisher<UserDeletedFailEvent> userDeletedFailEventDomainEventPublisher, List<String> failureMessages) {
+        return new UserDeletedFailEvent(user,
+                ZonedDateTime.now(ZoneId.of("UTC")),
+                userDeletedFailEventDomainEventPublisher,
+                failureMessages);
     }
 }

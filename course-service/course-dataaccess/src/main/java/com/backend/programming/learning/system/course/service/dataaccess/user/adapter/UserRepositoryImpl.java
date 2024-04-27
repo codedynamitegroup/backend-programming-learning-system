@@ -29,4 +29,10 @@ public class UserRepositoryImpl implements UserRepository {
         return userJpaRepository.findById(userId)
                 .map(userDataAccessMapper::userEntityToUser);
     }
+
+    @Override
+    public Optional<User> findUserByEmail(String email) {
+        return userJpaRepository.findByEmail(email)
+                .map(userDataAccessMapper::userEntityToUser);
+    }
 }

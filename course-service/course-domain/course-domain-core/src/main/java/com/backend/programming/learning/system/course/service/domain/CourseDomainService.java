@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.course.service.domain;
 
 import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.event.question.event.*;
+import com.backend.programming.learning.system.course.service.domain.event.user.*;
+import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
 
 
 import java.util.List;
@@ -46,4 +48,25 @@ public interface CourseDomainService {
     void createStartExamSubmission(ExamSubmission examSubmission);
     void createCalendarEvent(CalendarEvent calendarEvent);
     void createNotification(Notification notification);
+
+    UserCreatedSuccessEvent createUserSuccess(User user,
+                                              DomainEventPublisher<UserCreatedSuccessEvent> userCreatedSuccessEventDomainEventPublisher);
+
+    UserCreatedFailEvent createUserFail(User user,
+                                        DomainEventPublisher<UserCreatedFailEvent> userCreatedFailEventDomainEventPublisher,
+                                        List<String> failureMessages);
+    UserUpdatedSuccessEvent updateUserSuccess(User user,
+                                              DomainEventPublisher<UserUpdatedSuccessEvent> userUpdatedSuccessEventDomainEventPublisher);
+    UserUpdatedFailEvent updateUserFail(User user,
+                                        DomainEventPublisher<UserUpdatedFailEvent> userUpdatedFailEventDomainEventPublisher,
+                                        List<String> failureMessages);
+    UserDeletedSuccessEvent deletedUserSuccess(User user,
+                                               DomainEventPublisher<UserDeletedSuccessEvent> userDeletedSuccessEventDomainEventPublisher);
+    UserDeletedFailEvent deletedUserFail(User user,
+                                         DomainEventPublisher<UserDeletedFailEvent> userDeletedFailEventDomainEventPublisher,
+                                         List<String> failureMessages);
+
+
+
+
 }
