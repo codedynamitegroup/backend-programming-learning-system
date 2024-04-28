@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.code.assessment.service.applicat
 
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.test_case.CreateTestCasesCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.test_case.CreateTestCasesResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.test_case.PatchDeleteTestCasesCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.test_case.PatchDeleteTestCasesResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.TestCaseApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/code-assessment/test-case",
@@ -21,11 +26,19 @@ public class TestCaseController {
         this.service = service;
     }
     @PostMapping
-    public ResponseEntity<CreateTestCasesResponse> creatTestCases
+    public ResponseEntity<CreateTestCasesResponse> createTestCases
             (@RequestBody CreateTestCasesCommand createTestCasesCommand){
         log.info("Create test cases for code question id {}", createTestCasesCommand.getCodeQuestionId());
         CreateTestCasesResponse createCodeQuestionResponse =
                 service.createTestCases(createTestCasesCommand);
         return ResponseEntity.ok(createCodeQuestionResponse);
+    }
+    @PostMapping("/patch-delete")
+    public ResponseEntity<PatchDeleteTestCasesResponse> deleteTestCases
+            (@RequestBody List<UUID> testCaseIds){
+        PatchDeleteTestCasesCommand command = PatchDeleteTestCasesCommand.builder().testCaseIds(testCaseIds).build();
+        PatchDeleteTestCasesResponse response =
+                service.patchDeleteTestCases(command);
+        return ResponseEntity.ok(response);
     }
 }

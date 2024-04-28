@@ -3,12 +3,15 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 import com.backend.programming.learning.system.code.assessment.service.domain.CodeAssessmentDomainService;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.test_case.CreateTestCasesCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.test_case.CreateTestCasesResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.test_case.PatchDeleteTestCasesCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.test_case.PatchDeleteTestCasesResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.TestCase;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.test_case.TestCaseDataMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.CodeQuestionRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.TestCaseRepository;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TestCaseId;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -54,5 +57,18 @@ public class TestCaseHelper {
             log.warn("Could not find code question with id: {}", codeQuestionId);
             throw new CodeAssessmentDomainException("Could not find code question with id: " + codeQuestionId);
         }
+    }
+
+    //no transactional annotation needed
+    public PatchDeleteTestCasesResponse patchDeleteTestCases(PatchDeleteTestCasesCommand command) {
+        for (UUID id: command.getTestCaseIds())
+            try {
+                testCaseRepository.delete(new TestCaseId(id));
+            } catch (Exception e) {
+//                throw new RuntimeException(e);
+                log.error("Can not delete testcase with id {}, message {}", id, e.getMessage());
+            }
+        return PatchDeleteTestCasesResponse.builder().message("Delete successfully").build();
+
     }
 }
