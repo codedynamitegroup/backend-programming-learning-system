@@ -248,6 +248,7 @@ CREATE TABLE "public".contest_user
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
     contest_id uuid NOT NULL,
     user_id uuid NOT NULL,
+    calendar_event_id uuid,
     update_calendar_event_state update_state,
     is_completed bool DEFAULT FALSE NOT NULL,
     completed_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,

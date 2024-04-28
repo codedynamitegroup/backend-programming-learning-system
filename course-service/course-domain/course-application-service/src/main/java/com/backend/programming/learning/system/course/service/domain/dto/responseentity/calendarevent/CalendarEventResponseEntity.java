@@ -32,6 +32,8 @@ public class CalendarEventResponseEntity {
     private final UUID courseId;
     private final UUID contestId;
     private final NotificationComponentType component;
+    private final Boolean isStartTimeNotified;
+    private final Boolean isEndTimeNotified;
     @NotNull
     private final ZonedDateTime createdAt;
 }

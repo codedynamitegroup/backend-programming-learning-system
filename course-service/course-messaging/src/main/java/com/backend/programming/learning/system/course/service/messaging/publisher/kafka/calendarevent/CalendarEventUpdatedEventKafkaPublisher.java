@@ -37,7 +37,7 @@ public class CalendarEventUpdatedEventKafkaPublisher implements CalendarEventUpd
         String userId = domainEvent.getCalendarEvent().getUser().getId().toString();
         log.info("Received CalendarEventUpdatedEvent for calendar event id: {} and contest id: {} and user id: {}",
                 calendarEventId, contestId, userId);
-        String key = contestId.concat(userId);
+        String key = userId.concat("_").concat(calendarEventId);
 
         try {
             CalendarEventUpdateResponseAvroModel calendarEventUpdateResponseAvroModel = calendarEventMessagingDataMapper

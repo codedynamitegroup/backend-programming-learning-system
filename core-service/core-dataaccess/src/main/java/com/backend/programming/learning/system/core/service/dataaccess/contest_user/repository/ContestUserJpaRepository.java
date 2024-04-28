@@ -14,4 +14,5 @@ import java.util.UUID;
 public interface ContestUserJpaRepository extends JpaRepository<ContestUserEntity, UUID> {
     Optional<ContestUserEntity> findById(UUID id);
     Page<ContestUserEntity> findAllByContestId(UUID contestId, Pageable pageable);
+    Optional<ContestUserEntity> findByContestIdAndUserId(UUID contestId, UUID userId);
 }

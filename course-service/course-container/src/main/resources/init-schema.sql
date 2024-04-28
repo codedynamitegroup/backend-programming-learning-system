@@ -461,11 +461,14 @@ CREATE TABLE "public".calendar_event
     course_id uuid,
     contest_id uuid,
     component notification_component_type DEFAULT 'REMINDER',
+    is_start_time_notified bool DEFAULT FALSE NOT NULL,
+    is_end_time_notified bool DEFAULT FALSE NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT calendar_event_pkey PRIMARY KEY (id),
     CONSTRAINT calendar_event_created_by_fkey FOREIGN KEY (user_id)
         REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-    CONSTRAINT contest_user_id_no_key UNIQUE (user_id, contest_id)
+    CONSTRAINT contest_user_id_no_key UNIQUE (user_id, contest_id),
+    CONSTRAINT user_contest_id_key UNIQUE (user_id, contest_id),
 );

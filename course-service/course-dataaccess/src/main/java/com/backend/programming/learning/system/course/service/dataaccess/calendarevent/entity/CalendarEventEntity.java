@@ -34,6 +34,8 @@ public class CalendarEventEntity {
     private UUID contestId;
     @Enumerated(EnumType.STRING)
     private NotificationComponentType component;
+    private Boolean isStartTimeNotified;
+    private Boolean isEndTimeNotified;
     private ZonedDateTime createdAt;
 
     @Override

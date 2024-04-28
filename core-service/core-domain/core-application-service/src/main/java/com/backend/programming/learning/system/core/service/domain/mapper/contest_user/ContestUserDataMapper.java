@@ -56,6 +56,7 @@ public class ContestUserDataMapper {
         return ContestUserResponseEntity.builder()
                 .contestId(contestUser.getContest().getId().getValue())
                 .user(userDataMapper.userToUserResponseEntity(contestUser.getUser()))
+                .calendarEventId(contestUser.getCalendarEventId())
                 .isCompleted(contestUser.getCompleted())
                 .completedAt(contestUser.getCompletedAt())
                 .createdAt(contestUser.getCreatedAt())

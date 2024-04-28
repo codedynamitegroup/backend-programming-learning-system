@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.implement.calendarevent;
+package com.backend.programming.learning.system.course.service.domain.implement.service.calendarevent;
 
 import com.backend.programming.learning.system.course.service.domain.entity.CalendarEvent;
 import com.backend.programming.learning.system.course.service.domain.exception.CalendarEventNotFoundException;

@@ -12,7 +12,7 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class ContestUserCreateOutboxMessage {
+public class ContestUserUpdateOutboxMessage {
     private UUID id;
     private UUID sagaId;
     private ZonedDateTime createdAt;
