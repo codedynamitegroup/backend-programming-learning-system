@@ -36,6 +36,15 @@
       "type": ["string", "null"]
     },
     {
+      "name": "apiKey",
+      "type": ["string", "null"]
+    },
+    {
+      "name": "moodleUrl",
+      "type": ["string", "null"]
+    },
+
+    {
       "name": "createdBy",
       "type": "string"
     },

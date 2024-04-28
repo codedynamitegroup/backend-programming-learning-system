@@ -56,8 +56,8 @@ CREATE TABLE "public".organization
     id          uuid DEFAULT gen_random_uuid() NOT NULL,
     description text,
     name        text                           NOT NULL,
-    api_key     text                           NOT NULL,
-    moodle_url  text                           NOT NULL,
+    api_key     text                           ,
+    moodle_url  text                           ,
     CONSTRAINT organization_pkey PRIMARY KEY (id)
 );
 
