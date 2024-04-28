@@ -3,7 +3,6 @@ package com.backend.programming.learning.system.core.service.domain.event.contes
 import com.backend.programming.learning.system.core.service.domain.entity.ContestUser;
 import com.backend.programming.learning.system.domain.event.DomainEvent;
 
-import java.time.ZonedDateTime;
 import java.util.List;
 
 public abstract class ContestUserEvent implements DomainEvent<ContestUser> {

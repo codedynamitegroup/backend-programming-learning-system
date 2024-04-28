@@ -11,6 +11,7 @@ import java.util.UUID;
 public class ContestUser extends AggregateRoot<ContestUserId> {
     private final User user;
     private final Contest contest;
+    private UUID calendarEventId;
     private UpdateState updateCalendarEventState;
     private Boolean isCompleted;
     private ZonedDateTime completedAt;
@@ -21,6 +22,7 @@ public class ContestUser extends AggregateRoot<ContestUserId> {
         super.setId(builder.contestUserId);
         user = builder.user;
         contest = builder.contest;
+        setCalendarEventId(builder.calendarEventId);
         setUpdateCalendarEventState(builder.updateCalendarEventState);
         isCompleted = builder.isCompleted;
         setCompletedAt(builder.completedAt);
@@ -45,6 +47,14 @@ public class ContestUser extends AggregateRoot<ContestUserId> {
 
     public Contest getContest() {
         return contest;
+    }
+
+    public UUID getCalendarEventId() {
+        return calendarEventId;
+    }
+
+    public void setCalendarEventId(UUID calendarEventId) {
+        this.calendarEventId = calendarEventId;
     }
 
     public UpdateState getUpdateCalendarEventState() {
@@ -91,6 +101,7 @@ public class ContestUser extends AggregateRoot<ContestUserId> {
         private ContestUserId contestUserId;
         private User user;
         private Contest contest;
+        private UUID calendarEventId;
         private UpdateState updateCalendarEventState;
         private Boolean isCompleted;
         private ZonedDateTime completedAt;
@@ -112,6 +123,11 @@ public class ContestUser extends AggregateRoot<ContestUserId> {
 
         public Builder contest(Contest val) {
             contest = val;
+            return this;
+        }
+
+        public Builder calendarEventId(UUID val) {
+            calendarEventId = val;
             return this;
         }
 

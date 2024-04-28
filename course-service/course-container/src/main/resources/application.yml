@@ -35,6 +35,9 @@ course-service:
   organization-update-response-topic-name: organization-update-response
   organization-delete-response-topic-name: organization-delete-response
   organization-response-topic-name: organization-response
+  
+  calendar-event-update-request-topic-name: calendar-event-update-request
+  calendar-event-update-response-topic-name: calendar-event-update-response
 
   outbox-scheduler-fixed-rate: 10000
   outbox-scheduler-initial-delay: 10000
@@ -79,16 +82,11 @@ kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
 
-  course-service-user-consumer-group-id: course-service-user-topic-consumer
-
-
   question-create-consumer-group-id: question-create-topic-consumer
   question-delete-consumer-group-id: question-delete-topic-consumer
   question-update-consumer-group-id: question-update-topic-consumer
 
-  course-service-user-create-request-group-id: course-service-user-create-request-topic
-  course-service-user-update-request-group-id: course-service-user-update-request-topic
-  course-service-user-delete-request-group-id: course-service-user-delete-request-topic
+  course-service-calendar-event-consumer-group-id: course-service-calendar-event-consumer
 
   course-service-organization-create-request-group-id: course-service-organization-create-request-topic
   course-service-organization-update-request-group-id: course-service-organization-update-request-topic

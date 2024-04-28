@@ -17,6 +17,7 @@ public class ContestUserResponseEntity {
     private final UserResponseEntity user;
     @NotNull
     private final UUID contestId;
+    private final UUID calendarEventId;
     @NotNull
     private final Boolean isCompleted;
     @NotNull

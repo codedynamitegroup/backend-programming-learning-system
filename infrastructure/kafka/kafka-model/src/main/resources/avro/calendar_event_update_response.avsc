@@ -18,10 +18,24 @@
       }
     },
     {
+      "name": "calendarEventId",
+      "type": {
+          "type": "string",
+          "logicalType": "uuid"
+      }
+    },
+    {
       "name": "userId",
       "type": {
         "type": "string",
         "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "contestId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid" //Logical type is part of the 'string' type definition
       }
     },
     {

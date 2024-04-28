@@ -30,6 +30,8 @@ public class ContestUserEntity {
     @JoinColumn(name = "contest_id", referencedColumnName = "id")
     private ContestEntity contest;
 
+    private UUID calendarEventId;
+
     @Enumerated(EnumType.STRING)
     private UpdateState updateCalendarEventState;
     private Boolean isCompleted;

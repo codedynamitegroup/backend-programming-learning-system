@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -33,6 +34,12 @@ public class ContestUserRepositoryImpl implements ContestUserRepository {
     public Page<ContestUser> findAllByContestId(UUID contestId, Integer pageNo, Integer pageSize, Boolean fetchAll) {
         Pageable paging = fetchAll ? Pageable.unpaged() : Pageable.ofSize(pageSize).withPage(pageNo);
         return contestUserJpaRepository.findAllByContestId(contestId, paging)
+                .map(contestUserDataAccessMapper::contestUserEntityToContestUser);
+    }
+
+    @Override
+    public Optional<ContestUser> findByContestIdAndUserId(UUID contestId, UUID userId) {
+        return contestUserJpaRepository.findByContestIdAndUserId(contestId, userId)
                 .map(contestUserDataAccessMapper::contestUserEntityToContestUser);
     }
 }
