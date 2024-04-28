@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.ports.input.message.listener.calendarevent.CalendarEventUpdateRequestMessageListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 @Slf4j
@@ -18,6 +19,7 @@ public class CalendarEventUpdateRequestMessageListenerImpl implements CalendarEv
     }
 
     @Override
+    @Transactional
     public void updateCalendarEvent(CalendarEventUpdateRequest calendarEventUpdateRequest) {
         return;
     }

@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.core.service.domain.event.questio
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.user.*;
+import com.backend.programming.learning.system.core.service.domain.valueobject.UpdateState;
 import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
 import lombok.extern.slf4j.Slf4j;
 
@@ -183,5 +184,13 @@ public class CoreDomainServiceImpl implements CoreDomainService {
                 ZonedDateTime.now(ZoneId.of("UTC")),
                 userDeletedFailEventDomainEventPublisher,
                 failureMessages);
+    }
+
+    @Override
+    public void updateContestUserCalendarEventState(ContestUser contestUser, String calendarEventId, UpdateState updateCalendarEventState) {
+        contestUser.setCalendarEventId(calendarEventId != null ? UUID.fromString(calendarEventId) : null);
+        contestUser.setUpdateCalendarEventState(updateCalendarEventState);
+        log.info("Contest user calendar event state updated with calendar event id: {} and update calendar event state: {}",
+                calendarEventId, updateCalendarEventState);
     }
 }

@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.kafka.consumer.KafkaConsumer;
 import com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.OptimisticLockingFailureException;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -29,6 +30,8 @@ public class CalendarEventUpdateRequestKafkaListener implements KafkaConsumer<Ca
     }
 
     @Override
+    @KafkaListener(id="${kafka-consumer-config.course-service-calendar-event-consumer-group-id}",
+            topics = "${course-service.calendar-event-update-request-topic-name}")
     public void receive(
             @Payload List<CalendarEventUpdateRequestAvroModel> messages,
             @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) List<String> keys,

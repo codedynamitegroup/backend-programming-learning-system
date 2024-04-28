@@ -13,4 +13,17 @@ public class CourseServiceConfigData {
     private String questionUpdatedRequestTopicName;
 
     private String questionResponseTopicName;
+
+    private String calendarEventUpdateRequestTopicName;
+    private String calendarEventUpdateResponseTopicName;
+
+    private String userRequestTopicName;
+    private String userResponseTopicName;
+    private String userCreateRequestTopicName;
+    private String userUpdateRequestTopicName;
+    private String userDeleteRequestTopicName;
+    private String userCreateResponseTopicName;
+    private String userUpdateResponseTopicName;
+    private String userDeleteResponseTopicName;
+
 }

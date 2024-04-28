@@ -27,6 +27,8 @@ public class ContestUserCalendarEventUpdateResponseMessageListenerImpl implement
 
     @Override
     public void calendarEventCreatedUpdatedOrDeletedFail(ContestUserCalendarEventUpdatedResponse contestUserCalendarEventUpdatedResponse) {
-        // No rollback operation is needed for this saga
+        contestUserCalendarEventUpdateSaga.rollback(contestUserCalendarEventUpdatedResponse);
+        log.info("Calendar Event Update Saga rollback operation is completed for calendar event id: {}",
+                contestUserCalendarEventUpdatedResponse.getCalendarEventId());
     }
 }

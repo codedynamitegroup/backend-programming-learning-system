@@ -29,6 +29,8 @@ public class CalendarEventDataAccessMapper {
                 .courseId(calendarEventEntity.getCourseId())
                 .contestId(calendarEventEntity.getContestId())
                 .component(calendarEventEntity.getComponent())
+                .isStartTimeNotified(calendarEventEntity.getIsStartTimeNotified())
+                .isEndTimeNotified(calendarEventEntity.getIsEndTimeNotified())
                 .createdAt(calendarEventEntity.getCreatedAt())
                 .build();
     }
@@ -46,6 +48,8 @@ public class CalendarEventDataAccessMapper {
                 .courseId(calendarEvent.getCourseId())
                 .contestId(calendarEvent.getContestId())
                 .component(calendarEvent.getComponent())
+                .isStartTimeNotified(calendarEvent.getStartTimeNotified())
+                .isEndTimeNotified(calendarEvent.getEndTimeNotified())
                 .createdAt(calendarEvent.getCreatedAt())
                 .build();
     }

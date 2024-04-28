@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.core.service.domain.event.questio
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.user.*;
+import com.backend.programming.learning.system.core.service.domain.valueobject.UpdateState;
 import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
 
 import java.util.List;
@@ -52,4 +53,7 @@ public interface CoreDomainService {
     UserDeletedFailEvent deletedUserFail(User user,
                                         DomainEventPublisher<UserDeletedFailEvent> userDeletedFailEventDomainEventPublisher,
                                         List<String> failureMessages);
+
+    void updateContestUserCalendarEventState(ContestUser contestUser, String calendarEventId, UpdateState updateCalendarEventState);
+
 }
