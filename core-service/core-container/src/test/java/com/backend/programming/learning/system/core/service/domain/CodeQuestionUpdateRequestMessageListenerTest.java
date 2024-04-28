@@ -98,7 +98,7 @@ public class CodeQuestionUpdateRequestMessageListenerTest {
                 .problemStatement("pro")
                 .inputFormat("in")
                 .outputFormat("out")
-                .constraints("constraints")
+//                .constraints("constraints")
                 .state(CopyState.CREATING.name())
                 .build();
     }

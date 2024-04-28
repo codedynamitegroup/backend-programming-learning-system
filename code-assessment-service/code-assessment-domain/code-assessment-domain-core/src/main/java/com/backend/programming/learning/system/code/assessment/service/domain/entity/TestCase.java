@@ -10,10 +10,10 @@ import java.util.UUID;
 
 public class TestCase extends AggregateRoot<TestCaseId> {
     private CodeQuestionId codeQuestionId;
-    private final String inputData;
-    private final String outputData;
-    private final Boolean isSample;
-    private final Double score;
+    private String inputData;
+    private String outputData;
+    private Boolean isSample;
+    private Double score;
 
     private TestCase(Builder builder) {
         codeQuestionId = builder.codeQuestionId;

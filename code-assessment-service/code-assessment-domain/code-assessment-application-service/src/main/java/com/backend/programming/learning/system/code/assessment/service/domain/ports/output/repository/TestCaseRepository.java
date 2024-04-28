@@ -12,6 +12,7 @@ public interface TestCaseRepository {
     Page<TestCase>  getTestCaseByCodeQuestionId(CodeQuestionId id, Integer pageNo, Integer pageSize, Boolean fetchAll);
     List<TestCase> save(List<TestCase> listTestCase);
     TestCase save(TestCase testCase);
+    Optional<TestCase> findById(TestCaseId id);
     void delete(TestCaseId id);
 
 }

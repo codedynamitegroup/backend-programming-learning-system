@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @Slf4j
@@ -48,6 +49,12 @@ public class TestCaseRepositoryImpl  implements TestCaseRepository {
         TestCaseEntity entity = dataAccessMapper.testCaseToTestCaseEntity(testCase);
         TestCaseEntity entityRes = jpaRepository.save(entity);
         return dataAccessMapper.testCaseEntityToTestCase(entityRes);
+    }
+
+    @Override
+    public Optional<TestCase> findById(TestCaseId id) {
+        return jpaRepository.findById(id.getValue()).map(dataAccessMapper::testCaseEntityToTestCase)
+;
     }
 
     @Override

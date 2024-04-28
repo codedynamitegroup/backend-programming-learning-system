@@ -5,9 +5,12 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.test_case.CreateTestCasesResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.test_case.PatchDeleteTestCasesCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.test_case.PatchDeleteTestCasesResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.testcase.UpdateTestCaseCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.testcase.UpdateTestCaseResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.TestCase;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
+import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.GenericHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.test_case.TestCaseDataMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.CodeQuestionRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.TestCaseRepository;
@@ -28,12 +31,14 @@ public class TestCaseHelper {
     private final TestCaseRepository testCaseRepository;
     private final TestCaseDataMapper testCaseDataMapper;
     private final CodeQuestionRepository codeQuestionRepository;
+    private final GenericHelper genericHelper;
 
-    public TestCaseHelper(CodeAssessmentDomainService codeAssessmentDomainService, TestCaseRepository testCaseRepository, TestCaseDataMapper testCaseDataMapper, CodeQuestionRepository codeQuestionRepository) {
+    public TestCaseHelper(CodeAssessmentDomainService codeAssessmentDomainService, TestCaseRepository testCaseRepository, TestCaseDataMapper testCaseDataMapper, CodeQuestionRepository codeQuestionRepository, GenericHelper genericHelper) {
         this.codeAssessmentDomainService = codeAssessmentDomainService;
         this.testCaseRepository = testCaseRepository;
         this.testCaseDataMapper = testCaseDataMapper;
         this.codeQuestionRepository = codeQuestionRepository;
+        this.genericHelper = genericHelper;
     }
 
     @Transactional
@@ -70,5 +75,26 @@ public class TestCaseHelper {
             }
         return PatchDeleteTestCasesResponse.builder().message("Delete successfully").build();
 
+    }
+
+    @Transactional
+    public UpdateTestCaseResponse updateTestCase(UpdateTestCaseCommand command) {
+        TestCase testCase = testCaseDataMapper.updateTestCaseCommandToTestCase(command);
+        TestCase testCaseExist = checkIfTestCaseExist(command.getId());
+        
+        genericHelper.mapNullAttributeToRepositoryAttribute(testCase, testCaseExist, TestCase.class);
+
+        testCaseRepository.save(testCase);
+        return UpdateTestCaseResponse.builder().message("update successfully").build();
+    }
+
+    private TestCase checkIfTestCaseExist(UUID id) {
+        Optional<TestCase> testCase = testCaseRepository.findById(new TestCaseId(id));
+
+        if (testCase.isEmpty()) {
+            log.warn("Could not find test case with id: {}", id);
+            throw new CodeAssessmentDomainException("Could not find test case with id: " + id);
+        }
+        return testCase.get();
     }
 }
