@@ -17,6 +17,9 @@ course-service:
 
   question-response-topic-name: core-question-response
 
+  calendar-event-update-request-topic-name: calendar-event-update-request
+  calendar-event-update-response-topic-name: calendar-event-update-response
+
   outbox-scheduler-fixed-rate: 10000
   outbox-scheduler-initial-delay: 10000
 
