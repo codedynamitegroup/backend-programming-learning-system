@@ -5,6 +5,8 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.test_case.CreateTestCasesResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.test_case.PatchDeleteTestCasesCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.test_case.PatchDeleteTestCasesResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.testcase.GetTestCasesByQuestionIdCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.testcase.GetTestCasesByQuestionIdResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.testcase.UpdateTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.testcase.UpdateTestCaseResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
@@ -17,6 +19,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.po
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TestCaseId;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -81,7 +84,7 @@ public class TestCaseHelper {
     public UpdateTestCaseResponse updateTestCase(UpdateTestCaseCommand command) {
         TestCase testCase = testCaseDataMapper.updateTestCaseCommandToTestCase(command);
         TestCase testCaseExist = checkIfTestCaseExist(command.getId());
-        
+
         genericHelper.mapNullAttributeToRepositoryAttribute(testCase, testCaseExist, TestCase.class);
 
         testCaseRepository.save(testCase);
@@ -96,5 +99,15 @@ public class TestCaseHelper {
             throw new CodeAssessmentDomainException("Could not find test case with id: " + id);
         }
         return testCase.get();
+    }
+
+    public Page<TestCase> getTestCasesByCodeQuestionId(GetTestCasesByQuestionIdCommand command) {
+        return testCaseRepository.getTestCaseByCodeQuestionId(
+                new CodeQuestionId(command.getCodeQuestionId()),
+                command.getPageNum(),
+                command.getPageSize(),
+                command.getFetchAll()
+        );
+
     }
 }

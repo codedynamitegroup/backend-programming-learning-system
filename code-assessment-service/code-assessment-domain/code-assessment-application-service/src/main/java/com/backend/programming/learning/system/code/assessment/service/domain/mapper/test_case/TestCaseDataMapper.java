@@ -2,10 +2,12 @@ package com.backend.programming.learning.system.code.assessment.service.domain.m
 
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.TestCaseDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.test_case.CreateTestCasesCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.testcase.GetTestCasesByQuestionIdResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.testcase.UpdateTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.TestCase;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TestCaseId;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -42,4 +44,22 @@ public class TestCaseDataMapper {
                 .build();
     }
 
+    public GetTestCasesByQuestionIdResponse testCasesPageQueryToTestCasesReponse(Page<TestCase> testCases) {
+        return GetTestCasesByQuestionIdResponse.builder()
+                .currentPage(testCases.getNumber())
+                .totalPages(testCases.getTotalPages())
+                .totalItems(testCases.getTotalElements())
+                .testCases(testCases.stream().map(this::testCaseToTestCaseDto).collect(Collectors.toList()))
+                .build();
+    }
+
+    public TestCaseDto testCaseToTestCaseDto(TestCase testCase) {
+        return TestCaseDto.builder()
+                .id(testCase.getId().getValue())
+                .inputData(testCase.getInputData())
+                .outputData(testCase.getOutputData())
+                .isSample(testCase.getIsSample())
+                .score(testCase.getScore())
+                .build();
+    }
 }
