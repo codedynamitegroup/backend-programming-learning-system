@@ -23,7 +23,7 @@ public class UserEntity {
     private UUID id;
 
     private String email;
-    private Date dob;
+    private ZonedDateTime dob;
     private String firstName;
     private String lastName;
     private String avatarUrl;

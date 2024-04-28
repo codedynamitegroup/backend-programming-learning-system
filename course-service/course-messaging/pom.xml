@@ -31,6 +31,10 @@
             <groupId>com.backend.programming.learning.system</groupId>
             <artifactId>kafka-model</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.backend.programming.learning.system</groupId>
+            <artifactId>socket-emitter</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
