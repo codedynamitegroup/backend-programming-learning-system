@@ -34,9 +34,27 @@ CREATE TYPE difficulty AS ENUM ('EASY', 'MEDIUM', 'HARD');
 DROP TYPE IF EXISTS qtype;
 CREATE TYPE qtype AS ENUM ('MULTIPLE_CHOICE', 'SHORT_ANSWER', 'CODE', 'ESSAY');
 
+DROP TYPE IF EXISTS grading_status;
+CREATE TYPE grading_status AS ENUM ('GRADING', 'ACCEPTED', 'WRONG_ANSWER', 'GRADING_SYSTEM_FAILED');
 
 
 
+DROP TABLE IF EXISTS "public".user CASCADE;
+CREATE TABLE "public".user
+(
+    id uuid UNIQUE NOT NULL,
+    email text UNIQUE NOT NULL,
+    dob date,
+    first_name character varying,
+    last_name character varying,
+    phone character varying,
+    address character varying,
+    avatar_url text,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    is_deleted boolean NOT NULL DEFAULT false,
+    CONSTRAINT user_pkey PRIMARY KEY (id)
+);
 
 
 DROP TABLE IF EXISTS questions CASCADE;
@@ -69,6 +87,19 @@ CREATE TABLE questions
 --         ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS programming_language CASCADE;
+CREATE TABLE programming_language(
+    id uuid UNIQUE NOT NULL ,
+    name text not null ,
+    compiler_api_id int not null ,
+    time_limit float not null,
+    memory_limit float not null,
+    is_active boolean default false,
+    copy_state CopyState not null ,
+    CONSTRAINT pr_la_pk PRIMARY KEY (id)
+
+);
+
 DROP TABLE IF EXISTS qtype_code_questions CASCADE;
 CREATE TABLE qtype_code_questions(
     id uuid UNIQUE NOT NULL,
@@ -96,11 +127,67 @@ CREATE TABLE test_cases(
     output_data text not null ,
     is_sample boolean default false,
     score double precision default 1.0,
+    CONSTRAINT te_ca_pk PRIMARY KEY (id),
     CONSTRAINT qcq_tc_fk FOREIGN KEY (code_question_id)
         REFERENCES qtype_code_questions (id) MATCH SIMPLE
         ON DELETE CASCADE
         ON UPDATE NO ACTION
 );
+
+
+DROP TABLE  IF EXISTS code_submission CASCADE;
+CREATE TABLE code_submission(
+    id uuid UNIQUE NOT NULL ,
+    code_question_id uuid not null ,
+    user_id uuid not null ,
+    language_id uuid not null,
+    grade double precision,
+    avg_runtime double precision,
+    avg_memory double precision,
+    ai_accessment text,
+    sonaque_assessment text,
+    source_code text not null ,
+    number_of_test_case_sent int not null ,
+    number_of_test_case_graded int default 0,
+    grading_status grading_status not null ,
+    copy_state CopyState not null ,
+    CONSTRAINT co_su_pk PRIMARY KEY (id),
+    CONSTRAINT co_qu_co_su_fk FOREIGN KEY (code_question_id)
+        REFERENCES qtype_code_questions (id) MATCH SIMPLE
+        ON DELETE CASCADE
+        ON UPDATE NO ACTION,
+    CONSTRAINT cc_fk FOREIGN KEY (user_id)
+        REFERENCES "public".user (id) MATCH SIMPLE
+        ON DELETE CASCADE
+        ON UPDATE NO ACTION,
+    CONSTRAINT pr_la_co_su_fk FOREIGN KEY (language_id)
+        REFERENCES programming_language (id) MATCH SIMPLE
+        ON DELETE CASCADE
+        ON UPDATE NO ACTION
+
+);
+
+DROP TABLE IF EXISTS code_submission_test_case CASCADE;
+CREATE TABLE code_submission_test_case(
+    id uuid UNIQUE NOT NULL ,
+    test_case_id uuid not null ,
+    code_submission_id uuid not null ,
+    actual_output text,
+    runtime float,
+    memory float,
+    passed boolean,
+    judge_token text not null,
+    CONSTRAINT co_su_te_ca_pk PRIMARY KEY (id),
+    CONSTRAINT co_su_te_cax2_fk FOREIGN KEY (test_case_id)
+        REFERENCES test_cases (id) MATCH SIMPLE
+        ON DELETE CASCADE
+        ON UPDATE NO ACTION,
+    CONSTRAINT co_sux2_te_ca_fk FOREIGN KEY (code_submission_id)
+        REFERENCES code_submission (id) MATCH SIMPLE
+        ON DELETE CASCADE
+        ON UPDATE NO ACTION
+);
+-- outbox
 
 DROP TABLE IF EXISTS code_questions_update_outbox CASCADE;
 CREATE TABLE code_questions_update_outbox

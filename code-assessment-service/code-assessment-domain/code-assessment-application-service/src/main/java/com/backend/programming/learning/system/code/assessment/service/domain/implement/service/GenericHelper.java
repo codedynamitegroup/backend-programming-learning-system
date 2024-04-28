@@ -8,7 +8,7 @@ import java.lang.reflect.Field;
 @Component
 @Slf4j
 public class GenericHelper {
-    //not use for object without  final field
+    //not use for objects that have final field(s)
     public <T> void mapNullAttributeToRepositoryAttribute(T nullAttributeObject, T repositoryObject, Class<T> tClass){
         Field[] fields = tClass.getDeclaredFields();
         for(Field field: fields){

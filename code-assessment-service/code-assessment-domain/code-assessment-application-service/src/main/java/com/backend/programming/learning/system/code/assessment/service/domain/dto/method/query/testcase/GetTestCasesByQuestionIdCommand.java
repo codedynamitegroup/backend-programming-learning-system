@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.UUID;
 
@@ -18,7 +19,7 @@ public class GetTestCasesByQuestionIdCommand {
     @PositiveOrZero(message = "pageNum must not be negative")
     Integer pageNum;
 
-    @PositiveOrZero(message = "pageSize must not be negative")
+    @Positive(message = "pageSize must be positive")
     Integer pageSize;
 
     Boolean fetchAll;

@@ -12,6 +12,8 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.TestCase;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.codequestion.CodeQuestionNotFoundException;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.test_case.TestCaseNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.GenericHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.test_case.TestCaseDataMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.CodeQuestionRepository;
@@ -63,7 +65,7 @@ public class TestCaseHelper {
 
         if (codeQuestion.isEmpty()) {
             log.warn("Could not find code question with id: {}", codeQuestionId);
-            throw new CodeAssessmentDomainException("Could not find code question with id: " + codeQuestionId);
+            throw new CodeQuestionNotFoundException("Could not find code question with id: " + codeQuestionId);
         }
     }
 
@@ -96,7 +98,7 @@ public class TestCaseHelper {
 
         if (testCase.isEmpty()) {
             log.warn("Could not find test case with id: {}", id);
-            throw new CodeAssessmentDomainException("Could not find test case with id: " + id);
+            throw new TestCaseNotFoundException("Could not find test case with id: " + id);
         }
         return testCase.get();
     }

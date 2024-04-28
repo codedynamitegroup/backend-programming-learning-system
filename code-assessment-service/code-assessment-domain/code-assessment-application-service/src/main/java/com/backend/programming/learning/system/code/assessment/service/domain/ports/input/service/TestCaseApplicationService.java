@@ -18,5 +18,5 @@ public interface TestCaseApplicationService {
 
     UpdateTestCaseResponse updateTestCase(@Valid UpdateTestCaseCommand command);
 
-    GetTestCasesByQuestionIdResponse getTestCasesByCodeQuestionId(GetTestCasesByQuestionIdCommand command);
+    GetTestCasesByQuestionIdResponse getTestCasesByCodeQuestionId(@Valid GetTestCasesByQuestionIdCommand command);
 }

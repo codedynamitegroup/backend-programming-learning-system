@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.code.assessment.service.applicat
 import com.backend.programming.learning.system.application.handler.ErrorDTO;
 import com.backend.programming.learning.system.application.handler.GlobalExceptionHandler;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.test_case.TestCaseNotFoundException;
 import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,16 @@ public class CodeAssessmentGlobalExceptionHandler extends GlobalExceptionHandler
         log.error(questionNotFoundException.getMessage(), questionNotFoundException);
         return ErrorDTO.builder()
                 .message(questionNotFoundException.getMessage())
+                .code(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .build();
+    }
+    @ResponseBody
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(value = {TestCaseNotFoundException.class})
+    public ErrorDTO handleException(TestCaseNotFoundException exception){
+        log.error(exception.getMessage(), exception);
+        return ErrorDTO.builder()
+                .message(exception.getMessage())
                 .code(HttpStatus.NOT_FOUND.getReasonPhrase())
                 .build();
     }
