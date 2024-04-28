@@ -1,11 +1,11 @@
 package com.backend.programming.learning.system.course.service.domain;
 
 import com.backend.programming.learning.system.course.service.domain.entity.*;
+import com.backend.programming.learning.system.course.service.domain.event.organization.*;
 import com.backend.programming.learning.system.course.service.domain.event.question.event.*;
 import com.backend.programming.learning.system.course.service.domain.event.user.*;
 import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
 import com.backend.programming.learning.system.domain.valueobject.QuestionResponseStatus;
-
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.ZoneId;
@@ -216,6 +216,51 @@ public class CourseDomainServiceImpl implements CourseDomainService {
         return new UserDeletedFailEvent(user,
                 ZonedDateTime.now(ZoneId.of("UTC")),
                 userDeletedFailEventDomainEventPublisher,
+                failureMessages);
+    }
+
+    @Override
+    public OrganizationCreatedSuccessEvent createOrganizationSuccess(Organization organization, DomainEventPublisher<OrganizationCreatedSuccessEvent> organizationCreatedSuccessEventDomainEventPublisher) {
+        return new OrganizationCreatedSuccessEvent(organization,
+                ZonedDateTime.now(ZoneId.of("UTC")),
+                organizationCreatedSuccessEventDomainEventPublisher);
+    }
+
+    @Override
+    public OrganizationCreatedFailEvent createOrganizationFail(Organization organization, DomainEventPublisher<OrganizationCreatedFailEvent> organizationCreatedFailEventDomainEventPublisher, List<String> failureMessages) {
+        return new OrganizationCreatedFailEvent(organization,
+                ZonedDateTime.now(ZoneId.of("UTC")),
+                organizationCreatedFailEventDomainEventPublisher,
+                failureMessages);
+    }
+
+    @Override
+    public OrganizationUpdatedSuccessEvent updateOrganizationSuccess(Organization organization, DomainEventPublisher<OrganizationUpdatedSuccessEvent> organizationUpdatedSuccessEventDomainEventPublisher) {
+        return new OrganizationUpdatedSuccessEvent(organization,
+                ZonedDateTime.now(ZoneId.of("UTC")),
+                organizationUpdatedSuccessEventDomainEventPublisher);
+    }
+
+    @Override
+    public OrganizationUpdatedFailEvent updateOrganizationFail(Organization organization, DomainEventPublisher<OrganizationUpdatedFailEvent> organizationUpdatedFailEventDomainEventPublisher, List<String> failureMessages) {
+        return new OrganizationUpdatedFailEvent(organization,
+                ZonedDateTime.now(ZoneId.of("UTC")),
+                organizationUpdatedFailEventDomainEventPublisher,
+                failureMessages);
+    }
+
+    @Override
+    public OrganizationDeletedSuccessEvent deleteOrganizationSuccess(Organization organization, DomainEventPublisher<OrganizationDeletedSuccessEvent> organizationDeletedSuccessEventDomainEventPublisher) {
+        return new OrganizationDeletedSuccessEvent(organization,
+                ZonedDateTime.now(ZoneId.of("UTC")),
+                organizationDeletedSuccessEventDomainEventPublisher);
+    }
+
+    @Override
+    public OrganizationDeletedFailEvent deleteOrganizationFail(Organization organization, DomainEventPublisher<OrganizationDeletedFailEvent> organizationDeletedFailEventDomainEventPublisher, List<String> failureMessages) {
+        return new OrganizationDeletedFailEvent(organization,
+                ZonedDateTime.now(ZoneId.of("UTC")),
+                organizationDeletedFailEventDomainEventPublisher,
                 failureMessages);
     }
 }

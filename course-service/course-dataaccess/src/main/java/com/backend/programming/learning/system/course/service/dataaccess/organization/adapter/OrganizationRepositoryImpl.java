@@ -17,6 +17,13 @@ import java.util.UUID;
 public class OrganizationRepositoryImpl implements OrganizationRepository {
     private final OrganizationJpaRepository organizationJpaRepository;
     private final OrganizationDataAccessMapper organizationDataAccessMapper;
+
+    @Override
+    public Optional<Organization> findOrganizationByName(String name) {
+        return organizationJpaRepository.findOrganizationByName(name)
+                .map(organizationDataAccessMapper::organizationEntityToOrganization);
+    }
+
     @Override
     public Organization saveOrganization(Organization organization) {
         return organizationDataAccessMapper.organizationEntityToOrganization(

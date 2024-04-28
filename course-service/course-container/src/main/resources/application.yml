@@ -26,6 +26,16 @@ course-service:
   user-delete-response-topic-name: user-delete-response
   user-response-topic-name: user-response
 
+
+  organization-request-topic-name: organization-request
+  organization-create-request-topic-name: organization-create-request
+  organization-update-request-topic-name: organization-update-request
+  organization-delete-request-topic-name: organization-delete-request
+  organization-create-response-topic-name: organization-create-response
+  organization-update-response-topic-name: organization-update-response
+  organization-delete-response-topic-name: organization-delete-response
+  organization-response-topic-name: organization-response
+  
   calendar-event-update-request-topic-name: calendar-event-update-request
   calendar-event-update-response-topic-name: calendar-event-update-response
 
@@ -77,6 +87,10 @@ kafka-consumer-config:
   question-update-consumer-group-id: question-update-topic-consumer
 
   course-service-calendar-event-consumer-group-id: course-service-calendar-event-consumer
+
+  course-service-organization-create-request-group-id: course-service-organization-create-request-topic
+  course-service-organization-update-request-group-id: course-service-organization-update-request-topic
+  course-service-organization-delete-request-group-id: course-service-organization-delete-request-topic
 
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
