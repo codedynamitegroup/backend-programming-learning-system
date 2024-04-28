@@ -89,6 +89,8 @@ kafka-consumer-config:
 
   core-service-question-consumer-group-id: core-service-question-topic-consumer
 
+  core-service-calendar-event-consumer-group-id: core-service-calendar-event-topic-consumer
+
   core-service-user-create-request-group-id: core-service-user-create-request-topic
   core-service-user-update-request-group-id: core-service-user-update-request-topic
   core-service-user-delete-request-group-id: core-service-user-delete-request-topic

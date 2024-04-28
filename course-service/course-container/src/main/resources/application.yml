@@ -17,15 +17,6 @@ course-service:
 
   question-response-topic-name: core-question-response
 
-  user-request-topic-name: user-request
-  user-create-request-topic-name: user-create-request
-  user-update-request-topic-name: user-update-request
-  user-delete-request-topic-name: user-delete-request
-  user-create-response-topic-name: user-create-response
-  user-update-response-topic-name: user-update-response
-  user-delete-response-topic-name: user-delete-response
-  user-response-topic-name: user-response
-
   outbox-scheduler-fixed-rate: 10000
   outbox-scheduler-initial-delay: 10000
 
@@ -69,16 +60,9 @@ kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
 
-  course-service-user-consumer-group-id: course-service-user-topic-consumer
-
-
   question-create-consumer-group-id: question-create-topic-consumer
   question-delete-consumer-group-id: question-delete-topic-consumer
   question-update-consumer-group-id: question-update-topic-consumer
-
-  course-service-user-create-request-group-id: course-service-user-create-request-topic
-  course-service-user-update-request-group-id: course-service-user-update-request-topic
-  course-service-user-delete-request-group-id: course-service-user-delete-request-topic
 
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
