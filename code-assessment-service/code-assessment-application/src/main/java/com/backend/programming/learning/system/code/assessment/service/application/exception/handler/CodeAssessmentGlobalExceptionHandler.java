@@ -3,7 +3,9 @@ package com.backend.programming.learning.system.code.assessment.service.applicat
 import com.backend.programming.learning.system.application.handler.ErrorDTO;
 import com.backend.programming.learning.system.application.handler.GlobalExceptionHandler;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_submission.CodeSubmissionJudgingServiceUnavailableException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.test_case.TestCaseNotFoundException;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
 import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -40,6 +42,16 @@ public class CodeAssessmentGlobalExceptionHandler extends GlobalExceptionHandler
         return ErrorDTO.builder()
                 .message(exception.getMessage())
                 .code(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .build();
+    }
+    @ResponseBody
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+    @ExceptionHandler(value = {CodeSubmissionJudgingServiceUnavailableException.class})
+    public ErrorDTO handleException(CodeSubmissionJudgingServiceUnavailableException exception){
+        log.error(exception.getMessage(), exception);
+        return ErrorDTO.builder()
+                .message(GradingStatus.GRADING_SYSTEM_UNAVAILABLE.name() + ": " + exception.getMessage())
+                .code(HttpStatus.SERVICE_UNAVAILABLE.getReasonPhrase())
                 .build();
     }
 }

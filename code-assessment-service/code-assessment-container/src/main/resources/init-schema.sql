@@ -35,7 +35,7 @@ DROP TYPE IF EXISTS qtype;
 CREATE TYPE qtype AS ENUM ('MULTIPLE_CHOICE', 'SHORT_ANSWER', 'CODE', 'ESSAY');
 
 DROP TYPE IF EXISTS grading_status;
-CREATE TYPE grading_status AS ENUM ('GRADING', 'ACCEPTED', 'WRONG_ANSWER', 'GRADING_SYSTEM_FAILED');
+CREATE TYPE grading_status AS ENUM ('GRADING', 'ACCEPTED', 'WRONG_ANSWER', 'GRADING_SYSTEM_UNAVAILABLE');
 
 
 
@@ -94,7 +94,7 @@ CREATE TABLE programming_language(
     compiler_api_id int not null ,
     time_limit float not null,
     memory_limit float not null,
-    is_active boolean default false,
+    is_actived boolean default false,
     copy_state CopyState not null ,
     CONSTRAINT pr_la_pk PRIMARY KEY (id)
 
@@ -144,7 +144,7 @@ CREATE TABLE code_submission(
     grade double precision,
     avg_runtime double precision,
     avg_memory double precision,
-    ai_accessment text,
+    ai_assessment text,
     sonaque_assessment text,
     source_code text not null ,
     number_of_test_case_sent int not null ,

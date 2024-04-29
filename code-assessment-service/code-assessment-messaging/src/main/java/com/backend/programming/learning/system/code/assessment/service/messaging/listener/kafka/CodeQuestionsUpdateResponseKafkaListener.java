@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.messaging.listener.kafka;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.message.codequestion.CodeQuestionsUpdateResponse;
-import com.backend.programming.learning.system.code.assessment.service.domain.exeption.codequestion.CodeQuestionNotFoundException;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_question.CodeQuestionNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.messaging.mapper.CodeQuestionMessagingDataMapper;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.message.listener.CodeQuestionUpdateResponseMessageListener;
@@ -9,7 +9,6 @@ import com.backend.programming.learning.system.kafka.code.assessment.code.questi
 import com.backend.programming.learning.system.kafka.consumer.KafkaConsumer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.OptimisticLockingFailureException;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;

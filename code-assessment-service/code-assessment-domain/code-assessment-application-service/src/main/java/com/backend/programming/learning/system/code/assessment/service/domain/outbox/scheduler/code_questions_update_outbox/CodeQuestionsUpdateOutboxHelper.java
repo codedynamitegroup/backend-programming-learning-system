@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.o
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.code_questions_update_outbox.CodeQuestionsUpdateOutboxMessage;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.code_questions_update_outbox.CodeQuestionsUpdatePayload;
-import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.CodeQuestionsUpdateOutboxRepository;
+import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_question.CodeQuestionsUpdateOutboxRepository;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;

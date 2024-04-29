@@ -1,10 +1,9 @@
-package com.backend.programming.learning.system.code.assessment.service.dataaccess.user.entity;
+package com.backend.programming.learning.system.code.assessment.service.dataaccess.language.entity;
+
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -14,16 +13,25 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="user")
-public class UserEntity {
+@Table(name="programming_language")
+public class ProgrammingLanguageEntity {
     @Id
-    private UUID id;
+    UUID id;
+
+    String name;
+    Integer compilerApiId;
+    Float timeLimit;
+    Float memoryLimit;
+    Boolean isActived;
+
+    @Enumerated(EnumType.STRING)
+    String copyState;
 
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
-        UserEntity that = (UserEntity) object;
+        ProgrammingLanguageEntity that = (ProgrammingLanguageEntity) object;
         return Objects.equals(id, that.id);
     }
 

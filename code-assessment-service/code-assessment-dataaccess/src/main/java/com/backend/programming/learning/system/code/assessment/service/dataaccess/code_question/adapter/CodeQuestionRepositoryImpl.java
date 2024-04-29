@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.code.assessment.service.dataacces
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.mapper.CodeQuestionDataAccessMapper;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.repository.CodeQuestionJpaRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
-import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.CodeQuestionRepository;
+import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_question.CodeQuestionRepository;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

@@ -1,8 +1,8 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.implement.service.codequestion;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
-import com.backend.programming.learning.system.code.assessment.service.domain.exeption.codequestion.CodeQuestionNotFoundException;
-import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.CodeQuestionRepository;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_question.CodeQuestionNotFoundException;
+import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_question.CodeQuestionRepository;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.saga.SagaStatus;

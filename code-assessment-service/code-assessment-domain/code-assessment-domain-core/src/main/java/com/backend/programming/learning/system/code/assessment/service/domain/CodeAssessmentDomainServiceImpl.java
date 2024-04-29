@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.domain;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.TestCase;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionsUpdatedEvent;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
@@ -31,6 +32,11 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
     @Override
     public void cancelCopyCodeQuestions(CodeQuestion codeQuestion, CopyState state, List<String> failureMessages) {
         codeQuestion.initCancelCopy(state, failureMessages);
+    }
+
+    @Override
+    public void initiateCodeSubmission(CodeSubmission codeSubmission) {
+
     }
 
 }

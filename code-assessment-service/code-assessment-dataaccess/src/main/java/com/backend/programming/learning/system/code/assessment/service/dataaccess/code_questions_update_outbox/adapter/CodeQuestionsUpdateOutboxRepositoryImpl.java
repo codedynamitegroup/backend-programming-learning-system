@@ -5,7 +5,7 @@ import com.backend.programming.learning.system.code.assessment.service.dataacces
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_questions_update_outbox.mapper.CodeQuestionsUpdateOutboxMapper;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_questions_update_outbox.repository.CodeQuestionsUpdateOutboxJpaRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.code_questions_update_outbox.CodeQuestionsUpdateOutboxMessage;
-import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.CodeQuestionsUpdateOutboxRepository;
+import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_question.CodeQuestionsUpdateOutboxRepository;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
 import org.springframework.stereotype.Component;

@@ -2,16 +2,18 @@ package com.backend.programming.learning.system.code.assessment.service.domain.e
 
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.LanguageId;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 
 public class Langauge extends AggregateRoot<LanguageId> {
     private String name;
     private Integer judge0_compilerApiId;
-    private Double timeLimit;
-    private Double memoryLimit;
+    private Float timeLimit;
+    private Float memoryLimit;
     private String headCode;
     private String bodyCode;
     private String tailCode;
     private Boolean isActive;
+    private CopyState copyState;
 
     private Langauge(Builder builder) {
         name = builder.name;
@@ -22,6 +24,7 @@ public class Langauge extends AggregateRoot<LanguageId> {
         bodyCode = builder.bodyCode;
         tailCode = builder.tailCode;
         isActive = builder.isActive;
+        copyState = builder.copyState;
         super.setId(builder.id);
     }
 
@@ -33,15 +36,18 @@ public class Langauge extends AggregateRoot<LanguageId> {
         return name;
     }
 
+    public CopyState getCopyState() {
+        return copyState;
+    }
     public Integer getJudge0_compilerApiId() {
         return judge0_compilerApiId;
     }
 
-    public Double getTimeLimit() {
+    public Float getTimeLimit() {
         return timeLimit;
     }
 
-    public Double getMemoryLimit() {
+    public Float getMemoryLimit() {
         return memoryLimit;
     }
 
@@ -64,15 +70,32 @@ public class Langauge extends AggregateRoot<LanguageId> {
     public static final class Builder {
         private String name;
         private Integer judge0_compilerApiId;
-        private Double timeLimit;
-        private Double memoryLimit;
+        private Float timeLimit;
+        private Float memoryLimit;
         private String headCode;
         private String bodyCode;
         private String tailCode;
         private Boolean isActive;
+        private CopyState copyState;
         private LanguageId id;
 
         private Builder() {
+        }
+
+        private Builder(Builder builder) {
+            name = builder.name;
+            judge0_compilerApiId = builder.judge0_compilerApiId;
+            timeLimit = builder.timeLimit;
+            memoryLimit = builder.memoryLimit;
+            headCode = builder.headCode;
+            bodyCode = builder.bodyCode;
+            tailCode = builder.tailCode;
+            isActive = builder.isActive;
+            id = builder.id;
+        }
+
+        public static Builder builder() {
+            return new Builder();
         }
 
         public Builder name(String val) {
@@ -85,12 +108,12 @@ public class Langauge extends AggregateRoot<LanguageId> {
             return this;
         }
 
-        public Builder timeLimit(Double val) {
+        public Builder timeLimit(Float val) {
             timeLimit = val;
             return this;
         }
 
-        public Builder memoryLimit(Double val) {
+        public Builder memoryLimit(Float val) {
             memoryLimit = val;
             return this;
         }
@@ -115,6 +138,11 @@ public class Langauge extends AggregateRoot<LanguageId> {
             return this;
         }
 
+        public Builder copyState(CopyState val) {
+            copyState = val;
+            return this;
+        }
+
         public Builder id(LanguageId val) {
             id = val;
             return this;
@@ -123,5 +151,6 @@ public class Langauge extends AggregateRoot<LanguageId> {
         public Langauge build() {
             return new Langauge(this);
         }
+
     }
 }

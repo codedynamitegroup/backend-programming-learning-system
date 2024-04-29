@@ -1,13 +1,13 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.Langauge;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.LanguageId;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 
 import java.util.Optional;
-import java.util.UUID;
 
-public interface CodeQuestionRepository {
-    CodeQuestion save(CodeQuestion codeQuestion);
-    Optional<CodeQuestion> findById(CodeQuestionId codeQuestionId);
-    void deleteCodeQuestionById(UUID id);
+public interface ProgrammingLanguageRepository {
+    Optional<Langauge> findById(LanguageId languageId);
+
 }

@@ -2,8 +2,8 @@ package com.backend.programming.learning.system.code.assessment.service.domain;
 
 
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.message.publisher.codequestion.CodeQuestionsUpdateMessagePublisher;
-import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.CodeQuestionRepository;
-import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.CodeQuestionsUpdateOutboxRepository;
+import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_question.CodeQuestionRepository;
+import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_question.CodeQuestionsUpdateOutboxRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.QuestionRepository;
 import org.mockito.Mockito;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

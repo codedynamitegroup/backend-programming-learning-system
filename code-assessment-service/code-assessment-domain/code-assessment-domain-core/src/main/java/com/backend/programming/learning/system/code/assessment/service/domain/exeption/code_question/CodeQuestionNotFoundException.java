@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.code.assessment.service.domain.exeption.codequestion;
+package com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_question;
 
 import com.backend.programming.learning.system.domain.exception.DomainException;
 
