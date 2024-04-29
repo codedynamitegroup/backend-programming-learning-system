@@ -8,9 +8,7 @@ import com.backend.programming.learning.system.core.service.dataaccess.user.mapp
 import com.backend.programming.learning.system.core.service.domain.entity.Contest;
 import com.backend.programming.learning.system.core.service.domain.entity.ContestUser;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
-import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestUserId;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
