@@ -29,6 +29,10 @@ course-service:
   calendar-event-update-request-topic-name: calendar-event-update-request
   calendar-event-update-response-topic-name: calendar-event-update-response
 
+  organization-create-request-topic-name: organization-create-request
+  organization-update-request-topic-name: organization-update-request
+  organization-delete-request-topic-name: organization-delete-request
+
   outbox-scheduler-fixed-rate: 10000
   outbox-scheduler-initial-delay: 10000
 
@@ -77,6 +81,10 @@ kafka-consumer-config:
   question-update-consumer-group-id: question-update-topic-consumer
 
   course-service-calendar-event-consumer-group-id: course-service-calendar-event-consumer
+
+  course-service-organization-create-request-group-id: course-service-organization-create-request-consumer
+  course-service-organization-update-request-group-id: course-service-organization-update-request-consumer
+  course-service-organization-delete-request-group-id: course-service-organization-delete-request-consumer
 
   course-service-user-create-request-group-id: course-service-user-create-request-consumer
   course-service-user-update-request-group-id: course-service-user-update-request-consumer

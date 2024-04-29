@@ -38,6 +38,8 @@ public class OrganizationMessagingDataMapper {
                 .setName(organization.getName())
                 .setPhone(organization.getPhone())
                 .setAddress(organization.getPhone())
+                .setApiKey(organization.getApiKey())
+                .setMoodleUrl(organization.getMoodleUrl())
                 .setCreatedAt(organization.getCreatedAt().toInstant())
                 .setCreatedBy(organization.getCreatedBy().getId().toString())
                 .setUpdatedAt(organization.getUpdatedAt().toInstant())

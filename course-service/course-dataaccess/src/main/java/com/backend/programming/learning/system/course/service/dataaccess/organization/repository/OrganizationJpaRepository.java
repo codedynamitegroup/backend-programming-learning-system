@@ -13,4 +13,6 @@ public interface OrganizationJpaRepository extends JpaRepository<OrganizationEnt
     Optional<OrganizationEntity> findById(UUID organizationId);
 
     List<OrganizationEntity> findAll();
+
+    Optional<OrganizationEntity> findOrganizationByName(String name);
 }

@@ -5,12 +5,10 @@
  */
 package com.backend.programming.learning.system.kafka.auth.avro.model.organization;
 
-import org.apache.avro.generic.GenericArray;
-import org.apache.avro.specific.SpecificData;
-import org.apache.avro.util.Utf8;
-import org.apache.avro.message.BinaryMessageEncoder;
 import org.apache.avro.message.BinaryMessageDecoder;
+import org.apache.avro.message.BinaryMessageEncoder;
 import org.apache.avro.message.SchemaStore;
+import org.apache.avro.specific.SpecificData;
 
 @org.apache.avro.specific.AvroGenerated
 public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
@@ -73,9 +71,9 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
     return DECODER.decode(b);
   }
 
-  private java.lang.String id;
-  private java.lang.String sagaId;
-  private java.lang.String organizationId;
+  private String id;
+  private String sagaId;
+  private String organizationId;
   private boolean isDeleted;
 
   /**
@@ -92,7 +90,7 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
    * @param organizationId The new value for organizationId
    * @param isDeleted The new value for isDeleted
    */
-  public OrganizationDeleteRequestAvroModel(java.lang.String id, java.lang.String sagaId, java.lang.String organizationId, java.lang.Boolean isDeleted) {
+  public OrganizationDeleteRequestAvroModel(String id, String sagaId, String organizationId, Boolean isDeleted) {
     this.id = id;
     this.sagaId = sagaId;
     this.organizationId = organizationId;
@@ -100,14 +98,14 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
   }
 
   @Override
-  public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
+  public SpecificData getSpecificData() { return MODEL$; }
 
   @Override
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
 
   // Used by DatumWriter.  Applications should not call.
   @Override
-  public java.lang.Object get(int field$) {
+  public Object get(int field$) {
     switch (field$) {
     case 0: return id;
     case 1: return sagaId;
@@ -120,12 +118,12 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
   // Used by DatumReader.  Applications should not call.
   @Override
   @SuppressWarnings(value="unchecked")
-  public void put(int field$, java.lang.Object value$) {
+  public void put(int field$, Object value$) {
     switch (field$) {
     case 0: id = value$ != null ? value$.toString() : null; break;
     case 1: sagaId = value$ != null ? value$.toString() : null; break;
     case 2: organizationId = value$ != null ? value$.toString() : null; break;
-    case 3: isDeleted = (java.lang.Boolean)value$; break;
+    case 3: isDeleted = (Boolean)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -134,7 +132,7 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
    * Gets the value of the 'id' field.
    * @return The value of the 'id' field.
    */
-  public java.lang.String getId() {
+  public String getId() {
     return id;
   }
 
@@ -143,7 +141,7 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
    * Sets the value of the 'id' field.
    * @param value the value to set.
    */
-  public void setId(java.lang.String value) {
+  public void setId(String value) {
     this.id = value;
   }
 
@@ -151,7 +149,7 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
    * Gets the value of the 'sagaId' field.
    * @return The value of the 'sagaId' field.
    */
-  public java.lang.String getSagaId() {
+  public String getSagaId() {
     return sagaId;
   }
 
@@ -160,7 +158,7 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
    * Sets the value of the 'sagaId' field.
    * @param value the value to set.
    */
-  public void setSagaId(java.lang.String value) {
+  public void setSagaId(String value) {
     this.sagaId = value;
   }
 
@@ -168,7 +166,7 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
    * Gets the value of the 'organizationId' field.
    * @return The value of the 'organizationId' field.
    */
-  public java.lang.String getOrganizationId() {
+  public String getOrganizationId() {
     return organizationId;
   }
 
@@ -177,7 +175,7 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
    * Sets the value of the 'organizationId' field.
    * @param value the value to set.
    */
-  public void setOrganizationId(java.lang.String value) {
+  public void setOrganizationId(String value) {
     this.organizationId = value;
   }
 
@@ -202,8 +200,8 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
    * Creates a new OrganizationDeleteRequestAvroModel RecordBuilder.
    * @return A new OrganizationDeleteRequestAvroModel RecordBuilder
    */
-  public static com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationDeleteRequestAvroModel.Builder newBuilder() {
-    return new com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationDeleteRequestAvroModel.Builder();
+  public static Builder newBuilder() {
+    return new Builder();
   }
 
   /**
@@ -211,11 +209,11 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
    * @param other The existing builder to copy.
    * @return A new OrganizationDeleteRequestAvroModel RecordBuilder
    */
-  public static com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationDeleteRequestAvroModel.Builder newBuilder(com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationDeleteRequestAvroModel.Builder other) {
+  public static Builder newBuilder(Builder other) {
     if (other == null) {
-      return new com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationDeleteRequestAvroModel.Builder();
+      return new Builder();
     } else {
-      return new com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationDeleteRequestAvroModel.Builder(other);
+      return new Builder(other);
     }
   }
 
@@ -224,11 +222,11 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
    * @param other The existing instance to copy.
    * @return A new OrganizationDeleteRequestAvroModel RecordBuilder
    */
-  public static com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationDeleteRequestAvroModel.Builder newBuilder(com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationDeleteRequestAvroModel other) {
+  public static Builder newBuilder(OrganizationDeleteRequestAvroModel other) {
     if (other == null) {
-      return new com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationDeleteRequestAvroModel.Builder();
+      return new Builder();
     } else {
-      return new com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationDeleteRequestAvroModel.Builder(other);
+      return new Builder(other);
     }
   }
 
@@ -239,9 +237,9 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<OrganizationDeleteRequestAvroModel>
     implements org.apache.avro.data.RecordBuilder<OrganizationDeleteRequestAvroModel> {
 
-    private java.lang.String id;
-    private java.lang.String sagaId;
-    private java.lang.String organizationId;
+    private String id;
+    private String sagaId;
+    private String organizationId;
     private boolean isDeleted;
 
     /** Creates a new Builder */
@@ -253,7 +251,7 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationDeleteRequestAvroModel.Builder other) {
+    private Builder(Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -277,7 +275,7 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
      * Creates a Builder by copying an existing OrganizationDeleteRequestAvroModel instance
      * @param other The existing instance to copy.
      */
-    private Builder(com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationDeleteRequestAvroModel other) {
+    private Builder(OrganizationDeleteRequestAvroModel other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -301,7 +299,7 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
       * Gets the value of the 'id' field.
       * @return The value.
       */
-    public java.lang.String getId() {
+    public String getId() {
       return id;
     }
 
@@ -311,7 +309,7 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationDeleteRequestAvroModel.Builder setId(java.lang.String value) {
+    public Builder setId(String value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -331,7 +329,7 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationDeleteRequestAvroModel.Builder clearId() {
+    public Builder clearId() {
       id = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -341,7 +339,7 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
       * Gets the value of the 'sagaId' field.
       * @return The value.
       */
-    public java.lang.String getSagaId() {
+    public String getSagaId() {
       return sagaId;
     }
 
@@ -351,7 +349,7 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
       * @param value The value of 'sagaId'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationDeleteRequestAvroModel.Builder setSagaId(java.lang.String value) {
+    public Builder setSagaId(String value) {
       validate(fields()[1], value);
       this.sagaId = value;
       fieldSetFlags()[1] = true;
@@ -371,7 +369,7 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
       * Clears the value of the 'sagaId' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationDeleteRequestAvroModel.Builder clearSagaId() {
+    public Builder clearSagaId() {
       sagaId = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -381,7 +379,7 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
       * Gets the value of the 'organizationId' field.
       * @return The value.
       */
-    public java.lang.String getOrganizationId() {
+    public String getOrganizationId() {
       return organizationId;
     }
 
@@ -391,7 +389,7 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
       * @param value The value of 'organizationId'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationDeleteRequestAvroModel.Builder setOrganizationId(java.lang.String value) {
+    public Builder setOrganizationId(String value) {
       validate(fields()[2], value);
       this.organizationId = value;
       fieldSetFlags()[2] = true;
@@ -411,7 +409,7 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
       * Clears the value of the 'organizationId' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationDeleteRequestAvroModel.Builder clearOrganizationId() {
+    public Builder clearOrganizationId() {
       organizationId = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -431,7 +429,7 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
       * @param value The value of 'isDeleted'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationDeleteRequestAvroModel.Builder setIsDeleted(boolean value) {
+    public Builder setIsDeleted(boolean value) {
       validate(fields()[3], value);
       this.isDeleted = value;
       fieldSetFlags()[3] = true;
@@ -451,7 +449,7 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
       * Clears the value of the 'isDeleted' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationDeleteRequestAvroModel.Builder clearIsDeleted() {
+    public Builder clearIsDeleted() {
       fieldSetFlags()[3] = false;
       return this;
     }
@@ -461,14 +459,14 @@ public class OrganizationDeleteRequestAvroModel extends org.apache.avro.specific
     public OrganizationDeleteRequestAvroModel build() {
       try {
         OrganizationDeleteRequestAvroModel record = new OrganizationDeleteRequestAvroModel();
-        record.id = fieldSetFlags()[0] ? this.id : (java.lang.String) defaultValue(fields()[0]);
-        record.sagaId = fieldSetFlags()[1] ? this.sagaId : (java.lang.String) defaultValue(fields()[1]);
-        record.organizationId = fieldSetFlags()[2] ? this.organizationId : (java.lang.String) defaultValue(fields()[2]);
-        record.isDeleted = fieldSetFlags()[3] ? this.isDeleted : (java.lang.Boolean) defaultValue(fields()[3]);
+        record.id = fieldSetFlags()[0] ? this.id : (String) defaultValue(fields()[0]);
+        record.sagaId = fieldSetFlags()[1] ? this.sagaId : (String) defaultValue(fields()[1]);
+        record.organizationId = fieldSetFlags()[2] ? this.organizationId : (String) defaultValue(fields()[2]);
+        record.isDeleted = fieldSetFlags()[3] ? this.isDeleted : (Boolean) defaultValue(fields()[3]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
-      } catch (java.lang.Exception e) {
+      } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);
       }
     }

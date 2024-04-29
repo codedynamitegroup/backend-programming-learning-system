@@ -1,8 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain;
 
 import com.backend.programming.learning.system.course.service.domain.entity.*;
-import com.backend.programming.learning.system.course.service.domain.event.calendarevent.CalendarEventEvent;
-import com.backend.programming.learning.system.course.service.domain.event.calendarevent.CalendarEventUpdatedEvent;
+import com.backend.programming.learning.system.course.service.domain.event.organization.*;
 import com.backend.programming.learning.system.course.service.domain.event.question.event.*;
 import com.backend.programming.learning.system.course.service.domain.event.user.*;
 import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
@@ -67,8 +66,24 @@ public interface CourseDomainService {
     UserDeletedFailEvent deletedUserFail(User user,
                                          DomainEventPublisher<UserDeletedFailEvent> userDeletedFailEventDomainEventPublisher,
                                          List<String> failureMessages);
+    OrganizationCreatedSuccessEvent createOrganizationSuccess(Organization organization,
+                                                              DomainEventPublisher<OrganizationCreatedSuccessEvent> organizationCreatedSuccessEventDomainEventPublisher);
 
+    OrganizationCreatedFailEvent createOrganizationFail(Organization organization,
+                                                        DomainEventPublisher<OrganizationCreatedFailEvent> organizationCreatedFailEventDomainEventPublisher,
+                                                        List<String> failureMessages);
 
+    OrganizationUpdatedSuccessEvent updateOrganizationSuccess(Organization organization,
+                                                              DomainEventPublisher<OrganizationUpdatedSuccessEvent> organizationUpdatedSuccessEventDomainEventPublisher);
 
+    OrganizationUpdatedFailEvent updateOrganizationFail(Organization organization,
+                                                        DomainEventPublisher<OrganizationUpdatedFailEvent> organizationUpdatedFailEventDomainEventPublisher,
+                                                        List<String> failureMessages);
 
+    OrganizationDeletedSuccessEvent deleteOrganizationSuccess(Organization organization,
+                                                              DomainEventPublisher<OrganizationDeletedSuccessEvent> organizationDeletedSuccessEventDomainEventPublisher);
+
+    OrganizationDeletedFailEvent deleteOrganizationFail(Organization organization,
+                                                        DomainEventPublisher<OrganizationDeletedFailEvent> organizationDeletedFailEventDomainEventPublisher,
+                                                        List<String> failureMessages);
 }

@@ -26,6 +26,7 @@ public class OrganizationEntity {
 
     private String description;
 
+    @Column(name = "api_key")
     private String apiKey;
 
     private String moodleUrl;

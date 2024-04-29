@@ -14,6 +14,8 @@ public class Organization extends AggregateRoot<OrganizationId> {
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
+    private Boolean isDeleted;
+
     private Organization(Builder builder) {
         super.setId(builder.organizationId);
         name = builder.name;
@@ -22,6 +24,7 @@ public class Organization extends AggregateRoot<OrganizationId> {
         apiKey = builder.apiKey;
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
+        isDeleted =builder.isDeleted;
     }
 
 
@@ -31,6 +34,10 @@ public class Organization extends AggregateRoot<OrganizationId> {
 
     public String getName() {
         return name;
+    }
+
+    public Boolean getDeleted() {
+        return isDeleted;
     }
 
     public String getApiKey() {
@@ -55,6 +62,10 @@ public class Organization extends AggregateRoot<OrganizationId> {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
     }
 
     public void setName(String name) {
@@ -89,6 +100,8 @@ public class Organization extends AggregateRoot<OrganizationId> {
         private String apiKey;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
+
+        private Boolean isDeleted;
 
         private Builder() {
         }
@@ -128,6 +141,10 @@ public class Organization extends AggregateRoot<OrganizationId> {
             return this;
         }
 
+        public Builder isDeleted(Boolean val) {
+            isDeleted = val;
+            return this;
+        }
         public Organization build() {
             return new Organization(this);
         }
