@@ -45,6 +45,8 @@ public class ContestUserCalendarEventUpdatedResponseKafkaListener implements Kaf
 
         messages.forEach(calendarEventUpdateResponseAvroModel -> {
             try {
+                log.info("Processing calendar event update response for calendar event id: {}",
+                        calendarEventUpdateResponseAvroModel.getCalendarEventId());
                 ContestUserCalendarEventUpdatedResponse contestUserCalendarEventUpdatedResponse =
                         contestUserEventMessagingDataMapper
                                 .calendarEventUpdateResponseAvroModelToCalendarEventUpdateResponse

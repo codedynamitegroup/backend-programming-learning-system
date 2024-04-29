@@ -43,9 +43,12 @@ public class CalendarEventUpdatedEventKafkaPublisher implements CalendarEventUpd
 
         String sagaId = calendarEventUpdateOutboxMessage.getSagaId().toString();
 
-        log.info("Received CalendarEventUpdateOutboxMessage for calendar event id: {} and saga id: {}",
-                calendarEventUpdateEventPayload.getCalendarEventId(),
+        log.info("Received CalendarEventUpdateOutboxMessage for contest id: {}, user id: {} and saga id: {}",
+                calendarEventUpdateEventPayload.getContestId(),
+                calendarEventUpdateEventPayload.getUserId(),
                 sagaId);
+
+        String key = calendarEventUpdateEventPayload.getContestId() + "_" + calendarEventUpdateEventPayload.getUserId();
 
         try {
             CalendarEventUpdateResponseAvroModel calendarEventUpdateResponseAvroModel =
@@ -61,16 +64,20 @@ public class CalendarEventUpdatedEventKafkaPublisher implements CalendarEventUpd
                             calendarEventUpdateResponseAvroModel,
                             calendarEventUpdateOutboxMessage,
                             outboxCallback,
-                            calendarEventUpdateEventPayload.getCalendarEventId(),
+                            key,
                             "CalendarEventUpdateResponseAvroModel"));
 
-            log.info("CalendarEventUpdateEventPayload sent to Kafka for calendar event id: {} and saga id: {}",
-                    calendarEventUpdateEventPayload.getCalendarEventId(), sagaId);
+            log.info("CalendarEventUpdateEventPayload sent to Kafka for contest id: {} and user id: {} with saga id: {}",
+                    calendarEventUpdateEventPayload.getContestId(),
+                    calendarEventUpdateEventPayload.getUserId(),
+                    sagaId);
         } catch (Exception e) {
             log.error("Error while sending CalendarEventUpdateEventPayload" +
-                            " to kafka with calendar event id: {} and saga id: {}, error: {}",
-                    calendarEventUpdateEventPayload.getCalendarEventId(),
-                    sagaId, e.getMessage());
+                            " to Kafka for contest id: {} and user id: {} with saga id: {}",
+                    calendarEventUpdateEventPayload.getContestId(),
+                    calendarEventUpdateEventPayload.getUserId(),
+                    sagaId,
+                    e);
         }
     }
 }

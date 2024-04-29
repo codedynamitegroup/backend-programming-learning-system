@@ -20,17 +20,12 @@ public class CalendarEventUpdateOutboxMessage {
     private ZonedDateTime processedAt;
     private String type;
     private String payload;
-    private SagaStatus sagaStatus;
     private UpdateState updateCalendarEventState;
     private OutboxStatus outboxStatus;
     private int version;
 
     public void setProcessedAt(ZonedDateTime processedAt) {
         this.processedAt = processedAt;
-    }
-
-    public void setSagaStatus(SagaStatus sagaStatus) {
-        this.sagaStatus = sagaStatus;
     }
 
     public void setUpdateCalendarEventState(UpdateState updateCalendarEventState) {

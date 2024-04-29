@@ -28,8 +28,8 @@ public class CalendarEventUpdateOutboxEntity {
     private String payload;
     @Enumerated(EnumType.STRING)
     private OutboxStatus outboxStatus;
-    @Enumerated(EnumType.STRING)
-    private SagaStatus sagaStatus;
+//    @Enumerated(EnumType.STRING)
+//    private SagaStatus sagaStatus;
     @Enumerated(EnumType.STRING)
     private UpdateState updateCalendarEventState;
     @Version

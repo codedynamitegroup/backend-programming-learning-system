@@ -9,6 +9,7 @@ import com.backend.programming.learning.system.core.service.domain.event.contest
 import com.backend.programming.learning.system.core.service.domain.mapper.contest_user.ContestUserDataMapper;
 import com.backend.programming.learning.system.core.service.domain.outbox.scheduler.contest_user.ContestUserUpdateOutboxHelper;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -24,17 +25,20 @@ public class ContestUserCommandHandler {
     private final ContestUserDataMapper contestUserDataMapper;
     private final ContestUserUpdateOutboxHelper contestUserUpdateOutboxHelper;
     private final ContestUserSagaHelper contestUserSagaHelper;
+    private final ObjectMapper objectMapper;
 
     public ContestUserCommandHandler(ContestUserCreateHelper contestUserCreateHelper,
                                      ContestUserQueryHelper contestUserQueryHelper,
                                      ContestUserDataMapper contestUserDataMapper,
                                      ContestUserUpdateOutboxHelper contestUserUpdateOutboxHelper,
-                                     ContestUserSagaHelper contestUserSagaHelper) {
+                                     ContestUserSagaHelper contestUserSagaHelper,
+                                     ObjectMapper objectMapper) {
         this.contestUserCreateHelper = contestUserCreateHelper;
         this.contestUserQueryHelper = contestUserQueryHelper;
         this.contestUserDataMapper = contestUserDataMapper;
         this.contestUserUpdateOutboxHelper = contestUserUpdateOutboxHelper;
         this.contestUserSagaHelper = contestUserSagaHelper;
+        this.objectMapper = objectMapper;
     }
 
     @Transactional

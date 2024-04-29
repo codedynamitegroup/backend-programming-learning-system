@@ -48,9 +48,10 @@ public class ContestUserCalendarEventUpdateRequestKafkaPublisher implements Cont
                 sagaId);
 
         try {
-            CalendarEventUpdateRequestAvroModel calendarEventUpdateRequestAvroModel = contestUserEventMessagingDataMapper
-                    .contestUserUpdatedEventPayloadToCalendarEventUpdateRequestAvroModel(
-                            sagaId, contestUserUpdateEventPayload);
+            CalendarEventUpdateRequestAvroModel calendarEventUpdateRequestAvroModel =
+                    contestUserEventMessagingDataMapper
+                            .contestUserUpdatedEventPayloadToCalendarEventUpdateRequestAvroModel(
+                                    sagaId, contestUserUpdateEventPayload);
 
             kafkaProducer.send(coreServiceConfigData.getCalendarEventUpdateRequestTopicName(),
                     sagaId,

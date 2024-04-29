@@ -12,6 +12,7 @@ public class ContestUserUpdateOutboxDataAccessMapper {
                 .id(contestUserUpdateOutboxMessage.getId())
                 .sagaId(contestUserUpdateOutboxMessage.getSagaId())
                 .createdAt(contestUserUpdateOutboxMessage.getCreatedAt())
+                .processedAt(contestUserUpdateOutboxMessage.getProcessedAt())
                 .type(contestUserUpdateOutboxMessage.getType())
                 .payload(contestUserUpdateOutboxMessage.getPayload())
                 .updateCalendarEventState(contestUserUpdateOutboxMessage.getUpdateCalendarEventState())

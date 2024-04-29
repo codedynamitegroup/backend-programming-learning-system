@@ -105,30 +105,15 @@ public class CalendarEventDataMapper {
                 .build();
     }
 
-    public CalendarEventUpdateEventPayload calendarEventUpdatedEventToCalendarEventUpdateEventPayload(
-            CalendarEventUpdatedEvent calendarEventUpdatedEvent) {
-        return CalendarEventUpdateEventPayload.builder()
-                .calendarEventId(calendarEventUpdatedEvent.getCalendarEvent().getId().getValue().toString())
-                .name(calendarEventUpdatedEvent.getCalendarEvent().getName())
-                .description(calendarEventUpdatedEvent.getCalendarEvent().getDescription())
-                .eventType(calendarEventUpdatedEvent.getCalendarEvent().getEventType().name())
-                .startTime(calendarEventUpdatedEvent.getCalendarEvent().getStartTime())
-                .endTime(calendarEventUpdatedEvent.getCalendarEvent().getEndTime())
-                .userId(calendarEventUpdatedEvent.getCalendarEvent().getUser().getId().getValue().toString())
-                .contestId(calendarEventUpdatedEvent.getCalendarEvent().getContestId().toString())
-                .component(calendarEventUpdatedEvent.getCalendarEvent().getComponent().name())
-                .updateCalendarEventState(calendarEventUpdatedEvent.getUpdateCalendarEventState().name())
-                .createdAt(calendarEventUpdatedEvent.getCalendarEvent().getCreatedAt())
-                .failureMessages(calendarEventUpdatedEvent.getFailureMessages())
-                .build();
-    }
-
     public CalendarEventUpdateEventPayload calendarEventUpdateRequestToCalendarEventUpdateEventPayload(
+            String calendarEventId,
             CalendarEventUpdateRequest calendarEventUpdateRequest,
+            String updateCalendarEventState,
             List<String> failureMessages) {
         CalendarEvent calendarEvent = calendarEventUpdateRequestModelToCalendarEvent(calendarEventUpdateRequest);
+
         return CalendarEventUpdateEventPayload.builder()
-                .calendarEventId(calendarEvent.getId().getValue().toString())
+                .calendarEventId(calendarEventId)
                 .name(calendarEvent.getName())
                 .description(calendarEvent.getDescription())
                 .eventType(calendarEvent.getEventType().name())
@@ -137,7 +122,7 @@ public class CalendarEventDataMapper {
                 .userId(calendarEvent.getUser().getId().getValue().toString())
                 .contestId(calendarEvent.getContestId().toString())
                 .component(calendarEvent.getComponent().name())
-                .updateCalendarEventState(String.valueOf(calendarEventUpdateRequest.getUpdateCalendarEventState()))
+                .updateCalendarEventState(updateCalendarEventState)
                 .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .failureMessages(failureMessages)
                 .build();

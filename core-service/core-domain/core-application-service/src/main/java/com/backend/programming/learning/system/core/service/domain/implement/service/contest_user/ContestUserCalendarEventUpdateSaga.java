@@ -33,21 +33,21 @@ public class ContestUserCalendarEventUpdateSaga implements SagaStepApplyOutboxPa
     @Override
     @Transactional
     public void process(ContestUserCalendarEventUpdatedResponse contestUserCalendarEventUpdatedResponse) {
-        Optional<ContestUserUpdateOutboxMessage> orderPaymentOutboxMessageResponse =
+        Optional<ContestUserUpdateOutboxMessage> contestUserUpdateOutboxResponse =
                 contestUserUpdateOutboxHelper.getContestUserUpdateOutboxMessageBySagaIdAndSagaStatus(
                         UUID.fromString(contestUserCalendarEventUpdatedResponse.getSagaId()),
                         SagaStatus.STARTED);
 
-        if (orderPaymentOutboxMessageResponse.isEmpty()) {
+        if (contestUserUpdateOutboxResponse.isEmpty()) {
             log.info("An outbox message with saga id: {} is already processed!",
                     contestUserCalendarEventUpdatedResponse.getSagaId());
             return;
         }
 
-        ContestUserUpdateOutboxMessage contestUserUpdateOutboxMessage = orderPaymentOutboxMessageResponse.get();
+        ContestUserUpdateOutboxMessage contestUserUpdateOutboxMessage = contestUserUpdateOutboxResponse.get();
 
         // Update contest user calendar event state
-        switch (contestUserUpdateOutboxMessage.getUpdateCalendarEventState()){
+        switch (contestUserCalendarEventUpdatedResponse.getUpdateCalendarEventState()){
             case CREATED ->
             {
                 // Update contest user

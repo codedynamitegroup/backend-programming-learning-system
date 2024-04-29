@@ -12,10 +12,10 @@ public class CalendarEventUpdateOutboxDataAccessMapper {
                 .id(calendarEventUpdateOutboxMessage.getId())
                 .sagaId(calendarEventUpdateOutboxMessage.getSagaId())
                 .createdAt(calendarEventUpdateOutboxMessage.getCreatedAt())
+                .processedAt(calendarEventUpdateOutboxMessage.getProcessedAt())
                 .type(calendarEventUpdateOutboxMessage.getType())
                 .payload(calendarEventUpdateOutboxMessage.getPayload())
                 .updateCalendarEventState(calendarEventUpdateOutboxMessage.getUpdateCalendarEventState())
-                .sagaStatus(calendarEventUpdateOutboxMessage.getSagaStatus())
                 .outboxStatus(calendarEventUpdateOutboxMessage.getOutboxStatus())
                 .version(calendarEventUpdateOutboxMessage.getVersion())
                 .build();
@@ -31,7 +31,6 @@ public class CalendarEventUpdateOutboxDataAccessMapper {
                 .type(calendarEventUpdateOutboxEntity.getType())
                 .payload(calendarEventUpdateOutboxEntity.getPayload())
                 .updateCalendarEventState(calendarEventUpdateOutboxEntity.getUpdateCalendarEventState())
-                .sagaStatus(calendarEventUpdateOutboxEntity.getSagaStatus())
                 .outboxStatus(calendarEventUpdateOutboxEntity.getOutboxStatus())
                 .version(calendarEventUpdateOutboxEntity.getVersion())
                 .build();

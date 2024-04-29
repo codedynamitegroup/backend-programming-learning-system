@@ -61,12 +61,15 @@ public class CalendarEventRequestHelper {
 
         CalendarEventUpdateEventPayload calendarEventUpdateEventPayload =
                 calendarEventDataMapper.
-                        calendarEventUpdateRequestToCalendarEventUpdateEventPayload(calendarEventUpdateRequest,
+                        calendarEventUpdateRequestToCalendarEventUpdateEventPayload(
+                                calendarEvent.getId().getValue().toString(),
+                                calendarEventUpdateRequest,
+                                UpdateState.CREATED.name(),
                                 new ArrayList<>());
 
         calendarEventUpdateOutboxHelper.saveCalendarEventUpdateOutboxRepositoryOutboxMessage(
                 calendarEventUpdateEventPayload,
-                UpdateState.CREATED,
+                UpdateState.valueOf(calendarEventUpdateEventPayload.getUpdateCalendarEventState()),
                 OutboxStatus.STARTED,
                 UUID.fromString(calendarEventUpdateRequest.getSagaId()));
     }
@@ -94,12 +97,14 @@ public class CalendarEventRequestHelper {
         CalendarEventUpdateEventPayload calendarEventUpdateEventPayload =
                 calendarEventDataMapper.
                         calendarEventUpdateRequestToCalendarEventUpdateEventPayload(
+                                calendarEvent.getId().getValue().toString(),
                                 calendarEventUpdateRequest,
+                                UpdateState.UPDATED.name(),
                                 new ArrayList<>());
 
         calendarEventUpdateOutboxHelper.saveCalendarEventUpdateOutboxRepositoryOutboxMessage(
                 calendarEventUpdateEventPayload,
-                UpdateState.UPDATED,
+                UpdateState.valueOf(calendarEventUpdateEventPayload.getUpdateCalendarEventState()),
                 OutboxStatus.STARTED,
                 UUID.fromString(calendarEventUpdateRequest.getSagaId()));
     }
@@ -124,12 +129,14 @@ public class CalendarEventRequestHelper {
         CalendarEventUpdateEventPayload calendarEventUpdateEventPayload =
                 calendarEventDataMapper.
                         calendarEventUpdateRequestToCalendarEventUpdateEventPayload(
+                                null,
                                 calendarEventUpdateRequest,
+                                UpdateState.DELETED.name(),
                                 new ArrayList<>());
 
         calendarEventUpdateOutboxHelper.saveCalendarEventUpdateOutboxRepositoryOutboxMessage(
                 calendarEventUpdateEventPayload,
-                UpdateState.DELETED,
+                UpdateState.valueOf(calendarEventUpdateEventPayload.getUpdateCalendarEventState()),
                 OutboxStatus.STARTED,
                 UUID.fromString(calendarEventUpdateRequest.getSagaId()));
 
