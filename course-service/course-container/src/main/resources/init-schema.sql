@@ -502,7 +502,7 @@ CREATE TABLE "public".calendar_event_update_outbox
     payload jsonb NOT NULL,
     outbox_status outbox_status NOT NULL,
     saga_status saga_status NOT NULL,
-    updateCalendarEventState update_state,
+    update_calendar_event_state update_state,
     version integer NOT NULL,
     CONSTRAINT calendar_event_outbox_pkey PRIMARY KEY (id)
 );

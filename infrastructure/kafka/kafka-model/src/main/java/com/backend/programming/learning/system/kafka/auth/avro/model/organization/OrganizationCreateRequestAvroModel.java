@@ -5,10 +5,12 @@
  */
 package com.backend.programming.learning.system.kafka.auth.avro.model.organization;
 
-import org.apache.avro.message.BinaryMessageDecoder;
-import org.apache.avro.message.BinaryMessageEncoder;
-import org.apache.avro.message.SchemaStore;
+import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
+import org.apache.avro.util.Utf8;
+import org.apache.avro.message.BinaryMessageEncoder;
+import org.apache.avro.message.BinaryMessageDecoder;
+import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
@@ -74,17 +76,17 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
     return DECODER.decode(b);
   }
 
-  private String id;
-  private String sagaId;
-  private String organizationId;
-  private String email;
-  private String description;
-  private String name;
-  private String phone;
-  private String address;
-  private String apiKey;
-  private String moodleUrl;
-  private String createdBy;
+  private java.lang.String id;
+  private java.lang.String sagaId;
+  private java.lang.String organizationId;
+  private java.lang.String email;
+  private java.lang.String description;
+  private java.lang.String name;
+  private java.lang.String phone;
+  private java.lang.String address;
+  private java.lang.String apiKey;
+  private java.lang.String moodleUrl;
+  private java.lang.String createdBy;
   private java.time.Instant createdAt;
   private java.time.Instant updatedAt;
   private boolean isDeleted;
@@ -113,7 +115,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * @param updatedAt The new value for updatedAt
    * @param isDeleted The new value for isDeleted
    */
-  public OrganizationCreateRequestAvroModel(String id, String sagaId, String organizationId, String email, String description, String name, String phone, String address, String apiKey, String moodleUrl, String createdBy, java.time.Instant createdAt, java.time.Instant updatedAt, Boolean isDeleted) {
+  public OrganizationCreateRequestAvroModel(java.lang.String id, java.lang.String sagaId, java.lang.String organizationId, java.lang.String email, java.lang.String description, java.lang.String name, java.lang.String phone, java.lang.String address, java.lang.String apiKey, java.lang.String moodleUrl, java.lang.String createdBy, java.time.Instant createdAt, java.time.Instant updatedAt, java.lang.Boolean isDeleted) {
     this.id = id;
     this.sagaId = sagaId;
     this.organizationId = organizationId;
@@ -131,14 +133,14 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
   }
 
   @Override
-  public SpecificData getSpecificData() { return MODEL$; }
+  public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
 
   @Override
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
 
   // Used by DatumWriter.  Applications should not call.
   @Override
-  public Object get(int field$) {
+  public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return id;
     case 1: return sagaId;
@@ -185,7 +187,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
   // Used by DatumReader.  Applications should not call.
   @Override
   @SuppressWarnings(value="unchecked")
-  public void put(int field$, Object value$) {
+  public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: id = value$ != null ? value$.toString() : null; break;
     case 1: sagaId = value$ != null ? value$.toString() : null; break;
@@ -200,7 +202,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
     case 10: createdBy = value$ != null ? value$.toString() : null; break;
     case 11: createdAt = (java.time.Instant)value$; break;
     case 12: updatedAt = (java.time.Instant)value$; break;
-    case 13: isDeleted = (Boolean)value$; break;
+    case 13: isDeleted = (java.lang.Boolean)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -209,7 +211,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * Gets the value of the 'id' field.
    * @return The value of the 'id' field.
    */
-  public String getId() {
+  public java.lang.String getId() {
     return id;
   }
 
@@ -218,7 +220,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * Sets the value of the 'id' field.
    * @param value the value to set.
    */
-  public void setId(String value) {
+  public void setId(java.lang.String value) {
     this.id = value;
   }
 
@@ -226,7 +228,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * Gets the value of the 'sagaId' field.
    * @return The value of the 'sagaId' field.
    */
-  public String getSagaId() {
+  public java.lang.String getSagaId() {
     return sagaId;
   }
 
@@ -235,7 +237,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * Sets the value of the 'sagaId' field.
    * @param value the value to set.
    */
-  public void setSagaId(String value) {
+  public void setSagaId(java.lang.String value) {
     this.sagaId = value;
   }
 
@@ -243,7 +245,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * Gets the value of the 'organizationId' field.
    * @return The value of the 'organizationId' field.
    */
-  public String getOrganizationId() {
+  public java.lang.String getOrganizationId() {
     return organizationId;
   }
 
@@ -252,7 +254,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * Sets the value of the 'organizationId' field.
    * @param value the value to set.
    */
-  public void setOrganizationId(String value) {
+  public void setOrganizationId(java.lang.String value) {
     this.organizationId = value;
   }
 
@@ -260,7 +262,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * Gets the value of the 'email' field.
    * @return The value of the 'email' field.
    */
-  public String getEmail() {
+  public java.lang.String getEmail() {
     return email;
   }
 
@@ -269,7 +271,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * Sets the value of the 'email' field.
    * @param value the value to set.
    */
-  public void setEmail(String value) {
+  public void setEmail(java.lang.String value) {
     this.email = value;
   }
 
@@ -277,7 +279,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * Gets the value of the 'description' field.
    * @return The value of the 'description' field.
    */
-  public String getDescription() {
+  public java.lang.String getDescription() {
     return description;
   }
 
@@ -286,7 +288,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * Sets the value of the 'description' field.
    * @param value the value to set.
    */
-  public void setDescription(String value) {
+  public void setDescription(java.lang.String value) {
     this.description = value;
   }
 
@@ -294,7 +296,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * Gets the value of the 'name' field.
    * @return The value of the 'name' field.
    */
-  public String getName() {
+  public java.lang.String getName() {
     return name;
   }
 
@@ -303,7 +305,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * Sets the value of the 'name' field.
    * @param value the value to set.
    */
-  public void setName(String value) {
+  public void setName(java.lang.String value) {
     this.name = value;
   }
 
@@ -311,7 +313,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * Gets the value of the 'phone' field.
    * @return The value of the 'phone' field.
    */
-  public String getPhone() {
+  public java.lang.String getPhone() {
     return phone;
   }
 
@@ -320,7 +322,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * Sets the value of the 'phone' field.
    * @param value the value to set.
    */
-  public void setPhone(String value) {
+  public void setPhone(java.lang.String value) {
     this.phone = value;
   }
 
@@ -328,7 +330,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * Gets the value of the 'address' field.
    * @return The value of the 'address' field.
    */
-  public String getAddress() {
+  public java.lang.String getAddress() {
     return address;
   }
 
@@ -337,7 +339,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * Sets the value of the 'address' field.
    * @param value the value to set.
    */
-  public void setAddress(String value) {
+  public void setAddress(java.lang.String value) {
     this.address = value;
   }
 
@@ -345,7 +347,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * Gets the value of the 'apiKey' field.
    * @return The value of the 'apiKey' field.
    */
-  public String getApiKey() {
+  public java.lang.String getApiKey() {
     return apiKey;
   }
 
@@ -354,7 +356,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * Sets the value of the 'apiKey' field.
    * @param value the value to set.
    */
-  public void setApiKey(String value) {
+  public void setApiKey(java.lang.String value) {
     this.apiKey = value;
   }
 
@@ -362,7 +364,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * Gets the value of the 'moodleUrl' field.
    * @return The value of the 'moodleUrl' field.
    */
-  public String getMoodleUrl() {
+  public java.lang.String getMoodleUrl() {
     return moodleUrl;
   }
 
@@ -371,7 +373,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * Sets the value of the 'moodleUrl' field.
    * @param value the value to set.
    */
-  public void setMoodleUrl(String value) {
+  public void setMoodleUrl(java.lang.String value) {
     this.moodleUrl = value;
   }
 
@@ -379,7 +381,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * Gets the value of the 'createdBy' field.
    * @return The value of the 'createdBy' field.
    */
-  public String getCreatedBy() {
+  public java.lang.String getCreatedBy() {
     return createdBy;
   }
 
@@ -388,7 +390,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * Sets the value of the 'createdBy' field.
    * @param value the value to set.
    */
-  public void setCreatedBy(String value) {
+  public void setCreatedBy(java.lang.String value) {
     this.createdBy = value;
   }
 
@@ -447,8 +449,8 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * Creates a new OrganizationCreateRequestAvroModel RecordBuilder.
    * @return A new OrganizationCreateRequestAvroModel RecordBuilder
    */
-  public static Builder newBuilder() {
-    return new Builder();
+  public static com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder newBuilder() {
+    return new com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder();
   }
 
   /**
@@ -456,11 +458,11 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * @param other The existing builder to copy.
    * @return A new OrganizationCreateRequestAvroModel RecordBuilder
    */
-  public static Builder newBuilder(Builder other) {
+  public static com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder newBuilder(com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder other) {
     if (other == null) {
-      return new Builder();
+      return new com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder();
     } else {
-      return new Builder(other);
+      return new com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder(other);
     }
   }
 
@@ -469,11 +471,11 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
    * @param other The existing instance to copy.
    * @return A new OrganizationCreateRequestAvroModel RecordBuilder
    */
-  public static Builder newBuilder(OrganizationCreateRequestAvroModel other) {
+  public static com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder newBuilder(com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel other) {
     if (other == null) {
-      return new Builder();
+      return new com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder();
     } else {
-      return new Builder(other);
+      return new com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder(other);
     }
   }
 
@@ -484,17 +486,17 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<OrganizationCreateRequestAvroModel>
     implements org.apache.avro.data.RecordBuilder<OrganizationCreateRequestAvroModel> {
 
-    private String id;
-    private String sagaId;
-    private String organizationId;
-    private String email;
-    private String description;
-    private String name;
-    private String phone;
-    private String address;
-    private String apiKey;
-    private String moodleUrl;
-    private String createdBy;
+    private java.lang.String id;
+    private java.lang.String sagaId;
+    private java.lang.String organizationId;
+    private java.lang.String email;
+    private java.lang.String description;
+    private java.lang.String name;
+    private java.lang.String phone;
+    private java.lang.String address;
+    private java.lang.String apiKey;
+    private java.lang.String moodleUrl;
+    private java.lang.String createdBy;
     private java.time.Instant createdAt;
     private java.time.Instant updatedAt;
     private boolean isDeleted;
@@ -508,7 +510,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(Builder other) {
+    private Builder(com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -572,7 +574,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
      * Creates a Builder by copying an existing OrganizationCreateRequestAvroModel instance
      * @param other The existing instance to copy.
      */
-    private Builder(OrganizationCreateRequestAvroModel other) {
+    private Builder(com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -636,7 +638,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Gets the value of the 'id' field.
       * @return The value.
       */
-    public String getId() {
+    public java.lang.String getId() {
       return id;
     }
 
@@ -646,7 +648,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public Builder setId(String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder setId(java.lang.String value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -666,7 +668,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public Builder clearId() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder clearId() {
       id = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -676,7 +678,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Gets the value of the 'sagaId' field.
       * @return The value.
       */
-    public String getSagaId() {
+    public java.lang.String getSagaId() {
       return sagaId;
     }
 
@@ -686,7 +688,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * @param value The value of 'sagaId'.
       * @return This builder.
       */
-    public Builder setSagaId(String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder setSagaId(java.lang.String value) {
       validate(fields()[1], value);
       this.sagaId = value;
       fieldSetFlags()[1] = true;
@@ -706,7 +708,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Clears the value of the 'sagaId' field.
       * @return This builder.
       */
-    public Builder clearSagaId() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder clearSagaId() {
       sagaId = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -716,7 +718,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Gets the value of the 'organizationId' field.
       * @return The value.
       */
-    public String getOrganizationId() {
+    public java.lang.String getOrganizationId() {
       return organizationId;
     }
 
@@ -726,7 +728,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * @param value The value of 'organizationId'.
       * @return This builder.
       */
-    public Builder setOrganizationId(String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder setOrganizationId(java.lang.String value) {
       validate(fields()[2], value);
       this.organizationId = value;
       fieldSetFlags()[2] = true;
@@ -746,7 +748,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Clears the value of the 'organizationId' field.
       * @return This builder.
       */
-    public Builder clearOrganizationId() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder clearOrganizationId() {
       organizationId = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -756,7 +758,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Gets the value of the 'email' field.
       * @return The value.
       */
-    public String getEmail() {
+    public java.lang.String getEmail() {
       return email;
     }
 
@@ -766,7 +768,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * @param value The value of 'email'.
       * @return This builder.
       */
-    public Builder setEmail(String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder setEmail(java.lang.String value) {
       validate(fields()[3], value);
       this.email = value;
       fieldSetFlags()[3] = true;
@@ -786,7 +788,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Clears the value of the 'email' field.
       * @return This builder.
       */
-    public Builder clearEmail() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder clearEmail() {
       email = null;
       fieldSetFlags()[3] = false;
       return this;
@@ -796,7 +798,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Gets the value of the 'description' field.
       * @return The value.
       */
-    public String getDescription() {
+    public java.lang.String getDescription() {
       return description;
     }
 
@@ -806,7 +808,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * @param value The value of 'description'.
       * @return This builder.
       */
-    public Builder setDescription(String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder setDescription(java.lang.String value) {
       validate(fields()[4], value);
       this.description = value;
       fieldSetFlags()[4] = true;
@@ -826,7 +828,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Clears the value of the 'description' field.
       * @return This builder.
       */
-    public Builder clearDescription() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder clearDescription() {
       description = null;
       fieldSetFlags()[4] = false;
       return this;
@@ -836,7 +838,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Gets the value of the 'name' field.
       * @return The value.
       */
-    public String getName() {
+    public java.lang.String getName() {
       return name;
     }
 
@@ -846,7 +848,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * @param value The value of 'name'.
       * @return This builder.
       */
-    public Builder setName(String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder setName(java.lang.String value) {
       validate(fields()[5], value);
       this.name = value;
       fieldSetFlags()[5] = true;
@@ -866,7 +868,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Clears the value of the 'name' field.
       * @return This builder.
       */
-    public Builder clearName() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder clearName() {
       name = null;
       fieldSetFlags()[5] = false;
       return this;
@@ -876,7 +878,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Gets the value of the 'phone' field.
       * @return The value.
       */
-    public String getPhone() {
+    public java.lang.String getPhone() {
       return phone;
     }
 
@@ -886,7 +888,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * @param value The value of 'phone'.
       * @return This builder.
       */
-    public Builder setPhone(String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder setPhone(java.lang.String value) {
       validate(fields()[6], value);
       this.phone = value;
       fieldSetFlags()[6] = true;
@@ -906,7 +908,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Clears the value of the 'phone' field.
       * @return This builder.
       */
-    public Builder clearPhone() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder clearPhone() {
       phone = null;
       fieldSetFlags()[6] = false;
       return this;
@@ -916,7 +918,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Gets the value of the 'address' field.
       * @return The value.
       */
-    public String getAddress() {
+    public java.lang.String getAddress() {
       return address;
     }
 
@@ -926,7 +928,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * @param value The value of 'address'.
       * @return This builder.
       */
-    public Builder setAddress(String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder setAddress(java.lang.String value) {
       validate(fields()[7], value);
       this.address = value;
       fieldSetFlags()[7] = true;
@@ -946,7 +948,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Clears the value of the 'address' field.
       * @return This builder.
       */
-    public Builder clearAddress() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder clearAddress() {
       address = null;
       fieldSetFlags()[7] = false;
       return this;
@@ -956,7 +958,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Gets the value of the 'apiKey' field.
       * @return The value.
       */
-    public String getApiKey() {
+    public java.lang.String getApiKey() {
       return apiKey;
     }
 
@@ -966,7 +968,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * @param value The value of 'apiKey'.
       * @return This builder.
       */
-    public Builder setApiKey(String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder setApiKey(java.lang.String value) {
       validate(fields()[8], value);
       this.apiKey = value;
       fieldSetFlags()[8] = true;
@@ -986,7 +988,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Clears the value of the 'apiKey' field.
       * @return This builder.
       */
-    public Builder clearApiKey() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder clearApiKey() {
       apiKey = null;
       fieldSetFlags()[8] = false;
       return this;
@@ -996,7 +998,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Gets the value of the 'moodleUrl' field.
       * @return The value.
       */
-    public String getMoodleUrl() {
+    public java.lang.String getMoodleUrl() {
       return moodleUrl;
     }
 
@@ -1006,7 +1008,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * @param value The value of 'moodleUrl'.
       * @return This builder.
       */
-    public Builder setMoodleUrl(String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder setMoodleUrl(java.lang.String value) {
       validate(fields()[9], value);
       this.moodleUrl = value;
       fieldSetFlags()[9] = true;
@@ -1026,7 +1028,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Clears the value of the 'moodleUrl' field.
       * @return This builder.
       */
-    public Builder clearMoodleUrl() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder clearMoodleUrl() {
       moodleUrl = null;
       fieldSetFlags()[9] = false;
       return this;
@@ -1036,7 +1038,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Gets the value of the 'createdBy' field.
       * @return The value.
       */
-    public String getCreatedBy() {
+    public java.lang.String getCreatedBy() {
       return createdBy;
     }
 
@@ -1046,7 +1048,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * @param value The value of 'createdBy'.
       * @return This builder.
       */
-    public Builder setCreatedBy(String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder setCreatedBy(java.lang.String value) {
       validate(fields()[10], value);
       this.createdBy = value;
       fieldSetFlags()[10] = true;
@@ -1066,7 +1068,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Clears the value of the 'createdBy' field.
       * @return This builder.
       */
-    public Builder clearCreatedBy() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder clearCreatedBy() {
       createdBy = null;
       fieldSetFlags()[10] = false;
       return this;
@@ -1086,7 +1088,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * @param value The value of 'createdAt'.
       * @return This builder.
       */
-    public Builder setCreatedAt(java.time.Instant value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder setCreatedAt(java.time.Instant value) {
       validate(fields()[11], value);
       this.createdAt = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
       fieldSetFlags()[11] = true;
@@ -1106,7 +1108,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Clears the value of the 'createdAt' field.
       * @return This builder.
       */
-    public Builder clearCreatedAt() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder clearCreatedAt() {
       fieldSetFlags()[11] = false;
       return this;
     }
@@ -1125,7 +1127,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * @param value The value of 'updatedAt'.
       * @return This builder.
       */
-    public Builder setUpdatedAt(java.time.Instant value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder setUpdatedAt(java.time.Instant value) {
       validate(fields()[12], value);
       this.updatedAt = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
       fieldSetFlags()[12] = true;
@@ -1145,7 +1147,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Clears the value of the 'updatedAt' field.
       * @return This builder.
       */
-    public Builder clearUpdatedAt() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder clearUpdatedAt() {
       fieldSetFlags()[12] = false;
       return this;
     }
@@ -1164,7 +1166,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * @param value The value of 'isDeleted'.
       * @return This builder.
       */
-    public Builder setIsDeleted(boolean value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder setIsDeleted(boolean value) {
       validate(fields()[13], value);
       this.isDeleted = value;
       fieldSetFlags()[13] = true;
@@ -1184,7 +1186,7 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
       * Clears the value of the 'isDeleted' field.
       * @return This builder.
       */
-    public Builder clearIsDeleted() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel.Builder clearIsDeleted() {
       fieldSetFlags()[13] = false;
       return this;
     }
@@ -1194,24 +1196,24 @@ public class OrganizationCreateRequestAvroModel extends org.apache.avro.specific
     public OrganizationCreateRequestAvroModel build() {
       try {
         OrganizationCreateRequestAvroModel record = new OrganizationCreateRequestAvroModel();
-        record.id = fieldSetFlags()[0] ? this.id : (String) defaultValue(fields()[0]);
-        record.sagaId = fieldSetFlags()[1] ? this.sagaId : (String) defaultValue(fields()[1]);
-        record.organizationId = fieldSetFlags()[2] ? this.organizationId : (String) defaultValue(fields()[2]);
-        record.email = fieldSetFlags()[3] ? this.email : (String) defaultValue(fields()[3]);
-        record.description = fieldSetFlags()[4] ? this.description : (String) defaultValue(fields()[4]);
-        record.name = fieldSetFlags()[5] ? this.name : (String) defaultValue(fields()[5]);
-        record.phone = fieldSetFlags()[6] ? this.phone : (String) defaultValue(fields()[6]);
-        record.address = fieldSetFlags()[7] ? this.address : (String) defaultValue(fields()[7]);
-        record.apiKey = fieldSetFlags()[8] ? this.apiKey : (String) defaultValue(fields()[8]);
-        record.moodleUrl = fieldSetFlags()[9] ? this.moodleUrl : (String) defaultValue(fields()[9]);
-        record.createdBy = fieldSetFlags()[10] ? this.createdBy : (String) defaultValue(fields()[10]);
+        record.id = fieldSetFlags()[0] ? this.id : (java.lang.String) defaultValue(fields()[0]);
+        record.sagaId = fieldSetFlags()[1] ? this.sagaId : (java.lang.String) defaultValue(fields()[1]);
+        record.organizationId = fieldSetFlags()[2] ? this.organizationId : (java.lang.String) defaultValue(fields()[2]);
+        record.email = fieldSetFlags()[3] ? this.email : (java.lang.String) defaultValue(fields()[3]);
+        record.description = fieldSetFlags()[4] ? this.description : (java.lang.String) defaultValue(fields()[4]);
+        record.name = fieldSetFlags()[5] ? this.name : (java.lang.String) defaultValue(fields()[5]);
+        record.phone = fieldSetFlags()[6] ? this.phone : (java.lang.String) defaultValue(fields()[6]);
+        record.address = fieldSetFlags()[7] ? this.address : (java.lang.String) defaultValue(fields()[7]);
+        record.apiKey = fieldSetFlags()[8] ? this.apiKey : (java.lang.String) defaultValue(fields()[8]);
+        record.moodleUrl = fieldSetFlags()[9] ? this.moodleUrl : (java.lang.String) defaultValue(fields()[9]);
+        record.createdBy = fieldSetFlags()[10] ? this.createdBy : (java.lang.String) defaultValue(fields()[10]);
         record.createdAt = fieldSetFlags()[11] ? this.createdAt : (java.time.Instant) defaultValue(fields()[11]);
         record.updatedAt = fieldSetFlags()[12] ? this.updatedAt : (java.time.Instant) defaultValue(fields()[12]);
-        record.isDeleted = fieldSetFlags()[13] ? this.isDeleted : (Boolean) defaultValue(fields()[13]);
+        record.isDeleted = fieldSetFlags()[13] ? this.isDeleted : (java.lang.Boolean) defaultValue(fields()[13]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
-      } catch (Exception e) {
+      } catch (java.lang.Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);
       }
     }
