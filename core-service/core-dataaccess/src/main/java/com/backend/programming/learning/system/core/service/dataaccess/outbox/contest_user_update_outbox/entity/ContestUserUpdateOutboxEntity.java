@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.core.service.dataaccess.outbox.contest_user_update_outbox.entity;
 
-import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
 import com.backend.programming.learning.system.core.service.domain.valueobject.UpdateState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
@@ -8,7 +7,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 

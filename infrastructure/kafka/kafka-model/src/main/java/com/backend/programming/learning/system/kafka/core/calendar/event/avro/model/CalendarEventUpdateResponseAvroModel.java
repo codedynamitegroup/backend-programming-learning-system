@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class CalendarEventUpdateResponseAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 8780734651754261140L;
+  private static final long serialVersionUID = -3014469368404495486L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CalendarEventUpdateResponseAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.core.calendar.event.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"calendarEventId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"contestId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"courseId\",\"type\":[\"null\",{\"type\":\"string\",\"logicalType\":\"uuid\"}]},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"description\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"eventType\",\"type\":{\"type\":\"enum\",\"name\":\"NotificationEventType\",\"symbols\":[\"USER\",\"COURSE\"]}},{\"name\":\"startTime\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"endTime\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"component\",\"type\":{\"type\":\"enum\",\"name\":\"NotificationComponentType\",\"symbols\":[\"ASSIGNMENT\",\"EXAM\",\"POST\",\"CONTEST\",\"REMINDER\"]}},{\"name\":\"updateCalendarEventState\",\"type\":{\"type\":\"enum\",\"name\":\"UpdateState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CalendarEventUpdateResponseAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.core.calendar.event.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"calendarEventId\",\"type\":[\"null\",{\"type\":\"string\",\"logicalType\":\"uuid\"}]},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"contestId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"courseId\",\"type\":[\"null\",{\"type\":\"string\",\"logicalType\":\"uuid\"}]},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"description\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"eventType\",\"type\":{\"type\":\"enum\",\"name\":\"NotificationEventType\",\"symbols\":[\"USER\",\"COURSE\"]}},{\"name\":\"startTime\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"endTime\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}]},{\"name\":\"component\",\"type\":{\"type\":\"enum\",\"name\":\"NotificationComponentType\",\"symbols\":[\"ASSIGNMENT\",\"EXAM\",\"POST\",\"CONTEST\",\"REMINDER\"]}},{\"name\":\"updateCalendarEventState\",\"type\":{\"type\":\"enum\",\"name\":\"UpdateState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -127,7 +127,7 @@ public class CalendarEventUpdateResponseAvroModel extends org.apache.avro.specif
     this.description = description;
     this.eventType = eventType;
     this.startTime = startTime.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
-    this.endTime = endTime.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
+    this.endTime = endTime;
     this.component = component;
     this.updateCalendarEventState = updateCalendarEventState;
     this.failureMessages = failureMessages;
@@ -165,7 +165,7 @@ public class CalendarEventUpdateResponseAvroModel extends org.apache.avro.specif
       new org.apache.avro.Conversion<?>[] {
       new org.apache.avro.Conversions.UUIDConversion(),
       new org.apache.avro.Conversions.UUIDConversion(),
-      new org.apache.avro.Conversions.UUIDConversion(),
+      null,
       new org.apache.avro.Conversions.UUIDConversion(),
       new org.apache.avro.Conversions.UUIDConversion(),
       null,
@@ -173,7 +173,7 @@ public class CalendarEventUpdateResponseAvroModel extends org.apache.avro.specif
       null,
       null,
       new org.apache.avro.data.TimeConversions.TimestampMillisConversion(),
-      new org.apache.avro.data.TimeConversions.TimestampMillisConversion(),
+      null,
       null,
       null,
       null,
@@ -392,7 +392,7 @@ public class CalendarEventUpdateResponseAvroModel extends org.apache.avro.specif
    * @param value the value to set.
    */
   public void setEndTime(java.time.Instant value) {
-    this.endTime = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
+    this.endTime = value;
   }
 
   /**
@@ -1050,7 +1050,7 @@ public class CalendarEventUpdateResponseAvroModel extends org.apache.avro.specif
       */
     public com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.CalendarEventUpdateResponseAvroModel.Builder setEndTime(java.time.Instant value) {
       validate(fields()[10], value);
-      this.endTime = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
+      this.endTime = value;
       fieldSetFlags()[10] = true;
       return this;
     }
@@ -1069,6 +1069,7 @@ public class CalendarEventUpdateResponseAvroModel extends org.apache.avro.specif
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.CalendarEventUpdateResponseAvroModel.Builder clearEndTime() {
+      endTime = null;
       fieldSetFlags()[10] = false;
       return this;
     }

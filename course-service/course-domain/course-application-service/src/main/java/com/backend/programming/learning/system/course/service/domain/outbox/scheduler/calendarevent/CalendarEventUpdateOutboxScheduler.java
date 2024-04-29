@@ -40,9 +40,9 @@ public class CalendarEventUpdateOutboxScheduler implements OutboxScheduler {
                     outboxMessages.size(),
                     outboxMessages.stream().map(outboxMessage ->
                             outboxMessage.getId().toString()).collect(Collectors.joining(",")));
-            outboxMessages.forEach(orderOutboxMessage ->
+            outboxMessages.forEach(calendarEventUpdateOutboxMessage ->
                     calendarEventUpdatedMessagePublisher.publish(
-                            orderOutboxMessage, this::updateOutboxStatus));
+                            calendarEventUpdateOutboxMessage, this::updateOutboxStatus));
             log.info("{} CalendarEventUpdateOutboxMessage sent to message bus!", outboxMessages.size());
         }
     }

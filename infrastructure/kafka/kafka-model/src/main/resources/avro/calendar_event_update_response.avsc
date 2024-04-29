@@ -19,10 +19,13 @@
     },
     {
       "name": "calendarEventId",
-      "type": {
+      "type": [
+        "null",
+        {
           "type": "string",
-          "logicalType": "uuid"
-      }
+          "logicalType": "uuid" //Logical type is part of the 'string' type definition
+        }
+      ]
     },
     {
       "name": "userId",
@@ -76,10 +79,13 @@
     },
     {
       "name": "endTime",
-      "type": {
-        "type": "long",
-        "logicalType": "timestamp-millis"
-      }
+      "type": [
+        "null",
+        {
+          "type": "long",
+          "logicalType": "timestamp-millis"
+        }
+      ]
     },
     {
       "name": "component",

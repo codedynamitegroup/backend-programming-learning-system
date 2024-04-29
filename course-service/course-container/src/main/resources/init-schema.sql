@@ -501,7 +501,6 @@ CREATE TABLE "public".calendar_event_update_outbox
     type character varying COLLATE pg_catalog."default" NOT NULL,
     payload jsonb NOT NULL,
     outbox_status outbox_status NOT NULL,
-    saga_status saga_status NOT NULL,
     update_calendar_event_state update_state,
     version integer NOT NULL,
     CONSTRAINT calendar_event_outbox_pkey PRIMARY KEY (id)
@@ -509,8 +508,8 @@ CREATE TABLE "public".calendar_event_update_outbox
 
 CREATE INDEX calendar_event_outbox_saga_status
     ON "public".calendar_event_update_outbox
-        (type, outbox_status, saga_status);
+        (type, update_calendar_event_state);
 
 CREATE UNIQUE INDEX calendar_event_outbox_saga_id
     ON "public".calendar_event_update_outbox
-        (type, saga_id, saga_status);
+        (type, saga_id, update_calendar_event_state, outbox_status);
