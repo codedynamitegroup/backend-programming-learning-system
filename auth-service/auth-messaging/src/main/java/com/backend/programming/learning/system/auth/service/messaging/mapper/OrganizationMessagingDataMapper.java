@@ -1,25 +1,15 @@
 package com.backend.programming.learning.system.auth.service.messaging.mapper;
 
 import com.backend.programming.learning.system.auth.service.domain.dto.method.message.OrganizationResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.message.UserResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
-import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationCreatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationDeletedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationUpdatedEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserDeletedEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedEvent;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationResponseStatus;
-import com.backend.programming.learning.system.domain.valueobject.UserResponseStatus;
 import com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel;
 import com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationDeleteRequestAvroModel;
 import com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseAvroModel;
 import com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationUpdateRequestAvroModel;
-import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel;
-import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserDeleteRequestAvroModel;
-import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseAvroModel;
-import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserUpdateRequestAvroModel;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;

@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.auth.service.messaging.listener.kafka.user;
 
+import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.message.listener.CoreServiceUserResponseMessageListener;
 import com.backend.programming.learning.system.auth.service.messaging.mapper.UserMessagingDataMapper;
 import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseAvroModel;
@@ -11,6 +12,7 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.OptimisticLockException;
 import java.util.List;
 
 @Slf4j
@@ -38,57 +40,65 @@ public class CoreServiceUserResponseKafkaListener implements KafkaConsumer<UserR
                 offsets.toString());
 
         messages.forEach(userResponseAvroModel -> {
-            switch (userResponseAvroModel.getUserResponseStatus()){
-                case CREATED:{
-                    log.info("Success to create user for id: {}",
-                            userResponseAvroModel.getUserId());
-                    userResponseMessageListener
-                            .userCreateSuccess(userMessagingDataMapper
-                                    .userResponseAvroModelToUserResponse(userResponseAvroModel));
-                    break;
+            try {
+                switch (userResponseAvroModel.getCopyState()){
+                    case CREATED:{
+                        log.info("Success to create user for id: {}",
+                                userResponseAvroModel.getUserId());
+                        userResponseMessageListener
+                                .userCreateSuccess(userMessagingDataMapper
+                                        .userResponseAvroModelToUserResponse(userResponseAvroModel));
+                        break;
+                    }
+                    case CREATE_ROLLBACKING:{
+                        log.info("Fail to create user for id: {}",
+                                userResponseAvroModel.getUserId());
+                        userResponseMessageListener
+                                .userCreateFail(userMessagingDataMapper
+                                        .userResponseAvroModelToUserResponse(userResponseAvroModel));
+                        break;
+                    }
+                    case DELETED: {
+                        log.info("Success to delete user for id: {}",
+                                userResponseAvroModel.getUserId());
+                        userResponseMessageListener
+                                .userDeleteSuccess(userMessagingDataMapper
+                                        .userResponseAvroModelToUserResponse(userResponseAvroModel));
+                        break;
+                    }
+                    case DELETE_ROLLBACKING:{
+                        log.info("Fail to delete user for id: {}",
+                                userResponseAvroModel.getUserId());
+                        userResponseMessageListener
+                                .userDeleteFail(userMessagingDataMapper
+                                        .userResponseAvroModelToUserResponse(userResponseAvroModel));
+                        break;
+                    }
+                    case UPDATED:{
+                        log.info("Success to update user for id: {}",
+                                userResponseAvroModel.getUserId());
+                        userResponseMessageListener
+                                .userUpdatedSuccess(userMessagingDataMapper
+                                        .userResponseAvroModelToUserResponse(userResponseAvroModel));
+                        break;
+                    }
+                    case UPDATE_ROLLBACKING:{
+                        log.info("Fail to update user for id: {}",
+                                userResponseAvroModel.getUserId());
+                        userResponseMessageListener
+                                .userUpdatedFail(userMessagingDataMapper
+                                        .userResponseAvroModelToUserResponse(userResponseAvroModel));
+                        break;
+                    }
                 }
-                case CREATE_FAILED:{
-                    log.info("Fail to create user for id: {}",
-                            userResponseAvroModel.getUserId());
-                    userResponseMessageListener
-                            .userCreateFail(userMessagingDataMapper
-                                    .userResponseAvroModelToUserResponse(userResponseAvroModel));
-                    break;
-                }
-                case DELETED: {
-                    log.info("Success to delete user for id: {}",
-                            userResponseAvroModel.getUserId());
-                    userResponseMessageListener
-                            .userDeleteSuccess(userMessagingDataMapper
-                                    .userResponseAvroModelToUserResponse(userResponseAvroModel));
-                    break;
-                }
-                case DELETE_FAILED:{
-                    log.info("Fail to delete user for id: {}",
-                            userResponseAvroModel.getUserId());
-                    userResponseMessageListener
-                            .userDeleteFail(userMessagingDataMapper
-                                    .userResponseAvroModelToUserResponse(userResponseAvroModel));
-                    break;
-                }
-                case UPDATED:{
-                    log.info("Success to update user for id: {}",
-                            userResponseAvroModel.getUserId());
-                    userResponseMessageListener
-                            .userUpdatedSuccess(userMessagingDataMapper
-                                    .userResponseAvroModelToUserResponse(userResponseAvroModel));
-                    break;
-                }
-                case UPDATE_FAILED:{
-                    log.info("Fail to update user for id: {}",
-                            userResponseAvroModel.getUserId());
-                    userResponseMessageListener
-                            .userUpdatedFail(userMessagingDataMapper
-                                    .userResponseAvroModelToUserResponse(userResponseAvroModel));
-                    break;
-                }
+            } catch (OptimisticLockException e) {
+                //NO-OP for optimistic lock. This means another thread finished the work, do not throw error to prevent reading the data from kafka again!
+                log.error("Caught optimistic locking exception in PaymentResponseKafkaListener for order id: {}",
+                        userResponseAvroModel.getUserId());
+            } catch (AuthNotFoundException e) {
+                //NO-OP for OrderNotFoundException
+                log.error("No user found for user id: {}", userResponseAvroModel.getUserId());
             }
-
         });
     }
 }

@@ -12,6 +12,7 @@ import com.backend.programming.learning.system.auth.service.domain.event.user.Us
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedEvent;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.ZoneId;
@@ -20,52 +21,50 @@ import java.time.ZonedDateTime;
 @Slf4j
 public class AuthDomainServiceImpl implements AuthDomainService {
     @Override
-    public UserCreatedEvent createUser(User user, DomainEventPublisher<UserCreatedEvent>
-            userCreatedEventDomainEventPublisher) {
+    public UserCreatedEvent createUser(User user) {
         user.initializeUser();
+        user.setCopyState(CopyState.CREATING);
         log.info("User with id: {} is initiated", user.getId().getValue());
-        return new UserCreatedEvent(user, ZonedDateTime.now(ZoneId.of("UTC")), userCreatedEventDomainEventPublisher);
+        return new UserCreatedEvent(user, ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
-    public UserDeletedEvent deleteUser(User user, DomainEventPublisher<UserDeletedEvent>
-            userDeletedEventDomainEventPublisher) {
+    public UserDeletedEvent deleteUser(User user) {
         user.deleteUser();
+        user.setCopyState(CopyState.DELETING);
         log.info("User with id: {} is deleted", user.getId().getValue());
-        return new UserDeletedEvent(user, ZonedDateTime.now(ZoneId.of("UTC")), userDeletedEventDomainEventPublisher);
+        return new UserDeletedEvent(user, ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
-    public UserUpdatedEvent updateUser(User user, DomainEventPublisher<UserUpdatedEvent> userUpdatedEventDomainEventPublisher) {
-        return new UserUpdatedEvent(user, ZonedDateTime.now(ZoneId.of("UTC")), userUpdatedEventDomainEventPublisher);
+    public UserUpdatedEvent updateUser(User user) {
+        user.setCopyState(CopyState.UPDATING);
+        return new UserUpdatedEvent(user, ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
-    public OrganizationCreatedEvent createOrganization(Organization organization,
-                                                       DomainEventPublisher<OrganizationCreatedEvent> organizationCreatedEventDomainEventPublisher) {
+    public OrganizationCreatedEvent createOrganization(Organization organization) {
         organization.initializeOrganization();
+        organization.setCopyState(CopyState.CREATING);
         log.info("Organization with id: {} is initiated", organization.getId().getValue());
         return new OrganizationCreatedEvent(organization,
-                ZonedDateTime.now(ZoneId.of("UTC")),
-                organizationCreatedEventDomainEventPublisher);
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
-    public OrganizationDeletedEvent deleteOrganization(Organization organization,
-                                                       DomainEventPublisher<OrganizationDeletedEvent> organizationDeletedEventDomainEventPublisher) {
+    public OrganizationDeletedEvent deleteOrganization(Organization organization) {
         organization.deleteOrganization();
+        organization.setCopyState(CopyState.DELETING);
         log.info("Organization with id: {} is deleted", organization.getId().getValue());
         return new OrganizationDeletedEvent(organization,
-                ZonedDateTime.now(ZoneId.of("UTC")),
-                organizationDeletedEventDomainEventPublisher);
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
-    public OrganizationUpdatedEvent updateOrganization(Organization organization,
-                                                       DomainEventPublisher<OrganizationUpdatedEvent> organizationUpdatedEventDomainEventPublisher) {
+    public OrganizationUpdatedEvent updateOrganization(Organization organization) {
+        organization.setCopyState(CopyState.UPDATING);
         return new OrganizationUpdatedEvent(organization,
-                ZonedDateTime.now(ZoneId.of("UTC")),
-                organizationUpdatedEventDomainEventPublisher);
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override

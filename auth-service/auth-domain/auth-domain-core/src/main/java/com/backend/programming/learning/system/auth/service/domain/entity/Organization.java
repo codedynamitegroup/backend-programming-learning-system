@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.auth.service.domain.entity;
 
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 
 import java.time.ZoneId;
@@ -16,37 +17,41 @@ public class Organization extends AggregateRoot<OrganizationId> {
     private String address;
     private String apiKey;
     private String moodleUrl;
+    private CopyState copyState;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
     private User createdBy;
     private User updatedBy;
     private Boolean isDeleted;
 
+    private Organization(Builder builder) {
+        super.setId(builder.organizationId);
+        setDescription(builder.description);
+        setName(builder.name);
+        setEmail(builder.email);
+        setPhone(builder.phone);
+        setAddress(builder.address);
+        setApiKey(builder.apiKey);
+        setMoodleUrl(builder.moodleUrl);
+        setCopyState(builder.copyState);
+        setCreatedAt(builder.createdAt);
+        setUpdatedAt(builder.updatedAt);
+        setCreatedBy(builder.createdBy);
+        setUpdatedBy(builder.updatedBy);
+        isDeleted = builder.isDeleted;
+    }
+
     public void initializeOrganization() {
         setId(new OrganizationId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
-        updatedAt = ZonedDateTime.now(ZoneId.of("UTC"));
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
         isDeleted = false;
     }
 
+
+
     public void deleteOrganization() {
         isDeleted = true;
-    }
-
-    private Organization(Builder builder) {
-        super.setId(builder.organizationId);
-        description = builder.description;
-        name = builder.name;
-        email = builder.email;
-        phone = builder.phone;
-        address = builder.address;
-        apiKey = builder.apiKey;
-        moodleUrl = builder.moodleUrl;
-        createdAt = builder.createdAt;
-        updatedAt = builder.updatedAt;
-        createdBy = builder.createdBy;
-        updatedBy = builder.updatedBy;
-        isDeleted = builder.isDeleted;
     }
 
     public String getDescription() {
@@ -145,6 +150,14 @@ public class Organization extends AggregateRoot<OrganizationId> {
         isDeleted = deleted;
     }
 
+    public CopyState getCopyState() {
+        return copyState;
+    }
+
+    public void setCopyState(CopyState copyState) {
+        this.copyState = copyState;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -157,6 +170,7 @@ public class Organization extends AggregateRoot<OrganizationId> {
         private String address;
         private String apiKey;
         private String moodleUrl;
+        private CopyState copyState;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
         private User createdBy;
@@ -199,6 +213,11 @@ public class Organization extends AggregateRoot<OrganizationId> {
 
         public Builder moodleUrl(String val) {
             moodleUrl = val;
+            return this;
+        }
+
+        public Builder copyState(CopyState val) {
+            copyState = val;
             return this;
         }
 

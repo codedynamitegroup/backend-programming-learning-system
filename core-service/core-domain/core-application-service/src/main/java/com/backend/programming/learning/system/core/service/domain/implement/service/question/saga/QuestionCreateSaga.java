@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Component
-public class QuestionCreateSaga implements SagaStep<QuestionResponse, EmptyEvent, EmptyEvent> {
+public class QuestionCreateSaga implements SagaStep<QuestionResponse> {
     private final CoreDomainService coreDomainService;
     private final QuestionRepository questionRepository;
     private final QuestionCreatedMessagePublisher questionCreatedMessagePublisher;
@@ -29,15 +29,13 @@ public class QuestionCreateSaga implements SagaStep<QuestionResponse, EmptyEvent
 
     @Override
     @Transactional
-    public EmptyEvent process(QuestionResponse questionResponse) {
+    public void process(QuestionResponse questionResponse) {
         log.info("Processing question create saga for question id: {}", questionResponse.getId());
-        return EmptyEvent.INSTANCE;
     }
 
     @Override
     @Transactional
-    public EmptyEvent rollback(QuestionResponse questionResponse) {
+    public void rollback(QuestionResponse questionResponse) {
         log.info("Rollback question create saga for question id: {}", questionResponse.getId());
-        return EmptyEvent.INSTANCE;
     }
 }

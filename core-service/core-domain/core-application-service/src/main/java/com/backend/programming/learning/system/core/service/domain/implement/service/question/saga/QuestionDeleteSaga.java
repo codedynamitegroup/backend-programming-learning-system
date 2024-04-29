@@ -8,16 +8,14 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class QuestionDeleteSaga implements SagaStep<QuestionResponse, EmptyEvent, EmptyEvent> {
+public class QuestionDeleteSaga implements SagaStep<QuestionResponse> {
     @Override
-    public EmptyEvent process(QuestionResponse data) {
+    public void process(QuestionResponse data) {
         log.info("Processing question delete saga for question id: {}", data.getId());
-        return null;
     }
 
     @Override
-    public EmptyEvent rollback(QuestionResponse data) {
+    public void rollback(QuestionResponse data) {
         log.info("Rollback question delete saga for question id: {}", data.getId());
-        return null;
     }
 }

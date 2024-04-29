@@ -6,14 +6,12 @@ import com.backend.programming.learning.system.domain.event.publisher.DomainEven
 import java.time.ZonedDateTime;
 
 public class UserUpdatedEvent extends UserEvent {
-    private final DomainEventPublisher<UserUpdatedEvent> userUpdatedEventDomainEventPublisher;
-    public UserUpdatedEvent(User user, ZonedDateTime createdAt, DomainEventPublisher<UserUpdatedEvent> userUpdatedEventDomainEventPublisher) {
+    public UserUpdatedEvent(User user, ZonedDateTime createdAt) {
         super(user, createdAt);
-        this.userUpdatedEventDomainEventPublisher = userUpdatedEventDomainEventPublisher;
     }
 
     @Override
     public void fire() {
-        userUpdatedEventDomainEventPublisher.publish(this);
+        
     }
 }

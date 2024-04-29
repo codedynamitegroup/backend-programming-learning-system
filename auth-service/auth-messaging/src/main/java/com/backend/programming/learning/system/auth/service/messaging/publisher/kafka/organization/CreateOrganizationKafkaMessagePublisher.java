@@ -2,11 +2,9 @@ package com.backend.programming.learning.system.auth.service.messaging.publisher
 
 import com.backend.programming.learning.system.auth.service.domain.config.AuthServiceConfigData;
 import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationCreatedEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
-import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.organization.OrganizationCreatedMessagePublisher;
 import com.backend.programming.learning.system.auth.service.messaging.mapper.OrganizationMessagingDataMapper;
+import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
 import com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel;
-import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel;
 import com.backend.programming.learning.system.kafka.producer.KafkaMessageHelper;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class CreateOrganizationKafkaMessagePublisher implements OrganizationCreatedMessagePublisher {
+public class CreateOrganizationKafkaMessagePublisher implements DomainEventPublisher<OrganizationCreatedEvent> {
     private final OrganizationMessagingDataMapper organizationMessagingDataMapper;
     private final AuthServiceConfigData authServiceConfigData;
     private final KafkaProducer<String, OrganizationCreateRequestAvroModel> kafkaProducer;
