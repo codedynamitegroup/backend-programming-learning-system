@@ -2,7 +2,6 @@ package com.backend.programming.learning.system.course.service.messaging.listene
 
 import com.backend.programming.learning.system.course.service.domain.ports.input.message.listener.auth.UserRequestMessageListener;
 import com.backend.programming.learning.system.course.service.messaging.mapper.UserMessagingDataMapper;
-import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserDeleteRequestAvroModel;
 import com.backend.programming.learning.system.kafka.consumer.KafkaConsumer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;

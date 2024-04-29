@@ -20,8 +20,8 @@ public class UserRole extends BaseEntity<UserRoleId> {
 
     public void initializeUserRole() {
         setId(new UserRoleId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
-        updatedAt = ZonedDateTime.now(ZoneId.of("UTC"));
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
         isActive = true;
     }
 

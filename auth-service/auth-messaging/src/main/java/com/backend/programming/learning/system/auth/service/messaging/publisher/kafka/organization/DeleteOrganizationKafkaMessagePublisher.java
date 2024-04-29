@@ -1,12 +1,9 @@
 package com.backend.programming.learning.system.auth.service.messaging.publisher.kafka.organization;
 
 import com.backend.programming.learning.system.auth.service.domain.config.AuthServiceConfigData;
-import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationCreatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationDeletedEvent;
-import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.organization.OrganizationCreatedMessagePublisher;
-import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.organization.OrganizationDeletedMessagePublisher;
 import com.backend.programming.learning.system.auth.service.messaging.mapper.OrganizationMessagingDataMapper;
-import com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationCreateRequestAvroModel;
+import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
 import com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationDeleteRequestAvroModel;
 import com.backend.programming.learning.system.kafka.producer.KafkaMessageHelper;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
@@ -15,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class DeleteOrganizationKafkaMessagePublisher implements OrganizationDeletedMessagePublisher {
+public class DeleteOrganizationKafkaMessagePublisher implements DomainEventPublisher<OrganizationDeletedEvent> {
     private final OrganizationMessagingDataMapper organizationMessagingDataMapper;
     private final AuthServiceConfigData authServiceConfigData;
     private final KafkaProducer<String, OrganizationDeleteRequestAvroModel> kafkaProducer;

@@ -17,39 +17,17 @@ import java.util.UUID;
 
 @Slf4j
 @Component
-public class UpdatedUserCoreSaga implements SagaStep<UserResponse, EmptyEvent, EmptyEvent> {
-    private final AuthDomainService authDomainService;
-    private final UserRepository userRepository;
-
-    public UpdatedUserCoreSaga(AuthDomainService authDomainService, UserRepository userRepository) {
-        this.authDomainService = authDomainService;
-        this.userRepository = userRepository;
-    }
-
+public class UpdatedUserCoreSaga implements SagaStep<UserResponse> {
 
     @Override
     @Transactional
-    public EmptyEvent process(UserResponse userResponse) {
-        log.info("Updating user with id: {}", userResponse.getUserId());
-        User user = findUser(userResponse.getUserId());
-        return EmptyEvent.INSTANCE;
+    public void process(UserResponse userResponse) {
+
     }
 
     @Override
     @Transactional
-    public EmptyEvent rollback(UserResponse userResponse) {
-        log.info("Updating user fail with id: {}", userResponse.getUserId());
-        User user = findUser(userResponse.getUserId());
-        return EmptyEvent.INSTANCE;
-    }
+    public void rollback(UserResponse userResponse) {
 
-    private User findUser(String userId) {
-        Optional<User> user = userRepository.findById(new UserId(UUID.fromString(userId)));
-        if (user.isEmpty()) {
-            log.error("User with id: {} could not be found!", userId);
-            throw new AuthNotFoundException("User with id: " + userId + " could not be found!");
-        }
-        return user.get();
     }
-
 }

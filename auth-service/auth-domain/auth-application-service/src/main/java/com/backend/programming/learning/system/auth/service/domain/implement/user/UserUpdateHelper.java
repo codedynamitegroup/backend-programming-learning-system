@@ -5,9 +5,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.up
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
-import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.user.UserUpdatedMessagePublisher;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
-import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -22,12 +20,10 @@ import java.util.UUID;
 @Component
 public class UserUpdateHelper {
     private final UserRepository userRepository;
-    private final UserUpdatedMessagePublisher userUpdatedMessagePublisher;
     private final AuthDomainService authDomainService;
 
-    public UserUpdateHelper(UserRepository userRepository, UserUpdatedMessagePublisher userUpdatedMessagePublisher, AuthDomainService authDomainService) {
+    public UserUpdateHelper(UserRepository userRepository, AuthDomainService authDomainService) {
         this.userRepository = userRepository;
-        this.userUpdatedMessagePublisher = userUpdatedMessagePublisher;
         this.authDomainService = authDomainService;
     }
 
@@ -55,7 +51,7 @@ public class UserUpdateHelper {
             user.setAvatarUrl(updateUserCommand.getAvatarUrl());
         }
 
-        UserUpdatedEvent userUpdatedEvent = authDomainService.updateUser(user, userUpdatedMessagePublisher);
+        UserUpdatedEvent userUpdatedEvent = authDomainService.updateUser(user);
 
         saveUser(user);
         return userUpdatedEvent;

@@ -8,14 +8,12 @@ import com.backend.programming.learning.system.domain.event.publisher.DomainEven
 import java.time.ZonedDateTime;
 
 public class OrganizationUpdatedEvent extends OrganizationEvent {
-    private final DomainEventPublisher<OrganizationUpdatedEvent> organizationUpdatedEventDomainEventPublisher;
-    public OrganizationUpdatedEvent(Organization organization, ZonedDateTime createdAt, DomainEventPublisher<OrganizationUpdatedEvent> organizationUpdatedEventDomainEventPublisher) {
+    public OrganizationUpdatedEvent(Organization organization, ZonedDateTime createdAt) {
         super(organization, createdAt);
-        this.organizationUpdatedEventDomainEventPublisher = organizationUpdatedEventDomainEventPublisher;
     }
 
     @Override
     public void fire() {
-        organizationUpdatedEventDomainEventPublisher.publish(this);
+
     }
 }

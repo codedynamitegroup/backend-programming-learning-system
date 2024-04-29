@@ -5,7 +5,6 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.de
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserDeletedEvent;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
-import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.user.UserDeletedMessagePublisher;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
@@ -19,14 +18,11 @@ import java.util.Optional;
 public class UserDeleteHelper {
     private final AuthDomainService authDomainService;
     private final UserRepository userRepository;
-    private final UserDeletedMessagePublisher userDeletedMessagePublisher;
 
-    public UserDeleteHelper(AuthDomainService authDomainService, UserRepository userRepository, UserDeletedMessagePublisher userDeletedMessagePublisher) {
+    public UserDeleteHelper(AuthDomainService authDomainService, UserRepository userRepository) {
         this.authDomainService = authDomainService;
         this.userRepository = userRepository;
-        this.userDeletedMessagePublisher = userDeletedMessagePublisher;
     }
-
 
     @Transactional
     public UserDeletedEvent deleteUser(DeleteUserCommand deleteUserCommand) {
@@ -40,7 +36,7 @@ public class UserDeleteHelper {
 
         User user = userResult.get();
 
-        UserDeletedEvent userDeletedEvent = authDomainService.deleteUser(user, userDeletedMessagePublisher);
+        UserDeletedEvent userDeletedEvent = authDomainService.deleteUser(user);
         userRepository.save(user);
         return userDeletedEvent;
     }

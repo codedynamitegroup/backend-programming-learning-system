@@ -16,16 +16,26 @@
       "type": "string"
     },
     {
-      "name": "userResponseStatus",
+      "name": "copyState",
       "type": {
         "type": "enum",
-        "name": "UserResponseStatus",
-        "symbols": ["CREATED",
-          "CREATE_FAILED",
+        "name": "CopyState",
+        "symbols": [
+          "CREATING",
+          "CREATED",
+          "UPDATING",
           "UPDATED",
-          "UPDATE_FAILED",
+          "DELETING",
           "DELETED",
-          "DELETE_FAILED"]
+          "CREATE_PROPAGATING",
+          "UPDATE_PROPAGATING",
+          "DELETE_PROPAGATING",
+          "CREATE_ROLLBACKING",
+          "UPDATE_ROLLBACKING",
+          "DELETE_ROLLBACKING",
+          "DELETE_FAILED",
+          "UPDATE_FAILED",
+          "CREATE_FAILED"]
       }
     },
     {

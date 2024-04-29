@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.auth.service.dataaccess.organiza
 
 import com.backend.programming.learning.system.auth.service.dataaccess.role.entity.RoleEntity;
 import com.backend.programming.learning.system.auth.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import javax.persistence.*;
 import lombok.*;
@@ -37,6 +38,10 @@ public class OrganizationEntity {
     private String address;
     private String apiKey;
     private String moodleUrl;
+
+    @Enumerated(EnumType.STRING)
+    private CopyState copyState;
+
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
     private Boolean isDeleted;

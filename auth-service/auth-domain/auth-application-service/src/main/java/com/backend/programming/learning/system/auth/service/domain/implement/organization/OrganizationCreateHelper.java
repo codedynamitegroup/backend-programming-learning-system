@@ -7,7 +7,6 @@ import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationCreatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.mapper.OrganizationDataMapper;
-import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.organization.OrganizationCreatedMessagePublisher;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.OrganizationRepository;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
@@ -25,14 +24,12 @@ public class OrganizationCreateHelper {
     private final OrganizationRepository organizationRepository;
     private final OrganizationDataMapper organizationDataMapper;
     private final UserRepository userRepository;
-    private final OrganizationCreatedMessagePublisher organizationCreatedMessagePublisher;
 
-    public OrganizationCreateHelper(AuthDomainService authDomainService, OrganizationRepository organizationRepository, OrganizationDataMapper organizationDataMapper, UserRepository userRepository, OrganizationCreatedMessagePublisher organizationCreatedMessagePublisher) {
+    public OrganizationCreateHelper(AuthDomainService authDomainService, OrganizationRepository organizationRepository, OrganizationDataMapper organizationDataMapper, UserRepository userRepository) {
         this.authDomainService = authDomainService;
         this.organizationRepository = organizationRepository;
         this.organizationDataMapper = organizationDataMapper;
         this.userRepository = userRepository;
-        this.organizationCreatedMessagePublisher = organizationCreatedMessagePublisher;
     }
 
 
@@ -42,7 +39,7 @@ public class OrganizationCreateHelper {
         Organization organization = organizationDataMapper.createOrganizationCommandToOrganization(createOrganizationCommand);
         organization.setCreatedBy(createdBy);
         organization.setUpdatedBy(createdBy);
-        OrganizationCreatedEvent organizationCreatedEvent = authDomainService.createOrganization(organization, organizationCreatedMessagePublisher);
+        OrganizationCreatedEvent organizationCreatedEvent = authDomainService.createOrganization(organization);
         saveOrganization(organization);
         return organizationCreatedEvent;
     }

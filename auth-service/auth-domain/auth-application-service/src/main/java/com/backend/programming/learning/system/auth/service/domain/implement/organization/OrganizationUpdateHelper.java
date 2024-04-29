@@ -7,10 +7,8 @@ import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationUpdatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
-import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.organization.OrganizationUpdatedMessagePublisher;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.OrganizationRepository;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
-import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
@@ -28,13 +26,11 @@ public class OrganizationUpdateHelper {
     private final OrganizationRepository organizationRepository;
     private final UserRepository userRepository;
     private final AuthDomainService authDomainService;
-    private final OrganizationUpdatedMessagePublisher organizationUpdatedMessagePublisher;
 
-    public OrganizationUpdateHelper(OrganizationRepository organizationRepository, UserRepository userRepository, AuthDomainService authDomainService, OrganizationUpdatedMessagePublisher organizationUpdatedMessagePublisher) {
+    public OrganizationUpdateHelper(OrganizationRepository organizationRepository, UserRepository userRepository, AuthDomainService authDomainService) {
         this.organizationRepository = organizationRepository;
         this.userRepository = userRepository;
         this.authDomainService = authDomainService;
-        this.organizationUpdatedMessagePublisher = organizationUpdatedMessagePublisher;
     }
 
 
@@ -74,7 +70,7 @@ public class OrganizationUpdateHelper {
             organization.setMoodleUrl(updateOrganizationCommand.getMoodleUrl());
         }
 
-        OrganizationUpdatedEvent organizationUpdatedEvent = authDomainService.updateOrganization(organization, organizationUpdatedMessagePublisher);
+        OrganizationUpdatedEvent organizationUpdatedEvent = authDomainService.updateOrganization(organization);
         updateOrganization(organization);
         return organizationUpdatedEvent;
     }

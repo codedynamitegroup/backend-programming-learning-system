@@ -1,73 +1,44 @@
 package com.backend.programming.learning.system.auth.service.messaging.mapper;
 
 import com.backend.programming.learning.system.auth.service.domain.dto.method.message.UserResponse;
-import com.backend.programming.learning.system.auth.service.domain.entity.User;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserDeletedEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedEvent;
-import com.backend.programming.learning.system.domain.valueobject.UserResponseStatus;
-import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel;
-import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserDeleteRequestAvroModel;
+import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserEventPayload;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel;
 import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseAvroModel;
-import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserUpdateRequestAvroModel;
 import org.springframework.stereotype.Component;
-
+import java.time.Instant;
 import java.util.UUID;
 
 @Component
 public class UserMessagingDataMapper {
-    public UserCreateRequestAvroModel userCreatedToUserCreateRequestAvroModel(UserCreatedEvent userCreatedEvent) {
-        User user = userCreatedEvent.getUser();
-        return UserCreateRequestAvroModel.newBuilder()
-                .setId(UUID.randomUUID().toString())
-                .setSagaId("")
-                .setUserId(user.getId().getValue().toString())
-                .setEmail(user.getEmail())
-                .setFirstName(user.getFirstName())
-                .setLastName(user.getLastName())
-                .setPhone(user.getPhone())
-                .setCreatedAt(user.getCreatedAt().toInstant())
-                .setUpdatedAt(user.getUpdatedAt().toInstant())
-                .setIsDeleted(user.getDeleted())
-                .build();
-    }
-
-    public UserUpdateRequestAvroModel userUpdatedToUserUpdateRequestAvroModel(UserUpdatedEvent userUpdatedEvent) {
-        User user = userUpdatedEvent.getUser();
-        if (user.getDob() == null) {
-            return UserUpdateRequestAvroModel.newBuilder()
-                    .setId(UUID.randomUUID().toString())
-                    .setSagaId("")
-                    .setUserId(user.getId().getValue().toString())
-                    .setFirstName(user.getFirstName())
-                    .setLastName(user.getLastName())
-                    .setPhone(user.getPhone())
-                    .setAddress(user.getAddress())
-                    .setAvatarUrl(user.getAvatarUrl())
-                    .setUpdatedAt(user.getUpdatedAt().toInstant())
-                    .build();
+    public UserRequestAvroModel userUpdatedToUserUpdateRequestAvroModel(String sagaId,
+                                                                        UserEventPayload userEventPayload) {
+        Instant instantWithZeroNano = Instant.now().truncatedTo(java.time.temporal.ChronoUnit.SECONDS);
+        Instant dob = userEventPayload.getDob().toInstant();
+        if (userEventPayload.getDob() == null) {
+            dob = instantWithZeroNano;
         }
-        return UserUpdateRequestAvroModel.newBuilder()
+        return UserRequestAvroModel.newBuilder()
                 .setId(UUID.randomUUID().toString())
                 .setSagaId("")
-                .setUserId(user.getId().getValue().toString())
-                .setFirstName(user.getFirstName())
-                .setLastName(user.getLastName())
-                .setPhone(user.getPhone())
-                .setAddress(user.getAddress())
-                .setDob(user.getDob().toInstant())
-                .setAvatarUrl(user.getAvatarUrl())
-                .setUpdatedAt(user.getUpdatedAt().toInstant())
+                .setUserId(userEventPayload.getUserId())
+                .setFirstName(userEventPayload.getFirstName())
+                .setLastName(userEventPayload.getLastName())
+                .setPhone(userEventPayload.getPhone())
+                .setAddress(userEventPayload.getAddress())
+                .setDob(dob)
+                .setAvatarUrl(userEventPayload.getAvatarUrl())
+                .setUpdatedAt(userEventPayload.getUpdatedAt().toInstant())
                 .build();
     }
 
-    public UserDeleteRequestAvroModel userDeletedToUserDeleteRequestAvroModel(UserDeletedEvent userDeletedEvent) {
-        User user = userDeletedEvent.getUser();
-        return UserDeleteRequestAvroModel.newBuilder()
+    public UserRequestAvroModel userDeletedToUserDeleteRequestAvroModel(String sagaId,
+                                                                        UserEventPayload userEventPayload) {
+        return UserRequestAvroModel.newBuilder()
                 .setId(UUID.randomUUID().toString())
-                .setSagaId("")
-                .setUserId(user.getId().getValue().toString())
-                .setIsDeleted(user.getDeleted())
+                .setSagaId(sagaId)
+                .setUserId(userEventPayload.getUserId())
+                .setIsDeleted(userEventPayload.getIsDeleted())
                 .build();
     }
 
@@ -76,9 +47,26 @@ public class UserMessagingDataMapper {
                 .id(userResponseAvroModel.getId())
                 .sagaId(userResponseAvroModel.getSagaId())
                 .userId(userResponseAvroModel.getUserId())
-                .userResponseStatus(UserResponseStatus.valueOf(userResponseAvroModel.getUserResponseStatus().name()))
+                .state(CopyState.valueOf(userResponseAvroModel.getCopyState().name()))
                 .failureMessages(userResponseAvroModel.getFailureMessages())
                 .build();
 
+    }
+
+    public UserRequestAvroModel userCreatedEventPayloadToUserCreateRequestAvroModel(String sagaId,
+                                                                                    UserEventPayload userEventPayload)
+    {
+        return UserRequestAvroModel.newBuilder()
+                .setId(UUID.randomUUID().toString())
+                .setSagaId(sagaId)
+                .setUserId(userEventPayload.getUserId())
+                .setEmail(userEventPayload.getEmail())
+                .setFirstName(userEventPayload.getFirstName())
+                .setLastName(userEventPayload.getLastName())
+                .setPhone(userEventPayload.getPhone())
+                .setCreatedAt(userEventPayload.getCreatedAt().toInstant())
+                .setUpdatedAt(userEventPayload.getUpdatedAt().toInstant())
+                .setIsDeleted(userEventPayload.getIsDeleted())
+                .build();
     }
 }

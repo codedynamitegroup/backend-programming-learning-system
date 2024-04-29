@@ -1,7 +1,6 @@
 package com.backend.programming.learning.system.auth.service.domain.dto.method.message;
 
 import com.backend.programming.learning.system.domain.valueobject.OrganizationResponseStatus;
-import com.backend.programming.learning.system.domain.valueobject.UserResponseStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

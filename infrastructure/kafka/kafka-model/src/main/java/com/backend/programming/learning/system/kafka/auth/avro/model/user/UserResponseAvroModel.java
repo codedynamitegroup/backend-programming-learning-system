@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class UserResponseAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 7763536235303921082L;
+  private static final long serialVersionUID = 6896496006293596331L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserResponseAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model.user\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"userResponseStatus\",\"type\":{\"type\":\"enum\",\"name\":\"UserResponseStatus\",\"symbols\":[\"CREATED\",\"CREATE_FAILED\",\"UPDATED\",\"UPDATE_FAILED\",\"DELETED\",\"DELETE_FAILED\"]}},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserResponseAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model.user\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"CREATE_PROPAGATING\",\"UPDATE_PROPAGATING\",\"DELETE_PROPAGATING\",\"CREATE_ROLLBACKING\",\"UPDATE_ROLLBACKING\",\"DELETE_ROLLBACKING\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -76,7 +76,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
   private java.lang.String id;
   private java.lang.String sagaId;
   private java.lang.String userId;
-  private com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseStatus userResponseStatus;
+  private com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState copyState;
   private java.util.List<java.lang.String> failureMessages;
 
   /**
@@ -91,14 +91,14 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
    * @param id The new value for id
    * @param sagaId The new value for sagaId
    * @param userId The new value for userId
-   * @param userResponseStatus The new value for userResponseStatus
+   * @param copyState The new value for copyState
    * @param failureMessages The new value for failureMessages
    */
-  public UserResponseAvroModel(java.lang.String id, java.lang.String sagaId, java.lang.String userId, com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseStatus userResponseStatus, java.util.List<java.lang.String> failureMessages) {
+  public UserResponseAvroModel(java.lang.String id, java.lang.String sagaId, java.lang.String userId, com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState copyState, java.util.List<java.lang.String> failureMessages) {
     this.id = id;
     this.sagaId = sagaId;
     this.userId = userId;
-    this.userResponseStatus = userResponseStatus;
+    this.copyState = copyState;
     this.failureMessages = failureMessages;
   }
 
@@ -115,7 +115,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
     case 0: return id;
     case 1: return sagaId;
     case 2: return userId;
-    case 3: return userResponseStatus;
+    case 3: return copyState;
     case 4: return failureMessages;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
@@ -129,7 +129,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
     case 0: id = value$ != null ? value$.toString() : null; break;
     case 1: sagaId = value$ != null ? value$.toString() : null; break;
     case 2: userId = value$ != null ? value$.toString() : null; break;
-    case 3: userResponseStatus = (com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseStatus)value$; break;
+    case 3: copyState = (com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState)value$; break;
     case 4: failureMessages = (java.util.List<java.lang.String>)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
@@ -187,20 +187,20 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
   }
 
   /**
-   * Gets the value of the 'userResponseStatus' field.
-   * @return The value of the 'userResponseStatus' field.
+   * Gets the value of the 'copyState' field.
+   * @return The value of the 'copyState' field.
    */
-  public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseStatus getUserResponseStatus() {
-    return userResponseStatus;
+  public com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState getCopyState() {
+    return copyState;
   }
 
 
   /**
-   * Sets the value of the 'userResponseStatus' field.
+   * Sets the value of the 'copyState' field.
    * @param value the value to set.
    */
-  public void setUserResponseStatus(com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseStatus value) {
-    this.userResponseStatus = value;
+  public void setCopyState(com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState value) {
+    this.copyState = value;
   }
 
   /**
@@ -264,7 +264,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
     private java.lang.String id;
     private java.lang.String sagaId;
     private java.lang.String userId;
-    private com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseStatus userResponseStatus;
+    private com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState copyState;
     private java.util.List<java.lang.String> failureMessages;
 
     /** Creates a new Builder */
@@ -290,8 +290,8 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
         this.userId = data().deepCopy(fields()[2].schema(), other.userId);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
-      if (isValidValue(fields()[3], other.userResponseStatus)) {
-        this.userResponseStatus = data().deepCopy(fields()[3].schema(), other.userResponseStatus);
+      if (isValidValue(fields()[3], other.copyState)) {
+        this.copyState = data().deepCopy(fields()[3].schema(), other.copyState);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
       if (isValidValue(fields()[4], other.failureMessages)) {
@@ -318,8 +318,8 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
         this.userId = data().deepCopy(fields()[2].schema(), other.userId);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.userResponseStatus)) {
-        this.userResponseStatus = data().deepCopy(fields()[3].schema(), other.userResponseStatus);
+      if (isValidValue(fields()[3], other.copyState)) {
+        this.copyState = data().deepCopy(fields()[3].schema(), other.copyState);
         fieldSetFlags()[3] = true;
       }
       if (isValidValue(fields()[4], other.failureMessages)) {
@@ -449,41 +449,41 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
     }
 
     /**
-      * Gets the value of the 'userResponseStatus' field.
+      * Gets the value of the 'copyState' field.
       * @return The value.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseStatus getUserResponseStatus() {
-      return userResponseStatus;
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState getCopyState() {
+      return copyState;
     }
 
 
     /**
-      * Sets the value of the 'userResponseStatus' field.
-      * @param value The value of 'userResponseStatus'.
+      * Sets the value of the 'copyState' field.
+      * @param value The value of 'copyState'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseAvroModel.Builder setUserResponseStatus(com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseStatus value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseAvroModel.Builder setCopyState(com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState value) {
       validate(fields()[3], value);
-      this.userResponseStatus = value;
+      this.copyState = value;
       fieldSetFlags()[3] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'userResponseStatus' field has been set.
-      * @return True if the 'userResponseStatus' field has been set, false otherwise.
+      * Checks whether the 'copyState' field has been set.
+      * @return True if the 'copyState' field has been set, false otherwise.
       */
-    public boolean hasUserResponseStatus() {
+    public boolean hasCopyState() {
       return fieldSetFlags()[3];
     }
 
 
     /**
-      * Clears the value of the 'userResponseStatus' field.
+      * Clears the value of the 'copyState' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseAvroModel.Builder clearUserResponseStatus() {
-      userResponseStatus = null;
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseAvroModel.Builder clearCopyState() {
+      copyState = null;
       fieldSetFlags()[3] = false;
       return this;
     }
@@ -536,7 +536,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.String) defaultValue(fields()[0]);
         record.sagaId = fieldSetFlags()[1] ? this.sagaId : (java.lang.String) defaultValue(fields()[1]);
         record.userId = fieldSetFlags()[2] ? this.userId : (java.lang.String) defaultValue(fields()[2]);
-        record.userResponseStatus = fieldSetFlags()[3] ? this.userResponseStatus : (com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseStatus) defaultValue(fields()[3]);
+        record.copyState = fieldSetFlags()[3] ? this.copyState : (com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState) defaultValue(fields()[3]);
         record.failureMessages = fieldSetFlags()[4] ? this.failureMessages : (java.util.List<java.lang.String>) defaultValue(fields()[4]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
@@ -576,7 +576,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
 
     out.writeString(this.userId);
 
-    out.writeEnum(this.userResponseStatus.ordinal());
+    out.writeEnum(this.copyState.ordinal());
 
     long size0 = this.failureMessages.size();
     out.writeArrayStart();
@@ -604,7 +604,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
 
       this.userId = in.readString();
 
-      this.userResponseStatus = com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseStatus.values()[in.readEnum()];
+      this.copyState = com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState.values()[in.readEnum()];
 
       long size0 = in.readArrayStart();
       java.util.List<java.lang.String> a0 = this.failureMessages;
@@ -637,7 +637,7 @@ public class UserResponseAvroModel extends org.apache.avro.specific.SpecificReco
           break;
 
         case 3:
-          this.userResponseStatus = com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseStatus.values()[in.readEnum()];
+          this.copyState = com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState.values()[in.readEnum()];
           break;
 
         case 4:

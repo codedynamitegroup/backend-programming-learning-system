@@ -6,7 +6,6 @@ import com.backend.programming.learning.system.auth.service.domain.entity.Organi
 import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationDeletedEvent;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
-import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.organization.OrganizationDeletedMessagePublisher;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.OrganizationRepository;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import lombok.extern.slf4j.Slf4j;
@@ -20,12 +19,9 @@ import java.util.Optional;
 public class OrganizationDeleteHelper {
     private final AuthDomainService authDomainService;
     private final OrganizationRepository organizationRepository;
-    private final OrganizationDeletedMessagePublisher organizationDeletedMessagePublisher;
-
-    public OrganizationDeleteHelper(AuthDomainService authDomainService, OrganizationRepository organizationRepository, OrganizationDeletedMessagePublisher organizationDeletedMessagePublisher) {
+    public OrganizationDeleteHelper(AuthDomainService authDomainService, OrganizationRepository organizationRepository) {
         this.authDomainService = authDomainService;
         this.organizationRepository = organizationRepository;
-        this.organizationDeletedMessagePublisher = organizationDeletedMessagePublisher;
     }
 
     @Transactional
@@ -40,7 +36,7 @@ public class OrganizationDeleteHelper {
 
         Organization organization = organizationResult.get();
 
-        OrganizationDeletedEvent organizationDeletedEvent = authDomainService.deleteOrganization(organization, organizationDeletedMessagePublisher);
+        OrganizationDeletedEvent organizationDeletedEvent = authDomainService.deleteOrganization(organization);
         deleteOrganization(organization);
         return organizationDeletedEvent;
     }

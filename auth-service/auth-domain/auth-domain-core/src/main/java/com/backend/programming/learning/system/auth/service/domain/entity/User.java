@@ -2,12 +2,11 @@ package com.backend.programming.learning.system.auth.service.domain.entity;
 
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
-import com.backend.programming.learning.system.domain.valueobject.UserStatus;
 
 import java.time.ZonedDateTime;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.UUID;
 
 public class User extends AggregateRoot<UserId> {
@@ -21,6 +20,7 @@ public class User extends AggregateRoot<UserId> {
     private String avatarUrl;
     private String refreshToken;
     private String lastIp;
+    private CopyState copyState;
     private ZonedDateTime lastLogin;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
@@ -38,6 +38,7 @@ public class User extends AggregateRoot<UserId> {
         setAvatarUrl(builder.avatarUrl);
         setRefreshToken(builder.refreshToken);
         setLastIp(builder.lastIp);
+        setCopyState(builder.copyState);
         setLastLogin(builder.lastLogin);
         createdAt = builder.createdAt;
         setUpdatedAt(builder.updatedAt);
@@ -46,9 +47,9 @@ public class User extends AggregateRoot<UserId> {
 
     public void initializeUser() {
         setId(new UserId(UUID.randomUUID()));
-        lastLogin = ZonedDateTime.now(ZoneId.of("UTC"));
-        createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
-        updatedAt = ZonedDateTime.now(ZoneId.of("UTC"));
+        lastLogin = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
         isDeleted = false;
     }
 
@@ -156,10 +157,17 @@ public class User extends AggregateRoot<UserId> {
         this.updatedAt = updatedAt;
     }
 
+    public CopyState getCopyState() {
+        return copyState;
+    }
+
+    public void setCopyState(CopyState copyState) {
+        this.copyState = copyState;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
-
 
     public static final class Builder {
         private String email;
@@ -172,10 +180,10 @@ public class User extends AggregateRoot<UserId> {
         private String avatarUrl;
         private String refreshToken;
         private String lastIp;
+        private CopyState copyState;
         private ZonedDateTime lastLogin;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
-        private UserStatus userStatus;
         private Boolean isDeleted;
         private UserId userId;
 
@@ -229,6 +237,11 @@ public class User extends AggregateRoot<UserId> {
 
         public Builder lastIp(String val) {
             lastIp = val;
+            return this;
+        }
+
+        public Builder copyState(CopyState val) {
+            copyState = val;
             return this;
         }
 

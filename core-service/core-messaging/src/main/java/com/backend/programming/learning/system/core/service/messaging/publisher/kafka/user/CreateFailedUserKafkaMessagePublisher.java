@@ -32,7 +32,7 @@ public class CreateFailedUserKafkaMessagePublisher implements UserCreateFailedMe
 
         try {
             UserResponseAvroModel userResponseAvroModel = userMessagingDataMapper
-                    .userCreatedFailEventToUserResponseAvroModel(domainEvent);
+                    .userCreateFailedEventToUserResponseAvroModel(domainEvent);
             kafkaProducer.send(coreServiceConfigData.getUserResponseTopicName(),
                     userId,
                     userResponseAvroModel,

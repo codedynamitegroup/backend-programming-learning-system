@@ -2,7 +2,7 @@ package com.backend.programming.learning.system.auth.service.dataaccess.user.ent
 
 import javax.persistence.*;
 
-import com.backend.programming.learning.system.domain.valueobject.UserStatus;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import lombok.*;
 
 import java.time.ZonedDateTime;
@@ -29,6 +29,8 @@ public class UserEntity {
     private String avatarUrl;
     private String refreshToken;
     private String lastIp;
+    @Enumerated(EnumType.STRING)
+    private CopyState copyState;
     private ZonedDateTime lastLogin;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;

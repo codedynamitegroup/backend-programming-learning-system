@@ -8,11 +8,13 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.up
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
+import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserEventPayload;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,6 +35,21 @@ public class UserDataMapper {
                 .userId(user.getId().getValue())
                 .email(user.getEmail())
                 .message(message)
+                .build();
+    }
+
+    public UserEventPayload userCreatedEventToUserCreatedEventPayload(UserCreatedEvent userCreatedEvent) {
+        User user = userCreatedEvent.getUser();
+        return UserEventPayload.builder()
+                .userId(user.getId().getValue().toString())
+                .email(user.getEmail())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .phone(user.getPhone())
+                .createdAt(user.getCreatedAt())
+                .updatedAt(user.getUpdatedAt())
+                .isDeleted(user.getDeleted())
+                .copyState(CopyState.CREATING.name())
                 .build();
     }
 

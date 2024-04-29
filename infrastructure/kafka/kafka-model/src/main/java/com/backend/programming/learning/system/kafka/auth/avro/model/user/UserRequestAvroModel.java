@@ -13,11 +13,11 @@ import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
-public class UserCreateRequestAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -4969717955958099176L;
+public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
+  private static final long serialVersionUID = 1851599654137689524L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserCreateRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model.user\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"email\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"firstName\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"lastName\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"phone\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"updatedAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"isDeleted\",\"type\":\"boolean\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model.user\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"email\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"firstName\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"lastName\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"phone\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"address\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"avatarUrl\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"dob\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"},\"default\":0},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"CREATE_PROPAGATING\",\"UPDATE_PROPAGATING\",\"DELETE_PROPAGATING\",\"CREATE_ROLLBACKING\",\"UPDATE_ROLLBACKING\",\"DELETE_ROLLBACKING\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"},\"default\":0},{\"name\":\"updatedAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"},\"default\":0},{\"name\":\"isDeleted\",\"type\":\"boolean\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -25,17 +25,17 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
     MODEL$.addLogicalTypeConversion(new org.apache.avro.data.TimeConversions.TimestampMillisConversion());
   }
 
-  private static final BinaryMessageEncoder<UserCreateRequestAvroModel> ENCODER =
+  private static final BinaryMessageEncoder<UserRequestAvroModel> ENCODER =
       new BinaryMessageEncoder<>(MODEL$, SCHEMA$);
 
-  private static final BinaryMessageDecoder<UserCreateRequestAvroModel> DECODER =
+  private static final BinaryMessageDecoder<UserRequestAvroModel> DECODER =
       new BinaryMessageDecoder<>(MODEL$, SCHEMA$);
 
   /**
    * Return the BinaryMessageEncoder instance used by this class.
    * @return the message encoder used by this class
    */
-  public static BinaryMessageEncoder<UserCreateRequestAvroModel> getEncoder() {
+  public static BinaryMessageEncoder<UserRequestAvroModel> getEncoder() {
     return ENCODER;
   }
 
@@ -43,7 +43,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
    * Return the BinaryMessageDecoder instance used by this class.
    * @return the message decoder used by this class
    */
-  public static BinaryMessageDecoder<UserCreateRequestAvroModel> getDecoder() {
+  public static BinaryMessageDecoder<UserRequestAvroModel> getDecoder() {
     return DECODER;
   }
 
@@ -52,12 +52,12 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
    * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
    * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
    */
-  public static BinaryMessageDecoder<UserCreateRequestAvroModel> createDecoder(SchemaStore resolver) {
+  public static BinaryMessageDecoder<UserRequestAvroModel> createDecoder(SchemaStore resolver) {
     return new BinaryMessageDecoder<>(MODEL$, SCHEMA$, resolver);
   }
 
   /**
-   * Serializes this UserCreateRequestAvroModel to a ByteBuffer.
+   * Serializes this UserRequestAvroModel to a ByteBuffer.
    * @return a buffer holding the serialized data for this instance
    * @throws java.io.IOException if this instance could not be serialized
    */
@@ -66,12 +66,12 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
   }
 
   /**
-   * Deserializes a UserCreateRequestAvroModel from a ByteBuffer.
+   * Deserializes a UserRequestAvroModel from a ByteBuffer.
    * @param b a byte buffer holding serialized data for an instance of this class
-   * @return a UserCreateRequestAvroModel instance decoded from the given buffer
+   * @return a UserRequestAvroModel instance decoded from the given buffer
    * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
    */
-  public static UserCreateRequestAvroModel fromByteBuffer(
+  public static UserRequestAvroModel fromByteBuffer(
       java.nio.ByteBuffer b) throws java.io.IOException {
     return DECODER.decode(b);
   }
@@ -83,6 +83,10 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
   private java.lang.String firstName;
   private java.lang.String lastName;
   private java.lang.String phone;
+  private java.lang.String address;
+  private java.lang.String avatarUrl;
+  private java.time.Instant dob;
+  private com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState copyState;
   private java.time.Instant createdAt;
   private java.time.Instant updatedAt;
   private boolean isDeleted;
@@ -92,7 +96,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
    * to their default values from the schema.  If that is desired then
    * one should use <code>newBuilder()</code>.
    */
-  public UserCreateRequestAvroModel() {}
+  public UserRequestAvroModel() {}
 
   /**
    * All-args constructor.
@@ -103,11 +107,15 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
    * @param firstName The new value for firstName
    * @param lastName The new value for lastName
    * @param phone The new value for phone
+   * @param address The new value for address
+   * @param avatarUrl The new value for avatarUrl
+   * @param dob The new value for dob
+   * @param copyState The new value for copyState
    * @param createdAt The new value for createdAt
    * @param updatedAt The new value for updatedAt
    * @param isDeleted The new value for isDeleted
    */
-  public UserCreateRequestAvroModel(java.lang.String id, java.lang.String sagaId, java.lang.String userId, java.lang.String email, java.lang.String firstName, java.lang.String lastName, java.lang.String phone, java.time.Instant createdAt, java.time.Instant updatedAt, java.lang.Boolean isDeleted) {
+  public UserRequestAvroModel(java.lang.String id, java.lang.String sagaId, java.lang.String userId, java.lang.String email, java.lang.String firstName, java.lang.String lastName, java.lang.String phone, java.lang.String address, java.lang.String avatarUrl, java.time.Instant dob, com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState copyState, java.time.Instant createdAt, java.time.Instant updatedAt, java.lang.Boolean isDeleted) {
     this.id = id;
     this.sagaId = sagaId;
     this.userId = userId;
@@ -115,6 +123,10 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
     this.firstName = firstName;
     this.lastName = lastName;
     this.phone = phone;
+    this.address = address;
+    this.avatarUrl = avatarUrl;
+    this.dob = dob.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
+    this.copyState = copyState;
     this.createdAt = createdAt.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
     this.updatedAt = updatedAt.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
     this.isDeleted = isDeleted;
@@ -137,9 +149,13 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
     case 4: return firstName;
     case 5: return lastName;
     case 6: return phone;
-    case 7: return createdAt;
-    case 8: return updatedAt;
-    case 9: return isDeleted;
+    case 7: return address;
+    case 8: return avatarUrl;
+    case 9: return dob;
+    case 10: return copyState;
+    case 11: return createdAt;
+    case 12: return updatedAt;
+    case 13: return isDeleted;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -152,6 +168,10 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       null,
       null,
       null,
+      null,
+      null,
+      null,
+      new org.apache.avro.data.TimeConversions.TimestampMillisConversion(),
       null,
       new org.apache.avro.data.TimeConversions.TimestampMillisConversion(),
       new org.apache.avro.data.TimeConversions.TimestampMillisConversion(),
@@ -176,9 +196,13 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
     case 4: firstName = value$ != null ? value$.toString() : null; break;
     case 5: lastName = value$ != null ? value$.toString() : null; break;
     case 6: phone = value$ != null ? value$.toString() : null; break;
-    case 7: createdAt = (java.time.Instant)value$; break;
-    case 8: updatedAt = (java.time.Instant)value$; break;
-    case 9: isDeleted = (java.lang.Boolean)value$; break;
+    case 7: address = value$ != null ? value$.toString() : null; break;
+    case 8: avatarUrl = value$ != null ? value$.toString() : null; break;
+    case 9: dob = (java.time.Instant)value$; break;
+    case 10: copyState = (com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState)value$; break;
+    case 11: createdAt = (java.time.Instant)value$; break;
+    case 12: updatedAt = (java.time.Instant)value$; break;
+    case 13: isDeleted = (java.lang.Boolean)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -303,6 +327,74 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
   }
 
   /**
+   * Gets the value of the 'address' field.
+   * @return The value of the 'address' field.
+   */
+  public java.lang.String getAddress() {
+    return address;
+  }
+
+
+  /**
+   * Sets the value of the 'address' field.
+   * @param value the value to set.
+   */
+  public void setAddress(java.lang.String value) {
+    this.address = value;
+  }
+
+  /**
+   * Gets the value of the 'avatarUrl' field.
+   * @return The value of the 'avatarUrl' field.
+   */
+  public java.lang.String getAvatarUrl() {
+    return avatarUrl;
+  }
+
+
+  /**
+   * Sets the value of the 'avatarUrl' field.
+   * @param value the value to set.
+   */
+  public void setAvatarUrl(java.lang.String value) {
+    this.avatarUrl = value;
+  }
+
+  /**
+   * Gets the value of the 'dob' field.
+   * @return The value of the 'dob' field.
+   */
+  public java.time.Instant getDob() {
+    return dob;
+  }
+
+
+  /**
+   * Sets the value of the 'dob' field.
+   * @param value the value to set.
+   */
+  public void setDob(java.time.Instant value) {
+    this.dob = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
+  }
+
+  /**
+   * Gets the value of the 'copyState' field.
+   * @return The value of the 'copyState' field.
+   */
+  public com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState getCopyState() {
+    return copyState;
+  }
+
+
+  /**
+   * Sets the value of the 'copyState' field.
+   * @param value the value to set.
+   */
+  public void setCopyState(com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState value) {
+    this.copyState = value;
+  }
+
+  /**
    * Gets the value of the 'createdAt' field.
    * @return The value of the 'createdAt' field.
    */
@@ -354,45 +446,45 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
   }
 
   /**
-   * Creates a new UserCreateRequestAvroModel RecordBuilder.
-   * @return A new UserCreateRequestAvroModel RecordBuilder
+   * Creates a new UserRequestAvroModel RecordBuilder.
+   * @return A new UserRequestAvroModel RecordBuilder
    */
-  public static com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder newBuilder() {
-    return new com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder();
+  public static com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder newBuilder() {
+    return new com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder();
   }
 
   /**
-   * Creates a new UserCreateRequestAvroModel RecordBuilder by copying an existing Builder.
+   * Creates a new UserRequestAvroModel RecordBuilder by copying an existing Builder.
    * @param other The existing builder to copy.
-   * @return A new UserCreateRequestAvroModel RecordBuilder
+   * @return A new UserRequestAvroModel RecordBuilder
    */
-  public static com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder newBuilder(com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder other) {
+  public static com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder newBuilder(com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder other) {
     if (other == null) {
-      return new com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder();
+      return new com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder();
     } else {
-      return new com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder(other);
+      return new com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder(other);
     }
   }
 
   /**
-   * Creates a new UserCreateRequestAvroModel RecordBuilder by copying an existing UserCreateRequestAvroModel instance.
+   * Creates a new UserRequestAvroModel RecordBuilder by copying an existing UserRequestAvroModel instance.
    * @param other The existing instance to copy.
-   * @return A new UserCreateRequestAvroModel RecordBuilder
+   * @return A new UserRequestAvroModel RecordBuilder
    */
-  public static com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder newBuilder(com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel other) {
+  public static com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder newBuilder(com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel other) {
     if (other == null) {
-      return new com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder();
+      return new com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder();
     } else {
-      return new com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder(other);
+      return new com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder(other);
     }
   }
 
   /**
-   * RecordBuilder for UserCreateRequestAvroModel instances.
+   * RecordBuilder for UserRequestAvroModel instances.
    */
   @org.apache.avro.specific.AvroGenerated
-  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<UserCreateRequestAvroModel>
-    implements org.apache.avro.data.RecordBuilder<UserCreateRequestAvroModel> {
+  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<UserRequestAvroModel>
+    implements org.apache.avro.data.RecordBuilder<UserRequestAvroModel> {
 
     private java.lang.String id;
     private java.lang.String sagaId;
@@ -401,6 +493,10 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
     private java.lang.String firstName;
     private java.lang.String lastName;
     private java.lang.String phone;
+    private java.lang.String address;
+    private java.lang.String avatarUrl;
+    private java.time.Instant dob;
+    private com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState copyState;
     private java.time.Instant createdAt;
     private java.time.Instant updatedAt;
     private boolean isDeleted;
@@ -414,7 +510,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder other) {
+    private Builder(com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -444,25 +540,41 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
         this.phone = data().deepCopy(fields()[6].schema(), other.phone);
         fieldSetFlags()[6] = other.fieldSetFlags()[6];
       }
-      if (isValidValue(fields()[7], other.createdAt)) {
-        this.createdAt = data().deepCopy(fields()[7].schema(), other.createdAt);
+      if (isValidValue(fields()[7], other.address)) {
+        this.address = data().deepCopy(fields()[7].schema(), other.address);
         fieldSetFlags()[7] = other.fieldSetFlags()[7];
       }
-      if (isValidValue(fields()[8], other.updatedAt)) {
-        this.updatedAt = data().deepCopy(fields()[8].schema(), other.updatedAt);
+      if (isValidValue(fields()[8], other.avatarUrl)) {
+        this.avatarUrl = data().deepCopy(fields()[8].schema(), other.avatarUrl);
         fieldSetFlags()[8] = other.fieldSetFlags()[8];
       }
-      if (isValidValue(fields()[9], other.isDeleted)) {
-        this.isDeleted = data().deepCopy(fields()[9].schema(), other.isDeleted);
+      if (isValidValue(fields()[9], other.dob)) {
+        this.dob = data().deepCopy(fields()[9].schema(), other.dob);
         fieldSetFlags()[9] = other.fieldSetFlags()[9];
+      }
+      if (isValidValue(fields()[10], other.copyState)) {
+        this.copyState = data().deepCopy(fields()[10].schema(), other.copyState);
+        fieldSetFlags()[10] = other.fieldSetFlags()[10];
+      }
+      if (isValidValue(fields()[11], other.createdAt)) {
+        this.createdAt = data().deepCopy(fields()[11].schema(), other.createdAt);
+        fieldSetFlags()[11] = other.fieldSetFlags()[11];
+      }
+      if (isValidValue(fields()[12], other.updatedAt)) {
+        this.updatedAt = data().deepCopy(fields()[12].schema(), other.updatedAt);
+        fieldSetFlags()[12] = other.fieldSetFlags()[12];
+      }
+      if (isValidValue(fields()[13], other.isDeleted)) {
+        this.isDeleted = data().deepCopy(fields()[13].schema(), other.isDeleted);
+        fieldSetFlags()[13] = other.fieldSetFlags()[13];
       }
     }
 
     /**
-     * Creates a Builder by copying an existing UserCreateRequestAvroModel instance
+     * Creates a Builder by copying an existing UserRequestAvroModel instance
      * @param other The existing instance to copy.
      */
-    private Builder(com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel other) {
+    private Builder(com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -492,17 +604,33 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
         this.phone = data().deepCopy(fields()[6].schema(), other.phone);
         fieldSetFlags()[6] = true;
       }
-      if (isValidValue(fields()[7], other.createdAt)) {
-        this.createdAt = data().deepCopy(fields()[7].schema(), other.createdAt);
+      if (isValidValue(fields()[7], other.address)) {
+        this.address = data().deepCopy(fields()[7].schema(), other.address);
         fieldSetFlags()[7] = true;
       }
-      if (isValidValue(fields()[8], other.updatedAt)) {
-        this.updatedAt = data().deepCopy(fields()[8].schema(), other.updatedAt);
+      if (isValidValue(fields()[8], other.avatarUrl)) {
+        this.avatarUrl = data().deepCopy(fields()[8].schema(), other.avatarUrl);
         fieldSetFlags()[8] = true;
       }
-      if (isValidValue(fields()[9], other.isDeleted)) {
-        this.isDeleted = data().deepCopy(fields()[9].schema(), other.isDeleted);
+      if (isValidValue(fields()[9], other.dob)) {
+        this.dob = data().deepCopy(fields()[9].schema(), other.dob);
         fieldSetFlags()[9] = true;
+      }
+      if (isValidValue(fields()[10], other.copyState)) {
+        this.copyState = data().deepCopy(fields()[10].schema(), other.copyState);
+        fieldSetFlags()[10] = true;
+      }
+      if (isValidValue(fields()[11], other.createdAt)) {
+        this.createdAt = data().deepCopy(fields()[11].schema(), other.createdAt);
+        fieldSetFlags()[11] = true;
+      }
+      if (isValidValue(fields()[12], other.updatedAt)) {
+        this.updatedAt = data().deepCopy(fields()[12].schema(), other.updatedAt);
+        fieldSetFlags()[12] = true;
+      }
+      if (isValidValue(fields()[13], other.isDeleted)) {
+        this.isDeleted = data().deepCopy(fields()[13].schema(), other.isDeleted);
+        fieldSetFlags()[13] = true;
       }
     }
 
@@ -520,7 +648,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder setId(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder setId(java.lang.String value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -540,7 +668,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder clearId() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder clearId() {
       id = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -560,7 +688,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * @param value The value of 'sagaId'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder setSagaId(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder setSagaId(java.lang.String value) {
       validate(fields()[1], value);
       this.sagaId = value;
       fieldSetFlags()[1] = true;
@@ -580,7 +708,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * Clears the value of the 'sagaId' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder clearSagaId() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder clearSagaId() {
       sagaId = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -600,7 +728,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * @param value The value of 'userId'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder setUserId(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder setUserId(java.lang.String value) {
       validate(fields()[2], value);
       this.userId = value;
       fieldSetFlags()[2] = true;
@@ -620,7 +748,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * Clears the value of the 'userId' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder clearUserId() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder clearUserId() {
       userId = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -640,7 +768,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * @param value The value of 'email'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder setEmail(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder setEmail(java.lang.String value) {
       validate(fields()[3], value);
       this.email = value;
       fieldSetFlags()[3] = true;
@@ -660,7 +788,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * Clears the value of the 'email' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder clearEmail() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder clearEmail() {
       email = null;
       fieldSetFlags()[3] = false;
       return this;
@@ -680,7 +808,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * @param value The value of 'firstName'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder setFirstName(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder setFirstName(java.lang.String value) {
       validate(fields()[4], value);
       this.firstName = value;
       fieldSetFlags()[4] = true;
@@ -700,7 +828,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * Clears the value of the 'firstName' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder clearFirstName() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder clearFirstName() {
       firstName = null;
       fieldSetFlags()[4] = false;
       return this;
@@ -720,7 +848,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * @param value The value of 'lastName'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder setLastName(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder setLastName(java.lang.String value) {
       validate(fields()[5], value);
       this.lastName = value;
       fieldSetFlags()[5] = true;
@@ -740,7 +868,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * Clears the value of the 'lastName' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder clearLastName() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder clearLastName() {
       lastName = null;
       fieldSetFlags()[5] = false;
       return this;
@@ -760,7 +888,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * @param value The value of 'phone'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder setPhone(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder setPhone(java.lang.String value) {
       validate(fields()[6], value);
       this.phone = value;
       fieldSetFlags()[6] = true;
@@ -780,9 +908,168 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * Clears the value of the 'phone' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder clearPhone() {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder clearPhone() {
       phone = null;
       fieldSetFlags()[6] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'address' field.
+      * @return The value.
+      */
+    public java.lang.String getAddress() {
+      return address;
+    }
+
+
+    /**
+      * Sets the value of the 'address' field.
+      * @param value The value of 'address'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder setAddress(java.lang.String value) {
+      validate(fields()[7], value);
+      this.address = value;
+      fieldSetFlags()[7] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'address' field has been set.
+      * @return True if the 'address' field has been set, false otherwise.
+      */
+    public boolean hasAddress() {
+      return fieldSetFlags()[7];
+    }
+
+
+    /**
+      * Clears the value of the 'address' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder clearAddress() {
+      address = null;
+      fieldSetFlags()[7] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'avatarUrl' field.
+      * @return The value.
+      */
+    public java.lang.String getAvatarUrl() {
+      return avatarUrl;
+    }
+
+
+    /**
+      * Sets the value of the 'avatarUrl' field.
+      * @param value The value of 'avatarUrl'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder setAvatarUrl(java.lang.String value) {
+      validate(fields()[8], value);
+      this.avatarUrl = value;
+      fieldSetFlags()[8] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'avatarUrl' field has been set.
+      * @return True if the 'avatarUrl' field has been set, false otherwise.
+      */
+    public boolean hasAvatarUrl() {
+      return fieldSetFlags()[8];
+    }
+
+
+    /**
+      * Clears the value of the 'avatarUrl' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder clearAvatarUrl() {
+      avatarUrl = null;
+      fieldSetFlags()[8] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'dob' field.
+      * @return The value.
+      */
+    public java.time.Instant getDob() {
+      return dob;
+    }
+
+
+    /**
+      * Sets the value of the 'dob' field.
+      * @param value The value of 'dob'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder setDob(java.time.Instant value) {
+      validate(fields()[9], value);
+      this.dob = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
+      fieldSetFlags()[9] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'dob' field has been set.
+      * @return True if the 'dob' field has been set, false otherwise.
+      */
+    public boolean hasDob() {
+      return fieldSetFlags()[9];
+    }
+
+
+    /**
+      * Clears the value of the 'dob' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder clearDob() {
+      fieldSetFlags()[9] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'copyState' field.
+      * @return The value.
+      */
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState getCopyState() {
+      return copyState;
+    }
+
+
+    /**
+      * Sets the value of the 'copyState' field.
+      * @param value The value of 'copyState'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder setCopyState(com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState value) {
+      validate(fields()[10], value);
+      this.copyState = value;
+      fieldSetFlags()[10] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'copyState' field has been set.
+      * @return True if the 'copyState' field has been set, false otherwise.
+      */
+    public boolean hasCopyState() {
+      return fieldSetFlags()[10];
+    }
+
+
+    /**
+      * Clears the value of the 'copyState' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder clearCopyState() {
+      copyState = null;
+      fieldSetFlags()[10] = false;
       return this;
     }
 
@@ -800,10 +1087,10 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * @param value The value of 'createdAt'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder setCreatedAt(java.time.Instant value) {
-      validate(fields()[7], value);
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder setCreatedAt(java.time.Instant value) {
+      validate(fields()[11], value);
       this.createdAt = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
-      fieldSetFlags()[7] = true;
+      fieldSetFlags()[11] = true;
       return this;
     }
 
@@ -812,7 +1099,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * @return True if the 'createdAt' field has been set, false otherwise.
       */
     public boolean hasCreatedAt() {
-      return fieldSetFlags()[7];
+      return fieldSetFlags()[11];
     }
 
 
@@ -820,8 +1107,8 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * Clears the value of the 'createdAt' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder clearCreatedAt() {
-      fieldSetFlags()[7] = false;
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder clearCreatedAt() {
+      fieldSetFlags()[11] = false;
       return this;
     }
 
@@ -839,10 +1126,10 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * @param value The value of 'updatedAt'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder setUpdatedAt(java.time.Instant value) {
-      validate(fields()[8], value);
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder setUpdatedAt(java.time.Instant value) {
+      validate(fields()[12], value);
       this.updatedAt = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
-      fieldSetFlags()[8] = true;
+      fieldSetFlags()[12] = true;
       return this;
     }
 
@@ -851,7 +1138,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * @return True if the 'updatedAt' field has been set, false otherwise.
       */
     public boolean hasUpdatedAt() {
-      return fieldSetFlags()[8];
+      return fieldSetFlags()[12];
     }
 
 
@@ -859,8 +1146,8 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * Clears the value of the 'updatedAt' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder clearUpdatedAt() {
-      fieldSetFlags()[8] = false;
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder clearUpdatedAt() {
+      fieldSetFlags()[12] = false;
       return this;
     }
 
@@ -878,10 +1165,10 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * @param value The value of 'isDeleted'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder setIsDeleted(boolean value) {
-      validate(fields()[9], value);
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder setIsDeleted(boolean value) {
+      validate(fields()[13], value);
       this.isDeleted = value;
-      fieldSetFlags()[9] = true;
+      fieldSetFlags()[13] = true;
       return this;
     }
 
@@ -890,7 +1177,7 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * @return True if the 'isDeleted' field has been set, false otherwise.
       */
     public boolean hasIsDeleted() {
-      return fieldSetFlags()[9];
+      return fieldSetFlags()[13];
     }
 
 
@@ -898,16 +1185,16 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
       * Clears the value of the 'isDeleted' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserCreateRequestAvroModel.Builder clearIsDeleted() {
-      fieldSetFlags()[9] = false;
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder clearIsDeleted() {
+      fieldSetFlags()[13] = false;
       return this;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public UserCreateRequestAvroModel build() {
+    public UserRequestAvroModel build() {
       try {
-        UserCreateRequestAvroModel record = new UserCreateRequestAvroModel();
+        UserRequestAvroModel record = new UserRequestAvroModel();
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.String) defaultValue(fields()[0]);
         record.sagaId = fieldSetFlags()[1] ? this.sagaId : (java.lang.String) defaultValue(fields()[1]);
         record.userId = fieldSetFlags()[2] ? this.userId : (java.lang.String) defaultValue(fields()[2]);
@@ -915,9 +1202,13 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
         record.firstName = fieldSetFlags()[4] ? this.firstName : (java.lang.String) defaultValue(fields()[4]);
         record.lastName = fieldSetFlags()[5] ? this.lastName : (java.lang.String) defaultValue(fields()[5]);
         record.phone = fieldSetFlags()[6] ? this.phone : (java.lang.String) defaultValue(fields()[6]);
-        record.createdAt = fieldSetFlags()[7] ? this.createdAt : (java.time.Instant) defaultValue(fields()[7]);
-        record.updatedAt = fieldSetFlags()[8] ? this.updatedAt : (java.time.Instant) defaultValue(fields()[8]);
-        record.isDeleted = fieldSetFlags()[9] ? this.isDeleted : (java.lang.Boolean) defaultValue(fields()[9]);
+        record.address = fieldSetFlags()[7] ? this.address : (java.lang.String) defaultValue(fields()[7]);
+        record.avatarUrl = fieldSetFlags()[8] ? this.avatarUrl : (java.lang.String) defaultValue(fields()[8]);
+        record.dob = fieldSetFlags()[9] ? this.dob : (java.time.Instant) defaultValue(fields()[9]);
+        record.copyState = fieldSetFlags()[10] ? this.copyState : (com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState) defaultValue(fields()[10]);
+        record.createdAt = fieldSetFlags()[11] ? this.createdAt : (java.time.Instant) defaultValue(fields()[11]);
+        record.updatedAt = fieldSetFlags()[12] ? this.updatedAt : (java.time.Instant) defaultValue(fields()[12]);
+        record.isDeleted = fieldSetFlags()[13] ? this.isDeleted : (java.lang.Boolean) defaultValue(fields()[13]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -928,8 +1219,8 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumWriter<UserCreateRequestAvroModel>
-    WRITER$ = (org.apache.avro.io.DatumWriter<UserCreateRequestAvroModel>)MODEL$.createDatumWriter(SCHEMA$);
+  private static final org.apache.avro.io.DatumWriter<UserRequestAvroModel>
+    WRITER$ = (org.apache.avro.io.DatumWriter<UserRequestAvroModel>)MODEL$.createDatumWriter(SCHEMA$);
 
   @Override public void writeExternal(java.io.ObjectOutput out)
     throws java.io.IOException {
@@ -937,8 +1228,8 @@ public class UserCreateRequestAvroModel extends org.apache.avro.specific.Specifi
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumReader<UserCreateRequestAvroModel>
-    READER$ = (org.apache.avro.io.DatumReader<UserCreateRequestAvroModel>)MODEL$.createDatumReader(SCHEMA$);
+  private static final org.apache.avro.io.DatumReader<UserRequestAvroModel>
+    READER$ = (org.apache.avro.io.DatumReader<UserRequestAvroModel>)MODEL$.createDatumReader(SCHEMA$);
 
   @Override public void readExternal(java.io.ObjectInput in)
     throws java.io.IOException {
