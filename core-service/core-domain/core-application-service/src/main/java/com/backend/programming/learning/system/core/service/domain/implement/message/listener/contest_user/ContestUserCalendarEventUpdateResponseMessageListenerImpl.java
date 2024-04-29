@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.implement.message.listener.contest_user;
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.message.contest_user.ContestUserCalendarEventUpdatedResponse;
-import com.backend.programming.learning.system.core.service.domain.implement.saga.contest_user.ContestUserCalendarEventUpdateSaga;
+import com.backend.programming.learning.system.core.service.domain.implement.service.contest_user.ContestUserCalendarEventUpdateSaga;
 import com.backend.programming.learning.system.core.service.domain.ports.input.message.listener.contest_user.ContestUserCalendarEventUpdateResponseMessageListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.messaging.mapper;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.message.calendarevent.CalendarEventUpdateRequest;
 import com.backend.programming.learning.system.course.service.domain.event.calendarevent.CalendarEventUpdatedEvent;
+import com.backend.programming.learning.system.course.service.domain.outbox.model.calendarevent.CalendarEventUpdateEventPayload;
 import com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.*;
 import org.springframework.stereotype.Component;
 
@@ -12,29 +13,24 @@ import java.util.UUID;
 @Component
 public class CalendarEventMessagingDataMapper {
 
-    public CalendarEventUpdateResponseAvroModel calendarEventUpdateEventToCalendarEventUpdateResponseAvroModel(
-            CalendarEventUpdatedEvent calendarEventUpdatedEvent
+    public CalendarEventUpdateResponseAvroModel calendarEventUpdateEventPayloadToCalendarEventUpdateResponseAvroModel(
+            String sagaId,
+            CalendarEventUpdateEventPayload calendarEventUpdateEventPayload
     ) {
-        ZonedDateTime startTime = calendarEventUpdatedEvent.getCalendarEvent().getStartTime();
-        ZonedDateTime endTime = calendarEventUpdatedEvent.getCalendarEvent().getEndTime();
-
         return CalendarEventUpdateResponseAvroModel.newBuilder()
                 .setId(UUID.randomUUID())
-                .setSagaId(UUID.randomUUID())
-                .setCalendarEventId(calendarEventUpdatedEvent.getCalendarEvent().getId().getValue())
-                .setUserId(calendarEventUpdatedEvent.getCalendarEvent().getUser().getId().getValue())
-                .setCourseId(calendarEventUpdatedEvent.getCalendarEvent().getCourseId())
-                .setContestId(calendarEventUpdatedEvent.getCalendarEvent().getContestId())
-                .setName(calendarEventUpdatedEvent.getCalendarEvent().getName())
-                .setDescription(calendarEventUpdatedEvent.getCalendarEvent().getDescription())
-                .setEventType(NotificationEventType.valueOf(calendarEventUpdatedEvent.getCalendarEvent().getEventType().name()))
-                .setStartTime(startTime.toInstant())
-                .setEndTime(endTime.toInstant())
-                .setComponent(NotificationComponentType.valueOf(
-                        calendarEventUpdatedEvent.getCalendarEvent().getComponent().name()))
-                .setUpdateCalendarEventState(UpdateState.valueOf(
-                        calendarEventUpdatedEvent.getUpdateCalendarEventState().name()))
-                .setFailureMessages(calendarEventUpdatedEvent.getFailureMessages())
+                .setSagaId(UUID.fromString(sagaId))
+                .setCalendarEventId(calendarEventUpdateEventPayload.getCalendarEvent().getId().getValue())
+                .setUserId(calendarEventUpdateEventPayload.getCalendarEvent().getUser().getId().getValue())
+                .setContestId(calendarEventUpdateEventPayload.getCalendarEvent().getContestId())
+                .setCourseId(calendarEventUpdateEventPayload.getCalendarEvent().getCourseId())
+                .setName(calendarEventUpdateEventPayload.getCalendarEvent().getName())
+                .setDescription(calendarEventUpdateEventPayload.getCalendarEvent().getDescription())
+                .setEventType(NotificationEventType.valueOf(calendarEventUpdateEventPayload.getCalendarEvent().getEventType().name()))
+                .setStartTime(calendarEventUpdateEventPayload.getCalendarEvent().getStartTime().toInstant())
+                .setEndTime(calendarEventUpdateEventPayload.getCalendarEvent().getEndTime().toInstant())
+                .setComponent(NotificationComponentType.valueOf(calendarEventUpdateEventPayload.getCalendarEvent().getComponent().name()))
+                .setUpdateCalendarEventState(UpdateState.valueOf(calendarEventUpdateEventPayload.getUpdateCalendarEventState()))
                 .build();
     }
 

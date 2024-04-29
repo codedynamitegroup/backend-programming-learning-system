@@ -2,15 +2,9 @@ package com.backend.programming.learning.system.core.service.domain.implement.se
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestCommand;
-import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
-import com.backend.programming.learning.system.core.service.domain.entity.Contest;
-import com.backend.programming.learning.system.core.service.domain.entity.Topic;
-import com.backend.programming.learning.system.core.service.domain.entity.User;
+import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.exception.*;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseRepository;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ContestRepository;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.TopicRepository;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.UserRepository;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
@@ -22,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -30,15 +25,19 @@ import java.util.UUID;
 public class ContestUpdateHelper {
     private final ContestRepository contestRepository;
     private final UserRepository userRepository;
+    private final ContestUserRepository contestUserRepository;
 
     public ContestUpdateHelper(ContestRepository contestRepository,
-                               UserRepository userRepository) {
+                               UserRepository userRepository,
+                               ContestUserRepository contestUserRepository) {
         this.contestRepository = contestRepository;
         this.userRepository = userRepository;
+        this.contestUserRepository = contestUserRepository;
     }
 
     @Transactional
     public void persistContest(UpdateContestCommand updateContestCommand) {
+        checkContestUserExistsByContestId(updateContestCommand.getContestId());
         Contest contest = getContest(updateContestCommand.getContestId());
 
         User updatedBy = getUser(updateContestCommand.getUpdatedBy());
@@ -94,6 +93,15 @@ public class ContestUpdateHelper {
             throw new CoreDomainException("Could not update contest with id: " + contest.getId().getValue());
         }
         log.info("Contest updated with id: {}", contest.getId().getValue());
+    }
+
+    private void checkContestUserExistsByContestId(UUID contestId) {
+        List<ContestUser> contestUsers = contestUserRepository.findByContestId(contestId);
+        if (!contestUsers.isEmpty()) {
+            log.error("Cannot update contest with id: {} when there are users registered", contestId);
+            throw new CoreDomainException("Cannot update contest with id: " +
+                    contestId + " when there are users registered");
+        }
     }
 }
 

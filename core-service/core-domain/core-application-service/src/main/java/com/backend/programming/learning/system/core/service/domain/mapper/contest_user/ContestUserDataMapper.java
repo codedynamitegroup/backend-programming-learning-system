@@ -7,7 +7,9 @@ import com.backend.programming.learning.system.core.service.domain.dto.responsee
 import com.backend.programming.learning.system.core.service.domain.entity.Contest;
 import com.backend.programming.learning.system.core.service.domain.entity.ContestUser;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
+import com.backend.programming.learning.system.core.service.domain.event.contest_user.ContestUserUpdatedEvent;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
+import com.backend.programming.learning.system.core.service.domain.outbox.model.contest_user.ContestUserUpdateEventPayload;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.UpdateState;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
@@ -36,6 +38,7 @@ public class ContestUserDataMapper {
                 .user(User.builder()
                         .id(new UserId(createContestUserCommand.getUserId()))
                         .build())
+                .updateCalendarEventState(UpdateState.CREATING)
                 .isCompleted(false)
                 .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .updatedAt(ZonedDateTime.now(ZoneId.of("UTC")))
@@ -74,6 +77,16 @@ public class ContestUserDataMapper {
                 .currentPage(contestUsers.getNumber())
                 .totalItems(contestUsers.getTotalElements())
                 .totalPages(contestUsers.getTotalPages())
+                .build();
+    }
+
+    public ContestUserUpdateEventPayload contestUserUpdatedEventToContestUserUpdateEventPayload(
+            ContestUserUpdatedEvent contestUserUpdatedEvent) {
+        return ContestUserUpdateEventPayload.builder()
+                .contestUser(contestUserUpdatedEvent.getContestUser())
+                .createdAt(contestUserUpdatedEvent.getCreatedAt())
+                .updateCalendarEventState(
+                        contestUserUpdatedEvent.getContestUser().getUpdateCalendarEventState().name())
                 .build();
     }
 }

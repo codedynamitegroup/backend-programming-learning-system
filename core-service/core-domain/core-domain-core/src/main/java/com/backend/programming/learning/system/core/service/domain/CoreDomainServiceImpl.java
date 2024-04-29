@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain;
 
 import com.backend.programming.learning.system.core.service.domain.entity.*;
+import com.backend.programming.learning.system.core.service.domain.event.contest_user.ContestUserUpdatedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
@@ -128,9 +129,10 @@ public class CoreDomainServiceImpl implements CoreDomainService {
     }
 
     @Override
-    public void createContestUser(ContestUser contestUser) {
+    public ContestUserUpdatedEvent createContestUser(ContestUser contestUser) {
         contestUser.initializeContestUser();
         log.info("Contest user created with id: {}", contestUser.getId().getValue());
+        return new ContestUserUpdatedEvent(contestUser, ZonedDateTime.now(ZoneId.of("UTC")));
     }
 
     @Override

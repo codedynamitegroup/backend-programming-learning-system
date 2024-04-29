@@ -3,14 +3,16 @@ package com.backend.programming.learning.system.course.service.domain.event.cale
 import com.backend.programming.learning.system.course.service.domain.entity.CalendarEvent;
 import com.backend.programming.learning.system.course.service.domain.valueobject.UpdateState;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 public class CalendarEventUpdatedEvent extends CalendarEventEvent {
 
-    protected CalendarEventUpdatedEvent(CalendarEvent calendarEvent,
-                                        UpdateState updateCalendarEventState,
-                                        List<String> failureMessages) {
-        super(calendarEvent, updateCalendarEventState, failureMessages);
+    public CalendarEventUpdatedEvent(CalendarEvent calendarEvent,
+                                     UpdateState updateCalendarEventState,
+                                     ZonedDateTime createdAt,
+                                     List<String> failureMessages) {
+        super(calendarEvent, updateCalendarEventState, createdAt, failureMessages);
     }
     @Override
     public void fire() {

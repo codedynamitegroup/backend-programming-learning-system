@@ -5,11 +5,16 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestUsersCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestUsersResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.ContestUser;
+import com.backend.programming.learning.system.core.service.domain.event.contest_user.ContestUserUpdatedEvent;
 import com.backend.programming.learning.system.core.service.domain.mapper.contest_user.ContestUserDataMapper;
+import com.backend.programming.learning.system.core.service.domain.outbox.scheduler.contest_user.ContestUserUpdateOutboxHelper;
+import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.UUID;
 
 @Component
 @Slf4j
@@ -17,25 +22,45 @@ public class ContestUserCommandHandler {
     private final ContestUserCreateHelper contestUserCreateHelper;
     private final ContestUserQueryHelper contestUserQueryHelper;
     private final ContestUserDataMapper contestUserDataMapper;
+    private final ContestUserUpdateOutboxHelper contestUserUpdateOutboxHelper;
+    private final ContestUserSagaHelper contestUserSagaHelper;
 
     public ContestUserCommandHandler(ContestUserCreateHelper contestUserCreateHelper,
                                      ContestUserQueryHelper contestUserQueryHelper,
-                                     ContestUserDataMapper contestUserDataMapper) {
+                                     ContestUserDataMapper contestUserDataMapper,
+                                     ContestUserUpdateOutboxHelper contestUserUpdateOutboxHelper,
+                                     ContestUserSagaHelper contestUserSagaHelper) {
         this.contestUserCreateHelper = contestUserCreateHelper;
         this.contestUserQueryHelper = contestUserQueryHelper;
         this.contestUserDataMapper = contestUserDataMapper;
+        this.contestUserUpdateOutboxHelper = contestUserUpdateOutboxHelper;
+        this.contestUserSagaHelper = contestUserSagaHelper;
     }
 
     @Transactional
     public CreateContestUserResponse createContestUserResponse(
             CreateContestUserCommand createContestUserCommand) {
-        ContestUser contestUser = contestUserCreateHelper
+        ContestUserUpdatedEvent contestUserUpdatedEvent = contestUserCreateHelper
                 .persistContestUser(createContestUserCommand);
+        log.info("Contest_User is created with id: {}", contestUserUpdatedEvent.getContestUser().getId().getValue());
+        CreateContestUserResponse createContestUserResponse = contestUserDataMapper
+                .contestUserToCreateContestUserResponse(contestUserUpdatedEvent.getContestUser(),
+                "Contest_User created successfully");
 
-        log.info("Contest User created with id: {}", contestUser.getId().getValue());
+        contestUserUpdateOutboxHelper.saveContestUserUpdateOutboxMessage(
+                contestUserDataMapper
+                        .contestUserUpdatedEventToContestUserUpdateEventPayload(contestUserUpdatedEvent),
+                contestUserUpdatedEvent.getContestUser().getUpdateCalendarEventState(),
+                contestUserSagaHelper.updateCalendarEventStateToSagaStatus(
+                        contestUserUpdatedEvent.getContestUser().getUpdateCalendarEventState()),
+                OutboxStatus.STARTED,
+                UUID.randomUUID());
 
-        return contestUserDataMapper.contestUserToCreateContestUserResponse(contestUser,
-                "Contest User created successfully");
+        log.info("Returning contestUserUpdatedEvent with contest id and user id: {} {}",
+                contestUserUpdatedEvent.getContestUser().getContest().getId().getValue(),
+                contestUserUpdatedEvent.getContestUser().getUser().getId().getValue());
+
+        return createContestUserResponse;
     }
 
     @Transactional(readOnly = true)

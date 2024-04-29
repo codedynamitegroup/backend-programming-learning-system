@@ -32,6 +32,24 @@ CREATE TYPE notification_event_type AS ENUM ('USER', 'COURSE');
 DROP TYPE IF EXISTS notification_component_type;
 CREATE TYPE notification_component_type AS ENUM ('ASSIGNMENT', 'EXAM', 'POST', 'CONTEST', 'REMINDER');
 
+DROP TYPE IF EXISTS update_state;
+CREATE TYPE update_state AS ENUM (
+    'CREATING',
+    'CREATED',
+    'UPDATING',
+    'UPDATED',
+    'DELETING',
+    'DELETED',
+    'DELETE_FAILED',
+    'UPDATE_FAILED',
+    'CREATE_FAILED');
+
+DROP TYPE IF EXISTS saga_status;
+CREATE TYPE saga_status AS ENUM ('STARTED', 'FAILED', 'SUCCEEDED', 'PROCESSING', 'COMPENSATING', 'COMPENSATED');
+
+DROP TYPE IF EXISTS outbox_status;
+CREATE TYPE outbox_status AS ENUM ('STARTED', 'COMPLETED', 'FAILED');
+
 DROP TABLE IF EXISTS "public".user CASCADE;
 CREATE TABLE "public".user
 (
@@ -469,6 +487,30 @@ CREATE TABLE "public".calendar_event
         REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-    CONSTRAINT contest_user_id_no_key UNIQUE (user_id, contest_id),
-    CONSTRAINT user_contest_id_key UNIQUE (user_id, contest_id),
+    CONSTRAINT contest_user_id_no_key UNIQUE (user_id, contest_id)
 );
+
+DROP TABLE IF EXISTS "public".calendar_event_update_outbox CASCADE;
+
+CREATE TABLE "public".calendar_event_update_outbox
+(
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
+    saga_id uuid NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    processed_at TIMESTAMP WITH TIME ZONE,
+    type character varying COLLATE pg_catalog."default" NOT NULL,
+    payload jsonb NOT NULL,
+    outbox_status outbox_status NOT NULL,
+    saga_status saga_status NOT NULL,
+    updateCalendarEventState update_state,
+    version integer NOT NULL,
+    CONSTRAINT calendar_event_outbox_pkey PRIMARY KEY (id)
+);
+
+CREATE INDEX calendar_event_outbox_saga_status
+    ON "public".calendar_event_update_outbox
+        (type, outbox_status, saga_status);
+
+CREATE UNIQUE INDEX calendar_event_outbox_saga_id
+    ON "public".calendar_event_update_outbox
+        (type, saga_id, saga_status);

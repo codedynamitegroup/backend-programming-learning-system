@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.outbox.model.contest_user;
 
+import com.backend.programming.learning.system.core.service.domain.valueobject.UpdateState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
 import lombok.AllArgsConstructor;
@@ -20,7 +21,7 @@ public class ContestUserUpdateOutboxMessage {
     private String type;
     private String payload;
     private SagaStatus sagaStatus;
-//    private OrderStatus orderStatus;
+    private UpdateState updateCalendarEventState;
     private OutboxStatus outboxStatus;
     private int version;
 
@@ -32,9 +33,9 @@ public class ContestUserUpdateOutboxMessage {
         this.sagaStatus = sagaStatus;
     }
 
-//    public void setOrderStatus(OrderStatus orderStatus) {
-//        this.orderStatus = orderStatus;
-//    }
+    public void setUpdateCalendarEventState(UpdateState updateCalendarEventState) {
+        this.updateCalendarEventState = updateCalendarEventState;
+    }
 
     public void setOutboxStatus(OutboxStatus outboxStatus) {
         this.outboxStatus = outboxStatus;

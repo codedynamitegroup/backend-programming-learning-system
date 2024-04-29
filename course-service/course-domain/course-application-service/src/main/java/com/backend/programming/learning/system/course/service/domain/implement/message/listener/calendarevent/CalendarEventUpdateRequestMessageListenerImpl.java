@@ -14,13 +14,26 @@ public class CalendarEventUpdateRequestMessageListenerImpl implements CalendarEv
 
     private final CalendarEventRequestHelper calendarEventRequestHelper;
 
-    public CalendarEventUpdateRequestMessageListenerImpl(CalendarEventRequestHelper calendarEventRequestHelper) {
+    public CalendarEventUpdateRequestMessageListenerImpl(
+            CalendarEventRequestHelper calendarEventRequestHelper) {
         this.calendarEventRequestHelper = calendarEventRequestHelper;
     }
 
     @Override
     @Transactional
     public void updateCalendarEvent(CalendarEventUpdateRequest calendarEventUpdateRequest) {
-        return;
+        switch (calendarEventUpdateRequest.getUpdateCalendarEventState()) {
+            case CREATING:
+                calendarEventRequestHelper.persistCalendarEvent(calendarEventUpdateRequest);
+                break;
+            case UPDATING:
+                calendarEventRequestHelper.updateCalendarEvent(calendarEventUpdateRequest);
+                break;
+            case DELETING:
+                calendarEventRequestHelper.deleteCalendarEvent(calendarEventUpdateRequest);
+                break;
+            default:
+                log.error("Invalid update state: {}", calendarEventUpdateRequest.getUpdateCalendarEventState());
+        }
     }
 }

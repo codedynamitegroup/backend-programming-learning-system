@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.course.service.domain.event.quest
 import com.backend.programming.learning.system.course.service.domain.event.user.*;
 import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
 
+
 import java.util.List;
 
 public interface CourseDomainService {
@@ -65,14 +66,12 @@ public interface CourseDomainService {
     UserDeletedFailEvent deletedUserFail(User user,
                                          DomainEventPublisher<UserDeletedFailEvent> userDeletedFailEventDomainEventPublisher,
                                          List<String> failureMessages);
-
-
     OrganizationCreatedSuccessEvent createOrganizationSuccess(Organization organization,
                                                               DomainEventPublisher<OrganizationCreatedSuccessEvent> organizationCreatedSuccessEventDomainEventPublisher);
 
-   OrganizationCreatedFailEvent createOrganizationFail(Organization organization,
-                                                       DomainEventPublisher<OrganizationCreatedFailEvent> organizationCreatedFailEventDomainEventPublisher,
-                                                       List<String> failureMessages);
+    OrganizationCreatedFailEvent createOrganizationFail(Organization organization,
+                                                        DomainEventPublisher<OrganizationCreatedFailEvent> organizationCreatedFailEventDomainEventPublisher,
+                                                        List<String> failureMessages);
 
     OrganizationUpdatedSuccessEvent updateOrganizationSuccess(Organization organization,
                                                               DomainEventPublisher<OrganizationUpdatedSuccessEvent> organizationUpdatedSuccessEventDomainEventPublisher);
@@ -87,11 +86,4 @@ public interface CourseDomainService {
     OrganizationDeletedFailEvent deleteOrganizationFail(Organization organization,
                                                         DomainEventPublisher<OrganizationDeletedFailEvent> organizationDeletedFailEventDomainEventPublisher,
                                                         List<String> failureMessages);
-
-
-
-
-
-
-
 }
