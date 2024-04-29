@@ -37,7 +37,6 @@ public interface CoreDomainService {
     void createChapter(Chapter chapter);
     void createCertificateCourseUser(CertificateCourseUser certificateCourseUser);
     ContestUserUpdatedEvent createContestUser(ContestUser contestUser);
-    void createCalendarEvent(CalendarEvent calendarEvent);
 
     UserCreatedSuccessEvent createUserSuccess(User user,
                                               DomainEventPublisher<UserCreatedSuccessEvent> userCreatedSuccessEventDomainEventPublisher);

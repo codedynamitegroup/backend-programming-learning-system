@@ -9,8 +9,8 @@ import java.time.ZonedDateTime;
 import java.util.UUID;
 
 public class ContestUser extends AggregateRoot<ContestUserId> {
-    private final User user;
-    private final Contest contest;
+    private User user;
+    private Contest contest;
     private UUID calendarEventId;
     private UpdateState updateCalendarEventState;
     private Boolean isCompleted;
@@ -95,6 +95,14 @@ public class ContestUser extends AggregateRoot<ContestUserId> {
 
     public void setUpdatedAt(ZonedDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public void setContest(Contest contest) {
+        this.contest = contest;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public static final class Builder {

@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.course.service.domain.outbox.model.calendarevent;
 
-import com.backend.programming.learning.system.course.service.domain.entity.CalendarEvent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +13,23 @@ import java.util.List;
 @AllArgsConstructor
 public class CalendarEventUpdateEventPayload {
     @JsonProperty
-    private CalendarEvent calendarEvent;
+    private String calendarEventId;
+    @JsonProperty
+    private String name;
+    @JsonProperty
+    private String description;
+    @JsonProperty
+    private String eventType;
+    @JsonProperty
+    private ZonedDateTime startTime;
+    @JsonProperty
+    private ZonedDateTime endTime;
+    @JsonProperty
+    private String userId;
+    @JsonProperty
+    private String contestId;
+    @JsonProperty
+    private String component;
     @JsonProperty
     private String updateCalendarEventState;
     @JsonProperty

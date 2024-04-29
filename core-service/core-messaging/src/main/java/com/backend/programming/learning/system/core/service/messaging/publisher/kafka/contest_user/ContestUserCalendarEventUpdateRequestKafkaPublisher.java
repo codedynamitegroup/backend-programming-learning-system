@@ -44,7 +44,7 @@ public class ContestUserCalendarEventUpdateRequestKafkaPublisher implements Cont
         String sagaId = contestUserUpdateOutboxMessage.getSagaId().toString();
 
         log.info("Received ContestUserUpdateOutboxMessage for contest_user_id: {} and saga id: {}",
-                contestUserUpdateEventPayload.getContestUser().getId().getValue(),
+                contestUserUpdateEventPayload.getContestUserId(),
                 sagaId);
 
         try {
@@ -60,15 +60,15 @@ public class ContestUserCalendarEventUpdateRequestKafkaPublisher implements Cont
                             calendarEventUpdateRequestAvroModel,
                             contestUserUpdateOutboxMessage,
                             outboxCallback,
-                            contestUserUpdateEventPayload.getContestUser().getId().getValue().toString(),
+                            contestUserUpdateEventPayload.getContestUserId(),
                             "CalendarEventUpdateRequestAvroModel"));
 
             log.info("ContestUserUpdateEventPayload sent to Kafka for contest_user_id: {} and saga id: {}",
-                    contestUserUpdateEventPayload.getContestUser().getId().getValue().toString(), sagaId);
+                    contestUserUpdateEventPayload.getContestUserId(), sagaId);
         } catch (Exception e) {
             log.error("Error while sending ContestUserUpdateEventPayload" +
                             " to kafka with contest_user_id: {} and saga id: {}, error: {}",
-                    contestUserUpdateEventPayload.getContestUser().getId().getValue().toString(),
+                    contestUserUpdateEventPayload.getContestUserId(),
                     sagaId, e.getMessage());
         }
     }

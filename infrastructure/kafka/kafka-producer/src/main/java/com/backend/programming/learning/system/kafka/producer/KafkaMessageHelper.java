@@ -1,7 +1,5 @@
 package com.backend.programming.learning.system.kafka.producer;
 
-import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
-import com.backend.programming.learning.system.course.service.domain.exception.CourseDomainException;
 import com.backend.programming.learning.system.domain.exception.DomainException;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.fasterxml.jackson.core.JsonProcessingException;

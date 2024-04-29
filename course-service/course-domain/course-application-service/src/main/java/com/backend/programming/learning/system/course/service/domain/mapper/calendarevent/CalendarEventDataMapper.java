@@ -108,8 +108,17 @@ public class CalendarEventDataMapper {
     public CalendarEventUpdateEventPayload calendarEventUpdatedEventToCalendarEventUpdateEventPayload(
             CalendarEventUpdatedEvent calendarEventUpdatedEvent) {
         return CalendarEventUpdateEventPayload.builder()
-                .calendarEvent(calendarEventUpdatedEvent.getCalendarEvent())
+                .calendarEventId(calendarEventUpdatedEvent.getCalendarEvent().getId().getValue().toString())
+                .name(calendarEventUpdatedEvent.getCalendarEvent().getName())
+                .description(calendarEventUpdatedEvent.getCalendarEvent().getDescription())
+                .eventType(calendarEventUpdatedEvent.getCalendarEvent().getEventType().name())
+                .startTime(calendarEventUpdatedEvent.getCalendarEvent().getStartTime())
+                .endTime(calendarEventUpdatedEvent.getCalendarEvent().getEndTime())
+                .userId(calendarEventUpdatedEvent.getCalendarEvent().getUser().getId().getValue().toString())
+                .contestId(calendarEventUpdatedEvent.getCalendarEvent().getContestId().toString())
+                .component(calendarEventUpdatedEvent.getCalendarEvent().getComponent().name())
                 .updateCalendarEventState(calendarEventUpdatedEvent.getUpdateCalendarEventState().name())
+                .createdAt(calendarEventUpdatedEvent.getCalendarEvent().getCreatedAt())
                 .failureMessages(calendarEventUpdatedEvent.getFailureMessages())
                 .build();
     }
@@ -119,7 +128,15 @@ public class CalendarEventDataMapper {
             List<String> failureMessages) {
         CalendarEvent calendarEvent = calendarEventUpdateRequestModelToCalendarEvent(calendarEventUpdateRequest);
         return CalendarEventUpdateEventPayload.builder()
-                .calendarEvent(calendarEvent)
+                .calendarEventId(calendarEvent.getId().getValue().toString())
+                .name(calendarEvent.getName())
+                .description(calendarEvent.getDescription())
+                .eventType(calendarEvent.getEventType().name())
+                .startTime(calendarEvent.getStartTime())
+                .endTime(calendarEvent.getEndTime())
+                .userId(calendarEvent.getUser().getId().getValue().toString())
+                .contestId(calendarEvent.getContestId().toString())
+                .component(calendarEvent.getComponent().name())
                 .updateCalendarEventState(String.valueOf(calendarEventUpdateRequest.getUpdateCalendarEventState()))
                 .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .failureMessages(failureMessages)

@@ -1,8 +1,6 @@
 package com.backend.programming.learning.system.core.service.messaging.mapper;
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.message.contest_user.ContestUserCalendarEventUpdatedResponse;
-import com.backend.programming.learning.system.core.service.domain.entity.ContestUser;
-import com.backend.programming.learning.system.core.service.domain.event.contest_user.ContestUserUpdatedEvent;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.contest_user.ContestUserUpdateEventPayload;
 import com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.*;
 import org.springframework.stereotype.Component;
@@ -18,20 +16,18 @@ public class ContestUserEventMessagingDataMapper {
     public CalendarEventUpdateRequestAvroModel contestUserUpdatedEventPayloadToCalendarEventUpdateRequestAvroModel(
             String sagaId,
             ContestUserUpdateEventPayload contestUserUpdateEventPayload) {
-        ContestUser contestUser = contestUserUpdateEventPayload.getContestUser();
-
         return CalendarEventUpdateRequestAvroModel.newBuilder()
                 .setId(UUID.randomUUID())
                 .setSagaId(UUID.fromString(sagaId))
-                .setUserId(contestUser.getUser().getId().getValue())
-                .setContestId(contestUser.getContest().getId().getValue())
+                .setUserId(UUID.fromString(contestUserUpdateEventPayload.getUserId()))
+                .setContestId(UUID.fromString(contestUserUpdateEventPayload.getContestId()))
                 .setCourseId(null)
-                .setName(contestUser.getContest().getName())
+                .setName(contestUserUpdateEventPayload.getName())
                 .setEventType(NotificationEventType.USER)
-                .setStartTime(contestUser.getContest().getStartTime().toInstant())
-                .setEndTime(contestUser.getContest().getEndTime().toInstant())
+                .setStartTime(contestUserUpdateEventPayload.getStartTime().toInstant())
+                .setEndTime(contestUserUpdateEventPayload.getEndTime().toInstant())
                 .setComponent(NotificationComponentType.CONTEST)
-                .setUpdateCalendarEventState(UpdateState.valueOf(contestUser.getUpdateCalendarEventState().toString()))
+                .setUpdateCalendarEventState(UpdateState.valueOf(contestUserUpdateEventPayload.getUpdateCalendarEventState()))
                 .build();
     }
 

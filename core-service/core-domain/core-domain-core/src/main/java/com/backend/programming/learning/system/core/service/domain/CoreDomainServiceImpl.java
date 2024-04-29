@@ -136,12 +136,6 @@ public class CoreDomainServiceImpl implements CoreDomainService {
     }
 
     @Override
-    public void createCalendarEvent(CalendarEvent calendarEvent) {
-        calendarEvent.initializeCalendarEvent();
-        log.info("Calendar event created with id: {}", calendarEvent.getId().getValue());
-    }
-
-    @Override
     public UserCreatedSuccessEvent createUserSuccess(User user, DomainEventPublisher<UserCreatedSuccessEvent> userCreatedSuccessEventDomainEventPublisher) {
         return new UserCreatedSuccessEvent(user,
                 ZonedDateTime.now(ZoneId.of("UTC")),

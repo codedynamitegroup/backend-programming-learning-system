@@ -13,7 +13,23 @@ import java.time.ZonedDateTime;
 @AllArgsConstructor
 public class ContestUserUpdateEventPayload {
     @JsonProperty
-    private ContestUser contestUser;
+    private String contestUserId;
+    @JsonProperty
+    private String userId;
+    @JsonProperty
+    private String contestId;
+    @JsonProperty
+    private String name;
+    @JsonProperty
+    private String description;
+    @JsonProperty
+    private String eventType;
+    @JsonProperty
+    private ZonedDateTime startTime;
+    @JsonProperty
+    private ZonedDateTime endTime;
+    @JsonProperty
+    private String component;
     @JsonProperty
     private String updateCalendarEventState;
     @JsonProperty

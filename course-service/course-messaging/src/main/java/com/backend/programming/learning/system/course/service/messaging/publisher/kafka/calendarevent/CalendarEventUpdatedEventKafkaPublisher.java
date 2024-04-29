@@ -44,7 +44,7 @@ public class CalendarEventUpdatedEventKafkaPublisher implements CalendarEventUpd
         String sagaId = calendarEventUpdateOutboxMessage.getSagaId().toString();
 
         log.info("Received CalendarEventUpdateOutboxMessage for calendar event id: {} and saga id: {}",
-                calendarEventUpdateEventPayload.getCalendarEvent().getId().getValue().toString(),
+                calendarEventUpdateEventPayload.getCalendarEventId(),
                 sagaId);
 
         try {
@@ -61,15 +61,15 @@ public class CalendarEventUpdatedEventKafkaPublisher implements CalendarEventUpd
                             calendarEventUpdateResponseAvroModel,
                             calendarEventUpdateOutboxMessage,
                             outboxCallback,
-                            calendarEventUpdateEventPayload.getCalendarEvent().getId().getValue().toString(),
+                            calendarEventUpdateEventPayload.getCalendarEventId(),
                             "CalendarEventUpdateResponseAvroModel"));
 
             log.info("CalendarEventUpdateEventPayload sent to Kafka for calendar event id: {} and saga id: {}",
-                    calendarEventUpdateEventPayload.getCalendarEvent().getId().getValue().toString(), sagaId);
+                    calendarEventUpdateEventPayload.getCalendarEventId(), sagaId);
         } catch (Exception e) {
             log.error("Error while sending CalendarEventUpdateEventPayload" +
                             " to kafka with calendar event id: {} and saga id: {}, error: {}",
-                    calendarEventUpdateEventPayload.getCalendarEvent().getId().getValue().toString(),
+                    calendarEventUpdateEventPayload.getCalendarEventId(),
                     sagaId, e.getMessage());
         }
     }

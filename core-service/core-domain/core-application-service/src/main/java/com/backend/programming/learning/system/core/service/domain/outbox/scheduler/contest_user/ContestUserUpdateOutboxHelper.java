@@ -88,12 +88,12 @@ public class ContestUserUpdateOutboxHelper {
             return objectMapper.writeValueAsString(contestUserUpdateEventPayload);
         } catch (JsonProcessingException e) {
             log.error("Could not create ContestUserUpdateEventPayload object for contest id: {} and user id: {}",
-                    contestUserUpdateEventPayload.getContestUser().getContest().getId().getValue(),
-                    contestUserUpdateEventPayload.getContestUser().getUser().getId().getValue(),
+                    contestUserUpdateEventPayload.getContestId(),
+                    contestUserUpdateEventPayload.getUserId(),
                     e);
             throw new CoreDomainException("Could not create ContestUserUpdateEventPayload object for contest id: " +
-                    contestUserUpdateEventPayload.getContestUser().getContest().getId().getValue() +
-                    " and user id: " + contestUserUpdateEventPayload.getContestUser().getUser().getId().getValue());
+                    contestUserUpdateEventPayload.getContestId() +
+                    " and user id: " + contestUserUpdateEventPayload.getUserId(), e);
         }
     }
 

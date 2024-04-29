@@ -44,11 +44,13 @@ public class ContestUserCreateHelper {
 
     @Transactional
     public ContestUserUpdatedEvent persistContestUser(CreateContestUserCommand createContestUserCommand) {
-        checkUser(createContestUserCommand.getUserId());
-        checkContest(createContestUserCommand.getContestId());
+        User user = getUser(createContestUserCommand.getUserId());
+        Contest contest = getContest(createContestUserCommand.getContestId());
 
         ContestUser contestUser = contestUserDataMapper.
                 createContestUserCommandToContestUser(createContestUserCommand);
+        contestUser.setUser(user);
+        contestUser.setContest(contest);
         ContestUserUpdatedEvent contestUserUpdatedEvent = coreDomainService.createContestUser(contestUser);
         saveContestUser(contestUser);
 
@@ -56,20 +58,22 @@ public class ContestUserCreateHelper {
         return contestUserUpdatedEvent;
     }
 
-    private void checkUser(UUID userId) {
+    private User getUser(UUID userId) {
         Optional<User> user = userRepository.findUser(userId);
         if (user.isEmpty()) {
             log.warn("User with id: {} not found", userId);
             throw new UserNotFoundException("Could not find user with id: " + userId);
         }
+        return user.get();
     }
 
-    private void checkContest(UUID contestId) {
+    private Contest getContest(UUID contestId) {
         Optional<Contest> contest = contestRepository.findById(new ContestId(contestId));
         if (contest.isEmpty()) {
             log.warn("Contest with id: {} not found", contestId);
             throw new ContestNotFoundException("Could not find contest with id: " + contestId);
         }
+        return contest.get();
     }
 
     private void saveContestUser(ContestUser contestUser) {

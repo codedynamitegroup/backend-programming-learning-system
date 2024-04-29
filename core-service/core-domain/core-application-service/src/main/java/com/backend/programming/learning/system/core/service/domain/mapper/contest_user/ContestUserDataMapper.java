@@ -83,10 +83,18 @@ public class ContestUserDataMapper {
     public ContestUserUpdateEventPayload contestUserUpdatedEventToContestUserUpdateEventPayload(
             ContestUserUpdatedEvent contestUserUpdatedEvent) {
         return ContestUserUpdateEventPayload.builder()
-                .contestUser(contestUserUpdatedEvent.getContestUser())
-                .createdAt(contestUserUpdatedEvent.getCreatedAt())
+                .contestUserId(contestUserUpdatedEvent.getContestUser().getId().getValue().toString())
+                .userId(contestUserUpdatedEvent.getContestUser().getUser().getId().getValue().toString())
+                .contestId(contestUserUpdatedEvent.getContestUser().getContest().getId().getValue().toString())
+                .name(contestUserUpdatedEvent.getContestUser().getContest().getName())
+                .description(contestUserUpdatedEvent.getContestUser().getContest().getDescription())
+                .eventType("USER")
+                .startTime(contestUserUpdatedEvent.getContestUser().getContest().getStartTime())
+                .endTime(contestUserUpdatedEvent.getContestUser().getContest().getEndTime())
+                .component("CONTEST")
                 .updateCalendarEventState(
                         contestUserUpdatedEvent.getContestUser().getUpdateCalendarEventState().name())
+                .createdAt(contestUserUpdatedEvent.getCreatedAt())
                 .build();
     }
 }
