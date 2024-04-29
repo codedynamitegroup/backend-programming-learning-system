@@ -1,14 +1,18 @@
 package com.backend.programming.learning.system.course.service.messaging.publisher.kafka.calendarevent;
 
 import com.backend.programming.learning.system.course.service.domain.config.CourseServiceConfigData;
-import com.backend.programming.learning.system.course.service.domain.event.calendarevent.CalendarEventUpdatedEvent;
+import com.backend.programming.learning.system.course.service.domain.outbox.model.calendarevent.CalendarEventUpdateEventPayload;
+import com.backend.programming.learning.system.course.service.domain.outbox.model.calendarevent.CalendarEventUpdateOutboxMessage;
 import com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.question.calendarevent.CalendarEventUpdatedMessagePublisher;
 import com.backend.programming.learning.system.course.service.messaging.mapper.CalendarEventMessagingDataMapper;
 import com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.CalendarEventUpdateResponseAvroModel;
 import com.backend.programming.learning.system.kafka.producer.KafkaMessageHelper;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
+import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import java.util.function.BiConsumer;
 
 @Slf4j
 @Component
@@ -30,35 +34,43 @@ public class CalendarEventUpdatedEventKafkaPublisher implements CalendarEventUpd
     }
 
     @Override
-    public void publish(CalendarEventUpdatedEvent domainEvent) {
+    public void publish(CalendarEventUpdateOutboxMessage calendarEventUpdateOutboxMessage,
+                        BiConsumer<CalendarEventUpdateOutboxMessage, OutboxStatus> outboxCallback) {
+        CalendarEventUpdateEventPayload calendarEventUpdateEventPayload =
+                kafkaMessageHelper.getObjectEventPayload(
+                        calendarEventUpdateOutboxMessage.getPayload(),
+                        CalendarEventUpdateEventPayload.class);
 
-        String calendarEventId = domainEvent.getCalendarEvent().getId().toString();
-        String contestId = domainEvent.getCalendarEvent().getContestId().toString();
-        String userId = domainEvent.getCalendarEvent().getUser().getId().toString();
-        log.info("Received CalendarEventUpdatedEvent for calendar event id: {} and contest id: {} and user id: {}",
-                calendarEventId, contestId, userId);
-        String key = userId.concat("_").concat(calendarEventId);
+        String sagaId = calendarEventUpdateOutboxMessage.getSagaId().toString();
+
+        log.info("Received CalendarEventUpdateOutboxMessage for calendar event id: {} and saga id: {}",
+                calendarEventUpdateEventPayload.getCalendarEvent().getId().getValue().toString(),
+                sagaId);
 
         try {
-            CalendarEventUpdateResponseAvroModel calendarEventUpdateResponseAvroModel = calendarEventMessagingDataMapper
-                    .calendarEventUpdateEventToCalendarEventUpdateResponseAvroModel(domainEvent);
+            CalendarEventUpdateResponseAvroModel calendarEventUpdateResponseAvroModel =
+                    calendarEventMessagingDataMapper
+                            .calendarEventUpdateEventPayloadToCalendarEventUpdateResponseAvroModel(
+                                    sagaId, calendarEventUpdateEventPayload);
 
             kafkaProducer.send(courseServiceConfigData.getCalendarEventUpdateResponseTopicName(),
-                    key,
+                    sagaId,
                     calendarEventUpdateResponseAvroModel,
-                    kafkaMessageHelper.getKafkaCallback(
+                    kafkaMessageHelper.getKafkaCallbackApplyOutbox(
                             courseServiceConfigData.getCalendarEventUpdateResponseTopicName(),
                             calendarEventUpdateResponseAvroModel,
-                            calendarEventId,
-                            "CalendarEventUpdateResponseAvroModel")
-            );
-            log.info("CalendarEventUpdateResponseAvroModel sent to Kafka for calendar event id: {} and contest id: {} and user id: {}",
-                    calendarEventId, contestId, userId);
-        } catch (Exception e) {
-            log.error("Error while sending CalendarEventUpdateResponseAvroModel message" +
-                            " to kafka with calendar event id: {} and contest id: {} and user id: {}, error: {}",
-                    calendarEventId, contestId, userId, e.getMessage());
-        }
+                            calendarEventUpdateOutboxMessage,
+                            outboxCallback,
+                            calendarEventUpdateEventPayload.getCalendarEvent().getId().getValue().toString(),
+                            "CalendarEventUpdateResponseAvroModel"));
 
+            log.info("CalendarEventUpdateEventPayload sent to Kafka for calendar event id: {} and saga id: {}",
+                    calendarEventUpdateEventPayload.getCalendarEvent().getId().getValue().toString(), sagaId);
+        } catch (Exception e) {
+            log.error("Error while sending CalendarEventUpdateEventPayload" +
+                            " to kafka with calendar event id: {} and saga id: {}, error: {}",
+                    calendarEventUpdateEventPayload.getCalendarEvent().getId().getValue().toString(),
+                    sagaId, e.getMessage());
+        }
     }
 }

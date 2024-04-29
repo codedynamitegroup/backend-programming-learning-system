@@ -2,11 +2,16 @@ package com.backend.programming.learning.system.course.service.domain.mapper.cal
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.calendarevent.CreateCalendarEventCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.calendarevent.CreateCalendarEventResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.message.calendarevent.CalendarEventUpdateRequest;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.calendarevent.QueryAllCalendarEventsResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.calendarevent.CalendarEventResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.CalendarEvent;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.event.calendarevent.CalendarEventEvent;
+import com.backend.programming.learning.system.course.service.domain.event.calendarevent.CalendarEventUpdatedEvent;
 import com.backend.programming.learning.system.course.service.domain.mapper.user.UserDataMapper;
+import com.backend.programming.learning.system.course.service.domain.outbox.model.calendarevent.CalendarEventUpdateEventPayload;
+import com.backend.programming.learning.system.course.service.domain.valueobject.CalendarEventId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.NotificationComponentType;
 import com.backend.programming.learning.system.course.service.domain.valueobject.NotificationEventType;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
@@ -16,6 +21,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class CalendarEventDataMapper {
@@ -80,4 +86,43 @@ public class CalendarEventDataMapper {
                 .build();
     }
 
+    public CalendarEvent calendarEventUpdateRequestModelToCalendarEvent(CalendarEventUpdateRequest calendarEventUpdateRequest) {
+        return CalendarEvent.builder()
+                .name(calendarEventUpdateRequest.getName())
+                .description(calendarEventUpdateRequest.getDescription())
+                .eventType(NotificationEventType.valueOf(String.valueOf(calendarEventUpdateRequest.getEventType())))
+                .startTime(calendarEventUpdateRequest.getStartTime())
+                .endTime(calendarEventUpdateRequest.getEndTime())
+                .user(User.builder()
+                        .id(new UserId(UUID.fromString(calendarEventUpdateRequest.getUserId())))
+                        .build())
+                .courseId(null)
+                .contestId(UUID.fromString(calendarEventUpdateRequest.getContestId()))
+                .component(NotificationComponentType.valueOf(String.valueOf(calendarEventUpdateRequest.getComponent())))
+                .isStartTimeNotified(false)
+                .isEndTimeNotified(false)
+                .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
+                .build();
+    }
+
+    public CalendarEventUpdateEventPayload calendarEventUpdatedEventToCalendarEventUpdateEventPayload(
+            CalendarEventUpdatedEvent calendarEventUpdatedEvent) {
+        return CalendarEventUpdateEventPayload.builder()
+                .calendarEvent(calendarEventUpdatedEvent.getCalendarEvent())
+                .updateCalendarEventState(calendarEventUpdatedEvent.getUpdateCalendarEventState().name())
+                .failureMessages(calendarEventUpdatedEvent.getFailureMessages())
+                .build();
+    }
+
+    public CalendarEventUpdateEventPayload calendarEventUpdateRequestToCalendarEventUpdateEventPayload(
+            CalendarEventUpdateRequest calendarEventUpdateRequest,
+            List<String> failureMessages) {
+        CalendarEvent calendarEvent = calendarEventUpdateRequestModelToCalendarEvent(calendarEventUpdateRequest);
+        return CalendarEventUpdateEventPayload.builder()
+                .calendarEvent(calendarEvent)
+                .updateCalendarEventState(String.valueOf(calendarEventUpdateRequest.getUpdateCalendarEventState()))
+                .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
+                .failureMessages(failureMessages)
+                .build();
+    }
 }

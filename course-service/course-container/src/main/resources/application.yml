@@ -78,6 +78,10 @@ kafka-consumer-config:
 
   course-service-calendar-event-consumer-group-id: course-service-calendar-event-consumer
 
+  course-service-user-create-request-group-id: course-service-user-create-request-consumer
+  course-service-user-update-request-group-id: course-service-user-update-request-consumer
+  course-service-user-delete-request-group-id: course-service-user-delete-request-consumer
+
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
   specific-avro-reader: true

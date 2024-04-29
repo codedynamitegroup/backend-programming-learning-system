@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.core.service.messaging.mapper;
 import com.backend.programming.learning.system.core.service.domain.dto.method.message.contest_user.ContestUserCalendarEventUpdatedResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.ContestUser;
 import com.backend.programming.learning.system.core.service.domain.event.contest_user.ContestUserUpdatedEvent;
+import com.backend.programming.learning.system.core.service.domain.outbox.model.contest_user.ContestUserUpdateEventPayload;
 import com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.*;
 import org.springframework.stereotype.Component;
 
@@ -15,11 +16,13 @@ public class ContestUserEventMessagingDataMapper {
 
 
     public CalendarEventUpdateRequestAvroModel contestUserUpdatedEventPayloadToCalendarEventUpdateRequestAvroModel(
-             ContestUserUpdatedEvent contestUserUpdatedEvent) {
-        ContestUser contestUser = contestUserUpdatedEvent.getContestUser();
+            String sagaId,
+            ContestUserUpdateEventPayload contestUserUpdateEventPayload) {
+        ContestUser contestUser = contestUserUpdateEventPayload.getContestUser();
 
         return CalendarEventUpdateRequestAvroModel.newBuilder()
                 .setId(UUID.randomUUID())
+                .setSagaId(UUID.fromString(sagaId))
                 .setUserId(contestUser.getUser().getId().getValue())
                 .setContestId(contestUser.getContest().getId().getValue())
                 .setCourseId(null)
@@ -39,6 +42,7 @@ public class ContestUserEventMessagingDataMapper {
 
         return ContestUserCalendarEventUpdatedResponse.builder()
                 .id(calendarEventUpdateResponseAvroModel.getId().toString())
+                .sagaId(calendarEventUpdateResponseAvroModel.getSagaId().toString())
                 .userId(calendarEventUpdateResponseAvroModel.getUserId().toString())
                 .contestId(calendarEventUpdateResponseAvroModel.getContestId().toString())
                 .courseId(calendarEventUpdateResponseAvroModel.getCourseId().toString())
@@ -46,8 +50,14 @@ public class ContestUserEventMessagingDataMapper {
                 .eventType(com.backend.programming.learning.system.core.service.domain.valueobject.NotificationEventType.valueOf(calendarEventUpdateResponseAvroModel.getEventType().toString()))
                 .startTime(startTime)
                 .endTime(endTime)
-                .component(com.backend.programming.learning.system.core.service.domain.valueobject.NotificationComponentType.valueOf(calendarEventUpdateResponseAvroModel.getComponent().toString()))
-                .updateCalendarEventState(com.backend.programming.learning.system.core.service.domain.valueobject.UpdateState.valueOf(calendarEventUpdateResponseAvroModel.getUpdateCalendarEventState().toString()))
+                .component(
+                        com.backend.programming.learning.system.core.service.domain.valueobject.
+                                NotificationComponentType.valueOf(
+                                        calendarEventUpdateResponseAvroModel.getComponent().toString()))
+                .updateCalendarEventState(
+                        com.backend.programming.learning.system.core.service.domain.valueobject.
+                                UpdateState.valueOf(
+                                        calendarEventUpdateResponseAvroModel.getUpdateCalendarEventState().toString()))
                 .failureMessages(calendarEventUpdateResponseAvroModel.getFailureMessages())
                 .build();
     }

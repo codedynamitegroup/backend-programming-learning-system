@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.entity.Contest;
 import com.backend.programming.learning.system.core.service.domain.entity.ContestUser;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
+import com.backend.programming.learning.system.core.service.domain.event.contest_user.ContestUserUpdatedEvent;
 import com.backend.programming.learning.system.core.service.domain.exception.ContestNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
@@ -42,17 +43,17 @@ public class ContestUserCreateHelper {
     }
 
     @Transactional
-    public ContestUser persistContestUser(CreateContestUserCommand createContestUserCommand) {
+    public ContestUserUpdatedEvent persistContestUser(CreateContestUserCommand createContestUserCommand) {
         checkUser(createContestUserCommand.getUserId());
         checkContest(createContestUserCommand.getContestId());
 
         ContestUser contestUser = contestUserDataMapper.
                 createContestUserCommandToContestUser(createContestUserCommand);
-        coreDomainService.createContestUser(contestUser);
-        ContestUser contestUserResult = saveContestUser(contestUser);
+        ContestUserUpdatedEvent contestUserUpdatedEvent = coreDomainService.createContestUser(contestUser);
+        saveContestUser(contestUser);
 
-        log.info("Contest User created with id: {}", contestUserResult.getId().getValue());
-        return contestUserResult;
+        log.info("Contest User created with id: {}", contestUserUpdatedEvent.getContestUser().getId().getValue());
+        return contestUserUpdatedEvent;
     }
 
     private void checkUser(UUID userId) {
@@ -71,7 +72,7 @@ public class ContestUserCreateHelper {
         }
     }
 
-    private ContestUser saveContestUser(ContestUser contestUser) {
+    private void saveContestUser(ContestUser contestUser) {
         ContestUser savedContestUser = contestUserRepository
                 .saveContestUser(contestUser);
 
@@ -81,7 +82,6 @@ public class ContestUserCreateHelper {
             throw new CoreDomainException("Could not save contest user");
         }
         log.info("Contest User saved with id: {}", savedContestUser.getId().getValue());
-        return savedContestUser;
     }
 }
 

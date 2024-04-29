@@ -1,7 +1,11 @@
 package com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.question.calendarevent;
 
-import com.backend.programming.learning.system.course.service.domain.event.calendarevent.CalendarEventUpdatedEvent;
-import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
+import com.backend.programming.learning.system.course.service.domain.outbox.model.calendarevent.CalendarEventUpdateOutboxMessage;
+import com.backend.programming.learning.system.outbox.OutboxStatus;
 
-public interface CalendarEventUpdatedMessagePublisher extends DomainEventPublisher<CalendarEventUpdatedEvent> {
+import java.util.function.BiConsumer;
+
+public interface CalendarEventUpdatedMessagePublisher {
+    void publish(CalendarEventUpdateOutboxMessage calendarEventUpdateOutboxMessage,
+                 BiConsumer<CalendarEventUpdateOutboxMessage, OutboxStatus> outboxCallback);
 }

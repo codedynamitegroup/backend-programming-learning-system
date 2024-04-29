@@ -15,7 +15,6 @@ import java.util.UUID;
 public class CalendarEventRepositoryImpl implements CalendarEventRepository {
     private final CalendarEventJpaRepository calendarEventJpaRepository;
     private final CalendarEventDataAccessMapper calendarEventDataAccessMapper;
-    private CalendarEventJpaRepository calendarEventJpaRepository1;
 
     public CalendarEventRepositoryImpl(CalendarEventJpaRepository calendarEventJpaRepository,
                                        CalendarEventDataAccessMapper calendarEventDataAccessMapper) {
@@ -47,5 +46,16 @@ public class CalendarEventRepositoryImpl implements CalendarEventRepository {
     @Override
     public void deleteCalendarEvent(UUID calendarEventId) {
         calendarEventJpaRepository.deleteById(calendarEventId);
+    }
+
+    @Override
+    public void deleteCalendarEventByContestIdAndUserId(UUID contestId, UUID userId) {
+        calendarEventJpaRepository.deleteByContestIdAndUserId(contestId, userId);
+    }
+
+    @Override
+    public Optional<CalendarEvent> findCalendarEventByContestIdAndUserId(UUID contestId, UUID userId) {
+        return calendarEventJpaRepository.findByContestIdAndUserId(contestId, userId)
+                .map(calendarEventDataAccessMapper::calendarEventEntityToCalendarEvent);
     }
 }

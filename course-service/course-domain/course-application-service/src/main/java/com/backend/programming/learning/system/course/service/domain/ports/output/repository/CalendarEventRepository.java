@@ -14,4 +14,8 @@ public interface CalendarEventRepository {
     List<CalendarEvent> findAllBetweenFromTimeAndToTime(ZonedDateTime fromTime, ZonedDateTime toTime);
 
     void deleteCalendarEvent(UUID calendarEventId);
+
+//    CalendarEvent saveCalendarEventByContestIdAndUserId(UUID contestId, UUID userId, CalendarEvent calendarEvent);
+    void deleteCalendarEventByContestIdAndUserId(UUID contestId, UUID userId);
+    Optional<CalendarEvent> findCalendarEventByContestIdAndUserId(UUID contestId, UUID userId);
 }

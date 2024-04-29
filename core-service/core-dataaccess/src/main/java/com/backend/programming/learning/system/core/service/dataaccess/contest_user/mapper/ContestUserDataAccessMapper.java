@@ -13,6 +13,8 @@ import com.backend.programming.learning.system.core.service.domain.valueobject.C
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class ContestUserDataAccessMapper {
     private final ContestDataAccessMapper contestDataAccessMapper;
@@ -52,5 +54,12 @@ public class ContestUserDataAccessMapper {
                 .completedAt(contestUserEntity.getCompletedAt())
                 .createdAt(contestUserEntity.getCreatedAt())
                 .build();
+    }
+
+    public List<ContestUser> contestUserEntityListToContestUserList(
+            List<ContestUserEntity> contestUserEntities) {
+        return contestUserEntities.stream()
+                .map(this::contestUserEntityToContestUser)
+                .toList();
     }
 }

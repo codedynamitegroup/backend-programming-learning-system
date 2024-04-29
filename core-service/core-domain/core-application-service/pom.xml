@@ -27,10 +27,6 @@
             <groupId>com.backend.programming.learning.system</groupId>
             <artifactId>core-domain-core</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.backend.programming.learning.system</groupId>-->
-<!--            <artifactId>core-socket</artifactId>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>com.backend.programming.learning.system</groupId>
             <artifactId>common-domain</artifactId>
