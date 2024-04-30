@@ -17,27 +17,33 @@
     },
     {
       "name": "email",
-      "type": ["string", "null"]
+      "type": ["null", "string"],
+      "default": null
     },
     {
       "name": "firstName",
-      "type": ["string", "null"]
+      "type": ["null", "string"],
+      "default": null
     },
     {
       "name": "lastName",
-      "type": ["string", "null"]
+      "type": ["null", "string"],
+      "default": null
     },
     {
       "name": "phone",
-      "type": ["string", "null"]
+      "type": ["null", "string"],
+      "default": null
     },
     {
       "name": "address",
-      "type": ["string", "null"]
+      "type": ["null", "string"],
+      "default": null
     },
     {
       "name": "avatarUrl",
-      "type": ["string", "null"]
+      "type": ["null", "string"],
+      "default": null
     },
     {
       "name": "dob",
@@ -59,15 +65,10 @@
           "UPDATED",
           "DELETING",
           "DELETED",
-          "CREATE_PROPAGATING",
-          "UPDATE_PROPAGATING",
-          "DELETE_PROPAGATING",
-          "CREATE_ROLLBACKING",
-          "UPDATE_ROLLBACKING",
-          "DELETE_ROLLBACKING",
           "DELETE_FAILED",
           "UPDATE_FAILED",
-          "CREATE_FAILED"]
+          "CREATE_FAILED"
+        ]
       }
     },
     {
@@ -88,7 +89,8 @@
     },
     {
       "name": "isDeleted",
-      "type": "boolean"
+      "type": ["null", "boolean"],
+      "default": null
     }
   ]
 }

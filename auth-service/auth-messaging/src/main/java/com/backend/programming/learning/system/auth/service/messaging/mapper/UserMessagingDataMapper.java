@@ -2,7 +2,7 @@ package com.backend.programming.learning.system.auth.service.messaging.mapper;
 
 import com.backend.programming.learning.system.auth.service.domain.dto.method.message.UserResponse;
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserEventPayload;
-import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState;
 import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel;
 import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseAvroModel;
 import org.springframework.stereotype.Component;
@@ -14,13 +14,15 @@ public class UserMessagingDataMapper {
     public UserRequestAvroModel userUpdatedToUserUpdateRequestAvroModel(String sagaId,
                                                                         UserEventPayload userEventPayload) {
         Instant instantWithZeroNano = Instant.now().truncatedTo(java.time.temporal.ChronoUnit.SECONDS);
-        Instant dob = userEventPayload.getDob().toInstant();
+        Instant dob;
         if (userEventPayload.getDob() == null) {
             dob = instantWithZeroNano;
+        } else {
+            dob = userEventPayload.getDob().toInstant();
         }
         return UserRequestAvroModel.newBuilder()
                 .setId(UUID.randomUUID().toString())
-                .setSagaId("")
+                .setSagaId(sagaId)
                 .setUserId(userEventPayload.getUserId())
                 .setFirstName(userEventPayload.getFirstName())
                 .setLastName(userEventPayload.getLastName())
@@ -29,6 +31,7 @@ public class UserMessagingDataMapper {
                 .setDob(dob)
                 .setAvatarUrl(userEventPayload.getAvatarUrl())
                 .setUpdatedAt(userEventPayload.getUpdatedAt().toInstant())
+                .setCopyState(CopyState.UPDATING)
                 .build();
     }
 
@@ -39,6 +42,7 @@ public class UserMessagingDataMapper {
                 .setSagaId(sagaId)
                 .setUserId(userEventPayload.getUserId())
                 .setIsDeleted(userEventPayload.getIsDeleted())
+                .setCopyState(CopyState.DELETING)
                 .build();
     }
 
@@ -47,7 +51,8 @@ public class UserMessagingDataMapper {
                 .id(userResponseAvroModel.getId())
                 .sagaId(userResponseAvroModel.getSagaId())
                 .userId(userResponseAvroModel.getUserId())
-                .state(CopyState.valueOf(userResponseAvroModel.getCopyState().name()))
+                .state(com.backend.programming.learning.system.domain.valueobject
+                        .CopyState.valueOf(userResponseAvroModel.getCopyState().name()))
                 .failureMessages(userResponseAvroModel.getFailureMessages())
                 .build();
 
@@ -67,6 +72,7 @@ public class UserMessagingDataMapper {
                 .setCreatedAt(userEventPayload.getCreatedAt().toInstant())
                 .setUpdatedAt(userEventPayload.getUpdatedAt().toInstant())
                 .setIsDeleted(userEventPayload.getIsDeleted())
+                .setCopyState(CopyState.CREATING)
                 .build();
     }
 }

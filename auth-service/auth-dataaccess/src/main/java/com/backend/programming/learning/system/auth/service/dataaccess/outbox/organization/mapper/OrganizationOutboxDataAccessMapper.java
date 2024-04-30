@@ -2,7 +2,6 @@ package com.backend.programming.learning.system.auth.service.dataaccess.outbox.o
 
 import com.backend.programming.learning.system.auth.service.dataaccess.outbox.organization.entity.OrganizationOutboxEntity;
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.organization.OrganizationOutboxMessage;
-import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserOutboxMessage;
 import org.springframework.stereotype.Component;
 
 @Component

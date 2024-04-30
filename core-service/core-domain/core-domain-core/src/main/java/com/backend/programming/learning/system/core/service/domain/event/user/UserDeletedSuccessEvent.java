@@ -7,14 +7,11 @@ import java.time.ZonedDateTime;
 import java.util.Collections;
 
 public class UserDeletedSuccessEvent extends UserEvent {
-    private final DomainEventPublisher<UserDeletedSuccessEvent> userDeletedSuccessEventDomainEventPublisher;
-    public UserDeletedSuccessEvent(User user, ZonedDateTime createdAt, DomainEventPublisher<UserDeletedSuccessEvent> userDeletedSuccessEventDomainEventPublisher) {
+    public UserDeletedSuccessEvent(User user, ZonedDateTime createdAt) {
         super(user, createdAt, Collections.emptyList());
-        this.userDeletedSuccessEventDomainEventPublisher = userDeletedSuccessEventDomainEventPublisher;
     }
 
     @Override
     public void fire() {
-        userDeletedSuccessEventDomainEventPublisher.publish(this);
     }
 }

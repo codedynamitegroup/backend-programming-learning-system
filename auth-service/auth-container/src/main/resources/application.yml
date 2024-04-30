@@ -6,16 +6,14 @@ logging:
     com.backend.programming.learning.system: INFO
 
 auth-service:
-  user-create-request-topic-name: user-create-request
-  user-update-request-topic-name: user-update-request
-  user-delete-request-topic-name: user-delete-request
+  user-request-topic-name: user-request
   user-response-topic-name: user-response
   organization-create-request-topic-name: organization-create-request
   organization-update-request-topic-name: organization-update-request
   organization-delete-request-topic-name: organization-delete-request
   organization-response-topic-name: organization-response
-  outbox-scheduler-fixed-rate: 10000
-  outbox-scheduler-initial-delay: 10000
+  outbox-scheduler-fixed-rate: 2000
+  outbox-scheduler-initial-delay: 2000
 
 spring:
   jpa:

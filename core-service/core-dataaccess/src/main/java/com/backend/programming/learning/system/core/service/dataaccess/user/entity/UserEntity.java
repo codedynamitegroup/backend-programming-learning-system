@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.core.service.dataaccess.user.ent
 
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_user.entity.CertificateCourseUserEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,6 +31,8 @@ public class UserEntity {
     private String phone;
     private String address;
     private String avatarUrl;
+    @Enumerated(EnumType.STRING)
+    private CopyState copyState;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
     private Boolean isDeleted;
