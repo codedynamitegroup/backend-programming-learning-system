@@ -58,4 +58,13 @@ public class CalendarEventRepositoryImpl implements CalendarEventRepository {
         return calendarEventJpaRepository.findByContestIdAndUserId(contestId, userId)
                 .map(calendarEventDataAccessMapper::calendarEventEntityToCalendarEvent);
     }
+
+    @Override
+    public List<CalendarEvent> findAllByStartTimeAfterNow() {
+        return calendarEventJpaRepository.findAllByStartTimeAfterNow()
+                .stream()
+                .map(calendarEventDataAccessMapper
+                        ::calendarEventEntityToCalendarEvent)
+                .toList();
+    }
 }

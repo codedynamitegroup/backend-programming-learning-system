@@ -7,11 +7,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.calendarevent.CalendarEventResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.CalendarEvent;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
-import com.backend.programming.learning.system.course.service.domain.event.calendarevent.CalendarEventEvent;
-import com.backend.programming.learning.system.course.service.domain.event.calendarevent.CalendarEventUpdatedEvent;
 import com.backend.programming.learning.system.course.service.domain.mapper.user.UserDataMapper;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.calendarevent.CalendarEventUpdateEventPayload;
-import com.backend.programming.learning.system.course.service.domain.valueobject.CalendarEventId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.NotificationComponentType;
 import com.backend.programming.learning.system.course.service.domain.valueobject.NotificationEventType;
 import com.backend.programming.learning.system.domain.valueobject.UserId;

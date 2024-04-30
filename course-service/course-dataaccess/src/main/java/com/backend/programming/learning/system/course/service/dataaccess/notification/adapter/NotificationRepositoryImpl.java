@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.dataaccess.notification.adapter;
 
+import com.backend.programming.learning.system.course.service.dataaccess.notification.entity.NotificationEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.notification.mapper.NotificationDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.notification.repository.NotificationJpaRepository;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Component;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -55,5 +58,14 @@ public class NotificationRepositoryImpl implements NotificationRepository {
     @Override
     public int markReadNotificationById(UUID notificationId) {
         return notificationJpaRepository.markReadNotificationById(true, ZonedDateTime.now(ZoneId.of("UTC")), notificationId);
+    }
+
+    @Override
+    public List<Notification> saveAllNotifications(List<Notification> notifications) {
+        List<NotificationEntity> notificationEntities = new ArrayList<>();
+        Iterable<NotificationEntity> notificationEntitiesIterable = notificationJpaRepository.saveAll(
+                        notificationDataAccessMapper.notificationListToNotificationEntityList(notifications));
+        notificationEntitiesIterable.forEach(notificationEntities::add);
+        return notificationDataAccessMapper.notificationEntityListToNotificationList(notificationEntities);
     }
 }

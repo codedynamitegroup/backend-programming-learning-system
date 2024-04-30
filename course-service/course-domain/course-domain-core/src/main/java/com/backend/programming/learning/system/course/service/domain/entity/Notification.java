@@ -51,7 +51,6 @@ public class Notification extends AggregateRoot<NotificationId> {
         updatedAt = ZonedDateTime.now(ZoneId.of("UTC"));
     }
 
-
     public User getUserFrom() {
         return userFrom;
     }
