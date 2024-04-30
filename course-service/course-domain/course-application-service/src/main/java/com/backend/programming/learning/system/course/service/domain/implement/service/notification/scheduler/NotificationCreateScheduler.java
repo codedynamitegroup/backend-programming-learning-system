@@ -138,44 +138,46 @@ public class NotificationCreateScheduler {
         log.info("End NotificationCreateScheduler at {}", ZonedDateTime.now(ZoneId.of("UTC")));
     }
 
-    private NotificationNotifyTime isTimeValidToCreateNotification(ZonedDateTime time, NotificationNotifyTime notificationNotifyTime) {
+    private NotificationNotifyTime isTimeValidToCreateNotification(ZonedDateTime time,
+                                                                   NotificationNotifyTime notificationNotifyTime) {
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UTC"));
         // Check multiple cases for notificationNotifyTime
         if (notificationNotifyTime == null) {
             // Check if the time is between now and 24 hours
-            if (time.isAfter(ZonedDateTime.now(ZoneId.of("UTC")))
-                    && time.isBefore(ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1))) {
+            if (time.isAfter(now)
+                    && time.isBefore(now.plusDays(1))) {
                 return NotificationNotifyTime.TWENTY_FOUR_HOURS;
             } else {
                 return null;
             }
         } else if (notificationNotifyTime == NotificationNotifyTime.TWENTY_FOUR_HOURS) {
             // Check if the time is between now and 12 hours
-            if (time.isAfter(ZonedDateTime.now(ZoneId.of("UTC")))
-                    && time.isBefore(ZonedDateTime.now(ZoneId.of("UTC")).plusHours(12))) {
+            if (time.isAfter(now)
+                    && time.isBefore(now.plusHours(12))) {
                 return NotificationNotifyTime.TWELVE_HOURS;
             } else {
                 return null;
             }
         } else if (notificationNotifyTime == NotificationNotifyTime.TWELVE_HOURS) {
             // Check if the time is between now and 6 hours
-            if (time.isAfter(ZonedDateTime.now(ZoneId.of("UTC")))
-                    && time.isBefore(ZonedDateTime.now(ZoneId.of("UTC")).plusHours(6))) {
+            if (time.isAfter(now)
+                    && time.isBefore(now.plusHours(6))) {
                 return NotificationNotifyTime.SIX_HOURS;
             } else {
                 return null;
             }
         } else if (notificationNotifyTime == NotificationNotifyTime.SIX_HOURS) {
             // Check if the time is between now and 3 hours
-            if (time.isAfter(ZonedDateTime.now(ZoneId.of("UTC")))
-                    && time.isBefore(ZonedDateTime.now(ZoneId.of("UTC")).plusHours(3))) {
+            if (time.isAfter(now)
+                    && time.isBefore(now.plusHours(3))) {
                 return NotificationNotifyTime.THREE_HOURS;
             } else {
                 return null;
             }
         } else if (notificationNotifyTime == NotificationNotifyTime.THREE_HOURS) {
             // Check if the time is between now and 1 hour
-            if (time.isAfter(ZonedDateTime.now(ZoneId.of("UTC")))
-                    && time.isBefore(ZonedDateTime.now(ZoneId.of("UTC")).plusHours(1))) {
+            if (time.isAfter(now)
+                    && time.isBefore(now.plusHours(1))) {
                 return NotificationNotifyTime.ONE_HOUR;
             } else {
                 return null;
