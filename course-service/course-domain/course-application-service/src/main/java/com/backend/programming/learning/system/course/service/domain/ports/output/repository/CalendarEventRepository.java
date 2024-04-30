@@ -19,5 +19,5 @@ public interface CalendarEventRepository {
     void deleteCalendarEventByContestIdAndUserId(UUID contestId, UUID userId);
     Optional<CalendarEvent> findCalendarEventByContestIdAndUserId(UUID contestId, UUID userId);
 
-    List<CalendarEvent> findAllByStartTimeAfterNow();
+    List<CalendarEvent> findAllByStartTimeAfterTime(ZonedDateTime time);
 }

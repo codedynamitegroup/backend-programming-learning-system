@@ -27,8 +27,7 @@ public interface CalendarEventJpaRepository extends JpaRepository<CalendarEventE
 
     @Query("""
         select c from CalendarEventEntity c
-        where
-        c.startTime > NOW()
+        where c.startTime > ?1
         """)
-    List<CalendarEventEntity> findAllByStartTimeAfterNow();
+    List<CalendarEventEntity> findAllByStartTimeAfterTime(ZonedDateTime time);
 }

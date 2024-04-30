@@ -46,6 +46,9 @@ public class ContestUserCreateHelper {
     public ContestUserUpdatedEvent persistContestUser(CreateContestUserCommand createContestUserCommand) {
         User user = getUser(createContestUserCommand.getUserId());
         Contest contest = getContest(createContestUserCommand.getContestId());
+        checkContestUserByContestIdAndUserId(
+                createContestUserCommand.getContestId(),
+                createContestUserCommand.getUserId());
 
         ContestUser contestUser = contestUserDataMapper.
                 createContestUserCommandToContestUser(createContestUserCommand);
@@ -74,6 +77,17 @@ public class ContestUserCreateHelper {
             throw new ContestNotFoundException("Could not find contest with id: " + contestId);
         }
         return contest.get();
+    }
+
+    private void checkContestUserByContestIdAndUserId(UUID contestId, UUID userId) {
+        Optional<ContestUser> contestUser = contestUserRepository.findByContestIdAndUserId(contestId, userId);
+        if (contestUser.isPresent()) {
+            log.warn("User with id: {} is already registered for the contest with id: {}", userId, contestId);
+            throw new CoreDomainException("User with id: " +
+                    userId +
+                    " is already registered for the contest with id: " +
+                    contestId);
+        }
     }
 
     private void saveContestUser(ContestUser contestUser) {

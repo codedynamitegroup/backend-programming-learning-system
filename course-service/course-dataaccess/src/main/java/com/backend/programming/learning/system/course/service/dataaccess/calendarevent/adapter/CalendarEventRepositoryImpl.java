@@ -1,16 +1,20 @@
 package com.backend.programming.learning.system.course.service.dataaccess.calendarevent.adapter;
 
+import com.backend.programming.learning.system.course.service.dataaccess.calendarevent.entity.CalendarEventEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.calendarevent.mapper.CalendarEventDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.calendarevent.repository.CalendarEventJpaRepository;
 import com.backend.programming.learning.system.course.service.domain.entity.CalendarEvent;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CalendarEventRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Slf4j
 @Component
 public class CalendarEventRepositoryImpl implements CalendarEventRepository {
     private final CalendarEventJpaRepository calendarEventJpaRepository;
@@ -60,8 +64,8 @@ public class CalendarEventRepositoryImpl implements CalendarEventRepository {
     }
 
     @Override
-    public List<CalendarEvent> findAllByStartTimeAfterNow() {
-        return calendarEventJpaRepository.findAllByStartTimeAfterNow()
+    public List<CalendarEvent> findAllByStartTimeAfterTime(ZonedDateTime time) {
+        return calendarEventJpaRepository.findAllByStartTimeAfterTime(time)
                 .stream()
                 .map(calendarEventDataAccessMapper
                         ::calendarEventEntityToCalendarEvent)

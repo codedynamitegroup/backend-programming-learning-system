@@ -492,7 +492,7 @@ CREATE TABLE "public".plagiarism_detection_report
 
 CREATE UNIQUE INDEX plagiarism_detection_report_exam_id_question_id
     ON "public".plagiarism_detection_report
-        (exam_id, question_id);
+        (exam_id, question_id, programming_language_id);
 
 DROP TABLE IF EXISTS "public".contest_user_update_outbox CASCADE;
 

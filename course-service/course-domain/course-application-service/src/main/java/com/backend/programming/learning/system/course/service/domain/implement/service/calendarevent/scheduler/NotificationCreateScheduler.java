@@ -47,88 +47,88 @@ public class NotificationCreateScheduler {
     @Scheduled(fixedRateString = "${course-service.create-notification-scheduler-fixed-rate}")
     public void processCreateNotification() {
         log.info("Start NotificationCreateScheduler at {}", ZonedDateTime.now(ZoneId.of("UTC")));
-        notificationTimeMapInMillis.forEach((notificationTime, timeInMillis) -> {
-            // Get all calendar events with the time after now
-            List<CalendarEvent> calendarEvents = calendarEventRepository
-                    .findAllByStartTimeAfterNow();
 
-            if (calendarEvents.isEmpty()) {
-                log.info("No calendar event found after now at schedule time: {}",
-                        ZonedDateTime.now(ZoneId.of("UTC")));
-                return;
-            }
+        // Get all calendar events with the time after now
+        List<CalendarEvent> calendarEvents = calendarEventRepository
+                .findAllByStartTimeAfterTime(ZonedDateTime.now(ZoneId.of("UTC")));
 
-            // Save multiple notifications for better performance
-            List<Notification> notifications = new ArrayList<>();
+        if (calendarEvents.isEmpty()) {
+            log.info("No calendar event found after now at schedule time: {}",
+                    ZonedDateTime.now(ZoneId.of("UTC")));
+            return;
+        }
 
-            // Check if the startTime of calendarEvent is valid to create a notification
-            // If it is, create a notification
-            // Otherwise, do nothing
-            calendarEvents.forEach(calendarEvent -> {
-                Integer notificationTimeInMillis = isTimeValidToCreateNotification(calendarEvent.getStartTime());
-                if (notificationTimeInMillis != null) {
-                    // TODO: DO FOR REMAINING COMPONENTS
-                    switch (calendarEvent.getComponent()) {
-                        case CONTEST: {
-                            // Get the minutes before the contest starts
-                            int minutesBeforeContestStart =
-                                    calendarEvent.getStartTime().getMinute()
-                                            - ZonedDateTime.now(ZoneId.of("UTC")).getMinute();
-                            // Build full message for contest
-                            String fullMessage = "Contest " + calendarEvent.getName() + " is about to start in "
-                                    + minutesBeforeContestStart + " minutes";
-                            // Build small message for contest
-                            String smallMessage = "Contest " + calendarEvent.getName() + " is about to start in "
-                                    + minutesBeforeContestStart + " minutes";
-                            // Create notification for contest
-                            Notification newNotification = Notification.builder()
-                                    .id(new NotificationId(UUID.randomUUID()))
-                                    .userFrom(calendarEvent.getUser())
-                                    .userTo(calendarEvent.getUser())
-                                    .subject("Contest " + calendarEvent.getName() + " is about to start")
-                                    .fullMessage(fullMessage)
-                                    .smallMessage(smallMessage)
-                                    .component(calendarEvent.getComponent())
-                                    .eventType(calendarEvent.getEventType())
-                                    .contextUrl("contest/" + calendarEvent.getContestId())
-                                    .contextUrlName("Contest")
-                                    .isRead(false)
-                                    .timeRead(null)
-                                    .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
-                                    .updatedAt(ZonedDateTime.now(ZoneId.of("UTC")))
-                                    .build();
-                            notifications.add(newNotification);
-                            break;
-                        }
-                        default:
-                            log.error("Invalid component: {}", calendarEvent.getComponent());
-                            break;
+        // Save multiple notifications for better performance
+        List<Notification> notifications = new ArrayList<>();
+
+        // Check if the startTime of calendarEvent is valid to create a notification
+        // If it is, create a notification
+        // Otherwise, do nothing
+        calendarEvents.forEach(calendarEvent -> {
+            Integer notificationTimeInMillis = isTimeValidToCreateNotification(calendarEvent.getStartTime());
+            if (notificationTimeInMillis != null) {
+                // TODO: DO FOR REMAINING COMPONENTS
+                switch (calendarEvent.getComponent()) {
+                    case CONTEST: {
+                        // Get the minutes before the contest starts
+                        int minutesBeforeContestStart =
+                                calendarEvent.getStartTime().minusMinutes(
+                                        ZonedDateTime.now(ZoneId.of("UTC")).getMinute()).getMinute();
+                        // Build full message for contest
+                        String fullMessage = "Contest " + calendarEvent.getName() + " is about to start in "
+                                + minutesBeforeContestStart + " minutes";
+                        // Build small message for contest
+                        String smallMessage = "Contest " + calendarEvent.getName() + " is about to start in "
+                                + minutesBeforeContestStart + " minutes";
+                        // Create notification for contest
+                        Notification newNotification = Notification.builder()
+                                .id(new NotificationId(UUID.randomUUID()))
+                                .userFrom(calendarEvent.getUser())
+                                .userTo(calendarEvent.getUser())
+                                .subject("Contest " + calendarEvent.getName() + " is about to start")
+                                .fullMessage(fullMessage)
+                                .smallMessage(smallMessage)
+                                .component(calendarEvent.getComponent())
+                                .eventType(calendarEvent.getEventType())
+                                .contextUrl("contest/" + calendarEvent.getContestId())
+                                .contextUrlName("Contest")
+                                .isRead(false)
+                                .timeRead(null)
+                                .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
+                                .updatedAt(ZonedDateTime.now(ZoneId.of("UTC")))
+                                .build();
+                        notifications.add(newNotification);
+                        break;
                     }
+                    default:
+                        log.error("Invalid component: {}", calendarEvent.getComponent());
+                        break;
                 }
-            });
-
-            if (notifications.isEmpty()) {
-                log.info("No notification created at schedule time: {}",
-                        ZonedDateTime.now(ZoneId.of("UTC")));
-                return;
             }
-
-            log.info("{} notifications created at schedule time: {}",
-                    notifications.size(), ZonedDateTime.now(ZoneId.of("UTC")));
-            // Save notifications
-            List<Notification> savedNotifications = notificationRepository.saveAllNotifications(notifications);
-
-            log.info("Start emitting notifications at {}", ZonedDateTime.now(ZoneId.of("UTC")));
-            for (Notification notificationResult : savedNotifications) {
-                NotificationResponseEntity queryNotificationResponse = notificationDataMapper
-                        .notificationToQueryNotificationResponse(notificationResult);
-                log.info("Emitting notification to user: {}", queryNotificationResponse);
-                String room = "user_" + notificationResult.getUserTo().getId().getValue();
-                notificationMessageEmitter.emit(room, "get_message", queryNotificationResponse);
-                log.info("Notification emitted to user: {}", queryNotificationResponse);
-            }
-            log.info("End emitting notifications at {}", ZonedDateTime.now(ZoneId.of("UTC")));
         });
+
+        if (notifications.isEmpty()) {
+            log.info("No notification created at schedule time: {}",
+                    ZonedDateTime.now(ZoneId.of("UTC")));
+            return;
+        }
+
+        log.info("{} notifications created at schedule time: {}",
+                notifications.size(), ZonedDateTime.now(ZoneId.of("UTC")));
+        // Save notifications
+        List<Notification> savedNotifications = notificationRepository.saveAllNotifications(notifications);
+
+        log.info("Start emitting notifications at {}", ZonedDateTime.now(ZoneId.of("UTC")));
+        for (Notification notificationResult : savedNotifications) {
+            NotificationResponseEntity queryNotificationResponse = notificationDataMapper
+                    .notificationToQueryNotificationResponse(notificationResult);
+            log.info("Emitting notification to user: {}", queryNotificationResponse);
+            String room = "user_" + notificationResult.getUserTo().getId().getValue();
+            notificationMessageEmitter.emit(room, "get_message", queryNotificationResponse);
+            log.info("Notification emitted to user: {}", queryNotificationResponse);
+        }
+        log.info("End emitting notifications at {}", ZonedDateTime.now(ZoneId.of("UTC")));
+
         log.info("End NotificationCreateScheduler at {}", ZonedDateTime.now(ZoneId.of("UTC")));
     }
 
