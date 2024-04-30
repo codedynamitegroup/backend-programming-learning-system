@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.messaging.listene
 
 import com.backend.programming.learning.system.course.service.domain.ports.input.message.listener.auth.UserRequestMessageListener;
 import com.backend.programming.learning.system.course.service.messaging.mapper.UserMessagingDataMapper;
+import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel;
 import com.backend.programming.learning.system.kafka.consumer.KafkaConsumer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @Slf4j
 @Component
-public class UserCreateRequestKafkaListener implements KafkaConsumer<UserCreateRequestAvroModel> {
+public class UserCreateRequestKafkaListener implements KafkaConsumer<UserRequestAvroModel> {
     private final UserRequestMessageListener userRequestMessageListener;
     private final UserMessagingDataMapper userMessagingDataMapper;
 
@@ -26,7 +27,7 @@ public class UserCreateRequestKafkaListener implements KafkaConsumer<UserCreateR
     @Override
     @KafkaListener(id = "${kafka-consumer-config.course-service-user-create-request-group-id}",
             topics = "${course-service.user-create-request-topic-name}")
-    public void receive(@Payload List<UserCreateRequestAvroModel> messages,
+    public void receive(@Payload List<UserRequestAvroModel> messages,
                         @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) List<String> keys,
                         @Header(KafkaHeaders.RECEIVED_PARTITION_ID) List<Integer> partitions,
                         @Header(KafkaHeaders.OFFSET) List<Long> offsets) {

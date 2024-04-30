@@ -16,7 +16,7 @@ public class UserMessagingDataMapper {
                 .setId(UUID.randomUUID().toString())
                 .setSagaId("")
                 .setUserId(userCreatedSuccessEvent.getUser().getId().getValue().toString())
-                .setUserResponseStatus(UserResponseStatus.CREATED)
+                .setCopyState(CopyState.CREATED)
                 .setFailureMessages(userCreatedSuccessEvent.getFailureMessages())
                 .build();
     }
@@ -25,12 +25,12 @@ public class UserMessagingDataMapper {
                 .setId(UUID.randomUUID().toString())
                 .setSagaId("")
                 .setUserId(userCreatedFailEvent.getUser().getId().getValue().toString())
-                .setUserResponseStatus(UserResponseStatus.CREATE_FAILED)
+                .setCopyState(CopyState.CREATE_FAILED)
                 .setFailureMessages(userCreatedFailEvent.getFailureMessages())
                 .build();
     }
 
-    public UserCreateRequest userCreateRequestAvroModelToUserCreateRequest(UserCreateRequestAvroModel userCreateRequestAvroModel) {
+    public UserCreateRequest userCreateRequestAvroModelToUserCreateRequest(UserRequestAvroModel userCreateRequestAvroModel) {
         return UserCreateRequest.builder()
                 .id(userCreateRequestAvroModel.getId())
                 .sagaId(userCreateRequestAvroModel.getSagaId())
@@ -45,7 +45,7 @@ public class UserMessagingDataMapper {
                 .build();
     }
 
-    public UserUpdateRequest userUpdateRequestAvroModelToUserUpdateRequest(UserUpdateRequestAvroModel userUpdateRequestAvroModel) {
+    public UserUpdateRequest userUpdateRequestAvroModelToUserUpdateRequest(UserRequestAvroModel userUpdateRequestAvroModel) {
         return UserUpdateRequest.builder()
                 .id(userUpdateRequestAvroModel.getId())
                 .sagaId(userUpdateRequestAvroModel.getSagaId())
@@ -60,7 +60,7 @@ public class UserMessagingDataMapper {
                 .build();
     }
 
-    public UserDeleteRequest userDeleteRequestAvroModelToUserDeleteRequest(UserDeleteRequestAvroModel userDeleteRequestAvroModel) {
+    public UserDeleteRequest userDeleteRequestAvroModelToUserDeleteRequest(UserRequestAvroModel userDeleteRequestAvroModel) {
         return UserDeleteRequest.builder()
                 .id(userDeleteRequestAvroModel.getId())
                 .sagaId(userDeleteRequestAvroModel.getSagaId())
@@ -74,7 +74,7 @@ public class UserMessagingDataMapper {
                 .setId(UUID.randomUUID().toString())
                 .setSagaId("")
                 .setUserId(domainEvent.getUser().getId().getValue().toString())
-                .setUserResponseStatus(UserResponseStatus.DELETED)
+                .setCopyState(CopyState.DELETED)
                 .setFailureMessages(domainEvent.getFailureMessages())
                 .build();
     }
@@ -84,7 +84,7 @@ public class UserMessagingDataMapper {
                 .setId(UUID.randomUUID().toString())
                 .setSagaId("")
                 .setUserId(domainEvent.getUser().getId().getValue().toString())
-                .setUserResponseStatus(UserResponseStatus.DELETE_FAILED)
+                .setCopyState(CopyState.DELETE_FAILED)
                 .setFailureMessages(domainEvent.getFailureMessages())
                 .build();
     }
@@ -94,7 +94,7 @@ public class UserMessagingDataMapper {
                 .setId(UUID.randomUUID().toString())
                 .setSagaId("")
                 .setUserId(domainEvent.getUser().getId().getValue().toString())
-                .setUserResponseStatus(UserResponseStatus.UPDATED)
+                .setCopyState(CopyState.UPDATED)
                 .setFailureMessages(domainEvent.getFailureMessages())
                 .build();
     }
@@ -104,7 +104,7 @@ public class UserMessagingDataMapper {
                 .setId(UUID.randomUUID().toString())
                 .setSagaId("")
                 .setUserId(domainEvent.getUser().getId().getValue().toString())
-                .setUserResponseStatus(UserResponseStatus.UPDATE_FAILED)
+                .setCopyState(CopyState.UPDATE_FAILED)
                 .setFailureMessages(domainEvent.getFailureMessages())
                 .build();
     }
