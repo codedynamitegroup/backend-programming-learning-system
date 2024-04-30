@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.course.service.domain.ports.outp
 import com.backend.programming.learning.system.course.service.domain.entity.Notification;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -13,4 +14,5 @@ public interface NotificationRepository {
     Optional<Notification> findById(UUID notificationId);
     void deleteNotificationById(UUID notificationId);
     int markReadNotificationById(UUID notificationId);
+    List<Notification> saveAllNotifications(List<Notification> notifications);
 }

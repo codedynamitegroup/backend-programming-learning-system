@@ -24,4 +24,10 @@ public interface CalendarEventJpaRepository extends JpaRepository<CalendarEventE
     void deleteByContestIdAndUserId(UUID contestId, UUID userId);
 
     Optional<CalendarEventEntity> findByContestIdAndUserId(UUID contestId, UUID userId);
+
+    @Query("""
+        select c from CalendarEventEntity c
+        where c.startTime > ?1
+        """)
+    List<CalendarEventEntity> findAllByStartTimeAfterTime(ZonedDateTime time);
 }

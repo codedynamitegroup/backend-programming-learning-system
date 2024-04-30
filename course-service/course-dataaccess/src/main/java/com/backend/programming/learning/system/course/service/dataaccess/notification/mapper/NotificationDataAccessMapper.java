@@ -8,6 +8,8 @@ import com.backend.programming.learning.system.course.service.domain.entity.User
 import com.backend.programming.learning.system.domain.valueobject.NotificationId;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class NotificationDataAccessMapper {
     private final UserDataAccessMapper userDataAccessMapper;
@@ -61,5 +63,17 @@ public class NotificationDataAccessMapper {
                 .createdAt(notificationEntity.getCreatedAt())
                 .updatedAt(notificationEntity.getUpdatedAt())
                 .build();
+    }
+
+    public List<NotificationEntity> notificationListToNotificationEntityList(List<Notification> notifications) {
+        return notifications.stream()
+                .map(this::notificationToNotificationEntity)
+                .toList();
+    }
+
+    public List<Notification> notificationEntityListToNotificationList(List<NotificationEntity> notificationEntities) {
+        return notificationEntities.stream()
+                .map(this::notificationEntityToNotification)
+                .toList();
     }
 }
