@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.implement.service.calendarevent.scheduler;
+package com.backend.programming.learning.system.course.service.domain.implement.service.notification.scheduler;
 
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.notification.NotificationResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.CalendarEvent;
