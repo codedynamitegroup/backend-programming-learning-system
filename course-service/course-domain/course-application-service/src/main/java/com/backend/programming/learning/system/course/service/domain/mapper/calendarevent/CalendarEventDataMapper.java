@@ -51,6 +51,7 @@ public class CalendarEventDataMapper {
                 .component(NotificationComponentType.valueOf(createCalendarEventCommand.getComponent()))
                 .isStartTimeNotified(false)
                 .isEndTimeNotified(false)
+                .notificationNotifyTime(null)
                 .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .build();
     }
@@ -69,6 +70,7 @@ public class CalendarEventDataMapper {
                 .component(calendarEvent.getComponent())
                 .isStartTimeNotified(calendarEvent.getStartTimeNotified())
                 .isEndTimeNotified(calendarEvent.getEndTimeNotified())
+                .notificationNotifyTime(calendarEvent.getNotificationNotifyTime())
                 .createdAt(calendarEvent.getCreatedAt())
                 .build();
     }
@@ -98,6 +100,7 @@ public class CalendarEventDataMapper {
                 .component(NotificationComponentType.valueOf(String.valueOf(calendarEventUpdateRequest.getComponent())))
                 .isStartTimeNotified(false)
                 .isEndTimeNotified(false)
+                .notificationNotifyTime(null)
                 .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .build();
     }

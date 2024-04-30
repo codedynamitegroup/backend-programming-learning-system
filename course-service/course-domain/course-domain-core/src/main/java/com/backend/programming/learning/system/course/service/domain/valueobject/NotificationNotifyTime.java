@@ -5,8 +5,7 @@ public enum NotificationNotifyTime {
     TWELVE_HOURS(43200000),
     SIX_HOURS(21600000),
     THREE_HOURS(10800000),
-    ONE_HOUR(3600000),
-    THIRTY_MINUTES(1800000);
+    ONE_HOUR(3600000);
 
     private final int timeInMillis;
 

@@ -31,6 +31,7 @@ public class CalendarEventDataAccessMapper {
                 .component(calendarEventEntity.getComponent())
                 .isStartTimeNotified(calendarEventEntity.getIsStartTimeNotified())
                 .isEndTimeNotified(calendarEventEntity.getIsEndTimeNotified())
+                .notificationNotifyTime(calendarEventEntity.getNotificationNotifyTime())
                 .createdAt(calendarEventEntity.getCreatedAt())
                 .build();
     }
@@ -50,6 +51,7 @@ public class CalendarEventDataAccessMapper {
                 .component(calendarEvent.getComponent())
                 .isStartTimeNotified(calendarEvent.getStartTimeNotified())
                 .isEndTimeNotified(calendarEvent.getEndTimeNotified())
+                .notificationNotifyTime(calendarEvent.getNotificationNotifyTime())
                 .createdAt(calendarEvent.getCreatedAt())
                 .build();
     }

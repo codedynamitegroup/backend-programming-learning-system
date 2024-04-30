@@ -50,6 +50,9 @@ CREATE TYPE saga_status AS ENUM ('STARTED', 'FAILED', 'SUCCEEDED', 'PROCESSING',
 DROP TYPE IF EXISTS outbox_status;
 CREATE TYPE outbox_status AS ENUM ('STARTED', 'COMPLETED', 'FAILED');
 
+DROP TYPE IF EXISTS notification_notify_time;
+CREATE TYPE notification_notify_time AS ENUM ('TWENTY_FOUR_HOURS', 'TWELVE_HOURS', 'SIX_HOURS', 'THREE_HOURS', 'ONE_HOUR');
+
 DROP TABLE IF EXISTS "public".user CASCADE;
 CREATE TABLE "public".user
 (
@@ -481,6 +484,7 @@ CREATE TABLE "public".calendar_event
     component notification_component_type DEFAULT 'REMINDER',
     is_start_time_notified bool DEFAULT FALSE NOT NULL,
     is_end_time_notified bool DEFAULT FALSE NOT NULL,
+    notification_notify_time notification_notify_time,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT calendar_event_pkey PRIMARY KEY (id),
     CONSTRAINT calendar_event_created_by_fkey FOREIGN KEY (user_id)

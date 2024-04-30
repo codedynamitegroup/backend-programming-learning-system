@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.course.service.domain.dto.respon
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.valueobject.NotificationComponentType;
 import com.backend.programming.learning.system.course.service.domain.valueobject.NotificationEventType;
+import com.backend.programming.learning.system.course.service.domain.valueobject.NotificationNotifyTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,6 +35,7 @@ public class CalendarEventResponseEntity {
     private final NotificationComponentType component;
     private final Boolean isStartTimeNotified;
     private final Boolean isEndTimeNotified;
+    private final NotificationNotifyTime notificationNotifyTime;
     @NotNull
     private final ZonedDateTime createdAt;
 }

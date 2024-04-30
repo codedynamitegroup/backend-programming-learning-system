@@ -65,8 +65,10 @@ public class NotificationCreateScheduler {
         // If it is, create a notification
         // Otherwise, do nothing
         calendarEvents.forEach(calendarEvent -> {
-            Integer notificationTimeInMillis = isTimeValidToCreateNotification(calendarEvent.getStartTime());
-            if (notificationTimeInMillis != null) {
+            NotificationNotifyTime newNotificationNotifyTime = isTimeValidToCreateNotification(
+                    calendarEvent.getStartTime(),
+                    calendarEvent.getNotificationNotifyTime());
+            if (newNotificationNotifyTime != null) {
                 // TODO: DO FOR REMAINING COMPONENTS
                 switch (calendarEvent.getComponent()) {
                     case CONTEST: {
@@ -104,6 +106,7 @@ public class NotificationCreateScheduler {
                         log.error("Invalid component: {}", calendarEvent.getComponent());
                         break;
                 }
+                calendarEvent.setNotificationNotifyTime(newNotificationNotifyTime);
             }
         });
 
@@ -129,18 +132,56 @@ public class NotificationCreateScheduler {
         }
         log.info("End emitting notifications at {}", ZonedDateTime.now(ZoneId.of("UTC")));
 
+        // Save updated calendar events
+        calendarEventRepository.saveAllCalendarEvents(calendarEvents);
+
         log.info("End NotificationCreateScheduler at {}", ZonedDateTime.now(ZoneId.of("UTC")));
     }
 
-    private Integer isTimeValidToCreateNotification(ZonedDateTime time) {
-        // Check if the time is after the current time for any notification time
-        // If it is, return the notification time in milliseconds
-        // Otherwise, return null
-        return notificationTimeMapInMillis.entrySet().stream().filter(
-                entry -> time.isAfter(ZonedDateTime.now(ZoneId.of("UTC")).plusSeconds(entry.getValue() / 1000)
-                ))
-                .findFirst()
-                .map(Map.Entry::getValue)
-                .orElse(null);
+    private NotificationNotifyTime isTimeValidToCreateNotification(ZonedDateTime time, NotificationNotifyTime notificationNotifyTime) {
+        // Check multiple cases for notificationNotifyTime
+        if (notificationNotifyTime == null) {
+            // Check if the time is between now and 24 hours
+            if (time.isAfter(ZonedDateTime.now(ZoneId.of("UTC")))
+                    && time.isBefore(ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1))) {
+                return NotificationNotifyTime.TWENTY_FOUR_HOURS;
+            } else {
+                return null;
+            }
+        } else if (notificationNotifyTime == NotificationNotifyTime.TWENTY_FOUR_HOURS) {
+            // Check if the time is between now and 12 hours
+            if (time.isAfter(ZonedDateTime.now(ZoneId.of("UTC")))
+                    && time.isBefore(ZonedDateTime.now(ZoneId.of("UTC")).plusHours(12))) {
+                return NotificationNotifyTime.TWELVE_HOURS;
+            } else {
+                return null;
+            }
+        } else if (notificationNotifyTime == NotificationNotifyTime.TWELVE_HOURS) {
+            // Check if the time is between now and 6 hours
+            if (time.isAfter(ZonedDateTime.now(ZoneId.of("UTC")))
+                    && time.isBefore(ZonedDateTime.now(ZoneId.of("UTC")).plusHours(6))) {
+                return NotificationNotifyTime.SIX_HOURS;
+            } else {
+                return null;
+            }
+        } else if (notificationNotifyTime == NotificationNotifyTime.SIX_HOURS) {
+            // Check if the time is between now and 3 hours
+            if (time.isAfter(ZonedDateTime.now(ZoneId.of("UTC")))
+                    && time.isBefore(ZonedDateTime.now(ZoneId.of("UTC")).plusHours(3))) {
+                return NotificationNotifyTime.THREE_HOURS;
+            } else {
+                return null;
+            }
+        } else if (notificationNotifyTime == NotificationNotifyTime.THREE_HOURS) {
+            // Check if the time is between now and 1 hour
+            if (time.isAfter(ZonedDateTime.now(ZoneId.of("UTC")))
+                    && time.isBefore(ZonedDateTime.now(ZoneId.of("UTC")).plusHours(1))) {
+                return NotificationNotifyTime.ONE_HOUR;
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
 }

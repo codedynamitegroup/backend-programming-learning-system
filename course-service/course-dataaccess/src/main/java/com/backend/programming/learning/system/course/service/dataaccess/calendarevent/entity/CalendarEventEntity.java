@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.course.service.dataaccess.calend
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.course.service.domain.valueobject.NotificationComponentType;
 import com.backend.programming.learning.system.course.service.domain.valueobject.NotificationEventType;
+import com.backend.programming.learning.system.course.service.domain.valueobject.NotificationNotifyTime;
 import lombok.*;
 
 import javax.persistence.*;
@@ -36,6 +37,8 @@ public class CalendarEventEntity {
     private NotificationComponentType component;
     private Boolean isStartTimeNotified;
     private Boolean isEndTimeNotified;
+    @Enumerated(EnumType.STRING)
+    private NotificationNotifyTime notificationNotifyTime;
     private ZonedDateTime createdAt;
 
     @Override
