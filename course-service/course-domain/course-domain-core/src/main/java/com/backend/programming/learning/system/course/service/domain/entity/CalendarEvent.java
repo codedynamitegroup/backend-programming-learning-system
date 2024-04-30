@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.entity;
 
+import com.backend.programming.learning.system.course.service.domain.valueobject.NotificationNotifyTime;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.course.service.domain.valueobject.CalendarEventId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.NotificationComponentType;
@@ -21,6 +22,7 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
     private NotificationComponentType component;
     private Boolean isStartTimeNotified;
     private Boolean isEndTimeNotified;
+    private NotificationNotifyTime notificationNotifyTime;
     private ZonedDateTime createdAt;
 
     public void initializeCalendarEvent() {
@@ -43,6 +45,7 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
         setComponent(builder.component);
         isStartTimeNotified = builder.isStartTimeNotified;
         isEndTimeNotified = builder.isEndTimeNotified;
+        setNotificationNotifyTime(builder.notificationNotifyTime);
         setCreatedAt(builder.createdAt);
     }
 
@@ -51,85 +54,12 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
     }
 
 
-
-    public ZonedDateTime getCreatedAt() {
-        return createdAt;
+    public String getName() {
+        return name;
     }
 
-    public void setCreatedAt(ZonedDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Boolean getEndTimeNotified() {
-        return isEndTimeNotified;
-    }
-
-    public void setEndTimeNotified(Boolean endTimeNotified) {
-        isEndTimeNotified = endTimeNotified;
-    }
-
-    public Boolean getStartTimeNotified() {
-        return isStartTimeNotified;
-    }
-
-    public void setStartTimeNotified(Boolean startTimeNotified) {
-        isStartTimeNotified = startTimeNotified;
-    }
-
-    public NotificationComponentType getComponent() {
-        return component;
-    }
-
-    public void setComponent(NotificationComponentType component) {
-        this.component = component;
-    }
-
-    public UUID getContestId() {
-        return contestId;
-    }
-
-    public void setContestId(UUID contestId) {
-        this.contestId = contestId;
-    }
-
-    public UUID getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(UUID courseId) {
-        this.courseId = courseId;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public ZonedDateTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(ZonedDateTime endTime) {
-        this.endTime = endTime;
-    }
-
-    public ZonedDateTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(ZonedDateTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public NotificationEventType getEventType() {
-        return eventType;
-    }
-
-    public void setEventType(NotificationEventType eventType) {
-        this.eventType = eventType;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
@@ -140,12 +70,92 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
         this.description = description;
     }
 
-    public String getName() {
-        return name;
+    public NotificationEventType getEventType() {
+        return eventType;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEventType(NotificationEventType eventType) {
+        this.eventType = eventType;
+    }
+
+    public ZonedDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(ZonedDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public ZonedDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(ZonedDateTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public UUID getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(UUID courseId) {
+        this.courseId = courseId;
+    }
+
+    public UUID getContestId() {
+        return contestId;
+    }
+
+    public void setContestId(UUID contestId) {
+        this.contestId = contestId;
+    }
+
+    public NotificationComponentType getComponent() {
+        return component;
+    }
+
+    public void setComponent(NotificationComponentType component) {
+        this.component = component;
+    }
+
+    public Boolean getStartTimeNotified() {
+        return isStartTimeNotified;
+    }
+
+    public void setStartTimeNotified(Boolean startTimeNotified) {
+        isStartTimeNotified = startTimeNotified;
+    }
+
+    public Boolean getEndTimeNotified() {
+        return isEndTimeNotified;
+    }
+
+    public void setEndTimeNotified(Boolean endTimeNotified) {
+        isEndTimeNotified = endTimeNotified;
+    }
+
+    public NotificationNotifyTime getNotificationNotifyTime() {
+        return notificationNotifyTime;
+    }
+
+    public void setNotificationNotifyTime(NotificationNotifyTime notificationNotifyTime) {
+        this.notificationNotifyTime = notificationNotifyTime;
+    }
+
+    public ZonedDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
     public static final class Builder {
@@ -161,6 +171,7 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
         private NotificationComponentType component;
         private Boolean isStartTimeNotified;
         private Boolean isEndTimeNotified;
+        private NotificationNotifyTime notificationNotifyTime;
         private ZonedDateTime createdAt;
 
         private Builder() {
@@ -223,6 +234,11 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
 
         public Builder isEndTimeNotified(Boolean val) {
             isEndTimeNotified = val;
+            return this;
+        }
+
+        public Builder notificationNotifyTime(NotificationNotifyTime val) {
+            notificationNotifyTime = val;
             return this;
         }
 

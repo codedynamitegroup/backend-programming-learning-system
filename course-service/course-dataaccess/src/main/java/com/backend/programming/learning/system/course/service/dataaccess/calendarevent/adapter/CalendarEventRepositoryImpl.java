@@ -71,4 +71,15 @@ public class CalendarEventRepositoryImpl implements CalendarEventRepository {
                         ::calendarEventEntityToCalendarEvent)
                 .toList();
     }
+
+    @Override
+    public List<CalendarEvent> saveAllCalendarEvents(List<CalendarEvent> calendarEvents) {
+        List<CalendarEventEntity> calendarEventEntities = new ArrayList<>();
+        calendarEvents.forEach(calendarEvent -> calendarEventEntities.add(calendarEventDataAccessMapper
+                .calendarEventToCalendarEventEntity(calendarEvent)));
+        return calendarEventJpaRepository.saveAll(calendarEventEntities)
+                .stream()
+                .map(calendarEventDataAccessMapper::calendarEventEntityToCalendarEvent)
+                .toList();
+    }
 }
