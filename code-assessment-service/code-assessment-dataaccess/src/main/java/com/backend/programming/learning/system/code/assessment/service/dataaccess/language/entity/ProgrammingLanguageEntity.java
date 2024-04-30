@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.dataaccess.language.entity;
 
 
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,7 +26,7 @@ public class ProgrammingLanguageEntity {
     Boolean isActived;
 
     @Enumerated(EnumType.STRING)
-    String copyState;
+    CopyState copyState;
 
     @Override
     public boolean equals(Object object) {

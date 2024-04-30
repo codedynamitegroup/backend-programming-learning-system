@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 
 public interface TestCaseRepository {
     Page<TestCase>  getTestCaseByCodeQuestionId(CodeQuestionId id, Integer pageNo, Integer pageSize, Boolean fetchAll);
+    List<TestCase>  getTestCaseByCodeQuestionId(CodeQuestionId id);
     List<TestCase> save(List<TestCase> listTestCase);
     TestCase save(TestCase testCase);
     Optional<TestCase> findById(TestCaseId id);

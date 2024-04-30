@@ -20,6 +20,6 @@ INSERT INTO test_cases(id, code_question_id  ,input_data  ,output_data  ,is_samp
 VALUES
     ('9b103259-1a04-4ae4-aaac-dbd8f2d37ec6', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', '1 2', '3', true);
 
-INSERT INTO programming_language(id ,name , compiler_api_id ,time_limit,memory_limit,is_active, copy_state)
+INSERT INTO programming_language(id ,name , compiler_api_id ,time_limit,memory_limit,is_actived, copy_state)
 VALUES
     ('c95d5c7d-cadf-42cc-afdc-968211ae3720', 'Java', 19, 2, 200, true, 'CREATED');

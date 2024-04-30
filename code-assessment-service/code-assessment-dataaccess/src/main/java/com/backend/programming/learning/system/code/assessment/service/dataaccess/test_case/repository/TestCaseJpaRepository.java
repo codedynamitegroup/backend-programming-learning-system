@@ -13,4 +13,5 @@ import java.util.UUID;
 @Repository
 public interface TestCaseJpaRepository extends JpaRepository<TestCaseEntity, UUID> {
     Page<TestCaseEntity> findByCodeQuestionId(UUID codeQuestionId, Pageable pageable);
+    List<TestCaseEntity> findByCodeQuestionId(UUID codeQuestionId);
 }

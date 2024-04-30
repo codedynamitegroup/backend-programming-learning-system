@@ -1,11 +1,13 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.entity;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.CodeSubmissionTestCaseId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.LanguageId;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.*;
 
 import java.util.List;
+import java.util.UUID;
 
 public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
     private CodeQuestionId codeQuestionId;
@@ -18,7 +20,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
     private GradingStatus gradingStatus;
     private String aiAssessment;
     private String sonaqueAssessment;
-    private Integer numOfTestCaseSent;
+    private Integer numOfTestCase;
     private Integer numOfTestCaseGraded;
     private CopyState copyState;
     private List<CodeSubmissionTestCase> codeSubmissionTestCaseList;
@@ -34,7 +36,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         gradingStatus = builder.gradingStatus;
         aiAssessment = builder.aiAssessment;
         sonaqueAssessment = builder.sonaqueAssessment;
-        numOfTestCaseSent = builder.numOfTestCaseSent;
+        numOfTestCase = builder.numOfTestCase;
         numOfTestCaseGraded = builder.numOfTestCaseGraded;
         copyState = builder.copyState;
         codeSubmissionTestCaseList = builder.codeSubmissionTestCaseList;
@@ -45,8 +47,8 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         return new Builder();
     }
 
-    public Integer getNumOfTestCaseSent() {
-        return numOfTestCaseSent;
+    public Integer getNumOfTestCase() {
+        return numOfTestCase;
     }
 
     public Integer getNumOfTestCaseGraded() {
@@ -100,6 +102,31 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         return sonaqueAssessment;
     }
 
+    public void initiate(List<TestCase> testCases) {
+        codeSubmissionTestCaseList =
+                testCases.stream().map(this::initiateCodeSubmissionTestCase)
+                        .toList();
+
+        setId(new CodeSubmissionId(UUID.randomUUID()));
+        gradingStatus = GradingStatus.GRADING;
+        numOfTestCase = codeSubmissionTestCaseList.size();
+        numOfTestCaseGraded = 0;
+        copyState = CopyState.CREATING;
+    }
+
+    private CodeSubmissionTestCase initiateCodeSubmissionTestCase(TestCase testCase) {
+        return CodeSubmissionTestCase.builder()
+                .id(new CodeSubmissionTestCaseId(UUID.randomUUID()))
+                .testCase(testCase)
+                .codeSubmission(this)
+                .judgeToken("hi")
+                .build();
+    }
+
+    public void setCodeSubmissionTestCaseList(List<CodeSubmissionTestCase> codeSubmissionTestCaseList) {
+        this.codeSubmissionTestCaseList = codeSubmissionTestCaseList;
+    }
+
     public static final class Builder {
         private CodeQuestionId codeQuestionId;
         private UserId userId;
@@ -111,7 +138,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         private GradingStatus gradingStatus;
         private String aiAssessment;
         private String sonaqueAssessment;
-        private Integer numOfTestCaseSent;
+        private Integer numOfTestCase;
         private Integer numOfTestCaseGraded;
         private CopyState copyState;
         private List<CodeSubmissionTestCase> codeSubmissionTestCaseList;
@@ -170,8 +197,8 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
             return this;
         }
 
-        public Builder numOfTestCaseSent(Integer val) {
-            numOfTestCaseSent = val;
+        public Builder numOfTestCase(Integer val) {
+            numOfTestCase = val;
             return this;
         }
 

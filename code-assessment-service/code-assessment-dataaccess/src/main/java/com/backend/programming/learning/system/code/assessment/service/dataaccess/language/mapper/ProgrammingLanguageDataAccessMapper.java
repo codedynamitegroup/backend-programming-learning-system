@@ -15,7 +15,7 @@ public class ProgrammingLanguageDataAccessMapper {
                 .timeLimit(entity.getTimeLimit())
                 .memoryLimit(entity.getMemoryLimit())
                 .isActive(entity.getIsActived())
-                .copyState(CopyState.valueOf(entity.getCopyState()))
+                .copyState(entity.getCopyState())
                 .build();
     }
 }

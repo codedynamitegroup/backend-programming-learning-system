@@ -35,8 +35,10 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
     }
 
     @Override
-    public void initiateCodeSubmission(CodeSubmission codeSubmission) {
-
+    public CodeSubmission initiateCodeSubmission(CodeSubmission codeSubmission, List<TestCase> testCases) {
+        codeSubmission.initiate(testCases);
+        return codeSubmission;
     }
+
 
 }

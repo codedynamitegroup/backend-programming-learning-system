@@ -9,7 +9,7 @@ import java.lang.reflect.Field;
 @Slf4j
 public class GenericHelper {
     //not use for objects that have final field(s)
-    public <T> void mapNullAttributeToRepositoryAttribute(T nullAttributeObject, T repositoryObject, Class<T> tClass){
+    public <T> T mapNullAttributeToRepositoryAttribute(T nullAttributeObject, T repositoryObject, Class<T> tClass){
         Field[] fields = tClass.getDeclaredFields();
         for(Field field: fields){
             field.setAccessible(true);
@@ -24,5 +24,6 @@ public class GenericHelper {
             }
             field.setAccessible(false);
         }
+        return nullAttributeObject;
     }
 }

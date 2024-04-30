@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 @Slf4j
@@ -35,6 +36,13 @@ public class TestCaseRepositoryImpl  implements TestCaseRepository {
         Page<TestCaseEntity> listTcResponse = jpaRepository.findByCodeQuestionId(id.getValue(), pageable);
 
         return listTcResponse.map(dataAccessMapper::testCaseEntityToTestCase);
+    }
+
+    @Override
+    public List<TestCase> getTestCaseByCodeQuestionId(CodeQuestionId id) {
+        List<TestCaseEntity> listTcResponse = jpaRepository.findByCodeQuestionId(id.getValue());
+
+        return listTcResponse.stream().map(dataAccessMapper::testCaseEntityToTestCase).collect(Collectors.toList());
     }
 
     @Override

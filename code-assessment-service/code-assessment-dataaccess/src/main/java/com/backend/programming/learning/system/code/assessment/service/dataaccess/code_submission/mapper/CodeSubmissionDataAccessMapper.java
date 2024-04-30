@@ -5,7 +5,6 @@ import com.backend.programming.learning.system.code.assessment.service.dataacces
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.language.entity.ProgrammingLanguageEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
-import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.LanguageId;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
@@ -33,10 +32,10 @@ public class CodeSubmissionDataAccessMapper {
                 .aiAssessment(codeSubmission.getAiAssessment())
                 .sonaqueAssessment(codeSubmission.getSonaqueAssessment())
                 .sourceCode(codeSubmission.getSourceCode())
-                .numOfTestCaseSent(codeSubmission.getNumOfTestCaseSent())
+                .numOfTestCaseSent(codeSubmission.getNumOfTestCase())
                 .numOfTestCaseGraded(codeSubmission.getNumOfTestCaseGraded())
-                .gradingStatus(codeSubmission.getGradingStatus().name())
-                .copyState(codeSubmission.getCopyState().name())
+                .gradingStatus(codeSubmission.getGradingStatus())
+                .copyState(codeSubmission.getCopyState())
                 .build();
     }
 
@@ -52,10 +51,10 @@ public class CodeSubmissionDataAccessMapper {
                 .aiAssessment(entity.getAiAssessment())
                 .sonaqueAssessment(entity.getSonaqueAssessment())
                 .sourceCode(entity.getSourceCode())
-                .numOfTestCaseSent(entity.getNumOfTestCaseSent())
+                .numOfTestCase(entity.getNumOfTestCaseSent())
                 .numOfTestCaseGraded(entity.getNumOfTestCaseGraded())
-                .gradingStatus(GradingStatus.valueOf(entity.getGradingStatus()))
-                .copyState(CopyState.valueOf(entity.getCopyState()))
+                .gradingStatus(entity.getGradingStatus())
+                .copyState(entity.getCopyState())
                 .build();
     }
 }

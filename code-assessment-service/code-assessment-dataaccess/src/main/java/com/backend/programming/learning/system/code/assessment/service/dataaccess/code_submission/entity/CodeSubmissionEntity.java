@@ -3,6 +3,8 @@ package com.backend.programming.learning.system.code.assessment.service.dataacce
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.CodeQuestionEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.language.entity.ProgrammingLanguageEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import lombok.*;
 
 import javax.persistence.*;
@@ -46,10 +48,10 @@ public class CodeSubmissionEntity {
     private Integer numOfTestCaseGraded;
 
     @Enumerated(EnumType.STRING)
-    private String gradingStatus;
+    private GradingStatus gradingStatus;
 
     @Enumerated(EnumType.STRING)
-    private String copyState;
+    private CopyState copyState;
 
     @Override
     public boolean equals(Object object) {
