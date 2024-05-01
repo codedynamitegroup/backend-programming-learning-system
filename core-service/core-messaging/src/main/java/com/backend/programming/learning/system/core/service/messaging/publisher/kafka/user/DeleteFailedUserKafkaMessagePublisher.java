@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.messaging.publisher.kafka.user;
 
-import com.backend.programming.learning.system.core.service.domain.config.CoreServiceConfigData;
+import com.backend.programming.learning.system.core.service.config.CoreServiceConfigData;
 import com.backend.programming.learning.system.core.service.domain.event.user.UserDeletedFailEvent;
 import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.user.UserDeleteFailedMessagePublisher;
 import com.backend.programming.learning.system.core.service.messaging.mapper.UserMessagingDataMapper;

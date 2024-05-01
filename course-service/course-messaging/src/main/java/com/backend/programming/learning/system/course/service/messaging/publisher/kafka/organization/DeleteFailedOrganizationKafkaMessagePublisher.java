@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.course.service.messaging.publisher.kafka.organization;
 
-import com.backend.programming.learning.system.course.service.domain.config.CourseServiceConfigData;
+import com.backend.programming.learning.system.course.service.config.CourseServiceConfigData;
 import com.backend.programming.learning.system.course.service.domain.event.organization.OrganizationDeletedFailEvent;
 import com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.question.organization.OrganizationDeleteFailedMessagePublisher;
 import com.backend.programming.learning.system.course.service.messaging.mapper.OrganizationMessagingDataMapper;

@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: auth-service
+  profiles:
+    active: auth
+  cloud:
+    config:
+      name: auth-service,config-client
+      uri: http://localhost:9999
