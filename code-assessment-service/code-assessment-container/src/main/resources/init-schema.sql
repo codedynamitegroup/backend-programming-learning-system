@@ -93,7 +93,7 @@ CREATE TABLE programming_language(
     name text not null ,
     compiler_api_id int not null ,
     time_limit float not null,
-    memory_limit float not null,
+    memory_limit float check(memory_limit >= 2048) not null ,
     is_actived boolean default false,
     copy_state CopyState not null ,
     CONSTRAINT pr_la_pk PRIMARY KEY (id)
@@ -124,7 +124,7 @@ CREATE TABLE programming_language_code_question(
     programming_language_id uuid NOT NULL ,
     code_question_id uuid not null ,
     time_limit float not null,
-    memory_limit float not null,
+    memory_limit float check(memory_limit >= 2048) not null ,
     active boolean default true,
     CONSTRAINT pr_la_co_qu_pk PRIMARY KEY (programming_language_id, code_question_id),
     CONSTRAINT prl_fk FOREIGN KEY (programming_language_id)
