@@ -7,20 +7,36 @@ import com.backend.programming.learning.system.domain.valueobject.TestCasePassSt
 public class CodeSubmissionTestCase extends BaseEntity<CodeSubmissionTestCaseId> {
     private final TestCase testCase;
     private final CodeSubmission codeSubmission;
-    private final String actualOutput;
-    private final TestCasePassStatus testCasePassStatus;
+    private String actualOutput;
+    private String compileOutput;
+    private Float runTime;
+    private Float memory;
+    private Boolean passed;
+    private String judgeToken;
 
     private CodeSubmissionTestCase(Builder builder) {
         testCase = builder.testCase;
         codeSubmission = builder.codeSubmission;
         actualOutput = builder.actualOutput;
-        testCasePassStatus = builder.testCasePassStatus;
+        compileOutput = builder.compileOutput;
+        runTime = builder.runTime;
+        memory = builder.memory;
+        passed = builder.passed;
+        judgeToken = builder.judgeToken;
         super.setId(builder.id);
+    }
+
+    public static Builder builder() {
+        return new Builder();
     }
 
 
     public TestCase getTestCase() {
         return testCase;
+    }
+
+    public String getCompileOutput() {
+        return compileOutput;
     }
 
     public CodeSubmission getCodeSubmission() {
@@ -31,18 +47,31 @@ public class CodeSubmissionTestCase extends BaseEntity<CodeSubmissionTestCaseId>
         return actualOutput;
     }
 
-    public TestCasePassStatus getIsPass() {
-        return testCasePassStatus;
+    public Float getRunTime() {
+        return runTime;
     }
-    public static Builder builder() {
-        return new Builder();
+
+    public Float getMemory() {
+        return memory;
+    }
+
+    public Boolean getPassed() {
+        return passed;
+    }
+
+    public String getJudgeToken() {
+        return judgeToken;
     }
 
     public static final class Builder {
         private TestCase testCase;
         private CodeSubmission codeSubmission;
         private String actualOutput;
-        private TestCasePassStatus testCasePassStatus;
+        private String compileOutput;
+        private Float runTime;
+        private Float memory;
+        private Boolean passed;
+        private String judgeToken;
         private CodeSubmissionTestCaseId id;
 
         private Builder() {
@@ -63,8 +92,28 @@ public class CodeSubmissionTestCase extends BaseEntity<CodeSubmissionTestCaseId>
             return this;
         }
 
-        public Builder testCasePassStatus(TestCasePassStatus val) {
-            testCasePassStatus = val;
+        public Builder compileOutput(String val) {
+            compileOutput = val;
+            return this;
+        }
+
+        public Builder runTime(Float val) {
+            runTime = val;
+            return this;
+        }
+
+        public Builder memory(Float val) {
+            memory = val;
+            return this;
+        }
+
+        public Builder passed(Boolean val) {
+            passed = val;
+            return this;
+        }
+
+        public Builder judgeToken(String val) {
+            judgeToken = val;
             return this;
         }
 

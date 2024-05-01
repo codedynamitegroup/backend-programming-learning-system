@@ -1,25 +1,28 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.entity;
 
-import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.LanguageId;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.CodeSubmissionTestCaseId;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
-import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
-import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
-import com.backend.programming.learning.system.domain.valueobject.SubmissionPassStatus;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
+import com.backend.programming.learning.system.domain.valueobject.*;
 
 import java.util.List;
+import java.util.UUID;
 
 public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
-    private final CodeQuestionId codeQuestionId;
-    private final UserId userId;
-    private final LanguageId languageId;
+    private CodeQuestionId codeQuestionId;
+    private UserId userId;
+    private ProgrammingLanguageId languageId;
     private Double grade;
     private Double runTime;
     private Double memory;
     private String sourceCode;
-    private SubmissionPassStatus submissionPassStatus;
+    private GradingStatus gradingStatus;
     private String aiAssessment;
     private String sonaqueAssessment;
+    private Integer numOfTestCase;
+    private Integer numOfTestCaseGraded;
+    private CopyState copyState;
     private List<CodeSubmissionTestCase> codeSubmissionTestCaseList;
 
     private CodeSubmission(Builder builder) {
@@ -30,15 +33,30 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         runTime = builder.runTime;
         memory = builder.memory;
         sourceCode = builder.sourceCode;
-        submissionPassStatus = builder.submissionPassStatus;
+        gradingStatus = builder.gradingStatus;
         aiAssessment = builder.aiAssessment;
         sonaqueAssessment = builder.sonaqueAssessment;
+        numOfTestCase = builder.numOfTestCase;
+        numOfTestCaseGraded = builder.numOfTestCaseGraded;
+        copyState = builder.copyState;
         codeSubmissionTestCaseList = builder.codeSubmissionTestCaseList;
         super.setId(builder.id);
     }
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    public Integer getNumOfTestCase() {
+        return numOfTestCase;
+    }
+
+    public Integer getNumOfTestCaseGraded() {
+        return numOfTestCaseGraded;
+    }
+
+    public CopyState getCopyState() {
+        return copyState;
     }
 
     public List<CodeSubmissionTestCase> getCodeSubmissionTestCaseList() {
@@ -52,7 +70,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         return userId;
     }
 
-    public LanguageId getLanguageId() {
+    public ProgrammingLanguageId getLanguageId() {
         return languageId;
     }
 
@@ -72,8 +90,8 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         return sourceCode;
     }
 
-    public SubmissionPassStatus getSubmissionPassStatus() {
-        return submissionPassStatus;
+    public GradingStatus getGradingStatus() {
+        return gradingStatus;
     }
 
     public String getAiAssessment() {
@@ -84,17 +102,45 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         return sonaqueAssessment;
     }
 
+    public void initiate(List<TestCase> testCases) {
+        codeSubmissionTestCaseList =
+                testCases.stream().map(this::initiateCodeSubmissionTestCase)
+                        .toList();
+
+        setId(new CodeSubmissionId(UUID.randomUUID()));
+        gradingStatus = GradingStatus.GRADING;
+        numOfTestCase = codeSubmissionTestCaseList.size();
+        numOfTestCaseGraded = 0;
+        copyState = CopyState.CREATING;
+    }
+
+    private CodeSubmissionTestCase initiateCodeSubmissionTestCase(TestCase testCase) {
+        return CodeSubmissionTestCase.builder()
+                .id(new CodeSubmissionTestCaseId(UUID.randomUUID()))
+                .testCase(testCase)
+                .codeSubmission(this)
+                .judgeToken("hi")
+                .build();
+    }
+
+    public void setCodeSubmissionTestCaseList(List<CodeSubmissionTestCase> codeSubmissionTestCaseList) {
+        this.codeSubmissionTestCaseList = codeSubmissionTestCaseList;
+    }
+
     public static final class Builder {
         private CodeQuestionId codeQuestionId;
         private UserId userId;
-        private LanguageId languageId;
+        private ProgrammingLanguageId languageId;
         private Double grade;
         private Double runTime;
         private Double memory;
         private String sourceCode;
-        private SubmissionPassStatus submissionPassStatus;
+        private GradingStatus gradingStatus;
         private String aiAssessment;
         private String sonaqueAssessment;
+        private Integer numOfTestCase;
+        private Integer numOfTestCaseGraded;
+        private CopyState copyState;
         private List<CodeSubmissionTestCase> codeSubmissionTestCaseList;
         private CodeSubmissionId id;
 
@@ -111,7 +157,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
             return this;
         }
 
-        public Builder languageId(LanguageId val) {
+        public Builder languageId(ProgrammingLanguageId val) {
             languageId = val;
             return this;
         }
@@ -136,8 +182,8 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
             return this;
         }
 
-        public Builder submissionPassStatus(SubmissionPassStatus val) {
-            submissionPassStatus = val;
+        public Builder gradingStatus(GradingStatus val) {
+            gradingStatus = val;
             return this;
         }
 
@@ -148,6 +194,21 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
 
         public Builder sonaqueAssessment(String val) {
             sonaqueAssessment = val;
+            return this;
+        }
+
+        public Builder numOfTestCase(Integer val) {
+            numOfTestCase = val;
+            return this;
+        }
+
+        public Builder numOfTestCaseGraded(Integer val) {
+            numOfTestCaseGraded = val;
+            return this;
+        }
+
+        public Builder copyState(CopyState val) {
+            copyState = val;
             return this;
         }
 

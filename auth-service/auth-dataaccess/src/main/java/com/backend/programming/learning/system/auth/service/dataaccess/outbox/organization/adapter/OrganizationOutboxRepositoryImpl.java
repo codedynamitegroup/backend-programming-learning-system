@@ -4,9 +4,7 @@ import com.backend.programming.learning.system.auth.service.dataaccess.outbox.or
 import com.backend.programming.learning.system.auth.service.dataaccess.outbox.organization.mapper.OrganizationOutboxDataAccessMapper;
 import com.backend.programming.learning.system.auth.service.dataaccess.outbox.organization.repository.OrganizationOutboxJpaRepository;
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.organization.OrganizationOutboxMessage;
-import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserOutboxMessage;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.OrganizationOutboxRepository;
-import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserOutboxRepository;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
 import org.springframework.stereotype.Component;

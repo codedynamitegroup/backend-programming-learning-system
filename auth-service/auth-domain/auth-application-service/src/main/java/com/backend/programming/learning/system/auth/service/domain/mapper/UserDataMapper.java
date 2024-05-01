@@ -9,6 +9,8 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.up
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.UserDeletedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserEventPayload;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
@@ -38,7 +40,7 @@ public class UserDataMapper {
                 .build();
     }
 
-    public UserEventPayload userCreatedEventToUserCreatedEventPayload(UserCreatedEvent userCreatedEvent) {
+    public UserEventPayload userCreatedEventToUserEventPayload(UserCreatedEvent userCreatedEvent) {
         User user = userCreatedEvent.getUser();
         return UserEventPayload.builder()
                 .userId(user.getId().getValue().toString())
@@ -50,6 +52,30 @@ public class UserDataMapper {
                 .updatedAt(user.getUpdatedAt())
                 .isDeleted(user.getDeleted())
                 .copyState(CopyState.CREATING.name())
+                .build();
+    }
+
+    public UserEventPayload userUpdatedEventToUserEventPayload(UserUpdatedEvent userUpdatedEvent) {
+        User user = userUpdatedEvent.getUser();
+        return UserEventPayload.builder()
+                .userId(user.getId().getValue().toString())
+                .dob(user.getDob())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .phone(user.getPhone())
+                .address(user.getAddress())
+                .avatarUrl(user.getAvatarUrl())
+                .updatedAt(user.getUpdatedAt())
+                .copyState(CopyState.UPDATING.name())
+                .build();
+    }
+
+    public UserEventPayload userDeletedEventToUserEventPayload(UserDeletedEvent userDeletedEvent) {
+        User user = userDeletedEvent.getUser();
+        return UserEventPayload.builder()
+                .userId(user.getId().getValue().toString())
+                .isDeleted(user.getDeleted())
+                .copyState(CopyState.UPDATING.name())
                 .build();
     }
 

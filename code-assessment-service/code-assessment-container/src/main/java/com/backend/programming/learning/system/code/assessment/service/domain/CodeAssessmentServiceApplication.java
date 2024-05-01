@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@EntityScan(basePackages = "com.backend.programming.learning.system.code.assessment.service.dataaccess")
+@EntityScan(basePackages = {"com.backend.programming.learning.system.code.assessment.service.dataaccess","com.backend.programming.learning.system.dataaccess"})
 @EnableJpaRepositories(basePackages = "com.backend.programming.learning.system.code.assessment.service.dataaccess")
 @SpringBootApplication(scanBasePackages = "com.backend.programming.learning.system")
 public class CodeAssessmentServiceApplication {

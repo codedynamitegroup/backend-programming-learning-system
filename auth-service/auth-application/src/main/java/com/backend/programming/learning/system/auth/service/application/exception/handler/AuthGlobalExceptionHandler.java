@@ -20,8 +20,8 @@ public class AuthGlobalExceptionHandler extends GlobalExceptionHandler {
     public ErrorDTO handleException(AuthDomainException orderDomainException) {
         log.error(orderDomainException.getMessage(), orderDomainException);
         return ErrorDTO.builder()
-                .status(HttpStatus.BAD_REQUEST.value())
-                .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                .code(HttpStatus.BAD_REQUEST.value())
+                .status(HttpStatus.BAD_REQUEST.getReasonPhrase())
                 .message(orderDomainException.getMessage())
                 .build();
     }
@@ -32,8 +32,8 @@ public class AuthGlobalExceptionHandler extends GlobalExceptionHandler {
     public ErrorDTO handleException(AuthNotFoundException certificateCourseNotFoundException) {
         log.error(certificateCourseNotFoundException.getMessage(), certificateCourseNotFoundException);
         return ErrorDTO.builder()
-                .status(HttpStatus.NOT_FOUND.value())
-                .code(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .code(HttpStatus.NOT_FOUND.value())
+                .status(HttpStatus.NOT_FOUND.getReasonPhrase())
                 .message(certificateCourseNotFoundException.getMessage())
                 .build();
     }

@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 1851599654137689524L;
+  private static final long serialVersionUID = -508328353540298778L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model.user\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"email\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"firstName\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"lastName\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"phone\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"address\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"avatarUrl\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"dob\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"},\"default\":0},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"CREATE_PROPAGATING\",\"UPDATE_PROPAGATING\",\"DELETE_PROPAGATING\",\"CREATE_ROLLBACKING\",\"UPDATE_ROLLBACKING\",\"DELETE_ROLLBACKING\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"},\"default\":0},{\"name\":\"updatedAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"},\"default\":0},{\"name\":\"isDeleted\",\"type\":\"boolean\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model.user\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"email\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"firstName\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"lastName\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"phone\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"address\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"avatarUrl\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"dob\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"},\"default\":0},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"},\"default\":0},{\"name\":\"updatedAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"},\"default\":0},{\"name\":\"isDeleted\",\"type\":[\"null\",\"boolean\"],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -89,7 +89,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
   private com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState copyState;
   private java.time.Instant createdAt;
   private java.time.Instant updatedAt;
-  private boolean isDeleted;
+  private java.lang.Boolean isDeleted;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -432,7 +432,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
    * Gets the value of the 'isDeleted' field.
    * @return The value of the 'isDeleted' field.
    */
-  public boolean getIsDeleted() {
+  public java.lang.Boolean getIsDeleted() {
     return isDeleted;
   }
 
@@ -441,7 +441,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
    * Sets the value of the 'isDeleted' field.
    * @param value the value to set.
    */
-  public void setIsDeleted(boolean value) {
+  public void setIsDeleted(java.lang.Boolean value) {
     this.isDeleted = value;
   }
 
@@ -499,7 +499,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
     private com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState copyState;
     private java.time.Instant createdAt;
     private java.time.Instant updatedAt;
-    private boolean isDeleted;
+    private java.lang.Boolean isDeleted;
 
     /** Creates a new Builder */
     private Builder() {
@@ -1155,7 +1155,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
       * Gets the value of the 'isDeleted' field.
       * @return The value.
       */
-    public boolean getIsDeleted() {
+    public java.lang.Boolean getIsDeleted() {
       return isDeleted;
     }
 
@@ -1165,7 +1165,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
       * @param value The value of 'isDeleted'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder setIsDeleted(boolean value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder setIsDeleted(java.lang.Boolean value) {
       validate(fields()[13], value);
       this.isDeleted = value;
       fieldSetFlags()[13] = true;
@@ -1186,6 +1186,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder clearIsDeleted() {
+      isDeleted = null;
       fieldSetFlags()[13] = false;
       return this;
     }

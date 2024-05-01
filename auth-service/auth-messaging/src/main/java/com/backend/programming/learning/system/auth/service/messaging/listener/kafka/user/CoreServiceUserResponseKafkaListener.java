@@ -42,58 +42,22 @@ public class CoreServiceUserResponseKafkaListener implements KafkaConsumer<UserR
         messages.forEach(userResponseAvroModel -> {
             try {
                 switch (userResponseAvroModel.getCopyState()){
-                    case CREATED:{
-                        log.info("Success to create user for id: {}",
-                                userResponseAvroModel.getUserId());
+                    case CREATED, DELETED, UPDATED: {
                         userResponseMessageListener
-                                .userCreateSuccess(userMessagingDataMapper
+                                .userCreatedUpdatedOrDeletedSuccess(userMessagingDataMapper
                                         .userResponseAvroModelToUserResponse(userResponseAvroModel));
                         break;
                     }
-                    case CREATE_ROLLBACKING:{
-                        log.info("Fail to create user for id: {}",
-                                userResponseAvroModel.getUserId());
+                    case CREATE_FAILED, DELETE_FAILED, UPDATE_FAILED:{
                         userResponseMessageListener
-                                .userCreateFail(userMessagingDataMapper
-                                        .userResponseAvroModelToUserResponse(userResponseAvroModel));
-                        break;
-                    }
-                    case DELETED: {
-                        log.info("Success to delete user for id: {}",
-                                userResponseAvroModel.getUserId());
-                        userResponseMessageListener
-                                .userDeleteSuccess(userMessagingDataMapper
-                                        .userResponseAvroModelToUserResponse(userResponseAvroModel));
-                        break;
-                    }
-                    case DELETE_ROLLBACKING:{
-                        log.info("Fail to delete user for id: {}",
-                                userResponseAvroModel.getUserId());
-                        userResponseMessageListener
-                                .userDeleteFail(userMessagingDataMapper
-                                        .userResponseAvroModelToUserResponse(userResponseAvroModel));
-                        break;
-                    }
-                    case UPDATED:{
-                        log.info("Success to update user for id: {}",
-                                userResponseAvroModel.getUserId());
-                        userResponseMessageListener
-                                .userUpdatedSuccess(userMessagingDataMapper
-                                        .userResponseAvroModelToUserResponse(userResponseAvroModel));
-                        break;
-                    }
-                    case UPDATE_ROLLBACKING:{
-                        log.info("Fail to update user for id: {}",
-                                userResponseAvroModel.getUserId());
-                        userResponseMessageListener
-                                .userUpdatedFail(userMessagingDataMapper
+                                .userCreatedUpdatedOrDeletedFail(userMessagingDataMapper
                                         .userResponseAvroModelToUserResponse(userResponseAvroModel));
                         break;
                     }
                 }
             } catch (OptimisticLockException e) {
                 //NO-OP for optimistic lock. This means another thread finished the work, do not throw error to prevent reading the data from kafka again!
-                log.error("Caught optimistic locking exception in PaymentResponseKafkaListener for order id: {}",
+                log.error("Caught optimistic locking exception in UserResponseAvroModel for order id: {}",
                         userResponseAvroModel.getUserId());
             } catch (AuthNotFoundException e) {
                 //NO-OP for OrderNotFoundException

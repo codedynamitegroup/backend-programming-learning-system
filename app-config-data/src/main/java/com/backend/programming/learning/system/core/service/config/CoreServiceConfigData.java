@@ -13,7 +13,10 @@ public class CoreServiceConfigData {
     private String questionUpdatedRequestTopicName;
     private String questionResponseTopicName;
 
+    private String userRequestTopicName;
     private String userResponseTopicName;
+    private String codeQuestionUpdateRequestToCoreServiceTopicName;
+    private String codeQuestionUpdateResponseFromCoreServiceTopicName;
 
     private String calendarEventUpdateRequestTopicName;
     private String calendarEventUpdateResponseTopicName;

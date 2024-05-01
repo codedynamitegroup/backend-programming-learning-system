@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.entity;
 
-import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TestCaseId;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
@@ -11,7 +10,7 @@ import java.util.UUID;
 
 public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     private final QuestionId questionId;
-    private final List<TestCase> testCases;
+    private final String name;
     private final String dslTemplate;
     private final String problemStatement;
     private final String inputFormat;
@@ -28,27 +27,39 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     public void initializeCodeQuestion(){
         setId(new CodeQuestionId(UUID.randomUUID()));
         copyState = CopyState.CREATING;
-        intializeTestCases();
     }
     public void validateCodeQuestion(){
         validateInitialCodeQuestion();
         //code later
     }
+    public void setCopyState(CopyState state){
+        copyState = state;
+    }
 
     private void validateInitialCodeQuestion() {
     }
+    public void initCancelCopy(CopyState state, List<String> failureMessages){
+        this.copyState = state;
+        updateFailureMessages(failureMessages);
 
-    private void intializeTestCases() {
-        if(testCases != null)
-            for(TestCase testCase: testCases){
-                testCase.initializeTestCase(super.getId(), new TestCaseId(UUID.randomUUID()));
-            }
     }
+    private void updateFailureMessages(List<String> failureMessages) {
+        if (this.failureMessages != null && failureMessages != null) {
+            this.failureMessages.addAll(failureMessages.stream().filter(message -> !message.isEmpty()).toList());
+        }
+        if (this.failureMessages == null) {
+            this.failureMessages = failureMessages;
+        }
+    }
+
 
     public String getConstraints() {
         return constraints;
     }
 
+    public String getName() {
+        return name;
+    }
     public String getProblemStatement() {
         return problemStatement;
     }
@@ -69,10 +80,6 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         return questionId;
     }
 
-    public List<TestCase> getTestCases() {
-        return testCases;
-    }
-
     public String getDslTemplate() {
         return dslTemplate;
     }
@@ -83,27 +90,26 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
 
     private CodeQuestion(Builder builder) {
         questionId = builder.questionId;
-        testCases = builder.testCases;
+        name = builder.name;
         dslTemplate = builder.dslTemplate;
         problemStatement = builder.problemStatement;
         inputFormat = builder.inputFormat;
         outputFormat = builder.outputFormat;
         constraints = builder.constraints;
-        copyState = builder.copyState;
+        setCopyState(builder.copyState);
         failureMessages = builder.failureMessages;
         super.setId(builder.id);
     }
 
     public static final class Builder {
         private QuestionId questionId;
-        private List<TestCase> testCases;
+        private String name;
         private String dslTemplate;
         private String problemStatement;
         private String inputFormat;
         private String outputFormat;
         private String constraints;
         private CopyState copyState;
-        private Boolean isDeleted;
         private List<String> failureMessages;
         private CodeQuestionId id;
 
@@ -115,8 +121,8 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
             return this;
         }
 
-        public Builder testCases(List<TestCase> val) {
-            testCases = val;
+        public Builder name(String val) {
+            name = val;
             return this;
         }
 
@@ -147,11 +153,6 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
 
         public Builder copyState(CopyState val) {
             copyState = val;
-            return this;
-        }
-
-        public Builder isDeleted(Boolean val) {
-            isDeleted = val;
             return this;
         }
 

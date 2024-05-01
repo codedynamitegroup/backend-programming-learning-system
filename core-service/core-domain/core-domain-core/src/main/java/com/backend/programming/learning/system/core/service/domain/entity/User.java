@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.entity;
 
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
 import java.time.ZonedDateTime;
@@ -20,23 +21,24 @@ public class User extends AggregateRoot<UserId> {
     private String phone;
     private String address;
     private String avatarUrl;
-
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
     private Boolean isDeleted;
+    private CopyState copyState;
 
     private User(Builder builder) {
         super.setId(builder.userId);
         email = builder.email;
-        firstName = builder.firstName;
-        lastName = builder.lastName;
-        dob = builder.dob;
-        phone = builder.phone;
-        address = builder.address;
-        avatarUrl = builder.avatarUrl;
+        setFirstName(builder.firstName);
+        setLastName(builder.lastName);
+        setDob(builder.dob);
+        setPhone(builder.phone);
+        setAddress(builder.address);
+        setAvatarUrl(builder.avatarUrl);
         createdAt = builder.createdAt;
-        updatedAt = builder.updatedAt;
+        setUpdatedAt(builder.updatedAt);
         isDeleted = builder.isDeleted;
+        setCopyState(builder.copyState);
     }
 
     public String getEmail() {
@@ -111,6 +113,14 @@ public class User extends AggregateRoot<UserId> {
         isDeleted = deleted;
     }
 
+    public CopyState getCopyState() {
+        return copyState;
+    }
+
+    public void setCopyState(CopyState copyState) {
+        this.copyState = copyState;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -127,6 +137,7 @@ public class User extends AggregateRoot<UserId> {
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
         private Boolean isDeleted;
+        private CopyState copyState;
 
         private Builder() {
         }
@@ -183,6 +194,11 @@ public class User extends AggregateRoot<UserId> {
 
         public Builder isDeleted(Boolean val) {
             isDeleted = val;
+            return this;
+        }
+
+        public Builder copyState(CopyState val) {
+            copyState = val;
             return this;
         }
 
