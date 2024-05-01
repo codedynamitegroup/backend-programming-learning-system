@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.auth.service.domain.config;
+package com.backend.programming.learning.system.auth.service.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

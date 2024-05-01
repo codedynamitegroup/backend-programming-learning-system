@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.messaging.publisher.kafka;
 
-import com.backend.programming.learning.system.code.assessment.service.domain.config.CodeAssessmentServiceConfigData;
+import com.backend.programming.learning.system.code.assessment.service.config.CodeAssessmentServiceConfigData;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.code_questions_update_outbox.CodeQuestionsUpdateOutboxMessage;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.code_questions_update_outbox.CodeQuestionsUpdatePayload;

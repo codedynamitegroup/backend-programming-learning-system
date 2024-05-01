@@ -48,6 +48,7 @@ public class UserUpdateSagaHelper {
             case CREATING,UPDATING,DELETING -> SagaStatus.STARTED;
             case CREATE_FAILED, UPDATE_FAILED, DELETE_FAILED-> SagaStatus.COMPENSATING;
             case CREATED,UPDATED,DELETED -> SagaStatus.SUCCEEDED;
+            default -> SagaStatus.STARTED;
         };
     }
 }
