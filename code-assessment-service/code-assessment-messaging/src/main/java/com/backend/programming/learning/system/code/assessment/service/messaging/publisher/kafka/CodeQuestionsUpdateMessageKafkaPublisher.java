@@ -64,7 +64,7 @@ public class CodeQuestionsUpdateMessageKafkaPublisher
             kafkaProducer.send(codeAssessmentServiceConfigData.getCodeQuestionUpdateRequestToCoreServiceTopicName(),
                     sagaId,
                     avroModel,
-                    kafkaMessageHelper.getKafkaCallback(
+                    kafkaMessageHelper.getKafkaCallbackApplyOutbox(
                             codeAssessmentServiceConfigData.getCodeQuestionUpdateRequestToCoreServiceTopicName(),
                             avroModel,
                             codeQuestionsUpdateOutboxMessage,
