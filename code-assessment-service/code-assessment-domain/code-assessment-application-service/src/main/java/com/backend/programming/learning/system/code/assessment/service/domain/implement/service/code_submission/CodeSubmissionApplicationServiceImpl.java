@@ -4,8 +4,11 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.CodeSubmissionApplicationService;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
-@Component
+@Service
+@Validated
 public class CodeSubmissionApplicationServiceImpl implements CodeSubmissionApplicationService {
     private final CodeSubmissionCommandHandler codeSubmissionCommandHandler;
 

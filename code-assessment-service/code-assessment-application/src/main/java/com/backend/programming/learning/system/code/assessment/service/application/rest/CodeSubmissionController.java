@@ -26,8 +26,10 @@ public class CodeSubmissionController {
     @PostMapping
     public ResponseEntity<CreateCodeSubmissionResponse> createTestCases
             (@RequestBody CreateCodeSubmissionCommand createCodeSubmissionCommand){
+        log.info("adsd {}", createCodeSubmissionCommand.getCodeQuestionId());
         CreateCodeSubmissionResponse response =
                 codeSubmissionApplicationService.createCodeSubmission(createCodeSubmissionCommand);
         return ResponseEntity.ok(response);
     }
+
 }

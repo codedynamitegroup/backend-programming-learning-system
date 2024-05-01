@@ -23,6 +23,7 @@ import io.netty.handler.timeout.ReadTimeoutException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.reactive.function.client.WebClientRequestException;
 
 import java.net.ConnectException;
 import java.util.List;
@@ -59,18 +60,10 @@ public class CodeSubmissionHelper {
     //don't use @transactional here
     public CodeSubmission createCodeSubmission(CreateCodeSubmissionCommand createCodeSubmissionCommand) {
         CodeSubmission codeSubmission = initAndSaveCodeSubmission(createCodeSubmissionCommand);
-        try {
-            //send judge to get token and store token if success
-            assessmentSourceCodeByTestCases.judge(codeSubmission);
-        } catch (Exception e) {
-            if (e instanceof ReadTimeoutException || e instanceof ConnectException){
-                //change codesubmission state if sending failed and throw error
-                codeSubmission.setGradingStatus(GradingStatus.GRADING_SYSTEM_UNAVAILABLE);
-                codeSubmissionRepository.save(codeSubmission);
-                throw new CodeSubmissionJudgingServiceUnavailableException("Judgement services are unavailable now. Please, try again later");
-            }
-            throw e;
-        }
+        //send judge to get token and store token if success
+        assessmentSourceCodeByTestCases.judge(codeSubmission);
+
+
 
 
         return codeSubmission;

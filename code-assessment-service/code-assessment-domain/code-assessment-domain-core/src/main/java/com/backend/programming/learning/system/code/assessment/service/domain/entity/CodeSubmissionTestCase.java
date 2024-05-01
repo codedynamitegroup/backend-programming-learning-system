@@ -63,6 +63,10 @@ public class CodeSubmissionTestCase extends BaseEntity<CodeSubmissionTestCaseId>
         return judgeToken;
     }
 
+    public void setJudgeToken(String judgeToken) {
+        this.judgeToken = judgeToken;
+    }
+
     public static final class Builder {
         private TestCase testCase;
         private CodeSubmission codeSubmission;

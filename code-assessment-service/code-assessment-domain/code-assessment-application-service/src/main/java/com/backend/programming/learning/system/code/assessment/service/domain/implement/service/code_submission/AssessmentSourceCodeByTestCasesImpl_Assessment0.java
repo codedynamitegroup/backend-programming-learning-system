@@ -4,6 +4,9 @@ import com.backend.programming.learning.system.code.assessment.service.domain.en
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_submission.CodeSubmissionJudgingServiceUnavailableException;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.code_submission.CodeSubmissionDataMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.assessment.AssessmentSourceCodeByTestCases;
+import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.CodeSubmissionTestCaseRepository;
+import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_submssion.CodeSubmissionRepository;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
 import io.netty.handler.timeout.ReadTimeoutException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,8 +17,10 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientRequestException;
 import reactor.core.publisher.Mono;
 
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
@@ -26,15 +31,33 @@ import org.springframework.http.HttpStatus;
 @Slf4j
 public class AssessmentSourceCodeByTestCasesImpl_Assessment0 implements AssessmentSourceCodeByTestCases {
 
-    private final CodeSubmissionDataMapper codeSubmissionDataMapper;
+    private final CodeSubmissionRepository codeSubmissionRepository;
+    private final CodeSubmissionTestCaseRepository codeSubmissionTestCaseRepository;
 
-    public AssessmentSourceCodeByTestCasesImpl_Assessment0(CodeSubmissionDataMapper codeSubmissionDataMapper) {
-        this.codeSubmissionDataMapper = codeSubmissionDataMapper;
+    public AssessmentSourceCodeByTestCasesImpl_Assessment0(CodeSubmissionRepository codeSubmissionRepository, CodeSubmissionTestCaseRepository codeSubmissionTestCaseRepository) {
+        this.codeSubmissionRepository = codeSubmissionRepository;
+        this.codeSubmissionTestCaseRepository = codeSubmissionTestCaseRepository;
     }
-
 
     @Override
     public void judge(CodeSubmission codeSubmission) {
+        Thread thread = new Thread(()-> {
+            try {
+                this.processSending(codeSubmission);
+            } catch (Exception e) {
+                if (e instanceof ReadTimeoutException || e instanceof WebClientRequestException){
+                    //change codesubmission state if sending failed and throw error
+                    codeSubmission.setGradingStatus(GradingStatus.GRADING_SYSTEM_UNAVAILABLE);
+                    codeSubmissionRepository.save(codeSubmission);
+                    throw new CodeSubmissionJudgingServiceUnavailableException("Judgement services are unavailable now. Please, try again later");
+                }
+                throw e;
+            }
+        });
+        thread.start();
+
+    }
+    private void processSending(CodeSubmission codeSubmission){
         WebClient client = WebClient.create("http://localhost:2358");
         Token[] result = client.post()
                 .uri("/submissions/batch?base64_encoded=true")
@@ -47,7 +70,11 @@ public class AssessmentSourceCodeByTestCasesImpl_Assessment0 implements Assessme
 //                                Mono.error(new CodeSubmissionJudgingServiceUnavailableException("Judgement services are unavailable now. Please, try again later")))
                 .bodyToMono(Token[].class)
                 .block();
-        log.info("abb {}", result.length);
+        if(result != null) {
+            for (int i = 0; i < result.length; ++i)
+                codeSubmission.getCodeSubmissionTestCaseList().get(i).setJudgeToken(result[i].token.toString());
+            codeSubmissionTestCaseRepository.save(codeSubmission.getCodeSubmissionTestCaseList());
+        }
 
     }
     RequestBody codeSubmissionToRequestBody(CodeSubmission codeSubmission){
