@@ -25,8 +25,8 @@ public class GlobalExceptionHandler {
         log.info("Exception class: {}", exception.getClass());
 
         return ErrorDTO.builder()
-                .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                .code(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
+                .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .status(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
                 .message(exception.getMessage())
                 .build();
     }
@@ -40,8 +40,8 @@ public class GlobalExceptionHandler {
         log.error(badRequestException.getMessage(), badRequestException);
 
         return ErrorDTO.builder()
-                .status(HttpStatus.BAD_REQUEST.value())
-                .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                .code(HttpStatus.BAD_REQUEST.value())
+                .status(HttpStatus.BAD_REQUEST.getReasonPhrase())
                 .message(badRequestException.getMessage())
                 .build();
     }
@@ -55,16 +55,16 @@ public class GlobalExceptionHandler {
             String violations = extractViolationsFromException((ConstraintViolationException) validationException);
             log.error(violations, validationException);
             errorDTO = ErrorDTO.builder()
-                    .status(HttpStatus.BAD_REQUEST.value())
-                    .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                    .code(HttpStatus.BAD_REQUEST.value())
+                    .status(HttpStatus.BAD_REQUEST.getReasonPhrase())
                     .message(violations)
                     .build();
         } else {
             String exceptionMessage = validationException.getMessage();
             log.error(exceptionMessage, validationException);
             errorDTO = ErrorDTO.builder()
-                    .status(HttpStatus.BAD_REQUEST.value())
-                    .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                    .code(HttpStatus.BAD_REQUEST.value())
+                    .status(HttpStatus.BAD_REQUEST.getReasonPhrase())
                     .message(exceptionMessage)
                     .build();
         }
