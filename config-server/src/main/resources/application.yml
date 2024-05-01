@@ -1,0 +1,25 @@
+server:
+  port: 9999
+
+logging:
+  level:
+    ROOT: INFO
+    org.spring.framework.cloud.config: DEBUG
+
+spring:
+  application:
+    name: configserver
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/6BrosT/config-server-repository.git
+          skip-ssl-validation: true
+          default-label: main
+          clone-on-start: true
+      fail-fast: true
+
+  security:
+    user:
+      name: spring_cloud_user
+      password: springCloud_Pwd!

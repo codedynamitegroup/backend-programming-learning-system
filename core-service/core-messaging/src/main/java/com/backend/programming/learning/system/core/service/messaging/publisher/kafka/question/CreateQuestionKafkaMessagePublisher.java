@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.messaging.publisher.kafka.question;
 
-import com.backend.programming.learning.system.core.service.domain.config.CoreServiceConfigData;
+import com.backend.programming.learning.system.core.service.config.CoreServiceConfigData;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.question.QuestionCreatedMessagePublisher;
 import com.backend.programming.learning.system.core.service.messaging.mapper.QuestionMessagingDataMapper;

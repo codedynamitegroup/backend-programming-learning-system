@@ -6,8 +6,6 @@ logging:
     com.backend.programming.learning.system: DEBUG
 
 core-service:
-  code-question-update-response-from-core-service-topic-name: code-question-update-response-from-core-service
-  code-question-update-request-to-core-service-topic-name: code-question-update-request-to-core-service
   question-created-request-topic-name: core-question-create-request
   question-deleted-request-topic-name: core-question-delete-request
   question-updated-request-topic-name: core-question-update-request
@@ -15,13 +13,19 @@ core-service:
   question-response-topic-name: core-question-response
 
   user-request-topic-name: user-request
+  user-create-request-topic-name: user-create-request
+  user-update-request-topic-name: user-update-request
+  user-delete-request-topic-name: user-delete-request
+  user-create-response-topic-name: user-create-response
+  user-update-response-topic-name: user-update-response
+  user-delete-response-topic-name: user-delete-response
   user-response-topic-name: user-response
 
   calendar-event-update-request-topic-name: calendar-event-update-request
   calendar-event-update-response-topic-name: calendar-event-update-response
 
-  outbox-scheduler-fixed-rate: 2000
-  outbox-scheduler-initial-delay: 2000
+  outbox-scheduler-fixed-rate: 10000
+  outbox-scheduler-initial-delay: 10000
 
 #spring:
 #  jpa:
@@ -53,7 +57,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/core-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: postgres
-    password: postgres
+    password: localdb
     driver-class-name: org.postgresql.Driver
     platform: postgres
     schema: classpath:init-schema.sql
@@ -63,7 +67,7 @@ spring:
 kafka-config:
   bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
   schema-registry-url-key: schema.registry.url
-  schema-registry-url: http://192.168.1.21:8081
+  schema-registry-url: http://localhost:8081
   num-of-partitions: 3
   replication-factor: 3
 
@@ -87,10 +91,10 @@ kafka-consumer-config:
 
   core-service-calendar-event-consumer-group-id: core-service-calendar-event-topic-consumer
 
-  core-service-user-request-group-id: core-service-user-create-topic
-
+  core-service-user-create-request-group-id: core-service-user-create-request-topic
+  core-service-user-update-request-group-id: core-service-user-update-request-topic
+  core-service-user-delete-request-group-id: core-service-user-delete-request-topic
   customer-group-id: customer-topic-consumer
-  code-question-update-consumer-group-id: code-question-update-topic-consumer
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
   specific-avro-reader: true

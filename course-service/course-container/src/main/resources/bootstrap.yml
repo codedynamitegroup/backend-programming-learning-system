@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: course-service
+  profiles:
+    active: course
+  cloud:
+    config:
+      name: course-service,config-client
+      uri: http://localhost:9999
+      username: spring_cloud_user
+      password: springCloud_Pwd!

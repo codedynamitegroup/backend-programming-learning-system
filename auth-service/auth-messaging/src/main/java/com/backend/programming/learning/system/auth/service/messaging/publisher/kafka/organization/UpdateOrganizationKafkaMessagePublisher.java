@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.auth.service.messaging.publisher.kafka.organization;
 
-import com.backend.programming.learning.system.auth.service.domain.config.AuthServiceConfigData;
+import com.backend.programming.learning.system.auth.service.config.AuthServiceConfigData;
 import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationUpdatedEvent;
 import com.backend.programming.learning.system.auth.service.messaging.mapper.OrganizationMessagingDataMapper;
 import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;

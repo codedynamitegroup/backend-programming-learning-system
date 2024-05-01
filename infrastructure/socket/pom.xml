@@ -13,7 +13,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>socket-config-data</module>
         <module>socket-emitter</module>
     </modules>
 

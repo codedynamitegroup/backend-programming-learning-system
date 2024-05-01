@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.messaging.publisher.kafka.contest_user;
 
-import com.backend.programming.learning.system.core.service.domain.config.CoreServiceConfigData;
+import com.backend.programming.learning.system.core.service.config.CoreServiceConfigData;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.contest_user.ContestUserUpdateEventPayload;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.contest_user.ContestUserUpdateOutboxMessage;
 import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.contest_user.ContestUserUpdateMessagePublisher;

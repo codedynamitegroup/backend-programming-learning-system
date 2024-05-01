@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.course.service.messaging.publisher.kafka.user;
 
-import com.backend.programming.learning.system.course.service.domain.config.CourseServiceConfigData;
+import com.backend.programming.learning.system.course.service.config.CourseServiceConfigData;
 import com.backend.programming.learning.system.course.service.domain.event.user.UserUpdatedFailEvent;
 import com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.question.user.UserUpdateFailedMessagePublisher;
 import com.backend.programming.learning.system.course.service.messaging.mapper.UserMessagingDataMapper;

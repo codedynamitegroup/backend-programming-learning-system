@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: code-assessment-service
+  profiles:
+    active: code_assessment
+  cloud:
+    config:
+      name: code-assessment-service,config-client
+      uri: http://localhost:9999
+      username: spring_cloud_user
+      password: springCloud_Pwd!

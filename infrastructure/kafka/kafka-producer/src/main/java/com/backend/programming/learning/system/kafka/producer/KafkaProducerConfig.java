@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.kafka.producer;
 
-import com.backend.programming.learning.system.kafka.config.data.KafkaConfigData;
-import com.backend.programming.learning.system.kafka.config.data.KafkaProducerConfigData;
+import com.backend.programming.learning.system.kafka.config.KafkaConfigData;
+import com.backend.programming.learning.system.kafka.publisher.config.KafkaProducerConfigData;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.springframework.context.annotation.Bean;

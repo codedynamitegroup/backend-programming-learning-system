@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.course.service.messaging.publisher.kafka.calendarevent;
 
-import com.backend.programming.learning.system.course.service.domain.config.CourseServiceConfigData;
+import com.backend.programming.learning.system.course.service.config.CourseServiceConfigData;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.calendarevent.CalendarEventUpdateEventPayload;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.calendarevent.CalendarEventUpdateOutboxMessage;
 import com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.question.calendarevent.CalendarEventUpdatedMessagePublisher;

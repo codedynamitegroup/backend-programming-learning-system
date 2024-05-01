@@ -1,7 +1,6 @@
 package com.backend.programming.learning.system.auth.service.messaging.publisher.kafka.user;
 
-import com.backend.programming.learning.system.auth.service.domain.config.AuthServiceConfigData;
-import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
+import com.backend.programming.learning.system.auth.service.config.AuthServiceConfigData;
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserEventPayload;
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserOutboxMessage;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.user.UserRequestMessagePublisher;
@@ -10,8 +9,6 @@ import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRe
 import com.backend.programming.learning.system.kafka.producer.KafkaOutboxMessageHelper;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

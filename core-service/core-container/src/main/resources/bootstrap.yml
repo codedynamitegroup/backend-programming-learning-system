@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: core-service
+  profiles:
+    active: core
+  cloud:
+    config:
+      name: core-service,config-client
+      uri: http://localhost:9999
+      username: spring_cloud_user
+      password: springCloud_Pwd!

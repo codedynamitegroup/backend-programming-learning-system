@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.messaging.publisher.kafka.user;
 
-import com.backend.programming.learning.system.core.service.domain.config.CoreServiceConfigData;
+import com.backend.programming.learning.system.core.service.config.CoreServiceConfigData;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.user.UserEventPayload;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.user.UserOutboxMessage;
 import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.user.UserResponseMessagePublisher;
@@ -9,7 +9,6 @@ import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRe
 import com.backend.programming.learning.system.kafka.producer.KafkaOutboxMessageHelper;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

@@ -1,7 +1,6 @@
 package com.backend.programming.learning.system.kafka.consumer.config;
 
-import com.backend.programming.learning.system.kafka.config.data.KafkaConfigData;
-import com.backend.programming.learning.system.kafka.config.data.KafkaConsumerConfigData;
+import com.backend.programming.learning.system.kafka.config.KafkaConfigData;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.springframework.context.annotation.Bean;
