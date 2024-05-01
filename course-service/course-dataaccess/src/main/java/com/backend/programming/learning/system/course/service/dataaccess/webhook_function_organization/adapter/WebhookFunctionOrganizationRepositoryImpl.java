@@ -2,8 +2,8 @@ package com.backend.programming.learning.system.course.service.dataaccess.webhoo
 
 import com.backend.programming.learning.system.course.service.dataaccess.webhook_function_organization.mapper.WebhookFunctionOrganizationDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.webhook_function_organization.repository.WebhookFunctionOrganizationJpaRepository;
-import com.backend.programming.learning.system.entity.WebhookFunctionOrganization;
-import com.backend.programming.learning.system.ports.output.repository.WebhookFunctionOrganizationRepository;
+import com.backend.programming.learning.system.course.service.domain.entity.WebhookFunctionOrganization;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.WebhookFunctionOrganizationRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -1,8 +1,8 @@
 package com.backend.programming.learning.system.course.service.dataaccess.call_moodle_api_function.mapper;
 
 import com.backend.programming.learning.system.course.service.dataaccess.call_moodle_api_function.entity.CallMoodleApiFunctionEntity;
-import com.backend.programming.learning.system.entity.CallMoodleApiFunction;
-import com.backend.programming.learning.system.valueobject.CallMoodleApiFunctionId;
+import com.backend.programming.learning.system.course.service.domain.entity.CallMoodleApiFunction;
+import com.backend.programming.learning.system.course.service.domain.valueobject.CallMoodleApiFunctionId;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

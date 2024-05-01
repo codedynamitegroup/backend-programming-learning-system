@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.course.service.dataaccess.question_submission.mapper;
 
-import com.backend.programming.learning.system.course.service.dataaccess.exam.mapper.ExamDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.exam_submission.entity.ExamSubmissionEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.exam_submission.mapper.ExamSubmissionDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.question.entity.QuestionEntity;
@@ -8,11 +7,11 @@ import com.backend.programming.learning.system.course.service.dataaccess.questio
 import com.backend.programming.learning.system.course.service.dataaccess.question_submission.entity.QuestionSubmissionEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.mapper.UserDataAccessMapper;
-import com.backend.programming.learning.system.entity.ExamSubmission;
-import com.backend.programming.learning.system.entity.Question;
-import com.backend.programming.learning.system.entity.QuestionSubmission;
-import com.backend.programming.learning.system.entity.User;
-import com.backend.programming.learning.system.valueobject.QuestionSubmissionId;
+import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
+import com.backend.programming.learning.system.course.service.domain.entity.Question;
+import com.backend.programming.learning.system.course.service.domain.entity.QuestionSubmission;
+import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.valueobject.QuestionSubmissionId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

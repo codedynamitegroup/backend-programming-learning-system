@@ -1,0 +1,96 @@
+{
+  "name": "UserRequestAvroModel",
+  "namespace": "com.backend.programming.learning.system.kafka.auth.avro.model.user",
+  "type": "record",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "sagaId",
+      "type": "string"
+    },
+    {
+      "name": "userId",
+      "type": "string"
+    },
+    {
+      "name": "email",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "firstName",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "lastName",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "phone",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "address",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "avatarUrl",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "dob",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      },
+      "default": 0
+    },
+    {
+      "name": "copyState",
+      "type": {
+        "type": "enum",
+        "name": "CopyState",
+        "symbols": [
+          "CREATING",
+          "CREATED",
+          "UPDATING",
+          "UPDATED",
+          "DELETING",
+          "DELETED",
+          "DELETE_FAILED",
+          "UPDATE_FAILED",
+          "CREATE_FAILED"
+        ]
+      }
+    },
+    {
+      "name": "createdAt",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      },
+      "default": 0
+    },
+    {
+      "name": "updatedAt",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      },
+      "default": 0
+    },
+    {
+      "name": "isDeleted",
+      "type": ["null", "boolean"],
+      "default": null
+    }
+  ]
+}

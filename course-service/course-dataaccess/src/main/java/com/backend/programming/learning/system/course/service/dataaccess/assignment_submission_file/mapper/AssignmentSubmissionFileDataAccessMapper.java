@@ -3,9 +3,9 @@ package com.backend.programming.learning.system.course.service.dataaccess.assign
 import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.entity.SubmissionAssignmentEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.mapper.SubmissionAssignmentDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission_file.entity.AssignmentSubmissionFileEntity;
-import com.backend.programming.learning.system.entity.SubmissionAssignment;
-import com.backend.programming.learning.system.entity.SubmissionAssignmentFile;
-import com.backend.programming.learning.system.valueobject.AssignmentSubmissionFileId;
+import com.backend.programming.learning.system.course.service.domain.entity.SubmissionAssignment;
+import com.backend.programming.learning.system.course.service.domain.entity.SubmissionAssignmentFile;
+import com.backend.programming.learning.system.course.service.domain.valueobject.AssignmentSubmissionFileId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

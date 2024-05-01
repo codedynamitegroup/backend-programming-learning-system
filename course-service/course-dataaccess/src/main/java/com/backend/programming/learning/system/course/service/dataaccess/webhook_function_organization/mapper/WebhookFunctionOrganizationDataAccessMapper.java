@@ -1,8 +1,8 @@
 package com.backend.programming.learning.system.course.service.dataaccess.webhook_function_organization.mapper;
 
 import com.backend.programming.learning.system.course.service.dataaccess.webhook_function_organization.entity.WebhookFunctionOrganizationEntity;
-import com.backend.programming.learning.system.entity.WebhookFunctionOrganization;
-import com.backend.programming.learning.system.valueobject.WebhookFunctionOrganizationId;
+import com.backend.programming.learning.system.course.service.domain.entity.WebhookFunctionOrganization;
+import com.backend.programming.learning.system.course.service.domain.valueobject.WebhookFunctionOrganizationId;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -18,14 +18,13 @@ import com.backend.programming.learning.system.core.service.domain.entity.Topic;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.mapper.topic.TopicDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.NotificationEventType;
-import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
-import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.*;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,39 +46,42 @@ public class CalendarEventDataMapper {
 
     public CalendarEvent createCalendarEventCommandToCalendarEvent(CreateCalendarEventCommand createCalendarEventCommand) {
         return CalendarEvent.builder()
-                .userTo(User.builder()
-                        .id(new UserId(createCalendarEventCommand.getUserIdTo()))
-                        .build())
                 .name(createCalendarEventCommand.getName())
                 .description(createCalendarEventCommand.getDescription())
                 .eventType(NotificationEventType.valueOf(createCalendarEventCommand.getEventType()))
                 .startTime(createCalendarEventCommand.getStartTime())
                 .endTime(createCalendarEventCommand.getEndTime())
+                .user(User.builder()
+                    .id(new UserId(createCalendarEventCommand.getUserId()))
+                    .build())
+                .courseId(createCalendarEventCommand.getCourseId())
+                .component(NotificationComponentType.valueOf(createCalendarEventCommand.getComponent()))
+                .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .build();
     }
 
     public CalendarEventResponseEntity calendarEventToCalendarEventResponseEntity(CalendarEvent calendarEvent) {
         return CalendarEventResponseEntity.builder()
                 .calendarEventId(calendarEvent.getId().getValue())
-                .userTo(userDataMapper.userToUserResponseEntity(calendarEvent.getUserTo()))
+                .user(userDataMapper.userToUserResponseEntity(calendarEvent.getUser()))
                 .name(calendarEvent.getName())
                 .description(calendarEvent.getDescription())
                 .eventType(NotificationEventType.valueOf(calendarEvent.getEventType().name()))
                 .startTime(calendarEvent.getStartTime())
                 .endTime(calendarEvent.getEndTime())
+                .courseId(calendarEvent.getCourseId())
+                .component(calendarEvent.getComponent().name())
                 .createdAt(calendarEvent.getCreatedAt())
                 .build();
     }
 
-    public QueryAllCalendarEventsResponse pageCalendarEventToQueryAllCalendarEventsResponse(Page<CalendarEvent> calendarEvents) {
+    public QueryAllCalendarEventsResponse calendarEventsToQueryAllCalendarEventsResponse(List<CalendarEvent> calendarEvents) {
         List<CalendarEventResponseEntity> calendarEventResponseEntities = new ArrayList<>();
-        calendarEvents.forEach(calendarEvent -> calendarEventResponseEntities.add(
-                calendarEventToCalendarEventResponseEntity(calendarEvent)));
+        for (CalendarEvent calendarEvent : calendarEvents) {
+            calendarEventResponseEntities.add(calendarEventToCalendarEventResponseEntity(calendarEvent));
+        }
         return QueryAllCalendarEventsResponse.builder()
                 .calendarEvents(calendarEventResponseEntities)
-                .currentPage(calendarEvents.getNumber())
-                .totalPages(calendarEvents.getTotalPages())
-                .totalItems(calendarEvents.getTotalElements())
                 .build();
     }
 

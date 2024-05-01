@@ -1,13 +1,14 @@
 package com.backend.programming.learning.system.core.service.domain;
 
 import com.backend.programming.learning.system.core.service.domain.entity.*;
+import com.backend.programming.learning.system.core.service.domain.event.contest_user.ContestUserUpdatedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
-import com.backend.programming.learning.system.core.service.domain.event.user.UserCreatedFailEvent;
-import com.backend.programming.learning.system.core.service.domain.event.user.UserCreatedSuccessEvent;
+import com.backend.programming.learning.system.core.service.domain.event.user.*;
+import com.backend.programming.learning.system.core.service.domain.valueobject.UpdateState;
 import com.backend.programming.learning.system.domain.DomainConstants;
-import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.ZoneId;
@@ -27,57 +28,57 @@ public class CoreDomainServiceImpl implements CoreDomainService {
     public QuestionCreatedEvent createQtypeCodeQuestion(Question question, QtypeCodeQuestion qtypeCodeQuestion) {
         qtypeCodeQuestion.initQtypeCodeQuestion();
         log.info("Qtype code question initiated with id: {}", qtypeCodeQuestion.getId().getValue());
-        return new QuestionCreatedEvent(question, qtypeCodeQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of("UTC")));
+        return new QuestionCreatedEvent(question, qtypeCodeQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
     public QuestionCreatedEvent createQtypeEssayQuestion(Question question, QtypeEssayQuestion qtypeEssayQuestion) {
         qtypeEssayQuestion.initQtypeEssayQuestion();
         log.info("Qtype essay question initiated with id: {}", qtypeEssayQuestion.getId().getValue());
-        return new QuestionCreatedEvent(question, qtypeEssayQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of("UTC")));
+        return new QuestionCreatedEvent(question, qtypeEssayQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
     public QuestionCreatedEvent createQtypeShortAnswerQuestion(Question question, QtypeShortAnswerQuestion qtypeEssayQuestion) {
         qtypeEssayQuestion.initQtypeShortAnswerQuestion();
         log.info("Qtype short answer question initiated with id: {}", qtypeEssayQuestion.getId().getValue());
-        return new QuestionCreatedEvent(question, qtypeEssayQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of("UTC")));
+        return new QuestionCreatedEvent(question, qtypeEssayQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
     public QuestionCreatedEvent createQtypeMultipleChoiceQuestion(Question question, QtypeMultiChoiceQuestion qtypeMultipleChoiceQuestion) {
         qtypeMultipleChoiceQuestion.initQtypeMultipleChoiceQuestion();
         log.info("Qtype multiple choice question initiated with id: {}", qtypeMultipleChoiceQuestion.getId().getValue());
-        return new QuestionCreatedEvent(question, qtypeMultipleChoiceQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of("UTC")));
+        return new QuestionCreatedEvent(question, qtypeMultipleChoiceQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
     public QuestionDeletedEvent deleteQuestion(Question question, UUID qtypeId) {
-        return new QuestionDeletedEvent(question, qtypeId, ZonedDateTime.now(ZoneId.of("UTC")));
+        return new QuestionDeletedEvent(question, qtypeId, ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
     public QuestionUpdatedEvent updateQtypeCodeQuestion(Question question, QtypeCodeQuestion qtypeCodeQuestion) {
-        return new QuestionUpdatedEvent(question, qtypeCodeQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of("UTC")));
+        return new QuestionUpdatedEvent(question, qtypeCodeQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
     public QuestionUpdatedEvent updateQtypeEssayQuestion(Question question, QtypeEssayQuestion qtypeEssayQuestion) {
-        return new QuestionUpdatedEvent(question, qtypeEssayQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of("UTC")));
+        return new QuestionUpdatedEvent(question, qtypeEssayQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
     public QuestionUpdatedEvent updateQtypeShortAnswerQuestion(
             Question question,
             QtypeShortAnswerQuestion qtypeShortAnswerQuestion) {
-        return new QuestionUpdatedEvent(question, qtypeShortAnswerQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of("UTC")));
+        return new QuestionUpdatedEvent(question, qtypeShortAnswerQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
     public QuestionUpdatedEvent updateQtypeMultipleChoiceQuestion(
             Question question,
             QtypeMultiChoiceQuestion qtypeMultiChoiceQuestion) {
-        return new QuestionUpdatedEvent(question, qtypeMultiChoiceQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of("UTC")));
+        return new QuestionUpdatedEvent(question, qtypeMultiChoiceQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
@@ -129,31 +130,61 @@ public class CoreDomainServiceImpl implements CoreDomainService {
     }
 
     @Override
-    public void createContestUser(ContestUser contestUser) {
+    public ContestUserUpdatedEvent createContestUser(ContestUser contestUser) {
         contestUser.initializeContestUser();
         log.info("Contest user created with id: {}", contestUser.getId().getValue());
+        return new ContestUserUpdatedEvent(contestUser, ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
-    public void createCalendarEvent(CalendarEvent calendarEvent) {
-        calendarEvent.initializeCalendarEvent();
-        log.info("Calendar event created with id: {}", calendarEvent.getId().getValue());
-    }
-
-    @Override
-    public UserCreatedSuccessEvent createUserSuccess(User user, DomainEventPublisher<UserCreatedSuccessEvent> userCreatedSuccessEventDomainEventPublisher) {
+    public UserCreatedSuccessEvent createdUserSuccess(User user) {
+        user.setCopyState(CopyState.CREATED);
         return new UserCreatedSuccessEvent(user,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
-                userCreatedSuccessEventDomainEventPublisher);
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
-    public UserCreatedFailEvent createUserFail(User user,
-                                               DomainEventPublisher<UserCreatedFailEvent> userCreatedFailEventDomainEventPublisher,
-                                               List<String> failureMessages) {
+    public UserCreatedFailEvent createdUserFail(User user, List<String> failureMessages) {
+        user.setCopyState(CopyState.CREATE_FAILED);
         return new UserCreatedFailEvent(user,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)), failureMessages);
+    }
+
+    @Override
+    public UserUpdatedSuccessEvent updatedUserSuccess(User user) {
+        user.setCopyState(CopyState.UPDATED);
+        return new UserUpdatedSuccessEvent(user,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+    }
+
+    @Override
+    public UserUpdatedFailEvent updatedUserFail(User user, List<String> failureMessages) {
+        user.setCopyState(CopyState.UPDATE_FAILED);
+        return new UserUpdatedFailEvent(user,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
-                userCreatedFailEventDomainEventPublisher,
                 failureMessages);
+    }
+
+    @Override
+    public UserDeletedSuccessEvent deletedUserSuccess(User user) {
+        user.setCopyState(CopyState.DELETED);
+        return new UserDeletedSuccessEvent(user,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+    }
+
+    @Override
+    public UserDeletedFailEvent deletedUserFail(User user, List<String> failureMessages) {
+        user.setCopyState(CopyState.DELETE_FAILED);
+        return new UserDeletedFailEvent(user,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                failureMessages);
+    }
+
+    @Override
+    public void updateContestUserCalendarEventState(ContestUser contestUser, String calendarEventId, UpdateState updateCalendarEventState) {
+        contestUser.setCalendarEventId(calendarEventId != null ? UUID.fromString(calendarEventId) : null);
+        contestUser.setUpdateCalendarEventState(updateCalendarEventState);
+        log.info("Contest user calendar event state updated with calendar event id: {} and update calendar event state: {}",
+                calendarEventId, updateCalendarEventState);
     }
 }

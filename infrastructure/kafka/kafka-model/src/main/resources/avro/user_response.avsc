@@ -1,7 +1,7 @@
 {
   "type": "record",
   "name": "UserResponseAvroModel",
-  "namespace": "com.backend.programming.learning.system.kafka.auth.avro.model",
+  "namespace": "com.backend.programming.learning.system.kafka.auth.avro.model.user",
   "fields": [
     {
       "name": "id",
@@ -16,16 +16,20 @@
       "type": "string"
     },
     {
-      "name": "userResponseStatus",
+      "name": "copyState",
       "type": {
         "type": "enum",
-        "name": "UserResponseStatus",
-        "symbols": ["CREATED",
-          "CREATE_FAILED",
+        "name": "CopyState",
+        "symbols": [
+          "CREATING",
+          "CREATED",
+          "UPDATING",
           "UPDATED",
-          "UPDATE_FAILED",
+          "DELETING",
           "DELETED",
-          "DELETE_FAILED"]
+          "DELETE_FAILED",
+          "UPDATE_FAILED",
+          "CREATE_FAILED"]
       }
     },
     {

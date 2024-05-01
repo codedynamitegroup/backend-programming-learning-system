@@ -1,9 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.implement.message.listener.user;
 
-import com.backend.programming.learning.system.core.service.domain.dto.method.message.user.UserCreateRequest;
-import com.backend.programming.learning.system.core.service.domain.dto.method.message.user.UserDeleteRequest;
-import com.backend.programming.learning.system.core.service.domain.dto.method.message.user.UserUpdateRequest;
-import com.backend.programming.learning.system.core.service.domain.event.user.UserEvent;
+import com.backend.programming.learning.system.core.service.domain.dto.method.message.user.UserRequest;
 import com.backend.programming.learning.system.core.service.domain.ports.input.message.listener.auth.UserRequestMessageListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,25 +17,17 @@ public class UserRequestMessageListenerImpl implements UserRequestMessageListene
     }
 
     @Override
-    public void userCreated(UserCreateRequest userRequest) {
-        UserEvent userEvent = userRequestHelper.persistUser(userRequest);
-        fireEvent(userEvent);
+    public void userCreated(UserRequest userRequest) {
+        userRequestHelper.createdUser(userRequest);
     }
 
     @Override
-    public void userUpdated(UserUpdateRequest userUpdateRequest) {
-
+    public void userUpdated(UserRequest userUpdateRequest) {
+        userRequestHelper.updatedUser(userUpdateRequest);
     }
 
     @Override
-    public void userDeleted(UserDeleteRequest userDeleteRequest) {
-
-    }
-
-
-    private void fireEvent(UserEvent userEvent) {
-        log.info("Publishing user event with user id: {}",
-                userEvent.getUser().getId().getValue());
-        userEvent.fire();
+    public void userDeleted(UserRequest userDeleteRequest) {
+        userRequestHelper.deletedUser(userDeleteRequest);
     }
 }

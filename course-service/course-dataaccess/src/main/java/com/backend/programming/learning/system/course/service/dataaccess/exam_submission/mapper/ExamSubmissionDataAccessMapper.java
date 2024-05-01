@@ -5,12 +5,14 @@ import com.backend.programming.learning.system.course.service.dataaccess.exam.ma
 import com.backend.programming.learning.system.course.service.dataaccess.exam_submission.entity.ExamSubmissionEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.mapper.UserDataAccessMapper;
-import com.backend.programming.learning.system.entity.Exam;
-import com.backend.programming.learning.system.entity.ExamSubmission;
-import com.backend.programming.learning.system.entity.User;
-import com.backend.programming.learning.system.valueobject.ExamSubmissionId;
+import com.backend.programming.learning.system.course.service.domain.entity.Exam;
+import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
+import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamSubmissionId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
@@ -25,19 +27,29 @@ public class ExamSubmissionDataAccessMapper {
                 .id(examSubmission.getId().getValue())
                 .exam(examEntity)
                 .user(userEntity)
-                .type(examSubmission.getType())
-                .passStatus(examSubmission.getPassStatus())
+                .startTime(examSubmission.getStartTime())
+                .submitTime(examSubmission.getSubmitTime())
+                .submitCount(examSubmission.getSubmissionCount())
+                .status(examSubmission.status())
                 .build();
     }
 
     public ExamSubmission examSubmissionEntityToExamSubmission(ExamSubmissionEntity examSubmissionEntity) {
+        if(Objects.isNull(examSubmissionEntity)) {
+            return ExamSubmission.builder()
+                    .submissionCount(0)
+                    .build();
+        }
+
         Exam exam = examDataAccessMapper.examEntityToExam(examSubmissionEntity.getExam());
         User user = userDataAccessMapper.userEntityToUser(examSubmissionEntity.getUser());
         ExamSubmission examSubmission = ExamSubmission.builder()
                 .exam(exam)
                 .user(user)
-                .type(examSubmissionEntity.getType())
-                .passStatus(examSubmissionEntity.getPassStatus())
+                .startTime(examSubmissionEntity.getStartTime())
+                .submitTime(examSubmissionEntity.getSubmitTime())
+                .submissionCount(examSubmissionEntity.getSubmitCount())
+                .status(examSubmissionEntity.getStatus())
                 .build();
         examSubmission.setId(new ExamSubmissionId(examSubmissionEntity.getId()));
         return examSubmission;

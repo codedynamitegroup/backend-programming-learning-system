@@ -8,10 +8,10 @@ import com.backend.programming.learning.system.core.service.dataaccess.user.mapp
 import com.backend.programming.learning.system.core.service.domain.entity.Contest;
 import com.backend.programming.learning.system.core.service.domain.entity.ContestUser;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
-import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestUserId;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class ContestUserDataAccessMapper {
@@ -31,6 +31,8 @@ public class ContestUserDataAccessMapper {
                 .id(contestUser.getId().getValue())
                 .user(user)
                 .contest(contest)
+                .calendarEventId(contestUser.getCalendarEventId())
+                .updateCalendarEventState(contestUser.getUpdateCalendarEventState())
                 .isCompleted(contestUser.getCompleted())
                 .completedAt(contestUser.getCompletedAt())
                 .createdAt(contestUser.getCreatedAt())
@@ -44,9 +46,18 @@ public class ContestUserDataAccessMapper {
                 .id(new ContestUserId(contestUserEntity.getId()))
                 .user(user)
                 .contest(contest)
+                .calendarEventId(contestUserEntity.getCalendarEventId())
+                .updateCalendarEventState(contestUserEntity.getUpdateCalendarEventState())
                 .isCompleted(contestUserEntity.getIsCompleted())
                 .completedAt(contestUserEntity.getCompletedAt())
                 .createdAt(contestUserEntity.getCreatedAt())
                 .build();
+    }
+
+    public List<ContestUser> contestUserEntityListToContestUserList(
+            List<ContestUserEntity> contestUserEntities) {
+        return contestUserEntities.stream()
+                .map(this::contestUserEntityToContestUser)
+                .toList();
     }
 }

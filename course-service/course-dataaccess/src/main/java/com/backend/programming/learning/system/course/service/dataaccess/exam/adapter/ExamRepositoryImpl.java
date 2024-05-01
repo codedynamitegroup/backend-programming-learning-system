@@ -3,9 +3,9 @@ package com.backend.programming.learning.system.course.service.dataaccess.exam.a
 import com.backend.programming.learning.system.course.service.dataaccess.exam.entity.ExamEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.exam.mapper.ExamDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.exam.repository.ExamJpaRepository;
-import com.backend.programming.learning.system.entity.Exam;
-import com.backend.programming.learning.system.ports.output.repository.ExamRepository;
-import com.backend.programming.learning.system.valueobject.ExamId;
+import com.backend.programming.learning.system.course.service.domain.entity.Exam;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamRepository;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;

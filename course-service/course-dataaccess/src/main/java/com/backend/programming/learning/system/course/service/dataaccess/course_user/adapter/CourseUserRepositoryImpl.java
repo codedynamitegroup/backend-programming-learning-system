@@ -2,8 +2,8 @@ package com.backend.programming.learning.system.course.service.dataaccess.course
 
 import com.backend.programming.learning.system.course.service.dataaccess.course_user.mapper.CourseUserDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.course_user.repository.CourseUserJpaRepository;
-import com.backend.programming.learning.system.entity.CourseUser;
-import com.backend.programming.learning.system.ports.output.repository.CourseUserRepository;
+import com.backend.programming.learning.system.course.service.domain.entity.CourseUser;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseUserRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

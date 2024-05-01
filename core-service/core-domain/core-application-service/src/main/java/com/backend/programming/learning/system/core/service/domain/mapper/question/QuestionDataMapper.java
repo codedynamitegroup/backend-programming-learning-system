@@ -14,6 +14,7 @@ import com.backend.programming.learning.system.core.service.domain.valueobject.A
 import com.backend.programming.learning.system.domain.valueobject.*;
 import org.springframework.stereotype.Component;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -35,8 +36,8 @@ public class QuestionDataMapper {
                 .createdBy(createdBy)
                 .updatedBy(updatedBy)
                 .qtype(QuestionType.valueOf(createQuestionCommand.getQType()))
-                .createdAt(ZonedDateTime.now())
-                .updatedAt(ZonedDateTime.now())
+                .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
+                .updatedAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .build();
     }
 
@@ -92,8 +93,8 @@ public class QuestionDataMapper {
                 .createdBy(question.getCreatedBy())
                 .updatedBy(question.getUpdatedBy())
                 .qtype(question.getqtype())
-                .createdAt(ZonedDateTime.now())
-                .updatedAt(ZonedDateTime.now())
+                .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
+                .updatedAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .answers(question.getAnswers())
                 .build();
     }
@@ -137,7 +138,7 @@ public class QuestionDataMapper {
                 .updatedBy(User.builder()
                         .id(new UserId(updateQuestionEntity.getUpdatedBy()))
                         .build())
-                .updatedAt(ZonedDateTime.now())
+                .updatedAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .answers(answers)
                 .qtype(qtype)
                 .createdBy(createdBy)

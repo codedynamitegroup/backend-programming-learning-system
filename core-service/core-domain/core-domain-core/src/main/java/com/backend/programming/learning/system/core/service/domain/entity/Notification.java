@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.entity;
 
 import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.NotificationComponentType;
 import com.backend.programming.learning.system.core.service.domain.valueobject.NotificationEventType;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
@@ -17,7 +18,7 @@ public class Notification extends AggregateRoot<NotificationId> {
     private String subject;
     private String fullMessage;
     private String smallMessage;
-    private String component;
+    private NotificationComponentType component;
     private NotificationEventType eventType;
     private String contextUrl;
     private String contextUrlName;
@@ -49,8 +50,8 @@ public class Notification extends AggregateRoot<NotificationId> {
 
     public void initializeNotification() {
         setId(new NotificationId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
-        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
+        updatedAt = ZonedDateTime.now(ZoneId.of("UTC"));
     }
 
 
@@ -94,11 +95,11 @@ public class Notification extends AggregateRoot<NotificationId> {
         this.smallMessage = smallMessage;
     }
 
-    public String getComponent() {
+    public NotificationComponentType getComponent() {
         return component;
     }
 
-    public void setComponent(String component) {
+    public void setComponent(NotificationComponentType component) {
         this.component = component;
     }
 
@@ -165,7 +166,7 @@ public class Notification extends AggregateRoot<NotificationId> {
         private String subject;
         private String fullMessage;
         private String smallMessage;
-        private String component;
+        private NotificationComponentType component;
         private NotificationEventType eventType;
         private String contextUrl;
         private String contextUrlName;
@@ -207,7 +208,7 @@ public class Notification extends AggregateRoot<NotificationId> {
             return this;
         }
 
-        public Builder component(String val) {
+        public Builder component(NotificationComponentType val) {
             component = val;
             return this;
         }

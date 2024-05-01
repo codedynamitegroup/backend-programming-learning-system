@@ -2,7 +2,7 @@ package com.backend.programming.learning.system.course.service.dataaccess.assign
 
 import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.entity.SubmissionAssignmentEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
-import com.backend.programming.learning.system.valueobject.Type;
+import com.backend.programming.learning.system.course.service.domain.valueobject.Type;
 import lombok.*;
 
 import javax.persistence.*;

@@ -2,13 +2,11 @@ package com.backend.programming.learning.system.course.service.dataaccess.course
 
 import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.course.mapper.CourseDataAccessMapper;
-import com.backend.programming.learning.system.course.service.dataaccess.course.repository.CourseJpaRepository;
 import com.backend.programming.learning.system.course.service.dataaccess.course_user.entity.CourseUserEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.mapper.UserDataAccessMapper;
-import com.backend.programming.learning.system.course.service.dataaccess.user.repository.UserJpaRepository;
-import com.backend.programming.learning.system.entity.CourseUser;
-import com.backend.programming.learning.system.valueobject.CourseUserId;
+import com.backend.programming.learning.system.course.service.domain.entity.CourseUser;
+import com.backend.programming.learning.system.course.service.domain.valueobject.CourseUserId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

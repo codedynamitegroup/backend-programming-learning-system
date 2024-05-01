@@ -2,9 +2,8 @@ package com.backend.programming.learning.system.course.service.dataaccess.questi
 
 import com.backend.programming.learning.system.course.service.dataaccess.question_bank_category.mapper.QuestionBankCategoryDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.question_bank_category.repository.QuestionBankCategoryJpaRepository;
-import com.backend.programming.learning.system.entity.QuestionBankCategory;
-import com.backend.programming.learning.system.ports.output.repository.QuestionBankCategoryRepository;
-import com.backend.programming.learning.system.valueobject.QuestionBankCategoryId;
+import com.backend.programming.learning.system.course.service.domain.entity.QuestionBankCategory;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.QuestionBankCategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

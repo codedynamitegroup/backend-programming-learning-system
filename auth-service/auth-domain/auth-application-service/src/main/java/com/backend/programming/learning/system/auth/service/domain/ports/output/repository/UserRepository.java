@@ -12,6 +12,7 @@ import java.util.Optional;
 public interface UserRepository {
     User save(User user);
     Optional<User> findById(UserId userId);
+    Optional<User> findByIdAndIsDeletedTrue(UserId userId);
     Optional<User> findByEmail(String email);
     Page<User> findAll(Integer page, Integer size);
 }

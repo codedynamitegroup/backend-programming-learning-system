@@ -1,12 +1,12 @@
 package com.backend.programming.learning.system.core.service.domain;
 
 import com.backend.programming.learning.system.core.service.domain.entity.*;
+import com.backend.programming.learning.system.core.service.domain.event.contest_user.ContestUserUpdatedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
-import com.backend.programming.learning.system.core.service.domain.event.user.UserCreatedFailEvent;
-import com.backend.programming.learning.system.core.service.domain.event.user.UserCreatedSuccessEvent;
-import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
+import com.backend.programming.learning.system.core.service.domain.event.user.*;
+import com.backend.programming.learning.system.core.service.domain.valueobject.UpdateState;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,12 +35,15 @@ public interface CoreDomainService {
     void createNotification(Notification notification);
     void createChapter(Chapter chapter);
     void createCertificateCourseUser(CertificateCourseUser certificateCourseUser);
-    void createContestUser(ContestUser contestUser);
-    void createCalendarEvent(CalendarEvent calendarEvent);
+    ContestUserUpdatedEvent createContestUser(ContestUser contestUser);
 
-    UserCreatedSuccessEvent createUserSuccess(User user,
-                                              DomainEventPublisher<UserCreatedSuccessEvent> userCreatedSuccessEventDomainEventPublisher);
-    UserCreatedFailEvent createUserFail(User user,
-                                        DomainEventPublisher<UserCreatedFailEvent> userCreatedFailEventDomainEventPublisher,
-                                        List<String> failureMessages);
+    UserCreatedSuccessEvent createdUserSuccess(User user);
+    UserCreatedFailEvent createdUserFail(User user, List<String> failureMessages);
+    UserUpdatedSuccessEvent updatedUserSuccess(User user);
+    UserUpdatedFailEvent updatedUserFail(User user, List<String> failureMessages);
+    UserDeletedSuccessEvent deletedUserSuccess(User user);
+    UserDeletedFailEvent deletedUserFail(User user, List<String> failureMessages);
+
+    void updateContestUserCalendarEventState(ContestUser contestUser, String calendarEventId, UpdateState updateCalendarEventState);
+
 }

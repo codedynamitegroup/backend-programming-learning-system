@@ -2,8 +2,8 @@ package com.backend.programming.learning.system.course.service.dataaccess.call_m
 
 import com.backend.programming.learning.system.course.service.dataaccess.call_moodle_api_function.mapper.CallMoodleApiFunctionDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.call_moodle_api_function.repository.CallMoodleApiFunctionJpaRepository;
-import com.backend.programming.learning.system.entity.CallMoodleApiFunction;
-import com.backend.programming.learning.system.ports.output.repository.CallMoodleApiFunctionRepository;
+import com.backend.programming.learning.system.course.service.domain.entity.CallMoodleApiFunction;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CallMoodleApiFunctionRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

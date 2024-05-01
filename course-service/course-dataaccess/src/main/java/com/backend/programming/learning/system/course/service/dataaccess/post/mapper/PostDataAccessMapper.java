@@ -5,10 +5,10 @@ import com.backend.programming.learning.system.course.service.dataaccess.course.
 import com.backend.programming.learning.system.course.service.dataaccess.post.entity.PostEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.mapper.UserDataAccessMapper;
-import com.backend.programming.learning.system.entity.Course;
-import com.backend.programming.learning.system.entity.Post;
-import com.backend.programming.learning.system.entity.User;
-import com.backend.programming.learning.system.valueobject.PostId;
+import com.backend.programming.learning.system.course.service.domain.entity.Course;
+import com.backend.programming.learning.system.course.service.domain.entity.Post;
+import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.valueobject.PostId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

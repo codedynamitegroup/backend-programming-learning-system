@@ -26,6 +26,8 @@ public class CreateCalendarEventCommand {
     @NotNull(message = "StartTime is required")
     private final ZonedDateTime startTime;
     private final ZonedDateTime endTime;
-    @NotNull(message = "UserIdTo is required")
-    private final UUID userIdTo;
+    @NotNull(message = "UserId is required")
+    private final UUID userId;
+    private final UUID courseId;
+    private final String component;
 }

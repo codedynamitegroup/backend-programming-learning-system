@@ -13,11 +13,20 @@ CREATE TYPE difficulty AS ENUM ('EASY', 'MEDIUM', 'HARD');
 DROP TYPE IF EXISTS qtype;
 CREATE TYPE qtype AS ENUM ('MULTIPLE_CHOICE', 'SHORT_ANSWER', 'CODE', 'ESSAY');
 
-DROP TYPE IF EXISTS notification_event_type;
-CREATE TYPE notification_event_type AS ENUM ('USER', 'COURSE');
-
 DROP TYPE IF EXISTS plagiarism_detection_report_status;
 CREATE TYPE plagiarism_detection_report_status AS ENUM ('PROCESSING', 'COMPLETED', 'FAILED');
+
+DROP TYPE IF EXISTS update_state;
+CREATE TYPE update_state AS ENUM (
+    'CREATING',
+    'CREATED',
+    'UPDATING',
+    'UPDATED',
+    'DELETING',
+    'DELETED',
+    'DELETE_FAILED',
+    'UPDATE_FAILED',
+    'CREATE_FAILED');
 
 DROP TYPE IF EXISTS CopyState;
 CREATE TYPE CopyState AS ENUM (
@@ -54,6 +63,7 @@ CREATE TABLE "public".user
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
 	is_deleted boolean NOT NULL DEFAULT false,
+	copy_state CopyState,
     CONSTRAINT user_pkey PRIMARY KEY (id)
 );
 
@@ -247,6 +257,8 @@ CREATE TABLE "public".contest_user
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
     contest_id uuid NOT NULL,
     user_id uuid NOT NULL,
+    calendar_event_id uuid,
+    update_calendar_event_state update_state,
     is_completed bool DEFAULT FALSE NOT NULL,
     completed_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
@@ -426,34 +438,6 @@ CREATE TABLE "public".qtype_multichoice_question
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "public".notification CASCADE;
-CREATE TABLE "public".notification
-(
-    id uuid DEFAULT uuid_generate_v4() NOT NULL,
-    user_id_from uuid,
-    user_id_to uuid NOT NULL,
-    subject text,
-    full_message text,
-    small_message text,
-    component text,
-    event_type notification_event_type NOT NULL,
-    context_url text,
-    context_url_name text,
-    is_read bool DEFAULT FALSE NOT NULL,
-    time_read TIMESTAMP WITH TIME ZONE,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT notification_pkey PRIMARY KEY (id),
-    CONSTRAINT notification_user_id_from_fkey FOREIGN KEY (user_id_from)
-        REFERENCES "public".user (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    CONSTRAINT notification_user_id_to_fkey FOREIGN KEY (user_id_to)
-        REFERENCES "public".user (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
-
 DROP TABLE IF EXISTS "public".code_submission CASCADE;
 CREATE TABLE "public".code_submission
 (
@@ -479,24 +463,6 @@ CREATE TABLE "public".code_submission
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "public".calendar_event CASCADE;
-CREATE TABLE "public".calendar_event
-(
-    id uuid DEFAULT uuid_generate_v4() NOT NULL,
-    name text,
-    description text,
-    event_type notification_event_type NOT NULL,
-    start_time TIMESTAMP WITH TIME ZONE NOT NULL,
-    end_time TIMESTAMP WITH TIME ZONE,
-    user_id_to uuid NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT calendar_event_pkey PRIMARY KEY (id),
-    CONSTRAINT calendar_event_created_by_fkey FOREIGN KEY (user_id_to)
-        REFERENCES "public".user (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
-
 DROP TABLE IF EXISTS "public".plagiarism_detection_report CASCADE;
 CREATE TABLE "public".plagiarism_detection_report
 (
@@ -516,12 +482,42 @@ CREATE TABLE "public".plagiarism_detection_report
     CONSTRAINT plagiarism_detection_report_question_id_fkey FOREIGN KEY (question_id)
         REFERENCES "public".question (id) MATCH SIMPLE
         ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    CONSTRAINT unique_plagiarism_detection_report UNIQUE (exam_id, question_id)
+        ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "public".code_questions_update_outbox CASCADE;
-CREATE TABLE "public".code_questions_update_outbox
+CREATE UNIQUE INDEX plagiarism_detection_report_exam_id_question_id
+    ON "public".plagiarism_detection_report
+        (exam_id, question_id, programming_language_id);
+
+DROP TABLE IF EXISTS "public".contest_user_update_outbox CASCADE;
+
+CREATE TABLE "public".contest_user_update_outbox
+(
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
+    saga_id uuid NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    processed_at TIMESTAMP WITH TIME ZONE,
+    type character varying COLLATE pg_catalog."default" NOT NULL,
+    payload jsonb NOT NULL,
+    outbox_status outbox_status NOT NULL,
+    saga_status saga_status NOT NULL,
+    update_calendar_event_state update_state,
+    version integer NOT NULL,
+    CONSTRAINT contest_user_outbox_pkey PRIMARY KEY (id)
+);
+
+CREATE INDEX contest_user_outbox_saga_status
+    ON "public".contest_user_update_outbox
+        (type, outbox_status, saga_status);
+
+CREATE UNIQUE INDEX contest_user_outbox_saga_id
+    ON "public".contest_user_update_outbox
+        (type, saga_id, saga_status);
+
+
+DROP TABLE IF EXISTS "public".user_outbox CASCADE;
+
+CREATE TABLE "public".user_outbox
 (
     id uuid NOT NULL,
     saga_id uuid NOT NULL,
@@ -532,12 +528,13 @@ CREATE TABLE "public".code_questions_update_outbox
     outbox_status outbox_status NOT NULL,
     copy_state CopyState NOT NULL,
     version integer NOT NULL,
-    CONSTRAINT cquo_pk PRIMARY KEY (id)
+    CONSTRAINT user_outbox_pkey PRIMARY KEY (id)
 );
 
-CREATE INDEX "code_questions_update_outbox_saga_status"
-    ON code_questions_update_outbox
-        (type, outbox_status);
-CREATE UNIQUE INDEX "code_questions_update_outbox_saga_id"
-    ON code_questions_update_outbox
-        (type, saga_id, copy_state, outbox_status);
+CREATE INDEX "user_outbox_saga_status"
+    ON "public".user_outbox
+    (type, outbox_status);
+
+CREATE UNIQUE INDEX "user_outbox_saga_id"
+    ON "public".user_outbox
+    (type, saga_id, copy_state, outbox_status);

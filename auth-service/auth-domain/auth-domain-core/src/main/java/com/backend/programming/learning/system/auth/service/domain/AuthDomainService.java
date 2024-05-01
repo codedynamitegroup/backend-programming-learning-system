@@ -4,20 +4,21 @@ import com.backend.programming.learning.system.auth.service.domain.entity.Organi
 import com.backend.programming.learning.system.auth.service.domain.entity.Role;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.entity.UserRole;
-import com.backend.programming.learning.system.auth.service.domain.event.UserCreatedEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.UserDeletedEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.UserUpdatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationCreatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationDeletedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationUpdatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.UserDeletedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedEvent;
 import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
 
 public interface AuthDomainService {
-    UserCreatedEvent createUser(User user, DomainEventPublisher<UserCreatedEvent>
-            userCreatedEventDomainEventPublisher);
-    UserDeletedEvent deleteUser(User user, DomainEventPublisher<UserDeletedEvent>
-            userDeletedEventDomainEventPublisher);
-    UserUpdatedEvent updateUser(User user, DomainEventPublisher<UserUpdatedEvent>
-            userUpdatedEventDomainEventPublisher);
-    void createOrganization(Organization organization);
-    void deleteOrganization(Organization organization);
+    UserCreatedEvent createUser(User user);
+    UserDeletedEvent deleteUser(User user);
+    UserUpdatedEvent updateUser(User user);
+    OrganizationCreatedEvent createOrganization(Organization organization);
+    OrganizationDeletedEvent deleteOrganization(Organization organization);
+    OrganizationUpdatedEvent updateOrganization(Organization organization);
     void createUserRole(UserRole userRole);
     void createRole(Role role);
 }

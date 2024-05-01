@@ -14,6 +14,8 @@ import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.stream.Collectors;
 
 @Component
@@ -38,6 +40,8 @@ public class ContestDataMapper {
                         .builder()
                         .id(new UserId(createContestCommand.getUpdatedBy()))
                         .build())
+                .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
+                .updatedAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .build();
     }
 

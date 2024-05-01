@@ -3,9 +3,9 @@ package com.backend.programming.learning.system.course.service.dataaccess.course
 import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.mapper.UserDataAccessMapper;
-import com.backend.programming.learning.system.entity.Course;
-import com.backend.programming.learning.system.entity.User;
-import com.backend.programming.learning.system.valueobject.CourseId;
+import com.backend.programming.learning.system.course.service.domain.entity.Course;
+import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +20,7 @@ public class CourseDataAccessMapper {
         return CourseEntity.builder()
                 .id(course.getId().getValue())
                 .name(course.getName())
+                .courseType(course.getCourseType())
                 .visible(course.getVisible())
                 .createdBy(createdBy)
                 .updatedBy(updatedBy)
@@ -32,6 +33,7 @@ public class CourseDataAccessMapper {
         User updatedBy = userDataAccessMapper.userEntityToUser(courseEntity.getUpdatedBy());
         Course response = Course.builder()
                 .name(courseEntity.getName())
+                .courseType(courseEntity.getCourseType())
                 .visible(courseEntity.getVisible())
                 .createdBy(createdBy)
                 .updatedBy(updatedBy)

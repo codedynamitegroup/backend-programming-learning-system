@@ -1,14 +1,14 @@
 package com.backend.programming.learning.system.auth.service.application.rest.question_bank_category;
 
-import com.backend.programming.learning.system.dto.method.create.question_bank_category.CreateQuestionBankCategoryCommand;
-import com.backend.programming.learning.system.dto.method.create.question_bank_category.CreateQuestionBankCategoryResponse;
-import com.backend.programming.learning.system.dto.method.query.question_bank_category.QueryAllQuestionBankCategoryCommand;
-import com.backend.programming.learning.system.dto.method.query.question_bank_category.QueryAllQuestionBankCategoryResponse;
-import com.backend.programming.learning.system.dto.method.update.question_bank_category.UpdateQuestionBankCategoryCommand;
-import com.backend.programming.learning.system.dto.method.update.question_bank_category.UpdateQuestionBankCategoryResponse;
-import com.backend.programming.learning.system.dto.responseentity.question_bank_category.QuestionBankCategoryEntity;
-import com.backend.programming.learning.system.ports.input.service.question_bank_category.QuestionBankCategoryApplicationService;
-import com.backend.programming.learning.system.valueobject.QuestionBankCategoryId;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_bank_category.CreateQuestionBankCategoryCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_bank_category.CreateQuestionBankCategoryResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.question_bank_category.QueryAllQuestionBankCategoryCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.question_bank_category.QueryAllQuestionBankCategoryResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.question_bank_category.UpdateQuestionBankCategoryCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.question_bank_category.UpdateQuestionBankCategoryResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.question_bank_category.QuestionBankCategoryEntity;
+import com.backend.programming.learning.system.course.service.domain.ports.input.service.question_bank_category.QuestionBankCategoryApplicationService;
+import com.backend.programming.learning.system.course.service.domain.valueobject.QuestionBankCategoryId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

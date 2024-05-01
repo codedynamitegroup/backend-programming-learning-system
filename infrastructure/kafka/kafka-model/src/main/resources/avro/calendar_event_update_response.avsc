@@ -1,0 +1,132 @@
+{
+  "name": "CalendarEventUpdateResponseAvroModel",
+  "namespace": "com.backend.programming.learning.system.kafka.core.calendar.event.avro.model",
+  "type": "record",
+  "fields": [
+    {
+      "name": "id",
+      "type": {
+          "type": "string",
+          "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "sagaId",
+      "type": {
+          "type": "string",
+          "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "calendarEventId",
+      "type": [
+        "null",
+        {
+          "type": "string",
+          "logicalType": "uuid" //Logical type is part of the 'string' type definition
+        }
+      ]
+    },
+    {
+      "name": "userId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "contestId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid" //Logical type is part of the 'string' type definition
+      }
+    },
+    {
+      "name": "courseId",
+      "type": [
+        "null",
+        {
+          "type": "string",
+          "logicalType": "uuid" //Logical type is part of the 'string' type definition
+        }
+      ]
+    },
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "description",
+      "type": "string"
+    },
+    {
+      "name": "eventType",
+      "type": {
+        "type": "enum",
+        "name": "NotificationEventType",
+        "symbols": [
+          "USER",
+          "COURSE"
+        ]
+      }
+    },
+    {
+      "name": "startTime",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    },
+    {
+      "name": "endTime",
+      "type": [
+        "null",
+        {
+          "type": "long",
+          "logicalType": "timestamp-millis"
+        }
+      ]
+    },
+    {
+      "name": "component",
+      "type": {
+        "type": "enum",
+        "name": "NotificationComponentType",
+        "symbols": [
+          "ASSIGNMENT",
+          "EXAM",
+          "POST",
+          "CONTEST",
+          "REMINDER"
+        ]
+      }
+    },
+    {
+      "name": "updateCalendarEventState",
+      "type": {
+        "type": "enum",
+        "name": "UpdateState",
+        "symbols": [
+          "CREATING",
+          "CREATED",
+          "UPDATING",
+          "UPDATED",
+          "DELETING",
+          "DELETED",
+          "DELETE_FAILED",
+          "UPDATE_FAILED",
+          "CREATE_FAILED"
+        ]
+      }
+    },
+    {
+      "name": "failureMessages",
+      "type": {
+        "type": "array",
+        "items":{
+          "type":"string"
+        }
+      }
+    }
+  ]
+}

@@ -13,6 +13,8 @@ import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +35,8 @@ public class CertificateCourseUserDataMapper {
                         .id(new UserId(createCertificateCourseUserCommand.getUserId()))
                         .build())
                 .isCompleted(false)
+                .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
+                .updatedAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .build();
     }
 

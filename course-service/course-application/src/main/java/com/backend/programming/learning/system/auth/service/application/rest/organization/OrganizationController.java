@@ -1,15 +1,15 @@
 package com.backend.programming.learning.system.auth.service.application.rest.organization;
 
-import com.backend.programming.learning.system.dto.method.create.organization.CreateOrganizationCommand;
-import com.backend.programming.learning.system.dto.method.create.organization.CreateOrganizationResponse;
-import com.backend.programming.learning.system.dto.method.delete.organization.DeleteOrganizationCommand;
-import com.backend.programming.learning.system.dto.method.delete.organization.DeleteOrganizationResponse;
-import com.backend.programming.learning.system.dto.method.query.organization.QueryAllOrganizationResponse;
-import com.backend.programming.learning.system.dto.method.query.organization.QueryOrganizationCommand;
-import com.backend.programming.learning.system.dto.method.update.organization.UpdateOrganizationCommand;
-import com.backend.programming.learning.system.dto.method.update.organization.UpdateOrganizationResponse;
-import com.backend.programming.learning.system.dto.responseentity.organization.OrganizationResponseEntity;
-import com.backend.programming.learning.system.ports.input.service.organization.OrganizationApplicationService;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.organization.CreateOrganizationCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.organization.CreateOrganizationResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.delete.organization.DeleteOrganizationCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.delete.organization.DeleteOrganizationResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.organization.QueryAllOrganizationResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.organization.QueryOrganizationCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.organization.UpdateOrganizationCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.organization.UpdateOrganizationResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.organization.OrganizationResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.ports.input.service.organization.OrganizationApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

@@ -1,16 +1,16 @@
 package com.backend.programming.learning.system.auth.service.application.rest.assignment;
 
-import com.backend.programming.learning.system.dto.method.create.assignment.CreateAssignmentCommand;
-import com.backend.programming.learning.system.dto.method.create.assignment.CreateAssignmentResponse;
-import com.backend.programming.learning.system.dto.method.delete.assignment.DeleteAssignmentCommand;
-import com.backend.programming.learning.system.dto.method.delete.assignment.DeleteAssignmentResponse;
-import com.backend.programming.learning.system.dto.method.query.assignment.QueryAllAssignmentsCommand;
-import com.backend.programming.learning.system.dto.method.query.assignment.QueryAllAssignmentsResponse;
-import com.backend.programming.learning.system.dto.method.query.assignment.QueryAssignmentCommand;
-import com.backend.programming.learning.system.dto.method.query.assignment.QueryAssignmentResponse;
-import com.backend.programming.learning.system.dto.method.update.assignment.UpdateAssignmentCommand;
-import com.backend.programming.learning.system.dto.method.update.assignment.UpdateAssignmentResponse;
-import com.backend.programming.learning.system.ports.input.service.assignment.AssignmentApplicationService;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.assignment.CreateAssignmentCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.assignment.CreateAssignmentResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.delete.assignment.DeleteAssignmentCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.delete.assignment.DeleteAssignmentResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAllAssignmentsCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAllAssignmentsResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAssignmentCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAssignmentResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentResponse;
+import com.backend.programming.learning.system.course.service.domain.ports.input.service.assignment.AssignmentApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

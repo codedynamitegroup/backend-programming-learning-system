@@ -18,21 +18,54 @@ DROP TYPE IF EXISTS grade_method;
 CREATE TYPE grade_method AS ENUM ('QUIZ_GRADEHIGHEST', 'QUIZ_GRADEAVERAGE', 'QUIZ_ATTEMPTFIRST', 'QUIZ_ATTEMPTLAST');
 
 DROP TYPE IF EXISTS type;
-CREATE TYPE type AS ENUM ('TEXT_ONLINNE', 'FILE');
+CREATE TYPE type AS ENUM ('TEXT_ONLINE', 'FILE', 'BOTH');
+
+DROP TYPE IF EXISTS overdue_handling;
+CREATE TYPE overdue_handling AS ENUM ('AUTOSUBMIT', 'GRACEPERIOD', 'AUTOABANDON');
+
+DROP TYPE IF EXISTS status;
+CREATE TYPE status AS ENUM ('SUBMITTED', 'NOT_SUBMITTED');
+
+DROP TYPE IF EXISTS notification_event_type;
+CREATE TYPE notification_event_type AS ENUM ('USER', 'COURSE');
+
+DROP TYPE IF EXISTS notification_component_type;
+CREATE TYPE notification_component_type AS ENUM ('ASSIGNMENT', 'EXAM', 'POST', 'CONTEST', 'REMINDER');
+
+DROP TYPE IF EXISTS update_state;
+CREATE TYPE update_state AS ENUM (
+    'CREATING',
+    'CREATED',
+    'UPDATING',
+    'UPDATED',
+    'DELETING',
+    'DELETED',
+    'DELETE_FAILED',
+    'UPDATE_FAILED',
+    'CREATE_FAILED');
+
+DROP TYPE IF EXISTS saga_status;
+CREATE TYPE saga_status AS ENUM ('STARTED', 'FAILED', 'SUCCEEDED', 'PROCESSING', 'COMPENSATING', 'COMPENSATED');
+
+DROP TYPE IF EXISTS outbox_status;
+CREATE TYPE outbox_status AS ENUM ('STARTED', 'COMPLETED', 'FAILED');
+
+DROP TYPE IF EXISTS notification_notify_time;
+CREATE TYPE notification_notify_time AS ENUM ('TWENTY_FOUR_HOURS', 'TWELVE_HOURS', 'SIX_HOURS', 'THREE_HOURS', 'ONE_HOUR');
 
 DROP TABLE IF EXISTS "public".user CASCADE;
 CREATE TABLE "public".user
 (
     id         uuid                     DEFAULT gen_random_uuid() NOT NULL,
     email      text UNIQUE NOT NULL,
-    dob        date        NOT NULL,
-    first_name text        NOT NULL,
-    last_name  text        NOT NULL,
-    phone      text        NOT NULL,
-    address    text        NOT NULL,
-    avatar_url text        NOT NULL,
+    dob        date,
+    first_name text,
+    last_name  text,
+    phone      text,
+    address    text,
+    avatar_url text,
     last_login TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    is_deleted boolean     NOT NULL     DEFAULT '0',
+    is_deleted boolean DEFAULT '0',
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT user_pkey PRIMARY KEY (id)
@@ -44,20 +77,21 @@ CREATE TABLE "public".organization
     id          uuid DEFAULT gen_random_uuid() NOT NULL,
     description text,
     name        text                           NOT NULL,
-    api_key     text                           NOT NULL,
-    moodle_url  text                           NOT NULL,
+    api_key     text                           ,
+    moodle_url  text                           ,
     CONSTRAINT organization_pkey PRIMARY KEY (id)
 );
 
 DROP TABLE IF EXISTS "public".question_bank_category CASCADE;
 CREATE TABLE "public".question_bank_category
 (
-    id           uuid                     DEFAULT gen_random_uuid() NOT NULL,
-    name         text                                               NOT NULL,
-    "created_by" uuid                                               NOT NULL,
-    "updated_by" uuid                                               NOT NULL,
-    "created_at" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    id            uuid                     DEFAULT gen_random_uuid() NOT NULL,
+    "name"        text                                               NOT NULL,
+    "description" text,
+    "created_by"  uuid                                               NOT NULL,
+    "updated_by"  uuid                                               NOT NULL,
+    "created_at"  TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "updated_at"  TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT question_bank_category_pkey PRIMARY KEY (id),
     CONSTRAINT question_bank_category_created_by_fkey FOREIGN KEY (created_by)
         REFERENCES "public".user (id) MATCH SIMPLE
@@ -103,13 +137,14 @@ CREATE TABLE "public".question
 DROP TABLE IF EXISTS "public".course CASCADE;
 CREATE TABLE "public".course
 (
-    id         uuid    DEFAULT gen_random_uuid() NOT NULL,
-    name       text UNIQUE,
-    visible    boolean DEFAULT '1',
-    created_by uuid,
-    updated_by uuid,
-    created_at TIMESTAMP WITH TIME ZONE,
-    updated_at TIMESTAMP WITH TIME ZONE,
+    id          uuid    DEFAULT gen_random_uuid() NOT NULL,
+    name        text UNIQUE,
+    visible     boolean DEFAULT '1',
+    course_type text,
+    created_by  uuid,
+    updated_by  uuid,
+    created_at  TIMESTAMP WITH TIME ZONE,
+    updated_at  TIMESTAMP WITH TIME ZONE,
     CONSTRAINT course_pkey PRIMARY KEY (id),
     CONSTRAINT course_created_by_fkey FOREIGN KEY (created_by)
         REFERENCES "public".user (id) MATCH SIMPLE
@@ -172,17 +207,17 @@ CREATE TABLE "public".exam
     id                 uuid                      DEFAULT gen_random_uuid() NOT NULL,
     course_id          uuid             NOT NULL,
     name               text             NOT NULL,
-    intro              text             NOT NULL,
+    intro              text,
     score              double precision NOT NULL DEFAULT '0',
     max_score          double precision NOT NULL DEFAULT '0',
     time_open          TIMESTAMP WITH TIME ZONE,
     time_close         TIMESTAMP WITH TIME ZONE,
-    time_limit         TIMESTAMP WITH TIME ZONE,
-    overdue_handling   text             NOT NULL DEFAULT 'autoabandon',
+    time_limit         INTEGER,
+    overdue_handling   overdue_handling NOT NULL DEFAULT 'AUTOABANDON',
     can_redo_questions boolean          NOT NULL DEFAULT '0',
     max_attempts       bigint           NOT NULL DEFAULT '0',
     shuffle_answers    boolean          NOT NULL DEFAULT '0',
-    grade_method       grade_method     NOT NULL,
+    grade_method       grade_method     NOT NULL DEFAULT 'QUIZ_GRADEHIGHEST',
     created_at         TIMESTAMP WITH TIME ZONE  DEFAULT CURRENT_TIMESTAMP,
     updated_at         TIMESTAMP WITH TIME ZONE  DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT exam_pkey PRIMARY KEY (id),
@@ -215,8 +250,10 @@ CREATE TABLE "public".exam_submission
     id          uuid            DEFAULT gen_random_uuid() NOT NULL,
     exam_id     uuid   NOT NULL,
     user_id     uuid   NOT NULL,
-    type        type   NOT NULL,
-    pass_status bigint NOT NULL DEFAULT '0',
+    submit_count bigint NOT NULL DEFAULT '0',
+    start_time  TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    submit_time TIMESTAMP WITH TIME ZONE DEFAULT NULL,
+    status status NOT NULL DEFAULT 'NOT_SUBMITTED',
     CONSTRAINT exam_submission_pkey PRIMARY KEY (id),
     CONSTRAINT exam_submission_exam_id_fkey FOREIGN KEY (exam_id)
         REFERENCES "public".exam (id) MATCH SIMPLE
@@ -224,6 +261,30 @@ CREATE TABLE "public".exam_submission
         ON DELETE CASCADE,
     CONSTRAINT exam_submission_user_id_fkey FOREIGN KEY (user_id)
         REFERENCES "public".user (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS "public".exam_question_submission CASCADE;
+CREATE TABLE "public".exam_question_submission
+(
+    id                 uuid                      DEFAULT gen_random_uuid() NOT NULL,
+    user_id            uuid             NOT NULL,
+    exam_question_id uuid             NOT NULL,
+    AI_assessment text,
+    pass_status        bigint           NOT NULL DEFAULT '0',
+    grade              double precision NOT NULL,
+    content            text,
+    right_answer       text             NOT NULL,
+    num_file           bigint           NOT NULL,
+    status bigint NOT NULL DEFAULT '0',
+    CONSTRAINT exam_question_submission_pkey PRIMARY KEY (id),
+    CONSTRAINT exam_question_submission_user_id_fkey FOREIGN KEY (user_id)
+        REFERENCES "public".USER (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT exam_question_submission_exam_submission_id_fkey FOREIGN KEY (exam_question_id)
+        REFERENCES "public".exam_question (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
@@ -378,3 +439,81 @@ CREATE TABLE "public".call_organization
         ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS "public".notification CASCADE;
+
+CREATE TABLE "public".notification
+(
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
+    user_id_from uuid,
+    user_id_to uuid NOT NULL,
+    subject text,
+    full_message text,
+    small_message text,
+    component notification_component_type DEFAULT 'REMINDER',
+    event_type notification_event_type NOT NULL,
+    context_url text,
+    context_url_name text,
+    is_read bool DEFAULT FALSE NOT NULL,
+    time_read TIMESTAMP WITH TIME ZONE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT notification_pkey PRIMARY KEY (id),
+    CONSTRAINT notification_user_id_from_fkey FOREIGN KEY (user_id_from)
+        REFERENCES "public".user (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT notification_user_id_to_fkey FOREIGN KEY (user_id_to)
+        REFERENCES "public".user (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS "public".calendar_event CASCADE;
+
+CREATE TABLE "public".calendar_event
+(
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
+    name text,
+    description text,
+    event_type notification_event_type NOT NULL,
+    start_time TIMESTAMP WITH TIME ZONE NOT NULL,
+    end_time TIMESTAMP WITH TIME ZONE,
+    user_id uuid NOT NULL,
+    course_id uuid,
+    contest_id uuid,
+    component notification_component_type DEFAULT 'REMINDER',
+    is_start_time_notified bool DEFAULT FALSE NOT NULL,
+    is_end_time_notified bool DEFAULT FALSE NOT NULL,
+    notification_notify_time notification_notify_time,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT calendar_event_pkey PRIMARY KEY (id),
+    CONSTRAINT calendar_event_created_by_fkey FOREIGN KEY (user_id)
+        REFERENCES "public".user (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT contest_user_id_no_key UNIQUE (user_id, contest_id)
+);
+
+DROP TABLE IF EXISTS "public".calendar_event_update_outbox CASCADE;
+
+CREATE TABLE "public".calendar_event_update_outbox
+(
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
+    saga_id uuid NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    processed_at TIMESTAMP WITH TIME ZONE,
+    type character varying COLLATE pg_catalog."default" NOT NULL,
+    payload jsonb NOT NULL,
+    outbox_status outbox_status NOT NULL,
+    update_calendar_event_state update_state,
+    version integer NOT NULL,
+    CONSTRAINT calendar_event_outbox_pkey PRIMARY KEY (id)
+);
+
+CREATE INDEX calendar_event_outbox_saga_status
+    ON "public".calendar_event_update_outbox
+        (type, update_calendar_event_state);
+
+CREATE UNIQUE INDEX calendar_event_outbox_saga_id
+    ON "public".calendar_event_update_outbox
+        (type, saga_id, update_calendar_event_state, outbox_status);

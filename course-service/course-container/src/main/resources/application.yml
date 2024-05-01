@@ -5,12 +5,38 @@ logging:
   level:
     com.backend.programming.learning.system: INFO
 
+
+socket-config:
+  port: 8085
+  host: 172.16.12.5
+
 course-service:
   question-created-request-topic-name: core-question-create-request
   question-deleted-request-topic-name: core-question-delete-request
   question-updated-request-topic-name: core-question-update-request
+
+  question-response-topic-name: core-question-response
+
+  user-request-topic-name: user-request
+  user-create-request-topic-name: user-create-request
+  user-update-request-topic-name: user-update-request
+  user-delete-request-topic-name: user-delete-request
+  user-create-response-topic-name: user-create-response
+  user-update-response-topic-name: user-update-response
+  user-delete-response-topic-name: user-delete-response
+  user-response-topic-name: user-response
+
+  calendar-event-update-request-topic-name: calendar-event-update-request
+  calendar-event-update-response-topic-name: calendar-event-update-response
+
+  organization-create-request-topic-name: organization-create-request
+  organization-update-request-topic-name: organization-update-request
+  organization-delete-request-topic-name: organization-delete-request
+
   outbox-scheduler-fixed-rate: 10000
   outbox-scheduler-initial-delay: 10000
+
+  create-notification-scheduler-fixed-rate: 1800000
 
 spring:
   jpa:
@@ -26,7 +52,8 @@ spring:
     password: localdb
     driver-class-name: org.postgresql.Driver
     platform: postgres
-#    schema: classpath:init-schema.sql
+    schema: classpath:init-schema.sql
+    data: classpath:init-data.sql
     initialization-mode: always
 
 kafka-config:
@@ -50,7 +77,21 @@ kafka-producer-config:
 kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-  question-consumer-group-id: question-topic-consumer
+
+  question-create-consumer-group-id: question-create-topic-consumer
+  question-delete-consumer-group-id: question-delete-topic-consumer
+  question-update-consumer-group-id: question-update-topic-consumer
+
+  course-service-calendar-event-consumer-group-id: course-service-calendar-event-consumer
+
+  course-service-organization-create-request-group-id: course-service-organization-create-request-consumer
+  course-service-organization-update-request-group-id: course-service-organization-update-request-consumer
+  course-service-organization-delete-request-group-id: course-service-organization-delete-request-consumer
+
+  course-service-user-create-request-group-id: course-service-user-create-request-consumer
+  course-service-user-update-request-group-id: course-service-user-update-request-consumer
+  course-service-user-delete-request-group-id: course-service-user-delete-request-consumer
+
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
   specific-avro-reader: true

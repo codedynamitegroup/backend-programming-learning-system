@@ -1,39 +1,16 @@
 package com.backend.programming.learning.system.core.service.messaging.mapper;
 
-import com.backend.programming.learning.system.core.service.domain.dto.method.message.user.UserCreateRequest;
-import com.backend.programming.learning.system.core.service.domain.dto.method.message.user.UserDeleteRequest;
-import com.backend.programming.learning.system.core.service.domain.dto.method.message.user.UserUpdateRequest;
-import com.backend.programming.learning.system.core.service.domain.event.user.*;
-import com.backend.programming.learning.system.domain.valueobject.UserRequestStatus;
-import com.backend.programming.learning.system.kafka.auth.avro.model.*;
+import com.backend.programming.learning.system.core.service.domain.dto.method.message.user.UserRequest;
+import com.backend.programming.learning.system.core.service.domain.outbox.model.user.UserEventPayload;
+import com.backend.programming.learning.system.kafka.auth.avro.model.user.*;
 import org.springframework.stereotype.Component;
 
-import java.time.Instant;
 import java.util.UUID;
 
 @Component
 public class UserMessagingDataMapper {
-    public UserResponseAvroModel userCreatedSuccessEventToUserResponseAvroModel(UserCreatedSuccessEvent userCreatedSuccessEvent) {
-        return UserResponseAvroModel.newBuilder()
-                .setId(UUID.randomUUID().toString())
-                .setSagaId("")
-                .setUserId(userCreatedSuccessEvent.getUser().getId().getValue().toString())
-                .setUserResponseStatus(UserResponseStatus.CREATED)
-                .setFailureMessages(userCreatedSuccessEvent.getFailureMessages())
-                .build();
-    }
-    public UserResponseAvroModel userCreatedFailEventToUserResponseAvroModel(UserCreatedFailEvent userCreatedFailEvent) {
-        return UserResponseAvroModel.newBuilder()
-                .setId(UUID.randomUUID().toString())
-                .setSagaId("")
-                .setUserId(userCreatedFailEvent.getUser().getId().getValue().toString())
-                .setUserResponseStatus(UserResponseStatus.CREATE_FAILED)
-                .setFailureMessages(userCreatedFailEvent.getFailureMessages())
-                .build();
-    }
-
-    public UserCreateRequest userCreateRequestAvroModelToUserCreateRequest(UserCreateRequestAvroModel userCreateRequestAvroModel) {
-        return UserCreateRequest.builder()
+    public UserRequest userCreateRequestAvroModelToUserCreateRequest(UserRequestAvroModel userCreateRequestAvroModel) {
+        return UserRequest.builder()
                 .id(userCreateRequestAvroModel.getId())
                 .sagaId(userCreateRequestAvroModel.getSagaId())
                 .userId(userCreateRequestAvroModel.getUserId())
@@ -47,8 +24,8 @@ public class UserMessagingDataMapper {
                 .build();
     }
 
-    public UserUpdateRequest userUpdateRequestAvroModelToUserUpdateRequest(UserUpdateRequestAvroModel userUpdateRequestAvroModel) {
-        return UserUpdateRequest.builder()
+    public UserRequest userUpdateRequestAvroModelToUserUpdateRequest(UserRequestAvroModel userUpdateRequestAvroModel) {
+        return UserRequest.builder()
                 .id(userUpdateRequestAvroModel.getId())
                 .sagaId(userUpdateRequestAvroModel.getSagaId())
                 .userId(userUpdateRequestAvroModel.getUserId())
@@ -62,8 +39,8 @@ public class UserMessagingDataMapper {
                 .build();
     }
 
-    public UserDeleteRequest userDeleteRequestAvroModelToUserDeleteRequest(UserDeleteRequestAvroModel userDeleteRequestAvroModel) {
-        return UserDeleteRequest.builder()
+    public UserRequest userDeleteRequestAvroModelToUserDeleteRequest(UserRequestAvroModel userDeleteRequestAvroModel) {
+        return UserRequest.builder()
                 .id(userDeleteRequestAvroModel.getId())
                 .sagaId(userDeleteRequestAvroModel.getSagaId())
                 .userId(userDeleteRequestAvroModel.getUserId())
@@ -71,43 +48,13 @@ public class UserMessagingDataMapper {
                 .build();
     }
 
-    public UserResponseAvroModel userDeletedSuccessEventToUserResponseAvroModel(UserDeletedSuccessEvent domainEvent) {
+    public UserResponseAvroModel userEventPayloadToUserResponseAvroModel(String sagaId, UserEventPayload userEventPayload) {
         return UserResponseAvroModel.newBuilder()
                 .setId(UUID.randomUUID().toString())
-                .setSagaId("")
-                .setUserId(domainEvent.getUser().getId().getValue().toString())
-                .setUserResponseStatus(UserResponseStatus.DELETED)
-                .setFailureMessages(domainEvent.getFailureMessages())
-                .build();
-    }
-
-    public UserResponseAvroModel userDeleteFailedEventToUserResponseAvroModel(UserDeletedFailEvent domainEvent) {
-        return UserResponseAvroModel.newBuilder()
-                .setId(UUID.randomUUID().toString())
-                .setSagaId("")
-                .setUserId(domainEvent.getUser().getId().getValue().toString())
-                .setUserResponseStatus(UserResponseStatus.DELETE_FAILED)
-                .setFailureMessages(domainEvent.getFailureMessages())
-                .build();
-    }
-
-    public UserResponseAvroModel userUpdatedSuccessEventToUserResponseAvroModel(UserUpdatedSuccessEvent domainEvent) {
-        return UserResponseAvroModel.newBuilder()
-                .setId(UUID.randomUUID().toString())
-                .setSagaId("")
-                .setUserId(domainEvent.getUser().getId().getValue().toString())
-                .setUserResponseStatus(UserResponseStatus.UPDATED)
-                .setFailureMessages(domainEvent.getFailureMessages())
-                .build();
-    }
-
-    public UserResponseAvroModel userUpdateFailedEventToUserResponseAvroModel(UserUpdatedFailEvent domainEvent) {
-        return UserResponseAvroModel.newBuilder()
-                .setId(UUID.randomUUID().toString())
-                .setSagaId("")
-                .setUserId(domainEvent.getUser().getId().getValue().toString())
-                .setUserResponseStatus(UserResponseStatus.UPDATE_FAILED)
-                .setFailureMessages(domainEvent.getFailureMessages())
+                .setSagaId(sagaId)
+                .setUserId(userEventPayload.getUserId())
+                .setCopyState(CopyState.valueOf(userEventPayload.getCopyState()))
+                .setFailureMessages(userEventPayload.getFailureMessages())
                 .build();
     }
 }

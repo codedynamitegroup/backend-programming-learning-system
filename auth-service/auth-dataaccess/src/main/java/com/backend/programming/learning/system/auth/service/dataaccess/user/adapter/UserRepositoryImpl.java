@@ -37,6 +37,12 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public Optional<User> findByIdAndIsDeletedTrue(UserId userId) {
+        return userJpaRepository.findByIdAndIsDeletedTrue(userId.getValue())
+                .map(userDataAccessMapper::userEntityToUser);
+    }
+
+    @Override
     public Optional<User> findByEmail(String email) {
         return userJpaRepository.findByEmailAndIsDeletedFalse(email)
                 .map(userDataAccessMapper::userEntityToUser);

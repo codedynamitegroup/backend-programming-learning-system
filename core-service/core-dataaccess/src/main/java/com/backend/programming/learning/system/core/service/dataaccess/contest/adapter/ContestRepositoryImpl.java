@@ -51,7 +51,7 @@ public class ContestRepositoryImpl implements ContestRepository {
     public Page<Contest> findAll(String searchName, String startTimeFilter, Integer page, Integer size) {
         Pageable paging = PageRequest.of(page, size);
 
-        ZonedDateTime now = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UTC"));
         switch (ContestStartTimeFilter.valueOf(startTimeFilter)) {
             case UPCOMING -> {
                 if(searchName.isEmpty()){

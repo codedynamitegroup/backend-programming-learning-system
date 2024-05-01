@@ -21,6 +21,7 @@ public class QuestionBankCategoryEntity {
     private UUID id;
 
     private String name;
+    private String description;
     @OneToOne
     @JoinColumn(name = "created_by", referencedColumnName = "id")
     private UserEntity createdBy;

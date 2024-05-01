@@ -1,37 +1,29 @@
 package com.backend.programming.learning.system.core.service.domain.entity;
 
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseUserId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.ContestQuestionId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestUserId;
-import com.backend.programming.learning.system.domain.DomainConstants;
+import com.backend.programming.learning.system.core.service.domain.valueobject.UpdateState;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
-import com.backend.programming.learning.system.domain.entity.BaseEntity;
-import com.backend.programming.learning.system.domain.valueobject.QuestionId;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
-public class ContestUser extends BaseEntity<ContestUserId> {
-    private final User user;
-    private final Contest contest;
+public class ContestUser extends AggregateRoot<ContestUserId> {
+    private User user;
+    private Contest contest;
+    private UUID calendarEventId;
+    private UpdateState updateCalendarEventState;
     private Boolean isCompleted;
     private ZonedDateTime completedAt;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
-    public void initializeContestUser() {
-        setId(new ContestUserId(UUID.randomUUID()));
-        setCreatedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
-        setUpdatedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
-    }
-
     private ContestUser(Builder builder) {
         super.setId(builder.contestUserId);
         user = builder.user;
         contest = builder.contest;
+        setCalendarEventId(builder.calendarEventId);
+        setUpdateCalendarEventState(builder.updateCalendarEventState);
         isCompleted = builder.isCompleted;
         setCompletedAt(builder.completedAt);
         setCreatedAt(builder.createdAt);
@@ -42,6 +34,12 @@ public class ContestUser extends BaseEntity<ContestUserId> {
         return new Builder();
     }
 
+    public void initializeContestUser() {
+        setId(new ContestUserId(UUID.randomUUID()));
+        setCreatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
+        setUpdatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
+    }
+
 
     public User getUser() {
         return user;
@@ -49,6 +47,22 @@ public class ContestUser extends BaseEntity<ContestUserId> {
 
     public Contest getContest() {
         return contest;
+    }
+
+    public UUID getCalendarEventId() {
+        return calendarEventId;
+    }
+
+    public void setCalendarEventId(UUID calendarEventId) {
+        this.calendarEventId = calendarEventId;
+    }
+
+    public UpdateState getUpdateCalendarEventState() {
+        return updateCalendarEventState;
+    }
+
+    public void setUpdateCalendarEventState(UpdateState updateCalendarEventState) {
+        this.updateCalendarEventState = updateCalendarEventState;
     }
 
     public Boolean getCompleted() {
@@ -83,10 +97,20 @@ public class ContestUser extends BaseEntity<ContestUserId> {
         this.updatedAt = updatedAt;
     }
 
+    public void setContest(Contest contest) {
+        this.contest = contest;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public static final class Builder {
         private ContestUserId contestUserId;
         private User user;
         private Contest contest;
+        private UUID calendarEventId;
+        private UpdateState updateCalendarEventState;
         private Boolean isCompleted;
         private ZonedDateTime completedAt;
         private ZonedDateTime createdAt;
@@ -107,6 +131,16 @@ public class ContestUser extends BaseEntity<ContestUserId> {
 
         public Builder contest(Contest val) {
             contest = val;
+            return this;
+        }
+
+        public Builder calendarEventId(UUID val) {
+            calendarEventId = val;
+            return this;
+        }
+
+        public Builder updateCalendarEventState(UpdateState val) {
+            updateCalendarEventState = val;
             return this;
         }
 

@@ -2,12 +2,15 @@ package com.backend.programming.learning.system.core.service.dataaccess.contest_
 
 import com.backend.programming.learning.system.core.service.dataaccess.contest_user.mapper.ContestUserDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.contest_user.repository.ContestUserJpaRepository;
+import com.backend.programming.learning.system.core.service.domain.entity.ContestQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.ContestUser;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ContestUserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -34,5 +37,23 @@ public class ContestUserRepositoryImpl implements ContestUserRepository {
         Pageable paging = fetchAll ? Pageable.unpaged() : Pageable.ofSize(pageSize).withPage(pageNo);
         return contestUserJpaRepository.findAllByContestId(contestId, paging)
                 .map(contestUserDataAccessMapper::contestUserEntityToContestUser);
+    }
+
+    @Override
+    public Optional<ContestUser> findByContestIdAndUserId(UUID contestId, UUID userId) {
+        return contestUserJpaRepository.findByContestIdAndUserId(contestId, userId)
+                .map(contestUserDataAccessMapper::contestUserEntityToContestUser);
+    }
+
+    @Override
+    public List<ContestUser> findByContestId(UUID contestId) {
+        return contestUserDataAccessMapper.contestUserEntityListToContestUserList(
+                contestUserJpaRepository.findByContestId(contestId)
+        );
+    }
+
+    @Override
+    public void deleteByContestIdAndUserId(UUID contestId, UUID userId) {
+        contestUserJpaRepository.deleteByContestIdAndUserId(contestId, userId);
     }
 }

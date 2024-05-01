@@ -3,8 +3,8 @@ package com.backend.programming.learning.system.course.service.dataaccess.post.a
 import com.backend.programming.learning.system.course.service.dataaccess.post.entity.PostEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.post.mapper.PostDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.post.repository.PostJpaRepository;
-import com.backend.programming.learning.system.entity.Post;
-import com.backend.programming.learning.system.ports.output.repository.PostRepository;
+import com.backend.programming.learning.system.course.service.domain.entity.Post;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

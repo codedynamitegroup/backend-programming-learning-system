@@ -3,8 +3,8 @@ package com.backend.programming.learning.system.course.service.dataaccess.exam_q
 import com.backend.programming.learning.system.course.service.dataaccess.exam.mapper.ExamDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.exam_question.entity.ExamQuestionEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.question.mapper.QuestionDataAccessMapper;
-import com.backend.programming.learning.system.entity.ExamQuestion;
-import com.backend.programming.learning.system.valueobject.ExamQuestionId;
+import com.backend.programming.learning.system.course.service.domain.entity.ExamQuestion;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamQuestionId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

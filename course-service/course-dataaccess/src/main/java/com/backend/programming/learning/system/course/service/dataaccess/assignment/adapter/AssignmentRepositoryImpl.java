@@ -1,11 +1,10 @@
 package com.backend.programming.learning.system.course.service.dataaccess.assignment.adapter;
 
-import com.backend.programming.learning.system.course.service.dataaccess.assignment.entity.AssignmentEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.assignment.mapper.AssignmentDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.assignment.repository.AssignmentJpaRepository;
-import com.backend.programming.learning.system.entity.Assignment;
-import com.backend.programming.learning.system.ports.output.repository.AssignmentRepository;
-import com.backend.programming.learning.system.valueobject.CourseId;
+import com.backend.programming.learning.system.course.service.domain.entity.Assignment;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.AssignmentRepository;
+import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

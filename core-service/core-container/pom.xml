@@ -37,10 +37,6 @@
         </dependency>
         <dependency>
             <groupId>com.backend.programming.learning.system</groupId>
-            <artifactId>core-socket</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.backend.programming.learning.system</groupId>
             <artifactId>common-dataaccess</artifactId>
         </dependency>
         <dependency>

@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.course.service.dataaccess.exam.entity;
 
 import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
+import com.backend.programming.learning.system.course.service.domain.valueobject.OverdueHandling;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,8 +31,9 @@ public class ExamEntity {
     private Float maxScore;
     private ZonedDateTime timeOpen;
     private ZonedDateTime timeClose;
-    private ZonedDateTime timeLimit;
-    private String overdueHandling;
+    private Integer timeLimit;
+    @Enumerated(EnumType.STRING)
+    private OverdueHandling overdueHandling;
     private Boolean canRedoQuestions;
     private Integer maxAttempts;
 //    private Boolean shuffleQuestions;

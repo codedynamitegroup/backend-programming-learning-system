@@ -5,25 +5,23 @@ logging:
   level:
     com.backend.programming.learning.system: DEBUG
 
-socket-config:
-  port: 8085
-  host: localhost
-
 core-service:
   code-question-update-response-from-core-service-topic-name: code-question-update-response-from-core-service
   code-question-update-request-to-core-service-topic-name: code-question-update-request-to-core-service
   question-created-request-topic-name: core-question-create-request
   question-deleted-request-topic-name: core-question-delete-request
   question-updated-request-topic-name: core-question-update-request
-  user-create-request-topic-name: user-create-request
-  user-update-request-topic-name: user-update-request
-  user-delete-request-topic-name: user-delete-request
-  user-create-response-topic-name: user-create-response
-  user-update-response-topic-name: user-update-response
-  user-delete-response-topic-name: user-delete-response
+
+  question-response-topic-name: core-question-response
+
+  user-request-topic-name: user-request
   user-response-topic-name: user-response
-  outbox-scheduler-fixed-rate: 10000
-  outbox-scheduler-initial-delay: 10000
+
+  calendar-event-update-request-topic-name: calendar-event-update-request
+  calendar-event-update-response-topic-name: calendar-event-update-response
+
+  outbox-scheduler-fixed-rate: 2000
+  outbox-scheduler-initial-delay: 2000
 
 #spring:
 #  jpa:
@@ -83,9 +81,14 @@ kafka-producer-config:
 kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-  core-service-user-create-request-group-id: core-service-user-create-request-topic
-  core-service-user-update-request-group-id: core-service-user-update-request-topic
-  core-service-user-delete-request-group-id: core-service-user-delete-request-topic
+  core-service-user-consumer-group-id: core-service-user-topic-consumer
+
+  core-service-question-consumer-group-id: core-service-question-topic-consumer
+
+  core-service-calendar-event-consumer-group-id: core-service-calendar-event-topic-consumer
+
+  core-service-user-request-group-id: core-service-user-create-topic
+
   customer-group-id: customer-topic-consumer
   code-question-update-consumer-group-id: code-question-update-topic-consumer
   auto-offset-reset: earliest

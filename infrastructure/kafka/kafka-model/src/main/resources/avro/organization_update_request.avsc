@@ -1,0 +1,58 @@
+{
+  "name": "OrganizationUpdateRequestAvroModel",
+  "namespace": "com.backend.programming.learning.system.kafka.auth.avro.model.organization",
+  "type": "record",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "sagaId",
+      "type": "string"
+    },
+    {
+      "name": "organizationId",
+      "type": "string"
+    },
+    {
+      "name": "description",
+      "type": ["string", "null"]
+    },
+    {
+      "name": "name",
+      "type": ["string", "null"]
+    },
+    {
+      "name": "email",
+      "type": ["string", "null"]
+    },
+    {
+      "name": "phone",
+      "type": ["string", "null"]
+    },
+    {
+      "name": "address",
+      "type": ["string", "null"]
+    },
+    {
+      "name": "apiKey",
+      "type": ["string", "null"]
+    },
+    {
+      "name": "moodleUrl",
+      "type": ["string", "null"]
+    },
+    {
+      "name": "updatedAt",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    },
+    {
+      "name": "updatedBy",
+      "type": "string"
+    }
+  ]
+}

@@ -3,9 +3,9 @@ package com.backend.programming.learning.system.course.service.dataaccess.exam.m
 import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.course.mapper.CourseDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.exam.entity.ExamEntity;
-import com.backend.programming.learning.system.entity.Course;
-import com.backend.programming.learning.system.entity.Exam;
-import com.backend.programming.learning.system.valueobject.ExamId;
+import com.backend.programming.learning.system.course.service.domain.entity.Course;
+import com.backend.programming.learning.system.course.service.domain.entity.Exam;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -45,7 +45,7 @@ public class ExamDataAccessMapper{
                 .timeOpen(examEntity.getTimeOpen())
                 .timeClose(examEntity.getTimeClose())
                 .timeLimit(examEntity.getTimeLimit())
-                .overdueHanding(examEntity.getOverdueHandling())
+                .overdueHandling(examEntity.getOverdueHandling())
                 .canRedoQuestions(examEntity.getCanRedoQuestions())
                 .maxAttempts(examEntity.getMaxAttempts())
 //                .shuffle_answers(examEntity.getShuffleQuestions())

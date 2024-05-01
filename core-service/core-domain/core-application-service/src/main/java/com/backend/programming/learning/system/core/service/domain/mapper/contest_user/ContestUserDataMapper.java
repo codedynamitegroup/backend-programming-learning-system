@@ -7,12 +7,17 @@ import com.backend.programming.learning.system.core.service.domain.dto.responsee
 import com.backend.programming.learning.system.core.service.domain.entity.Contest;
 import com.backend.programming.learning.system.core.service.domain.entity.ContestUser;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
+import com.backend.programming.learning.system.core.service.domain.event.contest_user.ContestUserUpdatedEvent;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
+import com.backend.programming.learning.system.core.service.domain.outbox.model.contest_user.ContestUserUpdateEventPayload;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.UpdateState;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +28,7 @@ public class ContestUserDataMapper {
     public ContestUserDataMapper(UserDataMapper userDataMapper) {
         this.userDataMapper = userDataMapper;
     }
+
     public ContestUser createContestUserCommandToContestUser(
             CreateContestUserCommand createContestUserCommand) {
         return ContestUser.builder()
@@ -32,7 +38,10 @@ public class ContestUserDataMapper {
                 .user(User.builder()
                         .id(new UserId(createContestUserCommand.getUserId()))
                         .build())
+                .updateCalendarEventState(UpdateState.CREATING)
                 .isCompleted(false)
+                .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
+                .updatedAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .build();
     }
 
@@ -50,6 +59,7 @@ public class ContestUserDataMapper {
         return ContestUserResponseEntity.builder()
                 .contestId(contestUser.getContest().getId().getValue())
                 .user(userDataMapper.userToUserResponseEntity(contestUser.getUser()))
+                .calendarEventId(contestUser.getCalendarEventId())
                 .isCompleted(contestUser.getCompleted())
                 .completedAt(contestUser.getCompletedAt())
                 .createdAt(contestUser.getCreatedAt())
@@ -67,6 +77,24 @@ public class ContestUserDataMapper {
                 .currentPage(contestUsers.getNumber())
                 .totalItems(contestUsers.getTotalElements())
                 .totalPages(contestUsers.getTotalPages())
+                .build();
+    }
+
+    public ContestUserUpdateEventPayload contestUserUpdatedEventToContestUserUpdateEventPayload(
+            ContestUserUpdatedEvent contestUserUpdatedEvent) {
+        return ContestUserUpdateEventPayload.builder()
+                .contestUserId(contestUserUpdatedEvent.getContestUser().getId().getValue().toString())
+                .userId(contestUserUpdatedEvent.getContestUser().getUser().getId().getValue().toString())
+                .contestId(contestUserUpdatedEvent.getContestUser().getContest().getId().getValue().toString())
+                .name(contestUserUpdatedEvent.getContestUser().getContest().getName())
+                .description(contestUserUpdatedEvent.getContestUser().getContest().getDescription())
+                .eventType("USER")
+                .startTime(contestUserUpdatedEvent.getContestUser().getContest().getStartTime())
+                .endTime(contestUserUpdatedEvent.getContestUser().getContest().getEndTime())
+                .component("CONTEST")
+                .updateCalendarEventState(
+                        contestUserUpdatedEvent.getContestUser().getUpdateCalendarEventState().name())
+                .createdAt(contestUserUpdatedEvent.getCreatedAt())
                 .build();
     }
 }
