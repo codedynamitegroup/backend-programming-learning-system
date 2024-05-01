@@ -5,8 +5,8 @@ import com.backend.programming.learning.system.course.service.domain.event.organ
 import com.backend.programming.learning.system.course.service.domain.event.question.event.*;
 import com.backend.programming.learning.system.course.service.domain.event.user.*;
 import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
-import com.backend.programming.learning.system.domain.valueobject.QuestionResponseStatus;
 
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.ZoneId;
@@ -112,7 +112,7 @@ public class CourseDomainServiceImpl implements CourseDomainService {
         log.info("Question with id: {} is created with event", question.getId().getValue());
         return new QuestionCreatedEvent(question,
                 ZonedDateTime.now(ZoneId.of("UTC")),
-                QuestionResponseStatus.CREATED);
+                CopyState.CREATED);
     }
 
     @Override
@@ -120,7 +120,7 @@ public class CourseDomainServiceImpl implements CourseDomainService {
         log.info("Question with id: {} is failed to create with event", question.getId().getValue());
         return new QuestionCreateFailedEvent(question,
                 ZonedDateTime.now(ZoneId.of("UTC")),
-                QuestionResponseStatus.CREATE_FAILED);
+                CopyState.CREATE_FAILED);
     }
 
     @Override
@@ -128,7 +128,7 @@ public class CourseDomainServiceImpl implements CourseDomainService {
         log.info("Question with id: {} is updated with event", question.getId().getValue());
         return new QuestionUpdatedEvent(question,
                 ZonedDateTime.now(ZoneId.of("UTC")),
-                QuestionResponseStatus.UPDATED);
+                CopyState.UPDATED);
     }
 
     @Override
@@ -136,7 +136,7 @@ public class CourseDomainServiceImpl implements CourseDomainService {
         log.info("Question with id: {} is failed to update with event", question.getId().getValue());
         return new QuestionUpdateFailedEvent(question,
                 ZonedDateTime.now(ZoneId.of("UTC")),
-                QuestionResponseStatus.UPDATE_FAILED);
+                CopyState.UPDATE_FAILED);
     }
 
     @Override
@@ -144,7 +144,7 @@ public class CourseDomainServiceImpl implements CourseDomainService {
         log.info("Question with id: {} is deleted with event", question.getId().getValue());
         return new QuestionDeletedEvent(question,
                 ZonedDateTime.now(ZoneId.of("UTC")),
-                QuestionResponseStatus.DELETED);
+                CopyState.DELETED);
     }
 
     @Override
@@ -152,7 +152,7 @@ public class CourseDomainServiceImpl implements CourseDomainService {
         log.info("Question with id: {} is failed to delete with event", question.getId().getValue());
         return new QuestionDeleteFailedEvent(question,
                 ZonedDateTime.now(ZoneId.of("UTC")),
-                QuestionResponseStatus.DELETE_FAILED);
+                CopyState.DELETE_FAILED);
     }
 
     @Override

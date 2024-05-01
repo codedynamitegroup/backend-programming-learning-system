@@ -302,6 +302,7 @@ CREATE TABLE "public".question
     default_mark numeric(5,2) NOT NULL,
     qtype qtype NOT NULL,
     created_by uuid NOT NULL,
+    copy_state CopyState NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_by uuid NOT NULL,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
@@ -580,7 +581,7 @@ CREATE TABLE  "public".question_outbox
     payload jsonb NOT NULL,
     outbox_status outbox_status NOT NULL,
     saga_status saga_status NOT NULL,
-    copy_state copy_state NOT NULL,
+    copy_state CopyState NOT NULL,
     version integer NOT NULL,
     CONSTRAINT question_outbox_pkey PRIMARY KEY (id)
 );

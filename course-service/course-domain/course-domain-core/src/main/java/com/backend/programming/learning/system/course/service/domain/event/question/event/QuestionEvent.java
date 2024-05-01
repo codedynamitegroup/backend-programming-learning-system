@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.event.question.event;
 
 import com.backend.programming.learning.system.domain.event.DomainEvent;
-import com.backend.programming.learning.system.domain.valueobject.QuestionResponseStatus;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.course.service.domain.entity.Question;
 
 import java.time.ZonedDateTime;
@@ -9,12 +9,12 @@ import java.time.ZonedDateTime;
 public abstract class QuestionEvent implements DomainEvent<Question> {
     private final Question question;
     private final ZonedDateTime createdAt;
-    private final QuestionResponseStatus status;
+    private final CopyState copyState;
 
-    public QuestionEvent(Question question, ZonedDateTime createdAt, QuestionResponseStatus status) {
+    public QuestionEvent(Question question, ZonedDateTime createdAt, CopyState copyState) {
         this.question = question;
         this.createdAt = createdAt;
-        this.status = status;
+        this.copyState = copyState;
     }
 
     public Question getQuestion() {
@@ -25,7 +25,7 @@ public abstract class QuestionEvent implements DomainEvent<Question> {
         return createdAt;
     }
 
-    public QuestionResponseStatus getStatus() {
-        return status;
+    public CopyState getCopyState() {
+        return copyState;
     }
 }
