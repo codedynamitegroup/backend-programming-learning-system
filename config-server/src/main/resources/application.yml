@@ -13,10 +13,7 @@ spring:
     config:
       server:
         git:
-#          Use this uri for local repository
-          uri: file://Users/khanhnguyen/Khanh/School/HCMUS/DATN/Github/6bros/backend-programming-learning-system/config-server-repository
-#          Use this uri for remote repository
-#          uri: https://github.com/6BrosT/config-server-repository.git
+          uri: https://github.com/6BrosT/config-server-repository.git
           skip-ssl-validation: true
           default-label: main
           clone-on-start: true
