@@ -6,6 +6,9 @@ logging:
     com.backend.programming.learning.system: DEBUG
 
 core-service:
+  code-question-update-response-from-core-service-topic-name: code-question-update-response-from-core-service
+  code-question-update-request-to-core-service-topic-name: code-question-update-request-to-core-service
+
   question-created-request-topic-name: core-question-create-request
   question-deleted-request-topic-name: core-question-delete-request
   question-updated-request-topic-name: core-question-update-request
@@ -13,12 +16,6 @@ core-service:
   question-response-topic-name: core-question-response
 
   user-request-topic-name: user-request
-  user-create-request-topic-name: user-create-request
-  user-update-request-topic-name: user-update-request
-  user-delete-request-topic-name: user-delete-request
-  user-create-response-topic-name: user-create-response
-  user-update-response-topic-name: user-update-response
-  user-delete-response-topic-name: user-delete-response
   user-response-topic-name: user-response
 
   calendar-event-update-request-topic-name: calendar-event-update-request
@@ -91,10 +88,10 @@ kafka-consumer-config:
 
   core-service-calendar-event-consumer-group-id: core-service-calendar-event-topic-consumer
 
-  core-service-user-create-request-group-id: core-service-user-create-request-topic
-  core-service-user-update-request-group-id: core-service-user-update-request-topic
-  core-service-user-delete-request-group-id: core-service-user-delete-request-topic
-  customer-group-id: customer-topic-consumer
+  core-service-user-request-group-id: core-service-user-request-topic
+
+  code-question-update-consumer-group-id: code-question-update-topic-consumer
+
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
   specific-avro-reader: true
