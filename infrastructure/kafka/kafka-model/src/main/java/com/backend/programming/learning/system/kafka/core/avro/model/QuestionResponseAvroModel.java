@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class QuestionResponseAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 7664385219135079136L;
+  private static final long serialVersionUID = 1961108393110508458L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"QuestionResponseAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.core.avro.model\",\"fields\":[{\"name\":\"answers\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"java-class\":\"java.util.List\"}},{\"name\":\"createdBy\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"defaultMark\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\",\"java-class\":\"java.math.BigDecimal\"}},{\"name\":\"difficulty\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"generalFeedback\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"organizationId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"qType\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"questionText\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"updatedBy\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"questionResponseStatus\",\"type\":{\"type\":\"enum\",\"name\":\"QuestionResponseStatus\",\"symbols\":[\"CREATED\",\"CREATING\",\"UPDATING\",\"DELETING\",\"CREATE_FAILED\",\"UPDATED\",\"UPDATE_FAILED\",\"DELETED\",\"DELETE_FAILED\"]}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"QuestionResponseAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.core.avro.model\",\"fields\":[{\"name\":\"answers\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"java-class\":\"java.util.List\"}},{\"name\":\"createdBy\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"defaultMark\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\",\"java-class\":\"java.math.BigDecimal\"}},{\"name\":\"difficulty\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"generalFeedback\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"organizationId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"qType\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"questionText\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"updatedBy\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"CREATE_PROPAGATING\",\"UPDATE_PROPAGATING\",\"DELETE_PROPAGATING\",\"CREATE_ROLLBACKING\",\"UPDATE_ROLLBACKING\",\"DELETE_ROLLBACKING\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -85,7 +85,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
   private java.lang.String questionText;
   private java.lang.String sagaId;
   private java.lang.String updatedBy;
-  private com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseStatus questionResponseStatus;
+  private com.backend.programming.learning.system.kafka.core.avro.model.CopyState copyState;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -108,9 +108,9 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
    * @param questionText The new value for questionText
    * @param sagaId The new value for sagaId
    * @param updatedBy The new value for updatedBy
-   * @param questionResponseStatus The new value for questionResponseStatus
+   * @param copyState The new value for copyState
    */
-  public QuestionResponseAvroModel(java.util.List<java.lang.String> answers, java.lang.String createdBy, java.math.BigDecimal defaultMark, java.lang.String difficulty, java.lang.String generalFeedback, java.lang.String id, java.lang.String name, java.lang.String organizationId, java.lang.String qType, java.lang.String questionText, java.lang.String sagaId, java.lang.String updatedBy, com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseStatus questionResponseStatus) {
+  public QuestionResponseAvroModel(java.util.List<java.lang.String> answers, java.lang.String createdBy, java.math.BigDecimal defaultMark, java.lang.String difficulty, java.lang.String generalFeedback, java.lang.String id, java.lang.String name, java.lang.String organizationId, java.lang.String qType, java.lang.String questionText, java.lang.String sagaId, java.lang.String updatedBy, com.backend.programming.learning.system.kafka.core.avro.model.CopyState copyState) {
     this.answers = answers;
     this.createdBy = createdBy;
     this.defaultMark = defaultMark;
@@ -123,7 +123,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
     this.questionText = questionText;
     this.sagaId = sagaId;
     this.updatedBy = updatedBy;
-    this.questionResponseStatus = questionResponseStatus;
+    this.copyState = copyState;
   }
 
   @Override
@@ -148,7 +148,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
     case 9: return questionText;
     case 10: return sagaId;
     case 11: return updatedBy;
-    case 12: return questionResponseStatus;
+    case 12: return copyState;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -170,7 +170,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
     case 9: questionText = value$ != null ? value$.toString() : null; break;
     case 10: sagaId = value$ != null ? value$.toString() : null; break;
     case 11: updatedBy = value$ != null ? value$.toString() : null; break;
-    case 12: questionResponseStatus = (com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseStatus)value$; break;
+    case 12: copyState = (com.backend.programming.learning.system.kafka.core.avro.model.CopyState)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -380,20 +380,20 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
   }
 
   /**
-   * Gets the value of the 'questionResponseStatus' field.
-   * @return The value of the 'questionResponseStatus' field.
+   * Gets the value of the 'copyState' field.
+   * @return The value of the 'copyState' field.
    */
-  public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseStatus getQuestionResponseStatus() {
-    return questionResponseStatus;
+  public com.backend.programming.learning.system.kafka.core.avro.model.CopyState getCopyState() {
+    return copyState;
   }
 
 
   /**
-   * Sets the value of the 'questionResponseStatus' field.
+   * Sets the value of the 'copyState' field.
    * @param value the value to set.
    */
-  public void setQuestionResponseStatus(com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseStatus value) {
-    this.questionResponseStatus = value;
+  public void setCopyState(com.backend.programming.learning.system.kafka.core.avro.model.CopyState value) {
+    this.copyState = value;
   }
 
   /**
@@ -449,7 +449,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
     private java.lang.String questionText;
     private java.lang.String sagaId;
     private java.lang.String updatedBy;
-    private com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseStatus questionResponseStatus;
+    private com.backend.programming.learning.system.kafka.core.avro.model.CopyState copyState;
 
     /** Creates a new Builder */
     private Builder() {
@@ -510,8 +510,8 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
         this.updatedBy = data().deepCopy(fields()[11].schema(), other.updatedBy);
         fieldSetFlags()[11] = other.fieldSetFlags()[11];
       }
-      if (isValidValue(fields()[12], other.questionResponseStatus)) {
-        this.questionResponseStatus = data().deepCopy(fields()[12].schema(), other.questionResponseStatus);
+      if (isValidValue(fields()[12], other.copyState)) {
+        this.copyState = data().deepCopy(fields()[12].schema(), other.copyState);
         fieldSetFlags()[12] = other.fieldSetFlags()[12];
       }
     }
@@ -570,8 +570,8 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
         this.updatedBy = data().deepCopy(fields()[11].schema(), other.updatedBy);
         fieldSetFlags()[11] = true;
       }
-      if (isValidValue(fields()[12], other.questionResponseStatus)) {
-        this.questionResponseStatus = data().deepCopy(fields()[12].schema(), other.questionResponseStatus);
+      if (isValidValue(fields()[12], other.copyState)) {
+        this.copyState = data().deepCopy(fields()[12].schema(), other.copyState);
         fieldSetFlags()[12] = true;
       }
     }
@@ -1057,41 +1057,41 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
     }
 
     /**
-      * Gets the value of the 'questionResponseStatus' field.
+      * Gets the value of the 'copyState' field.
       * @return The value.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseStatus getQuestionResponseStatus() {
-      return questionResponseStatus;
+    public com.backend.programming.learning.system.kafka.core.avro.model.CopyState getCopyState() {
+      return copyState;
     }
 
 
     /**
-      * Sets the value of the 'questionResponseStatus' field.
-      * @param value The value of 'questionResponseStatus'.
+      * Sets the value of the 'copyState' field.
+      * @param value The value of 'copyState'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder setQuestionResponseStatus(com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseStatus value) {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder setCopyState(com.backend.programming.learning.system.kafka.core.avro.model.CopyState value) {
       validate(fields()[12], value);
-      this.questionResponseStatus = value;
+      this.copyState = value;
       fieldSetFlags()[12] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'questionResponseStatus' field has been set.
-      * @return True if the 'questionResponseStatus' field has been set, false otherwise.
+      * Checks whether the 'copyState' field has been set.
+      * @return True if the 'copyState' field has been set, false otherwise.
       */
-    public boolean hasQuestionResponseStatus() {
+    public boolean hasCopyState() {
       return fieldSetFlags()[12];
     }
 
 
     /**
-      * Clears the value of the 'questionResponseStatus' field.
+      * Clears the value of the 'copyState' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder clearQuestionResponseStatus() {
-      questionResponseStatus = null;
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder clearCopyState() {
+      copyState = null;
       fieldSetFlags()[12] = false;
       return this;
     }
@@ -1113,7 +1113,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
         record.questionText = fieldSetFlags()[9] ? this.questionText : (java.lang.String) defaultValue(fields()[9]);
         record.sagaId = fieldSetFlags()[10] ? this.sagaId : (java.lang.String) defaultValue(fields()[10]);
         record.updatedBy = fieldSetFlags()[11] ? this.updatedBy : (java.lang.String) defaultValue(fields()[11]);
-        record.questionResponseStatus = fieldSetFlags()[12] ? this.questionResponseStatus : (com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseStatus) defaultValue(fields()[12]);
+        record.copyState = fieldSetFlags()[12] ? this.copyState : (com.backend.programming.learning.system.kafka.core.avro.model.CopyState) defaultValue(fields()[12]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -1181,7 +1181,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
 
     out.writeString(this.updatedBy);
 
-    out.writeEnum(this.questionResponseStatus.ordinal());
+    out.writeEnum(this.copyState.ordinal());
 
   }
 
@@ -1227,7 +1227,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
 
       this.updatedBy = in.readString();
 
-      this.questionResponseStatus = com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseStatus.values()[in.readEnum()];
+      this.copyState = com.backend.programming.learning.system.kafka.core.avro.model.CopyState.values()[in.readEnum()];
 
     } else {
       for (int i = 0; i < 13; i++) {
@@ -1294,7 +1294,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
           break;
 
         case 12:
-          this.questionResponseStatus = com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseStatus.values()[in.readEnum()];
+          this.copyState = com.backend.programming.learning.system.kafka.core.avro.model.CopyState.values()[in.readEnum()];
           break;
 
         default:

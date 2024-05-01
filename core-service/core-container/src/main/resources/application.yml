@@ -9,10 +9,7 @@ core-service:
   code-question-update-response-from-core-service-topic-name: code-question-update-response-from-core-service
   code-question-update-request-to-core-service-topic-name: code-question-update-request-to-core-service
 
-  question-created-request-topic-name: core-question-create-request
-  question-deleted-request-topic-name: core-question-delete-request
-  question-updated-request-topic-name: core-question-update-request
-
+  question-request-topic-name: core-question-request
   question-response-topic-name: core-question-response
 
   user-request-topic-name: user-request

@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.core.service.dataaccess.question
 import com.backend.programming.learning.system.core.service.dataaccess.chapter_question.entity.ChapterQuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.organization.entity.OrganizationEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
 import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import javax.persistence.*;
@@ -37,6 +38,9 @@ public class QuestionEntity {
     private String questionText;
     private String generalFeedback;
     private BigDecimal defaultMark;
+
+    @Enumerated(EnumType.STRING)
+    private CopyState copyState;
 
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;

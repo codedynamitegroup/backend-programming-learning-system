@@ -53,7 +53,8 @@ public class QuestionDataAccessMapper {
             builder.updatedAt(question.getUpdatedAt());
         if(question.getAnswers() != null)
             builder.answerOfQuestions(answerOfQuestionDataAccessMapper.answerOfQuestionListToAnswerOfQuestionEntityList(question.getAnswers()));
-
+        if (question.getCopyState() != null)
+            builder.copyState(question.getCopyState());
         return builder.build();
     }
 
@@ -74,6 +75,7 @@ public class QuestionDataAccessMapper {
                 .createdAt(questionEntity.getCreatedAt())
                 .updatedAt(questionEntity.getUpdatedAt())
                 .answers(answerOfQuestionDataAccessMapper.answerOfQuestionEntityListToAnswerOfQuestionList(questionEntity.getAnswerOfQuestions()))
+                .copyState(questionEntity.getCopyState())
                 .build();
     }
 
@@ -101,6 +103,8 @@ public class QuestionDataAccessMapper {
         if (question.getAnswers() != null)
             questionEntity.setAnswerOfQuestions(answerOfQuestionDataAccessMapper
                     .setAnswerOfQuestionEntityList(questionEntity.getAnswerOfQuestions(), question.getAnswers()));
+        if (question.getCopyState() != null)
+            questionEntity.setCopyState(question.getCopyState());
 
         return questionEntity;
     }

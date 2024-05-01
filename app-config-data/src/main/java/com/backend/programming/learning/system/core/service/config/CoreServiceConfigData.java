@@ -8,9 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "core-service")
 public class CoreServiceConfigData {
-    private String questionCreatedRequestTopicName;
-    private String questionDeletedRequestTopicName;
-    private String questionUpdatedRequestTopicName;
+    private String questionRequestTopicName;
     private String questionResponseTopicName;
 
     private String userRequestTopicName;

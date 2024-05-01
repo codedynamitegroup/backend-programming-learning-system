@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.dto.method.message;
 
-import com.backend.programming.learning.system.domain.valueobject.QuestionResponseStatus;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,5 +24,5 @@ public class QuestionResponse {
     private BigDecimal defaultMark;
     private String qType;
     private List<String> answers;
-    private QuestionResponseStatus questionResponseStatus;
+    private CopyState copyState;
 }

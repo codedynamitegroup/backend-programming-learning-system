@@ -9,12 +9,16 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.up
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
+import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
+import com.backend.programming.learning.system.core.service.domain.outbox.model.question.QuestionEventAnswer;
+import com.backend.programming.learning.system.core.service.domain.outbox.model.question.QuestionEventPayload;
 import com.backend.programming.learning.system.core.service.domain.valueobject.AnswerId;
 import com.backend.programming.learning.system.domain.valueobject.*;
 import org.springframework.stereotype.Component;
 
 import java.time.ZoneId;
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -115,12 +119,6 @@ public class QuestionDataMapper {
         if (updateQuestionEntity == null) return null;
 
         if (updateQuestionEntity.getAnswers() != null) {
-//            answers = updateQuestionEntity.getAnswers()
-//                    .stream()
-//                    .map(answer -> answerOfQuestionUpdateEntityToAnswerOfQuestion(answer, new QuestionId(
-//                            updateQuestionEntity.getQuestionId())))
-//                    .toList();
-
             answers = updateQuestionEntity.getAnswers()
                     .stream()
                     .map(answer -> answerOfQuestionUpdateEntityToAnswerOfQuestion(answer, new QuestionId(UUID.randomUUID())))
@@ -162,5 +160,80 @@ public class QuestionDataMapper {
                 .qtypeId(questionUpdatedEvent.getQtypeID())
                 .message(qtypeCodeQuestionUpdatedSuccessfully)
                 .build();
+    }
+
+    public QuestionEventPayload questionDeletedEventToQuestionEventPayload(QuestionDeletedEvent questionDeletedEvent) {
+        return QuestionEventPayload.builder()
+                .id(questionDeletedEvent.getQuestion().getId().getValue().toString())
+                .sagaId(questionDeletedEvent.getQtypeID().toString())
+                .organizationId(questionDeletedEvent.getQuestion().getOrganization().getId().getValue().toString())
+                .createdBy(questionDeletedEvent.getQuestion().getCreatedBy().getId().getValue().toString())
+                .updatedBy(questionDeletedEvent.getQuestion().getUpdatedBy().getId().getValue().toString())
+                .difficulty(questionDeletedEvent.getQuestion().getDifficulty().name())
+                .name(questionDeletedEvent.getQuestion().getName())
+                .questionText(questionDeletedEvent.getQuestion().getQuestionText())
+                .generalFeedback(questionDeletedEvent.getQuestion().getGeneralFeedback())
+                .defaultMark(BigDecimal.valueOf(questionDeletedEvent.getQuestion().getDefaultMark()))
+                .qType(questionDeletedEvent.getQuestion().getqtype().name())
+                .answers(answerOfQuestionListToQuestionEventAnswerList(questionDeletedEvent.getQuestion().getAnswers()))
+                .copyState(CopyState.DELETING)
+                .createdAt(questionDeletedEvent.getQuestion().getCreatedAt())
+                .updatedAt(questionDeletedEvent.getQuestion().getUpdatedAt())
+                .build();
+    }
+
+    public QuestionEventPayload questionCreatedEventToQuestionEventPayload(QuestionCreatedEvent questionCreatedEvent) {
+        return QuestionEventPayload.builder()
+                .id(questionCreatedEvent.getQuestion().getId().getValue().toString())
+                .sagaId(questionCreatedEvent.getQtypeID().toString())
+                .organizationId(questionCreatedEvent.getQuestion().getOrganization().getId().getValue().toString())
+                .createdBy(questionCreatedEvent.getQuestion().getCreatedBy().getId().getValue().toString())
+                .updatedBy(questionCreatedEvent.getQuestion().getUpdatedBy().getId().getValue().toString())
+                .difficulty(questionCreatedEvent.getQuestion().getDifficulty().name())
+                .name(questionCreatedEvent.getQuestion().getName())
+                .questionText(questionCreatedEvent.getQuestion().getQuestionText())
+                .generalFeedback(questionCreatedEvent.getQuestion().getGeneralFeedback())
+                .defaultMark(BigDecimal.valueOf(questionCreatedEvent.getQuestion().getDefaultMark()))
+                .qType(questionCreatedEvent.getQuestion().getqtype().name())
+                .answers(answerOfQuestionListToQuestionEventAnswerList(questionCreatedEvent.getQuestion().getAnswers()))
+                .copyState(CopyState.CREATING)
+                .createdAt(questionCreatedEvent.getQuestion().getCreatedAt())
+                .updatedAt(questionCreatedEvent.getQuestion().getUpdatedAt())
+                .build();
+   }
+
+    public QuestionEventPayload questionUpdatedEventToQuestionEventPayload(QuestionUpdatedEvent questionUpdatedEvent) {
+          return QuestionEventPayload.builder()
+                 .id(questionUpdatedEvent.getQuestion().getId().getValue().toString())
+                 .sagaId(questionUpdatedEvent.getQtypeID().toString())
+                 .organizationId(questionUpdatedEvent.getQuestion().getOrganization().getId().getValue().toString())
+                 .createdBy(questionUpdatedEvent.getQuestion().getCreatedBy().getId().getValue().toString())
+                 .updatedBy(questionUpdatedEvent.getQuestion().getUpdatedBy().getId().getValue().toString())
+                 .difficulty(questionUpdatedEvent.getQuestion().getDifficulty().name())
+                 .name(questionUpdatedEvent.getQuestion().getName())
+                 .questionText(questionUpdatedEvent.getQuestion().getQuestionText())
+                 .generalFeedback(questionUpdatedEvent.getQuestion().getGeneralFeedback())
+                 .defaultMark(BigDecimal.valueOf(questionUpdatedEvent.getQuestion().getDefaultMark()))
+                 .qType(questionUpdatedEvent.getQuestion().getqtype().name())
+                 .answers(answerOfQuestionListToQuestionEventAnswerList(questionUpdatedEvent.getQuestion().getAnswers()))
+                 .copyState(CopyState.UPDATING)
+                 .createdAt(questionUpdatedEvent.getQuestion().getCreatedAt())
+                 .updatedAt(questionUpdatedEvent.getQuestion().getUpdatedAt())
+                 .build();
+    }
+
+    private QuestionEventAnswer answerOfQuestionToQuestionEventAnswer(AnswerOfQuestion answerOfQuestion) {
+        return QuestionEventAnswer.builder()
+                .id(answerOfQuestion.getId().getValue().toString())
+                .answer(answerOfQuestion.getAnswer())
+                .fraction(answerOfQuestion.getFraction())
+                .feedback(answerOfQuestion.getFeedback())
+                .build();
+    }
+
+    private List<QuestionEventAnswer> answerOfQuestionListToQuestionEventAnswerList(List<AnswerOfQuestion> answerOfQuestions) {
+        return List.of(answerOfQuestions.stream()
+                .map(this::answerOfQuestionToQuestionEventAnswer)
+                .toArray(QuestionEventAnswer[]::new));
     }
 }

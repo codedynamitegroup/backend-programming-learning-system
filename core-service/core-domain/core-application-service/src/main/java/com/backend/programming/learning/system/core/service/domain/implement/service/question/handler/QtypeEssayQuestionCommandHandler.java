@@ -10,9 +10,10 @@ import com.backend.programming.learning.system.core.service.domain.event.questio
 import com.backend.programming.learning.system.core.service.domain.implement.service.question.method.create.QtypeEssayQuestionCreateHelper;
 import com.backend.programming.learning.system.core.service.domain.implement.service.question.method.query.QtypeEssayQuestionQueryHelper;
 import com.backend.programming.learning.system.core.service.domain.implement.service.question.method.update.QtypeEssayQuestionUpdateHelper;
+import com.backend.programming.learning.system.core.service.domain.implement.service.question.saga.QuestionSagaHelper;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
-import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.question.QuestionCreatedMessagePublisher;
-import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.question.QuestionUpdatedMessagePublisher;
+import com.backend.programming.learning.system.core.service.domain.outbox.scheduler.question.QuestionOutboxHelper;
+import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -26,8 +27,8 @@ public class QtypeEssayQuestionCommandHandler {
     private final QtypeEssayQuestionQueryHelper qtypeEssayQuestionQueryHelper;
     private final QtypeEssayQuestionUpdateHelper qtypeEssayQuestionUpdateHelper;
 
-    private final QuestionUpdatedMessagePublisher questionUpdatedMessagePublisher;
-    private final QuestionCreatedMessagePublisher questionCreatedMessagePublisher;
+    private final QuestionOutboxHelper questionOutboxHelper;
+    private final QuestionSagaHelper questionSagaHelper;
 
     private final QuestionDataMapper questionDataMapper;
 
@@ -35,21 +36,25 @@ public class QtypeEssayQuestionCommandHandler {
     public QtypeEssayQuestionCommandHandler(QtypeEssayQuestionCreateHelper qtypeEssayQuestionCreateHelper,
                                             QtypeEssayQuestionQueryHelper qtypeEssayQuestionQueryHelper,
                                             QtypeEssayQuestionUpdateHelper qtypeEssayQuestionUpdateHelper,
-                                            QuestionUpdatedMessagePublisher questionUpdatedMessagePublisher,
-                                            QuestionCreatedMessagePublisher questionCreatedMessagePublisher,
+                                            QuestionOutboxHelper questionOutboxHelper,
+                                            QuestionSagaHelper questionSagaHelper,
                                             QuestionDataMapper questionDataMapper) {
         this.qtypeEssayQuestionCreateHelper = qtypeEssayQuestionCreateHelper;
         this.qtypeEssayQuestionQueryHelper = qtypeEssayQuestionQueryHelper;
         this.qtypeEssayQuestionUpdateHelper = qtypeEssayQuestionUpdateHelper;
-        this.questionUpdatedMessagePublisher = questionUpdatedMessagePublisher;
-        this.questionCreatedMessagePublisher = questionCreatedMessagePublisher;
+        this.questionOutboxHelper = questionOutboxHelper;
+        this.questionSagaHelper = questionSagaHelper;
         this.questionDataMapper = questionDataMapper;
     }
 
     public CreateQuestionResponse createQtypeEssayQuestion(CreateQtypeEssayQuestionCommand createQtypeEssayQuestionCommand) {
         QuestionCreatedEvent questionCreatedEvent = qtypeEssayQuestionCreateHelper.persistQtypeEssayQuestion(createQtypeEssayQuestionCommand);
 
-        questionCreatedMessagePublisher.publish(questionCreatedEvent);
+        questionOutboxHelper.saveNewQuestionOutboxMessage(questionDataMapper.questionCreatedEventToQuestionEventPayload(questionCreatedEvent),
+                questionCreatedEvent.getQuestion().getCopyState(),
+                OutboxStatus.STARTED,
+                questionSagaHelper.questionStatusToSagaStatus(questionCreatedEvent.getQuestion().getCopyState()),
+                UUID.randomUUID());
 
         return questionDataMapper.questionCreatedEventToCreateQuestionResponse(questionCreatedEvent, "Qtype Essay Question created successfully");
     }
@@ -65,7 +70,11 @@ public class QtypeEssayQuestionCommandHandler {
     public UpdateQuestionResponse updateQtypeEssayQuestion(UpdateQtypeEssayQuestionCommand updateQtypeEssayQuestionCommand) {
         QuestionUpdatedEvent questionUpdatedEvent = qtypeEssayQuestionUpdateHelper.updateQtypeEssayQuestion(updateQtypeEssayQuestionCommand);
 
-        questionUpdatedMessagePublisher.publish(questionUpdatedEvent);
+        questionOutboxHelper.saveNewQuestionOutboxMessage(questionDataMapper.questionUpdatedEventToQuestionEventPayload(questionUpdatedEvent),
+                questionUpdatedEvent.getQuestion().getCopyState(),
+                OutboxStatus.STARTED,
+                questionSagaHelper.questionStatusToSagaStatus(questionUpdatedEvent.getQuestion().getCopyState()),
+                UUID.randomUUID());
 
         return questionDataMapper.questionUpdatedEventToUpdateQuestionRespond(questionUpdatedEvent, "Qtype Essay Question updated successfully");
     }

@@ -20,12 +20,14 @@ public class Question extends AggregateRoot<QuestionId> {
     private final QuestionType qtype;
     private List<String> failureMessages;
     private List<AnswerOfQuestion> answers;
+    private CopyState copyState;
 
     private final ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
     private Question(Builder builder) {
         super.setId(builder.questionId);
+        copyState = builder.copyState;
         organization = builder.organization;
         difficulty = builder.difficulty;
         name = builder.name;
@@ -64,6 +66,14 @@ public class Question extends AggregateRoot<QuestionId> {
 
     public List<AnswerOfQuestion> getAnswers() {
         return answers;
+    }
+
+    public CopyState getCopyState() {
+        return copyState;
+    }
+
+    public void setCopyState(CopyState copyState) {
+        this.copyState = copyState;
     }
 
     public Organization getOrganization() {
@@ -129,8 +139,14 @@ public class Question extends AggregateRoot<QuestionId> {
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
         private List<AnswerOfQuestion> answers;
+        private CopyState copyState;
 
         private Builder() {
+        }
+
+        public Builder copyState(CopyState val) {
+            copyState = val;
+            return this;
         }
 
         public Builder answers(List<AnswerOfQuestion> val) {

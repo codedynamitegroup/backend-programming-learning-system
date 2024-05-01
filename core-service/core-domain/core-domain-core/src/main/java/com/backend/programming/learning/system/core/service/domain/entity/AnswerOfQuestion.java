@@ -8,9 +8,9 @@ import java.util.UUID;
 
 public class AnswerOfQuestion extends BaseEntity<AnswerId> {
     private final QuestionId questionId;
-    private final String feedback;
-    private final String answer;
-    private final Float fraction;
+    private String feedback;
+    private String answer;
+    private Float fraction;
 
     private AnswerOfQuestion(Builder builder) {
         super.setId(builder.answerId);

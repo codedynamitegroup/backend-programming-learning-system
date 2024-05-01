@@ -12,9 +12,7 @@ services:
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic code-question-update-request-to-core-service --delete --if-exists
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic code-question-update-response-from-core-service --delete --if-exists
       
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic core-question-create-request --delete --if-exists
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic core-question-update-request --delete --if-exists
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic core-question-delete-request --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic core-question-request --delete --if-exists
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic core-question-response --delete --if-exists
       
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic user-request --delete --if-exists
@@ -38,9 +36,7 @@ services:
       kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic code-question-update-request-to-core-service --replication-factor 3 --partitions 3
       kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic code-question-update-response-from-core-service --replication-factor 3 --partitions 3
       
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic core-question-create-request --replication-factor 3 --partitions 3
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic core-question-update-request --replication-factor 3 --partitions 3
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic core-question-delete-request --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic core-question-request --replication-factor 3 --partitions 3
       kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic core-question-response --replication-factor 3 --partitions 3
 
       kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic user-request --replication-factor 3 --partitions 3

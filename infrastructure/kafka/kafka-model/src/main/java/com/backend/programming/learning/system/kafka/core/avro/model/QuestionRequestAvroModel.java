@@ -13,26 +13,26 @@ import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
-public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 1674596224641341967L;
+public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
+  private static final long serialVersionUID = -997845868370780224L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"QuestionCreateRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.core.avro.model\",\"fields\":[{\"name\":\"answers\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"java-class\":\"java.util.List\"}},{\"name\":\"createdBy\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"defaultMark\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\",\"java-class\":\"java.math.BigDecimal\"}},{\"name\":\"difficulty\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"generalFeedback\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"organizationId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"qType\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"questionText\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"updatedBy\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"QuestionRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.core.avro.model\",\"fields\":[{\"name\":\"answers\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"java-class\":\"java.util.List\"}},{\"name\":\"createdBy\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"defaultMark\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\",\"java-class\":\"java.math.BigDecimal\"}},{\"name\":\"difficulty\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"generalFeedback\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"organizationId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"qType\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"questionText\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"updatedBy\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"CREATE_PROPAGATING\",\"UPDATE_PROPAGATING\",\"DELETE_PROPAGATING\",\"CREATE_ROLLBACKING\",\"UPDATE_ROLLBACKING\",\"DELETE_ROLLBACKING\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
 
-  private static final BinaryMessageEncoder<QuestionCreateRequestAvroModel> ENCODER =
+  private static final BinaryMessageEncoder<QuestionRequestAvroModel> ENCODER =
       new BinaryMessageEncoder<>(MODEL$, SCHEMA$);
 
-  private static final BinaryMessageDecoder<QuestionCreateRequestAvroModel> DECODER =
+  private static final BinaryMessageDecoder<QuestionRequestAvroModel> DECODER =
       new BinaryMessageDecoder<>(MODEL$, SCHEMA$);
 
   /**
    * Return the BinaryMessageEncoder instance used by this class.
    * @return the message encoder used by this class
    */
-  public static BinaryMessageEncoder<QuestionCreateRequestAvroModel> getEncoder() {
+  public static BinaryMessageEncoder<QuestionRequestAvroModel> getEncoder() {
     return ENCODER;
   }
 
@@ -40,7 +40,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
    * Return the BinaryMessageDecoder instance used by this class.
    * @return the message decoder used by this class
    */
-  public static BinaryMessageDecoder<QuestionCreateRequestAvroModel> getDecoder() {
+  public static BinaryMessageDecoder<QuestionRequestAvroModel> getDecoder() {
     return DECODER;
   }
 
@@ -49,12 +49,12 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
    * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
    * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
    */
-  public static BinaryMessageDecoder<QuestionCreateRequestAvroModel> createDecoder(SchemaStore resolver) {
+  public static BinaryMessageDecoder<QuestionRequestAvroModel> createDecoder(SchemaStore resolver) {
     return new BinaryMessageDecoder<>(MODEL$, SCHEMA$, resolver);
   }
 
   /**
-   * Serializes this QuestionCreateRequestAvroModel to a ByteBuffer.
+   * Serializes this QuestionRequestAvroModel to a ByteBuffer.
    * @return a buffer holding the serialized data for this instance
    * @throws java.io.IOException if this instance could not be serialized
    */
@@ -63,12 +63,12 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
   }
 
   /**
-   * Deserializes a QuestionCreateRequestAvroModel from a ByteBuffer.
+   * Deserializes a QuestionRequestAvroModel from a ByteBuffer.
    * @param b a byte buffer holding serialized data for an instance of this class
-   * @return a QuestionCreateRequestAvroModel instance decoded from the given buffer
+   * @return a QuestionRequestAvroModel instance decoded from the given buffer
    * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
    */
-  public static QuestionCreateRequestAvroModel fromByteBuffer(
+  public static QuestionRequestAvroModel fromByteBuffer(
       java.nio.ByteBuffer b) throws java.io.IOException {
     return DECODER.decode(b);
   }
@@ -85,13 +85,14 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
   private java.lang.String questionText;
   private java.lang.String sagaId;
   private java.lang.String updatedBy;
+  private com.backend.programming.learning.system.kafka.core.avro.model.CopyState copyState;
 
   /**
    * Default constructor.  Note that this does not initialize fields
    * to their default values from the schema.  If that is desired then
    * one should use <code>newBuilder()</code>.
    */
-  public QuestionCreateRequestAvroModel() {}
+  public QuestionRequestAvroModel() {}
 
   /**
    * All-args constructor.
@@ -107,8 +108,9 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
    * @param questionText The new value for questionText
    * @param sagaId The new value for sagaId
    * @param updatedBy The new value for updatedBy
+   * @param copyState The new value for copyState
    */
-  public QuestionCreateRequestAvroModel(java.util.List<java.lang.String> answers, java.lang.String createdBy, java.math.BigDecimal defaultMark, java.lang.String difficulty, java.lang.String generalFeedback, java.lang.String id, java.lang.String name, java.lang.String organizationId, java.lang.String qType, java.lang.String questionText, java.lang.String sagaId, java.lang.String updatedBy) {
+  public QuestionRequestAvroModel(java.util.List<java.lang.String> answers, java.lang.String createdBy, java.math.BigDecimal defaultMark, java.lang.String difficulty, java.lang.String generalFeedback, java.lang.String id, java.lang.String name, java.lang.String organizationId, java.lang.String qType, java.lang.String questionText, java.lang.String sagaId, java.lang.String updatedBy, com.backend.programming.learning.system.kafka.core.avro.model.CopyState copyState) {
     this.answers = answers;
     this.createdBy = createdBy;
     this.defaultMark = defaultMark;
@@ -121,6 +123,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
     this.questionText = questionText;
     this.sagaId = sagaId;
     this.updatedBy = updatedBy;
+    this.copyState = copyState;
   }
 
   @Override
@@ -145,6 +148,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
     case 9: return questionText;
     case 10: return sagaId;
     case 11: return updatedBy;
+    case 12: return copyState;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -166,6 +170,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
     case 9: questionText = value$ != null ? value$.toString() : null; break;
     case 10: sagaId = value$ != null ? value$.toString() : null; break;
     case 11: updatedBy = value$ != null ? value$.toString() : null; break;
+    case 12: copyState = (com.backend.programming.learning.system.kafka.core.avro.model.CopyState)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -375,45 +380,62 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
   }
 
   /**
-   * Creates a new QuestionCreateRequestAvroModel RecordBuilder.
-   * @return A new QuestionCreateRequestAvroModel RecordBuilder
+   * Gets the value of the 'copyState' field.
+   * @return The value of the 'copyState' field.
    */
-  public static com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder newBuilder() {
-    return new com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder();
+  public com.backend.programming.learning.system.kafka.core.avro.model.CopyState getCopyState() {
+    return copyState;
+  }
+
+
+  /**
+   * Sets the value of the 'copyState' field.
+   * @param value the value to set.
+   */
+  public void setCopyState(com.backend.programming.learning.system.kafka.core.avro.model.CopyState value) {
+    this.copyState = value;
   }
 
   /**
-   * Creates a new QuestionCreateRequestAvroModel RecordBuilder by copying an existing Builder.
+   * Creates a new QuestionRequestAvroModel RecordBuilder.
+   * @return A new QuestionRequestAvroModel RecordBuilder
+   */
+  public static com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder newBuilder() {
+    return new com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder();
+  }
+
+  /**
+   * Creates a new QuestionRequestAvroModel RecordBuilder by copying an existing Builder.
    * @param other The existing builder to copy.
-   * @return A new QuestionCreateRequestAvroModel RecordBuilder
+   * @return A new QuestionRequestAvroModel RecordBuilder
    */
-  public static com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder newBuilder(com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder other) {
+  public static com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder newBuilder(com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder other) {
     if (other == null) {
-      return new com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder();
+      return new com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder();
     } else {
-      return new com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder(other);
+      return new com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder(other);
     }
   }
 
   /**
-   * Creates a new QuestionCreateRequestAvroModel RecordBuilder by copying an existing QuestionCreateRequestAvroModel instance.
+   * Creates a new QuestionRequestAvroModel RecordBuilder by copying an existing QuestionRequestAvroModel instance.
    * @param other The existing instance to copy.
-   * @return A new QuestionCreateRequestAvroModel RecordBuilder
+   * @return A new QuestionRequestAvroModel RecordBuilder
    */
-  public static com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder newBuilder(com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel other) {
+  public static com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder newBuilder(com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel other) {
     if (other == null) {
-      return new com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder();
+      return new com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder();
     } else {
-      return new com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder(other);
+      return new com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder(other);
     }
   }
 
   /**
-   * RecordBuilder for QuestionCreateRequestAvroModel instances.
+   * RecordBuilder for QuestionRequestAvroModel instances.
    */
   @org.apache.avro.specific.AvroGenerated
-  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<QuestionCreateRequestAvroModel>
-    implements org.apache.avro.data.RecordBuilder<QuestionCreateRequestAvroModel> {
+  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<QuestionRequestAvroModel>
+    implements org.apache.avro.data.RecordBuilder<QuestionRequestAvroModel> {
 
     private java.util.List<java.lang.String> answers;
     private java.lang.String createdBy;
@@ -427,6 +449,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
     private java.lang.String questionText;
     private java.lang.String sagaId;
     private java.lang.String updatedBy;
+    private com.backend.programming.learning.system.kafka.core.avro.model.CopyState copyState;
 
     /** Creates a new Builder */
     private Builder() {
@@ -437,7 +460,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder other) {
+    private Builder(com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.answers)) {
         this.answers = data().deepCopy(fields()[0].schema(), other.answers);
@@ -487,13 +510,17 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
         this.updatedBy = data().deepCopy(fields()[11].schema(), other.updatedBy);
         fieldSetFlags()[11] = other.fieldSetFlags()[11];
       }
+      if (isValidValue(fields()[12], other.copyState)) {
+        this.copyState = data().deepCopy(fields()[12].schema(), other.copyState);
+        fieldSetFlags()[12] = other.fieldSetFlags()[12];
+      }
     }
 
     /**
-     * Creates a Builder by copying an existing QuestionCreateRequestAvroModel instance
+     * Creates a Builder by copying an existing QuestionRequestAvroModel instance
      * @param other The existing instance to copy.
      */
-    private Builder(com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel other) {
+    private Builder(com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.answers)) {
         this.answers = data().deepCopy(fields()[0].schema(), other.answers);
@@ -543,6 +570,10 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
         this.updatedBy = data().deepCopy(fields()[11].schema(), other.updatedBy);
         fieldSetFlags()[11] = true;
       }
+      if (isValidValue(fields()[12], other.copyState)) {
+        this.copyState = data().deepCopy(fields()[12].schema(), other.copyState);
+        fieldSetFlags()[12] = true;
+      }
     }
 
     /**
@@ -559,7 +590,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
       * @param value The value of 'answers'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder setAnswers(java.util.List<java.lang.String> value) {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder setAnswers(java.util.List<java.lang.String> value) {
       validate(fields()[0], value);
       this.answers = value;
       fieldSetFlags()[0] = true;
@@ -579,7 +610,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
       * Clears the value of the 'answers' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder clearAnswers() {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder clearAnswers() {
       answers = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -599,7 +630,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
       * @param value The value of 'createdBy'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder setCreatedBy(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder setCreatedBy(java.lang.String value) {
       validate(fields()[1], value);
       this.createdBy = value;
       fieldSetFlags()[1] = true;
@@ -619,7 +650,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
       * Clears the value of the 'createdBy' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder clearCreatedBy() {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder clearCreatedBy() {
       createdBy = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -639,7 +670,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
       * @param value The value of 'defaultMark'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder setDefaultMark(java.math.BigDecimal value) {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder setDefaultMark(java.math.BigDecimal value) {
       validate(fields()[2], value);
       this.defaultMark = value;
       fieldSetFlags()[2] = true;
@@ -659,7 +690,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
       * Clears the value of the 'defaultMark' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder clearDefaultMark() {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder clearDefaultMark() {
       defaultMark = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -679,7 +710,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
       * @param value The value of 'difficulty'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder setDifficulty(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder setDifficulty(java.lang.String value) {
       validate(fields()[3], value);
       this.difficulty = value;
       fieldSetFlags()[3] = true;
@@ -699,7 +730,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
       * Clears the value of the 'difficulty' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder clearDifficulty() {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder clearDifficulty() {
       difficulty = null;
       fieldSetFlags()[3] = false;
       return this;
@@ -719,7 +750,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
       * @param value The value of 'generalFeedback'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder setGeneralFeedback(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder setGeneralFeedback(java.lang.String value) {
       validate(fields()[4], value);
       this.generalFeedback = value;
       fieldSetFlags()[4] = true;
@@ -739,7 +770,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
       * Clears the value of the 'generalFeedback' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder clearGeneralFeedback() {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder clearGeneralFeedback() {
       generalFeedback = null;
       fieldSetFlags()[4] = false;
       return this;
@@ -759,7 +790,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder setId(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder setId(java.lang.String value) {
       validate(fields()[5], value);
       this.id = value;
       fieldSetFlags()[5] = true;
@@ -779,7 +810,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder clearId() {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder clearId() {
       id = null;
       fieldSetFlags()[5] = false;
       return this;
@@ -799,7 +830,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
       * @param value The value of 'name'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder setName(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder setName(java.lang.String value) {
       validate(fields()[6], value);
       this.name = value;
       fieldSetFlags()[6] = true;
@@ -819,7 +850,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
       * Clears the value of the 'name' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder clearName() {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder clearName() {
       name = null;
       fieldSetFlags()[6] = false;
       return this;
@@ -839,7 +870,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
       * @param value The value of 'organizationId'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder setOrganizationId(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder setOrganizationId(java.lang.String value) {
       validate(fields()[7], value);
       this.organizationId = value;
       fieldSetFlags()[7] = true;
@@ -859,7 +890,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
       * Clears the value of the 'organizationId' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder clearOrganizationId() {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder clearOrganizationId() {
       organizationId = null;
       fieldSetFlags()[7] = false;
       return this;
@@ -879,7 +910,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
       * @param value The value of 'qType'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder setQType(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder setQType(java.lang.String value) {
       validate(fields()[8], value);
       this.qType = value;
       fieldSetFlags()[8] = true;
@@ -899,7 +930,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
       * Clears the value of the 'qType' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder clearQType() {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder clearQType() {
       qType = null;
       fieldSetFlags()[8] = false;
       return this;
@@ -919,7 +950,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
       * @param value The value of 'questionText'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder setQuestionText(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder setQuestionText(java.lang.String value) {
       validate(fields()[9], value);
       this.questionText = value;
       fieldSetFlags()[9] = true;
@@ -939,7 +970,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
       * Clears the value of the 'questionText' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder clearQuestionText() {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder clearQuestionText() {
       questionText = null;
       fieldSetFlags()[9] = false;
       return this;
@@ -959,7 +990,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
       * @param value The value of 'sagaId'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder setSagaId(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder setSagaId(java.lang.String value) {
       validate(fields()[10], value);
       this.sagaId = value;
       fieldSetFlags()[10] = true;
@@ -979,7 +1010,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
       * Clears the value of the 'sagaId' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder clearSagaId() {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder clearSagaId() {
       sagaId = null;
       fieldSetFlags()[10] = false;
       return this;
@@ -999,7 +1030,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
       * @param value The value of 'updatedBy'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder setUpdatedBy(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder setUpdatedBy(java.lang.String value) {
       validate(fields()[11], value);
       this.updatedBy = value;
       fieldSetFlags()[11] = true;
@@ -1019,17 +1050,57 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
       * Clears the value of the 'updatedBy' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel.Builder clearUpdatedBy() {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder clearUpdatedBy() {
       updatedBy = null;
       fieldSetFlags()[11] = false;
       return this;
     }
 
+    /**
+      * Gets the value of the 'copyState' field.
+      * @return The value.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.CopyState getCopyState() {
+      return copyState;
+    }
+
+
+    /**
+      * Sets the value of the 'copyState' field.
+      * @param value The value of 'copyState'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder setCopyState(com.backend.programming.learning.system.kafka.core.avro.model.CopyState value) {
+      validate(fields()[12], value);
+      this.copyState = value;
+      fieldSetFlags()[12] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'copyState' field has been set.
+      * @return True if the 'copyState' field has been set, false otherwise.
+      */
+    public boolean hasCopyState() {
+      return fieldSetFlags()[12];
+    }
+
+
+    /**
+      * Clears the value of the 'copyState' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder clearCopyState() {
+      copyState = null;
+      fieldSetFlags()[12] = false;
+      return this;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
-    public QuestionCreateRequestAvroModel build() {
+    public QuestionRequestAvroModel build() {
       try {
-        QuestionCreateRequestAvroModel record = new QuestionCreateRequestAvroModel();
+        QuestionRequestAvroModel record = new QuestionRequestAvroModel();
         record.answers = fieldSetFlags()[0] ? this.answers : (java.util.List<java.lang.String>) defaultValue(fields()[0]);
         record.createdBy = fieldSetFlags()[1] ? this.createdBy : (java.lang.String) defaultValue(fields()[1]);
         record.defaultMark = fieldSetFlags()[2] ? this.defaultMark : (java.math.BigDecimal) defaultValue(fields()[2]);
@@ -1042,6 +1113,7 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
         record.questionText = fieldSetFlags()[9] ? this.questionText : (java.lang.String) defaultValue(fields()[9]);
         record.sagaId = fieldSetFlags()[10] ? this.sagaId : (java.lang.String) defaultValue(fields()[10]);
         record.updatedBy = fieldSetFlags()[11] ? this.updatedBy : (java.lang.String) defaultValue(fields()[11]);
+        record.copyState = fieldSetFlags()[12] ? this.copyState : (com.backend.programming.learning.system.kafka.core.avro.model.CopyState) defaultValue(fields()[12]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -1052,8 +1124,8 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumWriter<QuestionCreateRequestAvroModel>
-    WRITER$ = (org.apache.avro.io.DatumWriter<QuestionCreateRequestAvroModel>)MODEL$.createDatumWriter(SCHEMA$);
+  private static final org.apache.avro.io.DatumWriter<QuestionRequestAvroModel>
+    WRITER$ = (org.apache.avro.io.DatumWriter<QuestionRequestAvroModel>)MODEL$.createDatumWriter(SCHEMA$);
 
   @Override public void writeExternal(java.io.ObjectOutput out)
     throws java.io.IOException {
@@ -1061,8 +1133,8 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumReader<QuestionCreateRequestAvroModel>
-    READER$ = (org.apache.avro.io.DatumReader<QuestionCreateRequestAvroModel>)MODEL$.createDatumReader(SCHEMA$);
+  private static final org.apache.avro.io.DatumReader<QuestionRequestAvroModel>
+    READER$ = (org.apache.avro.io.DatumReader<QuestionRequestAvroModel>)MODEL$.createDatumReader(SCHEMA$);
 
   @Override public void readExternal(java.io.ObjectInput in)
     throws java.io.IOException {
@@ -1109,6 +1181,8 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
 
     out.writeString(this.updatedBy);
 
+    out.writeEnum(this.copyState.ordinal());
+
   }
 
   @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
@@ -1153,8 +1227,10 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
 
       this.updatedBy = in.readString();
 
+      this.copyState = com.backend.programming.learning.system.kafka.core.avro.model.CopyState.values()[in.readEnum()];
+
     } else {
-      for (int i = 0; i < 12; i++) {
+      for (int i = 0; i < 13; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           long size0 = in.readArrayStart();
@@ -1215,6 +1291,10 @@ public class QuestionCreateRequestAvroModel extends org.apache.avro.specific.Spe
 
         case 11:
           this.updatedBy = in.readString();
+          break;
+
+        case 12:
+          this.copyState = com.backend.programming.learning.system.kafka.core.avro.model.CopyState.values()[in.readEnum()];
           break;
 
         default:

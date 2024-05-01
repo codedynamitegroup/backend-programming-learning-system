@@ -10,9 +10,10 @@ import com.backend.programming.learning.system.core.service.domain.event.questio
 import com.backend.programming.learning.system.core.service.domain.implement.service.question.method.create.QtypeMultichoiceQuestionCreateHelper;
 import com.backend.programming.learning.system.core.service.domain.implement.service.question.method.query.QtypeMultichoiceQuestionQueryHelper;
 import com.backend.programming.learning.system.core.service.domain.implement.service.question.method.update.QtypeMultichoiceQuestionUpdateHelper;
+import com.backend.programming.learning.system.core.service.domain.implement.service.question.saga.QuestionSagaHelper;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
-import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.question.QuestionCreatedMessagePublisher;
-import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.question.QuestionUpdatedMessagePublisher;
+import com.backend.programming.learning.system.core.service.domain.outbox.scheduler.question.QuestionOutboxHelper;
+import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -26,29 +27,33 @@ public class QtypeMultichoiceQuestionCommandHandler {
     private final QtypeMultichoiceQuestionQueryHelper qtypeMultichoiceQuestionQueryHelper;
     private final QtypeMultichoiceQuestionUpdateHelper qtypeMultichoiceQuestionUpdateHelper;
 
-    private final QuestionUpdatedMessagePublisher questionUpdatedMessagePublisher;
-    private final QuestionCreatedMessagePublisher questionCreatedMessagePublisher;
+    private final QuestionOutboxHelper questionOutboxHelper;
+    private final QuestionSagaHelper questionSagaHelper;
 
     private final QuestionDataMapper questionDataMapper;
 
     public QtypeMultichoiceQuestionCommandHandler(QtypeMultichoiceQuestionCreateHelper qtypeMultichoiceQuestionCreateHelper,
                                                   QtypeMultichoiceQuestionQueryHelper qtypeMultichoiceQuestionQueryHelper,
                                                   QtypeMultichoiceQuestionUpdateHelper qtypeMultichoiceQuestionUpdateHelper,
-                                                  QuestionUpdatedMessagePublisher questionUpdatedMessagePublisher,
-                                                  QuestionCreatedMessagePublisher questionCreatedMessagePublisher,
+                                                  QuestionOutboxHelper questionOutboxHelper,
+                                                  QuestionSagaHelper questionSagaHelper,
                                                   QuestionDataMapper questionDataMapper) {
         this.qtypeMultichoiceQuestionCreateHelper = qtypeMultichoiceQuestionCreateHelper;
         this.qtypeMultichoiceQuestionQueryHelper = qtypeMultichoiceQuestionQueryHelper;
         this.qtypeMultichoiceQuestionUpdateHelper = qtypeMultichoiceQuestionUpdateHelper;
-        this.questionUpdatedMessagePublisher = questionUpdatedMessagePublisher;
-        this.questionCreatedMessagePublisher = questionCreatedMessagePublisher;
+        this.questionOutboxHelper = questionOutboxHelper;
+        this.questionSagaHelper = questionSagaHelper;
         this.questionDataMapper = questionDataMapper;
     }
 
     public CreateQuestionResponse createQtypeMultichoiceQuestion(CreateQtypeMultichoiceQuestionCommand createQtypeMultichoiceQuestionCommand) {
         QuestionCreatedEvent questionCreatedEvent = qtypeMultichoiceQuestionCreateHelper.persistQtypeMultichoiceQuestion(createQtypeMultichoiceQuestionCommand);
 
-        questionCreatedMessagePublisher.publish(questionCreatedEvent);
+        questionOutboxHelper.saveNewQuestionOutboxMessage(questionDataMapper.questionCreatedEventToQuestionEventPayload(questionCreatedEvent),
+                questionCreatedEvent.getQuestion().getCopyState(),
+                OutboxStatus.STARTED,
+                questionSagaHelper.questionStatusToSagaStatus(questionCreatedEvent.getQuestion().getCopyState()),
+                UUID.randomUUID());
 
         return questionDataMapper.questionCreatedEventToCreateQuestionResponse(questionCreatedEvent, "Qtype Multichoice Question created successfully");
     }
@@ -64,7 +69,11 @@ public class QtypeMultichoiceQuestionCommandHandler {
     public UpdateQuestionResponse updateQtypeMultichoiceQuestion(UpdateQtypeMultichoiceQuestionCommand updateQtypeMultichoiceQuestionCommand) {
         QuestionUpdatedEvent questionUpdatedEvent = qtypeMultichoiceQuestionUpdateHelper.updateQtypeMultichoiceQuestionInDb(updateQtypeMultichoiceQuestionCommand);
 
-        questionUpdatedMessagePublisher.publish(questionUpdatedEvent);
+        questionOutboxHelper.saveNewQuestionOutboxMessage(questionDataMapper.questionUpdatedEventToQuestionEventPayload(questionUpdatedEvent),
+                questionUpdatedEvent.getQuestion().getCopyState(),
+                OutboxStatus.STARTED,
+                questionSagaHelper.questionStatusToSagaStatus(questionUpdatedEvent.getQuestion().getCopyState()),
+                UUID.randomUUID());
 
         return questionDataMapper.questionUpdatedEventToUpdateQuestionRespond(questionUpdatedEvent,
                 "Qtype Multichoice Question updated successfully");

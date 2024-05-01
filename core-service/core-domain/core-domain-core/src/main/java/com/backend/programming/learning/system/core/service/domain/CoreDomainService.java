@@ -26,6 +26,14 @@ public interface CoreDomainService {
     QuestionUpdatedEvent updateQtypeShortAnswerQuestion(Question question, QtypeShortAnswerQuestion qtypeShortAnswerQuestion);
     QuestionUpdatedEvent updateQtypeMultipleChoiceQuestion(Question question, QtypeMultiChoiceQuestion qtypeMultiChoiceQuestion);
 
+    void deleteQuestion(Question question);
+    void rollbackQuestion(Question question);
+    void rollbackQtypeCodeQuestion(QtypeCodeQuestion qtypeCodeQuestion);
+    void rollbackQtypeEssayQuestion(QtypeEssayQuestion qtypeEssayQuestion);
+    void rollbackQtypeShortAnswerQuestion(QtypeShortAnswerQuestion qtypeShortAnswerQuestion);
+    void rollbackQtypeMultipleChoiceQuestion(QtypeMultiChoiceQuestion qtypeMultiChoiceQuestion);
+    void rollbackAnswerOfQuestion(List<AnswerOfQuestion> answerOfQuestionList);
+
     //
     void createAnswerOfQuestion(AnswerOfQuestion answerOfQuestion);
     void createCertificateCourse(CertificateCourse certificateCourse);
@@ -45,5 +53,4 @@ public interface CoreDomainService {
     UserDeletedFailEvent deletedUserFail(User user, List<String> failureMessages);
 
     void updateContestUserCalendarEventState(ContestUser contestUser, String calendarEventId, UpdateState updateCalendarEventState);
-
 }

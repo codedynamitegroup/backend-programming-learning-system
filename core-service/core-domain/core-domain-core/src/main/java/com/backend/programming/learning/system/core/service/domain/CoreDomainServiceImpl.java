@@ -7,6 +7,8 @@ import com.backend.programming.learning.system.core.service.domain.event.questio
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.user.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.UpdateState;
+import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import lombok.extern.slf4j.Slf4j;
@@ -21,12 +23,16 @@ public class CoreDomainServiceImpl implements CoreDomainService {
     @Override
     public void createQuestion(Question question) {
         question.initializeQuestion();
+        question.setCopyState(CopyState.CREATING);
+
         log.info("Question initialized with id: {}", question.getId().getValue());
     }
 
     @Override
     public QuestionCreatedEvent createQtypeCodeQuestion(Question question, QtypeCodeQuestion qtypeCodeQuestion) {
         qtypeCodeQuestion.initQtypeCodeQuestion();
+        question.setCopyState(CopyState.CREATING);
+
         log.info("Qtype code question initiated with id: {}", qtypeCodeQuestion.getId().getValue());
         return new QuestionCreatedEvent(question, qtypeCodeQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
@@ -34,6 +40,8 @@ public class CoreDomainServiceImpl implements CoreDomainService {
     @Override
     public QuestionCreatedEvent createQtypeEssayQuestion(Question question, QtypeEssayQuestion qtypeEssayQuestion) {
         qtypeEssayQuestion.initQtypeEssayQuestion();
+        question.setCopyState(CopyState.CREATING);
+
         log.info("Qtype essay question initiated with id: {}", qtypeEssayQuestion.getId().getValue());
         return new QuestionCreatedEvent(question, qtypeEssayQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
@@ -41,6 +49,8 @@ public class CoreDomainServiceImpl implements CoreDomainService {
     @Override
     public QuestionCreatedEvent createQtypeShortAnswerQuestion(Question question, QtypeShortAnswerQuestion qtypeEssayQuestion) {
         qtypeEssayQuestion.initQtypeShortAnswerQuestion();
+        question.setCopyState(CopyState.CREATING);
+
         log.info("Qtype short answer question initiated with id: {}", qtypeEssayQuestion.getId().getValue());
         return new QuestionCreatedEvent(question, qtypeEssayQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
@@ -48,22 +58,27 @@ public class CoreDomainServiceImpl implements CoreDomainService {
     @Override
     public QuestionCreatedEvent createQtypeMultipleChoiceQuestion(Question question, QtypeMultiChoiceQuestion qtypeMultipleChoiceQuestion) {
         qtypeMultipleChoiceQuestion.initQtypeMultipleChoiceQuestion();
+        question.setCopyState(CopyState.CREATING);
+
         log.info("Qtype multiple choice question initiated with id: {}", qtypeMultipleChoiceQuestion.getId().getValue());
         return new QuestionCreatedEvent(question, qtypeMultipleChoiceQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
     public QuestionDeletedEvent deleteQuestion(Question question, UUID qtypeId) {
+        question.setCopyState(CopyState.DELETING);
         return new QuestionDeletedEvent(question, qtypeId, ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
     public QuestionUpdatedEvent updateQtypeCodeQuestion(Question question, QtypeCodeQuestion qtypeCodeQuestion) {
+        question.setCopyState(CopyState.UPDATING);
         return new QuestionUpdatedEvent(question, qtypeCodeQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
     public QuestionUpdatedEvent updateQtypeEssayQuestion(Question question, QtypeEssayQuestion qtypeEssayQuestion) {
+        question.setCopyState(CopyState.UPDATING);
         return new QuestionUpdatedEvent(question, qtypeEssayQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
@@ -71,6 +86,7 @@ public class CoreDomainServiceImpl implements CoreDomainService {
     public QuestionUpdatedEvent updateQtypeShortAnswerQuestion(
             Question question,
             QtypeShortAnswerQuestion qtypeShortAnswerQuestion) {
+        question.setCopyState(CopyState.UPDATING);
         return new QuestionUpdatedEvent(question, qtypeShortAnswerQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
@@ -78,7 +94,43 @@ public class CoreDomainServiceImpl implements CoreDomainService {
     public QuestionUpdatedEvent updateQtypeMultipleChoiceQuestion(
             Question question,
             QtypeMultiChoiceQuestion qtypeMultiChoiceQuestion) {
+        question.setCopyState(CopyState.UPDATING);
         return new QuestionUpdatedEvent(question, qtypeMultiChoiceQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+    }
+
+    @Override
+    public void deleteQuestion(Question question) {
+
+    }
+
+    @Override
+    public void rollbackQuestion(Question question) {
+
+    }
+
+    @Override
+    public void rollbackQtypeCodeQuestion(QtypeCodeQuestion qtypeCodeQuestion) {
+
+    }
+
+    @Override
+    public void rollbackQtypeEssayQuestion(QtypeEssayQuestion qtypeEssayQuestion) {
+
+    }
+
+    @Override
+    public void rollbackQtypeShortAnswerQuestion(QtypeShortAnswerQuestion qtypeShortAnswerQuestion) {
+
+    }
+
+    @Override
+    public void rollbackQtypeMultipleChoiceQuestion(QtypeMultiChoiceQuestion qtypeMultiChoiceQuestion) {
+
+    }
+
+    @Override
+    public void rollbackAnswerOfQuestion(List<AnswerOfQuestion> answerOfQuestionList) {
+
     }
 
     @Override

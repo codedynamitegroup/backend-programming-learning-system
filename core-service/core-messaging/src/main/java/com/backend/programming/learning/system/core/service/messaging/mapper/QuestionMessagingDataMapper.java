@@ -6,11 +6,10 @@ import com.backend.programming.learning.system.core.service.domain.entity.Questi
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
-import com.backend.programming.learning.system.domain.valueobject.QuestionResponseStatus;
-import com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel;
-import com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel;
+import com.backend.programming.learning.system.core.service.domain.outbox.model.question.QuestionEventPayload;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel;
-import com.backend.programming.learning.system.kafka.core.avro.model.QuestionUpdateRequestAvroModel;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -20,10 +19,10 @@ import java.util.stream.Collectors;
 
 @Component
 public class QuestionMessagingDataMapper {
-    public QuestionCreateRequestAvroModel questionCreatedToQuestionCreateRequestAvroModel(QuestionCreatedEvent questionCreatedEvent) {
+    public QuestionRequestAvroModel questionCreatedToQuestionCreateRequestAvroModel(QuestionCreatedEvent questionCreatedEvent) {
         Question question = questionCreatedEvent.getQuestion();
 
-        return QuestionCreateRequestAvroModel.newBuilder()
+        return QuestionRequestAvroModel.newBuilder()
                 .setId(question.getId().getValue().toString())
                 .setSagaId(UUID.randomUUID().toString())
                 .setOrganizationId(question.getOrganization().getId().getValue().toString())
@@ -39,10 +38,10 @@ public class QuestionMessagingDataMapper {
                 .build();
     }
 
-    public QuestionDeleteRequestAvroModel questionDeletedToQuestionDeleteRequestAvroModel(QuestionDeletedEvent questionDeletedEvent) {
+    public QuestionRequestAvroModel questionDeletedToQuestionDeleteRequestAvroModel(QuestionDeletedEvent questionDeletedEvent) {
         Question question = questionDeletedEvent.getQuestion();
 
-        return QuestionDeleteRequestAvroModel.newBuilder()
+        return QuestionRequestAvroModel.newBuilder()
                 .setId(question.getId().getValue().toString())
                 .setSagaId(UUID.randomUUID().toString())
                 .setOrganizationId(question.getOrganization().getId().getValue().toString())
@@ -58,10 +57,10 @@ public class QuestionMessagingDataMapper {
                 .build();
     }
 
-    public QuestionUpdateRequestAvroModel questionUpdatedToQuestionUpdateRequestAvroModel(QuestionUpdatedEvent questionUpdatedEvent) {
+    public QuestionRequestAvroModel questionUpdatedToQuestionUpdateRequestAvroModel(QuestionUpdatedEvent questionUpdatedEvent) {
         Question question = questionUpdatedEvent.getQuestion();
 
-        return QuestionUpdateRequestAvroModel.newBuilder()
+        return QuestionRequestAvroModel.newBuilder()
                 .setId(question.getId().getValue().toString())
                 .setSagaId(UUID.randomUUID().toString())
                 .setOrganizationId(question.getOrganization().getId().getValue().toString())
@@ -97,7 +96,32 @@ public class QuestionMessagingDataMapper {
                 .defaultMark(questionResponseAvroModel.getDefaultMark())
                 .qType(questionResponseAvroModel.getQType())
                 .answers(questionResponseAvroModel.getAnswers())
-                .questionResponseStatus(QuestionResponseStatus.valueOf(questionResponseAvroModel.getQuestionResponseStatus().toString()))
+                .copyState(CopyState.valueOf(questionResponseAvroModel.getCopyState().toString()))
+                .build();
+    }
+
+    public QuestionRequestAvroModel questionEventPayloadToQuestionRequestAvroModel(String sagaId,
+                                                                                   QuestionEventPayload questionEventPayload) {
+        return QuestionRequestAvroModel.newBuilder()
+                .setId(UUID.randomUUID().toString())
+                .setSagaId(sagaId)
+                .setOrganizationId(questionEventPayload.getOrganizationId())
+                .setCreatedBy(questionEventPayload.getCreatedBy())
+                .setUpdatedBy(questionEventPayload.getUpdatedBy())
+                .setDifficulty(questionEventPayload.getDifficulty())
+                .setName(questionEventPayload.getName())
+                .setQuestionText(questionEventPayload.getQuestionText())
+                .setGeneralFeedback(questionEventPayload.getGeneralFeedback())
+                .setDefaultMark(questionEventPayload.getDefaultMark())
+                .setQType(questionEventPayload.getQType())
+                .setAnswers(questionEventPayload
+                        .getAnswers()
+                        .stream()
+                        .map(answerOfQuestion -> answerOfQuestion.getId().toString())
+                        .collect(Collectors.toList()))
+                .setCreatedBy(questionEventPayload.getCreatedBy())
+                .setUpdatedBy(questionEventPayload.getUpdatedBy())
+                .setCopyState(com.backend.programming.learning.system.kafka.core.avro.model.CopyState.valueOf(questionEventPayload.getCopyState().name()))
                 .build();
     }
 }

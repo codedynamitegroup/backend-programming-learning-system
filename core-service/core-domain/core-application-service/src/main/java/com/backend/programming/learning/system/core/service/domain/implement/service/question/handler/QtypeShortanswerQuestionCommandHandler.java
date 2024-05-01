@@ -10,9 +10,10 @@ import com.backend.programming.learning.system.core.service.domain.event.questio
 import com.backend.programming.learning.system.core.service.domain.implement.service.question.method.create.QtypeShortanswerQuestionCreateHelper;
 import com.backend.programming.learning.system.core.service.domain.implement.service.question.method.query.QtypeShortanswerQuestionQueryHelper;
 import com.backend.programming.learning.system.core.service.domain.implement.service.question.method.update.QtypeShortanswerQuestionUpdateHelper;
+import com.backend.programming.learning.system.core.service.domain.implement.service.question.saga.QuestionSagaHelper;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
-import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.question.QuestionCreatedMessagePublisher;
-import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.question.QuestionUpdatedMessagePublisher;
+import com.backend.programming.learning.system.core.service.domain.outbox.scheduler.question.QuestionOutboxHelper;
+import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -25,30 +26,32 @@ public class QtypeShortanswerQuestionCommandHandler {
     private final QtypeShortanswerQuestionCreateHelper qtypeShortanswerCreateHelper;
     private final QtypeShortanswerQuestionQueryHelper qtypeShortanswerQuestionQueryHelper;
     private final QtypeShortanswerQuestionUpdateHelper qtypeShortanswerQuestionUpdateHelper;
-
-    private final QuestionUpdatedMessagePublisher questionUpdatedMessagePublisher;
-    private final QuestionCreatedMessagePublisher questionCreatedMessagePublisher;
-
+    private final QuestionOutboxHelper questionOutboxHelper;
+    private final QuestionSagaHelper questionSagaHelper;
     private final QuestionDataMapper questionDataMapper;
 
     public QtypeShortanswerQuestionCommandHandler(QtypeShortanswerQuestionCreateHelper qtypeShortanswerCreateHelper,
                                                   QtypeShortanswerQuestionQueryHelper qtypeShortanswerQuestionQueryHelper,
                                                   QtypeShortanswerQuestionUpdateHelper qtypeShortanswerQuestionUpdateHelper,
-                                                  QuestionUpdatedMessagePublisher questionUpdatedMessagePublisher,
-                                                  QuestionCreatedMessagePublisher questionCreatedMessagePublisher,
+                                                  QuestionOutboxHelper questionOutboxHelper,
+                                                  QuestionSagaHelper questionSagaHelper,
                                                   QuestionDataMapper questionDataMapper) {
         this.qtypeShortanswerCreateHelper = qtypeShortanswerCreateHelper;
         this.qtypeShortanswerQuestionQueryHelper = qtypeShortanswerQuestionQueryHelper;
         this.qtypeShortanswerQuestionUpdateHelper = qtypeShortanswerQuestionUpdateHelper;
-        this.questionUpdatedMessagePublisher = questionUpdatedMessagePublisher;
-        this.questionCreatedMessagePublisher = questionCreatedMessagePublisher;
+        this.questionOutboxHelper = questionOutboxHelper;
+        this.questionSagaHelper = questionSagaHelper;
         this.questionDataMapper = questionDataMapper;
     }
 
     public CreateQuestionResponse createQtypeShortanswerQuestion(CreateQtypeShortanswerQuestionCommand createQtypeShortanswerQuestionCommand) {
         QuestionCreatedEvent questionCreatedEvent = qtypeShortanswerCreateHelper.persistQtypeShortanswerQuestion(createQtypeShortanswerQuestionCommand);
 
-        questionCreatedMessagePublisher.publish(questionCreatedEvent);
+        questionOutboxHelper.saveNewQuestionOutboxMessage(questionDataMapper.questionCreatedEventToQuestionEventPayload(questionCreatedEvent),
+                questionCreatedEvent.getQuestion().getCopyState(),
+                OutboxStatus.STARTED,
+                questionSagaHelper.questionStatusToSagaStatus(questionCreatedEvent.getQuestion().getCopyState()),
+                UUID.randomUUID());
 
         return questionDataMapper.questionCreatedEventToCreateQuestionResponse(questionCreatedEvent, "Qtype Shortanswer Question created successfully");
     }
@@ -64,7 +67,11 @@ public class QtypeShortanswerQuestionCommandHandler {
     public UpdateQuestionResponse updateQtypeShortanswerQuestion(UpdateQtypeShortanswerQuestionCommand updateQtypeShortanswerQuestionCommand) {
         QuestionUpdatedEvent questionUpdatedEvent = qtypeShortanswerQuestionUpdateHelper.updateQtypeShortanswerQuestionInDb(updateQtypeShortanswerQuestionCommand);
 
-        questionUpdatedMessagePublisher.publish(questionUpdatedEvent);
+        questionOutboxHelper.saveNewQuestionOutboxMessage(questionDataMapper.questionUpdatedEventToQuestionEventPayload(questionUpdatedEvent),
+                questionUpdatedEvent.getQuestion().getCopyState(),
+                OutboxStatus.STARTED,
+                questionSagaHelper.questionStatusToSagaStatus(questionUpdatedEvent.getQuestion().getCopyState()),
+                UUID.randomUUID());
 
         return questionDataMapper
                 .questionUpdatedEventToUpdateQuestionRespond(questionUpdatedEvent, "Qtype Shortanswer Question updated successfully");

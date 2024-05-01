@@ -10,9 +10,10 @@ import com.backend.programming.learning.system.core.service.domain.event.questio
 import com.backend.programming.learning.system.core.service.domain.implement.service.question.method.create.QtypeCodeQuestionCreateHelper;
 import com.backend.programming.learning.system.core.service.domain.implement.service.question.method.query.QtypeCodeQuestionQueryHelper;
 import com.backend.programming.learning.system.core.service.domain.implement.service.question.method.update.QtypeCodeQuestionUpdateHelper;
+import com.backend.programming.learning.system.core.service.domain.implement.service.question.saga.QuestionSagaHelper;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
-import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.question.QuestionCreatedMessagePublisher;
-import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.question.QuestionUpdatedMessagePublisher;
+import com.backend.programming.learning.system.core.service.domain.outbox.scheduler.question.QuestionOutboxHelper;
+import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -26,8 +27,8 @@ public class QtypeCodeQuestionCommandHandler {
     private final QtypeCodeQuestionQueryHelper qtypeCodeQuestionQueryHelper;
     private final QtypeCodeQuestionUpdateHelper qtypeCodeQuestionUpdateHelper;
 
-    private final QuestionUpdatedMessagePublisher questionUpdatedMessagePublisher;
-    private final QuestionCreatedMessagePublisher questionCreatedMessagePublisher;
+    private final QuestionOutboxHelper questionOutboxHelper;
+    private final QuestionSagaHelper questionSagaHelper;
 
     private final QuestionDataMapper questionDataMapper;
 
@@ -35,20 +36,25 @@ public class QtypeCodeQuestionCommandHandler {
     public QtypeCodeQuestionCommandHandler(QtypeCodeQuestionCreateHelper qtypeCodeQuestionCreateHelper,
                                            QtypeCodeQuestionQueryHelper qtypeCodeQuestionQueryHelper,
                                            QtypeCodeQuestionUpdateHelper qtypeCodeQuestionUpdateHelper,
-                                           QuestionDataMapper questionDataMapper,
-                                           QuestionUpdatedMessagePublisher questionUpdatedMessagePublisher,
-                                           QuestionCreatedMessagePublisher questionCreatedMessagePublisher) {
+                                           QuestionOutboxHelper questionOutboxHelper,
+                                           QuestionSagaHelper questionSagaHelper,
+                                           QuestionDataMapper questionDataMapper) {
         this.qtypeCodeQuestionCreateHelper = qtypeCodeQuestionCreateHelper;
         this.qtypeCodeQuestionQueryHelper = qtypeCodeQuestionQueryHelper;
         this.qtypeCodeQuestionUpdateHelper = qtypeCodeQuestionUpdateHelper;
+        this.questionOutboxHelper = questionOutboxHelper;
+        this.questionSagaHelper = questionSagaHelper;
         this.questionDataMapper = questionDataMapper;
-        this.questionUpdatedMessagePublisher = questionUpdatedMessagePublisher;
-        this.questionCreatedMessagePublisher = questionCreatedMessagePublisher;
     }
 
     public CreateQuestionResponse createQtypeCodeQuestion(CreateQtypeCodeQuestionCommand createQtypeCodeQuestionCommand) {
         QuestionCreatedEvent questionCreatedEvent = qtypeCodeQuestionCreateHelper.persistQtypeCodeQuestion(createQtypeCodeQuestionCommand);
-        questionCreatedMessagePublisher.publish(questionCreatedEvent);
+
+        questionOutboxHelper.saveNewQuestionOutboxMessage(questionDataMapper.questionCreatedEventToQuestionEventPayload(questionCreatedEvent),
+                questionCreatedEvent.getQuestion().getCopyState(),
+                OutboxStatus.STARTED,
+                questionSagaHelper.questionStatusToSagaStatus(questionCreatedEvent.getQuestion().getCopyState()),
+                UUID.randomUUID());
 
         return questionDataMapper.questionCreatedEventToCreateQuestionResponse(questionCreatedEvent, "Qtype Code Question created successfully");
     }
@@ -64,7 +70,11 @@ public class QtypeCodeQuestionCommandHandler {
     public UpdateQuestionResponse updateQtypeCodeQuestion(UpdateQtypeCodeQuestionCommand updateQtypeCodeQuestionCommand) {
         QuestionUpdatedEvent questionUpdatedEvent = qtypeCodeQuestionUpdateHelper.updateQtypeCodeQuestionInDb(updateQtypeCodeQuestionCommand);
 
-        questionUpdatedMessagePublisher.publish(questionUpdatedEvent);
+        questionOutboxHelper.saveNewQuestionOutboxMessage(questionDataMapper.questionUpdatedEventToQuestionEventPayload(questionUpdatedEvent),
+                questionUpdatedEvent.getQuestion().getCopyState(),
+                OutboxStatus.STARTED,
+                questionSagaHelper.questionStatusToSagaStatus(questionUpdatedEvent.getQuestion().getCopyState()),
+                UUID.randomUUID());
 
         return questionDataMapper.questionUpdatedEventToUpdateQuestionRespond(questionUpdatedEvent, "Qtype Code Question updated successfully");
     }
