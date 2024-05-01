@@ -19,7 +19,7 @@ spring:
           clone-on-start: true
       fail-fast: true
 
-  security:
-    user:
-      name: spring_cloud_user
-      password: springCloud_Pwd!
+#  security:
+#    user:
+#      name: spring_cloud_user
+#      password: springCloud_Pwd!

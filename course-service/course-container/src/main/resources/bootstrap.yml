@@ -7,5 +7,5 @@ spring:
     config:
       name: course-service,config-client
       uri: http://localhost:9999
-      username: spring_cloud_user
-      password: springCloud_Pwd!
+#      username: spring_cloud_user
+#      password: springCloud_Pwd!
