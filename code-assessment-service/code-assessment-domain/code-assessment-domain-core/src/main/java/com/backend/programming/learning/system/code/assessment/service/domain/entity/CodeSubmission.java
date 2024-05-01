@@ -2,7 +2,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.e
 
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.CodeSubmissionTestCaseId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
-import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.LanguageId;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.*;
 
@@ -12,7 +12,7 @@ import java.util.UUID;
 public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
     private CodeQuestionId codeQuestionId;
     private UserId userId;
-    private LanguageId languageId;
+    private ProgrammingLanguageId languageId;
     private Double grade;
     private Double runTime;
     private Double memory;
@@ -70,7 +70,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         return userId;
     }
 
-    public LanguageId getLanguageId() {
+    public ProgrammingLanguageId getLanguageId() {
         return languageId;
     }
 
@@ -130,7 +130,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
     public static final class Builder {
         private CodeQuestionId codeQuestionId;
         private UserId userId;
-        private LanguageId languageId;
+        private ProgrammingLanguageId languageId;
         private Double grade;
         private Double runTime;
         private Double memory;
@@ -157,7 +157,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
             return this;
         }
 
-        public Builder languageId(LanguageId val) {
+        public Builder languageId(ProgrammingLanguageId val) {
             languageId = val;
             return this;
         }

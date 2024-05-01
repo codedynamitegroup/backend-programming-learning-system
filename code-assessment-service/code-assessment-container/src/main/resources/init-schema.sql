@@ -119,6 +119,24 @@ CREATE TABLE qtype_code_questions(
 --         ON DELETE CASCADE
     );
 
+DROP TABLE IF EXISTS programming_language_code_question CASCADE;
+CREATE TABLE programming_language_code_question(
+    programming_language_id uuid NOT NULL ,
+    code_question_id uuid not null ,
+    time_limit float not null,
+    memory_limit float not null,
+    active boolean default true,
+    CONSTRAINT pr_la_co_qu_pk PRIMARY KEY (programming_language_id, code_question_id),
+    CONSTRAINT prl_fk FOREIGN KEY (programming_language_id)
+        REFERENCES programming_language (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT cq_fk FOREIGN KEY (code_question_id)
+        REFERENCES qtype_code_questions (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
 DROP TABLE IF EXISTS test_cases CASCADE;
 CREATE TABLE test_cases(
     id uuid UNIQUE NOT NULL ,
@@ -173,10 +191,11 @@ CREATE TABLE code_submission_test_case(
     test_case_id uuid not null ,
     code_submission_id uuid not null ,
     actual_output text,
+    compile_output text,
     runtime float,
     memory float,
     passed boolean,
-    judge_token text not null,
+    judge_token text,
     CONSTRAINT co_su_te_ca_pk PRIMARY KEY (id),
     CONSTRAINT co_su_te_cax2_fk FOREIGN KEY (test_case_id)
         REFERENCES test_cases (id) MATCH SIMPLE

@@ -24,7 +24,8 @@ public class CodeAssessmentGlobalExceptionHandler extends GlobalExceptionHandler
         log.error(codeAssessmentDomainException.getMessage(), codeAssessmentDomainException);
         return ErrorDTO.builder()
                 .message(codeAssessmentDomainException.getMessage())
-                .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                .status(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                .code(HttpStatus.BAD_REQUEST.value())
                 .build();
     }
     @ResponseBody
@@ -34,7 +35,8 @@ public class CodeAssessmentGlobalExceptionHandler extends GlobalExceptionHandler
         log.error(questionNotFoundException.getMessage(), questionNotFoundException);
         return ErrorDTO.builder()
                 .message(questionNotFoundException.getMessage())
-                .code(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .status(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .code(HttpStatus.NOT_FOUND.value())
                 .build();
     }
     @ResponseBody
@@ -44,7 +46,8 @@ public class CodeAssessmentGlobalExceptionHandler extends GlobalExceptionHandler
         log.error(exception.getMessage(), exception);
         return ErrorDTO.builder()
                 .message(exception.getMessage())
-                .code(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .status(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .code(HttpStatus.NOT_FOUND.value())
                 .build();
     }
     @ResponseBody
@@ -54,7 +57,8 @@ public class CodeAssessmentGlobalExceptionHandler extends GlobalExceptionHandler
         log.error(exception.getMessage(), exception);
         return ErrorDTO.builder()
                 .message(GradingStatus.GRADING_SYSTEM_UNAVAILABLE.name() + ": " + exception.getMessage())
-                .code(HttpStatus.SERVICE_UNAVAILABLE.getReasonPhrase())
+                .status(HttpStatus.SERVICE_UNAVAILABLE.getReasonPhrase())
+                .code(HttpStatus.SERVICE_UNAVAILABLE.value())
                 .build();
     }
     @ResponseBody
@@ -64,7 +68,8 @@ public class CodeAssessmentGlobalExceptionHandler extends GlobalExceptionHandler
         log.error(exception.getMessage(), exception);
         return ErrorDTO.builder()
                 .message(exception.getMessage())
-                .code(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .status(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .code(HttpStatus.NOT_FOUND.value())
                 .build();
     }
     @ResponseBody
@@ -74,7 +79,8 @@ public class CodeAssessmentGlobalExceptionHandler extends GlobalExceptionHandler
         log.error(exception.getMessage(), exception);
         return ErrorDTO.builder()
                 .message(exception.getMessage())
-                .code(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .status(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .code(HttpStatus.NOT_FOUND.value())
                 .build();
     }
     @ResponseBody
@@ -84,7 +90,8 @@ public class CodeAssessmentGlobalExceptionHandler extends GlobalExceptionHandler
         log.error(exception.getMessage(), exception);
         return ErrorDTO.builder()
                 .message(exception.getMessage())
-                .code(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .status(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .code(HttpStatus.NOT_FOUND.value())
                 .build();
     }
 }

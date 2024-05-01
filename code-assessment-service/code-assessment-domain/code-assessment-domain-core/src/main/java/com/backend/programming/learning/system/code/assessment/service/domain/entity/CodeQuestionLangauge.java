@@ -1,13 +1,13 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.entity;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.CodeQuestionLangaugeId;
-import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.LanguageId;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 
 public class CodeQuestionLangauge extends BaseEntity<CodeQuestionLangaugeId> {
     private final CodeQuestionId codeQuestionId;
-    private final LanguageId languageId;
+    private final ProgrammingLanguageId programmingLanguageId;
     private Double timeLimit;
     private Double memoryLimit;
     private String headCode;
@@ -17,7 +17,7 @@ public class CodeQuestionLangauge extends BaseEntity<CodeQuestionLangaugeId> {
 
     private CodeQuestionLangauge(Builder builder) {
         codeQuestionId = builder.codeQuestionId;
-        languageId = builder.languageId;
+        programmingLanguageId = builder.programmingLanguageId;
         timeLimit = builder.timeLimit;
         memoryLimit = builder.memoryLimit;
         headCode = builder.headCode;
@@ -35,8 +35,8 @@ public class CodeQuestionLangauge extends BaseEntity<CodeQuestionLangaugeId> {
         return codeQuestionId;
     }
 
-    public LanguageId getLanguageId() {
-        return languageId;
+    public ProgrammingLanguageId getLanguageId() {
+        return programmingLanguageId;
     }
 
     public Double getTimeLimit() {
@@ -65,7 +65,7 @@ public class CodeQuestionLangauge extends BaseEntity<CodeQuestionLangaugeId> {
 
     public static final class Builder {
         private CodeQuestionId codeQuestionId;
-        private LanguageId languageId;
+        private ProgrammingLanguageId programmingLanguageId;
         private Double timeLimit;
         private Double memoryLimit;
         private String headCode;
@@ -82,8 +82,8 @@ public class CodeQuestionLangauge extends BaseEntity<CodeQuestionLangaugeId> {
             return this;
         }
 
-        public Builder languageId(LanguageId val) {
-            languageId = val;
+        public Builder languageId(ProgrammingLanguageId val) {
+            programmingLanguageId = val;
             return this;
         }
 

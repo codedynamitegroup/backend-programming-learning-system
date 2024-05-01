@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.code.assessment.service.dataacces
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -27,9 +28,22 @@ public class CodeSubmissionTestCaseEntity {
     CodeSubmissionEntity codeSubmission;
 
     String actualOutput;
+    String compileOutput;
     Float runtime;
     Float memory;
     Boolean passed;
     String judgeToken;
 
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        CodeSubmissionTestCaseEntity that = (CodeSubmissionTestCaseEntity) object;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

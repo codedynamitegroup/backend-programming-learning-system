@@ -1,10 +1,10 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.entity;
 
-import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.LanguageId;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 
-public class Langauge extends AggregateRoot<LanguageId> {
+public class ProgrammingLangauge extends AggregateRoot<ProgrammingLanguageId> {
     private String name;
     private Integer judge0_compilerApiId;
     private Float timeLimit;
@@ -15,7 +15,7 @@ public class Langauge extends AggregateRoot<LanguageId> {
     private Boolean isActive;
     private CopyState copyState;
 
-    private Langauge(Builder builder) {
+    private ProgrammingLangauge(Builder builder) {
         name = builder.name;
         judge0_compilerApiId = builder.judge0_compilerApiId;
         timeLimit = builder.timeLimit;
@@ -77,7 +77,7 @@ public class Langauge extends AggregateRoot<LanguageId> {
         private String tailCode;
         private Boolean isActive;
         private CopyState copyState;
-        private LanguageId id;
+        private ProgrammingLanguageId id;
 
         private Builder() {
         }
@@ -143,13 +143,13 @@ public class Langauge extends AggregateRoot<LanguageId> {
             return this;
         }
 
-        public Builder id(LanguageId val) {
+        public Builder id(ProgrammingLanguageId val) {
             id = val;
             return this;
         }
 
-        public Langauge build() {
-            return new Langauge(this);
+        public ProgrammingLangauge build() {
+            return new ProgrammingLangauge(this);
         }
 
     }

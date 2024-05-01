@@ -2,9 +2,9 @@ package com.backend.programming.learning.system.code.assessment.service.dataacce
 
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.language.mapper.ProgrammingLanguageDataAccessMapper;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.language.repository.ProgrammingLanguageJpaRepository;
-import com.backend.programming.learning.system.code.assessment.service.domain.entity.Langauge;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.ProgrammingLangauge;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.ProgrammingLanguageRepository;
-import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.LanguageId;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.ProgrammingLanguageId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +22,7 @@ public class ProgrammingLanguageRepositoryImpl implements ProgrammingLanguageRep
     }
 
     @Override
-    public Optional<Langauge> findById(LanguageId languageId) {
+    public Optional<ProgrammingLangauge> findById(ProgrammingLanguageId languageId) {
         return jpaRepository.findById(languageId.getValue()).map(dataAccessMapper::entityToProgramingLanguage);
     }
 }

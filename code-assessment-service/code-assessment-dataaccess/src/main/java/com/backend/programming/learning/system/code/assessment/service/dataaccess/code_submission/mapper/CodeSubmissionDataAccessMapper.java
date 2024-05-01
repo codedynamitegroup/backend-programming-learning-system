@@ -5,10 +5,9 @@ import com.backend.programming.learning.system.code.assessment.service.dataacces
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.language.entity.ProgrammingLanguageEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
-import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.LanguageId;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
-import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
@@ -44,7 +43,7 @@ public class CodeSubmissionDataAccessMapper {
                 .id(new CodeSubmissionId(entity.getId()))
                 .codeQuestionId(new CodeQuestionId(entity.getCodeQuestion().getId()))
                 .userId(new UserId(entity.getUser().getId()))
-                .languageId(new LanguageId(entity.getProgrammingLanguage().getId()))
+                .languageId(new ProgrammingLanguageId(entity.getProgrammingLanguage().getId()))
                 .grade(entity.getGrade())
                 .runTime(entity.getAvgRuntime())
                 .memory(entity.getAvgMemory())

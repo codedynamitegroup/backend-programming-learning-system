@@ -8,6 +8,7 @@ public class CodeSubmissionTestCase extends BaseEntity<CodeSubmissionTestCaseId>
     private final TestCase testCase;
     private final CodeSubmission codeSubmission;
     private String actualOutput;
+    private String compileOutput;
     private Float runTime;
     private Float memory;
     private Boolean passed;
@@ -17,6 +18,7 @@ public class CodeSubmissionTestCase extends BaseEntity<CodeSubmissionTestCaseId>
         testCase = builder.testCase;
         codeSubmission = builder.codeSubmission;
         actualOutput = builder.actualOutput;
+        compileOutput = builder.compileOutput;
         runTime = builder.runTime;
         memory = builder.memory;
         passed = builder.passed;
@@ -31,6 +33,10 @@ public class CodeSubmissionTestCase extends BaseEntity<CodeSubmissionTestCaseId>
 
     public TestCase getTestCase() {
         return testCase;
+    }
+
+    public String getCompileOutput() {
+        return compileOutput;
     }
 
     public CodeSubmission getCodeSubmission() {
@@ -61,6 +67,7 @@ public class CodeSubmissionTestCase extends BaseEntity<CodeSubmissionTestCaseId>
         private TestCase testCase;
         private CodeSubmission codeSubmission;
         private String actualOutput;
+        private String compileOutput;
         private Float runTime;
         private Float memory;
         private Boolean passed;
@@ -82,6 +89,11 @@ public class CodeSubmissionTestCase extends BaseEntity<CodeSubmissionTestCaseId>
 
         public Builder actualOutput(String val) {
             actualOutput = val;
+            return this;
+        }
+
+        public Builder compileOutput(String val) {
+            compileOutput = val;
             return this;
         }
 

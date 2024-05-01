@@ -8,7 +8,7 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class ErrorDTO<T> {
-    private final Integer status;
-    private final String code;
+    private final Integer code;
+    private final String status;
     private final T message;
 }
