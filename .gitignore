@@ -36,3 +36,5 @@ build/
 .vscode/
 
 infrastructure/docker-compose/volumes/**/**
+
+config-server-repository/
