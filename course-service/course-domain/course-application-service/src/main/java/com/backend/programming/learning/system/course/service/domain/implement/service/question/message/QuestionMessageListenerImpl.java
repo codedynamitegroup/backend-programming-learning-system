@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.implement.question.message;
+package com.backend.programming.learning.system.course.service.domain.implement.service.question.message;
 
 import com.backend.programming.learning.system.course.service.domain.CourseDomainService;
 import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionCreateRequest;
