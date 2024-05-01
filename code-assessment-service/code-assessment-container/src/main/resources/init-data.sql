@@ -26,4 +26,4 @@ VALUES
 
 INSERT INTO programming_language_code_question(programming_language_id,code_question_id,time_limit,memory_limit,active)
 VALUES
-    ('c95d5c7d-cadf-42cc-afdc-968211ae3720','3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 1, 2000, true);
+    ('c95d5c7d-cadf-42cc-afdc-968211ae3720','3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 1, 4000, true);

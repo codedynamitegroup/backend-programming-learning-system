@@ -5,20 +5,26 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_question.CodeQuestionNotFoundException;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_submission.CodeSubmissionJudgingServiceUnavailableException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.programming_language.ProgrammingLanguageNotFoundException;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.test_case.TestCaseNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.code_submission.CodeSubmissionDataMapper;
+import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.assessment.AssessmentSourceCodeByTestCases;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_question.CodeQuestionRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_submssion.CodeSubmissionRepository;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.programming_language_code_question.ProgrammingLanguageCodeQuestionId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.exception.user.UserNotFoundException;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
+import io.netty.handler.timeout.ReadTimeoutException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.net.ConnectException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -35,9 +41,9 @@ public class CodeSubmissionHelper {
     private final UserRepository userRepository;
     private final CodeSubmissionTestCaseRepository codeSubmissionTestCaseRepository;
     private final ProgrammingLanguageCodeQuestionRepository programmingLanguageCodeQuestionRepository;
+    private final AssessmentSourceCodeByTestCases assessmentSourceCodeByTestCases;
 
-
-    public CodeSubmissionHelper(CodeAssessmentDomainService codeAssessmentDomainService, CodeSubmissionDataMapper codeSubmissionDataMapper, CodeSubmissionRepository codeSubmissionRepository, CodeQuestionRepository codeQuestionRepository, ProgrammingLanguageRepository programmingLanguageRepository, TestCaseRepository testCaseRepository, UserRepository userRepository, CodeSubmissionTestCaseRepository codeSubmissionTestCaseRepository, ProgrammingLanguageCodeQuestionRepository programmingLanguageCodeQuestionRepository) {
+    public CodeSubmissionHelper(CodeAssessmentDomainService codeAssessmentDomainService, CodeSubmissionDataMapper codeSubmissionDataMapper, CodeSubmissionRepository codeSubmissionRepository, CodeQuestionRepository codeQuestionRepository, ProgrammingLanguageRepository programmingLanguageRepository, TestCaseRepository testCaseRepository, UserRepository userRepository, CodeSubmissionTestCaseRepository codeSubmissionTestCaseRepository, ProgrammingLanguageCodeQuestionRepository programmingLanguageCodeQuestionRepository, AssessmentSourceCodeByTestCases assessmentSourceCodeByTestCases) {
         this.codeAssessmentDomainService = codeAssessmentDomainService;
         this.codeSubmissionDataMapper = codeSubmissionDataMapper;
         this.codeSubmissionRepository = codeSubmissionRepository;
@@ -47,15 +53,25 @@ public class CodeSubmissionHelper {
         this.userRepository = userRepository;
         this.codeSubmissionTestCaseRepository = codeSubmissionTestCaseRepository;
         this.programmingLanguageCodeQuestionRepository = programmingLanguageCodeQuestionRepository;
+        this.assessmentSourceCodeByTestCases = assessmentSourceCodeByTestCases;
     }
 
+    //don't use @transactional here
     public CodeSubmission createCodeSubmission(CreateCodeSubmissionCommand createCodeSubmissionCommand) {
         CodeSubmission codeSubmission = initAndSaveCodeSubmission(createCodeSubmissionCommand);
-        //send judge to get token
-        //send 5 time
-        //store token if success
+        try {
+            //send judge to get token and store token if success
+            assessmentSourceCodeByTestCases.judge(codeSubmission);
+        } catch (Exception e) {
+            if (e instanceof ReadTimeoutException || e instanceof ConnectException){
+                //change codesubmission state if sending failed and throw error
+                codeSubmission.setGradingStatus(GradingStatus.GRADING_SYSTEM_UNAVAILABLE);
+                codeSubmissionRepository.save(codeSubmission);
+                throw new CodeSubmissionJudgingServiceUnavailableException("Judgement services are unavailable now. Please, try again later");
+            }
+            throw e;
+        }
 
-        //change codesubmission state if sending failed and throw error
 
         return codeSubmission;
     }
@@ -65,24 +81,29 @@ public class CodeSubmissionHelper {
 
         validateUser(createCodeSubmissionCommand.getUserId());
         validateCodeQuestion(createCodeSubmissionCommand.getCodeQuestionId());
-        validateLanguage(createCodeSubmissionCommand.getLanguageId(), createCodeSubmissionCommand.getCodeQuestionId());
+        ProgrammingLangauge programmingLangauge = validateLanguage(createCodeSubmissionCommand.getLanguageId(), createCodeSubmissionCommand.getCodeQuestionId());
+        ProgrammingLanguageCodeQuestion plcq =
+                validateProgrammingLanguageCodeQuestion(createCodeSubmissionCommand.getLanguageId(), createCodeSubmissionCommand.getCodeQuestionId());
 
-        List<TestCase> testCases = testCaseRepository.getTestCaseByCodeQuestionId(new CodeQuestionId(createCodeSubmissionCommand.getCodeQuestionId()));
-        codeAssessmentDomainService.initiateCodeSubmission(codeSubmission, testCases);
+        List<TestCase> testCases =  validateTestCases(createCodeSubmissionCommand.getCodeQuestionId());
+        codeAssessmentDomainService.initiateCodeSubmission(codeSubmission, testCases, plcq, programmingLangauge);
 
-        CodeSubmission codeSubmissionRes = codeSubmissionRepository.save(codeSubmission);
+        codeSubmissionRepository.save(codeSubmission);
         codeSubmissionTestCaseRepository.save(codeSubmission.getCodeSubmissionTestCaseList());
 
-        return codeSubmissionRes;
+        return codeSubmission;
     }
 
-    private void validateLanguage(UUID languageId, UUID codeQuestionId) {
-        Optional<ProgrammingLangauge> langauge = programmingLanguageRepository.findById(new ProgrammingLanguageId(languageId));
-
-        if (langauge.isEmpty()) {
-            log.warn("Could not find programming language with id: {}", languageId);
-            throw new ProgrammingLanguageNotFoundException("Could not find programming language with id: " + languageId);
+    private List<TestCase> validateTestCases(UUID codeQuestionId) {
+        List<TestCase> testCases = testCaseRepository.getTestCaseByCodeQuestionId(new CodeQuestionId(codeQuestionId));
+        if(testCases.isEmpty()){
+            log.error("This code question has no test case to submit!");
+            throw new TestCaseNotFoundException("This code question has no test case to submit");
         }
+        return testCases;
+    }
+
+    private ProgrammingLanguageCodeQuestion validateProgrammingLanguageCodeQuestion(UUID languageId, UUID codeQuestionId) {
         Optional<ProgrammingLanguageCodeQuestion> plcq
                 = programmingLanguageCodeQuestionRepository
                 .findById(new ProgrammingLanguageCodeQuestionId
@@ -92,6 +113,17 @@ public class CodeSubmissionHelper {
             log.warn("lanquage with id {} does not support code question {}", languageId, codeQuestionId);
             throw new CodeAssessmentDomainException("lanquage with id " + languageId + " does not support code question " + codeQuestionId);
         }
+        return plcq.get();
+    }
+
+    private ProgrammingLangauge validateLanguage(UUID languageId, UUID codeQuestionId) {
+        Optional<ProgrammingLangauge> langauge = programmingLanguageRepository.findById(new ProgrammingLanguageId(languageId));
+
+        if (langauge.isEmpty()) {
+            log.warn("Could not find programming language with id: {}", languageId);
+            throw new ProgrammingLanguageNotFoundException("Could not find programming language with id: " + languageId);
+        }
+        return langauge.get();
     }
 
     private void validateCodeQuestion(UUID codeQuestionId) {

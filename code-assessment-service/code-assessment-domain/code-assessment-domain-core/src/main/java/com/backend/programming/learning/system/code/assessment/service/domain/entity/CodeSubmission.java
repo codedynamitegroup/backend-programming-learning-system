@@ -24,6 +24,8 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
     private Integer numOfTestCaseGraded;
     private CopyState copyState;
     private List<CodeSubmissionTestCase> codeSubmissionTestCaseList;
+    private ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion;
+    private Integer programmingLangaugeJudge0Id;
 
     private CodeSubmission(Builder builder) {
         codeQuestionId = builder.codeQuestionId;
@@ -39,12 +41,33 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         numOfTestCase = builder.numOfTestCase;
         numOfTestCaseGraded = builder.numOfTestCaseGraded;
         copyState = builder.copyState;
-        codeSubmissionTestCaseList = builder.codeSubmissionTestCaseList;
+        setCodeSubmissionTestCaseList(builder.codeSubmissionTestCaseList);
+        setProgrammingLanguageCodeQuestion(builder.programmingLanguageCodeQuestion);
         super.setId(builder.id);
     }
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    public ProgrammingLanguageCodeQuestion getProgrammingLanguageCodeQuestion() {
+        return programmingLanguageCodeQuestion;
+    }
+
+    public void setProgrammingLanguageCodeQuestion(ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion) {
+        this.programmingLanguageCodeQuestion = programmingLanguageCodeQuestion;
+    }
+
+    public void setGradingStatus(GradingStatus gradingStatus) {
+        this.gradingStatus = gradingStatus;
+    }
+
+    public Integer getProgrammingLangaugeJudge0Id() {
+        return programmingLangaugeJudge0Id;
+    }
+
+    public void setProgrammingLangaugeJudge0Id(Integer programmingLangaugeJudge0Id) {
+        this.programmingLangaugeJudge0Id = programmingLangaugeJudge0Id;
     }
 
     public Integer getNumOfTestCase() {
@@ -102,7 +125,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         return sonaqueAssessment;
     }
 
-    public void initiate(List<TestCase> testCases) {
+    public void initiate(List<TestCase> testCases, ProgrammingLanguageCodeQuestion plcq) {
         codeSubmissionTestCaseList =
                 testCases.stream().map(this::initiateCodeSubmissionTestCase)
                         .toList();
@@ -112,6 +135,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         numOfTestCase = codeSubmissionTestCaseList.size();
         numOfTestCaseGraded = 0;
         copyState = CopyState.CREATING;
+        programmingLanguageCodeQuestion = plcq;
     }
 
     private CodeSubmissionTestCase initiateCodeSubmissionTestCase(TestCase testCase) {
@@ -142,7 +166,11 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         private Integer numOfTestCaseGraded;
         private CopyState copyState;
         private List<CodeSubmissionTestCase> codeSubmissionTestCaseList;
+        private ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion;
+        private Integer programmingLangaugeJudge0Id;
+
         private CodeSubmissionId id;
+        private CodeQuestionLangauge codeQuestionLangauge;
 
         private Builder() {
         }
@@ -156,7 +184,10 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
             userId = val;
             return this;
         }
-
+        public Builder programmingLangaugeJudge0Id(Integer val){
+            programmingLangaugeJudge0Id = val;
+            return this;
+        }
         public Builder languageId(ProgrammingLanguageId val) {
             languageId = val;
             return this;
@@ -217,6 +248,15 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
             return this;
         }
 
+        public Builder programmingLanguageCodeQuestion(ProgrammingLanguageCodeQuestion val) {
+            programmingLanguageCodeQuestion = val;
+            return this;
+        }
+
+        public Builder codeQuestionLangauge(CodeQuestionLangauge val) {
+            codeQuestionLangauge = val;
+            return this;
+        }
 
         public Builder id(CodeSubmissionId val) {
             id = val;
