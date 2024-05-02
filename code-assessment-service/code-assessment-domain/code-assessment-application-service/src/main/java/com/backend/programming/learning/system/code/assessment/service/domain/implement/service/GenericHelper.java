@@ -4,14 +4,20 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 @Slf4j
 public class GenericHelper {
     //not use for objects that have final field(s)
     public <T> T mapNullAttributeToRepositoryAttribute(T nullAttributeObject, T repositoryObject, Class<T> tClass){
-        Field[] fields = tClass.getDeclaredFields();
-        for(Field field: fields){
+        List<Field> parentClassField = Arrays.asList(tClass.getSuperclass().getDeclaredFields());
+        List<Field> classField = Arrays.asList(tClass.getDeclaredFields());
+        List<Field> allFields = Stream.concat(parentClassField.stream(), classField.stream()).toList();
+        for(Field field: allFields){
             field.setAccessible(true);
             try {
                 Object nullAttributeObjectField = field.get(nullAttributeObject);

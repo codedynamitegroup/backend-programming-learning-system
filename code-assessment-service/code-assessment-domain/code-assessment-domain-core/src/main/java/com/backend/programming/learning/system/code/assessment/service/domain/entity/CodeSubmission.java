@@ -26,6 +26,26 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
     private List<CodeSubmissionTestCase> codeSubmissionTestCaseList;
     private ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion;
     private Integer programmingLangaugeJudge0Id;
+    private Integer version;
+
+    @Override
+    public String toString() {
+        return "CodeSubmission{" +
+                "codeQuestionId=" + codeQuestionId +
+                ", userId=" + userId +
+                ", languageId=" + languageId +
+                ", grade=" + grade +
+                ", runTime=" + runTime +
+                ", memory=" + memory +
+                ", sourceCode='" + sourceCode + '\'' +
+                ", gradingStatus=" + gradingStatus +
+                ", aiAssessment='" + aiAssessment + '\'' +
+                ", sonaqueAssessment='" + sonaqueAssessment + '\'' +
+                ", numOfTestCase=" + numOfTestCase +
+                ", numOfTestCaseGraded=" + numOfTestCaseGraded +
+                ", copyState=" + copyState +
+                '}';
+    }
 
     private CodeSubmission(Builder builder) {
         codeQuestionId = builder.codeQuestionId;
@@ -35,7 +55,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         runTime = builder.runTime;
         memory = builder.memory;
         sourceCode = builder.sourceCode;
-        gradingStatus = builder.gradingStatus;
+        setGradingStatus(builder.gradingStatus);
         aiAssessment = builder.aiAssessment;
         sonaqueAssessment = builder.sonaqueAssessment;
         numOfTestCase = builder.numOfTestCase;
@@ -43,6 +63,8 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         copyState = builder.copyState;
         setCodeSubmissionTestCaseList(builder.codeSubmissionTestCaseList);
         setProgrammingLanguageCodeQuestion(builder.programmingLanguageCodeQuestion);
+        setProgrammingLangaugeJudge0Id(builder.programmingLangaugeJudge0Id);
+        version = builder.version;
         super.setId(builder.id);
     }
 
@@ -68,6 +90,10 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
 
     public void setProgrammingLangaugeJudge0Id(Integer programmingLangaugeJudge0Id) {
         this.programmingLangaugeJudge0Id = programmingLangaugeJudge0Id;
+    }
+
+    public Integer getVersion() {
+        return version;
     }
 
     public Integer getNumOfTestCase() {
@@ -136,6 +162,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         numOfTestCaseGraded = 0;
         copyState = CopyState.CREATING;
         programmingLanguageCodeQuestion = plcq;
+        version = 0;
     }
 
     private CodeSubmissionTestCase initiateCodeSubmissionTestCase(TestCase testCase) {
@@ -149,6 +176,10 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
 
     public void setCodeSubmissionTestCaseList(List<CodeSubmissionTestCase> codeSubmissionTestCaseList) {
         this.codeSubmissionTestCaseList = codeSubmissionTestCaseList;
+    }
+
+    public void increaseGradedTestCaseByOne() {
+        numOfTestCaseGraded += 1;
     }
 
     public static final class Builder {
@@ -168,8 +199,9 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         private List<CodeSubmissionTestCase> codeSubmissionTestCaseList;
         private ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion;
         private Integer programmingLangaugeJudge0Id;
-
+        private Integer version;
         private CodeSubmissionId id;
+
         private CodeQuestionLangauge codeQuestionLangauge;
 
         private Builder() {
@@ -184,10 +216,17 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
             userId = val;
             return this;
         }
-        public Builder programmingLangaugeJudge0Id(Integer val){
+
+        public Builder programmingLangaugeJudge0Id(Integer val) {
             programmingLangaugeJudge0Id = val;
             return this;
         }
+
+        public Builder version(Integer val) {
+            version = val;
+            return this;
+        }
+
         public Builder languageId(ProgrammingLanguageId val) {
             languageId = val;
             return this;

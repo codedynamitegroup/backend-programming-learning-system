@@ -5,8 +5,8 @@ import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.TestCasePassStatus;
 
 public class CodeSubmissionTestCase extends BaseEntity<CodeSubmissionTestCaseId> {
-    private final TestCase testCase;
-    private final CodeSubmission codeSubmission;
+    private TestCase testCase;
+    private CodeSubmission codeSubmission;
     private String actualOutput;
     private String compileOutput;
     private String message;
@@ -16,6 +16,23 @@ public class CodeSubmissionTestCase extends BaseEntity<CodeSubmissionTestCaseId>
     private Float memory;
     private Boolean passed;
     private String judgeToken;
+
+    @Override
+    public String toString() {
+        return "CodeSubmissionTestCase{" +
+                "testCase=" + testCase +
+                ", codeSubmission=" + codeSubmission +
+                ", actualOutput='" + actualOutput + '\'' +
+                ", compileOutput='" + compileOutput + '\'' +
+                ", message='" + message + '\'' +
+                ", stderr='" + stderr + '\'' +
+                ", statusDescription='" + statusDescription + '\'' +
+                ", runTime=" + runTime +
+                ", memory=" + memory +
+                ", passed=" + passed +
+                ", judgeToken='" + judgeToken + '\'' +
+                '}';
+    }
 
     private CodeSubmissionTestCase(Builder builder) {
         testCase = builder.testCase;

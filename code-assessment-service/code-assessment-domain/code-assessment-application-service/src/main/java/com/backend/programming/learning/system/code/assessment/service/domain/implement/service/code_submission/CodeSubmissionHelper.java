@@ -2,12 +2,14 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 
 import com.backend.programming.learning.system.code.assessment.service.domain.CodeAssessmentDomainService;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_submission.UpdateCodeSubmissionTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_question.CodeQuestionNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_submission.CodeSubmissionJudgingServiceUnavailableException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.programming_language.ProgrammingLanguageNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.test_case.TestCaseNotFoundException;
+import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.GenericHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.code_submission.CodeSubmissionDataMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.assessment.AssessmentSourceCodeByTestCases;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.*;
@@ -18,9 +20,11 @@ import com.backend.programming.learning.system.code.assessment.service.domain.va
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.exception.user.UserNotFoundException;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
+import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import io.netty.handler.timeout.ReadTimeoutException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClientRequestException;
@@ -43,8 +47,9 @@ public class CodeSubmissionHelper {
     private final CodeSubmissionTestCaseRepository codeSubmissionTestCaseRepository;
     private final ProgrammingLanguageCodeQuestionRepository programmingLanguageCodeQuestionRepository;
     private final AssessmentSourceCodeByTestCases assessmentSourceCodeByTestCases;
+    private final GenericHelper genericHelper;
 
-    public CodeSubmissionHelper(CodeAssessmentDomainService codeAssessmentDomainService, CodeSubmissionDataMapper codeSubmissionDataMapper, CodeSubmissionRepository codeSubmissionRepository, CodeQuestionRepository codeQuestionRepository, ProgrammingLanguageRepository programmingLanguageRepository, TestCaseRepository testCaseRepository, UserRepository userRepository, CodeSubmissionTestCaseRepository codeSubmissionTestCaseRepository, ProgrammingLanguageCodeQuestionRepository programmingLanguageCodeQuestionRepository, AssessmentSourceCodeByTestCases assessmentSourceCodeByTestCases) {
+    public CodeSubmissionHelper(CodeAssessmentDomainService codeAssessmentDomainService, CodeSubmissionDataMapper codeSubmissionDataMapper, CodeSubmissionRepository codeSubmissionRepository, CodeQuestionRepository codeQuestionRepository, ProgrammingLanguageRepository programmingLanguageRepository, TestCaseRepository testCaseRepository, UserRepository userRepository, CodeSubmissionTestCaseRepository codeSubmissionTestCaseRepository, ProgrammingLanguageCodeQuestionRepository programmingLanguageCodeQuestionRepository, AssessmentSourceCodeByTestCases assessmentSourceCodeByTestCases, GenericHelper genericHelper) {
         this.codeAssessmentDomainService = codeAssessmentDomainService;
         this.codeSubmissionDataMapper = codeSubmissionDataMapper;
         this.codeSubmissionRepository = codeSubmissionRepository;
@@ -55,6 +60,7 @@ public class CodeSubmissionHelper {
         this.codeSubmissionTestCaseRepository = codeSubmissionTestCaseRepository;
         this.programmingLanguageCodeQuestionRepository = programmingLanguageCodeQuestionRepository;
         this.assessmentSourceCodeByTestCases = assessmentSourceCodeByTestCases;
+        this.genericHelper = genericHelper;
     }
 
     //don't use @transactional here
@@ -134,5 +140,28 @@ public class CodeSubmissionHelper {
             log.warn("Could not find user with id: {}", userId);
             throw new UserNotFoundException("Could not find user with id: " + userId);
         }
+    }
+
+    @Transactional
+    public CodeSubmissionTestCase handleTestCaseResult(UpdateCodeSubmissionTestCaseCommand command) {
+        CodeSubmissionTestCase cstc = codeSubmissionDataMapper.updateCodeSubmissionTestCaseCommandToCodeSubmissionTestCase(command);
+        Optional<CodeSubmissionTestCase> cstcExist = codeSubmissionTestCaseRepository.findByToken(command.getToken());
+
+        if(cstcExist.isPresent()){
+            genericHelper.mapNullAttributeToRepositoryAttribute(cstc, cstcExist.get(), CodeSubmissionTestCase.class);
+//            log.info("jfdk {}", cstc.getCodeSubmission().toString());
+            codeSubmissionTestCaseRepository.save(cstc);
+        }
+        return cstc;
+    }
+
+    @Transactional
+    public void increaseCodeSubmissionGradedTestCase(CodeSubmissionTestCase codeSubmissionTestCase) {
+        codeSubmissionRepository.updateOneTestCase(codeSubmissionTestCase.getCodeSubmission().getId());
+    }
+
+    public void logCodeSubmission(CodeSubmissionId id) {
+        Optional<CodeSubmission> codeSubmission = codeSubmissionRepository.findById(id);
+        log.info("jkas {}", codeSubmission.get().getNumOfTestCaseGraded());
     }
 }

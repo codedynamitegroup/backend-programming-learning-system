@@ -169,6 +169,7 @@ CREATE TABLE code_submission(
     number_of_test_case_graded int default 0,
     grading_status grading_status not null ,
     copy_state CopyState not null ,
+    version integer default 0 NOT NULL,
     CONSTRAINT co_su_pk PRIMARY KEY (id),
     CONSTRAINT co_qu_co_su_fk FOREIGN KEY (code_question_id)
         REFERENCES qtype_code_questions (id) MATCH SIMPLE

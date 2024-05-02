@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class UpdateCodeSubmissionTestCaseCommand {
     String stdout;
+    String stderr;
     Float time;
     Float memory;
     @NotNull

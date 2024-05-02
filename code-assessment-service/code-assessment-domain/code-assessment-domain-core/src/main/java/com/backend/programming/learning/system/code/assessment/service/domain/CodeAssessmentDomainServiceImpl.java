@@ -40,5 +40,10 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
         return codeSubmission;
     }
 
+    @Override
+    public void increaseCodeSubmissionGradedTestCase(CodeSubmission codeSubmission) {
+        codeSubmission.increaseGradedTestCaseByOne();
+    }
+
 
 }

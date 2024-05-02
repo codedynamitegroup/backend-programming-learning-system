@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -28,7 +29,24 @@ public class CodeSubmissionTestCaseRepositoryImpl implements CodeSubmissionTestC
                         .map(dataAccessMapper::codeSubmissionTestCaseToEntity)
                         .collect(Collectors.toList()))
                 .stream()
-                .map(dataAccessMapper::entityToCodeSubmission)
+                .map(dataAccessMapper::entityToCodeSubmissionTestCase)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public CodeSubmissionTestCase save(CodeSubmissionTestCase codeSubmissionTestCase) {
+        return dataAccessMapper
+                .entityToCodeSubmissionTestCase(
+                    jpaRepository
+                        .save(dataAccessMapper
+                                .codeSubmissionTestCaseToEntity(codeSubmissionTestCase)));
+    }
+
+    @Override
+    public Optional<CodeSubmissionTestCase> findByToken(String token) {
+
+        return jpaRepository
+                .findFirstByJudgeToken(token)
+                .map(dataAccessMapper::entityToCodeSubmissionTestCase);
     }
 }

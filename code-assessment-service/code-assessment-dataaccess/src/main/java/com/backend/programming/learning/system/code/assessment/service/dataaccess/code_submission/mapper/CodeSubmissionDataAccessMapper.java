@@ -35,6 +35,7 @@ public class CodeSubmissionDataAccessMapper {
                 .numOfTestCaseGraded(codeSubmission.getNumOfTestCaseGraded())
                 .gradingStatus(codeSubmission.getGradingStatus())
                 .copyState(codeSubmission.getCopyState())
+//                .version(codeSubmission.getVersion())
                 .build();
     }
 
@@ -54,6 +55,7 @@ public class CodeSubmissionDataAccessMapper {
                 .numOfTestCaseGraded(entity.getNumOfTestCaseGraded())
                 .gradingStatus(entity.getGradingStatus())
                 .copyState(entity.getCopyState())
+//                .version(entity.getVersion())
                 .build();
     }
 }

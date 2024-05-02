@@ -31,9 +31,10 @@ public class CodeSubmissionController {
 
     @PutMapping("/test-case-token")
     public void updateCodeSubmissionTestCase(@RequestBody UpdateCodeSubmissionTestCaseCommand command){
-        log.info("dnjs {}", command.toString());
+//        log.info("dnjs {}", command.toString());
         //handle code exit
         //handle over mem
+        codeSubmissionApplicationService.handleTestCaseResult(command);
 
     }
 

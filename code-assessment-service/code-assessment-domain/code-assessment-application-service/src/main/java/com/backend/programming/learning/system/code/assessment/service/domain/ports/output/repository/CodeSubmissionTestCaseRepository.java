@@ -3,7 +3,12 @@ package com.backend.programming.learning.system.code.assessment.service.domain.p
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmissionTestCase;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CodeSubmissionTestCaseRepository {
     List<CodeSubmissionTestCase> save(List<CodeSubmissionTestCase> cstcList);
+
+    CodeSubmissionTestCase save(CodeSubmissionTestCase codeSubmissionTestCase);
+
+    Optional<CodeSubmissionTestCase> findByToken(String token);
 }

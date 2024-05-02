@@ -36,7 +36,7 @@ public class CodeSubmissionTestCaseDataAccessMapper {
                 .build();
     }
 
-    public CodeSubmissionTestCase entityToCodeSubmission(CodeSubmissionTestCaseEntity entity) {
+    public CodeSubmissionTestCase entityToCodeSubmissionTestCase(CodeSubmissionTestCaseEntity entity) {
         return CodeSubmissionTestCase.builder()
                 .id(new CodeSubmissionTestCaseId(entity.getId()))
                 .testCase(testCaseDataAccessMapper.testCaseEntityToTestCase(entity.getTestCase()))
