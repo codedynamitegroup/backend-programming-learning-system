@@ -25,4 +25,9 @@ public class MoodleApplicationServiceImpl implements MoodleApplicationService {
     public List<UserEntityResponse> syncUser() {
         return moodleCommandHandler.syncUser();
     }
+
+    @Override
+    public String getToken(String username, String password) {
+        return moodleCommandHandler.getToken(username, password);
+    }
 }
