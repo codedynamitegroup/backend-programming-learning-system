@@ -1,9 +1,10 @@
-package com.backend.programming.learning.system.auth.service.application.rest.moodle.models;
+package com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user_moodle;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -15,6 +16,8 @@ import lombok.Setter;
 @Setter
 @Getter
 @Builder
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class UserModel {
     String id;
@@ -35,6 +38,7 @@ public class UserModel {
     Integer mailformat;
     String description;
     Integer descriptionformat;
+    String country;
     String profileimageurlsmall;
     String profileimageurl;
     Object preferences;
