@@ -32,6 +32,7 @@ public class MoodleCommandHandler {
     private final UserRepository userRepository;
     String GET_USERS = "core_user_get_users";
     String MOODLE_URL = "http://62.171.185.208/webservice/rest/server.php";
+    String MOODLE_URL_TOKEN = "http://62.171.185.208/login/token.php";
     String TOKEN = "cdf90b5bf53bcae577c60419702dbee7";
 
     @Transactional
@@ -66,5 +67,11 @@ public class MoodleCommandHandler {
         });
 
         return moodleDataMapper.userEntityResponseList(result);
+    }
+
+    public String getToken(String username, String password) {
+        String apiURL = String.format("%s?username=%s&password=%s&service=wh", MOODLE_URL_TOKEN, username, password);
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(apiURL, String.class);
     }
 }

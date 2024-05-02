@@ -12,4 +12,6 @@ import java.util.List;
  */
 public interface MoodleApplicationService {
     List<UserEntityResponse> syncUser();
+
+    String getToken(String username, String password);
 }
