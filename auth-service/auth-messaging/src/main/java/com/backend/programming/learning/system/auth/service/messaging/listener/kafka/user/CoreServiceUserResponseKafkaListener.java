@@ -41,23 +41,21 @@ public class CoreServiceUserResponseKafkaListener implements KafkaConsumer<UserR
 
         messages.forEach(userResponseAvroModel -> {
             try {
-                switch (userResponseAvroModel.getCopyState()){
-                    case CREATED, DELETED, UPDATED: {
+                switch (userResponseAvroModel.getCopyState()) {
+                    case CREATED, DELETED, UPDATED -> {
                         userResponseMessageListener
                                 .userCreatedUpdatedOrDeletedSuccess(userMessagingDataMapper
                                         .userResponseAvroModelToUserResponse(userResponseAvroModel));
-                        break;
                     }
-                    case CREATE_FAILED, DELETE_FAILED, UPDATE_FAILED:{
+                    case CREATE_FAILED, DELETE_FAILED, UPDATE_FAILED -> {
                         userResponseMessageListener
                                 .userCreatedUpdatedOrDeletedFail(userMessagingDataMapper
                                         .userResponseAvroModelToUserResponse(userResponseAvroModel));
-                        break;
                     }
                 }
             } catch (OptimisticLockException e) {
                 //NO-OP for optimistic lock. This means another thread finished the work, do not throw error to prevent reading the data from kafka again!
-                log.error("Caught optimistic locking exception in UserResponseAvroModel for order id: {}",
+                log.error("Caught optimistic locking exception in UserResponseAvroModel for user id: {}",
                         userResponseAvroModel.getUserId());
             } catch (AuthNotFoundException e) {
                 //NO-OP for OrderNotFoundException

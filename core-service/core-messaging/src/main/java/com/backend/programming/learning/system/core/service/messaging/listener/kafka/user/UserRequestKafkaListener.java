@@ -2,7 +2,7 @@ package com.backend.programming.learning.system.core.service.messaging.listener.
 
 import com.backend.programming.learning.system.core.service.domain.exception.CoreApplicationServiceException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
-import com.backend.programming.learning.system.core.service.domain.ports.input.message.listener.auth.UserRequestMessageListener;
+import com.backend.programming.learning.system.core.service.domain.ports.input.message.listener.user.UserRequestMessageListener;
 import com.backend.programming.learning.system.core.service.messaging.mapper.UserMessagingDataMapper;
 import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel;
 import com.backend.programming.learning.system.kafka.consumer.KafkaConsumer;
@@ -15,7 +15,6 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.OptimisticLockException;
 import java.sql.SQLException;
 import java.util.List;
 

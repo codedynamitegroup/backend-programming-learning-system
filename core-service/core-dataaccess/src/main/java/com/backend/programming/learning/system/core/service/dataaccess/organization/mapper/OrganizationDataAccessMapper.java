@@ -9,10 +9,13 @@ import org.springframework.stereotype.Component;
 public class OrganizationDataAccessMapper {
     public Organization organizationEntityToOrganization(OrganizationEntity organizationEntity) {
         return Organization.builder()
-                .organizationId(new OrganizationId(organizationEntity.getId()))
+                .id(new OrganizationId(organizationEntity.getId()))
                 .name(organizationEntity.getName())
                 .description(organizationEntity.getDescription())
                 .moodleUrl(organizationEntity.getMoodleUrl())
+                .apiKey(organizationEntity.getApiKey())
+                .copyState(organizationEntity.getCopyState())
+                .isDeleted(organizationEntity.getIsDeleted())
                 .createdAt(organizationEntity.getCreatedAt())
                 .updatedAt(organizationEntity.getUpdatedAt())
                 .build();
@@ -26,6 +29,9 @@ public class OrganizationDataAccessMapper {
                 .moodleUrl(organization.getMoodleUrl())
                 .createdAt(organization.getCreatedAt())
                 .updatedAt(organization.getUpdatedAt())
+                .isDeleted(organization.getDeleted())
+                .copyState(organization.getCopyState())
+                .apiKey(organization.getApiKey())
                 .build();
     }
 }

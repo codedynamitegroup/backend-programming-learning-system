@@ -14,11 +14,16 @@ import com.backend.programming.learning.system.auth.service.domain.entity.Organi
 import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationCreatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationDeletedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationUpdatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.implement.saga.organization.OrganizationUpdateSagaHelper;
 import com.backend.programming.learning.system.auth.service.domain.mapper.OrganizationDataMapper;
+import com.backend.programming.learning.system.auth.service.domain.outbox.scheduler.organization.OrganizationOutboxHelper;
+import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.UUID;
 
 @Slf4j
 @Component
@@ -29,21 +34,34 @@ public class OrganizationCommandHandler {
     private final OrganizationQueryHelper organizationQueryHelper;
     private final OrganizationUpdateHelper organizationUpdateHelper;
     private final OrganizationDataMapper organizationDataMapper;
+    private final OrganizationUpdateSagaHelper organizationUpdateSagaHelper;
+    private final OrganizationOutboxHelper organizationOutboxHelper;
 
-    public OrganizationCommandHandler(OrganizationCreateHelper organizationCreateHelper, OrganizationDeleteHelper organizationDeleteHelper, OrganizationQueryHelper organizationQueryHelper, OrganizationUpdateHelper organizationUpdateHelper, OrganizationDataMapper organizationDataMapper) {
+    public OrganizationCommandHandler(OrganizationCreateHelper organizationCreateHelper, OrganizationDeleteHelper organizationDeleteHelper, OrganizationQueryHelper organizationQueryHelper, OrganizationUpdateHelper organizationUpdateHelper, OrganizationDataMapper organizationDataMapper, OrganizationUpdateSagaHelper organizationUpdateSagaHelper, OrganizationOutboxHelper organizationOutboxHelper) {
         this.organizationCreateHelper = organizationCreateHelper;
         this.organizationDeleteHelper = organizationDeleteHelper;
         this.organizationQueryHelper = organizationQueryHelper;
         this.organizationUpdateHelper = organizationUpdateHelper;
         this.organizationDataMapper = organizationDataMapper;
+        this.organizationUpdateSagaHelper = organizationUpdateSagaHelper;
+        this.organizationOutboxHelper = organizationOutboxHelper;
     }
 
     @Transactional
     public CreateOrganizationResponse createOrganization(CreateOrganizationCommand createOrganizationCommand) {
         OrganizationCreatedEvent organizationCreatedEvent = organizationCreateHelper.persistOrganization(createOrganizationCommand);
         log.info("Organization is created with id: {}", organizationCreatedEvent.getOrganization().getId().getValue());
-        return organizationDataMapper.organizationToCreateOrganizationResponse(organizationCreatedEvent.getOrganization(),
+
+        CreateOrganizationResponse createOrganizationResponse = organizationDataMapper.organizationToCreateOrganizationResponse(organizationCreatedEvent.getOrganization(),
                 "Organization created successfully");
+
+        organizationOutboxHelper.saveOrganizationOutboxMessage(
+                organizationDataMapper.organizationCreatedEventToOrganizationEventPayload(organizationCreatedEvent),
+                organizationCreatedEvent.getOrganization().getCopyState(),
+                OutboxStatus.STARTED,
+                organizationUpdateSagaHelper.copyStatusToSagaStatus(organizationCreatedEvent.getOrganization().getCopyState()),
+                UUID.randomUUID());
+        return createOrganizationResponse;
     }
 
     @Transactional(readOnly = true)
@@ -64,16 +82,30 @@ public class OrganizationCommandHandler {
     public UpdateOrganizationResponse updateOrganization(UpdateOrganizationCommand updateOrganizationCommand) {
         OrganizationUpdatedEvent organizationUpdatedEvent = organizationUpdateHelper.persistOrganization(updateOrganizationCommand);
         log.info("Organization is updated with id: {}", organizationUpdatedEvent.getOrganization().getId().getValue());
-        return organizationDataMapper.organizationToUpdateOrganizationResponse(organizationUpdatedEvent.getOrganization(),
+        UpdateOrganizationResponse organizationResponse = organizationDataMapper.organizationToUpdateOrganizationResponse(organizationUpdatedEvent.getOrganization(),
                 "Organization updated successfully");
+        organizationOutboxHelper.saveOrganizationOutboxMessage(
+                organizationDataMapper.organizationUpdatedEventToOrganizationEventPayload(organizationUpdatedEvent),
+                organizationUpdatedEvent.getOrganization().getCopyState(),
+                OutboxStatus.STARTED,
+                organizationUpdateSagaHelper.copyStatusToSagaStatus(organizationUpdatedEvent.getOrganization().getCopyState()),
+                UUID.randomUUID());
+        return organizationResponse;
     }
 
     @Transactional
     public DeleteOrganizationResponse deleteOrganization(DeleteOrganizationCommand deleteOrganizationCommand) {
         OrganizationDeletedEvent organizationDeletedEvent = organizationDeleteHelper.deleteOrganization(deleteOrganizationCommand);
         log.info("Organization is deleted with id: {}", organizationDeletedEvent.getOrganization().getId().getValue());
-        return organizationDataMapper.deleteOrganizationResponse(organizationDeletedEvent.getOrganization().getId().getValue(),
+        DeleteOrganizationResponse deleteOrganizationResponse = organizationDataMapper.deleteOrganizationResponse(organizationDeletedEvent.getOrganization().getId().getValue(),
                 "Organization deleted successfully");
+        organizationOutboxHelper.saveOrganizationOutboxMessage(
+                organizationDataMapper.organizationDeletedEventToOrganizationEventPayload(organizationDeletedEvent),
+                organizationDeletedEvent.getOrganization().getCopyState(),
+                OutboxStatus.STARTED,
+                organizationUpdateSagaHelper.copyStatusToSagaStatus(organizationDeletedEvent.getOrganization().getCopyState()),
+                UUID.randomUUID());
+        return deleteOrganizationResponse;
     }
 
 }

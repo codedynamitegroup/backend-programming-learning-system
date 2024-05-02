@@ -11,10 +11,11 @@ VALUES
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb47', 'Learn JavaScript', 'JavaScript is a programming language that conforms to the ECMAScript specification. JavaScript is high-level, often just-in-time compiled, and multi-paradigm. It has curly-bracket syntax, dynamic typing, prototype-based object-orientation, and first-class functions.', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', 'Data structures and Algorithms', 'Explore the fundamental building blocks of computer science through our comprehensive courses on Data Structures and Algorithms. Gain a solid understanding of both theory and practical application.','9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992' );
 
-INSERT INTO public.organization(id, name, description)
+INSERT INTO public.organization(id, description, copy_state, name, created_at, updated_at, is_deleted)
 VALUES
-    ('9ba179ed-d26d-4828-a0f6-8836c2063992', 'Codecademy', 'Codecademy is an American online interactive platform that offers free coding classes in 12 different programming languages including Python, Java, JavaScript (jQuery, AngularJS, React.js), Ruby, SQL, and Sass, as well as markup languages HTML and CSS.'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb46', 'Coursera', 'Coursera is an American massive open online course provider founded in 2012 by Stanford University computer science professors Andrew Ng and Daphne Koller that offers massive open online courses, specializations, degrees, professional and mastertrack courses.');
+	 ('9ba179ed-d26d-4828-a0f6-8836c2063992',NULL,'CREATED','Code Dynamite','2024-04-15 18:37:44.08878+07','2024-04-15 18:37:44.08878+07',false),
+	 ('08b65a39-394f-4977-a5fa-3fe145b620f8',NULL,'CREATED','moodle2','2024-04-15 18:09:29.488151+07','2024-04-15 18:09:29.488151+07',false),
+	 ('3ead3b08-afdd-442f-b544-fdbd86eaa186',NULL,'CREATED','Code Dynamite','2024-04-15 18:09:40.033204+07','2024-04-15 18:09:40.033204+07',false);
 
 INSERT INTO public.programming_language(id, name, compiler_api_id)
 VALUES

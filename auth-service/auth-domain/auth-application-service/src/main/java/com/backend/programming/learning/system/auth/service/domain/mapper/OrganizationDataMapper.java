@@ -10,11 +10,17 @@ import com.backend.programming.learning.system.auth.service.domain.dto.response_
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
+import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationCreatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationDeletedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationUpdatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.outbox.model.organization.OrganizationEventPayload;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,6 +48,24 @@ public class OrganizationDataMapper {
                 .email(organization.getEmail())
                 .name(organization.getName())
                 .message(message)
+                .build();
+    }
+
+    public OrganizationEventPayload organizationCreatedEventToOrganizationEventPayload(OrganizationCreatedEvent organizationCreatedEvent) {
+        Organization organization = organizationCreatedEvent.getOrganization();
+        return OrganizationEventPayload.builder()
+                .organizationId(organization.getId().getValue().toString())
+                .email(organization.getEmail())
+                .description(organization.getDescription())
+                .name(organization.getName())
+                .phone(organization.getPhone())
+                .address(organization.getAddress())
+                .createdAt(organization.getCreatedAt())
+                .createdBy(organization.getCreatedBy().getId().getValue().toString())
+                .updatedAt(organization.getUpdatedAt())
+                .updatedBy(organization.getUpdatedBy().getId().getValue().toString())
+                .isDeleted(organization.getDeleted())
+                .copyState(CopyState.CREATING.name())
                 .build();
     }
 
@@ -85,10 +109,36 @@ public class OrganizationDataMapper {
                 .build();
     }
 
+    public OrganizationEventPayload organizationDeletedEventToOrganizationEventPayload(OrganizationDeletedEvent organizationDeletedEvent) {
+        Organization organization = organizationDeletedEvent.getOrganization();
+        return OrganizationEventPayload.builder()
+                .organizationId(organization.getId().getValue().toString())
+                .isDeleted(organization.getDeleted())
+                .copyState(CopyState.DELETING.name())
+                .build();
+    }
+
     public UpdateOrganizationResponse organizationToUpdateOrganizationResponse(Organization organizationUpdated, String message) {
         return UpdateOrganizationResponse.builder()
                 .organizationId(organizationUpdated.getId().getValue())
                 .message(message)
+                .build();
+    }
+
+    public OrganizationEventPayload organizationUpdatedEventToOrganizationEventPayload(OrganizationUpdatedEvent organizationUpdatedEvent) {
+        Organization organization = organizationUpdatedEvent.getOrganization();
+        return OrganizationEventPayload.builder()
+                .organizationId(organization.getId().getValue().toString())
+                .description(organization.getDescription())
+                .name(organization.getName())
+                .email(organization.getEmail())
+                .phone(organization.getPhone())
+                .address(organization.getAddress())
+                .apiKey(organization.getApiKey())
+                .moodleUrl(organization.getMoodleUrl())
+                .updatedAt(organization.getUpdatedAt())
+                .updatedBy(organization.getUpdatedBy().getId().getValue().toString())
+                .copyState(CopyState.UPDATING.name())
                 .build();
     }
 }

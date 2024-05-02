@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.implement.message.listener.user;
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.message.user.UserRequest;
-import com.backend.programming.learning.system.core.service.domain.ports.input.message.listener.auth.UserRequestMessageListener;
+import com.backend.programming.learning.system.core.service.domain.ports.input.message.listener.user.UserRequestMessageListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;

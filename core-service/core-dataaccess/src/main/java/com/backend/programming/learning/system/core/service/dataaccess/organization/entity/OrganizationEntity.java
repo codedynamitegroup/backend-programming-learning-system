@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.dataaccess.organization.entity;
 
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,8 +24,12 @@ public class OrganizationEntity {
     private String description;
     private String name;
     private String moodleUrl;
+    private String apiKey;
+    @Enumerated(EnumType.STRING)
+    private CopyState copyState;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
+    private Boolean isDeleted;
 
     @OneToMany(mappedBy = "organization", cascade = CascadeType.REMOVE)
     private List<QuestionEntity> questions;

@@ -8,11 +8,6 @@ import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 
-/***********************************
- * Created by TGT on 31/03/2024.
- * Description: User aggregate root class for core service
- ************************************/
-
 public class User extends AggregateRoot<UserId> {
     private String email;
     private String firstName;

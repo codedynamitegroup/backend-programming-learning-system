@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.core.service.domain;
 
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.event.contest_user.ContestUserUpdatedEvent;
+import com.backend.programming.learning.system.core.service.domain.event.organization.*;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
@@ -51,6 +52,13 @@ public interface CoreDomainService {
     UserUpdatedFailEvent updatedUserFail(User user, List<String> failureMessages);
     UserDeletedSuccessEvent deletedUserSuccess(User user);
     UserDeletedFailEvent deletedUserFail(User user, List<String> failureMessages);
+
+    OrganizationCreatedSuccessEvent createdOrganizationSuccess(Organization organization);
+    OrganizationCreatedFailEvent createdOrganizationFail(Organization organization, List<String> failureMessages);
+    OrganizationUpdatedSuccessEvent updatedOrganizationSuccess(Organization organization);
+    OrganizationUpdatedFailEvent updatedOrganizationFail(Organization organization, List<String> failureMessages);
+    OrganizationDeletedSuccessEvent deletedOrganizationSuccess(Organization organization);
+    OrganizationDeletedFailEvent deletedOrganizationFail(Organization organization, List<String> failureMessages);
 
     void updateContestUserCalendarEventState(ContestUser contestUser, String calendarEventId, UpdateState updateCalendarEventState);
 }
