@@ -1,9 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.question.message;
 
 import com.backend.programming.learning.system.course.service.domain.CourseDomainService;
-import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionCreateRequest;
-import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionDeleteRequest;
-import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionUpdateRequest;
+import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionRequest;
 import com.backend.programming.learning.system.course.service.domain.event.question.event.*;
 import com.backend.programming.learning.system.course.service.domain.mapper.question.QuestionDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.input.message.listener.question.QuestionMessageListener;
@@ -43,50 +41,56 @@ public class QuestionMessageListenerImpl implements QuestionMessageListener {
     }
 
     @Override
-    public void createQuestion(QuestionCreateRequest questionCreateRequest) {
+    public void createQuestion(QuestionRequest questionCreateRequest) {
         try {
             QuestionCreatedEvent questionCreatedEvent = courseDomainService
-                    .createQuestionEvent(questionDataMapper.questionCreateRequestToQuestion(questionCreateRequest));
+                    .createQuestionEvent(questionDataMapper.questionCreateRequestToQuestion(questionCreateRequest),
+                            questionCreateRequest.getSagaId());
             questionCreatedResponseMessagePublisher.publish(questionCreatedEvent);
         }
         catch (Exception e) {
             log.error("Error while sending message to topic: {} with message: {}", questionCreateRequest, e.getMessage());
 
             QuestionCreateFailedEvent questionCreateFailedEvent = courseDomainService
-                    .createQuestionFailedEvent(questionDataMapper.questionCreateRequestToQuestion(questionCreateRequest));
+                    .createQuestionFailedEvent(questionDataMapper.questionCreateRequestToQuestion(questionCreateRequest),
+                            questionCreateRequest.getSagaId());
             questionCreateFailedResponseMessagePublisher.publish(questionCreateFailedEvent);
         }
 
     }
 
     @Override
-    public void updateQuestion(QuestionUpdateRequest questionUpdateRequest) {
+    public void updateQuestion(QuestionRequest questionUpdateRequest) {
         try {
             QuestionUpdatedEvent questionUpdatedEvent = courseDomainService
-                    .updateQuestionEvent(questionDataMapper.questionUpdateRequestToQuestion(questionUpdateRequest));
+                    .updateQuestionEvent(questionDataMapper.questionUpdateRequestToQuestion(questionUpdateRequest),
+                            questionUpdateRequest.getSagaId());
             questionUpdatedResponseMessagePublisher.publish(questionUpdatedEvent);
         }
         catch (Exception e) {
             log.error("Error while sending message to topic: {} with message: {}", questionUpdateRequest, e.getMessage());
 
             QuestionUpdateFailedEvent questionUpdateFailedEvent = courseDomainService
-                    .updateQuestionFailedEvent(questionDataMapper.questionUpdateRequestToQuestion(questionUpdateRequest));
+                    .updateQuestionFailedEvent(questionDataMapper.questionUpdateRequestToQuestion(questionUpdateRequest),
+                            questionUpdateRequest.getSagaId());
             questionUpdateFailedResponseMessagePublisher.publish(questionUpdateFailedEvent);
         }
     }
 
     @Override
-    public void deleteQuestion(QuestionDeleteRequest questionDeleteRequest) {
+    public void deleteQuestion(QuestionRequest questionDeleteRequest) {
         try {
             QuestionDeletedEvent questionDeletedEvent = courseDomainService
-                    .deleteQuestionEvent(questionDataMapper.questionDeleteRequestToQuestion(questionDeleteRequest));
+                    .deleteQuestionEvent(questionDataMapper.questionDeleteRequestToQuestion(questionDeleteRequest),
+                            questionDeleteRequest.getSagaId());
             questionDeletedResponseMessagePublisher.publish(questionDeletedEvent);
         }
         catch (Exception e) {
             log.error("Error while sending message to topic: {} with message: {}", questionDeleteRequest, e.getMessage());
 
             QuestionDeleteFailedEvent questionDeleteFailedEvent = courseDomainService
-                    .deleteQuestionFailedEvent(questionDataMapper.questionDeleteRequestToQuestion(questionDeleteRequest));
+                    .deleteQuestionFailedEvent(questionDataMapper.questionDeleteRequestToQuestion(questionDeleteRequest),
+                            questionDeleteRequest.getSagaId());
             questionDeleteFailedResponseMessagePublisher.publish(questionDeleteFailedEvent);
         }
 

@@ -44,6 +44,24 @@ CREATE TYPE update_state AS ENUM (
     'UPDATE_FAILED',
     'CREATE_FAILED');
 
+DROP TYPE IF EXISTS CopyState;
+CREATE TYPE CopyState AS ENUM (
+    'CREATING',
+    'CREATED',
+    'UPDATING',
+    'UPDATED',
+    'DELETING',
+    'DELETED',
+    'CREATE_PROPAGATING',
+    'UPDATE_PROPAGATING',
+    'DELETE_PROPAGATING',
+    'CREATE_ROLLBACKING',
+    'UPDATE_ROLLBACKING',
+    'DELETE_ROLLBACKING',
+    'DELETE_FAILED',
+    'UPDATE_FAILED',
+    'CREATE_FAILED');
+
 DROP TYPE IF EXISTS saga_status;
 CREATE TYPE saga_status AS ENUM ('STARTED', 'FAILED', 'SUCCEEDED', 'PROCESSING', 'COMPENSATING', 'COMPENSATED');
 
@@ -517,3 +535,28 @@ CREATE INDEX calendar_event_outbox_saga_status
 CREATE UNIQUE INDEX calendar_event_outbox_saga_id
     ON "public".calendar_event_update_outbox
         (type, saga_id, update_calendar_event_state, outbox_status);
+
+DROP TABLE IF EXISTS "public".question_outbox CASCADE;
+CREATE TABLE  "public".question_outbox
+(
+    id uuid NOT NULL,
+    saga_id uuid NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    processed_at TIMESTAMP WITH TIME ZONE,
+    type character varying COLLATE pg_catalog."default" NOT NULL,
+    payload jsonb NOT NULL,
+    prev_payload jsonb NULL,
+    outbox_status outbox_status NOT NULL,
+    saga_status saga_status NOT NULL,
+    copy_state CopyState NOT NULL,
+    version integer NOT NULL,
+    CONSTRAINT question_outbox_pkey PRIMARY KEY (id)
+);
+
+CREATE UNIQUE INDEX "question_outbox_saga_status"
+    ON "public".question_outbox
+    (type, outbox_status, saga_status);
+
+CREATE UNIQUE INDEX "question_outbox_saga_id"
+    ON "public".question_outbox
+    (type, saga_id, saga_status);

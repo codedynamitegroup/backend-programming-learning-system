@@ -19,73 +19,10 @@ import java.util.stream.Collectors;
 
 @Component
 public class QuestionMessagingDataMapper {
-    public QuestionRequestAvroModel questionCreatedToQuestionCreateRequestAvroModel(QuestionCreatedEvent questionCreatedEvent) {
-        Question question = questionCreatedEvent.getQuestion();
-
-        return QuestionRequestAvroModel.newBuilder()
-                .setId(question.getId().getValue().toString())
-                .setSagaId(UUID.randomUUID().toString())
-                .setOrganizationId(question.getOrganization().getId().getValue().toString())
-                .setCreatedBy(question.getCreatedBy().getId().getValue().toString())
-                .setUpdatedBy(question.getUpdatedBy().getId().getValue().toString())
-                .setDifficulty(question.getDifficulty().toString())
-                .setName(question.getName())
-                .setQuestionText(question.getQuestionText())
-                .setGeneralFeedback(question.getGeneralFeedback())
-                .setDefaultMark(BigDecimal.valueOf(question.getDefaultMark()))
-                .setQType(question.getqtype().toString())
-                .setAnswers(answerListToAnswerIdList(question.getAnswers()))
-                .build();
-    }
-
-    public QuestionRequestAvroModel questionDeletedToQuestionDeleteRequestAvroModel(QuestionDeletedEvent questionDeletedEvent) {
-        Question question = questionDeletedEvent.getQuestion();
-
-        return QuestionRequestAvroModel.newBuilder()
-                .setId(question.getId().getValue().toString())
-                .setSagaId(UUID.randomUUID().toString())
-                .setOrganizationId(question.getOrganization().getId().getValue().toString())
-                .setCreatedBy(question.getCreatedBy().getId().getValue().toString())
-                .setUpdatedBy(question.getUpdatedBy().getId().getValue().toString())
-                .setDifficulty(question.getDifficulty().toString())
-                .setName(question.getName())
-                .setQuestionText(question.getQuestionText())
-                .setGeneralFeedback(question.getGeneralFeedback())
-                .setDefaultMark(BigDecimal.valueOf(question.getDefaultMark()))
-                .setQType(question.getqtype().toString())
-                .setAnswers(answerListToAnswerIdList(question.getAnswers()))
-                .build();
-    }
-
-    public QuestionRequestAvroModel questionUpdatedToQuestionUpdateRequestAvroModel(QuestionUpdatedEvent questionUpdatedEvent) {
-        Question question = questionUpdatedEvent.getQuestion();
-
-        return QuestionRequestAvroModel.newBuilder()
-                .setId(question.getId().getValue().toString())
-                .setSagaId(UUID.randomUUID().toString())
-                .setOrganizationId(question.getOrganization().getId().getValue().toString())
-                .setCreatedBy(question.getCreatedBy().getId().getValue().toString())
-                .setUpdatedBy(question.getUpdatedBy().getId().getValue().toString())
-                .setDifficulty(question.getDifficulty().toString())
-                .setName(question.getName())
-                .setQuestionText(question.getQuestionText())
-                .setGeneralFeedback(question.getGeneralFeedback())
-                .setDefaultMark(BigDecimal.valueOf(question.getDefaultMark()))
-                .setQType(question.getqtype().toString())
-                .setAnswers(answerListToAnswerIdList(question.getAnswers()))
-                .build();
-    }
-
-    private List<String> answerListToAnswerIdList(List<AnswerOfQuestion> answers) {
-        return answers.stream()
-                .map(answer -> answer.getId().getValue().toString())
-                .collect(Collectors.toList());
-    }
-
     public QuestionResponse questionResponseAvroModelToQuestionResponse(QuestionResponseAvroModel questionResponseAvroModel) {
         return QuestionResponse.builder()
                 .id(questionResponseAvroModel.getId())
-                .sagaId(UUID.randomUUID().toString())
+                .sagaId(questionResponseAvroModel.getSagaId())
                 .organizationId(questionResponseAvroModel.getOrganizationId())
                 .createdBy(questionResponseAvroModel.getCreatedBy())
                 .updatedBy(questionResponseAvroModel.getUpdatedBy())
@@ -103,7 +40,7 @@ public class QuestionMessagingDataMapper {
     public QuestionRequestAvroModel questionEventPayloadToQuestionRequestAvroModel(String sagaId,
                                                                                    QuestionEventPayload questionEventPayload) {
         return QuestionRequestAvroModel.newBuilder()
-                .setId(UUID.randomUUID().toString())
+                .setId(questionEventPayload.getId())
                 .setSagaId(sagaId)
                 .setOrganizationId(questionEventPayload.getOrganizationId())
                 .setCreatedBy(questionEventPayload.getCreatedBy())

@@ -8,8 +8,8 @@ import java.time.ZonedDateTime;
 public class QuestionUpdatedEvent extends QuestionEvent{
     public QuestionUpdatedEvent(
             Question question,
-            ZonedDateTime createdAt, CopyState copyState) {
-        super(question, createdAt, copyState);
+            ZonedDateTime createdAt, CopyState copyState, String sagaId) {
+        super(question, createdAt, copyState, sagaId);
     }
 
     @Override

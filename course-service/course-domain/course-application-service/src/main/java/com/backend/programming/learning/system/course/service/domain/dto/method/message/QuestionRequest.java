@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Builder
 @AllArgsConstructor
-public class QuestionDeleteRequest {
+public class QuestionRequest {
     private String id;
     private String sagaId;
     private String organizationId;

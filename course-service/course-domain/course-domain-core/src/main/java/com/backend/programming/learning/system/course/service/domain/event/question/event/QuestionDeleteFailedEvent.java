@@ -9,8 +9,8 @@ public class QuestionDeleteFailedEvent extends QuestionEvent{
     public QuestionDeleteFailedEvent(
             Question question,
             ZonedDateTime createdAt,
-            CopyState copyState) {
-        super(question, createdAt, copyState);
+            CopyState copyState, String sagaId) {
+        super(question, createdAt, copyState, sagaId);
     }
 
     @Override

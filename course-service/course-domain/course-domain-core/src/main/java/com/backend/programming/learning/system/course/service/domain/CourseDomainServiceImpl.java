@@ -108,51 +108,51 @@ public class CourseDomainServiceImpl implements CourseDomainService {
     }
 
     @Override
-    public QuestionCreatedEvent createQuestionEvent(Question question) {
+    public QuestionCreatedEvent createQuestionEvent(Question question, String sagaId) {
         log.info("Question with id: {} is created with event", question.getId().getValue());
         return new QuestionCreatedEvent(question,
                 ZonedDateTime.now(ZoneId.of("UTC")),
-                CopyState.CREATED);
+                CopyState.CREATED, sagaId);
     }
 
     @Override
-    public QuestionCreateFailedEvent createQuestionFailedEvent(Question question) {
+    public QuestionCreateFailedEvent createQuestionFailedEvent(Question question, String sagaId) {
         log.info("Question with id: {} is failed to create with event", question.getId().getValue());
         return new QuestionCreateFailedEvent(question,
                 ZonedDateTime.now(ZoneId.of("UTC")),
-                CopyState.CREATE_FAILED);
+                CopyState.CREATE_FAILED, sagaId);
     }
 
     @Override
-    public QuestionUpdatedEvent updateQuestionEvent(Question question) {
+    public QuestionUpdatedEvent updateQuestionEvent(Question question, String sagaId) {
         log.info("Question with id: {} is updated with event", question.getId().getValue());
         return new QuestionUpdatedEvent(question,
                 ZonedDateTime.now(ZoneId.of("UTC")),
-                CopyState.UPDATED);
+                CopyState.UPDATED, sagaId);
     }
 
     @Override
-    public QuestionUpdateFailedEvent updateQuestionFailedEvent(Question question) {
+    public QuestionUpdateFailedEvent updateQuestionFailedEvent(Question question, String sagaId) {
         log.info("Question with id: {} is failed to update with event", question.getId().getValue());
         return new QuestionUpdateFailedEvent(question,
                 ZonedDateTime.now(ZoneId.of("UTC")),
-                CopyState.UPDATE_FAILED);
+                CopyState.UPDATE_FAILED, sagaId);
     }
 
     @Override
-    public QuestionDeletedEvent deleteQuestionEvent(Question question) {
+    public QuestionDeletedEvent deleteQuestionEvent(Question question, String sagaId) {
         log.info("Question with id: {} is deleted with event", question.getId().getValue());
         return new QuestionDeletedEvent(question,
                 ZonedDateTime.now(ZoneId.of("UTC")),
-                CopyState.DELETED);
+                CopyState.DELETED, sagaId);
     }
 
     @Override
-    public QuestionDeleteFailedEvent deleteQuestionFailedEvent(Question question) {
+    public QuestionDeleteFailedEvent deleteQuestionFailedEvent(Question question, String sagaId) {
         log.info("Question with id: {} is failed to delete with event", question.getId().getValue());
         return new QuestionDeleteFailedEvent(question,
                 ZonedDateTime.now(ZoneId.of("UTC")),
-                CopyState.DELETE_FAILED);
+                CopyState.DELETE_FAILED, sagaId);
     }
 
     @Override

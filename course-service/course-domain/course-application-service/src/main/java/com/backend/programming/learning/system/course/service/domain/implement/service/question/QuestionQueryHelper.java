@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.implement.question;
+package com.backend.programming.learning.system.course.service.domain.implement.service.question;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QueryAllQuestionCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.Question;
