@@ -4,13 +4,11 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.test_case.CreateTestCasesCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.test_case.CreateTestCasesResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_submission.UpdateCodeSubmissionTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.CodeSubmissionApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/code-assessment/code-submission",
@@ -24,12 +22,19 @@ public class CodeSubmissionController {
     }
 
     @PostMapping
-    public ResponseEntity<CreateCodeSubmissionResponse> createTestCases
+    public ResponseEntity<CreateCodeSubmissionResponse> createCodeSubmission
             (@RequestBody CreateCodeSubmissionCommand createCodeSubmissionCommand){
-        log.info("adsd {}", createCodeSubmissionCommand.getCodeQuestionId());
         CreateCodeSubmissionResponse response =
                 codeSubmissionApplicationService.createCodeSubmission(createCodeSubmissionCommand);
         return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/test-case-token")
+    public void updateCodeSubmissionTestCase(@RequestBody UpdateCodeSubmissionTestCaseCommand command){
+        log.info("dnjs {}", command.toString());
+        //handle code exit
+        //handle over mem
+
     }
 
 }

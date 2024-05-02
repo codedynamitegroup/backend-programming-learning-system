@@ -35,7 +35,7 @@ DROP TYPE IF EXISTS qtype;
 CREATE TYPE qtype AS ENUM ('MULTIPLE_CHOICE', 'SHORT_ANSWER', 'CODE', 'ESSAY');
 
 DROP TYPE IF EXISTS grading_status;
-CREATE TYPE grading_status AS ENUM ('GRADING', 'ACCEPTED', 'WRONG_ANSWER', 'GRADING_SYSTEM_UNAVAILABLE');
+CREATE TYPE grading_status AS ENUM ('GRADING', 'GRADED', 'GRADING_SYSTEM_UNAVAILABLE');
 
 
 
@@ -192,6 +192,9 @@ CREATE TABLE code_submission_test_case(
     code_submission_id uuid not null ,
     actual_output text,
     compile_output text,
+    message text,
+    stderr text,
+    status_description text,
     runtime float,
     memory float,
     passed boolean,

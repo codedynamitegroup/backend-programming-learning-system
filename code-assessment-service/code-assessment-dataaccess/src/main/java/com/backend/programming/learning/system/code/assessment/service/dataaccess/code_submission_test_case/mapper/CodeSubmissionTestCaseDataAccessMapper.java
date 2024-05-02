@@ -29,6 +29,9 @@ public class CodeSubmissionTestCaseDataAccessMapper {
                 .runtime(cstc.getRunTime())
                 .memory(cstc.getMemory())
                 .passed(cstc.getPassed())
+                .message(cstc.getMessage())
+                .stderr(cstc.getStderr())
+                .statusDescription(cstc.getStatusDescription())
                 .judgeToken(cstc.getJudgeToken())
                 .build();
     }
@@ -43,6 +46,9 @@ public class CodeSubmissionTestCaseDataAccessMapper {
                 .runTime(entity.getRuntime())
                 .memory(entity.getMemory())
                 .passed(entity.getPassed())
+                .message(entity.getMessage())
+                .statusDescription(entity.getStatusDescription())
+                .stderr(entity.getStderr())
                 .judgeToken(entity.getJudgeToken())
                 .build();
     }

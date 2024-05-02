@@ -29,6 +29,9 @@ public class CodeSubmissionTestCaseEntity {
 
     String actualOutput;
     String compileOutput;
+    String message;
+    String stderr;
+    String statusDescription;
     Float runtime;
     Float memory;
     Boolean passed;

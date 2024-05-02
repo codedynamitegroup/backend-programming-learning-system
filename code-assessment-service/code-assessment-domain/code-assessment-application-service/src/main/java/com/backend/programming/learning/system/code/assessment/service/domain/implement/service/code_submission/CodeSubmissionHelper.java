@@ -64,8 +64,6 @@ public class CodeSubmissionHelper {
         assessmentSourceCodeByTestCases.judge(codeSubmission);
 
 
-
-
         return codeSubmission;
     }
     @Transactional
