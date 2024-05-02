@@ -53,45 +53,45 @@ public class QuestionKafkaMessagePublisher implements QuestionRequestMessagePubl
         try {
             switch (questionEventPayload.getCopyState()) {
                 case CREATING:
-                    QuestionRequestAvroModel userCreatedRequestAvroModel = questionMessagingDataMapper
+                    QuestionRequestAvroModel questionCreatedRequestAvroModel = questionMessagingDataMapper
                             .questionEventPayloadToQuestionRequestAvroModel(sagaId, questionEventPayload);
 
                     kafkaProducer.send(coreServiceConfigData.getQuestionRequestTopicName(),
                             sagaId,
-                            userCreatedRequestAvroModel,
+                            questionCreatedRequestAvroModel,
                             questionKafkaMessageHelper.getKafkaCallback(coreServiceConfigData.getQuestionRequestTopicName(),
-                                    userCreatedRequestAvroModel, questionOutboxMessage, outboxCallback,
+                                    questionCreatedRequestAvroModel, questionOutboxMessage, outboxCallback,
                                     sagaId, "QuestionRequestAvroModel"));
                     break;
                 case DELETING:
-                    QuestionRequestAvroModel userDeletedRequestAvroModel = questionMessagingDataMapper
+                    QuestionRequestAvroModel questionDeletedRequestAvroModel = questionMessagingDataMapper
                             .questionEventPayloadToQuestionRequestAvroModel(sagaId, questionEventPayload);
 
                     kafkaProducer.send(coreServiceConfigData.getQuestionRequestTopicName(),
                             sagaId,
-                            userDeletedRequestAvroModel,
+                            questionDeletedRequestAvroModel,
                             questionKafkaMessageHelper.getKafkaCallback(coreServiceConfigData.getQuestionRequestTopicName(),
-                                    userDeletedRequestAvroModel, questionOutboxMessage, outboxCallback,
+                                    questionDeletedRequestAvroModel, questionOutboxMessage, outboxCallback,
                                     sagaId, "QuestionRequestAvroModel"));
                     break;
                 case UPDATING:
-                    QuestionRequestAvroModel userUpdatedRequestAvroModel = questionMessagingDataMapper
+                    QuestionRequestAvroModel questionUpdatedRequestAvroModel = questionMessagingDataMapper
                             .questionEventPayloadToQuestionRequestAvroModel(sagaId, questionEventPayload);
 
                     kafkaProducer.send(coreServiceConfigData.getQuestionRequestTopicName(),
                             sagaId,
-                            userUpdatedRequestAvroModel,
+                            questionUpdatedRequestAvroModel,
                             questionKafkaMessageHelper.getKafkaCallback(coreServiceConfigData.getQuestionRequestTopicName(),
-                                    userUpdatedRequestAvroModel,
+                                    questionUpdatedRequestAvroModel,
                                     questionOutboxMessage,
                                     outboxCallback,
                                     sagaId, "QuestionRequestAvroModel"));
                     break;
             }
-            log.info("UserRequestAvroModel sent to Kafka for user id: {} and saga id: {}", questionEventPayload.getId(), sagaId);
+            log.info("QuestionRequestAvroModel sent to Kafka for question id: {} and saga id: {}", questionEventPayload.getId(), sagaId);
         } catch (Exception e) {
-            log.error("Error while sending UserRequestAvroModel message" +
-                    " to kafka with user id: {} and saga id: {}, error: {}", questionEventPayload.getId(), sagaId, e.getMessage());
+            log.error("Error while sending QuestionRequestAvroModel message" +
+                    " to kafka with question id: {} and saga id: {}, error: {}", questionEventPayload.getId(), sagaId, e.getMessage());
         }
     }
 

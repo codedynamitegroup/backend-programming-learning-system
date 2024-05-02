@@ -47,6 +47,7 @@ public class QuestionCommandHandler {
     public QuestionDeleteResponse deleteQuestionById(UUID questionId) {
         QuestionDeletedEvent questionDeletedEvent = questionDeleteHelper.deleteQuestionById(questionId);
 
+        // TODO: add prev payload
         questionOutboxHelper.saveNewQuestionOutboxMessage(questionDataMapper.questionDeletedEventToQuestionEventPayload(questionDeletedEvent),
                 questionDeletedEvent.getQuestion().getCopyState(),
                 OutboxStatus.STARTED,

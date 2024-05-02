@@ -25,6 +25,7 @@ public class QuestionOutboxEntity {
     private ZonedDateTime processedAt;
     private String type;
     private String payload;
+    private String prevPayload;
     @Enumerated(EnumType.STRING)
     private SagaStatus sagaStatus;
     @Enumerated(EnumType.STRING)

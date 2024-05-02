@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.core.service.domain.outbox.model.question;
 
-import com.backend.programming.learning.system.core.service.domain.entity.AnswerOfQuestion;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

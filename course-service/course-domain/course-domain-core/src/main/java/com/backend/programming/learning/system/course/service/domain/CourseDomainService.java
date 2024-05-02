@@ -39,12 +39,12 @@ public interface CourseDomainService {
 
     void createQuestionSubmission(QuestionSubmission questionSubmission);
 
-    QuestionCreatedEvent createQuestionEvent(Question question);
-    QuestionCreateFailedEvent createQuestionFailedEvent(Question question);
-    QuestionUpdatedEvent updateQuestionEvent(Question question);
-    QuestionUpdateFailedEvent updateQuestionFailedEvent(Question question);
-    QuestionDeletedEvent deleteQuestionEvent(Question question);
-    QuestionDeleteFailedEvent deleteQuestionFailedEvent(Question question);
+    QuestionCreatedEvent createQuestionEvent(Question question, String sagaId);
+    QuestionCreateFailedEvent createQuestionFailedEvent(Question question, String sagaId);
+    QuestionUpdatedEvent updateQuestionEvent(Question question, String sagaId);
+    QuestionUpdateFailedEvent updateQuestionFailedEvent(Question question, String sagaId);
+    QuestionDeletedEvent deleteQuestionEvent(Question question, String sagaId);
+    QuestionDeleteFailedEvent deleteQuestionFailedEvent(Question question, String sagaId);
 
     void createStartExamSubmission(ExamSubmission examSubmission);
     void createCalendarEvent(CalendarEvent calendarEvent);

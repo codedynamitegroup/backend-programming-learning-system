@@ -1,11 +1,9 @@
 package com.backend.programming.learning.system.course.service.domain.mapper.question;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionRequest;
 import com.backend.programming.learning.system.domain.valueobject.*;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question.CreateQuestionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question.CreateQuestionResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionCreateRequest;
-import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionDeleteRequest;
-import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionUpdateRequest;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QueryAllQuestionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.Organization;
@@ -111,7 +109,7 @@ public class QuestionDataMapper {
                 .build();
     }
 
-    public Question questionCreateRequestToQuestion(QuestionCreateRequest questionCreateRequest) {
+    public Question questionCreateRequestToQuestion(QuestionRequest questionCreateRequest) {
         return Question.builder()
                 .id( new QuestionId(UUID.fromString(questionCreateRequest.getId())))
                 .organization(Organization.builder()
@@ -134,7 +132,7 @@ public class QuestionDataMapper {
                 .build();
     }
 
-    public Question questionUpdateRequestToQuestion(QuestionUpdateRequest questionUpdateRequest) {
+    public Question questionUpdateRequestToQuestion(QuestionRequest questionUpdateRequest) {
         return Question.builder()
                 .id(new QuestionId(UUID.fromString(questionUpdateRequest.getId())))
                 .organization(Organization.builder()
@@ -157,7 +155,7 @@ public class QuestionDataMapper {
                 .build();
     }
 
-    public Question questionDeleteRequestToQuestion(QuestionDeleteRequest questionDeleteRequest) {
+    public Question questionDeleteRequestToQuestion(QuestionRequest questionDeleteRequest) {
         return Question.builder()
                 .id(new QuestionId(UUID.fromString(questionDeleteRequest.getId())))
                 .organization(Organization.builder()

@@ -1,23 +1,19 @@
 package com.backend.programming.learning.system.course.service.messaging.mapper;
 
-import com.backend.programming.learning.system.domain.valueobject.QuestionResponseStatus;
-import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionCreateRequest;
-import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionDeleteRequest;
+import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionRequest;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionUpdateRequest;
 import com.backend.programming.learning.system.course.service.domain.event.question.event.QuestionEvent;
-import com.backend.programming.learning.system.kafka.core.avro.model.QuestionCreateRequestAvroModel;
-import com.backend.programming.learning.system.kafka.core.avro.model.QuestionDeleteRequestAvroModel;
+import com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel;
-import com.backend.programming.learning.system.kafka.core.avro.model.QuestionUpdateRequestAvroModel;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
 @Component
 public class QuestionMessagingMapper {
-    public QuestionDeleteRequest questionDeleteRequestAvroModelToQuestionDeleteRequest(QuestionDeleteRequestAvroModel questionDeleteRequestAvroModel) {
-        return QuestionDeleteRequest.builder()
+    public QuestionRequest questionRequestAvroModelToQuestionDeleteRequest(QuestionRequestAvroModel questionDeleteRequestAvroModel) {
+        return QuestionRequest.builder()
                 .id(questionDeleteRequestAvroModel.getId())
                 .sagaId(questionDeleteRequestAvroModel.getSagaId())
                 .organizationId(questionDeleteRequestAvroModel.getOrganizationId())
@@ -33,8 +29,8 @@ public class QuestionMessagingMapper {
                 .build();
     }
 
-    public QuestionCreateRequest questionCreateRequestAvroModelToQuestionCreateRequest(QuestionCreateRequestAvroModel questionCreateRequestAvroModel) {
-        return QuestionCreateRequest.builder()
+    public QuestionRequest questionRequestAvroModelToQuestionCreateRequest(QuestionRequestAvroModel questionCreateRequestAvroModel) {
+        return QuestionRequest.builder()
                 .id(questionCreateRequestAvroModel.getId())
                 .sagaId(questionCreateRequestAvroModel.getSagaId())
                 .organizationId(questionCreateRequestAvroModel.getOrganizationId())
@@ -50,8 +46,8 @@ public class QuestionMessagingMapper {
                 .build();
     }
 
-    public QuestionUpdateRequest questionUpdateRequestAvroModelToQuestionUpdateRequest(QuestionUpdateRequestAvroModel questionUpdateRequestAvroModel) {
-        return QuestionUpdateRequest.builder()
+    public QuestionRequest questionRequestAvroModelToQuestionUpdateRequest(QuestionRequestAvroModel questionUpdateRequestAvroModel) {
+        return QuestionRequest.builder()
                 .id(questionUpdateRequestAvroModel.getId())
                 .sagaId(questionUpdateRequestAvroModel.getSagaId())
                 .organizationId(questionUpdateRequestAvroModel.getOrganizationId())
@@ -81,14 +77,14 @@ public class QuestionMessagingMapper {
                 .defaultMark(questionResponseAvroModel.getDefaultMark())
                 .qType(questionResponseAvroModel.getQType())
                 .answers(questionResponseAvroModel.getAnswers())
-                .questionResponseStatus(QuestionResponseStatus.valueOf(questionResponseAvroModel.getQuestionResponseStatus().toString()))
+                .copyState(CopyState.valueOf(questionResponseAvroModel.getCopyState().toString()))
                 .build();
     }
 
     public QuestionResponseAvroModel questionResponseToQuestionResponseAvroModel(QuestionEvent questionEvent) {
         return QuestionResponseAvroModel.newBuilder()
                 .setId(questionEvent.getQuestion().getId().getValue().toString())
-                .setSagaId("")
+                .setSagaId(questionEvent.getSagaId())
                 .setOrganizationId(questionEvent.getQuestion().getOrganization().getId().getValue().toString())
                 .setCreatedBy(questionEvent.getQuestion().getCreatedBy().getId().getValue().toString())
                 .setUpdatedBy(questionEvent.getQuestion().getUpdatedBy().getId().getValue().toString())
@@ -99,7 +95,7 @@ public class QuestionMessagingMapper {
                 .setDefaultMark(BigDecimal.valueOf(questionEvent.getQuestion().getDefaultMark()))
                 .setQType(questionEvent.getQuestion().getQtype().toString())
                 .setAnswers(questionEvent.getQuestion().getAnswers())
-                .setQuestionResponseStatus(com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseStatus.valueOf(questionEvent.getStatus().toString()))
+                .setCopyState(com.backend.programming.learning.system.kafka.core.avro.model.CopyState.valueOf(questionEvent.getCopyState().toString()))
                 .build();
     }
 }

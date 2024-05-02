@@ -579,6 +579,7 @@ CREATE TABLE  "public".question_outbox
     processed_at TIMESTAMP WITH TIME ZONE,
     type character varying COLLATE pg_catalog."default" NOT NULL,
     payload jsonb NOT NULL,
+    prev_payload jsonb NULL,
     outbox_status outbox_status NOT NULL,
     saga_status saga_status NOT NULL,
     copy_state CopyState NOT NULL,
@@ -586,10 +587,10 @@ CREATE TABLE  "public".question_outbox
     CONSTRAINT question_outbox_pkey PRIMARY KEY (id)
 );
 
-CREATE UNIQUE INDEX "question_outbox_saga_status"
+CREATE INDEX "question_outbox_saga_status"
     ON "public".question_outbox
     (type, outbox_status, saga_status);
 
-CREATE UNIQUE INDEX "question_outbox_saga_id"
+CREATE INDEX "question_outbox_saga_id"
     ON "public".question_outbox
     (type, saga_id, saga_status);

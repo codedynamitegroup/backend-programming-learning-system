@@ -11,10 +11,7 @@ socket-config:
   host: 172.16.12.5
 
 course-service:
-  question-created-request-topic-name: core-question-create-request
-  question-deleted-request-topic-name: core-question-delete-request
-  question-updated-request-topic-name: core-question-update-request
-
+  question-request-topic-name: core-question-request
   question-response-topic-name: core-question-response
 
   user-request-topic-name: user-request
@@ -78,9 +75,7 @@ kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
 
-  question-create-consumer-group-id: question-create-topic-consumer
-  question-delete-consumer-group-id: question-delete-topic-consumer
-  question-update-consumer-group-id: question-update-topic-consumer
+  question-request-consumer-group-id: question-request-topic-consumer
 
   course-service-calendar-event-consumer-group-id: course-service-calendar-event-consumer
 
