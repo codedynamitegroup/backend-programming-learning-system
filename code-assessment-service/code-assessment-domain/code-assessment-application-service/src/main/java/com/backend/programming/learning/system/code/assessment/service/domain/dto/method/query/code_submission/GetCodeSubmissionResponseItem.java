@@ -13,19 +13,53 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class GetCodeSubmissionsByUserIdResponseItem {
+public class GetCodeSubmissionResponseItem {
     @NotNull
     UUID id;
+
     @NotNull
     UUID codeQuestionId;
+
     @NotNull
     UUID programmingLanguageId;
     Double avgRuntime;
     Double avgMemory;
+
     @NotNull
     GradingStatus gradingStatus;
+
+    @NotNull
     Float maxGrade;
+
+    @NotNull
     Double achievedGrade;
+
     @NotNull
     String description;
+
+    String sourceCode;
+    FirstFailTestCase firstFailTestCase;
+
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class FirstFailTestCase{
+        @NotNull
+        String input;
+
+        @NotNull
+        String output;
+
+        String actualOutput;
+        String stderr;
+        String compileOutput;
+        Float runtime;
+        Float memory;
+        String message;
+    }
+
+    public void setFirstFailTestCase(FirstFailTestCase firstFailTestCase) {
+        this.firstFailTestCase = firstFailTestCase;
+    }
 }

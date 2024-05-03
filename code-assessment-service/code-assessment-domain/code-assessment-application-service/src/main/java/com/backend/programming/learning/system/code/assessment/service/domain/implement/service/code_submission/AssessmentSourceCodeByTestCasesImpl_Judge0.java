@@ -3,7 +3,6 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 import com.backend.programming.learning.system.code.assessment.service.config.CodeAssessmentServiceConfigData;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_submission.CodeSubmissionJudgingServiceUnavailableException;
-import com.backend.programming.learning.system.code.assessment.service.domain.mapper.code_submission.CodeSubmissionDataMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.assessment.AssessmentSourceCodeByTestCases;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.CodeSubmissionTestCaseRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_submssion.CodeSubmissionRepository;
@@ -14,7 +13,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -23,23 +21,21 @@ import reactor.core.publisher.Mono;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import org.springframework.http.HttpStatus;
 
 @Component
 @Slf4j
-public class AssessmentSourceCodeByTestCasesImpl_Assessment0 implements AssessmentSourceCodeByTestCases {
+public class AssessmentSourceCodeByTestCasesImpl_Judge0 implements AssessmentSourceCodeByTestCases {
 
     private final CodeSubmissionRepository codeSubmissionRepository;
     private final CodeSubmissionTestCaseRepository codeSubmissionTestCaseRepository;
 
     private final CodeAssessmentServiceConfigData codeAssessmentServiceConfigData;
 
-    public AssessmentSourceCodeByTestCasesImpl_Assessment0(CodeSubmissionRepository codeSubmissionRepository, CodeSubmissionTestCaseRepository codeSubmissionTestCaseRepository, CodeAssessmentServiceConfigData codeAssessmentServiceConfigData) {
+    public AssessmentSourceCodeByTestCasesImpl_Judge0(CodeSubmissionRepository codeSubmissionRepository, CodeSubmissionTestCaseRepository codeSubmissionTestCaseRepository, CodeAssessmentServiceConfigData codeAssessmentServiceConfigData) {
         this.codeSubmissionRepository = codeSubmissionRepository;
         this.codeSubmissionTestCaseRepository = codeSubmissionTestCaseRepository;
         this.codeAssessmentServiceConfigData = codeAssessmentServiceConfigData;
