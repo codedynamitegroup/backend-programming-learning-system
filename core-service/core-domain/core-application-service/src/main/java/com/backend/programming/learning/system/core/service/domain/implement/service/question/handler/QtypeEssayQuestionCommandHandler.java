@@ -54,7 +54,7 @@ public class QtypeEssayQuestionCommandHandler {
                 questionCreatedEvent.getQuestion().getCopyState(),
                 OutboxStatus.STARTED,
                 questionSagaHelper.questionStatusToSagaStatus(questionCreatedEvent.getQuestion().getCopyState()),
-                UUID.randomUUID());
+                UUID.randomUUID(), null);
 
         return questionDataMapper.questionCreatedEventToCreateQuestionResponse(questionCreatedEvent, "Qtype Essay Question created successfully");
     }
@@ -74,7 +74,8 @@ public class QtypeEssayQuestionCommandHandler {
                 questionUpdatedEvent.getQuestion().getCopyState(),
                 OutboxStatus.STARTED,
                 questionSagaHelper.questionStatusToSagaStatus(questionUpdatedEvent.getQuestion().getCopyState()),
-                UUID.randomUUID());
+                UUID.randomUUID(),
+                questionDataMapper.questionUpdatedEventToQuestionEventPreviousPayload(questionUpdatedEvent));
 
         return questionDataMapper.questionUpdatedEventToUpdateQuestionRespond(questionUpdatedEvent, "Qtype Essay Question updated successfully");
     }

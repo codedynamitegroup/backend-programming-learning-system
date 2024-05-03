@@ -38,6 +38,12 @@ public class QtypeCodeQuestionRepositoryImpl implements QtypeCodeQuestionReposit
     }
 
     @Override
+    public Optional<QtypeCodeQuestion> findQtypeCodeQuestionByQuestionId(UUID questionId) {
+        return qtypeCodeQuestionJpaRepository.findByQuestionId(questionId)
+                .map(qtypeCodeQuestionDataAccessMapper::qtypeCodeQuestionEntityToQtypeCodeQuestion);
+    }
+
+    @Override
     public List<QtypeCodeQuestion> findAllQtypeCodeQuestions() {
         return qtypeCodeQuestionJpaRepository
                 .findAll()

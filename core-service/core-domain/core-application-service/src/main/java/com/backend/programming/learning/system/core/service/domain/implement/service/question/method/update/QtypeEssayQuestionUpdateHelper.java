@@ -3,10 +3,12 @@ package com.backend.programming.learning.system.core.service.domain.implement.se
 import com.backend.programming.learning.system.core.service.domain.CoreDomainService;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeEssayQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeEssayQuestion;
+import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
 import com.backend.programming.learning.system.core.service.domain.exception.question.QtypeEssayQuestionNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QtypeEssayQuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeEssayQuestionRepository;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QuestionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +20,7 @@ import java.util.UUID;
 public class QtypeEssayQuestionUpdateHelper {
     // Repositories
     private final QtypeEssayQuestionRepository qtypeEssayQuestionRepository;
+    private final QuestionRepository questionRepository;
 
     // Mappers
     private final QtypeEssayQuestionDataMapper qtypeEssayQuestionDataMapper;
@@ -26,10 +29,11 @@ public class QtypeEssayQuestionUpdateHelper {
     private final CoreDomainService coreDomainService;
 
     public QtypeEssayQuestionUpdateHelper(
-            QtypeEssayQuestionRepository qtypeEssayQuestionRepository,
+            QtypeEssayQuestionRepository qtypeEssayQuestionRepository, QuestionRepository questionRepository,
             QtypeEssayQuestionDataMapper qtypeEssayQuestionDataMapper,
             CommonUpdateHelper commonUpdateHelper,
             CoreDomainService coreDomainService) {
+        this.questionRepository = questionRepository;
         this.commonUpdateHelper = commonUpdateHelper;
         this.qtypeEssayQuestionRepository = qtypeEssayQuestionRepository;
         this.qtypeEssayQuestionDataMapper = qtypeEssayQuestionDataMapper;
@@ -46,6 +50,7 @@ public class QtypeEssayQuestionUpdateHelper {
                     .forEach(answer -> commonUpdateHelper.checkAnswerExist(answer.getAnswerId()));
 
         QtypeEssayQuestion qtypeEssayQuestion = getQtypeEssayQuestion(updateQtypeEssayQuestionCommand.getQtEssayQuestionId());
+        Question prevQuestion = questionRepository.findQuestion(qtypeEssayQuestion.getQuestion().getId().getValue()).get();
         QtypeEssayQuestion mappedQtypeEssayQuestion = qtypeEssayQuestionDataMapper
                 .updateQtypeEssayQuestionCommandToQtypeEssayQuestion(updateQtypeEssayQuestionCommand, qtypeEssayQuestion);
 
@@ -55,7 +60,7 @@ public class QtypeEssayQuestionUpdateHelper {
         commonUpdateHelper.updateQuestion(mappedQtypeEssayQuestion.getQuestion());
         log.info("Question updated with id: {}", mappedQtypeEssayQuestion.getQuestion().getId().getValue());
 
-        return coreDomainService.updateQtypeEssayQuestion(mappedQtypeEssayQuestion.getQuestion(), mappedQtypeEssayQuestion);
+        return coreDomainService.updateQtypeEssayQuestion(mappedQtypeEssayQuestion.getQuestion(), mappedQtypeEssayQuestion, prevQuestion, qtypeEssayQuestion);
     }
 
     // Check if Qtype Essay Question exist in database and get it

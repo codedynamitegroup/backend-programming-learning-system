@@ -9,6 +9,7 @@ import java.util.UUID;
 public interface QtypeMultichoiceQuestionRepository {
     QtypeMultiChoiceQuestion saveQtypeMultipleChoiceQuestion(QtypeMultiChoiceQuestion question);
     Optional<QtypeMultiChoiceQuestion> findQtypeMultipleChoiceQuestion(UUID qtMultipleChoiceQuestionId);
+    Optional<QtypeMultiChoiceQuestion> findQtypeMultipleChoiceQuestionByQuestionId(UUID questionId);
     List<QtypeMultiChoiceQuestion> findAllQtypeMultipleChoiceQuestion();
     void deleteQtypeMultipleChoiceQuestion(UUID qtMultipleChoiceQuestionId);
     UUID getId(UUID questionId);

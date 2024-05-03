@@ -3,10 +3,12 @@ package com.backend.programming.learning.system.core.service.domain.implement.se
 import com.backend.programming.learning.system.core.service.domain.CoreDomainService;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeShortanswerQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeShortAnswerQuestion;
+import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
 import com.backend.programming.learning.system.core.service.domain.exception.question.QtypeShortanswerQuestionNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QtypeShortanswerQuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeShortanswerQuestionRepository;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QuestionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +20,7 @@ import java.util.UUID;
 public class QtypeShortanswerQuestionUpdateHelper {
     // Repositories
     private final QtypeShortanswerQuestionRepository qtypeShortanswerQuestionRepository;
+    private final QuestionRepository questionRepository;
 
     // Mappers
     private final QtypeShortanswerQuestionDataMapper qtypeShortanswerQuestionDataMapper;
@@ -27,10 +30,12 @@ public class QtypeShortanswerQuestionUpdateHelper {
 
     public QtypeShortanswerQuestionUpdateHelper(
             QtypeShortanswerQuestionRepository qtypeShortanswerQuestionRepository,
+            QuestionRepository questionRepository,
             QtypeShortanswerQuestionDataMapper qtypeShortanswerQuestionDataMapper,
             CoreDomainService coreDomainService,
             CommonUpdateHelper commonUpdateHelper) {
         this.qtypeShortanswerQuestionRepository = qtypeShortanswerQuestionRepository;
+        this.questionRepository = questionRepository;
         this.qtypeShortanswerQuestionDataMapper = qtypeShortanswerQuestionDataMapper;
         this.coreDomainService = coreDomainService;
         this.commonUpdateHelper = commonUpdateHelper;
@@ -46,6 +51,7 @@ public class QtypeShortanswerQuestionUpdateHelper {
                     .forEach(answer -> commonUpdateHelper.checkAnswerExist(answer.getAnswerId()));
 
         QtypeShortAnswerQuestion qtypeShortAnswerQuestion = getQtypeShortanswerQuestion(updateQtypeShortanswerQuestionCommand.getQtShortanswerQuestionId());
+        Question prevQuestion = questionRepository.findQuestion(qtypeShortAnswerQuestion.getQuestion().getId().getValue()).get();
         QtypeShortAnswerQuestion mappedQtypeShortAnswerQuestion = qtypeShortanswerQuestionDataMapper
                 .updateQtypeShortanswerQuestionCommandToQtypeShortAnswerQuestion(updateQtypeShortanswerQuestionCommand, qtypeShortAnswerQuestion);
 
@@ -55,7 +61,7 @@ public class QtypeShortanswerQuestionUpdateHelper {
         commonUpdateHelper.updateQuestion(mappedQtypeShortAnswerQuestion.getQuestion());
         log.info("Question updated with id: {}", mappedQtypeShortAnswerQuestion.getQuestion().getId().getValue());
 
-        return coreDomainService.updateQtypeShortAnswerQuestion(mappedQtypeShortAnswerQuestion.getQuestion(), mappedQtypeShortAnswerQuestion);
+        return coreDomainService.updateQtypeShortAnswerQuestion(mappedQtypeShortAnswerQuestion.getQuestion(), mappedQtypeShortAnswerQuestion, prevQuestion, qtypeShortAnswerQuestion);
     }
 
     // Check if Qtype Shortanswer Question exists in database

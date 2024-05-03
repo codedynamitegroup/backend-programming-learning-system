@@ -11,8 +11,7 @@ import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
-import com.backend.programming.learning.system.core.service.domain.outbox.model.question.QuestionEventAnswer;
-import com.backend.programming.learning.system.core.service.domain.outbox.model.question.QuestionEventPayload;
+import com.backend.programming.learning.system.core.service.domain.outbox.model.question.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.AnswerId;
 import com.backend.programming.learning.system.domain.valueobject.*;
 import org.springframework.stereotype.Component;
@@ -235,5 +234,143 @@ public class QuestionDataMapper {
         return List.of(answerOfQuestions.stream()
                 .map(this::answerOfQuestionToQuestionEventAnswer)
                 .toArray(QuestionEventAnswer[]::new));
+    }
+
+    private QuestionEventQtypeEssay qtypeEssayQuestionToQuestionEventQtypeEssay(QtypeEssayQuestion qtypeEssayQuestion) {
+        return QuestionEventQtypeEssay.builder()
+                .id(qtypeEssayQuestion.getId().getValue().toString())
+                .questionId(qtypeEssayQuestion.getQuestion().getId().getValue().toString())
+                .responseFormat(qtypeEssayQuestion.getResponseFormat())
+                .responseRequired(qtypeEssayQuestion.getResponseRequired())
+                .responseFieldLines(qtypeEssayQuestion.getResponseFieldLines())
+                .minWordLimit(qtypeEssayQuestion.getMinWordLimit())
+                .maxWordLimit(qtypeEssayQuestion.getMaxWordLimit())
+                .attachments(qtypeEssayQuestion.getAttachments())
+                .attachmentsRequired(qtypeEssayQuestion.getAttachmentsRequired())
+                .graderInfo(qtypeEssayQuestion.getGraderInfo())
+                .graderInfoFormat(qtypeEssayQuestion.getGraderInfoFormat())
+                .responseTemplate(qtypeEssayQuestion.getResponseTemplate())
+                .maxBytes(qtypeEssayQuestion.getMaxBytes())
+                .fileTypesList(qtypeEssayQuestion.getFileTypesList())
+                .build();
+    }
+
+    private QuestionEventQtypeCode qtypeCodeQuestionToQuestionEventQtypeCode(QtypeCodeQuestion qtypeCodeQuestion) {
+        return QuestionEventQtypeCode.builder()
+                .id(qtypeCodeQuestion.getId().getValue().toString())
+                .questionId(qtypeCodeQuestion.getQuestion().getId().getValue().toString())
+                .dslTemplate(qtypeCodeQuestion.getDslTemplate())
+                .build();
+    }
+
+    private QuestionEventQtypeMultichoice qtypeMultichoiceQuestionToQuestionEventQtypeMultichoice(QtypeMultiChoiceQuestion qtypeMultichoiceQuestion) {
+        return QuestionEventQtypeMultichoice.builder()
+                .id(qtypeMultichoiceQuestion.getId().getValue().toString())
+                .questionId(qtypeMultichoiceQuestion.getQuestion().getId().getValue().toString())
+                .single(qtypeMultichoiceQuestion.getSingle())
+                .shuffleAnswers(qtypeMultichoiceQuestion.getShuffleAnswers())
+                .answerNumbering(qtypeMultichoiceQuestion.getAnswerNumbering())
+                .correctFeedback(qtypeMultichoiceQuestion.getCorrectFeedback())
+                .partiallyCorrectFeedback(qtypeMultichoiceQuestion.getPartiallyCorrectFeedback())
+                .incorrectFeedback(qtypeMultichoiceQuestion.getIncorrectFeedback())
+                .showNumCorrect(qtypeMultichoiceQuestion.getShowNumCorrect())
+                .showStandardInstructions(qtypeMultichoiceQuestion.getShowStandardInstructions())
+                .build();
+    }
+
+    private QuestionEventQtypeShortanswer qtypeShortanswerQuestionToQuestionEventQtypeShortanswer(QtypeShortAnswerQuestion qtypeShortanswerQuestion) {
+        return QuestionEventQtypeShortanswer.builder()
+                .id(qtypeShortanswerQuestion.getId().getValue().toString())
+                .questionId(qtypeShortanswerQuestion.getQuestion().getId().getValue().toString())
+                .caseSensitive(qtypeShortanswerQuestion.getCaseSensitive())
+                .build();
+    }
+
+    public QuestionEventPreviousPayload questionDeletedEventToQuestionEventPreviousPayload(QuestionDeletedEvent questionDeletedEvent) {
+        QuestionEventQtypeCode qtypeCodeQuestion = null;
+        QuestionEventQtypeEssay qtypeEssayQuestion = null;
+        QuestionEventQtypeMultichoice qtypeMultichoiceQuestion = null;
+        QuestionEventQtypeShortanswer qtypeShortanswerQuestion = null;
+
+        switch (questionDeletedEvent.getQuestion().getqtype()) {
+            case CODE:
+                qtypeCodeQuestion = qtypeCodeQuestionToQuestionEventQtypeCode(questionDeletedEvent.getQtypeCodeQuestion());
+                break;
+            case SHORT_ANSWER:
+                qtypeShortanswerQuestion = qtypeShortanswerQuestionToQuestionEventQtypeShortanswer(questionDeletedEvent.getQtypeShortAnswerQuestion());
+                break;
+            case ESSAY:
+                qtypeEssayQuestion = qtypeEssayQuestionToQuestionEventQtypeEssay(questionDeletedEvent.getQtypeEssayQuestion());
+                break;
+            case MULTIPLE_CHOICE:
+                qtypeMultichoiceQuestion = qtypeMultichoiceQuestionToQuestionEventQtypeMultichoice(questionDeletedEvent.getQtypeMultiChoiceQuestion());
+                break;
+        }
+
+        return QuestionEventPreviousPayload.builder()
+                .id(questionDeletedEvent.getQuestion().getId().getValue().toString())
+                .sagaId(questionDeletedEvent.getQtypeID().toString())
+                .organizationId(questionDeletedEvent.getQuestion().getOrganization().getId().getValue().toString())
+                .createdBy(questionDeletedEvent.getQuestion().getCreatedBy().getId().getValue().toString())
+                .updatedBy(questionDeletedEvent.getQuestion().getUpdatedBy().getId().getValue().toString())
+                .difficulty(questionDeletedEvent.getQuestion().getDifficulty().name())
+                .name(questionDeletedEvent.getQuestion().getName())
+                .questionText(questionDeletedEvent.getQuestion().getQuestionText())
+                .generalFeedback(questionDeletedEvent.getQuestion().getGeneralFeedback())
+                .defaultMark(BigDecimal.valueOf(questionDeletedEvent.getQuestion().getDefaultMark()))
+                .qType(questionDeletedEvent.getQuestion().getqtype().name())
+                .answers(answerOfQuestionListToQuestionEventAnswerList(questionDeletedEvent.getQuestion().getAnswers()))
+                .copyState(questionDeletedEvent.getQuestion().getCopyState())
+                .createdAt(questionDeletedEvent.getQuestion().getCreatedAt())
+                .updatedAt(questionDeletedEvent.getQuestion().getUpdatedAt())
+                .qtypeCodeQuestion(qtypeCodeQuestion)
+                .qtypeEssayQuestion(qtypeEssayQuestion)
+                .qtypeMultichoiceQuestion(qtypeMultichoiceQuestion)
+                .qtypeShortanswerQuestion(qtypeShortanswerQuestion)
+                .build();
+    }
+
+    public QuestionEventPreviousPayload questionUpdatedEventToQuestionEventPreviousPayload(QuestionUpdatedEvent questionUpdatedEvent) {
+        QuestionEventQtypeCode qtypeCodeQuestion = null;
+        QuestionEventQtypeEssay qtypeEssayQuestion = null;
+        QuestionEventQtypeMultichoice qtypeMultichoiceQuestion = null;
+        QuestionEventQtypeShortanswer qtypeShortanswerQuestion = null;
+
+        switch (questionUpdatedEvent.getQuestion().getqtype()) {
+            case CODE:
+                qtypeCodeQuestion = qtypeCodeQuestionToQuestionEventQtypeCode(questionUpdatedEvent.getQtypeCodeQuestion());
+                break;
+            case SHORT_ANSWER:
+                qtypeShortanswerQuestion = qtypeShortanswerQuestionToQuestionEventQtypeShortanswer(questionUpdatedEvent.getQtypeShortAnswerQuestion());
+                break;
+            case ESSAY:
+                qtypeEssayQuestion = qtypeEssayQuestionToQuestionEventQtypeEssay(questionUpdatedEvent.getQtypeEssayQuestion());
+                break;
+            case MULTIPLE_CHOICE:
+                qtypeMultichoiceQuestion = qtypeMultichoiceQuestionToQuestionEventQtypeMultichoice(questionUpdatedEvent.getQtypeMultiChoiceQuestion());
+                break;
+        }
+
+        return QuestionEventPreviousPayload.builder()
+                .id(questionUpdatedEvent.getQuestion().getId().getValue().toString())
+                .sagaId(questionUpdatedEvent.getQtypeID().toString())
+                .organizationId(questionUpdatedEvent.getQuestion().getOrganization().getId().getValue().toString())
+                .createdBy(questionUpdatedEvent.getQuestion().getCreatedBy().getId().getValue().toString())
+                .updatedBy(questionUpdatedEvent.getQuestion().getUpdatedBy().getId().getValue().toString())
+                .difficulty(questionUpdatedEvent.getQuestion().getDifficulty().name())
+                .name(questionUpdatedEvent.getQuestion().getName())
+                .questionText(questionUpdatedEvent.getQuestion().getQuestionText())
+                .generalFeedback(questionUpdatedEvent.getQuestion().getGeneralFeedback())
+                .defaultMark(BigDecimal.valueOf(questionUpdatedEvent.getQuestion().getDefaultMark()))
+                .qType(questionUpdatedEvent.getQuestion().getqtype().name())
+                .answers(answerOfQuestionListToQuestionEventAnswerList(questionUpdatedEvent.getQuestion().getAnswers()))
+                .copyState(questionUpdatedEvent.getPrevQuestion().getCopyState())
+                .createdAt(questionUpdatedEvent.getQuestion().getCreatedAt())
+                .updatedAt(questionUpdatedEvent.getQuestion().getUpdatedAt())
+                .qtypeCodeQuestion(qtypeCodeQuestion)
+                .qtypeEssayQuestion(qtypeEssayQuestion)
+                .qtypeMultichoiceQuestion(qtypeMultichoiceQuestion)
+                .qtypeShortanswerQuestion(qtypeShortanswerQuestion)
+                .build();
     }
 }
