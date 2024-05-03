@@ -61,7 +61,6 @@ public class CoreServiceOrganizationResponseKafkaListener implements KafkaConsum
                 //NO-OP for OrderNotFoundException
                 log.error("No user found for organization id: {}", organizationResponseAvroModel.getOrganizationId());
             }
-
         });
     }
 }

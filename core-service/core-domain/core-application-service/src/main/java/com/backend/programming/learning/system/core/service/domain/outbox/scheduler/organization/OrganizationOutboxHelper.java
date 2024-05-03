@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.backend.programming.learning.system.saga.user.SagaConstants.USER_SAGA_NAME;
+import static com.backend.programming.learning.system.saga.organization.SagaConstants.ORGANIZATION_SAGA_NAME;
 
 @Slf4j
 @Component
@@ -37,18 +37,18 @@ public class OrganizationOutboxHelper {
     @Transactional(readOnly = true)
     public Optional<OrganizationOutboxMessage> getOrganizationOutboxMessageBySagaIdAndCopyState(UUID sagaId,
                                                                                                 CopyState copyState) {
-        return organizationOutboxRepository.findByTypeAndSagaIdAndCopyStateAndOutboxStatus(USER_SAGA_NAME, sagaId,
+        return organizationOutboxRepository.findByTypeAndSagaIdAndCopyStateAndOutboxStatus(ORGANIZATION_SAGA_NAME, sagaId,
                 copyState, OutboxStatus.COMPLETED);
     }
 
     @Transactional(readOnly = true)
     public Optional<List<OrganizationOutboxMessage>> getOrganizationOutboxMessageByOutboxStatus(OutboxStatus outboxStatus) {
-        return organizationOutboxRepository.findByTypeAndOutboxStatus(USER_SAGA_NAME, outboxStatus);
+        return organizationOutboxRepository.findByTypeAndOutboxStatus(ORGANIZATION_SAGA_NAME, outboxStatus);
     }
 
     @Transactional
     public void deleteOrganizationOutboxMessageByOutboxStatus(OutboxStatus outboxStatus) {
-        organizationOutboxRepository.deleteByTypeAndOutboxStatus(USER_SAGA_NAME, outboxStatus);
+        organizationOutboxRepository.deleteByTypeAndOutboxStatus(ORGANIZATION_SAGA_NAME, outboxStatus);
     }
 
     @Transactional
@@ -58,9 +58,8 @@ public class OrganizationOutboxHelper {
                                               UUID sagaId) {
         save(OrganizationOutboxMessage.builder()
                 .id(UUID.randomUUID())
-                .type(USER_SAGA_NAME)
+                .type(ORGANIZATION_SAGA_NAME)
                 .sagaId(sagaId)
-                .type(USER_SAGA_NAME)
                 .createdAt(ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)))
                 .processedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)))
                 .payload(createdPayload(organizationEventPayload))

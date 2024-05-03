@@ -3,8 +3,6 @@ package com.backend.programming.learning.system.auth.service.domain.outbox.sched
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.organization.OrganizationEventPayload;
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.organization.OrganizationOutboxMessage;
-import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserEventPayload;
-import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserOutboxMessage;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.OrganizationOutboxRepository;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
@@ -50,10 +48,10 @@ public class OrganizationOutboxHelper {
     public void save(OrganizationOutboxMessage organizationOutboxMessage) {
         OrganizationOutboxMessage response = organizationOutboxRepository.save(organizationOutboxMessage);
         if (response == null) {
-            log.error("Could not save UserOutboxMessage with outbox id: {}", organizationOutboxMessage.getId());
-            throw new AuthDomainException("Could not save UserOutboxMessage with outbox id: " + organizationOutboxMessage.getId());
+            log.error("Could not save OrganizationOutboxMessage with outbox id: {}", organizationOutboxMessage.getId());
+            throw new AuthDomainException("Could not save OrganizationOutboxMessage with outbox id: " + organizationOutboxMessage.getId());
         }
-        log.info("UserOutboxMessage saved with outbox id: {}", organizationOutboxMessage.getId());
+        log.info("OrganizationOutboxMessage saved with outbox id: {}", organizationOutboxMessage.getId());
     }
 
     @Transactional
@@ -76,12 +74,12 @@ public class OrganizationOutboxHelper {
             return objectMapper.writeValueAsString(organizationEventPayload);
         } catch (JsonProcessingException e) {
             log.error("Could not create OrganizationEventPayload object for organization id: {}", organizationEventPayload.getOrganizationId(), e);
-            throw new AuthDomainException("Could not create OrganizationEventPayload object for user id: " + organizationEventPayload.getOrganizationId());
+            throw new AuthDomainException("Could not create OrganizationEventPayload object for organization id: " + organizationEventPayload.getOrganizationId());
         }
     }
 
     @Transactional
-    public void deleteUserOutboxMessageByOutboxStatusAndSagaStatus(OutboxStatus outboxStatus,
+    public void deleteOrganizationOutboxMessageByOutboxStatusAndSagaStatus(OutboxStatus outboxStatus,
                                                                    SagaStatus... sagaStatus) {
         organizationOutboxRepository.deleteByTypeAndOutboxStatusAndSagaStatus(ORGANIZATION_SAGA_NAME, outboxStatus, sagaStatus);
     }

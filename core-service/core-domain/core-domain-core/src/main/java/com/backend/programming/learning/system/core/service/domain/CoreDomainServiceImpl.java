@@ -191,28 +191,24 @@ public class CoreDomainServiceImpl implements CoreDomainService {
 
     @Override
     public UserCreatedSuccessEvent createdUserSuccess(User user) {
-        user.setCopyState(CopyState.CREATED);
         return new UserCreatedSuccessEvent(user,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
     public UserCreatedFailEvent createdUserFail(User user, List<String> failureMessages) {
-        user.setCopyState(CopyState.CREATE_FAILED);
         return new UserCreatedFailEvent(user,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)), failureMessages);
     }
 
     @Override
     public UserUpdatedSuccessEvent updatedUserSuccess(User user) {
-        user.setCopyState(CopyState.UPDATED);
         return new UserUpdatedSuccessEvent(user,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
     public UserUpdatedFailEvent updatedUserFail(User user, List<String> failureMessages) {
-        user.setCopyState(CopyState.UPDATE_FAILED);
         return new UserUpdatedFailEvent(user,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
                 failureMessages);
@@ -220,14 +216,12 @@ public class CoreDomainServiceImpl implements CoreDomainService {
 
     @Override
     public UserDeletedSuccessEvent deletedUserSuccess(User user) {
-        user.setCopyState(CopyState.DELETED);
         return new UserDeletedSuccessEvent(user,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
     public UserDeletedFailEvent deletedUserFail(User user, List<String> failureMessages) {
-        user.setCopyState(CopyState.DELETE_FAILED);
         return new UserDeletedFailEvent(user,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
                 failureMessages);
@@ -235,42 +229,36 @@ public class CoreDomainServiceImpl implements CoreDomainService {
 
     @Override
     public OrganizationCreatedSuccessEvent createdOrganizationSuccess(Organization organization) {
-        organization.setCopyState(CopyState.CREATED);
         return new OrganizationCreatedSuccessEvent(organization,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
     public OrganizationCreatedFailEvent createdOrganizationFail(Organization organization, List<String> failureMessages) {
-        organization.setCopyState(CopyState.CREATE_FAILED);
         return new OrganizationCreatedFailEvent(organization,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)), failureMessages);
     }
 
     @Override
     public OrganizationUpdatedSuccessEvent updatedOrganizationSuccess(Organization organization) {
-        organization.setCopyState(CopyState.UPDATED);
         return new OrganizationUpdatedSuccessEvent(organization,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
     public OrganizationUpdatedFailEvent updatedOrganizationFail(Organization organization, List<String> failureMessages) {
-        organization.setCopyState(CopyState.UPDATE_FAILED);
         return new OrganizationUpdatedFailEvent(organization,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)), failureMessages);
     }
 
     @Override
     public OrganizationDeletedSuccessEvent deletedOrganizationSuccess(Organization organization) {
-        organization.setCopyState(CopyState.DELETED);
         return new OrganizationDeletedSuccessEvent(organization,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
     public OrganizationDeletedFailEvent deletedOrganizationFail(Organization organization, List<String> failureMessages) {
-        organization.setCopyState(CopyState.DELETE_FAILED);
         return new OrganizationDeletedFailEvent(organization,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)), failureMessages);
     }

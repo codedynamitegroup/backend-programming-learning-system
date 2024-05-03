@@ -19,7 +19,6 @@ public class User extends AggregateRoot<UserId> {
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
     private Boolean isDeleted;
-    private CopyState copyState;
 
     private User(Builder builder) {
         super.setId(builder.userId);
@@ -33,7 +32,6 @@ public class User extends AggregateRoot<UserId> {
         createdAt = builder.createdAt;
         setUpdatedAt(builder.updatedAt);
         isDeleted = builder.isDeleted;
-        setCopyState(builder.copyState);
     }
 
     public String getEmail() {
@@ -108,14 +106,6 @@ public class User extends AggregateRoot<UserId> {
         isDeleted = deleted;
     }
 
-    public CopyState getCopyState() {
-        return copyState;
-    }
-
-    public void setCopyState(CopyState copyState) {
-        this.copyState = copyState;
-    }
-
     public static Builder builder() {
         return new Builder();
     }
@@ -132,7 +122,6 @@ public class User extends AggregateRoot<UserId> {
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
         private Boolean isDeleted;
-        private CopyState copyState;
 
         private Builder() {
         }
@@ -189,11 +178,6 @@ public class User extends AggregateRoot<UserId> {
 
         public Builder isDeleted(Boolean val) {
             isDeleted = val;
-            return this;
-        }
-
-        public Builder copyState(CopyState val) {
-            copyState = val;
             return this;
         }
 

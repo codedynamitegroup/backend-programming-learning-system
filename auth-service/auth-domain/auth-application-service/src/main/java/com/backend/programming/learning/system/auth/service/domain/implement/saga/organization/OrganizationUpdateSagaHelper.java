@@ -1,13 +1,10 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.saga.organization;
 
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
-import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.OrganizationRepository;
-import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 import com.backend.programming.learning.system.saga.SagaStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

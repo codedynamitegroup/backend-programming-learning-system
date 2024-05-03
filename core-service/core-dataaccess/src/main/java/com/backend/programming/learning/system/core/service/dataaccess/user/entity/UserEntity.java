@@ -31,8 +31,6 @@ public class UserEntity {
     private String phone;
     private String address;
     private String avatarUrl;
-    @Enumerated(EnumType.STRING)
-    private CopyState copyState;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
     private Boolean isDeleted;

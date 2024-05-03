@@ -59,8 +59,8 @@ public class OrganizationRequestHelper {
             failureMessages.add("Could not create organization with id: " + organization.getId().getValue().toString());
             OrganizationCreatedFailEvent organizationCreatedFailEvent = coreDomainService.createdOrganizationFail(organization, failureMessages);
             organizationOutboxHelper.saveOrganizationOutboxMessage(organizationDataMapper.organizationEventToOrganizationEventPayload(
-                    organizationCreatedFailEvent),
-                    organizationCreatedFailEvent.getOrganization().getCopyState(),
+                    organizationCreatedFailEvent, CopyState.CREATE_FAILED),
+                    CopyState.CREATE_FAILED,
                     OutboxStatus.STARTED,
                     UUID.fromString(organizationRequest.getSagaId()));
             return;
@@ -70,8 +70,8 @@ public class OrganizationRequestHelper {
         OrganizationCreatedSuccessEvent organizationCreatedSuccessEvent = coreDomainService.createdOrganizationSuccess(organization);
 
         organizationOutboxHelper.saveOrganizationOutboxMessage(organizationDataMapper.organizationEventToOrganizationEventPayload(
-                organizationCreatedSuccessEvent),
-                organizationCreatedSuccessEvent.getOrganization().getCopyState(),
+                organizationCreatedSuccessEvent, CopyState.CREATED),
+                CopyState.CREATED,
                 OutboxStatus.STARTED,
                 UUID.fromString(organizationRequest.getSagaId()));
     }
@@ -93,8 +93,8 @@ public class OrganizationRequestHelper {
             OrganizationDeletedFailEvent organizationDeletedFailEvent = coreDomainService.deletedOrganizationFail(
                     organization, failureMessages);
             organizationOutboxHelper.saveOrganizationOutboxMessage(organizationDataMapper.organizationEventToOrganizationEventPayload(
-                    organizationDeletedFailEvent),
-                    organizationDeletedFailEvent.getOrganization().getCopyState(),
+                    organizationDeletedFailEvent, CopyState.DELETE_FAILED),
+                    CopyState.DELETE_FAILED,
                     OutboxStatus.STARTED,
                     UUID.fromString(organizationRequest.getSagaId()));
             return;
@@ -116,8 +116,8 @@ public class OrganizationRequestHelper {
         OrganizationDeletedSuccessEvent organizationDeletedSuccessEvent = coreDomainService.deletedOrganizationSuccess(organization);
 
         organizationOutboxHelper.saveOrganizationOutboxMessage(organizationDataMapper.organizationEventToOrganizationEventPayload(
-                organizationDeletedSuccessEvent),
-                organizationDeletedSuccessEvent.getOrganization().getCopyState(),
+                organizationDeletedSuccessEvent, CopyState.DELETED),
+                CopyState.DELETED,
                 OutboxStatus.STARTED,
                 UUID.fromString(organizationRequest.getSagaId()));
     }
@@ -140,8 +140,8 @@ public class OrganizationRequestHelper {
             OrganizationUpdatedFailEvent organizationUpdatedFailEvent = coreDomainService.updatedOrganizationFail(
                     organization, failureMessages);
             organizationOutboxHelper.saveOrganizationOutboxMessage(organizationDataMapper.organizationEventToOrganizationEventPayload(
-                    organizationUpdatedFailEvent),
-                    organizationUpdatedFailEvent.getOrganization().getCopyState(),
+                    organizationUpdatedFailEvent, CopyState.UPDATE_FAILED),
+                    CopyState.UPDATE_FAILED,
                     OutboxStatus.STARTED,
                     UUID.fromString(organizationRequest.getSagaId()));
             return;
@@ -173,8 +173,8 @@ public class OrganizationRequestHelper {
             OrganizationUpdatedFailEvent organizationUpdatedFailEvent = coreDomainService.updatedOrganizationFail(
                     organization, failureMessages);
             organizationOutboxHelper.saveOrganizationOutboxMessage(organizationDataMapper.organizationEventToOrganizationEventPayload(
-                    organizationUpdatedFailEvent),
-                    organizationUpdatedFailEvent.getOrganization().getCopyState(),
+                    organizationUpdatedFailEvent, CopyState.UPDATE_FAILED),
+                    CopyState.UPDATE_FAILED,
                     OutboxStatus.STARTED,
                     UUID.fromString(organizationRequest.getSagaId()));
             return;
@@ -184,8 +184,8 @@ public class OrganizationRequestHelper {
         OrganizationUpdatedSuccessEvent organizationUpdatedSuccessEvent = coreDomainService.updatedOrganizationSuccess(organization);
 
         organizationOutboxHelper.saveOrganizationOutboxMessage(organizationDataMapper.organizationEventToOrganizationEventPayload(
-                organizationUpdatedSuccessEvent),
-                organizationUpdatedSuccessEvent.getOrganization().getCopyState(),
+                organizationUpdatedSuccessEvent, CopyState.UPDATED),
+                CopyState.UPDATED,
                 OutboxStatus.STARTED,
                 UUID.fromString(organizationRequest.getSagaId()));
     }

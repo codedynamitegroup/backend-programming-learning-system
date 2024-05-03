@@ -43,12 +43,10 @@ public class UserUpdateSaga implements SagaStep<UserResponse> {
 
         UserOutboxMessage userOutboxMessage = userOutboxMessageResponse.get();
 
-        User user = saveUserSuccessfulState(userResponse);
-
-        SagaStatus sagaStatus = userSagaHelper.copyStatusToSagaStatus(user.getCopyState());
+        SagaStatus sagaStatus = userSagaHelper.copyStatusToSagaStatus(userResponse.getState());
 
         //update outbox
-        userOutboxHelper.save(updateOutboxMessage(userOutboxMessage, user.getCopyState(), sagaStatus
+        userOutboxHelper.save(updateOutboxMessage(userOutboxMessage, userResponse.getState(), sagaStatus
         ));
 
         log.info("User with id: {} is created successfully!", userResponse.getUserId());
@@ -68,12 +66,10 @@ public class UserUpdateSaga implements SagaStep<UserResponse> {
 
         UserOutboxMessage userOutboxMessage = userOutboxMessageResponse.get();
 
-        User user = saveUserRollbackState(userResponse);
-
-        SagaStatus sagaStatus = userSagaHelper.copyStatusToSagaStatus(user.getCopyState());
+        SagaStatus sagaStatus = userSagaHelper.copyStatusToSagaStatus(userResponse.getState());
 
         //update outbox
-        userOutboxHelper.save(updateOutboxMessage(userOutboxMessage, user.getCopyState(), sagaStatus
+        userOutboxHelper.save(updateOutboxMessage(userOutboxMessage, userResponse.getState(), sagaStatus
         ));
 
         log.info("User with id: {} is rollback!", userResponse.getUserId());
@@ -86,25 +82,5 @@ public class UserUpdateSaga implements SagaStep<UserResponse> {
         userOutboxMessage.setCopyState(copyState);
         userOutboxMessage.setSagaStatus(sagaStatus);
         return userOutboxMessage;
-    }
-
-    private User saveUserSuccessfulState(UserResponse response){
-        User user;
-        if (response.getState() == CopyState.DELETED) {
-            user = userSagaHelper.findUserByIdAndIsDeletedTrue(UUID.fromString(response.getUserId()));
-        } else {
-            user = userSagaHelper.findUserById(UUID.fromString(response.getUserId()));
-        }
-        log.info("Completing save user state successful with id: {} with state {}", response.getId(), response.getState().toString());
-        user.setCopyState(response.getState());//domain service should do this job but it's quite short so I set it directly
-        userRepository.save(user);
-        return user;
-    }
-    private User saveUserRollbackState(UserResponse response){
-        User user = userSagaHelper.findUserById(UUID.fromString(response.getUserId()));
-        log.info("Completing save user state rollback with id: {} with state {}", response.getId(), response.getState().toString());
-        user.setCopyState(response.getState());//domain service should do this job but it's quite short so I set it directly
-        userRepository.save(user);
-        return user;
     }
 }

@@ -1,7 +1,6 @@
 package com.backend.programming.learning.system.auth.service.domain.outbox.scheduler.organization;
 
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.organization.OrganizationOutboxMessage;
-import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserOutboxMessage;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.organization.OrganizationRequestMessagePublish;
 import com.backend.programming.learning.system.outbox.OutboxScheduler;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
@@ -38,13 +37,13 @@ public class OrganizationOutboxScheduler implements OutboxScheduler {
                         SagaStatus.STARTED, SagaStatus.COMPENSATING);
         if (outboxMessagesResponse.isPresent() && outboxMessagesResponse.get().size() > 0) {
             List<OrganizationOutboxMessage> outboxMessages = outboxMessagesResponse.get();
-            log.info("Received {} UserOutboxMessage with ids: {}, sending to message bus!",
+            log.info("Received {} OrganizationOutboxMessage with ids: {}, sending to message bus!",
                     outboxMessages.size(),
                     outboxMessages.stream().map(outboxMessage ->
                             outboxMessage.getId().toString()).collect(Collectors.joining(",")));
             outboxMessages.forEach(outboxMessage ->
                     organizationRequestMessagePublish.publish(outboxMessage, this::updateOutboxStatus));
-            log.info("{} UserOutboxMessage sent to message bus!", outboxMessages.size());
+            log.info("{} OrganizationOutboxMessage sent to message bus!", outboxMessages.size());
         }
     }
 

@@ -38,10 +38,6 @@ public class OrganizationEntity {
     private String address;
     private String apiKey;
     private String moodleUrl;
-
-    @Enumerated(EnumType.STRING)
-    private CopyState copyState;
-
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
     private Boolean isDeleted;

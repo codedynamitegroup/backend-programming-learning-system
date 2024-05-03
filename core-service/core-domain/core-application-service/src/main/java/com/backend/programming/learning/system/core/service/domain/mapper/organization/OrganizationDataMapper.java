@@ -10,6 +10,7 @@ import com.backend.programming.learning.system.core.service.domain.event.user.Us
 import com.backend.programming.learning.system.core.service.domain.outbox.model.organization.OrganizationEventPayload;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.user.UserEventPayload;
 import com.backend.programming.learning.system.domain.DomainConstants;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
@@ -48,10 +49,10 @@ public class OrganizationDataMapper {
                 .build();
     }
 
-    public OrganizationEventPayload organizationEventToOrganizationEventPayload(OrganizationEvent organizationEvent) {
+    public OrganizationEventPayload organizationEventToOrganizationEventPayload(OrganizationEvent organizationEvent, CopyState copyState) {
         return OrganizationEventPayload.builder()
                 .organizationId(organizationEvent.getOrganization().getId().getValue().toString())
-                .copyState(organizationEvent.getOrganization().getCopyState().name())
+                .copyState(copyState.name())
                 .failureMessages(organizationEvent.getFailureMessages())
                 .build();
     }

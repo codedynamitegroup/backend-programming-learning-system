@@ -44,8 +44,8 @@ public class UserRequestKafkaListener implements KafkaConsumer<UserRequestAvroMo
 
         messages.forEach(userRequestAvroModel -> {
             try {
-                switch (userRequestAvroModel.getCopyState()){
-                    case CREATING:{
+                switch (userRequestAvroModel.getCopyState()) {
+                    case CREATING -> {
                         log.info("Creating user: {}",
                                 userRequestAvroModel);
                         userRequestMessageListener
@@ -53,7 +53,7 @@ public class UserRequestKafkaListener implements KafkaConsumer<UserRequestAvroMo
                                         .userCreateRequestAvroModelToUserCreateRequest(userRequestAvroModel));
                         break;
                     }
-                    case DELETING:{
+                    case DELETING -> {
                         log.info("Deleting user: {}",
                                 userRequestAvroModel);
                         userRequestMessageListener
@@ -61,7 +61,7 @@ public class UserRequestKafkaListener implements KafkaConsumer<UserRequestAvroMo
                                         .userDeleteRequestAvroModelToUserDeleteRequest(userRequestAvroModel));
                         break;
                     }
-                    case UPDATING:{
+                    case UPDATING -> {
                         log.info("Updating user: {}",
                                 userRequestAvroModel);
                         userRequestMessageListener

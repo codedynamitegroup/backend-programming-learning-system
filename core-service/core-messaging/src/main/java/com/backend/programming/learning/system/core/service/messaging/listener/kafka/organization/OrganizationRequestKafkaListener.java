@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.messaging.listener.kafka.organization;
 
 import com.backend.programming.learning.system.core.service.domain.exception.CoreApplicationServiceException;
+import com.backend.programming.learning.system.core.service.domain.exception.OrganizationNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.ports.input.message.listener.organization.OrganizationRequestMessageListener;
 import com.backend.programming.learning.system.core.service.messaging.mapper.OrganizationMessagingDataMapper;
@@ -44,30 +45,27 @@ public class OrganizationRequestKafkaListener implements KafkaConsumer<Organizat
 
         messages.forEach(organizationRequestAvroModel -> {
             try {
-                switch (organizationRequestAvroModel.getCopyState()){
-                    case CREATING:{
+                switch (organizationRequestAvroModel.getCopyState()) {
+                    case CREATING -> {
                         log.info("Creating organization: {}",
                                 organizationRequestAvroModel);
                         organizationRequestMessageListener
                                 .organizationCreated(organizationMessagingDataMapper
                                         .organizationCreatedRequestAvroModelToOrganizationRequest(organizationRequestAvroModel));
-                        break;
                     }
-                    case DELETING:{
+                    case DELETING -> {
                         log.info("Deleting organization: {}",
                                 organizationRequestAvroModel);
                         organizationRequestMessageListener
                                 .organizationDeleted(organizationMessagingDataMapper
                                         .organizationDeletedRequestAvroModelToOrganizationRequest(organizationRequestAvroModel));
-                        break;
                     }
-                    case UPDATING:{
+                    case UPDATING -> {
                         log.info("Updating organization: {}",
                                 organizationRequestAvroModel);
                         organizationRequestMessageListener
                                 .organizationUpdated(organizationMessagingDataMapper
                                         .organizationUpdatedRequestAvroModelToOrganizationRequest(organizationRequestAvroModel));
-                        break;
                     }
                 }
             } catch (DataAccessException e) {
@@ -82,7 +80,7 @@ public class OrganizationRequestKafkaListener implements KafkaConsumer<Organizat
                     throw new CoreApplicationServiceException("Throwing DataAccessException in" +
                             " UserRequestKafkaListener: " + e.getMessage(), e);
                 }
-            } catch (UserNotFoundException e) {
+            } catch (OrganizationNotFoundException e) {
                 //NO-OP for OrderNotFoundException
                 log.error("No organization found for organization id: {}", organizationRequestAvroModel.getOrganizationId());
             }

@@ -25,8 +25,6 @@ public class OrganizationEntity {
     private String name;
     private String moodleUrl;
     private String apiKey;
-    @Enumerated(EnumType.STRING)
-    private CopyState copyState;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
     private Boolean isDeleted;

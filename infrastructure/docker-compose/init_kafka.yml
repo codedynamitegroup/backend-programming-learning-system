@@ -21,7 +21,6 @@ services:
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic organization-request --delete --if-exists
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic organization-response --delete --if-exists
       
-      
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic calendar-event-update-request --delete --if-exists
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic calendar-event-update-response --delete --if-exists
       

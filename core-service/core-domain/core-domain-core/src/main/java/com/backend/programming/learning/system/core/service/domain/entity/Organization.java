@@ -13,7 +13,6 @@ public class Organization extends AggregateRoot<OrganizationId> {
     private String apiKey;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
-    private CopyState copyState;
     private Boolean isDeleted;
 
     private Organization(Builder builder) {
@@ -24,7 +23,6 @@ public class Organization extends AggregateRoot<OrganizationId> {
         setApiKey(builder.apiKey);
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
-        setCopyState(builder.copyState);
         isDeleted = builder.isDeleted;
     }
 
@@ -64,14 +62,6 @@ public class Organization extends AggregateRoot<OrganizationId> {
         isDeleted = deleted;
     }
 
-    public CopyState getCopyState() {
-        return copyState;
-    }
-
-    public void setCopyState(CopyState copyState) {
-        this.copyState = copyState;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -106,7 +96,6 @@ public class Organization extends AggregateRoot<OrganizationId> {
         private String apiKey;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
-        private CopyState copyState;
         private Boolean isDeleted;
 
         private Builder() {
@@ -148,11 +137,6 @@ public class Organization extends AggregateRoot<OrganizationId> {
 
         public Builder updatedAt(ZonedDateTime val) {
             updatedAt = val;
-            return this;
-        }
-
-        public Builder copyState(CopyState val) {
-            copyState = val;
             return this;
         }
 

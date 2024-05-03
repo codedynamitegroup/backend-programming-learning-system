@@ -1,14 +1,10 @@
 package com.backend.programming.learning.system.core.service.messaging.mapper;
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.message.organization.OrganizationRequest;
-import com.backend.programming.learning.system.core.service.domain.dto.method.message.user.UserRequest;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.organization.OrganizationEventPayload;
-import com.backend.programming.learning.system.core.service.domain.outbox.model.user.UserEventPayload;
 import com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState;
 import com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationRequestAvroModel;
 import com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseAvroModel;
-import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel;
-import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseAvroModel;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;

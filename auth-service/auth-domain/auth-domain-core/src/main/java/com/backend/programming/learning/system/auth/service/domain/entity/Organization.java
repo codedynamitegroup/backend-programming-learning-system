@@ -2,7 +2,6 @@ package com.backend.programming.learning.system.auth.service.domain.entity;
 
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
-import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 
 import java.time.ZoneId;
@@ -17,7 +16,6 @@ public class Organization extends AggregateRoot<OrganizationId> {
     private String address;
     private String apiKey;
     private String moodleUrl;
-    private CopyState copyState;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
     private User createdBy;
@@ -33,7 +31,6 @@ public class Organization extends AggregateRoot<OrganizationId> {
         setAddress(builder.address);
         setApiKey(builder.apiKey);
         setMoodleUrl(builder.moodleUrl);
-        setCopyState(builder.copyState);
         setCreatedAt(builder.createdAt);
         setUpdatedAt(builder.updatedAt);
         setCreatedBy(builder.createdBy);
@@ -150,14 +147,6 @@ public class Organization extends AggregateRoot<OrganizationId> {
         isDeleted = deleted;
     }
 
-    public CopyState getCopyState() {
-        return copyState;
-    }
-
-    public void setCopyState(CopyState copyState) {
-        this.copyState = copyState;
-    }
-
     public static Builder builder() {
         return new Builder();
     }
@@ -170,7 +159,6 @@ public class Organization extends AggregateRoot<OrganizationId> {
         private String address;
         private String apiKey;
         private String moodleUrl;
-        private CopyState copyState;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
         private User createdBy;
@@ -213,11 +201,6 @@ public class Organization extends AggregateRoot<OrganizationId> {
 
         public Builder moodleUrl(String val) {
             moodleUrl = val;
-            return this;
-        }
-
-        public Builder copyState(CopyState val) {
-            copyState = val;
             return this;
         }
 

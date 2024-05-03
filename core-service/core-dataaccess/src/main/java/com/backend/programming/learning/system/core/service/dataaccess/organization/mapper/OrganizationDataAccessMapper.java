@@ -14,7 +14,6 @@ public class OrganizationDataAccessMapper {
                 .description(organizationEntity.getDescription())
                 .moodleUrl(organizationEntity.getMoodleUrl())
                 .apiKey(organizationEntity.getApiKey())
-                .copyState(organizationEntity.getCopyState())
                 .isDeleted(organizationEntity.getIsDeleted())
                 .createdAt(organizationEntity.getCreatedAt())
                 .updatedAt(organizationEntity.getUpdatedAt())
@@ -30,7 +29,6 @@ public class OrganizationDataAccessMapper {
                 .createdAt(organization.getCreatedAt())
                 .updatedAt(organization.getUpdatedAt())
                 .isDeleted(organization.getDeleted())
-                .copyState(organization.getCopyState())
                 .apiKey(organization.getApiKey())
                 .build();
     }

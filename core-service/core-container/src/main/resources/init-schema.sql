@@ -66,7 +66,6 @@ CREATE TABLE "public".user
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
 	is_deleted boolean NOT NULL DEFAULT false,
-	copy_state CopyState,
     CONSTRAINT user_pkey PRIMARY KEY (id)
 );
 
@@ -286,7 +285,6 @@ CREATE TABLE "public".organization
     description text,
     moodle_url text,
     api_key text,
-    copy_state CopyState,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     is_deleted boolean NOT NULL DEFAULT false,

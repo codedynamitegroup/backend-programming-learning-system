@@ -1,11 +1,8 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.saga.organization;
 
 import com.backend.programming.learning.system.auth.service.domain.dto.method.message.OrganizationResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.message.UserResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
-import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.organization.OrganizationOutboxMessage;
-import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserOutboxMessage;
 import com.backend.programming.learning.system.auth.service.domain.outbox.scheduler.organization.OrganizationOutboxHelper;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.OrganizationRepository;
 import com.backend.programming.learning.system.domain.DomainConstants;
@@ -47,12 +44,10 @@ public class OrganizationUpdateSaga implements SagaStep<OrganizationResponse> {
 
         OrganizationOutboxMessage organizationOutboxMessage = organizationOutboxMessageResponse.get();
 
-        Organization organization = saveOrganizationSuccessfulState(organizationResponse);
-
-        SagaStatus sagaStatus = organizationUpdateSagaHelper.copyStatusToSagaStatus(organization.getCopyState());
+        SagaStatus sagaStatus = organizationUpdateSagaHelper.copyStatusToSagaStatus(organizationResponse.getState());
 
         //update outbox
-        organizationOutboxHelper.save(updateOutboxMessage(organizationOutboxMessage, organization.getCopyState(), sagaStatus
+        organizationOutboxHelper.save(updateOutboxMessage(organizationOutboxMessage, organizationResponse.getState(), sagaStatus
         ));
 
         log.info("Organization with id: {} is created successfully!", organizationResponse.getOrganizationId());
@@ -73,12 +68,10 @@ public class OrganizationUpdateSaga implements SagaStep<OrganizationResponse> {
 
         OrganizationOutboxMessage organizationOutboxMessage = organizationOutboxMessageResponse.get();
 
-        Organization organization = saveOrganizationRollbackState(organizationResponse);
-
-        SagaStatus sagaStatus = organizationUpdateSagaHelper.copyStatusToSagaStatus(organization.getCopyState());
+        SagaStatus sagaStatus = organizationUpdateSagaHelper.copyStatusToSagaStatus(organizationResponse.getState());
 
         //update outbox
-        organizationOutboxHelper.save(updateOutboxMessage(organizationOutboxMessage, organization.getCopyState(), sagaStatus
+        organizationOutboxHelper.save(updateOutboxMessage(organizationOutboxMessage, organizationResponse.getState(), sagaStatus
         ));
 
         log.info("Organization with id: {} is rollback!", organizationResponse.getOrganizationId());
@@ -91,30 +84,5 @@ public class OrganizationUpdateSaga implements SagaStep<OrganizationResponse> {
         organizationOutboxMessage.setCopyState(copyState);
         organizationOutboxMessage.setSagaStatus(sagaStatus);
         return organizationOutboxMessage;
-    }
-
-    private Organization saveOrganizationSuccessfulState(OrganizationResponse organizationResponse){
-        Organization organization;
-        if (organizationResponse.getState() == CopyState.DELETED) {
-            organization = organizationUpdateSagaHelper.findOrganizationByIdAndIsDeletedTrue(
-                    UUID.fromString(organizationResponse.getOrganizationId()));
-        } else {
-            organization = organizationUpdateSagaHelper.findOrganizationById(
-                    UUID.fromString(organizationResponse.getOrganizationId()));
-        }
-        log.info("Completing save organization state successful with id: {} with state {}",
-                organizationResponse.getId(), organizationResponse.getState().toString());
-        organization.setCopyState(organizationResponse.getState()); //domain service should do this job but it's quite short so I set it directly
-        organizationRepository.save(organization);
-        return organization;
-    }
-    private Organization saveOrganizationRollbackState(OrganizationResponse organizationResponse){
-        Organization organization = organizationUpdateSagaHelper.findOrganizationById(
-                UUID.fromString(organizationResponse.getOrganizationId()));
-        log.info("Completing save organization state rollback with id: {} with state {}",
-                organizationResponse.getId(), organizationResponse.getState().toString());
-        organization.setCopyState(organizationResponse.getState());//domain service should do this job but it's quite short so I set it directly
-        organizationRepository.save(organization);
-        return organization;
     }
 }
