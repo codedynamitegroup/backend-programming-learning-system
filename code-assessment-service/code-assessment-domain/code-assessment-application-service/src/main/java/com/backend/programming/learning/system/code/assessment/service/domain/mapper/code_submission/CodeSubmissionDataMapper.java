@@ -2,17 +2,16 @@ package com.backend.programming.learning.system.code.assessment.service.domain.m
 
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionResponse;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetCodeSubmissionsByUserIdResponseItem;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetCodeSubmissionResponseItem;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_submission.UpdateCodeSubmissionTestCaseCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmissionTestCase;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.ProgrammingLanguageId;
-import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.Arrays;
+import java.util.Base64;
 
 @Component
 public class CodeSubmissionDataMapper {
@@ -45,8 +44,8 @@ public class CodeSubmissionDataMapper {
                 .build();
     }
 
-    public GetCodeSubmissionsByUserIdResponseItem codeSubmissionToGetCodeSubmissionByUserIdResponseItem(CodeSubmission codeSubmission) {
-        return GetCodeSubmissionsByUserIdResponseItem.builder()
+    public GetCodeSubmissionResponseItem codeSubmissionToGetCodeSubmissionResponseItem(CodeSubmission codeSubmission) {
+        return GetCodeSubmissionResponseItem.builder()
                 .programmingLanguageId(codeSubmission.getLanguageId().getValue())
                 .id(codeSubmission.getId().getValue())
                 .avgRuntime(codeSubmission.getRunTime())
@@ -55,6 +54,7 @@ public class CodeSubmissionDataMapper {
                 .maxGrade(codeSubmission.getCodeQuestion().getMaxGrade())
                 .achievedGrade(codeSubmission.getGrade())
                 .description(codeSubmission.getStatusDescription())
+                .sourceCode(codeSubmission.getSourceCode() != null? Arrays.toString(Base64.getDecoder().decode(codeSubmission.getSourceCode())) : null)
                 .build();
     }
 }

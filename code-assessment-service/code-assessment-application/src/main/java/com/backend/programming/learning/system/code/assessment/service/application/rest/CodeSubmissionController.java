@@ -3,10 +3,10 @@ package com.backend.programming.learning.system.code.assessment.service.applicat
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetCodeSubmissionsByUserIdCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetCodeSubmissionsByUserIdResponseItem;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetCodeSubmissionResponseItem;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetDetailCodeSubmissionsByIdCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_submission.UpdateCodeSubmissionTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.CodeSubmissionApplicationService;
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -36,7 +36,7 @@ public class CodeSubmissionController {
         return ResponseEntity.ok(response);
     }
     @GetMapping
-    public ResponseEntity<List<GetCodeSubmissionsByUserIdResponseItem>> getCodeSubmissionsByUserId
+    public ResponseEntity<List<@Valid GetCodeSubmissionResponseItem>> getCodeSubmissionsByUserId
             (@RequestParam UUID userId,
              @RequestParam UUID codeQuestionId){
 
@@ -44,8 +44,21 @@ public class CodeSubmissionController {
                 .codeQuestionId(codeQuestionId)
                 .userId(userId)
                 .build();
-        List<@Valid GetCodeSubmissionsByUserIdResponseItem> response =
+        List<GetCodeSubmissionResponseItem> response =
                 codeSubmissionApplicationService.getCodeSubmissionsByUserId(command);
+        return ResponseEntity.ok(response);
+    }
+    @GetMapping("/detail")
+    public ResponseEntity<@Valid GetCodeSubmissionResponseItem> getCodeSubmissionsById
+            (@RequestParam UUID userId,
+             @RequestParam UUID codeSubmissionId){
+
+        GetDetailCodeSubmissionsByIdCommand command = GetDetailCodeSubmissionsByIdCommand.builder()
+                .codeSubmissionId(codeSubmissionId)
+                .userId(userId)
+                .build();
+        GetCodeSubmissionResponseItem response =
+                codeSubmissionApplicationService.getCodeSubmissionsById(command);
         return ResponseEntity.ok(response);
     }
 
