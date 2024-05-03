@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.course.service.domain.mapper.question;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionRequest;
+import com.backend.programming.learning.system.course.service.domain.event.question.event.QuestionEvent;
+import com.backend.programming.learning.system.course.service.domain.outbox.model.question.QuestionEventPayload;
 import com.backend.programming.learning.system.domain.valueobject.*;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question.CreateQuestionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question.CreateQuestionResponse;
@@ -13,6 +15,7 @@ import com.backend.programming.learning.system.course.service.domain.entity.User
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -128,7 +131,22 @@ public class QuestionDataMapper {
                 .defaultMark(questionCreateRequest.getDefaultMark().floatValue())
                 .qtype(QuestionType.valueOf(questionCreateRequest.getQType()))
                 .isQuestionBank(false)
-                .answers(questionCreateRequest.getAnswers())
+                .build();
+    }
+
+    public Question questionCreateRequestToQuestion(Organization organization, User createdBy, QuestionRequest questionCreateRequest) {
+        return Question.builder()
+                .id( new QuestionId(UUID.fromString(questionCreateRequest.getId())))
+                .organization(organization)
+                .createdBy(createdBy)
+                .updatedBy(createdBy)
+                .questionText(questionCreateRequest.getQuestionText())
+                .difficulty(QuestionDifficulty.valueOf(questionCreateRequest.getDifficulty()))
+                .name(questionCreateRequest.getName())
+                .generalFeedback(questionCreateRequest.getGeneralFeedback())
+                .defaultMark(questionCreateRequest.getDefaultMark().floatValue())
+                .qtype(QuestionType.valueOf(questionCreateRequest.getQType()))
+                .isQuestionBank(false)
                 .build();
     }
 
@@ -151,7 +169,6 @@ public class QuestionDataMapper {
                 .defaultMark(questionUpdateRequest.getDefaultMark().floatValue())
                 .qtype(QuestionType.valueOf(questionUpdateRequest.getQType()))
                 .isQuestionBank(false)
-                .answers(questionUpdateRequest.getAnswers())
                 .build();
     }
 
@@ -174,7 +191,23 @@ public class QuestionDataMapper {
                 .defaultMark(questionDeleteRequest.getDefaultMark().floatValue())
                 .qtype(QuestionType.valueOf(questionDeleteRequest.getQType()))
                 .isQuestionBank(false)
-                .answers(questionDeleteRequest.getAnswers())
+                .build();
+    }
+
+    public QuestionEventPayload questionEventToQuestionEventPayload(QuestionEvent questionEvent) {
+        return QuestionEventPayload.builder()
+                .id(questionEvent.getQuestion().getId().getValue().toString())
+                .sagaId(questionEvent.getSagaId())
+                .organizationId(questionEvent.getQuestion().getOrganization().getId().getValue().toString())
+                .createdBy(questionEvent.getQuestion().getCreatedBy().getId().getValue().toString())
+                .updatedBy(questionEvent.getQuestion().getUpdatedBy().getId().getValue().toString())
+                .difficulty(questionEvent.getQuestion().getDifficulty().name())
+                .name(questionEvent.getQuestion().getName())
+                .questionText(questionEvent.getQuestion().getQuestionText())
+                .generalFeedback(questionEvent.getQuestion().getGeneralFeedback())
+                .defaultMark(BigDecimal.valueOf(questionEvent.getQuestion().getDefaultMark()))
+                .qType(questionEvent.getQuestion().getQtype().name())
+                .copyState(questionEvent.getCopyState())
                 .build();
     }
 }

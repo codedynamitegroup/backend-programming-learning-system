@@ -19,7 +19,6 @@ public class Question extends AggregateRoot<QuestionId> {
     private List<String> failureMessages;
     private Boolean isQuestionBank;
     private QuestionBankCategory questionBankCategory;
-    private List<String> answers;
 
     private User createdBy;
     private User updatedBy;
@@ -38,7 +37,6 @@ public class Question extends AggregateRoot<QuestionId> {
         failureMessages = builder.failureMessages;
         isQuestionBank = builder.isQuestionBank;
         questionBankCategory = builder.questionBankCategory;
-        answers = builder.answers;
         createdBy = builder.createdBy;
         updatedBy = builder.updatedBy;
         createdAt = builder.createdAt;
@@ -91,10 +89,6 @@ public class Question extends AggregateRoot<QuestionId> {
 
     public QuestionBankCategory getQuestionBankCategory() {
         return questionBankCategory;
-    }
-
-    public List<String> getAnswers() {
-        return answers;
     }
 
     public User getCreatedBy() {

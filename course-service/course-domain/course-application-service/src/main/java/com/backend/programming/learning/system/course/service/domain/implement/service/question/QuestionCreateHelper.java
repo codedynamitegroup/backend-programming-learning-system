@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 
 import com.backend.programming.learning.system.course.service.domain.CourseDomainService;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question.CreateQuestionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionRequest;
 import com.backend.programming.learning.system.course.service.domain.entity.Organization;
 import com.backend.programming.learning.system.course.service.domain.entity.Question;
 import com.backend.programming.learning.system.course.service.domain.entity.QuestionBankCategory;
@@ -48,6 +49,16 @@ public class QuestionCreateHelper {
         return questionResult;
     }
 
+    public Question createQuestion(QuestionRequest questionRequest) {
+        User createdBy = getUser(UUID.fromString(questionRequest.getCreatedBy()));
+        Organization organization = getOrganization(UUID.fromString(questionRequest.getOrganizationId()));
+        Question question = questionDataMapper.questionCreateRequestToQuestion(organization, createdBy, questionRequest);
+        Question questionResult = saveQuestion(question);
+
+        log.info("Question is created from create question request with id: {}", questionResult.getId());
+        return questionResult;
+    }
+
     private User getUser(UUID userId) {
         Optional<User> user = userRepository.findUser(userId);
         if (user.isEmpty()) {
@@ -68,6 +79,7 @@ public class QuestionCreateHelper {
 
     private Question saveQuestion(Question question) {
         Question savedQuestion = questionRepository.saveQuestion(question);
+
         if (savedQuestion == null) {
             log.error("Failed to save question");
             throw new RuntimeException("Failed to save question");

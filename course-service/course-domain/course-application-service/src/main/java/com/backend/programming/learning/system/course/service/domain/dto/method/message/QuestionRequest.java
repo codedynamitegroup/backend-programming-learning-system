@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Getter
 @Builder
@@ -22,5 +21,4 @@ public class QuestionRequest {
     private String generalFeedback;
     private BigDecimal defaultMark;
     private String qType;
-    private List<String> answers;
 }
