@@ -5,47 +5,32 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.backend.programming.learning.system</groupId>
-        <artifactId>core-service</artifactId>
+        <artifactId>backend-programming-learning-system</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>core-container</artifactId>
-
-    <properties>
-    </properties>
+    <artifactId>gateway-service</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.backend.programming.learning.system</groupId>
-            <artifactId>core-domain-core</artifactId>
+            <artifactId>app-config-data</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.backend.programming.learning.system</groupId>
-            <artifactId>core-application-service</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.backend.programming.learning.system</groupId>
-            <artifactId>core-application</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.backend.programming.learning.system</groupId>
-            <artifactId>core-dataaccess</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.backend.programming.learning.system</groupId>
-            <artifactId>core-messaging</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.backend.programming.learning.system</groupId>
-            <artifactId>common-dataaccess</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-circuitbreaker-reactor-resilience4j</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -56,10 +41,6 @@
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
@@ -67,7 +48,11 @@
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -77,7 +62,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <image>
-                        <name>${project.groupId}/core.service:${project.version}</name>
+                        <name>${project.groupId}/gateway.service:${project.version}</name>
                     </image>
                 </configuration>
                 <executions>
