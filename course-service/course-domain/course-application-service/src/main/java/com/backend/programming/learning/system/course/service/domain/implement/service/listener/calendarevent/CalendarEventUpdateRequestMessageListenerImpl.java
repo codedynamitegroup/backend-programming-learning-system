@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.implement.message.listener.calendarevent;
+package com.backend.programming.learning.system.course.service.domain.implement.service.listener.calendarevent;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.message.calendarevent.CalendarEventUpdateRequest;
 import com.backend.programming.learning.system.course.service.domain.ports.input.message.listener.calendarevent.CalendarEventUpdateRequestMessageListener;

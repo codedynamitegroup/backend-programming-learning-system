@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.implement.call_moodle_api_function;
+package com.backend.programming.learning.system.course.service.domain.implement.service.call_moodle_api_function;
 
 import com.backend.programming.learning.system.course.service.domain.CourseDomainService;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.call_moodle_api_function.CreateCallMoodleApiFunctionCommand;

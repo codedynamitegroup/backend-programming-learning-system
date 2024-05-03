@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.implement.post;
+package com.backend.programming.learning.system.course.service.domain.implement.service.post;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.post.DeletePostCommand;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.PostRepository;

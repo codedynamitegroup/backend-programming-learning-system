@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.implement.message.listener.user;
+package com.backend.programming.learning.system.course.service.domain.implement.service.listener.user;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.message.user.UserRequest;
 import com.backend.programming.learning.system.course.service.domain.ports.input.message.listener.user.UserRequestMessageListener;

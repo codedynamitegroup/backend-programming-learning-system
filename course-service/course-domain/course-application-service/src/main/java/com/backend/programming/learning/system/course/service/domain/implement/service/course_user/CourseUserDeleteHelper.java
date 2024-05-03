@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.implement.course_user;
+package com.backend.programming.learning.system.course.service.domain.implement.service.course_user;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.course_user.DeleteCourseUserCommand;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseUserRepository;

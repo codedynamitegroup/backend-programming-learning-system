@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.implement.assignment;
+package com.backend.programming.learning.system.course.service.domain.implement.service.assignment;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.assignment.CreateAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.assignment.CreateAssignmentResponse;

@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.implement.question_bank_category;
+package com.backend.programming.learning.system.course.service.domain.implement.service.question_bank_category;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.question_bank_category.QueryAllQuestionBankCategoryCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.QuestionBankCategory;
