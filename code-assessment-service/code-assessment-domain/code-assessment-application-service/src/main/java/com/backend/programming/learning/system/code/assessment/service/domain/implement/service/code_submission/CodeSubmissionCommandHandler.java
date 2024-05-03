@@ -46,9 +46,11 @@ public class CodeSubmissionCommandHandler {
     public List<GetCodeSubmissionResponseItem> getCodeSubmissionsByUserId(GetCodeSubmissionsByUserIdCommand command) {
         List<CodeSubmission> codeSubmissions = codeSubmissionHelper.getCodeSubmissionsByUserId(command);
         if(codeSubmissions != null){
-            return codeSubmissions.stream()
+            List<GetCodeSubmissionResponseItem> list = codeSubmissions.stream()
                     .map(codeSubmissionDataMapper::codeSubmissionToGetCodeSubmissionResponseItem)
-                    .collect(Collectors.toList());
+                    .toList();
+            list.forEach(item -> item.setSourceCode(null));
+            return list;
         }
         return List.of();
     }
@@ -57,7 +59,7 @@ public class CodeSubmissionCommandHandler {
         CodeSubmission codeSubmission = codeSubmissionHelper.getCodeSubmissionsById(command);
         GetCodeSubmissionResponseItem item = codeSubmissionDataMapper.codeSubmissionToGetCodeSubmissionResponseItem(codeSubmission);
         CodeSubmissionTestCase cstc = codeSubmissionHelper.findFirstNonAcceptedTestCase(new CodeSubmissionId(command.getCodeSubmissionId()));
-//        item.setFirstFailTestCase(codeSubmissionDataMapper.codeSubmissionTestCaseToFirstFailTestCase(cstc));
+        item.setFirstFailTestCase(codeSubmissionDataMapper.codeSubmissionTestCaseToFirstFailTestCase(cstc));
         return item;
     }
 }

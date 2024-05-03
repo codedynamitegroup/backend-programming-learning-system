@@ -36,7 +36,7 @@ public class CodeSubmissionController {
         return ResponseEntity.ok(response);
     }
     @GetMapping
-    public ResponseEntity<List<@Valid GetCodeSubmissionResponseItem>> getCodeSubmissionsByUserId
+    public ResponseEntity<List< GetCodeSubmissionResponseItem>> getCodeSubmissionsByUserId
             (@RequestParam UUID userId,
              @RequestParam UUID codeQuestionId){
 
@@ -44,12 +44,13 @@ public class CodeSubmissionController {
                 .codeQuestionId(codeQuestionId)
                 .userId(userId)
                 .build();
-        List<GetCodeSubmissionResponseItem> response =
+        List<@Valid GetCodeSubmissionResponseItem> response =
                 codeSubmissionApplicationService.getCodeSubmissionsByUserId(command);
+
         return ResponseEntity.ok(response);
     }
     @GetMapping("/detail")
-    public ResponseEntity<@Valid GetCodeSubmissionResponseItem> getCodeSubmissionsById
+    public ResponseEntity<GetCodeSubmissionResponseItem> getCodeSubmissionsById
             (@RequestParam UUID userId,
              @RequestParam UUID codeSubmissionId){
 
@@ -57,7 +58,7 @@ public class CodeSubmissionController {
                 .codeSubmissionId(codeSubmissionId)
                 .userId(userId)
                 .build();
-        GetCodeSubmissionResponseItem response =
+        @Valid GetCodeSubmissionResponseItem response =
                 codeSubmissionApplicationService.getCodeSubmissionsById(command);
         return ResponseEntity.ok(response);
     }
