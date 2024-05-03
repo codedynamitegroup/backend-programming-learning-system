@@ -22,6 +22,12 @@ public class QtypeCodeQuestionDataAccessMapper {
             builder.question(questionDataAccessMapper.questionToQuestionEntity(qtypeCodeQuestion.getQuestion()));
         if (qtypeCodeQuestion.getDslTemplate() != null)
             builder.dslTemplate(qtypeCodeQuestion.getDslTemplate());
+        if (qtypeCodeQuestion.getProblemStatement() != null)
+            builder.problemStatement(qtypeCodeQuestion.getProblemStatement());
+        if (qtypeCodeQuestion.getCodeQuestionName() != null)
+            builder.name(qtypeCodeQuestion.getCodeQuestionName());
+        if (qtypeCodeQuestion.getMaxGrade() != null)
+            builder.maxGrade(qtypeCodeQuestion.getMaxGrade());
 
         return builder.build();
     }
@@ -34,6 +40,10 @@ public class QtypeCodeQuestionDataAccessMapper {
             qtypeCodeQuestionEntity.setQuestion(questionDataAccessMapper.setQuestionEntity(qtypeCodeQuestionEntity.getQuestion(), qtypeCodeQuestion.getQuestion()));
         if (qtypeCodeQuestion.getDslTemplate() != null)
             qtypeCodeQuestionEntity.setDslTemplate(qtypeCodeQuestion.getDslTemplate());
+        if (qtypeCodeQuestion.getProblemStatement() != null)
+            qtypeCodeQuestionEntity.setProblemStatement(qtypeCodeQuestion.getProblemStatement());
+        if (qtypeCodeQuestion.getCodeQuestionName() != null)
+            qtypeCodeQuestionEntity.setName(qtypeCodeQuestion.getCodeQuestionName());
 
         return qtypeCodeQuestionEntity;
     }
@@ -43,6 +53,9 @@ public class QtypeCodeQuestionDataAccessMapper {
                 .id(new QtypeCodeQuestionId(qtypeCodeQuestionEntity.getId()))
                 .question(questionDataAccessMapper.questionEntityToQuestion(qtypeCodeQuestionEntity.getQuestion()))
                 .dslTemplate(qtypeCodeQuestionEntity.getDslTemplate())
+                .problemStatement(qtypeCodeQuestionEntity.getProblemStatement())
+                .name(qtypeCodeQuestionEntity.getName())
+                .maxGrade(qtypeCodeQuestionEntity.getMaxGrade())
                 .build();
     }
 }

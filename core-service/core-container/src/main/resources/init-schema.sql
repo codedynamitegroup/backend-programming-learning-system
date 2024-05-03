@@ -379,6 +379,9 @@ CREATE TABLE "public".qtype_code_question
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
     question_id uuid NOT NULL,
     dsl_template text,
+    problem_statement text,
+    name text,
+    max_grade float default 10,
     CONSTRAINT qtype_code_question_pkey PRIMARY KEY (id),
     CONSTRAINT qtype_code_question_question_id_fkey FOREIGN KEY (question_id)
         REFERENCES "public".question (id) MATCH SIMPLE

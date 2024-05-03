@@ -7,15 +7,26 @@ import java.util.UUID;
 
 public class QtypeCodeQuestion extends BaseEntity<QtypeCodeQuestionId> {
     private final Question question;
-    private final String dslTemplate;
+    private String dslTemplate;
+    private String problemStatement;
+    private String codeQuestionName;
+    private Float maxGrade;
+
+    private QtypeCodeQuestion(Builder builder) {
+        super.setId(builder.id);
+        question = builder.question;
+        dslTemplate = builder.dslTemplate;
+        problemStatement = builder.problemStatement;
+        codeQuestionName = builder.name;
+        maxGrade = builder.maxGrade;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
 
     public void initQtypeCodeQuestion() {
         setId(new QtypeCodeQuestionId(UUID.randomUUID()));
-    }
-    private QtypeCodeQuestion(Builder builder) {
-        super.setId(builder.qtypeCodeQuestionId);
-        question = builder.question;
-        dslTemplate = builder.dslTemplate;
     }
 
     public Question getQuestion() {
@@ -26,20 +37,32 @@ public class QtypeCodeQuestion extends BaseEntity<QtypeCodeQuestionId> {
         return dslTemplate;
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public String getProblemStatement() {
+        return problemStatement;
     }
 
+    public String getCodeQuestionName() {
+        return codeQuestionName;
+    }
+
+    public Float getMaxGrade() {
+        return maxGrade;
+    }
+
+
     public static final class Builder {
-        private QtypeCodeQuestionId qtypeCodeQuestionId;
+        private QtypeCodeQuestionId id;
         private Question question;
         private String dslTemplate;
+        private String problemStatement;
+        private String name;
+        private Float maxGrade;
 
         private Builder() {
         }
 
         public Builder id(QtypeCodeQuestionId val) {
-            qtypeCodeQuestionId = val;
+            id = val;
             return this;
         }
 
@@ -50,6 +73,21 @@ public class QtypeCodeQuestion extends BaseEntity<QtypeCodeQuestionId> {
 
         public Builder dslTemplate(String val) {
             dslTemplate = val;
+            return this;
+        }
+
+        public Builder problemStatement(String val) {
+            problemStatement = val;
+            return this;
+        }
+
+        public Builder name(String val) {
+            name = val;
+            return this;
+        }
+
+        public Builder maxGrade(Float val) {
+            maxGrade = val;
             return this;
         }
 

@@ -16,6 +16,14 @@ public class CreateQtypeCodeQuestionCommand extends CreateQuestionCommand {
     @NotNull
     private final String dslTemplate;
 
+    private final String problemStatement;
+
+    @NotNull
+    private final Float maxGrade;
+
+    @NotNull
+    private final String codeQuestionName;
+
 
     public CreateQtypeCodeQuestionCommand(
             @NotNull(message = "Organization ID is required") UUID organizationId,
@@ -27,7 +35,9 @@ public class CreateQtypeCodeQuestionCommand extends CreateQuestionCommand {
             @NotNull(message = "General feedback is required") String generalFeedback,
             @NotNull(message = "Default mark is required") @DecimalMin(value = "0.0", inclusive = false, message = "Default mark must be greater than 0") @Digits(integer = 5, fraction = 2, message = "Default mark must have up to 5 digits and 2 decimals") BigDecimal defaultMark,
             @NotNull(message = "Question type is required") String qType,
-            @NotNull(message = "Answers is required") List<AnswerOfQuestion> answers, String dslTemplate) {
+            @NotNull(message = "Answers is required") List<AnswerOfQuestion> answers, String dslTemplate,
+            String problemStatement,
+            Float maxGrade, String codeQuestionName) {
         super(organizationId,
                 createdBy,
                 updatedBy,
@@ -39,5 +49,8 @@ public class CreateQtypeCodeQuestionCommand extends CreateQuestionCommand {
                 qType,
                 answers);
         this.dslTemplate = dslTemplate;
+        this.problemStatement = problemStatement;
+        this.maxGrade = maxGrade;
+        this.codeQuestionName = codeQuestionName;
     }
 }
