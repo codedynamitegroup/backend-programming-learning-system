@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.implement.service.code_submission;
 
-import com.backend.programming.learning.system.code.assessment.service.domain.config.CodeAssessmentServiceConfigData;
+import com.backend.programming.learning.system.code.assessment.service.config.CodeAssessmentServiceConfigData;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_submission.CodeSubmissionJudgingServiceUnavailableException;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.code_submission.CodeSubmissionDataMapper;

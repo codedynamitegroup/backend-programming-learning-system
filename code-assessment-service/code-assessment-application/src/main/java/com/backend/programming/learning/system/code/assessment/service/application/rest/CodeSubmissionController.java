@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/code-assessment/code-submission",
@@ -36,7 +37,13 @@ public class CodeSubmissionController {
     }
     @GetMapping
     public ResponseEntity<List<GetCodeSubmissionsByUserIdResponseItem>> getCodeSubmissionsByUserId
-            (@RequestBody GetCodeSubmissionsByUserIdCommand command){
+            (@RequestParam UUID userId,
+             @RequestParam UUID codeQuestionId){
+
+        GetCodeSubmissionsByUserIdCommand command = GetCodeSubmissionsByUserIdCommand.builder()
+                .codeQuestionId(codeQuestionId)
+                .userId(userId)
+                .build();
         List<@Valid GetCodeSubmissionsByUserIdResponseItem> response =
                 codeSubmissionApplicationService.getCodeSubmissionsByUserId(command);
         return ResponseEntity.ok(response);
