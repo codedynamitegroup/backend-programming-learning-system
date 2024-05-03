@@ -192,9 +192,10 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         numOfTestCaseGraded += 1;
     }
 
-    public void updateAvgTimeAndMemory(Double avgTime, Double avgMemory) {
+    public void updateAvgTimeAndMemoryAndGrade(Double avgTime, Double avgMemory, long numOfPassedTestCase) {
         runTime = avgTime;
         memory = avgMemory;
+        grade = codeQuestion.getMaxGrade().doubleValue() * (numOfPassedTestCase * 1.0 / numOfTestCase);
     }
 
     public static final class Builder {

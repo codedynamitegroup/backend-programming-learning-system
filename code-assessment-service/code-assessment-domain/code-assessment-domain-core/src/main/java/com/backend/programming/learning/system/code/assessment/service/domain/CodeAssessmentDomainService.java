@@ -15,5 +15,5 @@ public interface CodeAssessmentDomainService {
 
     void increaseCodeSubmissionGradedTestCase(CodeSubmission codeSubmission);
 
-    void calculateAvgTimeAndMemory(CodeSubmission codeSubmission, List<CodeSubmissionTestCase> cstc, String acceptedDescription);
+    void calculateAvgTimeAndMemoryAndGrade(CodeSubmission codeSubmission, List<CodeSubmissionTestCase> cstc, String acceptedDescription);
 }

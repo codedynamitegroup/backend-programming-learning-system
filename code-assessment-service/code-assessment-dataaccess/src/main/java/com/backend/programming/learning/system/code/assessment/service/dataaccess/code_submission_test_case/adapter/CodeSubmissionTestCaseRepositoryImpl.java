@@ -61,7 +61,7 @@ public class CodeSubmissionTestCaseRepositoryImpl implements CodeSubmissionTestC
     }
 
     @Override
-    public Optional<CodeSubmissionTestCase> findFirstNotAcceptedByCodeSubmissionId(CodeSubmissionId id) {
+    public Optional<CodeSubmissionTestCase> findFirstNonAcceptedByCodeSubmissionId(CodeSubmissionId id) {
 
         return jpaRepository
                 .findFirstByCodeSubmissionIdAndStatusDescriptionNot
@@ -70,4 +70,6 @@ public class CodeSubmissionTestCaseRepositoryImpl implements CodeSubmissionTestC
                                         .getAcceptedStatusDescription())
                 .map(dataAccessMapper::entityToCodeSubmissionTestCase);
     }
+
+
 }

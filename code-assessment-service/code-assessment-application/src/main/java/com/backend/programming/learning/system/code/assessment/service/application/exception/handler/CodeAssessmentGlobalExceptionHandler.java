@@ -5,9 +5,11 @@ import com.backend.programming.learning.system.application.handler.GlobalExcepti
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_question.CodeQuestionNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_submission.CodeSubmissionJudgingServiceUnavailableException;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_submission.CodeSubmissionNotFound;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.programming_language.ProgrammingLanguageNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.test_case.TestCaseNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
+import com.backend.programming.learning.system.domain.exception.DomainException;
 import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
 import com.backend.programming.learning.system.domain.exception.user.UserNotFoundException;
 import lombok.extern.slf4j.Slf4j;
@@ -29,28 +31,6 @@ public class CodeAssessmentGlobalExceptionHandler extends GlobalExceptionHandler
                 .build();
     }
     @ResponseBody
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(value = {QuestionNotFoundException.class})
-    public ErrorDTO handleException(QuestionNotFoundException questionNotFoundException){
-        log.error(questionNotFoundException.getMessage(), questionNotFoundException);
-        return ErrorDTO.builder()
-                .message(questionNotFoundException.getMessage())
-                .status(HttpStatus.NOT_FOUND.getReasonPhrase())
-                .code(HttpStatus.NOT_FOUND.value())
-                .build();
-    }
-    @ResponseBody
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(value = {TestCaseNotFoundException.class})
-    public ErrorDTO handleException(TestCaseNotFoundException exception){
-        log.error(exception.getMessage(), exception);
-        return ErrorDTO.builder()
-                .message(exception.getMessage())
-                .status(HttpStatus.NOT_FOUND.getReasonPhrase())
-                .code(HttpStatus.NOT_FOUND.value())
-                .build();
-    }
-    @ResponseBody
     @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
     @ExceptionHandler(value = {CodeSubmissionJudgingServiceUnavailableException.class})
     public ErrorDTO handleException(CodeSubmissionJudgingServiceUnavailableException exception){
@@ -63,30 +43,13 @@ public class CodeAssessmentGlobalExceptionHandler extends GlobalExceptionHandler
     }
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(value = {ProgrammingLanguageNotFoundException.class})
-    public ErrorDTO handleException(ProgrammingLanguageNotFoundException exception){
-        log.error(exception.getMessage(), exception);
-        return ErrorDTO.builder()
-                .message(exception.getMessage())
-                .status(HttpStatus.NOT_FOUND.getReasonPhrase())
-                .code(HttpStatus.NOT_FOUND.value())
-                .build();
-    }
-    @ResponseBody
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(value = {CodeQuestionNotFoundException.class})
-    public ErrorDTO handleException(CodeQuestionNotFoundException exception){
-        log.error(exception.getMessage(), exception);
-        return ErrorDTO.builder()
-                .message(exception.getMessage())
-                .status(HttpStatus.NOT_FOUND.getReasonPhrase())
-                .code(HttpStatus.NOT_FOUND.value())
-                .build();
-    }
-    @ResponseBody
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(value = {UserNotFoundException.class})
-    public ErrorDTO handleException(UserNotFoundException exception){
+    @ExceptionHandler(value = {
+            UserNotFoundException.class,
+            CodeSubmissionNotFound.class,
+            CodeQuestionNotFoundException.class,
+            ProgrammingLanguageNotFoundException.class,
+            TestCaseNotFoundException.class})
+    public ErrorDTO handleException(DomainException exception){
         log.error(exception.getMessage(), exception);
         return ErrorDTO.builder()
                 .message(exception.getMessage())

@@ -47,7 +47,7 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
     }
 
     @Override
-    public void calculateAvgTimeAndMemory(CodeSubmission codeSubmission, List<CodeSubmissionTestCase> cstc, String acceptedDescription) {
+    public void calculateAvgTimeAndMemoryAndGrade(CodeSubmission codeSubmission, List<CodeSubmissionTestCase> cstc, String acceptedDescription) {
         boolean notAllAccepted = cstc.stream().anyMatch(item -> !item.getStatusDescription().equals(acceptedDescription));
         if(!notAllAccepted){
             Double avgTime = cstc.stream()
@@ -58,8 +58,15 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
                     .mapToDouble(item -> item.getMemory().doubleValue())
                     .average()
                     .orElse(Double.NaN);
-            codeSubmission.updateAvgTimeAndMemory(avgTime, avgMemory);
+            codeSubmission.updateAvgTimeAndMemoryAndGrade(avgTime, avgMemory, cstc.size());
         }
+        else
+            codeSubmission.updateAvgTimeAndMemoryAndGrade
+                    (null , null,
+                            cstc.stream()
+                                    .filter(item-> item.getStatusDescription().equals(acceptedDescription))
+                                    .count());
+
         codeSubmission.setGradingStatus(GradingStatus.GRADED);
     }
 

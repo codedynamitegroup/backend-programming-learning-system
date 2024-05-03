@@ -15,5 +15,5 @@ public interface CodeSubmissionTestCaseRepository {
 
     List<CodeSubmissionTestCase> findByCodeSubmissionId(CodeSubmissionId id);
 
-    Optional<CodeSubmissionTestCase> findFirstNotAcceptedByCodeSubmissionId(CodeSubmissionId id);
+    Optional<CodeSubmissionTestCase> findFirstNonAcceptedByCodeSubmissionId(CodeSubmissionId id);
 }
