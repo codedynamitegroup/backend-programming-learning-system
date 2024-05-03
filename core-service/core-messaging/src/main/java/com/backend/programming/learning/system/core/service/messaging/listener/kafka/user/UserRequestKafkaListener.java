@@ -32,7 +32,7 @@ public class UserRequestKafkaListener implements KafkaConsumer<UserRequestAvroMo
 
     @Override
     @KafkaListener(id = "${kafka-consumer-config.core-service-user-request-group-id}",
-            topics = "${core-service.user-request-topic-name}")
+            topics = "${core-service.core-user-request-topic-name}")
     public void receive(@Payload List<UserRequestAvroModel> messages,
                         @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) List<String> keys,
                         @Header(KafkaHeaders.RECEIVED_PARTITION_ID) List<Integer> partitions,
@@ -45,29 +45,27 @@ public class UserRequestKafkaListener implements KafkaConsumer<UserRequestAvroMo
 
         messages.forEach(userRequestAvroModel -> {
             try {
-                if (userRequestAvroModel.getServiceName().equals(ServiceName.CORE_SERVICE)) {
-                    switch (userRequestAvroModel.getCopyState()) {
-                        case CREATING -> {
-                            log.info("Creating user: {}",
-                                    userRequestAvroModel);
-                            userRequestMessageListener
-                                    .userCreated(userMessagingDataMapper
-                                            .userCreateRequestAvroModelToUserCreateRequest(userRequestAvroModel));
-                        }
-                        case DELETING -> {
-                            log.info("Deleting user: {}",
-                                    userRequestAvroModel);
-                            userRequestMessageListener
-                                    .userDeleted(userMessagingDataMapper
-                                            .userDeleteRequestAvroModelToUserDeleteRequest(userRequestAvroModel));
-                        }
-                        case UPDATING -> {
-                            log.info("Updating user: {}",
-                                    userRequestAvroModel);
-                            userRequestMessageListener
-                                    .userUpdated(userMessagingDataMapper
-                                            .userUpdateRequestAvroModelToUserUpdateRequest(userRequestAvroModel));
-                        }
+                switch (userRequestAvroModel.getCopyState()) {
+                    case CREATING -> {
+                        log.info("Creating user: {}",
+                                userRequestAvroModel);
+                        userRequestMessageListener
+                                .userCreated(userMessagingDataMapper
+                                        .userCreateRequestAvroModelToUserCreateRequest(userRequestAvroModel));
+                    }
+                    case DELETING -> {
+                        log.info("Deleting user: {}",
+                                userRequestAvroModel);
+                        userRequestMessageListener
+                                .userDeleted(userMessagingDataMapper
+                                        .userDeleteRequestAvroModelToUserDeleteRequest(userRequestAvroModel));
+                    }
+                    case UPDATING -> {
+                        log.info("Updating user: {}",
+                                userRequestAvroModel);
+                        userRequestMessageListener
+                                .userUpdated(userMessagingDataMapper
+                                        .userUpdateRequestAvroModelToUserUpdateRequest(userRequestAvroModel));
                     }
                 }
             } catch (DataAccessException e) {

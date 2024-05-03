@@ -15,10 +15,12 @@ services:
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic core-question-request --delete --if-exists
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic core-question-response --delete --if-exists
       
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic user-request --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic core-user-request --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic course-user-request --delete --if-exists
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic user-response --delete --if-exists
       
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic organization-request --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic core-organization-request --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic course-organization-request --delete --if-exists
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic organization-response --delete --if-exists
       
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic calendar-event-update-request --delete --if-exists
@@ -32,10 +34,12 @@ services:
       kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic core-question-request --replication-factor 3 --partitions 3
       kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic core-question-response --replication-factor 3 --partitions 3
 
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic user-request --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic core-user-request --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic course-user-request --replication-factor 3 --partitions 3
       kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic user-response --replication-factor 3 --partitions 3
       
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic organization-request --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic core-organization-request --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic course-organization-request --replication-factor 3 --partitions 3
       kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic organization-response --replication-factor 3 --partitions 3
       
       kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic calendar-event-update-request --replication-factor 3 --partitions 3

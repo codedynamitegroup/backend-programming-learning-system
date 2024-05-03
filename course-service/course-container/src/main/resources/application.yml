@@ -14,10 +14,10 @@ course-service:
   question-request-topic-name: core-question-request
   question-response-topic-name: core-question-response
 
-  user-request-topic-name: user-request
+  course-user-request-topic-name: course-user-request
   user-response-topic-name: user-response
 
-  organization-request-topic-name: organization-request
+  course-organization-request-topic-name: course-organization-request
   organization-response-topic-name: organization-response
 
   calendar-event-update-request-topic-name: calendar-event-update-request

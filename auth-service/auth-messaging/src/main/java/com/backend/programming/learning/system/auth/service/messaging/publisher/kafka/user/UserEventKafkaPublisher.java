@@ -37,7 +37,12 @@ public class UserEventKafkaPublisher implements UserRequestMessagePublisher {
 
         String sagaId = userOutboxMessage.getSagaId().toString();
         ServiceName serviceName = userOutboxMessage.getServiceName();
-
+        String requestTopicName;
+        if (serviceName.equals(ServiceName.CORE_SERVICE)) {
+            requestTopicName = authServiceConfigData.getCoreUserRequestTopicName();
+        } else {
+            requestTopicName = authServiceConfigData.getCourseUserRequestTopicName();
+        }
         log.info("Received UserOutboxMessage for user id: {} and saga id: {}", userEventPayload.getUserId(), sagaId);
 
         try {
@@ -45,30 +50,30 @@ public class UserEventKafkaPublisher implements UserRequestMessagePublisher {
                 case CREATING -> {
                     UserRequestAvroModel userRequestAvroModel = userMessagingDataMapper
                             .userCreatedEventPayloadToUserCreateRequestAvroModel(sagaId, serviceName, userEventPayload);
-                    kafkaProducer.send(authServiceConfigData.getUserRequestTopicName(),
+                    kafkaProducer.send(requestTopicName,
                             sagaId,
                             userRequestAvroModel,
-                            kafkaOutboxMessageHelper.getKafkaCallback(authServiceConfigData.getUserRequestTopicName(),
+                            kafkaOutboxMessageHelper.getKafkaCallback(requestTopicName,
                                     userRequestAvroModel, userOutboxMessage, outboxCallback,
                                     sagaId, "UserRequestAvroModel"));
                 }
                 case DELETING -> {
                     UserRequestAvroModel userRequestAvroModel = userMessagingDataMapper
                             .userDeletedToUserDeleteRequestAvroModel(sagaId, serviceName, userEventPayload);
-                    kafkaProducer.send(authServiceConfigData.getUserRequestTopicName(),
+                    kafkaProducer.send(requestTopicName,
                             sagaId,
                             userRequestAvroModel,
-                            kafkaOutboxMessageHelper.getKafkaCallback(authServiceConfigData.getUserRequestTopicName(),
+                            kafkaOutboxMessageHelper.getKafkaCallback(requestTopicName,
                                     userRequestAvroModel, userOutboxMessage, outboxCallback,
                                     sagaId, "UserRequestAvroModel"));
                 }
                 case UPDATING -> {
                     UserRequestAvroModel userRequestAvroModel = userMessagingDataMapper
                             .userUpdatedToUserUpdateRequestAvroModel(sagaId, serviceName, userEventPayload);
-                    kafkaProducer.send(authServiceConfigData.getUserRequestTopicName(),
+                    kafkaProducer.send(requestTopicName,
                             sagaId,
                             userRequestAvroModel,
-                            kafkaOutboxMessageHelper.getKafkaCallback(authServiceConfigData.getUserRequestTopicName(),
+                            kafkaOutboxMessageHelper.getKafkaCallback(requestTopicName,
                                     userRequestAvroModel, userOutboxMessage, outboxCallback,
                                     sagaId, "UserRequestAvroModel"));
                 }

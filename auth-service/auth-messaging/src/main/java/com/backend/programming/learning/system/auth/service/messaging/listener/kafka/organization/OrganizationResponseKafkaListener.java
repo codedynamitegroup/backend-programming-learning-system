@@ -17,17 +17,17 @@ import java.util.List;
 
 @Slf4j
 @Component
-public class CoreServiceOrganizationResponseKafkaListener implements KafkaConsumer<OrganizationResponseAvroModel> {
+public class OrganizationResponseKafkaListener implements KafkaConsumer<OrganizationResponseAvroModel> {
     private final CoreServiceOrganizationResponseMessageListener organizationResponseMessageListener;
     private final OrganizationMessagingDataMapper organizationMessagingDataMapper;
 
-    public CoreServiceOrganizationResponseKafkaListener(CoreServiceOrganizationResponseMessageListener organizationResponseMessageListener, OrganizationMessagingDataMapper organizationMessagingDataMapper) {
+    public OrganizationResponseKafkaListener(CoreServiceOrganizationResponseMessageListener organizationResponseMessageListener, OrganizationMessagingDataMapper organizationMessagingDataMapper) {
         this.organizationResponseMessageListener = organizationResponseMessageListener;
         this.organizationMessagingDataMapper = organizationMessagingDataMapper;
     }
 
     @Override
-    @KafkaListener(id = "${kafka-consumer-config.core-service-organization-response-group-id}",
+    @KafkaListener(id = "${kafka-consumer-config.service-organization-response-group-id}",
             topics = "${auth-service.organization-response-topic-name}")
     public void receive(@Payload List<OrganizationResponseAvroModel> messages,
                         @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) List<String> keys,

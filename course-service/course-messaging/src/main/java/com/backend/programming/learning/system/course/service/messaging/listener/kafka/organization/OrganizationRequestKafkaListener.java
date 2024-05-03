@@ -32,7 +32,7 @@ public class OrganizationRequestKafkaListener implements KafkaConsumer<Organizat
 
     @Override
     @KafkaListener(id = "${kafka-consumer-config.course-service-organization-request-group-id}",
-            topics = "${course-service.organization-request-topic-name}")
+            topics = "${course-service.course-organization-request-topic-name}")
     public void receive(@Payload List<OrganizationRequestAvroModel> messages,
                         @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) List<String> keys,
                         @Header(KafkaHeaders.RECEIVED_PARTITION_ID) List<Integer> partitions,
@@ -45,29 +45,27 @@ public class OrganizationRequestKafkaListener implements KafkaConsumer<Organizat
 
         messages.forEach(organizationRequestAvroModel -> {
             try {
-                if (organizationRequestAvroModel.getServiceName().equals(ServiceName.COURSE_SERVICE)) {
-                    switch (organizationRequestAvroModel.getCopyState()) {
-                        case CREATING -> {
-                            log.info("Creating organization: {}",
-                                    organizationRequestAvroModel);
-                            organizationRequestMessageListener
-                                    .organizationCreated(organizationMessagingDataMapper
-                                            .organizationCreatedRequestAvroModelToOrganizationRequest(organizationRequestAvroModel));
-                        }
-                        case DELETING -> {
-                            log.info("Deleting organization: {}",
-                                    organizationRequestAvroModel);
-                            organizationRequestMessageListener
-                                    .organizationDeleted(organizationMessagingDataMapper
-                                            .organizationDeletedRequestAvroModelToOrganizationRequest(organizationRequestAvroModel));
-                        }
-                        case UPDATING -> {
-                            log.info("Updating organization: {}",
-                                    organizationRequestAvroModel);
-                            organizationRequestMessageListener
-                                    .organizationUpdated(organizationMessagingDataMapper
-                                            .organizationUpdatedRequestAvroModelToOrganizationRequest(organizationRequestAvroModel));
-                        }
+                switch (organizationRequestAvroModel.getCopyState()) {
+                    case CREATING -> {
+                        log.info("Creating organization: {}",
+                                organizationRequestAvroModel);
+                        organizationRequestMessageListener
+                                .organizationCreated(organizationMessagingDataMapper
+                                        .organizationCreatedRequestAvroModelToOrganizationRequest(organizationRequestAvroModel));
+                    }
+                    case DELETING -> {
+                        log.info("Deleting organization: {}",
+                                organizationRequestAvroModel);
+                        organizationRequestMessageListener
+                                .organizationDeleted(organizationMessagingDataMapper
+                                        .organizationDeletedRequestAvroModelToOrganizationRequest(organizationRequestAvroModel));
+                    }
+                    case UPDATING -> {
+                        log.info("Updating organization: {}",
+                                organizationRequestAvroModel);
+                        organizationRequestMessageListener
+                                .organizationUpdated(organizationMessagingDataMapper
+                                        .organizationUpdatedRequestAvroModelToOrganizationRequest(organizationRequestAvroModel));
                     }
                 }
             } catch (DataAccessException e) {

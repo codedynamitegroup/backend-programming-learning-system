@@ -12,10 +12,10 @@ core-service:
   question-request-topic-name: core-question-request
   question-response-topic-name: core-question-response
 
-  user-request-topic-name: user-request
+  core-user-request-topic-name: core-user-request
   user-response-topic-name: user-response
 
-  organization-request-topic-name: organization-request
+  core-organization-request-topic-name: core-organization-request
   organization-response-topic-name: organization-response
 
   calendar-event-update-request-topic-name: calendar-event-update-request
