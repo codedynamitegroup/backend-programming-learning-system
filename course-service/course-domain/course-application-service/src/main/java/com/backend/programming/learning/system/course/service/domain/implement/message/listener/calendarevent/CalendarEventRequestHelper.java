@@ -7,7 +7,7 @@ import com.backend.programming.learning.system.course.service.domain.mapper.cale
 import com.backend.programming.learning.system.course.service.domain.outbox.model.calendarevent.CalendarEventUpdateEventPayload;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.calendarevent.CalendarEventUpdateOutboxMessage;
 import com.backend.programming.learning.system.course.service.domain.outbox.scheduler.calendarevent.CalendarEventUpdateOutboxHelper;
-import com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.question.calendarevent.CalendarEventUpdatedMessagePublisher;
+import com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.calendarevent.CalendarEventUpdatedMessagePublisher;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CalendarEventRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.UpdateState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;

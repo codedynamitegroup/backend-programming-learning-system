@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.auth.service.dataaccess.outbox.or
 import com.backend.programming.learning.system.auth.service.dataaccess.outbox.organization.repository.OrganizationOutboxJpaRepository;
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.organization.OrganizationOutboxMessage;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.OrganizationOutboxRepository;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
 import org.springframework.stereotype.Component;
@@ -50,11 +51,12 @@ public class OrganizationOutboxRepositoryImpl implements OrganizationOutboxRepos
     }
 
     @Override
-    public Optional<OrganizationOutboxMessage> findByTypeAndSagaIdAndSagaStatus(String type,
-                                                                                UUID sagaId,
-                                                                                SagaStatus... sagaStatus) {
+    public Optional<OrganizationOutboxMessage> findByTypeAndSagaIdAndServiceNameAndSagaStatus(String type,
+                                                                                              UUID sagaId,
+                                                                                              ServiceName serviceName,
+                                                                                              SagaStatus... sagaStatus) {
         return organizationOutboxJpaRepository
-                .findByTypeAndSagaIdAndSagaStatusIn(type, sagaId, Arrays.asList(sagaStatus))
+                .findByTypeAndSagaIdAndServiceNameAndSagaStatusIn(type, sagaId, serviceName, Arrays.asList(sagaStatus))
                 .map(organizationOutboxDataAccessMapper::organizationOutboxEntityToOrganizationOutboxMessage);
     }
 

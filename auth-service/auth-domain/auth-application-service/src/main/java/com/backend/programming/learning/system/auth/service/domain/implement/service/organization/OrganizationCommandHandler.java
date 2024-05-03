@@ -18,6 +18,7 @@ import com.backend.programming.learning.system.auth.service.domain.implement.sag
 import com.backend.programming.learning.system.auth.service.domain.mapper.OrganizationDataMapper;
 import com.backend.programming.learning.system.auth.service.domain.outbox.scheduler.organization.OrganizationOutboxHelper;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -58,10 +59,20 @@ public class OrganizationCommandHandler {
 
         organizationOutboxHelper.saveOrganizationOutboxMessage(
                 organizationDataMapper.organizationCreatedEventToOrganizationEventPayload(organizationCreatedEvent),
+                ServiceName.CORE_SERVICE,
                 CopyState.CREATING,
                 OutboxStatus.STARTED,
                 organizationUpdateSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
                 UUID.randomUUID());
+
+        organizationOutboxHelper.saveOrganizationOutboxMessage(
+                organizationDataMapper.organizationCreatedEventToOrganizationEventPayload(organizationCreatedEvent),
+                ServiceName.COURSE_SERVICE,
+                CopyState.CREATING,
+                OutboxStatus.STARTED,
+                organizationUpdateSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
+                UUID.randomUUID());
+
         return createOrganizationResponse;
     }
 
@@ -87,10 +98,20 @@ public class OrganizationCommandHandler {
                 "Organization updated successfully");
         organizationOutboxHelper.saveOrganizationOutboxMessage(
                 organizationDataMapper.organizationUpdatedEventToOrganizationEventPayload(organizationUpdatedEvent),
+                ServiceName.CORE_SERVICE,
                 CopyState.UPDATING,
                 OutboxStatus.STARTED,
                 organizationUpdateSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
                 UUID.randomUUID());
+
+        organizationOutboxHelper.saveOrganizationOutboxMessage(
+                organizationDataMapper.organizationUpdatedEventToOrganizationEventPayload(organizationUpdatedEvent),
+                ServiceName.COURSE_SERVICE,
+                CopyState.UPDATING,
+                OutboxStatus.STARTED,
+                organizationUpdateSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
+                UUID.randomUUID());
+
         return organizationResponse;
     }
 
@@ -102,10 +123,20 @@ public class OrganizationCommandHandler {
                 "Organization deleted successfully");
         organizationOutboxHelper.saveOrganizationOutboxMessage(
                 organizationDataMapper.organizationDeletedEventToOrganizationEventPayload(organizationDeletedEvent),
+                ServiceName.CORE_SERVICE,
                 CopyState.DELETING,
                 OutboxStatus.STARTED,
                 organizationUpdateSagaHelper.copyStatusToSagaStatus(CopyState.DELETING),
                 UUID.randomUUID());
+
+        organizationOutboxHelper.saveOrganizationOutboxMessage(
+                organizationDataMapper.organizationDeletedEventToOrganizationEventPayload(organizationDeletedEvent),
+                ServiceName.COURSE_SERVICE,
+                CopyState.DELETING,
+                OutboxStatus.STARTED,
+                organizationUpdateSagaHelper.copyStatusToSagaStatus(CopyState.DELETING),
+                UUID.randomUUID());
+
         return deleteOrganizationResponse;
     }
 

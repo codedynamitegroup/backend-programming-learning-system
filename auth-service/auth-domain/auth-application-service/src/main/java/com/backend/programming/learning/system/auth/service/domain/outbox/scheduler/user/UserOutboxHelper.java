@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.auth.service.domain.outbox.model.
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserOutboxRepository;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -36,12 +37,15 @@ public class UserOutboxHelper {
     @Transactional(readOnly = true)
     public Optional<List<UserOutboxMessage>> getUserOutboxMessageByOutboxStatusAndSagaStatus(
             OutboxStatus outboxStatus, SagaStatus... sagaStatus) {
-        return userOutboxRepository.findByTypeAndOutboxStatusAndSagaStatus(USER_SAGA_NAME, outboxStatus, sagaStatus);
+        return userOutboxRepository.findByTypeAndOutboxStatusAndSagaStatus(
+                USER_SAGA_NAME, outboxStatus, sagaStatus);
     }
 
     @Transactional(readOnly = true)
-    public Optional<UserOutboxMessage> getUserOutboxMessageBySagaIdAndSagaStatus(UUID sagaId, SagaStatus... sagaStatus) {
-        return userOutboxRepository.findByTypeAndSagaIdAndSagaStatus(USER_SAGA_NAME, sagaId, sagaStatus);
+    public Optional<UserOutboxMessage> getUserOutboxMessageBySagaIdAndServiceNameAndSagaStatus(
+            UUID sagaId, ServiceName serviceName, SagaStatus... sagaStatus) {
+        return userOutboxRepository.findByTypeAndSagaIdAndServiceNameAndSagaStatus(
+                USER_SAGA_NAME, sagaId, serviceName, sagaStatus);
     }
 
     @Transactional
@@ -56,7 +60,7 @@ public class UserOutboxHelper {
 
     @Transactional
     public void saveUserOutboxMessage(UserEventPayload userEventPayload,
-                                             CopyState state, OutboxStatus outboxStatus, SagaStatus sagaStatus, UUID sagaId) {
+                                           ServiceName serviceName, CopyState state, OutboxStatus outboxStatus, SagaStatus sagaStatus, UUID sagaId) {
         userOutboxRepository.save(UserOutboxMessage.builder()
                 .id(UUID.randomUUID())
                 .sagaId(sagaId)
@@ -66,6 +70,7 @@ public class UserOutboxHelper {
                 .copyState(state)
                 .outboxStatus(outboxStatus)
                 .sagaStatus(sagaStatus)
+                .serviceName(serviceName)
                 .build());
     }
 

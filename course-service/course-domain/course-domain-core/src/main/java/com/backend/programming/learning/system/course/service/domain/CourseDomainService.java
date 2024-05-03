@@ -50,40 +50,17 @@ public interface CourseDomainService {
     void createCalendarEvent(CalendarEvent calendarEvent);
     void createNotification(Notification notification);
 
-    UserCreatedSuccessEvent createUserSuccess(User user,
-                                              DomainEventPublisher<UserCreatedSuccessEvent> userCreatedSuccessEventDomainEventPublisher);
+    UserCreatedSuccessEvent createdUserSuccess(User user);
+    UserCreatedFailEvent createdUserFail(User user, List<String> failureMessages);
+    UserUpdatedSuccessEvent updatedUserSuccess(User user);
+    UserUpdatedFailEvent updatedUserFail(User user, List<String> failureMessages);
+    UserDeletedSuccessEvent deletedUserSuccess(User user);
+    UserDeletedFailEvent deletedUserFail(User user, List<String> failureMessages);
 
-    UserCreatedFailEvent createUserFail(User user,
-                                        DomainEventPublisher<UserCreatedFailEvent> userCreatedFailEventDomainEventPublisher,
-                                        List<String> failureMessages);
-    UserUpdatedSuccessEvent updateUserSuccess(User user,
-                                              DomainEventPublisher<UserUpdatedSuccessEvent> userUpdatedSuccessEventDomainEventPublisher);
-    UserUpdatedFailEvent updateUserFail(User user,
-                                        DomainEventPublisher<UserUpdatedFailEvent> userUpdatedFailEventDomainEventPublisher,
-                                        List<String> failureMessages);
-    UserDeletedSuccessEvent deletedUserSuccess(User user,
-                                               DomainEventPublisher<UserDeletedSuccessEvent> userDeletedSuccessEventDomainEventPublisher);
-    UserDeletedFailEvent deletedUserFail(User user,
-                                         DomainEventPublisher<UserDeletedFailEvent> userDeletedFailEventDomainEventPublisher,
-                                         List<String> failureMessages);
-    OrganizationCreatedSuccessEvent createOrganizationSuccess(Organization organization,
-                                                              DomainEventPublisher<OrganizationCreatedSuccessEvent> organizationCreatedSuccessEventDomainEventPublisher);
-
-    OrganizationCreatedFailEvent createOrganizationFail(Organization organization,
-                                                        DomainEventPublisher<OrganizationCreatedFailEvent> organizationCreatedFailEventDomainEventPublisher,
-                                                        List<String> failureMessages);
-
-    OrganizationUpdatedSuccessEvent updateOrganizationSuccess(Organization organization,
-                                                              DomainEventPublisher<OrganizationUpdatedSuccessEvent> organizationUpdatedSuccessEventDomainEventPublisher);
-
-    OrganizationUpdatedFailEvent updateOrganizationFail(Organization organization,
-                                                        DomainEventPublisher<OrganizationUpdatedFailEvent> organizationUpdatedFailEventDomainEventPublisher,
-                                                        List<String> failureMessages);
-
-    OrganizationDeletedSuccessEvent deleteOrganizationSuccess(Organization organization,
-                                                              DomainEventPublisher<OrganizationDeletedSuccessEvent> organizationDeletedSuccessEventDomainEventPublisher);
-
-    OrganizationDeletedFailEvent deleteOrganizationFail(Organization organization,
-                                                        DomainEventPublisher<OrganizationDeletedFailEvent> organizationDeletedFailEventDomainEventPublisher,
-                                                        List<String> failureMessages);
+    OrganizationCreatedSuccessEvent createdOrganizationSuccess(Organization organization);
+    OrganizationCreatedFailEvent createdOrganizationFail(Organization organization, List<String> failureMessages);
+    OrganizationUpdatedSuccessEvent updatedOrganizationSuccess(Organization organization);
+    OrganizationUpdatedFailEvent updatedOrganizationFail(Organization organization, List<String> failureMessages);
+    OrganizationDeletedSuccessEvent deletedOrganizationSuccess(Organization organization);
+    OrganizationDeletedFailEvent deletedOrganizationFail(Organization organization, List<String> failureMessages);
 }

@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.auth.service.domain.outbox.model.
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserOutboxMessage;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.user.UserRequestMessagePublisher;
 import com.backend.programming.learning.system.auth.service.messaging.mapper.UserMessagingDataMapper;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel;
 import com.backend.programming.learning.system.kafka.producer.KafkaOutboxMessageHelper;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
@@ -35,6 +36,7 @@ public class UserEventKafkaPublisher implements UserRequestMessagePublisher {
         UserEventPayload userEventPayload = kafkaOutboxMessageHelper.getEventPayload(userOutboxMessage.getPayload(), UserEventPayload.class);
 
         String sagaId = userOutboxMessage.getSagaId().toString();
+        ServiceName serviceName = userOutboxMessage.getServiceName();
 
         log.info("Received UserOutboxMessage for user id: {} and saga id: {}", userEventPayload.getUserId(), sagaId);
 
@@ -42,7 +44,7 @@ public class UserEventKafkaPublisher implements UserRequestMessagePublisher {
             switch (userOutboxMessage.getCopyState()) {
                 case CREATING -> {
                     UserRequestAvroModel userRequestAvroModel = userMessagingDataMapper
-                            .userCreatedEventPayloadToUserCreateRequestAvroModel(sagaId, userEventPayload);
+                            .userCreatedEventPayloadToUserCreateRequestAvroModel(sagaId, serviceName, userEventPayload);
                     kafkaProducer.send(authServiceConfigData.getUserRequestTopicName(),
                             sagaId,
                             userRequestAvroModel,
@@ -52,7 +54,7 @@ public class UserEventKafkaPublisher implements UserRequestMessagePublisher {
                 }
                 case DELETING -> {
                     UserRequestAvroModel userRequestAvroModel = userMessagingDataMapper
-                            .userDeletedToUserDeleteRequestAvroModel(sagaId, userEventPayload);
+                            .userDeletedToUserDeleteRequestAvroModel(sagaId, serviceName, userEventPayload);
                     kafkaProducer.send(authServiceConfigData.getUserRequestTopicName(),
                             sagaId,
                             userRequestAvroModel,
@@ -62,7 +64,7 @@ public class UserEventKafkaPublisher implements UserRequestMessagePublisher {
                 }
                 case UPDATING -> {
                     UserRequestAvroModel userRequestAvroModel = userMessagingDataMapper
-                            .userUpdatedToUserUpdateRequestAvroModel(sagaId, userEventPayload);
+                            .userUpdatedToUserUpdateRequestAvroModel(sagaId, serviceName, userEventPayload);
                     kafkaProducer.send(authServiceConfigData.getUserRequestTopicName(),
                             sagaId,
                             userRequestAvroModel,

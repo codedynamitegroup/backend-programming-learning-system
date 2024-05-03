@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.auth.service.domain.outbox.model.user;
 
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ public class UserOutboxMessage {
     private SagaStatus sagaStatus;
     private CopyState copyState;
     private OutboxStatus outboxStatus;
+    private ServiceName serviceName;
     private int version;
 
     public void setProcessedAt(ZonedDateTime processedAt) {

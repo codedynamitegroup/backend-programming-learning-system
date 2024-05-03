@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.core.service.domain.exception.Use
 import com.backend.programming.learning.system.core.service.domain.ports.input.message.listener.organization.OrganizationRequestMessageListener;
 import com.backend.programming.learning.system.core.service.messaging.mapper.OrganizationMessagingDataMapper;
 import com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationRequestAvroModel;
+import com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName;
 import com.backend.programming.learning.system.kafka.consumer.KafkaConsumer;
 import lombok.extern.slf4j.Slf4j;
 import org.postgresql.util.PSQLState;
@@ -45,27 +46,29 @@ public class OrganizationRequestKafkaListener implements KafkaConsumer<Organizat
 
         messages.forEach(organizationRequestAvroModel -> {
             try {
-                switch (organizationRequestAvroModel.getCopyState()) {
-                    case CREATING -> {
-                        log.info("Creating organization: {}",
-                                organizationRequestAvroModel);
-                        organizationRequestMessageListener
-                                .organizationCreated(organizationMessagingDataMapper
-                                        .organizationCreatedRequestAvroModelToOrganizationRequest(organizationRequestAvroModel));
-                    }
-                    case DELETING -> {
-                        log.info("Deleting organization: {}",
-                                organizationRequestAvroModel);
-                        organizationRequestMessageListener
-                                .organizationDeleted(organizationMessagingDataMapper
-                                        .organizationDeletedRequestAvroModelToOrganizationRequest(organizationRequestAvroModel));
-                    }
-                    case UPDATING -> {
-                        log.info("Updating organization: {}",
-                                organizationRequestAvroModel);
-                        organizationRequestMessageListener
-                                .organizationUpdated(organizationMessagingDataMapper
-                                        .organizationUpdatedRequestAvroModelToOrganizationRequest(organizationRequestAvroModel));
+                if (organizationRequestAvroModel.getServiceName().equals(ServiceName.CORE_SERVICE)) {
+                    switch (organizationRequestAvroModel.getCopyState()) {
+                        case CREATING -> {
+                            log.info("Creating organization: {}",
+                                    organizationRequestAvroModel);
+                            organizationRequestMessageListener
+                                    .organizationCreated(organizationMessagingDataMapper
+                                            .organizationCreatedRequestAvroModelToOrganizationRequest(organizationRequestAvroModel));
+                        }
+                        case DELETING -> {
+                            log.info("Deleting organization: {}",
+                                    organizationRequestAvroModel);
+                            organizationRequestMessageListener
+                                    .organizationDeleted(organizationMessagingDataMapper
+                                            .organizationDeletedRequestAvroModelToOrganizationRequest(organizationRequestAvroModel));
+                        }
+                        case UPDATING -> {
+                            log.info("Updating organization: {}",
+                                    organizationRequestAvroModel);
+                            organizationRequestMessageListener
+                                    .organizationUpdated(organizationMessagingDataMapper
+                                            .organizationUpdatedRequestAvroModelToOrganizationRequest(organizationRequestAvroModel));
+                        }
                     }
                 }
             } catch (DataAccessException e) {

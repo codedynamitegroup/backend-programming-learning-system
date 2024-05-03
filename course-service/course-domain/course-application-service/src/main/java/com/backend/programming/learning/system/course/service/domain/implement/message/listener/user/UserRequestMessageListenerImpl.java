@@ -1,11 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.implement.message.listener.user;
 
-
-import com.backend.programming.learning.system.course.service.domain.dto.method.message.user.UserCreateRequest;
-import com.backend.programming.learning.system.course.service.domain.dto.method.message.user.UserDeleteRequest;
-import com.backend.programming.learning.system.course.service.domain.dto.method.message.user.UserUpdateRequest;
-import com.backend.programming.learning.system.course.service.domain.event.user.UserEvent;
-import com.backend.programming.learning.system.course.service.domain.ports.input.message.listener.auth.UserRequestMessageListener;
+import com.backend.programming.learning.system.course.service.domain.dto.method.message.user.UserRequest;
+import com.backend.programming.learning.system.course.service.domain.ports.input.message.listener.user.UserRequestMessageListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -14,38 +10,24 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 @Service
 public class UserRequestMessageListenerImpl implements UserRequestMessageListener {
-    private final UserCreateRequestHelper userCreateRequestHelper;
-    private final UserUpdateRequestHelper userUpdateRequestHelper;
-    private final UserDeleteRequestHelper userDeleteRequestHelper;
+    private final UserRequestHelper userRequestHelper;
 
-    public UserRequestMessageListenerImpl(UserCreateRequestHelper userCreateRequestHelper, UserUpdateRequestHelper userUpdateRequestHelper, UserDeleteRequestHelper userDeleteRequestHelper) {
-        this.userCreateRequestHelper = userCreateRequestHelper;
-        this.userUpdateRequestHelper = userUpdateRequestHelper;
-        this.userDeleteRequestHelper = userDeleteRequestHelper;
+    public UserRequestMessageListenerImpl(UserRequestHelper userRequestHelper) {
+        this.userRequestHelper = userRequestHelper;
     }
 
     @Override
-    public void userCreated(UserCreateRequest userRequest) {
-        UserEvent userEvent = userCreateRequestHelper.persistUser(userRequest);
-        fireEvent(userEvent);
+    public void userCreated(UserRequest userRequest) {
+        userRequestHelper.createdUser(userRequest);
     }
 
     @Override
-    public void userUpdated(UserUpdateRequest userUpdateRequest) {
-        UserEvent userEvent = userUpdateRequestHelper.persistUser(userUpdateRequest);
-        fireEvent(userEvent);
+    public void userUpdated(UserRequest userUpdateRequest) {
+        userRequestHelper.updatedUser(userUpdateRequest);
     }
 
     @Override
-    public void userDeleted(UserDeleteRequest userDeleteRequest) {
-        UserEvent userEvent = userDeleteRequestHelper.persistUser(userDeleteRequest);
-        fireEvent(userEvent);
-    }
-
-
-    private void fireEvent(UserEvent userEvent) {
-        log.info("Publishing user event with user id: {}",
-                userEvent.getUser().getId().getValue());
-        userEvent.fire();
+    public void userDeleted(UserRequest userDeleteRequest) {
+        userRequestHelper.deletedUser(userDeleteRequest);
     }
 }

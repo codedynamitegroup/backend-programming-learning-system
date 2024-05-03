@@ -1,11 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.implement.message.listener.organization;
 
-
-import com.backend.programming.learning.system.course.service.domain.dto.method.message.organization.OrganizationCreateRequest;
-import com.backend.programming.learning.system.course.service.domain.dto.method.message.organization.OrganizationDeleteRequest;
-import com.backend.programming.learning.system.course.service.domain.dto.method.message.organization.OrganizationUpdateRequest;
-import com.backend.programming.learning.system.course.service.domain.event.organization.OrganizationEvent;
-import com.backend.programming.learning.system.course.service.domain.ports.input.message.listener.auth.OrganizationRequestMessageListener;
+import com.backend.programming.learning.system.course.service.domain.dto.method.message.organization.OrganizationRequest;
+import com.backend.programming.learning.system.course.service.domain.ports.input.message.listener.organization.OrganizationRequestMessageListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -14,39 +10,24 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 @Service
 public class OrganizationRequestMessageListenerImpl implements OrganizationRequestMessageListener {
-    private final OrganizationCreateRequestHelper organizationCreateRequestHelper;
-    private final OrganizationUpdateRequestHelper organizationUpdateRequestHelper;
-    private final OrganizationDeleteRequestHelper organizationDeleteRequestHelper;
+    private final OrganizationRequestHelper organizationRequestHelper;
 
-    public OrganizationRequestMessageListenerImpl(OrganizationCreateRequestHelper organizationCreateRequestHelper, OrganizationUpdateRequestHelper organizationUpdateRequestHelper, OrganizationDeleteRequestHelper organizationDeleteRequestHelper) {
-        this.organizationCreateRequestHelper = organizationCreateRequestHelper;
-        this.organizationUpdateRequestHelper = organizationUpdateRequestHelper;
-        this.organizationDeleteRequestHelper = organizationDeleteRequestHelper;
-    }
-
-
-    @Override
-    public void organizationCreated(OrganizationCreateRequest organizationCreateRequest) {
-        OrganizationEvent organizationEvent = organizationCreateRequestHelper.persistOrganization(organizationCreateRequest);
-        fireEvent(organizationEvent);
+    public OrganizationRequestMessageListenerImpl(OrganizationRequestHelper organizationRequestHelper) {
+        this.organizationRequestHelper = organizationRequestHelper;
     }
 
     @Override
-    public void organizationDeleted(OrganizationDeleteRequest organizationDeleteRequest) {
-        OrganizationEvent organizationEvent = organizationDeleteRequestHelper.persistOrganization(organizationDeleteRequest);
-        fireEvent(organizationEvent);
+    public void organizationCreated(OrganizationRequest organizationCreateRequest) {
+        organizationRequestHelper.createdOrganization(organizationCreateRequest);
     }
 
     @Override
-    public void organizationUpdated(OrganizationUpdateRequest organizationUpdateRequest) {
-        OrganizationEvent organizationEvent = organizationUpdateRequestHelper.persistOrganization(organizationUpdateRequest);
-        fireEvent(organizationEvent);
-
+    public void organizationUpdated(OrganizationRequest organizationUpdateRequest) {
+        organizationRequestHelper.updatedOrganization(organizationUpdateRequest);
     }
 
-    private void fireEvent(OrganizationEvent organizationEvent) {
-        log.info("Publishing organization event with organization id: {}",
-                organizationEvent.getOrganization().getId().getValue());
-        organizationEvent.fire();
+    @Override
+    public void organizationDeleted(OrganizationRequest organizationDeleteRequest) {
+        organizationRequestHelper.deletedOrganization(organizationDeleteRequest);
     }
 }

@@ -23,19 +23,18 @@ import java.util.UUID;
 public class UserUpdateSaga implements SagaStep<UserResponse> {
     private final UserOutboxHelper userOutboxHelper;
     private final UserUpdateSagaHelper userSagaHelper;
-    private final UserRepository userRepository;
 
-    public UserUpdateSaga(UserOutboxHelper userOutboxHelper, UserUpdateSagaHelper userSagaHelper, UserRepository userRepository) {
+    public UserUpdateSaga(UserOutboxHelper userOutboxHelper, UserUpdateSagaHelper userSagaHelper) {
         this.userOutboxHelper = userOutboxHelper;
         this.userSagaHelper = userSagaHelper;
-        this.userRepository = userRepository;
     }
 
     @Override
     @Transactional
     public void process(UserResponse userResponse) {
         Optional<UserOutboxMessage> userOutboxMessageResponse =
-                userOutboxHelper.getUserOutboxMessageBySagaIdAndSagaStatus(UUID.fromString(userResponse.getSagaId()), SagaStatus.STARTED);
+                userOutboxHelper.getUserOutboxMessageBySagaIdAndServiceNameAndSagaStatus(
+                        UUID.fromString(userResponse.getSagaId()), userResponse.getServiceName(), SagaStatus.STARTED);
         if (userOutboxMessageResponse.isEmpty()) {
             log.info("An outbox message with saga id: {} is already processed!", userResponse.getSagaId());
             return;
@@ -57,7 +56,9 @@ public class UserUpdateSaga implements SagaStep<UserResponse> {
     @Transactional
     public void rollback(UserResponse userResponse) {
         Optional<UserOutboxMessage> userOutboxMessageResponse =
-                userOutboxHelper.getUserOutboxMessageBySagaIdAndSagaStatus(UUID.fromString(userResponse.getSagaId()),
+                userOutboxHelper.getUserOutboxMessageBySagaIdAndServiceNameAndSagaStatus(
+                        UUID.fromString(userResponse.getSagaId()),
+                        userResponse.getServiceName(),
                         SagaStatus.STARTED);
         if (userOutboxMessageResponse.isEmpty()) {
             log.info("An outbox message with saga id: {} is already roll backed!", userResponse.getSagaId());

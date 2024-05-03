@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.core.service.domain.exception.Cor
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.ports.input.message.listener.user.UserRequestMessageListener;
 import com.backend.programming.learning.system.core.service.messaging.mapper.UserMessagingDataMapper;
+import com.backend.programming.learning.system.kafka.auth.avro.model.user.ServiceName;
 import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel;
 import com.backend.programming.learning.system.kafka.consumer.KafkaConsumer;
 import lombok.extern.slf4j.Slf4j;
@@ -44,30 +45,29 @@ public class UserRequestKafkaListener implements KafkaConsumer<UserRequestAvroMo
 
         messages.forEach(userRequestAvroModel -> {
             try {
-                switch (userRequestAvroModel.getCopyState()) {
-                    case CREATING -> {
-                        log.info("Creating user: {}",
-                                userRequestAvroModel);
-                        userRequestMessageListener
-                                .userCreated(userMessagingDataMapper
-                                        .userCreateRequestAvroModelToUserCreateRequest(userRequestAvroModel));
-                        break;
-                    }
-                    case DELETING -> {
-                        log.info("Deleting user: {}",
-                                userRequestAvroModel);
-                        userRequestMessageListener
-                                .userDeleted(userMessagingDataMapper
-                                        .userDeleteRequestAvroModelToUserDeleteRequest(userRequestAvroModel));
-                        break;
-                    }
-                    case UPDATING -> {
-                        log.info("Updating user: {}",
-                                userRequestAvroModel);
-                        userRequestMessageListener
-                                .userUpdated(userMessagingDataMapper
-                                        .userUpdateRequestAvroModelToUserUpdateRequest(userRequestAvroModel));
-                        break;
+                if (userRequestAvroModel.getServiceName().equals(ServiceName.CORE_SERVICE)) {
+                    switch (userRequestAvroModel.getCopyState()) {
+                        case CREATING -> {
+                            log.info("Creating user: {}",
+                                    userRequestAvroModel);
+                            userRequestMessageListener
+                                    .userCreated(userMessagingDataMapper
+                                            .userCreateRequestAvroModelToUserCreateRequest(userRequestAvroModel));
+                        }
+                        case DELETING -> {
+                            log.info("Deleting user: {}",
+                                    userRequestAvroModel);
+                            userRequestMessageListener
+                                    .userDeleted(userMessagingDataMapper
+                                            .userDeleteRequestAvroModelToUserDeleteRequest(userRequestAvroModel));
+                        }
+                        case UPDATING -> {
+                            log.info("Updating user: {}",
+                                    userRequestAvroModel);
+                            userRequestMessageListener
+                                    .userUpdated(userMessagingDataMapper
+                                            .userUpdateRequestAvroModelToUserUpdateRequest(userRequestAvroModel));
+                        }
                     }
                 }
             } catch (DataAccessException e) {

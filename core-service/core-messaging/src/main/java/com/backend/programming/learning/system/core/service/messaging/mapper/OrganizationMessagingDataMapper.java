@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.core.service.domain.outbox.model.
 import com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState;
 import com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationRequestAvroModel;
 import com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseAvroModel;
+import com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -52,6 +53,8 @@ public class OrganizationMessagingDataMapper {
                 .setSagaId(sagaId)
                 .setOrganizationId(organizationEventPayload.getOrganizationId())
                 .setCopyState(CopyState.valueOf(organizationEventPayload.getCopyState()))
+                .setServiceName(
+                        ServiceName.valueOf(com.backend.programming.learning.system.domain.valueobject.ServiceName.CORE_SERVICE.name()))
                 .setFailureMessages(organizationEventPayload.getFailureMessages())
                 .build();
     }

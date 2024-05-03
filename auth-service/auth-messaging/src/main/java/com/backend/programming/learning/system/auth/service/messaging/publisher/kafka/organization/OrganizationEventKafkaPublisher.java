@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.auth.service.domain.outbox.model.
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.organization.OrganizationOutboxMessage;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.organization.OrganizationRequestMessagePublish;
 import com.backend.programming.learning.system.auth.service.messaging.mapper.OrganizationMessagingDataMapper;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationRequestAvroModel;
 import com.backend.programming.learning.system.kafka.producer.KafkaOutboxMessageHelper;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
@@ -34,6 +35,7 @@ public class OrganizationEventKafkaPublisher implements OrganizationRequestMessa
         OrganizationEventPayload organizationEventPayload = kafkaOutboxMessageHelper.getEventPayload(organizationOutboxMessage.getPayload(), OrganizationEventPayload.class);
 
         String sagaId = organizationOutboxMessage.getSagaId().toString();
+        ServiceName serviceName = organizationOutboxMessage.getServiceName();
 
         log.info("Received OrganizationOutboxMessage for organization id: {} and saga id: {}",
                 organizationEventPayload.getOrganizationId(), sagaId);
@@ -42,7 +44,7 @@ public class OrganizationEventKafkaPublisher implements OrganizationRequestMessa
             switch (organizationOutboxMessage.getCopyState()) {
                 case CREATING -> {
                     OrganizationRequestAvroModel organizationRequestAvroModel = organizationMessagingDataMapper
-                            .organizationCreatedEventPayloadToOrganizationRequestAvroModel(sagaId, organizationEventPayload);
+                            .organizationCreatedEventPayloadToOrganizationRequestAvroModel(sagaId, serviceName, organizationEventPayload);
                     kafkaProducer.send(authServiceConfigData.getOrganizationRequestTopicName(),
                             sagaId,
                             organizationRequestAvroModel,
@@ -52,7 +54,7 @@ public class OrganizationEventKafkaPublisher implements OrganizationRequestMessa
                 }
                 case DELETING -> {
                     OrganizationRequestAvroModel organizationRequestAvroModel = organizationMessagingDataMapper
-                            .organizationDeletedEventPayloadToOrganizationRequestAvroModel(sagaId, organizationEventPayload);
+                            .organizationDeletedEventPayloadToOrganizationRequestAvroModel(sagaId, serviceName, organizationEventPayload);
                     kafkaProducer.send(authServiceConfigData.getOrganizationRequestTopicName(),
                             sagaId,
                             organizationRequestAvroModel,
@@ -62,7 +64,7 @@ public class OrganizationEventKafkaPublisher implements OrganizationRequestMessa
                 }
                 case UPDATING -> {
                     OrganizationRequestAvroModel organizationRequestAvroModel = organizationMessagingDataMapper
-                            .organizationUpdatedEventPayloadToOrganizationRequestAvroModel(sagaId, organizationEventPayload);
+                            .organizationUpdatedEventPayloadToOrganizationRequestAvroModel(sagaId, serviceName, organizationEventPayload);
                     kafkaProducer.send(authServiceConfigData.getOrganizationRequestTopicName(),
                             sagaId,
                             organizationRequestAvroModel,
