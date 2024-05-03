@@ -11,8 +11,6 @@ public class AuthServiceConfigData {
     private String userRequestTopicName;
     private String userResponseTopicName;
 
-    private String organizationCreateRequestTopicName;
-    private String organizationUpdateRequestTopicName;
-    private String organizationDeleteRequestTopicName;
+    private String organizationRequestTopicName;
     private String organizationResponseTopicName;
 }

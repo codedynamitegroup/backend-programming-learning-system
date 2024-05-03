@@ -1,0 +1,78 @@
+{
+  "name": "OrganizationRequestAvroModel",
+  "namespace": "com.backend.programming.learning.system.kafka.auth.avro.model.organization",
+  "type": "record",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "sagaId",
+      "type": "string"
+    },
+    {
+      "name": "organizationId",
+      "type": "string"
+    },
+    {
+      "name": "description",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "name",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "apiKey",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "moodleUrl",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "copyState",
+      "type": {
+        "type": "enum",
+        "name": "CopyState",
+        "symbols": [
+          "CREATING",
+          "CREATED",
+          "UPDATING",
+          "UPDATED",
+          "DELETING",
+          "DELETED",
+          "DELETE_FAILED",
+          "UPDATE_FAILED",
+          "CREATE_FAILED"
+        ]
+      }
+    },
+    {
+      "name": "createdAt",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      },
+      "default": 0
+    },
+    {
+      "name": "updatedAt",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      },
+      "default": 0
+    },
+    {
+      "name": "isDeleted",
+      "type": ["null", "boolean"],
+      "default": null
+    }
+  ]
+}

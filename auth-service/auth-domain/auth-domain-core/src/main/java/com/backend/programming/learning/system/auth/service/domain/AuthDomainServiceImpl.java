@@ -23,7 +23,6 @@ public class AuthDomainServiceImpl implements AuthDomainService {
     @Override
     public UserCreatedEvent createUser(User user) {
         user.initializeUser();
-        user.setCopyState(CopyState.CREATING);
         log.info("User with id: {} is initiated", user.getId().getValue());
         return new UserCreatedEvent(user, ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
@@ -31,21 +30,18 @@ public class AuthDomainServiceImpl implements AuthDomainService {
     @Override
     public UserDeletedEvent deleteUser(User user) {
         user.deleteUser();
-        user.setCopyState(CopyState.DELETING);
         log.info("User with id: {} is deleted", user.getId().getValue());
         return new UserDeletedEvent(user, ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
     public UserUpdatedEvent updateUser(User user) {
-        user.setCopyState(CopyState.UPDATING);
         return new UserUpdatedEvent(user, ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
     public OrganizationCreatedEvent createOrganization(Organization organization) {
         organization.initializeOrganization();
-        organization.setCopyState(CopyState.CREATING);
         log.info("Organization with id: {} is initiated", organization.getId().getValue());
         return new OrganizationCreatedEvent(organization,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
@@ -54,7 +50,6 @@ public class AuthDomainServiceImpl implements AuthDomainService {
     @Override
     public OrganizationDeletedEvent deleteOrganization(Organization organization) {
         organization.deleteOrganization();
-        organization.setCopyState(CopyState.DELETING);
         log.info("Organization with id: {} is deleted", organization.getId().getValue());
         return new OrganizationDeletedEvent(organization,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
@@ -62,7 +57,6 @@ public class AuthDomainServiceImpl implements AuthDomainService {
 
     @Override
     public OrganizationUpdatedEvent updateOrganization(Organization organization) {
-        organization.setCopyState(CopyState.UPDATING);
         return new OrganizationUpdatedEvent(organization,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }

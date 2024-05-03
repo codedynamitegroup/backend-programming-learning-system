@@ -15,6 +15,9 @@ core-service:
   user-request-topic-name: user-request
   user-response-topic-name: user-response
 
+  organization-request-topic-name: organization-request
+  organization-response-topic-name: organization-response
+
   calendar-event-update-request-topic-name: calendar-event-update-request
   calendar-event-update-response-topic-name: calendar-event-update-response
 
@@ -88,6 +91,8 @@ kafka-consumer-config:
   core-service-user-request-group-id: core-service-user-request-topic
 
   code-question-update-consumer-group-id: code-question-update-topic-consumer
+
+  core-service-organization-request-group-id: core-service-organization-request-topic
 
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader

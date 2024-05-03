@@ -8,9 +8,7 @@ logging:
 auth-service:
   user-request-topic-name: user-request
   user-response-topic-name: user-response
-  organization-create-request-topic-name: organization-create-request
-  organization-update-request-topic-name: organization-update-request
-  organization-delete-request-topic-name: organization-delete-request
+  organization-request-topic-name: organization-request
   organization-response-topic-name: organization-response
   outbox-scheduler-fixed-rate: 2000
   outbox-scheduler-initial-delay: 2000

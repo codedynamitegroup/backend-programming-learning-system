@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.event.user.UserEvent;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.user.UserEventPayload;
 import com.backend.programming.learning.system.domain.DomainConstants;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
@@ -61,10 +62,10 @@ public class UserDataMapper {
                 .build();
     }
 
-    public UserEventPayload userEventToUserEventPayload(UserEvent userEvent) {
+    public UserEventPayload userEventToUserEventPayload(UserEvent userEvent, CopyState copyState) {
         return UserEventPayload.builder()
                 .userId(userEvent.getUser().getId().getValue().toString())
-                .copyState(userEvent.getUser().getCopyState().name())
+                .copyState(copyState.name())
                 .failureMessages(userEvent.getFailureMessages())
                 .build();
     }

@@ -66,7 +66,6 @@ CREATE TABLE "public".user
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
 	is_deleted boolean NOT NULL DEFAULT false,
-	copy_state CopyState,
     CONSTRAINT user_pkey PRIMARY KEY (id)
 );
 
@@ -285,8 +284,10 @@ CREATE TABLE "public".organization
     name text,
     description text,
     moodle_url text,
+    api_key text,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    is_deleted boolean NOT NULL DEFAULT false,
     CONSTRAINT organization_pkey PRIMARY KEY (id)
 );
 
@@ -594,3 +595,27 @@ CREATE INDEX "question_outbox_saga_status"
 CREATE INDEX "question_outbox_saga_id"
     ON "public".question_outbox
     (type, saga_id, saga_status);
+
+DROP TABLE IF EXISTS "public".organization_outbox CASCADE;
+
+CREATE TABLE "public".organization_outbox
+(
+    id uuid NOT NULL,
+    saga_id uuid NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    processed_at TIMESTAMP WITH TIME ZONE,
+    type character varying COLLATE pg_catalog."default" NOT NULL,
+    payload jsonb NOT NULL,
+    outbox_status outbox_status NOT NULL,
+    copy_state CopyState NOT NULL,
+    version integer NOT NULL,
+    CONSTRAINT organization_outbox_pkey PRIMARY KEY (id)
+);
+
+CREATE INDEX "organization_outbox_saga_status"
+    ON "public".organization_outbox
+    (type, outbox_status);
+
+CREATE UNIQUE INDEX "organization_outbox_saga_id"
+    ON "public".organization_outbox
+    (type, saga_id, copy_state, outbox_status);

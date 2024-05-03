@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.auth.service.domain.implement.se
 import com.backend.programming.learning.system.auth.service.domain.AuthDomainService;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.organization.DeleteOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
+import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationDeletedEvent;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
@@ -37,11 +38,11 @@ public class OrganizationDeleteHelper {
         Organization organization = organizationResult.get();
 
         OrganizationDeletedEvent organizationDeletedEvent = authDomainService.deleteOrganization(organization);
-        deleteOrganization(organization);
+        saveOrganization(organization);
         return organizationDeletedEvent;
     }
 
-    private Organization deleteOrganization(Organization organization) {
+    private Organization saveOrganization(Organization organization) {
         Organization organizationResult = organizationRepository.save(organization);
         if (organizationResult == null) {
             log.error("Could not delete organization!");

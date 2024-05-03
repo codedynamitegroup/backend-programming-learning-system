@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.auth.service.dataaccess.organizat
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.OrganizationRepository;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
+import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -33,6 +34,12 @@ public class OrganizationRepositoryImpl implements OrganizationRepository {
     @Override
     public Optional<Organization> findById(OrganizationId organizationId) {
         return organizationJpaRepository.findByIdAndIsDeletedFalse(organizationId.getValue())
+                .map(organizationDataAccessMapper::organizationEntityToOrganization);
+    }
+
+    @Override
+    public Optional<Organization> findByIdAndIsDeletedTrue(OrganizationId organizationId) {
+        return organizationJpaRepository.findByIdAndIsDeletedTrue(organizationId.getValue())
                 .map(organizationDataAccessMapper::organizationEntityToOrganization);
     }
 

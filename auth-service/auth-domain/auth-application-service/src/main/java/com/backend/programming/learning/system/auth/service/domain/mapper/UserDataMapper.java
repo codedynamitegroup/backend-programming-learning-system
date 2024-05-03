@@ -75,7 +75,7 @@ public class UserDataMapper {
         return UserEventPayload.builder()
                 .userId(user.getId().getValue().toString())
                 .isDeleted(user.getDeleted())
-                .copyState(CopyState.UPDATING.name())
+                .copyState(CopyState.DELETING.name())
                 .build();
     }
 
