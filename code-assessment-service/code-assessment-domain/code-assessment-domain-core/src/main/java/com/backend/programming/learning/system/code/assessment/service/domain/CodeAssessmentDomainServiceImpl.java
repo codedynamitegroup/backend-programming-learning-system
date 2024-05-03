@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionsUpdatedEvent;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,6 +44,23 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
     @Override
     public void increaseCodeSubmissionGradedTestCase(CodeSubmission codeSubmission) {
         codeSubmission.increaseGradedTestCaseByOne();
+    }
+
+    @Override
+    public void calculateAvgTimeAndMemory(CodeSubmission codeSubmission, List<CodeSubmissionTestCase> cstc, String acceptedDescription) {
+        boolean notAllAccepted = cstc.stream().anyMatch(item -> !item.getStatusDescription().equals(acceptedDescription));
+        if(!notAllAccepted){
+            Double avgTime = cstc.stream()
+                    .mapToDouble(item -> item.getRunTime().doubleValue())
+                    .average()
+                    .orElse(Double.NaN);
+            Double avgMemory = cstc.stream()
+                    .mapToDouble(item -> item.getMemory().doubleValue())
+                    .average()
+                    .orElse(Double.NaN);
+            codeSubmission.updateAvgTimeAndMemory(avgTime, avgMemory);
+        }
+        codeSubmission.setGradingStatus(GradingStatus.GRADED);
     }
 
 

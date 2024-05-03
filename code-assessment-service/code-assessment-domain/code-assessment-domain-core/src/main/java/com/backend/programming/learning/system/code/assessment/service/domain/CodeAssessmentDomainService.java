@@ -14,4 +14,6 @@ public interface CodeAssessmentDomainService {
     CodeSubmission initiateCodeSubmission(CodeSubmission codeSubmission, List<TestCase> testCases, ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion, ProgrammingLangauge programmingLangauge);
 
     void increaseCodeSubmissionGradedTestCase(CodeSubmission codeSubmission);
+
+    void calculateAvgTimeAndMemory(CodeSubmission codeSubmission, List<CodeSubmissionTestCase> cstc, String acceptedDescription);
 }

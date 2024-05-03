@@ -169,7 +169,7 @@ CREATE TABLE code_submission(
     number_of_test_case_graded int default 0,
     grading_status grading_status not null ,
     copy_state CopyState not null ,
-    version integer default 0 NOT NULL,
+--     version integer default 0 NOT NULL,
     CONSTRAINT co_su_pk PRIMARY KEY (id),
     CONSTRAINT co_qu_co_su_fk FOREIGN KEY (code_question_id)
         REFERENCES qtype_code_questions (id) MATCH SIMPLE
@@ -198,7 +198,7 @@ CREATE TABLE code_submission_test_case(
     status_description text,
     runtime float,
     memory float,
-    passed boolean,
+--     passed boolean,
     judge_token text,
     CONSTRAINT co_su_te_ca_pk PRIMARY KEY (id),
     CONSTRAINT co_su_te_cax2_fk FOREIGN KEY (test_case_id)

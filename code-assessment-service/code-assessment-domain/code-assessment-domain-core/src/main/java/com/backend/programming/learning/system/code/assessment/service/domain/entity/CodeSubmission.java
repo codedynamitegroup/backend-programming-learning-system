@@ -182,6 +182,11 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         numOfTestCaseGraded += 1;
     }
 
+    public void updateAvgTimeAndMemory(Double avgTime, Double avgMemory) {
+        runTime = avgTime;
+        memory = avgMemory;
+    }
+
     public static final class Builder {
         private CodeQuestionId codeQuestionId;
         private UserId userId;

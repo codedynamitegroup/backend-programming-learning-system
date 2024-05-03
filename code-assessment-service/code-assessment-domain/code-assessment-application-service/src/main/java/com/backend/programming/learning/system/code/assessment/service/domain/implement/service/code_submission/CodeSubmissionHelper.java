@@ -1,12 +1,12 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.implement.service.code_submission;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.CodeAssessmentDomainService;
+import com.backend.programming.learning.system.code.assessment.service.domain.config.CodeAssessmentServiceConfigData;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_submission.UpdateCodeSubmissionTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_question.CodeQuestionNotFoundException;
-import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_submission.CodeSubmissionJudgingServiceUnavailableException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.programming_language.ProgrammingLanguageNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.test_case.TestCaseNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.GenericHelper;
@@ -22,14 +22,10 @@ import com.backend.programming.learning.system.domain.exception.user.UserNotFoun
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
-import io.netty.handler.timeout.ReadTimeoutException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.reactive.function.client.WebClientRequestException;
 
-import java.net.ConnectException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -48,8 +44,9 @@ public class CodeSubmissionHelper {
     private final ProgrammingLanguageCodeQuestionRepository programmingLanguageCodeQuestionRepository;
     private final AssessmentSourceCodeByTestCases assessmentSourceCodeByTestCases;
     private final GenericHelper genericHelper;
+    private final CodeAssessmentServiceConfigData codeAssessmentServiceConfigData;
 
-    public CodeSubmissionHelper(CodeAssessmentDomainService codeAssessmentDomainService, CodeSubmissionDataMapper codeSubmissionDataMapper, CodeSubmissionRepository codeSubmissionRepository, CodeQuestionRepository codeQuestionRepository, ProgrammingLanguageRepository programmingLanguageRepository, TestCaseRepository testCaseRepository, UserRepository userRepository, CodeSubmissionTestCaseRepository codeSubmissionTestCaseRepository, ProgrammingLanguageCodeQuestionRepository programmingLanguageCodeQuestionRepository, AssessmentSourceCodeByTestCases assessmentSourceCodeByTestCases, GenericHelper genericHelper) {
+    public CodeSubmissionHelper(CodeAssessmentDomainService codeAssessmentDomainService, CodeSubmissionDataMapper codeSubmissionDataMapper, CodeSubmissionRepository codeSubmissionRepository, CodeQuestionRepository codeQuestionRepository, ProgrammingLanguageRepository programmingLanguageRepository, TestCaseRepository testCaseRepository, UserRepository userRepository, CodeSubmissionTestCaseRepository codeSubmissionTestCaseRepository, ProgrammingLanguageCodeQuestionRepository programmingLanguageCodeQuestionRepository, AssessmentSourceCodeByTestCases assessmentSourceCodeByTestCases, GenericHelper genericHelper, CodeAssessmentServiceConfigData codeAssessmentServiceConfigData) {
         this.codeAssessmentDomainService = codeAssessmentDomainService;
         this.codeSubmissionDataMapper = codeSubmissionDataMapper;
         this.codeSubmissionRepository = codeSubmissionRepository;
@@ -61,6 +58,7 @@ public class CodeSubmissionHelper {
         this.programmingLanguageCodeQuestionRepository = programmingLanguageCodeQuestionRepository;
         this.assessmentSourceCodeByTestCases = assessmentSourceCodeByTestCases;
         this.genericHelper = genericHelper;
+        this.codeAssessmentServiceConfigData = codeAssessmentServiceConfigData;
     }
 
     //don't use @transactional here
@@ -160,8 +158,20 @@ public class CodeSubmissionHelper {
         codeSubmissionRepository.updateOneTestCase(codeSubmissionTestCase.getCodeSubmission().getId());
     }
 
-    public void logCodeSubmission(CodeSubmissionId id) {
-        Optional<CodeSubmission> codeSubmission = codeSubmissionRepository.findById(id);
-        log.info("jkas {}", codeSubmission.get().getNumOfTestCaseGraded());
+    @Transactional
+    public void updateCodeSubmissionWhenAllTestCaseAssessed(CodeSubmissionId id) {
+        Optional<CodeSubmission> codeSubmissionOpt = codeSubmissionRepository.findById(id);
+
+        if(codeSubmissionOpt.isPresent()){
+            CodeSubmission codeSubmission = codeSubmissionOpt.get();
+
+            if(codeSubmission.getNumOfTestCaseGraded().equals(codeSubmission.getNumOfTestCase())){
+                List<CodeSubmissionTestCase> cstc = codeSubmissionTestCaseRepository.findByCodeSubmissionId(id);
+
+                codeAssessmentDomainService.calculateAvgTimeAndMemory(codeSubmission, cstc, codeAssessmentServiceConfigData.getAcceptedStatusDescription());
+
+                codeSubmissionRepository.save(codeSubmission);
+            }
+        }
     }
 }

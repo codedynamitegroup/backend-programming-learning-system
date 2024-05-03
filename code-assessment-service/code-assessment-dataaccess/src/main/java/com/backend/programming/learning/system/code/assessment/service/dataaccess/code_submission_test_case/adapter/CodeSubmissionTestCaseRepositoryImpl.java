@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.code.assessment.service.dataacces
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission_test_case.repository.CodeSubmissionTestCaseJpaRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmissionTestCase;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.CodeSubmissionTestCaseRepository;
+import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -48,5 +49,11 @@ public class CodeSubmissionTestCaseRepositoryImpl implements CodeSubmissionTestC
         return jpaRepository
                 .findFirstByJudgeToken(token)
                 .map(dataAccessMapper::entityToCodeSubmissionTestCase);
+    }
+
+    @Override
+    public List<CodeSubmissionTestCase> findByCodeSubmissionId(CodeSubmissionId id) {
+
+        return jpaRepository.findByCodeSubmissionId(id.getValue()).stream().map(dataAccessMapper::entityToCodeSubmissionTestCase).collect(Collectors.toList());
     }
 }

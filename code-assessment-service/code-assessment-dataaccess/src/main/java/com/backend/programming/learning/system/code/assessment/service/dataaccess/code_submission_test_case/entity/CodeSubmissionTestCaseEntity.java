@@ -34,7 +34,7 @@ public class CodeSubmissionTestCaseEntity {
     String statusDescription;
     Float runtime;
     Float memory;
-    Boolean passed;
+//    Boolean passed;
     String judgeToken;
 
     @Override

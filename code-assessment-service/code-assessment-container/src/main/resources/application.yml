@@ -11,6 +11,7 @@ code-assessment-service:
   outbox-scheduler-initial-delay: 10000 #2000 in production
   assessment-external-service-ip: localhost
   assessment-external-service-port: 2358
+  accepted-status-description: Accepted
 
 spring:
   jpa:

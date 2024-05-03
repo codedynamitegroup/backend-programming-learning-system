@@ -7,9 +7,6 @@ import com.backend.programming.learning.system.code.assessment.service.domain.en
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmissionTestCase;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.code_submission.CodeSubmissionDataMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.PessimisticLockException;
-import org.hibernate.exception.LockTimeoutException;
-import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -34,6 +31,8 @@ public class CodeSubmissionCommandHandler {
         //single non-query statement to prevent lost update
         codeSubmissionHelper.increaseCodeSubmissionGradedTestCase(codeSubmissionTestCase);
         //log
-//        codeSubmissionHelper.logCodeSubmission(codeSubmissionTestCase.getCodeSubmission().getId());
+
+        //update codeSubmission
+        codeSubmissionHelper.updateCodeSubmissionWhenAllTestCaseAssessed(codeSubmissionTestCase.getCodeSubmission().getId());
     }
 }

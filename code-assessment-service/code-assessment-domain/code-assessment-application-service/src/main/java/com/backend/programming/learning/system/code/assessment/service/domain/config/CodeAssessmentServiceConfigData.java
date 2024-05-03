@@ -15,6 +15,8 @@ public class CodeAssessmentServiceConfigData {
     private String assessmentExternalServiceIp;
     private String assessmentExternalServicePort;
 
+    private String acceptedStatusDescription;
+
     @Value("${server.port}")
     Integer serverPort;
 
