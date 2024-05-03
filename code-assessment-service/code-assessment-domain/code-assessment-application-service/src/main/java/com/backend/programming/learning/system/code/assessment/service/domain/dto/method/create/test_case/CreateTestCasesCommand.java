@@ -14,8 +14,8 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class CreateTestCasesCommand {
-    @NotNull(message = "Test case list must not be null")
-    private final List<@Valid TestCaseDto> testCase;
-    @NotNull(message = "Code question id must not be null")
+    @NotNull(message = "testCases list must not be null")
+    private final List<@Valid TestCaseDto> testCases;
+    @NotNull(message = "codeQuestionId must not be null")
     private final UUID codeQuestionId;
 }

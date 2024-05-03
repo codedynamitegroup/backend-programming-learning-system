@@ -25,4 +25,6 @@ public class CreateCodeQuestionCommand {
     private final String outputFormat;
     @NotNull(message = "constraints must not be null")
     private final String constraints;
+    @NotNull(message = "maxGrade must not be null")
+    private final Float maxGrade;
 }

@@ -9,6 +9,9 @@ code-assessment-service:
   code-question-update-request-to-core-service-topic-name: code-question-update-request-to-core-service
   outbox-scheduler-fixed-rate: 10000 #2000 in production
   outbox-scheduler-initial-delay: 10000 #2000 in production
+  assessment-external-service-ip: localhost
+  assessment-external-service-port: 2358
+  accepted-status-description: Accepted
 
 spring:
   jpa:

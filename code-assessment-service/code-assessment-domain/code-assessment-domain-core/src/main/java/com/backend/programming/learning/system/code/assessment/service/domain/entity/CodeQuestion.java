@@ -17,6 +17,7 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     private final String outputFormat;
     private final String constraints;
     private CopyState copyState;
+    private Float maxGrade;
     private List<String> failureMessages;
     public static final String FAILURE_MESSAGE_DELIMITER = ",";
 
@@ -88,6 +89,10 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         return failureMessages;
     }
 
+    public Float getMaxGrade() {
+        return maxGrade;
+    }
+
     private CodeQuestion(Builder builder) {
         questionId = builder.questionId;
         name = builder.name;
@@ -97,6 +102,7 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         outputFormat = builder.outputFormat;
         constraints = builder.constraints;
         setCopyState(builder.copyState);
+        maxGrade = builder.maxGrade;
         failureMessages = builder.failureMessages;
         super.setId(builder.id);
     }
@@ -110,6 +116,7 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         private String outputFormat;
         private String constraints;
         private CopyState copyState;
+        private Float maxGrade;
         private List<String> failureMessages;
         private CodeQuestionId id;
 
@@ -156,11 +163,15 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
             return this;
         }
 
+        public Builder maxGrade(Float val) {
+            maxGrade = val;
+            return this;
+        }
+
         public Builder failureMessages(List<String> val) {
             failureMessages = val;
             return this;
         }
-
 
         public Builder codeQuestionId(CodeQuestionId val) {
             id = val;

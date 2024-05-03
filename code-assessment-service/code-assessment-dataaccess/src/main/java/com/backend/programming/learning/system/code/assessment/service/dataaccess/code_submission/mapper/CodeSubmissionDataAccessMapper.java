@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.mapper;
 
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.CodeQuestionEntity;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.mapper.CodeQuestionDataAccessMapper;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.entity.CodeSubmissionEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.language.entity.ProgrammingLanguageEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.user.entity.UserEntity;
@@ -13,11 +14,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CodeSubmissionDataAccessMapper {
+    private final CodeQuestionDataAccessMapper codeQuestionDataAccessMapper;
+
+    public CodeSubmissionDataAccessMapper(CodeQuestionDataAccessMapper codeQuestionDataAccessMapper) {
+        this.codeQuestionDataAccessMapper = codeQuestionDataAccessMapper;
+    }
+
     public CodeSubmissionEntity codeSubmissionToEntity(CodeSubmission codeSubmission) {
         return CodeSubmissionEntity.builder()
                 .id(codeSubmission.getId().getValue())
                 .codeQuestion(CodeQuestionEntity.builder()
-                        .id(codeSubmission.getCodeQuestionId().getValue())
+                        .id(codeSubmission.getCodeQuestion().getId().getValue())
                         .build())
                 .user(UserEntity.builder()
                         .id(codeSubmission.getUserId().getValue())
@@ -35,13 +42,14 @@ public class CodeSubmissionDataAccessMapper {
                 .numOfTestCaseGraded(codeSubmission.getNumOfTestCaseGraded())
                 .gradingStatus(codeSubmission.getGradingStatus())
                 .copyState(codeSubmission.getCopyState())
+//                .version(codeSubmission.getVersion())
                 .build();
     }
 
     public CodeSubmission entityToCodeSubmission(CodeSubmissionEntity entity) {
         return CodeSubmission.builder()
                 .id(new CodeSubmissionId(entity.getId()))
-                .codeQuestionId(new CodeQuestionId(entity.getCodeQuestion().getId()))
+                .codeQuestion(codeQuestionDataAccessMapper.codeQuestionEntityToCodeQuestion(entity.getCodeQuestion()))
                 .userId(new UserId(entity.getUser().getId()))
                 .languageId(new ProgrammingLanguageId(entity.getProgrammingLanguage().getId()))
                 .grade(entity.getGrade())
@@ -54,6 +62,7 @@ public class CodeSubmissionDataAccessMapper {
                 .numOfTestCaseGraded(entity.getNumOfTestCaseGraded())
                 .gradingStatus(entity.getGradingStatus())
                 .copyState(entity.getCopyState())
+//                .version(entity.getVersion())
                 .build();
     }
 }

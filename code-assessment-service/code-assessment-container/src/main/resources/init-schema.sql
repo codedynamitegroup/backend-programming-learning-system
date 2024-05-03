@@ -35,7 +35,7 @@ DROP TYPE IF EXISTS qtype;
 CREATE TYPE qtype AS ENUM ('MULTIPLE_CHOICE', 'SHORT_ANSWER', 'CODE', 'ESSAY');
 
 DROP TYPE IF EXISTS grading_status;
-CREATE TYPE grading_status AS ENUM ('GRADING', 'ACCEPTED', 'WRONG_ANSWER', 'GRADING_SYSTEM_UNAVAILABLE');
+CREATE TYPE grading_status AS ENUM ('GRADING', 'GRADED', 'GRADING_SYSTEM_UNAVAILABLE');
 
 
 
@@ -57,22 +57,22 @@ CREATE TABLE "public".user
 );
 
 
-DROP TABLE IF EXISTS questions CASCADE;
-CREATE TABLE questions
-(
-    id uuid UNIQUE NOT NULL,
-    org_id uuid NOT NULL,
-    difficulty difficulty NOT NULL,
-    name text NOT NULL,
-    question_text text,
-    general_feedback text,
-    default_mark numeric(5,2) NOT NULL,
-    qtype qtype NOT NULL,
-    created_by uuid NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    updated_by uuid NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT question_pkey PRIMARY KEY (id)
+-- DROP TABLE IF EXISTS questions CASCADE;
+-- CREATE TABLE questions
+-- (
+--     id uuid UNIQUE NOT NULL,
+--     org_id uuid NOT NULL,
+--     difficulty difficulty NOT NULL,
+--     name text NOT NULL,
+--     question_text text,
+--     general_feedback text,
+--     default_mark numeric(5,2) NOT NULL,
+--     qtype qtype NOT NULL,
+--     created_by uuid NOT NULL,
+--     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+--     updated_by uuid NOT NULL,
+--     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+--     CONSTRAINT question_pkey PRIMARY KEY (id)
 --     CONSTRAINT question_org_id_fkey FOREIGN KEY (org_id)
 --         REFERENCES organization (id) MATCH SIMPLE
 --         ON UPDATE CASCADE
@@ -85,7 +85,7 @@ CREATE TABLE questions
 --         REFERENCES user (id) MATCH SIMPLE
 --         ON UPDATE CASCADE
 --         ON DELETE CASCADE
-);
+-- );
 
 DROP TABLE IF EXISTS programming_language CASCADE;
 CREATE TABLE programming_language(
@@ -93,7 +93,7 @@ CREATE TABLE programming_language(
     name text not null ,
     compiler_api_id int not null ,
     time_limit float not null,
-    memory_limit float not null,
+    memory_limit float check(memory_limit >= 2048) not null ,
     is_actived boolean default false,
     copy_state CopyState not null ,
     CONSTRAINT pr_la_pk PRIMARY KEY (id)
@@ -112,6 +112,7 @@ CREATE TABLE qtype_code_questions(
     copy_state CopyState,
     failure_messages text,
     constraints text,
+    max_grade float default 10,
     CONSTRAINT qtype_code_questions_pk PRIMARY KEY (id)
 --         CONSTRAINT qtype_code_questions_questions_id_fk FOREIGN KEY (question_id)
 --         REFERENCES questions (id) MATCH SIMPLE
@@ -124,7 +125,7 @@ CREATE TABLE programming_language_code_question(
     programming_language_id uuid NOT NULL ,
     code_question_id uuid not null ,
     time_limit float not null,
-    memory_limit float not null,
+    memory_limit float check(memory_limit >= 2048) not null ,
     active boolean default true,
     CONSTRAINT pr_la_co_qu_pk PRIMARY KEY (programming_language_id, code_question_id),
     CONSTRAINT prl_fk FOREIGN KEY (programming_language_id)
@@ -169,6 +170,7 @@ CREATE TABLE code_submission(
     number_of_test_case_graded int default 0,
     grading_status grading_status not null ,
     copy_state CopyState not null ,
+--     version integer default 0 NOT NULL,
     CONSTRAINT co_su_pk PRIMARY KEY (id),
     CONSTRAINT co_qu_co_su_fk FOREIGN KEY (code_question_id)
         REFERENCES qtype_code_questions (id) MATCH SIMPLE
@@ -192,9 +194,12 @@ CREATE TABLE code_submission_test_case(
     code_submission_id uuid not null ,
     actual_output text,
     compile_output text,
+    message text,
+    stderr text,
+    status_description text,
     runtime float,
     memory float,
-    passed boolean,
+--     passed boolean,
     judge_token text,
     CONSTRAINT co_su_te_ca_pk PRIMARY KEY (id),
     CONSTRAINT co_su_te_cax2_fk FOREIGN KEY (test_case_id)

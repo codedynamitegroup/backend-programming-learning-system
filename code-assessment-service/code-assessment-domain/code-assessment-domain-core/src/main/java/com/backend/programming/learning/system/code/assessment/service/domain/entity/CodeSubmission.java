@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
-    private CodeQuestionId codeQuestionId;
+    private CodeQuestion codeQuestion;
     private UserId userId;
     private ProgrammingLanguageId languageId;
     private Double grade;
@@ -24,27 +24,77 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
     private Integer numOfTestCaseGraded;
     private CopyState copyState;
     private List<CodeSubmissionTestCase> codeSubmissionTestCaseList;
+    private ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion;
+    private Integer programmingLangaugeJudge0Id;
+    private String statusDescription;
+    private Integer version;
+
+    @Override
+    public String toString() {
+        return "CodeSubmission{" +
+                "codeQuestionId=" + codeQuestion +
+                ", userId=" + userId +
+                ", languageId=" + languageId +
+                ", grade=" + grade +
+                ", runTime=" + runTime +
+                ", memory=" + memory +
+                ", sourceCode='" + sourceCode + '\'' +
+                ", gradingStatus=" + gradingStatus +
+                ", aiAssessment='" + aiAssessment + '\'' +
+                ", sonaqueAssessment='" + sonaqueAssessment + '\'' +
+                ", numOfTestCase=" + numOfTestCase +
+                ", numOfTestCaseGraded=" + numOfTestCaseGraded +
+                ", copyState=" + copyState +
+                '}';
+    }
 
     private CodeSubmission(Builder builder) {
-        codeQuestionId = builder.codeQuestionId;
+        codeQuestion = builder.codeQuestion;
         userId = builder.userId;
         languageId = builder.languageId;
         grade = builder.grade;
         runTime = builder.runTime;
         memory = builder.memory;
         sourceCode = builder.sourceCode;
-        gradingStatus = builder.gradingStatus;
+        setGradingStatus(builder.gradingStatus);
         aiAssessment = builder.aiAssessment;
         sonaqueAssessment = builder.sonaqueAssessment;
         numOfTestCase = builder.numOfTestCase;
         numOfTestCaseGraded = builder.numOfTestCaseGraded;
         copyState = builder.copyState;
-        codeSubmissionTestCaseList = builder.codeSubmissionTestCaseList;
+        setCodeSubmissionTestCaseList(builder.codeSubmissionTestCaseList);
+        setProgrammingLanguageCodeQuestion(builder.programmingLanguageCodeQuestion);
+        setProgrammingLangaugeJudge0Id(builder.programmingLangaugeJudge0Id);
+        version = builder.version;
         super.setId(builder.id);
     }
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    public ProgrammingLanguageCodeQuestion getProgrammingLanguageCodeQuestion() {
+        return programmingLanguageCodeQuestion;
+    }
+
+    public void setProgrammingLanguageCodeQuestion(ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion) {
+        this.programmingLanguageCodeQuestion = programmingLanguageCodeQuestion;
+    }
+
+    public void setGradingStatus(GradingStatus gradingStatus) {
+        this.gradingStatus = gradingStatus;
+    }
+
+    public Integer getProgrammingLangaugeJudge0Id() {
+        return programmingLangaugeJudge0Id;
+    }
+
+    public void setProgrammingLangaugeJudge0Id(Integer programmingLangaugeJudge0Id) {
+        this.programmingLangaugeJudge0Id = programmingLangaugeJudge0Id;
+    }
+
+    public Integer getVersion() {
+        return version;
     }
 
     public Integer getNumOfTestCase() {
@@ -62,8 +112,16 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
     public List<CodeSubmissionTestCase> getCodeSubmissionTestCaseList() {
         return codeSubmissionTestCaseList;
     }
-    public CodeQuestionId getCodeQuestionId() {
-        return codeQuestionId;
+    public CodeQuestion getCodeQuestion() {
+        return codeQuestion;
+    }
+
+    public String getStatusDescription() {
+        return statusDescription;
+    }
+
+    public void setStatusDescription(String statusDescription) {
+        this.statusDescription = statusDescription;
     }
 
     public UserId getUserId() {
@@ -102,16 +160,19 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         return sonaqueAssessment;
     }
 
-    public void initiate(List<TestCase> testCases) {
+    public void initiate(CodeQuestion codeQuestion, List<TestCase> testCases, ProgrammingLanguageCodeQuestion plcq) {
         codeSubmissionTestCaseList =
                 testCases.stream().map(this::initiateCodeSubmissionTestCase)
                         .toList();
 
+        this.codeQuestion = codeQuestion;
         setId(new CodeSubmissionId(UUID.randomUUID()));
         gradingStatus = GradingStatus.GRADING;
         numOfTestCase = codeSubmissionTestCaseList.size();
         numOfTestCaseGraded = 0;
         copyState = CopyState.CREATING;
+        programmingLanguageCodeQuestion = plcq;
+        version = 0;
     }
 
     private CodeSubmissionTestCase initiateCodeSubmissionTestCase(TestCase testCase) {
@@ -127,8 +188,17 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         this.codeSubmissionTestCaseList = codeSubmissionTestCaseList;
     }
 
+    public void increaseGradedTestCaseByOne() {
+        numOfTestCaseGraded += 1;
+    }
+
+    public void updateAvgTimeAndMemory(Double avgTime, Double avgMemory) {
+        runTime = avgTime;
+        memory = avgMemory;
+    }
+
     public static final class Builder {
-        private CodeQuestionId codeQuestionId;
+        private CodeQuestion codeQuestion;
         private UserId userId;
         private ProgrammingLanguageId languageId;
         private Double grade;
@@ -142,18 +212,33 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         private Integer numOfTestCaseGraded;
         private CopyState copyState;
         private List<CodeSubmissionTestCase> codeSubmissionTestCaseList;
+        private ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion;
+        private Integer programmingLangaugeJudge0Id;
+        private Integer version;
         private CodeSubmissionId id;
+
+        private CodeQuestionLangauge codeQuestionLangauge;
 
         private Builder() {
         }
 
-        public Builder codeQuestionId(CodeQuestionId val) {
-            codeQuestionId = val;
+        public Builder codeQuestion(CodeQuestion val) {
+            codeQuestion = val;
             return this;
         }
 
         public Builder userId(UserId val) {
             userId = val;
+            return this;
+        }
+
+        public Builder programmingLangaugeJudge0Id(Integer val) {
+            programmingLangaugeJudge0Id = val;
+            return this;
+        }
+
+        public Builder version(Integer val) {
+            version = val;
             return this;
         }
 
@@ -217,6 +302,15 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
             return this;
         }
 
+        public Builder programmingLanguageCodeQuestion(ProgrammingLanguageCodeQuestion val) {
+            programmingLanguageCodeQuestion = val;
+            return this;
+        }
+
+        public Builder codeQuestionLangauge(CodeQuestionLangauge val) {
+            codeQuestionLangauge = val;
+            return this;
+        }
 
         public Builder id(CodeSubmissionId val) {
             id = val;

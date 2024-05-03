@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Component
 public class TestCaseDataMapper {
     public List<TestCase> createTestCasesCommandToTestCaseList(CreateTestCasesCommand command){
-        return command.getTestCase()
+        return command.getTestCases()
                 .stream()
                 .map((TestCaseDto testCaseDto) ->
                         testCaseDtoToTestCase(testCaseDto,

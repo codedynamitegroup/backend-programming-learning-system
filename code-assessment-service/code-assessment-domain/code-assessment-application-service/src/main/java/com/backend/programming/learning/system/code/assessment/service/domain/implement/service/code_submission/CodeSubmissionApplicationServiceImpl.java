@@ -2,10 +2,17 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetCodeSubmissionsByUserIdCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetCodeSubmissionsByUserIdResponseItem;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_submission.UpdateCodeSubmissionTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.CodeSubmissionApplicationService;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
-@Component
+import java.util.List;
+
+@Service
+@Validated
 public class CodeSubmissionApplicationServiceImpl implements CodeSubmissionApplicationService {
     private final CodeSubmissionCommandHandler codeSubmissionCommandHandler;
 
@@ -17,5 +24,16 @@ public class CodeSubmissionApplicationServiceImpl implements CodeSubmissionAppli
     public CreateCodeSubmissionResponse createCodeSubmission(CreateCodeSubmissionCommand createCodeSubmissionCommand) {
         return codeSubmissionCommandHandler.createCodeSubmission(createCodeSubmissionCommand);
 
+    }
+
+    @Override
+    public void handleTestCaseResult(UpdateCodeSubmissionTestCaseCommand command) {
+        codeSubmissionCommandHandler.handleTestCaseResult(command);
+    }
+
+    @Override
+    public List<GetCodeSubmissionsByUserIdResponseItem> getCodeSubmissionsByUserId(GetCodeSubmissionsByUserIdCommand command) {
+
+        return codeSubmissionCommandHandler.getCodeSubmissionsByUserId(command);
     }
 }

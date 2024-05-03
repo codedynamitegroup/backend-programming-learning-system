@@ -28,12 +28,15 @@ public class CodeSubmissionTestCaseDataAccessMapper {
                 .compileOutput(cstc.getCompileOutput())
                 .runtime(cstc.getRunTime())
                 .memory(cstc.getMemory())
-                .passed(cstc.getPassed())
+//                .passed(cstc.getPassed())
+                .message(cstc.getMessage())
+                .stderr(cstc.getStderr())
+                .statusDescription(cstc.getStatusDescription())
                 .judgeToken(cstc.getJudgeToken())
                 .build();
     }
 
-    public CodeSubmissionTestCase entityToCodeSubmission(CodeSubmissionTestCaseEntity entity) {
+    public CodeSubmissionTestCase entityToCodeSubmissionTestCase(CodeSubmissionTestCaseEntity entity) {
         return CodeSubmissionTestCase.builder()
                 .id(new CodeSubmissionTestCaseId(entity.getId()))
                 .testCase(testCaseDataAccessMapper.testCaseEntityToTestCase(entity.getTestCase()))
@@ -42,7 +45,10 @@ public class CodeSubmissionTestCaseDataAccessMapper {
                 .compileOutput(entity.getCompileOutput())
                 .runTime(entity.getRuntime())
                 .memory(entity.getMemory())
-                .passed(entity.getPassed())
+//                .passed(entity.getPassed())
+                .message(entity.getMessage())
+                .statusDescription(entity.getStatusDescription())
+                .stderr(entity.getStderr())
                 .judgeToken(entity.getJudgeToken())
                 .build();
     }
