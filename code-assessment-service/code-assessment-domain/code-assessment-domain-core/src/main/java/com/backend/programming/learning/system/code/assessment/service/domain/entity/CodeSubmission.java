@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
-    private CodeQuestionId codeQuestionId;
+    private CodeQuestion codeQuestion;
     private UserId userId;
     private ProgrammingLanguageId languageId;
     private Double grade;
@@ -26,12 +26,13 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
     private List<CodeSubmissionTestCase> codeSubmissionTestCaseList;
     private ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion;
     private Integer programmingLangaugeJudge0Id;
+    private String statusDescription;
     private Integer version;
 
     @Override
     public String toString() {
         return "CodeSubmission{" +
-                "codeQuestionId=" + codeQuestionId +
+                "codeQuestionId=" + codeQuestion +
                 ", userId=" + userId +
                 ", languageId=" + languageId +
                 ", grade=" + grade +
@@ -48,7 +49,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
     }
 
     private CodeSubmission(Builder builder) {
-        codeQuestionId = builder.codeQuestionId;
+        codeQuestion = builder.codeQuestion;
         userId = builder.userId;
         languageId = builder.languageId;
         grade = builder.grade;
@@ -111,8 +112,16 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
     public List<CodeSubmissionTestCase> getCodeSubmissionTestCaseList() {
         return codeSubmissionTestCaseList;
     }
-    public CodeQuestionId getCodeQuestionId() {
-        return codeQuestionId;
+    public CodeQuestion getCodeQuestion() {
+        return codeQuestion;
+    }
+
+    public String getStatusDescription() {
+        return statusDescription;
+    }
+
+    public void setStatusDescription(String statusDescription) {
+        this.statusDescription = statusDescription;
     }
 
     public UserId getUserId() {
@@ -151,11 +160,12 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         return sonaqueAssessment;
     }
 
-    public void initiate(List<TestCase> testCases, ProgrammingLanguageCodeQuestion plcq) {
+    public void initiate(CodeQuestion codeQuestion, List<TestCase> testCases, ProgrammingLanguageCodeQuestion plcq) {
         codeSubmissionTestCaseList =
                 testCases.stream().map(this::initiateCodeSubmissionTestCase)
                         .toList();
 
+        this.codeQuestion = codeQuestion;
         setId(new CodeSubmissionId(UUID.randomUUID()));
         gradingStatus = GradingStatus.GRADING;
         numOfTestCase = codeSubmissionTestCaseList.size();
@@ -188,7 +198,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
     }
 
     public static final class Builder {
-        private CodeQuestionId codeQuestionId;
+        private CodeQuestion codeQuestion;
         private UserId userId;
         private ProgrammingLanguageId languageId;
         private Double grade;
@@ -212,8 +222,8 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         private Builder() {
         }
 
-        public Builder codeQuestionId(CodeQuestionId val) {
-            codeQuestionId = val;
+        public Builder codeQuestion(CodeQuestion val) {
+            codeQuestion = val;
             return this;
         }
 

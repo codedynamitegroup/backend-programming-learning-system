@@ -32,6 +32,8 @@ public class CodeQuestionEntity {
     private String constraints;
     private String failureMessages;
 
+    private Float maxGrade;
+
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;

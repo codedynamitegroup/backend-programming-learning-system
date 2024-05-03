@@ -34,8 +34,8 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
     }
 
     @Override
-    public CodeSubmission initiateCodeSubmission(CodeSubmission codeSubmission, List<TestCase> testCases, ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion, ProgrammingLangauge programmingLangauge) {
-        codeSubmission.initiate(testCases, programmingLanguageCodeQuestion);
+    public CodeSubmission initiateCodeSubmission(CodeSubmission codeSubmission, CodeQuestion codeQuestion, List<TestCase> testCases, ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion, ProgrammingLangauge programmingLangauge) {
+        codeSubmission.initiate(codeQuestion ,testCases, programmingLanguageCodeQuestion);
         codeSubmission.setProgrammingLangaugeJudge0Id(programmingLangauge.getJudge0_compilerApiId());
 
         return codeSubmission;

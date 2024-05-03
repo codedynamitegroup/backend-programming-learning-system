@@ -11,7 +11,7 @@ public interface CodeAssessmentDomainService {
     List<TestCase> initiateTestCases(List<TestCase> testCases);
     void cancelCopyCodeQuestions(CodeQuestion codeQuestion, CopyState state, List<String> failureMessages);
 
-    CodeSubmission initiateCodeSubmission(CodeSubmission codeSubmission, List<TestCase> testCases, ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion, ProgrammingLangauge programmingLangauge);
+    CodeSubmission initiateCodeSubmission(CodeSubmission codeSubmission, CodeQuestion codeQuestion, List<TestCase> testCases, ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion, ProgrammingLangauge programmingLangauge);
 
     void increaseCodeSubmissionGradedTestCase(CodeSubmission codeSubmission);
 

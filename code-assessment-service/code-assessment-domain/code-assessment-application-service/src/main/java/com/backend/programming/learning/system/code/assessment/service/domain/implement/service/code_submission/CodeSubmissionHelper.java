@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 import com.backend.programming.learning.system.code.assessment.service.domain.CodeAssessmentDomainService;
 import com.backend.programming.learning.system.code.assessment.service.domain.config.CodeAssessmentServiceConfigData;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetCodeSubmissionsByUserIdCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_submission.UpdateCodeSubmissionTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
@@ -75,13 +76,13 @@ public class CodeSubmissionHelper {
         CodeSubmission codeSubmission = codeSubmissionDataMapper.createCodeSubmissionCommandToCodeSubmission(createCodeSubmissionCommand);
 
         validateUser(createCodeSubmissionCommand.getUserId());
-        validateCodeQuestion(createCodeSubmissionCommand.getCodeQuestionId());
+        CodeQuestion codeQuestion = validateCodeQuestion(createCodeSubmissionCommand.getCodeQuestionId());
         ProgrammingLangauge programmingLangauge = validateLanguage(createCodeSubmissionCommand.getLanguageId(), createCodeSubmissionCommand.getCodeQuestionId());
         ProgrammingLanguageCodeQuestion plcq =
                 validateProgrammingLanguageCodeQuestion(createCodeSubmissionCommand.getLanguageId(), createCodeSubmissionCommand.getCodeQuestionId());
 
         List<TestCase> testCases =  validateTestCases(createCodeSubmissionCommand.getCodeQuestionId());
-        codeAssessmentDomainService.initiateCodeSubmission(codeSubmission, testCases, plcq, programmingLangauge);
+        codeAssessmentDomainService.initiateCodeSubmission(codeSubmission, codeQuestion, testCases, plcq, programmingLangauge);
 
         codeSubmissionRepository.save(codeSubmission);
         codeSubmissionTestCaseRepository.save(codeSubmission.getCodeSubmissionTestCaseList());
@@ -121,13 +122,14 @@ public class CodeSubmissionHelper {
         return langauge.get();
     }
 
-    private void validateCodeQuestion(UUID codeQuestionId) {
+    private CodeQuestion validateCodeQuestion(UUID codeQuestionId) {
         Optional<CodeQuestion> codeQuestion = codeQuestionRepository.findById(new CodeQuestionId(codeQuestionId));
 
         if (codeQuestion.isEmpty()) {
             log.warn("Could not find code question with id: {}", codeQuestionId);
             throw new CodeQuestionNotFoundException("Could not find code question with id: " + codeQuestionId);
         }
+        return codeQuestion.get();
 
     }
 
@@ -174,4 +176,25 @@ public class CodeSubmissionHelper {
             }
         }
     }
+
+    @Transactional
+    public List<CodeSubmission> getCodeSubmissionsByUserId(GetCodeSubmissionsByUserIdCommand command) {
+        Optional<List<CodeSubmission>> codeSubmissionsOpt = codeSubmissionRepository.findByUserIdAndQuestionId(new UserId(command.getUserId()), new CodeQuestionId(command.getCodeQuestionId()));
+        if(codeSubmissionsOpt.isPresent())
+            findDescriptionStatus(codeSubmissionsOpt.get());
+        return codeSubmissionsOpt.orElse(null);
+    }
+
+    private void findDescriptionStatus(List<CodeSubmission> codeSubmissions) {
+        codeSubmissions.stream().forEach(codeSubmission -> {
+            if(codeSubmission.getRunTime() != null)
+                codeSubmission.setStatusDescription(codeAssessmentServiceConfigData.getAcceptedStatusDescription());
+            else
+            {
+                Optional<CodeSubmissionTestCase> cstc = codeSubmissionTestCaseRepository.findFirstNotAcceptedByCodeSubmissionId(codeSubmission.getId());
+                cstc.ifPresent(cstcp -> codeSubmission.setStatusDescription(cstcp.getStatusDescription()));
+            }
+        });
+    }
+
 }

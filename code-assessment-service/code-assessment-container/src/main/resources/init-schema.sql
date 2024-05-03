@@ -57,22 +57,22 @@ CREATE TABLE "public".user
 );
 
 
-DROP TABLE IF EXISTS questions CASCADE;
-CREATE TABLE questions
-(
-    id uuid UNIQUE NOT NULL,
-    org_id uuid NOT NULL,
-    difficulty difficulty NOT NULL,
-    name text NOT NULL,
-    question_text text,
-    general_feedback text,
-    default_mark numeric(5,2) NOT NULL,
-    qtype qtype NOT NULL,
-    created_by uuid NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    updated_by uuid NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT question_pkey PRIMARY KEY (id)
+-- DROP TABLE IF EXISTS questions CASCADE;
+-- CREATE TABLE questions
+-- (
+--     id uuid UNIQUE NOT NULL,
+--     org_id uuid NOT NULL,
+--     difficulty difficulty NOT NULL,
+--     name text NOT NULL,
+--     question_text text,
+--     general_feedback text,
+--     default_mark numeric(5,2) NOT NULL,
+--     qtype qtype NOT NULL,
+--     created_by uuid NOT NULL,
+--     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+--     updated_by uuid NOT NULL,
+--     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+--     CONSTRAINT question_pkey PRIMARY KEY (id)
 --     CONSTRAINT question_org_id_fkey FOREIGN KEY (org_id)
 --         REFERENCES organization (id) MATCH SIMPLE
 --         ON UPDATE CASCADE
@@ -85,7 +85,7 @@ CREATE TABLE questions
 --         REFERENCES user (id) MATCH SIMPLE
 --         ON UPDATE CASCADE
 --         ON DELETE CASCADE
-);
+-- );
 
 DROP TABLE IF EXISTS programming_language CASCADE;
 CREATE TABLE programming_language(
@@ -112,6 +112,7 @@ CREATE TABLE qtype_code_questions(
     copy_state CopyState,
     failure_messages text,
     constraints text,
+    max_grade float default 10,
     CONSTRAINT qtype_code_questions_pk PRIMARY KEY (id)
 --         CONSTRAINT qtype_code_questions_questions_id_fk FOREIGN KEY (question_id)
 --         REFERENCES questions (id) MATCH SIMPLE
