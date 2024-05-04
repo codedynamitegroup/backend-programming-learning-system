@@ -47,12 +47,12 @@ public class QuestionCommandHandler {
     public QuestionDeleteResponse deleteQuestionById(UUID questionId) {
         QuestionDeletedEvent questionDeletedEvent = questionDeleteHelper.deleteQuestionById(questionId);
 
-        // TODO: add prev payload
         questionOutboxHelper.saveNewQuestionOutboxMessage(questionDataMapper.questionDeletedEventToQuestionEventPayload(questionDeletedEvent),
                 questionDeletedEvent.getQuestion().getCopyState(),
                 OutboxStatus.STARTED,
                 questionSagaHelper.questionStatusToSagaStatus(questionDeletedEvent.getQuestion().getCopyState()),
-                UUID.randomUUID());
+                UUID.randomUUID(),
+                questionDataMapper.questionDeletedEventToQuestionEventPreviousPayload(questionDeletedEvent));
 
         return QuestionDeleteResponse.builder()
                 .questionId(questionId)

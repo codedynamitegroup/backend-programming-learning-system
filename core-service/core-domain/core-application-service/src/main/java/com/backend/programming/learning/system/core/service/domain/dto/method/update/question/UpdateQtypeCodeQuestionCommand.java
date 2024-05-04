@@ -15,6 +15,10 @@ public class UpdateQtypeCodeQuestionCommand {
     private final UUID qtCodeQuestionId;
     private final String dslTemplate;
 
+    private final String problemStatement;
+    private final String name;
+    private final Float maxGrade;
+
     @NotNull
     private final UpdateQuestionEntity question;
 }

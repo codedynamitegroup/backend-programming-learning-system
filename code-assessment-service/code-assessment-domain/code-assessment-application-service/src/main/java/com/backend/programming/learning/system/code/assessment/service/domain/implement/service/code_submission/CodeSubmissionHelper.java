@@ -210,8 +210,6 @@ public class CodeSubmissionHelper {
     @Transactional
     public CodeSubmissionTestCase findFirstNonAcceptedTestCase(CodeSubmissionId codeSubmissionId) {
         Optional<CodeSubmissionTestCase> cstcOpt = codeSubmissionTestCaseRepository.findFirstNonAcceptedByCodeSubmissionId(codeSubmissionId);
-        if(cstcOpt.isPresent())
-            return cstcOpt.get();
-        else throw new CodeSubmissionTestCaseNotFound("No non-accepted test case founded by codeSubmission id: " + codeSubmissionId.getValue());
+        return cstcOpt.orElse(null);
     }
 }

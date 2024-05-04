@@ -23,4 +23,7 @@ public class QtypeCodeQuestionEntity {
     @JoinColumn(name = "question_id", referencedColumnName = "id")
     private QuestionEntity question;
     private String dslTemplate;
+    private String problemStatement;
+    private String name;
+    private Float maxGrade;
 }

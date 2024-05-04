@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.course.service.messaging.publisher.kafka.question;
 
-import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.course.service.config.CourseServiceConfigData;
+import com.backend.programming.learning.system.course.service.domain.exception.CourseDomainException;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.question.QuestionEventPayload;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.question.QuestionOutboxMessage;
 import com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.question.QuestionResponseMessagePublisher;
@@ -66,7 +66,7 @@ public class QuestionResponseKafkaMessagePublisher implements QuestionResponseMe
             return objectMapper.readValue(payload, QuestionEventPayload.class);
         } catch (JsonProcessingException e) {
             log.error("Could not read QuestionCreatedEventPayload object:", e);
-            throw new CoreDomainException("Could not read QuestionEventPayload object: {}", e);
+            throw new CourseDomainException("Could not read QuestionEventPayload object: {}", e);
         }
     }
 }

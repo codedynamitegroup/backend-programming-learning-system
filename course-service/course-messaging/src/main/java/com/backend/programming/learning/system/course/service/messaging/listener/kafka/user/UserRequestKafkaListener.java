@@ -1,9 +1,9 @@
 package com.backend.programming.learning.system.course.service.messaging.listener.kafka.user;
 
-import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.exception.CourseApplicationServiceException;
 import com.backend.programming.learning.system.course.service.domain.ports.input.message.listener.user.UserRequestMessageListener;
 import com.backend.programming.learning.system.course.service.messaging.mapper.UserMessagingDataMapper;
+import com.backend.programming.learning.system.domain.exception.user.UserNotFoundException;
 import com.backend.programming.learning.system.kafka.auth.avro.model.user.ServiceName;
 import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel;
 import com.backend.programming.learning.system.kafka.consumer.KafkaConsumer;

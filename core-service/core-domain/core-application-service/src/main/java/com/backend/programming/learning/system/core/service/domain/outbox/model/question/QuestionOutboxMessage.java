@@ -20,6 +20,7 @@ public class QuestionOutboxMessage {
     private ZonedDateTime processedAt;
     private String type;
     private String payload;
+    private String previousPayload;
     private SagaStatus sagaStatus;
     private OutboxStatus outboxStatus;
     private CopyState copyState;

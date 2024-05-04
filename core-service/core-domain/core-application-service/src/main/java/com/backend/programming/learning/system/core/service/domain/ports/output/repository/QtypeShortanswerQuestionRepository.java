@@ -9,6 +9,7 @@ import java.util.UUID;
 public interface QtypeShortanswerQuestionRepository {
     QtypeShortAnswerQuestion saveQtypeShortAnswerQuestion(QtypeShortAnswerQuestion question);
     Optional<QtypeShortAnswerQuestion> findQtypeShortAnswerQuestion(UUID qtShortAnswerQuestionId);
+    Optional<QtypeShortAnswerQuestion> findQtypeShortAnswerQuestionByQuestionId(UUID questionId);
     List<QtypeShortAnswerQuestion> findAllQtypeShortAnswerQuestions();
     void deleteQtypeShortAnswerQuestion(UUID qtShortAnswerQuestionId);
     UUID getId(UUID questionId);

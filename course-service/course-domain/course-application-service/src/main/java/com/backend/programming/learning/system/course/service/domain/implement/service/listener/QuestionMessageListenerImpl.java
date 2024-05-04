@@ -66,9 +66,10 @@ public class QuestionMessageListenerImpl implements QuestionMessageListener {
     @Override
     public void updateQuestion(QuestionRequest questionUpdateRequest) {
         try {
-            QuestionUpdatedEvent questionUpdatedEvent = courseDomainService
-                    .updateQuestionEvent(questionDataMapper.questionUpdateRequestToQuestion(questionUpdateRequest),
-                            questionUpdateRequest.getSagaId());
+            Question question = questionDataMapper.questionUpdateRequestToQuestion(questionUpdateRequest);
+            questionCreateHelper.saveQuestion(question);
+
+            QuestionUpdatedEvent questionUpdatedEvent = courseDomainService.updateQuestionEvent(question, questionUpdateRequest.getSagaId());
 
             questionOutboxHelper.saveNewQuestionOutboxMessage(questionDataMapper.questionEventToQuestionEventPayload(questionUpdatedEvent),
                     questionUpdatedEvent.getCopyState(),
@@ -92,9 +93,10 @@ public class QuestionMessageListenerImpl implements QuestionMessageListener {
     @Override
     public void deleteQuestion(QuestionRequest questionDeleteRequest) {
         try {
-            QuestionDeletedEvent questionDeletedEvent = courseDomainService
-                    .deleteQuestionEvent(questionDataMapper.questionDeleteRequestToQuestion(questionDeleteRequest),
-                            questionDeleteRequest.getSagaId());
+            Question question = questionDataMapper.questionDeleteRequestToQuestion(questionDeleteRequest);
+            questionDeleteHelper.deleteById(UUID.fromString(questionDeleteRequest.getId()));
+
+            QuestionDeletedEvent questionDeletedEvent = courseDomainService.deleteQuestionEvent(question, questionDeleteRequest.getSagaId());
 
             questionOutboxHelper.saveNewQuestionOutboxMessage(questionDataMapper.questionEventToQuestionEventPayload(questionDeletedEvent),
                     questionDeletedEvent.getCopyState(),
