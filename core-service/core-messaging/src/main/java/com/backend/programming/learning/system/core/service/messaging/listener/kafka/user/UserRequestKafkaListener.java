@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.core.service.domain.exception.Cor
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.ports.input.message.listener.user.UserRequestMessageListener;
 import com.backend.programming.learning.system.core.service.messaging.mapper.UserMessagingDataMapper;
+import com.backend.programming.learning.system.kafka.auth.avro.model.user.ServiceName;
 import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel;
 import com.backend.programming.learning.system.kafka.consumer.KafkaConsumer;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +32,7 @@ public class UserRequestKafkaListener implements KafkaConsumer<UserRequestAvroMo
 
     @Override
     @KafkaListener(id = "${kafka-consumer-config.core-service-user-request-group-id}",
-            topics = "${core-service.user-request-topic-name}")
+            topics = "${core-service.core-user-request-topic-name}")
     public void receive(@Payload List<UserRequestAvroModel> messages,
                         @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) List<String> keys,
                         @Header(KafkaHeaders.RECEIVED_PARTITION_ID) List<Integer> partitions,
@@ -51,7 +52,6 @@ public class UserRequestKafkaListener implements KafkaConsumer<UserRequestAvroMo
                         userRequestMessageListener
                                 .userCreated(userMessagingDataMapper
                                         .userCreateRequestAvroModelToUserCreateRequest(userRequestAvroModel));
-                        break;
                     }
                     case DELETING -> {
                         log.info("Deleting user: {}",
@@ -59,7 +59,6 @@ public class UserRequestKafkaListener implements KafkaConsumer<UserRequestAvroMo
                         userRequestMessageListener
                                 .userDeleted(userMessagingDataMapper
                                         .userDeleteRequestAvroModelToUserDeleteRequest(userRequestAvroModel));
-                        break;
                     }
                     case UPDATING -> {
                         log.info("Updating user: {}",
@@ -67,7 +66,6 @@ public class UserRequestKafkaListener implements KafkaConsumer<UserRequestAvroMo
                         userRequestMessageListener
                                 .userUpdated(userMessagingDataMapper
                                         .userUpdateRequestAvroModelToUserUpdateRequest(userRequestAvroModel));
-                        break;
                     }
                 }
             } catch (DataAccessException e) {

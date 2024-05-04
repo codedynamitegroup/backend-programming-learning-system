@@ -13,8 +13,7 @@ public interface OrganizationRepository {
     Optional<Organization> findOrganizationById(UUID organizationId);
 
     List<OrganizationResponseEntity> findAllOrganization();
-    
-    
+
 
     void deleteOrganizationById(UUID organizationId);
 

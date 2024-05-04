@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.implement.exam_question;
+package com.backend.programming.learning.system.course.service.domain.implement.service.exam_question;
 
 import com.backend.programming.learning.system.course.service.domain.CourseDomainService;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.CreateExamQuestionCommand;

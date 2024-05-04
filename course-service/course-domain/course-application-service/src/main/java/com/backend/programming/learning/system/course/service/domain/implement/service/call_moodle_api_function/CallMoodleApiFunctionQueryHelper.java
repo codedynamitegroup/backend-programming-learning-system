@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.implement.call_moodle_api_function;
+package com.backend.programming.learning.system.course.service.domain.implement.service.call_moodle_api_function;
 
 import com.backend.programming.learning.system.course.service.domain.entity.CallMoodleApiFunction;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CallMoodleApiFunctionRepository;

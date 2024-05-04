@@ -2,7 +2,7 @@ package com.backend.programming.learning.system.code.assessment.service.dataacce
 
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission_test_case.mapper.CodeSubmissionTestCaseDataAccessMapper;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission_test_case.repository.CodeSubmissionTestCaseJpaRepository;
-import com.backend.programming.learning.system.code.assessment.service.domain.config.CodeAssessmentServiceConfigData;
+import com.backend.programming.learning.system.code.assessment.service.config.CodeAssessmentServiceConfigData;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmissionTestCase;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.CodeSubmissionTestCaseRepository;
 import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
@@ -61,7 +61,7 @@ public class CodeSubmissionTestCaseRepositoryImpl implements CodeSubmissionTestC
     }
 
     @Override
-    public Optional<CodeSubmissionTestCase> findFirstNotAcceptedByCodeSubmissionId(CodeSubmissionId id) {
+    public Optional<CodeSubmissionTestCase> findFirstNonAcceptedByCodeSubmissionId(CodeSubmissionId id) {
 
         return jpaRepository
                 .findFirstByCodeSubmissionIdAndStatusDescriptionNot
@@ -70,4 +70,6 @@ public class CodeSubmissionTestCaseRepositoryImpl implements CodeSubmissionTestC
                                         .getAcceptedStatusDescription())
                 .map(dataAccessMapper::entityToCodeSubmissionTestCase);
     }
+
+
 }

@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class OrganizationRequestAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 8465514088069731235L;
+  private static final long serialVersionUID = 9117027309153885211L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrganizationRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model.organization\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"organizationId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"description\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"name\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"apiKey\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"moodleUrl\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"},\"default\":0},{\"name\":\"updatedAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"},\"default\":0},{\"name\":\"isDeleted\",\"type\":[\"null\",\"boolean\"],\"default\":null}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrganizationRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model.organization\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"organizationId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"description\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"name\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"apiKey\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"moodleUrl\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"serviceName\",\"type\":{\"type\":\"enum\",\"name\":\"ServiceName\",\"symbols\":[\"CORE_SERVICE\",\"AUTH_SERVICE\",\"COURSE_SERVICE\",\"CODE_ASSESSMENT_SERVICE\",\"BACKGROUND_SERVICE\"]}},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"},\"default\":0},{\"name\":\"updatedAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"},\"default\":0},{\"name\":\"isDeleted\",\"type\":[\"null\",\"boolean\"],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -83,6 +83,7 @@ public class OrganizationRequestAvroModel extends org.apache.avro.specific.Speci
   private java.lang.String name;
   private java.lang.String apiKey;
   private java.lang.String moodleUrl;
+  private com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName serviceName;
   private com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState copyState;
   private java.time.Instant createdAt;
   private java.time.Instant updatedAt;
@@ -104,12 +105,13 @@ public class OrganizationRequestAvroModel extends org.apache.avro.specific.Speci
    * @param name The new value for name
    * @param apiKey The new value for apiKey
    * @param moodleUrl The new value for moodleUrl
+   * @param serviceName The new value for serviceName
    * @param copyState The new value for copyState
    * @param createdAt The new value for createdAt
    * @param updatedAt The new value for updatedAt
    * @param isDeleted The new value for isDeleted
    */
-  public OrganizationRequestAvroModel(java.lang.String id, java.lang.String sagaId, java.lang.String organizationId, java.lang.String description, java.lang.String name, java.lang.String apiKey, java.lang.String moodleUrl, com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState copyState, java.time.Instant createdAt, java.time.Instant updatedAt, java.lang.Boolean isDeleted) {
+  public OrganizationRequestAvroModel(java.lang.String id, java.lang.String sagaId, java.lang.String organizationId, java.lang.String description, java.lang.String name, java.lang.String apiKey, java.lang.String moodleUrl, com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName serviceName, com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState copyState, java.time.Instant createdAt, java.time.Instant updatedAt, java.lang.Boolean isDeleted) {
     this.id = id;
     this.sagaId = sagaId;
     this.organizationId = organizationId;
@@ -117,6 +119,7 @@ public class OrganizationRequestAvroModel extends org.apache.avro.specific.Speci
     this.name = name;
     this.apiKey = apiKey;
     this.moodleUrl = moodleUrl;
+    this.serviceName = serviceName;
     this.copyState = copyState;
     this.createdAt = createdAt.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
     this.updatedAt = updatedAt.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
@@ -140,16 +143,18 @@ public class OrganizationRequestAvroModel extends org.apache.avro.specific.Speci
     case 4: return name;
     case 5: return apiKey;
     case 6: return moodleUrl;
-    case 7: return copyState;
-    case 8: return createdAt;
-    case 9: return updatedAt;
-    case 10: return isDeleted;
+    case 7: return serviceName;
+    case 8: return copyState;
+    case 9: return createdAt;
+    case 10: return updatedAt;
+    case 11: return isDeleted;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
 
   private static final org.apache.avro.Conversion<?>[] conversions =
       new org.apache.avro.Conversion<?>[] {
+      null,
       null,
       null,
       null,
@@ -181,10 +186,11 @@ public class OrganizationRequestAvroModel extends org.apache.avro.specific.Speci
     case 4: name = value$ != null ? value$.toString() : null; break;
     case 5: apiKey = value$ != null ? value$.toString() : null; break;
     case 6: moodleUrl = value$ != null ? value$.toString() : null; break;
-    case 7: copyState = (com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState)value$; break;
-    case 8: createdAt = (java.time.Instant)value$; break;
-    case 9: updatedAt = (java.time.Instant)value$; break;
-    case 10: isDeleted = (java.lang.Boolean)value$; break;
+    case 7: serviceName = (com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName)value$; break;
+    case 8: copyState = (com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState)value$; break;
+    case 9: createdAt = (java.time.Instant)value$; break;
+    case 10: updatedAt = (java.time.Instant)value$; break;
+    case 11: isDeleted = (java.lang.Boolean)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -309,6 +315,23 @@ public class OrganizationRequestAvroModel extends org.apache.avro.specific.Speci
   }
 
   /**
+   * Gets the value of the 'serviceName' field.
+   * @return The value of the 'serviceName' field.
+   */
+  public com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName getServiceName() {
+    return serviceName;
+  }
+
+
+  /**
+   * Sets the value of the 'serviceName' field.
+   * @param value the value to set.
+   */
+  public void setServiceName(com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName value) {
+    this.serviceName = value;
+  }
+
+  /**
    * Gets the value of the 'copyState' field.
    * @return The value of the 'copyState' field.
    */
@@ -424,6 +447,7 @@ public class OrganizationRequestAvroModel extends org.apache.avro.specific.Speci
     private java.lang.String name;
     private java.lang.String apiKey;
     private java.lang.String moodleUrl;
+    private com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName serviceName;
     private com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState copyState;
     private java.time.Instant createdAt;
     private java.time.Instant updatedAt;
@@ -468,21 +492,25 @@ public class OrganizationRequestAvroModel extends org.apache.avro.specific.Speci
         this.moodleUrl = data().deepCopy(fields()[6].schema(), other.moodleUrl);
         fieldSetFlags()[6] = other.fieldSetFlags()[6];
       }
-      if (isValidValue(fields()[7], other.copyState)) {
-        this.copyState = data().deepCopy(fields()[7].schema(), other.copyState);
+      if (isValidValue(fields()[7], other.serviceName)) {
+        this.serviceName = data().deepCopy(fields()[7].schema(), other.serviceName);
         fieldSetFlags()[7] = other.fieldSetFlags()[7];
       }
-      if (isValidValue(fields()[8], other.createdAt)) {
-        this.createdAt = data().deepCopy(fields()[8].schema(), other.createdAt);
+      if (isValidValue(fields()[8], other.copyState)) {
+        this.copyState = data().deepCopy(fields()[8].schema(), other.copyState);
         fieldSetFlags()[8] = other.fieldSetFlags()[8];
       }
-      if (isValidValue(fields()[9], other.updatedAt)) {
-        this.updatedAt = data().deepCopy(fields()[9].schema(), other.updatedAt);
+      if (isValidValue(fields()[9], other.createdAt)) {
+        this.createdAt = data().deepCopy(fields()[9].schema(), other.createdAt);
         fieldSetFlags()[9] = other.fieldSetFlags()[9];
       }
-      if (isValidValue(fields()[10], other.isDeleted)) {
-        this.isDeleted = data().deepCopy(fields()[10].schema(), other.isDeleted);
+      if (isValidValue(fields()[10], other.updatedAt)) {
+        this.updatedAt = data().deepCopy(fields()[10].schema(), other.updatedAt);
         fieldSetFlags()[10] = other.fieldSetFlags()[10];
+      }
+      if (isValidValue(fields()[11], other.isDeleted)) {
+        this.isDeleted = data().deepCopy(fields()[11].schema(), other.isDeleted);
+        fieldSetFlags()[11] = other.fieldSetFlags()[11];
       }
     }
 
@@ -520,21 +548,25 @@ public class OrganizationRequestAvroModel extends org.apache.avro.specific.Speci
         this.moodleUrl = data().deepCopy(fields()[6].schema(), other.moodleUrl);
         fieldSetFlags()[6] = true;
       }
-      if (isValidValue(fields()[7], other.copyState)) {
-        this.copyState = data().deepCopy(fields()[7].schema(), other.copyState);
+      if (isValidValue(fields()[7], other.serviceName)) {
+        this.serviceName = data().deepCopy(fields()[7].schema(), other.serviceName);
         fieldSetFlags()[7] = true;
       }
-      if (isValidValue(fields()[8], other.createdAt)) {
-        this.createdAt = data().deepCopy(fields()[8].schema(), other.createdAt);
+      if (isValidValue(fields()[8], other.copyState)) {
+        this.copyState = data().deepCopy(fields()[8].schema(), other.copyState);
         fieldSetFlags()[8] = true;
       }
-      if (isValidValue(fields()[9], other.updatedAt)) {
-        this.updatedAt = data().deepCopy(fields()[9].schema(), other.updatedAt);
+      if (isValidValue(fields()[9], other.createdAt)) {
+        this.createdAt = data().deepCopy(fields()[9].schema(), other.createdAt);
         fieldSetFlags()[9] = true;
       }
-      if (isValidValue(fields()[10], other.isDeleted)) {
-        this.isDeleted = data().deepCopy(fields()[10].schema(), other.isDeleted);
+      if (isValidValue(fields()[10], other.updatedAt)) {
+        this.updatedAt = data().deepCopy(fields()[10].schema(), other.updatedAt);
         fieldSetFlags()[10] = true;
+      }
+      if (isValidValue(fields()[11], other.isDeleted)) {
+        this.isDeleted = data().deepCopy(fields()[11].schema(), other.isDeleted);
+        fieldSetFlags()[11] = true;
       }
     }
 
@@ -819,6 +851,46 @@ public class OrganizationRequestAvroModel extends org.apache.avro.specific.Speci
     }
 
     /**
+      * Gets the value of the 'serviceName' field.
+      * @return The value.
+      */
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName getServiceName() {
+      return serviceName;
+    }
+
+
+    /**
+      * Sets the value of the 'serviceName' field.
+      * @param value The value of 'serviceName'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationRequestAvroModel.Builder setServiceName(com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName value) {
+      validate(fields()[7], value);
+      this.serviceName = value;
+      fieldSetFlags()[7] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'serviceName' field has been set.
+      * @return True if the 'serviceName' field has been set, false otherwise.
+      */
+    public boolean hasServiceName() {
+      return fieldSetFlags()[7];
+    }
+
+
+    /**
+      * Clears the value of the 'serviceName' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationRequestAvroModel.Builder clearServiceName() {
+      serviceName = null;
+      fieldSetFlags()[7] = false;
+      return this;
+    }
+
+    /**
       * Gets the value of the 'copyState' field.
       * @return The value.
       */
@@ -833,9 +905,9 @@ public class OrganizationRequestAvroModel extends org.apache.avro.specific.Speci
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationRequestAvroModel.Builder setCopyState(com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState value) {
-      validate(fields()[7], value);
+      validate(fields()[8], value);
       this.copyState = value;
-      fieldSetFlags()[7] = true;
+      fieldSetFlags()[8] = true;
       return this;
     }
 
@@ -844,7 +916,7 @@ public class OrganizationRequestAvroModel extends org.apache.avro.specific.Speci
       * @return True if the 'copyState' field has been set, false otherwise.
       */
     public boolean hasCopyState() {
-      return fieldSetFlags()[7];
+      return fieldSetFlags()[8];
     }
 
 
@@ -854,7 +926,7 @@ public class OrganizationRequestAvroModel extends org.apache.avro.specific.Speci
       */
     public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationRequestAvroModel.Builder clearCopyState() {
       copyState = null;
-      fieldSetFlags()[7] = false;
+      fieldSetFlags()[8] = false;
       return this;
     }
 
@@ -873,9 +945,9 @@ public class OrganizationRequestAvroModel extends org.apache.avro.specific.Speci
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationRequestAvroModel.Builder setCreatedAt(java.time.Instant value) {
-      validate(fields()[8], value);
+      validate(fields()[9], value);
       this.createdAt = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
-      fieldSetFlags()[8] = true;
+      fieldSetFlags()[9] = true;
       return this;
     }
 
@@ -884,7 +956,7 @@ public class OrganizationRequestAvroModel extends org.apache.avro.specific.Speci
       * @return True if the 'createdAt' field has been set, false otherwise.
       */
     public boolean hasCreatedAt() {
-      return fieldSetFlags()[8];
+      return fieldSetFlags()[9];
     }
 
 
@@ -893,7 +965,7 @@ public class OrganizationRequestAvroModel extends org.apache.avro.specific.Speci
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationRequestAvroModel.Builder clearCreatedAt() {
-      fieldSetFlags()[8] = false;
+      fieldSetFlags()[9] = false;
       return this;
     }
 
@@ -912,9 +984,9 @@ public class OrganizationRequestAvroModel extends org.apache.avro.specific.Speci
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationRequestAvroModel.Builder setUpdatedAt(java.time.Instant value) {
-      validate(fields()[9], value);
+      validate(fields()[10], value);
       this.updatedAt = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
-      fieldSetFlags()[9] = true;
+      fieldSetFlags()[10] = true;
       return this;
     }
 
@@ -923,7 +995,7 @@ public class OrganizationRequestAvroModel extends org.apache.avro.specific.Speci
       * @return True if the 'updatedAt' field has been set, false otherwise.
       */
     public boolean hasUpdatedAt() {
-      return fieldSetFlags()[9];
+      return fieldSetFlags()[10];
     }
 
 
@@ -932,7 +1004,7 @@ public class OrganizationRequestAvroModel extends org.apache.avro.specific.Speci
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationRequestAvroModel.Builder clearUpdatedAt() {
-      fieldSetFlags()[9] = false;
+      fieldSetFlags()[10] = false;
       return this;
     }
 
@@ -951,9 +1023,9 @@ public class OrganizationRequestAvroModel extends org.apache.avro.specific.Speci
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationRequestAvroModel.Builder setIsDeleted(java.lang.Boolean value) {
-      validate(fields()[10], value);
+      validate(fields()[11], value);
       this.isDeleted = value;
-      fieldSetFlags()[10] = true;
+      fieldSetFlags()[11] = true;
       return this;
     }
 
@@ -962,7 +1034,7 @@ public class OrganizationRequestAvroModel extends org.apache.avro.specific.Speci
       * @return True if the 'isDeleted' field has been set, false otherwise.
       */
     public boolean hasIsDeleted() {
-      return fieldSetFlags()[10];
+      return fieldSetFlags()[11];
     }
 
 
@@ -972,7 +1044,7 @@ public class OrganizationRequestAvroModel extends org.apache.avro.specific.Speci
       */
     public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationRequestAvroModel.Builder clearIsDeleted() {
       isDeleted = null;
-      fieldSetFlags()[10] = false;
+      fieldSetFlags()[11] = false;
       return this;
     }
 
@@ -988,10 +1060,11 @@ public class OrganizationRequestAvroModel extends org.apache.avro.specific.Speci
         record.name = fieldSetFlags()[4] ? this.name : (java.lang.String) defaultValue(fields()[4]);
         record.apiKey = fieldSetFlags()[5] ? this.apiKey : (java.lang.String) defaultValue(fields()[5]);
         record.moodleUrl = fieldSetFlags()[6] ? this.moodleUrl : (java.lang.String) defaultValue(fields()[6]);
-        record.copyState = fieldSetFlags()[7] ? this.copyState : (com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState) defaultValue(fields()[7]);
-        record.createdAt = fieldSetFlags()[8] ? this.createdAt : (java.time.Instant) defaultValue(fields()[8]);
-        record.updatedAt = fieldSetFlags()[9] ? this.updatedAt : (java.time.Instant) defaultValue(fields()[9]);
-        record.isDeleted = fieldSetFlags()[10] ? this.isDeleted : (java.lang.Boolean) defaultValue(fields()[10]);
+        record.serviceName = fieldSetFlags()[7] ? this.serviceName : (com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName) defaultValue(fields()[7]);
+        record.copyState = fieldSetFlags()[8] ? this.copyState : (com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState) defaultValue(fields()[8]);
+        record.createdAt = fieldSetFlags()[9] ? this.createdAt : (java.time.Instant) defaultValue(fields()[9]);
+        record.updatedAt = fieldSetFlags()[10] ? this.updatedAt : (java.time.Instant) defaultValue(fields()[10]);
+        record.isDeleted = fieldSetFlags()[11] ? this.isDeleted : (java.lang.Boolean) defaultValue(fields()[11]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;

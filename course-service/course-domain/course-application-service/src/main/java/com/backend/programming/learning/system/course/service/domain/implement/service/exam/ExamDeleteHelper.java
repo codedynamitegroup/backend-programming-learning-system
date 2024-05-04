@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.implement.exam;
+package com.backend.programming.learning.system.course.service.domain.implement.service.exam;
 
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;

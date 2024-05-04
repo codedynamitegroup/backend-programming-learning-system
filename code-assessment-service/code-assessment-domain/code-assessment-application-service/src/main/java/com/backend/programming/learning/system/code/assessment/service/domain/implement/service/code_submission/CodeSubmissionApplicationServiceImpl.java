@@ -3,7 +3,8 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetCodeSubmissionsByUserIdCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetCodeSubmissionsByUserIdResponseItem;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetCodeSubmissionResponseItem;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetDetailCodeSubmissionsByIdCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_submission.UpdateCodeSubmissionTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.CodeSubmissionApplicationService;
 import org.springframework.stereotype.Service;
@@ -32,8 +33,14 @@ public class CodeSubmissionApplicationServiceImpl implements CodeSubmissionAppli
     }
 
     @Override
-    public List<GetCodeSubmissionsByUserIdResponseItem> getCodeSubmissionsByUserId(GetCodeSubmissionsByUserIdCommand command) {
+    public List<GetCodeSubmissionResponseItem> getCodeSubmissionsByUserId(GetCodeSubmissionsByUserIdCommand command) {
 
         return codeSubmissionCommandHandler.getCodeSubmissionsByUserId(command);
+    }
+
+    @Override
+    public GetCodeSubmissionResponseItem getCodeSubmissionsById(GetDetailCodeSubmissionsByIdCommand command) {
+        return codeSubmissionCommandHandler.getCodeSubmissionsById(command);
+
     }
 }

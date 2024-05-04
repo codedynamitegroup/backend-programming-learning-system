@@ -48,4 +48,10 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     public void deleteById(UUID questionId) {
         questionJpaRepository.deleteById(questionId);
     }
+
+    @Override
+    public Page<Question> findAllByExamId(UUID examId, String search, int pageNo, int pageSize) {
+        return questionJpaRepository.findAllByExamId(examId, search, PageRequest.of(pageNo, pageSize))
+                .map(questionDataAccessMapper::questionEntityToQuestion);
+    }
 }

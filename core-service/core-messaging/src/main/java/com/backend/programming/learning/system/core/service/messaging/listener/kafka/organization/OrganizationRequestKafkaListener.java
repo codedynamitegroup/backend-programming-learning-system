@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.core.service.domain.exception.Use
 import com.backend.programming.learning.system.core.service.domain.ports.input.message.listener.organization.OrganizationRequestMessageListener;
 import com.backend.programming.learning.system.core.service.messaging.mapper.OrganizationMessagingDataMapper;
 import com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationRequestAvroModel;
+import com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName;
 import com.backend.programming.learning.system.kafka.consumer.KafkaConsumer;
 import lombok.extern.slf4j.Slf4j;
 import org.postgresql.util.PSQLState;
@@ -32,7 +33,7 @@ public class OrganizationRequestKafkaListener implements KafkaConsumer<Organizat
 
     @Override
     @KafkaListener(id = "${kafka-consumer-config.core-service-organization-request-group-id}",
-            topics = "${core-service.organization-request-topic-name}")
+            topics = "${core-service.core-organization-request-topic-name}")
     public void receive(@Payload List<OrganizationRequestAvroModel> messages,
                         @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) List<String> keys,
                         @Header(KafkaHeaders.RECEIVED_PARTITION_ID) List<Integer> partitions,

@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.auth.service.domain.outbox.model.
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.OrganizationOutboxRepository;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -40,8 +41,10 @@ public class OrganizationOutboxHelper {
     }
 
     @Transactional(readOnly = true)
-    public Optional<OrganizationOutboxMessage> getOrganizationOutboxMessageBySagaIdAndSagaStatus(UUID sagaId, SagaStatus... sagaStatus) {
-        return organizationOutboxRepository.findByTypeAndSagaIdAndSagaStatus(ORGANIZATION_SAGA_NAME, sagaId, sagaStatus);
+    public Optional<OrganizationOutboxMessage> getOrganizationOutboxMessageBySagaIdAndServiceNameAndSagaStatus(
+            UUID sagaId, ServiceName serviceName, SagaStatus... sagaStatus) {
+        return organizationOutboxRepository.findByTypeAndSagaIdAndServiceNameAndSagaStatus(
+                ORGANIZATION_SAGA_NAME, sagaId, serviceName, sagaStatus);
     }
 
     @Transactional
@@ -56,7 +59,7 @@ public class OrganizationOutboxHelper {
 
     @Transactional
     public void saveOrganizationOutboxMessage(OrganizationEventPayload organizationEventPayload,
-                                              CopyState state, OutboxStatus outboxStatus, SagaStatus sagaStatus, UUID sagaId) {
+                                              ServiceName serviceName, CopyState state, OutboxStatus outboxStatus, SagaStatus sagaStatus, UUID sagaId) {
         organizationOutboxRepository.save(OrganizationOutboxMessage.builder()
                 .id(UUID.randomUUID())
                 .sagaId(sagaId)
@@ -66,6 +69,7 @@ public class OrganizationOutboxHelper {
                 .copyState(state)
                 .outboxStatus(outboxStatus)
                 .sagaStatus(sagaStatus)
+                .serviceName(serviceName)
                 .build());
     }
 

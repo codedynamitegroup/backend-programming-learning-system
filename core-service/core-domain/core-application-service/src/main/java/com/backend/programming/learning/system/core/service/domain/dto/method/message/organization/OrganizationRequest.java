@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.dto.method.message.organization;
 
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,6 +20,7 @@ public class OrganizationRequest {
     private String apiKey;
     private String moodleUrl;
     private CopyState copyState;
+    private ServiceName serviceName;
     private Instant createdAt;
     private Instant updatedAt;
     private Boolean isDeleted;

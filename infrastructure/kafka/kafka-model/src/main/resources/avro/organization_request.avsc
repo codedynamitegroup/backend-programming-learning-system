@@ -36,6 +36,20 @@
       "default": null
     },
     {
+      "name": "serviceName",
+      "type": {
+        "type": "enum",
+        "name": "ServiceName",
+        "symbols": [
+          "CORE_SERVICE",
+          "AUTH_SERVICE",
+          "COURSE_SERVICE",
+          "CODE_ASSESSMENT_SERVICE",
+          "BACKGROUND_SERVICE"
+        ]
+      }
+    },
+    {
       "name": "copyState",
       "type": {
         "type": "enum",

@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.auth.service.domain.outbox.model.
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.organization.OrganizationOutboxMessage;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.organization.OrganizationRequestMessagePublish;
 import com.backend.programming.learning.system.auth.service.messaging.mapper.OrganizationMessagingDataMapper;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationRequestAvroModel;
 import com.backend.programming.learning.system.kafka.producer.KafkaOutboxMessageHelper;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
@@ -34,7 +35,13 @@ public class OrganizationEventKafkaPublisher implements OrganizationRequestMessa
         OrganizationEventPayload organizationEventPayload = kafkaOutboxMessageHelper.getEventPayload(organizationOutboxMessage.getPayload(), OrganizationEventPayload.class);
 
         String sagaId = organizationOutboxMessage.getSagaId().toString();
-
+        ServiceName serviceName = organizationOutboxMessage.getServiceName();
+        String requestTopicName;
+        if (serviceName.equals(ServiceName.CORE_SERVICE)) {
+            requestTopicName = authServiceConfigData.getCoreOrganizationRequestTopicName();
+        } else {
+            requestTopicName = authServiceConfigData.getCourseOrganizationRequestTopicName();
+        }
         log.info("Received OrganizationOutboxMessage for organization id: {} and saga id: {}",
                 organizationEventPayload.getOrganizationId(), sagaId);
 
@@ -42,31 +49,31 @@ public class OrganizationEventKafkaPublisher implements OrganizationRequestMessa
             switch (organizationOutboxMessage.getCopyState()) {
                 case CREATING -> {
                     OrganizationRequestAvroModel organizationRequestAvroModel = organizationMessagingDataMapper
-                            .organizationCreatedEventPayloadToOrganizationRequestAvroModel(sagaId, organizationEventPayload);
-                    kafkaProducer.send(authServiceConfigData.getOrganizationRequestTopicName(),
+                            .organizationCreatedEventPayloadToOrganizationRequestAvroModel(sagaId, serviceName, organizationEventPayload);
+                    kafkaProducer.send(requestTopicName,
                             sagaId,
                             organizationRequestAvroModel,
-                            kafkaOutboxMessageHelper.getKafkaCallback(authServiceConfigData.getOrganizationRequestTopicName(),
+                            kafkaOutboxMessageHelper.getKafkaCallback(requestTopicName,
                                     organizationRequestAvroModel, organizationOutboxMessage, outboxCallback,
                                     sagaId, "OrganizationRequestAvroModel"));
                 }
                 case DELETING -> {
                     OrganizationRequestAvroModel organizationRequestAvroModel = organizationMessagingDataMapper
-                            .organizationDeletedEventPayloadToOrganizationRequestAvroModel(sagaId, organizationEventPayload);
-                    kafkaProducer.send(authServiceConfigData.getOrganizationRequestTopicName(),
+                            .organizationDeletedEventPayloadToOrganizationRequestAvroModel(sagaId, serviceName, organizationEventPayload);
+                    kafkaProducer.send(requestTopicName,
                             sagaId,
                             organizationRequestAvroModel,
-                            kafkaOutboxMessageHelper.getKafkaCallback(authServiceConfigData.getOrganizationRequestTopicName(),
+                            kafkaOutboxMessageHelper.getKafkaCallback(requestTopicName,
                                     organizationRequestAvroModel, organizationOutboxMessage, outboxCallback,
                                     sagaId, "OrganizationRequestAvroModel"));
                 }
                 case UPDATING -> {
                     OrganizationRequestAvroModel organizationRequestAvroModel = organizationMessagingDataMapper
-                            .organizationUpdatedEventPayloadToOrganizationRequestAvroModel(sagaId, organizationEventPayload);
-                    kafkaProducer.send(authServiceConfigData.getOrganizationRequestTopicName(),
+                            .organizationUpdatedEventPayloadToOrganizationRequestAvroModel(sagaId, serviceName, organizationEventPayload);
+                    kafkaProducer.send(requestTopicName,
                             sagaId,
                             organizationRequestAvroModel,
-                            kafkaOutboxMessageHelper.getKafkaCallback(authServiceConfigData.getOrganizationRequestTopicName(),
+                            kafkaOutboxMessageHelper.getKafkaCallback(requestTopicName,
                                     organizationRequestAvroModel, organizationOutboxMessage, outboxCallback,
                                     sagaId, "OrganizationRequestAvroModel"));
                 }

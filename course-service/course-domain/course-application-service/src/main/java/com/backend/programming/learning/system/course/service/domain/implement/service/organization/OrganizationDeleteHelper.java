@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.implement.organization;
+package com.backend.programming.learning.system.course.service.domain.implement.service.organization;
 
 import com.backend.programming.learning.system.course.service.domain.entity.Organization;
 import com.backend.programming.learning.system.course.service.domain.exception.OrganizationNotFoundException;

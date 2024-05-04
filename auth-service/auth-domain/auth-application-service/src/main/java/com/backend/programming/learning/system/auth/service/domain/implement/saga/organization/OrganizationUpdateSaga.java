@@ -23,20 +23,18 @@ import java.util.UUID;
 public class OrganizationUpdateSaga implements SagaStep<OrganizationResponse> {
     private final OrganizationOutboxHelper organizationOutboxHelper;
     private final OrganizationUpdateSagaHelper organizationUpdateSagaHelper;
-    private final OrganizationRepository organizationRepository;
 
-    public OrganizationUpdateSaga(OrganizationOutboxHelper organizationOutboxHelper, OrganizationUpdateSagaHelper organizationUpdateSagaHelper, OrganizationRepository organizationRepository) {
+    public OrganizationUpdateSaga(OrganizationOutboxHelper organizationOutboxHelper, OrganizationUpdateSagaHelper organizationUpdateSagaHelper) {
         this.organizationOutboxHelper = organizationOutboxHelper;
         this.organizationUpdateSagaHelper = organizationUpdateSagaHelper;
-        this.organizationRepository = organizationRepository;
     }
 
     @Override
     @Transactional
     public void process(OrganizationResponse organizationResponse) {
         Optional<OrganizationOutboxMessage> organizationOutboxMessageResponse =
-                organizationOutboxHelper.getOrganizationOutboxMessageBySagaIdAndSagaStatus(
-                        UUID.fromString(organizationResponse.getSagaId()), SagaStatus.STARTED);
+                organizationOutboxHelper.getOrganizationOutboxMessageBySagaIdAndServiceNameAndSagaStatus(
+                        UUID.fromString(organizationResponse.getSagaId()), organizationResponse.getServiceName(), SagaStatus.STARTED);
         if (organizationOutboxMessageResponse.isEmpty()) {
             log.info("An outbox message with saga id: {} is already processed!", organizationResponse.getSagaId());
             return;
@@ -58,8 +56,9 @@ public class OrganizationUpdateSaga implements SagaStep<OrganizationResponse> {
     @Transactional
     public void rollback(OrganizationResponse organizationResponse) {
         Optional<OrganizationOutboxMessage> organizationOutboxMessageResponse =
-                organizationOutboxHelper.getOrganizationOutboxMessageBySagaIdAndSagaStatus(
+                organizationOutboxHelper.getOrganizationOutboxMessageBySagaIdAndServiceNameAndSagaStatus(
                         UUID.fromString(organizationResponse.getSagaId()),
+                        organizationResponse.getServiceName(),
                         SagaStatus.STARTED);
         if (organizationOutboxMessageResponse.isEmpty()) {
             log.info("An outbox message with saga id: {} is already roll backed!", organizationResponse.getSagaId());

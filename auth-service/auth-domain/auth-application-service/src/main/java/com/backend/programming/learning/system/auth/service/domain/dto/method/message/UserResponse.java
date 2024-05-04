@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.auth.service.domain.dto.method.message;
 
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,5 +16,6 @@ public class UserResponse {
     private String sagaId;
     private String userId;
     private CopyState state;
+    private ServiceName serviceName;
     private List<String> failureMessages;
 }

@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.auth.service.messaging.mapper;
 
 import com.backend.programming.learning.system.auth.service.domain.dto.method.message.OrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.organization.OrganizationEventPayload;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState;
 import com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationRequestAvroModel;
 import com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseAvroModel;
@@ -11,7 +12,9 @@ import java.util.UUID;
 
 @Component
 public class OrganizationMessagingDataMapper {
-    public OrganizationRequestAvroModel organizationCreatedEventPayloadToOrganizationRequestAvroModel(String sagaId,
+    public OrganizationRequestAvroModel organizationCreatedEventPayloadToOrganizationRequestAvroModel(
+            String sagaId,
+            ServiceName serviceName,
             OrganizationEventPayload organizationEventPayload) {
         return OrganizationRequestAvroModel.newBuilder()
                 .setId(UUID.randomUUID().toString())
@@ -23,10 +26,14 @@ public class OrganizationMessagingDataMapper {
                 .setUpdatedAt(organizationEventPayload.getUpdatedAt().toInstant())
                 .setIsDeleted(organizationEventPayload.getIsDeleted())
                 .setCopyState(CopyState.CREATING)
+                .setServiceName(
+                        com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName.valueOf(serviceName.name()))
                 .build();
     }
 
-    public OrganizationRequestAvroModel organizationUpdatedEventPayloadToOrganizationRequestAvroModel(String sagaId,
+    public OrganizationRequestAvroModel organizationUpdatedEventPayloadToOrganizationRequestAvroModel(
+            String sagaId,
+            ServiceName serviceName,
             OrganizationEventPayload organizationEventPayload) {
         return OrganizationRequestAvroModel.newBuilder()
                 .setId(UUID.randomUUID().toString())
@@ -38,17 +45,23 @@ public class OrganizationMessagingDataMapper {
                 .setMoodleUrl(organizationEventPayload.getMoodleUrl())
                 .setUpdatedAt(organizationEventPayload.getUpdatedAt().toInstant())
                 .setCopyState(CopyState.UPDATING)
+                .setServiceName(
+                        com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName.valueOf(serviceName.name()))
                 .build();
     }
 
-    public OrganizationRequestAvroModel organizationDeletedEventPayloadToOrganizationRequestAvroModel(String sagaId,
-                                                                                                OrganizationEventPayload organizationEventPayload) {
+    public OrganizationRequestAvroModel organizationDeletedEventPayloadToOrganizationRequestAvroModel(
+            String sagaId,
+            ServiceName serviceName,
+            OrganizationEventPayload organizationEventPayload) {
         return OrganizationRequestAvroModel.newBuilder()
                 .setId(UUID.randomUUID().toString())
                 .setSagaId(sagaId)
                 .setOrganizationId(organizationEventPayload.getOrganizationId())
                 .setIsDeleted(organizationEventPayload.getIsDeleted())
                 .setCopyState(CopyState.DELETING)
+                .setServiceName(
+                        com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName.valueOf(serviceName.name()))
                 .build();
     }
 
@@ -59,6 +72,8 @@ public class OrganizationMessagingDataMapper {
                 .organizationId(organizationResponseAvroModel.getOrganizationId())
                 .state(com.backend.programming.learning.system.domain.valueobject
                         .CopyState.valueOf(organizationResponseAvroModel.getCopyState().name()))
+                .serviceName(com.backend.programming.learning.system.domain.valueobject
+                        .ServiceName.valueOf(organizationResponseAvroModel.getServiceName().name()))
                 .failureMessages(organizationResponseAvroModel.getFailureMessages())
                 .build();
 

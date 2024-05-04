@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.implement.course;
+package com.backend.programming.learning.system.course.service.domain.implement.service.course;
 
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseRepository;

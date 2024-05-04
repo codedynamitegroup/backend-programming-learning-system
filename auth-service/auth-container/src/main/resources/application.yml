@@ -6,10 +6,14 @@ logging:
     com.backend.programming.learning.system: INFO
 
 auth-service:
-  user-request-topic-name: user-request
+  core-user-request-topic-name: core-user-request
+  course-user-request-topic-name: course-user-request
   user-response-topic-name: user-response
-  organization-request-topic-name: organization-request
+
+  core-organization-request-topic-name: core-organization-request
+  course-organization-request-topic-name: course-organization-request
   organization-response-topic-name: organization-response
+
   outbox-scheduler-fixed-rate: 2000
   outbox-scheduler-initial-delay: 2000
 
@@ -52,8 +56,8 @@ kafka-producer-config:
 kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-  core-service-user-response-group-id: core-service-user-response-topic
-  core-service-organization-response-group-id: core-service-organization-response-topic
+  service-user-response-group-id: service-user-response-topic
+  service-organization-response-group-id: service-organization-response-topic
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
   specific-avro-reader: true

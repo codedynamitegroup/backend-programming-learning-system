@@ -1,13 +1,16 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.implement.service.code_submission;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.CodeAssessmentDomainService;
-import com.backend.programming.learning.system.code.assessment.service.domain.config.CodeAssessmentServiceConfigData;
+import com.backend.programming.learning.system.code.assessment.service.config.CodeAssessmentServiceConfigData;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetCodeSubmissionsByUserIdCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetDetailCodeSubmissionsByIdCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_submission.UpdateCodeSubmissionTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_question.CodeQuestionNotFoundException;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_submission.CodeSubmissionNotFound;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_submission.CodeSubmissionTestCaseNotFound;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.programming_language.ProgrammingLanguageNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.test_case.TestCaseNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.GenericHelper;
@@ -16,7 +19,6 @@ import com.backend.programming.learning.system.code.assessment.service.domain.po
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_question.CodeQuestionRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_submssion.CodeSubmissionRepository;
-import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.programming_language_code_question.ProgrammingLanguageCodeQuestionId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.exception.user.UserNotFoundException;
@@ -170,7 +172,7 @@ public class CodeSubmissionHelper {
             if(codeSubmission.getNumOfTestCaseGraded().equals(codeSubmission.getNumOfTestCase())){
                 List<CodeSubmissionTestCase> cstc = codeSubmissionTestCaseRepository.findByCodeSubmissionId(id);
 
-                codeAssessmentDomainService.calculateAvgTimeAndMemory(codeSubmission, cstc, codeAssessmentServiceConfigData.getAcceptedStatusDescription());
+                codeAssessmentDomainService.calculateAvgTimeAndMemoryAndGrade(codeSubmission, cstc, codeAssessmentServiceConfigData.getAcceptedStatusDescription());
 
                 codeSubmissionRepository.save(codeSubmission);
             }
@@ -186,15 +188,28 @@ public class CodeSubmissionHelper {
     }
 
     private void findDescriptionStatus(List<CodeSubmission> codeSubmissions) {
-        codeSubmissions.stream().forEach(codeSubmission -> {
+        codeSubmissions.forEach(codeSubmission -> {
             if(codeSubmission.getRunTime() != null)
                 codeSubmission.setStatusDescription(codeAssessmentServiceConfigData.getAcceptedStatusDescription());
             else
             {
-                Optional<CodeSubmissionTestCase> cstc = codeSubmissionTestCaseRepository.findFirstNotAcceptedByCodeSubmissionId(codeSubmission.getId());
+                Optional<CodeSubmissionTestCase> cstc = codeSubmissionTestCaseRepository.findFirstNonAcceptedByCodeSubmissionId(codeSubmission.getId());
                 cstc.ifPresent(cstcp -> codeSubmission.setStatusDescription(cstcp.getStatusDescription()));
             }
         });
     }
 
+    @Transactional
+    public CodeSubmission getCodeSubmissionsById(GetDetailCodeSubmissionsByIdCommand command) {
+        Optional<CodeSubmission> codeSubmissionOpt = codeSubmissionRepository.findById(new CodeSubmissionId(command.getCodeSubmissionId()));
+        if(codeSubmissionOpt.isPresent())
+            return codeSubmissionOpt.get();
+        else throw new CodeSubmissionNotFound("CodeSubmission with id " + command.getCodeSubmissionId() + " not found");
+    }
+
+    @Transactional
+    public CodeSubmissionTestCase findFirstNonAcceptedTestCase(CodeSubmissionId codeSubmissionId) {
+        Optional<CodeSubmissionTestCase> cstcOpt = codeSubmissionTestCaseRepository.findFirstNonAcceptedByCodeSubmissionId(codeSubmissionId);
+        return cstcOpt.orElse(null);
+    }
 }
