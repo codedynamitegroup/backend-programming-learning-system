@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.auth.service.application.rest.su
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.submission_assignment.CreateSubmissionAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.submission_assignment.CreateSubmissionAssignmentResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.submission_assignment_file.CreateSubmissionAssignmentFileResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.submission_assignment.DeleteSubmissionAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.submission_assignment.DeleteSubmissionAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QueryAllSubmissionAssignmentResponse;
@@ -11,8 +12,14 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.submission_assignment.UpdateSubmissionAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.submission_assignment.UpdateSubmissionAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.submission_assignment.SubmissionAssignmentApplicationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,15 +33,31 @@ public class SubmissionAssignmentController {
     private final SubmissionAssignmentApplicationService submissionAssignmentApplicationService;
 
     @PostMapping
+    @Operation(summary = "Create submission assignment.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateSubmissionAssignmentResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateSubmissionAssignmentResponse> createSubmissionAssignment(
             @RequestBody CreateSubmissionAssignmentCommand createSubmissionAssignmentCommand
     ) {
         log.info("Creating submission assignment");
         CreateSubmissionAssignmentResponse response = submissionAssignmentApplicationService.createSubmissionAssignment(createSubmissionAssignmentCommand);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping("/{submissionId}")
+    @Operation(summary = "Query submission assignment by id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = SubmissionAssignmentResponseEntity.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<SubmissionAssignmentResponseEntity> querySubmissionAssignmentById(
             @PathVariable UUID submissionId
     ) {
@@ -45,6 +68,14 @@ public class SubmissionAssignmentController {
     }
 
     @GetMapping
+    @Operation(summary = "Query all submission assignment by assignment id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllSubmissionAssignmentResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllSubmissionAssignmentResponse> queryAllByAssignmentId(
             @RequestParam UUID assignmentId
     ) {
@@ -55,6 +86,14 @@ public class SubmissionAssignmentController {
     }
 
     @DeleteMapping("/{submissionAssignmentId}")
+    @Operation(summary = "Delete submission assignment by id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = DeleteSubmissionAssignmentResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<DeleteSubmissionAssignmentResponse> deleteSubmissionAssignmentById(
             @PathVariable UUID submissionAssignmentId
     ) {
@@ -69,6 +108,14 @@ public class SubmissionAssignmentController {
     }
 
     @PutMapping("/{submissionAssignmentId}")
+    @Operation(summary = "Update submission assignment by id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = UpdateSubmissionAssignmentResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<UpdateSubmissionAssignmentResponse> updateSubmissionAssignmentById(
             @PathVariable UUID submissionAssignmentId,
             @RequestBody UpdateSubmissionAssignmentCommand updateSubmissionAssignmentCommand

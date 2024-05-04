@@ -2,12 +2,18 @@ package com.backend.programming.learning.system.auth.service.application.rest.qu
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question.CreateQuestionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_bank_category.CreateQuestionBankCategoryResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.question.DeleteQuestionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QueryAllQuestionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QueryAllQuestionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QueryQuestionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.question.QuestionApplicationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -37,6 +43,14 @@ public class QuestionController {
     final private QuestionApplicationService questionApplicationService;
 
     @PostMapping("/create")
+    @Operation(summary = "Create question.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateQuestionResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateQuestionResponse> createQuestion(
             @RequestBody CreateQuestionCommand createQuestionCommand
     ) {
@@ -44,7 +58,16 @@ public class QuestionController {
         CreateQuestionResponse response = questionApplicationService.createQuestion(createQuestionCommand);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
     @PostMapping("/bank/create")
+    @Operation(summary = "Create question bank.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateQuestionResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateQuestionResponse> createQuestionBank(
             @RequestBody CreateQuestionCommand createQuestionCommand
     ) {
@@ -54,6 +77,14 @@ public class QuestionController {
     }
 
     @GetMapping
+    @Operation(summary = "Get all questions.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllQuestionResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllQuestionResponse> findAllQuestions(
             @RequestParam(name = "questionBankCategoryId", required = false) UUID questionBankCategoryId,
             @RequestParam(defaultValue = "") String search,
@@ -70,14 +101,32 @@ public class QuestionController {
         log.info("Get all questions");
         return ResponseEntity.ok(response);
     }
+
     @GetMapping("/{questionId}")
+    @Operation(summary = "Get question by id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QuestionResponseEntity.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QuestionResponseEntity> findById(@PathVariable UUID questionId) {
         log.info("Get question by id: {}", questionId);
         QueryQuestionCommand queryQuestionCommand = QueryQuestionCommand.builder().questionId(questionId).build();
         QuestionResponseEntity response = questionApplicationService.findById(queryQuestionCommand);
         return ResponseEntity.ok(response);
     }
+
     @DeleteMapping("/{questionId}")
+    @Operation(summary = "Delete question by id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = String.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<String> deleteById(@PathVariable UUID questionId) {
         log.info("Delete question by id: {}", questionId);
         DeleteQuestionCommand deleteQuestionCommand = DeleteQuestionCommand.builder().questionId(questionId).build();

@@ -3,7 +3,13 @@ package com.backend.programming.learning.system.code.assessment.service.applicat
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.codequestion.CreateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.codequestion.CreateCodeQuestionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.CodeQuestionApplicationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,11 +27,19 @@ public class CodeQuestionController {
         this.codeQuestionApplicationService = codeQuestionApplicationService;
     }
     @PostMapping
+    @Operation(summary = "Create code question.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateCodeQuestionResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateCodeQuestionResponse> createCodeQuestion
             (@RequestBody CreateCodeQuestionCommand createCodeQuestionCommand){
         log.info("Create code question for question id {}", createCodeQuestionCommand.getQuestionId());
         CreateCodeQuestionResponse createCodeQuestionResponse =
             codeQuestionApplicationService.createCodeQuestion(createCodeQuestionCommand);
-        return ResponseEntity.ok(createCodeQuestionResponse);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createCodeQuestionResponse);
     }
 }

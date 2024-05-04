@@ -3,7 +3,13 @@ package com.backend.programming.learning.system.auth.service.application.rest.ex
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.CreateExamQuestionResponse;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.exam_submission.ExamSubmissionApplicationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -26,6 +32,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class ExamSubmissionController {
     private final ExamSubmissionApplicationService examSubmissionApplicationService;
     @PostMapping("/submit")
+    @Operation(summary = "Submit exam.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateExamSubmissionResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateExamSubmissionResponse> submitExam(
             @RequestBody CreateExamSubmissionCommand createExamSubmissionCommand) {
         log.info("Submit exam");
@@ -34,6 +48,14 @@ public class ExamSubmissionController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
     @PostMapping("/start-exam")
+    @Operation(summary = "Start exam.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateExamSubmissionResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateExamSubmissionResponse> startExam(
             @RequestBody CreateExamSubmissionStartCommand createExamSubmissionStartCommand) {
         log.info("Start exam");

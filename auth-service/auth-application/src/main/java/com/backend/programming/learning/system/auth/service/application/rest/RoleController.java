@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.auth.service.application.rest;
 
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.organization.CreateOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.role.CreateRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.role.CreateRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.role.DeleteRoleCommand;
@@ -11,6 +12,11 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.up
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.role.UpdateRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.role.RoleEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.RoleApplicationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +36,14 @@ public class RoleController {
     }
 
     @PostMapping
+    @Operation(summary = "Create role.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateRoleResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateRoleResponse> createRole(@RequestBody CreateRoleCommand createRoleCommand) {
         log.info("Creating role with name: {}", createRoleCommand.getName());
         CreateRoleResponse createRoleResponse = roleApplicationService.createRole(createRoleCommand);
@@ -38,6 +52,14 @@ public class RoleController {
     }
 
     @GetMapping("/organization/{id}")
+    @Operation(summary = "Get all roles by organization id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllRolesByOrganizationResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllRolesByOrganizationResponse> getRolesByOrganizationId(
             @PathVariable UUID id,
             @RequestParam(defaultValue = "0") Integer pageNo,
@@ -53,6 +75,14 @@ public class RoleController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get role by id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = RoleEntityResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<RoleEntityResponse> getRoleById(@PathVariable UUID id) {
         RoleEntityResponse queryRoleResponse =
                roleApplicationService.findRoleById(QueryRoleByIdCommand.builder().roleId(id).build());
@@ -61,6 +91,14 @@ public class RoleController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Update role by id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = UpdateRoleResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<UpdateRoleResponse> updateRoleById(@PathVariable UUID id, @RequestBody UpdateRoleCommand updateRoleCommand) {
         log.info("Updating role with id: {}", id);
         UpdateRoleResponse updateRoleResponse = roleApplicationService.updateRole(UpdateRoleCommand.builder()
@@ -74,6 +112,14 @@ public class RoleController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete role by id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = DeleteRoleResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<DeleteRoleResponse> deleteRoleById(@PathVariable UUID id) {
         log.info("Deleting role with id: {}", id);
         DeleteRoleResponse deleteRoleResponse =

@@ -44,7 +44,7 @@
 		<spring-cloud-starter-circuitbreaker-reactor-resilience4j.version>1.0.5.RELEASE</spring-cloud-starter-circuitbreaker-reactor-resilience4j.version>
 		<micrometer-registry-prometheus.version>1.8.1</micrometer-registry-prometheus.version>
 		<logstash-logback-encoder.version>6.5</logstash-logback-encoder.version>
-		<springdoc-openapi-ui.version>1.8.0</springdoc-openapi-ui.version>
+		<springdoc-openapi-ui.version>1.6.6</springdoc-openapi-ui.version>
 	</properties>
 
 	<dependencyManagement>

@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.application.rest;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.test_case.CreateTestCasesCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.test_case.CreateTestCasesResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.test_case.PatchDeleteTestCasesCommand;
@@ -9,7 +10,13 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.testcase.UpdateTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.testcase.UpdateTestCaseResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.TestCaseApplicationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,15 +33,33 @@ public class TestCaseController {
     public TestCaseController(TestCaseApplicationService service) {
         this.service = service;
     }
+
     @PostMapping
+    @Operation(summary = "Create test cases.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateTestCasesResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateTestCasesResponse> createTestCases
             (@RequestBody CreateTestCasesCommand createTestCasesCommand){
         log.info("Create test cases for code question id {}", createTestCasesCommand.getCodeQuestionId());
         CreateTestCasesResponse createCodeQuestionResponse =
                 service.createTestCases(createTestCasesCommand);
-        return ResponseEntity.ok(createCodeQuestionResponse);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createCodeQuestionResponse);
     }
+
     @PutMapping
+    @Operation(summary = "Update test case.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = UpdateTestCaseResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<UpdateTestCaseResponse> updateTestCase
             (@RequestBody UpdateTestCaseCommand command){
         log.info("update test case with id {}", command.getId());
@@ -42,7 +67,16 @@ public class TestCaseController {
                 service.updateTestCase(command);
         return ResponseEntity.ok(response);
     }
+
     @GetMapping
+    @Operation(summary = "Get test cases by question id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = GetTestCasesByQuestionIdResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<GetTestCasesByQuestionIdResponse> updateTestCase
             (@RequestParam(defaultValue = "0") Integer pageNo,
              @RequestParam(defaultValue = "10") Integer pageSize,
@@ -62,6 +96,14 @@ public class TestCaseController {
     }
 
     @PostMapping("/patch-delete")
+    @Operation(summary = "Delete test cases.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = PatchDeleteTestCasesResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<PatchDeleteTestCasesResponse> deleteTestCases
             (@RequestBody List<UUID> testCaseIds){
         PatchDeleteTestCasesCommand command = PatchDeleteTestCasesCommand.builder().testCaseIds(testCaseIds).build();
