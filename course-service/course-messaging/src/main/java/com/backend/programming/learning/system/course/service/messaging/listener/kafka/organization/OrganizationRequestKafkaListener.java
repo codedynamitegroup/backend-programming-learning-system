@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.course.service.messaging.listener.kafka.organization;
 
-import com.backend.programming.learning.system.core.service.domain.exception.OrganizationNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.exception.CourseApplicationServiceException;
+import com.backend.programming.learning.system.course.service.domain.exception.OrganizationNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.ports.input.message.listener.organization.OrganizationRequestMessageListener;
 import com.backend.programming.learning.system.course.service.messaging.mapper.OrganizationMessagingDataMapper;
 import com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationRequestAvroModel;
