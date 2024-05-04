@@ -15,7 +15,7 @@
 		<module>app-config-data</module>
         <module>discovery-service</module>
         <module>gateway-service</module>
-    </modules>
+	</modules>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -44,10 +44,12 @@
 		<spring-cloud-starter-circuitbreaker-reactor-resilience4j.version>1.0.5.RELEASE</spring-cloud-starter-circuitbreaker-reactor-resilience4j.version>
 		<micrometer-registry-prometheus.version>1.8.1</micrometer-registry-prometheus.version>
 		<logstash-logback-encoder.version>6.5</logstash-logback-encoder.version>
+		<springdoc-openapi-ui.version>1.8.0</springdoc-openapi-ui.version>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
+
 			<dependency>
 				<groupId>com.backend.programming.learning.system</groupId>
 				<artifactId>app-config-data</artifactId>
@@ -328,6 +330,12 @@
 				<groupId>net.logstash.logback</groupId>
 				<artifactId>logstash-logback-encoder</artifactId>
 				<version>${logstash-logback-encoder.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springdoc</groupId>
+				<artifactId>springdoc-openapi-ui</artifactId>
+				<version>${springdoc-openapi-ui.version}</version>
 			</dependency>
 
 		</dependencies>
