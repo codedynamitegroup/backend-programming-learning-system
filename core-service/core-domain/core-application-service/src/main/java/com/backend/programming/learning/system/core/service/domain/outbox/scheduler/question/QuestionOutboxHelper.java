@@ -39,9 +39,10 @@ public class QuestionOutboxHelper {
     }
 
     @Transactional(readOnly = true)
-    public Optional<QuestionOutboxMessage> getQuestionOutboxMessageBySagaIdAndSagaStatus(UUID sagaId,
-                                                                                         SagaStatus... sagaStatus) {
-        return questionOutboxRepository.findByTypeAndSagaIdAndSagaStatus(QUESTION_SAGA_NAME, sagaId, sagaStatus);
+    public Optional<QuestionOutboxMessage> getQuestionOutboxMessageBySagaIdAndSagaStatusAndCopyState(UUID sagaId,
+                                                                                                     CopyState copyState,
+                                                                                                     SagaStatus... sagaStatus) {
+        return questionOutboxRepository.findByTypeAndSagaIdAndCopyStateAndSagaStatus(QUESTION_SAGA_NAME, sagaId, copyState, sagaStatus);
     }
 
     @Transactional

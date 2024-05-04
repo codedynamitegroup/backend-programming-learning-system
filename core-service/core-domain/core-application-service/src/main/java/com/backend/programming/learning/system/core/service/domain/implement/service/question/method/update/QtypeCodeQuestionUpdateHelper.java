@@ -52,7 +52,7 @@ public class QtypeCodeQuestionUpdateHelper {
         QtypeCodeQuestion qtypeCodeQuestion = getQtypeCodeQuestion(updateQtypeCodeQuestionCommand.getQtCodeQuestionId());
         Question prevQuestion = questionRepository.findQuestion(qtypeCodeQuestion.getQuestion().getId().getValue()).get();
         QtypeCodeQuestion mappedQtypeCodeQuestion = qtypeCodeQuestionDataMapper
-                .updateQtypeCodeQuestionCommandToQtypeCodeQuestion(updateQtypeCodeQuestionCommand, qtypeCodeQuestion);
+                .updateQtypeCodeQuestionCommandToQtypeCodeQuestion(updateQtypeCodeQuestionCommand, prevQuestion, qtypeCodeQuestion);
 
 
         updateQtypeCodeQuestionInDb(mappedQtypeCodeQuestion);

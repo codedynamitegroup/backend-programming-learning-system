@@ -53,7 +53,7 @@ public class QtypeMultichoiceQuestionUpdateHelper {
         QtypeMultiChoiceQuestion qtypeMultichoiceQuestion = getQtypeMultichoiceQuestion(updateQtypeMultichoiceQuestionCommand.getQtMultichoiceQuestionId());
         Question prevQuestion = questionRepository.findQuestion(qtypeMultichoiceQuestion.getQuestion().getId().getValue()).get();
         QtypeMultiChoiceQuestion mappedQtypeMultichoiceQuestion = qtypeMultichoiceQuestionDataMapper
-                .updateQtypeMultichoiceQuestionCommandToQtypeMultiChoiceQuestion(updateQtypeMultichoiceQuestionCommand, qtypeMultichoiceQuestion);
+                .updateQtypeMultichoiceQuestionCommandToQtypeMultiChoiceQuestion(updateQtypeMultichoiceQuestionCommand, prevQuestion, qtypeMultichoiceQuestion);
 
         updateQtypeMultichoiceQuestionInDb(mappedQtypeMultichoiceQuestion);
         log.info("Qtype Multichoice Question updated with id: {}", mappedQtypeMultichoiceQuestion.getId().getValue());

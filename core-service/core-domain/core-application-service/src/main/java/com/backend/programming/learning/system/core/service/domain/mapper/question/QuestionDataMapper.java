@@ -110,6 +110,7 @@ public class QuestionDataMapper {
     }
 
     public Question updateQuestionEntityToQuestion(UpdateQuestionEntity updateQuestionEntity,
+                                                   Question prevQuestion,
                                                    QuestionId questionId,
                                                    Organization organization,
                                                    User createdBy,
@@ -124,14 +125,32 @@ public class QuestionDataMapper {
                     .toList();
         }
 
+        String name = updateQuestionEntity.getName();
+        String questionText = updateQuestionEntity.getQuestionText();
+        String generalFeedback = updateQuestionEntity.getGeneralFeedback();
+        Float defaultMark = updateQuestionEntity.getDefaultMark();
+        QuestionDifficulty difficulty = updateQuestionEntity.getDifficulty();
+
+
+        if (name == null)
+            name = prevQuestion.getName();
+        if (questionText == null)
+            questionText = prevQuestion.getQuestionText();
+        if (generalFeedback == null)
+            generalFeedback = prevQuestion.getGeneralFeedback();
+        if (defaultMark == null)
+            defaultMark = prevQuestion.getDefaultMark();
+        if (difficulty == null)
+            difficulty = prevQuestion.getDifficulty();
+
         return Question.builder()
                 .questionId(questionId)
                 .organization(organization)
-                .name(updateQuestionEntity.getName())
-                .questionText(updateQuestionEntity.getQuestionText())
-                .generalFeedback(updateQuestionEntity.getGeneralFeedback())
-                .defaultMark(updateQuestionEntity.getDefaultMark())
-                .difficulty(updateQuestionEntity.getDifficulty())
+                .name(name)
+                .questionText(questionText)
+                .generalFeedback(generalFeedback)
+                .defaultMark(defaultMark)
+                .difficulty(difficulty)
                 .updatedBy(User.builder()
                         .id(new UserId(updateQuestionEntity.getUpdatedBy()))
                         .build())

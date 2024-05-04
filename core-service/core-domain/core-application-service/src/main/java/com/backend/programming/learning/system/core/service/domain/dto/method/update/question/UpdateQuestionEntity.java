@@ -23,7 +23,7 @@ public class UpdateQuestionEntity {
     private final String name;
     private final String questionText;
     private final String generalFeedback;
-    private final float defaultMark;
+    private final Float defaultMark;
 
     @NotNull
     private final UUID updatedBy;

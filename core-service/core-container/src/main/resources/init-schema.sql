@@ -597,7 +597,7 @@ CREATE INDEX "question_outbox_saga_status"
 
 CREATE INDEX "question_outbox_saga_id"
     ON "public".question_outbox
-    (type, saga_id, saga_status);
+    (type, saga_id, copy_state, saga_status);
 
 DROP TABLE IF EXISTS "public".organization_outbox CASCADE;
 

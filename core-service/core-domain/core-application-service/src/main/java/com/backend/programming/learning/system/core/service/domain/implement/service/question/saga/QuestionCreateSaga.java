@@ -41,7 +41,8 @@ public class QuestionCreateSaga implements SagaStep<QuestionResponse> {
     @Transactional
     public void process(QuestionResponse questionResponse) {
         Optional<QuestionOutboxMessage> questionOutboxMessage = questionOutboxHelper
-                .getQuestionOutboxMessageBySagaIdAndSagaStatus(UUID.fromString(questionResponse.getSagaId()),
+                .getQuestionOutboxMessageBySagaIdAndSagaStatusAndCopyState(UUID.fromString(questionResponse.getSagaId()),
+                        CopyState.CREATING,
                         SagaStatus.STARTED);
 
         if (questionOutboxMessage.isEmpty()) {
@@ -55,7 +56,7 @@ public class QuestionCreateSaga implements SagaStep<QuestionResponse> {
         Question question = questionSagaHelper.findQuestionById(UUID.fromString(questionResponse.getId()));
 
         // set new state and save
-        question.setCopyState(CopyState.CREATED);
+        question.setCopyState(questionResponse.getCopyState());
         questionRepository.saveQuestion(question);
 
         SagaStatus sagaStatus = questionSagaHelper.questionStatusToSagaStatus(question.getCopyState());
@@ -72,7 +73,8 @@ public class QuestionCreateSaga implements SagaStep<QuestionResponse> {
     @Transactional
     public void rollback(QuestionResponse questionResponse) {
         Optional<QuestionOutboxMessage> questionOutboxMessage =questionOutboxHelper
-                .getQuestionOutboxMessageBySagaIdAndSagaStatus(UUID.fromString(questionResponse.getSagaId()),
+                .getQuestionOutboxMessageBySagaIdAndSagaStatusAndCopyState(UUID.fromString(questionResponse.getSagaId()),
+                        CopyState.CREATE_FAILED,
                         getCurrentSagaStatus(questionResponse.getCopyState()));
 
         if (questionOutboxMessage.isEmpty()) {

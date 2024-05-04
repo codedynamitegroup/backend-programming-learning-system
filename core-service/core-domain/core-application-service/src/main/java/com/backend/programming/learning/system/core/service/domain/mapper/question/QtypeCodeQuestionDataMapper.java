@@ -69,6 +69,7 @@ public class QtypeCodeQuestionDataMapper {
     }
 
     public QtypeCodeQuestion updateQtypeCodeQuestionCommandToQtypeCodeQuestion(UpdateQtypeCodeQuestionCommand updateQtypeCodeQuestionCommand,
+                                                                               Question prevQuestion,
                                                                                QtypeCodeQuestion qtypeCodeQuestion) {
 
         return QtypeCodeQuestion.builder()
@@ -79,6 +80,7 @@ public class QtypeCodeQuestionDataMapper {
                 .maxGrade(updateQtypeCodeQuestionCommand.getMaxGrade())
                 .question(questionDataMapper
                         .updateQuestionEntityToQuestion(updateQtypeCodeQuestionCommand.getQuestion(),
+                                prevQuestion,
                                 qtypeCodeQuestion.getQuestion().getId(),
                                 qtypeCodeQuestion.getQuestion().getOrganization(),
                                 qtypeCodeQuestion.getQuestion().getCreatedBy(),

@@ -52,7 +52,7 @@ public class QtypeEssayQuestionUpdateHelper {
         QtypeEssayQuestion qtypeEssayQuestion = getQtypeEssayQuestion(updateQtypeEssayQuestionCommand.getQtEssayQuestionId());
         Question prevQuestion = questionRepository.findQuestion(qtypeEssayQuestion.getQuestion().getId().getValue()).get();
         QtypeEssayQuestion mappedQtypeEssayQuestion = qtypeEssayQuestionDataMapper
-                .updateQtypeEssayQuestionCommandToQtypeEssayQuestion(updateQtypeEssayQuestionCommand, qtypeEssayQuestion);
+                .updateQtypeEssayQuestionCommandToQtypeEssayQuestion(updateQtypeEssayQuestionCommand, prevQuestion, qtypeEssayQuestion);
 
         updateQtypeEssayQuestionInDb(mappedQtypeEssayQuestion);
         log.info("Qtype Essay Question updated with id: {}", mappedQtypeEssayQuestion.getId().getValue());

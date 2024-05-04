@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.core.service.dataaccess.outbox.qu
 import com.backend.programming.learning.system.core.service.dataaccess.outbox.question.repository.QuestionOutboxJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.question.QuestionOutboxMessage;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QuestionOutboxRepository;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
 import org.springframework.stereotype.Component;
@@ -51,12 +52,13 @@ public class QuestionOutboxRepositoryImpl implements QuestionOutboxRepository {
     }
 
     @Override
-    public Optional<QuestionOutboxMessage> findByTypeAndSagaIdAndSagaStatus(
+    public Optional<QuestionOutboxMessage> findByTypeAndSagaIdAndCopyStateAndSagaStatus(
             String type,
             UUID sagaId,
+            CopyState copyState,
             SagaStatus... sagaStatus) {
         return questionOutboxJpaRepository
-                .findByTypeAndSagaIdAndSagaStatusIn(type, sagaId, Arrays.asList(sagaStatus))
+                .findByTypeAndSagaIdAndCopyStateAndSagaStatusIn(type, sagaId, copyState, Arrays.asList(sagaStatus))
                 .map(questionOutboxDataAccessMapper::questionOutboxEntityToQuestionOutboxMessage);    }
 
     @Override

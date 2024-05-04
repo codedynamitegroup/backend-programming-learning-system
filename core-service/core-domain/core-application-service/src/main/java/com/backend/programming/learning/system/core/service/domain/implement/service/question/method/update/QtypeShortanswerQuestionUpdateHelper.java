@@ -53,7 +53,9 @@ public class QtypeShortanswerQuestionUpdateHelper {
         QtypeShortAnswerQuestion qtypeShortAnswerQuestion = getQtypeShortanswerQuestion(updateQtypeShortanswerQuestionCommand.getQtShortanswerQuestionId());
         Question prevQuestion = questionRepository.findQuestion(qtypeShortAnswerQuestion.getQuestion().getId().getValue()).get();
         QtypeShortAnswerQuestion mappedQtypeShortAnswerQuestion = qtypeShortanswerQuestionDataMapper
-                .updateQtypeShortanswerQuestionCommandToQtypeShortAnswerQuestion(updateQtypeShortanswerQuestionCommand, qtypeShortAnswerQuestion);
+                .updateQtypeShortanswerQuestionCommandToQtypeShortAnswerQuestion(updateQtypeShortanswerQuestionCommand,
+                        qtypeShortAnswerQuestion,
+                        prevQuestion);
 
         updateQtypeShortanswerQuestionInDb(mappedQtypeShortAnswerQuestion);
         log.info("Qtype Shortanswer Question updated with id: {}", mappedQtypeShortAnswerQuestion.getId().getValue());
