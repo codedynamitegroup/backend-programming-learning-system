@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.application.rest.chapter;
 
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter.CreateChapterCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter.CreateChapterResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.chapter.DeleteChapterCommand;
@@ -15,6 +16,11 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.up
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.topic.UpdateTopicResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.chapter.ChapterApplicationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +39,14 @@ public class ChapterController {
     }
 
     @PostMapping("/create")
+    @Operation(summary = "Create chapter.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateChapterResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateChapterResponse> createChapter(
             @RequestBody CreateChapterCommand createChapterCommand) {
         log.info("Creating chapter: {}", createChapterCommand);
@@ -44,6 +58,14 @@ public class ChapterController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Update chapter.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = UpdateChapterResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<UpdateChapterResponse> updateChapter(
             @PathVariable UUID id,
             @RequestBody UpdateChapterCommand updateChapterCommand) {
@@ -61,6 +83,14 @@ public class ChapterController {
     }
 
     @GetMapping
+    @Operation(summary = "Get all chapters.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllChaptersResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllChaptersResponse> getAllChapters(
             @RequestParam UUID certificateCourseId) {
         QueryAllChaptersResponse queryAllChaptersResponse =
@@ -73,6 +103,14 @@ public class ChapterController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get chapter by id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = ChapterResponseEntity.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<ChapterResponseEntity> getChapter(@PathVariable UUID id) {
         ChapterResponseEntity chapterResponseEntity =
                 chapterApplicationService.queryChapter(QueryChapterCommand
@@ -84,6 +122,14 @@ public class ChapterController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete chapter by id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = DeleteChapterResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<DeleteChapterResponse> deleteChapter(@PathVariable UUID id) {
         DeleteChapterResponse deleteChapterResponse =
                 chapterApplicationService.deleteChapter(DeleteChapterCommand

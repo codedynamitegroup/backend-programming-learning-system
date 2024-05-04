@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.application.rest.contest;
 
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter.CreateChapterResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest.CreateContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest.CreateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest_user.CreateContestUserCommand;
@@ -17,7 +18,13 @@ import com.backend.programming.learning.system.core.service.domain.dto.responsee
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest.ContestApplicationService;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest_user.ContestUserApplicationService;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestStartTimeFilter;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +44,14 @@ public class ContestController {
     }
 
     @PostMapping("/create")
+    @Operation(summary = "Create contest.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateContestResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateContestResponse> createCertificateCourse(
             @RequestBody CreateContestCommand createContestCommand) {
         log.info("Creating contest: {}", createContestCommand);
@@ -44,10 +59,18 @@ public class ContestController {
                 contestApplicationService.createContest(createContestCommand);
         log.info("Contest created: {}", createContestResponse);
 
-        return ResponseEntity.ok(createContestResponse);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createContestResponse);
     }
 
     @PostMapping("/register")
+    @Operation(summary = "Register contest.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateContestUserResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateContestUserResponse> registerContest(
             @RequestBody CreateContestUserCommand createContestUserCommand) {
         log.info("Creating Contest User course: {}", contestUserApplicationService);
@@ -55,10 +78,18 @@ public class ContestController {
                 contestUserApplicationService.createContestUser(createContestUserCommand);
         log.info("Contest User created: {}", createContestUserCommand);
 
-        return ResponseEntity.ok(createContestUserResponse);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createContestUserResponse);
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Update contest.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = UpdateContestResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<UpdateContestResponse> updateContest(
             @PathVariable UUID id,
             @RequestBody UpdateContestCommand updateContestCommand) {
@@ -78,6 +109,14 @@ public class ContestController {
     }
 
     @GetMapping
+    @Operation(summary = "Get all contests.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllContestsResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllContestsResponse> getAllContests(
             @RequestParam(defaultValue = "") String searchName,
             @RequestParam(defaultValue = "UPCOMING") String startTimeFilter,
@@ -97,6 +136,14 @@ public class ContestController {
     }
 
     @GetMapping("/{id}/users")
+    @Operation(summary = "Get all users of contest.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllContestUsersResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllContestUsersResponse> getAllUsersOfContest(
             @PathVariable UUID id,
             @RequestParam(defaultValue = "0") Integer pageNo,
@@ -116,6 +163,14 @@ public class ContestController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get contest by id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = ContestResponseEntity.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<ContestResponseEntity> getContest(@PathVariable UUID id) {
         ContestResponseEntity contestResponseEntity =
                 contestApplicationService.queryContest(QueryContestCommand
@@ -127,6 +182,14 @@ public class ContestController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete contest by id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = DeleteContestResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<DeleteContestResponse> deleteContest(@PathVariable UUID id) {
         DeleteContestResponse deleteContestResponse =
                 contestApplicationService.deleteContest(DeleteContestCommand
