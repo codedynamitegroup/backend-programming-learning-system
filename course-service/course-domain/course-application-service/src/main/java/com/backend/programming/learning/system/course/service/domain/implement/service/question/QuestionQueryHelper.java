@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.question;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QueryAllQuestionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QueryAllQuestionExamCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.Question;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,5 +35,13 @@ public class QuestionQueryHelper {
     @Transactional(readOnly = true)
     public Question findById(UUID questionId) {
         return questionRepository.findById(questionId);
+    }
+
+    public Page<Question> findAllQuestionsByExamId(QueryAllQuestionExamCommand queryAllQuestionCommand) {
+        return questionRepository.findAllByExamId(
+                queryAllQuestionCommand.examId(),
+                queryAllQuestionCommand.search(),
+                queryAllQuestionCommand.pageNo(),
+                queryAllQuestionCommand.pageSize());
     }
 }
