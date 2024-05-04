@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.ports.outp
 
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -11,4 +12,6 @@ public interface UserRepository {
     Optional<User> findUser(UUID userId);
 
     Optional<User> findUserByEmail(String email);
+
+    List<User> findAll();
 }

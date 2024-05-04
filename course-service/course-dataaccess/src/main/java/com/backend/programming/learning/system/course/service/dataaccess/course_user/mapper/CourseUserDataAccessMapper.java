@@ -20,12 +20,16 @@ public class CourseUserDataAccessMapper {
     public CourseUserEntity courseUserToCourseUserEntity(CourseUser courseUser) {
         return CourseUserEntity.builder()
                 .id(courseUser.getId().getValue())
+                .user(userDataAccessMapper.userToUserEntity(courseUser.user))
+                .course(courseDataAccessMapper.courseToCourseEntity(courseUser.course))
                 .build();
     }
 
     public CourseUser courseUserEntityToCourseUser(CourseUserEntity courseUserEntity) {
         return CourseUser.builder()
                 .id(new CourseUserId(courseUserEntity.getId()))
+                .user(userDataAccessMapper.userEntityToUser(courseUserEntity.getUser()))
+                .course(courseDataAccessMapper.courseEntityToCourse(courseUserEntity.getCourse()))
                 .build();
     }
 

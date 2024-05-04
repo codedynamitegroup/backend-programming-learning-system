@@ -30,7 +30,7 @@ public class UserEntity {
     private String phone;
     private String address;
     private ZonedDateTime lastLogin;
-    private Boolean is_deleted;
+    private Boolean isDeleted;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 

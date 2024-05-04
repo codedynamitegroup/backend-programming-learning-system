@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.course.service.domain.ports.outp
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
 import org.springframework.data.domain.Page;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public interface CourseRepository {
@@ -11,6 +12,8 @@ public interface CourseRepository {
     Page<Course> findAll(String search, Integer page, Integer size);
 
     Course findBy(UUID courseId);
+
+    Optional<Course> findByName(String courseName);
 
     Course findById(UUID courseId);
 
