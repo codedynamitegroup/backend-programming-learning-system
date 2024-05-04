@@ -43,6 +43,7 @@
 		<spring-cloud-dependencies.version>2021.0.8</spring-cloud-dependencies.version>
 		<spring-cloud-starter-circuitbreaker-reactor-resilience4j.version>1.0.5.RELEASE</spring-cloud-starter-circuitbreaker-reactor-resilience4j.version>
 		<micrometer-registry-prometheus.version>1.8.1</micrometer-registry-prometheus.version>
+		<logstash-logback-encoder.version>6.5</logstash-logback-encoder.version>
 	</properties>
 
 	<dependencyManagement>
@@ -323,6 +324,12 @@
 				<version>${micrometer-registry-prometheus.version}</version>
 			</dependency>
 
+			<dependency>
+				<groupId>net.logstash.logback</groupId>
+				<artifactId>logstash-logback-encoder</artifactId>
+				<version>${logstash-logback-encoder.version}</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -336,6 +343,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.logstash.logback</groupId>
+			<artifactId>logstash-logback-encoder</artifactId>
 		</dependency>
 	</dependencies>
 

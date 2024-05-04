@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.gateway.service.model.CodeAssessm
 import com.backend.programming.learning.system.gateway.service.model.CoreServiceFallbackModel;
 import com.backend.programming.learning.system.gateway.service.model.CourseServiceFallbackModel;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,9 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/fallback")
 public class FallbackController {
 
+    @Value("${server.port}")
+    private String port;
+
     @PostMapping("/core-fallback")
     public ResponseEntity<CoreServiceFallbackModel> coreServiceFallback() {
-        log.info("Returning fallback result for core-service!");
+        log.info("Returning fallback result for core-service! on port {}", port);
         return ResponseEntity.ok(CoreServiceFallbackModel.builder()
                 .fallbackMessage("Fallback result for core-service!")
                 .build());
@@ -25,7 +29,7 @@ public class FallbackController {
 
     @PostMapping("/course-fallback")
     public ResponseEntity<CourseServiceFallbackModel> courseServiceFallback() {
-        log.info("Returning fallback result for course-service!");
+        log.info("Returning fallback result for course-service! on port {}", port);
         return ResponseEntity.ok(CourseServiceFallbackModel.builder()
                 .fallbackMessage("Fallback result for course-service!")
                 .build());
@@ -34,7 +38,7 @@ public class FallbackController {
 
     @PostMapping("/auth-fallback")
     public ResponseEntity<AuthServiceFallbackModel> authServiceFallback() {
-        log.info("Returning fallback result for auth-service!");
+        log.info("Returning fallback result for auth-service! on port {}", port);
         return ResponseEntity.ok(AuthServiceFallbackModel.builder()
                 .fallbackMessage("Fallback result for auth-service!")
                 .build());
@@ -42,7 +46,7 @@ public class FallbackController {
 
     @PostMapping("/code-assessment-fallback")
     public ResponseEntity<CodeAssessmentServiceFallbackModel> codeAssessmentServiceFallback() {
-        log.info("Returning fallback result for code-assessment-service!");
+        log.info("Returning fallback result for code-assessment-service! on port {}", port);
         return ResponseEntity.ok(CodeAssessmentServiceFallbackModel.builder()
                 .fallbackMessage("Fallback result for code-assessment-service!")
                 .build());
