@@ -8,12 +8,17 @@ import com.backend.programming.learning.system.code.assessment.service.domain.en
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmissionTestCase;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
+@Slf4j
 public class CodeSubmissionDataMapper {
     public CreateCodeSubmissionResponse codeSubmissionToCreateCodeSubmissionResponse(CodeSubmission codeSubmission) {
         return CreateCodeSubmissionResponse.builder()
@@ -54,7 +59,33 @@ public class CodeSubmissionDataMapper {
                 .maxGrade(codeSubmission.getCodeQuestion().getMaxGrade())
                 .achievedGrade(codeSubmission.getGrade())
                 .description(codeSubmission.getStatusDescription())
-                .sourceCode(codeSubmission.getSourceCode() != null? Arrays.toString(Base64.getDecoder().decode(codeSubmission.getSourceCode())) : null)
+                .sourceCode(decodeBase64ToString(codeSubmission.getSourceCode()))
                 .build();
+    }
+
+    public GetCodeSubmissionResponseItem.FirstFailTestCase codeSubmissionTestCaseToFirstFailTestCase(CodeSubmissionTestCase cstc) {
+        if(cstc == null) return null;
+        return GetCodeSubmissionResponseItem.FirstFailTestCase.builder()
+                .compileOutput(decodeBase64ToString(cstc.getCompileOutput()))
+                .actualOutput(decodeBase64ToString(cstc.getActualOutput()))
+                .input(cstc.getTestCase().getInputData())
+                .output(cstc.getTestCase().getOutputData())
+                .stderr(decodeBase64ToString(cstc.getStderr()))
+                .runtime(cstc.getRunTime())
+                .memory(cstc.getMemory())
+                .message(decodeBase64ToString(cstc.getMessage()))
+                .description(cstc.getStatusDescription())
+                .build();
+    }
+    private String decodeBase64ToString(String str){
+        if(str == null) return null;
+        String nonEnterstr = str.replace("\n","");
+        try {
+            return new String(Base64.getDecoder().decode(nonEnterstr.getBytes()), StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            log.error("not base64 {}", str);
+            return str;
+        }
+
     }
 }

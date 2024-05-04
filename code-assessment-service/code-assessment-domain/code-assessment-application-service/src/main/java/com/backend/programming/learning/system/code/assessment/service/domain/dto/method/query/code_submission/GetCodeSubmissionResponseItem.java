@@ -40,6 +40,9 @@ public class GetCodeSubmissionResponseItem {
     String sourceCode;
     FirstFailTestCase firstFailTestCase;
 
+    public void setSourceCode(String sourceCode) {
+        this.sourceCode = sourceCode;
+    }
 
     @Getter
     @Builder
@@ -57,6 +60,8 @@ public class GetCodeSubmissionResponseItem {
         Float runtime;
         Float memory;
         String message;
+        @NotNull
+        String description;
     }
 
     public void setFirstFailTestCase(FirstFailTestCase firstFailTestCase) {
