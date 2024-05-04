@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class AuthServiceConfigData {
     private String coreUserRequestTopicName;
     private String courseUserRequestTopicName;
+    private String codeAssessmentUserRequestTopicName;
     private String userResponseTopicName;
 
     private String coreOrganizationRequestTopicName;

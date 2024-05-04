@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionsUpdatedEvent;
+import com.backend.programming.learning.system.code.assessment.service.domain.event.user.*;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 
 import java.util.List;
@@ -16,4 +17,11 @@ public interface CodeAssessmentDomainService {
     void increaseCodeSubmissionGradedTestCase(CodeSubmission codeSubmission);
 
     void calculateAvgTimeAndMemoryAndGrade(CodeSubmission codeSubmission, List<CodeSubmissionTestCase> cstc, String acceptedDescription);
+
+    UserCreatedSuccessEvent createdUserSuccess(User user);
+    UserCreatedFailEvent createdUserFail(User user, List<String> failureMessages);
+    UserUpdatedSuccessEvent updatedUserSuccess(User user);
+    UserUpdatedFailEvent updatedUserFail(User user, List<String> failureMessages);
+    UserDeletedSuccessEvent deletedUserSuccess(User user);
+    UserDeletedFailEvent deletedUserFail(User user, List<String> failureMessages);
 }

@@ -40,8 +40,10 @@ public class UserEventKafkaPublisher implements UserRequestMessagePublisher {
         String requestTopicName;
         if (serviceName.equals(ServiceName.CORE_SERVICE)) {
             requestTopicName = authServiceConfigData.getCoreUserRequestTopicName();
-        } else {
+        } else if (serviceName.equals(ServiceName.COURSE_SERVICE)){
             requestTopicName = authServiceConfigData.getCourseUserRequestTopicName();
+        } else {
+            requestTopicName = authServiceConfigData.getCodeAssessmentUserRequestTopicName();
         }
         log.info("Received UserOutboxMessage for user id: {} and saga id: {}", userEventPayload.getUserId(), sagaId);
 
