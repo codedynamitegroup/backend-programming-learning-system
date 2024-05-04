@@ -5,6 +5,7 @@ import lombok.Builder;
 
 import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -36,6 +37,8 @@ public record CreateExamCommand(
         @NotNull(message = "Exam shuffle questions is required")
         Boolean shuffleQuestions,
         @NotNull(message = "Exam grade method is required")
-        String gradeMethod
+        String gradeMethod,
+        @NotNull(message = "Question ids are required")
+        List<UUID> questionIds
 ) {
 }

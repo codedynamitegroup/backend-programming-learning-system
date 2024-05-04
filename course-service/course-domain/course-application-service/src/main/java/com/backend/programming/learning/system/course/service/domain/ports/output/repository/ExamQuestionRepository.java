@@ -11,4 +11,6 @@ public interface ExamQuestionRepository {
     void assignExamToQuestions(List<ExamQuestion> examQuestions);
 
     void deleteByExamIdAndQuestionIdIn(UUID examId, List<UUID> questionIds);
+
+    void deleteByExamId(UUID value);
 }

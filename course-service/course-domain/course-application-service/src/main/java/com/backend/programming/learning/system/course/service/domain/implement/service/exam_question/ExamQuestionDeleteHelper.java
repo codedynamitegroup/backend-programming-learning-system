@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.CreateExamQuestionCommand;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamQuestionRepository;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,11 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ExamQuestionDeleteHelper {
     private final ExamQuestionRepository examQuestionRepository;
+
+    public void deleteByExamId(ExamId examId){
+        examQuestionRepository.deleteByExamId(examId.getValue());
+    }
+
     public void unAssignExamToQuestions(CreateExamQuestionCommand createExamQuestionCommand) {
         log.info("Un-assigning exam to question");
         examQuestionRepository.deleteByExamIdAndQuestionIdIn(

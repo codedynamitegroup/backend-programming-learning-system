@@ -12,4 +12,6 @@ public interface ExamQuestionJpaRepository extends JpaRepository<ExamQuestionEnt
     Optional<ExamQuestionEntity> findById(UUID id);
 
     void deleteByExamIdAndQuestionIdIn(UUID examId, List<UUID> questionIds);
+
+    void deleteAllByExamId(UUID examId);
 }
