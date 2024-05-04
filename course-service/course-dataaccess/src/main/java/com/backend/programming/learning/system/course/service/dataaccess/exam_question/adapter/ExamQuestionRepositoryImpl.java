@@ -33,4 +33,9 @@ public class ExamQuestionRepositoryImpl implements ExamQuestionRepository {
     public void deleteByExamIdAndQuestionIdIn(UUID examId, List<UUID> questionIds) {
         examQuestionJpaRepository.deleteByExamIdAndQuestionIdIn(examId, questionIds);
     }
+
+    @Override
+    public void deleteByExamId(UUID examId) {
+        examQuestionJpaRepository.deleteAllByExamId(examId);
+    }
 }
