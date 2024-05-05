@@ -9,6 +9,7 @@ import java.util.UUID;
 public interface QtypeCodeQuestionRepository {
     QtypeCodeQuestion saveQtypeCodeQuestion(QtypeCodeQuestion qtypeCodeQuestion);
     Optional<QtypeCodeQuestion> findQtypeCodeQuestion(UUID qtCodeQuestionId);
+    Optional<QtypeCodeQuestion> findQtypeCodeQuestionByQuestionId(UUID questionId);
     List<QtypeCodeQuestion> findAllQtypeCodeQuestions();
     UUID getId(UUID questionId);
     void updateQtypeCodeQuestion(QtypeCodeQuestion qtypeCodeQuestion);

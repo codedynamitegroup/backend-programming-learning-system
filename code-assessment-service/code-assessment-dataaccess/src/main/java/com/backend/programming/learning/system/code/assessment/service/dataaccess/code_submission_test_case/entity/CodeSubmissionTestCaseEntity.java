@@ -23,15 +23,18 @@ public class CodeSubmissionTestCaseEntity {
     @JoinColumn(name="test_case_id", referencedColumnName = "id")
     TestCaseEntity testCase;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="code_submission_id", referencedColumnName = "id")
     CodeSubmissionEntity codeSubmission;
 
     String actualOutput;
     String compileOutput;
+    String message;
+    String stderr;
+    String statusDescription;
     Float runtime;
     Float memory;
-    Boolean passed;
+//    Boolean passed;
     String judgeToken;
 
     @Override

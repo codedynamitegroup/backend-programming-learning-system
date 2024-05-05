@@ -1,111 +1,61 @@
 package com.backend.programming.learning.system.course.service.messaging.mapper;
 
-import com.backend.programming.learning.system.course.service.domain.dto.method.message.organization.OrganizationCreateRequest;
-import com.backend.programming.learning.system.course.service.domain.dto.method.message.organization.OrganizationDeleteRequest;
-import com.backend.programming.learning.system.course.service.domain.dto.method.message.organization.OrganizationUpdateRequest;
-import com.backend.programming.learning.system.course.service.domain.event.organization.*;
-import com.backend.programming.learning.system.kafka.auth.avro.model.organization.*;
+import com.backend.programming.learning.system.course.service.domain.dto.method.message.organization.OrganizationRequest;
+import com.backend.programming.learning.system.course.service.domain.outbox.model.organization.OrganizationEventPayload;
+import com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState;
+import com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationRequestAvroModel;
+import com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseAvroModel;
+import com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
 @Component
 public class OrganizationMessagingDataMapper {
+    public OrganizationRequest organizationCreatedRequestAvroModelToOrganizationRequest(OrganizationRequestAvroModel organizationRequestAvroModel) {
+        return OrganizationRequest.builder()
+                .id(organizationRequestAvroModel.getId())
+                .sagaId(organizationRequestAvroModel.getSagaId())
+                .organizationId(organizationRequestAvroModel.getOrganizationId())
+                .name(organizationRequestAvroModel.getName())
+                .description(organizationRequestAvroModel.getDescription())
+                .createdAt(organizationRequestAvroModel.getCreatedAt())
+                .updatedAt(organizationRequestAvroModel.getUpdatedAt())
+                .isDeleted(organizationRequestAvroModel.getIsDeleted())
+                .build();
+    }
 
-    public OrganizationResponseAvroModel organizationCreatedSuccessEventToOrganizationResponseAvroModel(OrganizationCreatedSuccessEvent organizationCreatedSuccessEvent) {
+    public OrganizationRequest organizationUpdatedRequestAvroModelToOrganizationRequest(OrganizationRequestAvroModel organizationRequestAvroModel) {
+        return OrganizationRequest.builder()
+                .id(organizationRequestAvroModel.getId())
+                .sagaId(organizationRequestAvroModel.getSagaId())
+                .organizationId(organizationRequestAvroModel.getOrganizationId())
+                .name(organizationRequestAvroModel.getName())
+                .description(organizationRequestAvroModel.getDescription())
+                .apiKey(organizationRequestAvroModel.getApiKey())
+                .moodleUrl(organizationRequestAvroModel.getMoodleUrl())
+                .updatedAt(organizationRequestAvroModel.getUpdatedAt())
+                .build();
+    }
+
+    public OrganizationRequest organizationDeletedRequestAvroModelToOrganizationRequest(OrganizationRequestAvroModel organizationRequestAvroModel) {
+        return OrganizationRequest.builder()
+                .id(organizationRequestAvroModel.getId())
+                .sagaId(organizationRequestAvroModel.getSagaId())
+                .organizationId(organizationRequestAvroModel.getOrganizationId())
+                .isDeleted(organizationRequestAvroModel.getIsDeleted())
+                .build();
+    }
+
+    public OrganizationResponseAvroModel organizationEventPayloadToOrganizationResponseAvroModel(String sagaId, OrganizationEventPayload organizationEventPayload) {
         return OrganizationResponseAvroModel.newBuilder()
                 .setId(UUID.randomUUID().toString())
-                .setSagaId("")
-                .setOrganizationId(organizationCreatedSuccessEvent.getOrganization().getId().getValue().toString())
-                .setOrganizationResponseStatus(OrganizationResponseStatus.CREATED)
-                .setFailureMessages(organizationCreatedSuccessEvent.getFailureMessages())
-                .build();
-    }
-
-    public OrganizationResponseAvroModel organizationCreatedFailEventToOrganizationResponseAvroModel(OrganizationCreatedFailEvent organizationCreatedFailEvent) {
-        return OrganizationResponseAvroModel.newBuilder()
-                .setId(UUID.randomUUID().toString())
-                .setSagaId("")
-                .setOrganizationId(organizationCreatedFailEvent.getOrganization().getId().getValue().toString())
-                .setOrganizationResponseStatus(OrganizationResponseStatus.CREATE_FAILED)
-                .setFailureMessages(organizationCreatedFailEvent.getFailureMessages())
-                .build();
-    }
-
-    public OrganizationResponseAvroModel organizationDeletedSuccessEventToOrganizationResponseAvroModel(OrganizationDeletedSuccessEvent organizationDeletedSuccessEvent) {
-        return OrganizationResponseAvroModel.newBuilder()
-                .setId(UUID.randomUUID().toString())
-                .setSagaId("")
-                .setOrganizationId(organizationDeletedSuccessEvent.getOrganization().getId().getValue().toString())
-                .setOrganizationResponseStatus(OrganizationResponseStatus.DELETED)
-                .setFailureMessages(organizationDeletedSuccessEvent.getFailureMessages())
-                .build();
-    }
-
-    public OrganizationResponseAvroModel organizationDeletedFailEventToOrganizationResponseAvroModel(OrganizationDeletedFailEvent organizationDeletedFailEvent) {
-        return OrganizationResponseAvroModel.newBuilder()
-                .setId(UUID.randomUUID().toString())
-                .setSagaId("")
-                .setOrganizationId(organizationDeletedFailEvent.getOrganization().getId().getValue().toString())
-                .setOrganizationResponseStatus(OrganizationResponseStatus.DELETE_FAILED)
-                .setFailureMessages(organizationDeletedFailEvent.getFailureMessages())
-                .build();
-    }
-
-
-    public OrganizationResponseAvroModel organizationUpdatedSuccessEventToOrganizationResponseAvroModel(OrganizationUpdatedSuccessEvent organizationUpdatedSuccessEvent) {
-        return OrganizationResponseAvroModel.newBuilder()
-                .setId(UUID.randomUUID().toString())
-                .setSagaId("")
-                .setOrganizationId(organizationUpdatedSuccessEvent.getOrganization().getId().getValue().toString())
-                .setOrganizationResponseStatus(OrganizationResponseStatus.UPDATED)
-                .setFailureMessages(organizationUpdatedSuccessEvent.getFailureMessages())
-                .build();
-    }
-
-    public OrganizationResponseAvroModel organizationUpdatedFailEventToOrganizationResponseAvroModel(OrganizationUpdatedFailEvent organizationUpdatedFailEvent) {
-        return OrganizationResponseAvroModel.newBuilder()
-                .setId(UUID.randomUUID().toString())
-                .setSagaId("")
-                .setOrganizationId(organizationUpdatedFailEvent.getOrganization().getId().getValue().toString())
-                .setOrganizationResponseStatus(OrganizationResponseStatus.UPDATE_FAILED)
-                .setFailureMessages(organizationUpdatedFailEvent.getFailureMessages())
-                .build();
-    }
-
-    public OrganizationCreateRequest organizationCreateRequestAvroModelToOrganizationCreateRequest(OrganizationCreateRequestAvroModel organizationCreateRequestAvroModel) {
-        return OrganizationCreateRequest.builder()
-                .id(organizationCreateRequestAvroModel.getId())
-                .sagaId(organizationCreateRequestAvroModel.getSagaId())
-                .organizationId(organizationCreateRequestAvroModel.getOrganizationId())
-                .name(organizationCreateRequestAvroModel.getName())
-                .description(organizationCreateRequestAvroModel.getDescription())
-                .apiKey(organizationCreateRequestAvroModel.getApiKey())
-                .moodle_url(organizationCreateRequestAvroModel.getMoodleUrl())
-                .createdAt(organizationCreateRequestAvroModel.getCreatedAt())
-                .updatedAt(organizationCreateRequestAvroModel.getUpdatedAt())
-                .build();
-    }
-
-    public OrganizationUpdateRequest organizationUpdateRequestAvroModelToOrganizationUpdateRequest(OrganizationUpdateRequestAvroModel organizationUpdateRequestAvroModel) {
-        return OrganizationUpdateRequest.builder()
-                .id(organizationUpdateRequestAvroModel.getId())
-                .sagaId(organizationUpdateRequestAvroModel.getSagaId())
-                .organizationId(organizationUpdateRequestAvroModel.getOrganizationId())
-                .name(organizationUpdateRequestAvroModel.getName())
-                .description(organizationUpdateRequestAvroModel.getDescription())
-                .moodle_url(organizationUpdateRequestAvroModel.getMoodleUrl())
-                .apiKey(organizationUpdateRequestAvroModel.getApiKey())
-                .updatedAt(organizationUpdateRequestAvroModel.getUpdatedAt())
-                .build();
-    }
-
-    public OrganizationDeleteRequest organizationDeleteRequestAvroModelToOrganizationDeleteRequest(OrganizationDeleteRequestAvroModel organizationDeleteRequestAvroModel) {
-        return OrganizationDeleteRequest.builder()
-                .id(organizationDeleteRequestAvroModel.getId())
-                .sagaId(organizationDeleteRequestAvroModel.getSagaId())
-                .organizationId(organizationDeleteRequestAvroModel.getOrganizationId())
-                .isDeleted(organizationDeleteRequestAvroModel.getIsDeleted())
+                .setSagaId(sagaId)
+                .setOrganizationId(organizationEventPayload.getOrganizationId())
+                .setCopyState(CopyState.valueOf(organizationEventPayload.getCopyState()))
+                .setServiceName(
+                        ServiceName.valueOf(com.backend.programming.learning.system.domain.valueobject.ServiceName.COURSE_SERVICE.name()))
+                .setFailureMessages(organizationEventPayload.getFailureMessages())
                 .build();
     }
 }

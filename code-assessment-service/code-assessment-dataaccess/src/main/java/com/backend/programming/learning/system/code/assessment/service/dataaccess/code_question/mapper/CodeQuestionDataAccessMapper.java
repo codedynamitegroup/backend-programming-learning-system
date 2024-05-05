@@ -31,6 +31,7 @@ public class CodeQuestionDataAccessMapper {
                 .outputFormat(codeQuestion.getOutputFormat())
                 .constraints(codeQuestion.getConstraints())
                 .copyState(codeQuestion.getCopyState())
+                .maxGrade(codeQuestion.getMaxGrade())
                 .failureMessages(codeQuestion.getFailureMessages() != null ?
                         String.join(CodeQuestion.FAILURE_MESSAGE_DELIMITER, codeQuestion.getFailureMessages()) : "")
                 .build();
@@ -47,6 +48,7 @@ public class CodeQuestionDataAccessMapper {
                 .inputFormat(codeQuestionEntity.getInputFormat())
                 .outputFormat(codeQuestionEntity.getOutputFormat())
                 .copyState(codeQuestionEntity.getCopyState())
+                .maxGrade(codeQuestionEntity.getMaxGrade())
                 .failureMessages(codeQuestionEntity.getFailureMessages()==null || codeQuestionEntity.getFailureMessages().isEmpty() ? new ArrayList<>() :
                         new ArrayList<>(Arrays.asList(codeQuestionEntity.getFailureMessages()
                                 .split(CodeQuestion.FAILURE_MESSAGE_DELIMITER))))

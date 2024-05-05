@@ -2,10 +2,19 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetCodeSubmissionsByUserIdCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetCodeSubmissionResponseItem;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetDetailCodeSubmissionsByIdCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_submission.UpdateCodeSubmissionTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmissionTestCase;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.code_submission.CodeSubmissionDataMapper;
+import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -21,5 +30,36 @@ public class CodeSubmissionCommandHandler {
     public CreateCodeSubmissionResponse createCodeSubmission(CreateCodeSubmissionCommand createCodeSubmissionCommand) {
         CodeSubmission codeSubmission = codeSubmissionHelper.createCodeSubmission(createCodeSubmissionCommand);
         return codeSubmissionDataMapper.codeSubmissionToCreateCodeSubmissionResponse(codeSubmission);
+    }
+
+    public void handleTestCaseResult(UpdateCodeSubmissionTestCaseCommand command) {
+        CodeSubmissionTestCase codeSubmissionTestCase = codeSubmissionHelper.handleTestCaseResult(command);
+
+        //single non-query statement to prevent lost update
+        codeSubmissionHelper.increaseCodeSubmissionGradedTestCase(codeSubmissionTestCase);
+        //log
+
+        //update codeSubmission
+        codeSubmissionHelper.updateCodeSubmissionWhenAllTestCaseAssessed(codeSubmissionTestCase.getCodeSubmission().getId());
+    }
+
+    public List<GetCodeSubmissionResponseItem> getCodeSubmissionsByUserId(GetCodeSubmissionsByUserIdCommand command) {
+        List<CodeSubmission> codeSubmissions = codeSubmissionHelper.getCodeSubmissionsByUserId(command);
+        if(codeSubmissions != null){
+            List<GetCodeSubmissionResponseItem> list = codeSubmissions.stream()
+                    .map(codeSubmissionDataMapper::codeSubmissionToGetCodeSubmissionResponseItem)
+                    .toList();
+            list.forEach(item -> item.setSourceCode(null));
+            return list;
+        }
+        return List.of();
+    }
+
+    public GetCodeSubmissionResponseItem getCodeSubmissionsById(GetDetailCodeSubmissionsByIdCommand command) {
+        CodeSubmission codeSubmission = codeSubmissionHelper.getCodeSubmissionsById(command);
+        GetCodeSubmissionResponseItem item = codeSubmissionDataMapper.codeSubmissionToGetCodeSubmissionResponseItem(codeSubmission);
+        CodeSubmissionTestCase cstc = codeSubmissionHelper.findFirstNonAcceptedTestCase(new CodeSubmissionId(command.getCodeSubmissionId()));
+        item.setFirstFailTestCase(codeSubmissionDataMapper.codeSubmissionTestCaseToFirstFailTestCase(cstc));
+        return item;
     }
 }

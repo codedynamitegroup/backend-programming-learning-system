@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.auth.service.dataaccess.outbox.user.repository;
 
 import com.backend.programming.learning.system.auth.service.dataaccess.outbox.user.entity.UserOutboxEntity;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,8 +18,9 @@ public interface UserOutboxJpaRepository extends JpaRepository<UserOutboxEntity,
                                                                                  OutboxStatus outboxStatus,
                                                                                  List<SagaStatus> sagaStatus);
 
-    Optional<UserOutboxEntity> findByTypeAndSagaIdAndSagaStatusIn(String type,
+    Optional<UserOutboxEntity> findByTypeAndSagaIdAndServiceNameAndSagaStatusIn(String type,
                                                                      UUID sagaId,
+                                                                                ServiceName serviceName,
                                                                      List<SagaStatus> sagaStatus);
 
     void deleteByTypeAndOutboxStatusAndSagaStatusIn(String type,

@@ -3,13 +3,6 @@
   "name" : "QuestionRequestAvroModel",
   "namespace" : "com.backend.programming.learning.system.kafka.core.avro.model",
   "fields" : [ {
-    "name" : "answers",
-    "type" : {
-      "type" : "array",
-      "items" : "string",
-      "java-class" : "java.util.List"
-    }
-  }, {
     "name" : "createdBy",
     "logicalType" : "UUID",
     "type" : "string"

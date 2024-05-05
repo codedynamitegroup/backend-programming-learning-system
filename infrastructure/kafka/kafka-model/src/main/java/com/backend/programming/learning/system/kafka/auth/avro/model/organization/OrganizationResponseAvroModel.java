@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class OrganizationResponseAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -4736081006018162018L;
+  private static final long serialVersionUID = 4181468499279748412L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrganizationResponseAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model.organization\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"organizationId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"organizationResponseStatus\",\"type\":{\"type\":\"enum\",\"name\":\"OrganizationResponseStatus\",\"symbols\":[\"CREATED\",\"CREATE_FAILED\",\"UPDATED\",\"UPDATE_FAILED\",\"DELETED\",\"DELETE_FAILED\"]}},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrganizationResponseAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model.organization\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"organizationId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"serviceName\",\"type\":{\"type\":\"enum\",\"name\":\"ServiceName\",\"symbols\":[\"CORE_SERVICE\",\"AUTH_SERVICE\",\"COURSE_SERVICE\",\"CODE_ASSESSMENT_SERVICE\",\"BACKGROUND_SERVICE\"]}},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -76,7 +76,8 @@ public class OrganizationResponseAvroModel extends org.apache.avro.specific.Spec
   private java.lang.String id;
   private java.lang.String sagaId;
   private java.lang.String organizationId;
-  private com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseStatus organizationResponseStatus;
+  private com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName serviceName;
+  private com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState copyState;
   private java.util.List<java.lang.String> failureMessages;
 
   /**
@@ -91,14 +92,16 @@ public class OrganizationResponseAvroModel extends org.apache.avro.specific.Spec
    * @param id The new value for id
    * @param sagaId The new value for sagaId
    * @param organizationId The new value for organizationId
-   * @param organizationResponseStatus The new value for organizationResponseStatus
+   * @param serviceName The new value for serviceName
+   * @param copyState The new value for copyState
    * @param failureMessages The new value for failureMessages
    */
-  public OrganizationResponseAvroModel(java.lang.String id, java.lang.String sagaId, java.lang.String organizationId, com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseStatus organizationResponseStatus, java.util.List<java.lang.String> failureMessages) {
+  public OrganizationResponseAvroModel(java.lang.String id, java.lang.String sagaId, java.lang.String organizationId, com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName serviceName, com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState copyState, java.util.List<java.lang.String> failureMessages) {
     this.id = id;
     this.sagaId = sagaId;
     this.organizationId = organizationId;
-    this.organizationResponseStatus = organizationResponseStatus;
+    this.serviceName = serviceName;
+    this.copyState = copyState;
     this.failureMessages = failureMessages;
   }
 
@@ -115,8 +118,9 @@ public class OrganizationResponseAvroModel extends org.apache.avro.specific.Spec
     case 0: return id;
     case 1: return sagaId;
     case 2: return organizationId;
-    case 3: return organizationResponseStatus;
-    case 4: return failureMessages;
+    case 3: return serviceName;
+    case 4: return copyState;
+    case 5: return failureMessages;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -129,8 +133,9 @@ public class OrganizationResponseAvroModel extends org.apache.avro.specific.Spec
     case 0: id = value$ != null ? value$.toString() : null; break;
     case 1: sagaId = value$ != null ? value$.toString() : null; break;
     case 2: organizationId = value$ != null ? value$.toString() : null; break;
-    case 3: organizationResponseStatus = (com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseStatus)value$; break;
-    case 4: failureMessages = (java.util.List<java.lang.String>)value$; break;
+    case 3: serviceName = (com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName)value$; break;
+    case 4: copyState = (com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState)value$; break;
+    case 5: failureMessages = (java.util.List<java.lang.String>)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -187,20 +192,37 @@ public class OrganizationResponseAvroModel extends org.apache.avro.specific.Spec
   }
 
   /**
-   * Gets the value of the 'organizationResponseStatus' field.
-   * @return The value of the 'organizationResponseStatus' field.
+   * Gets the value of the 'serviceName' field.
+   * @return The value of the 'serviceName' field.
    */
-  public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseStatus getOrganizationResponseStatus() {
-    return organizationResponseStatus;
+  public com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName getServiceName() {
+    return serviceName;
   }
 
 
   /**
-   * Sets the value of the 'organizationResponseStatus' field.
+   * Sets the value of the 'serviceName' field.
    * @param value the value to set.
    */
-  public void setOrganizationResponseStatus(com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseStatus value) {
-    this.organizationResponseStatus = value;
+  public void setServiceName(com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName value) {
+    this.serviceName = value;
+  }
+
+  /**
+   * Gets the value of the 'copyState' field.
+   * @return The value of the 'copyState' field.
+   */
+  public com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState getCopyState() {
+    return copyState;
+  }
+
+
+  /**
+   * Sets the value of the 'copyState' field.
+   * @param value the value to set.
+   */
+  public void setCopyState(com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState value) {
+    this.copyState = value;
   }
 
   /**
@@ -264,7 +286,8 @@ public class OrganizationResponseAvroModel extends org.apache.avro.specific.Spec
     private java.lang.String id;
     private java.lang.String sagaId;
     private java.lang.String organizationId;
-    private com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseStatus organizationResponseStatus;
+    private com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName serviceName;
+    private com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState copyState;
     private java.util.List<java.lang.String> failureMessages;
 
     /** Creates a new Builder */
@@ -290,13 +313,17 @@ public class OrganizationResponseAvroModel extends org.apache.avro.specific.Spec
         this.organizationId = data().deepCopy(fields()[2].schema(), other.organizationId);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
-      if (isValidValue(fields()[3], other.organizationResponseStatus)) {
-        this.organizationResponseStatus = data().deepCopy(fields()[3].schema(), other.organizationResponseStatus);
+      if (isValidValue(fields()[3], other.serviceName)) {
+        this.serviceName = data().deepCopy(fields()[3].schema(), other.serviceName);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
-      if (isValidValue(fields()[4], other.failureMessages)) {
-        this.failureMessages = data().deepCopy(fields()[4].schema(), other.failureMessages);
+      if (isValidValue(fields()[4], other.copyState)) {
+        this.copyState = data().deepCopy(fields()[4].schema(), other.copyState);
         fieldSetFlags()[4] = other.fieldSetFlags()[4];
+      }
+      if (isValidValue(fields()[5], other.failureMessages)) {
+        this.failureMessages = data().deepCopy(fields()[5].schema(), other.failureMessages);
+        fieldSetFlags()[5] = other.fieldSetFlags()[5];
       }
     }
 
@@ -318,13 +345,17 @@ public class OrganizationResponseAvroModel extends org.apache.avro.specific.Spec
         this.organizationId = data().deepCopy(fields()[2].schema(), other.organizationId);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.organizationResponseStatus)) {
-        this.organizationResponseStatus = data().deepCopy(fields()[3].schema(), other.organizationResponseStatus);
+      if (isValidValue(fields()[3], other.serviceName)) {
+        this.serviceName = data().deepCopy(fields()[3].schema(), other.serviceName);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.failureMessages)) {
-        this.failureMessages = data().deepCopy(fields()[4].schema(), other.failureMessages);
+      if (isValidValue(fields()[4], other.copyState)) {
+        this.copyState = data().deepCopy(fields()[4].schema(), other.copyState);
         fieldSetFlags()[4] = true;
+      }
+      if (isValidValue(fields()[5], other.failureMessages)) {
+        this.failureMessages = data().deepCopy(fields()[5].schema(), other.failureMessages);
+        fieldSetFlags()[5] = true;
       }
     }
 
@@ -449,42 +480,82 @@ public class OrganizationResponseAvroModel extends org.apache.avro.specific.Spec
     }
 
     /**
-      * Gets the value of the 'organizationResponseStatus' field.
+      * Gets the value of the 'serviceName' field.
       * @return The value.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseStatus getOrganizationResponseStatus() {
-      return organizationResponseStatus;
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName getServiceName() {
+      return serviceName;
     }
 
 
     /**
-      * Sets the value of the 'organizationResponseStatus' field.
-      * @param value The value of 'organizationResponseStatus'.
+      * Sets the value of the 'serviceName' field.
+      * @param value The value of 'serviceName'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseAvroModel.Builder setOrganizationResponseStatus(com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseStatus value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseAvroModel.Builder setServiceName(com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName value) {
       validate(fields()[3], value);
-      this.organizationResponseStatus = value;
+      this.serviceName = value;
       fieldSetFlags()[3] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'organizationResponseStatus' field has been set.
-      * @return True if the 'organizationResponseStatus' field has been set, false otherwise.
+      * Checks whether the 'serviceName' field has been set.
+      * @return True if the 'serviceName' field has been set, false otherwise.
       */
-    public boolean hasOrganizationResponseStatus() {
+    public boolean hasServiceName() {
       return fieldSetFlags()[3];
     }
 
 
     /**
-      * Clears the value of the 'organizationResponseStatus' field.
+      * Clears the value of the 'serviceName' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseAvroModel.Builder clearOrganizationResponseStatus() {
-      organizationResponseStatus = null;
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseAvroModel.Builder clearServiceName() {
+      serviceName = null;
       fieldSetFlags()[3] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'copyState' field.
+      * @return The value.
+      */
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState getCopyState() {
+      return copyState;
+    }
+
+
+    /**
+      * Sets the value of the 'copyState' field.
+      * @param value The value of 'copyState'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseAvroModel.Builder setCopyState(com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState value) {
+      validate(fields()[4], value);
+      this.copyState = value;
+      fieldSetFlags()[4] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'copyState' field has been set.
+      * @return True if the 'copyState' field has been set, false otherwise.
+      */
+    public boolean hasCopyState() {
+      return fieldSetFlags()[4];
+    }
+
+
+    /**
+      * Clears the value of the 'copyState' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseAvroModel.Builder clearCopyState() {
+      copyState = null;
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -503,9 +574,9 @@ public class OrganizationResponseAvroModel extends org.apache.avro.specific.Spec
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseAvroModel.Builder setFailureMessages(java.util.List<java.lang.String> value) {
-      validate(fields()[4], value);
+      validate(fields()[5], value);
       this.failureMessages = value;
-      fieldSetFlags()[4] = true;
+      fieldSetFlags()[5] = true;
       return this;
     }
 
@@ -514,7 +585,7 @@ public class OrganizationResponseAvroModel extends org.apache.avro.specific.Spec
       * @return True if the 'failureMessages' field has been set, false otherwise.
       */
     public boolean hasFailureMessages() {
-      return fieldSetFlags()[4];
+      return fieldSetFlags()[5];
     }
 
 
@@ -524,7 +595,7 @@ public class OrganizationResponseAvroModel extends org.apache.avro.specific.Spec
       */
     public com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseAvroModel.Builder clearFailureMessages() {
       failureMessages = null;
-      fieldSetFlags()[4] = false;
+      fieldSetFlags()[5] = false;
       return this;
     }
 
@@ -536,8 +607,9 @@ public class OrganizationResponseAvroModel extends org.apache.avro.specific.Spec
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.String) defaultValue(fields()[0]);
         record.sagaId = fieldSetFlags()[1] ? this.sagaId : (java.lang.String) defaultValue(fields()[1]);
         record.organizationId = fieldSetFlags()[2] ? this.organizationId : (java.lang.String) defaultValue(fields()[2]);
-        record.organizationResponseStatus = fieldSetFlags()[3] ? this.organizationResponseStatus : (com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseStatus) defaultValue(fields()[3]);
-        record.failureMessages = fieldSetFlags()[4] ? this.failureMessages : (java.util.List<java.lang.String>) defaultValue(fields()[4]);
+        record.serviceName = fieldSetFlags()[3] ? this.serviceName : (com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName) defaultValue(fields()[3]);
+        record.copyState = fieldSetFlags()[4] ? this.copyState : (com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState) defaultValue(fields()[4]);
+        record.failureMessages = fieldSetFlags()[5] ? this.failureMessages : (java.util.List<java.lang.String>) defaultValue(fields()[5]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -576,7 +648,9 @@ public class OrganizationResponseAvroModel extends org.apache.avro.specific.Spec
 
     out.writeString(this.organizationId);
 
-    out.writeEnum(this.organizationResponseStatus.ordinal());
+    out.writeEnum(this.serviceName.ordinal());
+
+    out.writeEnum(this.copyState.ordinal());
 
     long size0 = this.failureMessages.size();
     out.writeArrayStart();
@@ -604,7 +678,9 @@ public class OrganizationResponseAvroModel extends org.apache.avro.specific.Spec
 
       this.organizationId = in.readString();
 
-      this.organizationResponseStatus = com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseStatus.values()[in.readEnum()];
+      this.serviceName = com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName.values()[in.readEnum()];
+
+      this.copyState = com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState.values()[in.readEnum()];
 
       long size0 = in.readArrayStart();
       java.util.List<java.lang.String> a0 = this.failureMessages;
@@ -622,7 +698,7 @@ public class OrganizationResponseAvroModel extends org.apache.avro.specific.Spec
       }
 
     } else {
-      for (int i = 0; i < 5; i++) {
+      for (int i = 0; i < 6; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           this.id = in.readString();
@@ -637,10 +713,14 @@ public class OrganizationResponseAvroModel extends org.apache.avro.specific.Spec
           break;
 
         case 3:
-          this.organizationResponseStatus = com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseStatus.values()[in.readEnum()];
+          this.serviceName = com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName.values()[in.readEnum()];
           break;
 
         case 4:
+          this.copyState = com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState.values()[in.readEnum()];
+          break;
+
+        case 5:
           long size0 = in.readArrayStart();
           java.util.List<java.lang.String> a0 = this.failureMessages;
           if (a0 == null) {

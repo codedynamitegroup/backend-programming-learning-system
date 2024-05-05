@@ -21,16 +21,6 @@ public class OrganizationDataAccessMapper {
                 .build();
     }
 
-    public Organization organizationResponseEntityToOrganization(OrganizationResponseEntity organizationResponseEntity) {
-        return Organization.builder()
-                .id(new OrganizationId(organizationResponseEntity.getOrganizationId()))
-                .description(organizationResponseEntity.getDescription())
-                .name(organizationResponseEntity.getName())
-                .apiKey(organizationResponseEntity.getApiKey())
-                .moodleUrl(organizationResponseEntity.getMoodleUrl())
-                .build();
-    }
-
     public List<OrganizationResponseEntity> organizationEntityListToOrganizationList(List<OrganizationEntity> organizationEntityList) {
     return organizationEntityList.stream().map(this::organizationEntityToOrganizationResponseEntity).toList();
     }
@@ -42,6 +32,9 @@ public class OrganizationDataAccessMapper {
                 .description(organization.getDescription())
                 .apiKey(organization.getApiKey())
                 .moodleUrl(organization.getMoodleUrl())
+                .createdAt(organization.getCreatedAt())
+                .updatedAt(organization.getUpdatedAt())
+                .isDeleted(organization.getDeleted())
                 .build();
     }
 
@@ -52,6 +45,9 @@ public class OrganizationDataAccessMapper {
                 .description(organization.getDescription())
                 .apiKey(organization.getApiKey())
                 .moodleUrl(organization.getMoodleUrl())
+                .createdAt(organization.getCreatedAt())
+                .updatedAt(organization.getUpdatedAt())
+                .isDeleted(organization.getIsDeleted())
                 .build();
     }
 }

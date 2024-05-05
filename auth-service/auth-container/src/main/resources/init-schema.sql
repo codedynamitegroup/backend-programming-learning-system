@@ -16,6 +16,14 @@ CREATE TYPE CopyState AS ENUM (
     'UPDATE_FAILED',
     'CREATE_FAILED');
 
+DROP TYPE IF EXISTS service_name;
+CREATE TYPE service_name AS ENUM (
+    'CORE_SERVICE',
+    'AUTH_SERVICE',
+    'COURSE_SERVICE',
+    'CODE_ASSESSMENT_SERVICE',
+    'BACKGROUND_SERVICE');
+
 DROP TYPE IF EXISTS saga_status;
 CREATE TYPE saga_status AS ENUM ('STARTED', 'FAILED', 'SUCCEEDED', 'PROCESSING', 'COMPENSATING', 'COMPENSATED');
 
@@ -37,7 +45,6 @@ CREATE TABLE "public".main_user (
 	avatar_url text,
 	refresh_token character varying,
 	last_ip character varying,
-	copy_state CopyState,
 	last_login TIMESTAMP WITH TIME ZONE,
 	created_at TIMESTAMP WITH TIME ZONE,
 	updated_at TIMESTAMP WITH TIME ZONE,
@@ -56,7 +63,6 @@ CREATE TABLE "public".main_organization (
 	address character varying,
 	api_key character varying,
 	moodle_url text,
-	copy_state CopyState,
 	created_at TIMESTAMP WITH TIME ZONE,
 	updated_at TIMESTAMP WITH TIME ZONE,
 	updated_by uuid,
@@ -119,6 +125,7 @@ CREATE TABLE "public".user_outbox
     payload jsonb NOT NULL,
     outbox_status outbox_status NOT NULL,
     saga_status saga_status NOT NULL,
+    service_name service_name NOT NULL,
     copy_state CopyState NOT NULL,
     version integer NOT NULL,
     CONSTRAINT user_outbox_pkey PRIMARY KEY (id)
@@ -130,7 +137,7 @@ CREATE INDEX "user_outbox_saga_status"
 
 CREATE UNIQUE INDEX "user_outbox_saga_id"
     ON "public".user_outbox
-    (type, saga_id, saga_status);
+    (type, saga_id, saga_status, service_name);
 
 DROP TABLE IF EXISTS "public".organization_outbox CASCADE;
 
@@ -144,6 +151,7 @@ CREATE TABLE "public".organization_outbox
     payload jsonb NOT NULL,
     outbox_status outbox_status NOT NULL,
     saga_status saga_status NOT NULL,
+    service_name service_name NOT NULL,
     copy_state CopyState NOT NULL,
     version integer NOT NULL,
     CONSTRAINT organization_outbox_pkey PRIMARY KEY (id)
@@ -155,4 +163,4 @@ CREATE INDEX "organization_outbox_saga_status"
 
 CREATE UNIQUE INDEX "organization_outbox_saga_id"
     ON "public".organization_outbox
-    (type, saga_id, saga_status);
+    (type, saga_id, saga_status, service_name);

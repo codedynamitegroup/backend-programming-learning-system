@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.course.service.messaging.publish
 import com.backend.programming.learning.system.course.service.config.CourseServiceConfigData;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.calendarevent.CalendarEventUpdateEventPayload;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.calendarevent.CalendarEventUpdateOutboxMessage;
-import com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.question.calendarevent.CalendarEventUpdatedMessagePublisher;
+import com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.calendarevent.CalendarEventUpdatedMessagePublisher;
 import com.backend.programming.learning.system.course.service.messaging.mapper.CalendarEventMessagingDataMapper;
 import com.backend.programming.learning.system.kafka.core.calendar.event.avro.model.CalendarEventUpdateResponseAvroModel;
 import com.backend.programming.learning.system.kafka.producer.KafkaMessageHelper;

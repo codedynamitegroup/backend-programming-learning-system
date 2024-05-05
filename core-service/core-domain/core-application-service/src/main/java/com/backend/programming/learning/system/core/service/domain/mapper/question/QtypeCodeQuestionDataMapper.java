@@ -50,6 +50,9 @@ public class QtypeCodeQuestionDataMapper {
         return QtypeCodeQuestion.builder()
                 .question(question)
                 .dslTemplate(createQtypeCodeQuestionCommand.getDslTemplate())
+                .problemStatement(createQtypeCodeQuestionCommand.getProblemStatement())
+                .name(createQtypeCodeQuestionCommand.getName())
+                .maxGrade(createQtypeCodeQuestionCommand.getMaxGrade())
                 .build();
     }
 
@@ -66,13 +69,18 @@ public class QtypeCodeQuestionDataMapper {
     }
 
     public QtypeCodeQuestion updateQtypeCodeQuestionCommandToQtypeCodeQuestion(UpdateQtypeCodeQuestionCommand updateQtypeCodeQuestionCommand,
+                                                                               Question prevQuestion,
                                                                                QtypeCodeQuestion qtypeCodeQuestion) {
 
         return QtypeCodeQuestion.builder()
                 .id(new QtypeCodeQuestionId(updateQtypeCodeQuestionCommand.getQtCodeQuestionId()))
                 .dslTemplate(updateQtypeCodeQuestionCommand.getDslTemplate())
+                .problemStatement(updateQtypeCodeQuestionCommand.getProblemStatement())
+                .name(updateQtypeCodeQuestionCommand.getName())
+                .maxGrade(updateQtypeCodeQuestionCommand.getMaxGrade())
                 .question(questionDataMapper
                         .updateQuestionEntityToQuestion(updateQtypeCodeQuestionCommand.getQuestion(),
+                                prevQuestion,
                                 qtypeCodeQuestion.getQuestion().getId(),
                                 qtypeCodeQuestion.getQuestion().getOrganization(),
                                 qtypeCodeQuestion.getQuestion().getCreatedBy(),

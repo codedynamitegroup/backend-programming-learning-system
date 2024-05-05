@@ -10,19 +10,13 @@ import org.springframework.context.annotation.Configuration;
 public class CourseServiceConfigData {
     private String questionRequestTopicName;
     private String questionResponseTopicName;
-
-    private String organizationResponseTopicName;
   
     private String calendarEventUpdateRequestTopicName;
     private String calendarEventUpdateResponseTopicName;
 
-    private String userRequestTopicName;
+    private String courseUserRequestTopicName;
     private String userResponseTopicName;
-    private String userCreateRequestTopicName;
-    private String userUpdateRequestTopicName;
-    private String userDeleteRequestTopicName;
-    private String userCreateResponseTopicName;
-    private String userUpdateResponseTopicName;
-    private String userDeleteResponseTopicName;
 
+    private String courseOrganizationRequestTopicName;
+    private String organizationResponseTopicName;
 }

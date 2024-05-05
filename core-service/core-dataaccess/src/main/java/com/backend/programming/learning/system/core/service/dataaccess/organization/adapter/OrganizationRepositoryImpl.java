@@ -25,4 +25,11 @@ public class OrganizationRepositoryImpl implements OrganizationRepository {
         return organizationJpaRepository.findById(organizationId)
                 .map(organizationDataAccessMapper::organizationEntityToOrganization);
     }
+
+    @Override
+    public Organization save(Organization organization) {
+        return organizationDataAccessMapper
+                .organizationEntityToOrganization(organizationJpaRepository
+                        .save(organizationDataAccessMapper.organizationToOrganizationEntity(organization)));
+    }
 }

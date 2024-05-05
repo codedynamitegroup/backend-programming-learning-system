@@ -1,7 +1,8 @@
-package com.backend.programming.learning.system.course.service.domain.implement.exam;
+package com.backend.programming.learning.system.course.service.domain.implement.service.exam;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam.CreateExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam.CreateExamResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.CreateExamQuestionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.course.DeleteCourseResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.exam.DeleteExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryAllExamCommand;
@@ -11,6 +12,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.exam.UpdateExamResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.exam.ExamResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
+import com.backend.programming.learning.system.course.service.domain.implement.service.exam_question.ExamQuestionCreateHelper;
+import com.backend.programming.learning.system.course.service.domain.implement.service.exam_question.ExamQuestionDeleteHelper;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam.ExamDataMapper;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import lombok.RequiredArgsConstructor;
@@ -35,8 +38,17 @@ public class ExamCommandHandler {
     private final ExamDeleteHelper examDeleteHelper;
     private final ExamUpdateHelper examUpdateHelper;
     private final ExamDataMapper examDataMapper;
+    private final ExamQuestionCreateHelper examQuestionCreateHelper;
+    private final ExamQuestionDeleteHelper examQuestionDeleteHelper;
+
+    @Transactional
     public CreateExamResponse createExam(CreateExamCommand createExamCommand) {
         Exam examCreated = examCreateHelper.persistExam(createExamCommand);
+        examQuestionCreateHelper.assignExamToQuestions(
+                CreateExamQuestionCommand.builder()
+                        .examId(examCreated.getId().getValue())
+                        .questionIds(createExamCommand.questionIds())
+                        .build());
         log.info("Exam is created with id: {}", examCreated.getId());
         return examDataMapper.examToCreateExamResponse(examCreated, "Exam created successfully");
     }
@@ -63,8 +75,15 @@ public class ExamCommandHandler {
         return new DeleteCourseResponse("Exam deleted successfully");
     }
 
+    @Transactional
     public UpdateExamResponse updateExam(ExamId examId, UpdateExamCommand updateExamCommand) {
         Exam exam = examUpdateHelper.updateExam(examId, updateExamCommand);
+        examQuestionDeleteHelper.deleteByExamId(examId);
+        examQuestionCreateHelper.assignExamToQuestions(
+                CreateExamQuestionCommand.builder()
+                        .examId(examId.getValue())
+                        .questionIds(updateExamCommand.questionIds())
+                        .build());
         return examDataMapper.examToUpdateExamResponse(exam, "Exam updated successfully");
     }
 }

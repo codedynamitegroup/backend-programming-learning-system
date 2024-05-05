@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.implement.organization;
+package com.backend.programming.learning.system.course.service.domain.implement.service.organization;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.organization.QueryAllOrganizationResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.Organization;

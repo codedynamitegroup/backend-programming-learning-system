@@ -14,9 +14,11 @@ import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserDeletedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedEvent;
-import com.backend.programming.learning.system.auth.service.domain.implement.saga.UserUpdateSagaHelper;
+import com.backend.programming.learning.system.auth.service.domain.implement.saga.user.UserUpdateSagaHelper;
 import com.backend.programming.learning.system.auth.service.domain.mapper.UserDataMapper;
 import com.backend.programming.learning.system.auth.service.domain.outbox.scheduler.user.UserOutboxHelper;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -56,10 +58,19 @@ public class UserCommandHandler {
 
         userOutboxHelper.saveUserOutboxMessage(
                         userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
-                        userCreatedEvent.getUser().getCopyState(),
+                        ServiceName.CORE_SERVICE,
+                        CopyState.CREATING,
+                        OutboxStatus.STARTED,
+                        userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
+                                UUID.randomUUID());
+
+        userOutboxHelper.saveUserOutboxMessage(
+                userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
+                ServiceName.COURSE_SERVICE,
+                CopyState.CREATING,
                 OutboxStatus.STARTED,
-                userSagaHelper.copyStatusToSagaStatus(userCreatedEvent.getUser().getCopyState()),
-                        UUID.randomUUID());
+                userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
+                UUID.randomUUID());
 
         return createUserResponse;
     }
@@ -84,9 +95,18 @@ public class UserCommandHandler {
 
         userOutboxHelper.saveUserOutboxMessage(
                 userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
-                userUpdatedEvent.getUser().getCopyState(),
+                ServiceName.CORE_SERVICE,
+                CopyState.UPDATING,
                 OutboxStatus.STARTED,
-                userSagaHelper.copyStatusToSagaStatus(userUpdatedEvent.getUser().getCopyState()),
+                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
+                UUID.randomUUID());
+
+        userOutboxHelper.saveUserOutboxMessage(
+                userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
+                ServiceName.COURSE_SERVICE,
+                CopyState.UPDATING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
                 UUID.randomUUID());
 
         log.info("User is updated with id: {}", userUpdatedEvent.getUser().getId().getValue());
@@ -101,10 +121,20 @@ public class UserCommandHandler {
 
         userOutboxHelper.saveUserOutboxMessage(
                 userDataMapper.userDeletedEventToUserEventPayload(userDeletedEvent),
-                userDeletedEvent.getUser().getCopyState(),
+                ServiceName.CORE_SERVICE,
+                CopyState.DELETING,
                 OutboxStatus.STARTED,
-                userSagaHelper.copyStatusToSagaStatus(userDeletedEvent.getUser().getCopyState()),
+                userSagaHelper.copyStatusToSagaStatus(CopyState.DELETING),
                 UUID.randomUUID());
+
+        userOutboxHelper.saveUserOutboxMessage(
+                userDataMapper.userDeletedEventToUserEventPayload(userDeletedEvent),
+                ServiceName.COURSE_SERVICE,
+                CopyState.DELETING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.DELETING),
+                UUID.randomUUID());
+
         return userDataMapper.deleteUserResponse(deleteUserCommand.getUserId(),
                 "User deleted successfully");
     }

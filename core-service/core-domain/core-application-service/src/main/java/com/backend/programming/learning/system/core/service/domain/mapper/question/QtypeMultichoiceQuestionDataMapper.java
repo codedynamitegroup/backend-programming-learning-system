@@ -45,8 +45,8 @@ public class QtypeMultichoiceQuestionDataMapper {
                 .toArray(QueryQtypeMultichoiceQuestionResponse[]::new));
     }
 
-    public QtypeMultiChoiceQuestion updateQtypeMultichoiceQuestionCommandToQtypeMultiChoiceQuestion(
-            UpdateQtypeMultichoiceQuestionCommand updateQtypeMultichoiceQuestionCommand,
+    public QtypeMultiChoiceQuestion updateQtypeMultichoiceQuestionCommandToQtypeMultiChoiceQuestion(UpdateQtypeMultichoiceQuestionCommand updateQtypeMultichoiceQuestionCommand,
+            Question prevQuestion,
             QtypeMultiChoiceQuestion qtypeMultiChoiceQuestion) {
         return QtypeMultiChoiceQuestion.builder()
                 .id(new QtypeMultiChoiceQuestionId(updateQtypeMultichoiceQuestionCommand.getQtMultichoiceQuestionId()))
@@ -60,6 +60,7 @@ public class QtypeMultichoiceQuestionDataMapper {
                 .showStandardInstructions(updateQtypeMultichoiceQuestionCommand.getShowStandardInstructions())
                 .question(questionDataMapper
                         .updateQuestionEntityToQuestion(updateQtypeMultichoiceQuestionCommand.getQuestion(),
+                                prevQuestion,
                                 qtypeMultiChoiceQuestion.getQuestion().getId(),
                                 qtypeMultiChoiceQuestion.getQuestion().getOrganization(),
                                 qtypeMultiChoiceQuestion.getQuestion().getCreatedBy(),

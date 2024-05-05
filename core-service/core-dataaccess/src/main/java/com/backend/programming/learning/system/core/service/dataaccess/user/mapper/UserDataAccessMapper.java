@@ -20,7 +20,6 @@ public class UserDataAccessMapper {
                 .createdAt(userEntity.getCreatedAt())
                 .updatedAt(userEntity.getUpdatedAt())
                 .isDeleted(userEntity.getIsDeleted())
-                .copyState(userEntity.getCopyState())
                 .build();
     }
 
@@ -37,7 +36,6 @@ public class UserDataAccessMapper {
                 .createdAt(user.getCreatedAt())
                 .updatedAt(user.getUpdatedAt())
                 .isDeleted(user.getDeleted())
-                .copyState(user.getCopyState())
                 .build();
     }
 }

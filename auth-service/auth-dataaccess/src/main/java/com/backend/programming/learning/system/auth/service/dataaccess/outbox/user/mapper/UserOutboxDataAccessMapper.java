@@ -18,6 +18,7 @@ public class UserOutboxDataAccessMapper {
                 .copyState(userOutboxMessage.getCopyState())
                 .sagaStatus(userOutboxMessage.getSagaStatus())
                 .outboxStatus(userOutboxMessage.getOutboxStatus())
+                .serviceName(userOutboxMessage.getServiceName())
                 .version(userOutboxMessage.getVersion())
                 .build();
     }
@@ -33,6 +34,7 @@ public class UserOutboxDataAccessMapper {
                 .copyState(userOutboxEntity.getCopyState())
                 .sagaStatus(userOutboxEntity.getSagaStatus())
                 .outboxStatus(userOutboxEntity.getOutboxStatus())
+                .serviceName(userOutboxEntity.getServiceName())
                 .version(userOutboxEntity.getVersion())
                 .build();
     }

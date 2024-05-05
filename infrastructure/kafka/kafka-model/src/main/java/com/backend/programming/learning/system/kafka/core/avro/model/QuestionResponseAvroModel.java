@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class QuestionResponseAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 1961108393110508458L;
+  private static final long serialVersionUID = 5441763810025687194L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"QuestionResponseAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.core.avro.model\",\"fields\":[{\"name\":\"answers\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"java-class\":\"java.util.List\"}},{\"name\":\"createdBy\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"defaultMark\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\",\"java-class\":\"java.math.BigDecimal\"}},{\"name\":\"difficulty\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"generalFeedback\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"organizationId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"qType\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"questionText\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"updatedBy\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"CREATE_PROPAGATING\",\"UPDATE_PROPAGATING\",\"DELETE_PROPAGATING\",\"CREATE_ROLLBACKING\",\"UPDATE_ROLLBACKING\",\"DELETE_ROLLBACKING\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"QuestionResponseAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.core.avro.model\",\"fields\":[{\"name\":\"createdBy\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"defaultMark\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\",\"java-class\":\"java.math.BigDecimal\"}},{\"name\":\"difficulty\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"generalFeedback\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"organizationId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"qType\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"questionText\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"updatedBy\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"CREATE_PROPAGATING\",\"UPDATE_PROPAGATING\",\"DELETE_PROPAGATING\",\"CREATE_ROLLBACKING\",\"UPDATE_ROLLBACKING\",\"DELETE_ROLLBACKING\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -73,7 +73,6 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
     return DECODER.decode(b);
   }
 
-  private java.util.List<java.lang.String> answers;
   private java.lang.String createdBy;
   private java.math.BigDecimal defaultMark;
   private java.lang.String difficulty;
@@ -96,7 +95,6 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
 
   /**
    * All-args constructor.
-   * @param answers The new value for answers
    * @param createdBy The new value for createdBy
    * @param defaultMark The new value for defaultMark
    * @param difficulty The new value for difficulty
@@ -110,8 +108,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
    * @param updatedBy The new value for updatedBy
    * @param copyState The new value for copyState
    */
-  public QuestionResponseAvroModel(java.util.List<java.lang.String> answers, java.lang.String createdBy, java.math.BigDecimal defaultMark, java.lang.String difficulty, java.lang.String generalFeedback, java.lang.String id, java.lang.String name, java.lang.String organizationId, java.lang.String qType, java.lang.String questionText, java.lang.String sagaId, java.lang.String updatedBy, com.backend.programming.learning.system.kafka.core.avro.model.CopyState copyState) {
-    this.answers = answers;
+  public QuestionResponseAvroModel(java.lang.String createdBy, java.math.BigDecimal defaultMark, java.lang.String difficulty, java.lang.String generalFeedback, java.lang.String id, java.lang.String name, java.lang.String organizationId, java.lang.String qType, java.lang.String questionText, java.lang.String sagaId, java.lang.String updatedBy, com.backend.programming.learning.system.kafka.core.avro.model.CopyState copyState) {
     this.createdBy = createdBy;
     this.defaultMark = defaultMark;
     this.difficulty = difficulty;
@@ -136,19 +133,18 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
   @Override
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return answers;
-    case 1: return createdBy;
-    case 2: return defaultMark;
-    case 3: return difficulty;
-    case 4: return generalFeedback;
-    case 5: return id;
-    case 6: return name;
-    case 7: return organizationId;
-    case 8: return qType;
-    case 9: return questionText;
-    case 10: return sagaId;
-    case 11: return updatedBy;
-    case 12: return copyState;
+    case 0: return createdBy;
+    case 1: return defaultMark;
+    case 2: return difficulty;
+    case 3: return generalFeedback;
+    case 4: return id;
+    case 5: return name;
+    case 6: return organizationId;
+    case 7: return qType;
+    case 8: return questionText;
+    case 9: return sagaId;
+    case 10: return updatedBy;
+    case 11: return copyState;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -158,38 +154,20 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: answers = (java.util.List<java.lang.String>)value$; break;
-    case 1: createdBy = value$ != null ? value$.toString() : null; break;
-    case 2: defaultMark = (java.math.BigDecimal)value$; break;
-    case 3: difficulty = value$ != null ? value$.toString() : null; break;
-    case 4: generalFeedback = value$ != null ? value$.toString() : null; break;
-    case 5: id = value$ != null ? value$.toString() : null; break;
-    case 6: name = value$ != null ? value$.toString() : null; break;
-    case 7: organizationId = value$ != null ? value$.toString() : null; break;
-    case 8: qType = value$ != null ? value$.toString() : null; break;
-    case 9: questionText = value$ != null ? value$.toString() : null; break;
-    case 10: sagaId = value$ != null ? value$.toString() : null; break;
-    case 11: updatedBy = value$ != null ? value$.toString() : null; break;
-    case 12: copyState = (com.backend.programming.learning.system.kafka.core.avro.model.CopyState)value$; break;
+    case 0: createdBy = value$ != null ? value$.toString() : null; break;
+    case 1: defaultMark = (java.math.BigDecimal)value$; break;
+    case 2: difficulty = value$ != null ? value$.toString() : null; break;
+    case 3: generalFeedback = value$ != null ? value$.toString() : null; break;
+    case 4: id = value$ != null ? value$.toString() : null; break;
+    case 5: name = value$ != null ? value$.toString() : null; break;
+    case 6: organizationId = value$ != null ? value$.toString() : null; break;
+    case 7: qType = value$ != null ? value$.toString() : null; break;
+    case 8: questionText = value$ != null ? value$.toString() : null; break;
+    case 9: sagaId = value$ != null ? value$.toString() : null; break;
+    case 10: updatedBy = value$ != null ? value$.toString() : null; break;
+    case 11: copyState = (com.backend.programming.learning.system.kafka.core.avro.model.CopyState)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
-  }
-
-  /**
-   * Gets the value of the 'answers' field.
-   * @return The value of the 'answers' field.
-   */
-  public java.util.List<java.lang.String> getAnswers() {
-    return answers;
-  }
-
-
-  /**
-   * Sets the value of the 'answers' field.
-   * @param value the value to set.
-   */
-  public void setAnswers(java.util.List<java.lang.String> value) {
-    this.answers = value;
   }
 
   /**
@@ -437,7 +415,6 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<QuestionResponseAvroModel>
     implements org.apache.avro.data.RecordBuilder<QuestionResponseAvroModel> {
 
-    private java.util.List<java.lang.String> answers;
     private java.lang.String createdBy;
     private java.math.BigDecimal defaultMark;
     private java.lang.String difficulty;
@@ -462,57 +439,53 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
      */
     private Builder(com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.answers)) {
-        this.answers = data().deepCopy(fields()[0].schema(), other.answers);
+      if (isValidValue(fields()[0], other.createdBy)) {
+        this.createdBy = data().deepCopy(fields()[0].schema(), other.createdBy);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
-      if (isValidValue(fields()[1], other.createdBy)) {
-        this.createdBy = data().deepCopy(fields()[1].schema(), other.createdBy);
+      if (isValidValue(fields()[1], other.defaultMark)) {
+        this.defaultMark = data().deepCopy(fields()[1].schema(), other.defaultMark);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.defaultMark)) {
-        this.defaultMark = data().deepCopy(fields()[2].schema(), other.defaultMark);
+      if (isValidValue(fields()[2], other.difficulty)) {
+        this.difficulty = data().deepCopy(fields()[2].schema(), other.difficulty);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
-      if (isValidValue(fields()[3], other.difficulty)) {
-        this.difficulty = data().deepCopy(fields()[3].schema(), other.difficulty);
+      if (isValidValue(fields()[3], other.generalFeedback)) {
+        this.generalFeedback = data().deepCopy(fields()[3].schema(), other.generalFeedback);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
-      if (isValidValue(fields()[4], other.generalFeedback)) {
-        this.generalFeedback = data().deepCopy(fields()[4].schema(), other.generalFeedback);
+      if (isValidValue(fields()[4], other.id)) {
+        this.id = data().deepCopy(fields()[4].schema(), other.id);
         fieldSetFlags()[4] = other.fieldSetFlags()[4];
       }
-      if (isValidValue(fields()[5], other.id)) {
-        this.id = data().deepCopy(fields()[5].schema(), other.id);
+      if (isValidValue(fields()[5], other.name)) {
+        this.name = data().deepCopy(fields()[5].schema(), other.name);
         fieldSetFlags()[5] = other.fieldSetFlags()[5];
       }
-      if (isValidValue(fields()[6], other.name)) {
-        this.name = data().deepCopy(fields()[6].schema(), other.name);
+      if (isValidValue(fields()[6], other.organizationId)) {
+        this.organizationId = data().deepCopy(fields()[6].schema(), other.organizationId);
         fieldSetFlags()[6] = other.fieldSetFlags()[6];
       }
-      if (isValidValue(fields()[7], other.organizationId)) {
-        this.organizationId = data().deepCopy(fields()[7].schema(), other.organizationId);
+      if (isValidValue(fields()[7], other.qType)) {
+        this.qType = data().deepCopy(fields()[7].schema(), other.qType);
         fieldSetFlags()[7] = other.fieldSetFlags()[7];
       }
-      if (isValidValue(fields()[8], other.qType)) {
-        this.qType = data().deepCopy(fields()[8].schema(), other.qType);
+      if (isValidValue(fields()[8], other.questionText)) {
+        this.questionText = data().deepCopy(fields()[8].schema(), other.questionText);
         fieldSetFlags()[8] = other.fieldSetFlags()[8];
       }
-      if (isValidValue(fields()[9], other.questionText)) {
-        this.questionText = data().deepCopy(fields()[9].schema(), other.questionText);
+      if (isValidValue(fields()[9], other.sagaId)) {
+        this.sagaId = data().deepCopy(fields()[9].schema(), other.sagaId);
         fieldSetFlags()[9] = other.fieldSetFlags()[9];
       }
-      if (isValidValue(fields()[10], other.sagaId)) {
-        this.sagaId = data().deepCopy(fields()[10].schema(), other.sagaId);
+      if (isValidValue(fields()[10], other.updatedBy)) {
+        this.updatedBy = data().deepCopy(fields()[10].schema(), other.updatedBy);
         fieldSetFlags()[10] = other.fieldSetFlags()[10];
       }
-      if (isValidValue(fields()[11], other.updatedBy)) {
-        this.updatedBy = data().deepCopy(fields()[11].schema(), other.updatedBy);
+      if (isValidValue(fields()[11], other.copyState)) {
+        this.copyState = data().deepCopy(fields()[11].schema(), other.copyState);
         fieldSetFlags()[11] = other.fieldSetFlags()[11];
-      }
-      if (isValidValue(fields()[12], other.copyState)) {
-        this.copyState = data().deepCopy(fields()[12].schema(), other.copyState);
-        fieldSetFlags()[12] = other.fieldSetFlags()[12];
       }
     }
 
@@ -522,98 +495,54 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
      */
     private Builder(com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel other) {
       super(SCHEMA$, MODEL$);
-      if (isValidValue(fields()[0], other.answers)) {
-        this.answers = data().deepCopy(fields()[0].schema(), other.answers);
+      if (isValidValue(fields()[0], other.createdBy)) {
+        this.createdBy = data().deepCopy(fields()[0].schema(), other.createdBy);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.createdBy)) {
-        this.createdBy = data().deepCopy(fields()[1].schema(), other.createdBy);
+      if (isValidValue(fields()[1], other.defaultMark)) {
+        this.defaultMark = data().deepCopy(fields()[1].schema(), other.defaultMark);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.defaultMark)) {
-        this.defaultMark = data().deepCopy(fields()[2].schema(), other.defaultMark);
+      if (isValidValue(fields()[2], other.difficulty)) {
+        this.difficulty = data().deepCopy(fields()[2].schema(), other.difficulty);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.difficulty)) {
-        this.difficulty = data().deepCopy(fields()[3].schema(), other.difficulty);
+      if (isValidValue(fields()[3], other.generalFeedback)) {
+        this.generalFeedback = data().deepCopy(fields()[3].schema(), other.generalFeedback);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.generalFeedback)) {
-        this.generalFeedback = data().deepCopy(fields()[4].schema(), other.generalFeedback);
+      if (isValidValue(fields()[4], other.id)) {
+        this.id = data().deepCopy(fields()[4].schema(), other.id);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.id)) {
-        this.id = data().deepCopy(fields()[5].schema(), other.id);
+      if (isValidValue(fields()[5], other.name)) {
+        this.name = data().deepCopy(fields()[5].schema(), other.name);
         fieldSetFlags()[5] = true;
       }
-      if (isValidValue(fields()[6], other.name)) {
-        this.name = data().deepCopy(fields()[6].schema(), other.name);
+      if (isValidValue(fields()[6], other.organizationId)) {
+        this.organizationId = data().deepCopy(fields()[6].schema(), other.organizationId);
         fieldSetFlags()[6] = true;
       }
-      if (isValidValue(fields()[7], other.organizationId)) {
-        this.organizationId = data().deepCopy(fields()[7].schema(), other.organizationId);
+      if (isValidValue(fields()[7], other.qType)) {
+        this.qType = data().deepCopy(fields()[7].schema(), other.qType);
         fieldSetFlags()[7] = true;
       }
-      if (isValidValue(fields()[8], other.qType)) {
-        this.qType = data().deepCopy(fields()[8].schema(), other.qType);
+      if (isValidValue(fields()[8], other.questionText)) {
+        this.questionText = data().deepCopy(fields()[8].schema(), other.questionText);
         fieldSetFlags()[8] = true;
       }
-      if (isValidValue(fields()[9], other.questionText)) {
-        this.questionText = data().deepCopy(fields()[9].schema(), other.questionText);
+      if (isValidValue(fields()[9], other.sagaId)) {
+        this.sagaId = data().deepCopy(fields()[9].schema(), other.sagaId);
         fieldSetFlags()[9] = true;
       }
-      if (isValidValue(fields()[10], other.sagaId)) {
-        this.sagaId = data().deepCopy(fields()[10].schema(), other.sagaId);
+      if (isValidValue(fields()[10], other.updatedBy)) {
+        this.updatedBy = data().deepCopy(fields()[10].schema(), other.updatedBy);
         fieldSetFlags()[10] = true;
       }
-      if (isValidValue(fields()[11], other.updatedBy)) {
-        this.updatedBy = data().deepCopy(fields()[11].schema(), other.updatedBy);
+      if (isValidValue(fields()[11], other.copyState)) {
+        this.copyState = data().deepCopy(fields()[11].schema(), other.copyState);
         fieldSetFlags()[11] = true;
       }
-      if (isValidValue(fields()[12], other.copyState)) {
-        this.copyState = data().deepCopy(fields()[12].schema(), other.copyState);
-        fieldSetFlags()[12] = true;
-      }
-    }
-
-    /**
-      * Gets the value of the 'answers' field.
-      * @return The value.
-      */
-    public java.util.List<java.lang.String> getAnswers() {
-      return answers;
-    }
-
-
-    /**
-      * Sets the value of the 'answers' field.
-      * @param value The value of 'answers'.
-      * @return This builder.
-      */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder setAnswers(java.util.List<java.lang.String> value) {
-      validate(fields()[0], value);
-      this.answers = value;
-      fieldSetFlags()[0] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'answers' field has been set.
-      * @return True if the 'answers' field has been set, false otherwise.
-      */
-    public boolean hasAnswers() {
-      return fieldSetFlags()[0];
-    }
-
-
-    /**
-      * Clears the value of the 'answers' field.
-      * @return This builder.
-      */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder clearAnswers() {
-      answers = null;
-      fieldSetFlags()[0] = false;
-      return this;
     }
 
     /**
@@ -631,9 +560,9 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder setCreatedBy(java.lang.String value) {
-      validate(fields()[1], value);
+      validate(fields()[0], value);
       this.createdBy = value;
-      fieldSetFlags()[1] = true;
+      fieldSetFlags()[0] = true;
       return this;
     }
 
@@ -642,7 +571,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       * @return True if the 'createdBy' field has been set, false otherwise.
       */
     public boolean hasCreatedBy() {
-      return fieldSetFlags()[1];
+      return fieldSetFlags()[0];
     }
 
 
@@ -652,7 +581,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder clearCreatedBy() {
       createdBy = null;
-      fieldSetFlags()[1] = false;
+      fieldSetFlags()[0] = false;
       return this;
     }
 
@@ -671,9 +600,9 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder setDefaultMark(java.math.BigDecimal value) {
-      validate(fields()[2], value);
+      validate(fields()[1], value);
       this.defaultMark = value;
-      fieldSetFlags()[2] = true;
+      fieldSetFlags()[1] = true;
       return this;
     }
 
@@ -682,7 +611,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       * @return True if the 'defaultMark' field has been set, false otherwise.
       */
     public boolean hasDefaultMark() {
-      return fieldSetFlags()[2];
+      return fieldSetFlags()[1];
     }
 
 
@@ -692,7 +621,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder clearDefaultMark() {
       defaultMark = null;
-      fieldSetFlags()[2] = false;
+      fieldSetFlags()[1] = false;
       return this;
     }
 
@@ -711,9 +640,9 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder setDifficulty(java.lang.String value) {
-      validate(fields()[3], value);
+      validate(fields()[2], value);
       this.difficulty = value;
-      fieldSetFlags()[3] = true;
+      fieldSetFlags()[2] = true;
       return this;
     }
 
@@ -722,7 +651,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       * @return True if the 'difficulty' field has been set, false otherwise.
       */
     public boolean hasDifficulty() {
-      return fieldSetFlags()[3];
+      return fieldSetFlags()[2];
     }
 
 
@@ -732,7 +661,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder clearDifficulty() {
       difficulty = null;
-      fieldSetFlags()[3] = false;
+      fieldSetFlags()[2] = false;
       return this;
     }
 
@@ -751,9 +680,9 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder setGeneralFeedback(java.lang.String value) {
-      validate(fields()[4], value);
+      validate(fields()[3], value);
       this.generalFeedback = value;
-      fieldSetFlags()[4] = true;
+      fieldSetFlags()[3] = true;
       return this;
     }
 
@@ -762,7 +691,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       * @return True if the 'generalFeedback' field has been set, false otherwise.
       */
     public boolean hasGeneralFeedback() {
-      return fieldSetFlags()[4];
+      return fieldSetFlags()[3];
     }
 
 
@@ -772,7 +701,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder clearGeneralFeedback() {
       generalFeedback = null;
-      fieldSetFlags()[4] = false;
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -791,9 +720,9 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder setId(java.lang.String value) {
-      validate(fields()[5], value);
+      validate(fields()[4], value);
       this.id = value;
-      fieldSetFlags()[5] = true;
+      fieldSetFlags()[4] = true;
       return this;
     }
 
@@ -802,7 +731,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       * @return True if the 'id' field has been set, false otherwise.
       */
     public boolean hasId() {
-      return fieldSetFlags()[5];
+      return fieldSetFlags()[4];
     }
 
 
@@ -812,7 +741,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder clearId() {
       id = null;
-      fieldSetFlags()[5] = false;
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -831,9 +760,9 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder setName(java.lang.String value) {
-      validate(fields()[6], value);
+      validate(fields()[5], value);
       this.name = value;
-      fieldSetFlags()[6] = true;
+      fieldSetFlags()[5] = true;
       return this;
     }
 
@@ -842,7 +771,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       * @return True if the 'name' field has been set, false otherwise.
       */
     public boolean hasName() {
-      return fieldSetFlags()[6];
+      return fieldSetFlags()[5];
     }
 
 
@@ -852,7 +781,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder clearName() {
       name = null;
-      fieldSetFlags()[6] = false;
+      fieldSetFlags()[5] = false;
       return this;
     }
 
@@ -871,9 +800,9 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder setOrganizationId(java.lang.String value) {
-      validate(fields()[7], value);
+      validate(fields()[6], value);
       this.organizationId = value;
-      fieldSetFlags()[7] = true;
+      fieldSetFlags()[6] = true;
       return this;
     }
 
@@ -882,7 +811,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       * @return True if the 'organizationId' field has been set, false otherwise.
       */
     public boolean hasOrganizationId() {
-      return fieldSetFlags()[7];
+      return fieldSetFlags()[6];
     }
 
 
@@ -892,7 +821,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder clearOrganizationId() {
       organizationId = null;
-      fieldSetFlags()[7] = false;
+      fieldSetFlags()[6] = false;
       return this;
     }
 
@@ -911,9 +840,9 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder setQType(java.lang.String value) {
-      validate(fields()[8], value);
+      validate(fields()[7], value);
       this.qType = value;
-      fieldSetFlags()[8] = true;
+      fieldSetFlags()[7] = true;
       return this;
     }
 
@@ -922,7 +851,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       * @return True if the 'qType' field has been set, false otherwise.
       */
     public boolean hasQType() {
-      return fieldSetFlags()[8];
+      return fieldSetFlags()[7];
     }
 
 
@@ -932,7 +861,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder clearQType() {
       qType = null;
-      fieldSetFlags()[8] = false;
+      fieldSetFlags()[7] = false;
       return this;
     }
 
@@ -951,9 +880,9 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder setQuestionText(java.lang.String value) {
-      validate(fields()[9], value);
+      validate(fields()[8], value);
       this.questionText = value;
-      fieldSetFlags()[9] = true;
+      fieldSetFlags()[8] = true;
       return this;
     }
 
@@ -962,7 +891,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       * @return True if the 'questionText' field has been set, false otherwise.
       */
     public boolean hasQuestionText() {
-      return fieldSetFlags()[9];
+      return fieldSetFlags()[8];
     }
 
 
@@ -972,7 +901,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder clearQuestionText() {
       questionText = null;
-      fieldSetFlags()[9] = false;
+      fieldSetFlags()[8] = false;
       return this;
     }
 
@@ -991,9 +920,9 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder setSagaId(java.lang.String value) {
-      validate(fields()[10], value);
+      validate(fields()[9], value);
       this.sagaId = value;
-      fieldSetFlags()[10] = true;
+      fieldSetFlags()[9] = true;
       return this;
     }
 
@@ -1002,7 +931,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       * @return True if the 'sagaId' field has been set, false otherwise.
       */
     public boolean hasSagaId() {
-      return fieldSetFlags()[10];
+      return fieldSetFlags()[9];
     }
 
 
@@ -1012,7 +941,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder clearSagaId() {
       sagaId = null;
-      fieldSetFlags()[10] = false;
+      fieldSetFlags()[9] = false;
       return this;
     }
 
@@ -1031,9 +960,9 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder setUpdatedBy(java.lang.String value) {
-      validate(fields()[11], value);
+      validate(fields()[10], value);
       this.updatedBy = value;
-      fieldSetFlags()[11] = true;
+      fieldSetFlags()[10] = true;
       return this;
     }
 
@@ -1042,7 +971,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       * @return True if the 'updatedBy' field has been set, false otherwise.
       */
     public boolean hasUpdatedBy() {
-      return fieldSetFlags()[11];
+      return fieldSetFlags()[10];
     }
 
 
@@ -1052,7 +981,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder clearUpdatedBy() {
       updatedBy = null;
-      fieldSetFlags()[11] = false;
+      fieldSetFlags()[10] = false;
       return this;
     }
 
@@ -1071,9 +1000,9 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder setCopyState(com.backend.programming.learning.system.kafka.core.avro.model.CopyState value) {
-      validate(fields()[12], value);
+      validate(fields()[11], value);
       this.copyState = value;
-      fieldSetFlags()[12] = true;
+      fieldSetFlags()[11] = true;
       return this;
     }
 
@@ -1082,7 +1011,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       * @return True if the 'copyState' field has been set, false otherwise.
       */
     public boolean hasCopyState() {
-      return fieldSetFlags()[12];
+      return fieldSetFlags()[11];
     }
 
 
@@ -1092,7 +1021,7 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       */
     public com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel.Builder clearCopyState() {
       copyState = null;
-      fieldSetFlags()[12] = false;
+      fieldSetFlags()[11] = false;
       return this;
     }
 
@@ -1101,19 +1030,18 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
     public QuestionResponseAvroModel build() {
       try {
         QuestionResponseAvroModel record = new QuestionResponseAvroModel();
-        record.answers = fieldSetFlags()[0] ? this.answers : (java.util.List<java.lang.String>) defaultValue(fields()[0]);
-        record.createdBy = fieldSetFlags()[1] ? this.createdBy : (java.lang.String) defaultValue(fields()[1]);
-        record.defaultMark = fieldSetFlags()[2] ? this.defaultMark : (java.math.BigDecimal) defaultValue(fields()[2]);
-        record.difficulty = fieldSetFlags()[3] ? this.difficulty : (java.lang.String) defaultValue(fields()[3]);
-        record.generalFeedback = fieldSetFlags()[4] ? this.generalFeedback : (java.lang.String) defaultValue(fields()[4]);
-        record.id = fieldSetFlags()[5] ? this.id : (java.lang.String) defaultValue(fields()[5]);
-        record.name = fieldSetFlags()[6] ? this.name : (java.lang.String) defaultValue(fields()[6]);
-        record.organizationId = fieldSetFlags()[7] ? this.organizationId : (java.lang.String) defaultValue(fields()[7]);
-        record.qType = fieldSetFlags()[8] ? this.qType : (java.lang.String) defaultValue(fields()[8]);
-        record.questionText = fieldSetFlags()[9] ? this.questionText : (java.lang.String) defaultValue(fields()[9]);
-        record.sagaId = fieldSetFlags()[10] ? this.sagaId : (java.lang.String) defaultValue(fields()[10]);
-        record.updatedBy = fieldSetFlags()[11] ? this.updatedBy : (java.lang.String) defaultValue(fields()[11]);
-        record.copyState = fieldSetFlags()[12] ? this.copyState : (com.backend.programming.learning.system.kafka.core.avro.model.CopyState) defaultValue(fields()[12]);
+        record.createdBy = fieldSetFlags()[0] ? this.createdBy : (java.lang.String) defaultValue(fields()[0]);
+        record.defaultMark = fieldSetFlags()[1] ? this.defaultMark : (java.math.BigDecimal) defaultValue(fields()[1]);
+        record.difficulty = fieldSetFlags()[2] ? this.difficulty : (java.lang.String) defaultValue(fields()[2]);
+        record.generalFeedback = fieldSetFlags()[3] ? this.generalFeedback : (java.lang.String) defaultValue(fields()[3]);
+        record.id = fieldSetFlags()[4] ? this.id : (java.lang.String) defaultValue(fields()[4]);
+        record.name = fieldSetFlags()[5] ? this.name : (java.lang.String) defaultValue(fields()[5]);
+        record.organizationId = fieldSetFlags()[6] ? this.organizationId : (java.lang.String) defaultValue(fields()[6]);
+        record.qType = fieldSetFlags()[7] ? this.qType : (java.lang.String) defaultValue(fields()[7]);
+        record.questionText = fieldSetFlags()[8] ? this.questionText : (java.lang.String) defaultValue(fields()[8]);
+        record.sagaId = fieldSetFlags()[9] ? this.sagaId : (java.lang.String) defaultValue(fields()[9]);
+        record.updatedBy = fieldSetFlags()[10] ? this.updatedBy : (java.lang.String) defaultValue(fields()[10]);
+        record.copyState = fieldSetFlags()[11] ? this.copyState : (com.backend.programming.learning.system.kafka.core.avro.model.CopyState) defaultValue(fields()[11]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -1146,19 +1074,6 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
   @Override public void customEncode(org.apache.avro.io.Encoder out)
     throws java.io.IOException
   {
-    long size0 = this.answers.size();
-    out.writeArrayStart();
-    out.setItemCount(size0);
-    long actualSize0 = 0;
-    for (java.lang.String e0: this.answers) {
-      actualSize0++;
-      out.startItem();
-      out.writeString(e0);
-    }
-    out.writeArrayEnd();
-    if (actualSize0 != size0)
-      throw new java.util.ConcurrentModificationException("Array-size written was " + size0 + ", but element count was " + actualSize0 + ".");
-
     out.writeString(this.createdBy);
 
     out.writeString(this.defaultMark.toString());
@@ -1190,21 +1105,6 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
   {
     org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
     if (fieldOrder == null) {
-      long size0 = in.readArrayStart();
-      java.util.List<java.lang.String> a0 = this.answers;
-      if (a0 == null) {
-        a0 = new SpecificData.Array<java.lang.String>((int)size0, SCHEMA$.getField("answers").schema());
-        this.answers = a0;
-      } else a0.clear();
-      SpecificData.Array<java.lang.String> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.String>)a0 : null);
-      for ( ; 0 < size0; size0 = in.arrayNext()) {
-        for ( ; size0 != 0; size0--) {
-          java.lang.String e0 = (ga0 != null ? ga0.peek() : null);
-          e0 = in.readString();
-          a0.add(e0);
-        }
-      }
-
       this.createdBy = in.readString();
 
       this.defaultMark = new java.math.BigDecimal(in.readString());
@@ -1230,70 +1130,53 @@ public class QuestionResponseAvroModel extends org.apache.avro.specific.Specific
       this.copyState = com.backend.programming.learning.system.kafka.core.avro.model.CopyState.values()[in.readEnum()];
 
     } else {
-      for (int i = 0; i < 13; i++) {
+      for (int i = 0; i < 12; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
-          long size0 = in.readArrayStart();
-          java.util.List<java.lang.String> a0 = this.answers;
-          if (a0 == null) {
-            a0 = new SpecificData.Array<java.lang.String>((int)size0, SCHEMA$.getField("answers").schema());
-            this.answers = a0;
-          } else a0.clear();
-          SpecificData.Array<java.lang.String> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.String>)a0 : null);
-          for ( ; 0 < size0; size0 = in.arrayNext()) {
-            for ( ; size0 != 0; size0--) {
-              java.lang.String e0 = (ga0 != null ? ga0.peek() : null);
-              e0 = in.readString();
-              a0.add(e0);
-            }
-          }
-          break;
-
-        case 1:
           this.createdBy = in.readString();
           break;
 
-        case 2:
+        case 1:
           this.defaultMark = new java.math.BigDecimal(in.readString());
           break;
 
-        case 3:
+        case 2:
           this.difficulty = in.readString();
           break;
 
-        case 4:
+        case 3:
           this.generalFeedback = in.readString();
           break;
 
-        case 5:
+        case 4:
           this.id = in.readString();
           break;
 
-        case 6:
+        case 5:
           this.name = in.readString();
           break;
 
-        case 7:
+        case 6:
           this.organizationId = in.readString();
           break;
 
-        case 8:
+        case 7:
           this.qType = in.readString();
           break;
 
-        case 9:
+        case 8:
           this.questionText = in.readString();
           break;
 
-        case 10:
+        case 9:
           this.sagaId = in.readString();
           break;
 
-        case 11:
+        case 10:
           this.updatedBy = in.readString();
           break;
 
-        case 12:
+        case 11:
           this.copyState = com.backend.programming.learning.system.kafka.core.avro.model.CopyState.values()[in.readEnum()];
           break;
 

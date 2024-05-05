@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.course.service.domain.ports.outpu
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -17,7 +18,7 @@ public class UserRepositoryImpl implements UserRepository {
     private final UserDataAccessMapper userDataAccessMapper;
 
     @Override
-    public User saveUser(User user) {
+    public User save(User user) {
         return userDataAccessMapper
                 .userEntityToUser(userJpaRepository
                         .save(userDataAccessMapper
@@ -32,7 +33,13 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public Optional<User> findUserByEmail(String email) {
-        return userJpaRepository.findByEmail(email)
+        return userJpaRepository.findByEmailAndIsDeletedFalse(email)
                 .map(userDataAccessMapper::userEntityToUser);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userDataAccessMapper
+                .userEntityListToUserList(userJpaRepository.findAll());
     }
 }

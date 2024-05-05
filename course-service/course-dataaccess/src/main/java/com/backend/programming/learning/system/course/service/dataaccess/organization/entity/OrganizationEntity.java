@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -29,7 +30,11 @@ public class OrganizationEntity {
     @Column(name = "api_key")
     private String apiKey;
 
+    private ZonedDateTime createdAt;
+    private ZonedDateTime updatedAt;
+
     private String moodleUrl;
+    private Boolean isDeleted;
 
     @Override
     public boolean equals(Object o) {

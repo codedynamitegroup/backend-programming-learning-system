@@ -2,11 +2,13 @@ package com.backend.programming.learning.system.course.service.domain.mapper.org
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.organization.CreateOrganizationCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.organization.CreateOrganizationResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.message.organization.OrganizationCreateRequest;
-import com.backend.programming.learning.system.course.service.domain.dto.method.message.organization.OrganizationDeleteRequest;
-import com.backend.programming.learning.system.course.service.domain.dto.method.message.organization.OrganizationUpdateRequest;
+import com.backend.programming.learning.system.course.service.domain.dto.method.message.organization.OrganizationRequest;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.organization.OrganizationResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.Organization;
+import com.backend.programming.learning.system.course.service.domain.event.organization.OrganizationEvent;
+import com.backend.programming.learning.system.course.service.domain.outbox.model.organization.OrganizationEventPayload;
+import com.backend.programming.learning.system.domain.DomainConstants;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import org.springframework.stereotype.Component;
 
@@ -18,22 +20,6 @@ import java.util.UUID;
 @Component
 
 public class OrganizationDataMapper {
-    public Organization organizationCreateRequestToOrganization(OrganizationCreateRequest organizationRequest) {
-        Instant instant = Instant.now();
-        ZoneId zoneId = ZoneId.of("Asia/Ho_Chi_Minh");
-        ZonedDateTime zonedDateTime = instant.atZone(zoneId);
-        return Organization.builder()
-                .id(new OrganizationId(UUID.fromString(organizationRequest.getId())))
-                .name(organizationRequest.getName())
-                .description(organizationRequest.getDescription())
-                .apiKey(organizationRequest.getApiKey())
-                .moodleUrl(organizationRequest.getMoodle_url())
-                .createdAt(zonedDateTime)
-                .updatedAt(zonedDateTime)
-                .build();
-
-    }
-
     public Organization createOrganizationCommandToOrganization(CreateOrganizationCommand createOrganizationCommand) {
         Instant instant = Instant.now();
         ZoneId zoneId = ZoneId.of("Asia/Ho_Chi_Minh");
@@ -66,18 +52,40 @@ public class OrganizationDataMapper {
                 .build();
     }
 
-    public Organization organizationDeleteRequestToOrganization(OrganizationDeleteRequest organizationRequest) {
+    public Organization organizationCreatedRequestToOrganization(OrganizationRequest organizationRequest) {
         return Organization.builder()
-                .id(new OrganizationId(UUID.fromString(organizationRequest.getId())))
+                .id(new OrganizationId(UUID.fromString(organizationRequest.getOrganizationId())))
+                .name(organizationRequest.getName())
+                .description(organizationRequest.getDescription())
+                .createdAt(organizationRequest.getCreatedAt().atZone(ZoneId.of(DomainConstants.ASIA_HCM)))
+                .updatedAt(organizationRequest.getUpdatedAt().atZone(ZoneId.of(DomainConstants.ASIA_HCM)))
+                .isDeleted(organizationRequest.getIsDeleted())
                 .build();
     }
 
-    public Organization organizationUpdateRequestToOrganization(OrganizationUpdateRequest organizationUpdateRequest) {
+    public Organization organizationUpdatedRequestToOrganization(OrganizationRequest organizationRequest) {
         return Organization.builder()
-                .id(new OrganizationId(UUID.fromString(organizationUpdateRequest.getId())))
-                .name(organizationUpdateRequest.getName())
-                .description(organizationUpdateRequest.getDescription())
-                .updatedAt(organizationUpdateRequest.getUpdatedAt().atZone(ZoneId.of("UTC")))
+                .id(new OrganizationId(UUID.fromString(organizationRequest.getOrganizationId())))
+                .name(organizationRequest.getName())
+                .description(organizationRequest.getDescription())
+                .moodleUrl(organizationRequest.getMoodleUrl())
+                .apiKey(organizationRequest.getApiKey())
+                .updatedAt(organizationRequest.getUpdatedAt().atZone(ZoneId.of(DomainConstants.ASIA_HCM)))
+                .build();
+    }
+
+    public Organization organizationDeletedRequestToOrganization(OrganizationRequest organizationRequest) {
+        return Organization.builder()
+                .id(new OrganizationId(UUID.fromString(organizationRequest.getOrganizationId())))
+                .isDeleted(organizationRequest.getIsDeleted())
+                .build();
+    }
+
+    public OrganizationEventPayload organizationEventToOrganizationEventPayload(OrganizationEvent organizationEvent, CopyState copyState) {
+        return OrganizationEventPayload.builder()
+                .organizationId(organizationEvent.getOrganization().getId().getValue().toString())
+                .copyState(copyState.name())
+                .failureMessages(organizationEvent.getFailureMessages())
                 .build();
     }
 }

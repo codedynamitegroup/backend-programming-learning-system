@@ -39,6 +39,12 @@ public class QtypeEssayQuestionRepositoryImpl implements QtypeEssayQuestionRepos
     }
 
     @Override
+    public Optional<QtypeEssayQuestion> findQtypeEssayQuestionByQuestionId(UUID questionId) {
+        return qtypeEssayQuestionJpaRepository.findByQuestionId(questionId)
+                .map(qtypeEssayQuestionDataAccessMapper::qtypeEssayQuestionEntityToQtypeEssayQuestion);
+    }
+
+    @Override
     public List<QtypeEssayQuestion> findAllQtypeEssayQuestion() {
         return qtypeEssayQuestionJpaRepository
                 .findAll()

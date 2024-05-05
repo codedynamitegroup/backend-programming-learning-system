@@ -23,6 +23,5 @@ public class QuestionResponse {
     private String generalFeedback;
     private BigDecimal defaultMark;
     private String qType;
-    private List<String> answers;
     private CopyState copyState;
 }

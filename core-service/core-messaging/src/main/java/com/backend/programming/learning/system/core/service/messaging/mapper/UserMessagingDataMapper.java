@@ -54,6 +54,8 @@ public class UserMessagingDataMapper {
                 .setSagaId(sagaId)
                 .setUserId(userEventPayload.getUserId())
                 .setCopyState(CopyState.valueOf(userEventPayload.getCopyState()))
+                .setServiceName(
+                        ServiceName.valueOf(com.backend.programming.learning.system.domain.valueobject.ServiceName.CORE_SERVICE.name()))
                 .setFailureMessages(userEventPayload.getFailureMessages())
                 .build();
     }

@@ -1,14 +1,10 @@
 package com.backend.programming.learning.system.course.service.messaging.mapper;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionRequest;
-import com.backend.programming.learning.system.domain.valueobject.CopyState;
-import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionResponse;
-import com.backend.programming.learning.system.course.service.domain.event.question.event.QuestionEvent;
+import com.backend.programming.learning.system.course.service.domain.outbox.model.question.QuestionEventPayload;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel;
 import org.springframework.stereotype.Component;
-
-import java.math.BigDecimal;
 
 @Component
 public class QuestionMessagingMapper {
@@ -25,7 +21,6 @@ public class QuestionMessagingMapper {
                 .generalFeedback(questionDeleteRequestAvroModel.getGeneralFeedback())
                 .defaultMark(questionDeleteRequestAvroModel.getDefaultMark())
                 .qType(questionDeleteRequestAvroModel.getQType())
-                .answers(questionDeleteRequestAvroModel.getAnswers())
                 .build();
     }
 
@@ -42,7 +37,6 @@ public class QuestionMessagingMapper {
                 .generalFeedback(questionCreateRequestAvroModel.getGeneralFeedback())
                 .defaultMark(questionCreateRequestAvroModel.getDefaultMark())
                 .qType(questionCreateRequestAvroModel.getQType())
-                .answers(questionCreateRequestAvroModel.getAnswers())
                 .build();
     }
 
@@ -59,43 +53,23 @@ public class QuestionMessagingMapper {
                 .generalFeedback(questionUpdateRequestAvroModel.getGeneralFeedback())
                 .defaultMark(questionUpdateRequestAvroModel.getDefaultMark())
                 .qType(questionUpdateRequestAvroModel.getQType())
-                .answers(questionUpdateRequestAvroModel.getAnswers())
                 .build();
     }
 
-    public QuestionResponse questionResponseAvroModelToQuestionResponse(QuestionResponseAvroModel questionResponseAvroModel) {
-        return QuestionResponse.builder()
-                .id(questionResponseAvroModel.getId())
-                .sagaId(questionResponseAvroModel.getSagaId())
-                .organizationId(questionResponseAvroModel.getOrganizationId())
-                .createdBy(questionResponseAvroModel.getCreatedBy())
-                .updatedBy(questionResponseAvroModel.getUpdatedBy())
-                .difficulty(questionResponseAvroModel.getDifficulty())
-                .name(questionResponseAvroModel.getName())
-                .questionText(questionResponseAvroModel.getQuestionText())
-                .generalFeedback(questionResponseAvroModel.getGeneralFeedback())
-                .defaultMark(questionResponseAvroModel.getDefaultMark())
-                .qType(questionResponseAvroModel.getQType())
-                .answers(questionResponseAvroModel.getAnswers())
-                .copyState(CopyState.valueOf(questionResponseAvroModel.getCopyState().toString()))
-                .build();
-    }
-
-    public QuestionResponseAvroModel questionResponseToQuestionResponseAvroModel(QuestionEvent questionEvent) {
+    public QuestionResponseAvroModel questionEventPayloadToQuestionResponseAvroModel(QuestionEventPayload questionEventPayload) {
         return QuestionResponseAvroModel.newBuilder()
-                .setId(questionEvent.getQuestion().getId().getValue().toString())
-                .setSagaId(questionEvent.getSagaId())
-                .setOrganizationId(questionEvent.getQuestion().getOrganization().getId().getValue().toString())
-                .setCreatedBy(questionEvent.getQuestion().getCreatedBy().getId().getValue().toString())
-                .setUpdatedBy(questionEvent.getQuestion().getUpdatedBy().getId().getValue().toString())
-                .setDifficulty(questionEvent.getQuestion().getDifficulty().toString())
-                .setName(questionEvent.getQuestion().getName())
-                .setQuestionText(questionEvent.getQuestion().getQuestionText())
-                .setGeneralFeedback(questionEvent.getQuestion().getGeneralFeedback())
-                .setDefaultMark(BigDecimal.valueOf(questionEvent.getQuestion().getDefaultMark()))
-                .setQType(questionEvent.getQuestion().getQtype().toString())
-                .setAnswers(questionEvent.getQuestion().getAnswers())
-                .setCopyState(com.backend.programming.learning.system.kafka.core.avro.model.CopyState.valueOf(questionEvent.getCopyState().toString()))
+                .setId(questionEventPayload.getId())
+                .setSagaId(questionEventPayload.getSagaId())
+                .setOrganizationId(questionEventPayload.getOrganizationId())
+                .setCreatedBy(questionEventPayload.getCreatedBy())
+                .setUpdatedBy(questionEventPayload.getUpdatedBy())
+                .setDifficulty(questionEventPayload.getDifficulty())
+                .setName(questionEventPayload.getName())
+                .setQuestionText(questionEventPayload.getQuestionText())
+                .setGeneralFeedback(questionEventPayload.getGeneralFeedback())
+                .setDefaultMark(questionEventPayload.getDefaultMark())
+                .setQType(questionEventPayload.getQType())
+                .setCopyState(com.backend.programming.learning.system.kafka.core.avro.model.CopyState.valueOf(questionEventPayload.getCopyState().toString()))
                 .build();
     }
 }

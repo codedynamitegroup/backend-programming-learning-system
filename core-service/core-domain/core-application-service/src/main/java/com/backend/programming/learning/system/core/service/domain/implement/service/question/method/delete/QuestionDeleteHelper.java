@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.implement.service.question.method.delete;
 
 import com.backend.programming.learning.system.core.service.domain.CoreDomainService;
-import com.backend.programming.learning.system.core.service.domain.entity.Question;
+import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
@@ -42,6 +42,25 @@ public class QuestionDeleteHelper {
     public QuestionDeletedEvent deleteQuestionById(UUID questionId) {
         Question deletingQuestion = getQuestion(questionId);
         UUID qtypeQuestionId = getQtypeQuestionId(deletingQuestion);
+        QtypeShortAnswerQuestion qtypeShortAnswerQuestion = null;
+        QtypeEssayQuestion qtypeEssayQuestion = null;
+        QtypeCodeQuestion qtypeCodeQuestion = null;
+        QtypeMultiChoiceQuestion qtypeMultiChoiceQuestion = null;
+
+        switch (deletingQuestion.getqtype()) {
+            case CODE:
+                qtypeCodeQuestion = qtypeCodeQuestionRepository.findQtypeCodeQuestionByQuestionId(deletingQuestion.getId().getValue()).get();
+                break;
+            case SHORT_ANSWER:
+                qtypeShortAnswerQuestion = qtypeShortanswerQuestionRepository.findQtypeShortAnswerQuestionByQuestionId(deletingQuestion.getId().getValue()).get();
+                break;
+            case ESSAY:
+                qtypeEssayQuestion = qtypeEssayQuestionRepository.findQtypeEssayQuestionByQuestionId(deletingQuestion.getId().getValue()).get();
+                break;
+            case MULTIPLE_CHOICE:
+                qtypeMultiChoiceQuestion = qtypeMultipleChoiceQuestionRepository.findQtypeMultipleChoiceQuestionByQuestionId(deletingQuestion.getId().getValue()).get();
+                break;
+        }
 
         // delete answer of question
         log.info("Deleting answers of question with id: {}", questionId);
@@ -50,7 +69,7 @@ public class QuestionDeleteHelper {
 
         deleteQuestion(questionId);
 
-        return coreDomainService.deleteQuestion(deletingQuestion, qtypeQuestionId);
+        return coreDomainService.deleteQuestion(deletingQuestion, qtypeQuestionId, qtypeShortAnswerQuestion, qtypeEssayQuestion, qtypeMultiChoiceQuestion, qtypeCodeQuestion);
     }
 
     @Transactional

@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.core.service.dataaccess.outbox.q
 
 import com.backend.programming.learning.system.core.service.dataaccess.outbox.question.entity.QuestionOutboxEntity;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.question.QuestionOutboxMessage;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,9 +17,10 @@ public interface QuestionOutboxJpaRepository extends JpaRepository<QuestionOutbo
     Optional<List<QuestionOutboxEntity>> findByTypeAndOutboxStatusAndSagaStatusIn(String type,
                                                                                       OutboxStatus outboxStatus,
                                                                                       List<SagaStatus> sagaStatus);
-    Optional<QuestionOutboxEntity> findByTypeAndSagaIdAndSagaStatusIn(String type,
-                                                                          UUID sagaId,
-                                                                          List<SagaStatus> sagaStatus);
+    Optional<QuestionOutboxEntity> findByTypeAndSagaIdAndCopyStateAndSagaStatusIn(String type,
+                                                                                  UUID sagaId,
+                                                                                  CopyState copyState,
+                                                                                  List<SagaStatus> sagaStatus);
     void deleteByTypeAndOutboxStatusAndSagaStatusIn(String type,
                                                     OutboxStatus outboxStatus,
                                                     List<SagaStatus> sagaStatus);

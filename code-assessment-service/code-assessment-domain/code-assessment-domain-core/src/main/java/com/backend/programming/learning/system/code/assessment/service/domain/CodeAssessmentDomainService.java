@@ -1,8 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.domain;
 
-import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
-import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
-import com.backend.programming.learning.system.code.assessment.service.domain.entity.TestCase;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionsUpdatedEvent;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 
@@ -13,5 +11,9 @@ public interface CodeAssessmentDomainService {
     List<TestCase> initiateTestCases(List<TestCase> testCases);
     void cancelCopyCodeQuestions(CodeQuestion codeQuestion, CopyState state, List<String> failureMessages);
 
-    CodeSubmission initiateCodeSubmission(CodeSubmission codeSubmission, List<TestCase> testCases);
+    CodeSubmission initiateCodeSubmission(CodeSubmission codeSubmission, CodeQuestion codeQuestion, List<TestCase> testCases, ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion, ProgrammingLangauge programmingLangauge);
+
+    void increaseCodeSubmissionGradedTestCase(CodeSubmission codeSubmission);
+
+    void calculateAvgTimeAndMemoryAndGrade(CodeSubmission codeSubmission, List<CodeSubmissionTestCase> cstc, String acceptedDescription);
 }

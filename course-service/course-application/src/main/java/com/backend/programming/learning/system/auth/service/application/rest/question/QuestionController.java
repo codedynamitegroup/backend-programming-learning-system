@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_bank_category.CreateQuestionBankCategoryResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.question.DeleteQuestionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QueryAllQuestionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QueryAllQuestionExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QueryAllQuestionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QueryQuestionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.question.QuestionResponseEntity;
@@ -132,5 +133,23 @@ public class QuestionController {
         DeleteQuestionCommand deleteQuestionCommand = DeleteQuestionCommand.builder().questionId(questionId).build();
         questionApplicationService.deleteById(deleteQuestionCommand);
         return ResponseEntity.ok("Question deleted successfully");
+    }
+
+    @GetMapping("/exam/{examId}")
+    public ResponseEntity<QueryAllQuestionResponse> findAllQuestionsByExamId(
+            @PathVariable UUID examId,
+            @RequestParam(defaultValue = "") String search,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize
+    ) {
+        QueryAllQuestionExamCommand queryAllQuestionCommand = QueryAllQuestionExamCommand.builder()
+                .examId(examId)
+                .search(search)
+                .pageNo(pageNo)
+                .pageSize(pageSize)
+                .build();
+        QueryAllQuestionResponse response = questionApplicationService.findAllQuestionsByExamId(queryAllQuestionCommand);
+        log.info("Get all questions by exam id");
+        return ResponseEntity.ok(response);
     }
 }

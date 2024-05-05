@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.auth.service.dataaccess.outbox.organization.entity;
 
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
 import lombok.*;
@@ -32,6 +33,8 @@ public class OrganizationOutboxEntity {
     private CopyState copyState;
     @Enumerated(EnumType.STRING)
     private OutboxStatus outboxStatus;
+    @Enumerated(EnumType.STRING)
+    private ServiceName serviceName;
     @Version
     private int version;
 

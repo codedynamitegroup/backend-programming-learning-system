@@ -2,8 +2,9 @@ package com.backend.programming.learning.system.core.service.messaging.listener.
 
 import com.backend.programming.learning.system.core.service.domain.exception.CoreApplicationServiceException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
-import com.backend.programming.learning.system.core.service.domain.ports.input.message.listener.auth.UserRequestMessageListener;
+import com.backend.programming.learning.system.core.service.domain.ports.input.message.listener.user.UserRequestMessageListener;
 import com.backend.programming.learning.system.core.service.messaging.mapper.UserMessagingDataMapper;
+import com.backend.programming.learning.system.kafka.auth.avro.model.user.ServiceName;
 import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel;
 import com.backend.programming.learning.system.kafka.consumer.KafkaConsumer;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +16,6 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.OptimisticLockException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class UserRequestKafkaListener implements KafkaConsumer<UserRequestAvroMo
 
     @Override
     @KafkaListener(id = "${kafka-consumer-config.core-service-user-request-group-id}",
-            topics = "${core-service.user-request-topic-name}")
+            topics = "${core-service.core-user-request-topic-name}")
     public void receive(@Payload List<UserRequestAvroModel> messages,
                         @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) List<String> keys,
                         @Header(KafkaHeaders.RECEIVED_PARTITION_ID) List<Integer> partitions,
@@ -45,30 +45,27 @@ public class UserRequestKafkaListener implements KafkaConsumer<UserRequestAvroMo
 
         messages.forEach(userRequestAvroModel -> {
             try {
-                switch (userRequestAvroModel.getCopyState()){
-                    case CREATING:{
+                switch (userRequestAvroModel.getCopyState()) {
+                    case CREATING -> {
                         log.info("Creating user: {}",
                                 userRequestAvroModel);
                         userRequestMessageListener
                                 .userCreated(userMessagingDataMapper
                                         .userCreateRequestAvroModelToUserCreateRequest(userRequestAvroModel));
-                        break;
                     }
-                    case DELETING:{
+                    case DELETING -> {
                         log.info("Deleting user: {}",
                                 userRequestAvroModel);
                         userRequestMessageListener
                                 .userDeleted(userMessagingDataMapper
                                         .userDeleteRequestAvroModelToUserDeleteRequest(userRequestAvroModel));
-                        break;
                     }
-                    case UPDATING:{
+                    case UPDATING -> {
                         log.info("Updating user: {}",
                                 userRequestAvroModel);
                         userRequestMessageListener
                                 .userUpdated(userMessagingDataMapper
                                         .userUpdateRequestAvroModelToUserUpdateRequest(userRequestAvroModel));
-                        break;
                     }
                 }
             } catch (DataAccessException e) {

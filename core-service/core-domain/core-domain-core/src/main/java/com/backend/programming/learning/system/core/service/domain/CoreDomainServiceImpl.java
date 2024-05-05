@@ -2,15 +2,14 @@ package com.backend.programming.learning.system.core.service.domain;
 
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.event.contest_user.ContestUserUpdatedEvent;
+import com.backend.programming.learning.system.core.service.domain.event.organization.*;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.user.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.UpdateState;
-import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.DomainConstants;
-import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.ZoneId;
@@ -65,37 +64,83 @@ public class CoreDomainServiceImpl implements CoreDomainService {
     }
 
     @Override
-    public QuestionDeletedEvent deleteQuestion(Question question, UUID qtypeId) {
+    public QuestionDeletedEvent deleteQuestion(
+            Question question,
+            UUID qtypeId,
+            QtypeShortAnswerQuestion qtypeShortAnswerQuestion,
+            QtypeEssayQuestion qtypeEssayQuestion,
+            QtypeMultiChoiceQuestion qtypeMultiChoiceQuestion,
+            QtypeCodeQuestion qtypeCodeQuestion) {
         question.setCopyState(CopyState.DELETING);
-        return new QuestionDeletedEvent(question, qtypeId, ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+        return new QuestionDeletedEvent(question,
+                qtypeId, ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                qtypeCodeQuestion,
+                qtypeMultiChoiceQuestion,
+                qtypeEssayQuestion,
+                qtypeShortAnswerQuestion);
     }
 
     @Override
-    public QuestionUpdatedEvent updateQtypeCodeQuestion(Question question, QtypeCodeQuestion qtypeCodeQuestion) {
+    public QuestionUpdatedEvent updateQtypeCodeQuestion(Question question,
+                                                        QtypeCodeQuestion qtypeCodeQuestion,
+                                                        Question prevQuestion,
+                                                        QtypeCodeQuestion prevQtypeCodeQuestion) {
         question.setCopyState(CopyState.UPDATING);
-        return new QuestionUpdatedEvent(question, qtypeCodeQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+        return new QuestionUpdatedEvent(question,
+                qtypeCodeQuestion.getId().getValue(),
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                prevQuestion, prevQtypeCodeQuestion,
+                null,
+                null,
+                null);
     }
 
     @Override
-    public QuestionUpdatedEvent updateQtypeEssayQuestion(Question question, QtypeEssayQuestion qtypeEssayQuestion) {
+    public QuestionUpdatedEvent updateQtypeEssayQuestion(Question question,
+                                                         QtypeEssayQuestion qtypeEssayQuestion,
+                                                         Question prevQuestion,
+                                                         QtypeEssayQuestion prevQtypeEssayQuestion) {
         question.setCopyState(CopyState.UPDATING);
-        return new QuestionUpdatedEvent(question, qtypeEssayQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+        return new QuestionUpdatedEvent(question,
+                qtypeEssayQuestion.getId().getValue(),
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                prevQuestion,
+                null,
+                null,
+                prevQtypeEssayQuestion,
+                null);
     }
 
     @Override
-    public QuestionUpdatedEvent updateQtypeShortAnswerQuestion(
-            Question question,
-            QtypeShortAnswerQuestion qtypeShortAnswerQuestion) {
+    public QuestionUpdatedEvent updateQtypeShortAnswerQuestion(Question question,
+                                                               QtypeShortAnswerQuestion qtypeShortAnswerQuestion,
+                                                               Question prevQuestion,
+                                                               QtypeShortAnswerQuestion prevQtypeShortAnswerQuestion) {
         question.setCopyState(CopyState.UPDATING);
-        return new QuestionUpdatedEvent(question, qtypeShortAnswerQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+        return new QuestionUpdatedEvent(question,
+                qtypeShortAnswerQuestion.getId().getValue(),
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                prevQuestion,
+                null,
+                null,
+                null,
+                prevQtypeShortAnswerQuestion);
     }
 
     @Override
-    public QuestionUpdatedEvent updateQtypeMultipleChoiceQuestion(
-            Question question,
-            QtypeMultiChoiceQuestion qtypeMultiChoiceQuestion) {
+    public QuestionUpdatedEvent updateQtypeMultipleChoiceQuestion(Question question,
+                                                                  QtypeMultiChoiceQuestion qtypeMultiChoiceQuestion,
+                                                                  Question prevQuestion,
+                                                                  QtypeMultiChoiceQuestion prevQtypeMultiChoiceQuestion ) {
         question.setCopyState(CopyState.UPDATING);
-        return new QuestionUpdatedEvent(question, qtypeMultiChoiceQuestion.getId().getValue(), ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+        return new QuestionUpdatedEvent(question,
+                qtypeMultiChoiceQuestion.getId().getValue(),
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                prevQuestion,
+                null,
+                prevQtypeMultiChoiceQuestion,
+                null,
+                null);
     }
 
     @Override
@@ -190,28 +235,24 @@ public class CoreDomainServiceImpl implements CoreDomainService {
 
     @Override
     public UserCreatedSuccessEvent createdUserSuccess(User user) {
-        user.setCopyState(CopyState.CREATED);
         return new UserCreatedSuccessEvent(user,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
     public UserCreatedFailEvent createdUserFail(User user, List<String> failureMessages) {
-        user.setCopyState(CopyState.CREATE_FAILED);
         return new UserCreatedFailEvent(user,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)), failureMessages);
     }
 
     @Override
     public UserUpdatedSuccessEvent updatedUserSuccess(User user) {
-        user.setCopyState(CopyState.UPDATED);
         return new UserUpdatedSuccessEvent(user,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
     public UserUpdatedFailEvent updatedUserFail(User user, List<String> failureMessages) {
-        user.setCopyState(CopyState.UPDATE_FAILED);
         return new UserUpdatedFailEvent(user,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
                 failureMessages);
@@ -219,17 +260,51 @@ public class CoreDomainServiceImpl implements CoreDomainService {
 
     @Override
     public UserDeletedSuccessEvent deletedUserSuccess(User user) {
-        user.setCopyState(CopyState.DELETED);
         return new UserDeletedSuccessEvent(user,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
 
     @Override
     public UserDeletedFailEvent deletedUserFail(User user, List<String> failureMessages) {
-        user.setCopyState(CopyState.DELETE_FAILED);
         return new UserDeletedFailEvent(user,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
                 failureMessages);
+    }
+
+    @Override
+    public OrganizationCreatedSuccessEvent createdOrganizationSuccess(Organization organization) {
+        return new OrganizationCreatedSuccessEvent(organization,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+    }
+
+    @Override
+    public OrganizationCreatedFailEvent createdOrganizationFail(Organization organization, List<String> failureMessages) {
+        return new OrganizationCreatedFailEvent(organization,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)), failureMessages);
+    }
+
+    @Override
+    public OrganizationUpdatedSuccessEvent updatedOrganizationSuccess(Organization organization) {
+        return new OrganizationUpdatedSuccessEvent(organization,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+    }
+
+    @Override
+    public OrganizationUpdatedFailEvent updatedOrganizationFail(Organization organization, List<String> failureMessages) {
+        return new OrganizationUpdatedFailEvent(organization,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)), failureMessages);
+    }
+
+    @Override
+    public OrganizationDeletedSuccessEvent deletedOrganizationSuccess(Organization organization) {
+        return new OrganizationDeletedSuccessEvent(organization,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+    }
+
+    @Override
+    public OrganizationDeletedFailEvent deletedOrganizationFail(Organization organization, List<String> failureMessages) {
+        return new OrganizationDeletedFailEvent(organization,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)), failureMessages);
     }
 
     @Override

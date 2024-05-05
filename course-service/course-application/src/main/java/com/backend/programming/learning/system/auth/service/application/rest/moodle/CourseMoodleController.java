@@ -1,12 +1,6 @@
 package com.backend.programming.learning.system.auth.service.application.rest.moodle;
 
-import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.CourseMoodleResponseEntity;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -34,14 +28,6 @@ public class CourseMoodleController {
     String TOKEN = "cdf90b5bf53bcae577c60419702dbee7";
 
     @GetMapping
-    @Operation(summary = "Get all courses.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Success.", content = {
-                    @Content(mediaType = "application/vnd.api.v1+json",
-                            schema = @Schema(implementation = String.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "Not found."),
-            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<String> getCourse() {
         String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s",
                 MOODLE_URL, TOKEN, GET_ALL_COURSES);
@@ -50,14 +36,6 @@ public class CourseMoodleController {
     }
 
     @GetMapping("/user")
-    @Operation(summary = "Get course by user.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Success.", content = {
-                    @Content(mediaType = "application/vnd.api.v1+json",
-                            schema = @Schema(implementation = String.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "Not found."),
-            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<String> getCourseByUser(
             @RequestParam(value = "userId", required = false) String userId
     ) {

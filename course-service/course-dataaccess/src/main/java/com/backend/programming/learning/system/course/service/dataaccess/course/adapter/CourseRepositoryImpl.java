@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -36,6 +37,12 @@ public class CourseRepositoryImpl implements CourseRepository {
         return courseDataAccessMapper.courseEntityToCourse(courseJpaRepository
                 .findById(courseId)
                 .orElseThrow(() -> new RuntimeException("Course not found")));
+    }
+
+    @Override
+    public Optional<Course> findByName(String courseName) {
+        return courseJpaRepository.findByName(courseName)
+                .map(courseDataAccessMapper::courseEntityToCourse);
     }
 
     @Override

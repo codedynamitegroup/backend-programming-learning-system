@@ -2,13 +2,23 @@ package com.backend.programming.learning.system.code.assessment.service.domain.m
 
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetCodeSubmissionResponseItem;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_submission.UpdateCodeSubmissionTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmissionTestCase;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.ProgrammingLanguageId;
-import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
+@Slf4j
 public class CodeSubmissionDataMapper {
     public CreateCodeSubmissionResponse codeSubmissionToCreateCodeSubmissionResponse(CodeSubmission codeSubmission) {
         return CreateCodeSubmissionResponse.builder()
@@ -20,10 +30,62 @@ public class CodeSubmissionDataMapper {
 
     public CodeSubmission createCodeSubmissionCommandToCodeSubmission(CreateCodeSubmissionCommand createCodeSubmissionCommand) {
         return CodeSubmission.builder()
-                .codeQuestionId(new CodeQuestionId(createCodeSubmissionCommand.getCodeQuestionId()))
                 .languageId(new ProgrammingLanguageId(createCodeSubmissionCommand.getLanguageId()))
                 .userId(new UserId(createCodeSubmissionCommand.getUserId()))
                 .sourceCode(createCodeSubmissionCommand.getSourceCode())
                 .build();
+    }
+
+    public CodeSubmissionTestCase updateCodeSubmissionTestCaseCommandToCodeSubmissionTestCase(UpdateCodeSubmissionTestCaseCommand command) {
+        return CodeSubmissionTestCase.builder()
+                .judgeToken(command.getToken())
+                .stderr(command.getStderr())
+                .actualOutput(command.getStdout())
+                .runTime(command.getTime())
+                .memory(command.getMemory())
+                .compileOutput(command.getCompile_output())
+                .message(command.getMessage())
+                .statusDescription(command.getStatus().getDescription())
+                .build();
+    }
+
+    public GetCodeSubmissionResponseItem codeSubmissionToGetCodeSubmissionResponseItem(CodeSubmission codeSubmission) {
+        return GetCodeSubmissionResponseItem.builder()
+                .programmingLanguageId(codeSubmission.getLanguageId().getValue())
+                .id(codeSubmission.getId().getValue())
+                .avgRuntime(codeSubmission.getRunTime())
+                .avgMemory(codeSubmission.getMemory())
+                .gradingStatus(codeSubmission.getGradingStatus())
+                .maxGrade(codeSubmission.getCodeQuestion().getMaxGrade())
+                .achievedGrade(codeSubmission.getGrade())
+                .description(codeSubmission.getStatusDescription())
+                .sourceCode(decodeBase64ToString(codeSubmission.getSourceCode()))
+                .build();
+    }
+
+    public GetCodeSubmissionResponseItem.FirstFailTestCase codeSubmissionTestCaseToFirstFailTestCase(CodeSubmissionTestCase cstc) {
+        if(cstc == null) return null;
+        return GetCodeSubmissionResponseItem.FirstFailTestCase.builder()
+                .compileOutput(decodeBase64ToString(cstc.getCompileOutput()))
+                .actualOutput(decodeBase64ToString(cstc.getActualOutput()))
+                .input(cstc.getTestCase().getInputData())
+                .output(cstc.getTestCase().getOutputData())
+                .stderr(decodeBase64ToString(cstc.getStderr()))
+                .runtime(cstc.getRunTime())
+                .memory(cstc.getMemory())
+                .message(decodeBase64ToString(cstc.getMessage()))
+                .description(cstc.getStatusDescription())
+                .build();
+    }
+    private String decodeBase64ToString(String str){
+        if(str == null) return null;
+        String nonEnterstr = str.replace("\n","");
+        try {
+            return new String(Base64.getDecoder().decode(nonEnterstr.getBytes()), StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            log.error("not base64 {}", str);
+            return str;
+        }
+
     }
 }

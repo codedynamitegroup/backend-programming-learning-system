@@ -55,8 +55,8 @@ public class UserRequestHelper {
             log.error("Found user with email: {}", user.getEmail());
             failureMessages.add("Found user with email: " + user.getEmail());
             UserCreatedFailEvent userCreatedFailEvent = coreDomainService.createdUserFail(user, failureMessages);
-            userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userCreatedFailEvent),
-                    userCreatedFailEvent.getUser().getCopyState(),
+            userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userCreatedFailEvent, CopyState.CREATE_FAILED),
+                    CopyState.CREATE_FAILED,
                     OutboxStatus.STARTED,
                     UUID.fromString(userRequest.getSagaId()));
             return;
@@ -68,8 +68,8 @@ public class UserRequestHelper {
             log.error("Could not create user with id: {}", user.getId().getValue().toString());
             failureMessages.add("Could not create user with id: " + user.getId().getValue().toString());
             UserCreatedFailEvent userCreatedFailEvent = coreDomainService.createdUserFail(user, failureMessages);
-            userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userCreatedFailEvent),
-                    userCreatedFailEvent.getUser().getCopyState(),
+            userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userCreatedFailEvent, CopyState.CREATE_FAILED),
+                    CopyState.CREATE_FAILED,
                     OutboxStatus.STARTED,
                     UUID.fromString(userRequest.getSagaId()));
             return;
@@ -78,8 +78,8 @@ public class UserRequestHelper {
         log.info("User is created with id: {}", userSaved.getId().getValue());
         UserCreatedSuccessEvent userCreatedSuccessEvent = coreDomainService.createdUserSuccess(user);
 
-        userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userCreatedSuccessEvent),
-                userCreatedSuccessEvent.getUser().getCopyState(),
+        userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userCreatedSuccessEvent, CopyState.CREATED),
+                CopyState.CREATED,
                 OutboxStatus.STARTED,
                 UUID.fromString(userRequest.getSagaId()));
     }
@@ -99,8 +99,8 @@ public class UserRequestHelper {
             log.error("Not found user with id: {}", user.getId().getValue());
             failureMessages.add("Not found user with id: " + user.getId().getValue());
             UserDeletedFailEvent userDeletedFailEvent = coreDomainService.deletedUserFail(user, failureMessages);
-            userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userDeletedFailEvent),
-                    userDeletedFailEvent.getUser().getCopyState(),
+            userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userDeletedFailEvent, CopyState.DELETE_FAILED),
+                    CopyState.DELETE_FAILED,
                     OutboxStatus.STARTED,
                     UUID.fromString(userRequest.getSagaId()));
             return;
@@ -121,8 +121,8 @@ public class UserRequestHelper {
 
         UserDeletedSuccessEvent userDeletedSuccessEvent = coreDomainService.deletedUserSuccess(user);
 
-        userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userDeletedSuccessEvent),
-                userDeletedSuccessEvent.getUser().getCopyState(),
+        userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userDeletedSuccessEvent, CopyState.DELETED),
+                CopyState.DELETED,
                 OutboxStatus.STARTED,
                 UUID.fromString(userRequest.getSagaId()));
     }
@@ -143,8 +143,8 @@ public class UserRequestHelper {
             log.error("Not found user with id: {}", user.getId().getValue());
             failureMessages.add("Not found user with id: " + user.getId().getValue());
             UserUpdatedFailEvent userUpdatedFailEvent = coreDomainService.updatedUserFail(user, failureMessages);
-            userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userUpdatedFailEvent),
-                    userUpdatedFailEvent.getUser().getCopyState(),
+            userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userUpdatedFailEvent, CopyState.UPDATE_FAILED),
+                    CopyState.UPDATE_FAILED,
                     OutboxStatus.STARTED,
                     UUID.fromString(userUpdateRequest.getSagaId()));
             return;
@@ -180,8 +180,8 @@ public class UserRequestHelper {
             log.error("Could not update user with id: {}", user.getId().getValue());
             failureMessages.add("Could not update user with id: " + user.getId().getValue());
             UserUpdatedFailEvent userUpdatedFailEvent = coreDomainService.updatedUserFail(user, failureMessages);
-            userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userUpdatedFailEvent),
-                    userUpdatedFailEvent.getUser().getCopyState(),
+            userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userUpdatedFailEvent, CopyState.UPDATE_FAILED),
+                    CopyState.UPDATE_FAILED,
                     OutboxStatus.STARTED,
                     UUID.fromString(userUpdateRequest.getSagaId()));
             return;
@@ -190,8 +190,8 @@ public class UserRequestHelper {
         log.info("User is updated with id: {}", userSaved.getId().getValue());
         UserUpdatedSuccessEvent userUpdatedSuccessEvent = coreDomainService.updatedUserSuccess(user);
 
-        userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userUpdatedSuccessEvent),
-                userUpdatedSuccessEvent.getUser().getCopyState(),
+        userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userUpdatedSuccessEvent, CopyState.UPDATED),
+                CopyState.UPDATED,
                 OutboxStatus.STARTED,
                 UUID.fromString(userUpdateRequest.getSagaId()));
     }

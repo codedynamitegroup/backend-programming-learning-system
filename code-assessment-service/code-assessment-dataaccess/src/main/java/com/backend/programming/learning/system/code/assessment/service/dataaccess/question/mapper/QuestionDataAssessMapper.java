@@ -9,9 +9,9 @@ import java.math.BigDecimal;
 @Component
 public class QuestionDataAssessMapper {
 
-    public QuestionEntity questionToQuestionEntity(Question question) {
-        return QuestionEntity.builder()
-                .id(question.getId().getValue())
-                .build();
-    }
+//    public QuestionEntity questionToQuestionEntity(Question question) {
+//        return QuestionEntity.builder()
+//                .id(question.getId().getValue())
+//                .build();
+//    }
 }

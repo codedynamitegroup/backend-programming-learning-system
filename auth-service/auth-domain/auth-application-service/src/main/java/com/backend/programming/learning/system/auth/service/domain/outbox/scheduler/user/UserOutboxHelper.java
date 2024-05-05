@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.auth.service.domain.outbox.model.
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserOutboxRepository;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -20,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.backend.programming.learning.system.saga.auth.SagaConstants.AUTH_SAGA_NAME;
+import static com.backend.programming.learning.system.saga.user.SagaConstants.USER_SAGA_NAME;
 
 @Slf4j
 @Component
@@ -36,12 +37,15 @@ public class UserOutboxHelper {
     @Transactional(readOnly = true)
     public Optional<List<UserOutboxMessage>> getUserOutboxMessageByOutboxStatusAndSagaStatus(
             OutboxStatus outboxStatus, SagaStatus... sagaStatus) {
-        return userOutboxRepository.findByTypeAndOutboxStatusAndSagaStatus(AUTH_SAGA_NAME, outboxStatus, sagaStatus);
+        return userOutboxRepository.findByTypeAndOutboxStatusAndSagaStatus(
+                USER_SAGA_NAME, outboxStatus, sagaStatus);
     }
 
     @Transactional(readOnly = true)
-    public Optional<UserOutboxMessage> getUserOutboxMessageBySagaIdAndSagaStatus(UUID sagaId, SagaStatus... sagaStatus) {
-        return userOutboxRepository.findByTypeAndSagaIdAndSagaStatus(AUTH_SAGA_NAME, sagaId, sagaStatus);
+    public Optional<UserOutboxMessage> getUserOutboxMessageBySagaIdAndServiceNameAndSagaStatus(
+            UUID sagaId, ServiceName serviceName, SagaStatus... sagaStatus) {
+        return userOutboxRepository.findByTypeAndSagaIdAndServiceNameAndSagaStatus(
+                USER_SAGA_NAME, sagaId, serviceName, sagaStatus);
     }
 
     @Transactional
@@ -55,32 +59,33 @@ public class UserOutboxHelper {
     }
 
     @Transactional
-    public void saveUserOutboxMessage(UserEventPayload userCreatedEventPayload,
-                                             CopyState state, OutboxStatus outboxStatus, SagaStatus sagaStatus, UUID sagaId) {
+    public void saveUserOutboxMessage(UserEventPayload userEventPayload,
+                                           ServiceName serviceName, CopyState state, OutboxStatus outboxStatus, SagaStatus sagaStatus, UUID sagaId) {
         userOutboxRepository.save(UserOutboxMessage.builder()
                 .id(UUID.randomUUID())
                 .sagaId(sagaId)
                 .createdAt(ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)))
-                .type(AUTH_SAGA_NAME)
-                .payload(createPayload(userCreatedEventPayload))
+                .type(USER_SAGA_NAME)
+                .payload(createPayload(userEventPayload))
                 .copyState(state)
                 .outboxStatus(outboxStatus)
                 .sagaStatus(sagaStatus)
+                .serviceName(serviceName)
                 .build());
     }
 
-    private String createPayload(UserEventPayload userCreatedEventPayload) {
+    private String createPayload(UserEventPayload userEventPayload) {
         try {
-            return objectMapper.writeValueAsString(userCreatedEventPayload);
+            return objectMapper.writeValueAsString(userEventPayload);
         } catch (JsonProcessingException e) {
-            log.error("Could not create UserCreatedEventPayload object for user id: {}", userCreatedEventPayload.getUserId(), e);
-            throw new AuthDomainException("Could not create UserCreatedEventPayload object for user id: " + userCreatedEventPayload.getUserId());
+            log.error("Could not create UserEventPayload object for user id: {}", userEventPayload.getUserId(), e);
+            throw new AuthDomainException("Could not create UserEventPayload object for user id: " + userEventPayload.getUserId());
         }
     }
 
     @Transactional
     public void deleteUserOutboxMessageByOutboxStatusAndSagaStatus(OutboxStatus outboxStatus,
                                                                    SagaStatus... sagaStatus) {
-        userOutboxRepository.deleteByTypeAndOutboxStatusAndSagaStatus(AUTH_SAGA_NAME, outboxStatus, sagaStatus);
+        userOutboxRepository.deleteByTypeAndOutboxStatusAndSagaStatus(USER_SAGA_NAME, outboxStatus, sagaStatus);
     }
 }

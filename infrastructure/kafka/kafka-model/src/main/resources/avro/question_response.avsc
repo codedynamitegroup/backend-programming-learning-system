@@ -2,14 +2,7 @@
   "type" : "record",
   "name" : "QuestionResponseAvroModel",
   "namespace" : "com.backend.programming.learning.system.kafka.core.avro.model",
-  "fields" : [ {
-    "name" : "answers",
-    "type" : {
-      "type" : "array",
-      "items" : "string",
-      "java-class" : "java.util.List"
-    }
-  }, {
+  "fields" : [{
     "name" : "createdBy",
     "logicalType" : "UUID",
     "type" : "string"

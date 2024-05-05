@@ -20,7 +20,6 @@ public class User extends AggregateRoot<UserId> {
     private String avatarUrl;
     private String refreshToken;
     private String lastIp;
-    private CopyState copyState;
     private ZonedDateTime lastLogin;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
@@ -38,7 +37,6 @@ public class User extends AggregateRoot<UserId> {
         setAvatarUrl(builder.avatarUrl);
         setRefreshToken(builder.refreshToken);
         setLastIp(builder.lastIp);
-        setCopyState(builder.copyState);
         setLastLogin(builder.lastLogin);
         createdAt = builder.createdAt;
         setUpdatedAt(builder.updatedAt);
@@ -157,14 +155,6 @@ public class User extends AggregateRoot<UserId> {
         this.updatedAt = updatedAt;
     }
 
-    public CopyState getCopyState() {
-        return copyState;
-    }
-
-    public void setCopyState(CopyState copyState) {
-        this.copyState = copyState;
-    }
-
     public static Builder builder() {
         return new Builder();
     }
@@ -180,7 +170,6 @@ public class User extends AggregateRoot<UserId> {
         private String avatarUrl;
         private String refreshToken;
         private String lastIp;
-        private CopyState copyState;
         private ZonedDateTime lastLogin;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
@@ -237,11 +226,6 @@ public class User extends AggregateRoot<UserId> {
 
         public Builder lastIp(String val) {
             lastIp = val;
-            return this;
-        }
-
-        public Builder copyState(CopyState val) {
-            copyState = val;
             return this;
         }
 
