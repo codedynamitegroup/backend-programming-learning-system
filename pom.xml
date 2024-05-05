@@ -45,6 +45,7 @@
 		<micrometer-registry-prometheus.version>1.8.1</micrometer-registry-prometheus.version>
 		<logstash-logback-encoder.version>6.5</logstash-logback-encoder.version>
 		<springdoc-openapi-ui.version>1.6.6</springdoc-openapi-ui.version>
+		<spring-cloud-starter-zipkin.version>2.2.8.RELEASE</spring-cloud-starter-zipkin.version>
 	</properties>
 
 	<dependencyManagement>
@@ -314,11 +315,23 @@
 				<version>${spring-cloud.version}</version>
 			</dependency>
 
-<!--			<dependency>-->
-<!--				<groupId>org.springframework.boot</groupId>-->
-<!--				<artifactId>spring-boot-starter-security</artifactId>-->
-<!--				<version>${spring-boot.version}</version>-->
-<!--			</dependency>-->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-sleuth</artifactId>
+				<version>${spring-cloud.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-zipkin</artifactId>
+				<version>${spring-cloud-starter-zipkin.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-security</artifactId>
+				<version>${spring-boot.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>io.micrometer</groupId>
