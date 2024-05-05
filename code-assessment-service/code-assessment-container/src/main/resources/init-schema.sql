@@ -37,7 +37,12 @@ CREATE TYPE qtype AS ENUM ('MULTIPLE_CHOICE', 'SHORT_ANSWER', 'CODE', 'ESSAY');
 DROP TYPE IF EXISTS grading_status;
 CREATE TYPE grading_status AS ENUM ('GRADING', 'GRADED', 'GRADING_SYSTEM_UNAVAILABLE');
 
-
+DROP TABLE IF EXISTS tag CASCADE;
+CREATE TABLE tag(
+    id uuid unique not null ,
+    name text unique not null ,
+    CONSTRAINT tag_pk PRIMARY KEY (id)
+);
 
 DROP TABLE IF EXISTS "public".user CASCADE;
 CREATE TABLE "public".user
@@ -119,6 +124,56 @@ CREATE TABLE qtype_code_questions(
 --         ON UPDATE CASCADE
 --         ON DELETE CASCADE
     );
+
+DROP TABLE IF EXISTS tag_code_question CASCADE;
+CREATE TABLE tag_code_question(
+    code_question_id uuid not null ,
+    tag_id uuid not null ,
+    constraint tcq_pk PRIMARY KEY (code_question_id, tag_id),
+    constraint tag_fk foreign key (tag_id)
+                              references tag (id) match simple on UPDATE cascade on delete cascade ,
+    constraint c_qu_fk foreign key (code_question_id)
+                              references qtype_code_questions (id) match simple on update cascade on delete cascade
+);
+
+DROP TABLE IF EXISTS shared_solution cascade;
+CREATE TABLE shared_solution(
+    id uuid not null ,
+    code_question_id uuid not null ,
+    user_id uuid not null ,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE,
+    source_code text not null ,
+    approach text not null ,
+    complexity text,
+    view_number int default 0 check(view_number >= 0),
+    title text not null ,
+    constraint ss_pk primary key (id),
+    constraint co_qu_fk foreign key (code_question_id)
+        references qtype_code_questions (id) match simple on update cascade on delete cascade,
+    constraint user_fk foreign key (user_id)
+                            references "public".user (id) match simple on update cascade on delete cascade
+
+);
+
+DROP TABLE IF EXISTS shared_solution_tag cascade;
+CREATE TABLE shared_solution_tag(
+    shared_solution_id uuid not null ,
+    tag_id uuid not null ,
+    constraint sst_id primary key (shared_solution_id, tag_id),
+    constraint ss_sst_fk foreign key (shared_solution_id)
+                                references shared_solution(id) match simple on update cascade on delete cascade ,
+    constraint t_sst_fk foreign key (tag_id)
+                                references tag(id) match simple on update cascade on delete cascade
+);
+
+-- DROP TABLE IF EXISTS comment cascase;
+-- CREATE TABLE comment(
+--     id uuid not null ,
+--     shared_solution_id uuid not null ,
+--     user_id uuid not null ,
+--     content text not null,
+-- );
 
 DROP TABLE IF EXISTS programming_language_code_question CASCADE;
 CREATE TABLE programming_language_code_question(
