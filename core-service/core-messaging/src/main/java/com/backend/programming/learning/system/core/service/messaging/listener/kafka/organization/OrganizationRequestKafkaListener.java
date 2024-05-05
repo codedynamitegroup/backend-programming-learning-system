@@ -32,7 +32,7 @@ public class OrganizationRequestKafkaListener implements KafkaConsumer<Organizat
     }
 
     @Override
-    @KafkaListener(id = "${kafka-consumer-config.core-service-organization-request-group-id}",
+    @KafkaListener(id = "${kafka-consumer-config.core-service-organization-consumer-group-id}",
             topics = "${core-service.core-organization-request-topic-name}")
     public void receive(@Payload List<OrganizationRequestAvroModel> messages,
                         @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) List<String> keys,
