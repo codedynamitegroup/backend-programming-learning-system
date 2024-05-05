@@ -39,8 +39,6 @@ core-service:
 #      mode: always
 
 spring:
-  kafka:
-    bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
   zipkin:
     sender:
       type: kafka
