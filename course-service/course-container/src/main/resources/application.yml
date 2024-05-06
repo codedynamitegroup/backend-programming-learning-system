@@ -14,28 +14,36 @@ course-service:
   question-request-topic-name: core-question-request
   question-response-topic-name: core-question-response
 
-  user-request-topic-name: user-request
-  user-create-request-topic-name: user-create-request
-  user-update-request-topic-name: user-update-request
-  user-delete-request-topic-name: user-delete-request
-  user-create-response-topic-name: user-create-response
-  user-update-response-topic-name: user-update-response
-  user-delete-response-topic-name: user-delete-response
+  course-user-request-topic-name: course-user-request
   user-response-topic-name: user-response
+
+  course-organization-request-topic-name: course-organization-request
+  organization-response-topic-name: organization-response
 
   calendar-event-update-request-topic-name: calendar-event-update-request
   calendar-event-update-response-topic-name: calendar-event-update-response
 
-  organization-create-request-topic-name: organization-create-request
-  organization-update-request-topic-name: organization-update-request
-  organization-delete-request-topic-name: organization-delete-request
-
-  outbox-scheduler-fixed-rate: 10000
-  outbox-scheduler-initial-delay: 10000
+  outbox-scheduler-fixed-rate: 2000
+  outbox-scheduler-initial-delay: 2000
 
   create-notification-scheduler-fixed-rate: 1800000
 
 spring:
+  kafka:
+    bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
+  zipkin:
+    sender:
+      type: kafka
+  sleuth:
+    sampler:
+      probability: 1.0
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
   jpa:
     open-in-view: false
     show-sql: true
@@ -74,7 +82,6 @@ kafka-producer-config:
 kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-
   question-request-consumer-group-id: question-request-topic-consumer
 
   course-service-calendar-event-consumer-group-id: course-service-calendar-event-consumer
@@ -83,9 +90,9 @@ kafka-consumer-config:
   course-service-organization-update-request-group-id: course-service-organization-update-request-consumer
   course-service-organization-delete-request-group-id: course-service-organization-delete-request-consumer
 
-  course-service-user-create-request-group-id: course-service-user-create-request-consumer
-  course-service-user-update-request-group-id: course-service-user-update-request-consumer
-  course-service-user-delete-request-group-id: course-service-user-delete-request-consumer
+  course-service-user-request-group-id: course-service-user-request-topic
+
+  course-service-organization-request-group-id: course-service-organization-request-topic
 
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
@@ -100,3 +107,27 @@ kafka-consumer-config:
   max-partition-fetch-bytes-default: 1048576
   max-partition-fetch-bytes-boost-factor: 1
   poll-timeout-ms: 150
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+security:
+  paths-to-ignore: /api-docs, /actuator/**
+
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure.include: health, prometheus
+      path-mapping.prometheus: metrics
+  endpoint:
+    health:
+      show-details: always
+    prometheus:
+      cache.time-to-live: 1ms
+
+log:
+  appName: course-service

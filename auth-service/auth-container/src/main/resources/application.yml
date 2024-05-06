@@ -6,16 +6,32 @@ logging:
     com.backend.programming.learning.system: INFO
 
 auth-service:
-  user-request-topic-name: user-request
+  core-user-request-topic-name: core-user-request
+  course-user-request-topic-name: course-user-request
   user-response-topic-name: user-response
-  organization-create-request-topic-name: organization-create-request
-  organization-update-request-topic-name: organization-update-request
-  organization-delete-request-topic-name: organization-delete-request
+
+  core-organization-request-topic-name: core-organization-request
+  course-organization-request-topic-name: course-organization-request
   organization-response-topic-name: organization-response
   outbox-scheduler-fixed-rate: 2000
   outbox-scheduler-initial-delay: 2000
 
 spring:
+  kafka:
+    bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
+  zipkin:
+    sender:
+      type: kafka
+  sleuth:
+    sampler:
+      probability: 1.0
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
   jpa:
     open-in-view: false
     show-sql: true
@@ -54,8 +70,8 @@ kafka-producer-config:
 kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-  core-service-user-response-group-id: core-service-user-response-topic
-  core-service-organization-response-group-id: core-service-organization-response-topic
+  service-user-response-group-id: service-user-response-topic
+  service-organization-response-group-id: service-organization-response-topic
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
   specific-avro-reader: true
@@ -69,3 +85,27 @@ kafka-consumer-config:
   max-partition-fetch-bytes-default: 1048576
   max-partition-fetch-bytes-boost-factor: 1
   poll-timeout-ms: 150
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+security:
+  paths-to-ignore: /api-docs, /actuator/**
+
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure.include: health, prometheus
+      path-mapping.prometheus: metrics
+  endpoint:
+    health:
+      show-details: always
+    prometheus:
+      cache.time-to-live: 1ms
+
+log:
+  appName: auth-service

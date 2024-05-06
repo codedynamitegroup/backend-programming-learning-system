@@ -9,36 +9,24 @@ core-service:
   code-question-update-response-from-core-service-topic-name: code-question-update-response-from-core-service
   code-question-update-request-to-core-service-topic-name: code-question-update-request-to-core-service
 
-  core-organization-request-topic-name: core-organization-request
-
   question-request-topic-name: core-question-request
   question-response-topic-name: core-question-response
 
-  core-user-request-topic-name: user-request
+  core-user-request-topic-name: core-user-request
   user-response-topic-name: user-response
+
+  core-organization-request-topic-name: core-organization-request
+  organization-response-topic-name: organization-response
 
   calendar-event-update-request-topic-name: calendar-event-update-request
   calendar-event-update-response-topic-name: calendar-event-update-response
 
-  outbox-scheduler-fixed-rate: 10000
-  outbox-scheduler-initial-delay: 10000
-
-#spring:
-#  jpa:
-#    open-in-view: false
-#    show-sql: true
-#  datasource:
-#    url: jdbc:postgresql://localhost:5432/core-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
-#    username: postgres
-#    password: localdb
-#    driver-class-name: org.postgresql.Driver
-#  sql:
-#    init:
-#      platform: postgres
-#      schema-locations: classpath:init-schema.sql
-#      mode: always
+  outbox-scheduler-fixed-rate: 2000
+  outbox-scheduler-initial-delay: 2000
 
 spring:
+  kafka:
+    bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
   zipkin:
     sender:
       type: kafka
@@ -55,10 +43,6 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL9Dialect
-#        enable_lazy_load_no_trans: true
-#        event:
-#          merge:
-#            entity_copy_observer: allow
   datasource:
     url: jdbc:postgresql://localhost:5432/core-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: postgres
@@ -92,8 +76,6 @@ kafka-consumer-config:
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
   core-service-user-consumer-group-id: core-service-user-topic-consumer
 
-  core-service-organization-consumer-group-id: core-service-organization-request-topic-consumer
-
   core-service-question-consumer-group-id: core-service-question-topic-consumer
 
   core-service-calendar-event-consumer-group-id: core-service-calendar-event-topic-consumer
@@ -101,6 +83,8 @@ kafka-consumer-config:
   core-service-user-request-group-id: core-service-user-request-topic
 
   code-question-update-consumer-group-id: code-question-update-topic-consumer
+
+  core-service-organization-consumer-group-id: core-service-organization-topic-consumer
 
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
