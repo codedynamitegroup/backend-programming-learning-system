@@ -20,7 +20,7 @@ spring:
       fail-fast: true
 
 security:
-  paths-to-ignore: /api-docs, /actuator/**
+  paths-to-ignore: /actuator/**
 
 management:
   endpoints:
