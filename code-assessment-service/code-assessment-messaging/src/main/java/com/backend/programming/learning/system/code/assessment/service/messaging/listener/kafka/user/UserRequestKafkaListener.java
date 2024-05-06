@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.code.assessment.service.messagin
 import com.backend.programming.learning.system.code.assessment.service.domain.exception.CodeAssessmentServiceApplicationServiceException;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.message.listener.UserRequestMessageListener;
 import com.backend.programming.learning.system.code.assessment.service.messaging.mapper.UserMessagingDataMapper;
-import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
+import com.backend.programming.learning.system.domain.exception.user.UserNotFoundException;
 import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel;
 import com.backend.programming.learning.system.kafka.consumer.KafkaConsumer;
 import lombok.extern.slf4j.Slf4j;
