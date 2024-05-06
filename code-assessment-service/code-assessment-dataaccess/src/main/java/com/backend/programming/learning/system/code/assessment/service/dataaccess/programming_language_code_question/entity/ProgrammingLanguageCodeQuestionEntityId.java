@@ -4,8 +4,6 @@ import com.backend.programming.learning.system.code.assessment.service.dataacces
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.language.entity.ProgrammingLanguageEntity;
 import lombok.*;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
@@ -17,15 +15,15 @@ import java.util.UUID;
 @AllArgsConstructor
 public class ProgrammingLanguageCodeQuestionEntityId implements Serializable {
 
-    ProgrammingLanguageEntity programmingLanguage;
+    UUID programmingLanguage;
 
-    CodeQuestionEntity codeQuestion;
+    UUID codeQuestion;
 
     @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        ProgrammingLanguageCodeQuestionEntityId that = (ProgrammingLanguageCodeQuestionEntityId) object;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProgrammingLanguageCodeQuestionEntityId that = (ProgrammingLanguageCodeQuestionEntityId) o;
         return Objects.equals(programmingLanguage, that.programmingLanguage) && Objects.equals(codeQuestion, that.codeQuestion);
     }
 

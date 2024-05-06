@@ -24,4 +24,6 @@ public interface CodeAssessmentDomainService {
     UserUpdatedFailEvent updatedUserFail(User user, List<String> failureMessages);
     UserDeletedSuccessEvent deletedUserSuccess(User user);
     UserDeletedFailEvent deletedUserFail(User user, List<String> failureMessages);
+    
+    SharedSolution initiateSharedSolution(SharedSolution sharedSolution, List<Tag> tags);
 }

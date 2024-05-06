@@ -77,6 +77,12 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
         return new UserCreatedSuccessEvent(user,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
     }
+    
+    public SharedSolution initiateSharedSolution(SharedSolution sharedSolution, List<Tag> tags) {
+        sharedSolution.initiate(tags);
+        return sharedSolution;
+    }
+
 
     @Override
     public UserCreatedFailEvent createdUserFail(User user, List<String> failureMessages) {
