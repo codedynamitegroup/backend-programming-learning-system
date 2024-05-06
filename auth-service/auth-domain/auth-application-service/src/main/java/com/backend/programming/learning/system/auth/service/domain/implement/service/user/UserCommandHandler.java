@@ -72,6 +72,14 @@ public class UserCommandHandler {
                 userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
                 UUID.randomUUID());
 
+        userOutboxHelper.saveUserOutboxMessage(
+                userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
+                ServiceName.CODE_ASSESSMENT_SERVICE,
+                CopyState.CREATING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
+                UUID.randomUUID());
+
         return createUserResponse;
     }
 
@@ -109,6 +117,14 @@ public class UserCommandHandler {
                 userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
                 UUID.randomUUID());
 
+        userOutboxHelper.saveUserOutboxMessage(
+                userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
+                ServiceName.CODE_ASSESSMENT_SERVICE,
+                CopyState.UPDATING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
+                UUID.randomUUID());
+
         log.info("User is updated with id: {}", userUpdatedEvent.getUser().getId().getValue());
         return userDataMapper.userToUpdateUserResponse(userUpdatedEvent.getUser(), "User updated successfully");
     }
@@ -130,6 +146,14 @@ public class UserCommandHandler {
         userOutboxHelper.saveUserOutboxMessage(
                 userDataMapper.userDeletedEventToUserEventPayload(userDeletedEvent),
                 ServiceName.COURSE_SERVICE,
+                CopyState.DELETING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.DELETING),
+                UUID.randomUUID());
+
+        userOutboxHelper.saveUserOutboxMessage(
+                userDataMapper.userDeletedEventToUserEventPayload(userDeletedEvent),
+                ServiceName.CODE_ASSESSMENT_SERVICE,
                 CopyState.DELETING,
                 OutboxStatus.STARTED,
                 userSagaHelper.copyStatusToSagaStatus(CopyState.DELETING),

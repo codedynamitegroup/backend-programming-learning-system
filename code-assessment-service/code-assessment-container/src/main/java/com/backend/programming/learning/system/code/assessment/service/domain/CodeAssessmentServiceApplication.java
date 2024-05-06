@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EnableDiscoveryClient
 @EntityScan(basePackages = {"com.backend.programming.learning.system.code.assessment.service.dataaccess","com.backend.programming.learning.system.dataaccess"})
-@EnableJpaRepositories(basePackages = "com.backend.programming.learning.system.code.assessment.service.dataaccess")
+@EnableJpaRepositories(basePackages = {"com.backend.programming.learning.system.code.assessment.service.dataaccess","com.backend.programming.learning.system.dataaccess"})
 @SpringBootApplication(scanBasePackages = "com.backend.programming.learning.system")
 public class CodeAssessmentServiceApplication {
     public static void main(String[] args){

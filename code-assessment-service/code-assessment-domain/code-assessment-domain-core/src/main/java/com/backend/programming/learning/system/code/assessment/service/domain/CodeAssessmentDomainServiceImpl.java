@@ -2,7 +2,9 @@ package com.backend.programming.learning.system.code.assessment.service.domain;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionsUpdatedEvent;
+import com.backend.programming.learning.system.code.assessment.service.domain.event.user.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
+import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import lombok.extern.slf4j.Slf4j;
 
@@ -70,5 +72,41 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
         codeSubmission.setGradingStatus(GradingStatus.GRADED);
     }
 
+    @Override
+    public UserCreatedSuccessEvent createdUserSuccess(User user) {
+        return new UserCreatedSuccessEvent(user,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+    }
 
+    @Override
+    public UserCreatedFailEvent createdUserFail(User user, List<String> failureMessages) {
+        return new UserCreatedFailEvent(user,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)), failureMessages);
+    }
+
+    @Override
+    public UserUpdatedSuccessEvent updatedUserSuccess(User user) {
+        return new UserUpdatedSuccessEvent(user,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+    }
+
+    @Override
+    public UserUpdatedFailEvent updatedUserFail(User user, List<String> failureMessages) {
+        return new UserUpdatedFailEvent(user,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                failureMessages);
+    }
+
+    @Override
+    public UserDeletedSuccessEvent deletedUserSuccess(User user) {
+        return new UserDeletedSuccessEvent(user,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+    }
+
+    @Override
+    public UserDeletedFailEvent deletedUserFail(User user, List<String> failureMessages) {
+        return new UserDeletedFailEvent(user,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                failureMessages);
+    }
 }

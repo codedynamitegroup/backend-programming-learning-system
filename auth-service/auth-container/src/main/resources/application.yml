@@ -8,6 +8,7 @@ logging:
 auth-service:
   core-user-request-topic-name: core-user-request
   course-user-request-topic-name: course-user-request
+  code-assessment-user-request-topic-name: code-assessment-user-request
   user-response-topic-name: user-response
 
   core-organization-request-topic-name: core-organization-request

@@ -27,4 +27,20 @@ public class UserDataAccessMapper {
                 .isDeleted(entity.getIsDeleted())
                 .build();
     }
+
+    public UserEntity userToUserEntity(User user) {
+        return UserEntity.builder()
+                .id(user.getId().getValue())
+                .email(user.getEmail())
+                .dob(user.getDob())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .phone(user.getPhone())
+                .address(user.getAddress())
+                .avatarUrl(user.getAvatarUrl())
+                .createdAt(user.getCreatedAt())
+                .updatedAt(user.getUpdatedAt())
+                .isDeleted(user.getDeleted())
+                .build();
+    }
 }

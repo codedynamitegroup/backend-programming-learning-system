@@ -1,8 +1,8 @@
 package com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission_test_case.adapter;
 
+import com.backend.programming.learning.system.code.assessment.service.config.CodeAssessmentServiceConfigData;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission_test_case.mapper.CodeSubmissionTestCaseDataAccessMapper;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission_test_case.repository.CodeSubmissionTestCaseJpaRepository;
-import com.backend.programming.learning.system.code.assessment.service.config.CodeAssessmentServiceConfigData;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmissionTestCase;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.CodeSubmissionTestCaseRepository;
 import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
