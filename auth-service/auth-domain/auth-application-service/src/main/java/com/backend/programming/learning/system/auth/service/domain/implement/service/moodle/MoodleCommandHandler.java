@@ -3,7 +3,6 @@ package com.backend.programming.learning.system.auth.service.domain.implement.se
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user_moodle.ListUserModel;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
-import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.mapper.MoodleDataMapper;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -37,7 +36,7 @@ public class MoodleCommandHandler {
 
     @Transactional
     public List<UserEntityResponse> syncUser() {
-        String criteria = "criteria[0][key]=auth&criteria[0][value]=manual";
+        String criteria = "criteria[0][key]=&criteria[0][value]=";
         String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&%s",
                 MOODLE_URL, TOKEN, GET_USERS, criteria);
         RestTemplate restTemplate = new RestTemplate();

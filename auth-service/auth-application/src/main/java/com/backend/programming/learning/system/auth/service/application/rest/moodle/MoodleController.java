@@ -36,8 +36,8 @@ public class MoodleController {
 
     @GetMapping("token")
     public ResponseEntity<String> getToken(
-            @RequestParam(value = "username", required = false) String username,
-            @RequestParam(value = "password", required = false) String password
+            @RequestParam(value = "username", required = true) String username,
+            @RequestParam(value = "password", required = true) String password
     ) {
         String res = moodleApplicationService.getToken(username, password);
         return ResponseEntity.ok(res);

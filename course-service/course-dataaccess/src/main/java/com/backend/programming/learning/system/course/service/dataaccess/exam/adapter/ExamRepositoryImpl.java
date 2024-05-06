@@ -5,10 +5,12 @@ import com.backend.programming.learning.system.course.service.dataaccess.exam.ma
 import com.backend.programming.learning.system.course.service.dataaccess.exam.repository.ExamJpaRepository;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamRepository;
+import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
+
 
 @Repository
 public class ExamRepositoryImpl implements ExamRepository {
@@ -34,8 +36,8 @@ public class ExamRepositoryImpl implements ExamRepository {
     }
 
     @Override
-    public Page<Exam> findAll(String search, Integer pageNo, Integer pageSize) {
-        return examJpaRepository.findAll(PageRequest.of(pageNo, pageSize))
+    public Page<Exam> findAll(CourseId courseId, String search, Integer pageNo, Integer pageSize) {
+        return examJpaRepository.findAll(courseId.getValue(), search, PageRequest.of(pageNo, pageSize))
                 .map(examDataAccessMapper::examEntityToExam);
     }
 
