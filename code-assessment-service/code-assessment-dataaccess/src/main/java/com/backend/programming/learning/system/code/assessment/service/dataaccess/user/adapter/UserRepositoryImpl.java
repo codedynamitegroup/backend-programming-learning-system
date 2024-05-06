@@ -27,4 +27,17 @@ public class UserRepositoryImpl implements UserRepository {
         Optional<UserEntity> user = userJpaRepository.findById(userId.getValue());
         return user.map(dataAccessMapper::userEntityToUser);
     }
+
+    @Override
+    public Optional<User> findUserByEmail(String email) {
+        return userJpaRepository.findByEmail(email)
+                .map(dataAccessMapper::userEntityToUser);
+    }
+
+    @Override
+    public User save(User user) {
+        return dataAccessMapper
+                .userEntityToUser(userJpaRepository
+                        .save(dataAccessMapper.userToUserEntity(user)));
+    }
 }
