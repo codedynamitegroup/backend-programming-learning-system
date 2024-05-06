@@ -5,10 +5,14 @@ import com.backend.programming.learning.system.course.service.dataaccess.exam.ma
 import com.backend.programming.learning.system.course.service.dataaccess.exam.repository.ExamJpaRepository;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamRepository;
+import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
 
 @Repository
 public class ExamRepositoryImpl implements ExamRepository {
@@ -34,8 +38,8 @@ public class ExamRepositoryImpl implements ExamRepository {
     }
 
     @Override
-    public Page<Exam> findAll(String search, Integer pageNo, Integer pageSize) {
-        return examJpaRepository.findAll(PageRequest.of(pageNo, pageSize))
+    public Page<Exam> findAll(CourseId courseId, String search, Integer pageNo, Integer pageSize) {
+        return examJpaRepository.findAll(courseId.getValue(), search, PageRequest.of(pageNo, pageSize))
                 .map(examDataAccessMapper::examEntityToExam);
     }
 
@@ -44,5 +48,11 @@ public class ExamRepositoryImpl implements ExamRepository {
         ExamEntity examEntity = examJpaRepository.findById(examId.getValue())
                 .orElseThrow(() -> new RuntimeException("Exam not found"));
         examJpaRepository.delete(examEntity);
+    }
+
+    @Override
+    public Optional<Exam> findByName(String name) {
+        return examJpaRepository.findByName(name)
+                .map(examDataAccessMapper::examEntityToExam);
     }
 }

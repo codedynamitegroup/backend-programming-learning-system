@@ -12,6 +12,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.exam.UpdateExamResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.exam.ExamResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.exam.ExamApplicationService;
+import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -43,11 +44,11 @@ import java.util.UUID;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/course/exam", produces = "application/vnd.api.v1+json")
+@RequestMapping(value = "/course/", produces = "application/vnd.api.v1+json")
 public class ExamController {
     private final ExamApplicationService examApplicationService;
 
-    @GetMapping
+    @GetMapping("{courseId}/exam")
     @Operation(summary = "Get list exam.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Success.", content = {
@@ -57,6 +58,7 @@ public class ExamController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllExamResponse> findAll(
+            @PathVariable UUID courseId,
             @RequestParam(defaultValue = "") String search,
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize
@@ -67,11 +69,11 @@ public class ExamController {
                 .pageNo(pageNo)
                 .pageSize(pageSize)
                 .build();
-        QueryAllExamResponse response = examApplicationService.findAll(queryAllExamCommand);
+        QueryAllExamResponse response = examApplicationService.findAll(new CourseId(courseId),queryAllExamCommand);
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping
+    @PostMapping("exam")
     @Operation(summary = "Create exam.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Success.", content = {
@@ -85,7 +87,7 @@ public class ExamController {
         CreateExamResponse response = examApplicationService.createExam(createExamCommand);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
-    @GetMapping("/{examId}")
+    @GetMapping("exam/{examId}")
     @Operation(summary = "Get exam by id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
@@ -101,7 +103,7 @@ public class ExamController {
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping("/{examId}")
+    @DeleteMapping("exam/{examId}")
     @Operation(summary = "Delete exam by id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
@@ -116,7 +118,7 @@ public class ExamController {
         DeleteCourseResponse response = examApplicationService.deleteExam(deleteExamCommand);
         return ResponseEntity.ok(response);
     }
-    @PutMapping("/{examId}")
+    @PutMapping("exam/{examId}")
     @Operation(summary = "Update exam by id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {

@@ -22,7 +22,7 @@ public class CourseRepositoryImpl implements CourseRepository {
     @Override
     public Course save(Course course) {
         return courseDataAccessMapper.courseEntityToCourse(courseJpaRepository
-                .save(courseDataAccessMapper
+                .saveAndFlush(courseDataAccessMapper
                         .courseToCourseEntity(course)));
     }
 
