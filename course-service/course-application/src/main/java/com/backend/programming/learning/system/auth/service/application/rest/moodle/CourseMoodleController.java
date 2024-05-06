@@ -1,14 +1,15 @@
 package com.backend.programming.learning.system.auth.service.application.rest.moodle;
 
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.CourseMoodleResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.CourseResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.ports.input.service.moodle.MoodleApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 /**
  * com.backend.programming.learning.system.auth.service.application.rest.course
@@ -21,6 +22,8 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 @RequestMapping(value = "/course/course/moodle", produces = "application/vnd.api.v1+json")
 public class CourseMoodleController {
+    private final MoodleApplicationService moodleApplicationService;
+
     // tạm để ở controller này
     String GET_ALL_COURSES = "core_course_get_courses";
     String GET_COURSE_BY_USER = "core_enrol_get_users_courses";
@@ -43,5 +46,11 @@ public class CourseMoodleController {
                 MOODLE_URL, TOKEN, GET_COURSE_BY_USER, userId);
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForEntity(apiURL, String.class);
+    }
+
+    @PostMapping
+    public ResponseEntity<List<CourseResponseEntity>> syncCourse() {
+        List<CourseResponseEntity>courses = moodleApplicationService.syncCourse();
+        return ResponseEntity.ok(courses);
     }
 }

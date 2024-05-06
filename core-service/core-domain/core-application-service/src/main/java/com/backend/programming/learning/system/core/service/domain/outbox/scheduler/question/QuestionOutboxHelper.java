@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.core.service.domain.outbox.sched
 
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.question.QuestionEventPayload;
+import com.backend.programming.learning.system.core.service.domain.outbox.model.question.QuestionEventPreviousPayload;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.question.QuestionOutboxMessage;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QuestionOutboxRepository;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
@@ -38,9 +39,10 @@ public class QuestionOutboxHelper {
     }
 
     @Transactional(readOnly = true)
-    public Optional<QuestionOutboxMessage> getQuestionOutboxMessageBySagaIdAndSagaStatus(UUID sagaId,
-                                                                                         SagaStatus... sagaStatus) {
-        return questionOutboxRepository.findByTypeAndSagaIdAndSagaStatus(QUESTION_SAGA_NAME, sagaId, sagaStatus);
+    public Optional<QuestionOutboxMessage> getQuestionOutboxMessageBySagaIdAndSagaStatusAndCopyState(UUID sagaId,
+                                                                                                     CopyState copyState,
+                                                                                                     SagaStatus... sagaStatus) {
+        return questionOutboxRepository.findByTypeAndSagaIdAndCopyStateAndSagaStatus(QUESTION_SAGA_NAME, sagaId, copyState, sagaStatus);
     }
 
     @Transactional
@@ -57,16 +59,17 @@ public class QuestionOutboxHelper {
 
     @Transactional
     public void saveNewQuestionOutboxMessage(QuestionEventPayload questionEventPayload,
-                     CopyState copyState,
-                     OutboxStatus outboxStatus,
-                     SagaStatus sagaStatus,
-                     UUID sagaId) {
+                                             CopyState copyState,
+                                             OutboxStatus outboxStatus,
+                                             SagaStatus sagaStatus,
+                                             UUID sagaId, QuestionEventPreviousPayload previousPayload) {
         questionOutboxRepository.save(QuestionOutboxMessage.builder()
                 .id(UUID.randomUUID())
                 .sagaId(sagaId)
                 .createdAt(questionEventPayload.getCreatedAt())
                 .type(QUESTION_SAGA_NAME)
                 .payload(createPayload(questionEventPayload))
+                .previousPayload(previousPayload != null ? createPayload(previousPayload) : null)
                 .sagaStatus(sagaStatus)
                 .outboxStatus(outboxStatus)
                 .copyState(copyState)
@@ -87,6 +90,15 @@ public class QuestionOutboxHelper {
         } catch (Exception e) {
             log.error("Failed to create payload object for question event: {}", questionEventPayload, e);
             throw new CoreDomainException("Failed to create payload object for question event: " + questionEventPayload, e);
+        }
+    }
+
+    private String createPayload(QuestionEventPreviousPayload questionEventPreviousPayload) {
+        try {
+            return objectMapper.writeValueAsString(questionEventPreviousPayload);
+        } catch (Exception e) {
+            log.error("Failed to create payload object for question event: {}", questionEventPreviousPayload, e);
+            throw new CoreDomainException("Failed to create payload object for question event: " + questionEventPreviousPayload, e);
         }
     }
 }

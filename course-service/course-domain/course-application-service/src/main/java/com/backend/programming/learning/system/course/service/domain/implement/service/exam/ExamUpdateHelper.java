@@ -25,15 +25,15 @@ public class ExamUpdateHelper {
 
     public Exam updateExam(ExamId examId, UpdateExamCommand updateExamCommand) {
         Exam exam = examRepository.findBy(examId);
-        Course course = courseRepository.findBy(updateExamCommand.getCourseId());
+        Course course = courseRepository.findBy(updateExamCommand.courseId());
         exam.setCourse(course);
-        exam.setName(updateExamCommand.getName());
-        exam.setIntro(updateExamCommand.getIntro());
-        exam.setScore(updateExamCommand.getScore());
-        exam.setMaxScore(updateExamCommand.getMaxScore());
-        exam.setTimeOpen(updateExamCommand.getTimeOpen());
-        exam.setTimeClose(updateExamCommand.getTimeClose());
-        exam.setOverdueHanding(updateExamCommand.getOverdueHandling());
+        exam.setName(updateExamCommand.name());
+        exam.setIntro(updateExamCommand.intro());
+        exam.setScore(updateExamCommand.score());
+        exam.setMaxScore(updateExamCommand.maxScore());
+        exam.setTimeOpen(updateExamCommand.timeOpen());
+        exam.setTimeClose(updateExamCommand.timeClose());
+        exam.setOverdueHanding(updateExamCommand.overdueHandling());
         return examRepository.save(exam);
     }
 

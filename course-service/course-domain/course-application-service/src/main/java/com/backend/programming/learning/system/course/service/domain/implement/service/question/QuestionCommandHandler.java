@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.question.DeleteQuestionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QueryAllQuestionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QueryAllQuestionExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QueryAllQuestionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QueryQuestionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.question.QuestionResponseEntity;
@@ -59,5 +60,10 @@ public class QuestionCommandHandler {
         Question question = questionCreateHelper.createQuestionBank(createQuestionCommand);
         log.info("Question bank is created with id: {}", question.getId());
         return questionDataMapper.questionToCreateQuestionResponse(question, "Question bank created successfully");
+    }
+
+    public QueryAllQuestionResponse findAllQuestionsByExamId(QueryAllQuestionExamCommand queryAllQuestionCommand) {
+        Page<Question> questions = questionQueryHelper.findAllQuestionsByExamId(queryAllQuestionCommand);
+        return questionDataMapper.questionsToQueryAllQuestionResponse(questions);
     }
 }

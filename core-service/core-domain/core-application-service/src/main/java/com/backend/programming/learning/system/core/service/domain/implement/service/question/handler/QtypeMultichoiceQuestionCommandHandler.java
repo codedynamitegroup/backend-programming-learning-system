@@ -53,7 +53,7 @@ public class QtypeMultichoiceQuestionCommandHandler {
                 questionCreatedEvent.getQuestion().getCopyState(),
                 OutboxStatus.STARTED,
                 questionSagaHelper.questionStatusToSagaStatus(questionCreatedEvent.getQuestion().getCopyState()),
-                UUID.randomUUID());
+                UUID.randomUUID(), null);
 
         return questionDataMapper.questionCreatedEventToCreateQuestionResponse(questionCreatedEvent, "Qtype Multichoice Question created successfully");
     }
@@ -73,7 +73,8 @@ public class QtypeMultichoiceQuestionCommandHandler {
                 questionUpdatedEvent.getQuestion().getCopyState(),
                 OutboxStatus.STARTED,
                 questionSagaHelper.questionStatusToSagaStatus(questionUpdatedEvent.getQuestion().getCopyState()),
-                UUID.randomUUID());
+                UUID.randomUUID(),
+                questionDataMapper.questionUpdatedEventToQuestionEventPreviousPayload(questionUpdatedEvent));
 
         return questionDataMapper.questionUpdatedEventToUpdateQuestionRespond(questionUpdatedEvent,
                 "Qtype Multichoice Question updated successfully");

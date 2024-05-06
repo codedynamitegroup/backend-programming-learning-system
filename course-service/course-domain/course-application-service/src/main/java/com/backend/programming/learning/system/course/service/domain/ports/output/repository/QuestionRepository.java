@@ -17,4 +17,6 @@ public interface QuestionRepository {
     Question findById(UUID questionId);
 
     void deleteById(UUID questionId);
+
+    Page<Question> findAllByExamId(UUID examId, String search, int pageNo, int pageSize);
 }

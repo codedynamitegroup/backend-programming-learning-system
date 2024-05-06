@@ -77,7 +77,7 @@ public class QuestionCreateHelper {
         return organization.get();
     }
 
-    private Question saveQuestion(Question question) {
+    public Question saveQuestion(Question question) {
         Question savedQuestion = questionRepository.saveQuestion(question);
 
         if (savedQuestion == null) {

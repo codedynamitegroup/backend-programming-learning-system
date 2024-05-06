@@ -40,12 +40,14 @@ public class QtypeShortanswerQuestionDataMapper {
 
     public QtypeShortAnswerQuestion updateQtypeShortanswerQuestionCommandToQtypeShortAnswerQuestion(
             UpdateQtypeShortanswerQuestionCommand updateQtypeShortanswerQuestionCommand,
-            QtypeShortAnswerQuestion qtypeShortAnswerQuestion) {
+            QtypeShortAnswerQuestion qtypeShortAnswerQuestion,
+            Question prevQuestion) {
         return QtypeShortAnswerQuestion.builder()
                 .id(new QtypeShortAnswerQuestionId(updateQtypeShortanswerQuestionCommand.getQtShortanswerQuestionId()))
                 .caseSensitive(updateQtypeShortanswerQuestionCommand.getCaseSensitive())
                 .question(questionDataMapper
                         .updateQuestionEntityToQuestion(updateQtypeShortanswerQuestionCommand.getQuestion(),
+                                prevQuestion,
                                 qtypeShortAnswerQuestion.getQuestion().getId(),
                                 qtypeShortAnswerQuestion.getQuestion().getOrganization(),
                                 qtypeShortAnswerQuestion.getQuestion().getCreatedBy(),

@@ -5,6 +5,8 @@ import com.backend.programming.learning.system.domain.valueobject.UserId;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class UserDataAccessMapper {
     public UserEntity userToUserEntity(User user) {
@@ -18,7 +20,7 @@ public class UserDataAccessMapper {
                 .address(user.getAddress())
                 .avatarUrl(user.getAvatarUrl())
                 .lastLogin(user.getLastLogin())
-                .is_deleted(user.getDeleted())
+                .isDeleted(user.getDeleted())
                 .createdAt(user.getCreatedAt())
                 .updatedAt(user.getUpdatedAt())
                 .build();
@@ -35,10 +37,17 @@ public class UserDataAccessMapper {
                 .address(userEntity.getAddress())
                 .avatarUrl(userEntity.getAvatarUrl())
                 .lastLogin(userEntity.getLastLogin())
-                .isDeleted(userEntity.getIs_deleted())
+                .isDeleted(userEntity.getIsDeleted())
                 .createdAt(userEntity.getCreatedAt())
                 .updatedAt(userEntity.getUpdatedAt())
                 .build();
 
+    }
+
+    public List<User> userEntityListToUserList(List<UserEntity> all) {
+        return
+            all.stream()
+                .map(this::userEntityToUser)
+                .toList();
     }
 }

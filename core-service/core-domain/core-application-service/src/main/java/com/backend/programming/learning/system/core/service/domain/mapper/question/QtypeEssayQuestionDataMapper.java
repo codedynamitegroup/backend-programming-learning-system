@@ -49,8 +49,8 @@ public class QtypeEssayQuestionDataMapper {
                 .toArray(QueryQtypeEssayQuestionResponse[]::new));
     }
 
-    public QtypeEssayQuestion updateQtypeEssayQuestionCommandToQtypeEssayQuestion(
-            UpdateQtypeEssayQuestionCommand updateQtypeEssayQuestionCommand,
+    public QtypeEssayQuestion updateQtypeEssayQuestionCommandToQtypeEssayQuestion(UpdateQtypeEssayQuestionCommand updateQtypeEssayQuestionCommand,
+            Question prevQuestion,
             QtypeEssayQuestion qtypeEssayQuestion) {
 
             return QtypeEssayQuestion.builder()
@@ -68,6 +68,7 @@ public class QtypeEssayQuestionDataMapper {
                     .maxBytes(updateQtypeEssayQuestionCommand.getMaxBytes())
                     .fileTypesList(updateQtypeEssayQuestionCommand.getFileTypesList())
                     .question(questionDataMapper.updateQuestionEntityToQuestion(updateQtypeEssayQuestionCommand.getQuestion(),
+                            prevQuestion,
                             qtypeEssayQuestion.getQuestion().getId(),
                             qtypeEssayQuestion.getQuestion().getOrganization(),
                             qtypeEssayQuestion.getQuestion().getCreatedBy(),

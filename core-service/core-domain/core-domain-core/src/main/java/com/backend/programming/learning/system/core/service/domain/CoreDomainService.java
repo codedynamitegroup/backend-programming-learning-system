@@ -16,16 +16,42 @@ public interface CoreDomainService {
     // question
     void createQuestion(Question question);
 
+    // create qtype
     QuestionCreatedEvent createQtypeCodeQuestion(Question question, QtypeCodeQuestion qtypeCodeQuestion);
     QuestionCreatedEvent createQtypeEssayQuestion(Question question, QtypeEssayQuestion qtypeEssayQuestion);
     QuestionCreatedEvent createQtypeShortAnswerQuestion(Question question, QtypeShortAnswerQuestion qtypeEssayQuestion);
     QuestionCreatedEvent createQtypeMultipleChoiceQuestion(Question question, QtypeMultiChoiceQuestion qtypeMultipleChoiceQuestion);
 
-    QuestionDeletedEvent deleteQuestion(Question question, UUID qtypeId);
-    QuestionUpdatedEvent updateQtypeCodeQuestion(Question question, QtypeCodeQuestion qtypeCodeQuestion);
-    QuestionUpdatedEvent updateQtypeEssayQuestion(Question question, QtypeEssayQuestion qtypeEssayQuestion);
-    QuestionUpdatedEvent updateQtypeShortAnswerQuestion(Question question, QtypeShortAnswerQuestion qtypeShortAnswerQuestion);
-    QuestionUpdatedEvent updateQtypeMultipleChoiceQuestion(Question question, QtypeMultiChoiceQuestion qtypeMultiChoiceQuestion);
+    // delete
+    QuestionDeletedEvent deleteQuestion(
+            Question question,
+            UUID qtypeId,
+            QtypeShortAnswerQuestion qtypeShortAnswerQuestion,
+            QtypeEssayQuestion qtypeEssayQuestion,
+            QtypeMultiChoiceQuestion qtypeMultiChoiceQuestion,
+            QtypeCodeQuestion qtypeCodeQuestion);
+
+    // update qtype
+    QuestionUpdatedEvent updateQtypeCodeQuestion(
+            Question question,
+            QtypeCodeQuestion qtypeCodeQuestion,
+            Question prevQuestion,
+            QtypeCodeQuestion prevQtypeCodeQuestion);
+    QuestionUpdatedEvent updateQtypeEssayQuestion(
+            Question question,
+            QtypeEssayQuestion qtypeEssayQuestion,
+            Question prevQuestion,
+            QtypeEssayQuestion prevQtypeEssayQuestion);
+    QuestionUpdatedEvent updateQtypeShortAnswerQuestion(
+            Question question,
+            QtypeShortAnswerQuestion qtypeShortAnswerQuestion,
+            Question prevQuestion,
+            QtypeShortAnswerQuestion prevQtypeShortAnswerQuestion);
+    QuestionUpdatedEvent updateQtypeMultipleChoiceQuestion(
+            Question question,
+            QtypeMultiChoiceQuestion qtypeMultiChoiceQuestion,
+            Question prevQuestion,
+            QtypeMultiChoiceQuestion prevQtypeMultiChoiceQuestion);
 
     void deleteQuestion(Question question);
     void rollbackQuestion(Question question);

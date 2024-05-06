@@ -17,6 +17,7 @@ public class QuestionOutboxDataAccessMapper {
                 .sagaStatus(questionOutboxEntity.getSagaStatus())
                 .outboxStatus(questionOutboxEntity.getOutboxStatus())
                 .version(questionOutboxEntity.getVersion())
+                .previousPayload(questionOutboxEntity.getPrevPayload())
                 .build();
     }
 
@@ -31,6 +32,7 @@ public class QuestionOutboxDataAccessMapper {
                 .sagaStatus(questionOutboxMessage.getSagaStatus())
                 .outboxStatus(questionOutboxMessage.getOutboxStatus())
                 .version(questionOutboxMessage.getVersion())
+                .prevPayload(questionOutboxMessage.getPreviousPayload())
                 .build();
     }
 }

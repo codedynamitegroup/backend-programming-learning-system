@@ -3,10 +3,12 @@ package com.backend.programming.learning.system.core.service.domain.implement.se
 import com.backend.programming.learning.system.core.service.domain.CoreDomainService;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeMultichoiceQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeMultiChoiceQuestion;
+import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
 import com.backend.programming.learning.system.core.service.domain.exception.question.QtypeMultichoiceQuestionNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QtypeMultichoiceQuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeMultichoiceQuestionRepository;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QuestionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +20,7 @@ import java.util.UUID;
 public class QtypeMultichoiceQuestionUpdateHelper {
     // Repositories
     private final QtypeMultichoiceQuestionRepository qtypeMultichoiceQuestionRepository;
+    private final QuestionRepository questionRepository;
 
     // Mappers
     private final QtypeMultichoiceQuestionDataMapper qtypeMultichoiceQuestionDataMapper;
@@ -27,10 +30,12 @@ public class QtypeMultichoiceQuestionUpdateHelper {
 
     public QtypeMultichoiceQuestionUpdateHelper(
             QtypeMultichoiceQuestionRepository qtypeMultichoiceQuestionRepository,
+            QuestionRepository questionRepository,
             QtypeMultichoiceQuestionDataMapper qtypeMultichoiceQuestionDataMapper,
             CoreDomainService coreDomainService,
             CommonUpdateHelper commonUpdateHelper) {
         this.qtypeMultichoiceQuestionRepository = qtypeMultichoiceQuestionRepository;
+        this.questionRepository = questionRepository;
         this.qtypeMultichoiceQuestionDataMapper = qtypeMultichoiceQuestionDataMapper;
         this.coreDomainService = coreDomainService;
         this.commonUpdateHelper = commonUpdateHelper;
@@ -46,8 +51,9 @@ public class QtypeMultichoiceQuestionUpdateHelper {
                     .forEach(answer -> commonUpdateHelper.checkAnswerExist(answer.getAnswerId()));
 
         QtypeMultiChoiceQuestion qtypeMultichoiceQuestion = getQtypeMultichoiceQuestion(updateQtypeMultichoiceQuestionCommand.getQtMultichoiceQuestionId());
+        Question prevQuestion = questionRepository.findQuestion(qtypeMultichoiceQuestion.getQuestion().getId().getValue()).get();
         QtypeMultiChoiceQuestion mappedQtypeMultichoiceQuestion = qtypeMultichoiceQuestionDataMapper
-                .updateQtypeMultichoiceQuestionCommandToQtypeMultiChoiceQuestion(updateQtypeMultichoiceQuestionCommand, qtypeMultichoiceQuestion);
+                .updateQtypeMultichoiceQuestionCommandToQtypeMultiChoiceQuestion(updateQtypeMultichoiceQuestionCommand, prevQuestion, qtypeMultichoiceQuestion);
 
         updateQtypeMultichoiceQuestionInDb(mappedQtypeMultichoiceQuestion);
         log.info("Qtype Multichoice Question updated with id: {}", mappedQtypeMultichoiceQuestion.getId().getValue());
@@ -55,7 +61,7 @@ public class QtypeMultichoiceQuestionUpdateHelper {
         commonUpdateHelper.updateQuestion(mappedQtypeMultichoiceQuestion.getQuestion());
         log.info("Question updated with id: {}", mappedQtypeMultichoiceQuestion.getQuestion().getId().getValue());
 
-        return coreDomainService.updateQtypeMultipleChoiceQuestion(mappedQtypeMultichoiceQuestion.getQuestion(), mappedQtypeMultichoiceQuestion);
+        return coreDomainService.updateQtypeMultipleChoiceQuestion(mappedQtypeMultichoiceQuestion.getQuestion(), mappedQtypeMultichoiceQuestion, prevQuestion, qtypeMultichoiceQuestion);
     }
 
     // Get Qtype Multichoice Question entity by id

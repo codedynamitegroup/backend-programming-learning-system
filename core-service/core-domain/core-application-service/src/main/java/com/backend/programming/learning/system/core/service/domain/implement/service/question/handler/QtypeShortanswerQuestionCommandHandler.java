@@ -51,7 +51,7 @@ public class QtypeShortanswerQuestionCommandHandler {
                 questionCreatedEvent.getQuestion().getCopyState(),
                 OutboxStatus.STARTED,
                 questionSagaHelper.questionStatusToSagaStatus(questionCreatedEvent.getQuestion().getCopyState()),
-                UUID.randomUUID());
+                UUID.randomUUID(), null);
 
         return questionDataMapper.questionCreatedEventToCreateQuestionResponse(questionCreatedEvent, "Qtype Shortanswer Question created successfully");
     }
@@ -71,7 +71,8 @@ public class QtypeShortanswerQuestionCommandHandler {
                 questionUpdatedEvent.getQuestion().getCopyState(),
                 OutboxStatus.STARTED,
                 questionSagaHelper.questionStatusToSagaStatus(questionUpdatedEvent.getQuestion().getCopyState()),
-                UUID.randomUUID());
+                UUID.randomUUID(),
+                questionDataMapper.questionUpdatedEventToQuestionEventPreviousPayload(questionUpdatedEvent));
 
         return questionDataMapper
                 .questionUpdatedEventToUpdateQuestionRespond(questionUpdatedEvent, "Qtype Shortanswer Question updated successfully");

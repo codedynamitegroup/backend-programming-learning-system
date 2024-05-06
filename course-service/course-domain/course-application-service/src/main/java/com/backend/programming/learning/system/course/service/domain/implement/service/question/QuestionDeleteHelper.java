@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 /**
  * com.backend.programming.learning.system.implement.question
  * Create by Dang Ngoc Tien
@@ -20,5 +22,10 @@ public class QuestionDeleteHelper {
     public void deleteById(DeleteQuestionCommand deleteQuestionCommand) {
         questionRepository.deleteById(deleteQuestionCommand.questionId());
         log.info("Question is deleted with id: {}", deleteQuestionCommand.questionId());
+    }
+
+    public void deleteById(UUID questionId) {
+        questionRepository.deleteById(questionId);
+        log.info("Question is deleted with id: {}", questionId);
     }
 }
