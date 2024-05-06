@@ -36,5 +36,5 @@ build/
 .vscode/
 
 infrastructure/docker-compose/volumes/**/**
-infrastructure/docker-compose/grafana/**/**
-infrastructure/docker-compose/prometheus/**/**
+infrastructure/docker-compose/grafana/**
+infrastructure/docker-compose/prometheus/**
