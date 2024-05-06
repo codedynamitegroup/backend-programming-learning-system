@@ -20,6 +20,17 @@ code-assessment-service:
   accepted-status-description: Accepted
 
 spring:
+  kafka:
+    bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
+  zipkin:
+    sender:
+      type: kafka
+  sleuth:
+    sampler:
+      probability: 1.0
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   jpa:
     open-in-view: false
     show-sql: true
@@ -73,3 +84,27 @@ kafka-consumer-config:
   max-partition-fetch-bytes-default: 1048576
   max-partition-fetch-bytes-boost-factor: 1
   poll-timeout-ms: 150
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+security:
+  paths-to-ignore: /api-docs, /actuator/**
+
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure.include: health, prometheus
+      path-mapping.prometheus: metrics
+  endpoint:
+    health:
+      show-details: always
+    prometheus:
+      cache.time-to-live: 1ms
+
+log:
+  appName: code-assessment-service

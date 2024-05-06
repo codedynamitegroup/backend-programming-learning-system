@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.application.rest.topic;
 
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.review.CreateReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.topic.CreateTopicCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.topic.CreateTopicResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.topic.DeleteTopicCommand;
@@ -13,7 +14,13 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.up
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.topic.UpdateTopicResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.topic.TopicApplicationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +37,14 @@ public class TopicController {
     }
 
     @PostMapping("/create")
+    @Operation(summary = "Create topic.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateTopicResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateTopicResponse> createTopic(
             @RequestBody CreateTopicCommand createTopicCommand) {
         log.info("Creating topic: {}", createTopicCommand);
@@ -37,10 +52,18 @@ public class TopicController {
                 topicApplicationService.createTopic(createTopicCommand);
         log.info("Topic created: {}", createTopicResponse);
 
-        return ResponseEntity.ok(createTopicResponse);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createTopicResponse);
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Update topic.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = UpdateTopicResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<UpdateTopicResponse> updateTopic(
             @PathVariable UUID id,
             @RequestBody UpdateTopicCommand updateTopicCommand) {
@@ -59,6 +82,14 @@ public class TopicController {
     }
 
     @GetMapping
+    @Operation(summary = "Get all topics.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllTopicsResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllTopicsResponse> getAllTopics(
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize,
@@ -76,6 +107,14 @@ public class TopicController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get topic by id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = TopicResponseEntity.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<TopicResponseEntity> getTopic(@PathVariable UUID id) {
         TopicResponseEntity topicResponseEntity =
                 topicApplicationService.queryTopic(QueryTopicCommand
@@ -87,6 +126,14 @@ public class TopicController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete topic.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = DeleteTopicResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<DeleteTopicResponse> deleteTopic(@PathVariable UUID id) {
         DeleteTopicResponse deleteTopicResponse =
                 topicApplicationService.deleteTopic(DeleteTopicCommand

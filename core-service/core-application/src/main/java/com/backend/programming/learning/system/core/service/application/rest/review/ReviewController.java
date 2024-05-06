@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.application.rest.review;
 
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest.CreateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.review.CreateReviewCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.review.CreateReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.review.DeleteReviewCommand;
@@ -11,7 +12,13 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.up
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.review.ReviewResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.review.ReviewApplicationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +35,14 @@ public class ReviewController {
     }
 
     @PostMapping("/create")
+    @Operation(summary = "Create review.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateReviewResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateReviewResponse> createReview(
             @RequestBody CreateReviewCommand createReviewCommand) {
         log.info("Creating review: {}", createReviewCommand);
@@ -35,10 +50,18 @@ public class ReviewController {
                 reviewApplicationService.createReview(createReviewCommand);
         log.info("Review created: {}", createReviewResponse);
 
-        return ResponseEntity.ok(createReviewResponse);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createReviewResponse);
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Update review.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = UpdateReviewResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<UpdateReviewResponse> updateReview(
             @PathVariable UUID id,
             @RequestBody UpdateReviewCommand updateReviewCommand) {
@@ -56,6 +79,14 @@ public class ReviewController {
     }
 
     @GetMapping
+    @Operation(summary = "Get all reviews by certificate course id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllReviewsResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllReviewsResponse> getAllReviewsByCertificateCourseId(
             @RequestParam UUID certificateCourseId,
             @RequestParam(defaultValue = "0") Integer pageNo,
@@ -72,6 +103,14 @@ public class ReviewController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get review by id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = ReviewResponseEntity.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<ReviewResponseEntity> getReview(
             @PathVariable UUID id) {
         ReviewResponseEntity reviewResponseEntity =
@@ -84,6 +123,14 @@ public class ReviewController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete review.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = DeleteReviewResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<DeleteReviewResponse> deleteReview(
             @PathVariable UUID id,
             @RequestParam UUID deletedBy) {

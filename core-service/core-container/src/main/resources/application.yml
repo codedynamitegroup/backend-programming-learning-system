@@ -21,25 +21,21 @@ core-service:
   calendar-event-update-request-topic-name: calendar-event-update-request
   calendar-event-update-response-topic-name: calendar-event-update-response
 
-  outbox-scheduler-fixed-rate: 10000
-  outbox-scheduler-initial-delay: 10000
-
-#spring:
-#  jpa:
-#    open-in-view: false
-#    show-sql: true
-#  datasource:
-#    url: jdbc:postgresql://localhost:5432/core-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
-#    username: postgres
-#    password: localdb
-#    driver-class-name: org.postgresql.Driver
-#  sql:
-#    init:
-#      platform: postgres
-#      schema-locations: classpath:init-schema.sql
-#      mode: always
+  outbox-scheduler-fixed-rate: 2000
+  outbox-scheduler-initial-delay: 2000
 
 spring:
+  kafka:
+    bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
+  zipkin:
+    sender:
+      type: kafka
+  sleuth:
+    sampler:
+      probability: 1.0
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   jpa:
     open-in-view: false
     show-sql: true
@@ -47,10 +43,6 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL9Dialect
-#        enable_lazy_load_no_trans: true
-#        event:
-#          merge:
-#            entity_copy_observer: allow
   datasource:
     url: jdbc:postgresql://localhost:5432/core-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: postgres
@@ -92,7 +84,7 @@ kafka-consumer-config:
 
   code-question-update-consumer-group-id: code-question-update-topic-consumer
 
-  core-service-organization-request-group-id: core-service-organization-request-topic
+  core-service-organization-consumer-group-id: core-service-organization-topic-consumer
 
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
@@ -107,4 +99,28 @@ kafka-consumer-config:
   max-partition-fetch-bytes-default: 1048576
   max-partition-fetch-bytes-boost-factor: 1
   poll-timeout-ms: 150
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+security:
+  paths-to-ignore: /api-docs, /actuator/**
+
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure.include: health, prometheus
+      path-mapping.prometheus: metrics
+  endpoint:
+    health:
+      show-details: always
+    prometheus:
+      cache.time-to-live: 1ms
+
+log:
+  appName: core-service
 

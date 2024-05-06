@@ -6,7 +6,13 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.qu
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeMultichoiceQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QtypeMultichoiceQuestionApplicationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +30,14 @@ public class QtypeMultichoiceQuestionController {
     }
 
     @PostMapping("/create")
+    @Operation(summary = "Create multichoice question.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateQuestionResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateQuestionResponse> createQtypeMultichoiceQuestion(
             @RequestBody CreateQtypeMultichoiceQuestionCommand createQtypeMultichoiceQuestionCommand) {
         log.info("Creating multichoice question: {}", createQtypeMultichoiceQuestionCommand);
@@ -31,10 +45,18 @@ public class QtypeMultichoiceQuestionController {
                 .createQtypeMultichoiceQuestion(createQtypeMultichoiceQuestionCommand);
         log.info("Question multichoice created: {}", createQuestionResponse);
 
-        return ResponseEntity.ok(createQuestionResponse);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createQuestionResponse);
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get multichoice question by id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryQtypeMultichoiceQuestionResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryQtypeMultichoiceQuestionResponse> queryQtypeMultichoiceQuestionById(@PathVariable("id") UUID id) {
         log.info("Querying multichoice question by id: {}", id);
         QueryQtypeMultichoiceQuestionResponse queryQtypeMultichoiceQuestionResponse = qtypeMultichoiceQuestionApplicationService
@@ -45,6 +67,14 @@ public class QtypeMultichoiceQuestionController {
     }
 
     @GetMapping
+    @Operation(summary = "Get all multichoice questions.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryQtypeMultichoiceQuestionResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<List<QueryQtypeMultichoiceQuestionResponse>> queryAllQtypeMultichoiceQuestion() {
         log.info("Querying all multichoice questions");
         List<QueryQtypeMultichoiceQuestionResponse> queryQtypeMultichoiceQuestionResponse = qtypeMultichoiceQuestionApplicationService
@@ -55,6 +85,14 @@ public class QtypeMultichoiceQuestionController {
     }
 
     @PutMapping
+    @Operation(summary = "Update multichoice question.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = UpdateQuestionResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<UpdateQuestionResponse> updateQtypeMultichoiceQuestion(
             @RequestBody UpdateQtypeMultichoiceQuestionCommand updateQtypeMultichoiceQuestionCommand) {
         log.info("Updating multichoice question: {}", updateQtypeMultichoiceQuestionCommand);

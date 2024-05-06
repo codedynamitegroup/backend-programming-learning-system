@@ -29,6 +29,21 @@ course-service:
   create-notification-scheduler-fixed-rate: 1800000
 
 spring:
+  kafka:
+    bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
+  zipkin:
+    sender:
+      type: kafka
+  sleuth:
+    sampler:
+      probability: 1.0
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
   jpa:
     open-in-view: false
     show-sql: true
@@ -67,7 +82,6 @@ kafka-producer-config:
 kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-
   question-request-consumer-group-id: question-request-topic-consumer
 
   course-service-calendar-event-consumer-group-id: course-service-calendar-event-consumer
@@ -93,3 +107,27 @@ kafka-consumer-config:
   max-partition-fetch-bytes-default: 1048576
   max-partition-fetch-bytes-boost-factor: 1
   poll-timeout-ms: 150
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+security:
+  paths-to-ignore: /api-docs, /actuator/**
+
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure.include: health, prometheus
+      path-mapping.prometheus: metrics
+  endpoint:
+    health:
+      show-details: always
+    prometheus:
+      cache.time-to-live: 1ms
+
+log:
+  appName: course-service

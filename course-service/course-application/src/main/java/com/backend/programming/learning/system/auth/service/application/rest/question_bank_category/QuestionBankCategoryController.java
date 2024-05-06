@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.auth.service.application.rest.qu
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_bank_category.CreateQuestionBankCategoryCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_bank_category.CreateQuestionBankCategoryResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.question_bank_category.QueryAllQuestionBankCategoryCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.question_bank_category.QueryAllQuestionBankCategoryResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.question_bank_category.UpdateQuestionBankCategoryCommand;
@@ -9,6 +10,11 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.question_bank_category.QuestionBankCategoryEntity;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.question_bank_category.QuestionBankCategoryApplicationService;
 import com.backend.programming.learning.system.course.service.domain.valueobject.QuestionBankCategoryId;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -37,6 +43,14 @@ import java.util.UUID;
 public class QuestionBankCategoryController {
     private final QuestionBankCategoryApplicationService questionBankCategoryApplicationService;
     @PostMapping("/create")
+    @Operation(summary = "Create question bank category.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateQuestionBankCategoryResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateQuestionBankCategoryResponse> createQuestionBankCategory(
             @RequestBody CreateQuestionBankCategoryCommand createQuestionBankCategoryCommand) {
         log.info("Creating question bank category");
@@ -44,7 +58,16 @@ public class QuestionBankCategoryController {
                 .createQuestionBankCategoryCommand(createQuestionBankCategoryCommand);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
     @GetMapping
+    @Operation(summary = "Query all question bank category.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllQuestionBankCategoryResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllQuestionBankCategoryResponse> queryAllQuestionBankCategory(
             @RequestParam(defaultValue = "") String search,
             @RequestParam(defaultValue = "0") Integer pageNo,
@@ -60,7 +83,16 @@ public class QuestionBankCategoryController {
                 .queryAllQuestionBankCategory(queryAllQuestionBankCategoryCommand);
         return ResponseEntity.ok(response);
     }
+
     @GetMapping("{questionBankCategoryId}")
+    @Operation(summary = "Query question bank category.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QuestionBankCategoryEntity.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QuestionBankCategoryEntity> queryQuestionBankCategory(
             @PathVariable UUID questionBankCategoryId
     ) {
@@ -69,7 +101,16 @@ public class QuestionBankCategoryController {
                 .queryQuestionBankCategory(new QuestionBankCategoryId(questionBankCategoryId));
         return ResponseEntity.ok(response);
     }
+
     @PutMapping("{questionBankCategoryId}")
+    @Operation(summary = "Update question bank category.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = UpdateQuestionBankCategoryResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<UpdateQuestionBankCategoryResponse> updateQuestionBankCategory(
             @PathVariable UUID questionBankCategoryId,
             @RequestBody UpdateQuestionBankCategoryCommand updateQuestionBankCategoryCommand

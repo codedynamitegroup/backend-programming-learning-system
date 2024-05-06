@@ -11,6 +11,11 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.up
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.organization.UpdateOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.organization.OrganizationEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.OrganizationApplicationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +35,14 @@ public class OrganizationController {
     }
 
     @PostMapping
+    @Operation(summary = "Create organization.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateOrganizationResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateOrganizationResponse> createOrganization(@RequestBody CreateOrganizationCommand createOrganizationCommand) {
         log.info("Creating organization with email: {}", createOrganizationCommand.getEmail());
         CreateOrganizationResponse createOrganizationResponse = organizationApplicationService.createOrganization(createOrganizationCommand);
@@ -38,6 +51,14 @@ public class OrganizationController {
     }
 
     @GetMapping
+    @Operation(summary = "Get all organizations.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllOrganizationsResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllOrganizationsResponse> getAllOrganizations(
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize
@@ -53,6 +74,14 @@ public class OrganizationController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get organization by id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = OrganizationEntityResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<OrganizationEntityResponse> getOrganizationById(@PathVariable UUID id) {
         OrganizationEntityResponse queryOrganizationResponse =
                 organizationApplicationService.findOrganizationById(QueryOrganizationByIdCommand.builder().organizationId(id).build());
@@ -61,6 +90,14 @@ public class OrganizationController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Update organization by id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = UpdateOrganizationResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<UpdateOrganizationResponse> updateOrganizationById(
             @PathVariable UUID id,
             @RequestBody UpdateOrganizationCommand updateOrganizationCommand
@@ -84,6 +121,14 @@ public class OrganizationController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete organization by id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = DeleteOrganizationResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<DeleteOrganizationResponse> deleteOrganizationById(@PathVariable UUID id) {
         log.info("Deleting organization with id: {}", id);
         DeleteOrganizationResponse deleteOrganizationResponse =

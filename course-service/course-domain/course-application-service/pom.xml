@@ -15,10 +15,10 @@
     </properties>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>com.backend.programming.learning.system</groupId>-->
-<!--            <artifactId>app-config-data</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.backend.programming.learning.system</groupId>
+            <artifactId>app-config-data</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.backend.programming.learning.system</groupId>
             <artifactId>saga</artifactId>

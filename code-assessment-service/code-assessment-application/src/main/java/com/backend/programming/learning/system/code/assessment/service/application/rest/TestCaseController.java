@@ -43,7 +43,7 @@ public class TestCaseController {
         return ResponseEntity.ok(response);
     }
     @GetMapping
-    public ResponseEntity<GetTestCasesByQuestionIdResponse> getTestCases
+    public ResponseEntity<GetTestCasesByQuestionIdResponse> updateTestCase
             (@RequestParam(defaultValue = "0") Integer pageNo,
              @RequestParam(defaultValue = "10") Integer pageSize,
              @RequestParam(defaultValue = "false") Boolean fetchAll,

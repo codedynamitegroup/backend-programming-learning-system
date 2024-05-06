@@ -13,6 +13,8 @@
 		<module>infrastructure</module>
         <module>config-server</module>
 		<module>app-config-data</module>
+        <module>discovery-service</module>
+        <module>gateway-service</module>
 	</modules>
 
 	<parent>
@@ -39,10 +41,16 @@
 		<maven.compiler.target>17</maven.compiler.target>
 		<spring-cloud.version>3.1.7</spring-cloud.version>
 		<spring-cloud-dependencies.version>2021.0.8</spring-cloud-dependencies.version>
+		<spring-cloud-starter-circuitbreaker-reactor-resilience4j.version>1.0.5.RELEASE</spring-cloud-starter-circuitbreaker-reactor-resilience4j.version>
+		<micrometer-registry-prometheus.version>1.8.1</micrometer-registry-prometheus.version>
+		<logstash-logback-encoder.version>6.5</logstash-logback-encoder.version>
+		<springdoc-openapi-ui.version>1.6.6</springdoc-openapi-ui.version>
+		<spring-cloud-starter-zipkin.version>2.2.8.RELEASE</spring-cloud-starter-zipkin.version>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
+
 			<dependency>
 				<groupId>com.backend.programming.learning.system</groupId>
 				<artifactId>app-config-data</artifactId>
@@ -239,6 +247,12 @@
 			</dependency>
 
 			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+				<version>${spring-boot.version}</version>
+			</dependency>
+
+			<dependency>
 				<groupId>org.mockito</groupId>
 				<artifactId>mockito-core</artifactId>
 				<version>${mockito.version}</version>
@@ -251,6 +265,36 @@
 				<version>${spring-cloud-dependencies.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-gateway</artifactId>
+				<version>${spring-cloud.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-circuitbreaker-reactor-resilience4j</artifactId>
+				<version>${spring-cloud-starter-circuitbreaker-reactor-resilience4j.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+				<version>${spring-cloud.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+				<version>${spring-cloud.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-loadbalancer</artifactId>
+				<version>${spring-cloud.version}</version>
 			</dependency>
 
 			<dependency>
@@ -271,11 +315,41 @@
 				<version>${spring-cloud.version}</version>
 			</dependency>
 
-<!--			<dependency>-->
-<!--				<groupId>org.springframework.boot</groupId>-->
-<!--				<artifactId>spring-boot-starter-security</artifactId>-->
-<!--				<version>${spring-boot.version}</version>-->
-<!--			</dependency>-->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-sleuth</artifactId>
+				<version>${spring-cloud.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-zipkin</artifactId>
+				<version>${spring-cloud-starter-zipkin.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-security</artifactId>
+				<version>${spring-boot.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.micrometer</groupId>
+				<artifactId>micrometer-registry-prometheus</artifactId>
+				<version>${micrometer-registry-prometheus.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>net.logstash.logback</groupId>
+				<artifactId>logstash-logback-encoder</artifactId>
+				<version>${logstash-logback-encoder.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springdoc</groupId>
+				<artifactId>springdoc-openapi-ui</artifactId>
+				<version>${springdoc-openapi-ui.version}</version>
+			</dependency>
 
 		</dependencies>
 	</dependencyManagement>
@@ -290,6 +364,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.logstash.logback</groupId>
+			<artifactId>logstash-logback-encoder</artifactId>
 		</dependency>
 	</dependencies>
 

@@ -12,6 +12,11 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.up
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse.CertificateCourseApplicationService;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse_user.CertificateCourseUserApplicationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +38,14 @@ public class CertificateCourseController {
     }
 
     @PostMapping("/create")
+    @Operation(summary = "Create Certificate course.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateCertificateCourseResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateCertificateCourseResponse> createCertificateCourse(
             @RequestBody CreateCertificateCourseCommand createCertificateCourseCommand) {
         log.info("Creating certificate course: {}", createCertificateCourseCommand);
@@ -44,6 +57,14 @@ public class CertificateCourseController {
     }
 
     @PostMapping("/register")
+    @Operation(summary = "Register Certificate course User.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateCertificateCourseUserResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateCertificateCourseUserResponse> registerCertificateCourse(
             @RequestBody CreateCertificateCourseUserCommand createCertificateCourseUserCommand) {
         log.info("Creating Certificate course User course: {}", createCertificateCourseUserCommand);
@@ -55,6 +76,14 @@ public class CertificateCourseController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Update Certificate course.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = UpdateCertificateCourseResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<UpdateCertificateCourseResponse> updateCertificateCourse(
             @PathVariable UUID id,
             @RequestBody UpdateCertificateCourseCommand updateCertificateCourseCommand) {
@@ -76,6 +105,14 @@ public class CertificateCourseController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get Certificate course by id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CertificateCourseResponseEntity.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CertificateCourseResponseEntity> getCertificateCourseById(@PathVariable UUID id) {
         CertificateCourseResponseEntity certificateCourseResponseEntity =
                 certificateCourseApplicationService.queryCertificateCourse(QueryCertificateCourseCommand
@@ -87,6 +124,14 @@ public class CertificateCourseController {
     }
 
     @GetMapping
+    @Operation(summary = "Get all Certificate courses.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllCertificateCoursesResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllCertificateCoursesResponse> getAllCertificateCourses(
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize) {
@@ -101,6 +146,14 @@ public class CertificateCourseController {
     }
 
     @GetMapping("/{id}/users")
+    @Operation(summary = "Get all users of Certificate course.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllCertificateCourseUsersResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllCertificateCourseUsersResponse> getAllUsersOfCertificateCourse(
             @PathVariable UUID id,
             @RequestParam(defaultValue = "0") Integer pageNo,
@@ -120,6 +173,14 @@ public class CertificateCourseController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete Certificate course.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = DeleteCertificateCourseResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<DeleteCertificateCourseResponse> deleteCertificateCourse(@PathVariable UUID id) {
         DeleteCertificateCourseResponse deleteCertificateCourseResponse =
                 certificateCourseApplicationService.deleteCertificateCourse(DeleteCertificateCourseCommand
