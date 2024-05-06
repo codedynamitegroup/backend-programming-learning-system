@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.dto.message;
 
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -29,8 +29,7 @@ public class QuestionMessagingDataMapper {
     }
 
     public QuestionRequestAvroModel questionEventPayloadToQuestionRequestAvroModel(String sagaId,
-                                                                                   QuestionEventPayload questionEventPayload,
-                                                                                   ServiceName serviceName) {
+                                                                                   QuestionEventPayload questionEventPayload) {
         return QuestionRequestAvroModel.newBuilder()
                 .setId(questionEventPayload.getId())
                 .setSagaId(sagaId)
@@ -46,7 +45,6 @@ public class QuestionMessagingDataMapper {
                 .setCreatedBy(questionEventPayload.getCreatedBy())
                 .setUpdatedBy(questionEventPayload.getUpdatedBy())
                 .setCopyState(com.backend.programming.learning.system.kafka.core.avro.model.CopyState.valueOf(questionEventPayload.getCopyState().name()))
-                .setServiceName(com.backend.programming.learning.system.kafka.core.avro.model.ServiceName.valueOf(serviceName.name()))
                 .build();
     }
 }

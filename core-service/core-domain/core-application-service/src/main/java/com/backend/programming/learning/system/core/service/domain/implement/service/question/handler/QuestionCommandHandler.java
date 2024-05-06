@@ -11,6 +11,7 @@ import com.backend.programming.learning.system.core.service.domain.outbox.model.
 import com.backend.programming.learning.system.core.service.domain.outbox.model.question.QuestionEventPreviousPayload;
 import com.backend.programming.learning.system.core.service.domain.outbox.scheduler.code_questions.CodeQuestionsUpdateOutboxHelper;
 import com.backend.programming.learning.system.core.service.domain.outbox.scheduler.question.QuestionOutboxHelper;
+import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.extern.slf4j.Slf4j;
@@ -64,13 +65,14 @@ public class QuestionCommandHandler {
                 UUID.randomUUID(),
                 previousPayload);
 
-        questionOutboxHelper.saveNewQuestionOutboxMessage(questionEventPayload,
-                questionDeletedEvent.getQuestion().getCopyState(),
-                OutboxStatus.STARTED,
-                questionSagaHelper.questionStatusToSagaStatus(questionDeletedEvent.getQuestion().getCopyState()),
-                ServiceName.CODE_ASSESSMENT_SERVICE,
-                UUID.randomUUID(),
-                previousPayload);
+        if (questionDeletedEvent.getQuestion().getqtype() == QuestionType.CODE)
+            questionOutboxHelper.saveNewQuestionOutboxMessage(questionEventPayload,
+                    questionDeletedEvent.getQuestion().getCopyState(),
+                    OutboxStatus.STARTED,
+                    questionSagaHelper.questionStatusToSagaStatus(questionDeletedEvent.getQuestion().getCopyState()),
+                    ServiceName.CODE_ASSESSMENT_SERVICE,
+                    UUID.randomUUID(),
+                    previousPayload);
 
         return QuestionDeleteResponse.builder()
                 .questionId(questionId)

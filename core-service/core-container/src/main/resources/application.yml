@@ -80,6 +80,7 @@ kafka-consumer-config:
   core-service-user-consumer-group-id: core-service-user-topic-consumer
 
   core-service-question-consumer-group-id: core-service-question-topic-consumer
+  core-service-code-question-consumer-group-id: core-service-code-question-topic-consumer
 
   core-service-calendar-event-consumer-group-id: core-service-calendar-event-topic-consumer
 

@@ -33,7 +33,8 @@ public class QuestionRequestKafkaListener implements KafkaConsumer<QuestionReque
 
 
     @Override
-    @KafkaListener(id = "${kafka-consumer-config.question-request-consumer-group-id}", topics = "${code-assessment-service.question-request-topic-name}")
+    @KafkaListener(id = "${kafka-consumer-config.question-request-consumer-group-id}",
+            topics = "${code-assessment-service.question-request-code-assessment-topic-name}")
     public void receive(
             @Payload List<QuestionRequestAvroModel> messages,
             @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) List<String> keys,

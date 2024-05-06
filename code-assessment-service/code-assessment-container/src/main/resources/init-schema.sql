@@ -316,3 +316,26 @@ CREATE UNIQUE INDEX "user_outbox_saga_id"
     ON "public".user_outbox
     (type, saga_id, copy_state, outbox_status);
 
+DROP TABLE IF EXISTS "public".question_outbox CASCADE;
+CREATE TABLE  "public".question_outbox
+(
+    id uuid NOT NULL,
+    saga_id uuid NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    processed_at TIMESTAMP WITH TIME ZONE,
+    type character varying COLLATE pg_catalog."default" NOT NULL,
+    payload jsonb NOT NULL,
+    prev_payload jsonb NULL,
+    outbox_status outbox_status NOT NULL,
+    copy_state CopyState NOT NULL,
+    version integer NOT NULL,
+    CONSTRAINT question_outbox_pkey PRIMARY KEY (id)
+);
+
+CREATE  INDEX "question_outbox_status"
+    ON "public".question_outbox
+    (type, outbox_status);
+
+CREATE INDEX "question_outbox_saga_id"
+    ON "public".question_outbox
+    (type, saga_id);

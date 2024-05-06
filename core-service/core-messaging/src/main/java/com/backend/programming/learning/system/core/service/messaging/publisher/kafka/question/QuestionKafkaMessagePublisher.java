@@ -1,13 +1,11 @@
 package com.backend.programming.learning.system.core.service.messaging.publisher.kafka.question;
 
 import com.backend.programming.learning.system.core.service.config.CoreServiceConfigData;
-import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.question.QuestionEventPayload;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.question.QuestionOutboxMessage;
 import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.question.QuestionRequestMessagePublisher;
 import com.backend.programming.learning.system.core.service.messaging.mapper.QuestionMessagingDataMapper;
-import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
@@ -48,21 +46,22 @@ public class QuestionKafkaMessagePublisher implements QuestionRequestMessagePubl
 
         QuestionEventPayload questionEventPayload = getQuestionEventPayload(questionOutboxMessage.getPayload());
         String sagaId = questionOutboxMessage.getSagaId().toString();
+        String topicName;
 
         log.info("Received QuestionOutboxMessage for question id: {} and saga id: {}",
                 questionEventPayload.getId(),
                 sagaId);
 
-        String topicName = coreServiceConfigData.getQuestionRequestTopicName();
-
         if (questionOutboxMessage.getServiceName() == ServiceName.CODE_ASSESSMENT_SERVICE)
             topicName = coreServiceConfigData.getQuestionRequestCodeAssessmentTopicName();
+        else
+            topicName = coreServiceConfigData.getQuestionRequestTopicName();
 
         try {
             switch (questionEventPayload.getCopyState()) {
                 case CREATING, DELETING, UPDATING:
                     QuestionRequestAvroModel questionRequestAvroModel = questionMessagingDataMapper
-                            .questionEventPayloadToQuestionRequestAvroModel(sagaId, questionEventPayload, questionOutboxMessage.getServiceName());
+                            .questionEventPayloadToQuestionRequestAvroModel(sagaId, questionEventPayload);
 
                     kafkaProducer.send(topicName,
                             sagaId,

@@ -1,9 +1,10 @@
 package com.backend.programming.learning.system.code.assessment.service.messaging.mapper;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.question.QuestionEventPayload;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.message.QuestionRequest;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel;
-import com.backend.programming.learning.system.kafka.core.avro.model.ServiceName;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -24,23 +25,23 @@ public class QuestionMessagingDataMapper {
                 .build();
     }
 
-//    public QuestionResponseAvroModel questionEventPayloadToQuestionResponseAvroModel(QuestionEventPayload questionEventPayload) {
-//        return QuestionResponseAvroModel.newBuilder()
-//                .setId(questionEventPayload.getId())
-//                .setSagaId(questionEventPayload.getSagaId())
-//                .setOrganizationId(questionEventPayload.getOrganizationId())
-//                .setCreatedBy(questionEventPayload.getCreatedBy())
-//                .setUpdatedBy(questionEventPayload.getUpdatedBy())
-//                .setDifficulty(questionEventPayload.getDifficulty())
-//                .setName(questionEventPayload.getName())
-//                .setQuestionText(questionEventPayload.getQuestionText())
-//                .setGeneralFeedback(questionEventPayload.getGeneralFeedback())
-//                .setDefaultMark(questionEventPayload.getDefaultMark())
-//                .setQType(questionEventPayload.getQType())
-//                .setCopyState(com.backend.programming.learning.system.kafka.core.avro.model.CopyState.valueOf(questionEventPayload.getCopyState().toString()))
-//                .setServiceName(com.backend.programming.learning.system.kafka.core.avro.model.ServiceName.valueOf(
-//                        ServiceName.COURSE_SERVICE.name()))
-//                .build();
-//    }
+    public QuestionResponseAvroModel questionEventPayloadToQuestionResponseAvroModel(QuestionEventPayload questionEventPayload) {
+        return QuestionResponseAvroModel.newBuilder()
+                .setId(questionEventPayload.getId())
+                .setSagaId(questionEventPayload.getSagaId())
+                .setOrganizationId(questionEventPayload.getOrganizationId())
+                .setCreatedBy(questionEventPayload.getCreatedBy())
+                .setUpdatedBy(questionEventPayload.getUpdatedBy())
+                .setDifficulty(questionEventPayload.getDifficulty())
+                .setName(questionEventPayload.getName())
+                .setQuestionText(questionEventPayload.getQuestionText())
+                .setGeneralFeedback(questionEventPayload.getGeneralFeedback())
+                .setDefaultMark(questionEventPayload.getDefaultMark())
+                .setQType(questionEventPayload.getQType())
+                .setCopyState(com.backend.programming.learning.system.kafka.core.avro.model.CopyState.valueOf(questionEventPayload.getCopyState().toString()))
+                .setServiceName(com.backend.programming.learning.system.kafka.core.avro.model.ServiceName.valueOf(
+                        ServiceName.CODE_ASSESSMENT_SERVICE.name()))
+                .build();
+    }
 
 }
