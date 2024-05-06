@@ -20,4 +20,6 @@ public interface ExamJpaRepository extends JpaRepository<ExamEntity, UUID> {
             AND (e.name LIKE %:search%)
             """)
     Page<ExamEntity> findAll(UUID courseId, String search, Pageable pageable);
+
+    Optional<ExamEntity> findByName(String name);
 }

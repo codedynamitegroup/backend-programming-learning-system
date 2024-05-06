@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 
 @Repository
 public class ExamRepositoryImpl implements ExamRepository {
@@ -46,5 +48,11 @@ public class ExamRepositoryImpl implements ExamRepository {
         ExamEntity examEntity = examJpaRepository.findById(examId.getValue())
                 .orElseThrow(() -> new RuntimeException("Exam not found"));
         examJpaRepository.delete(examEntity);
+    }
+
+    @Override
+    public Optional<Exam> findByName(String name) {
+        return examJpaRepository.findByName(name)
+                .map(examDataAccessMapper::examEntityToExam);
     }
 }

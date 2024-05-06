@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -24,10 +23,10 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/auth/moodle/user", produces = "application/vnd.api.v1+json")
-public class MoodleController {
+public class MoodleUserController {
     private final MoodleApplicationService moodleApplicationService;
 
-    @PostMapping
+    @PostMapping("sync")
     public ResponseEntity< List<UserEntityResponse>> syncUser() {
         List<UserEntityResponse> user = moodleApplicationService.syncUser();
         return ResponseEntity.ok(user);

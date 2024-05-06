@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.course.service.domain.valueobject
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import org.springframework.data.domain.Page;
 
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -16,4 +17,6 @@ public interface ExamRepository {
     Page<Exam> findAll(CourseId courseId, String search, Integer pageNo, Integer pageSize);
 
     void deleteById(ExamId examId);
+
+    Optional<Exam> findByName(String name);
 }
