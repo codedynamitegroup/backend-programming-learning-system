@@ -27,7 +27,7 @@ scrape_configs:
     scrape_interval: 1m
     metrics_path: '/actuator/metrics'
     static_configs:
-      - targets: ['gateway-service:9092']
+      - targets: ['gateway-service:9098']
   - job_name: 'core-service'
     scrape_interval: 1m
     metrics_path: '/actuator/metrics'
