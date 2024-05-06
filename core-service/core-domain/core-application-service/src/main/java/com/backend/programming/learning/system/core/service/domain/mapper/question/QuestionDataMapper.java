@@ -11,6 +11,8 @@ import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
+import com.backend.programming.learning.system.core.service.domain.outbox.model.code_questions.CodeQuestionDeleteEventPayload;
+import com.backend.programming.learning.system.core.service.domain.outbox.model.code_questions.CodeQuestionsUpdatePayload;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.question.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.AnswerId;
 import com.backend.programming.learning.system.domain.valueobject.*;
@@ -390,6 +392,16 @@ public class QuestionDataMapper {
                 .qtypeEssayQuestion(qtypeEssayQuestion)
                 .qtypeMultichoiceQuestion(qtypeMultichoiceQuestion)
                 .qtypeShortanswerQuestion(qtypeShortanswerQuestion)
+                .build();
+    }
+
+    public CodeQuestionDeleteEventPayload questionDeletedEventToCodeQuestionsDeleteEventPayload(QuestionDeletedEvent questionDeletedEvent) {
+        return CodeQuestionDeleteEventPayload.builder()
+                .id(questionDeletedEvent.getQuestion().getId().getValue().toString())
+                .codeQuestionId(questionDeletedEvent.getQtypeID().toString())
+                .sagaId(questionDeletedEvent.getQtypeID().toString())
+                .questionId(questionDeletedEvent.getQuestion().getId().getValue().toString())
+                .state(questionDeletedEvent.getQuestion().getCopyState().name())
                 .build();
     }
 }

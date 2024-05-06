@@ -14,6 +14,8 @@ services:
       
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic core-question-request --delete --if-exists
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic core-question-response --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic core-question-request-code-assessment --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic core-question-response-code-assessment --delete --if-exists
       
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic core-user-request --delete --if-exists
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic course-user-request --delete --if-exists
@@ -34,6 +36,8 @@ services:
       
       kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic core-question-request --replication-factor 3 --partitions 3
       kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic core-question-response --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic  core-question-request-code-assessment --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic  core-question-response-code-assessment --replication-factor 3 --partitions 3
 
       kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic core-user-request --replication-factor 3 --partitions 3
       kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic course-user-request --replication-factor 3 --partitions 3

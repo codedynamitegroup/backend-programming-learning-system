@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.core.service.messaging.mapper;
 import com.backend.programming.learning.system.core.service.domain.dto.method.message.QuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.question.QuestionEventPayload;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel;
 import org.springframework.stereotype.Component;
@@ -23,11 +24,13 @@ public class QuestionMessagingDataMapper {
                 .defaultMark(questionResponseAvroModel.getDefaultMark())
                 .qType(questionResponseAvroModel.getQType())
                 .copyState(CopyState.valueOf(questionResponseAvroModel.getCopyState().toString()))
+                .serviceName(ServiceName.valueOf(questionResponseAvroModel.getServiceName().toString()))
                 .build();
     }
 
     public QuestionRequestAvroModel questionEventPayloadToQuestionRequestAvroModel(String sagaId,
-                                                                                   QuestionEventPayload questionEventPayload) {
+                                                                                   QuestionEventPayload questionEventPayload,
+                                                                                   ServiceName serviceName) {
         return QuestionRequestAvroModel.newBuilder()
                 .setId(questionEventPayload.getId())
                 .setSagaId(sagaId)
@@ -43,6 +46,7 @@ public class QuestionMessagingDataMapper {
                 .setCreatedBy(questionEventPayload.getCreatedBy())
                 .setUpdatedBy(questionEventPayload.getUpdatedBy())
                 .setCopyState(com.backend.programming.learning.system.kafka.core.avro.model.CopyState.valueOf(questionEventPayload.getCopyState().name()))
+                .setServiceName(com.backend.programming.learning.system.kafka.core.avro.model.ServiceName.valueOf(serviceName.name()))
                 .build();
     }
 }

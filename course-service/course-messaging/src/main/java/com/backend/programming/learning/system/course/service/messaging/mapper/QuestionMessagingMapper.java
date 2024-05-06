@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.outbox.model.question.QuestionEventPayload;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel;
+import com.backend.programming.learning.system.kafka.core.avro.model.ServiceName;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -70,6 +71,7 @@ public class QuestionMessagingMapper {
                 .setDefaultMark(questionEventPayload.getDefaultMark())
                 .setQType(questionEventPayload.getQType())
                 .setCopyState(com.backend.programming.learning.system.kafka.core.avro.model.CopyState.valueOf(questionEventPayload.getCopyState().toString()))
+                .setServiceName(com.backend.programming.learning.system.kafka.core.avro.model.ServiceName.valueOf(ServiceName.COURSE_SERVICE.name()))
                 .build();
     }
 }

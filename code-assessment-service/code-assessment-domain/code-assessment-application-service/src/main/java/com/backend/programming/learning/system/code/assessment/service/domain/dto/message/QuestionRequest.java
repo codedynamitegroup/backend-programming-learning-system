@@ -1,18 +1,15 @@
-package com.backend.programming.learning.system.core.service.domain.dto.method.message;
+package com.backend.programming.learning.system.code.assessment.service.domain.dto.message;
 
-import com.backend.programming.learning.system.domain.valueobject.CopyState;
-import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Getter
 @Builder
 @AllArgsConstructor
-public class QuestionResponse {
+public class QuestionRequest {
     private String id;
     private String sagaId;
     private String organizationId;
@@ -22,8 +19,6 @@ public class QuestionResponse {
     private String name;
     private String questionText;
     private String generalFeedback;
-    private ServiceName serviceName;
     private BigDecimal defaultMark;
     private String qType;
-    private CopyState copyState;
 }

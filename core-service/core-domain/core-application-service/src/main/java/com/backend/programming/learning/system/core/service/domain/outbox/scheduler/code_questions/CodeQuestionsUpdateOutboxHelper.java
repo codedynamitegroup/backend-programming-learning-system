@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.outbox.scheduler.code_questions;
 
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
+import com.backend.programming.learning.system.core.service.domain.outbox.model.code_questions.CodeQuestionDeleteEventPayload;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.code_questions.CodeQuestionsUpdateOutboxMessage;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.code_questions.CodeQuestionsUpdatePayload;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CodeQuestionsUpdateOutboxRepository;
@@ -89,6 +90,25 @@ public class CodeQuestionsUpdateOutboxHelper {
 
     }
 
+    @Transactional
+    public void saveCodeQuestionsDeleteOutboxMessage(
+            CodeQuestionDeleteEventPayload payload,
+            CopyState copyState,
+            OutboxStatus outboxStatus,
+            UUID sagaId){
+        save(CodeQuestionsUpdateOutboxMessage.builder()
+                .id(UUID.randomUUID())
+                .sagaId(sagaId)
+                .processedAt(ZonedDateTime.now(ZoneId.of("UTC")))
+                .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
+                .type(SagaConstants.CODE_QUESTIONS_UPDATE_SAGA_NAME)
+                .payload(createPayload(payload))
+                .copyState(copyState)
+                .outboxStatus(outboxStatus)
+                .build());
+
+    }
+
     private String createPayload(CodeQuestionsUpdatePayload payload) {
         try {
             return objectMapper.writeValueAsString(payload);
@@ -99,6 +119,18 @@ public class CodeQuestionsUpdateOutboxHelper {
                     payload.getId(), e);
         }
     }
+
+    private String createPayload(CodeQuestionDeleteEventPayload payload) {
+        try {
+            return objectMapper.writeValueAsString(payload);
+        } catch (JsonProcessingException e) {
+            log.error("Could not create CodeQuestionsUpdatePayload object for id: {}",
+                    payload.getId(), e);
+            throw new CoreDomainException("Could not create CodeQuestionsUpdatePayload object for id: " +
+                    payload.getId(), e);
+        }
+    }
+
     @Transactional
     public void updateOutboxMessage(CodeQuestionsUpdateOutboxMessage outboxMessage, OutboxStatus outboxStatus) {
         outboxMessage.setOutboxStatus(outboxStatus);

@@ -13,6 +13,7 @@ import com.backend.programming.learning.system.core.service.domain.implement.ser
 import com.backend.programming.learning.system.core.service.domain.implement.service.question.saga.QuestionSagaHelper;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.outbox.scheduler.question.QuestionOutboxHelper;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -53,6 +54,7 @@ public class QtypeMultichoiceQuestionCommandHandler {
                 questionCreatedEvent.getQuestion().getCopyState(),
                 OutboxStatus.STARTED,
                 questionSagaHelper.questionStatusToSagaStatus(questionCreatedEvent.getQuestion().getCopyState()),
+                ServiceName.COURSE_SERVICE,
                 UUID.randomUUID(), null);
 
         return questionDataMapper.questionCreatedEventToCreateQuestionResponse(questionCreatedEvent, "Qtype Multichoice Question created successfully");
@@ -73,6 +75,7 @@ public class QtypeMultichoiceQuestionCommandHandler {
                 questionUpdatedEvent.getQuestion().getCopyState(),
                 OutboxStatus.STARTED,
                 questionSagaHelper.questionStatusToSagaStatus(questionUpdatedEvent.getQuestion().getCopyState()),
+                ServiceName.COURSE_SERVICE,
                 UUID.randomUUID(),
                 questionDataMapper.questionUpdatedEventToQuestionEventPreviousPayload(questionUpdatedEvent));
 
