@@ -70,5 +70,11 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
         codeSubmission.setGradingStatus(GradingStatus.GRADED);
     }
 
+    @Override
+    public SharedSolution initiateSharedSolution(SharedSolution sharedSolution, List<Tag> tags) {
+        sharedSolution.initiate(tags);
+        return sharedSolution;
+    }
+
 
 }

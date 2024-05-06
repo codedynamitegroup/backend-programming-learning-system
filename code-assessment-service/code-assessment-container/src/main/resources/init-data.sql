@@ -27,3 +27,8 @@ VALUES
 INSERT INTO programming_language_code_question(programming_language_id,code_question_id,time_limit,memory_limit,active)
 VALUES
     ('c95d5c7d-cadf-42cc-afdc-968211ae3720','3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 1, 204800, true);
+
+INSERT INTO tag(id, name)
+VALUES
+    ('4d5d31cc-6386-4ef5-903d-625e64b122d7','Java'),
+    ('cd55e806-5d20-4813-b2ce-f8a235fc9151','Math');
