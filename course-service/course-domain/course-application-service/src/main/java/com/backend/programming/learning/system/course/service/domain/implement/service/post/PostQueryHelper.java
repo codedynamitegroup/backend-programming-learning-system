@@ -21,7 +21,10 @@ import org.springframework.stereotype.Component;
 public class PostQueryHelper {
     private final PostRepository postRepository;
     public Page<Post> findAll(QueryAllPostCommand queryAllPostCommand) {
-        return postRepository.findAll(queryAllPostCommand.getPageNo(), queryAllPostCommand.getPageSize());
+        return postRepository.findAll(
+                queryAllPostCommand.getSearch(),
+                queryAllPostCommand.getPageNo(),
+                queryAllPostCommand.getPageSize());
     }
 
     public Post findById(QueryPostCommand createPostCommand) {

@@ -27,8 +27,9 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
-    public Page<Post> findAll(Integer pageNo, Integer pageSize) {
-        return postJpaRepository.findAll(PageRequest.of(pageNo, pageSize))
+    public Page<Post> findAll(String search, Integer pageNo, Integer pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
+        return postJpaRepository.findAll(search, pageRequest)
                 .map(postDataAccessMapper::postEntityToPost);
     }
 
