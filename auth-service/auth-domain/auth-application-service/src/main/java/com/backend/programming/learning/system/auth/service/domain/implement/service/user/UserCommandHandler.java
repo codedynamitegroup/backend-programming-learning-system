@@ -4,9 +4,13 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.cr
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryUserByIdCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
@@ -14,21 +18,27 @@ import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserDeletedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.implement.saga.user.UserUpdateSagaHelper;
 import com.backend.programming.learning.system.auth.service.domain.mapper.UserDataMapper;
 import com.backend.programming.learning.system.auth.service.domain.outbox.scheduler.user.UserOutboxHelper;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.UUID;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class UserCommandHandler {
 
     private final UserCreateHelper userCreateHelper;
@@ -38,16 +48,8 @@ public class UserCommandHandler {
     private final UserUpdateHelper userUpdateHelper;
     private final UserOutboxHelper userOutboxHelper;
     private final UserUpdateSagaHelper userSagaHelper;
-
-    public UserCommandHandler(UserCreateHelper userCreateHelper, UserDeleteHelper userDeleteHelper, UserDataMapper userDataMapper, UserQueryHelper userQueryHelper, UserUpdateHelper userUpdateHelper, UserOutboxHelper userOutboxHelper, UserUpdateSagaHelper userSagaHelper) {
-        this.userCreateHelper = userCreateHelper;
-        this.userDeleteHelper = userDeleteHelper;
-        this.userDataMapper = userDataMapper;
-        this.userQueryHelper = userQueryHelper;
-        this.userUpdateHelper = userUpdateHelper;
-        this.userOutboxHelper = userOutboxHelper;
-        this.userSagaHelper = userSagaHelper;
-    }
+    private final UserLoginHelper userLoginHelper;
+    private final UserRefreshTokenHelper userRefreshTokenHelper;
 
     @Transactional
     public CreateUserResponse createUser(CreateUserCommand createOrderCommand) {
@@ -57,12 +59,12 @@ public class UserCommandHandler {
                 "User created successfully");
 
         userOutboxHelper.saveUserOutboxMessage(
-                        userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
-                        ServiceName.CORE_SERVICE,
-                        CopyState.CREATING,
-                        OutboxStatus.STARTED,
-                        userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
-                                UUID.randomUUID());
+                userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
+                ServiceName.CORE_SERVICE,
+                CopyState.CREATING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
+                UUID.randomUUID());
 
         userOutboxHelper.saveUserOutboxMessage(
                 userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
@@ -161,5 +163,13 @@ public class UserCommandHandler {
 
         return userDataMapper.deleteUserResponse(deleteUserCommand.getUserId(),
                 "User deleted successfully");
+    }
+
+    public LoginUserResponse loginUser(LoginUserCommand loginUserCommand) {
+        return userLoginHelper.loginUser(loginUserCommand);
+    }
+
+    public RefreshTokenUserResponse refreshTokenUser(RefreshTokenUserCommand refreshTokenUserCommand) {
+        return userRefreshTokenHelper.refreshTokenUser(refreshTokenUserCommand);
     }
 }

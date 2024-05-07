@@ -25,6 +25,11 @@ core-service:
   outbox-scheduler-initial-delay: 2000
 
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://${keycloak.domain}/auth/realms/${keycloak.realm}
   kafka:
     bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
   zipkin:
@@ -124,3 +129,13 @@ management:
 log:
   appName: core-service
 
+jwt:
+  auth:
+    converter:
+      resource-id: spring-client-api-rest
+
+keycloak:
+  realm: microservices_realm
+  domain: localhost:9081
+  client: spring-client-api-rest
+  urls: http://${keycloak.domain}

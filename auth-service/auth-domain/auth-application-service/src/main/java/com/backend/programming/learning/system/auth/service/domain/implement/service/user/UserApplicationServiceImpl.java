@@ -4,9 +4,13 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.cr
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryUserByIdCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
@@ -48,5 +52,15 @@ class UserApplicationServiceImpl implements UserApplicationService {
     @Override
     public DeleteUserResponse deleteUserById(DeleteUserCommand deleteUserCommand) {
         return userCommandHandler.deleteUser(deleteUserCommand);
+    }
+
+    @Override
+    public LoginUserResponse loginUser(LoginUserCommand loginUserCommand) {
+        return userCommandHandler.loginUser(loginUserCommand);
+    }
+
+    @Override
+    public RefreshTokenUserResponse refreshTokenUser(RefreshTokenUserCommand refreshTokenUserCommand) {
+        return userCommandHandler.refreshTokenUser(refreshTokenUserCommand);
     }
 }
