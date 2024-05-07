@@ -18,6 +18,10 @@ spring:
           default-label: main
           clone-on-start: true
       fail-fast: true
+  security:
+    user:
+      name: spring_cloud_user
+      password: springCloud_Pwd!
 
 security:
   paths-to-ignore: /actuator/**
@@ -33,7 +37,6 @@ management:
       show-details: always
     prometheus:
       cache.time-to-live: 1ms
-#  security:
-#    user:
-#      name: spring_cloud_user
-#      password: springCloud_Pwd!
+
+log:
+  app-name: config-server

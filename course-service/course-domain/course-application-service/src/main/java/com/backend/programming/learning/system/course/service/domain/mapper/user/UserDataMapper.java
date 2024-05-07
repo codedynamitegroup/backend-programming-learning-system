@@ -29,8 +29,8 @@ public class UserDataMapper {
                 .firstName(userRequest.getFirstName())
                 .lastName(userRequest.getLastName())
                 .phone(userRequest.getPhone())
-                .createdAt(userRequest.getCreatedAt().atZone(ZoneId.of(DomainConstants.ASIA_HCM)))
-                .updatedAt(userRequest.getUpdatedAt().atZone(ZoneId.of(DomainConstants.ASIA_HCM)))
+                .createdAt(userRequest.getCreatedAt().atZone(ZoneId.of(DomainConstants.UTC)))
+                .updatedAt(userRequest.getUpdatedAt().atZone(ZoneId.of(DomainConstants.UTC)))
                 .isDeleted(userRequest.getIsDeleted())
                 .build();
     }
@@ -42,9 +42,9 @@ public class UserDataMapper {
                 .lastName(userUpdateRequest.getLastName())
                 .address(userUpdateRequest.getAddress())
                 .avatarUrl(userUpdateRequest.getAvatarUrl())
-                .dob(userUpdateRequest.getDob().atZone(ZoneId.of(DomainConstants.ASIA_HCM)))
+                .dob(userUpdateRequest.getDob().atZone(ZoneId.of(DomainConstants.UTC)))
                 .phone(userUpdateRequest.getPhone())
-                .updatedAt(userUpdateRequest.getUpdatedAt().atZone(ZoneId.of(DomainConstants.ASIA_HCM)))
+                .updatedAt(userUpdateRequest.getUpdatedAt().atZone(ZoneId.of(DomainConstants.UTC)))
                 .build();
     }
 

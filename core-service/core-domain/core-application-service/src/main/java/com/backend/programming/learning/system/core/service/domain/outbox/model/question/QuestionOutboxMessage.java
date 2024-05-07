@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.outbox.model.question;
 
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ public class QuestionOutboxMessage {
     private String type;
     private String payload;
     private String previousPayload;
+    private ServiceName serviceName;
     private SagaStatus sagaStatus;
     private OutboxStatus outboxStatus;
     private CopyState copyState;

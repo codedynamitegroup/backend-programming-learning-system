@@ -8,11 +8,16 @@ code-assessment-service:
   code-question-update-response-from-core-service-topic-name: code-question-update-response-from-core-service
   code-question-update-request-to-core-service-topic-name: code-question-update-request-to-core-service
 
+  question-request-code-assessment-topic-name: core-question-request-code-assessment
+  question-response-code-assessment-topic-name: core-question-response-code-assessment
+
   code-assessment-user-request-topic-name: code-assessment-user-request
   user-response-topic-name: user-response
 
   outbox-scheduler-fixed-rate: 2000
   outbox-scheduler-initial-delay: 2000
+
+  question-request-topic-name: core-question-request
 
   assessment-external-service-ip: localhost
   assessment-external-service-port: 2358
@@ -70,6 +75,7 @@ kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
   create-code-question-consumer-group-id: create-code-question-topic-consumer
+  question-request-consumer-group-id: question-request-topic-consumer
   code-assessment-service-user-request-group-id: code-assessment-service-user-request-topic
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader

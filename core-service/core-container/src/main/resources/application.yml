@@ -12,6 +12,9 @@ core-service:
   question-request-topic-name: core-question-request
   question-response-topic-name: core-question-response
 
+  question-request-code-assessment-topic-name: core-question-request-code-assessment
+  question-response-code-assessment-topic-name: core-question-response-code-assessment
+
   core-user-request-topic-name: core-user-request
   user-response-topic-name: user-response
 
@@ -77,6 +80,7 @@ kafka-consumer-config:
   core-service-user-consumer-group-id: core-service-user-topic-consumer
 
   core-service-question-consumer-group-id: core-service-question-topic-consumer
+  core-service-code-question-consumer-group-id: core-service-code-question-topic-consumer
 
   core-service-calendar-event-consumer-group-id: core-service-calendar-event-topic-consumer
 

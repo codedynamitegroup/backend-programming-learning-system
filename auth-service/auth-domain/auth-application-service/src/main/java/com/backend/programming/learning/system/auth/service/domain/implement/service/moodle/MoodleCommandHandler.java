@@ -59,6 +59,8 @@ public class MoodleCommandHandler {
             throw new RuntimeException(e);
         }
 
+        List<User> result = new ArrayList<>();
+
         listUserModel.getUsers().forEach(userModel -> {
             Optional<User> userResult = userRepository.findByEmail(userModel.getEmail());
             if (userResult.isPresent()) {

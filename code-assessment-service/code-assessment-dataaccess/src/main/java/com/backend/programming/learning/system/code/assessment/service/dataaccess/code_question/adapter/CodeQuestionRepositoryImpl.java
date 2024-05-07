@@ -44,6 +44,12 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
     }
 
     @Override
+    public Optional<CodeQuestion> findByQuestionId(UUID questionId) {
+        return codeQuestionJpaRepository.findByQuestionId(questionId)
+                .map(codeQuestionDataAccessMapper::codeQuestionEntityToCodeQuestion);
+    }
+
+    @Override
     public void deleteCodeQuestionById(UUID id){
         codeQuestionJpaRepository.deleteById(id);
     }

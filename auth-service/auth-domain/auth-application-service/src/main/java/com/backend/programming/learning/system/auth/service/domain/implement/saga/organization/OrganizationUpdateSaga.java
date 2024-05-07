@@ -1,10 +1,8 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.saga.organization;
 
 import com.backend.programming.learning.system.auth.service.domain.dto.method.message.OrganizationResponse;
-import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.organization.OrganizationOutboxMessage;
 import com.backend.programming.learning.system.auth.service.domain.outbox.scheduler.organization.OrganizationOutboxHelper;
-import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.OrganizationRepository;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.saga.SagaStatus;
@@ -79,7 +77,7 @@ public class OrganizationUpdateSaga implements SagaStep<OrganizationResponse> {
     private OrganizationOutboxMessage updateOutboxMessage(OrganizationOutboxMessage organizationOutboxMessage,
                                                                  CopyState copyState,
                                                                  SagaStatus sagaStatus) {
-        organizationOutboxMessage.setProcessedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+        organizationOutboxMessage.setProcessedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
         organizationOutboxMessage.setCopyState(copyState);
         organizationOutboxMessage.setSagaStatus(sagaStatus);
         return organizationOutboxMessage;

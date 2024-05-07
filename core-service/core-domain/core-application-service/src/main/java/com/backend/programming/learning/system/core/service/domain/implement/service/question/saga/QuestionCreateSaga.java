@@ -112,7 +112,7 @@ public class QuestionCreateSaga implements SagaStep<QuestionResponse> {
     private QuestionOutboxMessage updateOutboxMessage(QuestionOutboxMessage outboxMessage,
                                                       CopyState copyState,
                                                       SagaStatus sagaStatus) {
-        outboxMessage.setProcessedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+        outboxMessage.setProcessedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
         outboxMessage.setCopyState(copyState);
         outboxMessage.setSagaStatus(sagaStatus);
 

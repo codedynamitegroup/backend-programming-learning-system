@@ -16,6 +16,15 @@ CREATE TYPE qtype AS ENUM ('MULTIPLE_CHOICE', 'SHORT_ANSWER', 'CODE', 'ESSAY');
 DROP TYPE IF EXISTS plagiarism_detection_report_status;
 CREATE TYPE plagiarism_detection_report_status AS ENUM ('PROCESSING', 'COMPLETED', 'FAILED');
 
+DROP TYPE IF EXISTS service_name;
+CREATE TYPE service_name AS ENUM (
+    'CORE_SERVICE',
+    'AUTH_SERVICE',
+    'COURSE_SERVICE',
+    'CODE_ASSESSMENT_SERVICE',
+    'BACKGROUND_SERVICE');
+
+
 DROP TYPE IF EXISTS update_state;
 CREATE TYPE update_state AS ENUM (
     'CREATING',
@@ -587,6 +596,7 @@ CREATE TABLE  "public".question_outbox
     outbox_status outbox_status NOT NULL,
     saga_status saga_status NOT NULL,
     copy_state CopyState NOT NULL,
+    service_name service_name NOT NULL,
     version integer NOT NULL,
     CONSTRAINT question_outbox_pkey PRIMARY KEY (id)
 );

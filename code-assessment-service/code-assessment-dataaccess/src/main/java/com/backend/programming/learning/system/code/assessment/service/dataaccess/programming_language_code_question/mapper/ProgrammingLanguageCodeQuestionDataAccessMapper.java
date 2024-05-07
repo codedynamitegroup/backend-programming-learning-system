@@ -14,12 +14,8 @@ import org.springframework.stereotype.Component;
 public class ProgrammingLanguageCodeQuestionDataAccessMapper {
     public ProgrammingLanguageCodeQuestionEntityId idToEntityId(ProgrammingLanguageCodeQuestionId id) {
         return ProgrammingLanguageCodeQuestionEntityId.builder()
-                .programmingLanguage(ProgrammingLanguageEntity.builder()
-                        .id(id.getValue().getProgrammingLanguageId().getValue())
-                        .build())
-                .codeQuestion(CodeQuestionEntity.builder()
-                        .id(id.getValue().getCodeQuestionId().getValue())
-                        .build())
+                .programmingLanguage(id.getValue().getProgrammingLanguageId().getValue())
+                .codeQuestion(id.getValue().getCodeQuestionId().getValue())
                 .build();
     }
 
