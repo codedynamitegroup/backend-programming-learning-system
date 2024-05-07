@@ -1,18 +1,22 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.implement.service.shared_solution;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.CodeAssessmentDomainService;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.CreateSharedSolutionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.DeleteSharedSolutionVoteCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionDetailCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.SharedSolution;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.SharedSolutionVote;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Tag;
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.ValidateHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.shared_solution.SharedSolutionDataMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.SharedSolutionRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.SharedSolutionId;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.shared_solution_vote.SharedSolutionVoteId;
+import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
-import java.beans.Transient;
 import java.util.List;
 import java.util.UUID;
 
@@ -43,7 +47,9 @@ public class SharedSolutionHelper {
 
     @Transactional
     public SharedSolution getDetailSharedSolution(GetSharedSolutionDetailCommand command) {
-        return validateHelper.validateSharedSolution(command.getSharedSolutionId());
+        SharedSolution sharedSolution = validateHelper.validateSharedSolution(command.getSharedSolutionId(), command.getUserId());
+        sharedSolutionRepository.increaseViewByOne(sharedSolution.getId());
+        return sharedSolution;
     }
 
     @Transactional
@@ -60,5 +66,29 @@ public class SharedSolutionHelper {
     @Transactional
     public List<Integer> getTotalVotes(List<SharedSolution> sharedSolutions) {
         return sharedSolutions.stream().map(item->countTotalVote(item.getId().getValue())).toList();
+    }
+
+    @Transactional
+    public void voteSharedSolution(VoteSharedSolutionCommand command) {
+        validateHelper.validateUser(command.getUserId());
+        validateHelper.validateSharedSolution(command.getSharedSolutionId());
+        SharedSolutionVote ssv = sharedSolutionDataMapper.voteSharedSolutionCommandToSharedSolutionVote(command);
+        sharedSolutionRepository.voteSharedSolution(ssv);
+    }
+
+    @Transactional
+    public void deleteSharedSolutionVote(DeleteSharedSolutionVoteCommand command) {
+
+        validateHelper.validateUser(command.getUserId());
+        validateHelper.validateSharedSolution(command.getSharedSolutionId());
+
+        SharedSolutionVoteId id = new SharedSolutionVoteId(
+                new UserId(command.getUserId()),
+                new SharedSolutionId(command.getSharedSolutionId()));
+        validateHelper.validateSharedSolutionVote(id);
+
+        sharedSolutionRepository
+                .deleteSharedSolutionVoteById(id);
+
     }
 }

@@ -62,11 +62,10 @@ public class TestCaseController {
     }
 
     @PostMapping("/patch-delete")
-    public ResponseEntity<PatchDeleteTestCasesResponse> deleteTestCases
+    public ResponseEntity deleteTestCases
             (@RequestBody List<UUID> testCaseIds){
         PatchDeleteTestCasesCommand command = PatchDeleteTestCasesCommand.builder().testCaseIds(testCaseIds).build();
-        PatchDeleteTestCasesResponse response =
-                service.patchDeleteTestCases(command);
-        return ResponseEntity.ok(response);
+        service.patchDeleteTestCases(command);
+        return ResponseEntity.noContent().build();
     }
 }

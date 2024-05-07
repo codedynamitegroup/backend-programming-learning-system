@@ -1,7 +1,10 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.implement.service.shared_solution;
 
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.CreateSharedSolutionCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.CreateSharedSolutionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.DeleteSharedSolutionVoteCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionByCodeQuestionIdCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionDetailCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionResponseItem;
@@ -42,5 +45,16 @@ public class SharedSolutionCommandHanlder {
         for(int i = 0; i<items.size(); ++i)
             items.get(i).setTotalVote(totalVotes.get(i));
         return items;
+    }
+
+    public VoteSharedSolutionResponse voteSharedSolution(VoteSharedSolutionCommand command) {
+        sharedSolutionHelper.voteSharedSolution(command);
+        return VoteSharedSolutionResponse.builder().message("vote successfully").build();
+    }
+
+    public VoteSharedSolutionResponse deleteVote(DeleteSharedSolutionVoteCommand command) {
+        sharedSolutionHelper.deleteSharedSolutionVote(command);
+        return VoteSharedSolutionResponse.builder().message("delete vote successfully").build();
+
     }
 }

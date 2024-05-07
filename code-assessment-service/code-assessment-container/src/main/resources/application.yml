@@ -25,17 +25,17 @@ code-assessment-service:
   accepted-status-description: Accepted
 
 spring:
-  kafka:
-    bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
-  zipkin:
-    sender:
-      type: kafka
-  sleuth:
-    sampler:
-      probability: 1.0
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
+#  kafka:
+#    bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
+#  zipkin:
+#    sender:
+#      type: kafka
+#  sleuth:
+#    sampler:
+#      probability: 1.0
+#  mvc:
+#    pathmatch:
+#      matching-strategy: ant_path_matcher
   jpa:
     open-in-view: false
     show-sql: true

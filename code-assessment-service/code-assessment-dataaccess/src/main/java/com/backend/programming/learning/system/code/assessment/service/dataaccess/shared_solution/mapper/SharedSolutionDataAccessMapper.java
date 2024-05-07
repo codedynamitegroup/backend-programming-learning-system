@@ -2,11 +2,12 @@ package com.backend.programming.learning.system.code.assessment.service.dataacce
 
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.CodeQuestionEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.shared_solution.entity.SharedSolutionEntity;
-import com.backend.programming.learning.system.code.assessment.service.dataaccess.shared_solution.entity.SharedSolutionTagEntity;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.shared_solution.entity.tag.SharedSolutionTagEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.tag.entity.TagEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.SharedSolution;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.SharedSolutionVote;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Tag;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.SharedSolutionId;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
@@ -46,6 +47,20 @@ public class SharedSolutionDataAccessMapper {
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .tags(tags)
+                .build();
+    }
+    public SharedSolution entityToSharedSolution(SharedSolutionEntity entity, List<Tag> tags, SharedSolutionVote sharedSolutionVote) {
+        return SharedSolution.builder()
+                .id(new SharedSolutionId(entity.getId()))
+                .codeQuestionId(new CodeQuestionId(entity.getCodeQuestion().getId()))
+                .user(userDataAccessMapper.userEntityToUser(entity.getUser()))
+                .title(entity.getTitle())
+                .content(entity.getContent())
+                .viewNumber(entity.getViewNumber())
+                .createdAt(entity.getCreatedAt())
+                .updatedAt(entity.getUpdatedAt())
+                .tags(tags)
+                .youVote(sharedSolutionVote != null? sharedSolutionVote.getVoteType(): null)
                 .build();
     }
 

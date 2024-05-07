@@ -1,10 +1,14 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.mapper.shared_solution;
 
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.CreateSharedSolutionCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.CreateSharedSolutionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionResponseItem;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.SharedSolution;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.SharedSolutionVote;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.User;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.SharedSolutionId;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.shared_solution_vote.SharedSolutionVoteId;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
@@ -39,6 +43,7 @@ public class SharedSolutionDataMapper {
                 .createdAt(sharedSolutions.getCreatedAt())
                 .content(sharedSolutions.getContent())
                 .title(sharedSolutions.getTitle())
+                .youVote(sharedSolutions.getYouVote())
                 .tags(sharedSolutions.getTags()
                         .stream()
                         .map(item-> GetSharedSolutionResponseItem.Tag.builder()
@@ -61,6 +66,15 @@ public class SharedSolutionDataMapper {
                         .map(item-> GetSharedSolutionResponseItem.Tag.builder()
                                 .name(item.getName()).id(item.getId().getValue()).build())
                         .toList())
+                .build();
+    }
+
+    public SharedSolutionVote voteSharedSolutionCommandToSharedSolutionVote(VoteSharedSolutionCommand command) {
+        return SharedSolutionVote.builder()
+                .id(new SharedSolutionVoteId
+                        (new UserId(command.getUserId()),
+                                new SharedSolutionId(command.getSharedSolutionId())))
+                .voteType(command.getVoteType())
                 .build();
     }
 }
