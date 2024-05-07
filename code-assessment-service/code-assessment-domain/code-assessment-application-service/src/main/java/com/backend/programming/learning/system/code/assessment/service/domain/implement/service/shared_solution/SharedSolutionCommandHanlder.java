@@ -38,9 +38,12 @@ public class SharedSolutionCommandHanlder {
 
     @Transactional
     public List<GetSharedSolutionResponseItem> getSharedSolutions(GetSharedSolutionByCodeQuestionIdCommand command) {
-        List<SharedSolution> sharedSolutions = sharedSolutionHelper.getSharedSolutionsByCodeQuestionId(command.getCodeQuestionId());
+        List<SharedSolution> sharedSolutions
+                = sharedSolutionHelper.getSharedSolutionsByCodeQuestionId(command.getCodeQuestionId());
+
         List<GetSharedSolutionResponseItem> items =  sharedSolutions.stream().map(sharedSolutionDataMapper::sharedSolutionToGetSharedSolutionResponseItemIgnoreTitleAndContent)
                 .toList();
+
         List<Integer> totalVotes = sharedSolutionHelper.getTotalVotes(sharedSolutions);
         for(int i = 0; i<items.size(); ++i)
             items.get(i).setTotalVote(totalVotes.get(i));

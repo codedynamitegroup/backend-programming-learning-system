@@ -17,5 +17,5 @@ public interface CodeSubmissionApplicationService {
 
     List<GetCodeSubmissionResponseItem> getCodeSubmissionsByUserId(@Valid GetCodeSubmissionsByUserIdCommand command);
 
-    GetCodeSubmissionResponseItem getCodeSubmissionsById(GetDetailCodeSubmissionsByIdCommand command);
+    GetCodeSubmissionResponseItem getCodeSubmissionsById(@Valid GetDetailCodeSubmissionsByIdCommand command);
 }

@@ -61,7 +61,6 @@ public class SharedSolutionRepositoryImpl implements SharedSolutionRepository {
         List<SharedSolutionTagEntity> sharedSolutionTagEntities =
                 tags.stream().map(tag -> dataAccessMapper.tagToSharedSolutionTagEntity(tag, SharedSolutionEntity.builder().id(id).build()))
                         .toList();
-//        sharedSolutionTagEntities.forEach(a-> log.info("ccaa {} {}", a.getSharedSolution().getId(), a.getTag().getId() ));
         sharedSolutionTagJpaRepository.saveAll(sharedSolutionTagEntities);
     }
 
@@ -69,6 +68,7 @@ public class SharedSolutionRepositoryImpl implements SharedSolutionRepository {
     public Optional<SharedSolution> findById(UUID sharedSolutionId, UUID voteUserId) {
         List<SharedSolutionTagEntity> sst = sharedSolutionTagJpaRepository.findBySharedSolutionId(sharedSolutionId);
 
+        //check if user vote this
         SharedSolutionVoteEntityId entityId = sharedSolutionVoteDataAccessMapper.userIdAndSharedSolutionIdToEntityId(sharedSolutionId, voteUserId);
         Optional<SharedSolutionVoteEntity> sharedSolutionVoteEntityOpt = sharedSolutionVoteJpaRepository.findById(entityId);
         SharedSolutionVote sharedSolutionVote = sharedSolutionVoteEntityOpt.map(sharedSolutionVoteDataAccessMapper::entityToVote).orElse(null);
@@ -82,6 +82,7 @@ public class SharedSolutionRepositoryImpl implements SharedSolutionRepository {
 
     @Override
     public Optional<SharedSolution> findById(UUID sharedSolutionId) {
+        //find tag
         List<SharedSolutionTagEntity> sst = sharedSolutionTagJpaRepository.findBySharedSolutionId(sharedSolutionId);
         List<Tag> tags = sst.stream().map(sharedSolutionTagDataAccessMapper::sharedSolutionTagEntityToTag).toList();
 
@@ -101,10 +102,14 @@ public class SharedSolutionRepositoryImpl implements SharedSolutionRepository {
     @Override
     public List<SharedSolution> findByCodeQuestionId(UUID codeQuestionId) {
         List<SharedSolutionEntity> sharedSolutionEntities = sharedSolutionJpaRepository.findByCodeQuestionId(codeQuestionId);
+
+
+        //get tag
         List<List<Tag>> eachTags = sharedSolutionEntities.stream().map(item->{
             List<SharedSolutionTagEntity> sst = sharedSolutionTagJpaRepository.findBySharedSolutionId(item.getId());
             return sst.stream().map(sharedSolutionTagDataAccessMapper::sharedSolutionTagEntityToTag).toList();
         }).toList();
+
         List<SharedSolution> result = new ArrayList<>();
         for(int i = 0; i<sharedSolutionEntities.size(); ++i){
             result.add(dataAccessMapper
