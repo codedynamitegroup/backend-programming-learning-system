@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle;
+package com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user_course;
 
 import lombok.*;
 

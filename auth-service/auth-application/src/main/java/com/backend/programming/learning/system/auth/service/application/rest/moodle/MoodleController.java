@@ -28,9 +28,8 @@ public class MoodleController {
     private final MoodleApplicationService moodleApplicationService;
 
     @PostMapping
-    public ResponseEntity< List<UserEntityResponse>> syncUser() {
-        List<UserEntityResponse> user = moodleApplicationService.syncUser();
-        return ResponseEntity.ok(user);
+    public ResponseEntity< String> syncUser() {
+        return ResponseEntity.ok(moodleApplicationService.syncUser());
     }
 
 

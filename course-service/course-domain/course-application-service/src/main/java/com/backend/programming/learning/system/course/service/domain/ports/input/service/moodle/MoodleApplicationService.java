@@ -5,6 +5,6 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import java.util.List;
 
 public interface MoodleApplicationService {
-    List<CourseResponseEntity> syncCourse();
+    String syncCourse();
 
 }
