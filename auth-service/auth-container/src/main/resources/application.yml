@@ -124,5 +124,7 @@ jwt:
 keycloak:
   realm: microservices_realm
   domain: localhost:9081
+  admin-client-id: admin-cli
+  admin-client-secret: f3abb73d-8afa-4cd9-a35b-2555258a4a3d
   client: spring-client-api-rest
   urls: http://${keycloak.domain}

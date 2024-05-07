@@ -20,6 +20,7 @@ public class UserEntity {
     @Id
     private UUID id;
     private String email;
+    private String username;
     private String password;
     private ZonedDateTime dob;
     private String firstName;

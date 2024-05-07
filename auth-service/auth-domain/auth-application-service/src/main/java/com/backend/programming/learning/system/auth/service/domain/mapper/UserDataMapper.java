@@ -25,6 +25,7 @@ public class UserDataMapper {
     public User createUserCommandToUser(CreateUserCommand createUserCommand) {
         return User.builder()
                 .email(createUserCommand.getEmail())
+                .username(createUserCommand.getUsername())
                 .password(createUserCommand.getPassword())
                 .firstName(createUserCommand.getFirstName())
                 .lastName(createUserCommand.getLastName())

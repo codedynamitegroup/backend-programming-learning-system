@@ -36,6 +36,7 @@ DROP TABLE IF EXISTS "public".main_user CASCADE;
 CREATE TABLE "public".main_user (
 	id uuid NOT NULL,
     email character varying COLLATE pg_catalog."default" NOT NULL,
+    username character varying,
     password character varying COLLATE pg_catalog."default" NOT NULL,
     dob TIMESTAMP WITH TIME ZONE,
 	first_name character varying,

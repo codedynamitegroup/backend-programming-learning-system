@@ -12,6 +12,7 @@ import java.util.UUID;
 public class User extends AggregateRoot<UserId> {
     private String email;
     private String password;
+    private String username;
     private ZonedDateTime dob;
     private String firstName;
     private String lastName;
@@ -28,6 +29,7 @@ public class User extends AggregateRoot<UserId> {
     private User(Builder builder) {
         super.setId(builder.userId);
         email = builder.email;
+        setUsername(builder.username);
         setPassword(builder.password);
         setDob(builder.dob);
         setFirstName(builder.firstName);
@@ -155,6 +157,14 @@ public class User extends AggregateRoot<UserId> {
         this.updatedAt = updatedAt;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -162,6 +172,7 @@ public class User extends AggregateRoot<UserId> {
     public static final class Builder {
         private String email;
         private String password;
+        private String username;
         private ZonedDateTime dob;
         private String firstName;
         private String lastName;
@@ -181,6 +192,11 @@ public class User extends AggregateRoot<UserId> {
 
         public Builder email(String val) {
             email = val;
+            return this;
+        }
+
+        public Builder username(String val) {
+            username = val;
             return this;
         }
 

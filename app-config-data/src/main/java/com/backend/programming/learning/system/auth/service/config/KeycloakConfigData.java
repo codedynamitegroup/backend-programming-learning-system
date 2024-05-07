@@ -12,4 +12,6 @@ public class KeycloakConfigData {
     private String domain;
     private String client;
     private String urls;
+    private String adminClientId;
+    private String adminClientSecret;
 }
