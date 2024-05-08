@@ -12,7 +12,7 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.OptimisticLockException;
+import jakarta.persistence.OptimisticLockException;
 import java.util.List;
 
 @Slf4j
@@ -32,8 +32,8 @@ public class CodeQuestionResponseKafkaListener implements KafkaConsumer<Question
     @KafkaListener(id = "${kafka-consumer-config.core-service-code-question-consumer-group-id}",
             topics = "${core-service.question-response-code-assessment-topic-name}")
     public void receive(@Payload List<QuestionResponseAvroModel> messages,
-                        @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) List<String> keys,
-                        @Header(KafkaHeaders.RECEIVED_PARTITION_ID) List<Integer> partitions,
+                        @Header(KafkaHeaders.RECEIVED_KEY) List<String> keys,
+                        @Header(KafkaHeaders.RECEIVED_PARTITION) List<Integer> partitions,
                         @Header(KafkaHeaders.OFFSET) List<Long> offsets) {
         log.info("{} number of question response received with keys:{}, partitions:{} and offsets: {}",
                 messages.size(),

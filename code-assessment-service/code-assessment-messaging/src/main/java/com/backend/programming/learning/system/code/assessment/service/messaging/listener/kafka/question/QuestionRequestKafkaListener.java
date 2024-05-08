@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.code.assessment.service.messaging.listener.kafka;
+package com.backend.programming.learning.system.code.assessment.service.messaging.listener.kafka.question;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.exception.CodeAssessmentApplicationServiceException;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.message.listener.QuestionRequestMessageListener;
@@ -37,8 +37,8 @@ public class QuestionRequestKafkaListener implements KafkaConsumer<QuestionReque
             topics = "${code-assessment-service.question-request-code-assessment-topic-name}")
     public void receive(
             @Payload List<QuestionRequestAvroModel> messages,
-            @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) List<String> keys,
-            @Header(KafkaHeaders.RECEIVED_PARTITION_ID) List<Integer> partitions,
+            @Header(KafkaHeaders.RECEIVED_KEY) List<String> keys,
+            @Header(KafkaHeaders.RECEIVED_PARTITION) List<Integer> partitions,
             @Header(KafkaHeaders.OFFSET) List<Long> offsets) {
         log.info("{} number of question request received with keys: {}, partitions: {} and offsets: {}",
                 messages.size(),

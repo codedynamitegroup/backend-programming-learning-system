@@ -1,7 +1,10 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.implement.service.shared_solution;
 
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.CreateSharedSolutionCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.CreateSharedSolutionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.DeleteSharedSolutionVoteCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionByCodeQuestionIdCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionDetailCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionResponseItem;
@@ -37,5 +40,15 @@ public class SharedSolutionApplicationServiceImpl implements SharedSolutionAppli
     @Override
     public List<GetSharedSolutionResponseItem> getSharedSolutions(GetSharedSolutionByCodeQuestionIdCommand command) {
         return hanlder.getSharedSolutions(command);
+    }
+
+    @Override
+    public VoteSharedSolutionResponse voteSharedSolution(VoteSharedSolutionCommand command) {
+        return hanlder.voteSharedSolution(command);
+    }
+
+    @Override
+    public VoteSharedSolutionResponse deleteVote(DeleteSharedSolutionVoteCommand command) {
+        return hanlder.deleteVote(command);
     }
 }

@@ -3,6 +3,8 @@ package com.backend.programming.learning.system.code.assessment.service.domain.e
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagId;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 
+import java.util.UUID;
+
 public class Tag extends AggregateRoot<TagId> {
     private String name;
 
@@ -17,6 +19,10 @@ public class Tag extends AggregateRoot<TagId> {
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    public void inititate() {
+        super.setId(new TagId(UUID.randomUUID()));
     }
 
     public static final class Builder {

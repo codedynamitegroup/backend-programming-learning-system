@@ -17,6 +17,7 @@ spring:
           skip-ssl-validation: true
           default-label: main
           clone-on-start: true
+          force-pull: true
       fail-fast: true
   security:
     user:

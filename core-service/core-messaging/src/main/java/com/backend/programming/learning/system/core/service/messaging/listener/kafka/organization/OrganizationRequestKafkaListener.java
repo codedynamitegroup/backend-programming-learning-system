@@ -35,8 +35,8 @@ public class OrganizationRequestKafkaListener implements KafkaConsumer<Organizat
     @KafkaListener(id = "${kafka-consumer-config.core-service-organization-consumer-group-id}",
             topics = "${core-service.core-organization-request-topic-name}")
     public void receive(@Payload List<OrganizationRequestAvroModel> messages,
-                        @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) List<String> keys,
-                        @Header(KafkaHeaders.RECEIVED_PARTITION_ID) List<Integer> partitions,
+                        @Header(KafkaHeaders.RECEIVED_KEY) List<String> keys,
+                        @Header(KafkaHeaders.RECEIVED_PARTITION) List<Integer> partitions,
                         @Header(KafkaHeaders.OFFSET) List<Long> offsets) {
         log.info("{} number of organization requests received with keys:{}, partitions:{} and offsets: {}",
                 messages.size(),

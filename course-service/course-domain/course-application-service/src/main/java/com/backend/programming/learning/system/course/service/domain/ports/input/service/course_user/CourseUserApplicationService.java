@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.course_user.CreateCourseUserResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.course_user.DeleteCourseUserCommand;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 /**
  * com.backend.programming.learning.system.ports.input.service.course_user

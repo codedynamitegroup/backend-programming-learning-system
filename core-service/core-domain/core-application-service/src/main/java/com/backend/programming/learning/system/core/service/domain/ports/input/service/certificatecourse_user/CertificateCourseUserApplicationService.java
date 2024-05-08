@@ -5,7 +5,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCourseUsersCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCourseUsersResponse;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 public interface CertificateCourseUserApplicationService {
     CreateCertificateCourseUserResponse createCertificateCourseUser(

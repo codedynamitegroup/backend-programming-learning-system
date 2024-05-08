@@ -18,11 +18,14 @@ auth-service:
   outbox-scheduler-initial-delay: 2000
 
 spring:
+  application:
+    name: auth-service
   kafka:
     bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
   zipkin:
     sender:
       type: kafka
+    base-url: http://localhost:9411
   sleuth:
     sampler:
       probability: 1.0
@@ -33,22 +36,34 @@ spring:
     loadbalancer:
       ribbon:
         enabled: false
-  jpa:
-    open-in-view: false
-    show-sql: true
-    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+#  jpa:
+#    open-in-view: false
+#    show-sql: true
+#    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/auth-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
+#    username: postgres
+#    password: localdb
+#    driver-class-name: org.postgresql.Driver
+#    platform: postgres
+#    schema: classpath:init-schema.sql
+#    data: classpath:init-data.sql
+#    initialization-mode: always
   datasource:
     url: jdbc:postgresql://localhost:5432/auth-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: postgres
     password: localdb
     driver-class-name: org.postgresql.Driver
-    platform: postgres
-    schema: classpath:init-schema.sql
-    data: classpath:init-data.sql
-    initialization-mode: always
+
+  sql:
+    init:
+      platform: postgres
+      mode: always
+      data-locations: classpath:init-data.sql
+      schema-locations: classpath:init-schema.sql
 
 kafka-config:
   bootstrap-servers: localhost:19092, localhost:29092, localhost:39092

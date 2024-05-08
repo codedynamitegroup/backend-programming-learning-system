@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface CertificateCourseUserJpaRepository extends PagingAndSortingRepository<CertificateCourseUserEntity, UUID> {
+public interface CertificateCourseUserJpaRepository extends JpaRepository<CertificateCourseUserEntity, UUID> {
     Optional<CertificateCourseUserEntity> findById(UUID id);
 
     Page<CertificateCourseUserEntity> findAllByCertificateCourseId(

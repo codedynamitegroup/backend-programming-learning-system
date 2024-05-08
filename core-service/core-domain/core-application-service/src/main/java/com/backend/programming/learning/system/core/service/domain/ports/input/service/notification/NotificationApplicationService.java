@@ -9,7 +9,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.qu
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.notification.MarkReadNotificationCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.notification.MarkReadNotificationResponse;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 public interface NotificationApplicationService {
     CreateNotificationResponse createNotificationResponse(

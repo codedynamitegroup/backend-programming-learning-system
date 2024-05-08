@@ -11,7 +11,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.up
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.topic.UpdateTopicResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 public interface TopicApplicationService {
     CreateTopicResponse createTopic(

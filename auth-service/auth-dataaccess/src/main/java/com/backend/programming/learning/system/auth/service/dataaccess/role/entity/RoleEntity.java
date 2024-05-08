@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.auth.service.dataaccess.role.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import com.backend.programming.learning.system.auth.service.dataaccess.organization.entity.OrganizationEntity;
 import com.backend.programming.learning.system.auth.service.dataaccess.user.entity.UserEntity;

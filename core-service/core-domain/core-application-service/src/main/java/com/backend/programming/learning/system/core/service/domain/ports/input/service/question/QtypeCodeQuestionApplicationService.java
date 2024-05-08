@@ -6,7 +6,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.qu
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeCodeQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQuestionResponse;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 

@@ -1,10 +1,11 @@
-package com.backend.programming.learning.system.code.assessment.service.dataaccess.shared_solution.entity;
+package com.backend.programming.learning.system.code.assessment.service.dataaccess.shared_solution.entity.vote;
 
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.shared_solution.entity.SharedSolutionEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.Vote;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Objects;
 
 @Getter
@@ -14,8 +15,8 @@ import java.util.Objects;
 @NoArgsConstructor
 @Entity
 @Table(name = "vote_shared_solution")
-@IdClass(VoteSharedSolutionEntityId.class)
-public class VoteSharedSolutionEntity {
+@IdClass(SharedSolutionVoteEntityId.class)
+public class SharedSolutionVoteEntity {
     @Id
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -33,7 +34,7 @@ public class VoteSharedSolutionEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        VoteSharedSolutionEntity that = (VoteSharedSolutionEntity) o;
+        SharedSolutionVoteEntity that = (SharedSolutionVoteEntity) o;
         return Objects.equals(user, that.user) && Objects.equals(sharedSolution, that.sharedSolution);
     }
 

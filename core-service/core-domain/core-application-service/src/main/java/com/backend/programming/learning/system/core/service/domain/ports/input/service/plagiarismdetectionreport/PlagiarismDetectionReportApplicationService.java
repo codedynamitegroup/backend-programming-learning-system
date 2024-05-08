@@ -7,7 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.qu
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.plagiarismdetectionreport.QueryPlagiarismDetectionReportCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.plagiarismdetectionreport.PlagiarismDetectionReportResponseEntity;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 public interface PlagiarismDetectionReportApplicationService {
     PlagiarismDetectionReportResponseEntity queryPlagiarismDetectionReport

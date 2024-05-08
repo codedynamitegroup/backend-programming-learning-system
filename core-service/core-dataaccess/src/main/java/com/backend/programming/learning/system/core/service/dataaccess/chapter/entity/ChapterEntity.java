@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.core.service.dataaccess.chapter.
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter_question.entity.ChapterQuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.ZonedDateTime;
