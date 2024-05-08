@@ -1,3 +1,6 @@
+server:
+  port: 8761
+
 eureka:
   client:
     register-with-eureka: true
@@ -10,15 +13,10 @@ eureka:
     eviction-interval-timer-in-ms: 2000
 
 spring:
-  cloud:
-    loadbalancer:
-      ribbon:
-        enabled: false
+  application:
+    name: discovery-service
   profiles:
     active: singleserver
-
-security:
-  paths-to-ignore: /actuator/**
 
 management:
   endpoints:
@@ -36,7 +34,9 @@ management:
 server:
   port: 8761
 spring:
-  profiles: peer1
+  config:
+    activate:
+      on-profile: peer1
 eureka:
   instance:
     hostname: discovery-service-1
@@ -53,7 +53,9 @@ log:
 server:
   port: 8762
 spring:
-  profiles: peer2
+  config:
+    activate:
+      on-profile: peer2
 eureka:
   instance:
     hostname: discovery-service-2

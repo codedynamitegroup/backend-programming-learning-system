@@ -1,6 +1,13 @@
 server:
   port: 8181
 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true
+
 logging:
   level:
     com.backend.programming.learning.system: DEBUG
@@ -33,8 +40,12 @@ spring:
   profiles:
     active: core
   config:
-    import: "optional:configserver:${CONFIG_SERVER:http://localhost:9999}"
+    import: optional:configserver:${CONFIG_SERVER:http://localhost:9999}
     name: core-service,config-client
+  cloud:
+    config:
+      username: spring_cloud_user
+      password: springCloud_Pwd!
   kafka:
     bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
   zipkin:

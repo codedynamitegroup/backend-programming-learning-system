@@ -39,7 +39,7 @@
 		<socketio.version>2.0.3</socketio.version>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
-		<spring-cloud.version>3.1.7</spring-cloud.version>
+		<spring-cloud.version>4.0.3</spring-cloud.version>
 		<spring-cloud-dependencies.version>2023.0.1</spring-cloud-dependencies.version>
 		<spring-cloud-starter-circuitbreaker-reactor-resilience4j.version>1.0.5.RELEASE</spring-cloud-starter-circuitbreaker-reactor-resilience4j.version>
 		<micrometer-registry-prometheus.version>1.12.5</micrometer-registry-prometheus.version>
@@ -302,13 +302,13 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-				<version>${spring-cloud.version}</version>
+				<version>${spring-cloud-netflix.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-				<version>${spring-cloud.version}</version>
+				<version>${spring-cloud-netflix.version}</version>
 			</dependency>
 
 			<dependency>
