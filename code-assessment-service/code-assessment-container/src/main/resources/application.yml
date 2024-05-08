@@ -56,7 +56,7 @@ spring:
 #    data: classpath:init-data.sql
 #    initialization-mode: always
   datasource:
-    url: jdbc:postgresql://localhost:5432/course-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
+    url: jdbc:postgresql://localhost:5432/code-assessment-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: postgres
     password: localdb
     driver-class-name: org.postgresql.Driver

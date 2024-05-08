@@ -38,6 +38,12 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public Optional<User> findByUserIdMoodle(Integer userIdMoodle) {
+        return userJpaRepository.findByUserIdMoodle(userIdMoodle)
+                .map(userDataAccessMapper::userEntityToUser);
+    }
+
+    @Override
     public List<User> findAll() {
         return userDataAccessMapper
                 .userEntityListToUserList(userJpaRepository.findAll());

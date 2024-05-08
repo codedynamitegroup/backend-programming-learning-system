@@ -7,10 +7,10 @@ import com.backend.programming.learning.system.code.assessment.service.domain.en
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.tag.TagDataMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.TagRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagId;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Slf4j

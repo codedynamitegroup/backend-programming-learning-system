@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.dto.method.update.course;
 
+import com.backend.programming.learning.system.course.service.domain.entity.CourseType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,7 +19,7 @@ import java.util.UUID;
 public class UpdateCourseResponse {
     private UUID courseId;
     private String name;
-    private String courseType;
+    private CourseType courseType;
     private Boolean visible;
     private String message;
 }
