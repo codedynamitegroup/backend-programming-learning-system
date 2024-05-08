@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.gateway.service.config;
+package com.backend.programming.learning.system.config.server.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
