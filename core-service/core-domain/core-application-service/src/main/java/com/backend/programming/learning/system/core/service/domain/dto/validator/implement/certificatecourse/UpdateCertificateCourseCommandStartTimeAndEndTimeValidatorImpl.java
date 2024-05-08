@@ -3,8 +3,8 @@ package com.backend.programming.learning.system.core.service.domain.dto.validato
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.validator.certificatecourse.UpdateCertificateCourseCommandStartTimeAndEndTimeValidator;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 public class UpdateCertificateCourseCommandStartTimeAndEndTimeValidatorImpl implements ConstraintValidator<
         UpdateCertificateCourseCommandStartTimeAndEndTimeValidator, UpdateCertificateCourseCommand> {

@@ -6,7 +6,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionDetailCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionResponseItem;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 
 public interface SharedSolutionApplicationService {

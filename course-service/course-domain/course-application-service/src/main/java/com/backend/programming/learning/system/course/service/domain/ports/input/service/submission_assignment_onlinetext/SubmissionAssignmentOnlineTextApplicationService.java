@@ -7,7 +7,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment_onlinetext.QuerySubmissionAssignmentOnlineTextCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment_onlinetext.SubmissionAssignmentOnlineTextResponseEntity;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 public interface SubmissionAssignmentOnlineTextApplicationService {
     CreateSubmissionAssignmentOnlineTextResponse createSubmissionAssignmentOnlineText(@Valid CreateSubmissionAssignmentOnlineTextCommand createSubmissionAssignmentOnlineTextCommand);

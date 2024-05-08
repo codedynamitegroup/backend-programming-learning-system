@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.core.service.dataaccess.topic.en
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.topic_programminglanguage.entity.TopicProgrammingLanguageEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import com.backend.programming.learning.system.core.service.domain.entity.TopicProgrammingLanguage;
 import lombok.*;

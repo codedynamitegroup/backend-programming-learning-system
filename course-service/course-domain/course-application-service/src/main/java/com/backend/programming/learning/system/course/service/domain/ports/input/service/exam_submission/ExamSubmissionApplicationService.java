@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 /**
  * com.backend.programming.learning.system.ports.input.service.exam_submission

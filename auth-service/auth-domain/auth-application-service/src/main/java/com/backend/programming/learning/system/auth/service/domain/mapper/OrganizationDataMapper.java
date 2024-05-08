@@ -20,7 +20,7 @@ import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 

@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.dataaccess.question.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import lombok.*;

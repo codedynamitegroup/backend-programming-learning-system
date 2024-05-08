@@ -34,8 +34,7 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
     @Override
     public CertificateCourse saveCertificateCourse(CertificateCourse certificateCourse) {
         return certificateCourseDataAccessMapper.certificateCourseEntityToCertificateCourse(
-                certificateCourseJpaRepository
-                .save(certificateCourseDataAccessMapper
+                certificateCourseJpaRepository.save(certificateCourseDataAccessMapper
                         .certificateCourseToCertificateCourseEntity(certificateCourse)));
     }
 

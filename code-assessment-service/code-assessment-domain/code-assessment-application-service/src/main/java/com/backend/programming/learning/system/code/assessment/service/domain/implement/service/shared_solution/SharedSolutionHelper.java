@@ -11,7 +11,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.po
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.SharedSolutionId;
 import org.springframework.stereotype.Component;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import java.beans.Transient;
 import java.util.List;
 import java.util.UUID;

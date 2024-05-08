@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.core.service.domain.dto.method.c
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;

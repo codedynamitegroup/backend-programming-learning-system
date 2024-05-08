@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.auth.service.domain.dto.method.query.organization;
 
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
 
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.organization.OrganizationEntityResponse;
 import lombok.AllArgsConstructor;

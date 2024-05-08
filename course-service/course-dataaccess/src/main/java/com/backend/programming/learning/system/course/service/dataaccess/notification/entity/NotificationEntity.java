@@ -5,7 +5,7 @@ import com.backend.programming.learning.system.course.service.domain.valueobject
 import com.backend.programming.learning.system.course.service.domain.valueobject.NotificationEventType;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;

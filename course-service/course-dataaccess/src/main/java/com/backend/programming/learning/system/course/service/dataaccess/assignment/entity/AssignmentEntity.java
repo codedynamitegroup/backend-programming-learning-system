@@ -5,7 +5,7 @@ import com.backend.programming.learning.system.course.service.dataaccess.course.
 import com.backend.programming.learning.system.course.service.domain.valueobject.Type;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Objects;

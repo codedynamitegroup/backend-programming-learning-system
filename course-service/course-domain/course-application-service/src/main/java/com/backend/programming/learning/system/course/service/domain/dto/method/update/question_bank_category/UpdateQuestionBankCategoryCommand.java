@@ -2,7 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.dto.method
 
 import lombok.Builder;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * com.backend.programming.learning.system.dto.method.update.question_bank_category

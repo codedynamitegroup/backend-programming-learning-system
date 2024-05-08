@@ -2,8 +2,8 @@ package com.backend.programming.learning.system.dataaccess.validator.implement;
 
 import com.backend.programming.learning.system.dataaccess.validator.EnumValidator;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;

@@ -13,7 +13,7 @@ public class WebSecurityConfig {
         httpSecurity.authorizeExchange()
                 .anyExchange()
                 .permitAll();
-//        httpSecurity.csrf().disable();
+        httpSecurity.csrf().disable();
         return httpSecurity.build();
     }
 }

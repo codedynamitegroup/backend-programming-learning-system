@@ -5,7 +5,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.call_moodle_api_function.QueryAllCallMoodleApiFunctionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.call_moodle_api_function.CallMoodleApiFunctionResponseEntity;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.UUID;
 
 public interface CallMoodleApiFunctionApplicationService {

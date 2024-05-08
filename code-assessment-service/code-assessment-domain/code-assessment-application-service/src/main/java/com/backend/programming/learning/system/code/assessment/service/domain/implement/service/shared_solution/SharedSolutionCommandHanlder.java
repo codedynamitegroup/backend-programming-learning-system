@@ -9,7 +9,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.en
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.shared_solution.SharedSolutionDataMapper;
 import org.springframework.stereotype.Component;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import java.util.List;
 
 @Component
