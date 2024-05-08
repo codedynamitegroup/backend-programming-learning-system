@@ -34,6 +34,7 @@ public class TestCaseController {
                 service.createTestCases(createTestCasesCommand);
         return ResponseEntity.ok(createCodeQuestionResponse);
     }
+
     @PutMapping
     public ResponseEntity<UpdateTestCaseResponse> updateTestCase
             (@RequestBody UpdateTestCaseCommand command){
@@ -42,6 +43,7 @@ public class TestCaseController {
                 service.updateTestCase(command);
         return ResponseEntity.ok(response);
     }
+
     @GetMapping
     public ResponseEntity<GetTestCasesByQuestionIdResponse> updateTestCase
             (@RequestParam(defaultValue = "0") Integer pageNo,

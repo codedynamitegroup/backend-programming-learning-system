@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.code.assessment.service.dataacce
 
 import lombok.*;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -19,6 +20,7 @@ public class TagEntity {
     @Id
     UUID id;
 
+    @Column(unique = true)
     String name;
 
     @Override
