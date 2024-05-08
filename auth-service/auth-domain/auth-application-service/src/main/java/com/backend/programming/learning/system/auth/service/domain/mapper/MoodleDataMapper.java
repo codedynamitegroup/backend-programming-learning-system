@@ -1,5 +1,7 @@
 package com.backend.programming.learning.system.auth.service.domain.mapper;
 
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user_moodle.UserModel;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
@@ -19,22 +21,15 @@ import java.util.UUID;
  */
 @Component
 public class MoodleDataMapper {
-    public User updateUser(UserModel userModel, User user) {
-        return User.builder()
-                .id(user.getId())
-                .email(userModel.getEmail())
-                .password(user.getPassword())
+    public UpdateUserCommand updateUser(UserModel userModel, User user) {
+        return UpdateUserCommand.builder()
+                .userId(user.getId().getValue())
                 .dob(user.getDob())
                 .firstName(userModel.getFirstname())
                 .lastName(userModel.getLastname())
                 .phone(user.getPhone())
                 .address(user.getAddress())
                 .avatarUrl(userModel.getProfileimageurl())
-                .refreshToken(user.getRefreshToken())
-                .lastLogin(user.getLastLogin())
-                .createdAt(user.getCreatedAt())
-                .updatedAt(ZonedDateTime.now())
-                .isDeleted(user.getDeleted())
                 .build();
     }
 
@@ -61,23 +56,13 @@ public class MoodleDataMapper {
                 .build();
     }
 
-    public User createUser(UserModel userModel) {
-        return User.builder()
-                .id(new UserId(UUID.randomUUID()))
+    public CreateUserCommand createUser(UserModel userModel) {
+        return CreateUserCommand.builder()
                 .email(userModel.getEmail())
                 .password("123456")
-                .dob(ZonedDateTime.now())
                 .firstName(userModel.getFirstname())
                 .lastName(userModel.getLastname())
                 .phone("")
-                .address(userModel.getCountry())
-                .avatarUrl(userModel.getProfileimageurl())
-                .refreshToken("")
-                .lastIp("")
-                .lastLogin(ZonedDateTime.now())
-                .createdAt(ZonedDateTime.now())
-                .updatedAt(ZonedDateTime.now())
-                .isDeleted(false)
                 .build();
     }
 }

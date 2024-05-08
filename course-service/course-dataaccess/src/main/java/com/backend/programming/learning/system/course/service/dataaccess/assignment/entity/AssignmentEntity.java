@@ -23,10 +23,12 @@ public class AssignmentEntity {
     @Column(name = "id")
     private UUID id;
 
+    private Integer assignmentIdMoodle;
+
     @OneToMany(mappedBy = "assignment")
     private List<SubmissionAssignmentEntity> assignmentSubmissions;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     private CourseEntity course;
     private String title;

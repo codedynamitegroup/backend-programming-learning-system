@@ -57,8 +57,8 @@ public class OrganizationDataMapper {
                 .id(new OrganizationId(UUID.fromString(organizationRequest.getOrganizationId())))
                 .name(organizationRequest.getName())
                 .description(organizationRequest.getDescription())
-                .createdAt(organizationRequest.getCreatedAt().atZone(ZoneId.of(DomainConstants.ASIA_HCM)))
-                .updatedAt(organizationRequest.getUpdatedAt().atZone(ZoneId.of(DomainConstants.ASIA_HCM)))
+                .createdAt(organizationRequest.getCreatedAt().atZone(ZoneId.of(DomainConstants.UTC)))
+                .updatedAt(organizationRequest.getUpdatedAt().atZone(ZoneId.of(DomainConstants.UTC)))
                 .isDeleted(organizationRequest.getIsDeleted())
                 .build();
     }
@@ -70,7 +70,7 @@ public class OrganizationDataMapper {
                 .description(organizationRequest.getDescription())
                 .moodleUrl(organizationRequest.getMoodleUrl())
                 .apiKey(organizationRequest.getApiKey())
-                .updatedAt(organizationRequest.getUpdatedAt().atZone(ZoneId.of(DomainConstants.ASIA_HCM)))
+                .updatedAt(organizationRequest.getUpdatedAt().atZone(ZoneId.of(DomainConstants.UTC)))
                 .build();
     }
 

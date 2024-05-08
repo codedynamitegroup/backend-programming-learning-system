@@ -20,4 +20,5 @@ public interface CodeSubmissionJpaRepository extends JpaRepository<CodeSubmissio
     void increaseNumOfTestCaseGradedByOne(@Param("id") UUID id);
 
     Optional<List<CodeSubmissionEntity>> findByUserIdAndCodeQuestionId(UUID userId, UUID codeQuestionId);
+
 }

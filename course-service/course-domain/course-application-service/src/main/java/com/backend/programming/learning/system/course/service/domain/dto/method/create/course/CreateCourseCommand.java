@@ -12,6 +12,8 @@ import java.util.UUID;
  */
 @Builder
 public record CreateCourseCommand(
+
+        Integer courseIdMoodle,
         @NotNull(message = "Name is required")
         String name,
         String key,

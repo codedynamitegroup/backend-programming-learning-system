@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamRepository;
+import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,8 +26,8 @@ public class ExamQueryHelper {
         return exam;
     }
 
-    public Page<Exam> findAll(String search, Integer pageNo, Integer pageSize) {
-        Page<Exam> exams = examRepository.findAll(search, pageNo, pageSize);
+    public Page<Exam> findAll(CourseId courseId, String search, Integer pageNo, Integer pageSize) {
+        Page<Exam> exams = examRepository.findAll(courseId, search, pageNo, pageSize);
         log.info("Exams found successfully");
         return exams;
     }

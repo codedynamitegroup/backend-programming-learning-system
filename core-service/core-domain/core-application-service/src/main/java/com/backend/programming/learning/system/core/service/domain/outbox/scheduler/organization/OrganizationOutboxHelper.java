@@ -3,8 +3,6 @@ package com.backend.programming.learning.system.core.service.domain.outbox.sched
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.organization.OrganizationEventPayload;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.organization.OrganizationOutboxMessage;
-import com.backend.programming.learning.system.core.service.domain.outbox.model.user.UserEventPayload;
-import com.backend.programming.learning.system.core.service.domain.outbox.model.user.UserOutboxMessage;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.OrganizationOutboxRepository;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
@@ -60,8 +58,8 @@ public class OrganizationOutboxHelper {
                 .id(UUID.randomUUID())
                 .type(ORGANIZATION_SAGA_NAME)
                 .sagaId(sagaId)
-                .createdAt(ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)))
-                .processedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)))
+                .createdAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)))
+                .processedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)))
                 .payload(createdPayload(organizationEventPayload))
                 .copyState(copyState)
                 .outboxStatus(outboxStatus)

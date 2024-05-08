@@ -15,6 +15,8 @@ public interface CourseRepository {
 
     Optional<Course> findByName(String courseName);
 
+    Optional<Course> findByCourseIdMoodle(Integer courseIdMoodle);
+
     Course findById(UUID courseId);
 
     void deleteById(UUID courseId);

@@ -6,7 +6,6 @@ import com.backend.programming.learning.system.core.service.domain.outbox.model.
 import com.backend.programming.learning.system.core.service.domain.outbox.scheduler.question.QuestionOutboxHelper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QuestionRepository;
 import com.backend.programming.learning.system.domain.DomainConstants;
-import com.backend.programming.learning.system.domain.event.EmptyEvent;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.saga.SagaStatus;
 import com.backend.programming.learning.system.saga.SagaStep;
@@ -70,7 +69,7 @@ public class QuestionDeleteSaga implements SagaStep<QuestionResponse> {
     private QuestionOutboxMessage updateOutboxMessage(QuestionOutboxMessage outboxMessage,
                                                       CopyState copyState,
                                                       SagaStatus sagaStatus) {
-        outboxMessage.setProcessedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+        outboxMessage.setProcessedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
         outboxMessage.setCopyState(copyState);
         outboxMessage.setSagaStatus(sagaStatus);
 

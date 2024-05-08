@@ -22,13 +22,13 @@ public class CourseRepositoryImpl implements CourseRepository {
     @Override
     public Course save(Course course) {
         return courseDataAccessMapper.courseEntityToCourse(courseJpaRepository
-                .save(courseDataAccessMapper
+                .saveAndFlush(courseDataAccessMapper
                         .courseToCourseEntity(course)));
     }
 
     @Override
     public Page<Course> findAll(String search, Integer page, Integer size) {
-        return courseJpaRepository.findAll(PageRequest.of(page, size))
+        return courseJpaRepository.findAll(search, PageRequest.of(page, size))
                 .map(courseDataAccessMapper::courseEntityToCourse);
     }
 
@@ -42,6 +42,12 @@ public class CourseRepositoryImpl implements CourseRepository {
     @Override
     public Optional<Course> findByName(String courseName) {
         return courseJpaRepository.findByName(courseName)
+                .map(courseDataAccessMapper::courseEntityToCourse);
+    }
+
+    @Override
+    public Optional<Course> findByCourseIdMoodle(Integer courseIdMoodle) {
+        return courseJpaRepository.findByCourseIdMoodle(courseIdMoodle)
                 .map(courseDataAccessMapper::courseEntityToCourse);
     }
 

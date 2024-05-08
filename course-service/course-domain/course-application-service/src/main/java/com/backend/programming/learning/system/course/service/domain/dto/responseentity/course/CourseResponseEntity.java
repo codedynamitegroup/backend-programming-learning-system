@@ -18,6 +18,7 @@ import java.util.UUID;
 @Builder
 public record CourseResponseEntity(
         UUID id,
+        Integer courseIdMoodle,
         String name,
         String courseType,
         Boolean visible,

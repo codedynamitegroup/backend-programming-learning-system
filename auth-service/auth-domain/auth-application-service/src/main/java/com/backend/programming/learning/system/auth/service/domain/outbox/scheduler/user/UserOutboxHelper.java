@@ -64,7 +64,7 @@ public class UserOutboxHelper {
         userOutboxRepository.save(UserOutboxMessage.builder()
                 .id(UUID.randomUUID())
                 .sagaId(sagaId)
-                .createdAt(ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)))
+                .createdAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)))
                 .type(USER_SAGA_NAME)
                 .payload(createPayload(userEventPayload))
                 .copyState(state)

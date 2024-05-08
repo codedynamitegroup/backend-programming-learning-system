@@ -40,8 +40,8 @@ public class Organization extends AggregateRoot<OrganizationId> {
 
     public void initializeOrganization() {
         setId(new OrganizationId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
-        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
+        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
         isDeleted = false;
     }
 

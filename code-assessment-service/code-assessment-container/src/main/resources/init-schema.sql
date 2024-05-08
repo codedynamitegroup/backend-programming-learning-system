@@ -28,6 +28,9 @@ CREATE TYPE saga_status AS ENUM ('STARTED', 'FAILED', 'SUCCEEDED', 'PROCESSING',
 DROP TYPE IF EXISTS outbox_status;
 CREATE TYPE outbox_status AS ENUM ('STARTED', 'COMPLETED', 'FAILED');
 
+DROP TYPE IF EXISTS vote_type;
+CREATE TYPE vote_type AS ENUM ('UPVOTE', 'DOWNVOTE');
+
 DROP TYPE IF EXISTS difficulty;
 CREATE TYPE difficulty AS ENUM ('EASY', 'MEDIUM', 'HARD');
 
@@ -143,9 +146,7 @@ CREATE TABLE shared_solution(
     user_id uuid not null ,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL,
     updated_at TIMESTAMP WITH TIME ZONE,
-    source_code text not null ,
-    approach text not null ,
-    complexity text,
+    content text not null ,
     view_number int default 0 check(view_number >= 0),
     title text not null ,
     constraint ss_pk primary key (id),
@@ -160,20 +161,53 @@ DROP TABLE IF EXISTS shared_solution_tag cascade;
 CREATE TABLE shared_solution_tag(
     shared_solution_id uuid not null ,
     tag_id uuid not null ,
-    constraint sst_id primary key (shared_solution_id, tag_id),
-    constraint ss_sst_fk foreign key (shared_solution_id)
-                                references shared_solution(id) match simple on update cascade on delete cascade ,
-    constraint t_sst_fk foreign key (tag_id)
-                                references tag(id) match simple on update cascade on delete cascade
+    constraint sst_id primary key (shared_solution_id, tag_id)
+--    constraint ssx2_t_fk foreign key (shared_solution_id)
+--                                references shared_solution(id) match simple on update cascade on delete cascade ,
+--    constraint ss_tx2_fk foreign key (tag_id)
+--                                references tag(id) match simple on update cascade on delete cascade
 );
 
--- DROP TABLE IF EXISTS comment cascase;
--- CREATE TABLE comment(
---     id uuid not null ,
---     shared_solution_id uuid not null ,
---     user_id uuid not null ,
---     content text not null,
--- );
+ DROP TABLE IF EXISTS comment cascade;
+ CREATE TABLE comment(
+     id uuid not null ,
+     shared_solution_id uuid not null ,
+     user_id uuid not null ,
+     reply_id uuid,
+     content text not null,
+     created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+     constraint comment_pk primary key (id),
+     constraint c_ss_fk foreign key (shared_solution_id)
+        references shared_solution(id) match simple on update cascade on delete cascade,
+     constraint c_u_fk foreign key (user_id)
+        references "public".user(id) match simple on update cascade on delete cascade,
+     constraint reply_fk foreign key(reply_id)
+        references comment(id) match simple on update cascade on delete cascade
+ );
+
+DROP TABLE IF EXISTS vote_comment cascade;
+CREATE TABLE vote_comment (
+    user_id uuid not null,
+    comment_id uuid not null,
+    vote_type vote_type not null,
+    constraint vc_pk primary key(user_id, comment_id),
+    constraint c_vc_fk foreign key (comment_id)
+            references comment(id) match simple on update cascade on delete cascade,
+    constraint vc_u_fk foreign key (user_id)
+            references "public".user(id) match simple on update cascade on delete cascade
+);
+
+DROP TABLE IF EXISTS vote_shared_solution cascade;
+CREATE TABLE vote_shared_solution (
+    user_id uuid not null,
+    shared_solution_id uuid not null,
+    vote_type vote_type not null,
+    constraint vss_pk primary key(user_id, shared_solution_id),
+    constraint ss_vss_fk foreign key (shared_solution_id)
+            references shared_solution(id) match simple on update cascade on delete cascade,
+    constraint vss_u_fk foreign key (user_id)
+            references "public".user(id) match simple on update cascade on delete cascade
+);
 
 DROP TABLE IF EXISTS programming_language_code_question CASCADE;
 CREATE TABLE programming_language_code_question(
@@ -316,3 +350,26 @@ CREATE UNIQUE INDEX "user_outbox_saga_id"
     ON "public".user_outbox
     (type, saga_id, copy_state, outbox_status);
 
+DROP TABLE IF EXISTS "public".question_outbox CASCADE;
+CREATE TABLE  "public".question_outbox
+(
+    id uuid NOT NULL,
+    saga_id uuid NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    processed_at TIMESTAMP WITH TIME ZONE,
+    type character varying COLLATE pg_catalog."default" NOT NULL,
+    payload jsonb NOT NULL,
+    prev_payload jsonb NULL,
+    outbox_status outbox_status NOT NULL,
+    copy_state CopyState NOT NULL,
+    version integer NOT NULL,
+    CONSTRAINT question_outbox_pkey PRIMARY KEY (id)
+);
+
+CREATE  INDEX "question_outbox_status"
+    ON "public".question_outbox
+    (type, outbox_status);
+
+CREATE INDEX "question_outbox_saga_id"
+    ON "public".question_outbox
+    (type, saga_id);

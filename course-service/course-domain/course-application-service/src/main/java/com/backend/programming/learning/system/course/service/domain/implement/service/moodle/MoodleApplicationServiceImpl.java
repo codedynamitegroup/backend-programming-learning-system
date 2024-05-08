@@ -16,7 +16,7 @@ import java.util.List;
 public class MoodleApplicationServiceImpl implements MoodleApplicationService {
     private final MoodleCommandHandler moodleCommandHandler;
     @Override
-    public List<CourseResponseEntity> syncCourse() {
+    public String syncCourse() {
         return moodleCommandHandler.syncCourse();
     }
 }
