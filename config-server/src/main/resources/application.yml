@@ -9,6 +9,8 @@ logging:
 spring:
   application:
     name: configserver
+  profiles:
+    active: git
   cloud:
     config:
       server:
@@ -23,9 +25,6 @@ spring:
     user:
       name: spring_cloud_user
       password: springCloud_Pwd!
-
-security:
-  paths-to-ignore: /actuator/**
 
 management:
   endpoints:
