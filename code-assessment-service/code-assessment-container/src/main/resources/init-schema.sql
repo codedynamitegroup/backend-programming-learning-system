@@ -161,11 +161,11 @@ DROP TABLE IF EXISTS shared_solution_tag cascade;
 CREATE TABLE shared_solution_tag(
     shared_solution_id uuid not null ,
     tag_id uuid not null ,
-    constraint sst_id primary key (shared_solution_id, tag_id)
---    constraint ssx2_t_fk foreign key (shared_solution_id)
---                                references shared_solution(id) match simple on update cascade on delete cascade ,
---    constraint ss_tx2_fk foreign key (tag_id)
---                                references tag(id) match simple on update cascade on delete cascade
+    constraint sst_id primary key (shared_solution_id, tag_id),
+    constraint ssx2_t_fk foreign key (shared_solution_id)
+                                references shared_solution(id) match simple on update cascade on delete cascade ,
+    constraint ss_tx2_fk foreign key (tag_id)
+                                references tag(id) match simple on update cascade on delete cascade
 );
 
  DROP TABLE IF EXISTS comment cascade;
