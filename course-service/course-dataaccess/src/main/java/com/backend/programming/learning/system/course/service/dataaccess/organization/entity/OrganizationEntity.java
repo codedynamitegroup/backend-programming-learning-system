@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.course.service.dataaccess.organi
 import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
