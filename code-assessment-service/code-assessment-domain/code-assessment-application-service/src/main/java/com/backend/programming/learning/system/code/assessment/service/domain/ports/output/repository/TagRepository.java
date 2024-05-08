@@ -13,4 +13,6 @@ public interface TagRepository {
     void saveAll(List<Tag> tags);
 
     void deleteTag(TagId tagId);
+
+    List<Tag> getTags();
 }

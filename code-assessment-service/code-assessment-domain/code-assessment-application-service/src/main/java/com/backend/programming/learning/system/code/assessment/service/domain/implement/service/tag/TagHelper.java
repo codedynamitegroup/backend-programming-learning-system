@@ -37,4 +37,9 @@ public class TagHelper {
     public void deleteTag(DeleteTagCommand command) {
         tagRepository.deleteTag(new TagId(command.getTagId()));
     }
+
+    @Transactional
+    public List<Tag> getTags() {
+        return tagRepository.getTags();
+    }
 }

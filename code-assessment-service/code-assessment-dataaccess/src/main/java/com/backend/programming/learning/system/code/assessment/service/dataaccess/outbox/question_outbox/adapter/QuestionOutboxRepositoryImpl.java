@@ -1,8 +1,8 @@
-package com.backend.programming.learning.system.code.assessment.service.dataaccess.question_outbox.adapter;
+package com.backend.programming.learning.system.code.assessment.service.dataaccess.outbox.question_outbox.adapter;
 
-import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_questions_update_outbox.exception.CodeQuestionsUpdateOutboxNotFoundException;
-import com.backend.programming.learning.system.code.assessment.service.dataaccess.question_outbox.mapper.QuestionOutboxDataAccessMapper;
-import com.backend.programming.learning.system.code.assessment.service.dataaccess.question_outbox.repository.QuestionOutboxJpaRepository;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.outbox.code_questions_update_outbox.exception.CodeQuestionsUpdateOutboxNotFoundException;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.outbox.question_outbox.repository.QuestionOutboxJpaRepository;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.outbox.question_outbox.mapper.QuestionOutboxDataAccessMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.question.QuestionOutboxMessage;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.QuestionOutboxRepository;
 import com.backend.programming.learning.system.outbox.OutboxStatus;

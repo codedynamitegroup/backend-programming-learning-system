@@ -1,6 +1,6 @@
-package com.backend.programming.learning.system.code.assessment.service.dataaccess.question_outbox.mapper;
+package com.backend.programming.learning.system.code.assessment.service.dataaccess.outbox.question_outbox.mapper;
 
-import com.backend.programming.learning.system.code.assessment.service.dataaccess.question_outbox.entity.QuestionOutboxEntity;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.outbox.question_outbox.entity.QuestionOutboxEntity;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.question.QuestionOutboxMessage;
 import org.springframework.stereotype.Component;
 

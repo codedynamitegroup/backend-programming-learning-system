@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.code.assessment.service.applicat
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.tag.CreateTagsCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.tag.CreateTagsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.tag.DeleteTagCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.tag.TagResponseItem;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.TagApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -36,5 +37,11 @@ public class TagController {
         DeleteTagCommand command = DeleteTagCommand.builder().tagId(tagId).build();
         tagApplicationService.deleteTag(command);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<TagResponseItem>> getTags(){
+        List<TagResponseItem> response = tagApplicationService.getTags();
+        return ResponseEntity.ok(response);
     }
 }

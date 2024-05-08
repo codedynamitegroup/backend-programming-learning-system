@@ -3,9 +3,13 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.tag.CreateTagsCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.tag.CreateTagsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.tag.DeleteTagCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.tag.TagResponseItem;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.Tag;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.tag.TagDataMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @Slf4j
@@ -25,5 +29,10 @@ public class TagCommandHandler {
 
     public void deleteTag(DeleteTagCommand command) {
         tagHelper.deleteTag(command);
+    }
+
+    public List<TagResponseItem> getTags() {
+        List<Tag> tags = tagHelper.getTags();
+        return tags.stream().map(tagDataMapper::tagToTagResponseItem).toList();
     }
 }

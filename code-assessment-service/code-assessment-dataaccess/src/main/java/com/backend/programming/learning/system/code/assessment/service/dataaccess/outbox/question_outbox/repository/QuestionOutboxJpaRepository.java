@@ -1,6 +1,6 @@
-package com.backend.programming.learning.system.code.assessment.service.dataaccess.question_outbox.repository;
+package com.backend.programming.learning.system.code.assessment.service.dataaccess.outbox.question_outbox.repository;
 
-import com.backend.programming.learning.system.code.assessment.service.dataaccess.question_outbox.entity.QuestionOutboxEntity;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.outbox.question_outbox.entity.QuestionOutboxEntity;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

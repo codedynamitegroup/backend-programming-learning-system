@@ -8,6 +8,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionByCodeQuestionIdCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionDetailCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionResponseItem;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.UpdateSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.SharedSolutionApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -50,5 +51,10 @@ public class SharedSolutionApplicationServiceImpl implements SharedSolutionAppli
     @Override
     public VoteSharedSolutionResponse deleteVote(DeleteSharedSolutionVoteCommand command) {
         return hanlder.deleteVote(command);
+    }
+
+    @Override
+    public void updateSharedSolution(UpdateSharedSolutionCommand command) {
+
     }
 }

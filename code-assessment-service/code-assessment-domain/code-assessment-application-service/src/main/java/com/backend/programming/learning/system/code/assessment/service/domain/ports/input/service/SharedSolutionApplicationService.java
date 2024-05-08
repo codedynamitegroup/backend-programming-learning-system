@@ -9,6 +9,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionDetailCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionResponseItem;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.UpdateSharedSolutionCommand;
 import jakarta.validation.Valid;
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface SharedSolutionApplicationService {
     VoteSharedSolutionResponse voteSharedSolution(@Valid VoteSharedSolutionCommand command);
 
     VoteSharedSolutionResponse deleteVote(@Valid DeleteSharedSolutionVoteCommand command);
+
+    void updateSharedSolution(@Valid UpdateSharedSolutionCommand command);
 }

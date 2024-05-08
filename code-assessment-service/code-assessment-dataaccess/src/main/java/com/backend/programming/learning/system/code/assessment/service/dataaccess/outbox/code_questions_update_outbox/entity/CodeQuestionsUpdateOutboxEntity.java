@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.code.assessment.service.dataaccess.code_questions_update_outbox.entity;
+package com.backend.programming.learning.system.code.assessment.service.dataaccess.outbox.code_questions_update_outbox.entity;
 
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
