@@ -22,6 +22,7 @@ public class WebSecurityConfig {
         return httpSecurity
                 .authorizeHttpRequests(auth -> auth
                         .antMatchers(HttpMethod.GET, "/core/certificate-courses").hasAnyRole(ADMIN, GENERAL)
+                        .antMatchers(HttpMethod.GET, "/core/topics").hasAnyRole(ADMIN, GENERAL)
                         .anyRequest().permitAll()
                 )
                 .csrf(csrf -> csrf.disable())

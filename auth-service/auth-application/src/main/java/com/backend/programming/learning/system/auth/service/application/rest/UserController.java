@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.auth.service.application.rest;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.method.create.role.CreateRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserCommand;
@@ -15,6 +14,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.re
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
+import com.backend.programming.learning.system.auth.service.domain.ports.input.service.KeycloakApplicationService;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -24,9 +24,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Slf4j
@@ -35,9 +38,11 @@ import java.util.UUID;
 public class UserController {
 
     private final UserApplicationService userApplicationService;
+    private final KeycloakApplicationService keycloakApplicationService;
 
-    public UserController(UserApplicationService userApplicationService) {
+    public UserController(UserApplicationService userApplicationService, KeycloakApplicationService keycloakApplicationService) {
         this.userApplicationService = userApplicationService;
+        this.keycloakApplicationService = keycloakApplicationService;
     }
 
     @PostMapping
@@ -49,11 +54,17 @@ public class UserController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<CreateUserResponse> createUser(@RequestBody CreateUserCommand createUserCommand) {
-        log.info("Creating user with email: {}", createUserCommand.getEmail());
-        CreateUserResponse createUserResponse = userApplicationService.createUser(createUserCommand);
-        log.info("User created with email: {}", createUserResponse.getEmail());
-        return ResponseEntity.status(HttpStatus.CREATED).body(createUserResponse);
+    public ResponseEntity<?> createUser(@RequestBody CreateUserCommand createUserCommand) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken) {
+            JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) authentication;
+            String token = jwtAuthenticationToken.getToken().getTokenValue();
+            log.info("Creating user with email: {}", createUserCommand.getEmail());
+            CreateUserResponse createUserResponse = userApplicationService.createUser(createUserCommand, token);
+            log.info("User created with email: {}", createUserResponse.getEmail());
+            return ResponseEntity.status(HttpStatus.CREATED).body(createUserResponse);
+        }
+        return ResponseEntity.badRequest().body("Token is not valid.");
     }
 
     @PostMapping("/login")
@@ -92,6 +103,16 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(refreshTokenUser);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<?> findAllUsers(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken) {
+            JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) authentication;
+            String token = jwtAuthenticationToken.getToken().getTokenValue();
+            return ResponseEntity.ok(keycloakApplicationService.findAllUsers(token));
+        }
+        return ResponseEntity.badRequest().body("Token is not valid.");
+    }
 
     @GetMapping("/{id}")
     @Operation(summary = "Get user by id.")

@@ -52,8 +52,8 @@ public class UserCommandHandler {
     private final UserRefreshTokenHelper userRefreshTokenHelper;
 
     @Transactional
-    public CreateUserResponse createUser(CreateUserCommand createOrderCommand) {
-        UserCreatedEvent userCreatedEvent = userCreateHelper.persistUser(createOrderCommand);
+    public CreateUserResponse createUser(CreateUserCommand createOrderCommand, String token) {
+        UserCreatedEvent userCreatedEvent = userCreateHelper.persistUser(createOrderCommand, token);
         log.info("User is created with id: {}", userCreatedEvent.getUser().getId().getValue());
         CreateUserResponse createUserResponse = userDataMapper.userToCreateUserResponse(userCreatedEvent.getUser(),
                 "User created successfully");

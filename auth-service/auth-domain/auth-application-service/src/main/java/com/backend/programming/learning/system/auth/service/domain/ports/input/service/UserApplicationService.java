@@ -18,7 +18,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.response_
 import javax.validation.Valid;
 
 public interface UserApplicationService {
-    CreateUserResponse createUser(@Valid CreateUserCommand createUserCommand);
+    CreateUserResponse createUser(@Valid CreateUserCommand createUserCommand, String token);
     UserEntityResponse findUserById(@Valid QueryUserByIdCommand queryUserCommand);
     QueryAllUsersResponse findAllUsers(QueryAllUsersCommand queryAllUsersCommand);
     UpdateUserResponse updateUser(@Valid UpdateUserCommand updateUserCommand);

@@ -30,8 +30,8 @@ class UserApplicationServiceImpl implements UserApplicationService {
     }
 
     @Override
-    public CreateUserResponse createUser(CreateUserCommand createUserCommand) {
-        return userCommandHandler.createUser(createUserCommand);
+    public CreateUserResponse createUser(CreateUserCommand createUserCommand, String token) {
+        return userCommandHandler.createUser(createUserCommand, token);
     }
 
     @Override

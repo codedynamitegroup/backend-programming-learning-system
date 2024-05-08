@@ -14,18 +14,18 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig {
-    public static final String ADMIN = "admin";
-    public static final String GENERAL = "general";
+    public static final String ADMIN = "admin_client_role";
+    public static final String USER = "user_client_role";
     private final JwtAuthConverter jwtAuthConverter;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .authorizeHttpRequests(auth -> auth
-                        .antMatchers(HttpMethod.GET, "/auth/users", "/auth/users/**").hasRole(ADMIN)
-                        .antMatchers(HttpMethod.POST, "/auth/users").hasAnyRole(ADMIN)
+                        .antMatchers(HttpMethod.GET, "/auth/users").hasAnyRole(ADMIN, USER)
+                        .antMatchers(HttpMethod.GET, "/auth/users/search").hasAnyRole(ADMIN, USER)
+                        .antMatchers(HttpMethod.POST, "/auth/users").hasRole(ADMIN)
                         .anyRequest().permitAll()
                 )
-                .csrf(csrf -> csrf.disable())
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt
                                 .jwtAuthenticationConverter(jwtAuthConverter)

@@ -10,7 +10,7 @@ import org.springframework.security.oauth2.jwt.JwtClaimNames;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.stereotype.Component;
-
+import org.springframework.lang.NonNull;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -20,50 +20,58 @@ public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationTo
 
     private final JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
 
+    @Value("${jwt.auth.converter.principle-attribute}")
+    private String principleAttribute;
+
     @Value("${jwt.auth.converter.resource-id}")
     private String resourceId;
 
 
     @Override
-    public AbstractAuthenticationToken convert(Jwt jwt) {
-        Collection<GrantedAuthority> authorities = Stream.concat(
-                jwtGrantedAuthoritiesConverter.convert(jwt).stream(),
-                extractResourceRoles(jwt).stream()).collect(Collectors.toSet());
-        return new JwtAuthenticationToken(jwt, authorities, getPrincipalClaimName(jwt));
+    public AbstractAuthenticationToken convert(@NonNull Jwt jwt) {
+        Collection<GrantedAuthority> authorities = Stream
+                .concat(jwtGrantedAuthoritiesConverter.convert(jwt).stream(), extractResourceRoles(jwt).stream())
+                .toList();
+
+        return new JwtAuthenticationToken(
+                jwt,
+                authorities,
+                getPrincipleClaimName(jwt)
+        );
     }
 
-    private String getPrincipalClaimName(Jwt jwt) {
-        String claimName = JwtClaimNames.SUB;
-        return jwt.getClaim(claimName);
-    }
 
     private Collection<? extends GrantedAuthority> extractResourceRoles(Jwt jwt) {
 
-        Map<String, Object> realmAccess = jwt.getClaim("realm_access");
-        Map<String, Object> resourceAccess = jwt.getClaim("resource_access");
-
-        Collection<String> allRoles = new ArrayList<>();
+        Map<String, Object> resourceAccess;
+        Map<String, Object> resource;
         Collection<String> resourceRoles;
-        Collection<String> realmRoles ;
 
-        if(resourceAccess != null && resourceAccess.get("account") != null){
-            Map<String,Object> account =  (Map<String,Object>) resourceAccess.get("account");
-            if(account.containsKey("roles") ){
-                resourceRoles = (Collection<String>) account.get("roles");
-                allRoles.addAll(resourceRoles);
-            }
+        if (jwt.getClaim("resource_access") == null) {
+            return Set.of();
         }
+        resourceAccess = jwt.getClaim("resource_access");
 
-        if(realmAccess != null && realmAccess.containsKey("roles")){
-            realmRoles = (Collection<String>) realmAccess.get("roles");
-            allRoles.addAll(realmRoles);
-        }
-        if (allRoles.isEmpty() || !Objects.equals(resourceId,jwt.getClaim("azp")) ) {
+        if (resourceAccess.get(resourceId) == null) {
             return Set.of();
         }
 
-        return allRoles.stream()
+        resource = (Map<String, Object>) resourceAccess.get(resourceId);
+
+        resourceRoles = (Collection<String>) resource.get("roles");
+        return resourceRoles
+                .stream()
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
                 .collect(Collectors.toSet());
     }
+
+
+    private String getPrincipleClaimName(Jwt jwt) {
+        String claimName = JwtClaimNames.SUB;
+        if (principleAttribute != null) {
+            claimName = principleAttribute;
+        }
+        return jwt.getClaim(claimName);
+    }
+
 }

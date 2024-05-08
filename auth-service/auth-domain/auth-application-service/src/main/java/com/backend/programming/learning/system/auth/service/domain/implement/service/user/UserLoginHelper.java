@@ -26,7 +26,7 @@ public class UserLoginHelper {
         WebClient client = WebClient.create(keycloakConfigData.getUrls());
 
         ResponseLoginAndRefreshUser result = client.post()
-                .uri("auth/realms/" + keycloakConfigData.getRealm() + "/protocol/openid-connect/token")
+                .uri("realms/" + keycloakConfigData.getRealm() + "/protocol/openid-connect/token")
                 .accept(MediaType.APPLICATION_FORM_URLENCODED)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .body(BodyInserters.fromFormData(loginUserCommandToRequestBody(loginUserCommand)))
@@ -46,6 +46,7 @@ public class UserLoginHelper {
     private MultiValueMap<String, String> loginUserCommandToRequestBody(LoginUserCommand loginUserCommand) {
         MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
         formData.add("client_id", keycloakConfigData.getClient());
+        formData.add("client_secret", keycloakConfigData.getClientSecret());
         formData.add("username", loginUserCommand.getUsername());
         formData.add("password", loginUserCommand.getPassword());
         formData.add("grant_type", "password");

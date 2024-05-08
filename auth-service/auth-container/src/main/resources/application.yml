@@ -22,7 +22,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://${keycloak.domain}/auth/realms/${keycloak.realm}
+          issuer-uri: http://${keycloak.domain}/realms/${keycloak.realm}
   kafka:
     bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
   zipkin:
@@ -120,11 +120,13 @@ jwt:
   auth:
     converter:
       resource-id: spring-client-api-rest
+      principle-attribute: preferred_username
 
 keycloak:
-  realm: microservices_realm
-  domain: localhost:9081
+  realm: spring-boot-realm-dev
+  domain: localhost:8890
   admin-client-id: admin-cli
-  admin-client-secret: f3abb73d-8afa-4cd9-a35b-2555258a4a3d
+  admin-client-secret: nfJffV2sitCYDQlmkXTeEZ5VqSE8616R
   client: spring-client-api-rest
+  client-secret: 1XZYXGBfRPXCaQlMl66jUIfxlhECRgR7
   urls: http://${keycloak.domain}
