@@ -4,19 +4,15 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.AssignmentCourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.ListAssignmentCourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.ListCourseModel;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.ListSubmissionAssignmentModel;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionAssignmentModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user_course.ListUserCourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user_course.UserCourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user.ListUserModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user.UserModel;
-import com.backend.programming.learning.system.course.service.domain.entity.Assignment;
-import com.backend.programming.learning.system.course.service.domain.entity.Course;
-import com.backend.programming.learning.system.course.service.domain.entity.CourseUser;
-import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.mapper.moodle.MoodleDataMapper;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.AssignmentRepository;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseRepository;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseUserRepository;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -36,9 +32,11 @@ public class MoodleCommandHandler {
     private final UserRepository userRepository;
     private final CourseUserRepository courseUserRepository;
     private final AssignmentRepository assignmentRepository;
+    private final SubmissionAssignmentRepository submissionAssignmentRepository;
     Map<String, Course> courseIdsMap = new HashMap<>();
 
     String GET_ASSIGNMENTS = "mod_assign_get_assignments";
+    String GET_SUBMISSION_ASSIGNMENTS = "mod_assign_get_submissions";
     String GET_COURSES = "core_course_get_courses";
 
     String GET_USER_COURSES = "core_enrol_get_users_courses";
@@ -85,6 +83,26 @@ public class MoodleCommandHandler {
             throw new RuntimeException(e);
         }
         return listAssignmentCourseModel.getCourses();
+    }
+
+    @Transactional
+    public List<SubmissionAssignmentModel> getAllSubmissionAssignment(String assignmentId)
+    {
+        String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&assignmentids[0]=%s",
+                MOODLE_URL, TOKEN, GET_SUBMISSION_ASSIGNMENTS,assignmentId);
+        RestTemplate restTemplate = new RestTemplate();
+        String model = restTemplate.getForObject(apiURL, String.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        ListSubmissionAssignmentModel listSubmissionAssignmentModel = null;
+        if(model.equals("{\"assignments\":[{}]}"))
+            return new ArrayList<>();
+        try {
+            listSubmissionAssignmentModel = objectMapper.readValue(model, ListSubmissionAssignmentModel.class);
+            log.info("Course model: {}", listSubmissionAssignmentModel);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return listSubmissionAssignmentModel.getAssignments();
     }
 
     @Transactional
@@ -146,9 +164,24 @@ public class MoodleCommandHandler {
                 assignmentCourseModel.getAssignments().forEach(assignmentModel -> {
                     Assignment assignmentCreate = moodleDataMapper.createAssignment(course, assignmentModel);
                     assignmentRepository.saveAssignment(assignmentCreate);
+
+                    List<SubmissionAssignmentModel> listSubmissionAssignmentModel = getAllSubmissionAssignment(assignmentModel.getId());
+                    listSubmissionAssignmentModel.forEach(submissionAssignmentModel -> {
+                        submissionAssignmentModel.getSubmissions().forEach(submissionModel -> {
+                            Optional<User> user = userRepository.findUserByEmail("duongchithong2002@gmail.com");
+                            if(submissionModel.getStatus().equals("submitted")) {
+                                SubmissionAssignment submissionCreate = moodleDataMapper.createSubmissionAssignment(assignmentCreate, user.get(), submissionModel);
+                                submissionAssignmentRepository.saveSubmissionAssignment(submissionCreate);
+
+
+                            }
+                        });
+                    });
                 });
             });
         }
+
+
         courseIdsMap.values().forEach(course -> result.add(moodleDataMapper.courseToCourseResponseEntity(course)));
         return result;
     }

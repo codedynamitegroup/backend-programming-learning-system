@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.dto.method.create.course;
 
+import com.backend.programming.learning.system.course.service.domain.entity.CourseType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,8 +18,7 @@ public record CreateCourseCommand(
         @NotNull(message = "Name is required")
         String name,
         String key,
-        @NotNull(message = "Course type is required")
-        String courseType,
+        CourseType courseType,
         @NotNull(message = "Visible is required")
         Boolean visible,
         @NotNull(message = "Created by is required")

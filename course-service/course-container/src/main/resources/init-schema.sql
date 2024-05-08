@@ -161,7 +161,7 @@ DROP TABLE IF EXISTS "public".course CASCADE;
 CREATE TABLE "public".course
 (
     id          uuid    DEFAULT gen_random_uuid() NOT NULL,
-    course_id integer,
+    course_id_moodle integer,
     name        text UNIQUE,
     visible     boolean DEFAULT '1',
     course_type text,

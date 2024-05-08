@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.course.service.domain.mapper.moo
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.CourseResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.AssignmentModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.CourseModel;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.Submission;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionAssignmentModel;
 import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.valueobject.*;
@@ -25,7 +26,7 @@ public class MoodleDataMapper {
                 .id(new CourseId(UUID.randomUUID()))
                 .courseIdMoodle(Integer.valueOf(courseModel.getId()))
                 .name(courseModel.getFullname())
-                .courseType(courseModel.getShortname())
+//                .courseType(courseModel.getShortname())
                 .key(courseModel.getIdnumber())
                 .visible(courseModel.getVisible()==1)
                 .createdAt(ZonedDateTime.now())
@@ -74,6 +75,24 @@ public class MoodleDataMapper {
                 .time_close(Instant.ofEpochSecond(assignmentModel.getDuedate()).atZone(ZoneId.of("UTC")))
                 .time_limit(Instant.ofEpochSecond(assignmentModel.getTimelimit()).atZone(ZoneId.of("UTC")))
                 .visible(false)
+                .build();
+    }
+
+    public SubmissionAssignment createSubmissionAssignment(Assignment assignment,User user, Submission submission) {
+        return SubmissionAssignment.builder()
+                .id(new SubmissionAssignmentId(UUID.randomUUID()))
+                .assignment(assignment)
+                .user(user)
+                .pass_status(1)
+                .content("content")
+                .grade((float)-1)
+                .submittedAt(Instant.ofEpochSecond(submission.getTimecreated()).atZone(ZoneId.of("UTC")))
+                .build();
+    }
+
+    public SubmissionAssignmentFile createSubmissionAssignmentFile(SubmissionAssignment submissionAssignment, Submission submission) {
+        return SubmissionAssignmentFile.builder()
+                .id(new AssignmentSubmissionFileId(UUID.randomUUID()))
                 .build();
     }
     public CourseResponseEntity courseToCourseResponseEntity(Course course) {

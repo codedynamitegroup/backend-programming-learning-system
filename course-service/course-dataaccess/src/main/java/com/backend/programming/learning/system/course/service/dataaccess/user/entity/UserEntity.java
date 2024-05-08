@@ -21,6 +21,7 @@ public class UserEntity {
     @Id
     @Column(name = "id")
     private UUID id;
+    private Integer userIdMoodle;
 
     private String email;
     private ZonedDateTime dob;
