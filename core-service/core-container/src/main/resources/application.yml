@@ -1,38 +1,16 @@
 server:
   port: 8181
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
-  instance:
-    preferIpAddress: true
-
-logging:
-  level:
-    com.backend.programming.learning.system: DEBUG
-
-core-service:
-  code-question-update-response-from-core-service-topic-name: code-question-update-response-from-core-service
-  code-question-update-request-to-core-service-topic-name: code-question-update-request-to-core-service
-
-  question-request-topic-name: core-question-request
-  question-response-topic-name: core-question-response
-
-  question-request-code-assessment-topic-name: core-question-request-code-assessment
-  question-response-code-assessment-topic-name: core-question-response-code-assessment
-
-  core-user-request-topic-name: core-user-request
-  user-response-topic-name: user-response
-
-  core-organization-request-topic-name: core-organization-request
-  organization-response-topic-name: organization-response
-
-  calendar-event-update-request-topic-name: calendar-event-update-request
-  calendar-event-update-response-topic-name: calendar-event-update-response
-
-  outbox-scheduler-fixed-rate: 2000
-  outbox-scheduler-initial-delay: 2000
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+#  instance:
+#    preferIpAddress: true
+#
+#logging:
+#  level:
+#    com.backend.programming.learning.system: DEBUG
 
 spring:
   application:
@@ -45,30 +23,30 @@ spring:
     config:
       username: spring_cloud_user
       password: springCloud_Pwd!
-  kafka:
-    bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
-  zipkin:
-    sender:
-      type: kafka
-    base-url: http://localhost:9411
-  sleuth:
-    sampler:
-      probability: 1.0
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
-  datasource:
-    url: jdbc:postgresql://localhost:5432/core-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
-    username: postgres
-    password: localdb
-    driver-class-name: org.postgresql.Driver
-
-  sql:
-    init:
-      platform: postgres
-      mode: always
-      data-locations: classpath:init-data.sql
-      schema-locations: classpath:init-schema.sql
+#  kafka:
+#    bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
+#  zipkin:
+#    sender:
+#      type: kafka
+#    base-url: http://localhost:9411
+#  sleuth:
+#    sampler:
+#      probability: 1.0
+#  mvc:
+#    pathmatch:
+#      matching-strategy: ant_path_matcher
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/core-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
+#    username: postgres
+#    password: localdb
+#    driver-class-name: org.postgresql.Driver
+#
+#  sql:
+#    init:
+#      platform: postgres
+#      mode: always
+#      data-locations: classpath:init-data.sql
+#      schema-locations: classpath:init-schema.sql
 
 
 #kafka-config:
@@ -118,6 +96,12 @@ spring:
 #  max-partition-fetch-bytes-default: 1048576
 #  max-partition-fetch-bytes-boost-factor: 1
 #  poll-timeout-ms: 150
+
+info:
+  app:
+    name: "core-service"
+    description: "Core Service"
+    version: "1.0-SNAPSHOT"
 
 springdoc:
   api-docs:

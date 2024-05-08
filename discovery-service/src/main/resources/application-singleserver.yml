@@ -6,11 +6,14 @@ spring:
     name: eureka-discovery-service
 
 eureka:
+  instance:
+    appname: service-registry-cluster
+    hostname: localhost
   client:
     register-with-eureka: false
     fetch-registry: false
-  instance:
-    appname: service-registry-cluster
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 
 logging:
   level:
