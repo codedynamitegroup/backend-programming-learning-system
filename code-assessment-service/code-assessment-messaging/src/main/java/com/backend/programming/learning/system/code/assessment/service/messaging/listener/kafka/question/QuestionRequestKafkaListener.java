@@ -9,6 +9,7 @@ import com.backend.programming.learning.system.kafka.core.avro.model.QuestionReq
 import lombok.extern.slf4j.Slf4j;
 import org.postgresql.util.PSQLState;
 import org.springframework.dao.DataAccessException;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -32,8 +33,8 @@ public class QuestionRequestKafkaListener implements KafkaConsumer<QuestionReque
 
 
     @Override
-//    @KafkaListener(id = "${kafka-consumer-config.question-request-consumer-group-id}",
-//            topics = "${code-assessment-service.question-request-code-assessment-topic-name}")
+    @KafkaListener(id = "${kafka-consumer-config.question-request-consumer-group-id}",
+            topics = "${code-assessment-service.question-request-code-assessment-topic-name}")
     public void receive(
             @Payload List<QuestionRequestAvroModel> messages,
             @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) List<String> keys,

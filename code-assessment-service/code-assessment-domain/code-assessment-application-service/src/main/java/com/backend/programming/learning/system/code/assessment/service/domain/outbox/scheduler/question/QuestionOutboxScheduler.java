@@ -28,8 +28,8 @@ public class QuestionOutboxScheduler implements OutboxScheduler {
 
     @Override
     @Transactional
-//    @Scheduled(fixedDelayString = "${code-assessment-service.outbox-scheduler-fixed-rate}",
-//            initialDelayString = "${code-assessment-service.outbox-scheduler-initial-delay}")
+    @Scheduled(fixedDelayString = "${code-assessment-service.outbox-scheduler-fixed-rate}",
+            initialDelayString = "${code-assessment-service.outbox-scheduler-initial-delay}")
     public void processOutboxMessage() {
         Optional<List<QuestionOutboxMessage>> questionOutboxMessages = questionOutboxHelper
                 .getQuestionOutboxMessagesByOutboxStatus(OutboxStatus.STARTED);

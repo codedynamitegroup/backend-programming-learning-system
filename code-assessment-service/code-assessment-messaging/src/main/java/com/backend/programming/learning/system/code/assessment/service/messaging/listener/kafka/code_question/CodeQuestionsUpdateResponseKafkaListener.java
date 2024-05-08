@@ -9,6 +9,7 @@ import com.backend.programming.learning.system.kafka.code.assessment.code.questi
 import com.backend.programming.learning.system.kafka.consumer.KafkaConsumer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.OptimisticLockingFailureException;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -30,9 +31,9 @@ public class CodeQuestionsUpdateResponseKafkaListener
         this.codeQuestionMessagingDataMapper = codeQuestionMessagingDataMapper;
     }
 
-//    @Override
-//    @KafkaListener(id = "${kafka-consumer-config.create-code-question-consumer-group-id}",
-//    topics = "${code-assessment-service.code-question-update-response-from-core-service-topic-name}")
+    @Override
+    @KafkaListener(id = "${kafka-consumer-config.create-code-question-consumer-group-id}",
+    topics = "${code-assessment-service.code-question-update-response-from-core-service-topic-name}")
     public void receive(@Payload List<CodeQuestionUpdateResponseAvroModel> messages,
                         @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) List<String> keys,
                         @Header(KafkaHeaders.RECEIVED_PARTITION_ID) List<Integer> partitions,
