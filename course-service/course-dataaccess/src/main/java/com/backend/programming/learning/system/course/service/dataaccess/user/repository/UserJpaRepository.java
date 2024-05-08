@@ -11,4 +11,6 @@ import org.springframework.stereotype.Repository;
 public interface UserJpaRepository extends JpaRepository<UserEntity, UUID>{
     Optional<UserEntity> findById(UUID id);
     Optional<UserEntity> findByEmailAndIsDeletedFalse(String email);
+
+    Optional<UserEntity> findByUserIdMoodle(Integer userIdMoodle);
 }

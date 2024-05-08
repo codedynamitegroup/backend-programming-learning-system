@@ -12,6 +12,7 @@ public class UserDataAccessMapper {
     public UserEntity userToUserEntity(User user) {
         return UserEntity.builder()
                 .id(user.getId().getValue())
+                .userIdMoodle(user.getUserIdMoodle())
                 .email(user.getEmail())
                 .dob(user.getDob())
                 .firstName(user.getFirstName())
@@ -29,6 +30,7 @@ public class UserDataAccessMapper {
     public User userEntityToUser(UserEntity userEntity) {
         return User.builder()
                 .id(new UserId(userEntity.getId()))
+                .userIdMoodle(userEntity.getUserIdMoodle())
                 .email(userEntity.getEmail())
                 .dob(userEntity.getDob())
                 .firstName(userEntity.getFirstName())
