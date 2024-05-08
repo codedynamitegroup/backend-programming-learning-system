@@ -11,6 +11,7 @@ import java.util.UUID;
 
 public class Course extends AggregateRoot<CourseId> {
     private String name;
+    private Integer courseIdMoodle;
     private String courseType;
     private String key;
     private Boolean visible;
@@ -24,6 +25,7 @@ public class Course extends AggregateRoot<CourseId> {
 
     private Course(Builder builder) {
         super.setId(builder.courseId);
+        courseIdMoodle = builder.courseIdMoodle;
         name = builder.name;
         courseType = builder.courseType;
         key = builder.key;
@@ -41,6 +43,14 @@ public class Course extends AggregateRoot<CourseId> {
         setId(new CourseId(UUID.randomUUID()));
         createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
         updatedAt = ZonedDateTime.now(ZoneId.of("UTC"));
+    }
+
+    public Integer getCourseIdMoodle() {
+        return courseIdMoodle;
+    }
+
+    public void setCourseIdMoodle(Integer courseIdMoodle) {
+        this.courseIdMoodle = courseIdMoodle;
     }
 
     public String getName() {
@@ -138,6 +148,7 @@ public class Course extends AggregateRoot<CourseId> {
 
     public static final class Builder {
         private CourseId courseId;
+        private Integer courseIdMoodle;
         private String name;
         private String courseType;
         private String key;
@@ -159,6 +170,11 @@ public class Course extends AggregateRoot<CourseId> {
 
         public Builder id(CourseId val) {
             courseId = val;
+            return this;
+        }
+
+        public Builder courseIdMoodle(Integer val) {
+            courseIdMoodle = val;
             return this;
         }
 

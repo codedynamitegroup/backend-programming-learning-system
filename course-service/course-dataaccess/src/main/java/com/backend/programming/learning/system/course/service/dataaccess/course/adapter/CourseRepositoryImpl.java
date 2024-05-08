@@ -46,6 +46,12 @@ public class CourseRepositoryImpl implements CourseRepository {
     }
 
     @Override
+    public Optional<Course> findByCourseIdMoodle(Integer courseIdMoodle) {
+        return courseJpaRepository.findByCourseIdMoodle(courseIdMoodle)
+                .map(courseDataAccessMapper::courseEntityToCourse);
+    }
+
+    @Override
     public Course findById(UUID courseId) {
         return courseDataAccessMapper.courseEntityToCourse(courseJpaRepository
                 .findById(courseId)

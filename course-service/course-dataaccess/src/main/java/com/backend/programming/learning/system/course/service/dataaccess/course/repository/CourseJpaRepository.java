@@ -22,4 +22,6 @@ public interface CourseJpaRepository extends JpaRepository<CourseEntity, UUID> {
              WHERE c.name LIKE %:search%
              """)
     Page<CourseEntity> findAll(String search, Pageable pageable);
+
+    Optional<CourseEntity> findByCourseIdMoodle(Integer courseIdMoodle);
 }

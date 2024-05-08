@@ -73,7 +73,6 @@ public class MoodleCommandHandler {
                 MOODLE_URL, TOKEN, GET_ASSIGNMENTS, courseId);
         RestTemplate restTemplate = new RestTemplate();
         String model = restTemplate.getForObject(apiURL, String.class);
-        //tôi muốn "{courses:"+model+"}" thành List<CourseModel>
         ObjectMapper objectMapper = new ObjectMapper();
         ListAssignmentCourseModel listAssignmentCourseModel = null;
         if(model.equals("{\"courses\":[{}]}"))
@@ -91,17 +90,25 @@ public class MoodleCommandHandler {
     @Transactional
     public void createCourseUser() {
         List<UserModel> allUser = getAllUser();
-        allUser.forEach(userModel -> {
+        for (UserModel userModel : allUser) {
             List<UserCourseModel> allCourse = getCoursesByUser(userModel.getId());
+            if (allCourse.isEmpty()) {
+                continue;
+            }
+
             Optional<User> userResult = userRepository.findUserByEmail(userModel.getEmail());
-            allCourse.forEach(userCourseModel -> {
-                Optional<Course> courseResult = courseRepository.findByName(userCourseModel.getFullname());
-                if(courseResult.isPresent()) {
+            if (userResult.isEmpty()) {
+                continue;
+            }
+
+            allCourse.parallelStream().forEach(userCourseModel -> {
+                Optional<Course> courseResult = courseRepository.findByCourseIdMoodle(Integer.valueOf(userCourseModel.getId()));
+                if (courseResult.isPresent()) {
                     CourseUser courseUser = moodleDataMapper.createCourseUser(courseResult.get(), userResult.get());
                     courseUserRepository.saveCourseUser(courseUser);
                 }
             });
-        });
+        }
     }
 
     @Transactional
@@ -110,7 +117,6 @@ public class MoodleCommandHandler {
                 MOODLE_URL, TOKEN, GET_COURSES);
         RestTemplate restTemplate = new RestTemplate();
         String model = restTemplate.getForObject(apiURL, String.class);
-        //tôi muốn "{courses:"+model+"}" thành List<CourseModel>
         model = "{\"courses\":"+model+"}";
         ObjectMapper objectMapper = new ObjectMapper();
         ListCourseModel listCourseModel = null;
@@ -124,8 +130,6 @@ public class MoodleCommandHandler {
         }
         List<CourseResponseEntity> result = new ArrayList<>();
         Optional<User> userResult = userRepository.findUserByEmail("kayonkiu@gmail.com");
-
-// Tạo và lưu trữ các khóa học
         listCourseModel.getCourses().forEach(courseModel -> {
             Course courseCreate = moodleDataMapper.createCourse(courseModel);
             courseCreate.setCreatedBy(userResult.get());
@@ -150,7 +154,6 @@ public class MoodleCommandHandler {
     }
     @Transactional
     public List<UserCourseModel> getCoursesByUser(String userId) {
-        // tôi muốn lấy tất cả khóa học của người dùng từ moodle
         String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&userid=%s",
                 MOODLE_URL, TOKEN, GET_USER_COURSES, userId);
         RestTemplate restTemplate = new RestTemplate();
@@ -167,7 +170,6 @@ public class MoodleCommandHandler {
             throw new RuntimeException(e);
         }
         return listUserCourseModel.getCourses();
-
     }
 
     @Transactional

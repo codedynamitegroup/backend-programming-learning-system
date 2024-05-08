@@ -29,6 +29,7 @@ public class CourseEntity {
     @Column(name = "id")
     private UUID id;
 
+    private Integer courseIdMoodle;
     private String name;
     private String courseType;
     private Boolean visible;

@@ -43,6 +43,12 @@ public class AssignmentRepositoryImpl implements AssignmentRepository {
     }
 
     @Override
+    public Optional<Assignment> findByAssignmentIdMoodle(Integer assignmentIdMoodle) {
+        return assignmentJpaRepository.findByAssignmentIdMoodle(assignmentIdMoodle)
+                .map(assignmentDataAccessMapper::assignmentEntityToAssignment);
+    }
+
+    @Override
     public void deleteAssignmentById(UUID assignmentId) {
         assignmentJpaRepository.deleteById(assignmentId);
 

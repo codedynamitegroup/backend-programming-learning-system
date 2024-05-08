@@ -3,14 +3,9 @@ package com.backend.programming.learning.system.course.service.domain.mapper.moo
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.CourseResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.AssignmentModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.CourseModel;
-import com.backend.programming.learning.system.course.service.domain.entity.Assignment;
-import com.backend.programming.learning.system.course.service.domain.entity.Course;
-import com.backend.programming.learning.system.course.service.domain.entity.CourseUser;
-import com.backend.programming.learning.system.course.service.domain.entity.User;
-import com.backend.programming.learning.system.course.service.domain.valueobject.AssignmentId;
-import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
-import com.backend.programming.learning.system.course.service.domain.valueobject.CourseUserId;
-import com.backend.programming.learning.system.course.service.domain.valueobject.Type;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionAssignmentModel;
+import com.backend.programming.learning.system.course.service.domain.entity.*;
+import com.backend.programming.learning.system.course.service.domain.valueobject.*;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -28,6 +23,7 @@ public class MoodleDataMapper {
     public Course createCourse(CourseModel courseModel) {
         return Course.builder()
                 .id(new CourseId(UUID.randomUUID()))
+                .courseIdMoodle(Integer.valueOf(courseModel.getId()))
                 .name(courseModel.getFullname())
                 .courseType(courseModel.getShortname())
                 .key(courseModel.getIdnumber())
@@ -67,6 +63,7 @@ public class MoodleDataMapper {
         });
         return Assignment.builder()
                 .id(new AssignmentId(UUID.randomUUID()))
+                .assignmentIdMoodle(Integer.valueOf(assignmentModel.getId()))
                 .title(assignmentModel.getName())
                 .courseId(course.getId())
                 .intro(assignmentModel.getIntro())

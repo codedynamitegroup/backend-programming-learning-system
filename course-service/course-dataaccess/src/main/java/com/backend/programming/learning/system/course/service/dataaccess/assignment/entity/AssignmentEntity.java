@@ -23,6 +23,8 @@ public class AssignmentEntity {
     @Column(name = "id")
     private UUID id;
 
+    private Integer assignmentIdMoodle;
+
     @OneToMany(mappedBy = "assignment")
     private List<SubmissionAssignmentEntity> assignmentSubmissions;
 
