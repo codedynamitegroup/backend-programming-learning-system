@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SubmissionAssignmentModel {
-    private String assignmentid;
-    private List<Submission> submissions;
+public class ListSubmissionAssignmentModel {
+    List<SubmissionAssignmentModel> assignments;
+    Object warnings;
 }

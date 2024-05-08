@@ -9,6 +9,7 @@ import java.util.List;
 
 
 public class User extends AggregateRoot<UserId> {
+    private Integer userIdMoodle;
     private  String name;
     private String email;
     private ZonedDateTime dob;
@@ -25,6 +26,7 @@ public class User extends AggregateRoot<UserId> {
 
     private User(Builder builder) {
         super.setId(builder.userId);
+        userIdMoodle = builder.userIdMoodle;
         name = builder.name;
         email = builder.email;
         dob = builder.dob;
@@ -38,6 +40,14 @@ public class User extends AggregateRoot<UserId> {
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
         failureMessage = builder.failureMessage;
+    }
+
+    public Integer getUserIdMoodle() {
+        return userIdMoodle;
+    }
+
+    public void setUserIdMoodle(Integer userIdMoodle) {
+        this.userIdMoodle = userIdMoodle;
     }
 
     public void setName(String name) {
@@ -146,6 +156,7 @@ public class User extends AggregateRoot<UserId> {
 
     public static final class Builder {
         private UserId userId;
+        private Integer userIdMoodle;
         private String name;
         private String email;
         private ZonedDateTime dob;
@@ -169,6 +180,11 @@ public class User extends AggregateRoot<UserId> {
 
         public Builder id(UserId val) {
             userId = val;
+            return this;
+        }
+
+        public Builder userIdMoodle(Integer val) {
+            userIdMoodle = val;
             return this;
         }
 

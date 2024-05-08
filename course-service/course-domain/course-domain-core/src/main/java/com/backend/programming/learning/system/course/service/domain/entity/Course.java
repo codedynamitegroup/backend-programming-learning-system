@@ -12,7 +12,7 @@ import java.util.UUID;
 public class Course extends AggregateRoot<CourseId> {
     private String name;
     private Integer courseIdMoodle;
-    private String courseType;
+    private CourseType courseType;
     private String key;
     private Boolean visible;
     private User createdBy;
@@ -61,11 +61,11 @@ public class Course extends AggregateRoot<CourseId> {
         this.name = name;
     }
 
-    public String getCourseType() {
+    public CourseType getCourseType() {
         return courseType;
     }
 
-    public void setCourseType(String courseType) {
+    public void setCourseType(CourseType courseType) {
         this.courseType = courseType;
     }
 
@@ -150,7 +150,7 @@ public class Course extends AggregateRoot<CourseId> {
         private CourseId courseId;
         private Integer courseIdMoodle;
         private String name;
-        private String courseType;
+        private CourseType courseType;
         private String key;
         private Boolean visible;
         private User createdBy;
@@ -183,7 +183,7 @@ public class Course extends AggregateRoot<CourseId> {
             return this;
         }
 
-        public Builder courseType(String val) {
+        public Builder courseType(CourseType val) {
             courseType = val;
             return this;
         }

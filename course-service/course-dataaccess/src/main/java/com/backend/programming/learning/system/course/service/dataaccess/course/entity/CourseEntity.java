@@ -1,5 +1,7 @@
 package com.backend.programming.learning.system.course.service.dataaccess.course.entity;
 
+import com.backend.programming.learning.system.course.service.dataaccess.course_type.entity.CourseTypeEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.organization.entity.OrganizationEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,12 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
@@ -29,9 +26,18 @@ public class CourseEntity {
     @Column(name = "id")
     private UUID id;
 
+    @OneToOne
+    @JoinColumn(name = "org_id", referencedColumnName = "id")
+    private OrganizationEntity organization;
+
+
+    @ManyToOne
+    @JoinColumn(name = "course_type_id", referencedColumnName = "id")
+    private CourseTypeEntity courseType;
+
+
     private Integer courseIdMoodle;
     private String name;
-    private String courseType;
     private Boolean visible;
 
     @ManyToOne
