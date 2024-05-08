@@ -25,11 +25,14 @@ code-assessment-service:
   accepted-status-description: Accepted
 
 spring:
+  application:
+    name: code-assessment-service
   kafka:
     bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
   zipkin:
     sender:
       type: kafka
+    base-url: http://localhost:9411
   sleuth:
     sampler:
       probability: 1.0
