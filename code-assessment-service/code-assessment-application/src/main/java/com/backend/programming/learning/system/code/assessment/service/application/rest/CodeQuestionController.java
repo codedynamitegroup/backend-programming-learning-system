@@ -29,7 +29,7 @@ public class CodeQuestionController {
     @PostMapping
     @Operation(summary = "Create code question.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Success.", content = {
+            @ApiResponse(responseCode = "202", description = "Accepted.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
                             schema = @Schema(implementation = CreateCodeQuestionResponse.class))
             }),
@@ -40,6 +40,6 @@ public class CodeQuestionController {
         log.info("Create code question for question id {}", createCodeQuestionCommand.getQuestionId());
         CreateCodeQuestionResponse createCodeQuestionResponse =
             codeQuestionApplicationService.createCodeQuestion(createCodeQuestionCommand);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createCodeQuestionResponse);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(createCodeQuestionResponse);
     }
 }

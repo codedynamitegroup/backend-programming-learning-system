@@ -13,4 +13,5 @@ import java.util.UUID;
 public class GetSharedSolutionByCodeQuestionIdCommand {
     @NotNull(message = "codeQuestionId must not be null")
     UUID codeQuestionId;
+
 }

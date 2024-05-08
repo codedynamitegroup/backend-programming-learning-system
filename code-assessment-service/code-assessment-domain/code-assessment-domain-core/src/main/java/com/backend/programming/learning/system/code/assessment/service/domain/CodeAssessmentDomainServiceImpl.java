@@ -44,11 +44,6 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
     }
 
     @Override
-    public void increaseCodeSubmissionGradedTestCase(CodeSubmission codeSubmission) {
-        codeSubmission.increaseGradedTestCaseByOne();
-    }
-
-    @Override
     public void calculateAvgTimeAndMemoryAndGrade(CodeSubmission codeSubmission, List<CodeSubmissionTestCase> cstc, String acceptedDescription) {
         boolean notAllAccepted = cstc.stream().anyMatch(item -> !item.getStatusDescription().equals(acceptedDescription));
         if(!notAllAccepted){
@@ -81,6 +76,11 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
     public SharedSolution initiateSharedSolution(SharedSolution sharedSolution, List<Tag> tags) {
         sharedSolution.initiate(tags);
         return sharedSolution;
+    }
+
+    @Override
+    public void initiateTags(List<Tag> tags){
+        tags.forEach(Tag::inititate);
     }
 
 

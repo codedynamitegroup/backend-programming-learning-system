@@ -13,4 +13,11 @@ import java.util.UUID;
 public class GetSharedSolutionDetailCommand {
     @NotNull(message = "sharedSolutionId must not be null")
     UUID sharedSolutionId;
+
+    @NotNull(message = "userId must not be null")
+    UUID userId;
+
+    public void setSharedSolutionId(@NotNull(message = "sharedSolutionId must not be null") UUID sharedSolutionId) {
+        this.sharedSolutionId = sharedSolutionId;
+    }
 }

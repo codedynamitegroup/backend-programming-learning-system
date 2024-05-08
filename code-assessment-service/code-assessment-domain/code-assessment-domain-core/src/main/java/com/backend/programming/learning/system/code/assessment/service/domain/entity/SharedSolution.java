@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.entity;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.SharedSolutionId;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.Vote;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 
@@ -14,6 +15,7 @@ public class SharedSolution extends AggregateRoot<SharedSolutionId> {
     private User user;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
+    private Vote youVote;
 
     private String content;
     private String title;
@@ -45,6 +47,10 @@ public class SharedSolution extends AggregateRoot<SharedSolutionId> {
         return title;
     }
 
+    public Vote getYouVote() {
+        return youVote;
+    }
+
     public Integer getViewNumber() {
         return viewNumber;
     }
@@ -60,6 +66,7 @@ public class SharedSolution extends AggregateRoot<SharedSolutionId> {
         user = builder.user;
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
+        youVote = builder.youVote;
         content = builder.content;
         title = builder.title;
         viewNumber = builder.viewNumber;
@@ -83,6 +90,7 @@ public class SharedSolution extends AggregateRoot<SharedSolutionId> {
         private User user;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
+        private Vote youVote;
         private String content;
         private String title;
         private Integer viewNumber;
@@ -114,6 +122,11 @@ public class SharedSolution extends AggregateRoot<SharedSolutionId> {
 
         public Builder updatedAt(ZonedDateTime val) {
             updatedAt = val;
+            return this;
+        }
+
+        public Builder youVote(Vote val) {
+            youVote = val;
             return this;
         }
 

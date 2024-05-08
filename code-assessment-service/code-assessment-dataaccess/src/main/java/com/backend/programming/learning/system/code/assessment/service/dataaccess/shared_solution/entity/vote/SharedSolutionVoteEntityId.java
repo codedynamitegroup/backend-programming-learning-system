@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.code.assessment.service.dataaccess.shared_solution.entity;
+package com.backend.programming.learning.system.code.assessment.service.dataaccess.shared_solution.entity.vote;
 
 import lombok.*;
 
@@ -11,7 +11,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class VoteSharedSolutionEntityId implements Serializable {
+public class SharedSolutionVoteEntityId implements Serializable {
     UUID user;
     UUID sharedSolution;
 
@@ -19,7 +19,7 @@ public class VoteSharedSolutionEntityId implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        VoteSharedSolutionEntityId that = (VoteSharedSolutionEntityId) o;
+        SharedSolutionVoteEntityId that = (SharedSolutionVoteEntityId) o;
         return Objects.equals(user, that.user) && Objects.equals(sharedSolution, that.sharedSolution);
     }
 

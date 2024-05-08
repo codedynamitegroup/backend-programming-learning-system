@@ -13,4 +13,11 @@ public class TagDataAccessMapper {
                 .name(tagEntity.getName())
                 .build();
     }
+
+    public TagEntity tagToEntity(Tag tag) {
+        return TagEntity.builder()
+                .id(tag.getId().getValue())
+                .name(tag.getName())
+                .build();
+    }
 }
