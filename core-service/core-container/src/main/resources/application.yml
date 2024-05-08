@@ -30,6 +30,11 @@ core-service:
 spring:
   application:
     name: core-service
+  profiles:
+    active: core
+  config:
+    import: "optional:configserver:${CONFIG_SERVER:http://localhost:9999}"
+    name: core-service,config-client
   kafka:
     bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
   zipkin:
@@ -42,25 +47,6 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-#  jpa:
-#    open-in-view: false
-#    show-sql: true
-#    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
-#    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.PostgreSQL9Dialect
-#  datasource:
-#    url: jdbc:postgresql://localhost:5432/core-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
-#    username: postgres
-#    password: localdb
-#    driver-class-name: org.postgresql.Driver
-#    platform: postgres
-#    schema: classpath:init-schema.sql
-#    data: classpath:init-data.sql
-#    initialization-mode: always
-#  jpa:
-#    show-sql: true  # Whether to log SQL statements
-#    database-platform: org.hibernate.dialect.PostgreSQL9Dialect  # Optional dialect override
   datasource:
     url: jdbc:postgresql://localhost:5432/core-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: postgres
@@ -146,4 +132,3 @@ management:
 
 log:
   appName: core-service
-
