@@ -1,10 +1,10 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Getter
