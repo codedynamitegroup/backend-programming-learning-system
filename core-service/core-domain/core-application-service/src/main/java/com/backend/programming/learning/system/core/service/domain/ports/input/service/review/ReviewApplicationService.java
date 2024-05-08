@@ -11,7 +11,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.up
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.review.ReviewResponseEntity;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 public interface ReviewApplicationService {
     CreateReviewResponse createReview(

@@ -7,7 +7,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.calendarevent.QueryAllCalendarEventsCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.calendarevent.QueryAllCalendarEventsResponse;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 public interface CalendarEventApplicationService {
     CreateCalendarEventResponse createCalendarEventResponse(

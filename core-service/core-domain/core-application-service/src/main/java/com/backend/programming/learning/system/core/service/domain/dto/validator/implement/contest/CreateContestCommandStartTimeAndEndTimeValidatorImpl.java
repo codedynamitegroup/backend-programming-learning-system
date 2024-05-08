@@ -5,8 +5,8 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.validator.certificatecourse.CreateCertificateCourseCommandStartTimeAndEndTimeValidator;
 import com.backend.programming.learning.system.core.service.domain.dto.validator.contest.CreateContestCommandStartTimeAndEndTimeValidator;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 public class CreateContestCommandStartTimeAndEndTimeValidatorImpl implements ConstraintValidator<
         CreateContestCommandStartTimeAndEndTimeValidator, CreateContestCommand> {

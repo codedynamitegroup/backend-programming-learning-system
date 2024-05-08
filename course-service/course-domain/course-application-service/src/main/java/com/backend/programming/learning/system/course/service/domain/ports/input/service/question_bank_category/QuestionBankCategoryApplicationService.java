@@ -9,7 +9,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.question_bank_category.QuestionBankCategoryEntity;
 import com.backend.programming.learning.system.course.service.domain.valueobject.QuestionBankCategoryId;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 /**
  * com.backend.programming.learning.system.ports.input.service.question_bank_category

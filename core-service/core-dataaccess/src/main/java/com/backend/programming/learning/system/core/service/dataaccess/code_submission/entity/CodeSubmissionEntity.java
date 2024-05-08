@@ -2,7 +2,7 @@ package com.backend.programming.learning.system.core.service.dataaccess.code_sub
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Objects;
 import java.util.UUID;
 

@@ -1,7 +1,6 @@
 package com.backend.programming.learning.system.course.service.dataaccess.question_bank_category.repository;
 
 import com.backend.programming.learning.system.course.service.dataaccess.question_bank_category.entity.QuestionBankCategoryEntity;
-import net.bytebuddy.jar.asm.commons.Remapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

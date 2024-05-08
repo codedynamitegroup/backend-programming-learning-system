@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.code.assessment.service.dataacce
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.tag.entity.TagEntity;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity

@@ -12,7 +12,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.CourseResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 public interface CourseApplicationService {
     CreateCourseResponse createCourse(

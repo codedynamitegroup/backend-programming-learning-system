@@ -11,7 +11,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.up
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.organization.UpdateOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.organization.OrganizationEntityResponse;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 public interface OrganizationApplicationService {
     CreateOrganizationResponse createOrganization(@Valid CreateOrganizationCommand createOrganizationCommand);

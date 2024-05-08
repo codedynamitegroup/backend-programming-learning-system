@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.course.service.dataaccess.notific
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -15,7 +16,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface NotificationJpaRepository extends PagingAndSortingRepository<NotificationEntity, UUID> {
+public interface NotificationJpaRepository extends JpaRepository<NotificationEntity, UUID> {
     Optional<NotificationEntity> findById(UUID id);
 
     Page<NotificationEntity> findAllByUserTo(UserEntity userTo, Pageable pageable);

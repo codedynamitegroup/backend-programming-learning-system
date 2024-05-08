@@ -9,7 +9,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.testcase.UpdateTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.testcase.UpdateTestCaseResponse;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 public interface TestCaseApplicationService {
     CreateTestCasesResponse createTestCases(@Valid CreateTestCasesCommand command);

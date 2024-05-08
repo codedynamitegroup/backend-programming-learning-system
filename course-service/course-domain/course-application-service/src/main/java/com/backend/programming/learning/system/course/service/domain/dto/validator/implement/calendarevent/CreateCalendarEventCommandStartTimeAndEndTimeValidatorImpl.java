@@ -3,8 +3,8 @@ package com.backend.programming.learning.system.course.service.domain.dto.valida
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.calendarevent.CreateCalendarEventCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.validator.calendarevent.CreateCalendarEventCommandStartTimeAndEndTimeValidator;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 public class CreateCalendarEventCommandStartTimeAndEndTimeValidatorImpl implements ConstraintValidator<
         CreateCalendarEventCommandStartTimeAndEndTimeValidator, CreateCalendarEventCommand> {

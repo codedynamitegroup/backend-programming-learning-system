@@ -11,7 +11,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.up
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestResponseEntity;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 public interface ContestApplicationService {
     CreateContestResponse createContest(

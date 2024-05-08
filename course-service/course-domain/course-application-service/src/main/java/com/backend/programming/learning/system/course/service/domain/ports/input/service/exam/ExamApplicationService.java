@@ -13,7 +13,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 /**
  * com.backend.programming.learning.system.ports.input.service

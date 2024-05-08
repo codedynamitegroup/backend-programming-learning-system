@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.auth.service.dataaccess.role.enti
 import com.backend.programming.learning.system.auth.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.ZonedDateTime;

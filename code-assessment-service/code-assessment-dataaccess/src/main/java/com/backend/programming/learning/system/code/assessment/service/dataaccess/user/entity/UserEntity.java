@@ -2,7 +2,7 @@ package com.backend.programming.learning.system.code.assessment.service.dataacce
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Objects;
