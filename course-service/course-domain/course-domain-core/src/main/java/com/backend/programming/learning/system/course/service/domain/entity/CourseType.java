@@ -4,9 +4,18 @@ import com.backend.programming.learning.system.course.service.domain.valueobject
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 
 public class CourseType extends AggregateRoot<CourseTypeId>{
+    private Integer moodleId;
     private String name;
     public String getName() {
         return name;
+    }
+
+    public Integer getMoodleId() {
+        return moodleId;
+    }
+
+    public void setMoodleId(Integer moodleId) {
+        this.moodleId = moodleId;
     }
 
     public void setName(String name) {
@@ -23,6 +32,7 @@ public class CourseType extends AggregateRoot<CourseTypeId>{
     }
     public static final class Builder {
         private CourseTypeId id;
+        private Integer moodleId;
         private String name;
 
         private Builder() {
@@ -34,6 +44,11 @@ public class CourseType extends AggregateRoot<CourseTypeId>{
 
         public Builder id(CourseTypeId val) {
             id = val;
+            return this;
+        }
+
+        public Builder moodleId(Integer val) {
+            moodleId = val;
             return this;
         }
 
