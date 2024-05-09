@@ -10,7 +10,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.organization.UpdateOrganizationResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.organization.OrganizationResponseEntity;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 public interface OrganizationApplicationService {
 

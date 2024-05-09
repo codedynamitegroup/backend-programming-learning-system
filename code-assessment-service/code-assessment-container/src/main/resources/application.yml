@@ -1,5 +1,13 @@
 server:
   port: 8183
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true
+
 logging:
   level:
     com.backend.programming.learning.system: DEBUG
@@ -8,11 +16,16 @@ code-assessment-service:
   code-question-update-response-from-core-service-topic-name: code-question-update-response-from-core-service
   code-question-update-request-to-core-service-topic-name: code-question-update-request-to-core-service
 
+  question-request-code-assessment-topic-name: core-question-request-code-assessment
+  question-response-code-assessment-topic-name: core-question-response-code-assessment
+
   code-assessment-user-request-topic-name: code-assessment-user-request
   user-response-topic-name: user-response
 
   outbox-scheduler-fixed-rate: 2000
   outbox-scheduler-initial-delay: 2000
+
+  question-request-topic-name: core-question-request
 
   assessment-external-service-ip: localhost
   assessment-external-service-port: 2358
@@ -20,33 +33,38 @@ code-assessment-service:
   accepted-status-description: Accepted
 
 spring:
+  application:
+    name: code-assessment-service
+  config:
+    import: optional:configserver:${CONFIG_SERVER:http://localhost:9999}
+  cloud:
+    config:
+      username: spring_cloud_user
+      password: springCloud_Pwd!
   kafka:
     bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
   zipkin:
     sender:
       type: kafka
+    base-url: http://localhost:9411
   sleuth:
     sampler:
       probability: 1.0
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-  jpa:
-    open-in-view: false
-    show-sql: true
-    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQL9Dialect
   datasource:
     url: jdbc:postgresql://localhost:5432/code-assessment-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: postgres
     password: localdb
     driver-class-name: org.postgresql.Driver
-    platform: postgres
-    schema: classpath:init-schema.sql
-    data: classpath:init-data.sql
-    initialization-mode: always
+
+  sql:
+    init:
+      platform: postgres
+      mode: always
+      data-locations: classpath:init-data.sql
+      schema-locations: classpath:init-schema.sql
 
 kafka-config:
   bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
@@ -70,6 +88,7 @@ kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
   create-code-question-consumer-group-id: create-code-question-topic-consumer
+  question-request-consumer-group-id: question-request-topic-consumer
   code-assessment-service-user-request-group-id: code-assessment-service-user-request-topic
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader

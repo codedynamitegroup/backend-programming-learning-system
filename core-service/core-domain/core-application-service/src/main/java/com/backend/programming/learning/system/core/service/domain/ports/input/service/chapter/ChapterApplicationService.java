@@ -11,7 +11,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.up
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.chapter.UpdateChapterResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResponseEntity;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 public interface ChapterApplicationService {
     CreateChapterResponse createChapter(

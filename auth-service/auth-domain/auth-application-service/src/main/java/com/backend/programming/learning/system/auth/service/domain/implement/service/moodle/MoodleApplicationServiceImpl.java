@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.response_
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.MoodleApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -22,7 +23,7 @@ import java.util.List;
 public class MoodleApplicationServiceImpl implements MoodleApplicationService {
     private final MoodleCommandHandler moodleCommandHandler;
     @Override
-    public List<UserEntityResponse> syncUser() {
+    public String syncUser() {
         return moodleCommandHandler.syncUser();
     }
 

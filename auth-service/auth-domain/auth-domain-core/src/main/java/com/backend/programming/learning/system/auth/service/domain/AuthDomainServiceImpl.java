@@ -11,8 +11,6 @@ import com.backend.programming.learning.system.auth.service.domain.event.user.Us
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserDeletedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedEvent;
 import com.backend.programming.learning.system.domain.DomainConstants;
-import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
-import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.ZoneId;
@@ -24,19 +22,19 @@ public class AuthDomainServiceImpl implements AuthDomainService {
     public UserCreatedEvent createUser(User user) {
         user.initializeUser();
         log.info("User with id: {} is initiated", user.getId().getValue());
-        return new UserCreatedEvent(user, ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+        return new UserCreatedEvent(user, ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
     }
 
     @Override
     public UserDeletedEvent deleteUser(User user) {
         user.deleteUser();
         log.info("User with id: {} is deleted", user.getId().getValue());
-        return new UserDeletedEvent(user, ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+        return new UserDeletedEvent(user, ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
     }
 
     @Override
     public UserUpdatedEvent updateUser(User user) {
-        return new UserUpdatedEvent(user, ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+        return new UserUpdatedEvent(user, ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
     }
 
     @Override
@@ -44,7 +42,7 @@ public class AuthDomainServiceImpl implements AuthDomainService {
         organization.initializeOrganization();
         log.info("Organization with id: {} is initiated", organization.getId().getValue());
         return new OrganizationCreatedEvent(organization,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
     }
 
     @Override
@@ -52,13 +50,13 @@ public class AuthDomainServiceImpl implements AuthDomainService {
         organization.deleteOrganization();
         log.info("Organization with id: {} is deleted", organization.getId().getValue());
         return new OrganizationDeletedEvent(organization,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
     }
 
     @Override
     public OrganizationUpdatedEvent updateOrganization(Organization organization) {
         return new OrganizationUpdatedEvent(organization,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
     }
 
     @Override

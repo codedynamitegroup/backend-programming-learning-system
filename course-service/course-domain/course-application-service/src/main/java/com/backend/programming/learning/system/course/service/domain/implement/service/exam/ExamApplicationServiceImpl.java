@@ -11,6 +11,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.exam.UpdateExamResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.exam.ExamResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.exam.ExamApplicationService;
+import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,8 +42,10 @@ public class ExamApplicationServiceImpl implements ExamApplicationService {
     }
 
     @Override
-    public QueryAllExamResponse findAll(QueryAllExamCommand queryAllExamCommand) {
-        return examCommandHandler.findAll(queryAllExamCommand);
+    public QueryAllExamResponse findAll(
+            CourseId courseId,
+            QueryAllExamCommand queryAllExamCommand) {
+        return examCommandHandler.findAll(courseId, queryAllExamCommand);
     }
 
     @Override

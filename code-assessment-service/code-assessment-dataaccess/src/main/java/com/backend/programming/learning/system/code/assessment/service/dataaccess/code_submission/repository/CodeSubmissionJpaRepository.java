@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.LockModeType;
+import jakarta.persistence.LockModeType;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -20,4 +20,5 @@ public interface CodeSubmissionJpaRepository extends JpaRepository<CodeSubmissio
     void increaseNumOfTestCaseGradedByOne(@Param("id") UUID id);
 
     Optional<List<CodeSubmissionEntity>> findByUserIdAndCodeQuestionId(UUID userId, UUID codeQuestionId);
+
 }

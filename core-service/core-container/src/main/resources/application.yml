@@ -1,6 +1,13 @@
 server:
   port: 8181
 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true
+
 logging:
   level:
     com.backend.programming.learning.system: DEBUG
@@ -11,6 +18,9 @@ core-service:
 
   question-request-topic-name: core-question-request
   question-response-topic-name: core-question-response
+
+  question-request-code-assessment-topic-name: core-question-request-code-assessment
+  question-response-code-assessment-topic-name: core-question-response-code-assessment
 
   core-user-request-topic-name: core-user-request
   user-response-topic-name: user-response
@@ -30,11 +40,22 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://${keycloak.domain}/auth/realms/${keycloak.realm}
+  application:
+    name: core-service
+  profiles:
+    active: core
+  config:
+    import: optional:configserver:${CONFIG_SERVER:http://localhost:9999}
+  cloud:
+    config:
+      username: spring_cloud_user
+      password: springCloud_Pwd!
   kafka:
     bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
   zipkin:
     sender:
       type: kafka
+    base-url: http://localhost:9411
   sleuth:
     sampler:
       probability: 1.0
@@ -53,57 +74,62 @@ spring:
     username: postgres
     password: localdb
     driver-class-name: org.postgresql.Driver
-    platform: postgres
-    schema: classpath:init-schema.sql
-    data: classpath:init-data.sql
-    initialization-mode: always
 
-kafka-config:
-  bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
-  schema-registry-url-key: schema.registry.url
-  schema-registry-url: http://localhost:8081
-  num-of-partitions: 3
-  replication-factor: 3
+  sql:
+    init:
+      platform: postgres
+      mode: always
+      data-locations: classpath:init-data.sql
+      schema-locations: classpath:init-schema.sql
 
-kafka-producer-config:
-  key-serializer-class: org.apache.kafka.common.serialization.StringSerializer
-  value-serializer-class: io.confluent.kafka.serializers.KafkaAvroSerializer
-  compression-type: none
-  acks: all
-  batch-size: 16384
-  batch-size-boost-factor: 100
-  linger-ms: 5
-  request-timeout-ms: 60000
-  retry-count: 5
 
-kafka-consumer-config:
-  key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-  value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-  core-service-user-consumer-group-id: core-service-user-topic-consumer
-
-  core-service-question-consumer-group-id: core-service-question-topic-consumer
-
-  core-service-calendar-event-consumer-group-id: core-service-calendar-event-topic-consumer
-
-  core-service-user-request-group-id: core-service-user-request-topic
-
-  code-question-update-consumer-group-id: code-question-update-topic-consumer
-
-  core-service-organization-consumer-group-id: core-service-organization-topic-consumer
-
-  auto-offset-reset: earliest
-  specific-avro-reader-key: specific.avro.reader
-  specific-avro-reader: true
-  batch-listener: true
-  auto-startup: true
-  concurrency-level: 3
-  session-timeout-ms: 10000
-  heartbeat-interval-ms: 3000
-  max-poll-interval-ms: 300000
-  max-poll-records: 500
-  max-partition-fetch-bytes-default: 1048576
-  max-partition-fetch-bytes-boost-factor: 1
-  poll-timeout-ms: 150
+#kafka-config:
+#  bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
+#  schema-registry-url-key: schema.registry.url
+#  schema-registry-url: http://localhost:8081
+#  num-of-partitions: 3
+#  replication-factor: 3
+#
+#kafka-producer-config:
+#  key-serializer-class: org.apache.kafka.common.serialization.StringSerializer
+#  value-serializer-class: io.confluent.kafka.serializers.KafkaAvroSerializer
+#  compression-type: none
+#  acks: all
+#  batch-size: 16384
+#  batch-size-boost-factor: 100
+#  linger-ms: 5
+#  request-timeout-ms: 60000
+#  retry-count: 5
+#
+#kafka-consumer-config:
+#  key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#  value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+#  core-service-user-consumer-group-id: core-service-user-topic-consumer
+#
+#  core-service-question-consumer-group-id: core-service-question-topic-consumer
+#  core-service-code-question-consumer-group-id: core-service-code-question-topic-consumer
+#
+#  core-service-calendar-event-consumer-group-id: core-service-calendar-event-topic-consumer
+#
+#  core-service-user-request-group-id: core-service-user-request-topic
+#
+#  code-question-update-consumer-group-id: code-question-update-topic-consumer
+#
+#  core-service-organization-consumer-group-id: core-service-organization-topic-consumer
+#
+#  auto-offset-reset: earliest
+#  specific-avro-reader-key: specific.avro.reader
+#  specific-avro-reader: true
+#  batch-listener: true
+#  auto-startup: true
+#  concurrency-level: 3
+#  session-timeout-ms: 10000
+#  heartbeat-interval-ms: 3000
+#  max-poll-interval-ms: 300000
+#  max-poll-records: 500
+#  max-partition-fetch-bytes-default: 1048576
+#  max-partition-fetch-bytes-boost-factor: 1
+#  poll-timeout-ms: 150
 
 springdoc:
   api-docs:

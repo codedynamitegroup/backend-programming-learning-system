@@ -1,5 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.dto.responseentity.course;
 
+import com.backend.programming.learning.system.course.service.domain.entity.Course;
+import com.backend.programming.learning.system.course.service.domain.entity.CourseType;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,8 +20,9 @@ import java.util.UUID;
 @Builder
 public record CourseResponseEntity(
         UUID id,
+        Integer courseIdMoodle,
         String name,
-        String courseType,
+        CourseType courseType,
         Boolean visible,
         UserId createdBy,
         UserId updatedBy,

@@ -1,13 +1,12 @@
 package com.backend.programming.learning.system.core.service.messaging.publisher.kafka.question;
 
 import com.backend.programming.learning.system.core.service.config.CoreServiceConfigData;
-import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.question.QuestionEventPayload;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.question.QuestionOutboxMessage;
 import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.question.QuestionRequestMessagePublisher;
 import com.backend.programming.learning.system.core.service.messaging.mapper.QuestionMessagingDataMapper;
-import com.backend.programming.learning.system.domain.valueobject.QuestionType;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
@@ -47,58 +46,33 @@ public class QuestionKafkaMessagePublisher implements QuestionRequestMessagePubl
 
         QuestionEventPayload questionEventPayload = getQuestionEventPayload(questionOutboxMessage.getPayload());
         String sagaId = questionOutboxMessage.getSagaId().toString();
+        String topicName;
 
         log.info("Received QuestionOutboxMessage for question id: {} and saga id: {}",
                 questionEventPayload.getId(),
                 sagaId);
 
+        if (questionOutboxMessage.getServiceName() == ServiceName.CODE_ASSESSMENT_SERVICE)
+            topicName = coreServiceConfigData.getQuestionRequestCodeAssessmentTopicName();
+        else
+            topicName = coreServiceConfigData.getQuestionRequestTopicName();
+
         try {
             switch (questionEventPayload.getCopyState()) {
-                case CREATING:
-                    QuestionRequestAvroModel questionCreatedRequestAvroModel = questionMessagingDataMapper
+                case CREATING, DELETING, UPDATING:
+                    QuestionRequestAvroModel questionRequestAvroModel = questionMessagingDataMapper
                             .questionEventPayloadToQuestionRequestAvroModel(sagaId, questionEventPayload);
 
-                    kafkaProducer.send(coreServiceConfigData.getQuestionRequestTopicName(),
+                    kafkaProducer.send(topicName,
                             sagaId,
-                            questionCreatedRequestAvroModel,
-                            questionKafkaMessageHelper.getKafkaCallback(coreServiceConfigData.getQuestionRequestTopicName(),
-                                    questionCreatedRequestAvroModel, questionOutboxMessage, outboxCallback,
-                                    sagaId, "QuestionRequestAvroModel"));
-                    break;
-                case DELETING:
-                    QuestionRequestAvroModel questionDeletedRequestAvroModel = questionMessagingDataMapper
-                            .questionEventPayloadToQuestionRequestAvroModel(sagaId, questionEventPayload);
-
-                    // TODO: implement delete for Code assessment service
-//                    if ( questionEventPayload.getQType().equals(QuestionType.CODE.name())) {
-//                        kafkaProducer.send(coreServiceConfigData.getQuestionRequestTopicName(),
-//                                sagaId,
-//                                questionDeletedRequestAvroModel,
-//                                questionKafkaMessageHelper.getKafkaCallback(coreServiceConfigData.getQuestionRequestTopicName(),
-//                                        questionDeletedRequestAvroModel, questionOutboxMessage, outboxCallback,
-//                                        sagaId, "QuestionRequestAvroModel");
-//                    }
-
-                    kafkaProducer.send(coreServiceConfigData.getQuestionRequestTopicName(),
-                            sagaId,
-                            questionDeletedRequestAvroModel,
-                            questionKafkaMessageHelper.getKafkaCallback(coreServiceConfigData.getQuestionRequestTopicName(),
-                                    questionDeletedRequestAvroModel, questionOutboxMessage, outboxCallback,
-                                    sagaId, "QuestionRequestAvroModel"));
-                    break;
-                case UPDATING:
-                    QuestionRequestAvroModel questionUpdatedRequestAvroModel = questionMessagingDataMapper
-                            .questionEventPayloadToQuestionRequestAvroModel(sagaId, questionEventPayload);
-
-                    kafkaProducer.send(coreServiceConfigData.getQuestionRequestTopicName(),
-                            sagaId,
-                            questionUpdatedRequestAvroModel,
-                            questionKafkaMessageHelper.getKafkaCallback(coreServiceConfigData.getQuestionRequestTopicName(),
-                                    questionUpdatedRequestAvroModel,
+                            questionRequestAvroModel,
+                            questionKafkaMessageHelper.getKafkaCallback(topicName,
+                                    questionRequestAvroModel,
                                     questionOutboxMessage,
                                     outboxCallback,
                                     sagaId, "QuestionRequestAvroModel"));
                     break;
+
             }
             log.info("QuestionRequestAvroModel sent to Kafka for question id: {} and saga id: {}", questionEventPayload.getId(), sagaId);
         } catch (Exception e) {

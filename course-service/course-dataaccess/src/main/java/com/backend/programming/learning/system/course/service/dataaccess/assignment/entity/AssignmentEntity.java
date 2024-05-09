@@ -5,7 +5,7 @@ import com.backend.programming.learning.system.course.service.dataaccess.course.
 import com.backend.programming.learning.system.course.service.domain.valueobject.Type;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -23,10 +23,12 @@ public class AssignmentEntity {
     @Column(name = "id")
     private UUID id;
 
+    private Integer assignmentIdMoodle;
+
     @OneToMany(mappedBy = "assignment")
     private List<SubmissionAssignmentEntity> assignmentSubmissions;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     private CourseEntity course;
     private String title;

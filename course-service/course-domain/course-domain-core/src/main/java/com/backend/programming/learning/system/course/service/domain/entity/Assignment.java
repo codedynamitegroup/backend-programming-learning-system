@@ -10,6 +10,7 @@ import java.util.UUID;
 
 public class Assignment extends AggregateRoot<AssignmentId> {
     private CourseId courseId;
+    private Integer assignmentIdMoodle;
     private String title;
     private String intro;
     private Float scores;
@@ -23,6 +24,7 @@ public class Assignment extends AggregateRoot<AssignmentId> {
 
     private Assignment(Builder builder) {
         super.setId(builder.assignmentId);
+        assignmentIdMoodle = builder.assignmentIdMoodle;
         courseId = builder.courseId;
         title = builder.title;
         intro = builder.intro;
@@ -37,6 +39,14 @@ public class Assignment extends AggregateRoot<AssignmentId> {
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    public Integer getAssignmentIdMoodle() {
+        return assignmentIdMoodle;
+    }
+
+    public void setAssignmentIdMoodle(Integer assignmentIdMoodle) {
+        this.assignmentIdMoodle = assignmentIdMoodle;
     }
 
     public CourseId getCourseId() {
@@ -123,6 +133,7 @@ public class Assignment extends AggregateRoot<AssignmentId> {
 
     public static final class Builder {
         private AssignmentId assignmentId;
+        private Integer assignmentIdMoodle;
         private CourseId courseId;
         private String title;
         private String intro;
@@ -143,6 +154,11 @@ public class Assignment extends AggregateRoot<AssignmentId> {
 
         public Builder id(AssignmentId val) {
             assignmentId = val;
+            return this;
+        }
+
+        public Builder assignmentIdMoodle(Integer val) {
+            assignmentIdMoodle = val;
             return this;
         }
 

@@ -44,11 +44,6 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
     }
 
     @Override
-    public void increaseCodeSubmissionGradedTestCase(CodeSubmission codeSubmission) {
-        codeSubmission.increaseGradedTestCaseByOne();
-    }
-
-    @Override
     public void calculateAvgTimeAndMemoryAndGrade(CodeSubmission codeSubmission, List<CodeSubmissionTestCase> cstc, String acceptedDescription) {
         boolean notAllAccepted = cstc.stream().anyMatch(item -> !item.getStatusDescription().equals(acceptedDescription));
         if(!notAllAccepted){
@@ -75,38 +70,49 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
     @Override
     public UserCreatedSuccessEvent createdUserSuccess(User user) {
         return new UserCreatedSuccessEvent(user,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
     }
+    
+    public SharedSolution initiateSharedSolution(SharedSolution sharedSolution, List<Tag> tags) {
+        sharedSolution.initiate(tags);
+        return sharedSolution;
+    }
+
+    @Override
+    public void initiateTags(List<Tag> tags){
+        tags.forEach(Tag::inititate);
+    }
+
 
     @Override
     public UserCreatedFailEvent createdUserFail(User user, List<String> failureMessages) {
         return new UserCreatedFailEvent(user,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)), failureMessages);
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)), failureMessages);
     }
 
     @Override
     public UserUpdatedSuccessEvent updatedUserSuccess(User user) {
         return new UserUpdatedSuccessEvent(user,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
     }
 
     @Override
     public UserUpdatedFailEvent updatedUserFail(User user, List<String> failureMessages) {
         return new UserUpdatedFailEvent(user,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)),
                 failureMessages);
     }
 
     @Override
     public UserDeletedSuccessEvent deletedUserSuccess(User user) {
         return new UserDeletedSuccessEvent(user,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
     }
 
     @Override
     public UserDeletedFailEvent deletedUserFail(User user, List<String> failureMessages) {
         return new UserDeletedFailEvent(user,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)),
                 failureMessages);
     }
 }

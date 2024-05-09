@@ -19,8 +19,8 @@ public class Role extends AggregateRoot<RoleId> {
 
     public void initializeRole() {
         setId(new RoleId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
-        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
+        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
     }
 
 

@@ -2,7 +2,6 @@ package com.backend.programming.learning.system.auth.service.domain.entity;
 
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
-import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
 import java.time.ZonedDateTime;
@@ -47,9 +46,9 @@ public class User extends AggregateRoot<UserId> {
 
     public void initializeUser() {
         setId(new UserId(UUID.randomUUID()));
-        lastLogin = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
-        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
-        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM));
+        lastLogin = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
+        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
         isDeleted = false;
     }
 

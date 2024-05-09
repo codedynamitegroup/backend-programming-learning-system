@@ -1,6 +1,13 @@
 server:
   port: 8184
 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true
+
 logging:
   level:
     com.backend.programming.learning.system: INFO
@@ -29,37 +36,38 @@ course-service:
   create-notification-scheduler-fixed-rate: 1800000
 
 spring:
+  application:
+    name: course-service
+  config:
+    import: optional:configserver:${CONFIG_SERVER:http://localhost:9999}
+  cloud:
+    config:
+      username: spring_cloud_user
+      password: springCloud_Pwd!
   kafka:
     bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
   zipkin:
     sender:
       type: kafka
+    base-url: http://localhost:9411
   sleuth:
     sampler:
       probability: 1.0
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-  cloud:
-    loadbalancer:
-      ribbon:
-        enabled: false
-  jpa:
-    open-in-view: false
-    show-sql: true
-    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQL9Dialect
   datasource:
     url: jdbc:postgresql://localhost:5432/course-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: postgres
     password: localdb
     driver-class-name: org.postgresql.Driver
-    platform: postgres
-    schema: classpath:init-schema.sql
-    data: classpath:init-data.sql
-    initialization-mode: always
+
+  sql:
+    init:
+      platform: postgres
+      mode: always
+      data-locations: classpath:init-data.sql
+      schema-locations: classpath:init-schema.sql
 
 kafka-config:
   bootstrap-servers: localhost:19092, localhost:29092, localhost:39092

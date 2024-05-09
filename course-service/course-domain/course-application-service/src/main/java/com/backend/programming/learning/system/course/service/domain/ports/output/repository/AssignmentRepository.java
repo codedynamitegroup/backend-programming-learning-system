@@ -13,6 +13,8 @@ public interface AssignmentRepository {
     Optional<Assignment> findById(UUID assignmentId);
     List<Assignment> findAllByCourseId(CourseId courseId);
 
+    Optional<Assignment> findByAssignmentIdMoodle(Integer assignmentIdMoodle);
+
     void deleteAssignmentById(UUID assignmentId);
 
 }

@@ -75,6 +75,8 @@ DROP TABLE IF EXISTS "public".user CASCADE;
 CREATE TABLE "public".user
 (
     id         uuid                     DEFAULT gen_random_uuid() NOT NULL,
+    userId integer,
+    username  text UNIQUE,
     email      text UNIQUE NOT NULL,
     dob        date,
     first_name text,
@@ -159,6 +161,7 @@ DROP TABLE IF EXISTS "public".course CASCADE;
 CREATE TABLE "public".course
 (
     id          uuid    DEFAULT gen_random_uuid() NOT NULL,
+    course_id_moodle integer,
     name        text UNIQUE,
     visible     boolean DEFAULT '1',
     course_type text,
@@ -313,6 +316,7 @@ DROP TABLE IF EXISTS "public".assignment CASCADE;
 CREATE TABLE "public".assignment
 (
     id         uuid                      DEFAULT gen_random_uuid() NOT NULL,
+    assignment_id integer,
     course_id  uuid             NOT NULL,
     title      text             NOT NULL,
     intro      text,

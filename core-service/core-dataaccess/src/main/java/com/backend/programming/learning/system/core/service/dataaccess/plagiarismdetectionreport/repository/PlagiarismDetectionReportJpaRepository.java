@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface PlagiarismDetectionReportJpaRepository extends PagingAndSortingRepository<PlagiarismDetectionReportEntity, UUID> {
+public interface PlagiarismDetectionReportJpaRepository extends JpaRepository<PlagiarismDetectionReportEntity, UUID> {
     Optional<PlagiarismDetectionReportEntity> findById(UUID plagiarismDetectionReportId);
     Optional<PlagiarismDetectionReportEntity> findByExamIdAndQuestionId(UUID examId, UUID questionId);
     Page<PlagiarismDetectionReportEntity> findAllByExamId(UUID examId, Pageable pageable);

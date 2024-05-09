@@ -1,9 +1,7 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.saga.user;
 
 import com.backend.programming.learning.system.auth.service.domain.dto.method.message.UserResponse;
-import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserOutboxMessage;
-import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.auth.service.domain.outbox.scheduler.user.UserOutboxHelper;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
@@ -79,7 +77,7 @@ public class UserUpdateSaga implements SagaStep<UserResponse> {
     private UserOutboxMessage updateOutboxMessage(UserOutboxMessage userOutboxMessage,
                                                                  CopyState copyState,
                                                                  SagaStatus sagaStatus) {
-        userOutboxMessage.setProcessedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+        userOutboxMessage.setProcessedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
         userOutboxMessage.setCopyState(copyState);
         userOutboxMessage.setSagaStatus(sagaStatus);
         return userOutboxMessage;

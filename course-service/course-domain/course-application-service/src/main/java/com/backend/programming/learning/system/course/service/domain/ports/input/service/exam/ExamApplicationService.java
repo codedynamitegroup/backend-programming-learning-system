@@ -10,9 +10,10 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.exam.UpdateExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.exam.UpdateExamResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.exam.ExamResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 /**
  * com.backend.programming.learning.system.ports.input.service
@@ -29,6 +30,7 @@ public interface ExamApplicationService {
             @Valid QueryExamCommand queryExamCommand);
 
     QueryAllExamResponse findAll(
+            @Valid CourseId courseId,
             @Valid QueryAllExamCommand queryAllExamCommand);
 
     DeleteCourseResponse deleteExam(

@@ -17,6 +17,7 @@ public class AssignmentDataAccessMapper {
        return AssignmentEntity.builder()
                .course(courseEntity)
                .id(assignment.getId().getValue())
+               .assignmentIdMoodle(assignment.getAssignmentIdMoodle())
                .title(assignment.getTitle())
                .intro(assignment.getIntro())
                .score(assignment.getScores())
@@ -32,6 +33,7 @@ public class AssignmentDataAccessMapper {
     public Assignment assignmentEntityToAssignment(AssignmentEntity assignmentEntity) {
         return Assignment.builder()
                 .id(new AssignmentId(assignmentEntity.getId()))
+                .assignmentIdMoodle(assignmentEntity.getAssignmentIdMoodle())
                 .courseId(new CourseId(assignmentEntity.getCourse().getId()))
                 .title(assignmentEntity.getTitle())
                 .intro(assignmentEntity.getIntro())

@@ -9,5 +9,6 @@ import java.util.UUID;
 public interface CodeQuestionRepository {
     CodeQuestion save(CodeQuestion codeQuestion);
     Optional<CodeQuestion> findById(CodeQuestionId codeQuestionId);
+    Optional<CodeQuestion> findByQuestionId(UUID questionId);
     void deleteCodeQuestionById(UUID id);
 }

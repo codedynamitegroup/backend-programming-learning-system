@@ -11,7 +11,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentResponse;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 public interface AssignmentApplicationService {
     CreateAssignmentResponse createAssignment(

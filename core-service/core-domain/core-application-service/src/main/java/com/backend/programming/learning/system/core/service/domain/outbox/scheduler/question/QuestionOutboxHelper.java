@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.core.service.domain.outbox.model.
 import com.backend.programming.learning.system.core.service.domain.outbox.model.question.QuestionOutboxMessage;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QuestionOutboxRepository;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -62,6 +63,7 @@ public class QuestionOutboxHelper {
                                              CopyState copyState,
                                              OutboxStatus outboxStatus,
                                              SagaStatus sagaStatus,
+                                             ServiceName serviceName,
                                              UUID sagaId, QuestionEventPreviousPayload previousPayload) {
         questionOutboxRepository.save(QuestionOutboxMessage.builder()
                 .id(UUID.randomUUID())
@@ -73,6 +75,7 @@ public class QuestionOutboxHelper {
                 .sagaStatus(sagaStatus)
                 .outboxStatus(outboxStatus)
                 .copyState(copyState)
+                .serviceName(serviceName)
                 .version(1)
                 .build());
     }

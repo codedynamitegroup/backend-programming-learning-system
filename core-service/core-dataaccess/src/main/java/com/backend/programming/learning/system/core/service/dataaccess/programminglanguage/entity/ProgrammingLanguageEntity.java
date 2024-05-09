@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.core.service.dataaccess.topic_pro
 import com.backend.programming.learning.system.core.service.domain.entity.TopicProgrammingLanguage;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;

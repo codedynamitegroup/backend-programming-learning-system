@@ -1,11 +1,9 @@
 package com.backend.programming.learning.system.course.service.dataaccess.organization.entity;
 
+import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
@@ -22,6 +20,10 @@ public class OrganizationEntity {
     @Id
     @Column(name = "id")
     private UUID id;
+
+    @OneToOne
+    @JoinColumn(name = "course_id", referencedColumnName = "id")
+    private CourseEntity course;
 
     private String name;
 

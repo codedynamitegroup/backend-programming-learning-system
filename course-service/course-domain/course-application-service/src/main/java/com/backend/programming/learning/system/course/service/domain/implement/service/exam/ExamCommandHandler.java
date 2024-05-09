@@ -15,6 +15,7 @@ import com.backend.programming.learning.system.course.service.domain.entity.Exam
 import com.backend.programming.learning.system.course.service.domain.implement.service.exam_question.ExamQuestionCreateHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.exam_question.ExamQuestionDeleteHelper;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam.ExamDataMapper;
+import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -61,8 +62,9 @@ public class ExamCommandHandler {
     }
 
     @Transactional(readOnly = true)
-    public QueryAllExamResponse findAll(QueryAllExamCommand queryAllExamCommand) {
+    public QueryAllExamResponse findAll(CourseId courseId, QueryAllExamCommand queryAllExamCommand) {
         Page<Exam> exams = examQueryHelper.findAll(
+                courseId,
                 queryAllExamCommand.getSearch(),
                 queryAllExamCommand.getPageNo(),
                 queryAllExamCommand.getPageSize());

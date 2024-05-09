@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.auth.service.domain.dto.method.create.user;
 
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

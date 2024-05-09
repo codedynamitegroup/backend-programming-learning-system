@@ -5,7 +5,6 @@ import com.backend.programming.learning.system.course.service.domain.event.organ
 import com.backend.programming.learning.system.course.service.domain.event.question.event.*;
 import com.backend.programming.learning.system.course.service.domain.event.user.*;
 import com.backend.programming.learning.system.domain.DomainConstants;
-import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
 
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import lombok.extern.slf4j.Slf4j;
@@ -177,38 +176,38 @@ public class CourseDomainServiceImpl implements CourseDomainService {
     @Override
     public UserCreatedSuccessEvent createdUserSuccess(User user) {
         return new UserCreatedSuccessEvent(user,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
     }
 
     @Override
     public UserCreatedFailEvent createdUserFail(User user, List<String> failureMessages) {
         return new UserCreatedFailEvent(user,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)), failureMessages);
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)), failureMessages);
     }
 
     @Override
     public UserUpdatedSuccessEvent updatedUserSuccess(User user) {
         return new UserUpdatedSuccessEvent(user,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
     }
 
     @Override
     public UserUpdatedFailEvent updatedUserFail(User user, List<String> failureMessages) {
         return new UserUpdatedFailEvent(user,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)),
                 failureMessages);
     }
 
     @Override
     public UserDeletedSuccessEvent deletedUserSuccess(User user) {
         return new UserDeletedSuccessEvent(user,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
     }
 
     @Override
     public UserDeletedFailEvent deletedUserFail(User user, List<String> failureMessages) {
         return new UserDeletedFailEvent(user,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)),
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)),
                 failureMessages);
     }
 
@@ -216,36 +215,36 @@ public class CourseDomainServiceImpl implements CourseDomainService {
     @Override
     public OrganizationCreatedSuccessEvent createdOrganizationSuccess(Organization organization) {
         return new OrganizationCreatedSuccessEvent(organization,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
     }
 
     @Override
     public OrganizationCreatedFailEvent createdOrganizationFail(Organization organization, List<String> failureMessages) {
         return new OrganizationCreatedFailEvent(organization,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)), failureMessages);
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)), failureMessages);
     }
 
     @Override
     public OrganizationUpdatedSuccessEvent updatedOrganizationSuccess(Organization organization) {
         return new OrganizationUpdatedSuccessEvent(organization,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
     }
 
     @Override
     public OrganizationUpdatedFailEvent updatedOrganizationFail(Organization organization, List<String> failureMessages) {
         return new OrganizationUpdatedFailEvent(organization,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)), failureMessages);
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)), failureMessages);
     }
 
     @Override
     public OrganizationDeletedSuccessEvent deletedOrganizationSuccess(Organization organization) {
         return new OrganizationDeletedSuccessEvent(organization,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)));
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
     }
 
     @Override
     public OrganizationDeletedFailEvent deletedOrganizationFail(Organization organization, List<String> failureMessages) {
         return new OrganizationDeletedFailEvent(organization,
-                ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)), failureMessages);
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)), failureMessages);
     }
 }

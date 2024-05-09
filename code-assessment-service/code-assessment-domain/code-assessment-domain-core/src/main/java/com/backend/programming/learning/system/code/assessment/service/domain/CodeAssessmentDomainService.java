@@ -14,8 +14,6 @@ public interface CodeAssessmentDomainService {
 
     CodeSubmission initiateCodeSubmission(CodeSubmission codeSubmission, CodeQuestion codeQuestion, List<TestCase> testCases, ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion, ProgrammingLangauge programmingLangauge);
 
-    void increaseCodeSubmissionGradedTestCase(CodeSubmission codeSubmission);
-
     void calculateAvgTimeAndMemoryAndGrade(CodeSubmission codeSubmission, List<CodeSubmissionTestCase> cstc, String acceptedDescription);
 
     UserCreatedSuccessEvent createdUserSuccess(User user);
@@ -24,4 +22,8 @@ public interface CodeAssessmentDomainService {
     UserUpdatedFailEvent updatedUserFail(User user, List<String> failureMessages);
     UserDeletedSuccessEvent deletedUserSuccess(User user);
     UserDeletedFailEvent deletedUserFail(User user, List<String> failureMessages);
+    
+    SharedSolution initiateSharedSolution(SharedSolution sharedSolution, List<Tag> tags);
+
+    void initiateTags(List<Tag> tags);
 }

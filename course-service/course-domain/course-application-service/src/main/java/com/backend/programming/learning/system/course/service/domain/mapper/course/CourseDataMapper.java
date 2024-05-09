@@ -17,6 +17,7 @@ public class CourseDataMapper {
             CreateCourseCommand createCourseCommand) {
         return Course.builder()
                 .name(createCourseCommand.name())
+                .courseIdMoodle(createCourseCommand.courseIdMoodle())
                 .courseType(createCourseCommand.courseType())
                 .key(createCourseCommand.key())
                 .visible(createCourseCommand.visible())
@@ -40,6 +41,7 @@ public class CourseDataMapper {
     public CourseResponseEntity courseToQueryCourseResponse(Course course) {
         return CourseResponseEntity.builder()
                 .id(course.getId().getValue())
+                .courseIdMoodle(course.getCourseIdMoodle())
                 .name(course.getName())
                 .courseType(course.getCourseType())
                 .visible(course.getVisible())

@@ -11,7 +11,8 @@ import java.util.UUID;
 
 public class Course extends AggregateRoot<CourseId> {
     private String name;
-    private String courseType;
+    private Integer courseIdMoodle;
+    private CourseType courseType;
     private String key;
     private Boolean visible;
     private User createdBy;
@@ -24,6 +25,7 @@ public class Course extends AggregateRoot<CourseId> {
 
     private Course(Builder builder) {
         super.setId(builder.courseId);
+        courseIdMoodle = builder.courseIdMoodle;
         name = builder.name;
         courseType = builder.courseType;
         key = builder.key;
@@ -43,6 +45,14 @@ public class Course extends AggregateRoot<CourseId> {
         updatedAt = ZonedDateTime.now(ZoneId.of("UTC"));
     }
 
+    public Integer getCourseIdMoodle() {
+        return courseIdMoodle;
+    }
+
+    public void setCourseIdMoodle(Integer courseIdMoodle) {
+        this.courseIdMoodle = courseIdMoodle;
+    }
+
     public String getName() {
         return name;
     }
@@ -51,11 +61,11 @@ public class Course extends AggregateRoot<CourseId> {
         this.name = name;
     }
 
-    public String getCourseType() {
+    public CourseType getCourseType() {
         return courseType;
     }
 
-    public void setCourseType(String courseType) {
+    public void setCourseType(CourseType courseType) {
         this.courseType = courseType;
     }
 
@@ -138,8 +148,9 @@ public class Course extends AggregateRoot<CourseId> {
 
     public static final class Builder {
         private CourseId courseId;
+        private Integer courseIdMoodle;
         private String name;
-        private String courseType;
+        private CourseType courseType;
         private String key;
         private Boolean visible;
         private User createdBy;
@@ -162,12 +173,17 @@ public class Course extends AggregateRoot<CourseId> {
             return this;
         }
 
+        public Builder courseIdMoodle(Integer val) {
+            courseIdMoodle = val;
+            return this;
+        }
+
         public Builder name(String val) {
             name = val;
             return this;
         }
 
-        public Builder courseType(String val) {
+        public Builder courseType(CourseType val) {
             courseType = val;
             return this;
         }

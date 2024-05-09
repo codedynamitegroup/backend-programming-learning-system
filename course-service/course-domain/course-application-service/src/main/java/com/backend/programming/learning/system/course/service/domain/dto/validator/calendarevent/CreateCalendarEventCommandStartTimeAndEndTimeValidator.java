@@ -2,8 +2,8 @@ package com.backend.programming.learning.system.course.service.domain.dto.valida
 
 import com.backend.programming.learning.system.course.service.domain.dto.validator.implement.calendarevent.CreateCalendarEventCommandStartTimeAndEndTimeValidatorImpl;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 import java.lang.annotation.*;
 
 @Documented

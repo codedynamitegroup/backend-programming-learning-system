@@ -6,7 +6,7 @@ import com.backend.programming.learning.system.core.service.dataaccess.user.enti
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
 import com.backend.programming.learning.system.domain.valueobject.QuestionType;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;

@@ -63,7 +63,7 @@ public class OrganizationOutboxHelper {
         organizationOutboxRepository.save(OrganizationOutboxMessage.builder()
                 .id(UUID.randomUUID())
                 .sagaId(sagaId)
-                .createdAt(ZonedDateTime.now(ZoneId.of(DomainConstants.ASIA_HCM)))
+                .createdAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)))
                 .type(ORGANIZATION_SAGA_NAME)
                 .payload(createPayload(organizationEventPayload))
                 .copyState(state)

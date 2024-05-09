@@ -1,11 +1,12 @@
 package com.backend.programming.learning.system.core.service.dataaccess.outbox.question.entity;
 
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
@@ -26,6 +27,8 @@ public class QuestionOutboxEntity {
     private String type;
     private String payload;
     private String prevPayload;
+    @Enumerated(EnumType.STRING)
+    private ServiceName serviceName;
     @Enumerated(EnumType.STRING)
     private SagaStatus sagaStatus;
     @Enumerated(EnumType.STRING)

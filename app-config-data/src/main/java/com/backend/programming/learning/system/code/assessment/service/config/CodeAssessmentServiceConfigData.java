@@ -12,6 +12,8 @@ public class CodeAssessmentServiceConfigData {
     private String codeQuestionUpdateRequestToCoreServiceTopicName;
     private String codeQuestionUpdateResponseFromCoreServiceTopicName;
 
+    private String questionResponseCodeAssessmentTopicName;
+
     private String assessmentExternalServiceIp;
     private String assessmentExternalServicePort;
 

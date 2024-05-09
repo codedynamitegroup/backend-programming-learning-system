@@ -9,6 +9,8 @@ logging:
 spring:
   application:
     name: configserver
+  profiles:
+    active: git
   cloud:
     config:
       server:
@@ -16,15 +18,13 @@ spring:
           uri: https://github.com/6BrosT/config-server-repository.git
           skip-ssl-validation: true
           default-label: main
+#          force-pull: true
           clone-on-start: true
       fail-fast: true
   security:
     user:
       name: spring_cloud_user
       password: springCloud_Pwd!
-
-security:
-  paths-to-ignore: /actuator/**
 
 management:
   endpoints:
