@@ -3,7 +3,6 @@ package com.backend.programming.learning.system.auth.service.domain.ports.input.
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import org.keycloak.representations.idm.UserRepresentation;
-import javax.validation.Valid;
 import java.util.List;
 
 public interface KeycloakApplicationService {

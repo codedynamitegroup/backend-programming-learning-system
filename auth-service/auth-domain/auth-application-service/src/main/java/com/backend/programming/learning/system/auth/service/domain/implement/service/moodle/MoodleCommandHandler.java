@@ -65,10 +65,10 @@ public class MoodleCommandHandler {
             Optional<User> userResult = userRepository.findByEmail(userModel.getEmail());
             if (userResult.isPresent()) {
                 UpdateUserCommand userUpdate = moodleDataMapper.updateUser(userModel, userResult.get());
-                UpdateUserResponse updateUserResponse =userApplicationService.updateUser(userUpdate);
+                UpdateUserResponse updateUserResponse =userApplicationService.updateUser(userUpdate, "");
             } else {
                 CreateUserCommand user = moodleDataMapper.createUser(userModel);
-                CreateUserResponse createUserResponse =userApplicationService.createUser(user);
+                CreateUserResponse createUserResponse =userApplicationService.createUser(user, "");
             }
         });
         log.info("Sync user successfully");

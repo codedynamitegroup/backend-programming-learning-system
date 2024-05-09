@@ -1,10 +1,9 @@
 package com.backend.programming.learning.system.auth.service.domain.dto.method.login;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-
-import javax.validation.constraints.NotNull;
 
 @Getter
 @Builder
