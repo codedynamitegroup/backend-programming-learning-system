@@ -19,6 +19,8 @@ import reactor.core.publisher.Mono;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 @EnableDiscoveryClient
 @SpringBootApplication
@@ -37,7 +39,7 @@ public class GatewayServiceApplication {
 				.route(p -> p
 						.path("/core/**")
 						.filters( f -> f
-								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+								.addResponseHeader("X-Response-Time", ZonedDateTime.now(ZoneId.of("UTC")).toString())
 								.circuitBreaker(c -> c.setName("coreCircuitBreaker")
 										.setFallbackUri("forward:/fallback/core-fallback"))
 								.requestRateLimiter(config -> config.setRateLimiter(redisRateLimiter())
@@ -45,7 +47,7 @@ public class GatewayServiceApplication {
 						.uri("lb://core-service"))
 				.route(p -> p
 						.path("/auth/**")
-						.filters( f -> f.addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+						.filters( f -> f.addResponseHeader("X-Response-Time", ZonedDateTime.now(ZoneId.of("UTC")).toString())
 								.circuitBreaker(c -> c.setName("authCircuitBreaker")
 										.setFallbackUri("forward:/fallback/auth-fallback"))
 								.requestRateLimiter(config -> config.setRateLimiter(redisRateLimiter())
@@ -53,7 +55,7 @@ public class GatewayServiceApplication {
 						.uri("lb://auth-service"))
 				.route(p -> p
 						.path("/course/**")
-						.filters( f -> f.addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+						.filters( f -> f.addResponseHeader("X-Response-Time", ZonedDateTime.now(ZoneId.of("UTC")).toString())
 								.circuitBreaker(c -> c.setName("courseCircuitBreaker")
 										.setFallbackUri("forward:/fallback/course-fallback"))
 								.requestRateLimiter(config -> config.setRateLimiter(redisRateLimiter())
@@ -61,7 +63,7 @@ public class GatewayServiceApplication {
 						.uri("lb://course-service"))
 				.route(p -> p
 						.path("code-assessment/**")
-						.filters( f -> f.addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+						.filters( f -> f.addResponseHeader("X-Response-Time", ZonedDateTime.now(ZoneId.of("UTC")).toString())
 								.circuitBreaker(c -> c.setName("codeAssessmentCircuitBreaker")
 										.setFallbackUri("forward:/fallback/code-assessment-fallback"))
 								.requestRateLimiter(config -> config.setRateLimiter(redisRateLimiter())
@@ -70,12 +72,12 @@ public class GatewayServiceApplication {
 				.route(p -> p
 						.path("/v3/api-docs/**")
 						.filters( f -> f.rewritePath("/v3/api-docs/(?<path>.*)", "/${path}/v3/api-docs")
-								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
+								.addResponseHeader("X-Response-Time", ZonedDateTime.now(ZoneId.of("UTC")).toString()))
 						.uri("http://localhost:" + serverPort))
 				.route(p -> p
 						.path("/swagger-ui/**")
 						.filters( f -> f.rewritePath("/swagger-ui/(?<path>.*)", "/${path}/swagger-ui")
-								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
+								.addResponseHeader("X-Response-Time", ZonedDateTime.now(ZoneId.of("UTC")).toString()))
 						.uri("http://localhost:" + serverPort))
 				.build();
 	}
