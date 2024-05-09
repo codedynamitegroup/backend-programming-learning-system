@@ -37,8 +37,6 @@ logging:
 spring:
   application:
     name: core-service
-  profiles:
-    active: core
   config:
     import: optional:configserver:${CONFIG_SERVER:http://localhost:9999}
   cloud:
@@ -87,7 +85,7 @@ spring:
 #  linger-ms: 5
 #  request-timeout-ms: 60000
 #  retry-count: 5
-
+#
 #kafka-consumer-config:
 #  key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 #  value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
@@ -118,15 +116,6 @@ spring:
 #  max-partition-fetch-bytes-boost-factor: 1
 #  poll-timeout-ms: 150
 
-springdoc:
-  api-docs:
-    path: /core/v3/api-docs
-  swagger-ui:
-    path: /core/swagger-ui
-
-security:
-  paths-to-ignore: /core/v3/api-docs, /actuator/**
-
 management:
   endpoints:
     web:
@@ -139,5 +128,26 @@ management:
     prometheus:
       cache.time-to-live: 1ms
 
+springdoc:
+  api-docs:
+    path: /core/v3/api-docs
+  swagger-ui:
+    path: /core/swagger-ui
+
+security:
+  paths-to-ignore: /core/v3/api-docs, /actuator/**
+
 log:
   appName: core-service
+
+---
+spring.config.activate.on-profile: prod
+# Disable springdoc-openapi
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
+
+security:
+    paths-to-ignore: /actuator/**
