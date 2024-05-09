@@ -108,7 +108,7 @@ springdoc:
   api-docs:
     path: /code-assessment/v3/api-docs
   swagger-ui:
-    path: /swagger-ui.html
+    path: /code-assessment/swagger-ui
 
 security:
   paths-to-ignore: /code-assessment/v3/api-docs, /actuator/**

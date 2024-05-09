@@ -120,7 +120,7 @@ springdoc:
   api-docs:
     path: /course/v3/api-docs
   swagger-ui:
-    path: /swagger-ui.html
+    path: /course/swagger-ui
 
 security:
   paths-to-ignore: /course/v3/api-docs, /actuator/**
