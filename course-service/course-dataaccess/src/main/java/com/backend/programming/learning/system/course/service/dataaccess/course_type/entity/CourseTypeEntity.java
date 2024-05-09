@@ -20,6 +20,8 @@ public class CourseTypeEntity {
     @Column(name = "id")
     private UUID id;
 
+    private Integer moodleId;
+
     private String name;
 
     @Override

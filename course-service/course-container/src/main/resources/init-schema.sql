@@ -75,7 +75,7 @@ DROP TABLE IF EXISTS "public".user CASCADE;
 CREATE TABLE "public".user
 (
     id         uuid                     DEFAULT gen_random_uuid() NOT NULL,
-    userId integer,
+    user_id_moodle int,
     username  text UNIQUE,
     email      text UNIQUE NOT NULL,
     dob        date,
@@ -157,14 +157,26 @@ CREATE TABLE "public".question
         on update CASCADE
 
 );
+
+DROP TABLE IF EXISTS "public".course_type CASCADE;
+CREATE TABLE "public".course_type
+(
+    id          uuid    DEFAULT gen_random_uuid() NOT NULL,
+    moodle_id integer,
+    name        text UNIQUE,
+    CONSTRAINT course_type_pkey PRIMARY KEY (id)
+);
+
+
 DROP TABLE IF EXISTS "public".course CASCADE;
 CREATE TABLE "public".course
 (
     id          uuid    DEFAULT gen_random_uuid() NOT NULL,
     course_id_moodle integer,
+    course_type_id uuid,
+    org_id uuid,
     name        text UNIQUE,
     visible     boolean DEFAULT '1',
-    course_type text,
     created_by  uuid,
     updated_by  uuid,
     created_at  TIMESTAMP WITH TIME ZONE,
@@ -177,10 +189,51 @@ CREATE TABLE "public".course
     CONSTRAINT course_updated_by_fkey FOREIGN KEY (updated_by)
         REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
+        ON DELETE cascade,
+    CONSTRAINT org_id_fkey FOREIGN KEY (org_id)
+	    REFERENCES "public".organization (id) MATCH SIMPLE
+	    ON UPDATE CASCADE
+	    ON DELETE CASCADE,
+	 CONSTRAINT course_type_id_fkey FOREIGN KEY (course_type_id)
+        REFERENCES "public".course_type (id) MATCH SIMPLE
+        ON UPDATE CASCADE
         ON DELETE CASCADE
 );
-DROP TABLE IF EXISTS "public".post CASCADE;
 
+
+DROP TABLE IF EXISTS "public".section CASCADE;
+CREATE TABLE "public".section
+(
+    id          uuid    DEFAULT gen_random_uuid() NOT NULL,
+    course_id uuid,
+    name        text UNIQUE,
+    visible integer,
+    CONSTRAINT section_pkey PRIMARY KEY (id),
+	CONSTRAINT section_course_id_fkey FOREIGN KEY (course_id)
+	    REFERENCES "public".course (id) MATCH SIMPLE
+	    ON UPDATE CASCADE
+	    ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS "public".module CASCADE;
+CREATE TABLE "public".module
+(
+    id          uuid    DEFAULT gen_random_uuid() NOT NULL,
+    section_id uuid,
+    name        text UNIQUE,
+    visible integer,
+    time_open TIMESTAMP WITH TIME zone,
+    time_close TIMESTAMP WITH TIME zone,
+    CONSTRAINT module_pkey PRIMARY KEY (id),
+	CONSTRAINT module_section_id_fkey FOREIGN KEY (section_id)
+	    REFERENCES "public".section (id) MATCH SIMPLE
+	    ON UPDATE CASCADE
+	    ON DELETE CASCADE
+);
+
+
+
+DROP TABLE IF EXISTS "public".post CASCADE;
 CREATE TABLE "public".post
 (
     id            uuid                     DEFAULT gen_random_uuid() NOT NULL,
@@ -316,7 +369,7 @@ DROP TABLE IF EXISTS "public".assignment CASCADE;
 CREATE TABLE "public".assignment
 (
     id         uuid                      DEFAULT gen_random_uuid() NOT NULL,
-    assignment_id integer,
+    assignment_id_moodle integer,
     course_id  uuid             NOT NULL,
     title      text             NOT NULL,
     intro      text,
