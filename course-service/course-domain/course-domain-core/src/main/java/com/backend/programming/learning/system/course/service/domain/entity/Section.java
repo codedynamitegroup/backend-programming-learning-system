@@ -5,12 +5,14 @@ import com.backend.programming.learning.system.course.service.domain.valueobject
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 
 public class Section extends AggregateRoot<SectionId> {
+    private Integer cmid;
     private Course course;
     private String name;
     private Integer visible;
 
     private Section(Builder builder) {
         super.setId(builder.id);
+        cmid = builder.cmid;
         setCourse(builder.course);
         setName(builder.name);
         setVisible(builder.visible);
@@ -18,6 +20,14 @@ public class Section extends AggregateRoot<SectionId> {
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    public Integer getCmid() {
+        return cmid;
+    }
+
+    public void setCmid(Integer cmid) {
+        this.cmid = cmid;
     }
 
     public Course getCourse() {
@@ -48,6 +58,8 @@ public class Section extends AggregateRoot<SectionId> {
 
     public static final class Builder {
         private SectionId id;
+        private Integer cmid;
+
         private Course course;
         private String name;
         private Integer visible;
@@ -66,6 +78,11 @@ public class Section extends AggregateRoot<SectionId> {
 
         public Builder course(Course val) {
             course = val;
+            return this;
+        }
+
+        public Builder cmid(Integer val) {
+            cmid = val;
             return this;
         }
 

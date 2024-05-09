@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.course.service.domain.mapper.moo
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.CourseResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.AssignmentModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.CourseModel;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.section.SectionModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.Submission;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionAssignmentModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionPlugin;
@@ -113,6 +114,15 @@ public class MoodleDataMapper {
                 .id(new SubmissionAssignmentOnlineTextId(UUID.randomUUID()))
                 .content(submissionPlugin.getEditorfields().get(0).getText())
                 .assignmentSubmission(submissionCreate)
+                .build();
+    }
+
+    public Section createSection(Course course, SectionModel sectionModel) {
+        return Section.builder()
+                .id(new SectionId(UUID.randomUUID()))
+
+//                .name(sectionModel.getName())
+//                .visible(sectionModel.getVisible()==1)
                 .build();
     }
 }

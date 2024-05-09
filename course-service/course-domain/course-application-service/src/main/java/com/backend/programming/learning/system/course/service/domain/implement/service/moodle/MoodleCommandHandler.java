@@ -4,6 +4,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.AssignmentCourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.ListAssignmentCourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.ListCourseModel;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.section.ListSectionModel;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.section.SectionModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.ListSubmissionAssignmentModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionAssignmentModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionPlugin;
@@ -19,6 +21,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -37,9 +40,13 @@ public class MoodleCommandHandler {
     private final SubmissionAssignmentRepository submissionAssignmentRepository;
     private final SubmissionAssignmentFileRepository submissionAssignmentFileRepository;
     private final SubmissionAssignmentOnlineTextRepository submissionAssignmentOnlineTextRepository;
+    private final SectionRepository sectionRepository;
+    private final ModuleRepository moduleRepository;
     Map<String, Course> courseIdsMap = new HashMap<>();
 
     String GET_ASSIGNMENTS = "mod_assign_get_assignments";
+
+    String GET_CONTENTS = "core_course_get_contents";
     String GET_SUBMISSION_ASSIGNMENTS = "mod_assign_get_submissions";
     String GET_COURSES = "core_course_get_courses";
 
@@ -64,11 +71,42 @@ public class MoodleCommandHandler {
     @Transactional
     public void createSection()
     {
+        Page<Course> allCourse = courseRepository.findAll("",1,1000);
+        for (Course course : allCourse) {
+            List<SectionModel> allSection = getAllSection(course.getCourseIdMoodle().toString());
+            if (allSection.isEmpty()) {
+                continue;
+            }
+
+            allSection.parallelStream().forEach(sectionModel -> {
+                Section section = moodleDataMapper.createSection(course, sectionModel);
+//                sectionRepository.saveSection(section);
+            });
+        }
 
 
 
 
     }
+
+    private List<SectionModel> getAllSection(String courseId) {
+        String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&courseid=%s",
+                MOODLE_URL, TOKEN, GET_CONTENTS, courseId);
+        RestTemplate restTemplate = new RestTemplate();
+        String model = restTemplate.getForObject(apiURL, String.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        ListSectionModel listSectionModel = null;
+        if(model.equals("{\"courses\":[{}]}"))
+            return new ArrayList<>();
+        try {
+            listSectionModel = objectMapper.readValue(model, ListSectionModel.class);
+            log.info("Course model: {}", listSectionModel);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return listSectionModel.getSections();
+    }
+
     @Transactional
     public List<AssignmentCourseModel> getAllAssignments(String courseId)
     {

@@ -21,6 +21,8 @@ public class SectionEntity {
     @Column(name = "id")
     private UUID id;
 
+    private Integer cmid;
+
     @ManyToOne
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     private CourseEntity course;

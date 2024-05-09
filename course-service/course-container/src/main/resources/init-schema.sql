@@ -205,6 +205,7 @@ DROP TABLE IF EXISTS "public".section CASCADE;
 CREATE TABLE "public".section
 (
     id          uuid    DEFAULT gen_random_uuid() NOT NULL,
+    cmid integer,
     course_id uuid,
     name        text UNIQUE,
     visible integer,
