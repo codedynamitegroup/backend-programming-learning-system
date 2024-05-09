@@ -34,7 +34,7 @@ public class UserCreateHelper {
         User user = authDataMapper.createUserCommandToUser(createUserCommand);
         findUserWithEmail(user.getEmail());
         UserCreatedEvent userCreatedEvent = authDomainService.createUser(user);
-        saveUser(user);
+        User userSaved = saveUser(user);
         keycloakApplicationService.createUser(createUserCommand, token);
         return userCreatedEvent;
     }

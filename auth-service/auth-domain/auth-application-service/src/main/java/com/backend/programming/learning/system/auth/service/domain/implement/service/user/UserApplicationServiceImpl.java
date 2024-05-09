@@ -45,13 +45,13 @@ class UserApplicationServiceImpl implements UserApplicationService {
     }
 
     @Override
-    public UpdateUserResponse updateUser(UpdateUserCommand updateUserCommand) {
-        return userCommandHandler.updateUser(updateUserCommand);
+    public UpdateUserResponse updateUser(UpdateUserCommand updateUserCommand, String token) {
+        return userCommandHandler.updateUser(updateUserCommand, token);
     }
 
     @Override
-    public DeleteUserResponse deleteUserById(DeleteUserCommand deleteUserCommand) {
-        return userCommandHandler.deleteUser(deleteUserCommand);
+    public DeleteUserResponse deleteUserById(DeleteUserCommand deleteUserCommand, String token) {
+        return userCommandHandler.deleteUser(deleteUserCommand, token);
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserDeletedEvent;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
+import com.backend.programming.learning.system.auth.service.domain.ports.input.service.KeycloakApplicationService;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
@@ -19,14 +20,16 @@ import java.util.Optional;
 public class UserDeleteHelper {
     private final AuthDomainService authDomainService;
     private final UserRepository userRepository;
+    private final KeycloakApplicationService keycloakApplicationService;
 
-    public UserDeleteHelper(AuthDomainService authDomainService, UserRepository userRepository) {
+    public UserDeleteHelper(AuthDomainService authDomainService, UserRepository userRepository, KeycloakApplicationService keycloakApplicationService) {
         this.authDomainService = authDomainService;
         this.userRepository = userRepository;
+        this.keycloakApplicationService = keycloakApplicationService;
     }
 
     @Transactional
-    public UserDeletedEvent deleteUser(DeleteUserCommand deleteUserCommand) {
+    public UserDeletedEvent deleteUser(DeleteUserCommand deleteUserCommand, String token) {
         Optional<User> userResult =
                 userRepository.findById(new UserId(deleteUserCommand.getUserId()));
         if (userResult.isEmpty()) {
@@ -38,7 +41,8 @@ public class UserDeleteHelper {
         User user = userResult.get();
 
         UserDeletedEvent userDeletedEvent = authDomainService.deleteUser(user);
-        saveUser(user);
+        User userSaved = saveUser(user);
+        keycloakApplicationService.deleteUser(userSaved, token);
         return userDeletedEvent;
     }
 

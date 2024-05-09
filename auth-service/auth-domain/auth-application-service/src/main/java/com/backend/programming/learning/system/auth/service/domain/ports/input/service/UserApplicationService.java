@@ -21,8 +21,8 @@ public interface UserApplicationService {
     CreateUserResponse createUser(@Valid CreateUserCommand createUserCommand, String token);
     UserEntityResponse findUserById(@Valid QueryUserByIdCommand queryUserCommand);
     QueryAllUsersResponse findAllUsers(QueryAllUsersCommand queryAllUsersCommand);
-    UpdateUserResponse updateUser(@Valid UpdateUserCommand updateUserCommand);
-    DeleteUserResponse deleteUserById(@Valid DeleteUserCommand deleteUserCommand);
+    UpdateUserResponse updateUser(@Valid UpdateUserCommand updateUserCommand, String token);
+    DeleteUserResponse deleteUserById(@Valid DeleteUserCommand deleteUserCommand, String token);
     LoginUserResponse loginUser(@Valid LoginUserCommand loginUserCommand);
     RefreshTokenUserResponse refreshTokenUser(@Valid RefreshTokenUserCommand refreshTokenUserCommand);
 }

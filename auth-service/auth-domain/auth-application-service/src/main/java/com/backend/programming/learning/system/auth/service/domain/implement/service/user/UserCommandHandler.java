@@ -100,8 +100,8 @@ public class UserCommandHandler {
     }
 
     @Transactional
-    public UpdateUserResponse updateUser(UpdateUserCommand updateUserCommand) {
-        UserUpdatedEvent userUpdatedEvent = userUpdateHelper.persistUser(updateUserCommand);
+    public UpdateUserResponse updateUser(UpdateUserCommand updateUserCommand, String token) {
+        UserUpdatedEvent userUpdatedEvent = userUpdateHelper.persistUser(updateUserCommand, token);
 
         userOutboxHelper.saveUserOutboxMessage(
                 userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
@@ -133,8 +133,8 @@ public class UserCommandHandler {
 
 
     @Transactional
-    public DeleteUserResponse deleteUser(DeleteUserCommand deleteUserCommand) {
-        UserDeletedEvent userDeletedEvent = userDeleteHelper.deleteUser(deleteUserCommand);
+    public DeleteUserResponse deleteUser(DeleteUserCommand deleteUserCommand, String token) {
+        UserDeletedEvent userDeletedEvent = userDeleteHelper.deleteUser(deleteUserCommand, token);
         log.info("User is deleted with id: {}", deleteUserCommand.getUserId());
 
         userOutboxHelper.saveUserOutboxMessage(

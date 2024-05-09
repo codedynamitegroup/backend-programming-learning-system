@@ -3,24 +3,25 @@ package com.backend.programming.learning.system.auth.service.domain.implement.se
 import com.backend.programming.learning.system.auth.service.config.KeycloakConfigData;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.login.ResponseLoginAndRefreshUser;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.KeycloakApplicationService;
+import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.auth.service.domain.util.KeycloakProvider;
+import com.backend.programming.learning.system.domain.exception.user.UserNotFoundException;
+import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+
 import org.keycloak.admin.client.resource.*;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
-import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import javax.ws.rs.core.Response;
 
@@ -83,12 +84,19 @@ public class KeycloakApplicationServiceImpl implements KeycloakApplicationServic
     }
 
     @Override
-    public void deleteUser(DeleteUserCommand deleteUserCommand, String token) {
-
+    public void deleteUser(User user, String token) {
+        UsersResource usersResource = getUserResource(token);
+        UserRepresentation userRepresentation = usersResource.searchByUsername(user.getUsername(), true).get(0);
+        userRepresentation.setEnabled(false);
+        usersResource.get(userRepresentation.getId()).update(userRepresentation);
     }
 
     @Override
-    public void updateUser(UpdateUserCommand updateUserCommand, String token) {
-
+    public void updateUser(User user, String token) {
+        UsersResource usersResource = getUserResource(token);
+        UserRepresentation userRepresentation = usersResource.searchByUsername(user.getUsername(), true).get(0);
+        userRepresentation.setFirstName(user.getFirstName());
+        userRepresentation.setLastName(user.getLastName());
+        usersResource.get(userRepresentation.getId()).update(userRepresentation);
     }
 }

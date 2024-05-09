@@ -22,6 +22,8 @@ public class WebSecurityConfig {
         return httpSecurity
                 .authorizeHttpRequests(auth -> auth
                         .antMatchers(HttpMethod.GET, "/auth/users").hasAnyRole(ADMIN, USER)
+                        .antMatchers(HttpMethod.DELETE, "/auth/users/:id").hasRole(ADMIN)
+                        .antMatchers(HttpMethod.PUT, "/auth/users/:id").hasRole(ADMIN)
                         .antMatchers(HttpMethod.GET, "/auth/users/search").hasAnyRole(ADMIN, USER)
                         .antMatchers(HttpMethod.POST, "/auth/users").hasRole(ADMIN)
                         .anyRequest().permitAll()
