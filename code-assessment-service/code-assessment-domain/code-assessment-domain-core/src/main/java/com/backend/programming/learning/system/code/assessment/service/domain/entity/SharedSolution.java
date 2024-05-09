@@ -16,7 +16,9 @@ public class SharedSolution extends AggregateRoot<SharedSolutionId> {
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
     private Vote youVote;
+
     private Integer totalVote;
+    private Integer totalComment;
 
     private String content;
     private String title;
@@ -53,6 +55,10 @@ public class SharedSolution extends AggregateRoot<SharedSolutionId> {
         return title;
     }
 
+    public Integer getTotalComment() {
+        return totalComment;
+    }
+
     public Vote getYouVote() {
         return youVote;
     }
@@ -74,6 +80,7 @@ public class SharedSolution extends AggregateRoot<SharedSolutionId> {
         updatedAt = builder.updatedAt;
         youVote = builder.youVote;
         totalVote = builder.totalVote;
+        totalComment = builder.totalComment;
         content = builder.content;
         title = builder.title;
         viewNumber = builder.viewNumber;
@@ -101,6 +108,7 @@ public class SharedSolution extends AggregateRoot<SharedSolutionId> {
         private ZonedDateTime updatedAt;
         private Vote youVote;
         private Integer totalVote;
+        private Integer totalComment;
         private String content;
         private String title;
         private Integer viewNumber;
@@ -142,6 +150,11 @@ public class SharedSolution extends AggregateRoot<SharedSolutionId> {
 
         public Builder totalVote(Integer val) {
             totalVote = val;
+            return this;
+        }
+
+        public Builder totalComment(Integer val) {
+            totalComment = val;
             return this;
         }
 

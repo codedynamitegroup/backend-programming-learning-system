@@ -15,23 +15,33 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface SharedSolutionRepository {
-    SharedSolution save(SharedSolution sharedSolution);
 
-    void saveTag(List<Tag> tags, UUID id);
+    //main group
+    SharedSolution save(SharedSolution sharedSolution);
 
     Optional<SharedSolution> findById(UUID sharedSolutionId, UUID voteUserId);
 
     Optional<SharedSolution> findById(UUID sharedSolutionId);
 
-    Integer countVoteById(UUID sharedSolutionId);
+    void increaseViewByOne(SharedSolutionId id);
+
+    void deleteById(SharedSolutionId id);
 
     Page<SharedSolution> findByCodeQuestionId(CodeQuestionId codeQuestionId, Integer pageNo, Integer pageSize, SharedSolution.SortedFields sortBy, QueryOrderBy orderBy, List<TagId> tagIds);
 
-    void increaseViewByOne(SharedSolutionId id);
 
+
+
+    //tag group
+    void saveTag(List<Tag> tags, UUID id);
+
+
+
+    //vote group
     void voteSharedSolution(SharedSolutionVote ssv);
 
     void deleteSharedSolutionVoteById(SharedSolutionVoteId sharedSolutionVoteId);
 
     Optional<SharedSolutionVote> findSharedSolutionVoteById(SharedSolutionVoteId id);
+
 }

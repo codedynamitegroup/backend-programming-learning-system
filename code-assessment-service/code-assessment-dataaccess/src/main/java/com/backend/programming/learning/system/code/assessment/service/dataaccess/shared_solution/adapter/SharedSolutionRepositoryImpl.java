@@ -52,15 +52,18 @@ public class SharedSolutionRepositoryImpl implements SharedSolutionRepository {
 
     @Override
     public SharedSolution save(SharedSolution sharedSolution) {
+        //save shared solution
         SharedSolutionEntity entity = sharedSolutionJpaRepository.save(dataAccessMapper.sharedSoltionToEntity(sharedSolution));
+
+        //save shared solution tag
         List<Tag> tags = sharedSolution.getTags();
         if(tags != null && !tags.isEmpty()){
             List<SharedSolutionTagEntity> sharedSolutionTagEntities =
                     tags.stream().map(tag -> dataAccessMapper.tagToSharedSolutionTagEntity(tag, entity))
                             .toList();
-//        sharedSolutionTagEntities.forEach(a-> log.info("ccaa {} {}", a.getSharedSolution().getId(), a.getTag().getId() ));
             sharedSolutionTagJpaRepository.saveAll(sharedSolutionTagEntities);
         }
+
         return dataAccessMapper.entityToSharedSolution(entity, tags);
     }
 
@@ -74,6 +77,7 @@ public class SharedSolutionRepositoryImpl implements SharedSolutionRepository {
 
     @Override
     public Optional<SharedSolution> findById(UUID sharedSolutionId, UUID voteUserId) {
+        //find tag
         List<SharedSolutionTagEntity> sst = sharedSolutionTagJpaRepository.findBySharedSolutionId(sharedSolutionId);
 
         //check if user vote this
@@ -81,8 +85,10 @@ public class SharedSolutionRepositoryImpl implements SharedSolutionRepository {
         Optional<SharedSolutionVoteEntity> sharedSolutionVoteEntityOpt = sharedSolutionVoteJpaRepository.findById(entityId);
         SharedSolutionVote sharedSolutionVote = sharedSolutionVoteEntityOpt.map(sharedSolutionVoteDataAccessMapper::entityToVote).orElse(null);
 
+        //map tag
         List<Tag> tags = sst.stream().map(sharedSolutionTagDataAccessMapper::sharedSolutionTagEntityToTag).toList();
 
+        //find shared solution and return
         return sharedSolutionJpaRepository
                 .findById(sharedSolutionId)
                 .map(item -> dataAccessMapper.entityToSharedSolution(item, tags, sharedSolutionVote));
@@ -90,21 +96,9 @@ public class SharedSolutionRepositoryImpl implements SharedSolutionRepository {
 
     @Override
     public Optional<SharedSolution> findById(UUID sharedSolutionId) {
-        //find tag
-        List<SharedSolutionTagEntity> sst = sharedSolutionTagJpaRepository.findBySharedSolutionId(sharedSolutionId);
-        List<Tag> tags = sst.stream().map(sharedSolutionTagDataAccessMapper::sharedSolutionTagEntityToTag).toList();
-
         return sharedSolutionJpaRepository
                 .findById(sharedSolutionId)
-                .map(item -> dataAccessMapper.entityToSharedSolution(item, tags));
-    }
-
-    @Override
-    public Integer countVoteById(UUID sharedSolutionId) {
-        long numUpvote = sharedSolutionVoteJpaRepository.countBySharedSolutionIdAndVoteTypeIn(sharedSolutionId, List.of(Vote.UPVOTE));
-        long numDownvote = sharedSolutionVoteJpaRepository.countBySharedSolutionIdAndVoteTypeIn(sharedSolutionId, List.of(Vote.DOWNVOTE));
-
-        return (int) (numUpvote - numDownvote);
+                .map(dataAccessMapper::entityToSharedSolutionIgnoreLazy);
     }
 
     @Override
@@ -143,6 +137,7 @@ public class SharedSolutionRepositoryImpl implements SharedSolutionRepository {
             sharedSolutions.add(dataAccessMapper
                     .entityToSharedSolution(sharedSolutionEntities.getContent().get(i), eachTags.get(i)));
         }
+
         Page<SharedSolution> result = new PageImpl<>(sharedSolutions, sharedSolutionEntities.getPageable(), sharedSolutionEntities.getTotalElements());
         return result;
     }
@@ -150,6 +145,11 @@ public class SharedSolutionRepositoryImpl implements SharedSolutionRepository {
     @Override
     public void increaseViewByOne(SharedSolutionId id) {
         sharedSolutionJpaRepository.increaseOneViewById(id.getValue());
+    }
+
+    @Override
+    public void deleteById(SharedSolutionId id) {
+        sharedSolutionJpaRepository.deleteById(id.getValue());
     }
 
     @Override

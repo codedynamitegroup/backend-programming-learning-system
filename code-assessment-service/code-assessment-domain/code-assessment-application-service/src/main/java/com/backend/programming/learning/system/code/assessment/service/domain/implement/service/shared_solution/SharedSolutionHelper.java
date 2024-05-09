@@ -3,13 +3,17 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 import com.backend.programming.learning.system.code.assessment.service.domain.CodeAssessmentDomainService;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.DeleteSharedSolutionCommad;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.DeleteSharedSolutionVoteCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionByCodeQuestionIdCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionDetailCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.UpdateSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.SharedSolution;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.SharedSolutionVote;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Tag;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
+import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.GenericHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.ValidateHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.shared_solution.SharedSolutionDataMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.tag.TagDataMapper;
@@ -33,13 +37,15 @@ public class SharedSolutionHelper {
     final CodeAssessmentDomainService codeAssessmentDomainService;
     final TagDataMapper tagDataMapper;
     final ValidateHelper validateHelper;
+    final GenericHelper genericHelper;
 
-    public SharedSolutionHelper(SharedSolutionRepository sharedSolutionRepository, SharedSolutionDataMapper sharedSolutionDataMapper, CodeAssessmentDomainService codeAssessmentDomainService, TagDataMapper tagDataMapper, ValidateHelper validateHelper) {
+    public SharedSolutionHelper(SharedSolutionRepository sharedSolutionRepository, SharedSolutionDataMapper sharedSolutionDataMapper, CodeAssessmentDomainService codeAssessmentDomainService, TagDataMapper tagDataMapper, ValidateHelper validateHelper, GenericHelper genericHelper) {
         this.sharedSolutionRepository = sharedSolutionRepository;
         this.sharedSolutionDataMapper = sharedSolutionDataMapper;
         this.codeAssessmentDomainService = codeAssessmentDomainService;
         this.tagDataMapper = tagDataMapper;
         this.validateHelper = validateHelper;
+        this.genericHelper = genericHelper;
     }
 
     @Transactional
@@ -61,11 +67,6 @@ public class SharedSolutionHelper {
     }
 
     @Transactional
-    public Integer countTotalVote(UUID sharedSolutionId) {
-        return sharedSolutionRepository.countVoteById(sharedSolutionId);
-    }
-
-    @Transactional
     public Page<SharedSolution> getSharedSolutionsByCodeQuestionId(GetSharedSolutionByCodeQuestionIdCommand command) {
         CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(command.getCodeQuestionId());
         List<TagId> tagIds = command.getTagIds() == null? null: command.getTagIds().stream().map(tagDataMapper::UUIDToTagId).toList();
@@ -77,7 +78,6 @@ public class SharedSolutionHelper {
                 command.getOrderBy(),
                 tagIds);
     }
-
 
     @Transactional
     public void voteSharedSolution(VoteSharedSolutionCommand command) {
@@ -101,5 +101,32 @@ public class SharedSolutionHelper {
         sharedSolutionRepository
                 .deleteSharedSolutionVoteById(id);
 
+    }
+
+    @Transactional
+    public void updateSharedSolution(UpdateSharedSolutionCommand command) {
+        validateHelper.validateUser(command.getUserId());
+        SharedSolution sharedSolutionRepo = validateHelper.validateSharedSolution(command.getSharedSolutionId());
+
+        if(!command.getUserId().equals(sharedSolutionRepo.getUser().getId().getValue())){
+            throw new CodeAssessmentDomainException("User " + command.getUserId() + "does not own solution " + command.getSharedSolutionId());
+        }
+        SharedSolution sharedSolution = sharedSolutionDataMapper.updateSharedSolutionCommandToSharedSolution(command);
+
+        genericHelper.mapNullAttributeToRepositoryAttribute(sharedSolution, sharedSolutionRepo, SharedSolution.class);
+
+        sharedSolutionRepository.save(sharedSolution);
+
+    }
+
+    public void deleteSharedSolution(DeleteSharedSolutionCommad command) {
+        validateHelper.validateUser(command.getUserId());
+        SharedSolution sharedSolutionRepo = validateHelper.validateSharedSolution(command.getSharedSolutionId());
+
+        if(!command.getUserId().equals(sharedSolutionRepo.getUser().getId().getValue())){
+            throw new CodeAssessmentDomainException("User " + command.getUserId() + "does not own solution " + command.getSharedSolutionId());
+        }
+
+        sharedSolutionRepository.deleteById(sharedSolutionRepo.getId());
     }
 }

@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionResponseItem;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionsResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.UpdateSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.SharedSolution;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.SharedSolutionVote;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.User;
@@ -42,7 +43,7 @@ public class SharedSolutionDataMapper {
                 .sharedSolutionId(sharedSolution.getId().getValue())
                 .totalVote(sharedSolution.getTotalVote())
                 .totalView(sharedSolution.getViewNumber())
-                .totalComment(0)
+                .totalComment(sharedSolution.getTotalComment())
                 .createdAt(sharedSolution.getCreatedAt())
                 .content(sharedSolution.getContent())
                 .title(sharedSolution.getTitle())
@@ -90,6 +91,14 @@ public class SharedSolutionDataMapper {
                 .totalItems(sharedSolutions.getTotalElements())
                 .totalPages(sharedSolutions.getTotalPages())
                 .sharedSolution(sharedSolutions.stream().map(this::sharedSolutionToGetSharedSolutionResponseItemIgnoreTitle).toList())
+                .build();
+    }
+
+    public SharedSolution updateSharedSolutionCommandToSharedSolution(UpdateSharedSolutionCommand command) {
+        return SharedSolution.builder()
+                .id(new SharedSolutionId(command.getSharedSolutionId()))
+                .content(command.getContent())
+                .title(command.getTitle())
                 .build();
     }
 }

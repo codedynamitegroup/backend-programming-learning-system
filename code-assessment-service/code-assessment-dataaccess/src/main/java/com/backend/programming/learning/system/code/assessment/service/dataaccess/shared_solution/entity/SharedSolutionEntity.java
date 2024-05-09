@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.code.assessment.service.dataacce
 
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.CodeQuestionEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.Vote;
 import lombok.*;
 
 import jakarta.persistence.*;
@@ -36,9 +37,18 @@ public class SharedSolutionEntity {
     String content;
     String title;
 
-    @Formula("(SELECT COALESCE((SELECT COUNT(*) FROM vote_shared_solution ssve WHERE ssve.shared_solution_id = id AND ssve.vote_type = 'UPVOTE'), 0)" +
-            "- COALESCE((SELECT COUNT(*) FROM vote_shared_solution ssve WHERE ssve.shared_solution_id = id AND ssve.vote_type = 'DOWNVOTE'), 0))")
+    @Basic(fetch=FetchType.LAZY)
+    @Formula("""
+            COALESCE((SELECT COUNT(*) FROM vote_shared_solution ssve WHERE ssve.shared_solution_id = id AND ssve.vote_type = 'UPVOTE'), 0)
+            - COALESCE((SELECT COUNT(*) FROM vote_shared_solution ssve WHERE ssve.shared_solution_id = id AND ssve.vote_type = 'DOWNVOTE'), 0)
+            """)
     Integer totalVoteCount;
+
+    @Basic(fetch=FetchType.LAZY)
+    @Formula("""
+            coalesce((select count(*) from comment cmt WHERE cmt.shared_solution_id = id), 0)
+            """)
+    Integer totalComment;
 
     ZonedDateTime createdAt;
     ZonedDateTime updatedAt;

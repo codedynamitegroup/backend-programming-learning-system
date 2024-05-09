@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.DeleteSharedSolutionCommad;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.DeleteSharedSolutionVoteCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionByCodeQuestionIdCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionDetailCommand;
@@ -33,33 +34,13 @@ public class SharedSolutionController {
         this.service = service;
     }
 
+    //create shared solution
     @PostMapping
-    public ResponseEntity<CreateSharedSolutionResponse> createCodeSubmission
+    public ResponseEntity<CreateSharedSolutionResponse> createSharedSolution
             (@RequestBody CreateSharedSolutionCommand command){
         CreateSharedSolutionResponse response =
                 service.createSharedSolution(command);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
-    }
-
-    //vote
-    @PostMapping("/{shared-solution-id}/vote")
-    public ResponseEntity<VoteSharedSolutionResponse> voteSharedSolution
-    (@PathVariable("shared-solution-id") UUID sharedSolutionId,
-     @RequestBody VoteSharedSolutionCommand command){
-        command.setSharedSolutionId(sharedSolutionId);
-        VoteSharedSolutionResponse response =
-                service.voteSharedSolution(command);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
-    }
-
-    @DeleteMapping("/{shared-solution-id}/vote")
-    public ResponseEntity deleteVote
-            (@PathVariable("shared-solution-id") UUID sharedSolutionId,
-             @RequestBody DeleteSharedSolutionVoteCommand command){
-        command.setSharedSolutionId(sharedSolutionId);
-        service.deleteVote(command);
-        return ResponseEntity.noContent().build();
-
     }
 
     //view
@@ -92,13 +73,50 @@ public class SharedSolutionController {
 
     //edit
     @PutMapping("/{shared-solution-id}")
-    public ResponseEntity patchDetailSharedSolution(
+    public ResponseEntity updateSharedSolution(
             @PathVariable("shared-solution-id") UUID sharedSolutionId,
             @RequestBody UpdateSharedSolutionCommand command){
         command.setSharedSolutionId(sharedSolutionId);
         service.updateSharedSolution(command);
-        return null;
+        return ResponseEntity.noContent().build();
     }
 
     //delete
+    @DeleteMapping("/{shared-solution-id}")
+    public ResponseEntity deleteSharedSolution(
+            @PathVariable("shared-solution-id") UUID sharedSolutionId,
+            @RequestBody DeleteSharedSolutionCommad command){
+        command.setSharedSolutionId(sharedSolutionId);
+        service.deleteSharedSolution(command);
+        return ResponseEntity.noContent().build();
+    }
+
+
+    //comment
+    //reply
+
+
+
+
+
+    //vote
+    @PostMapping("/{shared-solution-id}/vote")
+    public ResponseEntity<VoteSharedSolutionResponse> voteSharedSolution
+    (@PathVariable("shared-solution-id") UUID sharedSolutionId,
+     @RequestBody VoteSharedSolutionCommand command){
+        command.setSharedSolutionId(sharedSolutionId);
+        VoteSharedSolutionResponse response =
+                service.voteSharedSolution(command);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    //remove vote
+    @DeleteMapping("/{shared-solution-id}/vote")
+    public ResponseEntity deleteVote
+    (@PathVariable("shared-solution-id") UUID sharedSolutionId,
+     @RequestBody DeleteSharedSolutionVoteCommand command){
+        command.setSharedSolutionId(sharedSolutionId);
+        service.deleteVote(command);
+        return ResponseEntity.noContent().build();
+    }
 }

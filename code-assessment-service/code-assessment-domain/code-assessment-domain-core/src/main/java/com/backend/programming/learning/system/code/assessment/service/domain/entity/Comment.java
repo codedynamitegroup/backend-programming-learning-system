@@ -12,7 +12,6 @@ public class Comment extends BaseEntity<CommentId> {
     private String content;
     private ZonedDateTime updatedAt;
     private final ZonedDateTime createdAt;
-    private Boolean isDeleted;
     private UserId updatedBy;
     private final UserId createdBy;
 
@@ -21,7 +20,6 @@ public class Comment extends BaseEntity<CommentId> {
         content = builder.content;
         updatedAt = builder.updatedAt;
         createdAt = builder.createdAt;
-        isDeleted = builder.isDeleted;
         updatedBy = builder.updatedBy;
         createdBy = builder.createdBy;
         super.setId(builder.id);
@@ -47,9 +45,6 @@ public class Comment extends BaseEntity<CommentId> {
         return createdAt;
     }
 
-    public Boolean getDeleted() {
-        return isDeleted;
-    }
 
     public UserId getUpdatedBy() {
         return updatedBy;
@@ -64,7 +59,6 @@ public class Comment extends BaseEntity<CommentId> {
         private String content;
         private ZonedDateTime updatedAt;
         private ZonedDateTime createdAt;
-        private Boolean isDeleted;
         private UserId updatedBy;
         private UserId createdBy;
         private CommentId id;
@@ -89,11 +83,6 @@ public class Comment extends BaseEntity<CommentId> {
 
         public Builder createdAt(ZonedDateTime val) {
             createdAt = val;
-            return this;
-        }
-
-        public Builder isDeleted(Boolean val) {
-            isDeleted = val;
             return this;
         }
 

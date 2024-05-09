@@ -53,11 +53,25 @@ public class SharedSolutionDataAccessMapper {
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .totalVote(entity.getTotalVoteCount())
+                .totalComment(entity.getTotalComment())
                 .tags(tags)
                 .build();
 
     }
-    public SharedSolution entityToSharedSolution(SharedSolutionEntity entity, List<Tag> tags, SharedSolutionVote sharedSolutionVote) {
+    public SharedSolution entityToSharedSolutionIgnoreLazy(SharedSolutionEntity entity) {
+        return SharedSolution.builder()
+                .id(new SharedSolutionId(entity.getId()))
+                .codeQuestionId(new CodeQuestionId(entity.getCodeQuestion().getId()))
+                .user(userDataAccessMapper.userEntityToUser(entity.getUser()))
+                .title(entity.getTitle())
+                .content(entity.getContent())
+                .viewNumber(entity.getViewNumber())
+                .createdAt(entity.getCreatedAt())
+                .updatedAt(entity.getUpdatedAt())
+                .build();
+
+    }
+    public SharedSolution entityToSharedSolution(SharedSolutionEntity entity, List<Tag> tags, SharedSolutionVote youVote) {
         return SharedSolution.builder()
                 .id(new SharedSolutionId(entity.getId()))
                 .codeQuestionId(new CodeQuestionId(entity.getCodeQuestion().getId()))
@@ -68,7 +82,9 @@ public class SharedSolutionDataAccessMapper {
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .tags(tags)
-                .youVote(sharedSolutionVote != null? sharedSolutionVote.getVoteType(): null)
+                .totalVote(entity.getTotalVoteCount())
+                .totalComment(entity.getTotalComment())
+                .youVote(youVote != null? youVote.getVoteType(): null)
                 .build();
     }
 
