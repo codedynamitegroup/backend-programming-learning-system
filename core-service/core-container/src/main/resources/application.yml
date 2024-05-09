@@ -12,27 +12,27 @@ logging:
   level:
     com.backend.programming.learning.system: DEBUG
 
-core-service:
-  code-question-update-response-from-core-service-topic-name: code-question-update-response-from-core-service
-  code-question-update-request-to-core-service-topic-name: code-question-update-request-to-core-service
-
-  question-request-topic-name: core-question-request
-  question-response-topic-name: core-question-response
-
-  question-request-code-assessment-topic-name: core-question-request-code-assessment
-  question-response-code-assessment-topic-name: core-question-response-code-assessment
-
-  core-user-request-topic-name: core-user-request
-  user-response-topic-name: user-response
-
-  core-organization-request-topic-name: core-organization-request
-  organization-response-topic-name: organization-response
-
-  calendar-event-update-request-topic-name: calendar-event-update-request
-  calendar-event-update-response-topic-name: calendar-event-update-response
-
-  outbox-scheduler-fixed-rate: 2000
-  outbox-scheduler-initial-delay: 2000
+#core-service:
+#  code-question-update-response-from-core-service-topic-name: code-question-update-response-from-core-service
+#  code-question-update-request-to-core-service-topic-name: code-question-update-request-to-core-service
+#
+#  question-request-topic-name: core-question-request
+#  question-response-topic-name: core-question-response
+#
+#  question-request-code-assessment-topic-name: core-question-request-code-assessment
+#  question-response-code-assessment-topic-name: core-question-response-code-assessment
+#
+#  core-user-request-topic-name: core-user-request
+#  user-response-topic-name: user-response
+#
+#  core-organization-request-topic-name: core-organization-request
+#  organization-response-topic-name: organization-response
+#
+#  calendar-event-update-request-topic-name: calendar-event-update-request
+#  calendar-event-update-response-topic-name: calendar-event-update-response
+#
+#  outbox-scheduler-fixed-rate: 2000
+#  outbox-scheduler-initial-delay: 2000
 
 spring:
   application:
@@ -70,53 +70,53 @@ spring:
       schema-locations: classpath:init-schema.sql
 
 
-kafka-config:
-  bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
-  schema-registry-url-key: schema.registry.url
-  schema-registry-url: http://localhost:8081
-  num-of-partitions: 3
-  replication-factor: 3
+#kafka-config:
+#  bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
+#  schema-registry-url-key: schema.registry.url
+#  schema-registry-url: http://localhost:8081
+#  num-of-partitions: 3
+#  replication-factor: 3
+#
+#kafka-producer-config:
+#  key-serializer-class: org.apache.kafka.common.serialization.StringSerializer
+#  value-serializer-class: io.confluent.kafka.serializers.KafkaAvroSerializer
+#  compression-type: none
+#  acks: all
+#  batch-size: 16384
+#  batch-size-boost-factor: 100
+#  linger-ms: 5
+#  request-timeout-ms: 60000
+#  retry-count: 5
 
-kafka-producer-config:
-  key-serializer-class: org.apache.kafka.common.serialization.StringSerializer
-  value-serializer-class: io.confluent.kafka.serializers.KafkaAvroSerializer
-  compression-type: none
-  acks: all
-  batch-size: 16384
-  batch-size-boost-factor: 100
-  linger-ms: 5
-  request-timeout-ms: 60000
-  retry-count: 5
-
-kafka-consumer-config:
-  key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-  value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-  core-service-user-consumer-group-id: core-service-user-topic-consumer
-
-  core-service-question-consumer-group-id: core-service-question-topic-consumer
-  core-service-code-question-consumer-group-id: core-service-code-question-topic-consumer
-
-  core-service-calendar-event-consumer-group-id: core-service-calendar-event-topic-consumer
-
-  core-service-user-request-group-id: core-service-user-request-topic
-
-  code-question-update-consumer-group-id: code-question-update-topic-consumer
-
-  core-service-organization-consumer-group-id: core-service-organization-topic-consumer
-
-  auto-offset-reset: earliest
-  specific-avro-reader-key: specific.avro.reader
-  specific-avro-reader: true
-  batch-listener: true
-  auto-startup: true
-  concurrency-level: 3
-  session-timeout-ms: 10000
-  heartbeat-interval-ms: 3000
-  max-poll-interval-ms: 300000
-  max-poll-records: 500
-  max-partition-fetch-bytes-default: 1048576
-  max-partition-fetch-bytes-boost-factor: 1
-  poll-timeout-ms: 150
+#kafka-consumer-config:
+#  key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#  value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+#  core-service-user-consumer-group-id: core-service-user-topic-consumer
+#
+#  core-service-question-consumer-group-id: core-service-question-topic-consumer
+#  core-service-code-question-consumer-group-id: core-service-code-question-topic-consumer
+#
+#  core-service-calendar-event-consumer-group-id: core-service-calendar-event-topic-consumer
+#
+#  core-service-user-request-group-id: core-service-user-request-topic
+#
+#  code-question-update-consumer-group-id: code-question-update-topic-consumer
+#
+#  core-service-organization-consumer-group-id: core-service-organization-topic-consumer
+#
+#  auto-offset-reset: earliest
+#  specific-avro-reader-key: specific.avro.reader
+#  specific-avro-reader: true
+#  batch-listener: true
+#  auto-startup: true
+#  concurrency-level: 3
+#  session-timeout-ms: 10000
+#  heartbeat-interval-ms: 3000
+#  max-poll-interval-ms: 300000
+#  max-poll-records: 500
+#  max-partition-fetch-bytes-default: 1048576
+#  max-partition-fetch-bytes-boost-factor: 1
+#  poll-timeout-ms: 150
 
 springdoc:
   api-docs:
