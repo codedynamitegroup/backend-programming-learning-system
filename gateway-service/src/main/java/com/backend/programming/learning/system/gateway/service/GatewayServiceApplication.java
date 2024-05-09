@@ -18,7 +18,6 @@ import org.springframework.context.annotation.ComponentScan;
 import reactor.core.publisher.Mono;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
@@ -26,12 +25,13 @@ import java.time.ZonedDateTime;
 @SpringBootApplication
 @ComponentScan(basePackages = "com.backend.programming.learning.system")
 public class GatewayServiceApplication {
-	@Value("${server.port}")
-	private String serverPort;
 
 	public static void main(String[] args) {
 		SpringApplication.run(GatewayServiceApplication.class, args);
 	}
+
+	@Value("${server.port}")
+	private String serverPort;
 
 	@Bean
 	public RouteLocator gatewayServiceRouteConfig(RouteLocatorBuilder routeLocatorBuilder) {
@@ -100,4 +100,5 @@ public class GatewayServiceApplication {
 		return exchange -> Mono.justOrEmpty(exchange.getRequest().getHeaders().getFirst("user"))
 				.defaultIfEmpty("anonymous");
 	}
+
 }
