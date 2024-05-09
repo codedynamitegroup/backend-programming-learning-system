@@ -8,6 +8,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionByCodeQuestionIdCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionDetailCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionResponseItem;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.UpdateSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.SharedSolutionApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +40,7 @@ public class SharedSolutionApplicationServiceImpl implements SharedSolutionAppli
     }
 
     @Override
-    public List<GetSharedSolutionResponseItem> getSharedSolutions(GetSharedSolutionByCodeQuestionIdCommand command) {
+    public GetSharedSolutionsResponse getSharedSolutions(GetSharedSolutionByCodeQuestionIdCommand command) {
         return hanlder.getSharedSolutions(command);
     }
 

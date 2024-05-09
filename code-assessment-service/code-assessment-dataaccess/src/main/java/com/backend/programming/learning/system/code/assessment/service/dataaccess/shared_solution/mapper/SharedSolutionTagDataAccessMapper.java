@@ -5,6 +5,8 @@ import com.backend.programming.learning.system.code.assessment.service.domain.en
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagId;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 public class SharedSolutionTagDataAccessMapper {
     public Tag sharedSolutionTagEntityToTag(SharedSolutionTagEntity entity){
@@ -12,5 +14,9 @@ public class SharedSolutionTagDataAccessMapper {
                 .name(entity.getTag().getName())
                 .id(new TagId(entity.getTag().getId()))
                 .build();
+    }
+
+    public UUID tagIdToEntityId(TagId tagId) {
+        return tagId.getValue();
     }
 }

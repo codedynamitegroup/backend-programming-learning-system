@@ -4,16 +4,22 @@ import com.backend.programming.learning.system.code.assessment.service.domain.Co
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.DeleteSharedSolutionVoteCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionByCodeQuestionIdCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionDetailCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.SharedSolution;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.SharedSolutionVote;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Tag;
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.ValidateHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.shared_solution.SharedSolutionDataMapper;
+import com.backend.programming.learning.system.code.assessment.service.domain.mapper.tag.TagDataMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.SharedSolutionRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.SharedSolutionId;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.shared_solution_vote.SharedSolutionVoteId;
+import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import jakarta.transaction.Transactional;
@@ -25,12 +31,14 @@ public class SharedSolutionHelper {
     final SharedSolutionRepository sharedSolutionRepository;
     final SharedSolutionDataMapper sharedSolutionDataMapper;
     final CodeAssessmentDomainService codeAssessmentDomainService;
+    final TagDataMapper tagDataMapper;
     final ValidateHelper validateHelper;
 
-    public SharedSolutionHelper(SharedSolutionRepository sharedSolutionRepository, SharedSolutionDataMapper sharedSolutionDataMapper, CodeAssessmentDomainService codeAssessmentDomainService, ValidateHelper validateHelper) {
+    public SharedSolutionHelper(SharedSolutionRepository sharedSolutionRepository, SharedSolutionDataMapper sharedSolutionDataMapper, CodeAssessmentDomainService codeAssessmentDomainService, TagDataMapper tagDataMapper, ValidateHelper validateHelper) {
         this.sharedSolutionRepository = sharedSolutionRepository;
         this.sharedSolutionDataMapper = sharedSolutionDataMapper;
         this.codeAssessmentDomainService = codeAssessmentDomainService;
+        this.tagDataMapper = tagDataMapper;
         this.validateHelper = validateHelper;
     }
 
@@ -58,15 +66,18 @@ public class SharedSolutionHelper {
     }
 
     @Transactional
-    public List<SharedSolution> getSharedSolutionsByCodeQuestionId(UUID codeQuestionId) {
-        validateHelper.validateCodeQuestion(codeQuestionId);
-        return sharedSolutionRepository.findByCodeQuestionId(codeQuestionId);
+    public Page<SharedSolution> getSharedSolutionsByCodeQuestionId(GetSharedSolutionByCodeQuestionIdCommand command) {
+        CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(command.getCodeQuestionId());
+        List<TagId> tagIds = command.getTagIds() == null? null: command.getTagIds().stream().map(tagDataMapper::UUIDToTagId).toList();
+        return sharedSolutionRepository.findByCodeQuestionId(
+                codeQuestion.getId(),
+                command.getPageNum(),
+                command.getPageSize(),
+                command.getSortBy(),
+                command.getOrderBy(),
+                tagIds);
     }
 
-    @Transactional
-    public List<Integer> getTotalVotes(List<SharedSolution> sharedSolutions) {
-        return sharedSolutions.stream().map(item->countTotalVote(item.getId().getValue())).toList();
-    }
 
     @Transactional
     public void voteSharedSolution(VoteSharedSolutionCommand command) {

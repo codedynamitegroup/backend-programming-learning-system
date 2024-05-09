@@ -22,6 +22,8 @@ public class GetSharedSolutionResponseItem {
     @NotNull
     User user;
     @NotNull
+    UUID sharedSolutionId;
+    @NotNull
     Integer totalVote;
     @NotNull
     Integer totalView;

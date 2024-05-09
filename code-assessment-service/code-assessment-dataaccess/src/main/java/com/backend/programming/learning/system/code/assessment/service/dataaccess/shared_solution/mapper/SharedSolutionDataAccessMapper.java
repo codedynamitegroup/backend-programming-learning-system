@@ -18,9 +18,15 @@ import java.util.List;
 @Component
 public class SharedSolutionDataAccessMapper {
     final UserDataAccessMapper userDataAccessMapper;
+    final SharedSolutionFieldToSharedSolutionEntityField sharedSolutionFieldToSharedSolutionEntityField;
 
-    public SharedSolutionDataAccessMapper(UserDataAccessMapper userDataAccessMapper) {
+    public SharedSolutionDataAccessMapper(UserDataAccessMapper userDataAccessMapper, SharedSolutionFieldToSharedSolutionEntityField sharedSolutionFieldToSharedSolutionEntityField) {
         this.userDataAccessMapper = userDataAccessMapper;
+        this.sharedSolutionFieldToSharedSolutionEntityField = sharedSolutionFieldToSharedSolutionEntityField;
+    }
+
+    public String sharedSolutionFieldToSharedSolutionEntityField(String str){
+        return sharedSolutionFieldToSharedSolutionEntityField.fieldMapper.get(str);
     }
 
     public SharedSolutionEntity sharedSoltionToEntity(SharedSolution sharedSolution) {
@@ -46,8 +52,10 @@ public class SharedSolutionDataAccessMapper {
                 .viewNumber(entity.getViewNumber())
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
+                .totalVote(entity.getTotalVoteCount())
                 .tags(tags)
                 .build();
+
     }
     public SharedSolution entityToSharedSolution(SharedSolutionEntity entity, List<Tag> tags, SharedSolutionVote sharedSolutionVote) {
         return SharedSolution.builder()

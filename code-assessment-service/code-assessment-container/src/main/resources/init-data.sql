@@ -32,3 +32,17 @@ INSERT INTO tag(id, name)
 VALUES
     ('4d5d31cc-6386-4ef5-903d-625e64b122d7','Java'),
     ('cd55e806-5d20-4813-b2ce-f8a235fc9151','Math');
+
+insert into shared_solution (id, code_question_id, user_id, title, content) values ('675b7db4-228a-4b75-8eac-aa4336241b63', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 'b029f559-52a8-4699-b595-71161498ed8c', 'Devil Commands, The', 'transition revolutionary platforms');
+insert into shared_solution (id, code_question_id, user_id, title, content) values ('bbbad0c0-a0a2-43c9-b3d5-c05ca848bb48', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'The Divine Woman', 'unleash global supply-chains');
+insert into shared_solution (id, code_question_id, user_id, title, content) values ('7679484a-2070-41d8-8aca-f242144c124c', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 'b029f559-52a8-4699-b595-71161498ed8c', 'Dimples', 'aggregate 24/365 action-items');
+insert into shared_solution (id, code_question_id, user_id, title, content) values ('9b393ec2-6eef-4a63-8f29-ee358161be49', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', 'Fatal Hour, The', 'mesh impactful solutions');
+insert into shared_solution (id, code_question_id, user_id, title, content) values ('e56c0333-f1ec-4ed2-8b29-ed90d26823cd', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'Three Stooges Meet Hercules, The', 'innovate interactive content');
+
+insert into shared_solution_tag (shared_solution_id, tag_id) values ('675b7db4-228a-4b75-8eac-aa4336241b63', '4d5d31cc-6386-4ef5-903d-625e64b122d7');
+insert into shared_solution_tag (shared_solution_id, tag_id) values ('675b7db4-228a-4b75-8eac-aa4336241b63', 'cd55e806-5d20-4813-b2ce-f8a235fc9151');
+insert into shared_solution_tag (shared_solution_id, tag_id) values ('bbbad0c0-a0a2-43c9-b3d5-c05ca848bb48', 'cd55e806-5d20-4813-b2ce-f8a235fc9151');
+insert into shared_solution_tag (shared_solution_id, tag_id) values ('7679484a-2070-41d8-8aca-f242144c124c', '4d5d31cc-6386-4ef5-903d-625e64b122d7');
+
+
+

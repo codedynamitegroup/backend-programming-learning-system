@@ -4,7 +4,11 @@ import com.backend.programming.learning.system.code.assessment.service.domain.en
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.SharedSolutionVote;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Tag;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.SharedSolutionId;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.shared_solution_vote.SharedSolutionVoteId;
+import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
+import com.backend.programming.learning.system.domain.valueobject.QueryOrderBy;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +25,7 @@ public interface SharedSolutionRepository {
 
     Integer countVoteById(UUID sharedSolutionId);
 
-    List<SharedSolution> findByCodeQuestionId(UUID codeQuestionId);
+    Page<SharedSolution> findByCodeQuestionId(CodeQuestionId codeQuestionId, Integer pageNo, Integer pageSize, SharedSolution.SortedFields sortBy, QueryOrderBy orderBy, List<TagId> tagIds);
 
     void increaseViewByOne(SharedSolutionId id);
 

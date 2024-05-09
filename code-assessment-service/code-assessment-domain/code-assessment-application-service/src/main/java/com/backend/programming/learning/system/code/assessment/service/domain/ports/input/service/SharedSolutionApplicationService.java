@@ -9,6 +9,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionDetailCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionResponseItem;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.UpdateSharedSolutionCommand;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -18,7 +19,7 @@ public interface SharedSolutionApplicationService {
 
     GetSharedSolutionResponseItem getDetailSharedSolution(@Valid GetSharedSolutionDetailCommand command);
 
-    List<GetSharedSolutionResponseItem> getSharedSolutions(@Valid GetSharedSolutionByCodeQuestionIdCommand command);
+    GetSharedSolutionsResponse getSharedSolutions(@Valid GetSharedSolutionByCodeQuestionIdCommand command);
 
     VoteSharedSolutionResponse voteSharedSolution(@Valid VoteSharedSolutionCommand command);
 

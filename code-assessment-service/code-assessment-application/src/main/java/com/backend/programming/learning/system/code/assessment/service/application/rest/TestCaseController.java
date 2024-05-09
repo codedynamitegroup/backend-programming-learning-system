@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.application.rest;
 
+import com.backend.programming.learning.system.code.assessment.service.config.CodeAssessmentServiceConfigData;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.test_case.CreateTestCasesCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.test_case.CreateTestCasesResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.test_case.PatchDeleteTestCasesCommand;
@@ -22,10 +23,13 @@ import java.util.UUID;
 @Slf4j
 public class TestCaseController {
     private final TestCaseApplicationService service;
+    private final CodeAssessmentServiceConfigData codeAssessmentServiceConfigData;
 
-    public TestCaseController(TestCaseApplicationService service) {
+    public TestCaseController(TestCaseApplicationService service, CodeAssessmentServiceConfigData codeAssessmentServiceConfigData) {
         this.service = service;
+        this.codeAssessmentServiceConfigData = codeAssessmentServiceConfigData;
     }
+
     @PostMapping
     public ResponseEntity<CreateTestCasesResponse> createTestCases
             (@RequestBody CreateTestCasesCommand createTestCasesCommand){
@@ -46,11 +50,10 @@ public class TestCaseController {
 
     @GetMapping
     public ResponseEntity<GetTestCasesByQuestionIdResponse> updateTestCase
-            (@RequestParam(defaultValue = "0") Integer pageNo,
-             @RequestParam(defaultValue = "10") Integer pageSize,
+            (@RequestParam(defaultValue = "${code-assessment-service.default-page-number}") Integer pageNo,
+             @RequestParam(defaultValue = "${code-assessment-service.default-page-size}") Integer pageSize,
              @RequestParam(defaultValue = "false") Boolean fetchAll,
              @RequestParam UUID codeQuestionId){
-
         GetTestCasesByQuestionIdCommand command =
                 GetTestCasesByQuestionIdCommand.builder()
                         .codeQuestionId(codeQuestionId)

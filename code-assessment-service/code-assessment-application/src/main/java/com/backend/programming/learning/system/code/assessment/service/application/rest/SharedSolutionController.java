@@ -9,6 +9,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionByCodeQuestionIdCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionDetailCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionResponseItem;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.UpdateSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.SharedSolutionApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -64,13 +65,17 @@ public class SharedSolutionController {
     //view
     //num of comment
     @GetMapping
-    public ResponseEntity<List<GetSharedSolutionResponseItem>>
-    getSharedSolutions(@RequestBody UUID codeQuestionId){
-        GetSharedSolutionByCodeQuestionIdCommand command =
-                GetSharedSolutionByCodeQuestionIdCommand.builder().codeQuestionId(codeQuestionId).build();
-        List<GetSharedSolutionResponseItem> items =
+    public ResponseEntity<GetSharedSolutionsResponse>
+    getSharedSolutions(
+            @RequestBody GetSharedSolutionByCodeQuestionIdCommand command,
+            @RequestParam(defaultValue = "${code-assessment-service.default-page-number}") Integer pageNo,
+            @RequestParam(defaultValue = "${code-assessment-service.default-page-size}") Integer pageSize
+    ){
+        command.setPageNum(pageNo);
+        command.setPageSize(pageSize);
+        GetSharedSolutionsResponse response =
                 service.getSharedSolutions(command);
-        return ResponseEntity.ok(items);
+        return ResponseEntity.ok(response);
     }
 
     //view detail

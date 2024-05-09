@@ -5,6 +5,9 @@ logging:
     com.backend.programming.learning.system: DEBUG
 
 code-assessment-service:
+  default-page-size: 10
+  default-page-number: 0
+
   code-question-update-response-from-core-service-topic-name: code-question-update-response-from-core-service
   code-question-update-request-to-core-service-topic-name: code-question-update-request-to-core-service
 

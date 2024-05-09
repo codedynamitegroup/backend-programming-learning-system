@@ -5,6 +5,9 @@ import com.backend.programming.learning.system.code.assessment.service.dataacces
 import lombok.*;
 
 import jakarta.persistence.*;
+import lombok.experimental.FieldNameConstants;
+import org.hibernate.annotations.Formula;
+
 import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
@@ -16,6 +19,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="shared_solution")
+@FieldNameConstants
 public class SharedSolutionEntity {
     @Id
     UUID id;
@@ -31,6 +35,10 @@ public class SharedSolutionEntity {
     Integer viewNumber;
     String content;
     String title;
+
+    @Formula("(SELECT COALESCE((SELECT COUNT(*) FROM vote_shared_solution ssve WHERE ssve.shared_solution_id = id AND ssve.vote_type = 'UPVOTE'), 0)" +
+            "- COALESCE((SELECT COUNT(*) FROM vote_shared_solution ssve WHERE ssve.shared_solution_id = id AND ssve.vote_type = 'DOWNVOTE'), 0))")
+    Integer totalVoteCount;
 
     ZonedDateTime createdAt;
     ZonedDateTime updatedAt;
