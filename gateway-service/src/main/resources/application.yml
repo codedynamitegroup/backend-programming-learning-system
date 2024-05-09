@@ -18,7 +18,6 @@ spring:
     active: gateway
   config:
     import: "optional:configserver:${CONFIG_SERVER:http://localhost:9999}"
-    name: gateway-service,config-client
   cloud:
     config:
       username: spring_cloud_user
