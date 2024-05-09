@@ -99,7 +99,7 @@ springdoc:
   api-docs:
     path: /auth/v3/api-docs
   swagger-ui:
-    path: /swagger-ui.html
+    path: /auth/swagger-ui
 
 security:
   paths-to-ignore: /auth/v3/api-docs, /actuator/**
