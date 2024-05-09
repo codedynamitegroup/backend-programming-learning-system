@@ -1,9 +1,11 @@
 package com.backend.programming.learning.system.auth.service.domain.mapper;
 
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user_role.CreateUserRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user_moodle.UserModel;
+import com.backend.programming.learning.system.auth.service.domain.entity.Role;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -63,6 +66,17 @@ public class MoodleDataMapper {
                 .firstName(userModel.getFirstname())
                 .lastName(userModel.getLastname())
                 .phone("")
+                .build();
+    }
+
+
+    public CreateUserRoleCommand createRole(com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user_moodle.Role role,
+                                            Map<String, Role> roleMap, UUID userId) {
+        return CreateUserRoleCommand.builder()
+                .roleId(roleMap.get(role.getShortname().toLowerCase()).getId().getValue())
+                .userId(userId)
+                .name(role.getShortname())
+                .createdBy(userId)
                 .build();
     }
 }
