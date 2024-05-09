@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.CourseResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.AssignmentCourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.ListAssignmentCourseModel;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.CourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.ListCourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.ListSubmissionAssignmentModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionAssignmentModel;
@@ -38,6 +39,7 @@ public class MoodleCommandHandler {
     String GET_ASSIGNMENTS = "mod_assign_get_assignments";
     String GET_SUBMISSION_ASSIGNMENTS = "mod_assign_get_submissions";
     String GET_COURSES = "core_course_get_courses";
+    String GET_COURSE_BY_FIELD = "core_course_get_courses_by_field";
 
     String GET_USER_COURSES = "core_enrol_get_users_courses";
 
@@ -130,7 +132,7 @@ public class MoodleCommandHandler {
     }
 
     @Transactional
-    private List<CourseResponseEntity> getAllCourse() {
+    public List<CourseResponseEntity> getAllCourse() {
         String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s",
                 MOODLE_URL, TOKEN, GET_COURSES);
         RestTemplate restTemplate = new RestTemplate();
@@ -185,6 +187,49 @@ public class MoodleCommandHandler {
         courseIdsMap.values().forEach(course -> result.add(moodleDataMapper.courseToCourseResponseEntity(course)));
         return result;
     }
+
+    public ListCourseModel getCourses() {
+        String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s",
+                MOODLE_URL, TOKEN, GET_COURSES);
+        RestTemplate restTemplate = new RestTemplate();
+        String model = restTemplate.getForObject(apiURL, String.class);
+        model = "{\"courses\":"+model+"}";
+        ObjectMapper objectMapper = new ObjectMapper();
+        ListCourseModel listCourseModel = null;
+        if(model.equals("{\"courses\":[]}"))
+            return null;
+        try {
+            listCourseModel = objectMapper.readValue(model, ListCourseModel.class);
+            log.info("Course model: {}", listCourseModel);
+
+            return listCourseModel;
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public CourseModel getCourse(String courseId) {
+        String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&options[ids][0]=%s",
+                MOODLE_URL, TOKEN, GET_COURSES, courseId);
+        RestTemplate restTemplate = new RestTemplate();
+        String model = restTemplate.getForObject(apiURL, String.class);
+        model = "{\"courses\":"+model+"}";
+        ObjectMapper objectMapper = new ObjectMapper();
+        ListCourseModel listCourseModel = null;
+
+        if(model.equals("{\"courses\":[]}"))
+            return null;
+
+        try {
+            listCourseModel = objectMapper.readValue(model, ListCourseModel.class);
+            log.info("Course model: {}", listCourseModel);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        return listCourseModel.getCourses().get(0);
+    }
+
     @Transactional
     public List<UserCourseModel> getCoursesByUser(String userId) {
         String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&userid=%s",

@@ -467,7 +467,7 @@ DROP TABLE IF EXISTS "public".webhook_api_function CASCADE;
 CREATE TABLE "public".webhook_api_function
 (
     "id"          uuid DEFAULT gen_random_uuid() NOT NULL,
-    "area"        text                           NOT NULL,
+    "area"        text                           NULL,
     "name"        text                           NOT NULL,
     "description" text                           NOT NULL,
     CONSTRAINT webhook_api_function_pkey PRIMARY KEY (id)
