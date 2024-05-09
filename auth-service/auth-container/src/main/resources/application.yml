@@ -118,3 +118,14 @@ management:
 
 log:
   appName: auth-service
+---
+spring.config.activate.on-profile: prod
+# Disable springdoc-openapi
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
+
+security:
+  paths-to-ignore: /actuator/**
