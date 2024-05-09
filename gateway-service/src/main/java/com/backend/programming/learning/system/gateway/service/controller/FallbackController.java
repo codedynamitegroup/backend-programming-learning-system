@@ -7,7 +7,6 @@ import com.backend.programming.learning.system.gateway.service.model.CourseServi
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +18,7 @@ public class FallbackController {
     @Value("${server.port}")
     private String port;
 
-    @PostMapping("/core-fallback")
+    @RequestMapping("/core-fallback")
     public ResponseEntity<CoreServiceFallbackModel> coreServiceFallback() {
         log.info("Returning fallback result for core-service! on port {}", port);
         return ResponseEntity.ok(CoreServiceFallbackModel.builder()
@@ -27,7 +26,7 @@ public class FallbackController {
                 .build());
     }
 
-    @PostMapping("/course-fallback")
+    @RequestMapping("/course-fallback")
     public ResponseEntity<CourseServiceFallbackModel> courseServiceFallback() {
         log.info("Returning fallback result for course-service! on port {}", port);
         return ResponseEntity.ok(CourseServiceFallbackModel.builder()
@@ -36,7 +35,7 @@ public class FallbackController {
     }
 
 
-    @PostMapping("/auth-fallback")
+    @RequestMapping("/auth-fallback")
     public ResponseEntity<AuthServiceFallbackModel> authServiceFallback() {
         log.info("Returning fallback result for auth-service! on port {}", port);
         return ResponseEntity.ok(AuthServiceFallbackModel.builder()
@@ -44,7 +43,7 @@ public class FallbackController {
                 .build());
     }
 
-    @PostMapping("/code-assessment-fallback")
+    @RequestMapping("/code-assessment-fallback")
     public ResponseEntity<CodeAssessmentServiceFallbackModel> codeAssessmentServiceFallback() {
         log.info("Returning fallback result for code-assessment-service! on port {}", port);
         return ResponseEntity.ok(CodeAssessmentServiceFallbackModel.builder()

@@ -24,6 +24,9 @@ spring:
         locator:
           enabled: false
           lowerCaseServiceId: true
+      httpclient:
+        connect-timeout: 1000
+        response-timeout: 10s
     config:
       username: spring_cloud_user
       password: springCloud_Pwd!

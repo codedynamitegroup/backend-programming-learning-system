@@ -16,6 +16,7 @@ import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpMethod;
 import reactor.core.publisher.Mono;
 
 import java.time.Duration;
@@ -49,7 +50,10 @@ public class GatewayServiceApplication {
 								.circuitBreaker(c -> c.setName("coreCircuitBreaker")
 										.setFallbackUri("forward:/fallback/core-fallback"))
 								.requestRateLimiter(config -> config.setRateLimiter(redisRateLimiter())
-										.setKeyResolver(userKeyResolver())))
+										.setKeyResolver(userKeyResolver()))
+								.retry(retryConfig -> retryConfig.setRetries(3)
+										.setMethods(HttpMethod.GET)
+										.setBackoff(Duration.ofMillis(100), Duration.ofMillis(1000), 2, true)))
 						.uri("lb://core-service"))
 				.route(p -> p
 						.path("/auth/**")
@@ -57,7 +61,10 @@ public class GatewayServiceApplication {
 								.circuitBreaker(c -> c.setName("authCircuitBreaker")
 										.setFallbackUri("forward:/fallback/auth-fallback"))
 								.requestRateLimiter(config -> config.setRateLimiter(redisRateLimiter())
-										.setKeyResolver(userKeyResolver())))
+										.setKeyResolver(userKeyResolver()))
+								.retry(retryConfig -> retryConfig.setRetries(3)
+										.setMethods(HttpMethod.GET)
+										.setBackoff(Duration.ofMillis(100), Duration.ofMillis(1000), 2, true)))
 						.uri("lb://auth-service"))
 				.route(p -> p
 						.path("/course/**")
@@ -65,7 +72,10 @@ public class GatewayServiceApplication {
 								.circuitBreaker(c -> c.setName("courseCircuitBreaker")
 										.setFallbackUri("forward:/fallback/course-fallback"))
 								.requestRateLimiter(config -> config.setRateLimiter(redisRateLimiter())
-										.setKeyResolver(userKeyResolver())))
+										.setKeyResolver(userKeyResolver()))
+								.retry(retryConfig -> retryConfig.setRetries(3)
+										.setMethods(HttpMethod.GET)
+										.setBackoff(Duration.ofMillis(100), Duration.ofMillis(1000), 2, true)))
 						.uri("lb://course-service"))
 				.route(p -> p
 						.path("code-assessment/**")
@@ -73,7 +83,10 @@ public class GatewayServiceApplication {
 								.circuitBreaker(c -> c.setName("codeAssessmentCircuitBreaker")
 										.setFallbackUri("forward:/fallback/code-assessment-fallback"))
 								.requestRateLimiter(config -> config.setRateLimiter(redisRateLimiter())
-										.setKeyResolver(userKeyResolver())))
+										.setKeyResolver(userKeyResolver()))
+								.retry(retryConfig -> retryConfig.setRetries(3)
+										.setMethods(HttpMethod.GET)
+										.setBackoff(Duration.ofMillis(100), Duration.ofMillis(1000), 2, true)))
 						.uri("lb://code-assessment-service"))
 				.route(p -> p
 						.path("/v3/api-docs/**")
