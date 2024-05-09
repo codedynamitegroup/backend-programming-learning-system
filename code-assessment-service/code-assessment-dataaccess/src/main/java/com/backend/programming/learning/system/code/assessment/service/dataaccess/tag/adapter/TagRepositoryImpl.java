@@ -9,6 +9,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.va
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -27,5 +28,16 @@ public class TagRepositoryImpl implements TagRepository {
         Optional<TagEntity> tagEntity = jpaRepository.findById(id.getValue());
 
         return tagEntity.map(dataAccessMapper::entityToTag);
+    }
+
+    @Override
+    public void saveAll(List<Tag> tags) {
+        List<TagEntity> tagEntities = tags.stream().map(dataAccessMapper::tagToEntity).toList();
+        jpaRepository.saveAll(tagEntities);
+    }
+
+    @Override
+    public void deleteTag(TagId tagId) {
+        jpaRepository.deleteById(tagId.getValue());
     }
 }

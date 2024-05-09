@@ -17,7 +17,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.up
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 public interface CalendarEventApplicationService {
     CreateCalendarEventResponse createCalendarEventResponse(

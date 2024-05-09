@@ -1,11 +1,11 @@
-package com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution;
+package com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 

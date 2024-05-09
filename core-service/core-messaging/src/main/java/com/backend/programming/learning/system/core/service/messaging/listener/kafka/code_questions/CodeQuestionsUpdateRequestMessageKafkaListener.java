@@ -34,8 +34,8 @@ public class CodeQuestionsUpdateRequestMessageKafkaListener
     @KafkaListener(id = "${kafka-consumer-config.code-question-update-consumer-group-id}",
             topics = "${core-service.code-question-update-request-to-core-service-topic-name}")
     public void receive(@Payload List<CodeQuestionUpdateRequestAvroModel> messages,
-                        @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) List<String> keys,
-                        @Header(KafkaHeaders.RECEIVED_PARTITION_ID) List<Integer> partitions,
+                        @Header(KafkaHeaders.RECEIVED_KEY) List<String> keys,
+                        @Header(KafkaHeaders.RECEIVED_PARTITION) List<Integer> partitions,
                         @Header(KafkaHeaders.OFFSET) List<Long> offsets){
         log.info("{} number of code-question-update-request received with keys:{}, partitions:{} and offsets: {}",
                 messages.size(),

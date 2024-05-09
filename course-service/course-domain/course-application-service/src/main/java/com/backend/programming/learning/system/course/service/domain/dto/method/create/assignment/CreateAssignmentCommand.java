@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import com.backend.programming.learning.system.dataaccess.validator.EnumValidator;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 

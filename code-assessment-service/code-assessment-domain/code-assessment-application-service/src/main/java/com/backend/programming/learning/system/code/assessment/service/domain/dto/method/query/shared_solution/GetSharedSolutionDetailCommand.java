@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Getter
@@ -13,4 +13,11 @@ import java.util.UUID;
 public class GetSharedSolutionDetailCommand {
     @NotNull(message = "sharedSolutionId must not be null")
     UUID sharedSolutionId;
+
+    @NotNull(message = "userId must not be null")
+    UUID userId;
+
+    public void setSharedSolutionId(@NotNull(message = "sharedSolutionId must not be null") UUID sharedSolutionId) {
+        this.sharedSolutionId = sharedSolutionId;
+    }
 }

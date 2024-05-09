@@ -1,9 +1,10 @@
-package com.backend.programming.learning.system.code.assessment.service.dataaccess.shared_solution.entity;
+package com.backend.programming.learning.system.code.assessment.service.dataaccess.shared_solution.entity.tag;
 
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.shared_solution.entity.SharedSolutionEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.tag.entity.TagEntity;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity

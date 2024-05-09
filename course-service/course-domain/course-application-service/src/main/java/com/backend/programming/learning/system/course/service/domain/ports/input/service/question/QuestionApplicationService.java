@@ -9,7 +9,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QueryQuestionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.question.QuestionResponseEntity;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 /**
  * com.backend.programming.learning.system.ports.input.service.question

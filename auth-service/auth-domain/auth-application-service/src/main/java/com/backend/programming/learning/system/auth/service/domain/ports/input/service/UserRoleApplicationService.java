@@ -9,7 +9,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.up
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user_role.UpdateUserRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user_role.UserRoleEntityResponse;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 public interface UserRoleApplicationService {
     CreateUserRoleResponse createUserRole(@Valid CreateUserRoleCommand createUserRoleCommand);

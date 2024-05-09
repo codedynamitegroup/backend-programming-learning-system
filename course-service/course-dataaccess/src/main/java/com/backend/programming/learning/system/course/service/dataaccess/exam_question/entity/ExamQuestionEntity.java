@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.course.service.dataaccess.exam.en
 import com.backend.programming.learning.system.course.service.dataaccess.question.entity.QuestionEntity;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Objects;
 import java.util.UUID;
 

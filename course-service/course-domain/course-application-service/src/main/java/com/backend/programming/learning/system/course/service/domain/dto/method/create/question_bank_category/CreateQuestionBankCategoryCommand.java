@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.dto.method.create.question_bank_category;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 
 /**

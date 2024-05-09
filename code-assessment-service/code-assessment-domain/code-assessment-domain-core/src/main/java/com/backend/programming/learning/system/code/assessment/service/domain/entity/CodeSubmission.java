@@ -188,10 +188,6 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         this.codeSubmissionTestCaseList = codeSubmissionTestCaseList;
     }
 
-    public void increaseGradedTestCaseByOne() {
-        numOfTestCaseGraded += 1;
-    }
-
     public void updateAvgTimeAndMemoryAndGrade(Double avgTime, Double avgMemory, long numOfPassedTestCase) {
         runTime = avgTime;
         memory = avgMemory;

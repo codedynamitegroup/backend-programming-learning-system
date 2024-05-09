@@ -4,8 +4,8 @@ package com.backend.programming.learning.system.core.service.domain.dto.validato
 import com.backend.programming.learning.system.core.service.domain.dto.validator.implement.certificatecourse.UpdateCertificateCourseCommandStartTimeAndEndTimeValidatorImpl;
 import com.backend.programming.learning.system.core.service.domain.dto.validator.implement.contest.UpdateContestCommandStartTimeAndEndTimeValidatorImpl;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 import java.lang.annotation.*;
 
 @Documented

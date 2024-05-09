@@ -11,7 +11,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.submission_assignment.UpdateSubmissionAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.submission_assignment.UpdateSubmissionAssignmentResponse;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 public interface SubmissionAssignmentApplicationService {
 

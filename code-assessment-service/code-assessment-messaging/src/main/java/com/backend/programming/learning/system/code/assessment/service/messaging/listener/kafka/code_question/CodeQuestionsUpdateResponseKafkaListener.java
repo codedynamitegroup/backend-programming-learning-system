@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.code.assessment.service.messaging.listener.kafka;
+package com.backend.programming.learning.system.code.assessment.service.messaging.listener.kafka.code_question;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.message.codequestion.CodeQuestionsUpdateResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_question.CodeQuestionNotFoundException;
@@ -31,12 +31,12 @@ public class CodeQuestionsUpdateResponseKafkaListener
         this.codeQuestionMessagingDataMapper = codeQuestionMessagingDataMapper;
     }
 
-//    @Override
-//    @KafkaListener(id = "${kafka-consumer-config.create-code-question-consumer-group-id}",
-//    topics = "${code-assessment-service.code-question-update-response-from-core-service-topic-name}")
+    @Override
+    @KafkaListener(id = "${kafka-consumer-config.create-code-question-consumer-group-id}",
+    topics = "${code-assessment-service.code-question-update-response-from-core-service-topic-name}")
     public void receive(@Payload List<CodeQuestionUpdateResponseAvroModel> messages,
-                        @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) List<String> keys,
-                        @Header(KafkaHeaders.RECEIVED_PARTITION_ID) List<Integer> partitions,
+                        @Header(KafkaHeaders.RECEIVED_KEY) List<String> keys,
+                        @Header(KafkaHeaders.RECEIVED_PARTITION) List<Integer> partitions,
                         @Header(KafkaHeaders.OFFSET) List<Long> offsets) {
         log.info("{} number of customer create messages received with keys {}, partitions {} and offsets {}",
                 messages.size(),

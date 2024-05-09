@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.auth.service.domain.dto.method.query.role;
 
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
 
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.organization.OrganizationEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.role.RoleEntityResponse;

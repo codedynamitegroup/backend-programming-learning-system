@@ -6,7 +6,7 @@ import com.backend.programming.learning.system.domain.valueobject.QuestionDiffic
 import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;

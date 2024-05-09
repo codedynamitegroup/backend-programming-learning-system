@@ -11,7 +11,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.up
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.role.UpdateRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.role.RoleEntityResponse;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 public interface RoleApplicationService {
     CreateRoleResponse createRole(@Valid CreateRoleCommand createRoleCommand);

@@ -34,6 +34,7 @@ public class TestCaseController {
                 service.createTestCases(createTestCasesCommand);
         return ResponseEntity.ok(createCodeQuestionResponse);
     }
+
     @PutMapping
     public ResponseEntity<UpdateTestCaseResponse> updateTestCase
             (@RequestBody UpdateTestCaseCommand command){
@@ -42,6 +43,7 @@ public class TestCaseController {
                 service.updateTestCase(command);
         return ResponseEntity.ok(response);
     }
+
     @GetMapping
     public ResponseEntity<GetTestCasesByQuestionIdResponse> updateTestCase
             (@RequestParam(defaultValue = "0") Integer pageNo,
@@ -62,11 +64,10 @@ public class TestCaseController {
     }
 
     @PostMapping("/patch-delete")
-    public ResponseEntity<PatchDeleteTestCasesResponse> deleteTestCases
+    public ResponseEntity deleteTestCases
             (@RequestBody List<UUID> testCaseIds){
         PatchDeleteTestCasesCommand command = PatchDeleteTestCasesCommand.builder().testCaseIds(testCaseIds).build();
-        PatchDeleteTestCasesResponse response =
-                service.patchDeleteTestCases(command);
-        return ResponseEntity.ok(response);
+        service.patchDeleteTestCases(command);
+        return ResponseEntity.noContent().build();
     }
 }

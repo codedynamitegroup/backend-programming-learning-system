@@ -2,7 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.dto.method
 
 import lombok.Builder;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 

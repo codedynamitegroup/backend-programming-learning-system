@@ -2,11 +2,8 @@ package com.backend.programming.learning.system.dataaccess.validator;
 
 
 import com.backend.programming.learning.system.dataaccess.validator.implement.EnumValidatorImpl;
+import jakarta.validation.*;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
-import javax.validation.ReportAsSingleViolation;
-import javax.validation.constraints.NotNull;
 import java.lang.annotation.*;
 
 @Documented
