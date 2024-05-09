@@ -21,12 +21,12 @@ public class CourseDataAccessMapper {
     public CourseEntity courseToCourseEntity(Course course) {
         UserEntity createdBy = userDataAccessMapper.userToUserEntity(course.getCreatedBy());
         UserEntity updatedBy = userDataAccessMapper.userToUserEntity(course.getUpdatedBy());
-        CourseTypeEntity courseType = courseTypeDataAccessMapper.courseTypeToCourseTypeEntity(course.getCourseType());
+//        CourseTypeEntity courseType = courseTypeDataAccessMapper.courseTypeToCourseTypeEntity(course.getCourseType());
         return CourseEntity.builder()
                 .id(course.getId().getValue())
                 .courseIdMoodle(course.getCourseIdMoodle())
                 .name(course.getName())
-                .courseType(courseType)
+//                .courseType(courseType)
                 .visible(course.getVisible())
                 .createdBy(createdBy)
                 .updatedBy(updatedBy)
@@ -37,11 +37,11 @@ public class CourseDataAccessMapper {
     public Course courseEntityToCourse(CourseEntity courseEntity) {
         User createdBy = userDataAccessMapper.userEntityToUser(courseEntity.getCreatedBy());
         User updatedBy = userDataAccessMapper.userEntityToUser(courseEntity.getUpdatedBy());
-        CourseType courseType = courseTypeDataAccessMapper.courseTypeEntityToCourseType(courseEntity.getCourseType());
+//        CourseType courseType = courseTypeDataAccessMapper.courseTypeEntityToCourseType(courseEntity.getCourseType());
         Course response = Course.builder()
                 .name(courseEntity.getName())
                 .courseIdMoodle(courseEntity.getCourseIdMoodle())
-                .courseType(courseType)
+//                .courseType(courseType)
                 .visible(courseEntity.getVisible())
                 .createdBy(createdBy)
                 .updatedBy(updatedBy)

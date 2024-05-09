@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.ListCourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.ListSubmissionAssignmentModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionAssignmentModel;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionPlugin;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user_course.ListUserCourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user_course.UserCourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user.ListUserModel;
@@ -13,6 +14,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.mapper.moodle.MoodleDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.*;
+import com.backend.programming.learning.system.course.service.domain.valueobject.Type;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +35,8 @@ public class MoodleCommandHandler {
     private final CourseUserRepository courseUserRepository;
     private final AssignmentRepository assignmentRepository;
     private final SubmissionAssignmentRepository submissionAssignmentRepository;
+    private final SubmissionAssignmentFileRepository submissionAssignmentFileRepository;
+    private final SubmissionAssignmentOnlineTextRepository submissionAssignmentOnlineTextRepository;
     Map<String, Course> courseIdsMap = new HashMap<>();
 
     String GET_ASSIGNMENTS = "mod_assign_get_assignments";
@@ -58,8 +62,9 @@ public class MoodleCommandHandler {
     }
 
     @Transactional
-    public void syncAssignment()
+    public void createSection()
     {
+
 
 
 
@@ -172,7 +177,35 @@ public class MoodleCommandHandler {
                             if(submissionModel.getStatus().equals("submitted")) {
                                 SubmissionAssignment submissionCreate = moodleDataMapper.createSubmissionAssignment(assignmentCreate, user.get(), submissionModel);
                                 submissionAssignmentRepository.saveSubmissionAssignment(submissionCreate);
-
+                                SubmissionPlugin submissionPlugin = submissionModel.getPlugins().get(0);
+                                if(assignmentCreate.getType().equals(Type.FILE))
+                                {
+                                    SubmissionAssignmentFile submissionAssignmentFile = moodleDataMapper.
+                                            createSubmissionAssignmentFile(submissionCreate, submissionPlugin);
+                                    submissionAssignmentFileRepository.saveSubmissionAssignmentFile(submissionAssignmentFile);
+                                }
+                                else if(assignmentCreate.getType().equals(Type.TEXT_ONLINE)) {
+                                    SubmissionAssignmentOnlineText submissionAssignmentOnlineText = moodleDataMapper.
+                                            createSubmissionAssignmentOnlineText(submissionCreate, submissionPlugin);
+                                    submissionAssignmentOnlineTextRepository.saveAssignmentSubmissionOnlineText(submissionAssignmentOnlineText);
+                                }
+                                else {
+                                    for(SubmissionPlugin plugin: submissionModel.getPlugins())
+                                    {
+                                        if(plugin.getType().equals("file"))
+                                        {
+                                            SubmissionAssignmentFile submissionAssignmentFile = moodleDataMapper.
+                                                    createSubmissionAssignmentFile(submissionCreate, plugin);
+                                            submissionAssignmentFileRepository.saveSubmissionAssignmentFile(submissionAssignmentFile);
+                                        }
+                                        else if(plugin.getType().equals("onlinetext"))
+                                        {
+                                            SubmissionAssignmentOnlineText submissionAssignmentOnlineText = moodleDataMapper.
+                                                    createSubmissionAssignmentOnlineText(submissionCreate, plugin);
+                                            submissionAssignmentOnlineTextRepository.saveAssignmentSubmissionOnlineText(submissionAssignmentOnlineText);
+                                        }
+                                    }
+                                }
 
                             }
                         });

@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.CourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.Submission;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionAssignmentModel;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionPlugin;
 import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.valueobject.*;
 import org.springframework.stereotype.Component;
@@ -90,9 +91,11 @@ public class MoodleDataMapper {
                 .build();
     }
 
-    public SubmissionAssignmentFile createSubmissionAssignmentFile(SubmissionAssignment submissionAssignment, Submission submission) {
+    public SubmissionAssignmentFile createSubmissionAssignmentFile(SubmissionAssignment submissionAssignment, SubmissionPlugin plugin) {
         return SubmissionAssignmentFile.builder()
                 .id(new AssignmentSubmissionFileId(UUID.randomUUID()))
+                .assignmentSubmission(submissionAssignment)
+                .num_file(plugin.getFileareas().get(0).getFiles().size())
                 .build();
     }
     public CourseResponseEntity courseToCourseResponseEntity(Course course) {
@@ -102,6 +105,14 @@ public class MoodleDataMapper {
                 .visible(course.getVisible())
                 .createdAt(course.getCreatedAt())
                 .updatedAt(course.getUpdatedAt())
+                .build();
+    }
+
+    public SubmissionAssignmentOnlineText createSubmissionAssignmentOnlineText(SubmissionAssignment submissionCreate, SubmissionPlugin submissionPlugin) {
+        return SubmissionAssignmentOnlineText.builder()
+                .id(new SubmissionAssignmentOnlineTextId(UUID.randomUUID()))
+                .content(submissionPlugin.getEditorfields().get(0).getText())
+                .assignmentSubmission(submissionCreate)
                 .build();
     }
 }

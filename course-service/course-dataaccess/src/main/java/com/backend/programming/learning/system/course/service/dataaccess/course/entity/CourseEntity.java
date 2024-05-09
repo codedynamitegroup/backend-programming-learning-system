@@ -27,6 +27,7 @@ public class CourseEntity {
     @Column(name = "id")
     private UUID id;
 
+
     @OneToOne
     @JoinColumn(name = "org_id", referencedColumnName = "id")
     private OrganizationEntity organization;
