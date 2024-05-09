@@ -28,12 +28,15 @@ public class UserModel {
     String lastname;
     String fullname;
     String email;
+    String address;
+    String phone1;
     String department;
     Long firstaccess;
     Long lastaccess;
     Long lastcourseaccess;
     String description;
     Integer descriptionformat;
+    String city;
     String country;
     String profileimageurlsmall;
     String profileimageurl;

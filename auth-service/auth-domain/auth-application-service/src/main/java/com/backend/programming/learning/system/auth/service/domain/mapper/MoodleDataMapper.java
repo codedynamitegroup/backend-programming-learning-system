@@ -30,8 +30,8 @@ public class MoodleDataMapper {
                 .dob(user.getDob())
                 .firstName(userModel.getFirstname())
                 .lastName(userModel.getLastname())
-                .phone(user.getPhone())
-                .address(user.getAddress())
+                .phone(userModel.getPhone1())
+                .address(userModel.getAddress())
                 .avatarUrl(userModel.getProfileimageurl())
                 .build();
     }
@@ -62,10 +62,10 @@ public class MoodleDataMapper {
     public CreateUserCommand createUser(UserModel userModel) {
         return CreateUserCommand.builder()
                 .email(userModel.getEmail())
-                .password("123456")
+                .password("")
                 .firstName(userModel.getFirstname())
                 .lastName(userModel.getLastname())
-                .phone("")
+                .phone(userModel.getPhone1())
                 .build();
     }
 
