@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.gateway.service;
 
+import com.backend.programming.learning.system.gateway.service.config.GatewayServiceConfigData;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig;
 import io.github.resilience4j.timelimiter.TimeLimiterConfig;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +19,6 @@ import org.springframework.context.annotation.ComponentScan;
 import reactor.core.publisher.Mono;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
@@ -26,12 +26,18 @@ import java.time.ZonedDateTime;
 @SpringBootApplication
 @ComponentScan(basePackages = "com.backend.programming.learning.system")
 public class GatewayServiceApplication {
-	@Value("${server.port}")
-	private String serverPort;
+	private final GatewayServiceConfigData gatewayServiceConfigData;
+
+	public GatewayServiceApplication(GatewayServiceConfigData gatewayServiceConfigData) {
+		this.gatewayServiceConfigData = gatewayServiceConfigData;
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(GatewayServiceApplication.class, args);
 	}
+
+	@Value("${server.port}")
+	private String serverPort;
 
 	@Bean
 	public RouteLocator gatewayServiceRouteConfig(RouteLocatorBuilder routeLocatorBuilder) {
@@ -82,12 +88,34 @@ public class GatewayServiceApplication {
 				.build();
 	}
 
+//	@Bean
+//	public Customizer<ReactiveResilience4JCircuitBreakerFactory> defaultCustomizer() {
+//		return factory -> factory.configureDefault(id -> new Resilience4JConfigBuilder(id)
+//				.circuitBreakerConfig(CircuitBreakerConfig.ofDefaults())
+//				.timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(10))
+//						.build()).build());
+//	}
+
 	@Bean
-	public Customizer<ReactiveResilience4JCircuitBreakerFactory> defaultCustomizer() {
-		return factory -> factory.configureDefault(id -> new Resilience4JConfigBuilder(id)
-				.circuitBreakerConfig(CircuitBreakerConfig.ofDefaults())
-				.timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(10))
-						.build()).build());
+	Customizer<ReactiveResilience4JCircuitBreakerFactory> circuitBreakerFactoryCustomizer() {
+		return reactiveResilience4JCircuitBreakerFactory ->
+				reactiveResilience4JCircuitBreakerFactory.configureDefault(id -> new Resilience4JConfigBuilder(id)
+						.timeLimiterConfig(TimeLimiterConfig.custom()
+								.timeoutDuration(Duration.ofMillis(gatewayServiceConfigData.getTimeoutMs()))
+								.build())
+						.circuitBreakerConfig(CircuitBreakerConfig.custom()
+								.failureRateThreshold(gatewayServiceConfigData.getFailureRateThreshold())
+								.slowCallRateThreshold(gatewayServiceConfigData.getSlowCallRateThreshold())
+								.slowCallDurationThreshold(Duration.ofMillis(gatewayServiceConfigData
+										.getSlowCallDurationThreshold()))
+								.permittedNumberOfCallsInHalfOpenState(gatewayServiceConfigData
+										.getPermittedNumOfCallsInHalfOpenState())
+								.slidingWindowSize(gatewayServiceConfigData.getSlidingWindowSize())
+								.minimumNumberOfCalls(gatewayServiceConfigData.getMinNumberOfCalls())
+								.waitDurationInOpenState(Duration.ofMillis(gatewayServiceConfigData
+										.getWaitDurationInOpenState()))
+								.build())
+						.build());
 	}
 
 	@Bean
@@ -100,4 +128,5 @@ public class GatewayServiceApplication {
 		return exchange -> Mono.justOrEmpty(exchange.getRequest().getHeaders().getFirst("user"))
 				.defaultIfEmpty("anonymous");
 	}
+
 }
