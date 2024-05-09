@@ -14,11 +14,20 @@ eureka:
 spring:
   application:
     name: gateway-service
-  profiles:
-    active: gateway
   config:
     import: "optional:configserver:${CONFIG_SERVER:http://localhost:9999}"
   cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
     config:
       username: spring_cloud_user
       password: springCloud_Pwd!
+  data:
+    redis:
+      connect-timeout: 2s
+      host: ${REDIS_HOST:localhost}
+      port: 6379
+      timeout: 1s
