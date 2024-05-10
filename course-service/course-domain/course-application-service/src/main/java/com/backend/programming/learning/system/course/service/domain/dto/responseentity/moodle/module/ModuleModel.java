@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.module;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ModuleModel {
     private String id;
     private String url;

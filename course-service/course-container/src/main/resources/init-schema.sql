@@ -205,9 +205,8 @@ DROP TABLE IF EXISTS "public".section CASCADE;
 CREATE TABLE "public".section
 (
     id          uuid    DEFAULT gen_random_uuid() NOT NULL,
-    cmid integer,
     course_id uuid,
-    name        text UNIQUE,
+    name        text,
     visible integer,
     CONSTRAINT section_pkey PRIMARY KEY (id),
 	CONSTRAINT section_course_id_fkey FOREIGN KEY (course_id)
@@ -220,8 +219,9 @@ DROP TABLE IF EXISTS "public".module CASCADE;
 CREATE TABLE "public".module
 (
     id          uuid    DEFAULT gen_random_uuid() NOT NULL,
+    cmid integer,
     section_id uuid,
-    name        text UNIQUE,
+    name        text,
     visible integer,
     time_open TIMESTAMP WITH TIME zone,
     time_close TIMESTAMP WITH TIME zone,

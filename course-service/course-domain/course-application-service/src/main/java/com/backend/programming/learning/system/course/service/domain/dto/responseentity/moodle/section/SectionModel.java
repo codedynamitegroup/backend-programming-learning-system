@@ -1,5 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.section;
 
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.module.ModuleModel;
+import com.backend.programming.learning.system.course.service.domain.entity.Module;
 import lombok.*;
 
 import java.util.List;
@@ -19,5 +21,5 @@ public class SectionModel {
     private String section;
     private String hiddenbynumsections;
     private Boolean uservisible;
-//    private List<SectionModule> modules;
+    private List<ModuleModel> modules;
 }

@@ -3,11 +3,13 @@ package com.backend.programming.learning.system.course.service.domain.mapper.moo
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.CourseResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.AssignmentModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.CourseModel;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.module.ModuleModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.section.SectionModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.Submission;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionAssignmentModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionPlugin;
 import com.backend.programming.learning.system.course.service.domain.entity.*;
+import com.backend.programming.learning.system.course.service.domain.entity.Module;
 import com.backend.programming.learning.system.course.service.domain.valueobject.*;
 import org.springframework.stereotype.Component;
 
@@ -120,9 +122,30 @@ public class MoodleDataMapper {
     public Section createSection(Course course, SectionModel sectionModel) {
         return Section.builder()
                 .id(new SectionId(UUID.randomUUID()))
-
-//                .name(sectionModel.getName())
-//                .visible(sectionModel.getVisible()==1)
+                .name(sectionModel.getName())
+                .visible(sectionModel.getVisible())
+                .course(course)
                 .build();
+    }
+
+    public Module createModule(Section section, ModuleModel module) {
+        ZonedDateTime timeOpen=null;
+        ZonedDateTime timeClose=null;
+        if(module.getDates().size()!=0)
+        {
+            timeOpen=Instant.ofEpochSecond(module.getDates().get(0).getTimestamp()).atZone(ZoneId.of("UTC"));
+            timeClose=Instant.ofEpochSecond(module.getDates().get(1).getTimestamp()).atZone(ZoneId.of("UTC"));
+
+        }
+        return Module.builder()
+                .id(new ModuleId(UUID.randomUUID()))
+                .cmid(Integer.valueOf(module.getId()))
+                .section(section)
+                .name(module.getName())
+                .visible(module.getVisible())
+                .timeOpen(timeOpen)
+                .timeClose(timeClose)
+                .build();
+
     }
 }

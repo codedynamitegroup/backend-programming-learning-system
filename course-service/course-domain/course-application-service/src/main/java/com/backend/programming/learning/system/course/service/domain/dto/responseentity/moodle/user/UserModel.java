@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 /**
@@ -14,6 +15,7 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserModel {
     String id;
     String username;
