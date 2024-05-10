@@ -72,6 +72,12 @@ public class CourseDomainServiceImpl implements CourseDomainService {
     }
 
     @Override
+    public void createCourseUser(CourseUser courseUser) {
+        courseUser.initializeCourseUser();
+        log.info("CourseUser with id: {} is initiated", courseUser.getId().getValue());
+    }
+
+    @Override
     public void createExamQuestions(List<ExamQuestion> examQuestions) {
         examQuestions.forEach(ExamQuestion::initializeExamQuestion);
         log.info("ExamQuestion is initiated");

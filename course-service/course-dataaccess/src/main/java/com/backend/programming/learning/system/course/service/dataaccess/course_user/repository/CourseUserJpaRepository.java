@@ -12,4 +12,5 @@ public interface CourseUserJpaRepository extends JpaRepository<CourseUserEntity,
     Optional<CourseUserEntity> findById(UUID id);
 
     void deleteByCourseIdAndUserIdIn(UUID courseId, List<UUID> userIds);
+    void deleteByCourseIdAndUserId(UUID courseId, UUID userIds);
 }

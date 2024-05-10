@@ -7,10 +7,10 @@ import com.backend.programming.learning.system.course.service.domain.exception.O
 import com.backend.programming.learning.system.course.service.domain.implement.service.course.CourseCreateHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.course.CourseDeleteHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.course.CourseUpdateHelper;
-import com.backend.programming.learning.system.course.service.domain.implement.service.listener.user.UserRequestHelper;
+import com.backend.programming.learning.system.course.service.domain.implement.service.course_user.CourseUserCreateHelper;
+import com.backend.programming.learning.system.course.service.domain.implement.service.course_user.CourseUserDeleteHelper;
 import com.backend.programming.learning.system.course.service.domain.mapper.webhook.WebhookDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.OrganizationRepository;
-import com.backend.programming.learning.system.domain.valueobject.WebhookEventName;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -20,26 +20,27 @@ import java.util.Optional;
 @Slf4j
 public class WebhookHelper {
     private final WebhookDataMapper webhookDataMapper;
-    //    private final WebhookApiFunctionRepository webhookApiFunctionRepository;
-    private final UserRequestHelper userRequestHelper;
     private final OrganizationRepository organizationRepository;
     private final CourseCreateHelper courseCreateHelper;
     private final CourseUpdateHelper courseUpdateHelper;
     private final CourseDeleteHelper courseDeleteHelper;
+    private final CourseUserCreateHelper courseUserCreateHelper;
+    private final CourseUserDeleteHelper courseUserDeleteHelper;
 
 
     public WebhookHelper(
             WebhookDataMapper webhookDataMapper,
-            UserRequestHelper userRequestHelper,
             OrganizationRepository organizationRepository,
             CourseCreateHelper courseCreateHelper,
-            CourseUpdateHelper courseUpdateHelper, CourseDeleteHelper courseDeleteHelper) {
+            CourseUpdateHelper courseUpdateHelper, CourseDeleteHelper courseDeleteHelper,
+            CourseUserCreateHelper courseUserCreateHelper, CourseUserDeleteHelper courseUserDeleteHelper) {
         this.webhookDataMapper = webhookDataMapper;
-        this.userRequestHelper = userRequestHelper;
         this.organizationRepository = organizationRepository;
         this.courseCreateHelper = courseCreateHelper;
         this.courseUpdateHelper = courseUpdateHelper;
         this.courseDeleteHelper = courseDeleteHelper;
+        this.courseUserCreateHelper = courseUserCreateHelper;
+        this.courseUserDeleteHelper = courseUserDeleteHelper;
     }
 
     public void processWebhook(WebhookCommand webhookCommand) {
@@ -75,6 +76,12 @@ public class WebhookHelper {
             case COURSE_MODULE_DELETED:
                 break;
             case USER_ENROLLMENT_CREATED:
+                enrollUserToCourse(webhookMessage);
+                break;
+            case USER_ENROLLMENT_DELETED:
+                unenrollUserToCourse(webhookMessage);
+                break;
+            case USER_ENROLLMENT_UPDATED:
                 break;
             case ROLE_ASSIGNED:
                 break;
@@ -87,22 +94,25 @@ public class WebhookHelper {
             default:
                 log.info("Event not found: {}", webhookMessage.getEventName());
         }
-
-
-//        log.info("Webhook host organization: {}", organization.getName());
     }
 
     private void updateCourse(WebhookMessage webhookMessage) {
         courseUpdateHelper.updateCourse(webhookMessage);
     }
-
     private void createCourse(WebhookMessage webhookMessage, Organization organization) {
         courseCreateHelper.createCourse(webhookMessage, organization);
     }
-
     private void deleteCourse(WebhookMessage webhookMessage) {
         courseDeleteHelper.deleteCourse(Integer.valueOf(webhookMessage.getCourseId()));
     }
+
+    private void enrollUserToCourse(WebhookMessage webhookMessage) {
+        courseUserCreateHelper.enrollUserToCourse(webhookMessage);
+    }
+    private void unenrollUserToCourse(WebhookMessage webhookMessage) {
+        courseUserDeleteHelper.unenrollUserToCourse(webhookMessage);
+    }
+
 
     private Organization findOrganization(String moodleUrl) {
         Optional<Organization> organization = organizationRepository.findOrganizationByMoodleUrl(moodleUrl);

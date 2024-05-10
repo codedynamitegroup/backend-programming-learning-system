@@ -18,6 +18,8 @@ public enum WebhookEventName {
     USER_DELETED("\\core\\event\\user_deleted"),
 
     USER_ENROLLMENT_CREATED("\\core\\event\\user_enrolment_created"),
+    USER_ENROLLMENT_UPDATED("\\core\\event\\user_enrolment_updated"),
+    USER_ENROLLMENT_DELETED("\\core\\event\\user_enrolment_deleted"),
 
     ROLE_ASSIGNED("\\core\\event\\role_assigned"),
 
