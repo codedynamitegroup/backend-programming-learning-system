@@ -18,4 +18,6 @@ public interface OrganizationRepository {
     void deleteOrganizationById(UUID organizationId);
 
     Optional<Organization> findOrganizationByName(String name);
+
+    Optional<Organization> findOrganizationByMoodleUrl(String moodleUrl);
 }

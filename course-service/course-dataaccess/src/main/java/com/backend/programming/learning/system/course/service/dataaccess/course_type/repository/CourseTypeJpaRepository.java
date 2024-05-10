@@ -22,5 +22,5 @@ public interface CourseTypeJpaRepository extends JpaRepository<CourseTypeEntity,
              WHERE c.name LIKE %:search%
              """)
     Page<CourseTypeEntity> findAll(String search, Pageable pageable);
-
+    Optional<CourseTypeEntity> findByMoodleId(Integer moodleId);
 }

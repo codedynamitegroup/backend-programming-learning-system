@@ -15,4 +15,5 @@ public interface OrganizationJpaRepository extends JpaRepository<OrganizationEnt
     List<OrganizationEntity> findAll();
 
     Optional<OrganizationEntity> findOrganizationByName(String name);
+    Optional<OrganizationEntity> findByMoodleUrl(String moodleUrl);
 }

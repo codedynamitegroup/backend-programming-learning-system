@@ -53,4 +53,10 @@ public class CourseTypeRepositoryImpl implements CourseTypeRepository {
     public List<CourseType> findAll() {
         return courseTypeDataAccessMapper.courseTypeEntityListToCourseTypeList(courseJpaRepository.findAll());
     }
+
+    @Override
+    public Optional<CourseType> findByMoodleId(Integer moodleId) {
+        return courseJpaRepository.findByMoodleId(moodleId)
+                .map(courseTypeDataAccessMapper::courseTypeEntityToCourseType);
+    }
 }

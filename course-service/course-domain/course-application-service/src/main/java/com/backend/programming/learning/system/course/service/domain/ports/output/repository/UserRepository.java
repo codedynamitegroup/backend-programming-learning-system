@@ -16,4 +16,5 @@ public interface UserRepository {
     Optional<User> findByUserIdMoodle(Integer userIdMoodle);
 
     List<User> findAll();
+
 }

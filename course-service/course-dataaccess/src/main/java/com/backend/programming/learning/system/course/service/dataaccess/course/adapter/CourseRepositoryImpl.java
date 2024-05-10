@@ -62,4 +62,10 @@ public class CourseRepositoryImpl implements CourseRepository {
     public void deleteById(UUID courseId) {
         courseJpaRepository.deleteById(courseId);
     }
+
+    @Override
+    public void deleteByMoodleId(Integer courseMoodleId) {
+        courseJpaRepository.findByCourseIdMoodle(courseMoodleId)
+                .ifPresent(courseJpaRepository::delete);
+    }
 }
