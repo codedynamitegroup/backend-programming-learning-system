@@ -16,7 +16,7 @@ public class UpdateTestCaseCommand {
 
     private final String outputData;
 
-    private final boolean isSample;
+    private final Boolean isSample;
 
     @Positive(message = "score must be positive")
     private final Double score;

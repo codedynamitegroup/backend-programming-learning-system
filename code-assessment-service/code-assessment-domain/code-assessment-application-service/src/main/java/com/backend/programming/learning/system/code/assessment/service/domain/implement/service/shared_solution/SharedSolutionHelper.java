@@ -21,14 +21,12 @@ import com.backend.programming.learning.system.code.assessment.service.domain.po
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.SharedSolutionId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.shared_solution_vote.SharedSolutionVoteId;
-import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import jakarta.transaction.Transactional;
 import java.util.List;
-import java.util.UUID;
 
 @Component
 public class SharedSolutionHelper {
@@ -69,7 +67,7 @@ public class SharedSolutionHelper {
     @Transactional
     public Page<SharedSolution> getSharedSolutionsByCodeQuestionId(GetSharedSolutionByCodeQuestionIdCommand command) {
         CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(command.getCodeQuestionId());
-        List<TagId> tagIds = command.getTagIds() == null? null: command.getTagIds().stream().map(tagDataMapper::UUIDToTagId).toList();
+        List<TagId> tagIds = command.getFilterTagIds() == null? null: command.getFilterTagIds().stream().map(tagDataMapper::UUIDToTagId).toList();
         return sharedSolutionRepository.findByCodeQuestionId(
                 codeQuestion.getId(),
                 command.getPageNum(),
@@ -113,9 +111,9 @@ public class SharedSolutionHelper {
         }
         SharedSolution sharedSolution = sharedSolutionDataMapper.updateSharedSolutionCommandToSharedSolution(command);
 
-        genericHelper.mapNullAttributeToRepositoryAttribute(sharedSolution, sharedSolutionRepo, SharedSolution.class);
+        genericHelper.mapRepositoryAttributeToUpdateAttribute(sharedSolutionRepo, sharedSolution, SharedSolution.class);
 
-        sharedSolutionRepository.save(sharedSolution);
+        sharedSolutionRepository.save(sharedSolutionRepo);
 
     }
 

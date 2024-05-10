@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.UUID;
 
 public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
-    private CodeQuestion codeQuestion;
-    private UserId userId;
-    private ProgrammingLanguageId languageId;
+    private final CodeQuestion codeQuestion;
+    private final UserId userId;
+    private final ProgrammingLanguageId languageId;
     private Double grade;
     private Double runTime;
     private Double memory;
@@ -160,12 +160,11 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         return sonaqueAssessment;
     }
 
-    public void initiate(CodeQuestion codeQuestion, List<TestCase> testCases, ProgrammingLanguageCodeQuestion plcq) {
+    public void initiate(List<TestCase> testCases, ProgrammingLanguageCodeQuestion plcq) {
         codeSubmissionTestCaseList =
                 testCases.stream().map(this::initiateCodeSubmissionTestCase)
                         .toList();
 
-        this.codeQuestion = codeQuestion;
         setId(new CodeSubmissionId(UUID.randomUUID()));
         gradingStatus = GradingStatus.GRADING;
         numOfTestCase = codeSubmissionTestCaseList.size();

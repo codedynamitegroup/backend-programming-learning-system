@@ -10,12 +10,12 @@ import java.util.UUID;
 
 public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     private final QuestionId questionId;
-    private final String name;
+    private String name;
     private final String dslTemplate;
-    private final String problemStatement;
-    private final String inputFormat;
-    private final String outputFormat;
-    private final String constraints;
+    private String problemStatement;
+    private String inputFormat;
+    private String outputFormat;
+    private String constraints;
     private CopyState copyState;
     private Float maxGrade;
     private List<String> failureMessages;

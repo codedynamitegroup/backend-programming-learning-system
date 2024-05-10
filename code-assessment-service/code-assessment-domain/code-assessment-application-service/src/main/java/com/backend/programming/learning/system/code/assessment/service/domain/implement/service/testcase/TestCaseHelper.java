@@ -84,10 +84,12 @@ public class TestCaseHelper {
     public UpdateTestCaseResponse updateTestCase(UpdateTestCaseCommand command) {
         TestCase testCase = testCaseDataMapper.updateTestCaseCommandToTestCase(command);
         TestCase testCaseExist = checkIfTestCaseExist(command.getId());
+        log.info("tc sample {} {}", testCase.getIsSample(), testCaseExist.getIsSample());
 
-        genericHelper.mapNullAttributeToRepositoryAttribute(testCase, testCaseExist, TestCase.class);
+        genericHelper.mapRepositoryAttributeToUpdateAttribute(testCaseExist, testCase, TestCase.class);
 
-        testCaseRepository.save(testCase);
+        testCaseRepository.save(testCaseExist);
+        log.info("tc sample {} {}", testCase.getIsSample(), testCaseExist.getIsSample());
         return UpdateTestCaseResponse.builder().message("update successfully").build();
     }
 

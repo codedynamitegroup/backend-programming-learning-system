@@ -59,16 +59,18 @@ public class CodeSubmissionHelper {
     }
     @Transactional
     public CodeSubmission initAndSaveCodeSubmission(CreateCodeSubmissionCommand createCodeSubmissionCommand){
-        CodeSubmission codeSubmission = codeSubmissionDataMapper.createCodeSubmissionCommandToCodeSubmission(createCodeSubmissionCommand);
-
         validateHelper.validateUser(createCodeSubmissionCommand.getUserId());
+
         CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(createCodeSubmissionCommand.getCodeQuestionId());
+        CodeSubmission codeSubmission = codeSubmissionDataMapper.createCodeSubmissionCommandToCodeSubmission(createCodeSubmissionCommand, codeQuestion);
+
+
         ProgrammingLangauge programmingLangauge = validateHelper.validateLanguage(createCodeSubmissionCommand.getLanguageId(), createCodeSubmissionCommand.getCodeQuestionId());
         ProgrammingLanguageCodeQuestion plcq =
                 validateHelper.validateProgrammingLanguageCodeQuestion(createCodeSubmissionCommand.getLanguageId(), createCodeSubmissionCommand.getCodeQuestionId());
 
         List<TestCase> testCases =  validateHelper.validateTestCasesByCodeQuestionId(createCodeSubmissionCommand.getCodeQuestionId());
-        codeAssessmentDomainService.initiateCodeSubmission(codeSubmission, codeQuestion, testCases, plcq, programmingLangauge);
+        codeAssessmentDomainService.initiateCodeSubmission(codeSubmission, testCases, plcq, programmingLangauge);
 
         codeSubmissionRepository.save(codeSubmission);
         codeSubmissionTestCaseRepository.save(codeSubmission.getCodeSubmissionTestCaseList());
@@ -84,9 +86,10 @@ public class CodeSubmissionHelper {
         Optional<CodeSubmissionTestCase> cstcExist = codeSubmissionTestCaseRepository.findByToken(command.getToken());
 
         if(cstcExist.isPresent()){
-            genericHelper.mapNullAttributeToRepositoryAttribute(cstc, cstcExist.get(), CodeSubmissionTestCase.class);
+            CodeSubmissionTestCase cstcRepo = cstcExist.get();
+            genericHelper.mapRepositoryAttributeToUpdateAttribute(cstcRepo , cstc, CodeSubmissionTestCase.class);
 //            log.info("jfdk {}", cstc.getCodeSubmission().toString());
-            codeSubmissionTestCaseRepository.save(cstc);
+            codeSubmissionTestCaseRepository.save(cstcRepo);
         }
         return cstc;
     }

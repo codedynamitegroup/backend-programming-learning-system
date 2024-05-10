@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class TestCase extends AggregateRoot<TestCaseId> {
-    private CodeQuestionId codeQuestionId;
+    private final CodeQuestionId codeQuestionId;
     private String inputData;
     private String outputData;
     private Boolean isSample;
@@ -43,15 +43,10 @@ public class TestCase extends AggregateRoot<TestCaseId> {
         return outputData;
     }
 
-    public boolean getIsSample() {
+    public Boolean getIsSample() {
         return isSample;
     }
 
-    void initializeTestCase(CodeQuestionId codeQuestionId, TestCaseId testCaseId) {
-        this.codeQuestionId = codeQuestionId;
-        super.setId(testCaseId);
-
-    }
     public static Builder builder() {
         return new Builder();
     }

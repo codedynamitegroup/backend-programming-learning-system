@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.UUID;
 
 public class SharedSolution extends AggregateRoot<SharedSolutionId> {
-    private CodeQuestionId codeQuestionId;
-    private User user;
+    private final CodeQuestionId codeQuestionId;
+    private final User user;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
     private Vote youVote;

@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetCodeSubmissionResponseItem;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_submission.UpdateCodeSubmissionTestCaseCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmissionTestCase;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.ProgrammingLanguageId;
@@ -28,10 +29,11 @@ public class CodeSubmissionDataMapper {
                 .build();
     }
 
-    public CodeSubmission createCodeSubmissionCommandToCodeSubmission(CreateCodeSubmissionCommand createCodeSubmissionCommand) {
+    public CodeSubmission createCodeSubmissionCommandToCodeSubmission(CreateCodeSubmissionCommand createCodeSubmissionCommand, CodeQuestion codeQuestion) {
         return CodeSubmission.builder()
                 .languageId(new ProgrammingLanguageId(createCodeSubmissionCommand.getLanguageId()))
                 .userId(new UserId(createCodeSubmissionCommand.getUserId()))
+                .codeQuestion(codeQuestion)
                 .sourceCode(createCodeSubmissionCommand.getSourceCode())
                 .build();
     }
