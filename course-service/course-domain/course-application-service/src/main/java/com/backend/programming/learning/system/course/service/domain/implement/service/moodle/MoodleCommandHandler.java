@@ -64,27 +64,25 @@ public class MoodleCommandHandler {
     @Transactional
     public String syncCourse() {
 
-        List<CourseResponseEntity> result = new ArrayList<>();
         List<CourseResponseEntity> allCourse = getAllCourse();
-        result.addAll(allCourse);
         createCourseUser();
-        createSection();
         return "Sync course success";
     }
 
     @Transactional
     public void createSection()
     {
-        Page<Course> allCourse = courseRepository.findAll("",0,1000);
-        for (Course course : allCourse.getContent()) {
-            if(course.getCourseIdMoodle() == null)
+        for (Map.Entry<String, Course> entry : courseIdsMap.entrySet()) {
+            String courseId = entry.getKey();
+            Course course = entry.getValue();
+            if(course.getCourseIdMoodle() == null||course.getName().equals("code dynamite"))
                 continue;
             List<SectionModel> allSection = getAllSection(course.getCourseIdMoodle().toString());
             if (allSection.isEmpty()) {
                 continue;
             }
 
-            allSection.parallelStream().forEach(sectionModel -> {
+            allSection.forEach(sectionModel -> {
                 Section section = moodleDataMapper.createSection(course, sectionModel);
                 sectionRepository.save(section);
                 // create module
@@ -269,6 +267,8 @@ public class MoodleCommandHandler {
         });
 
         createAssignment();
+        createSection();
+
 
 
         courseIdsMap.values().forEach(course -> result.add(moodleDataMapper.courseToCourseResponseEntity(course)));

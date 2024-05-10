@@ -124,7 +124,7 @@ public class MoodleDataMapper {
                 .id(new SectionId(UUID.randomUUID()))
                 .name(sectionModel.getName())
                 .visible(sectionModel.getVisible())
-                .course(course)
+                .courseId(course.getId())
                 .build();
     }
 
