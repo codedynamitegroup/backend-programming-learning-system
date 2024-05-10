@@ -18,7 +18,7 @@ spring:
           uri: https://github.com/6BrosT/config-server-repository.git
           skip-ssl-validation: true
           default-label: main
-#          force-pull: true
+          force-pull: true
           clone-on-start: true
       fail-fast: true
   security:
@@ -29,14 +29,17 @@ spring:
 management:
   endpoints:
     web:
-      base-path: /actuator
-      exposure.include: health, prometheus
-      path-mapping.prometheus: metrics
+      exposure:
+        include: "*"
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
   endpoint:
     health:
-      show-details: always
-    prometheus:
-      cache.time-to-live: 1ms
-
-log:
-  app-name: config-server
+      probes:
+        enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
