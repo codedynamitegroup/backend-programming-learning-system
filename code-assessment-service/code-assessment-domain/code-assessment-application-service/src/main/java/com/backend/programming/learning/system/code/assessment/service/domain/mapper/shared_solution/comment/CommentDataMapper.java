@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.m
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.DtoMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment.CreateCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment.CreateCommentResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.comment.UpdateCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Comment;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.User;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.CommentId;
@@ -30,6 +31,12 @@ public class CommentDataMapper {
         return CreateCommentResponse.builder()
                 .comment(dtoMapper.commentToCommentDto(comment))
                 .user(dtoMapper.userToUserDto(comment.getUser()))
+                .build();
+    }
+
+    public Comment updateCommentCommandToComment(UpdateCommentCommand command) {
+        return Comment.builder()
+                .content(command.getContent())
                 .build();
     }
 }

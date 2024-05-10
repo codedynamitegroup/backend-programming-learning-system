@@ -14,6 +14,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.UpdateSharedSolutionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.comment.UpdateCommentCommand;
 import jakarta.validation.Valid;
 import java.util.List;
 
@@ -33,4 +34,6 @@ public interface SharedSolutionApplicationService {
     void deleteSharedSolution(@Valid DeleteSharedSolutionCommad command);
 
     CreateCommentResponse createComment(@Valid CreateCommentCommand command);
+
+    void updateComment(@Valid UpdateCommentCommand command);
 }

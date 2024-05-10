@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.code.assessment.service.dataacces
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.user.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Formula;
 
 import java.time.ZonedDateTime;
 import java.util.Objects;
@@ -34,10 +35,21 @@ public class CommentEntity {
     CommentEntity replyComment;
 
     Integer replyLevel;
-
     String content;
-
     ZonedDateTime createdAt;
+
+    @Basic(fetch = FetchType.LAZY)
+    @Formula("""
+            COALESCE((SELECT COUNT(*) FROM vote_comment vce WHERE vce.comment_id = id AND vce.vote_type = 'UPVOTE'), 0)
+            - COALESCE((SELECT COUNT(*) FROM vote_comment vce WHERE vce.comment_id = id AND vce.vote_type = 'DOWNVOTE'), 0)
+            """)
+    Integer totalVote;
+
+    @Basic(fetch = FetchType.LAZY)
+    @Formula("""
+             coalesce((select count(*) from comment ce where ce.reply_id = id), 0)
+             """)
+    Integer numOfReply;
 
     @Override
     public boolean equals(Object o) {

@@ -16,6 +16,8 @@ public class Comment extends BaseEntity<CommentId> {
     private CommentId replyId;
     private Integer replyLevel;
     private ZonedDateTime createdAt;
+    private Integer numOfReply;
+    private Integer totalVote;
 
     public SharedSolutionId getSharedSolutionId() {
         return sharedSolutionId;
@@ -41,6 +43,14 @@ public class Comment extends BaseEntity<CommentId> {
         return createdAt;
     }
 
+    public Integer getNumOfReply() {
+        return numOfReply;
+    }
+
+    public Integer getTotalVote() {
+        return totalVote;
+    }
+
     private Comment(Builder builder) {
         super.setId(builder.id);
         sharedSolutionId = builder.sharedSolutionId;
@@ -49,6 +59,8 @@ public class Comment extends BaseEntity<CommentId> {
         replyId = builder.replyId;
         replyLevel = builder.replyLevel;
         createdAt = builder.createdAt;
+        numOfReply = builder.numOfReply;
+        totalVote = builder.totalVote;
     }
 
     public static Builder builder() {
@@ -64,13 +76,15 @@ public class Comment extends BaseEntity<CommentId> {
 
 
     public static final class Builder {
-        private CommentId id;
         private SharedSolutionId sharedSolutionId;
         private User user;
         private String content;
         private CommentId replyId;
         private Integer replyLevel;
         private ZonedDateTime createdAt;
+        private Integer numOfReply;
+        private Integer totalVote;
+        private CommentId id;
 
         private Builder() {
         }
@@ -107,6 +121,16 @@ public class Comment extends BaseEntity<CommentId> {
 
         public Builder createdAt(ZonedDateTime val) {
             createdAt = val;
+            return this;
+        }
+
+        public Builder numOfReply(Integer val) {
+            numOfReply = val;
+            return this;
+        }
+
+        public Builder totalVote(Integer val) {
+            totalVote = val;
             return this;
         }
 

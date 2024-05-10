@@ -2,8 +2,10 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 
 import com.backend.programming.learning.system.code.assessment.service.domain.CodeAssessmentDomainService;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment.CreateCommentCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.comment.UpdateCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Comment;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.User;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.GenericHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.ValidateHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.shared_solution.comment.CommentDataMapper;
@@ -40,5 +42,21 @@ public class CommentHelper {
 
         return commentRepository.save(comment);
 
+    }
+
+    public void updateComment(UpdateCommentCommand command) {
+        User user = validateHelper.validateUser(command.getUserId());
+
+        validateHelper.validateSharedSolution(command.getSharedSolutionId());
+
+        Comment comment = validateHelper.validateComment(command.getCommentId());
+
+        if(!comment.getUser().equals(user))
+            throw new CodeAssessmentDomainException("User " + command.getUserId() + "does not own comment " + command.getCommentId());
+
+        Comment updatedComment = commentDataMapper.updateCommentCommandToComment(command);
+        genericHelper.mapRepositoryAttributeToUpdateAttribute(comment, updatedComment, Comment.class);
+
+        commentRepository.save(comment);
     }
 }

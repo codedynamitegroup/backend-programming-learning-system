@@ -14,6 +14,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionResponseItem;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.UpdateSharedSolutionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.comment.UpdateCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.SharedSolutionApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -95,6 +96,7 @@ public class SharedSolutionController {
 
 
     //comment
+    //comment reply
     @PostMapping("/{shared-solution-id}/comment")
     public ResponseEntity<CreateCommentResponse> createComment(
             @PathVariable("shared-solution-id") UUID sharedSolutionId,
@@ -104,9 +106,18 @@ public class SharedSolutionController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    //edit
+    @PutMapping("/{shared-solution-id}/comment/{comment-id}")
+    public ResponseEntity updateComment(
+            @PathVariable("shared-solution-id") UUID sharedSolutionId,
+            @PathVariable("comment-id") UUID commentId,
+            @RequestBody UpdateCommentCommand command){
+        command.setCommentId(commentId);
+        command.setSharedSolutionId(sharedSolutionId);
+        service.updateComment(command);
+        return ResponseEntity.noContent().build();
 
-    //reply
-
+    }
 
 
 

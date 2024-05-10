@@ -13,6 +13,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionResponseItem;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.UpdateSharedSolutionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.comment.UpdateCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.shared_solution.comment.CommentHandler;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.SharedSolutionApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -71,5 +72,10 @@ public class SharedSolutionApplicationServiceImpl implements SharedSolutionAppli
     @Override
     public CreateCommentResponse createComment(CreateCommentCommand command) {
         return commentHandler.createComment(command);
+    }
+
+    @Override
+    public void updateComment(UpdateCommentCommand command) {
+        commentHandler.updateComment(command);
     }
 }

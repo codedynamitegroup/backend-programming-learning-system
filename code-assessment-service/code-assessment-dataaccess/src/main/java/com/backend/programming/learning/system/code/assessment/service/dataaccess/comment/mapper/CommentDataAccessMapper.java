@@ -41,7 +41,7 @@ public class CommentDataAccessMapper {
                 .replyComment(
                         comment.getReplyId() != null?
                         CommentEntity.builder()
-                        .id(comment.getId().getValue())
+                        .id(comment.getReplyId().getValue())
                         .build(): null)
                 .build();
     }

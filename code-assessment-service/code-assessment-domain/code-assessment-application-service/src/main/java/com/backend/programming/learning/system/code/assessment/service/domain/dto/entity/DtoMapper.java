@@ -10,8 +10,8 @@ public class DtoMapper {
         return CommentDto.builder()
                 .id(comment.getId().getValue())
                 .content(comment.getContent())
-                .numOfReply(null)
-                .totalVote(null)
+                .numOfReply(comment.getNumOfReply())
+                .totalVote(comment.getTotalVote())
                 .replyId(comment.getReplyId() != null? comment.getReplyId().getValue(): null)
                 .createdAt(comment.getCreatedAt())
                 .build();
