@@ -36,11 +36,3 @@ spring:
       host: ${REDIS_HOST:localhost}
       port: 6379
       timeout: 1s
-
-resilience4j.circuitbreaker:
-  configs:
-    default:
-      slidingWindowSize: 10
-      permittedNumberOfCallsInHalfOpenState: 10
-      failureRateThreshold: 50
-      waitDurationInOpenState: 10000
