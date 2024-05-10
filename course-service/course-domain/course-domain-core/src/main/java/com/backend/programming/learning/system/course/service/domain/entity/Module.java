@@ -8,6 +8,7 @@ import java.time.ZonedDateTime;
 
 public class Module extends AggregateRoot<ModuleId> {
     private Section section;
+    private Integer cmid;
     private String name;
     private Integer visible;
     private ZonedDateTime timeOpen;
@@ -15,6 +16,7 @@ public class Module extends AggregateRoot<ModuleId> {
 
     private Module(Builder builder) {
         super.setId(builder.id);
+        cmid = builder.cmid;
         setSection(builder.section);
         setName(builder.name);
         setVisible(builder.visible);
@@ -62,6 +64,14 @@ public class Module extends AggregateRoot<ModuleId> {
         this.timeClose = timeClose;
     }
 
+    public Integer getCmid() {
+        return cmid;
+    }
+
+    public void setCmid(Integer cmid) {
+        this.cmid = cmid;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -69,6 +79,8 @@ public class Module extends AggregateRoot<ModuleId> {
 
     public static final class Builder {
         private ModuleId id;
+
+        private Integer cmid;
         private Section section;
         private String name;
         private Integer visible;
@@ -84,6 +96,11 @@ public class Module extends AggregateRoot<ModuleId> {
 
         public Builder id(ModuleId val) {
             id = val;
+            return this;
+        }
+
+        public Builder cmid(Integer val) {
+            cmid = val;
             return this;
         }
 
