@@ -21,6 +21,7 @@ public class OrganizationEntity {
     @Column(name = "id")
     private UUID id;
 
+
     private String name;
 
     private String description;

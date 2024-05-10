@@ -20,6 +20,7 @@ public class Section extends AggregateRoot<SectionId> {
         return new Builder();
     }
 
+
     public Course getCourse() {
         return course;
     }
@@ -48,6 +49,7 @@ public class Section extends AggregateRoot<SectionId> {
 
     public static final class Builder {
         private SectionId id;
+
         private Course course;
         private String name;
         private Integer visible;
@@ -68,6 +70,7 @@ public class Section extends AggregateRoot<SectionId> {
             course = val;
             return this;
         }
+
 
         public Builder name(String val) {
             name = val;
