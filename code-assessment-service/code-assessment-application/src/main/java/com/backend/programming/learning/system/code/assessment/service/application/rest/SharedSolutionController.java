@@ -9,10 +9,13 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.DeleteSharedSolutionCommad;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.DeleteSharedSolutionVoteCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.comment.DeleteCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionByCodeQuestionIdCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionDetailCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionResponseItem;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionsResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.comment.GetSolutionCommentCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.comment.GetSolutionCommentResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.UpdateSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.comment.UpdateCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.SharedSolutionApplicationService;
@@ -47,7 +50,6 @@ public class SharedSolutionController {
     }
 
     //view
-    //num of comment
     @GetMapping
     public ResponseEntity<GetSharedSolutionsResponse>
     getSharedSolutions(
@@ -106,7 +108,7 @@ public class SharedSolutionController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    //edit
+    //edit comment
     @PutMapping("/{shared-solution-id}/comment/{comment-id}")
     public ResponseEntity updateComment(
             @PathVariable("shared-solution-id") UUID sharedSolutionId,
@@ -116,13 +118,40 @@ public class SharedSolutionController {
         command.setSharedSolutionId(sharedSolutionId);
         service.updateComment(command);
         return ResponseEntity.noContent().build();
+    }
 
+    //delete comment
+    @DeleteMapping("/{shared-solution-id}/comment/{comment-id}")
+    public ResponseEntity deleteComment(
+            @PathVariable("shared-solution-id") UUID sharedSolutionId,
+            @PathVariable("comment-id") UUID commentId,
+            @RequestBody DeleteCommentCommand command){
+        command.setCommentId(commentId);
+        command.setSharedSolutionId(sharedSolutionId);
+        service.deleteComment(command);
+        return ResponseEntity.noContent().build();
+    }
+
+    //get solution comments
+    @GetMapping("/{shared-solution-id}/comment")
+    public ResponseEntity<GetSolutionCommentResponse> getSolutionComments(
+            @PathVariable("shared-solution-id") UUID sharedSolutionId,
+            @RequestParam(defaultValue = "${code-assessment-service.default-page-number}") Integer pageNo,
+            @RequestParam(defaultValue = "${code-assessment-service.default-page-size}") Integer pageSize,
+            @RequestBody GetSolutionCommentCommand command){
+
+        command.setSharedSolutionId(sharedSolutionId);
+        command.setPageNum(pageNo);
+        command.setPageSize(pageSize);
+
+        GetSolutionCommentResponse response =  service.getComments(command);
+        return ResponseEntity.ok(response);
     }
 
 
 
 
-    //vote
+    //vote shared solution
     @PostMapping("/{shared-solution-id}/vote")
     public ResponseEntity<VoteSharedSolutionResponse> voteSharedSolution
     (@PathVariable("shared-solution-id") UUID sharedSolutionId,
@@ -133,7 +162,7 @@ public class SharedSolutionController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    //remove vote
+    //remove vote shared solution
     @DeleteMapping("/{shared-solution-id}/vote")
     public ResponseEntity deleteVote
     (@PathVariable("shared-solution-id") UUID sharedSolutionId,

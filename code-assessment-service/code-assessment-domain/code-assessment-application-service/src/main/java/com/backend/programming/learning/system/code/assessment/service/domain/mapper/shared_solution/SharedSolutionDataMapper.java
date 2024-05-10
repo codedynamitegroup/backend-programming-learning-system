@@ -60,7 +60,7 @@ public class SharedSolutionDataMapper {
                 .build();
     }
 
-    public GetSharedSolutionResponseItem sharedSolutionToGetSharedSolutionResponseItemIgnoreTitle(SharedSolution sharedSolution) {
+    public GetSharedSolutionResponseItem sharedSolutionToGetSharedSolutionResponseItemIgnoreContent(SharedSolution sharedSolution) {
         return GetSharedSolutionResponseItem.builder()
                 .user(UserDto.builder()
                         .id(sharedSolution.getUser().getId().getValue())
@@ -91,12 +91,12 @@ public class SharedSolutionDataMapper {
                 .build();
     }
 
-    public GetSharedSolutionsResponse PageableSharedSolutionListToGetSharedSolutionsResponse(Page<SharedSolution> sharedSolutions) {
+    public GetSharedSolutionsResponse pageableSharedSolutionListToGetSharedSolutionsResponse(Page<SharedSolution> sharedSolutions) {
         return GetSharedSolutionsResponse.builder()
                 .currentPage(sharedSolutions.getNumber())
                 .totalItems(sharedSolutions.getTotalElements())
                 .totalPages(sharedSolutions.getTotalPages())
-                .sharedSolution(sharedSolutions.stream().map(this::sharedSolutionToGetSharedSolutionResponseItemIgnoreTitle).toList())
+                .sharedSolution(sharedSolutions.stream().map(this::sharedSolutionToGetSharedSolutionResponseItemIgnoreContent).toList())
                 .build();
     }
 

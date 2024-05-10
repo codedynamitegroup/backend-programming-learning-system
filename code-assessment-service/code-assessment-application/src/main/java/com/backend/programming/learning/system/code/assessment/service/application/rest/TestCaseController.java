@@ -49,7 +49,7 @@ public class TestCaseController {
     }
 
     @GetMapping
-    public ResponseEntity<GetTestCasesByQuestionIdResponse> updateTestCase
+    public ResponseEntity<GetTestCasesByQuestionIdResponse> getTestCases
             (@RequestParam(defaultValue = "${code-assessment-service.default-page-number}") Integer pageNo,
              @RequestParam(defaultValue = "${code-assessment-service.default-page-size}") Integer pageSize,
              @RequestParam(defaultValue = "false") Boolean fetchAll,

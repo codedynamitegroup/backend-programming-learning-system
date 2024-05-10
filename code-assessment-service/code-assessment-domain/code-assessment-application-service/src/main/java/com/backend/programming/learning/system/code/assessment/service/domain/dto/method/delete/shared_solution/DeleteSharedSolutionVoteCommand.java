@@ -1,9 +1,11 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.UUID;
 
@@ -15,13 +17,8 @@ public class DeleteSharedSolutionVoteCommand {
     UUID userId;
 
     @NotNull(message = "sharedSolutionId must not be null")
+    @JsonIgnore
+    @Setter
     UUID sharedSolutionId;
 
-    public void setUserId(@NotNull(message = "userId must not be null") UUID userId) {
-        this.userId = userId;
-    }
-
-    public void setSharedSolutionId(@NotNull(message = "sharedSolutionId must not be null") UUID sharedSolutionId) {
-        this.sharedSolutionId = sharedSolutionId;
-    }
 }

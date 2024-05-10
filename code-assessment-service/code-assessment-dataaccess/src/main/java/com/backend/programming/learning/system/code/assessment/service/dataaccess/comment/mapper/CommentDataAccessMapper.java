@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.code.assessment.service.dataacces
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Comment;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.CommentId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.SharedSolutionId;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.Vote;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -43,6 +44,26 @@ public class CommentDataAccessMapper {
                         CommentEntity.builder()
                         .id(comment.getReplyId().getValue())
                         .build(): null)
+                .build();
+    }
+
+    public Comment entityToComment(CommentEntity commentEntity, Vote vote) {
+        return Comment.builder()
+                .id(new CommentId(commentEntity.getId()))
+                .sharedSolutionId(new SharedSolutionId(commentEntity.getSharedSolution().getId()))
+                .user(userDataAccessMapper.userEntityToUser(commentEntity.getUser()))
+                .replyId(commentEntity.getReplyComment() !=null?
+                        new CommentId(commentEntity.getReplyComment().getId()):
+                        null)
+                .youVote(vote)
+
+                //lazy load here
+                .totalVote(commentEntity.getTotalVote())
+                .numOfReply(commentEntity.getNumOfReply())
+
+                .replyLevel(commentEntity.getReplyLevel())
+                .createdAt(commentEntity.getCreatedAt())
+                .content(commentEntity.getContent())
                 .build();
     }
 }

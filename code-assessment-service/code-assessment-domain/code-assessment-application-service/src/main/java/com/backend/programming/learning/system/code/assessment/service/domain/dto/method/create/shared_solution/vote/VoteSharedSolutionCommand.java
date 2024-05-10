@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.Vote;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +22,7 @@ public class VoteSharedSolutionCommand {
 
     @Setter
     @NotNull(message = "sharedSolutionId must not be null")
+    @JsonIgnore
     UUID sharedSolutionId;
 
 }

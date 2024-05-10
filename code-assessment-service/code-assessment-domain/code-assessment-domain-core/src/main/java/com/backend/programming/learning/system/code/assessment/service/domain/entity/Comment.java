@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.e
 
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.CommentId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.SharedSolutionId;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.Vote;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.BaseEntity;
 
@@ -18,9 +19,14 @@ public class Comment extends BaseEntity<CommentId> {
     private ZonedDateTime createdAt;
     private Integer numOfReply;
     private Integer totalVote;
+    private Vote youVote;
 
     public SharedSolutionId getSharedSolutionId() {
         return sharedSolutionId;
+    }
+
+    public Vote getYouVote() {
+        return youVote;
     }
 
     public User getUser() {
@@ -61,6 +67,7 @@ public class Comment extends BaseEntity<CommentId> {
         createdAt = builder.createdAt;
         numOfReply = builder.numOfReply;
         totalVote = builder.totalVote;
+        youVote = builder.youVote;
     }
 
     public static Builder builder() {
@@ -84,6 +91,7 @@ public class Comment extends BaseEntity<CommentId> {
         private ZonedDateTime createdAt;
         private Integer numOfReply;
         private Integer totalVote;
+        private Vote youVote;
         private CommentId id;
 
         private Builder() {
@@ -134,8 +142,14 @@ public class Comment extends BaseEntity<CommentId> {
             return this;
         }
 
+        public Builder youVote(Vote val) {
+            youVote = val;
+            return this;
+        }
+
         public Comment build() {
             return new Comment(this);
         }
+
     }
 }

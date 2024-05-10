@@ -117,6 +117,7 @@ public class SharedSolutionHelper {
 
     }
 
+    @Transactional
     public void deleteSharedSolution(DeleteSharedSolutionCommad command) {
         validateHelper.validateUser(command.getUserId());
         SharedSolution sharedSolutionRepo = validateHelper.validateSharedSolution(command.getSharedSolutionId());

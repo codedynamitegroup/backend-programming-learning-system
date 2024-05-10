@@ -14,6 +14,8 @@ public class DtoMapper {
                 .totalVote(comment.getTotalVote())
                 .replyId(comment.getReplyId() != null? comment.getReplyId().getValue(): null)
                 .createdAt(comment.getCreatedAt())
+                .user(this.userToUserDto(comment.getUser()))
+                .youVote(comment.getYouVote())
                 .build();
     }
 

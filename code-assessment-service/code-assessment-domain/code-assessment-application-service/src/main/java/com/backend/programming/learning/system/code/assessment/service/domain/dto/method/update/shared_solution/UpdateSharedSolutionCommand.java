@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.validator.OneNotNull.OneNotNull;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ public class UpdateSharedSolutionCommand {
 
     @Setter
     @NotNull(message = "sharedSolutionId must not be null")
+    @JsonIgnore
     UUID sharedSolutionId;
 
     String title;

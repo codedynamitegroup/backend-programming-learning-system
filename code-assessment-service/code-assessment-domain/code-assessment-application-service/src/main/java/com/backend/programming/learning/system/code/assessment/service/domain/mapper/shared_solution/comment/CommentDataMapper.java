@@ -3,11 +3,14 @@ package com.backend.programming.learning.system.code.assessment.service.domain.m
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.DtoMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment.CreateCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment.CreateCommentResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionsResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.comment.GetSolutionCommentResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.comment.UpdateCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Comment;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.User;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.CommentId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.SharedSolutionId;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -30,13 +33,21 @@ public class CommentDataMapper {
     public CreateCommentResponse commentToCreateCommentResponse(Comment comment) {
         return CreateCommentResponse.builder()
                 .comment(dtoMapper.commentToCommentDto(comment))
-                .user(dtoMapper.userToUserDto(comment.getUser()))
                 .build();
     }
 
     public Comment updateCommentCommandToComment(UpdateCommentCommand command) {
         return Comment.builder()
                 .content(command.getContent())
+                .build();
+    }
+
+    public GetSolutionCommentResponse pageableCommentToGetSolutionCommentResponse(Page<Comment> comments) {
+        return GetSolutionCommentResponse.builder()
+                .currentPage(comments.getNumber())
+                .totalItems(comments.getTotalElements())
+                .totalPages(comments.getTotalPages())
+                .sharedSolution(comments.stream().map(dtoMapper::commentToCommentDto).toList())
                 .build();
     }
 }

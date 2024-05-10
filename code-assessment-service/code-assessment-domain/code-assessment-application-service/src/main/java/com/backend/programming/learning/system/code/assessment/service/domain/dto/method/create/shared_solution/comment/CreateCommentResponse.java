@@ -1,7 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.CommentDto;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.UserDto;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +14,4 @@ import java.time.ZonedDateTime;
 public class CreateCommentResponse {
     @NotNull
     CommentDto comment;
-
-    @NotNull
-    UserDto user;
 }
