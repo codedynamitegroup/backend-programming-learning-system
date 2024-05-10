@@ -6,10 +6,12 @@ import com.backend.programming.learning.system.code.assessment.service.domain.ex
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.programming_language.ProgrammingLanguageNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.shared_solution.SharedSolutionNotFound;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.shared_solution.SharedSolutionVoteNotFound;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.shared_solution.comment.CommentNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.tag.TagNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.test_case.TestCaseNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_question.CodeQuestionRepository;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.CommentId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.SharedSolutionId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagId;
@@ -36,9 +38,10 @@ public class ValidateHelper {
     private final TagRepository tagRepository;
     private final SharedSolutionRepository sharedSolutionRepository;
     private final ProgrammingLanguageCodeQuestionRepository programmingLanguageCodeQuestionRepository;
+    private final CommentRepository commentRepository;
 
 
-    public ValidateHelper(CodeQuestionRepository codeQuestionRepository, ProgrammingLanguageRepository programmingLanguageRepository, TestCaseRepository testCaseRepository, UserRepository userRepository, TagRepository tagRepository, SharedSolutionRepository sharedSolutionRepository, ProgrammingLanguageCodeQuestionRepository programmingLanguageCodeQuestionRepository) {
+    public ValidateHelper(CodeQuestionRepository codeQuestionRepository, ProgrammingLanguageRepository programmingLanguageRepository, TestCaseRepository testCaseRepository, UserRepository userRepository, TagRepository tagRepository, SharedSolutionRepository sharedSolutionRepository, ProgrammingLanguageCodeQuestionRepository programmingLanguageCodeQuestionRepository, CommentRepository commentRepository) {
         this.codeQuestionRepository = codeQuestionRepository;
         this.programmingLanguageRepository = programmingLanguageRepository;
         this.testCaseRepository = testCaseRepository;
@@ -46,6 +49,7 @@ public class ValidateHelper {
         this.tagRepository = tagRepository;
         this.sharedSolutionRepository = sharedSolutionRepository;
         this.programmingLanguageCodeQuestionRepository = programmingLanguageCodeQuestionRepository;
+        this.commentRepository = commentRepository;
     }
 
     public List<TestCase> validateTestCasesByCodeQuestionId(UUID codeQuestionId) {
@@ -145,6 +149,17 @@ public class ValidateHelper {
         }else{
             log.error("SharedSolutionVote with userId: {} and solutionId: {} not found", userId, sharedSolutionId);
             throw new SharedSolutionVoteNotFound("SharedSolutionVote with userId: " + userId.getValue() + " and solutionId: " + sharedSolutionId.getValue() + " not found");
+        }
+    }
+
+    public Comment validateComment(UUID replyId) {
+        Optional<Comment> commentOpt =
+                commentRepository.findById(new CommentId(replyId));
+        if(commentOpt.isPresent()){
+            return commentOpt.get();
+        }else{
+            log.error("Comment with id: {} not found", replyId);
+            throw new CommentNotFoundException("Comment with id: " + replyId + " not found");
         }
     }
 }

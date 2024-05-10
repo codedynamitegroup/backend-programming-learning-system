@@ -31,7 +31,9 @@ public class CommentEntity {
 
     @OneToOne
     @JoinColumn(name = "reply_id", referencedColumnName = "id")
-    CommentEntity comment;
+    CommentEntity replyComment;
+
+    Integer replyLevel;
 
     String content;
 

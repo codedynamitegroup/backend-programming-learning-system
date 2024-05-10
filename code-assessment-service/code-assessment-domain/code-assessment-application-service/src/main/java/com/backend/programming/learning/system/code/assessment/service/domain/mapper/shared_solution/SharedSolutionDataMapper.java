@@ -1,5 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.mapper.shared_solution;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.TagDto;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.UserDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionCommand;
@@ -36,9 +38,11 @@ public class SharedSolutionDataMapper {
 
     public GetSharedSolutionResponseItem sharedSolutionToGetSharedSolutionResponseItem(SharedSolution sharedSolution) {
         return GetSharedSolutionResponseItem.builder()
-                .user(GetSharedSolutionResponseItem.User.builder()
+                .user(UserDto.builder()
                         .id(sharedSolution.getUser().getId().getValue())
                         .avatarUrl(sharedSolution.getUser().getAvatarUrl())
+                        .firstName(sharedSolution.getUser().getFirstName())
+                        .lastName(sharedSolution.getUser().getLastName())
                         .build())
                 .sharedSolutionId(sharedSolution.getId().getValue())
                 .totalVote(sharedSolution.getTotalVote())
@@ -50,7 +54,7 @@ public class SharedSolutionDataMapper {
                 .youVote(sharedSolution.getYouVote())
                 .tags(sharedSolution.getTags()
                         .stream()
-                        .map(item-> GetSharedSolutionResponseItem.Tag.builder()
+                        .map(item-> TagDto.builder()
                                 .name(item.getName()).id(item.getId().getValue()).build())
                         .toList())
                 .build();
@@ -58,9 +62,11 @@ public class SharedSolutionDataMapper {
 
     public GetSharedSolutionResponseItem sharedSolutionToGetSharedSolutionResponseItemIgnoreTitle(SharedSolution sharedSolution) {
         return GetSharedSolutionResponseItem.builder()
-                .user(GetSharedSolutionResponseItem.User.builder()
+                .user(UserDto.builder()
                         .id(sharedSolution.getUser().getId().getValue())
                         .avatarUrl(sharedSolution.getUser().getAvatarUrl())
+                        .firstName(sharedSolution.getUser().getFirstName())
+                        .lastName(sharedSolution.getUser().getLastName())
                         .build())
                 .sharedSolutionId(sharedSolution.getId().getValue())
                 .totalView(sharedSolution.getViewNumber())
@@ -70,7 +76,7 @@ public class SharedSolutionDataMapper {
                 .title(sharedSolution.getTitle())
                 .tags(sharedSolution.getTags()
                         .stream()
-                        .map(item-> GetSharedSolutionResponseItem.Tag.builder()
+                        .map(item-> TagDto.builder()
                                 .name(item.getName()).id(item.getId().getValue()).build())
                         .toList())
                 .build();

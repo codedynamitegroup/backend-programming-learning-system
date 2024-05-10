@@ -176,6 +176,7 @@ CREATE TABLE shared_solution_tag(
      reply_id uuid,
      content text not null,
      created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+     reply_level int default 0 check(reply_level >= 0),
      constraint comment_pk primary key (id),
      constraint c_ss_fk foreign key (shared_solution_id)
         references shared_solution(id) match simple on update cascade on delete cascade,

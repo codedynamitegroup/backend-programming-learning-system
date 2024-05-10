@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.implement.service.tag;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.TagDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.tag.CreateTagsCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.tag.CreateTagsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.tag.DeleteTagCommand;
@@ -33,7 +34,7 @@ public class TagApplicationServiceImpl implements TagApplicationService {
     }
 
     @Override
-    public List<TagResponseItem> getTags() {
+    public List<TagDto> getTags() {
 
         return tagCommandHandler.getTags();
     }

@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionsUpdatedEvent;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.user.*;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
@@ -81,6 +82,14 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
     @Override
     public void initiateTags(List<Tag> tags){
         tags.forEach(Tag::inititate);
+    }
+
+    @Override
+    public void intitateComment(Comment comment, Comment replyComment) {
+        if(replyComment != null &&  replyComment.getReplyLevel() != 0)
+            throw new CodeAssessmentDomainException("Reply comment must be the root comment with id " + replyComment.getReplyId().getValue());
+
+        comment.initate(replyComment);
     }
 
 

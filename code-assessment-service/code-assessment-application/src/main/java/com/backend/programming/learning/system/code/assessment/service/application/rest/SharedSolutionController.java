@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.code.assessment.service.application.rest;
 
 
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment.CreateCommentCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment.CreateCommentResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionCommand;
@@ -93,6 +95,16 @@ public class SharedSolutionController {
 
 
     //comment
+    @PostMapping("/{shared-solution-id}/comment")
+    public ResponseEntity<CreateCommentResponse> createComment(
+            @PathVariable("shared-solution-id") UUID sharedSolutionId,
+            @RequestBody CreateCommentCommand command){
+        command.setSharedSolutionId(sharedSolutionId);
+        CreateCommentResponse response = service.createComment(command);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+
     //reply
 
 

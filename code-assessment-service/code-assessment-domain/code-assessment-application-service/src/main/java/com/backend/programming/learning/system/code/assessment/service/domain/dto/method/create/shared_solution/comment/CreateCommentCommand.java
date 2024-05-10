@@ -1,6 +1,6 @@
-package com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote;
+package com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment;
 
-import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.Vote;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,18 +9,22 @@ import lombok.Setter;
 
 import java.util.UUID;
 
-@Getter
 @Builder
+@Getter
 @AllArgsConstructor
-public class VoteSharedSolutionCommand {
+public class CreateCommentCommand {
     @NotNull(message = "userId must not be null")
     UUID userId;
-
-    @NotNull(message = "voteType must not be null")
-    Vote voteType;
 
     @Setter
     @NotNull(message = "sharedSolutionId must not be null")
     UUID sharedSolutionId;
+
+    UUID replyId;
+
+    @NotNull(message = "content must not be null")
+    @NotBlank(message = "content must not be blank")
+    String content;
+
 
 }

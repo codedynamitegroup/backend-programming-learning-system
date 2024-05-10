@@ -26,4 +26,6 @@ public interface CodeAssessmentDomainService {
     SharedSolution initiateSharedSolution(SharedSolution sharedSolution, List<Tag> tags);
 
     void initiateTags(List<Tag> tags);
+
+    void intitateComment(Comment comment, Comment replyComment);
 }

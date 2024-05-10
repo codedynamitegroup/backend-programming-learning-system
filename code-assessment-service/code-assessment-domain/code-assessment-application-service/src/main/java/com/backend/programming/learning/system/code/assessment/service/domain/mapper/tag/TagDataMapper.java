@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.mapper.tag;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.TagDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.tag.TagResponseItem;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Tag;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagId;
@@ -13,8 +14,8 @@ public class TagDataMapper {
         return Tag.builder().name(s).build();
     }
 
-    public TagResponseItem tagToTagResponseItem(Tag tag) {
-        return TagResponseItem.builder()
+    public TagDto tagToTagResponseItem(Tag tag) {
+        return TagDto.builder()
                 .id(tag.getId().getValue())
                 .name(tag.getName())
                 .build();

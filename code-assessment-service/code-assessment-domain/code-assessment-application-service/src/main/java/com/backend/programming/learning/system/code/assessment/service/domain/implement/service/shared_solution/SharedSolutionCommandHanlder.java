@@ -1,5 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.implement.service.shared_solution;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment.CreateCommentCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment.CreateCommentResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionCommand;
@@ -11,8 +13,11 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionResponseItem;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.UpdateSharedSolutionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.Comment;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.SharedSolution;
+import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.shared_solution.comment.CommentHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.shared_solution.SharedSolutionDataMapper;
+import com.backend.programming.learning.system.code.assessment.service.domain.mapper.shared_solution.comment.CommentDataMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
@@ -21,8 +26,9 @@ import java.util.List;
 
 @Component
 public class SharedSolutionCommandHanlder {
-    private final SharedSolutionHelper sharedSolutionHelper;
-    private final SharedSolutionDataMapper sharedSolutionDataMapper;
+    final SharedSolutionHelper sharedSolutionHelper;
+    final SharedSolutionDataMapper sharedSolutionDataMapper;
+
 
     public SharedSolutionCommandHanlder(SharedSolutionHelper sharedSolutionHelper, SharedSolutionDataMapper sharedSolutionDataMapper) {
         this.sharedSolutionHelper = sharedSolutionHelper;
@@ -67,4 +73,6 @@ public class SharedSolutionCommandHanlder {
     public void deleteSharedSolution(DeleteSharedSolutionCommad command) {
         sharedSolutionHelper.deleteSharedSolution(command);
     }
+
+
 }

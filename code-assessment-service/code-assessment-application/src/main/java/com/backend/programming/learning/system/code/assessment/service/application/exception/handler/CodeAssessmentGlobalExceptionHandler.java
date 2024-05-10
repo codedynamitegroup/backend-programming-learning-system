@@ -9,6 +9,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.ex
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.programming_language.ProgrammingLanguageNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.shared_solution.SharedSolutionNotFound;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.shared_solution.SharedSolutionVoteNotFound;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.shared_solution.comment.CommentNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.tag.TagNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.test_case.TestCaseNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
@@ -54,7 +55,8 @@ public class CodeAssessmentGlobalExceptionHandler extends GlobalExceptionHandler
             TestCaseNotFoundException.class,
             TagNotFoundException.class,
             SharedSolutionNotFound.class,
-            SharedSolutionVoteNotFound.class})
+            SharedSolutionVoteNotFound.class,
+            CommentNotFoundException.class})
     public ErrorDTO handleException(DomainException exception){
         log.error(exception.getMessage(), exception);
         return ErrorDTO.builder()

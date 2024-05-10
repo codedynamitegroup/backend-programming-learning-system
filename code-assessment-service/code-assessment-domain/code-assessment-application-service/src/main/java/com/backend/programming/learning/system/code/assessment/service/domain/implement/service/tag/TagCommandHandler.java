@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.implement.service.tag;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.TagDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.tag.CreateTagsCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.tag.CreateTagsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.tag.DeleteTagCommand;
@@ -31,7 +32,7 @@ public class TagCommandHandler {
         tagHelper.deleteTag(command);
     }
 
-    public List<TagResponseItem> getTags() {
+    public List<TagDto> getTags() {
         List<Tag> tags = tagHelper.getTags();
         return tags.stream().map(tagDataMapper::tagToTagResponseItem).toList();
     }
