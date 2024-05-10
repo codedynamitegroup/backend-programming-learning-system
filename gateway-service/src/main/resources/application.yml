@@ -97,3 +97,15 @@ springdoc:
         url: /swagger-ui/course
       - name: code-assessment
         url: /swagger-ui/code-assessment
+
+---
+spring.config.activate.on-profile: prod
+# Disable springdoc-openapi
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
+
+security:
+  paths-to-ignore: /actuator/**
