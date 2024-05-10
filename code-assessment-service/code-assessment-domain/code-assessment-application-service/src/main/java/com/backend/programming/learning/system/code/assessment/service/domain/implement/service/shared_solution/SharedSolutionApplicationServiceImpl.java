@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.implement.service.shared_solution;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.CommentDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment.CreateCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment.CreateCommentResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionCommand;
@@ -13,6 +14,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionDetailCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionResponseItem;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionsResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.comment.GetReplyCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.comment.GetSolutionCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.comment.GetSolutionCommentResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.UpdateSharedSolutionCommand;
@@ -22,6 +24,8 @@ import com.backend.programming.learning.system.code.assessment.service.domain.po
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+
+import java.util.List;
 
 @Service
 @Validated
@@ -90,5 +94,10 @@ public class SharedSolutionApplicationServiceImpl implements SharedSolutionAppli
     @Override
     public GetSolutionCommentResponse getComments(GetSolutionCommentCommand command) {
         return commentHandler.getComments(command);
+    }
+
+    @Override
+    public List<CommentDto> getReplyComments(GetReplyCommentCommand command) {
+        return commentHandler.getReplyComments(command);
     }
 }

@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.application.rest;
 
 
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.CommentDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment.CreateCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment.CreateCommentResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionCommand;
@@ -14,6 +15,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionDetailCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionResponseItem;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionsResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.comment.GetReplyCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.comment.GetSolutionCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.comment.GetSolutionCommentResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.UpdateSharedSolutionCommand;
@@ -145,6 +147,21 @@ public class SharedSolutionController {
         command.setPageSize(pageSize);
 
         GetSolutionCommentResponse response =  service.getComments(command);
+        return ResponseEntity.ok(response);
+    }
+    //get solution comments
+    @GetMapping("/{shared-solution-id}/comment/{comment-id}/reply")
+    public ResponseEntity<List<CommentDto>> getReplyComment(
+            @PathVariable("shared-solution-id") UUID sharedSolutionId,
+            @PathVariable("comment-id") UUID commentId,
+//            @RequestParam(defaultValue = "${code-assessment-service.default-page-number}") Integer pageNo,
+//            @RequestParam(defaultValue = "${code-assessment-service.default-page-size}") Integer pageSize,
+            @RequestBody GetReplyCommentCommand command){
+
+        command.setSharedSolutionId(sharedSolutionId);
+        command.setRootCommentId(commentId);
+
+        List<CommentDto> response =  service.getReplyComments(command);
         return ResponseEntity.ok(response);
     }
 

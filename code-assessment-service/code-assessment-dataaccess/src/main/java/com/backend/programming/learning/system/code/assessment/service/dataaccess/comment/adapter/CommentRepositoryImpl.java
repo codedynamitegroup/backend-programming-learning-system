@@ -21,6 +21,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -81,6 +82,25 @@ public class CommentRepositoryImpl implements CommentRepository {
 
 
         return comments;
+    }
+
+    @Override
+    public List<Comment> findReplyByRootCommentId(CommentId commentId, UserId userId) {
+        List<CommentEntity> commentEntities = commentJpaRepository.findByReplyCommentIdOrderByCreatedAtDesc(commentId.getValue());
+
+        List<Comment> result = commentEntities.stream()
+                .map(commentEntity -> {
+                    Optional<CommentVoteEntity> commentVoteEntityOpt
+                            = commentVoteJpaRepository.findById(
+                            commentVoteDataAccessMapper
+                                    .commentIdAndUserIdToEntityId(
+                                            commentEntity.getId(),
+                                            userId.getValue()));
+                    Vote vote = commentVoteEntityOpt.map(CommentVoteEntity::getVoteType).orElse(null);
+                    return commentDataAccessMapper.entityToComment(commentEntity, vote);
+                })
+                .toList();
+        return result;
     }
 
 }

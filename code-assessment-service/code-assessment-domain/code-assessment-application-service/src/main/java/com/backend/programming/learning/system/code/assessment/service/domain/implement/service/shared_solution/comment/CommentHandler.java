@@ -1,8 +1,11 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.implement.service.shared_solution.comment;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.CommentDto;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.DtoMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment.CreateCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment.CreateCommentResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.comment.DeleteCommentCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.comment.GetReplyCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.comment.GetSolutionCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.comment.GetSolutionCommentResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.comment.UpdateCommentCommand;
@@ -19,10 +22,12 @@ import java.util.List;
 public class CommentHandler {
     final CommentDataMapper commentDataMapper;
     final CommentHelper commentHelper;
+    final DtoMapper dtoMapper;
 
-    public CommentHandler(CommentDataMapper commentDataMapper, CommentHelper commentHelper) {
+    public CommentHandler(CommentDataMapper commentDataMapper, CommentHelper commentHelper, DtoMapper dtoMapper) {
         this.commentDataMapper = commentDataMapper;
         this.commentHelper = commentHelper;
+        this.dtoMapper = dtoMapper;
     }
 
     public CreateCommentResponse createComment(CreateCommentCommand command) {
@@ -41,5 +46,10 @@ public class CommentHandler {
     public GetSolutionCommentResponse getComments(GetSolutionCommentCommand command) {
         Page<Comment> comments = commentHelper.getComments(command);
         return commentDataMapper.pageableCommentToGetSolutionCommentResponse(comments);
+    }
+
+    public List<CommentDto> getReplyComments(GetReplyCommentCommand command) {
+        List<Comment> comments = commentHelper.getReplyComments(command);
+        return comments.stream().map(dtoMapper::commentToCommentDto).toList();
     }
 }

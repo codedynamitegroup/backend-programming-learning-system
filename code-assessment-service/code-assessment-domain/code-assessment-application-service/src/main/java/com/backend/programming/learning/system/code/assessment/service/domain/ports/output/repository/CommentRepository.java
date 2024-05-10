@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.domain.valueobject.QueryOrderBy;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface CommentRepository {
@@ -16,5 +17,7 @@ public interface CommentRepository {
 
     void deleteById(CommentId commentId);
 
-    Page<Comment> findBySharedSolutionId(SharedSolutionId id, UserId id1, Integer pageNum, Integer pageSize, QueryOrderBy orderBy);
+    Page<Comment> findBySharedSolutionId(SharedSolutionId sharedSolutionId, UserId userId, Integer pageNum, Integer pageSize, QueryOrderBy orderBy);
+
+    List<Comment> findReplyByRootCommentId(CommentId commentId, UserId userId);
 }

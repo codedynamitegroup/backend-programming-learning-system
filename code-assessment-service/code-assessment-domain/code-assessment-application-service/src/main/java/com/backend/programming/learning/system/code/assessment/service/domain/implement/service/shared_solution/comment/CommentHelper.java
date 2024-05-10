@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 import com.backend.programming.learning.system.code.assessment.service.domain.CodeAssessmentDomainService;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment.CreateCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.comment.DeleteCommentCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.comment.GetReplyCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.comment.GetSolutionCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.comment.UpdateCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Comment;
@@ -19,6 +20,8 @@ import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Slf4j
 @Component
@@ -89,5 +92,14 @@ public class CommentHelper {
                 command.getPageNum(),
                 command.getPageSize(),
                 command.getOrderBy());
+    }
+
+    @Transactional
+    public List<Comment> getReplyComments(GetReplyCommentCommand command) {
+        User user = validateHelper.validateUser(command.getUserId());
+        Comment comment = validateHelper.validateComment(command.getRootCommentId());
+
+        return commentRepository.findReplyByRootCommentId(comment.getId(), user.getId());
+
     }
 }
