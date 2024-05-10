@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   keycloak:
-    image: quay.io/keycloak/keycloak:22.0.4
+    image: quay.io/keycloak/keycloak:${KEYCLOAK_VERSION:-latest}
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin

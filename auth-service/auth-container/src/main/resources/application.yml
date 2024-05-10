@@ -123,17 +123,6 @@ management:
 
 log:
   appName: auth-service
----
-spring.config.activate.on-profile: prod
-# Disable springdoc-openapi
-springdoc:
-  api-docs:
-    enabled: false
-  swagger-ui:
-    enabled: false
-
-security:
-  paths-to-ignore: /actuator/**
 
 jwt:
   auth:
@@ -149,3 +138,15 @@ keycloak:
   client: spring-client-api-rest
   client-secret: 1XZYXGBfRPXCaQlMl66jUIfxlhECRgR7
   urls: http://${keycloak.domain}
+
+---
+spring.config.activate.on-profile: prod
+# Disable springdoc-openapi
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
+
+security:
+  paths-to-ignore: /actuator/**
