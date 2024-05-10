@@ -1,5 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.mapper.moodle;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.user.CreateUserCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.CourseResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.AssignmentModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.CourseModel;
@@ -8,6 +10,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.Submission;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionAssignmentModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionPlugin;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.user_moodle.UserModel;
 import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.entity.Module;
 import com.backend.programming.learning.system.course.service.domain.valueobject.*;
@@ -147,5 +150,29 @@ public class MoodleDataMapper {
                 .timeClose(timeClose)
                 .build();
 
+    }
+
+    public UpdateUserCommand updateUser(UserModel userModel, User user) {
+        return UpdateUserCommand.builder()
+                .userId(user.getId().getValue())
+                .userIdMoodle(Integer.valueOf(userModel.getId()))
+                .dob(user.getDob())
+                .firstName(userModel.getFirstname())
+                .lastName(userModel.getLastname())
+                .phone(userModel.getPhone1())
+                .address(userModel.getAddress())
+                .avatarUrl(userModel.getProfileimageurl())
+                .build();
+    }
+
+    public CreateUserCommand createUser(UserModel userModel) {
+        return CreateUserCommand.builder()
+                .email(userModel.getEmail())
+                .userIdMoodle(Integer.valueOf(userModel.getId()))
+                .password("")
+                .firstName(userModel.getFirstname())
+                .lastName(userModel.getLastname())
+                .phone(userModel.getPhone1())
+                .build();
     }
 }

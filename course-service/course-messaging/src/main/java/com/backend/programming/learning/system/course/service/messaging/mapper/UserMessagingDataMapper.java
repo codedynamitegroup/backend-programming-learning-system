@@ -62,4 +62,34 @@ public class UserMessagingDataMapper {
                 .setFailureMessages(userEventPayload.getFailureMessages())
                 .build();
     }
+
+    public UserRequestAvroModel userCreatedEventPayloadToUserCreateRequestAvroModel(String sagaId, com.backend.programming.learning.system.domain.valueobject.ServiceName serviceName, UserEventPayload userEventPayload) {
+        return UserRequestAvroModel.newBuilder()
+                .setId(UUID.randomUUID().toString())
+                .setSagaId(sagaId)
+                .setUserId(userEventPayload.getUserId())
+                .setEmail(userEventPayload.getEmail())
+                .setFirstName(userEventPayload.getFirstName())
+                .setLastName(userEventPayload.getLastName())
+                .setPhone(userEventPayload.getPhone())
+                .setCreatedAt(userEventPayload.getCreatedAt().toInstant())
+                .setUpdatedAt(userEventPayload.getUpdatedAt().toInstant())
+                .setIsDeleted(userEventPayload.getIsDeleted())
+                .build();
+    }
+
+    public UserRequestAvroModel userUpdatedToUserUpdateRequestAvroModel(String sagaId, com.backend.programming.learning.system.domain.valueobject.ServiceName serviceName, UserEventPayload userEventPayload) {
+        return UserRequestAvroModel.newBuilder()
+                .setId(UUID.randomUUID().toString())
+                .setSagaId(sagaId)
+                .setUserId(userEventPayload.getUserId())
+                .setFirstName(userEventPayload.getFirstName())
+                .setLastName(userEventPayload.getLastName())
+                .setAddress(userEventPayload.getAddress())
+                .setAvatarUrl(userEventPayload.getAvatarUrl())
+                .setDob(userEventPayload.getDob().toInstant())
+                .setPhone(userEventPayload.getPhone())
+                .setUpdatedAt(userEventPayload.getUpdatedAt().toInstant())
+                .build();
+    }
 }

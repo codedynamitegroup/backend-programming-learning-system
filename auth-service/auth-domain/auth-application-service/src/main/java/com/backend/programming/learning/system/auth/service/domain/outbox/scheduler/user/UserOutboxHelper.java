@@ -60,7 +60,11 @@ public class UserOutboxHelper {
 
     @Transactional
     public void saveUserOutboxMessage(UserEventPayload userEventPayload,
-                                           ServiceName serviceName, CopyState state, OutboxStatus outboxStatus, SagaStatus sagaStatus, UUID sagaId) {
+                                           ServiceName serviceName,
+                                      CopyState state,
+                                      OutboxStatus outboxStatus,
+                                      SagaStatus sagaStatus,
+                                      UUID sagaId) {
         userOutboxRepository.save(UserOutboxMessage.builder()
                 .id(UUID.randomUUID())
                 .sagaId(sagaId)
@@ -72,6 +76,33 @@ public class UserOutboxHelper {
                 .sagaStatus(sagaStatus)
                 .serviceName(serviceName)
                 .build());
+    }
+
+    @Transactional
+    public void saveUserOutboxMessage1(UserEventPayload userEventPayload,
+                                      CopyState copyState,
+                                      OutboxStatus outboxStatus,
+                                      UUID sagaId) {
+        save(UserOutboxMessage.builder()
+                .id(UUID.randomUUID())
+                .type(USER_SAGA_NAME)
+                .sagaId(sagaId)
+                .type(USER_SAGA_NAME)
+                .createdAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)))
+                .processedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)))
+                .payload(createdPayload(userEventPayload))
+                .copyState(copyState)
+                .outboxStatus(outboxStatus)
+                .build());
+    }
+
+    private String createdPayload(UserEventPayload userEventPayload) {
+        try {
+            return objectMapper.writeValueAsString(userEventPayload);
+        } catch (JsonProcessingException e) {
+            log.error("Could not create UserEventPayload json!", e);
+            throw new AuthDomainException("Could not create UserEventPayload json!", e);
+        }
     }
 
     private String createPayload(UserEventPayload userEventPayload) {
@@ -87,5 +118,19 @@ public class UserOutboxHelper {
     public void deleteUserOutboxMessageByOutboxStatusAndSagaStatus(OutboxStatus outboxStatus,
                                                                    SagaStatus... sagaStatus) {
         userOutboxRepository.deleteByTypeAndOutboxStatusAndSagaStatus(USER_SAGA_NAME, outboxStatus, sagaStatus);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<UserOutboxMessage> getUserOutboxMessageBySagaIdAndCopyState(UUID sagaId,
+                                                                                CopyState copyState) {
+        return userOutboxRepository.findByTypeAndSagaIdAndCopyStateAndOutboxStatus(USER_SAGA_NAME, sagaId,
+                copyState, OutboxStatus.COMPLETED);
+    }
+
+    @Transactional
+    public void updateOutboxMessage(UserOutboxMessage userOutboxMessage, OutboxStatus outboxStatus) {
+        userOutboxMessage.setOutboxStatus(outboxStatus);
+        save(userOutboxMessage);
+        log.info("User outbox table status is updated as: {}", outboxStatus.name());
     }
 }

@@ -1,5 +1,8 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.moodle;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.user.CreateUserCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.user.CreateUserResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.CourseResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.AssignmentCourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.AssignmentModel;
@@ -18,14 +21,15 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user.UserModel;
 import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.entity.Module;
+import com.backend.programming.learning.system.course.service.domain.ports.input.service.user.UserApplicationService;
 import com.backend.programming.learning.system.course.service.domain.mapper.moodle.MoodleDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.course.service.domain.valueobject.Type;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -37,6 +41,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class MoodleCommandHandler {
     private final MoodleDataMapper moodleDataMapper;
+    private final UserApplicationService userApplicationService;
     private final CourseRepository courseRepository;
     private final UserRepository userRepository;
     private final CourseUserRepository courseUserRepository;
@@ -46,21 +51,23 @@ public class MoodleCommandHandler {
     private final SubmissionAssignmentOnlineTextRepository submissionAssignmentOnlineTextRepository;
     private final SectionRepository sectionRepository;
     private final ModuleRepository moduleRepository;
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final RestTemplate restTemplate = new RestTemplate();
+
     Map<String, Course> courseIdsMap = new HashMap<>();
 
     String GET_ASSIGNMENTS = "mod_assign_get_assignments";
-
+    String GET_ENROLLED_USERS = "core_enrol_get_enrolled_users";
     String GET_CONTENTS = "core_course_get_contents";
     String GET_SUBMISSION_ASSIGNMENTS = "mod_assign_get_submissions";
     String GET_COURSES = "core_course_get_courses";
-
     String GET_USER_COURSES = "core_enrol_get_users_courses";
-
     String GET_USERS = "core_user_get_users";
-//    String MOODLE_URL = "http://62.171.185.208/webservice/rest/server.php";
-    String MOODLE_URL = "http://localhost/moodle/webservice/rest/server.php";
+    String MOODLE_URL = "http://62.171.185.208/webservice/rest/server.php";
+//    String MOODLE_URL = "http://localhost/moodle/webservice/rest/server.php";
     String MOODLE_URL_TOKEN = "http://62.171.185.208/login/token.php";
-    String TOKEN = "c22b03ca9c0a3c8431cd6b57bd4c8b04";
+    String TOKEN = "cdf90b5bf53bcae577c60419702dbee7";
+//    String TOKEN = "c22b03ca9c0a3c8431cd6b57bd4c8b04";
 
 
     @Transactional
@@ -358,5 +365,49 @@ public class MoodleCommandHandler {
         }
         
         return listUserModel.getUsers();
+    }
+
+    @Transactional
+    public String syncUser() {
+        String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&courseid=1",
+                MOODLE_URL, TOKEN, GET_ENROLLED_USERS);
+        String model = restTemplate.getForObject(apiURL, String.class);
+        List<com.backend.programming.learning.system.course.service.domain.dto.responseentity.user_moodle.UserModel> listUserModel = null;
+        try {
+            listUserModel = List.of(objectMapper.readValue(model, com.backend.programming.learning.system.course.service.domain.dto.responseentity.user_moodle.UserModel[].class));
+            log.info("User model: {}", listUserModel);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+//        List<Role> roles = roleRepository
+//                .findAllRolesByOrganizationId(new OrganizationId(UUID.fromString("3ead3b08-afdd-442f-b544-fdbd86eaa186")), 0, 9999)
+//                .getContent();
+//
+//        Map<String, Role> roleMap = roles.stream()
+//                .collect(Collectors.toMap(role -> role.getName().toLowerCase(), role -> role));
+
+        listUserModel.forEach(userModel -> {
+            Optional<User> userResult = userRepository.findByEmail(userModel.getEmail());
+            if (userResult.isPresent()) {
+                UpdateUserCommand userUpdate = moodleDataMapper.updateUser(userModel, userResult.get());
+                UpdateUserResponse updateUserResponse = userApplicationService.updateUser(userUpdate);
+//                List<Role> rolesMoodle = userModel.getRoles();
+//                rolesMoodle.forEach(role -> {
+//                    CreateUserRoleCommand createRole = moodleDataMapper.createRole(role, roleMap, updateUserResponse.getUserId());
+//                    userRoleApplicationService.createUserRole(createRole);
+//                });
+            } else {
+                CreateUserCommand user = moodleDataMapper.createUser(userModel);
+                CreateUserResponse createUserResponse = userApplicationService.createUser(user);
+//                List<Role> rolesMoodle = userModel.getRoles();
+//                rolesMoodle.forEach(role -> {
+//                    CreateUserRoleCommand createRole = moodleDataMapper.createRole(role, roleMap, createUserResponse.getUserId());
+//                    userRoleApplicationService.createUserRole(createRole);
+//                });
+            }
+        });
+        log.info("Sync user successfully");
+        return "Sync user successfully";
     }
 }

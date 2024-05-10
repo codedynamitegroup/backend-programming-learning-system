@@ -1,11 +1,14 @@
 package com.backend.programming.learning.system.course.service.domain.entity;
 
+import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 
 public class User extends AggregateRoot<UserId> {
@@ -20,7 +23,7 @@ public class User extends AggregateRoot<UserId> {
     private String avatarUrl;
     private ZonedDateTime lastLogin;
     private Boolean isDeleted;
-    private final ZonedDateTime createdAt;
+    private ZonedDateTime createdAt;
     private  ZonedDateTime updatedAt;
     private List<String> failureMessage;
 
@@ -152,6 +155,14 @@ public class User extends AggregateRoot<UserId> {
 
     public void setDeleted(Boolean deleted) {
         isDeleted = deleted;
+    }
+
+    public void initializeUser() {
+        setId(new UserId(UUID.randomUUID()));
+        lastLogin = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
+        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
+        isDeleted = false;
     }
 
     public static final class Builder {

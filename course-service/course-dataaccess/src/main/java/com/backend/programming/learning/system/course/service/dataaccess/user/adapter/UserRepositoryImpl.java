@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.course.service.dataaccess.user.ma
 import com.backend.programming.learning.system.course.service.dataaccess.user.repository.UserJpaRepository;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
+import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -47,5 +48,17 @@ public class UserRepositoryImpl implements UserRepository {
     public List<User> findAll() {
         return userDataAccessMapper
                 .userEntityListToUserList(userJpaRepository.findAll());
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return userJpaRepository.findByEmailAndIsDeletedFalse(email)
+                .map(userDataAccessMapper::userEntityToUser);
+    }
+
+    @Override
+    public Optional<User> findById(UserId userId) {
+        return userJpaRepository.findByIdAndIsDeletedFalse(userId.getValue())
+                .map(userDataAccessMapper::userEntityToUser);
     }
 }
