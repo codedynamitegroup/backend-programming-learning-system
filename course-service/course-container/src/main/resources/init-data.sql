@@ -1,8 +1,8 @@
-INSERT INTO public.user(id,email,dob,first_name,last_name,phone,address,avatar_url,created_at,updated_at,is_deleted)
+INSERT INTO public.user(id,email,dob,first_name,last_name,phone,address,avatar_url,created_at,updated_at,is_deleted, user_id_moodle)
 VALUES
-   ('9ba179ed-d26d-4828-a0f6-8836c2063992','nguyenquoctuan385@gmail.com',NULL,'Tuan','Nguyen','012345678','HCM',NULL,'2024-04-12 21:33:23.371836+07','2024-04-12 21:33:23.371836+07',true),
-   ('b029f559-52a8-4699-b595-71161498ed8c','dcthong852@gmail.com',NULL,'Thong','Duong','12365478',NULL,NULL,'2024-04-15 18:07:20.891115+07','2024-04-15 18:07:20.891115+07',false),
-   ('8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7','tgtien852@gmail.com',NULL,'Tien','Truong','12365478',NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false);
+   ('9ba179ed-d26d-4828-a0f6-8836c2063992','nguyenquoctuan385@gmail.com',NULL,'Tuan','Nguyen','012345678','HCM',NULL,'2024-04-12 21:33:23.371836+07','2024-04-12 21:33:23.371836+07',true, '4'),
+   ('b029f559-52a8-4699-b595-71161498ed8c','dcthong852@gmail.com',NULL,'Thong','Duong','12365478',NULL,NULL,'2024-04-15 18:07:20.891115+07','2024-04-15 18:07:20.891115+07',false, '3'),
+   ('8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7','tgtien852@gmail.com',NULL,'Tien','Truong','12365478',NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false, '2');
 
 INSERT INTO public.organization(id, description, name, created_at, updated_at, is_deleted, moodle_url)
 VALUES
@@ -51,12 +51,17 @@ VALUES
     ('b6484e21-6937-489c-b031-b71767994743', '\\core\\event\\user_updated', 'User updated');
 
 
-INSERT INTO public.webhook_function_organization(id, webhook_api_function_id, organization_id)
+INSERT INTO public.webhook_function_organization(id, webhook_api_function_id, org_id)
 VALUES
     ('b6484e21-6937-489c-b031-b71767994744', 'b6484e21-6937-489c-b031-b71767991741', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
     ('b6484e21-6937-489c-b031-b71767994745', 'b6484e21-6937-489c-b031-b71767992742', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
     ('b6484e21-6937-489c-b031-b71767994746', 'b6484e21-6937-489c-b031-b71767993743', '9ba179ed-d26d-4828-a0f6-8836c2063992');
 
+INSERT INTO public.course_type(id, moodle_id, name)
+VALUES
+    ('b6484e21-6937-489c-b031-b71767994747', '1', 'CLC'),
+    ('b6484e21-6937-489c-b031-b71767994748', '2', 'VP'),
+    ('b6484e21-6937-489c-b031-b71767994749', '3', 'APCS');
 --INSERT INTO public.answer_of_question(id, question_id, feedback, answer, fraction)
 --VALUES
 --    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b6484e21-6937-489c-b031-b71767994221', 'Correct', 'print(Hello World)', 1),

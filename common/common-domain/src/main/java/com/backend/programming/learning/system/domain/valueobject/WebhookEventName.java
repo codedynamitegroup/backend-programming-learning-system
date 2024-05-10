@@ -2,8 +2,8 @@ package com.backend.programming.learning.system.domain.valueobject;
 
 public enum WebhookEventName {
     COURSE_CREATED("\\core\\event\\course_created"),
-    COURSE_UPDATED("\\core\\event\\course_deleted"),
-    COURSE_DELETED("\\core\\event\\course_updated"),
+    COURSE_UPDATED("\\core\\event\\course_updated"),
+    COURSE_DELETED("\\core\\event\\course_deleted"),
 
     COURSE_SECTION_CREATED("\\core\\event\\course_section_created"),
     COURSE_SECTION_UPDATED("\\core\\event\\course_section_updated"),

@@ -5,10 +5,15 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.course.QueryAllCourseResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.course.UpdateCourseResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.CourseResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.CourseModel;
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
+import com.backend.programming.learning.system.course.service.domain.entity.CourseType;
+import com.backend.programming.learning.system.course.service.domain.entity.Organization;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
+
+import java.util.UUID;
 
 @Component
 public class CourseDataMapper {
@@ -21,6 +26,22 @@ public class CourseDataMapper {
                 .courseType(createCourseCommand.courseType())
                 .key(createCourseCommand.key())
                 .visible(createCourseCommand.visible())
+                .createdBy(user)
+                .updatedBy(user)
+                .build();
+    }
+
+    public Course courseModelToCourse(CourseModel courseModel,
+                                      User user,
+                                      Organization organization,
+                                      CourseType courseType) {
+        return Course.builder()
+                .courseIdMoodle(Integer.valueOf(courseModel.getId()))
+                .organization(organization)
+                .name(courseModel.getFullname())
+                .courseType(courseType)
+                .key(courseModel.getIdnumber())
+                .visible(courseModel.getVisible().equals(1))
                 .createdBy(user)
                 .updatedBy(user)
                 .build();
@@ -71,5 +92,16 @@ public class CourseDataMapper {
                 .visible(course.getVisible())
                 .message(message)
                 .build();
+    }
+
+    public void setCourse(Course previousCourse,
+                          CourseModel courseModel,
+                          User user,
+                          CourseType courseType) {
+        previousCourse.setName(courseModel.getFullname());
+        previousCourse.setCourseType(courseType);
+        previousCourse.setUpdatedBy(user);
+        previousCourse.setName(courseModel.getFullname());
+        previousCourse.setVisible(courseModel.getVisible().equals(1));
     }
 }

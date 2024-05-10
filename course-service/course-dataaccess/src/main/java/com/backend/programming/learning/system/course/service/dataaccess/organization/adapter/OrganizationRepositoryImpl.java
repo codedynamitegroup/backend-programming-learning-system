@@ -26,7 +26,7 @@ public class OrganizationRepositoryImpl implements OrganizationRepository {
 
     @Override
     public Optional<Organization> findOrganizationByMoodleUrl(String moodleUrl) {
-        return organizationJpaRepository.findOrganizationByMoodleUrl(moodleUrl)
+        return organizationJpaRepository.findByMoodleUrl(moodleUrl)
                 .map(organizationDataAccessMapper::organizationEntityToOrganization);
     }
 

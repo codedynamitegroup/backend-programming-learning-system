@@ -24,4 +24,6 @@ public interface CourseJpaRepository extends JpaRepository<CourseEntity, UUID> {
     Page<CourseEntity> findAll(String search, Pageable pageable);
 
     Optional<CourseEntity> findByCourseIdMoodle(Integer courseIdMoodle);
+
+    void deleteByCourseIdMoodle(Integer courseIdMoodle);
 }
