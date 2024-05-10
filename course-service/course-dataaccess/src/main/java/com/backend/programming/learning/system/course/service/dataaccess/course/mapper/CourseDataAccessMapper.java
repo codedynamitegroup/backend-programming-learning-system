@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.course.service.dataaccess.course
 import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.course_type.entity.CourseTypeEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.course_type.mapper.CourseTypeDataAccessMapper;
+import com.backend.programming.learning.system.course.service.dataaccess.organization.mapper.OrganizationDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Component;
 public class CourseDataAccessMapper {
     private final UserDataAccessMapper userDataAccessMapper;
     private final CourseTypeDataAccessMapper courseTypeDataAccessMapper;
+    private final OrganizationDataAccessMapper organizationDataAccessMapper;
 
     public CourseEntity courseToCourseEntity(Course course) {
         UserEntity createdBy = userDataAccessMapper.userToUserEntity(course.getCreatedBy());
@@ -32,6 +34,7 @@ public class CourseDataAccessMapper {
                 .updatedBy(updatedBy)
                 .createdAt(course.getCreatedAt())
                 .updatedAt(course.getUpdatedAt())
+                .organization(organizationDataAccessMapper.organizationToOrganizationEntity(course.getOrganization()))
                 .build();
     }
     public Course courseEntityToCourse(CourseEntity courseEntity) {
@@ -47,6 +50,7 @@ public class CourseDataAccessMapper {
                 .updatedBy(updatedBy)
                 .createdAt(courseEntity.getCreatedAt())
                 .updatedAt(courseEntity.getUpdatedAt())
+                .organization(organizationDataAccessMapper.organizationEntityToOrganization(courseEntity.getOrganization()))
                 .build();
         response.setId(new CourseId(courseEntity.getId()));
         return response;

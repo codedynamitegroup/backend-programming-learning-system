@@ -1,66 +1,77 @@
+server:
+  port: 8761
+
 eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
   instance:
-    appname: service-registry-cluster
-  server:
-    enable-self-preservation: false
-    expected-client-renewal-interval-seconds: 3
-    eviction-interval-timer-in-ms: 2000
+    hostname: localhost
+  client:
+    fetchRegistry: false
+    registerWithEureka: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 
 spring:
   application:
-    name: discovery-service
-  profiles:
-    active: singleserver
+    name: eurekaserver
 
 management:
   endpoints:
     web:
-      base-path: /actuator
-      exposure.include: health, prometheus
-      path-mapping.prometheus: metrics
+      exposure:
+        include: "*"
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
   endpoint:
     health:
+      probes:
+        enabled: true
       show-details: always
     prometheus:
       cache.time-to-live: 1ms
+  info:
+    env:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
 
 ---
-server:
-  port: 8761
-spring:
-  config:
-    activate:
-      on-profile: peer1
-eureka:
-  instance:
-    hostname: discovery-service-1
-    metadataMap:
-      instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-  client:
-    serviceUrl:
-      defaultZone: http://discovery-service-1:8761/eureka/,http://discovery-service-2:8762/eureka/
-
-log:
-  app-name: discovery-service-1
-
----
-server:
-  port: 8762
-spring:
-  config:
-    activate:
-      on-profile: peer2
-eureka:
-  instance:
-    hostname: discovery-service-2
-    metadataMap:
-      instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-  client:
-    serviceUrl:
-      defaultZone: http://discovery-service-2:8762/eureka/,http://discovery-service-1:8761/eureka/
-
-log:
-  app-name: discovery-service-2
+#server:
+#  port: 8761
+#spring:
+#  config:
+#    activate:
+#      on-profile: peer1
+#eureka:
+#  instance:
+#    hostname: discovery-service-1
+#    metadataMap:
+#      instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+#  client:
+#    serviceUrl:
+#      defaultZone: http://discovery-service-1:8761/eureka/,http://discovery-service-2:8762/eureka/
+#
+#log:
+#  app-name: discovery-service-1
+#
+#---
+#server:
+#  port: 8762
+#spring:
+#  config:
+#    activate:
+#      on-profile: peer2
+#eureka:
+#  instance:
+#    hostname: discovery-service-2
+#    metadataMap:
+#      instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+#  client:
+#    serviceUrl:
+#      defaultZone: http://discovery-service-2:8762/eureka/,http://discovery-service-1:8761/eureka/
+#
+#log:
+#  app-name: discovery-service-2

@@ -22,4 +22,9 @@ public class CourseDeleteHelper {
         log.info("Course deleted with id: {}", courseId);
         courseRepository.deleteById(courseId);
     }
+
+    public void deleteCourse(Integer courseMoodleId) {
+        courseRepository.deleteByMoodleId(courseMoodleId);
+        log.info("Course deleted with course moodle id: {}", courseMoodleId);
+    }
 }

@@ -42,31 +42,18 @@ spring:
           issuer-uri: http://${keycloak.domain}/auth/realms/${keycloak.realm}
   application:
     name: core-service
-  profiles:
-    active: core
   config:
     import: optional:configserver:${CONFIG_SERVER:http://localhost:9999}
   cloud:
     config:
       username: spring_cloud_user
       password: springCloud_Pwd!
-  kafka:
-    bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
-  zipkin:
-    sender:
-      type: kafka
-    base-url: http://localhost:9411
-  sleuth:
-    sampler:
-      probability: 1.0
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
   datasource:
     url: jdbc:postgresql://localhost:5432/core-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: postgres
     password: localdb
     driver-class-name: org.postgresql.Driver
+
   sql:
     init:
       platform: postgres
@@ -123,26 +110,38 @@ kafka-consumer-config:
   max-partition-fetch-bytes-boost-factor: 1
   poll-timeout-ms: 150
 
-springdoc:
-  api-docs:
-    path: /api-docs
-  swagger-ui:
-    path: /swagger-ui.html
-
-security:
-  paths-to-ignore: /api-docs, /actuator/**
-
 management:
   endpoints:
     web:
-      base-path: /actuator
-      exposure.include: health, prometheus
-      path-mapping.prometheus: metrics
+      exposure:
+        include: "*"
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
   endpoint:
     health:
+      probes:
+        enabled: true
       show-details: always
     prometheus:
       cache.time-to-live: 1ms
+  info:
+    env:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+springdoc:
+  api-docs:
+    path: /core/v3/api-docs
+  swagger-ui:
+    path: /core/swagger-ui
+
+security:
+  paths-to-ignore: /core/v3/api-docs, /actuator/**
 
 log:
   appName: core-service
@@ -157,3 +156,15 @@ keycloak:
   domain: localhost:9081
   client: spring-client-api-rest
   urls: http://${keycloak.domain}
+
+---
+spring.config.activate.on-profile: prod
+# Disable springdoc-openapi
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
+
+security:
+    paths-to-ignore: /actuator/**

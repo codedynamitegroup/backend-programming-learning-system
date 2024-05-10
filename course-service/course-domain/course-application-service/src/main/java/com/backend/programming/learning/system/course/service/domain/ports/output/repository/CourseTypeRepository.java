@@ -17,4 +17,5 @@ public interface CourseTypeRepository {
     void deleteCourseTypeById(UUID courseTypeId);
 
     List<CourseType> findAll();
+    Optional<CourseType> findByMoodleId(Integer moodleId);
 }

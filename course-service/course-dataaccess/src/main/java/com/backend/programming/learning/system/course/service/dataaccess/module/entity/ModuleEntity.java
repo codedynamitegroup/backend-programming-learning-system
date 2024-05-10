@@ -15,12 +15,14 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "course")
+@Table(name = "module")
 @Entity
 public class ModuleEntity {
     @Id
     @Column(name = "id")
     private UUID id;
+
+    private Integer cmid;
 
     @ManyToOne
     @JoinColumn(name = "section_id", referencedColumnName = "id")

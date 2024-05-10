@@ -21,12 +21,14 @@ public class CourseTypeDataAccessMapper {
     public CourseTypeEntity courseTypeToCourseTypeEntity(CourseType courseType) {
         return CourseTypeEntity.builder()
                 .id(courseType.getId().getValue())
+                .moodleId(courseType.getMoodleId())
                 .name(courseType.getName())
                 .build();
     }
     public CourseType courseTypeEntityToCourseType(CourseTypeEntity courseTypeEntity) {
        CourseType response = CourseType.builder()
                 .name(courseTypeEntity.getName())
+                .moodleId(courseTypeEntity.getMoodleId())
                 .build();
         response.setId(new CourseTypeId(courseTypeEntity.getId()));
         return response;

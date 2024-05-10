@@ -1,8 +1,20 @@
-logging:
-  level.root: DEBUG
-
 server:
   port: 9098
+
+logging:
+  level.root: DEBUG
+  level:
+    com.backend.programming.learning.system.gateway.service: DEBUG
+
+gateway-service:
+  timeout-ms: 10000
+  failure-rate-threshold: 50
+  slow-call-rate-threshold: 50
+  slow-call-duration-threshold: 50
+  permitted-num-of-calls-in-half-open-state: 10
+  sliding-window-size: 10
+  min-number-of-calls: 10
+  wait-duration-in-open-state: 60000
 
 eureka:
   client:
@@ -14,12 +26,86 @@ eureka:
 spring:
   application:
     name: gateway-service
-  profiles:
-    active: gateway
   config:
     import: "optional:configserver:${CONFIG_SERVER:http://localhost:9999}"
-    name: gateway-service,config-client
   cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+          lowerCaseServiceId: true
+      httpclient:
+        connect-timeout: 1000
+        response-timeout: 10s
     config:
       username: spring_cloud_user
       password: springCloud_Pwd!
+  data:
+    redis:
+      connect-timeout: 2s
+      host: ${REDIS_HOST:localhost}
+      port: 6379
+      timeout: 1s
+
+security:
+  paths-to-ignore: /actuator/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: always
+    prometheus:
+      cache.time-to-live: 1ms
+    gateway:
+      enabled: true
+  info:
+    env:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+springdoc:
+  api-docs:
+    urls:
+      - name: core
+        url: /v3/api-docs/core
+      - name: auth
+        url: /v3/api-docs/auth
+      - name: course
+        url: /v3/api-docs/course
+      - name: code-assessment
+        url: /v3/api-docs/code-assessment
+  swagger-ui:
+    urls:
+      - name: core
+        url: /swagger-ui/core
+      - name: auth
+        url: /swagger-ui/auth
+      - name: course
+        url: /swagger-ui/course
+      - name: code-assessment
+        url: /swagger-ui/code-assessment
+
+---
+spring.config.activate.on-profile: prod
+# Disable springdoc-openapi
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
+
+security:
+  paths-to-ignore: /actuator/**

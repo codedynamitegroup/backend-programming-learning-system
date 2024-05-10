@@ -25,6 +25,7 @@ public class ModuleDataAccessMapper {
         SectionEntity section = sectionDataAccessMapper.sectionToSectionEntity(module.getSection());
         return ModuleEntity.builder()
                 .id(module.getId().getValue())
+                .cmid(module.getCmid())
                 .name(module.getName())
                 .visible(module.getVisible())
                 .section(section)
@@ -36,6 +37,7 @@ public class ModuleDataAccessMapper {
     public Module moduleEntityToModule(ModuleEntity moduleEntity) {
         return Module.builder()
                 .id(new ModuleId(moduleEntity.getId()))
+                .cmid(moduleEntity.getCmid())
                 .name(moduleEntity.getName())
                 .visible(moduleEntity.getVisible())
                 .section(sectionDataAccessMapper.sectionEntityToSection(moduleEntity.getSection()))

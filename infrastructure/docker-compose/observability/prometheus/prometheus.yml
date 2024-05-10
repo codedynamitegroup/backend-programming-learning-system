@@ -1,0 +1,50 @@
+global:
+  scrape_interval:     5s # Set the scrape interval to every 5 seconds.
+  evaluation_interval: 5s # Evaluate rules every 5 seconds.
+
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['localhost:9090']
+  - job_name: 'grafana'
+    scrape_interval: 1m
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['grafana:3000']
+  - job_name: 'config-service'
+    scrape_interval: 10s
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'config-service:9999' ]
+  - job_name: 'discovery-service'
+    scrape_interval: 10s
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'discovery-service:8761' ]
+  - job_name: 'gateway-service'
+    scrape_interval: 1m
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['gateway-service:9098']
+  - job_name: 'core-service'
+    scrape_interval: 1m
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['core-service:8181']
+  - job_name: 'auth-service'
+    scrape_interval: 1m
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'auth-service:8182' ]
+  - job_name: 'course-service'
+    scrape_interval: 1m
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['course-service:8184']
+  - job_name: 'code-assessment-service'
+    scrape_interval: 1m
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['code-assessment-service:8183']
+  
