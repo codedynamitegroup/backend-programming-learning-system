@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.course.service.dataaccess.section
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
 import com.backend.programming.learning.system.course.service.domain.entity.Section;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.SectionId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
@@ -22,7 +23,7 @@ public class SectionDataAccessMapper {
     }
 
     public SectionEntity sectionToSectionEntity(Section section) {
-        CourseEntity course = courseDataAccessMapper.courseToCourseEntity(section.getCourse());
+        CourseEntity course = CourseEntity.builder().id(section.getCourseId().getValue()).build();
         return SectionEntity.builder()
                 .id(section.getId().getValue())
                 .course(course)
@@ -34,7 +35,7 @@ public class SectionDataAccessMapper {
         return Section.builder()
                 .id(new SectionId(sectionEntity.getId()))
                 .name(sectionEntity.getName())
-                .course(courseDataAccessMapper.courseEntityToCourse(sectionEntity.getCourse()))
+                .courseId(new CourseId(sectionEntity.getCourse().getId()))
                 .visible(sectionEntity.getVisible())
                 .build();
 
