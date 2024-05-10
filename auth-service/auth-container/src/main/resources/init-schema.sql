@@ -39,6 +39,7 @@ CREATE TABLE "public".main_user (
     username character varying,
     password character varying COLLATE pg_catalog."default" NOT NULL,
     dob TIMESTAMP WITH TIME ZONE,
+    organization_id uuid DEFAULT NULL,
 	first_name character varying,
 	last_name character varying,
 	phone character varying,
@@ -76,18 +77,13 @@ DROP TABLE IF EXISTS "public".role CASCADE;
 
 CREATE TABLE "public".role (
 	id uuid NOT NULL,
-	organization_id uuid NOT NULL,
 	description text,
 	name character varying COLLATE pg_catalog."default" NOT NULL,
 	created_at TIMESTAMP WITH TIME ZONE,
 	updated_at TIMESTAMP WITH TIME ZONE,
 	updated_by uuid,
 	created_by uuid,
-	PRIMARY KEY ("id"),
-    CONSTRAINT role_fk1 FOREIGN KEY (organization_id)
-        REFERENCES "public".main_organization (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE CASCADE
+	PRIMARY KEY ("id")
 );
 
 
@@ -97,8 +93,6 @@ CREATE TABLE "public".user_role (
 	id uuid NOT NULL,
 	user_id uuid NOT NULL,
 	role_id uuid NOT NULL,
-	is_active boolean NOT NULL DEFAULT true,
-	name character varying COLLATE pg_catalog."default" NOT NULL,
 	created_at TIMESTAMP WITH TIME ZONE,
 	updated_at TIMESTAMP WITH TIME ZONE,
 	updated_by uuid,

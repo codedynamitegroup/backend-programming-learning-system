@@ -23,17 +23,16 @@ import java.util.UUID;
 
 @Component
 public class RoleDataMapper {
-    private final OrganizationDataMapper organizationDataMapper;
     private final UserDataMapper userDataMapper;
 
-    public RoleDataMapper(OrganizationDataMapper organizationDataMapper, UserDataMapper userDataMapper) {
-        this.organizationDataMapper = organizationDataMapper;
+    public RoleDataMapper(UserDataMapper userDataMapper) {
         this.userDataMapper = userDataMapper;
     }
 
     public Role createRoleCommandToRole(CreateRoleCommand createRoleCommand) {
         return Role.builder()
                 .name(createRoleCommand.getName())
+                .description(createRoleCommand.getDescription())
                 .build();
     }
 
@@ -46,39 +45,17 @@ public class RoleDataMapper {
     }
 
     public RoleEntityResponse roleToRoleResponse(Role role) {
-        OrganizationEntityResponse organizationEntityResponse = organizationDataMapper
-                .organizationToOrganizationEntityResponse(role.getOrganization());
         UserEntityResponse createdBy = userDataMapper.userToUserResponse(role.getCreatedBy());
         UserEntityResponse updatedBy = userDataMapper.userToUserResponse(role.getUpdatedBy());
 
         return RoleEntityResponse.builder()
                 .roleId(role.getId().getValue())
-                .organization(organizationEntityResponse)
                 .createdBy(createdBy)
                 .updatedBy(updatedBy)
                 .description(role.getDescription())
                 .name(role.getName())
                 .createdAt(role.getCreatedAt())
                 .updatedAt(role.getUpdatedAt())
-                .build();
-    }
-
-    public QueryAllRolesByOrganizationResponse rolesToQueryAllRolesByOrganizationResponse(Page<Role> roles) {
-        List<RoleEntityResponse> roleEntityResponses = roles
-                .map(this::roleToRoleResponse).getContent();
-        return QueryAllRolesByOrganizationResponse.builder()
-                .roles(roleEntityResponses)
-                .currentPage(roles.getNumber())
-                .totalPages(roles.getTotalPages())
-                .totalItems(roles.getTotalElements())
-                .build();
-    }
-
-    public Role updateRoleCommandToRole(UpdateRoleCommand updateRoleCommand) {
-        return Role.builder()
-                .id(new RoleId(updateRoleCommand.getRoleId()))
-                .name(updateRoleCommand.getName())
-                .description(updateRoleCommand.getDescription())
                 .build();
     }
 

@@ -12,6 +12,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.up
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.role.RoleEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.Role;
 import com.backend.programming.learning.system.auth.service.domain.mapper.RoleDataMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class RoleCommandHandler {
 
     private final RoleCreateHelper roleCreateHelper;
@@ -26,14 +28,6 @@ public class RoleCommandHandler {
     private final RoleDataMapper roleDataMapper;
     private final RoleQueryHelper roleQueryHelper;
     private final RoleUpdateHelper roleUpdateHelper;
-
-    public RoleCommandHandler(RoleCreateHelper roleCreateHelper, RoleDeleteHelper roleDeleteHelper, RoleDataMapper roleDataMapper, RoleQueryHelper roleQueryHelper, RoleUpdateHelper roleUpdateHelper) {
-        this.roleCreateHelper = roleCreateHelper;
-        this.roleDeleteHelper = roleDeleteHelper;
-        this.roleDataMapper = roleDataMapper;
-        this.roleQueryHelper = roleQueryHelper;
-        this.roleUpdateHelper = roleUpdateHelper;
-    }
 
     @Transactional
     public CreateRoleResponse createRole(CreateRoleCommand createRoleCommand) {
@@ -47,14 +41,6 @@ public class RoleCommandHandler {
         Role role = roleQueryHelper.queryRole(queryRoleCommand.getRoleId());
         log.info("Role is queried with id: {}", queryRoleCommand.getRoleId());
         return roleDataMapper.roleToRoleResponse(role);
-    }
-
-    @Transactional(readOnly = true)
-    public QueryAllRolesByOrganizationResponse queryRolesByOrganizationId(QueryAllRolesByOrganizationCommand queryAllRolesCommand) {
-        Page<Role> roles = roleQueryHelper.queryAllRolesByOrganizationId(queryAllRolesCommand.getOrganizationId(),
-                queryAllRolesCommand.getPageNo(), queryAllRolesCommand.getPageSize());
-        log.info("All roles are queried");
-        return roleDataMapper.rolesToQueryAllRolesByOrganizationResponse(roles);
     }
 
     @Transactional

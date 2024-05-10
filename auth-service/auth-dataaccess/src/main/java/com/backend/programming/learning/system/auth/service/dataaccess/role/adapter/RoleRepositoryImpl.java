@@ -41,11 +41,4 @@ public class RoleRepositoryImpl implements RoleRepository {
     public void deleteById(RoleId roleId) {
         roleJpaRepository.deleteById(roleId.getValue());
     }
-
-    @Override
-    public Page<Role> findAllRolesByOrganizationId(OrganizationId organizationId, Integer page, Integer size) {
-        Pageable paging = PageRequest.of(page, size);
-        return roleJpaRepository.findAllByOrganizationId(organizationId.getValue(), paging)
-                .map(roleDataAccessMapper::roleEntityToRole);
-    }
 }

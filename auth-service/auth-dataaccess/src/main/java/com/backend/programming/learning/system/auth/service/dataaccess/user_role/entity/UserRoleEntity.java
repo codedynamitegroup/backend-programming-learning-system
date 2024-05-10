@@ -37,9 +37,6 @@ public class UserRoleEntity {
     @OneToOne
     @JoinColumn(name = "updated_by", referencedColumnName = "id")
     private UserEntity updatedBy;
-
-    private boolean isActive;
-    private String name;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 

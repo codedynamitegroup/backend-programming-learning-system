@@ -3,13 +3,13 @@ INSERT INTO public.main_organization (id,description,name,email,phone,address,ap
 	 ('08b65a39-394f-4977-a5fa-3fe145b620f8',NULL,'moodle2','moodle234@gmail.com','12345678',NULL,NULL,NULL,'2024-04-15 18:09:29.488151+07','2024-04-15 18:09:29.488151+07','9ba179ed-d26d-4828-a0f6-8836c2063992','9ba179ed-d26d-4828-a0f6-8836c2063992',false),
 	 ('3ead3b08-afdd-442f-b544-fdbd86eaa186',NULL,'Code Dynamite','codedynamite@gmail.com','12345678',NULL,NULL,NULL,'2024-04-15 18:09:40.033204+07','2024-04-15 18:09:40.033204+07','9ba179ed-d26d-4828-a0f6-8836c2063992','9ba179ed-d26d-4828-a0f6-8836c2063992',false);
 
-INSERT INTO public.main_user (id,email,username,password,dob,first_name,last_name,phone,address,avatar_url,refresh_token,last_ip,last_login,created_at,updated_at,is_deleted) VALUES
-	 ('9ba179ed-d26d-4828-a0f6-8836c2063992','nguyenquoctuan385@gmail.com','nguyenquoctuan385','123456',NULL,'Tuan','Nguyen','012345678','HCM',NULL,NULL,NULL,'2024-04-12 21:33:23.371836+07','2024-04-12 21:33:23.371836+07','2024-04-12 21:33:23.371836+07',true),
-	 ('b029f559-52a8-4699-b595-71161498ed8c','dcthong852@gmail.com','dcthong852','123456',NULL,'Thong','Duong','12365478',NULL,NULL,NULL,NULL,'2024-04-15 18:07:20.891115+07','2024-04-15 18:07:20.891115+07','2024-04-15 18:07:20.891115+07',false),
-	 ('8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7','tgtien852@gmail.com','tgtien852','123456',NULL,'Tien','Truong','12365478',NULL,NULL,NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false);
+INSERT INTO public.main_user (id,organization_id,email,username,password,dob,first_name,last_name,phone,address,avatar_url,refresh_token,last_ip,last_login,created_at,updated_at,is_deleted) VALUES
+	 ('9ba179ed-d26d-4828-a0f6-8836c2063992','08b65a39-394f-4977-a5fa-3fe145b620f8','nguyenquoctuan385@gmail.com','nguyenquoctuan385','123456',NULL,'Tuan','Nguyen','012345678','HCM',NULL,NULL,NULL,'2024-04-12 21:33:23.371836+07','2024-04-12 21:33:23.371836+07','2024-04-12 21:33:23.371836+07',true),
+	 ('b029f559-52a8-4699-b595-71161498ed8c',null, 'dcthong852@gmail.com','dcthong852','123456',NULL,'Thong','Duong','12365478',NULL,NULL,NULL,NULL,'2024-04-15 18:07:20.891115+07','2024-04-15 18:07:20.891115+07','2024-04-15 18:07:20.891115+07',false),
+	 ('8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7','08b65a39-394f-4977-a5fa-3fe145b620f8','tgtien852@gmail.com','tgtien852','123456',NULL,'Tien','Truong','12365478',NULL,NULL,NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false);
 
-INSERT INTO public."role" (id,organization_id,description,name,created_at,updated_at,updated_by,created_by) VALUES
-	 ('f705404f-5971-455e-9c34-93a0ce5b90b3','3ead3b08-afdd-442f-b544-fdbd86eaa186',NULL,'admin','2024-04-15 18:39:05.040563+07','2024-04-15 18:39:05.040563+07','9ba179ed-d26d-4828-a0f6-8836c2063992','9ba179ed-d26d-4828-a0f6-8836c2063992');
+INSERT INTO public.role (id,description,name,created_at,updated_at,updated_by,created_by) VALUES
+	 ('f705404f-5971-455e-9c34-93a0ce5b90b3',NULL,'admin','2024-04-15 18:39:05.040563+07','2024-04-15 18:39:05.040563+07','9ba179ed-d26d-4828-a0f6-8836c2063992','9ba179ed-d26d-4828-a0f6-8836c2063992');
 
-INSERT INTO public.user_role (id,user_id,role_id,is_active,name,created_at,updated_at,updated_by,created_by) VALUES
-	 ('5991f22b-f530-4913-88f2-90319ee93a76','9ba179ed-d26d-4828-a0f6-8836c2063992','f705404f-5971-455e-9c34-93a0ce5b90b3',true,'Admin','2024-04-15 18:43:25.024225+07','2024-04-15 18:43:25.024225+07','9ba179ed-d26d-4828-a0f6-8836c2063992','9ba179ed-d26d-4828-a0f6-8836c2063992');
+INSERT INTO public.user_role (id,user_id,role_id,created_at,updated_at,updated_by,created_by) VALUES
+	 ('5991f22b-f530-4913-88f2-90319ee93a76','9ba179ed-d26d-4828-a0f6-8836c2063992','f705404f-5971-455e-9c34-93a0ce5b90b3','2024-04-15 18:43:25.024225+07','2024-04-15 18:43:25.024225+07','9ba179ed-d26d-4828-a0f6-8836c2063992','9ba179ed-d26d-4828-a0f6-8836c2063992');

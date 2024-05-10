@@ -20,6 +20,7 @@ import com.backend.programming.learning.system.auth.service.domain.outbox.schedu
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -29,6 +30,7 @@ import java.util.UUID;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class OrganizationCommandHandler {
 
     private final OrganizationCreateHelper organizationCreateHelper;
@@ -38,16 +40,6 @@ public class OrganizationCommandHandler {
     private final OrganizationDataMapper organizationDataMapper;
     private final OrganizationUpdateSagaHelper organizationUpdateSagaHelper;
     private final OrganizationOutboxHelper organizationOutboxHelper;
-
-    public OrganizationCommandHandler(OrganizationCreateHelper organizationCreateHelper, OrganizationDeleteHelper organizationDeleteHelper, OrganizationQueryHelper organizationQueryHelper, OrganizationUpdateHelper organizationUpdateHelper, OrganizationDataMapper organizationDataMapper, OrganizationUpdateSagaHelper organizationUpdateSagaHelper, OrganizationOutboxHelper organizationOutboxHelper) {
-        this.organizationCreateHelper = organizationCreateHelper;
-        this.organizationDeleteHelper = organizationDeleteHelper;
-        this.organizationQueryHelper = organizationQueryHelper;
-        this.organizationUpdateHelper = organizationUpdateHelper;
-        this.organizationDataMapper = organizationDataMapper;
-        this.organizationUpdateSagaHelper = organizationUpdateSagaHelper;
-        this.organizationOutboxHelper = organizationOutboxHelper;
-    }
 
     @Transactional
     public CreateOrganizationResponse createOrganization(CreateOrganizationCommand createOrganizationCommand) {

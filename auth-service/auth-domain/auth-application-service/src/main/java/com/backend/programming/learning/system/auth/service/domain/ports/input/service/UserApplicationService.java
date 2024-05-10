@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.de
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersByOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryUserByIdCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
@@ -21,6 +22,7 @@ public interface UserApplicationService {
     CreateUserResponse createUser(@Valid CreateUserCommand createUserCommand, String token);
     UserEntityResponse findUserById(@Valid QueryUserByIdCommand queryUserCommand);
     QueryAllUsersResponse findAllUsers(QueryAllUsersCommand queryAllUsersCommand);
+    QueryAllUsersResponse findAllUsersByOrganization(QueryAllUsersByOrganizationCommand queryAllUsersByOrganizationCommand);
     UpdateUserResponse updateUser(@Valid UpdateUserCommand updateUserCommand, String token);
     DeleteUserResponse deleteUserById(@Valid DeleteUserCommand deleteUserCommand, String token);
     LoginUserResponse loginUser(@Valid LoginUserCommand loginUserCommand);

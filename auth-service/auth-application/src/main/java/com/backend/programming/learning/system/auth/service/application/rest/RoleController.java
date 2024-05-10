@@ -51,29 +51,6 @@ public class RoleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createRoleResponse);
     }
 
-    @GetMapping("/organization/{id}")
-    @Operation(summary = "Get all roles by organization id.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Success.", content = {
-                    @Content(mediaType = "application/vnd.api.v1+json",
-                            schema = @Schema(implementation = QueryAllRolesByOrganizationResponse.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "Not found."),
-            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<QueryAllRolesByOrganizationResponse> getRolesByOrganizationId(
-            @PathVariable UUID id,
-            @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "10") Integer pageSize) {
-        log.info("Getting roles by organization id: {}", id);
-        QueryAllRolesByOrganizationResponse roles = roleApplicationService
-                .findByOrganizationId(QueryAllRolesByOrganizationCommand.builder()
-                        .organizationId(id)
-                        .pageNo(pageNo)
-                        .pageSize(pageSize)
-                        .build());
-        return ResponseEntity.ok(roles);
-    }
-
     @GetMapping("/{id}")
     @Operation(summary = "Get role by id.")
     @ApiResponses(value = {

@@ -6,7 +6,7 @@ import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserDeletedEvent;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
-import com.backend.programming.learning.system.auth.service.domain.ports.input.service.KeycloakApplicationService;
+import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserKeycloakApplicationService;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
@@ -20,9 +20,9 @@ import java.util.Optional;
 public class UserDeleteHelper {
     private final AuthDomainService authDomainService;
     private final UserRepository userRepository;
-    private final KeycloakApplicationService keycloakApplicationService;
+    private final UserKeycloakApplicationService keycloakApplicationService;
 
-    public UserDeleteHelper(AuthDomainService authDomainService, UserRepository userRepository, KeycloakApplicationService keycloakApplicationService) {
+    public UserDeleteHelper(AuthDomainService authDomainService, UserRepository userRepository, UserKeycloakApplicationService keycloakApplicationService) {
         this.authDomainService = authDomainService;
         this.userRepository = userRepository;
         this.keycloakApplicationService = keycloakApplicationService;

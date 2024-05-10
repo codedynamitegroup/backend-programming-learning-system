@@ -19,11 +19,9 @@ import java.util.UUID;
 @Component
 public class RoleQueryHelper {
     private final RoleRepository roleRepository;
-    private final OrganizationRepository organizationRepository;
 
-    public RoleQueryHelper(RoleRepository roleRepository, OrganizationRepository organizationRepository) {
+    public RoleQueryHelper(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
-        this.organizationRepository = organizationRepository;
     }
 
     @Transactional(readOnly = true)
@@ -37,22 +35,6 @@ public class RoleQueryHelper {
         }
         return roleResult.get();
     }
-
-    private void checkOrganizationExist(UUID organizationId) {
-        Optional<Organization> organization = organizationRepository.findById(new OrganizationId(organizationId));
-        if (organization.isEmpty()) {
-            log.warn("Could not find organization with id: {}", organizationId);
-            throw new AuthNotFoundException("Could not find organization with id: " + organizationId);
-        }
-    }
-
-
-    @Transactional(readOnly = true)
-    public Page<Role> queryAllRolesByOrganizationId(UUID organizationId ,Integer pageNo, Integer pageSize) {
-        checkOrganizationExist(organizationId);
-        return roleRepository.findAllRolesByOrganizationId(new OrganizationId(organizationId), pageNo, pageSize);
-    }
-
 }
 
 

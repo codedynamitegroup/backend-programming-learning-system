@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.de
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersByOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryUserByIdCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
@@ -40,7 +41,6 @@ import java.util.UUID;
 @Component
 @RequiredArgsConstructor
 public class UserCommandHandler {
-
     private final UserCreateHelper userCreateHelper;
     private final UserDeleteHelper userDeleteHelper;
     private final UserDataMapper userDataMapper;
@@ -96,6 +96,16 @@ public class UserCommandHandler {
     public QueryAllUsersResponse queryAllUsers(QueryAllUsersCommand queryAllUsersCommand) {
         Page<User> users = userQueryHelper.queryAllUsers(queryAllUsersCommand.getPageNo(), queryAllUsersCommand.getPageSize());
         log.info("All users are queried");
+        return userDataMapper.usersToQueryAllUsers(users);
+    }
+
+    @Transactional(readOnly = true)
+    public QueryAllUsersResponse queryAllUsersByOrganization(QueryAllUsersByOrganizationCommand queryAllUsersByOrganizationCommand) {
+        Page<User> users = userQueryHelper.queryAllUsersByOrganization(
+                queryAllUsersByOrganizationCommand.getOrganizationId(),
+                queryAllUsersByOrganizationCommand.getPageNo(),
+                queryAllUsersByOrganizationCommand.getPageSize());
+        log.info("All users by organizationId {} are queried", queryAllUsersByOrganizationCommand.getOrganizationId());
         return userDataMapper.usersToQueryAllUsers(users);
     }
 

@@ -23,11 +23,13 @@ public class User extends AggregateRoot<UserId> {
     private ZonedDateTime lastLogin;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
+    private Organization organization;
     private Boolean isDeleted;
 
     private User(Builder builder) {
         super.setId(builder.userId);
         email = builder.email;
+        organization = builder.Organization;
         setUsername(builder.username);
         setPassword(builder.password);
         setDob(builder.dob);
@@ -156,6 +158,14 @@ public class User extends AggregateRoot<UserId> {
         this.updatedAt = updatedAt;
     }
 
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
+    }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -169,6 +179,7 @@ public class User extends AggregateRoot<UserId> {
     }
 
     public static final class Builder {
+        private Organization Organization;
         private String email;
         private String password;
         private String username;
@@ -187,6 +198,11 @@ public class User extends AggregateRoot<UserId> {
         private UserId userId;
 
         private Builder() {
+        }
+
+        public Builder organization(Organization val) {
+            Organization = val;
+            return this;
         }
 
         public Builder email(String val) {

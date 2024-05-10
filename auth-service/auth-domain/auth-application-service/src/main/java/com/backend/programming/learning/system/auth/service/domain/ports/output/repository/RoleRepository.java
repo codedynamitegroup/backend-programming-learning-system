@@ -12,5 +12,4 @@ public interface RoleRepository {
     Role save(Role role);
     Optional<Role> findById(RoleId roleId);
     void deleteById(RoleId roleId);
-    Page<Role> findAllRolesByOrganizationId(OrganizationId organizationId, Integer page, Integer size);
 }

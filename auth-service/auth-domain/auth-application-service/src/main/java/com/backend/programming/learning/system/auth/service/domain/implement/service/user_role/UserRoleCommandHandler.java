@@ -5,32 +5,22 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.cr
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user_role.DeleteUserRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user_role.DeleteUserRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user_role.QueryUserRoleCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user_role.UpdateUserRoleCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user_role.UpdateUserRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user_role.UserRoleEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.UserRole;
 import com.backend.programming.learning.system.auth.service.domain.mapper.UserRoleDataMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class UserRoleCommandHandler {
-
     private final UserRoleCreateHelper userRoleCreateHelper;
     private final UserRoleDeleteHelper userRoleDeleteHelper;
     private final UserRoleDataMapper userRoleDataMapper;
     private final UserRoleQueryHelper userRoleQueryHelper;
-    private final UserRoleUpdateHelper userRoleUpdateHelper;
-
-    public UserRoleCommandHandler(UserRoleCreateHelper userRoleCreateHelper, UserRoleDeleteHelper userRoleDeleteHelper, UserRoleDataMapper userRoleDataMapper, UserRoleQueryHelper userRoleQueryHelper, UserRoleUpdateHelper userRoleUpdateHelper) {
-        this.userRoleCreateHelper = userRoleCreateHelper;
-        this.userRoleDeleteHelper = userRoleDeleteHelper;
-        this.userRoleDataMapper = userRoleDataMapper;
-        this.userRoleQueryHelper = userRoleQueryHelper;
-        this.userRoleUpdateHelper = userRoleUpdateHelper;
-    }
 
     @Transactional
     public CreateUserRoleResponse createUserRole(CreateUserRoleCommand createUserRoleCommand) {
@@ -48,13 +38,6 @@ public class UserRoleCommandHandler {
         return userRoleDataMapper.userRoleToUserRoleResponse(userRole);
     }
 
-    @Transactional
-    public UpdateUserRoleResponse updateUserRole(UpdateUserRoleCommand updateUserRoleCommand) {
-        UserRole userRoleUpdated = userRoleUpdateHelper.persistUserRole(updateUserRoleCommand);
-        log.info("User role is updated with id: {}", userRoleUpdated.getId().getValue());
-        return userRoleDataMapper.userRoleToUpdateUserRoleResponse(userRoleUpdated,
-                "User role updated successfully");
-    }
 
     @Transactional
     public DeleteUserRoleResponse deleteUserRole(DeleteUserRoleCommand deleteUserRoleCommand) {

@@ -19,6 +19,8 @@ public class CreateUserCommand {
     @NotNull
     private final String username;
 
+    private final UUID organizationId;
+
     @NotNull
     private final String password;
 

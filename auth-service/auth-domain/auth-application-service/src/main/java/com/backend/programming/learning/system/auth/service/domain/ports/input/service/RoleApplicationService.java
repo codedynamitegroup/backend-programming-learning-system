@@ -16,7 +16,6 @@ import jakarta.validation.Valid;
 public interface RoleApplicationService {
     CreateRoleResponse createRole(@Valid CreateRoleCommand createRoleCommand);
     RoleEntityResponse findRoleById(@Valid QueryRoleByIdCommand queryRoleCommand);
-    QueryAllRolesByOrganizationResponse findByOrganizationId(@Valid QueryAllRolesByOrganizationCommand queryAllRolesCommand);
     UpdateRoleResponse updateRole(@Valid UpdateRoleCommand updateRoleCommand);
     DeleteRoleResponse deleteRoleById(@Valid DeleteRoleCommand deleteRoleCommand);
 }

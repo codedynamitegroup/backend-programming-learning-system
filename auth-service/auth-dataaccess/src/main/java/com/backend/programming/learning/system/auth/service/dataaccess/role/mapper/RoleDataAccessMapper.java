@@ -13,21 +13,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class RoleDataAccessMapper {
     private final UserDataAccessMapper userDataAccessMapper;
-    private final OrganizationDataAccessMapper organizationDataAccessMapper;
 
-    public RoleDataAccessMapper(UserDataAccessMapper userDataAccessMapper, OrganizationDataAccessMapper organizationDataAccessMapper) {
+    public RoleDataAccessMapper(UserDataAccessMapper userDataAccessMapper) {
         this.userDataAccessMapper = userDataAccessMapper;
-        this.organizationDataAccessMapper = organizationDataAccessMapper;
     }
 
     public RoleEntity roleToRoleEntity(Role role) {
         return RoleEntity.builder()
                 .id(role.getId().getValue())
-                .organization(
-                        OrganizationEntity.builder()
-                                .id(role.getOrganization().getId().getValue())
-                                .build()
-                )
                 .createdBy(userDataAccessMapper.userToUserEntity(role.getCreatedBy()))
                 .updatedBy(userDataAccessMapper.userToUserEntity(role.getUpdatedBy()))
                 .description(role.getDescription())
@@ -40,7 +33,6 @@ public class RoleDataAccessMapper {
     public Role roleEntityToRole(RoleEntity roleEntity) {
         return Role.builder()
                 .id(new RoleId(roleEntity.getId()))
-                .organization(organizationDataAccessMapper.organizationEntityToOrganization(roleEntity.getOrganization()))
                 .createdBy(userDataAccessMapper.userEntityToUser(roleEntity.getCreatedBy()))
                 .updatedBy(userDataAccessMapper.userEntityToUser(roleEntity.getUpdatedBy()))
                 .description(roleEntity.getDescription())

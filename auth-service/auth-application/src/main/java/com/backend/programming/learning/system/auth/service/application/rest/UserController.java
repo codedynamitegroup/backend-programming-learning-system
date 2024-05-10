@@ -14,7 +14,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.re
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
-import com.backend.programming.learning.system.auth.service.domain.ports.input.service.KeycloakApplicationService;
+import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserKeycloakApplicationService;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -26,7 +26,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,11 +37,9 @@ import java.util.UUID;
 public class UserController {
 
     private final UserApplicationService userApplicationService;
-    private final KeycloakApplicationService keycloakApplicationService;
 
-    public UserController(UserApplicationService userApplicationService, KeycloakApplicationService keycloakApplicationService) {
+    public UserController(UserApplicationService userApplicationService) {
         this.userApplicationService = userApplicationService;
-        this.keycloakApplicationService = keycloakApplicationService;
     }
 
     @PostMapping
@@ -100,16 +97,6 @@ public class UserController {
                         .build()
         );
         return ResponseEntity.status(HttpStatus.OK).body(refreshTokenUser);
-    }
-
-    @GetMapping("/search")
-    public ResponseEntity<?> findAllUsers(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
-            String token = jwtAuthenticationToken.getToken().getTokenValue();
-            return ResponseEntity.ok(keycloakApplicationService.findAllUsers(token));
-        }
-        return ResponseEntity.badRequest().body("Token is not valid.");
     }
 
     @GetMapping("/{id}")

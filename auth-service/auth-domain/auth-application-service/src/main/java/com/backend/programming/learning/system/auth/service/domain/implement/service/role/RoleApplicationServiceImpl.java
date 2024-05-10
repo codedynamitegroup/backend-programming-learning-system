@@ -37,11 +37,6 @@ class RoleApplicationServiceImpl implements RoleApplicationService {
     }
 
     @Override
-    public QueryAllRolesByOrganizationResponse findByOrganizationId(QueryAllRolesByOrganizationCommand queryAllRolesCommand) {
-        return roleCommandHandler.queryRolesByOrganizationId(queryAllRolesCommand);
-    }
-
-    @Override
     public UpdateRoleResponse updateRole(UpdateRoleCommand updateRoleCommand) {
         return roleCommandHandler.updateRole(updateRoleCommand);
     }

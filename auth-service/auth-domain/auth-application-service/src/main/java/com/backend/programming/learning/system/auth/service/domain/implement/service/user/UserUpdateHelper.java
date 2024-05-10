@@ -5,7 +5,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.up
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
-import com.backend.programming.learning.system.auth.service.domain.ports.input.service.KeycloakApplicationService;
+import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserKeycloakApplicationService;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
@@ -22,9 +22,9 @@ import java.util.UUID;
 public class UserUpdateHelper {
     private final UserRepository userRepository;
     private final AuthDomainService authDomainService;
-    private final KeycloakApplicationService keycloakApplicationService;
+    private final UserKeycloakApplicationService keycloakApplicationService;
 
-    public UserUpdateHelper(UserRepository userRepository, AuthDomainService authDomainService, KeycloakApplicationService keycloakApplicationService) {
+    public UserUpdateHelper(UserRepository userRepository, AuthDomainService authDomainService, UserKeycloakApplicationService keycloakApplicationService) {
         this.userRepository = userRepository;
         this.authDomainService = authDomainService;
         this.keycloakApplicationService = keycloakApplicationService;

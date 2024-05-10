@@ -13,5 +13,6 @@ public class RefreshTokenUserCommand {
     @NotNull
     private final String refreshToken;
 
+    @NotNull
     private final String accessToken;
 }

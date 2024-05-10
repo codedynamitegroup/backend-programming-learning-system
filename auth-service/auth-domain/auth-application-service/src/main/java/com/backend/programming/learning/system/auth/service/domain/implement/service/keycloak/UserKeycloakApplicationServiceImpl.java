@@ -2,22 +2,16 @@ package com.backend.programming.learning.system.auth.service.domain.implement.se
 
 import com.backend.programming.learning.system.auth.service.config.KeycloakConfigData;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
-import com.backend.programming.learning.system.auth.service.domain.ports.input.service.KeycloakApplicationService;
-import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
+import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserKeycloakApplicationService;
 import com.backend.programming.learning.system.auth.service.domain.util.KeycloakProvider;
-import com.backend.programming.learning.system.domain.exception.user.UserNotFoundException;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 import org.keycloak.admin.client.resource.*;
 import org.keycloak.representations.idm.CredentialRepresentation;
@@ -29,19 +23,13 @@ import javax.ws.rs.core.Response;
 @Slf4j
 @Validated
 @Service
-public class KeycloakApplicationServiceImpl implements KeycloakApplicationService {
+public class UserKeycloakApplicationServiceImpl implements UserKeycloakApplicationService {
     private final KeycloakProvider keycloakProvider;
     private final KeycloakConfigData keycloakConfigData;
 
-    public KeycloakApplicationServiceImpl(KeycloakProvider keycloakProvider, KeycloakConfigData keycloakConfigData) {
+    public UserKeycloakApplicationServiceImpl(KeycloakProvider keycloakProvider, KeycloakConfigData keycloakConfigData) {
         this.keycloakProvider = keycloakProvider;
         this.keycloakConfigData = keycloakConfigData;
-    }
-
-    @Override
-    public List<UserRepresentation> findAllUsers(String token) {
-        UsersResource usersResource = getUserResource(token);
-        return usersResource.list();
     }
 
     public UsersResource getUserResource(String token) {
