@@ -10,6 +10,7 @@ import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRe
 import com.backend.programming.learning.system.kafka.producer.KafkaOutboxMessageHelper;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -17,18 +18,13 @@ import java.util.function.BiConsumer;
 
 @Slf4j
 @Component
-public class UserEventKafkaPublisher1 implements UserRequestMessagePublisher {
+@RequiredArgsConstructor
+public class UserRequestEventKafkaPublisher implements UserRequestMessagePublisher {
     private final UserMessagingDataMapper userMessagingDataMapper;
     private final KafkaProducer<String, UserRequestAvroModel> kafkaProducer;
     private final AuthServiceConfigData authServiceConfigData;
     private final KafkaOutboxMessageHelper kafkaOutboxMessageHelper;
 
-    public UserEventKafkaPublisher1(UserMessagingDataMapper userMessagingDataMapper, KafkaProducer<String, UserRequestAvroModel> kafkaProducer, AuthServiceConfigData authServiceConfigData, KafkaOutboxMessageHelper kafkaOutboxMessageHelper) {
-        this.userMessagingDataMapper = userMessagingDataMapper;
-        this.kafkaProducer = kafkaProducer;
-        this.authServiceConfigData = authServiceConfigData;
-        this.kafkaOutboxMessageHelper = kafkaOutboxMessageHelper;
-    }
 
 
     @Override
@@ -38,7 +34,7 @@ public class UserEventKafkaPublisher1 implements UserRequestMessagePublisher {
         String sagaId = userOutboxMessage.getSagaId().toString();
         ServiceName serviceName = ServiceName.AUTH_SERVICE;
 
-        String requestTopicName = "auth-service-user-request-topic";
+        String requestTopicName = "course-user-request";
         try {
             switch (userOutboxMessage.getCopyState()) {
                 case CREATING -> {

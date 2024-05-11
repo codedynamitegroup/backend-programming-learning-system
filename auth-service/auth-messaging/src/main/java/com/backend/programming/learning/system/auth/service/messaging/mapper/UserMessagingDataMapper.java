@@ -9,6 +9,7 @@ import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRe
 import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseAvroModel;
 import org.springframework.stereotype.Component;
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -95,12 +96,14 @@ public class UserMessagingDataMapper {
                 .sagaId(userCreateRequestAvroModel.getSagaId())
                 .userId(userCreateRequestAvroModel.getUserId())
                 .email(userCreateRequestAvroModel.getEmail())
+                .password("")
                 .firstName(userCreateRequestAvroModel.getFirstName())
                 .lastName(userCreateRequestAvroModel.getLastName())
                 .phone(userCreateRequestAvroModel.getPhone())
                 .createdAt(userCreateRequestAvroModel.getCreatedAt())
                 .updatedAt(userCreateRequestAvroModel.getUpdatedAt())
                 .isDeleted(userCreateRequestAvroModel.getIsDeleted())
+                .copyState(com.backend.programming.learning.system.domain.valueobject.CopyState.CREATING)
                 .build();
     }
 
@@ -125,6 +128,18 @@ public class UserMessagingDataMapper {
                 .dob(userUpdateRequestAvroModel.getDob())
                 .phone(userUpdateRequestAvroModel.getPhone())
                 .updatedAt(userUpdateRequestAvroModel.getUpdatedAt())
+                .build();
+    }
+
+    public UserResponseAvroModel userEventPayloadToUserResponseAvroModel(String sagaId, UserEventPayload userEventPayload) {
+        return UserResponseAvroModel.newBuilder()
+                .setId(UUID.randomUUID().toString())
+                .setSagaId(sagaId)
+                .setUserId(userEventPayload.getUserId())
+                .setCopyState(CopyState.valueOf(userEventPayload.getCopyState()))
+                .setServiceName(
+                        com.backend.programming.learning.system.kafka.auth.avro.model.user.ServiceName.valueOf(com.backend.programming.learning.system.domain.valueobject.ServiceName.COURSE_SERVICE.name()))
+                .setFailureMessages(List.of())
                 .build();
     }
 }

@@ -78,24 +78,6 @@ public class UserOutboxHelper {
                 .build());
     }
 
-    @Transactional
-    public void saveUserOutboxMessage1(UserEventPayload userEventPayload,
-                                      CopyState copyState,
-                                      OutboxStatus outboxStatus,
-                                      UUID sagaId) {
-        save(UserOutboxMessage.builder()
-                .id(UUID.randomUUID())
-                .type(USER_SAGA_NAME)
-                .sagaId(sagaId)
-                .type(USER_SAGA_NAME)
-                .createdAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)))
-                .processedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)))
-                .payload(createdPayload(userEventPayload))
-                .copyState(copyState)
-                .outboxStatus(outboxStatus)
-                .build());
-    }
-
     private String createdPayload(UserEventPayload userEventPayload) {
         try {
             return objectMapper.writeValueAsString(userEventPayload);

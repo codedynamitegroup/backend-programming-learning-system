@@ -7,10 +7,11 @@ import com.backend.programming.learning.system.course.service.domain.event.user.
 import com.backend.programming.learning.system.course.service.domain.mapper.user.UserDataMapper;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.user.UserOutboxMessage;
 import com.backend.programming.learning.system.course.service.domain.outbox.scheduler.user.UserOutboxHelper;
-import com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.user.UserResponseMessagePublisher;
+import com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.user.UserRequestMessagePublisher;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,20 +24,13 @@ import java.util.UUID;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class UserRequestHelper {
     private final UserDataMapper userDataMapper;
     private final UserRepository userRepository;
     private final CourseDomainService courseDomainService;
     private final UserOutboxHelper userOutboxHelper;
-    private final UserResponseMessagePublisher userResponseMessagePublisher;
-
-    public UserRequestHelper(UserDataMapper userDataMapper, UserRepository userRepository, CourseDomainService courseDomainService, UserOutboxHelper userOutboxHelper, UserResponseMessagePublisher userResponseMessagePublisher) {
-        this.userDataMapper = userDataMapper;
-        this.userRepository = userRepository;
-        this.courseDomainService = courseDomainService;
-        this.userOutboxHelper = userOutboxHelper;
-        this.userResponseMessagePublisher = userResponseMessagePublisher;
-    }
+    private final UserRequestMessagePublisher userRequestMessagePublisher;
 
     @Transactional
     public void createdUser(UserRequest userRequest) {
@@ -199,7 +193,7 @@ public class UserRequestHelper {
                 userOutboxHelper.getUserOutboxMessageBySagaIdAndCopyState(
                         UUID.fromString(userRequest.getSagaId()), copyState);
         if (userOutboxMessage.isPresent()) {
-            userResponseMessagePublisher.publish(userOutboxMessage.get(), userOutboxHelper::updateOutboxMessage);
+            userRequestMessagePublisher.publish(userOutboxMessage.get(), userOutboxHelper::updateOutboxMessage);
             return true;
         }
         return false;

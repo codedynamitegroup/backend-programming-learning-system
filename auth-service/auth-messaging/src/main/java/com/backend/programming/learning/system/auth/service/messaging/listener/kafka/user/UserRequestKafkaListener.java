@@ -26,7 +26,6 @@ public class UserRequestKafkaListener implements KafkaConsumer<UserRequestAvroMo
     private final UserRequestMessageListener userRequestMessageListener;
     private final UserMessagingDataMapper userMessagingDataMapper;
 
-
     @Override
     @KafkaListener(id = "${kafka-consumer-config.course-service-user-request-group-id}",
             topics = "${auth-service.course-user-request-topic-name}")

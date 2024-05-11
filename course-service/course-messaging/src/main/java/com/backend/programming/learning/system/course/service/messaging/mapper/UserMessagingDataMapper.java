@@ -8,6 +8,8 @@ import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRe
 import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseAvroModel;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Component
@@ -59,7 +61,7 @@ public class UserMessagingDataMapper {
                 .setCopyState(CopyState.valueOf(userEventPayload.getCopyState()))
                 .setServiceName(
                         ServiceName.valueOf(com.backend.programming.learning.system.domain.valueobject.ServiceName.COURSE_SERVICE.name()))
-                .setFailureMessages(userEventPayload.getFailureMessages())
+                .setFailureMessages(Objects.isNull(userEventPayload.getFailureMessages()) ? List.of() : userEventPayload.getFailureMessages())
                 .build();
     }
 
@@ -75,6 +77,8 @@ public class UserMessagingDataMapper {
                 .setCreatedAt(userEventPayload.getCreatedAt().toInstant())
                 .setUpdatedAt(userEventPayload.getUpdatedAt().toInstant())
                 .setIsDeleted(userEventPayload.getIsDeleted())
+                .setServiceName(ServiceName.valueOf(serviceName.name()))
+                .setCopyState(CopyState.valueOf(userEventPayload.getCopyState()))
                 .build();
     }
 
