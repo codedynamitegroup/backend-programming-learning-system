@@ -14,4 +14,10 @@ public interface CodeSubmissionRepository {
     Optional<CodeSubmission> findById(CodeSubmissionId id);
 
     Optional<List<CodeSubmission>> findByUserIdAndQuestionId(UserId userId, CodeQuestionId codeQuestionId);
+
+    Integer findNumberOfSubmissionUnderMySubmissionByMemory(CodeSubmissionId id);
+
+    Integer findNumberOfSubmissionUnderMySubmissionByRunTime(CodeSubmissionId id);
+
+    Integer countGradedTotalSubmission(CodeQuestionId id);
 }

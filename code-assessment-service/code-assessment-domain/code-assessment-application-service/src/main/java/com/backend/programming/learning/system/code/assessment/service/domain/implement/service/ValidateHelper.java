@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_question.CodeQuestionNotFoundException;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_submission.CodeSubmissionNotFound;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.programming_language.ProgrammingLanguageNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.shared_solution.SharedSolutionNotFound;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.shared_solution.SharedSolutionVoteNotFound;
@@ -11,6 +12,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.ex
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.test_case.TestCaseNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_question.CodeQuestionRepository;
+import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_submssion.CodeSubmissionRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.CommentId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.SharedSolutionId;
@@ -20,6 +22,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.va
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.shared_solution_vote.SharedSolutionVoteId;
 import com.backend.programming.learning.system.domain.exception.user.UserNotFoundException;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
+import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -40,9 +43,9 @@ public class ValidateHelper {
     private final SharedSolutionRepository sharedSolutionRepository;
     private final ProgrammingLanguageCodeQuestionRepository programmingLanguageCodeQuestionRepository;
     private final CommentRepository commentRepository;
+    private final CodeSubmissionRepository codeSubmissionRepository;
 
-
-    public ValidateHelper(CodeQuestionRepository codeQuestionRepository, ProgrammingLanguageRepository programmingLanguageRepository, TestCaseRepository testCaseRepository, UserRepository userRepository, TagRepository tagRepository, SharedSolutionRepository sharedSolutionRepository, ProgrammingLanguageCodeQuestionRepository programmingLanguageCodeQuestionRepository, CommentRepository commentRepository) {
+    public ValidateHelper(CodeQuestionRepository codeQuestionRepository, ProgrammingLanguageRepository programmingLanguageRepository, TestCaseRepository testCaseRepository, UserRepository userRepository, TagRepository tagRepository, SharedSolutionRepository sharedSolutionRepository, ProgrammingLanguageCodeQuestionRepository programmingLanguageCodeQuestionRepository, CommentRepository commentRepository, CodeSubmissionRepository codeSubmissionRepository) {
         this.codeQuestionRepository = codeQuestionRepository;
         this.programmingLanguageRepository = programmingLanguageRepository;
         this.testCaseRepository = testCaseRepository;
@@ -51,6 +54,7 @@ public class ValidateHelper {
         this.sharedSolutionRepository = sharedSolutionRepository;
         this.programmingLanguageCodeQuestionRepository = programmingLanguageCodeQuestionRepository;
         this.commentRepository = commentRepository;
+        this.codeSubmissionRepository = codeSubmissionRepository;
     }
 
     public List<TestCase> validateTestCasesByCodeQuestionId(UUID codeQuestionId) {
@@ -174,6 +178,17 @@ public class ValidateHelper {
         }else{
             log.error("CommentVote with userId: {} and comment: {} not found", userId, commentId);
             throw new CommentNotFoundException("SharedSolutionVote with userId: " + userId.getValue() + " and solutionId: " + commentId.getValue() + " not found");
+        }
+    }
+
+    public CodeSubmission validateCodeSubmission(CodeSubmissionId codeSubmissionId) {
+        Optional<CodeSubmission> codeSubmissionOpt = codeSubmissionRepository.findById(codeSubmissionId);
+        if(codeSubmissionOpt.isPresent())
+            return codeSubmissionOpt.get();
+        else {
+            log.error("codesubmission with id: {} not found", codeSubmissionId);
+            throw new CodeSubmissionNotFound("codesubmission with id " + codeSubmissionId.getValue() + " not found");
+
         }
     }
 }

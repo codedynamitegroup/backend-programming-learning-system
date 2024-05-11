@@ -54,4 +54,19 @@ public class CodeSubmissionRepositoryImpl implements CodeSubmissionRepository {
                         .map(dataAccessMapper::entityToCodeSubmission)
                         .collect(Collectors.toList()));
     }
+
+    @Override
+    public Integer findNumberOfSubmissionUnderMySubmissionByMemory(CodeSubmissionId id) {
+        return jpaRepository.findNumberOfSubmissionUnderMySubmissionByMemory(id.getValue());
+    }
+
+    @Override
+    public Integer findNumberOfSubmissionUnderMySubmissionByRunTime(CodeSubmissionId id) {
+        return jpaRepository.findNumberOfSubmissionUnderMySubmissionByRunTime(id.getValue());
+    }
+
+    @Override
+    public Integer countGradedTotalSubmission(CodeQuestionId id) {
+        return jpaRepository.countGradedByCodeQuestionId(id.getValue());
+    }
 }
