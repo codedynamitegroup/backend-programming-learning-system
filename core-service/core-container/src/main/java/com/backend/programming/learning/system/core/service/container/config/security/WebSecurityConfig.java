@@ -24,8 +24,6 @@ public class WebSecurityConfig {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET, "/core/certificate-courses").hasAnyRole(ADMIN, GENERAL)
-                        .requestMatchers(HttpMethod.GET, "/core/topics").hasAnyRole(ADMIN, GENERAL)
                         .anyRequest().permitAll()
                 )
                 .csrf(csrf -> csrf.disable())
