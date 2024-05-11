@@ -41,4 +41,10 @@ public class RoleRepositoryImpl implements RoleRepository {
     public void deleteById(RoleId roleId) {
         roleJpaRepository.deleteById(roleId.getValue());
     }
+
+    @Override
+    public Page<Role> findAll(Integer page, Integer size) {
+        return roleJpaRepository.findAll(PageRequest.of(page, size))
+                .map(roleDataAccessMapper::roleEntityToRole);
+    }
 }

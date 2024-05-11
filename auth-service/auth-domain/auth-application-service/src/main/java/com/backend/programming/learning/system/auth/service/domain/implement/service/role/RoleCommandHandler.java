@@ -4,9 +4,9 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.cr
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.role.CreateRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.role.DeleteRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.role.DeleteRoleResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesByOrganizationCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryRoleByIdCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesByOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.role.UpdateRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.role.UpdateRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.role.RoleEntityResponse;
@@ -41,6 +41,13 @@ public class RoleCommandHandler {
         Role role = roleQueryHelper.queryRole(queryRoleCommand.getRoleId());
         log.info("Role is queried with id: {}", queryRoleCommand.getRoleId());
         return roleDataMapper.roleToRoleResponse(role);
+    }
+
+    @Transactional(readOnly = true)
+    public QueryAllRolesResponse queryAllRoles(QueryAllRolesCommand queryAllRolesCommand) {
+        Page<Role> roles = roleQueryHelper.queryAllRoles(queryAllRolesCommand.getPageNo(), queryAllRolesCommand.getPageSize());
+        log.info("All roles are queried");
+        return roleDataMapper.rolesToQueryAllRolesResponse(roles);
     }
 
     @Transactional

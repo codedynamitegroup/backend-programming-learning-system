@@ -32,15 +32,14 @@ public class UserKeycloakApplicationServiceImpl implements UserKeycloakApplicati
         this.keycloakConfigData = keycloakConfigData;
     }
 
-    public UsersResource getUserResource(String token) {
+    @Override
+    public UsersResource getUsersResource(String token) {
         RealmResource realmResource = keycloakProvider.getRealmResource(token).realm(keycloakConfigData.getRealm());
         return realmResource.users();
     }
 
     @Override
     public void createUser(CreateUserCommand createUserCommand, String token) {
-        UsersResource usersResource = getUserResource(token);
-
         UserRepresentation userRepresentation = new UserRepresentation();
         userRepresentation.setFirstName(createUserCommand.getFirstName());
         userRepresentation.setLastName(createUserCommand.getLastName());
@@ -58,6 +57,7 @@ public class UserKeycloakApplicationServiceImpl implements UserKeycloakApplicati
         list.add(credentialRepresentation);
         userRepresentation.setCredentials(list);
 
+        UsersResource usersResource = getUsersResource(token);
         Response response = usersResource.create(userRepresentation);
 
         if (Objects.equals(201, response.getStatus())) {
@@ -73,7 +73,7 @@ public class UserKeycloakApplicationServiceImpl implements UserKeycloakApplicati
 
     @Override
     public void deleteUser(User user, String token) {
-        UsersResource usersResource = getUserResource(token);
+        UsersResource usersResource = getUsersResource(token);
         UserRepresentation userRepresentation = usersResource.searchByUsername(user.getUsername(), true).get(0);
         userRepresentation.setEnabled(false);
         usersResource.get(userRepresentation.getId()).update(userRepresentation);
@@ -81,7 +81,7 @@ public class UserKeycloakApplicationServiceImpl implements UserKeycloakApplicati
 
     @Override
     public void updateUser(User user, String token) {
-        UsersResource usersResource = getUserResource(token);
+        UsersResource usersResource = getUsersResource(token);
         UserRepresentation userRepresentation = usersResource.searchByUsername(user.getUsername(), true).get(0);
         userRepresentation.setFirstName(user.getFirstName());
         userRepresentation.setLastName(user.getLastName());

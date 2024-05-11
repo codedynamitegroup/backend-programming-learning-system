@@ -35,6 +35,11 @@ public class RoleQueryHelper {
         }
         return roleResult.get();
     }
+
+    @Transactional(readOnly = true)
+    public Page<Role> queryAllRoles(Integer page, Integer size) {
+        return roleRepository.findAll(page, size);
+    }
 }
 
 

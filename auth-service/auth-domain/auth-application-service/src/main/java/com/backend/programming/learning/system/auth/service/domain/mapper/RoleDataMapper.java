@@ -3,18 +3,13 @@ package com.backend.programming.learning.system.auth.service.domain.mapper;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.role.CreateRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.role.CreateRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.role.DeleteRoleResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesByOrganizationResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.update.role.UpdateRoleCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.organization.QueryAllOrganizationsResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.role.UpdateRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.organization.OrganizationEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.role.RoleEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
-import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.entity.Role;
-import com.backend.programming.learning.system.auth.service.domain.entity.User;
-import com.backend.programming.learning.system.auth.service.domain.valueobject.RoleId;
-import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
@@ -70,6 +65,17 @@ public class RoleDataMapper {
         return DeleteRoleResponse.builder()
                 .roleId(roleId)
                 .message(message)
+                .build();
+    }
+
+    public QueryAllRolesResponse rolesToQueryAllRolesResponse(Page<Role> roles) {
+        List<RoleEntityResponse> roleEntityResponses = roles
+                .map(this::roleToRoleResponse).getContent();
+        return QueryAllRolesResponse.builder()
+                .roles(roleEntityResponses)
+                .currentPage(roles.getNumber())
+                .totalPages(roles.getTotalPages())
+                .totalItems(roles.getTotalElements())
                 .build();
     }
 }

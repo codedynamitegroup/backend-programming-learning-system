@@ -16,5 +16,5 @@ public interface UserJpaRepository extends JpaRepository<UserEntity, UUID> {
     Optional<UserEntity> findByIdAndIsDeletedFalse(UUID id);
     Optional<UserEntity> findByIdAndIsDeletedTrue(UUID id);
     Page<UserEntity> findAllByIsDeletedFalse(Pageable pageable);
-    Page<UserEntity> findAllByOrganizationId(UUID organizationId, Pageable pageable);
+    Page<UserEntity> findAllByOrganizationIdAndIsDeletedFalse(UUID organizationId, Pageable pageable);
 }

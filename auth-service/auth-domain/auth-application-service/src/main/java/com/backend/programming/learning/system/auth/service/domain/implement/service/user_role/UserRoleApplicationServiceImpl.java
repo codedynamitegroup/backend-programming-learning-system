@@ -22,8 +22,8 @@ class UserRoleApplicationServiceImpl implements UserRoleApplicationService {
     }
 
     @Override
-    public CreateUserRoleResponse createUserRole(CreateUserRoleCommand createUserRoleCommand) {
-        return userRoleCommandHandler.createUserRole(createUserRoleCommand);
+    public CreateUserRoleResponse createUserRole(CreateUserRoleCommand createUserRoleCommand, String token) {
+        return userRoleCommandHandler.createUserRole(createUserRoleCommand, token);
     }
 
     @Override

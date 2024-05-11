@@ -29,6 +29,7 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/auth/users/:id").hasRole(ADMIN)
                         .requestMatchers(HttpMethod.GET, "/auth/users/search").hasAnyRole(ADMIN, USER)
                         .requestMatchers(HttpMethod.POST, "/auth/users").hasRole(ADMIN)
+                        .requestMatchers(HttpMethod.POST, "/auth/user-roles").hasRole(ADMIN)
                         .anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2

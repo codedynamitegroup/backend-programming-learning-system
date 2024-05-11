@@ -57,7 +57,6 @@ public class OrganizationController {
                     @Content(mediaType = "application/vnd.api.v1+json",
                             schema = @Schema(implementation = QueryAllOrganizationsResponse.class))
             }),
-            @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllOrganizationsResponse> getAllOrganizations(
             @RequestParam(defaultValue = "0") Integer pageNo,

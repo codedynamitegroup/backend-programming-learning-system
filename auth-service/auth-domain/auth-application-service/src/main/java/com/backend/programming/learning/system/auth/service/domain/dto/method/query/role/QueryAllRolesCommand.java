@@ -5,12 +5,11 @@ import lombok.Builder;
 import lombok.Getter;
 
 import jakarta.validation.constraints.NotNull;
-import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
-public class QueryAllRolesByOrganizationCommand {
+public class QueryAllRolesCommand {
     @NotNull
     private final int pageNo;
 
