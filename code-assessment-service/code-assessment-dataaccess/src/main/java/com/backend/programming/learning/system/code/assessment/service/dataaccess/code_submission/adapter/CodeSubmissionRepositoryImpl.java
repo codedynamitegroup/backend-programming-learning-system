@@ -66,7 +66,22 @@ public class CodeSubmissionRepositoryImpl implements CodeSubmissionRepository {
     }
 
     @Override
-    public Integer countGradedTotalSubmission(CodeQuestionId id) {
-        return jpaRepository.countGradedByCodeQuestionId(id.getValue());
+    public Integer totalSubmissionHavingAvgMemoryAndRunTime(CodeQuestionId id) {
+        return jpaRepository.totalSubmissionHavingAvgMemoryAndRunTime(id.getValue());
+    }
+
+    @Override
+    public Integer findNumberOfSubmissionUnderMySubmissionByScore(CodeSubmissionId id) {
+        return jpaRepository.findNumberOfSubmissionUnderMySubmissionByScore(id.getValue());
+    }
+
+    @Override
+    public Integer totalSubmissionHavingScore(CodeQuestionId id) {
+        return jpaRepository.totalSubmissionHavingScore(id.getValue());
+    }
+
+    @Override
+    public Integer findYourScoreRank(CodeSubmissionId id) {
+        return jpaRepository.findYourScoreRank(id.getValue());
     }
 }

@@ -19,5 +19,11 @@ public interface CodeSubmissionRepository {
 
     Integer findNumberOfSubmissionUnderMySubmissionByRunTime(CodeSubmissionId id);
 
-    Integer countGradedTotalSubmission(CodeQuestionId id);
+    Integer totalSubmissionHavingAvgMemoryAndRunTime(CodeQuestionId id);
+
+    Integer findNumberOfSubmissionUnderMySubmissionByScore(CodeSubmissionId id);
+
+    Integer totalSubmissionHavingScore(CodeQuestionId id);
+
+    Integer findYourScoreRank(CodeSubmissionId id);
 }

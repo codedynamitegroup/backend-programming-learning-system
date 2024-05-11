@@ -156,14 +156,22 @@ public class CodeSubmissionHelper {
     public GetMemoryAndTimeRankingResponse getMemoryAndRunTimeRanking(GetMemoryAndTimeRankingCommand command) {
         CodeSubmission codeSubmission = validateHelper.validateCodeSubmission(new CodeSubmissionId(command.getCodeSubmissionId()));
 
-        Integer memoryRank = codeSubmissionRepository.findNumberOfSubmissionUnderMySubmissionByMemory(codeSubmission.getId());
-        Integer runTimeRank = codeSubmissionRepository.findNumberOfSubmissionUnderMySubmissionByRunTime(codeSubmission.getId());
-        Integer totalSubmission = codeSubmissionRepository.countGradedTotalSubmission(codeSubmission.getCodeQuestion().getId());
+        Integer memoryRank = codeSubmission.getMemory() != null? codeSubmissionRepository.findNumberOfSubmissionUnderMySubmissionByMemory(codeSubmission.getId()): null;
+        Integer runTimeRank = memoryRank != null? codeSubmissionRepository.findNumberOfSubmissionUnderMySubmissionByRunTime(codeSubmission.getId()): null;
+        Integer totalSubmissionHavingAvgMemoryAndRunTime = memoryRank != null? codeSubmissionRepository.totalSubmissionHavingAvgMemoryAndRunTime(codeSubmission.getCodeQuestion().getId()): null;
+
+        Integer numberOfSubmissionUnderYouByScore = codeSubmission.getGrade() != null? codeSubmissionRepository.findNumberOfSubmissionUnderMySubmissionByScore(codeSubmission.getId()): null;
+        Integer totalSubmissionHavingScore = numberOfSubmissionUnderYouByScore != null? codeSubmissionRepository.totalSubmissionHavingScore(codeSubmission.getCodeQuestion().getId()): null;
+        Integer yourScoreRank = numberOfSubmissionUnderYouByScore != null? codeSubmissionRepository.findYourScoreRank(codeSubmission.getId()): null;
 
         return GetMemoryAndTimeRankingResponse.builder()
-                .totalSubmission(totalSubmission)
+                .totalSubmissionHavingAvgMemoryAndRunTime(totalSubmissionHavingAvgMemoryAndRunTime)
                 .numberOfSubmissionUnderYouByMemory(memoryRank)
                 .numberOfSubmissionUnderYouByRunTime(runTimeRank)
+
+                .totalSubmissionHavingScore(totalSubmissionHavingScore)
+                .yourScoreRank(yourScoreRank)
+                .numberOfSubmissionUnderYouByScore(numberOfSubmissionUnderYouByScore)
                 .build();
 
     }
