@@ -30,6 +30,7 @@
         <dependency>
             <groupId>io.opentelemetry.javaagent</groupId>
             <artifactId>opentelemetry-javaagent</artifactId>
+            <version>${otelVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
