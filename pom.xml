@@ -49,6 +49,7 @@
 		<spring-cloud-netflix.version>4.0.3</spring-cloud-netflix.version>
 		<micrometer-tracing-bridge-brave.version>1.12.5</micrometer-tracing-bridge-brave.version>
 		<swagger-annotations.version>2.2.20</swagger-annotations.version>
+		<otelVersion>1.32.0</otelVersion>
 	</properties>
 
 	<dependencyManagement>
@@ -353,6 +354,12 @@
 				<version>${logstash-logback-encoder.version}</version>
 			</dependency>
 
+			<dependency>
+				<groupId>io.opentelemetry.javaagent</groupId>
+				<artifactId>opentelemetry-javaagent</artifactId>
+				<version>${otelVersion}</version>
+				<scope>runtime</scope>
+			</dependency>
 
 		</dependencies>
 	</dependencyManagement>
