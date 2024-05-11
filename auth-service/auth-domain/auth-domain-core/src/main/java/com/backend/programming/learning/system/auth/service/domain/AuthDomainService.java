@@ -10,7 +10,6 @@ import com.backend.programming.learning.system.auth.service.domain.event.organiz
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserDeletedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedEvent;
-import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
 
 public interface AuthDomainService {
     UserCreatedEvent createUser(User user);

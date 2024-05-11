@@ -10,6 +10,7 @@ public class UserDataAccessMapper {
     public User userEntityToUser(UserEntity userEntity) {
         return User.builder()
                 .id(new UserId(userEntity.getId()))
+                .username(userEntity.getUsername())
                 .email(userEntity.getEmail())
                 .password(userEntity.getPassword())
                 .createdAt(userEntity.getCreatedAt())
@@ -31,6 +32,7 @@ public class UserDataAccessMapper {
         return UserEntity.builder()
                 .id(user.getId().getValue())
                 .email(user.getEmail())
+                .username(user.getUsername())
                 .password(user.getPassword())
                 .createdAt(user.getCreatedAt())
                 .updatedAt(user.getUpdatedAt())

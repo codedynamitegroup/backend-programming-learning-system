@@ -21,10 +21,6 @@ public class RoleEntity {
     @Id
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name = "organization_id", referencedColumnName = "id")
-    private OrganizationEntity organization;
-
     @OneToOne
     @JoinColumn(name = "created_by", referencedColumnName = "id")
     private UserEntity createdBy;

@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.auth.service.dataaccess.user.entity;
 
+import com.backend.programming.learning.system.auth.service.dataaccess.organization.entity.OrganizationEntity;
 import jakarta.persistence.*;
 
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
@@ -20,6 +21,7 @@ public class UserEntity {
     @Id
     private UUID id;
     private String email;
+    private String username;
     private String password;
     private ZonedDateTime dob;
     private String firstName;
@@ -33,6 +35,10 @@ public class UserEntity {
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
     private Boolean isDeleted;
+
+    @ManyToOne
+    @JoinColumn(name = "organization_id", referencedColumnName = "id")
+    private OrganizationEntity organization;
 
     @Override
     public boolean equals(Object o) {

@@ -68,15 +68,14 @@ public class MoodleDataMapper {
                 .phone(userModel.getPhone1())
                 .build();
     }
-
-
-    public CreateUserRoleCommand createRole(com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user_moodle.Role role,
-                                            Map<String, Role> roleMap, UUID userId) {
-        return CreateUserRoleCommand.builder()
-                .roleId(roleMap.get(role.getShortname().toLowerCase()).getId().getValue())
-                .userId(userId)
-                .name(role.getShortname())
-                .createdBy(userId)
-                .build();
-    }
+    
+//    public CreateUserRoleCommand createRole(com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user_moodle.Role role,
+//                                            Map<String, Role> roleMap, UUID userId) {
+//        return CreateUserRoleCommand.builder()
+//                .roleId(roleMap.get(role.getShortname().toLowerCase()).getId().getValue())
+//                .userId(userId)
+//                .name(role.getShortname())
+//                .createdBy(userId)
+//                .build();
+//    }
 }
