@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.core.service.container.config;
+package com.backend.programming.learning.system.code.assessment.service.domain.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
