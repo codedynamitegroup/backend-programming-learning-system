@@ -24,7 +24,7 @@ public class SectionRepositoryImpl implements SectionRepository {
     public Section save(Section section) {
         return
             sectionDataAccessMapper.sectionEntityToSection(sectionJpaRepository
-                .saveAndFlush(sectionDataAccessMapper
+                .save(sectionDataAccessMapper
                     .sectionToSectionEntity(section)));
     }
 
