@@ -4,9 +4,14 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.cr
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersByOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryUserByIdCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
@@ -14,23 +19,28 @@ import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserDeletedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.implement.saga.user.UserUpdateSagaHelper;
 import com.backend.programming.learning.system.auth.service.domain.mapper.UserDataMapper;
 import com.backend.programming.learning.system.auth.service.domain.outbox.scheduler.user.UserOutboxHelper;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.UUID;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class UserCommandHandler {
-
     private final UserCreateHelper userCreateHelper;
     private final UserDeleteHelper userDeleteHelper;
     private final UserDataMapper userDataMapper;
@@ -38,31 +48,23 @@ public class UserCommandHandler {
     private final UserUpdateHelper userUpdateHelper;
     private final UserOutboxHelper userOutboxHelper;
     private final UserUpdateSagaHelper userSagaHelper;
-
-    public UserCommandHandler(UserCreateHelper userCreateHelper, UserDeleteHelper userDeleteHelper, UserDataMapper userDataMapper, UserQueryHelper userQueryHelper, UserUpdateHelper userUpdateHelper, UserOutboxHelper userOutboxHelper, UserUpdateSagaHelper userSagaHelper) {
-        this.userCreateHelper = userCreateHelper;
-        this.userDeleteHelper = userDeleteHelper;
-        this.userDataMapper = userDataMapper;
-        this.userQueryHelper = userQueryHelper;
-        this.userUpdateHelper = userUpdateHelper;
-        this.userOutboxHelper = userOutboxHelper;
-        this.userSagaHelper = userSagaHelper;
-    }
+    private final UserLoginHelper userLoginHelper;
+    private final UserRefreshTokenHelper userRefreshTokenHelper;
 
     @Transactional
-    public CreateUserResponse createUser(CreateUserCommand createOrderCommand) {
-        UserCreatedEvent userCreatedEvent = userCreateHelper.persistUser(createOrderCommand);
+    public CreateUserResponse createUser(CreateUserCommand createOrderCommand, String token) {
+        UserCreatedEvent userCreatedEvent = userCreateHelper.persistUser(createOrderCommand, token);
         log.info("User is created with id: {}", userCreatedEvent.getUser().getId().getValue());
         CreateUserResponse createUserResponse = userDataMapper.userToCreateUserResponse(userCreatedEvent.getUser(),
                 "User created successfully");
 
         userOutboxHelper.saveUserOutboxMessage(
-                        userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
-                        ServiceName.CORE_SERVICE,
-                        CopyState.CREATING,
-                        OutboxStatus.STARTED,
-                        userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
-                                UUID.randomUUID());
+                userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
+                ServiceName.CORE_SERVICE,
+                CopyState.CREATING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
+                UUID.randomUUID());
 
         userOutboxHelper.saveUserOutboxMessage(
                 userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
@@ -97,9 +99,19 @@ public class UserCommandHandler {
         return userDataMapper.usersToQueryAllUsers(users);
     }
 
+    @Transactional(readOnly = true)
+    public QueryAllUsersResponse queryAllUsersByOrganization(QueryAllUsersByOrganizationCommand queryAllUsersByOrganizationCommand) {
+        Page<User> users = userQueryHelper.queryAllUsersByOrganization(
+                queryAllUsersByOrganizationCommand.getOrganizationId(),
+                queryAllUsersByOrganizationCommand.getPageNo(),
+                queryAllUsersByOrganizationCommand.getPageSize());
+        log.info("All users by organizationId {} are queried", queryAllUsersByOrganizationCommand.getOrganizationId());
+        return userDataMapper.usersToQueryAllUsers(users);
+    }
+
     @Transactional
-    public UpdateUserResponse updateUser(UpdateUserCommand updateUserCommand) {
-        UserUpdatedEvent userUpdatedEvent = userUpdateHelper.persistUser(updateUserCommand);
+    public UpdateUserResponse updateUser(UpdateUserCommand updateUserCommand, String token) {
+        UserUpdatedEvent userUpdatedEvent = userUpdateHelper.persistUser(updateUserCommand, token);
 
         userOutboxHelper.saveUserOutboxMessage(
                 userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
@@ -131,8 +143,8 @@ public class UserCommandHandler {
 
 
     @Transactional
-    public DeleteUserResponse deleteUser(DeleteUserCommand deleteUserCommand) {
-        UserDeletedEvent userDeletedEvent = userDeleteHelper.deleteUser(deleteUserCommand);
+    public DeleteUserResponse deleteUser(DeleteUserCommand deleteUserCommand, String token) {
+        UserDeletedEvent userDeletedEvent = userDeleteHelper.deleteUser(deleteUserCommand, token);
         log.info("User is deleted with id: {}", deleteUserCommand.getUserId());
 
         userOutboxHelper.saveUserOutboxMessage(
@@ -161,5 +173,13 @@ public class UserCommandHandler {
 
         return userDataMapper.deleteUserResponse(deleteUserCommand.getUserId(),
                 "User deleted successfully");
+    }
+
+    public LoginUserResponse loginUser(LoginUserCommand loginUserCommand) {
+        return userLoginHelper.loginUser(loginUserCommand);
+    }
+
+    public RefreshTokenUserResponse refreshTokenUser(RefreshTokenUserCommand refreshTokenUserCommand) {
+        return userRefreshTokenHelper.refreshTokenUser(refreshTokenUserCommand);
     }
 }

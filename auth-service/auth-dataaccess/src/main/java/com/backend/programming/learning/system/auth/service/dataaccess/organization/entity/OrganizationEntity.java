@@ -42,9 +42,6 @@ public class OrganizationEntity {
     private ZonedDateTime updatedAt;
     private Boolean isDeleted;
 
-    @OneToMany(mappedBy = "organization")
-    private List<RoleEntity> roles;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

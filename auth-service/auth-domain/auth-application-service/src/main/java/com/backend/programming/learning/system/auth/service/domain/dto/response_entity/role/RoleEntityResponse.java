@@ -17,9 +17,6 @@ public class RoleEntityResponse {
     @NotNull
     private UUID roleId;
 
-    @NotNull
-    private OrganizationEntityResponse organization;
-
     private UserEntityResponse createdBy;
 
     private UserEntityResponse updatedBy;

@@ -9,6 +9,7 @@ import com.backend.programming.learning.system.auth.service.domain.exception.Aut
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.OrganizationRepository;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
+import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +41,7 @@ public class OrganizationUpdateHelper {
         User updateBy = getUser(updateOrganizationCommand.getUpdatedBy());
 
         organization.setUpdatedBy(updateBy);
-        organization.setUpdatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
+        organization.setUpdatedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
 
         if (updateOrganizationCommand.getName() != null) {
             organization.setName(updateOrganizationCommand.getName());
@@ -93,13 +94,12 @@ public class OrganizationUpdateHelper {
         return organization.get();
     }
 
-    private Organization updateOrganization(Organization organization) {
+    private void updateOrganization(Organization organization) {
         Organization organizationResult = organizationRepository.save(organization);
         if (organizationResult == null) {
             log.error("Could not update organization!");
             throw new AuthDomainException("Could not update organization!");
         }
         log.info("Organization is updated with id: {}", organizationResult.getId().getValue());
-        return organizationResult;
     }
 }

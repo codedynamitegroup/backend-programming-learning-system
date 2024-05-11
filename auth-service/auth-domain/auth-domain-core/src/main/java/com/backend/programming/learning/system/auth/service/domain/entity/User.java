@@ -11,6 +11,7 @@ import java.util.UUID;
 public class User extends AggregateRoot<UserId> {
     private String email;
     private String password;
+    private String username;
     private ZonedDateTime dob;
     private String firstName;
     private String lastName;
@@ -22,11 +23,14 @@ public class User extends AggregateRoot<UserId> {
     private ZonedDateTime lastLogin;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
+    private Organization organization;
     private Boolean isDeleted;
 
     private User(Builder builder) {
         super.setId(builder.userId);
         email = builder.email;
+        organization = builder.Organization;
+        setUsername(builder.username);
         setPassword(builder.password);
         setDob(builder.dob);
         setFirstName(builder.firstName);
@@ -154,13 +158,31 @@ public class User extends AggregateRoot<UserId> {
         this.updatedAt = updatedAt;
     }
 
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
+    }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
     public static final class Builder {
+        private Organization Organization;
         private String email;
         private String password;
+        private String username;
         private ZonedDateTime dob;
         private String firstName;
         private String lastName;
@@ -178,8 +200,18 @@ public class User extends AggregateRoot<UserId> {
         private Builder() {
         }
 
+        public Builder organization(Organization val) {
+            Organization = val;
+            return this;
+        }
+
         public Builder email(String val) {
             email = val;
+            return this;
+        }
+
+        public Builder username(String val) {
+            username = val;
             return this;
         }
 

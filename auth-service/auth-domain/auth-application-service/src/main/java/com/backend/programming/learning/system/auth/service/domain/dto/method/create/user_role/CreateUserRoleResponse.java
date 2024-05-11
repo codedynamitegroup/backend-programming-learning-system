@@ -15,8 +15,6 @@ import java.util.UUID;
 public class CreateUserRoleResponse {
     @NotNull
     private UUID userRoleId;
-    @NotNull
-    private String name;
 
     @NotNull
     private final String message;

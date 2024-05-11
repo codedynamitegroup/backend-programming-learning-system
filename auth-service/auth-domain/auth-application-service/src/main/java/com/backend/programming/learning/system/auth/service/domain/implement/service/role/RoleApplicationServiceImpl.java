@@ -4,9 +4,9 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.cr
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.role.CreateRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.role.DeleteRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.role.DeleteRoleResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesByOrganizationCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryRoleByIdCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesByOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.role.UpdateRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.role.UpdateRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.role.RoleEntityResponse;
@@ -37,11 +37,6 @@ class RoleApplicationServiceImpl implements RoleApplicationService {
     }
 
     @Override
-    public QueryAllRolesByOrganizationResponse findByOrganizationId(QueryAllRolesByOrganizationCommand queryAllRolesCommand) {
-        return roleCommandHandler.queryRolesByOrganizationId(queryAllRolesCommand);
-    }
-
-    @Override
     public UpdateRoleResponse updateRole(UpdateRoleCommand updateRoleCommand) {
         return roleCommandHandler.updateRole(updateRoleCommand);
     }
@@ -49,5 +44,10 @@ class RoleApplicationServiceImpl implements RoleApplicationService {
     @Override
     public DeleteRoleResponse deleteRoleById(DeleteRoleCommand deleteRoleCommand) {
         return roleCommandHandler.deleteRole(deleteRoleCommand);
+    }
+
+    @Override
+    public QueryAllRolesResponse findAllRoles(QueryAllRolesCommand queryAllRolesCommand) {
+        return roleCommandHandler.queryAllRoles(queryAllRolesCommand);
     }
 }

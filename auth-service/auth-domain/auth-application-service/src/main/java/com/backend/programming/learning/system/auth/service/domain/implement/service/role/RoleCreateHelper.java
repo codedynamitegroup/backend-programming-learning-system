@@ -25,14 +25,12 @@ import java.util.UUID;
 public class RoleCreateHelper {
     private final AuthDomainService authDomainService;
     private final RoleRepository roleRepository;
-    private final OrganizationRepository organizationRepository;
     private final RoleDataMapper roleDataMapper;
     private final UserRepository userRepository;
 
-    public RoleCreateHelper(AuthDomainService authDomainService, RoleRepository roleRepository, OrganizationRepository organizationRepository, RoleDataMapper roleDataMapper, UserRepository userRepository) {
+    public RoleCreateHelper(AuthDomainService authDomainService, RoleRepository roleRepository, RoleDataMapper roleDataMapper, UserRepository userRepository) {
         this.authDomainService = authDomainService;
         this.roleRepository = roleRepository;
-        this.organizationRepository = organizationRepository;
         this.roleDataMapper = roleDataMapper;
         this.userRepository = userRepository;
     }
@@ -40,22 +38,11 @@ public class RoleCreateHelper {
     @Transactional
     public Role persistRole(CreateRoleCommand createRoleCommand) {
         User createdBy = getUser(createRoleCommand.getCreatedBy());
-        Organization organization = getOrganization(createRoleCommand.getOrganizationId());
         Role role = roleDataMapper.createRoleCommandToRole(createRoleCommand);
-        role.setOrganization(organization);
         role.setCreatedBy(createdBy);
         role.setUpdatedBy(createdBy);
         authDomainService.createRole(role);
         return saveRole(role);
-    }
-
-    private Organization getOrganization(UUID organizationId) {
-        Optional<Organization> organization = organizationRepository.findById(new OrganizationId(organizationId));
-        if (organization.isEmpty()) {
-            log.warn("Could not find organization with id: {}", organizationId);
-            throw new AuthNotFoundException("Could not find organization with id: " + organizationId);
-        }
-        return organization.get();
     }
 
     private User getUser(UUID userId) {

@@ -24,9 +24,6 @@ public class UserRoleEntityResponse {
     private UserEntityResponse createdBy;
 
     private UserEntityResponse updatedBy;
-
-    private boolean isActive;
-    private String name;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 }
