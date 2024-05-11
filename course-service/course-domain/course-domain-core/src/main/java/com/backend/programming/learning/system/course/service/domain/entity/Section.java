@@ -5,13 +5,13 @@ import com.backend.programming.learning.system.course.service.domain.valueobject
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 
 public class Section extends AggregateRoot<SectionId> {
-    private Course course;
+    private CourseId courseId;
     private String name;
     private Integer visible;
 
     private Section(Builder builder) {
         super.setId(builder.id);
-        setCourse(builder.course);
+        setCourseId(builder.courseId);
         setName(builder.name);
         setVisible(builder.visible);
     }
@@ -21,12 +21,12 @@ public class Section extends AggregateRoot<SectionId> {
     }
 
 
-    public Course getCourse() {
-        return course;
+    public CourseId getCourseId() {
+        return courseId;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourseId(CourseId courseId) {
+        this.courseId = courseId;
     }
 
     public String getName() {
@@ -50,7 +50,7 @@ public class Section extends AggregateRoot<SectionId> {
     public static final class Builder {
         private SectionId id;
 
-        private Course course;
+        private CourseId courseId;
         private String name;
         private Integer visible;
 
@@ -66,8 +66,8 @@ public class Section extends AggregateRoot<SectionId> {
             return this;
         }
 
-        public Builder course(Course val) {
-            course = val;
+        public Builder courseId(CourseId val) {
+            courseId = val;
             return this;
         }
 
