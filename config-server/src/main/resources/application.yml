@@ -1,13 +1,9 @@
 server:
   port: 9999
 
-logging:
-  pattern:
-    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
-
 spring:
   application:
-    name: configserver
+    name: config-server
   profiles:
     active: git
   cloud:
@@ -17,13 +13,18 @@ spring:
           uri: https://github.com/6BrosT/config-server-repository.git
           skip-ssl-validation: true
           default-label: main
-          force-pull: true
+#          force-pull: true
           clone-on-start: true
+          timeout: 10
       fail-fast: true
   security:
     user:
       name: spring_cloud_user
       password: springCloud_Pwd!
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
 
 management:
   endpoints:
