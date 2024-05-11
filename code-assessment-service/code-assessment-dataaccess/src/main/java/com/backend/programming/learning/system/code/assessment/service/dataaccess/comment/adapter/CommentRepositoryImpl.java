@@ -2,16 +2,19 @@ package com.backend.programming.learning.system.code.assessment.service.dataacce
 
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.comment.entity.CommentEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.comment.entity.vote.CommentVoteEntity;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.comment.entity.vote.CommentVoteEntityId;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.comment.mapper.CommentDataAccessMapper;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.comment.mapper.CommentVoteDataAccessMapper;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.comment.repository.CommentJpaRepository;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.comment.repository.CommentVoteJpaRepository;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.general_mapper.GeneralMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Comment;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.CommentVote;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.CommentRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.CommentId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.SharedSolutionId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.Vote;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.comment_vote.CommentVoteId;
 import com.backend.programming.learning.system.domain.valueobject.QueryOrderBy;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
@@ -102,5 +105,25 @@ public class CommentRepositoryImpl implements CommentRepository {
                 .toList();
         return result;
     }
+
+    @Override
+    public void vote(CommentVote commentVote) {
+        CommentVoteEntity commentVoteEntity = commentVoteDataAccessMapper.commentVoteToEntity(commentVote);
+        commentVoteJpaRepository.save(commentVoteEntity);
+
+    }
+
+    @Override
+    public void unvote(CommentVoteId commentVoteId) {
+        commentVoteJpaRepository.deleteById(commentVoteDataAccessMapper.idToEntityId(commentVoteId));
+    }
+
+    @Override
+    public Optional<CommentVote> findCommentVoteId(CommentVoteId commentVoteId) {
+        Optional<CommentVoteEntity> commentVoteEntity = commentVoteJpaRepository.findById(commentVoteDataAccessMapper.idToEntityId(commentVoteId));
+
+        return commentVoteEntity.map(commentVoteDataAccessMapper::entityToCommentVote);
+    }
+
 
 }

@@ -16,10 +16,10 @@ public class GetReplyCommentCommand {
     @NotNull(message = "userId must not be null")
     UUID userId;
 
-    @NotNull(message = "sharedSolutionId must not be null")
-    @Setter
-    @JsonIgnore
-    UUID sharedSolutionId;
+//    @NotNull(message = "sharedSolutionId must not be null")
+//    @Setter
+//    @JsonIgnore
+//    UUID sharedSolutionId;
 
     @NotNull(message = "rootCommentId must not be null")
     @Setter

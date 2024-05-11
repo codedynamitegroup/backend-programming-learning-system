@@ -15,6 +15,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.va
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.SharedSolutionId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagId;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.comment_vote.CommentVoteId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.programming_language_code_question.ProgrammingLanguageCodeQuestionId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.shared_solution_vote.SharedSolutionVoteId;
 import com.backend.programming.learning.system.domain.exception.user.UserNotFoundException;
@@ -160,6 +161,19 @@ public class ValidateHelper {
         }else{
             log.error("Comment with id: {} not found", replyId);
             throw new CommentNotFoundException("Comment with id: " + replyId + " not found");
+        }
+    }
+
+    public CommentVote validateCommentVote(CommentVoteId commentVoteId) {
+        Optional<CommentVote> commentVoteOpt =
+                commentRepository.findCommentVoteId(commentVoteId);
+        UserId userId = commentVoteId.getValue().getUserId();
+        CommentId commentId = commentVoteId.getValue().getCommentId();
+        if(commentVoteOpt.isPresent()){
+            return commentVoteOpt.get();
+        }else{
+            log.error("CommentVote with userId: {} and comment: {} not found", userId, commentId);
+            throw new CommentNotFoundException("SharedSolutionVote with userId: " + userId.getValue() + " and solutionId: " + commentId.getValue() + " not found");
         }
     }
 }

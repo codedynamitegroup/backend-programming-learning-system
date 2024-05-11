@@ -4,6 +4,7 @@ package com.backend.programming.learning.system.code.assessment.service.applicat
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.CommentDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment.CreateCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment.CreateCommentResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment.vote.VoteCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionCommand;
@@ -11,6 +12,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.DeleteSharedSolutionCommad;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.DeleteSharedSolutionVoteCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.comment.DeleteCommentCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.comment.vote.UnvoteCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionByCodeQuestionIdCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionDetailCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionResponseItem;
@@ -149,20 +151,43 @@ public class SharedSolutionController {
         GetSolutionCommentResponse response =  service.getComments(command);
         return ResponseEntity.ok(response);
     }
-    //get solution comments
-    @GetMapping("/{shared-solution-id}/comment/{comment-id}/reply")
+
+    //get reply comments
+    @GetMapping("/reply-comment/{comment-id}")
     public ResponseEntity<List<CommentDto>> getReplyComment(
-            @PathVariable("shared-solution-id") UUID sharedSolutionId,
             @PathVariable("comment-id") UUID commentId,
 //            @RequestParam(defaultValue = "${code-assessment-service.default-page-number}") Integer pageNo,
 //            @RequestParam(defaultValue = "${code-assessment-service.default-page-size}") Integer pageSize,
             @RequestBody GetReplyCommentCommand command){
 
-        command.setSharedSolutionId(sharedSolutionId);
         command.setRootCommentId(commentId);
 
         List<CommentDto> response =  service.getReplyComments(command);
         return ResponseEntity.ok(response);
+    }
+
+    //vote comment
+    @PostMapping("/vote/comment/{comment-id}")
+    public ResponseEntity<String> voteComment(
+            @PathVariable("comment-id") UUID commentId,
+            @RequestBody VoteCommentCommand command){
+
+        command.setCommentId(commentId);
+
+        service.voteComment(command);
+        return ResponseEntity.ok("vote successfully");
+    }
+
+    //unvote comment
+    @DeleteMapping("/vote/comment/{comment-id}")
+    public ResponseEntity<String> unvoteComment(
+            @PathVariable("comment-id") UUID commentId,
+            @RequestBody UnvoteCommentCommand command){
+
+        command.setCommentId(commentId);
+
+        service.unvoteComment(command);
+        return ResponseEntity.noContent().build();
     }
 
 
@@ -181,7 +206,7 @@ public class SharedSolutionController {
 
     //remove vote shared solution
     @DeleteMapping("/{shared-solution-id}/vote")
-    public ResponseEntity deleteVote
+    public ResponseEntity deleteVoteSharedSolution
     (@PathVariable("shared-solution-id") UUID sharedSolutionId,
      @RequestBody DeleteSharedSolutionVoteCommand command){
         command.setSharedSolutionId(sharedSolutionId);

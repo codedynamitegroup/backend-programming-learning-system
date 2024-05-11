@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.d
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.SharedSolution;
 import com.backend.programming.learning.system.domain.valueobject.QueryOrderBy;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;

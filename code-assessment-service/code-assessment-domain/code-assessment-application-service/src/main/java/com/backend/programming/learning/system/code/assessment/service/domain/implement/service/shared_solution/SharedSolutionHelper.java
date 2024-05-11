@@ -67,7 +67,11 @@ public class SharedSolutionHelper {
     @Transactional
     public Page<SharedSolution> getSharedSolutionsByCodeQuestionId(GetSharedSolutionByCodeQuestionIdCommand command) {
         CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(command.getCodeQuestionId());
-        List<TagId> tagIds = command.getFilterTagIds() == null? null: command.getFilterTagIds().stream().map(tagDataMapper::UUIDToTagId).toList();
+        
+        List<TagId> tagIds = command.getFilterTagIds() == null || command.getFilterTagIds().isEmpty()?
+                null:
+                command.getFilterTagIds().stream().map(tagDataMapper::UUIDToTagId).toList();
+
         return sharedSolutionRepository.findByCodeQuestionId(
                 codeQuestion.getId(),
                 command.getPageNum(),
@@ -76,6 +80,7 @@ public class SharedSolutionHelper {
                 command.getOrderBy(),
                 tagIds);
     }
+    //hello
 
     @Transactional
     public void voteSharedSolution(VoteSharedSolutionCommand command) {
