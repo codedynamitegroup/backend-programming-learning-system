@@ -2,9 +2,8 @@ server:
   port: 9999
 
 logging:
-  level:
-    ROOT: INFO
-    org.spring.framework.cloud.config: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
 
 spring:
   application:
