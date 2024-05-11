@@ -11,4 +11,5 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ListCourseModel {
-    List<CourseModel> courses;}
+    List<CourseModel> courses;
+}

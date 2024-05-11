@@ -62,6 +62,24 @@ VALUES
     ('b6484e21-6937-489c-b031-b71767994747', '1', 'CLC'),
     ('b6484e21-6937-489c-b031-b71767994748', '2', 'VP'),
     ('b6484e21-6937-489c-b031-b71767994749', '3', 'APCS');
+
+INSERT INTO public.role_moodle(id,name)
+VALUES
+    (1,'manager'),
+    (2,'coursecreator'),
+    (3,'editingteacher'),
+    (4,'teacher'),
+    (5,'student'),
+    (6,'guest');
+
+INSERT INTO public.org_role(id, org_id, role_moodle_id)
+VALUES
+    ('b6484e21-6937-489c-b031-b71767994750', '9ba179ed-d26d-4828-a0f6-8836c2063992', 1),
+    ('b6484e21-6937-489c-b031-b71767994751', '9ba179ed-d26d-4828-a0f6-8836c2063992', 2),
+    ('b6484e21-6937-489c-b031-b71767994752', '9ba179ed-d26d-4828-a0f6-8836c2063992', 3),
+    ('b6484e21-6937-489c-b031-b71767994753', '9ba179ed-d26d-4828-a0f6-8836c2063992', 4),
+    ('b6484e21-6937-489c-b031-b71767994754', '9ba179ed-d26d-4828-a0f6-8836c2063992', 5),
+    ('b6484e21-6937-489c-b031-b71767994755', '9ba179ed-d26d-4828-a0f6-8836c2063992', 6);
 --INSERT INTO public.answer_of_question(id, question_id, feedback, answer, fraction)
 --VALUES
 --    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b6484e21-6937-489c-b031-b71767994221', 'Correct', 'print(Hello World)', 1),
