@@ -4,9 +4,14 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.cr
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersByOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryUserByIdCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
@@ -26,8 +31,8 @@ class UserApplicationServiceImpl implements UserApplicationService {
     }
 
     @Override
-    public CreateUserResponse createUser(CreateUserCommand createUserCommand) {
-        return userCommandHandler.createUser(createUserCommand);
+    public CreateUserResponse createUser(CreateUserCommand createUserCommand, String token) {
+        return userCommandHandler.createUser(createUserCommand, token);
     }
 
     @Override
@@ -41,12 +46,27 @@ class UserApplicationServiceImpl implements UserApplicationService {
     }
 
     @Override
-    public UpdateUserResponse updateUser(UpdateUserCommand updateUserCommand) {
-        return userCommandHandler.updateUser(updateUserCommand);
+    public QueryAllUsersResponse findAllUsersByOrganization(QueryAllUsersByOrganizationCommand queryAllUsersByOrganizationCommand) {
+        return userCommandHandler.queryAllUsersByOrganization(queryAllUsersByOrganizationCommand);
     }
 
     @Override
-    public DeleteUserResponse deleteUserById(DeleteUserCommand deleteUserCommand) {
-        return userCommandHandler.deleteUser(deleteUserCommand);
+    public UpdateUserResponse updateUser(UpdateUserCommand updateUserCommand, String token) {
+        return userCommandHandler.updateUser(updateUserCommand, token);
+    }
+
+    @Override
+    public DeleteUserResponse deleteUserById(DeleteUserCommand deleteUserCommand, String token) {
+        return userCommandHandler.deleteUser(deleteUserCommand, token);
+    }
+
+    @Override
+    public LoginUserResponse loginUser(LoginUserCommand loginUserCommand) {
+        return userCommandHandler.loginUser(loginUserCommand);
+    }
+
+    @Override
+    public RefreshTokenUserResponse refreshTokenUser(RefreshTokenUserCommand refreshTokenUserCommand) {
+        return userCommandHandler.refreshTokenUser(refreshTokenUserCommand);
     }
 }

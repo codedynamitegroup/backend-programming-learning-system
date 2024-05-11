@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.auth.service.domain.implement.se
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
+import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -39,6 +40,10 @@ public class UserQueryHelper {
         return userRepository.findAll(pageNo, pageSize);
     }
 
+    @Transactional(readOnly = true)
+    public Page<User> queryAllUsersByOrganization(UUID organizationId, Integer pageNo, Integer pageSize) {
+        return userRepository.findAllUsersByOrganization(organizationId, pageNo, pageSize);
+    }
 }
 
 

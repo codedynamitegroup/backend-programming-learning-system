@@ -7,11 +7,13 @@ import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.entity.UserRole;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.mapper.UserRoleDataMapper;
+import com.backend.programming.learning.system.auth.service.domain.ports.input.service.RoleKeycloakApplicationService;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.RoleRepository;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRoleRepository;
 import com.backend.programming.learning.system.auth.service.domain.valueobject.RoleId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,24 +23,17 @@ import java.util.UUID;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class UserRoleCreateHelper {
     private final AuthDomainService authDomainService;
     private final UserRoleRepository userRoleRepository;
     private final UserRoleDataMapper userRoleDataMapper;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-
-
-    public UserRoleCreateHelper(AuthDomainService authDomainService, UserRoleRepository userRoleRepository, UserRoleDataMapper userRoleDataMapper, UserRepository userRepository, RoleRepository roleRepository) {
-        this.authDomainService = authDomainService;
-        this.userRoleRepository = userRoleRepository;
-        this.userRoleDataMapper = userRoleDataMapper;
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-    }
+    private final RoleKeycloakApplicationService roleKeycloakApplicationService;
 
     @Transactional
-    public UserRole persistUserRole(CreateUserRoleCommand createUserRoleCommand) {
+    public UserRole persistUserRole(CreateUserRoleCommand createUserRoleCommand, String token) {
         User createdBy = getUser(createUserRoleCommand.getCreatedBy());
         User user = getUser(createUserRoleCommand.getUserId());
         Role role = getRole(createUserRoleCommand.getRoleId());
@@ -50,6 +45,7 @@ public class UserRoleCreateHelper {
         userRole.setUpdatedBy(createdBy);
 
         authDomainService.createUserRole(userRole);
+        roleKeycloakApplicationService.assignRole(user.getUsername(), role.getName(), token);
         return saveUserRole(userRole);
     }
 

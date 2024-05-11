@@ -33,8 +33,6 @@ public class UserRoleDataAccessMapper {
                 .updatedAt(userRole.getUpdatedAt())
                 .createdBy(userDataAccessMapper.userToUserEntity(userRole.getCreatedBy()))
                 .updatedBy(userDataAccessMapper.userToUserEntity(userRole.getUpdatedBy()))
-                .isActive(userRole.isActive())
-                .name(userRole.getName())
                 .build();
     }
 
@@ -47,8 +45,6 @@ public class UserRoleDataAccessMapper {
                 .updatedAt(userRoleEntity.getUpdatedAt())
                 .createdBy(userDataAccessMapper.userEntityToUser(userRoleEntity.getCreatedBy()))
                 .updatedBy(userDataAccessMapper.userEntityToUser(userRoleEntity.getUpdatedBy()))
-                .isActive(userRoleEntity.isActive())
-                .name(userRoleEntity.getName())
                 .build();
     }
 }

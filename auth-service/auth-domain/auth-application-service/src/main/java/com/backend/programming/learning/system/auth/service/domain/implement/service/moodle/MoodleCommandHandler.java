@@ -69,31 +69,31 @@ public class MoodleCommandHandler {
             throw new RuntimeException(e);
         }
 
-        List<com.backend.programming.learning.system.auth.service.domain.entity.Role> roles = roleRepository
-                .findAllRolesByOrganizationId(new OrganizationId(UUID.fromString("3ead3b08-afdd-442f-b544-fdbd86eaa186")), 0, 9999)
-                .getContent();
-
-        Map<String, com.backend.programming.learning.system.auth.service.domain.entity.Role> roleMap = roles.stream()
-                .collect(Collectors.toMap(role -> role.getName().toLowerCase(), role -> role));
+//        List<com.backend.programming.learning.system.auth.service.domain.entity.Role> roles = roleRepository
+//                .findAllRolesByOrganizationId(new OrganizationId(UUID.fromString("3ead3b08-afdd-442f-b544-fdbd86eaa186")), 0, 9999)
+//                .getContent();
+//
+//        Map<String, com.backend.programming.learning.system.auth.service.domain.entity.Role> roleMap = roles.stream()
+//                .collect(Collectors.toMap(role -> role.getName().toLowerCase(), role -> role));
 
         listUserModel.forEach(userModel -> {
             Optional<User> userResult = userRepository.findByEmail(userModel.getEmail());
             if (userResult.isPresent()) {
                 UpdateUserCommand userUpdate = moodleDataMapper.updateUser(userModel, userResult.get());
-                UpdateUserResponse updateUserResponse = userApplicationService.updateUser(userUpdate);
-                List<Role> rolesMoodle = userModel.getRoles();
-                rolesMoodle.forEach(role -> {
-                    CreateUserRoleCommand createRole = moodleDataMapper.createRole(role, roleMap, updateUserResponse.getUserId());
-                    userRoleApplicationService.createUserRole(createRole);
-                });
+                UpdateUserResponse updateUserResponse = userApplicationService.updateUser(userUpdate, "");
+//                List<Role> rolesMoodle = userModel.getRoles();
+//                rolesMoodle.forEach(role -> {
+//                    CreateUserRoleCommand createRole = moodleDataMapper.createRole(role, roleMap, updateUserResponse.getUserId());
+//                    userRoleApplicationService.createUserRole(createRole);
+//                });
             } else {
                 CreateUserCommand user = moodleDataMapper.createUser(userModel);
-                CreateUserResponse createUserResponse = userApplicationService.createUser(user);
-                List<Role> rolesMoodle = userModel.getRoles();
-                rolesMoodle.forEach(role -> {
-                    CreateUserRoleCommand createRole = moodleDataMapper.createRole(role, roleMap, createUserResponse.getUserId());
-                    userRoleApplicationService.createUserRole(createRole);
-                });
+                CreateUserResponse createUserResponse = userApplicationService.createUser(user, "");
+//                List<Role> rolesMoodle = userModel.getRoles();
+//                rolesMoodle.forEach(role -> {
+//                    CreateUserRoleCommand createRole = moodleDataMapper.createRole(role, roleMap, createUserResponse.getUserId());
+//                    userRoleApplicationService.createUserRole(createRole);
+//                });
             }
         });
         log.info("Sync user successfully");

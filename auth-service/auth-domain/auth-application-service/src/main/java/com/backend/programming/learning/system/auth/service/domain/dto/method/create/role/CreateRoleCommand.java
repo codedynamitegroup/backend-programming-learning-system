@@ -12,10 +12,9 @@ import java.util.UUID;
 @AllArgsConstructor
 public class CreateRoleCommand {
     @NotNull
-    private final UUID organizationId;
-
-    @NotNull
     private final String name;
+
+    private String description;
 
     @NotNull
     private final UUID createdBy;

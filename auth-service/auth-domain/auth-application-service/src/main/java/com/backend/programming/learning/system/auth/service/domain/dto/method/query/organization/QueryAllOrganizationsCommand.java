@@ -12,9 +12,6 @@ import java.util.UUID;
 @AllArgsConstructor
 public class QueryAllOrganizationsCommand {
     @NotNull
-    private final UUID organizationId;
-
-    @NotNull
     private final int pageNo;
 
     @NotNull

@@ -17,6 +17,11 @@ public class CreateUserCommand {
     private final String email;
 
     @NotNull
+    private final String username;
+
+    private final UUID organizationId;
+
+    @NotNull
     private final String password;
 
     private final String firstName;

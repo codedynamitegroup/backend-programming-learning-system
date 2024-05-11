@@ -1,13 +1,12 @@
 package com.backend.programming.learning.system.auth.service.application.rest;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.method.create.organization.CreateOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.role.CreateRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.role.CreateRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.role.DeleteRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.role.DeleteRoleResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesByOrganizationCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryRoleByIdCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.role.QueryAllRolesByOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.role.UpdateRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.role.UpdateRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.role.RoleEntityResponse;
@@ -51,29 +50,6 @@ public class RoleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createRoleResponse);
     }
 
-    @GetMapping("/organization/{id}")
-    @Operation(summary = "Get all roles by organization id.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Success.", content = {
-                    @Content(mediaType = "application/vnd.api.v1+json",
-                            schema = @Schema(implementation = QueryAllRolesByOrganizationResponse.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "Not found."),
-            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<QueryAllRolesByOrganizationResponse> getRolesByOrganizationId(
-            @PathVariable UUID id,
-            @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "10") Integer pageSize) {
-        log.info("Getting roles by organization id: {}", id);
-        QueryAllRolesByOrganizationResponse roles = roleApplicationService
-                .findByOrganizationId(QueryAllRolesByOrganizationCommand.builder()
-                        .organizationId(id)
-                        .pageNo(pageNo)
-                        .pageSize(pageSize)
-                        .build());
-        return ResponseEntity.ok(roles);
-    }
-
     @GetMapping("/{id}")
     @Operation(summary = "Get role by id.")
     @ApiResponses(value = {
@@ -89,6 +65,29 @@ public class RoleController {
        log.info("Returning role with id: {}", queryRoleResponse.getRoleId());
        return  ResponseEntity.ok(queryRoleResponse);
     }
+
+    @GetMapping
+    @Operation(summary = "Get all roles.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = RoleEntityResponse.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllRolesResponse> getAllRoles(
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize
+    ) {
+        QueryAllRolesResponse queryAllRolesResponse =
+                roleApplicationService.findAllRoles(QueryAllRolesCommand.builder()
+                        .pageNo(pageNo)
+                        .pageSize(pageSize)
+                        .build()
+                );
+        log.info("Returning all roles");
+        return ResponseEntity.ok(queryAllRolesResponse);
+    }
+
 
     @PutMapping("/{id}")
     @Operation(summary = "Update role by id.")

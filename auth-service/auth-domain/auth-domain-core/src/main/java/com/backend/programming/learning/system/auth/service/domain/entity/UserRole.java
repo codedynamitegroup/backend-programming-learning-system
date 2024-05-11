@@ -11,8 +11,6 @@ import java.util.UUID;
 public class UserRole extends BaseEntity<UserRoleId> {
     private User user;
     private Role role;
-    private boolean isActive;
-    private String name;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
     private User createdBy;
@@ -22,7 +20,6 @@ public class UserRole extends BaseEntity<UserRoleId> {
         setId(new UserRoleId(UUID.randomUUID()));
         createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
         updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
-        isActive = true;
     }
 
     public static Builder builder() {
@@ -33,8 +30,6 @@ public class UserRole extends BaseEntity<UserRoleId> {
         super.setId(builder.userRoleId);
         user = builder.user;
         role = builder.role;
-        isActive = builder.isActive;
-        name = builder.name;
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
         createdBy = builder.createdBy;
@@ -47,14 +42,6 @@ public class UserRole extends BaseEntity<UserRoleId> {
 
     public Role getRole() {
         return role;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public ZonedDateTime getCreatedAt() {
@@ -71,14 +58,6 @@ public class UserRole extends BaseEntity<UserRoleId> {
 
     public User getUpdatedBy() {
         return updatedBy;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public void setCreatedAt(ZonedDateTime createdAt) {
@@ -108,8 +87,6 @@ public class UserRole extends BaseEntity<UserRoleId> {
     public static final class Builder {
         private User user;
         private Role role;
-        private boolean isActive;
-        private String name;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
         private User createdBy;
@@ -126,16 +103,6 @@ public class UserRole extends BaseEntity<UserRoleId> {
 
         public Builder role(Role val) {
             role = val;
-            return this;
-        }
-
-        public Builder isActive(boolean val) {
-            isActive = val;
-            return this;
-        }
-
-        public Builder name(String val) {
-            name = val;
             return this;
         }
 

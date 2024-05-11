@@ -1,16 +1,20 @@
 server:
   port: 8182
 
+logging:
+  level:
+    com.backend.programming.learning.system: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
+
 eureka:
   client:
+    fetchRegistry: true
+    registerWithEureka: true
     serviceUrl:
       defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
   instance:
     preferIpAddress: true
-
-logging:
-  level:
-    com.backend.programming.learning.system: INFO
 
 auth-service:
   core-user-request-topic-name: core-user-request
@@ -25,6 +29,11 @@ auth-service:
   outbox-scheduler-initial-delay: 2000
 
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://${keycloak.domain}/realms/${keycloak.realm}
   application:
     name: auth-service
   config:
@@ -118,6 +127,22 @@ management:
 
 log:
   appName: auth-service
+
+jwt:
+  auth:
+    converter:
+      resource-id: spring-client-api-rest
+      principle-attribute: preferred_username
+
+keycloak:
+  realm: spring-boot-realm-dev
+  domain: localhost:8890
+  admin-client-id: admin-cli
+  admin-client-secret: nfJffV2sitCYDQlmkXTeEZ5VqSE8616R
+  client: spring-client-api-rest
+  client-secret: 1XZYXGBfRPXCaQlMl66jUIfxlhECRgR7
+  urls: http://${keycloak.domain}
+
 ---
 spring.config.activate.on-profile: prod
 # Disable springdoc-openapi

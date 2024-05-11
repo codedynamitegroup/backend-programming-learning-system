@@ -1,16 +1,20 @@
 server:
   port: 8181
 
+logging:
+  level:
+    com.backend.programming.learning.system: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
+
 eureka:
   client:
+    fetchRegistry: true
+    registerWithEureka: true
     serviceUrl:
       defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
   instance:
     preferIpAddress: true
-
-logging:
-  level:
-    com.backend.programming.learning.system: DEBUG
 
 core-service:
   code-question-update-response-from-core-service-topic-name: code-question-update-response-from-core-service
@@ -35,6 +39,11 @@ core-service:
   outbox-scheduler-initial-delay: 2000
 
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://${keycloak.domain}/auth/realms/${keycloak.realm}
   application:
     name: core-service
   config:
@@ -140,6 +149,17 @@ security:
 
 log:
   appName: core-service
+
+jwt:
+  auth:
+    converter:
+      resource-id: spring-client-api-rest
+
+keycloak:
+  realm: microservices_realm
+  domain: localhost:9081
+  client: spring-client-api-rest
+  urls: http://${keycloak.domain}
 
 ---
 spring.config.activate.on-profile: prod
