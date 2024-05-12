@@ -17,8 +17,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionPlugin;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user_course.ListUserCourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user_course.UserCourseModel;
-import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user.ListUserModel;
-import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user.UserModel;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.user_moodle.UserModel;
 import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.entity.Module;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.user.UserApplicationService;
