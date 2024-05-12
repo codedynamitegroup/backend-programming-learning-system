@@ -15,6 +15,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.ListSubmissionAssignmentModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionAssignmentModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionPlugin;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user.ListUserModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user_course.ListUserCourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user_course.UserCourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.quiz.ListQuizModel;
@@ -63,13 +64,16 @@ public class MoodleCommandHandler {
     String GET_ENROLLED_USERS = "core_enrol_get_enrolled_users";
     String GET_CONTENTS = "core_course_get_contents";
     String GET_SUBMISSION_ASSIGNMENTS = "mod_assign_get_submissions";
+
+    String GET_USER_PROFILE = "core_user_get_course_user_profiles";
+
     String GET_USER_COURSES = "core_enrol_get_users_courses";
     String GET_USERS = "core_user_get_users";
-    String MOODLE_URL = "http://62.171.185.208/webservice/rest/server.php";
-//    String MOODLE_URL = "http://localhost/moodle/webservice/rest/server.php";
+//    String MOODLE_URL = "http://62.171.185.208/webservice/rest/server.php";
+    String MOODLE_URL = "http://localhost/moodle/webservice/rest/server.php";
     String MOODLE_URL_TOKEN = "http://62.171.185.208/login/token.php";
-    String TOKEN = "cdf90b5bf53bcae577c60419702dbee7";
-//    String TOKEN = "c22b03ca9c0a3c8431cd6b57bd4c8b04";
+//    String TOKEN = "cdf90b5bf53bcae577c60419702dbee7";
+    String TOKEN = "c22b03ca9c0a3c8431cd6b57bd4c8b04";
 
 
     @Transactional
@@ -306,6 +310,7 @@ public class MoodleCommandHandler {
         }
     }
 
+    // Get course by id
     public CourseModel getCourse(String courseId) {
         String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&options[ids][0]=%s",
                 MOODLE_URL, TOKEN, GET_COURSES, courseId);
@@ -326,6 +331,29 @@ public class MoodleCommandHandler {
         }
 
         return listCourseModel.getCourses().get(0);
+    }
+
+    // Get user by id
+    public com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user.UserModel getUser(String userId) {
+        String apiUrl = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&userlist[0][courseid]=1&userlist[0][userid]=%s",
+                MOODLE_URL, TOKEN, GET_USER_PROFILE, userId);
+        RestTemplate restTemplate = new RestTemplate();
+        String model = restTemplate.getForObject(apiUrl, String.class);
+        model = "{\"users\":"+model+"}";
+        ObjectMapper objectMapper = new ObjectMapper();
+        ListUserModel listUserModel = null;
+
+        if(model.equals("{\"users\":[]}"))
+            return null;
+
+        try {
+            listUserModel = objectMapper.readValue(model, ListUserModel.class);
+            log.info("User model: {}", listUserModel);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        return listUserModel.getUsers().get(0);
     }
 
     @Transactional
@@ -362,7 +390,7 @@ public class MoodleCommandHandler {
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-        
+
         return listUserModel;
     }
 

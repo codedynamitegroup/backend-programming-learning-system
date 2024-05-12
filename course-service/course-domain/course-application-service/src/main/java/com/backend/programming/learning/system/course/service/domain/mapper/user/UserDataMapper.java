@@ -5,8 +5,11 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.message.user.UserRequest;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.user.UpdateUserResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user.UserModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.user.UserResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.entity.Organization;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.entity.WebhookMessage;
 import com.backend.programming.learning.system.course.service.domain.event.user.UserCreatedEvent;
 import com.backend.programming.learning.system.course.service.domain.event.user.UserEvent;
 import com.backend.programming.learning.system.course.service.domain.event.user.UserUpdatedEvent;
@@ -14,13 +17,18 @@ import com.backend.programming.learning.system.course.service.domain.outbox.mode
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.time.ZoneId;
+import java.util.Objects;
 import java.util.UUID;
 
 @Component
 public class UserDataMapper {
+    private static final Logger log = LoggerFactory.getLogger(UserDataMapper.class);
+
     public UserResponseEntity userToUserResponseEntity(User user) {
         return UserResponseEntity.builder()
                 .userId(user.getId().getValue())
@@ -133,5 +141,33 @@ public class UserDataMapper {
                 .updatedAt(user.getUpdatedAt())
                 .copyState(CopyState.UPDATING.name())
                 .build();
+    }
+
+    public User userModelToUser(UserModel userModel, Organization organization) {
+        return User.builder()
+                .userIdMoodle(Integer.valueOf(userModel.getId()))
+                .organization(organization)
+                .name(userModel.getUsername())
+                .email(userModel.getEmail())
+                .dob(null)
+                .firstName(userModel.getFirstname())
+                .lastName(userModel.getLastname())
+                .phone(userModel.getPhone1())
+                .address(userModel.getCity())
+                .avatarUrl(userModel.getProfileimageurl())
+                .isDeleted(false)
+                .build();
+    }
+
+    public User setUserWithOtherPayload(UserModel userModel, User prevUser) {
+        prevUser.setName(userModel.getUsername());
+        prevUser.setEmail(userModel.getEmail());
+        prevUser.setFirstName(userModel.getFirstname());
+        prevUser.setLastName(userModel.getLastname());
+        prevUser.setPhone(userModel.getPhone1());
+        prevUser.setAddress(userModel.getCity());
+        prevUser.setAvatarUrl(userModel.getProfileimageurl());
+
+        return prevUser;
     }
 }

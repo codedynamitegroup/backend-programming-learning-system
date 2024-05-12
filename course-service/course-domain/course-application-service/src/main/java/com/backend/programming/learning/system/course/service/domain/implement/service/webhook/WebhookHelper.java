@@ -9,6 +9,7 @@ import com.backend.programming.learning.system.course.service.domain.implement.s
 import com.backend.programming.learning.system.course.service.domain.implement.service.course.CourseUpdateHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.course_user.CourseUserCreateHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.course_user.CourseUserDeleteHelper;
+import com.backend.programming.learning.system.course.service.domain.implement.service.user.UserHelper;
 import com.backend.programming.learning.system.course.service.domain.mapper.webhook.WebhookDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.OrganizationRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -26,14 +27,15 @@ public class WebhookHelper {
     private final CourseDeleteHelper courseDeleteHelper;
     private final CourseUserCreateHelper courseUserCreateHelper;
     private final CourseUserDeleteHelper courseUserDeleteHelper;
-
+    private final UserHelper userHelper;
 
     public WebhookHelper(
             WebhookDataMapper webhookDataMapper,
             OrganizationRepository organizationRepository,
             CourseCreateHelper courseCreateHelper,
             CourseUpdateHelper courseUpdateHelper, CourseDeleteHelper courseDeleteHelper,
-            CourseUserCreateHelper courseUserCreateHelper, CourseUserDeleteHelper courseUserDeleteHelper) {
+            CourseUserCreateHelper courseUserCreateHelper, CourseUserDeleteHelper courseUserDeleteHelper,
+            UserHelper userHelper) {
         this.webhookDataMapper = webhookDataMapper;
         this.organizationRepository = organizationRepository;
         this.courseCreateHelper = courseCreateHelper;
@@ -41,6 +43,7 @@ public class WebhookHelper {
         this.courseDeleteHelper = courseDeleteHelper;
         this.courseUserCreateHelper = courseUserCreateHelper;
         this.courseUserDeleteHelper = courseUserDeleteHelper;
+        this.userHelper = userHelper;
     }
 
     public void processWebhook(WebhookCommand webhookCommand) {
@@ -58,8 +61,10 @@ public class WebhookHelper {
                 deleteCourse(webhookMessage);
                 break;
             case USER_CREATED:
+                createUser(webhookMessage, organization);
                 break;
             case USER_UPDATED:
+                updateUser(webhookMessage);
                 break;
             case USER_DELETED:
                 break;
@@ -85,12 +90,12 @@ public class WebhookHelper {
                 break;
             case ROLE_ASSIGNED:
                 break;
-            case ENROL_INSTANCE_CREATED:
-                break;
-            case ENROL_INSTANCE_UPDATED:
-                break;
-            case ENROL_INSTANCE_DELETED:
-                break;
+//            case ENROL_INSTANCE_CREATED:
+//                break;
+//            case ENROL_INSTANCE_UPDATED:
+//                break;
+//            case ENROL_INSTANCE_DELETED:
+//                break;
             default:
                 log.info("Event not found: {}", webhookMessage.getEventName());
         }
@@ -113,6 +118,12 @@ public class WebhookHelper {
         courseUserDeleteHelper.unenrollUserToCourse(webhookMessage);
     }
 
+    private void createUser(WebhookMessage webhookMessage, Organization organization) {
+        userHelper.createUser(webhookMessage, organization);
+    }
+    private void updateUser(WebhookMessage webhookMessage) {
+            userHelper.updateUser(webhookMessage);
+    }
 
     private Organization findOrganization(String moodleUrl) {
         Optional<Organization> organization = organizationRepository.findOrganizationByMoodleUrl(moodleUrl);
