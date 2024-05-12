@@ -1,18 +1,21 @@
 package com.backend.programming.learning.system.auth.service.application.rest;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.method.create.role.CreateRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersByOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryUserByIdCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.update.role.UpdateRoleCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.update.role.UpdateRoleResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
+import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserKeycloakApplicationService;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -22,9 +25,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Slf4j
@@ -47,11 +52,52 @@ public class UserController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<CreateUserResponse> createUser(@RequestBody CreateUserCommand createUserCommand) {
-        log.info("Creating user with email: {}", createUserCommand.getEmail());
-        CreateUserResponse createUserResponse = userApplicationService.createUser(createUserCommand);
-        log.info("User created with email: {}", createUserResponse.getEmail());
-        return ResponseEntity.status(HttpStatus.CREATED).body(createUserResponse);
+    public ResponseEntity<?> createUser(@RequestBody CreateUserCommand createUserCommand) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            String token = jwtAuthenticationToken.getToken().getTokenValue();
+            log.info("Creating user with email: {}", createUserCommand.getEmail());
+            CreateUserResponse createUserResponse = userApplicationService.createUser(createUserCommand, token);
+            log.info("User created with email: {}", createUserResponse.getEmail());
+            return ResponseEntity.status(HttpStatus.CREATED).body(createUserResponse);
+        }
+        return ResponseEntity.badRequest().body("Token is not valid.");
+    }
+
+    @PostMapping("/login")
+    @Operation(summary = "Login user.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = LoginUserResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<LoginUserResponse> loginUser(@RequestBody LoginUserCommand loginUserCommand) {
+        log.info("Logging user with username: {}", loginUserCommand.getUsername());
+        LoginUserResponse loginUserResponse = userApplicationService.loginUser(loginUserCommand);
+        return ResponseEntity.status(HttpStatus.OK).body(loginUserResponse);
+    }
+
+    @PostMapping("/refresh_token")
+    @Operation(summary = "Refresh token user.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = RefreshTokenUserResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<RefreshTokenUserResponse> refreshTokenUser(
+            @RequestParam String refreshToken
+    ) {
+        RefreshTokenUserResponse refreshTokenUser = userApplicationService.refreshTokenUser(
+                RefreshTokenUserCommand
+                        .builder()
+                        .refreshToken(refreshToken)
+                        .build()
+        );
+        return ResponseEntity.status(HttpStatus.OK).body(refreshTokenUser);
     }
 
     @GetMapping("/{id}")
@@ -91,6 +137,29 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
+    @GetMapping("/organizations/{organizationId}")
+    @Operation(summary = "Get all users by organization.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllUsersResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllUsersResponse> getAllUsersByOrganization(
+            @PathVariable UUID organizationId,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize
+    ) {
+        QueryAllUsersResponse users = userApplicationService.findAllUsersByOrganization(QueryAllUsersByOrganizationCommand.builder()
+                .organizationId(organizationId)
+                .pageNo(pageNo)
+                .pageSize(pageSize)
+                .build());
+        log.info("Returning all users from organization with id: {}.", organizationId);
+        return ResponseEntity.ok(users);
+    }
+
     @PutMapping("/{id}")
     @Operation(summary = "Update user by id.")
     @ApiResponses(value = {
@@ -100,20 +169,25 @@ public class UserController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<UpdateUserResponse> updateUserById(@PathVariable UUID id, @RequestBody UpdateUserCommand updateUserCommand) {
-        log.info("Updating user with id: {}", id);
-        UpdateUserResponse updateUserResponse = userApplicationService.updateUser(UpdateUserCommand.builder()
-                .userId(id)
-                .dob(updateUserCommand.getDob())
-                .firstName(updateUserCommand.getFirstName())
-                .lastName(updateUserCommand.getLastName())
-                .phone(updateUserCommand.getPhone())
-                .address(updateUserCommand.getAddress())
-                .avatarUrl(updateUserCommand.getAvatarUrl())
-                .build());
+    public ResponseEntity<?> updateUserById(@PathVariable UUID id, @RequestBody UpdateUserCommand updateUserCommand) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            String token = jwtAuthenticationToken.getToken().getTokenValue();
+            log.info("Updating user with id: {}", id);
+            UpdateUserResponse updateUserResponse = userApplicationService.updateUser(UpdateUserCommand.builder()
+                    .userId(id)
+                    .dob(updateUserCommand.getDob())
+                    .firstName(updateUserCommand.getFirstName())
+                    .lastName(updateUserCommand.getLastName())
+                    .phone(updateUserCommand.getPhone())
+                    .address(updateUserCommand.getAddress())
+                    .avatarUrl(updateUserCommand.getAvatarUrl())
+                    .build(), token);
 
-        log.info("User updated with id: {}", id);
-        return ResponseEntity.ok(updateUserResponse);
+            log.info("User updated with id: {}", id);
+            return ResponseEntity.ok(updateUserResponse);
+        }
+        return ResponseEntity.badRequest().body("Token is not valid.");
     }
 
     @DeleteMapping("/{id}")
@@ -125,11 +199,18 @@ public class UserController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<DeleteUserResponse> deleteUserById(@PathVariable UUID id) {
-        log.info("Deleting user with id: {}", id);
-        DeleteUserResponse deleteUserResponse =
-                userApplicationService.deleteUserById(DeleteUserCommand.builder().userId(id).build());
-        log.info("User deleted with id: {}", id);
-        return ResponseEntity.ok(deleteUserResponse);
+    public ResponseEntity<?> deleteUserById(@PathVariable UUID id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            String token = jwtAuthenticationToken.getToken().getTokenValue();
+            log.info("Deleting user with id: {}", id);
+            DeleteUserResponse deleteUserResponse =
+                    userApplicationService.deleteUserById(DeleteUserCommand.builder()
+                            .userId(id)
+                            .build(), token);
+            log.info("User deleted with id: {}", id);
+            return ResponseEntity.ok(deleteUserResponse);
+        }
+        return ResponseEntity.badRequest().body("Token is not valid.");
     }
 }

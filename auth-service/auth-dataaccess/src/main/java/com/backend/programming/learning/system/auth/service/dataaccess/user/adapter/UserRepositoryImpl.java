@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.auth.service.dataaccess.user.ada
 import com.backend.programming.learning.system.auth.service.dataaccess.user.repository.UserJpaRepository;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
+import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import com.backend.programming.learning.system.auth.service.dataaccess.user.mapper.UserDataAccessMapper;
 import org.springframework.data.domain.Page;
@@ -65,6 +66,13 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public Optional<User> findUser(UUID userId) {
         return userJpaRepository.findById(userId)
+                .map(userDataAccessMapper::userEntityToUser);
+    }
+
+    @Override
+    public Page<User> findAllUsersByOrganization(UUID organizationId, Integer page, Integer size) {
+        Pageable paging = PageRequest.of(page, size);
+        return userJpaRepository.findAllByOrganizationIdAndIsDeletedFalse(organizationId, paging)
                 .map(userDataAccessMapper::userEntityToUser);
     }
 }

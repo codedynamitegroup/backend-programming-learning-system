@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.auth.service.application.rest;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user_role.CreateUserRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user_role.CreateUserRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user_role.DeleteUserRoleCommand;
@@ -8,8 +7,6 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.de
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user_role.QueryUserRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user_role.UpdateUserRoleCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user_role.UpdateUserRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user_role.UserRoleEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserRoleApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,6 +17,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -43,13 +43,18 @@ public class UserRoleController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<CreateUserRoleResponse> createUserRole(@RequestBody CreateUserRoleCommand createUserRoleCommand) {
-        log.info("Creating user role with role id: {} and user id: {}",
-                createUserRoleCommand.getRoleId(), createUserRoleCommand.getUserId());
-        CreateUserRoleResponse createUserRoleResponse = userRoleApplicationService.createUserRole(createUserRoleCommand);
-        log.info("User role created with role id: {} and user id: {}",
-                createUserRoleCommand.getRoleId(), createUserRoleCommand.getUserId());
-        return ResponseEntity.status(HttpStatus.CREATED).body(createUserRoleResponse);
+    public ResponseEntity<?> createUserRole(@RequestBody CreateUserRoleCommand createUserRoleCommand) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            String token = jwtAuthenticationToken.getToken().getTokenValue();
+            log.info("Creating user role with role id: {} and user id: {}",
+                    createUserRoleCommand.getRoleId(), createUserRoleCommand.getUserId());
+            CreateUserRoleResponse createUserRoleResponse = userRoleApplicationService.createUserRole(createUserRoleCommand, token);
+            log.info("User role created with role id: {} and user id: {}",
+                    createUserRoleCommand.getRoleId(), createUserRoleCommand.getUserId());
+            return ResponseEntity.status(HttpStatus.CREATED).body(createUserRoleResponse);
+        }
+        return ResponseEntity.badRequest().body("Token is not valid.");
     }
 
     @GetMapping("/getByRoleIdAndUserId")
@@ -74,29 +79,6 @@ public class UserRoleController {
                roleId, userId);
        return ResponseEntity.ok(userRole);
     }
-
-    @PutMapping("/{id}")
-    @Operation(summary = "Update user role by id.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Success.", content = {
-                    @Content(mediaType = "application/vnd.api.v1+json",
-                            schema = @Schema(implementation = UpdateUserRoleResponse.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "Not found."),
-            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<UpdateUserRoleResponse> updateUserRoleById(@PathVariable UUID id,
-                                                                     @RequestBody UpdateUserRoleCommand updateUserRoleCommand) {
-        log.info("Updating user role with id: {}", id);
-        UpdateUserRoleResponse updateUserRoleResponse = userRoleApplicationService.updateUserRole(UpdateUserRoleCommand.builder()
-                .userRoleId(id)
-                .name(updateUserRoleCommand.getName())
-                .isActive(updateUserRoleCommand.getIsActive())
-                .updatedBy(updateUserRoleCommand.getUpdatedBy())
-                .build());
-        log.info("User role updated with id: {}", id);
-        return ResponseEntity.ok(updateUserRoleResponse);
-    }
-
 
     @DeleteMapping("/deleteByRoleIdAndUserId")
     @Operation(summary = "Delete user role by role id and user id.")

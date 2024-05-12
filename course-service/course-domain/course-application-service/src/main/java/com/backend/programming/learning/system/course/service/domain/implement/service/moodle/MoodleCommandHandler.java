@@ -30,6 +30,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -61,6 +62,7 @@ public class MoodleCommandHandler {
     String GET_CONTENTS = "core_course_get_contents";
     String GET_SUBMISSION_ASSIGNMENTS = "mod_assign_get_submissions";
     String GET_COURSES = "core_course_get_courses";
+
     String GET_USER_COURSES = "core_enrol_get_users_courses";
     String GET_USERS = "core_user_get_users";
     String MOODLE_URL = "http://62.171.185.208/webservice/rest/server.php";
@@ -348,23 +350,20 @@ public class MoodleCommandHandler {
 
     @Transactional
     public List<UserModel> getAllUser() {
-        // tôi muốn lấy tất cả người dùng từ moodle
-
-        String criteria = "criteria[0][key]=auth&criteria[0][value]=manual";
-        String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&%s",
-                MOODLE_URL, TOKEN, GET_USERS, criteria);
+        String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&courseid=1",
+                MOODLE_URL, TOKEN, GET_USERS);
         RestTemplate restTemplate = new RestTemplate();
         String model = restTemplate.getForObject(apiURL, String.class);
         ObjectMapper objectMapper = new ObjectMapper();
-        ListUserModel listUserModel = null;
+        List<UserModel> listUserModel = null;
         try {
-            listUserModel = objectMapper.readValue(model, ListUserModel.class);
+            listUserModel = List.of(objectMapper.readValue(model, UserModel[].class));
             log.info("User model: {}", listUserModel);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
         
-        return listUserModel.getUsers();
+        return listUserModel;
     }
 
     @Transactional

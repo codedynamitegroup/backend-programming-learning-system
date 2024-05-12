@@ -5,9 +5,10 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.cr
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.message.user.UserRequest;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.organization.OrganizationEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
+import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedFailEvent;
@@ -17,7 +18,7 @@ import com.backend.programming.learning.system.auth.service.domain.event.user.Us
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserEventPayload;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
+import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
@@ -30,10 +31,15 @@ public class UserDataMapper {
     public User createUserCommandToUser(CreateUserCommand createUserCommand) {
         return User.builder()
                 .email(createUserCommand.getEmail())
+                .username(createUserCommand.getUsername())
                 .password(createUserCommand.getPassword())
                 .firstName(createUserCommand.getFirstName())
                 .lastName(createUserCommand.getLastName())
                 .phone(createUserCommand.getPhone())
+                .organization(createUserCommand.getOrganizationId() == null ? null :
+                        Organization.builder()
+                                .id(new OrganizationId(createUserCommand.getOrganizationId()))
+                                .build())
                 .build();
     }
 
@@ -85,6 +91,7 @@ public class UserDataMapper {
     }
 
     public UserEntityResponse userToUserResponse(User user) {
+        Organization organizationEntityResponse = user.getOrganization();
         return UserEntityResponse.builder()
                 .userId(user.getId().getValue())
                 .email(user.getEmail())
@@ -98,6 +105,7 @@ public class UserDataMapper {
                 .lastLogin(user.getLastLogin())
                 .createdAt(user.getCreatedAt())
                 .updatedAt(user.getUpdatedAt())
+                .organization(organizationEntityResponse)
                 .isDeleted(user.getDeleted())
                 .build();
     }
@@ -110,18 +118,6 @@ public class UserDataMapper {
                 .currentPage(users.getNumber())
                 .totalPages(users.getTotalPages())
                 .totalItems(users.getTotalElements())
-                .build();
-    }
-
-    public User updateUserCommandToUser(UpdateUserCommand updateUserCommand) {
-        return User.builder()
-                .id(new UserId(updateUserCommand.getUserId()))
-                .dob(updateUserCommand.getDob())
-                .firstName(updateUserCommand.getFirstName())
-                .lastName(updateUserCommand.getLastName())
-                .phone(updateUserCommand.getPhone())
-                .address(updateUserCommand.getAddress())
-                .avatarUrl(updateUserCommand.getAvatarUrl())
                 .build();
     }
 

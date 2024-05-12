@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.auth.service.dataaccess.user.repository;
 
+import com.backend.programming.learning.system.auth.service.dataaccess.role.entity.RoleEntity;
 import com.backend.programming.learning.system.auth.service.dataaccess.user.entity.UserEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,4 +16,5 @@ public interface UserJpaRepository extends JpaRepository<UserEntity, UUID> {
     Optional<UserEntity> findByIdAndIsDeletedFalse(UUID id);
     Optional<UserEntity> findByIdAndIsDeletedTrue(UUID id);
     Page<UserEntity> findAllByIsDeletedFalse(Pageable pageable);
+    Page<UserEntity> findAllByOrganizationIdAndIsDeletedFalse(UUID organizationId, Pageable pageable);
 }

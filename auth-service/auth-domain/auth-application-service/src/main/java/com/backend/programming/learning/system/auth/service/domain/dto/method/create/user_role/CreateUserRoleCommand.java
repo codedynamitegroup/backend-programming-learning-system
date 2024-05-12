@@ -11,15 +11,12 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class    CreateUserRoleCommand {
+public class CreateUserRoleCommand {
     @NotNull
     private final UUID roleId;
 
     @NotNull
     private final UUID userId;
-
-    @NotNull
-    private String name;
 
     @NotNull
     private final UUID createdBy;

@@ -13,6 +13,7 @@ import java.util.UUID;
 
 public class User extends AggregateRoot<UserId> {
     private Integer userIdMoodle;
+    private Organization organization;
     private  String name;
     private String email;
     private ZonedDateTime dob;
@@ -30,6 +31,7 @@ public class User extends AggregateRoot<UserId> {
     private User(Builder builder) {
         super.setId(builder.userId);
         userIdMoodle = builder.userIdMoodle;
+        organization = builder.organization;
         name = builder.name;
         email = builder.email;
         dob = builder.dob;
@@ -43,6 +45,14 @@ public class User extends AggregateRoot<UserId> {
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
         failureMessage = builder.failureMessage;
+    }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
     }
 
     public Integer getUserIdMoodle() {
@@ -168,6 +178,7 @@ public class User extends AggregateRoot<UserId> {
     public static final class Builder {
         private UserId userId;
         private Integer userIdMoodle;
+        private Organization organization;
         private String name;
         private String email;
         private ZonedDateTime dob;
@@ -199,6 +210,10 @@ public class User extends AggregateRoot<UserId> {
             return this;
         }
 
+        public Builder organization(Organization val) {
+            organization = val;
+            return this;
+        }
         public Builder name(String val) {
             name = val;
             return this;

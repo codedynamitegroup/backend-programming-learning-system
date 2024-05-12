@@ -9,7 +9,6 @@ import java.time.ZonedDateTime;
 import java.util.UUID;
 
 public class Role extends AggregateRoot<RoleId> {
-    private Organization organization;
     private String description;
     private String name;
     private ZonedDateTime createdAt;
@@ -23,20 +22,14 @@ public class Role extends AggregateRoot<RoleId> {
         updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
     }
 
-
     private Role(Builder builder) {
         super.setId(builder.roleId);
-        organization = builder.Organization;
         description = builder.description;
         name = builder.name;
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
         createdBy = builder.createdBy;
         updatedBy = builder.updatedBy;
-    }
-
-    public Organization getOrganization() {
-        return organization;
     }
 
     public String getDescription() {
@@ -87,16 +80,11 @@ public class Role extends AggregateRoot<RoleId> {
         this.updatedBy = updatedBy;
     }
 
-    public void setOrganization(Organization organization) {
-        this.organization = organization;
-    }
-
     public static Builder builder() {
         return new Builder();
     }
 
     public static final class Builder {
-        private Organization Organization;
         private String description;
         private String name;
         private ZonedDateTime createdAt;
@@ -106,11 +94,6 @@ public class Role extends AggregateRoot<RoleId> {
         private RoleId roleId;
 
         private Builder() {
-        }
-
-        public Builder organization(Organization val) {
-            Organization = val;
-            return this;
         }
 
         public Builder description(String val) {

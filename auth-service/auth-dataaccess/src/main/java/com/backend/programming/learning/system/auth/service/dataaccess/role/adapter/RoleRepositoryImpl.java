@@ -43,9 +43,8 @@ public class RoleRepositoryImpl implements RoleRepository {
     }
 
     @Override
-    public Page<Role> findAllRolesByOrganizationId(OrganizationId organizationId, Integer page, Integer size) {
-        Pageable paging = PageRequest.of(page, size);
-        return roleJpaRepository.findAllByOrganizationId(organizationId.getValue(), paging)
+    public Page<Role> findAll(Integer page, Integer size) {
+        return roleJpaRepository.findAll(PageRequest.of(page, size))
                 .map(roleDataAccessMapper::roleEntityToRole);
     }
 }
