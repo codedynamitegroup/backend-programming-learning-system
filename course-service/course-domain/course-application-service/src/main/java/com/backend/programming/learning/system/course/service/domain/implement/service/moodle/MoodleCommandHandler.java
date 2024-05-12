@@ -15,10 +15,11 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.ListSubmissionAssignmentModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionAssignmentModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionPlugin;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user.ListUserModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user_course.ListUserCourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user_course.UserCourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.quiz.ListQuizModel;
-import com.backend.programming.learning.system.course.service.domain.dto.responseentity.user_moodle.UserModel;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user.UserModel;
 import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.entity.Module;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.user.UserApplicationService;
@@ -66,7 +67,7 @@ public class MoodleCommandHandler {
     String GET_USER_COURSES = "core_enrol_get_users_courses";
     String GET_USERS = "core_user_get_users";
     String MOODLE_URL = "http://62.171.185.208/webservice/rest/server.php";
-//    String MOODLE_URL = "http://localhost/moodle/webservice/rest/server.php";
+    //    String MOODLE_URL = "http://localhost/moodle/webservice/rest/server.php";
     String MOODLE_URL_TOKEN = "http://62.171.185.208/login/token.php";
     String TOKEN = "cdf90b5bf53bcae577c60419702dbee7";
 //    String TOKEN = "c22b03ca9c0a3c8431cd6b57bd4c8b04";
@@ -81,12 +82,11 @@ public class MoodleCommandHandler {
     }
 
     @Transactional
-    public void createSection()
-    {
+    public void createSection() {
         for (Map.Entry<String, Course> entry : courseIdsMap.entrySet()) {
             String courseId = entry.getKey();
             Course course = entry.getValue();
-            if(course.getCourseIdMoodle() == null||course.getName().equals("code dynamite"))
+            if (course.getCourseIdMoodle() == null || course.getName().equals("code dynamite"))
                 continue;
             List<SectionModel> allSection = getAllSection(course.getCourseIdMoodle().toString());
             if (allSection.isEmpty()) {
@@ -97,8 +97,7 @@ public class MoodleCommandHandler {
                 Section section = moodleDataMapper.createSection(course, sectionModel);
                 sectionRepository.save(section);
                 // create module
-                 for(ModuleModel module: sectionModel.getModules())
-                {
+                for (ModuleModel module : sectionModel.getModules()) {
                     Module moduleCreate = moodleDataMapper.createModule(section, module);
                     moduleRepository.save(moduleCreate);
                 }
@@ -113,7 +112,7 @@ public class MoodleCommandHandler {
         String model = restTemplate.getForObject(apiURL, String.class);
         ObjectMapper objectMapper = new ObjectMapper();
         ListSectionModel listSectionModel = null;
-        if(model.equals("[{}]"))
+        if (model.equals("[{}]"))
             return new ArrayList<>();
         try {
             SectionModel[] sectionModels = objectMapper.readValue(model, SectionModel[].class);
@@ -125,15 +124,14 @@ public class MoodleCommandHandler {
     }
 
     @Transactional
-    public List<AssignmentCourseModel> getAllAssignments(String courseId)
-    {
+    public List<AssignmentCourseModel> getAllAssignments(String courseId) {
         String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&courseids[0]=%s",
                 MOODLE_URL, TOKEN, GET_ASSIGNMENTS, courseId);
         RestTemplate restTemplate = new RestTemplate();
         String model = restTemplate.getForObject(apiURL, String.class);
         ObjectMapper objectMapper = new ObjectMapper();
         ListAssignmentCourseModel listAssignmentCourseModel = null;
-        if(model.equals("{\"courses\":[{}]}"))
+        if (model.equals("{\"courses\":[{}]}"))
             return new ArrayList<>();
 
         try {
@@ -146,15 +144,14 @@ public class MoodleCommandHandler {
     }
 
     @Transactional
-    public List<SubmissionAssignmentModel> getAllSubmissionAssignment(String assignmentId)
-    {
+    public List<SubmissionAssignmentModel> getAllSubmissionAssignment(String assignmentId) {
         String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&assignmentids[0]=%s",
-                MOODLE_URL, TOKEN, GET_SUBMISSION_ASSIGNMENTS,assignmentId);
+                MOODLE_URL, TOKEN, GET_SUBMISSION_ASSIGNMENTS, assignmentId);
         RestTemplate restTemplate = new RestTemplate();
         String model = restTemplate.getForObject(apiURL, String.class);
         ObjectMapper objectMapper = new ObjectMapper();
         ListSubmissionAssignmentModel listSubmissionAssignmentModel = null;
-        if(model.equals("{\"assignments\":[{}]}"))
+        if (model.equals("{\"assignments\":[{}]}"))
             return new ArrayList<>();
         try {
             listSubmissionAssignmentModel = objectMapper.readValue(model, ListSubmissionAssignmentModel.class);
@@ -190,38 +187,30 @@ public class MoodleCommandHandler {
     }
 
     @Transactional
-    public void createSubmissionAssignment(Assignment assignmentCreate, AssignmentModel assignmentModel)
-    {
+    public void createSubmissionAssignment(Assignment assignmentCreate, AssignmentModel assignmentModel) {
         List<SubmissionAssignmentModel> listSubmissionAssignmentModel = getAllSubmissionAssignment(assignmentModel.getId());
         listSubmissionAssignmentModel.forEach(submissionAssignmentModel -> {
             submissionAssignmentModel.getSubmissions().forEach(submissionModel -> {
                 Optional<User> user = userRepository.findUserByEmail("duongchithong2002@gmail.com");
-                if(submissionModel.getStatus().equals("submitted")) {
+                if (submissionModel.getStatus().equals("submitted")) {
                     SubmissionAssignment submissionCreate = moodleDataMapper.createSubmissionAssignment(assignmentCreate, user.get(), submissionModel);
                     submissionAssignmentRepository.saveSubmissionAssignment(submissionCreate);
                     SubmissionPlugin submissionPlugin = submissionModel.getPlugins().get(0);
-                    if(assignmentCreate.getType().equals(Type.FILE))
-                    {
+                    if (assignmentCreate.getType().equals(Type.FILE)) {
                         SubmissionAssignmentFile submissionAssignmentFile = moodleDataMapper.
                                 createSubmissionAssignmentFile(submissionCreate, submissionPlugin);
                         submissionAssignmentFileRepository.saveSubmissionAssignmentFile(submissionAssignmentFile);
-                    }
-                    else if(assignmentCreate.getType().equals(Type.TEXT_ONLINE)) {
+                    } else if (assignmentCreate.getType().equals(Type.TEXT_ONLINE)) {
                         SubmissionAssignmentOnlineText submissionAssignmentOnlineText = moodleDataMapper.
                                 createSubmissionAssignmentOnlineText(submissionCreate, submissionPlugin);
                         submissionAssignmentOnlineTextRepository.saveAssignmentSubmissionOnlineText(submissionAssignmentOnlineText);
-                    }
-                    else {
-                        for(SubmissionPlugin plugin: submissionModel.getPlugins())
-                        {
-                            if(plugin.getType().equals("file"))
-                            {
+                    } else {
+                        for (SubmissionPlugin plugin : submissionModel.getPlugins()) {
+                            if (plugin.getType().equals("file")) {
                                 SubmissionAssignmentFile submissionAssignmentFile = moodleDataMapper.
                                         createSubmissionAssignmentFile(submissionCreate, plugin);
                                 submissionAssignmentFileRepository.saveSubmissionAssignmentFile(submissionAssignmentFile);
-                            }
-                            else if(plugin.getType().equals("onlinetext"))
-                            {
+                            } else if (plugin.getType().equals("onlinetext")) {
                                 SubmissionAssignmentOnlineText submissionAssignmentOnlineText = moodleDataMapper.
                                         createSubmissionAssignmentOnlineText(submissionCreate, plugin);
                                 submissionAssignmentOnlineTextRepository.saveAssignmentSubmissionOnlineText(submissionAssignmentOnlineText);
@@ -233,9 +222,9 @@ public class MoodleCommandHandler {
             });
         });
     }
+
     @Transactional
-    public void createAssignment()
-    {
+    public void createAssignment() {
         for (Map.Entry<String, Course> entry : courseIdsMap.entrySet()) {
             String courseId = entry.getKey();
             Course course = entry.getValue();
@@ -256,10 +245,10 @@ public class MoodleCommandHandler {
                 MOODLE_URL, TOKEN, GET_COURSES);
         RestTemplate restTemplate = new RestTemplate();
         String model = restTemplate.getForObject(apiURL, String.class);
-        model = "{\"courses\":"+model+"}";
+        model = "{\"courses\":" + model + "}";
         ObjectMapper objectMapper = new ObjectMapper();
         ListCourseModel listCourseModel = null;
-        if(model.equals("{\"courses\":[]}"))
+        if (model.equals("{\"courses\":[]}"))
             return new ArrayList<>();
         try {
             listCourseModel = objectMapper.readValue(model, ListCourseModel.class);
@@ -281,7 +270,6 @@ public class MoodleCommandHandler {
         createSection();
 
 
-
         courseIdsMap.values().forEach(course -> result.add(moodleDataMapper.courseToCourseResponseEntity(course)));
         return result;
     }
@@ -291,10 +279,10 @@ public class MoodleCommandHandler {
                 MOODLE_URL, TOKEN, GET_COURSES);
         RestTemplate restTemplate = new RestTemplate();
         String model = restTemplate.getForObject(apiURL, String.class);
-        model = "{\"courses\":"+model+"}";
+        model = "{\"courses\":" + model + "}";
         ObjectMapper objectMapper = new ObjectMapper();
         ListCourseModel listCourseModel = null;
-        if(model.equals("{\"courses\":[]}"))
+        if (model.equals("{\"courses\":[]}"))
             return null;
         try {
             listCourseModel = objectMapper.readValue(model, ListCourseModel.class);
@@ -311,11 +299,11 @@ public class MoodleCommandHandler {
                 MOODLE_URL, TOKEN, GET_COURSES, courseId);
         RestTemplate restTemplate = new RestTemplate();
         String model = restTemplate.getForObject(apiURL, String.class);
-        model = "{\"courses\":"+model+"}";
+        model = "{\"courses\":" + model + "}";
         ObjectMapper objectMapper = new ObjectMapper();
         ListCourseModel listCourseModel = null;
 
-        if(model.equals("{\"courses\":[]}"))
+        if (model.equals("{\"courses\":[]}"))
             return null;
 
         try {
@@ -334,10 +322,10 @@ public class MoodleCommandHandler {
                 MOODLE_URL, TOKEN, GET_USER_COURSES, userId);
         RestTemplate restTemplate = new RestTemplate();
         String model = restTemplate.getForObject(apiURL, String.class);
-        model = "{\"courses\":"+model+"}";
+        model = "{\"courses\":" + model + "}";
         ObjectMapper objectMapper = new ObjectMapper();
         ListUserCourseModel listUserCourseModel = null;
-        if(model.equals("{\"courses\":[]}"))
+        if (model.equals("{\"courses\":[]}"))
             return new ArrayList<>();
         try {
             listUserCourseModel = objectMapper.readValue(model, ListUserCourseModel.class);
@@ -351,7 +339,7 @@ public class MoodleCommandHandler {
     @Transactional
     public List<UserModel> getAllUser() {
         String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&courseid=1",
-                MOODLE_URL, TOKEN, GET_USERS);
+                MOODLE_URL, TOKEN, GET_ENROLLED_USERS);
         RestTemplate restTemplate = new RestTemplate();
         String model = restTemplate.getForObject(apiURL, String.class);
         ObjectMapper objectMapper = new ObjectMapper();
@@ -362,7 +350,7 @@ public class MoodleCommandHandler {
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-        
+
         return listUserModel;
     }
 
@@ -371,9 +359,9 @@ public class MoodleCommandHandler {
         String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&courseid=1",
                 MOODLE_URL, TOKEN, GET_ENROLLED_USERS);
         String model = restTemplate.getForObject(apiURL, String.class);
-        List<com.backend.programming.learning.system.course.service.domain.dto.responseentity.user_moodle.UserModel> listUserModel = null;
+        List<UserModel> listUserModel = null;
         try {
-            listUserModel = List.of(objectMapper.readValue(model, com.backend.programming.learning.system.course.service.domain.dto.responseentity.user_moodle.UserModel[].class));
+            listUserModel = List.of(objectMapper.readValue(model, UserModel[].class));
             log.info("User model: {}", listUserModel);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
