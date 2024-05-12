@@ -247,4 +247,16 @@ public class CourseDomainServiceImpl implements CourseDomainService {
         return new OrganizationDeletedFailEvent(organization,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)), failureMessages);
     }
+
+    @Override
+    public UserUpdatedEvent updateUser(User user) {
+        return new UserUpdatedEvent(user, ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)), List.of());
+    }
+
+    @Override
+    public UserCreatedEvent createUser(User user) {
+        user.initializeUser();
+        log.info("User with id: {} is initiated", user.getId().getValue());
+        return new UserCreatedEvent(user, ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)), List.of());
+    }
 }

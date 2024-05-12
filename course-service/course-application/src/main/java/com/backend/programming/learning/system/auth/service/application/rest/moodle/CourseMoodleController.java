@@ -19,12 +19,7 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 @RequestMapping(value = "/course/course/moodle", produces = "application/vnd.api.v1+json")
 public class CourseMoodleController {
-    // tạm để ở controller này
     private final MoodleApplicationService moodleApplicationService;
-    String GET_ALL_COURSES = "core_course_get_courses";
-    String GET_COURSE_BY_USER = "core_enrol_get_users_courses";
-    String MOODLE_URL = "http://62.171.185.208/webservice/rest/server.php";
-    String TOKEN = "cdf90b5bf53bcae577c60419702dbee7";
 
     @PostMapping
     public ResponseEntity<String> syncCourse() {

@@ -19,4 +19,9 @@ public class MoodleApplicationServiceImpl implements MoodleApplicationService {
     public String syncCourse() {
         return moodleCommandHandler.syncCourse();
     }
+
+    @Override
+    public String syncUser() {
+        return moodleCommandHandler.syncUser();
+    }
 }

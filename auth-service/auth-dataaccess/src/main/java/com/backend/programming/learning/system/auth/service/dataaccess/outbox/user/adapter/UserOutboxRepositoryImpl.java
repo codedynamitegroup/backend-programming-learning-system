@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.auth.service.dataaccess.outbox.us
 import com.backend.programming.learning.system.auth.service.dataaccess.outbox.user.repository.UserOutboxJpaRepository;
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserOutboxMessage;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserOutboxRepository;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
@@ -63,5 +64,15 @@ public class UserOutboxRepositoryImpl implements UserOutboxRepository {
     public void deleteByTypeAndOutboxStatusAndSagaStatus(String type, OutboxStatus outboxStatus, SagaStatus... sagaStatus) {
         userOutboxJpaRepository.deleteByTypeAndOutboxStatusAndSagaStatusIn(type, outboxStatus,
                 Arrays.asList(sagaStatus));
+    }
+
+    @Override
+    public Optional<UserOutboxMessage> findByTypeAndSagaIdAndCopyStateAndOutboxStatus(String sagaType,
+                                                                                      UUID sagaId,
+                                                                                      CopyState copyState,
+                                                                                      OutboxStatus outboxStatus) {
+        return userOutboxJpaRepository
+                .findByTypeAndSagaIdAndCopyStateAndOutboxStatus(sagaType, sagaId, copyState, outboxStatus)
+                .map(userOutboxDataAccessMapper::userOutboxEntityToUserOutboxMessage);
     }
 }
