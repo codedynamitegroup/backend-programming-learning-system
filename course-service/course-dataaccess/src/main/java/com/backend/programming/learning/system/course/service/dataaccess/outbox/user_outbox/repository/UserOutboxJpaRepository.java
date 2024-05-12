@@ -2,7 +2,10 @@ package com.backend.programming.learning.system.course.service.dataaccess.outbox
 
 import com.backend.programming.learning.system.course.service.dataaccess.outbox.user_outbox.entity.UserOutboxEntity;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
+import com.backend.programming.learning.system.saga.SagaStatus;
+import io.micrometer.observation.ObservationFilter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -21,5 +24,4 @@ public interface UserOutboxJpaRepository extends JpaRepository<UserOutboxEntity,
                                                                               OutboxStatus outboxStatus);
 
     void deleteByTypeAndOutboxStatus(String type, OutboxStatus outboxStatus);
-
 }

@@ -46,7 +46,7 @@ public class UserCommandHandler {
 
 //        userOutboxHelper.saveUserOutboxMessage(
 //                userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
-////                ServiceName.COURSE_SERVICE,
+////                ServiceName.AUTH_SERVICE,
 //                CopyState.CREATING,
 //                OutboxStatus.STARTED,
 ////                userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
@@ -77,18 +77,18 @@ public class UserCommandHandler {
 
 //        userOutboxHelper.saveUserOutboxMessage(
 //                userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
-//                ServiceName.COURSE_SERVICE,
+////                ServiceName.AUTH_SERVICE,
 //                CopyState.UPDATING,
 //                OutboxStatus.STARTED,
-//                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
+////                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
 //                UUID.randomUUID());
 //
 //        userOutboxHelper.saveUserOutboxMessage(
 //                userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
-//                ServiceName.CODE_ASSESSMENT_SERVICE,
+////                ServiceName.CODE_ASSESSMENT_SERVICE,
 //                CopyState.UPDATING,
 //                OutboxStatus.STARTED,
-//                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
+////                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
 //                UUID.randomUUID());
 
         log.info("User is updated with id: {}", userUpdatedEvent.getUser().getId().getValue());

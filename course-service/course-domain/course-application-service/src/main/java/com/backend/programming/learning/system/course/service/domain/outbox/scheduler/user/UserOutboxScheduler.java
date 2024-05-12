@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserOutboxScheduler implements OutboxScheduler {
     private final UserOutboxHelper userOutboxHelper;
-    private final UserRequestMessagePublisher userResponseMessagePublisher;
+    private final UserRequestMessagePublisher userRequestMessagePublisher;
 
     @Override
     @Transactional
@@ -36,7 +36,7 @@ public class UserOutboxScheduler implements OutboxScheduler {
                     outboxMessages.stream().map(outboxMessage ->
                             outboxMessage.getId().toString()).collect(Collectors.joining(",")));
             outboxMessages.forEach(userOutboxMessage -> {
-                userResponseMessagePublisher.publish(userOutboxMessage, userOutboxHelper::updateOutboxMessage);
+                userRequestMessagePublisher.publish(userOutboxMessage, userOutboxHelper::updateOutboxMessage);
             });
             log.info("{} UserOutboxMessage sent to message bus!", outboxMessages.size());
         }

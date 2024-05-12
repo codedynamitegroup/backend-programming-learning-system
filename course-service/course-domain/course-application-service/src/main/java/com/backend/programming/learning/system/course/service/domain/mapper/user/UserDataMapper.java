@@ -79,6 +79,7 @@ public class UserDataMapper {
     public User createUserCommandToUser(CreateUserCommand createUserCommand) {
         return User.builder()
                 .email(createUserCommand.getEmail())
+                .userIdMoodle(createUserCommand.getUserIdMoodle())
                 .firstName(createUserCommand.getFirstName())
                 .lastName(createUserCommand.getLastName())
                 .phone(createUserCommand.getPhone())
@@ -87,6 +88,7 @@ public class UserDataMapper {
     public User updateUserCommandToUser(UpdateUserCommand updateUserCommand) {
         return User.builder()
                 .id(new UserId(updateUserCommand.getUserId()))
+                .userIdMoodle(updateUserCommand.getUserIdMoodle())
                 .dob(updateUserCommand.getDob())
                 .firstName(updateUserCommand.getFirstName())
                 .lastName(updateUserCommand.getLastName())
