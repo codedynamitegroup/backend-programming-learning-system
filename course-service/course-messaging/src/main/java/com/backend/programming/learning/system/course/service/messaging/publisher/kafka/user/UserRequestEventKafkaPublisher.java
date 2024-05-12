@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.course.service.messaging.publisher.kafka.user;
 
 import com.backend.programming.learning.system.auth.service.config.AuthServiceConfigData;
+import com.backend.programming.learning.system.course.service.config.CourseServiceConfigData;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.user.UserEventPayload;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.user.UserOutboxMessage;
 import com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.user.UserRequestMessagePublisher;
@@ -22,7 +23,7 @@ import java.util.function.BiConsumer;
 public class UserRequestEventKafkaPublisher implements UserRequestMessagePublisher {
     private final UserMessagingDataMapper userMessagingDataMapper;
     private final KafkaProducer<String, UserRequestAvroModel> kafkaProducer;
-    private final AuthServiceConfigData authServiceConfigData;
+    private final CourseServiceConfigData courseServiceConfigData;
     private final KafkaOutboxMessageHelper kafkaOutboxMessageHelper;
 
 
@@ -34,7 +35,7 @@ public class UserRequestEventKafkaPublisher implements UserRequestMessagePublish
         String sagaId = userOutboxMessage.getSagaId().toString();
         ServiceName serviceName = ServiceName.AUTH_SERVICE;
 
-        String requestTopicName = "course-user-request";
+        String requestTopicName = courseServiceConfigData.getCourseUserRequestTopicName();
         try {
             switch (userOutboxMessage.getCopyState()) {
                 case CREATING -> {
