@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Getter;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.Setter;
+
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -27,4 +30,9 @@ public class CreateCodeQuestionCommand {
     private final String constraints;
     @NotNull(message = "maxGrade must not be null")
     private final Float maxGrade;
+
+    @Setter
+    private Boolean isPublic;
+
+    private final List<UUID> tagIds;
 }

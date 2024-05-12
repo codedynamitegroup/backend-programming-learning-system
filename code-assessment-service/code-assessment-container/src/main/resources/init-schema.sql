@@ -119,6 +119,7 @@ CREATE TABLE qtype_code_questions(
     output_format text,
     copy_state CopyState,
     failure_messages text,
+    is_public boolean default true,
     constraints text,
     max_grade float default 10,
     CONSTRAINT qtype_code_questions_pk PRIMARY KEY (id)

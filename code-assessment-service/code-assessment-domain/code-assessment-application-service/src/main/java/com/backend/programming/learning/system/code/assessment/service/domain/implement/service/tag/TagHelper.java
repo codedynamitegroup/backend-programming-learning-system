@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 import com.backend.programming.learning.system.code.assessment.service.domain.CodeAssessmentDomainService;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.tag.CreateTagsCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.tag.DeleteTagCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.tag.GetTagsCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Tag;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.tag.TagDataMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.TagRepository;
@@ -39,7 +40,10 @@ public class TagHelper {
     }
 
     @Transactional
-    public List<Tag> getTags() {
-        return tagRepository.getTags();
+    public List<Tag> getTags(GetTagsCommand command) {
+        if(command.getCountCodeQuestion())
+            return tagRepository.getTags();
+        else
+            return tagRepository.getTagsExcludeCountCodeQuestion();
     }
 }

@@ -15,8 +15,6 @@ import java.util.UUID;
 @Builder
 public class GetSharedSolutionDetailCommand {
     @NotNull(message = "sharedSolutionId must not be null")
-    @JsonIgnore
-    @Setter
     UUID sharedSolutionId;
 
     @NotNull(message = "userId must not be null")

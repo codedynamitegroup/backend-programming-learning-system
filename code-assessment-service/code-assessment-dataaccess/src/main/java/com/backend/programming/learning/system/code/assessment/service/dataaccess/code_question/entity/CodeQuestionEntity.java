@@ -33,6 +33,7 @@ public class CodeQuestionEntity {
     private String failureMessages;
 
     private Float maxGrade;
+    private Boolean isPublic;
 
     @Override
     public boolean equals(Object object) {

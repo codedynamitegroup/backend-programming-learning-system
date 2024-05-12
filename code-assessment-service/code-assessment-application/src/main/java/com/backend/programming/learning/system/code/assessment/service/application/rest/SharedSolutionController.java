@@ -22,7 +22,9 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.comment.GetSolutionCommentResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.UpdateSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.comment.UpdateCommentCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.SharedSolution;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.SharedSolutionApplicationService;
+import com.backend.programming.learning.system.domain.valueobject.QueryOrderBy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,7 +56,7 @@ public class SharedSolutionController {
     }
 
     //view
-    @GetMapping
+    @PostMapping("/list")
     public ResponseEntity<GetSharedSolutionsResponse>
     getSharedSolutions(
             @RequestBody GetSharedSolutionByCodeQuestionIdCommand command,
@@ -63,6 +65,12 @@ public class SharedSolutionController {
     ){
         command.setPageNum(pageNo);
         command.setPageSize(pageSize);
+
+        if(command.getOrderBy() == null)
+            command.setOrderBy(QueryOrderBy.DESC);
+        if(command.getSortBy() == null)
+            command.setSortBy(SharedSolution.SortedFields.totalVote);
+
         GetSharedSolutionsResponse response =
                 service.getSharedSolutions(command);
         return ResponseEntity.ok(response);
@@ -72,8 +80,13 @@ public class SharedSolutionController {
     @GetMapping("/{shared-solution-id}")
     public ResponseEntity<GetSharedSolutionResponseItem> getDetailSharedSolution
     (@PathVariable("shared-solution-id") UUID sharedSolutionId,
-     @RequestBody GetSharedSolutionDetailCommand command){
-        command.setSharedSolutionId(sharedSolutionId);
+     @RequestParam UUID userId){
+
+        GetSharedSolutionDetailCommand command = GetSharedSolutionDetailCommand.builder()
+                .userId(userId)
+                .sharedSolutionId(sharedSolutionId)
+                .build();
+
         GetSharedSolutionResponseItem item =
                 service.getDetailSharedSolution(command);
         return ResponseEntity.ok(item);
@@ -142,11 +155,16 @@ public class SharedSolutionController {
             @PathVariable("shared-solution-id") UUID sharedSolutionId,
             @RequestParam(defaultValue = "${code-assessment-service.default-page-number}") Integer pageNo,
             @RequestParam(defaultValue = "${code-assessment-service.default-page-size}") Integer pageSize,
-            @RequestBody GetSolutionCommentCommand command){
+            @RequestParam UUID userId,
+            @RequestParam(defaultValue = "DESC") QueryOrderBy orderBy){
 
-        command.setSharedSolutionId(sharedSolutionId);
-        command.setPageNum(pageNo);
-        command.setPageSize(pageSize);
+        GetSolutionCommentCommand command = GetSolutionCommentCommand.builder()
+                .userId(userId)
+                .orderBy(orderBy)
+                .sharedSolutionId(sharedSolutionId)
+                .pageNum(pageNo)
+                .pageSize(pageSize)
+                .build();
 
         GetSolutionCommentResponse response =  service.getComments(command);
         return ResponseEntity.ok(response);
@@ -158,9 +176,12 @@ public class SharedSolutionController {
             @PathVariable("comment-id") UUID commentId,
 //            @RequestParam(defaultValue = "${code-assessment-service.default-page-number}") Integer pageNo,
 //            @RequestParam(defaultValue = "${code-assessment-service.default-page-size}") Integer pageSize,
-            @RequestBody GetReplyCommentCommand command){
+            @RequestParam UUID userId){
 
-        command.setRootCommentId(commentId);
+        GetReplyCommentCommand command = GetReplyCommentCommand.builder()
+                .userId(userId)
+                .rootCommentId(commentId)
+                .build();
 
         List<CommentDto> response =  service.getReplyComments(command);
         return ResponseEntity.ok(response);

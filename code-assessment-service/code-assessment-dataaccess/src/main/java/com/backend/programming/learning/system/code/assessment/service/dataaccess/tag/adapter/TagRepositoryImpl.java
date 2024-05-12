@@ -46,4 +46,10 @@ public class TagRepositoryImpl implements TagRepository {
         List<TagEntity> tagEntities = jpaRepository.findAll();
         return tagEntities.stream().map(dataAccessMapper::entityToTag).toList();
     }
+
+    @Override
+    public List<Tag> getTagsExcludeCountCodeQuestion() {
+        List<TagEntity> tagEntities = jpaRepository.findAll();
+        return tagEntities.stream().map(dataAccessMapper::entityToTagIgnoreLazy).toList();
+    }
 }

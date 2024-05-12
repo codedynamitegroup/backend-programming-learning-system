@@ -15,4 +15,6 @@ public interface TagRepository {
     void deleteTag(TagId tagId);
 
     List<Tag> getTags();
+
+    List<Tag> getTagsExcludeCountCodeQuestion();
 }

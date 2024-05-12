@@ -22,8 +22,6 @@ public class GetReplyCommentCommand {
 //    UUID sharedSolutionId;
 
     @NotNull(message = "rootCommentId must not be null")
-    @Setter
-    @JsonIgnore
     UUID rootCommentId;
 
 }

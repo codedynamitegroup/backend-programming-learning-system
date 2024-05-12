@@ -25,11 +25,11 @@ public class GetSharedSolutionByCodeQuestionIdCommand {
 
     List<UUID> filterTagIds;
 
-    @Builder.Default
-    SharedSolution.SortedFields sortBy = SharedSolution.SortedFields.totalVote;
+    @Setter
+    SharedSolution.SortedFields sortBy;
 
-    @Builder.Default
-    QueryOrderBy orderBy = QueryOrderBy.DESC ;
+    @Setter
+    QueryOrderBy orderBy;
 
     @Positive(message = "pageSize must be positive")
     @Setter

@@ -38,6 +38,10 @@ public class CodeQuestionController {
     public ResponseEntity<CreateCodeQuestionResponse> createCodeQuestion
             (@RequestBody CreateCodeQuestionCommand createCodeQuestionCommand){
         log.info("Create code question for question id {}", createCodeQuestionCommand.getQuestionId());
+
+        if(createCodeQuestionCommand.getIsPublic() == null)
+            createCodeQuestionCommand.setIsPublic(true);
+
         CreateCodeQuestionResponse createCodeQuestionResponse =
             codeQuestionApplicationService.createCodeQuestion(createCodeQuestionCommand);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(createCodeQuestionResponse);

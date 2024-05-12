@@ -75,6 +75,5 @@ public class CodeSubmissionController {
     @PutMapping("/test-case-token")
     public void updateCodeSubmissionTestCase(@RequestBody UpdateCodeSubmissionTestCaseCommand command){
         codeSubmissionApplicationService.handleTestCaseResult(command);
-
     }
 }

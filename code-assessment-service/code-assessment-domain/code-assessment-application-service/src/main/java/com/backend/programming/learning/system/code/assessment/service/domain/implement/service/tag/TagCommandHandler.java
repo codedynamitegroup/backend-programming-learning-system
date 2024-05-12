@@ -4,11 +4,13 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.tag.CreateTagsCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.tag.CreateTagsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.tag.DeleteTagCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.tag.GetTagsCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.tag.TagResponseItem;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Tag;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.tag.TagDataMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,8 +34,8 @@ public class TagCommandHandler {
         tagHelper.deleteTag(command);
     }
 
-    public List<TagDto> getTags() {
-        List<Tag> tags = tagHelper.getTags();
+    public List<TagDto> getTags(GetTagsCommand command) {
+        List<Tag> tags = tagHelper.getTags(command);
         return tags.stream().map(tagDataMapper::tagToTagResponseItem).toList();
     }
 }

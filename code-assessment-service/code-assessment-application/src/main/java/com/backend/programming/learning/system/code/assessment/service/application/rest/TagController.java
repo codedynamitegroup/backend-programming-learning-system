@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.tag.CreateTagsCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.tag.CreateTagsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.tag.DeleteTagCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.tag.GetTagsCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.tag.TagResponseItem;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.TagApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -41,8 +42,15 @@ public class TagController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TagDto>> getTags(){
-        List<TagDto> response = tagApplicationService.getTags();
+    public ResponseEntity<List<TagDto>> getTags(@RequestParam(value = "countCodeQuestion", required = false) Boolean countCodeQuestion){
+        if(countCodeQuestion == null)
+            countCodeQuestion = false;
+
+        GetTagsCommand command = new GetTagsCommand(countCodeQuestion);
+        List<TagDto> response = tagApplicationService.getTags(command);
         return ResponseEntity.ok(response);
     }
+
+
+
 }

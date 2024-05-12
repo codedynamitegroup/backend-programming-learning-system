@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.tag.CreateTagsCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.tag.CreateTagsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.tag.DeleteTagCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.tag.GetTagsCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.tag.TagResponseItem;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.TagApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -34,8 +35,8 @@ public class TagApplicationServiceImpl implements TagApplicationService {
     }
 
     @Override
-    public List<TagDto> getTags() {
+    public List<TagDto> getTags(GetTagsCommand command) {
 
-        return tagCommandHandler.getTags();
+        return tagCommandHandler.getTags(command);
     }
 }

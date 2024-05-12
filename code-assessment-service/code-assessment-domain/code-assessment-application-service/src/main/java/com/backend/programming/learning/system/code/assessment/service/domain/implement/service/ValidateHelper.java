@@ -188,7 +188,16 @@ public class ValidateHelper {
         else {
             log.error("codesubmission with id: {} not found", codeSubmissionId);
             throw new CodeSubmissionNotFound("codesubmission with id " + codeSubmissionId.getValue() + " not found");
+        }
+    }
 
+    public Tag validateTagById(UUID id) {
+        Optional<Tag> tagOpt = tagRepository.findById(new TagId(id));
+        if(tagOpt.isPresent())
+            return tagOpt.get();
+        else {
+            log.error("tag with id: {} not found", id);
+            throw new TagNotFoundException("tag with id " + id + " not found");
         }
     }
 }

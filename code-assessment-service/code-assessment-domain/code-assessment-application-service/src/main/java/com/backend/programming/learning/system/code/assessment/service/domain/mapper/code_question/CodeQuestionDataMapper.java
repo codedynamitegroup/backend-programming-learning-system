@@ -5,6 +5,9 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionsUpdatedEvent;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.code_questions_update_outbox.CodeQuestionsUpdatePayload;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagId;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.code_question_tag.CodeQuestionTagId;
+import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import org.springframework.stereotype.Component;
@@ -21,6 +24,7 @@ public class CodeQuestionDataMapper {
                 .outputFormat(command.getOutputFormat())
                 .constraints(command.getConstraints())
                 .copyState(CopyState.CREATING)
+                .isPublic(command.getIsPublic())
                 .build();
     }
     public CreateCodeQuestionResponse codeQuestionToCreateCodeQuestionReponse(CodeQuestion codeQuestion, String message){
@@ -45,4 +49,7 @@ public class CodeQuestionDataMapper {
     }
 
 
+    public CodeQuestionTagId codeQuestionIdAndTagIdToCodeQuestionTagId(CodeQuestionId id, TagId tagId) {
+        return new CodeQuestionTagId(id, tagId);
+    }
 }

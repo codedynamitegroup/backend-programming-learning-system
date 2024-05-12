@@ -18,6 +18,7 @@ public class TagDataMapper {
         return TagDto.builder()
                 .id(tag.getId().getValue())
                 .name(tag.getName())
+                .numOfCodeQuestion(tag.getNumOfCodeQuestion())
                 .build();
     }
 

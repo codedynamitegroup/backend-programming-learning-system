@@ -18,6 +18,7 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     private String constraints;
     private CopyState copyState;
     private Float maxGrade;
+    private Boolean isPublic;
     private List<String> failureMessages;
     public static final String FAILURE_MESSAGE_DELIMITER = ",";
 
@@ -85,6 +86,10 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         return dslTemplate;
     }
 
+    public Boolean getIsPublic() {
+        return isPublic;
+    }
+
     public List<String> getFailureMessages() {
         return failureMessages;
     }
@@ -94,6 +99,7 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     }
 
     private CodeQuestion(Builder builder) {
+        super.setId(builder.id);
         questionId = builder.questionId;
         name = builder.name;
         dslTemplate = builder.dslTemplate;
@@ -103,8 +109,8 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         constraints = builder.constraints;
         setCopyState(builder.copyState);
         maxGrade = builder.maxGrade;
+        isPublic = builder.isPublic;
         failureMessages = builder.failureMessages;
-        super.setId(builder.id);
     }
 
     public static final class Builder {
@@ -117,6 +123,7 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         private String constraints;
         private CopyState copyState;
         private Float maxGrade;
+        private Boolean isPublic;
         private List<String> failureMessages;
         private CodeQuestionId id;
 
@@ -168,6 +175,11 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
             return this;
         }
 
+        public Builder isPublic(Boolean val) {
+            isPublic = val;
+            return this;
+        }
+
         public Builder failureMessages(List<String> val) {
             failureMessages = val;
             return this;
@@ -181,5 +193,6 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         public CodeQuestion build() {
             return new CodeQuestion(this);
         }
+
     }
 }

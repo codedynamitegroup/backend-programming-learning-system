@@ -2,13 +2,17 @@ package com.backend.programming.learning.system.code.assessment.service.dataacce
 
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.CodeQuestionEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.mapper.CodeQuestionDataAccessMapper;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.mapper.CodeQuestionTagDataAccessMapper;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.repository.CodeQuestionJpaRepository;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.repository.CodeQuestionTagJpaRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_question.CodeQuestionRepository;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.code_question_tag.CodeQuestionTagId;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -17,12 +21,14 @@ import java.util.UUID;
 public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
     private final CodeQuestionJpaRepository codeQuestionJpaRepository;
     private final CodeQuestionDataAccessMapper codeQuestionDataAccessMapper;
+    private final CodeQuestionTagJpaRepository codeQuestionTagJpaRepository;
+    private final CodeQuestionTagDataAccessMapper codeQuestionTagDataAccessMapper;
 
-    public CodeQuestionRepositoryImpl
-            (CodeQuestionJpaRepository codeQuestionJpaRepository
-                    , CodeQuestionDataAccessMapper codeQuestionDataAccessMapper) {
+    public CodeQuestionRepositoryImpl(CodeQuestionJpaRepository codeQuestionJpaRepository, CodeQuestionDataAccessMapper codeQuestionDataAccessMapper, CodeQuestionTagJpaRepository codeQuestionTagJpaRepository, CodeQuestionTagDataAccessMapper codeQuestionTagDataAccessMapper) {
         this.codeQuestionJpaRepository = codeQuestionJpaRepository;
         this.codeQuestionDataAccessMapper = codeQuestionDataAccessMapper;
+        this.codeQuestionTagJpaRepository = codeQuestionTagJpaRepository;
+        this.codeQuestionTagDataAccessMapper = codeQuestionTagDataAccessMapper;
     }
 
     @Override
@@ -52,5 +58,17 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
     @Override
     public void deleteCodeQuestionById(UUID id){
         codeQuestionJpaRepository.deleteById(id);
+    }
+
+    @Override
+    public void saveTags(List<CodeQuestionTagId> codeQuestionTagIds) {
+        codeQuestionTagIds.stream().map(codeQuestionTagDataAccessMapper::idToEntity)
+                .forEach(item ->{
+                    try {
+                        codeQuestionTagJpaRepository.save(item);
+                    } catch (Exception e) {
+                        log.error("Can not save tag {} with code question {}", item.getTag().getId(), item.getCodeQuestion().getId());
+                    }
+                });
     }
 }

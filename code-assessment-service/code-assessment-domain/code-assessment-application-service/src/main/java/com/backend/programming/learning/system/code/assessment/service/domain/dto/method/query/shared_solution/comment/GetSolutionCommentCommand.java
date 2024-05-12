@@ -20,20 +20,14 @@ public class GetSolutionCommentCommand {
     UUID userId;
 
     @NotNull(message = "sharedSolutionId must not be null")
-    @Setter
-    @JsonIgnore
     UUID sharedSolutionId;
 
-    @Builder.Default
-    QueryOrderBy orderBy = QueryOrderBy.DESC ;
+    @NotNull
+    QueryOrderBy orderBy;
 
     @Positive(message = "pageSize must be positive")
-    @Setter
-    @JsonIgnore
     Integer pageSize;
 
     @PositiveOrZero(message = "pageNum must not be negative")
-    @Setter
-    @JsonIgnore
     Integer pageNum;
 }
