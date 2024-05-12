@@ -1,7 +1,10 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.mapper.code_question;
 
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.codequestion.CreateCodeQuestionCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.codequestion.CreateCodeQuestionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.DtoMapper;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionsUpdatedEvent;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.code_questions_update_outbox.CodeQuestionsUpdatePayload;
@@ -10,10 +13,17 @@ import com.backend.programming.learning.system.code.assessment.service.domain.va
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CodeQuestionDataMapper {
+    final DtoMapper dtoMapper;
+
+    public CodeQuestionDataMapper(DtoMapper dtoMapper) {
+        this.dtoMapper = dtoMapper;
+    }
+
     public CodeQuestion createCodeQuestionCommandToCodeQuestion(CreateCodeQuestionCommand command){
         return CodeQuestion.builder()
                 .questionId(new QuestionId(command.getQuestionId()))
@@ -25,6 +35,8 @@ public class CodeQuestionDataMapper {
                 .constraints(command.getConstraints())
                 .copyState(CopyState.CREATING)
                 .isPublic(command.getIsPublic())
+                .difficulty(command.getDifficulty())
+                .maxGrade(command.getMaxGrade())
                 .build();
     }
     public CreateCodeQuestionResponse codeQuestionToCreateCodeQuestionReponse(CodeQuestion codeQuestion, String message){
@@ -51,5 +63,14 @@ public class CodeQuestionDataMapper {
 
     public CodeQuestionTagId codeQuestionIdAndTagIdToCodeQuestionTagId(CodeQuestionId id, TagId tagId) {
         return new CodeQuestionTagId(id, tagId);
+    }
+
+    public GetCodeQuestionsResponse pagableCodeQuestionsToGetCodeQuestionsResponse(Page<CodeQuestion> codeQuestions) {
+        return GetCodeQuestionsResponse.builder()
+                .currentPage(codeQuestions.getNumber())
+                .totalItems(codeQuestions.getTotalElements())
+                .totalPages(codeQuestions.getTotalPages())
+                .codeQuestions(codeQuestions.stream().map(dtoMapper::codeQuestionToDto).toList())
+                .build();
     }
 }

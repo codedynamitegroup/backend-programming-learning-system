@@ -1,8 +1,11 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.implement.service.code_question;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.CodeAssessmentDomainService;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.codequestion.CreateCodeQuestionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.Tag;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.User;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionsUpdatedEvent;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.ValidateHelper;
@@ -11,6 +14,8 @@ import com.backend.programming.learning.system.code.assessment.service.domain.po
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.code_question_tag.CodeQuestionTagId;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.apache.bcel.classfile.Code;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -79,5 +84,28 @@ public class CodeQuestionsHelper {
         }
         log.info("Code question is save with id: {}", codeQuestionResult.getId().getValue());
         return codeQuestionResult;
+    }
+
+    @Transactional
+    public Page<CodeQuestion> getCodeQuestions(GetCodeQuestionsCommand command) {
+        User user = validateHelper.validateUser(command.getUserId());
+        List<TagId> tagIds = command.getTagIds() == null || command.getTagIds().isEmpty()? null:
+                command.getTagIds().stream().map(item->{
+                            try {
+                                return validateHelper.validateTagById(item).getId();
+                            } catch (Exception e) {
+                                return null;
+                            }
+                        })
+                        .filter(Objects::nonNull)
+                        .toList();
+        Page<CodeQuestion> codeQuestions = codeQuestionRepository
+                .findAll(user.getId(),
+                        tagIds,
+                        command.getOrderBy(),
+                        command.getSortBy(),
+                        command.getPageNum(),
+                        command.getPageSize());
+        return codeQuestions;
     }
 }

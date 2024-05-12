@@ -2,9 +2,13 @@ package com.backend.programming.learning.system.code.assessment.service.dataacce
 
 
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
 import lombok.*;
 
 import jakarta.persistence.*;
+import lombok.experimental.FieldNameConstants;
+
+import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -15,6 +19,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@FieldNameConstants
 public class CodeQuestionEntity {
     @Id
     private UUID id;
@@ -32,7 +37,11 @@ public class CodeQuestionEntity {
     private String constraints;
     private String failureMessages;
 
+    @Enumerated(EnumType.STRING)
+    private QuestionDifficulty difficulty;
+
     private Float maxGrade;
+    private ZonedDateTime createdAt;
     private Boolean isPublic;
 
     @Override

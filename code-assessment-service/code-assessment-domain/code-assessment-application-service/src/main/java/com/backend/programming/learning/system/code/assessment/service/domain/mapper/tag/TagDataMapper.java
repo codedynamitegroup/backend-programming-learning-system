@@ -16,7 +16,7 @@ public class TagDataMapper {
 
     public TagDto tagToTagResponseItem(Tag tag) {
         return TagDto.builder()
-                .id(tag.getId().getValue())
+                .id(tag.getId() != null? tag.getId().getValue(): null)
                 .name(tag.getName())
                 .numOfCodeQuestion(tag.getNumOfCodeQuestion())
                 .build();

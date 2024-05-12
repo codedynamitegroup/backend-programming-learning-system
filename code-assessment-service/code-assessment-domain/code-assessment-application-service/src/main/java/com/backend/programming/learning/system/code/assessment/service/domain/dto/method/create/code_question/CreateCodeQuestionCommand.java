@@ -1,5 +1,6 @@
-package com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.codequestion;
+package com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question;
 
+import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,6 +31,8 @@ public class CreateCodeQuestionCommand {
     private final String constraints;
     @NotNull(message = "maxGrade must not be null")
     private final Float maxGrade;
+    @NotNull(message = "difficulty must not be null")
+    private final QuestionDifficulty difficulty;
 
     @Setter
     private Boolean isPublic;

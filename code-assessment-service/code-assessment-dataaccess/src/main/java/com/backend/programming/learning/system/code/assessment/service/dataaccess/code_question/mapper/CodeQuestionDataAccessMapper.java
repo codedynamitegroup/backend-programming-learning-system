@@ -14,9 +14,11 @@ import java.util.Arrays;
 public class CodeQuestionDataAccessMapper {
 
     private final QuestionDataAssessMapper questionDataAssessMapper;
+    private final CodeQuestionFieldToCodeQuestionEntityField codeQuestionFieldToCodeQuestionEntityField;
 
-    public CodeQuestionDataAccessMapper(QuestionDataAssessMapper questionDataAssessMapper) {
+    public CodeQuestionDataAccessMapper(QuestionDataAssessMapper questionDataAssessMapper, CodeQuestionFieldToCodeQuestionEntityField codeQuestionFieldToCodeQuestionEntityField) {
         this.questionDataAssessMapper = questionDataAssessMapper;
+        this.codeQuestionFieldToCodeQuestionEntityField = codeQuestionFieldToCodeQuestionEntityField;
     }
 
     public CodeQuestionEntity codeQuestionToCodeQuestionEntity(CodeQuestion codeQuestion){
@@ -33,6 +35,8 @@ public class CodeQuestionDataAccessMapper {
                 .copyState(codeQuestion.getCopyState())
                 .maxGrade(codeQuestion.getMaxGrade())
                 .isPublic(codeQuestion.getIsPublic())
+                .difficulty(codeQuestion.getDifficulty())
+                .createdAt(codeQuestion.getCreatedAt())
                 .failureMessages(codeQuestion.getFailureMessages() != null ?
                         String.join(CodeQuestion.FAILURE_MESSAGE_DELIMITER, codeQuestion.getFailureMessages()) : "")
                 .build();
@@ -44,6 +48,7 @@ public class CodeQuestionDataAccessMapper {
                 .questionId(new QuestionId(codeQuestionEntity.getQuestionId()))
                 .codeQuestionId(new CodeQuestionId(codeQuestionEntity.getId()))
                 .name(codeQuestionEntity.getName())
+                .problemStatement(codeQuestionEntity.getProblemStatement())
                 .dslTemplate(codeQuestionEntity.getDslTemplate())
                 .constraints(codeQuestionEntity.getConstraints())
                 .inputFormat(codeQuestionEntity.getInputFormat())
@@ -51,10 +56,39 @@ public class CodeQuestionDataAccessMapper {
                 .copyState(codeQuestionEntity.getCopyState())
                 .maxGrade(codeQuestionEntity.getMaxGrade())
                 .isPublic(codeQuestionEntity.getIsPublic())
+                .difficulty(codeQuestionEntity.getDifficulty())
+                .createdAt(codeQuestionEntity.getCreatedAt())
                 .failureMessages(codeQuestionEntity.getFailureMessages()==null || codeQuestionEntity.getFailureMessages().isEmpty() ? new ArrayList<>() :
                         new ArrayList<>(Arrays.asList(codeQuestionEntity.getFailureMessages()
                                 .split(CodeQuestion.FAILURE_MESSAGE_DELIMITER))))
                 .build();
         return codeQuestion;
+    }
+    public CodeQuestion codeQuestionEntityToCodeQuestion(CodeQuestionEntity codeQuestionEntity, Boolean done){
+        CodeQuestion codeQuestion = CodeQuestion.builder()
+//                .questionId(new QuestionId(codeQuestionEntity.getQuestion().getId()))
+                .questionId(new QuestionId(codeQuestionEntity.getQuestionId()))
+                .codeQuestionId(new CodeQuestionId(codeQuestionEntity.getId()))
+                .name(codeQuestionEntity.getName())
+                .problemStatement(codeQuestionEntity.getProblemStatement())
+                .dslTemplate(codeQuestionEntity.getDslTemplate())
+                .constraints(codeQuestionEntity.getConstraints())
+                .inputFormat(codeQuestionEntity.getInputFormat())
+                .outputFormat(codeQuestionEntity.getOutputFormat())
+                .copyState(codeQuestionEntity.getCopyState())
+                .maxGrade(codeQuestionEntity.getMaxGrade())
+                .isPublic(codeQuestionEntity.getIsPublic())
+                .difficulty(codeQuestionEntity.getDifficulty())
+                .createdAt(codeQuestionEntity.getCreatedAt())
+                .solved(done)
+                .failureMessages(codeQuestionEntity.getFailureMessages()==null || codeQuestionEntity.getFailureMessages().isEmpty() ? new ArrayList<>() :
+                        new ArrayList<>(Arrays.asList(codeQuestionEntity.getFailureMessages()
+                                .split(CodeQuestion.FAILURE_MESSAGE_DELIMITER))))
+                .build();
+        return codeQuestion;
+    }
+
+    public String codeQuestionFieldToCodeQuestionEntityField(String name) {
+        return codeQuestionFieldToCodeQuestionEntityField.fieldMapper.get(name);
     }
 }

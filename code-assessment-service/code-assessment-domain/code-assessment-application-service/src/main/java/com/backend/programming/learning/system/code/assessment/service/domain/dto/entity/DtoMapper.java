@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.dto.entity;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Comment;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.User;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,15 @@ public class DtoMapper {
                 .firstName(user.getFirstName())
                 .avatarUrl(user.getAvatarUrl())
                 .id(user.getId().getValue())
+                .build();
+    }
+
+    public CodeQuestionDto codeQuestionToDto(CodeQuestion codeQuestion) {
+        return CodeQuestionDto.builder()
+                .name(codeQuestion.getName())
+                .done(codeQuestion.getSolved())
+                .id(codeQuestion.getId().getValue())
+                .difficulty(codeQuestion.getDifficulty())
                 .build();
     }
 }

@@ -7,11 +7,13 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Tag;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.tag.TagDataMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.TagRepository;
+import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_question.CodeQuestionRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagId;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -19,11 +21,13 @@ import java.util.List;
 public class TagHelper {
     final TagRepository tagRepository;
     final CodeAssessmentDomainService codeAssessmentDomainService;
+    final CodeQuestionRepository codeQuestionRepository;
     final TagDataMapper tagDataMapper;
 
-    public TagHelper(TagRepository tagRepository, CodeAssessmentDomainService codeAssessmentDomainService, TagDataMapper tagDataMapper) {
+    public TagHelper(TagRepository tagRepository, CodeAssessmentDomainService codeAssessmentDomainService, CodeQuestionRepository codeQuestionRepository, TagDataMapper tagDataMapper) {
         this.tagRepository = tagRepository;
         this.codeAssessmentDomainService = codeAssessmentDomainService;
+        this.codeQuestionRepository = codeQuestionRepository;
         this.tagDataMapper = tagDataMapper;
     }
 
@@ -41,8 +45,12 @@ public class TagHelper {
 
     @Transactional
     public List<Tag> getTags(GetTagsCommand command) {
-        if(command.getCountCodeQuestion())
-            return tagRepository.getTags();
+        if(command.getCountCodeQuestion()){
+            List<Tag> tags = new ArrayList<>(tagRepository.getTags());
+            Integer countAllCodeQuestion = codeQuestionRepository.countAllCodeQuestion();
+            tags.add(Tag.builder().name("All").numOfCodeQuestion(countAllCodeQuestion).build());
+            return tags;
+        }
         else
             return tagRepository.getTagsExcludeCountCodeQuestion();
     }

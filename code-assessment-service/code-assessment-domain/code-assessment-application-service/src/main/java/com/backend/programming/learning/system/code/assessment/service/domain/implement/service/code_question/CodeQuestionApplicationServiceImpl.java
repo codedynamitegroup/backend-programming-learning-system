@@ -1,7 +1,9 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.implement.service.code_question;
 
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.codequestion.CreateCodeQuestionCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.codequestion.CreateCodeQuestionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.CodeQuestionApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,5 +22,10 @@ class CodeQuestionApplicationServiceImpl implements CodeQuestionApplicationServi
     @Override
     public CreateCodeQuestionResponse createCodeQuestion(CreateCodeQuestionCommand command) {
         return codeQuestionCreateCommandHandler.createCodeQuestion(command);
+    }
+
+    @Override
+    public GetCodeQuestionsResponse getCodeQuestions(GetCodeQuestionsCommand command) {
+        return codeQuestionCreateCommandHandler.getCodeQuestions(command);
     }
 }

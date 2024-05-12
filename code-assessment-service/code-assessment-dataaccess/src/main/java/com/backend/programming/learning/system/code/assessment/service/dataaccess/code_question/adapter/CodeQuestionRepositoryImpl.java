@@ -5,11 +5,24 @@ import com.backend.programming.learning.system.code.assessment.service.dataacces
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.mapper.CodeQuestionTagDataAccessMapper;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.repository.CodeQuestionJpaRepository;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.repository.CodeQuestionTagJpaRepository;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.entity.CodeSubmissionEntity;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.repository.CodeSubmissionJpaRepository;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.general_mapper.GeneralMapper;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.tag.entity.TagEntity;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_question.CodeQuestionRepository;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.code_question_tag.CodeQuestionTagId;
+import com.backend.programming.learning.system.domain.valueobject.BaseId;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
+import com.backend.programming.learning.system.domain.valueobject.QueryOrderBy;
+import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -23,12 +36,16 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
     private final CodeQuestionDataAccessMapper codeQuestionDataAccessMapper;
     private final CodeQuestionTagJpaRepository codeQuestionTagJpaRepository;
     private final CodeQuestionTagDataAccessMapper codeQuestionTagDataAccessMapper;
+    private final GeneralMapper generalMapper;
+    private final CodeSubmissionJpaRepository codeSubmissionJpaRepository;
 
-    public CodeQuestionRepositoryImpl(CodeQuestionJpaRepository codeQuestionJpaRepository, CodeQuestionDataAccessMapper codeQuestionDataAccessMapper, CodeQuestionTagJpaRepository codeQuestionTagJpaRepository, CodeQuestionTagDataAccessMapper codeQuestionTagDataAccessMapper) {
+    public CodeQuestionRepositoryImpl(CodeQuestionJpaRepository codeQuestionJpaRepository, CodeQuestionDataAccessMapper codeQuestionDataAccessMapper, CodeQuestionTagJpaRepository codeQuestionTagJpaRepository, CodeQuestionTagDataAccessMapper codeQuestionTagDataAccessMapper, GeneralMapper generalMapper, CodeSubmissionJpaRepository codeSubmissionJpaRepository) {
         this.codeQuestionJpaRepository = codeQuestionJpaRepository;
         this.codeQuestionDataAccessMapper = codeQuestionDataAccessMapper;
         this.codeQuestionTagJpaRepository = codeQuestionTagJpaRepository;
         this.codeQuestionTagDataAccessMapper = codeQuestionTagDataAccessMapper;
+        this.generalMapper = generalMapper;
+        this.codeSubmissionJpaRepository = codeSubmissionJpaRepository;
     }
 
     @Override
@@ -70,5 +87,35 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
                         log.error("Can not save tag {} with code question {}", item.getTag().getId(), item.getCodeQuestion().getId());
                     }
                 });
+    }
+
+    @Override
+    public Integer countAllCodeQuestion() {
+        return (int) codeQuestionJpaRepository.count();
+    }
+
+    @Override
+    public Page<CodeQuestion> findAll(UserId userId, List<TagId> tagIds, QueryOrderBy orderBy, CodeQuestion.Fields sortBy, Integer pageNum, Integer pageSize) {
+        Pageable pageable
+                = PageRequest
+                .of(pageNum,
+                        pageSize,
+                        Sort.by(generalMapper.QueryOrderByToSortDirection(orderBy),
+                                codeQuestionDataAccessMapper.codeQuestionFieldToCodeQuestionEntityField(sortBy.name())));
+
+        List<UUID> tagEntityId = tagIds == null? null: tagIds.stream().map(BaseId::getValue).toList();
+
+        Page<CodeQuestionEntity> codeQuestionEntityPageable =
+                codeQuestionJpaRepository.findAndFilterByTagIds(tagEntityId, pageable);
+
+        Page<CodeQuestion> codeQuestions = codeQuestionEntityPageable.map(item->{
+           Optional<CodeSubmissionEntity> submissionEntity = codeSubmissionJpaRepository.findByUserIdAndCodeQuestionIdAndGrade(userId.getValue(), item.getId(), item.getMaxGrade().doubleValue());
+           Boolean done = false;
+           if(submissionEntity.isPresent())
+               done = true;
+           return codeQuestionDataAccessMapper.codeQuestionEntityToCodeQuestion(item, done);
+        });
+
+        return codeQuestions;
     }
 }

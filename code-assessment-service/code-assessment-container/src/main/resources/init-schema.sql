@@ -119,8 +119,10 @@ CREATE TABLE qtype_code_questions(
     output_format text,
     copy_state CopyState,
     failure_messages text,
+    difficulty difficulty not null,
     is_public boolean default true,
     constraints text,
+    created_at TIMESTAMP WITH TIME ZONE default CURRENT_TIMESTAMP,
     max_grade float default 10,
     CONSTRAINT qtype_code_questions_pk PRIMARY KEY (id)
 --         CONSTRAINT qtype_code_questions_questions_id_fk FOREIGN KEY (question_id)

@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.repository;
 
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.entity.CodeSubmissionEntity;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -94,4 +95,7 @@ public interface CodeSubmissionJpaRepository extends JpaRepository<CodeSubmissio
                                     ) as rtb where rtb.id = ?1
             """, nativeQuery = true)
     Integer findYourScoreRank(UUID value);
+
+    Optional<CodeSubmissionEntity> findByUserIdAndCodeQuestionIdAndGrade(UUID value, UUID id, Double grade);
+
 }

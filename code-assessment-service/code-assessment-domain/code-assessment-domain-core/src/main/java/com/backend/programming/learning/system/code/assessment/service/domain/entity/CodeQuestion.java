@@ -1,10 +1,14 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.entity;
 
+import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,6 +23,9 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     private CopyState copyState;
     private Float maxGrade;
     private Boolean isPublic;
+    private QuestionDifficulty difficulty;
+    private ZonedDateTime createdAt;
+    private Boolean solved;
     private List<String> failureMessages;
     public static final String FAILURE_MESSAGE_DELIMITER = ",";
 
@@ -28,6 +35,7 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
 
     public void initializeCodeQuestion(){
         setId(new CodeQuestionId(UUID.randomUUID()));
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
         copyState = CopyState.CREATING;
     }
     public void validateCodeQuestion(){
@@ -62,6 +70,23 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     public String getName() {
         return name;
     }
+
+    public ZonedDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public Boolean getPublic() {
+        return isPublic;
+    }
+
+    public QuestionDifficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public Boolean getSolved() {
+        return solved;
+    }
+
     public String getProblemStatement() {
         return problemStatement;
     }
@@ -110,8 +135,12 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         setCopyState(builder.copyState);
         maxGrade = builder.maxGrade;
         isPublic = builder.isPublic;
-        failureMessages = builder.failureMessages;
+        difficulty = builder.difficulty;
+        createdAt = builder.createdAt;
+        solved = builder.solved;
     }
+
+    public enum Fields { name, difficulty, createdAt}
 
     public static final class Builder {
         private QuestionId questionId;
@@ -124,6 +153,9 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         private CopyState copyState;
         private Float maxGrade;
         private Boolean isPublic;
+        private QuestionDifficulty difficulty;
+        private ZonedDateTime createdAt;
+        private Boolean solved;
         private List<String> failureMessages;
         private CodeQuestionId id;
 
@@ -180,6 +212,21 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
             return this;
         }
 
+        public Builder difficulty(QuestionDifficulty val) {
+            difficulty = val;
+            return this;
+        }
+
+        public Builder createdAt(ZonedDateTime val) {
+            createdAt = val;
+            return this;
+        }
+
+        public Builder solved(Boolean val) {
+            solved = val;
+            return this;
+        }
+
         public Builder failureMessages(List<String> val) {
             failureMessages = val;
             return this;
@@ -193,6 +240,5 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         public CodeQuestion build() {
             return new CodeQuestion(this);
         }
-
     }
 }
