@@ -69,8 +69,8 @@ public class MoodleCommandHandler {
 
     String GET_USER_COURSES = "core_enrol_get_users_courses";
     String GET_USERS = "core_user_get_users";
-    String MOODLE_URL = "http://62.171.185.208/webservice/rest/server.php";
-    //    String MOODLE_URL = "http://localhost/moodle/webservice/rest/server.php";
+//    String MOODLE_URL = "http://62.171.185.208/webservice/rest/server.php";
+        String MOODLE_URL = "http://localhost/moodle/webservice/rest/server.php";
     String MOODLE_URL_TOKEN = "http://62.171.185.208/login/token.php";
 //    String TOKEN = "cdf90b5bf53bcae577c60419702dbee7";
     String TOKEN = "c22b03ca9c0a3c8431cd6b57bd4c8b04";
@@ -320,7 +320,7 @@ public class MoodleCommandHandler {
     }
 
     // Get user by id
-    public com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user.UserModel getUser(String userId) {
+    public UserModel getUser(String userId) {
         String apiUrl = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&userlist[0][courseid]=1&userlist[0][userid]=%s",
                 MOODLE_URL, TOKEN, GET_USER_PROFILE, userId);
         RestTemplate restTemplate = new RestTemplate();
