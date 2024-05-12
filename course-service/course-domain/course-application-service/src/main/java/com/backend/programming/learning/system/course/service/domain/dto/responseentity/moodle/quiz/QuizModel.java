@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle_course.quiz;
+package com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.quiz;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

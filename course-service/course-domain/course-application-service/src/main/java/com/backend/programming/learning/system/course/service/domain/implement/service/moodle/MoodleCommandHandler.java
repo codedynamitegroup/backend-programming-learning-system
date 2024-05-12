@@ -17,6 +17,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionPlugin;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user_course.ListUserCourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user_course.UserCourseModel;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.quiz.ListQuizModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.user_moodle.UserModel;
 import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.entity.Module;
@@ -29,7 +30,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -49,19 +49,20 @@ public class MoodleCommandHandler {
     private final SubmissionAssignmentRepository submissionAssignmentRepository;
     private final SubmissionAssignmentFileRepository submissionAssignmentFileRepository;
     private final SubmissionAssignmentOnlineTextRepository submissionAssignmentOnlineTextRepository;
+    private final ExamRepository examRepository;
     private final SectionRepository sectionRepository;
     private final ModuleRepository moduleRepository;
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final RestTemplate restTemplate = new RestTemplate();
 
     Map<String, Course> courseIdsMap = new HashMap<>();
+    private String GET_COURSES = "core_course_get_courses";
+    private String GET_QUIZZES = "mod_quiz_get_quizzes_by_courses";
 
     String GET_ASSIGNMENTS = "mod_assign_get_assignments";
     String GET_ENROLLED_USERS = "core_enrol_get_enrolled_users";
     String GET_CONTENTS = "core_course_get_contents";
     String GET_SUBMISSION_ASSIGNMENTS = "mod_assign_get_submissions";
-    String GET_COURSES = "core_course_get_courses";
-
     String GET_USER_COURSES = "core_enrol_get_users_courses";
     String GET_USERS = "core_user_get_users";
     String MOODLE_URL = "http://62.171.185.208/webservice/rest/server.php";
@@ -407,5 +408,73 @@ public class MoodleCommandHandler {
         });
         log.info("Sync user successfully");
         return "Sync user successfully";
+    }
+
+    public String syncCourseExam() {
+        String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s",
+                MOODLE_URL, TOKEN, GET_COURSES);
+        RestTemplate restTemplate = new RestTemplate();
+        String model = restTemplate.getForObject(apiURL, String.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<CourseModel> listCourseMoodle = null;
+        try {
+            listCourseMoodle = List.of(objectMapper.readValue(model, CourseModel[].class));
+            log.info("Course model: {}", listCourseMoodle);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        List<Course> result = new ArrayList<>();
+        Map<String, Course> courseIdsMap = new HashMap<>();
+        listCourseMoodle.forEach(courseModel -> {
+            Optional<Course> courseResult = courseRepository.findByName(courseModel.getFullname());
+            if (courseResult.isPresent()) {
+                Course courseUpdate = moodleDataMapper.updateCourseByCourseMoodle(courseModel, courseResult.get());
+                Course res = courseRepository.save(courseUpdate);
+                result.add(res);
+                courseIdsMap.put(courseModel.getId(), res);
+            } else {
+                Optional<User> userSave = userRepository.findUserByEmail("dcthong852@gmail.com");
+                Course course = moodleDataMapper.createCourseByCourseMoodle(courseModel, userSave.get());
+                Course res = courseRepository.save(course);
+                result.add(res);
+                courseIdsMap.put(courseModel.getId(), res);
+            }
+        });
+
+        List<String> courseIds = listCourseMoodle
+                .stream()
+                .map(CourseModel::getId)
+                .filter(id -> !id.equals("1"))
+                .toList();
+
+        String courseIdsString = String.join(",", courseIds);
+        String apiURLQuiz = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s",
+                MOODLE_URL, TOKEN, GET_QUIZZES);
+        String modelQuiz = restTemplate.getForObject(apiURLQuiz, String.class);
+        ListQuizModel listQuizModel = null;
+        try {
+            listQuizModel = objectMapper.readValue(modelQuiz, ListQuizModel.class);
+            log.info("Quiz model: {}", listQuizModel);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        List<Exam> exams = new ArrayList<>();
+        listQuizModel.getQuizzes().forEach(quizModel -> {
+            Optional<Exam> examResult = examRepository.findByName(quizModel.getName());
+            if (examResult.isPresent()) {
+                Exam examUpdate = moodleDataMapper.updateExam(quizModel,
+                        examResult.get(),
+                        courseIdsMap.get(quizModel.getCourse().toString()));
+                Exam res = examRepository.save(examUpdate);
+                exams.add(res);
+            } else {
+                Exam exam = moodleDataMapper.createExam(quizModel,
+                        courseIdsMap.get(quizModel.getCourse().toString()));
+                Exam res = examRepository.save(exam);
+                exams.add(res);
+            }
+        });
+        return "Sync course successfully";
     }
 }
