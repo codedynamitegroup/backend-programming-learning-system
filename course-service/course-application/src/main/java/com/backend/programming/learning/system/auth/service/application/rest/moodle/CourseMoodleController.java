@@ -25,4 +25,8 @@ public class CourseMoodleController {
     public ResponseEntity<String> syncCourse() {
         return ResponseEntity.ok(moodleApplicationService.syncCourse());
     }
+    @PostMapping("exam/sync")
+    public ResponseEntity<String> syncCourseExam() {
+        return ResponseEntity.ok(moodleApplicationService.syncCourseExam());
+    }
 }
