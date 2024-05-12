@@ -11,6 +11,8 @@ public interface SectionRepository {
 
     Section findById(UUID sectionId);
 
+    Section findBySectionMoodleId(Integer sectionMoodleId);
+
     List<Section> findByCourseId(UUID courseId);
     void deleteById(UUID sectionId);
 }

@@ -68,12 +68,15 @@ public class MoodleCommandHandler {
     String GET_USER_PROFILE = "core_user_get_course_user_profiles";
 
     String GET_USER_COURSES = "core_enrol_get_users_courses";
+
+    String GET_MODULE="core_course_get_course_module";
     String GET_USERS = "core_user_get_users";
-    String MOODLE_URL = "http://62.171.185.208/webservice/rest/server.php";
-    //    String MOODLE_URL = "http://localhost/moodle/webservice/rest/server.php";
+//    String MOODLE_URL = "http://62.171.185.208/webservice/rest/server.php";
+        String MOODLE_URL = "http://localhost/moodle/webservice/rest/server.php";
     String MOODLE_URL_TOKEN = "http://62.171.185.208/login/token.php";
 //    String TOKEN = "cdf90b5bf53bcae577c60419702dbee7";
-    String TOKEN = "c22b03ca9c0a3c8431cd6b57bd4c8b04";
+//    String TOKEN = "c22b03ca9c0a3c8431cd6b57bd4c8b04";
+        String TOKEN = "60d437ef3f02dded9a7b097a8a81bf61";
 
 
     @Transactional
@@ -108,7 +111,7 @@ public class MoodleCommandHandler {
         }
     }
 
-    private List<SectionModel> getAllSection(String courseId) {
+    public List<SectionModel>  getAllSection(String courseId) {
         String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&courseid=%s",
                 MOODLE_URL, TOKEN, GET_CONTENTS, courseId);
         RestTemplate restTemplate = new RestTemplate();
@@ -260,7 +263,7 @@ public class MoodleCommandHandler {
             throw new RuntimeException(e);
         }
         List<CourseResponseEntity> result = new ArrayList<>();
-        Optional<User> userResult = userRepository.findUserByEmail("kayonkiu@gmail.com");
+        Optional<User> userResult = userRepository.findUserByEmail("dcthong20@clc.fitus.edu.vn");
         listCourseModel.getCourses().forEach(courseModel -> {
             Course courseCreate = moodleDataMapper.createCourse(courseModel);
             courseCreate.setCreatedBy(userResult.get());

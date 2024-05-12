@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.course.service.domain.valueobject
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 public class Module extends AggregateRoot<ModuleId> {
     private Section section;
@@ -74,6 +75,10 @@ public class Module extends AggregateRoot<ModuleId> {
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    public void initializeModule() {
+        setId(new ModuleId(UUID.randomUUID()));
     }
 
 
