@@ -75,6 +75,7 @@ public class WebhookHelper {
                 updateUser(webhookMessage);
                 break;
             case USER_DELETED:
+                deleteUser(webhookMessage);
                 break;
             case COURSE_SECTION_CREATED:
                 Course course=findCourse(Integer.valueOf(webhookMessage.getCourseId()));
@@ -137,6 +138,9 @@ public class WebhookHelper {
     }
     private void updateUser(WebhookMessage webhookMessage) {
             userHelper.updateUser(webhookMessage);
+    }
+    private void deleteUser(WebhookMessage webhookMessage) {
+        userHelper.deleteUser(webhookMessage);
     }
 
     private Organization findOrganization(String moodleUrl) {

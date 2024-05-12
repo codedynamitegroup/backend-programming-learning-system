@@ -323,7 +323,7 @@ public class MoodleCommandHandler {
     }
 
     // Get user by id
-    public com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user.UserModel getUser(String userId) {
+    public UserModel getUser(String userId) {
         String apiUrl = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&userlist[0][courseid]=1&userlist[0][userid]=%s",
                 MOODLE_URL, TOKEN, GET_USER_PROFILE, userId);
         RestTemplate restTemplate = new RestTemplate();

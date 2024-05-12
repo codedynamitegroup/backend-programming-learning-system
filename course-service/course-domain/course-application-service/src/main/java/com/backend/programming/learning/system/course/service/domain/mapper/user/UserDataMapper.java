@@ -143,6 +143,20 @@ public class UserDataMapper {
                 .build();
     }
 
+    public UserEventPayload userToUserEventPayload(User user, CopyState copyState) {
+        return UserEventPayload.builder()
+                .userId(user.getId().getValue().toString())
+                .dob(user.getDob())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .phone(user.getPhone())
+                .address(user.getAddress())
+                .avatarUrl(user.getAvatarUrl())
+                .updatedAt(user.getUpdatedAt())
+                .copyState(copyState.name())
+                .build();
+    }
+
     public User userModelToUser(UserModel userModel, Organization organization) {
         return User.builder()
                 .userIdMoodle(Integer.valueOf(userModel.getId()))

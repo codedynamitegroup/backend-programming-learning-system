@@ -17,4 +17,5 @@ public interface UserJpaRepository extends JpaRepository<UserEntity, UUID>{
     Optional<UserEntity> findByUserIdMoodle(Integer userIdMoodle);
 
     Optional<UserEntity> findByIdAndIsDeletedFalse(UUID id);
+    void deleteByUserIdMoodle(Integer userIdMoodle);
 }
