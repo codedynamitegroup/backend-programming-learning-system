@@ -39,10 +39,10 @@ spring:
       password: springCloud_Pwd!
   data:
     redis:
-      connect-timeout: 2s
       host: ${REDIS_HOST:localhost}
       port: 6379
-      timeout: 1s
+      timeout: 15s
+      connect-timeout: 15s
 
 security:
   paths-to-ignore: /actuator/**
