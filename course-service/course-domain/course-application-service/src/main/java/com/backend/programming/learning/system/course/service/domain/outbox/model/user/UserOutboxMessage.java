@@ -28,4 +28,16 @@ public class UserOutboxMessage {
     public void setOutboxStatus(OutboxStatus outboxStatus) {
         this.outboxStatus = outboxStatus;
     }
+
+    public void setProcessedAt(ZonedDateTime now) {
+        this.processedAt = now;
+    }
+
+    public void setCopyState(CopyState copyState) {
+        this.copyState = copyState;
+    }
+
+    public void setSagaStatus(SagaStatus sagaStatus) {
+        this.sagaStatus = sagaStatus;
+    }
 }

@@ -63,4 +63,8 @@ public interface CourseDomainService {
     OrganizationUpdatedFailEvent updatedOrganizationFail(Organization organization, List<String> failureMessages);
     OrganizationDeletedSuccessEvent deletedOrganizationSuccess(Organization organization);
     OrganizationDeletedFailEvent deletedOrganizationFail(Organization organization, List<String> failureMessages);
+
+    UserUpdatedEvent updateUser(User user);
+
+    UserCreatedEvent createUser(User user);
 }
