@@ -61,4 +61,18 @@ public class TopicProgrammingLanguageDataAccessMapper {
                 .map(this::topicProgrammingLanguageEntityToTopicProgrammingLanguage)
                 .toList();
     }
+
+    public List<TopicProgrammingLanguageEntity> topicProgrammingLanguagesToTopicProgrammingLanguageEntities(
+            List<TopicProgrammingLanguage> topicProgrammingLanguages) {
+        return topicProgrammingLanguages.stream()
+                .map(this::topicProgrammingLanguageToTopicProgrammingLanguageEntity)
+                .toList();
+    }
+
+    public List<TopicProgrammingLanguage> topicProgrammingLanguageEntitiesToTopicProgrammingLanguages(
+            List<TopicProgrammingLanguageEntity> topicProgrammingLanguageEntities) {
+        return topicProgrammingLanguageEntities.stream()
+                .map(this::topicProgrammingLanguageEntityToTopicProgrammingLanguage)
+                .toList();
+    }
 }

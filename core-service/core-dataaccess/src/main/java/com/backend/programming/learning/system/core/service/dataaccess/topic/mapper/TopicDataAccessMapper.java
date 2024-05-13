@@ -1,30 +1,20 @@
 package com.backend.programming.learning.system.core.service.dataaccess.topic.mapper;
 
-import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.repository.CertificateCourseJpaRepository;
 import com.backend.programming.learning.system.core.service.dataaccess.programminglanguage.entity.ProgrammingLanguageEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.programminglanguage.mapper.ProgrammingLanguageDataAccessMapper;
-import com.backend.programming.learning.system.core.service.dataaccess.review.entity.ReviewEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.topic.entity.TopicEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.topic_programminglanguage.entity.TopicProgrammingLanguageEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
-import com.backend.programming.learning.system.core.service.dataaccess.user.repository.UserJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.entity.ProgrammingLanguage;
-import com.backend.programming.learning.system.core.service.domain.entity.Review;
 import com.backend.programming.learning.system.core.service.domain.entity.Topic;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
-import com.backend.programming.learning.system.core.service.domain.exception.CertificateCourseNotFoundException;
-import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.ReviewId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
 import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class TopicDataAccessMapper {
@@ -38,10 +28,24 @@ public class TopicDataAccessMapper {
         UserEntity createdBy = userDataAccessMapper.userToUserEntityHideSensitiveData(topic.getCreatedBy());
         UserEntity updatedBy = userDataAccessMapper.userToUserEntityHideSensitiveData(topic.getUpdatedBy());
 
+        List<TopicProgrammingLanguageEntity> topicProgrammingLanguageEntities = new ArrayList<>();
+        for (ProgrammingLanguage programmingLanguage : topic.getProgrammingLanguages()) {
+            topicProgrammingLanguageEntities.add(
+                    TopicProgrammingLanguageEntity.builder()
+                            .id(UUID.randomUUID())
+                            .topic(TopicEntity.builder().id(topic.getId().getValue()).build())
+                            .programmingLanguage
+                                    (ProgrammingLanguageEntity.builder().id(programmingLanguage.getId().getValue()).build())
+                            .build()
+            );
+        }
+
         return TopicEntity.builder()
                 .id(topic.getId().getValue())
                 .name(topic.getName())
                 .description(topic.getDescription())
+                .thumbnailUrl(topic.getThumbnailUrl())
+                .topicProgrammingLanguages(topicProgrammingLanguageEntities)
                 .createdBy(createdBy)
                 .updatedBy(updatedBy)
                 .createdAt(topic.getCreatedAt())
@@ -53,11 +57,25 @@ public class TopicDataAccessMapper {
         User createdBy = userDataAccessMapper.userEntityToUserHideSensitiveData(topicEntity.getCreatedBy());
         User updatedBy = userDataAccessMapper.userEntityToUserHideSensitiveData(topicEntity.getUpdatedBy());
 
+        List<ProgrammingLanguage> programmingLanguages = new ArrayList<>();
+        for (TopicProgrammingLanguageEntity topicProgrammingLanguageEntity : topicEntity.getTopicProgrammingLanguages()) {
+            programmingLanguages.add(
+                    ProgrammingLanguage.builder()
+                            .id(new ProgrammingLanguageId(topicProgrammingLanguageEntity.getId()))
+                            .name(topicProgrammingLanguageEntity.getProgrammingLanguage().getName())
+                            .compilerApiId(topicProgrammingLanguageEntity.getProgrammingLanguage().getCompilerApiId())
+                            .timeLimit(topicProgrammingLanguageEntity.getProgrammingLanguage().getTimeLimit())
+                            .memoryLimit(topicProgrammingLanguageEntity.getProgrammingLanguage().getMemoryLimit())
+                            .build()
+            );
+        }
+
         return Topic.builder()
                 .id(new TopicId(topicEntity.getId()))
                 .name(topicEntity.getName())
                 .description(topicEntity.getDescription())
-                .programmingLanguages(new ArrayList<>())
+                .thumbnailUrl(topicEntity.getThumbnailUrl())
+                .programmingLanguages(programmingLanguages)
                 .createdBy(createdBy)
                 .updatedBy(updatedBy)
                 .createdAt(topicEntity.getCreatedAt())

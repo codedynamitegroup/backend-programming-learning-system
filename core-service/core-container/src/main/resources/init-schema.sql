@@ -84,6 +84,7 @@ CREATE TABLE "public".topic
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
     name text UNIQUE NOT NULL,
     description text,
+    thumbnail_url text,
     created_by uuid,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_by uuid,

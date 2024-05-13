@@ -86,6 +86,7 @@ public class CertificateCourseDataMapper {
                 .endTime(certificateCourse.getEndTime())
                 .topic(topicResponseEntity)
                 .numOfStudents(certificateCourse.getNumOfStudents())
+                .numOfQuestions(certificateCourse.getNumOfQuestions())
                 .createdBy(createdByResponse)
                 .updatedBy(updatedByResponse)
                 .createdAt(certificateCourse.getCreatedAt())

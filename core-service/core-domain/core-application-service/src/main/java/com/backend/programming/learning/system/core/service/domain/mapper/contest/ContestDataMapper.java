@@ -4,10 +4,12 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest.CreateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Contest;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
+import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
@@ -16,14 +18,18 @@ import org.springframework.stereotype.Component;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 public class ContestDataMapper {
     private final UserDataMapper userDataMapper;
+    private final QuestionDataMapper questionDataMapper;
 
-    public ContestDataMapper(UserDataMapper userDataMapper) {
+    public ContestDataMapper(UserDataMapper userDataMapper,
+                             QuestionDataMapper questionDataMapper) {
         this.userDataMapper = userDataMapper;
+        this.questionDataMapper = questionDataMapper;
     }
 
     public Contest createContestCommandToContest(CreateContestCommand createContestCommand) {
@@ -57,12 +63,17 @@ public class ContestDataMapper {
     public ContestResponseEntity contestToQueryContestResponse(Contest contest) {
         UserResponseEntity createdByResponse = userDataMapper.userToUserResponseEntity(contest.getCreatedBy());
         UserResponseEntity updatedByResponse = userDataMapper.userToUserResponseEntity(contest.getUpdatedBy());
+        List<QuestionResponseEntity> questionResponseEntities =
+                contest.getQuestions().stream()
+                        .map(questionDataMapper::questionToQuestionResponseEntity)
+                        .toList();
 
         return ContestResponseEntity.builder()
                 .contestId(contest.getId().getValue())
                 .name(contest.getName())
                 .description(contest.getDescription())
                 .thumbnailUrl(contest.getThumbnailUrl())
+                .questions(questionResponseEntities)
                 .startTime(contest.getStartTime())
                 .endTime(contest.getEndTime())
                 .createdBy(createdByResponse)
@@ -90,4 +101,10 @@ public class ContestDataMapper {
                 .build();
     }
 
+
+    public List<ContestResponseEntity> contestsToContestResponseEntities(List<Contest> contests) {
+        return contests.stream()
+                .map(this::contestToQueryContestResponse)
+                .collect(Collectors.toList());
+    }
 }

@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -63,10 +64,10 @@ public class ContestRepositoryImpl implements ContestRepository {
             }
             case HAPPENING -> {
                 if (searchName.isEmpty()) {
-                    return contestJpaRepository.findAllHappeningContests(now, now, paging)
+                    return contestJpaRepository.findAllHappeningContests(now, paging)
                             .map(contestDataAccessMapper::contestEntityToContest);
                 }
-                return contestJpaRepository.findAllHappeningContestsContainsSearchName(now, now, searchName, paging)
+                return contestJpaRepository.findAllHappeningContestsContainsSearchName(now, searchName, paging)
                         .map(contestDataAccessMapper::contestEntityToContest);
             }
             case ENDED -> {
@@ -91,5 +92,14 @@ public class ContestRepositoryImpl implements ContestRepository {
     @Override
     public void deleteContestById(UUID contestId) {
         contestJpaRepository.deleteById(contestId);
+    }
+
+    @Override
+    public List<Contest> findMostPopularContests() {
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UTC"));
+        return contestJpaRepository.findMostPopularContests(now)
+                .stream()
+                .map(contestDataAccessMapper::contestEntityToContest)
+                .toList();
     }
 }

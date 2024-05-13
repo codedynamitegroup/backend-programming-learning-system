@@ -8,6 +8,7 @@ import com.backend.programming.learning.system.core.service.domain.exception.Rev
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.TopicProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 import lombok.extern.slf4j.Slf4j;
@@ -16,9 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Slf4j
 @Component
@@ -50,21 +49,18 @@ public class TopicUpdateHelper {
         topic.setUpdatedBy(updatedBy);
         topic.setUpdatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
 
-        updateTopic(topic);
-
         if (updateTopicCommand.getProgrammingLanguageIds() != null) {
             deleteAllTopicProgrammingLanguagesForTopic(topic.getId().getValue());
-            List<UUID> programmingLanguageIds = updateTopicCommand.getProgrammingLanguageIds();
-            programmingLanguageIds.forEach(programmingLanguageId -> {
-                saveTopicProgrammingLanguage(TopicProgrammingLanguage.builder()
-                        .programmingLanguage(ProgrammingLanguage.builder()
-                                .id(new ProgrammingLanguageId(programmingLanguageId))
-                                .build())
-                        .topic(topic)
+            List<ProgrammingLanguage> programmingLanguages = new ArrayList<>();
+            for (UUID programmingLanguageId : updateTopicCommand.getProgrammingLanguageIds()) {
+                programmingLanguages.add(ProgrammingLanguage.builder()
+                        .id(new ProgrammingLanguageId(programmingLanguageId))
                         .build());
-            });
+            }
+            topic.setProgrammingLanguages(programmingLanguages);
         }
 
+        updateTopic(topic);
         log.info("Topic updated with id: {}", topic.getId().getValue());
     }
 
@@ -92,7 +88,11 @@ public class TopicUpdateHelper {
     }
 
     private void saveTopicProgrammingLanguage(TopicProgrammingLanguage topicProgrammingLanguage) {
+        log.info("Saving topic programming language with topicId: {} and programmingLanguageId: {}",
+                topicProgrammingLanguage.getTopic().getId().getValue(),
+                topicProgrammingLanguage.getProgrammingLanguage().getId().getValue());
         topicProgrammingLanguageRepository.saveTopicProgrammingLanguage(topicProgrammingLanguage);
+        log.info("Topic programming language saved with id: {}", topicProgrammingLanguage.getId().getValue());
     }
 
     private void updateTopic(Topic topic) {

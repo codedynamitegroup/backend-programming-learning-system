@@ -24,14 +24,11 @@ import java.util.UUID;
 @Component
 public class ContestQueryHelper {
     private final ContestRepository contestRepository;
-    private final UserRepository userRepository;
     private final ContestQuestionRepository contestQuestionRepository;
 
     public ContestQueryHelper(ContestRepository contestRepository,
-                              UserRepository userRepository,
                               ContestQuestionRepository contestQuestionRepository) {
         this.contestRepository = contestRepository;
-        this.userRepository = userRepository;
         this.contestQuestionRepository = contestQuestionRepository;
     }
 
@@ -45,29 +42,16 @@ public class ContestQueryHelper {
             throw new ContestNotFoundException("Could not find contest with id: " +
                     contestId);
         }
-        User createdBy = getUser(contestResult.get().getCreatedBy().getId().getValue());
-        User updatedBy = getUser(contestResult.get().getUpdatedBy().getId().getValue());
         List<ContestQuestion> contestQuestions = getAllContestQuestionsForContest(contestId);
         List<Question> questions = contestQuestions.stream()
                 .map(ContestQuestion::getQuestion)
                 .toList();
 
         Contest contest = contestResult.get();
-        contest.setCreatedBy(createdBy);
-        contest.setUpdatedBy(updatedBy);
         contest.setQuestions(questions);
 
         log.info("Contest queried with id: {}", contest.getId().getValue());
         return contest;
-    }
-
-    private User getUser(UUID userId) {
-        Optional<User> user = userRepository.findUser(userId);
-        if (user.isEmpty()) {
-            log.warn("User with id: {} not found", userId);
-            throw new UserNotFoundException("Could not find user with id: " + userId);
-        }
-        return user.get();
     }
 
     @Transactional(readOnly = true)
@@ -78,6 +62,12 @@ public class ContestQueryHelper {
                 searchName, startTimeFilter, pageNo, pageSize);
 
         return contestRepository.findAll(searchName, startTimeFilter, pageNo, pageSize);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Contest> findMostPopularContests() {
+        log.info("Querying most popular upcoming contests");
+        return contestRepository.findMostPopularContests();
     }
 
     private List<ContestQuestion> getAllContestQuestionsForContest(UUID contestId) {

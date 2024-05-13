@@ -58,12 +58,12 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
 
     @Query(value = """
         select cce
-        from CertificateCourseEntity cce, CertificateCourseUserEntity ccue
-        where cce.id = ccue.certificateCourse.id
-         and (LENGTH(?1) = 0 OR (UPPER(cce.name) like UPPER(CONCAT('%', ?1, '%'))))
+        from CertificateCourseEntity cce
+        left join CertificateCourseUserEntity ccue
+        on cce.id = ccue.certificateCourse.id
+        where (LENGTH(?1) = 0 OR (UPPER(cce.name) like UPPER(CONCAT('%', ?1, '%'))))
          and ((?2 is NULL) OR (cce.topic.id in ?2))
         group by cce.id
-        having count(ccue.user.id) > 0
         order by count(ccue.user.id) desc
         limit 5
 """)
@@ -73,13 +73,13 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
 
     @Query(value = """
         select cce
-        from CertificateCourseEntity cce, CertificateCourseUserEntity ccue
-        where cce.id = ccue.certificateCourse.id
-         and (LENGTH(?1) = 0 OR (UPPER(cce.name) like UPPER(CONCAT('%', ?1, '%'))))
+        from CertificateCourseEntity cce
+        left join CertificateCourseUserEntity ccue
+        on cce.id = ccue.certificateCourse.id
+        where (LENGTH(?1) = 0 OR (UPPER(cce.name) like UPPER(CONCAT('%', ?1, '%'))))
          and ((?2 is NULL) OR (cce.topic.id in ?2))
          and ccue.user.id = ?3
         group by cce.id
-        having count(ccue.user.id) > 0
         order by count(ccue.user.id) desc
         limit 5
 """)
@@ -91,6 +91,8 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
     @Query(value = """
         select cce
         from CertificateCourseEntity cce
+        left join CertificateCourseUserEntity ccue
+        on cce.id = ccue.certificateCourse.id
         where (LENGTH(?1) = 0 OR (UPPER(cce.name) like UPPER(CONCAT('%', ?1, '%'))))
          and ((?2 is NULL) OR (cce.topic.id in ?2))
          and cce.id not in (
@@ -99,8 +101,7 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
             where ccue.user.id = ?3
          )
         group by cce.id
-        having count(cce.id) > 0
-        order by count(cce.id) desc
+        order by count(ccue.user.id) desc
         limit 5
 """)
     List<CertificateCourseEntity> findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIdsAndNotRegisteredBy(
