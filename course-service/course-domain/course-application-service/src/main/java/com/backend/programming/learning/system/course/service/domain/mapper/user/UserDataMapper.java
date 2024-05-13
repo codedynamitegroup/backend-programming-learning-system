@@ -77,6 +77,26 @@ public class UserDataMapper {
                 .build();
     }
 
+    public UserEventPayload userEventToUserEventPayloadWithTime(UserEvent userEvent, CopyState copyState, Boolean isDeleted) {
+        return UserEventPayload.builder()
+                .id(userEvent.getUser().getId().getValue().toString())
+                .userId(userEvent.getUser().getId().getValue().toString())
+                .dob(null)
+                .organizationId(userEvent.getUser().getOrganization().getId().getValue().toString())
+                .userName(userEvent.getUser().getName())
+                .email(userEvent.getUser().getEmail())
+                .firstName(userEvent.getUser().getFirstName())
+                .lastName(userEvent.getUser().getLastName())
+                .phone(userEvent.getUser().getPhone())
+                .address(userEvent.getUser().getAddress())
+                .avatarUrl(userEvent.getUser().getAvatarUrl())
+                .updatedAt(userEvent.getUser().getUpdatedAt())
+                .createdAt(userEvent.getUser().getCreatedAt())
+                .copyState(copyState.name())
+                .isDeleted(isDeleted)
+                .build();
+    }
+
     public CreateUserResponse userToCreateUserResponse(User user, String message) {
         return CreateUserResponse.builder()
                 .userId(user.getId().getValue())
