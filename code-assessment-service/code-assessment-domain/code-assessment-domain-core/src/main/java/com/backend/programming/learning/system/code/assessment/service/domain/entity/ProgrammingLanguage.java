@@ -4,7 +4,9 @@ import com.backend.programming.learning.system.code.assessment.service.domain.va
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 
-public class ProgrammingLangauge extends AggregateRoot<ProgrammingLanguageId> {
+import java.util.UUID;
+
+public class ProgrammingLanguage extends AggregateRoot<ProgrammingLanguageId> {
     private String name;
     private Integer judge0_compilerApiId;
     private Float timeLimit;
@@ -15,7 +17,7 @@ public class ProgrammingLangauge extends AggregateRoot<ProgrammingLanguageId> {
     private Boolean isActive;
     private CopyState copyState;
 
-    private ProgrammingLangauge(Builder builder) {
+    private ProgrammingLanguage(Builder builder) {
         name = builder.name;
         judge0_compilerApiId = builder.judge0_compilerApiId;
         timeLimit = builder.timeLimit;
@@ -65,6 +67,11 @@ public class ProgrammingLangauge extends AggregateRoot<ProgrammingLanguageId> {
 
     public Boolean getIsActive() {
         return isActive;
+    }
+
+    public void initiate() {
+        super.setId(new ProgrammingLanguageId(UUID.randomUUID()));
+        copyState = CopyState.CREATING;
     }
 
     public static final class Builder {
@@ -148,8 +155,8 @@ public class ProgrammingLangauge extends AggregateRoot<ProgrammingLanguageId> {
             return this;
         }
 
-        public ProgrammingLangauge build() {
-            return new ProgrammingLangauge(this);
+        public ProgrammingLanguage build() {
+            return new ProgrammingLanguage(this);
         }
 
     }

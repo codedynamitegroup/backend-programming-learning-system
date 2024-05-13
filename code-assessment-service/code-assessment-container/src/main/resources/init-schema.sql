@@ -99,9 +99,9 @@ DROP TABLE IF EXISTS programming_language CASCADE;
 CREATE TABLE programming_language(
     id uuid UNIQUE NOT NULL ,
     name text not null ,
-    compiler_api_id int not null ,
+    compiler_api_id int unique not null ,
     time_limit float not null,
-    memory_limit float check(memory_limit >= 2048) not null ,
+    memory_limit float check(memory_limit >= 204800) not null ,
     is_actived boolean default false,
     copy_state CopyState not null ,
     CONSTRAINT pr_la_pk PRIMARY KEY (id)

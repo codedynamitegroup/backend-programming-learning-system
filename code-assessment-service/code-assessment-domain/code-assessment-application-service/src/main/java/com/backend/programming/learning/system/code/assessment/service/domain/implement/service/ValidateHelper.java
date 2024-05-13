@@ -79,8 +79,8 @@ public class ValidateHelper {
         return plcq.get();
     }
 
-    public ProgrammingLangauge validateLanguage(UUID languageId, UUID codeQuestionId) {
-        Optional<ProgrammingLangauge> langauge = programmingLanguageRepository.findById(new ProgrammingLanguageId(languageId));
+    public ProgrammingLanguage validateLanguage(UUID languageId, UUID codeQuestionId) {
+        Optional<ProgrammingLanguage> langauge = programmingLanguageRepository.findById(new ProgrammingLanguageId(languageId));
 
         if (langauge.isEmpty()) {
             log.error("Could not find programming language with id: {}", languageId);

@@ -67,12 +67,12 @@ public class CodeSubmissionHelper {
         CodeSubmission codeSubmission = codeSubmissionDataMapper.createCodeSubmissionCommandToCodeSubmission(createCodeSubmissionCommand, codeQuestion);
 
 
-        ProgrammingLangauge programmingLangauge = validateHelper.validateLanguage(createCodeSubmissionCommand.getLanguageId(), createCodeSubmissionCommand.getCodeQuestionId());
+        ProgrammingLanguage programmingLanguage = validateHelper.validateLanguage(createCodeSubmissionCommand.getLanguageId(), createCodeSubmissionCommand.getCodeQuestionId());
         ProgrammingLanguageCodeQuestion plcq =
                 validateHelper.validateProgrammingLanguageCodeQuestion(createCodeSubmissionCommand.getLanguageId(), createCodeSubmissionCommand.getCodeQuestionId());
 
         List<TestCase> testCases =  validateHelper.validateTestCasesByCodeQuestionId(createCodeSubmissionCommand.getCodeQuestionId());
-        codeAssessmentDomainService.initiateCodeSubmission(codeSubmission, testCases, plcq, programmingLangauge);
+        codeAssessmentDomainService.initiateCodeSubmission(codeSubmission, testCases, plcq, programmingLanguage);
 
         codeSubmissionRepository.save(codeSubmission);
         codeSubmissionTestCaseRepository.save(codeSubmission.getCodeSubmissionTestCaseList());

@@ -12,7 +12,7 @@ public interface CodeAssessmentDomainService {
     List<TestCase> initiateTestCases(List<TestCase> testCases);
     void cancelCopyCodeQuestions(CodeQuestion codeQuestion, CopyState state, List<String> failureMessages);
 
-    CodeSubmission initiateCodeSubmission(CodeSubmission codeSubmission, List<TestCase> testCases, ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion, ProgrammingLangauge programmingLangauge);
+    CodeSubmission initiateCodeSubmission(CodeSubmission codeSubmission, List<TestCase> testCases, ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion, ProgrammingLanguage programmingLangauge);
 
     void calculateAvgTimeAndMemoryAndGrade(CodeSubmission codeSubmission, List<CodeSubmissionTestCase> cstc, String acceptedDescription);
 
@@ -28,4 +28,6 @@ public interface CodeAssessmentDomainService {
     void initiateTags(List<Tag> tags);
 
     void intitateComment(Comment comment, Comment replyComment);
+
+    void inititateProgrammingLanguage(ProgrammingLanguage programmingLanguage);
 }

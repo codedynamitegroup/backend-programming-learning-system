@@ -37,9 +37,9 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
     }
 
     @Override
-    public CodeSubmission initiateCodeSubmission(CodeSubmission codeSubmission, List<TestCase> testCases, ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion, ProgrammingLangauge programmingLangauge) {
+    public CodeSubmission initiateCodeSubmission(CodeSubmission codeSubmission, List<TestCase> testCases, ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion, ProgrammingLanguage programmingLanguage) {
         codeSubmission.initiate(testCases, programmingLanguageCodeQuestion);
-        codeSubmission.setProgrammingLangaugeJudge0Id(programmingLangauge.getJudge0_compilerApiId());
+        codeSubmission.setProgrammingLangaugeJudge0Id(programmingLanguage.getJudge0_compilerApiId());
 
         return codeSubmission;
     }
@@ -90,6 +90,11 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
             throw new CodeAssessmentDomainException("Reply comment must be the root comment with id " + replyComment.getReplyId().getValue());
 
         comment.initate(replyComment);
+    }
+
+    @Override
+    public void inititateProgrammingLanguage(ProgrammingLanguage programmingLanguage) {
+        programmingLanguage.initiate();
     }
 
 

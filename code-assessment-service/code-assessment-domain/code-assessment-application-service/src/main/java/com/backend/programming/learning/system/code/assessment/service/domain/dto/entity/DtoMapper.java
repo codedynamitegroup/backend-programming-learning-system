@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.d
 
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Comment;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.ProgrammingLanguage;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.User;
 import org.springframework.stereotype.Component;
 
@@ -35,6 +36,17 @@ public class DtoMapper {
                 .done(codeQuestion.getSolved())
                 .id(codeQuestion.getId().getValue())
                 .difficulty(codeQuestion.getDifficulty())
+                .build();
+    }
+
+    public ProgrammingLanguageDto programmingLanguageToDto(ProgrammingLanguage programmingLanguage) {
+        return ProgrammingLanguageDto.builder()
+                .isActived(programmingLanguage.getIsActive())
+                .memoryLimit(programmingLanguage.getMemoryLimit())
+                .judge0Id(programmingLanguage.getJudge0_compilerApiId())
+                .timeLimit(programmingLanguage.getTimeLimit())
+                .id(programmingLanguage.getId().getValue())
+                .name(programmingLanguage.getName())
                 .build();
     }
 }
