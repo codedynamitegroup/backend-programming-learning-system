@@ -19,11 +19,12 @@ public class UserDataAccessMapper {
     }
 
     public UserEntity userToUserEntity(User user) {
-//        OrganizationEntity organizationEntity = organizationDataAccessMapper.
-//                organizationToOrganizationEntity(user.getOrganization());
+        OrganizationEntity organizationEntity = organizationDataAccessMapper.
+                organizationToOrganizationEntity(user.getOrganization());
+
         return UserEntity.builder()
                 .id(user.getId().getValue())
-//                .organization(organizationEntity)
+                .organization(organizationEntity)
                 .username(user.getName())
                 .userIdMoodle(user.getUserIdMoodle())
                 .email(user.getEmail())
@@ -41,12 +42,13 @@ public class UserDataAccessMapper {
     }
 
     public User userEntityToUser(UserEntity userEntity) {
-//        Organization organization = organizationDataAccessMapper.
-//                organizationEntityToOrganization(userEntity.getOrganization());
+        Organization organization = organizationDataAccessMapper.
+                organizationEntityToOrganization(userEntity.getOrganization());
+
         return User.builder()
                 .id(new UserId(userEntity.getId()))
                 .userIdMoodle(userEntity.getUserIdMoodle())
-//                .organization(organization)
+                .organization(organization)
                 .name(userEntity.getUsername())
                 .email(userEntity.getEmail())
                 .dob(userEntity.getDob())

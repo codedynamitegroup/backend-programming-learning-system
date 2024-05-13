@@ -34,8 +34,8 @@ public class ChapterDataAccessMapper {
         CertificateCourseEntity certificateCourse = CertificateCourseEntity.builder()
                 .id(chapter.getCertificateCourseId().getValue())
                 .build();
-        UserEntity createdBy = userDataAccessMapper.userToUserEntity(chapter.getCreatedBy());
-        UserEntity updatedBy = userDataAccessMapper.userToUserEntity(chapter.getUpdatedBy());
+        UserEntity createdBy = userDataAccessMapper.userToUserEntityHideSensitiveData(chapter.getCreatedBy());
+        UserEntity updatedBy = userDataAccessMapper.userToUserEntityHideSensitiveData(chapter.getUpdatedBy());
 
         return ChapterEntity.builder()
                 .id(chapter.getId().getValue())
@@ -51,8 +51,8 @@ public class ChapterDataAccessMapper {
     }
 
     public Chapter chapterEntityToChapter(ChapterEntity chapterEntity) {
-        User createdBy = userDataAccessMapper.userEntityToUser(chapterEntity.getCreatedBy());
-        User updatedBy = userDataAccessMapper.userEntityToUser(chapterEntity.getUpdatedBy());
+        User createdBy = userDataAccessMapper.userEntityToUserHideSensitiveData(chapterEntity.getCreatedBy());
+        User updatedBy = userDataAccessMapper.userEntityToUserHideSensitiveData(chapterEntity.getUpdatedBy());
 
         return Chapter.builder()
                 .id(new ChapterId(chapterEntity.getId()))

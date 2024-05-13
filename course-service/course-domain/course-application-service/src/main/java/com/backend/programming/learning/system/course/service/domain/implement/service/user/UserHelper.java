@@ -5,6 +5,9 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.entity.Organization;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.entity.WebhookMessage;
+import com.backend.programming.learning.system.course.service.domain.event.user.UserCreatedSuccessEvent;
+import com.backend.programming.learning.system.course.service.domain.event.user.UserDeletedSuccessEvent;
+import com.backend.programming.learning.system.course.service.domain.event.user.UserUpdatedSuccessEvent;
 import com.backend.programming.learning.system.course.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.implement.service.moodle.MoodleCommandHandler;
 import com.backend.programming.learning.system.course.service.domain.mapper.user.UserDataMapper;
@@ -49,14 +52,17 @@ public class UserHelper {
 
         User result = userRepository.save(user);
         log.info("User created with id: {} and moodle id: {}", result.getUserIdMoodle(), result.getId());
+        UserCreatedSuccessEvent userCreatedSuccessEvent = courseDomainService.createdUserSuccess(result);
 
-        userOutboxHelper.saveUserOutboxMessage(userDataMapper.userToUserEventPayload(result, CopyState.CREATING),
+        userOutboxHelper.saveUserOutboxMessage(userDataMapper
+                        .userEventToUserEventPayloadWithTime(userCreatedSuccessEvent,
+                                CopyState.CREATING,
+                                false),
                 CopyState.CREATING,
                 OutboxStatus.STARTED,
                 UUID.randomUUID());
         return result;
     }
-
 
     @Transactional
     public User updateUser(WebhookMessage webhookMessage) {
@@ -69,7 +75,12 @@ public class UserHelper {
         User result = userRepository.save(user);
         log.info("User updated with id: {} and moodle id: {}", result.getUserIdMoodle(), result.getId());
 
-        userOutboxHelper.saveUserOutboxMessage(userDataMapper.userToUserEventPayload(result, CopyState.UPDATING),
+        UserUpdatedSuccessEvent userUpdatedSuccessEvent = courseDomainService.updatedUserSuccess(result);
+
+        userOutboxHelper.saveUserOutboxMessage(userDataMapper
+                        .userEventToUserEventPayloadWithTime(userUpdatedSuccessEvent,
+                                CopyState.UPDATING,
+                                false),
                 CopyState.UPDATING,
                 OutboxStatus.STARTED,
                 UUID.randomUUID());
@@ -82,13 +93,17 @@ public class UserHelper {
         User user = getUser(Integer.valueOf(webhookMessage.getRelatedUserId()));
 
         userRepository.deleteByUserMoodleId(user.getUserIdMoodle());
+        log.info("User deleted with moodle id: {}", webhookMessage.getRelatedUserId());
 
-        userOutboxHelper.saveUserOutboxMessage(userDataMapper.userToUserEventPayload(user, CopyState.DELETING),
+        UserDeletedSuccessEvent userDeletedSuccessEvent = courseDomainService.deletedUserSuccess(user);
+
+        userOutboxHelper.saveUserOutboxMessage(userDataMapper
+                        .userEventToUserEventPayloadWithTime(userDeletedSuccessEvent,
+                                CopyState.DELETING,
+                                true),
                 CopyState.DELETING,
                 OutboxStatus.STARTED,
                 UUID.randomUUID());
-
-        log.info("User deleted with moodle id: {}", webhookMessage.getRelatedUserId());
     }
 
     private User getUser(Integer moodleId) {

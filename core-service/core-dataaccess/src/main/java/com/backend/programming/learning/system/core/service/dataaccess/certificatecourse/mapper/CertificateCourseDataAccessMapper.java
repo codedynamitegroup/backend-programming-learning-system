@@ -31,8 +31,6 @@ public class CertificateCourseDataAccessMapper {
 
     public CertificateCourseEntity certificateCourseToCertificateCourseEntity(CertificateCourse certificateCourse) {
         TopicEntity topic = topicDataAccessMapper.topicToTopicEntity(certificateCourse.getTopic());
-        UserEntity createdBy = userDataAccessMapper.userToUserEntity(certificateCourse.getCreatedBy());
-        UserEntity updatedBy = userDataAccessMapper.userToUserEntity(certificateCourse.getUpdatedBy());
 
         return CertificateCourseEntity.builder()
                 .id(certificateCourse.getId().getValue())
@@ -43,9 +41,10 @@ public class CertificateCourseDataAccessMapper {
                 .topic(topic)
                 .startTime(certificateCourse.getStartTime())
                 .endTime(certificateCourse.getEndTime())
-                .isDeleted(certificateCourse.getDeleted())
-                .createdBy(createdBy)
-                .updatedBy(updatedBy)
+                .numOfStudents(certificateCourse.getNumOfStudents())
+                .numOfQuestions(certificateCourse.getNumOfQuestions())
+                .createdBy(userDataAccessMapper.userToUserEntityHideSensitiveData(certificateCourse.getCreatedBy()))
+                .updatedBy(userDataAccessMapper.userToUserEntityHideSensitiveData(certificateCourse.getUpdatedBy()))
                 .createdAt(certificateCourse.getCreatedAt())
                 .updatedAt(certificateCourse.getUpdatedAt())
                 .build();
@@ -53,8 +52,6 @@ public class CertificateCourseDataAccessMapper {
 
     public CertificateCourse certificateCourseEntityToCertificateCourse(
             CertificateCourseEntity certificateCourseEntity) {
-        User createdBy = userDataAccessMapper.userEntityToUser(certificateCourseEntity.getCreatedBy());
-        User updatedBy = userDataAccessMapper.userEntityToUser(certificateCourseEntity.getUpdatedBy());
         Topic topic = topicDataAccessMapper.topicEntityToTopic(certificateCourseEntity.getTopic());
 
         return CertificateCourse.builder()
@@ -66,9 +63,10 @@ public class CertificateCourseDataAccessMapper {
                 .topic(topic)
                 .startTime(certificateCourseEntity.getStartTime())
                 .endTime(certificateCourseEntity.getEndTime())
-                .isDeleted(certificateCourseEntity.getIsDeleted())
-                .createdBy(createdBy)
-                .updatedBy(updatedBy)
+                .numOfStudents(certificateCourseEntity.getNumOfStudents())
+                .numOfQuestions(certificateCourseEntity.getNumOfQuestions())
+                .createdBy(userDataAccessMapper.userEntityToUserHideSensitiveData(certificateCourseEntity.getCreatedBy()))
+                .updatedBy(userDataAccessMapper.userEntityToUserHideSensitiveData(certificateCourseEntity.getUpdatedBy()))
                 .createdAt(certificateCourseEntity.getCreatedAt())
                 .updatedAt(certificateCourseEntity.getUpdatedAt())
                 .build();

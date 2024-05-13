@@ -35,8 +35,8 @@ public class TopicDataAccessMapper {
     }
 
     public TopicEntity topicToTopicEntity(Topic topic) {
-        UserEntity createdBy = userDataAccessMapper.userToUserEntity(topic.getCreatedBy());
-        UserEntity updatedBy = userDataAccessMapper.userToUserEntity(topic.getUpdatedBy());
+        UserEntity createdBy = userDataAccessMapper.userToUserEntityHideSensitiveData(topic.getCreatedBy());
+        UserEntity updatedBy = userDataAccessMapper.userToUserEntityHideSensitiveData(topic.getUpdatedBy());
 
         return TopicEntity.builder()
                 .id(topic.getId().getValue())
@@ -50,8 +50,8 @@ public class TopicDataAccessMapper {
     }
 
     public Topic topicEntityToTopic(TopicEntity topicEntity) {
-        User createdBy = userDataAccessMapper.userEntityToUser(topicEntity.getCreatedBy());
-        User updatedBy = userDataAccessMapper.userEntityToUser(topicEntity.getUpdatedBy());
+        User createdBy = userDataAccessMapper.userEntityToUserHideSensitiveData(topicEntity.getCreatedBy());
+        User updatedBy = userDataAccessMapper.userEntityToUserHideSensitiveData(topicEntity.getUpdatedBy());
 
         return Topic.builder()
                 .id(new TopicId(topicEntity.getId()))

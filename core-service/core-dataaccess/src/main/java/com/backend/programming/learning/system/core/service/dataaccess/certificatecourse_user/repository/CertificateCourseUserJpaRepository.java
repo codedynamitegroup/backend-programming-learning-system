@@ -19,4 +19,5 @@ public interface CertificateCourseUserJpaRepository extends JpaRepository<Certif
 
     Optional<CertificateCourseUserEntity> findByCertificateCourseIdAndUserId(
             UUID certificateCourseId, UUID userId);
+    int countByCertificateCourseId(UUID certificateCourseId);
 }

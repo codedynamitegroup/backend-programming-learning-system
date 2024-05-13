@@ -46,7 +46,7 @@ public class CertificateCourseDataMapper {
                         .builder()
                         .id(new TopicId(createCertificateCourseCommand.getTopicId()))
                         .build())
-                .isDeleted(false)
+                .numOfStudents(0)
                 .createdBy(User
                         .builder()
                         .id(new UserId(createCertificateCourseCommand.getCreatedBy()))
@@ -85,7 +85,7 @@ public class CertificateCourseDataMapper {
                 .startTime(certificateCourse.getStartTime())
                 .endTime(certificateCourse.getEndTime())
                 .topic(topicResponseEntity)
-                .isDeleted(certificateCourse.getDeleted())
+                .numOfStudents(certificateCourse.getNumOfStudents())
                 .createdBy(createdByResponse)
                 .updatedBy(updatedByResponse)
                 .createdAt(certificateCourse.getCreatedAt())
@@ -94,16 +94,19 @@ public class CertificateCourseDataMapper {
     }
 
     public QueryAllCertificateCoursesResponse certificateCoursesToQueryAllCertificateCoursesResponse(
-            Page<CertificateCourse> certificateCourses) {
-        List<CertificateCourseResponseEntity> certificateCourseResponsEntities = new ArrayList<>();
+            List<CertificateCourse> certificateCourses,
+            List<CertificateCourse> mostEnrolledCertificateCoursesPage) {
+        List<CertificateCourseResponseEntity> certificateCourseResponseEntities = new ArrayList<>();
+        List<CertificateCourseResponseEntity> mostEnrolledCertificateCourses = new ArrayList<>();
         for (CertificateCourse certificateCourse : certificateCourses) {
-            certificateCourseResponsEntities.add(certificateCourseToQueryCertificateCourseResponse(certificateCourse));
+            certificateCourseResponseEntities.add(certificateCourseToQueryCertificateCourseResponse(certificateCourse));
+        }
+        for (CertificateCourse certificateCourse : mostEnrolledCertificateCoursesPage) {
+            mostEnrolledCertificateCourses.add(certificateCourseToQueryCertificateCourseResponse(certificateCourse));
         }
         return QueryAllCertificateCoursesResponse.builder()
-                .certificateCourses(certificateCourseResponsEntities)
-                .currentPage(certificateCourses.getNumber())
-                .totalPages(certificateCourses.getTotalPages())
-                .totalItems(certificateCourses.getTotalElements())
+                .certificateCourses(certificateCourseResponseEntities)
+                .mostEnrolledCertificateCourses(mostEnrolledCertificateCourses)
                 .build();
     }
 

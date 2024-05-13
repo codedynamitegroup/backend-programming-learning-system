@@ -19,13 +19,14 @@ public class ContestDataAccessMapper {
     }
 
     public ContestEntity contestToContestEntity(Contest contest) {
-        UserEntity createdBy = userDataAccessMapper.userToUserEntity(contest.getCreatedBy());
-        UserEntity updatedBy = userDataAccessMapper.userToUserEntity(contest.getUpdatedBy());
+        UserEntity createdBy = userDataAccessMapper.userToUserEntityHideSensitiveData(contest.getCreatedBy());
+        UserEntity updatedBy = userDataAccessMapper.userToUserEntityHideSensitiveData(contest.getUpdatedBy());
 
         return ContestEntity.builder()
                 .id(contest.getId().getValue())
                 .name(contest.getName())
                 .description(contest.getDescription())
+                .thumbnailUrl(contest.getThumbnailUrl())
                 .startTime(contest.getStartTime())
                 .endTime(contest.getEndTime())
                 .createdBy(createdBy)
@@ -36,12 +37,13 @@ public class ContestDataAccessMapper {
     }
 
     public Contest contestEntityToContest(ContestEntity contestEntity) {
-        User createdBy = userDataAccessMapper.userEntityToUser(contestEntity.getCreatedBy());
-        User updatedBy = userDataAccessMapper.userEntityToUser(contestEntity.getUpdatedBy());
+        User createdBy = userDataAccessMapper.userEntityToUserHideSensitiveData(contestEntity.getCreatedBy());
+        User updatedBy = userDataAccessMapper.userEntityToUserHideSensitiveData(contestEntity.getUpdatedBy());
         return Contest.builder()
                 .id(new ContestId(contestEntity.getId()))
                 .name(contestEntity.getName())
                 .description(contestEntity.getDescription())
+                .thumbnailUrl(contestEntity.getThumbnailUrl())
                 .startTime(contestEntity.getStartTime())
                 .endTime(contestEntity.getEndTime())
                 .createdBy(createdBy)

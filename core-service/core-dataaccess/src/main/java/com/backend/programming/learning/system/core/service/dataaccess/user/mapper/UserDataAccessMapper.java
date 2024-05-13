@@ -23,6 +23,22 @@ public class UserDataAccessMapper {
                 .build();
     }
 
+    public User userEntityToUserHideSensitiveData(UserEntity userEntity) {
+        return User.builder()
+                .id(new UserId(userEntity.getId()))
+                .email(null)
+                .dob(null)
+                .firstName(userEntity.getFirstName())
+                .lastName(userEntity.getLastName())
+                .avatarUrl(null)
+                .phone(null)
+                .address(null)
+                .createdAt(null)
+                .updatedAt(null)
+                .isDeleted(null)
+                .build();
+    }
+
     public UserEntity userToUserEntity(User user) {
         return UserEntity.builder()
                 .id(user.getId().getValue())
@@ -36,6 +52,22 @@ public class UserDataAccessMapper {
                 .createdAt(user.getCreatedAt())
                 .updatedAt(user.getUpdatedAt())
                 .isDeleted(user.getDeleted())
+                .build();
+    }
+
+    public UserEntity userToUserEntityHideSensitiveData(User user) {
+        return UserEntity.builder()
+                .id(user.getId().getValue())
+                .email(null)
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .dob(null)
+                .avatarUrl(null)
+                .phone(null)
+                .address(null)
+                .createdAt(null)
+                .updatedAt(null)
+                .isDeleted(null)
                 .build();
     }
 }

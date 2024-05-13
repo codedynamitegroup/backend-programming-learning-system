@@ -64,6 +64,7 @@ public class WebhookHelper {
     public void processWebhook(WebhookCommand webhookCommand) {
         WebhookMessage webhookMessage = webhookDataMapper.webhookCommandToWebhookMessage(webhookCommand);
         Organization organization = findOrganization(webhookCommand.getHost());
+
         switch (webhookMessage.getEventName()) {
             case COURSE_CREATED:
                 createCourse(webhookMessage, organization);
@@ -110,12 +111,6 @@ public class WebhookHelper {
                 break;
             case ROLE_ASSIGNED:
                 break;
-//            case ENROL_INSTANCE_CREATED:
-//                break;
-//            case ENROL_INSTANCE_UPDATED:
-//                break;
-//            case ENROL_INSTANCE_DELETED:
-//                break;
             default:
                 log.info("Event not found: {}", webhookMessage.getEventName());
         }

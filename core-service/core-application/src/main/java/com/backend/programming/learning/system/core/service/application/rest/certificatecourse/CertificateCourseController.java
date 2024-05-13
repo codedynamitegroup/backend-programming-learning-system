@@ -123,7 +123,7 @@ public class CertificateCourseController {
         return  ResponseEntity.ok(certificateCourseResponseEntity);
     }
 
-    @GetMapping
+    @PostMapping
     @Operation(summary = "Get all Certificate courses.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
@@ -133,44 +133,39 @@ public class CertificateCourseController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllCertificateCoursesResponse> getAllCertificateCourses(
-            @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "10") Integer pageSize) {
+            @RequestBody QueryAllCertificateCoursesCommand queryAllCertificateCoursesCommand) {
         QueryAllCertificateCoursesResponse queryAllCertificateCoursesResponse =
-                certificateCourseApplicationService.queryAllCertificateCourses(QueryAllCertificateCoursesCommand
-                        .builder()
-                        .pageNo(pageNo)
-                        .pageSize(pageSize)
-                        .build());
+                certificateCourseApplicationService.queryAllCertificateCourses(queryAllCertificateCoursesCommand);
         log.info("Returning all certificate courses");
         return ResponseEntity.ok(queryAllCertificateCoursesResponse);
     }
 
-    @GetMapping("/{id}/users")
-    @Operation(summary = "Get all users of Certificate course.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Success.", content = {
-                    @Content(mediaType = "application/vnd.api.v1+json",
-                            schema = @Schema(implementation = QueryAllCertificateCourseUsersResponse.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "Not found."),
-            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<QueryAllCertificateCourseUsersResponse> getAllUsersOfCertificateCourse(
-            @PathVariable UUID id,
-            @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "10") Integer pageSize,
-            @RequestParam(defaultValue = "false") Boolean fetchAll) {
-        QueryAllCertificateCourseUsersResponse queryAllCertificateCourseUsersResponse =
-                certificateCourseUserApplicationService.queryAllCertificateCourseUsers(
-                        QueryAllCertificateCourseUsersCommand
-                        .builder()
-                        .certificateCourseId(id)
-                        .pageNo(pageNo)
-                        .pageSize(pageSize)
-                        .fetchAll(fetchAll)
-                        .build());
-        log.info("Returning all users of certificate course: {}", id);
-        return ResponseEntity.ok(queryAllCertificateCourseUsersResponse);
-    }
+//    @GetMapping("/{id}/users")
+//    @Operation(summary = "Get all users of Certificate course.")
+//    @ApiResponses(value = {
+//            @ApiResponse(responseCode = "200", description = "Success.", content = {
+//                    @Content(mediaType = "application/vnd.api.v1+json",
+//                            schema = @Schema(implementation = QueryAllCertificateCourseUsersResponse.class))
+//            }),
+//            @ApiResponse(responseCode = "400", description = "Not found."),
+//            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+//    public ResponseEntity<QueryAllCertificateCourseUsersResponse> getAllUsersOfCertificateCourse(
+//            @PathVariable UUID id,
+//            @RequestParam(defaultValue = "0") Integer pageNo,
+//            @RequestParam(defaultValue = "10") Integer pageSize,
+//            @RequestParam(defaultValue = "false") Boolean fetchAll) {
+//        QueryAllCertificateCourseUsersResponse queryAllCertificateCourseUsersResponse =
+//                certificateCourseUserApplicationService.queryAllCertificateCourseUsers(
+//                        QueryAllCertificateCourseUsersCommand
+//                        .builder()
+//                        .certificateCourseId(id)
+//                        .pageNo(pageNo)
+//                        .pageSize(pageSize)
+//                        .fetchAll(fetchAll)
+//                        .build());
+//        log.info("Returning all users of certificate course: {}", id);
+//        return ResponseEntity.ok(queryAllCertificateCourseUsersResponse);
+//    }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete Certificate course.")

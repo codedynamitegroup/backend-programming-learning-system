@@ -24,6 +24,7 @@ public class ContestEntity {
 
     private String name;
     private String description;
+    private String thumbnailUrl;
     private ZonedDateTime startTime;
     private ZonedDateTime endTime;
 

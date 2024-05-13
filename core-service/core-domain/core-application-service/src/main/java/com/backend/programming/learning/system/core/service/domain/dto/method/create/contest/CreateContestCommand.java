@@ -18,6 +18,8 @@ public class CreateContestCommand {
     private final String name;
     @NotNull(message = "Description is required")
     private final String description;
+    @NotNull(message = "ThumbnailUrl is required")
+    private final String thumbnailUrl;
     @NotNull(message = "Start time is required")
     private final ZonedDateTime startTime;
     private final ZonedDateTime endTime;

@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.core.service.dataaccess.review.a
 
 import com.backend.programming.learning.system.core.service.dataaccess.review.mapper.ReviewDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.review.repository.ReviewJpaRepository;
+import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ReviewRepository;
 import org.springframework.data.domain.Page;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -51,5 +53,13 @@ public class ReviewRepositoryImpl implements ReviewRepository {
     @Override
     public Float getAvgRatingOfAllReviewsByCertificateCourseId(UUID certificateCourseId) {
         return reviewJpaRepository.getAvgRatingOfAllReviewsByCertificateCourseId(certificateCourseId);
+    }
+
+    @Override
+    public List<Review> findByCertificateCourseIdAndCreatedById(UUID certificateCourseId, UUID createdBy) {
+        return reviewJpaRepository.findByCertificateCourseIdAndCreatedById(certificateCourseId, createdBy)
+                .stream()
+                .map(reviewDataAccessMapper::reviewEntityToReview)
+                .toList();
     }
 }
