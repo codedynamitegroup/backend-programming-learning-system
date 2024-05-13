@@ -9,6 +9,7 @@ import com.backend.programming.learning.system.domain.valueobject.UserId;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -41,8 +42,13 @@ public class Topic extends AggregateRoot<TopicId> {
 
     public void initializeTopic() {
         setId(new TopicId(UUID.randomUUID()));
+        programmingLanguages = new ArrayList<>();
         createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
         updatedAt = ZonedDateTime.now(ZoneId.of("UTC"));
+    }
+
+    public void addProgrammingLanguage(ProgrammingLanguage programmingLanguage) {
+        programmingLanguages.add(programmingLanguage);
     }
 
     public void setName(String name) {

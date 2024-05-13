@@ -31,6 +31,9 @@ public class TopicEntity {
     private String description;
     private String thumbnailUrl;
 
+    @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL)
+    private List<TopicProgrammingLanguageEntity> topicProgrammingLanguages;
+
     @ManyToOne
     @JoinColumn(name = "created_by", referencedColumnName = "id")
     private UserEntity createdBy;

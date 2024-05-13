@@ -48,19 +48,13 @@ public class TopicCreateHelper {
         Topic topic = topicDataMapper.
                 createTopicCommandToTopic(createTopicCommand);
         coreDomainService.createTopic(topic);
-        Topic topicResult = saveTopic(topic);
 
         for (UUID programmingLanguageId : createTopicCommand.getProgrammingLanguageIds()) {
             ProgrammingLanguage programmingLanguage = getProgrammingLanguage(programmingLanguageId);
-            TopicProgrammingLanguage topicProgrammingLanguage =
-                    TopicProgrammingLanguage.builder()
-                            .id(new TopicProgrammingLanguageId(UUID.randomUUID()))
-                            .topic(topicResult)
-                            .programmingLanguage(programmingLanguage)
-                            .build();
-            saveTopicProgrammingLanguage(topicProgrammingLanguage);
+            topic.addProgrammingLanguage(programmingLanguage);
         }
 
+        Topic topicResult = saveTopic(topic);
         log.info("Topic created with id: {}", topicResult.getId().getValue());
         return topicResult;
     }
@@ -96,18 +90,18 @@ public class TopicCreateHelper {
         return savedTopic;
     }
 
-    private TopicProgrammingLanguage saveTopicProgrammingLanguage(TopicProgrammingLanguage topicProgrammingLanguage) {
-        TopicProgrammingLanguage savedTopicProgrammingLanguage = topicProgrammingLanguageRepository
-                .saveTopicProgrammingLanguage(topicProgrammingLanguage);
-
-        if (savedTopicProgrammingLanguage == null) {
-            log.error("Could not save topic programming language");
-
-            throw new CoreDomainException("Could not save topic programming language");
-        }
-        log.info("Topic programming language saved with id: {}", savedTopicProgrammingLanguage.getId().getValue());
-        return savedTopicProgrammingLanguage;
-    }
+//    private TopicProgrammingLanguage saveTopicProgrammingLanguage(TopicProgrammingLanguage topicProgrammingLanguage) {
+//        TopicProgrammingLanguage savedTopicProgrammingLanguage = topicProgrammingLanguageRepository
+//                .saveTopicProgrammingLanguage(topicProgrammingLanguage);
+//
+//        if (savedTopicProgrammingLanguage == null) {
+//            log.error("Could not save topic programming language");
+//
+//            throw new CoreDomainException("Could not save topic programming language");
+//        }
+//        log.info("Topic programming language saved with id: {}", savedTopicProgrammingLanguage.getId().getValue());
+//        return savedTopicProgrammingLanguage;
+//    }
 }
 
 

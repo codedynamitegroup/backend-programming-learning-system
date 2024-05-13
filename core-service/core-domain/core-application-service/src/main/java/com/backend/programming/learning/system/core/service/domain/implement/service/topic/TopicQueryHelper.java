@@ -23,12 +23,9 @@ import java.util.UUID;
 @Component
 public class TopicQueryHelper {
     private final TopicRepository topicRepository;
-    private final TopicProgrammingLanguageRepository topicProgrammingLanguageRepository;
 
-    public TopicQueryHelper(TopicRepository topicRepository,
-                            TopicProgrammingLanguageRepository topicProgrammingLanguageRepository) {
+    public TopicQueryHelper(TopicRepository topicRepository) {
         this.topicRepository = topicRepository;
-        this.topicProgrammingLanguageRepository = topicProgrammingLanguageRepository;
     }
 
     @Transactional(readOnly = true)
@@ -43,7 +40,6 @@ public class TopicQueryHelper {
         }
 
         Topic topic = topicResult.get();
-        topic.setProgrammingLanguages(getProgrammingLanguagesByTopicId(topic.getId().getValue()));
         log.info("Topic queried with id: {}", topic.getId().getValue());
         return topic;
     }
@@ -55,12 +51,6 @@ public class TopicQueryHelper {
         return topicRepository.findAll(pageNo, pageSize, fetchAll);
     }
 
-    private List<ProgrammingLanguage> getProgrammingLanguagesByTopicId(UUID topicId) {
-        return topicProgrammingLanguageRepository.findAllTopicProgrammingLanguagesByTopicId(new TopicId(topicId))
-                .stream()
-                .map(TopicProgrammingLanguage::getProgrammingLanguage)
-                .toList();
-    }
 }
 
 

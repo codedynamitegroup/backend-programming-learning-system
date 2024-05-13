@@ -49,22 +49,18 @@ public class TopicUpdateHelper {
         topic.setUpdatedBy(updatedBy);
         topic.setUpdatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
 
-        updateTopic(topic);
-
         if (updateTopicCommand.getProgrammingLanguageIds() != null) {
             deleteAllTopicProgrammingLanguagesForTopic(topic.getId().getValue());
-            Set<UUID> programmingLanguageIdsSet = new HashSet<>(updateTopicCommand.getProgrammingLanguageIds());
-            for (UUID programmingLanguageId : programmingLanguageIdsSet) {
-                saveTopicProgrammingLanguage(TopicProgrammingLanguage.builder()
-                        .id(new TopicProgrammingLanguageId(UUID.randomUUID()))
-                        .programmingLanguage(ProgrammingLanguage.builder()
-                                .id(new ProgrammingLanguageId(programmingLanguageId))
-                                .build())
-                        .topic(topic)
+            List<ProgrammingLanguage> programmingLanguages = new ArrayList<>();
+            for (UUID programmingLanguageId : updateTopicCommand.getProgrammingLanguageIds()) {
+                programmingLanguages.add(ProgrammingLanguage.builder()
+                        .id(new ProgrammingLanguageId(programmingLanguageId))
                         .build());
             }
+            topic.setProgrammingLanguages(programmingLanguages);
         }
 
+        updateTopic(topic);
         log.info("Topic updated with id: {}", topic.getId().getValue());
     }
 
