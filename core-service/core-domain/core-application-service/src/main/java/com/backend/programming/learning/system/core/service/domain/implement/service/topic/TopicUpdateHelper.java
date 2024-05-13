@@ -8,6 +8,7 @@ import com.backend.programming.learning.system.core.service.domain.exception.Rev
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.TopicProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 import lombok.extern.slf4j.Slf4j;
@@ -16,9 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Slf4j
 @Component
@@ -54,15 +53,16 @@ public class TopicUpdateHelper {
 
         if (updateTopicCommand.getProgrammingLanguageIds() != null) {
             deleteAllTopicProgrammingLanguagesForTopic(topic.getId().getValue());
-            List<UUID> programmingLanguageIds = updateTopicCommand.getProgrammingLanguageIds();
-            programmingLanguageIds.forEach(programmingLanguageId -> {
+            Set<UUID> programmingLanguageIdsSet = new HashSet<>(updateTopicCommand.getProgrammingLanguageIds());
+            for (UUID programmingLanguageId : programmingLanguageIdsSet) {
                 saveTopicProgrammingLanguage(TopicProgrammingLanguage.builder()
+                        .id(new TopicProgrammingLanguageId(UUID.randomUUID()))
                         .programmingLanguage(ProgrammingLanguage.builder()
                                 .id(new ProgrammingLanguageId(programmingLanguageId))
                                 .build())
                         .topic(topic)
                         .build());
-            });
+            }
         }
 
         log.info("Topic updated with id: {}", topic.getId().getValue());
@@ -92,7 +92,11 @@ public class TopicUpdateHelper {
     }
 
     private void saveTopicProgrammingLanguage(TopicProgrammingLanguage topicProgrammingLanguage) {
+        log.info("Saving topic programming language with topicId: {} and programmingLanguageId: {}",
+                topicProgrammingLanguage.getTopic().getId().getValue(),
+                topicProgrammingLanguage.getProgrammingLanguage().getId().getValue());
         topicProgrammingLanguageRepository.saveTopicProgrammingLanguage(topicProgrammingLanguage);
+        log.info("Topic programming language saved with id: {}", topicProgrammingLanguage.getId().getValue());
     }
 
     private void updateTopic(Topic topic) {
