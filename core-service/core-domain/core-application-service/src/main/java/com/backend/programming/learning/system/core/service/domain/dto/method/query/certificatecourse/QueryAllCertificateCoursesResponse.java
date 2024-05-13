@@ -13,11 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class QueryAllCertificateCoursesResponse {
     @NotNull
+    private final List<CertificateCourseResponseEntity> mostEnrolledCertificateCourses;
+    @NotNull
     private final List<CertificateCourseResponseEntity> certificateCourses;
-    @NotNull
-    private final int currentPage;
-    @NotNull
-    private final long totalItems;
-    @NotNull
-    private final int totalPages;
 }

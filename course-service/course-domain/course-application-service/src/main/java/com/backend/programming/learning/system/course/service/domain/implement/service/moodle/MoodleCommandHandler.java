@@ -111,6 +111,13 @@ public class MoodleCommandHandler {
         }
     }
 
+    @Transactional
+    public void createModule(Integer moduleId)
+    {
+        
+
+    }
+
     public List<SectionModel>  getAllSection(String courseId) {
         String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&courseid=%s",
                 MOODLE_URL, TOKEN, GET_CONTENTS, courseId);

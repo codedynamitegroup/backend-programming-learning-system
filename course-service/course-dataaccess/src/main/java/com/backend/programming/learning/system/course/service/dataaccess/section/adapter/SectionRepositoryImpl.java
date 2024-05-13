@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.course.service.domain.entity.Sect
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SectionRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
+import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -37,22 +38,27 @@ public class SectionRepositoryImpl implements SectionRepository {
     }
 
     @Override
-    public Section findBySectionMoodleId(Integer sectionMoodleId) {
-        return sectionDataAccessMapper.sectionEntityToSection(
+    public Optional<Section> findBySectionMoodleId(Integer sectionMoodleId) {
+        return
             sectionJpaRepository.findBySectionMoodleId(sectionMoodleId)
-                .orElseThrow(() -> new RuntimeException("Section not found")
-                )
-        );
+                .map(sectionDataAccessMapper::sectionEntityToSection);
     }
 
+
     @Override
-    public List<Section> findByCourseId(UUID courseId) {
+    public List<Section> findByCourseId(CourseId courseId) {
         return
-            sectionDataAccessMapper.sectionEntityListToSectionList(sectionJpaRepository.findByCourseId(courseId));
+            sectionDataAccessMapper.sectionEntityListToSectionList(sectionJpaRepository.findByCourseId(courseId.getValue()));
     }
 
     @Override
     public void deleteById(UUID sectionId) {
         sectionJpaRepository.deleteById(sectionId);
+    }
+
+    @Override
+    public void deleteBySectionMoodleId(Integer sectionMoodleId) {
+        sectionJpaRepository.findBySectionMoodleId(sectionMoodleId)
+            .ifPresent(sectionJpaRepository::delete);
     }
 }

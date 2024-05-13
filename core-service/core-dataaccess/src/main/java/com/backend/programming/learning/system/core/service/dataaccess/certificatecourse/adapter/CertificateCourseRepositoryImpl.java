@@ -2,26 +2,21 @@ package com.backend.programming.learning.system.core.service.dataaccess.certific
 
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.mapper.CertificateCourseDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.repository.CertificateCourseJpaRepository;
-import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_user.mapper.CertificateCourseUserDataAccessMapper;
-import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_user.repository.CertificateCourseUserJpaRepository;
-import com.backend.programming.learning.system.core.service.dataaccess.topic.entity.TopicEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.topic.mapper.TopicDataAccessMapper;
-import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
-import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourseUser;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseRepository;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import com.backend.programming.learning.system.core.service.domain.valueobject.IsRegisteredFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @Component
 public class CertificateCourseRepositoryImpl implements CertificateCourseRepository {
+    private static final Logger log = LoggerFactory.getLogger(CertificateCourseRepositoryImpl.class);
     private final CertificateCourseJpaRepository certificateCourseJpaRepository;
     private final CertificateCourseDataAccessMapper certificateCourseDataAccessMapper;
 
@@ -51,14 +46,76 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
     }
 
     @Override
-    public Page<CertificateCourse> findAll(Integer page, Integer size) {
-        Pageable paging = PageRequest.of(page, size);
-        return certificateCourseJpaRepository.findAllByIsDeletedFalse(paging)
-                .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse);
+    public List<CertificateCourse> findAllCertificateCourses(
+            String courseName,
+            List<UUID> filterTopicIds,
+            IsRegisteredFilter isRegisteredFilter,
+            UUID registeredBy
+    ) {
+        switch (isRegisteredFilter) {
+            case REGISTERED:
+                return certificateCourseJpaRepository.findAllByCourseNameAndByFilterTopicIdsAndRegisteredBy(
+                                courseName,
+                                filterTopicIds.isEmpty() ? null : filterTopicIds,
+                                registeredBy)
+                        .stream()
+                        .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
+                        .toList();
+            case NOT_REGISTERED:
+                return certificateCourseJpaRepository.findAllByCourseNameAndByFilterTopicIdsAndNotRegisteredBy(
+                        courseName,
+                                filterTopicIds.isEmpty() ? null : filterTopicIds,
+                        registeredBy)
+                        .stream()
+                        .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
+                        .toList();
+            default:
+                return certificateCourseJpaRepository.findAllByCourseNameAndByFilterTopicIds(
+                        courseName,
+                                filterTopicIds.isEmpty() ? null : filterTopicIds)
+                        .stream()
+                        .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
+                        .toList();
+        }
+
     }
 
     @Override
-    public int deleteCertificateCourse(UUID certificateCourseId) {
-        return certificateCourseJpaRepository.deleteById(true, certificateCourseId);
+    public void deleteCertificateCourse(UUID certificateCourseId) {
+        certificateCourseJpaRepository.deleteById(certificateCourseId);
+    }
+
+    @Override
+    public List<CertificateCourse> findMostEnrolledCertificateCourses(String courseName,
+                                                                      List<UUID> filterTopicIds,
+                                                                      IsRegisteredFilter isRegisteredFilter,
+                                                                      UUID registeredBy) {
+        switch (isRegisteredFilter) {
+            case REGISTERED:
+                return certificateCourseJpaRepository.findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIdsAndRegisteredBy(
+                                courseName,
+                                filterTopicIds.isEmpty() ? null : filterTopicIds,
+                                registeredBy)
+                        .stream()
+                        .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
+                        .toList();
+            case NOT_REGISTERED:
+                return certificateCourseJpaRepository.findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIdsAndNotRegisteredBy(
+                                courseName,
+                                filterTopicIds.isEmpty() ? null : filterTopicIds,
+                                registeredBy)
+                        .stream()
+                        .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
+                        .toList();
+            default:
+                return certificateCourseJpaRepository.findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIds(
+                                courseName,
+                                filterTopicIds.isEmpty() ? null : filterTopicIds)
+                        .stream()
+                        .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
+                        .toList();
+        }
+
+
     }
 }

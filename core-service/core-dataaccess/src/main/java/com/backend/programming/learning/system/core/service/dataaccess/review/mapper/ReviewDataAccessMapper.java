@@ -48,8 +48,8 @@ public class ReviewDataAccessMapper {
     }
 
     public Review reviewEntityToReview(ReviewEntity reviewEntity) {
-        User createdBy = userDataAccessMapper.userEntityToUser(reviewEntity.getCreatedBy());
-        User updatedBy = userDataAccessMapper.userEntityToUser(reviewEntity.getUpdatedBy());
+        User createdBy = userDataAccessMapper.userEntityToUserHideSensitiveData(reviewEntity.getCreatedBy());
+        User updatedBy = userDataAccessMapper.userEntityToUserHideSensitiveData(reviewEntity.getUpdatedBy());
 
         return Review.builder()
                 .id(new ReviewId(reviewEntity.getId()))

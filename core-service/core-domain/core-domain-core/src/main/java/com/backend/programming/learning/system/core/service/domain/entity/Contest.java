@@ -14,6 +14,7 @@ import java.util.UUID;
 public class Contest extends AggregateRoot<ContestId> {
     private String name;
     private String description;
+    private String thumbnailUrl;
     private ZonedDateTime startTime;
     private ZonedDateTime endTime;
     private List<Question> questions;
@@ -26,6 +27,7 @@ public class Contest extends AggregateRoot<ContestId> {
         super.setId(builder.contestId);
         setName(builder.name);
         setDescription(builder.description);
+        setThumbnailUrl(builder.thumbnailUrl);
         setStartTime(builder.startTime);
         setEndTime(builder.endTime);
         setQuestions(builder.questions);
@@ -60,6 +62,14 @@ public class Contest extends AggregateRoot<ContestId> {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 
     public ZonedDateTime getStartTime() {
@@ -122,6 +132,7 @@ public class Contest extends AggregateRoot<ContestId> {
         private ContestId contestId;
         private String name;
         private String description;
+        private String thumbnailUrl;
         private ZonedDateTime startTime;
         private ZonedDateTime endTime;
         private List<Question> questions;
@@ -145,6 +156,11 @@ public class Contest extends AggregateRoot<ContestId> {
 
         public Builder description(String val) {
             description = val;
+            return this;
+        }
+
+        public Builder thumbnailUrl(String val) {
+            thumbnailUrl = val;
             return this;
         }
 

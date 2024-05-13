@@ -30,6 +30,7 @@ public class ContestDataMapper {
         return Contest.builder()
                 .name(createContestCommand.getName())
                 .description(createContestCommand.getDescription())
+                .thumbnailUrl(createContestCommand.getThumbnailUrl())
                 .startTime(createContestCommand.getStartTime())
                 .endTime(createContestCommand.getEndTime())
                 .createdBy(User
@@ -61,6 +62,7 @@ public class ContestDataMapper {
                 .contestId(contest.getId().getValue())
                 .name(contest.getName())
                 .description(contest.getDescription())
+                .thumbnailUrl(contest.getThumbnailUrl())
                 .startTime(contest.getStartTime())
                 .endTime(contest.getEndTime())
                 .createdBy(createdByResponse)

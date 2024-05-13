@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -27,20 +28,17 @@ import java.util.UUID;
 public class ReviewCreateHelper {
     private final CoreDomainService coreDomainService;
     private final ReviewRepository reviewRepository;
-    private final UserRepository userRepository;
     private final CertificateCourseRepository certificateCourseRepository;
     private final CertificateCourseUserRepository certificateCourseUserRepository;
     private final ReviewDataMapper reviewDataMapper;
 
     public ReviewCreateHelper(CoreDomainService coreDomainService,
                               ReviewRepository reviewRepository,
-                              UserRepository userRepository,
                               CertificateCourseRepository certificateCourseRepository,
                               CertificateCourseUserRepository certificateCourseUserRepository,
                               ReviewDataMapper reviewDataMapper) {
         this.coreDomainService = coreDomainService;
         this.reviewRepository = reviewRepository;
-        this.userRepository = userRepository;
         this.certificateCourseRepository = certificateCourseRepository;
         this.certificateCourseUserRepository = certificateCourseUserRepository;
         this.reviewDataMapper = reviewDataMapper;
@@ -48,12 +46,12 @@ public class ReviewCreateHelper {
 
     @Transactional
     public Review persistReview(CreateReviewCommand createReviewCommand) {
-        checkUser(createReviewCommand.getCreatedBy());
-        checkUser(createReviewCommand.getUpdatedBy());
         checkCertificateCourseUserByCertificateCourseIdAndUserId(
                 createReviewCommand.getCertificateCourseId(),
                 createReviewCommand.getCreatedBy());
-
+        checkUserAlreadyReviewedCertificateCourse(
+                createReviewCommand.getCertificateCourseId(),
+                createReviewCommand.getCreatedBy());
 
         CertificateCourse certificateCourse = getCertificateCourse(createReviewCommand.getCertificateCourseId());
 
@@ -69,6 +67,16 @@ public class ReviewCreateHelper {
 
         log.info("Review created with id: {}", reviewResult.getId().getValue());
         return reviewResult;
+    }
+
+    private void checkUserAlreadyReviewedCertificateCourse(UUID certificateCourseId, UUID userId) {
+        List<Review> reviews = reviewRepository.findByCertificateCourseIdAndCreatedById(certificateCourseId, userId);
+        if (!reviews.isEmpty()) {
+            log.error("User with id: {} has already reviewed certificate course with id: {}",
+                    userId, certificateCourseId);
+            throw new CoreDomainException("User with id: " + userId +
+                    " has already reviewed certificate course with id: " + certificateCourseId);
+        }
     }
 
     private void checkCertificateCourseUserByCertificateCourseIdAndUserId(
@@ -87,13 +95,6 @@ public class ReviewCreateHelper {
         return reviewRepository.getAvgRatingOfAllReviewsByCertificateCourseId(certificateCourseId);
     }
 
-    private void checkUser(UUID userId) {
-        Optional<User> user = userRepository.findUser(userId);
-        if (user.isEmpty()) {
-            log.warn("User with id: {} not found", userId);
-            throw new UserNotFoundException("Could not find user with id: " + userId);
-        }
-    }
 
     private CertificateCourse getCertificateCourse(UUID certificateCourseId) {
         Optional<CertificateCourse> certificateCourse = certificateCourseRepository.findById(
