@@ -14,7 +14,6 @@ import com.backend.programming.learning.system.code.assessment.service.domain.po
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_question.CodeQuestionRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_submssion.CodeSubmissionRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.CommentId;
-import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.SharedSolutionId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.comment_vote.CommentVoteId;
@@ -23,6 +22,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.va
 import com.backend.programming.learning.system.domain.exception.user.UserNotFoundException;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
+import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -198,6 +198,16 @@ public class ValidateHelper {
         else {
             log.error("tag with id: {} not found", id);
             throw new TagNotFoundException("tag with id " + id + " not found");
+        }
+    }
+
+    public ProgrammingLanguage validateProgrammingLanguage(ProgrammingLanguageId programmingLanguageId) {
+        Optional<ProgrammingLanguage> plOpt = programmingLanguageRepository.findById(programmingLanguageId);
+        if(plOpt.isPresent())
+            return plOpt.get();
+        else {
+            log.error("programming language with id: {} not found", programmingLanguageId);
+            throw new ProgrammingLanguageNotFoundException("programming language with id " + programmingLanguageId.getValue() + " not found");
         }
     }
 }

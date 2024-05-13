@@ -5,7 +5,7 @@ import com.backend.programming.learning.system.code.assessment.service.dataacces
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.language.repository.ProgrammingLanguageJpaRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.ProgrammingLanguage;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.ProgrammingLanguageRepository;
-import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.ProgrammingLanguageId;
+import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -36,6 +36,12 @@ public class ProgrammingLanguageRepositoryImpl implements ProgrammingLanguageRep
 
     @Override
     public List<ProgrammingLanguage> findAll() {
-        return jpaRepository.findAll().stream().map(dataAccessMapper::entityToProgramingLanguage).toList();
+
+        return jpaRepository.findAllByOrderByNameAsc().stream().map(dataAccessMapper::entityToProgramingLanguage).toList();
+    }
+
+    @Override
+    public void deleteById(ProgrammingLanguageId id) {
+        jpaRepository.deleteById(id.getValue());
     }
 }

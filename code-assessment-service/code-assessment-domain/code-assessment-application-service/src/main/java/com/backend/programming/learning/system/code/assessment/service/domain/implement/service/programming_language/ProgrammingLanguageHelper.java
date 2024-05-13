@@ -3,13 +3,17 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 
 import com.backend.programming.learning.system.code.assessment.service.domain.CodeAssessmentDomainService;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.programming_language.CreateProgammingLanguageCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.programming_language.DeleteProgrammingLanguageCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.programming_language.UpdateProgrammingLanguageCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.ProgrammingLanguage;
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.GenericHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.ValidateHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.programming_language.ProgrammingLanguageDataMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.ProgrammingLanguageRepository;
+import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -38,5 +42,19 @@ public class ProgrammingLanguageHelper {
 
     public List<ProgrammingLanguage> getLanguage() {
         return programmingLanguageRepository.findAll();
+    }
+
+    @Transactional
+    public void deleteLanguage(DeleteProgrammingLanguageCommand command) {
+        ProgrammingLanguage pl = validateHelper.validateProgrammingLanguage(new ProgrammingLanguageId(command.getLanguageId()));
+        programmingLanguageRepository.deleteById(pl.getId());
+    }
+
+    @Transactional
+    public void updateLanguage(UpdateProgrammingLanguageCommand command) {
+        ProgrammingLanguage pl = validateHelper.validateProgrammingLanguage(new ProgrammingLanguageId(command.getLanguageId()));
+        ProgrammingLanguage plUpdated = programmingLanguageDataMapper.updateProgrammingLanguageCommandToProgrammingLangauge(command);
+        genericHelper.mapRepositoryAttributeToUpdateAttribute(pl, plUpdated, ProgrammingLanguage.class);
+        programmingLanguageRepository.save(pl);
     }
 }

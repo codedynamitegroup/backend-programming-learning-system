@@ -2,7 +2,7 @@ package com.backend.programming.learning.system.code.assessment.service.dataacce
 
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.language.entity.ProgrammingLanguageEntity;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.ProgrammingLanguage;
-import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.ProgrammingLanguageId;
+import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 import org.springframework.stereotype.Component;
 
 @Component

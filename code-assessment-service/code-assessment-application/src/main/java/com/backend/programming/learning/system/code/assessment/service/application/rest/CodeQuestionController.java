@@ -30,6 +30,9 @@ public class CodeQuestionController {
     public CodeQuestionController(CodeQuestionApplicationService codeQuestionApplicationService) {
         this.codeQuestionApplicationService = codeQuestionApplicationService;
     }
+
+    //add language to the body
+    //fix outbox
     @PostMapping
     @Operation(summary = "Create code question.")
     @ApiResponses(value = {
@@ -69,6 +72,10 @@ public class CodeQuestionController {
                 .build();
         GetCodeQuestionsResponse response = codeQuestionApplicationService.getCodeQuestions(command);
         return ResponseEntity.ok(response);
-
     }
+
+    //no neeed to delete
+
+    //update
+    //add outbox
 }

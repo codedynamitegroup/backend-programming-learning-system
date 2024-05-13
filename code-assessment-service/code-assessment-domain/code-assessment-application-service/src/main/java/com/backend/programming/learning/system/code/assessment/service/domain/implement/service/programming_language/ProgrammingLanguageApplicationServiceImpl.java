@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.ProgrammingLanguageDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.programming_language.CreateProgammingLanguageCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.programming_language.DeleteProgrammingLanguageCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.programming_language.UpdateProgrammingLanguageCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.ProgrammingLanguageApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -27,5 +29,15 @@ public class ProgrammingLanguageApplicationServiceImpl implements ProgrammingLan
     @Override
     public List<ProgrammingLanguageDto> getLanguage() {
         return programmingLanguageHandler.getLanguage();
+    }
+
+    @Override
+    public void deleteLanguage(DeleteProgrammingLanguageCommand command) {
+        programmingLanguageHandler.deleteLanguage(command);
+    }
+
+    @Override
+    public void updateLanguage(UpdateProgrammingLanguageCommand command) {
+        programmingLanguageHandler.updateLanguage(command);
     }
 }

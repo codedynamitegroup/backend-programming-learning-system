@@ -7,16 +7,13 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmissionTestCase;
-import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.ProgrammingLanguageId;
+import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.Base64;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 @Slf4j

@@ -2,7 +2,6 @@ package com.backend.programming.learning.system.code.assessment.service.domain.e
 
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.CodeSubmissionTestCaseId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
-import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.*;
 

@@ -27,6 +27,7 @@ public class CodeSubmissionController {
         this.codeSubmissionApplicationService = codeSubmissionApplicationService;
     }
 
+    //add outbox
     @PostMapping
     public ResponseEntity<CreateCodeSubmissionResponse> createCodeSubmission
             (@RequestBody CreateCodeSubmissionCommand createCodeSubmissionCommand){
@@ -76,4 +77,6 @@ public class CodeSubmissionController {
     public void updateCodeSubmissionTestCase(@RequestBody UpdateCodeSubmissionTestCaseCommand command){
         codeSubmissionApplicationService.handleTestCaseResult(command);
     }
+
+    //submit sample
 }
