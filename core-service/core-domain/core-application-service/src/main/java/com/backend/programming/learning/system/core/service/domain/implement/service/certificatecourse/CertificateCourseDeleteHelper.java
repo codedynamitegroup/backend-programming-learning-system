@@ -29,14 +29,16 @@ public class CertificateCourseDeleteHelper {
 
     @Transactional
     public void deleteCertificateCourseById(UUID certificateCourseId) {
-        int deletedRows = certificateCourseRepository.deleteCertificateCourse(certificateCourseId);
-        if (deletedRows == 0) {
-            log.warn("Could not delete certificate course with id: {}",
-                    certificateCourseId);
-            throw new CertificateCourseNotFoundException("Could not delete certificate course with id: " +
-                    certificateCourseId);
+        checkCertificateCourseExists(certificateCourseId);
+        certificateCourseRepository.deleteCertificateCourse(certificateCourseId);
+    }
+
+    private void checkCertificateCourseExists(UUID certificateCourseId) {
+        Optional<CertificateCourse> certificateCourse = certificateCourseRepository.findById(new CertificateCourseId(certificateCourseId));
+        if (certificateCourse.isEmpty()) {
+            log.warn("Certificate course with id: {} not found", certificateCourseId);
+            throw new CertificateCourseNotFoundException("Certificate course with id: " + certificateCourseId + " not found");
         }
-        log.info("Certificate course deleted with id: {}", certificateCourseId);
     }
 }
 

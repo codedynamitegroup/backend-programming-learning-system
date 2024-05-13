@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.core.service.domain.dto.response
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.valueobject.NotificationEventType;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,9 +12,12 @@ import jakarta.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
+
 @Getter
 @Builder
 @AllArgsConstructor
+@JsonInclude(NON_NULL)
 public class CalendarEventResponseEntity {
     @NotNull
     private final UUID calendarEventId;

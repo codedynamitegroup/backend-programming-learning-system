@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -23,4 +24,6 @@ public interface ReviewJpaRepository extends JpaRepository<ReviewEntity, UUID> {
     @Transactional(readOnly = true)
     @Query("SELECT AVG(r.rating) FROM ReviewEntity r WHERE r.certificateCourse.id = :certificateCourseId")
     Float getAvgRatingOfAllReviewsByCertificateCourseId(UUID certificateCourseId);
+
+    List<ReviewEntity> findByCertificateCourseIdAndCreatedById(UUID certificateCourseId, UUID createdBy);
 }

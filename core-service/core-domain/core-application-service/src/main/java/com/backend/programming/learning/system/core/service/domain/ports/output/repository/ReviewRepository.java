@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.core.service.domain.entity.Certif
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -19,4 +20,5 @@ public interface ReviewRepository {
 
     Float getAvgRatingOfAllReviewsByCertificateCourseId(UUID certificateCourseId);
 
+    List<Review> findByCertificateCourseIdAndCreatedById(UUID certificateCourseId, UUID createdBy);
 }

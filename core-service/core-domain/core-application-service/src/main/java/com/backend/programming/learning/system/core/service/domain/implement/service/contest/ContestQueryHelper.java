@@ -76,16 +76,8 @@ public class ContestQueryHelper {
     ) {
         log.info("Querying all contests with searchName: {}, startTimeFilter: {}, pageNo: {}, pageSize: {}",
                 searchName, startTimeFilter, pageNo, pageSize);
-        Page<Contest> contests = contestRepository.findAll(searchName, startTimeFilter, pageNo, pageSize);
 
-        for (Contest contest : contests) {
-            User createdBy = getUser(contest.getCreatedBy().getId().getValue());
-            User updatedBy = getUser(contest.getUpdatedBy().getId().getValue());
-            contest.setCreatedBy(createdBy);
-            contest.setUpdatedBy(updatedBy);
-        }
-
-        return contests;
+        return contestRepository.findAll(searchName, startTimeFilter, pageNo, pageSize);
     }
 
     private List<ContestQuestion> getAllContestQuestionsForContest(UUID contestId) {

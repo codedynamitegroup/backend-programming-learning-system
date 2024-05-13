@@ -26,7 +26,11 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
     @Query("select c from ContestEntity c where c.startTime >= ?1")
     Page<ContestEntity> findAllUpcomingContests(ZonedDateTime startTime, Pageable pageable);
 
-    @Query("select c from ContestEntity c where upper(c.name) like upper(concat('%', ?1, '%')) and c.startTime >= ?2")
+    @Query("""
+    select c from ContestEntity c
+    where (LENGTH(?1) = 0 OR upper(c.name) like upper(concat('%', ?1, '%')))
+    and c.startTime >= ?2
+""")
     Page<ContestEntity> findAllUpcomingContestsContainsSearchName(String name, ZonedDateTime startTime, Pageable pageable);
 
     @Query("""
@@ -37,7 +41,8 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
     @Query("""
             select c from ContestEntity c
             where c.startTime <= ?1 and (c.endTime is null or (c.endTime is not null and c.endTime >= ?2))
-            and upper(c.name) like upper(concat('%', ?3, '%'))""")
+            and (LENGTH(?3) = 0 OR upper(c.name) like upper(concat('%', ?3, '%')))
+            """)
     Page<ContestEntity> findAllHappeningContestsContainsSearchName(ZonedDateTime startTime, ZonedDateTime endTime, String name, Pageable pageable);
 
     @Query("select c from ContestEntity c where c.endTime is not null and c.endTime < ?1")
@@ -46,9 +51,10 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
     @Query("""
             select c from ContestEntity c
             where c.endTime is not null and c.endTime < ?1
-            and upper(c.name) like upper(concat('%', ?2, '%'))""")
+            and (LENGTH(?2) = 0 OR upper(c.name) like upper(concat('%', ?2, '%')))
+            """)
     Page<ContestEntity> findAllEndedContestsContainsSearchName(ZonedDateTime startTime, String name, Pageable pageable);
 
-    @Query("select c from ContestEntity c where upper(c.name) like upper(concat('%', ?1, '%'))")
+    @Query("select c from ContestEntity c where (LENGTH(?1) = 0 OR upper(c.name) like upper(concat('%', ?1, '%')))")
     Page<ContestEntity> findAllContainsSearchName(String name, Pageable pageable);
 }
