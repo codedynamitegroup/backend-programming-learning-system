@@ -124,6 +124,7 @@ public class MoodleDataMapper {
     public Section createSection(Course course, SectionModel sectionModel) {
         return Section.builder()
                 .id(new SectionId(UUID.randomUUID()))
+                .sectionMoodleId(Integer.valueOf(sectionModel.getId()))
                 .name(sectionModel.getName())
                 .visible(sectionModel.getVisible())
                 .courseId(course.getId())

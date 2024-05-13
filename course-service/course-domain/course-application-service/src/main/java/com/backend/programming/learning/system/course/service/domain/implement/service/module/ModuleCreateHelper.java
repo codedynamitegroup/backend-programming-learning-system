@@ -32,6 +32,7 @@ public class ModuleCreateHelper {
 
     @Transactional
     public void createModule(WebhookMessage webhookMessage, Section section) {
-        System.out.println(webhookMessage);
+
+
     }
 }

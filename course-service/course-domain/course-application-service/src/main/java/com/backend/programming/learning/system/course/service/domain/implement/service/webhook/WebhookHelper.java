@@ -11,7 +11,9 @@ import com.backend.programming.learning.system.course.service.domain.implement.s
 import com.backend.programming.learning.system.course.service.domain.implement.service.course.CourseUpdateHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.course_user.CourseUserCreateHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.course_user.CourseUserDeleteHelper;
-import com.backend.programming.learning.system.course.service.domain.implement.service.section.SectionHelper;
+import com.backend.programming.learning.system.course.service.domain.implement.service.section.SectionDeleteHelper;
+import com.backend.programming.learning.system.course.service.domain.implement.service.section.SectionCreateHelper;
+import com.backend.programming.learning.system.course.service.domain.implement.service.section.SectionUpdateHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.user.UserHelper;
 import com.backend.programming.learning.system.course.service.domain.mapper.webhook.WebhookDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseRepository;
@@ -34,7 +36,9 @@ public class WebhookHelper {
     private final CourseUserDeleteHelper courseUserDeleteHelper;
     private final UserHelper userHelper;
 
-    private final SectionHelper sectionHelper;
+    private final SectionCreateHelper sectionCreateHelper;
+    private final SectionUpdateHelper sectionUpdateHelper;
+    private final SectionDeleteHelper sectionDeleteHelper;
 
     public WebhookHelper(
             WebhookDataMapper webhookDataMapper,
@@ -42,7 +46,7 @@ public class WebhookHelper {
             CourseRepository courseRepository, CourseCreateHelper courseCreateHelper,
             CourseUpdateHelper courseUpdateHelper, CourseDeleteHelper courseDeleteHelper,
             CourseUserCreateHelper courseUserCreateHelper, CourseUserDeleteHelper courseUserDeleteHelper,
-            UserHelper userHelper, SectionHelper sectionHelper) {
+            UserHelper userHelper, SectionCreateHelper sectionCreateHelper, SectionUpdateHelper sectionUpdateHelper, SectionDeleteHelper sectionDeleteHelper) {
         this.webhookDataMapper = webhookDataMapper;
         this.organizationRepository = organizationRepository;
         this.courseRepository = courseRepository;
@@ -52,7 +56,9 @@ public class WebhookHelper {
         this.courseUserCreateHelper = courseUserCreateHelper;
         this.courseUserDeleteHelper = courseUserDeleteHelper;
         this.userHelper = userHelper;
-        this.sectionHelper = sectionHelper;
+        this.sectionCreateHelper = sectionCreateHelper;
+        this.sectionUpdateHelper = sectionUpdateHelper;
+        this.sectionDeleteHelper = sectionDeleteHelper;
     }
 
     public void processWebhook(WebhookCommand webhookCommand) {
@@ -82,11 +88,13 @@ public class WebhookHelper {
                 createSection(webhookMessage, course);
                 break;
             case COURSE_SECTION_UPDATED:
+                Course course_section=findCourse(Integer.valueOf(webhookMessage.getCourseId()));
+                updateSection(webhookMessage, course_section);
                 break;
             case COURSE_SECTION_DELETED:
+                deleteSection(webhookMessage);
                 break;
             case COURSE_MODULE_CREATED:
-                log.info("Course module created: {}", webhookMessage);
                 break;
             case COURSE_MODULE_UPDATED:
                 break;
@@ -124,7 +132,15 @@ public class WebhookHelper {
     }
 
     private void createSection(WebhookMessage webhookMessage, Course course) {
-        sectionHelper.createSection(webhookMessage, course);
+        sectionCreateHelper.createSection(webhookMessage, course);
+    }
+
+    private void updateSection(WebhookMessage webhookMessage, Course course) {
+        sectionUpdateHelper.updateSection(webhookMessage, course);
+    }
+
+    private void deleteSection(WebhookMessage webhookMessage) {
+        sectionDeleteHelper.deleteSection(webhookMessage.getObjectId());
     }
     private void enrollUserToCourse(WebhookMessage webhookMessage) {
         courseUserCreateHelper.enrollUserToCourse(webhookMessage);
