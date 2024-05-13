@@ -238,6 +238,7 @@ CREATE TABLE "public".section
 (
     id          uuid    DEFAULT gen_random_uuid() NOT NULL,
     course_id uuid,
+    section_moodle_id integer,
     name        text,
     visible integer,
     CONSTRAINT section_pkey PRIMARY KEY (id),

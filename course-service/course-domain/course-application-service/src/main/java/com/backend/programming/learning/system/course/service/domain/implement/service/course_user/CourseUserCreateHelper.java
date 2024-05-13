@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
 import com.backend.programming.learning.system.course.service.domain.entity.CourseUser;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.entity.WebhookMessage;
 import com.backend.programming.learning.system.course.service.domain.mapper.course_user.CourseUserDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseUserRepository;
@@ -27,13 +28,25 @@ import java.util.UUID;
  */
 @Slf4j
 @Component
-@RequiredArgsConstructor
 public class CourseUserCreateHelper {
     private final CourseDomainService courseDomainService;
     private final CourseUserRepository courseUserRepository;
     private final CourseUserDataMapper courseUserDataMapper;
     private final UserRepository userRepository;
     private final CourseRepository courseRepository;
+
+    public CourseUserCreateHelper(
+            CourseDomainService courseDomainService,
+            CourseUserRepository courseUserRepository,
+            CourseUserDataMapper courseUserDataMapper,
+            UserRepository userRepository,
+            CourseRepository courseRepository) {
+        this.courseDomainService = courseDomainService;
+        this.courseUserRepository = courseUserRepository;
+        this.courseUserDataMapper = courseUserDataMapper;
+        this.userRepository = userRepository;
+        this.courseRepository = courseRepository;
+    }
 
     public void assignCourseToUser(CreateCourseUserCommand createCourseUserCommand) {
         log.info("Assign course to user");
@@ -42,6 +55,17 @@ public class CourseUserCreateHelper {
         List<CourseUser> courseUsers = courseUserDataMapper.createCourseUserCommandToCourseUser(course, users);
         courseDomainService.createCourseUsers(courseUsers);
         courseUserRepository.saveAll(courseUsers);
+    }
+    public void enrollUserToCourse(WebhookMessage webhookMessage) {
+        log.info("Enroll user to course");
+        User user = getUser(Integer.valueOf(webhookMessage.getRelatedUserId()));
+        Course course = getCourse(Integer.valueOf(webhookMessage.getCourseId()));
+        CourseUser courseUser = courseUserDataMapper.buildCourseUser(course, user);
+
+        courseDomainService.createCourseUser(courseUser);
+        courseUserRepository.saveCourseUser(courseUser);
+
+        log.info("User with id: {} enrolled to course with id: {}", user.getId(), course.getId());
     }
 
 
@@ -65,5 +89,26 @@ public class CourseUserCreateHelper {
             throw new RuntimeException("Course not found");
         }
         return course;
+    }
+
+    private User getUser(Integer userMoodleId) {
+        Optional<User> user = userRepository.findByUserIdMoodle(userMoodleId);
+
+        if (user.isEmpty()) {
+            log.warn("User with moodle id: {} not found", userMoodleId);
+            throw new RuntimeException("User not found");
+        }
+
+        return user.get();
+    }
+    private Course getCourse(Integer courseIdMoodle) {
+        Optional<Course> course = courseRepository.findByCourseIdMoodle(courseIdMoodle);
+
+        if (course.isEmpty()) {
+            log.warn("Course with moodle id: {} not found", courseIdMoodle);
+            throw new RuntimeException("Course not found");
+        }
+
+        return course.get();
     }
 }

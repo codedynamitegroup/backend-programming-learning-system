@@ -28,7 +28,7 @@ public class UserEntity {
     @JoinColumn(name = "org_id", referencedColumnName = "id")
     private OrganizationEntity organization;
 
-
+    private String username;
     private String email;
     private ZonedDateTime dob;
     private String firstName;

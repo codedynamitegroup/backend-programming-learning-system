@@ -61,4 +61,9 @@ public class UserRepositoryImpl implements UserRepository {
         return userJpaRepository.findByIdAndIsDeletedFalse(userId.getValue())
                 .map(userDataAccessMapper::userEntityToUser);
     }
+
+    @Override
+    public void deleteByUserMoodleId(Integer userIdMoodle) {
+        userJpaRepository.deleteByUserIdMoodle(userIdMoodle);
+    }
 }

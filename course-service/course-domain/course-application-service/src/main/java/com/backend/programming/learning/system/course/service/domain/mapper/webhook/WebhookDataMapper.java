@@ -1,12 +1,9 @@
 package com.backend.programming.learning.system.course.service.domain.mapper.webhook;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.webhook.WebhookCommand;
-import com.backend.programming.learning.system.course.service.domain.entity.Course;
 import com.backend.programming.learning.system.course.service.domain.entity.WebhookMessage;
 import com.backend.programming.learning.system.domain.valueobject.WebhookEventName;
 import org.springframework.stereotype.Component;
-
-import java.util.Map;
 
 @Component
 public class WebhookDataMapper {
@@ -42,11 +39,5 @@ public class WebhookDataMapper {
             }
         }
         throw new IllegalArgumentException("Invalid event name: " + eventName);
-    }
-
-    public Course webhookCommandToCourse(WebhookCommand webhookCommand) {
-        Map<String, Object> courseData = webhookCommand.getOther();
-
-        return null;
     }
 }

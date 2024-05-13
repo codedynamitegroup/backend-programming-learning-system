@@ -11,4 +11,5 @@ public interface CourseUserRepository {
     void saveAll(List<CourseUser> courseUsers);
 
     void deleteByCourseIdAndUserIdIn(UUID courseId, List<UUID> userIds);
+    void deleteByCourseIdAndUserId(UUID courseId, UUID userIds);
 }

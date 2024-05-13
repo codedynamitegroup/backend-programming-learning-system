@@ -14,4 +14,7 @@ public interface SectionJpaRepository extends JpaRepository<SectionEntity, UUID>
 
     List<SectionEntity> findByCourseId(UUID courseId);
 
+    Optional<SectionEntity> findBySectionMoodleId(Integer sectionMoodleId);
+
+    void deleteBySectionMoodleId(Integer sectionMoodleId);
 }
