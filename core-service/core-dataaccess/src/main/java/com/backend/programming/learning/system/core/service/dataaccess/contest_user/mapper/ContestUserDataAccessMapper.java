@@ -25,7 +25,7 @@ public class ContestUserDataAccessMapper {
     }
 
     public ContestUserEntity contestUserToContestUserEntity(ContestUser contestUser) {
-        UserEntity user = userDataAccessMapper.userToUserEntity(contestUser.getUser());
+        UserEntity user = userDataAccessMapper.userToUserEntityHideSensitiveData(contestUser.getUser());
         ContestEntity contest = contestDataAccessMapper.contestToContestEntity(contestUser.getContest());
         return ContestUserEntity.builder()
                 .id(contestUser.getId().getValue())
@@ -40,7 +40,7 @@ public class ContestUserDataAccessMapper {
     }
 
     public ContestUser contestUserEntityToContestUser(ContestUserEntity contestUserEntity) {
-        User user = userDataAccessMapper.userEntityToUser(contestUserEntity.getUser());
+        User user = userDataAccessMapper.userEntityToUserHideSensitiveData(contestUserEntity.getUser());
         Contest contest = contestDataAccessMapper.contestEntityToContest(contestUserEntity.getContest());
         return ContestUser.builder()
                 .id(new ContestUserId(contestUserEntity.getId()))

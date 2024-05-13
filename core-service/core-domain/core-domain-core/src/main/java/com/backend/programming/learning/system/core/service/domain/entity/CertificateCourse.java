@@ -20,7 +20,8 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
     private Float avgRating;
     private ZonedDateTime startTime;
     private ZonedDateTime endTime;
-    private Boolean isDeleted;
+    private Integer numOfStudents;
+    private Integer numOfQuestions;
     private Topic topic;
     private User createdBy;
     private User updatedBy;
@@ -29,18 +30,19 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
 
     private CertificateCourse(Builder builder) {
         super.setId(builder.certificateCourseId);
-        name = builder.name;
-        description = builder.description;
-        skillLevel = builder.skillLevel;
-        avgRating = builder.avgRating;
-        startTime = builder.startTime;
-        endTime = builder.endTime;
-        isDeleted = builder.isDeleted;
-        topic = builder.topic;
-        createdBy = builder.createdBy;
-        updatedBy = builder.updatedBy;
-        createdAt = builder.createdAt;
-        updatedAt = builder.updatedAt;
+        setName(builder.name);
+        setDescription(builder.description);
+        setSkillLevel(builder.skillLevel);
+        setAvgRating(builder.avgRating);
+        setStartTime(builder.startTime);
+        setEndTime(builder.endTime);
+        setNumOfStudents(builder.numOfStudents);
+        setNumOfQuestions(builder.numOfQuestions);
+        setTopic(builder.topic);
+        setCreatedBy(builder.createdBy);
+        setUpdatedBy(builder.updatedBy);
+        setCreatedAt(builder.createdAt);
+        setUpdatedAt(builder.updatedAt);
     }
 
     public static Builder builder() {
@@ -53,96 +55,104 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         updatedAt = ZonedDateTime.now(ZoneId.of("UTC"));
     }
 
-
     public String getName() {
         return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public SkillLevel getSkillLevel() {
-        return skillLevel;
-    }
-
-    public Float getAvgRating() {
-        return avgRating;
-    }
-
-    public ZonedDateTime getStartTime() {
-        return startTime;
-    }
-
-    public ZonedDateTime getEndTime() {
-        return endTime;
-    }
-
-    public Boolean getDeleted() {
-        return isDeleted;
-    }
-
-    public Topic getTopic() {
-        return topic;
-    }
-
-    public User getCreatedBy() {
-        return createdBy;
-    }
-
-    public User getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public ZonedDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public ZonedDateTime getUpdatedAt() {
-        return updatedAt;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public SkillLevel getSkillLevel() {
+        return skillLevel;
     }
 
     public void setSkillLevel(SkillLevel skillLevel) {
         this.skillLevel = skillLevel;
     }
 
+    public Float getAvgRating() {
+        return avgRating;
+    }
+
     public void setAvgRating(Float avgRating) {
         this.avgRating = avgRating;
+    }
+
+    public ZonedDateTime getStartTime() {
+        return startTime;
     }
 
     public void setStartTime(ZonedDateTime startTime) {
         this.startTime = startTime;
     }
 
+    public ZonedDateTime getEndTime() {
+        return endTime;
+    }
+
     public void setEndTime(ZonedDateTime endTime) {
         this.endTime = endTime;
     }
 
-    public void setDeleted(Boolean deleted) {
-        isDeleted = deleted;
+    public Integer getNumOfStudents() {
+        return numOfStudents;
+    }
+
+    public void setNumOfStudents(Integer numOfStudents) {
+        this.numOfStudents = numOfStudents;
+    }
+
+    public Integer getNumOfQuestions() {
+        return numOfQuestions;
+    }
+
+    public void setNumOfQuestions(Integer numOfQuestions) {
+        this.numOfQuestions = numOfQuestions;
+    }
+
+    public Topic getTopic() {
+        return topic;
     }
 
     public void setTopic(Topic topic) {
         this.topic = topic;
     }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
     public void setCreatedBy(User createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public User getUpdatedBy() {
+        return updatedBy;
     }
 
     public void setUpdatedBy(User updatedBy) {
         this.updatedBy = updatedBy;
     }
 
+    public ZonedDateTime getCreatedAt() {
+        return createdAt;
+    }
+
     public void setCreatedAt(ZonedDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public ZonedDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
     public void setUpdatedAt(ZonedDateTime updatedAt) {
@@ -157,7 +167,8 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         private Float avgRating;
         private ZonedDateTime startTime;
         private ZonedDateTime endTime;
-        private Boolean isDeleted;
+        private Integer numOfStudents;
+        private Integer numOfQuestions;
         private Topic topic;
         private User createdBy;
         private User updatedBy;
@@ -202,8 +213,13 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
             return this;
         }
 
-        public Builder isDeleted(Boolean val) {
-            isDeleted = val;
+        public Builder numOfStudents(Integer val) {
+            numOfStudents = val;
+            return this;
+        }
+
+        public Builder numOfQuestions(Integer val) {
+            numOfQuestions = val;
             return this;
         }
 

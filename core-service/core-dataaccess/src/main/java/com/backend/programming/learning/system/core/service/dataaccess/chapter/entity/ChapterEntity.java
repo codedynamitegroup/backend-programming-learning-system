@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.core.service.dataaccess.chapter_q
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Formula;
 
 import java.time.ZonedDateTime;
 import java.util.Objects;
@@ -42,8 +43,6 @@ public class ChapterEntity {
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
-//    @OneToMany(mappedBy = "chapter", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-//    Set<ChapterQuestionEntity> chapterQuestions;
 
     @Override
     public boolean equals(Object o) {

@@ -44,6 +44,8 @@ public class CertificateCourseUserCreateHelper {
     @Transactional
     public CertificateCourseUser persistCertificateCourseUser(
             CreateCertificateCourseUserCommand createCertificateCourseUserCommand) {
+        checkIfCertificateCourseUserExists(createCertificateCourseUserCommand.getCertificateCourseId(),
+                createCertificateCourseUserCommand.getUserId());
         User user = getUser(createCertificateCourseUserCommand.getUserId());
         CertificateCourse certificateCourse =
                 getCertificateCourse(createCertificateCourseUserCommand.getCertificateCourseId());
@@ -57,6 +59,16 @@ public class CertificateCourseUserCreateHelper {
 
         log.info("Certificate course user created with id: {}", certificateCourseUserResult.getId().getValue());
         return certificateCourseUserResult;
+    }
+
+    private void checkIfCertificateCourseUserExists(UUID certificateCourseId, UUID userId) {
+        Optional<CertificateCourseUser> certificateCourseUser = certificateCourseUserRepository
+                .findByCertificateCourseIdAndUserId(certificateCourseId, userId);
+        if (certificateCourseUser.isPresent()) {
+            log.warn("User with id: {} already enrolled in certificate course with id: {}",
+                    certificateCourseId, userId);
+            throw new CoreDomainException("User already enrolled in this course");
+        }
     }
 
     private User getUser(UUID userId) {

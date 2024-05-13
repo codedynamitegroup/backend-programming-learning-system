@@ -30,7 +30,7 @@ public class CertificateCourseUserDataAccessMapper {
             CertificateCourseUser certificateCourseUser) {
         CertificateCourseEntity certificateCourse = certificateCourseDataAccessMapper
                 .certificateCourseToCertificateCourseEntity(certificateCourseUser.getCertificateCourse());
-        UserEntity user = userDataAccessMapper.userToUserEntity(certificateCourseUser.getUser());
+        UserEntity user = userDataAccessMapper.userToUserEntityHideSensitiveData(certificateCourseUser.getUser());
 
         return CertificateCourseUserEntity.builder()
                 .id(certificateCourseUser.getId().getValue())
@@ -47,7 +47,7 @@ public class CertificateCourseUserDataAccessMapper {
             CertificateCourseUserEntity certificateCourseUserEntity) {
         CertificateCourse certificateCourse = certificateCourseDataAccessMapper
                 .certificateCourseEntityToCertificateCourse(certificateCourseUserEntity.getCertificateCourse());
-        User user = userDataAccessMapper.userEntityToUser(certificateCourseUserEntity.getUser());
+        User user = userDataAccessMapper.userEntityToUserHideSensitiveData(certificateCourseUserEntity.getUser());
         return CertificateCourseUser.builder()
                 .id(new CertificateCourseUserId(certificateCourseUserEntity.getId()))
                 .certificateCourse(certificateCourse)
