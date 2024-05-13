@@ -1,6 +1,9 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.module;
 
 import com.backend.programming.learning.system.course.service.domain.CourseDomainService;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.module.CreateModuleCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.module.CreateModuleResponse;
+import com.backend.programming.learning.system.course.service.domain.entity.Module;
 import com.backend.programming.learning.system.course.service.domain.entity.Section;
 import com.backend.programming.learning.system.course.service.domain.entity.WebhookMessage;
 import com.backend.programming.learning.system.course.service.domain.implement.service.moodle.MoodleCommandHandler;
@@ -35,4 +38,14 @@ public class ModuleCreateHelper {
 
 
     }
+
+    @Transactional
+    public Module createModule(CreateModuleCommand createModuleCommand) {
+        Module module = moduleDataMapper.createModuleCommandToModule(createModuleCommand);
+        courseDomainService.createModule(module);
+        Module createResult = moduleRepository.save(module);
+        log.info("Module is created with id: {}", createResult.getId());
+        return createResult;
+    }
 }
+

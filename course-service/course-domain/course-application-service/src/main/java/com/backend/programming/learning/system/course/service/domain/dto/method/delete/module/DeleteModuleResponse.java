@@ -10,6 +10,5 @@ import java.util.UUID;
 @AllArgsConstructor
 public class DeleteModuleResponse {
    private UUID moduleId;
-   private String name;
    private String message;
 }
