@@ -13,6 +13,13 @@ import java.util.List;
 @AllArgsConstructor
 public class UserEventPayload {
     @JsonProperty
+    private String id;
+    @JsonProperty
+    private String userName;
+    @JsonProperty
+    private String organizationId;
+
+    @JsonProperty
     private String userId;
     @JsonProperty
     private String email;

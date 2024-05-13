@@ -65,10 +65,14 @@ public class UserMessagingDataMapper {
                 .build();
     }
 
-    public UserRequestAvroModel userCreatedEventPayloadToUserCreateRequestAvroModel(String sagaId, com.backend.programming.learning.system.domain.valueobject.ServiceName serviceName, UserEventPayload userEventPayload) {
+    public UserRequestAvroModel userCreatedEventPayloadToUserCreateRequestAvroModel(String sagaId,
+                                                                                    com.backend.programming.learning.system.domain.valueobject.ServiceName serviceName,
+                                                                                    UserEventPayload userEventPayload) {
         return UserRequestAvroModel.newBuilder()
-                .setId(UUID.randomUUID().toString())
+                .setId(userEventPayload.getId())
                 .setSagaId(sagaId)
+                .setOrganizationId(userEventPayload.getOrganizationId())
+                .setUserName(userEventPayload.getUserName())
                 .setUserId(userEventPayload.getUserId())
                 .setEmail(userEventPayload.getEmail())
                 .setFirstName(userEventPayload.getFirstName())
@@ -82,12 +86,15 @@ public class UserMessagingDataMapper {
                 .build();
     }
 
-    public UserRequestAvroModel userUpdatedToUserUpdateRequestAvroModel(String sagaId, com.backend.programming.learning.system.domain.valueobject.ServiceName serviceName, UserEventPayload userEventPayload) {
+    public UserRequestAvroModel userUpdatedToUserUpdateRequestAvroModel(String sagaId, com.backend.programming.learning.system.domain.valueobject.ServiceName serviceName,
+                                                                        UserEventPayload userEventPayload) {
         return UserRequestAvroModel.newBuilder()
-                .setId(UUID.randomUUID().toString())
+                .setId(userEventPayload.getId())
                 .setSagaId(sagaId)
+                .setOrganizationId(userEventPayload.getOrganizationId())
                 .setUserId(userEventPayload.getUserId())
                 .setFirstName(userEventPayload.getFirstName())
+                .setUserName(userEventPayload.getUserName())
                 .setLastName(userEventPayload.getLastName())
                 .setAddress(userEventPayload.getAddress())
                 .setAvatarUrl(userEventPayload.getAvatarUrl())

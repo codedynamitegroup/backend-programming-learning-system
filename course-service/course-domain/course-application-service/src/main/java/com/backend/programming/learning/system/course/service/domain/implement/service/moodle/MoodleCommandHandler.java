@@ -75,8 +75,8 @@ public class MoodleCommandHandler {
         String MOODLE_URL = "http://localhost/moodle/webservice/rest/server.php";
     String MOODLE_URL_TOKEN = "http://62.171.185.208/login/token.php";
 //    String TOKEN = "cdf90b5bf53bcae577c60419702dbee7";
-//    String TOKEN = "c22b03ca9c0a3c8431cd6b57bd4c8b04";
-        String TOKEN = "60d437ef3f02dded9a7b097a8a81bf61";
+    String TOKEN = "c22b03ca9c0a3c8431cd6b57bd4c8b04";
+//        String TOKEN = "60d437ef3f02dded9a7b097a8a81bf61";
 
 
     @Transactional
