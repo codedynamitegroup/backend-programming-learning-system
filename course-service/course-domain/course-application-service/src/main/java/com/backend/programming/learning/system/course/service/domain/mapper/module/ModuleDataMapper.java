@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.course.service.domain.mapper.module;
 
-import com.backend.programming.learning.system.course.service.domain.dto.method.create.module.CreateModuleCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.module.ModuleModel;
 import com.backend.programming.learning.system.course.service.domain.entity.Section;
 import org.springframework.stereotype.Component;
