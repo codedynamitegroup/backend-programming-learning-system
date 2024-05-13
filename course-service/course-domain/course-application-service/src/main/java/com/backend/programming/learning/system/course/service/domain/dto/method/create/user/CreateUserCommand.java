@@ -14,6 +14,7 @@ public class CreateUserCommand {
     @Email
     private final String email;
     private Integer userIdMoodle;
+    private String username;
 
     @NotNull
     private final String password;

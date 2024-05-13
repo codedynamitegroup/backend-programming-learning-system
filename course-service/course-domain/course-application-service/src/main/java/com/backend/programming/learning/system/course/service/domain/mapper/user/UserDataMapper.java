@@ -9,7 +9,6 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.Organization;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
-import com.backend.programming.learning.system.course.service.domain.entity.WebhookMessage;
 import com.backend.programming.learning.system.course.service.domain.event.user.UserCreatedEvent;
 import com.backend.programming.learning.system.course.service.domain.event.user.UserEvent;
 import com.backend.programming.learning.system.course.service.domain.event.user.UserUpdatedEvent;
@@ -22,7 +21,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.time.ZoneId;
-import java.util.Objects;
 import java.util.UUID;
 
 @Component
@@ -40,6 +38,7 @@ public class UserDataMapper {
         return User.builder()
                 .id(new UserId(UUID.fromString(userRequest.getUserId())))
                 .email(userRequest.getEmail())
+                .username(userRequest.getUserName())
                 .firstName(userRequest.getFirstName())
                 .lastName(userRequest.getLastName())
                 .phone(userRequest.getPhone())
@@ -104,9 +103,11 @@ public class UserDataMapper {
                 .message(message)
                 .build();
     }
-    public User createUserCommandToUser(CreateUserCommand createUserCommand) {
+    public User createUserCommandToUser(CreateUserCommand createUserCommand, Organization organization) {
         return User.builder()
                 .email(createUserCommand.getEmail())
+                .organization(organization)
+                .username(createUserCommand.getUsername())
                 .userIdMoodle(createUserCommand.getUserIdMoodle())
                 .firstName(createUserCommand.getFirstName())
                 .lastName(createUserCommand.getLastName())
@@ -138,6 +139,8 @@ public class UserDataMapper {
         return UserEventPayload.builder()
                 .userId(user.getId().getValue().toString())
                 .email(user.getEmail())
+                .userName(user.getUserName())
+                .organizationId(user.getOrganization().getId().getValue().toString())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .phone(user.getPhone())
@@ -152,6 +155,9 @@ public class UserDataMapper {
         User user = userUpdatedEvent.getUser();
         return UserEventPayload.builder()
                 .userId(user.getId().getValue().toString())
+                .email(user.getEmail())
+                .userName(user.getUserName())
+                .organizationId(user.getOrganization().getId().getValue().toString())
                 .dob(user.getDob())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())

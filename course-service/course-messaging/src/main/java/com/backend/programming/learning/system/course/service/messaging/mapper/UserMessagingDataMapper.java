@@ -69,7 +69,7 @@ public class UserMessagingDataMapper {
                                                                                     com.backend.programming.learning.system.domain.valueobject.ServiceName serviceName,
                                                                                     UserEventPayload userEventPayload) {
         return UserRequestAvroModel.newBuilder()
-                .setId(userEventPayload.getId())
+                .setId(UUID.randomUUID().toString())
                 .setSagaId(sagaId)
                 .setOrganizationId(userEventPayload.getOrganizationId())
                 .setUserName(userEventPayload.getUserName())

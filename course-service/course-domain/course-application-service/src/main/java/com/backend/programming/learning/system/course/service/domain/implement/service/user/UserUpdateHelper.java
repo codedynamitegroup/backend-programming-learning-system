@@ -32,6 +32,9 @@ public class UserUpdateHelper {
         if (updateUserCommand.getUserIdMoodle() != null) {
             user.setUserIdMoodle(updateUserCommand.getUserIdMoodle());
         }
+        if (updateUserCommand.getUsername() != null) {
+            user.setUserName(updateUserCommand.getUsername());
+        }
         if (updateUserCommand.getDob() != null) {
             user.setDob(updateUserCommand.getDob());
         }

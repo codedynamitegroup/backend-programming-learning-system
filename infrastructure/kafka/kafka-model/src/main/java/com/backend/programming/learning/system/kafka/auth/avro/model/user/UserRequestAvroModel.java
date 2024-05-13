@@ -5,9 +5,7 @@
  */
 package com.backend.programming.learning.system.kafka.auth.avro.model.user;
 
-import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
-import org.apache.avro.util.Utf8;
 import org.apache.avro.message.BinaryMessageEncoder;
 import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
@@ -78,7 +76,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
 
   private java.lang.String id;
   private java.lang.String organizationId;
-  private java.lang.String userName;
+  private java.lang.String username;
   private java.lang.String sagaId;
   private java.lang.String userId;
   private java.lang.String email;
@@ -105,7 +103,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
    * All-args constructor.
    * @param id The new value for id
    * @param organizationId The new value for organizationId
-   * @param userName The new value for userName
+   * @param username The new value for userName
    * @param sagaId The new value for sagaId
    * @param userId The new value for userId
    * @param email The new value for email
@@ -121,10 +119,10 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
    * @param updatedAt The new value for updatedAt
    * @param isDeleted The new value for isDeleted
    */
-  public UserRequestAvroModel(java.lang.String id, java.lang.String organizationId, java.lang.String userName, java.lang.String sagaId, java.lang.String userId, java.lang.String email, java.lang.String firstName, java.lang.String lastName, java.lang.String phone, java.lang.String address, java.lang.String avatarUrl, java.time.Instant dob, com.backend.programming.learning.system.kafka.auth.avro.model.user.ServiceName serviceName, com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState copyState, java.time.Instant createdAt, java.time.Instant updatedAt, java.lang.Boolean isDeleted) {
+  public UserRequestAvroModel(java.lang.String id, java.lang.String organizationId, java.lang.String username, java.lang.String sagaId, java.lang.String userId, java.lang.String email, java.lang.String firstName, java.lang.String lastName, java.lang.String phone, java.lang.String address, java.lang.String avatarUrl, java.time.Instant dob, com.backend.programming.learning.system.kafka.auth.avro.model.user.ServiceName serviceName, com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState copyState, java.time.Instant createdAt, java.time.Instant updatedAt, java.lang.Boolean isDeleted) {
     this.id = id;
     this.organizationId = organizationId;
-    this.userName = userName;
+    this.username = username;
     this.sagaId = sagaId;
     this.userId = userId;
     this.email = email;
@@ -153,7 +151,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
     switch (field$) {
     case 0: return id;
     case 1: return organizationId;
-    case 2: return userName;
+    case 2: return username;
     case 3: return sagaId;
     case 4: return userId;
     case 5: return email;
@@ -206,7 +204,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
     switch (field$) {
     case 0: id = value$ != null ? value$.toString() : null; break;
     case 1: organizationId = value$ != null ? value$.toString() : null; break;
-    case 2: userName = value$ != null ? value$.toString() : null; break;
+    case 2: username = value$ != null ? value$.toString() : null; break;
     case 3: sagaId = value$ != null ? value$.toString() : null; break;
     case 4: userId = value$ != null ? value$.toString() : null; break;
     case 5: email = value$ != null ? value$.toString() : null; break;
@@ -263,8 +261,8 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
    * Gets the value of the 'userName' field.
    * @return The value of the 'userName' field.
    */
-  public java.lang.String getUserName() {
-    return userName;
+  public java.lang.String getUsername() {
+    return username;
   }
 
 
@@ -272,8 +270,8 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
    * Sets the value of the 'userName' field.
    * @param value the value to set.
    */
-  public void setUserName(java.lang.String value) {
-    this.userName = value;
+  public void setUsername(java.lang.String value) {
+    this.username = value;
   }
 
   /**
@@ -668,8 +666,8 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
         this.organizationId = data().deepCopy(fields()[1].schema(), other.organizationId);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.userName)) {
-        this.userName = data().deepCopy(fields()[2].schema(), other.userName);
+      if (isValidValue(fields()[2], other.username)) {
+        this.userName = data().deepCopy(fields()[2].schema(), other.username);
         fieldSetFlags()[2] = true;
       }
       if (isValidValue(fields()[3], other.sagaId)) {
@@ -1414,7 +1412,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
         UserRequestAvroModel record = new UserRequestAvroModel();
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.String) defaultValue(fields()[0]);
         record.organizationId = fieldSetFlags()[1] ? this.organizationId : (java.lang.String) defaultValue(fields()[1]);
-        record.userName = fieldSetFlags()[2] ? this.userName : (java.lang.String) defaultValue(fields()[2]);
+        record.username = fieldSetFlags()[2] ? this.userName : (java.lang.String) defaultValue(fields()[2]);
         record.sagaId = fieldSetFlags()[3] ? this.sagaId : (java.lang.String) defaultValue(fields()[3]);
         record.userId = fieldSetFlags()[4] ? this.userId : (java.lang.String) defaultValue(fields()[4]);
         record.email = fieldSetFlags()[5] ? this.email : (java.lang.String) defaultValue(fields()[5]);
