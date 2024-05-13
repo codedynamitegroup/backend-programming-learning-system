@@ -25,20 +25,17 @@ public class ContestUserCommandHandler {
     private final ContestUserDataMapper contestUserDataMapper;
     private final ContestUserUpdateOutboxHelper contestUserUpdateOutboxHelper;
     private final ContestUserSagaHelper contestUserSagaHelper;
-    private final ObjectMapper objectMapper;
 
     public ContestUserCommandHandler(ContestUserCreateHelper contestUserCreateHelper,
                                      ContestUserQueryHelper contestUserQueryHelper,
                                      ContestUserDataMapper contestUserDataMapper,
                                      ContestUserUpdateOutboxHelper contestUserUpdateOutboxHelper,
-                                     ContestUserSagaHelper contestUserSagaHelper,
-                                     ObjectMapper objectMapper) {
+                                     ContestUserSagaHelper contestUserSagaHelper) {
         this.contestUserCreateHelper = contestUserCreateHelper;
         this.contestUserQueryHelper = contestUserQueryHelper;
         this.contestUserDataMapper = contestUserDataMapper;
         this.contestUserUpdateOutboxHelper = contestUserUpdateOutboxHelper;
         this.contestUserSagaHelper = contestUserSagaHelper;
-        this.objectMapper = objectMapper;
     }
 
     @Transactional

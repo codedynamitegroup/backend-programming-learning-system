@@ -1,30 +1,14 @@
 package com.backend.programming.learning.system.core.service.dataaccess.topic.mapper;
 
-import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.repository.CertificateCourseJpaRepository;
-import com.backend.programming.learning.system.core.service.dataaccess.programminglanguage.entity.ProgrammingLanguageEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.programminglanguage.mapper.ProgrammingLanguageDataAccessMapper;
-import com.backend.programming.learning.system.core.service.dataaccess.review.entity.ReviewEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.topic.entity.TopicEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.topic_programminglanguage.entity.TopicProgrammingLanguageEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
-import com.backend.programming.learning.system.core.service.dataaccess.user.repository.UserJpaRepository;
-import com.backend.programming.learning.system.core.service.domain.entity.ProgrammingLanguage;
-import com.backend.programming.learning.system.core.service.domain.entity.Review;
 import com.backend.programming.learning.system.core.service.domain.entity.Topic;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
-import com.backend.programming.learning.system.core.service.domain.exception.CertificateCourseNotFoundException;
-import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.ReviewId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
-import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class TopicDataAccessMapper {
@@ -42,6 +26,7 @@ public class TopicDataAccessMapper {
                 .id(topic.getId().getValue())
                 .name(topic.getName())
                 .description(topic.getDescription())
+                .thumbnailUrl(topic.getThumbnailUrl())
                 .createdBy(createdBy)
                 .updatedBy(updatedBy)
                 .createdAt(topic.getCreatedAt())
@@ -57,6 +42,7 @@ public class TopicDataAccessMapper {
                 .id(new TopicId(topicEntity.getId()))
                 .name(topicEntity.getName())
                 .description(topicEntity.getDescription())
+                .thumbnailUrl(topicEntity.getThumbnailUrl())
                 .programmingLanguages(new ArrayList<>())
                 .createdBy(createdBy)
                 .updatedBy(updatedBy)

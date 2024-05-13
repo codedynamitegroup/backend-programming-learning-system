@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.core.service.domain.entity.Contes
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -15,4 +16,5 @@ public interface ContestRepository {
     Page<Contest> findAll(String searchName, String startTimeFilter, Integer page, Integer size);
 
     void deleteContestById(UUID contestId);
+    List<Contest> findMostPopularContests();
 }

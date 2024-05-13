@@ -58,9 +58,7 @@ public class TopicCreateHelper {
                             .topic(topicResult)
                             .programmingLanguage(programmingLanguage)
                             .build();
-            TopicProgrammingLanguage topicProgrammingLanguageResult =
-                    saveTopicProgrammingLanguage(topicProgrammingLanguage);
-            topicResult.addProgrammingLanguage(topicProgrammingLanguageResult.getProgrammingLanguage());
+            saveTopicProgrammingLanguage(topicProgrammingLanguage);
         }
 
         log.info("Topic created with id: {}", topicResult.getId().getValue());

@@ -44,15 +44,9 @@ public class CertificateCourseQueryHelper {
             throw new CertificateCourseNotFoundException("Could not find certificate course with id: " +
                     certificateCourseId);
         }
-        User createdBy = getUser(certificateCourseResult.get().getCreatedBy().getId().getValue());
-        User updatedBy = getUser(certificateCourseResult.get().getUpdatedBy().getId().getValue());
-
         CertificateCourse certificateCourse = certificateCourseResult.get();
-        certificateCourse.setCreatedBy(createdBy);
-        certificateCourse.setUpdatedBy(updatedBy);
-
-        log.info("Certificate course queried with id: {}", certificateCourseResult.get().getId().getValue());
-        return certificateCourseResult.get();
+        log.info("Certificate course queried with id: {}", certificateCourse.getId().getValue());
+        return certificateCourse;
     }
 
     @Transactional(readOnly = true)

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -24,37 +25,57 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
     Optional<ContestEntity> findById(UUID id);
 
     @Query("select c from ContestEntity c where c.startTime >= ?1")
-    Page<ContestEntity> findAllUpcomingContests(ZonedDateTime startTime, Pageable pageable);
+    Page<ContestEntity> findAllUpcomingContests(ZonedDateTime now, Pageable pageable);
 
     @Query("""
     select c from ContestEntity c
     where (LENGTH(?1) = 0 OR upper(c.name) like upper(concat('%', ?1, '%')))
     and c.startTime >= ?2
+    order by c.startTime desc
 """)
-    Page<ContestEntity> findAllUpcomingContestsContainsSearchName(String name, ZonedDateTime startTime, Pageable pageable);
+    Page<ContestEntity> findAllUpcomingContestsContainsSearchName(String name, ZonedDateTime now, Pageable pageable);
 
     @Query("""
             select c from ContestEntity c
-            where c.startTime <= ?1 and (c.endTime is null or (c.endTime is not null and c.endTime >= ?2))""")
-    Page<ContestEntity> findAllHappeningContests(ZonedDateTime startTime, ZonedDateTime endTime, Pageable pageable);
-
-    @Query("""
-            select c from ContestEntity c
-            where c.startTime <= ?1 and (c.endTime is null or (c.endTime is not null and c.endTime >= ?2))
-            and (LENGTH(?3) = 0 OR upper(c.name) like upper(concat('%', ?3, '%')))
+            where c.startTime <= ?1 and (c.endTime is null or (c.endTime is not null and c.endTime >= ?1))
+            order by c.startTime desc
             """)
-    Page<ContestEntity> findAllHappeningContestsContainsSearchName(ZonedDateTime startTime, ZonedDateTime endTime, String name, Pageable pageable);
+    Page<ContestEntity> findAllHappeningContests(ZonedDateTime now, Pageable pageable);
+
+    @Query("""
+            select c from ContestEntity c
+            where c.startTime <= ?1 and (c.endTime is null or (c.endTime is not null and c.endTime >= ?1))
+            and (LENGTH(?2) = 0 OR upper(c.name) like upper(concat('%', ?2, '%')))
+            order by c.startTime desc
+            """)
+    Page<ContestEntity> findAllHappeningContestsContainsSearchName(ZonedDateTime now, String name, Pageable pageable);
 
     @Query("select c from ContestEntity c where c.endTime is not null and c.endTime < ?1")
-    Page<ContestEntity> findAllEndedContests(ZonedDateTime startTime, Pageable pageable);
+    Page<ContestEntity> findAllEndedContests(ZonedDateTime now, Pageable pageable);
 
     @Query("""
             select c from ContestEntity c
             where c.endTime is not null and c.endTime < ?1
             and (LENGTH(?2) = 0 OR upper(c.name) like upper(concat('%', ?2, '%')))
+            order by c.startTime desc
             """)
-    Page<ContestEntity> findAllEndedContestsContainsSearchName(ZonedDateTime startTime, String name, Pageable pageable);
+    Page<ContestEntity> findAllEndedContestsContainsSearchName(ZonedDateTime now, String name, Pageable pageable);
 
-    @Query("select c from ContestEntity c where (LENGTH(?1) = 0 OR upper(c.name) like upper(concat('%', ?1, '%')))")
+    @Query("""
+    select c from ContestEntity c
+    where (LENGTH(?1) = 0 OR upper(c.name) like upper(concat('%', ?1, '%')))
+    order by c.startTime desc
+""")
     Page<ContestEntity> findAllContainsSearchName(String name, Pageable pageable);
+
+    @Query("""
+    select c
+    from ContestEntity c
+    left join ContestUserEntity cu on c.id = cu.contest.id
+    where (c.startTime > ?1 OR (c.startTime <= ?1 and (c.endTime is null or (c.endTime is not null and c.endTime >= ?1))))
+    group by c.id
+    order by count(cu.user.id) desc, c.startTime desc
+    limit 10
+""")
+    List<ContestEntity> findMostPopularContests(ZonedDateTime now);
 }

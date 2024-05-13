@@ -15,64 +15,34 @@ import java.util.UUID;
 public class Topic extends AggregateRoot<TopicId> {
     private String name;
     private String description;
+    private String thumbnailUrl;
     private List<ProgrammingLanguage> programmingLanguages;
     private User createdBy;
     private User updatedBy;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
-    public void addProgrammingLanguage(ProgrammingLanguage programmingLanguage) {
-        programmingLanguages.add(programmingLanguage);
-    }
-
     private Topic(Builder builder) {
         super.setId(builder.topicId);
-        name = builder.name;
-        description = builder.description;
-        programmingLanguages = builder.programmingLanguages;
-        createdBy = builder.createdBy;
-        updatedBy = builder.updatedBy;
-        createdAt = builder.createdAt;
-        updatedAt = builder.updatedAt;
+        setName(builder.name);
+        setDescription(builder.description);
+        setThumbnailUrl(builder.thumbnailUrl);
+        setProgrammingLanguages(builder.programmingLanguages);
+        setCreatedBy(builder.createdBy);
+        setUpdatedBy(builder.updatedBy);
+        setCreatedAt(builder.createdAt);
+        setUpdatedAt(builder.updatedAt);
     }
 
     public static Builder builder() {
         return new Builder();
     }
 
+
     public void initializeTopic() {
         setId(new TopicId(UUID.randomUUID()));
         createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
         updatedAt = ZonedDateTime.now(ZoneId.of("UTC"));
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public List<ProgrammingLanguage> getProgrammingLanguages() {
-        return programmingLanguages;
-    }
-
-    public User getCreatedBy() {
-        return createdBy;
-    }
-
-    public User getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public ZonedDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public ZonedDateTime getUpdatedAt() {
-        return updatedAt;
     }
 
     public void setName(String name) {
@@ -81,6 +51,10 @@ public class Topic extends AggregateRoot<TopicId> {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 
     public void setProgrammingLanguages(List<ProgrammingLanguage> programmingLanguages) {
@@ -103,10 +77,43 @@ public class Topic extends AggregateRoot<TopicId> {
         this.updatedAt = updatedAt;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+
+    public List<ProgrammingLanguage> getProgrammingLanguages() {
+        return programmingLanguages;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public User getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public ZonedDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public ZonedDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
     public static final class Builder {
         private TopicId topicId;
         private String name;
         private String description;
+        private String thumbnailUrl;
         private List<ProgrammingLanguage> programmingLanguages;
         private User createdBy;
         private User updatedBy;
@@ -128,6 +135,11 @@ public class Topic extends AggregateRoot<TopicId> {
 
         public Builder description(String val) {
             description = val;
+            return this;
+        }
+
+        public Builder thumbnailUrl(String val) {
+            thumbnailUrl = val;
             return this;
         }
 

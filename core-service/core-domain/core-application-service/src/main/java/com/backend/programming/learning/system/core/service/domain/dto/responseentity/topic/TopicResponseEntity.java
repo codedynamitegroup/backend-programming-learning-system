@@ -26,6 +26,8 @@ public class TopicResponseEntity {
     @NotNull
     private final String description;
     @NotNull
+    private final String thumbnailUrl;
+    @NotNull
     private final List<ProgrammingLanguageResponseEntity> programmingLanguages;
     @NotNull
     private final UserResponseEntity createdBy;

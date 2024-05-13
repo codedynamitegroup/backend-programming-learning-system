@@ -15,8 +15,10 @@ import java.util.UUID;
 public class CreateTopicCommand {
     @NotNull(message = "name is required")
     private final String name;
-    @NotNull(message = "skillLevel is required")
+    @NotNull(message = "description is required")
     private final String description;
+    @NotNull(message = "thumbnailUrl is required")
+    private final String thumbnailUrl;
     @NotNull(message = "programmingLanguageIds is required")
     private final List<UUID> programmingLanguageIds;
     @NotNull(message = "createdBy is required")

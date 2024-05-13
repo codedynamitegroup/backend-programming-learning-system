@@ -1,12 +1,15 @@
 package com.backend.programming.learning.system.core.service.dataaccess.topic.entity;
 
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.programminglanguage.entity.ProgrammingLanguageEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.topic_programminglanguage.entity.TopicProgrammingLanguageEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.core.service.domain.entity.ProgrammingLanguage;
 import jakarta.persistence.*;
 
 import com.backend.programming.learning.system.core.service.domain.entity.TopicProgrammingLanguage;
 import lombok.*;
+import org.hibernate.annotations.Formula;
 
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -26,6 +29,7 @@ public class TopicEntity {
     private UUID id;
     private String name;
     private String description;
+    private String thumbnailUrl;
 
     @ManyToOne
     @JoinColumn(name = "created_by", referencedColumnName = "id")
@@ -34,12 +38,6 @@ public class TopicEntity {
     @ManyToOne
     @JoinColumn(name = "updated_by", referencedColumnName = "id")
     private UserEntity updatedBy;
-
-//    @OneToMany(mappedBy = "topic", cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
-//    private List<CertificateCourseEntity> certificateCourses;
-
-//    @OneToMany(mappedBy = "topic", cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
-//    private List<TopicProgrammingLanguageEntity> topicProgrammingLanguages;
 
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
