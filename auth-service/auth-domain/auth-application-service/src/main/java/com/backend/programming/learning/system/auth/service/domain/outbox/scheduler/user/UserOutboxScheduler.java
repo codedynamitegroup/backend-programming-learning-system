@@ -39,31 +39,4 @@ public class UserOutboxScheduler implements OutboxScheduler {
             log.info("{} UserOutboxMessage sent to message bus!", outboxMessages.size());
         }
     }
-//
-//    @Override
-//    @Transactional
-//    @Scheduled(fixedDelayString = "${auth-service.outbox-scheduler-fixed-rate}",
-//        initialDelayString = "${auth-service.outbox-scheduler-initial-delay}")
-//    public void processOutboxMessage() {
-//        Optional<List<UserOutboxMessage>> outboxMessagesResponse =
-//                userOutboxHelper.getUserOutboxMessageByOutboxStatusAndSagaStatus(
-//                        OutboxStatus.STARTED,
-//                        SagaStatus.STARTED, SagaStatus.COMPENSATING);
-//        if (outboxMessagesResponse.isPresent() && outboxMessagesResponse.get().size() > 0) {
-//            List<UserOutboxMessage> outboxMessages = outboxMessagesResponse.get();
-//            log.info("Received {} UserOutboxMessage with ids: {}, sending to message bus!",
-//                    outboxMessages.size(),
-//                    outboxMessages.stream().map(outboxMessage ->
-//                            outboxMessage.getId().toString()).collect(Collectors.joining(",")));
-//            outboxMessages.forEach(outboxMessage ->
-//                    userResponseMessagePublisher.publish(outboxMessage, this::updateOutboxStatus));
-//            log.info("{} UserOutboxMessage sent to message bus!", outboxMessages.size());
-//        }
-//    }
-
-    private void updateOutboxStatus(UserOutboxMessage userOutboxMessage, OutboxStatus outboxStatus) {
-        userOutboxMessage.setOutboxStatus(outboxStatus);
-        userOutboxHelper.save(userOutboxMessage);
-        log.info("UserOutboxMessage is updated with outbox status: {}", outboxStatus.name());
-    }
 }

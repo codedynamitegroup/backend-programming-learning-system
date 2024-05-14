@@ -16,6 +16,7 @@ public class UserRequest {
     private String sagaId;
     private String userId;
     private String email;
+    private String userName;
     private String firstName;
     private String lastName;
     private String phone;

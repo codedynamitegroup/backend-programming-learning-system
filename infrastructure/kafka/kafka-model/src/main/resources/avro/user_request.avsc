@@ -13,7 +13,7 @@
         "default": null
     },
     {
-      "name": "userName",
+      "name": "username",
       "type": ["null", "string"],
       "default": null
     },
