@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -49,10 +51,11 @@ public class TopicCreateHelper {
                 createTopicCommandToTopic(createTopicCommand);
         coreDomainService.createTopic(topic);
 
+        List<ProgrammingLanguage> programmingLanguages = new ArrayList<>();
         for (UUID programmingLanguageId : createTopicCommand.getProgrammingLanguageIds()) {
-            ProgrammingLanguage programmingLanguage = getProgrammingLanguage(programmingLanguageId);
-            topic.addProgrammingLanguage(programmingLanguage);
+            programmingLanguages.add(getProgrammingLanguage(programmingLanguageId));
         }
+        topic.setProgrammingLanguages(programmingLanguages);
 
         Topic topicResult = saveTopic(topic);
         log.info("Topic created with id: {}", topicResult.getId().getValue());

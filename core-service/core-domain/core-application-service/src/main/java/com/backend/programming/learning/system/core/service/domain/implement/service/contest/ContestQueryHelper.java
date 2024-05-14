@@ -4,10 +4,7 @@ import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.exception.CertificateCourseNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.ContestNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseRepository;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ContestQuestionRepository;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ContestRepository;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.UserRepository;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestStartTimeFilter;
@@ -25,11 +22,14 @@ import java.util.UUID;
 public class ContestQueryHelper {
     private final ContestRepository contestRepository;
     private final ContestQuestionRepository contestQuestionRepository;
+    private final ContestUserRepository contestUserRepository;
 
     public ContestQueryHelper(ContestRepository contestRepository,
-                              ContestQuestionRepository contestQuestionRepository) {
+                              ContestQuestionRepository contestQuestionRepository,
+                              ContestUserRepository contestUserRepository) {
         this.contestRepository = contestRepository;
         this.contestQuestionRepository = contestQuestionRepository;
+        this.contestUserRepository = contestUserRepository;
     }
 
     @Transactional(readOnly = true)
@@ -65,10 +65,17 @@ public class ContestQueryHelper {
     }
 
     @Transactional(readOnly = true)
-    public List<Contest> findMostPopularContests() {
+    public Page<Contest> findMostPopularContests() {
         log.info("Querying most popular upcoming contests");
         return contestRepository.findMostPopularContests();
     }
+
+    @Transactional(readOnly = true)
+    public int countAllParticipants() {
+        log.info("Counting all participants");
+        return contestUserRepository.countAllParticipants();
+    }
+
 
     private List<ContestQuestion> getAllContestQuestionsForContest(UUID contestId) {
         List<ContestQuestion> contestQuestion = contestQuestionRepository

@@ -14,4 +14,8 @@ import java.util.List;
 public class QueryMostPopularContestsResponse {
     @NotNull
     private final List<ContestResponseEntity> mostPopularContests;
+    @NotNull
+    private final long totalItems;
+    @NotNull
+    private final int numOfParticipants;
 }
