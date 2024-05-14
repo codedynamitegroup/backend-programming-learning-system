@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.core.service.domain.mapper.quest
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQtypeMultichoiceQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryQtypeMultichoiceQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeMultichoiceQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QtypeMultichoiceQuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeMultiChoiceQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.domain.valueobject.QtypeMultiChoiceQuestionId;
@@ -35,7 +36,7 @@ public class QtypeMultichoiceQuestionDataMapper {
 
     public QueryQtypeMultichoiceQuestionResponse qtypeMultichoiceQuestionToQueryQtypeMultichoiceQuestionResponse(QtypeMultiChoiceQuestion qtypeMultichoiceQuestion) {
         return QueryQtypeMultichoiceQuestionResponse.builder()
-                .qtypeMultichoiceQuestion(qtypeMultichoiceQuestion)
+                .qtypeMultichoiceQuestion(qtypeMultichoiceQuestionToQtypeMultichoiceQuestionResponseEntity(qtypeMultichoiceQuestion))
                 .build();
     }
 
@@ -66,6 +67,21 @@ public class QtypeMultichoiceQuestionDataMapper {
                                 qtypeMultiChoiceQuestion.getQuestion().getCreatedBy(),
                                 qtypeMultiChoiceQuestion.getQuestion().getqtype(),
                                 qtypeMultiChoiceQuestion.getQuestion().getAnswers()))
+                .build();
+    }
+
+    private QtypeMultichoiceQuestionResponseEntity qtypeMultichoiceQuestionToQtypeMultichoiceQuestionResponseEntity(QtypeMultiChoiceQuestion qtypeMultiChoiceQuestion) {
+        return QtypeMultichoiceQuestionResponseEntity.builder()
+                .question(questionDataMapper.questionToQuestionResponseEntity(qtypeMultiChoiceQuestion.getQuestion()))
+                .id(qtypeMultiChoiceQuestion.getId().getValue().toString())
+                .single(qtypeMultiChoiceQuestion.getSingle())
+                .shuffleAnswers(qtypeMultiChoiceQuestion.getShuffleAnswers())
+                .correctFeedback(qtypeMultiChoiceQuestion.getCorrectFeedback())
+                .partiallyCorrectFeedback(qtypeMultiChoiceQuestion.getPartiallyCorrectFeedback())
+                .incorrectFeedback(qtypeMultiChoiceQuestion.getIncorrectFeedback())
+                .answerNumbering(qtypeMultiChoiceQuestion.getAnswerNumbering())
+                .showNumCorrect(qtypeMultiChoiceQuestion.getShowNumCorrect())
+                .showStandardInstructions(qtypeMultiChoiceQuestion.getShowStandardInstructions())
                 .build();
     }
 }

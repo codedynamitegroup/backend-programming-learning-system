@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.dto.method.query.question;
 
 
-import com.backend.programming.learning.system.core.service.domain.entity.QtypeEssayQuestion;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QtypeEssayQuestionResponseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,5 +10,5 @@ import lombok.Getter;
 @Builder
 @AllArgsConstructor
 public class QueryQtypeEssayQuestionResponse {
-    private final QtypeEssayQuestion qtypeEssayQuestion;
+    private final QtypeEssayQuestionResponseEntity qtypeEssayQuestion;
 }
