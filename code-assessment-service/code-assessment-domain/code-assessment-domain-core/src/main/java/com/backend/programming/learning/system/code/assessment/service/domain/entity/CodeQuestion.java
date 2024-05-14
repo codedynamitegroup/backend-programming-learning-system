@@ -2,10 +2,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.e
 
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
-import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
-import com.backend.programming.learning.system.domain.valueobject.CopyState;
-import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
-import com.backend.programming.learning.system.domain.valueobject.QuestionId;
+import com.backend.programming.learning.system.domain.valueobject.*;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -15,6 +12,7 @@ import java.util.UUID;
 public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     private final QuestionId questionId;
     private String name;
+    private UserId userId;
     private final String dslTemplate;
     private String problemStatement;
     private String inputFormat;
@@ -27,6 +25,13 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     private ZonedDateTime createdAt;
     private Boolean solved;
     private List<String> failureMessages;
+    private List<ProgrammingLanguage> programmingLanguages;
+    private ProgrammingLanguageId sourceCodeLanguageId;
+    private String sourceCode;
+    private List<TestCase> tcs;
+
+
+
     public static final String FAILURE_MESSAGE_DELIMITER = ",";
 
     public static Builder builder() {
@@ -79,6 +84,14 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         return isPublic;
     }
 
+    public String getSourceCode() {
+        return sourceCode;
+    }
+
+    public List<TestCase> getTcs() {
+        return tcs;
+    }
+
     public QuestionDifficulty getDifficulty() {
         return difficulty;
     }
@@ -89,6 +102,14 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
 
     public String getProblemStatement() {
         return problemStatement;
+    }
+
+    public List<ProgrammingLanguage> getProgrammingLanguages() {
+        return programmingLanguages;
+    }
+
+    public ProgrammingLanguageId getSourceCodeLanguageId() {
+        return sourceCodeLanguageId;
     }
 
     public String getInputFormat() {
@@ -115,6 +136,10 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         return isPublic;
     }
 
+    public UserId getUserId() {
+        return userId;
+    }
+
     public List<String> getFailureMessages() {
         return failureMessages;
     }
@@ -127,6 +152,7 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         super.setId(builder.id);
         questionId = builder.questionId;
         name = builder.name;
+        userId = builder.userId;
         dslTemplate = builder.dslTemplate;
         problemStatement = builder.problemStatement;
         inputFormat = builder.inputFormat;
@@ -138,6 +164,14 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         difficulty = builder.difficulty;
         createdAt = builder.createdAt;
         solved = builder.solved;
+        failureMessages = builder.failureMessages;
+    }
+
+    public void getDetail(List<TestCase> sampleTestCase, CodeSubmission codeSubmission, List<ProgrammingLanguage> languages) {
+        tcs = sampleTestCase == null || sampleTestCase.isEmpty()? null: sampleTestCase;
+        sourceCode = codeSubmission != null? codeSubmission.getSourceCode(): null;
+        sourceCodeLanguageId = codeSubmission != null? codeSubmission.getLanguageId() : null;
+        this.programmingLanguages = languages;
     }
 
     public enum Fields { name, difficulty, createdAt}
@@ -145,6 +179,7 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     public static final class Builder {
         private QuestionId questionId;
         private String name;
+        private UserId userId;
         private String dslTemplate;
         private String problemStatement;
         private String inputFormat;
@@ -169,6 +204,11 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
 
         public Builder name(String val) {
             name = val;
+            return this;
+        }
+
+        public Builder userId(UserId val) {
+            userId = val;
             return this;
         }
 
@@ -240,5 +280,6 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         public CodeQuestion build() {
             return new CodeQuestion(this);
         }
+
     }
 }

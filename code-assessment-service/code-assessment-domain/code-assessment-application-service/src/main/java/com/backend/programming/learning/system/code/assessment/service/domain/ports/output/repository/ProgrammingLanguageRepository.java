@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.ProgrammingLanguage;
+import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface ProgrammingLanguageRepository {
     List<ProgrammingLanguage> findAll();
 
     void deleteById(ProgrammingLanguageId id);
+
+    List<ProgrammingLanguage> findByCodeQuestionId(CodeQuestionId id);
 }

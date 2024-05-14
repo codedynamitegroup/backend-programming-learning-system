@@ -98,4 +98,5 @@ public interface CodeSubmissionJpaRepository extends JpaRepository<CodeSubmissio
 
     Optional<CodeSubmissionEntity> findByUserIdAndCodeQuestionIdAndGrade(UUID value, UUID id, Double grade);
 
+    Optional<CodeSubmissionEntity> findByCodeQuestionIdAndUserId(UUID codeQuestionId, UUID userId);
 }

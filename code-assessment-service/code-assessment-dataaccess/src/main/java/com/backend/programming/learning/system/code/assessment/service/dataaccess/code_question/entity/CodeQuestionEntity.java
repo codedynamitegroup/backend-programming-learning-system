@@ -24,6 +24,7 @@ public class CodeQuestionEntity {
     @Id
     private UUID id;
     private UUID questionId;
+    private UUID userId;
 
     private String name;
     private String dslTemplate;

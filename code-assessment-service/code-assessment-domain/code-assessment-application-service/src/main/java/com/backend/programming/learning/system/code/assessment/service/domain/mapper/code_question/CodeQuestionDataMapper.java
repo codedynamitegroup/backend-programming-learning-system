@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_question.UpdateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionsUpdatedEvent;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.code_questions_update_outbox.CodeQuestionsUpdatePayload;
@@ -13,6 +14,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.va
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
+import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +30,7 @@ public class CodeQuestionDataMapper {
         return CodeQuestion.builder()
                 .questionId(new QuestionId(command.getQuestionId()))
                 .name(command.getName())
+                .userId(new UserId(command.getUserId()))
                 .dslTemplate(command.getDslTemplate())
                 .problemStatement(command.getProblemStatement())
                 .inputFormat(command.getInputFormat())
@@ -70,7 +73,21 @@ public class CodeQuestionDataMapper {
                 .currentPage(codeQuestions.getNumber())
                 .totalItems(codeQuestions.getTotalElements())
                 .totalPages(codeQuestions.getTotalPages())
-                .codeQuestions(codeQuestions.stream().map(dtoMapper::codeQuestionToDto).toList())
+                .codeQuestions(codeQuestions.stream().map(dtoMapper::codeQuestionToDtoIgnoreProblemStatement).toList())
+                .build();
+    }
+
+    public CodeQuestion updateCodeQuestionCommandToCodeQuestion(UpdateCodeQuestionCommand command) {
+        return CodeQuestion.builder()
+                .userId(new UserId(command.getUserId()))
+                .name(command.getName())
+                .problemStatement(command.getProblemStatement())
+                .inputFormat(command.getInputFormat())
+                .outputFormat(command.getOutputFormat())
+                .constraints(command.getConstraints())
+                .maxGrade(command.getMaxGrade())
+                .difficulty(command.getDifficulty())
+                .isPublic(command.getIsPublic())
                 .build();
     }
 }

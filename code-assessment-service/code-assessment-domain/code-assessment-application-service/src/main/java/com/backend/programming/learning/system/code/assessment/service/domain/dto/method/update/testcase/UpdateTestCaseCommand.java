@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.testcase;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.validator.OneNotNull.OneNotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,6 +12,10 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
+@OneNotNull(
+        fields = {"inputData", "outputData", "isSample", "score"},
+        message = "inputData, outputData, isSample or score must not be null"
+)
 public class UpdateTestCaseCommand {
     private final String inputData;
 

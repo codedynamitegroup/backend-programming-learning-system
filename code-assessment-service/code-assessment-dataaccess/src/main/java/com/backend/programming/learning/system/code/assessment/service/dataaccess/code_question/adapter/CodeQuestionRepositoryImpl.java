@@ -8,16 +8,16 @@ import com.backend.programming.learning.system.code.assessment.service.dataacces
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.entity.CodeSubmissionEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.repository.CodeSubmissionJpaRepository;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.general_mapper.GeneralMapper;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language_code_question.mapper.ProgrammingLanguageCodeQuestionDataAccessMapper;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language_code_question.repository.ProgrammingLanguageCodeQuestionJpaRepository;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.tag.entity.TagEntity;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.ProgrammingLanguageCodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_question.CodeQuestionRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.code_question_tag.CodeQuestionTagId;
-import com.backend.programming.learning.system.domain.valueobject.BaseId;
-import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
-import com.backend.programming.learning.system.domain.valueobject.QueryOrderBy;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
+import com.backend.programming.learning.system.domain.valueobject.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -38,14 +38,18 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
     private final CodeQuestionTagDataAccessMapper codeQuestionTagDataAccessMapper;
     private final GeneralMapper generalMapper;
     private final CodeSubmissionJpaRepository codeSubmissionJpaRepository;
+    private final ProgrammingLanguageCodeQuestionJpaRepository programmingLanguageCodeQuestionJpaRepository;
+    private final ProgrammingLanguageCodeQuestionDataAccessMapper programmingLanguageCodeQuestionDataAccessMapper;
 
-    public CodeQuestionRepositoryImpl(CodeQuestionJpaRepository codeQuestionJpaRepository, CodeQuestionDataAccessMapper codeQuestionDataAccessMapper, CodeQuestionTagJpaRepository codeQuestionTagJpaRepository, CodeQuestionTagDataAccessMapper codeQuestionTagDataAccessMapper, GeneralMapper generalMapper, CodeSubmissionJpaRepository codeSubmissionJpaRepository) {
+    public CodeQuestionRepositoryImpl(CodeQuestionJpaRepository codeQuestionJpaRepository, CodeQuestionDataAccessMapper codeQuestionDataAccessMapper, CodeQuestionTagJpaRepository codeQuestionTagJpaRepository, CodeQuestionTagDataAccessMapper codeQuestionTagDataAccessMapper, GeneralMapper generalMapper, CodeSubmissionJpaRepository codeSubmissionJpaRepository, ProgrammingLanguageCodeQuestionJpaRepository programmingLanguageCodeQuestionJpaRepository, ProgrammingLanguageCodeQuestionDataAccessMapper programmingLanguageCodeQuestionDataAccessMapper) {
         this.codeQuestionJpaRepository = codeQuestionJpaRepository;
         this.codeQuestionDataAccessMapper = codeQuestionDataAccessMapper;
         this.codeQuestionTagJpaRepository = codeQuestionTagJpaRepository;
         this.codeQuestionTagDataAccessMapper = codeQuestionTagDataAccessMapper;
         this.generalMapper = generalMapper;
         this.codeSubmissionJpaRepository = codeSubmissionJpaRepository;
+        this.programmingLanguageCodeQuestionJpaRepository = programmingLanguageCodeQuestionJpaRepository;
+        this.programmingLanguageCodeQuestionDataAccessMapper = programmingLanguageCodeQuestionDataAccessMapper;
     }
 
     @Override
@@ -117,5 +121,18 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
         });
 
         return codeQuestions;
+    }
+
+    @Override
+    public void saveNewLanguage(List<ProgrammingLanguageCodeQuestion> plcqs) {
+        programmingLanguageCodeQuestionJpaRepository
+                .saveAll(plcqs.stream()
+                        .map(programmingLanguageCodeQuestionDataAccessMapper::domainObjectToEntity)
+                        .toList());
+    }
+
+    @Override
+    public void deleteLanguage(List<ProgrammingLanguageId> list) {
+        programmingLanguageCodeQuestionJpaRepository.deleteByProgrammingLanguageIdIn(list.stream().map(BaseId::getValue).toList());
     }
 }

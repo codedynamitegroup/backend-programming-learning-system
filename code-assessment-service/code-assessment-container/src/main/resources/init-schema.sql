@@ -112,6 +112,7 @@ DROP TABLE IF EXISTS qtype_code_questions CASCADE;
 CREATE TABLE qtype_code_questions(
     id uuid UNIQUE NOT NULL,
     question_id uuid NOT NULL,
+    user_id uuid not null,
     dsl_template text,
     name text NOT NULL,
     problem_statement text,

@@ -210,4 +210,15 @@ public class ValidateHelper {
             throw new ProgrammingLanguageNotFoundException("programming language with id " + programmingLanguageId.getValue() + " not found");
         }
     }
+    public List<ProgrammingLanguage> validateProgrammingLanguage(List<UUID> ids) {
+        return ids.stream().map(id->{
+            Optional<ProgrammingLanguage> plOpt = programmingLanguageRepository.findById(new ProgrammingLanguageId(id));
+            if(plOpt.isPresent())
+                return plOpt.get();
+            else {
+                log.error("Language with id {} not found", id);
+                throw new ProgrammingLanguageNotFoundException("Language with id: " + id + " not found");
+            }
+        }).toList();
+    }
 }

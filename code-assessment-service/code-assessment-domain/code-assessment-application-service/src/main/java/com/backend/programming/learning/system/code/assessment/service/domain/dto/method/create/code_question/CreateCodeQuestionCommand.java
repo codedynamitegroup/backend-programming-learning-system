@@ -18,16 +18,16 @@ public class CreateCodeQuestionCommand {
     @NotNull(message = "questionId must not be null")
     private final UUID questionId;
 
+    @NotNull(message = "userId must not be null")
+    private final UUID userId;
+
     private final String dslTemplate;
     @NotNull(message = "name must not be null")
     private final String name;
     @NotNull(message = "problemStatement must not be null")
     private final String problemStatement;
-    @NotNull(message = "inputFormat must not be null")
     private final String inputFormat;
-    @NotNull(message = "outputFormat must not be null")
     private final String outputFormat;
-    @NotNull(message = "constraints must not be null")
     private final String constraints;
     @NotNull(message = "maxGrade must not be null")
     private final Float maxGrade;

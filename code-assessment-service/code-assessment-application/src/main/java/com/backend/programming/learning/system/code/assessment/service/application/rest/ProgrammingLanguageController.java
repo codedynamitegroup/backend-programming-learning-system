@@ -39,7 +39,6 @@ public class ProgrammingLanguageController {
         return ResponseEntity.ok(response);
     }
 
-    //delete
     //add outbox
     @DeleteMapping("/{language-id}")
     public ResponseEntity deleteLanguage(@PathVariable(value = "language-id")UUID id){
@@ -49,7 +48,6 @@ public class ProgrammingLanguageController {
         return ResponseEntity.noContent().build();
     }
 
-    //update
     //add outbox
     @PutMapping("/{language-id}")
     public ResponseEntity updateLanguage(@PathVariable(value = "language-id")UUID id,

@@ -61,9 +61,9 @@ insert into programming_language (id, name, compiler_api_id, time_limit, memory_
 insert into programming_language (id, name, compiler_api_id, time_limit, memory_limit, is_actived, copy_state) values ('c2812b53-059f-43cb-8e9b-966246a79567', 'Visual Basic.Net (vbnc 0.0.0.5943)', 84, 2, 204800, true, 'CREATED');
 
 
-INSERT INTO public.qtype_code_questions(id,question_id ,dsl_template , name ,problem_statement ,input_format ,output_format ,copy_state ,failure_messages ,constraints, max_grade, difficulty)
+INSERT INTO public.qtype_code_questions(user_id, id, question_id ,dsl_template , name ,problem_statement ,input_format ,output_format ,copy_state ,failure_messages ,constraints, max_grade, difficulty)
 VALUES
-    ('3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 'b6484e21-6937-489c-b031-b71767994221', 'template', 'code question name', 'code question statement', 'input format', 'output format', 'CREATED', '', 'None', 10, 'EASY');
+    ('9ba179ed-d26d-4828-a0f6-8836c2063992', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 'b6484e21-6937-489c-b031-b71767994221', 'template', 'code question name', 'code question statement', 'input format', 'output format', 'CREATED', '', 'None', 10, 'EASY');
 
 INSERT INTO test_cases(id, code_question_id  ,input_data  ,output_data  ,is_sample )
 VALUES

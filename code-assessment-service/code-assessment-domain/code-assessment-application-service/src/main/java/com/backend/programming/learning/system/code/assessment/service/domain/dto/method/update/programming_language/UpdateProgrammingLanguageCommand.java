@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.programming_language;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.validator.OneNotNull.OneNotNull;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,10 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @Getter
+@OneNotNull(
+        fields = {"name", "languageJudge0Id", "timeLimit", "memoryLimit", "isActived"},
+        message = "name, languageJudge0Id, timeLimit, memoryLimit or isActived must not be null"
+)
 public class UpdateProgrammingLanguageCommand {
     @NotNull(message = "languageId must not be null")
     @Setter

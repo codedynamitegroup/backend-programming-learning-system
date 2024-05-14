@@ -13,7 +13,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Constraint(validatedBy = OneNotNullValidator.class)
 public @interface OneNotNull {
-    String message() default "Exactly one of the fields must be set and the other must be null";
+    String message() default "One of the fields must not be null";
 
     Class<?>[] groups() default {};
 
@@ -23,4 +23,5 @@ public @interface OneNotNull {
      * Fields to validate against null.
      */
     String[] fields() default {};
+    Class<?>[] clazz() default {};
 }

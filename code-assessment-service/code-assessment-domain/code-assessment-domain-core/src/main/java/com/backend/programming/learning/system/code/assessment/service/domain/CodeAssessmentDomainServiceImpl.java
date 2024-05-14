@@ -5,13 +5,17 @@ import com.backend.programming.learning.system.code.assessment.service.domain.ev
 import com.backend.programming.learning.system.code.assessment.service.domain.event.user.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.programming_language_code_question.ProgrammingLanguageCodeQuestionId;
 import com.backend.programming.learning.system.domain.DomainConstants;
+import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainService{
@@ -95,6 +99,22 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
     @Override
     public void inititateProgrammingLanguage(ProgrammingLanguage programmingLanguage) {
         programmingLanguage.initiate();
+    }
+
+    @Override
+    public CodeQuestion getDetailCodeQuestion(CodeQuestion codeQuestion, List<TestCase> sampleTestCase, CodeSubmission codeSubmission, List<ProgrammingLanguage> languages) {
+        codeQuestion.getDetail(sampleTestCase, codeSubmission, languages);
+        return codeQuestion;
+    }
+
+    @Override
+    public ProgrammingLanguageCodeQuestion initProgrammingLanguageCodeQuestion(Float timeLimit, Float memoryLimit, CodeQuestionId codeQuestionId, UUID languageId) {
+        return ProgrammingLanguageCodeQuestion.builder()
+                .id(new ProgrammingLanguageCodeQuestionId(new ProgrammingLanguageId(languageId), codeQuestionId))
+                .active(true)
+                .timeLimit(timeLimit)
+                .memoryLimit(memoryLimit)
+                .build();
     }
 
 

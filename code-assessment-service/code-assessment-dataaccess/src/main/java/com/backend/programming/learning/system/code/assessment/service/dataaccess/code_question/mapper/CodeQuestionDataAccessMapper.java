@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.code.assessment.service.dataacces
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
+import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class CodeQuestionDataAccessMapper {
         CodeQuestionEntity codeQuestionEntity = CodeQuestionEntity.builder()
                 .id(codeQuestion.getId().getValue())
                 .questionId(codeQuestion.getQuestionId().getValue())
+                .userId(codeQuestion.getUserId().getValue())
 //                .question(questionDataAssessMapper.questionToQuestionEntity(new Question(codeQuestion.getQuestionId())))
                 .name(codeQuestion.getName())
                 .dslTemplate(codeQuestion.getDslTemplate())
@@ -47,6 +49,7 @@ public class CodeQuestionDataAccessMapper {
 //                .questionId(new QuestionId(codeQuestionEntity.getQuestion().getId()))
                 .questionId(new QuestionId(codeQuestionEntity.getQuestionId()))
                 .codeQuestionId(new CodeQuestionId(codeQuestionEntity.getId()))
+                .userId(new UserId(codeQuestionEntity.getUserId()))
                 .name(codeQuestionEntity.getName())
                 .problemStatement(codeQuestionEntity.getProblemStatement())
                 .dslTemplate(codeQuestionEntity.getDslTemplate())
@@ -69,6 +72,7 @@ public class CodeQuestionDataAccessMapper {
 //                .questionId(new QuestionId(codeQuestionEntity.getQuestion().getId()))
                 .questionId(new QuestionId(codeQuestionEntity.getQuestionId()))
                 .codeQuestionId(new CodeQuestionId(codeQuestionEntity.getId()))
+                .userId(new UserId(codeQuestionEntity.getUserId()))
                 .name(codeQuestionEntity.getName())
                 .problemStatement(codeQuestionEntity.getProblemStatement())
                 .dslTemplate(codeQuestionEntity.getDslTemplate())

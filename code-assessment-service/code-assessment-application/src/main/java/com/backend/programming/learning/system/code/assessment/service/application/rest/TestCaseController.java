@@ -4,7 +4,6 @@ import com.backend.programming.learning.system.code.assessment.service.config.Co
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.test_case.CreateTestCasesCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.test_case.CreateTestCasesResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.test_case.PatchDeleteTestCasesCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.test_case.PatchDeleteTestCasesResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.testcase.GetTestCasesByQuestionIdCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.testcase.GetTestCasesByQuestionIdResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.testcase.UpdateTestCaseCommand;
@@ -65,6 +64,8 @@ public class TestCaseController {
                 service.getTestCasesByCodeQuestionId(command);
         return ResponseEntity.ok(response);
     }
+
+    //get sample
 
     @PostMapping("/patch-delete")
     public ResponseEntity deleteTestCases

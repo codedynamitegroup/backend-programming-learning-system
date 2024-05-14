@@ -1,9 +1,15 @@
 package com.backend.programming.learning.system.code.assessment.service.application.rest;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.CodeQuestionDto;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.ProgrammingLanguageDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.langauge.AddLanguageToCodeQuestionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.langauge.DeleteLanguageToCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetDetailCodeQuestionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_question.UpdateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.CodeQuestionApplicationService;
 import com.backend.programming.learning.system.domain.valueobject.QueryOrderBy;
@@ -78,4 +84,60 @@ public class CodeQuestionController {
 
     //update
     //add outbox
+    @PutMapping("/{code-question-id}")
+    public ResponseEntity updateCodeQuestion(
+            @PathVariable(value = "code-question-id") UUID codeQuestionId,
+            @RequestBody UpdateCodeQuestionCommand command)
+    {
+        command.setCodeQuestionId(codeQuestionId);
+        codeQuestionApplicationService.updateCodeQuestion(command);
+        return  ResponseEntity.noContent().build();
+    }
+
+    //get detail
+    @GetMapping("/{code-question-id}")
+    public ResponseEntity<CodeQuestionDto> getDetailCodeQuestion(
+            @PathVariable("code-question-id") UUID codeQuestionId,
+            @RequestParam(required = false) UUID userId){
+        GetDetailCodeQuestionCommand command =  GetDetailCodeQuestionCommand.builder()
+                .codeQuestionId(codeQuestionId)
+                .userId(userId)
+                .build();
+        CodeQuestionDto codeQuestionDto = codeQuestionApplicationService.getDetailCodeQuestion(command);
+        return ResponseEntity.ok(codeQuestionDto);
+    }
+
+
+    //edit code question tag
+
+
+    //edit code question language
+    @PostMapping("{code-question-id}/language")
+    public ResponseEntity addLanguageToCodeQuestion(
+            @PathVariable("code-question-id") UUID codeQuestionId,
+            @RequestParam UUID userId,
+            @RequestBody List<ProgrammingLanguageDto> languages){
+        AddLanguageToCodeQuestionCommand command = AddLanguageToCodeQuestionCommand.builder()
+                .codeQuestionId(codeQuestionId)
+                .languages(languages)
+                .userId(userId)
+                .build();
+        codeQuestionApplicationService.addLanguageToCodeQuestion(command);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @DeleteMapping("{code-question-id}/language")
+    public ResponseEntity deleteProgrammingLanguageCodeQuestion(
+            @PathVariable("code-question-id") UUID codeQuestionId,
+            @RequestParam UUID userId,
+            @RequestBody List<UUID> languages){
+        DeleteLanguageToCodeQuestionCommand command = DeleteLanguageToCodeQuestionCommand.builder()
+                .codeQuestionId(codeQuestionId)
+                .userId(userId)
+                .languageIds(languages)
+                .build();
+        codeQuestionApplicationService.deleteProgrammingLanguageCodeQuestion(command);
+        return ResponseEntity.noContent().build();
+    }
+
 }

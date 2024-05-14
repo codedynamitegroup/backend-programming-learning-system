@@ -29,6 +29,16 @@ public class ProgrammingLanguageCodeQuestionDataAccessMapper {
                 .build();
     }
 
+    public ProgrammingLanguageCodeQuestionEntity domainObjectToEntity(ProgrammingLanguageCodeQuestion obj){
+        return ProgrammingLanguageCodeQuestionEntity.builder()
+                .codeQuestion(CodeQuestionEntity.builder().id(obj.getId().getValue().getCodeQuestionId().getValue()).build())
+                .programmingLanguage(ProgrammingLanguageEntity.builder().id(obj.getId().getValue().getProgrammingLanguageId().getValue()).build())
+                .active(obj.getActive())
+                .timeLimit(obj.getTimeLimit())
+                .memoryLimit(obj.getMemoryLimit())
+                .build();
+    }
+
     private ProgrammingLanguageCodeQuestionId entityIdToDomainId(ProgrammingLanguageEntity programmingLanguage, CodeQuestionEntity codeQuestion) {
         return new ProgrammingLanguageCodeQuestionId(
                 new ProgrammingLanguageId(programmingLanguage.getId()),

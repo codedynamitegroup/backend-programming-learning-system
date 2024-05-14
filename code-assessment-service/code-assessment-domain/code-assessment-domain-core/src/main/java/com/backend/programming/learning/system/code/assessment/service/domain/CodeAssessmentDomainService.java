@@ -3,9 +3,11 @@ package com.backend.programming.learning.system.code.assessment.service.domain;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionsUpdatedEvent;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.user.*;
+import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface CodeAssessmentDomainService {
     CodeQuestionsUpdatedEvent validateAndInitiateCodeQuestion(CodeQuestion codeQuestion);
@@ -30,4 +32,8 @@ public interface CodeAssessmentDomainService {
     void intitateComment(Comment comment, Comment replyComment);
 
     void inititateProgrammingLanguage(ProgrammingLanguage programmingLanguage);
+
+    CodeQuestion getDetailCodeQuestion(CodeQuestion codeQuestion, List<TestCase> sampleTestCase, CodeSubmission codeSubmission, List<ProgrammingLanguage> languages);
+
+    ProgrammingLanguageCodeQuestion initProgrammingLanguageCodeQuestion(Float timeLimit, Float memoryLimit, CodeQuestionId codeQuestionId, UUID id);
 }

@@ -84,4 +84,10 @@ public class CodeSubmissionRepositoryImpl implements CodeSubmissionRepository {
     public Integer findYourScoreRank(CodeSubmissionId id) {
         return jpaRepository.findYourScoreRank(id.getValue());
     }
+
+    @Override
+    public Optional<CodeSubmission> findLatestSubmission(CodeQuestionId id, UserId id1) {
+        Optional<CodeSubmissionEntity> codeSubmissionEntity = jpaRepository.findByCodeQuestionIdAndUserId(id.getValue(), id1.getValue());
+        return codeSubmissionEntity.map(dataAccessMapper::entityToCodeSubmission);
+    }
 }

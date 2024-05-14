@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -15,6 +16,11 @@ import java.util.UUID;
 public class CodeQuestionDto {
     UUID id;
     String name;
+    String problemStatement;
     Boolean done;
     QuestionDifficulty difficulty;
+    String sourceCode;
+    UUID sourceCodeLanguageId;
+    List<TestCaseDto> sampleTestCases;
+    List<ProgrammingLanguageDto> languages;
 }
