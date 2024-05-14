@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.container.config;
+package com.backend.programming.learning.system.auth.service.container.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

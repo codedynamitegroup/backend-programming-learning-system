@@ -1,6 +1,13 @@
 server:
   port: 9098
 
+logging:
+  level.root: DEBUG
+  level:
+    com.backend.programming.learning.system.gateway.service: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
+
 eureka:
   client:
     fetchRegistry: true
@@ -25,6 +32,11 @@ spring:
     name: gateway-service
   config:
     import: "optional:configserver:${CONFIG_SERVER:http://localhost:9999}"
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://${keycloak.domain}/realms/${keycloak.realm}
   cloud:
     gateway:
       discovery:
@@ -73,12 +85,20 @@ management:
     tags:
       application: ${spring.application.name}
 
-logging:
-  level.root: DEBUG
-  level:
-    com.backend.programming.learning.system.gateway.service: DEBUG
-  pattern:
-    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
+jwt:
+  auth:
+    converter:
+      resource-id: spring-client-api-rest
+      principle-attribute: preferred_username
+
+keycloak:
+  realm: spring-boot-realm-dev
+  domain: localhost:8890
+  admin-client-id: admin-cli
+  admin-client-secret: nfJffV2sitCYDQlmkXTeEZ5VqSE8616R
+  client: spring-client-api-rest
+  client-secret: 1XZYXGBfRPXCaQlMl66jUIfxlhECRgR7
+  urls: http://${keycloak.domain}
 
 springdoc:
   api-docs:
