@@ -16,4 +16,5 @@ public interface ContestUserRepository {
     Optional<ContestUser> findByContestIdAndUserId(UUID contestId, UUID userId);
     List<ContestUser> findByContestId(UUID contestId);
     void deleteByContestIdAndUserId(UUID contestId, UUID userId);
+    int countAllParticipants();
 }

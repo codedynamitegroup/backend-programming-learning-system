@@ -72,14 +72,18 @@ public class ContestCommandHandler {
 
     @Transactional(readOnly = true)
     public QueryMostPopularContestsResponse queryMostPopularContestsResponse() {
-        List<Contest> contests = contestQueryHelper
+        Page<Contest> contests = contestQueryHelper
                 .findMostPopularContests();
-
         log.info("Returning most popular upcoming contests: {}", contests);
+
+        int numOfParticipants = contestQueryHelper.countAllParticipants();
+        log.info("Returning number of participants: {}", numOfParticipants);
 
         return QueryMostPopularContestsResponse
                 .builder()
-                .mostPopularContests(contestDataMapper.contestsToContestResponseEntities(contests))
+                .mostPopularContests(contestDataMapper.contestsToContestResponseEntities(contests.getContent()))
+                .totalItems(contests.getTotalElements())
+                .numOfParticipants(numOfParticipants)
                 .build();
     }
 
@@ -91,6 +95,11 @@ public class ContestCommandHandler {
                 .queryContestById(queryContestCommand.getContestId());
 
         return contestDataMapper.contestToQueryContestResponse(contest);
+    }
+
+    @Transactional(readOnly = true)
+    public int countAllParticipants() {
+        return contestQueryHelper.countAllParticipants();
     }
 
     @Transactional

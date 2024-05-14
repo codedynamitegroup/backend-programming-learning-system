@@ -16,5 +16,5 @@ public interface ContestRepository {
     Page<Contest> findAll(String searchName, String startTimeFilter, Integer page, Integer size);
 
     void deleteContestById(UUID contestId);
-    List<Contest> findMostPopularContests();
+    Page<Contest> findMostPopularContests();
 }

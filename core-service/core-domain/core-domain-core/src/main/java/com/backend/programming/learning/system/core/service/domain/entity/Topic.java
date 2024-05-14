@@ -18,6 +18,7 @@ public class Topic extends AggregateRoot<TopicId> {
     private String description;
     private String thumbnailUrl;
     private List<ProgrammingLanguage> programmingLanguages;
+    private Integer numOfCertificateCourses;
     private User createdBy;
     private User updatedBy;
     private ZonedDateTime createdAt;
@@ -29,6 +30,7 @@ public class Topic extends AggregateRoot<TopicId> {
         setDescription(builder.description);
         setThumbnailUrl(builder.thumbnailUrl);
         setProgrammingLanguages(builder.programmingLanguages);
+        setNumOfCertificateCourses(builder.numOfCertificateCourses);
         setCreatedBy(builder.createdBy);
         setUpdatedBy(builder.updatedBy);
         setCreatedAt(builder.createdAt);
@@ -39,7 +41,6 @@ public class Topic extends AggregateRoot<TopicId> {
         return new Builder();
     }
 
-
     public void initializeTopic() {
         setId(new TopicId(UUID.randomUUID()));
         programmingLanguages = new ArrayList<>();
@@ -47,72 +48,77 @@ public class Topic extends AggregateRoot<TopicId> {
         updatedAt = ZonedDateTime.now(ZoneId.of("UTC"));
     }
 
-    public void addProgrammingLanguage(ProgrammingLanguage programmingLanguage) {
-        programmingLanguages.add(programmingLanguage);
+
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setThumbnailUrl(String thumbnailUrl) {
-        this.thumbnailUrl = thumbnailUrl;
-    }
-
-    public void setProgrammingLanguages(List<ProgrammingLanguage> programmingLanguages) {
-        this.programmingLanguages = programmingLanguages;
-    }
-
-    public void setCreatedBy(User createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public void setUpdatedBy(User updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-    public void setCreatedAt(ZonedDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public void setUpdatedAt(ZonedDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public String getName() {
-        return name;
-    }
-
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getThumbnailUrl() {
         return thumbnailUrl;
     }
 
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
+    }
+
     public List<ProgrammingLanguage> getProgrammingLanguages() {
         return programmingLanguages;
+    }
+
+    public void setProgrammingLanguages(List<ProgrammingLanguage> programmingLanguages) {
+        this.programmingLanguages = programmingLanguages;
+    }
+
+    public Integer getNumOfCertificateCourses() {
+        return numOfCertificateCourses;
+    }
+
+    public void setNumOfCertificateCourses(Integer numOfCertificateCourses) {
+        this.numOfCertificateCourses = numOfCertificateCourses;
     }
 
     public User getCreatedBy() {
         return createdBy;
     }
 
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
     public User getUpdatedBy() {
         return updatedBy;
+    }
+
+    public void setUpdatedBy(User updatedBy) {
+        this.updatedBy = updatedBy;
     }
 
     public ZonedDateTime getCreatedAt() {
         return createdAt;
     }
 
+    public void setCreatedAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public ZonedDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public void setUpdatedAt(ZonedDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public static final class Builder {
@@ -121,6 +127,7 @@ public class Topic extends AggregateRoot<TopicId> {
         private String description;
         private String thumbnailUrl;
         private List<ProgrammingLanguage> programmingLanguages;
+        private Integer numOfCertificateCourses;
         private User createdBy;
         private User updatedBy;
         private ZonedDateTime createdAt;
@@ -151,6 +158,11 @@ public class Topic extends AggregateRoot<TopicId> {
 
         public Builder programmingLanguages(List<ProgrammingLanguage> val) {
             programmingLanguages = val;
+            return this;
+        }
+
+        public Builder numOfCertificateCourses(Integer val) {
+            numOfCertificateCourses = val;
             return this;
         }
 

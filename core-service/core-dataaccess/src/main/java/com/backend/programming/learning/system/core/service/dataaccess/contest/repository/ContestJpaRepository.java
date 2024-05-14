@@ -75,7 +75,6 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
     where (c.startTime > ?1 OR (c.startTime <= ?1 and (c.endTime is null or (c.endTime is not null and c.endTime >= ?1))))
     group by c.id
     order by count(cu.user.id) desc, c.startTime desc
-    limit 10
 """)
-    List<ContestEntity> findMostPopularContests(ZonedDateTime now);
+    Page<ContestEntity> findMostPopularContests(ZonedDateTime now, Pageable pageable);
 }

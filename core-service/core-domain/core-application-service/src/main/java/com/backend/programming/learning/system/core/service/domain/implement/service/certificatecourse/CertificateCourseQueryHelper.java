@@ -56,13 +56,13 @@ public class CertificateCourseQueryHelper {
             IsRegisteredFilter isRegisteredFilter,
             UUID registeredBy
     ) {
-        if (isRegisteredFilter != IsRegisteredFilter.ALL && registeredBy == null) {
-            log.error("Registered by user id is required for registered filter: {}",
-                    isRegisteredFilter);
-            throw new CoreDomainException("Registered by user id is required for registered filter: " +
-                    isRegisteredFilter);
+        if (isRegisteredFilter != IsRegisteredFilter.ALL) {
+            if (registeredBy == null) {
+                log.warn("Registered by user id is required for certificate courses");
+                throw new CoreDomainException("Registered by user id is required for certificate courses");
+            }
+            checkUser(registeredBy);
         }
-        getUser(registeredBy);
         return certificateCourseRepository.findAllCertificateCourses(
                 courseName,
                 filterTopicIds,
@@ -78,13 +78,13 @@ public class CertificateCourseQueryHelper {
             IsRegisteredFilter isRegisteredFilter,
             UUID registeredBy
     ) {
-        if (isRegisteredFilter != IsRegisteredFilter.ALL && registeredBy == null) {
-            log.error("Registered by user id is required for registered filter: {}",
-                    isRegisteredFilter);
-            throw new CoreDomainException("Registered by user id is required for registered filter: " +
-                    isRegisteredFilter);
+        if (isRegisteredFilter != IsRegisteredFilter.ALL) {
+            if (registeredBy == null) {
+                log.warn("Registered by user id is required for most enrolled certificate courses");
+                throw new CoreDomainException("Registered by user id is required for most enrolled certificate courses");
+            }
+            checkUser(registeredBy);
         }
-        getUser(registeredBy);
         return certificateCourseRepository.findMostEnrolledCertificateCourses(
                 courseName,
                 filterTopicIds,
@@ -93,13 +93,12 @@ public class CertificateCourseQueryHelper {
         );
     }
 
-    private User getUser(UUID userId) {
+    private void checkUser(UUID userId) {
         Optional<User> user = userRepository.findUser(userId);
         if (user.isEmpty()) {
             log.warn("User with id: {} not found", userId);
             throw new UserNotFoundException("Could not find user with id: " + userId);
         }
-        return user.get();
     }
 
 }

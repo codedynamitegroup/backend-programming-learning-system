@@ -56,4 +56,9 @@ public class ContestUserRepositoryImpl implements ContestUserRepository {
     public void deleteByContestIdAndUserId(UUID contestId, UUID userId) {
         contestUserJpaRepository.deleteByContestIdAndUserId(contestId, userId);
     }
+
+    @Override
+    public int countAllParticipants() {
+        return contestUserJpaRepository.countAllParticipants();
+    }
 }
