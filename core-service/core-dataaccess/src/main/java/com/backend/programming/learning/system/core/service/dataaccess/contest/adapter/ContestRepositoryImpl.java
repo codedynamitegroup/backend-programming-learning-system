@@ -95,11 +95,10 @@ public class ContestRepositoryImpl implements ContestRepository {
     }
 
     @Override
-    public List<Contest> findMostPopularContests() {
+    public Page<Contest> findMostPopularContests() {
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UTC"));
-        return contestJpaRepository.findMostPopularContests(now)
-                .stream()
-                .map(contestDataAccessMapper::contestEntityToContest)
-                .toList();
+        Pageable paging = PageRequest.of(0, 10);
+        return contestJpaRepository.findMostPopularContests(now, paging)
+                .map(contestDataAccessMapper::contestEntityToContest);
     }
 }

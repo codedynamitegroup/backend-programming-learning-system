@@ -34,6 +34,10 @@ public class TopicEntity {
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL)
     private List<TopicProgrammingLanguageEntity> topicProgrammingLanguages;
 
+    @Basic(fetch = FetchType.LAZY)
+    @Formula("(select count(*) from certificate_course cc where cc.topic_id = id)")
+    private Integer numOfCertificateCourses;
+
     @ManyToOne
     @JoinColumn(name = "created_by", referencedColumnName = "id")
     private UserEntity createdBy;

@@ -30,6 +30,8 @@ public class TopicResponseEntity {
     @NotNull
     private final List<ProgrammingLanguageResponseEntity> programmingLanguages;
     @NotNull
+    private final Integer numOfCertificateCourses;
+    @NotNull
     private final UserResponseEntity createdBy;
     @NotNull
     private final UserResponseEntity updatedBy;
