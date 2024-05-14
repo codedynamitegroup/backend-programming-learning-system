@@ -36,4 +36,9 @@ public class CourseUserRepositoryImpl implements CourseUserRepository {
     public void deleteByCourseIdAndUserIdIn(UUID courseId, List<UUID> userIds) {
         courseUserJpaRepository.deleteByCourseIdAndUserIdIn(courseId, userIds);
     }
+
+    @Override
+    public void deleteByCourseIdAndUserId(UUID courseId, UUID userId) {
+        courseUserJpaRepository.deleteByCourseIdAndUserId(courseId, userId);
+    }
 }

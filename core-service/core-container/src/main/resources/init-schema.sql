@@ -84,6 +84,7 @@ CREATE TABLE "public".topic
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
     name text UNIQUE NOT NULL,
     description text,
+    thumbnail_url text,
     created_by uuid,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_by uuid,
@@ -110,7 +111,6 @@ CREATE TABLE "public".certificate_course
     avg_rating numeric(2,1) DEFAULT 0.0,
     start_time TIMESTAMP WITH TIME ZONE,
     end_time TIMESTAMP WITH TIME ZONE,
-    is_deleted bool DEFAULT FALSE NOT NULL,
     created_by uuid NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_by uuid NOT NULL,
@@ -205,7 +205,8 @@ CREATE TABLE "public".review
     CONSTRAINT review_updated_by_fkey FOREIGN KEY (updated_by)
         REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT review_certificate_course_id_created_by_key UNIQUE (certificate_course_id, created_by)
 );
 
 DROP TABLE IF EXISTS "public".programming_language CASCADE;
@@ -243,6 +244,7 @@ CREATE TABLE "public".contest
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
     name text,
     description text,
+    thumbnail_url text,
     start_time TIMESTAMP WITH TIME ZONE,
     end_time TIMESTAMP WITH TIME ZONE,
     created_by uuid NOT NULL,

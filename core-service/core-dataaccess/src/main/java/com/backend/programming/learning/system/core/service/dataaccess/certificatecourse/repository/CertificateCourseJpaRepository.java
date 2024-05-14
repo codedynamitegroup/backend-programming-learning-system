@@ -1,21 +1,11 @@
 package com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.repository;
 
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.organization.entity.OrganizationEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.topic.entity.TopicEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
-import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
-import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -23,10 +13,101 @@ import java.util.UUID;
 public interface CertificateCourseJpaRepository extends JpaRepository<CertificateCourseEntity, UUID> {
     Optional<CertificateCourseEntity> findById(UUID id);
     Optional<CertificateCourseEntity> findByName(String name);
-    Page<CertificateCourseEntity> findAllByIsDeletedFalse(Pageable pageable);
 
-    @Transactional
-    @Modifying
-    @Query("update CertificateCourseEntity c set c.isDeleted = ?1 where c.id = ?2")
-    int deleteById(Boolean isDeleted, UUID id);
+    @Query(value = """
+        select cce
+        from CertificateCourseEntity cce, CertificateCourseUserEntity ccue
+        where cce.id = ccue.certificateCourse.id
+         and (LENGTH(?1) = 0 OR (UPPER(cce.name) like UPPER(CONCAT('%', ?1, '%'))))
+         and ((?2 is NULL) OR (cce.topic.id in ?2))
+         and ccue.user.id = ?3
+        order by cce.name
+""")
+    List<CertificateCourseEntity> findAllByCourseNameAndByFilterTopicIdsAndRegisteredBy(
+            String courseName,
+            List<UUID> filterTopicIds,
+            UUID registeredBy);
+
+    @Query(value = """
+        select cce
+        from CertificateCourseEntity cce
+        where (LENGTH(?1) = 0 OR (UPPER(cce.name) like UPPER(CONCAT('%', ?1, '%'))))
+         and ((?2 is NULL) OR (cce.topic.id in ?2))
+         and cce.id not in (
+            select ccue.certificateCourse.id
+            from CertificateCourseUserEntity ccue
+            where ccue.user.id = ?3
+         )
+        order by cce.name
+""")
+    List<CertificateCourseEntity> findAllByCourseNameAndByFilterTopicIdsAndNotRegisteredBy(
+            String courseName,
+            List<UUID> filterTopicIds,
+            UUID registeredBy);
+
+    @Query(value = """
+        select cce
+        from CertificateCourseEntity cce
+        where (LENGTH(?1) = 0 OR (UPPER(cce.name) like UPPER(CONCAT('%', ?1, '%'))))
+         and ((?2 is NULL) OR (cce.topic.id in ?2))
+        order by cce.name
+""")
+    List<CertificateCourseEntity> findAllByCourseNameAndByFilterTopicIds(
+            String courseName,
+            List<UUID> filterTopicIds);
+
+    @Query(value = """
+        select cce
+        from CertificateCourseEntity cce
+        left join CertificateCourseUserEntity ccue
+        on cce.id = ccue.certificateCourse.id
+        where (LENGTH(?1) = 0 OR (UPPER(cce.name) like UPPER(CONCAT('%', ?1, '%'))))
+         and ((?2 is NULL) OR (cce.topic.id in ?2))
+        group by cce.id
+        order by count(ccue.user.id) desc
+        limit 5
+""")
+    List<CertificateCourseEntity> findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIds(
+            String courseName,
+            List<UUID> filterTopicIds);
+
+    @Query(value = """
+        select cce
+        from CertificateCourseEntity cce
+        left join CertificateCourseUserEntity ccue
+        on cce.id = ccue.certificateCourse.id
+        where (LENGTH(?1) = 0 OR (UPPER(cce.name) like UPPER(CONCAT('%', ?1, '%'))))
+         and ((?2 is NULL) OR (cce.topic.id in ?2))
+         and ccue.user.id = ?3
+        group by cce.id
+        order by count(ccue.user.id) desc
+        limit 5
+""")
+    List<CertificateCourseEntity> findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIdsAndRegisteredBy(
+            String courseName,
+            List<UUID> filterTopicIds,
+            UUID registeredBy);
+
+    @Query(value = """
+        select cce
+        from CertificateCourseEntity cce
+        left join CertificateCourseUserEntity ccue
+        on cce.id = ccue.certificateCourse.id
+        where (LENGTH(?1) = 0 OR (UPPER(cce.name) like UPPER(CONCAT('%', ?1, '%'))))
+         and ((?2 is NULL) OR (cce.topic.id in ?2))
+         and cce.id not in (
+            select ccue.certificateCourse.id
+            from CertificateCourseUserEntity ccue
+            where ccue.user.id = ?3
+         )
+        group by cce.id
+        order by count(ccue.user.id) desc
+        limit 5
+""")
+    List<CertificateCourseEntity> findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIdsAndNotRegisteredBy(
+            String courseName,
+            List<UUID> filterTopicIds,
+            UUID registeredBy);
+
+    void deleteById(UUID id);
 }

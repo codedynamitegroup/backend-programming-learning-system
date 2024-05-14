@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain;
 
 import com.backend.programming.learning.system.course.service.domain.entity.*;
+import com.backend.programming.learning.system.course.service.domain.entity.Module;
 import com.backend.programming.learning.system.course.service.domain.event.organization.*;
 import com.backend.programming.learning.system.course.service.domain.event.question.event.*;
 import com.backend.programming.learning.system.course.service.domain.event.user.*;
@@ -72,6 +73,12 @@ public class CourseDomainServiceImpl implements CourseDomainService {
     }
 
     @Override
+    public void createCourseUser(CourseUser courseUser) {
+        courseUser.initializeCourseUser();
+        log.info("CourseUser with id: {} is initiated", courseUser.getId().getValue());
+    }
+
+    @Override
     public void createExamQuestions(List<ExamQuestion> examQuestions) {
         examQuestions.forEach(ExamQuestion::initializeExamQuestion);
         log.info("ExamQuestion is initiated");
@@ -81,6 +88,19 @@ public class CourseDomainServiceImpl implements CourseDomainService {
     public void createOrganization(Organization organization) {
         organization.initializeOrganization();
         log.info("Organization with id: {} is initiated", organization.getId().getValue());
+    }
+
+    @Override
+    public void createSection(Section section) {
+        section.initializeSection();
+        log.info("Section with id: {} is initiated", section.getId().getValue());
+    }
+
+    @Override
+    public void createModule(Module module) {
+        module.initializeModule();
+        log.info("Module with id: {} is initiated", module.getId().getValue());
+
     }
 
     @Override
@@ -246,5 +266,17 @@ public class CourseDomainServiceImpl implements CourseDomainService {
     public OrganizationDeletedFailEvent deletedOrganizationFail(Organization organization, List<String> failureMessages) {
         return new OrganizationDeletedFailEvent(organization,
                 ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)), failureMessages);
+    }
+
+    @Override
+    public UserUpdatedEvent updateUser(User user) {
+        return new UserUpdatedEvent(user, ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)), List.of());
+    }
+
+    @Override
+    public UserCreatedEvent createUser(User user) {
+        user.initializeUser();
+        log.info("User with id: {} is initiated", user.getId().getValue());
+        return new UserCreatedEvent(user, ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)), List.of());
     }
 }

@@ -8,13 +8,18 @@ import com.backend.programming.learning.system.auth.service.domain.event.organiz
 import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationDeletedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationUpdatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedFailEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedSuccessEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserDeletedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedFailEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedSuccessEvent;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.List;
 
 @Slf4j
 public class AuthDomainServiceImpl implements AuthDomainService {
@@ -69,5 +74,30 @@ public class AuthDomainServiceImpl implements AuthDomainService {
     public void createRole(Role role) {
         role.initializeRole();
         log.info("Role with id: {} is initiated", role.getId().getValue());
+    }
+
+    @Override
+    public UserCreatedFailEvent createdUserFail(User user, List<String> failureMessages) {
+        return new UserCreatedFailEvent(user,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
+    }
+
+    @Override
+    public UserCreatedSuccessEvent createdUserSuccess(User user) {
+        return new UserCreatedSuccessEvent(user,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
+    }
+
+    @Override
+    public UserUpdatedFailEvent updatedUserFail(User user, List<String> failureMessages) {
+        return new UserUpdatedFailEvent(user,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)),
+                failureMessages);
+    }
+
+    @Override
+    public UserUpdatedSuccessEvent updatedUserSuccess(User user) {
+        return new UserUpdatedSuccessEvent(user,
+                ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
     }
 }

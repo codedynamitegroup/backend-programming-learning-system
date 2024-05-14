@@ -18,6 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -49,6 +51,7 @@ public class ContestUserCreateHelper {
         checkContestUserByContestIdAndUserId(
                 createContestUserCommand.getContestId(),
                 createContestUserCommand.getUserId());
+        checkEndTimeIsNotExpired(contest);
 
         ContestUser contestUser = contestUserDataMapper.
                 createContestUserCommandToContestUser(createContestUserCommand);
@@ -59,6 +62,14 @@ public class ContestUserCreateHelper {
 
         log.info("Contest User created with id: {}", contestUserUpdatedEvent.getContestUser().getId().getValue());
         return contestUserUpdatedEvent;
+    }
+
+    private void checkEndTimeIsNotExpired(Contest contest) {
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UTC"));
+        if (contest.getEndTime() != null && contest.getEndTime().isBefore(now)) {
+            log.warn("Contest with id: {} has already ended", contest.getId().getValue());
+            throw new CoreDomainException("Contest with id: " + contest.getId().getValue() + " has already ended");
+        }
     }
 
     private User getUser(UUID userId) {

@@ -1,23 +1,17 @@
 package com.backend.programming.learning.system.core.service.application.rest.contest;
 
-import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter.CreateChapterResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest.CreateContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest.CreateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest_user.CreateContestUserCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest_user.CreateContestUserResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.DeleteContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.DeleteContestResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCourseUsersCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCourseUsersResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.*;
-import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest.ContestApplicationService;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest_user.ContestUserApplicationService;
-import com.backend.programming.learning.system.core.service.domain.valueobject.ContestStartTimeFilter;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -133,6 +127,23 @@ public class ContestController {
                         .build());
         log.info("Returning all contests: {}", queryAllContestsResponse.getContests());
         return ResponseEntity.ok(queryAllContestsResponse);
+    }
+
+    @GetMapping("/popular")
+    @Operation(summary = "Get most popular contests.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllContestsResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryMostPopularContestsResponse> getMostPopularContests() {
+        QueryMostPopularContestsResponse queryMostPopularContestsResponse =
+                contestApplicationService.queryMostPopularContests();
+        log.info("Returning most popular upcoming contests: {}",
+                queryMostPopularContestsResponse.getMostPopularContests());
+        return ResponseEntity.ok(queryMostPopularContestsResponse);
     }
 
     @GetMapping("/{id}/users")

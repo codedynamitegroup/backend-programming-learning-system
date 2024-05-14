@@ -16,6 +16,7 @@ public class UserCourseModel {
     private Integer enrolledusercount;
     private String idnumber;
     private Integer visible;
+    private String courseimage;
 
     private String summary;
     private String summaryformat;

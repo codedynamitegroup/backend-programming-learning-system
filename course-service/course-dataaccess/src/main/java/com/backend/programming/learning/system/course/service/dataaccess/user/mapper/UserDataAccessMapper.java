@@ -1,6 +1,9 @@
 package com.backend.programming.learning.system.course.service.dataaccess.user.mapper;
 
+import com.backend.programming.learning.system.course.service.dataaccess.organization.entity.OrganizationEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.organization.mapper.OrganizationDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.course.service.domain.entity.Organization;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import org.springframework.stereotype.Component;
@@ -9,9 +12,20 @@ import java.util.List;
 
 @Component
 public class UserDataAccessMapper {
+    private final OrganizationDataAccessMapper organizationDataAccessMapper;
+
+    public UserDataAccessMapper(OrganizationDataAccessMapper organizationDataAccessMapper) {
+        this.organizationDataAccessMapper = organizationDataAccessMapper;
+    }
+
     public UserEntity userToUserEntity(User user) {
+        OrganizationEntity organizationEntity = organizationDataAccessMapper.
+                organizationToOrganizationEntity(user.getOrganization());
+
         return UserEntity.builder()
                 .id(user.getId().getValue())
+                .organization(organizationEntity)
+                .username(user.getUserName())
                 .userIdMoodle(user.getUserIdMoodle())
                 .email(user.getEmail())
                 .dob(user.getDob())
@@ -28,9 +42,15 @@ public class UserDataAccessMapper {
     }
 
     public User userEntityToUser(UserEntity userEntity) {
+        Organization organization = organizationDataAccessMapper.
+                organizationEntityToOrganization(userEntity.getOrganization());
+
         return User.builder()
                 .id(new UserId(userEntity.getId()))
                 .userIdMoodle(userEntity.getUserIdMoodle())
+                .organization(organization)
+                .username(userEntity.getUsername())
+                .name(userEntity.getUsername())
                 .email(userEntity.getEmail())
                 .dob(userEntity.getDob())
                 .firstName(userEntity.getFirstName())

@@ -1,13 +1,16 @@
 package com.backend.programming.learning.system.course.service.domain.mapper.moodle;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.user.CreateUserCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.CourseResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.AssignmentModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.CourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.module.ModuleModel;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.quiz.QuizModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.section.SectionModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.Submission;
-import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionAssignmentModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionPlugin;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user.UserModel;
 import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.entity.Module;
 import com.backend.programming.learning.system.course.service.domain.valueobject.*;
@@ -22,7 +25,6 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Component
-
 public class MoodleDataMapper {
 
     public Course createCourse(CourseModel courseModel) {
@@ -122,6 +124,7 @@ public class MoodleDataMapper {
     public Section createSection(Course course, SectionModel sectionModel) {
         return Section.builder()
                 .id(new SectionId(UUID.randomUUID()))
+                .sectionMoodleId(Integer.valueOf(sectionModel.getId()))
                 .name(sectionModel.getName())
                 .visible(sectionModel.getVisible())
                 .courseId(course.getId())
@@ -148,4 +151,106 @@ public class MoodleDataMapper {
                 .build();
 
     }
+
+    public UpdateUserCommand updateUser(UserModel userModel, User user) {
+        return UpdateUserCommand.builder()
+                .userId(user.getId().getValue())
+                .username(userModel.getUsername())
+                .userIdMoodle(Integer.valueOf(userModel.getId()))
+                .dob(user.getDob())
+                .firstName(userModel.getFirstname())
+                .lastName(userModel.getLastname())
+                .phone(userModel.getPhone1())
+                .address(userModel.getAddress())
+                .avatarUrl(userModel.getProfileimageurl())
+                .build();
+    }
+
+    public CreateUserCommand createUser(UserModel userModel) {
+        return CreateUserCommand.builder()
+                .email(userModel.getEmail())
+                .username(userModel.getUsername())
+                .userIdMoodle(Integer.valueOf(userModel.getId()))
+                .password("")
+                .firstName(userModel.getFirstname())
+                .lastName(userModel.getLastname())
+                .phone(userModel.getPhone1())
+                .build();
+    }
+
+    public Course updateCourseByCourseMoodle(CourseModel courseModel, Course course) {
+        return Course.builder()
+                .id(course.getId())
+                .name(courseModel.getFullname())
+//                .courseType("MOODLE")
+                .visible(courseModel.getVisible().equals("1"))
+                .createdBy(course.getCreatedBy())
+                .posts(course.getPosts())
+                .exams(course.getExams())
+                .assignments(course.getAssignments())
+                .updatedBy(course.getUpdatedBy())
+                .createdAt(course.getCreatedAt())
+                .updatedAt(course.getUpdatedAt())
+                .build();
+    }
+
+    public Course createCourseByCourseMoodle(CourseModel courseModel, User user) {
+        return Course.builder()
+                .id(new CourseId(UUID.randomUUID()))
+                .name(courseModel.getFullname())
+//                .courseType("MOODLE")
+                .visible(courseModel.getVisible().equals("1"))
+                .createdBy(user)
+                .updatedBy(user)
+                .build();
+    }
+
+    public Exam updateExam(QuizModel quizModel, Exam exam, Course course) {
+        return Exam.builder()
+                .id(exam.getId())
+                .course(course)
+                .name(quizModel.getName())
+                .score(quizModel.getGrade().floatValue())
+                .maxScore(quizModel.getGrade().floatValue())
+                .timeOpen(ZonedDateTime.ofInstant(
+                        Instant.ofEpochSecond(quizModel.getTimeopen()),
+                        ZoneId.of("UTC")))
+                .timeClose(ZonedDateTime.ofInstant(
+                        Instant.ofEpochSecond(quizModel.getTimeclose()),
+                        ZoneId.of("UTC")))
+                .timeLimit(quizModel.getTimelimit().intValue())
+                .intro(quizModel.getIntro())
+                .overdueHandling(OverdueHandling.AUTOSUBMIT)
+                .canRedoQuestions(quizModel.getCanredoquestions().equals("0") ? false : true)
+                .maxAttempts(quizModel.getAttemptonlast())
+                .shuffleAnswers(quizModel.getShuffleanswers().equals("0") ? false : true)
+                .gradeMethod("QUIZ_GRADEHIGHEST")
+                .createdAt(exam.getCreatedAt())
+                .updatedAt(exam.getUpdatedAt())
+                .build();
+    }
+
+    public Exam createExam(QuizModel quizModel, Course course) {
+        return Exam.builder()
+                .id(new ExamId(UUID.randomUUID()))
+                .course(course)
+                .name(quizModel.getName())
+                .score(quizModel.getGrade().floatValue())
+                .maxScore(quizModel.getGrade().floatValue())
+                .timeOpen(ZonedDateTime.ofInstant(
+                        Instant.ofEpochSecond(quizModel.getTimeopen()),
+                        ZoneId.of("UTC")))
+                .timeClose(ZonedDateTime.ofInstant(
+                        Instant.ofEpochSecond(quizModel.getTimeclose()),
+                        ZoneId.of("UTC")))
+                .timeLimit(quizModel.getTimelimit().intValue())
+                .intro(quizModel.getIntro())
+                .overdueHandling(OverdueHandling.AUTOSUBMIT)
+                .canRedoQuestions(quizModel.getCanredoquestions().equals("0") ? false : true)
+                .maxAttempts(quizModel.getAttemptonlast())
+                .shuffleAnswers(quizModel.getShuffleanswers().equals("0") ? false : true)
+                .gradeMethod("QUIZ_GRADEHIGHEST")
+                .build();
+    }
+
 }

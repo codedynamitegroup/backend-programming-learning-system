@@ -58,6 +58,18 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public Optional<User> findUserByEmail(String email) {
+        return userJpaRepository.findByEmailAndIsDeletedFalse(email)
+                .map(userDataAccessMapper::userEntityToUser);
+    }
+
+    @Override
+    public Optional<User> findUser(UUID userId) {
+        return userJpaRepository.findById(userId)
+                .map(userDataAccessMapper::userEntityToUser);
+    }
+
+    @Override
     public Page<User> findAllUsersByOrganization(UUID organizationId, Integer page, Integer size) {
         Pageable paging = PageRequest.of(page, size);
         return userJpaRepository.findAllByOrganizationIdAndIsDeletedFalse(organizationId, paging)

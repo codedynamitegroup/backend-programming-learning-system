@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.auth.service.messaging.mapper;
 
 import com.backend.programming.learning.system.auth.service.domain.dto.method.message.UserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.message.user.UserRequest;
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserEventPayload;
 import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState;
@@ -8,6 +9,7 @@ import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRe
 import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseAvroModel;
 import org.springframework.stereotype.Component;
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -86,5 +88,62 @@ public class UserMessagingDataMapper {
                 .failureMessages(userResponseAvroModel.getFailureMessages())
                 .build();
 
+    }
+
+    public UserRequest userCreateRequestAvroModelToUserCreateRequest(UserRequestAvroModel userCreateRequestAvroModel) {
+        return UserRequest.builder()
+                .id(userCreateRequestAvroModel.getId())
+                .sagaId(userCreateRequestAvroModel.getSagaId())
+                .userId(userCreateRequestAvroModel.getUserId())
+                .username(userCreateRequestAvroModel.getUsername())
+                .organizationId(UUID.fromString(userCreateRequestAvroModel.getOrganizationId()))
+                .email(userCreateRequestAvroModel.getEmail())
+                .password("")
+                .firstName(userCreateRequestAvroModel.getFirstName())
+                .lastName(userCreateRequestAvroModel.getLastName())
+                .phone(userCreateRequestAvroModel.getPhone())
+                .createdAt(userCreateRequestAvroModel.getCreatedAt())
+                .updatedAt(userCreateRequestAvroModel.getUpdatedAt())
+                .isDeleted(userCreateRequestAvroModel.getIsDeleted())
+                .copyState(com.backend.programming.learning.system.domain.valueobject.CopyState.CREATING)
+                .build();
+    }
+
+    public UserRequest userDeleteRequestAvroModelToUserDeleteRequest(UserRequestAvroModel userDeleteRequestAvroModel) {
+        return UserRequest.builder()
+                .id(userDeleteRequestAvroModel.getId())
+                .sagaId(userDeleteRequestAvroModel.getSagaId())
+                .userId(userDeleteRequestAvroModel.getUserId())
+                .isDeleted(userDeleteRequestAvroModel.getIsDeleted())
+                .build();
+    }
+
+    public UserRequest userUpdateRequestAvroModelToUserUpdateRequest(UserRequestAvroModel userUpdateRequestAvroModel) {
+        return UserRequest.builder()
+                .id(userUpdateRequestAvroModel.getId())
+                .sagaId(userUpdateRequestAvroModel.getSagaId())
+                .userId(userUpdateRequestAvroModel.getUserId())
+                .username(userUpdateRequestAvroModel.getUsername())
+                .organizationId(UUID.fromString(userUpdateRequestAvroModel.getOrganizationId()))
+                .firstName(userUpdateRequestAvroModel.getFirstName())
+                .lastName(userUpdateRequestAvroModel.getLastName())
+                .address(userUpdateRequestAvroModel.getAddress())
+                .avatarUrl(userUpdateRequestAvroModel.getAvatarUrl())
+                .dob(userUpdateRequestAvroModel.getDob())
+                .phone(userUpdateRequestAvroModel.getPhone())
+                .updatedAt(userUpdateRequestAvroModel.getUpdatedAt())
+                .build();
+    }
+
+    public UserResponseAvroModel userEventPayloadToUserResponseAvroModel(String sagaId, UserEventPayload userEventPayload) {
+        return UserResponseAvroModel.newBuilder()
+                .setId(UUID.randomUUID().toString())
+                .setSagaId(sagaId)
+                .setUserId(userEventPayload.getUserId())
+                .setCopyState(CopyState.valueOf(userEventPayload.getCopyState()))
+                .setServiceName(
+                        com.backend.programming.learning.system.kafka.auth.avro.model.user.ServiceName.valueOf(com.backend.programming.learning.system.domain.valueobject.ServiceName.COURSE_SERVICE.name()))
+                .setFailureMessages(List.of())
+                .build();
     }
 }

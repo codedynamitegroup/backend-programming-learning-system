@@ -2,37 +2,23 @@ package com.backend.programming.learning.system.auth.service.domain.implement.se
 
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user_role.CreateUserRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user_moodle.ListUserModel;
-import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user_moodle.Role;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user_moodle.UserModel;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
-import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.mapper.MoodleDataMapper;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserApplicationService;
-import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserRoleApplicationService;
-import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.RoleRepository;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
-import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * com.backend.programming.learning.system.auth.service.domain.implement.service.moodle
@@ -46,9 +32,9 @@ import java.util.stream.Collectors;
 public class MoodleCommandHandler {
     private final MoodleDataMapper moodleDataMapper;
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
+//    private final RoleRepository roleRepository;
     private final UserApplicationService userApplicationService;
-    private final UserRoleApplicationService userRoleApplicationService;
+//    private final UserRoleApplicationService userRoleApplicationService;
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final RestTemplate restTemplate = new RestTemplate();
     String GET_ENROLLED_USERS = "core_enrol_get_enrolled_users";

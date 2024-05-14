@@ -18,12 +18,14 @@ public enum WebhookEventName {
     USER_DELETED("\\core\\event\\user_deleted"),
 
     USER_ENROLLMENT_CREATED("\\core\\event\\user_enrolment_created"),
+    USER_ENROLLMENT_UPDATED("\\core\\event\\user_enrolment_updated"),
+    USER_ENROLLMENT_DELETED("\\core\\event\\user_enrolment_deleted"),
 
-    ROLE_ASSIGNED("\\core\\event\\role_assigned"),
+    ROLE_ASSIGNED("\\core\\event\\role_assigned");
 
-    ENROL_INSTANCE_CREATED("\\core\\event\\enrol_instance_created"),
-    ENROL_INSTANCE_UPDATED("\\core\\event\\enrol_instance_updated"),
-    ENROL_INSTANCE_DELETED("\\core\\event\\enrol_instance_deleted");
+//    ENROL_INSTANCE_CREATED("\\core\\event\\enrol_instance_created"),
+//    ENROL_INSTANCE_UPDATED("\\core\\event\\enrol_instance_updated"),
+//    ENROL_INSTANCE_DELETED("\\core\\event\\enrol_instance_deleted");
 
     public final String label;
 

@@ -9,11 +9,11 @@ import com.backend.programming.learning.system.core.service.domain.dto.responsee
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.ProgrammingLanguage;
 import com.backend.programming.learning.system.core.service.domain.entity.Topic;
+import com.backend.programming.learning.system.core.service.domain.entity.TopicProgrammingLanguage;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.mapper.programminglanguage.ProgrammingLanguageDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
 import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
-import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -22,34 +22,24 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
 public class TopicDataMapper {
-    private final ProgrammingLanguageDataMapper programmingLanguageDataMapper;
     private final UserDataMapper userDataMapper;
+    private final ProgrammingLanguageDataMapper programmingLanguageDataMapper;
 
-    public TopicDataMapper(ProgrammingLanguageDataMapper programmingLanguageDataMapper,
-                           UserDataMapper userDataMapper) {
-        this.programmingLanguageDataMapper = programmingLanguageDataMapper;
+    public TopicDataMapper(UserDataMapper userDataMapper,
+                           ProgrammingLanguageDataMapper programmingLanguageDataMapper) {
         this.userDataMapper = userDataMapper;
+        this.programmingLanguageDataMapper = programmingLanguageDataMapper;
     }
 
     public Topic createTopicCommandToTopic(CreateTopicCommand createTopicCommand) {
-        List<ProgrammingLanguage> programmingLanguages = new ArrayList<>();
-
-        for (UUID programmingLanguageId : createTopicCommand.getProgrammingLanguageIds()) {
-            programmingLanguages.add(ProgrammingLanguage
-                    .builder()
-                    .id(new ProgrammingLanguageId(programmingLanguageId))
-                    .build());
-        }
-
         return Topic.builder()
                 .name(createTopicCommand.getName())
                 .description(createTopicCommand.getDescription())
-                .programmingLanguages(programmingLanguages)
+                .thumbnailUrl(createTopicCommand.getThumbnailUrl())
                 .createdBy(User
                         .builder()
                         .id(new UserId(createTopicCommand.getCreatedBy()))
@@ -71,15 +61,19 @@ public class TopicDataMapper {
     }
 
     public TopicResponseEntity topicToQueryTopicResponse(Topic topic) {
-        List<ProgrammingLanguageResponseEntity> programmingLanguages = programmingLanguageDataMapper
-                .programmingLanguagesToQueryProgrammingLanguageResponses(topic.getProgrammingLanguages());
         UserResponseEntity createdByResponse = userDataMapper.userToUserResponseEntity(topic.getCreatedBy());
         UserResponseEntity updatedByResponse = userDataMapper.userToUserResponseEntity(topic.getUpdatedBy());
+        List<ProgrammingLanguageResponseEntity> programmingLanguages = new ArrayList<>();
+        for (ProgrammingLanguage programmingLanguage : topic.getProgrammingLanguages()) {
+            programmingLanguages.add(programmingLanguageDataMapper
+                    .programmingLanguageToQueryProgrammingLanguageResponse(programmingLanguage));
+        }
 
         return TopicResponseEntity.builder()
                 .topicId(topic.getId().getValue())
                 .name(topic.getName())
                 .description(topic.getDescription())
+                .thumbnailUrl(topic.getThumbnailUrl())
                 .programmingLanguages(programmingLanguages)
                 .createdBy(createdByResponse)
                 .updatedBy(updatedByResponse)

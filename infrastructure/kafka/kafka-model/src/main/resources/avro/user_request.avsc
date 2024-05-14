@@ -8,6 +8,16 @@
       "type": "string"
     },
     {
+      "name": "organizationId",
+      "type": ["null", "string"],
+        "default": null
+    },
+    {
+      "name": "username",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
       "name": "sagaId",
       "type": "string"
     },

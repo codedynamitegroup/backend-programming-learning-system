@@ -4,6 +4,8 @@ import com.backend.programming.learning.system.course.service.dataaccess.user.en
 
 import java.util.Optional;
 import java.util.UUID;
+
+import io.micrometer.observation.ObservationFilter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,4 +15,7 @@ public interface UserJpaRepository extends JpaRepository<UserEntity, UUID>{
     Optional<UserEntity> findByEmailAndIsDeletedFalse(String email);
 
     Optional<UserEntity> findByUserIdMoodle(Integer userIdMoodle);
+
+    Optional<UserEntity> findByIdAndIsDeletedFalse(UUID id);
+    void deleteByUserIdMoodle(Integer userIdMoodle);
 }

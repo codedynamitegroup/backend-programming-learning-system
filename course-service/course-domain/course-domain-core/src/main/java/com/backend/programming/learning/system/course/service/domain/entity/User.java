@@ -1,16 +1,20 @@
 package com.backend.programming.learning.system.course.service.domain.entity;
 
+import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 
 public class User extends AggregateRoot<UserId> {
     private Integer userIdMoodle;
-    private  String name;
+    private Organization organization;
+    private String userName;
+    private String name;
     private String email;
     private ZonedDateTime dob;
     private String firstName;
@@ -20,14 +24,16 @@ public class User extends AggregateRoot<UserId> {
     private String avatarUrl;
     private ZonedDateTime lastLogin;
     private Boolean isDeleted;
-    private final ZonedDateTime createdAt;
-    private  ZonedDateTime updatedAt;
+    private ZonedDateTime createdAt;
+    private ZonedDateTime updatedAt;
     private List<String> failureMessage;
 
     private User(Builder builder) {
         super.setId(builder.userId);
         userIdMoodle = builder.userIdMoodle;
+        organization = builder.organization;
         name = builder.name;
+        userName = builder.username;
         email = builder.email;
         dob = builder.dob;
         firstName = builder.firstName;
@@ -42,6 +48,14 @@ public class User extends AggregateRoot<UserId> {
         failureMessage = builder.failureMessage;
     }
 
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
+    }
+
     public Integer getUserIdMoodle() {
         return userIdMoodle;
     }
@@ -52,6 +66,10 @@ public class User extends AggregateRoot<UserId> {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public void setEmail(String email) {
@@ -100,6 +118,9 @@ public class User extends AggregateRoot<UserId> {
 
     public String getEmail() {
         return email;
+    }
+    public String getUserName() {
+        return userName;
     }
 
     public ZonedDateTime getDob() {
@@ -154,9 +175,19 @@ public class User extends AggregateRoot<UserId> {
         isDeleted = deleted;
     }
 
+    public void initializeUser() {
+        setId(new UserId(UUID.randomUUID()));
+        lastLogin = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
+        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
+        isDeleted = false;
+    }
+
     public static final class Builder {
         private UserId userId;
         private Integer userIdMoodle;
+        private String username;
+        private Organization organization;
         private String name;
         private String email;
         private ZonedDateTime dob;
@@ -188,8 +219,18 @@ public class User extends AggregateRoot<UserId> {
             return this;
         }
 
+        public Builder organization(Organization val) {
+            organization = val;
+            return this;
+        }
+
         public Builder name(String val) {
             name = val;
+            return this;
+        }
+
+        public Builder username(String val) {
+            username = val;
             return this;
         }
 

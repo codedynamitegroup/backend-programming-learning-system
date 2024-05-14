@@ -51,7 +51,6 @@ public class TopicController {
         CreateTopicResponse createTopicResponse =
                 topicApplicationService.createTopic(createTopicCommand);
         log.info("Topic created: {}", createTopicResponse);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(createTopicResponse);
     }
 

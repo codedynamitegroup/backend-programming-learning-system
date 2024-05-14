@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryContestCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryMostPopularContestsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestResponseEntity;
@@ -17,6 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Component
 @Slf4j
@@ -65,6 +68,19 @@ public class ContestCommandHandler {
         log.info("Returning all contests: {}", contests);
 
         return contestDataMapper.contestsToQueryAllContestsResponse(contests);
+    }
+
+    @Transactional(readOnly = true)
+    public QueryMostPopularContestsResponse queryMostPopularContestsResponse() {
+        List<Contest> contests = contestQueryHelper
+                .findMostPopularContests();
+
+        log.info("Returning most popular upcoming contests: {}", contests);
+
+        return QueryMostPopularContestsResponse
+                .builder()
+                .mostPopularContests(contestDataMapper.contestsToContestResponseEntities(contests))
+                .build();
     }
 
     @Transactional(readOnly = true)

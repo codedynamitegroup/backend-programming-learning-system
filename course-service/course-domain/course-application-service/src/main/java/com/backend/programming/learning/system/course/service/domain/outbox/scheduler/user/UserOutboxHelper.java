@@ -6,7 +6,9 @@ import com.backend.programming.learning.system.course.service.domain.outbox.mode
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserOutboxRepository;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
+import com.backend.programming.learning.system.saga.SagaStatus;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -83,7 +85,7 @@ public class UserOutboxHelper {
         }
     }
 
-    private void save(UserOutboxMessage userOutboxMessage) {
+    public void save(UserOutboxMessage userOutboxMessage) {
         UserOutboxMessage response = userOutboxRepository.save(userOutboxMessage);
         if (response == null) {
             log.error("Could not save UserOutboxMessage!");

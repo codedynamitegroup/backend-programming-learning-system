@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain;
 
 import com.backend.programming.learning.system.course.service.domain.entity.*;
+import com.backend.programming.learning.system.course.service.domain.entity.Module;
 import com.backend.programming.learning.system.course.service.domain.event.organization.*;
 import com.backend.programming.learning.system.course.service.domain.event.question.event.*;
 import com.backend.programming.learning.system.course.service.domain.event.user.*;
@@ -26,10 +27,15 @@ public interface CourseDomainService {
 
     void createSubmissionAssignmentFile(SubmissionAssignmentFile submissionAssignmentFile);
     void createCourseUsers(List<CourseUser> courseUsers);
+    void createCourseUser(CourseUser courseUser);
 
     void createExamQuestions(List<ExamQuestion> examQuestions);
 
     void createOrganization(Organization organization);
+
+    void createSection(Section section);
+
+    void createModule(Module module);
 
     void createCallMoodleApiFunction(CallMoodleApiFunction callMoodleApiFunction);
 
@@ -63,4 +69,8 @@ public interface CourseDomainService {
     OrganizationUpdatedFailEvent updatedOrganizationFail(Organization organization, List<String> failureMessages);
     OrganizationDeletedSuccessEvent deletedOrganizationSuccess(Organization organization);
     OrganizationDeletedFailEvent deletedOrganizationFail(Organization organization, List<String> failureMessages);
+
+    UserUpdatedEvent updateUser(User user);
+
+    UserCreatedEvent createUser(User user);
 }

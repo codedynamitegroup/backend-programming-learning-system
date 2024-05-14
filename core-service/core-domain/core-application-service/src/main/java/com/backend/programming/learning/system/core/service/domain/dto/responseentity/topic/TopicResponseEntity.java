@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.core.service.domain.dto.response
 
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.programminglanguage.ProgrammingLanguageResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,9 +12,12 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
+
 @Getter
 @Builder
 @AllArgsConstructor
+@JsonInclude(NON_NULL)
 public class TopicResponseEntity {
     @NotNull
     private final UUID topicId;
@@ -21,6 +25,8 @@ public class TopicResponseEntity {
     private final String name;
     @NotNull
     private final String description;
+    @NotNull
+    private final String thumbnailUrl;
     @NotNull
     private final List<ProgrammingLanguageResponseEntity> programmingLanguages;
     @NotNull

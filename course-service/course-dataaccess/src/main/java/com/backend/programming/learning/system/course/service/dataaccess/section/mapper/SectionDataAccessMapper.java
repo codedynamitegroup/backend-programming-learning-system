@@ -26,7 +26,9 @@ public class SectionDataAccessMapper {
         CourseEntity course = CourseEntity.builder().id(section.getCourseId().getValue()).build();
         return SectionEntity.builder()
                 .id(section.getId().getValue())
+                .sectionMoodleId(section.getSectionMoodleId())
                 .course(course)
+                .visible(section.getVisible())
                 .name(section.getName())
                 .build();
     }
@@ -35,6 +37,7 @@ public class SectionDataAccessMapper {
         return Section.builder()
                 .id(new SectionId(sectionEntity.getId()))
                 .name(sectionEntity.getName())
+                .sectionMoodleId(sectionEntity.getSectionMoodleId())
                 .courseId(new CourseId(sectionEntity.getCourse().getId()))
                 .visible(sectionEntity.getVisible())
                 .build();

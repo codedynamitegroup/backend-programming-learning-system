@@ -8,6 +8,7 @@ import com.backend.programming.learning.system.core.service.dataaccess.user.enti
 import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Formula;
 
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -33,7 +34,14 @@ public class CertificateCourseEntity {
 
     private ZonedDateTime startTime;
     private ZonedDateTime endTime;
-    private Boolean isDeleted;
+
+    @Basic(fetch = FetchType.LAZY)
+    @Formula("(select count(*) from certificate_course_user ccu where ccu.certificate_course_id = id)")
+    private Integer numOfStudents;
+
+    @Basic(fetch = FetchType.LAZY)
+    @Formula("(select count(*) from chapter c, chapter_question cq where c.certificate_course_id = id and c.id = cq.chapter_id)")
+    private Integer numOfQuestions;
 
     @ManyToOne
     @JoinColumn(name = "topic_id", referencedColumnName = "id")

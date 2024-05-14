@@ -23,4 +23,11 @@ public class CourseUserDataMapper {
                         .build())
                 .toList();
     }
+
+    public CourseUser buildCourseUser(Course course, User user) {
+        return CourseUser.builder()
+                .course(course)
+                .user(user)
+                .build();
+    }
 }

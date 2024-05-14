@@ -3,21 +3,25 @@ package com.backend.programming.learning.system.auth.service.domain.mapper;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.message.user.UserRequest;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.organization.OrganizationEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserDeletedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.UserEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserEventPayload;
+import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
+import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import java.time.ZoneId;
 import java.util.List;
 import java.util.UUID;
 
@@ -127,6 +131,43 @@ public class UserDataMapper {
         return UpdateUserResponse.builder()
                 .userId(userUpdated.getId().getValue())
                 .message(message)
+                .build();
+    }
+
+    public User userCreateRequestToUser(UserRequest userRequest) {
+        return User.builder()
+                .id(new UserId(UUID.fromString(userRequest.getUserId())))
+                .email(userRequest.getEmail())
+                .username(userRequest.getUsername())
+                .password("")
+                .firstName(userRequest.getFirstName())
+                .lastName(userRequest.getLastName())
+                .phone(userRequest.getPhone())
+                .createdAt(userRequest.getCreatedAt().atZone(ZoneId.of(DomainConstants.UTC)))
+                .updatedAt(userRequest.getUpdatedAt().atZone(ZoneId.of(DomainConstants.UTC)))
+                .isDeleted(userRequest.getIsDeleted())
+                .build();
+    }
+
+    public  UserEventPayload userEventToUserEventPayload(UserEvent userEvent, CopyState copyState) {
+        return UserEventPayload.builder()
+                .userId(userEvent.getUser().getId().getValue().toString())
+                .copyState(copyState.name())
+                .build();
+    }
+
+    public User userUpdateRequestToUser(UserRequest userUpdateRequest) {
+        return User.builder()
+                .id(new UserId(UUID.fromString(userUpdateRequest.getUserId())))
+                .firstName(userUpdateRequest.getFirstName())
+                .lastName(userUpdateRequest.getLastName())
+                .username(userUpdateRequest.getUsername())
+                .password("")
+                .address(userUpdateRequest.getAddress())
+                .avatarUrl(userUpdateRequest.getAvatarUrl())
+                .dob(userUpdateRequest.getDob().atZone(ZoneId.of(DomainConstants.UTC)))
+                .phone(userUpdateRequest.getPhone())
+                .updatedAt(userUpdateRequest.getUpdatedAt().atZone(ZoneId.of(DomainConstants.UTC)))
                 .build();
     }
 }
