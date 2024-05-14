@@ -1,13 +1,11 @@
 package com.backend.programming.learning.system.core.service.domain.dto.method.query.question;
 
-import com.backend.programming.learning.system.core.service.domain.dto.responseentity.QuestionResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import jakarta.validation.constraints.NotNull;
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Builder

@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.dataaccess.user.mapper;
 
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
@@ -68,6 +69,18 @@ public class UserDataAccessMapper {
                 .createdAt(null)
                 .updatedAt(null)
                 .isDeleted(null)
+                .build();
+    }
+    public UserResponseEntity userEntityToUserResponseEntityHideSensitiveData(UserEntity userEntity) {
+        return UserResponseEntity.builder()
+                .userId(userEntity.getId())
+                .email(null)
+                .dob(null)
+                .firstName(userEntity.getFirstName())
+                .lastName(userEntity.getLastName())
+                .avatarUrl(null)
+                .phone(null)
+                .address(null)
                 .build();
     }
 }

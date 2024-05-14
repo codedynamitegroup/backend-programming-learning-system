@@ -5,7 +5,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.chapter.UpdateChapterResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResponseEntity;
-import com.backend.programming.learning.system.core.service.domain.dto.responseentity.QuestionResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;

@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.dataaccess.question.mapper;
 
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.AnswerOfQuestionEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.AnswerOfQuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.AnswerOfQuestion;
 import com.backend.programming.learning.system.core.service.domain.valueobject.AnswerId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
@@ -77,5 +78,20 @@ public class AnswerOfQuestionDataAccessMapper {
         }
 
         return answerOfQuestionEntityList;
+    }
+    private AnswerOfQuestionResponseEntity answerOfQuestionEntityToAnswerOfQuestionResponseEntity(AnswerOfQuestionEntity answerOfQuestionEntity) {
+        return AnswerOfQuestionResponseEntity.builder()
+                .id(answerOfQuestionEntity.getId().toString())
+                .questionId(answerOfQuestionEntity.getQuestionId().toString())
+                .feedback(answerOfQuestionEntity.getFeedback())
+                .answer(answerOfQuestionEntity.getAnswer())
+                .fraction(answerOfQuestionEntity.getFraction())
+                .build();
+    }
+
+    public List<AnswerOfQuestionResponseEntity> answerOfQuestionEntityListToAnswerOfQuestionResponseEntityList(List<AnswerOfQuestionEntity> answerOfQuestionEntityList) {
+        return List.of(answerOfQuestionEntityList.stream()
+                .map(this::answerOfQuestionEntityToAnswerOfQuestionResponseEntity)
+                .toArray(AnswerOfQuestionResponseEntity[]::new));
     }
 }

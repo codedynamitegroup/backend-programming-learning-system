@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.implement.service.question.method.query;
 
-import com.backend.programming.learning.system.core.service.domain.dto.responseentity.QuestionResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;

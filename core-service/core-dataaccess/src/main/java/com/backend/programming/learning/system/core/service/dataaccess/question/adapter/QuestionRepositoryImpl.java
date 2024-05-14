@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.core.service.dataaccess.question
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.question.mapper.QuestionDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.question.repository.QuestionJpaRepository;
-import com.backend.programming.learning.system.core.service.domain.dto.responseentity.QuestionResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QuestionRepository;
 import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;

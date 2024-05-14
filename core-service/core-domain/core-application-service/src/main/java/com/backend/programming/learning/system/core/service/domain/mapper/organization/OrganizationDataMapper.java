@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.mapper.organization;
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.message.organization.OrganizationRequest;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.OrganizationResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Organization;
 import com.backend.programming.learning.system.core.service.domain.event.organization.OrganizationEvent;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.organization.OrganizationEventPayload;
@@ -48,6 +49,19 @@ public class OrganizationDataMapper {
                 .organizationId(organizationEvent.getOrganization().getId().getValue().toString())
                 .copyState(copyState.name())
                 .failureMessages(organizationEvent.getFailureMessages())
+                .build();
+    }
+
+    public OrganizationResponseEntity organizationToOrganizationResponseEntity(Organization organization) {
+        return OrganizationResponseEntity.builder()
+                .id(organization.getId().getValue().toString())
+                .name(organization.getName())
+                .description(organization.getDescription())
+                .moodleUrl(organization.getMoodleUrl())
+                .apiKey(organization.getApiKey())
+                .isDeleted(organization.getDeleted())
+                .createdAt(organization.getCreatedAt().toInstant().atZone(ZoneId.of(DomainConstants.UTC)))
+                .updatedAt(organization.getUpdatedAt().toInstant().atZone(ZoneId.of(DomainConstants.UTC)))
                 .build();
     }
 }

@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.dataaccess.organization.mapper;
 
 import com.backend.programming.learning.system.core.service.dataaccess.organization.entity.OrganizationEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.OrganizationResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Organization;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import org.springframework.stereotype.Component;
@@ -30,6 +31,19 @@ public class OrganizationDataAccessMapper {
                 .updatedAt(organization.getUpdatedAt())
                 .isDeleted(organization.getDeleted())
                 .apiKey(organization.getApiKey())
+                .build();
+    }
+
+    public OrganizationResponseEntity organizationEntityToOrganizationResponseEntity(OrganizationEntity organizationEntity) {
+        return OrganizationResponseEntity.builder()
+                .id(organizationEntity.getId().toString())
+                .name(organizationEntity.getName())
+                .description(organizationEntity.getDescription())
+                .moodleUrl(organizationEntity.getMoodleUrl())
+                .apiKey(organizationEntity.getApiKey())
+                .isDeleted(organizationEntity.getIsDeleted())
+                .createdAt(organizationEntity.getCreatedAt())
+                .updatedAt(organizationEntity.getUpdatedAt())
                 .build();
     }
 }
