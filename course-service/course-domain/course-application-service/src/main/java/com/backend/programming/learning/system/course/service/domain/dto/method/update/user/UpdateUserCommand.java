@@ -15,6 +15,7 @@ public class UpdateUserCommand {
     @NotNull
     private final UUID userId;
     private Integer userIdMoodle;
+    private String username;
 
     private ZonedDateTime dob;
 

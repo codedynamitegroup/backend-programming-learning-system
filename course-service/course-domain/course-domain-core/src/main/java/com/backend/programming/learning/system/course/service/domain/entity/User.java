@@ -6,7 +6,6 @@ import com.backend.programming.learning.system.domain.valueobject.UserId;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,7 +13,8 @@ import java.util.UUID;
 public class User extends AggregateRoot<UserId> {
     private Integer userIdMoodle;
     private Organization organization;
-    private  String name;
+    private String userName;
+    private String name;
     private String email;
     private ZonedDateTime dob;
     private String firstName;
@@ -25,7 +25,7 @@ public class User extends AggregateRoot<UserId> {
     private ZonedDateTime lastLogin;
     private Boolean isDeleted;
     private ZonedDateTime createdAt;
-    private  ZonedDateTime updatedAt;
+    private ZonedDateTime updatedAt;
     private List<String> failureMessage;
 
     private User(Builder builder) {
@@ -33,6 +33,7 @@ public class User extends AggregateRoot<UserId> {
         userIdMoodle = builder.userIdMoodle;
         organization = builder.organization;
         name = builder.name;
+        userName = builder.username;
         email = builder.email;
         dob = builder.dob;
         firstName = builder.firstName;
@@ -65,6 +66,10 @@ public class User extends AggregateRoot<UserId> {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public void setEmail(String email) {
@@ -113,6 +118,9 @@ public class User extends AggregateRoot<UserId> {
 
     public String getEmail() {
         return email;
+    }
+    public String getUserName() {
+        return userName;
     }
 
     public ZonedDateTime getDob() {
@@ -178,6 +186,7 @@ public class User extends AggregateRoot<UserId> {
     public static final class Builder {
         private UserId userId;
         private Integer userIdMoodle;
+        private String username;
         private Organization organization;
         private String name;
         private String email;
@@ -214,8 +223,14 @@ public class User extends AggregateRoot<UserId> {
             organization = val;
             return this;
         }
+
         public Builder name(String val) {
             name = val;
+            return this;
+        }
+
+        public Builder username(String val) {
+            username = val;
             return this;
         }
 

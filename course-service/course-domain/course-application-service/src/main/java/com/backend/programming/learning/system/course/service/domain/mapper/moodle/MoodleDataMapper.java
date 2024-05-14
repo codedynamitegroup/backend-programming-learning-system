@@ -155,6 +155,7 @@ public class MoodleDataMapper {
     public UpdateUserCommand updateUser(UserModel userModel, User user) {
         return UpdateUserCommand.builder()
                 .userId(user.getId().getValue())
+                .username(userModel.getUsername())
                 .userIdMoodle(Integer.valueOf(userModel.getId()))
                 .dob(user.getDob())
                 .firstName(userModel.getFirstname())
@@ -168,6 +169,7 @@ public class MoodleDataMapper {
     public CreateUserCommand createUser(UserModel userModel) {
         return CreateUserCommand.builder()
                 .email(userModel.getEmail())
+                .username(userModel.getUsername())
                 .userIdMoodle(Integer.valueOf(userModel.getId()))
                 .password("")
                 .firstName(userModel.getFirstname())

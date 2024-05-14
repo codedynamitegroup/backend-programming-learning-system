@@ -54,7 +54,7 @@ public class UserRequestHelper {
             UserCreatedFailEvent userCreatedFailEvent = authDomainService.createdUserFail(user, failureMessages);
             userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userCreatedFailEvent, CopyState.CREATE_FAILED),
                     ServiceName.AUTH_SERVICE,
-                    CopyState.CREATING,
+                    CopyState.CREATE_FAILED,
                     OutboxStatus.STARTED,
                     SagaStatus.STARTED,
                     UUID.fromString(userRequest.getSagaId()));
@@ -69,7 +69,7 @@ public class UserRequestHelper {
             UserCreatedFailEvent userCreatedFailEvent = authDomainService.createdUserFail(user, failureMessages);
             userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userCreatedFailEvent, CopyState.CREATE_FAILED),
                     ServiceName.AUTH_SERVICE,
-                    CopyState.CREATING,
+                    CopyState.CREATE_FAILED,
                     OutboxStatus.STARTED,
                     SagaStatus.STARTED,
                     UUID.fromString(userRequest.getSagaId()));
@@ -105,7 +105,7 @@ public class UserRequestHelper {
             UserUpdatedFailEvent userUpdatedFailEvent = authDomainService.updatedUserFail(user, failureMessages);
             userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userUpdatedFailEvent, CopyState.UPDATE_FAILED),
                     ServiceName.AUTH_SERVICE,
-                    CopyState.CREATING,
+                    CopyState.UPDATE_FAILED,
                     OutboxStatus.STARTED,
                     SagaStatus.STARTED,
                     UUID.fromString(userUpdateRequest.getSagaId()));
@@ -144,7 +144,7 @@ public class UserRequestHelper {
             UserUpdatedFailEvent userUpdatedFailEvent = authDomainService.updatedUserFail(user, failureMessages);
             userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userUpdatedFailEvent, CopyState.UPDATE_FAILED),
                     ServiceName.AUTH_SERVICE,
-                    CopyState.CREATING,
+                    CopyState.UPDATE_FAILED,
                     OutboxStatus.STARTED,
                     SagaStatus.STARTED,
                     UUID.fromString(userUpdateRequest.getSagaId()));
@@ -156,7 +156,7 @@ public class UserRequestHelper {
 
         userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userUpdatedSuccessEvent, CopyState.UPDATED),
                 ServiceName.AUTH_SERVICE,
-                CopyState.CREATING,
+                CopyState.UPDATED,
                 OutboxStatus.STARTED,
                 SagaStatus.STARTED,
                 UUID.fromString(userUpdateRequest.getSagaId()));

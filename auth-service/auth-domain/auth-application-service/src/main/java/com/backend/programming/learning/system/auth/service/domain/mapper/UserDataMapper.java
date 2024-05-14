@@ -6,12 +6,10 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.de
 import com.backend.programming.learning.system.auth.service.domain.dto.method.message.user.UserRequest;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.organization.OrganizationEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedFailEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserDeletedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedEvent;
@@ -140,6 +138,7 @@ public class UserDataMapper {
         return User.builder()
                 .id(new UserId(UUID.fromString(userRequest.getUserId())))
                 .email(userRequest.getEmail())
+                .username(userRequest.getUsername())
                 .password("")
                 .firstName(userRequest.getFirstName())
                 .lastName(userRequest.getLastName())
@@ -162,6 +161,7 @@ public class UserDataMapper {
                 .id(new UserId(UUID.fromString(userUpdateRequest.getUserId())))
                 .firstName(userUpdateRequest.getFirstName())
                 .lastName(userUpdateRequest.getLastName())
+                .username(userUpdateRequest.getUsername())
                 .password("")
                 .address(userUpdateRequest.getAddress())
                 .avatarUrl(userUpdateRequest.getAvatarUrl())
