@@ -1,9 +1,13 @@
 server:
   port: 9999
 
+logging:
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
+
 spring:
   application:
-    name: config-server
+    name: configserver
   profiles:
     active: git
   cloud:
@@ -15,16 +19,11 @@ spring:
           default-label: main
           force-pull: true
           clone-on-start: true
-          timeout: 10
       fail-fast: true
   security:
     user:
       name: spring_cloud_user
       password: springCloud_Pwd!
-
-logging:
-  pattern:
-    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
 
 management:
   endpoints:

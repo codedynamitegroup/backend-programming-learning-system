@@ -25,9 +25,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -52,12 +49,13 @@ public class UserController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<?> createUser(@RequestBody CreateUserCommand createUserCommand) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
-            String token = jwtAuthenticationToken.getToken().getTokenValue();
+    public ResponseEntity<?> createUser(
+            @RequestHeader(name = "Authorization") String authorizationHeader,
+            @RequestBody CreateUserCommand createUserCommand) {
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            String jwtToken = authorizationHeader.substring(7);
             log.info("Creating user with email: {}", createUserCommand.getEmail());
-            CreateUserResponse createUserResponse = userApplicationService.createUser(createUserCommand, token);
+            CreateUserResponse createUserResponse = userApplicationService.createUser(createUserCommand, jwtToken);
             log.info("User created with email: {}", createUserResponse.getEmail());
             return ResponseEntity.status(HttpStatus.CREATED).body(createUserResponse);
         }
@@ -169,10 +167,12 @@ public class UserController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<?> updateUserById(@PathVariable UUID id, @RequestBody UpdateUserCommand updateUserCommand) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
-            String token = jwtAuthenticationToken.getToken().getTokenValue();
+    public ResponseEntity<?> updateUserById(
+            @PathVariable UUID id,
+            @RequestHeader(name = "Authorization") String authorizationHeader,
+            @RequestBody UpdateUserCommand updateUserCommand) {
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            String jwtToken = authorizationHeader.substring(7);
             log.info("Updating user with id: {}", id);
             UpdateUserResponse updateUserResponse = userApplicationService.updateUser(UpdateUserCommand.builder()
                     .userId(id)
@@ -182,7 +182,7 @@ public class UserController {
                     .phone(updateUserCommand.getPhone())
                     .address(updateUserCommand.getAddress())
                     .avatarUrl(updateUserCommand.getAvatarUrl())
-                    .build(), token);
+                    .build(), jwtToken);
 
             log.info("User updated with id: {}", id);
             return ResponseEntity.ok(updateUserResponse);
@@ -199,15 +199,16 @@ public class UserController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<?> deleteUserById(@PathVariable UUID id) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
-            String token = jwtAuthenticationToken.getToken().getTokenValue();
+    public ResponseEntity<?> deleteUserById(
+            @RequestHeader(name = "Authorization") String authorizationHeader,
+            @PathVariable UUID id) {
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            String jwtToken = authorizationHeader.substring(7);
             log.info("Deleting user with id: {}", id);
             DeleteUserResponse deleteUserResponse =
                     userApplicationService.deleteUserById(DeleteUserCommand.builder()
                             .userId(id)
-                            .build(), token);
+                            .build(), jwtToken);
             log.info("User deleted with id: {}", id);
             return ResponseEntity.ok(deleteUserResponse);
         }

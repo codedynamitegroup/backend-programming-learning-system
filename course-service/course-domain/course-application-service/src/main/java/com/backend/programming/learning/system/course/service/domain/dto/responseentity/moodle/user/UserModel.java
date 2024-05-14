@@ -1,14 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.util.List;
+import lombok.*;
 
 /**
  * com.backend.programming.learning.system.auth.service.application.rest.moodle
@@ -30,20 +23,20 @@ public class UserModel {
     String lastname;
     String fullname;
     String email;
-    String address;
-    String phone1;
     String department;
-    Long firstaccess;
-    Long lastaccess;
-    Long lastcourseaccess;
+    Integer firstaccess;
+    Integer lastaccess;
+    String auth;
+    Boolean suspended;
+    Boolean confirmed;
+    String lang;
+    String theme;
+    String timezone;
+    Integer mailformat;
     String description;
     Integer descriptionformat;
-    String city;
     String country;
     String profileimageurlsmall;
     String profileimageurl;
-    List<Role> roles;
     Object preferences;
-    Object enrolledcourses;
 }
-

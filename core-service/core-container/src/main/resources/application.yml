@@ -39,11 +39,6 @@ core-service:
   outbox-scheduler-initial-delay: 2000
 
 spring:
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://${keycloak.domain}/auth/realms/${keycloak.realm}
   application:
     name: core-service
   config:
@@ -149,17 +144,6 @@ security:
 
 log:
   appName: core-service
-
-jwt:
-  auth:
-    converter:
-      resource-id: spring-client-api-rest
-
-keycloak:
-  realm: microservices_realm
-  domain: localhost:9081
-  client: spring-client-api-rest
-  urls: http://${keycloak.domain}
 
 ---
 spring.config.activate.on-profile: prod

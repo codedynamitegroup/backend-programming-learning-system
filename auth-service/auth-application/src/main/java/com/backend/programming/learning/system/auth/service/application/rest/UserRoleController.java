@@ -5,8 +5,6 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.cr
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user_role.DeleteUserRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user_role.DeleteUserRoleResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user_role.QueryUserRoleCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user_role.UserRoleEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserRoleApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,9 +15,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -43,13 +38,14 @@ public class UserRoleController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<?> createUserRole(@RequestBody CreateUserRoleCommand createUserRoleCommand) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
-            String token = jwtAuthenticationToken.getToken().getTokenValue();
+    public ResponseEntity<?> createUserRole(
+            @RequestHeader(name = "Authorization") String authorizationHeader,
+            @RequestBody CreateUserRoleCommand createUserRoleCommand) {
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            String jwtToken = authorizationHeader.substring(7);
             log.info("Creating user role with role id: {} and user id: {}",
                     createUserRoleCommand.getRoleId(), createUserRoleCommand.getUserId());
-            CreateUserRoleResponse createUserRoleResponse = userRoleApplicationService.createUserRole(createUserRoleCommand, token);
+            CreateUserRoleResponse createUserRoleResponse = userRoleApplicationService.createUserRole(createUserRoleCommand, jwtToken);
             log.info("User role created with role id: {} and user id: {}",
                     createUserRoleCommand.getRoleId(), createUserRoleCommand.getUserId());
             return ResponseEntity.status(HttpStatus.CREATED).body(createUserRoleResponse);

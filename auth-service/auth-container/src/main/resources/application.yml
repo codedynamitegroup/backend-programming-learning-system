@@ -29,11 +29,6 @@ auth-service:
   outbox-scheduler-initial-delay: 2000
 
 spring:
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://${keycloak.domain}/realms/${keycloak.realm}
   application:
     name: auth-service
   config:
