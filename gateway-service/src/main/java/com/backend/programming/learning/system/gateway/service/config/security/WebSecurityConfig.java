@@ -11,6 +11,8 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.ReactiveJwtAuthenticationConverterAdapter;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import reactor.core.publisher.Mono;
 import org.springframework.core.convert.converter.Converter;
 
@@ -24,7 +26,8 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityWebFilterChain securityFilterChain(ServerHttpSecurity serverHttpSecurity) {
-        serverHttpSecurity.authorizeExchange(exchanges -> exchanges
+        serverHttpSecurity
+                .authorizeExchange(exchanges -> exchanges
                         .pathMatchers(HttpMethod.GET, "/auth/users").hasAnyRole(ADMIN)
                         .pathMatchers(HttpMethod.GET, "/auth/users/**").hasAnyRole(ADMIN)
                         .pathMatchers(HttpMethod.DELETE, "/auth/users/:id").hasRole(ADMIN)
