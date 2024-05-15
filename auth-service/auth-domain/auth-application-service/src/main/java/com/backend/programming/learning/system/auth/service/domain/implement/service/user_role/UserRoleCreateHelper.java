@@ -45,7 +45,7 @@ public class UserRoleCreateHelper {
         userRole.setUpdatedBy(createdBy);
 
         authDomainService.createUserRole(userRole);
-        roleKeycloakApplicationService.assignRole(user.getUsername(), role.getName(), token);
+        roleKeycloakApplicationService.assignRole(user.getEmail(), role.getName(), token);
         return saveUserRole(userRole);
     }
 

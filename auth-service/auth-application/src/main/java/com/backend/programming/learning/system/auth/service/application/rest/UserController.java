@@ -15,7 +15,6 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.re
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
-import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserKeycloakApplicationService;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -33,7 +32,6 @@ import java.util.UUID;
 @RestController
 @RequestMapping(value = "/auth/users", produces = "application/vnd.api.v1+json")
 public class UserController {
-
     private final UserApplicationService userApplicationService;
 
     public UserController(UserApplicationService userApplicationService) {
@@ -72,7 +70,7 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<LoginUserResponse> loginUser(@RequestBody LoginUserCommand loginUserCommand) {
-        log.info("Logging user with username: {}", loginUserCommand.getUsername());
+        log.info("Logging user with email: {}", loginUserCommand.getEmail());
         LoginUserResponse loginUserResponse = userApplicationService.loginUser(loginUserCommand);
         return ResponseEntity.status(HttpStatus.OK).body(loginUserResponse);
     }
@@ -87,12 +85,12 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<RefreshTokenUserResponse> refreshTokenUser(
-            @RequestParam String refreshToken
+            @RequestHeader(value = "X-Username") String username
     ) {
         RefreshTokenUserResponse refreshTokenUser = userApplicationService.refreshTokenUser(
                 RefreshTokenUserCommand
                         .builder()
-                        .refreshToken(refreshToken)
+                        .email(username)
                         .build()
         );
         return ResponseEntity.status(HttpStatus.OK).body(refreshTokenUser);
