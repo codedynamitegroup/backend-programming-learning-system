@@ -34,9 +34,10 @@ spring:
     import: "optional:configserver:${CONFIG_SERVER:http://localhost:9999}"
   security:
     oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://${keycloak.domain}/realms/${keycloak.realm}
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://${keycloak.domain}/realms/${keycloak.realm}
   cloud:
     gateway:
       discovery:
@@ -84,21 +85,6 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
-
-jwt:
-  auth:
-    converter:
-      resource-id: spring-client-api-rest
-      principle-attribute: preferred_username
-
-keycloak:
-  realm: spring-boot-realm-dev
-  domain: localhost:8890
-  admin-client-id: admin-cli
-  admin-client-secret: bTEi5t1OKE7l97ij9wYjAMqqYA4NCod8
-  client: spring-client-api-rest
-  client-secret: pE2Lz9RL01YGE15800wDxRfnz2KFuCgX
-  urls: http://${keycloak.domain}
 
 springdoc:
   api-docs:

@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.code.assessment.service.domain.config;
+package com.backend.programming.learning.system.auth.service.container.config.security;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
