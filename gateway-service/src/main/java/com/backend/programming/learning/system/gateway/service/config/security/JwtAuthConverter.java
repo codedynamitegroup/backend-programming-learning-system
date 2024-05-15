@@ -2,7 +2,6 @@ package com.backend.programming.learning.system.gateway.service.config.security;
 
 import com.backend.programming.learning.system.gateway.service.config.KeycloakGatewayConfigData;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
