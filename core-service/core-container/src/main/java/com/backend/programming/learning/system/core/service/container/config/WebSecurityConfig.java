@@ -18,8 +18,8 @@ public class WebSecurityConfig {
                 registry
                         .addMapping("/**")
                         .allowedOrigins("*")
-                        .allowedHeaders("Authorization")
-                        .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH");
+                        .allowedHeaders("*")
+                        .allowedMethods("*");
             }
         };
     }
