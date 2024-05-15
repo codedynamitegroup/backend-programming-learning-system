@@ -1,9 +1,9 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.entity;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.CodeQuestionLangaugeId;
-import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
+import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 
 public class CodeQuestionLangauge extends BaseEntity<CodeQuestionLangaugeId> {
     private final CodeQuestionId codeQuestionId;

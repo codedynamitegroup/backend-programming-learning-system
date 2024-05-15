@@ -2,11 +2,7 @@ package com.backend.programming.learning.system.code.assessment.service.applicat
 
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionResponse;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.test_case.CreateTestCasesCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.test_case.CreateTestCasesResponse;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetCodeSubmissionResponseItem;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetCodeSubmissionsByUserIdCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetDetailCodeSubmissionsByIdCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_submission.UpdateCodeSubmissionTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.CodeSubmissionApplicationService;
 import jakarta.validation.Valid;
@@ -29,6 +25,7 @@ public class CodeSubmissionController {
         this.codeSubmissionApplicationService = codeSubmissionApplicationService;
     }
 
+    //add outbox
     @PostMapping
     public ResponseEntity<CreateCodeSubmissionResponse> createCodeSubmission
             (@RequestBody CreateCodeSubmissionCommand createCodeSubmissionCommand){
@@ -64,9 +61,20 @@ public class CodeSubmissionController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/{code-submission-id}/memory-time-ranking")
+    public ResponseEntity<GetMemoryAndTimeRankingResponse> getMemoryAndTimeRanking(@PathVariable("code-submission-id") UUID codeSubmissionId){
+        GetMemoryAndTimeRankingCommand command = GetMemoryAndTimeRankingCommand.builder()
+                .codeSubmissionId(codeSubmissionId)
+                .build();
+
+        GetMemoryAndTimeRankingResponse response = codeSubmissionApplicationService.getMemoryAndRunTimeRanking(command);
+        return ResponseEntity.ok(response);
+    }
+
     @PutMapping("/test-case-token")
     public void updateCodeSubmissionTestCase(@RequestBody UpdateCodeSubmissionTestCaseCommand command){
         codeSubmissionApplicationService.handleTestCaseResult(command);
-
     }
+
+    //submit sample or use judge api directly
 }

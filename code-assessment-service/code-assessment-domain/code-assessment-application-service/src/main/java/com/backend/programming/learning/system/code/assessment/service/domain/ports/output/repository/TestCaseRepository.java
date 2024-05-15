@@ -16,4 +16,5 @@ public interface TestCaseRepository {
     Optional<TestCase> findById(TestCaseId id);
     void delete(TestCaseId id);
 
+    List<TestCase> getSampleTestCase(CodeQuestionId id);
 }

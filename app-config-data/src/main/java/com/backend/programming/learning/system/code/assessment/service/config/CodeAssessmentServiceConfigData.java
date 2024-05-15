@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "code-assessment-service")
 public class CodeAssessmentServiceConfigData {
+    private String defaultPageSize;
+    private String defaultPageNumber;
+
     private String codeQuestionUpdateRequestToCoreServiceTopicName;
     private String codeQuestionUpdateResponseFromCoreServiceTopicName;
 

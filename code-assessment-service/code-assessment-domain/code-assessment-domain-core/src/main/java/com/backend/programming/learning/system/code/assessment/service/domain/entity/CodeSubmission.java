@@ -2,7 +2,6 @@ package com.backend.programming.learning.system.code.assessment.service.domain.e
 
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.CodeSubmissionTestCaseId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
-import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.*;
 
@@ -10,9 +9,9 @@ import java.util.List;
 import java.util.UUID;
 
 public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
-    private CodeQuestion codeQuestion;
-    private UserId userId;
-    private ProgrammingLanguageId languageId;
+    private final CodeQuestion codeQuestion;
+    private final UserId userId;
+    private final ProgrammingLanguageId languageId;
     private Double grade;
     private Double runTime;
     private Double memory;
@@ -160,12 +159,11 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         return sonaqueAssessment;
     }
 
-    public void initiate(CodeQuestion codeQuestion, List<TestCase> testCases, ProgrammingLanguageCodeQuestion plcq) {
+    public void initiate(List<TestCase> testCases, ProgrammingLanguageCodeQuestion plcq) {
         codeSubmissionTestCaseList =
                 testCases.stream().map(this::initiateCodeSubmissionTestCase)
                         .toList();
 
-        this.codeQuestion = codeQuestion;
         setId(new CodeSubmissionId(UUID.randomUUID()));
         gradingStatus = GradingStatus.GRADING;
         numOfTestCase = codeSubmissionTestCaseList.size();
@@ -191,7 +189,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
     public void updateAvgTimeAndMemoryAndGrade(Double avgTime, Double avgMemory, long numOfPassedTestCase) {
         runTime = avgTime;
         memory = avgMemory;
-        grade = codeQuestion.getMaxGrade().doubleValue() * (numOfPassedTestCase * 1.0 / numOfTestCase);
+        grade = numOfPassedTestCase == numOfTestCase? codeQuestion.getMaxGrade().doubleValue() : codeQuestion.getMaxGrade().doubleValue() * (numOfPassedTestCase * 1.0 / numOfTestCase);
     }
 
     public static final class Builder {

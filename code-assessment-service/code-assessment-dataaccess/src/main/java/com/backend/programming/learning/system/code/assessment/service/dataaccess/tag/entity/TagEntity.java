@@ -1,10 +1,9 @@
 package com.backend.programming.learning.system.code.assessment.service.dataaccess.tag.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Formula;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -20,6 +19,12 @@ public class TagEntity {
     UUID id;
 
     String name;
+
+    @Basic(fetch = FetchType.LAZY)
+    @Formula("""
+            COALESCE((select count(*) from tag_code_question tcq where tcq.tag_id = id), 0)
+            """)
+    Integer numOfCodeQuestion;
 
     @Override
     public boolean equals(Object o) {

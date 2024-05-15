@@ -69,4 +69,10 @@ public class TestCaseRepositoryImpl  implements TestCaseRepository {
     public void delete(TestCaseId id) {
         jpaRepository.deleteById(id.getValue());
     }
+
+    @Override
+    public List<TestCase> getSampleTestCase(CodeQuestionId id) {
+        List<TestCaseEntity> testCaseEntities = jpaRepository.findByCodeQuestionIdAndIsSample(id.getValue(), true);
+        return testCaseEntities.stream().map(dataAccessMapper::testCaseEntityToTestCase).toList();
+    }
 }

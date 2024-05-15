@@ -54,4 +54,40 @@ public class CodeSubmissionRepositoryImpl implements CodeSubmissionRepository {
                         .map(dataAccessMapper::entityToCodeSubmission)
                         .collect(Collectors.toList()));
     }
+
+    @Override
+    public Integer findNumberOfSubmissionUnderMySubmissionByMemory(CodeSubmissionId id) {
+        return jpaRepository.findNumberOfSubmissionUnderMySubmissionByMemory(id.getValue());
+    }
+
+    @Override
+    public Integer findNumberOfSubmissionUnderMySubmissionByRunTime(CodeSubmissionId id) {
+        return jpaRepository.findNumberOfSubmissionUnderMySubmissionByRunTime(id.getValue());
+    }
+
+    @Override
+    public Integer totalSubmissionHavingAvgMemoryAndRunTime(CodeQuestionId id) {
+        return jpaRepository.totalSubmissionHavingAvgMemoryAndRunTime(id.getValue());
+    }
+
+    @Override
+    public Integer findNumberOfSubmissionUnderMySubmissionByScore(CodeSubmissionId id) {
+        return jpaRepository.findNumberOfSubmissionUnderMySubmissionByScore(id.getValue());
+    }
+
+    @Override
+    public Integer totalSubmissionHavingScore(CodeQuestionId id) {
+        return jpaRepository.totalSubmissionHavingScore(id.getValue());
+    }
+
+    @Override
+    public Integer findYourScoreRank(CodeSubmissionId id) {
+        return jpaRepository.findYourScoreRank(id.getValue());
+    }
+
+    @Override
+    public Optional<CodeSubmission> findLatestSubmission(CodeQuestionId id, UserId id1) {
+        Optional<CodeSubmissionEntity> codeSubmissionEntity = jpaRepository.findByCodeQuestionIdAndUserId(id.getValue(), id1.getValue());
+        return codeSubmissionEntity.map(dataAccessMapper::entityToCodeSubmission);
+    }
 }

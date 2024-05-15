@@ -5,9 +5,9 @@ import com.backend.programming.learning.system.code.assessment.service.dataacces
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language_code_question.entity.ProgrammingLanguageCodeQuestionEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language_code_question.entity.ProgrammingLanguageCodeQuestionEntityId;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.ProgrammingLanguageCodeQuestion;
-import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.programming_language_code_question.ProgrammingLanguageCodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
+import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -26,6 +26,16 @@ public class ProgrammingLanguageCodeQuestionDataAccessMapper {
                 .timeLimit(entity.getTimeLimit())
                 .memoryLimit(entity.getMemoryLimit())
                 .active(entity.getActive())
+                .build();
+    }
+
+    public ProgrammingLanguageCodeQuestionEntity domainObjectToEntity(ProgrammingLanguageCodeQuestion obj){
+        return ProgrammingLanguageCodeQuestionEntity.builder()
+                .codeQuestion(CodeQuestionEntity.builder().id(obj.getId().getValue().getCodeQuestionId().getValue()).build())
+                .programmingLanguage(ProgrammingLanguageEntity.builder().id(obj.getId().getValue().getProgrammingLanguageId().getValue()).build())
+                .active(obj.getActive())
+                .timeLimit(obj.getTimeLimit())
+                .memoryLimit(obj.getMemoryLimit())
                 .build();
     }
 

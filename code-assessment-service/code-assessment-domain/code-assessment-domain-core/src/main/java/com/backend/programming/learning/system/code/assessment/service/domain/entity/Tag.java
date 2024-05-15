@@ -7,14 +7,20 @@ import java.util.UUID;
 
 public class Tag extends AggregateRoot<TagId> {
     private String name;
+    private Integer numOfCodeQuestion;
 
     public String getName() {
         return name;
     }
 
+    public Integer getNumOfCodeQuestion() {
+        return numOfCodeQuestion;
+    }
+
     private Tag(Builder builder) {
         super.setId(builder.id);
         name = builder.name;
+        numOfCodeQuestion = builder.numOfCodeQuestion;
     }
 
     public static Builder builder() {
@@ -26,8 +32,9 @@ public class Tag extends AggregateRoot<TagId> {
     }
 
     public static final class Builder {
-        private TagId id;
         private String name;
+        private Integer numOfCodeQuestion;
+        private TagId id;
 
         private Builder() {
         }
@@ -42,8 +49,14 @@ public class Tag extends AggregateRoot<TagId> {
             return this;
         }
 
+        public Builder numOfCodeQuestion(Integer val) {
+            numOfCodeQuestion = val;
+            return this;
+        }
+
         public Tag build() {
             return new Tag(this);
         }
+
     }
 }
