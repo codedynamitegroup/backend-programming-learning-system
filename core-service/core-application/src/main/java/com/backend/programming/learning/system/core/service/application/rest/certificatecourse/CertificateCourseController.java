@@ -56,7 +56,7 @@ public class CertificateCourseController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createCertificateCourseResponse);
     }
 
-    @PostMapping("/register")
+    @PostMapping("/{id}/register")
     @Operation(summary = "Register Certificate course User.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Success.", content = {
@@ -66,10 +66,17 @@ public class CertificateCourseController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateCertificateCourseUserResponse> registerCertificateCourse(
+            @PathVariable UUID id,
             @RequestBody CreateCertificateCourseUserCommand createCertificateCourseUserCommand) {
         log.info("Creating Certificate course User course: {}", createCertificateCourseUserCommand);
         CreateCertificateCourseUserResponse createCertificateCourseUserResponse =
-                certificateCourseUserApplicationService.createCertificateCourseUser(createCertificateCourseUserCommand);
+                certificateCourseUserApplicationService.createCertificateCourseUser(
+                        CreateCertificateCourseUserCommand
+                        .builder()
+                        .certificateCourseId(id)
+                        .userId(createCertificateCourseUserCommand.getUserId())
+                        .build()
+                );
         log.info("Certificate course User created: {}", createCertificateCourseUserResponse);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createCertificateCourseUserResponse);
@@ -137,6 +144,35 @@ public class CertificateCourseController {
         QueryAllCertificateCoursesResponse queryAllCertificateCoursesResponse =
                 certificateCourseApplicationService.queryAllCertificateCourses(queryAllCertificateCoursesCommand);
         log.info("Returning all certificate courses");
+        return ResponseEntity.ok(queryAllCertificateCoursesResponse);
+    }
+
+    @PostMapping("/filter-by-is-registered")
+    @Operation(summary = "Get all certificate courses filtered by is registered.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllCertificateCoursesResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllCertificateCoursesResponse> getAllCertificateCoursesFilteredByIsRegistered(
+            @RequestHeader("X-username") String username,
+            @RequestBody QueryAllCertificateCoursesFilterByIsRegisteredCommand
+                    queryAllCertificateCoursesFilterByIsRegisteredCommand) {
+        QueryAllCertificateCoursesResponse queryAllCertificateCoursesResponse =
+                certificateCourseApplicationService.
+                        queryAllCertificateCoursesFilterByIsRegistered(
+                                QueryAllCertificateCoursesFilterByIsRegisteredCommand.builder()
+                                        .courseName(queryAllCertificateCoursesFilterByIsRegisteredCommand
+                                                .getCourseName())
+                                        .filterTopicIds(queryAllCertificateCoursesFilterByIsRegisteredCommand
+                                                .getFilterTopicIds())
+                                        .isRegistered(queryAllCertificateCoursesFilterByIsRegisteredCommand
+                                                .isRegistered())
+                                        .username(username)
+                                        .build());
+        log.info("Returning all certificate courses filtered by is registered");
         return ResponseEntity.ok(queryAllCertificateCoursesResponse);
     }
 

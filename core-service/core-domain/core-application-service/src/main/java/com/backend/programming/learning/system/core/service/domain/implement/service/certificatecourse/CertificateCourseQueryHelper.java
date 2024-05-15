@@ -10,6 +10,7 @@ import com.backend.programming.learning.system.core.service.domain.exception.Use
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.IsRegisteredFilter;
+import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -52,44 +53,58 @@ public class CertificateCourseQueryHelper {
     @Transactional(readOnly = true)
     public List<CertificateCourse> queryAllCertificateCourses(
             String courseName,
-            List<UUID> filterTopicIds,
-            IsRegisteredFilter isRegisteredFilter,
-            UUID registeredBy
+            List<UUID> filterTopicIds
     ) {
-        if (isRegisteredFilter != IsRegisteredFilter.ALL) {
-            if (registeredBy == null) {
-                log.warn("Registered by user id is required for certificate courses");
-                throw new CoreDomainException("Registered by user id is required for certificate courses");
-            }
-            checkUser(registeredBy);
-        }
         return certificateCourseRepository.findAllCertificateCourses(
                 courseName,
+                filterTopicIds
+        );
+    }
+
+    @Transactional(readOnly = true)
+    public List<CertificateCourse> queryAllCertificateCoursesFilterByIsRegistered(
+            String courseName,
+            List<UUID> filterTopicIds,
+            boolean isRegistered,
+            String username
+    ) {
+        UserId userId = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException("Could not find user with username: " + username))
+                .getId();
+        return certificateCourseRepository.findAllCertificateCoursesByIsRegistered(
+                courseName,
                 filterTopicIds,
-                isRegisteredFilter,
-                registeredBy
+                isRegistered,
+                userId.getValue()
         );
     }
 
     @Transactional(readOnly = true)
     public List<CertificateCourse> queryMostEnrolledCertificateCourses(
             String courseName,
-            List<UUID> filterTopicIds,
-            IsRegisteredFilter isRegisteredFilter,
-            UUID registeredBy
+            List<UUID> filterTopicIds
     ) {
-        if (isRegisteredFilter != IsRegisteredFilter.ALL) {
-            if (registeredBy == null) {
-                log.warn("Registered by user id is required for most enrolled certificate courses");
-                throw new CoreDomainException("Registered by user id is required for most enrolled certificate courses");
-            }
-            checkUser(registeredBy);
-        }
         return certificateCourseRepository.findMostEnrolledCertificateCourses(
                 courseName,
+                filterTopicIds
+        );
+    }
+
+    @Transactional(readOnly = true)
+    public List<CertificateCourse> queryMostEnrolledCertificateCoursesFilterByIsRegistered(
+            String courseName,
+            List<UUID> filterTopicIds,
+            boolean isRegistered,
+            String username
+    ) {
+        UserId userId = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException("Could not find user with username: " + username))
+                .getId();
+        return certificateCourseRepository.findMostEnrolledCertificateCoursesByIsRegistered(
+                courseName,
                 filterTopicIds,
-                isRegisteredFilter,
-                registeredBy
+                isRegistered,
+                userId.getValue()
         );
     }
 

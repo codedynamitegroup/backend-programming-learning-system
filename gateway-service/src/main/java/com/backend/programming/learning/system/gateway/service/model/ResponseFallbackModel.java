@@ -12,11 +12,11 @@ import java.time.ZonedDateTime;
 @AllArgsConstructor
 @Builder
 public class ResponseFallbackModel {
+    private Integer code;
+    private String status;
+    private String message;
     private ZonedDateTime timestamp;
     private String path;
-    private String status;
-    private String error;
-    private String message;
     private String requestId;
     private String trace;
 }

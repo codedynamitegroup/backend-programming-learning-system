@@ -48,36 +48,38 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
     @Override
     public List<CertificateCourse> findAllCertificateCourses(
             String courseName,
-            List<UUID> filterTopicIds,
-            IsRegisteredFilter isRegisteredFilter,
-            UUID registeredBy
+            List<UUID> filterTopicIds
     ) {
-        switch (isRegisteredFilter) {
-            case REGISTERED:
-                return certificateCourseJpaRepository.findAllByCourseNameAndByFilterTopicIdsAndRegisteredBy(
-                                courseName,
-                                filterTopicIds.isEmpty() ? null : filterTopicIds,
-                                registeredBy)
-                        .stream()
-                        .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
-                        .toList();
-            case NOT_REGISTERED:
-                return certificateCourseJpaRepository.findAllByCourseNameAndByFilterTopicIdsAndNotRegisteredBy(
+        return certificateCourseJpaRepository.findAllByCourseNameAndByFilterTopicIds(
                         courseName,
-                                filterTopicIds.isEmpty() ? null : filterTopicIds,
-                        registeredBy)
-                        .stream()
-                        .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
-                        .toList();
-            default:
-                return certificateCourseJpaRepository.findAllByCourseNameAndByFilterTopicIds(
-                        courseName,
-                                filterTopicIds.isEmpty() ? null : filterTopicIds)
-                        .stream()
-                        .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
-                        .toList();
-        }
+                        filterTopicIds.isEmpty() ? null : filterTopicIds)
+                .stream()
+                .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
+                .toList();
+    }
 
+    @Override
+    public List<CertificateCourse> findAllCertificateCoursesByIsRegistered(String courseName,
+                                                                           List<UUID> filterTopicIds,
+                                                                           boolean isRegistered,
+                                                                           UUID userId) {
+        if (isRegistered) {
+            return certificateCourseJpaRepository.findAllByCourseNameAndByFilterTopicIdsAndRegisteredBy(
+                            courseName,
+                            filterTopicIds.isEmpty() ? null : filterTopicIds,
+                            userId)
+                    .stream()
+                    .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
+                    .toList();
+        } else {
+            return certificateCourseJpaRepository.findAllByCourseNameAndByFilterTopicIdsAndNotRegisteredBy(
+                            courseName,
+                            filterTopicIds.isEmpty() ? null : filterTopicIds,
+                            userId)
+                    .stream()
+                    .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
+                    .toList();
+        }
     }
 
     @Override
@@ -87,35 +89,38 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
 
     @Override
     public List<CertificateCourse> findMostEnrolledCertificateCourses(String courseName,
-                                                                      List<UUID> filterTopicIds,
-                                                                      IsRegisteredFilter isRegisteredFilter,
-                                                                      UUID registeredBy) {
-        switch (isRegisteredFilter) {
-            case REGISTERED:
-                return certificateCourseJpaRepository.findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIdsAndRegisteredBy(
-                                courseName,
-                                filterTopicIds.isEmpty() ? null : filterTopicIds,
-                                registeredBy)
-                        .stream()
-                        .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
-                        .toList();
-            case NOT_REGISTERED:
-                return certificateCourseJpaRepository.findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIdsAndNotRegisteredBy(
-                                courseName,
-                                filterTopicIds.isEmpty() ? null : filterTopicIds,
-                                registeredBy)
-                        .stream()
-                        .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
-                        .toList();
-            default:
-                return certificateCourseJpaRepository.findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIds(
+                                                                      List<UUID> filterTopicIds) {
+
+        return certificateCourseJpaRepository.findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIds(
                                 courseName,
                                 filterTopicIds.isEmpty() ? null : filterTopicIds)
                         .stream()
                         .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
                         .toList();
+    }
+
+    @Override
+    public List<CertificateCourse> findMostEnrolledCertificateCoursesByIsRegistered(
+            String courseName,
+            List<UUID> filterTopicIds,
+            boolean isRegistered,
+            UUID userId) {
+        if (isRegistered) {
+            return certificateCourseJpaRepository.findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIdsAndRegisteredBy(
+                            courseName,
+                            filterTopicIds.isEmpty() ? null : filterTopicIds,
+                            userId)
+                    .stream()
+                    .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
+                    .toList();
+        } else {
+            return certificateCourseJpaRepository.findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIdsAndNotRegisteredBy(
+                            courseName,
+                            filterTopicIds.isEmpty() ? null : filterTopicIds,
+                            userId)
+                    .stream()
+                    .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
+                    .toList();
         }
-
-
     }
 }
