@@ -38,4 +38,11 @@ public class UserRepositoryImpl implements UserRepository {
                 .userEntityToUser(userJpaRepository
                         .save(userMapper.userToUserEntity(user)));
     }
+
+    @Override
+    public Optional<User> findByUsername(String username) {
+//        return userJpaRepository.findByUsername(username)
+//                .map(userMapper::userEntityToUser);
+        return Optional.empty();
+    }
 }

@@ -52,22 +52,22 @@ public class FallbackController {
         if(rootCause == null && cause instanceof java.util.concurrent.TimeoutException) {
             // Gateway Timeout
             return ResponseEntity.status(HttpStatus.GATEWAY_TIMEOUT).body(ResponseFallbackModel.builder()
+                    .code(HttpStatus.GATEWAY_TIMEOUT.value())
+                    .status(HttpStatus.GATEWAY_TIMEOUT.getReasonPhrase())
+                    .message("The server took too long to respond.")
                     .timestamp(ZonedDateTime.now(ZoneId.of("UTC")))
                     .path(exchange.getRequest().getPath().value())
-                    .status(String.valueOf(HttpStatus.GATEWAY_TIMEOUT.value()))
-                    .error(HttpStatus.GATEWAY_TIMEOUT.getReasonPhrase())
-                    .message("The server took too long to respond.")
                     .requestId(exchange.getRequest().getId())
                     .trace(cause.getMessage())
                     .build());
         } else {
             // Other error
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResponseFallbackModel.builder()
+                    .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
+                    .message("An error occurred. Please try after some time or contact support team!!!")
                     .timestamp(ZonedDateTime.now(ZoneId.of("UTC")))
                     .path(exchange.getRequest().getPath().value())
-                    .status(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()))
-                    .error(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
-                    .message("An error occurred. Please try after some time or contact support team!!!")
                     .requestId(exchange.getRequest().getId())
                     .trace(cause != null ? cause.getMessage() : null)
                     .build());

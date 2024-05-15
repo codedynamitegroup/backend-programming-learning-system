@@ -18,14 +18,21 @@ public interface CertificateCourseRepository {
 
     List<CertificateCourse> findAllCertificateCourses(
             String courseName,
+            List<UUID> filterTopicIds
+    );
+
+    List<CertificateCourse> findAllCertificateCoursesByIsRegistered(
+            String courseName,
             List<UUID> filterTopicIds,
-            IsRegisteredFilter isRegisteredFilter,
-            UUID registeredBy
+            boolean isRegistered,
+            UUID userId
     );
 
     void deleteCertificateCourse(UUID certificateCourseId);
     List<CertificateCourse> findMostEnrolledCertificateCourses(String courseName,
-                                                               List<UUID> filterTopicIds,
-                                                               IsRegisteredFilter isRegisteredFilter,
-                                                               UUID registeredBy);
+                                                               List<UUID> filterTopicIds);
+    List<CertificateCourse> findMostEnrolledCertificateCoursesByIsRegistered(String courseName,
+                                                                            List<UUID> filterTopicIds,
+                                                                            boolean isRegistered,
+                                                                            UUID userId);
 }
