@@ -19,7 +19,7 @@ public class WebSecurityConfig {
                         .addMapping("/**")
                         .allowedOrigins("*")
                         .allowedHeaders("Authorization")
-                        .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH");
+                        .allowedMethods("*");
             }
         };
     }
