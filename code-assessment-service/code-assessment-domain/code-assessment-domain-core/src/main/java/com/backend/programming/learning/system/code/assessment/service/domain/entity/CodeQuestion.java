@@ -29,6 +29,7 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     private ProgrammingLanguageId sourceCodeLanguageId;
     private String sourceCode;
     private List<TestCase> tcs;
+    private List<Tag> tags;
 
 
 
@@ -148,6 +149,10 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         return maxGrade;
     }
 
+    public List<Tag> getTags() {
+        return tags;
+    }
+
     private CodeQuestion(Builder builder) {
         super.setId(builder.id);
         questionId = builder.questionId;
@@ -165,6 +170,11 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         createdAt = builder.createdAt;
         solved = builder.solved;
         failureMessages = builder.failureMessages;
+        programmingLanguages = builder.programmingLanguages;
+        sourceCodeLanguageId = builder.sourceCodeLanguageId;
+        sourceCode = builder.sourceCode;
+        tcs = builder.tcs;
+        tags = builder.tags;
     }
 
     public void getDetail(List<TestCase> sampleTestCase, CodeSubmission codeSubmission, List<ProgrammingLanguage> languages) {
@@ -192,6 +202,11 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         private ZonedDateTime createdAt;
         private Boolean solved;
         private List<String> failureMessages;
+        private List<ProgrammingLanguage> programmingLanguages;
+        private ProgrammingLanguageId sourceCodeLanguageId;
+        private String sourceCode;
+        private List<TestCase> tcs;
+        private List<Tag> tags;
         private CodeQuestionId id;
 
         private Builder() {
@@ -269,6 +284,31 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
 
         public Builder failureMessages(List<String> val) {
             failureMessages = val;
+            return this;
+        }
+
+        public Builder programmingLanguages(List<ProgrammingLanguage> val) {
+            programmingLanguages = val;
+            return this;
+        }
+
+        public Builder sourceCodeLanguageId(ProgrammingLanguageId val) {
+            sourceCodeLanguageId = val;
+            return this;
+        }
+
+        public Builder sourceCode(String val) {
+            sourceCode = val;
+            return this;
+        }
+
+        public Builder tcs(List<TestCase> val) {
+            tcs = val;
+            return this;
+        }
+
+        public Builder tags(List<Tag> val) {
+            tags = val;
             return this;
         }
 

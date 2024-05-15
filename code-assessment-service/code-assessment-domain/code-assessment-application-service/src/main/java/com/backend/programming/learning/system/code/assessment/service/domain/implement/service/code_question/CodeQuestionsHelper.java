@@ -63,7 +63,7 @@ public class CodeQuestionsHelper {
 
         CodeQuestionsUpdatedEvent codeQuestionCreatedEvent
                 = codeAssessmentDomainService.validateAndInitiateCodeQuestion(codeQuestion);
-        saveCodeQuestion(codeQuestion);
+        CodeQuestion codeQuestionRes = saveCodeQuestion(codeQuestion);
         log.info("Code question is created, id: {}", codeQuestionCreatedEvent.getCodeQuestion().getId().getValue());
 
 
@@ -78,7 +78,7 @@ public class CodeQuestionsHelper {
                         }
                     })
                     .filter(Objects::nonNull)
-                    .map(tag -> codeQuestionDataMaper.codeQuestionIdAndTagIdToCodeQuestionTagId(codeQuestion.getId(), tag.getId()))
+                    .map(tag -> codeQuestionDataMaper.codeQuestionIdAndTagIdToCodeQuestionTagId(codeQuestionRes.getId(), tag.getId()))
                     .toList();
             codeQuestionRepository.saveTags(codeQuestionTagIds);
         }
