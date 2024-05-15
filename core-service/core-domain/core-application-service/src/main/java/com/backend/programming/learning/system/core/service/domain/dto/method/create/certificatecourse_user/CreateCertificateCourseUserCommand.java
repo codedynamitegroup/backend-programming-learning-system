@@ -12,7 +12,6 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class CreateCertificateCourseUserCommand {
-    @NotNull(message = "CertificateCourseId is required")
     private final UUID certificateCourseId;
     @NotNull(message = "UserId is required")
     private final UUID userId;
