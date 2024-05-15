@@ -15,7 +15,6 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.re
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
-import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserKeycloakApplicationService;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -25,6 +24,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -33,7 +36,6 @@ import java.util.UUID;
 @RestController
 @RequestMapping(value = "/auth/users", produces = "application/vnd.api.v1+json")
 public class UserController {
-
     private final UserApplicationService userApplicationService;
 
     public UserController(UserApplicationService userApplicationService) {
@@ -49,13 +51,12 @@ public class UserController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<?> createUser(
-            @RequestHeader(name = "Authorization") String authorizationHeader,
-            @RequestBody CreateUserCommand createUserCommand) {
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            String jwtToken = authorizationHeader.substring(7);
+    public ResponseEntity<?> createUser(@RequestBody CreateUserCommand createUserCommand) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            String token = jwtAuthenticationToken.getToken().getTokenValue();
             log.info("Creating user with email: {}", createUserCommand.getEmail());
-            CreateUserResponse createUserResponse = userApplicationService.createUser(createUserCommand, jwtToken);
+            CreateUserResponse createUserResponse = userApplicationService.createUser(createUserCommand, token);
             log.info("User created with email: {}", createUserResponse.getEmail());
             return ResponseEntity.status(HttpStatus.CREATED).body(createUserResponse);
         }
@@ -72,7 +73,7 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<LoginUserResponse> loginUser(@RequestBody LoginUserCommand loginUserCommand) {
-        log.info("Logging user with username: {}", loginUserCommand.getUsername());
+        log.info("Logging user with email: {}", loginUserCommand.getEmail());
         LoginUserResponse loginUserResponse = userApplicationService.loginUser(loginUserCommand);
         return ResponseEntity.status(HttpStatus.OK).body(loginUserResponse);
     }
@@ -86,16 +87,20 @@ public class UserController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<RefreshTokenUserResponse> refreshTokenUser(
-            @RequestParam String refreshToken
-    ) {
-        RefreshTokenUserResponse refreshTokenUser = userApplicationService.refreshTokenUser(
-                RefreshTokenUserCommand
-                        .builder()
-                        .refreshToken(refreshToken)
-                        .build()
-        );
-        return ResponseEntity.status(HttpStatus.OK).body(refreshTokenUser);
+    public ResponseEntity<?> refreshTokenUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            String username = token.getClaim("preferred_username");
+            RefreshTokenUserResponse refreshTokenUser = userApplicationService.refreshTokenUser(
+                    RefreshTokenUserCommand
+                            .builder()
+                            .email(username)
+                            .build()
+            );
+            return ResponseEntity.status(HttpStatus.OK).body(refreshTokenUser);
+        }
+        return ResponseEntity.badRequest().body("Token is not valid.");
     }
 
     @GetMapping("/{id}")
@@ -169,10 +174,10 @@ public class UserController {
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<?> updateUserById(
             @PathVariable UUID id,
-            @RequestHeader(name = "Authorization") String authorizationHeader,
             @RequestBody UpdateUserCommand updateUserCommand) {
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            String jwtToken = authorizationHeader.substring(7);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            String token = jwtAuthenticationToken.getToken().getTokenValue();
             log.info("Updating user with id: {}", id);
             UpdateUserResponse updateUserResponse = userApplicationService.updateUser(UpdateUserCommand.builder()
                     .userId(id)
@@ -182,7 +187,7 @@ public class UserController {
                     .phone(updateUserCommand.getPhone())
                     .address(updateUserCommand.getAddress())
                     .avatarUrl(updateUserCommand.getAvatarUrl())
-                    .build(), jwtToken);
+                    .build(), token);
 
             log.info("User updated with id: {}", id);
             return ResponseEntity.ok(updateUserResponse);
@@ -200,15 +205,15 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<?> deleteUserById(
-            @RequestHeader(name = "Authorization") String authorizationHeader,
             @PathVariable UUID id) {
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            String jwtToken = authorizationHeader.substring(7);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            String token = jwtAuthenticationToken.getToken().getTokenValue();
             log.info("Deleting user with id: {}", id);
             DeleteUserResponse deleteUserResponse =
                     userApplicationService.deleteUserById(DeleteUserCommand.builder()
                             .userId(id)
-                            .build(), jwtToken);
+                            .build(), token);
             log.info("User deleted with id: {}", id);
             return ResponseEntity.ok(deleteUserResponse);
         }
