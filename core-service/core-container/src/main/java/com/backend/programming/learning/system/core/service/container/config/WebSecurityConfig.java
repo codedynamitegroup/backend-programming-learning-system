@@ -18,7 +18,7 @@ public class WebSecurityConfig {
                 registry
                         .addMapping("/**")
                         .allowedOrigins("*")
-                        .allowedHeaders("Authorization")
+                        .allowedHeaders("*")
                         .allowedMethods("*");
             }
         };
