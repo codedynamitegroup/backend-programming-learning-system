@@ -99,9 +99,9 @@ DROP TABLE IF EXISTS programming_language CASCADE;
 CREATE TABLE programming_language(
     id uuid UNIQUE NOT NULL ,
     name text not null ,
-    compiler_api_id int not null ,
+    compiler_api_id int unique not null ,
     time_limit float not null,
-    memory_limit float check(memory_limit >= 2048) not null ,
+    memory_limit float check(memory_limit >= 204800) not null ,
     is_actived boolean default false,
     copy_state CopyState not null ,
     CONSTRAINT pr_la_pk PRIMARY KEY (id)
@@ -112,6 +112,7 @@ DROP TABLE IF EXISTS qtype_code_questions CASCADE;
 CREATE TABLE qtype_code_questions(
     id uuid UNIQUE NOT NULL,
     question_id uuid NOT NULL,
+    user_id uuid not null,
     dsl_template text,
     name text NOT NULL,
     problem_statement text,
@@ -119,7 +120,10 @@ CREATE TABLE qtype_code_questions(
     output_format text,
     copy_state CopyState,
     failure_messages text,
+    difficulty difficulty not null,
+    is_public boolean default true,
     constraints text,
+    created_at TIMESTAMP WITH TIME ZONE default CURRENT_TIMESTAMP,
     max_grade float default 10,
     CONSTRAINT qtype_code_questions_pk PRIMARY KEY (id)
 --         CONSTRAINT qtype_code_questions_questions_id_fk FOREIGN KEY (question_id)
@@ -144,8 +148,8 @@ CREATE TABLE shared_solution(
     id uuid not null ,
     code_question_id uuid not null ,
     user_id uuid not null ,
-    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL default CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE default CURRENT_TIMESTAMP,
     content text not null ,
     view_number int default 0 check(view_number >= 0),
     title text not null ,
@@ -176,6 +180,7 @@ CREATE TABLE shared_solution_tag(
      reply_id uuid,
      content text not null,
      created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+     reply_level int default 0 check(reply_level >= 0),
      constraint comment_pk primary key (id),
      constraint c_ss_fk foreign key (shared_solution_id)
         references shared_solution(id) match simple on update cascade on delete cascade,

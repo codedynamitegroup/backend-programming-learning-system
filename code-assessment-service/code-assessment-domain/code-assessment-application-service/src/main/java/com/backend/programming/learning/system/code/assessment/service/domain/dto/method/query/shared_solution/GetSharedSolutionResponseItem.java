@@ -1,12 +1,12 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.UserDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.Vote;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.TagDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import jakarta.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
@@ -20,7 +20,9 @@ import java.util.UUID;
 public class GetSharedSolutionResponseItem {
 
     @NotNull
-    User user;
+    UserDto user;
+    @NotNull
+    UUID sharedSolutionId;
     @NotNull
     Integer totalVote;
     @NotNull
@@ -35,27 +37,6 @@ public class GetSharedSolutionResponseItem {
 
     Vote youVote;
 
-    List<Tag> tags;
+    List<TagDto> tags;
 
-    public void setTotalVote(@NotNull Integer totalVote) {
-        this.totalVote = totalVote;
-    }
-
-    @Getter
-    @Builder
-    @AllArgsConstructor
-    public static class Tag{
-        @NotNull
-        UUID id;
-        String name;
-    }
-
-    @Getter
-    @Builder
-    @AllArgsConstructor
-    public static class User{
-        @NotNull
-        UUID id;
-        String avatarUrl;
-    }
 }

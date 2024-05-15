@@ -5,9 +5,13 @@ import com.backend.programming.learning.system.code.assessment.service.dataacces
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Repository
 public interface ProgrammingLanguageCodeQuestionJpaRepository
         extends JpaRepository<ProgrammingLanguageCodeQuestionEntity, ProgrammingLanguageCodeQuestionEntityId> {
+    List<ProgrammingLanguageCodeQuestionEntity> findByCodeQuestionId(UUID value);
+
+    void deleteByProgrammingLanguageIdIn(List<UUID> ids);
 }

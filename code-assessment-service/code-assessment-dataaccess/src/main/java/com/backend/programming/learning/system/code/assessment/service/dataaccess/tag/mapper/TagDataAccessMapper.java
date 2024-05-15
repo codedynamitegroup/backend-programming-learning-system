@@ -11,6 +11,7 @@ public class TagDataAccessMapper {
         return Tag.builder()
                 .id(new TagId(tagEntity.getId()))
                 .name(tagEntity.getName())
+                .numOfCodeQuestion(tagEntity.getNumOfCodeQuestion())
                 .build();
     }
 
@@ -18,6 +19,13 @@ public class TagDataAccessMapper {
         return TagEntity.builder()
                 .id(tag.getId().getValue())
                 .name(tag.getName())
+                .build();
+    }
+
+    public Tag entityToTagIgnoreLazy(TagEntity tagEntity) {
+        return Tag.builder()
+                .id(new TagId(tagEntity.getId()))
+                .name(tagEntity.getName())
                 .build();
     }
 }

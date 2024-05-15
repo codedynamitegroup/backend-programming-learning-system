@@ -38,7 +38,7 @@ public class TestCaseDataMapper {
         return TestCase.builder()
                 .id(new TestCaseId(command.getId()))
                 .score(command.getScore())
-                .isSample(command.isSample())
+                .isSample(command.getIsSample())
                 .inputData(command.getInputData())
                 .outputData(command.getOutputData())
                 .build();

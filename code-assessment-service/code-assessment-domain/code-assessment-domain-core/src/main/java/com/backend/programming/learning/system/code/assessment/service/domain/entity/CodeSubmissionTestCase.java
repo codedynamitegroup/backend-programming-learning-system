@@ -5,8 +5,8 @@ import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import com.backend.programming.learning.system.domain.valueobject.TestCasePassStatus;
 
 public class CodeSubmissionTestCase extends BaseEntity<CodeSubmissionTestCaseId> {
-    private TestCase testCase;
-    private CodeSubmission codeSubmission;
+    private final TestCase testCase;
+    private final CodeSubmission codeSubmission;
     private String actualOutput;
     private String compileOutput;
     private String message;

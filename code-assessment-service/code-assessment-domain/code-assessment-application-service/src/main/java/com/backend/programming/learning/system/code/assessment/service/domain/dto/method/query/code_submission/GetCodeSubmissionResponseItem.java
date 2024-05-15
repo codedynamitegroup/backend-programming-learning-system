@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Getter;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.Setter;
+
 import java.util.UUID;
 
 @Getter
@@ -37,12 +39,11 @@ public class GetCodeSubmissionResponseItem {
     @NotNull
     String description;
 
+    @Setter
     String sourceCode;
-    FirstFailTestCase firstFailTestCase;
 
-    public void setSourceCode(String sourceCode) {
-        this.sourceCode = sourceCode;
-    }
+    @Setter
+    FirstFailTestCase firstFailTestCase;
 
     @Getter
     @Builder
@@ -64,7 +65,4 @@ public class GetCodeSubmissionResponseItem {
         String description;
     }
 
-    public void setFirstFailTestCase(FirstFailTestCase firstFailTestCase) {
-        this.firstFailTestCase = firstFailTestCase;
-    }
 }
