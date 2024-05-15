@@ -82,16 +82,37 @@ public class CertificateCourseCommandHandler {
         List<CertificateCourse> certificateCourses = certificateCourseQueryHelper
                 .queryAllCertificateCourses(
                         queryAllCertificateCoursesCommand.getCourseName(),
-                        queryAllCertificateCoursesCommand.getFilterTopicIds(),
-                        IsRegisteredFilter.valueOf(queryAllCertificateCoursesCommand.getIsRegisteredFilter()),
-                        queryAllCertificateCoursesCommand.getRegisteredBy()
+                        queryAllCertificateCoursesCommand.getFilterTopicIds()
                 );
         List<CertificateCourse> mostEnrolledCertificateCourses = certificateCourseQueryHelper
                 .queryMostEnrolledCertificateCourses(
                         queryAllCertificateCoursesCommand.getCourseName(),
-                        queryAllCertificateCoursesCommand.getFilterTopicIds(),
-                        IsRegisteredFilter.valueOf(queryAllCertificateCoursesCommand.getIsRegisteredFilter()),
-                        queryAllCertificateCoursesCommand.getRegisteredBy()
+                        queryAllCertificateCoursesCommand.getFilterTopicIds()
+                );
+
+        return certificateCourseDataMapper
+                .certificateCoursesToQueryAllCertificateCoursesResponse(
+                        certificateCourses,
+                        mostEnrolledCertificateCourses
+                );
+    }
+
+    @Transactional(readOnly = true)
+    public QueryAllCertificateCoursesResponse findAllCertificateCoursesFilterByIsRegistered(
+            QueryAllCertificateCoursesFilterByIsRegisteredCommand queryAllCertificateCoursesFilterByIsRegisteredCommand) {
+        List<CertificateCourse> certificateCourses = certificateCourseQueryHelper
+                .queryAllCertificateCoursesFilterByIsRegistered(
+                        queryAllCertificateCoursesFilterByIsRegisteredCommand.getCourseName(),
+                        queryAllCertificateCoursesFilterByIsRegisteredCommand.getFilterTopicIds(),
+                        queryAllCertificateCoursesFilterByIsRegisteredCommand.isRegistered(),
+                        queryAllCertificateCoursesFilterByIsRegisteredCommand.getUsername()
+                );
+        List<CertificateCourse> mostEnrolledCertificateCourses = certificateCourseQueryHelper
+                .queryMostEnrolledCertificateCoursesFilterByIsRegistered(
+                        queryAllCertificateCoursesFilterByIsRegisteredCommand.getCourseName(),
+                        queryAllCertificateCoursesFilterByIsRegisteredCommand.getFilterTopicIds(),
+                        queryAllCertificateCoursesFilterByIsRegisteredCommand.isRegistered(),
+                        queryAllCertificateCoursesFilterByIsRegisteredCommand.getUsername()
                 );
 
         return certificateCourseDataMapper
