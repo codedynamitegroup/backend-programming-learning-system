@@ -4,7 +4,9 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.langauge.AddLanguageToCodeQuestionCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.langauge.DeleteLanguageToCodeQuestionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.tag.AddTagToCodeQuestionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.language.DeleteLanguageToCodeQuestionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.tag.DeleteCodeQuestionTagCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetDetailCodeQuestionCommand;
@@ -52,5 +54,15 @@ class CodeQuestionApplicationServiceImpl implements CodeQuestionApplicationServi
     @Override
     public void deleteProgrammingLanguageCodeQuestion(DeleteLanguageToCodeQuestionCommand command) {
         codeQuestionCommandHandler.deleteProgrammingLanguageCodeQuestion(command);
+    }
+
+    @Override
+    public void addTagToCodeQuestion(AddTagToCodeQuestionCommand command) {
+        codeQuestionCommandHandler.addTagToCodeQuestion(command);
+    }
+
+    @Override
+    public void deleteCodeQuestionTag(DeleteCodeQuestionTagCommand command) {
+        codeQuestionCommandHandler.deleteCodeQuestionTag(command);
     }
 }

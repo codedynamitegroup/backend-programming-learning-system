@@ -5,7 +5,9 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.langauge.AddLanguageToCodeQuestionCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.langauge.DeleteLanguageToCodeQuestionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.tag.AddTagToCodeQuestionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.language.DeleteLanguageToCodeQuestionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.tag.DeleteCodeQuestionTagCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetDetailCodeQuestionCommand;
@@ -107,8 +109,34 @@ public class CodeQuestionController {
         return ResponseEntity.ok(codeQuestionDto);
     }
 
-
     //edit code question tag
+    @PostMapping("/{code-question-id}/tag")
+    public ResponseEntity addTagToCodeQuestion(
+            @PathVariable("code-question-id") UUID codeQuestionId,
+            @RequestParam UUID userId,
+            @RequestBody List<UUID> tagIds){
+        AddTagToCodeQuestionCommand command = AddTagToCodeQuestionCommand.builder()
+                .userId(userId)
+                .codeQuestionId(codeQuestionId)
+                .tagIds(tagIds)
+                .build();
+        codeQuestionApplicationService.addTagToCodeQuestion(command);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @DeleteMapping("/{code-question-id}/tag")
+    public ResponseEntity deleteCodeQuestionTag(
+            @PathVariable("code-question-id") UUID codeQuestionId,
+            @RequestParam UUID userId,
+            @RequestBody List<UUID> tagIds){
+        DeleteCodeQuestionTagCommand command = DeleteCodeQuestionTagCommand.builder()
+                .userId(userId)
+                .codeQuestionId(codeQuestionId)
+                .tagIds(tagIds)
+                .build();
+        codeQuestionApplicationService.deleteCodeQuestionTag(command);
+        return ResponseEntity.noContent().build();
+    }
 
 
     //edit code question language
@@ -126,7 +154,7 @@ public class CodeQuestionController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @DeleteMapping("{code-question-id}/language")
+    @DeleteMapping("/{code-question-id}/language")
     public ResponseEntity deleteProgrammingLanguageCodeQuestion(
             @PathVariable("code-question-id") UUID codeQuestionId,
             @RequestParam UUID userId,

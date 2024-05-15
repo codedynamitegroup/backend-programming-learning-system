@@ -33,7 +33,7 @@ public interface SharedSolutionRepository {
 
 
     //tag group
-    void saveTag(List<Tag> tags, UUID id);
+    void saveTag(List<Tag> tags, SharedSolutionId id);
 
 
 
@@ -44,4 +44,5 @@ public interface SharedSolutionRepository {
 
     Optional<SharedSolutionVote> findSharedSolutionVoteById(SharedSolutionVoteId id);
 
+    void deleteTag(List<Tag> tags, SharedSolutionId id);
 }

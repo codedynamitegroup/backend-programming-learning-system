@@ -1,7 +1,5 @@
-package com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.langauge;
+package com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.language;
 
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.ProgrammingLanguageDto;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

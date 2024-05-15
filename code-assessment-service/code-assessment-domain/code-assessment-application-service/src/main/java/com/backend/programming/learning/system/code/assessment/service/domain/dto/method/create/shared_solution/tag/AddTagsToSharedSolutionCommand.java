@@ -1,24 +1,23 @@
-package com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution;
+package com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.tag;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
-@Getter
-@Builder
 @AllArgsConstructor
-public class DeleteSharedSolutionVoteCommand {
+@Builder
+@Getter
+public class AddTagsToSharedSolutionCommand {
     @NotNull(message = "userId must not be null")
     UUID userId;
 
     @NotNull(message = "sharedSolutionId must not be null")
-    @JsonIgnore
-    @Setter
     UUID sharedSolutionId;
 
+    @NotNull(message = "tagIds must not be null")
+    List<UUID> tagIds;
 }

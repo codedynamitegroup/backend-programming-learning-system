@@ -1,7 +1,9 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_question;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestionTag;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.ProgrammingLanguageCodeQuestion;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.Tag;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.code_question_tag.CodeQuestionTagId;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
@@ -29,4 +31,10 @@ public interface CodeQuestionRepository {
     void saveNewLanguage(List<ProgrammingLanguageCodeQuestion> plcqs);
 
     void deleteLanguage(List<ProgrammingLanguageId> list);
+
+    void addTag(CodeQuestionId id, List<Tag> tags);
+
+    Optional<CodeQuestionTag> findCodeQuestionTagById(CodeQuestionTagId id);
+
+    void deleteCodeQuestionTag(List<CodeQuestionTag> tags);
 }

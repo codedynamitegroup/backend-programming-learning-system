@@ -6,10 +6,13 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment.vote.VoteCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.tag.AddTagsToSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.tag.DeleteCodeQuestionTagCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.DeleteSharedSolutionCommad;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.DeleteSharedSolutionVoteCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.tag.DeleteSharedSolutionTagCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.vote.DeleteSharedSolutionVoteCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.comment.DeleteCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.comment.vote.UnvoteCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionByCodeQuestionIdCommand;
@@ -233,7 +236,33 @@ public class SharedSolutionController {
         service.deleteVote(command);
         return ResponseEntity.noContent().build();
     }
-
-
+    
     //edit shared solution tag
+    @PostMapping("/{solution-id}/tag")
+    public ResponseEntity addTagToSolution(
+            @PathVariable("solution-id") UUID sharedSolutionId,
+            @RequestParam UUID userId,
+            @RequestBody List<UUID> tagIds){
+        AddTagsToSharedSolutionCommand command = AddTagsToSharedSolutionCommand.builder()
+                .userId(userId)
+                .sharedSolutionId(sharedSolutionId)
+                .tagIds(tagIds)
+                .build();
+        service.addTagToSolution(command);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @DeleteMapping("/{solution-id}/tag")
+    public ResponseEntity deleteSharedSolutionTag(
+            @PathVariable("solution-id") UUID sharedSolutionId,
+            @RequestParam UUID userId,
+            @RequestBody List<UUID> tagIds){
+        DeleteSharedSolutionTagCommand command = DeleteSharedSolutionTagCommand.builder()
+                .userId(userId)
+                .sharedSolutionId(sharedSolutionId)
+                .tagIds(tagIds)
+                .build();
+        service.deleteSharedSolutionTag(command);
+        return ResponseEntity.noContent().build();
+    }
 }

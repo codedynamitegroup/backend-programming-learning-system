@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_question.CodeQuestionNotFoundException;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_question.tag.CodeQuestionTagNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_submission.CodeSubmissionNotFound;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.programming_language.ProgrammingLanguageNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.shared_solution.SharedSolutionNotFound;
@@ -16,6 +17,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.po
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.CommentId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.SharedSolutionId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagId;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.code_question_tag.CodeQuestionTagId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.comment_vote.CommentVoteId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.programming_language_code_question.ProgrammingLanguageCodeQuestionId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.shared_solution_vote.SharedSolutionVoteId;
@@ -218,6 +220,18 @@ public class ValidateHelper {
             else {
                 log.error("Language with id {} not found", id);
                 throw new ProgrammingLanguageNotFoundException("Language with id: " + id + " not found");
+            }
+        }).toList();
+    }
+
+    public List<CodeQuestionTag> validateCodeQuestionTagsById(List<CodeQuestionTagId> ids) {
+        return ids.stream().map(id->{
+            Optional<CodeQuestionTag> cqt = codeQuestionRepository.findCodeQuestionTagById(id);
+            if(cqt.isPresent())
+                return cqt.get();
+            else {
+                log.error("CodeQuestion {} with tag id {} not found", id.getValue().getCodeQuestionId(), id.getValue().getTagId());
+                throw new CodeQuestionTagNotFoundException("CodeQuestion " + id.getValue().getCodeQuestionId().getValue() + " with tag id " + id.getValue().getTagId().getValue() + " not found");
             }
         }).toList();
     }

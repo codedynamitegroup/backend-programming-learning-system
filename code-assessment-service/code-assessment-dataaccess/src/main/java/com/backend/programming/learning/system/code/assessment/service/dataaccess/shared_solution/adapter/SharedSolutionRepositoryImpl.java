@@ -68,9 +68,9 @@ public class SharedSolutionRepositoryImpl implements SharedSolutionRepository {
     }
 
     @Override
-    public void saveTag(List<Tag> tags, UUID id) {
+    public void saveTag(List<Tag> tags, SharedSolutionId id) {
         List<SharedSolutionTagEntity> sharedSolutionTagEntities =
-                tags.stream().map(tag -> dataAccessMapper.tagToSharedSolutionTagEntity(tag, SharedSolutionEntity.builder().id(id).build()))
+                tags.stream().map(tag -> dataAccessMapper.tagToSharedSolutionTagEntity(tag, SharedSolutionEntity.builder().id(id.getValue()).build()))
                         .toList();
         sharedSolutionTagJpaRepository.saveAll(sharedSolutionTagEntities);
     }
@@ -169,6 +169,14 @@ public class SharedSolutionRepositoryImpl implements SharedSolutionRepository {
         SharedSolutionVoteEntityId id = sharedSolutionVoteDataAccessMapper.idToEntityId(sharedSolutionVoteId);
 
         return sharedSolutionVoteJpaRepository.findById(id).map(sharedSolutionVoteDataAccessMapper::entityToVote);
+    }
+
+    @Override
+    public void deleteTag(List<Tag> tags, SharedSolutionId id) {
+        List<SharedSolutionTagEntity> sharedSolutionTagEntities =
+                tags.stream().map(tag -> dataAccessMapper.tagToSharedSolutionTagEntity(tag, SharedSolutionEntity.builder().id(id.getValue()).build()))
+                        .toList();
+        sharedSolutionTagJpaRepository.deleteAll(sharedSolutionTagEntities);
     }
 
 }

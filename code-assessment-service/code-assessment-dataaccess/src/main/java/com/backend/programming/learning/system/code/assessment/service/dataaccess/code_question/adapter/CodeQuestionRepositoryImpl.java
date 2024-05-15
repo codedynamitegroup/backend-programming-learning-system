@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.adapter;
 
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.CodeQuestionEntity;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.tag.CodeQuestionTagEntity;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.tag.CodeQuestionTagEntityId;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.mapper.CodeQuestionDataAccessMapper;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.mapper.CodeQuestionTagDataAccessMapper;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.repository.CodeQuestionJpaRepository;
@@ -11,9 +13,7 @@ import com.backend.programming.learning.system.code.assessment.service.dataacces
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language_code_question.mapper.ProgrammingLanguageCodeQuestionDataAccessMapper;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language_code_question.repository.ProgrammingLanguageCodeQuestionJpaRepository;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.tag.entity.TagEntity;
-import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
-import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
-import com.backend.programming.learning.system.code.assessment.service.domain.entity.ProgrammingLanguageCodeQuestion;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_question.CodeQuestionRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.code_question_tag.CodeQuestionTagId;
@@ -134,5 +134,25 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
     @Override
     public void deleteLanguage(List<ProgrammingLanguageId> list) {
         programmingLanguageCodeQuestionJpaRepository.deleteByProgrammingLanguageIdIn(list.stream().map(BaseId::getValue).toList());
+    }
+
+    @Override
+    public void addTag(CodeQuestionId id, List<Tag> tags) {
+
+        List<CodeQuestionTagEntity> entities = tags.stream()
+                        .map(item->codeQuestionTagDataAccessMapper.codeQuestionIdAndTagIdToEntity(id, item.getId()))
+                                .toList();
+        codeQuestionTagJpaRepository.saveAll(entities);
+    }
+
+    @Override
+    public Optional<CodeQuestionTag> findCodeQuestionTagById(CodeQuestionTagId id) {
+        return codeQuestionTagJpaRepository.findById(codeQuestionTagDataAccessMapper.idToEntityId(id)).map(codeQuestionTagDataAccessMapper::entityToCodeQuestionTag);
+    }
+
+    @Override
+    public void deleteCodeQuestionTag(List<CodeQuestionTag> tags) {
+        List<CodeQuestionTagEntityId> cqteids = tags.stream().map(item->codeQuestionTagDataAccessMapper.idToEntityId(item.getId())).toList();
+        codeQuestionTagJpaRepository.deleteAllById(cqteids);
     }
 }

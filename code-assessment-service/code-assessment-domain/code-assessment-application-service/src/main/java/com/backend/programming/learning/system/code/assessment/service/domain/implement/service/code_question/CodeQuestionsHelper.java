@@ -4,7 +4,9 @@ import com.backend.programming.learning.system.code.assessment.service.domain.Co
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.ProgrammingLanguageDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.langauge.AddLanguageToCodeQuestionCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.langauge.DeleteLanguageToCodeQuestionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.tag.AddTagToCodeQuestionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.language.DeleteLanguageToCodeQuestionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.tag.DeleteCodeQuestionTagCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetDetailCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_question.UpdateCodeQuestionCommand;
@@ -22,12 +24,10 @@ import com.backend.programming.learning.system.code.assessment.service.domain.va
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.code_question_tag.CodeQuestionTagId;
 import com.backend.programming.learning.system.domain.entity.BaseEntity;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.apache.bcel.classfile.Code;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.text.html.Option;
 import java.util.*;
 
 @Slf4j
@@ -187,5 +187,43 @@ public class CodeQuestionsHelper {
         List<ProgrammingLanguage> programmingLanguages = validateHelper.validateProgrammingLanguage(command.getLanguageIds());
 
         codeQuestionRepository.deleteLanguage(programmingLanguages.stream().map(BaseEntity::getId).toList());
+    }
+
+    @Transactional
+    public void addTagToCodeQuestion(AddTagToCodeQuestionCommand command) {
+        if(command.getTagIds().isEmpty())
+            return;
+
+        User user = validateHelper.validateUser(command.getUserId());
+        CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(command.getCodeQuestionId());
+
+        if(!codeQuestion.getUserId().equals(user.getId()))
+            throw new CodeAssessmentDomainException("User " + codeQuestion.getUserId() + " does not possess code question " + command.getCodeQuestionId());
+
+        List<Tag> tags = validateHelper.validateTagsById(command.getTagIds());
+
+        codeQuestionRepository.addTag(codeQuestion.getId(), tags);
+    }
+
+    public void deleteCodeQuestionTag(DeleteCodeQuestionTagCommand command) {
+        if(command.getTagIds().isEmpty())
+            return;
+
+        User user = validateHelper.validateUser(command.getUserId());
+        CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(command.getCodeQuestionId());
+
+        if(!codeQuestion.getUserId().equals(user.getId()))
+            throw new CodeAssessmentDomainException("User " + codeQuestion.getUserId() + " does not possess code question " + command.getCodeQuestionId());
+
+        List<CodeQuestionTagId> cqts = command
+                .getTagIds()
+                .stream()
+                .map(TagId::new)
+                .map(item->codeQuestionDataMaper
+                        .codeQuestionIdAndTagIdToCodeQuestionTagId(codeQuestion.getId(), item))
+                .toList();
+        List<CodeQuestionTag> tags = validateHelper.validateCodeQuestionTagsById(cqts);
+
+        codeQuestionRepository.deleteCodeQuestionTag(tags);
     }
 }
