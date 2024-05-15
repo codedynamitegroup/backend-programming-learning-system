@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.core.service.dataaccess.question
 import com.backend.programming.learning.system.core.service.dataaccess.organization.mapper.OrganizationDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
-import com.backend.programming.learning.system.core.service.domain.dto.responseentity.QuestionResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import org.springframework.stereotype.Component;
@@ -112,19 +112,21 @@ public class QuestionDataAccessMapper {
     public QuestionResponseEntity questionEntityToQuestionResponseEntity(QuestionEntity questionEntity) {
         return QuestionResponseEntity.builder()
                 .id(questionEntity.getId().toString())
-                .organization(organizationDataAccessMapper.organizationEntityToOrganization(questionEntity.getOrganization()))
+                .organization(organizationDataAccessMapper
+                        .organizationEntityToOrganizationResponseEntity(questionEntity.getOrganization()))
                 .difficulty(questionEntity.getDifficulty())
                 .name(questionEntity.getName())
                 .questionText(questionEntity.getQuestionText())
                 .generalFeedback(questionEntity.getGeneralFeedback())
                 .defaultMark(questionEntity.getDefaultMark().floatValue())
-                .createdBy(userDataAccessMapper.userEntityToUser(questionEntity.getCreatedBy()))
-                .updatedBy(userDataAccessMapper.userEntityToUser(questionEntity.getUpdatedBy()))
+                .createdBy(userDataAccessMapper.userEntityToUserResponseEntityHideSensitiveData(questionEntity.getCreatedBy()))
+                .updatedBy(userDataAccessMapper.userEntityToUserResponseEntityHideSensitiveData(questionEntity.getUpdatedBy()))
                 .qtype(questionEntity.getQtype())
                 .failureMessages(null)
                 .createdAt(questionEntity.getCreatedAt())
                 .updatedAt(questionEntity.getUpdatedAt())
-                .answers(answerOfQuestionDataAccessMapper.answerOfQuestionEntityListToAnswerOfQuestionList(questionEntity.getAnswerOfQuestions()))
+                .answers(answerOfQuestionDataAccessMapper
+                        .answerOfQuestionEntityListToAnswerOfQuestionResponseEntityList(questionEntity.getAnswerOfQuestions()))
                 .build();
     }
 }

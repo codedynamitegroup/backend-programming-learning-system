@@ -6,13 +6,15 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.AnswerOfQuestionUpdateEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQuestionEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQuestionResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.responseentity.QuestionResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.AnswerOfQuestionResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
+import com.backend.programming.learning.system.core.service.domain.mapper.organization.OrganizationDataMapper;
+import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.code_questions.CodeQuestionDeleteEventPayload;
-import com.backend.programming.learning.system.core.service.domain.outbox.model.code_questions.CodeQuestionsUpdatePayload;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.question.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.AnswerId;
 import com.backend.programming.learning.system.domain.valueobject.*;
@@ -26,6 +28,14 @@ import java.util.UUID;
 
 @Component
 public class QuestionDataMapper {
+    private final OrganizationDataMapper organizationDataMapper;
+    private final UserDataMapper userDataMapper;
+
+    public QuestionDataMapper(OrganizationDataMapper organizationDataMapper, UserDataMapper userDataMapper) {
+        this.organizationDataMapper = organizationDataMapper;
+        this.userDataMapper = userDataMapper;
+    }
+
     // create question command to question
     public Question createQuestionCommandToQuestion(CreateQuestionCommand createQuestionCommand,
                                                     Organization organization,
@@ -89,18 +99,18 @@ public class QuestionDataMapper {
     public QuestionResponseEntity questionToQuestionResponseEntity(Question question) {
         return QuestionResponseEntity.builder()
                 .id(question.getId().getValue().toString())
-                .organization(question.getOrganization())
+                .organization(organizationDataMapper.organizationToOrganizationResponseEntity(question.getOrganization()))
                 .name(question.getName())
                 .questionText(question.getQuestionText())
                 .generalFeedback(question.getGeneralFeedback())
                 .defaultMark(question.getDefaultMark())
                 .difficulty(question.getDifficulty())
-                .createdBy(question.getCreatedBy())
-                .updatedBy(question.getUpdatedBy())
+                .createdBy(userDataMapper.userToUserResponseEntity(question.getCreatedBy()))
+                .updatedBy(userDataMapper.userToUserResponseEntity(question.getUpdatedBy()))
                 .qtype(question.getqtype())
                 .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .updatedAt(ZonedDateTime.now(ZoneId.of("UTC")))
-                .answers(question.getAnswers())
+                .answers(answerOfQuestionListToAnswerOfQuestionResponseEntityList(question.getAnswers()))
                 .build();
     }
 
@@ -403,5 +413,20 @@ public class QuestionDataMapper {
                 .questionId(questionDeletedEvent.getQuestion().getId().getValue().toString())
                 .state(questionDeletedEvent.getQuestion().getCopyState().name())
                 .build();
+    }
+
+    private AnswerOfQuestionResponseEntity answerOfQuestionToAnswerOfQuestionResponseEntity(AnswerOfQuestion answerOfQuestion) {
+        return AnswerOfQuestionResponseEntity.builder()
+                .id(answerOfQuestion.getId().getValue().toString())
+                .answer(answerOfQuestion.getAnswer())
+                .fraction(answerOfQuestion.getFraction())
+                .feedback(answerOfQuestion.getFeedback())
+                .build();
+    }
+
+    private List<AnswerOfQuestionResponseEntity> answerOfQuestionListToAnswerOfQuestionResponseEntityList(List<AnswerOfQuestion> answers) {
+        return List.of(answers.stream()
+                .map(this::answerOfQuestionToAnswerOfQuestionResponseEntity)
+                .toArray(AnswerOfQuestionResponseEntity[]::new));
     }
 }

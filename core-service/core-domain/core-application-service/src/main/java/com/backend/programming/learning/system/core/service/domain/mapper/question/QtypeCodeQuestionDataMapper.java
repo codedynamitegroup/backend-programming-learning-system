@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.message.C
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQtypeCodeQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryQtypeCodeQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeCodeQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QtypeCodeQuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeCodeQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.code_questions.CodeQuestionsUpdatePayload;
@@ -58,7 +59,7 @@ public class QtypeCodeQuestionDataMapper {
 
     public QueryQtypeCodeQuestionResponse qtypeCodeQuestionToQueryQtypeCodeQuestionResponse(QtypeCodeQuestion qtypeCodeQuestion) {
         return QueryQtypeCodeQuestionResponse.builder()
-                .qtypeCodeQuestion(qtypeCodeQuestion)
+                .qtypeCodeQuestion(qtypeCodeQuestionToQtypeCodeQuestionResponseEntity(qtypeCodeQuestion))
                 .build();
     }
 
@@ -86,6 +87,17 @@ public class QtypeCodeQuestionDataMapper {
                                 qtypeCodeQuestion.getQuestion().getCreatedBy(),
                                 qtypeCodeQuestion.getQuestion().getqtype(),
                                 qtypeCodeQuestion.getQuestion().getAnswers()))
+                .build();
+    }
+
+    private QtypeCodeQuestionResponseEntity qtypeCodeQuestionToQtypeCodeQuestionResponseEntity(QtypeCodeQuestion qtypeCodeQuestion) {
+        return QtypeCodeQuestionResponseEntity.builder()
+                .question(questionDataMapper.questionToQuestionResponseEntity(qtypeCodeQuestion.getQuestion()))
+                .id(qtypeCodeQuestion.getId().getValue().toString())
+                .dslTemplate(qtypeCodeQuestion.getDslTemplate())
+                .problemStatement(qtypeCodeQuestion.getProblemStatement())
+                .codeQuestionName(qtypeCodeQuestion.getCodeQuestionName())
+                .maxGrade(qtypeCodeQuestion.getMaxGrade())
                 .build();
     }
 }

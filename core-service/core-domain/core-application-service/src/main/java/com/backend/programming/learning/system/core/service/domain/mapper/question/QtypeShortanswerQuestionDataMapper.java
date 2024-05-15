@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.core.service.domain.mapper.quest
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQtypeShortanswerQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryQtypeShortanswerQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeShortanswerQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QtypeShortanswerQuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeShortAnswerQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.domain.valueobject.QtypeShortAnswerQuestionId;
@@ -28,7 +29,7 @@ public class QtypeShortanswerQuestionDataMapper {
 
         public QueryQtypeShortanswerQuestionResponse qtypeShortanswerQuestionToQueryQtypeShortanswerQuestionResponse(QtypeShortAnswerQuestion qtypeShortanswerQuestion) {
             return QueryQtypeShortanswerQuestionResponse.builder()
-                    .qtypeShortAnswerQuestion(qtypeShortanswerQuestion)
+                    .qtypeShortAnswerQuestion(qtypeShortAnswerQuestionToQtypeShortanswerQuestionResponseEntity(qtypeShortanswerQuestion))
                     .build();
         }
 
@@ -53,6 +54,14 @@ public class QtypeShortanswerQuestionDataMapper {
                                 qtypeShortAnswerQuestion.getQuestion().getCreatedBy(),
                                 qtypeShortAnswerQuestion.getQuestion().getqtype(),
                                 qtypeShortAnswerQuestion.getQuestion().getAnswers()))
+                .build();
+    }
+
+    private QtypeShortanswerQuestionResponseEntity qtypeShortAnswerQuestionToQtypeShortanswerQuestionResponseEntity(QtypeShortAnswerQuestion qtypeShortAnswerQuestion) {
+        return QtypeShortanswerQuestionResponseEntity.builder()
+                .question(questionDataMapper.questionToQuestionResponseEntity(qtypeShortAnswerQuestion.getQuestion()))
+                .id(qtypeShortAnswerQuestion.getId().toString())
+                .caseSensitive(qtypeShortAnswerQuestion.getCaseSensitive())
                 .build();
     }
 }

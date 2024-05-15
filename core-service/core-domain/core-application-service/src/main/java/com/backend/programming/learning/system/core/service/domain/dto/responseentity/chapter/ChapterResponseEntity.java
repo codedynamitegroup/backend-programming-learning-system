@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter;
 
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
-import com.backend.programming.learning.system.core.service.domain.dto.responseentity.QuestionResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

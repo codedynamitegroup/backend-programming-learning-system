@@ -16,7 +16,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class QueryAllCertificateCoursesCommand {
     @NotNull(message = "Course name is required")
-    private final String courseName = "";
+    private final String courseName;
 
     private final List<UUID> filterTopicIds;
 
