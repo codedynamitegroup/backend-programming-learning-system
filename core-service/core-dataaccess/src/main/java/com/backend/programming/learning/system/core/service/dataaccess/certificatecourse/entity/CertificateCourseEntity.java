@@ -43,6 +43,10 @@ public class CertificateCourseEntity {
     @Formula("(select count(*) from chapter c, chapter_question cq where c.certificate_course_id = id and c.id = cq.chapter_id)")
     private Integer numOfQuestions;
 
+    @Basic(fetch = FetchType.LAZY)
+    @Formula("(select count(*) from review r where r.certificate_course_id = id)")
+    private Integer numOfReviews;
+
     @ManyToOne
     @JoinColumn(name = "topic_id", referencedColumnName = "id")
     private TopicEntity topic;

@@ -5,7 +5,6 @@ import com.backend.programming.learning.system.core.service.dataaccess.certifica
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseRepository;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.IsRegisteredFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -16,7 +15,6 @@ import java.util.UUID;
 
 @Component
 public class CertificateCourseRepositoryImpl implements CertificateCourseRepository {
-    private static final Logger log = LoggerFactory.getLogger(CertificateCourseRepositoryImpl.class);
     private final CertificateCourseJpaRepository certificateCourseJpaRepository;
     private final CertificateCourseDataAccessMapper certificateCourseDataAccessMapper;
 
@@ -122,5 +120,10 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
                     .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
                     .toList();
         }
+    }
+
+    @Override
+    public int countNumOfCompletedQuestions(UUID certificateCourseId, UUID userId) {
+        return certificateCourseJpaRepository.countNumOfCompletedQuestions(certificateCourseId, userId);
     }
 }

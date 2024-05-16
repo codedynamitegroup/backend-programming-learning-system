@@ -110,4 +110,17 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
             UUID registeredBy);
 
     void deleteById(UUID id);
+
+    @Query("""
+    select count(*)
+    from ChapterEntity ce, ChapterQuestionEntity cqe, QuestionEntity qe, QtypeCodeQuestionEntity qcqe, CodeSubmissionEntity cse
+    where ce.id = cqe.chapter.id
+     and cqe.question.id = qe.id
+     and qe.id = qcqe.question.id
+     and qcqe.id = cse.codeQuestionId
+     and ce.certificateCourse.id = ?1
+     and cse.userId = ?2
+     and cse.pass = true
+""")
+    int countNumOfCompletedQuestions(UUID certificateCourseId, UUID userId);
 }

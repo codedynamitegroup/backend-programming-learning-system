@@ -22,6 +22,9 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
     private ZonedDateTime endTime;
     private Integer numOfStudents;
     private Integer numOfQuestions;
+    private Integer numOfCompletedQuestions;
+    private Integer numOfReviews;
+    private Boolean isRegistered;
     private Topic topic;
     private User createdBy;
     private User updatedBy;
@@ -30,7 +33,6 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
 
     private CertificateCourse(Builder builder) {
         super.setId(builder.certificateCourseId);
-        setName(builder.name);
         setDescription(builder.description);
         setSkillLevel(builder.skillLevel);
         setAvgRating(builder.avgRating);
@@ -38,6 +40,9 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         setEndTime(builder.endTime);
         setNumOfStudents(builder.numOfStudents);
         setNumOfQuestions(builder.numOfQuestions);
+        setNumOfCompletedQuestions(builder.numOfCompletedQuestions);
+        setNumOfReviews(builder.numOfReviews);
+        isRegistered = builder.isRegistered;
         setTopic(builder.topic);
         setCreatedBy(builder.createdBy);
         setUpdatedBy(builder.updatedBy);
@@ -54,6 +59,7 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
         updatedAt = ZonedDateTime.now(ZoneId.of("UTC"));
     }
+
 
     public String getName() {
         return name;
@@ -119,6 +125,30 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         this.numOfQuestions = numOfQuestions;
     }
 
+    public Integer getNumOfCompletedQuestions() {
+        return numOfCompletedQuestions;
+    }
+
+    public void setNumOfCompletedQuestions(Integer numOfCompletedQuestions) {
+        this.numOfCompletedQuestions = numOfCompletedQuestions;
+    }
+
+    public Integer getNumOfReviews() {
+        return numOfReviews;
+    }
+
+    public void setNumOfReviews(Integer numOfReviews) {
+        this.numOfReviews = numOfReviews;
+    }
+
+    public Boolean getRegistered() {
+        return isRegistered;
+    }
+
+    public void setRegistered(Boolean registered) {
+        isRegistered = registered;
+    }
+
     public Topic getTopic() {
         return topic;
     }
@@ -169,6 +199,9 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         private ZonedDateTime endTime;
         private Integer numOfStudents;
         private Integer numOfQuestions;
+        private Integer numOfCompletedQuestions;
+        private Integer numOfReviews;
+        private Boolean isRegistered;
         private Topic topic;
         private User createdBy;
         private User updatedBy;
@@ -220,6 +253,21 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
 
         public Builder numOfQuestions(Integer val) {
             numOfQuestions = val;
+            return this;
+        }
+
+        public Builder numOfCompletedQuestions(Integer val) {
+            numOfCompletedQuestions = val;
+            return this;
+        }
+
+        public Builder numOfReviews(Integer val) {
+            numOfReviews = val;
+            return this;
+        }
+
+        public Builder isRegistered(Boolean val) {
+            isRegistered = val;
             return this;
         }
 

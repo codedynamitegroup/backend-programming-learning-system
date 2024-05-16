@@ -36,7 +36,9 @@ public class CertificateCourseQueryHelper {
     }
 
     @Transactional(readOnly = true)
-    public CertificateCourse queryCertificateCourseById(UUID certificateCourseId) {
+    public CertificateCourse queryCertificateCourseById(
+            UUID certificateCourseId,
+            String username) {
         Optional<CertificateCourse> certificateCourseResult =
                 certificateCourseRepository.findById(new CertificateCourseId(certificateCourseId));
         if (certificateCourseResult.isEmpty()) {
@@ -46,6 +48,20 @@ public class CertificateCourseQueryHelper {
                     certificateCourseId);
         }
         CertificateCourse certificateCourse = certificateCourseResult.get();
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isPresent()) {
+            Optional<CertificateCourseUser> certificateCourseUser =
+                    certificateCourseUserRepository.findByCertificateCourseIdAndUserId(
+                            certificateCourseId,
+                            user.get().getId().getValue()
+                    );
+            if (certificateCourseUser.isPresent()) {
+                certificateCourse.setRegistered(true);
+                certificateCourse.setNumOfCompletedQuestions(
+                        countNumOfCompletedQuestions(certificateCourseId, user.get().getId().getValue())
+                );
+            }
+        }
         log.info("Certificate course queried with id: {}", certificateCourse.getId().getValue());
         return certificateCourse;
     }
@@ -53,67 +69,92 @@ public class CertificateCourseQueryHelper {
     @Transactional(readOnly = true)
     public List<CertificateCourse> queryAllCertificateCourses(
             String courseName,
-            List<UUID> filterTopicIds
-    ) {
-        return certificateCourseRepository.findAllCertificateCourses(
-                courseName,
-                filterTopicIds
-        );
-    }
-
-    @Transactional(readOnly = true)
-    public List<CertificateCourse> queryAllCertificateCoursesFilterByIsRegistered(
-            String courseName,
             List<UUID> filterTopicIds,
-            boolean isRegistered,
+            IsRegisteredFilter isRegisteredFilter,
             String username
     ) {
-        UserId userId = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UserNotFoundException("Could not find user with username: " + username))
-                .getId();
-        return certificateCourseRepository.findAllCertificateCoursesByIsRegistered(
-                courseName,
-                filterTopicIds,
-                isRegistered,
-                userId.getValue()
-        );
+        switch (isRegisteredFilter) {
+            case ALL:
+                return certificateCourseRepository.findAllCertificateCourses(
+                        courseName,
+                        filterTopicIds
+                );
+            case REGISTERED: {
+                Optional<User> user = userRepository.findByUsername(username);
+                if (user.isPresent()) {
+                    return certificateCourseRepository.findAllCertificateCoursesByIsRegistered(
+                            courseName,
+                            filterTopicIds,
+                            true,
+                            user.get().getId().getValue()
+                    );
+                } else {
+                    throw new UserNotFoundException("Could not find user with username: " + username);
+                }
+            }
+            case NOT_REGISTERED: {
+                Optional<User> user = userRepository.findByUsername(username);
+                if (user.isPresent()) {
+                    return certificateCourseRepository.findAllCertificateCoursesByIsRegistered(
+                            courseName,
+                            filterTopicIds,
+                            false,
+                            user.get().getId().getValue()
+                    );
+                } else {
+                    throw new UserNotFoundException("Could not find user with username: " + username);
+                }
+            }
+            default:
+                throw new CoreDomainException("Invalid isRegisteredFilter: " + isRegisteredFilter);
+        }
     }
-
     @Transactional(readOnly = true)
     public List<CertificateCourse> queryMostEnrolledCertificateCourses(
             String courseName,
-            List<UUID> filterTopicIds
-    ) {
-        return certificateCourseRepository.findMostEnrolledCertificateCourses(
-                courseName,
-                filterTopicIds
-        );
-    }
-
-    @Transactional(readOnly = true)
-    public List<CertificateCourse> queryMostEnrolledCertificateCoursesFilterByIsRegistered(
-            String courseName,
             List<UUID> filterTopicIds,
-            boolean isRegistered,
+            IsRegisteredFilter isRegisteredFilter,
             String username
     ) {
-        UserId userId = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UserNotFoundException("Could not find user with username: " + username))
-                .getId();
-        return certificateCourseRepository.findMostEnrolledCertificateCoursesByIsRegistered(
-                courseName,
-                filterTopicIds,
-                isRegistered,
-                userId.getValue()
-        );
+        switch (isRegisteredFilter) {
+            case ALL:
+                return certificateCourseRepository.findMostEnrolledCertificateCourses(
+                        courseName,
+                        filterTopicIds
+                );
+            case REGISTERED: {
+                Optional<User> user = userRepository.findByUsername(username);
+                if (user.isPresent()) {
+                    return certificateCourseRepository.findMostEnrolledCertificateCoursesByIsRegistered(
+                            courseName,
+                            filterTopicIds,
+                            true,
+                            user.get().getId().getValue()
+                    );
+                } else {
+                    throw new UserNotFoundException("Could not find user with username: " + username);
+                }
+            }
+            case NOT_REGISTERED: {
+                Optional<User> user = userRepository.findByUsername(username);
+                if (user.isPresent()) {
+                    return certificateCourseRepository.findMostEnrolledCertificateCoursesByIsRegistered(
+                            courseName,
+                            filterTopicIds,
+                            false,
+                            user.get().getId().getValue()
+                    );
+                } else {
+                    throw new UserNotFoundException("Could not find user with username: " + username);
+                }
+            }
+            default:
+                throw new CoreDomainException("Invalid isRegisteredFilter: " + isRegisteredFilter);
+        }
     }
 
-    private void checkUser(UUID userId) {
-        Optional<User> user = userRepository.findUser(userId);
-        if (user.isEmpty()) {
-            log.warn("User with id: {} not found", userId);
-            throw new UserNotFoundException("Could not find user with id: " + userId);
-        }
+    private int countNumOfCompletedQuestions(UUID certificateCourseId, UUID userId) {
+        return certificateCourseRepository.countNumOfCompletedQuestions(certificateCourseId, userId);
     }
 
 }

@@ -69,7 +69,9 @@ public class CertificateCourseCommandHandler {
     public CertificateCourseResponseEntity findCertificateCourseById(
             QueryCertificateCourseCommand queryCertificateCourseCommand) {
         CertificateCourse certificateCourse = certificateCourseQueryHelper
-                .queryCertificateCourseById(queryCertificateCourseCommand.getCertificateCourseId());
+                .queryCertificateCourseById(
+                        queryCertificateCourseCommand.getCertificateCourseId(),
+                        queryCertificateCourseCommand.getUsername());
 
         log.info("Certificate course found with id: {}", certificateCourse.getId().getValue());
 
@@ -82,12 +84,16 @@ public class CertificateCourseCommandHandler {
         List<CertificateCourse> certificateCourses = certificateCourseQueryHelper
                 .queryAllCertificateCourses(
                         queryAllCertificateCoursesCommand.getCourseName(),
-                        queryAllCertificateCoursesCommand.getFilterTopicIds()
+                        queryAllCertificateCoursesCommand.getFilterTopicIds(),
+                        IsRegisteredFilter.valueOf(queryAllCertificateCoursesCommand.getIsRegisteredFilter()),
+                        queryAllCertificateCoursesCommand.getUsername()
                 );
         List<CertificateCourse> mostEnrolledCertificateCourses = certificateCourseQueryHelper
                 .queryMostEnrolledCertificateCourses(
                         queryAllCertificateCoursesCommand.getCourseName(),
-                        queryAllCertificateCoursesCommand.getFilterTopicIds()
+                        queryAllCertificateCoursesCommand.getFilterTopicIds(),
+                        IsRegisteredFilter.valueOf(queryAllCertificateCoursesCommand.getIsRegisteredFilter()),
+                        queryAllCertificateCoursesCommand.getUsername()
                 );
 
         return certificateCourseDataMapper
@@ -97,30 +103,30 @@ public class CertificateCourseCommandHandler {
                 );
     }
 
-    @Transactional(readOnly = true)
-    public QueryAllCertificateCoursesResponse findAllCertificateCoursesFilterByIsRegistered(
-            QueryAllCertificateCoursesFilterByIsRegisteredCommand queryAllCertificateCoursesFilterByIsRegisteredCommand) {
-        List<CertificateCourse> certificateCourses = certificateCourseQueryHelper
-                .queryAllCertificateCoursesFilterByIsRegistered(
-                        queryAllCertificateCoursesFilterByIsRegisteredCommand.getCourseName(),
-                        queryAllCertificateCoursesFilterByIsRegisteredCommand.getFilterTopicIds(),
-                        queryAllCertificateCoursesFilterByIsRegisteredCommand.isRegistered(),
-                        queryAllCertificateCoursesFilterByIsRegisteredCommand.getUsername()
-                );
-        List<CertificateCourse> mostEnrolledCertificateCourses = certificateCourseQueryHelper
-                .queryMostEnrolledCertificateCoursesFilterByIsRegistered(
-                        queryAllCertificateCoursesFilterByIsRegisteredCommand.getCourseName(),
-                        queryAllCertificateCoursesFilterByIsRegisteredCommand.getFilterTopicIds(),
-                        queryAllCertificateCoursesFilterByIsRegisteredCommand.isRegistered(),
-                        queryAllCertificateCoursesFilterByIsRegisteredCommand.getUsername()
-                );
-
-        return certificateCourseDataMapper
-                .certificateCoursesToQueryAllCertificateCoursesResponse(
-                        certificateCourses,
-                        mostEnrolledCertificateCourses
-                );
-    }
+//    @Transactional(readOnly = true)
+//    public QueryAllCertificateCoursesResponse findAllCertificateCoursesFilterByIsRegistered(
+//            QueryAllCertificateCoursesFilterByIsRegisteredCommand queryAllCertificateCoursesFilterByIsRegisteredCommand) {
+//        List<CertificateCourse> certificateCourses = certificateCourseQueryHelper
+//                .queryAllCertificateCoursesFilterByIsRegistered(
+//                        queryAllCertificateCoursesFilterByIsRegisteredCommand.getCourseName(),
+//                        queryAllCertificateCoursesFilterByIsRegisteredCommand.getFilterTopicIds(),
+//                        queryAllCertificateCoursesFilterByIsRegisteredCommand.isRegistered(),
+//                        queryAllCertificateCoursesFilterByIsRegisteredCommand.getUsername()
+//                );
+//        List<CertificateCourse> mostEnrolledCertificateCourses = certificateCourseQueryHelper
+//                .queryMostEnrolledCertificateCoursesFilterByIsRegistered(
+//                        queryAllCertificateCoursesFilterByIsRegisteredCommand.getCourseName(),
+//                        queryAllCertificateCoursesFilterByIsRegisteredCommand.getFilterTopicIds(),
+//                        queryAllCertificateCoursesFilterByIsRegisteredCommand.isRegistered(),
+//                        queryAllCertificateCoursesFilterByIsRegisteredCommand.getUsername()
+//                );
+//
+//        return certificateCourseDataMapper
+//                .certificateCoursesToQueryAllCertificateCoursesResponse(
+//                        certificateCourses,
+//                        mostEnrolledCertificateCourses
+//                );
+//    }
 
     @Transactional
     public DeleteCertificateCourseResponse deleteCertificateCourse(

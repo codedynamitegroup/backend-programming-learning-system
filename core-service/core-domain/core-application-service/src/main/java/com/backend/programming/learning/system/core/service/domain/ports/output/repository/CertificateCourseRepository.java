@@ -35,4 +35,6 @@ public interface CertificateCourseRepository {
                                                                             List<UUID> filterTopicIds,
                                                                             boolean isRegistered,
                                                                             UUID userId);
+
+    int countNumOfCompletedQuestions(UUID certificateCourseId, UUID userId);
 }

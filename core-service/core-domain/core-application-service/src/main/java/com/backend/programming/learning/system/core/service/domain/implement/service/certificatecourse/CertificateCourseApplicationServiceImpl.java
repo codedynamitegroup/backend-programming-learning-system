@@ -42,13 +42,13 @@ class CertificateCourseApplicationServiceImpl implements CertificateCourseApplic
         return certificateCourseCommandHandler.findCertificateCourseById(queryCertificateCourseCommand);
     }
 
-    @Override
-    public QueryAllCertificateCoursesResponse queryAllCertificateCoursesFilterByIsRegistered(
-            QueryAllCertificateCoursesFilterByIsRegisteredCommand
-                    queryAllCertificateCoursesFilterByIsRegisteredCommand) {
-        return certificateCourseCommandHandler
-                .findAllCertificateCoursesFilterByIsRegistered(queryAllCertificateCoursesFilterByIsRegisteredCommand);
-    }
+//    @Override
+//    public QueryAllCertificateCoursesResponse queryAllCertificateCoursesFilterByIsRegistered(
+//            QueryAllCertificateCoursesFilterByIsRegisteredCommand
+//                    queryAllCertificateCoursesFilterByIsRegisteredCommand) {
+//        return certificateCourseCommandHandler
+//                .findAllCertificateCoursesFilterByIsRegistered(queryAllCertificateCoursesFilterByIsRegisteredCommand);
+//    }
 
     @Override
     public QueryAllCertificateCoursesResponse queryAllCertificateCourses(

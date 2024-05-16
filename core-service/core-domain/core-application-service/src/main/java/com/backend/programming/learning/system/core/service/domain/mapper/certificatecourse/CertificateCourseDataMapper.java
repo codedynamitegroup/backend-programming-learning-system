@@ -46,7 +46,6 @@ public class CertificateCourseDataMapper {
                         .builder()
                         .id(new TopicId(createCertificateCourseCommand.getTopicId()))
                         .build())
-                .numOfStudents(0)
                 .createdBy(User
                         .builder()
                         .id(new UserId(createCertificateCourseCommand.getCreatedBy()))
@@ -87,6 +86,7 @@ public class CertificateCourseDataMapper {
                 .topic(topicResponseEntity)
                 .numOfStudents(certificateCourse.getNumOfStudents())
                 .numOfQuestions(certificateCourse.getNumOfQuestions())
+                .numOfReviews(certificateCourse.getNumOfReviews())
                 .createdBy(createdByResponse)
                 .updatedBy(updatedByResponse)
                 .createdAt(certificateCourse.getCreatedAt())
