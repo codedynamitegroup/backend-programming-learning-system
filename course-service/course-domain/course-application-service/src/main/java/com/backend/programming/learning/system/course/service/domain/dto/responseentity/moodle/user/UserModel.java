@@ -28,9 +28,15 @@ public class UserModel {
     String address;
     String phone1;
     String department;
-    Long firstaccess;
-    Long lastaccess;
-    Long lastcourseaccess;
+    Integer firstaccess;
+    Integer lastaccess;
+    String auth;
+    Boolean suspended;
+    Boolean confirmed;
+    String lang;
+    String theme;
+    String timezone;
+    Integer mailformat;
     String description;
     Integer descriptionformat;
     String city;
