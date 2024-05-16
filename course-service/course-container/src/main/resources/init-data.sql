@@ -7,7 +7,7 @@ VALUES
 INSERT INTO public.organization(id, description, name, created_at, updated_at, is_deleted, moodle_url)
 VALUES
 	 ('9ba179ed-d26d-4828-a0f6-8836c2063992',NULL,'Code Dynamite','2024-04-15 18:37:44.08878+07','2024-04-15 18:37:44.08878+07',false, 'localhost'),
-	 ('08b65a39-394f-4977-a5fa-3fe145b620f8',NULL,'moodle2','2024-04-15 18:09:29.488151+07','2024-04-15 18:09:29.488151+07',false, 'tempUrl1'),
+	 ('08b65a39-394f-4977-a5fa-3fe145b620f8',NULL,'moodle2','2024-04-15 18:09:29.488151+07','2024-04-15 18:09:29.488151+07',false, 'localhost'),
 	 ('3ead3b08-afdd-442f-b544-fdbd86eaa186',NULL,'Code Dynamite','2024-04-15 18:09:40.033204+07','2024-04-15 18:09:40.033204+07',false, 'tempUrl2');
 
 INSERT INTO public.question(id, org_id, difficulty, name, question_text, general_feedback, default_mark, qtype, created_by, updated_by)
@@ -17,23 +17,23 @@ VALUES
    ('b6484e21-6937-489c-b031-b71767994132', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'MEDIUM', 'Question hihi', 'Question Wow Text', 'Question Amazing feedback', 1, 'SHORT_ANSWER', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c'),
    ('b6484e21-6937-489c-b031-b71767994735', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'HARD', 'Question haha', 'Question Speaker Text', 'Question Good Job feedback', 1, 'MULTIPLE_CHOICE', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c');
 
-INSERT INTO public.course(id, name, course_type_id, created_by, updated_by, created_at, updated_at)
-VALUES
-    ('b6484e21-6937-489c-b031-b71767994736', 'CSC001 - Nhập môn lập trình', null, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-04-15 18:07:41.151759+07', '2024-04-15 18:07:41.151759+07'),
-    ('b6484e21-6937-489c-b031-b71767994737', 'CSC002 - Lập trình hướng đối tượng', null, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-04-15 18:07:41.151759+07', '2024-04-15 18:07:41.151759+07'),
-    ('b6484e21-6937-489c-b031-b71767994738', 'CSC003 - Lập trình web', null, 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-04-15 18:07:41.151759+07', '2024-04-15 18:07:41.151759+07');
-
-INSERT INTO public.exam(id, course_id, name, intro, time_open, time_close, time_limit)
-VALUES
-    ('b6484e21-6937-489c-b031-b71767994739', 'b6484e21-6937-489c-b031-b71767994736', 'Kiểm tra giữa kỳ', 'Intro 1', '2024-04-15 18:07:41.151759+07', '2024-04-16 18:07:41.151759+07', 3600),
-    ('b6484e21-6937-489c-b031-b71767994740', 'b6484e21-6937-489c-b031-b71767994737', 'Kiểm tra cuối kỳ', 'Intro 2', '2024-04-15 18:07:41.151759+07', '2024-04-16 18:07:41.151759+07', 3600),
-    ('b6484e21-6937-489c-b031-b71767994741', 'b6484e21-6937-489c-b031-b71767994738', 'Kiểm tra đầu buổi 1', 'Intro 3', '2024-04-15 18:07:41.151759+07', '2024-04-16 18:07:41.151759+07', 3600);
-
-INSERT INTO public.exam_question(id, exam_id, question_id)
-VALUES
-    ('b6484e21-6937-489c-b031-b71767994742', 'b6484e21-6937-489c-b031-b71767994739', 'b6484e21-6937-489c-b031-b71767994221'),
-    ('b6484e21-6937-489c-b031-b71767994743', 'b6484e21-6937-489c-b031-b71767994740', 'b6484e21-6937-489c-b031-b71767994233'),
-    ('b6484e21-6937-489c-b031-b71767994744', 'b6484e21-6937-489c-b031-b71767994741', 'b6484e21-6937-489c-b031-b71767994132');
+--INSERT INTO public.course(id, name, course_type_id,org_id, created_by, updated_by, created_at, updated_at)
+--VALUES
+--    ('b6484e21-6937-489c-b031-b71767994736', 'CSC001 - Nhập môn lập trình', null,'08b65a39-394f-4977-a5fa-3fe145b620f8', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-04-15 18:07:41.151759+07', '2024-04-15 18:07:41.151759+07'),
+--    ('b6484e21-6937-489c-b031-b71767994737', 'CSC002 - Lập trình hướng đối tượng', null,'08b65a39-394f-4977-a5fa-3fe145b620f8', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-04-15 18:07:41.151759+07', '2024-04-15 18:07:41.151759+07'),
+--    ('b6484e21-6937-489c-b031-b71767994738', 'CSC003 - Lập trình web', null,'08b65a39-394f-4977-a5fa-3fe145b620f8', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', '2024-04-15 18:07:41.151759+07', '2024-04-15 18:07:41.151759+07');
+--
+--INSERT INTO public.exam(id, course_id, name, intro, time_open, time_close, time_limit)
+--VALUES
+--    ('b6484e21-6937-489c-b031-b71767994739', 'b6484e21-6937-489c-b031-b71767994736', 'Kiểm tra giữa kỳ', 'Intro 1', '2024-04-15 18:07:41.151759+07', '2024-04-16 18:07:41.151759+07', 3600),
+--    ('b6484e21-6937-489c-b031-b71767994740', 'b6484e21-6937-489c-b031-b71767994737', 'Kiểm tra cuối kỳ', 'Intro 2', '2024-04-15 18:07:41.151759+07', '2024-04-16 18:07:41.151759+07', 3600),
+--    ('b6484e21-6937-489c-b031-b71767994741', 'b6484e21-6937-489c-b031-b71767994738', 'Kiểm tra đầu buổi 1', 'Intro 3', '2024-04-15 18:07:41.151759+07', '2024-04-16 18:07:41.151759+07', 3600);
+--
+--INSERT INTO public.exam_question(id, exam_id, question_id)
+--VALUES
+--    ('b6484e21-6937-489c-b031-b71767994742', 'b6484e21-6937-489c-b031-b71767994739', 'b6484e21-6937-489c-b031-b71767994221'),
+--    ('b6484e21-6937-489c-b031-b71767994743', 'b6484e21-6937-489c-b031-b71767994740', 'b6484e21-6937-489c-b031-b71767994233'),
+--    ('b6484e21-6937-489c-b031-b71767994744', 'b6484e21-6937-489c-b031-b71767994741', 'b6484e21-6937-489c-b031-b71767994132');
 
 INSERT INTO public.webhook_api_function(id, name, description)
 VALUES
@@ -57,11 +57,11 @@ VALUES
     ('b6484e21-6937-489c-b031-b71767994745', 'b6484e21-6937-489c-b031-b71767992742', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
     ('b6484e21-6937-489c-b031-b71767994746', 'b6484e21-6937-489c-b031-b71767993743', '9ba179ed-d26d-4828-a0f6-8836c2063992');
 
-INSERT INTO public.course_type(id, moodle_id, name)
-VALUES
-    ('b6484e21-6937-489c-b031-b71767994747', '1', 'CLC'),
-    ('b6484e21-6937-489c-b031-b71767994748', '2', 'VP'),
-    ('b6484e21-6937-489c-b031-b71767994749', '3', 'APCS');
+--INSERT INTO public.course_type(id, moodle_id, name)
+--VALUES
+--    ('b6484e21-6937-489c-b031-b71767994747', '0', 'CLC'),
+--    ('b6484e21-6937-489c-b031-b71767994748', '1', 'VP'),
+--    ('b6484e21-6937-489c-b031-b71767994749', '2', 'APCS');
 --INSERT INTO public.answer_of_question(id, question_id, feedback, answer, fraction)
 --VALUES
 --    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b6484e21-6937-489c-b031-b71767994221', 'Correct', 'print(Hello World)', 1),

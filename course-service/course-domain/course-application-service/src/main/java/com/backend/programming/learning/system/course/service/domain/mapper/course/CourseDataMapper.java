@@ -63,6 +63,7 @@ public class CourseDataMapper {
         return CourseResponseEntity.builder()
                 .id(course.getId().getValue())
                 .courseIdMoodle(course.getCourseIdMoodle())
+                .organization(course.getOrganization())
                 .name(course.getName())
                 .courseType(course.getCourseType())
                 .visible(course.getVisible())

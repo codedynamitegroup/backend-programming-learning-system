@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.dto.respon
 
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
 import com.backend.programming.learning.system.course.service.domain.entity.CourseType;
+import com.backend.programming.learning.system.course.service.domain.entity.Organization;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +22,8 @@ import java.util.UUID;
 public record CourseResponseEntity(
         UUID id,
         Integer courseIdMoodle,
+
+        Organization organization,
         String name,
         CourseType courseType,
         Boolean visible,

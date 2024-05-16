@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.AssignmentCourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.AssignmentModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.ListAssignmentCourseModel;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.coure_type.CourseTypeModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.CourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.ListCourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.module.ModuleModel;
@@ -53,6 +54,7 @@ public class MoodleCommandHandler {
     private final ExamRepository examRepository;
     private final SectionRepository sectionRepository;
     private final ModuleRepository moduleRepository;
+    private final CourseTypeRepository courseTypeRepository;
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final RestTemplate restTemplate = new RestTemplate();
 
@@ -63,6 +65,9 @@ public class MoodleCommandHandler {
     String GET_ASSIGNMENTS = "mod_assign_get_assignments";
     String GET_ENROLLED_USERS = "core_enrol_get_enrolled_users";
     String GET_CONTENTS = "core_course_get_contents";
+
+
+    String GET_CATEGORY = "core_course_get_categories";
     String GET_SUBMISSION_ASSIGNMENTS = "mod_assign_get_submissions";
 
     String GET_USER_PROFILE = "core_user_get_course_user_profiles";
@@ -75,16 +80,46 @@ public class MoodleCommandHandler {
         String MOODLE_URL = "http://localhost/moodle/webservice/rest/server.php";
     String MOODLE_URL_TOKEN = "http://62.171.185.208/login/token.php";
 //    String TOKEN = "cdf90b5bf53bcae577c60419702dbee7";
-    String TOKEN = "c22b03ca9c0a3c8431cd6b57bd4c8b04";
-//        String TOKEN = "60d437ef3f02dded9a7b097a8a81bf61";
+//    String TOKEN = "c22b03ca9c0a3c8431cd6b57bd4c8b04";
+        String TOKEN = "60d437ef3f02dded9a7b097a8a81bf61";
 
 
     @Transactional
     public String syncCourse() {
 
+        createCourseType();
         List<CourseResponseEntity> allCourse = getAllCourse();
         createCourseUser();
         return "Sync course success";
+    }
+
+    @Transactional
+    public void createCourseType()
+    {
+        List<CourseTypeModel> courseTypeModels = getAllCourseType();
+        courseTypeModels.forEach(courseTypeModel -> {
+            CourseType courseType = moodleDataMapper.createCourseType(courseTypeModel);
+            courseTypeRepository.save(courseType);
+        });
+    }
+
+    private List<CourseTypeModel> getAllCourseType() {
+        String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s",
+                MOODLE_URL, TOKEN, GET_CATEGORY);
+        RestTemplate restTemplate = new RestTemplate();
+        String model = restTemplate.getForObject(apiURL, String.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        CourseTypeModel[] listCourseTypeModel = null;
+        if (model.equals("[]"))
+            return new ArrayList<>();
+        try {
+            listCourseTypeModel = objectMapper.readValue(model, CourseTypeModel[].class);
+            log.info("Course model: {}", listCourseTypeModel);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return Arrays.stream(listCourseTypeModel).toList();
+
     }
 
     @Transactional
@@ -272,11 +307,13 @@ public class MoodleCommandHandler {
         List<CourseResponseEntity> result = new ArrayList<>();
         Optional<User> userResult = userRepository.findUserByEmail("dcthong20@clc.fitus.edu.vn");
         listCourseModel.getCourses().forEach(courseModel -> {
-            Course courseCreate = moodleDataMapper.createCourse(courseModel);
-            courseCreate.setCreatedBy(userResult.get());
-            courseCreate.setUpdatedBy(userResult.get());
-            Course res = courseRepository.save(courseCreate);
-            courseIdsMap.put(courseModel.getId(), res);
+            if(courseModel.getCategoryid()!=0) {
+                Course courseCreate = moodleDataMapper.createCourse(courseModel, userResult.get().getOrganization());
+                courseCreate.setCreatedBy(userResult.get());
+                courseCreate.setUpdatedBy(userResult.get());
+                Course res = courseRepository.save(courseCreate);
+                courseIdsMap.put(courseModel.getId(), res);
+            }
         });
 
         createAssignment();
