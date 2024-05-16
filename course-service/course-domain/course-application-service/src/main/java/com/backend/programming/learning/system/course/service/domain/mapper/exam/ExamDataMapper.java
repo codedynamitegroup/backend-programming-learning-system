@@ -64,7 +64,8 @@ public class ExamDataMapper {
     public ExamResponseEntity examToQueryExamResponse(Exam exam) {
         return ExamResponseEntity.builder()
                 .id(exam.getId().getValue())
-                .courseId(exam.getCourse().getId())
+                .courseId(exam.getCourse().getId().getValue())
+                .shuffleAnswers(exam.getShuffleAnswers())
                 .name(exam.getName())
                 .scores(exam.getScore())
                 .maxScores(exam.getMaxScore())
