@@ -192,8 +192,8 @@ public class UserDataMapper {
                 .dob(null)
                 .firstName(userModel.getFirstname())
                 .lastName(userModel.getLastname())
-                .phone(userModel.getPhone1())
-                .address(userModel.getCity())
+//                .phone(userModel.getPhone1())
+//                .address(userModel.getCity())
                 .avatarUrl(userModel.getProfileimageurl())
                 .isDeleted(false)
                 .build();
@@ -204,8 +204,8 @@ public class UserDataMapper {
         prevUser.setEmail(userModel.getEmail());
         prevUser.setFirstName(userModel.getFirstname());
         prevUser.setLastName(userModel.getLastname());
-        prevUser.setPhone(userModel.getPhone1());
-        prevUser.setAddress(userModel.getCity());
+//        prevUser.setPhone(userModel.getPhone1());
+//        prevUser.setAddress(userModel.getCity());
         prevUser.setAvatarUrl(userModel.getProfileimageurl());
 
         return prevUser;

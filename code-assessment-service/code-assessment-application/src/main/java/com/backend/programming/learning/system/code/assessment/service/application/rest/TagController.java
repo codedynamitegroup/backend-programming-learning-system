@@ -1,8 +1,10 @@
 package com.backend.programming.learning.system.code.assessment.service.application.rest;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.TagDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.tag.CreateTagsCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.tag.CreateTagsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.tag.DeleteTagCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.tag.GetTagsCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.TagApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -37,4 +39,17 @@ public class TagController {
         tagApplicationService.deleteTag(command);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping
+    public ResponseEntity<List<TagDto>> getTags(@RequestParam(value = "countCodeQuestion", required = false) Boolean countCodeQuestion){
+        if(countCodeQuestion == null)
+            countCodeQuestion = false;
+
+        GetTagsCommand command = new GetTagsCommand(countCodeQuestion);
+        List<TagDto> response = tagApplicationService.getTags(command);
+        return ResponseEntity.ok(response);
+    }
+
+
+
 }

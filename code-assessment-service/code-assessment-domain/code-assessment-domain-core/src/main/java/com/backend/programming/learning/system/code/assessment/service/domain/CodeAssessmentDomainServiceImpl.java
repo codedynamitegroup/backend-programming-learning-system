@@ -3,14 +3,19 @@ package com.backend.programming.learning.system.code.assessment.service.domain;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionsUpdatedEvent;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.user.*;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.programming_language_code_question.ProgrammingLanguageCodeQuestionId;
 import com.backend.programming.learning.system.domain.DomainConstants;
+import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainService{
@@ -36,9 +41,9 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
     }
 
     @Override
-    public CodeSubmission initiateCodeSubmission(CodeSubmission codeSubmission, CodeQuestion codeQuestion, List<TestCase> testCases, ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion, ProgrammingLangauge programmingLangauge) {
-        codeSubmission.initiate(codeQuestion ,testCases, programmingLanguageCodeQuestion);
-        codeSubmission.setProgrammingLangaugeJudge0Id(programmingLangauge.getJudge0_compilerApiId());
+    public CodeSubmission initiateCodeSubmission(CodeSubmission codeSubmission, List<TestCase> testCases, ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion, ProgrammingLanguage programmingLanguage) {
+        codeSubmission.initiate(testCases, programmingLanguageCodeQuestion);
+        codeSubmission.setProgrammingLangaugeJudge0Id(programmingLanguage.getJudge0_compilerApiId());
 
         return codeSubmission;
     }
@@ -81,6 +86,35 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
     @Override
     public void initiateTags(List<Tag> tags){
         tags.forEach(Tag::inititate);
+    }
+
+    @Override
+    public void intitateComment(Comment comment, Comment replyComment) {
+        if(replyComment != null &&  replyComment.getReplyLevel() != 0)
+            throw new CodeAssessmentDomainException("Reply comment must be the root comment with id " + replyComment.getReplyId().getValue());
+
+        comment.initate(replyComment);
+    }
+
+    @Override
+    public void inititateProgrammingLanguage(ProgrammingLanguage programmingLanguage) {
+        programmingLanguage.initiate();
+    }
+
+    @Override
+    public CodeQuestion getDetailCodeQuestion(CodeQuestion codeQuestion, List<TestCase> sampleTestCase, CodeSubmission codeSubmission, List<ProgrammingLanguage> languages) {
+        codeQuestion.getDetail(sampleTestCase, codeSubmission, languages);
+        return codeQuestion;
+    }
+
+    @Override
+    public ProgrammingLanguageCodeQuestion initProgrammingLanguageCodeQuestion(Float timeLimit, Float memoryLimit, CodeQuestionId codeQuestionId, UUID languageId) {
+        return ProgrammingLanguageCodeQuestion.builder()
+                .id(new ProgrammingLanguageCodeQuestionId(new ProgrammingLanguageId(languageId), codeQuestionId))
+                .active(true)
+                .timeLimit(timeLimit)
+                .memoryLimit(memoryLimit)
+                .build();
     }
 
 

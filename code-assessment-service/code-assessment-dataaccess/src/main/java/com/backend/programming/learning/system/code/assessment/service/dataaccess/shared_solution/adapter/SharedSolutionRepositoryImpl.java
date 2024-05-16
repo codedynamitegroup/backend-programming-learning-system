@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.dataaccess.shared_solution.adapter;
 
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.general_mapper.GeneralMapper;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.shared_solution.entity.SharedSolutionEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.shared_solution.entity.tag.SharedSolutionTagEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.shared_solution.entity.vote.SharedSolutionVoteEntity;
@@ -15,12 +16,17 @@ import com.backend.programming.learning.system.code.assessment.service.domain.en
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Tag;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.SharedSolutionRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.SharedSolutionId;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.Vote;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.shared_solution_vote.SharedSolutionVoteId;
+import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
+import com.backend.programming.learning.system.domain.valueobject.QueryOrderBy;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Component;
 
 import javax.swing.text.html.Option;
+
 import java.util.*;
 
 @Component
@@ -32,40 +38,46 @@ public class SharedSolutionRepositoryImpl implements SharedSolutionRepository {
     final SharedSolutionTagDataAccessMapper sharedSolutionTagDataAccessMapper;
     final SharedSolutionVoteJpaRepository sharedSolutionVoteJpaRepository;
     final SharedSolutionVoteDataAccessMapper sharedSolutionVoteDataAccessMapper;
+    final GeneralMapper generalMapper;
 
-    public SharedSolutionRepositoryImpl(SharedSolutionDataAccessMapper dataAccessMapper, SharedSolutionJpaRepository sharedSolutionJpaRepository, SharedSolutionTagJpaRepository sharedSolutionTagJpaRepository, SharedSolutionTagDataAccessMapper sharedSolutionTagDataAccessMapper, SharedSolutionVoteJpaRepository sharedSolutionVoteJpaRepository, SharedSolutionVoteDataAccessMapper sharedSolutionVoteDataAccessMapper) {
+    public SharedSolutionRepositoryImpl(SharedSolutionDataAccessMapper dataAccessMapper, SharedSolutionJpaRepository sharedSolutionJpaRepository, SharedSolutionTagJpaRepository sharedSolutionTagJpaRepository, SharedSolutionTagDataAccessMapper sharedSolutionTagDataAccessMapper, SharedSolutionVoteJpaRepository sharedSolutionVoteJpaRepository, SharedSolutionVoteDataAccessMapper sharedSolutionVoteDataAccessMapper, GeneralMapper generalMapper) {
         this.dataAccessMapper = dataAccessMapper;
         this.sharedSolutionJpaRepository = sharedSolutionJpaRepository;
         this.sharedSolutionTagJpaRepository = sharedSolutionTagJpaRepository;
         this.sharedSolutionTagDataAccessMapper = sharedSolutionTagDataAccessMapper;
         this.sharedSolutionVoteJpaRepository = sharedSolutionVoteJpaRepository;
         this.sharedSolutionVoteDataAccessMapper = sharedSolutionVoteDataAccessMapper;
+        this.generalMapper = generalMapper;
     }
 
     @Override
     public SharedSolution save(SharedSolution sharedSolution) {
+        //save shared solution
         SharedSolutionEntity entity = sharedSolutionJpaRepository.save(dataAccessMapper.sharedSoltionToEntity(sharedSolution));
+
+        //save shared solution tag
         List<Tag> tags = sharedSolution.getTags();
         if(tags != null && !tags.isEmpty()){
             List<SharedSolutionTagEntity> sharedSolutionTagEntities =
                     tags.stream().map(tag -> dataAccessMapper.tagToSharedSolutionTagEntity(tag, entity))
                             .toList();
-//        sharedSolutionTagEntities.forEach(a-> log.info("ccaa {} {}", a.getSharedSolution().getId(), a.getTag().getId() ));
             sharedSolutionTagJpaRepository.saveAll(sharedSolutionTagEntities);
         }
+
         return dataAccessMapper.entityToSharedSolution(entity, tags);
     }
 
     @Override
-    public void saveTag(List<Tag> tags, UUID id) {
+    public void saveTag(List<Tag> tags, SharedSolutionId id) {
         List<SharedSolutionTagEntity> sharedSolutionTagEntities =
-                tags.stream().map(tag -> dataAccessMapper.tagToSharedSolutionTagEntity(tag, SharedSolutionEntity.builder().id(id).build()))
+                tags.stream().map(tag -> dataAccessMapper.tagToSharedSolutionTagEntity(tag, SharedSolutionEntity.builder().id(id.getValue()).build()))
                         .toList();
         sharedSolutionTagJpaRepository.saveAll(sharedSolutionTagEntities);
     }
 
     @Override
     public Optional<SharedSolution> findById(UUID sharedSolutionId, UUID voteUserId) {
+        //find tag
         List<SharedSolutionTagEntity> sst = sharedSolutionTagJpaRepository.findBySharedSolutionId(sharedSolutionId);
 
         //check if user vote this
@@ -73,8 +85,10 @@ public class SharedSolutionRepositoryImpl implements SharedSolutionRepository {
         Optional<SharedSolutionVoteEntity> sharedSolutionVoteEntityOpt = sharedSolutionVoteJpaRepository.findById(entityId);
         SharedSolutionVote sharedSolutionVote = sharedSolutionVoteEntityOpt.map(sharedSolutionVoteDataAccessMapper::entityToVote).orElse(null);
 
+        //map tag
         List<Tag> tags = sst.stream().map(sharedSolutionTagDataAccessMapper::sharedSolutionTagEntityToTag).toList();
 
+        //find shared solution and return
         return sharedSolutionJpaRepository
                 .findById(sharedSolutionId)
                 .map(item -> dataAccessMapper.entityToSharedSolution(item, tags, sharedSolutionVote));
@@ -82,45 +96,60 @@ public class SharedSolutionRepositoryImpl implements SharedSolutionRepository {
 
     @Override
     public Optional<SharedSolution> findById(UUID sharedSolutionId) {
-        //find tag
-        List<SharedSolutionTagEntity> sst = sharedSolutionTagJpaRepository.findBySharedSolutionId(sharedSolutionId);
-        List<Tag> tags = sst.stream().map(sharedSolutionTagDataAccessMapper::sharedSolutionTagEntityToTag).toList();
-
         return sharedSolutionJpaRepository
                 .findById(sharedSolutionId)
-                .map(item -> dataAccessMapper.entityToSharedSolution(item, tags));
+                .map(dataAccessMapper::entityToSharedSolutionIgnoreLazy);
     }
 
     @Override
-    public Integer countVoteById(UUID sharedSolutionId) {
-        long numUpvote = sharedSolutionVoteJpaRepository.countBySharedSolutionIdAndVoteTypeIn(sharedSolutionId, List.of(Vote.UPVOTE));
-        long numDownvote = sharedSolutionVoteJpaRepository.countBySharedSolutionIdAndVoteTypeIn(sharedSolutionId, List.of(Vote.DOWNVOTE));
+    public Page<SharedSolution>
+    findByCodeQuestionId(CodeQuestionId codeQuestionId,
+                         Integer pageNo,
+                         Integer pageSize,
+                         SharedSolution.SortedFields sortBy,
+                         QueryOrderBy orderBy,
+                         List<TagId> tagIds) {
 
-        return (int) (numUpvote - numDownvote);
-    }
+        List<UUID> tagEntityId
+                = tagIds == null?
+                null:
+                tagIds.stream()
+                        .map(sharedSolutionTagDataAccessMapper::tagIdToEntityId)
+                        .toList();
 
-    @Override
-    public List<SharedSolution> findByCodeQuestionId(UUID codeQuestionId) {
-        List<SharedSolutionEntity> sharedSolutionEntities = sharedSolutionJpaRepository.findByCodeQuestionId(codeQuestionId);
-
+        Pageable pageable
+                = PageRequest
+                    .of(pageNo,
+                        pageSize,
+                        Sort.by(generalMapper.QueryOrderByToSortDirection(orderBy),
+                                dataAccessMapper.sharedSolutionFieldToSharedSolutionEntityField(sortBy.name())));
+        Page<SharedSolutionEntity> sharedSolutionEntities = sharedSolutionJpaRepository
+                .findByCodeQuestionId(codeQuestionId.getValue(),tagEntityId, pageable);
 
         //get tag
-        List<List<Tag>> eachTags = sharedSolutionEntities.stream().map(item->{
+        List<List<Tag>> eachTags = sharedSolutionEntities.getContent().stream().map(item->{
             List<SharedSolutionTagEntity> sst = sharedSolutionTagJpaRepository.findBySharedSolutionId(item.getId());
             return sst.stream().map(sharedSolutionTagDataAccessMapper::sharedSolutionTagEntityToTag).toList();
         }).toList();
 
-        List<SharedSolution> result = new ArrayList<>();
-        for(int i = 0; i<sharedSolutionEntities.size(); ++i){
-            result.add(dataAccessMapper
-                    .entityToSharedSolution(sharedSolutionEntities.get(i), eachTags.get(i)));
+        List<SharedSolution> sharedSolutions = new ArrayList<>();
+        for(int i = 0; i<sharedSolutionEntities.getContent().size(); ++i){
+            sharedSolutions.add(dataAccessMapper
+                    .entityToSharedSolution(sharedSolutionEntities.getContent().get(i), eachTags.get(i)));
         }
+
+        Page<SharedSolution> result = new PageImpl<>(sharedSolutions, sharedSolutionEntities.getPageable(), sharedSolutionEntities.getTotalElements());
         return result;
     }
 
     @Override
     public void increaseViewByOne(SharedSolutionId id) {
         sharedSolutionJpaRepository.increaseOneViewById(id.getValue());
+    }
+
+    @Override
+    public void deleteById(SharedSolutionId id) {
+        sharedSolutionJpaRepository.deleteById(id.getValue());
     }
 
     @Override
@@ -140,6 +169,14 @@ public class SharedSolutionRepositoryImpl implements SharedSolutionRepository {
         SharedSolutionVoteEntityId id = sharedSolutionVoteDataAccessMapper.idToEntityId(sharedSolutionVoteId);
 
         return sharedSolutionVoteJpaRepository.findById(id).map(sharedSolutionVoteDataAccessMapper::entityToVote);
+    }
+
+    @Override
+    public void deleteTag(List<Tag> tags, SharedSolutionId id) {
+        List<SharedSolutionTagEntity> sharedSolutionTagEntities =
+                tags.stream().map(tag -> dataAccessMapper.tagToSharedSolutionTagEntity(tag, SharedSolutionEntity.builder().id(id.getValue()).build()))
+                        .toList();
+        sharedSolutionTagJpaRepository.deleteAll(sharedSolutionTagEntities);
     }
 
 }

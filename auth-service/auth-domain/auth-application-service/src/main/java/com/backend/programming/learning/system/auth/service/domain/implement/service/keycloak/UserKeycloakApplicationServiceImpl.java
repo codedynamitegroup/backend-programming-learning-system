@@ -44,7 +44,7 @@ public class UserKeycloakApplicationServiceImpl implements UserKeycloakApplicati
         userRepresentation.setFirstName(createUserCommand.getFirstName());
         userRepresentation.setLastName(createUserCommand.getLastName());
         userRepresentation.setEmail(createUserCommand.getEmail());
-        userRepresentation.setUsername(createUserCommand.getUsername());
+        userRepresentation.setUsername(createUserCommand.getEmail());
         userRepresentation.setEnabled(true);
         userRepresentation.setEmailVerified(false);
 
@@ -74,7 +74,12 @@ public class UserKeycloakApplicationServiceImpl implements UserKeycloakApplicati
     @Override
     public void deleteUser(User user, String token) {
         UsersResource usersResource = getUsersResource(token);
-        UserRepresentation userRepresentation = usersResource.searchByUsername(user.getUsername(), true).get(0);
+        List<UserRepresentation> userRepresentations = usersResource.searchByUsername(user.getUsername(), true);
+        if (userRepresentations.isEmpty()) {
+            log.error("User not found");
+            throw new AuthDomainException("User not found");
+        }
+        UserRepresentation userRepresentation = userRepresentations.get(0);
         userRepresentation.setEnabled(false);
         usersResource.get(userRepresentation.getId()).update(userRepresentation);
     }
@@ -82,7 +87,12 @@ public class UserKeycloakApplicationServiceImpl implements UserKeycloakApplicati
     @Override
     public void updateUser(User user, String token) {
         UsersResource usersResource = getUsersResource(token);
-        UserRepresentation userRepresentation = usersResource.searchByUsername(user.getUsername(), true).get(0);
+        List<UserRepresentation> userRepresentations = usersResource.searchByUsername(user.getUsername(), true);
+        if (userRepresentations.isEmpty()) {
+            log.error("User not found");
+            throw new AuthDomainException("User not found");
+        }
+        UserRepresentation userRepresentation = userRepresentations.get(0);
         userRepresentation.setFirstName(user.getFirstName());
         userRepresentation.setLastName(user.getLastName());
         usersResource.get(userRepresentation.getId()).update(userRepresentation);

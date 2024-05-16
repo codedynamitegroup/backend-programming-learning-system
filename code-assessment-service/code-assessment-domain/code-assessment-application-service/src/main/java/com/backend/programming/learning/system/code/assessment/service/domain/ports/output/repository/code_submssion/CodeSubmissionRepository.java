@@ -14,4 +14,18 @@ public interface CodeSubmissionRepository {
     Optional<CodeSubmission> findById(CodeSubmissionId id);
 
     Optional<List<CodeSubmission>> findByUserIdAndQuestionId(UserId userId, CodeQuestionId codeQuestionId);
+
+    Integer findNumberOfSubmissionUnderMySubmissionByMemory(CodeSubmissionId id);
+
+    Integer findNumberOfSubmissionUnderMySubmissionByRunTime(CodeSubmissionId id);
+
+    Integer totalSubmissionHavingAvgMemoryAndRunTime(CodeQuestionId id);
+
+    Integer findNumberOfSubmissionUnderMySubmissionByScore(CodeSubmissionId id);
+
+    Integer totalSubmissionHavingScore(CodeQuestionId id);
+
+    Integer findYourScoreRank(CodeSubmissionId id);
+
+    Optional<CodeSubmission> findLatestSubmission(CodeQuestionId id, UserId id1);
 }

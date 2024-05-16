@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.course.service.dataaccess.course
 import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.course_type.entity.CourseTypeEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.course_type.mapper.CourseTypeDataAccessMapper;
+import com.backend.programming.learning.system.course.service.dataaccess.organization.entity.OrganizationEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.organization.mapper.OrganizationDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.mapper.UserDataAccessMapper;
@@ -24,6 +25,7 @@ public class CourseDataAccessMapper {
         UserEntity createdBy = userDataAccessMapper.userToUserEntity(course.getCreatedBy());
         UserEntity updatedBy = userDataAccessMapper.userToUserEntity(course.getUpdatedBy());
         CourseTypeEntity courseType = courseTypeDataAccessMapper.courseTypeToCourseTypeEntity(course.getCourseType());
+        OrganizationEntity organization = organizationDataAccessMapper.organizationToOrganizationEntity(course.getOrganization());
         return CourseEntity.builder()
                 .id(course.getId().getValue())
                 .courseIdMoodle(course.getCourseIdMoodle())
@@ -34,7 +36,7 @@ public class CourseDataAccessMapper {
                 .updatedBy(updatedBy)
                 .createdAt(course.getCreatedAt())
                 .updatedAt(course.getUpdatedAt())
-                .organization(organizationDataAccessMapper.organizationToOrganizationEntity(course.getOrganization()))
+                .organization(organization)
                 .build();
     }
     public Course courseEntityToCourse(CourseEntity courseEntity) {

@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.CourseResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.AssignmentModel;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.coure_type.CourseTypeModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.CourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.module.ModuleModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.quiz.QuizModel;
@@ -13,6 +14,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user.UserModel;
 import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.entity.Module;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseTypeRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.*;
 import org.springframework.stereotype.Component;
 
@@ -21,18 +23,26 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Component
 public class MoodleDataMapper {
+    private final CourseTypeRepository courseTypeRepository;
 
-    public Course createCourse(CourseModel courseModel) {
+    public MoodleDataMapper(CourseTypeRepository courseTypeRepository) {
+        this.courseTypeRepository = courseTypeRepository;
+    }
+
+    public Course createCourse(CourseModel courseModel,Organization organization) {
+        Optional<CourseType> courseType = courseTypeRepository.findByMoodleId(Integer.valueOf(courseModel.getCategoryid()));
         return Course.builder()
                 .id(new CourseId(UUID.randomUUID()))
                 .courseIdMoodle(Integer.valueOf(courseModel.getId()))
+                .organization(organization)
                 .name(courseModel.getFullname())
-//                .courseType(courseModel.getShortname())
+                .courseType(courseType.get())
                 .key(courseModel.getIdnumber())
                 .visible(courseModel.getVisible()==1)
                 .createdAt(ZonedDateTime.now())
@@ -160,8 +170,8 @@ public class MoodleDataMapper {
                 .dob(user.getDob())
                 .firstName(userModel.getFirstname())
                 .lastName(userModel.getLastname())
-                .phone(userModel.getPhone1())
-                .address(userModel.getAddress())
+//                .phone(userModel.getPhone1())
+//                .address(userModel.getAddress())
                 .avatarUrl(userModel.getProfileimageurl())
                 .build();
     }
@@ -174,7 +184,7 @@ public class MoodleDataMapper {
                 .password("")
                 .firstName(userModel.getFirstname())
                 .lastName(userModel.getLastname())
-                .phone(userModel.getPhone1())
+//                .phone(userModel.getPhone1())
                 .build();
     }
 
@@ -253,4 +263,12 @@ public class MoodleDataMapper {
                 .build();
     }
 
+    public CourseType createCourseType(CourseTypeModel courseTypeModel) {
+        Integer moodleId = Integer.valueOf(courseTypeModel.getId());
+        return CourseType.builder()
+                .id(new CourseTypeId(UUID.randomUUID()))
+                .name(courseTypeModel.getName())
+                .moodleId(moodleId)
+                .build();
+    }
 }

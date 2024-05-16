@@ -11,8 +11,5 @@ import lombok.Getter;
 @AllArgsConstructor
 public class RefreshTokenUserCommand {
     @NotNull
-    private final String refreshToken;
-
-    @NotNull
-    private final String accessToken;
+    private final String email;
 }
