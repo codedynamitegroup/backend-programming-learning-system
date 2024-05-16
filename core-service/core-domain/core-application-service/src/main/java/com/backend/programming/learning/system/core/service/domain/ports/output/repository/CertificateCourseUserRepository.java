@@ -14,5 +14,4 @@ public interface CertificateCourseUserRepository {
 
     Optional<CertificateCourseUser> findByCertificateCourseIdAndUserId(
             UUID certificateCourseId, UUID userId);
-    int countByCertificateCourseId(UUID certificateCourseId);
 }

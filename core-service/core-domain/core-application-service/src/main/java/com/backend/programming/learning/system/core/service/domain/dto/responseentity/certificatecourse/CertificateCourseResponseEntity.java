@@ -39,6 +39,12 @@ public class CertificateCourseResponseEntity {
     @NotNull
     private final Integer numOfQuestions;
     @NotNull
+    private final Integer numOfCompletedQuestions;
+    @NotNull
+    private final Integer numOfReviews;
+    @NotNull
+    private final Boolean isRegistered;
+    @NotNull
     private final UserResponseEntity createdBy;
     @NotNull
     private final UserResponseEntity updatedBy;
