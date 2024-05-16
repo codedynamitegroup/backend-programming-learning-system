@@ -16,7 +16,7 @@ import java.util.UUID;
 @Builder
 public record ExamResponseEntity(
         UUID id,
-        CourseId courseId,
+        UUID courseId,
         String name,
         Float scores,
         Float maxScores,
