@@ -5,6 +5,8 @@ import com.backend.programming.learning.system.code.assessment.service.domain.Co
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetCodeSubmissionsByUserIdCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetDetailCodeSubmissionsByIdCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetMemoryAndTimeRankingCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetMemoryAndTimeRankingResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_submission.UpdateCodeSubmissionTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_submission.CodeSubmissionNotFound;
@@ -59,16 +61,18 @@ public class CodeSubmissionHelper {
     }
     @Transactional
     public CodeSubmission initAndSaveCodeSubmission(CreateCodeSubmissionCommand createCodeSubmissionCommand){
-        CodeSubmission codeSubmission = codeSubmissionDataMapper.createCodeSubmissionCommandToCodeSubmission(createCodeSubmissionCommand);
-
         validateHelper.validateUser(createCodeSubmissionCommand.getUserId());
+
         CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(createCodeSubmissionCommand.getCodeQuestionId());
-        ProgrammingLangauge programmingLangauge = validateHelper.validateLanguage(createCodeSubmissionCommand.getLanguageId(), createCodeSubmissionCommand.getCodeQuestionId());
+        CodeSubmission codeSubmission = codeSubmissionDataMapper.createCodeSubmissionCommandToCodeSubmission(createCodeSubmissionCommand, codeQuestion);
+
+
+        ProgrammingLanguage programmingLanguage = validateHelper.validateLanguage(createCodeSubmissionCommand.getLanguageId(), createCodeSubmissionCommand.getCodeQuestionId());
         ProgrammingLanguageCodeQuestion plcq =
                 validateHelper.validateProgrammingLanguageCodeQuestion(createCodeSubmissionCommand.getLanguageId(), createCodeSubmissionCommand.getCodeQuestionId());
 
         List<TestCase> testCases =  validateHelper.validateTestCasesByCodeQuestionId(createCodeSubmissionCommand.getCodeQuestionId());
-        codeAssessmentDomainService.initiateCodeSubmission(codeSubmission, codeQuestion, testCases, plcq, programmingLangauge);
+        codeAssessmentDomainService.initiateCodeSubmission(codeSubmission, testCases, plcq, programmingLanguage);
 
         codeSubmissionRepository.save(codeSubmission);
         codeSubmissionTestCaseRepository.save(codeSubmission.getCodeSubmissionTestCaseList());
@@ -84,9 +88,10 @@ public class CodeSubmissionHelper {
         Optional<CodeSubmissionTestCase> cstcExist = codeSubmissionTestCaseRepository.findByToken(command.getToken());
 
         if(cstcExist.isPresent()){
-            genericHelper.mapNullAttributeToRepositoryAttribute(cstc, cstcExist.get(), CodeSubmissionTestCase.class);
+            CodeSubmissionTestCase cstcRepo = cstcExist.get();
+            genericHelper.mapRepositoryAttributeToUpdateAttribute(cstcRepo , cstc, CodeSubmissionTestCase.class);
 //            log.info("jfdk {}", cstc.getCodeSubmission().toString());
-            codeSubmissionTestCaseRepository.save(cstc);
+            codeSubmissionTestCaseRepository.save(cstcRepo);
         }
         return cstc;
     }
@@ -145,5 +150,29 @@ public class CodeSubmissionHelper {
     public CodeSubmissionTestCase findFirstNonAcceptedTestCase(CodeSubmissionId codeSubmissionId) {
         Optional<CodeSubmissionTestCase> cstcOpt = codeSubmissionTestCaseRepository.findFirstNonAcceptedByCodeSubmissionId(codeSubmissionId);
         return cstcOpt.orElse(null);
+    }
+
+    @Transactional
+    public GetMemoryAndTimeRankingResponse getMemoryAndRunTimeRanking(GetMemoryAndTimeRankingCommand command) {
+        CodeSubmission codeSubmission = validateHelper.validateCodeSubmission(new CodeSubmissionId(command.getCodeSubmissionId()));
+
+        Integer memoryRank = codeSubmission.getMemory() != null? codeSubmissionRepository.findNumberOfSubmissionUnderMySubmissionByMemory(codeSubmission.getId()): null;
+        Integer runTimeRank = memoryRank != null? codeSubmissionRepository.findNumberOfSubmissionUnderMySubmissionByRunTime(codeSubmission.getId()): null;
+        Integer totalSubmissionHavingAvgMemoryAndRunTime = memoryRank != null? codeSubmissionRepository.totalSubmissionHavingAvgMemoryAndRunTime(codeSubmission.getCodeQuestion().getId()): null;
+
+        Integer numberOfSubmissionUnderYouByScore = codeSubmission.getGrade() != null? codeSubmissionRepository.findNumberOfSubmissionUnderMySubmissionByScore(codeSubmission.getId()): null;
+        Integer totalSubmissionHavingScore = numberOfSubmissionUnderYouByScore != null? codeSubmissionRepository.totalSubmissionHavingScore(codeSubmission.getCodeQuestion().getId()): null;
+        Integer yourScoreRank = numberOfSubmissionUnderYouByScore != null? codeSubmissionRepository.findYourScoreRank(codeSubmission.getId()): null;
+
+        return GetMemoryAndTimeRankingResponse.builder()
+                .totalSubmissionHavingAvgMemoryAndRunTime(totalSubmissionHavingAvgMemoryAndRunTime)
+                .numberOfSubmissionUnderYouByMemory(memoryRank)
+                .numberOfSubmissionUnderYouByRunTime(runTimeRank)
+
+                .totalSubmissionHavingScore(totalSubmissionHavingScore)
+                .yourScoreRank(yourScoreRank)
+                .numberOfSubmissionUnderYouByScore(numberOfSubmissionUnderYouByScore)
+                .build();
+
     }
 }

@@ -17,6 +17,9 @@ eureka:
     preferIpAddress: true
 
 code-assessment-service:
+  default-page-size: 10
+  default-page-number: 0
+
   code-question-update-response-from-core-service-topic-name: code-question-update-response-from-core-service
   code-question-update-request-to-core-service-topic-name: code-question-update-request-to-core-service
 
@@ -37,6 +40,11 @@ code-assessment-service:
   accepted-status-description: Accepted
 
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://${keycloak.domain}/realms/${keycloak.realm}
   application:
     name: code-assessment-service
   config:
@@ -87,7 +95,7 @@ kafka-consumer-config:
   specific-avro-reader: true
   batch-listener: true
   auto-startup: true
-  concurrency-level: 3  #increase the partition to increase this
+  concurrency-level: 3 #increase the partition to increase this
   session-timeout-ms: 10000
   heartbeat-interval-ms: 3000
   max-poll-interval-ms: 300000
@@ -131,6 +139,22 @@ management:
 
 log:
   appName: code-assessment-service
+
+jwt:
+  auth:
+    converter:
+      resource-id: spring-client-api-rest
+      principle-attribute: preferred_username
+
+keycloak:
+  realm: spring-boot-realm-dev
+  domain: localhost:8890
+  admin-client-id: admin-cli
+  admin-client-secret: bTEi5t1OKE7l97ij9wYjAMqqYA4NCod8
+  client: spring-client-api-rest
+  client-secret: pE2Lz9RL01YGE15800wDxRfnz2KFuCgX
+  urls: http://${keycloak.domain}
+
 ---
 spring.config.activate.on-profile: prod
 # Disable springdoc-openapi

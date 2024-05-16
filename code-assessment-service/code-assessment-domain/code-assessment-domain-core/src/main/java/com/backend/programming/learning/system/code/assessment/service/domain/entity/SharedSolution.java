@@ -11,11 +11,14 @@ import java.util.List;
 import java.util.UUID;
 
 public class SharedSolution extends AggregateRoot<SharedSolutionId> {
-    private CodeQuestionId codeQuestionId;
-    private User user;
+    private final CodeQuestionId codeQuestionId;
+    private final User user;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
     private Vote youVote;
+
+    private Integer totalVote;
+    private Integer totalComment;
 
     private String content;
     private String title;
@@ -23,12 +26,17 @@ public class SharedSolution extends AggregateRoot<SharedSolutionId> {
 
     private List<Tag> tags;
 
+
     public CodeQuestionId getCodeQuestionId() {
         return codeQuestionId;
     }
 
     public User getUser() {
         return user;
+    }
+
+    public Integer getTotalVote() {
+        return totalVote;
     }
 
     public ZonedDateTime getCreatedAt() {
@@ -45,6 +53,10 @@ public class SharedSolution extends AggregateRoot<SharedSolutionId> {
 
     public String getTitle() {
         return title;
+    }
+
+    public Integer getTotalComment() {
+        return totalComment;
     }
 
     public Vote getYouVote() {
@@ -67,6 +79,8 @@ public class SharedSolution extends AggregateRoot<SharedSolutionId> {
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
         youVote = builder.youVote;
+        totalVote = builder.totalVote;
+        totalComment = builder.totalComment;
         content = builder.content;
         title = builder.title;
         viewNumber = builder.viewNumber;
@@ -85,12 +99,16 @@ public class SharedSolution extends AggregateRoot<SharedSolutionId> {
         this.tags = tags;
     }
 
+    public enum SortedFields {createdAt, totalVote, viewNumber}
+
     public static final class Builder {
         private CodeQuestionId codeQuestionId;
         private User user;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
         private Vote youVote;
+        private Integer totalVote;
+        private Integer totalComment;
         private String content;
         private String title;
         private Integer viewNumber;
@@ -130,6 +148,16 @@ public class SharedSolution extends AggregateRoot<SharedSolutionId> {
             return this;
         }
 
+        public Builder totalVote(Integer val) {
+            totalVote = val;
+            return this;
+        }
+
+        public Builder totalComment(Integer val) {
+            totalComment = val;
+            return this;
+        }
+
         public Builder content(String val) {
             content = val;
             return this;
@@ -155,4 +183,5 @@ public class SharedSolution extends AggregateRoot<SharedSolutionId> {
         }
 
     }
+
 }

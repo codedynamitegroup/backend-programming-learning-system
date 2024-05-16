@@ -29,6 +29,11 @@ auth-service:
   outbox-scheduler-initial-delay: 2000
 
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://${keycloak.domain}/realms/${keycloak.realm}
   application:
     name: auth-service
   config:
@@ -136,9 +141,9 @@ keycloak:
   realm: spring-boot-realm-dev
   domain: localhost:8890
   admin-client-id: admin-cli
-  admin-client-secret: nfJffV2sitCYDQlmkXTeEZ5VqSE8616R
+  admin-client-secret: bTEi5t1OKE7l97ij9wYjAMqqYA4NCod8
   client: spring-client-api-rest
-  client-secret: 1XZYXGBfRPXCaQlMl66jUIfxlhECRgR7
+  client-secret: pE2Lz9RL01YGE15800wDxRfnz2KFuCgX
   urls: http://${keycloak.domain}
 
 ---

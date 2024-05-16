@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.dto.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,6 +11,7 @@ import java.util.UUID;
 
 @Getter
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Builder
 public class TestCaseDto {
     @NotNull(message = "inputData must not be null")

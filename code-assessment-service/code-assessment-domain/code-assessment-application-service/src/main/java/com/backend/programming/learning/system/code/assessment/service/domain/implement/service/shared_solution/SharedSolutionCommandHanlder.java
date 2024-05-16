@@ -4,21 +4,25 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionResponse;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.DeleteSharedSolutionVoteCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.DeleteSharedSolutionCommad;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.vote.DeleteSharedSolutionVoteCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionByCodeQuestionIdCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionDetailCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionResponseItem;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionsResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.UpdateSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.SharedSolution;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.shared_solution.SharedSolutionDataMapper;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import jakarta.transaction.Transactional;
-import java.util.List;
 
 @Component
 public class SharedSolutionCommandHanlder {
-    private final SharedSolutionHelper sharedSolutionHelper;
-    private final SharedSolutionDataMapper sharedSolutionDataMapper;
+    final SharedSolutionHelper sharedSolutionHelper;
+    final SharedSolutionDataMapper sharedSolutionDataMapper;
+
 
     public SharedSolutionCommandHanlder(SharedSolutionHelper sharedSolutionHelper, SharedSolutionDataMapper sharedSolutionDataMapper) {
         this.sharedSolutionHelper = sharedSolutionHelper;
@@ -32,23 +36,18 @@ public class SharedSolutionCommandHanlder {
     @Transactional
     public GetSharedSolutionResponseItem getDetailSharedSolution(GetSharedSolutionDetailCommand command) {
         SharedSolution sharedSolution = sharedSolutionHelper.getDetailSharedSolution(command);
-        Integer totalVote = sharedSolutionHelper.countTotalVote(command.getSharedSolutionId());
-        return sharedSolutionDataMapper.sharedSolutionToGetSharedSolutionResponseItem(sharedSolution, totalVote);
+        return sharedSolutionDataMapper.sharedSolutionToGetSharedSolutionResponseItem(sharedSolution);
     }
 
     @Transactional
-    public List<GetSharedSolutionResponseItem> getSharedSolutions(GetSharedSolutionByCodeQuestionIdCommand command) {
-        List<SharedSolution> sharedSolutions
-                = sharedSolutionHelper.getSharedSolutionsByCodeQuestionId(command.getCodeQuestionId());
+    public GetSharedSolutionsResponse getSharedSolutions(GetSharedSolutionByCodeQuestionIdCommand command) {
+        Page<SharedSolution> sharedSolutions
+                = sharedSolutionHelper.getSharedSolutionsByCodeQuestionId(command);
 
-        List<GetSharedSolutionResponseItem> items =  sharedSolutions.stream().map(sharedSolutionDataMapper::sharedSolutionToGetSharedSolutionResponseItemIgnoreTitleAndContent)
-                .toList();
-
-        List<Integer> totalVotes = sharedSolutionHelper.getTotalVotes(sharedSolutions);
-        for(int i = 0; i<items.size(); ++i)
-            items.get(i).setTotalVote(totalVotes.get(i));
-        return items;
+        return sharedSolutionDataMapper.pageableSharedSolutionListToGetSharedSolutionsResponse(sharedSolutions);
     }
+
+
 
     public VoteSharedSolutionResponse voteSharedSolution(VoteSharedSolutionCommand command) {
         sharedSolutionHelper.voteSharedSolution(command);
@@ -60,4 +59,14 @@ public class SharedSolutionCommandHanlder {
         return VoteSharedSolutionResponse.builder().message("delete vote successfully").build();
 
     }
+
+    public void updateSharedSolution(UpdateSharedSolutionCommand command) {
+        sharedSolutionHelper.updateSharedSolution(command);
+    }
+
+    public void deleteSharedSolution(DeleteSharedSolutionCommad command) {
+        sharedSolutionHelper.deleteSharedSolution(command);
+    }
+
+
 }

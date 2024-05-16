@@ -10,7 +10,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class LoginUserCommand {
     @NotNull
-    private final String username;
+    private final String email;
 
     @NotNull
     private final String password;

@@ -1,24 +1,38 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.entity;
 
+import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
-import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
-import com.backend.programming.learning.system.domain.valueobject.CopyState;
-import com.backend.programming.learning.system.domain.valueobject.QuestionId;
+import com.backend.programming.learning.system.domain.valueobject.*;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
 public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     private final QuestionId questionId;
-    private final String name;
+    private String name;
+    private UserId userId;
     private final String dslTemplate;
-    private final String problemStatement;
-    private final String inputFormat;
-    private final String outputFormat;
-    private final String constraints;
+    private String problemStatement;
+    private String inputFormat;
+    private String outputFormat;
+    private String constraints;
     private CopyState copyState;
     private Float maxGrade;
+    private Boolean isPublic;
+    private QuestionDifficulty difficulty;
+    private ZonedDateTime createdAt;
+    private Boolean solved;
     private List<String> failureMessages;
+    private List<ProgrammingLanguage> programmingLanguages;
+    private ProgrammingLanguageId sourceCodeLanguageId;
+    private String sourceCode;
+    private List<TestCase> tcs;
+    private List<Tag> tags;
+
+
+
     public static final String FAILURE_MESSAGE_DELIMITER = ",";
 
     public static Builder builder() {
@@ -27,6 +41,7 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
 
     public void initializeCodeQuestion(){
         setId(new CodeQuestionId(UUID.randomUUID()));
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
         copyState = CopyState.CREATING;
     }
     public void validateCodeQuestion(){
@@ -61,8 +76,41 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     public String getName() {
         return name;
     }
+
+    public ZonedDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public Boolean getPublic() {
+        return isPublic;
+    }
+
+    public String getSourceCode() {
+        return sourceCode;
+    }
+
+    public List<TestCase> getTcs() {
+        return tcs;
+    }
+
+    public QuestionDifficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public Boolean getSolved() {
+        return solved;
+    }
+
     public String getProblemStatement() {
         return problemStatement;
+    }
+
+    public List<ProgrammingLanguage> getProgrammingLanguages() {
+        return programmingLanguages;
+    }
+
+    public ProgrammingLanguageId getSourceCodeLanguageId() {
+        return sourceCodeLanguageId;
     }
 
     public String getInputFormat() {
@@ -85,6 +133,14 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         return dslTemplate;
     }
 
+    public Boolean getIsPublic() {
+        return isPublic;
+    }
+
+    public UserId getUserId() {
+        return userId;
+    }
+
     public List<String> getFailureMessages() {
         return failureMessages;
     }
@@ -93,9 +149,15 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         return maxGrade;
     }
 
+    public List<Tag> getTags() {
+        return tags;
+    }
+
     private CodeQuestion(Builder builder) {
+        super.setId(builder.id);
         questionId = builder.questionId;
         name = builder.name;
+        userId = builder.userId;
         dslTemplate = builder.dslTemplate;
         problemStatement = builder.problemStatement;
         inputFormat = builder.inputFormat;
@@ -103,13 +165,31 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         constraints = builder.constraints;
         setCopyState(builder.copyState);
         maxGrade = builder.maxGrade;
+        isPublic = builder.isPublic;
+        difficulty = builder.difficulty;
+        createdAt = builder.createdAt;
+        solved = builder.solved;
         failureMessages = builder.failureMessages;
-        super.setId(builder.id);
+        programmingLanguages = builder.programmingLanguages;
+        sourceCodeLanguageId = builder.sourceCodeLanguageId;
+        sourceCode = builder.sourceCode;
+        tcs = builder.tcs;
+        tags = builder.tags;
     }
+
+    public void getDetail(List<TestCase> sampleTestCase, CodeSubmission codeSubmission, List<ProgrammingLanguage> languages) {
+        tcs = sampleTestCase == null || sampleTestCase.isEmpty()? null: sampleTestCase;
+        sourceCode = codeSubmission != null? codeSubmission.getSourceCode(): null;
+        sourceCodeLanguageId = codeSubmission != null? codeSubmission.getLanguageId() : null;
+        this.programmingLanguages = languages;
+    }
+
+    public enum Fields { name, difficulty, createdAt}
 
     public static final class Builder {
         private QuestionId questionId;
         private String name;
+        private UserId userId;
         private String dslTemplate;
         private String problemStatement;
         private String inputFormat;
@@ -117,7 +197,16 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         private String constraints;
         private CopyState copyState;
         private Float maxGrade;
+        private Boolean isPublic;
+        private QuestionDifficulty difficulty;
+        private ZonedDateTime createdAt;
+        private Boolean solved;
         private List<String> failureMessages;
+        private List<ProgrammingLanguage> programmingLanguages;
+        private ProgrammingLanguageId sourceCodeLanguageId;
+        private String sourceCode;
+        private List<TestCase> tcs;
+        private List<Tag> tags;
         private CodeQuestionId id;
 
         private Builder() {
@@ -130,6 +219,11 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
 
         public Builder name(String val) {
             name = val;
+            return this;
+        }
+
+        public Builder userId(UserId val) {
+            userId = val;
             return this;
         }
 
@@ -168,8 +262,53 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
             return this;
         }
 
+        public Builder isPublic(Boolean val) {
+            isPublic = val;
+            return this;
+        }
+
+        public Builder difficulty(QuestionDifficulty val) {
+            difficulty = val;
+            return this;
+        }
+
+        public Builder createdAt(ZonedDateTime val) {
+            createdAt = val;
+            return this;
+        }
+
+        public Builder solved(Boolean val) {
+            solved = val;
+            return this;
+        }
+
         public Builder failureMessages(List<String> val) {
             failureMessages = val;
+            return this;
+        }
+
+        public Builder programmingLanguages(List<ProgrammingLanguage> val) {
+            programmingLanguages = val;
+            return this;
+        }
+
+        public Builder sourceCodeLanguageId(ProgrammingLanguageId val) {
+            sourceCodeLanguageId = val;
+            return this;
+        }
+
+        public Builder sourceCode(String val) {
+            sourceCode = val;
+            return this;
+        }
+
+        public Builder tcs(List<TestCase> val) {
+            tcs = val;
+            return this;
+        }
+
+        public Builder tags(List<Tag> val) {
+            tags = val;
             return this;
         }
 
@@ -181,5 +320,6 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         public CodeQuestion build() {
             return new CodeQuestion(this);
         }
+
     }
 }
