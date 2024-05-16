@@ -30,9 +30,11 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
     private User updatedBy;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
+    private List<CertificateCourseUser> certificateCourseUsers;
 
     private CertificateCourse(Builder builder) {
         super.setId(builder.certificateCourseId);
+        setName(builder.name);
         setDescription(builder.description);
         setSkillLevel(builder.skillLevel);
         setAvgRating(builder.avgRating);
@@ -48,6 +50,7 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         setUpdatedBy(builder.updatedBy);
         setCreatedAt(builder.createdAt);
         setUpdatedAt(builder.updatedAt);
+        setCertificateCourseUsers(builder.certificateCourseUsers);
     }
 
     public static Builder builder() {
@@ -59,7 +62,6 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
         updatedAt = ZonedDateTime.now(ZoneId.of("UTC"));
     }
-
 
     public String getName() {
         return name;
@@ -189,6 +191,14 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         this.updatedAt = updatedAt;
     }
 
+    public List<CertificateCourseUser> getCertificateCourseUsers() {
+        return certificateCourseUsers;
+    }
+
+    public void setCertificateCourseUsers(List<CertificateCourseUser> certificateCourseUsers) {
+        this.certificateCourseUsers = certificateCourseUsers;
+    }
+
     public static final class Builder {
         private CertificateCourseId certificateCourseId;
         private String name;
@@ -207,6 +217,7 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         private User updatedBy;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
+        private List<CertificateCourseUser> certificateCourseUsers;
 
         private Builder() {
         }
@@ -293,6 +304,11 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
 
         public Builder updatedAt(ZonedDateTime val) {
             updatedAt = val;
+            return this;
+        }
+
+        public Builder certificateCourseUsers(List<CertificateCourseUser> val) {
+            certificateCourseUsers = val;
             return this;
         }
 

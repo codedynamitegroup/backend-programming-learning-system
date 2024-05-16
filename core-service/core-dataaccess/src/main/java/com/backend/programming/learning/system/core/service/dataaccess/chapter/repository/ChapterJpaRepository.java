@@ -16,7 +16,7 @@ import java.util.UUID;
 @Repository
 public interface ChapterJpaRepository extends JpaRepository<ChapterEntity, UUID> {
     Optional<ChapterEntity> findById(UUID id);
-    List<ChapterEntity> findAllByCertificateCourseId(UUID certificateCourseId);
+    List<ChapterEntity> findAllByCertificateCourseIdOrderByNoAsc(UUID certificateCourseId);
 
     @Query(value = "SELECT COALESCE(MAX(no),0) FROM chapter WHERE certificate_course_id = :certificateCourseId",
             nativeQuery = true)

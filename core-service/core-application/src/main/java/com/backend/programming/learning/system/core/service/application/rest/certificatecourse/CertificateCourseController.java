@@ -17,9 +17,13 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.security.core.Authentication;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -121,13 +125,20 @@ public class CertificateCourseController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CertificateCourseResponseEntity> getCertificateCourseById(
-            @RequestHeader("X-username") String username,
             @PathVariable UUID id) {
+        String email = null;
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
         CertificateCourseResponseEntity certificateCourseResponseEntity =
                 certificateCourseApplicationService.queryCertificateCourse(QueryCertificateCourseCommand
                         .builder()
                         .certificateCourseId(id)
-                        .username(username)
+                        .email(email)
                         .build());
         log.info("Returning certificate course: {}", certificateCourseResponseEntity.getCertificateCourseId());
         return  ResponseEntity.ok(certificateCourseResponseEntity);
@@ -143,15 +154,22 @@ public class CertificateCourseController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllCertificateCoursesResponse> getAllCertificateCourses(
-            @RequestHeader("X-username") String username,
             @RequestBody QueryAllCertificateCoursesCommand queryAllCertificateCoursesCommand) {
+        String email = null;
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
         QueryAllCertificateCoursesResponse queryAllCertificateCoursesResponse =
                 certificateCourseApplicationService.queryAllCertificateCourses(QueryAllCertificateCoursesCommand
                         .builder()
                         .courseName(queryAllCertificateCoursesCommand.getCourseName())
                         .filterTopicIds(queryAllCertificateCoursesCommand.getFilterTopicIds())
                         .isRegisteredFilter(queryAllCertificateCoursesCommand.getIsRegisteredFilter())
-                        .username(username)
+                        .email(email)
                         .build());
         log.info("Returning all certificate courses");
         return ResponseEntity.ok(queryAllCertificateCoursesResponse);

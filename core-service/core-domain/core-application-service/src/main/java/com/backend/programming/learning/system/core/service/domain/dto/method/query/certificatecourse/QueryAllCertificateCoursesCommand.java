@@ -21,5 +21,5 @@ public class QueryAllCertificateCoursesCommand {
     @NotNull(message = "Is registered filter is required")
     @EnumValidator(enumClass = IsRegisteredFilter.class, message = "Is registered filter is invalid")
     private final String isRegisteredFilter;
-    private final String username;
+    private final String email;
 }

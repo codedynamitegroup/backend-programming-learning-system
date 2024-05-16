@@ -5,8 +5,6 @@ import com.backend.programming.learning.system.core.service.dataaccess.certifica
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseRepository;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -35,6 +33,7 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
     public Optional<CertificateCourse> findById(CertificateCourseId certificateCourseId) {
         return certificateCourseJpaRepository.findById(certificateCourseId.getValue())
                 .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse);
+
     }
 
     @Override
