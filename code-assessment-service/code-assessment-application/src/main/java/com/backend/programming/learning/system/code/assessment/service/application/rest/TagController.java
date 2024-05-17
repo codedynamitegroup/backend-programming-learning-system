@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.tag.DeleteTagCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.tag.GetTagsCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.TagApplicationService;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +27,8 @@ public class TagController {
     }
 
     @PostMapping
-    public ResponseEntity<CreateTagsResponse> createTag(@RequestBody List<String> tagNames){
-        CreateTagsCommand command = CreateTagsCommand.builder().tagNames(tagNames).build();
+    public ResponseEntity<CreateTagsResponse> createTag(@RequestBody List<TagDto> tags){
+        CreateTagsCommand command = CreateTagsCommand.builder().tags(tags).build();
 
         CreateTagsResponse response = tagApplicationService.createTags(command);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -41,11 +42,17 @@ public class TagController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TagDto>> getTags(@RequestParam(value = "countCodeQuestion", required = false) Boolean countCodeQuestion){
+    public ResponseEntity<List<TagDto>> getTags(
+            @RequestParam(value = "countCodeQuestion", required = false) Boolean countCodeQuestion,
+            @RequestParam(value = "tagType", required = false) TagType tagType
+    ){
         if(countCodeQuestion == null)
             countCodeQuestion = false;
 
-        GetTagsCommand command = new GetTagsCommand(countCodeQuestion);
+        GetTagsCommand command = GetTagsCommand.builder()
+                .countCodeQuestion(countCodeQuestion)
+                .tagType(tagType)
+                .build();
         List<TagDto> response = tagApplicationService.getTags(command);
         return ResponseEntity.ok(response);
     }

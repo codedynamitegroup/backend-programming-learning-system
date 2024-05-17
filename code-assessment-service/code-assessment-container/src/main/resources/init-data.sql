@@ -69,10 +69,10 @@ INSERT INTO test_cases(id, code_question_id  ,input_data  ,output_data  ,is_samp
 VALUES
     ('9b103259-1a04-4ae4-aaac-dbd8f2d37ec6', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', E'1\n2', '3', true);
 
-INSERT INTO tag(id, name)
+INSERT INTO tag(id, name, tag_type)
 VALUES
-    ('4d5d31cc-6386-4ef5-903d-625e64b122d7','Java'),
-    ('cd55e806-5d20-4813-b2ce-f8a235fc9151','Math');
+    ('4d5d31cc-6386-4ef5-903d-625e64b122d7','Array', 'ALGORITHM'),
+    ('cd55e806-5d20-4813-b2ce-f8a235fc9151','Math', 'ALGORITHM');
 
 insert into shared_solution (id, code_question_id, user_id, title, content) values ('675b7db4-228a-4b75-8eac-aa4336241b63', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 'b029f559-52a8-4699-b595-71161498ed8c', 'Devil Commands, The', 'transition revolutionary platforms');
 insert into shared_solution (id, code_question_id, user_id, title, content) values ('bbbad0c0-a0a2-43c9-b3d5-c05ca848bb48', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'The Divine Woman', 'unleash global supply-chains');

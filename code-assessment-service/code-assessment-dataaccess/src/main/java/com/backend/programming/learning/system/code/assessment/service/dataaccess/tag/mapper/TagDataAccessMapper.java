@@ -12,6 +12,7 @@ public class TagDataAccessMapper {
                 .id(new TagId(tagEntity.getId()))
                 .name(tagEntity.getName())
                 .numOfCodeQuestion(tagEntity.getNumOfCodeQuestion())
+                .tagType(tagEntity.getTagType())
                 .build();
     }
 
@@ -19,6 +20,7 @@ public class TagDataAccessMapper {
         return TagEntity.builder()
                 .id(tag.getId().getValue())
                 .name(tag.getName())
+                .tagType(tag.getTagType())
                 .build();
     }
 
@@ -26,6 +28,7 @@ public class TagDataAccessMapper {
         return Tag.builder()
                 .id(new TagId(tagEntity.getId()))
                 .name(tagEntity.getName())
+                .tagType(tagEntity.getTagType())
                 .build();
     }
 }
