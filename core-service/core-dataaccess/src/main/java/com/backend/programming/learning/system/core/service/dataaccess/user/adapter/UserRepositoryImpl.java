@@ -40,9 +40,9 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Optional<User> findByUsername(String username) {
-//        return userJpaRepository.findByUsername(username)
-//                .map(userMapper::userEntityToUser);
-        return Optional.empty();
+    public Optional<User> findByEmail(String email) {
+        return userJpaRepository.findByEmail(email)
+                .map(userMapper::userEntityToUser);
     }
+
 }

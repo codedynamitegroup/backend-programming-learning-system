@@ -13,7 +13,6 @@ import com.backend.programming.learning.system.core.service.domain.mapper.certif
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.IsRegisteredFilter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -69,7 +68,9 @@ public class CertificateCourseCommandHandler {
     public CertificateCourseResponseEntity findCertificateCourseById(
             QueryCertificateCourseCommand queryCertificateCourseCommand) {
         CertificateCourse certificateCourse = certificateCourseQueryHelper
-                .queryCertificateCourseById(queryCertificateCourseCommand.getCertificateCourseId());
+                .queryCertificateCourseById(
+                        queryCertificateCourseCommand.getCertificateCourseId(),
+                        queryCertificateCourseCommand.getEmail());
 
         log.info("Certificate course found with id: {}", certificateCourse.getId().getValue());
 
@@ -82,37 +83,16 @@ public class CertificateCourseCommandHandler {
         List<CertificateCourse> certificateCourses = certificateCourseQueryHelper
                 .queryAllCertificateCourses(
                         queryAllCertificateCoursesCommand.getCourseName(),
-                        queryAllCertificateCoursesCommand.getFilterTopicIds()
+                        queryAllCertificateCoursesCommand.getFilterTopicIds(),
+                        IsRegisteredFilter.valueOf(queryAllCertificateCoursesCommand.getIsRegisteredFilter()),
+                        queryAllCertificateCoursesCommand.getEmail()
                 );
         List<CertificateCourse> mostEnrolledCertificateCourses = certificateCourseQueryHelper
                 .queryMostEnrolledCertificateCourses(
                         queryAllCertificateCoursesCommand.getCourseName(),
-                        queryAllCertificateCoursesCommand.getFilterTopicIds()
-                );
-
-        return certificateCourseDataMapper
-                .certificateCoursesToQueryAllCertificateCoursesResponse(
-                        certificateCourses,
-                        mostEnrolledCertificateCourses
-                );
-    }
-
-    @Transactional(readOnly = true)
-    public QueryAllCertificateCoursesResponse findAllCertificateCoursesFilterByIsRegistered(
-            QueryAllCertificateCoursesFilterByIsRegisteredCommand queryAllCertificateCoursesFilterByIsRegisteredCommand) {
-        List<CertificateCourse> certificateCourses = certificateCourseQueryHelper
-                .queryAllCertificateCoursesFilterByIsRegistered(
-                        queryAllCertificateCoursesFilterByIsRegisteredCommand.getCourseName(),
-                        queryAllCertificateCoursesFilterByIsRegisteredCommand.getFilterTopicIds(),
-                        queryAllCertificateCoursesFilterByIsRegisteredCommand.isRegistered(),
-                        queryAllCertificateCoursesFilterByIsRegisteredCommand.getUsername()
-                );
-        List<CertificateCourse> mostEnrolledCertificateCourses = certificateCourseQueryHelper
-                .queryMostEnrolledCertificateCoursesFilterByIsRegistered(
-                        queryAllCertificateCoursesFilterByIsRegisteredCommand.getCourseName(),
-                        queryAllCertificateCoursesFilterByIsRegisteredCommand.getFilterTopicIds(),
-                        queryAllCertificateCoursesFilterByIsRegisteredCommand.isRegistered(),
-                        queryAllCertificateCoursesFilterByIsRegisteredCommand.getUsername()
+                        queryAllCertificateCoursesCommand.getFilterTopicIds(),
+                        IsRegisteredFilter.valueOf(queryAllCertificateCoursesCommand.getIsRegisteredFilter()),
+                        queryAllCertificateCoursesCommand.getEmail()
                 );
 
         return certificateCourseDataMapper

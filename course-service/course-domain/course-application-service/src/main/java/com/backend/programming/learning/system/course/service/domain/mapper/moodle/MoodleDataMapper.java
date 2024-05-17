@@ -192,6 +192,7 @@ public class MoodleDataMapper {
         return Course.builder()
                 .id(course.getId())
                 .name(courseModel.getFullname())
+                .organization(course.getOrganization())
 //                .courseType("MOODLE")
                 .visible(courseModel.getVisible().equals("1"))
                 .createdBy(course.getCreatedBy())
@@ -209,6 +210,8 @@ public class MoodleDataMapper {
                 .id(new CourseId(UUID.randomUUID()))
                 .name(courseModel.getFullname())
 //                .courseType("MOODLE")
+                .organization(user.getOrganization())
+
                 .visible(courseModel.getVisible().equals("1"))
                 .createdBy(user)
                 .updatedBy(user)

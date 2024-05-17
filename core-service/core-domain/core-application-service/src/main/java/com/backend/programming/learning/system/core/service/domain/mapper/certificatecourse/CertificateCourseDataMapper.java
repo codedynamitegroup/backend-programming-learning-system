@@ -15,6 +15,7 @@ import com.backend.programming.learning.system.core.service.domain.valueobject.C
 import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
 import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +24,7 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Component
 public class CertificateCourseDataMapper {
     private final TopicDataMapper topicDataMapper;
@@ -46,7 +48,6 @@ public class CertificateCourseDataMapper {
                         .builder()
                         .id(new TopicId(createCertificateCourseCommand.getTopicId()))
                         .build())
-                .numOfStudents(0)
                 .createdBy(User
                         .builder()
                         .id(new UserId(createCertificateCourseCommand.getCreatedBy()))
@@ -76,6 +77,8 @@ public class CertificateCourseDataMapper {
         UserResponseEntity createdByResponse = userDataMapper.userToUserResponseEntity(certificateCourse.getCreatedBy());
         UserResponseEntity updatedByResponse = userDataMapper.userToUserResponseEntity(certificateCourse.getUpdatedBy());
 
+        log.info("Certificate course found with isRegistered: {}", certificateCourse.getRegistered());
+
         return CertificateCourseResponseEntity.builder()
                 .certificateCourseId(certificateCourse.getId().getValue())
                 .name(certificateCourse.getName())
@@ -87,6 +90,9 @@ public class CertificateCourseDataMapper {
                 .topic(topicResponseEntity)
                 .numOfStudents(certificateCourse.getNumOfStudents())
                 .numOfQuestions(certificateCourse.getNumOfQuestions())
+                .numOfReviews(certificateCourse.getNumOfReviews())
+                .numOfCompletedQuestions(certificateCourse.getNumOfCompletedQuestions())
+                .isRegistered(certificateCourse.getRegistered())
                 .createdBy(createdByResponse)
                 .updatedBy(updatedByResponse)
                 .createdAt(certificateCourse.getCreatedAt())

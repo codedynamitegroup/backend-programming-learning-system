@@ -22,11 +22,15 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
     private ZonedDateTime endTime;
     private Integer numOfStudents;
     private Integer numOfQuestions;
+    private Integer numOfCompletedQuestions;
+    private Integer numOfReviews;
+    private Boolean isRegistered;
     private Topic topic;
     private User createdBy;
     private User updatedBy;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
+    private List<CertificateCourseUser> certificateCourseUsers;
 
     private CertificateCourse(Builder builder) {
         super.setId(builder.certificateCourseId);
@@ -38,11 +42,15 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         setEndTime(builder.endTime);
         setNumOfStudents(builder.numOfStudents);
         setNumOfQuestions(builder.numOfQuestions);
+        setNumOfCompletedQuestions(builder.numOfCompletedQuestions);
+        setNumOfReviews(builder.numOfReviews);
+        isRegistered = builder.isRegistered;
         setTopic(builder.topic);
         setCreatedBy(builder.createdBy);
         setUpdatedBy(builder.updatedBy);
         setCreatedAt(builder.createdAt);
         setUpdatedAt(builder.updatedAt);
+        setCertificateCourseUsers(builder.certificateCourseUsers);
     }
 
     public static Builder builder() {
@@ -119,6 +127,30 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         this.numOfQuestions = numOfQuestions;
     }
 
+    public Integer getNumOfCompletedQuestions() {
+        return numOfCompletedQuestions;
+    }
+
+    public void setNumOfCompletedQuestions(Integer numOfCompletedQuestions) {
+        this.numOfCompletedQuestions = numOfCompletedQuestions;
+    }
+
+    public Integer getNumOfReviews() {
+        return numOfReviews;
+    }
+
+    public void setNumOfReviews(Integer numOfReviews) {
+        this.numOfReviews = numOfReviews;
+    }
+
+    public Boolean getRegistered() {
+        return isRegistered;
+    }
+
+    public void setRegistered(Boolean registered) {
+        isRegistered = registered;
+    }
+
     public Topic getTopic() {
         return topic;
     }
@@ -159,6 +191,14 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         this.updatedAt = updatedAt;
     }
 
+    public List<CertificateCourseUser> getCertificateCourseUsers() {
+        return certificateCourseUsers;
+    }
+
+    public void setCertificateCourseUsers(List<CertificateCourseUser> certificateCourseUsers) {
+        this.certificateCourseUsers = certificateCourseUsers;
+    }
+
     public static final class Builder {
         private CertificateCourseId certificateCourseId;
         private String name;
@@ -169,11 +209,15 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         private ZonedDateTime endTime;
         private Integer numOfStudents;
         private Integer numOfQuestions;
+        private Integer numOfCompletedQuestions;
+        private Integer numOfReviews;
+        private Boolean isRegistered;
         private Topic topic;
         private User createdBy;
         private User updatedBy;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
+        private List<CertificateCourseUser> certificateCourseUsers;
 
         private Builder() {
         }
@@ -223,6 +267,21 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
             return this;
         }
 
+        public Builder numOfCompletedQuestions(Integer val) {
+            numOfCompletedQuestions = val;
+            return this;
+        }
+
+        public Builder numOfReviews(Integer val) {
+            numOfReviews = val;
+            return this;
+        }
+
+        public Builder isRegistered(Boolean val) {
+            isRegistered = val;
+            return this;
+        }
+
         public Builder topic(Topic val) {
             topic = val;
             return this;
@@ -245,6 +304,11 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
 
         public Builder updatedAt(ZonedDateTime val) {
             updatedAt = val;
+            return this;
+        }
+
+        public Builder certificateCourseUsers(List<CertificateCourseUser> val) {
+            certificateCourseUsers = val;
             return this;
         }
 
