@@ -1,11 +1,9 @@
 package com.backend.programming.learning.system.course.service.domain.dto.responseentity.question;
 
-import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
-import com.backend.programming.learning.system.domain.valueobject.QuestionId;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+
+import java.util.UUID;
 
 /**
  * com.backend.programming.learning.system.dto.responseentity.question
@@ -15,8 +13,8 @@ import lombok.Getter;
  */
 @Builder
 public record QuestionResponseEntity(
-        QuestionId questionId,
-        OrganizationId organizationId,
+        UUID questionId,
+        UUID organizationId,
         QuestionDifficulty difficulty,
         String name,
         String questionText,
