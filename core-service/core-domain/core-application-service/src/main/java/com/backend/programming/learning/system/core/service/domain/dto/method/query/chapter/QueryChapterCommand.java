@@ -13,4 +13,5 @@ import java.util.UUID;
 public class QueryChapterCommand {
     @NotNull
     private final UUID chapterId;
+    private final String email;
 }

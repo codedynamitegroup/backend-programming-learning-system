@@ -20,6 +20,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -117,6 +121,14 @@ public class ContestController {
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize
     ) {
+        String email = null;
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
         QueryAllContestsResponse queryAllContestsResponse =
                 contestApplicationService.queryAllContests(QueryAllContestsCommand
                         .builder()
@@ -124,6 +136,7 @@ public class ContestController {
                         .pageSize(pageSize)
                         .searchName(searchName)
                         .startTimeFilter(startTimeFilter)
+                        .email(email)
                         .build());
         log.info("Returning all contests: {}", queryAllContestsResponse.getContests());
         return ResponseEntity.ok(queryAllContestsResponse);
@@ -183,10 +196,19 @@ public class ContestController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<ContestResponseEntity> getContest(@PathVariable UUID id) {
+        String email = null;
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
         ContestResponseEntity contestResponseEntity =
                 contestApplicationService.queryContest(QueryContestCommand
                         .builder()
                         .contestId(id)
+                        .email(email)
                         .build());
         log.info("Returning contest: {}", contestResponseEntity.getContestId());
         return  ResponseEntity.ok(contestResponseEntity);

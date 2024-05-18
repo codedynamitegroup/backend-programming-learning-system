@@ -77,8 +77,6 @@ public class CertificateCourseDataMapper {
         UserResponseEntity createdByResponse = userDataMapper.userToUserResponseEntity(certificateCourse.getCreatedBy());
         UserResponseEntity updatedByResponse = userDataMapper.userToUserResponseEntity(certificateCourse.getUpdatedBy());
 
-        log.info("Certificate course found with isRegistered: {}", certificateCourse.getRegistered());
-
         return CertificateCourseResponseEntity.builder()
                 .certificateCourseId(certificateCourse.getId().getValue())
                 .name(certificateCourse.getName())

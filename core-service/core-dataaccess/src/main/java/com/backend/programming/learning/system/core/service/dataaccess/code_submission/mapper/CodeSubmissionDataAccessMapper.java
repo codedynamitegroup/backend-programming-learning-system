@@ -18,6 +18,9 @@ import com.backend.programming.learning.system.domain.valueobject.QtypeCodeQuest
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class CodeSubmissionDataAccessMapper {
 
@@ -44,5 +47,14 @@ public class CodeSubmissionDataAccessMapper {
                 .grade(codeSubmissionEntity.getGrade())
                 .pass(codeSubmissionEntity.getPass())
                 .build();
+    }
+
+    public List<CodeSubmission> codeSubmissionEntityListToCodeSubmissionList(
+            List<CodeSubmissionEntity> codeSubmissionEntities) {
+        List<CodeSubmission> codeSubmissions = new ArrayList<>();
+        for (CodeSubmissionEntity codeSubmissionEntity : codeSubmissionEntities) {
+            codeSubmissions.add(codeSubmissionEntityToCodeSubmission(codeSubmissionEntity));
+        }
+        return codeSubmissions;
     }
 }

@@ -70,7 +70,9 @@ public class ChapterCommandHandler {
     public QueryAllChaptersResponse queryAllChaptersResponse(
             QueryAllChaptersCommand queryAllChaptersCommand) {
         List<Chapter> chapters = chapterQueryHelper
-                .queryAllChapters(queryAllChaptersCommand.getCertificateCourseId());
+                .queryAllChapters(
+                        queryAllChaptersCommand.getCertificateCourseId(),
+                        queryAllChaptersCommand.getEmail());
 
         log.info("Returning all chapters: {}", chapters);
 
@@ -81,7 +83,9 @@ public class ChapterCommandHandler {
     public ChapterResponseEntity queryChapterResponse(
             QueryChapterCommand queryChapterCommand) {
         Chapter chapter = chapterQueryHelper
-                .queryChapterById(queryChapterCommand.getChapterId());
+                .queryChapterById(
+                        queryChapterCommand.getChapterId(),
+                        queryChapterCommand.getEmail());
 
         log.info("Returning chapter: {}", chapter);
 

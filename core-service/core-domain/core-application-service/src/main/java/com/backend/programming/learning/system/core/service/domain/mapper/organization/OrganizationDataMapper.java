@@ -11,6 +11,7 @@ import com.backend.programming.learning.system.domain.valueobject.OrganizationId
 import org.springframework.stereotype.Component;
 
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Component
@@ -53,6 +54,8 @@ public class OrganizationDataMapper {
     }
 
     public OrganizationResponseEntity organizationToOrganizationResponseEntity(Organization organization) {
+        ZonedDateTime createdAt = organization.getCreatedAt() != null ? organization.getCreatedAt().toInstant().atZone(ZoneId.of(DomainConstants.UTC)) : null;
+        ZonedDateTime updatedAt = organization.getUpdatedAt() != null ? organization.getUpdatedAt().toInstant().atZone(ZoneId.of(DomainConstants.UTC)) : null;
         return OrganizationResponseEntity.builder()
                 .id(organization.getId().getValue().toString())
                 .name(organization.getName())
@@ -60,8 +63,8 @@ public class OrganizationDataMapper {
                 .moodleUrl(organization.getMoodleUrl())
                 .apiKey(organization.getApiKey())
                 .isDeleted(organization.getDeleted())
-                .createdAt(organization.getCreatedAt().toInstant().atZone(ZoneId.of(DomainConstants.UTC)))
-                .updatedAt(organization.getUpdatedAt().toInstant().atZone(ZoneId.of(DomainConstants.UTC)))
+                .createdAt(createdAt)
+                .updatedAt(updatedAt)
                 .build();
     }
 }

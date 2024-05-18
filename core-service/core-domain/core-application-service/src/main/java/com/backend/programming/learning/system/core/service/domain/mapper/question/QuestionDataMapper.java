@@ -104,6 +104,7 @@ public class QuestionDataMapper {
                 .questionText(question.getQuestionText())
                 .generalFeedback(question.getGeneralFeedback())
                 .defaultMark(question.getDefaultMark())
+                .pass(question.getPass())
                 .difficulty(question.getDifficulty())
                 .createdBy(userDataMapper.userToUserResponseEntity(question.getCreatedBy()))
                 .updatedBy(userDataMapper.userToUserResponseEntity(question.getUpdatedBy()))

@@ -34,6 +34,19 @@ public class OrganizationDataAccessMapper {
                 .build();
     }
 
+    public Organization organizationEntityToOrganizationHideSensitiveData(OrganizationEntity organizationEntity) {
+        return Organization.builder()
+                .id(new OrganizationId(organizationEntity.getId()))
+                .name(organizationEntity.getName())
+                .description(organizationEntity.getDescription())
+                .moodleUrl(null)
+                .isDeleted(null)
+                .createdAt(null)
+                .updatedAt(null)
+                .build();
+    }
+
+
     public OrganizationResponseEntity organizationEntityToOrganizationResponseEntity(OrganizationEntity organizationEntity) {
         return OrganizationResponseEntity.builder()
                 .id(organizationEntity.getId().toString())

@@ -24,6 +24,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -93,10 +97,19 @@ public class ChapterController {
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllChaptersResponse> getAllChapters(
             @RequestParam UUID certificateCourseId) {
+        String email = null;
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
         QueryAllChaptersResponse queryAllChaptersResponse =
                 chapterApplicationService.queryAllChapters(QueryAllChaptersCommand
                         .builder()
                         .certificateCourseId(certificateCourseId)
+                        .email(email)
                         .build());
         log.info("Returning all chapters: {}", queryAllChaptersResponse);
         return ResponseEntity.ok(queryAllChaptersResponse);
@@ -112,10 +125,19 @@ public class ChapterController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<ChapterResponseEntity> getChapter(@PathVariable UUID id) {
+        String email = null;
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
         ChapterResponseEntity chapterResponseEntity =
                 chapterApplicationService.queryChapter(QueryChapterCommand
                         .builder()
                         .chapterId(id)
+                        .email(email)
                         .build());
         log.info("Returning chapter: {}", chapterResponseEntity);
         return ResponseEntity.ok(chapterResponseEntity);

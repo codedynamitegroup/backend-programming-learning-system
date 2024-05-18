@@ -46,7 +46,7 @@ public class ContestUserCommandHandler {
         log.info("Contest_User is created with id: {}", contestUserUpdatedEvent.getContestUser().getId().getValue());
         CreateContestUserResponse createContestUserResponse = contestUserDataMapper
                 .contestUserToCreateContestUserResponse(contestUserUpdatedEvent.getContestUser(),
-                "Contest_User created successfully");
+                "Registered successfully");
 
         contestUserUpdateOutboxHelper.saveContestUserUpdateOutboxMessage(
                 contestUserDataMapper
