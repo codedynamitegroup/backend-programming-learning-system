@@ -176,8 +176,7 @@ CREATE TABLE "public".course_type
 DROP TABLE IF EXISTS "public".role_moodle CASCADE;
 CREATE TABLE "public".role_moodle
 (
-    id          uuid    DEFAULT gen_random_uuid() NOT NULL,
-    role_id_moodle integer,
+    id          integer NOT NULL,
     name        text UNIQUE,
     CONSTRAINT role_moodle_pkey PRIMARY KEY (id)
 );
@@ -283,6 +282,7 @@ CREATE TABLE "public".course_user
     id        uuid DEFAULT gen_random_uuid() NOT NULL,
     user_id   uuid                           NOT NULL,
     course_id uuid                           NOT NULL,
+    role_id   integer                        NOT NULL,
     CONSTRAINT course_user_pkey PRIMARY KEY (id),
     CONSTRAINT course_user_user_id_fkey FOREIGN KEY (user_id)
         REFERENCES "public".user (id) MATCH SIMPLE
@@ -290,6 +290,10 @@ CREATE TABLE "public".course_user
         ON DELETE CASCADE,
     CONSTRAINT course_user_course_fkey FOREIGN KEY (course_id)
         REFERENCES "public".course (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT course_user_role_id_fkey FOREIGN KEY (role_id)
+        REFERENCES "public".role_moodle (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );

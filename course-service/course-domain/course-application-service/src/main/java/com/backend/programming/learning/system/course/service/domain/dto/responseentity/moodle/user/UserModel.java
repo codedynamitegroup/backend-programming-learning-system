@@ -45,5 +45,5 @@ public class UserModel {
     String profileimageurl;
     List<Role> roles;
     Object preferences;
-    Object enrolledcourses;
+    List<EnrolledCourse> enrolledcourses;
 }

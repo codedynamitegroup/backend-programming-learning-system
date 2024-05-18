@@ -51,11 +51,12 @@ public class MoodleDataMapper {
     }
 
 
-    public CourseUser createCourseUser(Course course, User user) {
+    public CourseUser createCourseUser(Course course, User user,RoleMoodle roleMoodle) {
         return CourseUser.builder()
                 .id(new CourseUserId(UUID.randomUUID()))
                 .course(course)
                 .user(user)
+                .roleMoodle(roleMoodle)
                 .build();
     }
 

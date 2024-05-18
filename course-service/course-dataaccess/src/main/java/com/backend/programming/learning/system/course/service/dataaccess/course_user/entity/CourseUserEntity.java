@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.course.service.dataaccess.course_user.entity;
 
 import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.role_moodle.entity.RoleMoodleEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import lombok.*;
 
@@ -28,6 +29,10 @@ public class CourseUserEntity {
     @ManyToOne
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     private CourseEntity course;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private RoleMoodleEntity roleMoodle;
 
     @Override
     public boolean equals(Object o) {

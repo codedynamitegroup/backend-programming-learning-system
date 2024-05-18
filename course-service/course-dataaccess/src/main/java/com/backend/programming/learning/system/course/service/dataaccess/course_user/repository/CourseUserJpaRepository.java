@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 @Repository
 public interface CourseUserJpaRepository extends JpaRepository<CourseUserEntity, UUID> {
-    Optional<CourseUserEntity> findById(UUID id);
+    List<CourseUserEntity> findByCourseId(UUID id);
 
     void deleteByCourseIdAndUserIdIn(UUID courseId, List<UUID> userIds);
     void deleteByCourseIdAndUserId(UUID courseId, UUID userIds);
