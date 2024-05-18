@@ -36,13 +36,23 @@ public class UserCreateHelper {
     }
 
     @Transactional
-    public UserCreatedEvent persistUser(CreateUserCommand createUserCommand, String token) {
+    public UserCreatedEvent persistUser(CreateUserCommand createUserCommand) {
         findUserWithEmail(createUserCommand.getEmail());
         findOrganization(createUserCommand.getOrganizationId());
         User user = authDataMapper.createUserCommandToUser(createUserCommand);
         UserCreatedEvent userCreatedEvent = authDomainService.createUser(user);
         saveUser(user);
-        keycloakApplicationService.createUser(createUserCommand, token);
+        keycloakApplicationService.createUser(createUserCommand);
+        return userCreatedEvent;
+    }
+
+    @Transactional
+    public UserCreatedEvent persistUserWithoutToken(CreateUserCommand createUserCommand) {
+        findUserWithEmail(createUserCommand.getEmail());
+        findOrganization(createUserCommand.getOrganizationId());
+        User user = authDataMapper.createUserCommandToUser(createUserCommand);
+        UserCreatedEvent userCreatedEvent = authDomainService.createUser(user);
+        saveUser(user);
         return userCreatedEvent;
     }
 

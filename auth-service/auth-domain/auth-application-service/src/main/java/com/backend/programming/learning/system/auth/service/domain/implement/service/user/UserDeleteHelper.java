@@ -29,7 +29,7 @@ public class UserDeleteHelper {
     }
 
     @Transactional
-    public UserDeletedEvent deleteUser(DeleteUserCommand deleteUserCommand, String token) {
+    public UserDeletedEvent deleteUser(DeleteUserCommand deleteUserCommand) {
         Optional<User> userResult =
                 userRepository.findById(new UserId(deleteUserCommand.getUserId()));
         if (userResult.isEmpty()) {
@@ -42,7 +42,7 @@ public class UserDeleteHelper {
 
         UserDeletedEvent userDeletedEvent = authDomainService.deleteUser(user);
         User userSaved = saveUser(user);
-        keycloakApplicationService.deleteUser(userSaved, token);
+        keycloakApplicationService.deleteUser(userSaved);
         return userDeletedEvent;
     }
 

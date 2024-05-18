@@ -6,6 +6,8 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.de
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.login.SocialLoginUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.login.SocialLoginUserProfileCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersByOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryUserByIdCommand;
@@ -50,10 +52,11 @@ public class UserCommandHandler {
     private final UserUpdateSagaHelper userSagaHelper;
     private final UserLoginHelper userLoginHelper;
     private final UserRefreshTokenHelper userRefreshTokenHelper;
+    private final UserSocialLoginHelper userSocialLoginHelper;
 
     @Transactional
-    public CreateUserResponse createUser(CreateUserCommand createOrderCommand, String token) {
-        UserCreatedEvent userCreatedEvent = userCreateHelper.persistUser(createOrderCommand, token);
+    public CreateUserResponse createUser(CreateUserCommand createOrderCommand) {
+        UserCreatedEvent userCreatedEvent = userCreateHelper.persistUser(createOrderCommand);
         log.info("User is created with id: {}", userCreatedEvent.getUser().getId().getValue());
         CreateUserResponse createUserResponse = userDataMapper.userToCreateUserResponse(userCreatedEvent.getUser(),
                 "User created successfully");
@@ -110,8 +113,8 @@ public class UserCommandHandler {
     }
 
     @Transactional
-    public UpdateUserResponse updateUser(UpdateUserCommand updateUserCommand, String token) {
-        UserUpdatedEvent userUpdatedEvent = userUpdateHelper.persistUser(updateUserCommand, token);
+    public UpdateUserResponse updateUser(UpdateUserCommand updateUserCommand) {
+        UserUpdatedEvent userUpdatedEvent = userUpdateHelper.persistUser(updateUserCommand);
 
         userOutboxHelper.saveUserOutboxMessage(
                 userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
@@ -143,8 +146,8 @@ public class UserCommandHandler {
 
 
     @Transactional
-    public DeleteUserResponse deleteUser(DeleteUserCommand deleteUserCommand, String token) {
-        UserDeletedEvent userDeletedEvent = userDeleteHelper.deleteUser(deleteUserCommand, token);
+    public DeleteUserResponse deleteUser(DeleteUserCommand deleteUserCommand) {
+        UserDeletedEvent userDeletedEvent = userDeleteHelper.deleteUser(deleteUserCommand);
         log.info("User is deleted with id: {}", deleteUserCommand.getUserId());
 
         userOutboxHelper.saveUserOutboxMessage(
@@ -175,11 +178,18 @@ public class UserCommandHandler {
                 "User deleted successfully");
     }
 
+    @Transactional
     public LoginUserResponse loginUser(LoginUserCommand loginUserCommand) {
         return userLoginHelper.loginUser(loginUserCommand);
     }
 
+    @Transactional
     public RefreshTokenUserResponse refreshTokenUser(RefreshTokenUserCommand refreshTokenUserCommand) {
         return userRefreshTokenHelper.refreshTokenUser(refreshTokenUserCommand);
+    }
+
+    @Transactional
+    public LoginUserResponse socialLoginUser(SocialLoginUserProfileCommand socialLoginUserProfileCommand) {
+        return userSocialLoginHelper.socialLoginUser(socialLoginUserProfileCommand);
     }
 }

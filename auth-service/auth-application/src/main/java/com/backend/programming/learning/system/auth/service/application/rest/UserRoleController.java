@@ -38,19 +38,15 @@ public class UserRoleController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<?> createUserRole(
+    public ResponseEntity<CreateUserRoleResponse> createUserRole(
             @RequestHeader(name = "Authorization") String authorizationHeader,
             @RequestBody CreateUserRoleCommand createUserRoleCommand) {
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            String jwtToken = authorizationHeader.substring(7);
-            log.info("Creating user role with role id: {} and user id: {}",
-                    createUserRoleCommand.getRoleId(), createUserRoleCommand.getUserId());
-            CreateUserRoleResponse createUserRoleResponse = userRoleApplicationService.createUserRole(createUserRoleCommand, jwtToken);
-            log.info("User role created with role id: {} and user id: {}",
-                    createUserRoleCommand.getRoleId(), createUserRoleCommand.getUserId());
-            return ResponseEntity.status(HttpStatus.CREATED).body(createUserRoleResponse);
-        }
-        return ResponseEntity.badRequest().body("Token is not valid.");
+        log.info("Creating user role with role id: {} and user id: {}",
+                createUserRoleCommand.getRoleId(), createUserRoleCommand.getUserId());
+        CreateUserRoleResponse createUserRoleResponse = userRoleApplicationService.createUserRole(createUserRoleCommand);
+        log.info("User role created with role id: {} and user id: {}",
+                createUserRoleCommand.getRoleId(), createUserRoleCommand.getUserId());
+        return ResponseEntity.status(HttpStatus.CREATED).body(createUserRoleResponse);
     }
 
     @GetMapping("/getByRoleIdAndUserId")
