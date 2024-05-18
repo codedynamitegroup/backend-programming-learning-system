@@ -1,5 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.tag;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.TagDto;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +13,6 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class CreateTagsCommand {
-    @NotNull(message = "tagNames must not be null")
-    List<@NotNull String> tagNames;
+    @NotNull(message = "tags must not be null")
+    List<@Valid TagDto> tags;
 }

@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.dataaccess.tag.entity;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Formula;
@@ -25,6 +26,9 @@ public class TagEntity {
             COALESCE((select count(*) from tag_code_question tcq where tcq.tag_id = id), 0)
             """)
     Integer numOfCodeQuestion;
+
+    @Enumerated(EnumType.STRING)
+    TagType tagType;
 
     @Override
     public boolean equals(Object o) {

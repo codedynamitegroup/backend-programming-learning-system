@@ -4,6 +4,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.course_user.CreateCourseUserResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.course_user.DeleteCourseUserCommand;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryCourseUserCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course_user.CourseUserResponseEntity;
 import jakarta.validation.Valid;
 
 /**
@@ -18,4 +20,8 @@ public interface CourseUserApplicationService {
 
     CreateCourseUserResponse unAssignCourseToUser(
             @Valid DeleteCourseUserCommand deleteCourseUserCommand);
+
+
+    CourseUserResponseEntity queryAllByCourseId(
+            @Valid QueryCourseUserCommand queryCourseUserCommand);
 }

@@ -33,7 +33,7 @@ public class TagHelper {
 
     @Transactional
     public void createTags(CreateTagsCommand command) {
-        List<Tag> tags = command.getTagNames().stream().map(tagDataMapper::createTagCommandToTag).toList();
+        List<Tag> tags = command.getTags().stream().map(tagDataMapper::createTagCommandToTag).toList();
         codeAssessmentDomainService.initiateTags(tags);
         tagRepository.saveAll(tags);
     }
@@ -46,12 +46,12 @@ public class TagHelper {
     @Transactional
     public List<Tag> getTags(GetTagsCommand command) {
         if(command.getCountCodeQuestion()){
-            List<Tag> tags = new ArrayList<>(tagRepository.getTags());
+            List<Tag> tags = new ArrayList<>(tagRepository.getTags(command.getTagType()));
             Integer countAllCodeQuestion = codeQuestionRepository.countAllCodeQuestion();
             tags.add(Tag.builder().name("All").numOfCodeQuestion(countAllCodeQuestion).build());
             return tags;
         }
         else
-            return tagRepository.getTagsExcludeCountCodeQuestion();
+            return tagRepository.getTagsExcludeCountCodeQuestion(command.getTagType());
     }
 }

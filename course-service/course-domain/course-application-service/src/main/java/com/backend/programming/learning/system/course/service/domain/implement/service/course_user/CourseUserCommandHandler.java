@@ -3,10 +3,16 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.course_user.CreateCourseUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.course_user.CreateCourseUserResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.course_user.DeleteCourseUserCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryCourseUserCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course_user.CourseUserResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.entity.CourseUser;
+import com.backend.programming.learning.system.course.service.domain.mapper.course_user.CourseUserDataMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * com.backend.programming.learning.system.implement.course_user
@@ -20,6 +26,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class CourseUserCommandHandler {
     private final CourseUserCreateHelper courseUserCreateHelper;
     private final CourseUserDeleteHelper courseUserDeleteHelper;
+    private final CourseUserQueryHelper courseUserQueryHelper;
+    private final CourseUserDataMapper courseUserDataMapper;
     @Transactional
     public CreateCourseUserResponse assignCourseToUser(CreateCourseUserCommand createCourseUserCommand) {
         courseUserCreateHelper.assignCourseToUser(createCourseUserCommand);
@@ -32,5 +40,11 @@ public class CourseUserCommandHandler {
         courseUserDeleteHelper.unAssignCourseToUser(deleteCourseUserCommand);
         log.info("Course un-assigned to user successfully");
         return CreateCourseUserResponse.builder().message("Course un-assigned to users successfully").build();
+    }
+
+    @Transactional(readOnly = true)
+    public CourseUserResponseEntity queryAllByCourseId(QueryCourseUserCommand queryCourseUserCommand) {
+        List<CourseUser> courseUsers = courseUserQueryHelper.findByCourseId(queryCourseUserCommand.getCourseId());
+        return courseUserDataMapper.courseUsersToCourseUserResponseEntity(courseUsers);
     }
 }

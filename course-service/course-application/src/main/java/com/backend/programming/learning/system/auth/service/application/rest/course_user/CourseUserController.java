@@ -4,6 +4,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.course_user.CreateCourseUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.course_user.CreateCourseUserResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.course_user.DeleteCourseUserCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryCourseUserCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course_user.CourseUserResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.course_user.CourseUserApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -14,11 +16,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 /**
  * com.backend.programming.learning.system.auth.service.application.rest.course_user
@@ -64,5 +64,23 @@ public class CourseUserController {
         log.info("Course un-assigned to user: {}", response);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/{courseId}")
+    @Operation(summary = "Query course user.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CourseUserResponseEntity.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<CourseUserResponseEntity> queryAllByCourseId(
+            @PathVariable UUID courseId) {
+        log.info("Query course user by course id: {}", courseId);
+        CourseUserResponseEntity response = courseUserApplicationService.queryAllByCourseId(new QueryCourseUserCommand(courseId));
+        log.info("Course user by course id: {}", response);
+        return ResponseEntity.ok(response);
+    }
+
 
 }

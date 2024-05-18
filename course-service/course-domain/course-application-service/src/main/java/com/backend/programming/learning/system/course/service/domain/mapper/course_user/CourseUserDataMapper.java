@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.mapper.course_user;
 
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course_user.CourseUserResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
 import com.backend.programming.learning.system.course.service.domain.entity.CourseUser;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
@@ -28,6 +29,15 @@ public class CourseUserDataMapper {
         return CourseUser.builder()
                 .course(course)
                 .user(user)
+                .build();
+    }
+
+    public CourseUserResponseEntity courseUsersToCourseUserResponseEntity(List<CourseUser> courseUsers) {
+        return CourseUserResponseEntity.builder()
+                .course(courseUsers.get(0).getCourse())
+                .users(courseUsers.stream()
+                        .map(CourseUser::getUser)
+                        .toList())
                 .build();
     }
 }
