@@ -282,3 +282,10 @@ VALUES
 INSERT INTO public.code_submission(id, user_id, code_question_id, programming_language_id, source_code, grade, pass)
 VALUES
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 1, true);
+
+INSERT INTO public.contest(id, name, description, thumbnail_url, start_time, end_time, created_by, updated_by)
+VALUES
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'Python Contest', 'This contest is for Python programmers who want to test their skills in Python programming.', 'https://leetcode.com/_next/static/images/weekly-default-553ede7bcc8e1b4a44c28a9e4a32068c.png', '2024-04-15 18:09:29.488151+07', '2024-09-10 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 'Java Contest', 'This contest is for Java programmers who want to test their skills in Java programming.', 'https://leetcode.com/_next/static/images/biweekly-default-f5a8fc3be85b6c9175207fd8fd855d47.png', '2024-09-15 18:09:29.488151+07', '2024-10-15 18:09:29.488151+07', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'Data Structures Contest', 'This contest is for programmers who want to test their skills in data structures and algorithms.', 'https://assets.leetcode.com/contest/weekly-contest-291/card_img_1654267951.png', '2024-01-15 18:09:29.488151+07', null, '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', 'Algorithms Contest', 'This contest is for programmers who want to test their skills in algorithms.', 'https://assets.leetcode.com/contest/weekly-contest-291/card_img_1654267951.png', '2024-01-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992');
