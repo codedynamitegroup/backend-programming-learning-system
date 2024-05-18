@@ -71,8 +71,8 @@ public class QuestionDataMapper {
 
     public QuestionResponseEntity questionToQueryQuestionResponse(Question question) {
         return QuestionResponseEntity.builder()
-                .questionId(question.getId())
-                .organizationId(question.getOrganization().getId())
+                .questionId(question.getId().getValue())
+                .organizationId(question.getOrganization().getId().getValue())
                 .difficulty(question.getDifficulty())
                 .name(question.getName())
                 .questionText(question.getQuestionText())
