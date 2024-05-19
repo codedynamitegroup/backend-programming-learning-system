@@ -28,7 +28,7 @@ public class TestCaseDataMapper {
         return TestCase.builder()
                 .codeQuestionId(codeQuestionId)
                 .id(testCaseDto.getId()!=null?new TestCaseId(testCaseDto.getId()):null)
-                .score(testCaseDto.getScore())
+                .score(testCaseDto.getScore() != null? testCaseDto.getScore() : null)
                 .isSample(testCaseDto.isSample())
                 .inputData(testCaseDto.getInputData())
                 .outputData(testCaseDto.getOutputData())

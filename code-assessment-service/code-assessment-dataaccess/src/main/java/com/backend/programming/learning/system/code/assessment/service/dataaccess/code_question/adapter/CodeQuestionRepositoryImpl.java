@@ -12,7 +12,6 @@ import com.backend.programming.learning.system.code.assessment.service.dataacces
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.general_mapper.GeneralMapper;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language_code_question.mapper.ProgrammingLanguageCodeQuestionDataAccessMapper;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language_code_question.repository.ProgrammingLanguageCodeQuestionJpaRepository;
-import com.backend.programming.learning.system.code.assessment.service.dataaccess.tag.entity.TagEntity;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_question.CodeQuestionRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagId;
@@ -99,7 +98,7 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
     }
 
     @Override
-    public Page<CodeQuestion> findAll(UserId userId, List<TagId> tagIds, QueryOrderBy orderBy, CodeQuestion.Fields sortBy, Integer pageNum, Integer pageSize) {
+    public Page<CodeQuestion> findAll(UserId userId, List<TagId> tagIds, QueryOrderBy orderBy, CodeQuestion.Fields sortBy, Integer pageNum, Integer pageSize, QuestionDifficulty difficulty, Boolean solved, String search) {
         Pageable pageable
                 = PageRequest
                 .of(pageNum,
@@ -109,15 +108,22 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
 
         List<UUID> tagEntityId = tagIds == null? null: tagIds.stream().map(BaseId::getValue).toList();
 
+        log.info("ccccc {}", search);
         Page<CodeQuestionEntity> codeQuestionEntityPageable =
-                codeQuestionJpaRepository.findAndFilterByTagIds(tagEntityId, pageable);
+                codeQuestionJpaRepository.findAndFilterByTagIds(tagEntityId, search, difficulty, solved, userId.getValue(), pageable);
 
         Page<CodeQuestion> codeQuestions = codeQuestionEntityPageable.map(item->{
-           Optional<CodeSubmissionEntity> submissionEntity = codeSubmissionJpaRepository.findByUserIdAndCodeQuestionIdAndGrade(userId.getValue(), item.getId(), item.getMaxGrade().doubleValue());
-           Boolean done = false;
-           if(submissionEntity.isPresent())
-               done = true;
-           return codeQuestionDataAccessMapper.codeQuestionEntityToCodeQuestion(item, done);
+            boolean done = false;
+
+            if (userId != null && solved == null) {
+                Optional<CodeSubmissionEntity> submissionEntity = codeSubmissionJpaRepository.findByUserIdAndCodeQuestionIdAndGrade(userId.getValue(), item.getId(), item.getMaxGrade().doubleValue());
+                if(submissionEntity.isPresent())
+                    done = true;
+            }
+            if(solved != null)
+                done = solved;
+
+            return codeQuestionDataAccessMapper.codeQuestionEntityToCodeQuestion(item, done);
         });
 
         return codeQuestions;

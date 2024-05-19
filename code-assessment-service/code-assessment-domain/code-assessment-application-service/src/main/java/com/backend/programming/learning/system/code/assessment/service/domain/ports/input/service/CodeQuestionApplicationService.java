@@ -8,7 +8,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.tag.AddTagToCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.language.DeleteLanguageToCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.tag.DeleteCodeQuestionTagCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsQuery;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetDetailCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_question.UpdateCodeQuestionCommand;
@@ -17,7 +17,7 @@ import jakarta.validation.Valid;
 public interface CodeQuestionApplicationService {
     CreateCodeQuestionResponse createCodeQuestion(@Valid CreateCodeQuestionCommand command);
 
-    GetCodeQuestionsResponse getCodeQuestions(@Valid GetCodeQuestionsCommand command);
+    GetCodeQuestionsResponse getCodeQuestions(@Valid GetCodeQuestionsQuery query);
 
     void updateCodeQuestion(@Valid UpdateCodeQuestionCommand command);
 

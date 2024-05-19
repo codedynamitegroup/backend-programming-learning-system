@@ -13,7 +13,6 @@ import java.util.List;
 @Builder
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-
 public class GetCodeQuestionsResponse {
     private final List<CodeQuestionDto> codeQuestions;
     private final Integer currentPage;

@@ -8,13 +8,14 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.tag.AddTagToCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.language.DeleteLanguageToCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.tag.DeleteCodeQuestionTagCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsQuery;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetDetailCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_question.UpdateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.CodeQuestionApplicationService;
 import com.backend.programming.learning.system.domain.valueobject.QueryOrderBy;
+import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -64,21 +65,29 @@ public class CodeQuestionController {
 
     @GetMapping
     public ResponseEntity<GetCodeQuestionsResponse> getPublicCodeQuestion(
-            @RequestParam(defaultValue = "${code-assessment-service.default-page-number}") Integer pageNo,
-            @RequestParam(defaultValue = "${code-assessment-service.default-page-size}") Integer pageSize,
+            @RequestParam Integer pageNo,
+            @RequestParam Integer pageSize,
             @RequestParam(required = false) List<UUID> tagIds,
             @RequestParam(defaultValue = "ASC") QueryOrderBy orderBy,
             @RequestParam(defaultValue = "createdAt") CodeQuestion.Fields sortBy,
-            @RequestParam UUID userId){
-        GetCodeQuestionsCommand command = GetCodeQuestionsCommand.builder()
+            @RequestParam(required = false) UUID userId,
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) QuestionDifficulty difficulty,
+            @RequestParam(required = false) Boolean solved){
+        log.info("getPublicCodeQuestion");
+//        tagIds.forEach(i-> log.info("{}",i));
+        GetCodeQuestionsQuery query = GetCodeQuestionsQuery.builder()
                 .orderBy(orderBy)
                 .sortBy(sortBy)
                 .pageNum(pageNo)
                 .pageSize(pageSize)
                 .tagIds(tagIds)
                 .userId(userId)
+                .search(search)
+                .difficulty(difficulty)
+                .solved(solved)
                 .build();
-        GetCodeQuestionsResponse response = codeQuestionApplicationService.getCodeQuestions(command);
+        GetCodeQuestionsResponse response = codeQuestionApplicationService.getCodeQuestions(query);
         return ResponseEntity.ok(response);
     }
 

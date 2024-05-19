@@ -6,10 +6,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.en
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Tag;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.code_question_tag.CodeQuestionTagId;
-import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
-import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
-import com.backend.programming.learning.system.domain.valueobject.QueryOrderBy;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
+import com.backend.programming.learning.system.domain.valueobject.*;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -26,7 +23,7 @@ public interface CodeQuestionRepository {
 
     Integer countAllCodeQuestion();
 
-    Page<CodeQuestion> findAll(UserId id, List<TagId> tagIds, QueryOrderBy orderBy, CodeQuestion.Fields sortBy, Integer pageNum, Integer pageSize);
+    Page<CodeQuestion> findAll(UserId id, List<TagId> tagIds, QueryOrderBy orderBy, CodeQuestion.Fields sortBy, Integer pageNum, Integer pageSize, QuestionDifficulty difficulty, Boolean solved, String search);
 
     void saveNewLanguage(List<ProgrammingLanguageCodeQuestion> plcqs);
 
