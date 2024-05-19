@@ -108,19 +108,21 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
 
         List<UUID> tagEntityId = tagIds == null? null: tagIds.stream().map(BaseId::getValue).toList();
 
-        log.info("ccccc {}", search);
         Page<CodeQuestionEntity> codeQuestionEntityPageable =
                 codeQuestionJpaRepository.findAndFilterByTagIds(tagEntityId, search, difficulty, solved, userId.getValue(), pageable);
 
         Page<CodeQuestion> codeQuestions = codeQuestionEntityPageable.map(item->{
+            //if userId == null then done = false
             boolean done = false;
 
+            //if solved does not exist, then we must find the done in every question
             if (userId != null && solved == null) {
                 Optional<CodeSubmissionEntity> submissionEntity = codeSubmissionJpaRepository.findByUserIdAndCodeQuestionIdAndGrade(userId.getValue(), item.getId(), item.getMaxGrade().doubleValue());
                 if(submissionEntity.isPresent())
                     done = true;
             }
-            if(solved != null)
+            //if solved exist then the result follow by solved
+            if(userId != null && solved != null)
                 done = solved;
 
             return codeQuestionDataAccessMapper.codeQuestionEntityToCodeQuestion(item, done);
