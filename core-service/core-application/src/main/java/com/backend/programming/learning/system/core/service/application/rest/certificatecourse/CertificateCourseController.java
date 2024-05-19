@@ -175,35 +175,6 @@ public class CertificateCourseController {
         return ResponseEntity.ok(queryAllCertificateCoursesResponse);
     }
 
-//    @PostMapping("/filter-by-is-registered")
-//    @Operation(summary = "Get all certificate courses filtered by is registered.")
-//    @ApiResponses(value = {
-//            @ApiResponse(responseCode = "200", description = "Success.", content = {
-//                    @Content(mediaType = "application/vnd.api.v1+json",
-//                            schema = @Schema(implementation = QueryAllCertificateCoursesResponse.class))
-//            }),
-//            @ApiResponse(responseCode = "400", description = "Not found."),
-//            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-//    public ResponseEntity<QueryAllCertificateCoursesResponse> getAllCertificateCoursesFilteredByIsRegistered(
-//            @RequestHeader("X-username") String username,
-//            @RequestBody QueryAllCertificateCoursesFilterByIsRegisteredCommand
-//                    queryAllCertificateCoursesFilterByIsRegisteredCommand) {
-//        QueryAllCertificateCoursesResponse queryAllCertificateCoursesResponse =
-//                certificateCourseApplicationService.
-//                        queryAllCertificateCoursesFilterByIsRegistered(
-//                                QueryAllCertificateCoursesFilterByIsRegisteredCommand.builder()
-//                                        .courseName(queryAllCertificateCoursesFilterByIsRegisteredCommand
-//                                                .getCourseName())
-//                                        .filterTopicIds(queryAllCertificateCoursesFilterByIsRegisteredCommand
-//                                                .getFilterTopicIds())
-//                                        .isRegistered(queryAllCertificateCoursesFilterByIsRegisteredCommand
-//                                                .isRegistered())
-//                                        .username(username)
-//                                        .build());
-//        log.info("Returning all certificate courses filtered by is registered");
-//        return ResponseEntity.ok(queryAllCertificateCoursesResponse);
-//    }
-
 //    @GetMapping("/{id}/users")
 //    @Operation(summary = "Get all users of Certificate course.")
 //    @ApiResponses(value = {

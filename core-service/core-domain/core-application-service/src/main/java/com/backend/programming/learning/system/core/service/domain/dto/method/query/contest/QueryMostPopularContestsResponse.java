@@ -15,7 +15,7 @@ public class QueryMostPopularContestsResponse {
     @NotNull
     private final List<ContestResponseEntity> mostPopularContests;
     @NotNull
-    private final long totalItems;
+    private final int numOfContests;
     @NotNull
     private final int numOfParticipants;
 }

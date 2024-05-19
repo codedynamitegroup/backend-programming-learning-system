@@ -18,6 +18,7 @@ public class Contest extends AggregateRoot<ContestId> {
     private ZonedDateTime startTime;
     private ZonedDateTime endTime;
     private List<Question> questions;
+    private Boolean isRegistered;
     private User createdBy;
     private User updatedBy;
     private ZonedDateTime createdAt;
@@ -31,6 +32,7 @@ public class Contest extends AggregateRoot<ContestId> {
         setStartTime(builder.startTime);
         setEndTime(builder.endTime);
         setQuestions(builder.questions);
+        isRegistered = builder.isRegistered;
         setCreatedBy(builder.createdBy);
         setUpdatedBy(builder.updatedBy);
         setCreatedAt(builder.createdAt);
@@ -96,6 +98,14 @@ public class Contest extends AggregateRoot<ContestId> {
         this.questions = questions;
     }
 
+    public Boolean getRegistered() {
+        return isRegistered;
+    }
+
+    public void setRegistered(Boolean registered) {
+        isRegistered = registered;
+    }
+
     public User getCreatedBy() {
         return createdBy;
     }
@@ -136,6 +146,7 @@ public class Contest extends AggregateRoot<ContestId> {
         private ZonedDateTime startTime;
         private ZonedDateTime endTime;
         private List<Question> questions;
+        private Boolean isRegistered;
         private User createdBy;
         private User updatedBy;
         private ZonedDateTime createdAt;
@@ -176,6 +187,11 @@ public class Contest extends AggregateRoot<ContestId> {
 
         public Builder questions(List<Question> val) {
             questions = val;
+            return this;
+        }
+
+        public Builder isRegistered(Boolean val) {
+            isRegistered = val;
             return this;
         }
 

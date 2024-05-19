@@ -13,11 +13,13 @@ import java.util.UUID;
  */
 @Builder
 public record QuestionBankCategoryEntity(
-        UUID questionBankCategoryId,
+        UUID id,
         String name,
         String description,
         UUID createdBy,
+        String createdByName,
         UUID updatedBy,
+        String updatedByName,
         ZonedDateTime createdAt,
         ZonedDateTime updatedAt
 ) {

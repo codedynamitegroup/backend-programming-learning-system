@@ -41,6 +41,8 @@ public class QuestionDataAccessMapper {
                 .questionBankCategoryId(Objects.nonNull(questionBankCategoryId) ? questionBankCategoryId.getValue() : null)
                 .createdBy(createdBy)
                 .updatedBy(createdBy)
+                .createdAt(question.getCreatedAt())
+                .updatedAt(question.getUpdatedAt())
                 .build();
     }
 
@@ -58,6 +60,8 @@ public class QuestionDataAccessMapper {
                 .organization(organization)
                 .createdBy(createdBy)
                 .updatedBy(updatedBy)
+                .createdAt(questionEntity.getCreatedAt())
+                .updatedAt(questionEntity.getUpdatedAt())
                 .build();
         response.setId(new QuestionId(questionEntity.getId()));
         return response;

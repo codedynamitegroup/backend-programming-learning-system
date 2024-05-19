@@ -76,6 +76,7 @@ public class ContestDataMapper {
                 .questions(questionResponseEntities)
                 .startTime(contest.getStartTime())
                 .endTime(contest.getEndTime())
+                .isRegistered(contest.getRegistered())
                 .createdBy(createdByResponse)
                 .updatedBy(updatedByResponse)
                 .createdAt(contest.getCreatedAt())

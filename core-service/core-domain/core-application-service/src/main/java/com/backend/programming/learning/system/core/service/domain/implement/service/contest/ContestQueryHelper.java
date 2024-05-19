@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -23,17 +24,20 @@ public class ContestQueryHelper {
     private final ContestRepository contestRepository;
     private final ContestQuestionRepository contestQuestionRepository;
     private final ContestUserRepository contestUserRepository;
+    private final UserRepository userRepository;
 
     public ContestQueryHelper(ContestRepository contestRepository,
                               ContestQuestionRepository contestQuestionRepository,
-                              ContestUserRepository contestUserRepository) {
+                              ContestUserRepository contestUserRepository,
+                              UserRepository userRepository) {
         this.contestRepository = contestRepository;
         this.contestQuestionRepository = contestQuestionRepository;
         this.contestUserRepository = contestUserRepository;
+        this.userRepository = userRepository;
     }
 
     @Transactional(readOnly = true)
-    public Contest queryContestById(UUID contestId) {
+    public Contest queryContestById(UUID contestId, String email) {
         Optional<Contest> contestResult =
                 contestRepository.findById(new ContestId(contestId));
         if (contestResult.isEmpty()) {
@@ -46,9 +50,17 @@ public class ContestQueryHelper {
         List<Question> questions = contestQuestions.stream()
                 .map(ContestQuestion::getQuestion)
                 .toList();
-
         Contest contest = contestResult.get();
         contest.setQuestions(questions);
+
+        Optional<User> userResult = userRepository.findByEmail(email);
+        if(userResult.isPresent()) {
+            Optional<ContestUser> contestUserResult = contestUserRepository.findByContestIdAndUserId(
+                    contest.getId().getValue(),
+                    userResult.get().getId().getValue()
+            );
+            contestUserResult.ifPresent(contestUser -> contest.setRegistered(true));
+        }
 
         log.info("Contest queried with id: {}", contest.getId().getValue());
         return contest;
@@ -56,18 +68,37 @@ public class ContestQueryHelper {
 
     @Transactional(readOnly = true)
     public Page<Contest> queryAllContests(
-            String searchName, String startTimeFilter, Integer pageNo, Integer pageSize
+            String searchName,
+            String startTimeFilter,
+            Integer pageNo,
+            Integer pageSize,
+            String email
     ) {
         log.info("Querying all contests with searchName: {}, startTimeFilter: {}, pageNo: {}, pageSize: {}",
                 searchName, startTimeFilter, pageNo, pageSize);
-
-        return contestRepository.findAll(searchName, startTimeFilter, pageNo, pageSize);
+        Optional<User> userResult = userRepository.findByEmail(email);
+        Page<Contest> contests = contestRepository.findAll(searchName, startTimeFilter, pageNo, pageSize);
+        for (Contest contest : contests) {
+            contest.setQuestions(new ArrayList<>());
+            if (userResult.isPresent()) {
+                Optional<ContestUser> contestUserResult = contestUserRepository.findByContestIdAndUserId(
+                        contest.getId().getValue(),
+                        userResult.get().getId().getValue()
+                );
+                contestUserResult.ifPresent(contestUser -> contest.setRegistered(true));
+            }
+        }
+        return contests;
     }
 
     @Transactional(readOnly = true)
-    public Page<Contest> findMostPopularContests() {
+    public List<Contest> findMostPopularContests() {
         log.info("Querying most popular upcoming contests");
-        return contestRepository.findMostPopularContests();
+        List<Contest> contestList = contestRepository.findMostPopularContests();
+        for (Contest contest : contestList) {
+            contest.setQuestions(new ArrayList<>());
+        }
+        return contestList;
     }
 
     @Transactional(readOnly = true)
@@ -76,6 +107,11 @@ public class ContestQueryHelper {
         return contestUserRepository.countAllParticipants();
     }
 
+    @Transactional(readOnly = true)
+    public int countAllContests() {
+        log.info("Counting all contests");
+        return contestRepository.countAllContests();
+    }
 
     private List<ContestQuestion> getAllContestQuestionsForContest(UUID contestId) {
         List<ContestQuestion> contestQuestion = contestQuestionRepository

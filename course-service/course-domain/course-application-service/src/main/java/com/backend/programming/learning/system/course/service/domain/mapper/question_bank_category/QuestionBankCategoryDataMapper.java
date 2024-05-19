@@ -30,7 +30,7 @@ public class QuestionBankCategoryDataMapper {
 
     public CreateQuestionBankCategoryResponse questionBankCategoryToCreateQuestionBankCategoryResponse(QuestionBankCategory questionBankCategory) {
         return CreateQuestionBankCategoryResponse.builder()
-                .questionBankCategoryId(questionBankCategory.getId().getValue())
+                .id(questionBankCategory.getId().getValue())
                 .name(questionBankCategory.getName())
                 .description(questionBankCategory.getDescription())
                 .createdBy(questionBankCategory.getCreatedBy().getId().getValue())
@@ -45,16 +45,20 @@ public class QuestionBankCategoryDataMapper {
         return QueryAllQuestionBankCategoryResponse.builder()
                 .questionBankCategories(questionBankCategoryPage
                         .map(this::questionBankCategoryToQuestionBankCategoryEntity).toList())
-                .message("Query all question bank category successfully")
+                .currentPage(questionBankCategoryPage.getNumber())
+                .totalItems(questionBankCategoryPage.getTotalElements())
+                .totalPages(questionBankCategoryPage.getTotalPages())
                 .build();
     }
     public QuestionBankCategoryEntity questionBankCategoryToQuestionBankCategoryEntity(QuestionBankCategory questionBankCategory) {
         return QuestionBankCategoryEntity.builder()
-                .questionBankCategoryId(questionBankCategory.getId().getValue())
+                .id(questionBankCategory.getId().getValue())
                 .name(questionBankCategory.getName())
                 .description(questionBankCategory.getDescription())
                 .createdBy(questionBankCategory.getCreatedBy().getId().getValue())
+                .createdByName(questionBankCategory.getCreatedBy().getName())
                 .updatedBy(questionBankCategory.getUpdatedBy().getId().getValue())
+                .updatedByName(questionBankCategory.getUpdatedBy().getName())
                 .createdAt(questionBankCategory.getCreatedAt())
                 .updatedAt(questionBankCategory.getUpdatedAt())
                 .build();
