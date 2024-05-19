@@ -13,4 +13,5 @@ import java.util.UUID;
 public class QueryContestCommand {
     @NotNull
     private final UUID contestId;
+    private final String email;
 }

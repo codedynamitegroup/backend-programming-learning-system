@@ -26,6 +26,32 @@ public class WebSecurityConfig {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
+                        // Certificate Course
+                        .requestMatchers(HttpMethod.POST, "/core/certificate-courses/create").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.POST, "/core/certificate-courses/{id}/register").hasAnyRole(ADMIN, USER)
+                        .requestMatchers(HttpMethod.PUT, "/core/certificate-courses/{id}").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.DELETE, "/core/certificate-courses/{id}").hasAnyRole(ADMIN)
+
+                        // Chapter
+                        .requestMatchers(HttpMethod.POST, "/core/chapters/create").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.PUT, "/core/chapters/{id}").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.DELETE, "/core/chapters/{id}").hasAnyRole(ADMIN)
+
+                        // Contest
+//                        .requestMatchers(HttpMethod.POST, "/core/contests/create").hasAnyRole(ADMIN)
+//                        .requestMatchers(HttpMethod.PUT, "/core/contests/{id}").hasAnyRole(ADMIN)
+//                        .requestMatchers(HttpMethod.DELETE, "/core/contests/{id}").hasAnyRole(ADMIN)
+
+                        // Review
+                        .requestMatchers(HttpMethod.POST, "/core/reviews/create").hasAnyRole(ADMIN, USER)
+                        .requestMatchers(HttpMethod.PUT, "/core/reviews/{id}").hasAnyRole(ADMIN, USER)
+                        .requestMatchers(HttpMethod.DELETE, "/core/reviews/{id}").hasAnyRole(ADMIN, USER)
+
+                        // Topic
+                        .requestMatchers(HttpMethod.POST, "/core/topics/create").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.PUT, "/core/topics/{id}").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.DELETE, "/core/topics/{id}").hasAnyRole(ADMIN)
+
                         .anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2

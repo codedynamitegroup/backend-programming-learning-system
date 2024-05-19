@@ -8,11 +8,37 @@ import java.util.UUID;
 public class CourseUser extends AggregateRoot<CourseUserId> {
     public User user;
     public Course course;
+    public RoleMoodle roleMoodle;
 
     private CourseUser(Builder builder) {
         super.setId(builder.courseUserId);
         user = builder.user;
         course = builder.course;
+        roleMoodle = builder.roleMoodle;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public RoleMoodle getRoleMoodle() {
+        return roleMoodle;
+    }
+
+    public void setRoleMoodle(RoleMoodle roleMoodle) {
+        this.roleMoodle = roleMoodle;
     }
 
     public static Builder builder() {
@@ -28,6 +54,8 @@ public class CourseUser extends AggregateRoot<CourseUserId> {
         private CourseUserId courseUserId;
         private User user;
         private Course course;
+
+        private RoleMoodle roleMoodle;
 
         private Builder() {
         }
@@ -48,6 +76,11 @@ public class CourseUser extends AggregateRoot<CourseUserId> {
 
         public Builder course(Course val) {
             course = val;
+            return this;
+        }
+
+        public Builder roleMoodle(RoleMoodle val) {
+            roleMoodle = val;
             return this;
         }
 

@@ -40,10 +40,14 @@ CREATE TYPE qtype AS ENUM ('MULTIPLE_CHOICE', 'SHORT_ANSWER', 'CODE', 'ESSAY');
 DROP TYPE IF EXISTS grading_status;
 CREATE TYPE grading_status AS ENUM ('GRADING', 'GRADED', 'GRADING_SYSTEM_UNAVAILABLE');
 
+DROP TYPE IF EXISTS tag_type;
+CREATE TYPE tag_type AS ENUM('ALGORITHM', 'OTHER');
+
 DROP TABLE IF EXISTS tag CASCADE;
 CREATE TABLE tag(
     id uuid unique not null ,
     name text unique not null ,
+    tag_type tag_type default 'OTHER',
     CONSTRAINT tag_pk PRIMARY KEY (id)
 );
 
@@ -378,3 +382,5 @@ CREATE  INDEX "question_outbox_status"
 CREATE INDEX "question_outbox_saga_id"
     ON "public".question_outbox
     (type, saga_id);
+
+CREATE INDEX "search_code_question" ON qtype_code_questions(name);

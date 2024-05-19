@@ -22,5 +22,5 @@ public class QueryAllContestsCommand {
     @NotNull
     @EnumValidator(enumClass = ContestStartTimeFilter.class, message = "Invalid contest start time filter")
     private final String startTimeFilter;
-
+    private final String email;
 }

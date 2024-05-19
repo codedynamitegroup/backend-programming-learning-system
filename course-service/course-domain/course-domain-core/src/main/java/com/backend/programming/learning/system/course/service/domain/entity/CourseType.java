@@ -25,6 +25,7 @@ public class CourseType extends AggregateRoot<CourseTypeId>{
     private CourseType(Builder builder) {
         super.setId(builder.id);
         setName(builder.name);
+        setMoodleId(builder.moodleId);
     }
 
     public static Builder builder() {

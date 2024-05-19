@@ -13,7 +13,7 @@ import java.util.UUID;
  */
 @Builder
 public record CreateQuestionBankCategoryResponse(
-        UUID questionBankCategoryId,
+        UUID id,
         String name,
         String description,
         UUID createdBy,

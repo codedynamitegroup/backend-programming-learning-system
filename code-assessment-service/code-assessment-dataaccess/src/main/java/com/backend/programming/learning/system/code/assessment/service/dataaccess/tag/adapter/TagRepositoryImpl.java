@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.code.assessment.service.dataacces
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Tag;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.TagRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagId;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -42,14 +43,15 @@ public class TagRepositoryImpl implements TagRepository {
     }
 
     @Override
-    public List<Tag> getTags() {
-        List<TagEntity> tagEntities = jpaRepository.findAll();
+    public List<Tag> getTags(TagType tagType) {
+
+        List<TagEntity> tagEntities = jpaRepository.findAllByTagType(tagType);
         return tagEntities.stream().map(dataAccessMapper::entityToTag).toList();
     }
 
     @Override
-    public List<Tag> getTagsExcludeCountCodeQuestion() {
-        List<TagEntity> tagEntities = jpaRepository.findAll();
+    public List<Tag> getTagsExcludeCountCodeQuestion(TagType tagType) {
+        List<TagEntity> tagEntities = jpaRepository.findAllByTagType(tagType);
         return tagEntities.stream().map(dataAccessMapper::entityToTagIgnoreLazy).toList();
     }
 }

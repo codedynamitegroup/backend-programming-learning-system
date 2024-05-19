@@ -9,12 +9,13 @@ import java.util.List;
 import java.util.UUID;
 
 public class Question extends AggregateRoot<QuestionId> {
-    private final Organization organization;
+    private Organization organization;
     private QuestionDifficulty difficulty;
     private String name;
     private String questionText;
     private String generalFeedback;
     private Float defaultMark;
+    private Boolean pass;
     private final User createdBy;
     private User updatedBy;
     private final QuestionType qtype;
@@ -34,6 +35,7 @@ public class Question extends AggregateRoot<QuestionId> {
         questionText = builder.questionText;
         generalFeedback = builder.generalFeedback;
         defaultMark = builder.defaultMark;
+        pass = builder.pass;
         createdBy = builder.createdBy;
         updatedBy = builder.updatedBy;
         qtype = builder.qtype;
@@ -124,6 +126,18 @@ public class Question extends AggregateRoot<QuestionId> {
         return updatedAt;
     }
 
+    public Boolean getPass() {
+        return pass;
+    }
+
+    public void setPass(Boolean pass) {
+        this.pass = pass;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
+    }
+
     public static final class Builder {
         private QuestionId questionId;
         private Organization organization;
@@ -132,6 +146,7 @@ public class Question extends AggregateRoot<QuestionId> {
         private String questionText;
         private String generalFeedback;
         private Float defaultMark;
+        private Boolean pass;
         private User createdBy;
         private User updatedBy;
         private QuestionType qtype;
@@ -186,6 +201,11 @@ public class Question extends AggregateRoot<QuestionId> {
 
         public Builder defaultMark(Float val) {
             defaultMark = val;
+            return this;
+        }
+
+        public Builder pass(Boolean val) {
+            pass = val;
             return this;
         }
 

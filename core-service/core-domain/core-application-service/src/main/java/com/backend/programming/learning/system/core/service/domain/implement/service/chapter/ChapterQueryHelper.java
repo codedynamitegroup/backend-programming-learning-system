@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.implement.service.chapter;
 
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.exception.CertificateCourseNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.ChapterNotFoundException;
@@ -20,23 +21,39 @@ import java.util.UUID;
 public class ChapterQueryHelper {
     private final ChapterRepository chapterRepository;
     private final ChapterQuestionRepository chapterQuestionRepository;
+    private final CodeSubmissionRepository codeSubmissionRepository;
+    private final UserRepository userRepository;
 
     public ChapterQueryHelper(ChapterRepository chapterRepository,
-                              ChapterQuestionRepository chapterQuestionRepository) {
+                              ChapterQuestionRepository chapterQuestionRepository,
+                              CodeSubmissionRepository codeSubmissionRepository,
+                              UserRepository userRepository) {
         this.chapterRepository = chapterRepository;
         this.chapterQuestionRepository = chapterQuestionRepository;
+        this.codeSubmissionRepository = codeSubmissionRepository;
+        this.userRepository = userRepository;
     }
 
     @Transactional(readOnly = true)
-    public List<Chapter> queryAllChapters(UUID certificateCourseId) {
+    public List<Chapter> queryAllChapters(UUID certificateCourseId,
+                                          String email) {
         List<Chapter> chapters = chapterRepository.findAllByCertificateCourseId(
                 new CertificateCourseId(certificateCourseId));
 
+        Optional<User> user = userRepository.findByEmail(email);
         for (Chapter chapter : chapters) {
             List<ChapterQuestion> chapterQuestions = getAllChapterQuestionsForChapter(chapter.getId().getValue());
             List<Question> questions = chapterQuestions.stream()
                     .map(ChapterQuestion::getQuestion)
                     .toList();
+            if (user.isPresent()) {
+                for (Question question : questions) {
+                    question.setPass(checkCodeQuestionIsPassed(
+                            user.get().getId().getValue(),
+                            question.getId().getValue()));
+                }
+            }
+
             chapter.setQuestions(questions);
         }
 
@@ -45,7 +62,7 @@ public class ChapterQueryHelper {
     }
 
     @Transactional(readOnly = true)
-    public Chapter queryChapterById(UUID chapterId) {
+    public Chapter queryChapterById(UUID chapterId, String email) {
         Optional<Chapter> chapter = chapterRepository.findById(chapterId);
 
         if (chapter.isEmpty()) {
@@ -58,10 +75,27 @@ public class ChapterQueryHelper {
         List<Question> questions = chapterQuestions.stream()
                 .map(ChapterQuestion::getQuestion)
                 .toList();
+
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isPresent()) {
+            for (Question question : questions) {
+                question.setPass(checkCodeQuestionIsPassed(
+                        user.get().getId().getValue(),
+                        question.getId().getValue()));
+            }
+        }
+
         chapterWithQuestions.setQuestions(questions);
 
         log.info("Chapter queried with id: {}", chapterId);
         return chapterWithQuestions;
+    }
+
+    private Boolean checkCodeQuestionIsPassed(UUID userId, UUID questionId) {
+        List<CodeSubmission> codeSubmissions = codeSubmissionRepository
+                .findAllCodeSubmissionsByUserIdAndQuestionId(userId, questionId);
+        return codeSubmissions.stream()
+                .anyMatch(CodeSubmission::getPass);
     }
 
     private List<ChapterQuestion> getAllChapterQuestionsForChapter(UUID chapterId) {

@@ -4,12 +4,14 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter.CreateChapterResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.chapter.UpdateChapterResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.OrganizationResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
+import com.backend.programming.learning.system.core.service.domain.mapper.organization.OrganizationDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterId;
@@ -24,12 +26,15 @@ import java.util.List;
 @Component
 public class ChapterDataMapper {
     private final UserDataMapper userDataMapper;
-private final QuestionDataMapper questionDataMapper;
+    private final QuestionDataMapper questionDataMapper;
+    private final OrganizationDataMapper organizationDataMapper;
 
     public ChapterDataMapper(UserDataMapper userDataMapper,
-                             QuestionDataMapper questionDataMapper) {
+                             QuestionDataMapper questionDataMapper,
+                             OrganizationDataMapper organizationDataMapper) {
         this.userDataMapper = userDataMapper;
         this.questionDataMapper = questionDataMapper;
+        this.organizationDataMapper = organizationDataMapper;
     }
 
     public Chapter createChapterCommandToChapter(CreateChapterCommand createChapterCommand) {
@@ -66,7 +71,8 @@ private final QuestionDataMapper questionDataMapper;
         List<QuestionResponseEntity> queryQuestionResponses = new ArrayList<>();
         for (Question question : chapter.getQuestions()) {
             queryQuestionResponses.add(
-                    questionDataMapper.questionToQuestionResponseEntity(question));
+                    questionDataMapper.questionToQuestionResponseEntity(question)
+            );
         }
 
         UserResponseEntity createdByResponse = userDataMapper.userToUserResponseEntity(chapter.getCreatedBy());
@@ -87,12 +93,12 @@ private final QuestionDataMapper questionDataMapper;
     }
 
     public QueryAllChaptersResponse chaptersToQueryAllChaptersResponse(List<Chapter> chapters) {
-        List<ChapterResponseEntity> chapterResponsEntities = new ArrayList<>();
+        List<ChapterResponseEntity> chapterResponseEntities = new ArrayList<>();
         for (Chapter chapter : chapters) {
-            chapterResponsEntities.add(chapterToQueryChapterResponse(chapter));
+            chapterResponseEntities.add(chapterToQueryChapterResponse(chapter));
         }
         return QueryAllChaptersResponse.builder()
-                .chapters(chapterResponsEntities)
+                .chapters(chapterResponseEntities)
                 .build();
     }
 

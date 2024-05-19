@@ -71,26 +71,6 @@ CREATE TYPE outbox_status AS ENUM ('STARTED', 'COMPLETED', 'FAILED');
 DROP TYPE IF EXISTS notification_notify_time;
 CREATE TYPE notification_notify_time AS ENUM ('TWENTY_FOUR_HOURS', 'TWELVE_HOURS', 'SIX_HOURS', 'THREE_HOURS', 'ONE_HOUR');
 
-DROP TABLE IF EXISTS "public".user CASCADE;
-CREATE TABLE "public".user
-(
-    id         uuid                     DEFAULT gen_random_uuid() NOT NULL,
-    user_id_moodle int,
-    username  text UNIQUE,
-    email      text UNIQUE NOT NULL,
-    dob        date,
-    first_name text,
-    last_name  text,
-    phone      text,
-    address    text,
-    avatar_url text,
-    last_login TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    is_deleted boolean DEFAULT '0',
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT user_pkey PRIMARY KEY (id)
-
-);
 DROP TABLE IF EXISTS "public".organization CASCADE;
 CREATE TABLE "public".organization
 (
@@ -103,6 +83,32 @@ CREATE TABLE "public".organization
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     is_deleted boolean NOT NULL DEFAULT false,
     CONSTRAINT organization_pkey PRIMARY KEY (id)
+);
+
+DROP TABLE IF EXISTS "public".user CASCADE;
+CREATE TABLE "public".user
+(
+    id         uuid                     DEFAULT gen_random_uuid() NOT NULL,
+    user_id_moodle int,
+    org_id    uuid                     ,
+    username  text UNIQUE,
+    email      text UNIQUE NOT NULL,
+    dob        date,
+    first_name text,
+    last_name  text,
+    phone      text,
+    address    text,
+    avatar_url text,
+    last_login TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    is_deleted boolean DEFAULT '0',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT user_pkey PRIMARY KEY (id),
+    CONSTRAINT user_org_id_fkey FOREIGN KEY (org_id)
+        REFERENCES "public".organization (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+
 );
 
 DROP TABLE IF EXISTS "public".question_bank_category CASCADE;
@@ -167,6 +173,13 @@ CREATE TABLE "public".course_type
     CONSTRAINT course_type_pkey PRIMARY KEY (id)
 );
 
+DROP TABLE IF EXISTS "public".role_moodle CASCADE;
+CREATE TABLE "public".role_moodle
+(
+    id          integer NOT NULL,
+    name        text UNIQUE,
+    CONSTRAINT role_moodle_pkey PRIMARY KEY (id)
+);
 
 DROP TABLE IF EXISTS "public".course CASCADE;
 CREATE TABLE "public".course
@@ -269,6 +282,7 @@ CREATE TABLE "public".course_user
     id        uuid DEFAULT gen_random_uuid() NOT NULL,
     user_id   uuid                           NOT NULL,
     course_id uuid                           NOT NULL,
+    role_id   integer                        NOT NULL,
     CONSTRAINT course_user_pkey PRIMARY KEY (id),
     CONSTRAINT course_user_user_id_fkey FOREIGN KEY (user_id)
         REFERENCES "public".user (id) MATCH SIMPLE
@@ -276,6 +290,10 @@ CREATE TABLE "public".course_user
         ON DELETE CASCADE,
     CONSTRAINT course_user_course_fkey FOREIGN KEY (course_id)
         REFERENCES "public".course (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT course_user_role_id_fkey FOREIGN KEY (role_id)
+        REFERENCES "public".role_moodle (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );

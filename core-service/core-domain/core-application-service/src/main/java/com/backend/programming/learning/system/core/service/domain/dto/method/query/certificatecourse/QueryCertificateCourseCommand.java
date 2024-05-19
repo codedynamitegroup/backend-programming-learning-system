@@ -13,4 +13,5 @@ import java.util.UUID;
 public class QueryCertificateCourseCommand {
     @NotNull
     private final UUID certificateCourseId;
+    private final String email;
 }

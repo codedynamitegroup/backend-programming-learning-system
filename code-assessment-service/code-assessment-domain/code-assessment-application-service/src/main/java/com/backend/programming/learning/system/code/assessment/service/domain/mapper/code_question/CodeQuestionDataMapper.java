@@ -3,7 +3,6 @@ package com.backend.programming.learning.system.code.assessment.service.domain.m
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.DtoMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionResponse;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_question.UpdateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;

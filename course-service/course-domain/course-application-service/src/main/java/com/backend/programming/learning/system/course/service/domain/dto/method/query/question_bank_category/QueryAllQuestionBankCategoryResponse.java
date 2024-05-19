@@ -14,6 +14,8 @@ import java.util.List;
 @Builder
 public record QueryAllQuestionBankCategoryResponse(
         List<QuestionBankCategoryEntity> questionBankCategories,
-        String message
+        int currentPage,
+        long totalItems,
+        int totalPages
 ) {
 }

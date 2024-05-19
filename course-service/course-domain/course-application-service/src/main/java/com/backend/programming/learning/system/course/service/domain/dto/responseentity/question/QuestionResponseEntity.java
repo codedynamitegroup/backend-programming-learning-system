@@ -1,11 +1,10 @@
 package com.backend.programming.learning.system.course.service.domain.dto.responseentity.question;
 
-import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
-import com.backend.programming.learning.system.domain.valueobject.QuestionId;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+
+import java.time.ZonedDateTime;
+import java.util.UUID;
 
 /**
  * com.backend.programming.learning.system.dto.responseentity.question
@@ -15,13 +14,15 @@ import lombok.Getter;
  */
 @Builder
 public record QuestionResponseEntity(
-        QuestionId questionId,
-        OrganizationId organizationId,
+        UUID id,
+        UUID organizationId,
         QuestionDifficulty difficulty,
         String name,
         String questionText,
         String generalFeedback,
         float defaultMark,
+        ZonedDateTime createdAt,
+        ZonedDateTime updatedAt,
         String message
 ) {
 }

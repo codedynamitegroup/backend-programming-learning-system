@@ -10,6 +10,9 @@ import com.backend.programming.learning.system.core.service.domain.ports.output.
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CodeSubmissionRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.UUID;
+
 @Component
 public class CodeSubmissionRepositoryImpl implements CodeSubmissionRepository {
     private final CodeSubmissionJpaRepository codeSubmissionJpaRepository;
@@ -27,5 +30,13 @@ public class CodeSubmissionRepositoryImpl implements CodeSubmissionRepository {
                 codeSubmissionJpaRepository.save(
                         codeSubmissionDataAccessMapper.
                                 codeSubmissionToCodeSubmissionEntity(codeSubmission)));
+    }
+
+    @Override
+    public List<CodeSubmission> findAllCodeSubmissionsByUserIdAndQuestionId(UUID userID, UUID questionId) {
+        return codeSubmissionDataAccessMapper.codeSubmissionEntityListToCodeSubmissionList(
+                codeSubmissionJpaRepository.findAllCodeSubmissionsByUserIdAndQuestionId(
+                        userID, questionId
+                ));
     }
 }

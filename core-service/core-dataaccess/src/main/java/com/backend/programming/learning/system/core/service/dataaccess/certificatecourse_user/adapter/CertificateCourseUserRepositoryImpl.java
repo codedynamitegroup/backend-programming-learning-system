@@ -49,8 +49,7 @@ public class CertificateCourseUserRepositoryImpl implements CertificateCourseUse
                 .map(certificateCourseUserDataAccessMapper::certificateCourseUserEntityToCertificateCourseUser);
     }
 
-    @Override
-    public int countByCertificateCourseId(UUID certificateCourseId) {
-        return certificateCourseUserJpaRepository.countByCertificateCourseId(certificateCourseId);
-    }
+
+
+
 }

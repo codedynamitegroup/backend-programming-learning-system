@@ -63,7 +63,8 @@ public class ContestCommandHandler {
                         queryAllContestsCommand.getSearchName(),
                         queryAllContestsCommand.getStartTimeFilter(),
                         queryAllContestsCommand.getPageNo(),
-                        queryAllContestsCommand.getPageSize());
+                        queryAllContestsCommand.getPageSize(),
+                        queryAllContestsCommand.getEmail());
 
         log.info("Returning all contests: {}", contests);
 
@@ -72,18 +73,21 @@ public class ContestCommandHandler {
 
     @Transactional(readOnly = true)
     public QueryMostPopularContestsResponse queryMostPopularContestsResponse() {
-        Page<Contest> contests = contestQueryHelper
+        List<Contest> contests = contestQueryHelper
                 .findMostPopularContests();
         log.info("Returning most popular upcoming contests: {}", contests);
 
         int numOfParticipants = contestQueryHelper.countAllParticipants();
         log.info("Returning number of participants: {}", numOfParticipants);
 
+        int numOfContests = contestQueryHelper.countAllContests();
+        log.info("Returning number of contests: {}", numOfContests);
+
         return QueryMostPopularContestsResponse
                 .builder()
-                .mostPopularContests(contestDataMapper.contestsToContestResponseEntities(contests.getContent()))
-                .totalItems(contests.getTotalElements())
+                .mostPopularContests(contestDataMapper.contestsToContestResponseEntities(contests))
                 .numOfParticipants(numOfParticipants)
+                .numOfContests(numOfContests)
                 .build();
     }
 
@@ -92,14 +96,11 @@ public class ContestCommandHandler {
             QueryContestCommand queryContestCommand
     ) {
         Contest contest = contestQueryHelper
-                .queryContestById(queryContestCommand.getContestId());
+                .queryContestById(
+                        queryContestCommand.getContestId(),
+                        queryContestCommand.getEmail());
 
         return contestDataMapper.contestToQueryContestResponse(contest);
-    }
-
-    @Transactional(readOnly = true)
-    public int countAllParticipants() {
-        return contestQueryHelper.countAllParticipants();
     }
 
     @Transactional
@@ -107,7 +108,8 @@ public class ContestCommandHandler {
             DeleteContestCommand deleteContestCommand
     ) {
         contestDeleteHelper.deleteContestById(
-                deleteContestCommand.getContestId());
+                deleteContestCommand.getContestId()
+        );
 
         return DeleteContestResponse.builder()
                 .contestId(deleteContestCommand.getContestId())

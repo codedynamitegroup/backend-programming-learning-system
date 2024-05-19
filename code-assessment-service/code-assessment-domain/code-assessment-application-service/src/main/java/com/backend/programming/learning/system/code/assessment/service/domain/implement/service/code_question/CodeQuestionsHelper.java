@@ -7,7 +7,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.tag.AddTagToCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.language.DeleteLanguageToCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.tag.DeleteCodeQuestionTagCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsQuery;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetDetailCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_question.UpdateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.*;
@@ -103,10 +103,10 @@ public class CodeQuestionsHelper {
     }
 
     @Transactional
-    public Page<CodeQuestion> getCodeQuestions(GetCodeQuestionsCommand command) {
-        User user = validateHelper.validateUser(command.getUserId());
-        List<TagId> tagIds = command.getTagIds() == null || command.getTagIds().isEmpty()? null:
-                command.getTagIds().stream().map(item->{
+    public Page<CodeQuestion> getCodeQuestions(GetCodeQuestionsQuery query) {
+        User user = query.getUserId() != null? validateHelper.validateUser(query.getUserId()): null;
+        List<TagId> tagIds = query.getTagIds() == null || query.getTagIds().isEmpty()? null:
+                query.getTagIds().stream().map(item->{
                             try {
                                 return validateHelper.validateTagById(item).getId();
                             } catch (Exception e) {
@@ -116,12 +116,15 @@ public class CodeQuestionsHelper {
                         .filter(Objects::nonNull)
                         .toList();
         Page<CodeQuestion> codeQuestions = codeQuestionRepository
-                .findAll(user.getId(),
+                .findAll(user != null? user.getId(): null,
                         tagIds,
-                        command.getOrderBy(),
-                        command.getSortBy(),
-                        command.getPageNum(),
-                        command.getPageSize());
+                        query.getOrderBy(),
+                        query.getSortBy(),
+                        query.getPageNum(),
+                        query.getPageSize(),
+                        query.getDifficulty(),
+                        query.getSolved(),
+                        query.getSearch());
         return codeQuestions;
     }
 

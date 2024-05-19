@@ -10,8 +10,11 @@ import java.util.UUID;
 
 @Component
 public class TagDataMapper {
-    public Tag createTagCommandToTag(String s) {
-        return Tag.builder().name(s).build();
+    public Tag createTagCommandToTag(TagDto s) {
+        return Tag.builder()
+                .name(s.getName())
+                .tagType(s.getTagType())
+                .build();
     }
 
     public TagDto tagToTagResponseItem(Tag tag) {
@@ -19,6 +22,7 @@ public class TagDataMapper {
                 .id(tag.getId() != null? tag.getId().getValue(): null)
                 .name(tag.getName())
                 .numOfCodeQuestion(tag.getNumOfCodeQuestion())
+                .tagType(tag.getTagType())
                 .build();
     }
 

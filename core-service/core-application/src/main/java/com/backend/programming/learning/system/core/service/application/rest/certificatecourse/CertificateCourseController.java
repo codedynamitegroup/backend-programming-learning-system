@@ -17,9 +17,13 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.security.core.Authentication;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -120,11 +124,21 @@ public class CertificateCourseController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<CertificateCourseResponseEntity> getCertificateCourseById(@PathVariable UUID id) {
+    public ResponseEntity<CertificateCourseResponseEntity> getCertificateCourseById(
+            @PathVariable UUID id) {
+        String email = null;
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
         CertificateCourseResponseEntity certificateCourseResponseEntity =
                 certificateCourseApplicationService.queryCertificateCourse(QueryCertificateCourseCommand
                         .builder()
                         .certificateCourseId(id)
+                        .email(email)
                         .build());
         log.info("Returning certificate course: {}", certificateCourseResponseEntity.getCertificateCourseId());
         return  ResponseEntity.ok(certificateCourseResponseEntity);
@@ -141,38 +155,23 @@ public class CertificateCourseController {
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllCertificateCoursesResponse> getAllCertificateCourses(
             @RequestBody QueryAllCertificateCoursesCommand queryAllCertificateCoursesCommand) {
-        QueryAllCertificateCoursesResponse queryAllCertificateCoursesResponse =
-                certificateCourseApplicationService.queryAllCertificateCourses(queryAllCertificateCoursesCommand);
-        log.info("Returning all certificate courses");
-        return ResponseEntity.ok(queryAllCertificateCoursesResponse);
-    }
+        String email = null;
 
-    @PostMapping("/filter-by-is-registered")
-    @Operation(summary = "Get all certificate courses filtered by is registered.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Success.", content = {
-                    @Content(mediaType = "application/vnd.api.v1+json",
-                            schema = @Schema(implementation = QueryAllCertificateCoursesResponse.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "Not found."),
-            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<QueryAllCertificateCoursesResponse> getAllCertificateCoursesFilteredByIsRegistered(
-            @RequestHeader("X-username") String username,
-            @RequestBody QueryAllCertificateCoursesFilterByIsRegisteredCommand
-                    queryAllCertificateCoursesFilterByIsRegisteredCommand) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
         QueryAllCertificateCoursesResponse queryAllCertificateCoursesResponse =
-                certificateCourseApplicationService.
-                        queryAllCertificateCoursesFilterByIsRegistered(
-                                QueryAllCertificateCoursesFilterByIsRegisteredCommand.builder()
-                                        .courseName(queryAllCertificateCoursesFilterByIsRegisteredCommand
-                                                .getCourseName())
-                                        .filterTopicIds(queryAllCertificateCoursesFilterByIsRegisteredCommand
-                                                .getFilterTopicIds())
-                                        .isRegistered(queryAllCertificateCoursesFilterByIsRegisteredCommand
-                                                .isRegistered())
-                                        .username(username)
-                                        .build());
-        log.info("Returning all certificate courses filtered by is registered");
+                certificateCourseApplicationService.queryAllCertificateCourses(QueryAllCertificateCoursesCommand
+                        .builder()
+                        .courseName(queryAllCertificateCoursesCommand.getCourseName())
+                        .filterTopicIds(queryAllCertificateCoursesCommand.getFilterTopicIds())
+                        .isRegisteredFilter(queryAllCertificateCoursesCommand.getIsRegisteredFilter())
+                        .email(email)
+                        .build());
+        log.info("Returning all certificate courses");
         return ResponseEntity.ok(queryAllCertificateCoursesResponse);
     }
 

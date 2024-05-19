@@ -46,7 +46,7 @@ public class ChapterRepositoryImpl implements ChapterRepository {
     @Override
     public List<Chapter> findAllByCertificateCourseId(CertificateCourseId certificateCourseId) {
         return chapterDataAccessMapper.chapterEntityListToChapterList(
-                chapterJpaRepository.findAllByCertificateCourseId(certificateCourseId.getValue()));
+                chapterJpaRepository.findAllByCertificateCourseIdOrderByNoAsc(certificateCourseId.getValue()));
     }
 
     @Override
