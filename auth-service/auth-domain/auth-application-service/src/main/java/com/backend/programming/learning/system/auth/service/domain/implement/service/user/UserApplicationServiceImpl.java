@@ -7,7 +7,6 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.de
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.SocialLoginUserCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.login.SocialLoginUserProfileCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersByOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryUserByIdCommand;
@@ -68,8 +67,8 @@ class UserApplicationServiceImpl implements UserApplicationService {
     }
 
     @Override
-    public LoginUserResponse socialLoginUser(SocialLoginUserProfileCommand socialLoginUserProfileCommand) {
-        return userCommandHandler.socialLoginUser(socialLoginUserProfileCommand);
+    public LoginUserResponse socialLoginUser(SocialLoginUserCommand socialLoginUserCommand) {
+        return userCommandHandler.socialLoginUser(socialLoginUserCommand);
     }
 
     @Override

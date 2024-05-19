@@ -106,6 +106,10 @@ public class UserKeycloakApplicationServiceImpl implements UserKeycloakApplicati
             log.error("User not found");
             throw new AuthDomainException("User not found");
         }
+        if (!provider.equals("google") && !provider.equals("microsoft")) {
+            log.error("Provider not found");
+            throw new AuthDomainException("Provider not found");
+        }
         UserRepresentation userRepresentation = userRepresentations.get(0);
         FederatedIdentityRepresentation federatedIdentityRepresentation = new FederatedIdentityRepresentation();
         federatedIdentityRepresentation.setUserId(userIdSSO);

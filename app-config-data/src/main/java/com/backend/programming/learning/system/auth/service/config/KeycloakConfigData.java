@@ -9,12 +9,13 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "keycloak")
 public class KeycloakConfigData {
     private String realm;
-    private String googleRealm;
     private String domain;
     private String client;
-    private String googleClient;
+    private String authenticationClientId;
     private String clientSecret;
     private String urls;
+    private String googleUrl;
+    private String microsoftUrl;
     private String adminClientId;
     private String adminClientSecret;
 }

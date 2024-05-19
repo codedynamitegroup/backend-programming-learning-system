@@ -8,7 +8,6 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.de
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.SocialLoginUserCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.login.SocialLoginUserProfileCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersByOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryUserByIdCommand;
@@ -19,7 +18,6 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.up
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserApplicationService;
-import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserKeycloakApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -42,12 +40,10 @@ import java.util.UUID;
 public class UserController {
     private final UserApplicationService userApplicationService;
     private final TokenService tokenService;
-    private final UserKeycloakApplicationService userKeycloakApplicationService;
-
-    public UserController(UserApplicationService userApplicationService, TokenService tokenService, UserKeycloakApplicationService userKeycloakApplicationService) {
+    public UserController(UserApplicationService userApplicationService, TokenService tokenService) {
         this.userApplicationService = userApplicationService;
         this.tokenService = tokenService;
-        this.userKeycloakApplicationService = userKeycloakApplicationService;
+
     }
 
     @PostMapping
@@ -81,7 +77,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(loginUserResponse);
     }
 
-    @PostMapping("/social_login")
+    @PostMapping("/social-login")
     @Operation(summary = "Socal login user.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
@@ -91,21 +87,15 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<LoginUserResponse> socialLoginUser(@RequestBody SocialLoginUserCommand socialLoginUserCommand) {
-        Jwt jwt = tokenService.decodeAccessToken(socialLoginUserCommand.getIdToken(), socialLoginUserCommand.getProvider());
         LoginUserResponse loginUserResponse = userApplicationService.socialLoginUser(
-                SocialLoginUserProfileCommand.builder()
-                        .userId(jwt.getClaim("sub"))
+                SocialLoginUserCommand.builder()
                         .provider(socialLoginUserCommand.getProvider())
                         .accessToken(socialLoginUserCommand.getAccessToken())
-                        .email(jwt.getClaim("email"))
-                        .firstName(jwt.getClaim("given_name"))
-                        .lastName(jwt.getClaim("family_name"))
-                        .avatarUrl(jwt.getClaim("picture"))
-                .build());
+                        .build());
         return ResponseEntity.status(HttpStatus.OK).body(loginUserResponse);
     }
 
-    @PostMapping("/refresh_token")
+    @PostMapping("/refresh-token")
     @Operation(summary = "Refresh token user.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {

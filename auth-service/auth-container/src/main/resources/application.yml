@@ -139,11 +139,13 @@ jwt:
 
 keycloak:
   realm: spring-boot-realm-dev
-  google-realm: google-realm-dev
+  google-url: https://www.googleapis.com
+  microsoft-url: https://graph.microsoft.com
   domain: localhost:8890
   admin-client-id: admin-cli
   admin-client-secret: bTEi5t1OKE7l97ij9wYjAMqqYA4NCod8
   client: spring-client-api-rest
+  authentication-client-id: authenticationClientId
   google-client: google-authentication-client
   client-secret: pE2Lz9RL01YGE15800wDxRfnz2KFuCgX
   urls: http://${keycloak.domain}

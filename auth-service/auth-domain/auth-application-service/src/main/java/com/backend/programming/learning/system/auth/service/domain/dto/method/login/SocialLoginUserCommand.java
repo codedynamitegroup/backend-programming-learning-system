@@ -13,8 +13,5 @@ public class SocialLoginUserCommand {
     private final String accessToken;
 
     @NotNull
-    private final String idToken;
-
-    @NotNull
     private final String provider;
 }

@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.auth.service.domain.mapper;
 
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateSocialLoginUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
@@ -42,6 +43,17 @@ public class UserDataMapper {
                 .build();
     }
 
+    public User createSocialLoginUserCommandToUser(CreateSocialLoginUserCommand createSocialLoginUserCommand) {
+        return User.builder()
+                .email(createSocialLoginUserCommand.getEmail())
+                .username(createSocialLoginUserCommand.getUsername())
+                .firstName(createSocialLoginUserCommand.getFirstName())
+                .lastName(createSocialLoginUserCommand.getLastName())
+                .avatarUrl(createSocialLoginUserCommand.getAvatarUrl())
+                .isLinkedWithGoogle(createSocialLoginUserCommand.getProvider().equals("google"))
+                .isLinkedWithMicrosoft(createSocialLoginUserCommand.getProvider().equals("microsoft"))
+                .build();
+    }
     public CreateUserResponse userToCreateUserResponse(User user, String message) {
         return CreateUserResponse.builder()
                 .userId(user.getId().getValue())

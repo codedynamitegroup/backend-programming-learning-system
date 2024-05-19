@@ -23,7 +23,7 @@ public class TokenService {
             JwtDecoder decoder = jwtDecoderConfig.getDecoder(provider);
             return decoder.decode(token);
         } catch (JwtException e) {
-            throw new AuthDomainException("Invalid token", e);
+            throw new AuthDomainException("Invalid token: " +  e.getMessage());
         }
     }
 }
