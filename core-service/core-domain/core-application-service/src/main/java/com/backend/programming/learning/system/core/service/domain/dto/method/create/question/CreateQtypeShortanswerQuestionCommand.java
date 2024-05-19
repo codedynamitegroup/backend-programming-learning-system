@@ -24,8 +24,10 @@ public class CreateQtypeShortanswerQuestionCommand extends  CreateQuestionComman
             @NotNull(message = "Difficulty by is required") String difficulty,
             @NotNull(message = "Name is required") String name,
             @NotNull(message = "Question text is required") String questionText,
-            @NotNull(message = "General feedback is required") String generalFeedback,
-            @NotNull(message = "Default mark is required") @DecimalMin(value = "0.0", inclusive = false, message = "Default mark must be greater than 0") @Digits(integer = 5, fraction = 2, message = "Default mark must have up to 5 digits and 2 decimals") BigDecimal defaultMark,
+            String generalFeedback,
+            @NotNull(message = "Default mark is required")
+            @DecimalMin(value = "0.0", message = "Default mark must be greater than or equal 0")
+            @Digits(integer = 5, fraction = 2, message = "Default mark must have up to 5 digits and 2 decimals") BigDecimal defaultMark,
             @NotNull(message = "Question type is required") String qType,
             @NotNull(message = "Answers is required") List<AnswerOfQuestion> answers, Boolean caseSensitive) {
         super(organizationId,

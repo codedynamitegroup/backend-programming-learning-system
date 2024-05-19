@@ -76,6 +76,8 @@ public class QuestionDataMapper {
 
     public List<AnswerOfQuestion> answerOfQuestionListToAnswerOfQuestionEntityList(List<com.backend.programming.learning.system.core.service.domain.dto.method.create.question.AnswerOfQuestion> answerOfQuestions
             , QuestionId questionId) {
+        if (answerOfQuestions == null) return null;
+
         return List.of(answerOfQuestions.stream()
                 .map(answerOfQuestion -> AnswerOfQuestion.builder()
                         .questionId(questionId)
@@ -263,6 +265,8 @@ public class QuestionDataMapper {
     }
 
     private List<QuestionEventAnswer> answerOfQuestionListToQuestionEventAnswerList(List<AnswerOfQuestion> answerOfQuestions) {
+        if (answerOfQuestions == null) return null;
+
         return List.of(answerOfQuestions.stream()
                 .map(this::answerOfQuestionToQuestionEventAnswer)
                 .toArray(QuestionEventAnswer[]::new));

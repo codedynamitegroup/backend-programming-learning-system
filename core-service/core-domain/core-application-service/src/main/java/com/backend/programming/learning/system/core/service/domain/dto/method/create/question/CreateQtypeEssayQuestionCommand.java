@@ -20,32 +20,19 @@ public class CreateQtypeEssayQuestionCommand extends CreateQuestionCommand{
     @NotNull(message = "Response field lines is required")
     private final Integer responseFieldLines;
 
-    @NotNull(message = "Min word limit is required")
-    @Max(value = 1000, message = "Min word limit must be between 1 and 1000")
-    @Min(value = 1, message = "Min word limit must be between 1 and 1000")
+    @Min(value = -1, message = "Min word limit must be between 1 and 1000 and equal -1 if unlimited")
     private final Integer minWordLimit;
 
-    @NotNull(message = "Max word limit is required")
-    @Max(value = 1000, message = "Max word limit must be between 1 and 1000")
-    @Min(value = 1, message = "Max word limit must be between 1 and 1000")
+    @Min(value = -1, message = "Max word limit must be between 1 and 1000")
     private final Integer maxWordLimit;
 
     @NotNull(message = "Attachments is required")
     private final Integer attachments;
 
-    @NotNull(message = "Attachments required is required")
     private final Integer attachmentsRequired;
-
-    @NotNull(message = "Grader info is required")
     private final String graderInfo;
-
-    @NotNull(message = "Grader info format is required")
     private final String graderInfoFormat;
-
-    @NotNull(message = "Response template is required")
     private final String responseTemplate;
-
-    @NotNull(message = "Max bytes is required")
     private final Integer maxBytes;
 
     @NotNull(message = "File types list is required")
@@ -59,8 +46,9 @@ public class CreateQtypeEssayQuestionCommand extends CreateQuestionCommand{
             @NotNull(message = "Difficulty by is required") String difficulty,
             @NotNull(message = "Name is required") String name,
             @NotNull(message = "Question text is required") String questionText,
-            @NotNull(message = "General feedback is required") String generalFeedback,
-            @NotNull(message = "Default mark is required") @DecimalMin(value = "0.0", inclusive = false, message = "Default mark must be greater than 0") @Digits(integer = 5, fraction = 2, message = "Default mark must have up to 5 digits and 2 decimals") BigDecimal defaultMark,
+            String generalFeedback,
+            @NotNull(message = "Default mark is required") @DecimalMin(value = "0.0", message = "Default mark must be greater than or equal 0")
+            @Digits(integer = 5, fraction = 2, message = "Default mark must have up to 5 digits and 2 decimals") BigDecimal defaultMark,
             @NotNull(message = "Question type is required") String qType,
             @NotNull(message = "Answers is required") List<AnswerOfQuestion> answers,
             String responseFormat,

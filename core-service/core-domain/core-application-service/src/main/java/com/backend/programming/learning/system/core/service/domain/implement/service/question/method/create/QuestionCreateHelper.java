@@ -54,12 +54,14 @@ public class QuestionCreateHelper {
         coreDomainService.createQuestion(question);
         saveQuestion(question);
 
-        // save answer
         List<AnswerOfQuestion> answerEntityList = questionDataMapper.answerOfQuestionListToAnswerOfQuestionEntityList(createQuestionCommand.getAnswers(), question.getId());
 
-        for (AnswerOfQuestion answerOfQuestion : answerEntityList) {
-            coreDomainService.createAnswerOfQuestion(answerOfQuestion);
-            saveAnswer(answerOfQuestion);
+        // save answer
+        if(answerEntityList != null ) {
+            for (AnswerOfQuestion answerOfQuestion : answerEntityList) {
+                coreDomainService.createAnswerOfQuestion(answerOfQuestion);
+                saveAnswer(answerOfQuestion);
+            }
         }
 
         log.info("Answers for question with id {} saved", question.getId().getValue());

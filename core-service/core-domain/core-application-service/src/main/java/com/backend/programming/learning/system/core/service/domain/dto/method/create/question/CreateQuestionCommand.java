@@ -31,17 +31,15 @@ public class CreateQuestionCommand {
     @NotNull(message = "Question text is required")
     private final String questionText;
 
-    @NotNull(message = "General feedback is required")
     private final String generalFeedback;
 
     @NotNull(message = "Default mark is required")
-    @DecimalMin(value = "0.0", inclusive = false, message = "Default mark must be greater than 0")
+    @DecimalMin(value = "0.0", message = "Default mark must be greater than or equal 0")
     @Digits(integer = 5, fraction = 2, message = "Default mark must have up to 5 digits and 2 decimals")
     private final BigDecimal defaultMark;
 
     @NotNull(message = "Question type is required")
     private final String qType;
 
-    @NotNull(message = "Answers is required")
     private List<AnswerOfQuestion> answers;
 }
