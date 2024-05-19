@@ -109,7 +109,13 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
         List<UUID> tagEntityId = tagIds == null? null: tagIds.stream().map(BaseId::getValue).toList();
 
         Page<CodeQuestionEntity> codeQuestionEntityPageable =
-                codeQuestionJpaRepository.findAndFilterByTagIds(tagEntityId, search, difficulty, solved, userId.getValue(), pageable);
+                codeQuestionJpaRepository.findAndFilterByTagIds(
+                        tagEntityId,
+                        search,
+                        difficulty,
+                        solved,
+                        userId != null? userId.getValue(): null,
+                        pageable);
 
         Page<CodeQuestion> codeQuestions = codeQuestionEntityPageable.map(item->{
             //if userId == null then done = false
