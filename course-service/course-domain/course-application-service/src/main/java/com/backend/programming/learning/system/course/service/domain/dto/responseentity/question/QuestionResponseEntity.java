@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.course.service.domain.dto.respon
 import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
 import lombok.Builder;
 
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 /**
@@ -13,13 +14,15 @@ import java.util.UUID;
  */
 @Builder
 public record QuestionResponseEntity(
-        UUID questionId,
+        UUID id,
         UUID organizationId,
         QuestionDifficulty difficulty,
         String name,
         String questionText,
         String generalFeedback,
         float defaultMark,
+        ZonedDateTime createdAt,
+        ZonedDateTime updatedAt,
         String message
 ) {
 }

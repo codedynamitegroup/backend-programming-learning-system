@@ -49,6 +49,8 @@ public class Question extends AggregateRoot<QuestionId> {
 
     public void initializeQuestion() {
         setId(new QuestionId(UUID.randomUUID()));
+        createdAt = ZonedDateTime.now();
+        updatedAt = ZonedDateTime.now();
     }
 
     public Organization getOrganization() {

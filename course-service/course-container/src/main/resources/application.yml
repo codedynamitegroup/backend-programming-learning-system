@@ -55,13 +55,13 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/course-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: postgres
-    password: localdb
+    password: postgres
     driver-class-name: org.postgresql.Driver
 
   sql:
     init:
       platform: postgres
-      mode: always
+      mode: never
       data-locations: classpath:init-data.sql
       schema-locations: classpath:init-schema.sql
 
