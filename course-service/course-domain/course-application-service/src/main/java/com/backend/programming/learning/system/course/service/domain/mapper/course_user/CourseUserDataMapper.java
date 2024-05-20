@@ -33,6 +33,13 @@ public class CourseUserDataMapper {
     }
 
     public CourseUserResponseEntity courseUsersToCourseUserResponseEntity(List<CourseUser> courseUsers) {
+        if(courseUsers.isEmpty()) {
+            return CourseUserResponseEntity.builder()
+                    .course(null)
+                    .users(null)
+                    .build();
+        }
+
         return CourseUserResponseEntity.builder()
                 .course(courseUsers.get(0).getCourse())
                 .users(courseUsers.stream()

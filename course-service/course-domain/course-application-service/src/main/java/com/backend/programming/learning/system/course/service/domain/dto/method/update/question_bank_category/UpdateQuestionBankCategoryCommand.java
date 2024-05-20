@@ -13,6 +13,8 @@ import jakarta.validation.constraints.NotNull;
 @Builder
 public record UpdateQuestionBankCategoryCommand(
         @NotNull(message = "Question Bank Category Id is required")
-        String name
+        String name,
+        @NotNull(message = "Description is required")
+        String description
 ) {
 }

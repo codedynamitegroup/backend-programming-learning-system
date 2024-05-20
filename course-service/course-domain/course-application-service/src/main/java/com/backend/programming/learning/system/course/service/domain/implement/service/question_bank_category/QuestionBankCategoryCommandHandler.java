@@ -29,6 +29,7 @@ public class QuestionBankCategoryCommandHandler {
     private final QuestionBankCategoryCreateHelper questionBankCategoryCreateHelper;
     private final QuestionBankCategoryQueryHelper questionBankCategoryQueryHelper;
     private final QuestionBankCategoryUpdateHelper questionBankCategoryUpdateHelper;
+    private final QuestionBankCategoryDeleteHelper questionBankCategoryDeleteHelper;
     private final QuestionBankCategoryDataMapper questionBankCategoryDataMapper;
     @Transactional
     public CreateQuestionBankCategoryResponse createQuestionBankCategory(CreateQuestionBankCategoryCommand createQuestionBankCategoryCommand) {
@@ -59,5 +60,11 @@ public class QuestionBankCategoryCommandHandler {
         QuestionBankCategory questionBankCategory = questionBankCategoryUpdateHelper
                 .updateQuestionBankCategory(questionBankCategoryId, updateQuestionBankCategoryCommand);
         return questionBankCategoryDataMapper.questionBankCategoryToUpdateQuestionBankCategoryResponse(questionBankCategory);
+    }
+
+    @Transactional
+    public void deleteQuestionBankCategory(QuestionBankCategoryId questionBankCategoryId) {
+        log.info("Deleting question bank category");
+        questionBankCategoryDeleteHelper.deleteQuestionBankCategory(questionBankCategoryId);
     }
 }

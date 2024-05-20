@@ -22,6 +22,7 @@ public class QuestionBankCategoryUpdateHelper {
     public QuestionBankCategory updateQuestionBankCategory(QuestionBankCategoryId questionBankCategoryId, UpdateQuestionBankCategoryCommand updateQuestionBankCategoryCommand) {
         QuestionBankCategory questionBankCategory = questionBankCategoryRepository.findById(questionBankCategoryId.getValue());
         questionBankCategory.setName(updateQuestionBankCategoryCommand.name());
+        questionBankCategory.setDescription(updateQuestionBankCategoryCommand.description());
         return questionBankCategoryRepository.save(questionBankCategory);
     }
 }

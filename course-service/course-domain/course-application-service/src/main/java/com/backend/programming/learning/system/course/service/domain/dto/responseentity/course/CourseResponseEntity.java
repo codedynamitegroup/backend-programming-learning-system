@@ -4,11 +4,10 @@ import com.backend.programming.learning.system.course.service.domain.entity.Cour
 import com.backend.programming.learning.system.course.service.domain.entity.CourseType;
 import com.backend.programming.learning.system.course.service.domain.entity.Organization;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -22,7 +21,7 @@ import java.util.UUID;
 public record CourseResponseEntity(
         UUID id,
         Integer courseIdMoodle,
-
+        List<UserCourseEntity> teachers,
         Organization organization,
         String name,
         CourseType courseType,
