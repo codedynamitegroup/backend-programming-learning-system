@@ -23,4 +23,10 @@ public class CourseUserQueryHelper {
         log.info("Course user found successfully");
         return courseUser;
     }
+
+    public List<CourseUser> findByCourseIdAndRoleTeacher(UUID courseId) {
+        List<CourseUser> courseUser = courseUserRepository.findByCourseIdAndRoleTeacher(courseId);
+        log.info("Course user found successfully");
+        return courseUser;
+    }
 }

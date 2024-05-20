@@ -66,7 +66,8 @@ public class CourseDataMapper {
         List<UserCourseEntity> teachers = course.getTeachers().stream()
                 .map(user -> UserCourseEntity.builder()
                         .userId(user.getId().getValue())
-                        .name(user.getName())
+                        .firstName(user.getFirstName())
+                        .lastName(user.getLastName())
                         .build())
                 .toList();
         return CourseResponseEntity.builder()

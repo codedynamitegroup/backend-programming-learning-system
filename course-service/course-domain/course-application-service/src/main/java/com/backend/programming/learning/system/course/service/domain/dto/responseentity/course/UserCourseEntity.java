@@ -13,6 +13,7 @@ import java.util.UUID;
 @Builder
 public record UserCourseEntity(
         UUID userId,
-        String name
+        String firstName,
+        String lastName
 ) {
 }

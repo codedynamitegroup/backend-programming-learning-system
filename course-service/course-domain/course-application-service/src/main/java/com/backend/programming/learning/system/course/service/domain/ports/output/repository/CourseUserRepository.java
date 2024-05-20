@@ -15,4 +15,6 @@ public interface CourseUserRepository {
 
     void deleteByCourseIdAndUserIdIn(UUID courseId, List<UUID> userIds);
     void deleteByCourseIdAndUserId(UUID courseId, UUID userIds);
+
+    List<CourseUser> findByCourseIdAndRoleTeacher(UUID courseId);
 }

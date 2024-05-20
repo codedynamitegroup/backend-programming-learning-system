@@ -15,7 +15,6 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
 import com.backend.programming.learning.system.course.service.domain.implement.service.course_user.CourseUserCommandHandler;
 import com.backend.programming.learning.system.course.service.domain.mapper.course.CourseDataMapper;
-import com.backend.programming.learning.system.course.service.domain.mapper.course_user.CourseUserDataMapper;
 import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -59,7 +58,7 @@ public class CourseCommandHandler {
 
         courses.forEach(course -> {
             Optional<CourseUserResponseEntity> courseUsers = Optional.ofNullable(courseUserCommandHandler
-                    .queryAllByCourseId(new QueryCourseUserCommand(course.getId().getValue())));
+                    .queryAllByCourseIdAndRoleTeacher(new QueryCourseUserCommand(course.getId().getValue())));
             course.setTeachers(courseUsers.map(CourseUserResponseEntity::getUsers).orElse(List.of()));
         });
         log.info("Returning all courses: {}", courses);

@@ -7,7 +7,6 @@ import com.backend.programming.learning.system.course.service.domain.ports.outpu
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -47,5 +46,11 @@ public class CourseUserRepositoryImpl implements CourseUserRepository {
     @Override
     public void deleteByCourseIdAndUserId(UUID courseId, UUID userId) {
         courseUserJpaRepository.deleteByCourseIdAndUserId(courseId, userId);
+    }
+
+    @Override
+    public List<CourseUser> findByCourseIdAndRoleTeacher(UUID courseId) {
+        return courseUserDataAccessMapper
+                .courseUserToCourseUserEntityList(courseUserJpaRepository.findByCourseIdAndRoleTeacher(courseId));
     }
 }
