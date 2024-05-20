@@ -7,18 +7,23 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.course.QueryAllCourseCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.course.QueryAllCourseResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.course.QueryCourseCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryCourseUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.course.UpdateCourseCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.course.UpdateCourseResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.CourseResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course_user.CourseUserResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
+import com.backend.programming.learning.system.course.service.domain.implement.service.course_user.CourseUserCommandHandler;
 import com.backend.programming.learning.system.course.service.domain.mapper.course.CourseDataMapper;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -36,7 +41,7 @@ public class CourseCommandHandler {
     private final CourseDeleteHelper courseDeleteHelper;
     private final CourseUpdateHelper courseUpdateHelper;
     private final CourseDataMapper courseDataMapper;
-    private final CourseRepository courseRepository;
+    private final CourseUserCommandHandler courseUserCommandHandler;
 
     public CreateCourseResponse createCourse(CreateCourseCommand createCourseCommand) {
         Course course = courseCreateHelper.createCourse(createCourseCommand);
@@ -50,6 +55,12 @@ public class CourseCommandHandler {
                 queryAllCourseCommand.getSearch(),
                 queryAllCourseCommand.getPageNo(),
                 queryAllCourseCommand.getPageSize());
+
+        courses.forEach(course -> {
+            Optional<CourseUserResponseEntity> courseUsers = Optional.ofNullable(courseUserCommandHandler
+                    .queryAllByCourseIdAndRoleTeacher(new QueryCourseUserCommand(course.getId().getValue())));
+            course.setTeachers(courseUsers.map(CourseUserResponseEntity::getUsers).orElse(List.of()));
+        });
         log.info("Returning all courses: {}", courses);
         return courseDataMapper.coursesToQueryAllCourseResponse(courses);
     }

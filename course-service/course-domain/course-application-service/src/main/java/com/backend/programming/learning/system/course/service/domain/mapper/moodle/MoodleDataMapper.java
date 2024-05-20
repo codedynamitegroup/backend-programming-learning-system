@@ -171,8 +171,8 @@ public class MoodleDataMapper {
                 .dob(user.getDob())
                 .firstName(userModel.getFirstname())
                 .lastName(userModel.getLastname())
-//                .phone(userModel.getPhone1())
-//                .address(userModel.getAddress())
+                .phone(userModel.getPhone1())
+                .address(userModel.getAddress())
                 .avatarUrl(userModel.getProfileimageurl())
                 .build();
     }
@@ -185,7 +185,7 @@ public class MoodleDataMapper {
                 .password("")
                 .firstName(userModel.getFirstname())
                 .lastName(userModel.getLastname())
-//                .phone(userModel.getPhone1())
+                .phone(userModel.getPhone1())
                 .build();
     }
 
