@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.dto.responseentity.course;
 
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course_type.CourseTypeResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
 import com.backend.programming.learning.system.course.service.domain.entity.CourseType;
 import com.backend.programming.learning.system.course.service.domain.entity.Organization;
@@ -24,7 +25,7 @@ public record CourseResponseEntity(
         List<UserCourseEntity> teachers,
         Organization organization,
         String name,
-        CourseType courseType,
+        CourseTypeResponseEntity courseType,
         Boolean visible,
         UserId createdBy,
         UserId updatedBy,

@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.course.UpdateCourseResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.CourseResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.UserCourseEntity;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course_type.CourseTypeResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.CourseModel;
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
 import com.backend.programming.learning.system.course.service.domain.entity.CourseType;
@@ -70,13 +71,18 @@ public class CourseDataMapper {
                         .lastName(user.getLastName())
                         .build())
                 .toList();
+        CourseTypeResponseEntity courseType = CourseTypeResponseEntity.builder()
+                .courseTypeId(course.getCourseType().getId().getValue())
+                .name(course.getCourseType().getName())
+                .moodleId(course.getCourseType().getMoodleId())
+                .build();
         return CourseResponseEntity.builder()
                 .id(course.getId().getValue())
                 .courseIdMoodle(course.getCourseIdMoodle())
                 .teachers(teachers)
                 .organization(course.getOrganization())
                 .name(course.getName())
-                .courseType(course.getCourseType())
+                .courseType(courseType)
                 .visible(course.getVisible())
                 .createdBy(course.getCreatedBy().getId())
                 .updatedBy(course.getUpdatedBy().getId())
