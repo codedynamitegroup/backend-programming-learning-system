@@ -3,12 +3,16 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.course_user.CreateCourseUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.course_user.CreateCourseUserResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.course_user.DeleteCourseUserCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryAllCourseUserCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryAllCourseUserResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryCourseUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course_user.CourseUserResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.CourseUser;
 import com.backend.programming.learning.system.course.service.domain.mapper.course_user.CourseUserDataMapper;
+import com.backend.programming.learning.system.course.service.domain.valueobject.CourseUserId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,5 +56,15 @@ public class CourseUserCommandHandler {
     public CourseUserResponseEntity queryAllByCourseIdAndRoleTeacher(QueryCourseUserCommand queryCourseUserCommand) {
         List<CourseUser> courseUsers = courseUserQueryHelper.findByCourseIdAndRoleTeacher(queryCourseUserCommand.getCourseId());
         return courseUserDataMapper.courseUsersToCourseUserResponseEntity(courseUsers);
+    }
+
+    @Transactional(readOnly = true)
+    public QueryAllCourseUserResponse queryAllUserByCourseId(CourseUserId courseUserId, QueryAllCourseUserCommand queryAllCourseUserCommand) {
+        Page<CourseUser> courseUsers = courseUserQueryHelper.findAllUserByCourseId(
+                courseUserId.getValue(),
+                queryAllCourseUserCommand.getSearch(),
+                queryAllCourseUserCommand.getPageNo(),
+                queryAllCourseUserCommand.getPageSize());
+        return courseUserDataMapper.courseUsersToQueryAllCourseUserResponse(courseUsers);
     }
 }

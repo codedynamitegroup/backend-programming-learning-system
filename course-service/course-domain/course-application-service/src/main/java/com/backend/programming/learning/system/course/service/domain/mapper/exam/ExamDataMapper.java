@@ -65,6 +65,7 @@ public class ExamDataMapper {
         return ExamResponseEntity.builder()
                 .id(exam.getId().getValue())
                 .courseId(exam.getCourse().getId().getValue())
+                .courseName(exam.getCourse().getName())
                 .shuffleAnswers(exam.getShuffleAnswers())
                 .name(exam.getName())
                 .scores(exam.getScore())

@@ -10,6 +10,7 @@ import com.backend.programming.learning.system.course.service.dataaccess.user.ma
 import com.backend.programming.learning.system.course.service.domain.entity.CourseUser;
 import com.backend.programming.learning.system.course.service.domain.valueobject.CourseUserId;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -59,5 +60,9 @@ public class CourseUserDataAccessMapper {
         return byCourseId.stream()
                 .map(this::courseUserEntityToCourseUser)
                 .toList();
+    }
+
+    public Page<CourseUser> courseUserPageToCourseUserPage(Page<CourseUserEntity> allUserByCourseId) {
+        return allUserByCourseId.map(this::courseUserEntityToCourseUser);
     }
 }

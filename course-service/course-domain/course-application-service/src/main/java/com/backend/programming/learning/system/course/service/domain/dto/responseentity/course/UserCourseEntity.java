@@ -14,6 +14,8 @@ import java.util.UUID;
 public record UserCourseEntity(
         UUID userId,
         String firstName,
-        String lastName
+        String lastName,
+        String email,
+        String role
 ) {
 }
