@@ -10,7 +10,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.response_
 import jakarta.validation.Valid;
 
 public interface UserRoleApplicationService {
-    CreateUserRoleResponse createUserRole(@Valid CreateUserRoleCommand createUserRoleCommand, String token);
+    CreateUserRoleResponse createUserRole(@Valid CreateUserRoleCommand createUserRoleCommand);
     UserRoleEntityResponse findUserRoleByRoleIdAndUserId(@Valid QueryUserRoleCommand queryOrganizationCommand);
     DeleteUserRoleResponse deleteUserRoleByRoleIdAndUserId(@Valid DeleteUserRoleCommand deleteUserRoleCommand);
 }

@@ -44,6 +44,16 @@ public class UserQueryHelper {
     public Page<User> queryAllUsersByOrganization(UUID organizationId, Integer pageNo, Integer pageSize) {
         return userRepository.findAllUsersByOrganization(organizationId, pageNo, pageSize);
     }
+
+    @Transactional(readOnly = true)
+    public User queryUserByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> {
+                    log.warn("Could not find user with email: {}", email);
+                    return new AuthNotFoundException("Could not find user with email: " +
+                            email);
+                });
+    }
 }
 
 

@@ -23,8 +23,8 @@ public class UserRoleCommandHandler {
     private final UserRoleQueryHelper userRoleQueryHelper;
 
     @Transactional
-    public CreateUserRoleResponse createUserRole(CreateUserRoleCommand createUserRoleCommand, String token) {
-        UserRole userRoleCreated = userRoleCreateHelper.persistUserRole(createUserRoleCommand, token);
+    public CreateUserRoleResponse createUserRole(CreateUserRoleCommand createUserRoleCommand) {
+        UserRole userRoleCreated = userRoleCreateHelper.persistUserRole(createUserRoleCommand);
         log.info("User role is created with id: {}", userRoleCreated.getId().getValue());
         return userRoleDataMapper.userRoleToCreateUserRoleResponse(userRoleCreated,
                 "User role created successfully");

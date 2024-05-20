@@ -31,6 +31,8 @@ public class UserEntity {
     private String avatarUrl;
     private String refreshToken;
     private String lastIp;
+    private Boolean isLinkedWithGoogle;
+    private Boolean isLinkedWithMicrosoft;
     private ZonedDateTime lastLogin;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;

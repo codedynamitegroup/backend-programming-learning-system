@@ -33,19 +33,19 @@ public class RoleKeycloakApplicationServiceImpl implements RoleKeycloakApplicati
     }
 
     @Override
-    public void assignRole(String email, String roleName, String token) {
-        UsersResource usersResource = keycloakUserService.getUsersResource(token);
+    public void assignRole(String email, String roleName) {
+        UsersResource usersResource = keycloakUserService.getUsersResource();
         List<UserRepresentation> userRepresentation = usersResource.searchByUsername(email, true);
         if (userRepresentation.isEmpty()) {
             log.error("User not found");
             throw new AuthNotFoundException("User not found");
         }
         UserRepresentation user = userRepresentation.get(0);
-        RolesResource rolesResource = getRolesResource(token);
+        RolesResource rolesResource = getRolesResource();
         RoleRepresentation representation = rolesResource.get(roleName).toRepresentation();
         usersResource.get(user.getId()).roles().realmLevel().add(Collections.singletonList(representation));
     }
-    public RolesResource getRolesResource(String token) {
-        return keycloakProvider.getRealmResource(token).realm(keycloakConfigData.getRealm()).roles();
+    public RolesResource getRolesResource() {
+        return keycloakProvider.getRealmResource().realm(keycloakConfigData.getRealm()).roles();
     }
 }

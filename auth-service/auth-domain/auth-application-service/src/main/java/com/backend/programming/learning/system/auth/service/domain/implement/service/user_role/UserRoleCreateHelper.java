@@ -33,7 +33,7 @@ public class UserRoleCreateHelper {
     private final RoleKeycloakApplicationService roleKeycloakApplicationService;
 
     @Transactional
-    public UserRole persistUserRole(CreateUserRoleCommand createUserRoleCommand, String token) {
+    public UserRole persistUserRole(CreateUserRoleCommand createUserRoleCommand) {
         User createdBy = getUser(createUserRoleCommand.getCreatedBy());
         User user = getUser(createUserRoleCommand.getUserId());
         Role role = getRole(createUserRoleCommand.getRoleId());
@@ -45,7 +45,7 @@ public class UserRoleCreateHelper {
         userRole.setUpdatedBy(createdBy);
 
         authDomainService.createUserRole(userRole);
-        roleKeycloakApplicationService.assignRole(user.getEmail(), role.getName(), token);
+        roleKeycloakApplicationService.assignRole(user.getEmail(), role.getName());
         return saveUserRole(userRole);
     }
 

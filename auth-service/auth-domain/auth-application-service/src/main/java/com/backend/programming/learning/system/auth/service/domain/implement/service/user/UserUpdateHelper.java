@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.auth.service.domain.event.user.Us
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserKeycloakApplicationService;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
+import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -31,9 +32,9 @@ public class UserUpdateHelper {
     }
 
     @Transactional
-    public UserUpdatedEvent persistUser(UpdateUserCommand updateUserCommand, String token) {
+    public UserUpdatedEvent persistUser(UpdateUserCommand updateUserCommand) {
         User user = getUser(updateUserCommand.getUserId());
-        user.setUpdatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
+        user.setUpdatedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
 
         if (updateUserCommand.getDob() != null) {
             user.setDob(updateUserCommand.getDob());
@@ -57,7 +58,7 @@ public class UserUpdateHelper {
         UserUpdatedEvent userUpdatedEvent = authDomainService.updateUser(user);
 
         User userSaved = saveUser(user);
-        keycloakApplicationService.updateUser(userSaved, token);
+        keycloakApplicationService.updateUser(userSaved);
         return userUpdatedEvent;
     }
 
