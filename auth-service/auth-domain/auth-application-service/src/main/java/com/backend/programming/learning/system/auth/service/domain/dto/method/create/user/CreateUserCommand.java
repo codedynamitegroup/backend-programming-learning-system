@@ -16,7 +16,6 @@ public class CreateUserCommand {
     @Email
     private final String email;
 
-    @NotNull
     private final String username;
 
     private final UUID organizationId;

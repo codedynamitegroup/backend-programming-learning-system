@@ -7,10 +7,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.de
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.SocialLoginUserCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersByOrganizationCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryUserByIdCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.*;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
@@ -86,7 +83,14 @@ public class UserCommandHandler {
     @Transactional(readOnly = true)
     public UserEntityResponse queryUser(QueryUserByIdCommand queryUserCommand) {
         User user = userQueryHelper.queryUser(queryUserCommand.getUserId());
-        log.info("Role is queried with id: {}", queryUserCommand.getUserId());
+        log.info("User is queried with id: {}", queryUserCommand.getUserId());
+        return userDataMapper.userToUserResponse(user);
+    }
+
+    @Transactional(readOnly = true)
+    public UserEntityResponse queryUserByEmail(QueryUserByEmailCommand queryUserByEmailCommand) {
+        User user = userQueryHelper.queryUserByEmail(queryUserByEmailCommand.getEmail());
+        log.info("User is queried with email: {}", queryUserByEmailCommand.getEmail());
         return userDataMapper.userToUserResponse(user);
     }
 

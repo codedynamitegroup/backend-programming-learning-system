@@ -33,6 +33,7 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET, "/auth/users").hasAnyRole(ADMIN, USER)
+                        .requestMatchers(HttpMethod.GET, "/auth/users/get-by-email/:email").hasAnyRole(ADMIN, USER)
                         .requestMatchers(HttpMethod.DELETE, "/auth/users/:id").hasRole(ADMIN)
                         .requestMatchers(HttpMethod.PUT, "/auth/users/:id").hasRole(ADMIN)
                         .requestMatchers(HttpMethod.GET, "/auth/users/search").hasAnyRole(ADMIN, USER)

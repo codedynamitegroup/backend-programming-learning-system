@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.auth.service.application.rest;
 
-import com.backend.programming.learning.system.auth.service.application.utils.TokenService;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserCommand;
@@ -8,10 +7,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.de
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.SocialLoginUserCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersByOrganizationCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryUserByIdCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.*;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
@@ -39,11 +35,9 @@ import java.util.UUID;
 @RequestMapping(value = "/auth/users", produces = "application/vnd.api.v1+json")
 public class UserController {
     private final UserApplicationService userApplicationService;
-    private final TokenService tokenService;
-    public UserController(UserApplicationService userApplicationService, TokenService tokenService) {
-        this.userApplicationService = userApplicationService;
-        this.tokenService = tokenService;
 
+    public UserController(UserApplicationService userApplicationService) {
+        this.userApplicationService = userApplicationService;
     }
 
     @PostMapping
@@ -59,6 +53,22 @@ public class UserController {
         log.info("Creating user with email: {}", createUserCommand.getEmail());
         CreateUserResponse createUserResponse = userApplicationService.createUser(createUserCommand);
         log.info("User created with email: {}", createUserResponse.getEmail());
+        return ResponseEntity.status(HttpStatus.CREATED).body(createUserResponse);
+    }
+
+    @PostMapping("/register")
+    @Operation(summary = "Register user.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateUserResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<CreateUserResponse> registeredUser(@RequestBody CreateUserCommand createUserCommand) {
+        log.info("Registering user with email: {}", createUserCommand.getEmail());
+        CreateUserResponse createUserResponse = userApplicationService.createUser(createUserCommand);
+        log.info("User Registered with email: {}", createUserResponse.getEmail());
         return ResponseEntity.status(HttpStatus.CREATED).body(createUserResponse);
     }
 
@@ -134,6 +144,22 @@ public class UserController {
                userApplicationService.findUserById(QueryUserByIdCommand.builder().userId(id).build());
        log.info("Returning user with id: {}", user.getUserId());
        return  ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/get-by-email/{email}")
+    @Operation(summary = "Get user by email.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = UserEntityResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<UserEntityResponse> getUserByEmail(@PathVariable String email) {
+        UserEntityResponse user =
+                userApplicationService.findUserByEmail(QueryUserByEmailCommand.builder().email(email).build());
+        log.info("Returning user with id: {}", user.getUserId());
+        return  ResponseEntity.ok(user);
     }
 
     @GetMapping

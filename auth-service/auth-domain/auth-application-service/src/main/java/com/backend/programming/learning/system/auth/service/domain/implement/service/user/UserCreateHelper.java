@@ -41,6 +41,8 @@ public class UserCreateHelper {
         findUserWithEmail(createUserCommand.getEmail());
         findOrganization(createUserCommand.getOrganizationId());
         User user = authDataMapper.createUserCommandToUser(createUserCommand);
+        user.setLinkedWithMicrosoft(false);
+        user.setLinkedWithGoogle(false);
         UserCreatedEvent userCreatedEvent = authDomainService.createUser(user);
         saveUser(user);
         keycloakApplicationService.createUser(createUserCommand);

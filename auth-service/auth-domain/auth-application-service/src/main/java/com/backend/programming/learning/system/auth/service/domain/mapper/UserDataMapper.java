@@ -118,6 +118,8 @@ public class UserDataMapper {
                 .updatedAt(user.getUpdatedAt())
                 .organization(organizationEntityResponse)
                 .isDeleted(user.getDeleted())
+                .isLinkedWithGoogle(user.getLinkedWithGoogle())
+                .isLinkedWithMicrosoft(user.getLinkedWithMicrosoft())
                 .build();
     }
 
