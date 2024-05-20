@@ -47,4 +47,10 @@ public class CourseUserCommandHandler {
         List<CourseUser> courseUsers = courseUserQueryHelper.findByCourseId(queryCourseUserCommand.getCourseId());
         return courseUserDataMapper.courseUsersToCourseUserResponseEntity(courseUsers);
     }
+
+    @Transactional(readOnly = true)
+    public CourseUserResponseEntity queryAllByCourseIdAndRoleTeacher(QueryCourseUserCommand queryCourseUserCommand) {
+        List<CourseUser> courseUsers = courseUserQueryHelper.findByCourseIdAndRoleTeacher(queryCourseUserCommand.getCourseId());
+        return courseUserDataMapper.courseUsersToCourseUserResponseEntity(courseUsers);
+    }
 }
