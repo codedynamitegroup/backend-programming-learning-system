@@ -34,6 +34,7 @@ public class CodeSubmissionDataAccessMapper {
                 .sourceCode(codeSubmission.getSourceCode())
                 .grade(codeSubmission.getGrade())
                 .pass(codeSubmission.getPass())
+                .createdAt(codeSubmission.getCreatedAt())
                 .build();
     }
 
@@ -46,6 +47,7 @@ public class CodeSubmissionDataAccessMapper {
                 .sourceCode(codeSubmissionEntity.getSourceCode())
                 .grade(codeSubmissionEntity.getGrade())
                 .pass(codeSubmissionEntity.getPass())
+                .createdAt(codeSubmissionEntity.getCreatedAt())
                 .build();
     }
 

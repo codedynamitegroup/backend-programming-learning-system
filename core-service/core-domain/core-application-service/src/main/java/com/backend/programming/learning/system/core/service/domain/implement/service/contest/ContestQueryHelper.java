@@ -1,13 +1,10 @@
 package com.backend.programming.learning.system.core.service.domain.implement.service.contest;
 
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest_user.ContestUserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
-import com.backend.programming.learning.system.core.service.domain.exception.CertificateCourseNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.ContestNotFoundException;
-import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.ContestStartTimeFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -111,6 +108,31 @@ public class ContestQueryHelper {
     public int countAllContests() {
         log.info("Counting all contests");
         return contestRepository.countAllContests();
+    }
+
+    @Transactional(readOnly = true)
+    public Page<ContestUserResponseEntity> queryLeaderboardOfContest(
+            UUID contestId,
+            Integer pageNo,
+            Integer pageSize
+    ) {
+        Page<ContestUser> contestLeaderboardResponseEntities
+                = contestUserRepository.findAllContestUsersOfLeaderboard(
+                        contestId, pageNo, pageSize);
+        log.info("Leaderboard of contest with id: {} queried", contestId);
+        return null;
+    }
+
+    @Transactional(readOnly = true)
+    public ContestUserResponseEntity queryMyRankOfContest(
+            UUID contestId,
+            String email
+    ) {
+        Optional<User> userResult = userRepository.findByEmail(email);
+        if (userResult.isEmpty()) {
+            return null;
+        }
+        return null;
     }
 
     private List<ContestQuestion> getAllContestQuestionsForContest(UUID contestId) {

@@ -124,7 +124,13 @@ VALUES
     ('b6484e21-6937-489c-b031-b71767994746', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'HARD', 'Templates', 'Learn how to use templates in C++.', 'Question Good Job feedback', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
     ('b6484e21-6937-489c-b031-b71767994747', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'EASY', 'STL', 'Learn how to use the Standard Template Library (STL) in C++.', 'Question Good Job feedback', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
     ('b6484e21-6937-489c-b031-b71767994748', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'MEDIUM', 'Concurrency', 'Learn how to write concurrent programs in C++ using threads and mutexes.', 'Question Good Job feedback', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    ('b6484e21-6937-489c-b031-b71767994749', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'HARD', 'Networking', 'Learn how to write networked programs in C++ using sockets.', 'Question Good Job feedback', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED');
+    ('b6484e21-6937-489c-b031-b71767994749', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'HARD', 'Networking', 'Learn how to write networked programs in C++ using sockets.', 'Question Good Job feedback', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
+
+--     Questions for contest_question
+    ('b6484e21-6937-489c-b031-b71767994750', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'HARD', 'Remove Digit From Number to Maximize Result', 'Question Mouse Text', 'Question Tuna feedback', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
+    ('b6484e21-6937-489c-b031-b71767994751', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'EASY', 'Minimum Consecutive Cards to Pick Up', 'Question Wire Text', 'Question Gold feedback', 1, 'ESSAY', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
+    ('b6484e21-6937-489c-b031-b71767994752', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'MEDIUM', 'K Divisible Elements Subarrays', 'Question Wow Text', 'Question Amazing feedback', 1, 'SHORT_ANSWER', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
+    ('b6484e21-6937-489c-b031-b71767994753', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'HARD', 'Total Appeal of A String', 'Question Speaker Text', 'Question Good Job feedback', 1, 'MULTIPLE_CHOICE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED');
 
 INSERT INTO public.answer_of_question(id, question_id, feedback, answer, fraction)
 VALUES
@@ -154,7 +160,11 @@ VALUES
     ('27549d54-4a3a-4be4-9875-eab03f88ba6a', 'b6484e21-6937-489c-b031-b71767994746', 'print(Hello World)'),
     ('27549d54-4a3a-4be4-9875-eab03f88ba7a', 'b6484e21-6937-489c-b031-b71767994747', 'print(Hello World)'),
     ('27549d54-4a3a-4be4-9875-eab03f88ba8a', 'b6484e21-6937-489c-b031-b71767994748', 'print(Hello World)'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba9a', 'b6484e21-6937-489c-b031-b71767994749', 'print(Hello World)');
+    ('27549d54-4a3a-4be4-9875-eab03f88ba9a', 'b6484e21-6937-489c-b031-b71767994749', 'print(Hello World)'),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba5b', 'b6484e21-6937-489c-b031-b71767994750', 'print(Hello World)'),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba6b', 'b6484e21-6937-489c-b031-b71767994751', 'print(Hello World)'),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba7b', 'b6484e21-6937-489c-b031-b71767994752', 'print(Hello World)'),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba8b', 'b6484e21-6937-489c-b031-b71767994753', 'print(Hello World)');
 
 INSERT INTO public.qtype_essay_question(id, question_id, response_format, response_required, response_field_lines, min_word_limit, max_word_limit, attachments, attachments_required, grader_info, grader_info_format, response_template, max_bytes, file_types_list)
 VALUES
@@ -285,7 +295,35 @@ VALUES
 
 INSERT INTO public.contest(id, name, description, thumbnail_url, start_time, end_time, created_by, updated_by)
 VALUES
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'Python Contest', 'This contest is for Python programmers who want to test their skills in Python programming.', 'https://leetcode.com/_next/static/images/weekly-default-553ede7bcc8e1b4a44c28a9e4a32068c.png', '2024-04-15 18:09:29.488151+07', '2024-09-10 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'Python Contest', 'This contest is for Python programmers who want to test their skills in Python programming.', 'https://leetcode.com/_next/static/images/weekly-default-553ede7bcc8e1b4a44c28a9e4a32068c.png', '2024-05-20 18:09:29.488151+07', '2024-09-10 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 'Java Contest', 'This contest is for Java programmers who want to test their skills in Java programming.', 'https://leetcode.com/_next/static/images/biweekly-default-f5a8fc3be85b6c9175207fd8fd855d47.png', '2024-09-15 18:09:29.488151+07', '2024-10-15 18:09:29.488151+07', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'Data Structures Contest', 'This contest is for programmers who want to test their skills in data structures and algorithms.', 'https://assets.leetcode.com/contest/weekly-contest-291/card_img_1654267951.png', '2024-01-15 18:09:29.488151+07', null, '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', 'Algorithms Contest', 'This contest is for programmers who want to test their skills in algorithms.', 'https://assets.leetcode.com/contest/weekly-contest-291/card_img_1654267951.png', '2024-01-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992');
+
+INSERT INTO public.contest_user(contest_id, user_id)
+VALUES
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7');
+
+INSERT INTO public.contest_question(contest_id, question_id)
+VALUES
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b6484e21-6937-489c-b031-b71767994750'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b6484e21-6937-489c-b031-b71767994751'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b6484e21-6937-489c-b031-b71767994752'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b6484e21-6937-489c-b031-b71767994753');
+
+INSERT INTO public.code_submission(id, user_id, code_question_id, programming_language_id, source_code, grade, pass)
+VALUES
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'b029f559-52a8-4699-b595-71161498ed8c', '27549d54-4a3a-4be4-9875-eab03f88ba6b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '27549d54-4a3a-4be4-9875-eab03f88ba7b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 2, true),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 3, true),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', 'b029f559-52a8-4699-b595-71161498ed8c', '27549d54-4a3a-4be4-9875-eab03f88ba6b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 3, true),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '27549d54-4a3a-4be4-9875-eab03f88ba7b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba8b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 4, true);
+
