@@ -29,6 +29,7 @@ import com.backend.programming.learning.system.course.service.domain.mapper.mood
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.course.service.domain.valueobject.Type;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.user.UpdateUserCommand;
+import com.backend.programming.learning.system.course.service.domain.valueobject.TypeModule;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -142,8 +143,14 @@ public class MoodleCommandHandler {
                 sectionRepository.save(section);
                 // create module
                 for (ModuleModel module : sectionModel.getModules()) {
-                    Module moduleCreate = moodleDataMapper.createModule(section, module);
-                    moduleRepository.save(moduleCreate);
+                    if(module.getModplural().equals("Assignments")||
+                            module.getModplural().equals("Quizzes")||
+                            module.getModplural().equals("URLs")||
+                            module.getModplural().equals("Files"))
+                    {
+                        Module moduleCreate = moodleDataMapper.createModule(section, module);
+                        moduleRepository.save(moduleCreate);
+                    }
                 }
             });
         }

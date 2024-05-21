@@ -149,14 +149,21 @@ public class MoodleDataMapper {
         {
             timeOpen=Instant.ofEpochSecond(module.getDates().get(0).getTimestamp()).atZone(ZoneId.of("UTC"));
             timeClose=Instant.ofEpochSecond(module.getDates().get(1).getTimestamp()).atZone(ZoneId.of("UTC"));
-
         }
+        String content=null;
+        if (module.getContents() != null && !module.getContents().isEmpty()) { // Sửa lỗi ở đây
+            content = module.getContents().get(0).getFileurl();
+            content=content.replace("/webservice","");
+        }
+
         return Module.builder()
                 .id(new ModuleId(UUID.randomUUID()))
                 .cmid(Integer.valueOf(module.getId()))
                 .section(section)
                 .name(module.getName())
                 .visible(module.getVisible())
+                .typeModule(TypeModule.fromLabel(module.getModplural()))
+                .content(content)
                 .timeOpen(timeOpen)
                 .timeClose(timeClose)
                 .build();

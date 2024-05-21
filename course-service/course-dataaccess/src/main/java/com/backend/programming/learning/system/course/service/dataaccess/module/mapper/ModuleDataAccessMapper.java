@@ -29,6 +29,8 @@ public class ModuleDataAccessMapper {
                 .name(module.getName())
                 .visible(module.getVisible())
                 .section(section)
+                .content(module.getContent())
+                .typeModule(module.getTypeModule())
                 .timeOpen(module.getTimeOpen())
                 .timeClose(module.getTimeClose())
                 .build();
@@ -40,6 +42,8 @@ public class ModuleDataAccessMapper {
                 .cmid(moduleEntity.getCmid())
                 .name(moduleEntity.getName())
                 .visible(moduleEntity.getVisible())
+                .content(moduleEntity.getContent())
+                .typeModule(moduleEntity.getTypeModule())
                 .section(sectionDataAccessMapper.sectionEntityToSection(moduleEntity.getSection()))
                 .timeOpen(moduleEntity.getTimeOpen())
                 .timeClose(moduleEntity.getTimeClose())

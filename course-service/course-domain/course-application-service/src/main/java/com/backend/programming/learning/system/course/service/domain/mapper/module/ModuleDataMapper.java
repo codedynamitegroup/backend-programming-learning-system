@@ -8,6 +8,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.module.ModuleModel;
 import com.backend.programming.learning.system.course.service.domain.entity.Section;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SectionRepository;
+import com.backend.programming.learning.system.course.service.domain.valueobject.TypeModule;
 import org.springframework.stereotype.Component;
 import com.backend.programming.learning.system.course.service.domain.entity.Module;
 
@@ -30,6 +31,7 @@ public class ModuleDataMapper {
                 .name(moduleModel.getName())
                 .visible(moduleModel.getVisible())
                 .section(section)
+                .typeModule(TypeModule.fromLabel(moduleModel.getModplural()))
                 .timeClose(ZonedDateTime
                         .from(Instant.ofEpochSecond(moduleModel.getDates().get(1).getTimestamp())
                                 .atZone(ZoneId.of("UTC"))))
@@ -70,6 +72,8 @@ public class ModuleDataMapper {
                 .moduleId(module.getId().getValue())
                 .name(module.getName())
                 .visible(module.getVisible())
+                .typeModule(module.getTypeModule().getLabel())
+                .content(module.getContent())
                 .build();
     }
 
