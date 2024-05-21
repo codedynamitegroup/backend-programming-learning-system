@@ -16,6 +16,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.ex
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.GenericHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.ValidateHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.code_question.CodeQuestionDataMapper;
+import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.ProgrammingLanguageCodeQuestionRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.ProgrammingLanguageRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.TestCaseRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_question.CodeQuestionRepository;
@@ -23,6 +24,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.po
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.code_question_tag.CodeQuestionTagId;
 import com.backend.programming.learning.system.domain.entity.BaseEntity;
+import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -43,8 +45,9 @@ public class CodeQuestionsHelper {
     private final CodeSubmissionRepository codeSubmissionRepository;
     private final TestCaseRepository testCaseRepository;
     private final ProgrammingLanguageRepository programmingLanguageRepository;
+    private final ProgrammingLanguageCodeQuestionRepository programmingLanguageCodeQuestionRepository;
 
-    public CodeQuestionsHelper(CodeAssessmentDomainService codeAssessmentDomainService, CodeQuestionRepository codeQuestionRepository, CodeQuestionDataMapper codeQuestionDataMaper, ValidateHelper validateHelper, GenericHelper genericHelper, CodeSubmissionRepository codeSubmissionRepository, TestCaseRepository testCaseRepository, ProgrammingLanguageRepository programmingLanguageRepository) {
+    public CodeQuestionsHelper(CodeAssessmentDomainService codeAssessmentDomainService, CodeQuestionRepository codeQuestionRepository, CodeQuestionDataMapper codeQuestionDataMaper, ValidateHelper validateHelper, GenericHelper genericHelper, CodeSubmissionRepository codeSubmissionRepository, TestCaseRepository testCaseRepository, ProgrammingLanguageRepository programmingLanguageRepository, ProgrammingLanguageCodeQuestionRepository programmingLanguageCodeQuestionRepository) {
         this.codeAssessmentDomainService = codeAssessmentDomainService;
         this.codeQuestionRepository = codeQuestionRepository;
         this.codeQuestionDataMaper = codeQuestionDataMaper;
@@ -53,6 +56,7 @@ public class CodeQuestionsHelper {
         this.codeSubmissionRepository = codeSubmissionRepository;
         this.testCaseRepository = testCaseRepository;
         this.programmingLanguageRepository = programmingLanguageRepository;
+        this.programmingLanguageCodeQuestionRepository = programmingLanguageCodeQuestionRepository;
     }
 
     @Transactional
@@ -66,10 +70,10 @@ public class CodeQuestionsHelper {
         CodeQuestion codeQuestionRes = saveCodeQuestion(codeQuestion);
         log.info("Code question is created, id: {}", codeQuestionCreatedEvent.getCodeQuestion().getId().getValue());
 
-
         //save tag;
         if(command.getTagIds() != null && !command.getTagIds().isEmpty()){
             List<CodeQuestionTagId> codeQuestionTagIds = command.getTagIds().stream()
+                    .filter(Objects::nonNull)
                     .map(item->{
                         try {
                             return validateHelper.validateTagById(item);
@@ -81,6 +85,33 @@ public class CodeQuestionsHelper {
                     .map(tag -> codeQuestionDataMaper.codeQuestionIdAndTagIdToCodeQuestionTagId(codeQuestionRes.getId(), tag.getId()))
                     .toList();
             codeQuestionRepository.saveTags(codeQuestionTagIds);
+        }
+
+        //save language
+        if(command.getProgrammingLanuages() != null && !command.getProgrammingLanuages().isEmpty()){
+            List<ProgrammingLanguageCodeQuestion> programmingLanguageCodeQuestions = command.getProgrammingLanuages()
+                    .stream()
+                    .filter(Objects::nonNull)
+                    .map(item->{
+                        try {
+                            ProgrammingLanguage programmingLanguage = validateHelper.validateProgrammingLanguage(new ProgrammingLanguageId(item.getId()));
+                            ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion
+                                    = codeAssessmentDomainService.initProgrammingLanguageCodeQuestion(
+                                            item.getTimeLimit(),
+                                            item.getMemoryLimit(),
+                                            item.getHeadCode(),
+                                            item.getBodyCode(),
+                                            item.getTailCode(),
+                                            codeQuestionRes.getId(),
+                                            item.getId());
+                            return programmingLanguageCodeQuestion;
+                        } catch (Exception e) {
+                            return null;
+                        }
+                    })
+                    .filter(Objects::nonNull)
+                    .toList();
+            codeQuestionRepository.saveNewLanguage(programmingLanguageCodeQuestions);
         }
 
         return codeQuestionCreatedEvent;
@@ -103,7 +134,7 @@ public class CodeQuestionsHelper {
     }
 
     @Transactional
-    public Page<CodeQuestion> getCodeQuestions(GetCodeQuestionsQuery query) {
+    public Page<CodeQuestion> getPublicCodeQuestions(GetCodeQuestionsQuery query) {
         User user = query.getUserId() != null? validateHelper.validateUser(query.getUserId()): null;
         List<TagId> tagIds = query.getTagIds() == null || query.getTagIds().isEmpty()? null:
                 query.getTagIds().stream().map(item->{
@@ -124,7 +155,8 @@ public class CodeQuestionsHelper {
                         query.getPageSize(),
                         query.getDifficulty(),
                         query.getSolved(),
-                        query.getSearch());
+                        query.getSearch(),
+                        true);
         return codeQuestions;
     }
 
@@ -149,12 +181,12 @@ public class CodeQuestionsHelper {
 
         List<TestCase> sampleTestCase = testCaseRepository.getSampleTestCase(codeQuestion.getId());
 
-        Optional<CodeSubmission> codeSubmissionOptional = user == null? Optional.empty(): codeSubmissionRepository.findLatestSubmission(codeQuestion.getId(), user.getId());
-        CodeSubmission codeSubmission = codeSubmissionOptional.orElse(null);
+        List<CodeSubmission> codeSubmissions = user == null? null: codeSubmissionRepository.findLatestSubmissionEachLanguage(codeQuestion.getId(), user.getId());
 
-        List<ProgrammingLanguage> languages = programmingLanguageRepository.findByCodeQuestionId(codeQuestion.getId());
+        List<ProgrammingLanguageCodeQuestion> languages = programmingLanguageCodeQuestionRepository.findByCodeQuestionId(codeQuestion.getId());
 
-        CodeQuestion result = codeAssessmentDomainService.getDetailCodeQuestion(codeQuestion, sampleTestCase, codeSubmission, languages);
+        CodeQuestion result = codeAssessmentDomainService.getDetailCodeQuestion(codeQuestion, sampleTestCase, codeSubmissions, languages);
+
         return result;
     }
 

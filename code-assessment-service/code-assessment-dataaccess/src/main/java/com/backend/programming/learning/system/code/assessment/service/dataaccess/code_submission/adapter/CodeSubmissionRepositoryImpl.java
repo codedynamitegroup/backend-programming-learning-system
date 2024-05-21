@@ -34,7 +34,6 @@ public class CodeSubmissionRepositoryImpl implements CodeSubmissionRepository {
 
     @Override
     public void updateOneTestCase(CodeSubmissionId id) {
-
         jpaRepository.increaseNumOfTestCaseGradedByOne(id.getValue());
     }
 
@@ -86,8 +85,8 @@ public class CodeSubmissionRepositoryImpl implements CodeSubmissionRepository {
     }
 
     @Override
-    public Optional<CodeSubmission> findLatestSubmission(CodeQuestionId id, UserId id1) {
-        Optional<CodeSubmissionEntity> codeSubmissionEntity = jpaRepository.findByCodeQuestionIdAndUserId(id.getValue(), id1.getValue());
-        return codeSubmissionEntity.map(dataAccessMapper::entityToCodeSubmission);
+    public List<CodeSubmission> findLatestSubmissionEachLanguage(CodeQuestionId id, UserId id1) {
+        List<CodeSubmissionEntity> codeSubmissionEntities = jpaRepository.findLatestSubmissionEachLanguageByCodeQuestionIdAndUserId(id.getValue(), id1.getValue());
+        return codeSubmissionEntities.stream().map(dataAccessMapper::entityToCodeSubmission).toList();
     }
 }

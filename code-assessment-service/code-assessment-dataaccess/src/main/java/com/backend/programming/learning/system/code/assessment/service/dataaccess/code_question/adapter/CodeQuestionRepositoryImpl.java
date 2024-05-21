@@ -98,7 +98,7 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
     }
 
     @Override
-    public Page<CodeQuestion> findAll(UserId userId, List<TagId> tagIds, QueryOrderBy orderBy, CodeQuestion.Fields sortBy, Integer pageNum, Integer pageSize, QuestionDifficulty difficulty, Boolean solved, String search) {
+    public Page<CodeQuestion> findAll(UserId userId, List<TagId> tagIds, QueryOrderBy orderBy, CodeQuestion.Fields sortBy, Integer pageNum, Integer pageSize, QuestionDifficulty difficulty, Boolean solved, String search, boolean isPublic) {
         Pageable pageable
                 = PageRequest
                 .of(pageNum,
@@ -115,6 +115,7 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
                         difficulty,
                         solved,
                         userId != null? userId.getValue(): null,
+                        isPublic,
                         pageable);
 
         Page<CodeQuestion> codeQuestions = codeQuestionEntityPageable.map(item->{

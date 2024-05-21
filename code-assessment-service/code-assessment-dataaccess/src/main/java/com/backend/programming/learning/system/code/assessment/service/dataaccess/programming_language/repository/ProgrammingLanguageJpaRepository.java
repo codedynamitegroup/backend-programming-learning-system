@@ -1,6 +1,6 @@
-package com.backend.programming.learning.system.code.assessment.service.dataaccess.language.repository;
+package com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language.repository;
 
-import com.backend.programming.learning.system.code.assessment.service.dataaccess.language.entity.ProgrammingLanguageEntity;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language.entity.ProgrammingLanguageEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -102,7 +102,7 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
     }
 
     @Override
-    public CodeQuestion getDetailCodeQuestion(CodeQuestion codeQuestion, List<TestCase> sampleTestCase, CodeSubmission codeSubmission, List<ProgrammingLanguage> languages) {
+    public CodeQuestion getDetailCodeQuestion(CodeQuestion codeQuestion, List<TestCase> sampleTestCase, List<CodeSubmission> codeSubmission, List<ProgrammingLanguageCodeQuestion> languages) {
         codeQuestion.getDetail(sampleTestCase, codeSubmission, languages);
         return codeQuestion;
     }
@@ -114,6 +114,19 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
                 .active(true)
                 .timeLimit(timeLimit)
                 .memoryLimit(memoryLimit)
+                .build();
+    }
+
+    @Override
+    public ProgrammingLanguageCodeQuestion initProgrammingLanguageCodeQuestion(Float timeLimit, Float memoryLimit, String headCode, String bodyCode, String tailCode, CodeQuestionId codeQuestionId, UUID languageId) {
+        return ProgrammingLanguageCodeQuestion.builder()
+                .id(new ProgrammingLanguageCodeQuestionId(new ProgrammingLanguageId(languageId), codeQuestionId))
+                .active(true)
+                .timeLimit(timeLimit)
+                .memoryLimit(memoryLimit)
+                .headCode(headCode)
+                .tailCode(tailCode)
+                .bodyCode(bodyCode)
                 .build();
     }
 

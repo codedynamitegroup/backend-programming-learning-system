@@ -21,6 +21,7 @@ public interface CodeQuestionJpaRepository extends JpaRepository<CodeQuestionEnt
             on cqe.id = cqte.codeQuestion.id
             where 
                 (?1 IS NULL OR cqte.tag.id in ?1)
+                AND cqe.isPublic = ?6
                 AND ((cast(?2 as text) IS NULL) or (upper(cqe.name) like upper(concat('%', cast(?2 as text), '%'))))
                 AND ((cast(?3 as text) is NULL) OR (?3 = cqe.difficulty))
                 AND ((?4 is null) or (?5 is null) or ((?4 = true) AND EXISTS (
@@ -38,6 +39,6 @@ public interface CodeQuestionJpaRepository extends JpaRepository<CodeQuestionEnt
                 )
             group by cqe.id
             """)
-    Page<CodeQuestionEntity> findAndFilterByTagIds(List<UUID> tagIs, String search, QuestionDifficulty difficulty, Boolean solved, UUID value, Pageable pageable);
+    Page<CodeQuestionEntity> findAndFilterByTagIds(List<UUID> tagIs, String search, QuestionDifficulty difficulty, Boolean solved, UUID value, boolean isPublic, Pageable pageable);
 
 }

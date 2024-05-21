@@ -1,13 +1,15 @@
 package com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.entity;
 
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.CodeQuestionEntity;
-import com.backend.programming.learning.system.code.assessment.service.dataaccess.language.entity.ProgrammingLanguageEntity;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language.entity.ProgrammingLanguageEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import lombok.*;
 
 import jakarta.persistence.*;
+
+import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -39,7 +41,9 @@ public class CodeSubmissionEntity {
     private Double avgMemory;
     private String aiAssessment;
     private String sonaqueAssessment;
-    private String sourceCode;
+    private String headCode;
+    private String bodyCode;
+    private String tailCode;
 
     @Column(name = "number_of_test_case_sent")
     private Integer numOfTestCaseSent;
@@ -49,6 +53,7 @@ public class CodeSubmissionEntity {
 
     @Enumerated(EnumType.STRING)
     private GradingStatus gradingStatus;
+    private ZonedDateTime createdAt;
 
     @Enumerated(EnumType.STRING)
     private CopyState copyState;

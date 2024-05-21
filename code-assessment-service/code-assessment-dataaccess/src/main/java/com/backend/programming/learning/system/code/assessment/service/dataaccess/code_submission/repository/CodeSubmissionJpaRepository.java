@@ -98,5 +98,15 @@ public interface CodeSubmissionJpaRepository extends JpaRepository<CodeSubmissio
 
     Optional<CodeSubmissionEntity> findByUserIdAndCodeQuestionIdAndGrade(UUID value, UUID id, Double grade);
 
-    Optional<CodeSubmissionEntity> findByCodeQuestionIdAndUserId(UUID codeQuestionId, UUID userId);
+    @Query("""
+            select cse from CodeSubmissionEntity cse 
+            where cse.codeQuestion.id = ?1 and cse.user.id = ?2 
+                and cse.createdAt in (select max(cse2.createdAt) as createdAt
+                                      from CodeSubmissionEntity cse2
+                                      where cse2.user.id = ?2 
+                                      and cse2.codeQuestion.id = cse.codeQuestion.id 
+                                      and cse.programmingLanguage.id = cse2.programmingLanguage.id
+                                      group by cse2.programmingLanguage.id)
+            """)
+    List<CodeSubmissionEntity> findLatestSubmissionEachLanguageByCodeQuestionIdAndUserId(UUID codeQuestionId, UUID userId);
 }

@@ -64,8 +64,8 @@ public class CodeQuestionCommandHandler {
 
     }
 
-    public GetCodeQuestionsResponse getCodeQuestions(GetCodeQuestionsQuery query) {
-        Page<CodeQuestion> codeQuestions = codeQuestionsHelper.getCodeQuestions(query);
+    public GetCodeQuestionsResponse getPublicCodeQuestions(GetCodeQuestionsQuery query) {
+        Page<CodeQuestion> codeQuestions = codeQuestionsHelper.getPublicCodeQuestions(query);
         return codeQuestionDataMaper.pagableCodeQuestionsToGetCodeQuestionsResponse(codeQuestions);
     }
 

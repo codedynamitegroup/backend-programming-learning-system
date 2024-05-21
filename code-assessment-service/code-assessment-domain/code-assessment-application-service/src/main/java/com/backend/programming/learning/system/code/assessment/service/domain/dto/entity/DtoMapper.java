@@ -39,10 +39,36 @@ public class DtoMapper {
                 .id(codeQuestion.getId().getValue())
                 .difficulty(codeQuestion.getDifficulty())
                 .problemStatement(codeQuestion.getProblemStatement())
-                .sourceCode(decodeBase64ToString(codeQuestion.getSourceCode()))
-                .sourceCodeLanguageId(codeQuestion.getSourceCodeLanguageId() != null? codeQuestion.getSourceCodeLanguageId().getValue(): null)
-                .languages(codeQuestion.getProgrammingLanguages() != null? codeQuestion.getProgrammingLanguages().stream().map(this::programmingLanguageToDto).toList(): null)
+                .inputFormat(codeQuestion.getInputFormat())
+                .outputFormat(codeQuestion.getOutputFormat())
+                .constraints(codeQuestion.getConstraints())
+                .codeSubmissions(codeQuestion.getCodeSubmissions() != null? codeQuestion.getCodeSubmissions().stream().map(this::codeSubmissionToDto).toList(): null)
+                .languages(codeQuestion.getProgrammingLanguages() != null? codeQuestion.getProgrammingLanguages().stream().map(this::programmingLanguageCodeQuestionToDto).toList(): null)
                 .sampleTestCases(codeQuestion.getTcs() != null? codeQuestion.getTcs().stream().map(this::testCaseToDto).toList(): null)
+                .build();
+    }
+
+    private ProgrammingLanguageDto programmingLanguageCodeQuestionToDto(ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion) {
+        return ProgrammingLanguageDto.builder()
+                .id(programmingLanguageCodeQuestion.getLanguage().getId().getValue())
+                .name(programmingLanguageCodeQuestion.getLanguage().getName())
+                .judge0Id(programmingLanguageCodeQuestion.getLanguage().getJudge0_compilerApiId())
+                .isActived(programmingLanguageCodeQuestion.getActive())
+                .timeLimit(programmingLanguageCodeQuestion.getTimeLimit())
+                .memoryLimit(programmingLanguageCodeQuestion.getMemoryLimit())
+                .tailCode(programmingLanguageCodeQuestion.getTailCode())
+                .headCode(programmingLanguageCodeQuestion.getHeadCode())
+                .bodyCode(programmingLanguageCodeQuestion.getBodyCode())
+                .build();
+    }
+
+    private CodeSubmissionDto codeSubmissionToDto(CodeSubmission codeSubmission) {
+        return CodeSubmissionDto.builder()
+                .id(codeSubmission.getId().getValue())
+                .languageId(codeSubmission.getLanguageId().getValue())
+                .bodyCode(decodeBase64ToString(codeSubmission.getBodyCode()))
+                .headCode(decodeBase64ToString(codeSubmission.getHeadCode()))
+                .tailCode(decodeBase64ToString(codeSubmission.getTailCode()))
                 .build();
     }
 
@@ -73,6 +99,9 @@ public class DtoMapper {
                 .timeLimit(programmingLanguage.getTimeLimit())
                 .id(programmingLanguage.getId().getValue())
                 .name(programmingLanguage.getName())
+                .bodyCode(programmingLanguage.getBodyCode() != null? decodeBase64ToString(programmingLanguage.getBodyCode()): "")
+                .headCode(programmingLanguage.getHeadCode() != null? decodeBase64ToString(programmingLanguage.getHeadCode()): "")
+                .tailCode(programmingLanguage.getTailCode() != null? decodeBase64ToString(programmingLanguage.getTailCode()): "")
                 .build();
     }
 

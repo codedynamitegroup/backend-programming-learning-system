@@ -1,7 +1,5 @@
 package com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language_code_question.entity;
 
-import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.CodeQuestionEntity;
-import com.backend.programming.learning.system.code.assessment.service.dataaccess.language.entity.ProgrammingLanguageEntity;
 import lombok.*;
 
 import java.io.Serializable;

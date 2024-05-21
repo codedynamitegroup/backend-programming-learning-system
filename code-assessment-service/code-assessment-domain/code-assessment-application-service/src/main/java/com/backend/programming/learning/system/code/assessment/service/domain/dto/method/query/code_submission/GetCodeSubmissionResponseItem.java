@@ -9,6 +9,7 @@ import lombok.Getter;
 import jakarta.validation.constraints.NotNull;
 import lombok.Setter;
 
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Getter
@@ -26,6 +27,7 @@ public class GetCodeSubmissionResponseItem {
     UUID programmingLanguageId;
     Double avgRuntime;
     Double avgMemory;
+    ZonedDateTime createdAt;
 
     @NotNull
     GradingStatus gradingStatus;
@@ -40,7 +42,13 @@ public class GetCodeSubmissionResponseItem {
     String description;
 
     @Setter
-    String sourceCode;
+    String headCode;
+
+    @Setter
+    String bodyCode;
+
+    @Setter
+    String tailCode;
 
     @Setter
     FirstFailTestCase firstFailTestCase;

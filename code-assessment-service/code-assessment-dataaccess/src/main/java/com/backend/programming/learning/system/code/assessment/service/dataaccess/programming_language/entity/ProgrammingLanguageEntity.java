@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.code.assessment.service.dataaccess.language.entity;
+package com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language.entity;
 
 
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
@@ -24,6 +24,10 @@ public class ProgrammingLanguageEntity {
     Float timeLimit;
     Float memoryLimit;
     Boolean isActived;
+
+    String headCode;
+    String bodyCode;
+    String tailCode;
 
     @Enumerated(EnumType.STRING)
     CopyState copyState;
