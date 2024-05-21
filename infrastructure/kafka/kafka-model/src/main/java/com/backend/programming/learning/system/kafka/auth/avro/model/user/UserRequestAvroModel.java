@@ -5,17 +5,19 @@
  */
 package com.backend.programming.learning.system.kafka.auth.avro.model.user;
 
+import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
+import org.apache.avro.util.Utf8;
 import org.apache.avro.message.BinaryMessageEncoder;
 import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -823260770423013919L;
+  private static final long serialVersionUID = 2221957418070323687L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model.user\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"organizationId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"userName\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"email\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"firstName\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"lastName\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"phone\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"address\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"avatarUrl\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"dob\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"},\"default\":0},{\"name\":\"serviceName\",\"type\":{\"type\":\"enum\",\"name\":\"ServiceName\",\"symbols\":[\"CORE_SERVICE\",\"AUTH_SERVICE\",\"COURSE_SERVICE\",\"CODE_ASSESSMENT_SERVICE\",\"BACKGROUND_SERVICE\"]}},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"},\"default\":0},{\"name\":\"updatedAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"},\"default\":0},{\"name\":\"isDeleted\",\"type\":[\"null\",\"boolean\"],\"default\":null}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UserRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.auth.avro.model.user\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"organizationId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"username\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"userId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"email\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"firstName\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"lastName\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"phone\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"address\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"avatarUrl\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"dob\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"},\"default\":0},{\"name\":\"serviceName\",\"type\":{\"type\":\"enum\",\"name\":\"ServiceName\",\"symbols\":[\"CORE_SERVICE\",\"AUTH_SERVICE\",\"COURSE_SERVICE\",\"CODE_ASSESSMENT_SERVICE\",\"BACKGROUND_SERVICE\"]}},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"},\"default\":0},{\"name\":\"updatedAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"},\"default\":0},{\"name\":\"isDeleted\",\"type\":[\"null\",\"boolean\"],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -103,7 +105,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
    * All-args constructor.
    * @param id The new value for id
    * @param organizationId The new value for organizationId
-   * @param username The new value for userName
+   * @param username The new value for username
    * @param sagaId The new value for sagaId
    * @param userId The new value for userId
    * @param email The new value for email
@@ -258,8 +260,8 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
   }
 
   /**
-   * Gets the value of the 'userName' field.
-   * @return The value of the 'userName' field.
+   * Gets the value of the 'username' field.
+   * @return The value of the 'username' field.
    */
   public java.lang.String getUsername() {
     return username;
@@ -267,7 +269,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
 
 
   /**
-   * Sets the value of the 'userName' field.
+   * Sets the value of the 'username' field.
    * @param value the value to set.
    */
   public void setUsername(java.lang.String value) {
@@ -555,7 +557,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
 
     private java.lang.String id;
     private java.lang.String organizationId;
-    private java.lang.String userName;
+    private java.lang.String username;
     private java.lang.String sagaId;
     private java.lang.String userId;
     private java.lang.String email;
@@ -590,8 +592,8 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
         this.organizationId = data().deepCopy(fields()[1].schema(), other.organizationId);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.userName)) {
-        this.userName = data().deepCopy(fields()[2].schema(), other.userName);
+      if (isValidValue(fields()[2], other.username)) {
+        this.username = data().deepCopy(fields()[2].schema(), other.username);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
       if (isValidValue(fields()[3], other.sagaId)) {
@@ -667,7 +669,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
         fieldSetFlags()[1] = true;
       }
       if (isValidValue(fields()[2], other.username)) {
-        this.userName = data().deepCopy(fields()[2].schema(), other.username);
+        this.username = data().deepCopy(fields()[2].schema(), other.username);
         fieldSetFlags()[2] = true;
       }
       if (isValidValue(fields()[3], other.sagaId)) {
@@ -809,41 +811,41 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
     }
 
     /**
-      * Gets the value of the 'userName' field.
+      * Gets the value of the 'username' field.
       * @return The value.
       */
-    public java.lang.String getUserName() {
-      return userName;
+    public java.lang.String getUsername() {
+      return username;
     }
 
 
     /**
-      * Sets the value of the 'userName' field.
-      * @param value The value of 'userName'.
+      * Sets the value of the 'username' field.
+      * @param value The value of 'username'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder setUserName(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder setUsername(java.lang.String value) {
       validate(fields()[2], value);
-      this.userName = value;
+      this.username = value;
       fieldSetFlags()[2] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'userName' field has been set.
-      * @return True if the 'userName' field has been set, false otherwise.
+      * Checks whether the 'username' field has been set.
+      * @return True if the 'username' field has been set, false otherwise.
       */
-    public boolean hasUserName() {
+    public boolean hasUsername() {
       return fieldSetFlags()[2];
     }
 
 
     /**
-      * Clears the value of the 'userName' field.
+      * Clears the value of the 'username' field.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder clearUserName() {
-      userName = null;
+    public com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel.Builder clearUsername() {
+      username = null;
       fieldSetFlags()[2] = false;
       return this;
     }
@@ -1412,7 +1414,7 @@ public class UserRequestAvroModel extends org.apache.avro.specific.SpecificRecor
         UserRequestAvroModel record = new UserRequestAvroModel();
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.String) defaultValue(fields()[0]);
         record.organizationId = fieldSetFlags()[1] ? this.organizationId : (java.lang.String) defaultValue(fields()[1]);
-        record.username = fieldSetFlags()[2] ? this.userName : (java.lang.String) defaultValue(fields()[2]);
+        record.username = fieldSetFlags()[2] ? this.username : (java.lang.String) defaultValue(fields()[2]);
         record.sagaId = fieldSetFlags()[3] ? this.sagaId : (java.lang.String) defaultValue(fields()[3]);
         record.userId = fieldSetFlags()[4] ? this.userId : (java.lang.String) defaultValue(fields()[4]);
         record.email = fieldSetFlags()[5] ? this.email : (java.lang.String) defaultValue(fields()[5]);

@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.course.service.dataaccess.module
 import com.backend.programming.learning.system.course.service.dataaccess.organization.entity.OrganizationEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.section.entity.SectionEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.course.service.domain.valueobject.TypeModule;
 import lombok.*;
 
 import jakarta.persistence.*;
@@ -29,6 +30,9 @@ public class ModuleEntity {
       private SectionEntity section;
     private String name;
     private Integer visible;
+    private String content;
+    @Enumerated(EnumType.STRING)
+    private TypeModule typeModule;
     private ZonedDateTime timeOpen;
     private ZonedDateTime timeClose;
 

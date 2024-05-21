@@ -8,7 +8,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.tag.AddTagToCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.language.DeleteLanguageToCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.tag.DeleteCodeQuestionTagCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsQuery;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetDetailCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_question.UpdateCodeQuestionCommand;
@@ -64,8 +64,8 @@ public class CodeQuestionCommandHandler {
 
     }
 
-    public GetCodeQuestionsResponse getCodeQuestions(GetCodeQuestionsCommand command) {
-        Page<CodeQuestion> codeQuestions = codeQuestionsHelper.getCodeQuestions(command);
+    public GetCodeQuestionsResponse getCodeQuestions(GetCodeQuestionsQuery query) {
+        Page<CodeQuestion> codeQuestions = codeQuestionsHelper.getCodeQuestions(query);
         return codeQuestionDataMaper.pagableCodeQuestionsToGetCodeQuestionsResponse(codeQuestions);
     }
 

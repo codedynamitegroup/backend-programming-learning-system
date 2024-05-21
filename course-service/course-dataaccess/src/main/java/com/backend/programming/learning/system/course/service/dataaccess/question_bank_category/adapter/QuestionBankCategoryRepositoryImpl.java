@@ -46,4 +46,9 @@ public class QuestionBankCategoryRepositoryImpl implements QuestionBankCategoryR
                 .map(questionBankCategoryDataAccessMapper::questionBankCategoryEntityToQuestionBankCategory);
     }
 
+    @Override
+    public void deleteById(UUID value) {
+        questionBankCategoryJpaRepository.deleteById(value);
+    }
+
 }

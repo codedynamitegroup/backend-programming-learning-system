@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.service.user;
 
 import com.backend.programming.learning.system.auth.service.domain.AuthDomainService;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateSocialLoginUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
@@ -36,13 +37,24 @@ public class UserCreateHelper {
     }
 
     @Transactional
-    public UserCreatedEvent persistUser(CreateUserCommand createUserCommand, String token) {
+    public UserCreatedEvent persistUser(CreateUserCommand createUserCommand) {
         findUserWithEmail(createUserCommand.getEmail());
         findOrganization(createUserCommand.getOrganizationId());
         User user = authDataMapper.createUserCommandToUser(createUserCommand);
+        user.setLinkedWithMicrosoft(false);
+        user.setLinkedWithGoogle(false);
         UserCreatedEvent userCreatedEvent = authDomainService.createUser(user);
         saveUser(user);
-        keycloakApplicationService.createUser(createUserCommand, token);
+        keycloakApplicationService.createUser(createUserCommand);
+        return userCreatedEvent;
+    }
+
+    @Transactional
+    public UserCreatedEvent persistUserSocialLogin(CreateSocialLoginUserCommand createSocialLoginUserCommand) {
+        findUserWithEmail(createSocialLoginUserCommand.getEmail());
+        User user = authDataMapper.createSocialLoginUserCommandToUser(createSocialLoginUserCommand);
+        UserCreatedEvent userCreatedEvent = authDomainService.createUser(user);
+        saveUser(user);
         return userCreatedEvent;
     }
 

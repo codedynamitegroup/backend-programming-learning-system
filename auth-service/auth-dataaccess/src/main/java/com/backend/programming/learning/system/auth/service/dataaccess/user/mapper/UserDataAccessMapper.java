@@ -24,6 +24,8 @@ public class UserDataAccessMapper {
                 .lastIp(userEntity.getLastIp())
                 .lastLogin(userEntity.getLastLogin())
                 .refreshToken(userEntity.getRefreshToken())
+                .isLinkedWithGoogle(userEntity.getIsLinkedWithGoogle())
+                .isLinkedWithMicrosoft(userEntity.getIsLinkedWithMicrosoft())
                 .isDeleted(userEntity.getIsDeleted())
                 .build();
     }
@@ -45,6 +47,8 @@ public class UserDataAccessMapper {
                 .lastIp(user.getLastIp())
                 .lastLogin(user.getLastLogin())
                 .refreshToken(user.getRefreshToken())
+                .isLinkedWithGoogle(user.getLinkedWithGoogle())
+                .isLinkedWithMicrosoft(user.getLinkedWithMicrosoft())
                 .isDeleted(user.getDeleted())
                 .build();
     }

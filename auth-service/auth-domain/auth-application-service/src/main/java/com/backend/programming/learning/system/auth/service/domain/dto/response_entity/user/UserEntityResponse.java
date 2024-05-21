@@ -29,5 +29,7 @@ public class UserEntityResponse {
     private ZonedDateTime lastLogin;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
+    private Boolean isLinkedWithGoogle;
+    private Boolean isLinkedWithMicrosoft;
     private Boolean isDeleted;
 }

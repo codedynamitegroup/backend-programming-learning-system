@@ -32,6 +32,9 @@ CREATE TYPE notification_event_type AS ENUM ('USER', 'COURSE');
 DROP TYPE IF EXISTS notification_component_type;
 CREATE TYPE notification_component_type AS ENUM ('ASSIGNMENT', 'EXAM', 'POST', 'CONTEST', 'REMINDER');
 
+DROP TYPE IF EXISTS type_module;
+CREATE TYPE type_module AS ENUM ('ASSIGNMENT', 'FILE', 'URL','QUIZ');
+
 DROP TYPE IF EXISTS update_state;
 CREATE TYPE update_state AS ENUM (
     'CREATING',
@@ -237,6 +240,8 @@ CREATE TABLE "public".module
     section_id uuid,
     name        text,
     visible integer,
+    content text,
+    type_module type_module,
     time_open TIMESTAMP WITH TIME zone,
     time_close TIMESTAMP WITH TIME zone,
     CONSTRAINT module_pkey PRIMARY KEY (id),

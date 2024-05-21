@@ -45,4 +45,9 @@ public class QuestionBankCategoryApplicationImpl implements QuestionBankCategory
     public UpdateQuestionBankCategoryResponse updateQuestionBankCategory(QuestionBankCategoryId questionBankCategoryId, UpdateQuestionBankCategoryCommand updateQuestionBankCategoryCommand) {
         return questionBankCategoryCommandHandler.updateQuestionBankCategory(questionBankCategoryId, updateQuestionBankCategoryCommand);
     }
+
+    @Override
+    public void deleteQuestionBankCategory(QuestionBankCategoryId questionBankCategoryId) {
+        questionBankCategoryCommandHandler.deleteQuestionBankCategory(questionBankCategoryId);
+    }
 }

@@ -29,6 +29,7 @@ import com.backend.programming.learning.system.course.service.domain.mapper.mood
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.course.service.domain.valueobject.Type;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.user.UpdateUserCommand;
+import com.backend.programming.learning.system.course.service.domain.valueobject.TypeModule;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -79,12 +80,12 @@ public class MoodleCommandHandler {
 
     String GET_MODULE="core_course_get_course_module";
     String GET_USERS = "core_user_get_users";
-//    String MOODLE_URL = "http://62.171.185.208/webservice/rest/server.php";
-        String MOODLE_URL = "http://localhost/moodle/webservice/rest/server.php";
+    //    String MOODLE_URL = "http://62.171.185.208/webservice/rest/server.php";
+    String MOODLE_URL = "http://localhost/moodle/webservice/rest/server.php";
     String MOODLE_URL_TOKEN = "http://62.171.185.208/login/token.php";
-//    String TOKEN = "cdf90b5bf53bcae577c60419702dbee7";
+    //    String TOKEN = "cdf90b5bf53bcae577c60419702dbee7";
 //    String TOKEN = "c22b03ca9c0a3c8431cd6b57bd4c8b04";
-        String TOKEN = "60d437ef3f02dded9a7b097a8a81bf61";
+    String TOKEN = "60d437ef3f02dded9a7b097a8a81bf61";
 
 
     @Transactional
@@ -142,8 +143,14 @@ public class MoodleCommandHandler {
                 sectionRepository.save(section);
                 // create module
                 for (ModuleModel module : sectionModel.getModules()) {
-                    Module moduleCreate = moodleDataMapper.createModule(section, module);
-                    moduleRepository.save(moduleCreate);
+                    if(module.getModplural().equals("Assignments")||
+                            module.getModplural().equals("Quizzes")||
+                            module.getModplural().equals("URLs")||
+                            module.getModplural().equals("Files"))
+                    {
+                        Module moduleCreate = moodleDataMapper.createModule(section, module);
+                        moduleRepository.save(moduleCreate);
+                    }
                 }
             });
         }

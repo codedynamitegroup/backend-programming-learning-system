@@ -71,13 +71,15 @@ public class QuestionDataMapper {
 
     public QuestionResponseEntity questionToQueryQuestionResponse(Question question) {
         return QuestionResponseEntity.builder()
-                .questionId(question.getId().getValue())
+                .id(question.getId().getValue())
                 .organizationId(question.getOrganization().getId().getValue())
                 .difficulty(question.getDifficulty())
                 .name(question.getName())
                 .questionText(question.getQuestionText())
                 .generalFeedback(question.getGeneralFeedback())
                 .defaultMark(question.getDefaultMark())
+                .createdAt(question.getCreatedAt())
+                .updatedAt(question.getUpdatedAt())
                 .build();
     }
 

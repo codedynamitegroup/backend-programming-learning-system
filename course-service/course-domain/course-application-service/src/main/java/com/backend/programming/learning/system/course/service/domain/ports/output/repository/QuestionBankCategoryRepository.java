@@ -14,4 +14,6 @@ public interface QuestionBankCategoryRepository {
     QuestionBankCategory findById(UUID id);
 
     Optional<QuestionBankCategory> findQuestionBankCategoryById(UUID questionBankCategoryId);
+
+    void deleteById(UUID value);
 }

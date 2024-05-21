@@ -5,6 +5,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.course.QueryAllCourseResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.course.UpdateCourseResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.CourseResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.UserCourseEntity;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course_type.CourseTypeResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.CourseModel;
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
 import com.backend.programming.learning.system.course.service.domain.entity.CourseType;
@@ -13,6 +15,8 @@ import com.backend.programming.learning.system.course.service.domain.entity.User
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Component
@@ -60,12 +64,25 @@ public class CourseDataMapper {
     }
 
     public CourseResponseEntity courseToQueryCourseResponse(Course course) {
+        List<UserCourseEntity> teachers = course.getTeachers().stream()
+                .map(user -> UserCourseEntity.builder()
+                        .userId(user.getId().getValue())
+                        .firstName(user.getFirstName())
+                        .lastName(user.getLastName())
+                        .build())
+                .toList();
+        CourseTypeResponseEntity courseType = CourseTypeResponseEntity.builder()
+                .courseTypeId(course.getCourseType().getId().getValue())
+                .name(course.getCourseType().getName())
+                .moodleId(course.getCourseType().getMoodleId())
+                .build();
         return CourseResponseEntity.builder()
                 .id(course.getId().getValue())
                 .courseIdMoodle(course.getCourseIdMoodle())
+                .teachers(teachers)
                 .organization(course.getOrganization())
                 .name(course.getName())
-                .courseType(course.getCourseType())
+                .courseType(courseType)
                 .visible(course.getVisible())
                 .createdBy(course.getCreatedBy().getId())
                 .updatedBy(course.getUpdatedBy().getId())

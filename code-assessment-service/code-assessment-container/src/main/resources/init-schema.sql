@@ -382,3 +382,5 @@ CREATE  INDEX "question_outbox_status"
 CREATE INDEX "question_outbox_saga_id"
     ON "public".question_outbox
     (type, saga_id);
+
+CREATE INDEX "search_code_question" ON qtype_code_questions(name);

@@ -66,7 +66,7 @@ public class MoodleCommandHandler {
             Optional<User> userResult = userRepository.findByEmail(userModel.getEmail());
             if (userResult.isPresent()) {
                 UpdateUserCommand userUpdate = moodleDataMapper.updateUser(userModel, userResult.get());
-                UpdateUserResponse updateUserResponse = userApplicationService.updateUser(userUpdate, "");
+                UpdateUserResponse updateUserResponse = userApplicationService.updateUser(userUpdate);
 //                List<Role> rolesMoodle = userModel.getRoles();
 //                rolesMoodle.forEach(role -> {
 //                    CreateUserRoleCommand createRole = moodleDataMapper.createRole(role, roleMap, updateUserResponse.getUserId());
@@ -74,7 +74,7 @@ public class MoodleCommandHandler {
 //                });
             } else {
                 CreateUserCommand user = moodleDataMapper.createUser(userModel);
-                CreateUserResponse createUserResponse = userApplicationService.createUser(user, "");
+                CreateUserResponse createUserResponse = userApplicationService.createUser(user);
 //                List<Role> rolesMoodle = userModel.getRoles();
 //                rolesMoodle.forEach(role -> {
 //                    CreateUserRoleCommand createRole = moodleDataMapper.createRole(role, roleMap, createUserResponse.getUserId());

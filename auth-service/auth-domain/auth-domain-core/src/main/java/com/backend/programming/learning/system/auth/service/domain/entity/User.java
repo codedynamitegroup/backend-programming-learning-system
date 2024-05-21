@@ -9,7 +9,7 @@ import java.time.ZoneId;
 import java.util.UUID;
 
 public class User extends AggregateRoot<UserId> {
-    private String email;
+    private final String email;
     private String password;
     private String username;
     private ZonedDateTime dob;
@@ -23,15 +23,16 @@ public class User extends AggregateRoot<UserId> {
     private ZonedDateTime lastLogin;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
+    private Boolean isLinkedWithGoogle;
+    private Boolean isLinkedWithMicrosoft;
     private Organization organization;
     private Boolean isDeleted;
 
     private User(Builder builder) {
         super.setId(builder.userId);
         email = builder.email;
-        organization = builder.Organization;
-        setUsername(builder.username);
         setPassword(builder.password);
+        setUsername(builder.username);
         setDob(builder.dob);
         setFirstName(builder.firstName);
         setLastName(builder.lastName);
@@ -43,6 +44,9 @@ public class User extends AggregateRoot<UserId> {
         setLastLogin(builder.lastLogin);
         createdAt = builder.createdAt;
         setUpdatedAt(builder.updatedAt);
+        isLinkedWithGoogle = builder.isLinkedWithGoogle;
+        isLinkedWithMicrosoft = builder.isLinkedWithMicrosoft;
+        setOrganization(builder.organization);
         isDeleted = builder.isDeleted;
     }
 
@@ -174,12 +178,27 @@ public class User extends AggregateRoot<UserId> {
         this.username = username;
     }
 
+    public Boolean getLinkedWithGoogle() {
+        return isLinkedWithGoogle;
+    }
+
+    public void setLinkedWithGoogle(Boolean linkedWithGoogle) {
+        isLinkedWithGoogle = linkedWithGoogle;
+    }
+
+    public Boolean getLinkedWithMicrosoft() {
+        return isLinkedWithMicrosoft;
+    }
+
+    public void setLinkedWithMicrosoft(Boolean linkedWithMicrosoft) {
+        isLinkedWithMicrosoft = linkedWithMicrosoft;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
     public static final class Builder {
-        private Organization Organization;
         private String email;
         private String password;
         private String username;
@@ -194,15 +213,13 @@ public class User extends AggregateRoot<UserId> {
         private ZonedDateTime lastLogin;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
+        private Boolean isLinkedWithGoogle;
+        private Boolean isLinkedWithMicrosoft;
+        private Organization organization;
         private Boolean isDeleted;
         private UserId userId;
 
         private Builder() {
-        }
-
-        public Builder organization(Organization val) {
-            Organization = val;
-            return this;
         }
 
         public Builder email(String val) {
@@ -210,13 +227,13 @@ public class User extends AggregateRoot<UserId> {
             return this;
         }
 
-        public Builder username(String val) {
-            username = val;
+        public Builder password(String val) {
+            password = val;
             return this;
         }
 
-        public Builder password(String val) {
-            password = val;
+        public Builder username(String val) {
+            username = val;
             return this;
         }
 
@@ -272,6 +289,21 @@ public class User extends AggregateRoot<UserId> {
 
         public Builder updatedAt(ZonedDateTime val) {
             updatedAt = val;
+            return this;
+        }
+
+        public Builder isLinkedWithGoogle(Boolean val) {
+            isLinkedWithGoogle = val;
+            return this;
+        }
+
+        public Builder isLinkedWithMicrosoft(Boolean val) {
+            isLinkedWithMicrosoft = val;
+            return this;
+        }
+
+        public Builder organization(Organization val) {
+            organization = val;
             return this;
         }
 

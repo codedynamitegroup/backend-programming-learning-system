@@ -1,9 +1,12 @@
 package com.backend.programming.learning.system.course.service.domain.mapper.course_user;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryAllCourseUserResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.UserCourseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course_user.CourseUserResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
 import com.backend.programming.learning.system.course.service.domain.entity.CourseUser;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -33,11 +36,39 @@ public class CourseUserDataMapper {
     }
 
     public CourseUserResponseEntity courseUsersToCourseUserResponseEntity(List<CourseUser> courseUsers) {
+        if(courseUsers.isEmpty()) {
+            return CourseUserResponseEntity.builder()
+                    .course(null)
+                    .users(null)
+                    .build();
+        }
+
         return CourseUserResponseEntity.builder()
                 .course(courseUsers.get(0).getCourse())
                 .users(courseUsers.stream()
                         .map(CourseUser::getUser)
                         .toList())
+                .build();
+    }
+
+    private List<UserCourseEntity> courseUsersToUserCourseEntities(List<CourseUser> courseUsers) {
+        return courseUsers.stream()
+                .map(courseUser -> UserCourseEntity.builder()
+                        .userId(courseUser.getUser().getId().getValue())
+                        .firstName(courseUser.getUser().getFirstName())
+                        .lastName(courseUser.getUser().getLastName())
+                        .email(courseUser.getUser().getEmail())
+                        .role(courseUser.getRoleMoodle().getName())
+                        .build())
+                .toList();
+    }
+
+    public QueryAllCourseUserResponse courseUsersToQueryAllCourseUserResponse(Page<CourseUser> courseUsers) {
+        return QueryAllCourseUserResponse.builder()
+                .users(courseUsersToUserCourseEntities(courseUsers.getContent()))
+                .currentPage(courseUsers.getNumber())
+                .totalItems(courseUsers.getTotalElements())
+                .totalPages(courseUsers.getTotalPages())
                 .build();
     }
 }

@@ -23,7 +23,6 @@ public class TestCaseDto {
     @NotNull(message = "isSample must not be null")
     private final boolean isSample;
 
-    @NotNull(message = "score must not be null")
     @Positive(message = "score must be positive")
     private final Double score;
 

@@ -30,4 +30,7 @@ public interface QuestionBankCategoryApplicationService {
     UpdateQuestionBankCategoryResponse updateQuestionBankCategory(
             @Valid QuestionBankCategoryId questionBankCategoryId,
             @Valid UpdateQuestionBankCategoryCommand updateQuestionBankCategoryCommand);
+
+    void deleteQuestionBankCategory(
+            @Valid QuestionBankCategoryId questionBankCategoryId);
 }

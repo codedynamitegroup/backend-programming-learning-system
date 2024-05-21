@@ -6,10 +6,8 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.de
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersByOrganizationCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryUserByIdCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.login.SocialLoginUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.*;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
@@ -19,7 +17,6 @@ import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserDeletedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedEvent;
-import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.implement.saga.user.UserUpdateSagaHelper;
 import com.backend.programming.learning.system.auth.service.domain.mapper.UserDataMapper;
 import com.backend.programming.learning.system.auth.service.domain.outbox.scheduler.user.UserOutboxHelper;
@@ -29,11 +26,8 @@ import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.UUID;
 
@@ -50,10 +44,11 @@ public class UserCommandHandler {
     private final UserUpdateSagaHelper userSagaHelper;
     private final UserLoginHelper userLoginHelper;
     private final UserRefreshTokenHelper userRefreshTokenHelper;
+    private final UserSocialLoginHelper userSocialLoginHelper;
 
     @Transactional
-    public CreateUserResponse createUser(CreateUserCommand createOrderCommand, String token) {
-        UserCreatedEvent userCreatedEvent = userCreateHelper.persistUser(createOrderCommand, token);
+    public CreateUserResponse createUser(CreateUserCommand createOrderCommand) {
+        UserCreatedEvent userCreatedEvent = userCreateHelper.persistUser(createOrderCommand);
         log.info("User is created with id: {}", userCreatedEvent.getUser().getId().getValue());
         CreateUserResponse createUserResponse = userDataMapper.userToCreateUserResponse(userCreatedEvent.getUser(),
                 "User created successfully");
@@ -88,7 +83,14 @@ public class UserCommandHandler {
     @Transactional(readOnly = true)
     public UserEntityResponse queryUser(QueryUserByIdCommand queryUserCommand) {
         User user = userQueryHelper.queryUser(queryUserCommand.getUserId());
-        log.info("Role is queried with id: {}", queryUserCommand.getUserId());
+        log.info("User is queried with id: {}", queryUserCommand.getUserId());
+        return userDataMapper.userToUserResponse(user);
+    }
+
+    @Transactional(readOnly = true)
+    public UserEntityResponse queryUserByEmail(QueryUserByEmailCommand queryUserByEmailCommand) {
+        User user = userQueryHelper.queryUserByEmail(queryUserByEmailCommand.getEmail());
+        log.info("User is queried with email: {}", queryUserByEmailCommand.getEmail());
         return userDataMapper.userToUserResponse(user);
     }
 
@@ -110,8 +112,8 @@ public class UserCommandHandler {
     }
 
     @Transactional
-    public UpdateUserResponse updateUser(UpdateUserCommand updateUserCommand, String token) {
-        UserUpdatedEvent userUpdatedEvent = userUpdateHelper.persistUser(updateUserCommand, token);
+    public UpdateUserResponse updateUser(UpdateUserCommand updateUserCommand) {
+        UserUpdatedEvent userUpdatedEvent = userUpdateHelper.persistUser(updateUserCommand);
 
         userOutboxHelper.saveUserOutboxMessage(
                 userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
@@ -143,8 +145,8 @@ public class UserCommandHandler {
 
 
     @Transactional
-    public DeleteUserResponse deleteUser(DeleteUserCommand deleteUserCommand, String token) {
-        UserDeletedEvent userDeletedEvent = userDeleteHelper.deleteUser(deleteUserCommand, token);
+    public DeleteUserResponse deleteUser(DeleteUserCommand deleteUserCommand) {
+        UserDeletedEvent userDeletedEvent = userDeleteHelper.deleteUser(deleteUserCommand);
         log.info("User is deleted with id: {}", deleteUserCommand.getUserId());
 
         userOutboxHelper.saveUserOutboxMessage(
@@ -175,11 +177,18 @@ public class UserCommandHandler {
                 "User deleted successfully");
     }
 
+    @Transactional
     public LoginUserResponse loginUser(LoginUserCommand loginUserCommand) {
         return userLoginHelper.loginUser(loginUserCommand);
     }
 
+    @Transactional
     public RefreshTokenUserResponse refreshTokenUser(RefreshTokenUserCommand refreshTokenUserCommand) {
         return userRefreshTokenHelper.refreshTokenUser(refreshTokenUserCommand);
+    }
+
+    @Transactional
+    public LoginUserResponse socialLoginUser(SocialLoginUserCommand socialLoginUserCommand) {
+        return userSocialLoginHelper.socialLoginUser(socialLoginUserCommand);
     }
 }

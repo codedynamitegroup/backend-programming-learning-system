@@ -6,7 +6,9 @@ import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserKeycloakApplicationService;
 import com.backend.programming.learning.system.auth.service.domain.util.KeycloakProvider;
+import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
+import org.keycloak.representations.idm.FederatedIdentityRepresentation;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import java.util.ArrayList;
@@ -16,8 +18,6 @@ import java.util.Objects;
 import org.keycloak.admin.client.resource.*;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
-
-import javax.ws.rs.core.Response;
 
 
 @Slf4j
@@ -33,13 +33,13 @@ public class UserKeycloakApplicationServiceImpl implements UserKeycloakApplicati
     }
 
     @Override
-    public UsersResource getUsersResource(String token) {
-        RealmResource realmResource = keycloakProvider.getRealmResource(token).realm(keycloakConfigData.getRealm());
+    public UsersResource getUsersResource() {
+        RealmResource realmResource = keycloakProvider.getRealmResource().realm(keycloakConfigData.getRealm());
         return realmResource.users();
     }
 
     @Override
-    public void createUser(CreateUserCommand createUserCommand, String token) {
+    public void createUser(CreateUserCommand createUserCommand) {
         UserRepresentation userRepresentation = new UserRepresentation();
         userRepresentation.setFirstName(createUserCommand.getFirstName());
         userRepresentation.setLastName(createUserCommand.getLastName());
@@ -57,7 +57,7 @@ public class UserKeycloakApplicationServiceImpl implements UserKeycloakApplicati
         list.add(credentialRepresentation);
         userRepresentation.setCredentials(list);
 
-        UsersResource usersResource = getUsersResource(token);
+        UsersResource usersResource = getUsersResource();
         Response response = usersResource.create(userRepresentation);
 
         if (Objects.equals(201, response.getStatus())) {
@@ -72,8 +72,8 @@ public class UserKeycloakApplicationServiceImpl implements UserKeycloakApplicati
     }
 
     @Override
-    public void deleteUser(User user, String token) {
-        UsersResource usersResource = getUsersResource(token);
+    public void deleteUser(User user) {
+        UsersResource usersResource = getUsersResource();
         List<UserRepresentation> userRepresentations = usersResource.searchByUsername(user.getUsername(), true);
         if (userRepresentations.isEmpty()) {
             log.error("User not found");
@@ -85,8 +85,8 @@ public class UserKeycloakApplicationServiceImpl implements UserKeycloakApplicati
     }
 
     @Override
-    public void updateUser(User user, String token) {
-        UsersResource usersResource = getUsersResource(token);
+    public void updateUser(User user) {
+        UsersResource usersResource = getUsersResource();
         List<UserRepresentation> userRepresentations = usersResource.searchByUsername(user.getUsername(), true);
         if (userRepresentations.isEmpty()) {
             log.error("User not found");
@@ -97,4 +97,26 @@ public class UserKeycloakApplicationServiceImpl implements UserKeycloakApplicati
         userRepresentation.setLastName(user.getLastName());
         usersResource.get(userRepresentation.getId()).update(userRepresentation);
     }
+
+    @Override
+    public void addFederationLink(String provider, String username, String userIdSSO, String usernameSSO) {
+        UsersResource usersResource = getUsersResource();
+        List<UserRepresentation> userRepresentations = usersResource.searchByUsername(username, true);
+        if (userRepresentations.isEmpty()) {
+            log.error("User not found");
+            throw new AuthDomainException("User not found");
+        }
+        if (!provider.equals("google") && !provider.equals("microsoft")) {
+            log.error("Provider not found");
+            throw new AuthDomainException("Provider not found");
+        }
+        UserRepresentation userRepresentation = userRepresentations.get(0);
+        FederatedIdentityRepresentation federatedIdentityRepresentation = new FederatedIdentityRepresentation();
+        federatedIdentityRepresentation.setUserId(userIdSSO);
+        federatedIdentityRepresentation.setUserName(usernameSSO);
+        federatedIdentityRepresentation.setIdentityProvider(provider);
+        Response response = usersResource.get(userRepresentation.getId()).addFederatedIdentity(provider, federatedIdentityRepresentation);
+        log.info("Federation link added with status: {}", response.getStatus());
+    }
+
 }

@@ -6,10 +6,8 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.de
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersByOrganizationCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryUserByIdCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.login.SocialLoginUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.*;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
@@ -51,16 +49,27 @@ public class UserController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<?> createUser(@RequestBody CreateUserCommand createUserCommand) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
-            String token = jwtAuthenticationToken.getToken().getTokenValue();
-            log.info("Creating user with email: {}", createUserCommand.getEmail());
-            CreateUserResponse createUserResponse = userApplicationService.createUser(createUserCommand, token);
-            log.info("User created with email: {}", createUserResponse.getEmail());
-            return ResponseEntity.status(HttpStatus.CREATED).body(createUserResponse);
-        }
-        return ResponseEntity.badRequest().body("Token is not valid.");
+    public ResponseEntity<CreateUserResponse> createUser(@RequestBody CreateUserCommand createUserCommand) {
+        log.info("Creating user with email: {}", createUserCommand.getEmail());
+        CreateUserResponse createUserResponse = userApplicationService.createUser(createUserCommand);
+        log.info("User created with email: {}", createUserResponse.getEmail());
+        return ResponseEntity.status(HttpStatus.CREATED).body(createUserResponse);
+    }
+
+    @PostMapping("/register")
+    @Operation(summary = "Register user.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateUserResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<CreateUserResponse> registeredUser(@RequestBody CreateUserCommand createUserCommand) {
+        log.info("Registering user with email: {}", createUserCommand.getEmail());
+        CreateUserResponse createUserResponse = userApplicationService.createUser(createUserCommand);
+        log.info("User Registered with email: {}", createUserResponse.getEmail());
+        return ResponseEntity.status(HttpStatus.CREATED).body(createUserResponse);
     }
 
     @PostMapping("/login")
@@ -78,7 +87,25 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(loginUserResponse);
     }
 
-    @PostMapping("/refresh_token")
+    @PostMapping("/social-login")
+    @Operation(summary = "Socal login user.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = LoginUserResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<LoginUserResponse> socialLoginUser(@RequestBody SocialLoginUserCommand socialLoginUserCommand) {
+        LoginUserResponse loginUserResponse = userApplicationService.socialLoginUser(
+                SocialLoginUserCommand.builder()
+                        .provider(socialLoginUserCommand.getProvider())
+                        .accessToken(socialLoginUserCommand.getAccessToken())
+                        .build());
+        return ResponseEntity.status(HttpStatus.OK).body(loginUserResponse);
+    }
+
+    @PostMapping("/refresh-token")
     @Operation(summary = "Refresh token user.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
@@ -117,6 +144,22 @@ public class UserController {
                userApplicationService.findUserById(QueryUserByIdCommand.builder().userId(id).build());
        log.info("Returning user with id: {}", user.getUserId());
        return  ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/get-by-email/{email}")
+    @Operation(summary = "Get user by email.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = UserEntityResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<UserEntityResponse> getUserByEmail(@PathVariable String email) {
+        UserEntityResponse user =
+                userApplicationService.findUserByEmail(QueryUserByEmailCommand.builder().email(email).build());
+        log.info("Returning user with id: {}", user.getUserId());
+        return  ResponseEntity.ok(user);
     }
 
     @GetMapping
@@ -172,27 +215,22 @@ public class UserController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<?> updateUserById(
+    public ResponseEntity<UpdateUserResponse> updateUserById(
             @PathVariable UUID id,
             @RequestBody UpdateUserCommand updateUserCommand) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
-            String token = jwtAuthenticationToken.getToken().getTokenValue();
-            log.info("Updating user with id: {}", id);
-            UpdateUserResponse updateUserResponse = userApplicationService.updateUser(UpdateUserCommand.builder()
-                    .userId(id)
-                    .dob(updateUserCommand.getDob())
-                    .firstName(updateUserCommand.getFirstName())
-                    .lastName(updateUserCommand.getLastName())
-                    .phone(updateUserCommand.getPhone())
-                    .address(updateUserCommand.getAddress())
-                    .avatarUrl(updateUserCommand.getAvatarUrl())
-                    .build(), token);
+        log.info("Updating user with id: {}", id);
+        UpdateUserResponse updateUserResponse = userApplicationService.updateUser(UpdateUserCommand.builder()
+                .userId(id)
+                .dob(updateUserCommand.getDob())
+                .firstName(updateUserCommand.getFirstName())
+                .lastName(updateUserCommand.getLastName())
+                .phone(updateUserCommand.getPhone())
+                .address(updateUserCommand.getAddress())
+                .avatarUrl(updateUserCommand.getAvatarUrl())
+                .build());
 
-            log.info("User updated with id: {}", id);
-            return ResponseEntity.ok(updateUserResponse);
-        }
-        return ResponseEntity.badRequest().body("Token is not valid.");
+        log.info("User updated with id: {}", id);
+        return ResponseEntity.ok(updateUserResponse);
     }
 
     @DeleteMapping("/{id}")
@@ -204,19 +242,14 @@ public class UserController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<?> deleteUserById(
+    public ResponseEntity<DeleteUserResponse> deleteUserById(
             @PathVariable UUID id) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
-            String token = jwtAuthenticationToken.getToken().getTokenValue();
-            log.info("Deleting user with id: {}", id);
-            DeleteUserResponse deleteUserResponse =
-                    userApplicationService.deleteUserById(DeleteUserCommand.builder()
-                            .userId(id)
-                            .build(), token);
-            log.info("User deleted with id: {}", id);
-            return ResponseEntity.ok(deleteUserResponse);
-        }
-        return ResponseEntity.badRequest().body("Token is not valid.");
+        log.info("Deleting user with id: {}", id);
+        DeleteUserResponse deleteUserResponse =
+                userApplicationService.deleteUserById(DeleteUserCommand.builder()
+                        .userId(id)
+                        .build());
+        log.info("User deleted with id: {}", id);
+        return ResponseEntity.ok(deleteUserResponse);
     }
 }

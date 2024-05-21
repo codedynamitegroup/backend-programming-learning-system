@@ -19,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -119,5 +120,23 @@ public class QuestionBankCategoryController {
         UpdateQuestionBankCategoryResponse response = questionBankCategoryApplicationService
                 .updateQuestionBankCategory(new QuestionBankCategoryId(questionBankCategoryId), updateQuestionBankCategoryCommand);
         return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("{questionBankCategoryId}")
+    @Operation(summary = "Delete question bank category.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = Void.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<Void> deleteQuestionBankCategory(
+            @PathVariable UUID questionBankCategoryId
+    ) {
+        log.info("Deleting question bank category");
+        questionBankCategoryApplicationService
+                .deleteQuestionBankCategory(new QuestionBankCategoryId(questionBankCategoryId));
+        return ResponseEntity.ok().build();
     }
 }

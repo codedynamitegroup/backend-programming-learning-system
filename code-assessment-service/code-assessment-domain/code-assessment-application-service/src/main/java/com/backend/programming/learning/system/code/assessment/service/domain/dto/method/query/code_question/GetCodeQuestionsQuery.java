@@ -2,8 +2,8 @@ package com.backend.programming.learning.system.code.assessment.service.domain.d
 
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.domain.valueobject.QueryOrderBy;
+import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
@@ -17,7 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Getter
-public class GetCodeQuestionsCommand {
+public class GetCodeQuestionsQuery {
     @Positive(message = "pageSize must be positive")
     @Setter
     @JsonIgnore
@@ -28,10 +28,12 @@ public class GetCodeQuestionsCommand {
     @JsonIgnore
     Integer pageNum;
 
+    String search;
+    Boolean solved;
+    QuestionDifficulty difficulty;
+
     List<UUID> tagIds;
     QueryOrderBy orderBy;
     CodeQuestion.Fields sortBy;
-
-    @NotNull(message = "userId must not be null")
     UUID userId;
 }

@@ -3,9 +3,12 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.course_user.CreateCourseUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.course_user.CreateCourseUserResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.course_user.DeleteCourseUserCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryAllCourseUserCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryAllCourseUserResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryCourseUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course_user.CourseUserResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.course_user.CourseUserApplicationService;
+import com.backend.programming.learning.system.course.service.domain.valueobject.CourseUserId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -36,5 +39,10 @@ public class CourseUserApplicationServiceImpl implements CourseUserApplicationSe
     @Override
     public CourseUserResponseEntity queryAllByCourseId(QueryCourseUserCommand queryCourseUserCommand) {
         return courseUserCommandHandler.queryAllByCourseId(queryCourseUserCommand);
+    }
+
+    @Override
+    public QueryAllCourseUserResponse queryAllUserByCourseId(CourseUserId courseUserId, QueryAllCourseUserCommand queryAllCourseUserCommand) {
+        return courseUserCommandHandler.queryAllUserByCourseId(courseUserId, queryAllCourseUserCommand);
     }
 }
