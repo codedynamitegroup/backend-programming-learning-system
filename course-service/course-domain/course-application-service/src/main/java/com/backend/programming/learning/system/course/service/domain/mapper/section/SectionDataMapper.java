@@ -3,21 +3,30 @@ package com.backend.programming.learning.system.course.service.domain.mapper.sec
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.section.CreateSectionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.section.CreateSectionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.section.QueryAllSectionResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.update.section.UpdateSectionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.section.UpdateSectionResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.module.ModuleResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.section.SectionModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.section.SectionResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
+import com.backend.programming.learning.system.course.service.domain.entity.Module;
 import com.backend.programming.learning.system.course.service.domain.entity.Section;
+import com.backend.programming.learning.system.course.service.domain.mapper.module.ModuleDataMapper;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ModuleRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
-import com.backend.programming.learning.system.course.service.domain.valueobject.SectionId;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.UUID;
 
 @Component
 public class SectionDataMapper {
+    private final ModuleDataMapper moduleDataMapper;
+    private final ModuleRepository moduleRepository;
+
+    public SectionDataMapper(ModuleDataMapper moduleDataMapper, ModuleRepository moduleRepository) {
+        this.moduleDataMapper = moduleDataMapper;
+        this.moduleRepository = moduleRepository;
+    }
+
     public Section sectionModelToSection(SectionModel sectionModel, Course course) {
         return Section.builder()
                 .name(sectionModel.getName())
@@ -51,9 +60,20 @@ public class SectionDataMapper {
     }
 
     public SectionResponseEntity sectionToSectionResponseEntity(Section section) {
+        List<Module> modules = moduleRepository.findBySectionId(section.getId().getValue());
+        if(modules.isEmpty()){
+            return SectionResponseEntity.builder()
+                    .sectionId(section.getId().getValue())
+                    .name(section.getName())
+                    .modules(List.of())
+                    .visible(section.getVisible())
+                    .build();
+        }
+        List<ModuleResponseEntity> moduleResponseEntities = modules.stream().map(moduleDataMapper::moduleToModuleResponseEntity).toList();
         return SectionResponseEntity.builder()
                 .sectionId(section.getId().getValue())
                 .name(section.getName())
+                .modules(moduleResponseEntities)
                 .visible(section.getVisible())
                 .build();
 
@@ -61,7 +81,6 @@ public class SectionDataMapper {
     public QueryAllSectionResponse sectionsToQueryAllSectionResponse(List<Section> sections) {
         return QueryAllSectionResponse.builder()
                 .sections(sections.stream().map(this::sectionToSectionResponseEntity).toList())
-                .courseId(sections.get(0).getCourseId().getValue())
                 .build();
     }
 
