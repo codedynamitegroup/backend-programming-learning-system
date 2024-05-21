@@ -12,6 +12,7 @@ import java.util.Optional;
 public interface RoleRepository {
     Role save(Role role);
     Optional<Role> findById(RoleId roleId);
+    Optional<Role> findByName(String roleName);
     void deleteById(RoleId roleId);
     Page<Role> findAll(Integer page, Integer size);
 }

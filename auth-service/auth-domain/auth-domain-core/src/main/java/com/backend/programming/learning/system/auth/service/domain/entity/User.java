@@ -10,7 +10,6 @@ import java.util.UUID;
 
 public class User extends AggregateRoot<UserId> {
     private final String email;
-    private String password;
     private String username;
     private ZonedDateTime dob;
     private String firstName;
@@ -19,7 +18,6 @@ public class User extends AggregateRoot<UserId> {
     private String address;
     private String avatarUrl;
     private String refreshToken;
-    private String lastIp;
     private ZonedDateTime lastLogin;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
@@ -31,7 +29,6 @@ public class User extends AggregateRoot<UserId> {
     private User(Builder builder) {
         super.setId(builder.userId);
         email = builder.email;
-        setPassword(builder.password);
         setUsername(builder.username);
         setDob(builder.dob);
         setFirstName(builder.firstName);
@@ -40,7 +37,6 @@ public class User extends AggregateRoot<UserId> {
         setAddress(builder.address);
         setAvatarUrl(builder.avatarUrl);
         setRefreshToken(builder.refreshToken);
-        setLastIp(builder.lastIp);
         setLastLogin(builder.lastLogin);
         createdAt = builder.createdAt;
         setUpdatedAt(builder.updatedAt);
@@ -64,10 +60,6 @@ public class User extends AggregateRoot<UserId> {
 
     public String getEmail() {
         return email;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public ZonedDateTime getDob() {
@@ -98,10 +90,6 @@ public class User extends AggregateRoot<UserId> {
         return refreshToken;
     }
 
-    public String getLastIp() {
-        return lastIp;
-    }
-
     public ZonedDateTime getLastLogin() {
         return lastLogin;
     }
@@ -116,10 +104,6 @@ public class User extends AggregateRoot<UserId> {
 
     public Boolean getDeleted() {
         return isDeleted;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public void setDob(ZonedDateTime dob) {
@@ -148,10 +132,6 @@ public class User extends AggregateRoot<UserId> {
 
     public void setRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
-    }
-
-    public void setLastIp(String lastIp) {
-        this.lastIp = lastIp;
     }
 
     public void setLastLogin(ZonedDateTime lastLogin) {
@@ -200,7 +180,6 @@ public class User extends AggregateRoot<UserId> {
 
     public static final class Builder {
         private String email;
-        private String password;
         private String username;
         private ZonedDateTime dob;
         private String firstName;
@@ -209,7 +188,6 @@ public class User extends AggregateRoot<UserId> {
         private String address;
         private String avatarUrl;
         private String refreshToken;
-        private String lastIp;
         private ZonedDateTime lastLogin;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
@@ -224,11 +202,6 @@ public class User extends AggregateRoot<UserId> {
 
         public Builder email(String val) {
             email = val;
-            return this;
-        }
-
-        public Builder password(String val) {
-            password = val;
             return this;
         }
 
@@ -269,11 +242,6 @@ public class User extends AggregateRoot<UserId> {
 
         public Builder refreshToken(String val) {
             refreshToken = val;
-            return this;
-        }
-
-        public Builder lastIp(String val) {
-            lastIp = val;
             return this;
         }
 
