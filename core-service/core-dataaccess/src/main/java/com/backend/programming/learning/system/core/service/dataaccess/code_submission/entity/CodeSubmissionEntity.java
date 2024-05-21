@@ -3,6 +3,8 @@ package com.backend.programming.learning.system.core.service.dataaccess.code_sub
 import lombok.*;
 
 import jakarta.persistence.*;
+
+import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -23,6 +25,7 @@ public class CodeSubmissionEntity {
     private String sourceCode;
     private Float grade;
     private Boolean pass;
+    private ZonedDateTime createdAt;
 
     @Override
     public boolean equals(Object o) {

@@ -273,7 +273,7 @@ CREATE TABLE "public".contest_user
     calendar_event_id uuid,
     update_calendar_event_state update_state,
     is_completed bool DEFAULT FALSE NOT NULL,
-    completed_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    completed_at TIMESTAMP WITH TIME ZONE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT contest_user_pkey PRIMARY KEY (id),
@@ -467,6 +467,7 @@ CREATE TABLE "public".code_submission
     source_code text,
     grade numeric(5,2) DEFAULT 0.0 NOT NULL,
     pass bool DEFAULT FALSE NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT code_submission_pkey PRIMARY KEY (id),
     CONSTRAINT code_submission_user_id_fkey FOREIGN KEY (user_id)
         REFERENCES "public".user (id) MATCH SIMPLE

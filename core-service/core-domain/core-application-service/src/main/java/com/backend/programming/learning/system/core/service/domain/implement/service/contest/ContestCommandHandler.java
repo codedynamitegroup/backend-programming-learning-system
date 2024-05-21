@@ -4,10 +4,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest.CreateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.DeleteContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.DeleteContestResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryContestCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryMostPopularContestsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.*;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestResponseEntity;
@@ -19,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -101,6 +99,21 @@ public class ContestCommandHandler {
                         queryContestCommand.getEmail());
 
         return contestDataMapper.contestToQueryContestResponse(contest);
+    }
+
+    @Transactional(readOnly = true)
+    public QueryLeaderboardOfContestResponse queryLeaderboardOfContestResponse(
+            QueryLeaderboardOfContestCommand queryLeaderboardOfContestCommand
+    ) {
+
+
+        return QueryLeaderboardOfContestResponse.builder()
+                .participantRank(null)
+                .contestLeaderboard(new ArrayList<>())
+                .currentPage(0)
+                .totalItems(0)
+                .totalPages(0)
+                .build();
     }
 
     @Transactional

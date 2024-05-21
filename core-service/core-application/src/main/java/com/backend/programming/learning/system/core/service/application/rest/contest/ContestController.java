@@ -186,6 +186,40 @@ public class ContestController {
         return ResponseEntity.ok(queryAllContestUsersResponse);
     }
 
+    @GetMapping("/{id}/leaderboard")
+    @Operation(summary = "Get leaderboard of contest.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryLeaderboardOfContestResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryLeaderboardOfContestResponse> getLeaderboardOfContest(
+            @PathVariable UUID id,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize) {
+        String email = null;
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
+        QueryLeaderboardOfContestResponse queryLeaderboardOfContestResponse =
+                contestApplicationService.queryLeaderboardOfContest(
+                        QueryLeaderboardOfContestCommand
+                                .builder()
+                                .contestId(id)
+                                .email(email)
+                                .pageNo(pageNo)
+                                .pageSize(pageSize)
+                                .build());
+        log.info("Returning leaderboard of contest: {}", id);
+        return ResponseEntity.ok(queryLeaderboardOfContestResponse);
+    }
+
     @GetMapping("/{id}")
     @Operation(summary = "Get contest by id.")
     @ApiResponses(value = {

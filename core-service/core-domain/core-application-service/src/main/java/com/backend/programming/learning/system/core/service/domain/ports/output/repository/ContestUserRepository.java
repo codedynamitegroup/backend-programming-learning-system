@@ -17,4 +17,6 @@ public interface ContestUserRepository {
     List<ContestUser> findByContestId(UUID contestId);
     void deleteByContestIdAndUserId(UUID contestId, UUID userId);
     int countAllParticipants();
+    Page<ContestUser> findAllContestUsersOfLeaderboard(
+            UUID contestId, Integer pageNo, Integer pageSize);
 }

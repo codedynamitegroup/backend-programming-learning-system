@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 public class ContestUser extends AggregateRoot<ContestUserId> {
@@ -17,17 +18,25 @@ public class ContestUser extends AggregateRoot<ContestUserId> {
     private ZonedDateTime completedAt;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
+    private Integer rank;
+    private Float totalScore;
+    private String totalTime;
+    private List<ContestQuestion> contestQuestions;
 
     private ContestUser(Builder builder) {
         super.setId(builder.contestUserId);
-        user = builder.user;
-        contest = builder.contest;
+        setUser(builder.user);
+        setContest(builder.contest);
         setCalendarEventId(builder.calendarEventId);
         setUpdateCalendarEventState(builder.updateCalendarEventState);
         isCompleted = builder.isCompleted;
         setCompletedAt(builder.completedAt);
         setCreatedAt(builder.createdAt);
         setUpdatedAt(builder.updatedAt);
+        setRank(builder.rank);
+        setTotalScore(builder.totalScore);
+        setTotalTime(builder.totalTime);
+        setContestQuestions(builder.contestQuestions);
     }
 
     public static Builder builder() {
@@ -45,8 +54,16 @@ public class ContestUser extends AggregateRoot<ContestUserId> {
         return user;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Contest getContest() {
         return contest;
+    }
+
+    public void setContest(Contest contest) {
+        this.contest = contest;
     }
 
     public UUID getCalendarEventId() {
@@ -97,12 +114,36 @@ public class ContestUser extends AggregateRoot<ContestUserId> {
         this.updatedAt = updatedAt;
     }
 
-    public void setContest(Contest contest) {
-        this.contest = contest;
+    public Integer getRank() {
+        return rank;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setRank(Integer rank) {
+        this.rank = rank;
+    }
+
+    public Float getTotalScore() {
+        return totalScore;
+    }
+
+    public void setTotalScore(Float totalScore) {
+        this.totalScore = totalScore;
+    }
+
+    public String getTotalTime() {
+        return totalTime;
+    }
+
+    public void setTotalTime(String totalTime) {
+        this.totalTime = totalTime;
+    }
+
+    public List<ContestQuestion> getContestQuestions() {
+        return contestQuestions;
+    }
+
+    public void setContestQuestions(List<ContestQuestion> contestQuestions) {
+        this.contestQuestions = contestQuestions;
     }
 
     public static final class Builder {
@@ -115,6 +156,10 @@ public class ContestUser extends AggregateRoot<ContestUserId> {
         private ZonedDateTime completedAt;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
+        private Integer rank;
+        private Float totalScore;
+        private String totalTime;
+        private List<ContestQuestion> contestQuestions;
 
         private Builder() {
         }
@@ -161,6 +206,26 @@ public class ContestUser extends AggregateRoot<ContestUserId> {
 
         public Builder updatedAt(ZonedDateTime val) {
             updatedAt = val;
+            return this;
+        }
+
+        public Builder rank(Integer val) {
+            rank = val;
+            return this;
+        }
+
+        public Builder totalScore(Float val) {
+            totalScore = val;
+            return this;
+        }
+
+        public Builder totalTime(String val) {
+            totalTime = val;
+            return this;
+        }
+
+        public Builder contestQuestions(List<ContestQuestion> val) {
+            contestQuestions = val;
             return this;
         }
 

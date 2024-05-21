@@ -72,7 +72,7 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
     select c
     from ContestEntity c
     left join ContestUserEntity cu on c.id = cu.contest.id
-    where (c.startTime > ?1 OR (c.startTime <= ?1 and (c.endTime is null or (c.endTime is not null and c.endTime >= ?1))))
+    where c.startTime > ?1
     group by c.id
     order by count(cu.user.id) desc, c.createdAt desc
     limit 10
