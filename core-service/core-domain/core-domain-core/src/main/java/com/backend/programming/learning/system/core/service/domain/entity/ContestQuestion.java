@@ -15,14 +15,20 @@ public class ContestQuestion extends BaseEntity<ContestQuestionId> {
     private Question question;
     private Contest contest;
     private UUID codeQuestionId;
-    private List<CodeSubmission> codeSubmissions;
+    private Float maxGrade;
+    private Float grade;
+    private Long doTime;
+    private Integer numOfSubmissions;
 
     private ContestQuestion(Builder builder) {
         super.setId(builder.contestQuestionId);
         setQuestion(builder.question);
         setContest(builder.contest);
         setCodeQuestionId(builder.codeQuestionId);
-        setCodeSubmissions(builder.codeSubmissions);
+        setMaxGrade(builder.maxGrade);
+        setGrade(builder.grade);
+        setDoTime(builder.doTime);
+        setNumOfSubmissions(builder.numOfSubmissions);
     }
 
     public static Builder builder() {
@@ -54,12 +60,36 @@ public class ContestQuestion extends BaseEntity<ContestQuestionId> {
         this.codeQuestionId = codeQuestionId;
     }
 
-    public List<CodeSubmission> getCodeSubmissions() {
-        return codeSubmissions;
+    public Float getMaxGrade() {
+        return maxGrade;
     }
 
-    public void setCodeSubmissions(List<CodeSubmission> codeSubmissions) {
-        this.codeSubmissions = codeSubmissions;
+    public void setMaxGrade(Float maxGrade) {
+        this.maxGrade = maxGrade;
+    }
+
+    public Float getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Float grade) {
+        this.grade = grade;
+    }
+
+    public Long getDoTime() {
+        return doTime;
+    }
+
+    public void setDoTime(Long doTime) {
+        this.doTime = doTime;
+    }
+
+    public Integer getNumOfSubmissions() {
+        return numOfSubmissions;
+    }
+
+    public void setNumOfSubmissions(Integer numOfSubmissions) {
+        this.numOfSubmissions = numOfSubmissions;
     }
 
     public static final class Builder {
@@ -67,7 +97,10 @@ public class ContestQuestion extends BaseEntity<ContestQuestionId> {
         private Question question;
         private Contest contest;
         private UUID codeQuestionId;
-        private List<CodeSubmission> codeSubmissions;
+        private Float maxGrade;
+        private Float grade;
+        private Long doTime;
+        private Integer numOfSubmissions;
 
         private Builder() {
         }
@@ -92,8 +125,23 @@ public class ContestQuestion extends BaseEntity<ContestQuestionId> {
             return this;
         }
 
-        public Builder codeSubmissions(List<CodeSubmission> val) {
-            codeSubmissions = val;
+        public Builder maxGrade(Float val) {
+            maxGrade = val;
+            return this;
+        }
+
+        public Builder grade(Float val) {
+            grade = val;
+            return this;
+        }
+
+        public Builder doTime(Long val) {
+            doTime = val;
+            return this;
+        }
+
+        public Builder numOfSubmissions(Integer val) {
+            numOfSubmissions = val;
             return this;
         }
 

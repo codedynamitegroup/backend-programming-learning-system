@@ -22,7 +22,7 @@ public class ContestUserResponseEntity {
     private final UUID contestId;
     private final UserResponseEntity user;
     private final Integer rank;
-    private final Integer totalTime;
+    private final Long totalTime;
     private final Float totalScore;
     private final List<ContestQuestionResponseEntity> contestQuestions;
     private final UUID calendarEventId;

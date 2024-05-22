@@ -65,8 +65,13 @@ public class ContestUserRepositoryImpl implements ContestUserRepository {
     @Override
     public Page<ContestUser> findAllContestUsersOfLeaderboard(UUID contestId, Integer pageNo, Integer pageSize) {
         Pageable paging = Pageable.ofSize(pageSize).withPage(pageNo);
-        return contestUserJpaRepository.findAllContestUsersOfLeaderboard(
-                contestId, paging)
+        return contestUserJpaRepository.findAllContestUsersOfLeaderboard(contestId, paging)
+                .map(contestUserDataAccessMapper::contestUserEntityToContestUser);
+    }
+
+    @Override
+    public Optional<ContestUser> findMyRankOfContest(UUID userId, UUID contestId) {
+        return contestUserJpaRepository.findMyRankOfLeaderboard(userId, contestId)
                 .map(contestUserDataAccessMapper::contestUserEntityToContestUser);
     }
 }
