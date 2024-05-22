@@ -25,11 +25,12 @@ public interface ContestUserJpaRepository extends JpaRepository<ContestUserEntit
     """)
     int countAllParticipants();
 
-    // Count sum grade of all code questions with a nearest pass code submission
     @Query(value = """
-        select cu.*,
-        sum(cs.grade) as sum_grade,
-        sum(cs.created_at - c.start_time) as total_time
+        select cc.*
+        from (select cu.*,
+        sum(cs.grade) as total_score,
+        EXTRACT(EPOCH FROM sum(cs.created_at - c.start_time)) as total_time,
+        DENSE_RANK() OVER (ORDER BY COALESCE(sum(cs.grade), 0) DESC, COALESCE(EXTRACT(EPOCH FROM sum(cs.created_at - c.start_time)), 0) DESC) AS rank
                 from contest_user cu
                 join contest c on cu.contest_id = c.id
                 join contest_question cq on cu.contest_id = cq.contest_id
@@ -46,8 +47,33 @@ public interface ContestUserJpaRepository extends JpaRepository<ContestUserEntit
                     order by cs.created_at asc
                     limit 1
                 )) or cs.id is null)
-                group by cu.id, c.id
-                order by sum_grade desc, total_time desc
+                group by cu.id, c.id) as cc
     """, nativeQuery = true)
     Page<ContestUserEntity> findAllContestUsersOfLeaderboard(UUID contestId, Pageable pageable);
+
+    @Query(value = """
+        select cu.*,
+        sum(cs.grade) as total_score,
+        EXTRACT(EPOCH FROM sum(cs.created_at - c.start_time)) as total_time,
+        DENSE_RANK() OVER (ORDER BY COALESCE(sum(cs.grade), 0) DESC, COALESCE(EXTRACT(EPOCH FROM sum(cs.created_at - c.start_time)), 0) DESC) AS rank
+        from contest_user cu
+        join contest c on cu.contest_id = c.id
+        join contest_question cq on cu.contest_id = cq.contest_id
+        join question q on cq.question_id = q.id
+        join qtype_code_question qcq on q.id = qcq.question_id
+        left join code_submission cs on qcq.id = cs.code_question_id and cu.user_id = cs.user_id
+        where cu.contest_id = ?1
+        and cu.user_id = ?2
+        and ((cs.id = (
+            select cs.id
+            from code_submission cs
+            where cs.code_question_id = qcq.id
+            and cs.user_id = cu.user_id
+            and cs.pass = true
+            order by cs.created_at asc
+            limit 1
+        )) or cs.id is null)
+        group by cu.id, c.id
+    """, nativeQuery = true)
+    Optional<ContestUserEntity> findMyRankOfLeaderboard(UUID userId, UUID contestId);
 }

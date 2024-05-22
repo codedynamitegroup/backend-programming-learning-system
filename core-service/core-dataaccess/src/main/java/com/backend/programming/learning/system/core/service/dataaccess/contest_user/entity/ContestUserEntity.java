@@ -41,6 +41,10 @@ public class ContestUserEntity {
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
+    private Integer rank;
+    private Float totalScore;
+    private Long totalTime;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

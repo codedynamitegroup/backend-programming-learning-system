@@ -9,6 +9,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.up
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Contest;
+import com.backend.programming.learning.system.core.service.domain.entity.ContestUser;
 import com.backend.programming.learning.system.core.service.domain.mapper.contest.ContestDataMapper;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import lombok.extern.slf4j.Slf4j;
@@ -105,14 +106,27 @@ public class ContestCommandHandler {
     public QueryLeaderboardOfContestResponse queryLeaderboardOfContestResponse(
             QueryLeaderboardOfContestCommand queryLeaderboardOfContestCommand
     ) {
+        Page<ContestUser> contestUsers = contestQueryHelper
+                .queryLeaderboardOfContest(
+                        queryLeaderboardOfContestCommand.getContestId(),
+                        queryLeaderboardOfContestCommand.getPageNo(),
+                        queryLeaderboardOfContestCommand.getPageSize());
 
+        ContestUser participantRank = contestQueryHelper
+                .queryMyRankOfContest(
+                        queryLeaderboardOfContestCommand.getContestId(),
+                        queryLeaderboardOfContestCommand.getEmail());
 
+        log.info("Returning leaderboard of contest: {}", contestUsers);
         return QueryLeaderboardOfContestResponse.builder()
-                .participantRank(null)
-                .contestLeaderboard(new ArrayList<>())
-                .currentPage(0)
-                .totalItems(0)
-                .totalPages(0)
+                .participantRank(
+                        participantRank == null
+                                ? null
+                                : contestDataMapper.contestUserToContestUserResponseEntity(participantRank))
+                .contestLeaderboard(contestDataMapper.contestUsersToContestUserResponseEntities(contestUsers.getContent()))
+                .currentPage(contestUsers.getNumber())
+                .totalItems(contestUsers.getTotalElements())
+                .totalPages(contestUsers.getTotalPages())
                 .build();
     }
 

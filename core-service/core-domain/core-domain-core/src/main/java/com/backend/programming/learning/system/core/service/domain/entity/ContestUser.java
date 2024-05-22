@@ -20,7 +20,7 @@ public class ContestUser extends AggregateRoot<ContestUserId> {
     private ZonedDateTime updatedAt;
     private Integer rank;
     private Float totalScore;
-    private String totalTime;
+    private Long totalTime;
     private List<ContestQuestion> contestQuestions;
 
     private ContestUser(Builder builder) {
@@ -130,11 +130,11 @@ public class ContestUser extends AggregateRoot<ContestUserId> {
         this.totalScore = totalScore;
     }
 
-    public String getTotalTime() {
+    public Long getTotalTime() {
         return totalTime;
     }
 
-    public void setTotalTime(String totalTime) {
+    public void setTotalTime(Long totalTime) {
         this.totalTime = totalTime;
     }
 
@@ -158,7 +158,7 @@ public class ContestUser extends AggregateRoot<ContestUserId> {
         private ZonedDateTime updatedAt;
         private Integer rank;
         private Float totalScore;
-        private String totalTime;
+        private Long totalTime;
         private List<ContestQuestion> contestQuestions;
 
         private Builder() {
@@ -219,7 +219,7 @@ public class ContestUser extends AggregateRoot<ContestUserId> {
             return this;
         }
 
-        public Builder totalTime(String val) {
+        public Builder totalTime(Long val) {
             totalTime = val;
             return this;
         }

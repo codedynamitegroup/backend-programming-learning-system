@@ -11,6 +11,7 @@ import com.backend.programming.learning.system.core.service.domain.ports.output.
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -38,5 +39,16 @@ public class CodeSubmissionRepositoryImpl implements CodeSubmissionRepository {
                 codeSubmissionJpaRepository.findAllCodeSubmissionsByUserIdAndQuestionId(
                         userID, questionId
                 ));
+    }
+
+    @Override
+    public int countAllByUserIdAndCodeQuestionId(UUID userId, UUID codeQuestionId) {
+        return codeSubmissionJpaRepository.countAllByUserIdAndCodeQuestionId(userId, codeQuestionId);
+    }
+
+    @Override
+    public Optional<CodeSubmission> findLatestPassedCodeSubmissionByUserIdAndCodeQuestionId(UUID userId, UUID codeQuestionId) {
+        return codeSubmissionJpaRepository.findLatestPassedCodeSubmissionByUserIdAndCodeQuestionId(userId, codeQuestionId)
+                .map(codeSubmissionDataAccessMapper::codeSubmissionEntityToCodeSubmission);
     }
 }

@@ -23,9 +23,10 @@ public class ContestQuestionResponseEntity {
     private final String questionText;
     private final String generalFeedback;
     private final Float defaultMark;
+    private final Float maxGrade;
     private final Float grade;
     private final Boolean pass;
     private final QuestionType qtype;
     private final Integer numOfSubmissions;
-    private final Integer doTime;
+    private final Long doTime;
 }

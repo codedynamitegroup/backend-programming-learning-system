@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.core.service.domain.implement.se
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest_user.ContestUserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.exception.ContestNotFoundException;
+import com.backend.programming.learning.system.core.service.domain.exception.question.QtypeCodeQuestionNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,15 +23,21 @@ public class ContestQueryHelper {
     private final ContestRepository contestRepository;
     private final ContestQuestionRepository contestQuestionRepository;
     private final ContestUserRepository contestUserRepository;
+    private final QtypeCodeQuestionRepository qtypeCodeQuestionRepository;
+    private final CodeSubmissionRepository codeSubmissionRepository;
     private final UserRepository userRepository;
 
     public ContestQueryHelper(ContestRepository contestRepository,
                               ContestQuestionRepository contestQuestionRepository,
                               ContestUserRepository contestUserRepository,
+                              QtypeCodeQuestionRepository qtypeCodeQuestionRepository,
+                              CodeSubmissionRepository codeSubmissionRepository,
                               UserRepository userRepository) {
         this.contestRepository = contestRepository;
         this.contestQuestionRepository = contestQuestionRepository;
         this.contestUserRepository = contestUserRepository;
+        this.qtypeCodeQuestionRepository = qtypeCodeQuestionRepository;
+        this.codeSubmissionRepository = codeSubmissionRepository;
         this.userRepository = userRepository;
     }
 
@@ -111,7 +119,7 @@ public class ContestQueryHelper {
     }
 
     @Transactional(readOnly = true)
-    public Page<ContestUserResponseEntity> queryLeaderboardOfContest(
+    public Page<ContestUser> queryLeaderboardOfContest(
             UUID contestId,
             Integer pageNo,
             Integer pageSize
@@ -119,12 +127,59 @@ public class ContestQueryHelper {
         Page<ContestUser> contestLeaderboardResponseEntities
                 = contestUserRepository.findAllContestUsersOfLeaderboard(
                         contestId, pageNo, pageSize);
+
+        // Get all contest questions for each contest user
+        for (ContestUser contestUser : contestLeaderboardResponseEntities) {
+            List<ContestQuestion> contestQuestions = contestQuestionRepository
+                    .findAllContestQuestionsByContestId(
+                            contestId
+                    );
+            for (ContestQuestion contestQuestion : contestQuestions) {
+                Question question = contestQuestion.getQuestion();
+                Optional<QtypeCodeQuestion> codeQuestion = qtypeCodeQuestionRepository
+                        .findQtypeCodeQuestionByQuestionId(
+                                question.getId().getValue()
+                        );
+                if (codeQuestion.isEmpty()) {
+                    log.warn("Could not find code question for question with id: {}",
+                            question.getId().getValue());
+                    throw new QtypeCodeQuestionNotFoundException("Could not find code question for question with id: " +
+                            question.getId().getValue());
+                }
+                contestQuestion.setCodeQuestionId(codeQuestion.get().getId().getValue());
+                contestQuestion.setMaxGrade(codeQuestion.get().getMaxGrade());
+                contestQuestion.setNumOfSubmissions(
+                        codeSubmissionRepository.countAllByUserIdAndCodeQuestionId(
+                                contestUser.getUser().getId().getValue(),
+                                codeQuestion.get().getId().getValue()
+                        )
+                );
+                Optional<CodeSubmission> codeSubmission = codeSubmissionRepository
+                        .findLatestPassedCodeSubmissionByUserIdAndCodeQuestionId(
+                                contestUser.getUser().getId().getValue(),
+                                codeQuestion.get().getId().getValue()
+                        );
+                if (codeSubmission.isPresent()) {
+                    contestQuestion.setGrade(codeSubmission.get().getGrade());
+                    Duration duration = Duration.between(
+                            contestUser.getContest().getStartTime(),
+                            codeSubmission.get().getCreatedAt()
+                    );
+                    contestQuestion.setDoTime(duration.toSeconds());
+                } else {
+                    contestQuestion.setGrade(0F);
+                    contestQuestion.setDoTime(0L);
+                }
+            }
+            contestUser.setContestQuestions(contestQuestions);
+        }
+
         log.info("Leaderboard of contest with id: {} queried", contestId);
-        return null;
+        return contestLeaderboardResponseEntities;
     }
 
     @Transactional(readOnly = true)
-    public ContestUserResponseEntity queryMyRankOfContest(
+    public ContestUser queryMyRankOfContest(
             UUID contestId,
             String email
     ) {
@@ -132,7 +187,57 @@ public class ContestQueryHelper {
         if (userResult.isEmpty()) {
             return null;
         }
-        return null;
+        Optional<ContestUser> contestUserResult = contestUserRepository.findMyRankOfContest(
+                userResult.get().getId().getValue(),
+                contestId
+        );
+        if (contestUserResult.isEmpty()) {
+            return null;
+        }
+        ContestUser contestUser = contestUserResult.get();
+
+        // Get all code questions for the contest user
+        List<ContestQuestion> contestQuestions = contestQuestionRepository
+                .findAllContestQuestionsByContestId(contestId);
+        for (ContestQuestion contestQuestion : contestQuestions) {
+            Question question = contestQuestion.getQuestion();
+            Optional<QtypeCodeQuestion> codeQuestion = qtypeCodeQuestionRepository
+                    .findQtypeCodeQuestionByQuestionId(question.getId().getValue());
+            if (codeQuestion.isEmpty()) {
+                log.warn("Could not find code question for question with id: {}",
+                        question.getId().getValue());
+                throw new QtypeCodeQuestionNotFoundException("Could not find code question for question with id: " +
+                        question.getId().getValue());
+            }
+            contestQuestion.setCodeQuestionId(codeQuestion.get().getId().getValue());
+            contestQuestion.setMaxGrade(codeQuestion.get().getMaxGrade());
+            contestQuestion.setNumOfSubmissions(
+                    codeSubmissionRepository.countAllByUserIdAndCodeQuestionId(
+                            contestUser.getUser().getId().getValue(),
+                            codeQuestion.get().getId().getValue()
+                    )
+            );
+            Optional<CodeSubmission> codeSubmission = codeSubmissionRepository
+                    .findLatestPassedCodeSubmissionByUserIdAndCodeQuestionId(
+                            contestUser.getUser().getId().getValue(),
+                            codeQuestion.get().getId().getValue()
+                    );
+            if (codeSubmission.isPresent()) {
+                contestQuestion.setGrade(codeSubmission.get().getGrade());
+                Duration duration = Duration.between(
+                        contestUser.getContest().getStartTime(),
+                        codeSubmission.get().getCreatedAt()
+                );
+                contestQuestion.setDoTime(duration.toSeconds());
+            } else {
+                contestQuestion.setGrade(0F);
+                contestQuestion.setDoTime(0L);
+            }
+        }
+        contestUser.setContestQuestions(contestQuestions);
+
+        log.info("My rank of contest with id: {} queried", contestId);
+        return contestUser;
     }
 
     private List<ContestQuestion> getAllContestQuestionsForContest(UUID contestId) {

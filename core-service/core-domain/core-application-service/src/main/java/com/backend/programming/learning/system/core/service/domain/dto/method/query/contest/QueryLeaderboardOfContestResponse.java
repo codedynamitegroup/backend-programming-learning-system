@@ -14,6 +14,6 @@ public class QueryLeaderboardOfContestResponse {
     private final ContestUserResponseEntity participantRank;
     private final List<ContestUserResponseEntity> contestLeaderboard;
     private final int currentPage;
-    private final int totalItems;
+    private final long totalItems;
     private final int totalPages;
 }
