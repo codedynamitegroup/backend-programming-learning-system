@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,28 +17,58 @@ import java.util.UUID;
 public interface CodeQuestionJpaRepository extends JpaRepository<CodeQuestionEntity, UUID> {
     Optional<CodeQuestionEntity> findByQuestionId(UUID questionId);
 
-    @Query("""
-            select cqe from CodeQuestionEntity cqe LEFT JOIN CodeQuestionTagEntity cqte
-            on cqe.id = cqte.codeQuestion.id
+    @Query(value = """
+            select cqe.* from qtype_code_questions cqe
             where 
-                (?1 IS NULL OR cqte.tag.id in ?1)
-                AND ((cast(?2 as text) IS NULL) or (upper(cqe.name) like upper(concat('%', cast(?2 as text), '%'))))
-                AND ((cast(?3 as text) is NULL) OR (?3 = cqe.difficulty))
-                AND ((?4 is null) or (?5 is null) or ((?4 = true) AND EXISTS (
-                                    select cse from CodeSubmissionEntity cse
-                                    where cse.codeQuestion.id = cqe.id
-                                    and cse.grade = cqe.maxGrade
-                                    and ?5 = cse.user.id
+                cqe.id in ( select cqe2.id from qtype_code_questions cqe2 
+                                    LEFT JOIN tag_code_question cqte
+                                    on cqe2.id = cqte.code_question_id 
+                                    where (COALESCE(?1,NULL) IS NULL OR cqte.tag_id in ?1)
+                                    group by cqe2.id
+                                    )
+                AND (cast(?3 as text) IS NULL or 
+                    cqe.fts_document @@ (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'') ) ) or
+                    cqe.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) )
+                    )
+                AND (cast(?4 as text) is NULL OR cast(?4 as text) = cast(cqe.difficulty as text))
+                AND ((?5 is null) or (?6 is null) or ((?5 = true) AND EXISTS (
+                                    select cse from code_submission cse
+                                    where cse.code_question_id = cqe.id
+                                    and cse.grade = cqe.max_grade
+                                    and ?6 = cse.user_id
                                 ))
-                or ((?4 = false) and not exists (
-                                    select cse from CodeSubmissionEntity cse
-                                    where cse.codeQuestion.id = cqe.id
-                                    and cse.grade = cqe.maxGrade
-                                    and ?5 = cse.user.id
+                    or ((?5 = false) and not exists (
+                                    select cse from code_submission cse
+                                    where cse.code_question_id = cqe.id
+                                    and cse.grade = cqe.max_grade
+                                    and ?6 = cse.user_id
                                 ))
                 )
-            group by cqe.id
-            """)
-    Page<CodeQuestionEntity> findAndFilterByTagIds(List<UUID> tagIs, String search, QuestionDifficulty difficulty, Boolean solved, UUID value, Pageable pageable);
-
+                AND cqe.is_public = ?7
+                
+                order by
+                ts_rank(cqe.fts_document, 
+                    case
+                        when cast(?3 as text) is null then to_tsquery('')
+                        else (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'')) )
+                    end
+                ) desc,
+                ts_rank(cqe.fts_document,
+                    case
+                        when cast(?3 as text) is null then to_tsquery('')
+                        else (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,''))))
+                    end
+                ) desc,
+                cqe.created_at asc
+                
+            """, nativeQuery = true)
+    Page<CodeQuestionEntity> findAndFilterByTagIds(List<UUID> tagIs,
+                                                   String searchExcludeFinalWord,
+                                                   String searchFinalWord,
+                                                   String difficulty,
+                                                   Boolean solved,
+                                                   UUID value,
+                                                   boolean isPublic,
+                                                   Pageable pageable);
+//    Page<CodeQuestionEntity> findAndFilterByTagIds(List<UUID> tagIs, String search, QuestionDifficulty difficulty, Boolean solved, UUID value, boolean isPublic, Pageable pageable);
 }

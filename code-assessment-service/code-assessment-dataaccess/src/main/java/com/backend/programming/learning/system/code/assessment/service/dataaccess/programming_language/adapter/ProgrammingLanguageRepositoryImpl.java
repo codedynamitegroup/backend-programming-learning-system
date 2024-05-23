@@ -1,12 +1,11 @@
-package com.backend.programming.learning.system.code.assessment.service.dataaccess.language.adapter;
+package com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language.adapter;
 
-import com.backend.programming.learning.system.code.assessment.service.dataaccess.language.entity.ProgrammingLanguageEntity;
-import com.backend.programming.learning.system.code.assessment.service.dataaccess.language.mapper.ProgrammingLanguageDataAccessMapper;
-import com.backend.programming.learning.system.code.assessment.service.dataaccess.language.repository.ProgrammingLanguageJpaRepository;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language.entity.ProgrammingLanguageEntity;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language.mapper.ProgrammingLanguageDataAccessMapper;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language.repository.ProgrammingLanguageJpaRepository;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language_code_question.entity.ProgrammingLanguageCodeQuestionEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language_code_question.repository.ProgrammingLanguageCodeQuestionJpaRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.ProgrammingLanguage;
-import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.ProgrammingLanguageCodeQuestionRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.ProgrammingLanguageRepository;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;

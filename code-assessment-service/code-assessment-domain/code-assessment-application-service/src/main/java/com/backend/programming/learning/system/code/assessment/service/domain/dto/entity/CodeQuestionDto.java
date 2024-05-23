@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.dto.entity;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
 import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
@@ -17,10 +18,12 @@ public class CodeQuestionDto {
     UUID id;
     String name;
     String problemStatement;
+    String inputFormat;
+    String outputFormat;
+    String constraints;
     Boolean done;
     QuestionDifficulty difficulty;
-    String sourceCode;
-    UUID sourceCodeLanguageId;
+    List<CodeSubmissionDto> codeSubmissions;
     List<TestCaseDto> sampleTestCases;
     List<ProgrammingLanguageDto> languages;
 }

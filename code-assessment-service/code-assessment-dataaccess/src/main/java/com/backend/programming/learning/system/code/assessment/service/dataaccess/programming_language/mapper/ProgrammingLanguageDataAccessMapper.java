@@ -1,6 +1,6 @@
-package com.backend.programming.learning.system.code.assessment.service.dataaccess.language.mapper;
+package com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language.mapper;
 
-import com.backend.programming.learning.system.code.assessment.service.dataaccess.language.entity.ProgrammingLanguageEntity;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language.entity.ProgrammingLanguageEntity;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.ProgrammingLanguage;
 import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 import org.springframework.stereotype.Component;
@@ -15,6 +15,9 @@ public class ProgrammingLanguageDataAccessMapper {
                 .timeLimit(entity.getTimeLimit())
                 .memoryLimit(entity.getMemoryLimit())
                 .isActive(entity.getIsActived())
+                .headCode(entity.getHeadCode())
+                .bodyCode(entity.getBodyCode())
+                .tailCode(entity.getTailCode())
                 .copyState(entity.getCopyState())
                 .build();
     }
@@ -28,6 +31,9 @@ public class ProgrammingLanguageDataAccessMapper {
                 .memoryLimit(programmingLanguage.getMemoryLimit())
                 .timeLimit(programmingLanguage.getMemoryLimit())
                 .copyState(programmingLanguage.getCopyState())
+                .headCode(programmingLanguage.getHeadCode())
+                .bodyCode(programmingLanguage.getBodyCode())
+                .tailCode(programmingLanguage.getTailCode())
                 .build();
     }
 }

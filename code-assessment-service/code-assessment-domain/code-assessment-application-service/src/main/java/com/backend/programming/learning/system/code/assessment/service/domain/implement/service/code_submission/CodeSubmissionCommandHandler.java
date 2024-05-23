@@ -27,6 +27,18 @@ public class CodeSubmissionCommandHandler {
 
     public CreateCodeSubmissionResponse createCodeSubmission(CreateCodeSubmissionCommand createCodeSubmissionCommand) {
         CodeSubmission codeSubmission = codeSubmissionHelper.createCodeSubmission(createCodeSubmissionCommand);
+        Thread thread2 = new Thread(()->{
+            boolean finish = false;
+            do{
+                try {
+                    Thread.sleep(2500);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                finish = codeSubmissionHelper.updateCodeSubmissionWhenAllTestCaseAssessed(codeSubmission.getId());
+            }while(!finish);
+        });
+        thread2.start();
         return codeSubmissionDataMapper.codeSubmissionToCreateCodeSubmissionResponse(codeSubmission);
     }
 
@@ -38,7 +50,7 @@ public class CodeSubmissionCommandHandler {
         //log
 
         //update codeSubmission
-        codeSubmissionHelper.updateCodeSubmissionWhenAllTestCaseAssessed(codeSubmissionTestCase.getCodeSubmission().getId());
+
     }
 
     public List<GetCodeSubmissionResponseItem> getCodeSubmissionsByUserId(GetCodeSubmissionsByUserIdCommand command) {
@@ -47,7 +59,11 @@ public class CodeSubmissionCommandHandler {
             List<GetCodeSubmissionResponseItem> list = codeSubmissions.stream()
                     .map(codeSubmissionDataMapper::codeSubmissionToGetCodeSubmissionResponseItem)
                     .toList();
-            list.forEach(item -> item.setSourceCode(null));
+            list.forEach(item -> {
+                item.setHeadCode(null);
+                item.setBodyCode(null);
+                item.setTailCode(null);
+            });
             return list;
         }
         return List.of();

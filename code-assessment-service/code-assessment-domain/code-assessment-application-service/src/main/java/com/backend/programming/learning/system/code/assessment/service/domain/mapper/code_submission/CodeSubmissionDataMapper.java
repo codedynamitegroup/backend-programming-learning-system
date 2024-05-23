@@ -31,7 +31,9 @@ public class CodeSubmissionDataMapper {
                 .languageId(new ProgrammingLanguageId(createCodeSubmissionCommand.getLanguageId()))
                 .userId(new UserId(createCodeSubmissionCommand.getUserId()))
                 .codeQuestion(codeQuestion)
-                .sourceCode(createCodeSubmissionCommand.getSourceCode())
+                .headCode(createCodeSubmissionCommand.getHeadCode())
+                .bodyCode(createCodeSubmissionCommand.getBodyCode())
+                .tailCode(createCodeSubmissionCommand.getTailCode())
                 .build();
     }
 
@@ -58,7 +60,10 @@ public class CodeSubmissionDataMapper {
                 .maxGrade(codeSubmission.getCodeQuestion().getMaxGrade())
                 .achievedGrade(codeSubmission.getGrade())
                 .description(codeSubmission.getStatusDescription())
-                .sourceCode(decodeBase64ToString(codeSubmission.getSourceCode()))
+                .headCode(decodeBase64ToString(codeSubmission.getHeadCode()))
+                .bodyCode(decodeBase64ToString(codeSubmission.getBodyCode()))
+                .tailCode(decodeBase64ToString(codeSubmission.getTailCode()))
+                .createdAt(codeSubmission.getCreatedAt())
                 .build();
     }
 

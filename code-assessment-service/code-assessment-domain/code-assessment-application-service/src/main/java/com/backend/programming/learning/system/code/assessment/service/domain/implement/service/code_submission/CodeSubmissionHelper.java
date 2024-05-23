@@ -16,11 +16,13 @@ import com.backend.programming.learning.system.code.assessment.service.domain.ma
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.assessment.AssessmentSourceCodeByTestCases;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_submssion.CodeSubmissionRepository;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -92,8 +94,9 @@ public class CodeSubmissionHelper {
             genericHelper.mapRepositoryAttributeToUpdateAttribute(cstcRepo , cstc, CodeSubmissionTestCase.class);
 //            log.info("jfdk {}", cstc.getCodeSubmission().toString());
             codeSubmissionTestCaseRepository.save(cstcRepo);
+            return cstcRepo;
         }
-        return cstc;
+        return null;
     }
 
     @Transactional
@@ -101,21 +104,22 @@ public class CodeSubmissionHelper {
         codeSubmissionRepository.updateOneTestCase(codeSubmissionTestCase.getCodeSubmission().getId());
     }
 
-    @Transactional
-    public void updateCodeSubmissionWhenAllTestCaseAssessed(CodeSubmissionId id) {
-        Optional<CodeSubmission> codeSubmissionOpt = codeSubmissionRepository.findById(id);
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public boolean updateCodeSubmissionWhenAllTestCaseAssessed(CodeSubmissionId id) {
+        CodeSubmission codeSubmission = validateHelper.validateCodeSubmission(id);
+//        log.info("ccccc {} {}", codeSubmission.getNumOfTestCase(), codeSubmission.getNumOfTestCaseGraded());
 
-        if(codeSubmissionOpt.isPresent()){
-            CodeSubmission codeSubmission = codeSubmissionOpt.get();
+        if(codeSubmission.getNumOfTestCaseGraded().equals(codeSubmission.getNumOfTestCase())){
+            List<CodeSubmissionTestCase> cstc = codeSubmissionTestCaseRepository.findByCodeSubmissionId(codeSubmission.getId());
 
-            if(codeSubmission.getNumOfTestCaseGraded().equals(codeSubmission.getNumOfTestCase())){
-                List<CodeSubmissionTestCase> cstc = codeSubmissionTestCaseRepository.findByCodeSubmissionId(id);
+            codeAssessmentDomainService.calculateAvgTimeAndMemoryAndGrade(codeSubmission, cstc, codeAssessmentServiceConfigData.getAcceptedStatusDescription());
 
-                codeAssessmentDomainService.calculateAvgTimeAndMemoryAndGrade(codeSubmission, cstc, codeAssessmentServiceConfigData.getAcceptedStatusDescription());
+            codeSubmissionRepository.save(codeSubmission);
 
-                codeSubmissionRepository.save(codeSubmission);
-            }
-        }
+            return true;
+        }else if(!codeSubmission.getGradingStatus().equals(GradingStatus.GRADING))
+            return true;
+        return false;
     }
 
     @Transactional

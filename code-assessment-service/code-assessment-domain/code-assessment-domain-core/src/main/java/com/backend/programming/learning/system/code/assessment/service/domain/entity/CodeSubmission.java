@@ -2,9 +2,12 @@ package com.backend.programming.learning.system.code.assessment.service.domain.e
 
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.CodeSubmissionTestCaseId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
+import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.valueobject.*;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,7 +18,9 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
     private Double grade;
     private Double runTime;
     private Double memory;
-    private String sourceCode;
+    private String headCode;
+    private String bodyCode;
+    private String tailCode;
     private GradingStatus gradingStatus;
     private String aiAssessment;
     private String sonaqueAssessment;
@@ -27,6 +32,11 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
     private Integer programmingLangaugeJudge0Id;
     private String statusDescription;
     private Integer version;
+    private ZonedDateTime createdAt;
+
+    public void setNumOfTestCaseGraded(Integer numOfTestCaseGraded) {
+        this.numOfTestCaseGraded = numOfTestCaseGraded;
+    }
 
     @Override
     public String toString() {
@@ -37,7 +47,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
                 ", grade=" + grade +
                 ", runTime=" + runTime +
                 ", memory=" + memory +
-                ", sourceCode='" + sourceCode + '\'' +
+                ", sourceCode='" + bodyCode + '\'' +
                 ", gradingStatus=" + gradingStatus +
                 ", aiAssessment='" + aiAssessment + '\'' +
                 ", sonaqueAssessment='" + sonaqueAssessment + '\'' +
@@ -48,13 +58,16 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
     }
 
     private CodeSubmission(Builder builder) {
+        super.setId(builder.id);
         codeQuestion = builder.codeQuestion;
         userId = builder.userId;
         languageId = builder.languageId;
         grade = builder.grade;
         runTime = builder.runTime;
         memory = builder.memory;
-        sourceCode = builder.sourceCode;
+        headCode = builder.headCode;
+        bodyCode = builder.bodyCode;
+        tailCode = builder.tailCode;
         setGradingStatus(builder.gradingStatus);
         aiAssessment = builder.aiAssessment;
         sonaqueAssessment = builder.sonaqueAssessment;
@@ -64,8 +77,9 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         setCodeSubmissionTestCaseList(builder.codeSubmissionTestCaseList);
         setProgrammingLanguageCodeQuestion(builder.programmingLanguageCodeQuestion);
         setProgrammingLangaugeJudge0Id(builder.programmingLangaugeJudge0Id);
+        setStatusDescription(builder.statusDescription);
         version = builder.version;
-        super.setId(builder.id);
+        createdAt = builder.createdAt;
     }
 
     public static Builder builder() {
@@ -115,6 +129,10 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         return codeQuestion;
     }
 
+    public ZonedDateTime getCreatedAt() {
+        return createdAt;
+    }
+
     public String getStatusDescription() {
         return statusDescription;
     }
@@ -143,8 +161,16 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         return memory;
     }
 
-    public String getSourceCode() {
-        return sourceCode;
+    public String getHeadCode() {
+        return headCode;
+    }
+
+    public String getBodyCode() {
+        return bodyCode;
+    }
+
+    public String getTailCode() {
+        return tailCode;
     }
 
     public GradingStatus getGradingStatus() {
@@ -170,6 +196,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         numOfTestCaseGraded = 0;
         copyState = CopyState.CREATING;
         programmingLanguageCodeQuestion = plcq;
+        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
         version = 0;
     }
 
@@ -199,7 +226,9 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         private Double grade;
         private Double runTime;
         private Double memory;
-        private String sourceCode;
+        private String headCode;
+        private String bodyCode;
+        private String tailCode;
         private GradingStatus gradingStatus;
         private String aiAssessment;
         private String sonaqueAssessment;
@@ -209,10 +238,12 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         private List<CodeSubmissionTestCase> codeSubmissionTestCaseList;
         private ProgrammingLanguageCodeQuestion programmingLanguageCodeQuestion;
         private Integer programmingLangaugeJudge0Id;
+        private String statusDescription;
         private Integer version;
-        private CodeSubmissionId id;
+        private ZonedDateTime createdAt;
 
         private CodeQuestionLangauge codeQuestionLangauge;
+        private CodeSubmissionId id;
 
         private Builder() {
         }
@@ -232,8 +263,18 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
             return this;
         }
 
+        public Builder statusDescription(String val) {
+            statusDescription = val;
+            return this;
+        }
+
         public Builder version(Integer val) {
             version = val;
+            return this;
+        }
+
+        public Builder createdAt(ZonedDateTime val) {
+            createdAt = val;
             return this;
         }
 
@@ -257,8 +298,18 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
             return this;
         }
 
-        public Builder sourceCode(String val) {
-            sourceCode = val;
+        public Builder headCode(String val) {
+            headCode = val;
+            return this;
+        }
+
+        public Builder bodyCode(String val) {
+            bodyCode = val;
+            return this;
+        }
+
+        public Builder tailCode(String val) {
+            tailCode = val;
             return this;
         }
 

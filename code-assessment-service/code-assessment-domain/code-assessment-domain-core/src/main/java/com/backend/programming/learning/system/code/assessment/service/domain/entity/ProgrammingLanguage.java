@@ -18,6 +18,7 @@ public class ProgrammingLanguage extends AggregateRoot<ProgrammingLanguageId> {
     private CopyState copyState;
 
     private ProgrammingLanguage(Builder builder) {
+        super.setId(builder.id);
         name = builder.name;
         judge0_compilerApiId = builder.judge0_compilerApiId;
         timeLimit = builder.timeLimit;
@@ -26,8 +27,10 @@ public class ProgrammingLanguage extends AggregateRoot<ProgrammingLanguageId> {
         bodyCode = builder.bodyCode;
         tailCode = builder.tailCode;
         isActive = builder.isActive;
+        headCode = builder.headCode;
+        bodyCode = builder.bodyCode;
+        tailCode = builder.tailCode;
         copyState = builder.copyState;
-        super.setId(builder.id);
     }
 
     public static Builder builder() {
@@ -37,6 +40,8 @@ public class ProgrammingLanguage extends AggregateRoot<ProgrammingLanguageId> {
     public String getName() {
         return name;
     }
+
+
 
     public CopyState getCopyState() {
         return copyState;
@@ -158,6 +163,5 @@ public class ProgrammingLanguage extends AggregateRoot<ProgrammingLanguageId> {
         public ProgrammingLanguage build() {
             return new ProgrammingLanguage(this);
         }
-
     }
 }
