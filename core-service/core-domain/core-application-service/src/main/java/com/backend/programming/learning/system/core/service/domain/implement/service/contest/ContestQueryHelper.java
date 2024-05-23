@@ -51,12 +51,7 @@ public class ContestQueryHelper {
             throw new ContestNotFoundException("Could not find contest with id: " +
                     contestId);
         }
-        List<ContestQuestion> contestQuestions = getAllContestQuestionsForContest(contestId);
-        List<Question> questions = contestQuestions.stream()
-                .map(ContestQuestion::getQuestion)
-                .toList();
         Contest contest = contestResult.get();
-        contest.setQuestions(questions);
 
         Optional<User> userResult = userRepository.findByEmail(email);
         if(userResult.isPresent()) {
@@ -66,6 +61,47 @@ public class ContestQueryHelper {
             );
             contestUserResult.ifPresent(contestUser -> contest.setRegistered(true));
         }
+
+        List<ContestQuestion> contestQuestions = contestQuestionRepository
+                .findAllContestQuestionsByContestId(contestId);
+        for (ContestQuestion contestQuestion : contestQuestions) {
+            Question question = contestQuestion.getQuestion();
+            Optional<QtypeCodeQuestion> codeQuestion = qtypeCodeQuestionRepository
+                    .findQtypeCodeQuestionByQuestionId(question.getId().getValue());
+            if (codeQuestion.isEmpty()) {
+                log.warn("Could not find code question for question with id: {}",
+                        question.getId().getValue());
+                throw new QtypeCodeQuestionNotFoundException("Could not find code question for question with id: " +
+                        question.getId().getValue());
+            }
+            contestQuestion.setCodeQuestionId(codeQuestion.get().getId().getValue());
+            contestQuestion.setMaxGrade(codeQuestion.get().getMaxGrade());
+            if (userResult.isPresent()) {
+                contestQuestion.setNumOfSubmissions(
+                        codeSubmissionRepository.countAllByUserIdAndCodeQuestionId(
+                                userResult.get().getId().getValue(),
+                                codeQuestion.get().getId().getValue()
+                        )
+                );
+                Optional<CodeSubmission> codeSubmission = codeSubmissionRepository
+                        .findLatestPassedCodeSubmissionByUserIdAndCodeQuestionId(
+                                userResult.get().getId().getValue(),
+                                codeQuestion.get().getId().getValue()
+                        );
+                if (codeSubmission.isPresent()) {
+                    contestQuestion.setGrade(codeSubmission.get().getGrade());
+                    Duration duration = Duration.between(
+                            contest.getStartTime(),
+                            codeSubmission.get().getCreatedAt()
+                    );
+                    contestQuestion.setDoTime(duration.toSeconds());
+                } else {
+                    contestQuestion.setGrade(0F);
+                    contestQuestion.setDoTime(0L);
+                }
+            }
+        }
+        contest.setQuestions(contestQuestions);
 
         log.info("Contest queried with id: {}", contest.getId().getValue());
         return contest;
