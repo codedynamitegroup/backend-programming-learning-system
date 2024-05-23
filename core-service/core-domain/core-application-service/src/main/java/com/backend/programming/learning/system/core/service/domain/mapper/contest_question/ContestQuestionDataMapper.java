@@ -25,16 +25,23 @@ import java.util.stream.Collectors;
 @Component
 public class ContestQuestionDataMapper {
     public ContestQuestionResponseEntity contestQuestionToContestQuestionResponseEntity(ContestQuestion contestQuestion) {
-
-
         return ContestQuestionResponseEntity.builder()
                 .questionId(contestQuestion.getQuestion().getId().getValue())
                 .codeQuestionId(contestQuestion.getCodeQuestionId())
                 .difficulty(contestQuestion.getQuestion().getDifficulty())
                 .name(contestQuestion.getQuestion().getName())
                 .questionText(contestQuestion.getQuestion().getQuestionText())
-                .generalFeedback(contestQuestion.getQuestion().getGeneralFeedback())
                 .defaultMark(contestQuestion.getQuestion().getDefaultMark())
+                .maxGrade(contestQuestion.getMaxGrade())
+                .grade(contestQuestion.getGrade())
+                .doTime(contestQuestion.getDoTime())
+                .numOfSubmissions(contestQuestion.getNumOfSubmissions())
                 .build();
+    }
+
+    public List<ContestQuestionResponseEntity> contestQuestionsToContestQuestionResponseEntities(List<ContestQuestion> contestQuestions) {
+        return contestQuestions.stream()
+                .map(this::contestQuestionToContestQuestionResponseEntity)
+                .collect(Collectors.toList());
     }
 }

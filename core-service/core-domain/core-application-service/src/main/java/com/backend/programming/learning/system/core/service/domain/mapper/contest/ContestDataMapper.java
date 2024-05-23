@@ -13,6 +13,7 @@ import com.backend.programming.learning.system.core.service.domain.entity.Contes
 import com.backend.programming.learning.system.core.service.domain.entity.ContestQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.ContestUser;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
+import com.backend.programming.learning.system.core.service.domain.mapper.contest_question.ContestQuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
@@ -29,12 +30,12 @@ import java.util.stream.Collectors;
 @Component
 public class ContestDataMapper {
     private final UserDataMapper userDataMapper;
-    private final QuestionDataMapper questionDataMapper;
+    private final ContestQuestionDataMapper contestQuestionDataMapper;
 
     public ContestDataMapper(UserDataMapper userDataMapper,
-                             QuestionDataMapper questionDataMapper) {
+                             ContestQuestionDataMapper contestQuestionDataMapper) {
         this.userDataMapper = userDataMapper;
-        this.questionDataMapper = questionDataMapper;
+        this.contestQuestionDataMapper = contestQuestionDataMapper;
     }
 
     public Contest createContestCommandToContest(CreateContestCommand createContestCommand) {
@@ -68,17 +69,20 @@ public class ContestDataMapper {
     public ContestResponseEntity contestToQueryContestResponse(Contest contest) {
         UserResponseEntity createdByResponse = userDataMapper.userToUserResponseEntity(contest.getCreatedBy());
         UserResponseEntity updatedByResponse = userDataMapper.userToUserResponseEntity(contest.getUpdatedBy());
-        List<QuestionResponseEntity> questionResponseEntities =
-                contest.getQuestions().stream()
-                        .map(questionDataMapper::questionToQuestionResponseEntity)
-                        .toList();
+//        List<QuestionResponseEntity> questionResponseEntities =
+//                contest.getQuestions().stream()
+//                        .map(questionDataMapper::questionToQuestionResponseEntity)
+//                        .toList();
+        List<ContestQuestionResponseEntity> contestQuestionResponseEntities =
+                contestQuestionDataMapper.
+                        contestQuestionsToContestQuestionResponseEntities(contest.getQuestions());
 
         return ContestResponseEntity.builder()
                 .contestId(contest.getId().getValue())
                 .name(contest.getName())
                 .description(contest.getDescription())
                 .thumbnailUrl(contest.getThumbnailUrl())
-                .questions(questionResponseEntities)
+                .questions(contestQuestionResponseEntities)
                 .startTime(contest.getStartTime())
                 .endTime(contest.getEndTime())
                 .isRegistered(contest.getRegistered())
@@ -122,23 +126,26 @@ public class ContestDataMapper {
 
     public ContestUserResponseEntity contestUserToContestUserResponseEntity(ContestUser contestUser) {
         UserResponseEntity userResponseEntity = userDataMapper.userToUserResponseEntity(contestUser.getUser());
-        List<ContestQuestionResponseEntity> contestQuestionResponseEntities = new ArrayList<>();
-        for (int i = 0; i < contestUser.getContestQuestions().size(); i++) {
-            ContestQuestion contestQuestion = contestUser.getContestQuestions().get(i);
-            ContestQuestionResponseEntity contestQuestionResponseEntity = ContestQuestionResponseEntity.builder()
-                    .questionId(contestQuestion.getQuestion().getId().getValue())
-                    .codeQuestionId(contestQuestion.getCodeQuestionId())
-                    .difficulty(contestQuestion.getQuestion().getDifficulty())
-                    .name(contestQuestion.getQuestion().getName())
-                    .questionText(contestQuestion.getQuestion().getQuestionText())
-                    .defaultMark(contestQuestion.getQuestion().getDefaultMark())
-                    .maxGrade(contestQuestion.getMaxGrade())
-                    .grade(contestQuestion.getGrade())
-                    .doTime(contestQuestion.getDoTime())
-                    .numOfSubmissions(contestQuestion.getNumOfSubmissions())
-                    .build();
-            contestQuestionResponseEntities.add(contestQuestionResponseEntity);
-        }
+//        List<ContestQuestionResponseEntity> contestQuestionResponseEntities = new ArrayList<>();
+//        for (int i = 0; i < contestUser.getContestQuestions().size(); i++) {
+//            ContestQuestion contestQuestion = contestUser.getContestQuestions().get(i);
+//            ContestQuestionResponseEntity contestQuestionResponseEntity = ContestQuestionResponseEntity.builder()
+//                    .questionId(contestQuestion.getQuestion().getId().getValue())
+//                    .codeQuestionId(contestQuestion.getCodeQuestionId())
+//                    .difficulty(contestQuestion.getQuestion().getDifficulty())
+//                    .name(contestQuestion.getQuestion().getName())
+//                    .questionText(contestQuestion.getQuestion().getQuestionText())
+//                    .defaultMark(contestQuestion.getQuestion().getDefaultMark())
+//                    .maxGrade(contestQuestion.getMaxGrade())
+//                    .grade(contestQuestion.getGrade())
+//                    .doTime(contestQuestion.getDoTime())
+//                    .numOfSubmissions(contestQuestion.getNumOfSubmissions())
+//                    .build();
+//            contestQuestionResponseEntities.add(contestQuestionResponseEntity);
+//        }
+        List<ContestQuestionResponseEntity> contestQuestionResponseEntities =
+                contestQuestionDataMapper.
+                        contestQuestionsToContestQuestionResponseEntities(contestUser.getContestQuestions());
 
         return ContestUserResponseEntity.builder()
                 .contestId(contestUser.getContest().getId().getValue())
