@@ -72,13 +72,13 @@ public class CodeQuestionController {
             @RequestParam Integer pageSize,
             @RequestParam(required = false) List<UUID> tagIds,
             @RequestParam(defaultValue = "ASC") QueryOrderBy orderBy,
-            @RequestParam(defaultValue = "createdAt") CodeQuestion.Fields sortBy,
             @RequestParam(required = false) UUID userId,
             @RequestParam(required = false) String search,
             @RequestParam(required = false) QuestionDifficulty difficulty,
             @RequestParam(required = false) Boolean solved){
         log.info("getPublicCodeQuestion");
 //        tagIds.forEach(i-> log.info("{}",i));
+        CodeQuestion.Fields sortBy = CodeQuestion.Fields.createdAt;
         GetCodeQuestionsQuery query = GetCodeQuestionsQuery.builder()
                 .orderBy(orderBy)
                 .sortBy(sortBy)

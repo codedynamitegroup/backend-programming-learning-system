@@ -101,18 +101,26 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
     public Page<CodeQuestion> findAll(UserId userId, List<TagId> tagIds, QueryOrderBy orderBy, CodeQuestion.Fields sortBy, Integer pageNum, Integer pageSize, QuestionDifficulty difficulty, Boolean solved, String search, boolean isPublic) {
         Pageable pageable
                 = PageRequest
-                .of(pageNum,
-                        pageSize,
-                        Sort.by(generalMapper.QueryOrderByToSortDirection(orderBy),
-                                codeQuestionDataAccessMapper.codeQuestionFieldToCodeQuestionEntityField(sortBy.name())));
+                .of(pageNum, pageSize);
+//                                codeQuestionDataAccessMapper.codeQuestionFieldToCodeQuestionEntityField(sortBy.name())));
 
-        List<UUID> tagEntityId = tagIds == null? null: tagIds.stream().map(BaseId::getValue).toList();
+        List<UUID> tagEntityId = tagIds == null? List.of(): tagIds.stream().map(BaseId::getValue).toList();
+
+        List<String> splitedSearch = codeQuestionDataAccessMapper.splitWords(search);
+
+        String searchFinalWord = splitedSearch != null && !splitedSearch.isEmpty()? splitedSearch.get(splitedSearch.size() - 1): null;
+
+        if(splitedSearch != null && !splitedSearch.isEmpty())
+            splitedSearch.remove(splitedSearch.size() - 1);
+
+        String searchExcludeFinalWord =  splitedSearch != null && !splitedSearch.isEmpty()? String.join(" ", splitedSearch) : null;
 
         Page<CodeQuestionEntity> codeQuestionEntityPageable =
                 codeQuestionJpaRepository.findAndFilterByTagIds(
                         tagEntityId,
-                        search,
-                        difficulty,
+                        searchExcludeFinalWord,
+                        searchFinalWord,
+                        difficulty == null? null: difficulty.name(),
                         solved,
                         userId != null? userId.getValue(): null,
                         isPublic,

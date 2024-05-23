@@ -4,6 +4,8 @@ CREATE SCHEMA "public";
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
+CREATE EXTENSION IF NOT EXISTS unaccent;
+
 DROP TYPE IF EXISTS CopyState;
 CREATE TYPE CopyState AS ENUM (
     'CREATING',
@@ -132,6 +134,7 @@ CREATE TABLE qtype_code_questions(
     constraints text,
     created_at TIMESTAMP WITH TIME ZONE default CURRENT_TIMESTAMP,
     max_grade float default 10,
+    fts_document tsvector,
     CONSTRAINT qtype_code_questions_pk PRIMARY KEY (id)
 --         CONSTRAINT qtype_code_questions_questions_id_fk FOREIGN KEY (question_id)
 --         REFERENCES questions (id) MATCH SIMPLE
@@ -392,4 +395,19 @@ CREATE INDEX "question_outbox_saga_id"
     ON "public".question_outbox
     (type, saga_id);
 
-CREATE INDEX "search_code_question" ON qtype_code_questions(name);
+--postgres function sucks
+CREATE OR REPLACE FUNCTION update_code_question_fts_document()
+RETURNS TRIGGER AS '
+BEGIN
+    NEW.fts_document := to_tsvector(unaccent(NEW.name) || '' '' || NEW.name);
+    RETURN NEW;
+END;
+' LANGUAGE plpgsql;
+
+create trigger tsvector_update_on_code_question before insert or update of name
+    on qtype_code_questions
+    for each row
+    execute procedure update_code_question_fts_document();
+
+create index code_question_fts_index on qtype_code_questions(fts_document);
+

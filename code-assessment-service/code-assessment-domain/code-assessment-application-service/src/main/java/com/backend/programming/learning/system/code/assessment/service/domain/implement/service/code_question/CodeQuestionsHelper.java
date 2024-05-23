@@ -146,6 +146,7 @@ public class CodeQuestionsHelper {
                         })
                         .filter(Objects::nonNull)
                         .toList();
+
         Page<CodeQuestion> codeQuestions = codeQuestionRepository
                 .findAll(user != null? user.getId(): null,
                         tagIds,
