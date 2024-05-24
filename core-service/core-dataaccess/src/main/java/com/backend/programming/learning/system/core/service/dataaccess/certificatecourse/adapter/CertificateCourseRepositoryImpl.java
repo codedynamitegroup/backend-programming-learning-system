@@ -59,9 +59,17 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
 
         String searchExcludeFinalWord =  splitedSearch != null && !splitedSearch.isEmpty() ? String.join(" ", splitedSearch) : null;
 
+        // Get rid of empty string in filterTopicIds
+        List<UUID> finalFilterTopicIds = new ArrayList<>();
+        for (UUID topicId: filterTopicIds) {
+            if (topicId != null && !topicId.toString().isEmpty()) {
+                finalFilterTopicIds.add(topicId);
+            }
+        }
+
         return certificateCourseJpaRepository.findAllByCourseNameAndByFilterTopicIds(
                         searchExcludeFinalWord, searchFinalWord,
-                        filterTopicIds.isEmpty() ? new ArrayList<>() : filterTopicIds)
+                        finalFilterTopicIds)
                 .stream()
                 .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
                 .toList();
@@ -81,10 +89,18 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
 
         String searchExcludeFinalWord =  splitedSearch != null && !splitedSearch.isEmpty() ? String.join(" ", splitedSearch) : null;
 
+        // Get rid of empty string in filterTopicIds
+        List<UUID> finalFilterTopicIds = new ArrayList<>();
+        for (UUID topicId: filterTopicIds) {
+            if (topicId != null && !topicId.toString().isEmpty()) {
+                finalFilterTopicIds.add(topicId);
+            }
+        }
+
         if (isRegistered) {
             return certificateCourseJpaRepository.findAllByCourseNameAndByFilterTopicIdsAndRegisteredBy(
                             searchExcludeFinalWord, searchFinalWord,
-                            filterTopicIds.isEmpty() ? new ArrayList<>() : filterTopicIds,
+                            finalFilterTopicIds,
                             userId)
                     .stream()
                     .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
@@ -92,7 +108,7 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
         } else {
             return certificateCourseJpaRepository.findAllByCourseNameAndByFilterTopicIdsAndNotRegisteredBy(
                             searchExcludeFinalWord, searchFinalWord,
-                            filterTopicIds.isEmpty() ? new ArrayList<>() : filterTopicIds,
+                            finalFilterTopicIds,
                             userId)
                     .stream()
                     .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
@@ -116,9 +132,18 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
             splitedSearch.remove(splitedSearch.size() - 1);
 
         String searchExcludeFinalWord =  splitedSearch != null && !splitedSearch.isEmpty() ? String.join(" ", splitedSearch) : null;
+
+        // Get rid of empty string in filterTopicIds
+        List<UUID> finalFilterTopicIds = new ArrayList<>();
+        for (UUID topicId: filterTopicIds) {
+            if (topicId != null && !topicId.toString().isEmpty()) {
+                finalFilterTopicIds.add(topicId);
+            }
+        }
+
         return certificateCourseJpaRepository.findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIds(
                         searchExcludeFinalWord, searchFinalWord,
-                        filterTopicIds.isEmpty() ? new ArrayList<>() : filterTopicIds)
+                        finalFilterTopicIds)
                         .stream()
                         .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
                         .toList();
@@ -139,10 +164,18 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
 
         String searchExcludeFinalWord =  splitedSearch != null && !splitedSearch.isEmpty() ? String.join(" ", splitedSearch) : null;
 
+        // Get rid of empty string in filterTopicIds
+        List<UUID> finalFilterTopicIds = new ArrayList<>();
+        for (UUID topicId: filterTopicIds) {
+            if (topicId != null && !topicId.toString().isEmpty()) {
+                finalFilterTopicIds.add(topicId);
+            }
+        }
+
         if (isRegistered) {
             return certificateCourseJpaRepository.findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIdsAndRegisteredBy(
                             searchExcludeFinalWord, searchFinalWord,
-                            filterTopicIds.isEmpty() ? new ArrayList<>() : filterTopicIds,
+                            finalFilterTopicIds,
                             userId)
                     .stream()
                     .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
@@ -150,7 +183,7 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
         } else {
             return certificateCourseJpaRepository.findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIdsAndNotRegisteredBy(
                             searchExcludeFinalWord, searchFinalWord,
-                            filterTopicIds.isEmpty() ? new ArrayList<>() : filterTopicIds,
+                            finalFilterTopicIds,
                             userId)
                     .stream()
                     .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
