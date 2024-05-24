@@ -27,13 +27,30 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
     @Query("select c from ContestEntity c where c.startTime >= ?1")
     Page<ContestEntity> findAllUpcomingContests(ZonedDateTime now, Pageable pageable);
 
-    @Query("""
-    select c from ContestEntity c
-    where (LENGTH(?1) = 0 OR upper(c.name) like upper(concat('%', ?1, '%')))
-    and c.startTime >= ?2
-    order by c.startTime desc
-""")
-    Page<ContestEntity> findAllUpcomingContestsContainsSearchName(String name, ZonedDateTime now, Pageable pageable);
+    @Query(value = """
+    select c.* from contest c
+    where c.start_time >= ?1
+    and (cast(?3 as text) IS NULL or
+                c.fts_document @@ (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'') ) ) or
+                c.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) )
+            )
+    order by 
+        ts_rank(c.fts_document, 
+            case
+                when cast(?3 as text) is null then to_tsquery('')
+                else (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'')) )
+            end
+        ) desc,
+        ts_rank(c.fts_document,
+            case
+                when cast(?3 as text) is null then to_tsquery('')
+                else (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,''))))
+            end
+        ) desc,
+        c.start_time desc
+""", nativeQuery = true)
+    Page<ContestEntity> findAllUpcomingContestsContainsSearchName(
+            ZonedDateTime now,  String searchExcludeFinalWord, String searchFinalWord, Pageable pageable);
 
     @Query("""
             select c from ContestEntity c
@@ -42,31 +59,84 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
             """)
     Page<ContestEntity> findAllHappeningContests(ZonedDateTime now, Pageable pageable);
 
-    @Query("""
-            select c from ContestEntity c
-            where c.startTime <= ?1 and (c.endTime is null or (c.endTime is not null and c.endTime >= ?1))
-            and (LENGTH(?2) = 0 OR upper(c.name) like upper(concat('%', ?2, '%')))
-            order by c.startTime desc
-            """)
-    Page<ContestEntity> findAllHappeningContestsContainsSearchName(ZonedDateTime now, String name, Pageable pageable);
+    @Query(value = """
+            select c.* from contest c
+            where c.start_time <= ?1 and (c.end_time is null or (c.end_time is not null and c.end_time >= ?1))
+            and (cast(?3 as text) IS NULL or
+                c.fts_document @@ (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'') ) ) or
+                c.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) )
+            )
+            order by 
+                ts_rank(c.fts_document, 
+                    case
+                        when cast(?3 as text) is null then to_tsquery('')
+                        else (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'')) )
+                    end
+                ) desc,
+                ts_rank(c.fts_document,
+                    case
+                        when cast(?3 as text) is null then to_tsquery('')
+                        else (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,''))))
+                    end
+                ) desc,
+                c.start_time desc
+            """, nativeQuery = true)
+    Page<ContestEntity> findAllHappeningContestsContainsSearchName(
+            ZonedDateTime now, String searchExcludeFinalWord, String searchFinalWord, Pageable pageable);
 
     @Query("select c from ContestEntity c where c.endTime is not null and c.endTime < ?1")
     Page<ContestEntity> findAllEndedContests(ZonedDateTime now, Pageable pageable);
 
-    @Query("""
-            select c from ContestEntity c
-            where c.endTime is not null and c.endTime < ?1
-            and (LENGTH(?2) = 0 OR upper(c.name) like upper(concat('%', ?2, '%')))
-            order by c.startTime desc
-            """)
-    Page<ContestEntity> findAllEndedContestsContainsSearchName(ZonedDateTime now, String name, Pageable pageable);
+    @Query(value = """
+            select c.* from contest c
+            where c.end_time is not null and c.end_time < ?1
+            and (cast(?3 as text) IS NULL or
+                c.fts_document @@ (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'') ) ) or
+                c.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) )
+            )
+            order by 
+                ts_rank(c.fts_document, 
+                    case
+                        when cast(?3 as text) is null then to_tsquery('')
+                        else (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'')) )
+                    end
+                ) desc,
+                ts_rank(c.fts_document,
+                    case
+                        when cast(?3 as text) is null then to_tsquery('')
+                        else (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?23 as text) ,''))))
+                    end
+                ) desc,
+                c.start_time desc
+            """, nativeQuery = true)
+    Page<ContestEntity> findAllEndedContestsContainsSearchName(
+            ZonedDateTime now, String searchExcludeFinalWord, String searchFinalWord, Pageable pageable);
 
-    @Query("""
-    select c from ContestEntity c
-    where (LENGTH(?1) = 0 OR upper(c.name) like upper(concat('%', ?1, '%')))
-    order by c.startTime desc
-""")
-    Page<ContestEntity> findAllContainsSearchName(String name, Pageable pageable);
+    @Query(value = """
+    select c.* from contest c
+    where (cast(?2 as text) IS NULL or
+            c.fts_document @@ (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'') ) ) or
+            c.fts_document @@ (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,'')) ) )
+            )
+    order by 
+        ts_rank(c.fts_document, 
+            case
+                when cast(?2 as text) is null then to_tsquery('')
+                else (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'')) )
+            end
+        ) desc,
+        ts_rank(c.fts_document,
+            case
+                when cast(?2 as text) is null then to_tsquery('')
+                else (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,''))))
+            end
+        ) desc,
+        c.start_time desc
+""", nativeQuery = true)
+    Page<ContestEntity> findAllContainsSearchName(
+            String searchExcludeFinalWord,
+            String searchFinalWord,
+            Pageable pageable);
 
     @Query("""
     select c

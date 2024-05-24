@@ -10,6 +10,11 @@ import com.backend.programming.learning.system.core.service.domain.exception.Use
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 @Component
 public class ContestDataAccessMapper {
     private final UserDataAccessMapper userDataAccessMapper;
@@ -51,5 +56,13 @@ public class ContestDataAccessMapper {
                 .createdAt(contestEntity.getCreatedAt())
                 .updatedAt(contestEntity.getUpdatedAt())
                 .build();
+    }
+
+    public List<String> splitWords(String search) {
+        if(search == null) return null;
+
+        ArrayList<String> words = Stream.of(search.split(" ")).filter(i-> !i.isEmpty()).collect(Collectors.toCollection(ArrayList::new));
+
+        return words;
     }
 }

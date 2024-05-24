@@ -62,6 +62,9 @@ public class CertificateCourseQueryHelper {
                 certificateCourse.setNumOfCompletedQuestions(0);
             }
         }
+        certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourseId));
+        certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourseId));
+        certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourseId));
         log.info("Certificate course queried with id: {}", certificateCourse.getId().getValue());
         return certificateCourse;
     }
@@ -74,11 +77,18 @@ public class CertificateCourseQueryHelper {
             String email
     ) {
         switch (isRegisteredFilter) {
-            case ALL:
-                return certificateCourseRepository.findAllCertificateCourses(
+            case ALL: {
+                List<CertificateCourse> certificateCourseList = certificateCourseRepository.findAllCertificateCourses(
                         courseName,
                         filterTopicIds
                 );
+                for (CertificateCourse certificateCourse : certificateCourseList) {
+                    certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourse.getId().getValue()));
+                    certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourse.getId().getValue()));
+                    certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourse.getId().getValue()));
+                }
+                return certificateCourseList;
+            }
             case REGISTERED: {
                 User user = getUserByEmail(email);
                 List<CertificateCourse> certificateCourseList =
@@ -105,6 +115,9 @@ public class CertificateCourseQueryHelper {
                         certificateCourse.setRegistered(false);
                         certificateCourse.setNumOfCompletedQuestions(0);
                     }
+                    certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourse.getId().getValue()));
+                    certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourse.getId().getValue()));
+                    certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourse.getId().getValue()));
                 }
                 return certificateCourseList;
             }
@@ -119,6 +132,9 @@ public class CertificateCourseQueryHelper {
                 );
                 for (CertificateCourse certificateCourse : certificateCourseList) {
                     certificateCourse.setRegistered(false);
+                    certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourse.getId().getValue()));
+                    certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourse.getId().getValue()));
+                    certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourse.getId().getValue()));
                 }
                 return certificateCourseList;
             }
@@ -135,11 +151,18 @@ public class CertificateCourseQueryHelper {
             String email
     ) {
         switch (isRegisteredFilter) {
-            case ALL:
-                return certificateCourseRepository.findMostEnrolledCertificateCourses(
+            case ALL: {
+                List<CertificateCourse> certificateCourseList = certificateCourseRepository.findMostEnrolledCertificateCourses(
                         courseName,
                         filterTopicIds
                 );
+                for (CertificateCourse certificateCourse : certificateCourseList) {
+                    certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourse.getId().getValue()));
+                    certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourse.getId().getValue()));
+                    certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourse.getId().getValue()));
+                }
+                return certificateCourseList;
+            }
             case REGISTERED: {
                 User user = getUserByEmail(email);
                 List<CertificateCourse> certificateCourseList =
@@ -166,6 +189,9 @@ public class CertificateCourseQueryHelper {
                         certificateCourse.setRegistered(false);
                         certificateCourse.setNumOfCompletedQuestions(0);
                     }
+                    certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourse.getId().getValue()));
+                    certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourse.getId().getValue()));
+                    certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourse.getId().getValue()));
                 }
                 return certificateCourseList;
 
@@ -181,6 +207,9 @@ public class CertificateCourseQueryHelper {
                 );
                 for (CertificateCourse certificateCourse : certificateCourseList) {
                     certificateCourse.setRegistered(false);
+                    certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourse.getId().getValue()));
+                    certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourse.getId().getValue()));
+                    certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourse.getId().getValue()));
                 }
                 return certificateCourseList;
             }
@@ -204,6 +233,18 @@ public class CertificateCourseQueryHelper {
 
     private int countNumOfCompletedQuestions(UUID certificateCourseId, UUID userId) {
         return certificateCourseRepository.countNumOfCompletedQuestions(certificateCourseId, userId);
+    }
+
+    private int countNumOfQuestions(UUID certificateCourseId) {
+        return certificateCourseRepository.countNumOfQuestionsByCertificateId(certificateCourseId);
+    }
+
+    private int countNumOfStudents(UUID certificateCourseId) {
+        return certificateCourseRepository.countNumOfStudentsByCertificateId(certificateCourseId);
+    }
+
+    private int countNumOfReviews(UUID certificateCourseId) {
+        return certificateCourseRepository.countNumOfReviewsByCertificateId(certificateCourseId);
     }
 
 }

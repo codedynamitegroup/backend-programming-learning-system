@@ -37,4 +37,7 @@ public interface CertificateCourseRepository {
                                                                             UUID userId);
 
     int countNumOfCompletedQuestions(UUID certificateCourseId, UUID userId);
+    int countNumOfQuestionsByCertificateId(UUID certificateCourseId);
+    int countNumOfStudentsByCertificateId(UUID certificateCourseId);
+    int countNumOfReviewsByCertificateId(UUID certificateCourseId);
 }

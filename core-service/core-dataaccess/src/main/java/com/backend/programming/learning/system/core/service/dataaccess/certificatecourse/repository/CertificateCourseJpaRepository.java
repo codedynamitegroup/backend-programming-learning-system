@@ -15,97 +15,189 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
     Optional<CertificateCourseEntity> findByName(String name);
 
     @Query(value = """
-        select cce
-        from CertificateCourseEntity cce, CertificateCourseUserEntity ccue
-        where cce.id = ccue.certificateCourse.id
-         and (LENGTH(?1) = 0 OR (UPPER(cce.name) like UPPER(CONCAT('%', ?1, '%'))))
-         and ((?2 is NULL) OR (cce.topic.id in ?2))
-         and ccue.user.id = ?3
-        order by cce.name
-""")
+        select cc.*
+        from certificate_course cc
+        left join certificate_course_user ccu on cc.id = ccu.certificate_course_id
+        where (cast(?2 as text) IS NULL or
+                cc.fts_document @@ (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'') ) ) or
+                cc.fts_document @@ (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,'')) ) )
+            )
+         and (COALESCE(?3, null) is null OR cc.topic_id in ?3)
+         and ccu.user_id = ?3
+        order by
+            ts_rank(cc.fts_document, 
+                case
+                    when cast(?2 as text) is null then to_tsquery('')
+                    else (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'')) )
+                end
+            ) desc,
+            ts_rank(cc.fts_document,
+                case
+                    when cast(?2 as text) is null then to_tsquery('')
+                    else (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,''))))
+                end
+            ) desc,
+            cc.name
+""", nativeQuery = true)
     List<CertificateCourseEntity> findAllByCourseNameAndByFilterTopicIdsAndRegisteredBy(
-            String courseName,
+            String searchExcludeFinalWord, String searchFinalWord,
             List<UUID> filterTopicIds,
             UUID registeredBy);
 
     @Query(value = """
-        select cce
-        from CertificateCourseEntity cce
-        where (LENGTH(?1) = 0 OR (UPPER(cce.name) like UPPER(CONCAT('%', ?1, '%'))))
-         and ((?2 is NULL) OR (cce.topic.id in ?2))
-         and cce.id not in (
-            select ccue.certificateCourse.id
-            from CertificateCourseUserEntity ccue
-            where ccue.user.id = ?3
+        select cc.*
+        from certificate_course cc
+        where (cast(?2 as text) IS NULL or
+                cc.fts_document @@ (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'') ) ) or
+                cc.fts_document @@ (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,'')) ) )
+            )
+         and (COALESCE(?3, null) is null OR cc.topic_id in ?3)
+         and cc.id not in (
+            select ccu.certificate_course_id
+            from certificate_course_user ccu
+            where ccu.user_id = ?4
          )
-        order by cce.name
-""")
+        order by
+            ts_rank(cc.fts_document, 
+                case
+                    when cast(?2 as text) is null then to_tsquery('')
+                    else (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'')) )
+                end
+            ) desc,
+            ts_rank(cc.fts_document,
+                case
+                    when cast(?2 as text) is null then to_tsquery('')
+                    else (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,''))))
+                end
+            ) desc,
+            cc.name
+""", nativeQuery = true)
     List<CertificateCourseEntity> findAllByCourseNameAndByFilterTopicIdsAndNotRegisteredBy(
-            String courseName,
+            String searchExcludeFinalWord, String searchFinalWord,
             List<UUID> filterTopicIds,
             UUID registeredBy);
 
     @Query(value = """
-        select cce
-        from CertificateCourseEntity cce
-        where (LENGTH(?1) = 0 OR (UPPER(cce.name) like UPPER(CONCAT('%', ?1, '%'))))
-         and ((?2 is NULL) OR (cce.topic.id in ?2))
-        order by cce.name
-""")
+        select cc.*
+        from certificate_course cc
+        where (cast(?2 as text) IS NULL or
+                cc.fts_document @@ (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'') ) ) or
+                cc.fts_document @@ (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,'')) ) )
+            )
+        order by
+            ts_rank(cc.fts_document, 
+                case
+                    when cast(?2 as text) is null then to_tsquery('')
+                    else (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'')) )
+                end
+            ) desc,
+            ts_rank(cc.fts_document,
+                case
+                    when cast(?2 as text) is null then to_tsquery('')
+                    else (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,''))))
+                end
+            ) desc,
+            cc.name
+""",nativeQuery = true)
     List<CertificateCourseEntity> findAllByCourseNameAndByFilterTopicIds(
-            String courseName,
+            String searchExcludeFinalWord, String searchFinalWord,
             List<UUID> filterTopicIds);
 
     @Query(value = """
-        select cce
-        from CertificateCourseEntity cce
-        left join CertificateCourseUserEntity ccue
-        on cce.id = ccue.certificateCourse.id
-        where (LENGTH(?1) = 0 OR (UPPER(cce.name) like UPPER(CONCAT('%', ?1, '%'))))
-         and ((?2 is NULL) OR (cce.topic.id in ?2))
-        group by cce.id
-        order by count(ccue.user.id) desc
+        select cc.*
+        from certificate_course cc
+        left join certificate_course_user ccu on cc.id = ccu.certificate_course_id
+        where (cast(?2 as text) IS NULL or
+                cc.fts_document @@ (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'') ) ) or
+                cc.fts_document @@ (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,'')) ) )
+            )
+            and (COALESCE(?3, null) is null OR cc.topic_id in ?3)
+        group by cc.id
+        order by 
+            ts_rank(cc.fts_document, 
+                case
+                    when cast(?2 as text) is null then to_tsquery('')
+                    else (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'')) )
+                end
+            ) desc,
+            ts_rank(cc.fts_document,
+                case
+                    when cast(?2 as text) is null then to_tsquery('')
+                    else (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,''))))
+                end
+            ) desc,
+            count(ccu.user_id) desc
         limit 5
-""")
+""", nativeQuery = true)
     List<CertificateCourseEntity> findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIds(
-            String courseName,
+            String searchExcludeFinalWord, String searchFinalWord,
             List<UUID> filterTopicIds);
 
     @Query(value = """
-        select cce
-        from CertificateCourseEntity cce
-        left join CertificateCourseUserEntity ccue
-        on cce.id = ccue.certificateCourse.id
-        where (LENGTH(?1) = 0 OR (UPPER(cce.name) like UPPER(CONCAT('%', ?1, '%'))))
-         and ((?2 is NULL) OR (cce.topic.id in ?2))
-         and ccue.user.id = ?3
-        group by cce.id
-        order by count(ccue.user.id) desc
+        select cc.*
+        from certificate_course cc
+        left join certificate_course_user ccu on cc.id = ccu.certificate_course_id
+        where (cast(?2 as text) IS NULL or
+                cc.fts_document @@ (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'') ) ) or
+                cc.fts_document @@ (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,'')) ) )
+            )
+         and (COALESCE(?3, null) is null OR cc.topic_id in ?3)
+         and ccu.user_id = ?4
+        group by cc.id
+        order by 
+            ts_rank(cc.fts_document, 
+                case
+                    when cast(?2 as text) is null then to_tsquery('')
+                    else (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'')) )
+                end
+            ) desc,
+            ts_rank(cc.fts_document,
+                case
+                    when cast(?2 as text) is null then to_tsquery('')
+                    else (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,''))))
+                end
+            ) desc,
+            count(ccu.user_id) desc
         limit 5
-""")
+""", nativeQuery = true)
     List<CertificateCourseEntity> findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIdsAndRegisteredBy(
-            String courseName,
+            String searchExcludeFinalWord, String searchFinalWord,
             List<UUID> filterTopicIds,
             UUID registeredBy);
 
     @Query(value = """
-        select cce
-        from CertificateCourseEntity cce
-        left join CertificateCourseUserEntity ccue
-        on cce.id = ccue.certificateCourse.id
-        where (LENGTH(?1) = 0 OR (UPPER(cce.name) like UPPER(CONCAT('%', ?1, '%'))))
-         and ((?2 is NULL) OR (cce.topic.id in ?2))
-         and cce.id not in (
-            select ccue.certificateCourse.id
-            from CertificateCourseUserEntity ccue
-            where ccue.user.id = ?3
+        select cc.*
+        from certificate_course cc
+        left join certificate_course_user ccu on cc.id = ccu.certificate_course_id
+        where (cast(?2 as text) IS NULL or
+                cc.fts_document @@ (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'') ) ) or
+                cc.fts_document @@ (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,'')) ) )
+            )
+         and (COALESCE(?3, null) is null OR cc.topic_id in ?3)
+         and cc.id not in (
+            select ccu.certificate_course.id
+            from certificate_course_user ccu
+            where ccu.user_id = ?3
          )
-        group by cce.id
-        order by count(ccue.user.id) desc
+        group by cc.id
+        order by 
+            ts_rank(cc.fts_document, 
+                case
+                    when cast(?2 as text) is null then to_tsquery('')
+                    else (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'')) )
+                end
+            ) desc,
+            ts_rank(cc.fts_document,
+                case
+                    when cast(?2 as text) is null then to_tsquery('')
+                    else (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,''))))
+                end
+            ) desc,
+            count(ccu.user_id) desc
         limit 5
-""")
+""", nativeQuery = true)
     List<CertificateCourseEntity> findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIdsAndNotRegisteredBy(
-            String courseName,
+            String searchExcludeFinalWord, String searchFinalWord,
             List<UUID> filterTopicIds,
             UUID registeredBy);
 
@@ -123,4 +215,26 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
      and cse.pass = true
 """)
     int countNumOfCompletedQuestions(UUID certificateCourseId, UUID userId);
+
+    @Query("""
+    select count(*)
+    from ChapterEntity ce, ChapterQuestionEntity cqe
+    where ce.id = cqe.chapter.id
+     and ce.certificateCourse.id = ?1
+""")
+    int countNumOfQuestionsByCertificateId(UUID certificateCourseId);
+
+    @Query("""
+    select count(*) 
+    from CertificateCourseUserEntity ccue
+    where ccue.certificateCourse.id = ?1
+""")
+    int countNumOfStudentsByCertificateId(UUID certificateCourseId);
+
+    @Query("""
+    select count(*)
+    from ReviewEntity re
+    where re.certificateCourse.id = ?1
+""")
+    int countNumOfReviewsByCertificateId(UUID certificateCourseId);
 }

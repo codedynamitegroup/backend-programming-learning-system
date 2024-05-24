@@ -27,10 +27,10 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         // Certificate Course
-                        .requestMatchers(HttpMethod.POST, "/core/certificate-courses/create").hasAnyRole(ADMIN)
-                        .requestMatchers(HttpMethod.POST, "/core/certificate-courses/{id}/register").hasAnyRole(ADMIN, USER)
-                        .requestMatchers(HttpMethod.PUT, "/core/certificate-courses/{id}").hasAnyRole(ADMIN)
-                        .requestMatchers(HttpMethod.DELETE, "/core/certificate-courses/{id}").hasAnyRole(ADMIN)
+//                        .requestMatchers(HttpMethod.POST, "/core/certificate-courses/create").hasAnyRole(ADMIN)
+//                        .requestMatchers(HttpMethod.POST, "/core/certificate-courses/{id}/register").hasAnyRole(ADMIN, USER)
+//                        .requestMatchers(HttpMethod.PUT, "/core/certificate-courses/{id}").hasAnyRole(ADMIN)
+//                        .requestMatchers(HttpMethod.DELETE, "/core/certificate-courses/{id}").hasAnyRole(ADMIN)
 
                         // Chapter
                         .requestMatchers(HttpMethod.POST, "/core/chapters/create").hasAnyRole(ADMIN)
