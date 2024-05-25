@@ -33,6 +33,7 @@ public class AssignmentEntity {
     private CourseEntity course;
     private String title;
     private String intro;
+    private String activity;
     private Float score;
     private Float maxScore;
     private ZonedDateTime timeOpen;
