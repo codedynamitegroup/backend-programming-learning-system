@@ -390,6 +390,7 @@ CREATE TABLE "public".exam_question_submission
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
+
 DROP TABLE IF EXISTS "public".assignment CASCADE;
 CREATE TABLE "public".assignment
 (
@@ -398,6 +399,7 @@ CREATE TABLE "public".assignment
     course_id  uuid             NOT NULL,
     title      text             NOT NULL,
     intro      text,
+    activity text,
     score      double precision NOT NULL DEFAULT '0',
     max_score  double precision NOT NULL DEFAULT '0',
     time_open  TIMESTAMP WITH TIME ZONE,
@@ -408,6 +410,57 @@ CREATE TABLE "public".assignment
     CONSTRAINT assignment_pkey PRIMARY KEY (id),
     CONSTRAINT assignment_course_id_fkey FOREIGN KEY (course_id)
         REFERENCES "public".course (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS "public".intro_file CASCADE;
+CREATE TABLE "public".intro_file
+(
+    id          uuid DEFAULT gen_random_uuid() NOT NULL,
+    assignment_id uuid,
+    file_name        text                           NOT NULL,
+    file_size integer NOT NULL,
+    file_url         text                           NOT NULL,
+    timemodified TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    mimetype text NOT NULL,
+    CONSTRAINT intro_file_pkey PRIMARY KEY (id),
+    CONSTRAINT intro_file_assignment_id_fkey FOREIGN KEY (assignment_id)
+        REFERENCES "public".assignment (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS "public".intro_attachment CASCADE;
+CREATE TABLE "public".intro_attachment
+(
+    id          uuid DEFAULT gen_random_uuid() NOT NULL,
+    assignment_id uuid,
+    file_name        text                           NOT NULL,
+    file_size integer NOT NULL,
+    file_url         text                           NOT NULL,
+    timemodified TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    mimetype text NOT NULL,
+    CONSTRAINT intro_attachment_pkey PRIMARY KEY (id),
+    CONSTRAINT intro_attachment_assignment_id_fkey FOREIGN KEY (assignment_id)
+        REFERENCES "public".assignment (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS "public".activity_attachment CASCADE;
+CREATE TABLE "public".activity_attachment
+(
+    id          uuid DEFAULT gen_random_uuid() NOT NULL,
+    assignment_id uuid,
+    file_name        text                           NOT NULL,
+    file_size integer NOT NULL,
+    file_url         text                           NOT NULL,
+    timemodified TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    mimetype text NOT NULL,
+    CONSTRAINT activity_attachment_pkey PRIMARY KEY (id),
+    CONSTRAINT activity_attachment_assignment_id_fkey FOREIGN KEY (assignment_id)
+        REFERENCES "public".assignment (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );

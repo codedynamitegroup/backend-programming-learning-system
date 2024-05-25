@@ -41,9 +41,12 @@ public class AssignmentModel {
     private Integer preventsubmissionnotingroup;
     private List<AssignmentConfigModel> configs;
     private String intro;
+    private String activity;
     private Integer introformat;
-    private Object introfiles;
-    private Object introattachments;
+    private Integer activityformat;
+    private List<AssignmentResourseModel> introfiles;
+    private List<AssignmentResourseModel> introattachments;
+    private List<AssignmentResourseModel> activityattachments;
     private Integer timelimit;
     private Integer submissionattachments;
 
