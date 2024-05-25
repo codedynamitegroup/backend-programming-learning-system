@@ -19,6 +19,8 @@ public class CreateTopicCommand {
     private final String description;
     @NotNull(message = "thumbnailUrl is required")
     private final String thumbnailUrl;
+    @NotNull(message = "isSingleProgrammingLanguage is required")
+    private final Boolean isSingleProgrammingLanguage;
     @NotNull(message = "programmingLanguageIds is required")
     private final List<UUID> programmingLanguageIds;
     @NotNull(message = "createdBy is required")
