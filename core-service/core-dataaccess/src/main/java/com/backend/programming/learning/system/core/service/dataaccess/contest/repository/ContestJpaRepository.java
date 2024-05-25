@@ -104,7 +104,7 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
                 ts_rank(c.fts_document,
                     case
                         when cast(?3 as text) is null then to_tsquery('')
-                        else (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?23 as text) ,''))))
+                        else (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,''))))
                     end
                 ) desc,
                 c.start_time desc
