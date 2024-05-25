@@ -5,57 +5,57 @@ VALUES
 	 ('8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7','tgtien852@gmail.com',NULL,'Tien','Truong','12365478',NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false);
 
 
-INSERT INTO public.topic(id, name, description, thumbnail_url, created_by, updated_by)
+INSERT INTO public.topic(id, name, description, thumbnail_url, created_by, updated_by, is_single_programming_language)
 VALUES
     ('9ba179ed-d26d-4828-a0f6-8836c2063992',
      'Learn Python',
      'Python is a versatile and user-friendly programming language known for its readability and efficiency. It''s widely used for web development, data analysis, artificial intelligence, and more.',
      'https://cdn.codechef.com/images/self-learning/icons/python.svg',
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
-     '9ba179ed-d26d-4828-a0f6-8836c2063992'
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+        true
     ),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb92',
      'Learn C',
      'C is a fundamental programming language that''s ideal for beginners due to its simplicity and direct control over hardware. Learning C provides a strong foundation in computer science concepts and programming techniques.',
      'https://cdn.codechef.com/images/self-learning/icons/c.svg',
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
-     '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     true),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb46',
      'Learn Java',
      'Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible. It is a general-purpose programming language intended to let application developers write once, run anywhere (WORA), meaning that compiled Java code can run on all platforms that support Java without the need for recompilation.',
      'https://cdn.codechef.com/images/self-learning/icons/java.svg',
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
-     '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     true),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb47',
      'Learn JavaScript',
      'JavaScript is a programming language that conforms to the ECMAScript specification. JavaScript is high-level, often just-in-time compiled, and multi-paradigm. It has curly-bracket syntax, dynamic typing, prototype-based object-orientation, and first-class functions.',
      'https://logos-download.com/wp-content/uploads/2019/01/JavaScript_Logo.png',
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
-     '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     true),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb48',
      'Data structures and Algorithms',
      'Explore the fundamental building blocks of computer science through our comprehensive courses on Data Structures and Algorithms. Gain a solid understanding of both theory and practical application.',
      'https://cdn.codechef.com/images/self-learning/icons/stacks-and-queues.svg',
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
-     '9ba179ed-d26d-4828-a0f6-8836c2063992' ),
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     false),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb49',
      'Learn SQL',
      'This sample SQL certification course equips you with the skills and knowledge to effectively query, manipulate, and manage data in relational databases using SQL.  The course prepares you for various entry-level database administrator or data analyst roles that heavily utilize SQL.',
      'https://e7.pngegg.com/pngimages/170/924/png-clipart-microsoft-sql-server-microsoft-azure-sql-database-microsoft-text-logo.png',
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
-     '9ba179ed-d26d-4828-a0f6-8836c2063992' );
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     true);
 
 INSERT INTO public.organization(id, description, name, created_at, updated_at, is_deleted)
 VALUES
 	 ('9ba179ed-d26d-4828-a0f6-8836c2063992',NULL,'Code Dynamite','2024-04-15 18:37:44.08878+07','2024-04-15 18:37:44.08878+07',false),
 	 ('08b65a39-394f-4977-a5fa-3fe145b620f8',NULL,'moodle2','2024-04-15 18:09:29.488151+07','2024-04-15 18:09:29.488151+07',false),
 	 ('3ead3b08-afdd-442f-b544-fdbd86eaa186',NULL,'Code Dynamite','2024-04-15 18:09:40.033204+07','2024-04-15 18:09:40.033204+07',false);
-
--- INSERT INTO public.programming_language(id, name, compiler_api_id)
--- VALUES
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb47', 'Python (2.7.17)', 70),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', 'Java (OpenJDK 13.0.1)', 62),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb49', 'C++ (GCC 9.2.0)', 54);
 
 insert into programming_language (id, name, compiler_api_id, time_limit, memory_limit) values ('e268cd70-cf0d-46ce-8f69-ade9d3a955a2', 'Assembly (NASM 2.14.02)', 45, 2, 204800);
 insert into programming_language (id, name, compiler_api_id, time_limit, memory_limit) values ('ec1a6b7b-7817-4241-bc8f-febce8d2770e', 'Bash (5.0.0)', 46, 2, 204800);
@@ -104,6 +104,17 @@ insert into programming_language (id, name, compiler_api_id, time_limit, memory_
 insert into programming_language (id, name, compiler_api_id, time_limit, memory_limit) values ('5122684e-b577-40ef-a25a-7cc6b9f19088', 'Swift (5.2.3)', 83, 2, 204800);
 insert into programming_language (id, name, compiler_api_id, time_limit, memory_limit) values ('574bebfa-640b-4836-9920-9686123cf324', 'TypeScript (3.7.4)', 74, 2, 204800);
 insert into programming_language (id, name, compiler_api_id, time_limit, memory_limit) values ('c2812b53-059f-43cb-8e9b-966246a79567', 'Visual Basic.Net (vbnc 0.0.0.5943)', 84, 2, 204800);
+
+INSERT INTO public.topic_programming_language(topic_id, programming_language_id)
+VALUES
+    ('9ba179ed-d26d-4828-a0f6-8836c2063992', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb92', 'c95d5c7d-cadf-42cc-afdc-968211ae3720'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb46', 'c95d5c7d-cadf-42cc-afdc-968211ae3720'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb47', 'c95d5c7d-cadf-42cc-afdc-968211ae3720'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', 'c95d5c7d-cadf-42cc-afdc-968211ae3720'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', 'cc69d904-ba4e-44fb-a0b5-8170e30bac39'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb49', 'c95d5c7d-cadf-42cc-afdc-968211ae3720');
 
 INSERT INTO public.question(id, org_id, difficulty, name, question_text, general_feedback, default_mark, qtype, created_by, updated_by, copy_state)
 VALUES
@@ -181,23 +192,14 @@ VALUES
 INSERT INTO public.certificate_course(id, topic_id, name, description, skill_level, start_time, end_time, created_by, updated_by, avg_rating)
 VALUES
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'Learn Python', 'This course is designed for beginners who want to learn Python programming from scratch. It covers the basics of Python programming, including data types, control structures, functions, and more.', 'BASIC', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 4),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 'd215b5f8-0249-4dc5-89a3-51fd148cfb92', 'Intermediate Python', 'This course is designed for intermediate Python programmers who want to enhance their skills and knowledge. It covers advanced topics such as object-oriented programming, data structures, algorithms, and more.', 'INTERMEDIATE', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 4),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'd215b5f8-0249-4dc5-89a3-51fd148cfb46', 'Advanced Python', 'This course is designed for experienced Python programmers who want to master advanced Python concepts and techniques. It covers topics such as decorators, generators, metaclasses, and more.', 'ADVANCED', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 4),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', 'd215b5f8-0249-4dc5-89a3-51fd148cfb47', 'Learn Java', 'This course is designed for beginners who want to learn Java programming from scratch. It covers the basics of Java programming, including data types, control structures, functions, and more.', 'BASIC', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 0),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', 'd215b5f8-0249-4dc5-89a3-51fd148cfb48', 'Intermediate Java', 'This course is designed for intermediate Java programmers who want to enhance their skills and knowledge. It covers advanced topics such as object-oriented programming, data structures, algorithms, and more.', 'INTERMEDIATE', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 0),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', 'd215b5f8-0249-4dc5-89a3-51fd148cfb49', 'Advanced Java', 'This course is designed for experienced Java programmers who want to master advanced Java concepts and techniques. It covers topics such as decorators, generators, metaclasses, and more.', 'ADVANCED', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 0),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'Intermediate Python', 'This course is designed for intermediate Python programmers who want to enhance their skills and knowledge. It covers advanced topics such as object-oriented programming, data structures, algorithms, and more.', 'INTERMEDIATE', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 4),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'Advanced Python', 'This course is designed for experienced Python programmers who want to master advanced Python concepts and techniques. It covers topics such as decorators, generators, metaclasses, and more.', 'ADVANCED', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 4),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', 'd215b5f8-0249-4dc5-89a3-51fd148cfb46', 'Learn Java', 'This course is designed for beginners who want to learn Java programming from scratch. It covers the basics of Java programming, including data types, control structures, functions, and more.', 'BASIC', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 0),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', 'd215b5f8-0249-4dc5-89a3-51fd148cfb46', 'Intermediate Java', 'This course is designed for intermediate Java programmers who want to enhance their skills and knowledge. It covers advanced topics such as object-oriented programming, data structures, algorithms, and more.', 'INTERMEDIATE', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 0),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', 'd215b5f8-0249-4dc5-89a3-51fd148cfb46', 'Advanced Java', 'This course is designed for experienced Java programmers who want to master advanced Java concepts and techniques. It covers topics such as decorators, generators, metaclasses, and more.', 'ADVANCED', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 0),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', 'd215b5f8-0249-4dc5-89a3-51fd148cfb48', 'Stacks and Queues', 'This course is designed for beginners who want to learn about stacks and queues. It covers the basics of stacks and queues, including their implementation, operations, and applications.', 'BASIC', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 0),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', 'd215b5f8-0249-4dc5-89a3-51fd148cfb48', 'Linked Lists', 'This course is designed for intermediate programmers who want to learn about linked lists. It covers the basics of linked lists, including their implementation, operations, and applications.', 'INTERMEDIATE', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 0),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', 'd215b5f8-0249-4dc5-89a3-51fd148cfb48', 'Binary Trees', 'This course is designed for experienced programmers who want to learn about binary trees. It covers the basics of binary trees, including their implementation, operations, and applications.', 'ADVANCED', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 0);
-
-INSERT INTO public.topic_programming_language(topic_id, programming_language_id)
-VALUES
-    ('9ba179ed-d26d-4828-a0f6-8836c2063992', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb92', 'c95d5c7d-cadf-42cc-afdc-968211ae3720'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb46', 'c95d5c7d-cadf-42cc-afdc-968211ae3720'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb47', 'c95d5c7d-cadf-42cc-afdc-968211ae3720'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', 'c95d5c7d-cadf-42cc-afdc-968211ae3720'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb49', 'c95d5c7d-cadf-42cc-afdc-968211ae3720');
 
 INSERT INTO public.certificate_course_user(certificate_course_id, user_id)
 VALUES
