@@ -168,7 +168,7 @@ public class ContestQueryHelper {
         // Get all contest questions for each contest user
         for (ContestUser contestUser : contestLeaderboardResponseEntities) {
             // Get and set user details
-            User user = getUser(contestUser.getUser().getId().getValue());
+            User user = getUserHideSensitiveData(contestUser.getUser().getId().getValue());
             contestUser.setUser(user);
             // Get and set contest details
             Contest contest = getContest(contestUser.getContest().getId().getValue());
@@ -241,7 +241,7 @@ public class ContestQueryHelper {
         ContestUser contestUser = contestUserResult.get();
 
         // Get and set user details
-        User user = getUser(contestUser.getUser().getId().getValue());
+        User user = getUserHideSensitiveData(contestUser.getUser().getId().getValue());
         contestUser.setUser(user);
         // Get and set contest details
         Contest contest = getContest(contestUser.getContest().getId().getValue());
@@ -291,13 +291,20 @@ public class ContestQueryHelper {
         return contestUser;
     }
 
-    private User getUser(UUID userId) {
+    private User getUserHideSensitiveData(UUID userId) {
         Optional<User> user = userRepository.findUser(userId);
         if (user.isEmpty()) {
             log.warn("User with id: {} not found", userId);
             throw new UserNotFoundException("Could not find user with id: " + userId);
         }
-        return user.get();
+        User userWithGeneralInformation = user.get();
+        userWithGeneralInformation.setAddress(null);
+        userWithGeneralInformation.setPhone(null);
+        userWithGeneralInformation.setDob(null);
+        userWithGeneralInformation.setCreatedAt(null);
+        userWithGeneralInformation.setUpdatedAt(null);
+        userWithGeneralInformation.setDeleted(null);
+        return userWithGeneralInformation;
     }
 
     private Contest getContest(UUID contestId) {
