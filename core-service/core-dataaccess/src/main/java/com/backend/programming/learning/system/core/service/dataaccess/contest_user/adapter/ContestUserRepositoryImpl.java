@@ -1,10 +1,12 @@
 package com.backend.programming.learning.system.core.service.dataaccess.contest_user.adapter;
 
+import com.backend.programming.learning.system.core.service.dataaccess.contest_user.entity.ContestUserEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.contest_user.mapper.ContestUserDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.contest_user.repository.ContestUserJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.entity.ContestQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.ContestUser;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ContestUserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
@@ -13,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Slf4j
 @Component
 public class ContestUserRepositoryImpl implements ContestUserRepository {
     private final ContestUserJpaRepository contestUserJpaRepository;
@@ -66,12 +69,12 @@ public class ContestUserRepositoryImpl implements ContestUserRepository {
     public Page<ContestUser> findAllContestUsersOfLeaderboard(UUID contestId, Integer pageNo, Integer pageSize) {
         Pageable paging = Pageable.ofSize(pageSize).withPage(pageNo);
         return contestUserJpaRepository.findAllContestUsersOfLeaderboard(contestId, paging)
-                .map(contestUserDataAccessMapper::contestUserEntityToContestUser);
+                .map(contestUserDataAccessMapper::contestUserLeaderboardToContestUser);
     }
 
     @Override
     public Optional<ContestUser> findMyRankOfContest(UUID userId, UUID contestId) {
         return contestUserJpaRepository.findMyRankOfLeaderboard(userId, contestId)
-                .map(contestUserDataAccessMapper::contestUserEntityToContestUser);
+                .map(contestUserDataAccessMapper::contestUserLeaderboardToContestUser);
     }
 }
