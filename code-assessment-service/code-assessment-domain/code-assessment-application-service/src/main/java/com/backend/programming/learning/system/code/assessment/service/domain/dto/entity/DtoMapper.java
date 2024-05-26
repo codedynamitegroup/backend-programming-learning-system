@@ -56,9 +56,9 @@ public class DtoMapper {
                 .isActived(programmingLanguageCodeQuestion.getActive())
                 .timeLimit(programmingLanguageCodeQuestion.getTimeLimit())
                 .memoryLimit(programmingLanguageCodeQuestion.getMemoryLimit())
-                .tailCode(programmingLanguageCodeQuestion.getTailCode())
-                .headCode(programmingLanguageCodeQuestion.getHeadCode())
-                .bodyCode(programmingLanguageCodeQuestion.getBodyCode())
+                .tailCode(decodeBase64ToString(programmingLanguageCodeQuestion.getTailCode()))
+                .headCode(decodeBase64ToString(programmingLanguageCodeQuestion.getHeadCode()))
+                .bodyCode(decodeBase64ToString(programmingLanguageCodeQuestion.getBodyCode()))
                 .build();
     }
 
