@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.CourseResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.AssignmentCourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.AssignmentModel;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.AssignmentResourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.ListAssignmentCourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.coure_type.CourseTypeModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.CourseModel;
@@ -29,7 +30,6 @@ import com.backend.programming.learning.system.course.service.domain.mapper.mood
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.course.service.domain.valueobject.Type;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.user.UpdateUserCommand;
-import com.backend.programming.learning.system.course.service.domain.valueobject.TypeModule;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -57,6 +57,9 @@ public class MoodleCommandHandler {
     private final SectionRepository sectionRepository;
     private final ModuleRepository moduleRepository;
     private final CourseTypeRepository courseTypeRepository;
+    private final IntroFileRepository introFileRepository;
+    private final IntroAttachmentRepository introAttachmentRepository;
+    private final ActivityAttachmentRepository activityAttachmentRepository;
 
     private final  RoleMoodleRepository roleMoodleRepository;
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -80,12 +83,12 @@ public class MoodleCommandHandler {
 
     String GET_MODULE="core_course_get_course_module";
     String GET_USERS = "core_user_get_users";
-    //    String MOODLE_URL = "http://62.171.185.208/webservice/rest/server.php";
-    String MOODLE_URL = "http://localhost/moodle/webservice/rest/server.php";
+    String MOODLE_URL = "http://62.171.185.208/webservice/rest/server.php";
+    //    String MOODLE_URL = "http://localhost/moodle/webservice/rest/server.php";
     String MOODLE_URL_TOKEN = "http://62.171.185.208/login/token.php";
-    //    String TOKEN = "cdf90b5bf53bcae577c60419702dbee7";
+    String TOKEN = "cdf90b5bf53bcae577c60419702dbee7";
 //    String TOKEN = "c22b03ca9c0a3c8431cd6b57bd4c8b04";
-    String TOKEN = "60d437ef3f02dded9a7b097a8a81bf61";
+//    String TOKEN = "60d437ef3f02dded9a7b097a8a81bf61";
 
 
     @Transactional
@@ -94,7 +97,38 @@ public class MoodleCommandHandler {
         createCourseType();
         List<CourseResponseEntity> allCourse = getAllCourse();
         createCourseUser();
+        createCourseExam(allCourse);
         return "Sync course success";
+    }
+
+    private void createCourseExam(List<CourseResponseEntity> allCourse) {
+        String apiURLQuiz = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s",
+                MOODLE_URL, TOKEN, GET_QUIZZES);
+        String modelQuiz = restTemplate.getForObject(apiURLQuiz, String.class);
+        ListQuizModel listQuizModel = null;
+        try {
+            listQuizModel = objectMapper.readValue(modelQuiz, ListQuizModel.class);
+            log.info("Quiz model: {}", listQuizModel);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        List<Exam> exams = new ArrayList<>();
+        listQuizModel.getQuizzes().forEach(quizModel -> {
+            Optional<Exam> examResult = examRepository.findByName(quizModel.getName());
+            if (examResult.isPresent()) {
+                Exam examUpdate = moodleDataMapper.updateExam(quizModel,
+                        examResult.get(),
+                        courseIdsMap.get(quizModel.getCourse().toString()));
+                Exam res = examRepository.save(examUpdate);
+                exams.add(res);
+            } else {
+                Exam exam = moodleDataMapper.createExam(quizModel,
+                        courseIdsMap.get(quizModel.getCourse().toString()));
+                Exam res = examRepository.save(exam);
+                exams.add(res);
+            }
+        });
     }
 
     @Transactional
@@ -159,7 +193,7 @@ public class MoodleCommandHandler {
     @Transactional
     public void createModule(Integer moduleId)
     {
-        
+
 
     }
 
@@ -312,6 +346,25 @@ public class MoodleCommandHandler {
                     Assignment assignmentCreate = moodleDataMapper.createAssignment(course, assignmentModel);
                     assignmentRepository.saveAssignment(assignmentCreate);
                     createSubmissionAssignment(assignmentCreate, assignmentModel);
+                    if(assignmentModel.getIntrofiles()!=null) {
+                        assignmentModel.getIntrofiles().forEach(introFileModel -> {
+                            IntroFile introFile = moodleDataMapper.createIntroFile(assignmentCreate, introFileModel);
+                            introFileRepository.save(introFile);
+                        });
+                    }
+
+                    if(assignmentModel.getIntroattachments()!=null) {
+                        assignmentModel.getIntroattachments().forEach(introAttachmentModel -> {
+                            IntroAttachment introAttachment = moodleDataMapper.createIntroAttachment(assignmentCreate, introAttachmentModel);
+                            introAttachmentRepository.save(introAttachment);
+                        });
+                    }
+                    if(assignmentModel.getActivityattachments()!=null) {
+                        assignmentModel.getActivityattachments().forEach(activityAttachmentModel -> {
+                            ActivityAttachment activityAttachment = moodleDataMapper.createActivityAttachment(assignmentCreate, activityAttachmentModel);
+                            activityAttachmentRepository.save(activityAttachment);
+                        });
+                    }
                 });
             });
         }
@@ -335,9 +388,9 @@ public class MoodleCommandHandler {
             throw new RuntimeException(e);
         }
         List<CourseResponseEntity> result = new ArrayList<>();
-        Optional<User> userResult = userRepository.findUserByEmail("dcthong20@clc.fitus.edu.vn");
+        Optional<User> userResult = userRepository.findUserByEmail("kayonkiu@gmail.com");
         listCourseModel.getCourses().forEach(courseModel -> {
-            if(courseModel.getCategoryid()!=0) {
+            if(courseModel.getCategoryid()!=0&&courseModel.getId()!="1") {
                 Course courseCreate = moodleDataMapper.createCourse(courseModel, userResult.get().getOrganization());
                 courseCreate.setCreatedBy(userResult.get());
                 courseCreate.setUpdatedBy(userResult.get());
@@ -518,18 +571,20 @@ public class MoodleCommandHandler {
         List<Course> result = new ArrayList<>();
         Map<String, Course> courseIdsMap = new HashMap<>();
         listCourseMoodle.forEach(courseModel -> {
-            Optional<Course> courseResult = courseRepository.findByName(courseModel.getFullname());
-            if (courseResult.isPresent()) {
-                Course courseUpdate = moodleDataMapper.updateCourseByCourseMoodle(courseModel, courseResult.get());
-                Course res = courseRepository.save(courseUpdate);
-                result.add(res);
-                courseIdsMap.put(courseModel.getId(), res);
-            } else {
-                Optional<User> userSave = userRepository.findUserByEmail("dcthong852@gmail.com");
-                Course course = moodleDataMapper.createCourseByCourseMoodle(courseModel, userSave.get());
-                Course res = courseRepository.save(course);
-                result.add(res);
-                courseIdsMap.put(courseModel.getId(), res);
+            if(!courseModel.getId().equals(1)){
+                Optional<Course> courseResult = courseRepository.findByName(courseModel.getFullname());
+                if (courseResult.isPresent()) {
+                    Course courseUpdate = moodleDataMapper.updateCourseByCourseMoodle(courseModel, courseResult.get());
+                    Course res = courseRepository.save(courseUpdate);
+                    result.add(res);
+                    courseIdsMap.put(courseModel.getId(), res);
+                } else {
+                    Optional<User> userSave = userRepository.findByEmail("kayonkiu@gmail.com");
+                    Course course = moodleDataMapper.createCourseByCourseMoodle(courseModel, userSave.get());
+                    Course res = courseRepository.save(course);
+                    result.add(res);
+                    courseIdsMap.put(courseModel.getId(), res);
+                }
             }
         });
 

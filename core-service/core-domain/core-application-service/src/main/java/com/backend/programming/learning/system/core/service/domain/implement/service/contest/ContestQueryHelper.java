@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.core.service.domain.implement.se
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest_user.ContestUserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.exception.ContestNotFoundException;
+import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.question.QtypeCodeQuestionNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
@@ -166,6 +167,13 @@ public class ContestQueryHelper {
 
         // Get all contest questions for each contest user
         for (ContestUser contestUser : contestLeaderboardResponseEntities) {
+            // Get and set user details
+            User user = getUserHideSensitiveData(contestUser.getUser().getId().getValue());
+            contestUser.setUser(user);
+            // Get and set contest details
+            Contest contest = getContest(contestUser.getContest().getId().getValue());
+            contestUser.setContest(contest);
+
             List<ContestQuestion> contestQuestions = contestQuestionRepository
                     .findAllContestQuestionsByContestId(
                             contestId
@@ -232,6 +240,13 @@ public class ContestQueryHelper {
         }
         ContestUser contestUser = contestUserResult.get();
 
+        // Get and set user details
+        User user = getUserHideSensitiveData(contestUser.getUser().getId().getValue());
+        contestUser.setUser(user);
+        // Get and set contest details
+        Contest contest = getContest(contestUser.getContest().getId().getValue());
+        contestUser.setContest(contest);
+
         // Get all code questions for the contest user
         List<ContestQuestion> contestQuestions = contestQuestionRepository
                 .findAllContestQuestionsByContestId(contestId);
@@ -274,6 +289,31 @@ public class ContestQueryHelper {
 
         log.info("My rank of contest with id: {} queried", contestId);
         return contestUser;
+    }
+
+    private User getUserHideSensitiveData(UUID userId) {
+        Optional<User> user = userRepository.findUser(userId);
+        if (user.isEmpty()) {
+            log.warn("User with id: {} not found", userId);
+            throw new UserNotFoundException("Could not find user with id: " + userId);
+        }
+        User userWithGeneralInformation = user.get();
+        userWithGeneralInformation.setAddress(null);
+        userWithGeneralInformation.setPhone(null);
+        userWithGeneralInformation.setDob(null);
+        userWithGeneralInformation.setCreatedAt(null);
+        userWithGeneralInformation.setUpdatedAt(null);
+        userWithGeneralInformation.setDeleted(null);
+        return userWithGeneralInformation;
+    }
+
+    private Contest getContest(UUID contestId) {
+        Optional<Contest> contest = contestRepository.findById(new ContestId(contestId));
+        if (contest.isEmpty()) {
+            log.warn("Contest with id: {} not found", contestId);
+            throw new ContestNotFoundException("Could not find contest with id: " + contestId);
+        }
+        return contest.get();
     }
 
     private List<ContestQuestion> getAllContestQuestionsForContest(UUID contestId) {

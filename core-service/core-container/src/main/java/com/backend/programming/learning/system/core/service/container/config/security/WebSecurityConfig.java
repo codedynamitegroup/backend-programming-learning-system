@@ -39,6 +39,7 @@ public class WebSecurityConfig {
 
                         // Contest
 //                        .requestMatchers(HttpMethod.POST, "/core/contests/create").hasAnyRole(ADMIN)
+//                        .requestMatchers(HttpMethod.POST, "/core/contests/{id}/register").hasAnyRole(ADMIN, USER)
 //                        .requestMatchers(HttpMethod.PUT, "/core/contests/{id}").hasAnyRole(ADMIN)
 //                        .requestMatchers(HttpMethod.DELETE, "/core/contests/{id}").hasAnyRole(ADMIN)
 

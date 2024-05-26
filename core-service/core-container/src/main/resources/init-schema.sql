@@ -87,6 +87,7 @@ CREATE TABLE "public".topic
     name text UNIQUE NOT NULL,
     description text,
     thumbnail_url text,
+    is_single_programming_language boolean DEFAULT false,
     created_by uuid,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_by uuid,

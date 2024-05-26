@@ -229,8 +229,10 @@ public class CoreDomainServiceImpl implements CoreDomainService {
     @Override
     public ContestUserUpdatedEvent createContestUser(ContestUser contestUser) {
         contestUser.initializeContestUser();
-        log.info("Contest user created with id: {}", contestUser.getId().getValue());
-        return new ContestUserUpdatedEvent(contestUser, ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
+        ContestUserUpdatedEvent contestUserUpdatedEvent =
+                new ContestUserUpdatedEvent(contestUser, ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
+        log.info("Contest user updated event created with id: {}", contestUserUpdatedEvent.getContestUser().getId().getValue());
+        return contestUserUpdatedEvent;
     }
 
     @Override

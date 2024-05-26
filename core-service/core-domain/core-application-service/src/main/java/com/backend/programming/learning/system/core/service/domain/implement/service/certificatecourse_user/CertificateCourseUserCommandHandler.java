@@ -32,11 +32,13 @@ public class CertificateCourseUserCommandHandler {
         CertificateCourseUser certificateCourseUser = certificateCourseUserCreateHelper
                 .persistCertificateCourseUser(createCertificateCourseUserCommand);
 
-        log.info("Certificate course user created with id: {}", certificateCourseUser.getId().getValue());
+        log.info("User with id: {} registered for certificate course with id: {}",
+                certificateCourseUser.getUser().getId().getValue(),
+                certificateCourseUser.getCertificateCourse().getId().getValue());
 
         return certificateCourseUserDataMapper.certificateCourseUserToCreateCertificateCourseUserResponse(
                 certificateCourseUser,
-                "Certificate course user created successfully");
+                "Registered certificate course successfully.");
     }
 
     @Transactional(readOnly = true)

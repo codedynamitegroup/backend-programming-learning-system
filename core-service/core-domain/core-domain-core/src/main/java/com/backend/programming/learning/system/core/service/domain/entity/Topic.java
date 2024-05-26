@@ -17,6 +17,7 @@ public class Topic extends AggregateRoot<TopicId> {
     private String name;
     private String description;
     private String thumbnailUrl;
+    private Boolean isSingleProgrammingLanguage;
     private List<ProgrammingLanguage> programmingLanguages;
     private Integer numOfCertificateCourses;
     private User createdBy;
@@ -29,6 +30,7 @@ public class Topic extends AggregateRoot<TopicId> {
         setName(builder.name);
         setDescription(builder.description);
         setThumbnailUrl(builder.thumbnailUrl);
+        isSingleProgrammingLanguage = builder.isSingleProgrammingLanguage;
         setProgrammingLanguages(builder.programmingLanguages);
         setNumOfCertificateCourses(builder.numOfCertificateCourses);
         setCreatedBy(builder.createdBy);
@@ -71,6 +73,14 @@ public class Topic extends AggregateRoot<TopicId> {
 
     public void setThumbnailUrl(String thumbnailUrl) {
         this.thumbnailUrl = thumbnailUrl;
+    }
+
+    public Boolean getSingleProgrammingLanguage() {
+        return isSingleProgrammingLanguage;
+    }
+
+    public void setSingleProgrammingLanguage(Boolean singleProgrammingLanguage) {
+        isSingleProgrammingLanguage = singleProgrammingLanguage;
     }
 
     public List<ProgrammingLanguage> getProgrammingLanguages() {
@@ -126,6 +136,7 @@ public class Topic extends AggregateRoot<TopicId> {
         private String name;
         private String description;
         private String thumbnailUrl;
+        private Boolean isSingleProgrammingLanguage;
         private List<ProgrammingLanguage> programmingLanguages;
         private Integer numOfCertificateCourses;
         private User createdBy;
@@ -153,6 +164,11 @@ public class Topic extends AggregateRoot<TopicId> {
 
         public Builder thumbnailUrl(String val) {
             thumbnailUrl = val;
+            return this;
+        }
+
+        public Builder isSingleProgrammingLanguage(Boolean val) {
+            isSingleProgrammingLanguage = val;
             return this;
         }
 
