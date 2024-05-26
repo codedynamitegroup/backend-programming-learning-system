@@ -30,8 +30,6 @@ import com.backend.programming.learning.system.course.service.domain.mapper.mood
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.course.service.domain.valueobject.Type;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.user.UpdateUserCommand;
-import com.backend.programming.learning.system.course.service.domain.valueobject.TypeModule;
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +38,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
 import java.util.*;
 
 @Slf4j
@@ -100,7 +97,38 @@ public class MoodleCommandHandler {
         createCourseType();
         List<CourseResponseEntity> allCourse = getAllCourse();
         createCourseUser();
+        createCourseExam(allCourse);
         return "Sync course success";
+    }
+
+    private void createCourseExam(List<CourseResponseEntity> allCourse) {
+        String apiURLQuiz = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s",
+                MOODLE_URL, TOKEN, GET_QUIZZES);
+        String modelQuiz = restTemplate.getForObject(apiURLQuiz, String.class);
+        ListQuizModel listQuizModel = null;
+        try {
+            listQuizModel = objectMapper.readValue(modelQuiz, ListQuizModel.class);
+            log.info("Quiz model: {}", listQuizModel);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        List<Exam> exams = new ArrayList<>();
+        listQuizModel.getQuizzes().forEach(quizModel -> {
+            Optional<Exam> examResult = examRepository.findByName(quizModel.getName());
+            if (examResult.isPresent()) {
+                Exam examUpdate = moodleDataMapper.updateExam(quizModel,
+                        examResult.get(),
+                        courseIdsMap.get(quizModel.getCourse().toString()));
+                Exam res = examRepository.save(examUpdate);
+                exams.add(res);
+            } else {
+                Exam exam = moodleDataMapper.createExam(quizModel,
+                        courseIdsMap.get(quizModel.getCourse().toString()));
+                Exam res = examRepository.save(exam);
+                exams.add(res);
+            }
+        });
     }
 
     @Transactional
@@ -543,18 +571,20 @@ public class MoodleCommandHandler {
         List<Course> result = new ArrayList<>();
         Map<String, Course> courseIdsMap = new HashMap<>();
         listCourseMoodle.forEach(courseModel -> {
-            Optional<Course> courseResult = courseRepository.findByName(courseModel.getFullname());
-            if (courseResult.isPresent()) {
-                Course courseUpdate = moodleDataMapper.updateCourseByCourseMoodle(courseModel, courseResult.get());
-                Course res = courseRepository.save(courseUpdate);
-                result.add(res);
-                courseIdsMap.put(courseModel.getId(), res);
-            } else {
-                Optional<User> userSave = userRepository.findUserByEmail("dcthong852@gmail.com");
-                Course course = moodleDataMapper.createCourseByCourseMoodle(courseModel, userSave.get());
-                Course res = courseRepository.save(course);
-                result.add(res);
-                courseIdsMap.put(courseModel.getId(), res);
+            if(!courseModel.getId().equals(1)){
+                Optional<Course> courseResult = courseRepository.findByName(courseModel.getFullname());
+                if (courseResult.isPresent()) {
+                    Course courseUpdate = moodleDataMapper.updateCourseByCourseMoodle(courseModel, courseResult.get());
+                    Course res = courseRepository.save(courseUpdate);
+                    result.add(res);
+                    courseIdsMap.put(courseModel.getId(), res);
+                } else {
+                    Optional<User> userSave = userRepository.findByEmail("kayonkiu@gmail.com");
+                    Course course = moodleDataMapper.createCourseByCourseMoodle(courseModel, userSave.get());
+                    Course res = courseRepository.save(course);
+                    result.add(res);
+                    courseIdsMap.put(courseModel.getId(), res);
+                }
             }
         });
 
