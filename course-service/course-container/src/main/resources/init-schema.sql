@@ -498,10 +498,11 @@ CREATE TABLE "public".submission_assignment
     id            uuid DEFAULT gen_random_uuid() NOT NULL,
     user_id       uuid                           NOT NULL,
     assignment_id uuid                           NOT NULL,
-    pass_status   bigint                         NOT NULL,
+    is_graded   boolean                        NOT NULL,
     grade         double precision               NOT NULL,
     content       text                           NOT NULL,
     submit_time   timestamp without time zone NOT NULL,
+    timemodified  TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT submission_assignment_pkey PRIMARY KEY (id),
     CONSTRAINT submission_assignment_user_id_fkey FOREIGN KEY (user_id)
         REFERENCES "public".user (id) MATCH SIMPLE
@@ -522,6 +523,23 @@ CREATE TABLE "public".submission_assignment_file
     CONSTRAINT submission_assignment_file_pkey PRIMARY KEY (id),
     CONSTRAINT submission_assignment_file_submission_assignment_id_fkey FOREIGN KEY (submission_assignment_id)
         REFERENCES "public".submission_assignment (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS "public".submission_file CASCADE;
+CREATE TABLE "public".submission_file
+(
+    id            uuid DEFAULT gen_random_uuid() NOT NULL,
+    submission_assignment_file_id uuid                           NOT NULL,
+    file_name     text                           NOT NULL,
+    file_size     integer                        NOT NULL,
+    file_url      text                           NOT NULL,
+    timemodified  TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    mimetype      text                           NOT NULL,
+    CONSTRAINT submission_file_pkey PRIMARY KEY (id),
+    CONSTRAINT submission_file_submission_assignment_id_fkey FOREIGN KEY (submission_assignment_file_id)
+        REFERENCES "public".submission_assignment_file (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );

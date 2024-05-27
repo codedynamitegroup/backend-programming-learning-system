@@ -11,7 +11,6 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class SubmissionAssignmentOnlineTextResponseEntity {
-    private final UUID submissionAssignmentOnlineTextId;
-    private final UUID submissionAssignmentId;
+    private final UUID id;
     private final String content;
 }
