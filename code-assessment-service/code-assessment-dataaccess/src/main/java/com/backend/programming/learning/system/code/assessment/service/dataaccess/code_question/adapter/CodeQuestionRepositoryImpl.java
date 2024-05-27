@@ -21,7 +21,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -122,8 +121,9 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
                         searchFinalWord,
                         difficulty == null? null: difficulty.name(),
                         solved,
-                        userId != null? userId.getValue(): null,
+                        userId != null ? userId.getValue(): null,
                         isPublic,
+                        search,
                         pageable);
 
         Page<CodeQuestion> codeQuestions = codeQuestionEntityPageable.map(item->{
@@ -132,7 +132,12 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
 
             //if solved does not exist, then we must find the done in every question
             if (userId != null && solved == null) {
-                Optional<CodeSubmissionEntity> submissionEntity = codeSubmissionJpaRepository.findByUserIdAndCodeQuestionIdAndGrade(userId.getValue(), item.getId(), item.getMaxGrade().doubleValue());
+                Optional<CodeSubmissionEntity> submissionEntity
+                        = codeSubmissionJpaRepository
+                        .findFirstByUserIdAndCodeQuestionIdAndGrade(
+                                userId.getValue(),
+                                item.getId(),
+                                item.getMaxGrade().doubleValue());
                 if(submissionEntity.isPresent())
                     done = true;
             }
