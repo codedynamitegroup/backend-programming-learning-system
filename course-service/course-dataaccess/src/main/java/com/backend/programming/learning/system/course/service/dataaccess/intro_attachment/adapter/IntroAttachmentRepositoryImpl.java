@@ -41,6 +41,9 @@ public class IntroAttachmentRepositoryImpl implements IntroAttachmentRepository 
 
     @Override
     public List<IntroAttachment> findAllByAssignmentId(UUID assignmentId) {
-        return null;
+        return introAttachmentJpaRepository.findAllByAssignmentId(assignmentId)
+                .stream()
+                .map(introAttachmentDataAccessMapper::introAttachmentEntityToIntroAttachment)
+                .toList();
     }
 }

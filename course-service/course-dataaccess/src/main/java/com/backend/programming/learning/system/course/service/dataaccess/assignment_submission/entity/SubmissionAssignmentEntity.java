@@ -29,13 +29,15 @@ public class SubmissionAssignmentEntity {
     @JoinColumn(name = "assignment_id", referencedColumnName = "id")
     private AssignmentEntity assignment;
 
-    private Integer pass_status;
+    private Boolean isGraded;
 
     private Float grade;
+
 
     private String content;
 
     private ZonedDateTime submitTime;
+    private ZonedDateTime timemodified;
 
     @Override
     public boolean equals(Object o) {

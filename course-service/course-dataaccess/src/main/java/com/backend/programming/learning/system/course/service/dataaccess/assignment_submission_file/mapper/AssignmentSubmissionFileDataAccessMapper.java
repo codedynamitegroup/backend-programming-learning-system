@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.course.service.dataaccess.assignm
 import com.backend.programming.learning.system.course.service.domain.entity.SubmissionAssignment;
 import com.backend.programming.learning.system.course.service.domain.entity.SubmissionAssignmentFile;
 import com.backend.programming.learning.system.course.service.domain.valueobject.AssignmentSubmissionFileId;
+import com.backend.programming.learning.system.course.service.domain.valueobject.SubmissionAssignmentId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -33,4 +34,6 @@ public class AssignmentSubmissionFileDataAccessMapper {
                 .num_file(submissionAssignmentFileEntity.getNum_file())
                 .build();
     }
+
+
 }

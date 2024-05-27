@@ -10,23 +10,42 @@ public class SubmissionAssignment extends AggregateRoot<SubmissionAssignmentId> 
 
     private User user;
     private Assignment assignment;
-    private Integer pass_status;
+    private Boolean isGraded;
     private Float grade;
     private String content;
+
     private ZonedDateTime submittedAt;
+    private ZonedDateTime timemodified;
 
     private SubmissionAssignment(Builder builder) {
         super.setId(builder.submissionAssignmentId);
         user = builder.user;
         assignment = builder.assignment;
-        pass_status = builder.pass_status;
+        isGraded = builder.isGraded;
+        timemodified = builder.timemodified;
         grade = builder.grade;
         content = builder.content;
         submittedAt = builder.submittedAt;
     }
 
-    public void setPass_status(Integer pass_status) {
-        this.pass_status = pass_status;
+    public Boolean getGraded() {
+        return isGraded;
+    }
+
+    public void setGraded(Boolean graded) {
+        isGraded = graded;
+    }
+
+    public ZonedDateTime getTimemodified() {
+        return timemodified;
+    }
+
+    public void setTimemodified(ZonedDateTime timemodified) {
+        this.timemodified = timemodified;
+    }
+
+    public void setIsGraded(Boolean graded) {
+        isGraded = graded;
     }
 
     public void setGrade(Float grade) {
@@ -53,8 +72,8 @@ public class SubmissionAssignment extends AggregateRoot<SubmissionAssignmentId> 
         return assignment;
     }
 
-    public Integer getPass_status() {
-        return pass_status;
+    public Boolean getGradedStatus() {
+        return isGraded;
     }
 
     public Float getGrade() {
@@ -85,10 +104,11 @@ public class SubmissionAssignment extends AggregateRoot<SubmissionAssignmentId> 
         private SubmissionAssignmentId submissionAssignmentId;
         private User user;
         private Assignment assignment;
-        private Integer pass_status;
+        private Boolean isGraded;
         private Float grade;
         private String content;
         private ZonedDateTime submittedAt;
+        private ZonedDateTime timemodified;
 
         private Builder() {
 
@@ -113,8 +133,8 @@ public class SubmissionAssignment extends AggregateRoot<SubmissionAssignmentId> 
             return this;
         }
 
-        public Builder pass_status(Integer val) {
-            pass_status = val;
+        public Builder isGraded(Boolean val) {
+            isGraded = val;
             return this;
         }
 
@@ -122,6 +142,12 @@ public class SubmissionAssignment extends AggregateRoot<SubmissionAssignmentId> 
             grade = val;
             return this;
         }
+
+        public Builder timemodified(ZonedDateTime val) {
+            timemodified = val;
+            return this;
+        }
+
 
         public Builder content(String val) {
             content = val;

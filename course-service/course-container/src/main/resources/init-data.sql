@@ -1,8 +1,8 @@
 INSERT INTO public.user(id,email,dob,first_name,last_name,phone,address,avatar_url,created_at,updated_at,is_deleted, user_id_moodle)
 VALUES
-   ('9ba179ed-d26d-4828-a0f6-8836c2063992','nguyenquoctuan3185@gmail.com',NULL,'Tuan','Nguyen','012345678','HCM',NULL,'2024-04-12 21:33:23.371836+07','2024-04-12 21:33:23.371836+07',true, 3),
-   ('b029f559-52a8-4699-b595-71161498ed8c','dcthong852@gmail.com',NULL,'Thong','Duong','12365478',NULL,NULL,'2024-04-15 18:07:20.891115+07','2024-04-15 18:07:20.891115+07',false, 2),
-   ('8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7','tgtien852@gmail.com',NULL,'Tien','Truong','12365478',NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false, 1);
+   ('9ba179ed-d26d-4828-a0f6-8836c2063992','nguyenquoctuan3185@gmail.com',NULL,'Tuan','Nguyen','012345678','HCM',NULL,'2024-04-12 21:33:23.371836+07','2024-04-12 21:33:23.371836+07',true, 0),
+   ('b029f559-52a8-4699-b595-71161498ed8c','dcthong852@gmail.com',NULL,'Thong','Duong','12365478',NULL,NULL,'2024-04-15 18:07:20.891115+07','2024-04-15 18:07:20.891115+07',false, 0),
+   ('8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7','tgtien852@gmail.com',NULL,'Tien','Truong','12365478',NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false, 0);
 
 INSERT INTO public.organization(id, description, name, created_at, updated_at, is_deleted, moodle_url)
 VALUES

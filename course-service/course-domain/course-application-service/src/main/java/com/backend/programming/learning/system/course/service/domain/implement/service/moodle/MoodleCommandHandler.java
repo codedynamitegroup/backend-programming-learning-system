@@ -63,6 +63,7 @@ public class MoodleCommandHandler {
     private final IntroFileRepository introFileRepository;
     private final IntroAttachmentRepository introAttachmentRepository;
     private final ActivityAttachmentRepository activityAttachmentRepository;
+    private final SubmissionFileRepository submissionFileRepository;
 
     private final  RoleMoodleRepository roleMoodleRepository;
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -275,32 +276,44 @@ public class MoodleCommandHandler {
         List<SubmissionAssignmentModel> listSubmissionAssignmentModel = getAllSubmissionAssignment(assignmentModel.getId());
         listSubmissionAssignmentModel.forEach(submissionAssignmentModel -> {
             submissionAssignmentModel.getSubmissions().forEach(submissionModel -> {
-                Optional<User> user = userRepository.findUserByEmail("duongchithong2002@gmail.com");
+                Optional<User> user = userRepository.findByUserIdMoodle(Integer.valueOf(submissionModel.getUserid()));
                 if (submissionModel.getStatus().equals("submitted")) {
                     SubmissionAssignment submissionCreate = moodleDataMapper.createSubmissionAssignment(assignmentCreate, user.get(), submissionModel);
                     submissionAssignmentRepository.saveSubmissionAssignment(submissionCreate);
-                    SubmissionPlugin submissionPlugin = submissionModel.getPlugins().get(0);
-                    if (assignmentCreate.getType().equals(Type.FILE)) {
-                        SubmissionAssignmentFile submissionAssignmentFile = moodleDataMapper.
-                                createSubmissionAssignmentFile(submissionCreate, submissionPlugin);
-                        submissionAssignmentFileRepository.saveSubmissionAssignmentFile(submissionAssignmentFile);
-                    } else if (assignmentCreate.getType().equals(Type.TEXT_ONLINE)) {
-                        SubmissionAssignmentOnlineText submissionAssignmentOnlineText = moodleDataMapper.
-                                createSubmissionAssignmentOnlineText(submissionCreate, submissionPlugin);
-                        submissionAssignmentOnlineTextRepository.saveAssignmentSubmissionOnlineText(submissionAssignmentOnlineText);
-                    } else {
+                    List<SubmissionPlugin> submissionPlugins = submissionModel.getPlugins();
+//                    if (assignmentCreate.getType().equals(Type.FILE)) {
+//                        SubmissionAssignmentFile submissionAssignmentFile = moodleDataMapper.
+//                                createSubmissionAssignmentFile(submissionCreate, submissionPlugin);
+//                        submissionAssignmentFileRepository.saveSubmissionAssignmentFile(submissionAssignmentFile);
+//                        submissionModel.getPlugins().get(0).getFileareas().forEach(fileArea -> {
+//                            fileArea.getFiles().forEach(file -> {
+//                                SubmissionFile submissionFile = moodleDataMapper.createSubmissionFile(submissionAssignmentFile, file);
+//                                submissionFileRepository.save(submissionFile);
+//                            });
+//                        });
+//                    } else if (assignmentCreate.getType().equals(Type.TEXT_ONLINE)) {
+//                        SubmissionAssignmentOnlineText submissionAssignmentOnlineText = moodleDataMapper.
+//                                createSubmissionAssignmentOnlineText(submissionCreate, submissionPlugin);
+//                        submissionAssignmentOnlineTextRepository.saveAssignmentSubmissionOnlineText(submissionAssignmentOnlineText);
+//                    } else {
                         for (SubmissionPlugin plugin : submissionModel.getPlugins()) {
                             if (plugin.getType().equals("file")) {
                                 SubmissionAssignmentFile submissionAssignmentFile = moodleDataMapper.
                                         createSubmissionAssignmentFile(submissionCreate, plugin);
                                 submissionAssignmentFileRepository.saveSubmissionAssignmentFile(submissionAssignmentFile);
+                                plugin.getFileareas().forEach(fileArea -> {
+                                    fileArea.getFiles().forEach(file -> {
+                                        SubmissionFile submissionFile = moodleDataMapper.createSubmissionFile(submissionAssignmentFile, file);
+                                        submissionFileRepository.save(submissionFile);
+                                    });
+                                });
                             } else if (plugin.getType().equals("onlinetext")) {
                                 SubmissionAssignmentOnlineText submissionAssignmentOnlineText = moodleDataMapper.
                                         createSubmissionAssignmentOnlineText(submissionCreate, plugin);
                                 submissionAssignmentOnlineTextRepository.saveAssignmentSubmissionOnlineText(submissionAssignmentOnlineText);
                             }
                         }
-                    }
+//                    }
 
                 }
             });
