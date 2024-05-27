@@ -23,27 +23,20 @@ public class QueryAssignmentResponse {
     @NotNull
     private final UUID id;
 
+    private final Integer moodleId;
+
     @NotNull
     private final String title;
 
     private final String intro;
 
-    private final List<IntroFileResponseEntity> introFile;
+    private final List<IntroFileResponseEntity> introFiles;
 
-    private final List<IntroAttachmentResponseEntity> introAttachment;
-
-//    @NotNull
-//    private final List<String> introFiles;
-//
-//    @NotNull
-//    private final List<String> introAttachments;
+    private final List<IntroAttachmentResponseEntity> introAttachments;
 
     private final String activity;
 
-    private final List<ActivityAttachmentResponseEntity> activityAttachment;
-
-//    @NotNull
-//    private final List<String> activityAttachments;
+    private final List<ActivityAttachmentResponseEntity> activityAttachments;
 
     @NotNull
     private final Float score;

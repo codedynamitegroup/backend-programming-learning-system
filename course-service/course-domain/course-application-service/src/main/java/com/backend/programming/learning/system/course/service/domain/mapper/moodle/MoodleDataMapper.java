@@ -10,6 +10,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.module.ModuleModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.quiz.QuizModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.section.SectionModel;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.File;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.Submission;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionPlugin;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user.UserModel;
@@ -168,13 +169,19 @@ public class MoodleDataMapper {
     }
 
     public SubmissionAssignment createSubmissionAssignment(Assignment assignment,User user, Submission submission) {
+        Boolean isGraded=false;
+        if(submission.getGradingstatus().equals("graded"))
+        {
+            isGraded=true;
+        }
         return SubmissionAssignment.builder()
                 .id(new SubmissionAssignmentId(UUID.randomUUID()))
                 .assignment(assignment)
                 .user(user)
-                .pass_status(1)
+                .isGraded(isGraded)
                 .content("content")
                 .grade((float)-1)
+                .timemodified(Instant.ofEpochSecond(submission.getTimemodified()).atZone(ZoneId.of("UTC")))
                 .submittedAt(Instant.ofEpochSecond(submission.getTimecreated()).atZone(ZoneId.of("UTC")))
                 .build();
     }
@@ -352,6 +359,18 @@ public class MoodleDataMapper {
                 .id(new CourseTypeId(UUID.randomUUID()))
                 .name(courseTypeModel.getName())
                 .moodleId(moodleId)
+                .build();
+    }
+
+    public SubmissionFile createSubmissionFile(SubmissionAssignmentFile submissionAssignmentFile, File file) {
+        return SubmissionFile.builder()
+                .id(new SubmissionFileId(UUID.randomUUID()))
+                .submissionAssignmentFile(submissionAssignmentFile)
+                .fileName(file.getFilename())
+                .fileSize(file.getFilesize())
+                .fileUrl(file.getFileurl())
+                .mimetype(file.getMimetype())
+                .timemodified(Instant.ofEpochSecond(file.getTimemodified()).atZone(ZoneId.of("UTC")))
                 .build();
     }
 }

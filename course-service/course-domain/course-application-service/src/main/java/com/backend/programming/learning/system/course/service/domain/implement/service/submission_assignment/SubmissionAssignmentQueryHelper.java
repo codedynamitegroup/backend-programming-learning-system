@@ -36,4 +36,11 @@ public class SubmissionAssignmentQueryHelper {
         log.info("SubmissionAssignment queried with assignment id: {}", queryAllSubmissionnAssignmentCommand.getAssignmentId());
         return submissionAssignments;
     }
+
+    @Transactional(readOnly=true)
+    public SubmissionAssignment queryByAssignmentIdAndUserId(UUID assignmentId,UUID userId) {
+       SubmissionAssignment submissionAssignment = submissionAssignmentRepository.findByAssignmentIdAndUserId(assignmentId, userId);
+        log.info("SubmissionAssignment queried with assignment id: {} and user id: {}", assignmentId, userId);
+        return submissionAssignment;
+    }
 }

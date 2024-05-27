@@ -13,4 +13,6 @@ public interface AssignmentSubmissionJpaRepository extends JpaRepository<Submiss
     Optional<SubmissionAssignmentEntity> findById(UUID id);
 
     List<SubmissionAssignmentEntity> findAllByAssignmentId(UUID assignmentId);
+
+    Optional<SubmissionAssignmentEntity> findByAssignmentIdAndUserId(UUID assignmentId, UUID userId);
 }

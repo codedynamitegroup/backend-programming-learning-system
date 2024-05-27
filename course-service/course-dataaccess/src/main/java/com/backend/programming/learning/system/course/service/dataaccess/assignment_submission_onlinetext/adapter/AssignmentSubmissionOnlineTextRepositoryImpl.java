@@ -38,6 +38,12 @@ public class AssignmentSubmissionOnlineTextRepositoryImpl implements SubmissionA
     }
 
     @Override
+    public Optional<SubmissionAssignmentOnlineText> findBySubmissionAssignmentId(UUID submissionAssignmentId) {
+        return assignmentSubmissionOnlineTextJpaRepository.findByAssignmentSubmission_Id(submissionAssignmentId)
+                .map(assignmentSubmissionOnlineTextDataAccessMapper::assignmentSubmissionOnlineTextEntityToAssignmentSubmissionOnlineText);
+    }
+
+    @Override
     public void deleteSubmissionAssignmentOnlineTextById(UUID submissionAssignmentOnlineTextId) {
         assignmentSubmissionOnlineTextJpaRepository.deleteById(submissionAssignmentOnlineTextId);
     }

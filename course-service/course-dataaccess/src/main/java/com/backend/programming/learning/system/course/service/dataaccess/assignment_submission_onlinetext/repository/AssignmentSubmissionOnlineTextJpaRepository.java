@@ -10,4 +10,6 @@ import java.util.UUID;
 @Repository
 public interface AssignmentSubmissionOnlineTextJpaRepository extends JpaRepository<AssignmentSubmissionOnlineTextEntity, UUID> {
     Optional<AssignmentSubmissionOnlineTextEntity> findById(UUID id);
+
+    Optional<AssignmentSubmissionOnlineTextEntity> findByAssignmentSubmission_Id(UUID submissionAssignmentId);
 }
