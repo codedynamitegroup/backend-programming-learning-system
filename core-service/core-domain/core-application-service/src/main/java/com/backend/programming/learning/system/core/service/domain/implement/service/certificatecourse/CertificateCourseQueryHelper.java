@@ -1,8 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.implement.service.certificatecourse;
 
-import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
-import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourseUser;
-import com.backend.programming.learning.system.core.service.domain.entity.User;
+import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.exception.CertificateCourseNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
@@ -23,13 +21,16 @@ public class CertificateCourseQueryHelper {
     private final CertificateCourseRepository certificateCourseRepository;
     private final UserRepository userRepository;
     private final CertificateCourseUserRepository certificateCourseUserRepository;
+    private final ChapterQuestionRepository chapterQuestionRepository;
 
     public CertificateCourseQueryHelper(CertificateCourseRepository certificateCourseRepository,
                                         UserRepository userRepository,
-                                        CertificateCourseUserRepository certificateCourseUserRepository) {
+                                        CertificateCourseUserRepository certificateCourseUserRepository,
+                                        ChapterQuestionRepository chapterQuestionRepository) {
         this.certificateCourseRepository = certificateCourseRepository;
         this.userRepository = userRepository;
         this.certificateCourseUserRepository = certificateCourseUserRepository;
+        this.chapterQuestionRepository = chapterQuestionRepository;
     }
 
     @Transactional(readOnly = true)
@@ -192,6 +193,15 @@ public class CertificateCourseQueryHelper {
                     certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourse.getId().getValue()));
                     certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourse.getId().getValue()));
                     certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourse.getId().getValue()));
+
+                    Optional<ChapterQuestion> currentQuestion = chapterQuestionRepository
+                            .findFirstUncompletedQuestionByCertificateCourseIdAndUserId(
+                            certificateCourse.getId().getValue(),
+                            user.getId().getValue()
+                    );
+                    currentQuestion.ifPresent(
+                            chapterQuestion -> certificateCourse.setCurrentQuestion(chapterQuestion.getQuestion())
+                    );
                 }
                 return certificateCourseList;
 

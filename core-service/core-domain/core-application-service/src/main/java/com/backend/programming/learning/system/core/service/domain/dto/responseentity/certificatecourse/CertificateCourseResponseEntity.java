@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse;
 
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -42,6 +43,8 @@ public class CertificateCourseResponseEntity {
     private final Integer numOfCompletedQuestions;
     @NotNull
     private final Integer numOfReviews;
+    @NotNull
+    private final QuestionResponseEntity currentQuestion;
     @NotNull
     private final Boolean isRegistered;
     @NotNull

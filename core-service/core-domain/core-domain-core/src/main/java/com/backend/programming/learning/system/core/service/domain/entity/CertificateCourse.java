@@ -24,6 +24,7 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
     private Integer numOfQuestions;
     private Integer numOfCompletedQuestions;
     private Integer numOfReviews;
+    private Question currentQuestion;
     private Boolean isRegistered;
     private Topic topic;
     private User createdBy;
@@ -44,6 +45,7 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         setNumOfQuestions(builder.numOfQuestions);
         setNumOfCompletedQuestions(builder.numOfCompletedQuestions);
         setNumOfReviews(builder.numOfReviews);
+        setCurrentQuestion(builder.currentQuestion);
         isRegistered = builder.isRegistered;
         setTopic(builder.topic);
         setCreatedBy(builder.createdBy);
@@ -143,6 +145,14 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         this.numOfReviews = numOfReviews;
     }
 
+    public Question getCurrentQuestion() {
+        return currentQuestion;
+    }
+
+    public void setCurrentQuestion(Question currentQuestion) {
+        this.currentQuestion = currentQuestion;
+    }
+
     public Boolean getRegistered() {
         return isRegistered;
     }
@@ -211,6 +221,7 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         private Integer numOfQuestions;
         private Integer numOfCompletedQuestions;
         private Integer numOfReviews;
+        private Question currentQuestion;
         private Boolean isRegistered;
         private Topic topic;
         private User createdBy;
@@ -274,6 +285,11 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
 
         public Builder numOfReviews(Integer val) {
             numOfReviews = val;
+            return this;
+        }
+
+        public Builder currentQuestion(Question val) {
+            currentQuestion = val;
             return this;
         }
 

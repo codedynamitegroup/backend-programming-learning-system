@@ -36,20 +36,20 @@ VALUES
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
      true),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb48',
-     'Data structures and Algorithms',
-     'Explore the fundamental building blocks of computer science through our comprehensive courses on Data Structures and Algorithms. Gain a solid understanding of both theory and practical application.',
-     'https://cdn.codechef.com/images/self-learning/icons/stacks-and-queues.svg',
-     '9ba179ed-d26d-4828-a0f6-8836c2063992',
-     '9ba179ed-d26d-4828-a0f6-8836c2063992',
-     false),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb49',
      'Learn SQL',
      'This sample SQL certification course equips you with the skills and knowledge to effectively query, manipulate, and manage data in relational databases using SQL.  The course prepares you for various entry-level database administrator or data analyst roles that heavily utilize SQL.',
      'https://e7.pngegg.com/pngimages/170/924/png-clipart-microsoft-sql-server-microsoft-azure-sql-database-microsoft-text-logo.png',
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
-     true);
+     true),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb48',
+     'Data structures and Algorithms',
+     'Explore the fundamental building blocks of computer science through our comprehensive courses on Data Structures and Algorithms. Gain a solid understanding of both theory and practical application.',
+     'https://cdn.codechef.com/images/self-learning/icons/stacks-and-queues.svg',
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     false);
 
 INSERT INTO public.organization(id, description, name, created_at, updated_at, is_deleted)
 VALUES
@@ -203,13 +203,13 @@ VALUES
 
 INSERT INTO public.certificate_course_user(certificate_course_id, user_id)
 VALUES
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b029f559-52a8-4699-b595-71161498ed8c'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 'b029f559-52a8-4699-b595-71161498ed8c'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'b029f559-52a8-4699-b595-71161498ed8c'),
@@ -291,7 +291,17 @@ VALUES
 
 INSERT INTO public.code_submission(id, user_id, code_question_id, programming_language_id, source_code, grade, pass)
 VALUES
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 1, true);
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba5a', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 1, true),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba5b', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 2, true),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba5c', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba5d', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 1, true),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba5e', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba5f', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba7a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba6a', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba8a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 1, false),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba6b', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba9a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba6c', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba6d', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false);
 
 INSERT INTO public.contest(id, name, description, thumbnail_url, start_time, end_time, created_by, updated_by)
 VALUES
