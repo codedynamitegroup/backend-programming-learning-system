@@ -26,7 +26,7 @@ public interface ChapterQuestionJpaRepository extends JpaRepository<ChapterQuest
         on cqe.question.id = qe.id
         join QtypeCodeQuestionEntity qtce
         on qtce.question.id = qe.id
-        left join CodeSubmissionEntity cse
+        join CodeSubmissionEntity cse
         on cse.codeQuestionId = qtce.id
         where ce.certificateCourse.id = ?1
         and cse.userId = ?2
@@ -46,7 +46,7 @@ public interface ChapterQuestionJpaRepository extends JpaRepository<ChapterQuest
             and cse2.pass = true
             group by qe2.id
         )
-        group by qe.id, cqe.id, ce.no, cse.id, cse.createdAt
+        group by cqe.id, qe.id, ce.no, cse.createdAt
         order by ce.no asc, cse.createdAt desc
         limit 1
 """)
