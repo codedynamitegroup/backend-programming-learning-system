@@ -5,8 +5,18 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.submission_assignment.DeleteSubmissionAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QueryAllSubmissionAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment.SubmissionAssignmentResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment_file.SubmissionAssignmentFileResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment_onlinetext.SubmissionAssignmentOnlineTextResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.SubmissionAssignment;
+import com.backend.programming.learning.system.course.service.domain.entity.SubmissionAssignmentFile;
+import com.backend.programming.learning.system.course.service.domain.entity.SubmissionAssignmentOnlineText;
+import com.backend.programming.learning.system.course.service.domain.mapper.submission_assignment_file.SubmissionAssignmentFileDataMapper;
+import com.backend.programming.learning.system.course.service.domain.mapper.submission_assignment_onlinetext.SubmissionAssignmentOnlineTextDataMapper;
+import com.backend.programming.learning.system.course.service.domain.mapper.submission_file.SubmissionFileDataMapper;
 import com.backend.programming.learning.system.course.service.domain.mapper.user.UserDataMapper;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionAssignmentFileRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionAssignmentOnlineTextRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionFileRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,13 +25,27 @@ import java.util.List;
 public class SubmissionAssignmentDataMapper {
 
     private final UserDataMapper userDataMapper;
+    private final SubmissionAssignmentFileDataMapper submissionAssignmentFileDataMapper;
+    private final SubmissionAssignmentFileRepository submissionAssignmentFileRepository;
 
-    public SubmissionAssignmentDataMapper(UserDataMapper userDataMapper) {
+    private final SubmissionAssignmentOnlineTextDataMapper submissionAssignmentOnlineTextDataMapper;
+    private final SubmissionAssignmentOnlineTextRepository submissionAssignmentOnlineTextRepository;
+
+    private final SubmissionFileDataMapper submissionFileDataMapper;
+    private final SubmissionFileRepository submissionFileRepository;
+
+    public SubmissionAssignmentDataMapper(UserDataMapper userDataMapper, SubmissionAssignmentFileDataMapper submissionAssignmentFileDataMapper, SubmissionAssignmentFileRepository submissionAssignmentFileRepository, SubmissionAssignmentOnlineTextDataMapper submissionAssignmentOnlineTextDataMapper, SubmissionAssignmentOnlineTextRepository submissionAssignmentOnlineTextRepository, SubmissionFileDataMapper submissionFileDataMapper, SubmissionFileRepository submissionFileRepository) {
         this.userDataMapper = userDataMapper;
+        this.submissionAssignmentFileDataMapper = submissionAssignmentFileDataMapper;
+        this.submissionAssignmentFileRepository = submissionAssignmentFileRepository;
+        this.submissionAssignmentOnlineTextDataMapper = submissionAssignmentOnlineTextDataMapper;
+        this.submissionAssignmentOnlineTextRepository = submissionAssignmentOnlineTextRepository;
+        this.submissionFileDataMapper = submissionFileDataMapper;
+        this.submissionFileRepository = submissionFileRepository;
     }
     public SubmissionAssignment createSubmissionAssignmentCommandToSubmissionAssignment(CreateSubmissionAssignmentCommand createSubmissionAssignmentCommand) {
         return SubmissionAssignment.builder()
-                .pass_status(createSubmissionAssignmentCommand.getPass_status())
+                .isGraded(false)
                 .grade(createSubmissionAssignmentCommand.getGrade())
                 .content(createSubmissionAssignmentCommand.getContent())
                 .submittedAt(createSubmissionAssignmentCommand.getTimeSubmit())
@@ -39,13 +63,35 @@ public class SubmissionAssignmentDataMapper {
     }
 
     public SubmissionAssignmentResponseEntity submissionAssignmentToSubmissionAssignmentResponseEntity(SubmissionAssignment submissionAssignment) {
+        if(submissionAssignment == null){
+            return null;
+        }
+        SubmissionAssignmentFile submissionAssignmentFile = submissionAssignmentFileRepository
+                .findBySubmissionAssignmentId(submissionAssignment.getId().getValue()).orElse(null);
+        SubmissionAssignmentFileResponseEntity submissionAssignmentFileResponseEntity = null;
+        if(submissionAssignmentFile != null){
+            submissionAssignmentFileResponseEntity = submissionAssignmentFileDataMapper
+                    .submissionAssignmentFileToSubmissionAssignmentFileResponseEntity(submissionAssignmentFile);
+
+        }
+        SubmissionAssignmentOnlineText submissionAssignmentOnlineText = submissionAssignmentOnlineTextRepository
+                .findBySubmissionAssignmentId(submissionAssignment.getId().getValue()).orElse(null);
+
+        SubmissionAssignmentOnlineTextResponseEntity submissionAssignmentOnlineTextResponseEntity = null;
+
+        if(submissionAssignmentOnlineText != null){
+            submissionAssignmentOnlineTextResponseEntity = submissionAssignmentOnlineTextDataMapper
+                    .submissionAssignmentOnlineTextToSubmissionAssignmentOnlineTextResponseEntity(submissionAssignmentOnlineText);
+        }
         return SubmissionAssignmentResponseEntity.builder()
-                .submissionAssignmentId(submissionAssignment.getId().getValue())
+                .id(submissionAssignment.getId().getValue())
                 .userId(submissionAssignment.getUser().getId().getValue())
-                .questionId(submissionAssignment.getAssignment().getId().getValue())
-                .pass_status(submissionAssignment.getPass_status())
+                .isGraded(submissionAssignment.getGradedStatus())
                 .grade(submissionAssignment.getGrade())
+                .submissionAssignmentFile(submissionAssignmentFileResponseEntity)
+                .submissionAssignmentOnlineText(submissionAssignmentOnlineTextResponseEntity)
                 .content(submissionAssignment.getContent())
+                .timemodefied(submissionAssignment.getTimemodified())
                 .submitTime(submissionAssignment.getSubmittedAt())
                 .build();
     }

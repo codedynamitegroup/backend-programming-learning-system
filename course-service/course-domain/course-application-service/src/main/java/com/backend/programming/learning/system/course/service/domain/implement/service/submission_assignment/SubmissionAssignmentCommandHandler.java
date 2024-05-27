@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QueryAllSubmissionAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QueryAllSubmissionnAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QuerySubmissionAssignmentCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QuerySubmissionAssignmentUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment.SubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.submission_assignment.UpdateSubmissionAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.submission_assignment.UpdateSubmissionAssignmentResponse;
@@ -16,6 +17,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.UUID;
 
 @Component
 @Slf4j
@@ -69,6 +72,13 @@ public class SubmissionAssignmentCommandHandler {
                 .submissionId(updateSubmissionAssignmentCommand.getSubmissionAssignmentId())
                 .message("Submission assignment updated successfully")
                 .build();
+    }
+
+    @Transactional
+    public SubmissionAssignmentResponseEntity queryByAssignmentIdAndUserId(QuerySubmissionAssignmentUserCommand querySubmissionAssignmentUserCommand) {
+        log.info("Query submission assignment by assignment id and user id command received");
+        SubmissionAssignment submissionAssignment = submissionAssignmentQueryHelper.queryByAssignmentIdAndUserId(querySubmissionAssignmentUserCommand.getAssignmentId(), querySubmissionAssignmentUserCommand.getUserId());
+        return submissionAssignmentDataMapper.submissionAssignmentToSubmissionAssignmentResponseEntity(submissionAssignment);
     }
 
 

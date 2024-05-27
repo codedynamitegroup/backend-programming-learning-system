@@ -15,7 +15,7 @@ public class UpdateSubmissionAssignmentCommand {
     private final UUID submissionAssignmentId;
 
     @NotNull
-    private final Integer pass_status;
+    private final Boolean isGraded;
 
     @NotNull
     private final Float grade;
