@@ -28,7 +28,8 @@ public interface CodeQuestionJpaRepository extends JpaRepository<CodeQuestionEnt
                                     )
                 AND (cast(?3 as text) IS NULL or 
                     cqe.fts_document @@ (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'') ) ) or
-                    cqe.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) )
+                    cqe.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) ) or
+                    (cast(?8 as text) is not null and cqe.name like concat('%', cast(?8 as text), '%'))
                     )
                 AND (cast(?4 as text) is NULL OR cast(?4 as text) = cast(cqe.difficulty as text))
                 AND ((?5 is null) or (?6 is null) or ((?5 = true) AND EXISTS (
@@ -69,6 +70,7 @@ public interface CodeQuestionJpaRepository extends JpaRepository<CodeQuestionEnt
                                                    Boolean solved,
                                                    UUID value,
                                                    boolean isPublic,
+                                                   String search,
                                                    Pageable pageable);
 //    Page<CodeQuestionEntity> findAndFilterByTagIds(List<UUID> tagIs, String search, QuestionDifficulty difficulty, Boolean solved, UUID value, boolean isPublic, Pageable pageable);
 }
