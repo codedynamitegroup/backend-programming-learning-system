@@ -31,6 +31,8 @@ public class ContestResponseEntity {
     private final ZonedDateTime startTime;
     private final ZonedDateTime endTime;
     @NotNull
+    private final Integer numOfParticipants;
+    @NotNull
     private final Boolean isRegistered;
     @NotNull
     private final List<ContestQuestionResponseEntity> questions;

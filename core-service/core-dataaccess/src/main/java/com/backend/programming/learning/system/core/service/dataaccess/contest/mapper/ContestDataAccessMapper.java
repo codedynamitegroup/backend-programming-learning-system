@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.dataaccess.contest.mapper;
 
 import com.backend.programming.learning.system.core.service.dataaccess.contest.entity.ContestEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.contest.projection.ContestProjection;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.user.repository.UserJpaRepository;
@@ -8,8 +9,11 @@ import com.backend.programming.learning.system.core.service.domain.entity.Contes
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
+import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,6 +59,39 @@ public class ContestDataAccessMapper {
                 .updatedBy(updatedBy)
                 .createdAt(contestEntity.getCreatedAt())
                 .updatedAt(contestEntity.getUpdatedAt())
+                .build();
+    }
+
+    public Contest contestProjectionToContest(ContestProjection contestProjection) {
+        ZonedDateTime startTime = contestProjection.getStartTime() == null
+                ? null
+                : ZonedDateTime.ofInstant(contestProjection.getStartTime(), ZoneId.of("UTC"));
+        ZonedDateTime endTime = contestProjection.getEndTime() == null
+                ? null
+                : ZonedDateTime.ofInstant(contestProjection.getEndTime(), ZoneId.of("UTC"));
+        ZonedDateTime createdAt = contestProjection.getCreatedAt() == null
+                ? null
+                : ZonedDateTime.ofInstant(contestProjection.getCreatedAt(), ZoneId.of("UTC"));
+        ZonedDateTime updatedAt = contestProjection.getUpdatedAt() == null
+                ? null
+                : ZonedDateTime.ofInstant(contestProjection.getUpdatedAt(), ZoneId.of("UTC"));
+
+        return Contest.builder()
+                .id(new ContestId(contestProjection.getId()))
+                .name(contestProjection.getName())
+                .description(contestProjection.getDescription())
+                .thumbnailUrl(contestProjection.getThumbnailUrl())
+                .startTime(startTime)
+                .endTime(endTime)
+                .numOfParticipants(contestProjection.getNumOfParticipants())
+                .createdBy(User.builder()
+                        .id(new UserId(contestProjection.getCreatedById()))
+                        .build())
+                .updatedBy(User.builder()
+                        .id(new UserId(contestProjection.getUpdatedById()))
+                        .build())
+                .createdAt(createdAt)
+                .updatedAt(updatedAt)
                 .build();
     }
 
