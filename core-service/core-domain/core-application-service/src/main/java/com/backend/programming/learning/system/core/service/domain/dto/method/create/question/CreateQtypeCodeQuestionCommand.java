@@ -23,7 +23,9 @@ public class CreateQtypeCodeQuestionCommand extends CreateQuestionCommand {
             @NotNull(message = "General feedback is required") String generalFeedback,
             @NotNull(message = "Default mark is required") @DecimalMin(value = "0.0", inclusive = false, message = "Default mark must be greater than 0") @Digits(integer = 5, fraction = 2, message = "Default mark must have up to 5 digits and 2 decimals") BigDecimal defaultMark,
             @NotNull(message = "Question type is required") String qType,
-            @NotNull(message = "Answers is required") List<AnswerOfQuestion> answers
+            @NotNull(message = "Answers is required") List<AnswerOfQuestion> answers,
+            UUID questionBankCategoryId,
+            Boolean isOrgQuestionBank
             ) {
         super(organizationId,
                 createdBy,
@@ -34,6 +36,8 @@ public class CreateQtypeCodeQuestionCommand extends CreateQuestionCommand {
                 generalFeedback,
                 defaultMark,
                 qType,
-                answers);
+                answers,
+                questionBankCategoryId,
+                isOrgQuestionBank);
     }
 }

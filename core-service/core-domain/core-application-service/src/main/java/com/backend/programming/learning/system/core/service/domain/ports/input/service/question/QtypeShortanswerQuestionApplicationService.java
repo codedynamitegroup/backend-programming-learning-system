@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.UUID;
 
 public interface QtypeShortanswerQuestionApplicationService {
-    CreateQuestionResponse createQtypeShortanswerQuestion(@Valid CreateQtypeShortanswerQuestionCommand createQtypeShortanswerQuestionCommand);
+    CreateQuestionResponse createQtypeShortanswerQuestion(
+            @Valid CreateQtypeShortanswerQuestionCommand createQtypeShortanswerQuestionCommand);
     QueryQtypeShortanswerQuestionResponse queryQtypeShortanswerQuestionById(UUID qtShortanswerQuestionId);
     List<QueryQtypeShortanswerQuestionResponse> queryAllQtypeShortanswerQuestions();
     UpdateQuestionResponse updateQtypeShortanswerQuestion(@Valid UpdateQtypeShortanswerQuestionCommand updateQtypeShortanswerQuestionCommand);
