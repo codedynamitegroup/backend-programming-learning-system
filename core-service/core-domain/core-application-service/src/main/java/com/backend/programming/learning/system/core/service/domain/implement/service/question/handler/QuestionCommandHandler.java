@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.core.service.domain.implement.service.question.handler;
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.question.QuestionDeleteResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
 import com.backend.programming.learning.system.core.service.domain.implement.service.question.method.delete.QuestionDeleteHelper;
@@ -15,6 +17,7 @@ import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -78,6 +81,18 @@ public class QuestionCommandHandler {
                 .questionId(questionId)
                 .qtypeId(questionDeletedEvent.getQtypeID())
                 .message("Question deleted successfully")
+                .build();
+    }
+
+    public QueryAllQuestionByCategoryIdResponse queryAllQuestionByCategory(UUID categoryId, QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand) {
+        Page<QuestionResponseEntity> questionResponseEntities = questionQueryHelper
+                .queryAllQuestionByCategory(categoryId, queryAllQuestionByCategoryIdCommand);
+
+        return QueryAllQuestionByCategoryIdResponse.builder()
+                .questionResponses(questionResponseEntities.getContent())
+                .currentPage(questionResponseEntities.getNumber())
+                .totalItems(questionResponseEntities.getTotalElements())
+                .totalPages(questionResponseEntities.getTotalPages())
                 .build();
     }
 }

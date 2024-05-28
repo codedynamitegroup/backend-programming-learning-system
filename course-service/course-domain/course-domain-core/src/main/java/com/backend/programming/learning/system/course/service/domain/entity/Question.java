@@ -17,7 +17,7 @@ public class Question extends AggregateRoot<QuestionId> {
     private Float defaultMark;
     private QuestionType qtype;
     private List<String> failureMessages;
-    private Boolean isQuestionBank;
+    private Boolean isOrgQuestionBank;
     private QuestionBankCategory questionBankCategory;
 
     private User createdBy;
@@ -35,7 +35,7 @@ public class Question extends AggregateRoot<QuestionId> {
         defaultMark = builder.defaultMark;
         qtype = builder.qtype;
         failureMessages = builder.failureMessages;
-        isQuestionBank = builder.isQuestionBank;
+        isOrgQuestionBank = builder.isOrgQuestionBank;
         questionBankCategory = builder.questionBankCategory;
         createdBy = builder.createdBy;
         updatedBy = builder.updatedBy;
@@ -85,8 +85,8 @@ public class Question extends AggregateRoot<QuestionId> {
         return failureMessages;
     }
 
-    public Boolean getQuestionBank() {
-        return isQuestionBank;
+    public Boolean getIsOrgQuestionBank() {
+        return isOrgQuestionBank;
     }
 
     public QuestionBankCategory getQuestionBankCategory() {
@@ -120,7 +120,7 @@ public class Question extends AggregateRoot<QuestionId> {
         private Float defaultMark;
         private QuestionType qtype;
         private List<String> failureMessages;
-        private Boolean isQuestionBank;
+        private Boolean isOrgQuestionBank;
         private QuestionBankCategory questionBankCategory;
         private List<String> answers;
         private User createdBy;
@@ -176,8 +176,8 @@ public class Question extends AggregateRoot<QuestionId> {
             return this;
         }
 
-        public Builder isQuestionBank(Boolean val) {
-            isQuestionBank = val;
+        public Builder isOrgQuestionBank(Boolean val) {
+            isOrgQuestionBank = val;
             return this;
         }
 

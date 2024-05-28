@@ -23,6 +23,9 @@ public class Question extends AggregateRoot<QuestionId> {
     private List<AnswerOfQuestion> answers;
     private CopyState copyState;
 
+    private UUID questionBankCategoryId;
+    private Boolean isOrgQuestionBank;
+
     private final ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
@@ -43,6 +46,8 @@ public class Question extends AggregateRoot<QuestionId> {
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
         answers = builder.answers;
+        questionBankCategoryId = builder.questionBankCategoryId;
+        isOrgQuestionBank = builder.isOrgQuestionBank;
     }
 
     public static Builder builder() {
@@ -54,14 +59,14 @@ public class Question extends AggregateRoot<QuestionId> {
     }
 
     private void updateFailureMessages(List<String> failureMessages) {
-        if(this.failureMessages != null && failureMessages != null) {
+        if (this.failureMessages != null && failureMessages != null) {
             this.failureMessages.addAll(failureMessages
                     .stream()
                     .filter(failureMessage -> !this.failureMessages
                             .contains(failureMessage))
                     .toList());
         }
-        if(this.failureMessages == null) {
+        if (this.failureMessages == null) {
             this.failureMessages = failureMessages;
         }
     }
@@ -138,6 +143,22 @@ public class Question extends AggregateRoot<QuestionId> {
         this.organization = organization;
     }
 
+    public void setQuestionBankCategoryId(UUID questionBankCategoryId) {
+        this.questionBankCategoryId = questionBankCategoryId;
+    }
+
+    public UUID getQuestionBankCategoryId() {
+        return questionBankCategoryId;
+    }
+
+    public void setIsOrgQuestionBank(Boolean isOrgQuestionBank) {
+        this.isOrgQuestionBank = isOrgQuestionBank;
+    }
+
+    public Boolean getIsOrgQuestionBank() {
+        return isOrgQuestionBank;
+    }
+
     public static final class Builder {
         private QuestionId questionId;
         private Organization organization;
@@ -155,6 +176,8 @@ public class Question extends AggregateRoot<QuestionId> {
         private ZonedDateTime updatedAt;
         private List<AnswerOfQuestion> answers;
         private CopyState copyState;
+        private UUID questionBankCategoryId;
+        private Boolean isOrgQuestionBank;
 
         private Builder() {
         }
@@ -236,6 +259,16 @@ public class Question extends AggregateRoot<QuestionId> {
 
         public Builder updatedAt(ZonedDateTime val) {
             updatedAt = val;
+            return this;
+        }
+
+        public Builder questionBankCategoryId(UUID val) {
+            questionBankCategoryId = val;
+            return this;
+        }
+
+        public Builder isOrgQuestionBank(Boolean val) {
+            isOrgQuestionBank = val;
             return this;
         }
 

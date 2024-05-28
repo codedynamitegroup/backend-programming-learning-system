@@ -45,6 +45,9 @@ public class QuestionEntity {
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
+    private UUID questionBankCategoryId;
+    private Boolean isOrgQuestionBank;
+
     @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinColumn(name = "question_id")
     private List<AnswerOfQuestionEntity> answerOfQuestions;

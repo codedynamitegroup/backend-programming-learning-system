@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -39,7 +40,7 @@ public class QuestionDataMapper {
                 .generalFeedback(createQuestionCommand.generalFeedback())
                 .defaultMark(createQuestionCommand.defaultMark())
                 .qtype(createQuestionCommand.qtype())
-                .isQuestionBank(false)
+                .isOrgQuestionBank(false)
                 .createdBy(createdBy)
                 .updatedBy(createdBy)
                 .build();
@@ -92,7 +93,7 @@ public class QuestionDataMapper {
                 .generalFeedback(createQuestionCommand.generalFeedback())
                 .defaultMark(createQuestionCommand.defaultMark())
                 .qtype(createQuestionCommand.qtype())
-                .isQuestionBank(true)
+                .isOrgQuestionBank(true)
                 .createdBy(createdBy)
                 .updatedBy(createdBy)
                 .build();
@@ -107,7 +108,7 @@ public class QuestionDataMapper {
                 .generalFeedback(createQuestionCommand.generalFeedback())
                 .defaultMark(createQuestionCommand.defaultMark())
                 .qtype(createQuestionCommand.qtype())
-                .isQuestionBank(true)
+                .isOrgQuestionBank(true)
                 .questionBankCategory(questionBankCategory)
                 .createdBy(createdBy)
                 .updatedBy(createdBy)
@@ -132,7 +133,7 @@ public class QuestionDataMapper {
                 .generalFeedback(questionCreateRequest.getGeneralFeedback())
                 .defaultMark(questionCreateRequest.getDefaultMark().floatValue())
                 .qtype(QuestionType.valueOf(questionCreateRequest.getQType()))
-                .isQuestionBank(false)
+                .isOrgQuestionBank(false)
                 .build();
     }
 
@@ -142,13 +143,15 @@ public class QuestionDataMapper {
                 .organization(organization)
                 .createdBy(createdBy)
                 .updatedBy(createdBy)
+                .createdAt(ZonedDateTime.now())
+                .updatedAt(ZonedDateTime.now())
                 .questionText(questionCreateRequest.getQuestionText())
                 .difficulty(QuestionDifficulty.valueOf(questionCreateRequest.getDifficulty()))
                 .name(questionCreateRequest.getName())
                 .generalFeedback(questionCreateRequest.getGeneralFeedback())
                 .defaultMark(questionCreateRequest.getDefaultMark().floatValue())
                 .qtype(QuestionType.valueOf(questionCreateRequest.getQType()))
-                .isQuestionBank(false)
+                .isOrgQuestionBank(false)
                 .build();
     }
 
@@ -170,7 +173,7 @@ public class QuestionDataMapper {
                 .generalFeedback(questionUpdateRequest.getGeneralFeedback())
                 .defaultMark(questionUpdateRequest.getDefaultMark().floatValue())
                 .qtype(QuestionType.valueOf(questionUpdateRequest.getQType()))
-                .isQuestionBank(false)
+                .isOrgQuestionBank(false)
                 .build();
     }
 
@@ -192,7 +195,7 @@ public class QuestionDataMapper {
                 .generalFeedback(questionDeleteRequest.getGeneralFeedback())
                 .defaultMark(questionDeleteRequest.getDefaultMark().floatValue())
                 .qtype(QuestionType.valueOf(questionDeleteRequest.getQType()))
-                .isQuestionBank(false)
+                .isOrgQuestionBank(false)
                 .build();
     }
 

@@ -1,11 +1,13 @@
 package com.backend.programming.learning.system.core.service.domain.implement.service.question.method.query;
 
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QuestionRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -44,6 +46,14 @@ public class QuestionQueryHelper {
         List<QuestionResponseEntity> questions = questionRepository.findAllQuestion();
 
         log.info("Query all questions");
+
+        return questions;
+    }
+
+    public Page<QuestionResponseEntity> queryAllQuestionByCategory(UUID categoryId, QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand) {
+        Page<QuestionResponseEntity> questions = questionRepository.findAllQuestionByCategory(categoryId, queryAllQuestionByCategoryIdCommand);
+
+        log.info("Query all questions by category with id: {}", categoryId);
 
         return questions;
     }

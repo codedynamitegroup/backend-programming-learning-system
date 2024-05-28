@@ -3,11 +3,14 @@ package com.backend.programming.learning.system.core.service.dataaccess.question
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.question.mapper.QuestionDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.question.repository.QuestionJpaRepository;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QuestionRepository;
 import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
 import com.backend.programming.learning.system.domain.valueobject.QuestionType;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -67,5 +70,16 @@ public class QuestionRepositoryImpl implements QuestionRepository {
         }
 
         questionJpaRepository.save(questionDataAccessMapper.setQuestionEntity(questionEntity.get(), question));
+    }
+
+    @Override
+    public Page<QuestionResponseEntity> findAllQuestionByCategory(UUID categoryId, QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand) {
+        Pageable pageRequest = Pageable.ofSize(queryAllQuestionByCategoryIdCommand.getPageSize())
+                .withPage(queryAllQuestionByCategoryIdCommand.getPageNo());
+        return questionJpaRepository
+                .findAllByQuestionBankCategoryId(categoryId,
+                        queryAllQuestionByCategoryIdCommand.getSearch(),
+                        pageRequest)
+                .map(questionDataAccessMapper::questionEntityToQuestionResponseEntity);
     }
 }
