@@ -20,8 +20,8 @@ public class CodeQuestionMessagingDataMapper {
                 .codeQuestionId(model.getCodeQuestionId())
                 .questionId(model.getQuestionId())
                 .problemStatement(model.getProblemStatement())
-                .inputFormat(model.getInputFormat())
-                .outputFormat(model.getOutputFormat())
+                .maxGrade(model.getMaxGrade())
+                .name(model.getName())
                 .state(com.backend.programming.learning.system.domain.valueobject
                         .CopyState
                         .valueOf(model.getCopyState().toString()))
@@ -39,8 +39,8 @@ public class CodeQuestionMessagingDataMapper {
                 .setCodeQuestionId(UUID.fromString(payload.getId()))
                 .setQuestionId(UUID.fromString(payload.getQuestionId()))
                 .setProblemStatement(payload.getProblemStatement())
-                .setInputFormat(payload.getInputFormat())
-                .setOutputFormat(payload.getOutputFormat())
+                .setMaxGrade(payload.getMaxGrade())
+                .setName(payload.getName())
                 .setCopyState(CopyState.valueOf(payload.getCopyState()))
 //                .setConstraints(payload.getConstraints())
                 .build();

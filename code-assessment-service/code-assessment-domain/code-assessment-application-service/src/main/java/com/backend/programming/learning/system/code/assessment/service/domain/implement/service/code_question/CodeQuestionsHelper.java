@@ -162,7 +162,7 @@ public class CodeQuestionsHelper {
     }
 
     @Transactional
-    public void updateCodeQuestion(UpdateCodeQuestionCommand command) {
+    public CodeQuestionsUpdatedEvent updateCodeQuestion(UpdateCodeQuestionCommand command) {
         User user = validateHelper.validateUser(command.getUserId());
         CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(command.getCodeQuestionId());
         if(!user.getId().equals(codeQuestion.getUserId()))
@@ -170,7 +170,10 @@ public class CodeQuestionsHelper {
 
         CodeQuestion codeQuestionUpdate = codeQuestionDataMaper.updateCodeQuestionCommandToCodeQuestion(command);
         genericHelper.mapRepositoryAttributeToUpdateAttribute(codeQuestion, codeQuestionUpdate, CodeQuestion.class);
+        CodeQuestionsUpdatedEvent event = codeAssessmentDomainService.updateCodeQuestion(codeQuestion);
         codeQuestionRepository.save(codeQuestion);
+
+        return event;
 
     }
 

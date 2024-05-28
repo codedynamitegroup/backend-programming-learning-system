@@ -55,9 +55,9 @@ public class CodeQuestionDataMapper {
                 .id(codeQuestion.getId().getValue().toString())
                 .questionId(codeQuestion.getQuestionId().getValue().toString())
                 .problemStatement(codeQuestion.getProblemStatement())
-                .inputFormat(codeQuestion.getInputFormat())
-                .outputFormat(codeQuestion.getOutputFormat())
+                .maxGrade(codeQuestion.getMaxGrade())
                 .copyState(state.toString())
+                .name(codeQuestion.getName())
 //                .constraints(codeQuestion.getConstraints())
                 .build();
     }
