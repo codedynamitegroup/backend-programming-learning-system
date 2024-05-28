@@ -130,6 +130,12 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
                 .build();
     }
 
+    @Override
+    public CodeQuestionsUpdatedEvent updateCodeQuestion(CodeQuestion codeQuestion) {
+        codeQuestion.setCopyState(CopyState.UPDATING);
+        return new CodeQuestionsUpdatedEvent(codeQuestion, ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
+    }
+
 
     @Override
     public UserCreatedFailEvent createdUserFail(User user, List<String> failureMessages) {

@@ -15,8 +15,8 @@ public class CodeQuestionsUpdateResponse {
     private UUID codeQuestionId;
     private UUID questionId;
     private String problemStatement;
-    private String inputFormat;
-    private String outputFormat;
+    private Float maxGrade;
+    private String name;
     private CopyState state;
     private String constraints;
     private UUID sagaId;
