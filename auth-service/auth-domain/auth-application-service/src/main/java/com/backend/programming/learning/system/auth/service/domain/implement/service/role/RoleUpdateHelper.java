@@ -40,9 +40,6 @@ public class RoleUpdateHelper {
         Role role = getRole(updateRoleCommand.getRoleId());
         User updateBy = getUser(updateRoleCommand.getUpdatedBy());
 
-        role.setUpdatedBy(updateBy);
-        role.setUpdatedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
-
         if (updateRoleCommand.getName() != null) {
             role.setName(updateRoleCommand.getName());
         }

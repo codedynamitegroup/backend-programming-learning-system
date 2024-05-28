@@ -29,10 +29,6 @@ public class UserRoleDataAccessMapper {
                                 .build()
                 )
                 .user(userDataAccessMapper.userToUserEntity(userRole.getUser()))
-                .createdAt(userRole.getCreatedAt())
-                .updatedAt(userRole.getUpdatedAt())
-                .createdBy(userDataAccessMapper.userToUserEntity(userRole.getCreatedBy()))
-                .updatedBy(userDataAccessMapper.userToUserEntity(userRole.getUpdatedBy()))
                 .build();
     }
 
@@ -41,10 +37,6 @@ public class UserRoleDataAccessMapper {
                 .id(new UserRoleId(userRoleEntity.getId()))
                 .role(roleDataAccessMapper.roleEntityToRole(userRoleEntity.getRole()))
                 .user(userDataAccessMapper.userEntityToUser(userRoleEntity.getUser()))
-                .createdAt(userRoleEntity.getCreatedAt())
-                .updatedAt(userRoleEntity.getUpdatedAt())
-                .createdBy(userDataAccessMapper.userEntityToUser(userRoleEntity.getCreatedBy()))
-                .updatedBy(userDataAccessMapper.userEntityToUser(userRoleEntity.getUpdatedBy()))
                 .build();
     }
 }

@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 
@@ -17,7 +16,4 @@ public class CreateUserRoleCommand {
 
     @NotNull
     private final UUID userId;
-
-    @NotNull
-    private final UUID createdBy;
 }

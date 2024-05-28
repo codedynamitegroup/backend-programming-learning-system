@@ -37,6 +37,18 @@ public class RoleQueryHelper {
     }
 
     @Transactional(readOnly = true)
+    public Role queryRoleByName(String roleName) {
+        Optional<Role> roleResult =
+                roleRepository.findByName(roleName);
+        if (roleResult.isEmpty()) {
+            log.warn("Could not find role with name: {}", roleName);
+            throw new AuthNotFoundException("Could not find role with role name: " +
+                    roleName);
+        }
+        return roleResult.get();
+    }
+
+    @Transactional(readOnly = true)
     public Page<Role> queryAllRoles(Integer page, Integer size) {
         return roleRepository.findAll(page, size);
     }

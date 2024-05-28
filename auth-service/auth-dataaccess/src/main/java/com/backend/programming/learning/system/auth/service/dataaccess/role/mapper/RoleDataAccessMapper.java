@@ -21,24 +21,16 @@ public class RoleDataAccessMapper {
     public RoleEntity roleToRoleEntity(Role role) {
         return RoleEntity.builder()
                 .id(role.getId().getValue())
-                .createdBy(userDataAccessMapper.userToUserEntity(role.getCreatedBy()))
-                .updatedBy(userDataAccessMapper.userToUserEntity(role.getUpdatedBy()))
                 .description(role.getDescription())
                 .name(role.getName())
-                .createdAt(role.getCreatedAt())
-                .updatedAt(role.getUpdatedAt())
                 .build();
     }
 
     public Role roleEntityToRole(RoleEntity roleEntity) {
         return Role.builder()
                 .id(new RoleId(roleEntity.getId()))
-                .createdBy(userDataAccessMapper.userEntityToUser(roleEntity.getCreatedBy()))
-                .updatedBy(userDataAccessMapper.userEntityToUser(roleEntity.getUpdatedBy()))
                 .description(roleEntity.getDescription())
                 .name(roleEntity.getName())
-                .createdAt(roleEntity.getCreatedAt())
-                .updatedAt(roleEntity.getUpdatedAt())
                 .build();
     }
 }

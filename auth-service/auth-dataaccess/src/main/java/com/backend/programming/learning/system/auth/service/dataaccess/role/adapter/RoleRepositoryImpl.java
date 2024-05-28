@@ -32,6 +32,12 @@ public class RoleRepositoryImpl implements RoleRepository {
     }
 
     @Override
+    public Optional<Role> findByName(String roleName) {
+        return roleJpaRepository.findByName(roleName)
+                .map(roleDataAccessMapper::roleEntityToRole);
+    }
+
+    @Override
     public Optional<Role> findById(RoleId roleId) {
         return roleJpaRepository.findById(roleId.getValue())
                 .map(roleDataAccessMapper::roleEntityToRole);

@@ -11,15 +11,9 @@ import java.util.UUID;
 public class UserRole extends BaseEntity<UserRoleId> {
     private User user;
     private Role role;
-    private ZonedDateTime createdAt;
-    private ZonedDateTime updatedAt;
-    private User createdBy;
-    private User updatedBy;
 
     public void initializeUserRole() {
         setId(new UserRoleId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
-        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
     }
 
     public static Builder builder() {
@@ -30,10 +24,6 @@ public class UserRole extends BaseEntity<UserRoleId> {
         super.setId(builder.userRoleId);
         user = builder.user;
         role = builder.role;
-        createdAt = builder.createdAt;
-        updatedAt = builder.updatedAt;
-        createdBy = builder.createdBy;
-        updatedBy = builder.updatedBy;
     }
 
     public User getUser() {
@@ -44,34 +34,6 @@ public class UserRole extends BaseEntity<UserRoleId> {
         return role;
     }
 
-    public ZonedDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public ZonedDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public User getCreatedBy() {
-        return createdBy;
-    }
-
-    public User getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setCreatedAt(ZonedDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public void setUpdatedAt(ZonedDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public void setUpdatedBy(User updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
     public void setUser(User user) {
         this.user = user;
     }
@@ -80,17 +42,10 @@ public class UserRole extends BaseEntity<UserRoleId> {
         this.role = role;
     }
 
-    public void setCreatedBy(User createdBy) {
-        this.createdBy = createdBy;
-    }
 
     public static final class Builder {
         private User user;
         private Role role;
-        private ZonedDateTime createdAt;
-        private ZonedDateTime updatedAt;
-        private User createdBy;
-        private User updatedBy;
         private UserRoleId userRoleId;
 
         private Builder() {
@@ -103,26 +58,6 @@ public class UserRole extends BaseEntity<UserRoleId> {
 
         public Builder role(Role val) {
             role = val;
-            return this;
-        }
-
-        public Builder createdAt(ZonedDateTime val) {
-            createdAt = val;
-            return this;
-        }
-
-        public Builder updatedAt(ZonedDateTime val) {
-            updatedAt = val;
-            return this;
-        }
-
-        public Builder createdBy(User val) {
-            createdBy = val;
-            return this;
-        }
-
-        public Builder updatedBy(User val) {
-            updatedBy = val;
             return this;
         }
 

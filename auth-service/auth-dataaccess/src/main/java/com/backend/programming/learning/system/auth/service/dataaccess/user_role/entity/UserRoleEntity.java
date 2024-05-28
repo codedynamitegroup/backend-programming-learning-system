@@ -29,17 +29,6 @@ public class UserRoleEntity {
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private RoleEntity role;
-
-    @OneToOne
-    @JoinColumn(name = "created_by", referencedColumnName = "id")
-    private UserEntity createdBy;
-
-    @OneToOne
-    @JoinColumn(name = "updated_by", referencedColumnName = "id")
-    private UserEntity updatedBy;
-    private ZonedDateTime createdAt;
-    private ZonedDateTime updatedAt;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -36,10 +36,6 @@ public class UserRoleDataMapper {
                 .userRoleId(userRole.getId().getValue())
                 .user(userDataMapper.userToUserResponse(userRole.getUser()))
                 .role(roleDataMapper.roleToRoleResponse(userRole.getRole()))
-                .createdBy(userDataMapper.userToUserResponse(userRole.getCreatedBy()))
-                .updatedBy(userDataMapper.userToUserResponse(userRole.getUpdatedBy()))
-                .createdAt(userRole.getCreatedAt())
-                .updatedAt(userRole.getUpdatedAt())
                 .build();
     }
 
