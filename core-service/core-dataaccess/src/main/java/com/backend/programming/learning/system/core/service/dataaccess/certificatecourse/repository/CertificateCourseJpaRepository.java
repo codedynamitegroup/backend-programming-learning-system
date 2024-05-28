@@ -84,6 +84,7 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
                 cc.fts_document @@ (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'') ) ) or
                 cc.fts_document @@ (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,'')) ) )
             )
+            and (COALESCE(?3, null) is null OR cc.topic_id in ?3)
         order by
             ts_rank(cc.fts_document, 
                 case

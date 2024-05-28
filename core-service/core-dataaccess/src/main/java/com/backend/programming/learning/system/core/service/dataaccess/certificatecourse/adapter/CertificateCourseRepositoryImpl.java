@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Slf4j
 @Component
 public class CertificateCourseRepositoryImpl implements CertificateCourseRepository {
     private final CertificateCourseJpaRepository certificateCourseJpaRepository;
