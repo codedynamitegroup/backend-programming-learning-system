@@ -53,6 +53,10 @@ public class ContestQueryHelper {
                     contestId);
         }
         Contest contest = contestResult.get();
+        User userCreatedBy = getUserHideSensitiveData(contest.getCreatedBy().getId().getValue());
+        contest.setCreatedBy(userCreatedBy);
+        User userUpdatedBy = getUserHideSensitiveData(contest.getUpdatedBy().getId().getValue());
+        contest.setUpdatedBy(userUpdatedBy);
 
         Optional<User> userResult = userRepository.findByEmail(email);
         if(userResult.isPresent()) {
@@ -129,6 +133,11 @@ public class ContestQueryHelper {
                 );
                 contestUserResult.ifPresent(contestUser -> contest.setRegistered(true));
             }
+
+            User userCreatedBy = getUserHideSensitiveData(contest.getCreatedBy().getId().getValue());
+            contest.setCreatedBy(userCreatedBy);
+            User userUpdatedBy = getUserHideSensitiveData(contest.getUpdatedBy().getId().getValue());
+            contest.setUpdatedBy(userUpdatedBy);
         }
         return contests;
     }
@@ -139,6 +148,10 @@ public class ContestQueryHelper {
         List<Contest> contestList = contestRepository.findMostPopularContests();
         for (Contest contest : contestList) {
             contest.setQuestions(new ArrayList<>());
+            User userCreatedBy = getUserHideSensitiveData(contest.getCreatedBy().getId().getValue());
+            contest.setCreatedBy(userCreatedBy);
+            User userUpdatedBy = getUserHideSensitiveData(contest.getUpdatedBy().getId().getValue());
+            contest.setUpdatedBy(userUpdatedBy);
         }
         return contestList;
     }

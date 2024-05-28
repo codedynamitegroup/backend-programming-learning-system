@@ -17,6 +17,7 @@ public class Contest extends AggregateRoot<ContestId> {
     private String thumbnailUrl;
     private ZonedDateTime startTime;
     private ZonedDateTime endTime;
+    private Integer numOfParticipants;
     private List<ContestQuestion> questions;
     private Boolean isRegistered;
     private User createdBy;
@@ -31,6 +32,7 @@ public class Contest extends AggregateRoot<ContestId> {
         setThumbnailUrl(builder.thumbnailUrl);
         setStartTime(builder.startTime);
         setEndTime(builder.endTime);
+        setNumOfParticipants(builder.numOfParticipants);
         setQuestions(builder.questions);
         isRegistered = builder.isRegistered;
         setCreatedBy(builder.createdBy);
@@ -90,6 +92,14 @@ public class Contest extends AggregateRoot<ContestId> {
         this.endTime = endTime;
     }
 
+    public Integer getNumOfParticipants() {
+        return numOfParticipants;
+    }
+
+    public void setNumOfParticipants(Integer numOfParticipants) {
+        this.numOfParticipants = numOfParticipants;
+    }
+
     public List<ContestQuestion> getQuestions() {
         return questions;
     }
@@ -145,6 +155,7 @@ public class Contest extends AggregateRoot<ContestId> {
         private String thumbnailUrl;
         private ZonedDateTime startTime;
         private ZonedDateTime endTime;
+        private Integer numOfParticipants;
         private List<ContestQuestion> questions;
         private Boolean isRegistered;
         private User createdBy;
@@ -182,6 +193,11 @@ public class Contest extends AggregateRoot<ContestId> {
 
         public Builder endTime(ZonedDateTime val) {
             endTime = val;
+            return this;
+        }
+
+        public Builder numOfParticipants(Integer val) {
+            numOfParticipants = val;
             return this;
         }
 

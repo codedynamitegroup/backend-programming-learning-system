@@ -69,10 +69,6 @@ public class ContestDataMapper {
     public ContestResponseEntity contestToQueryContestResponse(Contest contest) {
         UserResponseEntity createdByResponse = userDataMapper.userToUserResponseEntity(contest.getCreatedBy());
         UserResponseEntity updatedByResponse = userDataMapper.userToUserResponseEntity(contest.getUpdatedBy());
-//        List<QuestionResponseEntity> questionResponseEntities =
-//                contest.getQuestions().stream()
-//                        .map(questionDataMapper::questionToQuestionResponseEntity)
-//                        .toList();
         List<ContestQuestionResponseEntity> contestQuestionResponseEntities =
                 contestQuestionDataMapper.
                         contestQuestionsToContestQuestionResponseEntities(contest.getQuestions());
@@ -85,6 +81,7 @@ public class ContestDataMapper {
                 .questions(contestQuestionResponseEntities)
                 .startTime(contest.getStartTime())
                 .endTime(contest.getEndTime())
+                .numOfParticipants(contest.getNumOfParticipants())
                 .isRegistered(contest.getRegistered())
                 .createdBy(createdByResponse)
                 .updatedBy(updatedByResponse)

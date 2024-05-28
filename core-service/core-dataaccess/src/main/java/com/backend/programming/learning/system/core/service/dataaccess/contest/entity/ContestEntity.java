@@ -1,10 +1,9 @@
 package com.backend.programming.learning.system.core.service.dataaccess.contest.entity;
 
-import com.backend.programming.learning.system.core.service.dataaccess.chapter.entity.ChapterEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Formula;
 
 import java.time.ZonedDateTime;
 import java.util.Objects;
