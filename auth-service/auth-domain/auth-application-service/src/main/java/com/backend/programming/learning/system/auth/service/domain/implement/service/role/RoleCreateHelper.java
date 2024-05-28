@@ -39,8 +39,6 @@ public class RoleCreateHelper {
     public Role persistRole(CreateRoleCommand createRoleCommand) {
         User createdBy = getUser(createRoleCommand.getCreatedBy());
         Role role = roleDataMapper.createRoleCommandToRole(createRoleCommand);
-        role.setCreatedBy(createdBy);
-        role.setUpdatedBy(createdBy);
         authDomainService.createRole(role);
         return saveRole(role);
     }

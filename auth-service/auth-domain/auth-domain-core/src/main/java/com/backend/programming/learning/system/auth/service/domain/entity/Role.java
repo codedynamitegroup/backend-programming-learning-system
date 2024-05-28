@@ -11,25 +11,15 @@ import java.util.UUID;
 public class Role extends AggregateRoot<RoleId> {
     private String description;
     private String name;
-    private ZonedDateTime createdAt;
-    private ZonedDateTime updatedAt;
-    private User createdBy;
-    private User updatedBy;
 
     public void initializeRole() {
         setId(new RoleId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
-        updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
     }
 
     private Role(Builder builder) {
         super.setId(builder.roleId);
         description = builder.description;
         name = builder.name;
-        createdAt = builder.createdAt;
-        updatedAt = builder.updatedAt;
-        createdBy = builder.createdBy;
-        updatedBy = builder.updatedBy;
     }
 
     public String getDescription() {
@@ -40,44 +30,12 @@ public class Role extends AggregateRoot<RoleId> {
         return name;
     }
 
-    public ZonedDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public ZonedDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public User getCreatedBy() {
-        return createdBy;
-    }
-
-    public User getUpdatedBy() {
-        return updatedBy;
-    }
-
     public void setDescription(String description) {
         this.description = description;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setCreatedAt(ZonedDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public void setUpdatedAt(ZonedDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public void setCreatedBy(User createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public void setUpdatedBy(User updatedBy) {
-        this.updatedBy = updatedBy;
     }
 
     public static Builder builder() {
@@ -87,10 +45,6 @@ public class Role extends AggregateRoot<RoleId> {
     public static final class Builder {
         private String description;
         private String name;
-        private ZonedDateTime createdAt;
-        private ZonedDateTime updatedAt;
-        private User createdBy;
-        private User updatedBy;
         private RoleId roleId;
 
         private Builder() {
@@ -103,26 +57,6 @@ public class Role extends AggregateRoot<RoleId> {
 
         public Builder name(String val) {
             name = val;
-            return this;
-        }
-
-        public Builder createdAt(ZonedDateTime val) {
-            createdAt = val;
-            return this;
-        }
-
-        public Builder updatedAt(ZonedDateTime val) {
-            updatedAt = val;
-            return this;
-        }
-
-        public Builder createdBy(User val) {
-            createdBy = val;
-            return this;
-        }
-
-        public Builder updatedBy(User val) {
-            updatedBy = val;
             return this;
         }
 

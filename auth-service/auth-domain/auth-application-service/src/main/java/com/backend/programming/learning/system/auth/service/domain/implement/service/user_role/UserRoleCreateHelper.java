@@ -34,15 +34,12 @@ public class UserRoleCreateHelper {
 
     @Transactional
     public UserRole persistUserRole(CreateUserRoleCommand createUserRoleCommand) {
-        User createdBy = getUser(createUserRoleCommand.getCreatedBy());
         User user = getUser(createUserRoleCommand.getUserId());
         Role role = getRole(createUserRoleCommand.getRoleId());
 
         UserRole userRole = userRoleDataMapper.createUserRoleCommandToUserRole(createUserRoleCommand);
         userRole.setRole(role);
         userRole.setUser(user);
-        userRole.setCreatedBy(createdBy);
-        userRole.setUpdatedBy(createdBy);
 
         authDomainService.createUserRole(userRole);
         roleKeycloakApplicationService.assignRole(user.getEmail(), role.getName());

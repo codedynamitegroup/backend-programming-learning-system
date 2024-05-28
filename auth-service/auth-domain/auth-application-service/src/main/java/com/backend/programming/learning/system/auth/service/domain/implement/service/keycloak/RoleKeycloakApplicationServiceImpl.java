@@ -45,6 +45,7 @@ public class RoleKeycloakApplicationServiceImpl implements RoleKeycloakApplicati
         RoleRepresentation representation = rolesResource.get(roleName).toRepresentation();
         usersResource.get(user.getId()).roles().realmLevel().add(Collections.singletonList(representation));
     }
+
     public RolesResource getRolesResource() {
         return keycloakProvider.getRealmResource().realm(keycloakConfigData.getRealm()).roles();
     }

@@ -3,15 +3,21 @@ package com.backend.programming.learning.system.auth.service.domain.implement.se
 import com.backend.programming.learning.system.auth.service.domain.AuthDomainService;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateSocialLoginUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user_role.CreateUserRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
+import com.backend.programming.learning.system.auth.service.domain.entity.Role;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
+import com.backend.programming.learning.system.auth.service.domain.implement.service.role.RoleCreateHelper;
+import com.backend.programming.learning.system.auth.service.domain.implement.service.role.RoleQueryHelper;
+import com.backend.programming.learning.system.auth.service.domain.implement.service.user_role.UserRoleCreateHelper;
 import com.backend.programming.learning.system.auth.service.domain.mapper.UserDataMapper;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserKeycloakApplicationService;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.OrganizationRepository;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,31 +27,36 @@ import java.util.UUID;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class UserCreateHelper {
     private final AuthDomainService authDomainService;
     private final UserRepository userRepository;
     private final OrganizationRepository organizationRepository;
     private final UserDataMapper authDataMapper;
     private final UserKeycloakApplicationService keycloakApplicationService;
-
-    public UserCreateHelper(AuthDomainService authDomainService, UserRepository userRepository, OrganizationRepository organizationRepository, UserDataMapper authDataMapper, UserKeycloakApplicationService keycloakApplicationService) {
-        this.authDomainService = authDomainService;
-        this.userRepository = userRepository;
-        this.organizationRepository = organizationRepository;
-        this.authDataMapper = authDataMapper;
-        this.keycloakApplicationService = keycloakApplicationService;
-    }
+    private final RoleQueryHelper roleQueryHelper;
+    private final String ROLE_NAME_USER = "user";
+    private final UserRoleCreateHelper userRoleCreateHelper;
 
     @Transactional
     public UserCreatedEvent persistUser(CreateUserCommand createUserCommand) {
         findUserWithEmail(createUserCommand.getEmail());
         findOrganization(createUserCommand.getOrganizationId());
+
         User user = authDataMapper.createUserCommandToUser(createUserCommand);
         user.setLinkedWithMicrosoft(false);
         user.setLinkedWithGoogle(false);
+
         UserCreatedEvent userCreatedEvent = authDomainService.createUser(user);
         saveUser(user);
+
         keycloakApplicationService.createUser(createUserCommand);
+
+        Role role = roleQueryHelper.queryRoleByName(ROLE_NAME_USER);
+        userRoleCreateHelper.persistUserRole(CreateUserRoleCommand.builder()
+                        .userId(user.getId().getValue())
+                        .roleId(role.getId().getValue())
+                .build());
         return userCreatedEvent;
     }
 
