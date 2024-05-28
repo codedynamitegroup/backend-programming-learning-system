@@ -4,35 +4,45 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.CourseResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.AssignmentModel;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.AssignmentResourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.coure_type.CourseTypeModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.CourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.module.ModuleModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.quiz.QuizModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.section.SectionModel;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.File;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.Submission;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionPlugin;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user.UserModel;
 import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.entity.Module;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ActivityAttachmentRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseTypeRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.IntroAttachmentRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.IntroFileRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.*;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Component
 public class MoodleDataMapper {
     private final CourseTypeRepository courseTypeRepository;
+    private final IntroFileRepository introFileRepository;
 
-    public MoodleDataMapper(CourseTypeRepository courseTypeRepository) {
+    private final IntroAttachmentRepository introAttachmentRepository;
+
+    private final ActivityAttachmentRepository activityAttachmentRepository;
+
+    public MoodleDataMapper(CourseTypeRepository courseTypeRepository, IntroFileRepository introFileRepository, IntroAttachmentRepository introAttachmentRepository, ActivityAttachmentRepository activityAttachmentRepository) {
         this.courseTypeRepository = courseTypeRepository;
+        this.introFileRepository = introFileRepository;
+        this.introAttachmentRepository = introAttachmentRepository;
+        this.activityAttachmentRepository = activityAttachmentRepository;
     }
 
     public Course createCourse(CourseModel courseModel,Organization organization) {
@@ -59,8 +69,46 @@ public class MoodleDataMapper {
                 .roleMoodle(roleMoodle)
                 .build();
     }
+    public IntroFile createIntroFile(Assignment assignment, AssignmentResourseModel assignmentResourseModel)
+    {
+        return IntroFile.builder()
+                .id(new IntroFileId(UUID.randomUUID()))
+                .assignment(assignment)
+                .fileName(assignmentResourseModel.getFilename())
+                .fileSize(assignmentResourseModel.getFilesize())
+                .fileUrl(assignmentResourseModel.getFileurl())
+                .mimetype(assignmentResourseModel.getMimetype())
+                .timemodified(Instant.ofEpochSecond(assignmentResourseModel.getTimemodified()).atZone(ZoneId.of("UTC")))
+                .build();
+    }
 
-    public Assignment createAssignment(Course course, AssignmentModel assignmentModel) {
+    public IntroAttachment createIntroAttachment(Assignment assignment, AssignmentResourseModel assignmentResourseModel)
+    {
+        return IntroAttachment.builder()
+                .id(new IntroAttachmentId(UUID.randomUUID()))
+                .assignment(assignment)
+                .fileName(assignmentResourseModel.getFilename())
+                .fileSize(assignmentResourseModel.getFilesize())
+                .fileUrl(assignmentResourseModel.getFileurl())
+                .mimetype(assignmentResourseModel.getMimetype())
+                .timemodified(Instant.ofEpochSecond(assignmentResourseModel.getTimemodified()).atZone(ZoneId.of("UTC")))
+                .build();
+    }
+
+    public ActivityAttachment createActivityAttachment(Assignment assignment, AssignmentResourseModel assignmentResourseModel)
+    {
+        return ActivityAttachment.builder()
+                .id(new ActivityAttachmentId(UUID.randomUUID()))
+                .assignment(assignment)
+                .fileName(assignmentResourseModel.getFilename())
+                .fileSize(assignmentResourseModel.getFilesize())
+                .fileUrl(assignmentResourseModel.getFileurl())
+                .mimetype(assignmentResourseModel.getMimetype())
+                .timemodified(Instant.ofEpochSecond(assignmentResourseModel.getTimemodified()).atZone(ZoneId.of("UTC")))
+                .build();
+    }
+
+    public Assignment  createAssignment(Course course, AssignmentModel assignmentModel) {
         List<String> types= Arrays.asList("file","onlinetext");
         AtomicReference<Type> type= new AtomicReference<>(Type.FILE);
         AtomicReference<Boolean> fileType= new AtomicReference<>(false);
@@ -79,12 +127,37 @@ public class MoodleDataMapper {
                 type.set(Type.BOTH);
             }
         });
+
+        String activity=null;
+
+        if(assignmentModel.getActivity()!=null){
+            activity=assignmentModel.getActivity();
+        }
+
+
+        if(assignmentModel.getIntrofiles()!=null){
+            assignmentModel.getIntrofiles().forEach(introFile->{
+
+
+            });
+        }
+        if(assignmentModel.getIntroattachments()!=null){
+            assignmentModel.getIntroattachments().forEach(introAttachment->{
+            });
+        }
+        if(assignmentModel.getActivityattachments()!=null){
+            assignmentModel.getActivityattachments().forEach(activityAttachment->{
+            });
+        }
+
+
         return Assignment.builder()
                 .id(new AssignmentId(UUID.randomUUID()))
                 .assignmentIdMoodle(Integer.valueOf(assignmentModel.getId()))
                 .title(assignmentModel.getName())
                 .courseId(course.getId())
                 .intro(assignmentModel.getIntro())
+                .activity(activity)
                 .maxScores(assignmentModel.getGrade().floatValue())
                 .scores((float)0)
                 .type(type.get())
@@ -96,13 +169,19 @@ public class MoodleDataMapper {
     }
 
     public SubmissionAssignment createSubmissionAssignment(Assignment assignment,User user, Submission submission) {
+        Boolean isGraded=false;
+        if(submission.getGradingstatus().equals("graded"))
+        {
+            isGraded=true;
+        }
         return SubmissionAssignment.builder()
                 .id(new SubmissionAssignmentId(UUID.randomUUID()))
                 .assignment(assignment)
                 .user(user)
-                .pass_status(1)
+                .isGraded(isGraded)
                 .content("content")
                 .grade((float)-1)
+                .timemodified(Instant.ofEpochSecond(submission.getTimemodified()).atZone(ZoneId.of("UTC")))
                 .submittedAt(Instant.ofEpochSecond(submission.getTimecreated()).atZone(ZoneId.of("UTC")))
                 .build();
     }
@@ -149,14 +228,21 @@ public class MoodleDataMapper {
         {
             timeOpen=Instant.ofEpochSecond(module.getDates().get(0).getTimestamp()).atZone(ZoneId.of("UTC"));
             timeClose=Instant.ofEpochSecond(module.getDates().get(1).getTimestamp()).atZone(ZoneId.of("UTC"));
-
         }
+        String content=null;
+        if (module.getContents() != null && !module.getContents().isEmpty()) { // Sửa lỗi ở đây
+            content = module.getContents().get(0).getFileurl();
+            content=content.replace("/webservice","");
+        }
+
         return Module.builder()
                 .id(new ModuleId(UUID.randomUUID()))
                 .cmid(Integer.valueOf(module.getId()))
                 .section(section)
                 .name(module.getName())
                 .visible(module.getVisible())
+                .typeModule(TypeModule.fromLabel(module.getModplural()))
+                .content(content)
                 .timeOpen(timeOpen)
                 .timeClose(timeClose)
                 .build();
@@ -273,6 +359,18 @@ public class MoodleDataMapper {
                 .id(new CourseTypeId(UUID.randomUUID()))
                 .name(courseTypeModel.getName())
                 .moodleId(moodleId)
+                .build();
+    }
+
+    public SubmissionFile createSubmissionFile(SubmissionAssignmentFile submissionAssignmentFile, File file) {
+        return SubmissionFile.builder()
+                .id(new SubmissionFileId(UUID.randomUUID()))
+                .submissionAssignmentFile(submissionAssignmentFile)
+                .fileName(file.getFilename())
+                .fileSize(file.getFilesize())
+                .fileUrl(file.getFileurl())
+                .mimetype(file.getMimetype())
+                .timemodified(Instant.ofEpochSecond(file.getTimemodified()).atZone(ZoneId.of("UTC")))
                 .build();
     }
 }

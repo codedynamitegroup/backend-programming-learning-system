@@ -14,20 +14,21 @@ import java.util.List;
 public class AssignmentDataAccessMapper {
     public AssignmentEntity assignmentToAssignmentEntity(Assignment assignment) {
         CourseEntity courseEntity = CourseEntity.builder().id(assignment.getCourseId().getValue()).build();
-       return AssignmentEntity.builder()
-               .course(courseEntity)
-               .id(assignment.getId().getValue())
-               .assignmentIdMoodle(assignment.getAssignmentIdMoodle())
-               .title(assignment.getTitle())
-               .intro(assignment.getIntro())
-               .score(assignment.getScores())
-               .maxScore(assignment.getMaxScores())
-               .timeOpen(assignment.getTime_open())
-               .timeClose(assignment.getTime_close())
-               .timeLimit(assignment.getTime_limit())
-               .type(assignment.getType())
-               .visible(assignment.getVisible())
-               .build();
+        return AssignmentEntity.builder()
+                .course(courseEntity)
+                .id(assignment.getId().getValue())
+                .assignmentIdMoodle(assignment.getAssignmentIdMoodle())
+                .title(assignment.getTitle())
+                .intro(assignment.getIntro())
+                .activity(assignment.getActivity())
+                .score(assignment.getScores())
+                .maxScore(assignment.getMaxScores())
+                .timeOpen(assignment.getTime_open())
+                .timeClose(assignment.getTime_close())
+                .timeLimit(assignment.getTime_limit())
+                .type(assignment.getType())
+                .visible(assignment.getVisible())
+                .build();
     }
 
     public Assignment assignmentEntityToAssignment(AssignmentEntity assignmentEntity) {
@@ -37,6 +38,7 @@ public class AssignmentDataAccessMapper {
                 .courseId(new CourseId(assignmentEntity.getCourse().getId()))
                 .title(assignmentEntity.getTitle())
                 .intro(assignmentEntity.getIntro())
+                .activity(assignmentEntity.getActivity())
                 .scores(assignmentEntity.getScore())
                 .maxScores(assignmentEntity.getMaxScore())
                 .time_open(assignmentEntity.getTimeOpen())

@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 import com.backend.programming.learning.system.course.service.domain.entity.CourseUser;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseUserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -29,4 +30,11 @@ public class CourseUserQueryHelper {
         log.info("Course user found successfully");
         return courseUser;
     }
+
+    public Page<CourseUser> findAllUserByCourseId(UUID id, String search, int pageNo, int pageSize) {
+        Page<CourseUser> courseUser = courseUserRepository.findAllUserByCourseId(id, search, pageNo, pageSize);
+        log.info("Course user found successfully");
+        return courseUser;
+    }
+
 }

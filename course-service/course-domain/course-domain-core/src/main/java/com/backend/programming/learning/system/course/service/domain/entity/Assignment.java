@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.course.service.domain.valueobject
 import com.backend.programming.learning.system.course.service.domain.valueobject.Type;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 public class Assignment extends AggregateRoot<AssignmentId> {
@@ -13,6 +14,8 @@ public class Assignment extends AggregateRoot<AssignmentId> {
     private Integer assignmentIdMoodle;
     private String title;
     private String intro;
+    private String activity;
+
     private Float scores;
 
     private Float maxScores;
@@ -28,6 +31,7 @@ public class Assignment extends AggregateRoot<AssignmentId> {
         courseId = builder.courseId;
         title = builder.title;
         intro = builder.intro;
+        activity = builder.activity;
         scores = builder.scores;
         maxScores = builder.maxScores;
         time_open = builder.time_open;
@@ -40,6 +44,15 @@ public class Assignment extends AggregateRoot<AssignmentId> {
     public static Builder builder() {
         return new Builder();
     }
+
+    public String getActivity() {
+        return activity;
+    }
+
+    public void setActivity(String activity) {
+        this.activity = activity;
+    }
+
 
     public Integer getAssignmentIdMoodle() {
         return assignmentIdMoodle;
@@ -137,6 +150,9 @@ public class Assignment extends AggregateRoot<AssignmentId> {
         private CourseId courseId;
         private String title;
         private String intro;
+
+        private String activity;
+
         private Float scores;
         private Float maxScores;
         private ZonedDateTime time_open;
@@ -176,6 +192,13 @@ public class Assignment extends AggregateRoot<AssignmentId> {
             intro = val;
             return this;
         }
+
+
+        public Builder activity(String val) {
+            activity = val;
+            return this;
+        }
+
 
         public Builder scores(Float val) {
             scores = val;

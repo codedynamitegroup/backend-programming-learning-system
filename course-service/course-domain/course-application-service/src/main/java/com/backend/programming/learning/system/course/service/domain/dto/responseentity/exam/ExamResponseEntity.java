@@ -17,6 +17,7 @@ import java.util.UUID;
 public record ExamResponseEntity(
         UUID id,
         UUID courseId,
+        String courseName,
         String name,
         Float scores,
         Float maxScores,

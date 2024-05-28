@@ -4,10 +4,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest.CreateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.DeleteContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.DeleteContestResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryContestCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryMostPopularContestsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.*;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestResponseEntity;
@@ -56,5 +53,12 @@ class ContestApplicationServiceImpl implements ContestApplicationService {
     @Override
     public UpdateContestResponse updateContest(UpdateContestCommand updateContestCommand) {
         return contestCommandHandler.updateContestResponse(updateContestCommand);
+    }
+
+    @Override
+    public QueryLeaderboardOfContestResponse queryLeaderboardOfContest(
+            QueryLeaderboardOfContestCommand queryLeaderboardOfContestCommand) {
+        return contestCommandHandler
+                .queryLeaderboardOfContestResponse(queryLeaderboardOfContestCommand);
     }
 }

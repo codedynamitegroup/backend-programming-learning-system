@@ -23,7 +23,7 @@ public interface CodeQuestionRepository {
 
     Integer countAllCodeQuestion();
 
-    Page<CodeQuestion> findAll(UserId id, List<TagId> tagIds, QueryOrderBy orderBy, CodeQuestion.Fields sortBy, Integer pageNum, Integer pageSize, QuestionDifficulty difficulty, Boolean solved, String search);
+    Page<CodeQuestion> findAll(UserId id, List<TagId> tagIds, QueryOrderBy orderBy, CodeQuestion.Fields sortBy, Integer pageNum, Integer pageSize, QuestionDifficulty difficulty, Boolean solved, String search, boolean isPulic);
 
     void saveNewLanguage(List<ProgrammingLanguageCodeQuestion> plcqs);
 

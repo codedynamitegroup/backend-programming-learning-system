@@ -60,7 +60,7 @@ public class ContestController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createContestResponse);
     }
 
-    @PostMapping("/register")
+    @PostMapping("/{id}/register")
     @Operation(summary = "Register contest.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Success.", content = {
@@ -70,10 +70,15 @@ public class ContestController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateContestUserResponse> registerContest(
+            @PathVariable UUID id,
             @RequestBody CreateContestUserCommand createContestUserCommand) {
-        log.info("Creating Contest User course: {}", contestUserApplicationService);
+        log.info("User registering for contest: {}", id);
         CreateContestUserResponse createContestUserResponse =
-                contestUserApplicationService.createContestUser(createContestUserCommand);
+                contestUserApplicationService.createContestUser(CreateContestUserCommand
+                        .builder()
+                        .userId(createContestUserCommand.getUserId())
+                        .contestId(id)
+                        .build());
         log.info("Contest User created: {}", createContestUserCommand);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createContestUserResponse);
@@ -184,6 +189,40 @@ public class ContestController {
                                 .build());
         log.info("Returning all users of contest: {}", id);
         return ResponseEntity.ok(queryAllContestUsersResponse);
+    }
+
+    @GetMapping("/{id}/leaderboard")
+    @Operation(summary = "Get leaderboard of contest.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryLeaderboardOfContestResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryLeaderboardOfContestResponse> getLeaderboardOfContest(
+            @PathVariable UUID id,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize) {
+        String email = null;
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
+        QueryLeaderboardOfContestResponse queryLeaderboardOfContestResponse =
+                contestApplicationService.queryLeaderboardOfContest(
+                        QueryLeaderboardOfContestCommand
+                                .builder()
+                                .contestId(id)
+                                .email(email)
+                                .pageNo(pageNo)
+                                .pageSize(pageSize)
+                                .build());
+        log.info("Returning leaderboard of contest: {}", id);
+        return ResponseEntity.ok(queryLeaderboardOfContestResponse);
     }
 
     @GetMapping("/{id}")

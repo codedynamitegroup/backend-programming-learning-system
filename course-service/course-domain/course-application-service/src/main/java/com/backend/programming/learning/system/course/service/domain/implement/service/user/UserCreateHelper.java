@@ -27,7 +27,7 @@ public class UserCreateHelper {
 
     @Transactional
     public UserCreatedEvent persistUser(CreateUserCommand createUserCommand) {
-        Organization organization = organizationRepository.findOrganizationByName("moodle2")
+        Organization organization = organizationRepository.findOrganizationByName("Moodle")
                 .orElseThrow(() -> new AuthDomainException("Organization not found!"));
         User user = authDataMapper.createUserCommandToUser(createUserCommand, organization);
         findUserWithEmail(user.getEmail());

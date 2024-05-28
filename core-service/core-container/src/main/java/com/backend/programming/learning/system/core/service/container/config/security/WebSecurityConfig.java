@@ -38,9 +38,10 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/core/chapters/{id}").hasAnyRole(ADMIN)
 
                         // Contest
-//                        .requestMatchers(HttpMethod.POST, "/core/contests/create").hasAnyRole(ADMIN)
-//                        .requestMatchers(HttpMethod.PUT, "/core/contests/{id}").hasAnyRole(ADMIN)
-//                        .requestMatchers(HttpMethod.DELETE, "/core/contests/{id}").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.POST, "/core/contests/create").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.POST, "/core/contests/{id}/register").hasAnyRole(ADMIN, USER)
+                        .requestMatchers(HttpMethod.PUT, "/core/contests/{id}").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.DELETE, "/core/contests/{id}").hasAnyRole(ADMIN)
 
                         // Review
                         .requestMatchers(HttpMethod.POST, "/core/reviews/create").hasAnyRole(ADMIN, USER)

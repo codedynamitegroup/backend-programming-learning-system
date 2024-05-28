@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.entity;
 
 import com.backend.programming.learning.system.course.service.domain.valueobject.ModuleId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.SectionId;
+import com.backend.programming.learning.system.course.service.domain.valueobject.TypeModule;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 
 import java.time.ZonedDateTime;
@@ -12,17 +13,39 @@ public class Module extends AggregateRoot<ModuleId> {
     private Integer cmid;
     private String name;
     private Integer visible;
+    private String content;
+
+    private TypeModule typeModule;
+
     private ZonedDateTime timeOpen;
     private ZonedDateTime timeClose;
 
     private Module(Builder builder) {
         super.setId(builder.id);
         cmid = builder.cmid;
+        setContent(builder.content);
         setSection(builder.section);
+        setTypeModule(builder.typeModule);
         setName(builder.name);
         setVisible(builder.visible);
         setTimeOpen(builder.timeOpen);
         setTimeClose(builder.timeClose);
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public TypeModule getTypeModule() {
+        return typeModule;
+    }
+
+    public void setTypeModule(TypeModule typeModule) {
+        this.typeModule = typeModule;
     }
 
     public Section getSection() {
@@ -89,6 +112,9 @@ public class Module extends AggregateRoot<ModuleId> {
         private Section section;
         private String name;
         private Integer visible;
+
+        private String content;
+        private TypeModule typeModule;
         private ZonedDateTime timeOpen;
         private ZonedDateTime timeClose;
 
@@ -121,6 +147,16 @@ public class Module extends AggregateRoot<ModuleId> {
 
         public Builder visible(Integer val) {
             visible = val;
+            return this;
+        }
+
+        public Builder content(String val) {
+            content = val;
+            return this;
+        }
+
+        public Builder typeModule(TypeModule val) {
+            typeModule = val;
             return this;
         }
 

@@ -4,6 +4,8 @@ import com.backend.programming.learning.system.course.service.dataaccess.course_
 import com.backend.programming.learning.system.course.service.dataaccess.course_user.repository.CourseUserJpaRepository;
 import com.backend.programming.learning.system.course.service.domain.entity.CourseUser;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseUserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -34,8 +36,8 @@ public class CourseUserRepositoryImpl implements CourseUserRepository {
 
     @Override
     public List<CourseUser> findByCourseId(UUID courseUserId) {
-          return courseUserDataAccessMapper
-                    .courseUserToCourseUserEntityList(courseUserJpaRepository.findByCourseId(courseUserId));
+        return courseUserDataAccessMapper
+                .courseUserToCourseUserEntityList(courseUserJpaRepository.findByCourseId(courseUserId));
     }
 
     @Override
@@ -52,5 +54,12 @@ public class CourseUserRepositoryImpl implements CourseUserRepository {
     public List<CourseUser> findByCourseIdAndRoleTeacher(UUID courseId) {
         return courseUserDataAccessMapper
                 .courseUserToCourseUserEntityList(courseUserJpaRepository.findByCourseIdAndRoleTeacher(courseId));
+    }
+
+    @Override
+    public Page<CourseUser> findAllUserByCourseId(UUID id, String search, int pageNo, int pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
+        return courseUserDataAccessMapper
+                .courseUserPageToCourseUserPage(courseUserJpaRepository.findAllUserByCourseId(id, search, pageRequest));
     }
 }

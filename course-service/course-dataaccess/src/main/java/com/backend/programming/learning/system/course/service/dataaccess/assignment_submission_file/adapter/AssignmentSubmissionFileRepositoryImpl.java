@@ -6,6 +6,9 @@ import com.backend.programming.learning.system.course.service.domain.entity.Subm
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionAssignmentFileRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Repository
 public class AssignmentSubmissionFileRepositoryImpl implements SubmissionAssignmentFileRepository {
 
@@ -25,5 +28,11 @@ public class AssignmentSubmissionFileRepositoryImpl implements SubmissionAssignm
         return assignmentSubmissionFileDataAccessMapper.assignmentSubmissionFileEntityToAssignmentSubmissionFile(assignmentSubmissionFileJpaRepository
                 .save(assignmentSubmissionFileDataAccessMapper
                         .assignmentSubmissionFileToAssignmentSubmissionFileEntity(submissionAssignmentFile)));
+    }
+
+    @Override
+    public Optional<SubmissionAssignmentFile> findBySubmissionAssignmentId(UUID submissionAssignmentId) {
+        return assignmentSubmissionFileJpaRepository.findByAssignmentSubmission_Id(submissionAssignmentId)
+                .map(assignmentSubmissionFileDataAccessMapper::assignmentSubmissionFileEntityToAssignmentSubmissionFile);
     }
 }

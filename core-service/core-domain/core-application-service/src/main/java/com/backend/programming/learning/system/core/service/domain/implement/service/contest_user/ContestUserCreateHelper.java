@@ -51,7 +51,7 @@ public class ContestUserCreateHelper {
         checkContestUserByContestIdAndUserId(
                 createContestUserCommand.getContestId(),
                 createContestUserCommand.getUserId());
-        checkEndTimeIsNotExpired(contest);
+        checkIfContestStarted(contest);
 
         ContestUser contestUser = contestUserDataMapper.
                 createContestUserCommandToContestUser(createContestUserCommand);
@@ -64,11 +64,12 @@ public class ContestUserCreateHelper {
         return contestUserUpdatedEvent;
     }
 
-    private void checkEndTimeIsNotExpired(Contest contest) {
-        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UTC"));
-        if (contest.getEndTime() != null && contest.getEndTime().isBefore(now)) {
-            log.warn("Contest with id: {} has already ended", contest.getId().getValue());
-            throw new CoreDomainException("Contest with id: " + contest.getId().getValue() + " has already ended");
+    private void checkIfContestStarted(Contest contest) {
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UTC"))
+                .plusMinutes(1);
+        if (contest.getStartTime().isBefore(now)) {
+            log.warn("Contest with id: {} has already started", contest.getId().getValue());
+            throw new CoreDomainException("Contest with id: " + contest.getId().getValue() + " has already started");
         }
     }
 

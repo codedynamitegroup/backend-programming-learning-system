@@ -13,4 +13,6 @@ public class ModuleResponseEntity {
     private final UUID moduleId;
     private final String name;
     private final Integer visible;
+    private final String typeModule;
+    private final String content;
 }

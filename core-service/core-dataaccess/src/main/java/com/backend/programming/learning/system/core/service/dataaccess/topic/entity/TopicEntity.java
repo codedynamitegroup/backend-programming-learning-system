@@ -30,6 +30,7 @@ public class TopicEntity {
     private String name;
     private String description;
     private String thumbnailUrl;
+    private Boolean isSingleProgrammingLanguage;
 
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL)
     private List<TopicProgrammingLanguageEntity> topicProgrammingLanguages;

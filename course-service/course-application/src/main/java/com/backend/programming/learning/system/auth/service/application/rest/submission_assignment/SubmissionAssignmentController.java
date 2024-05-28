@@ -8,6 +8,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QueryAllSubmissionAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QueryAllSubmissionnAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QuerySubmissionAssignmentCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QuerySubmissionAssignmentUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment.SubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.submission_assignment.UpdateSubmissionAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.submission_assignment.UpdateSubmissionAssignmentResponse;
@@ -28,7 +29,7 @@ import java.util.UUID;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/assignment/submission_assignment", produces = "application/vnd.api.v1+json")
+@RequestMapping(value = "/course/submission-assignment", produces = "application/vnd.api.v1+json")
 public class SubmissionAssignmentController {
     private final SubmissionAssignmentApplicationService submissionAssignmentApplicationService;
 
@@ -123,7 +124,7 @@ public class SubmissionAssignmentController {
         log.info("Updating submission assignment by id");
         UpdateSubmissionAssignmentResponse response = submissionAssignmentApplicationService
                 .updateSubmissionAssignmentById(updateSubmissionAssignmentCommand.builder()
-                        .pass_status(updateSubmissionAssignmentCommand.getPass_status())
+                        .isGraded(updateSubmissionAssignmentCommand.getIsGraded())
                         .submissionAssignmentId(submissionAssignmentId)
                         .grade(updateSubmissionAssignmentCommand.getGrade())
                         .content(updateSubmissionAssignmentCommand.getContent())
@@ -131,4 +132,24 @@ public class SubmissionAssignmentController {
                         .build());
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/user")
+    @Operation(summary = "Query submission assignment by assignment id and user id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = SubmissionAssignmentResponseEntity.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<SubmissionAssignmentResponseEntity> queryByAssignmentIdAndUserId(
+            @RequestParam UUID assignmentId,
+            @RequestParam UUID userId
+    ) {
+        log.info("Querying submission assignment by assignment id and user id");
+        SubmissionAssignmentResponseEntity response = submissionAssignmentApplicationService
+                .queryByAssignmentIdAndUserId(new QuerySubmissionAssignmentUserCommand(assignmentId, userId));
+        return ResponseEntity.ok(response);
+    }
+
 }

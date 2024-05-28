@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.course.service.dataaccess.course_user.repository;
 
 import com.backend.programming.learning.system.course.service.dataaccess.course_user.entity.CourseUserEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -21,4 +23,13 @@ public interface CourseUserJpaRepository extends JpaRepository<CourseUserEntity,
             AND (cu.roleMoodle.id = 3 OR cu.roleMoodle.id = 4) 
     """)
     List<CourseUserEntity> findByCourseIdAndRoleTeacher(UUID courseId);
+
+
+    @Query("""
+            SELECT cu
+            FROM CourseUserEntity cu
+            WHERE cu.course.id = :id
+            AND (cu.user.firstName LIKE %:search% OR cu.user.lastName LIKE %:search% OR cu.user.email LIKE %:search%)
+    """)
+    Page<CourseUserEntity> findAllUserByCourseId(UUID id, String search, Pageable pageable);
 }

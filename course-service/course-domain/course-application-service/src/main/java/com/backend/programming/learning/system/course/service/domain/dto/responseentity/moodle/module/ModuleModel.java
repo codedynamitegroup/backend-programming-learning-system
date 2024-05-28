@@ -34,4 +34,5 @@ public class ModuleModel {
     private Object completiondata;
     private Integer downloadcontent;
     private List<TimeFrame> dates;
+    private List<ModuleContent> contents;
 }

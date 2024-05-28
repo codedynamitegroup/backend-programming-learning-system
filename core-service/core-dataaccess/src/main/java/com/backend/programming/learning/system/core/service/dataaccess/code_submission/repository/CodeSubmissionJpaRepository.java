@@ -22,4 +22,18 @@ public interface CodeSubmissionJpaRepository extends JpaRepository<CodeSubmissio
             AND qe.id = :questionId
 """)
     List<CodeSubmissionEntity> findAllCodeSubmissionsByUserIdAndQuestionId(UUID userId, UUID questionId);
+
+    int countAllByUserIdAndCodeQuestionId(UUID userId, UUID codeQuestionId);
+
+    @Query("""
+        SELECT cse
+            FROM CodeSubmissionEntity cse, QtypeCodeQuestionEntity qcqe
+            WHERE cse.codeQuestionId = qcqe.id
+            AND cse.userId = :userId
+            AND qcqe.id = :codeQuestionId
+            AND cse.pass = true
+            ORDER BY cse.createdAt DESC
+            LIMIT 1
+""")
+    Optional<CodeSubmissionEntity> findLatestPassedCodeSubmissionByUserIdAndCodeQuestionId(UUID userId, UUID codeQuestionId);
 }

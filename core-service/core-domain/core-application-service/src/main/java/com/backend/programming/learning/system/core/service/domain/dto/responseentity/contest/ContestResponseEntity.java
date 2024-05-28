@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest;
 
-import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest_question.ContestQuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
@@ -33,7 +33,7 @@ public class ContestResponseEntity {
     @NotNull
     private final Boolean isRegistered;
     @NotNull
-    private final List<QuestionResponseEntity> questions;
+    private final List<ContestQuestionResponseEntity> questions;
     @NotNull
     private final UserResponseEntity createdBy;
     @NotNull

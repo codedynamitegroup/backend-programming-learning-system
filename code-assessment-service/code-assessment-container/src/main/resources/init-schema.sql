@@ -4,6 +4,8 @@ CREATE SCHEMA "public";
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
+CREATE EXTENSION IF NOT EXISTS unaccent;
+
 DROP TYPE IF EXISTS CopyState;
 CREATE TYPE CopyState AS ENUM (
     'CREATING',
@@ -107,6 +109,9 @@ CREATE TABLE programming_language(
     time_limit float not null,
     memory_limit float check(memory_limit >= 204800) not null ,
     is_actived boolean default false,
+    head_code text default '',
+    body_code text default '',
+    tail_code text default '',
     copy_state CopyState not null ,
     CONSTRAINT pr_la_pk PRIMARY KEY (id)
 
@@ -129,6 +134,7 @@ CREATE TABLE qtype_code_questions(
     constraints text,
     created_at TIMESTAMP WITH TIME ZONE default CURRENT_TIMESTAMP,
     max_grade float default 10,
+    fts_document tsvector,
     CONSTRAINT qtype_code_questions_pk PRIMARY KEY (id)
 --         CONSTRAINT qtype_code_questions_questions_id_fk FOREIGN KEY (question_id)
 --         REFERENCES questions (id) MATCH SIMPLE
@@ -224,6 +230,9 @@ CREATE TABLE programming_language_code_question(
     code_question_id uuid not null ,
     time_limit float not null,
     memory_limit float check(memory_limit >= 2048) not null ,
+    head_code text default '',
+    body_code text default '',
+    tail_code text default '',
     active boolean default true,
     CONSTRAINT pr_la_co_qu_pk PRIMARY KEY (programming_language_id, code_question_id),
     CONSTRAINT prl_fk FOREIGN KEY (programming_language_id)
@@ -263,10 +272,13 @@ CREATE TABLE code_submission(
     avg_memory double precision,
     ai_assessment text,
     sonaque_assessment text,
-    source_code text not null ,
+    head_code text not null,
+    body_code text not null,
+    tail_code text not null,
     number_of_test_case_sent int not null ,
     number_of_test_case_graded int default 0,
     grading_status grading_status not null ,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
     copy_state CopyState not null ,
 --     version integer default 0 NOT NULL,
     CONSTRAINT co_su_pk PRIMARY KEY (id),
@@ -383,4 +395,19 @@ CREATE INDEX "question_outbox_saga_id"
     ON "public".question_outbox
     (type, saga_id);
 
-CREATE INDEX "search_code_question" ON qtype_code_questions(name);
+--postgres function sucks
+CREATE OR REPLACE FUNCTION update_code_question_fts_document()
+RETURNS TRIGGER AS '
+BEGIN
+    NEW.fts_document := to_tsvector(unaccent(NEW.name) || '' '' || NEW.name);
+    RETURN NEW;
+END;
+' LANGUAGE plpgsql;
+
+create trigger tsvector_update_on_code_question before insert or update of name
+    on qtype_code_questions
+    for each row
+    execute procedure update_code_question_fts_document();
+
+create index code_question_fts_index on qtype_code_questions(fts_document);
+

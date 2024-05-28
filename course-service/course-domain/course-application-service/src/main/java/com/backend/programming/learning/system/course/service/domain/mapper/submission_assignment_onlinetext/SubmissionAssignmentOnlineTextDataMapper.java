@@ -27,8 +27,7 @@ public class SubmissionAssignmentOnlineTextDataMapper {
 
     public SubmissionAssignmentOnlineTextResponseEntity submissionAssignmentOnlineTextToSubmissionAssignmentOnlineTextResponseEntity(SubmissionAssignmentOnlineText submissionAssignmentOnlineText) {
         return SubmissionAssignmentOnlineTextResponseEntity.builder()
-                .submissionAssignmentOnlineTextId(submissionAssignmentOnlineText.getId().getValue())
-                .submissionAssignmentId(submissionAssignmentOnlineText.getSubmissionAssignment().getId().getValue())
+                .id(submissionAssignmentOnlineText.getId().getValue())
                 .content(submissionAssignmentOnlineText.getContent())
                 .build();
     }

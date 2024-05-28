@@ -25,9 +25,8 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     private ZonedDateTime createdAt;
     private Boolean solved;
     private List<String> failureMessages;
-    private List<ProgrammingLanguage> programmingLanguages;
-    private ProgrammingLanguageId sourceCodeLanguageId;
-    private String sourceCode;
+    private List<ProgrammingLanguageCodeQuestion> programmingLanguages;
+    private List<CodeSubmission> codeSubmissions;
     private List<TestCase> tcs;
     private List<Tag> tags;
 
@@ -85,10 +84,6 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         return isPublic;
     }
 
-    public String getSourceCode() {
-        return sourceCode;
-    }
-
     public List<TestCase> getTcs() {
         return tcs;
     }
@@ -105,12 +100,8 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         return problemStatement;
     }
 
-    public List<ProgrammingLanguage> getProgrammingLanguages() {
+    public List<ProgrammingLanguageCodeQuestion> getProgrammingLanguages() {
         return programmingLanguages;
-    }
-
-    public ProgrammingLanguageId getSourceCodeLanguageId() {
-        return sourceCodeLanguageId;
     }
 
     public String getInputFormat() {
@@ -145,6 +136,10 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         return failureMessages;
     }
 
+    public List<CodeSubmission> getCodeSubmissions() {
+        return codeSubmissions;
+    }
+
     public Float getMaxGrade() {
         return maxGrade;
     }
@@ -171,16 +166,14 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         solved = builder.solved;
         failureMessages = builder.failureMessages;
         programmingLanguages = builder.programmingLanguages;
-        sourceCodeLanguageId = builder.sourceCodeLanguageId;
-        sourceCode = builder.sourceCode;
+        codeSubmissions = builder.codeSubmissions;
         tcs = builder.tcs;
         tags = builder.tags;
     }
 
-    public void getDetail(List<TestCase> sampleTestCase, CodeSubmission codeSubmission, List<ProgrammingLanguage> languages) {
+    public void getDetail(List<TestCase> sampleTestCase, List<CodeSubmission> codeSubmission, List<ProgrammingLanguageCodeQuestion> languages) {
         tcs = sampleTestCase == null || sampleTestCase.isEmpty()? null: sampleTestCase;
-        sourceCode = codeSubmission != null? codeSubmission.getSourceCode(): null;
-        sourceCodeLanguageId = codeSubmission != null? codeSubmission.getLanguageId() : null;
+        this.codeSubmissions = codeSubmission;
         this.programmingLanguages = languages;
     }
 
@@ -202,9 +195,8 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         private ZonedDateTime createdAt;
         private Boolean solved;
         private List<String> failureMessages;
-        private List<ProgrammingLanguage> programmingLanguages;
-        private ProgrammingLanguageId sourceCodeLanguageId;
-        private String sourceCode;
+        private List<ProgrammingLanguageCodeQuestion> programmingLanguages;
+        private List<CodeSubmission> codeSubmissions;
         private List<TestCase> tcs;
         private List<Tag> tags;
         private CodeQuestionId id;
@@ -287,18 +279,13 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
             return this;
         }
 
-        public Builder programmingLanguages(List<ProgrammingLanguage> val) {
+        public Builder programmingLanguages(List<ProgrammingLanguageCodeQuestion> val) {
             programmingLanguages = val;
             return this;
         }
 
-        public Builder sourceCodeLanguageId(ProgrammingLanguageId val) {
-            sourceCodeLanguageId = val;
-            return this;
-        }
-
-        public Builder sourceCode(String val) {
-            sourceCode = val;
+        public Builder codeSubmissions(List<CodeSubmission> val) {
+            codeSubmissions = val;
             return this;
         }
 

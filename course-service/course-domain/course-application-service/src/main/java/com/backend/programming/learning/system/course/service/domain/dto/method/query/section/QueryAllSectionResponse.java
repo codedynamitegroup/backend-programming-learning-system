@@ -13,6 +13,5 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class QueryAllSectionResponse {
-    private UUID courseId;
     List<SectionResponseEntity> sections;
 }

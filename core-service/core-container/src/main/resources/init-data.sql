@@ -5,57 +5,57 @@ VALUES
 	 ('8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7','tgtien852@gmail.com',NULL,'Tien','Truong','12365478',NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false);
 
 
-INSERT INTO public.topic(id, name, description, thumbnail_url, created_by, updated_by)
+INSERT INTO public.topic(id, name, description, thumbnail_url, created_by, updated_by, is_single_programming_language)
 VALUES
     ('9ba179ed-d26d-4828-a0f6-8836c2063992',
      'Learn Python',
      'Python is a versatile and user-friendly programming language known for its readability and efficiency. It''s widely used for web development, data analysis, artificial intelligence, and more.',
      'https://cdn.codechef.com/images/self-learning/icons/python.svg',
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
-     '9ba179ed-d26d-4828-a0f6-8836c2063992'
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+        true
     ),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb92',
      'Learn C',
      'C is a fundamental programming language that''s ideal for beginners due to its simplicity and direct control over hardware. Learning C provides a strong foundation in computer science concepts and programming techniques.',
      'https://cdn.codechef.com/images/self-learning/icons/c.svg',
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
-     '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     true),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb46',
      'Learn Java',
      'Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible. It is a general-purpose programming language intended to let application developers write once, run anywhere (WORA), meaning that compiled Java code can run on all platforms that support Java without the need for recompilation.',
      'https://cdn.codechef.com/images/self-learning/icons/java.svg',
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
-     '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     true),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb47',
      'Learn JavaScript',
      'JavaScript is a programming language that conforms to the ECMAScript specification. JavaScript is high-level, often just-in-time compiled, and multi-paradigm. It has curly-bracket syntax, dynamic typing, prototype-based object-orientation, and first-class functions.',
      'https://logos-download.com/wp-content/uploads/2019/01/JavaScript_Logo.png',
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
-     '9ba179ed-d26d-4828-a0f6-8836c2063992'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb48',
-     'Data structures and Algorithms',
-     'Explore the fundamental building blocks of computer science through our comprehensive courses on Data Structures and Algorithms. Gain a solid understanding of both theory and practical application.',
-     'https://cdn.codechef.com/images/self-learning/icons/stacks-and-queues.svg',
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
-     '9ba179ed-d26d-4828-a0f6-8836c2063992' ),
+     true),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb49',
      'Learn SQL',
      'This sample SQL certification course equips you with the skills and knowledge to effectively query, manipulate, and manage data in relational databases using SQL.  The course prepares you for various entry-level database administrator or data analyst roles that heavily utilize SQL.',
      'https://e7.pngegg.com/pngimages/170/924/png-clipart-microsoft-sql-server-microsoft-azure-sql-database-microsoft-text-logo.png',
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
-     '9ba179ed-d26d-4828-a0f6-8836c2063992' );
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     true),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb48',
+     'Data structures and Algorithms',
+     'Explore the fundamental building blocks of computer science through our comprehensive courses on Data Structures and Algorithms. Gain a solid understanding of both theory and practical application.',
+     'https://cdn.codechef.com/images/self-learning/icons/stacks-and-queues.svg',
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     false);
 
 INSERT INTO public.organization(id, description, name, created_at, updated_at, is_deleted)
 VALUES
 	 ('9ba179ed-d26d-4828-a0f6-8836c2063992',NULL,'Code Dynamite','2024-04-15 18:37:44.08878+07','2024-04-15 18:37:44.08878+07',false),
 	 ('08b65a39-394f-4977-a5fa-3fe145b620f8',NULL,'moodle2','2024-04-15 18:09:29.488151+07','2024-04-15 18:09:29.488151+07',false),
 	 ('3ead3b08-afdd-442f-b544-fdbd86eaa186',NULL,'Code Dynamite','2024-04-15 18:09:40.033204+07','2024-04-15 18:09:40.033204+07',false);
-
--- INSERT INTO public.programming_language(id, name, compiler_api_id)
--- VALUES
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb47', 'Python (2.7.17)', 70),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', 'Java (OpenJDK 13.0.1)', 62),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb49', 'C++ (GCC 9.2.0)', 54);
 
 insert into programming_language (id, name, compiler_api_id, time_limit, memory_limit) values ('e268cd70-cf0d-46ce-8f69-ade9d3a955a2', 'Assembly (NASM 2.14.02)', 45, 2, 204800);
 insert into programming_language (id, name, compiler_api_id, time_limit, memory_limit) values ('ec1a6b7b-7817-4241-bc8f-febce8d2770e', 'Bash (5.0.0)', 46, 2, 204800);
@@ -105,6 +105,17 @@ insert into programming_language (id, name, compiler_api_id, time_limit, memory_
 insert into programming_language (id, name, compiler_api_id, time_limit, memory_limit) values ('574bebfa-640b-4836-9920-9686123cf324', 'TypeScript (3.7.4)', 74, 2, 204800);
 insert into programming_language (id, name, compiler_api_id, time_limit, memory_limit) values ('c2812b53-059f-43cb-8e9b-966246a79567', 'Visual Basic.Net (vbnc 0.0.0.5943)', 84, 2, 204800);
 
+INSERT INTO public.topic_programming_language(topic_id, programming_language_id)
+VALUES
+    ('9ba179ed-d26d-4828-a0f6-8836c2063992', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb92', 'c95d5c7d-cadf-42cc-afdc-968211ae3720'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb46', 'c95d5c7d-cadf-42cc-afdc-968211ae3720'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb47', 'c95d5c7d-cadf-42cc-afdc-968211ae3720'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', 'c95d5c7d-cadf-42cc-afdc-968211ae3720'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', 'cc69d904-ba4e-44fb-a0b5-8170e30bac39'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb49', 'c95d5c7d-cadf-42cc-afdc-968211ae3720');
+
 INSERT INTO public.question(id, org_id, difficulty, name, question_text, general_feedback, default_mark, qtype, created_by, updated_by, copy_state)
 VALUES
     ('b6484e21-6937-489c-b031-b71767994221', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'HARD', 'Question Pants', 'Question Mouse Text', 'Question Tuna feedback', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
@@ -124,7 +135,13 @@ VALUES
     ('b6484e21-6937-489c-b031-b71767994746', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'HARD', 'Templates', 'Learn how to use templates in C++.', 'Question Good Job feedback', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
     ('b6484e21-6937-489c-b031-b71767994747', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'EASY', 'STL', 'Learn how to use the Standard Template Library (STL) in C++.', 'Question Good Job feedback', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
     ('b6484e21-6937-489c-b031-b71767994748', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'MEDIUM', 'Concurrency', 'Learn how to write concurrent programs in C++ using threads and mutexes.', 'Question Good Job feedback', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    ('b6484e21-6937-489c-b031-b71767994749', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'HARD', 'Networking', 'Learn how to write networked programs in C++ using sockets.', 'Question Good Job feedback', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED');
+    ('b6484e21-6937-489c-b031-b71767994749', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'HARD', 'Networking', 'Learn how to write networked programs in C++ using sockets.', 'Question Good Job feedback', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
+
+--     Questions for contest_question
+    ('b6484e21-6937-489c-b031-b71767994750', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'HARD', 'Remove Digit From Number to Maximize Result', 'Question Mouse Text', 'Question Tuna feedback', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
+    ('b6484e21-6937-489c-b031-b71767994751', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'EASY', 'Minimum Consecutive Cards to Pick Up', 'Question Wire Text', 'Question Gold feedback', 1, 'ESSAY', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
+    ('b6484e21-6937-489c-b031-b71767994752', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'MEDIUM', 'K Divisible Elements Subarrays', 'Question Wow Text', 'Question Amazing feedback', 1, 'SHORT_ANSWER', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
+    ('b6484e21-6937-489c-b031-b71767994753', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'HARD', 'Total Appeal of A String', 'Question Speaker Text', 'Question Good Job feedback', 1, 'MULTIPLE_CHOICE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED');
 
 INSERT INTO public.answer_of_question(id, question_id, feedback, answer, fraction)
 VALUES
@@ -154,7 +171,11 @@ VALUES
     ('27549d54-4a3a-4be4-9875-eab03f88ba6a', 'b6484e21-6937-489c-b031-b71767994746', 'print(Hello World)'),
     ('27549d54-4a3a-4be4-9875-eab03f88ba7a', 'b6484e21-6937-489c-b031-b71767994747', 'print(Hello World)'),
     ('27549d54-4a3a-4be4-9875-eab03f88ba8a', 'b6484e21-6937-489c-b031-b71767994748', 'print(Hello World)'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba9a', 'b6484e21-6937-489c-b031-b71767994749', 'print(Hello World)');
+    ('27549d54-4a3a-4be4-9875-eab03f88ba9a', 'b6484e21-6937-489c-b031-b71767994749', 'print(Hello World)'),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba5b', 'b6484e21-6937-489c-b031-b71767994750', 'print(Hello World)'),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba6b', 'b6484e21-6937-489c-b031-b71767994751', 'print(Hello World)'),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba7b', 'b6484e21-6937-489c-b031-b71767994752', 'print(Hello World)'),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba8b', 'b6484e21-6937-489c-b031-b71767994753', 'print(Hello World)');
 
 INSERT INTO public.qtype_essay_question(id, question_id, response_format, response_required, response_field_lines, min_word_limit, max_word_limit, attachments, attachments_required, grader_info, grader_info_format, response_template, max_bytes, file_types_list)
 VALUES
@@ -171,23 +192,14 @@ VALUES
 INSERT INTO public.certificate_course(id, topic_id, name, description, skill_level, start_time, end_time, created_by, updated_by, avg_rating)
 VALUES
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'Learn Python', 'This course is designed for beginners who want to learn Python programming from scratch. It covers the basics of Python programming, including data types, control structures, functions, and more.', 'BASIC', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 4),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 'd215b5f8-0249-4dc5-89a3-51fd148cfb92', 'Intermediate Python', 'This course is designed for intermediate Python programmers who want to enhance their skills and knowledge. It covers advanced topics such as object-oriented programming, data structures, algorithms, and more.', 'INTERMEDIATE', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 4),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'd215b5f8-0249-4dc5-89a3-51fd148cfb46', 'Advanced Python', 'This course is designed for experienced Python programmers who want to master advanced Python concepts and techniques. It covers topics such as decorators, generators, metaclasses, and more.', 'ADVANCED', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 4),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', 'd215b5f8-0249-4dc5-89a3-51fd148cfb47', 'Learn Java', 'This course is designed for beginners who want to learn Java programming from scratch. It covers the basics of Java programming, including data types, control structures, functions, and more.', 'BASIC', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 0),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', 'd215b5f8-0249-4dc5-89a3-51fd148cfb48', 'Intermediate Java', 'This course is designed for intermediate Java programmers who want to enhance their skills and knowledge. It covers advanced topics such as object-oriented programming, data structures, algorithms, and more.', 'INTERMEDIATE', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 0),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', 'd215b5f8-0249-4dc5-89a3-51fd148cfb49', 'Advanced Java', 'This course is designed for experienced Java programmers who want to master advanced Java concepts and techniques. It covers topics such as decorators, generators, metaclasses, and more.', 'ADVANCED', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 0),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'Intermediate Python', 'This course is designed for intermediate Python programmers who want to enhance their skills and knowledge. It covers advanced topics such as object-oriented programming, data structures, algorithms, and more.', 'INTERMEDIATE', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 4),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'Advanced Python', 'This course is designed for experienced Python programmers who want to master advanced Python concepts and techniques. It covers topics such as decorators, generators, metaclasses, and more.', 'ADVANCED', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 4),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', 'd215b5f8-0249-4dc5-89a3-51fd148cfb46', 'Learn Java', 'This course is designed for beginners who want to learn Java programming from scratch. It covers the basics of Java programming, including data types, control structures, functions, and more.', 'BASIC', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 0),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', 'd215b5f8-0249-4dc5-89a3-51fd148cfb46', 'Intermediate Java', 'This course is designed for intermediate Java programmers who want to enhance their skills and knowledge. It covers advanced topics such as object-oriented programming, data structures, algorithms, and more.', 'INTERMEDIATE', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 0),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', 'd215b5f8-0249-4dc5-89a3-51fd148cfb46', 'Advanced Java', 'This course is designed for experienced Java programmers who want to master advanced Java concepts and techniques. It covers topics such as decorators, generators, metaclasses, and more.', 'ADVANCED', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 0),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', 'd215b5f8-0249-4dc5-89a3-51fd148cfb48', 'Stacks and Queues', 'This course is designed for beginners who want to learn about stacks and queues. It covers the basics of stacks and queues, including their implementation, operations, and applications.', 'BASIC', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 0),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', 'd215b5f8-0249-4dc5-89a3-51fd148cfb48', 'Linked Lists', 'This course is designed for intermediate programmers who want to learn about linked lists. It covers the basics of linked lists, including their implementation, operations, and applications.', 'INTERMEDIATE', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 0),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', 'd215b5f8-0249-4dc5-89a3-51fd148cfb48', 'Binary Trees', 'This course is designed for experienced programmers who want to learn about binary trees. It covers the basics of binary trees, including their implementation, operations, and applications.', 'ADVANCED', '2024-04-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 0);
-
-INSERT INTO public.topic_programming_language(topic_id, programming_language_id)
-VALUES
-    ('9ba179ed-d26d-4828-a0f6-8836c2063992', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb92', 'c95d5c7d-cadf-42cc-afdc-968211ae3720'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb46', 'c95d5c7d-cadf-42cc-afdc-968211ae3720'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb47', 'c95d5c7d-cadf-42cc-afdc-968211ae3720'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb48', 'c95d5c7d-cadf-42cc-afdc-968211ae3720'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb49', 'c95d5c7d-cadf-42cc-afdc-968211ae3720');
 
 INSERT INTO public.certificate_course_user(certificate_course_id, user_id)
 VALUES
@@ -198,8 +210,6 @@ VALUES
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b029f559-52a8-4699-b595-71161498ed8c'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 'b029f559-52a8-4699-b595-71161498ed8c'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'b029f559-52a8-4699-b595-71161498ed8c'),
@@ -281,11 +291,116 @@ VALUES
 
 INSERT INTO public.code_submission(id, user_id, code_question_id, programming_language_id, source_code, grade, pass)
 VALUES
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 1, true);
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba5a', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 1, true),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba5b', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 2, true),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba5c', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba5d', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 1, true),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba5e', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba5f', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba7a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba6a', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba8a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 1, false),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba6b', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba9a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba6c', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba6d', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false);
 
 INSERT INTO public.contest(id, name, description, thumbnail_url, start_time, end_time, created_by, updated_by)
 VALUES
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'Python Contest', 'This contest is for Python programmers who want to test their skills in Python programming.', 'https://leetcode.com/_next/static/images/weekly-default-553ede7bcc8e1b4a44c28a9e4a32068c.png', '2024-04-15 18:09:29.488151+07', '2024-09-10 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 'Java Contest', 'This contest is for Java programmers who want to test their skills in Java programming.', 'https://leetcode.com/_next/static/images/biweekly-default-f5a8fc3be85b6c9175207fd8fd855d47.png', '2024-09-15 18:09:29.488151+07', '2024-10-15 18:09:29.488151+07', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'Data Structures Contest', 'This contest is for programmers who want to test their skills in data structures and algorithms.', 'https://assets.leetcode.com/contest/weekly-contest-291/card_img_1654267951.png', '2024-01-15 18:09:29.488151+07', null, '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', 'Algorithms Contest', 'This contest is for programmers who want to test their skills in algorithms.', 'https://assets.leetcode.com/contest/weekly-contest-291/card_img_1654267951.png', '2024-01-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992');
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'Python Contest',
+     '<h3 style="text-align:start"><span style="font-size:24px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">Ch&agrave;o mừng đến với Cuộc thi h&agrave;ng tuần Batch the code lần thứ 387</span></span></span></span></h3>
+
+<p>&nbsp;</p>
+
+<p style="text-align:start"><span style="font-size:14px"><span style="color:rgba(0, 0, 0, 0.65)"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="background-color:#fafafa">Cuộc thi n&agrave;y được t&agrave;i trợ bởi CodeDynamite.</span></span></span></span></p>
+
+<p style="text-align:start"><span style="font-size:14px"><span style="color:rgba(0, 0, 0, 0.65)"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="background-color:#fafafa"><strong>H&atilde;y đăng k&yacute; trước cuộc thi v&agrave; điền v&agrave;o bản khảo s&aacute;t để được chọn phỏng vấn với CodeDynamite!!</strong></span></span></span></span></p>
+
+<p style="text-align:start"><span style="font-size:14px"><span style="color:rgba(0, 0, 0, 0.65)"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="background-color:#fafafa">Bạn c&oacute; thể điền th&ocirc;ng tin li&ecirc;n hệ ở bước đăng k&yacute;.&nbsp;CodeDynamite c&oacute; thể li&ecirc;n hệ với những người chiến thắng cuộc thi đủ điều kiện để c&oacute; cơ hội phỏng vấn với CodeDynamite.</span></span></span></span></p>
+
+<p style="text-align:start"><span style="font-size:14px"><span style="color:rgba(0, 0, 0, 0.65)"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="background-color:#fafafa"><strong><strong>⭐ Giải thưởng⭐</strong></strong></span></span></span></span></p>
+
+<ul>
+	<li>Th&iacute; sinh xếp&nbsp;<strong>thứ 1 ~ thứ 3</strong>&nbsp;sẽ gi&agrave;nh được Ba l&ocirc; CodeDynamite</li>
+	<li>Th&iacute; sinh xếp&nbsp;<strong>thứ 4 ~ 10</strong>&nbsp;sẽ gi&agrave;nh được B&igrave;nh nước CodeDynamite</li>
+	<li>Th&iacute; sinh xếp hạng&nbsp;<strong>11 ~ 16</strong>&nbsp;sẽ gi&agrave;nh được CodeDynamite Big O Notebook</li>
+</ul>
+
+<p style="text-align:start"><span style="font-size:14px"><span style="color:rgba(0, 0, 0, 0.65)"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="background-color:#fafafa">Chỉ t&agrave;i khoản LCUS(6bt.com) mới đủ điều kiện nhận phần thưởng.&nbsp;Sau khi bảng xếp hạng được ho&agrave;n tất, th&agrave;nh vi&ecirc;n nh&oacute;m CodeDynamitesẽ li&ecirc;n hệ với bạn qua email về m&oacute;n qu&agrave;!</span></span></span></span></p>
+
+<p><img src="https://assets.leetcode.com/static_assets/others/Contest_Prize_Banner.png" style="--tw-border-spacing-x:0; --tw-border-spacing-y:0; --tw-ring-color:rgba(59,130,246,.5); --tw-ring-offset-color:#ffffff; --tw-ring-offset-shadow:0 0 #0000; --tw-ring-offset-width:0px; --tw-ring-shadow:0 0 #0000; --tw-rotate:0; --tw-scale-x:1; --tw-scale-y:1; --tw-scroll-snap-strictness:proximity; --tw-shadow-colored:0 0 #0000; --tw-shadow:0 0 #0000; --tw-skew-x:0; --tw-skew-y:0; --tw-translate-x:0; --tw-translate-y:0; background-color:#fafafa; border:0px none; box-sizing:border-box; color:rgba(0, 0, 0, 0.65); font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;; font-size:14px; font-style:normal; font-variant-ligatures:normal; font-weight:400; margin-bottom:20px; max-width:100%; text-align:start; text-decoration-color:initial; text-decoration-style:initial; text-decoration-thickness:initial; vertical-align:middle; white-space:normal" /></p>
+
+<h4 style="text-align:start"><span style="font-size:18px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">&nbsp;&nbsp;Lưu &yacute; quan trọng</span></span></span></span></h4>
+
+<ol>
+	<li>Để mang đến một cuộc thi tốt hơn v&agrave; đảm bảo t&iacute;nh c&ocirc;ng bằng, ch&uacute;ng t&ocirc;i đ&atilde; lắng nghe phản hồi của 6BroCoder v&agrave; suy nghĩ rất nhiều về thể lệ cuộc thi được cập nhật.&nbsp;Vui l&ograve;ng xem&nbsp;<a href="https://leetcode.com/discuss/general-discussion/951105/new-contest-rule-effective-from-december-2020" style="box-sizing:border-box; border:0px solid; --tw-border-spacing-x:0; --tw-border-spacing-y:0; --tw-translate-x:0; --tw-translate-y:0; --tw-rotate:0; --tw-skew-x:0; --tw-skew-y:0; --tw-scale-x:1; --tw-scale-y:1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness:proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width:0px; --tw-ring-offset-color:#ffffff; --tw-ring-color:rgba(59,130,246,.5); --tw-ring-offset-shadow:0 0 #0000; --tw-ring-shadow:0 0 #0000; --tw-shadow:0 0 #0000; --tw-shadow-colored:0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; color:#1890ff; text-decoration:none; outline:none; cursor:pointer; transition:color 0.3s ease 0s; touch-action:manipulation">quy tắc</a>&nbsp;cuộc thi mới của ch&uacute;ng t&ocirc;i bao gồm nhiều t&igrave;nh huống hơn với giải th&iacute;ch chi tiết.</li>
+	<li>Mỗi lần gửi sai sẽ bị&nbsp;phạt&nbsp;<strong>5 ph&uacute;t.</strong></li>
+	<li>Để đảm bảo t&iacute;nh c&ocirc;ng bằng của cuộc thi, CodeDynamite sẽ ẩn một số test case trong suốt cuộc thi.&nbsp;Khi người d&ugrave;ng gửi b&agrave;i gửi kh&ocirc;ng ch&iacute;nh x&aacute;c, CodeDynamite sẽ kh&ocirc;ng hiển thị c&aacute;c trường hợp thử nghiệm ẩn cho người d&ugrave;ng.</li>
+	<li>Đ&aacute;nh gi&aacute; cuối c&ugrave;ng của cuộc thi n&agrave;y sẽ được cập nhật trong v&ograve;ng 5 ng&agrave;y l&agrave;m việc sau cuộc thi.</li>
+	<br />
+	<li><strong>C&aacute;c h&agrave;nh động dưới đ&acirc;y được coi l&agrave; vi phạm cuộc thi</strong>&nbsp;:
+	<ul>
+		<li>Một người d&ugrave;ng gửi bằng nhiều t&agrave;i khoản trong một cuộc thi.&nbsp;T&agrave;i khoản LCUS (CodeDynamite.com) v&agrave; t&agrave;i khoản LCCN (CodeDynamite-cn.com) được coi l&agrave; t&agrave;i khoản ri&ecirc;ng biệt, ngay cả khi cả hai t&agrave;i khoản đều thuộc về c&ugrave;ng một người d&ugrave;ng.</li>
+		<li>Nhiều t&agrave;i khoản gửi m&atilde; giống nhau cho c&ugrave;ng một vấn đề.</li>
+		<li>Tạo ra những x&aacute;o trộn kh&ocirc;ng mong muốn l&agrave;m gi&aacute;n đoạn sự tham gia của người d&ugrave;ng kh&aacute;c v&agrave;o cuộc thi.</li>
+		<li>C&ocirc;ng bố giải ph&aacute;p cuộc thi ở c&aacute;c b&agrave;i thảo luận c&ocirc;ng khai trước khi cuộc thi kết th&uacute;c.</li>
+	</ul>
+	<br />
+	CodeDynamite nhấn mạnh v&agrave;o t&iacute;nh c&ocirc;ng bằng v&agrave; c&ocirc;ng bằng trong c&aacute;c cuộc thi của ch&uacute;ng t&ocirc;i.&nbsp;Ch&uacute;ng t&ocirc;i ho&agrave;n to&agrave;n&nbsp;<strong>KH&Ocirc;NG CHẤP NHẬN</strong>&nbsp;đối với c&aacute;c h&agrave;nh vi vi phạm (chẳng hạn như đạo văn, gian lận, v.v.).&nbsp;Khi người d&ugrave;ng bị coi l&agrave; vi phạm quy tắc cuộc thi, ch&uacute;ng t&ocirc;i sẽ &aacute;p dụng c&aacute;c h&igrave;nh phạt sau đối với người d&ugrave;ng n&agrave;y:
+
+	<ul>
+		<li><strong>Vi phạm lần đầu</strong>&nbsp;: Số tiền 6Coin đặt lại về 0 v&agrave; một cuộc thi v&agrave; thảo luận về lệnh cấm trong 1 th&aacute;ng.</li>
+		<li><strong>Vi phạm lần 2</strong>&nbsp;: Kh&oacute;a t&agrave;i khoản vĩnh viễn m&agrave; kh&ocirc;ng kh&aacute;ng c&aacute;o.</li>
+	</ul>
+	<br />
+	Hơn nữa, ch&uacute;ng t&ocirc;i khuyến kh&iacute;ch tất cả những người tham gia đ&oacute;ng g&oacute;p v&agrave;o việc duy tr&igrave; sự c&ocirc;ng bằng v&agrave; c&ocirc;ng bằng trong cuộc thi của ch&uacute;ng t&ocirc;i.&nbsp;Người d&ugrave;ng gửi (c&aacute;c) b&aacute;o c&aacute;o vi phạm hợp lệ sẽ kiếm th&ecirc;m 6Coin:
+	<ul>
+		<li>Đối với mỗi người tham gia vi phạm, 10 người d&ugrave;ng đầu ti&ecirc;n gửi b&aacute;o c&aacute;o vi phạm đối với người tham gia n&agrave;y sẽ kiếm được 20 6Coin.</li>
+		<li>Mỗi người d&ugrave;ng c&oacute; thể kiếm tới 100 6Coin khi b&aacute;o c&aacute;o vi phạm trong một cuộc thi.</li>
+		<li>Người d&ugrave;ng sẽ kh&ocirc;ng được thưởng 6Coins cho c&aacute;c b&aacute;o c&aacute;o về người d&ugrave;ng LCCN.</li>
+	</ul>
+	</li>
+</ol>
+
+<p><br />
+&nbsp;</p>
+
+<h4 style="text-align:start"><span style="font-size:18px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">&nbsp;&nbsp;Th&ocirc;ng b&aacute;o</span></span></span></span></h4>
+
+<p style="text-align:start"><span style="font-size:14px"><span style="color:rgba(0, 0, 0, 0.65)"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="background-color:#fafafa">Người d&ugrave;ng&nbsp;<strong>phải đăng k&yacute;</strong>&nbsp;để tham gia.&nbsp;Ch&uacute;ng t&ocirc;i hy vọng bạn th&iacute;ch cuộc thi n&agrave;y!</span></span></span></span></p>',
+     'https://leetcode.com/_next/static/images/weekly-default-553ede7bcc8e1b4a44c28a9e4a32068c.png', '2024-05-20 18:09:29.488151+07', '2024-09-10 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 'Java Contest',
+     '<h3 style="text-align:start"><span style="font-size:24px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">Welcome to the Java Contest Batch the code #387</span></span></span></span></h3>',
+     'https://leetcode.com/_next/static/images/biweekly-default-f5a8fc3be85b6c9175207fd8fd855d47.png', '2024-09-15 18:09:29.488151+07', '2024-10-15 18:09:29.488151+07', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'Data Structures Contest',
+     '<h3 style="text-align:start"><span style="font-size:24px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">Welcome to the Data Structures Contest Batch the code #387</span></span></span></span></h3>',
+     'https://assets.leetcode.com/contest/weekly-contest-291/card_img_1654267951.png', '2024-01-15 18:09:29.488151+07', null, '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', 'Algorithms Contest',
+        '<h3 style="text-align:start"><span style="font-size:24px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">Welcome to the Algorithms Contest Batch the code #387</span></span></span></span></h3>',
+     'https://assets.leetcode.com/contest/weekly-contest-291/card_img_1654267951.png', '2024-01-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992');
+
+INSERT INTO public.contest_user(contest_id, user_id)
+VALUES
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b029f559-52a8-4699-b595-71161498ed8c'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7');
+
+INSERT INTO public.contest_question(contest_id, question_id)
+VALUES
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b6484e21-6937-489c-b031-b71767994750'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b6484e21-6937-489c-b031-b71767994751'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b6484e21-6937-489c-b031-b71767994752'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b6484e21-6937-489c-b031-b71767994753');
+
+INSERT INTO public.code_submission(id, user_id, code_question_id, programming_language_id, source_code, grade, pass)
+VALUES
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'b029f559-52a8-4699-b595-71161498ed8c', '27549d54-4a3a-4be4-9875-eab03f88ba6b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '27549d54-4a3a-4be4-9875-eab03f88ba7b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 2, true),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 3, true),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', 'b029f559-52a8-4699-b595-71161498ed8c', '27549d54-4a3a-4be4-9875-eab03f88ba6b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 3, true),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '27549d54-4a3a-4be4-9875-eab03f88ba7b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba8b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 4, true);
+

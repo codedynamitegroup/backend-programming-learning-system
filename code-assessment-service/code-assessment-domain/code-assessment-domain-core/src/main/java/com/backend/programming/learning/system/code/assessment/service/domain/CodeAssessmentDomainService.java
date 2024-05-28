@@ -33,7 +33,10 @@ public interface CodeAssessmentDomainService {
 
     void inititateProgrammingLanguage(ProgrammingLanguage programmingLanguage);
 
-    CodeQuestion getDetailCodeQuestion(CodeQuestion codeQuestion, List<TestCase> sampleTestCase, CodeSubmission codeSubmission, List<ProgrammingLanguage> languages);
+    CodeQuestion getDetailCodeQuestion(CodeQuestion codeQuestion, List<TestCase> sampleTestCase, List<CodeSubmission> codeSubmission, List<ProgrammingLanguageCodeQuestion> languages);
 
     ProgrammingLanguageCodeQuestion initProgrammingLanguageCodeQuestion(Float timeLimit, Float memoryLimit, CodeQuestionId codeQuestionId, UUID id);
+
+    ProgrammingLanguageCodeQuestion initProgrammingLanguageCodeQuestion(Float timeLimit, Float memoryLimit, String headCode, String bodyCode, String tailCode ,CodeQuestionId codeQuestionId, UUID id);
+
 }

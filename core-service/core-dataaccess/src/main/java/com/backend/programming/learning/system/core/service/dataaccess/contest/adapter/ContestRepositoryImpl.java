@@ -52,38 +52,51 @@ public class ContestRepositoryImpl implements ContestRepository {
     public Page<Contest> findAll(String searchName, String startTimeFilter, Integer page, Integer size) {
         Pageable paging = PageRequest.of(page, size);
 
+        List<String> splitedSearch = contestDataAccessMapper.splitWords(searchName);
+
+        String searchFinalWord = splitedSearch != null && !splitedSearch.isEmpty()? splitedSearch.get(splitedSearch.size() - 1): null;
+
+        if(splitedSearch != null && !splitedSearch.isEmpty())
+            splitedSearch.remove(splitedSearch.size() - 1);
+
+        String searchExcludeFinalWord =  splitedSearch != null && !splitedSearch.isEmpty() ? String.join(" ", splitedSearch) : null;
+
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UTC"));
         switch (ContestStartTimeFilter.valueOf(startTimeFilter)) {
             case UPCOMING -> {
-                if(searchName.isEmpty()){
-                    return contestJpaRepository.findAllUpcomingContests(now, paging)
-                            .map(contestDataAccessMapper::contestEntityToContest);
-                }
-                return contestJpaRepository.findAllUpcomingContestsContainsSearchName(searchName, now, paging)
+//                if(searchName.isEmpty()){
+//                    return contestJpaRepository.findAllUpcomingContests(now, paging)
+//                            .map(contestDataAccessMapper::contestEntityToContest);
+//                }
+                return contestJpaRepository.findAllUpcomingContestsContainsSearchName(
+                        now, searchExcludeFinalWord, searchFinalWord, paging)
                         .map(contestDataAccessMapper::contestEntityToContest);
             }
             case HAPPENING -> {
-                if (searchName.isEmpty()) {
-                    return contestJpaRepository.findAllHappeningContests(now, paging)
-                            .map(contestDataAccessMapper::contestEntityToContest);
-                }
-                return contestJpaRepository.findAllHappeningContestsContainsSearchName(now, searchName, paging)
+//                if (searchName.isEmpty()) {
+//                    return contestJpaRepository.findAllHappeningContests(now, paging)
+//                            .map(contestDataAccessMapper::contestEntityToContest);
+//                }
+                return contestJpaRepository.findAllHappeningContestsContainsSearchName(
+                        now, searchExcludeFinalWord, searchFinalWord, paging)
                         .map(contestDataAccessMapper::contestEntityToContest);
             }
             case ENDED -> {
-                if (searchName.isEmpty()) {
-                    return contestJpaRepository.findAllEndedContests(now, paging)
-                            .map(contestDataAccessMapper::contestEntityToContest);
-                }
-                return contestJpaRepository.findAllEndedContestsContainsSearchName(now, searchName, paging)
+//                if (searchName.isEmpty()) {
+//                    return contestJpaRepository.findAllEndedContests(now, paging)
+//                            .map(contestDataAccessMapper::contestEntityToContest);
+//                }
+                return contestJpaRepository.findAllEndedContestsContainsSearchName(
+                        now, searchExcludeFinalWord, searchFinalWord,paging)
                         .map(contestDataAccessMapper::contestEntityToContest);
             }
             default -> {
-                if (searchName.isEmpty()) {
-                    return contestJpaRepository.findAll(paging)
-                            .map(contestDataAccessMapper::contestEntityToContest);
-                }
-                return contestJpaRepository.findAllContainsSearchName(searchName, paging)
+//                if (searchName.isEmpty()) {
+//                    return contestJpaRepository.findAll(paging)
+//                            .map(contestDataAccessMapper::contestEntityToContest);
+//                }
+                return contestJpaRepository.findAllContainsSearchName(
+                        searchExcludeFinalWord, searchFinalWord, paging)
                         .map(contestDataAccessMapper::contestEntityToContest);
             }
         }

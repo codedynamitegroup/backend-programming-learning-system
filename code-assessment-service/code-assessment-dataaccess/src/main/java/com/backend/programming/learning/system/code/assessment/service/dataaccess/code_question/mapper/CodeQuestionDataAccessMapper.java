@@ -6,12 +6,17 @@ import com.backend.programming.learning.system.code.assessment.service.domain.en
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
+@Slf4j
 public class CodeQuestionDataAccessMapper {
 
     private final QuestionDataAssessMapper questionDataAssessMapper;
@@ -94,5 +99,13 @@ public class CodeQuestionDataAccessMapper {
 
     public String codeQuestionFieldToCodeQuestionEntityField(String name) {
         return codeQuestionFieldToCodeQuestionEntityField.fieldMapper.get(name);
+    }
+
+    public List<String> splitWords(String search) {
+        if(search == null) return null;
+
+        ArrayList<String> words = Stream.of(search.split(" ")).filter(i-> !i.isEmpty()).collect(Collectors.toCollection(ArrayList::new));
+
+        return words;
     }
 }

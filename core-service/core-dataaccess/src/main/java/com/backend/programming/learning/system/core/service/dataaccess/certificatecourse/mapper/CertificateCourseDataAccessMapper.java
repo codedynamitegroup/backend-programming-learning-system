@@ -6,8 +6,15 @@ import com.backend.programming.learning.system.core.service.dataaccess.topic.map
 import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+@Slf4j
 @Component
 public class CertificateCourseDataAccessMapper {
     private final UserDataAccessMapper userDataAccessMapper;
@@ -31,9 +38,9 @@ public class CertificateCourseDataAccessMapper {
                 .topic(topic)
                 .startTime(certificateCourse.getStartTime())
                 .endTime(certificateCourse.getEndTime())
-                .numOfStudents(certificateCourse.getNumOfStudents())
-                .numOfQuestions(certificateCourse.getNumOfQuestions())
-                .numOfReviews(certificateCourse.getNumOfReviews())
+//                .numOfStudents(certificateCourse.getNumOfStudents())
+//                .numOfQuestions(certificateCourse.getNumOfQuestions())
+//                .numOfReviews(certificateCourse.getNumOfReviews())
                 .createdBy(userDataAccessMapper.userToUserEntityHideSensitiveData(certificateCourse.getCreatedBy()))
                 .updatedBy(userDataAccessMapper.userToUserEntityHideSensitiveData(certificateCourse.getUpdatedBy()))
                 .createdAt(certificateCourse.getCreatedAt())
@@ -54,14 +61,22 @@ public class CertificateCourseDataAccessMapper {
                 .topic(topic)
                 .startTime(certificateCourseEntity.getStartTime())
                 .endTime(certificateCourseEntity.getEndTime())
-                .numOfStudents(certificateCourseEntity.getNumOfStudents())
-                .numOfQuestions(certificateCourseEntity.getNumOfQuestions())
-                .numOfReviews(certificateCourseEntity.getNumOfReviews())
+//                .numOfStudents(certificateCourseEntity.getNumOfStudents())
+//                .numOfQuestions(certificateCourseEntity.getNumOfQuestions())
+//                .numOfReviews(certificateCourseEntity.getNumOfReviews())
                 .createdBy(userDataAccessMapper.userEntityToUserHideSensitiveData(certificateCourseEntity.getCreatedBy()))
                 .updatedBy(userDataAccessMapper.userEntityToUserHideSensitiveData(certificateCourseEntity.getUpdatedBy()))
                 .createdAt(certificateCourseEntity.getCreatedAt())
                 .updatedAt(certificateCourseEntity.getUpdatedAt())
                 .build();
+    }
+
+    public List<String> splitWords(String search) {
+        if(search == null) return null;
+
+        ArrayList<String> words = Stream.of(search.split(" ")).filter(i-> !i.isEmpty()).collect(Collectors.toCollection(ArrayList::new));
+
+        return words;
     }
 
 }

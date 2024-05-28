@@ -45,4 +45,11 @@ public class SubmissionAssignmentRepositoryImpl implements SubmissionAssignmentR
     public void deleteSubmissionAssignmentById(UUID submissionAssignmentId) {
         assignmentSubmissionJpaRepository.deleteById(submissionAssignmentId);
     }
+
+    @Override
+    public SubmissionAssignment findByAssignmentIdAndUserId(UUID assignmentId, UUID userId) {
+        return submissionAssignmentDataAccessMapper.
+                assignmentSubmissionEntityToAssignmentSubmission(assignmentSubmissionJpaRepository.
+                        findByAssignmentIdAndUserId(assignmentId, userId).orElse(null));
+    }
 }

@@ -10,5 +10,7 @@ public interface SubmissionAssignmentOnlineTextRepository {
 
     Optional<SubmissionAssignmentOnlineText> findById(UUID submissionAssignmentOnlineTextId);
 
+    Optional<SubmissionAssignmentOnlineText> findBySubmissionAssignmentId(UUID submissionAssignmentId);
+
     void deleteSubmissionAssignmentOnlineTextById(UUID submissionAssignmentOnlineTextId);
 }

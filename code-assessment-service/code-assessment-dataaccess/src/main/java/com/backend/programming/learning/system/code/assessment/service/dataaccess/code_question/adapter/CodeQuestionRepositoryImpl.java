@@ -21,7 +21,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -98,23 +97,33 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
     }
 
     @Override
-    public Page<CodeQuestion> findAll(UserId userId, List<TagId> tagIds, QueryOrderBy orderBy, CodeQuestion.Fields sortBy, Integer pageNum, Integer pageSize, QuestionDifficulty difficulty, Boolean solved, String search) {
+    public Page<CodeQuestion> findAll(UserId userId, List<TagId> tagIds, QueryOrderBy orderBy, CodeQuestion.Fields sortBy, Integer pageNum, Integer pageSize, QuestionDifficulty difficulty, Boolean solved, String search, boolean isPublic) {
         Pageable pageable
                 = PageRequest
-                .of(pageNum,
-                        pageSize,
-                        Sort.by(generalMapper.QueryOrderByToSortDirection(orderBy),
-                                codeQuestionDataAccessMapper.codeQuestionFieldToCodeQuestionEntityField(sortBy.name())));
+                .of(pageNum, pageSize);
+//                                codeQuestionDataAccessMapper.codeQuestionFieldToCodeQuestionEntityField(sortBy.name())));
 
-        List<UUID> tagEntityId = tagIds == null? null: tagIds.stream().map(BaseId::getValue).toList();
+        List<UUID> tagEntityId = tagIds == null? List.of(): tagIds.stream().map(BaseId::getValue).toList();
+
+        List<String> splitedSearch = codeQuestionDataAccessMapper.splitWords(search);
+
+        String searchFinalWord = splitedSearch != null && !splitedSearch.isEmpty()? splitedSearch.get(splitedSearch.size() - 1): null;
+
+        if(splitedSearch != null && !splitedSearch.isEmpty())
+            splitedSearch.remove(splitedSearch.size() - 1);
+
+        String searchExcludeFinalWord =  splitedSearch != null && !splitedSearch.isEmpty()? String.join(" ", splitedSearch) : null;
 
         Page<CodeQuestionEntity> codeQuestionEntityPageable =
                 codeQuestionJpaRepository.findAndFilterByTagIds(
                         tagEntityId,
-                        search,
-                        difficulty,
+                        searchExcludeFinalWord,
+                        searchFinalWord,
+                        difficulty == null? null: difficulty.name(),
                         solved,
-                        userId != null? userId.getValue(): null,
+                        userId != null ? userId.getValue(): null,
+                        isPublic,
+                        search,
                         pageable);
 
         Page<CodeQuestion> codeQuestions = codeQuestionEntityPageable.map(item->{
@@ -123,7 +132,12 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
 
             //if solved does not exist, then we must find the done in every question
             if (userId != null && solved == null) {
-                Optional<CodeSubmissionEntity> submissionEntity = codeSubmissionJpaRepository.findByUserIdAndCodeQuestionIdAndGrade(userId.getValue(), item.getId(), item.getMaxGrade().doubleValue());
+                Optional<CodeSubmissionEntity> submissionEntity
+                        = codeSubmissionJpaRepository
+                        .findFirstByUserIdAndCodeQuestionIdAndGrade(
+                                userId.getValue(),
+                                item.getId(),
+                                item.getMaxGrade().doubleValue());
                 if(submissionEntity.isPresent())
                     done = true;
             }

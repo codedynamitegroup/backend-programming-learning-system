@@ -4,9 +4,13 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.course_user.CreateCourseUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.course_user.CreateCourseUserResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.course_user.DeleteCourseUserCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryAllCourseUserCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryAllCourseUserResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryCourseUserCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.UserCourseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course_user.CourseUserResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.course_user.CourseUserApplicationService;
+import com.backend.programming.learning.system.course.service.domain.valueobject.CourseUserId;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -82,5 +86,30 @@ public class CourseUserController {
         return ResponseEntity.ok(response);
     }
 
-
+    @GetMapping("/{courseId}/user")
+    @Operation(summary = "Query course user.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = UserCourseEntity.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllCourseUserResponse> queryAllUserByCourseId(
+            @PathVariable UUID courseId,
+            @RequestParam(defaultValue = "") String search,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize) {
+        log.info("Query user by course id: {}", courseId);
+        QueryAllCourseUserCommand queryAllCourseUserCommand = QueryAllCourseUserCommand.builder()
+                .search(search)
+                .pageNo(pageNo)
+                .pageSize(pageSize)
+                .build();
+        QueryAllCourseUserResponse response = courseUserApplicationService.queryAllUserByCourseId(
+                new CourseUserId(courseId),
+                queryAllCourseUserCommand);
+        log.info("User by course id: {}", response);
+        return ResponseEntity.ok(response);
+    }
 }

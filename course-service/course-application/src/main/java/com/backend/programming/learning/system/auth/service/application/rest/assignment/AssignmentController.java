@@ -27,19 +27,19 @@ import java.util.UUID;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/assignment/assignment", produces = "application/vnd.api.v1+json")
+@RequestMapping(value = "/course/assignment", produces = "application/vnd.api.v1+json")
 public class AssignmentController {
     private final AssignmentApplicationService assignmentApplicationService;
 
-   @PostMapping
-   @Operation(summary = "Create assignment.")
-   @ApiResponses(value = {
-           @ApiResponse(responseCode = "201", description = "Success.", content = {
-                   @Content(mediaType = "application/vnd.api.v1+json",
-                           schema = @Schema(implementation = CreateAssignmentResponse.class))
-           }),
-           @ApiResponse(responseCode = "400", description = "Not found."),
-           @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    @PostMapping
+    @Operation(summary = "Create assignment.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateAssignmentResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateAssignmentResponse> createAssignment(
             @RequestBody CreateAssignmentCommand createAssignmentCommand
     ) {
@@ -89,7 +89,7 @@ public class AssignmentController {
     public ResponseEntity<UpdateAssignmentResponse> updateAssignment(
             @PathVariable UUID id,
             @RequestBody UpdateAssignmentCommand updateAssignmentCommand
-            )
+    )
     {
         log.info("Updating assignment with id: {}", id);
         UpdateAssignmentResponse response = assignmentApplicationService

@@ -27,5 +27,5 @@ public interface CodeSubmissionRepository {
 
     Integer findYourScoreRank(CodeSubmissionId id);
 
-    Optional<CodeSubmission> findLatestSubmission(CodeQuestionId id, UserId id1);
+    List<CodeSubmission> findLatestSubmissionEachLanguage(CodeQuestionId id, UserId id1);
 }
