@@ -90,7 +90,7 @@ public class QuestionDataMapper {
     public CreateQuestionResponse questionCreatedEventToCreateQuestionResponse(QuestionCreatedEvent questionCreatedEvent, String message) {
         return CreateQuestionResponse.builder()
                 .questionId(questionCreatedEvent.getQuestion().getId().getValue())
-                .qtypeId(questionCreatedEvent.getQtypeID())
+//                .qtypeId(questionCreatedEvent.getQtypeID())
                 .message(message)
                 .build();
     }

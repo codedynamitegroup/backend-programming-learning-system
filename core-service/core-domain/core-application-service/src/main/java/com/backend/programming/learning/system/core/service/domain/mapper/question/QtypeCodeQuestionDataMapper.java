@@ -53,10 +53,7 @@ public class QtypeCodeQuestionDataMapper {
                                                                       Question question) {
         return QtypeCodeQuestion.builder()
                 .question(question)
-                .dslTemplate(createQtypeCodeQuestionCommand.getDslTemplate())
-                .problemStatement(createQtypeCodeQuestionCommand.getProblemStatement())
                 .name(createQtypeCodeQuestionCommand.getName())
-                .maxGrade(createQtypeCodeQuestionCommand.getMaxGrade())
                 .build();
     }
 
