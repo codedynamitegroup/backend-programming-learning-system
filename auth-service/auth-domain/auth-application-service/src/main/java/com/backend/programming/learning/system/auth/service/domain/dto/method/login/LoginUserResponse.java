@@ -12,4 +12,7 @@ import lombok.Getter;
 public class LoginUserResponse {
     @NotNull
     private final String accessToken;
+
+    @NotNull
+    private final String refreshToken;
 }

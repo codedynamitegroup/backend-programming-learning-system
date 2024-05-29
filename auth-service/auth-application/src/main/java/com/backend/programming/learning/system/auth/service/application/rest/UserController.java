@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.auth.service.application.rest;
 
+import com.backend.programming.learning.system.auth.service.application.utils.JwtUtils;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserCommand;
@@ -7,8 +8,12 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.de
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.SocialLoginUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.logout.LogoutUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.logout.LogoutUserEmailCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.logout.LogoutUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.*;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserEmailCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
@@ -22,12 +27,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.UUID;
 
 @Slf4j
@@ -35,9 +37,11 @@ import java.util.UUID;
 @RequestMapping(value = "/auth/users", produces = "application/vnd.api.v1+json")
 public class UserController {
     private final UserApplicationService userApplicationService;
+    private final JwtUtils jwtUtils;
 
-    public UserController(UserApplicationService userApplicationService) {
+    public UserController(UserApplicationService userApplicationService, JwtUtils jwtUtils) {
         this.userApplicationService = userApplicationService;
+        this.jwtUtils = jwtUtils;
     }
 
     @PostMapping
@@ -114,20 +118,38 @@ public class UserController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<?> refreshTokenUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
-            Jwt token = jwtAuthenticationToken.getToken();
-            String username = token.getClaim("preferred_username");
-            RefreshTokenUserResponse refreshTokenUser = userApplicationService.refreshTokenUser(
-                    RefreshTokenUserCommand
-                            .builder()
-                            .email(username)
-                            .build()
-            );
-            return ResponseEntity.status(HttpStatus.OK).body(refreshTokenUser);
+    public ResponseEntity<?> refreshTokenUser(@RequestBody RefreshTokenUserCommand refreshTokenUserCommand) {
+        String email = jwtUtils.getEmailFromJwtStringWithoutCheckExp(refreshTokenUserCommand.getAccessToken());
+        if (email == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Invalid access token"));
         }
-        return ResponseEntity.badRequest().body("Token is not valid.");
+        RefreshTokenUserResponse refreshTokenUser = userApplicationService.refreshTokenUser(
+                RefreshTokenUserEmailCommand.builder()
+                        .email(email)
+                        .refreshToken(refreshTokenUserCommand.getRefreshToken())
+                        .build());
+        return ResponseEntity.status(HttpStatus.OK).body(refreshTokenUser);
+    }
+
+    @PostMapping("/logout")
+    @Operation(summary = "Logout user.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = RefreshTokenUserResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<?> logoutUser(@RequestHeader(value = "Access-Token", required = false) String accessToken) {
+        String email = jwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
+        if (email == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Invalid access token"));
+        }
+        LogoutUserResponse logoutUserResponse = userApplicationService.logoutUser(
+                LogoutUserEmailCommand.builder()
+                        .email(email)
+                        .build());
+        return ResponseEntity.status(HttpStatus.OK).body(logoutUserResponse);
     }
 
     @GetMapping("/{id}")
