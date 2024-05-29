@@ -16,8 +16,8 @@ public class CodeQuestionsUpdateRequest {
     private final String sagaId;
     private final String questionId;
     private final String problemStatement;
-    private final String inputFormat;
-    private final String outputFormat;
+    private final String name;
+    private final Float maxGrade;
 //    private final String constraints;
     private String state;//copy state
 }

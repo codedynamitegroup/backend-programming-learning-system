@@ -31,6 +31,9 @@ public class QtypeCodeQuestionDataMapper {
                         .questionId(new QuestionId(UUID.fromString(request.getQuestionId())))
                         .build())
                 .dslTemplate(null)
+                .maxGrade(request.getMaxGrade())
+                .problemStatement(request.getProblemStatement())
+                .name(request.getName())
                 .build();
     }
     public CodeQuestionsUpdatePayload codeQuestionsUpdateRequestToCodeQuestionsUpdatePayload(CodeQuestionsUpdateRequest request){
@@ -40,8 +43,8 @@ public class QtypeCodeQuestionDataMapper {
                 .sagaId(request.getSagaId())
                 .questionId(request.getQuestionId())
                 .problemStatement(request.getProblemStatement())
-                .inputFormat(request.getInputFormat())
-                .outputFormat(request.getOutputFormat())
+                .maxGrade(request.getMaxGrade())
+                .name(request.getName())
 //                .constraints(request.getConstraints())
                 .build();
     }
@@ -50,10 +53,7 @@ public class QtypeCodeQuestionDataMapper {
                                                                       Question question) {
         return QtypeCodeQuestion.builder()
                 .question(question)
-                .dslTemplate(createQtypeCodeQuestionCommand.getDslTemplate())
-                .problemStatement(createQtypeCodeQuestionCommand.getProblemStatement())
                 .name(createQtypeCodeQuestionCommand.getName())
-                .maxGrade(createQtypeCodeQuestionCommand.getMaxGrade())
                 .build();
     }
 

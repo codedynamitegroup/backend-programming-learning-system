@@ -31,6 +31,7 @@ public class QtypeCodeQuestionController {
         this.qtypeCodeQuestionApplicationService = qtypeCodeQuestionApplicationService;
     }
 
+    //meh, still need this shit
     @PostMapping("/create")
     @Operation(summary = "Create code question.")
     @ApiResponses(value = {
@@ -88,22 +89,23 @@ public class QtypeCodeQuestionController {
                 .build());
     }
 
-    @PutMapping
-    @Operation(summary = "Update code question.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Success.", content = {
-                    @Content(mediaType = "application/vnd.api.v1+json",
-                            schema = @Schema(implementation = UpdateQuestionResponse.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "Not found."),
-            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<UpdateQuestionResponse> updateQtypeCodeQuestion(
-            @RequestBody UpdateQtypeCodeQuestionCommand updateQtypeCodeQuestionCommand) {
-        log.info("Updating code question: {}", updateQtypeCodeQuestionCommand);
-        UpdateQuestionResponse updateQuestionResponse = qtypeCodeQuestionApplicationService
-                .updateQtypeCodeQuestion(updateQtypeCodeQuestionCommand);
-        log.info("Code question updated: {}", updateQuestionResponse);
-
-        return ResponseEntity.ok(updateQuestionResponse);
-    }
+    //update code question in the code assessment service
+//    @PutMapping
+//    @Operation(summary = "Update code question.")
+//    @ApiResponses(value = {
+//            @ApiResponse(responseCode = "200", description = "Success.", content = {
+//                    @Content(mediaType = "application/vnd.api.v1+json",
+//                            schema = @Schema(implementation = UpdateQuestionResponse.class))
+//            }),
+//            @ApiResponse(responseCode = "400", description = "Not found."),
+//            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+//    public ResponseEntity<UpdateQuestionResponse> updateQtypeCodeQuestion(
+//            @RequestBody UpdateQtypeCodeQuestionCommand updateQtypeCodeQuestionCommand) {
+//        log.info("Updating code question: {}", updateQtypeCodeQuestionCommand);
+//        UpdateQuestionResponse updateQuestionResponse = qtypeCodeQuestionApplicationService
+//                .updateQtypeCodeQuestion(updateQtypeCodeQuestionCommand);
+//        log.info("Code question updated: {}", updateQuestionResponse);
+//
+//        return ResponseEntity.ok(updateQuestionResponse);
+//    }
 }

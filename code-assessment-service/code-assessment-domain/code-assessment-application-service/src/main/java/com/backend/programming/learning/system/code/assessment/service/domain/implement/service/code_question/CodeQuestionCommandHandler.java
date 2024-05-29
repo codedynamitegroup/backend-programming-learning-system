@@ -70,7 +70,18 @@ public class CodeQuestionCommandHandler {
     }
 
     public void updateCodeQuestion(UpdateCodeQuestionCommand command) {
-        codeQuestionsHelper.updateCodeQuestion(command);
+        CodeQuestionsUpdatedEvent event = codeQuestionsHelper.updateCodeQuestion(command);
+        if(command.getName() != null || command.getProblemStatement() != null || command.getMaxGrade() != null){
+            codeQuestionsUpdateOutboxHelper.saveCodeQuestionsUpdateOutboxMessage(
+                    codeQuestionDataMaper.codeQuestionsUpdatedEventToCodeQuestionsUpdatePayload(
+                            event, CopyState.UPDATING
+                    ),
+                    event.getCodeQuestion().getCopyState(),
+                    codeQuestionsUpdateSagaHelper.copyStateToSagaStatus(CopyState.UPDATING),
+                    OutboxStatus.STARTED,
+                    UUID.randomUUID()
+            );
+        }
     }
 
     public CodeQuestionDto getDetailCodeQuestion(GetDetailCodeQuestionCommand command) {

@@ -51,12 +51,12 @@ public class QtypeCodeQuestionCommandHandler {
     public CreateQuestionResponse createQtypeCodeQuestion(CreateQtypeCodeQuestionCommand createQtypeCodeQuestionCommand) {
         QuestionCreatedEvent questionCreatedEvent = qtypeCodeQuestionCreateHelper.persistQtypeCodeQuestion(createQtypeCodeQuestionCommand);
 
-        questionOutboxHelper.saveNewQuestionOutboxMessage(questionDataMapper.questionCreatedEventToQuestionEventPayload(questionCreatedEvent),
-                questionCreatedEvent.getQuestion().getCopyState(),
-                OutboxStatus.STARTED,
-                questionSagaHelper.questionStatusToSagaStatus(questionCreatedEvent.getQuestion().getCopyState()),
-                ServiceName.COURSE_SERVICE,
-                UUID.randomUUID(), null);
+//        questionOutboxHelper.saveNewQuestionOutboxMessage(questionDataMapper.questionCreatedEventToQuestionEventPayload(questionCreatedEvent),
+//                questionCreatedEvent.getQuestion().getCopyState(),
+//                OutboxStatus.STARTED,
+//                questionSagaHelper.questionStatusToSagaStatus(questionCreatedEvent.getQuestion().getCopyState()),
+//                ServiceName.COURSE_SERVICE,
+//                UUID.randomUUID(), null);
 
         return questionDataMapper.questionCreatedEventToCreateQuestionResponse(questionCreatedEvent, "Qtype Code Question created successfully");
     }
