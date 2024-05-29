@@ -18,4 +18,6 @@ public interface SubmissionAssignmentRepository {
 
     SubmissionAssignment findByAssignmentIdAndUserId(UUID assignmentId, UUID userId);
 
+    SubmissionAssignment update(SubmissionAssignment submissionAssignment);
+
 }
