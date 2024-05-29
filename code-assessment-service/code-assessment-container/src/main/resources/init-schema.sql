@@ -341,14 +341,35 @@ CREATE TABLE code_questions_update_outbox
 
 CREATE INDEX "code_questions_update_outbox_saga_status"
 ON code_questions_update_outbox
-(type, outbox_status, saga_status);
+    (type, outbox_status, saga_status);
 CREATE INDEX "code_questions_update_outbox_saga_id"
 ON code_questions_update_outbox
     (type, saga_id, saga_status);
 
+DROP TABLE IF EXISTS code_submission_update_outbox CASCADE;
+CREATE TABLE code_submission_update_outbox
+(
+    id uuid NOT NULL,
+    saga_id uuid NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    processed_at TIMESTAMP WITH TIME ZONE,
+    type character varying COLLATE pg_catalog."default" NOT NULL,
+    payload jsonb NOT NULL,
+    outbox_status outbox_status NOT NULL,
+    saga_status saga_status NOT NULL,
+    copy_state CopyState NOT NULL,
+    version integer NOT NULL,
+    CONSTRAINT csuo_pk PRIMARY KEY (id)
+);
+
+CREATE INDEX "code_submission_update_outbox_saga_status"
+ON code_submission_update_outbox
+    (type, outbox_status, saga_status);
+CREATE INDEX "code_submission_update_outbox_saga_id"
+ON code_submission_update_outbox
+    (type, saga_id, saga_status);
 
 DROP TABLE IF EXISTS "public".user_outbox CASCADE;
-
 CREATE TABLE "public".user_outbox
 (
     id uuid NOT NULL,

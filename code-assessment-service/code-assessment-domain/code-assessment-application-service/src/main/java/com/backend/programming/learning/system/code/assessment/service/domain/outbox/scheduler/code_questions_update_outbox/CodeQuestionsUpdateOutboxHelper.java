@@ -61,6 +61,7 @@ public class CodeQuestionsUpdateOutboxHelper {
         }
         log.info("Save CodeQuestionsUpdateOutboxMessage with outbox id: {}", outboxMessage.getId());
     }
+
     @Transactional
     public void deleteCodeQuestionsUpdateOutboxMessageByOutboxStatusAndSagaStatus(OutboxStatus outboxStatus,
                                                                       SagaStatus... sagaStatus) {

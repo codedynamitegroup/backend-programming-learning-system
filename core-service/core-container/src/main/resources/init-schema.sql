@@ -501,8 +501,8 @@ CREATE TABLE "public".code_submission
     code_question_id uuid NOT NULL,
     programming_language_id uuid NOT NULL,
     source_code text,
-    grade numeric(5,2) DEFAULT 0.0 NOT NULL,
-    pass bool DEFAULT FALSE NOT NULL,
+    grade double precision, --please, this can be null
+    pass bool, --this can be null either
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT code_submission_pkey PRIMARY KEY (id),
     CONSTRAINT code_submission_user_id_fkey FOREIGN KEY (user_id)

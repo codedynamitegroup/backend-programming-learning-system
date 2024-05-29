@@ -8,18 +8,18 @@ import org.springframework.stereotype.Component;
 public class CodeQuestionsUpdateOutboxMapper {
     public CodeQuestionsUpdateOutboxEntity
     codeQuestionsUpdateOutboxMessageToOutboxEntity
-            (CodeQuestionsUpdateOutboxMessage codeQuestionsUpdateOutboxMessage){
+            (CodeQuestionsUpdateOutboxMessage outboxMessage){
         return CodeQuestionsUpdateOutboxEntity.builder()
-                .id(codeQuestionsUpdateOutboxMessage.getId())
-                .sagaId(codeQuestionsUpdateOutboxMessage.getSagaId())
-                .createdAt(codeQuestionsUpdateOutboxMessage.getCreatedAt())
-                .processedAt(codeQuestionsUpdateOutboxMessage.getProcessedAt())
-                .type(codeQuestionsUpdateOutboxMessage.getType())
-                .payload(codeQuestionsUpdateOutboxMessage.getPayload())
-                .copyState(codeQuestionsUpdateOutboxMessage.getCopyState())
-                .sagaStatus(codeQuestionsUpdateOutboxMessage.getSagaStatus())
-                .outboxStatus(codeQuestionsUpdateOutboxMessage.getOutboxStatus())
-                .version(codeQuestionsUpdateOutboxMessage.getVersion())
+                .id(outboxMessage.getId())
+                .sagaId(outboxMessage.getSagaId())
+                .createdAt(outboxMessage.getCreatedAt())
+                .processedAt(outboxMessage.getProcessedAt())
+                .type(outboxMessage.getType())
+                .payload(outboxMessage.getPayload())
+                .copyState(outboxMessage.getCopyState())
+                .sagaStatus(outboxMessage.getSagaStatus())
+                .outboxStatus(outboxMessage.getOutboxStatus())
+                .version(outboxMessage.getVersion())
                 .build();
     }
     public CodeQuestionsUpdateOutboxMessage outboxMessageEntityToCodeQuestionsUpdateOutboxMessage

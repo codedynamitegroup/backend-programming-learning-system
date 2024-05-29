@@ -13,7 +13,8 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetDetailCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_question.UpdateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
-import com.backend.programming.learning.system.code.assessment.service.domain.event.CodeQuestionsUpdatedEvent;
+import com.backend.programming.learning.system.code.assessment.service.domain.event.code_question.CodeQuestionsUpdatedEvent;
+import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.GeneralSagaHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.code_question.CodeQuestionDataMapper;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.scheduler.code_questions_update_outbox.CodeQuestionsUpdateOutboxHelper;
@@ -35,13 +36,15 @@ public class CodeQuestionCommandHandler {
     private final CodeQuestionsUpdateOutboxHelper codeQuestionsUpdateOutboxHelper;
     private final CodeQuestionsUpdateSagaHelper codeQuestionsUpdateSagaHelper;
     private final DtoMapper dtoMapper;
+    private final GeneralSagaHelper generalSagaHelper;
 
-    public CodeQuestionCommandHandler(CodeQuestionsHelper codeQuestionsHelper, CodeQuestionDataMapper codeQuestionDataMaper, CodeQuestionsUpdateOutboxHelper codeQuestionsUpdateOutboxHelper, CodeQuestionsUpdateSagaHelper codeQuestionsUpdateSagaHelper, DtoMapper dtoMapper) {
+    public CodeQuestionCommandHandler(CodeQuestionsHelper codeQuestionsHelper, CodeQuestionDataMapper codeQuestionDataMaper, CodeQuestionsUpdateOutboxHelper codeQuestionsUpdateOutboxHelper, CodeQuestionsUpdateSagaHelper codeQuestionsUpdateSagaHelper, DtoMapper dtoMapper, GeneralSagaHelper generalSagaHelper) {
         this.codeQuestionsHelper = codeQuestionsHelper;
         this.codeQuestionDataMaper = codeQuestionDataMaper;
         this.codeQuestionsUpdateOutboxHelper = codeQuestionsUpdateOutboxHelper;
         this.codeQuestionsUpdateSagaHelper = codeQuestionsUpdateSagaHelper;
         this.dtoMapper = dtoMapper;
+        this.generalSagaHelper = generalSagaHelper;
     }
 
     @Transactional
@@ -53,7 +56,7 @@ public class CodeQuestionCommandHandler {
                         codeQuestionsUpdatedEvent, CopyState.CREATING
                 ),
                 codeQuestionsUpdatedEvent.getCodeQuestion().getCopyState(),
-                codeQuestionsUpdateSagaHelper.copyStateToSagaStatus(CopyState.CREATING),
+                generalSagaHelper.copyStateToSagaStatus(CopyState.CREATING),
                 OutboxStatus.STARTED,
                 UUID.randomUUID()
         );
@@ -77,7 +80,7 @@ public class CodeQuestionCommandHandler {
                             event, CopyState.UPDATING
                     ),
                     event.getCodeQuestion().getCopyState(),
-                    codeQuestionsUpdateSagaHelper.copyStateToSagaStatus(CopyState.UPDATING),
+                    generalSagaHelper.copyStateToSagaStatus(CopyState.UPDATING),
                     OutboxStatus.STARTED,
                     UUID.randomUUID()
             );

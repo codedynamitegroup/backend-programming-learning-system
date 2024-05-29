@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.code.assessment.service.config.Co
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.question.QuestionEventPayload;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.question.QuestionOutboxMessage;
-import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.message.publisher.QuestionResponseMessagePublisher;
+import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.message.publisher.question.QuestionResponseMessagePublisher;
 import com.backend.programming.learning.system.code.assessment.service.messaging.mapper.QuestionMessagingDataMapper;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionResponseAvroModel;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;

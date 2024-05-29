@@ -9,24 +9,33 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetMemoryAndTimeRankingResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_submission.UpdateCodeSubmissionTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.*;
+import com.backend.programming.learning.system.code.assessment.service.domain.event.code_submission.CodeSubmissionUpdatedEvent;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_submission.CodeSubmissionNotFound;
+import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.GeneralSagaHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.GenericHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.ValidateHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.code_submission.CodeSubmissionDataMapper;
+import com.backend.programming.learning.system.code.assessment.service.domain.outbox.scheduler.code_submission_update_outbox.CodeSubmissionUpdateOutboxHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.assessment.AssessmentSourceCodeByTestCases;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_submssion.CodeSubmissionRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
+import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
+import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 @Slf4j
@@ -36,33 +45,26 @@ public class CodeSubmissionHelper {
     private final CodeSubmissionRepository codeSubmissionRepository;
 
     private final CodeSubmissionTestCaseRepository codeSubmissionTestCaseRepository;
-    private final AssessmentSourceCodeByTestCases assessmentSourceCodeByTestCases;
     private final GenericHelper genericHelper;
     private final CodeAssessmentServiceConfigData codeAssessmentServiceConfigData;
     private final ValidateHelper validateHelper;
+    private final CodeSubmissionUpdateOutboxHelper codeSubmissionUpdateOutboxHelper;
+    private final GeneralSagaHelper generalSagaHelper;
 
-    public CodeSubmissionHelper(CodeAssessmentDomainService codeAssessmentDomainService, CodeSubmissionDataMapper codeSubmissionDataMapper, CodeSubmissionRepository codeSubmissionRepository, CodeSubmissionTestCaseRepository codeSubmissionTestCaseRepository, AssessmentSourceCodeByTestCases assessmentSourceCodeByTestCases, GenericHelper genericHelper, CodeAssessmentServiceConfigData codeAssessmentServiceConfigData, ValidateHelper validateHelper) {
+    public CodeSubmissionHelper(CodeAssessmentDomainService codeAssessmentDomainService, CodeSubmissionDataMapper codeSubmissionDataMapper, CodeSubmissionRepository codeSubmissionRepository, CodeSubmissionTestCaseRepository codeSubmissionTestCaseRepository, GenericHelper genericHelper, CodeAssessmentServiceConfigData codeAssessmentServiceConfigData, ValidateHelper validateHelper, CodeSubmissionUpdateOutboxHelper codeSubmissionUpdateOutboxHelper, GeneralSagaHelper generalSagaHelper) {
         this.codeAssessmentDomainService = codeAssessmentDomainService;
         this.codeSubmissionDataMapper = codeSubmissionDataMapper;
         this.codeSubmissionRepository = codeSubmissionRepository;
         this.codeSubmissionTestCaseRepository = codeSubmissionTestCaseRepository;
-        this.assessmentSourceCodeByTestCases = assessmentSourceCodeByTestCases;
         this.genericHelper = genericHelper;
         this.codeAssessmentServiceConfigData = codeAssessmentServiceConfigData;
         this.validateHelper = validateHelper;
+        this.codeSubmissionUpdateOutboxHelper = codeSubmissionUpdateOutboxHelper;
+        this.generalSagaHelper = generalSagaHelper;
     }
 
-    //don't use @transactional here
-    public CodeSubmission createCodeSubmission(CreateCodeSubmissionCommand createCodeSubmissionCommand) {
-        CodeSubmission codeSubmission = initAndSaveCodeSubmission(createCodeSubmissionCommand);
-        //send judge to get token and store token if success
-        assessmentSourceCodeByTestCases.judge(codeSubmission);
-
-
-        return codeSubmission;
-    }
     @Transactional
-    public CodeSubmission initAndSaveCodeSubmission(CreateCodeSubmissionCommand createCodeSubmissionCommand){
+    public CodeSubmissionUpdatedEvent createCodeSubmission(CreateCodeSubmissionCommand createCodeSubmissionCommand){
         validateHelper.validateUser(createCodeSubmissionCommand.getUserId());
 
         CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(createCodeSubmissionCommand.getCodeQuestionId());
@@ -74,12 +76,13 @@ public class CodeSubmissionHelper {
                 validateHelper.validateProgrammingLanguageCodeQuestion(createCodeSubmissionCommand.getLanguageId(), createCodeSubmissionCommand.getCodeQuestionId());
 
         List<TestCase> testCases =  validateHelper.validateTestCasesByCodeQuestionId(createCodeSubmissionCommand.getCodeQuestionId());
-        codeAssessmentDomainService.initiateCodeSubmission(codeSubmission, testCases, plcq, programmingLanguage);
+        CodeSubmissionUpdatedEvent event = codeAssessmentDomainService.initiateCodeSubmission(codeSubmission, testCases, plcq, programmingLanguage);
 
         codeSubmissionRepository.save(codeSubmission);
         codeSubmissionTestCaseRepository.save(codeSubmission.getCodeSubmissionTestCaseList());
 
-        return codeSubmission;
+
+        return event;
     }
 
 
@@ -115,6 +118,18 @@ public class CodeSubmissionHelper {
             codeAssessmentDomainService.calculateAvgTimeAndMemoryAndGrade(codeSubmission, cstc, codeAssessmentServiceConfigData.getAcceptedStatusDescription());
 
             codeSubmissionRepository.save(codeSubmission);
+
+            CodeSubmissionUpdatedEvent event = new CodeSubmissionUpdatedEvent(codeSubmission, ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
+
+            codeSubmissionUpdateOutboxHelper.saveCodeSubmissionUpdateOutboxMessage(
+                    codeSubmissionDataMapper.codeSubmissionUpdatedEventToCodeSubmissionUpdatePayload(
+                            event, CopyState.UPDATING
+                    ),
+                    event.getCodeSubmission().getCopyState(),
+                    generalSagaHelper.copyStateToSagaStatus(CopyState.UPDATING),
+                    OutboxStatus.STARTED,
+                    UUID.randomUUID()
+            );
 
             return true;
         }else if(!codeSubmission.getGradingStatus().equals(GradingStatus.GRADING))

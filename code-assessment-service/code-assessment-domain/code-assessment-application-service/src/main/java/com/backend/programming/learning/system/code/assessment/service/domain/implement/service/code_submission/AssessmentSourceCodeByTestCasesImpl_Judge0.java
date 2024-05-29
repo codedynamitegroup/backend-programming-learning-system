@@ -64,6 +64,7 @@ public class AssessmentSourceCodeByTestCasesImpl_Judge0 implements AssessmentSou
     }
     private void processSending(CodeSubmission codeSubmission) throws UnknownHostException {
         WebClient client = WebClient.create("http://" + codeAssessmentServiceConfigData.getAssessmentExternalServiceIp() + ":" + codeAssessmentServiceConfigData.getAssessmentExternalServicePort());
+//        String hostAddress = "gnkjb06l-8183.asse.devtunnels.ms";
         String hostAddress = InetAddress.getLocalHost().getHostAddress();
 
         List<RequestBody> requestBodies = codeSubmissionToRequestBody(codeSubmission, hostAddress);
@@ -94,6 +95,7 @@ public class AssessmentSourceCodeByTestCasesImpl_Judge0 implements AssessmentSou
     }
     List<RequestBody> codeSubmissionToRequestBody(CodeSubmission codeSubmission, String hostAddress) {
         String callbackUrl = "http://" + hostAddress + ":" + codeAssessmentServiceConfigData.getServerPort().toString() + "/code-assessment/code-submission/test-case-token";
+//        String callbackUrl = "http://" + hostAddress + "/code-assessment/code-submission/test-case-token";
 
         List<CodeSubmissionTestCase> baseList = codeSubmission.getCodeSubmissionTestCaseList();
         Integer n = baseList.size();

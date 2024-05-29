@@ -6,27 +6,44 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_submission.UpdateCodeSubmissionTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmissionTestCase;
+import com.backend.programming.learning.system.code.assessment.service.domain.event.code_submission.CodeSubmissionUpdatedEvent;
+import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.GeneralSagaHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.code_submission.CodeSubmissionDataMapper;
+import com.backend.programming.learning.system.code.assessment.service.domain.outbox.scheduler.code_submission_update_outbox.CodeSubmissionUpdateOutboxHelper;
+import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.assessment.AssessmentSourceCodeByTestCases;
 import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Slf4j
 @Component
 public class CodeSubmissionCommandHandler {
     private final CodeSubmissionDataMapper codeSubmissionDataMapper;
+    private final AssessmentSourceCodeByTestCases assessmentSourceCodeByTestCases;
     private final CodeSubmissionHelper codeSubmissionHelper;
+    private final CodeSubmissionUpdateOutboxHelper codeSubmissionUpdateOutboxHelper;
+    private final GeneralSagaHelper generalSagaHelper;
 
-    public CodeSubmissionCommandHandler(CodeSubmissionDataMapper codeSubmissionDataMapper, CodeSubmissionHelper codeSubmissionHelper) {
+    public CodeSubmissionCommandHandler(CodeSubmissionDataMapper codeSubmissionDataMapper, AssessmentSourceCodeByTestCases assessmentSourceCodeByTestCases, CodeSubmissionHelper codeSubmissionHelper, CodeSubmissionUpdateOutboxHelper codeSubmissionUpdateOutboxHelper, GeneralSagaHelper generalSagaHelper) {
         this.codeSubmissionDataMapper = codeSubmissionDataMapper;
+        this.assessmentSourceCodeByTestCases = assessmentSourceCodeByTestCases;
         this.codeSubmissionHelper = codeSubmissionHelper;
+        this.codeSubmissionUpdateOutboxHelper = codeSubmissionUpdateOutboxHelper;
+        this.generalSagaHelper = generalSagaHelper;
     }
 
     public CreateCodeSubmissionResponse createCodeSubmission(CreateCodeSubmissionCommand createCodeSubmissionCommand) {
-        CodeSubmission codeSubmission = codeSubmissionHelper.createCodeSubmission(createCodeSubmissionCommand);
+        CodeSubmissionUpdatedEvent event = codeSubmissionHelper.createCodeSubmission(createCodeSubmissionCommand);
+        CodeSubmission codeSubmission = event.getCodeSubmission();
+
+        //send jugde0 and cron to check all graded
+        assessmentSourceCodeByTestCases.judge(codeSubmission);
         Thread thread2 = new Thread(()->{
             boolean finish = false;
             do{
@@ -39,6 +56,17 @@ public class CodeSubmissionCommandHandler {
             }while(!finish);
         });
         thread2.start();
+
+        codeSubmissionUpdateOutboxHelper.saveCodeSubmissionUpdateOutboxMessage(
+                codeSubmissionDataMapper.codeSubmissionUpdatedEventToCodeSubmissionUpdatePayload(
+                        event, CopyState.CREATING
+                ),
+                event.getCodeSubmission().getCopyState(),
+                generalSagaHelper.copyStateToSagaStatus(CopyState.CREATING),
+                OutboxStatus.STARTED,
+                UUID.randomUUID()
+        );
+
         return codeSubmissionDataMapper.codeSubmissionToCreateCodeSubmissionResponse(codeSubmission);
     }
 

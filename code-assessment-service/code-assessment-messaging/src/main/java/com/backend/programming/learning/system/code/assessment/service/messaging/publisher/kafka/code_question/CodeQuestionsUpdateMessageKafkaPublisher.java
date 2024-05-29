@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.code.assessment.service.config.Co
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.code_questions_update_outbox.CodeQuestionsUpdateOutboxMessage;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.code_questions_update_outbox.CodeQuestionsUpdatePayload;
-import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.message.publisher.codequestion.CodeQuestionsUpdateMessagePublisher;
+import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.message.publisher.code_question.CodeQuestionsUpdateMessagePublisher;
 import com.backend.programming.learning.system.code.assessment.service.messaging.mapper.CodeQuestionMessagingDataMapper;
 import com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel;
 import com.backend.programming.learning.system.kafka.producer.KafkaMessageHelper;
@@ -25,19 +25,16 @@ public class CodeQuestionsUpdateMessageKafkaPublisher
     private final KafkaProducer<String, CodeQuestionUpdateRequestAvroModel> kafkaProducer;
     private final CodeAssessmentServiceConfigData codeAssessmentServiceConfigData;
     private final KafkaMessageHelper kafkaMessageHelper;
-    private final ObjectMapper objectMapper;
 
     public CodeQuestionsUpdateMessageKafkaPublisher(
             CodeQuestionMessagingDataMapper codeQuestionMessagingDataMapper,
             KafkaProducer<String, CodeQuestionUpdateRequestAvroModel> kafkaProducer,
             CodeAssessmentServiceConfigData codeAssessmentServiceConfigData,
-            KafkaMessageHelper kafkaMessageHelper,
-            ObjectMapper objectMapper) {
+            KafkaMessageHelper kafkaMessageHelper) {
         this.codeQuestionMessagingDataMapper = codeQuestionMessagingDataMapper;
         this.kafkaProducer = kafkaProducer;
         this.codeAssessmentServiceConfigData = codeAssessmentServiceConfigData;
         this.kafkaMessageHelper = kafkaMessageHelper;
-        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -53,7 +50,7 @@ public class CodeQuestionsUpdateMessageKafkaPublisher
 
         String sagaId = codeQuestionsUpdateOutboxMessage.getSagaId().toString();
 
-        log.info("Received CodeQuestionsUpdateOutboxMessage for order id: {} and saga id: {}",
+        log.info("Received CodeQuestionsUpdateOutboxMessage for code question id: {} and saga id: {}",
                 codeQuestionsUpdatePayload.getId(),
                 sagaId);
         CodeQuestionUpdateRequestAvroModel avroModel =
@@ -81,12 +78,4 @@ public class CodeQuestionsUpdateMessageKafkaPublisher
         }
     }
 
-    private CodeQuestionsUpdatePayload getCodeQuestionsUpdatePayload(String payload) {
-        try {
-            return objectMapper.readValue(payload, CodeQuestionsUpdatePayload.class);
-        } catch (JsonProcessingException e) {
-            log.error("Could not read CodeQuestionsUpdatePayload object",e);
-            throw new CodeAssessmentDomainException("Could not read CodeQuestionsUpdatePayload object",e);
-        }
-    }
 }

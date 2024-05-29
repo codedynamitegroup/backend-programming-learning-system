@@ -7,6 +7,9 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmissionTestCase;
+import com.backend.programming.learning.system.code.assessment.service.domain.event.code_submission.CodeSubmissionUpdatedEvent;
+import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.code_submission_update_outbox.CodeSubmissionUpdatePayload;
+import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
@@ -91,5 +94,20 @@ public class CodeSubmissionDataMapper {
             return str;
         }
 
+    }
+
+    public CodeSubmissionUpdatePayload codeSubmissionUpdatedEventToCodeSubmissionUpdatePayload(CodeSubmissionUpdatedEvent event, CopyState copyState) {
+        CodeSubmission codeSubmission = event.getCodeSubmission();
+        return CodeSubmissionUpdatePayload.builder()
+                .id(codeSubmission.getId().getValue().toString())
+                .codeQuestionId(codeSubmission.getCodeQuestion().getId().getValue().toString())
+                .userId(codeSubmission.getUserId().getValue().toString())
+                .programmingLanguageId(codeSubmission.getLanguageId().getValue().toString())
+                .bodyCode(codeSubmission.getBodyCode())
+                .grade(codeSubmission.getGrade() == null? null: codeSubmission.getGrade().floatValue())
+                .pass(codeSubmission.getGrade() == null? null: codeSubmission.getGrade().floatValue() == codeSubmission.getCodeQuestion().getMaxGrade())
+                .createdAt(codeSubmission.getCreatedAt())
+                .copyState(codeSubmission.getCopyState().name())
+                .build();
     }
 }

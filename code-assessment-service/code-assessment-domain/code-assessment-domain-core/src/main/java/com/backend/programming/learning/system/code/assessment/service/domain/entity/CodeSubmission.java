@@ -216,6 +216,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
     public void updateAvgTimeAndMemoryAndGrade(Double avgTime, Double avgMemory, long numOfPassedTestCase) {
         runTime = avgTime;
         memory = avgMemory;
+        copyState = CopyState.UPDATING;
         grade = numOfPassedTestCase == numOfTestCase? codeQuestion.getMaxGrade().doubleValue() : codeQuestion.getMaxGrade().doubleValue() * (numOfPassedTestCase * 1.0 / numOfTestCase);
     }
 

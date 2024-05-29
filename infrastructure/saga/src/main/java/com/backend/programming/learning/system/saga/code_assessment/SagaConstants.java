@@ -4,4 +4,5 @@ public final class SagaConstants {
     private SagaConstants() {
     }
     public static final String CODE_QUESTIONS_UPDATE_SAGA_NAME = "CODE_QUESTIONS_UPDATE_SAGA";
+    public static final String CODE_SUBMISSION_UPDATE_SAGA_NAME = "CODE_SUBMISSION_UPDATE_SAGA_NAME";
 }

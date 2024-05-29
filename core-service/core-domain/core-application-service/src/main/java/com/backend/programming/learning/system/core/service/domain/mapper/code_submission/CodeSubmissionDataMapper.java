@@ -1,31 +1,11 @@
-package com.backend.programming.learning.system.core.service.domain.mapper.codesubmission;
+package com.backend.programming.learning.system.core.service.domain.mapper.code_submission;
 
-import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter.CreateChapterCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter.CreateChapterResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.update.chapter.UpdateChapterResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.message.CodeSubmissionUpdateRequest;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.codesubmission.CodeSubmissionResponseEntity;
-import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
-import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
-import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
 import com.backend.programming.learning.system.core.service.domain.entity.CodeSubmission;
-import com.backend.programming.learning.system.core.service.domain.entity.Question;
-import com.backend.programming.learning.system.core.service.domain.entity.User;
-import com.backend.programming.learning.system.core.service.domain.mapper.organization.OrganizationDataMapper;
-import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
-import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
-import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterId;
-import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
-import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
+import com.backend.programming.learning.system.domain.valueobject.*;
 import com.backend.programming.learning.system.domain.valueobject.QtypeCodeQuestionId;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
-
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class CodeSubmissionDataMapper {
@@ -52,6 +32,19 @@ public class CodeSubmissionDataMapper {
                 .grade(codeSubmission.getGrade())
                 .pass(codeSubmission.getPass())
                 .createdAt(codeSubmission.getCreatedAt())
+                .build();
+    }
+
+    public CodeSubmission CodeSubmissionUpdateRequestToCodeSubmission(CodeSubmissionUpdateRequest request) {
+        return CodeSubmission.builder()
+                .id(new CodeSubmissionId(request.getCodeSubmissionId()))
+                .userId(new UserId(request.getUserId()))
+                .codeQuestionId(new QtypeCodeQuestionId(request.getCodeQuestionId()))
+                .programmingLanguageId(new ProgrammingLanguageId(request.getProgrammingLanguageId()))
+                .sourceCode(request.getBodyCode())
+                .grade(request.getGrade())
+                .createdAt(request.getCreatedAt())
+                .pass(request.getPass())
                 .build();
     }
 }
