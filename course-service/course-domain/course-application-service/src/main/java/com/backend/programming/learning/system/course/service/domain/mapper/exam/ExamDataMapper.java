@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ExamDataMapper {
 
-    public Exam createExamCommandToExam(Course course, CreateExamCommand createExamCommand) {
+    public Exam createExamCommandToExam(Course course, CreateExamCommand createExamCommand, Integer maxPage) {
         return Exam.builder()
                 .course(course)
                 .name(createExamCommand.name())
@@ -36,6 +36,7 @@ public class ExamDataMapper {
                 .maxAttempts(createExamCommand.maxAttempts())
                 .shuffleAnswers(createExamCommand.shuffleQuestions())
                 .gradeMethod(createExamCommand.gradeMethod())
+                .maxPage(maxPage)
                 .build();
     }
 
@@ -57,6 +58,7 @@ public class ExamDataMapper {
                 .gradeMethod(examCreated.getGradeMethod())
                 .createdAt(examCreated.getCreatedAt())
                 .updatedAt(examCreated.getUpdatedAt())
+                .maxPage(examCreated.getMaxPage())
                 .message(message)
                 .build();
     }
@@ -81,6 +83,7 @@ public class ExamDataMapper {
                 .gradeMethod(exam.getGradeMethod())
                 .createdAt(exam.getCreatedAt())
                 .updatedAt(exam.getUpdatedAt())
+                .maxPage(exam.getMaxPage())
                 .build();
     }
 
@@ -111,6 +114,7 @@ public class ExamDataMapper {
                 .maxAttempts(exam.getMaxAttempts())
 //                .shuffleAnswers(exam.getShuffleAnswers())
                 .gradeMethod(exam.getGradeMethod())
+                .maxPage(exam.getMaxPage())
                 .message(message)
                 .build();
     }

@@ -32,6 +32,7 @@ public class ExamDataAccessMapper{
                 .gradeMethod(exam.getGradeMethod())
                 .createdAt(exam.getCreatedAt())
                 .updatedAt(exam.getUpdatedAt())
+                .maxPage(exam.getMaxPage())
                 .build();
     }
     public Exam examEntityToExam(ExamEntity examEntity) {
@@ -52,6 +53,7 @@ public class ExamDataAccessMapper{
                 .gradeMethod(examEntity.getGradeMethod())
                 .createdAt(examEntity.getCreatedAt())
                 .updatedAt(examEntity.getUpdatedAt())
+                .maxPage(examEntity.getMaxPage())
                 .build();
         response.setId(new ExamId(examEntity.getId()));
         return response;

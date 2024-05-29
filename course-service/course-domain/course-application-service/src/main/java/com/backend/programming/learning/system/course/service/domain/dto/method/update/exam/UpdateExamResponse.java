@@ -32,5 +32,6 @@ public class UpdateExamResponse {
     private Integer maxAttempts;
     private Boolean shuffleQuestions;
     private String gradeMethod;
+    private Integer maxPage;
     private String message;
 }

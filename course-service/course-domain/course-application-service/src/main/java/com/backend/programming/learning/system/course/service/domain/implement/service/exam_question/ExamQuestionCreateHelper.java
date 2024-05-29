@@ -17,9 +17,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
+import java.util.Map;
 
 /**
  * com.backend.programming.learning.system.implement.exam_question
@@ -41,10 +41,10 @@ public class ExamQuestionCreateHelper {
     public void assignExamToQuestions(CreateExamQuestionCommand createExamQuestionCommand) {
         log.info("Create exam question");
         Exam exam = examRepository.findBy(new ExamId(createExamQuestionCommand.examId()));
-        List<Question> questions = new ArrayList<>();
+        Map<Question, Integer> questions = new HashMap<>();
         createExamQuestionCommand.questionIds().forEach(questionId -> {
-            Question question = questionRepository.findById(questionId);
-            questions.add(question);
+            Question question = questionRepository.findById(questionId.questionId());
+            questions.put(question, questionId.page());
         });
 
         List<ExamQuestion> examQuestions = examQuestionDataMapper.createExamQuestionCommandToExamQuestion(exam, questions);

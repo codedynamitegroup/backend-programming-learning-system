@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.course.service.domain.entity.Ques
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * com.backend.programming.learning.system.mapper.exam_question
@@ -15,11 +16,12 @@ import java.util.List;
  */
 @Component
 public class ExamQuestionDataMapper {
-    public List<ExamQuestion> createExamQuestionCommandToExamQuestion(Exam exam, List<Question> questions) {
-        return questions.stream()
-                .map(question -> ExamQuestion.builder()
+    public List<ExamQuestion> createExamQuestionCommandToExamQuestion(Exam exam, Map<Question, Integer> questions) {
+        return questions.entrySet().stream()
+                .map(entry -> ExamQuestion.builder()
                         .exam(exam)
-                        .question(question)
+                        .question(entry.getKey())
+                        .page(entry.getValue())
                         .build())
                 .toList();
     }
