@@ -320,6 +320,7 @@ CREATE TABLE "public".exam
     max_attempts       bigint           NOT NULL DEFAULT '0',
     shuffle_answers    boolean          NOT NULL DEFAULT '0',
     grade_method       grade_method     NOT NULL DEFAULT 'QUIZ_GRADEHIGHEST',
+    "max_page"                  integer,
     created_at         TIMESTAMP WITH TIME ZONE  DEFAULT CURRENT_TIMESTAMP,
     updated_at         TIMESTAMP WITH TIME ZONE  DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT exam_pkey PRIMARY KEY (id),
@@ -335,6 +336,7 @@ CREATE TABLE "public".exam_question
     id          uuid DEFAULT gen_random_uuid() NOT NULL,
     exam_id     uuid                           NOT NULL,
     question_id uuid                           NOT NULL,
+    page        integer                        ,
     CONSTRAINT exam_question_pkey PRIMARY KEY (id),
     CONSTRAINT exam_question_exam_id_fkey FOREIGN KEY (exam_id)
         REFERENCES "public".exam (id) MATCH SIMPLE

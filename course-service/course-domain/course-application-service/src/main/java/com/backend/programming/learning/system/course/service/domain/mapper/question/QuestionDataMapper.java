@@ -215,4 +215,8 @@ public class QuestionDataMapper {
                 .copyState(questionEvent.getCopyState())
                 .build();
     }
+
+    public List<QuestionResponseEntity> questionListToQuestionResponseEntityList(List<Question> questions) {
+        return questions.stream().map(this::questionToQueryQuestionResponse).toList();
+    }
 }
