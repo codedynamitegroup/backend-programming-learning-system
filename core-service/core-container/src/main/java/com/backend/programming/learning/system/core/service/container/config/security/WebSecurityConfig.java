@@ -74,8 +74,10 @@ public class WebSecurityConfig {
                             "/**"
                     )
                     .requestMatchers("/v3/api-docs/**", "/configuration/**", "/swagger-ui/**",
-                            "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/api-docs/**");
-
+                            "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/api-docs/**")
+                    .requestMatchers(HttpMethod.POST, "/core/certificate-courses")
+                    .requestMatchers(HttpMethod.GET, "/core/certificate-courses/{id}")
+                    .requestMatchers(HttpMethod.GET, "/core/contests/**");
         };
     }
 

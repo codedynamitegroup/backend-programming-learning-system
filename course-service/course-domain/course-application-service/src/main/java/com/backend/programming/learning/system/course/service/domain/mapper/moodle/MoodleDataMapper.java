@@ -10,9 +10,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.module.ModuleModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.quiz.QuizModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.section.SectionModel;
-import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.File;
-import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.Submission;
-import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionPlugin;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.*;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user.UserModel;
 import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.entity.Module;
@@ -168,21 +166,28 @@ public class MoodleDataMapper {
                 .build();
     }
 
-    public SubmissionAssignment createSubmissionAssignment(Assignment assignment,User user, Submission submission) {
+    public SubmissionAssignment createSubmissionAssignment(Assignment assignment, User user, LastAttempt lastAttempt, Feedback feedback) {
         Boolean isGraded=false;
-        if(submission.getGradingstatus().equals("graded"))
+        float grade=(float)-1;
+        String content="";
+        if(lastAttempt.getSubmission().getGradingstatus().equals("graded"))
         {
             isGraded=true;
+        }
+        if(feedback!=null)
+        {
+            grade= Float.parseFloat(feedback.getGrade().getGrade());
+            content=feedback.getPlugins().get(0).getEditorfields().get(0).getText();
         }
         return SubmissionAssignment.builder()
                 .id(new SubmissionAssignmentId(UUID.randomUUID()))
                 .assignment(assignment)
                 .user(user)
                 .isGraded(isGraded)
-                .content("content")
-                .grade((float)-1)
-                .timemodified(Instant.ofEpochSecond(submission.getTimemodified()).atZone(ZoneId.of("UTC")))
-                .submittedAt(Instant.ofEpochSecond(submission.getTimecreated()).atZone(ZoneId.of("UTC")))
+                .content(content)
+                .grade(grade)
+                .timemodified(Instant.ofEpochSecond(lastAttempt.getSubmission().getTimemodified()).atZone(ZoneId.of("UTC")))
+                .submittedAt(Instant.ofEpochSecond(lastAttempt.getSubmission().getTimecreated()).atZone(ZoneId.of("UTC")))
                 .build();
     }
 

@@ -52,4 +52,12 @@ public class SubmissionAssignmentRepositoryImpl implements SubmissionAssignmentR
                 assignmentSubmissionEntityToAssignmentSubmission(assignmentSubmissionJpaRepository.
                         findByAssignmentIdAndUserId(assignmentId, userId).orElse(null));
     }
+
+    @Override
+    public SubmissionAssignment update(SubmissionAssignment submissionAssignment) {
+        return submissionAssignmentDataAccessMapper.
+                assignmentSubmissionEntityToAssignmentSubmission(assignmentSubmissionJpaRepository.
+                        save(submissionAssignmentDataAccessMapper.
+                                assignmentSubmissionToAssignmentSubmissionEntity(submissionAssignment)));
+    }
 }

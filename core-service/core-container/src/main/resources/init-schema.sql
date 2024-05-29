@@ -354,6 +354,8 @@ CREATE TABLE "public".question
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_by uuid NOT NULL,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    question_bank_category_id uuid,
+    is_org_question_bank bool DEFAULT FALSE,
     CONSTRAINT question_pkey PRIMARY KEY (id),
     CONSTRAINT question_org_id_fkey FOREIGN KEY (org_id)
         REFERENCES "public".organization (id) MATCH SIMPLE

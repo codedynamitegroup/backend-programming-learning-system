@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.application.rest.certificatecourse;
 
+import com.backend.programming.learning.system.core.service.application.utils.JwtUtils;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse_user.CreateCertificateCourseUserCommand;
@@ -125,14 +126,9 @@ public class CertificateCourseController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CertificateCourseResponseEntity> getCertificateCourseById(
+            @RequestHeader(value = "Access-Token", required = false) String accessToken,
             @PathVariable UUID id) {
-        String email = null;
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
-            Jwt token = jwtAuthenticationToken.getToken();
-            email = token.getClaim("preferred_username");
-        }
+        String email = JwtUtils.getEmailFromJwtString(accessToken);
 
         CertificateCourseResponseEntity certificateCourseResponseEntity =
                 certificateCourseApplicationService.queryCertificateCourse(QueryCertificateCourseCommand
@@ -154,14 +150,9 @@ public class CertificateCourseController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllCertificateCoursesResponse> getAllCertificateCourses(
+            @RequestHeader(value = "Access-Token", required = false) String accessToken,
             @RequestBody QueryAllCertificateCoursesCommand queryAllCertificateCoursesCommand) {
-        String email = null;
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
-            Jwt token = jwtAuthenticationToken.getToken();
-            email = token.getClaim("preferred_username");
-        }
+        String email = JwtUtils.getEmailFromJwtString(accessToken);
 
         QueryAllCertificateCoursesResponse queryAllCertificateCoursesResponse =
                 certificateCourseApplicationService.queryAllCertificateCourses(QueryAllCertificateCoursesCommand
@@ -174,33 +165,6 @@ public class CertificateCourseController {
         log.info("Returning all certificate courses");
         return ResponseEntity.ok(queryAllCertificateCoursesResponse);
     }
-
-//    @GetMapping("/{id}/users")
-//    @Operation(summary = "Get all users of Certificate course.")
-//    @ApiResponses(value = {
-//            @ApiResponse(responseCode = "200", description = "Success.", content = {
-//                    @Content(mediaType = "application/vnd.api.v1+json",
-//                            schema = @Schema(implementation = QueryAllCertificateCourseUsersResponse.class))
-//            }),
-//            @ApiResponse(responseCode = "400", description = "Not found."),
-//            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-//    public ResponseEntity<QueryAllCertificateCourseUsersResponse> getAllUsersOfCertificateCourse(
-//            @PathVariable UUID id,
-//            @RequestParam(defaultValue = "0") Integer pageNo,
-//            @RequestParam(defaultValue = "10") Integer pageSize,
-//            @RequestParam(defaultValue = "false") Boolean fetchAll) {
-//        QueryAllCertificateCourseUsersResponse queryAllCertificateCourseUsersResponse =
-//                certificateCourseUserApplicationService.queryAllCertificateCourseUsers(
-//                        QueryAllCertificateCourseUsersCommand
-//                        .builder()
-//                        .certificateCourseId(id)
-//                        .pageNo(pageNo)
-//                        .pageSize(pageSize)
-//                        .fetchAll(fetchAll)
-//                        .build());
-//        log.info("Returning all users of certificate course: {}", id);
-//        return ResponseEntity.ok(queryAllCertificateCourseUsersResponse);
-//    }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete Certificate course.")
