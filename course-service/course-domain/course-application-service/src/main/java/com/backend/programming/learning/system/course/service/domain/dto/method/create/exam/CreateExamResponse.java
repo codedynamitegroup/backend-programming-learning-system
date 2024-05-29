@@ -31,6 +31,7 @@ public record CreateExamResponse(
         String gradeMethod,
         ZonedDateTime createdAt,
         ZonedDateTime updatedAt,
+        Integer maxPage,
         String message
 ) {
 }

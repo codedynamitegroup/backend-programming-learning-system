@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam.CreateQuestionExamCommand;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,6 +20,6 @@ public record CreateExamQuestionCommand(
         @NotNull(message = "Exam id is required")
         UUID examId,
         @NotNull(message = "Question ids are required")
-        List<UUID> questionIds
+        List<CreateQuestionExamCommand> questionIds
 ) {
 }

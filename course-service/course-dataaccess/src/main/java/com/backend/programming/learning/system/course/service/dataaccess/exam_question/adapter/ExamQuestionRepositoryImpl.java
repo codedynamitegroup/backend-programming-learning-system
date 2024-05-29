@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.dataaccess.exam_q
 
 import com.backend.programming.learning.system.course.service.dataaccess.exam_question.mapper.ExamQuestionDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.exam_question.repository.ExamQuestionJpaRepository;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam.CreateQuestionExamCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.ExamQuestion;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamQuestionRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,8 +31,9 @@ public class ExamQuestionRepositoryImpl implements ExamQuestionRepository {
     }
 
     @Override
-    public void deleteByExamIdAndQuestionIdIn(UUID examId, List<UUID> questionIds) {
-        examQuestionJpaRepository.deleteByExamIdAndQuestionIdIn(examId, questionIds);
+    public void deleteByExamIdAndQuestionIdIn(UUID examId, List<CreateQuestionExamCommand> questionIds) {
+        List<UUID> questionIdsList = questionIds.stream().map(CreateQuestionExamCommand::questionId).toList();
+        examQuestionJpaRepository.deleteByExamIdAndQuestionIdIn(examId, questionIdsList);
     }
 
     @Override
