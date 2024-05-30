@@ -39,6 +39,7 @@ public class ExamQuestionDataAccessMapper {
                 .id(examQuestion.getId().getValue())
                 .exam(examDataAccessMapper.examToExamEntity(examQuestion.getExam()))
                 .question(questionDataAccessMapper.questionToQuestionEntity(examQuestion.getQuestion()))
+                .page(examQuestion.getPage())
                 .build();
     }
 }
