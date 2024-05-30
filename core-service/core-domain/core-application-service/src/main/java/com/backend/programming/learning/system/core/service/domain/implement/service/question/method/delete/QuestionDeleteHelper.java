@@ -57,7 +57,7 @@ public class QuestionDeleteHelper {
             case ESSAY:
                 qtypeEssayQuestion = qtypeEssayQuestionRepository.findQtypeEssayQuestionByQuestionId(deletingQuestion.getId().getValue()).get();
                 break;
-            case MULTIPLE_CHOICE:
+            case MULTIPLE_CHOICE, TRUE_FALSE:
                 qtypeMultiChoiceQuestion = qtypeMultipleChoiceQuestionRepository.findQtypeMultipleChoiceQuestionByQuestionId(deletingQuestion.getId().getValue()).get();
                 break;
         }
@@ -101,7 +101,7 @@ public class QuestionDeleteHelper {
         else if (question.getqtype() == QuestionType.ESSAY) {
             qtypeQuestionId = qtypeEssayQuestionRepository.getId(question.getId().getValue());
         }
-        else if (question.getqtype() == QuestionType.MULTIPLE_CHOICE) {
+        else if (question.getqtype() == QuestionType.MULTIPLE_CHOICE || question.getqtype() == QuestionType.TRUE_FALSE){
             qtypeQuestionId = qtypeMultipleChoiceQuestionRepository.getId(question.getId().getValue());
         }
         else {

@@ -13,7 +13,7 @@ DROP TYPE IF EXISTS difficulty;
 CREATE TYPE difficulty AS ENUM ('EASY', 'MEDIUM', 'HARD');
 
 DROP TYPE IF EXISTS qtype;
-CREATE TYPE qtype AS ENUM ('MULTIPLE_CHOICE', 'SHORT_ANSWER', 'CODE', 'ESSAY');
+CREATE TYPE qtype AS ENUM ('MULTIPLE_CHOICE', 'SHORT_ANSWER', 'CODE', 'ESSAY', 'TRUE_FALSE');
 
 DROP TYPE IF EXISTS plagiarism_detection_report_status;
 CREATE TYPE plagiarism_detection_report_status AS ENUM ('PROCESSING', 'COMPLETED', 'FAILED');
@@ -346,7 +346,7 @@ CREATE TABLE "public".question
     difficulty difficulty NOT NULL,
     name text NOT NULL,
     question_text text NOT NULL,
-    general_feedback text NOT NULL,
+    general_feedback text NULL,
     default_mark numeric(5,2) NOT NULL,
     qtype qtype NOT NULL,
     created_by uuid NOT NULL,
@@ -459,15 +459,15 @@ CREATE TABLE "public".qtype_essay_question
     response_format text NOT NULL,
     response_required int4 NOT NULL,
     response_field_lines int4 NOT NULL,
-    min_word_limit int4 NOT NULL,
-    max_word_limit int4 NOT NULL,
-    attachments int4 NOT NULL,
-    attachments_required int4 NOT NULL,
-    grader_info text NOT NULL,
-    grader_info_format text NOT NULL,
-    response_template text NOT NULL,
-    max_bytes int4 NOT NULL,
-    file_types_list text NOT NULL,
+    min_word_limit int4 NULL,
+    max_word_limit int4 NULL,
+    attachments int4 NULL,
+    attachments_required int4 NULL,
+    grader_info text NULL,
+    grader_info_format text NULL,
+    response_template text NULL,
+    max_bytes int4 NULL,
+    file_types_list text NULL,
     CONSTRAINT qtype_essay_question_pkey PRIMARY KEY (id),
     CONSTRAINT qtype_essay_question_question_id_fkey FOREIGN KEY (question_id)
         REFERENCES "public".question (id) MATCH SIMPLE
@@ -481,13 +481,13 @@ CREATE TABLE "public".qtype_multichoice_question
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
     question_id uuid NOT NULL,
     single bool NOT NULL,
-    shuffle_answers bool NOT NULL,
-    correct_feedback text NOT NULL,
-    partially_correct_feedback text NOT NULL,
-    incorrect_feedback text NOT NULL,
-    answer_numbering text NOT NULL,
-    show_num_correct int4 NOT NULL,
-    show_standard_instruction text NOT NULL,
+    shuffle_answers bool  NULL,
+    correct_feedback text  NULL,
+    partially_correct_feedback text  NULL,
+    incorrect_feedback text  NULL,
+    answer_numbering text  NULL,
+    show_num_correct int4  NULL,
+    show_standard_instruction text  NULL,
     CONSTRAINT qtype_multichoice_question_pkey PRIMARY KEY (id),
     CONSTRAINT qtype_multichoice_question_question_id_fkey FOREIGN KEY (question_id)
         REFERENCES "public".question (id) MATCH SIMPLE
