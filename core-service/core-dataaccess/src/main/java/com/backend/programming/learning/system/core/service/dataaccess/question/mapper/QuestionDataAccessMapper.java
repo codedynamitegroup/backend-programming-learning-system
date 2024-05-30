@@ -55,6 +55,10 @@ public class QuestionDataAccessMapper {
             builder.answerOfQuestions(answerOfQuestionDataAccessMapper.answerOfQuestionListToAnswerOfQuestionEntityList(question.getAnswers()));
         if (question.getCopyState() != null)
             builder.copyState(question.getCopyState());
+        if (question.getQuestionBankCategoryId() != null)
+            builder.questionBankCategoryId(question.getQuestionBankCategoryId());
+        if (question.getIsOrgQuestionBank() != null)
+            builder.isOrgQuestionBank(question.getIsOrgQuestionBank());
         return builder.build();
     }
 
@@ -76,6 +80,8 @@ public class QuestionDataAccessMapper {
                 .updatedAt(questionEntity.getUpdatedAt())
                 .answers(answerOfQuestionDataAccessMapper.answerOfQuestionEntityListToAnswerOfQuestionList(questionEntity.getAnswerOfQuestions()))
                 .copyState(questionEntity.getCopyState())
+                .questionBankCategoryId(questionEntity.getQuestionBankCategoryId())
+                .isOrgQuestionBank(questionEntity.getIsOrgQuestionBank())
                 .build();
     }
 

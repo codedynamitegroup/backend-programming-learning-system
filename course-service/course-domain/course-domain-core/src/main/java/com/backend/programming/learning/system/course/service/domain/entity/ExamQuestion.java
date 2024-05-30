@@ -8,11 +8,13 @@ import java.util.UUID;
 public class ExamQuestion extends AggregateRoot<ExamQuestionId> {
     private Exam exam;
     private Question question;
+    private Integer page;
 
     private ExamQuestion(Builder builder) {
         super.setId(builder.examQuestionId);
         exam = builder.exam;
         question = builder.question;
+        page = builder.page;
     }
 
     public static Builder builder() {
@@ -27,6 +29,10 @@ public class ExamQuestion extends AggregateRoot<ExamQuestionId> {
         return question;
     }
 
+    public Integer getPage() {
+        return page;
+    }
+
     public void initializeExamQuestion() {
         setId(new ExamQuestionId(UUID.randomUUID()));
     }
@@ -35,6 +41,7 @@ public class ExamQuestion extends AggregateRoot<ExamQuestionId> {
         private ExamQuestionId examQuestionId;
         private Exam exam;
         private Question question;
+        private Integer page;
 
         private Builder() {
         }
@@ -55,6 +62,11 @@ public class ExamQuestion extends AggregateRoot<ExamQuestionId> {
 
         public Builder question(Question val) {
             question = val;
+            return this;
+        }
+
+        public Builder page(Integer val) {
+            page = val;
             return this;
         }
 

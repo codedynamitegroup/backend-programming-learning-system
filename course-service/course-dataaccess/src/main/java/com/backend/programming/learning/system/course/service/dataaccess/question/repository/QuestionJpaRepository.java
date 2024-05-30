@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 @Repository
@@ -36,4 +37,14 @@ public interface QuestionJpaRepository extends JpaRepository<QuestionEntity, UUI
             AND (q.questionText LIKE %:search% OR q.name LIKE %:search%)
             """)
     Page<QuestionEntity> findAllByExamId(UUID examId, String search, Pageable pageable);
+
+    @Query("""
+    SELECT q 
+    FROM QuestionEntity q 
+    JOIN ExamQuestionEntity eq ON eq.question.id = q.id
+    WHERE LOWER(q.name) LIKE %:search%
+        AND eq.exam.id = :examId 
+        AND eq.page = :pageCurrent
+    """)
+    List<QuestionEntity> findAllByExamId(UUID examId, String search, Integer pageCurrent);
 }

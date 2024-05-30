@@ -22,7 +22,6 @@ public class UserEntity {
     private UUID id;
     private String email;
     private String username;
-    private String password;
     private ZonedDateTime dob;
     private String firstName;
     private String lastName;
@@ -30,7 +29,6 @@ public class UserEntity {
     private String address;
     private String avatarUrl;
     private String refreshToken;
-    private String lastIp;
     private Boolean isLinkedWithGoogle;
     private Boolean isLinkedWithMicrosoft;
     private ZonedDateTime lastLogin;

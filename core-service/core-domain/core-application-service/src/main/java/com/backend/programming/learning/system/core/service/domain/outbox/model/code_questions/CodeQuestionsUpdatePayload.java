@@ -23,9 +23,9 @@ public class CodeQuestionsUpdatePayload {
     @JsonProperty
     private final String problemStatement;
     @JsonProperty
-    private final String inputFormat;
+    private final Float maxGrade;
     @JsonProperty
-    private final String outputFormat;
+    private final String name;
     @JsonProperty
     private final String constraints;
     @JsonProperty

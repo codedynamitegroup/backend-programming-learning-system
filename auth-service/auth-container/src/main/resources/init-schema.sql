@@ -37,7 +37,6 @@ CREATE TABLE "public".main_user (
 	id uuid NOT NULL,
     email character varying COLLATE pg_catalog."default" NOT NULL,
     username character varying,
-    password character varying COLLATE pg_catalog."default",
     dob TIMESTAMP WITH TIME ZONE,
     organization_id uuid DEFAULT NULL,
 	first_name character varying,
@@ -46,7 +45,6 @@ CREATE TABLE "public".main_user (
 	address character varying,
 	avatar_url text,
 	refresh_token character varying,
-	last_ip character varying,
 	last_login TIMESTAMP WITH TIME ZONE,
 	is_linked_with_google boolean DEFAULT false,
 	is_linked_with_microsoft boolean DEFAULT false,
@@ -81,10 +79,6 @@ CREATE TABLE "public".role (
 	id uuid NOT NULL,
 	description text,
 	name character varying COLLATE pg_catalog."default" NOT NULL,
-	created_at TIMESTAMP WITH TIME ZONE,
-	updated_at TIMESTAMP WITH TIME ZONE,
-	updated_by uuid,
-	created_by uuid,
 	PRIMARY KEY ("id")
 );
 
@@ -95,10 +89,6 @@ CREATE TABLE "public".user_role (
 	id uuid NOT NULL,
 	user_id uuid NOT NULL,
 	role_id uuid NOT NULL,
-	created_at TIMESTAMP WITH TIME ZONE,
-	updated_at TIMESTAMP WITH TIME ZONE,
-	updated_by uuid,
-	created_by uuid,
 	PRIMARY KEY ("id"),
     CONSTRAINT user_role_fk1 FOREIGN KEY (user_id)
         REFERENCES "public".main_user (id) MATCH SIMPLE

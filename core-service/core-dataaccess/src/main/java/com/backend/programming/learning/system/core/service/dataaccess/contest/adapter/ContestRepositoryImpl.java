@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.core.service.dataaccess.contest.
 import com.backend.programming.learning.system.core.service.dataaccess.chapter.mapper.ChapterDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter.repository.ChapterJpaRepository;
 import com.backend.programming.learning.system.core.service.dataaccess.contest.mapper.ContestDataAccessMapper;
+import com.backend.programming.learning.system.core.service.dataaccess.contest.projection.ContestProjection;
 import com.backend.programming.learning.system.core.service.dataaccess.contest.repository.ContestJpaRepository;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
@@ -44,47 +45,44 @@ public class ContestRepositoryImpl implements ContestRepository {
 
     @Override
     public Optional<Contest> findById(ContestId contestId) {
-        return contestJpaRepository.findById(contestId.getValue())
-                .map(contestDataAccessMapper::contestEntityToContest);
+        return contestJpaRepository.findContestById(contestId.getValue())
+                .map(contestDataAccessMapper::contestProjectionToContest);
     }
 
     @Override
     public Page<Contest> findAll(String searchName, String startTimeFilter, Integer page, Integer size) {
         Pageable paging = PageRequest.of(page, size);
 
+        List<String> splitedSearch = contestDataAccessMapper.splitWords(searchName);
+
+        String searchFinalWord = splitedSearch != null && !splitedSearch.isEmpty()? splitedSearch.get(splitedSearch.size() - 1): null;
+
+        if(splitedSearch != null && !splitedSearch.isEmpty())
+            splitedSearch.remove(splitedSearch.size() - 1);
+
+        String searchExcludeFinalWord =  splitedSearch != null && !splitedSearch.isEmpty() ? String.join(" ", splitedSearch) : null;
+
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UTC"));
         switch (ContestStartTimeFilter.valueOf(startTimeFilter)) {
             case UPCOMING -> {
-                if(searchName.isEmpty()){
-                    return contestJpaRepository.findAllUpcomingContests(now, paging)
-                            .map(contestDataAccessMapper::contestEntityToContest);
-                }
-                return contestJpaRepository.findAllUpcomingContestsContainsSearchName(searchName, now, paging)
-                        .map(contestDataAccessMapper::contestEntityToContest);
+                return contestJpaRepository.findAllUpcomingContestsContainsSearchName(
+                        now, searchExcludeFinalWord, searchFinalWord, paging)
+                        .map(contestDataAccessMapper::contestProjectionToContest);
             }
             case HAPPENING -> {
-                if (searchName.isEmpty()) {
-                    return contestJpaRepository.findAllHappeningContests(now, paging)
-                            .map(contestDataAccessMapper::contestEntityToContest);
-                }
-                return contestJpaRepository.findAllHappeningContestsContainsSearchName(now, searchName, paging)
-                        .map(contestDataAccessMapper::contestEntityToContest);
+                return contestJpaRepository.findAllHappeningContestsContainsSearchName(
+                        now, searchExcludeFinalWord, searchFinalWord, paging)
+                        .map(contestDataAccessMapper::contestProjectionToContest);
             }
             case ENDED -> {
-                if (searchName.isEmpty()) {
-                    return contestJpaRepository.findAllEndedContests(now, paging)
-                            .map(contestDataAccessMapper::contestEntityToContest);
-                }
-                return contestJpaRepository.findAllEndedContestsContainsSearchName(now, searchName, paging)
-                        .map(contestDataAccessMapper::contestEntityToContest);
+                return contestJpaRepository.findAllEndedContestsContainsSearchName(
+                        now, searchExcludeFinalWord, searchFinalWord,paging)
+                        .map(contestDataAccessMapper::contestProjectionToContest);
             }
             default -> {
-                if (searchName.isEmpty()) {
-                    return contestJpaRepository.findAll(paging)
-                            .map(contestDataAccessMapper::contestEntityToContest);
-                }
-                return contestJpaRepository.findAllContainsSearchName(searchName, paging)
-                        .map(contestDataAccessMapper::contestEntityToContest);
+                return contestJpaRepository.findAllContainsSearchName(
+                        searchExcludeFinalWord, searchFinalWord, paging)
+                        .map(contestDataAccessMapper::contestProjectionToContest);
             }
         }
     }
@@ -99,7 +97,7 @@ public class ContestRepositoryImpl implements ContestRepository {
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UTC"));
         return contestJpaRepository.findMostPopularContests(now)
                 .stream()
-                .map(contestDataAccessMapper::contestEntityToContest)
+                .map(contestDataAccessMapper::contestProjectionToContest)
                 .toList();
     }
 

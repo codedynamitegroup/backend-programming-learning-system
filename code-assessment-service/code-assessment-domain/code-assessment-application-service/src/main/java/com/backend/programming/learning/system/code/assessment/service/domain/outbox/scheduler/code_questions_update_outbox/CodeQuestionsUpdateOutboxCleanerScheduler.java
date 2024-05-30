@@ -45,7 +45,7 @@ public class CodeQuestionsUpdateOutboxCleanerScheduler implements OutboxSchedule
                     SagaStatus.SUCCEEDED,
                     SagaStatus.FAILED,
                     SagaStatus.COMPENSATED);
-            log.info("{} OrderPaymentOutboxMessage deleted!", outboxMessages.size());
+            log.info("{} CodeQuestionsUpdateOutboxMessage deleted!", outboxMessages.size());
         }
     }
 }

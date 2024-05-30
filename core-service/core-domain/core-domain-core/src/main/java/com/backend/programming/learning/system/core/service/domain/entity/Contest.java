@@ -17,7 +17,8 @@ public class Contest extends AggregateRoot<ContestId> {
     private String thumbnailUrl;
     private ZonedDateTime startTime;
     private ZonedDateTime endTime;
-    private List<Question> questions;
+    private Integer numOfParticipants;
+    private List<ContestQuestion> questions;
     private Boolean isRegistered;
     private User createdBy;
     private User updatedBy;
@@ -31,6 +32,7 @@ public class Contest extends AggregateRoot<ContestId> {
         setThumbnailUrl(builder.thumbnailUrl);
         setStartTime(builder.startTime);
         setEndTime(builder.endTime);
+        setNumOfParticipants(builder.numOfParticipants);
         setQuestions(builder.questions);
         isRegistered = builder.isRegistered;
         setCreatedBy(builder.createdBy);
@@ -90,11 +92,19 @@ public class Contest extends AggregateRoot<ContestId> {
         this.endTime = endTime;
     }
 
-    public List<Question> getQuestions() {
+    public Integer getNumOfParticipants() {
+        return numOfParticipants;
+    }
+
+    public void setNumOfParticipants(Integer numOfParticipants) {
+        this.numOfParticipants = numOfParticipants;
+    }
+
+    public List<ContestQuestion> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(List<Question> questions) {
+    public void setQuestions(List<ContestQuestion> questions) {
         this.questions = questions;
     }
 
@@ -145,7 +155,8 @@ public class Contest extends AggregateRoot<ContestId> {
         private String thumbnailUrl;
         private ZonedDateTime startTime;
         private ZonedDateTime endTime;
-        private List<Question> questions;
+        private Integer numOfParticipants;
+        private List<ContestQuestion> questions;
         private Boolean isRegistered;
         private User createdBy;
         private User updatedBy;
@@ -185,7 +196,12 @@ public class Contest extends AggregateRoot<ContestId> {
             return this;
         }
 
-        public Builder questions(List<Question> val) {
+        public Builder numOfParticipants(Integer val) {
+            numOfParticipants = val;
+            return this;
+        }
+
+        public Builder questions(List<ContestQuestion> val) {
             questions = val;
             return this;
         }

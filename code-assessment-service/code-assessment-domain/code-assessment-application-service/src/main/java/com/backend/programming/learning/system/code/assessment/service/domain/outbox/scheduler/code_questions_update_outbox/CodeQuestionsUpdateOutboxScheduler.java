@@ -2,7 +2,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.o
 
 
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.code_questions_update_outbox.CodeQuestionsUpdateOutboxMessage;
-import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.message.publisher.codequestion.CodeQuestionsUpdateMessagePublisher;
+import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.message.publisher.code_question.CodeQuestionsUpdateMessagePublisher;
 import com.backend.programming.learning.system.outbox.OutboxScheduler;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
@@ -54,6 +54,6 @@ public class CodeQuestionsUpdateOutboxScheduler implements OutboxScheduler {
     private void updateOutboxStatus(CodeQuestionsUpdateOutboxMessage outboxMessage, OutboxStatus outboxStatus) {
         outboxMessage.setOutboxStatus(outboxStatus);
         codeQuestionsUpdateOutboxHelper.save(outboxMessage);
-        log.info("OrderPaymentOutboxMessage is updated with outbox status: {}", outboxStatus.name());
+        log.info("CodeQuestionsUpdateOutboxMessage is updated with outbox status: {}", outboxStatus.name());
     }
 }

@@ -16,4 +16,8 @@ public interface SubmissionAssignmentRepository {
 
     void deleteSubmissionAssignmentById(UUID submissionAssignmentId);
 
+    SubmissionAssignment findByAssignmentIdAndUserId(UUID assignmentId, UUID userId);
+
+    SubmissionAssignment update(SubmissionAssignment submissionAssignment);
+
 }

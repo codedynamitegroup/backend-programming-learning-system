@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.application.rest.contest;
 
+import com.backend.programming.learning.system.core.service.application.utils.JwtUtils;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest.CreateContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest.CreateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest_user.CreateContestUserCommand;
@@ -26,6 +27,8 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Base64;
+import java.util.Map;
 import java.util.UUID;
 
 @Slf4j
@@ -60,7 +63,7 @@ public class ContestController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createContestResponse);
     }
 
-    @PostMapping("/register")
+    @PostMapping("/{id}/register")
     @Operation(summary = "Register contest.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Success.", content = {
@@ -70,10 +73,15 @@ public class ContestController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateContestUserResponse> registerContest(
+            @PathVariable UUID id,
             @RequestBody CreateContestUserCommand createContestUserCommand) {
-        log.info("Creating Contest User course: {}", contestUserApplicationService);
+        log.info("User registering for contest: {}", id);
         CreateContestUserResponse createContestUserResponse =
-                contestUserApplicationService.createContestUser(createContestUserCommand);
+                contestUserApplicationService.createContestUser(CreateContestUserCommand
+                        .builder()
+                        .userId(createContestUserCommand.getUserId())
+                        .contestId(id)
+                        .build());
         log.info("Contest User created: {}", createContestUserCommand);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createContestUserResponse);
@@ -116,18 +124,13 @@ public class ContestController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllContestsResponse> getAllContests(
+            @RequestHeader(value = "Access-Token", required = false) String accessToken,
             @RequestParam(defaultValue = "") String searchName,
             @RequestParam(defaultValue = "UPCOMING") String startTimeFilter,
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize
     ) {
-        String email = null;
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
-            Jwt token = jwtAuthenticationToken.getToken();
-            email = token.getClaim("preferred_username");
-        }
+        String email = JwtUtils.getEmailFromJwtString(accessToken);
 
         QueryAllContestsResponse queryAllContestsResponse =
                 contestApplicationService.queryAllContests(QueryAllContestsCommand
@@ -186,6 +189,35 @@ public class ContestController {
         return ResponseEntity.ok(queryAllContestUsersResponse);
     }
 
+    @GetMapping("/{id}/leaderboard")
+    @Operation(summary = "Get leaderboard of contest.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryLeaderboardOfContestResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryLeaderboardOfContestResponse> getLeaderboardOfContest
+            (@RequestHeader(value = "Access-Token", required = false) String accessToken,
+            @PathVariable UUID id,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize) {
+        String email = JwtUtils.getEmailFromJwtString(accessToken);
+
+        QueryLeaderboardOfContestResponse queryLeaderboardOfContestResponse =
+                contestApplicationService.queryLeaderboardOfContest(
+                        QueryLeaderboardOfContestCommand
+                                .builder()
+                                .contestId(id)
+                                .email(email)
+                                .pageNo(pageNo)
+                                .pageSize(pageSize)
+                                .build());
+        log.info("Returning leaderboard of contest: {}", id);
+        return ResponseEntity.ok(queryLeaderboardOfContestResponse);
+    }
+
     @GetMapping("/{id}")
     @Operation(summary = "Get contest by id.")
     @ApiResponses(value = {
@@ -195,14 +227,10 @@ public class ContestController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<ContestResponseEntity> getContest(@PathVariable UUID id) {
-        String email = null;
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
-            Jwt token = jwtAuthenticationToken.getToken();
-            email = token.getClaim("preferred_username");
-        }
+    public ResponseEntity<ContestResponseEntity> getContest(
+            @RequestHeader(value = "Access-Token", required = false) String accessToken,
+            @PathVariable UUID id) {
+        String email = JwtUtils.getEmailFromJwtString(accessToken);
 
         ContestResponseEntity contestResponseEntity =
                 contestApplicationService.queryContest(QueryContestCommand

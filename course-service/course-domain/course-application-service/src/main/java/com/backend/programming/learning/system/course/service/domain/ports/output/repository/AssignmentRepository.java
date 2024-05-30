@@ -17,4 +17,6 @@ public interface AssignmentRepository {
 
     void deleteAssignmentById(UUID assignmentId);
 
+    List<Assignment> findAll();
+
 }

@@ -2,11 +2,13 @@ package com.backend.programming.learning.system.core.service.dataaccess.contest_
 
 import com.backend.programming.learning.system.core.service.dataaccess.contest.entity.ContestEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.core.service.domain.entity.ContestQuestion;
 import com.backend.programming.learning.system.core.service.domain.valueobject.UpdateState;
 import lombok.*;
 
 import jakarta.persistence.*;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 

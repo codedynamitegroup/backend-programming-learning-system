@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.auth.service.domain.exception.Aut
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserKeycloakApplicationService;
 import com.backend.programming.learning.system.auth.service.domain.util.KeycloakProvider;
 import jakarta.ws.rs.core.Response;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.keycloak.representations.idm.FederatedIdentityRepresentation;
 import org.springframework.stereotype.Service;
@@ -23,14 +24,10 @@ import org.keycloak.representations.idm.UserRepresentation;
 @Slf4j
 @Validated
 @Service
+@RequiredArgsConstructor
 public class UserKeycloakApplicationServiceImpl implements UserKeycloakApplicationService {
     private final KeycloakProvider keycloakProvider;
     private final KeycloakConfigData keycloakConfigData;
-
-    public UserKeycloakApplicationServiceImpl(KeycloakProvider keycloakProvider, KeycloakConfigData keycloakConfigData) {
-        this.keycloakProvider = keycloakProvider;
-        this.keycloakConfigData = keycloakConfigData;
-    }
 
     @Override
     public UsersResource getUsersResource() {
@@ -70,7 +67,6 @@ public class UserKeycloakApplicationServiceImpl implements UserKeycloakApplicati
             throw new AuthDomainException("Error creating user, please contact with the administrator.");
         }
     }
-
     @Override
     public void deleteUser(User user) {
         UsersResource usersResource = getUsersResource();

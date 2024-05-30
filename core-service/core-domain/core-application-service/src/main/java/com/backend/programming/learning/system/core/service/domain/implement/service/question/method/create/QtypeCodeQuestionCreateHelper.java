@@ -37,9 +37,10 @@ public class QtypeCodeQuestionCreateHelper {
 
         // init QtypeCodeQuestion
         QuestionCreatedEvent questionCreatedEvent = coreDomainService.createQtypeCodeQuestion(createdQuestion, qtypeCodeQuestion);
-        saveQtypeCodeQuestion(qtypeCodeQuestion);
 
-        log.info("Qtype Code Question created with id: {}", qtypeCodeQuestion.getQuestion().getId().getValue());
+//        saveQtypeCodeQuestion(qtypeCodeQuestion);
+
+//        log.info("Qtype Code Question created with id: {}", qtypeCodeQuestion.getQuestion().getId().getValue());
 
         return questionCreatedEvent;
     }

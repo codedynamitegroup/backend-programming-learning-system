@@ -1,0 +1,91 @@
+{
+  "name": "CodeSubmissionUpdateRequestAvroModel",
+  "namespace": "com.backend.programming.learning.system.kafka.code.assessment.code.submission.avro.model",
+  "type": "record",
+  "fields": [
+    {
+      "name": "id",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "codeSubmisisonId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "codeQuestionId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "userId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "programmingLanguageId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "sagaId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "bodyCode",
+      "type": "string"
+    },
+    {
+      "name": "grade",
+      "type": ["null", "float"]
+    },
+    {
+      "name": "pass",
+      "type": ["null", "boolean"]
+    },
+    {
+      "name": "createdAt",
+      "type":  {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    },
+    {
+      "name": "copyState",
+      "type": {
+        "type": "enum",
+        "name": "CopyState",
+        "symbols": [
+          "CREATING",
+          "CREATED",
+          "UPDATING",
+          "UPDATED",
+          "DELETING",
+          "DELETED",
+          "CREATE_PROPAGATING",
+          "UPDATE_PROPAGATING",
+          "DELETE_PROPAGATING",
+          "CREATE_ROLLBACKING",
+          "UPDATE_ROLLBACKING",
+          "DELETE_ROLLBACKING",
+          "DELETE_FAILED",
+          "UPDATE_FAILED",
+          "CREATE_FAILED"]
+      }
+    }
+  ]
+}

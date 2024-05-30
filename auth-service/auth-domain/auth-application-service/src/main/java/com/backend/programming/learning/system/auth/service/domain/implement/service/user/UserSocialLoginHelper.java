@@ -2,11 +2,17 @@ package com.backend.programming.learning.system.auth.service.domain.implement.se
 
 import com.backend.programming.learning.system.auth.service.config.KeycloakConfigData;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateSocialLoginUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user_role.CreateUserRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.*;
+import com.backend.programming.learning.system.auth.service.domain.entity.Role;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
+import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
+import com.backend.programming.learning.system.auth.service.domain.implement.service.role.RoleQueryHelper;
+import com.backend.programming.learning.system.auth.service.domain.implement.service.user_role.UserRoleCreateHelper;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserKeycloakApplicationService;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -20,18 +26,15 @@ import java.util.Optional;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class UserSocialLoginHelper {
     private final KeycloakConfigData keycloakConfigData;
     private final UserCreateHelper userCreateHelper;
     private final UserRepository userRepository;
     private final UserKeycloakApplicationService userKeycloakApplicationService;
-
-    public UserSocialLoginHelper(KeycloakConfigData keycloakConfigData, UserCreateHelper userCreateHelper, UserRepository userRepository, UserKeycloakApplicationService userKeycloakApplicationService) {
-        this.keycloakConfigData = keycloakConfigData;
-        this.userCreateHelper = userCreateHelper;
-        this.userRepository = userRepository;
-        this.userKeycloakApplicationService = userKeycloakApplicationService;
-    }
+    private final String ROLE_NAME_USER = "user";
+    private final RoleQueryHelper roleQueryHelper;
+    private final UserRoleCreateHelper userRoleCreateHelper;
 
     @Transactional
     public LoginUserResponse socialLoginUser(SocialLoginUserCommand socialLoginUserCommand) {
@@ -40,7 +43,7 @@ public class UserSocialLoginHelper {
 
             Optional<User> userResult = userRepository.findByEmail(userProfileResult.getEmail());
             if (userResult.isEmpty()) {
-                userCreateHelper.persistUserSocialLogin(CreateSocialLoginUserCommand.builder()
+                UserCreatedEvent userCreatedEvent = userCreateHelper.persistUserSocialLogin(CreateSocialLoginUserCommand.builder()
                         .email(userProfileResult.getEmail())
                         .username(userProfileResult.getEmail())
                         .firstName(userProfileResult.getGivenName())
@@ -50,8 +53,19 @@ public class UserSocialLoginHelper {
 
                 ResponseLoginAndRefreshUser keycloakLoggedResult = keycloakLogged(socialLoginUserCommand);
 
+                Role role = roleQueryHelper.queryRoleByName(ROLE_NAME_USER);
+                userRoleCreateHelper.persistUserRole(CreateUserRoleCommand.builder()
+                        .userId(userCreatedEvent.getUser().getId().getValue())
+                        .roleId(role.getId().getValue())
+                        .build());
+
+                User user = userCreatedEvent.getUser();
+                user.setRefreshToken(keycloakLoggedResult.getRefresh_token());
+                userRepository.save(user);
+
                 return LoginUserResponse.builder()
                         .accessToken(keycloakLoggedResult.getAccess_token())
+                        .refreshToken(keycloakLoggedResult.getRefresh_token())
                         .build();
             }
 
@@ -65,16 +79,21 @@ public class UserSocialLoginHelper {
                 ResponseLoginAndRefreshUser keycloakLoggedResult = keycloakLogged(socialLoginUserCommand);
 
                 userFound.setLinkedWithGoogle(Boolean.TRUE);
+                userFound.setRefreshToken(keycloakLoggedResult.getRefresh_token());
                 userRepository.save(userFound);
 
                 return LoginUserResponse.builder()
                         .accessToken(keycloakLoggedResult.getAccess_token())
+                        .refreshToken(keycloakLoggedResult.getRefresh_token())
                         .build();
             } else {
                 ResponseLoginAndRefreshUser keycloakLoggedResult = keycloakLogged(socialLoginUserCommand);
 
+                userFound.setRefreshToken(keycloakLoggedResult.getRefresh_token());
+                userRepository.save(userFound);
                 return LoginUserResponse.builder()
                         .accessToken(keycloakLoggedResult.getAccess_token())
+                        .refreshToken(keycloakLoggedResult.getRefresh_token())
                         .build();
             }
         } else if (socialLoginUserCommand.getProvider().equals("microsoft")) {
@@ -82,7 +101,7 @@ public class UserSocialLoginHelper {
 
             Optional<User> userResult = userRepository.findByEmail(userProfileResult.getMail());
             if (userResult.isEmpty()) {
-                userCreateHelper.persistUserSocialLogin(CreateSocialLoginUserCommand.builder()
+                UserCreatedEvent userCreatedEvent = userCreateHelper.persistUserSocialLogin(CreateSocialLoginUserCommand.builder()
                         .email(userProfileResult.getMail())
                         .username(userProfileResult.getUserPrincipalName())
                         .firstName(userProfileResult.getGivenName())
@@ -92,8 +111,19 @@ public class UserSocialLoginHelper {
 
                 ResponseLoginAndRefreshUser keycloakLoggedResult = keycloakLogged(socialLoginUserCommand);
 
+                Role role = roleQueryHelper.queryRoleByName(ROLE_NAME_USER);
+                userRoleCreateHelper.persistUserRole(CreateUserRoleCommand.builder()
+                        .userId(userCreatedEvent.getUser().getId().getValue())
+                        .roleId(role.getId().getValue())
+                        .build());
+
+                User user = userCreatedEvent.getUser();
+                user.setRefreshToken(keycloakLoggedResult.getRefresh_token());
+                userRepository.save(user);
+
                 return LoginUserResponse.builder()
                         .accessToken(keycloakLoggedResult.getAccess_token())
+                        .refreshToken(keycloakLoggedResult.getRefresh_token())
                         .build();
             }
 
@@ -107,16 +137,21 @@ public class UserSocialLoginHelper {
                 ResponseLoginAndRefreshUser keycloakLoggedResult = keycloakLogged(socialLoginUserCommand);
 
                 userFound.setLinkedWithMicrosoft(Boolean.TRUE);
+                userFound.setRefreshToken(keycloakLoggedResult.getRefresh_token());
                 userRepository.save(userFound);
 
                 return LoginUserResponse.builder()
                         .accessToken(keycloakLoggedResult.getAccess_token())
+                        .refreshToken(keycloakLoggedResult.getRefresh_token())
                         .build();
             } else {
                 ResponseLoginAndRefreshUser keycloakLoggedResult = keycloakLogged(socialLoginUserCommand);
 
+                userFound.setRefreshToken(keycloakLoggedResult.getRefresh_token());
+                userRepository.save(userFound);
                 return LoginUserResponse.builder()
                         .accessToken(keycloakLoggedResult.getAccess_token())
+                        .refreshToken(keycloakLoggedResult.getRefresh_token())
                         .build();
             }
         } else {

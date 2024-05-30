@@ -15,6 +15,9 @@ public class ProgrammingLanguageDataMapper {
                 .isActive(command.getIsActived())
                 .timeLimit(command.getTimeLimit())
                 .memoryLimit(command.getMemoryLimit())
+                .headCode(command.getHeadCode())
+                .bodyCode(command.getBodyCode())
+                .tailCode(command.getTailCode())
                 .build();
     }
 
@@ -26,6 +29,9 @@ public class ProgrammingLanguageDataMapper {
                 .timeLimit(command.getTimeLimit())
                 .memoryLimit(command.getMemoryLimit())
                 .isActive(command.getIsActived())
+                .bodyCode(command.getBodyCode())
+                .tailCode(command.getTailCode())
+                .headCode(command.getHeadCode())
                 .build();
     }
 }

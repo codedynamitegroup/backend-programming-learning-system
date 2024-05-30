@@ -21,9 +21,11 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +35,7 @@ import java.util.UUID;
 @RequestMapping(value = "/code-assessment/code-question",
         produces = "application/vnd.api.v1+json")
 @Slf4j
+@Validated
 public class CodeQuestionController {
     private final CodeQuestionApplicationService codeQuestionApplicationService;
 
@@ -69,13 +72,13 @@ public class CodeQuestionController {
             @RequestParam Integer pageSize,
             @RequestParam(required = false) List<UUID> tagIds,
             @RequestParam(defaultValue = "ASC") QueryOrderBy orderBy,
-            @RequestParam(defaultValue = "createdAt") CodeQuestion.Fields sortBy,
             @RequestParam(required = false) UUID userId,
             @RequestParam(required = false) String search,
             @RequestParam(required = false) QuestionDifficulty difficulty,
             @RequestParam(required = false) Boolean solved){
         log.info("getPublicCodeQuestion");
 //        tagIds.forEach(i-> log.info("{}",i));
+        CodeQuestion.Fields sortBy = CodeQuestion.Fields.createdAt;
         GetCodeQuestionsQuery query = GetCodeQuestionsQuery.builder()
                 .orderBy(orderBy)
                 .sortBy(sortBy)
@@ -87,7 +90,7 @@ public class CodeQuestionController {
                 .difficulty(difficulty)
                 .solved(solved)
                 .build();
-        GetCodeQuestionsResponse response = codeQuestionApplicationService.getCodeQuestions(query);
+        GetCodeQuestionsResponse response = codeQuestionApplicationService.getPublicCodeQuestions(query);
         return ResponseEntity.ok(response);
     }
 
@@ -105,7 +108,7 @@ public class CodeQuestionController {
         return  ResponseEntity.noContent().build();
     }
 
-    //get detail
+    //get detail public code question
     @GetMapping("/{code-question-id}")
     public ResponseEntity<CodeQuestionDto> getDetailCodeQuestion(
             @PathVariable("code-question-id") UUID codeQuestionId,
@@ -153,7 +156,7 @@ public class CodeQuestionController {
     public ResponseEntity addLanguageToCodeQuestion(
             @PathVariable("code-question-id") UUID codeQuestionId,
             @RequestParam UUID userId,
-            @RequestBody List<ProgrammingLanguageDto> languages){
+            @RequestBody List<@Valid ProgrammingLanguageDto> languages){
         AddLanguageToCodeQuestionCommand command = AddLanguageToCodeQuestionCommand.builder()
                 .codeQuestionId(codeQuestionId)
                 .languages(languages)

@@ -42,4 +42,7 @@ public class CreateQuestionCommand {
     private final String qType;
 
     private List<AnswerOfQuestion> answers;
+
+    private final UUID questionBankCategoryId;
+    private final Boolean isOrgQuestionBank;
 }

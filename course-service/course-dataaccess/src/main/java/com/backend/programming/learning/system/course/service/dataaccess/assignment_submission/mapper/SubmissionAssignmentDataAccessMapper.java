@@ -27,7 +27,8 @@ public class SubmissionAssignmentDataAccessMapper {
                 .id(submissionAssignment.getId().getValue())
                 .assignment(assignment)
                 .user(user)
-                .pass_status(submissionAssignment.getPass_status())
+                .isGraded(submissionAssignment.getGradedStatus())
+                .timemodified(submissionAssignment.getTimemodified())
                 .grade(submissionAssignment.getGrade())
                 .content(submissionAssignment.getContent())
                 .submitTime(submissionAssignment.getSubmittedAt())
@@ -35,20 +36,35 @@ public class SubmissionAssignmentDataAccessMapper {
     }
 
     public SubmissionAssignment assignmentSubmissionEntityToAssignmentSubmission(SubmissionAssignmentEntity submissionAssignmentEntity) {
+        if(submissionAssignmentEntity == null) return null;
         Assignment assignment = assignmentDataAccessMapper.assignmentEntityToAssignment(submissionAssignmentEntity.getAssignment());
         User user = userDataAccessMapper.userEntityToUser(submissionAssignmentEntity.getUser());
         return SubmissionAssignment.builder()
                 .id(new SubmissionAssignmentId(submissionAssignmentEntity.getId()))
                 .assignment(assignment)
                 .user(user)
-                .pass_status(submissionAssignmentEntity.getPass_status())
+                .isGraded(submissionAssignmentEntity.getIsGraded())
                 .grade(submissionAssignmentEntity.getGrade())
                 .content(submissionAssignmentEntity.getContent())
+                .timemodified(submissionAssignmentEntity.getTimemodified())
                 .submittedAt(submissionAssignmentEntity.getSubmitTime())
                 .build();
     }
 
     public List<SubmissionAssignment> assignmentSubmissionEntityListToAssignmentSubmissionList(List<SubmissionAssignmentEntity> submissionAssignmentEntityList) {
         return submissionAssignmentEntityList.stream().map(this::assignmentSubmissionEntityToAssignmentSubmission).toList();
+    }
+
+    public SubmissionAssignment submissionAssignmentEntityToSubmissionAssignment(SubmissionAssignmentEntity submissionAssignment) {
+        return SubmissionAssignment.builder()
+                .id(new SubmissionAssignmentId(submissionAssignment.getId()))
+                .assignment(assignmentDataAccessMapper.assignmentEntityToAssignment(submissionAssignment.getAssignment()))
+                .user(userDataAccessMapper.userEntityToUser(submissionAssignment.getUser()))
+                .isGraded(submissionAssignment.getIsGraded())
+                .grade(submissionAssignment.getGrade())
+                .content(submissionAssignment.getContent())
+                .timemodified(submissionAssignment.getTimemodified())
+                .submittedAt(submissionAssignment.getSubmitTime())
+                .build();
     }
 }

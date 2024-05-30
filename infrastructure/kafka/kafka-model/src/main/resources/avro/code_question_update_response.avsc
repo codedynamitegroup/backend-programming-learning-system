@@ -36,11 +36,10 @@
       "type": "string"
     },
     {
-      "name": "inputFormat",
-      "type": "string"
-    },
-    {
-      "name": "outputFormat",
+      "name": "maxGrade",
+      "type": "float"
+    },{
+      "name": "name",
       "type": "string"
     },
     {

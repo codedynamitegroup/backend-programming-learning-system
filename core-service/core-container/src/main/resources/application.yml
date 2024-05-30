@@ -20,6 +20,8 @@ core-service:
   code-question-update-response-from-core-service-topic-name: code-question-update-response-from-core-service
   code-question-update-request-to-core-service-topic-name: code-question-update-request-to-core-service
 
+  code-submission-update-request-to-core-service-topic-name: code-submission-update-request-to-core-service
+
   question-request-topic-name: core-question-request
   question-response-topic-name: core-question-response
 
@@ -97,6 +99,7 @@ kafka-consumer-config:
   core-service-user-request-group-id: core-service-user-request-topic
 
   code-question-update-consumer-group-id: code-question-update-topic-consumer
+  code-submission-update-consumer-group-id: code-submission-update-topic-consumer
 
   core-service-organization-consumer-group-id: core-service-organization-topic-consumer
 

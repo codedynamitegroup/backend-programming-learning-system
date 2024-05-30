@@ -17,7 +17,7 @@ import jakarta.validation.Valid;
 public interface CodeQuestionApplicationService {
     CreateCodeQuestionResponse createCodeQuestion(@Valid CreateCodeQuestionCommand command);
 
-    GetCodeQuestionsResponse getCodeQuestions(@Valid GetCodeQuestionsQuery query);
+    GetCodeQuestionsResponse getPublicCodeQuestions(@Valid GetCodeQuestionsQuery query);
 
     void updateCodeQuestion(@Valid UpdateCodeQuestionCommand command);
 

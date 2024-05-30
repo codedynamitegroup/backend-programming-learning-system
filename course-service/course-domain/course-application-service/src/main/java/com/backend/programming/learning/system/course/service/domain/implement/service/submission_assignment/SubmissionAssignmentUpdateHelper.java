@@ -21,8 +21,8 @@ public class SubmissionAssignmentUpdateHelper {
     @Transactional(readOnly = true)
     public void persistSubmissionAssignment(UpdateSubmissionAssignmentCommand updateSubmissionAssignmentCommand) {
         SubmissionAssignment submissionAssignment = getSubmissionAssignment(updateSubmissionAssignmentCommand.getSubmissionAssignmentId());
-        if (updateSubmissionAssignmentCommand.getPass_status() != null) {
-            submissionAssignment.setPass_status(updateSubmissionAssignmentCommand.getPass_status());
+        if (updateSubmissionAssignmentCommand.getIsGraded() != null) {
+            submissionAssignment.setIsGraded(updateSubmissionAssignmentCommand.getIsGraded());
         }
 
         if (updateSubmissionAssignmentCommand.getGrade() != null) {

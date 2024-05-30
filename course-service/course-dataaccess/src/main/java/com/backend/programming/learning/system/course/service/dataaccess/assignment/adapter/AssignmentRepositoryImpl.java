@@ -54,4 +54,9 @@ public class AssignmentRepositoryImpl implements AssignmentRepository {
 
     }
 
+    @Override
+    public List<Assignment> findAll() {
+        return assignmentDataAccessMapper.assignmentEntityListToAssignmentList(assignmentJpaRepository.findAll());
+    }
+
 }

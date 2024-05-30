@@ -40,6 +40,7 @@ public class ExamEntity {
     private String gradeMethod;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
+    private Integer maxPage;
 
     @Override
     public boolean equals(Object o) {

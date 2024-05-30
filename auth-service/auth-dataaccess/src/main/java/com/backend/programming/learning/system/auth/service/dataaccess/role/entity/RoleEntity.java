@@ -20,19 +20,8 @@ import java.util.UUID;
 public class RoleEntity {
     @Id
     private UUID id;
-
-    @OneToOne
-    @JoinColumn(name = "created_by", referencedColumnName = "id")
-    private UserEntity createdBy;
-
-    @OneToOne
-    @JoinColumn(name = "updated_by", referencedColumnName = "id")
-    private UserEntity updatedBy;
-
     private String description;
     private String name;
-    private ZonedDateTime createdAt;
-    private ZonedDateTime updatedAt;
 
     @Override
     public boolean equals(Object o) {

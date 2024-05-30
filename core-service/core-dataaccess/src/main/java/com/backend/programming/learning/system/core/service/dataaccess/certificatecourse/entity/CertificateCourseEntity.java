@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.core.service.dataaccess.review.en
 import com.backend.programming.learning.system.core.service.dataaccess.topic.entity.TopicEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Formula;
@@ -35,17 +36,17 @@ public class CertificateCourseEntity {
     private ZonedDateTime startTime;
     private ZonedDateTime endTime;
 
-    @Basic(fetch = FetchType.LAZY)
-    @Formula("(select count(*) from certificate_course_user ccu where ccu.certificate_course_id = id)")
-    private Integer numOfStudents;
-
-    @Basic(fetch = FetchType.LAZY)
-    @Formula("(select count(*) from chapter c, chapter_question cq where c.certificate_course_id = id and c.id = cq.chapter_id)")
-    private Integer numOfQuestions;
-
-    @Basic(fetch = FetchType.LAZY)
-    @Formula("(select count(*) from review r where r.certificate_course_id = id)")
-    private Integer numOfReviews;
+//    @Basic(fetch = FetchType.LAZY)
+//    @Formula("(select count(*) from certificate_course_user ccu where ccu.certificate_course_id = id)")
+//    private Integer numOfStudents;
+//
+//    @Basic(fetch = FetchType.LAZY)
+//    @Formula("(select count(*) from chapter c, chapter_question cq where c.certificate_course_id = id and c.id = cq.chapter_id)")
+//    private Integer numOfQuestions;
+//
+//    @Basic(fetch = FetchType.LAZY)
+//    @Formula("(select count(*) from review r where r.certificate_course_id = id)")
+//    private Integer numOfReviews;
 
     @ManyToOne
     @JoinColumn(name = "topic_id", referencedColumnName = "id")

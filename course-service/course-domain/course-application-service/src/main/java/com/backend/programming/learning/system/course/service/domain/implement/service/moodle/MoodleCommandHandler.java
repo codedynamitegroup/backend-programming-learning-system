@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.CourseResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.AssignmentCourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.AssignmentModel;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.AssignmentResourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.assignment.ListAssignmentCourseModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.coure_type.CourseTypeModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.CourseModel;
@@ -13,9 +14,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.module.ModuleModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.section.ListSectionModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.section.SectionModel;
-import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.ListSubmissionAssignmentModel;
-import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionAssignmentModel;
-import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.SubmissionPlugin;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.submission_assignment.*;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user.EnrolledCourse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user.ListUserModel;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user_course.ListUserCourseModel;
@@ -30,6 +29,7 @@ import com.backend.programming.learning.system.course.service.domain.ports.outpu
 import com.backend.programming.learning.system.course.service.domain.valueobject.Type;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -56,6 +56,10 @@ public class MoodleCommandHandler {
     private final SectionRepository sectionRepository;
     private final ModuleRepository moduleRepository;
     private final CourseTypeRepository courseTypeRepository;
+    private final IntroFileRepository introFileRepository;
+    private final IntroAttachmentRepository introAttachmentRepository;
+    private final ActivityAttachmentRepository activityAttachmentRepository;
+    private final SubmissionFileRepository submissionFileRepository;
 
     private final  RoleMoodleRepository roleMoodleRepository;
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -66,6 +70,9 @@ public class MoodleCommandHandler {
     private String GET_QUIZZES = "mod_quiz_get_quizzes_by_courses";
 
     String GET_ASSIGNMENTS = "mod_assign_get_assignments";
+    String GET_ASSIGNMENTS_USER = "mod_assign_get_user_mappings";
+
+    String GET_SUBMISSION_STATUS = "mod_assign_get_submission_status";
     String GET_ENROLLED_USERS = "core_enrol_get_enrolled_users";
     String GET_CONTENTS = "core_course_get_contents";
 
@@ -73,18 +80,20 @@ public class MoodleCommandHandler {
     String GET_CATEGORY = "core_course_get_categories";
     String GET_SUBMISSION_ASSIGNMENTS = "mod_assign_get_submissions";
 
+    String GET_GRADE="mod_assign_get_grades";
+
     String GET_USER_PROFILE = "core_user_get_course_user_profiles";
 
     String GET_USER_COURSES = "core_enrol_get_users_courses";
 
     String GET_MODULE="core_course_get_course_module";
     String GET_USERS = "core_user_get_users";
-    //    String MOODLE_URL = "http://62.171.185.208/webservice/rest/server.php";
-    String MOODLE_URL = "http://localhost/moodle/webservice/rest/server.php";
+    String MOODLE_URL = "http://62.171.185.208/webservice/rest/server.php";
+    //    String MOODLE_URL = "http://localhost/moodle/webservice/rest/server.php";
     String MOODLE_URL_TOKEN = "http://62.171.185.208/login/token.php";
-    //    String TOKEN = "cdf90b5bf53bcae577c60419702dbee7";
+    String TOKEN = "cdf90b5bf53bcae577c60419702dbee7";
 //    String TOKEN = "c22b03ca9c0a3c8431cd6b57bd4c8b04";
-    String TOKEN = "60d437ef3f02dded9a7b097a8a81bf61";
+//    String TOKEN = "60d437ef3f02dded9a7b097a8a81bf61";
 
 
     @Transactional
@@ -93,7 +102,39 @@ public class MoodleCommandHandler {
         createCourseType();
         List<CourseResponseEntity> allCourse = getAllCourse();
         createCourseUser();
+        createCourseExam(allCourse);
+//        updateGradeSubmissionAssignment();
         return "Sync course success";
+    }
+
+    private void createCourseExam(List<CourseResponseEntity> allCourse) {
+        String apiURLQuiz = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s",
+                MOODLE_URL, TOKEN, GET_QUIZZES);
+        String modelQuiz = restTemplate.getForObject(apiURLQuiz, String.class);
+        ListQuizModel listQuizModel = null;
+        try {
+            listQuizModel = objectMapper.readValue(modelQuiz, ListQuizModel.class);
+            log.info("Quiz model: {}", listQuizModel);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        List<Exam> exams = new ArrayList<>();
+        listQuizModel.getQuizzes().forEach(quizModel -> {
+            Optional<Exam> examResult = examRepository.findByName(quizModel.getName());
+            if (examResult.isPresent()) {
+                Exam examUpdate = moodleDataMapper.updateExam(quizModel,
+                        examResult.get(),
+                        courseIdsMap.get(quizModel.getCourse().toString()));
+                Exam res = examRepository.save(examUpdate);
+                exams.add(res);
+            } else {
+                Exam exam = moodleDataMapper.createExam(quizModel,
+                        courseIdsMap.get(quizModel.getCourse().toString()));
+                Exam res = examRepository.save(exam);
+                exams.add(res);
+            }
+        });
     }
 
     @Transactional
@@ -142,19 +183,105 @@ public class MoodleCommandHandler {
                 sectionRepository.save(section);
                 // create module
                 for (ModuleModel module : sectionModel.getModules()) {
-                    Module moduleCreate = moodleDataMapper.createModule(section, module);
-                    moduleRepository.save(moduleCreate);
+                    if(module.getModplural().equals("Assignments")||
+                            module.getModplural().equals("Quizzes")||
+                            module.getModplural().equals("URLs")||
+                            module.getModplural().equals("Files"))
+                    {
+                        Module moduleCreate = moodleDataMapper.createModule(section, module);
+                        moduleRepository.save(moduleCreate);
+                    }
                 }
             });
         }
     }
 
     @Transactional
-    public void createModule(Integer moduleId)
+    public List<SubmissionAssignmentUser> getAssignmentUser(Integer assignmentId) {
+
+        String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&assignmentids[0]=%s",
+                MOODLE_URL, TOKEN, GET_ASSIGNMENTS_USER, assignmentId);
+        RestTemplate restTemplate = new RestTemplate();
+        String model = restTemplate.getForObject(apiURL, String.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        ListSubmissionAssignmentUser listSubmissionAssignmentUser = null;
+        if (model.contains("{\"assignments\":[]"))
+            return new ArrayList<>();
+        try {
+            listSubmissionAssignmentUser = objectMapper.readValue(model, ListSubmissionAssignmentUser.class);
+            log.info("Course model: {}", listSubmissionAssignmentUser);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return listSubmissionAssignmentUser.getAssignments();
+    }
+
+    @Transactional
+    public SubmissionAssignmentStatus getSubmissionStatus(String assignmentId, String userId) {
+        String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&assignid=%s&userid=%s",
+                MOODLE_URL, TOKEN, GET_SUBMISSION_STATUS, assignmentId, userId);
+        RestTemplate restTemplate = new RestTemplate();
+        String model = restTemplate.getForObject(apiURL, String.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        SubmissionAssignmentStatus listSubmissionAssignmentStatus = null;
+        if (model.contains("{\"assignments\":[]}"))
+            return null;
+        try {
+            listSubmissionAssignmentStatus = objectMapper.readValue(model, SubmissionAssignmentStatus.class);
+            log.info("Course model: {}", listSubmissionAssignmentStatus);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return listSubmissionAssignmentStatus;
+    }
+    @Transactional
+    public void createSubmissionAssignmentUser(Assignment assignment)
     {
-        
+            List<SubmissionAssignmentUser> submissionAssignmentUsers = getAssignmentUser(assignment.getAssignmentIdMoodle());
+            if(submissionAssignmentUsers.size()==0)
+                return;
+            submissionAssignmentUsers.get(0).getMappings().forEach(submissionAssignmentUser -> {
+                SubmissionAssignmentStatus submissionAssignmentStatus = getSubmissionStatus(assignment.getAssignmentIdMoodle().toString(),
+                        submissionAssignmentUser.getUserid().toString());
+                Optional<User> user = userRepository.findByUserIdMoodle(submissionAssignmentUser.getUserid());
+                if(submissionAssignmentStatus.getLastattempt()==null)
+                    return;
+                if(submissionAssignmentStatus.getLastattempt().getSubmission().getStatus().equals("submitted"))
+                {
+                    submissionAssignmentStatus.getLastattempt().getSubmission().setGradingstatus(submissionAssignmentStatus.getLastattempt().getGradingstatus());
+                    SubmissionAssignment submissionAssignment =
+                           moodleDataMapper.createSubmissionAssignment(assignment,user.get(),
+                                   submissionAssignmentStatus.getLastattempt(),submissionAssignmentStatus.getFeedback());
+
+                    submissionAssignmentRepository.saveSubmissionAssignment(submissionAssignment);
+
+                    for (SubmissionPlugin plugin : submissionAssignmentStatus.getLastattempt().getSubmission().getPlugins()) {
+                        if (plugin.getType().equals("file")) {
+                            SubmissionAssignmentFile submissionAssignmentFile = moodleDataMapper.
+                                    createSubmissionAssignmentFile(submissionAssignment, plugin);
+                            submissionAssignmentFileRepository.saveSubmissionAssignmentFile(submissionAssignmentFile);
+                            plugin.getFileareas().forEach(fileArea -> {
+                                fileArea.getFiles().forEach(file -> {
+                                    SubmissionFile submissionFile = moodleDataMapper.createSubmissionFile(submissionAssignmentFile, file);
+                                    submissionFileRepository.save(submissionFile);
+                                });
+                            });
+                        } else if (plugin.getType().equals("onlinetext")) {
+                            SubmissionAssignmentOnlineText submissionAssignmentOnlineText = moodleDataMapper.
+                                    createSubmissionAssignmentOnlineText(submissionAssignment, plugin);
+                            submissionAssignmentOnlineTextRepository.saveAssignmentSubmissionOnlineText(submissionAssignmentOnlineText);
+                        }
+                    }
+
+
+                }
+
+
+            });
 
     }
+
 
     public List<SectionModel>  getAllSection(String courseId) {
         String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&courseid=%s",
@@ -214,6 +341,49 @@ public class MoodleCommandHandler {
     }
 
     @Transactional
+    public List<GradeSubmissionAssignment> getGrade(String assignmentId)
+    {
+        String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&assignmentids[0]=%s",
+                MOODLE_URL, TOKEN, GET_GRADE, assignmentId);
+        RestTemplate restTemplate = new RestTemplate();
+        String model = restTemplate.getForObject(apiURL, String.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        GradeSubmissionAssignmentResponse listGradeSubmissionAssignment = null;
+        if (model.contains("{\"assignments\":[]"))
+            return new ArrayList<>();
+        try {
+            listGradeSubmissionAssignment = objectMapper.readValue(model, GradeSubmissionAssignmentResponse.class);
+            log.info("Course model: {}", listGradeSubmissionAssignment);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return listGradeSubmissionAssignment.getAssignments();
+    }
+
+    @Transactional
+    public void updateGradeSubmissionAssignment()
+    {
+        List<Assignment> assignments = assignmentRepository.findAll();
+        assignments.forEach(assignment -> {
+            List<GradeSubmissionAssignment> gradeSubmissionAssignments = getGrade(assignment.getAssignmentIdMoodle().toString());
+            if(gradeSubmissionAssignments.size()==0)
+                return;
+           gradeSubmissionAssignments.get(0).getGrades().forEach(gradeSubmission -> {
+               Optional<User> user = userRepository.findByUserIdMoodle(gradeSubmission.getUserid());
+               UUID assignmentId = assignment.getId().getValue();
+               UUID userId = user.get().getId().getValue();
+               SubmissionAssignment submissionAssignment = submissionAssignmentRepository.findByAssignmentIdAndUserId(assignmentId, userId);
+                if(submissionAssignment!=null)
+                {
+                     submissionAssignment.setGrade(Float.valueOf(gradeSubmission.getGrade()));
+                     submissionAssignmentRepository.update(submissionAssignment);
+                }
+           });
+        });
+
+    }
+
+    @Transactional
     public void createCourseUser() {
 //        List<UserModel> allUser = getAllUser();
 //        for (UserModel userModel : allUser) {
@@ -257,42 +427,55 @@ public class MoodleCommandHandler {
         }
     }
 
-    @Transactional
-    public void createSubmissionAssignment(Assignment assignmentCreate, AssignmentModel assignmentModel) {
-        List<SubmissionAssignmentModel> listSubmissionAssignmentModel = getAllSubmissionAssignment(assignmentModel.getId());
-        listSubmissionAssignmentModel.forEach(submissionAssignmentModel -> {
-            submissionAssignmentModel.getSubmissions().forEach(submissionModel -> {
-                Optional<User> user = userRepository.findUserByEmail("duongchithong2002@gmail.com");
-                if (submissionModel.getStatus().equals("submitted")) {
-                    SubmissionAssignment submissionCreate = moodleDataMapper.createSubmissionAssignment(assignmentCreate, user.get(), submissionModel);
-                    submissionAssignmentRepository.saveSubmissionAssignment(submissionCreate);
-                    SubmissionPlugin submissionPlugin = submissionModel.getPlugins().get(0);
-                    if (assignmentCreate.getType().equals(Type.FILE)) {
-                        SubmissionAssignmentFile submissionAssignmentFile = moodleDataMapper.
-                                createSubmissionAssignmentFile(submissionCreate, submissionPlugin);
-                        submissionAssignmentFileRepository.saveSubmissionAssignmentFile(submissionAssignmentFile);
-                    } else if (assignmentCreate.getType().equals(Type.TEXT_ONLINE)) {
-                        SubmissionAssignmentOnlineText submissionAssignmentOnlineText = moodleDataMapper.
-                                createSubmissionAssignmentOnlineText(submissionCreate, submissionPlugin);
-                        submissionAssignmentOnlineTextRepository.saveAssignmentSubmissionOnlineText(submissionAssignmentOnlineText);
-                    } else {
-                        for (SubmissionPlugin plugin : submissionModel.getPlugins()) {
-                            if (plugin.getType().equals("file")) {
-                                SubmissionAssignmentFile submissionAssignmentFile = moodleDataMapper.
-                                        createSubmissionAssignmentFile(submissionCreate, plugin);
-                                submissionAssignmentFileRepository.saveSubmissionAssignmentFile(submissionAssignmentFile);
-                            } else if (plugin.getType().equals("onlinetext")) {
-                                SubmissionAssignmentOnlineText submissionAssignmentOnlineText = moodleDataMapper.
-                                        createSubmissionAssignmentOnlineText(submissionCreate, plugin);
-                                submissionAssignmentOnlineTextRepository.saveAssignmentSubmissionOnlineText(submissionAssignmentOnlineText);
-                            }
-                        }
-                    }
-
-                }
-            });
-        });
-    }
+//    @Transactional
+//    public void createSubmissionAssignment(Assignment assignmentCreate, AssignmentModel assignmentModel) {
+//        List<SubmissionAssignmentModel> listSubmissionAssignmentModel = getAllSubmissionAssignment(assignmentModel.getId());
+//        listSubmissionAssignmentModel.forEach(submissionAssignmentModel -> {
+//            submissionAssignmentModel.getSubmissions().forEach(submissionModel -> {
+//                Optional<User> user = userRepository.findByUserIdMoodle(Integer.valueOf(submissionModel.getUserid()));
+//                if (submissionModel.getStatus().equals("submitted")) {
+//                    SubmissionAssignment submissionCreate = moodleDataMapper.createSubmissionAssignment(assignmentCreate, user.get(), submissionModel);
+//                    submissionAssignmentRepository.saveSubmissionAssignment(submissionCreate);
+//
+//                    List<SubmissionPlugin> submissionPlugins = submissionModel.getPlugins();
+////                    if (assignmentCreate.getType().equals(Type.FILE)) {
+////                        SubmissionAssignmentFile submissionAssignmentFile = moodleDataMapper.
+////                                createSubmissionAssignmentFile(submissionCreate, submissionPlugin);
+////                        submissionAssignmentFileRepository.saveSubmissionAssignmentFile(submissionAssignmentFile);
+////                        submissionModel.getPlugins().get(0).getFileareas().forEach(fileArea -> {
+////                            fileArea.getFiles().forEach(file -> {
+////                                SubmissionFile submissionFile = moodleDataMapper.createSubmissionFile(submissionAssignmentFile, file);
+////                                submissionFileRepository.save(submissionFile);
+////                            });
+////                        });
+////                    } else if (assignmentCreate.getType().equals(Type.TEXT_ONLINE)) {
+////                        SubmissionAssignmentOnlineText submissionAssignmentOnlineText = moodleDataMapper.
+////                                createSubmissionAssignmentOnlineText(submissionCreate, submissionPlugin);
+////                        submissionAssignmentOnlineTextRepository.saveAssignmentSubmissionOnlineText(submissionAssignmentOnlineText);
+////                    } else {
+//                        for (SubmissionPlugin plugin : submissionModel.getPlugins()) {
+//                            if (plugin.getType().equals("file")) {
+//                                SubmissionAssignmentFile submissionAssignmentFile = moodleDataMapper.
+//                                        createSubmissionAssignmentFile(submissionCreate, plugin);
+//                                submissionAssignmentFileRepository.saveSubmissionAssignmentFile(submissionAssignmentFile);
+//                                plugin.getFileareas().forEach(fileArea -> {
+//                                    fileArea.getFiles().forEach(file -> {
+//                                        SubmissionFile submissionFile = moodleDataMapper.createSubmissionFile(submissionAssignmentFile, file);
+//                                        submissionFileRepository.save(submissionFile);
+//                                    });
+//                                });
+//                            } else if (plugin.getType().equals("onlinetext")) {
+//                                SubmissionAssignmentOnlineText submissionAssignmentOnlineText = moodleDataMapper.
+//                                        createSubmissionAssignmentOnlineText(submissionCreate, plugin);
+//                                submissionAssignmentOnlineTextRepository.saveAssignmentSubmissionOnlineText(submissionAssignmentOnlineText);
+//                            }
+//                        }
+////                    }
+//
+//                }
+//            });
+//        });
+//    }
 
     @Transactional
     public void createAssignment() {
@@ -304,7 +487,27 @@ public class MoodleCommandHandler {
                 assignmentCourseModel.getAssignments().forEach(assignmentModel -> {
                     Assignment assignmentCreate = moodleDataMapper.createAssignment(course, assignmentModel);
                     assignmentRepository.saveAssignment(assignmentCreate);
-                    createSubmissionAssignment(assignmentCreate, assignmentModel);
+//                    createSubmissionAssignment(assignmentCreate, assignmentModel);
+                    createSubmissionAssignmentUser(assignmentCreate);
+                    if(assignmentModel.getIntrofiles()!=null) {
+                        assignmentModel.getIntrofiles().forEach(introFileModel -> {
+                            IntroFile introFile = moodleDataMapper.createIntroFile(assignmentCreate, introFileModel);
+                            introFileRepository.save(introFile);
+                        });
+                    }
+
+                    if(assignmentModel.getIntroattachments()!=null) {
+                        assignmentModel.getIntroattachments().forEach(introAttachmentModel -> {
+                            IntroAttachment introAttachment = moodleDataMapper.createIntroAttachment(assignmentCreate, introAttachmentModel);
+                            introAttachmentRepository.save(introAttachment);
+                        });
+                    }
+                    if(assignmentModel.getActivityattachments()!=null) {
+                        assignmentModel.getActivityattachments().forEach(activityAttachmentModel -> {
+                            ActivityAttachment activityAttachment = moodleDataMapper.createActivityAttachment(assignmentCreate, activityAttachmentModel);
+                            activityAttachmentRepository.save(activityAttachment);
+                        });
+                    }
                 });
             });
         }
@@ -328,9 +531,9 @@ public class MoodleCommandHandler {
             throw new RuntimeException(e);
         }
         List<CourseResponseEntity> result = new ArrayList<>();
-        Optional<User> userResult = userRepository.findUserByEmail("dcthong20@clc.fitus.edu.vn");
+        Optional<User> userResult = userRepository.findUserByEmail("kayonkiu@gmail.com");
         listCourseModel.getCourses().forEach(courseModel -> {
-            if(courseModel.getCategoryid()!=0) {
+            if(courseModel.getCategoryid()!=0&&courseModel.getId()!="1") {
                 Course courseCreate = moodleDataMapper.createCourse(courseModel, userResult.get().getOrganization());
                 courseCreate.setCreatedBy(userResult.get());
                 courseCreate.setUpdatedBy(userResult.get());
@@ -511,18 +714,20 @@ public class MoodleCommandHandler {
         List<Course> result = new ArrayList<>();
         Map<String, Course> courseIdsMap = new HashMap<>();
         listCourseMoodle.forEach(courseModel -> {
-            Optional<Course> courseResult = courseRepository.findByName(courseModel.getFullname());
-            if (courseResult.isPresent()) {
-                Course courseUpdate = moodleDataMapper.updateCourseByCourseMoodle(courseModel, courseResult.get());
-                Course res = courseRepository.save(courseUpdate);
-                result.add(res);
-                courseIdsMap.put(courseModel.getId(), res);
-            } else {
-                Optional<User> userSave = userRepository.findUserByEmail("dcthong852@gmail.com");
-                Course course = moodleDataMapper.createCourseByCourseMoodle(courseModel, userSave.get());
-                Course res = courseRepository.save(course);
-                result.add(res);
-                courseIdsMap.put(courseModel.getId(), res);
+            if(!courseModel.getId().equals(1)){
+                Optional<Course> courseResult = courseRepository.findByName(courseModel.getFullname());
+                if (courseResult.isPresent()) {
+                    Course courseUpdate = moodleDataMapper.updateCourseByCourseMoodle(courseModel, courseResult.get());
+                    Course res = courseRepository.save(courseUpdate);
+                    result.add(res);
+                    courseIdsMap.put(courseModel.getId(), res);
+                } else {
+                    Optional<User> userSave = userRepository.findByEmail("kayonkiu@gmail.com");
+                    Course course = moodleDataMapper.createCourseByCourseMoodle(courseModel, userSave.get());
+                    Course res = courseRepository.save(course);
+                    result.add(res);
+                    courseIdsMap.put(courseModel.getId(), res);
+                }
             }
         });
 

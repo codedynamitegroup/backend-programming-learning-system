@@ -1,7 +1,8 @@
 package com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language_code_question.mapper;
 
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.CodeQuestionEntity;
-import com.backend.programming.learning.system.code.assessment.service.dataaccess.language.entity.ProgrammingLanguageEntity;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language.entity.ProgrammingLanguageEntity;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language.mapper.ProgrammingLanguageDataAccessMapper;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language_code_question.entity.ProgrammingLanguageCodeQuestionEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language_code_question.entity.ProgrammingLanguageCodeQuestionEntityId;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.ProgrammingLanguageCodeQuestion;
@@ -12,6 +13,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ProgrammingLanguageCodeQuestionDataAccessMapper {
+    final ProgrammingLanguageDataAccessMapper programmingLanguageDataAccessMapper;
+
+    public ProgrammingLanguageCodeQuestionDataAccessMapper(ProgrammingLanguageDataAccessMapper programmingLanguageDataAccessMapper) {
+        this.programmingLanguageDataAccessMapper = programmingLanguageDataAccessMapper;
+    }
+
     public ProgrammingLanguageCodeQuestionEntityId idToEntityId(ProgrammingLanguageCodeQuestionId id) {
         return ProgrammingLanguageCodeQuestionEntityId.builder()
                 .programmingLanguage(id.getValue().getProgrammingLanguageId().getValue())
@@ -25,7 +32,11 @@ public class ProgrammingLanguageCodeQuestionDataAccessMapper {
                 .id(this.entityIdToDomainId(entity.getProgrammingLanguage(), entity.getCodeQuestion()))
                 .timeLimit(entity.getTimeLimit())
                 .memoryLimit(entity.getMemoryLimit())
+                .language(programmingLanguageDataAccessMapper.entityToProgramingLanguage(entity.getProgrammingLanguage()))
                 .active(entity.getActive())
+                .headCode(entity.getHeadCode())
+                .bodyCode(entity.getBodyCode())
+                .tailCode(entity.getTailCode())
                 .build();
     }
 
@@ -36,6 +47,9 @@ public class ProgrammingLanguageCodeQuestionDataAccessMapper {
                 .active(obj.getActive())
                 .timeLimit(obj.getTimeLimit())
                 .memoryLimit(obj.getMemoryLimit())
+                .bodyCode(obj.getBodyCode())
+                .headCode(obj.getHeadCode())
+                .tailCode(obj.getTailCode())
                 .build();
     }
 

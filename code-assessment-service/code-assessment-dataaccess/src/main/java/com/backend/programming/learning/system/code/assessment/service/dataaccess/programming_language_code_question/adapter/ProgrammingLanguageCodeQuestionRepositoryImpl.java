@@ -6,8 +6,10 @@ import com.backend.programming.learning.system.code.assessment.service.dataacces
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.ProgrammingLanguageCodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.ProgrammingLanguageCodeQuestionRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.programming_language_code_question.ProgrammingLanguageCodeQuestionId;
+import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -25,5 +27,12 @@ public class ProgrammingLanguageCodeQuestionRepositoryImpl implements Programmin
         Optional<ProgrammingLanguageCodeQuestionEntity> entity
                 = jpaRepository.findById(dataAccessMapper.idToEntityId(id));
         return entity.map(dataAccessMapper::entityToDomainObject);
+    }
+
+    @Override
+    public List<ProgrammingLanguageCodeQuestion> findByCodeQuestionId(CodeQuestionId id) {
+        List<ProgrammingLanguageCodeQuestionEntity> entities =
+                jpaRepository.findByCodeQuestionId(id.getValue());
+        return entities.stream().map(dataAccessMapper::entityToDomainObject).toList();
     }
 }

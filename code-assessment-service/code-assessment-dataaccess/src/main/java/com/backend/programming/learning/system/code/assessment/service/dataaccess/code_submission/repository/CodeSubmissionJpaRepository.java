@@ -1,7 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.repository;
 
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.entity.CodeSubmissionEntity;
-import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -96,7 +95,17 @@ public interface CodeSubmissionJpaRepository extends JpaRepository<CodeSubmissio
             """, nativeQuery = true)
     Integer findYourScoreRank(UUID value);
 
-    Optional<CodeSubmissionEntity> findByUserIdAndCodeQuestionIdAndGrade(UUID value, UUID id, Double grade);
+    Optional<CodeSubmissionEntity> findFirstByUserIdAndCodeQuestionIdAndGrade(UUID value, UUID id, Double grade);
 
-    Optional<CodeSubmissionEntity> findByCodeQuestionIdAndUserId(UUID codeQuestionId, UUID userId);
+    @Query("""
+            select cse from CodeSubmissionEntity cse 
+            where cse.codeQuestion.id = ?1 and cse.user.id = ?2 
+                and cse.createdAt in (select max(cse2.createdAt) as createdAt
+                                      from CodeSubmissionEntity cse2
+                                      where cse2.user.id = ?2 
+                                      and cse2.codeQuestion.id = cse.codeQuestion.id 
+                                      and cse.programmingLanguage.id = cse2.programmingLanguage.id
+                                      group by cse2.programmingLanguage.id)
+            """)
+    List<CodeSubmissionEntity> findLatestSubmissionEachLanguageByCodeQuestionIdAndUserId(UUID codeQuestionId, UUID userId);
 }

@@ -40,6 +40,7 @@ public class TopicDataMapper {
                 .name(createTopicCommand.getName())
                 .description(createTopicCommand.getDescription())
                 .thumbnailUrl(createTopicCommand.getThumbnailUrl())
+                .isSingleProgrammingLanguage(createTopicCommand.getIsSingleProgrammingLanguage())
                 .numOfCertificateCourses(null)
                 .createdBy(User
                         .builder()
@@ -75,6 +76,7 @@ public class TopicDataMapper {
                 .name(topic.getName())
                 .description(topic.getDescription())
                 .thumbnailUrl(topic.getThumbnailUrl())
+                .isSingleProgrammingLanguage(topic.getSingleProgrammingLanguage())
                 .programmingLanguages(programmingLanguages)
                 .numOfCertificateCourses(topic.getNumOfCertificateCourses())
                 .createdBy(createdByResponse)

@@ -28,6 +28,8 @@ public class TopicResponseEntity {
     @NotNull
     private final String thumbnailUrl;
     @NotNull
+    private final Boolean isSingleProgrammingLanguage;
+    @NotNull
     private final List<ProgrammingLanguageResponseEntity> programmingLanguages;
     @NotNull
     private final Integer numOfCertificateCourses;

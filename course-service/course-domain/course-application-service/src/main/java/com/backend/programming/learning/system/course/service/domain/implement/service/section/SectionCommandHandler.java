@@ -7,7 +7,10 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.section.QueryAllSectionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.section.UpdateSectionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.section.UpdateSectionResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.module.ModuleResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.entity.Module;
 import com.backend.programming.learning.system.course.service.domain.entity.Section;
+import com.backend.programming.learning.system.course.service.domain.implement.service.module.ModuleCommandHandler;
 import com.backend.programming.learning.system.course.service.domain.mapper.section.SectionDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SectionRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j

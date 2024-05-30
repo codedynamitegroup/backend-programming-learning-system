@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.core.service.dataaccess.contest.
 
 import com.backend.programming.learning.system.core.service.dataaccess.chapter_question.entity.ChapterQuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.contest.entity.ContestEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.contest.projection.ContestProjection;
 import com.backend.programming.learning.system.core.service.dataaccess.topic.entity.TopicEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
@@ -22,62 +23,188 @@ import java.util.UUID;
 
 @Repository
 public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID> {
-    Optional<ContestEntity> findById(UUID id);
+    @Query(value = """
+    select c.id as id,
+                c.name as name,
+                c.description as description,
+                c.thumbnail_url as thumbnailUrl,
+                c.start_time as startTime,
+                c.end_time as endTime,
+                c.created_by as createdById,
+                c.updated_by as updatedById,
+                c.created_at as createdAt,
+                c.updated_at as updatedAt,
+           (select count(*) from contest_user cu where cu.contest_id = c.id) as numOfParticipants
+    from contest c
+    where c.id = ?1
+""", nativeQuery = true)
+    Optional<ContestProjection> findContestById(UUID id);
 
-    @Query("select c from ContestEntity c where c.startTime >= ?1")
-    Page<ContestEntity> findAllUpcomingContests(ZonedDateTime now, Pageable pageable);
+    @Query(value = """
+    select c.id as id,
+                c.name as name,
+                c.description as description,
+                c.thumbnail_url as thumbnailUrl,
+                c.start_time as startTime,
+                c.end_time as endTime,
+                c.created_by as createdById,
+                c.updated_by as updatedById,
+                c.created_at as createdAt,
+                c.updated_at as updatedAt,
+           (select count(*) from contest_user cu where cu.contest_id = c.id) as numOfParticipants
+           from contest c
+    where c.start_time >= ?1
+    and (cast(?3 as text) IS NULL or
+                c.fts_document @@ (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'') ) ) or
+                c.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) )
+            )
+    order by 
+        ts_rank(c.fts_document, 
+            case
+                when cast(?3 as text) is null then to_tsquery('')
+                else (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'')) )
+            end
+        ) desc,
+        ts_rank(c.fts_document,
+            case
+                when cast(?3 as text) is null then to_tsquery('')
+                else (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,''))))
+            end
+        ) desc,
+        c.start_time desc
+""", nativeQuery = true)
+    Page<ContestProjection> findAllUpcomingContestsContainsSearchName(
+            ZonedDateTime now,  String searchExcludeFinalWord, String searchFinalWord, Pageable pageable);
 
-    @Query("""
-    select c from ContestEntity c
-    where (LENGTH(?1) = 0 OR upper(c.name) like upper(concat('%', ?1, '%')))
-    and c.startTime >= ?2
-    order by c.startTime desc
-""")
-    Page<ContestEntity> findAllUpcomingContestsContainsSearchName(String name, ZonedDateTime now, Pageable pageable);
+    @Query(value = """
+            select c.id as id,
+                c.name as name,
+                c.description as description,
+                c.thumbnail_url as thumbnailUrl,
+                c.start_time as startTime,
+                c.end_time as endTime,
+                c.created_by as createdById,
+                c.updated_by as updatedById,
+                c.created_at as createdAt,
+                c.updated_at as updatedAt,
+                (select count(*) from contest_user cu where cu.contest_id = c.id) as numOfParticipants
+            from contest c
+            where c.start_time <= ?1 and (c.end_time is null or (c.end_time is not null and c.end_time >= ?1))
+            and (cast(?3 as text) IS NULL or
+                c.fts_document @@ (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'') ) ) or
+                c.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) )
+            )
+            order by 
+                ts_rank(c.fts_document, 
+                    case
+                        when cast(?3 as text) is null then to_tsquery('')
+                        else (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'')) )
+                    end
+                ) desc,
+                ts_rank(c.fts_document,
+                    case
+                        when cast(?3 as text) is null then to_tsquery('')
+                        else (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,''))))
+                    end
+                ) desc,
+                c.start_time desc
+            """, nativeQuery = true)
+    Page<ContestProjection> findAllHappeningContestsContainsSearchName(
+            ZonedDateTime now, String searchExcludeFinalWord, String searchFinalWord, Pageable pageable);
 
-    @Query("""
-            select c from ContestEntity c
-            where c.startTime <= ?1 and (c.endTime is null or (c.endTime is not null and c.endTime >= ?1))
-            order by c.startTime desc
-            """)
-    Page<ContestEntity> findAllHappeningContests(ZonedDateTime now, Pageable pageable);
+    @Query(value = """
+            select c.id as id,
+                c.name as name,
+                c.description as description,
+                c.thumbnail_url as thumbnailUrl,
+                c.start_time as startTime,
+                c.end_time as endTime,
+                c.created_by as createdById,
+                c.updated_by as updatedById,
+                c.created_at as createdAt,
+                c.updated_at as updatedAt,
+                (select count(*) from contest_user cu where cu.contest_id = c.id) as numOfParticipants
+            from contest c
+            where c.end_time is not null and c.end_time < ?1
+            and (cast(?3 as text) IS NULL or
+                c.fts_document @@ (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'') ) ) or
+                c.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) )
+            )
+            order by 
+                ts_rank(c.fts_document, 
+                    case
+                        when cast(?3 as text) is null then to_tsquery('')
+                        else (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'')) )
+                    end
+                ) desc,
+                ts_rank(c.fts_document,
+                    case
+                        when cast(?3 as text) is null then to_tsquery('')
+                        else (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,''))))
+                    end
+                ) desc,
+                c.start_time desc
+            """, nativeQuery = true)
+    Page<ContestProjection> findAllEndedContestsContainsSearchName(
+            ZonedDateTime now, String searchExcludeFinalWord, String searchFinalWord, Pageable pageable);
 
-    @Query("""
-            select c from ContestEntity c
-            where c.startTime <= ?1 and (c.endTime is null or (c.endTime is not null and c.endTime >= ?1))
-            and (LENGTH(?2) = 0 OR upper(c.name) like upper(concat('%', ?2, '%')))
-            order by c.startTime desc
-            """)
-    Page<ContestEntity> findAllHappeningContestsContainsSearchName(ZonedDateTime now, String name, Pageable pageable);
+    @Query(value = """
+    select c.id as id,
+                c.name as name,
+                c.description as description,
+                c.thumbnail_url as thumbnailUrl,
+                c.start_time as startTime,
+                c.end_time as endTime,
+                c.created_by as createdById,
+                c.updated_by as updatedById,
+                c.created_at as createdAt,
+                c.updated_at as updatedAt,
+                (select count(*) from contest_user cu where cu.contest_id = c.id) as numOfParticipants
+    from contest c
+    where (cast(?2 as text) IS NULL or
+            c.fts_document @@ (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'') ) ) or
+            c.fts_document @@ (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,'')) ) )
+            )
+    order by 
+        ts_rank(c.fts_document, 
+            case
+                when cast(?2 as text) is null then to_tsquery('')
+                else (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'')) )
+            end
+        ) desc,
+        ts_rank(c.fts_document,
+            case
+                when cast(?2 as text) is null then to_tsquery('')
+                else (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,''))))
+            end
+        ) desc,
+        c.start_time desc
+""", nativeQuery = true)
+    Page<ContestProjection> findAllContainsSearchName(
+            String searchExcludeFinalWord,
+            String searchFinalWord,
+            Pageable pageable);
 
-    @Query("select c from ContestEntity c where c.endTime is not null and c.endTime < ?1")
-    Page<ContestEntity> findAllEndedContests(ZonedDateTime now, Pageable pageable);
-
-    @Query("""
-            select c from ContestEntity c
-            where c.endTime is not null and c.endTime < ?1
-            and (LENGTH(?2) = 0 OR upper(c.name) like upper(concat('%', ?2, '%')))
-            order by c.startTime desc
-            """)
-    Page<ContestEntity> findAllEndedContestsContainsSearchName(ZonedDateTime now, String name, Pageable pageable);
-
-    @Query("""
-    select c from ContestEntity c
-    where (LENGTH(?1) = 0 OR upper(c.name) like upper(concat('%', ?1, '%')))
-    order by c.startTime desc
-""")
-    Page<ContestEntity> findAllContainsSearchName(String name, Pageable pageable);
-
-    @Query("""
-    select c
-    from ContestEntity c
-    left join ContestUserEntity cu on c.id = cu.contest.id
-    where (c.startTime > ?1 OR (c.startTime <= ?1 and (c.endTime is null or (c.endTime is not null and c.endTime >= ?1))))
-    group by c.id
-    order by count(cu.user.id) desc, c.createdAt desc
-    limit 10
-""")
-    List<ContestEntity> findMostPopularContests(ZonedDateTime now);
+    @Query(value = """
+        select c.id as id,
+                c.name as name,
+                c.description as description,
+                c.thumbnail_url as thumbnailUrl,
+                c.start_time as startTime,
+                c.end_time as endTime,
+                c.created_by as createdById,
+                c.updated_by as updatedById,
+                c.created_at as createdAt,
+                c.updated_at as updatedAt,
+                (select count(*) from contest_user cu where cu.contest_id = c.id) as numOfParticipants
+        from contest c
+        left join contest_user cu on c.id = cu.contest_id
+        where c.start_time > ?1
+        group by c.id
+        order by count(cu.user_id) desc, c.created_at desc
+        limit 10
+""", nativeQuery = true)
+    List<ContestProjection> findMostPopularContests(ZonedDateTime now);
 
     @Query("select count(c.id) from ContestEntity c")
     int countAllContests();

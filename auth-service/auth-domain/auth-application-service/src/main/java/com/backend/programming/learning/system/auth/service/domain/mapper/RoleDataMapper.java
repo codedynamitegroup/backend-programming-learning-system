@@ -18,11 +18,6 @@ import java.util.UUID;
 
 @Component
 public class RoleDataMapper {
-    private final UserDataMapper userDataMapper;
-
-    public RoleDataMapper(UserDataMapper userDataMapper) {
-        this.userDataMapper = userDataMapper;
-    }
 
     public Role createRoleCommandToRole(CreateRoleCommand createRoleCommand) {
         return Role.builder()
@@ -40,17 +35,10 @@ public class RoleDataMapper {
     }
 
     public RoleEntityResponse roleToRoleResponse(Role role) {
-        UserEntityResponse createdBy = userDataMapper.userToUserResponse(role.getCreatedBy());
-        UserEntityResponse updatedBy = userDataMapper.userToUserResponse(role.getUpdatedBy());
-
         return RoleEntityResponse.builder()
                 .roleId(role.getId().getValue())
-                .createdBy(createdBy)
-                .updatedBy(updatedBy)
                 .description(role.getDescription())
                 .name(role.getName())
-                .createdAt(role.getCreatedAt())
-                .updatedAt(role.getUpdatedAt())
                 .build();
     }
 

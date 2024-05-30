@@ -18,8 +18,6 @@ public class CreateSubmissionAssignmentCommand {
     @NotNull
     private final UUID assignmentId;
 
-    @NotNull
-    private final Integer pass_status;
 
     @NotNull
     private final Float grade;

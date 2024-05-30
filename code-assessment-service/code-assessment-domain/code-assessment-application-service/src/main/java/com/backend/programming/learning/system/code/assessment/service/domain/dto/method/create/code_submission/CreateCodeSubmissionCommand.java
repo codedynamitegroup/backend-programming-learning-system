@@ -18,9 +18,20 @@ public class CreateCodeSubmissionCommand {
     private UUID userId;
     @NotNull(message = "languageId must not be null")
     private UUID languageId;
-    @NotNull(message = "sourceCode must not be null")
+
+    @NotNull(message = "headCode must not be null")
     @Pattern(regexp = "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
-    message = "sourceCode must be base64 encoded")
-    private String sourceCode;
+    message = "headCode must be base64 encoded")
+    private String headCode;
+
+    @NotNull(message = "bodyCode must not be null")
+    @Pattern(regexp = "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+            message = "bodyCode must be base64 encoded")
+    private String bodyCode;
+
+    @NotNull(message = "tailCode must not be null")
+    @Pattern(regexp = "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+            message = "tailCode must be base64 encoded")
+    private String tailCode;
 
 }

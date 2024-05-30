@@ -110,6 +110,14 @@ public class User extends AggregateRoot<UserId> {
         return new Builder();
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setCreatedAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public static final class Builder {
         private UserId userId;
         private String email;

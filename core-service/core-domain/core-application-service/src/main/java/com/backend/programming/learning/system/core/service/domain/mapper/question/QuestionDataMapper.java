@@ -24,6 +24,7 @@ import java.time.ZoneId;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Component
@@ -41,6 +42,8 @@ public class QuestionDataMapper {
                                                     Organization organization,
                                                     User createdBy,
                                                     User updatedBy) {
+        UUID questionBankCategoryId = Objects.requireNonNullElse(createQuestionCommand.getQuestionBankCategoryId(), null);
+        Boolean isOrgQuestionBank = Objects.requireNonNullElse(createQuestionCommand.getIsOrgQuestionBank(), false);
         return Question.builder()
                 .organization(organization)
                 .name(createQuestionCommand.getName())
@@ -53,6 +56,8 @@ public class QuestionDataMapper {
                 .qtype(QuestionType.valueOf(createQuestionCommand.getQType()))
                 .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .updatedAt(ZonedDateTime.now(ZoneId.of("UTC")))
+                .questionBankCategoryId(questionBankCategoryId)
+                .isOrgQuestionBank(isOrgQuestionBank)
                 .build();
     }
 
@@ -92,7 +97,7 @@ public class QuestionDataMapper {
     public CreateQuestionResponse questionCreatedEventToCreateQuestionResponse(QuestionCreatedEvent questionCreatedEvent, String message) {
         return CreateQuestionResponse.builder()
                 .questionId(questionCreatedEvent.getQuestion().getId().getValue())
-                .qtypeId(questionCreatedEvent.getQtypeID())
+//                .qtypeId(questionCreatedEvent.getQtypeID())
                 .message(message)
                 .build();
     }

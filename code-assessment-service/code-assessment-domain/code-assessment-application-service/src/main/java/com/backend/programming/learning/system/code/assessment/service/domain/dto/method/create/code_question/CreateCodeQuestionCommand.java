@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.ProgrammingLanguageDto;
 import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,8 +28,11 @@ public class CreateCodeQuestionCommand {
     private final String name;
     @NotNull(message = "problemStatement must not be null")
     private final String problemStatement;
+    @NotNull(message = "inputFormat must not be null")
     private final String inputFormat;
+    @NotNull(message = "outputFormat must not be null")
     private final String outputFormat;
+    @NotNull(message = "constraints must not be null")
     private final String constraints;
     @NotNull(message = "maxGrade must not be null")
     private final Float maxGrade;
@@ -36,6 +41,8 @@ public class CreateCodeQuestionCommand {
 
     @Setter
     private Boolean isPublic;
+
+    private final List<@Valid ProgrammingLanguageDto> programmingLanuages;
 
     private final List<UUID> tagIds;
 }

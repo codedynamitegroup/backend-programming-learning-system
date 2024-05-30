@@ -38,9 +38,10 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/core/chapters/{id}").hasAnyRole(ADMIN)
 
                         // Contest
-//                        .requestMatchers(HttpMethod.POST, "/core/contests/create").hasAnyRole(ADMIN)
-//                        .requestMatchers(HttpMethod.PUT, "/core/contests/{id}").hasAnyRole(ADMIN)
-//                        .requestMatchers(HttpMethod.DELETE, "/core/contests/{id}").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.POST, "/core/contests/create").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.POST, "/core/contests/{id}/register").hasAnyRole(ADMIN, USER)
+                        .requestMatchers(HttpMethod.PUT, "/core/contests/{id}").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.DELETE, "/core/contests/{id}").hasAnyRole(ADMIN)
 
                         // Review
                         .requestMatchers(HttpMethod.POST, "/core/reviews/create").hasAnyRole(ADMIN, USER)
@@ -73,8 +74,10 @@ public class WebSecurityConfig {
                             "/**"
                     )
                     .requestMatchers("/v3/api-docs/**", "/configuration/**", "/swagger-ui/**",
-                            "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/api-docs/**");
-
+                            "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/api-docs/**")
+                    .requestMatchers(HttpMethod.POST, "/core/certificate-courses")
+                    .requestMatchers(HttpMethod.GET, "/core/certificate-courses/{id}")
+                    .requestMatchers(HttpMethod.GET, "/core/contests/**");
         };
     }
 

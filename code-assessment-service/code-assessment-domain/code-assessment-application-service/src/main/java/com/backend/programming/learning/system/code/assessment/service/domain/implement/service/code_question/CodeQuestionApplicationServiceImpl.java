@@ -32,8 +32,8 @@ class CodeQuestionApplicationServiceImpl implements CodeQuestionApplicationServi
     }
 
     @Override
-    public GetCodeQuestionsResponse getCodeQuestions(GetCodeQuestionsQuery query) {
-        return codeQuestionCommandHandler.getCodeQuestions(query);
+    public GetCodeQuestionsResponse getPublicCodeQuestions(GetCodeQuestionsQuery query) {
+        return codeQuestionCommandHandler.getPublicCodeQuestions(query);
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.core.service.application.rest.question;
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.question.QuestionDeleteResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QuestionApplicationService;
@@ -43,6 +45,34 @@ public class QuestionController {
         return ResponseEntity.ok(QueryAllQuestionsResponse.builder()
                 .questionResponses(questionResponseEntity)
                 .build());
+    }
+
+    @GetMapping("/category/{categoryId}")
+    @Operation(summary = "Get all questions by category id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllQuestionsResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllQuestionByCategoryIdResponse> getAllQuestionsByCategory(
+            @PathVariable UUID categoryId,
+            @RequestParam(value = "search", defaultValue = "") String search,
+            @RequestParam(value = "pageNo", defaultValue = "0") int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = "10") int pageSize
+            ) {
+        log.info("Getting all questions by category id: {}", categoryId);
+        QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand = QueryAllQuestionByCategoryIdCommand.builder()
+                .pageNo(pageNo)
+                .pageSize(pageSize)
+                .search(search)
+                .build();
+        QueryAllQuestionByCategoryIdResponse questionResponseEntity = questionApplicationService
+                .queryAllQuestionByCategory(categoryId, queryAllQuestionByCategoryIdCommand);
+        log.info("Questions retrieved: {}", questionResponseEntity);
+
+        return ResponseEntity.ok(questionResponseEntity);
     }
 
     @GetMapping("/{id}")

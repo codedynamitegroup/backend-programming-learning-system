@@ -4,14 +4,12 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest.CreateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.DeleteContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.DeleteContestResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryContestCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryMostPopularContestsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.*;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Contest;
+import com.backend.programming.learning.system.core.service.domain.entity.ContestUser;
 import com.backend.programming.learning.system.core.service.domain.mapper.contest.ContestDataMapper;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -101,6 +100,34 @@ public class ContestCommandHandler {
                         queryContestCommand.getEmail());
 
         return contestDataMapper.contestToQueryContestResponse(contest);
+    }
+
+    @Transactional(readOnly = true)
+    public QueryLeaderboardOfContestResponse queryLeaderboardOfContestResponse(
+            QueryLeaderboardOfContestCommand queryLeaderboardOfContestCommand
+    ) {
+        Page<ContestUser> contestUsers = contestQueryHelper
+                .queryLeaderboardOfContest(
+                        queryLeaderboardOfContestCommand.getContestId(),
+                        queryLeaderboardOfContestCommand.getPageNo(),
+                        queryLeaderboardOfContestCommand.getPageSize());
+
+        ContestUser participantRank = contestQueryHelper
+                .queryMyRankOfContest(
+                        queryLeaderboardOfContestCommand.getContestId(),
+                        queryLeaderboardOfContestCommand.getEmail());
+
+        log.info("Returning leaderboard of contest: {}", contestUsers);
+        return QueryLeaderboardOfContestResponse.builder()
+                .participantRank(
+                        participantRank == null
+                                ? null
+                                : contestDataMapper.contestUserToContestUserResponseEntity(participantRank))
+                .contestLeaderboard(contestDataMapper.contestUsersToContestUserResponseEntities(contestUsers.getContent()))
+                .currentPage(contestUsers.getNumber())
+                .totalItems(contestUsers.getTotalElements())
+                .totalPages(contestUsers.getTotalPages())
+                .build();
     }
 
     @Transactional

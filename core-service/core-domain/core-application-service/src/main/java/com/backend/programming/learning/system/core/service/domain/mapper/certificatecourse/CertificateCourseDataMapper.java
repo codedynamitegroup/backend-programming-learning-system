@@ -6,9 +6,11 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.qu
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
+import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.topic.TopicDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
@@ -29,11 +31,14 @@ import java.util.List;
 public class CertificateCourseDataMapper {
     private final TopicDataMapper topicDataMapper;
     private final UserDataMapper userDataMapper;
+    private final QuestionDataMapper questionDataMapper;
 
     public CertificateCourseDataMapper(TopicDataMapper topicDataMapper,
-                                       UserDataMapper userDataMapper) {
+                                       UserDataMapper userDataMapper,
+                                       QuestionDataMapper questionDataMapper) {
         this.topicDataMapper = topicDataMapper;
         this.userDataMapper = userDataMapper;
+        this.questionDataMapper = questionDataMapper;
     }
 
     public CertificateCourse createCertificateCourseCommandToCertificateCourse(
@@ -76,6 +81,9 @@ public class CertificateCourseDataMapper {
                 topicToQueryTopicResponse(certificateCourse.getTopic());
         UserResponseEntity createdByResponse = userDataMapper.userToUserResponseEntity(certificateCourse.getCreatedBy());
         UserResponseEntity updatedByResponse = userDataMapper.userToUserResponseEntity(certificateCourse.getUpdatedBy());
+        QuestionResponseEntity questionResponseEntity = certificateCourse.getCurrentQuestion() == null
+                ? null
+                : questionDataMapper.questionToQuestionResponseEntity(certificateCourse.getCurrentQuestion());
 
         return CertificateCourseResponseEntity.builder()
                 .certificateCourseId(certificateCourse.getId().getValue())
@@ -90,6 +98,7 @@ public class CertificateCourseDataMapper {
                 .numOfQuestions(certificateCourse.getNumOfQuestions())
                 .numOfReviews(certificateCourse.getNumOfReviews())
                 .numOfCompletedQuestions(certificateCourse.getNumOfCompletedQuestions())
+                .currentQuestion(questionResponseEntity)
                 .isRegistered(certificateCourse.getRegistered())
                 .createdBy(createdByResponse)
                 .updatedBy(updatedByResponse)
