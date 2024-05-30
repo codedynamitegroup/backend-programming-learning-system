@@ -15,4 +15,5 @@ public interface QtypeShortanswerQuestionApplicationService {
     QueryQtypeShortanswerQuestionResponse queryQtypeShortanswerQuestionById(UUID qtShortanswerQuestionId);
     List<QueryQtypeShortanswerQuestionResponse> queryAllQtypeShortanswerQuestions();
     UpdateQuestionResponse updateQtypeShortanswerQuestion(@Valid UpdateQtypeShortanswerQuestionCommand updateQtypeShortanswerQuestionCommand);
+    QueryQtypeShortanswerQuestionResponse queryQtypeShortanswerQuestionByQuestionId(UUID questionId);
 }

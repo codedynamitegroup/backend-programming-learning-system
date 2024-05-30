@@ -80,4 +80,8 @@ public class QtypeShortanswerQuestionCommandHandler {
         return questionDataMapper
                 .questionUpdatedEventToUpdateQuestionRespond(questionUpdatedEvent, "Qtype Shortanswer Question updated successfully");
     }
+
+    public QueryQtypeShortanswerQuestionResponse queryQtypeShortanswerQuestionByQuestionId(UUID questionId) {
+        return qtypeShortanswerQuestionQueryHelper.queryQtypeShortanswerQuestionByQuestionId(questionId);
+    }
 }

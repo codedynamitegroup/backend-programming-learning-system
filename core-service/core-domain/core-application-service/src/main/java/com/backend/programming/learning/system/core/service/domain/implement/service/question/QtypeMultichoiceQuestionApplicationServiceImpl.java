@@ -36,6 +36,11 @@ public class QtypeMultichoiceQuestionApplicationServiceImpl implements QtypeMult
     }
 
     @Override
+    public QueryQtypeMultichoiceQuestionResponse queryQtypeMultichoiceQuestionByQuestionId(UUID questionId) {
+        return qtypeMultichoiceQuestionCommandHandler.queryQtypeMultichoiceQuestionByQuestionId(questionId);
+    }
+
+    @Override
     public List<QueryQtypeMultichoiceQuestionResponse> queryAllQtypeMultichoiceQuestion() {
         return qtypeMultichoiceQuestionCommandHandler.queryAllQtypeMultichoiceQuestion();
     }

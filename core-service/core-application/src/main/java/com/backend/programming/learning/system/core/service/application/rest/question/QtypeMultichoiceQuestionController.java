@@ -66,6 +66,15 @@ public class QtypeMultichoiceQuestionController {
         return ResponseEntity.ok(queryQtypeMultichoiceQuestionResponse);
     }
 
+    @GetMapping("/questionId/{questionId}")
+    public ResponseEntity<QueryQtypeMultichoiceQuestionResponse> queryQtypeMultichoiceQuestionByQuestionId(@PathVariable("questionId") UUID questionId) {
+        log.info("Querying multichoice question by question id: {}", questionId);
+        QueryQtypeMultichoiceQuestionResponse queryQtypeMultichoiceQuestionResponse = qtypeMultichoiceQuestionApplicationService
+                .queryQtypeMultichoiceQuestionByQuestionId(questionId);
+        log.info("Question multichoice queried: {}", queryQtypeMultichoiceQuestionResponse);
+
+        return ResponseEntity.ok(queryQtypeMultichoiceQuestionResponse);
+    }
     @GetMapping
     @Operation(summary = "Get all multichoice questions.")
     @ApiResponses(value = {

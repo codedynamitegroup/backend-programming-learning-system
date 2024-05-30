@@ -48,4 +48,21 @@ public class QtypeMultichoiceQuestionQueryHelper {
 
         return qtypeMultichoiceQuestionDataMapper.qtypeMultichoiceQuestionsToQueryQtypeMultichoiceQuestionResponse(qtypeMultichoiceQuestions);
     }
+
+    public QueryQtypeMultichoiceQuestionResponse queryQtypeMultichoiceQuestionByQuestionId(UUID questionId) {
+        Optional<QtypeMultiChoiceQuestion> qtypeMultichoiceQuestion = qtypeMultichoiceQuestionRepository.findQtypeMultipleChoiceQuestionByQuestionId(questionId);
+
+        if (qtypeMultichoiceQuestion.isEmpty()) {
+            log.error("Qtype Multichoice Question not found with id: {}", questionId);
+
+            throw new QtypeMultichoiceQuestionNotFoundException("Qtype Multichoice Question with id " + questionId + " not found");
+        }
+
+        QueryQtypeMultichoiceQuestionResponse queryQtypeMultichoiceQuestionResponse = qtypeMultichoiceQuestionDataMapper
+                .qtypeMultichoiceQuestionToQueryQtypeMultichoiceQuestionResponse(qtypeMultichoiceQuestion.get());
+
+        log.info("Query Qtype Multichoice Question with id: {}", qtypeMultichoiceQuestion.get().getId().getValue());
+
+        return queryQtypeMultichoiceQuestionResponse;
+    }
 }

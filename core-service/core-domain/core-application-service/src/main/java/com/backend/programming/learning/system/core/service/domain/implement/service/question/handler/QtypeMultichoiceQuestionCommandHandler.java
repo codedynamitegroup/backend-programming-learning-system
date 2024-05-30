@@ -82,4 +82,8 @@ public class QtypeMultichoiceQuestionCommandHandler {
         return questionDataMapper.questionUpdatedEventToUpdateQuestionRespond(questionUpdatedEvent,
                 "Qtype Multichoice Question updated successfully");
     }
+
+    public QueryQtypeMultichoiceQuestionResponse queryQtypeMultichoiceQuestionByQuestionId(UUID questionId) {
+        return qtypeMultichoiceQuestionQueryHelper.queryQtypeMultichoiceQuestionByQuestionId(questionId);
+    }
 }

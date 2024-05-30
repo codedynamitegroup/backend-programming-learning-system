@@ -11,7 +11,7 @@ DROP TYPE IF EXISTS difficulty;
 CREATE TYPE difficulty AS ENUM ('EASY', 'MEDIUM', 'HARD');
 
 DROP TYPE IF EXISTS qtype;
-CREATE TYPE qtype AS ENUM ('MULTIPLE_CHOICE', 'SHORT_ANSWER', 'CODE', 'ESSAY');
+CREATE TYPE qtype AS ENUM ('MULTIPLE_CHOICE', 'SHORT_ANSWER', 'CODE', 'ESSAY', 'TRUE_FALSE');
 
 DROP TYPE IF EXISTS plagiarism_detection_report_status;
 CREATE TYPE plagiarism_detection_report_status AS ENUM ('PROCESSING', 'COMPLETED', 'FAILED');

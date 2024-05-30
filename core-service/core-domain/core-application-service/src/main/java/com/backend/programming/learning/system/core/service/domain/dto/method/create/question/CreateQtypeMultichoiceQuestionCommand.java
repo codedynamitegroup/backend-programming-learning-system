@@ -16,7 +16,6 @@ public class CreateQtypeMultichoiceQuestionCommand extends CreateQuestionCommand
     @NotNull(message = "Single is required")
     private final Boolean single;
 
-    @NotNull(message = "Shuffle answers is required")
     private final Boolean shuffleAnswers;
 
     @NotNull(message = "Answer is required")
@@ -27,7 +26,6 @@ public class CreateQtypeMultichoiceQuestionCommand extends CreateQuestionCommand
     @NotNull(message = "Incorrect feedback is required")
     private final String incorrectFeedback;
 
-    @NotNull(message = "Answer numbering is required")
     private final String answerNumbering;
 
     @NotNull(message = "Show number correct is required")
