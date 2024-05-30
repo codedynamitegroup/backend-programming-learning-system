@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.course.service.domain.dto.method
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
+import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import lombok.Builder;
 
 /**
@@ -20,6 +21,7 @@ public record CreateQuestionResponse(
         String questionText,
         String generalFeedback,
         float defaultMark,
+        QuestionType qtype,
         String message
 ) {
 }

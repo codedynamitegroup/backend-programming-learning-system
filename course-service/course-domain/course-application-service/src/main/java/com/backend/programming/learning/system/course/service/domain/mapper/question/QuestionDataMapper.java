@@ -55,6 +55,7 @@ public class QuestionDataMapper {
                 .questionText(question.getQuestionText())
                 .generalFeedback(question.getGeneralFeedback())
                 .defaultMark(question.getDefaultMark())
+                .qtype(question.getQtype())
                 .message(message)
                 .build();
     }
@@ -79,6 +80,7 @@ public class QuestionDataMapper {
                 .questionText(question.getQuestionText())
                 .generalFeedback(question.getGeneralFeedback())
                 .defaultMark(question.getDefaultMark())
+                .qtype(question.getQtype())
                 .createdAt(question.getCreatedAt())
                 .updatedAt(question.getUpdatedAt())
                 .build();
