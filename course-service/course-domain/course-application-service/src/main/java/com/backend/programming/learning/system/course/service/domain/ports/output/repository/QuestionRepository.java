@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.course.service.domain.ports.outp
 import com.backend.programming.learning.system.course.service.domain.entity.Question;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface QuestionRepository {
@@ -19,4 +20,5 @@ public interface QuestionRepository {
     void deleteById(UUID questionId);
 
     Page<Question> findAllByExamId(UUID examId, String search, int pageNo, int pageSize);
+    List<Question> findAllByExamId(UUID examId, String search, Integer pageCurrent);
 }

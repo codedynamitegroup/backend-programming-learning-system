@@ -31,6 +31,7 @@ public record ExamResponseEntity(
         Boolean shuffleAnswers,
         String gradeMethod,
         ZonedDateTime createdAt,
-        ZonedDateTime updatedAt
+        ZonedDateTime updatedAt,
+        Integer maxPage
 ) {
 }

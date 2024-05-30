@@ -3,6 +3,9 @@ package com.backend.programming.learning.system.course.service.domain.ports.inpu
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.CreateExamQuestionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.CreateExamQuestionResponse;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_question.QueryAllQuestionByExamIdCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_question.QueryAllQuestionByExamIdResponse;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import jakarta.validation.Valid;
 
 /**
@@ -17,4 +20,8 @@ public interface ExamQuestionApplicationService {
 
     CreateExamQuestionResponse unAssignExamToQuestions(
             @Valid CreateExamQuestionCommand createExamQuestionCommand);
+
+    QueryAllQuestionByExamIdResponse findAllQuestionByExamId(
+            ExamId examId,
+            @Valid QueryAllQuestionByExamIdCommand queryAllQuestionByExamIdCommand);
 }

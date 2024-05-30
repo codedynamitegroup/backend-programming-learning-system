@@ -9,9 +9,9 @@ import lombok.Getter;
 @Getter
 @Builder
 @AllArgsConstructor
-public class RefreshTokenUserCommand {
+public class RefreshTokenUserEmailCommand {
     @NotNull
-    private final String accessToken;
+    private final String email;
 
     @NotNull
     private final String refreshToken;

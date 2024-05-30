@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.auth.service.domain.implement.se
 import com.backend.programming.learning.system.auth.service.config.KeycloakConfigData;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.ResponseLoginAndRefreshUser;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserEmailCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
@@ -16,6 +17,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Slf4j
@@ -29,8 +31,17 @@ public class UserRefreshTokenHelper {
         this.userRepository = userRepository;
     }
 
-    public RefreshTokenUserResponse refreshTokenUser(RefreshTokenUserCommand refreshTokenUserCommand) {
+    public RefreshTokenUserResponse refreshTokenUser(RefreshTokenUserEmailCommand refreshTokenUserCommand) {
         User user = findUserByEmail(refreshTokenUserCommand.getEmail());
+        if (Objects.isNull(user.getRefreshToken())) {
+            log.error("User has logged out or does not have refresh token");
+            throw new AuthDomainException("User has logged out or does not have refresh token");
+        }
+        if (!user.getRefreshToken().equals(refreshTokenUserCommand.getRefreshToken())) {
+            log.error("Refresh token is not matching with the user's refresh token");
+            throw new AuthDomainException("Refresh token is not matching with the user's refresh token");
+        }
+
         WebClient client = WebClient.create(keycloakConfigData.getUrls());
 
         ResponseLoginAndRefreshUser result = client.post()
@@ -51,6 +62,7 @@ public class UserRefreshTokenHelper {
 
         return RefreshTokenUserResponse.builder()
                 .accessToken(result.getAccess_token())
+                .refreshToken(result.getRefresh_token())
                 .build();
     }
 
@@ -64,7 +76,7 @@ public class UserRefreshTokenHelper {
         return formData;
     }
 
-    public User findUserByEmail(String email) {
+    private User findUserByEmail(String email) {
         Optional<User> userResult =
                 userRepository.findByEmail(email);
         if (userResult.isEmpty()) {

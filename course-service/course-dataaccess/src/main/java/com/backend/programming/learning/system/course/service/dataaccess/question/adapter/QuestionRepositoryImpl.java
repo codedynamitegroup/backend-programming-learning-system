@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.dataaccess.question.adapter;
 
+import com.backend.programming.learning.system.course.service.dataaccess.question.entity.QuestionEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.question.mapper.QuestionDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.question.repository.QuestionJpaRepository;
 import com.backend.programming.learning.system.course.service.domain.entity.Question;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -28,7 +30,7 @@ public class QuestionRepositoryImpl implements QuestionRepository {
 
     @Override
     public Page<Question> findAll(UUID questionBankCategoryId, String search, Integer page, Integer size) {
-        if(Objects.isNull(questionBankCategoryId)) {
+        if (Objects.isNull(questionBankCategoryId)) {
             return questionJpaRepository.findAll(search, PageRequest.of(page, size))
                     .map(questionDataAccessMapper::questionEntityToQuestion);
         }
@@ -53,5 +55,15 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     public Page<Question> findAllByExamId(UUID examId, String search, int pageNo, int pageSize) {
         return questionJpaRepository.findAllByExamId(examId, search, PageRequest.of(pageNo, pageSize))
                 .map(questionDataAccessMapper::questionEntityToQuestion);
+    }
+
+    @Override
+    public List<Question> findAllByExamId(
+            UUID examId,
+            String search,
+            Integer pageCurrent) {
+        List<QuestionEntity> questionEntities = questionJpaRepository.findAllByExamId(
+                examId, search, pageCurrent);
+        return questionDataAccessMapper.questionEntitiesToQuestions(questionEntities);
     }
 }

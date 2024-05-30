@@ -29,7 +29,7 @@ public class Exam extends AggregateRoot<ExamId> {
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
-
+    private Integer maxPage;
 
     private Exam(Builder builder) {
         super.setId(builder.examId);;
@@ -48,6 +48,7 @@ public class Exam extends AggregateRoot<ExamId> {
         gradeMethod = builder.gradeMethod;
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
+        maxPage = builder.maxPage;
     }
 
     public static Builder builder() {
@@ -111,6 +112,14 @@ public class Exam extends AggregateRoot<ExamId> {
 
     public ZonedDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public Integer getMaxPage() {
+        return maxPage;
+    }
+
+    public void setMaxPage(Integer maxPage) {
+        this.maxPage = maxPage;
     }
 
     public void initializeExam(Course course, ExamId examId) {
@@ -201,6 +210,7 @@ public class Exam extends AggregateRoot<ExamId> {
         private String gradeMethod;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
+        private Integer maxPage;
 
         private Builder() {
         }
@@ -283,6 +293,11 @@ public class Exam extends AggregateRoot<ExamId> {
 
         public Builder updatedAt(ZonedDateTime val) {
             updatedAt = val;
+            return this;
+        }
+
+        public Builder maxPage(Integer val) {
+            maxPage = val;
             return this;
         }
 

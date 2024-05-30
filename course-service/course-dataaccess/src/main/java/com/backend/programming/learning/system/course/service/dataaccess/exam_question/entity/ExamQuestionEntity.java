@@ -29,6 +29,9 @@ public class ExamQuestionEntity {
     @JoinColumn(name = "question_id", referencedColumnName = "id")
     private QuestionEntity question;
 
+    @Column(name = "page")
+    private Integer page;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

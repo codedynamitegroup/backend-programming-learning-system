@@ -7,8 +7,11 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.de
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.SocialLoginUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.logout.LogoutUserEmailCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.logout.LogoutUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.*;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserEmailCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
@@ -26,5 +29,6 @@ public interface UserApplicationService {
     DeleteUserResponse deleteUserById(@Valid DeleteUserCommand deleteUserCommand);
     LoginUserResponse loginUser(@Valid LoginUserCommand loginUserCommand);
     LoginUserResponse socialLoginUser(@Valid SocialLoginUserCommand socialLoginUserCommand);
-    RefreshTokenUserResponse refreshTokenUser(@Valid RefreshTokenUserCommand refreshTokenUserCommand);
+    RefreshTokenUserResponse refreshTokenUser(@Valid RefreshTokenUserEmailCommand refreshTokenUserEmailCommand);
+    LogoutUserResponse logoutUser(@Valid LogoutUserEmailCommand logoutUserEmailCommand);
 }

@@ -2,6 +2,9 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.CreateExamQuestionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.CreateExamQuestionResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_question.QueryAllQuestionByExamIdCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_question.QueryAllQuestionByExamIdResponse;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -31,5 +34,11 @@ public class ExamQuestionCommandHandler {
         log.info("Un-assign exam to question");
         examQuestionDeleteHelper.unAssignExamToQuestions(createExamQuestionCommand);
         return CreateExamQuestionResponse.builder().message("Exam un-assigned to question").build();
+    }
+
+    public QueryAllQuestionByExamIdResponse findAllQuestionByExamId(
+            ExamId examId, QueryAllQuestionByExamIdCommand queryAllQuestionByExamIdCommand) {
+        log.info("Get all question by exam id");
+        return examQuestionCreateHelper.findAllQuestionByExamId(examId, queryAllQuestionByExamIdCommand);
     }
 }

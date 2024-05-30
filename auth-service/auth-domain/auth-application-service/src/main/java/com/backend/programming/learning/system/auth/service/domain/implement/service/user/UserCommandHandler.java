@@ -7,8 +7,11 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.de
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.SocialLoginUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.logout.LogoutUserEmailCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.logout.LogoutUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.*;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserEmailCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
@@ -45,6 +48,7 @@ public class UserCommandHandler {
     private final UserLoginHelper userLoginHelper;
     private final UserRefreshTokenHelper userRefreshTokenHelper;
     private final UserSocialLoginHelper userSocialLoginHelper;
+    private final UserLogoutHelper userLogoutHelper;
 
     @Transactional
     public CreateUserResponse createUser(CreateUserCommand createOrderCommand) {
@@ -183,12 +187,16 @@ public class UserCommandHandler {
     }
 
     @Transactional
-    public RefreshTokenUserResponse refreshTokenUser(RefreshTokenUserCommand refreshTokenUserCommand) {
+    public RefreshTokenUserResponse refreshTokenUser(RefreshTokenUserEmailCommand refreshTokenUserCommand) {
         return userRefreshTokenHelper.refreshTokenUser(refreshTokenUserCommand);
     }
 
     @Transactional
     public LoginUserResponse socialLoginUser(SocialLoginUserCommand socialLoginUserCommand) {
         return userSocialLoginHelper.socialLoginUser(socialLoginUserCommand);
+    }
+
+    public LogoutUserResponse logoutUser(LogoutUserEmailCommand logoutUserEmailCommand) {
+        return userLogoutHelper.logoutUser(logoutUserEmailCommand);
     }
 }
