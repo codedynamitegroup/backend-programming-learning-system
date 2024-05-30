@@ -32,8 +32,8 @@ public class CodeQuestionsUpdateResponseKafkaListener
     }
 
     @Override
-    @KafkaListener(id = "${kafka-consumer-config.create-code-question-consumer-group-id}",
-    topics = "${code-assessment-service.code-question-update-response-from-core-service-topic-name}")
+//    @KafkaListener(id = "${kafka-consumer-config.create-code-question-consumer-group-id}",
+//    topics = "${code-assessment-service.code-question-update-response-from-core-service-topic-name}")
     public void receive(@Payload List<CodeQuestionUpdateResponseAvroModel> messages,
                         @Header(KafkaHeaders.RECEIVED_KEY) List<String> keys,
                         @Header(KafkaHeaders.RECEIVED_PARTITION) List<Integer> partitions,
