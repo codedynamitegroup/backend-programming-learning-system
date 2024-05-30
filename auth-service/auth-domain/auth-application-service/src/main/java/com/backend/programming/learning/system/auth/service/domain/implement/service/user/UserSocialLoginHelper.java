@@ -65,6 +65,7 @@ public class UserSocialLoginHelper {
 
                 return LoginUserResponse.builder()
                         .accessToken(keycloakLoggedResult.getAccess_token())
+                        .refreshToken(keycloakLoggedResult.getRefresh_token())
                         .build();
             }
 
@@ -83,6 +84,7 @@ public class UserSocialLoginHelper {
 
                 return LoginUserResponse.builder()
                         .accessToken(keycloakLoggedResult.getAccess_token())
+                        .refreshToken(keycloakLoggedResult.getRefresh_token())
                         .build();
             } else {
                 ResponseLoginAndRefreshUser keycloakLoggedResult = keycloakLogged(socialLoginUserCommand);
@@ -91,6 +93,7 @@ public class UserSocialLoginHelper {
                 userRepository.save(userFound);
                 return LoginUserResponse.builder()
                         .accessToken(keycloakLoggedResult.getAccess_token())
+                        .refreshToken(keycloakLoggedResult.getRefresh_token())
                         .build();
             }
         } else if (socialLoginUserCommand.getProvider().equals("microsoft")) {
@@ -120,6 +123,7 @@ public class UserSocialLoginHelper {
 
                 return LoginUserResponse.builder()
                         .accessToken(keycloakLoggedResult.getAccess_token())
+                        .refreshToken(keycloakLoggedResult.getRefresh_token())
                         .build();
             }
 
@@ -138,6 +142,7 @@ public class UserSocialLoginHelper {
 
                 return LoginUserResponse.builder()
                         .accessToken(keycloakLoggedResult.getAccess_token())
+                        .refreshToken(keycloakLoggedResult.getRefresh_token())
                         .build();
             } else {
                 ResponseLoginAndRefreshUser keycloakLoggedResult = keycloakLogged(socialLoginUserCommand);
@@ -146,6 +151,7 @@ public class UserSocialLoginHelper {
                 userRepository.save(userFound);
                 return LoginUserResponse.builder()
                         .accessToken(keycloakLoggedResult.getAccess_token())
+                        .refreshToken(keycloakLoggedResult.getRefresh_token())
                         .build();
             }
         } else {

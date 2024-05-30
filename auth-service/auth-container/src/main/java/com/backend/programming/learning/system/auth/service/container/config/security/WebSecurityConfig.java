@@ -57,11 +57,6 @@ public class WebSecurityConfig {
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> {
             web.ignoring().requestMatchers(
-                    HttpMethod.POST,
-                    "/auth/users/login",
-                    "/auth/users/social_login"
-            );
-            web.ignoring().requestMatchers(
                             HttpMethod.OPTIONS,
                             "/**"
                     )
