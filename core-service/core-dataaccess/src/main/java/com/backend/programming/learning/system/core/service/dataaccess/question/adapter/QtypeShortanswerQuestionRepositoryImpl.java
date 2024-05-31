@@ -67,4 +67,10 @@ public class QtypeShortanswerQuestionRepositoryImpl implements QtypeShortanswerQ
         qtypeShortAnswerQuestionJpaRepository.save(qtypeShortanswerQuestionDataAccessMapper
                 .setQtypeShortAnswerQuestionEntity(qtypeShortAnswerQuestionEntity.get(), qtypeShortAnswerQuestion));
     }
+
+    @Override
+    public Optional<QtypeShortAnswerQuestion> findByQuestion(UUID questionId) {
+        return qtypeShortAnswerQuestionJpaRepository.findByQuestionId(questionId)
+                .map(qtypeShortanswerQuestionDataAccessMapper::qtypeShortanswerQuestionEntityToQtypeShortanswerQuestion);
+    }
 }
