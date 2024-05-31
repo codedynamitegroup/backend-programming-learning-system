@@ -50,4 +50,21 @@ public class QtypeShortanswerQuestionQueryHelper {
         return qtypeShortanswerQuestionDataMapper
                 .qtypeShortanswerQuestionsListToQueryQtypeShortanswerQuestionResponseList(qtypeShortanswerQuestions);
     }
+
+    public QueryQtypeShortanswerQuestionResponse queryQtypeShortanswerQuestionByQuestionId(UUID questionId) {
+        Optional<QtypeShortAnswerQuestion> qtypeShortanswerQuestion = qtypeShortanswerQuestionRepository.findQtypeShortAnswerQuestionByQuestionId(questionId);
+
+        if (qtypeShortanswerQuestion.isEmpty()) {
+            log.error("Qtype Shortanswer Question not found with question id: {}", questionId);
+
+            throw new QtypeShortanswerQuestionNotFoundException("Qtype Shortanswer Question with question id " + questionId + " not found");
+        }
+
+        QueryQtypeShortanswerQuestionResponse queryQtypeShortanswerQuestionResponse = qtypeShortanswerQuestionDataMapper
+                .qtypeShortanswerQuestionToQueryQtypeShortanswerQuestionResponse(qtypeShortanswerQuestion.get());
+
+        log.info("Query Qtype Shortanswer Question with question id: {}", qtypeShortanswerQuestion.get().getId().getValue());
+
+        return queryQtypeShortanswerQuestionResponse;
+    }
 }

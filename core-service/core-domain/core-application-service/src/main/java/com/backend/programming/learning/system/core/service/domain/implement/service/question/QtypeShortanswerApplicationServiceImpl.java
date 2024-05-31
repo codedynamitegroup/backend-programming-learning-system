@@ -44,4 +44,9 @@ public class QtypeShortanswerApplicationServiceImpl implements QtypeShortanswerQ
     public UpdateQuestionResponse updateQtypeShortanswerQuestion(UpdateQtypeShortanswerQuestionCommand updateQtypeShortanswerQuestionCommand) {
         return qtypeShortanswerQuestionCommandHandler.updateQtypeShortanswerQuestion(updateQtypeShortanswerQuestionCommand);
     }
+
+    @Override
+    public QueryQtypeShortanswerQuestionResponse queryQtypeShortanswerQuestionByQuestionId(UUID questionId) {
+        return qtypeShortanswerQuestionCommandHandler.queryQtypeShortanswerQuestionByQuestionId(questionId);
+    }
 }

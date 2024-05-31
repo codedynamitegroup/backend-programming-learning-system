@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * com.backend.programming.learning.system.implement.course_user
@@ -66,5 +67,10 @@ public class CourseUserCommandHandler {
                 queryAllCourseUserCommand.getPageNo(),
                 queryAllCourseUserCommand.getPageSize());
         return courseUserDataMapper.courseUsersToQueryAllCourseUserResponse(courseUsers);
+    }
+
+    @Transactional(readOnly = true)
+    public Integer countStudentByCourseId(UUID courseUserId) {
+        return courseUserQueryHelper.countStudentByCourseId(courseUserId);
     }
 }

@@ -81,6 +81,8 @@ public class QuestionDataMapper {
 
     public List<AnswerOfQuestion> answerOfQuestionListToAnswerOfQuestionEntityList(List<com.backend.programming.learning.system.core.service.domain.dto.method.create.question.AnswerOfQuestion> answerOfQuestions
             , QuestionId questionId) {
+        if (answerOfQuestions == null) return null;
+
         return List.of(answerOfQuestions.stream()
                 .map(answerOfQuestion -> AnswerOfQuestion.builder()
                         .questionId(questionId)
@@ -268,6 +270,8 @@ public class QuestionDataMapper {
     }
 
     private List<QuestionEventAnswer> answerOfQuestionListToQuestionEventAnswerList(List<AnswerOfQuestion> answerOfQuestions) {
+        if (answerOfQuestions == null) return null;
+
         return List.of(answerOfQuestions.stream()
                 .map(this::answerOfQuestionToQuestionEventAnswer)
                 .toArray(QuestionEventAnswer[]::new));
@@ -339,7 +343,7 @@ public class QuestionDataMapper {
             case ESSAY:
                 qtypeEssayQuestion = qtypeEssayQuestionToQuestionEventQtypeEssay(questionDeletedEvent.getQtypeEssayQuestion());
                 break;
-            case MULTIPLE_CHOICE:
+            case MULTIPLE_CHOICE, TRUE_FALSE:
                 qtypeMultichoiceQuestion = qtypeMultichoiceQuestionToQuestionEventQtypeMultichoice(questionDeletedEvent.getQtypeMultiChoiceQuestion());
                 break;
         }
@@ -383,7 +387,7 @@ public class QuestionDataMapper {
             case ESSAY:
                 qtypeEssayQuestion = qtypeEssayQuestionToQuestionEventQtypeEssay(questionUpdatedEvent.getQtypeEssayQuestion());
                 break;
-            case MULTIPLE_CHOICE:
+            case MULTIPLE_CHOICE, TRUE_FALSE:
                 qtypeMultichoiceQuestion = qtypeMultichoiceQuestionToQuestionEventQtypeMultichoice(questionUpdatedEvent.getQtypeMultiChoiceQuestion());
                 break;
         }

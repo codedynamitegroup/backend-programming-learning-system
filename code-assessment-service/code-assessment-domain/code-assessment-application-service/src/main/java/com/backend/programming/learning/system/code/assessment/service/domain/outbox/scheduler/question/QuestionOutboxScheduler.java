@@ -2,11 +2,10 @@ package com.backend.programming.learning.system.code.assessment.service.domain.o
 
 
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.question.QuestionOutboxMessage;
-import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.message.publisher.QuestionResponseMessagePublisher;
+import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.message.publisher.question.QuestionResponseMessagePublisher;
 import com.backend.programming.learning.system.outbox.OutboxScheduler;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,8 +27,8 @@ public class QuestionOutboxScheduler implements OutboxScheduler {
 
     @Override
     @Transactional
-    @Scheduled(fixedDelayString = "${code-assessment-service.outbox-scheduler-fixed-rate}",
-            initialDelayString = "${code-assessment-service.outbox-scheduler-initial-delay}")
+//    @Scheduled(fixedDelayString = "${code-assessment-service.outbox-scheduler-fixed-rate}",
+//            initialDelayString = "${code-assessment-service.outbox-scheduler-initial-delay}")
     public void processOutboxMessage() {
         Optional<List<QuestionOutboxMessage>> questionOutboxMessages = questionOutboxHelper
                 .getQuestionOutboxMessagesByOutboxStatus(OutboxStatus.STARTED);

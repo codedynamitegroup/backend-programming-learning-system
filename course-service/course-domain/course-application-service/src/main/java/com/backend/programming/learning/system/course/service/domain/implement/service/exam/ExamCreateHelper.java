@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 
 import com.backend.programming.learning.system.course.service.domain.CourseDomainService;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam.CreateExamCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam.CreateQuestionExamCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam.ExamDataMapper;
@@ -32,7 +33,13 @@ public class ExamCreateHelper {
     @Transactional
     public Exam persistExam(CreateExamCommand createExamCommand) {
         Course course = getCourse(createExamCommand.courseId());
-        Exam exam = examDataMapper.createExamCommandToExam(course, createExamCommand);
+
+        Integer maxPage = createExamCommand.questionIds().stream()
+                .mapToInt(CreateQuestionExamCommand::page)
+                .max()
+                .orElse(0);
+
+        Exam exam = examDataMapper.createExamCommandToExam(course, createExamCommand, maxPage);
         courseDomainService.createExam(exam);
         return saveExam(exam);
     }

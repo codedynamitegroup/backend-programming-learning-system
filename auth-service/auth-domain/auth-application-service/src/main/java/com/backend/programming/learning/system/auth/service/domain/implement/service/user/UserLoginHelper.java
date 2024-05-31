@@ -54,6 +54,7 @@ public class UserLoginHelper {
 
         return LoginUserResponse.builder()
                 .accessToken(result.getAccess_token())
+                .refreshToken(result.getRefresh_token())
                 .build();
     }
 

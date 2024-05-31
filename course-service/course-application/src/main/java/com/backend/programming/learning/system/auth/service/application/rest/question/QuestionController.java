@@ -2,7 +2,6 @@ package com.backend.programming.learning.system.auth.service.application.rest.qu
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question.CreateQuestionCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_bank_category.CreateQuestionBankCategoryResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.question.DeleteQuestionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QueryAllQuestionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QueryAllQuestionExamCommand;

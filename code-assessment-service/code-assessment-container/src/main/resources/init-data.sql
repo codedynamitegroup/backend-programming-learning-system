@@ -88,6 +88,20 @@ INSERT INTO tag(id, name, tag_type)
 VALUES
     ('4d5d31cc-6386-4ef5-903d-625e64b122d7','Array', 'ALGORITHM'),
     ('cd55e806-5d20-4813-b2ce-f8a235fc9151','Math', 'ALGORITHM'),
+    ('98e3f555-aa71-413d-a5bd-5dd6599ababb','Hash Table', 'ALGORITHM'),
+    ('dc7551c6-9183-4909-ae0a-dcfaae838883','Two Pointer', 'ALGORITHM'),
+    ('a5539d34-fda8-4eb2-8e53-a441931da88d','Sorting', 'ALGORITHM'),
+    ('0445b8ba-a466-4419-b737-5a2a3ce08ddf','Binary Tree', 'ALGORITHM'),
+    ('dc3bd976-e836-411d-be01-2349ef551f5b','Binary Search', 'ALGORITHM'),
+    ('b930cc0d-a9fc-4a60-894b-62ef391ad51f','Greedy', 'ALGORITHM'),
+    ('c11c568a-0aff-465c-a7f2-cf4a587b76cd','Counting', 'ALGORITHM'),
+    ('d3379a08-30b0-4835-b4b2-468296fd3d07','Linked List', 'ALGORITHM'),
+    ('f51c408d-2232-484d-833e-1c59733107a7','Dynamic Programming', 'ALGORITHM'),
+    ('28762fc4-b0c4-47f8-aa7d-6ce02ccb5a47','Recursion', 'ALGORITHM'),
+    ('8cbb60b7-39d0-462f-8498-b9b3ec80b5c3','Stack', 'ALGORITHM'),
+    ('9d752cc0-75b3-4dce-b92e-21375e2d61c5','String', 'ALGORITHM'),
+    ('d4070634-15e1-4b20-8142-ac2b0d7d3b20','Matrix', 'ALGORITHM'),
+    ('4276d92b-8752-476f-b127-cf1135772249','Iterator', 'ALGORITHM'),
     ('5d49c893-5ab8-4b82-aea5-70ab95bdf89c', 'Java', 'OTHER');
 
 insert into shared_solution (id, code_question_id, user_id, title, content) values ('675b7db4-228a-4b75-8eac-aa4336241b63', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 'b029f559-52a8-4699-b595-71161498ed8c', 'Devil Commands, The', 'transition revolutionary platforms');

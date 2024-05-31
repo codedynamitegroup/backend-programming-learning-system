@@ -13,6 +13,7 @@ import java.util.UUID;
 public interface QtypeMultichoiceQuestionApplicationService {
     CreateQuestionResponse createQtypeMultichoiceQuestion(@Valid CreateQtypeMultichoiceQuestionCommand createQtypeMultichoiceQuestionCommand);
     QueryQtypeMultichoiceQuestionResponse queryQtypeMultichoiceQuestionById(UUID qtMultichoiceQuestionId);
+    QueryQtypeMultichoiceQuestionResponse queryQtypeMultichoiceQuestionByQuestionId(UUID qtMultichoiceQuestionId);
     List<QueryQtypeMultichoiceQuestionResponse> queryAllQtypeMultichoiceQuestion();
     UpdateQuestionResponse updateQtypeMultichoiceQuestion(@Valid UpdateQtypeMultichoiceQuestionCommand updateQtypeMultichoiceQuestionCommand);
 }

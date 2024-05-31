@@ -2,7 +2,10 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.CreateExamQuestionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.CreateExamQuestionResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_question.QueryAllQuestionByExamIdCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_question.QueryAllQuestionByExamIdResponse;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.exam_question.ExamQuestionApplicationService;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -28,5 +31,11 @@ public class ExamQuestionApplicationServiceImpl implements ExamQuestionApplicati
     @Override
     public CreateExamQuestionResponse unAssignExamToQuestions(CreateExamQuestionCommand createExamQuestionCommand) {
         return examQuestionCommandHandler.unAssignExamToQuestions(createExamQuestionCommand);
+    }
+
+    @Override
+    public QueryAllQuestionByExamIdResponse findAllQuestionByExamId(
+            ExamId examId, QueryAllQuestionByExamIdCommand queryAllQuestionByExamIdCommand) {
+        return examQuestionCommandHandler.findAllQuestionByExamId(examId, queryAllQuestionByExamIdCommand);
     }
 }

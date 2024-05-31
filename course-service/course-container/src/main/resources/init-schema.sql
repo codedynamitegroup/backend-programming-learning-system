@@ -12,7 +12,7 @@ DROP TYPE IF EXISTS difficulty;
 CREATE TYPE difficulty AS ENUM ('EASY', 'MEDIUM', 'HARD');
 
 DROP TYPE IF EXISTS qtype;
-CREATE TYPE qtype AS ENUM ('MULTIPLE_CHOICE', 'SHORT_ANSWER', 'CODE', 'ESSAY');
+CREATE TYPE qtype AS ENUM ('MULTIPLE_CHOICE', 'SHORT_ANSWER', 'CODE', 'ESSAY', 'TRUE_FALSE');
 
 DROP TYPE IF EXISTS grade_method;
 CREATE TYPE grade_method AS ENUM ('QUIZ_GRADEHIGHEST', 'QUIZ_GRADEAVERAGE', 'QUIZ_ATTEMPTFIRST', 'QUIZ_ATTEMPTLAST');
@@ -320,6 +320,7 @@ CREATE TABLE "public".exam
     max_attempts       bigint           NOT NULL DEFAULT '0',
     shuffle_answers    boolean          NOT NULL DEFAULT '0',
     grade_method       grade_method     NOT NULL DEFAULT 'QUIZ_GRADEHIGHEST',
+    "max_page"                  integer,
     created_at         TIMESTAMP WITH TIME ZONE  DEFAULT CURRENT_TIMESTAMP,
     updated_at         TIMESTAMP WITH TIME ZONE  DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT exam_pkey PRIMARY KEY (id),
@@ -335,6 +336,7 @@ CREATE TABLE "public".exam_question
     id          uuid DEFAULT gen_random_uuid() NOT NULL,
     exam_id     uuid                           NOT NULL,
     question_id uuid                           NOT NULL,
+    page        integer                        ,
     CONSTRAINT exam_question_pkey PRIMARY KEY (id),
     CONSTRAINT exam_question_exam_id_fkey FOREIGN KEY (exam_id)
         REFERENCES "public".exam (id) MATCH SIMPLE

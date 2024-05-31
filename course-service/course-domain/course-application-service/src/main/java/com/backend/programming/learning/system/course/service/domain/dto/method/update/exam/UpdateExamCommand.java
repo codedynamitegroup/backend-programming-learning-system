@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.dto.method.update.exam;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam.CreateQuestionExamCommand;
 import com.backend.programming.learning.system.course.service.domain.valueobject.OverdueHandling;
 import lombok.Builder;
 
@@ -39,6 +40,6 @@ public record UpdateExamCommand(
         @NotNull(message = "Exam grade method is required")
         String gradeMethod,
         @NotNull(message = "Question ids are required")
-        List<UUID> questionIds
+        List<CreateQuestionExamCommand> questionIds
 ) {
 }

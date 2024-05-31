@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.ports.output.repository;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam.CreateQuestionExamCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.ExamQuestion;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public interface ExamQuestionRepository {
 
     void assignExamToQuestions(List<ExamQuestion> examQuestions);
 
-    void deleteByExamIdAndQuestionIdIn(UUID examId, List<UUID> questionIds);
+    void deleteByExamIdAndQuestionIdIn(UUID examId, List<CreateQuestionExamCommand> questionIds);
 
     void deleteByExamId(UUID value);
 }
