@@ -14,6 +14,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 
 import jakarta.validation.Valid;
 
+import java.util.UUID;
+
 public interface SubmissionAssignmentApplicationService {
 
     CreateSubmissionAssignmentResponse createSubmissionAssignment(@Valid CreateSubmissionAssignmentCommand createSubmissionAssignmentCommand);
@@ -28,4 +30,8 @@ public interface SubmissionAssignmentApplicationService {
 
 
     SubmissionAssignmentResponseEntity queryByAssignmentIdAndUserId(QuerySubmissionAssignmentUserCommand querySubmissionAssignmentUserCommand);
+
+    Integer countSubmissionGraded(UUID assignmentId);
+
+    Integer countAllByAssignmentId(UUID assignmentId);
 }
