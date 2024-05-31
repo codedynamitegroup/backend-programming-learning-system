@@ -17,6 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.UUID;
+
 @Service
 @Validated
 @Slf4j
@@ -52,5 +54,15 @@ public class SubmissionAssignmentApplicationServiceImpl implements SubmissionAss
     @Override
     public SubmissionAssignmentResponseEntity queryByAssignmentIdAndUserId(QuerySubmissionAssignmentUserCommand querySubmissionAssignmentCommand) {
         return submissionAssignmentCommandHandler.queryByAssignmentIdAndUserId(querySubmissionAssignmentCommand);
+    }
+
+    @Override
+    public Integer countSubmissionGraded(UUID assignmentId) {
+        return submissionAssignmentCommandHandler.countSubmissionGraded(assignmentId);
+    }
+
+    @Override
+    public Integer countAllByAssignmentId(UUID assignmentId) {
+        return submissionAssignmentCommandHandler.countAllByAssignmentId(assignmentId);
     }
 }

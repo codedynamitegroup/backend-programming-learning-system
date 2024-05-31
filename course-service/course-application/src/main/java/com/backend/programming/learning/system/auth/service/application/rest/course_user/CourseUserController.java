@@ -112,4 +112,21 @@ public class CourseUserController {
         log.info("User by course id: {}", response);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/{courseId}/count")
+    @Operation(summary = "Count student by course id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = Integer.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<Integer> countStudentByCourseId(
+            @PathVariable UUID courseId) {
+        log.info("Count student by course id: {}", courseId);
+        Integer response = courseUserApplicationService.countStudentByCourseId(courseId);
+        log.info("Student by course id: {}", response);
+        return ResponseEntity.ok(response);
+    }
 }

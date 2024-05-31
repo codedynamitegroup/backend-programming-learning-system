@@ -20,4 +20,8 @@ public interface SubmissionAssignmentRepository {
 
     SubmissionAssignment update(SubmissionAssignment submissionAssignment);
 
+
+    Integer countSubmissionsToGradeByAssignmentId(UUID assignmentId);
+
+    Integer countAllByAssignmentId(UUID assignmentId);
 }

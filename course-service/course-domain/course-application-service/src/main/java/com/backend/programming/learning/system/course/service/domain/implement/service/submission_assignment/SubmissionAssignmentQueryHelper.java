@@ -43,4 +43,14 @@ public class SubmissionAssignmentQueryHelper {
         log.info("SubmissionAssignment queried with assignment id: {} and user id: {}", assignmentId, userId);
         return submissionAssignment;
     }
+    @Transactional(readOnly=true)
+    public Integer countSubmissionsToGrade(UUID assignmentId) {
+        Integer count = submissionAssignmentRepository.countSubmissionsToGradeByAssignmentId(assignmentId);
+        log.info("SubmissionAssignment count with assignment id: {} and graded: {}", assignmentId);
+        return count;
+    }
+    @Transactional(readOnly=true)
+    public Integer countAllByAssignmentId(UUID assignmentId) {
+        return submissionAssignmentRepository.countAllByAssignmentId(assignmentId);
+    }
 }

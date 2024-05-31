@@ -37,4 +37,10 @@ public class CourseUserQueryHelper {
         return courseUser;
     }
 
+    public Integer countStudentByCourseId(UUID courseId) {
+        Integer count = courseUserRepository.countStudentByCourseId(courseId);
+        log.info("Course user found successfully");
+        return count;
+    }
+
 }

@@ -32,4 +32,12 @@ public interface CourseUserJpaRepository extends JpaRepository<CourseUserEntity,
             AND (cu.user.firstName LIKE %:search% OR cu.user.lastName LIKE %:search% OR cu.user.email LIKE %:search%)
     """)
     Page<CourseUserEntity> findAllUserByCourseId(UUID id, String search, Pageable pageable);
+
+    @Query("""
+            SELECT COUNT(cu)
+            FROM CourseUserEntity cu
+            WHERE cu.course.id = :courseId
+            AND cu.roleMoodle.id = 5
+    """)
+    Integer countStudentByCourseId(UUID courseId);
 }

@@ -11,6 +11,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.valueobject.CourseUserId;
 import jakarta.validation.Valid;
 
+import java.util.UUID;
+
 /**
  * com.backend.programming.learning.system.ports.input.service.course_user
  * Create by Dang Ngoc Tien
@@ -32,4 +34,7 @@ public interface CourseUserApplicationService {
     QueryAllCourseUserResponse queryAllUserByCourseId(
             @Valid CourseUserId courseUserId,
             @Valid QueryAllCourseUserCommand queryAllCourseUserCommand);
+
+    Integer countStudentByCourseId(
+            @Valid UUID courseId);
 }
