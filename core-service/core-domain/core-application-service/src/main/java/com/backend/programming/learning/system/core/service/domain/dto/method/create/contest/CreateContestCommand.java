@@ -23,8 +23,9 @@ public class CreateContestCommand {
     @NotNull(message = "Start time is required")
     private final ZonedDateTime startTime;
     private final ZonedDateTime endTime;
-    @NotNull(message = "CreatedBy is required")
-    private final UUID createdBy;
-    @NotNull(message = "UpdatedBy is required")
-    private final UUID updatedBy;
+    private final String email;
+//    @NotNull(message = "CreatedBy is required")
+//    private final UUID createdBy;
+//    @NotNull(message = "UpdatedBy is required")
+//    private final UUID updatedBy;
 }

@@ -45,14 +45,8 @@ public class ContestDataMapper {
                 .thumbnailUrl(createContestCommand.getThumbnailUrl())
                 .startTime(createContestCommand.getStartTime())
                 .endTime(createContestCommand.getEndTime())
-                .createdBy(User
-                        .builder()
-                        .id(new UserId(createContestCommand.getCreatedBy()))
-                        .build())
-                .updatedBy(User
-                        .builder()
-                        .id(new UserId(createContestCommand.getUpdatedBy()))
-                        .build())
+                .createdBy(null)
+                .updatedBy(null)
                 .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .updatedAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .build();

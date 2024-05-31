@@ -53,11 +53,29 @@ public class ContestController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<CreateContestResponse> createCertificateCourse(
+    public ResponseEntity<CreateContestResponse> createContest(
             @RequestBody CreateContestCommand createContestCommand) {
+        String email = null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+
+        }
+
         log.info("Creating contest: {}", createContestCommand);
         CreateContestResponse createContestResponse =
-                contestApplicationService.createContest(createContestCommand);
+                contestApplicationService.createContest(
+                        CreateContestCommand
+                                .builder()
+                                .name(createContestCommand.getName())
+                                .description(createContestCommand.getDescription())
+                                .thumbnailUrl(createContestCommand.getThumbnailUrl())
+                                .startTime(createContestCommand.getStartTime())
+                                .endTime(createContestCommand.getEndTime())
+                                .email(email)
+                                .build()
+                );
         log.info("Contest created: {}", createContestResponse);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createContestResponse);
