@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryAllExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryAllExamResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryExamCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.exam.UpdateExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.exam.UpdateExamResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.exam.ExamResponseEntity;
@@ -56,5 +57,10 @@ public class ExamApplicationServiceImpl implements ExamApplicationService {
     @Override
     public UpdateExamResponse updateExam(ExamId examId, UpdateExamCommand updateExamCommand) {
         return examCommandHandler.updateExam(examId, updateExamCommand);
+    }
+
+    @Override
+    public QueryOverviewResponse overviewExam(ExamId examId) {
+        return examCommandHandler.overviewExam(examId);
     }
 }

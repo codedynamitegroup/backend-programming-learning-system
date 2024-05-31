@@ -11,6 +11,7 @@ import com.backend.programming.learning.system.course.service.domain.entity.Exam
 import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamSubmissionRepository;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -51,5 +52,10 @@ public class ExamSubmissionRepositoryImpl implements ExamSubmissionRepository {
                 .min((e1, e2) -> e2.getSubmitCount().compareTo(e1.getSubmitCount()))
                 .orElse(null);
         return examSubmissionDataAccessMapper.examSubmissionEntityToExamSubmission(examSubmissionEntities);
+    }
+
+    @Override
+    public Integer countSubmission(ExamId examId) {
+        return examSubmissionJpaRepository.countSubmission(examId.getValue());
     }
 }

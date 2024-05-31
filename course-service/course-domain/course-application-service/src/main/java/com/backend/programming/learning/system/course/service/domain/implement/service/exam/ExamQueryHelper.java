@@ -1,7 +1,9 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.exam;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamSubmissionRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ExamQueryHelper {
     private final ExamRepository examRepository;
+    private final ExamSubmissionRepository examSubmissionRepository;
+
     public Exam findBy(ExamId examId) {
         Exam exam = examRepository.findBy(examId);
         log.info("Exam found successfully");
@@ -30,5 +34,17 @@ public class ExamQueryHelper {
         Page<Exam> exams = examRepository.findAll(courseId, search, pageNo, pageSize);
         log.info("Exams found successfully");
         return exams;
+    }
+
+    public QueryOverviewResponse overviewExam(ExamId examId) {
+        Integer numberOfStudent = examRepository.countStudent(examId);
+        Integer numberOfSubmission = examSubmissionRepository.countSubmission(examId);
+        Integer needGrading = 0;
+
+        return QueryOverviewResponse.builder()
+                .numberOfStudents(numberOfStudent)
+                .submitted(numberOfSubmission)
+                .needGrading(numberOfStudent) // temp
+                .build();
     }
 }

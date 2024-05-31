@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryAllExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryAllExamResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryExamCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.exam.UpdateExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.exam.UpdateExamResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.exam.ExamResponseEntity;
@@ -39,4 +40,6 @@ public interface ExamApplicationService {
     UpdateExamResponse updateExam(
             ExamId examId,
             @Valid UpdateExamCommand updateExamCommand);
+
+    QueryOverviewResponse overviewExam(ExamId examId);
 }
