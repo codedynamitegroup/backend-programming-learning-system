@@ -60,7 +60,6 @@ public class ContestController {
         if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
             Jwt token = jwtAuthenticationToken.getToken();
             email = token.getClaim("preferred_username");
-
         }
 
         log.info("Creating contest: {}", createContestCommand);
