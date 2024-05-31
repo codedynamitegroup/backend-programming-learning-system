@@ -65,4 +65,10 @@ public class QtypeMultichoiceQuestionRepositoryImpl implements QtypeMultichoiceQ
         qtypeMultichoiceQuestionJpaRepository.save(qtypeMultichoiceQuestionDataAccessMapper
                 .setQtypeMultichoiceQuestionEntity(qtypeMultichoiceQuestionEntity.get(), qtypeMultichoiceQuestion));
     }
+
+    @Override
+    public Optional<QtypeMultiChoiceQuestion> findByQuestionId(UUID questionId) {
+        return qtypeMultichoiceQuestionJpaRepository.findByQuestionId(questionId)
+                .map(qtypeMultichoiceQuestionDataAccessMapper::qtypeMultichoiceQuestionEntityToQtypeMultichoiceQuestion);
+    }
 }

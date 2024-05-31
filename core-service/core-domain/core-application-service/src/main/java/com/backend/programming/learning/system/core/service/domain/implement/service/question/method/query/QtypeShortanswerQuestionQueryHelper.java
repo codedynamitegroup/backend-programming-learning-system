@@ -42,6 +42,24 @@ public class QtypeShortanswerQuestionQueryHelper {
         return queryQtypeShortanswerQuestionResponse;
     }
 
+    public QueryQtypeShortanswerQuestionResponse queryQuestionById(UUID questionId) {
+        Optional<QtypeShortAnswerQuestion> qtypeShortanswerQuestion = qtypeShortanswerQuestionRepository
+                .findByQuestion(questionId);
+
+        if (qtypeShortanswerQuestion.isEmpty()) {
+            log.error("Qtype Shortanswer Question not found with id: {}", questionId);
+
+            throw new QtypeShortanswerQuestionNotFoundException("Qtype Shortanswer Question with id " + questionId + " not found");
+        }
+
+        QueryQtypeShortanswerQuestionResponse queryQtypeShortanswerQuestionResponse = qtypeShortanswerQuestionDataMapper
+                .qtypeShortanswerQuestionToQueryQtypeShortanswerQuestionResponse(qtypeShortanswerQuestion.get());
+
+        log.info("Query Qtype Shortanswer Question with id: {}", qtypeShortanswerQuestion.get().getId().getValue());
+
+        return queryQtypeShortanswerQuestionResponse;
+    }
+
     public List<QueryQtypeShortanswerQuestionResponse> queryAllQtypeShortanswerQuestions() {
         List<QtypeShortAnswerQuestion> qtypeShortanswerQuestions = qtypeShortanswerQuestionRepository.findAllQtypeShortAnswerQuestions();
 

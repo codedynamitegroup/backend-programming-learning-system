@@ -14,4 +14,6 @@ public interface QtypeEssayQuestionRepository {
     void deleteQtypeEssayQuestion(UUID qtEssayQuestionId);
     UUID getId(UUID questionId);
     void updateQtypeEssayQuestion(QtypeEssayQuestion question);
+
+    Optional<QtypeEssayQuestion> findByQuestionId(UUID questionId);
 }
