@@ -50,6 +50,15 @@ public class CertificateCourseQueryHelper {
         if (email != null) {
             Optional<User> userOptional = userRepository.findByEmail(email);
             if (userOptional.isPresent()) {
+                Optional<ChapterQuestion> currentQuestion = chapterQuestionRepository
+                        .findFirstUncompletedQuestionByCertificateCourseIdAndUserId(
+                                certificateCourse.getId().getValue(),
+                                userOptional.get().getId().getValue()
+                        );
+                currentQuestion.ifPresent(
+                        chapterQuestion -> certificateCourse.setCurrentQuestion(chapterQuestion.getQuestion())
+                );
+
                 Optional<CertificateCourseUser> certificateCourseUser =
                         certificateCourseUserRepository.findByCertificateCourseIdAndUserId(
                                 certificateCourseId,
@@ -107,11 +116,20 @@ public class CertificateCourseQueryHelper {
                             certificateCourse.setRegistered(false);
                             certificateCourse.setNumOfCompletedQuestions(0);
                         }
+                        Optional<ChapterQuestion> currentQuestion = chapterQuestionRepository
+                                .findFirstUncompletedQuestionByCertificateCourseIdAndUserId(
+                                        certificateCourse.getId().getValue(),
+                                        userOptional.get().getId().getValue()
+                                );
+                        currentQuestion.ifPresent(
+                                chapterQuestion -> certificateCourse.setCurrentQuestion(chapterQuestion.getQuestion())
+                        );
                     }
 
                     certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourse.getId().getValue()));
                     certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourse.getId().getValue()));
                     certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourse.getId().getValue()));
+
                 }
                 return certificateCourseList;
             }
@@ -144,6 +162,15 @@ public class CertificateCourseQueryHelper {
                     certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourse.getId().getValue()));
                     certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourse.getId().getValue()));
                     certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourse.getId().getValue()));
+
+                    Optional<ChapterQuestion> currentQuestion = chapterQuestionRepository
+                            .findFirstUncompletedQuestionByCertificateCourseIdAndUserId(
+                                    certificateCourse.getId().getValue(),
+                                    user.getId().getValue()
+                            );
+                    currentQuestion.ifPresent(
+                            chapterQuestion -> certificateCourse.setCurrentQuestion(chapterQuestion.getQuestion())
+                    );
                 }
                 return certificateCourseList;
             }
@@ -203,6 +230,15 @@ public class CertificateCourseQueryHelper {
                             certificateCourse.setRegistered(false);
                             certificateCourse.setNumOfCompletedQuestions(0);
                         }
+
+                        Optional<ChapterQuestion> currentQuestion = chapterQuestionRepository
+                                .findFirstUncompletedQuestionByCertificateCourseIdAndUserId(
+                                        certificateCourse.getId().getValue(),
+                                        userOptional.get().getId().getValue()
+                                );
+                        currentQuestion.ifPresent(
+                                chapterQuestion -> certificateCourse.setCurrentQuestion(chapterQuestion.getQuestion())
+                        );
                     }
 
                     certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourse.getId().getValue()));
