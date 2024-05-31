@@ -55,4 +55,9 @@ public class ExamRepositoryImpl implements ExamRepository {
         return examJpaRepository.findByName(name)
                 .map(examDataAccessMapper::examEntityToExam);
     }
+
+    @Override
+    public Integer countStudent(ExamId examId) {
+        return examJpaRepository.countStudent(examId.getValue());
+    }
 }
