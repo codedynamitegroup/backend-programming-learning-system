@@ -19,29 +19,21 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @AllArgsConstructor
 @JsonInclude(NON_NULL)
 public class ContestResponseEntity {
-    @NotNull
     private final UUID contestId;
-    @NotNull
     private final String name;
-    @NotNull
     private final String description;
-    @NotNull
+    private final String prizes;
+    private final String rules;
+    private final String scoring;
     private final String thumbnailUrl;
-    @NotNull
     private final ZonedDateTime startTime;
     private final ZonedDateTime endTime;
-    @NotNull
     private final Integer numOfParticipants;
-    @NotNull
     private final Boolean isRegistered;
-    @NotNull
     private final List<ContestQuestionResponseEntity> questions;
-    @NotNull
+    private final Boolean isPublic;
     private final UserResponseEntity createdBy;
-    @NotNull
     private final UserResponseEntity updatedBy;
-    @NotNull
     private final ZonedDateTime createdAt;
-    @NotNull
     private final ZonedDateTime updatedAt;
 }

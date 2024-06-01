@@ -118,12 +118,13 @@ public class ContestQueryHelper {
             String startTimeFilter,
             Integer pageNo,
             Integer pageSize,
-            String email
+            String email,
+            Boolean isAdmin
     ) {
         log.info("Querying all contests with searchName: {}, startTimeFilter: {}, pageNo: {}, pageSize: {}",
                 searchName, startTimeFilter, pageNo, pageSize);
         Optional<User> userResult = userRepository.findByEmail(email);
-        Page<Contest> contests = contestRepository.findAll(searchName, startTimeFilter, pageNo, pageSize);
+        Page<Contest> contests = contestRepository.findAll(searchName, startTimeFilter, pageNo, pageSize,isAdmin);
         for (Contest contest : contests) {
             contest.setQuestions(new ArrayList<>());
             if (userResult.isPresent()) {
@@ -141,6 +142,36 @@ public class ContestQueryHelper {
         }
         return contests;
     }
+
+//    @Transactional(readOnly = true)
+//    public Page<Contest> queryAllContestsForAdmin(
+//            String searchName,
+//            String startTimeFilter,
+//            Integer pageNo,
+//            Integer pageSize,
+//            String email
+//    ) {
+//        log.info("Querying all contests with searchName: {}, startTimeFilter: {}, pageNo: {}, pageSize: {}",
+//                searchName, startTimeFilter, pageNo, pageSize);
+//        Optional<User> userResult = userRepository.findByEmail(email);
+//        Page<Contest> contests = contestRepository.findAll(searchName, startTimeFilter, pageNo, pageSize, true);
+//        for (Contest contest : contests) {
+//            contest.setQuestions(new ArrayList<>());
+//            if (userResult.isPresent()) {
+//                Optional<ContestUser> contestUserResult = contestUserRepository.findByContestIdAndUserId(
+//                        contest.getId().getValue(),
+//                        userResult.get().getId().getValue()
+//                );
+//                contestUserResult.ifPresent(contestUser -> contest.setRegistered(true));
+//            }
+//
+//            User userCreatedBy = getUserHideSensitiveData(contest.getCreatedBy().getId().getValue());
+//            contest.setCreatedBy(userCreatedBy);
+//            User userUpdatedBy = getUserHideSensitiveData(contest.getUpdatedBy().getId().getValue());
+//            contest.setUpdatedBy(userUpdatedBy);
+//        }
+//        return contests;
+//    }
 
     @Transactional(readOnly = true)
     public List<Contest> findMostPopularContests() {

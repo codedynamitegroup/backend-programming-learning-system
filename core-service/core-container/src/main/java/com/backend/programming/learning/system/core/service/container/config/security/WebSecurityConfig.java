@@ -42,6 +42,7 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/core/contests/{id}/register").hasAnyRole(ADMIN, USER)
                         .requestMatchers(HttpMethod.PUT, "/core/contests/{id}").hasAnyRole(ADMIN)
                         .requestMatchers(HttpMethod.DELETE, "/core/contests/{id}").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.GET, "/core/contests/admin").hasAnyRole(ADMIN)
 
                         // Review
                         .requestMatchers(HttpMethod.POST, "/core/reviews/create").hasAnyRole(ADMIN, USER)
@@ -76,8 +77,7 @@ public class WebSecurityConfig {
                     .requestMatchers("/v3/api-docs/**", "/configuration/**", "/swagger-ui/**",
                             "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/api-docs/**")
                     .requestMatchers(HttpMethod.POST, "/core/certificate-courses")
-                    .requestMatchers(HttpMethod.GET, "/core/certificate-courses/{id}")
-                    .requestMatchers(HttpMethod.GET, "/core/contests/**");
+                    .requestMatchers(HttpMethod.GET, "/core/certificate-courses/{id}");
         };
     }
 

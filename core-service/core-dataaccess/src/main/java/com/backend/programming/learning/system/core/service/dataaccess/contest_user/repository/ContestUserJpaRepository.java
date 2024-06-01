@@ -55,7 +55,8 @@ public interface ContestUserJpaRepository extends JpaRepository<ContestUserEntit
                     where cs.code_question_id = qcq.id
                     and cs.user_id = cu.user_id
                     and cs.pass = true
-                    order by cs.created_at asc
+                    and cs.create_at >= c.start_time and (c.end_time is null or cs.create_at <= c.end_time)
+                    order by cs.grade desc, cs.created_at asc
                     limit 1
                 )) or cs.id is null)
                 group by cu.id, c.id) as cc
@@ -89,7 +90,8 @@ public interface ContestUserJpaRepository extends JpaRepository<ContestUserEntit
             where cs.code_question_id = qcq.id
             and cs.user_id = cu.user_id
             and cs.pass = true
-            order by cs.created_at asc
+            and cs.create_at >= c.start_time and (c.end_time is null or cs.create_at <= c.end_time)
+            order by cs.grade desc, cs.created_at asc
             limit 1
         )) or cs.id is null)
         group by cu.id, c.id
