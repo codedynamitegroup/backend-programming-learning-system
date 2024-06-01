@@ -19,4 +19,6 @@ public interface ExamRepository {
     void deleteById(ExamId examId);
 
     Optional<Exam> findByName(String name);
+
+    Integer countStudent(ExamId examId);
 }

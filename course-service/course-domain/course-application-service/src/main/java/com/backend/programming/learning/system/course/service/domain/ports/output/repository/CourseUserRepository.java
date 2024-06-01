@@ -19,4 +19,6 @@ public interface CourseUserRepository {
     List<CourseUser> findByCourseIdAndRoleTeacher(UUID courseId);
     
     Page<CourseUser> findAllUserByCourseId(UUID id, String search, int pageNo, int pageSize);
+
+    Integer countStudentByCourseId(UUID courseId);
 }

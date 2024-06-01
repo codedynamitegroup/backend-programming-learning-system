@@ -60,4 +60,14 @@ public class SubmissionAssignmentRepositoryImpl implements SubmissionAssignmentR
                         save(submissionAssignmentDataAccessMapper.
                                 assignmentSubmissionToAssignmentSubmissionEntity(submissionAssignment)));
     }
+
+    @Override
+    public Integer countSubmissionsToGradeByAssignmentId(UUID assignmentId) {
+        return assignmentSubmissionJpaRepository.countSubmissionsToGradeByAssignmentId(assignmentId);
+    }
+
+    @Override
+    public Integer countAllByAssignmentId(UUID assignmentId) {
+        return assignmentSubmissionJpaRepository.countAllByAssignmentId(assignmentId);
+    }
 }
