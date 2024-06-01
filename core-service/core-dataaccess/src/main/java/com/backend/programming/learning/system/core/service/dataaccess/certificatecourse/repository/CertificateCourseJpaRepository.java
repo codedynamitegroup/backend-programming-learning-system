@@ -54,8 +54,8 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
          and (COALESCE(?3, null) is null OR cc.topic_id in ?3)
          and cc.id not in (
             select ccu.certificate_course_id
-            from certificate_course_user ccu
-            where ccu.user_id = ?4
+            from certificate_course_user ccu2
+            where ccu2.user_id = ?4
          )
         order by
             ts_rank(cc.fts_document, 
