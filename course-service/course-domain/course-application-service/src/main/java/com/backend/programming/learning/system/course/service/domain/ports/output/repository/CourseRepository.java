@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface CourseRepository {
     Course save(Course course);
 
-    Page<Course> findAll(String search, Integer page, Integer size);
+    Page<Course> findAll(String search,String[] courseType, Integer page, Integer size);
 
     Course findBy(UUID courseId);
 

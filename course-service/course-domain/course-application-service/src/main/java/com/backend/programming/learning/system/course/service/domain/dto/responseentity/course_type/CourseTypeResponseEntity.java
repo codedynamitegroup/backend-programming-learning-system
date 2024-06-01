@@ -8,6 +8,7 @@ import java.util.UUID;
 
 public  record CourseTypeResponseEntity (
     UUID courseTypeId,
+    UUID organizationId,
     Integer moodleId,
     String name
 

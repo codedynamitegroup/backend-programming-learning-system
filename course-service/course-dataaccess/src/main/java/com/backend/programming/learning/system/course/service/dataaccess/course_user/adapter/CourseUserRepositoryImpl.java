@@ -62,4 +62,9 @@ public class CourseUserRepositoryImpl implements CourseUserRepository {
         return courseUserDataAccessMapper
                 .courseUserPageToCourseUserPage(courseUserJpaRepository.findAllUserByCourseId(id, search, pageRequest));
     }
+
+    @Override
+    public Integer countStudentByCourseId(UUID courseId) {
+        return courseUserJpaRepository.countStudentByCourseId(courseId);
+    }
 }

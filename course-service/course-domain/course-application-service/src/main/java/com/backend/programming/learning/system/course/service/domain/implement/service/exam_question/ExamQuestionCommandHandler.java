@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.CreateExamQuestionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_question.QueryAllQuestionByExamIdCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_question.QueryAllQuestionByExamIdResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_question.QueryAllQuestionByExamIdWithPageAttResponse;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +37,7 @@ public class ExamQuestionCommandHandler {
         return CreateExamQuestionResponse.builder().message("Exam un-assigned to question").build();
     }
 
-    public QueryAllQuestionByExamIdResponse findAllQuestionByExamId(
+    public QueryAllQuestionByExamIdWithPageAttResponse findAllQuestionByExamId(
             ExamId examId, QueryAllQuestionByExamIdCommand queryAllQuestionByExamIdCommand) {
         log.info("Get all question by exam id");
         return examQuestionCreateHelper.findAllQuestionByExamId(examId, queryAllQuestionByExamIdCommand);

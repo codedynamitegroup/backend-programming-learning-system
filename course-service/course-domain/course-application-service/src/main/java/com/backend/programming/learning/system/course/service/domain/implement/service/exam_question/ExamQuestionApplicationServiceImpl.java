@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.CreateExamQuestionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_question.QueryAllQuestionByExamIdCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_question.QueryAllQuestionByExamIdResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_question.QueryAllQuestionByExamIdWithPageAttResponse;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.exam_question.ExamQuestionApplicationService;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +35,7 @@ public class ExamQuestionApplicationServiceImpl implements ExamQuestionApplicati
     }
 
     @Override
-    public QueryAllQuestionByExamIdResponse findAllQuestionByExamId(
+    public QueryAllQuestionByExamIdWithPageAttResponse findAllQuestionByExamId(
             ExamId examId, QueryAllQuestionByExamIdCommand queryAllQuestionByExamIdCommand) {
         return examQuestionCommandHandler.findAllQuestionByExamId(examId, queryAllQuestionByExamIdCommand);
     }

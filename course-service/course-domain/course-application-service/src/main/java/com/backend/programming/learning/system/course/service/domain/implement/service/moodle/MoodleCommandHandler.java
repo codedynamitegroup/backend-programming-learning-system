@@ -183,10 +183,11 @@ public class MoodleCommandHandler {
                 sectionRepository.save(section);
                 // create module
                 for (ModuleModel module : sectionModel.getModules()) {
-                    if(module.getModplural().equals("Assignments")||
-                            module.getModplural().equals("Quizzes")||
-                            module.getModplural().equals("URLs")||
-                            module.getModplural().equals("Files"))
+//                    if(module.getModplural().equals("Assignments")||
+//                            module.getModplural().equals("Quizzes")||
+//                            module.getModplural().equals("URLs")||
+//                            module.getModplural().equals("Files"))
+                    if(module.getModplural().equals("Assignments"))
                     {
                         Module moduleCreate = moodleDataMapper.createModule(section, module);
                         moduleRepository.save(moduleCreate);

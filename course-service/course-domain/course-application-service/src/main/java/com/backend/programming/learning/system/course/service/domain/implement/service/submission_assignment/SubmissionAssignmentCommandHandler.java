@@ -81,6 +81,18 @@ public class SubmissionAssignmentCommandHandler {
         return submissionAssignmentDataMapper.submissionAssignmentToSubmissionAssignmentResponseEntity(submissionAssignment);
     }
 
+    @Transactional
+    public Integer countSubmissionGraded(UUID assignmentId) {
+        log.info("Count submission graded by assignment id command received");
+        return submissionAssignmentQueryHelper.countSubmissionsToGrade(assignmentId);
+    }
+
+    @Transactional
+    public Integer countAllByAssignmentId(UUID assignmentId) {
+        log.info("Count all submission by assignment id command received");
+        return submissionAssignmentQueryHelper.countAllByAssignmentId(assignmentId);
+    }
+
 
 
 

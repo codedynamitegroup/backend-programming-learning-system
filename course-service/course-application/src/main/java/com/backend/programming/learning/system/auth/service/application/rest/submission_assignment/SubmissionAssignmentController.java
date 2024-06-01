@@ -152,4 +152,40 @@ public class SubmissionAssignmentController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/countToGrade")
+    @Operation(summary = "Count submission graded by assignment id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = Integer.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<Integer> countSubmissionGraded(
+            @RequestParam UUID assignmentId
+    ) {
+        log.info("Counting submission graded by assignment id");
+        Integer response = submissionAssignmentApplicationService.countSubmissionGraded(assignmentId);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/countAll")
+    @Operation(summary = "Count all submission by assignment id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = Integer.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<Integer> countAllByAssignmentId(
+            @RequestParam UUID assignmentId
+    ) {
+        log.info("Counting all submission by assignment id");
+        Integer response = submissionAssignmentApplicationService.countAllByAssignmentId(assignmentId);
+        return ResponseEntity.ok(response);
+    }
+
+
+
 }

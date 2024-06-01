@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.CreateExamQuestionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_question.QueryAllQuestionByExamIdCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_question.QueryAllQuestionByExamIdResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_question.QueryAllQuestionByExamIdWithPageAttResponse;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.exam_question.ExamQuestionApplicationService;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import io.swagger.v3.oas.annotations.Operation;
@@ -44,21 +45,21 @@ public class ExamQuestionController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
-                            schema = @Schema(implementation = QueryAllQuestionByExamIdResponse.class))
+                            schema = @Schema(implementation = QueryAllQuestionByExamIdWithPageAttResponse.class))
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<QueryAllQuestionByExamIdResponse> findAllQuestionByExamId(
+    public ResponseEntity<QueryAllQuestionByExamIdWithPageAttResponse> findAllQuestionByExamId(
             @PathVariable UUID examId,
             @RequestParam(name = "search", required = false, defaultValue = "") String search,
-            @RequestParam(name = "currentPage", required = false, defaultValue = "0") int currentPage
+            @RequestParam(name = "currentPage", required = false) Integer currentPage
     ) {
         log.info("Get all question by exam id");
         QueryAllQuestionByExamIdCommand queryAllQuestionByExamIdCommand = QueryAllQuestionByExamIdCommand.builder()
                 .search(search)
                 .currentPage(currentPage)
                 .build();
-        QueryAllQuestionByExamIdResponse response = examQuestionApplicationService.findAllQuestionByExamId(
+        QueryAllQuestionByExamIdWithPageAttResponse response = examQuestionApplicationService.findAllQuestionByExamId(
                 new ExamId(examId),
                 queryAllQuestionByExamIdCommand);
         log.info("All question by exam id: {}", response);

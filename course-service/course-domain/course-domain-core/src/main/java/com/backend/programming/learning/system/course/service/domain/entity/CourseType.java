@@ -6,6 +6,16 @@ import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 public class CourseType extends AggregateRoot<CourseTypeId>{
     private Integer moodleId;
     private String name;
+
+    private Organization organization;
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
+    }
     public String getName() {
         return name;
     }
@@ -26,6 +36,7 @@ public class CourseType extends AggregateRoot<CourseTypeId>{
         super.setId(builder.id);
         setName(builder.name);
         setMoodleId(builder.moodleId);
+        setOrganization(builder.organization);
     }
 
     public static Builder builder() {
@@ -35,6 +46,8 @@ public class CourseType extends AggregateRoot<CourseTypeId>{
         private CourseTypeId id;
         private Integer moodleId;
         private String name;
+
+        private Organization organization;
 
         private Builder() {
         }
@@ -55,6 +68,11 @@ public class CourseType extends AggregateRoot<CourseTypeId>{
 
         public Builder name(String val) {
             name = val;
+            return this;
+        }
+
+        public Builder organization(Organization val) {
+            organization = val;
             return this;
         }
 

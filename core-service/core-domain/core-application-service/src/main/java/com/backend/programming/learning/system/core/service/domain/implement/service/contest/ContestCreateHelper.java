@@ -36,14 +36,13 @@ public class ContestCreateHelper {
 
     @Transactional
     public Contest persistContest(CreateContestCommand createContestCommand) {
-        User createdBy = getUser(createContestCommand.getCreatedBy());
-        User updatedBy = getUser(createContestCommand.getUpdatedBy());
+        User user = findUserByEmail(createContestCommand.getEmail());
 
         Contest contest = contestDataMapper.
                 createContestCommandToContest(createContestCommand);
         coreDomainService.createContest(contest);
-        contest.setCreatedBy(createdBy);
-        contest.setUpdatedBy(updatedBy);
+        contest.setCreatedBy(user);
+        contest.setUpdatedBy(user);
         Contest contestResult = saveContest(contest);
 
         log.info("Contest created with id: {}", contestResult.getId().getValue());
@@ -55,6 +54,15 @@ public class ContestCreateHelper {
         if (user.isEmpty()) {
             log.warn("User with id: {} not found", userId);
             throw new UserNotFoundException("Could not find user with id: " + userId);
+        }
+        return user.get();
+    }
+
+    private User findUserByEmail(String email) {
+        Optional<User> user = userRepository.findUserByEmail(email);
+        if (user.isEmpty()) {
+            log.warn("User with email: {} not found", email);
+            throw new UserNotFoundException("Could not find user with email: " + email);
         }
         return user.get();
     }

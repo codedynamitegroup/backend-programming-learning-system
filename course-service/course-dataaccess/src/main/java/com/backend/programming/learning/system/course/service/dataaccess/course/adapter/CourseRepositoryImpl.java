@@ -26,9 +26,11 @@ public class CourseRepositoryImpl implements CourseRepository {
                         .courseToCourseEntity(course)));
     }
 
+
+
     @Override
-    public Page<Course> findAll(String search, Integer page, Integer size) {
-        return courseJpaRepository.findAll(search, PageRequest.of(page, size))
+    public Page<Course> findAll(String search,String[] courseType, Integer page, Integer size) {
+        return courseJpaRepository.findAll(search,courseType, PageRequest.of(page, size))
                 .map(courseDataAccessMapper::courseEntityToCourse);
     }
 

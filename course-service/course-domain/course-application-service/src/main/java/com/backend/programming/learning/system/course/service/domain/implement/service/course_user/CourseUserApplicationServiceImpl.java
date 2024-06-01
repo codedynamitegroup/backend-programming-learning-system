@@ -14,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.UUID;
+
 /**
  * com.backend.programming.learning.system.implement.course_user
  * Create by Dang Ngoc Tien
@@ -44,5 +46,10 @@ public class CourseUserApplicationServiceImpl implements CourseUserApplicationSe
     @Override
     public QueryAllCourseUserResponse queryAllUserByCourseId(CourseUserId courseUserId, QueryAllCourseUserCommand queryAllCourseUserCommand) {
         return courseUserCommandHandler.queryAllUserByCourseId(courseUserId, queryAllCourseUserCommand);
+    }
+
+    @Override
+    public Integer countStudentByCourseId(UUID courseId) {
+        return courseUserCommandHandler.countStudentByCourseId(courseId);
     }
 }

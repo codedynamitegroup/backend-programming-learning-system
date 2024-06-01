@@ -16,40 +16,54 @@ public interface ChapterQuestionJpaRepository extends JpaRepository<ChapterQuest
     Optional<ChapterQuestionEntity> findById(UUID id);
     List<ChapterQuestionEntity> findAllChapterQuestionsByChapterId(UUID chapterId);
 
-
     @Query("""
-        select cqe
-        from ChapterQuestionEntity cqe
-        join ChapterEntity ce
-        on cqe.chapter.id = ce.id
-        join QuestionEntity qe
-        on cqe.question.id = qe.id
-        join QtypeCodeQuestionEntity qtce
-        on qtce.question.id = qe.id
-        join CodeSubmissionEntity cse
-        on cse.codeQuestionId = qtce.id
-        where ce.certificateCourse.id = ?1
-        and cse.userId = ?2
-        and qe.id not in (
-            select qe2.id
-            from CodeSubmissionEntity cse2
-            join QtypeCodeQuestionEntity qtce2
-            on cse2.codeQuestionId = qtce2.id
-            join QuestionEntity qe2
-            on qe2.id = qtce2.question.id
-            join ChapterQuestionEntity cqe2
-            on cqe2.question.id = qe2.id
-            join ChapterEntity ce2
-            on cqe2.chapter.id = ce2.id
-            where cse2.userId = ?2
-            and ce2.certificateCourse.id = ?1
-            and cse2.pass = true
-            group by qe2.id
-        )
-        group by cqe.id, qe.id, ce.no, cse.createdAt
-        order by ce.no asc, cse.createdAt desc
-        limit 1
+            select cq
+            from ChapterQuestionEntity cq
+            join ChapterEntity c
+            on c.id = cq.chapter.id
+            join QuestionEntity q
+            on q.id = cq.question.id
+            join QtypeCodeQuestionEntity qcq
+            on qcq.question.id = q.id
+            where c.certificateCourse.id = ?1
+            and (q.id not in (
+                    select q2.id
+                    from QuestionEntity q2
+                    join QtypeCodeQuestionEntity qcq2
+                    on qcq2.question.id = q2.id
+                    join CodeSubmissionEntity cs2
+                    on cs2.codeQuestionId = qcq2.id
+                    join ChapterQuestionEntity cq2
+                    on cq2.question.id = q2.id
+                    join ChapterEntity c2
+                    on c2.id = cq2.chapter.id
+                    where cs2.userId = ?2
+                    and c2.certificateCourse.id = ?1
+                    and cs2.userId = ?2
+                    and cs2.pass = true
+                    group by q2.id, cs2.createdAt
+                    order by cs2.createdAt desc
+            ) or q.id in (
+                    select q3.id
+                    from QuestionEntity q3
+                    join ChapterQuestionEntity cq3
+                    on cq3.question.id = q3.id
+                    join ChapterEntity c3
+                    on c3.id = cq3.chapter.id
+                    and c3.certificateCourse.id = ?1
+                    join QtypeCodeQuestionEntity qcq3
+                    on q3.id = qcq3.question.id
+                    where not exists (
+                            select 1
+                            from CodeSubmissionEntity s3
+                            where s3.codeQuestionId = qcq3.id
+                    )
+            ))
+            group by cq.id, q.id, c.no
+            order by c.no asc
+            limit 1
 """)
     Optional<ChapterQuestionEntity> findFirstUncompletedQuestionByCertificateCourseIdAndUserId
             (UUID certificateCourseId, UUID userId);
 }
+

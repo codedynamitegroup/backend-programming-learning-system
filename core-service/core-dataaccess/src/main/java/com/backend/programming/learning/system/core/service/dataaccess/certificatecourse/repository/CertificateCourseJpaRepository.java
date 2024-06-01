@@ -23,7 +23,7 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
                 cc.fts_document @@ (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,'')) ) )
             )
          and (COALESCE(?3, null) is null OR cc.topic_id in ?3)
-         and ccu.user_id = ?3
+         and ccu.user_id = ?4
         order by
             ts_rank(cc.fts_document, 
                 case
@@ -176,9 +176,9 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
             )
          and (COALESCE(?3, null) is null OR cc.topic_id in ?3)
          and cc.id not in (
-            select ccu.certificate_course.id
-            from certificate_course_user ccu
-            where ccu.user_id = ?3
+            select ccu2.certificate_course_id
+            from certificate_course_user ccu2
+            where ccu2.user_id = ?4
          )
         group by cc.id
         order by 

@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.dto.responseentity.question;
 
 import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
+import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import lombok.Builder;
 
 import java.time.ZonedDateTime;
@@ -21,8 +22,8 @@ public record QuestionResponseEntity(
         String questionText,
         String generalFeedback,
         float defaultMark,
+        QuestionType qtype,
         ZonedDateTime createdAt,
         ZonedDateTime updatedAt,
-        String message
-) {
+        String message) {
 }
