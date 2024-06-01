@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.application.rest;
 
+import com.backend.programming.learning.system.application.handler.utils.JwtUtils;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.*;
@@ -35,14 +36,15 @@ public class CodeSubmissionController {
     }
     @GetMapping
     public ResponseEntity<GetCodeSubmissionReponse> getCodeSubmissionsByUserId
-            (@RequestParam UUID userId,
+            (@RequestHeader(value = "Access-Token") String accessToken,
              @RequestParam UUID codeQuestionId,
              @RequestParam(defaultValue = "0") Integer pageNo,
              @RequestParam(defaultValue = "5") Integer pageSize){
+        String email = JwtUtils.getEmailFromJwtString(accessToken);
 
         GetCodeSubmissionsByUserIdCommand command = GetCodeSubmissionsByUserIdCommand.builder()
                 .codeQuestionId(codeQuestionId)
-                .userId(userId)
+                .email(email)
                 .pageNum(pageNo)
                 .pageSize(pageSize)
                 .build();

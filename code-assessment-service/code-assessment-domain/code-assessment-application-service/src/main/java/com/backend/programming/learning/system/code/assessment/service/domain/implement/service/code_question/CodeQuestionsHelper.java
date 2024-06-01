@@ -135,7 +135,7 @@ public class CodeQuestionsHelper {
 
     @Transactional
     public Page<CodeQuestion> getPublicCodeQuestions(GetCodeQuestionsQuery query) {
-        User user = query.getUserId() != null? validateHelper.validateUser(query.getUserId()): null;
+        User user = query.getEmail() != null? validateHelper.validateUserByEmail(query.getEmail()): null;
         List<TagId> tagIds = query.getTagIds() == null || query.getTagIds().isEmpty()? null:
                 query.getTagIds().stream().map(item->{
                             try {
@@ -179,13 +179,13 @@ public class CodeQuestionsHelper {
 
     @Transactional
     public CodeQuestion getDetailCodeQuestion(GetDetailCodeQuestionCommand command) {
-        User user = command.getUserId() != null? validateHelper.validateUser(command.getUserId()): null;
+        User user = validateHelper.validateUserByEmail(command.getEmail());
 
         CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(command.getCodeQuestionId());
 
         List<TestCase> sampleTestCase = testCaseRepository.getSampleTestCase(codeQuestion.getId());
 
-        List<CodeSubmission> codeSubmissions = user == null? null: codeSubmissionRepository.findLatestSubmissionEachLanguage(codeQuestion.getId(), user.getId());
+        List<CodeSubmission> codeSubmissions = codeSubmissionRepository.findLatestSubmissionEachLanguage(codeQuestion.getId(), user.getId());
 
         List<ProgrammingLanguageCodeQuestion> languages = programmingLanguageCodeQuestionRepository.findByCodeQuestionId(codeQuestion.getId());
 

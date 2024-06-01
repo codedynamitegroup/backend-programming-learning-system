@@ -14,5 +14,6 @@ public class GetDetailCodeQuestionCommand {
     @NotNull(message = "codeQuestionId must not be null")
     UUID codeQuestionId;
 
-    UUID userId;
+    @NotNull(message = "email must not be null")
+    String email;
 }

@@ -40,4 +40,10 @@ public class UserRepositoryImpl implements UserRepository {
                 .userEntityToUser(userJpaRepository
                         .save(dataAccessMapper.userToUserEntity(user)));
     }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        Optional<UserEntity> user = userJpaRepository.findByEmail(email);
+        return user.map(dataAccessMapper::userEntityToUser);
+    }
 }
