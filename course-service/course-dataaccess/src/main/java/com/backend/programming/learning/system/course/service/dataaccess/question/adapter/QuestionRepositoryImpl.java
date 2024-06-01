@@ -1,8 +1,9 @@
 package com.backend.programming.learning.system.course.service.dataaccess.question.adapter;
 
-import com.backend.programming.learning.system.course.service.dataaccess.question.entity.QuestionEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.question.entity.QuestionExamDataAccessDTO;
 import com.backend.programming.learning.system.course.service.dataaccess.question.mapper.QuestionDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.question.repository.QuestionJpaRepository;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QuestionExamDTO;
 import com.backend.programming.learning.system.course.service.domain.entity.Question;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
@@ -58,11 +59,11 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     }
 
     @Override
-    public List<Question> findAllByExamId(
+    public List<QuestionExamDTO> findAllByExamId(
             UUID examId,
             String search,
             Integer pageCurrent) {
-        List<QuestionEntity> questionEntities = questionJpaRepository.findAllByExamId(
+        List<QuestionExamDataAccessDTO> questionEntities = questionJpaRepository.findAllByExamId(
                 examId, search, pageCurrent);
         return questionDataAccessMapper.questionEntitiesToQuestions(questionEntities);
     }

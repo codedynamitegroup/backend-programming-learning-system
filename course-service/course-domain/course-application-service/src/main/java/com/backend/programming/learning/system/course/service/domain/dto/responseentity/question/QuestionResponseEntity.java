@@ -25,6 +25,5 @@ public record QuestionResponseEntity(
         QuestionType qtype,
         ZonedDateTime createdAt,
         ZonedDateTime updatedAt,
-        String message
-) {
+        String message) {
 }

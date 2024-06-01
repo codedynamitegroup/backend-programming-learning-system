@@ -4,6 +4,8 @@ import com.backend.programming.learning.system.course.service.domain.CourseDomai
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.CreateExamQuestionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_question.QueryAllQuestionByExamIdCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_question.QueryAllQuestionByExamIdResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_question.QueryAllQuestionByExamIdWithPageAttResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QuestionExamDTO;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
 import com.backend.programming.learning.system.course.service.domain.entity.ExamQuestion;
 import com.backend.programming.learning.system.course.service.domain.entity.Question;
@@ -52,14 +54,14 @@ public class ExamQuestionCreateHelper {
         examQuestionRepository.assignExamToQuestions(examQuestions);
     }
 
-    public QueryAllQuestionByExamIdResponse findAllQuestionByExamId(
+    public QueryAllQuestionByExamIdWithPageAttResponse findAllQuestionByExamId(
             ExamId examId, QueryAllQuestionByExamIdCommand queryAllQuestionByExamIdCommand) {
         log.info("Get all question by exam id");
-        List<Question> questions = questionRepository.findAllByExamId(
+        List<QuestionExamDTO> questions = questionRepository.findAllByExamId(
                 examId.getValue(),
                 queryAllQuestionByExamIdCommand.search(),
                 queryAllQuestionByExamIdCommand.currentPage());
-        return QueryAllQuestionByExamIdResponse.builder()
+        return QueryAllQuestionByExamIdWithPageAttResponse.builder()
                 .questions(questionDataMapper.questionListToQuestionResponseEntityList(questions))
                 .build();
     }
