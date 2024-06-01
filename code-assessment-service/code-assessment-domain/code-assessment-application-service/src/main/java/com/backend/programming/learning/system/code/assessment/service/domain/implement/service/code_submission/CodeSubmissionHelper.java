@@ -27,6 +27,7 @@ import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -138,14 +139,14 @@ public class CodeSubmissionHelper {
     }
 
     @Transactional
-    public List<CodeSubmission> getCodeSubmissionsByUserId(GetCodeSubmissionsByUserIdCommand command) {
-        Optional<List<CodeSubmission>> codeSubmissionsOpt = codeSubmissionRepository.findByUserIdAndQuestionId(new UserId(command.getUserId()), new CodeQuestionId(command.getCodeQuestionId()));
-        if(codeSubmissionsOpt.isPresent())
-            findDescriptionStatus(codeSubmissionsOpt.get());
-        return codeSubmissionsOpt.orElse(null);
+    public Page<CodeSubmission> getCodeSubmissionsByUserId(GetCodeSubmissionsByUserIdCommand command) {
+        Page<CodeSubmission> codeSubmissions = codeSubmissionRepository.findByUserIdAndQuestionId(new UserId(command.getUserId()), new CodeQuestionId(command.getCodeQuestionId()), command.getPageNum(), command.getPageSize());
+
+        findDescriptionStatus(codeSubmissions);
+        return codeSubmissions;
     }
 
-    private void findDescriptionStatus(List<CodeSubmission> codeSubmissions) {
+    private void findDescriptionStatus(Page<CodeSubmission> codeSubmissions) {
         codeSubmissions.forEach(codeSubmission -> {
             if(codeSubmission.getRunTime() != null)
                 codeSubmission.setStatusDescription(codeAssessmentServiceConfigData.getAcceptedStatusDescription());

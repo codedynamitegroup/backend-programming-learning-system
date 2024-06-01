@@ -34,15 +34,19 @@ public class CodeSubmissionController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
     }
     @GetMapping
-    public ResponseEntity<List<GetCodeSubmissionResponseItem>> getCodeSubmissionsByUserId
+    public ResponseEntity<GetCodeSubmissionReponse> getCodeSubmissionsByUserId
             (@RequestParam UUID userId,
-             @RequestParam UUID codeQuestionId){
+             @RequestParam UUID codeQuestionId,
+             @RequestParam(defaultValue = "0") Integer pageNo,
+             @RequestParam(defaultValue = "5") Integer pageSize){
 
         GetCodeSubmissionsByUserIdCommand command = GetCodeSubmissionsByUserIdCommand.builder()
                 .codeQuestionId(codeQuestionId)
                 .userId(userId)
+                .pageNum(pageNo)
+                .pageSize(pageSize)
                 .build();
-        List<@Valid GetCodeSubmissionResponseItem> response =
+        GetCodeSubmissionReponse response =
                 codeSubmissionApplicationService.getCodeSubmissionsByUserId(command);
 
         return ResponseEntity.ok(response);

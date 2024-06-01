@@ -9,11 +9,13 @@ import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId
 import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Component
 @Slf4j
@@ -43,15 +45,16 @@ public class CodeSubmissionRepositoryImpl implements CodeSubmissionRepository {
     }
 
     @Override
-    public Optional<List<CodeSubmission>> findByUserIdAndQuestionId(UserId userId, CodeQuestionId codeQuestionId) {
-
+    public Page<CodeSubmission> findByUserIdAndQuestionId(UserId userId, CodeQuestionId codeQuestionId, Integer pageNum, Integer pageSize) {
+        Pageable pageable
+                = PageRequest
+                .of(pageNum, pageSize);
         return jpaRepository
-                .findByUserIdAndCodeQuestionId(
+                .findByUserIdAndCodeQuestionIdOrderByCreatedAtDesc(
                         userId.getValue(),
-                        codeQuestionId.getValue())
-                .map(list-> list.stream()
-                        .map(dataAccessMapper::entityToCodeSubmission)
-                        .collect(Collectors.toList()));
+                        codeQuestionId.getValue(),
+                        pageable)
+                .map(dataAccessMapper::entityToCodeSubmission);
     }
 
     @Override
