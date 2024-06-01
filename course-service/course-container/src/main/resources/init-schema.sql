@@ -173,7 +173,12 @@ CREATE TABLE "public".course_type
     id          uuid    DEFAULT gen_random_uuid() NOT NULL,
     moodle_id integer,
     name        text UNIQUE,
-    CONSTRAINT course_type_pkey PRIMARY KEY (id)
+    org_id uuid,
+    CONSTRAINT course_type_pkey PRIMARY KEY (id),
+    CONSTRAINT course_type_org_id_fkey FOREIGN KEY (org_id)
+        REFERENCES "public".organization (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS "public".role_moodle CASCADE;
