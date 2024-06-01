@@ -140,7 +140,8 @@ public class CodeSubmissionHelper {
 
     @Transactional
     public Page<CodeSubmission> getCodeSubmissionsByUserId(GetCodeSubmissionsByUserIdCommand command) {
-        Page<CodeSubmission> codeSubmissions = codeSubmissionRepository.findByUserIdAndQuestionId(new UserId(command.getUserId()), new CodeQuestionId(command.getCodeQuestionId()), command.getPageNum(), command.getPageSize());
+        User user = validateHelper.validateUserByEmail(command.getEmail());
+        Page<CodeSubmission> codeSubmissions = codeSubmissionRepository.findByUserIdAndQuestionId(user.getId(), new CodeQuestionId(command.getCodeQuestionId()), command.getPageNum(), command.getPageSize());
 
         findDescriptionStatus(codeSubmissions);
         return codeSubmissions;
