@@ -1,13 +1,13 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.service.user;
 
 import com.backend.programming.learning.system.auth.service.config.KeycloakConfigData;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.change_password.ChangedPasswordUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.change_password.ChangedPasswordUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.ResponseLoginAndRefreshUser;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
-import com.backend.programming.learning.system.auth.service.domain.exception.UnAuthorizedServiceException;
+import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserKeycloakApplicationService;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -22,40 +22,39 @@ import java.util.Optional;
 
 @Slf4j
 @Component
-public class UserLoginHelper {
+public class UserChangedPasswordHelper {
     private final KeycloakConfigData keycloakConfigData;
     private final UserRepository userRepository;
+    private final UserKeycloakApplicationService userKeycloakApplicationService;
 
-
-    public UserLoginHelper(KeycloakConfigData keycloakConfigData, UserRepository userRepository) {
+    public UserChangedPasswordHelper(KeycloakConfigData keycloakConfigData, UserRepository userRepository, UserKeycloakApplicationService userKeycloakApplicationService) {
         this.keycloakConfigData = keycloakConfigData;
         this.userRepository = userRepository;
+        this.userKeycloakApplicationService = userKeycloakApplicationService;
     }
 
     @Transactional
-    public LoginUserResponse loginUser(LoginUserCommand loginUserCommand) {
-        User user = findUserByEmail(loginUserCommand.getEmail());
+    public ChangedPasswordUserResponse changedPasswordUser(ChangedPasswordUserCommand changedPasswordUserCommand) {
+        User user = findUserByEmail(changedPasswordUserCommand.getEmail());
         WebClient client = WebClient.create(keycloakConfigData.getUrls());
 
         ResponseLoginAndRefreshUser result = client.post()
                 .uri("realms/" + keycloakConfigData.getRealm() + "/protocol/openid-connect/token")
                 .accept(MediaType.APPLICATION_FORM_URLENCODED)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .body(BodyInserters.fromFormData(loginUserCommandToRequestBody(loginUserCommand)))
+                .body(BodyInserters.fromFormData(loginUserCommandToRequestBody(changedPasswordUserCommand)))
                 .retrieve()
                 .bodyToMono(ResponseLoginAndRefreshUser.class)
                 .block();
         if (result == null) {
-            log.error("Login failed");
-            throw new UnAuthorizedServiceException("Login failed");
+            log.error("Old password is incorrect!");
+            throw new AuthDomainException("Login failed");
         }
 
-        user.setRefreshToken(result.getRefresh_token());
-        saveUser(user);
+        userKeycloakApplicationService.updatePassword(changedPasswordUserCommand.getEmail(), changedPasswordUserCommand.getNewPassword());
 
-        return LoginUserResponse.builder()
-                .accessToken(result.getAccess_token())
-                .refreshToken(result.getRefresh_token())
+        return ChangedPasswordUserResponse.builder()
+                .message("Password is changed successfully!")
                 .build();
     }
 
@@ -70,22 +69,22 @@ public class UserLoginHelper {
         return userResult.get();
     }
 
-    private User saveUser(User user) {
-        User userResult = userRepository.save(user);
-        if (userResult == null) {
-            log.error("Could not update user!");
-            throw new AuthDomainException("Could not update user!");
-        }
-        log.info("User is updated with id: {}", userResult.getId().getValue());
-        return userResult;
-    }
+//    private User saveUser(User user) {
+//        User userResult = userRepository.save(user);
+//        if (userResult == null) {
+//            log.error("Could not update user!");
+//            throw new AuthDomainException("Could not update user!");
+//        }
+//        log.info("User is updated with id: {}", userResult.getId().getValue());
+//        return userResult;
+//    }
 
-    private MultiValueMap<String, String> loginUserCommandToRequestBody(LoginUserCommand loginUserCommand) {
+    private MultiValueMap<String, String> loginUserCommandToRequestBody(ChangedPasswordUserCommand changedPasswordUserCommand) {
         MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
         formData.add("client_id", keycloakConfigData.getClient());
         formData.add("client_secret", keycloakConfigData.getClientSecret());
-        formData.add("username", loginUserCommand.getEmail());
-        formData.add("password", loginUserCommand.getPassword());
+        formData.add("username", changedPasswordUserCommand.getEmail());
+        formData.add("password", changedPasswordUserCommand.getOldPassword());
         formData.add("grant_type", "password");
         return formData;
     }

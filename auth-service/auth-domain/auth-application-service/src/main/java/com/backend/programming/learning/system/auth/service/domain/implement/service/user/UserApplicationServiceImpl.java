@@ -1,5 +1,7 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.service.user;
 
+import com.backend.programming.learning.system.auth.service.domain.dto.method.change_password.ChangedPasswordUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.change_password.ChangedPasswordUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserCommand;
@@ -84,5 +86,10 @@ class UserApplicationServiceImpl implements UserApplicationService {
     @Override
     public LogoutUserResponse logoutUser(LogoutUserEmailCommand logoutUserEmailCommand) {
         return userCommandHandler.logoutUser(logoutUserEmailCommand);
+    }
+
+    @Override
+    public ChangedPasswordUserResponse changePasswordUser(ChangedPasswordUserCommand changedPasswordUserCommand) {
+        return userCommandHandler.changePasswordUser(changedPasswordUserCommand);
     }
 }

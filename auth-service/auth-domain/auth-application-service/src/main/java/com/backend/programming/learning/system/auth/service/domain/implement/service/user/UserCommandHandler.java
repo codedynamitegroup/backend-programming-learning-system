@@ -1,5 +1,7 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.service.user;
 
+import com.backend.programming.learning.system.auth.service.domain.dto.method.change_password.ChangedPasswordUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.change_password.ChangedPasswordUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserCommand;
@@ -49,6 +51,7 @@ public class UserCommandHandler {
     private final UserRefreshTokenHelper userRefreshTokenHelper;
     private final UserSocialLoginHelper userSocialLoginHelper;
     private final UserLogoutHelper userLogoutHelper;
+    private final UserChangedPasswordHelper userChangedPasswordHelper;
 
     @Transactional
     public CreateUserResponse createUser(CreateUserCommand createOrderCommand) {
@@ -198,5 +201,9 @@ public class UserCommandHandler {
 
     public LogoutUserResponse logoutUser(LogoutUserEmailCommand logoutUserEmailCommand) {
         return userLogoutHelper.logoutUser(logoutUserEmailCommand);
+    }
+
+    public ChangedPasswordUserResponse changePasswordUser(ChangedPasswordUserCommand changedPasswordUserCommand) {
+        return userChangedPasswordHelper.changedPasswordUser(changedPasswordUserCommand);
     }
 }
