@@ -21,8 +21,8 @@ import java.util.UUID;
 public class CourseQueryHelper {
     private final CourseRepository courseRepository;
 
-    public Page<Course> findAll(String search, Integer pageNo, Integer pageSize) {
-        Page<Course> courses = courseRepository.findAll(search, pageNo, pageSize);
+    public Page<Course> findAll(String search,String[] courseType, Integer pageNo, Integer pageSize) {
+        Page<Course> courses = courseRepository.findAll(search,courseType, pageNo, pageSize);
         log.info("Courses found successfully");
         return courses;
     }

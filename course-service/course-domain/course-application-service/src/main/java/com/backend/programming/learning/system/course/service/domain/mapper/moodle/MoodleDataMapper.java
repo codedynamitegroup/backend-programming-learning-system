@@ -14,10 +14,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user.UserModel;
 import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.entity.Module;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ActivityAttachmentRepository;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseTypeRepository;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.IntroAttachmentRepository;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.IntroFileRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.course.service.domain.valueobject.*;
 import org.springframework.stereotype.Component;
 
@@ -36,11 +33,14 @@ public class MoodleDataMapper {
 
     private final ActivityAttachmentRepository activityAttachmentRepository;
 
-    public MoodleDataMapper(CourseTypeRepository courseTypeRepository, IntroFileRepository introFileRepository, IntroAttachmentRepository introAttachmentRepository, ActivityAttachmentRepository activityAttachmentRepository) {
+    private final OrganizationRepository organizationRepository;
+
+    public MoodleDataMapper(CourseTypeRepository courseTypeRepository, IntroFileRepository introFileRepository, IntroAttachmentRepository introAttachmentRepository, ActivityAttachmentRepository activityAttachmentRepository, OrganizationRepository organizationRepository) {
         this.courseTypeRepository = courseTypeRepository;
         this.introFileRepository = introFileRepository;
         this.introAttachmentRepository = introAttachmentRepository;
         this.activityAttachmentRepository = activityAttachmentRepository;
+        this.organizationRepository = organizationRepository;
     }
 
     public Course createCourse(CourseModel courseModel,Organization organization) {
@@ -360,10 +360,12 @@ public class MoodleDataMapper {
 
     public CourseType createCourseType(CourseTypeModel courseTypeModel) {
         Integer moodleId = Integer.valueOf(courseTypeModel.getId());
+        Optional<Organization> organization = organizationRepository.findOrganizationById(UUID.fromString("08b65a39-394f-4977-a5fa-3fe145b620f8"));
         return CourseType.builder()
                 .id(new CourseTypeId(UUID.randomUUID()))
                 .name(courseTypeModel.getName())
                 .moodleId(moodleId)
+                .organization(organization.get())
                 .build();
     }
 

@@ -16,12 +16,13 @@ public interface CourseJpaRepository extends JpaRepository<CourseEntity, UUID> {
 
      Optional<CourseEntity> findByName(String courseName);
 
-     @Query("""
-             SELECT c
-             FROM CourseEntity c
-             WHERE c.name LIKE %:search%
-             """)
-    Page<CourseEntity> findAll(String search, Pageable pageable);
+    @Query("""
+    SELECT c
+    FROM CourseEntity c
+    WHERE c.name LIKE %:search%
+    AND (:courseType IS NULL OR c.courseType.name IN :courseType)
+    """)
+    Page<CourseEntity> findAll(String search,String[] courseType, Pageable pageable);
 
     Optional<CourseEntity> findByCourseIdMoodle(Integer courseIdMoodle);
 
