@@ -99,7 +99,6 @@ public class CodeQuestionController {
     //no neeed to delete
 
     //update
-    //add outbox
     @PutMapping("/{code-question-id}")
     public ResponseEntity updateCodeQuestion(
             @PathVariable(value = "code-question-id") UUID codeQuestionId,
@@ -114,10 +113,12 @@ public class CodeQuestionController {
     @GetMapping("/{code-question-id}")
     public ResponseEntity<CodeQuestionDto> getDetailCodeQuestion(
             @PathVariable("code-question-id") UUID codeQuestionId,
-            @RequestParam(required = false) UUID userId){
+            @RequestHeader(value = "Access-Token") String accessToken){
+        String email = JwtUtils.getEmailFromJwtString(accessToken);
+
         GetDetailCodeQuestionCommand command =  GetDetailCodeQuestionCommand.builder()
                 .codeQuestionId(codeQuestionId)
-                .userId(userId)
+                .email(email)
                 .build();
         CodeQuestionDto codeQuestionDto = codeQuestionApplicationService.getDetailCodeQuestion(command);
         return ResponseEntity.ok(codeQuestionDto);
