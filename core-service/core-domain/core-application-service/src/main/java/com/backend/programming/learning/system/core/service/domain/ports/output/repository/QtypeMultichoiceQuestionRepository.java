@@ -14,4 +14,6 @@ public interface QtypeMultichoiceQuestionRepository {
     void deleteQtypeMultipleChoiceQuestion(UUID qtMultipleChoiceQuestionId);
     UUID getId(UUID questionId);
     void updateQtypeMultichoiceQuestion(QtypeMultiChoiceQuestion qtypeMultichoiceQuestion);
+
+    Optional<QtypeMultiChoiceQuestion> findByQuestionId(UUID questionId);
 }

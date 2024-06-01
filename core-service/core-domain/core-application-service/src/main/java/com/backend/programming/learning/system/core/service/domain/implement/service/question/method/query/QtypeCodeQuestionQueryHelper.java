@@ -41,6 +41,23 @@ public class QtypeCodeQuestionQueryHelper {
         return queryQtypeCodeQuestionResponse;
     }
 
+    public QueryQtypeCodeQuestionResponse queryQuestionById(UUID questionId) {
+        Optional<QtypeCodeQuestion> qtypeCodeQuestion = qtypeCodeQuestionRepository.findQuestionId(questionId);
+
+        if (qtypeCodeQuestion.isEmpty()) {
+            log.error("Qtype Code Question not found with id: {}", questionId);
+
+            throw new QtypeCodeQuestionNotFoundException("Qtype Code Question with id " + questionId + " not found");
+        }
+
+        QueryQtypeCodeQuestionResponse queryQtypeCodeQuestionResponse = qtypeCodeQuestionDataMapper
+                .qtypeCodeQuestionToQueryQtypeCodeQuestionResponse(qtypeCodeQuestion.get());
+
+        log.info("Query Qtype Code Question with id: {}", qtypeCodeQuestion.get().getId().getValue());
+
+        return queryQtypeCodeQuestionResponse;
+    }
+
     public List<QueryQtypeCodeQuestionResponse> queryAllQtypeCodeQuestions() {
         List<QtypeCodeQuestion> qtypeCodeQuestions = qtypeCodeQuestionRepository.findAllQtypeCodeQuestions();
 

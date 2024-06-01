@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.ports.output.repository;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QuestionExamDTO;
 import com.backend.programming.learning.system.course.service.domain.entity.Question;
 import org.springframework.data.domain.Page;
 
@@ -20,5 +21,5 @@ public interface QuestionRepository {
     void deleteById(UUID questionId);
 
     Page<Question> findAllByExamId(UUID examId, String search, int pageNo, int pageSize);
-    List<Question> findAllByExamId(UUID examId, String search, Integer pageCurrent);
+    List<QuestionExamDTO> findAllByExamId(UUID examId, String search, Integer pageCurrent);
 }

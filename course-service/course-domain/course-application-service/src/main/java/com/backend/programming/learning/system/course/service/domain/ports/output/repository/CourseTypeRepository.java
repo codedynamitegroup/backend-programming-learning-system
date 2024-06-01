@@ -18,4 +18,6 @@ public interface CourseTypeRepository {
 
     List<CourseType> findAll();
     Optional<CourseType> findByMoodleId(Integer moodleId);
+
+    List<CourseType> findAllByOrganizationId(UUID organizationId);
 }

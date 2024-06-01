@@ -76,4 +76,10 @@ public class QtypeEssayQuestionRepositoryImpl implements QtypeEssayQuestionRepos
                 .setQtypeEssayQuestionEntity(qtypeEssayQuestionEntity.get(), qtypeEssayQuestion);
         qtypeEssayQuestionJpaRepository.save(savingQtypeEssayQuestionEntity);
     }
+
+    @Override
+    public Optional<QtypeEssayQuestion> findByQuestionId(UUID questionId) {
+        return qtypeEssayQuestionJpaRepository.findByQuestionId(questionId)
+                .map(qtypeEssayQuestionDataAccessMapper::qtypeEssayQuestionEntityToQtypeEssayQuestion);
+    }
 }

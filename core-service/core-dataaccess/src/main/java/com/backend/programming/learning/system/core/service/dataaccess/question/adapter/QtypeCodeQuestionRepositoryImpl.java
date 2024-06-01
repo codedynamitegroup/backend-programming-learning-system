@@ -69,4 +69,10 @@ public class QtypeCodeQuestionRepositoryImpl implements QtypeCodeQuestionReposit
     public void deleteById(UUID id) {
         qtypeCodeQuestionJpaRepository.deleteById(id);
     }
+
+    @Override
+    public Optional<QtypeCodeQuestion> findQuestionId(UUID questionId) {
+        return qtypeCodeQuestionJpaRepository.findByQuestionId(questionId)
+                .map(qtypeCodeQuestionDataAccessMapper::qtypeCodeQuestionEntityToQtypeCodeQuestion);
+    }
 }

@@ -41,6 +41,23 @@ public class QtypeEssayQuestionQueryHelper {
         return queryQtypeEssayQuestionByIdResponse;
     }
 
+    public QueryQtypeEssayQuestionResponse queryQuestionById(UUID questionId) {
+        Optional<QtypeEssayQuestion> qtypeEssayQuestion = qtypeEssayQuestionRepository.findByQuestionId(questionId);
+
+        if (qtypeEssayQuestion.isEmpty()) {
+            log.error("Qtype Essay Question not found with id: {}", questionId);
+
+            throw new QtypeEssayQuestionNotFoundException("Qtype Essay Question with id " + questionId + " not found");
+        }
+
+        QueryQtypeEssayQuestionResponse queryQtypeEssayQuestionByIdResponse = qtypeEssayQuestionDataMapper
+                .qtypeEssayQuestionToQueryQtypeEssayQuestionResponse(qtypeEssayQuestion.get());
+
+        log.info("Query Qtype Essay Question with id: {}", qtypeEssayQuestion.get().getId().getValue());
+
+        return queryQtypeEssayQuestionByIdResponse;
+    }
+
     public List<QueryQtypeEssayQuestionResponse> queryAllQtypeEssayQuestion() {
         List<QtypeEssayQuestion> qtypeEssayQuestions = qtypeEssayQuestionRepository.findAllQtypeEssayQuestion();
 

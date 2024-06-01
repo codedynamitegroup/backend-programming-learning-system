@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -75,14 +76,18 @@ public class CourseController {
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllCourseResponse> findAll(
             @RequestParam(defaultValue = "") String search,
+            @RequestParam(required = false) Optional<String[]> courseType,
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize
     ) {
         log.info("Getting list course");
+
+
         QueryAllCourseCommand queryAllCourseCommand = QueryAllCourseCommand.builder()
                 .search(search)
                 .pageNo(pageNo)
                 .pageSize(pageSize)
+                .courseType(courseType.orElse(null))
                 .build();
 
         QueryAllCourseResponse response = courseApplicationService.findAll(queryAllCourseCommand);

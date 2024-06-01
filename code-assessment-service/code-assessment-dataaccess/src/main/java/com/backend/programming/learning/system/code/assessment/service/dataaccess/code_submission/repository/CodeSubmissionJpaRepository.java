@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.repository;
 
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.entity.CodeSubmissionEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -17,7 +19,7 @@ public interface CodeSubmissionJpaRepository extends JpaRepository<CodeSubmissio
     @Query("update CodeSubmissionEntity cse set cse.numOfTestCaseGraded = cse.numOfTestCaseGraded + 1 where cse.id = :id")
     void increaseNumOfTestCaseGradedByOne(@Param("id") UUID id);
 
-    Optional<List<CodeSubmissionEntity>> findByUserIdAndCodeQuestionId(UUID userId, UUID codeQuestionId);
+    Page<CodeSubmissionEntity> findByUserIdAndCodeQuestionIdOrderByCreatedAtDesc(UUID userId, UUID codeQuestionId, Pageable pageable);
 
     @Query(value = """
             select count(*) from (

@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_question.QueryAllQuestionByExamIdCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_question.QueryAllQuestionByExamIdResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_question.QueryAllQuestionByExamIdWithPageAttResponse;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import jakarta.validation.Valid;
 
@@ -21,7 +22,7 @@ public interface ExamQuestionApplicationService {
     CreateExamQuestionResponse unAssignExamToQuestions(
             @Valid CreateExamQuestionCommand createExamQuestionCommand);
 
-    QueryAllQuestionByExamIdResponse findAllQuestionByExamId(
+    QueryAllQuestionByExamIdWithPageAttResponse findAllQuestionByExamId(
             ExamId examId,
             @Valid QueryAllQuestionByExamIdCommand queryAllQuestionByExamIdCommand);
 }

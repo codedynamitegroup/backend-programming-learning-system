@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.course.service.dataaccess.question.repository;
 
 import com.backend.programming.learning.system.course.service.dataaccess.question.entity.QuestionEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.question.entity.QuestionExamDataAccessDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -39,12 +40,13 @@ public interface QuestionJpaRepository extends JpaRepository<QuestionEntity, UUI
     Page<QuestionEntity> findAllByExamId(UUID examId, String search, Pageable pageable);
 
     @Query("""
-    SELECT q 
+    SELECT new com.backend.programming.learning.system.course.service.dataaccess.question.entity.QuestionExamDataAccessDTO(q.id AS id, q.difficulty AS difficulty, q.name AS name, q.questionText AS questionText, q.qtype AS qtype, eq.page AS page)
     FROM QuestionEntity q 
     JOIN ExamQuestionEntity eq ON eq.question.id = q.id
     WHERE LOWER(q.name) LIKE %:search%
         AND eq.exam.id = :examId 
-        AND eq.page = :pageCurrent
+        AND (:pageCurrent IS NULL OR eq.page = :pageCurrent)
+    ORDER BY eq.page ASC
     """)
-    List<QuestionEntity> findAllByExamId(UUID examId, String search, Integer pageCurrent);
+    List<QuestionExamDataAccessDTO> findAllByExamId(UUID examId, String search, Integer pageCurrent);
 }

@@ -31,7 +31,7 @@ public class CodeSubmissionApplicationServiceImpl implements CodeSubmissionAppli
     }
 
     @Override
-    public List<GetCodeSubmissionResponseItem> getCodeSubmissionsByUserId(GetCodeSubmissionsByUserIdCommand command) {
+    public GetCodeSubmissionReponse getCodeSubmissionsByUserId(GetCodeSubmissionsByUserIdCommand command) {
 
         return codeSubmissionCommandHandler.getCodeSubmissionsByUserId(command);
     }

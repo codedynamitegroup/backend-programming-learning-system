@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.en
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +14,7 @@ public interface CodeSubmissionRepository {
     void updateOneTestCase(CodeSubmissionId id);
     Optional<CodeSubmission> findById(CodeSubmissionId id);
 
-    Optional<List<CodeSubmission>> findByUserIdAndQuestionId(UserId userId, CodeQuestionId codeQuestionId);
+    Page<CodeSubmission> findByUserIdAndQuestionId(UserId userId, CodeQuestionId codeQuestionId, Integer pageNum, Integer pageSize);
 
     Integer findNumberOfSubmissionUnderMySubmissionByMemory(CodeSubmissionId id);
 

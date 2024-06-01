@@ -26,8 +26,8 @@ public class UserOutboxScheduler implements OutboxScheduler {
 
     @Override
     @Transactional
-//    @Scheduled(fixedRateString = "${code-assessment-service.outbox-scheduler-fixed-rate}",
-//    initialDelayString = "${code-assessment-service.outbox-scheduler-initial-delay}")
+    @Scheduled(fixedRateString = "${code-assessment-service.outbox-scheduler-fixed-rate}",
+    initialDelayString = "${code-assessment-service.outbox-scheduler-initial-delay}")
     public void processOutboxMessage() {
         Optional<List<UserOutboxMessage>> userOutboxMessages =
                 userOutboxHelper.getUserOutboxMessageByOutboxStatus(OutboxStatus.STARTED);
