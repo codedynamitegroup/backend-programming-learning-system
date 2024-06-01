@@ -19,19 +19,19 @@ public class QtypeShortanswerQuestionDataMapper {
         this.questionDataMapper = questionDataMapper;
     }
 
-        public QtypeShortAnswerQuestion createQuestionCommandToQtypeShortAnswerQuestion(CreateQtypeShortanswerQuestionCommand createQtypeShortanswerQuestionCommand,
-                                                                                        Question question) {
-            return QtypeShortAnswerQuestion.builder()
-                    .question(question)
-                    .caseSensitive(createQtypeShortanswerQuestionCommand.getCaseSensitive())
-                    .build();
-        }
+    public QtypeShortAnswerQuestion createQuestionCommandToQtypeShortAnswerQuestion(CreateQtypeShortanswerQuestionCommand createQtypeShortanswerQuestionCommand,
+                                                                                    Question question) {
+        return QtypeShortAnswerQuestion.builder()
+                .question(question)
+                .caseSensitive(createQtypeShortanswerQuestionCommand.getCaseSensitive())
+                .build();
+    }
 
-        public QueryQtypeShortanswerQuestionResponse qtypeShortanswerQuestionToQueryQtypeShortanswerQuestionResponse(QtypeShortAnswerQuestion qtypeShortanswerQuestion) {
-            return QueryQtypeShortanswerQuestionResponse.builder()
-                    .qtypeShortAnswerQuestion(qtypeShortAnswerQuestionToQtypeShortanswerQuestionResponseEntity(qtypeShortanswerQuestion))
-                    .build();
-        }
+    public QueryQtypeShortanswerQuestionResponse qtypeShortanswerQuestionToQueryQtypeShortanswerQuestionResponse(QtypeShortAnswerQuestion qtypeShortanswerQuestion) {
+        return QueryQtypeShortanswerQuestionResponse.builder()
+                .qtypeShortAnswerQuestion(qtypeShortAnswerQuestionToQtypeShortanswerQuestionResponseEntity(qtypeShortanswerQuestion))
+                .build();
+    }
 
     public List<QueryQtypeShortanswerQuestionResponse> qtypeShortanswerQuestionsListToQueryQtypeShortanswerQuestionResponseList(List<QtypeShortAnswerQuestion> qtypeShortanswerQuestions) {
         return List.of(qtypeShortanswerQuestions.stream()
@@ -60,7 +60,7 @@ public class QtypeShortanswerQuestionDataMapper {
     private QtypeShortanswerQuestionResponseEntity qtypeShortAnswerQuestionToQtypeShortanswerQuestionResponseEntity(QtypeShortAnswerQuestion qtypeShortAnswerQuestion) {
         return QtypeShortanswerQuestionResponseEntity.builder()
                 .question(questionDataMapper.questionToQuestionResponseEntity(qtypeShortAnswerQuestion.getQuestion()))
-                .id(qtypeShortAnswerQuestion.getId().toString())
+                .id(qtypeShortAnswerQuestion.getId().getValue().toString())
                 .caseSensitive(qtypeShortAnswerQuestion.getCaseSensitive())
                 .build();
     }
