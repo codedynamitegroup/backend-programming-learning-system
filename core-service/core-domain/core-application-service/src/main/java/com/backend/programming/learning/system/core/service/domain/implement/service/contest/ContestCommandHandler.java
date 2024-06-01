@@ -63,7 +63,26 @@ public class ContestCommandHandler {
                         queryAllContestsCommand.getStartTimeFilter(),
                         queryAllContestsCommand.getPageNo(),
                         queryAllContestsCommand.getPageSize(),
-                        queryAllContestsCommand.getEmail());
+                        queryAllContestsCommand.getEmail(),
+                        false);
+
+        log.info("Returning all contests: {}", contests);
+
+        return contestDataMapper.contestsToQueryAllContestsResponse(contests);
+    }
+
+    @Transactional(readOnly = true)
+    public QueryAllContestsResponse queryAllContestsResponseForAdmin(
+            QueryAllContestsCommand queryAllContestsCommand
+    ) {
+        Page<Contest> contests = contestQueryHelper
+                .queryAllContests(
+                        queryAllContestsCommand.getSearchName(),
+                        queryAllContestsCommand.getStartTimeFilter(),
+                        queryAllContestsCommand.getPageNo(),
+                        queryAllContestsCommand.getPageSize(),
+                        queryAllContestsCommand.getEmail(),
+                        true);
 
         log.info("Returning all contests: {}", contests);
 
@@ -129,6 +148,8 @@ public class ContestCommandHandler {
                 .totalPages(contestUsers.getTotalPages())
                 .build();
     }
+
+
 
     @Transactional
     public DeleteContestResponse deleteContestResponse(

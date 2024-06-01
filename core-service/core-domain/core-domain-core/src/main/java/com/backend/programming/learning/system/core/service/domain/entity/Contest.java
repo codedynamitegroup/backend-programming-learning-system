@@ -14,12 +14,16 @@ import java.util.UUID;
 public class Contest extends AggregateRoot<ContestId> {
     private String name;
     private String description;
+    private String prizes;
+    private String rules;
+    private String scoring;
     private String thumbnailUrl;
     private ZonedDateTime startTime;
     private ZonedDateTime endTime;
     private Integer numOfParticipants;
     private List<ContestQuestion> questions;
     private Boolean isRegistered;
+    private Boolean isPublic;
     private User createdBy;
     private User updatedBy;
     private ZonedDateTime createdAt;
@@ -29,12 +33,16 @@ public class Contest extends AggregateRoot<ContestId> {
         super.setId(builder.contestId);
         setName(builder.name);
         setDescription(builder.description);
+        setPrizes(builder.prizes);
+        setRules(builder.rules);
+        setScoring(builder.scoring);
         setThumbnailUrl(builder.thumbnailUrl);
         setStartTime(builder.startTime);
         setEndTime(builder.endTime);
         setNumOfParticipants(builder.numOfParticipants);
         setQuestions(builder.questions);
         isRegistered = builder.isRegistered;
+        isPublic = builder.isPublic;
         setCreatedBy(builder.createdBy);
         setUpdatedBy(builder.updatedBy);
         setCreatedAt(builder.createdAt);
@@ -51,7 +59,6 @@ public class Contest extends AggregateRoot<ContestId> {
         updatedAt = ZonedDateTime.now(ZoneId.of("UTC"));
     }
 
-
     public String getName() {
         return name;
     }
@@ -66,6 +73,30 @@ public class Contest extends AggregateRoot<ContestId> {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getPrizes() {
+        return prizes;
+    }
+
+    public void setPrizes(String prizes) {
+        this.prizes = prizes;
+    }
+
+    public String getRules() {
+        return rules;
+    }
+
+    public void setRules(String rules) {
+        this.rules = rules;
+    }
+
+    public String getScoring() {
+        return scoring;
+    }
+
+    public void setScoring(String scoring) {
+        this.scoring = scoring;
     }
 
     public String getThumbnailUrl() {
@@ -116,6 +147,14 @@ public class Contest extends AggregateRoot<ContestId> {
         isRegistered = registered;
     }
 
+    public Boolean getPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(Boolean aPublic) {
+        isPublic = aPublic;
+    }
+
     public User getCreatedBy() {
         return createdBy;
     }
@@ -152,12 +191,16 @@ public class Contest extends AggregateRoot<ContestId> {
         private ContestId contestId;
         private String name;
         private String description;
+        private String prizes;
+        private String rules;
+        private String scoring;
         private String thumbnailUrl;
         private ZonedDateTime startTime;
         private ZonedDateTime endTime;
         private Integer numOfParticipants;
         private List<ContestQuestion> questions;
         private Boolean isRegistered;
+        private Boolean isPublic;
         private User createdBy;
         private User updatedBy;
         private ZonedDateTime createdAt;
@@ -178,6 +221,21 @@ public class Contest extends AggregateRoot<ContestId> {
 
         public Builder description(String val) {
             description = val;
+            return this;
+        }
+
+        public Builder prizes(String val) {
+            prizes = val;
+            return this;
+        }
+
+        public Builder rules(String val) {
+            rules = val;
+            return this;
+        }
+
+        public Builder scoring(String val) {
+            scoring = val;
             return this;
         }
 
@@ -208,6 +266,11 @@ public class Contest extends AggregateRoot<ContestId> {
 
         public Builder isRegistered(Boolean val) {
             isRegistered = val;
+            return this;
+        }
+
+        public Builder isPublic(Boolean val) {
+            isPublic = val;
             return this;
         }
 

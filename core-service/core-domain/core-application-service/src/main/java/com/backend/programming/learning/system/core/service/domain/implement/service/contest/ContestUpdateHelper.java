@@ -37,10 +37,10 @@ public class ContestUpdateHelper {
 
     @Transactional
     public void persistContest(UpdateContestCommand updateContestCommand) {
-        checkContestUserExistsByContestId(updateContestCommand.getContestId());
+//        checkContestUserExistsByContestId(updateContestCommand.getContestId());
         Contest contest = getContest(updateContestCommand.getContestId());
 
-        User updatedBy = getUser(updateContestCommand.getUpdatedBy());
+        User updatedBy = findUserByEmail(updateContestCommand.getEmail());
         contest.setUpdatedBy(updatedBy);
         contest.setUpdatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
 
@@ -50,6 +50,22 @@ public class ContestUpdateHelper {
 
         if (updateContestCommand.getDescription() != null) {
             contest.setDescription(updateContestCommand.getDescription());
+        }
+
+        if (updateContestCommand.getThumbnailUrl() != null) {
+            contest.setThumbnailUrl(updateContestCommand.getThumbnailUrl());
+        }
+
+        if (updateContestCommand.getPrizes() != null) {
+            contest.setPrizes(updateContestCommand.getPrizes());
+        }
+
+        if (updateContestCommand.getRules() != null) {
+            contest.setRules(updateContestCommand.getRules());
+        }
+
+        if (updateContestCommand.getScoring() != null) {
+            contest.setScoring(updateContestCommand.getScoring());
         }
 
         if (updateContestCommand.getStartTime() != null) {
@@ -83,6 +99,15 @@ public class ContestUpdateHelper {
         return user.get();
     }
 
+    private User findUserByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isEmpty()) {
+            log.warn("User with email: {} not found", email);
+            throw new UserNotFoundException("Could not find user with email: " + email);
+        }
+        return user.get();
+    }
+
     private void updateContest(Contest contest) {
         Contest updatedContest = contestRepository
                 .saveContest(contest);
@@ -95,14 +120,14 @@ public class ContestUpdateHelper {
         log.info("Contest updated with id: {}", contest.getId().getValue());
     }
 
-    private void checkContestUserExistsByContestId(UUID contestId) {
-        List<ContestUser> contestUsers = contestUserRepository.findByContestId(contestId);
-        if (!contestUsers.isEmpty()) {
-            log.error("Cannot update contest with id: {} when there are users registered", contestId);
-            throw new CoreDomainException("Cannot update contest with id: " +
-                    contestId + " when there are users registered");
-        }
-    }
+//    private void checkContestUserExistsByContestId(UUID contestId) {
+//        List<ContestUser> contestUsers = contestUserRepository.findByContestId(contestId);
+//        if (!contestUsers.isEmpty()) {
+//            log.error("Cannot update contest with id: {} when there are users registered", contestId);
+//            throw new CoreDomainException("Cannot update contest with id: " +
+//                    contestId + " when there are users registered");
+//        }
+//    }
 }
 
 
