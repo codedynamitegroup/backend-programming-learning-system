@@ -122,6 +122,25 @@ public class QuestionDataMapper {
                 .build();
     }
 
+    public QuestionResponseEntity questionTrueFalseToQuestionTrueFalseResponseEntity(Question question) {
+        return QuestionResponseEntity.builder()
+                .id(question.getId().getValue().toString())
+                .organization(organizationDataMapper.organizationToOrganizationResponseEntity(question.getOrganization()))
+                .name(question.getName())
+                .questionText(question.getQuestionText())
+                .generalFeedback(question.getGeneralFeedback())
+                .defaultMark(question.getDefaultMark())
+                .pass(question.getPass())
+                .difficulty(question.getDifficulty())
+                .createdBy(userDataMapper.userToUserResponseEntity(question.getCreatedBy()))
+                .updatedBy(userDataMapper.userToUserResponseEntity(question.getUpdatedBy()))
+                .qtype(QuestionType.TRUE_FALSE)
+                .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
+                .updatedAt(ZonedDateTime.now(ZoneId.of("UTC")))
+                .answers(answerOfQuestionListToAnswerOfQuestionResponseEntityList(question.getAnswers()))
+                .build();
+    }
+
     public AnswerOfQuestionDeleteResponse answerOfQuestionToAnswerOfQuestionDeleteResponse(UUID answerId) {
         return AnswerOfQuestionDeleteResponse.builder()
                 .answerId(answerId)
