@@ -135,7 +135,7 @@ public class CodeQuestionsHelper {
 
     @Transactional
     public Page<CodeQuestion> getPublicCodeQuestions(GetCodeQuestionsQuery query) {
-        User user = query.getUserId() != null? validateHelper.validateUser(query.getUserId()): null;
+        User user = query.getEmail() != null? validateHelper.validateUserByEmail(query.getEmail()): null;
         List<TagId> tagIds = query.getTagIds() == null || query.getTagIds().isEmpty()? null:
                 query.getTagIds().stream().map(item->{
                             try {

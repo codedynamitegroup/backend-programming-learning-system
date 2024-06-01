@@ -235,4 +235,14 @@ public class ValidateHelper {
             }
         }).toList();
     }
+
+    public User validateUserByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+
+        if (user.isEmpty()) {
+            log.error("Could not find user with email: {}", email);
+            throw new UserNotFoundException("Could not find user with email: " + email);
+        }
+        return user.get();
+    }
 }

@@ -35,5 +35,5 @@ public class GetCodeQuestionsQuery {
     List<UUID> tagIds;
     QueryOrderBy orderBy;
     CodeQuestion.Fields sortBy;
-    UUID userId;
+    String email;
 }
