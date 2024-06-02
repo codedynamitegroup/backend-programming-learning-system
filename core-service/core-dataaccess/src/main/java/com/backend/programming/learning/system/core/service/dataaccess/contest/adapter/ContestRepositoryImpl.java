@@ -68,22 +68,22 @@ public class ContestRepositoryImpl implements ContestRepository {
         switch (ContestStartTimeFilter.valueOf(startTimeFilter)) {
             case UPCOMING -> {
                 return contestJpaRepository.findAllUpcomingContestsContainsSearchName(
-                                now, searchExcludeFinalWord, searchFinalWord, isAdmin, paging)
+                                now, searchExcludeFinalWord, searchFinalWord, searchName, isAdmin, paging)
                         .map(contestDataAccessMapper::contestProjectionToContest);
             }
             case HAPPENING -> {
                 return contestJpaRepository.findAllHappeningContestsContainsSearchName(
-                                now, searchExcludeFinalWord, searchFinalWord, isAdmin, paging)
+                                now, searchExcludeFinalWord, searchFinalWord, searchName, isAdmin, paging)
                         .map(contestDataAccessMapper::contestProjectionToContest);
             }
             case ENDED -> {
                 return contestJpaRepository.findAllEndedContestsContainsSearchName(
-                                now, searchExcludeFinalWord, searchFinalWord, isAdmin, paging)
+                                now, searchExcludeFinalWord, searchFinalWord, searchName, isAdmin, paging)
                         .map(contestDataAccessMapper::contestProjectionToContest);
             }
             default -> {
                 return contestJpaRepository.findAllContainsSearchName(
-                                searchExcludeFinalWord, searchFinalWord, isAdmin, paging)
+                                searchExcludeFinalWord, searchFinalWord, searchName, isAdmin, paging)
                         .map(contestDataAccessMapper::contestProjectionToContest);
 
             }

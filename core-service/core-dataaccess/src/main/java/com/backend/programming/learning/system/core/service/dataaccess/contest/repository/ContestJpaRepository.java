@@ -65,8 +65,8 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
     and (cast(?3 as text) IS NULL or
                 c.fts_document @@ (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'') ) ) or
                 c.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) )
-            )
-    and (?4 = TRUE or (c.is_public = true))
+            or cast(?4 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?4 as text), '%')))
+    and (?5 = TRUE or (c.is_public = true))
     order by 
         ts_rank(c.fts_document, 
             case
@@ -86,6 +86,7 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
             ZonedDateTime now,
             String searchExcludeFinalWord,
             String searchFinalWord,
+            String searchValue,
             Boolean isAdmin,
             Pageable pageable);
 
@@ -110,8 +111,8 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
             and (cast(?3 as text) IS NULL or
                 c.fts_document @@ (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'') ) ) or
                 c.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) )
-            )
-            and (?4 = TRUE or (c.is_public = true))
+                or cast(?4 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?4 as text), '%')))
+            and (?5 = TRUE or (c.is_public = true))
             order by 
                 ts_rank(c.fts_document, 
                     case
@@ -131,6 +132,7 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
             ZonedDateTime now,
             String searchExcludeFinalWord,
             String searchFinalWord,
+            String searchValue,
             Boolean isAdmin,
             Pageable pageable);
 
@@ -155,8 +157,8 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
             and (cast(?3 as text) IS NULL or
                 c.fts_document @@ (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'') ) ) or
                 c.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) )
-            )
-            and (?4 = TRUE or (c.is_public = true))
+                or cast(?4 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?4 as text), '%')))
+            and (?5 = TRUE or (c.is_public = true))
             order by 
                 ts_rank(c.fts_document, 
                     case
@@ -176,6 +178,7 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
             ZonedDateTime now,
             String searchExcludeFinalWord,
             String searchFinalWord,
+            String searchValue,
             Boolean isAdmin,
             Pageable pageable);
 
@@ -199,8 +202,8 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
     where (cast(?2 as text) IS NULL or
             c.fts_document @@ (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'') ) ) or
             c.fts_document @@ (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,'')) ) )
-            )
-      and (?3 = TRUE or (c.is_public = true))
+            or cast(?3 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?3 as text), '%')))
+      and (?4 = TRUE or (c.is_public = true))
     order by 
         ts_rank(c.fts_document, 
             case
@@ -219,6 +222,7 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
     Page<ContestProjection> findAllContainsSearchName(
             String searchExcludeFinalWord,
             String searchFinalWord,
+            String searchValue,
             Boolean isAdmin,
             Pageable pageable);
 
