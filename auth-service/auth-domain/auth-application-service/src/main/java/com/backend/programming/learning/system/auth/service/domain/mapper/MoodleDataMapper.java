@@ -26,7 +26,7 @@ import java.util.UUID;
 public class MoodleDataMapper {
     public UpdateUserCommand updateUser(UserModel userModel, User user) {
         return UpdateUserCommand.builder()
-                .userId(user.getId().getValue())
+                .email(user.getEmail())
                 .dob(user.getDob())
                 .firstName(userModel.getFirstname())
                 .lastName(userModel.getLastname())

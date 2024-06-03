@@ -34,12 +34,12 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET, "/auth/users").hasAnyRole(ADMIN, USER)
                         .requestMatchers(HttpMethod.GET, "/auth/users/get-by-email/:email").hasAnyRole(ADMIN, USER)
-                        .requestMatchers(HttpMethod.DELETE, "/auth/users/:id").hasRole(ADMIN)
-                        .requestMatchers(HttpMethod.PUT, "/auth/users/:id").hasRole(ADMIN)
+                        .requestMatchers(HttpMethod.DELETE, "/auth/users/:id").hasAnyRole(ADMIN, USER)
+                        .requestMatchers(HttpMethod.PUT, "/auth/users/:id").hasAnyRole(ADMIN, USER)
                         .requestMatchers(HttpMethod.GET, "/auth/users/search").hasAnyRole(ADMIN, USER)
                         .requestMatchers(HttpMethod.POST, "/auth/users").hasRole(ADMIN)
+                        .requestMatchers(HttpMethod.POST, "/auth/users/change-password").hasAnyRole(ADMIN, USER)
                         .requestMatchers(HttpMethod.POST, "/auth/user-roles").hasRole(ADMIN)
-                        .requestMatchers(HttpMethod.POST, "/auth/uses/refresh_token").hasAnyRole(ADMIN, USER)
                         .anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2

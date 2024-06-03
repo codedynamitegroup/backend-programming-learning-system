@@ -35,6 +35,8 @@ public class UserEntity {
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
     private Boolean isDeleted;
+    private Integer otp;
+    private ZonedDateTime otpExpireAt;
 
     @ManyToOne
     @JoinColumn(name = "organization_id", referencedColumnName = "id")

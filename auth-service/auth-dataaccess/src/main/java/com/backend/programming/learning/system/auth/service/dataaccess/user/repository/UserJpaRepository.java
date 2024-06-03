@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.auth.service.dataaccess.user.repository;
 
-import com.backend.programming.learning.system.auth.service.dataaccess.role.entity.RoleEntity;
 import com.backend.programming.learning.system.auth.service.dataaccess.user.entity.UserEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

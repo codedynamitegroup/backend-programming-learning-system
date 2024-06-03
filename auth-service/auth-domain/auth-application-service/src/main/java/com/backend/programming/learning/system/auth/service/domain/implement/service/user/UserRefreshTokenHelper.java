@@ -8,6 +8,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.re
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
+import com.backend.programming.learning.system.auth.service.domain.exception.UnAuthorizedServiceException;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -35,11 +36,11 @@ public class UserRefreshTokenHelper {
         User user = findUserByEmail(refreshTokenUserCommand.getEmail());
         if (Objects.isNull(user.getRefreshToken())) {
             log.error("User has logged out or does not have refresh token");
-            throw new AuthDomainException("User has logged out or does not have refresh token");
+            throw new UnAuthorizedServiceException("User has logged out or does not have refresh token");
         }
         if (!user.getRefreshToken().equals(refreshTokenUserCommand.getRefreshToken())) {
             log.error("Refresh token is not matching with the user's refresh token");
-            throw new AuthDomainException("Refresh token is not matching with the user's refresh token");
+            throw new UnAuthorizedServiceException("Refresh token is not matching with the user's refresh token");
         }
 
         WebClient client = WebClient.create(keycloakConfigData.getUrls());
@@ -52,9 +53,10 @@ public class UserRefreshTokenHelper {
                 .retrieve()
                 .bodyToMono(ResponseLoginAndRefreshUser.class)
                 .block();
+
         if (result == null) {
             log.error("Refresh token failed");
-            throw new AuthDomainException("Refresh token failed");
+            throw new UnAuthorizedServiceException("Refresh token failed");
         }
 
         user.setRefreshToken(result.getRefresh_token());

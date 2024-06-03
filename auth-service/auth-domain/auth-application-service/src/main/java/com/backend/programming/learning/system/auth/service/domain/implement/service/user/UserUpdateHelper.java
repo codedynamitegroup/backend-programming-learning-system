@@ -33,7 +33,7 @@ public class UserUpdateHelper {
 
     @Transactional
     public UserUpdatedEvent persistUser(UpdateUserCommand updateUserCommand) {
-        User user = getUser(updateUserCommand.getUserId());
+        User user = getUser(updateUserCommand.getEmail());
         user.setUpdatedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
 
         if (updateUserCommand.getDob() != null) {
@@ -62,11 +62,11 @@ public class UserUpdateHelper {
         return userUpdatedEvent;
     }
 
-    private User getUser(UUID userId) {
-        Optional<User> user = userRepository.findById(new UserId(userId));
+    private User getUser(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
         if (user.isEmpty()) {
-            log.error("User with id: {} could not be found!", userId);
-            throw new AuthDomainException("User with id: " + userId + " could not be found!");
+            log.error("User with email: {} could not be found!", email);
+            throw new AuthDomainException("User with email: " + email + " could not be found!");
         }
         return user.get();
     }

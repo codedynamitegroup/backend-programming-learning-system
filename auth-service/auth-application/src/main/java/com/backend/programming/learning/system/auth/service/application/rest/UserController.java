@@ -1,14 +1,16 @@
 package com.backend.programming.learning.system.auth.service.application.rest;
 
 import com.backend.programming.learning.system.auth.service.application.utils.JwtUtils;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.change_password.ChangedPasswordUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.change_password.ChangedPasswordUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.forgot_password.*;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.SocialLoginUserCommand;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.logout.LogoutUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.logout.LogoutUserEmailCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.logout.LogoutUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.*;
@@ -24,6 +26,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.mail.MessagingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -143,7 +146,7 @@ public class UserController {
     public ResponseEntity<?> logoutUser(@RequestHeader(value = "Access-Token", required = false) String accessToken) {
         String email = jwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
         if (email == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Invalid access token"));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Invalid access token"));
         }
         LogoutUserResponse logoutUserResponse = userApplicationService.logoutUser(
                 LogoutUserEmailCommand.builder()
@@ -228,8 +231,8 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
-    @PutMapping("/{id}")
-    @Operation(summary = "Update user by id.")
+    @PutMapping
+    @Operation(summary = "Update user.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
@@ -237,12 +240,16 @@ public class UserController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<UpdateUserResponse> updateUserById(
-            @PathVariable UUID id,
-            @RequestBody UpdateUserCommand updateUserCommand) {
-        log.info("Updating user with id: {}", id);
+    public ResponseEntity<?> updateUser(
+            @RequestBody UpdateUserCommand updateUserCommand,
+            @RequestHeader(value = "Access-Token", required = false) String accessToken) {
+        String email = jwtUtils.getEmailFromJwtString(accessToken);
+        if (email == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid access token");
+        }
+        log.info("Updating user with email: {}", email);
         UpdateUserResponse updateUserResponse = userApplicationService.updateUser(UpdateUserCommand.builder()
-                .userId(id)
+                .email(email)
                 .dob(updateUserCommand.getDob())
                 .firstName(updateUserCommand.getFirstName())
                 .lastName(updateUserCommand.getLastName())
@@ -251,8 +258,86 @@ public class UserController {
                 .avatarUrl(updateUserCommand.getAvatarUrl())
                 .build());
 
-        log.info("User updated with id: {}", id);
         return ResponseEntity.ok(updateUserResponse);
+    }
+
+    @PostMapping("/change-password")
+    @Operation(summary = "Change password user.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = UpdateUserResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<?> changePasswordUser(
+            @RequestBody ChangedPasswordUserCommand changedPasswordUserCommand,
+            @RequestHeader(value = "Access-Token", required = false) String accessToken) {
+        String email = jwtUtils.getEmailFromJwtString(accessToken);
+        if (email == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Invalid access token"));
+        }
+        log.info("Change password with email: {}", email);
+        ChangedPasswordUserResponse changedPasswordUserResponse = userApplicationService.changePasswordUser(ChangedPasswordUserCommand.builder()
+                .email(email)
+                .oldPassword(changedPasswordUserCommand.getOldPassword())
+                .newPassword(changedPasswordUserCommand.getNewPassword())
+                .build());
+
+        return ResponseEntity.ok(changedPasswordUserResponse);
+    }
+
+    @GetMapping("/forgot-password/{email}")
+    @Operation(summary = "Forgot password user.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = UpdateUserResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<ForgotPasswordEmailResponse> forgotPasswordUser(@PathVariable String email) throws MessagingException {
+        log.info("Forgot password with email: {}", email);
+        ForgotPasswordEmailResponse forgotPasswordEmailResponse = userApplicationService.forgotPasswordEmail(
+                ForgotPasswordEmailCommand.builder()
+                .email(email)
+                .build());
+
+        return ResponseEntity.ok(forgotPasswordEmailResponse);
+    }
+
+    @PostMapping("/forgot-password/verify-otp")
+    @Operation(summary = "Verify OTP User.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = UpdateUserResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<VerifyOTPResponse> verifyOTP(@RequestBody VerifyOTPCommand verifyOTPCommand) {
+        log.info("Verify OTP with email: {} and otp: {}", verifyOTPCommand.getEmail(), verifyOTPCommand.getOtp());
+        VerifyOTPResponse verifyOTPResponse = userApplicationService.verifyOTP(verifyOTPCommand);
+
+        return ResponseEntity.ok(verifyOTPResponse);
+    }
+
+    @PostMapping("/forgot-password/change-password")
+    @Operation(summary = "Change password user.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = UpdateUserResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<ResetPasswordResponse> forgotPasswordChangePassword(
+            @RequestBody ResetPasswordCommand forgotPasswordChangePasswordCommand) {
+        log.info("Forgot password change password with email: {}", forgotPasswordChangePasswordCommand.getEmail());
+        ResetPasswordResponse forgotPasswordChangePasswordResponse = userApplicationService.forgotPasswordChangePassword(
+                forgotPasswordChangePasswordCommand);
+
+        return ResponseEntity.ok(forgotPasswordChangePasswordResponse);
     }
 
     @DeleteMapping("/{id}")
