@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @Slf4j
 @RequestMapping(value = "/core/questions/shortanswer-question", produces = "application/vnd.api.v1+json")
@@ -68,6 +69,25 @@ public class QtypeShortanswerQuestionController {
         return ResponseEntity.ok(queryQtypeShortanswerQuestionResponse);
     }
 
+    @GetMapping("/questionId/{questionId}")
+    @Operation(summary = "Query shortanswer question by main question id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryQtypeShortanswerQuestionResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryQtypeShortanswerQuestionResponse> queryQtypeShortanswerQuestionByQuestionId(
+            @PathVariable("questionId") UUID questionId) {
+        log.info("Querying shortanswer question by question id: {}", questionId);
+        QueryQtypeShortanswerQuestionResponse queryQtypeShortanswerQuestionResponse = qtypeShortanswerQuestionApplicationService
+                .queryQtypeShortanswerQuestionByQuestionId(questionId);
+        log.info("Question shortanswer queried: {}", queryQtypeShortanswerQuestionResponse);
+
+        return ResponseEntity.ok(queryQtypeShortanswerQuestionResponse);
+    }
+
     @GetMapping
     @Operation(summary = "Query all shortanswer questions.")
     @ApiResponses(value = {
@@ -86,6 +106,7 @@ public class QtypeShortanswerQuestionController {
                 .qtypeShortAnswerQuestions(queryQtypeShortanswerQuestionResponse)
                 .build());
     }
+
 
     @PutMapping
     @Operation(summary = "Update shortanswer question.")

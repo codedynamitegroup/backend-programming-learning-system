@@ -4,6 +4,8 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryByIdsCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryByIdsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QuestionApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -45,6 +47,23 @@ public class QuestionController {
         return ResponseEntity.ok(QueryAllQuestionsResponse.builder()
                 .questionResponses(questionResponseEntity)
                 .build());
+    }
+
+    @PostMapping("/detail")
+    @Operation(summary = "Get all questions detail by ids.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryByIdsResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryByIdsResponse> getAllQuestionsDetail(@RequestBody QueryByIdsCommand ids) {
+        log.info("Getting all questions detail by ids: {}", ids);
+        QueryByIdsResponse questionResponseEntity = questionApplicationService.queryAllQuestionDetail(ids);
+        log.info("Questions retrieved: {}", questionResponseEntity);
+
+        return ResponseEntity.ok(questionResponseEntity);
     }
 
     @GetMapping("/category/{categoryId}")

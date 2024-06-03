@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
+@Slf4j
 @Component
 public class CertificateCourseRepositoryImpl implements CertificateCourseRepository {
     private final CertificateCourseJpaRepository certificateCourseJpaRepository;
@@ -65,10 +65,11 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
                 finalFilterTopicIds.add(topicId);
             }
         }
-
-        return certificateCourseJpaRepository.findAllByCourseNameAndByFilterTopicIds(
+        UUID firstTopicId = !finalFilterTopicIds.isEmpty() ? finalFilterTopicIds.get(0) : null;
+        return certificateCourseJpaRepository.findAllByCourseNameAndByTopicId(
                         searchExcludeFinalWord, searchFinalWord,
-                        finalFilterTopicIds)
+                        courseName,
+                        firstTopicId)
                 .stream()
                 .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
                 .toList();
@@ -95,19 +96,24 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
                 finalFilterTopicIds.add(topicId);
             }
         }
+        UUID firstTopicId = !finalFilterTopicIds.isEmpty() ? finalFilterTopicIds.get(0) : null;
 
         if (isRegistered) {
             return certificateCourseJpaRepository.findAllByCourseNameAndByFilterTopicIdsAndRegisteredBy(
-                            searchExcludeFinalWord, searchFinalWord,
-                            finalFilterTopicIds,
+                            searchExcludeFinalWord,
+                            searchFinalWord,
+                            courseName,
+                            firstTopicId,
                             userId)
                     .stream()
                     .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
                     .toList();
         } else {
             return certificateCourseJpaRepository.findAllByCourseNameAndByFilterTopicIdsAndNotRegisteredBy(
-                            searchExcludeFinalWord, searchFinalWord,
-                            finalFilterTopicIds,
+                            searchExcludeFinalWord,
+                            searchFinalWord,
+                            courseName,
+                            firstTopicId,
                             userId)
                     .stream()
                     .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
@@ -139,10 +145,13 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
                 finalFilterTopicIds.add(topicId);
             }
         }
+        UUID firstTopicId = !finalFilterTopicIds.isEmpty() ? finalFilterTopicIds.get(0) : null;
 
         return certificateCourseJpaRepository.findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIds(
-                        searchExcludeFinalWord, searchFinalWord,
-                        finalFilterTopicIds)
+                        searchExcludeFinalWord,
+                        searchFinalWord,
+                        courseName,
+                        firstTopicId)
                         .stream()
                         .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
                         .toList();
@@ -170,19 +179,24 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
                 finalFilterTopicIds.add(topicId);
             }
         }
+        UUID firstTopicId = !finalFilterTopicIds.isEmpty() ? finalFilterTopicIds.get(0) : null;
 
         if (isRegistered) {
             return certificateCourseJpaRepository.findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIdsAndRegisteredBy(
-                            searchExcludeFinalWord, searchFinalWord,
-                            finalFilterTopicIds,
+                            searchExcludeFinalWord,
+                            searchFinalWord,
+                            courseName,
+                            firstTopicId,
                             userId)
                     .stream()
                     .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
                     .toList();
         } else {
             return certificateCourseJpaRepository.findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIdsAndNotRegisteredBy(
-                            searchExcludeFinalWord, searchFinalWord,
-                            finalFilterTopicIds,
+                            searchExcludeFinalWord,
+                            searchFinalWord,
+                            courseName,
+                            firstTopicId,
                             userId)
                     .stream()
                     .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)

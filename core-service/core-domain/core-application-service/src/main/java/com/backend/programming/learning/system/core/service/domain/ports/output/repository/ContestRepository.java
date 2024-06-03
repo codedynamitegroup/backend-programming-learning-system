@@ -13,7 +13,7 @@ public interface ContestRepository {
 
     Optional<Contest> findById(ContestId contestId);
 
-    Page<Contest> findAll(String searchName, String startTimeFilter, Integer page, Integer size);
+    Page<Contest> findAll(String searchName, String startTimeFilter, Integer page, Integer size, Boolean isAdmin);
 
     void deleteContestById(UUID contestId);
     List<Contest> findMostPopularContests();

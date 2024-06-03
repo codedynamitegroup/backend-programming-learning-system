@@ -3,6 +3,8 @@ package com.backend.programming.learning.system.core.service.domain.implement.se
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.question.QuestionDeleteResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryByIdsCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryByIdsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.implement.service.question.handler.QuestionCommandHandler;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QuestionApplicationService;
@@ -44,5 +46,10 @@ public class QuestionApplicationServiceImpl implements QuestionApplicationServic
             QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand
     ) {
         return questionQueryCommandHandler.queryAllQuestionByCategory(categoryId, queryAllQuestionByCategoryIdCommand);
+    }
+
+    @Override
+    public QueryByIdsResponse queryAllQuestionDetail(QueryByIdsCommand ids) {
+        return questionQueryCommandHandler.queryAllQuestionDetail(ids);
     }
 }

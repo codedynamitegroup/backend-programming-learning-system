@@ -13,7 +13,7 @@ public interface CodeSubmissionApplicationService {
 
     void handleTestCaseResult(@Valid UpdateCodeSubmissionTestCaseCommand command);
 
-    List<GetCodeSubmissionResponseItem> getCodeSubmissionsByUserId(@Valid GetCodeSubmissionsByUserIdCommand command);
+    GetCodeSubmissionReponse getCodeSubmissionsByUserId(@Valid GetCodeSubmissionsByUserIdCommand command);
 
     GetCodeSubmissionResponseItem getCodeSubmissionsById(@Valid GetDetailCodeSubmissionsByIdCommand command);
 

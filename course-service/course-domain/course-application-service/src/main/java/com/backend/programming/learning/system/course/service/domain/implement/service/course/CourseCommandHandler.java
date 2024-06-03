@@ -53,6 +53,7 @@ public class CourseCommandHandler {
     public QueryAllCourseResponse findAll(QueryAllCourseCommand queryAllCourseCommand) {
         Page<Course> courses = courseQueryHelper.findAll(
                 queryAllCourseCommand.getSearch(),
+                queryAllCourseCommand.getCourseType(),
                 queryAllCourseCommand.getPageNo(),
                 queryAllCourseCommand.getPageSize());
 

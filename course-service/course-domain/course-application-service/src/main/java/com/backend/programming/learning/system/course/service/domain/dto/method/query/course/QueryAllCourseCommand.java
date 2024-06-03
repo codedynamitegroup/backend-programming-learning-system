@@ -17,4 +17,6 @@ public class QueryAllCourseCommand {
     private final int pageSize;
     @NotNull
     private final String search;
+
+    private final String[] courseType;
 }

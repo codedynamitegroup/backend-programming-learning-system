@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.application.rest;
 
+import com.backend.programming.learning.system.application.handler.utils.JwtUtils;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.*;
@@ -34,15 +35,20 @@ public class CodeSubmissionController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
     }
     @GetMapping
-    public ResponseEntity<List<GetCodeSubmissionResponseItem>> getCodeSubmissionsByUserId
-            (@RequestParam UUID userId,
-             @RequestParam UUID codeQuestionId){
+    public ResponseEntity<GetCodeSubmissionReponse> getCodeSubmissionsByUserId
+            (@RequestHeader(value = "Access-Token") String accessToken,
+             @RequestParam UUID codeQuestionId,
+             @RequestParam(defaultValue = "0") Integer pageNo,
+             @RequestParam(defaultValue = "5") Integer pageSize){
+        String email = JwtUtils.getEmailFromJwtString(accessToken);
 
         GetCodeSubmissionsByUserIdCommand command = GetCodeSubmissionsByUserIdCommand.builder()
                 .codeQuestionId(codeQuestionId)
-                .userId(userId)
+                .email(email)
+                .pageNum(pageNo)
+                .pageSize(pageSize)
                 .build();
-        List<@Valid GetCodeSubmissionResponseItem> response =
+        GetCodeSubmissionReponse response =
                 codeSubmissionApplicationService.getCodeSubmissionsByUserId(command);
 
         return ResponseEntity.ok(response);

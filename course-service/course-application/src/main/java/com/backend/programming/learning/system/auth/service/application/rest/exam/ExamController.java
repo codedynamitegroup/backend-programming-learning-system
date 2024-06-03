@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.auth.service.application.rest.exam;
 
-import com.backend.programming.learning.system.course.service.domain.dto.method.create.course_user.CreateCourseUserResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam.CreateExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam.CreateExamResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.course.DeleteCourseResponse;
@@ -8,6 +7,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryAllExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryAllExamResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryExamCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.exam.UpdateExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.exam.UpdateExamResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.exam.ExamResponseEntity;
@@ -133,6 +133,21 @@ public class ExamController {
     ) {
         log.info("Updating exam with id: {}", examId);
         UpdateExamResponse response = examApplicationService.updateExam(new ExamId(examId), updateExamCommand);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("exam/{examId}/overview")
+    @Operation(summary = "Get exam grading by id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryOverviewResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryOverviewResponse> overviewExam(@PathVariable UUID examId) {
+        log.info("Grading exam with id: {}", examId);
+        QueryOverviewResponse response = examApplicationService.overviewExam(new ExamId(examId));
         return ResponseEntity.ok(response);
     }
 }

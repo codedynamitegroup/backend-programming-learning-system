@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.course.service.domain.mapper.question;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionRequest;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QuestionExamDTO;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.question.QuestionWithPageResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.event.question.event.QuestionEvent;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.question.QuestionEventPayload;
 import com.backend.programming.learning.system.domain.valueobject.*;
@@ -218,7 +220,18 @@ public class QuestionDataMapper {
                 .build();
     }
 
-    public List<QuestionResponseEntity> questionListToQuestionResponseEntityList(List<Question> questions) {
-        return questions.stream().map(this::questionToQueryQuestionResponse).toList();
+    private QuestionWithPageResponseEntity questionToQuestionWithPageResponseEntity(QuestionExamDTO question) {
+        return QuestionWithPageResponseEntity.builder()
+                .id(question.getId())
+                .difficulty(question.getDifficulty())
+                .name(question.getName())
+                .questionText(question.getQuestionText())
+                .page(question.getPage())
+                .qtype(question.getQtype())
+                .build();
+    }
+
+    public List<QuestionWithPageResponseEntity> questionListToQuestionResponseEntityList(List<QuestionExamDTO> questions) {
+        return questions.stream().map(this::questionToQuestionWithPageResponseEntity).toList();
     }
 }

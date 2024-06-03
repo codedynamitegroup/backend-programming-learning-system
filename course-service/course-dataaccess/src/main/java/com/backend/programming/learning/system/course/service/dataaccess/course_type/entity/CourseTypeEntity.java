@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.course.service.dataaccess.course_type.entity;
 
+import com.backend.programming.learning.system.course.service.dataaccess.organization.entity.OrganizationEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.course.service.domain.entity.Organization;
 import lombok.*;
 
 import jakarta.persistence.*;
@@ -23,6 +25,10 @@ public class CourseTypeEntity {
     private Integer moodleId;
 
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "org_id", referencedColumnName = "id")
+    private OrganizationEntity organization;
 
     @Override
     public boolean equals(Object o) {

@@ -3,9 +3,15 @@ package com.backend.programming.learning.system.core.service.domain.implement.se
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.question.QuestionDeleteResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryByIdsCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryByIdsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
 import com.backend.programming.learning.system.core.service.domain.implement.service.question.method.delete.QuestionDeleteHelper;
+import com.backend.programming.learning.system.core.service.domain.implement.service.question.method.query.QtypeCodeQuestionQueryHelper;
+import com.backend.programming.learning.system.core.service.domain.implement.service.question.method.query.QtypeEssayQuestionQueryHelper;
+import com.backend.programming.learning.system.core.service.domain.implement.service.question.method.query.QtypeMultichoiceQuestionQueryHelper;
+import com.backend.programming.learning.system.core.service.domain.implement.service.question.method.query.QtypeShortanswerQuestionQueryHelper;
 import com.backend.programming.learning.system.core.service.domain.implement.service.question.method.query.QuestionQueryHelper;
 import com.backend.programming.learning.system.core.service.domain.implement.service.question.saga.QuestionSagaHelper;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
@@ -16,34 +22,32 @@ import com.backend.programming.learning.system.core.service.domain.outbox.schedu
 import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static com.backend.programming.learning.system.domain.valueobject.QuestionType.*;
+
 @Component
 @Slf4j
+@RequiredArgsConstructor
 public class QuestionCommandHandler {
+    private final QtypeEssayQuestionQueryHelper qtypeEssayQuestionQueryHelper;
+    private final QtypeCodeQuestionQueryHelper qtypeCodeQuestionQueryHelper;
+    private final QtypeMultichoiceQuestionQueryHelper qtypeMultichoiceQuestionQueryHelper;
+    private final QtypeShortanswerQuestionQueryHelper qtypeShortanswerQuestionQueryHelper;
+
     private final QuestionQueryHelper questionQueryHelper;
     private final QuestionDeleteHelper questionDeleteHelper;
     private final QuestionOutboxHelper questionOutboxHelper;
     private final QuestionSagaHelper questionSagaHelper;
     private final QuestionDataMapper questionDataMapper;
     private final CodeQuestionsUpdateOutboxHelper codeQuestionsUpdateOutboxHelper;
-
-    public QuestionCommandHandler(QuestionQueryHelper questionQueryHelper, QuestionDeleteHelper questionDeleteHelper,
-                                  QuestionOutboxHelper questionOutboxHelper, QuestionSagaHelper questionSagaHelper,
-                                  QuestionDataMapper questionDataMapper,
-                                  CodeQuestionsUpdateOutboxHelper codeQuestionsUpdateOutboxHelper) {
-        this.questionQueryHelper = questionQueryHelper;
-        this.questionDeleteHelper = questionDeleteHelper;
-        this.questionOutboxHelper = questionOutboxHelper;
-        this.questionSagaHelper = questionSagaHelper;
-        this.questionDataMapper = questionDataMapper;
-        this.codeQuestionsUpdateOutboxHelper = codeQuestionsUpdateOutboxHelper;
-    }
 
     public QuestionResponseEntity queryQuestionById(UUID questionId) {
         return questionQueryHelper
@@ -94,5 +98,29 @@ public class QuestionCommandHandler {
                 .totalItems(questionResponseEntities.getTotalElements())
                 .totalPages(questionResponseEntities.getTotalPages())
                 .build();
+    }
+
+    public QueryByIdsResponse queryAllQuestionDetail(QueryByIdsCommand ids) {
+        List<Object> responses = new ArrayList<>();
+        ids.questionCommands().forEach(questionCommand -> {
+            switch (questionCommand.qtype()) {
+                case "ESSAY":
+                    responses.add(qtypeEssayQuestionQueryHelper.queryQuestionById(questionCommand.questionId()));
+                    break;
+                case "CODE":
+                    responses.add(qtypeCodeQuestionQueryHelper.queryQuestionById(questionCommand.questionId()));
+                    break;
+                case "MULTIPLE_CHOICE":
+                    responses.add(qtypeMultichoiceQuestionQueryHelper.queryQuestionById(questionCommand.questionId()));
+                    break;
+                case "TRUE_FALSE":
+                    responses.add(qtypeMultichoiceQuestionQueryHelper.queryQuestionTrueFalseById(questionCommand.questionId()));
+                    break;
+                case "SHORT_ANSWER":
+                    responses.add(qtypeShortanswerQuestionQueryHelper.queryQuestionById(questionCommand.questionId()));
+                    break;
+            }
+        });
+        return new QueryByIdsResponse(responses);
     }
 }

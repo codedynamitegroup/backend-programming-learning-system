@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.m
 
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetCodeSubmissionReponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetCodeSubmissionResponseItem;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_submission.UpdateCodeSubmissionTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
@@ -13,6 +14,7 @@ import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
@@ -108,6 +110,15 @@ public class CodeSubmissionDataMapper {
                 .pass(codeSubmission.getGrade() == null? null: codeSubmission.getGrade().floatValue() == codeSubmission.getCodeQuestion().getMaxGrade())
                 .createdAt(codeSubmission.getCreatedAt())
                 .copyState(codeSubmission.getCopyState().name())
+                .build();
+    }
+
+    public GetCodeSubmissionReponse pagableToGetCodeSubmissionReponse(Page<GetCodeSubmissionResponseItem> list) {
+        return GetCodeSubmissionReponse.builder()
+                .codeSubmissions(list.toList())
+                .currentPage(list.getNumber())
+                .totalItems(list.getTotalElements())
+                .totalPages(list.getTotalPages())
                 .build();
     }
 }

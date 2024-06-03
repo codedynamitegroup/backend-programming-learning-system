@@ -17,8 +17,12 @@ public class UpdateContestCommand {
     private final UUID contestId;
     private final String name;
     private final String description;
+    private final String thumbnailUrl;
+    private final String prizes;
+    private final String rules;
+    private final String scoring;
+    private final Boolean isPublic;
     private final ZonedDateTime startTime;
     private final ZonedDateTime endTime;
-    @NotNull
-    private final UUID updatedBy;
+    private final String email;
 }

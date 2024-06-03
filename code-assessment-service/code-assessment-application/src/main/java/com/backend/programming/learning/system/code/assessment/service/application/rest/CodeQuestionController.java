@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.application.rest;
 
+import com.backend.programming.learning.system.application.handler.utils.JwtUtils;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.CodeQuestionDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.ProgrammingLanguageDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionCommand;
@@ -72,12 +73,13 @@ public class CodeQuestionController {
             @RequestParam Integer pageSize,
             @RequestParam(required = false) List<UUID> tagIds,
             @RequestParam(defaultValue = "ASC") QueryOrderBy orderBy,
-            @RequestParam(required = false) UUID userId,
             @RequestParam(required = false) String search,
             @RequestParam(required = false) QuestionDifficulty difficulty,
-            @RequestParam(required = false) Boolean solved){
-        log.info("getPublicCodeQuestion");
+            @RequestParam(required = false) Boolean solved,
+            @RequestHeader(value = "Access-Token", required = false) String accessToken){
+//        log.info("getPublicCodeQuestion");
 //        tagIds.forEach(i-> log.info("{}",i));
+        String email = JwtUtils.getEmailFromJwtString(accessToken);
         CodeQuestion.Fields sortBy = CodeQuestion.Fields.createdAt;
         GetCodeQuestionsQuery query = GetCodeQuestionsQuery.builder()
                 .orderBy(orderBy)
@@ -85,7 +87,7 @@ public class CodeQuestionController {
                 .pageNum(pageNo)
                 .pageSize(pageSize)
                 .tagIds(tagIds)
-                .userId(userId)
+                .email(email)
                 .search(search)
                 .difficulty(difficulty)
                 .solved(solved)
@@ -97,7 +99,6 @@ public class CodeQuestionController {
     //no neeed to delete
 
     //update
-    //add outbox
     @PutMapping("/{code-question-id}")
     public ResponseEntity updateCodeQuestion(
             @PathVariable(value = "code-question-id") UUID codeQuestionId,
@@ -112,10 +113,12 @@ public class CodeQuestionController {
     @GetMapping("/{code-question-id}")
     public ResponseEntity<CodeQuestionDto> getDetailCodeQuestion(
             @PathVariable("code-question-id") UUID codeQuestionId,
-            @RequestParam(required = false) UUID userId){
+            @RequestHeader(value = "Access-Token") String accessToken){
+        String email = JwtUtils.getEmailFromJwtString(accessToken);
+
         GetDetailCodeQuestionCommand command =  GetDetailCodeQuestionCommand.builder()
                 .codeQuestionId(codeQuestionId)
-                .userId(userId)
+                .email(email)
                 .build();
         CodeQuestionDto codeQuestionDto = codeQuestionApplicationService.getDetailCodeQuestion(command);
         return ResponseEntity.ok(codeQuestionDto);

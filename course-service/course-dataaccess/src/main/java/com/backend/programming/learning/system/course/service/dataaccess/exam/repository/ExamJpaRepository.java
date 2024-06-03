@@ -22,4 +22,12 @@ public interface ExamJpaRepository extends JpaRepository<ExamEntity, UUID> {
     Page<ExamEntity> findAll(UUID courseId, String search, Pageable pageable);
 
     Optional<ExamEntity> findByName(String name);
+
+    @Query("""
+            SELECT COUNT(cu)
+            FROM ExamEntity e 
+            JOIN CourseUserEntity cu ON e.course.id = cu.course.id AND cu.roleMoodle.id = 5 
+            WHERE e.id = :examId
+            """)
+    Integer countStudent(UUID examId);
 }

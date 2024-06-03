@@ -3,9 +3,11 @@ package com.backend.programming.learning.system.course.service.dataaccess.questi
 import com.backend.programming.learning.system.course.service.dataaccess.organization.entity.OrganizationEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.organization.mapper.OrganizationDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.question.entity.QuestionEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.question.entity.QuestionExamDataAccessDTO;
 import com.backend.programming.learning.system.course.service.dataaccess.question_bank_category.mapper.QuestionBankCategoryDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.mapper.UserDataAccessMapper;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QuestionExamDTO;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import com.backend.programming.learning.system.course.service.domain.entity.Organization;
 import com.backend.programming.learning.system.course.service.domain.entity.Question;
@@ -68,7 +70,19 @@ public class QuestionDataAccessMapper {
         return response;
     }
 
-    public List<Question> questionEntitiesToQuestions(List<QuestionEntity> questionEntities) {
-        return questionEntities.stream().map(this::questionEntityToQuestion).toList();
+    private QuestionExamDTO questionDTOtoQuestion(QuestionExamDataAccessDTO questionEntity) {
+        return
+                QuestionExamDTO.builder()
+                .id(questionEntity.getId())
+                .difficulty(questionEntity.getDifficulty())
+                .name(questionEntity.getName())
+                .questionText(questionEntity.getQuestionText())
+                .qtype(questionEntity.getQtype())
+                .page(questionEntity.getPage())
+                .build();
+    }
+
+    public List<QuestionExamDTO> questionEntitiesToQuestions(List<QuestionExamDataAccessDTO> questionEntities) {
+        return questionEntities.stream().map(this::questionDTOtoQuestion).toList();
     }
 }

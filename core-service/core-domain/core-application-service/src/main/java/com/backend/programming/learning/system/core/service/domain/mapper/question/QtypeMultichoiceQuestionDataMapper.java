@@ -40,6 +40,12 @@ public class QtypeMultichoiceQuestionDataMapper {
                 .build();
     }
 
+    public QueryQtypeMultichoiceQuestionResponse qtypeTrueFalseQuestionToQueryQtypeTrueFalseQuestionResponse(QtypeMultiChoiceQuestion qtypeMultichoiceQuestion) {
+        return QueryQtypeMultichoiceQuestionResponse.builder()
+                .qtypeMultichoiceQuestion(qtypeTrueFalseQuestionToQtypeTrueFalseQuestionResponseEntity(qtypeMultichoiceQuestion))
+                .build();
+    }
+
     public List<QueryQtypeMultichoiceQuestionResponse> qtypeMultichoiceQuestionsToQueryQtypeMultichoiceQuestionResponse(List<QtypeMultiChoiceQuestion> qtypeMultichoiceQuestions) {
         return List.of(qtypeMultichoiceQuestions.stream()
                 .map(this::qtypeMultichoiceQuestionToQueryQtypeMultichoiceQuestionResponse)
@@ -73,6 +79,20 @@ public class QtypeMultichoiceQuestionDataMapper {
     private QtypeMultichoiceQuestionResponseEntity qtypeMultichoiceQuestionToQtypeMultichoiceQuestionResponseEntity(QtypeMultiChoiceQuestion qtypeMultiChoiceQuestion) {
         return QtypeMultichoiceQuestionResponseEntity.builder()
                 .question(questionDataMapper.questionToQuestionResponseEntity(qtypeMultiChoiceQuestion.getQuestion()))
+                .id(qtypeMultiChoiceQuestion.getId().getValue().toString())
+                .single(qtypeMultiChoiceQuestion.getSingle())
+                .shuffleAnswers(qtypeMultiChoiceQuestion.getShuffleAnswers())
+                .correctFeedback(qtypeMultiChoiceQuestion.getCorrectFeedback())
+                .partiallyCorrectFeedback(qtypeMultiChoiceQuestion.getPartiallyCorrectFeedback())
+                .incorrectFeedback(qtypeMultiChoiceQuestion.getIncorrectFeedback())
+                .answerNumbering(qtypeMultiChoiceQuestion.getAnswerNumbering())
+                .showNumCorrect(qtypeMultiChoiceQuestion.getShowNumCorrect())
+                .showStandardInstructions(qtypeMultiChoiceQuestion.getShowStandardInstructions())
+                .build();
+    }
+    private QtypeMultichoiceQuestionResponseEntity qtypeTrueFalseQuestionToQtypeTrueFalseQuestionResponseEntity(QtypeMultiChoiceQuestion qtypeMultiChoiceQuestion) {
+        return QtypeMultichoiceQuestionResponseEntity.builder()
+                .question(questionDataMapper.questionTrueFalseToQuestionTrueFalseResponseEntity(qtypeMultiChoiceQuestion.getQuestion()))
                 .id(qtypeMultiChoiceQuestion.getId().getValue().toString())
                 .single(qtypeMultiChoiceQuestion.getSingle())
                 .shuffleAnswers(qtypeMultiChoiceQuestion.getShuffleAnswers())

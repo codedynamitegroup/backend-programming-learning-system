@@ -21,9 +21,9 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
         where (cast(?2 as text) IS NULL or
                 cc.fts_document @@ (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'') ) ) or
                 cc.fts_document @@ (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,'')) ) )
-            )
-         and (COALESCE(?3, null) is null OR cc.topic_id in ?3)
-         and ccu.user_id = ?4
+                or cast(?3 as text) IS NULL or UPPER(cc.name) like UPPER(concat('%', cast(?3 as text), '%')))
+         and (cast(?4 as uuid) is null or cc.topic_id = ?4)
+         and ccu.user_id = ?5
         order by
             ts_rank(cc.fts_document, 
                 case
@@ -40,8 +40,10 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
             cc.name
 """, nativeQuery = true)
     List<CertificateCourseEntity> findAllByCourseNameAndByFilterTopicIdsAndRegisteredBy(
-            String searchExcludeFinalWord, String searchFinalWord,
-            List<UUID> filterTopicIds,
+            String searchExcludeFinalWord,
+            String searchFinalWord,
+            String searchValue,
+            UUID topicId,
             UUID registeredBy);
 
     @Query(value = """
@@ -50,12 +52,12 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
         where (cast(?2 as text) IS NULL or
                 cc.fts_document @@ (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'') ) ) or
                 cc.fts_document @@ (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,'')) ) )
-            )
-         and (COALESCE(?3, null) is null OR cc.topic_id in ?3)
+                or cast(?3 as text) IS NULL or UPPER(cc.name) like UPPER(concat('%', cast(?3 as text), '%')))
+         and (cast(?4 as uuid) is null or cc.topic_id = ?4)
          and cc.id not in (
             select ccu.certificate_course_id
-            from certificate_course_user ccu
-            where ccu.user_id = ?4
+            from certificate_course_user ccu2
+            where ccu2.user_id = ?4
          )
         order by
             ts_rank(cc.fts_document, 
@@ -73,8 +75,10 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
             cc.name
 """, nativeQuery = true)
     List<CertificateCourseEntity> findAllByCourseNameAndByFilterTopicIdsAndNotRegisteredBy(
-            String searchExcludeFinalWord, String searchFinalWord,
-            List<UUID> filterTopicIds,
+            String searchExcludeFinalWord,
+            String searchFinalWord,
+            String searchValue,
+            UUID topicId,
             UUID registeredBy);
 
     @Query(value = """
@@ -83,26 +87,15 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
         where (cast(?2 as text) IS NULL or
                 cc.fts_document @@ (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'') ) ) or
                 cc.fts_document @@ (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,'')) ) )
-            )
-            and (COALESCE(?3, null) is null OR cc.topic_id in ?3)
-        order by
-            ts_rank(cc.fts_document, 
-                case
-                    when cast(?2 as text) is null then to_tsquery('')
-                    else (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'')) )
-                end
-            ) desc,
-            ts_rank(cc.fts_document,
-                case
-                    when cast(?2 as text) is null then to_tsquery('')
-                    else (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,''))))
-                end
-            ) desc,
-            cc.name
+                or cast(?3 as text) IS NULL or UPPER(cc.name) like UPPER(concat('%', cast(?3 as text), '%')))
+        and (cast(?4 as uuid) is null or cc.topic_id = ?4)
+        order by cc.name
 """,nativeQuery = true)
-    List<CertificateCourseEntity> findAllByCourseNameAndByFilterTopicIds(
-            String searchExcludeFinalWord, String searchFinalWord,
-            List<UUID> filterTopicIds);
+    List<CertificateCourseEntity> findAllByCourseNameAndByTopicId(
+            String searchExcludeFinalWord,
+            String searchFinalWord,
+            String searchValue,
+            UUID topicId);
 
     @Query(value = """
         select cc.*
@@ -111,8 +104,8 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
         where (cast(?2 as text) IS NULL or
                 cc.fts_document @@ (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'') ) ) or
                 cc.fts_document @@ (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,'')) ) )
-            )
-            and (COALESCE(?3, null) is null OR cc.topic_id in ?3)
+                or cast(?3 as text) IS NULL or UPPER(cc.name) like UPPER(concat('%', cast(?3 as text), '%')))
+         and (cast(?4 as uuid) is null or cc.topic_id = ?4)
         group by cc.id
         order by 
             ts_rank(cc.fts_document, 
@@ -131,8 +124,10 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
         limit 5
 """, nativeQuery = true)
     List<CertificateCourseEntity> findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIds(
-            String searchExcludeFinalWord, String searchFinalWord,
-            List<UUID> filterTopicIds);
+            String searchExcludeFinalWord,
+            String searchFinalWord,
+            String searchValue,
+            UUID topicId);
 
     @Query(value = """
         select cc.*
@@ -141,8 +136,8 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
         where (cast(?2 as text) IS NULL or
                 cc.fts_document @@ (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'') ) ) or
                 cc.fts_document @@ (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,'')) ) )
-            )
-         and (COALESCE(?3, null) is null OR cc.topic_id in ?3)
+                or cast(?3 as text) IS NULL or UPPER(cc.name) like UPPER(concat('%', cast(?3 as text), '%')))
+         and (cast(?4 as uuid) is null or cc.topic_id = ?4)
          and ccu.user_id = ?4
         group by cc.id
         order by 
@@ -162,8 +157,10 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
         limit 5
 """, nativeQuery = true)
     List<CertificateCourseEntity> findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIdsAndRegisteredBy(
-            String searchExcludeFinalWord, String searchFinalWord,
-            List<UUID> filterTopicIds,
+            String searchExcludeFinalWord,
+            String searchFinalWord,
+            String searchValue,
+            UUID topicId,
             UUID registeredBy);
 
     @Query(value = """
@@ -173,8 +170,8 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
         where (cast(?2 as text) IS NULL or
                 cc.fts_document @@ (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'') ) ) or
                 cc.fts_document @@ (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,'')) ) )
-            )
-         and (COALESCE(?3, null) is null OR cc.topic_id in ?3)
+                or cast(?3 as text) IS NULL or UPPER(cc.name) like UPPER(concat('%', cast(?3 as text), '%')))
+         and  (cast(?4 as uuid) is null or cc.topic_id = ?4)
          and cc.id not in (
             select ccu2.certificate_course_id
             from certificate_course_user ccu2
@@ -198,8 +195,10 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
         limit 5
 """, nativeQuery = true)
     List<CertificateCourseEntity> findMostEnrolledCertificateCoursesByCourseNameAndByFilterTopicIdsAndNotRegisteredBy(
-            String searchExcludeFinalWord, String searchFinalWord,
-            List<UUID> filterTopicIds,
+            String searchExcludeFinalWord,
+            String searchFinalWord,
+            String searchValue,
+            UUID topicId,
             UUID registeredBy);
 
     void deleteById(UUID id);

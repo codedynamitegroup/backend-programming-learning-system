@@ -15,6 +15,7 @@ import com.backend.programming.learning.system.domain.valueobject.CodeSubmission
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -81,20 +82,17 @@ public class CodeSubmissionCommandHandler {
 
     }
 
-    public List<GetCodeSubmissionResponseItem> getCodeSubmissionsByUserId(GetCodeSubmissionsByUserIdCommand command) {
-        List<CodeSubmission> codeSubmissions = codeSubmissionHelper.getCodeSubmissionsByUserId(command);
-        if(codeSubmissions != null){
-            List<GetCodeSubmissionResponseItem> list = codeSubmissions.stream()
-                    .map(codeSubmissionDataMapper::codeSubmissionToGetCodeSubmissionResponseItem)
-                    .toList();
-            list.forEach(item -> {
-                item.setHeadCode(null);
-                item.setBodyCode(null);
-                item.setTailCode(null);
-            });
-            return list;
-        }
-        return List.of();
+    public GetCodeSubmissionReponse getCodeSubmissionsByUserId(GetCodeSubmissionsByUserIdCommand command) {
+        Page<CodeSubmission> codeSubmissions = codeSubmissionHelper.getCodeSubmissionsByUserId(command);
+
+        Page<GetCodeSubmissionResponseItem> list = codeSubmissions.map(
+                        codeSubmissionDataMapper::codeSubmissionToGetCodeSubmissionResponseItem);
+        list.forEach(item -> {
+            item.setHeadCode(null);
+            item.setBodyCode(null);
+            item.setTailCode(null);
+        });
+        return codeSubmissionDataMapper.pagableToGetCodeSubmissionReponse(list);
     }
 
     public GetCodeSubmissionResponseItem getCodeSubmissionsById(GetDetailCodeSubmissionsByIdCommand command) {
