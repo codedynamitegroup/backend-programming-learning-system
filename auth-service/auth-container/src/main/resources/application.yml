@@ -144,7 +144,7 @@ log:
 jwt:
   auth:
     converter:
-      resource-id: spring-client-api-rest
+      resource-id: realm_access
       principle-attribute: preferred_username
 
 keycloak:
