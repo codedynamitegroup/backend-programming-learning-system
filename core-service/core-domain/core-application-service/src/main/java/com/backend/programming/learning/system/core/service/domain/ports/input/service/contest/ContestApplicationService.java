@@ -33,4 +33,7 @@ public interface ContestApplicationService {
 
     QueryLeaderboardOfContestResponse queryLeaderboardOfContest(
             @Valid QueryLeaderboardOfContestCommand queryLeaderboardOfContestCommand);
+
+    QueryStatisticsOfContestResponse queryStatisticsOfContestResponse(
+            @Valid QueryStatisticsOfContestCommand queryStatisticsOfContestCommand);
 }

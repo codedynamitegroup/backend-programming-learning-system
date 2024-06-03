@@ -81,6 +81,8 @@ public class ContestDataMapper {
                 .numOfParticipants(contest.getNumOfParticipants())
                 .isRegistered(contest.getRegistered())
                 .isPublic(contest.getPublic())
+                .isRestrictedForum(contest.getRestrictedForum())
+                .isDisabledForum(contest.getDisabledForum())
                 .createdBy(createdByResponse)
                 .updatedBy(updatedByResponse)
                 .createdAt(contest.getCreatedAt())
@@ -156,4 +158,6 @@ public class ContestDataMapper {
                 .updatedAt(contestUser.getUpdatedAt())
                 .build();
     }
+
+
 }

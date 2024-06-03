@@ -28,5 +28,6 @@ public class ContestQuestionResponseEntity {
     private final Boolean pass;
     private final QuestionType qtype;
     private final Integer numOfSubmissions;
+    private final Integer numOfCorrectSubmissions;
     private final Long doTime;
 }

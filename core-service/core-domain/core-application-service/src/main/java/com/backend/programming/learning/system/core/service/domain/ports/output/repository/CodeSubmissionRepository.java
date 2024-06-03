@@ -9,7 +9,16 @@ import java.util.UUID;
 
 public interface CodeSubmissionRepository {
     CodeSubmission saveCodeSubmission(CodeSubmission codeSubmission);
-    List<CodeSubmission> findAllCodeSubmissionsByUserIdAndQuestionId(UUID userId, UUID questionId);
-    int countAllByUserIdAndCodeQuestionId(UUID userId, UUID codeQuestionId);
-    Optional<CodeSubmission> findLatestPassedCodeSubmissionByUserIdAndCodeQuestionId(UUID userId, UUID codeQuestionId);
+    List<CodeSubmission> findAllCodeSubmissionsByUserIdAndQuestionIdAndContestId(
+            UUID userId, UUID questionId, UUID contestId);
+    List<CodeSubmission> findAllCodeSubmissionsByUserIdAndQuestionIdAndCertificateCourseId(
+            UUID userId, UUID questionId, UUID certificateCourseId);
+    int countAllByUserIdAndCodeQuestionIdAndContestId(
+            UUID userId, UUID codeQuestionId, UUID contestId);
+    Optional<CodeSubmission> findLatestPassedCodeSubmissionByUserIdAndCodeQuestionIdAndContestId(
+            UUID userId, UUID codeQuestionId, UUID contestId);
+    int countAllPassedCodeSubmissionsByUserIdAndCodeQuestionIdAndContestId(
+            UUID userId, UUID codeQuestionId, UUID contestId);
+    int countAllPassedCodeSubmissionsByCodeQuestionIdAndContestId(UUID codeQuestionId, UUID contestId);
+    int countAllCodeSubmissionsByCodeQuestionIdAndContestId(UUID codeQuestionId, UUID contestId);
 }

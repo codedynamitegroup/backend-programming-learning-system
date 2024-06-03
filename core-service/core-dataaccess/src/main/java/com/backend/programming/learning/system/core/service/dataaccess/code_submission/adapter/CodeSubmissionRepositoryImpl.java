@@ -34,21 +34,50 @@ public class CodeSubmissionRepositoryImpl implements CodeSubmissionRepository {
     }
 
     @Override
-    public List<CodeSubmission> findAllCodeSubmissionsByUserIdAndQuestionId(UUID userID, UUID questionId) {
+    public List<CodeSubmission> findAllCodeSubmissionsByUserIdAndQuestionIdAndContestId(
+            UUID userID, UUID questionId, UUID contestId) {
         return codeSubmissionDataAccessMapper.codeSubmissionEntityListToCodeSubmissionList(
-                codeSubmissionJpaRepository.findAllCodeSubmissionsByUserIdAndQuestionId(
-                        userID, questionId
+                codeSubmissionJpaRepository.findAllCodeSubmissionsByUserIdAndQuestionIdAndContestId(
+                        userID, questionId, contestId
                 ));
     }
 
     @Override
-    public int countAllByUserIdAndCodeQuestionId(UUID userId, UUID codeQuestionId) {
-        return codeSubmissionJpaRepository.countAllByUserIdAndCodeQuestionId(userId, codeQuestionId);
+    public List<CodeSubmission> findAllCodeSubmissionsByUserIdAndQuestionIdAndCertificateCourseId(
+            UUID userId, UUID questionId, UUID certificateCourseId) {
+        return codeSubmissionDataAccessMapper.codeSubmissionEntityListToCodeSubmissionList(
+                codeSubmissionJpaRepository.findAllCodeSubmissionsByUserIdAndQuestionIdAndCertificateCourseId(
+                        userId, questionId, certificateCourseId
+                ));
     }
 
     @Override
-    public Optional<CodeSubmission> findLatestPassedCodeSubmissionByUserIdAndCodeQuestionId(UUID userId, UUID codeQuestionId) {
-        return codeSubmissionJpaRepository.findLatestPassedCodeSubmissionByUserIdAndCodeQuestionId(userId, codeQuestionId)
+    public int countAllByUserIdAndCodeQuestionIdAndContestId(UUID userId, UUID codeQuestionId, UUID contestId) {
+        return codeSubmissionJpaRepository.countAllByUserIdAndCodeQuestionIdAndContestId(userId, codeQuestionId, contestId);
+    }
+
+    @Override
+    public Optional<CodeSubmission> findLatestPassedCodeSubmissionByUserIdAndCodeQuestionIdAndContestId(
+            UUID userId, UUID codeQuestionId, UUID contestId) {
+        return codeSubmissionJpaRepository.findLatestPassedCodeSubmissionByUserIdAndCodeQuestionIdAndContestId(
+                userId, codeQuestionId, contestId)
                 .map(codeSubmissionDataAccessMapper::codeSubmissionEntityToCodeSubmission);
+    }
+
+    @Override
+    public int countAllPassedCodeSubmissionsByUserIdAndCodeQuestionIdAndContestId(UUID userId, UUID codeQuestionId, UUID contestId) {
+        return codeSubmissionJpaRepository
+                .countAllPassedCodeSubmissionsByUserIdAndCodeQuestionIdAndContestId(
+                        userId, codeQuestionId, contestId);
+    }
+
+    @Override
+    public int countAllPassedCodeSubmissionsByCodeQuestionIdAndContestId(UUID codeQuestionId, UUID contestId) {
+        return codeSubmissionJpaRepository.countAllPassedCodeSubmissionsByCodeQuestionIdAndContestId(codeQuestionId, contestId);
+    }
+
+    @Override
+    public int countAllCodeSubmissionsByCodeQuestionIdAndContestId(UUID codeQuestionId, UUID contestId) {
+        return codeSubmissionJpaRepository.countAllCodeSubmissionsByCodeQuestionIdAndContestId(codeQuestionId, contestId);
     }
 }

@@ -9,8 +9,10 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.up
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Contest;
+import com.backend.programming.learning.system.core.service.domain.entity.ContestQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.ContestUser;
 import com.backend.programming.learning.system.core.service.domain.mapper.contest.ContestDataMapper;
+import com.backend.programming.learning.system.core.service.domain.mapper.contest_question.ContestQuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -28,17 +30,20 @@ public class ContestCommandHandler {
     private final ContestDeleteHelper contestDeleteHelper;
     private final ContestUpdateHelper contestUpdateHelper;
     private final ContestDataMapper contestDataMapper;
+    private final ContestQuestionDataMapper contestQuestionDataMapper;
 
     public ContestCommandHandler(ContestCreateHelper contestCreateHelper,
                                  ContestQueryHelper contestQueryHelper,
                                  ContestDeleteHelper contestDeleteHelper,
                                  ContestUpdateHelper contestUpdateHelper,
-                                 ContestDataMapper contestDataMapper) {
+                                 ContestDataMapper contestDataMapper,
+                                 ContestQuestionDataMapper contestQuestionDataMapper) {
         this.contestCreateHelper = contestCreateHelper;
         this.contestQueryHelper = contestQueryHelper;
         this.contestDeleteHelper = contestDeleteHelper;
         this.contestUpdateHelper = contestUpdateHelper;
         this.contestDataMapper = contestDataMapper;
+        this.contestQuestionDataMapper = contestQuestionDataMapper;
     }
 
     @Transactional
@@ -69,6 +74,35 @@ public class ContestCommandHandler {
         log.info("Returning all contests: {}", contests);
 
         return contestDataMapper.contestsToQueryAllContestsResponse(contests);
+    }
+
+    @Transactional(readOnly = true)
+    public QueryStatisticsOfContestResponse queryStatisticsOfContestResponse(
+            QueryStatisticsOfContestCommand queryStatisticsOfContestCommand
+    ) {
+
+        List<ContestQuestion> contestQuestions = contestQueryHelper
+                .queryAllContestQuestionsByContestId(
+                        queryStatisticsOfContestCommand.getContestId());
+        log.info("Returning all contest questions: {}", contestQuestions);
+
+        int numOfParticipantsOfContest = contestQueryHelper
+                .countAllParticipantsByContestId(
+                        queryStatisticsOfContestCommand.getContestId());
+        log.info("Returning number of participants for contest: {}", numOfParticipantsOfContest);
+
+        int numOfParticipantsHavingSubmissions = contestQueryHelper
+                .countAllParticipantsHavingSubmissionsByContestId(
+                        queryStatisticsOfContestCommand.getContestId());
+        log.info("Returning number of participants having submissions for contest: {}", numOfParticipantsHavingSubmissions);
+
+        return QueryStatisticsOfContestResponse.builder()
+                .contestQuestions(
+                        contestQuestionDataMapper.contestQuestionsToContestQuestionResponseEntities(contestQuestions)
+                )
+                .numOfSignUps(numOfParticipantsOfContest)
+                .numOfParticipantsHavingSubmissions(numOfParticipantsHavingSubmissions)
+                .build();
     }
 
     @Transactional(readOnly = true)

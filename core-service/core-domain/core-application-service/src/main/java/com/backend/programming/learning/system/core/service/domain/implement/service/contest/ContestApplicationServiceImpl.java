@@ -66,4 +66,12 @@ class ContestApplicationServiceImpl implements ContestApplicationService {
         return contestCommandHandler
                 .queryLeaderboardOfContestResponse(queryLeaderboardOfContestCommand);
     }
+
+    @Override
+    public QueryStatisticsOfContestResponse queryStatisticsOfContestResponse(
+            QueryStatisticsOfContestCommand queryStatisticsOfContestCommand) {
+        return contestCommandHandler
+                .queryStatisticsOfContestResponse(
+                        queryStatisticsOfContestCommand);
+    }
 }
