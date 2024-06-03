@@ -1,10 +1,11 @@
-package com.backend.programming.learning.system.core.service.application.utils;
+package com.backend.programming.learning.system.auth.service.application.utils;
 
-import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
-import com.nimbusds.jose.shaded.gson.Gson;
-import com.nimbusds.jose.shaded.gson.JsonObject;
 
-import java.util.*;
+import com.backend.programming.learning.system.course.service.domain.exception.CourseDomainException;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import java.util.Base64;
 
 public class JwtUtils {
     public static JsonObject getPayloadFromJwtString(String jwtString) {
@@ -19,7 +20,7 @@ public class JwtUtils {
         try {
             convertedObject = new Gson().fromJson(payload, JsonObject.class);
         } catch (Exception e) {
-            throw new CoreDomainException("Error while converting jwt payload to json object");
+            throw new CourseDomainException("Error while converting jwt payload to json object");
         }
         return convertedObject;
     }

@@ -18,8 +18,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @RequiredArgsConstructor
 @EnableWebSecurity
 public class WebSecurityConfig {
-    public static final String ADMIN = "admin_client_role";
-    public static final String USER = "user_client_role";
+    public static final String ADMIN = "admin";
+    public static final String USER = "user";
+    public static final String TEACHER_MOODLE = "teacher_moodle";
+    public static final String STUDENT_MOODLE = "student_moodle";
+    public static final String ADMIN_MOODLE = "admin_moodle";
     private final JwtAuthConverter jwtAuthConverter;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
