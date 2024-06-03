@@ -285,6 +285,27 @@ public class ContestController {
         return ResponseEntity.ok(queryLeaderboardOfContestResponse);
     }
 
+    @GetMapping("/{id}/admin/statistics")
+    @Operation(summary = "Get statistics of a contest for admin.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryLeaderboardOfContestResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryStatisticsOfContestResponse> getStatisticsOfContestsForAdmin
+            (@PathVariable UUID id) {
+        QueryStatisticsOfContestResponse queryStatisticsOfContestResponse =
+                contestApplicationService.queryStatisticsOfContestResponse(
+                        QueryStatisticsOfContestCommand
+                                .builder()
+                                .contestId(id)
+                                .build());
+        log.info("Returning statistics of contest: {}", id);
+        return ResponseEntity.ok(queryStatisticsOfContestResponse);
+    }
+
     @GetMapping("/{id}")
     @Operation(summary = "Get contest by id.")
     @ApiResponses(value = {

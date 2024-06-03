@@ -24,6 +24,8 @@ public class Contest extends AggregateRoot<ContestId> {
     private List<ContestQuestion> questions;
     private Boolean isRegistered;
     private Boolean isPublic;
+    private Boolean isRestrictedForum;
+    private Boolean isDisabledForum;
     private User createdBy;
     private User updatedBy;
     private ZonedDateTime createdAt;
@@ -43,6 +45,8 @@ public class Contest extends AggregateRoot<ContestId> {
         setQuestions(builder.questions);
         isRegistered = builder.isRegistered;
         isPublic = builder.isPublic;
+        isRestrictedForum = builder.isRestrictedForum;
+        isDisabledForum = builder.isDisabledForum;
         setCreatedBy(builder.createdBy);
         setUpdatedBy(builder.updatedBy);
         setCreatedAt(builder.createdAt);
@@ -155,6 +159,22 @@ public class Contest extends AggregateRoot<ContestId> {
         isPublic = aPublic;
     }
 
+    public Boolean getRestrictedForum() {
+        return isRestrictedForum;
+    }
+
+    public void setRestrictedForum(Boolean restrictedForum) {
+        isRestrictedForum = restrictedForum;
+    }
+
+    public Boolean getDisabledForum() {
+        return isDisabledForum;
+    }
+
+    public void setDisabledForum(Boolean disabledForum) {
+        isDisabledForum = disabledForum;
+    }
+
     public User getCreatedBy() {
         return createdBy;
     }
@@ -201,6 +221,8 @@ public class Contest extends AggregateRoot<ContestId> {
         private List<ContestQuestion> questions;
         private Boolean isRegistered;
         private Boolean isPublic;
+        private Boolean isRestrictedForum;
+        private Boolean isDisabledForum;
         private User createdBy;
         private User updatedBy;
         private ZonedDateTime createdAt;
@@ -271,6 +293,16 @@ public class Contest extends AggregateRoot<ContestId> {
 
         public Builder isPublic(Boolean val) {
             isPublic = val;
+            return this;
+        }
+
+        public Builder isRestrictedForum(Boolean val) {
+            isRestrictedForum = val;
+            return this;
+        }
+
+        public Builder isDisabledForum(Boolean val) {
+            isDisabledForum = val;
             return this;
         }
 
