@@ -25,6 +25,8 @@ public class UserDataAccessMapper {
                 .isLinkedWithGoogle(userEntity.getIsLinkedWithGoogle())
                 .isLinkedWithMicrosoft(userEntity.getIsLinkedWithMicrosoft())
                 .isDeleted(userEntity.getIsDeleted())
+                .otp(userEntity.getOtp())
+                .otpExpireAt(userEntity.getOtpExpireAt())
                 .build();
     }
 
@@ -46,6 +48,8 @@ public class UserDataAccessMapper {
                 .isLinkedWithGoogle(user.getLinkedWithGoogle())
                 .isLinkedWithMicrosoft(user.getLinkedWithMicrosoft())
                 .isDeleted(user.getDeleted())
+                .otp(user.getOtp())
+                .otpExpireAt(user.getOtpExpireAt())
                 .build();
     }
 }

@@ -10,4 +10,5 @@ public interface UserKeycloakApplicationService {
     void updateUser(User user);
     void addFederationLink(String provider, String username, String userIdSSO, String usernameSSO);
     UsersResource getUsersResource();
+    void updatePassword(String email, String newPassword);
 }
