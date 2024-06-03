@@ -6,13 +6,13 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.cr
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.forgot_password.*;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.SocialLoginUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.logout.LogoutUserEmailCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.logout.LogoutUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.*;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserEmailCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
@@ -28,6 +28,7 @@ import com.backend.programming.learning.system.auth.service.domain.outbox.schedu
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -52,6 +53,7 @@ public class UserCommandHandler {
     private final UserSocialLoginHelper userSocialLoginHelper;
     private final UserLogoutHelper userLogoutHelper;
     private final UserChangedPasswordHelper userChangedPasswordHelper;
+    private final UserForgotPasswordHelper userForgotPasswordHelper;
 
     @Transactional
     public CreateUserResponse createUser(CreateUserCommand createOrderCommand) {
@@ -205,5 +207,18 @@ public class UserCommandHandler {
 
     public ChangedPasswordUserResponse changePasswordUser(ChangedPasswordUserCommand changedPasswordUserCommand) {
         return userChangedPasswordHelper.changedPasswordUser(changedPasswordUserCommand);
+    }
+
+    public ForgotPasswordEmailResponse forgotPasswordEmail(ForgotPasswordEmailCommand forgotPasswordEmailCommand) throws MessagingException {
+        return userForgotPasswordHelper.forgotPasswordUser(forgotPasswordEmailCommand);
+    }
+
+    public VerifyOTPResponse verifyOTP(VerifyOTPCommand verifyOTPCommand) {
+        return userForgotPasswordHelper.verifyOTP(verifyOTPCommand);
+    }
+
+    public ResetPasswordResponse forgotPasswordChangePassword(
+            ResetPasswordCommand forgotPasswordChangePasswordCommand) {
+        return userForgotPasswordHelper.changedPasswordUser(forgotPasswordChangePasswordCommand);
     }
 }

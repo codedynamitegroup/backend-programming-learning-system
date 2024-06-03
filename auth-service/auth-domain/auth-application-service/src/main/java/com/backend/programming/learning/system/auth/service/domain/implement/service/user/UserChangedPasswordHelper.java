@@ -51,7 +51,7 @@ public class UserChangedPasswordHelper {
             throw new AuthDomainException("Login failed");
         }
 
-        userKeycloakApplicationService.updatePassword(changedPasswordUserCommand.getEmail(), changedPasswordUserCommand.getNewPassword());
+        userKeycloakApplicationService.updatePassword(user.getEmail(), changedPasswordUserCommand.getNewPassword());
 
         return ChangedPasswordUserResponse.builder()
                 .message("Password is changed successfully!")
@@ -68,16 +68,6 @@ public class UserChangedPasswordHelper {
         }
         return userResult.get();
     }
-
-//    private User saveUser(User user) {
-//        User userResult = userRepository.save(user);
-//        if (userResult == null) {
-//            log.error("Could not update user!");
-//            throw new AuthDomainException("Could not update user!");
-//        }
-//        log.info("User is updated with id: {}", userResult.getId().getValue());
-//        return userResult;
-//    }
 
     private MultiValueMap<String, String> loginUserCommandToRequestBody(ChangedPasswordUserCommand changedPasswordUserCommand) {
         MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
