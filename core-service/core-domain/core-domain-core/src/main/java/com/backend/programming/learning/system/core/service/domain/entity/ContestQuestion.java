@@ -19,6 +19,7 @@ public class ContestQuestion extends BaseEntity<ContestQuestionId> {
     private Float grade;
     private Long doTime;
     private Integer numOfSubmissions;
+    private Integer numOfCorrectSubmissions;
 
     private ContestQuestion(Builder builder) {
         super.setId(builder.contestQuestionId);
@@ -29,6 +30,7 @@ public class ContestQuestion extends BaseEntity<ContestQuestionId> {
         setGrade(builder.grade);
         setDoTime(builder.doTime);
         setNumOfSubmissions(builder.numOfSubmissions);
+        setNumOfCorrectSubmissions(builder.numOfCorrectSubmissions);
     }
 
     public static Builder builder() {
@@ -92,6 +94,14 @@ public class ContestQuestion extends BaseEntity<ContestQuestionId> {
         this.numOfSubmissions = numOfSubmissions;
     }
 
+    public Integer getNumOfCorrectSubmissions() {
+        return numOfCorrectSubmissions;
+    }
+
+    public void setNumOfCorrectSubmissions(Integer numOfCorrectSubmissions) {
+        this.numOfCorrectSubmissions = numOfCorrectSubmissions;
+    }
+
     public static final class Builder {
         private ContestQuestionId contestQuestionId;
         private Question question;
@@ -101,6 +111,7 @@ public class ContestQuestion extends BaseEntity<ContestQuestionId> {
         private Float grade;
         private Long doTime;
         private Integer numOfSubmissions;
+        private Integer numOfCorrectSubmissions;
 
         private Builder() {
         }
@@ -142,6 +153,11 @@ public class ContestQuestion extends BaseEntity<ContestQuestionId> {
 
         public Builder numOfSubmissions(Integer val) {
             numOfSubmissions = val;
+            return this;
+        }
+
+        public Builder numOfCorrectSubmissions(Integer val) {
+            numOfCorrectSubmissions = val;
             return this;
         }
 

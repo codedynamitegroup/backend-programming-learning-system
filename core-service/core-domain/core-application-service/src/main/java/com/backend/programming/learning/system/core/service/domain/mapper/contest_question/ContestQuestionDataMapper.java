@@ -36,6 +36,7 @@ public class ContestQuestionDataMapper {
                 .grade(contestQuestion.getGrade())
                 .doTime(contestQuestion.getDoTime())
                 .numOfSubmissions(contestQuestion.getNumOfSubmissions())
+                .numOfCorrectSubmissions(contestQuestion.getNumOfCorrectSubmissions())
                 .build();
     }
 

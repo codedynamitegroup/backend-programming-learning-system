@@ -32,6 +32,8 @@ public class ContestResponseEntity {
     private final Boolean isRegistered;
     private final List<ContestQuestionResponseEntity> questions;
     private final Boolean isPublic;
+    private final Boolean isRestrictedForum;
+    private final Boolean isDisabledForum;
     private final UserResponseEntity createdBy;
     private final UserResponseEntity updatedBy;
     private final ZonedDateTime createdAt;
