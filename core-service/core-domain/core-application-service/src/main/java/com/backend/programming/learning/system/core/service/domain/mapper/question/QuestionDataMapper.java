@@ -42,7 +42,6 @@ public class QuestionDataMapper {
                                                     Organization organization,
                                                     User createdBy,
                                                     User updatedBy) {
-        UUID questionBankCategoryId = Objects.requireNonNullElse(createQuestionCommand.getQuestionBankCategoryId(), null);
         Boolean isOrgQuestionBank = Objects.requireNonNullElse(createQuestionCommand.getIsOrgQuestionBank(), false);
         return Question.builder()
                 .organization(organization)
@@ -56,7 +55,7 @@ public class QuestionDataMapper {
                 .qtype(QuestionType.valueOf(createQuestionCommand.getQType()))
                 .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .updatedAt(ZonedDateTime.now(ZoneId.of("UTC")))
-                .questionBankCategoryId(questionBankCategoryId)
+                .questionBankCategoryId(createQuestionCommand.getQuestionBankCategoryId())
                 .isOrgQuestionBank(isOrgQuestionBank)
                 .build();
     }

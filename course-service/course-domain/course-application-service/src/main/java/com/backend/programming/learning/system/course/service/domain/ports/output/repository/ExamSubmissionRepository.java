@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.ports.output.repository;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
 import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
@@ -15,4 +16,6 @@ public interface ExamSubmissionRepository {
     ExamSubmission findByExamAndUser(Exam exam, User user);
 
     Integer countSubmission(ExamId examId);
+
+    ExamSubmission saveEnd(CreateExamSubmissionStartCommand createExamSubmissionStartCommand);
 }

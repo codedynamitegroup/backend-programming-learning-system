@@ -33,4 +33,10 @@ public class ExamSubmissionCommandHandler {
         ExamSubmission examSubmission = examSubmissionCreateHelper.createStartExamSubmission(createExamSubmissionStartCommand);
         return examSubmissionDataMapper.mapToCreateExamSubmissionResponse(examSubmission);
     }
+
+    @Transactional
+    public CreateExamSubmissionResponse endExam(CreateExamSubmissionStartCommand createExamSubmissionStartCommand) {
+        ExamSubmission examSubmission = examSubmissionCreateHelper.createEndExamSubmission(createExamSubmissionStartCommand);
+        return examSubmissionDataMapper.mapToCreateExamSubmissionResponse(examSubmission);
+    }
 }

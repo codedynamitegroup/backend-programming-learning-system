@@ -16,10 +16,10 @@ public record CreateQuestionSubmissionResponse(
         UUID examSubmissionId,
         UUID questionId,
         UUID userId,
-        Integer passStatus,
-        Float grade,
+//        Integer passStatus,
+//        Float grade,
         String content,
-        String rightAnswer,
+//        String rightAnswer,
         Integer numFile
 ) {
 }

@@ -30,4 +30,9 @@ public class ExamSubmissionApplicationImpl implements ExamSubmissionApplicationS
     public CreateExamSubmissionResponse startExam(CreateExamSubmissionStartCommand createExamSubmissionCommand) {
         return examSubmissionCommandHandler.startExam(createExamSubmissionCommand);
     }
+
+    @Override
+    public CreateExamSubmissionResponse endExam(CreateExamSubmissionStartCommand createExamSubmissionStartCommand) {
+        return examSubmissionCommandHandler.endExam(createExamSubmissionStartCommand);
+    }
 }
