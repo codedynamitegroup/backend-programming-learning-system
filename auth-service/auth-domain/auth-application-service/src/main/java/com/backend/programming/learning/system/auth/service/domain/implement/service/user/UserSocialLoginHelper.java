@@ -8,6 +8,7 @@ import com.backend.programming.learning.system.auth.service.domain.entity.Role;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
+import com.backend.programming.learning.system.auth.service.domain.exception.UnAuthorizedServiceException;
 import com.backend.programming.learning.system.auth.service.domain.implement.service.role.RoleQueryHelper;
 import com.backend.programming.learning.system.auth.service.domain.implement.service.user_role.UserRoleCreateHelper;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserKeycloakApplicationService;
@@ -173,7 +174,7 @@ public class UserSocialLoginHelper {
 
         if (result == null) {
             log.error("Logged keycloak failed");
-            throw new AuthDomainException("Logged keycloak failed");
+            throw new UnAuthorizedServiceException("Logged keycloak failed");
         }
 
         return result;
@@ -201,7 +202,7 @@ public class UserSocialLoginHelper {
 
         if (userProfileResult == null) {
             log.error("Login google account failed");
-            throw new AuthDomainException("Login by google account failed");
+            throw new UnAuthorizedServiceException("Login by google account failed");
         }
 
         return userProfileResult;
@@ -219,7 +220,7 @@ public class UserSocialLoginHelper {
 
         if (userProfileResult == null) {
             log.error("Login microsoft account failed");
-            throw new AuthDomainException("Login by microsoft account failed");
+            throw new UnAuthorizedServiceException("Login by microsoft account failed");
         }
 
         return userProfileResult;

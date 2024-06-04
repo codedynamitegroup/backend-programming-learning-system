@@ -47,13 +47,23 @@ spring:
     username: postgres
     password: localdb
     driver-class-name: org.postgresql.Driver
-
   sql:
     init:
       platform: postgres
       mode: always
       data-locations: classpath:init-data.sql
       schema-locations: classpath:init-schema.sql
+  mail:
+    host: smtp.gmail.com
+    username: nguyenquoctuan385@gmail.com
+    password: nstevmbgxpsmeepp
+    port: 587
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+          auth: true
 
 kafka-config:
   bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
@@ -134,7 +144,7 @@ log:
 jwt:
   auth:
     converter:
-      resource-id: spring-client-api-rest
+      resource-id: realm_access
       principle-attribute: preferred_username
 
 keycloak:

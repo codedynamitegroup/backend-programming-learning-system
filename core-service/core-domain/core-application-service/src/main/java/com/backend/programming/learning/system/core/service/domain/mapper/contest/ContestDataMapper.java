@@ -71,12 +71,18 @@ public class ContestDataMapper {
                 .contestId(contest.getId().getValue())
                 .name(contest.getName())
                 .description(contest.getDescription())
+                .prizes(contest.getPrizes())
+                .rules(contest.getRules())
+                .scoring(contest.getScoring())
                 .thumbnailUrl(contest.getThumbnailUrl())
                 .questions(contestQuestionResponseEntities)
                 .startTime(contest.getStartTime())
                 .endTime(contest.getEndTime())
                 .numOfParticipants(contest.getNumOfParticipants())
                 .isRegistered(contest.getRegistered())
+                .isPublic(contest.getPublic())
+                .isRestrictedForum(contest.getRestrictedForum())
+                .isDisabledForum(contest.getDisabledForum())
                 .createdBy(createdByResponse)
                 .updatedBy(updatedByResponse)
                 .createdAt(contest.getCreatedAt())
@@ -152,4 +158,6 @@ public class ContestDataMapper {
                 .updatedAt(contestUser.getUpdatedAt())
                 .build();
     }
+
+
 }

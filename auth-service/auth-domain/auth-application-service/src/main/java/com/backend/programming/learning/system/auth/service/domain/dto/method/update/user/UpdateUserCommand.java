@@ -14,12 +14,14 @@ import java.util.UUID;
 @AllArgsConstructor
 public class UpdateUserCommand {
     @NotNull
-    private final UUID userId;
+    private final String email;
 
     private ZonedDateTime dob;
 
+    @NotNull
     private String firstName;
 
+    @NotNull
     private String lastName;
 
     private String phone;

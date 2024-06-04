@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.implement.service.contest;
 
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryStatisticsOfContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest_user.ContestUserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.exception.ContestNotFoundException;
@@ -83,15 +84,17 @@ public class ContestQueryHelper {
             contestQuestion.setMaxGrade(codeQuestion.get().getMaxGrade());
             if (userResult.isPresent()) {
                 contestQuestion.setNumOfSubmissions(
-                        codeSubmissionRepository.countAllByUserIdAndCodeQuestionId(
+                        codeSubmissionRepository.countAllByUserIdAndCodeQuestionIdAndContestId(
                                 userResult.get().getId().getValue(),
-                                codeQuestion.get().getId().getValue()
+                                codeQuestion.get().getId().getValue(),
+                                contestId
                         )
                 );
                 Optional<CodeSubmission> codeSubmission = codeSubmissionRepository
-                        .findLatestPassedCodeSubmissionByUserIdAndCodeQuestionId(
+                        .findLatestPassedCodeSubmissionByUserIdAndCodeQuestionIdAndContestId(
                                 userResult.get().getId().getValue(),
-                                codeQuestion.get().getId().getValue()
+                                codeQuestion.get().getId().getValue(),
+                                contestId
                         );
                 if (codeSubmission.isPresent()) {
                     contestQuestion.setGrade(codeSubmission.get().getGrade());
@@ -118,12 +121,13 @@ public class ContestQueryHelper {
             String startTimeFilter,
             Integer pageNo,
             Integer pageSize,
-            String email
+            String email,
+            Boolean isAdmin
     ) {
         log.info("Querying all contests with searchName: {}, startTimeFilter: {}, pageNo: {}, pageSize: {}",
                 searchName, startTimeFilter, pageNo, pageSize);
         Optional<User> userResult = userRepository.findByEmail(email);
-        Page<Contest> contests = contestRepository.findAll(searchName, startTimeFilter, pageNo, pageSize);
+        Page<Contest> contests = contestRepository.findAll(searchName, startTimeFilter, pageNo, pageSize,isAdmin);
         for (Contest contest : contests) {
             contest.setQuestions(new ArrayList<>());
             if (userResult.isPresent()) {
@@ -143,6 +147,13 @@ public class ContestQueryHelper {
     }
 
     @Transactional(readOnly = true)
+    public QueryStatisticsOfContestResponse queryStatisticsOfContest(
+            UUID contestId
+    ) {
+        return null;
+    }
+
+    @Transactional(readOnly = true)
     public List<Contest> findMostPopularContests() {
         log.info("Querying most popular upcoming contests");
         List<Contest> contestList = contestRepository.findMostPopularContests();
@@ -157,9 +168,53 @@ public class ContestQueryHelper {
     }
 
     @Transactional(readOnly = true)
+    public List<ContestQuestion> queryAllContestQuestionsByContestId(UUID contestId) {
+        log.info("Querying all contest questions by contest id");
+        List<ContestQuestion> contestQuestions = contestQuestionRepository.findAllContestQuestionsByContestId(contestId);
+        for (ContestQuestion contestQuestion : contestQuestions) {
+            Question question = contestQuestion.getQuestion();
+            Optional<QtypeCodeQuestion> codeQuestion = qtypeCodeQuestionRepository
+                    .findQtypeCodeQuestionByQuestionId(question.getId().getValue());
+            if (codeQuestion.isEmpty()) {
+                log.warn("Could not find code question for question with id: {}",
+                        question.getId().getValue());
+                throw new QtypeCodeQuestionNotFoundException("Could not find code question for question with id: " +
+                        question.getId().getValue());
+            }
+            contestQuestion.setCodeQuestionId(codeQuestion.get().getId().getValue());
+            contestQuestion.setMaxGrade(codeQuestion.get().getMaxGrade());
+            contestQuestion.setNumOfCorrectSubmissions(
+                    codeSubmissionRepository.countAllPassedCodeSubmissionsByCodeQuestionIdAndContestId(
+                            codeQuestion.get().getId().getValue(),
+                            contestId
+                    )
+            );
+            contestQuestion.setNumOfSubmissions(
+                    codeSubmissionRepository.countAllCodeSubmissionsByCodeQuestionIdAndContestId(
+                            codeQuestion.get().getId().getValue(),
+                            contestId
+                    )
+            );
+        }
+        return contestQuestions;
+    }
+
+    @Transactional(readOnly = true)
     public int countAllParticipants() {
         log.info("Counting all participants");
         return contestUserRepository.countAllParticipants();
+    }
+
+    @Transactional(readOnly = true)
+    public int countAllParticipantsByContestId(UUID contestId) {
+        log.info("Counting all participants by contest id: {}", contestId);
+        return contestUserRepository.countAllParticipantsByContestId(contestId);
+    }
+
+    @Transactional(readOnly = true)
+    public int countAllParticipantsHavingSubmissionsByContestId(UUID contestId) {
+        log.info("Counting all participants having submissions by contest id: {}", contestId);
+        return contestUserRepository.countAllParticipantsHavingSubmissionsByContestId(contestId);
     }
 
     @Transactional(readOnly = true)
@@ -206,15 +261,17 @@ public class ContestQueryHelper {
                 contestQuestion.setCodeQuestionId(codeQuestion.get().getId().getValue());
                 contestQuestion.setMaxGrade(codeQuestion.get().getMaxGrade());
                 contestQuestion.setNumOfSubmissions(
-                        codeSubmissionRepository.countAllByUserIdAndCodeQuestionId(
+                        codeSubmissionRepository.countAllByUserIdAndCodeQuestionIdAndContestId(
                                 contestUser.getUser().getId().getValue(),
-                                codeQuestion.get().getId().getValue()
+                                codeQuestion.get().getId().getValue(),
+                                contestId
                         )
                 );
                 Optional<CodeSubmission> codeSubmission = codeSubmissionRepository
-                        .findLatestPassedCodeSubmissionByUserIdAndCodeQuestionId(
+                        .findLatestPassedCodeSubmissionByUserIdAndCodeQuestionIdAndContestId(
                                 contestUser.getUser().getId().getValue(),
-                                codeQuestion.get().getId().getValue()
+                                codeQuestion.get().getId().getValue(),
+                                contestId
                         );
                 if (codeSubmission.isPresent()) {
                     contestQuestion.setGrade(codeSubmission.get().getGrade());
@@ -276,15 +333,17 @@ public class ContestQueryHelper {
             contestQuestion.setCodeQuestionId(codeQuestion.get().getId().getValue());
             contestQuestion.setMaxGrade(codeQuestion.get().getMaxGrade());
             contestQuestion.setNumOfSubmissions(
-                    codeSubmissionRepository.countAllByUserIdAndCodeQuestionId(
+                    codeSubmissionRepository.countAllByUserIdAndCodeQuestionIdAndContestId(
                             contestUser.getUser().getId().getValue(),
-                            codeQuestion.get().getId().getValue()
+                            codeQuestion.get().getId().getValue(),
+                            contestId
                     )
             );
             Optional<CodeSubmission> codeSubmission = codeSubmissionRepository
-                    .findLatestPassedCodeSubmissionByUserIdAndCodeQuestionId(
+                    .findLatestPassedCodeSubmissionByUserIdAndCodeQuestionIdAndContestId(
                             contestUser.getUser().getId().getValue(),
-                            codeQuestion.get().getId().getValue()
+                            codeQuestion.get().getId().getValue(),
+                            contestId
                     );
             if (codeSubmission.isPresent()) {
                 contestQuestion.setGrade(codeSubmission.get().getGrade());

@@ -36,6 +36,11 @@ class ContestApplicationServiceImpl implements ContestApplicationService {
     }
 
     @Override
+    public QueryAllContestsResponse queryAllContestsForAdmin(QueryAllContestsCommand queryAllContestsCommand) {
+        return contestCommandHandler.queryAllContestsResponseForAdmin(queryAllContestsCommand);
+    }
+
+    @Override
     public QueryMostPopularContestsResponse queryMostPopularContests() {
         return contestCommandHandler.queryMostPopularContestsResponse();
     }
@@ -60,5 +65,13 @@ class ContestApplicationServiceImpl implements ContestApplicationService {
             QueryLeaderboardOfContestCommand queryLeaderboardOfContestCommand) {
         return contestCommandHandler
                 .queryLeaderboardOfContestResponse(queryLeaderboardOfContestCommand);
+    }
+
+    @Override
+    public QueryStatisticsOfContestResponse queryStatisticsOfContestResponse(
+            QueryStatisticsOfContestCommand queryStatisticsOfContestCommand) {
+        return contestCommandHandler
+                .queryStatisticsOfContestResponse(
+                        queryStatisticsOfContestCommand);
     }
 }

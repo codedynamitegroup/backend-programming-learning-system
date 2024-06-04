@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.de
 import com.backend.programming.learning.system.auth.service.domain.dto.method.message.user.UserRequest;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.organization.OrganizationEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
@@ -25,9 +26,16 @@ import org.springframework.stereotype.Component;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
 public class UserDataMapper {
+    private final RoleDataMapper roleDataMapper;
+
+    public UserDataMapper(RoleDataMapper roleDataMapper) {
+        this.roleDataMapper = roleDataMapper;
+    }
+
     public User createUserCommandToUser(CreateUserCommand createUserCommand) {
         return User.builder()
                 .email(createUserCommand.getEmail())
@@ -100,6 +108,24 @@ public class UserDataMapper {
                 .build();
     }
 
+    public OrganizationEntityResponse organizationToOrganizationEntityResponse(Organization organization) {
+        return OrganizationEntityResponse.builder()
+                .organizationId(organization.getId().getValue())
+                .createdBy(null)
+                .updatedBy(null)
+                .email(organization.getEmail())
+                .description(organization.getDescription())
+                .name(organization.getName())
+                .phone(organization.getPhone())
+                .address(organization.getAddress())
+                .apiKey(organization.getApiKey())
+                .moodleUrl(organization.getMoodleUrl())
+                .createdAt(organization.getCreatedAt())
+                .updatedAt(organization.getUpdatedAt())
+                .isDeleted(organization.getDeleted())
+                .build();
+    }
+
     public UserEntityResponse userToUserResponse(User user) {
         Organization organizationEntityResponse = user.getOrganization();
         return UserEntityResponse.builder()
@@ -114,10 +140,11 @@ public class UserDataMapper {
                 .lastLogin(user.getLastLogin())
                 .createdAt(user.getCreatedAt())
                 .updatedAt(user.getUpdatedAt())
-                .organization(organizationEntityResponse)
+                .organization(organizationEntityResponse != null ? organizationToOrganizationEntityResponse(organizationEntityResponse) : null)
                 .isDeleted(user.getDeleted())
                 .isLinkedWithGoogle(user.getLinkedWithGoogle())
                 .isLinkedWithMicrosoft(user.getLinkedWithMicrosoft())
+                .roles(user.getRoles().stream().map(roleDataMapper::roleToRoleResponse).collect(Collectors.toSet()))
                 .build();
     }
 

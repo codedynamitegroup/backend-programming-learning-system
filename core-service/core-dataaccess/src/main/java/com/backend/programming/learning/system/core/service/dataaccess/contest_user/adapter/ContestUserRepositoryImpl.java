@@ -66,6 +66,16 @@ public class ContestUserRepositoryImpl implements ContestUserRepository {
     }
 
     @Override
+    public int countAllParticipantsByContestId(UUID contestId) {
+        return contestUserJpaRepository.countAllParticipantsByContestId(contestId);
+    }
+
+    @Override
+    public int countAllParticipantsHavingSubmissionsByContestId(UUID contestId) {
+        return contestUserJpaRepository.countAllParticipantsHavingSubmissionsByContestId(contestId);
+    }
+
+    @Override
     public Page<ContestUser> findAllContestUsersOfLeaderboard(UUID contestId, Integer pageNo, Integer pageSize) {
         Pageable paging = Pageable.ofSize(pageSize).withPage(pageNo);
         return contestUserJpaRepository.findAllContestUsersOfLeaderboard(contestId, paging)

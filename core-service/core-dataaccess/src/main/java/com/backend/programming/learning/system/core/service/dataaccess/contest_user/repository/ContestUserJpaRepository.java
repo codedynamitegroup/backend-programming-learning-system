@@ -50,12 +50,16 @@ public interface ContestUserJpaRepository extends JpaRepository<ContestUserEntit
                 left join code_submission cs on qcq.id = cs.code_question_id and cu.user_id = cs.user_id
                 where cu.contest_id = ?1
                 and ((cs.id = (
-                    select cs.id
-                    from code_submission cs
-                    where cs.code_question_id = qcq.id
-                    and cs.user_id = cu.user_id
-                    and cs.pass = true
-                    order by cs.created_at asc
+                    select cs2.id
+                    from code_submission cs2
+                    join code_submission_contest csc2
+                    on cs2.id = csc2.code_submission_id
+                    where csc2.contest_id = ?1
+                    where cs2.code_question_id = qcq.id
+                    and cs2.user_id = cu.user_id
+                    and cs2.pass = true
+                    and cs2.create_at >= c.start_time and (c.end_time is null or cs2.create_at <= c.end_time)
+                    order by cs2.grade desc, cs2.created_at asc
                     limit 1
                 )) or cs.id is null)
                 group by cu.id, c.id) as cc
@@ -84,15 +88,38 @@ public interface ContestUserJpaRepository extends JpaRepository<ContestUserEntit
         where cu.contest_id = ?1
         and cu.user_id = ?2
         and ((cs.id = (
-            select cs.id
-            from code_submission cs
-            where cs.code_question_id = qcq.id
-            and cs.user_id = cu.user_id
-            and cs.pass = true
-            order by cs.created_at asc
+            select cs2.id
+            from code_submission cs2
+            join code_submission_contest csc2 
+            on cs2.id = csc2.code_submission_id
+            where csc2.contest_id = ?1
+            where cs2.code_question_id = qcq.id
+            and cs2.user_id = cu.user_id
+            and cs2.pass = true
+            and cs2.create_at >= c.start_time and (c.end_time is null or cs2.create_at <= c.end_time)
+            order by cs2.grade desc, cs2.created_at asc
             limit 1
         )) or cs.id is null)
         group by cu.id, c.id
     """, nativeQuery = true)
-    Optional<ContestUserLeaderboardProjection> findMyRankOfLeaderboard(UUID userId, UUID contestId);
+    Optional<ContestUserLeaderboardProjection> findMyRankOfLeaderboard(UUID contestId, UUID userId);
+
+    @Query("""
+        select count(distinct cu.user.id) from ContestUserEntity cu where cu.contest.id = ?1
+    """)
+    int countAllParticipantsByContestId(UUID contestId);
+
+    @Query(value="""
+        select count(distinct cu.user_id)
+        from contest_user cu
+        join contest_question cq on cu.contest_id = cq.contest_id
+        join qtype_code_question qcq on cq.question_id = qcq.question_id
+        where not exists (
+            select 1
+            from code_submission cs
+            where cs.code_question_id = qcq.id
+            and cs.user_id = cu.user_id
+        )
+    """, nativeQuery = true)
+    int countAllParticipantsHavingSubmissionsByContestId(UUID contestId);
 }

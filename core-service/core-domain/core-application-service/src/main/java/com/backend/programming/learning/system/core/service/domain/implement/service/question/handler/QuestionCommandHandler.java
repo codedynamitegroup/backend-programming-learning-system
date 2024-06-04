@@ -113,6 +113,9 @@ public class QuestionCommandHandler {
                 case "MULTIPLE_CHOICE":
                     responses.add(qtypeMultichoiceQuestionQueryHelper.queryQuestionById(questionCommand.questionId()));
                     break;
+                case "TRUE_FALSE":
+                    responses.add(qtypeMultichoiceQuestionQueryHelper.queryQuestionTrueFalseById(questionCommand.questionId()));
+                    break;
                 case "SHORT_ANSWER":
                     responses.add(qtypeShortanswerQuestionQueryHelper.queryQuestionById(questionCommand.questionId()));
                     break;

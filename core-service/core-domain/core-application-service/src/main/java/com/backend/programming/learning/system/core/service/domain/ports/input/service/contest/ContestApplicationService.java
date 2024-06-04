@@ -19,6 +19,9 @@ public interface ContestApplicationService {
             @Valid QueryAllContestsCommand queryAllContestsCommand);
     QueryMostPopularContestsResponse queryMostPopularContests();
 
+    QueryAllContestsResponse queryAllContestsForAdmin(
+            @Valid QueryAllContestsCommand queryAllContestsCommand);
+
     ContestResponseEntity queryContest(
             @Valid QueryContestCommand queryContestCommand);
 
@@ -30,4 +33,7 @@ public interface ContestApplicationService {
 
     QueryLeaderboardOfContestResponse queryLeaderboardOfContest(
             @Valid QueryLeaderboardOfContestCommand queryLeaderboardOfContestCommand);
+
+    QueryStatisticsOfContestResponse queryStatisticsOfContestResponse(
+            @Valid QueryStatisticsOfContestCommand queryStatisticsOfContestCommand);
 }

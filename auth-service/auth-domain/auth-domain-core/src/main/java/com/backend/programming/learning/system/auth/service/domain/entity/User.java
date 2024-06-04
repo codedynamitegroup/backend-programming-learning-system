@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.domain.valueobject.UserId;
 
 import java.time.ZonedDateTime;
 import java.time.ZoneId;
+import java.util.Set;
 import java.util.UUID;
 
 public class User extends AggregateRoot<UserId> {
@@ -25,6 +26,9 @@ public class User extends AggregateRoot<UserId> {
     private Boolean isLinkedWithMicrosoft;
     private Organization organization;
     private Boolean isDeleted;
+    private Integer otp;
+    private ZonedDateTime otpExpireAt;
+    Set<Role> roles;
 
     private User(Builder builder) {
         super.setId(builder.userId);
@@ -44,6 +48,17 @@ public class User extends AggregateRoot<UserId> {
         isLinkedWithMicrosoft = builder.isLinkedWithMicrosoft;
         setOrganization(builder.organization);
         isDeleted = builder.isDeleted;
+        setOtp(builder.otp);
+        setOtpExpireAt(builder.otpExpireAt);
+        setRoles(builder.roles);
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public void initializeUser() {
@@ -174,6 +189,22 @@ public class User extends AggregateRoot<UserId> {
         isLinkedWithMicrosoft = linkedWithMicrosoft;
     }
 
+    public Integer getOtp() {
+        return otp;
+    }
+
+    public void setOtp(Integer otp) {
+        this.otp = otp;
+    }
+
+    public ZonedDateTime getOtpExpireAt() {
+        return otpExpireAt;
+    }
+
+    public void setOtpExpireAt(ZonedDateTime otpExpireAt) {
+        this.otpExpireAt = otpExpireAt;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -195,6 +226,9 @@ public class User extends AggregateRoot<UserId> {
         private Boolean isLinkedWithMicrosoft;
         private Organization organization;
         private Boolean isDeleted;
+        private Integer otp;
+        private ZonedDateTime otpExpireAt;
+        private Set<Role> roles;
         private UserId userId;
 
         private Builder() {
@@ -277,6 +311,21 @@ public class User extends AggregateRoot<UserId> {
 
         public Builder isDeleted(Boolean val) {
             isDeleted = val;
+            return this;
+        }
+
+        public Builder otp(Integer val) {
+            otp = val;
+            return this;
+        }
+
+        public Builder otpExpireAt(ZonedDateTime val) {
+            otpExpireAt = val;
+            return this;
+        }
+
+        public Builder roles(Set<Role> val) {
+            roles = val;
             return this;
         }
 

@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.lo
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
+import com.backend.programming.learning.system.auth.service.domain.exception.UnAuthorizedServiceException;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -46,7 +47,7 @@ public class UserLoginHelper {
                 .block();
         if (result == null) {
             log.error("Login failed");
-            throw new AuthDomainException("Login failed");
+            throw new UnAuthorizedServiceException("Login failed");
         }
 
         user.setRefreshToken(result.getRefresh_token());

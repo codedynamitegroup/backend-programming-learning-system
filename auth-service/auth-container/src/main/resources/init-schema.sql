@@ -51,6 +51,8 @@ CREATE TABLE "public".main_user (
 	created_at TIMESTAMP WITH TIME ZONE,
 	updated_at TIMESTAMP WITH TIME ZONE,
 	is_deleted boolean NOT NULL DEFAULT false,
+	otp INTEGER DEFAULT NULL,
+	otp_expire_at TIMESTAMP WITH TIME ZONE DEFAULT NULL,
 	PRIMARY KEY ("id")
 );
 

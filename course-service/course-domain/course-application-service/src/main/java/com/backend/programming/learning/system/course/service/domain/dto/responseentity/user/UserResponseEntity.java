@@ -14,5 +14,7 @@ public class UserResponseEntity {
     @NotNull
     private final UUID userId;
     @NotNull
+    private final String fullName;
+    @NotNull
     private final String email;
 }

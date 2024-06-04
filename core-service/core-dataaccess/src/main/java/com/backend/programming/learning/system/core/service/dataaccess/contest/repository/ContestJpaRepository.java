@@ -27,9 +27,15 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
     select c.id as id,
                 c.name as name,
                 c.description as description,
+                c.prizes as prizes,
+                c.rules as rules,
+                c.scoring as scoring,
                 c.thumbnail_url as thumbnailUrl,
                 c.start_time as startTime,
                 c.end_time as endTime,
+                c.is_public as isPublic,
+                c.is_restricted_forum as isRestrictedForum,
+                c.is_disabled_forum as isDisabledForum,
                 c.created_by as createdById,
                 c.updated_by as updatedById,
                 c.created_at as createdAt,
@@ -44,9 +50,15 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
     select c.id as id,
                 c.name as name,
                 c.description as description,
+                c.prizes as prizes,
+                c.rules as rules,
+                c.scoring as scoring,
                 c.thumbnail_url as thumbnailUrl,
                 c.start_time as startTime,
                 c.end_time as endTime,
+                c.is_public as isPublic,
+                c.is_restricted_forum as isRestrictedForum,
+                c.is_disabled_forum as isDisabledForum,
                 c.created_by as createdById,
                 c.updated_by as updatedById,
                 c.created_at as createdAt,
@@ -57,7 +69,8 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
     and (cast(?3 as text) IS NULL or
                 c.fts_document @@ (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'') ) ) or
                 c.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) )
-            )
+            or cast(?4 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?4 as text), '%')))
+    and (?5 = TRUE or (c.is_public = true))
     order by 
         ts_rank(c.fts_document, 
             case
@@ -74,15 +87,26 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
         c.start_time desc
 """, nativeQuery = true)
     Page<ContestProjection> findAllUpcomingContestsContainsSearchName(
-            ZonedDateTime now,  String searchExcludeFinalWord, String searchFinalWord, Pageable pageable);
+            ZonedDateTime now,
+            String searchExcludeFinalWord,
+            String searchFinalWord,
+            String searchValue,
+            Boolean isAdmin,
+            Pageable pageable);
 
     @Query(value = """
             select c.id as id,
                 c.name as name,
                 c.description as description,
+                c.prizes as prizes,
+                c.rules as rules,
+                c.scoring as scoring,
                 c.thumbnail_url as thumbnailUrl,
                 c.start_time as startTime,
                 c.end_time as endTime,
+                c.is_public as isPublic,
+                c.is_restricted_forum as isRestrictedForum,
+                c.is_disabled_forum as isDisabledForum,
                 c.created_by as createdById,
                 c.updated_by as updatedById,
                 c.created_at as createdAt,
@@ -93,7 +117,8 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
             and (cast(?3 as text) IS NULL or
                 c.fts_document @@ (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'') ) ) or
                 c.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) )
-            )
+                or cast(?4 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?4 as text), '%')))
+            and (?5 = TRUE or (c.is_public = true))
             order by 
                 ts_rank(c.fts_document, 
                     case
@@ -110,15 +135,26 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
                 c.start_time desc
             """, nativeQuery = true)
     Page<ContestProjection> findAllHappeningContestsContainsSearchName(
-            ZonedDateTime now, String searchExcludeFinalWord, String searchFinalWord, Pageable pageable);
+            ZonedDateTime now,
+            String searchExcludeFinalWord,
+            String searchFinalWord,
+            String searchValue,
+            Boolean isAdmin,
+            Pageable pageable);
 
     @Query(value = """
             select c.id as id,
                 c.name as name,
                 c.description as description,
+                c.prizes as prizes,
+                c.rules as rules,
+                c.scoring as scoring,
                 c.thumbnail_url as thumbnailUrl,
                 c.start_time as startTime,
                 c.end_time as endTime,
+                c.is_public as isPublic,
+                c.is_restricted_forum as isRestrictedForum,
+                c.is_disabled_forum as isDisabledForum,
                 c.created_by as createdById,
                 c.updated_by as updatedById,
                 c.created_at as createdAt,
@@ -129,7 +165,8 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
             and (cast(?3 as text) IS NULL or
                 c.fts_document @@ (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'') ) ) or
                 c.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) )
-            )
+                or cast(?4 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?4 as text), '%')))
+            and (?5 = TRUE or (c.is_public = true))
             order by 
                 ts_rank(c.fts_document, 
                     case
@@ -146,15 +183,26 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
                 c.start_time desc
             """, nativeQuery = true)
     Page<ContestProjection> findAllEndedContestsContainsSearchName(
-            ZonedDateTime now, String searchExcludeFinalWord, String searchFinalWord, Pageable pageable);
+            ZonedDateTime now,
+            String searchExcludeFinalWord,
+            String searchFinalWord,
+            String searchValue,
+            Boolean isAdmin,
+            Pageable pageable);
 
     @Query(value = """
     select c.id as id,
                 c.name as name,
                 c.description as description,
+                c.prizes as prizes,
+                c.rules as rules,
+                c.scoring as scoring,
                 c.thumbnail_url as thumbnailUrl,
                 c.start_time as startTime,
                 c.end_time as endTime,
+                c.is_public as isPublic,
+                c.is_restricted_forum as isRestrictedForum,
+                c.is_disabled_forum as isDisabledForum,
                 c.created_by as createdById,
                 c.updated_by as updatedById,
                 c.created_at as createdAt,
@@ -164,7 +212,8 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
     where (cast(?2 as text) IS NULL or
             c.fts_document @@ (to_tsquery( concat(cast(?2 as text),':*') ) && plainto_tsquery( coalesce( cast(?1 as text) ,'') ) ) or
             c.fts_document @@ (to_tsquery( concat(unaccent(cast(?2 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?1 as text) ,'')) ) )
-            )
+            or cast(?3 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?3 as text), '%')))
+      and (?4 = TRUE or (c.is_public = true))
     order by 
         ts_rank(c.fts_document, 
             case
@@ -183,15 +232,23 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
     Page<ContestProjection> findAllContainsSearchName(
             String searchExcludeFinalWord,
             String searchFinalWord,
+            String searchValue,
+            Boolean isAdmin,
             Pageable pageable);
 
     @Query(value = """
         select c.id as id,
                 c.name as name,
                 c.description as description,
+                c.prizes as prizes,
+                c.rules as rules,
+                c.scoring as scoring,
                 c.thumbnail_url as thumbnailUrl,
                 c.start_time as startTime,
                 c.end_time as endTime,
+                c.is_public as isPublic,
+                c.is_restricted_forum as isRestrictedForum,
+                c.is_disabled_forum as isDisabledForum,
                 c.created_by as createdById,
                 c.updated_by as updatedById,
                 c.created_at as createdAt,
@@ -199,7 +256,7 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
                 (select count(*) from contest_user cu where cu.contest_id = c.id) as numOfParticipants
         from contest c
         left join contest_user cu on c.id = cu.contest_id
-        where c.start_time > ?1
+        where c.start_time > ?1 and c.is_public = true
         group by c.id
         order by count(cu.user_id) desc, c.created_at desc
         limit 10

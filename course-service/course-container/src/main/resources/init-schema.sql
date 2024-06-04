@@ -508,7 +508,7 @@ CREATE TABLE "public".submission_assignment
     is_graded   boolean                        NOT NULL,
     grade         double precision               ,
     content       text                          ,
-    submit_time   timestamp without time zone NOT NULL,
+    submit_time   timestamp without time zone,
     timemodified  TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT submission_assignment_pkey PRIMARY KEY (id),
     CONSTRAINT submission_assignment_user_id_fkey FOREIGN KEY (user_id)
@@ -517,6 +517,21 @@ CREATE TABLE "public".submission_assignment
         ON DELETE CASCADE,
     CONSTRAINT submission_assignment_assignment_id_fkey FOREIGN KEY (assignment_id)
         REFERENCES "public".assignment (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS "public".submission_grade CASCADE;
+CREATE TABLE "public".submission_grade
+(
+    id                       uuid DEFAULT gen_random_uuid() NOT NULL,
+    submission_assignment_id uuid                           NOT NULL,
+    grade                    double precision               NOT NULL,
+    time_created             TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    time_modified            TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT submission_grade_pkey PRIMARY KEY (id),
+    CONSTRAINT submission_grade_submission_assignment_id_fkey FOREIGN KEY (submission_assignment_id)
+        REFERENCES "public".submission_assignment (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );

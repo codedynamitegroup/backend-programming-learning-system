@@ -18,14 +18,16 @@ public class CreateContestCommand {
     private final String name;
     @NotNull(message = "Description is required")
     private final String description;
+    @NotNull(message = "Prizes is required")
+    private final String prizes;
+    @NotNull(message = "Rules is required")
+    private final String rules;
+    @NotNull(message = "Scoring is required")
+    private final String scoring;
     @NotNull(message = "ThumbnailUrl is required")
     private final String thumbnailUrl;
     @NotNull(message = "Start time is required")
     private final ZonedDateTime startTime;
     private final ZonedDateTime endTime;
     private final String email;
-//    @NotNull(message = "CreatedBy is required")
-//    private final UUID createdBy;
-//    @NotNull(message = "UpdatedBy is required")
-//    private final UUID updatedBy;
 }

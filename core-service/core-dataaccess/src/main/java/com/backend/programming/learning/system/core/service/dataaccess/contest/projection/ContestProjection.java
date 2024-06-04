@@ -8,9 +8,15 @@ public interface ContestProjection {
     UUID getId();
     String getName();
     String getDescription();
+    String getPrizes();
+    String getRules();
+    String getScoring();
     String getThumbnailUrl();
     Instant getStartTime();
     Instant getEndTime();
+    Boolean getIsPublic();
+    Boolean getIsRestrictedForum();
+    Boolean getIsDisabledForum();
     UUID getCreatedById();
     UUID getUpdatedById();
     Instant getCreatedAt();

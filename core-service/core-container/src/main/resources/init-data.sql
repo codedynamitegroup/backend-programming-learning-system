@@ -1,9 +1,10 @@
-INSERT INTO public.user (id,email,dob,first_name,last_name,phone,address,avatar_url,created_at,updated_at,is_deleted)
-VALUES
-	 ('9ba179ed-d26d-4828-a0f6-8836c2063992','nguyenquoctuan385@gmail.com',NULL,'Tuan','Nguyen','012345678','HCM',NULL,'2024-04-12 21:33:23.371836+07','2024-04-12 21:33:23.371836+07',true),
-	 ('b029f559-52a8-4699-b595-71161498ed8c','dcthong852@gmail.com',NULL,'Thong','Duong','12365478',NULL,NULL,'2024-04-15 18:07:20.891115+07','2024-04-15 18:07:20.891115+07',false),
-	 ('8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7','tgtien852@gmail.com',NULL,'Tien','Truong','12365478',NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false);
-
+INSERT INTO public.user (id,email,dob,first_name,last_name,phone,address,avatar_url,created_at,updated_at,is_deleted) VALUES
+	 ('9ba179ed-d26d-4828-a0f6-8836c2063992','nguyenquoctuan385@gmail.com','2002-05-29','Tuan','Nguyen Quoc','+8412365478',NULL,NULL,'2024-04-12 21:33:23.371836+07','2024-04-12 21:33:23.371836+07',false),
+	 ('b029f559-52a8-4699-b595-71161498ed8c','dcthong852@gmail.com','2002-04-29','Thong','Duong','+8412365478',NULL,NULL,'2024-04-15 18:07:20.891115+07','2024-04-15 18:07:20.891115+07',false),
+	 ('8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7','nthoang852@gmail.com','2002-03-29','Hoang','Nguyen Thanh','+8412365478',NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false),
+	 ('39328bcf-8af6-44fc-9ae9-247f953ee2a2','ndqkhanh852@gmail.com','2002-03-29','Khanh','Nguyen Dinh','+8412365478',NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false),
+	 ('8edbc0aa-0b91-480e-a428-23abf2109df9','tgtien852@gmail.com','2002-03-29','Tien','Truong Gia','+8412365478',NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false),
+	 ('05dbdfde-1eae-47ba-8ebb-6c4cdc4f6510','dntien852@gmail.com','2002-03-29','Tien','Dang Ngoc','+8412365478',NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false);
 
 INSERT INTO public.topic(id, name, description, thumbnail_url, created_by, updated_by, is_single_programming_language)
 VALUES
@@ -305,79 +306,55 @@ VALUES
     ('27549d54-4a3a-4be4-9875-eab03f88ba6c', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
     ('27549d54-4a3a-4be4-9875-eab03f88ba6d', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false);
 
-INSERT INTO public.contest(id, name, description, thumbnail_url, start_time, end_time, created_by, updated_by)
+INSERT INTO public.code_submission_certificate_course(code_submission_id, certificate_course_id)
+VALUES
+    ('27549d54-4a3a-4be4-9875-eab03f88ba5a', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba5b', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba5c', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba5d', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba5e', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba5f', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba6b', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba6c', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
+    ('27549d54-4a3a-4be4-9875-eab03f88ba6d', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16');
+
+INSERT INTO public.contest(id, name, description, prizes, rules, scoring, thumbnail_url, start_time, end_time, created_by, updated_by, is_public)
 VALUES
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'Python Contest',
-     '<h3 style="text-align:start"><span style="font-size:24px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">Ch&agrave;o mừng đến với Cuộc thi h&agrave;ng tuần Batch the code lần thứ 387</span></span></span></span></h3>
-
-<p>&nbsp;</p>
-
-<p style="text-align:start"><span style="font-size:14px"><span style="color:rgba(0, 0, 0, 0.65)"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="background-color:#fafafa">Cuộc thi n&agrave;y được t&agrave;i trợ bởi CodeDynamite.</span></span></span></span></p>
-
-<p style="text-align:start"><span style="font-size:14px"><span style="color:rgba(0, 0, 0, 0.65)"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="background-color:#fafafa"><strong>H&atilde;y đăng k&yacute; trước cuộc thi v&agrave; điền v&agrave;o bản khảo s&aacute;t để được chọn phỏng vấn với CodeDynamite!!</strong></span></span></span></span></p>
-
-<p style="text-align:start"><span style="font-size:14px"><span style="color:rgba(0, 0, 0, 0.65)"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="background-color:#fafafa">Bạn c&oacute; thể điền th&ocirc;ng tin li&ecirc;n hệ ở bước đăng k&yacute;.&nbsp;CodeDynamite c&oacute; thể li&ecirc;n hệ với những người chiến thắng cuộc thi đủ điều kiện để c&oacute; cơ hội phỏng vấn với CodeDynamite.</span></span></span></span></p>
-
-<p style="text-align:start"><span style="font-size:14px"><span style="color:rgba(0, 0, 0, 0.65)"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="background-color:#fafafa"><strong><strong>⭐ Giải thưởng⭐</strong></strong></span></span></span></span></p>
-
-<ul>
-	<li>Th&iacute; sinh xếp&nbsp;<strong>thứ 1 ~ thứ 3</strong>&nbsp;sẽ gi&agrave;nh được Ba l&ocirc; CodeDynamite</li>
-	<li>Th&iacute; sinh xếp&nbsp;<strong>thứ 4 ~ 10</strong>&nbsp;sẽ gi&agrave;nh được B&igrave;nh nước CodeDynamite</li>
-	<li>Th&iacute; sinh xếp hạng&nbsp;<strong>11 ~ 16</strong>&nbsp;sẽ gi&agrave;nh được CodeDynamite Big O Notebook</li>
-</ul>
-
-<p style="text-align:start"><span style="font-size:14px"><span style="color:rgba(0, 0, 0, 0.65)"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="background-color:#fafafa">Chỉ t&agrave;i khoản LCUS(6bt.com) mới đủ điều kiện nhận phần thưởng.&nbsp;Sau khi bảng xếp hạng được ho&agrave;n tất, th&agrave;nh vi&ecirc;n nh&oacute;m CodeDynamitesẽ li&ecirc;n hệ với bạn qua email về m&oacute;n qu&agrave;!</span></span></span></span></p>
-
-<p><img src="https://assets.leetcode.com/static_assets/others/Contest_Prize_Banner.png" style="--tw-border-spacing-x:0; --tw-border-spacing-y:0; --tw-ring-color:rgba(59,130,246,.5); --tw-ring-offset-color:#ffffff; --tw-ring-offset-shadow:0 0 #0000; --tw-ring-offset-width:0px; --tw-ring-shadow:0 0 #0000; --tw-rotate:0; --tw-scale-x:1; --tw-scale-y:1; --tw-scroll-snap-strictness:proximity; --tw-shadow-colored:0 0 #0000; --tw-shadow:0 0 #0000; --tw-skew-x:0; --tw-skew-y:0; --tw-translate-x:0; --tw-translate-y:0; background-color:#fafafa; border:0px none; box-sizing:border-box; color:rgba(0, 0, 0, 0.65); font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;; font-size:14px; font-style:normal; font-variant-ligatures:normal; font-weight:400; margin-bottom:20px; max-width:100%; text-align:start; text-decoration-color:initial; text-decoration-style:initial; text-decoration-thickness:initial; vertical-align:middle; white-space:normal" /></p>
-
-<h4 style="text-align:start"><span style="font-size:18px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">&nbsp;&nbsp;Lưu &yacute; quan trọng</span></span></span></span></h4>
-
-<ol>
-	<li>Để mang đến một cuộc thi tốt hơn v&agrave; đảm bảo t&iacute;nh c&ocirc;ng bằng, ch&uacute;ng t&ocirc;i đ&atilde; lắng nghe phản hồi của 6BroCoder v&agrave; suy nghĩ rất nhiều về thể lệ cuộc thi được cập nhật.&nbsp;Vui l&ograve;ng xem&nbsp;<a href="https://leetcode.com/discuss/general-discussion/951105/new-contest-rule-effective-from-december-2020" style="box-sizing:border-box; border:0px solid; --tw-border-spacing-x:0; --tw-border-spacing-y:0; --tw-translate-x:0; --tw-translate-y:0; --tw-rotate:0; --tw-skew-x:0; --tw-skew-y:0; --tw-scale-x:1; --tw-scale-y:1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness:proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width:0px; --tw-ring-offset-color:#ffffff; --tw-ring-color:rgba(59,130,246,.5); --tw-ring-offset-shadow:0 0 #0000; --tw-ring-shadow:0 0 #0000; --tw-shadow:0 0 #0000; --tw-shadow-colored:0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; color:#1890ff; text-decoration:none; outline:none; cursor:pointer; transition:color 0.3s ease 0s; touch-action:manipulation">quy tắc</a>&nbsp;cuộc thi mới của ch&uacute;ng t&ocirc;i bao gồm nhiều t&igrave;nh huống hơn với giải th&iacute;ch chi tiết.</li>
-	<li>Mỗi lần gửi sai sẽ bị&nbsp;phạt&nbsp;<strong>5 ph&uacute;t.</strong></li>
-	<li>Để đảm bảo t&iacute;nh c&ocirc;ng bằng của cuộc thi, CodeDynamite sẽ ẩn một số test case trong suốt cuộc thi.&nbsp;Khi người d&ugrave;ng gửi b&agrave;i gửi kh&ocirc;ng ch&iacute;nh x&aacute;c, CodeDynamite sẽ kh&ocirc;ng hiển thị c&aacute;c trường hợp thử nghiệm ẩn cho người d&ugrave;ng.</li>
-	<li>Đ&aacute;nh gi&aacute; cuối c&ugrave;ng của cuộc thi n&agrave;y sẽ được cập nhật trong v&ograve;ng 5 ng&agrave;y l&agrave;m việc sau cuộc thi.</li>
-	<br />
-	<li><strong>C&aacute;c h&agrave;nh động dưới đ&acirc;y được coi l&agrave; vi phạm cuộc thi</strong>&nbsp;:
-	<ul>
-		<li>Một người d&ugrave;ng gửi bằng nhiều t&agrave;i khoản trong một cuộc thi.&nbsp;T&agrave;i khoản LCUS (CodeDynamite.com) v&agrave; t&agrave;i khoản LCCN (CodeDynamite-cn.com) được coi l&agrave; t&agrave;i khoản ri&ecirc;ng biệt, ngay cả khi cả hai t&agrave;i khoản đều thuộc về c&ugrave;ng một người d&ugrave;ng.</li>
-		<li>Nhiều t&agrave;i khoản gửi m&atilde; giống nhau cho c&ugrave;ng một vấn đề.</li>
-		<li>Tạo ra những x&aacute;o trộn kh&ocirc;ng mong muốn l&agrave;m gi&aacute;n đoạn sự tham gia của người d&ugrave;ng kh&aacute;c v&agrave;o cuộc thi.</li>
-		<li>C&ocirc;ng bố giải ph&aacute;p cuộc thi ở c&aacute;c b&agrave;i thảo luận c&ocirc;ng khai trước khi cuộc thi kết th&uacute;c.</li>
-	</ul>
-	<br />
-	CodeDynamite nhấn mạnh v&agrave;o t&iacute;nh c&ocirc;ng bằng v&agrave; c&ocirc;ng bằng trong c&aacute;c cuộc thi của ch&uacute;ng t&ocirc;i.&nbsp;Ch&uacute;ng t&ocirc;i ho&agrave;n to&agrave;n&nbsp;<strong>KH&Ocirc;NG CHẤP NHẬN</strong>&nbsp;đối với c&aacute;c h&agrave;nh vi vi phạm (chẳng hạn như đạo văn, gian lận, v.v.).&nbsp;Khi người d&ugrave;ng bị coi l&agrave; vi phạm quy tắc cuộc thi, ch&uacute;ng t&ocirc;i sẽ &aacute;p dụng c&aacute;c h&igrave;nh phạt sau đối với người d&ugrave;ng n&agrave;y:
-
-	<ul>
-		<li><strong>Vi phạm lần đầu</strong>&nbsp;: Số tiền 6Coin đặt lại về 0 v&agrave; một cuộc thi v&agrave; thảo luận về lệnh cấm trong 1 th&aacute;ng.</li>
-		<li><strong>Vi phạm lần 2</strong>&nbsp;: Kh&oacute;a t&agrave;i khoản vĩnh viễn m&agrave; kh&ocirc;ng kh&aacute;ng c&aacute;o.</li>
-	</ul>
-	<br />
-	Hơn nữa, ch&uacute;ng t&ocirc;i khuyến kh&iacute;ch tất cả những người tham gia đ&oacute;ng g&oacute;p v&agrave;o việc duy tr&igrave; sự c&ocirc;ng bằng v&agrave; c&ocirc;ng bằng trong cuộc thi của ch&uacute;ng t&ocirc;i.&nbsp;Người d&ugrave;ng gửi (c&aacute;c) b&aacute;o c&aacute;o vi phạm hợp lệ sẽ kiếm th&ecirc;m 6Coin:
-	<ul>
-		<li>Đối với mỗi người tham gia vi phạm, 10 người d&ugrave;ng đầu ti&ecirc;n gửi b&aacute;o c&aacute;o vi phạm đối với người tham gia n&agrave;y sẽ kiếm được 20 6Coin.</li>
-		<li>Mỗi người d&ugrave;ng c&oacute; thể kiếm tới 100 6Coin khi b&aacute;o c&aacute;o vi phạm trong một cuộc thi.</li>
-		<li>Người d&ugrave;ng sẽ kh&ocirc;ng được thưởng 6Coins cho c&aacute;c b&aacute;o c&aacute;o về người d&ugrave;ng LCCN.</li>
-	</ul>
-	</li>
-</ol>
-
-<p><br />
-&nbsp;</p>
-
-<h4 style="text-align:start"><span style="font-size:18px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">&nbsp;&nbsp;Th&ocirc;ng b&aacute;o</span></span></span></span></h4>
-
-<p style="text-align:start"><span style="font-size:14px"><span style="color:rgba(0, 0, 0, 0.65)"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="background-color:#fafafa">Người d&ugrave;ng&nbsp;<strong>phải đăng k&yacute;</strong>&nbsp;để tham gia.&nbsp;Ch&uacute;ng t&ocirc;i hy vọng bạn th&iacute;ch cuộc thi n&agrave;y!</span></span></span></span></p>',
-     'https://leetcode.com/_next/static/images/weekly-default-553ede7bcc8e1b4a44c28a9e4a32068c.png', '2024-05-20 18:09:29.488151+07', '2024-09-10 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
+     '<h3 style="text-align:start"><span style="font-size:24px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">Welcome to the Python Contest Batch the code #387</span></span></span></span></h3>',
+     '<ol><li>1st Place: $1000</li><li>2nd Place: $500</li><li>3rd Place: $250</li></ol>',
+     '<ol><li>1. Participants must submit their solutions before the end time.</li><li>2. Participants must follow the contest rules and guidelines.</li><li>3. Participants must not cheat or plagiarize.</li></ol>',
+     '- Each challenge has a pre-determined score.
+          - A participant’s score depends on the number of test cases a participant’s code submission successfully passes.
+          - If a participant submits more than one solution per challenge, then the participant’s score will reflect the highest score achieved.
+          - Participants are ranked by score. If two or more participants achieve the same score, then the tie is broken by the total time taken to submit the last solution resulting in a higher score',
+     'https://leetcode.com/_next/static/images/weekly-default-553ede7bcc8e1b4a44c28a9e4a32068c.png', '2024-05-20 18:09:29.488151+07', '2024-09-10 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', true),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 'Java Contest',
      '<h3 style="text-align:start"><span style="font-size:24px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">Welcome to the Java Contest Batch the code #387</span></span></span></span></h3>',
-     'https://leetcode.com/_next/static/images/biweekly-default-f5a8fc3be85b6c9175207fd8fd855d47.png', '2024-09-15 18:09:29.488151+07', '2024-10-15 18:09:29.488151+07', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c'),
+     '- Prizes are optional. You may add any prizes that you would like to offer here.',
+     '<ol><li>1. Participants must submit their solutions before the end time.</li><li>2. Participants must follow the contest rules and guidelines.</li><li>3. Participants must not cheat or plagiarize.</li></ol>',
+     '- Each challenge has a pre-determined score.
+          - A participant’s score depends on the number of test cases a participant’s code submission successfully passes.
+          - If a participant submits more than one solution per challenge, then the participant’s score will reflect the highest score achieved.
+          - Participants are ranked by score. If two or more participants achieve the same score, then the tie is broken by the total time taken to submit the last solution resulting in a higher score',
+     'https://leetcode.com/_next/static/images/biweekly-default-f5a8fc3be85b6c9175207fd8fd855d47.png', '2024-09-15 18:09:29.488151+07', '2024-10-15 18:09:29.488151+07', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', true),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'Data Structures Contest',
-     '<h3 style="text-align:start"><span style="font-size:24px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">Welcome to the Data Structures Contest Batch the code #387</span></span></span></span></h3>',
-     'https://assets.leetcode.com/contest/weekly-contest-291/card_img_1654267951.png', '2024-01-15 18:09:29.488151+07', null, '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7'),
+     '<h3 style="text-align:start"><span style="font-size:24px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">Welcome to the Data Structures Contest Batch the code #387</span></span></span></span></h3>','<ol><li>1st Place: $1000</li><li>2nd Place: $500</li><li>3rd Place: $250</li></ol>',
+     '<ol><li>1. Participants must submit their solutions before the end time.</li><li>2. Participants must follow the contest rules and guidelines.</li><li>3. Participants must not cheat or plagiarize.</li></ol>',
+     '- Each challenge has a pre-determined score.
+          - A participant’s score depends on the number of test cases a participant’s code submission successfully passes.
+          - If a participant submits more than one solution per challenge, then the participant’s score will reflect the highest score achieved.
+          - Participants are ranked by score. If two or more participants achieve the same score, then the tie is broken by the total time taken to submit the last solution resulting in a higher score',
+     'https://assets.leetcode.com/contest/weekly-contest-291/card_img_1654267951.png', '2024-01-15 18:09:29.488151+07', null, '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', true),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', 'Algorithms Contest',
-        '<h3 style="text-align:start"><span style="font-size:24px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">Welcome to the Algorithms Contest Batch the code #387</span></span></span></span></h3>',
-     'https://assets.leetcode.com/contest/weekly-contest-291/card_img_1654267951.png', '2024-01-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992');
+        '<h3 style="text-align:start"><span style="font-size:24px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">Welcome to the Algorithms Contest Batch the code #387</span></span></span></span></h3>','<ol><li>1st Place: $1000</li><li>2nd Place: $500</li><li>3rd Place: $250</li></ol>',
+     '<ol><li>1. Participants must submit their solutions before the end time.</li><li>2. Participants must follow the contest rules and guidelines.</li><li>3. Participants must not cheat or plagiarize.</li></ol>',
+     '- Each challenge has a pre-determined score.
+          - A participant’s score depends on the number of test cases a participant’s code submission successfully passes.
+          - If a participant submits more than one solution per challenge, then the participant’s score will reflect the highest score achieved.
+          - Participants are ranked by score. If two or more participants achieve the same score, then the tie is broken by the total time taken to submit the last solution resulting in a higher score',
+     'https://assets.leetcode.com/contest/weekly-contest-291/card_img_1654267951.png', '2024-01-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', false);
 
 INSERT INTO public.contest_user(contest_id, user_id)
 VALUES
@@ -405,4 +382,17 @@ VALUES
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', 'b029f559-52a8-4699-b595-71161498ed8c', '27549d54-4a3a-4be4-9875-eab03f88ba6b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 3, true),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '27549d54-4a3a-4be4-9875-eab03f88ba7b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba8b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 4, true);
+
+INSERT INTO public.code_submission_contest(code_submission_id, contest_id)
+VALUES
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15');
+
+
 

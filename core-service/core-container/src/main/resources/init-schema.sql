@@ -264,9 +264,15 @@ CREATE TABLE "public".contest
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
     name text,
     description text,
+    prizes text,
+    rules text,
+    scoring text,
     thumbnail_url text,
     start_time TIMESTAMP WITH TIME ZONE,
     end_time TIMESTAMP WITH TIME ZONE,
+    is_public boolean DEFAULT FALSE,
+    is_restricted_forum boolean DEFAULT FALSE,
+    is_disabled_forum boolean DEFAULT FALSE,
     created_by uuid NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_by uuid NOT NULL,
@@ -517,6 +523,38 @@ CREATE TABLE "public".code_submission
         ON DELETE CASCADE,
     CONSTRAINT code_submission_programming_language_id_fkey FOREIGN KEY (programming_language_id)
         REFERENCES "public".programming_language (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS "public".code_submission_contest CASCADE;
+CREATE TABLE "public".code_submission_contest
+(
+    code_submission_id uuid NOT NULL,
+    contest_id uuid NOT NULL,
+    CONSTRAINT code_submission_contest_pkey PRIMARY KEY (code_submission_id),
+    CONSTRAINT code_submission_contest_contest_id_fkey FOREIGN KEY (contest_id)
+        REFERENCES "public".contest (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT code_submission_contest_code_submission_id_fkey FOREIGN KEY (code_submission_id)
+        REFERENCES "public".code_submission (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS "public".code_submission_certificate_course CASCADE;
+CREATE TABLE "public".code_submission_certificate_course
+(
+    code_submission_id uuid NOT NULL,
+    certificate_course_id uuid NOT NULL,
+    CONSTRAINT code_submission_certificate_course_pkey PRIMARY KEY (code_submission_id),
+    CONSTRAINT code_submission_certificate_course_certificate_course_id_fkey FOREIGN KEY (certificate_course_id)
+        REFERENCES "public".certificate_course (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT code_submission_certificate_course_code_submission_id_fkey FOREIGN KEY (code_submission_id)
+        REFERENCES "public".code_submission (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );

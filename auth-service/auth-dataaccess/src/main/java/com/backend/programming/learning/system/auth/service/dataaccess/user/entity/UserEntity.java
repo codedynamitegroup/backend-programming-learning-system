@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.auth.service.dataaccess.user.entity;
 
 import com.backend.programming.learning.system.auth.service.dataaccess.organization.entity.OrganizationEntity;
+import com.backend.programming.learning.system.auth.service.dataaccess.role.entity.RoleEntity;
 import jakarta.persistence.*;
 
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
@@ -8,6 +9,7 @@ import lombok.*;
 
 import java.time.ZonedDateTime;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -35,10 +37,20 @@ public class UserEntity {
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
     private Boolean isDeleted;
+    private Integer otp;
 
     @ManyToOne
     @JoinColumn(name = "organization_id", referencedColumnName = "id")
     private OrganizationEntity organization;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    Set<RoleEntity> roles;
+
+    private ZonedDateTime otpExpireAt;
 
     @Override
     public boolean equals(Object o) {

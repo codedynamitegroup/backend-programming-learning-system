@@ -69,6 +69,9 @@ public class ContestController {
                                 .builder()
                                 .name(createContestCommand.getName())
                                 .description(createContestCommand.getDescription())
+                                .prizes(createContestCommand.getPrizes())
+                                .rules(createContestCommand.getRules())
+                                .scoring(createContestCommand.getScoring())
                                 .thumbnailUrl(createContestCommand.getThumbnailUrl())
                                 .startTime(createContestCommand.getStartTime())
                                 .endTime(createContestCommand.getEndTime())
@@ -116,6 +119,13 @@ public class ContestController {
     public ResponseEntity<UpdateContestResponse> updateContest(
             @PathVariable UUID id,
             @RequestBody UpdateContestCommand updateContestCommand) {
+        String email = null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
         log.info("Updating contest: {}", id);
         UpdateContestResponse updateContestResponse =
                 contestApplicationService.updateContest(UpdateContestCommand
@@ -123,9 +133,14 @@ public class ContestController {
                         .contestId(id)
                         .name(updateContestCommand.getName())
                         .description(updateContestCommand.getDescription())
+                        .thumbnailUrl(updateContestCommand.getThumbnailUrl())
+                        .prizes(updateContestCommand.getPrizes())
+                        .rules(updateContestCommand.getRules())
+                        .scoring(updateContestCommand.getScoring())
                         .startTime(updateContestCommand.getStartTime())
                         .endTime(updateContestCommand.getEndTime())
-                        .updatedBy(updateContestCommand.getUpdatedBy())
+                        .isPublic(updateContestCommand.getIsPublic())
+                        .email(email)
                         .build());
         log.info("Contest updated: {}", updateContestResponse.getContestId());
         return ResponseEntity.ok(updateContestResponse);
@@ -143,7 +158,7 @@ public class ContestController {
     public ResponseEntity<QueryAllContestsResponse> getAllContests(
             @RequestHeader(value = "Access-Token", required = false) String accessToken,
             @RequestParam(defaultValue = "") String searchName,
-            @RequestParam(defaultValue = "UPCOMING") String startTimeFilter,
+            @RequestParam(defaultValue = "ALL") String startTimeFilter,
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize
     ) {
@@ -151,6 +166,41 @@ public class ContestController {
 
         QueryAllContestsResponse queryAllContestsResponse =
                 contestApplicationService.queryAllContests(QueryAllContestsCommand
+                        .builder()
+                        .pageNo(pageNo)
+                        .pageSize(pageSize)
+                        .searchName(searchName)
+                        .startTimeFilter(startTimeFilter)
+                        .email(email)
+                        .build());
+        log.info("Returning all contests: {}", queryAllContestsResponse.getContests());
+        return ResponseEntity.ok(queryAllContestsResponse);
+    }
+
+    @GetMapping("/admin")
+    @Operation(summary = "Get all contests for admin.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllContestsResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllContestsResponse> getAllContestsForAdmin(
+            @RequestParam(defaultValue = "") String searchName,
+            @RequestParam(defaultValue = "ALL") String startTimeFilter,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize
+    ) {
+        String email = null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
+        QueryAllContestsResponse queryAllContestsResponse =
+                contestApplicationService.queryAllContestsForAdmin(QueryAllContestsCommand
                         .builder()
                         .pageNo(pageNo)
                         .pageSize(pageSize)
@@ -233,6 +283,27 @@ public class ContestController {
                                 .build());
         log.info("Returning leaderboard of contest: {}", id);
         return ResponseEntity.ok(queryLeaderboardOfContestResponse);
+    }
+
+    @GetMapping("/{id}/admin/statistics")
+    @Operation(summary = "Get statistics of a contest for admin.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryLeaderboardOfContestResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryStatisticsOfContestResponse> getStatisticsOfContestsForAdmin
+            (@PathVariable UUID id) {
+        QueryStatisticsOfContestResponse queryStatisticsOfContestResponse =
+                contestApplicationService.queryStatisticsOfContestResponse(
+                        QueryStatisticsOfContestCommand
+                                .builder()
+                                .contestId(id)
+                                .build());
+        log.info("Returning statistics of contest: {}", id);
+        return ResponseEntity.ok(queryStatisticsOfContestResponse);
     }
 
     @GetMapping("/{id}")

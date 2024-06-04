@@ -23,9 +23,15 @@ public class ContestEntity {
 
     private String name;
     private String description;
+    private String prizes;
+    private String rules;
+    private String scoring;
     private String thumbnailUrl;
     private ZonedDateTime startTime;
     private ZonedDateTime endTime;
+    private Boolean isPublic;
+    private Boolean isRestrictedForum;
+    private Boolean isDisabledForum;
 
     @ManyToOne
     @JoinColumn(name = "created_by", referencedColumnName = "id")

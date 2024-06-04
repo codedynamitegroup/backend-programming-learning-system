@@ -36,6 +36,29 @@ public class UserKeycloakApplicationServiceImpl implements UserKeycloakApplicati
     }
 
     @Override
+    public void updatePassword(String email, String newPassword) {
+        UsersResource usersResource = getUsersResource();
+        List<UserRepresentation> userRepresentations = usersResource.searchByUsername(email, true);
+        if (userRepresentations.isEmpty()) {
+            log.error("User not found");
+            throw new AuthDomainException("User not found");
+        }
+        UserRepresentation userRepresentation = userRepresentations.get(0);
+
+        CredentialRepresentation credentialRepresentation = new CredentialRepresentation();
+        credentialRepresentation.setValue(newPassword);
+        credentialRepresentation.setTemporary(false);
+        credentialRepresentation.setType(CredentialRepresentation.PASSWORD);
+
+        List<CredentialRepresentation> list = new ArrayList<>();
+        list.add(credentialRepresentation);
+        userRepresentation.setCredentials(list);
+
+        usersResource.get(userRepresentation.getId()).update(userRepresentation);
+
+    }
+
+    @Override
     public void createUser(CreateUserCommand createUserCommand) {
         UserRepresentation userRepresentation = new UserRepresentation();
         userRepresentation.setFirstName(createUserCommand.getFirstName());
@@ -45,7 +68,7 @@ public class UserKeycloakApplicationServiceImpl implements UserKeycloakApplicati
         userRepresentation.setEnabled(true);
         userRepresentation.setEmailVerified(false);
 
-        CredentialRepresentation credentialRepresentation=new CredentialRepresentation();
+        CredentialRepresentation credentialRepresentation = new CredentialRepresentation();
         credentialRepresentation.setValue(createUserCommand.getPassword());
         credentialRepresentation.setTemporary(false);
         credentialRepresentation.setType(CredentialRepresentation.PASSWORD);

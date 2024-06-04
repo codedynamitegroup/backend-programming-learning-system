@@ -18,8 +18,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @RequiredArgsConstructor
 @EnableWebSecurity
 public class WebSecurityConfig {
-    public static final String ADMIN = "admin_client_role";
-    public static final String USER = "user_client_role";
+    public static final String ADMIN = "admin";
+    public static final String USER = "user";
+    public static final String TEACHER_MOODLE = "teacher_moodle";
+    public static final String STUDENT_MOODLE = "student_moodle";
+    public static final String ADMIN_MOODLE = "admin_moodle";
     private final JwtAuthConverter jwtAuthConverter;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -42,6 +45,8 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/core/contests/{id}/register").hasAnyRole(ADMIN, USER)
                         .requestMatchers(HttpMethod.PUT, "/core/contests/{id}").hasAnyRole(ADMIN)
                         .requestMatchers(HttpMethod.DELETE, "/core/contests/{id}").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.GET, "/core/contests/admin").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.GET, "/core/contests/{id}/admin/statistics").hasAnyRole(ADMIN)
 
                         // Review
                         .requestMatchers(HttpMethod.POST, "/core/reviews/create").hasAnyRole(ADMIN, USER)
@@ -76,8 +81,7 @@ public class WebSecurityConfig {
                     .requestMatchers("/v3/api-docs/**", "/configuration/**", "/swagger-ui/**",
                             "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/api-docs/**")
                     .requestMatchers(HttpMethod.POST, "/core/certificate-courses")
-                    .requestMatchers(HttpMethod.GET, "/core/certificate-courses/{id}")
-                    .requestMatchers(HttpMethod.GET, "/core/contests/**");
+                    .requestMatchers(HttpMethod.GET, "/core/certificate-courses/{id}");
         };
     }
 

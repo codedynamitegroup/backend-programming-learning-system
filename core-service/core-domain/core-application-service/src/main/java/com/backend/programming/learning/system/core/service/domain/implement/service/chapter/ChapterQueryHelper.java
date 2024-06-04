@@ -50,7 +50,9 @@ public class ChapterQueryHelper {
                 for (Question question : questions) {
                     question.setPass(checkCodeQuestionIsPassed(
                             user.get().getId().getValue(),
-                            question.getId().getValue()));
+                            question.getId().getValue(),
+                            chapter.getCertificateCourseId().getValue()
+                    ));
                 }
             }
 
@@ -81,7 +83,9 @@ public class ChapterQueryHelper {
             for (Question question : questions) {
                 question.setPass(checkCodeQuestionIsPassed(
                         user.get().getId().getValue(),
-                        question.getId().getValue()));
+                        question.getId().getValue(),
+                        chapterWithQuestions.getCertificateCourseId().getValue()
+                        ));
             }
         }
 
@@ -91,9 +95,9 @@ public class ChapterQueryHelper {
         return chapterWithQuestions;
     }
 
-    private Boolean checkCodeQuestionIsPassed(UUID userId, UUID questionId) {
+    private Boolean checkCodeQuestionIsPassed(UUID userId, UUID questionId, UUID certificateCourseId) {
         List<CodeSubmission> codeSubmissions = codeSubmissionRepository
-                .findAllCodeSubmissionsByUserIdAndQuestionId(userId, questionId);
+                .findAllCodeSubmissionsByUserIdAndQuestionIdAndCertificateCourseId(userId, questionId, certificateCourseId);
         return codeSubmissions.stream()
                 .anyMatch(CodeSubmission::getPass);
     }

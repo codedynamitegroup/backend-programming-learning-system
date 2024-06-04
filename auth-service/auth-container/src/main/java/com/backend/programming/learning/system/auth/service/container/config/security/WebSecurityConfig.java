@@ -24,22 +24,24 @@ import java.util.Collections;
 @RequiredArgsConstructor
 @EnableWebSecurity
 public class WebSecurityConfig {
-    public static final String ADMIN = "admin_client_role";
-    public static final String USER = "user_client_role";
+    public static final String ADMIN = "admin";
+    public static final String USER = "user";
+    public static final String TEACHER_MOODLE = "teacher_moodle";
+    public static final String STUDENT_MOODLE = "student_moodle";
+    public static final String ADMIN_MOODLE = "admin_moodle";
     private final JwtAuthConverter jwtAuthConverter;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET, "/auth/users").hasAnyRole(ADMIN, USER)
-                        .requestMatchers(HttpMethod.GET, "/auth/users/get-by-email/:email").hasAnyRole(ADMIN, USER)
+                        .requestMatchers(HttpMethod.GET, "/auth/users").hasAnyRole(ADMIN, ADMIN_MOODLE, STUDENT_MOODLE, TEACHER_MOODLE)
+                        .requestMatchers(HttpMethod.GET, "/auth/users/get-by-email/:email").hasRole(USER)
                         .requestMatchers(HttpMethod.DELETE, "/auth/users/:id").hasRole(ADMIN)
-                        .requestMatchers(HttpMethod.PUT, "/auth/users/:id").hasRole(ADMIN)
-                        .requestMatchers(HttpMethod.GET, "/auth/users/search").hasAnyRole(ADMIN, USER)
+                        .requestMatchers(HttpMethod.PUT, "/auth/users/:id").hasAnyRole(USER)
                         .requestMatchers(HttpMethod.POST, "/auth/users").hasRole(ADMIN)
+                        .requestMatchers(HttpMethod.POST, "/auth/users/change-password").hasAnyRole(USER)
                         .requestMatchers(HttpMethod.POST, "/auth/user-roles").hasRole(ADMIN)
-                        .requestMatchers(HttpMethod.POST, "/auth/uses/refresh_token").hasAnyRole(ADMIN, USER)
                         .anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
