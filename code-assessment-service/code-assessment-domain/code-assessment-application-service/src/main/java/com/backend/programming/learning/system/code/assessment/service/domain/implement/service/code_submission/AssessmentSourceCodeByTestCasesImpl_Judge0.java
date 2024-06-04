@@ -44,10 +44,10 @@ public class AssessmentSourceCodeByTestCasesImpl_Judge0 implements AssessmentSou
     }
 
     @Override
-    public void judge(CodeSubmission codeSubmission) {
+    public void judge(CodeSubmission codeSubmission, String callbackUrl) {
         Thread thread1 = new Thread(()-> {
             try {
-                this.processSending(codeSubmission);
+                this.processSending(codeSubmission, callbackUrl);
             } catch (Exception e) {
                 if (e instanceof ReadTimeoutException || e instanceof WebClientRequestException || e instanceof UnknownHostException){
                     //change codesubmission state if sending failed and throw error
@@ -62,12 +62,12 @@ public class AssessmentSourceCodeByTestCasesImpl_Judge0 implements AssessmentSou
         thread1.start();
 
     }
-    private void processSending(CodeSubmission codeSubmission) throws UnknownHostException {
+    private void processSending(CodeSubmission codeSubmission, String callbackUrl) throws UnknownHostException {
         WebClient client = WebClient.create("http://" + codeAssessmentServiceConfigData.getAssessmentExternalServiceIp() + ":" + codeAssessmentServiceConfigData.getAssessmentExternalServicePort());
 //        String hostAddress = "gnkjb06l-8183.asse.devtunnels.ms";
-        String hostAddress = InetAddress.getLocalHost().getHostAddress();
+//        String hostAddress = InetAddress.getLocalHost().getHostAddress();
 
-        List<RequestBody> requestBodies = codeSubmissionToRequestBody(codeSubmission, hostAddress);
+        List<RequestBody> requestBodies = codeSubmissionToRequestBody(codeSubmission, callbackUrl);
 
         List<Token> tokens = new ArrayList<>();
         requestBodies.forEach(requestBody -> {
@@ -93,8 +93,8 @@ public class AssessmentSourceCodeByTestCasesImpl_Judge0 implements AssessmentSou
 
 
     }
-    List<RequestBody> codeSubmissionToRequestBody(CodeSubmission codeSubmission, String hostAddress) {
-        String callbackUrl = "http://" + hostAddress + ":" + codeAssessmentServiceConfigData.getServerPort().toString() + "/code-assessment/code-submission/test-case-token";
+    List<RequestBody> codeSubmissionToRequestBody(CodeSubmission codeSubmission, String callbackUrl) {
+//        String callbackUrl = "http://" + hostAddress + ":" + codeAssessmentServiceConfigData.getServerPort().toString() + "/code-assessment/code-submission/test-case-token";
 //        String callbackUrl = "http://" + hostAddress + "/code-assessment/code-submission/test-case-token";
 
         List<CodeSubmissionTestCase> baseList = codeSubmission.getCodeSubmissionTestCaseList();

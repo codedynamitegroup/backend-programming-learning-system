@@ -44,7 +44,7 @@ public class CodeSubmissionCommandHandler {
         CodeSubmission codeSubmission = event.getCodeSubmission();
 
         //send jugde0 and cron to check all graded
-        assessmentSourceCodeByTestCases.judge(codeSubmission);
+        assessmentSourceCodeByTestCases.judge(codeSubmission, createCodeSubmissionCommand.getCallbackUrl());
         Thread thread2 = new Thread(()->{
             boolean finish = false;
             do{

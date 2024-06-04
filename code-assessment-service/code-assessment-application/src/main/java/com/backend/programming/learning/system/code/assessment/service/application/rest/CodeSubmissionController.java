@@ -29,7 +29,10 @@ public class CodeSubmissionController {
     //add outbox
     @PostMapping
     public ResponseEntity<CreateCodeSubmissionResponse> createCodeSubmission
-            (@RequestBody CreateCodeSubmissionCommand createCodeSubmissionCommand){
+            (@RequestHeader(value = "Access-Token") String accessToken,
+             @RequestBody CreateCodeSubmissionCommand createCodeSubmissionCommand){
+        String email = JwtUtils.getEmailFromJwtString(accessToken);
+        createCodeSubmissionCommand.setEmail(email);
         CreateCodeSubmissionResponse response =
                 codeSubmissionApplicationService.createCodeSubmission(createCodeSubmissionCommand);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
@@ -53,14 +56,15 @@ public class CodeSubmissionController {
 
         return ResponseEntity.ok(response);
     }
-    @GetMapping("/detail")
+    @GetMapping("/{code-submission-id}")
     public ResponseEntity<GetCodeSubmissionResponseItem> getCodeSubmissionsById
-            (@RequestParam UUID userId,
-             @RequestParam UUID codeSubmissionId){
+            (@RequestHeader(value = "Access-Token") String accessToken,
+             @PathVariable("code-submission-id") UUID codeSubmissionId){
+        String email = JwtUtils.getEmailFromJwtString(accessToken);
 
         GetDetailCodeSubmissionsByIdCommand command = GetDetailCodeSubmissionsByIdCommand.builder()
                 .codeSubmissionId(codeSubmissionId)
-                .userId(userId)
+                .email(email)
                 .build();
         @Valid GetCodeSubmissionResponseItem response =
                 codeSubmissionApplicationService.getCodeSubmissionsById(command);

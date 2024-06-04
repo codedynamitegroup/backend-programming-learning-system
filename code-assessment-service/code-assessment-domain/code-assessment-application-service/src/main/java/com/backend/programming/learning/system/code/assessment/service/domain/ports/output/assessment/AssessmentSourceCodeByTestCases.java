@@ -3,5 +3,5 @@ package com.backend.programming.learning.system.code.assessment.service.domain.p
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
 
 public interface AssessmentSourceCodeByTestCases {
-    void judge(CodeSubmission codeSubmission);
+    void judge(CodeSubmission codeSubmission, String callbackUrl);
 }
