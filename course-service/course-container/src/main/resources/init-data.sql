@@ -5,7 +5,6 @@ VALUES
 
 INSERT INTO public.role_moodle(id, name) VALUES (1,'Quản lý'), (2,'Người tạo khóa học'), (3,'Giảng viên 1'), (4,'Giảng viên'), (5,'Học sinh'), (6,'Guest');
 INSERT INTO public."user" (id,user_id_moodle,role_moodle_id,org_id,username,email,dob,first_name,last_name,phone,address,avatar_url,last_login,is_deleted,created_at,updated_at) VALUES
-	 ('9ba179ed-d26d-4828-a0f6-8836c2063992',0,NULL,NULL,NULL,'nguyenquoctuan38@gmail.com','2002-05-29','Tuan','Nguyen Quoc','+8412365478',NULL,NULL,'2024-06-04 19:54:04.349854+07',false,'2024-04-12 21:33:23.371836+07','2024-04-12 21:33:23.371836+07'),
 	 ('b029f559-52a8-4699-b595-71161498ed8c',0,NULL,NULL,NULL,'dcthong852@gmail.com','2002-04-29','Thong','Duong','+8412365478',NULL,NULL,'2024-06-04 19:54:04.349854+07',false,'2024-04-15 18:07:20.891115+07','2024-04-15 18:07:20.891115+07'),
 	 ('8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7',0,NULL,NULL,NULL,'nthoang852@gmail.com','2002-03-29','Hoang','Nguyen Thanh','+8412365478',NULL,NULL,'2024-06-04 19:54:04.349854+07',false,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07'),
 	 ('39328bcf-8af6-44fc-9ae9-247f953ee2a2',0,NULL,NULL,NULL,'ndqkhanh852@gmail.com','2002-03-29','Khanh','Nguyen Dinh','+8412365478',NULL,NULL,'2024-06-04 19:54:04.349854+07',false,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07'),
@@ -18,7 +17,7 @@ INSERT INTO public."user" (id,user_id_moodle,role_moodle_id,org_id,username,emai
 INSERT INTO public."user" (id,user_id_moodle,role_moodle_id,org_id,username,email,dob,first_name,last_name,phone,address,avatar_url,last_login,is_deleted,created_at,updated_at) VALUES
 	 ('2d3c1e66-1835-457f-93e9-265fe483feee',5,5,'08b65a39-394f-4977-a5fa-3fe145b620f8','ngocthu','dt.ngocthw@gmail.com',NULL,'Thư','Ngọc',NULL,NULL,NULL,'2024-06-04 19:54:23.712124+07',false,'2024-06-04 19:54:23.712124+07','2024-06-04 19:54:23.712124+07'),
 	 ('a9f5487e-c0b1-4fa4-b93a-6f16bde90583',6,3,'08b65a39-394f-4977-a5fa-3fe145b620f8','giaovien','ktpm4t@gmail.com',NULL,'giáo','vien',NULL,NULL,NULL,'2024-06-04 19:54:23.73386+07',false,'2024-06-04 19:54:23.73386+07','2024-06-04 19:54:23.73386+07'),
-	 ('6c69e33c-b068-4df8-bb68-e3400e3a5236',7,5,'08b65a39-394f-4977-a5fa-3fe145b620f8','quoctuan2002','nguyenquoctuan385@gmail.com',NULL,'Nguyễn','Quốc Tuấn',NULL,NULL,NULL,'2024-06-04 19:54:23.75895+07',false,'2024-06-04 19:54:23.759506+07','2024-06-04 19:54:23.759506+07'),
+	 ('9ba179ed-d26d-4828-a0f6-8836c2063992',7,5,'08b65a39-394f-4977-a5fa-3fe145b620f8','quoctuan2002','nguyenquoctuan385@gmail.com',NULL,'Nguyễn','Quốc Tuấn',NULL,NULL,NULL,'2024-06-04 19:54:23.75895+07',false,'2024-06-04 19:54:23.759506+07','2024-06-04 19:54:23.759506+07'),
 	 ('ca3040f2-e173-40a5-aab7-6ef15965ce43',8,5,'08b65a39-394f-4977-a5fa-3fe145b620f8','tgt2002','truonggiatien123@gmail.com',NULL,'Trương','Gia Tiến',NULL,NULL,NULL,'2024-06-04 19:54:23.789236+07',false,'2024-06-04 19:54:23.789748+07','2024-06-04 19:54:23.789748+07');
 
 INSERT INTO public.course_type (id,moodle_id,name,org_id) VALUES
@@ -40,7 +39,7 @@ INSERT INTO public.course_user (id,user_id,course_id,role_id) VALUES
 	 ('5ecb102e-8623-413a-8b85-7f393aaac95b','64412e27-169e-44ea-a101-74ebf8cb82d9','c061d55e-a8b0-433f-b6a3-ae9d5601422e',3),
 	 ('986aa426-1794-4c9e-9a36-079d0f7e8947','cb2c22ac-87de-44e4-9638-35979f6af667','c061d55e-a8b0-433f-b6a3-ae9d5601422e',5),
 	 ('67633940-1113-470d-8516-fe35a5cf6944','2d7ed5a0-fb21-4927-9a25-647c17d29668','c061d55e-a8b0-433f-b6a3-ae9d5601422e',5),
-	 ('f1a98c8d-9218-4bcf-8453-03c0e84e0516','6c69e33c-b068-4df8-bb68-e3400e3a5236','c061d55e-a8b0-433f-b6a3-ae9d5601422e',5),
+	 ('f1a98c8d-9218-4bcf-8453-03c0e84e0516','9ba179ed-d26d-4828-a0f6-8836c2063992','c061d55e-a8b0-433f-b6a3-ae9d5601422e',5),
 	 ('441b9962-ff25-4398-940c-81fc267d599f','64412e27-169e-44ea-a101-74ebf8cb82d9','62943cbb-5bc5-4cef-b9a9-e33c82ecf984',3),
 	 ('11f47469-4833-40d7-944d-a88e9c8b693a','ca3040f2-e173-40a5-aab7-6ef15965ce43','62943cbb-5bc5-4cef-b9a9-e33c82ecf984',5);
 INSERT INTO public.course_user (id,user_id,course_id,role_id) VALUES
@@ -81,10 +80,10 @@ INSERT INTO public.submission_assignment (id,user_id,assignment_id,is_graded,gra
 	 ('9f011388-31b4-4630-ac11-975febff1948','cb2c22ac-87de-44e4-9638-35979f6af667','b1b3e215-2450-4819-9aa6-3aea9f87e604',true,100.0,'','2024-05-06 07:35:10','2024-05-06 14:39:26+07'),
 	 ('8478c536-e657-408c-acbb-55905eeead13','2d7ed5a0-fb21-4927-9a25-647c17d29668','3926bcb3-6415-458d-b449-6e2b464732d7',true,4.5,'<p dir="ltr" style="text-align:left;">Quá xuất sắc</p>','2024-05-27 05:11:08','2024-05-27 12:11:08+07'),
 	 ('b85df3d3-86ce-449f-8ed3-6ecafcad4cf9','cb2c22ac-87de-44e4-9638-35979f6af667','3926bcb3-6415-458d-b449-6e2b464732d7',true,85.0,'<p dir="ltr" style="text-align:left;">Qua xuất sắc<img src="http://62.171.185.208/webservice/pluginfile.php/41/assignfeedback_comments/feedback/6/242549690_4573384179372457_7212491116034148251_n.png" alt="hehe" width="600" height="600" class="img-fluid atto_image_button_text-bottom" /></p>','2024-05-06 07:31:38','2024-05-26 11:52:48+07'),
-	 ('29d83061-2aac-4bb4-9e41-6344dad72264','6c69e33c-b068-4df8-bb68-e3400e3a5236','3926bcb3-6415-458d-b449-6e2b464732d7',true,100.0,'<p dir="ltr" style="text-align:left;">Quá giỏi</p>','2024-05-08 02:27:03','2024-05-08 09:27:37+07'),
+	 ('29d83061-2aac-4bb4-9e41-6344dad72264','9ba179ed-d26d-4828-a0f6-8836c2063992','3926bcb3-6415-458d-b449-6e2b464732d7',true,100.0,'<p dir="ltr" style="text-align:left;">Quá giỏi</p>','2024-05-08 02:27:03','2024-05-08 09:27:37+07'),
 	 ('5dece352-1ce6-4159-a23e-80437d9f15ec','2d7ed5a0-fb21-4927-9a25-647c17d29668','8c6d9aa1-f157-49ca-bfae-bc8a14570c81',false,-1.0,'','2024-05-28 08:09:33','2024-05-28 15:09:33+07'),
 	 ('e8500189-218e-4420-95fd-0ba98b4fbddd','cb2c22ac-87de-44e4-9638-35979f6af667','8c6d9aa1-f157-49ca-bfae-bc8a14570c81',false,-1.0,'','2024-05-06 08:11:48','2024-05-07 17:25:05+07'),
-	 ('13bc8451-f836-455d-9a36-fc0e00596443','6c69e33c-b068-4df8-bb68-e3400e3a5236','8c6d9aa1-f157-49ca-bfae-bc8a14570c81',false,-1.0,'','2024-05-08 02:08:36','2024-05-08 09:12:00+07');
+	 ('13bc8451-f836-455d-9a36-fc0e00596443','9ba179ed-d26d-4828-a0f6-8836c2063992','8c6d9aa1-f157-49ca-bfae-bc8a14570c81',false,-1.0,'','2024-05-08 02:08:36','2024-05-08 09:12:00+07');
 INSERT INTO public.submission_assignment (id,user_id,assignment_id,is_graded,grade,"content",submit_time,timemodified) VALUES
 	 ('40b37e96-5960-4484-97fe-a3d207c4f5c9','ca3040f2-e173-40a5-aab7-6ef15965ce43','438413fa-ac31-496a-becb-709505ea990a',true,65.0,'<p dir="ltr" style="text-align:left;">Tốt</p>','2024-05-13 03:32:09','2024-05-13 10:32:40+07');
 

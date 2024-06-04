@@ -20,7 +20,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebSecurityConfig {
     public static final String ADMIN = "admin";
     public static final String USER = "user";
-    public static final String TEACHER_MOODLE = "teacher_moodle";
+    public static final String LECTURER_MOODLE = "lecturer_moodle";
     public static final String STUDENT_MOODLE = "student_moodle";
     public static final String ADMIN_MOODLE = "admin_moodle";
     private final JwtAuthConverter jwtAuthConverter;

@@ -10,7 +10,6 @@ import lombok.Getter;
 @Builder
 @AllArgsConstructor
 public class ChangedPasswordUserCommand {
-    @NotNull
     private final String email;
 
     @NotNull
