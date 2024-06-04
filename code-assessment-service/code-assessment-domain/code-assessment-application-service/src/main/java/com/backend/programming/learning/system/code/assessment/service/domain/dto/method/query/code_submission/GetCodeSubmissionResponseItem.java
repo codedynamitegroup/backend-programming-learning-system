@@ -38,7 +38,6 @@ public class GetCodeSubmissionResponseItem {
     @NotNull
     Double achievedGrade;
 
-    @NotNull
     String description;
 
     @Setter
@@ -69,7 +68,6 @@ public class GetCodeSubmissionResponseItem {
         Float runtime;
         Float memory;
         String message;
-        @NotNull
         String description;
     }
 

@@ -1,11 +1,15 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import lombok.Setter;
+import org.hibernate.validator.constraints.URL;
+
 import java.util.UUID;
 
 @Getter
@@ -14,8 +18,15 @@ import java.util.UUID;
 public class CreateCodeSubmissionCommand {
     @NotNull(message = "codeQuestionId must not be null")
     private UUID codeQuestionId;
-    @NotNull(message = "userId must not be null")
-    private UUID userId;
+
+    private UUID examId;
+    private UUID contestId;
+    private UUID certificateCourseId;
+
+    @NotNull(message = "email must not be null")
+    @JsonIgnore
+    @Setter
+    private String email;
     @NotNull(message = "languageId must not be null")
     private UUID languageId;
 
@@ -33,5 +44,9 @@ public class CreateCodeSubmissionCommand {
     @Pattern(regexp = "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
             message = "tailCode must be base64 encoded")
     private String tailCode;
+
+    @NotNull(message = "callbackUrl must not be null")
+    @URL
+    private String callbackUrl;
 
 }

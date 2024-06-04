@@ -11,8 +11,8 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class GetDetailCodeSubmissionsByIdCommand {
-    @NotNull(message =  "userId must not be null")
-    UUID userId;
+    @NotNull(message =  "email must not be null")
+    String email;
 
     @NotNull(message = "codeSubmissionId must not be null")
     UUID codeSubmissionId;

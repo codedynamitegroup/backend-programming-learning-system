@@ -18,4 +18,6 @@ public interface ExamSubmissionApplicationService {
 
     CreateExamSubmissionResponse startExam(
             @Valid CreateExamSubmissionStartCommand createExamSubmissionStartCommand);
+
+    CreateExamSubmissionResponse endExam(CreateExamSubmissionStartCommand createExamSubmissionStartCommand);
 }

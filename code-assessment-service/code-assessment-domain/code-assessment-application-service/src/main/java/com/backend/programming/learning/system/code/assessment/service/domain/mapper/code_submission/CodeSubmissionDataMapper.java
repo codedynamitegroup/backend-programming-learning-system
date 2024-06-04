@@ -8,6 +8,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmissionTestCase;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.User;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.code_submission.CodeSubmissionUpdatedEvent;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.code_submission_update_outbox.CodeSubmissionUpdatePayload;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
@@ -31,10 +32,10 @@ public class CodeSubmissionDataMapper {
                 .build();
     }
 
-    public CodeSubmission createCodeSubmissionCommandToCodeSubmission(CreateCodeSubmissionCommand createCodeSubmissionCommand, CodeQuestion codeQuestion) {
+    public CodeSubmission createCodeSubmissionCommandToCodeSubmission(CreateCodeSubmissionCommand createCodeSubmissionCommand, CodeQuestion codeQuestion, User user) {
         return CodeSubmission.builder()
                 .languageId(new ProgrammingLanguageId(createCodeSubmissionCommand.getLanguageId()))
-                .userId(new UserId(createCodeSubmissionCommand.getUserId()))
+                .userId(user.getId())
                 .codeQuestion(codeQuestion)
                 .headCode(createCodeSubmissionCommand.getHeadCode())
                 .bodyCode(createCodeSubmissionCommand.getBodyCode())

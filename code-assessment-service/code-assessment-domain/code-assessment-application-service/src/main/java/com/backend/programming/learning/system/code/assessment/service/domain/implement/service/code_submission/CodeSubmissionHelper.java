@@ -11,6 +11,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.code_submission.CodeSubmissionUpdatedEvent;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_submission.CodeSubmissionNotFound;
+import com.backend.programming.learning.system.code.assessment.service.domain.exeption.programming_language.ProgrammingLanguageNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.GeneralSagaHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.GenericHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.ValidateHelper;
@@ -65,23 +66,26 @@ public class CodeSubmissionHelper {
     }
 
     @Transactional
-    public CodeSubmissionUpdatedEvent createCodeSubmission(CreateCodeSubmissionCommand createCodeSubmissionCommand){
-        validateHelper.validateUser(createCodeSubmissionCommand.getUserId());
+    public CodeSubmissionUpdatedEvent createCodeSubmission(CreateCodeSubmissionCommand command){
+        User user = validateHelper.validateUserByEmail(command.getEmail());
 
-        CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(createCodeSubmissionCommand.getCodeQuestionId());
-        CodeSubmission codeSubmission = codeSubmissionDataMapper.createCodeSubmissionCommandToCodeSubmission(createCodeSubmissionCommand, codeQuestion);
+        CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(command.getCodeQuestionId());
+        CodeSubmission codeSubmission = codeSubmissionDataMapper.createCodeSubmissionCommandToCodeSubmission(command, codeQuestion, user);
 
 
-        ProgrammingLanguage programmingLanguage = validateHelper.validateLanguage(createCodeSubmissionCommand.getLanguageId(), createCodeSubmissionCommand.getCodeQuestionId());
+        ProgrammingLanguage programmingLanguage = validateHelper.validateLanguage(command.getLanguageId(), command.getCodeQuestionId());
+        if(!programmingLanguage.getIsActive())
+            throw new ProgrammingLanguageNotFoundException("Language id "+ command.getLanguageId() + " is not available");
         ProgrammingLanguageCodeQuestion plcq =
-                validateHelper.validateProgrammingLanguageCodeQuestion(createCodeSubmissionCommand.getLanguageId(), createCodeSubmissionCommand.getCodeQuestionId());
+                validateHelper.validateProgrammingLanguageCodeQuestion(command.getLanguageId(), command.getCodeQuestionId());
+        if(!plcq.getActive())
+            throw new ProgrammingLanguageNotFoundException("Code question " + command.getCodeQuestionId() + " with language id "+ command.getLanguageId() + " is not available");
 
-        List<TestCase> testCases =  validateHelper.validateTestCasesByCodeQuestionId(createCodeSubmissionCommand.getCodeQuestionId());
+        List<TestCase> testCases =  validateHelper.validateTestCasesByCodeQuestionId(command.getCodeQuestionId());
         CodeSubmissionUpdatedEvent event = codeAssessmentDomainService.initiateCodeSubmission(codeSubmission, testCases, plcq, programmingLanguage);
 
         codeSubmissionRepository.save(codeSubmission);
         codeSubmissionTestCaseRepository.save(codeSubmission.getCodeSubmissionTestCaseList());
-
 
         return event;
     }
@@ -154,13 +158,17 @@ public class CodeSubmissionHelper {
             else
             {
                 Optional<CodeSubmissionTestCase> cstc = codeSubmissionTestCaseRepository.findFirstNonAcceptedByCodeSubmissionId(codeSubmission.getId());
-                cstc.ifPresent(cstcp -> codeSubmission.setStatusDescription(cstcp.getStatusDescription()));
+                if(cstc.isPresent()){
+                    codeSubmission.setStatusDescription(cstc.get().getStatusDescription());
+                }else codeSubmission.setStatusDescription(null);
             }
         });
     }
 
     @Transactional
     public CodeSubmission getCodeSubmissionsById(GetDetailCodeSubmissionsByIdCommand command) {
+        validateHelper.validateUserByEmail(command.getEmail());
+
         Optional<CodeSubmission> codeSubmissionOpt = codeSubmissionRepository.findById(new CodeSubmissionId(command.getCodeSubmissionId()));
         if(codeSubmissionOpt.isPresent())
             return codeSubmissionOpt.get();
@@ -195,5 +203,10 @@ public class CodeSubmissionHelper {
                 .numberOfSubmissionUnderYouByScore(numberOfSubmissionUnderYouByScore)
                 .build();
 
+    }
+
+    public void setUnavailable(CodeSubmission codeSubmission) {
+        codeSubmission.setGradingStatus(GradingStatus.GRADING_SYSTEM_UNAVAILABLE);
+        codeSubmissionRepository.save(codeSubmission);
     }
 }
