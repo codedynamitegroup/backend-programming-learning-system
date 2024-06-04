@@ -42,11 +42,17 @@ public class ExamSubmissionCreateHelper {
 
     public ExamSubmission createExamSubmission(CreateExamSubmissionCommand createExamSubmissionCommand) {
         log.info("Create exam submission");
-        ExamSubmission examSubmission = examSubmissionRepository.findBy(createExamSubmissionCommand.examSubmissionId());
+        Exam exam = examRepository.findBy(new ExamId(createExamSubmissionCommand.examId()));
+        User user = userRepository.findUser(createExamSubmissionCommand.userId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        ExamSubmission examSubmissionLast = examSubmissionRepository.findByExamAndUser(exam, user);
+        ExamSubmission examSubmission = examSubmissionDataMapper
+                .createExamSubmissionCommandToExamSubmission(exam, user,
+                        Objects.isNull(examSubmissionLast) ? 1 : examSubmissionLast.getSubmissionCount() + 1,
+                        createExamSubmissionCommand);
+
         courseDomainService.createExamSubmission(examSubmission);
         ExamSubmission submission = saveExamSubmission(examSubmission);
-
-
 
         List<QuestionSubmission> questionSubmissions = createExamSubmissionCommand
                 .questions()
