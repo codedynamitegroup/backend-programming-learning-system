@@ -26,7 +26,7 @@ import java.util.Collections;
 public class WebSecurityConfig {
     public static final String ADMIN = "admin";
     public static final String USER = "user";
-    public static final String TEACHER_MOODLE = "teacher_moodle";
+    public static final String LECTURER_MOODLE = "lecturer_moodle";
     public static final String STUDENT_MOODLE = "student_moodle";
     public static final String ADMIN_MOODLE = "admin_moodle";
     private final JwtAuthConverter jwtAuthConverter;
@@ -35,7 +35,7 @@ public class WebSecurityConfig {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET, "/auth/users").hasAnyRole(ADMIN, ADMIN_MOODLE, STUDENT_MOODLE, TEACHER_MOODLE)
+                        .requestMatchers(HttpMethod.GET, "/auth/users").hasAnyRole(ADMIN, ADMIN_MOODLE)
                         .requestMatchers(HttpMethod.GET, "/auth/users/get-by-email").hasRole(USER)
                         .requestMatchers(HttpMethod.DELETE, "/auth/users/:id").hasRole(ADMIN)
                         .requestMatchers(HttpMethod.PUT, "/auth/users/:id").hasAnyRole(USER)
