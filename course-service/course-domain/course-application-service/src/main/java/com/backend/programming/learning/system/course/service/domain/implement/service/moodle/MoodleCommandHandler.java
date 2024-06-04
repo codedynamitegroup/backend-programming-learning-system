@@ -26,6 +26,7 @@ import com.backend.programming.learning.system.course.service.domain.entity.Modu
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.user.UserApplicationService;
 import com.backend.programming.learning.system.course.service.domain.mapper.moodle.MoodleDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.*;
+import com.backend.programming.learning.system.course.service.domain.valueobject.SubmissionGradeId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.Type;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -37,6 +38,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.*;
 
 @Slf4j
@@ -62,6 +66,8 @@ public class MoodleCommandHandler {
     private final SubmissionFileRepository submissionFileRepository;
 
     private final  RoleMoodleRepository roleMoodleRepository;
+
+    private final SubmissionGradeRepository submissionGradeRepository;
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final RestTemplate restTemplate = new RestTemplate();
 
@@ -257,6 +263,21 @@ public class MoodleCommandHandler {
 
                     submissionAssignmentRepository.saveSubmissionAssignment(submissionAssignment);
 
+                    if(submissionAssignment.getGradedStatus())
+                    {
+                        ZonedDateTime timeCreated = Instant.ofEpochSecond(submissionAssignmentStatus.getFeedback().getGrade().getTimecreated()).atZone(ZoneId.of("UTC"));
+                        ZonedDateTime timeModified = Instant.ofEpochSecond(submissionAssignmentStatus.getFeedback().getGrade().getTimemodified()).atZone(ZoneId.of("UTC"));
+                        SubmissionGrade submissionGrade = SubmissionGrade.builder()
+                                .id(new SubmissionGradeId(UUID.randomUUID()))
+                                .grade(submissionAssignment.getGrade())
+                                .submissionAssignment(submissionAssignment)
+                                .timeCreated(timeCreated)
+                                .timeModified(timeModified)
+                                .build();
+
+                        submissionGradeRepository.save(submissionGrade);
+                    }
+
                     for (SubmissionPlugin plugin : submissionAssignmentStatus.getLastattempt().getSubmission().getPlugins()) {
                         if (plugin.getType().equals("file")) {
                             SubmissionAssignmentFile submissionAssignmentFile = moodleDataMapper.
@@ -274,10 +295,13 @@ public class MoodleCommandHandler {
                             submissionAssignmentOnlineTextRepository.saveAssignmentSubmissionOnlineText(submissionAssignmentOnlineText);
                         }
                     }
-
-
                 }
-
+                else {
+                    SubmissionAssignment submissionAssignment =
+                            moodleDataMapper.createSubmissionAssignment(assignment,user.get(),
+                                    submissionAssignmentStatus.getLastattempt(),submissionAssignmentStatus.getFeedback());
+                    submissionAssignmentRepository.saveSubmissionAssignment(submissionAssignment);
+                }
 
             });
 
