@@ -171,7 +171,7 @@ public class UserController {
        return  ResponseEntity.ok(user);
     }
 
-    @GetMapping("/get-by-email/{email}")
+    @GetMapping("/get-by-email")
     @Operation(summary = "Get user by email.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
@@ -180,7 +180,12 @@ public class UserController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<UserEntityResponse> getUserByEmail(@PathVariable String email) {
+    public ResponseEntity<?> getUserByEmail(
+            @RequestHeader(value = "Access-Token", required = false) String accessToken) {
+        String email = jwtUtils.getEmailFromJwtString(accessToken);
+        if (email == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid access token");
+        }
         UserEntityResponse user =
                 userApplicationService.findUserByEmail(QueryUserByEmailCommand.builder().email(email).build());
         log.info("Returning user with id: {}", user.getUserId());
