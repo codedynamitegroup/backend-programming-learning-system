@@ -1,6 +1,10 @@
 package com.backend.programming.learning.system.core.service.dataaccess.question.mapper;
 
 import com.backend.programming.learning.system.core.service.dataaccess.organization.mapper.OrganizationDataAccessMapper;
+import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QtypeCodeQuestionEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QtypeEssayQuestionEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QtypeMultichoiceQuestionEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QtypeShortanswerQuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
@@ -9,6 +13,7 @@ import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Component
 public class QuestionDataAccessMapper {
@@ -133,6 +138,80 @@ public class QuestionDataAccessMapper {
                 .updatedAt(questionEntity.getUpdatedAt())
                 .answers(answerOfQuestionDataAccessMapper
                         .answerOfQuestionEntityListToAnswerOfQuestionResponseEntityList(questionEntity.getAnswerOfQuestions()))
+                .build();
+    }
+
+    public QuestionEntity cloneQuestionEntity(QuestionEntity questionEntity) {
+        return QuestionEntity.builder()
+                .id(UUID.randomUUID())
+                .organization(questionEntity.getOrganization())
+                .difficulty(questionEntity.getDifficulty())
+                .name(questionEntity.getName())
+                .questionText(questionEntity.getQuestionText())
+                .generalFeedback(questionEntity.getGeneralFeedback())
+                .defaultMark(questionEntity.getDefaultMark())
+                .createdBy(questionEntity.getCreatedBy())
+                .updatedBy(questionEntity.getUpdatedBy())
+                .qtype(questionEntity.getQtype())
+                .createdAt(questionEntity.getCreatedAt())
+                .updatedAt(questionEntity.getUpdatedAt())
+                .answerOfQuestions(questionEntity.getAnswerOfQuestions())
+                .copyState(questionEntity.getCopyState())
+                .isOrgQuestionBank(questionEntity.getIsOrgQuestionBank())
+                .build();
+    }
+
+    public QtypeShortanswerQuestionEntity cloneQtypeShortanswerQuestionEntity(
+            QtypeShortanswerQuestionEntity qtypeShortanswerQuestion, QuestionEntity newQuestion) {
+        return QtypeShortanswerQuestionEntity.builder()
+                .id(UUID.randomUUID())
+                .question(newQuestion)
+                .caseSensitive(qtypeShortanswerQuestion.getCaseSensitive())
+                .build();
+    }
+
+    public QtypeMultichoiceQuestionEntity cloneQtypeMultichoiceQuestionEntity(QtypeMultichoiceQuestionEntity qtypeMultichoiceQuestion, QuestionEntity newQuestion) {
+        return QtypeMultichoiceQuestionEntity.builder()
+                .id(UUID.randomUUID())
+                .question(newQuestion)
+                .single(qtypeMultichoiceQuestion.getSingle())
+                .shuffleAnswers(qtypeMultichoiceQuestion.getShuffleAnswers())
+                .correctFeedback(qtypeMultichoiceQuestion.getCorrectFeedback())
+                .partiallyCorrectFeedback(qtypeMultichoiceQuestion.getPartiallyCorrectFeedback())
+                .incorrectFeedback(qtypeMultichoiceQuestion.getIncorrectFeedback())
+                .answerNumbering(qtypeMultichoiceQuestion.getAnswerNumbering())
+                .showNumCorrect(qtypeMultichoiceQuestion.getShowNumCorrect())
+                .showStandardInstruction(qtypeMultichoiceQuestion.getShowStandardInstruction())
+                .build();
+    }
+
+    public QtypeEssayQuestionEntity cloneQtypeEssayQuestionEntity(QtypeEssayQuestionEntity qtypeEssayQuestion, QuestionEntity newQuestion) {
+        return QtypeEssayQuestionEntity.builder()
+                .id(UUID.randomUUID())
+                .question(newQuestion)
+                .responseFormat(qtypeEssayQuestion.getResponseFormat())
+                .responseRequired(qtypeEssayQuestion.getResponseRequired())
+                .responseFieldLines(qtypeEssayQuestion.getResponseFieldLines())
+                .minWordLimit(qtypeEssayQuestion.getMinWordLimit())
+                .maxWordLimit(qtypeEssayQuestion.getMaxWordLimit())
+                .attachments(qtypeEssayQuestion.getAttachments())
+                .attachmentsRequired(qtypeEssayQuestion.getAttachmentsRequired())
+                .graderInfo(qtypeEssayQuestion.getGraderInfo())
+                .graderInfoFormat(qtypeEssayQuestion.getGraderInfoFormat())
+                .responseTemplate(qtypeEssayQuestion.getResponseTemplate())
+                .maxBytes(qtypeEssayQuestion.getMaxBytes())
+                .fileTypesList(qtypeEssayQuestion.getFileTypesList())
+                .build();
+    }
+
+    public QtypeCodeQuestionEntity cloneQtypeCodeQuestionEntity(QtypeCodeQuestionEntity qtypeCodeQuestion, QuestionEntity newQuestion) {
+        return QtypeCodeQuestionEntity.builder()
+                .id(UUID.randomUUID())
+                .question(newQuestion)
+                .dslTemplate(qtypeCodeQuestion.getDslTemplate())
+                .problemStatement(qtypeCodeQuestion.getProblemStatement())
+                .name(qtypeCodeQuestion.getName())
+                .maxGrade(qtypeCodeQuestion.getMaxGrade())
                 .build();
     }
 }
