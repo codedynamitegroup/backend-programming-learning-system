@@ -1,6 +1,9 @@
 package com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison;
 
 import jakarta.validation.constraints.NotNull;
+
+import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -10,15 +13,13 @@ import java.util.UUID;
  * Description: ...
  */
 public record CreateExamSubmissionCommand(
-        @NotNull(message = "Exam submission id is required")
-        UUID examSubmissionId
-//        @NotNull(message = "Exam id is required")
-//        UUID examId,
-//        @NotNull(message = "User id is required")
-//        UUID userId,
-//        @NotNull(message = "Type is required")
-//        Type type,
-//        @NotNull(message = "Pass status is required")
-//        Status passStatus
+//        @NotNull(message = "Exam submission id is required")
+//        UUID examSubmissionId,
+        @NotNull(message = "Exam id is required")
+        UUID examId,
+        @NotNull(message = "User id is required")
+        UUID userId,
+        List<CreateQuestionSubmit> questions,
+        ZonedDateTime startTime
 ) {
 }

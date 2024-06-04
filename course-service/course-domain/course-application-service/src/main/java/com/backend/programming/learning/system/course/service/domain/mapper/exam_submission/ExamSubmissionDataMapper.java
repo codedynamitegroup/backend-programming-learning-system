@@ -17,12 +17,15 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class ExamSubmissionDataMapper {
-    public ExamSubmission createExamSubmissionCommandToExamSubmission(Exam exam, User user, CreateExamSubmissionCommand createExamSubmissionCommand) {
+    public ExamSubmission createExamSubmissionCommandToExamSubmission(
+            Exam exam, User user,
+            Integer submissionCount,
+            CreateExamSubmissionCommand createExamSubmissionCommand) {
         return ExamSubmission.builder()
                 .exam(exam)
                 .user(user)
-//                .type(createExamSubmissionCommand.type())
-//                .passStatus(createExamSubmissionCommand.passStatus())
+                .submissionCount(submissionCount)
+                .startTime(createExamSubmissionCommand.startTime())
                 .build();
     }
 
