@@ -258,10 +258,25 @@ CREATE TABLE "public".topic_programming_language
     CONSTRAINT topic_id_programming_language_id_key UNIQUE (topic_id, programming_language_id)
 );
 
+DROP TABLE IF EXISTS "public".organization CASCADE;
+CREATE TABLE "public".organization
+(
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
+    name text,
+    description text,
+    moodle_url text,
+    api_key text,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    is_deleted boolean NOT NULL DEFAULT false,
+    CONSTRAINT organization_pkey PRIMARY KEY (id)
+);
+
 DROP TABLE IF EXISTS "public".contest CASCADE;
 CREATE TABLE "public".contest
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
+    org_id uuid,
     name text,
     description text,
     prizes text,
@@ -279,6 +294,10 @@ CREATE TABLE "public".contest
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     fts_document tsvector,
     CONSTRAINT contest_pkey PRIMARY KEY (id),
+    CONSTRAINT contest_org_id_fkey FOREIGN KEY (org_id)
+        REFERENCES "public".organization (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
     CONSTRAINT contest_created_by_fkey FOREIGN KEY (created_by)
         REFERENCES "public".user (id) MATCH SIMPLE
         ON UPDATE CASCADE
@@ -328,20 +347,6 @@ CREATE TABLE "public".contest_user
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT contest_user_contest_id_user_id_key UNIQUE (contest_id, user_id)
-);
-
-DROP TABLE IF EXISTS "public".organization CASCADE;
-CREATE TABLE "public".organization
-(
-    id uuid DEFAULT uuid_generate_v4() NOT NULL,
-    name text,
-    description text,
-    moodle_url text,
-    api_key text,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    is_deleted boolean NOT NULL DEFAULT false,
-    CONSTRAINT organization_pkey PRIMARY KEY (id)
 );
 
 DROP TABLE IF EXISTS "public".question CASCADE;
