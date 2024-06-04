@@ -163,30 +163,52 @@ VALUES
     ('d215b5f8-0249-4dc5-89a3-51fd148cff62', 'b6484e21-6937-489c-b031-b71767994735', 'huhu', 'multi 2', 1),
     ('d215b5f8-0249-4dc5-89a3-51fd148cff20', 'b6484e21-6937-489c-b031-b71767994735', 'haha', 'multi 3', 1);
 
-INSERT INTO public.qtype_code_question(id, question_id, dsl_template, name, max_grade)
-values
-    ('3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 'b6484e21-6937-489c-b031-b71767994221', '', 'Tổng 2 số', '10');
+-- INSERT INTO public.qtype_code_question(id, question_id, dsl_template, name, max_grade)
+-- values
+--     ('3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 'b6484e21-6937-489c-b031-b71767994221', '', 'Tổng 2 số', '10');
+
+-- INSERT INTO public.qtype_code_question(id, question_id, dsl_template)
+-- VALUES
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba6d', 'b6484e21-6937-489c-b031-b71767994736', 'print(Hello World)'),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba7d', 'b6484e21-6937-489c-b031-b71767994737', 'print(Hello World)'),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba8d', 'b6484e21-6937-489c-b031-b71767994738', 'print(Hello World)'),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba9d', 'b6484e21-6937-489c-b031-b71767994739', 'print(Hello World)'),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba0d', 'b6484e21-6937-489c-b031-b71767994740', 'print(Hello World)'),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba1a', 'b6484e21-6937-489c-b031-b71767994741', 'print(Hello World)'),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba2a', 'b6484e21-6937-489c-b031-b71767994742', 'print(Hello World)'),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba3a', 'b6484e21-6937-489c-b031-b71767994743', 'print(Hello World)'),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba4a', 'b6484e21-6937-489c-b031-b71767994744', 'print(Hello World)'),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba5a', 'b6484e21-6937-489c-b031-b71767994745', 'print(Hello World)'),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba6a', 'b6484e21-6937-489c-b031-b71767994746', 'print(Hello World)'),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba7a', 'b6484e21-6937-489c-b031-b71767994747', 'print(Hello World)'),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba8a', 'b6484e21-6937-489c-b031-b71767994748', 'print(Hello World)'),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba9a', 'b6484e21-6937-489c-b031-b71767994749', 'print(Hello World)'),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba5b', 'b6484e21-6937-489c-b031-b71767994750', 'print(Hello World)'),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba6b', 'b6484e21-6937-489c-b031-b71767994751', 'print(Hello World)'),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba7b', 'b6484e21-6937-489c-b031-b71767994752', 'print(Hello World)'),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba8b', 'b6484e21-6937-489c-b031-b71767994753', 'print(Hello World)');
 
 INSERT INTO public.qtype_code_question(id, question_id, dsl_template)
 VALUES
-    ('27549d54-4a3a-4be4-9875-eab03f88ba6d', 'b6484e21-6937-489c-b031-b71767994736', 'print(Hello World)'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba7d', 'b6484e21-6937-489c-b031-b71767994737', 'print(Hello World)'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba8d', 'b6484e21-6937-489c-b031-b71767994738', 'print(Hello World)'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba9d', 'b6484e21-6937-489c-b031-b71767994739', 'print(Hello World)'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba0d', 'b6484e21-6937-489c-b031-b71767994740', 'print(Hello World)'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba1a', 'b6484e21-6937-489c-b031-b71767994741', 'print(Hello World)'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba2a', 'b6484e21-6937-489c-b031-b71767994742', 'print(Hello World)'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba3a', 'b6484e21-6937-489c-b031-b71767994743', 'print(Hello World)'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba4a', 'b6484e21-6937-489c-b031-b71767994744', 'print(Hello World)'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba5a', 'b6484e21-6937-489c-b031-b71767994745', 'print(Hello World)'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba6a', 'b6484e21-6937-489c-b031-b71767994746', 'print(Hello World)'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba7a', 'b6484e21-6937-489c-b031-b71767994747', 'print(Hello World)'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba8a', 'b6484e21-6937-489c-b031-b71767994748', 'print(Hello World)'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba9a', 'b6484e21-6937-489c-b031-b71767994749', 'print(Hello World)'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba5b', 'b6484e21-6937-489c-b031-b71767994750', 'print(Hello World)'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba6b', 'b6484e21-6937-489c-b031-b71767994751', 'print(Hello World)'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba7b', 'b6484e21-6937-489c-b031-b71767994752', 'print(Hello World)'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba8b', 'b6484e21-6937-489c-b031-b71767994753', 'print(Hello World)');
+    ('3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 'b6484e21-6937-489c-b031-b71767994221', 'template'),
+    ('f6d7b882-9399-4bc3-baad-6350285bfa78', 'b6484e21-6937-489c-b031-b71767994736', 'template'),
+    ('48caf2c9-8c81-49a7-b656-c3b024a798c3', 'b6484e21-6937-489c-b031-b71767994737', 'template'),
+    ('2589a5b7-94c9-4a76-86d9-576718ca63c3', 'b6484e21-6937-489c-b031-b71767994738', 'template'),
+    ('2dbe940c-8d25-4a88-a283-d79785c1ea2a', 'b6484e21-6937-489c-b031-b71767994739', 'template'),
+    ('07bf0b32-09ce-47d0-b4e1-c0ba35799b43', 'b6484e21-6937-489c-b031-b71767994740', 'template'),
+    ('2f3b15cc-219f-47eb-8d17-702e89afb86a', 'b6484e21-6937-489c-b031-b71767994741', 'template'),
+    ('fe0a658d-7ce9-4524-b388-84539a34a521', 'b6484e21-6937-489c-b031-b71767994742', 'template'),
+    ('1374d22a-b27b-4d3d-9ad4-b613e1f1e253', 'b6484e21-6937-489c-b031-b71767994743', 'template'),
+    ('06d71d03-f5ba-4a89-9083-596ef649ade9', 'b6484e21-6937-489c-b031-b71767994744', 'template'),
+    ('b1ae32db-17e6-4fdb-991b-160e95721562', 'b6484e21-6937-489c-b031-b71767994745', 'template'),
+    ('058cdf70-3cc5-4a99-9edd-edfa0325c207', 'b6484e21-6937-489c-b031-b71767994746', 'template'),
+    ('51981528-01ff-491a-bc7b-a24aedfb0363', 'b6484e21-6937-489c-b031-b71767994747', 'template'),
+    ('6181a38b-2b06-4a60-ad5f-750780d79e3e', 'b6484e21-6937-489c-b031-b71767994748', 'template'),
+    ('22427527-053c-4602-a519-9e52cb5f2366', 'b6484e21-6937-489c-b031-b71767994749', 'template'),
+    ('cd39d755-41f1-452f-a0df-09c64c7a67cf', 'b6484e21-6937-489c-b031-b71767994750', 'template'),
+    ('d49496bb-87a5-483f-9597-564ad6ee0305', 'b6484e21-6937-489c-b031-b71767994751', 'template'),
+    ('4be91526-365b-4e50-99ae-75ba2a87ba08', 'b6484e21-6937-489c-b031-b71767994752', 'template'),
+    ('4be91526-365b-4e50-99ae-75ba2a87ba09', 'b6484e21-6937-489c-b031-b71767994753', 'template');
 
 INSERT INTO public.qtype_essay_question(id, question_id, response_format, response_required, response_field_lines, min_word_limit, max_word_limit, attachments, attachments_required, grader_info, grader_info_format, response_template, max_bytes, file_types_list)
 VALUES
@@ -300,32 +322,33 @@ VALUES
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb27', 'd215b5f8-0249-4dc5-89a3-51fd148cfb19', 'b6484e21-6937-489c-b031-b71767994748'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb28', 'd215b5f8-0249-4dc5-89a3-51fd148cfb19', 'b6484e21-6937-489c-b031-b71767994749');
 
-INSERT INTO public.code_submission(id, user_id, code_question_id, programming_language_id, source_code, grade, pass)
-VALUES
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba5a', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 1, true),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba5b', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 2, true),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba5c', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba5d', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 1, true),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba5e', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba5f', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba7a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba6a', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba8a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 1, false),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba6b', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba9a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba6c', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba6d', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false);
+insert into code_submission (id, code_question_id, user_id, programming_language_id, source_code, grade, created_at, pass) values ('a2e5afa6-f0c8-422e-8895-a706d1a1d6c1', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'c95d5c7d-cadf-42cc-afdc-968211ae3720', 'Y2xhc3MgUmVzdWx0IHsKICAgIHB1YmxpYyBzdGF0aWMgaW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKSB7CiAgICAgICAgcmV0dXJuIGEgKyBiOwogICAgfQp9', 10, CURRENT_TIMESTAMP, true);
+insert into code_submission (id, code_question_id, user_id, programming_language_id, source_code, grade, created_at, pass) values ('4a177c20-9487-48f6-b057-6d981e66b6cf', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'c95d5c7d-cadf-42cc-afdc-968211ae3720', 'Y2xhc3MgUmVzdWx0IHsKICAgIHB1YmxpYyBzdGF0aWMgaW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKSB7CiAgICAgICAgcmV0dXJuIGEgKyBiOwogICAgfQp9', 10, CURRENT_TIMESTAMP, true);
+insert into code_submission (id, code_question_id, user_id, programming_language_id, source_code, grade, created_at, pass) values ('df32ebfe-ec52-42c6-9447-cdc5280d5701', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'cba00cd8-8114-4bc4-84e6-499c27467978', 'aW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKXsKICAgIHJldHVybiBhICsgYjsKfQ==', 10, CURRENT_TIMESTAMP, true);
+insert into code_submission (id, code_question_id, user_id, programming_language_id, source_code, grade, created_at, pass) values ('0b4bccfc-411f-499d-b470-9574152269aa', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 'b029f559-52a8-4699-b595-71161498ed8c', 'c95d5c7d-cadf-42cc-afdc-968211ae3720', 'Y2xhc3MgUmVzdWx0IHsKICAgIHB1YmxpYyBzdGF0aWMgaW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKSB7CiAgICAgICAgcmV0dXJuIGEgKyBiOwogICAgfQp9', 0, CURRENT_TIMESTAMP, false);
+insert into code_submission (id, code_question_id, user_id, programming_language_id, source_code, grade, created_at, pass) values ('186c1fea-9706-4399-991a-8c9ff7d97b9a', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', 'c95d5c7d-cadf-42cc-afdc-968211ae3720', 'Y2xhc3MgUmVzdWx0IHsKICAgIHB1YmxpYyBzdGF0aWMgaW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKSB7CiAgICAgICAgcmV0dXJuIGEgKyBiOwogICAgfQp9', 10, CURRENT_TIMESTAMP, true);
+
+-- INSERT INTO public.code_submission(id, user_id, code_question_id, programming_language_id, source_code, grade, pass)
+-- VALUES
+--     ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba5a', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 1, true),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba5b', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 2, true),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba5c', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba5d', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 1, true),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba5e', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba5f', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba7a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba6a', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba8a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 1, false),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba6b', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba9a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba6c', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+--     ('27549d54-4a3a-4be4-9875-eab03f88ba6d', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false);
 
 INSERT INTO public.code_submission_certificate_course(code_submission_id, certificate_course_id)
 VALUES
-    ('27549d54-4a3a-4be4-9875-eab03f88ba5a', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba5b', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba5c', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba5d', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba5e', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba5f', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba6b', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba6c', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
-    ('27549d54-4a3a-4be4-9875-eab03f88ba6d', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16');
+    ('a2e5afa6-f0c8-422e-8895-a706d1a1d6c1', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
+    ('4a177c20-9487-48f6-b057-6d981e66b6cf', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
+    ('df32ebfe-ec52-42c6-9447-cdc5280d5701', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
+    ('0b4bccfc-411f-499d-b470-9574152269aa', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
+    ('186c1fea-9706-4399-991a-8c9ff7d97b9a', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16');
 
 INSERT INTO public.contest(id, name, description, prizes, rules, scoring, thumbnail_url, start_time, end_time, created_by, updated_by, is_public)
 VALUES
@@ -380,27 +403,24 @@ VALUES
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b6484e21-6937-489c-b031-b71767994752'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b6484e21-6937-489c-b031-b71767994753');
 
-INSERT INTO public.code_submission(id, user_id, code_question_id, programming_language_id, source_code, grade, pass)
-VALUES
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'b029f559-52a8-4699-b595-71161498ed8c', '27549d54-4a3a-4be4-9875-eab03f88ba6b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '27549d54-4a3a-4be4-9875-eab03f88ba7b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 2, true),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 3, true),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', 'b029f559-52a8-4699-b595-71161498ed8c', '27549d54-4a3a-4be4-9875-eab03f88ba6b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 3, true),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '27549d54-4a3a-4be4-9875-eab03f88ba7b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba8b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 4, true);
+-- INSERT INTO public.code_submission(id, user_id, code_question_id, programming_language_id, source_code, grade, pass)
+-- VALUES
+--     ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+--     ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'b029f559-52a8-4699-b595-71161498ed8c', '27549d54-4a3a-4be4-9875-eab03f88ba6b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+--     ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '27549d54-4a3a-4be4-9875-eab03f88ba7b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+--     ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 2, true),
+--     ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 3, true),
+--     ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', 'b029f559-52a8-4699-b595-71161498ed8c', '27549d54-4a3a-4be4-9875-eab03f88ba6b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 3, true),
+--     ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '27549d54-4a3a-4be4-9875-eab03f88ba7b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
+--     ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba8b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 4, true);
 
 INSERT INTO public.code_submission_contest(code_submission_id, contest_id)
 VALUES
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15');
+    ('a2e5afa6-f0c8-422e-8895-a706d1a1d6c1', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
+    ('4a177c20-9487-48f6-b057-6d981e66b6cf', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
+    ('df32ebfe-ec52-42c6-9447-cdc5280d5701', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
+    ('0b4bccfc-411f-499d-b470-9574152269aa', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
+    ('186c1fea-9706-4399-991a-8c9ff7d97b9a', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15');
 
 
 
