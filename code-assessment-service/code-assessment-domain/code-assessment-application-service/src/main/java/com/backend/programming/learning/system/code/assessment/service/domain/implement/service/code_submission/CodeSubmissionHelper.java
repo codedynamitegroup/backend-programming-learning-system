@@ -204,4 +204,9 @@ public class CodeSubmissionHelper {
                 .build();
 
     }
+
+    public void setUnavailable(CodeSubmission codeSubmission) {
+        codeSubmission.setGradingStatus(GradingStatus.GRADING_SYSTEM_UNAVAILABLE);
+        codeSubmissionRepository.save(codeSubmission);
+    }
 }

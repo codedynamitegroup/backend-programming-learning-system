@@ -8,6 +8,7 @@ import lombok.Getter;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Setter;
+import org.hibernate.validator.constraints.URL;
 
 import java.util.UUID;
 
@@ -45,6 +46,7 @@ public class CreateCodeSubmissionCommand {
     private String tailCode;
 
     @NotNull(message = "callbackUrl must not be null")
+    @URL
     private String callbackUrl;
 
 }

@@ -11,6 +11,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.im
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.code_submission.CodeSubmissionDataMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.scheduler.code_submission_update_outbox.CodeSubmissionUpdateOutboxHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.assessment.AssessmentSourceCodeByTestCases;
+import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
 import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
@@ -47,6 +48,7 @@ public class CodeSubmissionCommandHandler {
         assessmentSourceCodeByTestCases.judge(codeSubmission, createCodeSubmissionCommand.getCallbackUrl());
         Thread thread2 = new Thread(()->{
             boolean finish = false;
+            long startTime = System.currentTimeMillis();
             do{
                 try {
                     Thread.sleep(2500);
@@ -54,7 +56,12 @@ public class CodeSubmissionCommandHandler {
                     throw new RuntimeException(e);
                 }
                 finish = codeSubmissionHelper.updateCodeSubmissionWhenAllTestCaseAssessed(codeSubmission.getId());
-            }while(!finish);
+            }while(!finish && System.currentTimeMillis() < startTime + 120000);//cron in 2 minute
+            if(!finish){
+                finish = codeSubmissionHelper.updateCodeSubmissionWhenAllTestCaseAssessed(codeSubmission.getId());// check the last time
+                if(!finish)
+                    codeSubmissionHelper.setUnavailable(codeSubmission);
+            }
         });
         thread2.start();
 
