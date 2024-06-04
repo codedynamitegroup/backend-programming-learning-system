@@ -6,7 +6,7 @@ import com.backend.programming.learning.system.domain.valueobject.QtypeEssayQues
 import java.util.UUID;
 
 public class QtypeEssayQuestion extends BaseEntity<QtypeEssayQuestionId> {
-    private final Question question;
+    private Question question;
     private final String responseFormat;
     private final Integer responseRequired;
     private final Integer responseFieldLines;
@@ -27,6 +27,9 @@ public class QtypeEssayQuestion extends BaseEntity<QtypeEssayQuestionId> {
     // Getter
     public Question getQuestion() {
         return question;
+    }
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 
     public String getResponseFormat() {

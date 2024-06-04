@@ -6,7 +6,7 @@ import com.backend.programming.learning.system.domain.valueobject.QtypeCodeQuest
 import java.util.UUID;
 
 public class QtypeCodeQuestion extends BaseEntity<QtypeCodeQuestionId> {
-    private final Question question;
+    private Question question;
     private String dslTemplate;
     private String problemStatement;
     private String codeQuestionName;
@@ -31,6 +31,10 @@ public class QtypeCodeQuestion extends BaseEntity<QtypeCodeQuestionId> {
 
     public Question getQuestion() {
         return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 
     public String getDslTemplate() {

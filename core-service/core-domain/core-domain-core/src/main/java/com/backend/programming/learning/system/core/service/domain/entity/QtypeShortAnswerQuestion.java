@@ -6,7 +6,7 @@ import com.backend.programming.learning.system.domain.valueobject.QtypeShortAnsw
 import java.util.UUID;
 
 public class QtypeShortAnswerQuestion extends BaseEntity<QtypeShortAnswerQuestionId> {
-    private final Question question;
+    private Question question;
     private final Boolean caseSensitive;
 
     private QtypeShortAnswerQuestion(Builder builder) {
@@ -21,6 +21,9 @@ public class QtypeShortAnswerQuestion extends BaseEntity<QtypeShortAnswerQuestio
 
     public Question getQuestion() {
         return question;
+    }
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 
     public Boolean getCaseSensitive() {
