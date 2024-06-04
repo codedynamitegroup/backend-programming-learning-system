@@ -2,8 +2,11 @@ package com.backend.programming.learning.system.course.service.dataaccess.user.m
 
 import com.backend.programming.learning.system.course.service.dataaccess.organization.entity.OrganizationEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.organization.mapper.OrganizationDataAccessMapper;
+import com.backend.programming.learning.system.course.service.dataaccess.role_moodle.entity.RoleMoodleEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.role_moodle.mapper.RoleMoodleDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.Organization;
+import com.backend.programming.learning.system.course.service.domain.entity.RoleMoodle;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import org.springframework.stereotype.Component;
@@ -14,16 +17,23 @@ import java.util.List;
 public class UserDataAccessMapper {
     private final OrganizationDataAccessMapper organizationDataAccessMapper;
 
-    public UserDataAccessMapper(OrganizationDataAccessMapper organizationDataAccessMapper) {
+    private final RoleMoodleDataAccessMapper roleMoodleDataAccessMapper;
+
+    public UserDataAccessMapper(OrganizationDataAccessMapper organizationDataAccessMapper, RoleMoodleDataAccessMapper roleMoodleDataAccessMapper) {
         this.organizationDataAccessMapper = organizationDataAccessMapper;
+        this.roleMoodleDataAccessMapper = roleMoodleDataAccessMapper;
     }
 
     public UserEntity userToUserEntity(User user) {
         OrganizationEntity organizationEntity = organizationDataAccessMapper.
                 organizationToOrganizationEntity(user.getOrganization());
 
+        RoleMoodleEntity roleMoodleEntity = roleMoodleDataAccessMapper.
+                roleMoodleToRoleMoodleEntity(user.getRoleMoodle());
+
         return UserEntity.builder()
                 .id(user.getId().getValue())
+                .roleMoodle(roleMoodleEntity)
                 .organization(organizationEntity)
                 .username(user.getUserName())
                 .userIdMoodle(user.getUserIdMoodle())
@@ -45,8 +55,12 @@ public class UserDataAccessMapper {
         Organization organization = organizationDataAccessMapper.
                 organizationEntityToOrganization(userEntity.getOrganization());
 
+        RoleMoodle roleMoodle = roleMoodleDataAccessMapper.
+                roleMoodleEntityToRoleMoodle(userEntity.getRoleMoodle());
+
         return User.builder()
                 .id(new UserId(userEntity.getId()))
+                .roleMoodle(roleMoodle)
                 .userIdMoodle(userEntity.getUserIdMoodle())
                 .organization(organization)
                 .username(userEntity.getUsername())
