@@ -46,7 +46,7 @@ public class ExamSubmissionController {
         log.info("Submit exam");
         CreateExamSubmissionResponse response = examSubmissionApplicationService.submitExam(createExamSubmissionCommand);
         log.info("Exam submitted: {}", response);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
     @PostMapping("/start-exam")
     @Operation(summary = "Start exam.")

@@ -5,16 +5,21 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
 import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
+import com.backend.programming.learning.system.course.service.domain.entity.Question;
+import com.backend.programming.learning.system.course.service.domain.entity.QuestionSubmission;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam_submission.ExamSubmissionDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamSubmissionRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.QuestionRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.QuestionSubmissionRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -29,6 +34,8 @@ import java.util.Objects;
 public class ExamSubmissionCreateHelper {
     private final CourseDomainService courseDomainService;
     private final ExamSubmissionRepository examSubmissionRepository;
+    private final QuestionSubmissionRepository questionSubmissionRepository;
+    private final QuestionRepository questionRepository;
     private final ExamRepository examRepository;
     private final UserRepository userRepository;
     private final ExamSubmissionDataMapper examSubmissionDataMapper;
@@ -37,7 +44,30 @@ public class ExamSubmissionCreateHelper {
         log.info("Create exam submission");
         ExamSubmission examSubmission = examSubmissionRepository.findBy(createExamSubmissionCommand.examSubmissionId());
         courseDomainService.createExamSubmission(examSubmission);
-        return saveExamSubmission(examSubmission);
+        ExamSubmission submission = saveExamSubmission(examSubmission);
+
+
+
+        List<QuestionSubmission> questionSubmissions = createExamSubmissionCommand
+                .questions()
+                .stream()
+                .map(question -> {
+                    Question questionExam = questionRepository.findById(question.questionId());
+                    QuestionSubmission questionSubmission = QuestionSubmission.builder()
+                            .user(submission.getUser())
+                            .examSubmission(submission)
+                            .question(questionExam)
+                            .content(question.content())
+                            .numFile(question.numFile())
+                            .build();
+                    questionSubmission.initializeQuestionSubmission();
+                    return questionSubmission;
+                })
+                .toList();
+
+        questionSubmissionRepository.saveAll(questionSubmissions);
+
+        return submission;
     }
 
     private ExamSubmission saveExamSubmission(ExamSubmission examSubmission) {
