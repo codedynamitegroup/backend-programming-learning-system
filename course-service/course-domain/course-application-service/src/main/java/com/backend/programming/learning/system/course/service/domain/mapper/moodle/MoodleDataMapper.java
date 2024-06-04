@@ -170,7 +170,14 @@ public class MoodleDataMapper {
         Boolean isGraded=false;
         float grade=(float)-1;
         String content="";
-        if(lastAttempt.getSubmission().getGradingstatus().equals("graded"))
+        ZonedDateTime submittedAt=null;
+        ZonedDateTime timemodified=null;
+
+        submittedAt=Instant.ofEpochSecond(lastAttempt.getSubmission().getTimecreated()).atZone(ZoneId.of("UTC"));
+        timemodified=Instant.ofEpochSecond(lastAttempt.getSubmission().getTimemodified()).atZone(ZoneId.of("UTC"));
+
+
+        if(lastAttempt.getGradingstatus().equals("graded"))
         {
             isGraded=true;
         }
@@ -186,8 +193,8 @@ public class MoodleDataMapper {
                 .isGraded(isGraded)
                 .content(content)
                 .grade(grade)
-                .timemodified(Instant.ofEpochSecond(lastAttempt.getSubmission().getTimemodified()).atZone(ZoneId.of("UTC")))
-                .submittedAt(Instant.ofEpochSecond(lastAttempt.getSubmission().getTimecreated()).atZone(ZoneId.of("UTC")))
+                .timemodified(timemodified)
+                .submittedAt(submittedAt)
                 .build();
     }
 
