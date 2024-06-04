@@ -30,6 +30,7 @@ public class UserDataMapper {
     public UserResponseEntity userToUserResponseEntity(User user) {
         return UserResponseEntity.builder()
                 .userId(user.getId().getValue())
+                .roleMoodle(user.getRoleMoodle())
                 .fullName(user.getFirstName() + " " + user.getLastName())
                 .email(user.getEmail())
                 .build();

@@ -13,6 +13,8 @@ import java.util.UUID;
 public class User extends AggregateRoot<UserId> {
     private Integer userIdMoodle;
     private Organization organization;
+
+    private RoleMoodle roleMoodle;
     private String userName;
     private String name;
     private String email;
@@ -30,6 +32,7 @@ public class User extends AggregateRoot<UserId> {
 
     private User(Builder builder) {
         super.setId(builder.userId);
+        roleMoodle = builder.roleMoodle;
         userIdMoodle = builder.userIdMoodle;
         organization = builder.organization;
         name = builder.name;
@@ -46,6 +49,18 @@ public class User extends AggregateRoot<UserId> {
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
         failureMessage = builder.failureMessage;
+    }
+
+    public RoleMoodle getRoleMoodle() {
+        return roleMoodle;
+    }
+
+    public void setRoleMoodle(RoleMoodle roleMoodle) {
+        this.roleMoodle = roleMoodle;
+    }
+
+    public void setCreatedAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Organization getOrganization() {
@@ -185,6 +200,7 @@ public class User extends AggregateRoot<UserId> {
 
     public static final class Builder {
         private UserId userId;
+        private RoleMoodle roleMoodle;
         private Integer userIdMoodle;
         private String username;
         private Organization organization;
@@ -216,6 +232,11 @@ public class User extends AggregateRoot<UserId> {
 
         public Builder userIdMoodle(Integer val) {
             userIdMoodle = val;
+            return this;
+        }
+
+        public Builder roleMoodle(RoleMoodle val) {
+            roleMoodle = val;
             return this;
         }
 

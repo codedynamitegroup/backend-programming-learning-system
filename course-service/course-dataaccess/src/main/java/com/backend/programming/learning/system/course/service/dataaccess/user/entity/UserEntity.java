@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.course.service.dataaccess.user.e
 import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.organization.entity.OrganizationEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.question.entity.QuestionEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.role_moodle.entity.RoleMoodleEntity;
 import lombok.*;
 
 import jakarta.persistence.*;
@@ -23,6 +24,10 @@ public class UserEntity {
     @Column(name = "id")
     private UUID id;
     private Integer userIdMoodle;
+
+    @OneToOne
+    @JoinColumn(name = "role_moodle_id", referencedColumnName = "id")
+    private RoleMoodleEntity roleMoodle;
 
     @ManyToOne
     @JoinColumn(name = "org_id", referencedColumnName = "id")
