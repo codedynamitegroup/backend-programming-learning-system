@@ -356,12 +356,12 @@ CREATE TABLE "public".exam_question
 DROP TABLE IF EXISTS "public".exam_submission CASCADE;
 CREATE TABLE "public".exam_submission
 (
-    id          uuid            DEFAULT gen_random_uuid() NOT NULL,
-    exam_id     uuid   NOT NULL,
-    user_id     uuid   NOT NULL,
-    submit_count bigint NOT NULL DEFAULT '0',
-    start_time  TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    submit_time TIMESTAMP WITH TIME ZONE DEFAULT NULL,
+    id           uuid                     DEFAULT gen_random_uuid() NOT NULL,
+    exam_id      uuid NOT NULL,
+    user_id      uuid NOT NULL,
+    submit_count bigint                   DEFAULT '0',
+    start_time   TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    submit_time  TIMESTAMP WITH TIME ZONE DEFAULT NULL,
     status status NOT NULL DEFAULT 'NOT_SUBMITTED',
     CONSTRAINT exam_submission_pkey PRIMARY KEY (id),
     CONSTRAINT exam_submission_exam_id_fkey FOREIGN KEY (exam_id)
@@ -377,16 +377,16 @@ CREATE TABLE "public".exam_submission
 DROP TABLE IF EXISTS "public".exam_question_submission CASCADE;
 CREATE TABLE "public".exam_question_submission
 (
-    id                 uuid                      DEFAULT gen_random_uuid() NOT NULL,
-    user_id            uuid             NOT NULL,
-    exam_question_id uuid             NOT NULL,
-    AI_assessment text,
-    pass_status        bigint           NOT NULL DEFAULT '0',
-    grade              double precision NOT NULL,
-    content            text,
-    right_answer       text             NOT NULL,
-    num_file           bigint           NOT NULL,
-    status bigint NOT NULL DEFAULT '0',
+    id               uuid DEFAULT gen_random_uuid() NOT NULL,
+    user_id          uuid NOT NULL,
+    exam_question_id uuid NOT NULL,
+    AI_assessment    text,
+    pass_status      bigint,
+    grade            double precision,
+    content          text,
+    right_answer     text,
+    num_file         bigint,
+    status          integer,
     CONSTRAINT exam_question_submission_pkey PRIMARY KEY (id),
     CONSTRAINT exam_question_submission_user_id_fkey FOREIGN KEY (user_id)
         REFERENCES "public".USER (id) MATCH SIMPLE
@@ -475,15 +475,15 @@ CREATE TABLE "public".activity_attachment
 DROP TABLE IF EXISTS "public".question_submission CASCADE;
 CREATE TABLE "public".question_submission
 (
-    id                 uuid                      DEFAULT gen_random_uuid() NOT NULL,
-    user_id            uuid             NOT NULL,
-    exam_submission_id uuid             NOT NULL,
-    question_id        uuid             NOT NULL,
-    pass_status        bigint           NOT NULL DEFAULT '0',
-    grade              double precision NOT NULL,
+    id                 uuid DEFAULT gen_random_uuid() NOT NULL,
+    user_id            uuid                           NOT NULL,
+    exam_submission_id uuid                           NOT NULL,
+    question_id        uuid                           NOT NULL,
+    pass_status        bigint,
+    grade              double precision,
     content            text,
-    right_answer       text             NOT NULL,
-    num_file           bigint           NOT NULL,
+    right_answer       text,
+    num_file           bigint,
     CONSTRAINT question_submission_pkey PRIMARY KEY (id),
     CONSTRAINT question_submission_user_id_fkey FOREIGN KEY (user_id)
         REFERENCES "public".USER (id) MATCH SIMPLE

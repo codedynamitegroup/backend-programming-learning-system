@@ -63,4 +63,9 @@ public class ExamSubmissionCreateHelper {
         courseDomainService.createStartExamSubmission(examSubmission);
         return saveExamSubmission(examSubmission);
     }
+
+    public ExamSubmission createEndExamSubmission(CreateExamSubmissionStartCommand createExamSubmissionStartCommand) {
+        ExamSubmission saveExamSubmission = examSubmissionRepository.saveEnd(createExamSubmissionStartCommand);
+        return saveExamSubmission;
+    }
 }
