@@ -35,7 +35,7 @@ public class WebSecurityConfig {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET, "/auth/users").hasAnyRole(ADMIN, ADMIN_MOODLE)
+                        .requestMatchers(HttpMethod.GET, "/auth/users").hasAnyRole(ADMIN, ADMIN_MOODLE, STUDENT_MOODLE, TEACHER_MOODLE)
                         .requestMatchers(HttpMethod.GET, "/auth/users/get-by-email/:email").hasRole(USER)
                         .requestMatchers(HttpMethod.DELETE, "/auth/users/:id").hasRole(ADMIN)
                         .requestMatchers(HttpMethod.PUT, "/auth/users/:id").hasAnyRole(USER)
