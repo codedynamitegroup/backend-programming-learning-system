@@ -140,7 +140,7 @@ public class UserDataMapper {
                 .lastLogin(user.getLastLogin())
                 .createdAt(user.getCreatedAt())
                 .updatedAt(user.getUpdatedAt())
-                .organization(organizationToOrganizationEntityResponse(organizationEntityResponse))
+                .organization(organizationEntityResponse != null ? organizationToOrganizationEntityResponse(organizationEntityResponse) : null)
                 .isDeleted(user.getDeleted())
                 .isLinkedWithGoogle(user.getLinkedWithGoogle())
                 .isLinkedWithMicrosoft(user.getLinkedWithMicrosoft())
