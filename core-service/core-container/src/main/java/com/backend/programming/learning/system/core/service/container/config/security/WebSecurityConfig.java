@@ -83,4 +83,18 @@ public class WebSecurityConfig {
                     .requestMatchers(HttpMethod.GET, "/core/certificate-courses/{id}");
         };
     }
+//    @Bean
+//    public WebMvcConfigurer corsConfigurer() {
+//        return new WebMvcConfigurer() {
+//
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                registry
+//                        .addMapping("/**")
+//                        .allowedOrigins("*")
+//                        .allowedHeaders("*")
+//                        .allowedMethods("*");
+//            }
+//        };
+//    }
 }
