@@ -31,7 +31,7 @@ public class CodeSubmissionController {
     public ResponseEntity<CreateCodeSubmissionResponse> createCodeSubmission
             (@RequestHeader(value = "Access-Token") String accessToken,
              @RequestBody CreateCodeSubmissionCommand createCodeSubmissionCommand){
-        String email = JwtUtils.getEmailFromJwtString(accessToken);
+        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
         createCodeSubmissionCommand.setEmail(email);
         CreateCodeSubmissionResponse response =
                 codeSubmissionApplicationService.createCodeSubmission(createCodeSubmissionCommand);
@@ -43,7 +43,7 @@ public class CodeSubmissionController {
              @RequestParam UUID codeQuestionId,
              @RequestParam(defaultValue = "0") Integer pageNo,
              @RequestParam(defaultValue = "5") Integer pageSize){
-        String email = JwtUtils.getEmailFromJwtString(accessToken);
+        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
 
         GetCodeSubmissionsByUserIdCommand command = GetCodeSubmissionsByUserIdCommand.builder()
                 .codeQuestionId(codeQuestionId)
@@ -60,7 +60,7 @@ public class CodeSubmissionController {
     public ResponseEntity<GetCodeSubmissionResponseItem> getCodeSubmissionsById
             (@RequestHeader(value = "Access-Token") String accessToken,
              @PathVariable("code-submission-id") UUID codeSubmissionId){
-        String email = JwtUtils.getEmailFromJwtString(accessToken);
+        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
 
         GetDetailCodeSubmissionsByIdCommand command = GetDetailCodeSubmissionsByIdCommand.builder()
                 .codeSubmissionId(codeSubmissionId)

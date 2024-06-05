@@ -79,7 +79,7 @@ public class CodeQuestionController {
             @RequestHeader(value = "Access-Token", required = false) String accessToken){
 //        log.info("getPublicCodeQuestion");
 //        tagIds.forEach(i-> log.info("{}",i));
-        String email = JwtUtils.getEmailFromJwtString(accessToken);
+        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
         CodeQuestion.Fields sortBy = CodeQuestion.Fields.createdAt;
         GetCodeQuestionsQuery query = GetCodeQuestionsQuery.builder()
                 .orderBy(orderBy)
@@ -114,7 +114,7 @@ public class CodeQuestionController {
     public ResponseEntity<CodeQuestionDto> getDetailCodeQuestion(
             @PathVariable("code-question-id") UUID codeQuestionId,
             @RequestHeader(value = "Access-Token") String accessToken){
-        String email = JwtUtils.getEmailFromJwtString(accessToken);
+        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
 
         GetDetailCodeQuestionCommand command =  GetDetailCodeQuestionCommand.builder()
                 .codeQuestionId(codeQuestionId)
