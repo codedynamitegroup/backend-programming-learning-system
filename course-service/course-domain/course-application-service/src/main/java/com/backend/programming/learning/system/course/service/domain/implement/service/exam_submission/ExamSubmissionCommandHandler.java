@@ -3,12 +3,15 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam_submission.ExamSubmissionDataMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.UUID;
 
 /**
  * com.backend.programming.learning.system.implement.exam_submission
@@ -21,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class ExamSubmissionCommandHandler {
     private final ExamSubmissionCreateHelper examSubmissionCreateHelper;
+    private final ExamSubmissionQueryHelper examSubmissionQueryHelper;
     private final ExamSubmissionDataMapper examSubmissionDataMapper;
     @Transactional
     public CreateExamSubmissionResponse submitExam(CreateExamSubmissionCommand createExamSubmissionCommand) {
@@ -38,5 +42,10 @@ public class ExamSubmissionCommandHandler {
     public CreateExamSubmissionResponse endExam(CreateExamSubmissionStartCommand createExamSubmissionStartCommand) {
         ExamSubmission examSubmission = examSubmissionCreateHelper.createEndExamSubmission(createExamSubmissionStartCommand);
         return examSubmissionDataMapper.mapToCreateExamSubmissionResponse(examSubmission);
+    }
+
+    @Transactional(readOnly = true)
+    public QueryExamSubmissionResponse submitExamDetail(UUID submissionId) {
+        return examSubmissionQueryHelper.submitExamDetail(submissionId);
     }
 }
