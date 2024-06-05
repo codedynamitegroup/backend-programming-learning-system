@@ -87,19 +87,28 @@ public class CertificateCourseCommandHandler {
                         IsRegisteredFilter.valueOf(queryAllCertificateCoursesCommand.getIsRegisteredFilter()),
                         queryAllCertificateCoursesCommand.getEmail()
                 );
+//        List<CertificateCourse> mostEnrolledCertificateCourses = certificateCourseQueryHelper
+//                .queryMostEnrolledCertificateCourses(
+//                        queryAllCertificateCoursesCommand.getCourseName(),
+//                        queryAllCertificateCoursesCommand.getFilterTopicIds(),
+//                        IsRegisteredFilter.valueOf(queryAllCertificateCoursesCommand.getIsRegisteredFilter()),
+//                        queryAllCertificateCoursesCommand.getEmail()
+//                );
+
+        return certificateCourseDataMapper
+                .certificateCoursesToQueryAllCertificateCoursesResponse(certificateCourses);
+    }
+
+    @Transactional(readOnly = true)
+    public QueryAllMostEnrolledCertificateCoursesResponse findAllMostEnrolledCertificateCourses(
+            QueryAllMostEnrolledCertificateCoursesCommand queryAllMostEnrolledCertificateCoursesCommand) {
         List<CertificateCourse> mostEnrolledCertificateCourses = certificateCourseQueryHelper
                 .queryMostEnrolledCertificateCourses(
-                        queryAllCertificateCoursesCommand.getCourseName(),
-                        queryAllCertificateCoursesCommand.getFilterTopicIds(),
-                        IsRegisteredFilter.valueOf(queryAllCertificateCoursesCommand.getIsRegisteredFilter()),
-                        queryAllCertificateCoursesCommand.getEmail()
+                        queryAllMostEnrolledCertificateCoursesCommand.getEmail()
                 );
 
         return certificateCourseDataMapper
-                .certificateCoursesToQueryAllCertificateCoursesResponse(
-                        certificateCourses,
-                        mostEnrolledCertificateCourses
-                );
+                .certificateCoursesToQueryAllMostEnrolledCertificateCoursesResponse(mostEnrolledCertificateCourses);
     }
 
     @Transactional

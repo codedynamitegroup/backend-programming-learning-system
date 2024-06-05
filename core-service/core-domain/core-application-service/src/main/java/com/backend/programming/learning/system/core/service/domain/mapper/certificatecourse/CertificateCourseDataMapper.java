@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.core.service.domain.mapper.certi
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllMostEnrolledCertificateCoursesResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
@@ -108,19 +109,26 @@ public class CertificateCourseDataMapper {
     }
 
     public QueryAllCertificateCoursesResponse certificateCoursesToQueryAllCertificateCoursesResponse(
-            List<CertificateCourse> certificateCourses,
-            List<CertificateCourse> mostEnrolledCertificateCoursesPage) {
+            List<CertificateCourse> certificateCourses) {
         List<CertificateCourseResponseEntity> certificateCourseResponseEntities = new ArrayList<>();
-        List<CertificateCourseResponseEntity> mostEnrolledCertificateCourses = new ArrayList<>();
         for (CertificateCourse certificateCourse : certificateCourses) {
             certificateCourseResponseEntities.add(certificateCourseToQueryCertificateCourseResponse(certificateCourse));
         }
-        for (CertificateCourse certificateCourse : mostEnrolledCertificateCoursesPage) {
-            mostEnrolledCertificateCourses.add(certificateCourseToQueryCertificateCourseResponse(certificateCourse));
-        }
+
         return QueryAllCertificateCoursesResponse.builder()
                 .certificateCourses(certificateCourseResponseEntities)
-                .mostEnrolledCertificateCourses(mostEnrolledCertificateCourses)
+                .build();
+    }
+
+    public QueryAllMostEnrolledCertificateCoursesResponse certificateCoursesToQueryAllMostEnrolledCertificateCoursesResponse(
+            List<CertificateCourse> certificateCourses) {
+        List<CertificateCourseResponseEntity> certificateCourseResponseEntities = new ArrayList<>();
+        for (CertificateCourse certificateCourse : certificateCourses) {
+            certificateCourseResponseEntities.add(certificateCourseToQueryCertificateCourseResponse(certificateCourse));
+        }
+
+        return QueryAllMostEnrolledCertificateCoursesResponse.builder()
+                .mostEnrolledCertificateCourses(certificateCourseResponseEntities)
                 .build();
     }
 

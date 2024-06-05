@@ -166,6 +166,30 @@ public class CertificateCourseController {
         return ResponseEntity.ok(queryAllCertificateCoursesResponse);
     }
 
+    @PostMapping("/most-enrolled")
+    @Operation(summary = "Get all Certificate courses.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllMostEnrolledCertificateCoursesResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllMostEnrolledCertificateCoursesResponse> getAllMostEnrolledCertificateCourses(
+            @RequestHeader(value = "Access-Token", required = false) String accessToken) {
+        String email = JwtUtils.getEmailFromJwtString(accessToken);
+
+        QueryAllMostEnrolledCertificateCoursesResponse queryAllMostEnrolledCertificateCoursesResponse =
+                certificateCourseApplicationService.queryAllMostEnrolledCertificateCourses(
+                        QueryAllMostEnrolledCertificateCoursesCommand
+                        .builder()
+                        .email(email)
+                        .build()
+                );
+        log.info("Returning all certificate courses");
+        return ResponseEntity.ok(queryAllMostEnrolledCertificateCoursesResponse);
+    }
+
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete Certificate course.")
     @ApiResponses(value = {
