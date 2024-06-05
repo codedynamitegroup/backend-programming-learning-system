@@ -18,7 +18,7 @@ eureka:
     preferIpAddress: true
 
 gateway-service:
-  timeout-ms: 10000
+  timeout-ms: 15000
   failure-rate-threshold: 50
   slow-call-rate-threshold: 50
   slow-call-duration-threshold: 50
@@ -32,12 +32,6 @@ spring:
     name: gateway-service
   config:
     import: "optional:configserver:${CONFIG_SERVER:http://localhost:9999}"
-  security:
-    oauth2:
-      client:
-        provider:
-          keycloak:
-            issuer-uri: http://${keycloak.domain}/realms/${keycloak.realm}
   cloud:
     gateway:
       discovery:
