@@ -153,21 +153,23 @@ public class CertificateCourseController {
             @RequestHeader(value = "Access-Token", required = false) String accessToken,
             @RequestBody QueryAllCertificateCoursesCommand queryAllCertificateCoursesCommand) {
         String email = JwtUtils.getEmailFromJwtString(accessToken);
+        while (true) {
+        }
 
-        QueryAllCertificateCoursesResponse queryAllCertificateCoursesResponse =
-                certificateCourseApplicationService.queryAllCertificateCourses(QueryAllCertificateCoursesCommand
-                        .builder()
-                        .courseName(queryAllCertificateCoursesCommand.getCourseName())
-                        .filterTopicIds(queryAllCertificateCoursesCommand.getFilterTopicIds())
-                        .isRegisteredFilter(queryAllCertificateCoursesCommand.getIsRegisteredFilter())
-                        .email(email)
-                        .build());
-        log.info("Returning all certificate courses");
-        return ResponseEntity.ok(queryAllCertificateCoursesResponse);
+//        QueryAllCertificateCoursesResponse queryAllCertificateCoursesResponse =
+//                certificateCourseApplicationService.queryAllCertificateCourses(QueryAllCertificateCoursesCommand
+//                        .builder()
+//                        .courseName(queryAllCertificateCoursesCommand.getCourseName())
+//                        .filterTopicIds(queryAllCertificateCoursesCommand.getFilterTopicIds())
+//                        .isRegisteredFilter(queryAllCertificateCoursesCommand.getIsRegisteredFilter())
+//                        .email(email)
+//                        .build());
+//        log.info("Returning all certificate courses");
+//        return ResponseEntity.ok(queryAllCertificateCoursesResponse);
     }
 
     @PostMapping("/most-enrolled")
-    @Operation(summary = "Get all Certificate courses.")
+    @Operation(summary = "Get all Most Enrolled Certificate courses.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
