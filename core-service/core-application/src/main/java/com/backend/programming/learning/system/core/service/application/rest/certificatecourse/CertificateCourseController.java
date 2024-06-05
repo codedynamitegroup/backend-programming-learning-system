@@ -153,19 +153,17 @@ public class CertificateCourseController {
             @RequestHeader(value = "Access-Token", required = false) String accessToken,
             @RequestBody QueryAllCertificateCoursesCommand queryAllCertificateCoursesCommand) {
         String email = JwtUtils.getEmailFromJwtString(accessToken);
-        while (true) {
-        }
 
-//        QueryAllCertificateCoursesResponse queryAllCertificateCoursesResponse =
-//                certificateCourseApplicationService.queryAllCertificateCourses(QueryAllCertificateCoursesCommand
-//                        .builder()
-//                        .courseName(queryAllCertificateCoursesCommand.getCourseName())
-//                        .filterTopicIds(queryAllCertificateCoursesCommand.getFilterTopicIds())
-//                        .isRegisteredFilter(queryAllCertificateCoursesCommand.getIsRegisteredFilter())
-//                        .email(email)
-//                        .build());
-//        log.info("Returning all certificate courses");
-//        return ResponseEntity.ok(queryAllCertificateCoursesResponse);
+        QueryAllCertificateCoursesResponse queryAllCertificateCoursesResponse =
+                certificateCourseApplicationService.queryAllCertificateCourses(QueryAllCertificateCoursesCommand
+                        .builder()
+                        .courseName(queryAllCertificateCoursesCommand.getCourseName())
+                        .filterTopicIds(queryAllCertificateCoursesCommand.getFilterTopicIds())
+                        .isRegisteredFilter(queryAllCertificateCoursesCommand.getIsRegisteredFilter())
+                        .email(email)
+                        .build());
+        log.info("Returning all certificate courses");
+        return ResponseEntity.ok(queryAllCertificateCoursesResponse);
     }
 
     @PostMapping("/most-enrolled")
