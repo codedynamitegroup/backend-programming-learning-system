@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.gateway.service.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
@@ -22,20 +23,15 @@ public class WebSecurityConfig {
                         .anyExchange().permitAll()
                 );
         serverHttpSecurity.csrf((csrfSpec) -> csrfSpec.disable());
+        serverHttpSecurity.cors().configurationSource((exchange) -> {
+            CorsConfiguration corsConfiguration = new CorsConfiguration();
+            corsConfiguration.setAllowedOrigins(java.util.List.of("*"));
+            corsConfiguration.setAllowedMethods(java.util.List.of("*"));
+            corsConfiguration.setAllowedHeaders(java.util.List.of("*"));
+            UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+            source.registerCorsConfiguration("/**", corsConfiguration);
+            return corsConfiguration;
+        });
         return serverHttpSecurity.build();
-    }
-
-    @Bean
-    public CorsWebFilter corsWebFilter() {
-        CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.addAllowedOrigin("*");
-        corsConfiguration.addAllowedMethod("*");
-        corsConfiguration.addAllowedHeader("*");
-        corsConfiguration.setAllowCredentials(true);
-
-        UrlBasedCorsConfigurationSource corsConfigurationSource = new UrlBasedCorsConfigurationSource();
-        corsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
-
-        return new CorsWebFilter(corsConfigurationSource);
     }
 }
