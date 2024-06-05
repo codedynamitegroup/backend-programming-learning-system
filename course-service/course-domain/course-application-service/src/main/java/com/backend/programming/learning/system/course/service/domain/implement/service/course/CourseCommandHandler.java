@@ -56,12 +56,6 @@ public class CourseCommandHandler {
                 queryAllCourseCommand.getCourseType(),
                 queryAllCourseCommand.getPageNo(),
                 queryAllCourseCommand.getPageSize());
-
-        courses.forEach(course -> {
-            Optional<CourseUserResponseEntity> courseUsers = Optional.ofNullable(courseUserCommandHandler
-                    .queryAllByCourseIdAndRoleTeacher(new QueryCourseUserCommand(course.getId().getValue())));
-            course.setTeachers(courseUsers.map(CourseUserResponseEntity::getUsers).orElse(List.of()));
-        });
         log.info("Returning all courses: {}", courses);
         return courseDataMapper.coursesToQueryAllCourseResponse(courses);
     }

@@ -43,4 +43,10 @@ public class CourseUserQueryHelper {
         return count;
     }
 
+    public Page<CourseUser> findAllCourseByUserId(UUID userId, int pageNo, int pageSize, String search, String[] courseType) {
+        Page<CourseUser> courseUser = courseUserRepository.findAllCourseByUserId(userId, pageNo, pageSize, search, courseType);
+        log.info("Course user found successfully");
+        return courseUser;
+    }
+
 }

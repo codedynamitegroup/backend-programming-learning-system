@@ -4,9 +4,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.course_user.CreateCourseUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.course_user.CreateCourseUserResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.course_user.DeleteCourseUserCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryAllCourseUserCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryAllCourseUserResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryCourseUserCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.*;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.UserCourseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course_user.CourseUserResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.course_user.CourseUserApplicationService;
@@ -22,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -129,4 +128,34 @@ public class CourseUserController {
         log.info("Student by course id: {}", response);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/user/{userId}")
+    @Operation(summary = "Query all course by user id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllCourseByUserResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllCourseByUserResponse> queryAllCourseByUser(
+            @PathVariable UUID userId,
+            @RequestParam(defaultValue = "") String search,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(required = false) Optional<String[]> courseType) {
+        log.info("Query all course by user id: {}", userId);
+        QueryAllCourseByUserCommand queryAllCourseByUserCommand = QueryAllCourseByUserCommand.builder()
+                .userId(userId)
+                .search(search)
+                .pageNo(pageNo)
+                .pageSize(pageSize)
+                .courseType(courseType.orElse(null))
+                .build();
+        QueryAllCourseByUserResponse response = courseUserApplicationService.queryAllCourseByUser(queryAllCourseByUserCommand);
+        log.info("Course by user id: {}", response);
+        return ResponseEntity.ok(response);
+    }
+
+
 }
