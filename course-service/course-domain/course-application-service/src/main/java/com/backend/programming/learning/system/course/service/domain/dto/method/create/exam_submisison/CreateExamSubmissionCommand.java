@@ -20,6 +20,7 @@ public record CreateExamSubmissionCommand(
         @NotNull(message = "User id is required")
         UUID userId,
         List<CreateQuestionSubmit> questions,
-        ZonedDateTime startTime
+        ZonedDateTime startTime,
+        ZonedDateTime submitTime
 ) {
 }
