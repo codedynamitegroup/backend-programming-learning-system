@@ -4,9 +4,12 @@ import com.backend.programming.learning.system.course.service.dataaccess.questio
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 @Repository
 public interface QuestionSubmissionJpaRepository extends JpaRepository<QuestionSubmissionEntity, UUID> {
     Optional<QuestionSubmissionEntity> findById(UUID id);
+
+    List<QuestionSubmissionEntity> findByExamSubmissionId(UUID submissionId);
 }
