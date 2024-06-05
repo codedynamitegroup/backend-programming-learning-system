@@ -29,12 +29,7 @@ public interface CertificateCourseRepository {
     );
 
     void deleteCertificateCourse(UUID certificateCourseId);
-    List<CertificateCourse> findMostEnrolledCertificateCourses(String courseName,
-                                                               List<UUID> filterTopicIds);
-    List<CertificateCourse> findMostEnrolledCertificateCoursesByIsRegistered(String courseName,
-                                                                            List<UUID> filterTopicIds,
-                                                                            boolean isRegistered,
-                                                                            UUID userId);
+    List<CertificateCourse> findMostEnrolledCertificateCourses();
 
     int countNumOfCompletedQuestions(UUID certificateCourseId, UUID userId);
     int countNumOfQuestionsByCertificateId(UUID certificateCourseId);

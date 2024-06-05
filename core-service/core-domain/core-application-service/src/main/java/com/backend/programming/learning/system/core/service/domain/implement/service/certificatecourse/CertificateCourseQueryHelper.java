@@ -198,117 +198,46 @@ public class CertificateCourseQueryHelper {
 
     @Transactional(readOnly = true)
     public List<CertificateCourse> queryMostEnrolledCertificateCourses(
-            String courseName,
-            List<UUID> filterTopicIds,
-            IsRegisteredFilter isRegisteredFilter,
             String email
     ) {
-        switch (isRegisteredFilter) {
-            case ALL: {
-                List<CertificateCourse> certificateCourseList = certificateCourseRepository.findMostEnrolledCertificateCourses(
-                        courseName,
-                        filterTopicIds
-                );
+        List<CertificateCourse> certificateCourseList = certificateCourseRepository.findMostEnrolledCertificateCourses();
 
-                Optional<User> userOptional = email != null ? userRepository.findByEmail(email): Optional.empty();
+        Optional<User> userOptional = email != null ? userRepository.findByEmail(email): Optional.empty();
 
-                for (CertificateCourse certificateCourse : certificateCourseList) {
-                    if (userOptional.isPresent()) {
-                        Optional<CertificateCourseUser> certificateCourseUser =
-                                certificateCourseUserRepository.findByCertificateCourseIdAndUserId(
-                                        certificateCourse.getId().getValue(),
-                                        userOptional.get().getId().getValue()
-                                );
-                        if (certificateCourseUser.isPresent()) {
-                            certificateCourse.setRegistered(true);
-                            certificateCourse.setNumOfCompletedQuestions(
-                                    countNumOfCompletedQuestions(
-                                            certificateCourse.getId().getValue(),
-                                            userOptional.get().getId().getValue())
-                            );
-                        } else {
-                            certificateCourse.setRegistered(false);
-                            certificateCourse.setNumOfCompletedQuestions(0);
-                        }
-
-                        Optional<ChapterQuestion> currentQuestion = chapterQuestionRepository
-                                .findFirstUncompletedQuestionByCertificateCourseIdAndUserId(
-                                        certificateCourse.getId().getValue(),
-                                        userOptional.get().getId().getValue()
-                                );
-                        currentQuestion.ifPresent(
-                                chapterQuestion -> certificateCourse.setCurrentQuestion(chapterQuestion.getQuestion())
+        for (CertificateCourse certificateCourse : certificateCourseList) {
+            if (userOptional.isPresent()) {
+                Optional<CertificateCourseUser> certificateCourseUser =
+                        certificateCourseUserRepository.findByCertificateCourseIdAndUserId(
+                                certificateCourse.getId().getValue(),
+                                userOptional.get().getId().getValue()
                         );
-                    }
-
-                    certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourse.getId().getValue()));
-                    certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourse.getId().getValue()));
-                    certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourse.getId().getValue()));
-                }
-                return certificateCourseList;
-            }
-            case REGISTERED: {
-                User user = getUserByEmail(email);
-                List<CertificateCourse> certificateCourseList =
-                        certificateCourseRepository.findMostEnrolledCertificateCoursesByIsRegistered(
-                        courseName,
-                        filterTopicIds,
-                        true,
-                        user.getId().getValue()
-                );
-                for (CertificateCourse certificateCourse : certificateCourseList) {
-                    Optional<CertificateCourseUser> certificateCourseUser =
-                            certificateCourseUserRepository.findByCertificateCourseIdAndUserId(
+                if (certificateCourseUser.isPresent()) {
+                    certificateCourse.setRegistered(true);
+                    certificateCourse.setNumOfCompletedQuestions(
+                            countNumOfCompletedQuestions(
                                     certificateCourse.getId().getValue(),
-                                    user.getId().getValue()
-                            );
-                    if (certificateCourseUser.isPresent()) {
-                        certificateCourse.setRegistered(true);
-                        certificateCourse.setNumOfCompletedQuestions(
-                                countNumOfCompletedQuestions(
-                                        certificateCourse.getId().getValue(),
-                                        user.getId().getValue())
-                        );
-                    } else {
-                        certificateCourse.setRegistered(false);
-                        certificateCourse.setNumOfCompletedQuestions(0);
-                    }
-                    certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourse.getId().getValue()));
-                    certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourse.getId().getValue()));
-                    certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourse.getId().getValue()));
-
-                    Optional<ChapterQuestion> currentQuestion = chapterQuestionRepository
-                            .findFirstUncompletedQuestionByCertificateCourseIdAndUserId(
-                            certificateCourse.getId().getValue(),
-                            user.getId().getValue()
+                                    userOptional.get().getId().getValue())
                     );
-                    currentQuestion.ifPresent(
-                            chapterQuestion -> certificateCourse.setCurrentQuestion(chapterQuestion.getQuestion())
-                    );
-                }
-                return certificateCourseList;
-
-            }
-            case NOT_REGISTERED: {
-                User user = getUserByEmail(email);
-                List<CertificateCourse> certificateCourseList =
-                        certificateCourseRepository.findMostEnrolledCertificateCoursesByIsRegistered(
-                        courseName,
-                        filterTopicIds,
-                        false,
-                        user.getId().getValue()
-                );
-                for (CertificateCourse certificateCourse : certificateCourseList) {
+                } else {
                     certificateCourse.setRegistered(false);
-                    certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourse.getId().getValue()));
-                    certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourse.getId().getValue()));
-                    certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourse.getId().getValue()));
+                    certificateCourse.setNumOfCompletedQuestions(0);
                 }
-                return certificateCourseList;
+
+                Optional<ChapterQuestion> currentQuestion = chapterQuestionRepository
+                        .findFirstUncompletedQuestionByCertificateCourseIdAndUserId(
+                                certificateCourse.getId().getValue(),
+                                userOptional.get().getId().getValue()
+                        );
+                currentQuestion.ifPresent(
+                        chapterQuestion -> certificateCourse.setCurrentQuestion(chapterQuestion.getQuestion())
+                );
             }
-            default:
-                throw new CoreDomainException("Invalid isRegisteredFilter: " + isRegisteredFilter);
+
+            certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourse.getId().getValue()));
+            certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourse.getId().getValue()));
+            certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourse.getId().getValue()));
         }
+        return certificateCourseList;
     }
 
     private User getUserByEmail(String email) {
