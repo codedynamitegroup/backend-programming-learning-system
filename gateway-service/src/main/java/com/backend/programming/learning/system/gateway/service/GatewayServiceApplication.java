@@ -78,7 +78,7 @@ public class GatewayServiceApplication {
 										.setBackoff(Duration.ofMillis(100), Duration.ofMillis(1000), 2, true)))
 						.uri("lb://course-service"))
 				.route(p -> p
-						.path("code-assessment/**")
+						.path("/code-assessment/**")
 						.filters( f -> f.addResponseHeader("X-Response-Time", ZonedDateTime.now(ZoneId.of("UTC")).toString())
 								.circuitBreaker(c -> c.setName("codeAssessmentCircuitBreaker")
 										.setFallbackUri("forward:/fallback/code-assessment-fallback"))
@@ -133,7 +133,8 @@ public class GatewayServiceApplication {
 
 	@Bean
 	public RedisRateLimiter redisRateLimiter() {
-		return new RedisRateLimiter(10, 20, 1);
+		return new RedisRateLimiter(
+				300, 600, 1);
 	}
 
 	@Bean

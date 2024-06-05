@@ -26,6 +26,7 @@ public class ExamSubmissionDataMapper {
                 .user(user)
                 .submissionCount(submissionCount)
                 .startTime(createExamSubmissionCommand.startTime())
+                .submitTime(createExamSubmissionCommand.submitTime())
                 .build();
     }
 

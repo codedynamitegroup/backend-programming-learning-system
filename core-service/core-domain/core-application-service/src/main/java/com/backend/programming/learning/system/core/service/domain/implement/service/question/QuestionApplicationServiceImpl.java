@@ -1,5 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.implement.service.question;
 
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionCloneCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionCloneResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.question.QuestionDeleteResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdResponse;
@@ -51,5 +53,10 @@ public class QuestionApplicationServiceImpl implements QuestionApplicationServic
     @Override
     public QueryByIdsResponse queryAllQuestionDetail(QueryByIdsCommand ids) {
         return questionQueryCommandHandler.queryAllQuestionDetail(ids);
+    }
+
+    @Override
+    public CreateQuestionCloneResponse cloneQuestion(CreateQuestionCloneCommand createQuestionCloneCommand) {
+        return questionQueryCommandHandler.cloneQuestion(createQuestionCloneCommand);
     }
 }

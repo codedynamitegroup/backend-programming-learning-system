@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.mapper.question;
 
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionCloneResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.question.AnswerOfQuestionDeleteResponse;
@@ -456,5 +457,13 @@ public class QuestionDataMapper {
         return List.of(answers.stream()
                 .map(this::answerOfQuestionToAnswerOfQuestionResponseEntity)
                 .toArray(AnswerOfQuestionResponseEntity[]::new));
+    }
+
+    public CreateQuestionCloneResponse questionListToCreateQuestionCloneResponse(List<Question> questions) {
+        return CreateQuestionCloneResponse.builder()
+                .questions(questions.stream()
+                        .map(this::questionToQuestionResponseEntity)
+                        .toList())
+                .build();
     }
 }

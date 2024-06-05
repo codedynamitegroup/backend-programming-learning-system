@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.ports.output.repository;
 
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionClone;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
@@ -21,4 +22,6 @@ public interface QuestionRepository {
     void updateQuestion(Question question);
 
     Page<QuestionResponseEntity> findAllQuestionByCategory(UUID categoryId, QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand);
+
+    List<Question> cloneQuestion(List<CreateQuestionClone> questionClones);
 }

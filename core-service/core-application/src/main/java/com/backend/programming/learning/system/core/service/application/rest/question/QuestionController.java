@@ -1,5 +1,7 @@
 package com.backend.programming.learning.system.core.service.application.rest.question;
 
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionCloneCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionCloneResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.question.QuestionDeleteResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdResponse;
@@ -14,6 +16,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +31,23 @@ public class QuestionController {
 
     public QuestionController(QuestionApplicationService questionApplicationService) {
         this.questionApplicationService = questionApplicationService;
+    }
+
+    @PostMapping("/clone")
+    @Operation(summary = "Clone question.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateQuestionCloneResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<CreateQuestionCloneResponse> cloneQuestion(
+            @RequestBody CreateQuestionCloneCommand createQuestionCloneCommand
+    ) {
+        log.info("Cloning question");
+        CreateQuestionCloneResponse response = questionApplicationService.cloneQuestion(createQuestionCloneCommand);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping

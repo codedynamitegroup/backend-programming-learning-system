@@ -38,7 +38,6 @@ public class WebSecurityConfig {
                 )
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .cors(Customizer.withDefaults())
                 .build();
     }
 
@@ -52,21 +51,6 @@ public class WebSecurityConfig {
                     .requestMatchers("/v3/api-docs/**", "/configuration/**", "/swagger-ui/**",
                             "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/api-docs/**");
 
-        };
-    }
-
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry
-                        .addMapping("/**")
-                        .allowedOrigins("*")
-                        .allowedHeaders("*")
-                        .allowedMethods("*");
-            }
         };
     }
 }

@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.application.exception.handler;
 
+import com.backend.programming.learning.system.application.handler.AuthException;
 import com.backend.programming.learning.system.application.handler.ErrorDTO;
 import com.backend.programming.learning.system.application.handler.GlobalExceptionHandler;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
@@ -34,6 +35,17 @@ public class CodeAssessmentGlobalExceptionHandler extends GlobalExceptionHandler
                 .message(codeAssessmentDomainException.getMessage())
                 .status(HttpStatus.BAD_REQUEST.getReasonPhrase())
                 .code(HttpStatus.BAD_REQUEST.value())
+                .build();
+    }
+    @ResponseBody
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(value = {AuthException.class})
+    public ErrorDTO handleException(AuthException exception){
+        log.error(exception.getMessage(), exception);
+        return ErrorDTO.builder()
+                .message(exception.getMessage())
+                .status(HttpStatus.FORBIDDEN.getReasonPhrase())
+                .code(HttpStatus.FORBIDDEN.value())
                 .build();
     }
     @ResponseBody
