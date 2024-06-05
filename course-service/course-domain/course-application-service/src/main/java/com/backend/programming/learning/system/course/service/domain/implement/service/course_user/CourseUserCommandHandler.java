@@ -3,9 +3,7 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.course_user.CreateCourseUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.course_user.CreateCourseUserResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.course_user.DeleteCourseUserCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryAllCourseUserCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryAllCourseUserResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryCourseUserCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.*;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course_user.CourseUserResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.CourseUser;
 import com.backend.programming.learning.system.course.service.domain.mapper.course_user.CourseUserDataMapper;
@@ -72,5 +70,16 @@ public class CourseUserCommandHandler {
     @Transactional(readOnly = true)
     public Integer countStudentByCourseId(UUID courseUserId) {
         return courseUserQueryHelper.countStudentByCourseId(courseUserId);
+    }
+
+    @Transactional(readOnly = true)
+    public QueryAllCourseByUserResponse queryAllCourseByUserId(QueryAllCourseByUserCommand queryAllCourseByUserCommand) {
+        Page<CourseUser> courseUsers = courseUserQueryHelper.findAllCourseByUserId(
+                queryAllCourseByUserCommand.getUserId(),
+                queryAllCourseByUserCommand.getPageNo(),
+                queryAllCourseByUserCommand.getPageSize(),
+                queryAllCourseByUserCommand.getSearch(),
+                queryAllCourseByUserCommand.getCourseType());
+        return courseUserDataMapper.courseUsersToQueryAllCourseByUserResponse(courseUsers);
     }
 }

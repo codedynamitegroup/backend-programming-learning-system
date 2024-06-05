@@ -4,9 +4,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.course_user.CreateCourseUserResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.course_user.DeleteCourseUserCommand;
 
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryAllCourseUserCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryAllCourseUserResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryCourseUserCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.*;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course_user.CourseUserResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.valueobject.CourseUserId;
 import jakarta.validation.Valid;
@@ -37,4 +35,7 @@ public interface CourseUserApplicationService {
 
     Integer countStudentByCourseId(
             @Valid UUID courseId);
+
+    QueryAllCourseByUserResponse queryAllCourseByUser(
+            @Valid QueryAllCourseByUserCommand queryAllCourseByUserCommand);
 }

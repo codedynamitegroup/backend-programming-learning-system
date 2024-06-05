@@ -27,8 +27,6 @@ public record CourseResponseEntity(
         String name,
         CourseTypeResponseEntity courseType,
         Boolean visible,
-        UserId createdBy,
-        UserId updatedBy,
         ZonedDateTime createdAt,
         ZonedDateTime updatedAt
 ) {

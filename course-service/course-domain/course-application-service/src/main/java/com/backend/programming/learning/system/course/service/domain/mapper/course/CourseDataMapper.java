@@ -8,19 +8,22 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.UserCourseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course_type.CourseTypeResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.CourseModel;
-import com.backend.programming.learning.system.course.service.domain.entity.Course;
-import com.backend.programming.learning.system.course.service.domain.entity.CourseType;
-import com.backend.programming.learning.system.course.service.domain.entity.Organization;
-import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.entity.*;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseUserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 @Component
 public class CourseDataMapper {
+
+    private final CourseUserRepository courseUserRepository;
+
+    public CourseDataMapper(CourseUserRepository courseUserRepository) {
+        this.courseUserRepository = courseUserRepository;
+    }
+
     public Course createCourseCommandToCourse(
             User user,
             CreateCourseCommand createCourseCommand) {
@@ -64,11 +67,14 @@ public class CourseDataMapper {
     }
 
     public CourseResponseEntity courseToQueryCourseResponse(Course course) {
-        List<UserCourseEntity> teachers = course.getTeachers().stream()
-                .map(user -> UserCourseEntity.builder()
-                        .userId(user.getId().getValue())
-                        .firstName(user.getFirstName())
-                        .lastName(user.getLastName())
+        List<CourseUser> teachers=courseUserRepository.findByCourseIdAndRoleTeacher(course.getId().getValue());
+        List<UserCourseEntity> teachersResponse = teachers.stream()
+                .map(courseUser -> UserCourseEntity.builder()
+                        .userId(courseUser.getUser().getId().getValue())
+                        .firstName(courseUser.getUser().getFirstName())
+                        .lastName(courseUser.getUser().getLastName())
+                        .email(courseUser.getUser().getEmail())
+                        .role(courseUser.getRoleMoodle().getName())
                         .build())
                 .toList();
         CourseTypeResponseEntity courseType = CourseTypeResponseEntity.builder()
@@ -79,13 +85,11 @@ public class CourseDataMapper {
         return CourseResponseEntity.builder()
                 .id(course.getId().getValue())
                 .courseIdMoodle(course.getCourseIdMoodle())
-                .teachers(teachers)
+                .teachers(teachersResponse)
                 .organization(course.getOrganization())
                 .name(course.getName())
                 .courseType(courseType)
                 .visible(course.getVisible())
-                .createdBy(course.getCreatedBy().getId())
-                .updatedBy(course.getUpdatedBy().getId())
                 .createdAt(course.getCreatedAt())
                 .updatedAt(course.getUpdatedAt())
                 .build();

@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.dataaccess.course
 
 import com.backend.programming.learning.system.course.service.dataaccess.course_user.entity.CourseUserEntity;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -40,4 +41,14 @@ public interface CourseUserJpaRepository extends JpaRepository<CourseUserEntity,
             AND cu.roleMoodle.id = 5
     """)
     Integer countStudentByCourseId(UUID courseId);
+
+    @Query("""
+        SELECT cu
+        FROM CourseUserEntity cu
+        WHERE cu.user.id = :userId
+        AND (cu.course.name LIKE CONCAT('%', :search, '%'))
+        AND (:courseType IS NULL OR cu.course.courseType.name IN :courseType)
+    """)
+    Page<CourseUserEntity> findAllCourseByUserId(UUID userId, String search, String[] courseType, Pageable pageable);
+
 }
