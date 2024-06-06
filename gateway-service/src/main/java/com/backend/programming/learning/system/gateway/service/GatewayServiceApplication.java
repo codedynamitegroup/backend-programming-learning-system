@@ -47,8 +47,8 @@ public class GatewayServiceApplication {
 						.path("/core/**")
 						.filters( f -> f
 								.addResponseHeader("X-Response-Time", ZonedDateTime.now(ZoneId.of("UTC")).toString())
-								.circuitBreaker(c -> c.setName("coreCircuitBreaker")
-										.setFallbackUri("forward:/fallback/core-fallback"))
+//								.circuitBreaker(c -> c.setName("coreCircuitBreaker")
+//										.setFallbackUri("forward:/fallback/core-fallback"))
 								.requestRateLimiter(config -> config.setRateLimiter(redisRateLimiter())
 										.setKeyResolver(userKeyResolver()))
 								.retry(retryConfig -> retryConfig.setRetries(3)
@@ -58,8 +58,8 @@ public class GatewayServiceApplication {
 				.route(p -> p
 						.path("/auth/**")
 						.filters( f -> f.addResponseHeader("X-Response-Time", ZonedDateTime.now(ZoneId.of("UTC")).toString())
-								.circuitBreaker(c -> c.setName("authCircuitBreaker")
-										.setFallbackUri("forward:/fallback/auth-fallback"))
+//								.circuitBreaker(c -> c.setName("authCircuitBreaker")
+//										.setFallbackUri("forward:/fallback/auth-fallback"))
 								.requestRateLimiter(config -> config.setRateLimiter(redisRateLimiter())
 										.setKeyResolver(userKeyResolver()))
 								.retry(retryConfig -> retryConfig.setRetries(3)
@@ -69,8 +69,8 @@ public class GatewayServiceApplication {
 				.route(p -> p
 						.path("/course/**")
 						.filters( f -> f.addResponseHeader("X-Response-Time", ZonedDateTime.now(ZoneId.of("UTC")).toString())
-								.circuitBreaker(c -> c.setName("courseCircuitBreaker")
-										.setFallbackUri("forward:/fallback/course-fallback"))
+//								.circuitBreaker(c -> c.setName("courseCircuitBreaker")
+//										.setFallbackUri("forward:/fallback/course-fallback"))
 								.requestRateLimiter(config -> config.setRateLimiter(redisRateLimiter())
 										.setKeyResolver(userKeyResolver()))
 								.retry(retryConfig -> retryConfig.setRetries(3)
@@ -80,8 +80,8 @@ public class GatewayServiceApplication {
 				.route(p -> p
 						.path("/code-assessment/**")
 						.filters( f -> f.addResponseHeader("X-Response-Time", ZonedDateTime.now(ZoneId.of("UTC")).toString())
-								.circuitBreaker(c -> c.setName("codeAssessmentCircuitBreaker")
-										.setFallbackUri("forward:/fallback/code-assessment-fallback"))
+//								.circuitBreaker(c -> c.setName("codeAssessmentCircuitBreaker")
+//										.setFallbackUri("forward:/fallback/code-assessment-fallback"))
 								.requestRateLimiter(config -> config.setRateLimiter(redisRateLimiter())
 										.setKeyResolver(userKeyResolver()))
 								.retry(retryConfig -> retryConfig.setRetries(3)
@@ -101,14 +101,6 @@ public class GatewayServiceApplication {
 				.build();
 	}
 
-//	@Bean
-//	public Customizer<ReactiveResilience4JCircuitBreakerFactory> defaultCustomizer() {
-//		return factory -> factory.configureDefault(id -> new Resilience4JConfigBuilder(id)
-//				.circuitBreakerConfig(CircuitBreakerConfig.ofDefaults())
-//				.timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(10))
-//						.build()).build());
-//	}
-
 	@Bean
 	Customizer<ReactiveResilience4JCircuitBreakerFactory> circuitBreakerFactoryCustomizer() {
 		return reactiveResilience4JCircuitBreakerFactory ->
@@ -116,18 +108,18 @@ public class GatewayServiceApplication {
 						.timeLimiterConfig(TimeLimiterConfig.custom()
 								.timeoutDuration(Duration.ofMillis(gatewayServiceConfigData.getTimeoutMs()))
 								.build())
-						.circuitBreakerConfig(CircuitBreakerConfig.custom()
-								.failureRateThreshold(gatewayServiceConfigData.getFailureRateThreshold())
-								.slowCallRateThreshold(gatewayServiceConfigData.getSlowCallRateThreshold())
-								.slowCallDurationThreshold(Duration.ofMillis(gatewayServiceConfigData
-										.getSlowCallDurationThreshold()))
-								.permittedNumberOfCallsInHalfOpenState(gatewayServiceConfigData
-										.getPermittedNumOfCallsInHalfOpenState())
-								.slidingWindowSize(gatewayServiceConfigData.getSlidingWindowSize())
-								.minimumNumberOfCalls(gatewayServiceConfigData.getMinNumberOfCalls())
-								.waitDurationInOpenState(Duration.ofMillis(gatewayServiceConfigData
-										.getWaitDurationInOpenState()))
-								.build())
+//						.circuitBreakerConfig(CircuitBreakerConfig.custom()
+//								.failureRateThreshold(gatewayServiceConfigData.getFailureRateThreshold())
+//								.slowCallRateThreshold(gatewayServiceConfigData.getSlowCallRateThreshold())
+//								.slowCallDurationThreshold(Duration.ofMillis(gatewayServiceConfigData
+//										.getSlowCallDurationThreshold()))
+//								.permittedNumberOfCallsInHalfOpenState(gatewayServiceConfigData
+//										.getPermittedNumOfCallsInHalfOpenState())
+//								.slidingWindowSize(gatewayServiceConfigData.getSlidingWindowSize())
+//								.minimumNumberOfCalls(gatewayServiceConfigData.getMinNumberOfCalls())
+//								.waitDurationInOpenState(Duration.ofMillis(gatewayServiceConfigData
+//										.getWaitDurationInOpenState()))
+//								.build())
 						.build());
 	}
 

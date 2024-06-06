@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
@@ -27,4 +28,12 @@ public class QuestionSubmissionRepositoryImpl implements QuestionSubmissionRepos
     public void saveAll(List<QuestionSubmission> questionSubmissions) {
         questionSubmissions.forEach(this::save);
     }
+
+    @Override
+    public List<QuestionSubmission> findAllByExamSubmissionId(UUID submissionId) {
+        return questionSubmissionDataAccessMapper
+                .questionSubmissionEntityListToQuestionSubmissionList(
+                      questionSubmissionJpaRepository.findByExamSubmissionId(submissionId));
+    }
+
 }

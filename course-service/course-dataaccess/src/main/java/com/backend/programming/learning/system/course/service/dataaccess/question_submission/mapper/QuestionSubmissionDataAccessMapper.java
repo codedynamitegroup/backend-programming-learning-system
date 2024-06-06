@@ -15,6 +15,8 @@ import com.backend.programming.learning.system.course.service.domain.valueobject
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class QuestionSubmissionDataAccessMapper {
@@ -55,5 +57,11 @@ public class QuestionSubmissionDataAccessMapper {
                 .build();
         response.setId(new QuestionSubmissionId(questionSubmissionEntity.getId()));
         return response;
+    }
+
+    public List<QuestionSubmission> questionSubmissionEntityListToQuestionSubmissionList(List<QuestionSubmissionEntity> questionSubmissionEntities) {
+        return questionSubmissionEntities.stream()
+                .map(this::questionSubmissionEntityToQuestionSubmission)
+                .toList();
     }
 }
