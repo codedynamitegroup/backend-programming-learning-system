@@ -16,6 +16,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class SubmissionAssignmentResponseEntity {
     private final UUID id;
+    private final String assignmentName;
     private final UserResponseEntity user;
     private final Boolean isGraded;
     private final SubmissionAssignmentFileResponseEntity submissionAssignmentFile;

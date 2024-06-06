@@ -106,6 +106,7 @@ public class SubmissionAssignmentDataMapper {
         UserResponseEntity userResponseEntity = userDataMapper.userToUserResponseEntity(submissionAssignment.getUser());
         return SubmissionAssignmentResponseEntity.builder()
                 .id(submissionAssignment.getId().getValue())
+                .assignmentName(submissionAssignment.getAssignment().getTitle())
                 .user(userResponseEntity)
                 .isGraded(submissionAssignment.getGradedStatus())
                 .grade(submissionAssignment.getGrade())
