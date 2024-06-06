@@ -46,11 +46,16 @@ public class ContestUserCreateHelper {
 
     @Transactional
     public ContestUserUpdatedEvent persistContestUser(CreateContestUserCommand createContestUserCommand) {
-        User user = getUser(createContestUserCommand.getUserId());
+        if(createContestUserCommand.getEmail() == null) {
+            log.warn("Email is required");
+            throw new CoreDomainException("Email is required");
+        }
+
+        User user = getUserByEmail(createContestUserCommand.getEmail());
         Contest contest = getContest(createContestUserCommand.getContestId());
         checkContestUserByContestIdAndUserId(
                 createContestUserCommand.getContestId(),
-                createContestUserCommand.getUserId());
+                user.getId().getValue());
         checkIfContestStarted(contest);
 
         ContestUser contestUser = contestUserDataMapper.
@@ -73,11 +78,11 @@ public class ContestUserCreateHelper {
         }
     }
 
-    private User getUser(UUID userId) {
-        Optional<User> user = userRepository.findUser(userId);
+    private User getUserByEmail(String email) {
+        Optional<User> user = userRepository.findUserByEmail(email);
         if (user.isEmpty()) {
-            log.warn("User with id: {} not found", userId);
-            throw new UserNotFoundException("Could not find user with id: " + userId);
+            log.warn("User with email: {} not found", email);
+            throw new UserNotFoundException("Could not find user with email: " + email);
         }
         return user.get();
     }
