@@ -95,11 +95,18 @@ public class ContestController {
     public ResponseEntity<CreateContestUserResponse> registerContest(
             @PathVariable UUID id,
             @RequestBody CreateContestUserCommand createContestUserCommand) {
+        String email = null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
         log.info("User registering for contest: {}", id);
         CreateContestUserResponse createContestUserResponse =
                 contestUserApplicationService.createContestUser(CreateContestUserCommand
                         .builder()
-                        .userId(createContestUserCommand.getUserId())
+                        .email(email)
                         .contestId(id)
                         .build());
         log.info("Contest User created: {}", createContestUserCommand);
