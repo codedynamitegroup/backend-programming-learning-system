@@ -59,7 +59,7 @@ public class ContestUserCreateHelper {
         checkIfContestStarted(contest);
 
         ContestUser contestUser = contestUserDataMapper.
-                createContestUserCommandToContestUser(createContestUserCommand);
+                createContestUserCommandToContestUser(createContestUserCommand, user);
         contestUser.setUser(user);
         contestUser.setContest(contest);
         ContestUserUpdatedEvent contestUserUpdatedEvent = coreDomainService.createContestUser(contestUser);

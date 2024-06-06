@@ -30,14 +30,12 @@ public class ContestUserDataMapper {
     }
 
     public ContestUser createContestUserCommandToContestUser(
-            CreateContestUserCommand createContestUserCommand) {
+            CreateContestUserCommand createContestUserCommand, User user) {
         return ContestUser.builder()
                 .contest(Contest.builder()
                         .id(new ContestId(createContestUserCommand.getContestId()))
                         .build())
-                .user(User.builder()
-                        .id(new UserId(createContestUserCommand.getUserId()))
-                        .build())
+                .user(user)
                 .updateCalendarEventState(UpdateState.CREATING)
                 .isCompleted(false)
                 .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
