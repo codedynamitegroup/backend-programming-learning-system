@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.dataaccess.module.entity;
 
+import com.backend.programming.learning.system.course.service.dataaccess.assignment.entity.AssignmentEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.organization.entity.OrganizationEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.section.entity.SectionEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
@@ -22,6 +23,10 @@ public class ModuleEntity {
     @Id
     @Column(name = "id")
     private UUID id;
+
+    @OneToOne
+    @JoinColumn(name="assignment_id", referencedColumnName = "id")
+    private AssignmentEntity assignment;
 
     private Integer cmid;
 

@@ -11,6 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class ModuleResponseEntity {
     private final UUID moduleId;
+    private final UUID assignmentId;
     private final String name;
     private final Integer visible;
     private final String typeModule;
