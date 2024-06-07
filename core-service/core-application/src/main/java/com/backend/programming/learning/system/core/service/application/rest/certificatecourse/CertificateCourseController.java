@@ -167,7 +167,7 @@ public class CertificateCourseController {
     }
 
     @PostMapping("/most-enrolled")
-    @Operation(summary = "Get all Certificate courses.")
+    @Operation(summary = "Get all Most Enrolled Certificate courses.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",

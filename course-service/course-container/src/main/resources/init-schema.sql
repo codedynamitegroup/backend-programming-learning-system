@@ -228,6 +228,29 @@ CREATE TABLE "public".course
 );
 
 
+DROP TABLE IF EXISTS "public".assignment CASCADE;
+CREATE TABLE "public".assignment
+(
+    id         uuid                      DEFAULT gen_random_uuid() NOT NULL,
+    assignment_id_moodle integer,
+    course_id  uuid             NOT NULL,
+    title      text             NOT NULL,
+    intro      text,
+    activity text,
+    score      double precision NOT NULL DEFAULT '0',
+    max_score  double precision NOT NULL DEFAULT '0',
+    time_open  TIMESTAMP WITH TIME ZONE,
+    time_close TIMESTAMP WITH TIME ZONE,
+    time_limit TIMESTAMP WITH TIME ZONE,
+    type       type             NOT null,
+    visible    boolean          NOT NULL DEFAULT '0',
+    CONSTRAINT assignment_pkey PRIMARY KEY (id),
+    CONSTRAINT assignment_course_id_fkey FOREIGN KEY (course_id)
+        REFERENCES "public".course (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
 DROP TABLE IF EXISTS "public".section CASCADE;
 CREATE TABLE "public".section
 (
@@ -247,6 +270,7 @@ DROP TABLE IF EXISTS "public".module CASCADE;
 CREATE TABLE "public".module
 (
     id          uuid    DEFAULT gen_random_uuid() NOT NULL,
+    assignment_id uuid,
     cmid integer,
     section_id uuid,
     name        text,
@@ -259,7 +283,11 @@ CREATE TABLE "public".module
 	CONSTRAINT module_section_id_fkey FOREIGN KEY (section_id)
 	    REFERENCES "public".section (id) MATCH SIMPLE
 	    ON UPDATE CASCADE
-	    ON DELETE CASCADE
+	    ON DELETE CASCADE,
+	CONSTRAINT module_assignment_id_fkey FOREIGN KEY (assignment_id)
+	    REFERENCES "public".assignment (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 );
 
 
@@ -400,29 +428,6 @@ CREATE TABLE "public".exam_question_submission
         ON DELETE CASCADE,
     CONSTRAINT exam_question_submission_exam_submission_id_fkey FOREIGN KEY (exam_question_id)
         REFERENCES "public".exam_question (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
-
-DROP TABLE IF EXISTS "public".assignment CASCADE;
-CREATE TABLE "public".assignment
-(
-    id         uuid                      DEFAULT gen_random_uuid() NOT NULL,
-    assignment_id_moodle integer,
-    course_id  uuid             NOT NULL,
-    title      text             NOT NULL,
-    intro      text,
-    activity text,
-    score      double precision NOT NULL DEFAULT '0',
-    max_score  double precision NOT NULL DEFAULT '0',
-    time_open  TIMESTAMP WITH TIME ZONE,
-    time_close TIMESTAMP WITH TIME ZONE,
-    time_limit TIMESTAMP WITH TIME ZONE,
-    type       type             NOT null,
-    visible    boolean          NOT NULL DEFAULT '0',
-    CONSTRAINT assignment_pkey PRIMARY KEY (id),
-    CONSTRAINT assignment_course_id_fkey FOREIGN KEY (course_id)
-        REFERENCES "public".course (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
