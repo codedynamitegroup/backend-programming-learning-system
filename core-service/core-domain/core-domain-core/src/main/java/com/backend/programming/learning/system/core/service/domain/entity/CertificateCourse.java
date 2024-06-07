@@ -1,12 +1,8 @@
 package com.backend.programming.learning.system.core.service.domain.entity;
 
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseTopicId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseUserId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
-import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
-import com.backend.programming.learning.system.domain.valueobject.*;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;

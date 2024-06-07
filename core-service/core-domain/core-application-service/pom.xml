@@ -25,6 +25,10 @@
         </dependency>
         <dependency>
             <groupId>com.backend.programming.learning.system</groupId>
+            <artifactId>redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.backend.programming.learning.system</groupId>
             <artifactId>outbox</artifactId>
         </dependency>
         <dependency>

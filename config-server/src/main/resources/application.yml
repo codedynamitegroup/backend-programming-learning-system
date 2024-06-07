@@ -24,6 +24,10 @@ spring:
     user:
       name: spring_cloud_user
       password: springCloud_Pwd!
+  data:
+    redis:
+      host: localhost
+      port: 6379
 
 management:
   endpoints:

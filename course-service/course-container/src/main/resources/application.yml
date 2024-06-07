@@ -52,6 +52,10 @@ spring:
     config:
       username: spring_cloud_user
       password: springCloud_Pwd!
+  data:
+    redis:
+      host: localhost
+      port: 6379
   datasource:
     url: jdbc:postgresql://localhost:5432/course-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: postgres
