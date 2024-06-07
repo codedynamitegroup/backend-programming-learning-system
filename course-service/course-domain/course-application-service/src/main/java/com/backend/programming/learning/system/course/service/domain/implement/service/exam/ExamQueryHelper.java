@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
+import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
+import com.backend.programming.learning.system.course.service.domain.mapper.exam.ExamDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamSubmissionRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
@@ -23,6 +25,7 @@ import org.springframework.stereotype.Component;
 public class ExamQueryHelper {
     private final ExamRepository examRepository;
     private final ExamSubmissionRepository examSubmissionRepository;
+    private final ExamDataMapper examDataMapper;
 
     public Exam findBy(ExamId examId) {
         Exam exam = examRepository.findBy(examId);
@@ -37,11 +40,15 @@ public class ExamQueryHelper {
     }
 
     public QueryOverviewResponse overviewExam(ExamId examId) {
+        Exam exam = examRepository.findBy(examId);
+        ExamSubmission examSubmission = examSubmissionRepository.findByExamId(examId);
+
         Integer numberOfStudent = examRepository.countStudent(examId);
         Integer numberOfSubmission = examSubmissionRepository.countSubmission(examId);
         Integer needGrading = 0;
 
         return QueryOverviewResponse.builder()
+                .exam(examDataMapper.examToQueryExamResponse(exam))
                 .numberOfStudents(numberOfStudent)
                 .submitted(numberOfSubmission)
                 .needGrading(numberOfStudent) // temp

@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -47,5 +48,10 @@ public class ExamSubmissionCommandHandler {
     @Transactional(readOnly = true)
     public QueryExamSubmissionResponse submitExamDetail(UUID submissionId) {
         return examSubmissionQueryHelper.submitExamDetail(submissionId);
+    }
+
+    @Transactional(readOnly = true)
+    public List<QueryExamSubmissionResponse> findByExamIdAndUserId(UUID examId, UUID userId) {
+        return examSubmissionQueryHelper.findByExamIdAndUserId(examId, userId);
     }
 }

@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
 import jakarta.validation.Valid;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -25,4 +26,6 @@ public interface ExamSubmissionApplicationService {
     CreateExamSubmissionResponse endExam(CreateExamSubmissionStartCommand createExamSubmissionStartCommand);
 
     QueryExamSubmissionResponse submitExamDetail(UUID submissionId);
+
+    List<QueryExamSubmissionResponse> findByExamIdAndUserId(UUID examId, UUID userId);
 }

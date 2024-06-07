@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
 @Repository
 public interface ExamSubmissionJpaRepository extends JpaRepository<ExamSubmissionEntity, UUID> {
     Optional<ExamSubmissionEntity> findById(UUID id);
@@ -22,4 +23,13 @@ public interface ExamSubmissionJpaRepository extends JpaRepository<ExamSubmissio
             WHERE es.exam.id = :examId
             """)
     Integer countSubmission(UUID examId);
+
+    Optional<List<ExamSubmissionEntity>> findByExamId(UUID examId);
+
+    @Query("""
+            SELECT es
+            FROM ExamSubmissionEntity es
+            WHERE es.exam.id = :examId AND es.user.id = :userId
+            """)
+    List<ExamSubmissionEntity> findByExamIdAndUserId(UUID examId, UUID userId);
 }
