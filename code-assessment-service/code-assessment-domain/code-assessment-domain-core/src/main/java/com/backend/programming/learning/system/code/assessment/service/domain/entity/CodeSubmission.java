@@ -18,6 +18,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
     private Double grade;
     private Double runTime;
     private Double memory;
+    private String sourceCode;
     private String headCode;
     private String bodyCode;
     private String tailCode;
@@ -65,6 +66,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         grade = builder.grade;
         runTime = builder.runTime;
         memory = builder.memory;
+        sourceCode = builder.sourceCode;
         headCode = builder.headCode;
         bodyCode = builder.bodyCode;
         tailCode = builder.tailCode;
@@ -72,7 +74,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         aiAssessment = builder.aiAssessment;
         sonaqueAssessment = builder.sonaqueAssessment;
         numOfTestCase = builder.numOfTestCase;
-        numOfTestCaseGraded = builder.numOfTestCaseGraded;
+        setNumOfTestCaseGraded(builder.numOfTestCaseGraded);
         copyState = builder.copyState;
         setCodeSubmissionTestCaseList(builder.codeSubmissionTestCaseList);
         setProgrammingLanguageCodeQuestion(builder.programmingLanguageCodeQuestion);
@@ -173,6 +175,10 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         return tailCode;
     }
 
+    public String getSourceCode() {
+        return sourceCode;
+    }
+
     public GradingStatus getGradingStatus() {
         return gradingStatus;
     }
@@ -227,6 +233,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         private Double grade;
         private Double runTime;
         private Double memory;
+        private String sourceCode;
         private String headCode;
         private String bodyCode;
         private String tailCode;
@@ -296,6 +303,11 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
 
         public Builder memory(Double val) {
             memory = val;
+            return this;
+        }
+
+        public Builder sourceCode(String val) {
+            sourceCode = val;
             return this;
         }
 

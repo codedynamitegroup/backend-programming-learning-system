@@ -37,9 +37,10 @@ public class CodeSubmissionDataMapper {
                 .languageId(new ProgrammingLanguageId(createCodeSubmissionCommand.getLanguageId()))
                 .userId(user.getId())
                 .codeQuestion(codeQuestion)
-                .headCode(createCodeSubmissionCommand.getHeadCode())
-                .bodyCode(createCodeSubmissionCommand.getBodyCode())
-                .tailCode(createCodeSubmissionCommand.getTailCode())
+                .sourceCode(createCodeSubmissionCommand.getSourceCode())
+//                .headCode(createCodeSubmissionCommand.getHeadCode())
+//                .bodyCode(createCodeSubmissionCommand.getBodyCode())
+//                .tailCode(createCodeSubmissionCommand.getTailCode())
                 .build();
     }
 
@@ -66,9 +67,10 @@ public class CodeSubmissionDataMapper {
                 .maxGrade(codeSubmission.getCodeQuestion().getMaxGrade())
                 .achievedGrade(codeSubmission.getGrade())
                 .description(codeSubmission.getStatusDescription())
-                .headCode(decodeBase64ToString(codeSubmission.getHeadCode()))
-                .bodyCode(decodeBase64ToString(codeSubmission.getBodyCode()))
-                .tailCode(decodeBase64ToString(codeSubmission.getTailCode()))
+                .sourceCode(decodeBase64ToString(codeSubmission.getSourceCode()))
+//                .headCode(decodeBase64ToString(codeSubmission.getHeadCode()))
+//                .bodyCode(decodeBase64ToString(codeSubmission.getBodyCode()))
+//                .tailCode(decodeBase64ToString(codeSubmission.getTailCode()))
                 .createdAt(codeSubmission.getCreatedAt())
                 .build();
     }
@@ -106,7 +108,8 @@ public class CodeSubmissionDataMapper {
                 .codeQuestionId(codeSubmission.getCodeQuestion().getId().getValue().toString())
                 .userId(codeSubmission.getUserId().getValue().toString())
                 .programmingLanguageId(codeSubmission.getLanguageId().getValue().toString())
-                .bodyCode(codeSubmission.getBodyCode())
+//                .bodyCode(codeSubmission.getBodyCode())
+                .bodyCode(codeSubmission.getSourceCode())
                 .grade(codeSubmission.getGrade() == null? null: codeSubmission.getGrade().floatValue())
                 .pass(codeSubmission.getGrade() == null? null: codeSubmission.getGrade().floatValue() == codeSubmission.getCodeQuestion().getMaxGrade())
                 .createdAt(codeSubmission.getCreatedAt())

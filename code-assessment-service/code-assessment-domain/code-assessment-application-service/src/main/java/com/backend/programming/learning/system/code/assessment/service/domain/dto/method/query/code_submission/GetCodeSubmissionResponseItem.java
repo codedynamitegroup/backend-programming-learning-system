@@ -40,14 +40,16 @@ public class GetCodeSubmissionResponseItem {
 
     String description;
 
+//    @Setter
+//    String headCode;
+//
+//    @Setter
+//    String bodyCode;
+//
+//    @Setter
+//    String tailCode;
     @Setter
-    String headCode;
-
-    @Setter
-    String bodyCode;
-
-    @Setter
-    String tailCode;
+    String sourceCode;
 
     @Setter
     FirstFailTestCase firstFailTestCase;

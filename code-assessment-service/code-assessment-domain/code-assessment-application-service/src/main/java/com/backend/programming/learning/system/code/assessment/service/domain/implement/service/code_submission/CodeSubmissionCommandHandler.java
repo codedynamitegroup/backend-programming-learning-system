@@ -95,9 +95,10 @@ public class CodeSubmissionCommandHandler {
         Page<GetCodeSubmissionResponseItem> list = codeSubmissions.map(
                         codeSubmissionDataMapper::codeSubmissionToGetCodeSubmissionResponseItem);
         list.forEach(item -> {
-            item.setHeadCode(null);
-            item.setBodyCode(null);
-            item.setTailCode(null);
+            item.setSourceCode(null);
+//            item.setHeadCode(null);
+//            item.setBodyCode(null);
+//            item.setTailCode(null);
         });
         return codeSubmissionDataMapper.pagableToGetCodeSubmissionReponse(list);
     }
