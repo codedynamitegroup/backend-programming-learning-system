@@ -1,15 +1,12 @@
 package com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse;
 
-import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-
 import jakarta.validation.constraints.NotNull;
+import lombok.*;
+
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
@@ -19,7 +16,8 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @Builder
 @AllArgsConstructor
 @JsonInclude(NON_NULL)
-public class CertificateCourseResponseEntity {
+@NoArgsConstructor(force = true)
+public class GeneralCertificateCourseResponseEntity {
     @NotNull
     @JsonProperty("certificateCourseId")
     private final UUID certificateCourseId;
@@ -56,9 +54,6 @@ public class CertificateCourseResponseEntity {
     @NotNull
     @JsonProperty("numOfReviews")
     private final Integer numOfReviews;
-    @NotNull
-    @JsonProperty("currentQuestion")
-    private final QuestionResponseEntity currentQuestion;
     @NotNull
     @JsonProperty("isRegistered")
     private final Boolean isRegistered;

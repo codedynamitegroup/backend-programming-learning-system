@@ -61,7 +61,7 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
         from certificate_course cc
         left join certificate_course_user ccu on cc.id = ccu.certificate_course_id
         group by cc.id
-        order by ccu.avg_rating desc, count(ccu.user_id) desc
+        order by cc.avg_rating desc, count(ccu.user_id) desc
         limit 5
 """, nativeQuery = true)
     List<CertificateCourseEntity> findMostEnrolledCertificateCourses();
@@ -72,7 +72,7 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
         left join certificate_course_user ccu on cc.id = ccu.certificate_course_id
         where coalesce(?1, null) is null or cc.topic_id in ?1
         group by cc.id
-        order by ccu.avg_rating desc, count(ccu.user_id) desc
+        order by cc.avg_rating desc, count(ccu.user_id) desc
         limit 5
 """, nativeQuery = true)
     List<CertificateCourseEntity> findMostEnrolledCertificateCoursesByTopicIds(

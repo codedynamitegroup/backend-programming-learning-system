@@ -90,7 +90,7 @@ public class CertificateCourseQueryHelper {
     @Transactional(readOnly = true)
     public List<CertificateCourse> queryAllCertificateCourses(
             String courseName,
-            List<UUID> filterTopicIds,
+            UUID filterTopicId,
             IsRegisteredFilter isRegisteredFilter,
             String email
     ) {
@@ -98,7 +98,7 @@ public class CertificateCourseQueryHelper {
             case ALL: {
                 List<CertificateCourse> certificateCourseList = certificateCourseRepository.findAllCertificateCourses(
                         courseName,
-                        filterTopicIds
+                        filterTopicId
                 );
                 Optional<User> userOptional = email != null ? userRepository.findByEmail(email): Optional.empty();
 
@@ -142,7 +142,7 @@ public class CertificateCourseQueryHelper {
                 List<CertificateCourse> certificateCourseList =
                         certificateCourseRepository.findAllCertificateCoursesByIsRegistered(
                         courseName,
-                        filterTopicIds,
+                        filterTopicId,
                         true,
                         user.getId().getValue()
                 );
@@ -183,7 +183,7 @@ public class CertificateCourseQueryHelper {
                 List<CertificateCourse> certificateCourseList =
                         certificateCourseRepository.findAllCertificateCoursesByIsRegistered(
                         courseName,
-                        filterTopicIds,
+                        filterTopicId,
                         false,
                         user.getId().getValue()
                 );
@@ -220,6 +220,7 @@ public class CertificateCourseQueryHelper {
             for (Topic topic : topicIds) {
                 topicIdsList.add(topic.getId().getValue());
             }
+            log.info("Topic ids of registered courses by user: {}", topicIdsList);
             certificateCourseList = certificateCourseRepository
                     .findMostEnrolledCertificateCoursesByTopicIds(topicIdsList);
         }

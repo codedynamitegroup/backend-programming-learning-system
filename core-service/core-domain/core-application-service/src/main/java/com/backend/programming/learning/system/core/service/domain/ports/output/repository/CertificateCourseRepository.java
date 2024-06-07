@@ -18,12 +18,12 @@ public interface CertificateCourseRepository {
 
     List<CertificateCourse> findAllCertificateCourses(
             String courseName,
-            List<UUID> filterTopicIds
+            UUID filterTopicId
     );
 
     List<CertificateCourse> findAllCertificateCoursesByIsRegistered(
             String courseName,
-            List<UUID> filterTopicIds,
+            UUID filterTopicId,
             boolean isRegistered,
             UUID userId
     );
