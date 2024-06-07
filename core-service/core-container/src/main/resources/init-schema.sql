@@ -118,7 +118,6 @@ CREATE TABLE "public".certificate_course
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_by uuid NOT NULL,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    fts_document tsvector,
     CONSTRAINT certificate_course_pkey PRIMARY KEY (id),
     CONSTRAINT certificate_course_created_by_fkey FOREIGN KEY (created_by)
         REFERENCES "public".user (id) MATCH SIMPLE
@@ -133,24 +132,6 @@ CREATE TABLE "public".certificate_course
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
-
--- CREATE INDEX certificate_course_name_idx ON "public".certificate_course (name);
---postgres function sucks
-CREATE OR REPLACE FUNCTION update_certificate_course_fts_document()
-RETURNS TRIGGER AS '
-BEGIN
-    NEW.fts_document := to_tsvector(unaccent(NEW.name) || '' '' || NEW.name);
-    RETURN NEW;
-END;
-' LANGUAGE plpgsql;
-
-create trigger tsvector_update_on_certificate_course before insert or update of name
-    on certificate_course
-    for each row
-    execute procedure update_certificate_course_fts_document();
-
-create index certificate_course_fts_index on certificate_course(fts_document);
-
 
 DROP TABLE IF EXISTS "public".chapter CASCADE;
 CREATE TABLE "public".chapter
@@ -292,7 +273,6 @@ CREATE TABLE "public".contest
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_by uuid NOT NULL,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    fts_document tsvector,
     CONSTRAINT contest_pkey PRIMARY KEY (id),
     CONSTRAINT contest_org_id_fkey FOREIGN KEY (org_id)
         REFERENCES "public".organization (id) MATCH SIMPLE
@@ -307,23 +287,6 @@ CREATE TABLE "public".contest
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
-
--- CREATE INDEX contest_name_idx ON "public".contest (name);
-
-CREATE OR REPLACE FUNCTION update_contest_fts_document()
-RETURNS TRIGGER AS '
-BEGIN
-    NEW.fts_document := to_tsvector(unaccent(NEW.name) || '' '' || NEW.name);
-    RETURN NEW;
-END;
-' LANGUAGE plpgsql;
-
-create trigger tsvector_update_on_contest before insert or update of name
-    on contest
-    for each row
-    execute procedure update_contest_fts_document();
-
-create index contest_fts_index on contest(fts_document);
 
 DROP TABLE IF EXISTS "public".contest_user CASCADE;
 CREATE TABLE "public".contest_user

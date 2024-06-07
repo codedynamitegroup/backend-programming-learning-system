@@ -31,6 +31,8 @@ public interface CertificateCourseRepository {
     void deleteCertificateCourse(UUID certificateCourseId);
     List<CertificateCourse> findMostEnrolledCertificateCourses();
 
+    List<CertificateCourse> findMostEnrolledCertificateCoursesByTopicIds(List<UUID> topicIds);
+
     int countNumOfCompletedQuestions(UUID certificateCourseId, UUID userId);
     int countNumOfQuestionsByCertificateId(UUID certificateCourseId);
     int countNumOfStudentsByCertificateId(UUID certificateCourseId);

@@ -87,13 +87,6 @@ public class CertificateCourseCommandHandler {
                         IsRegisteredFilter.valueOf(queryAllCertificateCoursesCommand.getIsRegisteredFilter()),
                         queryAllCertificateCoursesCommand.getEmail()
                 );
-//        List<CertificateCourse> mostEnrolledCertificateCourses = certificateCourseQueryHelper
-//                .queryMostEnrolledCertificateCourses(
-//                        queryAllCertificateCoursesCommand.getCourseName(),
-//                        queryAllCertificateCoursesCommand.getFilterTopicIds(),
-//                        IsRegisteredFilter.valueOf(queryAllCertificateCoursesCommand.getIsRegisteredFilter()),
-//                        queryAllCertificateCoursesCommand.getEmail()
-//                );
 
         return certificateCourseDataMapper
                 .certificateCoursesToQueryAllCertificateCoursesResponse(certificateCourses);

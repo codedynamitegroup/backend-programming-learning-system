@@ -147,13 +147,6 @@ public class ContestQueryHelper {
     }
 
     @Transactional(readOnly = true)
-    public QueryStatisticsOfContestResponse queryStatisticsOfContest(
-            UUID contestId
-    ) {
-        return null;
-    }
-
-    @Transactional(readOnly = true)
     public List<Contest> findMostPopularContests() {
         log.info("Querying most popular upcoming contests");
         List<Contest> contestList = contestRepository.findMostPopularContests();
