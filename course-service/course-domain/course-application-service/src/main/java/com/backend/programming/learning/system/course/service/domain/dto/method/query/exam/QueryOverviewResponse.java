@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.dto.method.query.exam;
 
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.exam.ExamResponseEntity;
 import lombok.Builder;
 
 /**
@@ -10,6 +11,8 @@ import lombok.Builder;
  */
 @Builder
 public record QueryOverviewResponse(
+        ExamResponseEntity exam,
+        ExamSubmission examSubmission,
         Integer numberOfStudents,
         Integer submitted,
         Integer needGrading

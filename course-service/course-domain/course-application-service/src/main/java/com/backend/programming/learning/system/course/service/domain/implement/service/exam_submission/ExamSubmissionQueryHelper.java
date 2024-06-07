@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,5 +32,18 @@ public class ExamSubmissionQueryHelper {
         ExamSubmission examSubmission = examSubmissionRepository.findBy(submissionId);
         List<QuestionSubmission> questionSubmissions = questionSubmissionRepository.findAllByExamSubmissionId(submissionId);
         return examSubmissionDataMapper.mapToQueryExamSubmissionResponse(examSubmission, questionSubmissions);
+    }
+
+    public List<QueryExamSubmissionResponse> findByExamIdAndUserId(UUID examId, UUID userId) {
+        List<QueryExamSubmissionResponse> examSubmissionResponses = new ArrayList<>();
+        List<ExamSubmission> examSubmissions = examSubmissionRepository.findAllByExamIdAndUserId(examId, userId);
+
+        examSubmissions.forEach(examSubmission -> {
+            List<QuestionSubmission> questionSubmissions = questionSubmissionRepository
+                    .findAllByExamSubmissionId(examSubmission.getId().getValue());
+            examSubmissionResponses.add(examSubmissionDataMapper.mapToQueryExamSubmissionResponse(examSubmission, questionSubmissions));
+        });
+
+        return examSubmissionResponses;
     }
 }
