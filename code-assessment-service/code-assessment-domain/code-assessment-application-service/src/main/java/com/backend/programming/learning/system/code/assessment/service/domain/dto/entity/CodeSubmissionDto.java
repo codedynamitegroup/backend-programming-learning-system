@@ -14,7 +14,8 @@ import java.util.UUID;
 public class CodeSubmissionDto {
     UUID id;
     UUID languageId;
-    String headCode;
-    String bodyCode;
-    String tailCode;
+    String sourceCode;
+//    String headCode;
+//    String bodyCode;
+//    String tailCode;
 }
