@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -22,15 +23,18 @@ public class CertificateCourseQueryHelper {
     private final UserRepository userRepository;
     private final CertificateCourseUserRepository certificateCourseUserRepository;
     private final ChapterQuestionRepository chapterQuestionRepository;
+    private final TopicRepository topicRepository;
 
     public CertificateCourseQueryHelper(CertificateCourseRepository certificateCourseRepository,
                                         UserRepository userRepository,
                                         CertificateCourseUserRepository certificateCourseUserRepository,
-                                        ChapterQuestionRepository chapterQuestionRepository) {
+                                        ChapterQuestionRepository chapterQuestionRepository,
+                                        TopicRepository topicRepository) {
         this.certificateCourseRepository = certificateCourseRepository;
         this.userRepository = userRepository;
         this.certificateCourseUserRepository = certificateCourseUserRepository;
         this.chapterQuestionRepository = chapterQuestionRepository;
+        this.topicRepository = topicRepository;
     }
 
     @Transactional(readOnly = true)
@@ -200,9 +204,26 @@ public class CertificateCourseQueryHelper {
     public List<CertificateCourse> queryMostEnrolledCertificateCourses(
             String email
     ) {
-        List<CertificateCourse> certificateCourseList = certificateCourseRepository.findMostEnrolledCertificateCourses();
-
         Optional<User> userOptional = email != null ? userRepository.findByEmail(email): Optional.empty();
+
+        List<CertificateCourse> certificateCourseList;
+        if (userOptional.isEmpty()) {
+            certificateCourseList = certificateCourseRepository
+                            .findMostEnrolledCertificateCourses();
+        } else {
+            // Get all topic ids of registered courses by user
+            List<Topic> topicIds = topicRepository
+                    .findAllTopicsOfRegisteredCertificateCoursesByUserId(
+                            userOptional.get().getId().getValue()
+                    );
+            List<UUID> topicIdsList = new ArrayList<>();
+            for (Topic topic : topicIds) {
+                topicIdsList.add(topic.getId().getValue());
+            }
+            certificateCourseList = certificateCourseRepository
+                    .findMostEnrolledCertificateCoursesByTopicIds(topicIdsList);
+        }
+
 
         for (CertificateCourse certificateCourse : certificateCourseList) {
             if (userOptional.isPresent()) {
@@ -222,15 +243,6 @@ public class CertificateCourseQueryHelper {
                     certificateCourse.setRegistered(false);
                     certificateCourse.setNumOfCompletedQuestions(0);
                 }
-
-                Optional<ChapterQuestion> currentQuestion = chapterQuestionRepository
-                        .findFirstUncompletedQuestionByCertificateCourseIdAndUserId(
-                                certificateCourse.getId().getValue(),
-                                userOptional.get().getId().getValue()
-                        );
-                currentQuestion.ifPresent(
-                        chapterQuestion -> certificateCourse.setCurrentQuestion(chapterQuestion.getQuestion())
-                );
             }
 
             certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourse.getId().getValue()));
