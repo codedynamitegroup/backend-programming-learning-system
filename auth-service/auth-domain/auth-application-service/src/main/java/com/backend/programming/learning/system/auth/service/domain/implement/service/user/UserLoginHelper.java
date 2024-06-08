@@ -9,6 +9,7 @@ import com.backend.programming.learning.system.auth.service.domain.exception.Aut
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
 import com.backend.programming.learning.system.auth.service.domain.exception.UnAuthorizedServiceException;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
+import com.backend.programming.learning.system.domain.DomainConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,8 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 @Slf4j
@@ -51,6 +54,7 @@ public class UserLoginHelper {
         }
 
         user.setRefreshToken(result.getRefresh_token());
+        user.setLastLogin(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
         saveUser(user);
 
         return LoginUserResponse.builder()
