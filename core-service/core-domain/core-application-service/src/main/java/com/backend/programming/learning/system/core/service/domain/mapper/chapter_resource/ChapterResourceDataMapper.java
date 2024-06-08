@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter.CreateChapterResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.chapter.UpdateChapterResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterQuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResourceResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
@@ -26,10 +27,19 @@ import java.util.List;
 
 @Component
 public class ChapterResourceDataMapper {
+    private final ChapterQuestionDataMapper chapterQuestionDataMapper;
+
+    public ChapterResourceDataMapper(ChapterQuestionDataMapper chapterQuestionDataMapper) {
+        this.chapterQuestionDataMapper = chapterQuestionDataMapper;
+    }
+
     public ChapterResourceResponseEntity chapterResourceToChapterResourceResponse(ChapterResource chapterResource) {
+        ChapterQuestionResponseEntity question = chapterResource.getQuestion() != null
+                ? chapterQuestionDataMapper.questionToChapterQuestionResponse(chapterResource.getQuestion())
+                : null;
         return ChapterResourceResponseEntity.builder()
                 .chapterId(chapterResource.getChapter().getId().getValue())
-                .questionId(chapterResource.getQuestion() != null ? chapterResource.getQuestion().getId().getValue() : null)
+                .question(question)
                 .resourceType(chapterResource.getResourceType().toString())
                 .lessonHtml(chapterResource.getLessonHtml())
                 .youtubeVideoUrl(chapterResource.getYoutubeVideoUrl())
