@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse;
 
-import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.GeneralCertificateCourseResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -15,6 +15,6 @@ import java.util.List;
 public class QueryAllCertificateCoursesResponse {
     @NotNull
     @JsonProperty("certificateCourses")
-    private final List<GeneralCertificateCourseResponseEntity> certificateCourses;
+    private final List<CertificateCourseResponseEntity> certificateCourses;
 
 }

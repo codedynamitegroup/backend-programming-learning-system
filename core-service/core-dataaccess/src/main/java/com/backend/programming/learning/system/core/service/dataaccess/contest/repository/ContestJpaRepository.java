@@ -1,20 +1,12 @@
 package com.backend.programming.learning.system.core.service.dataaccess.contest.repository;
 
-import com.backend.programming.learning.system.core.service.dataaccess.chapter_question.entity.ChapterQuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.contest.entity.ContestEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.contest.projection.ContestProjection;
-import com.backend.programming.learning.system.core.service.dataaccess.topic.entity.TopicEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
-import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZonedDateTime;
 import java.util.List;

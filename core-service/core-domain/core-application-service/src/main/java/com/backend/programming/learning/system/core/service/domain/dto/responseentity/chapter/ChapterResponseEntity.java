@@ -3,11 +3,14 @@ package com.backend.programming.learning.system.core.service.domain.dto.response
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.NoArgsConstructor;
+
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -30,7 +33,7 @@ public class ChapterResponseEntity {
     @NotNull
     private final String description;
     @NotNull
-    private final List<QuestionResponseEntity> questions;
+    private final List<ChapterResourceResponseEntity> resources;
     @NotNull
     private final UserResponseEntity createdBy;
     @NotNull

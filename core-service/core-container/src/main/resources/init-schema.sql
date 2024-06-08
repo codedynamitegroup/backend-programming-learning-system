@@ -15,6 +15,9 @@ CREATE TYPE difficulty AS ENUM ('EASY', 'MEDIUM', 'HARD');
 DROP TYPE IF EXISTS qtype;
 CREATE TYPE qtype AS ENUM ('MULTIPLE_CHOICE', 'SHORT_ANSWER', 'CODE', 'ESSAY', 'TRUE_FALSE');
 
+DROP TYPE IF EXISTS resource_type;
+CREATE TYPE resource_type AS ENUM ('CODE', 'VIDEO', 'LESSON');
+
 DROP TYPE IF EXISTS plagiarism_detection_report_status;
 CREATE TYPE plagiarism_detection_report_status AS ENUM ('PROCESSING', 'COMPLETED', 'FAILED');
 
@@ -345,13 +348,34 @@ CREATE TABLE "public".question
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "public".chapter_question CASCADE;
-CREATE TABLE "public".chapter_question
+-- DROP TABLE IF EXISTS "public".chapter_question CASCADE;
+-- CREATE TABLE "public".chapter_question
+-- (
+--     id uuid DEFAULT uuid_generate_v4() NOT NULL,
+--     question_id uuid NOT NULL,
+--     chapter_id uuid NOT NULL,
+--     CONSTRAINT chapter_question_pkey PRIMARY KEY (id),
+--     CONSTRAINT question_id_fkey FOREIGN KEY (question_id)
+--         REFERENCES "public".question (id) MATCH SIMPLE
+--         ON UPDATE CASCADE
+--         ON DELETE CASCADE,
+--     CONSTRAINT chapter_id_fkey FOREIGN KEY (chapter_id)
+--         REFERENCES "public".chapter (id) MATCH SIMPLE
+--         ON UPDATE CASCADE
+--         ON DELETE CASCADE,
+--     CONSTRAINT chapter_question_question_id_chapter_id_key UNIQUE (question_id, chapter_id)
+-- );
+
+DROP TABLE IF EXISTS "public".chapter_resource CASCADE;
+CREATE TABLE "public".chapter_resource
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
-    question_id uuid NOT NULL,
     chapter_id uuid NOT NULL,
-    CONSTRAINT chapter_question_pkey PRIMARY KEY (id),
+    resource_type resource_type NOT NULL,
+    question_id uuid,
+    lesson_html text,
+    youtube_video_url text,
+    CONSTRAINT chapter_resource_pkey PRIMARY KEY (id),
     CONSTRAINT question_id_fkey FOREIGN KEY (question_id)
         REFERENCES "public".question (id) MATCH SIMPLE
         ON UPDATE CASCADE
@@ -359,8 +383,25 @@ CREATE TABLE "public".chapter_question
     CONSTRAINT chapter_id_fkey FOREIGN KEY (chapter_id)
         REFERENCES "public".chapter (id) MATCH SIMPLE
         ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS "public".chapter_resource_user CASCADE;
+CREATE TABLE "public".chapter_resource_user
+(
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
+    chapter_resource_id uuid NOT NULL,
+    user_id uuid NOT NULL,
+    is_viewed bool DEFAULT FALSE,
+    CONSTRAINT chapter_resource_user_pkey PRIMARY KEY (id),
+    CONSTRAINT chapter_resource_user_user_id_fkey FOREIGN KEY (user_id)
+        REFERENCES "public".user (id) MATCH SIMPLE
+        ON UPDATE CASCADE
         ON DELETE CASCADE,
-    CONSTRAINT chapter_question_question_id_chapter_id_key UNIQUE (question_id, chapter_id)
+    CONSTRAINT chapter_resource_user_chapter_resource_id_fkey FOREIGN KEY (chapter_resource_id)
+        REFERENCES "public".chapter_resource (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS "public".contest_question CASCADE;

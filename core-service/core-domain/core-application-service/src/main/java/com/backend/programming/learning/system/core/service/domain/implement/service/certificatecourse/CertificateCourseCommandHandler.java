@@ -78,7 +78,7 @@ public class CertificateCourseCommandHandler {
     }
 
     @Transactional(readOnly = true)
-    public QueryAllMyCertificateCoursesResponse findAllMyCertificateCourses(
+    public QueryAllCertificateCoursesResponse findAllMyCertificateCourses(
             QueryAllCertificateCoursesCommand queryAllCertificateCoursesCommand) {
         List<CertificateCourse> certificateCourses = certificateCourseQueryHelper
                 .queryAllCertificateCourses(
@@ -89,7 +89,7 @@ public class CertificateCourseCommandHandler {
                 );
 
         return certificateCourseDataMapper
-                .certificateCoursesToQueryAllMyCertificateCoursesResponse(certificateCourses);
+                .certificateCoursesToQueryAllCertificateCoursesResponse(certificateCourses);
     }
 
     @Transactional(readOnly = true)

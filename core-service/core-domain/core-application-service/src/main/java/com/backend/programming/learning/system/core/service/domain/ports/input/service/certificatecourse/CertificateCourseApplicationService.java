@@ -21,7 +21,7 @@ public interface CertificateCourseApplicationService {
     CertificateCourseResponseEntity queryCertificateCourse(
             @Valid QueryCertificateCourseCommand queryCertificateCourseCommand);
 
-    QueryAllMyCertificateCoursesResponse queryAllMyCertificateCourses(
+    QueryAllCertificateCoursesResponse queryAllMyCertificateCourses(
             @Valid QueryAllCertificateCoursesCommand queryAllCertificateCoursesCommand);
 
     QueryAllCertificateCoursesResponse queryAllCertificateCourses(

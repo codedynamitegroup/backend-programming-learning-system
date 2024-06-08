@@ -107,13 +107,13 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
     }
 
     @Override
-    public int countNumOfCompletedQuestions(UUID certificateCourseId, UUID userId) {
-        return certificateCourseJpaRepository.countNumOfCompletedQuestions(certificateCourseId, userId);
+    public int countNumOfCompletedResources(UUID certificateCourseId, UUID userId) {
+        return certificateCourseJpaRepository.countNumOfCompletedResources(certificateCourseId, userId);
     }
 
     @Override
-    public int countNumOfQuestionsByCertificateId(UUID certificateCourseId) {
-        return certificateCourseJpaRepository.countNumOfQuestionsByCertificateId(certificateCourseId);
+    public int countNumOfResourcesByCertificateId(UUID certificateCourseId) {
+        return certificateCourseJpaRepository.countNumOfResourcesByCertificateId(certificateCourseId);
     }
 
     @Override

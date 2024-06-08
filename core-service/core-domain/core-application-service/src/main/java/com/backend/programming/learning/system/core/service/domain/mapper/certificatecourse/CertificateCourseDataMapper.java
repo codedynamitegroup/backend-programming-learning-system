@@ -4,15 +4,15 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllMostEnrolledCertificateCoursesResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllMyCertificateCoursesResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
-import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.GeneralCertificateCourseResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResourceResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
+import com.backend.programming.learning.system.core.service.domain.mapper.chapter_resource.ChapterResourceDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.topic.TopicDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
@@ -21,7 +21,6 @@ import com.backend.programming.learning.system.core.service.domain.valueobject.S
 import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.time.ZoneId;
@@ -34,14 +33,14 @@ import java.util.List;
 public class CertificateCourseDataMapper {
     private final TopicDataMapper topicDataMapper;
     private final UserDataMapper userDataMapper;
-    private final QuestionDataMapper questionDataMapper;
+    private final ChapterResourceDataMapper chapterResourceDataMapper;
 
     public CertificateCourseDataMapper(TopicDataMapper topicDataMapper,
                                        UserDataMapper userDataMapper,
-                                       QuestionDataMapper questionDataMapper) {
+                                       ChapterResourceDataMapper chapterResourceDataMapper) {
         this.topicDataMapper = topicDataMapper;
         this.userDataMapper = userDataMapper;
-        this.questionDataMapper = questionDataMapper;
+        this.chapterResourceDataMapper = chapterResourceDataMapper;
     }
 
     public CertificateCourse createCertificateCourseCommandToCertificateCourse(
@@ -84,9 +83,9 @@ public class CertificateCourseDataMapper {
                 topicToQueryTopicResponse(certificateCourse.getTopic());
         UserResponseEntity createdByResponse = userDataMapper.userToUserResponseEntity(certificateCourse.getCreatedBy());
         UserResponseEntity updatedByResponse = userDataMapper.userToUserResponseEntity(certificateCourse.getUpdatedBy());
-        QuestionResponseEntity questionResponseEntity = certificateCourse.getCurrentQuestion() == null
+        ChapterResourceResponseEntity chapterResourceResponseEntity = certificateCourse.getCurrentResource() == null
                 ? null
-                : questionDataMapper.questionToQuestionResponseEntity(certificateCourse.getCurrentQuestion());
+                : chapterResourceDataMapper.chapterResourceToChapterResourceResponse(certificateCourse.getCurrentResource());
 
         return CertificateCourseResponseEntity.builder()
                 .certificateCourseId(certificateCourse.getId().getValue())
@@ -98,38 +97,11 @@ public class CertificateCourseDataMapper {
                 .endTime(certificateCourse.getEndTime())
                 .topic(topicResponseEntity)
                 .numOfStudents(certificateCourse.getNumOfStudents())
-                .numOfQuestions(certificateCourse.getNumOfQuestions())
+                .numOfResources(certificateCourse.getNumOfResources())
+                .numOfCompletedResources(certificateCourse.getNumOfCompletedResources())
+                .currentResource(chapterResourceResponseEntity)
                 .numOfReviews(certificateCourse.getNumOfReviews())
-                .numOfCompletedQuestions(certificateCourse.getNumOfCompletedQuestions())
-                .currentQuestion(questionResponseEntity)
                 .isRegistered(certificateCourse.getRegistered())
-                .createdBy(createdByResponse)
-                .updatedBy(updatedByResponse)
-                .createdAt(certificateCourse.getCreatedAt())
-                .updatedAt(certificateCourse.getUpdatedAt())
-                .build();
-    }
-
-    public GeneralCertificateCourseResponseEntity certificateCourseToGeneralCertificateCourseResponseEntity(
-            CertificateCourse certificateCourse) {
-        TopicResponseEntity topicResponseEntity = topicDataMapper.
-                topicToQueryTopicResponse(certificateCourse.getTopic());
-        UserResponseEntity createdByResponse = userDataMapper.userToUserResponseEntity(certificateCourse.getCreatedBy());
-        UserResponseEntity updatedByResponse = userDataMapper.userToUserResponseEntity(certificateCourse.getUpdatedBy());
-
-        return GeneralCertificateCourseResponseEntity.builder()
-                .certificateCourseId(certificateCourse.getId().getValue())
-                .name(certificateCourse.getName())
-                .description(certificateCourse.getDescription())
-                .skillLevel(certificateCourse.getSkillLevel().name())
-                .avgRating(certificateCourse.getAvgRating())
-                .startTime(certificateCourse.getStartTime())
-                .endTime(certificateCourse.getEndTime())
-                .topic(topicResponseEntity)
-                .numOfStudents(certificateCourse.getNumOfStudents())
-                .numOfQuestions(certificateCourse.getNumOfQuestions())
-                .numOfReviews(certificateCourse.getNumOfReviews())
-                .numOfCompletedQuestions(certificateCourse.getNumOfCompletedQuestions())
                 .createdBy(createdByResponse)
                 .updatedBy(updatedByResponse)
                 .createdAt(certificateCourse.getCreatedAt())
@@ -139,24 +111,12 @@ public class CertificateCourseDataMapper {
 
     public QueryAllCertificateCoursesResponse certificateCoursesToQueryAllCertificateCoursesResponse(
             List<CertificateCourse> certificateCourses) {
-        List<GeneralCertificateCourseResponseEntity> certificateCourseResponseEntities = new ArrayList<>();
-        for (CertificateCourse certificateCourse : certificateCourses) {
-            certificateCourseResponseEntities.add(certificateCourseToGeneralCertificateCourseResponseEntity(certificateCourse));
-        }
-
-        return QueryAllCertificateCoursesResponse.builder()
-                .certificateCourses(certificateCourseResponseEntities)
-                .build();
-    }
-
-    public QueryAllMyCertificateCoursesResponse certificateCoursesToQueryAllMyCertificateCoursesResponse(
-            List<CertificateCourse> certificateCourses) {
         List<CertificateCourseResponseEntity> certificateCourseResponseEntities = new ArrayList<>();
         for (CertificateCourse certificateCourse : certificateCourses) {
             certificateCourseResponseEntities.add(certificateCourseToQueryCertificateCourseResponse(certificateCourse));
         }
 
-        return QueryAllMyCertificateCoursesResponse.builder()
+        return QueryAllCertificateCoursesResponse.builder()
                 .certificateCourses(certificateCourseResponseEntities)
                 .build();
     }
