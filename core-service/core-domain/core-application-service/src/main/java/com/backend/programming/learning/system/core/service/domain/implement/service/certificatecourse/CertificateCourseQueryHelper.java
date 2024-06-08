@@ -173,6 +173,7 @@ public class CertificateCourseQueryHelper {
                                     certificateCourse.getId().getValue(),
                                     user.getId().getValue()
                             );
+                    log.info("Current chapter resource: {}", currentChapterResource);
                     currentChapterResource.ifPresent(
                             certificateCourse::setCurrentResource
                     );

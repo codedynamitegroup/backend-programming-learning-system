@@ -8,7 +8,9 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
     private Chapter chapter;
     private ResourceType resourceType;
     private Question question;
+    private String lessonTitle;
     private String lessonHtml;
+    private String videoTitle;
     private String youtubeVideoUrl;
     private Boolean isCompleted;
 
@@ -17,7 +19,9 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
         setChapter(builder.chapter);
         setResourceType(builder.resourceType);
         setQuestion(builder.question);
+        setLessonTitle(builder.lessonTitle);
         setLessonHtml(builder.lessonHtml);
+        setVideoTitle(builder.videoTitle);
         setYoutubeVideoUrl(builder.youtubeVideoUrl);
         isCompleted = builder.isCompleted;
     }
@@ -51,12 +55,28 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
         this.question = question;
     }
 
+    public String getLessonTitle() {
+        return lessonTitle;
+    }
+
+    public void setLessonTitle(String lessonTitle) {
+        this.lessonTitle = lessonTitle;
+    }
+
     public String getLessonHtml() {
         return lessonHtml;
     }
 
     public void setLessonHtml(String lessonHtml) {
         this.lessonHtml = lessonHtml;
+    }
+
+    public String getVideoTitle() {
+        return videoTitle;
+    }
+
+    public void setVideoTitle(String videoTitle) {
+        this.videoTitle = videoTitle;
     }
 
     public String getYoutubeVideoUrl() {
@@ -80,7 +100,9 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
         private Chapter chapter;
         private ResourceType resourceType;
         private Question question;
+        private String lessonTitle;
         private String lessonHtml;
+        private String videoTitle;
         private String youtubeVideoUrl;
         private Boolean isCompleted;
 
@@ -107,8 +129,18 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
             return this;
         }
 
+        public Builder lessonTitle(String val) {
+            lessonTitle = val;
+            return this;
+        }
+
         public Builder lessonHtml(String val) {
             lessonHtml = val;
+            return this;
+        }
+
+        public Builder videoTitle(String val) {
+            videoTitle = val;
             return this;
         }
 
