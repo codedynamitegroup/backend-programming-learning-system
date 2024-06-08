@@ -93,8 +93,7 @@ public class ContestController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateContestUserResponse> registerContest(
-            @PathVariable UUID id,
-            @RequestBody CreateContestUserCommand createContestUserCommand) {
+            @PathVariable UUID id) {
         String email = null;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
@@ -109,7 +108,7 @@ public class ContestController {
                         .email(email)
                         .contestId(id)
                         .build());
-        log.info("Contest User created: {}", createContestUserCommand);
+        log.info("User registered for contest: {}", id);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createContestUserResponse);
     }

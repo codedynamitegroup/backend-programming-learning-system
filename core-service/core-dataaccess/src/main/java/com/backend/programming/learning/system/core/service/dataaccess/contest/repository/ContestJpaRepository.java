@@ -32,9 +32,11 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
                 c.updated_by as updatedById,
                 c.created_at as createdAt,
                 c.updated_at as updatedAt,
-           (select count(*) from contest_user cu where cu.contest_id = c.id) as numOfParticipants
+                count(cu.id) as numOfParticipants
     from contest c
+    left join contest_user cu on cu.contest_id = c.id
     where c.id = ?1
+    group by c.id
 """, nativeQuery = true)
     Optional<ContestProjection> findContestById(UUID id);
 
@@ -55,11 +57,13 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
                 c.updated_by as updatedById,
                 c.created_at as createdAt,
                 c.updated_at as updatedAt,
-           (select count(*) from contest_user cu where cu.contest_id = c.id) as numOfParticipants
-           from contest c
+                count(cu.id) as numOfParticipants
+   from contest c
+   left join contest_user cu on cu.contest_id = c.id
     where c.start_time >= ?1
-    and cast(?2 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?2 as text), '%'))
+    and (cast(?2 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?2 as text), '%')))
     and (?3 = TRUE or (c.is_public = true))
+    group by c.id
     order by c.start_time desc
 """, nativeQuery = true)
     Page<ContestProjection> findAllUpcomingContestsContainsSearchName(
@@ -85,11 +89,13 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
                 c.updated_by as updatedById,
                 c.created_at as createdAt,
                 c.updated_at as updatedAt,
-                (select count(*) from contest_user cu where cu.contest_id = c.id) as numOfParticipants
+                count(cu.id) as numOfParticipants
             from contest c
+            left join contest_user cu on cu.contest_id = c.id
             where c.start_time <= ?1 and (c.end_time is null or (c.end_time is not null and c.end_time >= ?1))
-            and cast(?2 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?2 as text), '%'))
+            and (cast(?2 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?2 as text), '%')))
             and (?3 = TRUE or (c.is_public = true))
+            group by c.id
             order by c.start_time desc
             """, nativeQuery = true)
     Page<ContestProjection> findAllHappeningContestsContainsSearchName(
@@ -115,11 +121,13 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
                 c.updated_by as updatedById,
                 c.created_at as createdAt,
                 c.updated_at as updatedAt,
-                (select count(*) from contest_user cu where cu.contest_id = c.id) as numOfParticipants
+                count(cu.id) as numOfParticipants
             from contest c
+            left join contest_user cu on cu.contest_id = c.id
             where c.end_time is not null and c.end_time < ?1
-            and cast(?2 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?2 as text), '%'))
+            and (cast(?2 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?2 as text), '%')))
             and (?3 = TRUE or (c.is_public = true))
+            group by c.id
             order by c.start_time desc
             """, nativeQuery = true)
     Page<ContestProjection> findAllEndedContestsContainsSearchName(
@@ -145,10 +153,12 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
                 c.updated_by as updatedById,
                 c.created_at as createdAt,
                 c.updated_at as updatedAt,
-                (select count(*) from contest_user cu where cu.contest_id = c.id) as numOfParticipants
+                count(cu.id) as numOfParticipants
     from contest c
-    where cast(?1 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?1 as text), '%'))
+    left join contest_user cu on cu.contest_id = c.id
+    where (cast(?1 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?1 as text), '%')))
       and (?2 = TRUE or (c.is_public = true))
+    group by c.id
     order by c.start_time desc
 """, nativeQuery = true)
     Page<ContestProjection> findAllContainsSearchName(
