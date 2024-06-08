@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
 import jakarta.validation.Valid;
 
@@ -27,5 +28,5 @@ public interface ExamSubmissionApplicationService {
 
     QueryExamSubmissionResponse submitExamDetail(UUID submissionId);
 
-    List<QueryExamSubmissionResponse> findByExamIdAndUserId(UUID examId, UUID userId);
+    List<QueryExamSubmissionOverviewResponse> findByExamIdAndUserId(UUID examId, UUID userId);
 }
