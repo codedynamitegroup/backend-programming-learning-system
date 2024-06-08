@@ -292,7 +292,7 @@ public class UserController {
         return ResponseEntity.ok(changedPasswordUserResponse);
     }
 
-    @GetMapping("/forgot-password/{email}")
+    @PutMapping("/forgot-password")
     @Operation(summary = "Forgot password user.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
@@ -301,12 +301,9 @@ public class UserController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<ForgotPasswordEmailResponse> forgotPasswordUser(@PathVariable String email) throws MessagingException {
-        log.info("Forgot password with email: {}", email);
-        ForgotPasswordEmailResponse forgotPasswordEmailResponse = userApplicationService.forgotPasswordEmail(
-                ForgotPasswordEmailCommand.builder()
-                .email(email)
-                .build());
+    public ResponseEntity<ForgotPasswordEmailResponse> forgotPasswordUser(@RequestBody ForgotPasswordEmailCommand forgotPasswordEmailCommand) throws MessagingException {
+        log.info("Forgot password with email: {}", forgotPasswordEmailCommand.getEmail());
+        ForgotPasswordEmailResponse forgotPasswordEmailResponse = userApplicationService.forgotPasswordEmail(forgotPasswordEmailCommand);
 
         return ResponseEntity.ok(forgotPasswordEmailResponse);
     }

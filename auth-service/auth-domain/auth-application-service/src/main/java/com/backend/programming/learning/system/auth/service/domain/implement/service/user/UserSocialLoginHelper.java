@@ -13,6 +13,7 @@ import com.backend.programming.learning.system.auth.service.domain.implement.ser
 import com.backend.programming.learning.system.auth.service.domain.implement.service.user_role.UserRoleCreateHelper;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserKeycloakApplicationService;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
+import com.backend.programming.learning.system.domain.DomainConstants;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -23,6 +24,8 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 @Slf4j
@@ -81,6 +84,7 @@ public class UserSocialLoginHelper {
 
                 userFound.setLinkedWithGoogle(Boolean.TRUE);
                 userFound.setRefreshToken(keycloakLoggedResult.getRefresh_token());
+                userFound.setLastLogin(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
                 userRepository.save(userFound);
 
                 return LoginUserResponse.builder()
@@ -91,6 +95,7 @@ public class UserSocialLoginHelper {
                 ResponseLoginAndRefreshUser keycloakLoggedResult = keycloakLogged(socialLoginUserCommand);
 
                 userFound.setRefreshToken(keycloakLoggedResult.getRefresh_token());
+                userFound.setLastLogin(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
                 userRepository.save(userFound);
                 return LoginUserResponse.builder()
                         .accessToken(keycloakLoggedResult.getAccess_token())
@@ -139,6 +144,7 @@ public class UserSocialLoginHelper {
 
                 userFound.setLinkedWithMicrosoft(Boolean.TRUE);
                 userFound.setRefreshToken(keycloakLoggedResult.getRefresh_token());
+                userFound.setLastLogin(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
                 userRepository.save(userFound);
 
                 return LoginUserResponse.builder()
@@ -149,6 +155,7 @@ public class UserSocialLoginHelper {
                 ResponseLoginAndRefreshUser keycloakLoggedResult = keycloakLogged(socialLoginUserCommand);
 
                 userFound.setRefreshToken(keycloakLoggedResult.getRefresh_token());
+                userFound.setLastLogin(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
                 userRepository.save(userFound);
                 return LoginUserResponse.builder()
                         .accessToken(keycloakLoggedResult.getAccess_token())
