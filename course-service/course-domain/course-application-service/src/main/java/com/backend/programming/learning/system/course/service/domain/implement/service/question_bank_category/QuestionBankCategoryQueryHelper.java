@@ -22,6 +22,7 @@ public class QuestionBankCategoryQueryHelper {
     private final QuestionBankCategoryRepository questionBankCategoryRepository;
     public Page<QuestionBankCategory> queryAllQuestionBankCategory(QueryAllQuestionBankCategoryCommand queryAllQuestionBankCategoryCommand) {
         return questionBankCategoryRepository.findAll(
+                queryAllQuestionBankCategoryCommand.isOrgQuestionBank(),
                 queryAllQuestionBankCategoryCommand.search(),
                 queryAllQuestionBankCategoryCommand.pageNo(),
                 queryAllQuestionBankCategoryCommand.pageSize());

@@ -15,6 +15,7 @@ import lombok.Getter;
 @Builder
 @AllArgsConstructor
 public class QueryAllQuestionByCategoryIdCommand {
+    private Boolean isOrgQuestionBank;
     @NotNull
     private final int pageNo;
     @NotNull

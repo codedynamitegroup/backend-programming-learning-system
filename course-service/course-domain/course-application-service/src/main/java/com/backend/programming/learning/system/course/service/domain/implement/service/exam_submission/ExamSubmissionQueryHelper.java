@@ -42,7 +42,7 @@ public class ExamSubmissionQueryHelper {
         examSubmissions.forEach(examSubmission -> {
             List<QuestionSubmission> questionSubmissions = questionSubmissionRepository
                     .findAllByExamSubmissionId(examSubmission.getId().getValue());
-//            examSubmissionResponses.add(examSubmissionDataMapper.mapToQueryExamSubmissionResponse(examSubmission, questionSubmissions));
+//            examSubmissionResponses.add(examSubmissionDataMapper.mapToQueryExamSubmissionResponse(examSubmissionResponse, questionSubmissions));
 
             Double markTotal = questionSubmissions.stream()
                     .filter(questionSubmission -> questionSubmission.getGrade() != null)

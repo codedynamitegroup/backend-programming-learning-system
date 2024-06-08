@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.course.service.domain.mapper.exa
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.ExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QuestionSubmissionResponse;
@@ -100,4 +101,23 @@ public class ExamSubmissionDataMapper {
                 .markTotal(markTotal)
                 .build();
     }
+
+    public List<ExamSubmissionResponse> examSubmissionToQueryExamSubmission(List<ExamSubmission> examSubmission) {
+        return examSubmission.stream()
+                .map(this::examSubmissionToQueryExamSubmissionResponse)
+                .toList();
+    }
+
+    private ExamSubmissionResponse examSubmissionToQueryExamSubmissionResponse(ExamSubmission examSubmission) {
+        return ExamSubmissionResponse.builder()
+                .examSubmissionId(examSubmission.getId().getValue())
+                .studentId(examSubmission.getUser().getId().getValue())
+                .firstName(examSubmission.getUser().getFirstName())
+                .lastName(examSubmission.getUser().getLastName())
+                .startTime(examSubmission.getStartTime())
+                .submitTime(examSubmission.getSubmitTime())
+                .status(examSubmission.status())
+                .build();
+    }
+
 }
