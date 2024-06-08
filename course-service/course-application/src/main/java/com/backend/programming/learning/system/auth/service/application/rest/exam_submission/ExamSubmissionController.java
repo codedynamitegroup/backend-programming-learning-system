@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.auth.service.application.rest.ex
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.exam_submission.ExamSubmissionApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -112,16 +113,16 @@ public class ExamSubmissionController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
-                            schema = @Schema(implementation = QueryExamSubmissionResponse.class))
+                            schema = @Schema(implementation = QueryExamSubmissionOverviewResponse.class))
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<List<QueryExamSubmissionResponse>> findByExamId(
+    public ResponseEntity<List<QueryExamSubmissionOverviewResponse>> findByExamId(
             @PathVariable UUID examId,
             @RequestParam(value = "userId", required = true) UUID userId
             ) {
         log.info("Getting exam submission with exam id: {}", examId);
-        List<QueryExamSubmissionResponse> response = examSubmissionApplicationService.findByExamIdAndUserId(examId, userId);
+        List<QueryExamSubmissionOverviewResponse> response = examSubmissionApplicationService.findByExamIdAndUserId(examId, userId);
         return ResponseEntity.ok(response);
     }
 }

@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.course.service.domain.mapper.exa
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QuestionSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
@@ -86,5 +87,17 @@ public class ExamSubmissionDataMapper {
                         .numFile(questionSubmission.getNumFile())
                         .build())
                 .toList();
+    }
+
+    public QueryExamSubmissionOverviewResponse mapToQueryExamSubmissionResponseWithTotal(ExamSubmission examSubmission, Double markTotal) {
+        return QueryExamSubmissionOverviewResponse.builder()
+                .examSubmissionId(examSubmission.getId().getValue())
+                .examId(examSubmission.getExam().getId().getValue())
+                .userId(examSubmission.getUser().getId().getValue())
+                .startTime(examSubmission.getStartTime())
+                .submitTime(examSubmission.getSubmitTime())
+                .status(examSubmission.status())
+                .markTotal(markTotal)
+                .build();
     }
 }

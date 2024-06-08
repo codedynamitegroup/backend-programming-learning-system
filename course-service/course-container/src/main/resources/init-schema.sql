@@ -24,7 +24,7 @@ DROP TYPE IF EXISTS overdue_handling;
 CREATE TYPE overdue_handling AS ENUM ('AUTOSUBMIT', 'GRACEPERIOD', 'AUTOABANDON');
 
 DROP TYPE IF EXISTS status;
-CREATE TYPE status AS ENUM ('SUBMITTED', 'NOT_SUBMITTED');
+CREATE TYPE status AS ENUM ('SUBMITTED', 'NOT_SUBMITTED', 'GRADED');
 
 DROP TYPE IF EXISTS notification_event_type;
 CREATE TYPE notification_event_type AS ENUM ('USER', 'COURSE');
@@ -390,13 +390,14 @@ CREATE TABLE "public".exam_question
 DROP TABLE IF EXISTS "public".exam_submission CASCADE;
 CREATE TABLE "public".exam_submission
 (
-    id           uuid                     DEFAULT gen_random_uuid() NOT NULL,
-    exam_id      uuid NOT NULL,
-    user_id      uuid NOT NULL,
-    submit_count bigint                   DEFAULT '0',
-    start_time   TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    submit_time  TIMESTAMP WITH TIME ZONE DEFAULT NULL,
-    status status NOT NULL DEFAULT 'NOT_SUBMITTED',
+    id           uuid                      DEFAULT gen_random_uuid() NOT NULL,
+    exam_id      uuid             NOT NULL,
+    user_id      uuid             NOT NULL,
+    submit_count bigint                    DEFAULT '0',
+    start_time   TIMESTAMP WITH TIME ZONE  DEFAULT CURRENT_TIMESTAMP,
+    submit_time  TIMESTAMP WITH TIME ZONE  DEFAULT NULL,
+    status       status           NOT NULL DEFAULT 'NOT_SUBMITTED',
+    score        double precision DEFAULT '0',
     CONSTRAINT exam_submission_pkey PRIMARY KEY (id),
     CONSTRAINT exam_submission_exam_id_fkey FOREIGN KEY (exam_id)
         REFERENCES "public".exam (id) MATCH SIMPLE
