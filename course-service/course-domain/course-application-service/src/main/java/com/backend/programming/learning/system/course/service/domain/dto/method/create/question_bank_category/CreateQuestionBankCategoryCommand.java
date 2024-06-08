@@ -14,8 +14,8 @@ public record CreateQuestionBankCategoryCommand(
         String name,
         @NotNull(message = "Description is required")
         String description,
+        Boolean isOrgQuestionBank,
         @NotNull(message = "Created by is required")
-        UUID createdBy,
-        UUID questionBankId
+        UUID createdBy
 ) {
 }

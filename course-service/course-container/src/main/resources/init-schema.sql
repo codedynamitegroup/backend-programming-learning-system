@@ -130,13 +130,14 @@ CREATE TABLE "public".user
 DROP TABLE IF EXISTS "public".question_bank_category CASCADE;
 CREATE TABLE "public".question_bank_category
 (
-    id            uuid                     DEFAULT gen_random_uuid() NOT NULL,
-    "name"        text                                               NOT NULL,
-    "description" text,
-    "created_by"  uuid                                               NOT NULL,
-    "updated_by"  uuid                                               NOT NULL,
-    "created_at"  TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    "updated_at"  TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    id                     uuid                     DEFAULT gen_random_uuid() NOT NULL,
+    "name"                 text                                               NOT NULL,
+    "description"          text,
+    "is_org_question_bank" bool                     DEFAULT FALSE,
+    "created_by"           uuid                                               NOT NULL,
+    "updated_by"           uuid                                               NOT NULL,
+    "created_at"           TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "updated_at"           TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT question_bank_category_pkey PRIMARY KEY (id),
     CONSTRAINT question_bank_category_created_by_fkey FOREIGN KEY (created_by)
         REFERENCES "public".user (id) MATCH SIMPLE
@@ -357,7 +358,7 @@ CREATE TABLE "public".exam
     overdue_handling   overdue_handling NOT NULL DEFAULT 'AUTOABANDON',
     can_redo_questions boolean          NOT NULL DEFAULT '0',
     max_attempts       bigint           NOT NULL DEFAULT '0',
-    shuffle_answers    boolean          NOT NULL DEFAULT '0',
+    shuffle_questions    boolean          NOT NULL DEFAULT '0',
     grade_method       grade_method     NOT NULL DEFAULT 'QUIZ_GRADEHIGHEST',
     "max_page"                  integer,
     created_at         TIMESTAMP WITH TIME ZONE  DEFAULT CURRENT_TIMESTAMP,

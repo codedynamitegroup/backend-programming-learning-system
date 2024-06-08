@@ -86,17 +86,16 @@ public class ExamSubmissionRepositoryImpl implements ExamSubmissionRepository {
     }
 
     @Override
-    public ExamSubmission findByExamId(ExamId examId) {
-    //   examSubmissionJpaRepository
-    //                        .findByExamId(examId.getValue())
-    //                        .orElse(null));
-        // de tam
-    return null;
+    public List<ExamSubmission> findByExamId(ExamId examId) {
+        List<ExamSubmissionEntity> examSubmissions = examSubmissionJpaRepository
+                .findByExamId(examId.getValue())
+                .orElse(null);
+        return examSubmissionDataAccessMapper.examSubmissionEntitiesToExamSubmissions(examSubmissions);
     }
 
     @Override
     public List<ExamSubmission> findAllByExamIdAndUserId(UUID examId, UUID userId) {
-     List<ExamSubmissionEntity> examSubmissionEntities = examSubmissionJpaRepository.findByExamIdAndUserId(examId, userId);
-     return examSubmissionDataAccessMapper.examSubmissionEntitiesToExamSubmissions(examSubmissionEntities);
+        List<ExamSubmissionEntity> examSubmissionEntities = examSubmissionJpaRepository.findByExamIdAndUserId(examId, userId);
+        return examSubmissionDataAccessMapper.examSubmissionEntitiesToExamSubmissions(examSubmissionEntities);
     }
 }

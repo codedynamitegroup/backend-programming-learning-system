@@ -23,6 +23,7 @@ public class QuestionBankCategoryDataMapper {
         return QuestionBankCategory.builder()
                 .name(createQuestionBankCategoryCommand.name())
                 .description(createQuestionBankCategoryCommand.description())
+                .isOrgQuestionBank(createQuestionBankCategoryCommand.isOrgQuestionBank())
                 .createdBy(user)
                 .updatedBy(user)
                 .build();
@@ -33,6 +34,7 @@ public class QuestionBankCategoryDataMapper {
                 .id(questionBankCategory.getId().getValue())
                 .name(questionBankCategory.getName())
                 .description(questionBankCategory.getDescription())
+                .isOrgQuestionBank(questionBankCategory.getIsOrgQuestionBank())
                 .createdBy(questionBankCategory.getCreatedBy().getId().getValue())
                 .updatedBy(questionBankCategory.getUpdatedBy().getId().getValue())
                 .createdAt(questionBankCategory.getCreatedAt())
