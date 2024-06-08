@@ -22,18 +22,18 @@ public class CertificateCourseQueryHelper {
     private final CertificateCourseRepository certificateCourseRepository;
     private final UserRepository userRepository;
     private final CertificateCourseUserRepository certificateCourseUserRepository;
-    private final ChapterQuestionRepository chapterQuestionRepository;
+    private final ChapterResourceRepository chapterResourceRepository;
     private final TopicRepository topicRepository;
 
     public CertificateCourseQueryHelper(CertificateCourseRepository certificateCourseRepository,
                                         UserRepository userRepository,
                                         CertificateCourseUserRepository certificateCourseUserRepository,
-                                        ChapterQuestionRepository chapterQuestionRepository,
+                                        ChapterResourceRepository chapterResourceRepository,
                                         TopicRepository topicRepository) {
         this.certificateCourseRepository = certificateCourseRepository;
         this.userRepository = userRepository;
         this.certificateCourseUserRepository = certificateCourseUserRepository;
-        this.chapterQuestionRepository = chapterQuestionRepository;
+        this.chapterResourceRepository = chapterResourceRepository;
         this.topicRepository = topicRepository;
     }
 
@@ -54,13 +54,13 @@ public class CertificateCourseQueryHelper {
         if (email != null) {
             Optional<User> userOptional = userRepository.findByEmail(email);
             if (userOptional.isPresent()) {
-                Optional<ChapterQuestion> currentQuestion = chapterQuestionRepository
-                        .findFirstUncompletedQuestionByCertificateCourseIdAndUserId(
+                Optional<ChapterResource> currentChapterResource = chapterResourceRepository
+                        .findFirstUncompletedResourceByCertificateCourseIdAndUserId(
                                 certificateCourse.getId().getValue(),
                                 userOptional.get().getId().getValue()
                         );
-                currentQuestion.ifPresent(
-                        chapterQuestion -> certificateCourse.setCurrentQuestion(chapterQuestion.getQuestion())
+                currentChapterResource.ifPresent(
+                        certificateCourse::setCurrentResource
                 );
 
                 Optional<CertificateCourseUser> certificateCourseUser =
@@ -70,17 +70,17 @@ public class CertificateCourseQueryHelper {
                         );
                 if (certificateCourseUser.isPresent()) {
                     certificateCourse.setRegistered(true);
-                    certificateCourse.setNumOfCompletedQuestions(
-                            countNumOfCompletedQuestions(certificateCourseId, userOptional.get().getId().getValue())
+                    certificateCourse.setNumOfCompletedResources(
+                            countNumOfCompletedResources(certificateCourseId, userOptional.get().getId().getValue())
                     );
                 } else {
                     certificateCourse.setRegistered(false);
-                    certificateCourse.setNumOfCompletedQuestions(0);
+                    certificateCourse.setNumOfCompletedResources(0);
                 }
             }
         }
 
-        certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourseId));
+        certificateCourse.setNumOfResources(countNumOfResources(certificateCourseId));
         certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourseId));
         certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourseId));
         log.info("Certificate course queried with id: {}", certificateCourse.getId().getValue());
@@ -111,26 +111,27 @@ public class CertificateCourseQueryHelper {
                                 );
                         if (certificateCourseUser.isPresent()) {
                             certificateCourse.setRegistered(true);
-                            certificateCourse.setNumOfCompletedQuestions(
-                                    countNumOfCompletedQuestions(
+                            certificateCourse.setNumOfCompletedResources(
+                                    countNumOfCompletedResources(
                                             certificateCourse.getId().getValue(),
                                             userOptional.get().getId().getValue())
                             );
                         } else {
                             certificateCourse.setRegistered(false);
-                            certificateCourse.setNumOfCompletedQuestions(0);
+                            certificateCourse.setNumOfCompletedResources(0);
                         }
-                        Optional<ChapterQuestion> currentQuestion = chapterQuestionRepository
-                                .findFirstUncompletedQuestionByCertificateCourseIdAndUserId(
+                        Optional<ChapterResource> currentChapterResource = chapterResourceRepository
+                                .findFirstUncompletedResourceByCertificateCourseIdAndUserId(
                                         certificateCourse.getId().getValue(),
                                         userOptional.get().getId().getValue()
                                 );
-                        currentQuestion.ifPresent(
-                                chapterQuestion -> certificateCourse.setCurrentQuestion(chapterQuestion.getQuestion())
+
+                        currentChapterResource.ifPresent(
+                                certificateCourse::setCurrentResource
                         );
                     }
 
-                    certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourse.getId().getValue()));
+                    certificateCourse.setNumOfResources(countNumOfResources(certificateCourse.getId().getValue()));
                     certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourse.getId().getValue()));
                     certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourse.getId().getValue()));
 
@@ -154,26 +155,26 @@ public class CertificateCourseQueryHelper {
                             );
                     if (certificateCourseUser.isPresent()) {
                         certificateCourse.setRegistered(true);
-                        certificateCourse.setNumOfCompletedQuestions(
-                                countNumOfCompletedQuestions(
+                        certificateCourse.setNumOfCompletedResources(
+                                countNumOfCompletedResources(
                                         certificateCourse.getId().getValue(),
                                         user.getId().getValue())
                         );
                     } else {
                         certificateCourse.setRegistered(false);
-                        certificateCourse.setNumOfCompletedQuestions(0);
+                        certificateCourse.setNumOfCompletedResources(0);
                     }
-                    certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourse.getId().getValue()));
+                    certificateCourse.setNumOfResources(countNumOfResources(certificateCourse.getId().getValue()));
                     certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourse.getId().getValue()));
                     certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourse.getId().getValue()));
 
-                    Optional<ChapterQuestion> currentQuestion = chapterQuestionRepository
-                            .findFirstUncompletedQuestionByCertificateCourseIdAndUserId(
+                    Optional<ChapterResource> currentChapterResource = chapterResourceRepository
+                            .findFirstUncompletedResourceByCertificateCourseIdAndUserId(
                                     certificateCourse.getId().getValue(),
                                     user.getId().getValue()
                             );
-                    currentQuestion.ifPresent(
-                            chapterQuestion -> certificateCourse.setCurrentQuestion(chapterQuestion.getQuestion())
+                    currentChapterResource.ifPresent(
+                            certificateCourse::setCurrentResource
                     );
                 }
                 return certificateCourseList;
@@ -189,7 +190,7 @@ public class CertificateCourseQueryHelper {
                 );
                 for (CertificateCourse certificateCourse : certificateCourseList) {
                     certificateCourse.setRegistered(false);
-                    certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourse.getId().getValue()));
+                    certificateCourse.setNumOfResources(countNumOfResources(certificateCourse.getId().getValue()));
                     certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourse.getId().getValue()));
                     certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourse.getId().getValue()));
                 }
@@ -235,18 +236,18 @@ public class CertificateCourseQueryHelper {
                         );
                 if (certificateCourseUser.isPresent()) {
                     certificateCourse.setRegistered(true);
-                    certificateCourse.setNumOfCompletedQuestions(
-                            countNumOfCompletedQuestions(
+                    certificateCourse.setNumOfCompletedResources(
+                            countNumOfCompletedResources(
                                     certificateCourse.getId().getValue(),
                                     userOptional.get().getId().getValue())
                     );
                 } else {
                     certificateCourse.setRegistered(false);
-                    certificateCourse.setNumOfCompletedQuestions(0);
+                    certificateCourse.setNumOfCompletedResources(0);
                 }
             }
 
-            certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourse.getId().getValue()));
+            certificateCourse.setNumOfResources(countNumOfResources(certificateCourse.getId().getValue()));
             certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourse.getId().getValue()));
             certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourse.getId().getValue()));
         }
@@ -266,12 +267,12 @@ public class CertificateCourseQueryHelper {
         return user.get();
     }
 
-    private int countNumOfCompletedQuestions(UUID certificateCourseId, UUID userId) {
-        return certificateCourseRepository.countNumOfCompletedQuestions(certificateCourseId, userId);
+    private int countNumOfCompletedResources(UUID certificateCourseId, UUID userId) {
+        return certificateCourseRepository.countNumOfCompletedResources(certificateCourseId, userId);
     }
 
-    private int countNumOfQuestions(UUID certificateCourseId) {
-        return certificateCourseRepository.countNumOfQuestionsByCertificateId(certificateCourseId);
+    private int countNumOfResources(UUID certificateCourseId) {
+        return certificateCourseRepository.countNumOfResourcesByCertificateId(certificateCourseId);
     }
 
     private int countNumOfStudents(UUID certificateCourseId) {

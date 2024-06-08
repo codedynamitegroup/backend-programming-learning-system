@@ -4,8 +4,8 @@ import com.backend.programming.learning.system.domain.valueobject.BaseId;
 
 import java.util.UUID;
 
-public class ChapterQuestionId extends BaseId<UUID> {
-    public ChapterQuestionId(UUID value) {
+public class ChapterResourceId extends BaseId<UUID> {
+    public ChapterResourceId(UUID value) {
         super(value);
     }
 }

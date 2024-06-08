@@ -17,7 +17,7 @@ public class Chapter extends BaseEntity<ChapterId> {
     private int no;
     private String title;
     private String description;
-    private List<Question> questions;
+    private List<ChapterResource> chapterResources;
     private User createdBy;
     private User updatedBy;
     private ZonedDateTime createdAt;
@@ -25,20 +25,21 @@ public class Chapter extends BaseEntity<ChapterId> {
 
     private Chapter(Builder builder) {
         super.setId(builder.chapterId);
-        certificateCourseId = builder.certificateCourseId;
-        no = builder.no;
-        title = builder.title;
-        description = builder.description;
-        questions = builder.questions;
-        createdBy = builder.createdBy;
-        updatedBy = builder.updatedBy;
-        createdAt = builder.createdAt;
-        updatedAt = builder.updatedAt;
+        setCertificateCourseId(builder.certificateCourseId);
+        setNo(builder.no);
+        setTitle(builder.title);
+        setDescription(builder.description);
+        setChapterResources(builder.chapterResources);
+        setCreatedBy(builder.createdBy);
+        setUpdatedBy(builder.updatedBy);
+        setCreatedAt(builder.createdAt);
+        setUpdatedAt(builder.updatedAt);
     }
 
     public static Builder builder() {
         return new Builder();
     }
+
 
     public void initializeChapter() {
         setId(new ChapterId(UUID.randomUUID()));
@@ -51,72 +52,72 @@ public class Chapter extends BaseEntity<ChapterId> {
         return certificateCourseId;
     }
 
-    public int getNo() {
-        return no;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public List<Question> getQuestions() {
-        return questions;
-    }
-
-    public User getCreatedBy() {
-        return createdBy;
-    }
-
-    public User getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public ZonedDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public ZonedDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
     public void setCertificateCourseId(CertificateCourseId certificateCourseId) {
         this.certificateCourseId = certificateCourseId;
+    }
+
+    public int getNo() {
+        return no;
     }
 
     public void setNo(int no) {
         this.no = no;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
+    public List<ChapterResource> getChapterResources() {
+        return chapterResources;
+    }
+
+    public void setChapterResources(List<ChapterResource> chapterResources) {
+        this.chapterResources = chapterResources;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
     public void setCreatedBy(User createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public User getUpdatedBy() {
+        return updatedBy;
     }
 
     public void setUpdatedBy(User updatedBy) {
         this.updatedBy = updatedBy;
     }
 
+    public ZonedDateTime getCreatedAt() {
+        return createdAt;
+    }
+
     public void setCreatedAt(ZonedDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public void setUpdatedAt(ZonedDateTime updatedAt) {
-        this.updatedAt = updatedAt;
+    public ZonedDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
+    public void setUpdatedAt(ZonedDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public static final class Builder {
@@ -125,7 +126,7 @@ public class Chapter extends BaseEntity<ChapterId> {
         private int no;
         private String title;
         private String description;
-        private List<Question> questions;
+        private List<ChapterResource> chapterResources;
         private User createdBy;
         private User updatedBy;
         private ZonedDateTime createdAt;
@@ -159,8 +160,8 @@ public class Chapter extends BaseEntity<ChapterId> {
             return this;
         }
 
-        public Builder questions(List<Question> val) {
-            questions = val;
+        public Builder chapterResources(List<ChapterResource> val) {
+            chapterResources = val;
             return this;
         }
 

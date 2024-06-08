@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse;
 
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResourceResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
@@ -10,6 +11,8 @@ import lombok.Builder;
 import lombok.Getter;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.NoArgsConstructor;
+
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
@@ -19,6 +22,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @Builder
 @AllArgsConstructor
 @JsonInclude(NON_NULL)
+@NoArgsConstructor(force = true)
 public class CertificateCourseResponseEntity {
     @NotNull
     @JsonProperty("certificateCourseId")
@@ -48,17 +52,17 @@ public class CertificateCourseResponseEntity {
     @JsonProperty("numOfStudents")
     private final Integer numOfStudents;
     @NotNull
-    @JsonProperty("numOfQuestions")
-    private final Integer numOfQuestions;
+    @JsonProperty("numOfResources")
+    private final Integer numOfResources;
     @NotNull
-    @JsonProperty("numOfCompletedQuestions")
-    private final Integer numOfCompletedQuestions;
+    @JsonProperty("numOfCompletedResources")
+    private final Integer numOfCompletedResources;
+    @NotNull
+    @JsonProperty("currentResource")
+    private final ChapterResourceResponseEntity currentResource;
     @NotNull
     @JsonProperty("numOfReviews")
     private final Integer numOfReviews;
-    @NotNull
-    @JsonProperty("currentQuestion")
-    private final QuestionResponseEntity currentQuestion;
     @NotNull
     @JsonProperty("isRegistered")
     private final Boolean isRegistered;

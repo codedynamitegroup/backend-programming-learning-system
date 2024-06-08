@@ -5,12 +5,15 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.chapter.UpdateChapterResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.OrganizationResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResourceResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
+import com.backend.programming.learning.system.core.service.domain.entity.ChapterResource;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
+import com.backend.programming.learning.system.core.service.domain.mapper.chapter_resource.ChapterResourceDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.organization.OrganizationDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
@@ -26,22 +29,19 @@ import java.util.List;
 @Component
 public class ChapterDataMapper {
     private final UserDataMapper userDataMapper;
-    private final QuestionDataMapper questionDataMapper;
-    private final OrganizationDataMapper organizationDataMapper;
+    private final ChapterResourceDataMapper chapterResourceDataMapper;
 
     public ChapterDataMapper(UserDataMapper userDataMapper,
-                             QuestionDataMapper questionDataMapper,
-                             OrganizationDataMapper organizationDataMapper) {
+                             ChapterResourceDataMapper chapterResourceDataMapper) {
         this.userDataMapper = userDataMapper;
-        this.questionDataMapper = questionDataMapper;
-        this.organizationDataMapper = organizationDataMapper;
+        this.chapterResourceDataMapper = chapterResourceDataMapper;
     }
 
     public Chapter createChapterCommandToChapter(CreateChapterCommand createChapterCommand) {
         return Chapter.builder()
                 .title(createChapterCommand.getTitle())
                 .description(createChapterCommand.getDescription())
-                .questions(new ArrayList<>())
+                .chapterResources(new ArrayList<>())
                 .createdBy(User
                         .builder()
                         .id(new UserId(createChapterCommand.getCreatedBy()))
@@ -68,15 +68,13 @@ public class ChapterDataMapper {
     }
 
     public ChapterResponseEntity chapterToQueryChapterResponse(Chapter chapter) {
-        List<QuestionResponseEntity> queryQuestionResponses = new ArrayList<>();
-        for (Question question : chapter.getQuestions()) {
-            queryQuestionResponses.add(
-                    questionDataMapper.questionToQuestionResponseEntity(question)
-            );
-        }
-
         UserResponseEntity createdByResponse = userDataMapper.userToUserResponseEntity(chapter.getCreatedBy());
         UserResponseEntity updatedByResponse = userDataMapper.userToUserResponseEntity(chapter.getUpdatedBy());
+        List<ChapterResourceResponseEntity> chapterResourceResponseEntity = new ArrayList<>();
+        for (ChapterResource chapterResource : chapter.getChapterResources()) {
+            chapterResourceResponseEntity.add(
+                    chapterResourceDataMapper.chapterResourceToChapterResourceResponse(chapterResource));
+        }
 
         return ChapterResponseEntity.builder()
                 .chapterId(chapter.getId().getValue())
@@ -84,7 +82,7 @@ public class ChapterDataMapper {
                 .no(chapter.getNo())
                 .title(chapter.getTitle())
                 .description(chapter.getDescription())
-                .questions(queryQuestionResponses)
+                .resources(chapterResourceResponseEntity)
                 .createdBy(createdByResponse)
                 .updatedBy(updatedByResponse)
                 .createdAt(chapter.getCreatedAt())

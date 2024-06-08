@@ -43,7 +43,7 @@ class CertificateCourseApplicationServiceImpl implements CertificateCourseApplic
     }
 
     @Override
-    public QueryAllMyCertificateCoursesResponse queryAllMyCertificateCourses(
+    public QueryAllCertificateCoursesResponse queryAllMyCertificateCourses(
             QueryAllCertificateCoursesCommand queryAllCertificateCoursesCommand) {
         return certificateCourseCommandHandler.findAllMyCertificateCourses(queryAllCertificateCoursesCommand);
     }

@@ -201,7 +201,7 @@ public class CertificateCourseController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<QueryAllMyCertificateCoursesResponse> getAllMyCertificateCourses(
+    public ResponseEntity<QueryAllCertificateCoursesResponse> getAllMyCertificateCourses(
             @RequestBody QueryAllCertificateCoursesCommand queryAllCertificateCoursesCommand
     ) {
         String email = null;
@@ -211,7 +211,7 @@ public class CertificateCourseController {
             email = token.getClaim("preferred_username");
         }
 
-        QueryAllMyCertificateCoursesResponse queryAllMyCertificateCoursesResponse =
+        QueryAllCertificateCoursesResponse queryAllCertificateCoursesResponse =
                 certificateCourseApplicationService.queryAllMyCertificateCourses(QueryAllCertificateCoursesCommand
                         .builder()
                         .courseName(queryAllCertificateCoursesCommand.getCourseName())
@@ -220,7 +220,7 @@ public class CertificateCourseController {
                         .email(email)
                         .build());
         log.info("Returning all my registered certificate courses");
-        return ResponseEntity.ok(queryAllMyCertificateCoursesResponse);
+        return ResponseEntity.ok(queryAllCertificateCoursesResponse);
     }
 
     @PostMapping("/most-enrolled")

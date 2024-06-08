@@ -81,26 +81,46 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
 
     void deleteById(UUID id);
 
-    @Query("""
+    @Query(value = """
     select count(*)
-    from ChapterEntity ce, ChapterQuestionEntity cqe, QuestionEntity qe, QtypeCodeQuestionEntity qcqe, CodeSubmissionEntity cse
-    where ce.id = cqe.chapter.id
-     and cqe.question.id = qe.id
-     and qe.id = qcqe.question.id
-     and qcqe.id = cse.codeQuestionId
-     and ce.certificateCourse.id = ?1
-     and cse.userId = ?2
-     and cse.pass = true
-""")
-    int countNumOfCompletedQuestions(UUID certificateCourseId, UUID userId);
+    from chapter c,
+    chapter_resource cr
+    where c.id = cr.chapter_id
+     and c.certificate_course_id = ?1
+     and ((
+             cr.resource_type = 'CODE'
+            and exists (
+            select 1
+            from qtype_code_question qcq, 
+                code_submission cs
+                where qcq.question_id = cr.question_id
+                 and qcq.id = cs.code_question_id
+                 and cs.user_id = ?2
+                 and cs.pass = true
+                )
+             ) 
+             or 
+             ( 
+                 cr.resource_type <> 'CODE'
+                and exists(
+                    select 1
+                    from chapter_resource_user cru
+                    where cr.id = cru.chapter_resource_id
+                     and cru.user_id = ?2
+                     and cru.is_viewed = true
+                    )
+                 )
+             )
+""", nativeQuery = true)
+    int countNumOfCompletedResources(UUID certificateCourseId, UUID userId);
 
     @Query("""
     select count(*)
-    from ChapterEntity ce, ChapterQuestionEntity cqe
-    where ce.id = cqe.chapter.id
+    from ChapterEntity ce, ChapterResourceEntity cre
+    where ce.id = cre.chapter.id
      and ce.certificateCourse.id = ?1
 """)
-    int countNumOfQuestionsByCertificateId(UUID certificateCourseId);
+    int countNumOfResourcesByCertificateId(UUID certificateCourseId);
 
     @Query("""
     select count(*) 
