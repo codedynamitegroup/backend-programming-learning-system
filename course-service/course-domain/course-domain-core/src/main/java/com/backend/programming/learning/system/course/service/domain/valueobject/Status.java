@@ -8,5 +8,6 @@ package com.backend.programming.learning.system.course.service.domain.valueobjec
  */
 public enum Status {
     NOT_SUBMITTED,
-    SUBMITTED
+    SUBMITTED,
+    GRADED
 }

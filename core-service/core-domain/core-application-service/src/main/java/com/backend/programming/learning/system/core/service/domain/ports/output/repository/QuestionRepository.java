@@ -21,7 +21,9 @@ public interface QuestionRepository {
     // Update Question and Answer of Question
     void updateQuestion(Question question);
 
-    Page<QuestionResponseEntity> findAllQuestionByCategory(UUID categoryId, QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand);
+    Page<QuestionResponseEntity> findAllQuestionByCategory(
+            UUID categoryId,
+            QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand);
 
     List<Question> cloneQuestion(List<CreateQuestionClone> questionClones);
 }

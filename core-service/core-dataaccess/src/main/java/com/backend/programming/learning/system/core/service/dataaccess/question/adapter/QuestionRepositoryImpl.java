@@ -126,11 +126,14 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     }
 
     @Override
-    public Page<QuestionResponseEntity> findAllQuestionByCategory(UUID categoryId, QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand) {
+    public Page<QuestionResponseEntity> findAllQuestionByCategory(
+            UUID categoryId,
+            QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand) {
         Pageable pageRequest = Pageable.ofSize(queryAllQuestionByCategoryIdCommand.getPageSize())
                 .withPage(queryAllQuestionByCategoryIdCommand.getPageNo());
         return questionJpaRepository
                 .findAllByQuestionBankCategoryId(categoryId,
+                        queryAllQuestionByCategoryIdCommand.getIsOrgQuestionBank(),
                         queryAllQuestionByCategoryIdCommand.getSearch(),
                         pageRequest)
                 .map(questionDataAccessMapper::questionEntityToQuestionResponseEntity);
