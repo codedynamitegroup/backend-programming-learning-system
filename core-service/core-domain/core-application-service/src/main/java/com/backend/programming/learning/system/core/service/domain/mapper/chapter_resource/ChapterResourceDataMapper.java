@@ -41,7 +41,9 @@ public class ChapterResourceDataMapper {
                 .chapterId(chapterResource.getChapter().getId().getValue())
                 .question(question)
                 .resourceType(chapterResource.getResourceType().toString())
+                .lessonTitle(chapterResource.getLessonTitle())
                 .lessonHtml(chapterResource.getLessonHtml())
+                .videoTitle(chapterResource.getVideoTitle())
                 .youtubeVideoUrl(chapterResource.getYoutubeVideoUrl())
                 .isCompleted(chapterResource.getCompleted())
                 .build();

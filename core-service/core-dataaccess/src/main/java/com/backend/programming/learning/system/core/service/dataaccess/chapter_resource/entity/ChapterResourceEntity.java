@@ -25,7 +25,9 @@ public class ChapterResourceEntity {
     ChapterEntity chapter;
     @Enumerated(EnumType.STRING)
     private ResourceType resourceType;
+    private String lessonTitle;
     private String lessonHtml;
+    private String videoTitle;
     private String youtubeVideoUrl;
     @ManyToOne
     @JoinColumn(name = "question_id", referencedColumnName = "id")

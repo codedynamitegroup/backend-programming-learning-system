@@ -19,12 +19,16 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 public class ChapterResourceResponseEntity {
     @JsonProperty("chapterId")
     private UUID chapterId;
-    @JsonProperty("resourceId")
+    @JsonProperty("resourceType")
     private String resourceType;
     @JsonProperty("question")
     private ChapterQuestionResponseEntity question;
+    @JsonProperty("lessonTitle")
+    private String lessonTitle;
     @JsonProperty("lessonHtml")
     private String lessonHtml;
+    @JsonProperty("videoTitle")
+    private String videoTitle;
     @JsonProperty("youtubeVideoUrl")
     private String youtubeVideoUrl;
     @JsonProperty("isCompleted")

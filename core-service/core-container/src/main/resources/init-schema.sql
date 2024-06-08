@@ -373,7 +373,9 @@ CREATE TABLE "public".chapter_resource
     chapter_id uuid NOT NULL,
     resource_type resource_type NOT NULL,
     question_id uuid,
+    lesson_title text,
     lesson_html text,
+    video_title text,
     youtube_video_url text,
     CONSTRAINT chapter_resource_pkey PRIMARY KEY (id),
     CONSTRAINT question_id_fkey FOREIGN KEY (question_id)
