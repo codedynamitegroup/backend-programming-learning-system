@@ -60,8 +60,26 @@ public class CertificateCourseController {
     public ResponseEntity<CreateCertificateCourseResponse> createCertificateCourse(
             @RequestBody CreateCertificateCourseCommand createCertificateCourseCommand) {
         log.info("Creating certificate course: {}", createCertificateCourseCommand);
+
+        String email = null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
         CreateCertificateCourseResponse createCertificateCourseResponse =
-                certificateCourseApplicationService.createCertificateCourse(createCertificateCourseCommand);
+                certificateCourseApplicationService.createCertificateCourse(
+                        CreateCertificateCourseCommand.builder()
+                                .name(createCertificateCourseCommand.getName())
+                                .description(createCertificateCourseCommand.getDescription())
+                                .skillLevel(createCertificateCourseCommand.getSkillLevel())
+                                .topicId(createCertificateCourseCommand.getTopicId())
+                                .startTime(createCertificateCourseCommand.getStartTime())
+                                .endTime(createCertificateCourseCommand.getEndTime())
+                                .email(email)
+                                .build()
+                );
         log.info("Certificate course created: {}", createCertificateCourseResponse);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createCertificateCourseResponse);
@@ -77,15 +95,22 @@ public class CertificateCourseController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateCertificateCourseUserResponse> registerCertificateCourse(
-            @PathVariable UUID id,
-            @RequestBody CreateCertificateCourseUserCommand createCertificateCourseUserCommand) {
-        log.info("Creating Certificate course User course: {}", createCertificateCourseUserCommand);
+            @PathVariable UUID id) {
+        log.info("Creating Certificate course User for course: {}", id);
+
+        String email = null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
         CreateCertificateCourseUserResponse createCertificateCourseUserResponse =
                 certificateCourseUserApplicationService.createCertificateCourseUser(
                         CreateCertificateCourseUserCommand
                         .builder()
                         .certificateCourseId(id)
-                        .userId(createCertificateCourseUserCommand.getUserId())
+                        .email(email)
                         .build()
                 );
         log.info("Certificate course User created: {}", createCertificateCourseUserResponse);

@@ -55,14 +55,6 @@ public class CertificateCourseDataMapper {
                         .builder()
                         .id(new TopicId(createCertificateCourseCommand.getTopicId()))
                         .build())
-                .createdBy(User
-                        .builder()
-                        .id(new UserId(createCertificateCourseCommand.getCreatedBy()))
-                        .build())
-                .updatedBy(User
-                        .builder()
-                        .id(new UserId(createCertificateCourseCommand.getUpdatedBy()))
-                        .build())
                 .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .updatedAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .build();
