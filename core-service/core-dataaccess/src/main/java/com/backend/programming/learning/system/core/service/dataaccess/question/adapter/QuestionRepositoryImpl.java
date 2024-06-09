@@ -133,7 +133,6 @@ public class QuestionRepositoryImpl implements QuestionRepository {
                 .withPage(queryAllQuestionByCategoryIdCommand.getPageNo());
         return questionJpaRepository
                 .findAllByQuestionBankCategoryId(categoryId,
-                        queryAllQuestionByCategoryIdCommand.getIsOrgQuestionBank(),
                         queryAllQuestionByCategoryIdCommand.getSearch(),
                         pageRequest)
                 .map(questionDataAccessMapper::questionEntityToQuestionResponseEntity);

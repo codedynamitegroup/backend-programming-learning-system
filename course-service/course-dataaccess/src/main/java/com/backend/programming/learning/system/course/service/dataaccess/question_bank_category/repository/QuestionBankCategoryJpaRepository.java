@@ -14,6 +14,11 @@ import java.util.UUID;
 public interface QuestionBankCategoryJpaRepository extends JpaRepository<QuestionBankCategoryEntity, UUID> {
     Optional<QuestionBankCategoryEntity> findById(UUID id);
 
-    @Query("SELECT q FROM QuestionBankCategoryEntity q WHERE q.name LIKE %:search% AND q.isOrgQuestionBank = :isOrgQuestionBank")
+    @Query("""
+        SELECT q 
+        FROM QuestionBankCategoryEntity q 
+        WHERE (q.name LIKE %:search%) 
+            AND (q.isOrgQuestionBank = :isOrgQuestionBank OR :isOrgQuestionBank IS NULL)
+        """)
     Page<QuestionBankCategoryEntity> findAll(Boolean isOrgQuestionBank, String search, Pageable pageable);
 }
