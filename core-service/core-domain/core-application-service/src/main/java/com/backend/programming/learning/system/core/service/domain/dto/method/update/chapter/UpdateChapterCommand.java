@@ -19,6 +19,5 @@ public class UpdateChapterCommand {
     private final Integer no;
     private final String title;
     private final String description;
-    @NotNull
-    private final UUID updatedBy;
+    private final String email;
 }
