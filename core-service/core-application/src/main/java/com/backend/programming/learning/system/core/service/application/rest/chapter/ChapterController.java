@@ -62,6 +62,19 @@ public class ChapterController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createChapterResponse);
     }
 
+    @PostMapping("/chapter-resources/create")
+    @Operation(summary = "Create chapter resource by chapter id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateChapterResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<CreateChapterResponse> createChapterResource() {
+        return null;
+    }
+
     @PutMapping("/{id}")
     @Operation(summary = "Update chapter.")
     @ApiResponses(value = {
@@ -88,7 +101,7 @@ public class ChapterController {
     }
 
     @GetMapping
-    @Operation(summary = "Get all chapters.")
+    @Operation(summary = "Get all chapters by certificate course id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",

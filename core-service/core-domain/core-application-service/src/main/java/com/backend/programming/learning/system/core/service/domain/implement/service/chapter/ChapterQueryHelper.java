@@ -1,11 +1,17 @@
 package com.backend.programming.learning.system.core.service.domain.implement.service.chapter;
 
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.exception.ChapterNotFoundException;
+import com.backend.programming.learning.system.core.service.domain.mapper.chapter.ChapterDataMapper;
+import com.backend.programming.learning.system.core.service.domain.ports.input.service.chapter.ChapterRedisService;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ResourceType;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,24 +25,46 @@ public class ChapterQueryHelper {
     private final ChapterResourceUserRepository chapterResourceUserRepository;
     private final CodeSubmissionRepository codeSubmissionRepository;
     private final UserRepository userRepository;
+    private final ChapterDataMapper chapterDataMapper;
+    private final ChapterRedisService chapterRedisService;
 
     public ChapterQueryHelper(ChapterRepository chapterRepository,
                               ChapterResourceRepository chapterResourceRepository,
                               ChapterResourceUserRepository chapterResourceUserRepository,
                               CodeSubmissionRepository codeSubmissionRepository,
-                              UserRepository userRepository) {
+                              UserRepository userRepository,
+                              ChapterDataMapper chapterDataMapper,
+                              ChapterRedisService chapterRedisService) {
         this.chapterRepository = chapterRepository;
         this.chapterResourceRepository = chapterResourceRepository;
         this.chapterResourceUserRepository = chapterResourceUserRepository;
         this.codeSubmissionRepository = codeSubmissionRepository;
         this.userRepository = userRepository;
+        this.chapterDataMapper = chapterDataMapper;
+        this.chapterRedisService = chapterRedisService;
     }
 
     @Transactional(readOnly = true)
     public List<Chapter> queryAllChapters(UUID certificateCourseId,
                                           String email) {
-        List<Chapter> chapters = chapterRepository.findAllByCertificateCourseId(
-                new CertificateCourseId(certificateCourseId));
+        List<Chapter> chapters = new ArrayList<>();
+        QueryAllChaptersResponse redisResponse = chapterRedisService.getAllChapters(
+                certificateCourseId
+        );
+        if (redisResponse != null) {
+            log.info("Get all chapters from redis");
+            List <ChapterResponseEntity> chapterResponseEntities = redisResponse.getChapters();
+            for (ChapterResponseEntity chapterResponseEntity : chapterResponseEntities) {
+                Chapter chapter = chapterDataMapper.chapterResponseEntityToChapter(chapterResponseEntity);
+                chapters.add(chapter);
+            }
+        } else {
+            log.info("Get all chapters from database");
+            chapters = chapterRepository.findAllByCertificateCourseId(
+                    new CertificateCourseId(certificateCourseId));
+            QueryAllChaptersResponse response = chapterDataMapper.chaptersToQueryAllChaptersResponse(chapters);
+            chapterRedisService.saveAllChapters(response, certificateCourseId);
+        }
 
         Optional<User> user = userRepository.findByEmail(email);
         if (user.isPresent()) {

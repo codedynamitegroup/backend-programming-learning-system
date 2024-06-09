@@ -17,6 +17,10 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @JsonInclude(NON_NULL)
 @NoArgsConstructor(force = true)
 public class ChapterResourceResponseEntity {
+    @JsonProperty("chapterResourceId")
+    private UUID chapterResourceId;
+    @JsonProperty("no")
+    private int no;
     @JsonProperty("chapterId")
     private UUID chapterId;
     @JsonProperty("resourceType")

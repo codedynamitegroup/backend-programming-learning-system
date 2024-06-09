@@ -20,6 +20,7 @@ public class ChapterResourceEntity {
     @Id
     @Column(name = "id")
     private UUID id;
+    private int no;
     @ManyToOne
     @JoinColumn(name = "chapter_id", referencedColumnName = "id")
     ChapterEntity chapter;
