@@ -22,7 +22,7 @@ public interface ChapterResourceJpaRepository extends JpaRepository<ChapterResou
         and c.certificateCourse.id = ?1
         and ((
                 cq.resourceType = 'CODE'
-                and exists (
+                and not exists (
                     select 1
                     from CodeSubmissionEntity cs
                     join QtypeCodeQuestionEntity qcq
