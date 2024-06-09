@@ -9,9 +9,8 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
     private Integer no;
     private ResourceType resourceType;
     private Question question;
-    private String lessonTitle;
+    private String title;
     private String lessonHtml;
-    private String videoTitle;
     private String youtubeVideoUrl;
     private Boolean isCompleted;
 
@@ -21,9 +20,8 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
         setNo(builder.no);
         setResourceType(builder.resourceType);
         setQuestion(builder.question);
-        setLessonTitle(builder.lessonTitle);
+        setTitle(builder.title);
         setLessonHtml(builder.lessonHtml);
-        setVideoTitle(builder.videoTitle);
         setYoutubeVideoUrl(builder.youtubeVideoUrl);
         isCompleted = builder.isCompleted;
     }
@@ -64,12 +62,12 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
         this.question = question;
     }
 
-    public String getLessonTitle() {
-        return lessonTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setLessonTitle(String lessonTitle) {
-        this.lessonTitle = lessonTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getLessonHtml() {
@@ -78,14 +76,6 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
 
     public void setLessonHtml(String lessonHtml) {
         this.lessonHtml = lessonHtml;
-    }
-
-    public String getVideoTitle() {
-        return videoTitle;
-    }
-
-    public void setVideoTitle(String videoTitle) {
-        this.videoTitle = videoTitle;
     }
 
     public String getYoutubeVideoUrl() {
@@ -110,9 +100,8 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
         private Integer no;
         private ResourceType resourceType;
         private Question question;
-        private String lessonTitle;
+        private String title;
         private String lessonHtml;
-        private String videoTitle;
         private String youtubeVideoUrl;
         private Boolean isCompleted;
 
@@ -144,18 +133,13 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
             return this;
         }
 
-        public Builder lessonTitle(String val) {
-            lessonTitle = val;
+        public Builder title(String val) {
+            title = val;
             return this;
         }
 
         public Builder lessonHtml(String val) {
             lessonHtml = val;
-            return this;
-        }
-
-        public Builder videoTitle(String val) {
-            videoTitle = val;
             return this;
         }
 
