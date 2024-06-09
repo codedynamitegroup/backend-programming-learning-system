@@ -25,14 +25,12 @@ public class ChapterResourceResponseEntity {
     private UUID chapterId;
     @JsonProperty("resourceType")
     private String resourceType;
+    @JsonProperty("title")
+    private String title;
     @JsonProperty("question")
     private ChapterQuestionResponseEntity question;
-    @JsonProperty("lessonTitle")
-    private String lessonTitle;
     @JsonProperty("lessonHtml")
     private String lessonHtml;
-    @JsonProperty("videoTitle")
-    private String videoTitle;
     @JsonProperty("youtubeVideoUrl")
     private String youtubeVideoUrl;
     @JsonProperty("isCompleted")

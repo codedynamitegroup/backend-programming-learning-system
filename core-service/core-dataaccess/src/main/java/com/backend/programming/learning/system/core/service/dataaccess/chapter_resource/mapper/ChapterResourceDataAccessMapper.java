@@ -37,10 +37,9 @@ public class ChapterResourceDataAccessMapper {
                 .no(chapterResource.getNo())
                 .chapter(chapterEntity)
                 .resourceType(chapterResource.getResourceType())
-                .lessonTitle(chapterResource.getLessonTitle())
+                .title(chapterResource.getTitle())
                 .lessonHtml(chapterResource.getLessonHtml())
                 .question(questionEntity)
-                .videoTitle(chapterResource.getVideoTitle())
                 .youtubeVideoUrl(chapterResource.getYoutubeVideoUrl())
                 .build();
     }
@@ -57,9 +56,8 @@ public class ChapterResourceDataAccessMapper {
                 .chapter(chapter)
                 .question(question)
                 .resourceType(chapterResourceEntity.getResourceType())
-                .lessonTitle(chapterResourceEntity.getLessonTitle())
+                .title(chapterResourceEntity.getTitle())
                 .lessonHtml(chapterResourceEntity.getLessonHtml())
-                .videoTitle(chapterResourceEntity.getVideoTitle())
                 .youtubeVideoUrl(chapterResourceEntity.getYoutubeVideoUrl())
                 .build();
     }
