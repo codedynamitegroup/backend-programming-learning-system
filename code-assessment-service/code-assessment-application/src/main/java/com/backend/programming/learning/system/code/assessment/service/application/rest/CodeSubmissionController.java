@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.code.assessment.service.applicat
 import com.backend.programming.learning.system.application.handler.utils.JwtUtils;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.ExecuteCodeWithTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_submission.UpdateCodeSubmissionTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.CodeSubmissionApplicationService;
@@ -36,6 +37,14 @@ public class CodeSubmissionController {
         CreateCodeSubmissionResponse response =
                 codeSubmissionApplicationService.createCodeSubmission(createCodeSubmissionCommand);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
+    }
+    @PostMapping("/execute")
+    public ResponseEntity<String> executeCodeWithTestCase(
+            @RequestBody ExecuteCodeWithTestCaseCommand command
+    ){
+        String response =
+                codeSubmissionApplicationService.executeCodeWithTestCase(command);
+        return ResponseEntity.ok(response);
     }
     @GetMapping
     public ResponseEntity<GetCodeSubmissionReponse> getCodeSubmissionsByUserId

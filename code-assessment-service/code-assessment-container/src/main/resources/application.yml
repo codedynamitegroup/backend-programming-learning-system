@@ -37,7 +37,7 @@ code-assessment-service:
   question-request-topic-name: core-question-request
 
   assessment-external-service-ip: 62.171.185.208
-  assessment-external-service-port: 2358
+  assessment-external-service-port: 80
 
   accepted-status-description: Accepted
 
