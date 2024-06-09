@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.application.rest.chapter;
 
+import com.backend.programming.learning.system.core.service.application.utils.JwtUtils;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter.CreateChapterCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter.CreateChapterResponse;
@@ -61,6 +62,19 @@ public class ChapterController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createChapterResponse);
     }
 
+    @PostMapping("/chapter-resources/create")
+    @Operation(summary = "Create chapter resource by chapter id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateChapterResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<CreateChapterResponse> createChapterResource() {
+        return null;
+    }
+
     @PutMapping("/{id}")
     @Operation(summary = "Update chapter.")
     @ApiResponses(value = {
@@ -87,7 +101,7 @@ public class ChapterController {
     }
 
     @GetMapping
-    @Operation(summary = "Get all chapters.")
+    @Operation(summary = "Get all chapters by certificate course id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
@@ -96,14 +110,9 @@ public class ChapterController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllChaptersResponse> getAllChapters(
+            @RequestHeader(value = "Access-Token", required = false) String accessToken,
             @RequestParam UUID certificateCourseId) {
-        String email = null;
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
-            Jwt token = jwtAuthenticationToken.getToken();
-            email = token.getClaim("preferred_username");
-        }
+        String email = JwtUtils.getEmailFromJwtString(accessToken);
 
         QueryAllChaptersResponse queryAllChaptersResponse =
                 chapterApplicationService.queryAllChapters(QueryAllChaptersCommand
@@ -124,14 +133,10 @@ public class ChapterController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<ChapterResponseEntity> getChapter(@PathVariable UUID id) {
-        String email = null;
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
-            Jwt token = jwtAuthenticationToken.getToken();
-            email = token.getClaim("preferred_username");
-        }
+    public ResponseEntity<ChapterResponseEntity> getChapter(
+            @RequestHeader(value = "Access-Token", required = false) String accessToken,
+            @PathVariable UUID id) {
+        String email = JwtUtils.getEmailFromJwtString(accessToken);
 
         ChapterResponseEntity chapterResponseEntity =
                 chapterApplicationService.queryChapter(QueryChapterCommand

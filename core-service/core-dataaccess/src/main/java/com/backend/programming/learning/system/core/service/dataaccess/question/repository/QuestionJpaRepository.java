@@ -24,5 +24,7 @@ public interface QuestionJpaRepository extends JpaRepository<QuestionEntity, UUI
         AND (q.name LIKE %:search%)
         ORDER BY q.updatedAt
     """)
-    Page<QuestionEntity> findAllByQuestionBankCategoryId(UUID categoryId, String search, Pageable pageable);
+    Page<QuestionEntity> findAllByQuestionBankCategoryId(UUID categoryId,
+                                                         String search,
+                                                         Pageable pageable);
 }

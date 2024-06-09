@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.core.service.dataaccess.question.entity;
 
-import com.backend.programming.learning.system.core.service.dataaccess.chapter_question.entity.ChapterQuestionEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.chapter_resource.entity.ChapterResourceEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.organization.entity.OrganizationEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
@@ -64,7 +64,7 @@ public class QuestionEntity {
     private QuestionType qtype;
 
     @OneToMany(mappedBy = "question")
-    Set<ChapterQuestionEntity> chapterQuestions;
+    Set<ChapterResourceEntity> chapterQuestions;
 
     @Override
     public boolean equals(Object o) {

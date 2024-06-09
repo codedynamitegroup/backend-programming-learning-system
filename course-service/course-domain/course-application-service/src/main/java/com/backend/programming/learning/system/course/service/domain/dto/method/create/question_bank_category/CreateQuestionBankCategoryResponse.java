@@ -16,6 +16,7 @@ public record CreateQuestionBankCategoryResponse(
         UUID id,
         String name,
         String description,
+        Boolean isOrgQuestionBank,
         UUID createdBy,
         UUID updatedBy,
         ZonedDateTime createdAt,

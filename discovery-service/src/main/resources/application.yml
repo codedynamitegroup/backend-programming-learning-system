@@ -17,6 +17,10 @@ eureka:
 spring:
   application:
     name: discovery-service
+  data:
+    redis:
+      host: localhost
+      port: 6379
 
 management:
   endpoints:

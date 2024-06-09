@@ -20,7 +20,7 @@ public interface ExamSubmissionRepository {
 
     ExamSubmission saveEnd(CreateExamSubmissionStartCommand createExamSubmissionStartCommand);
 
-    ExamSubmission findByExamId(ExamId examId);
+    List<ExamSubmission> findByExamId(ExamId examId);
 
     List<ExamSubmission> findAllByExamIdAndUserId(UUID examId, UUID userId);
 }

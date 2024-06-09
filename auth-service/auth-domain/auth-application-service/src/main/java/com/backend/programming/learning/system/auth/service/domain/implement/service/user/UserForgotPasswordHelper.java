@@ -48,7 +48,7 @@ public class UserForgotPasswordHelper {
                 <p>Nếu bạn không yêu cầu đặt lại mật khẩu, vui lòng bỏ qua email này.</p>
                 """,
                 user.getLastName() + " " + user.getFirstName(), otp,
-                "http://localhost:3000/frontend#/forgot-password/verify-otp?email=" + user.getEmail(), 15
+                forgotPasswordEmailCommand.getRedirectUrl(), 15
                 );
         MailBody mailBody = MailBody.builder()
                 .to(user.getEmail())

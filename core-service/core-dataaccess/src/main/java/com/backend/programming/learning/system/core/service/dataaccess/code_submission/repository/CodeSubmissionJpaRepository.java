@@ -14,7 +14,7 @@ public interface CodeSubmissionJpaRepository extends JpaRepository<CodeSubmissio
     Optional<CodeSubmissionEntity> findById(UUID id);
 
     @Query(value = """
-            SELECT cse
+            SELECT cse.*
             FROM code_submission cse
             join question qe
             on cse.code_question_id = qe.id
@@ -23,14 +23,14 @@ public interface CodeSubmissionJpaRepository extends JpaRepository<CodeSubmissio
             join code_submission_contest csce on cse.id = csce.code_submission_id
             WHERE cse.code_question_id = qcqe.id
             AND qcqe.question_id = qe.id
-            AND cse.user_id = :userId
-            AND qe.id = :questionId
-            AND csce.contest_id = :contestId
+            AND cse.user_id = ?1
+            AND qe.id = ?2
+            AND csce.contest_id = ?3
 """,nativeQuery = true)
     List<CodeSubmissionEntity> findAllCodeSubmissionsByUserIdAndQuestionIdAndContestId(UUID userId, UUID questionId, UUID contestId);
 
     @Query(value = """
-            SELECT cse
+            SELECT cse.*
             FROM code_submission cse
             join question qe 
             on cse.code_question_id = qe.id
@@ -39,9 +39,9 @@ public interface CodeSubmissionJpaRepository extends JpaRepository<CodeSubmissio
             join code_submission_certificate_course cscce on cse.id = cscce.code_submission_id
             WHERE cse.code_question_id = qcqe.id
             AND qcqe.question_id = qe.id
-            AND cse.user_id = :userId
-            AND qe.id = :questionId
-            AND cscce.certificate_course_id = :certificateCourseId
+            AND cse.user_id = ?1
+            AND qe.id = ?2
+            AND cscce.certificate_course_id = ?3
 """, nativeQuery = true)
     List<CodeSubmissionEntity> findAllCodeSubmissionsByUserIdAndQuestionIdAndCertificateCourseId(
             UUID userId, UUID questionId, UUID certificateCourseId);
@@ -53,9 +53,9 @@ public interface CodeSubmissionJpaRepository extends JpaRepository<CodeSubmissio
             on qcqe.id = cse.code_question_id
             join code_submission_contest csce on cse.id = csce.code_submission_id
             WHERE cse.code_question_id = qcqe.id
-            AND cse.user_id = :userId
-            AND qcqe.id = :codeQuestionId
-            AND csce.contest_id = :contestId
+            AND cse.user_id = ?1
+            AND qcqe.id = ?2
+            AND csce.contest_id = ?3
 """, nativeQuery = true)
     int countAllByUserIdAndCodeQuestionIdAndContestId(UUID userId, UUID codeQuestionId, UUID contestId);
 

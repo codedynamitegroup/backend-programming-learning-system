@@ -69,4 +69,17 @@ public class UserDataMapper {
                 .failureMessages(userEvent.getFailureMessages())
                 .build();
     }
+
+    public User userResponseEntityToUser(UserResponseEntity userResponseEntity) {
+        return User.builder()
+                .id(new UserId(userResponseEntity.getUserId()))
+                .email(userResponseEntity.getEmail())
+                .firstName(userResponseEntity.getFirstName())
+                .lastName(userResponseEntity.getLastName())
+                .dob(userResponseEntity.getDob())
+                .avatarUrl(userResponseEntity.getAvatarUrl())
+                .phone(userResponseEntity.getPhone())
+                .address(userResponseEntity.getAddress())
+                .build();
+    }
 }

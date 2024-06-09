@@ -44,9 +44,8 @@ public class CertificateCourseUserCreateHelper {
     @Transactional
     public CertificateCourseUser persistCertificateCourseUser(
             CreateCertificateCourseUserCommand createCertificateCourseUserCommand) {
-        checkIfCertificateCourseUserExists(createCertificateCourseUserCommand.getCertificateCourseId(),
-                createCertificateCourseUserCommand.getUserId());
-        User user = getUser(createCertificateCourseUserCommand.getUserId());
+        User user = getUserByEmail(createCertificateCourseUserCommand.getEmail());
+        checkIfCertificateCourseUserExists(createCertificateCourseUserCommand.getCertificateCourseId(), user.getId().getValue());
         CertificateCourse certificateCourse =
                 getCertificateCourse(createCertificateCourseUserCommand.getCertificateCourseId());
 
@@ -71,11 +70,11 @@ public class CertificateCourseUserCreateHelper {
         }
     }
 
-    private User getUser(UUID userId) {
-        Optional<User> user = userRepository.findUser(userId);
+    private User getUserByEmail(String email) {
+        Optional<User> user = userRepository.findUserByEmail(email);
         if (user.isEmpty()) {
-            log.warn("User with id: {} not found", userId);
-            throw new UserNotFoundException("Could not find user with id: " + userId);
+            log.warn("User with email: {} not found", email);
+            throw new UserNotFoundException("Could not find user with email: " + email);
         }
         return user.get();
     }

@@ -1,14 +1,8 @@
 package com.backend.programming.learning.system.core.service.domain.entity;
 
-import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterQuestionId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestQuestionId;
-import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.domain.entity.BaseEntity;
-import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 
-import java.util.List;
 import java.util.UUID;
 
 public class ContestQuestion extends BaseEntity<ContestQuestionId> {
