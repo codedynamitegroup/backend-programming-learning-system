@@ -97,7 +97,6 @@ public class QuestionController {
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllQuestionByCategoryIdResponse> getAllQuestionsByCategory(
             @PathVariable UUID categoryId,
-            @RequestParam(value = "isOrgQuestionBank", defaultValue = "true") Boolean isOrgQuestionBank,
             @RequestParam(value = "search", defaultValue = "") String search,
             @RequestParam(value = "pageNo", defaultValue = "0") int pageNo,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize
@@ -107,7 +106,6 @@ public class QuestionController {
                 .pageNo(pageNo)
                 .pageSize(pageSize)
                 .search(search)
-                .isOrgQuestionBank(isOrgQuestionBank)
                 .build();
         QueryAllQuestionByCategoryIdResponse questionResponseEntity = questionApplicationService
                 .queryAllQuestionByCategory(categoryId, queryAllQuestionByCategoryIdCommand);

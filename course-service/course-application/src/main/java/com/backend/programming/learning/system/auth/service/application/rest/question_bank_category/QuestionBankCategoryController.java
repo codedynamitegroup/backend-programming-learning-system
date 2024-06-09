@@ -70,7 +70,7 @@ public class QuestionBankCategoryController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllQuestionBankCategoryResponse> queryAllQuestionBankCategory(
-            @RequestParam(name = "isOrgQuestionBank", defaultValue = "true") Boolean isOrgQuestionBank,
+            @RequestParam(name = "isOrgQuestionBank", required = false) Boolean isOrgQuestionBank,
             @RequestParam(defaultValue = "") String search,
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize

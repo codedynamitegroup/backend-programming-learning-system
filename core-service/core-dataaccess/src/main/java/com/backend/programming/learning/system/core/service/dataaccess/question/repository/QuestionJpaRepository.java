@@ -22,11 +22,9 @@ public interface QuestionJpaRepository extends JpaRepository<QuestionEntity, UUI
         FROM QuestionEntity q
         WHERE q.questionBankCategoryId = :categoryId
         AND (q.name LIKE %:search%)
-        AND q.isOrgQuestionBank = :isOrgQuestionBank
         ORDER BY q.updatedAt
     """)
     Page<QuestionEntity> findAllByQuestionBankCategoryId(UUID categoryId,
-                                                         Boolean isOrgQuestionBank,
                                                          String search,
                                                          Pageable pageable);
 }
