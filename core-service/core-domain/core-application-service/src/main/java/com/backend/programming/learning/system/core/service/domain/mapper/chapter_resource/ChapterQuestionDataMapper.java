@@ -7,7 +7,10 @@ import com.backend.programming.learning.system.core.service.domain.entity.Chapte
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
 import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
+import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import org.springframework.stereotype.Component;
+
+import java.util.UUID;
 
 @Component
 public class ChapterQuestionDataMapper {
@@ -37,6 +40,27 @@ public class ChapterQuestionDataMapper {
                 .qtype(question.getqtype())
                 .createdAt(question.getCreatedAt())
                 .updatedAt(question.getUpdatedAt())
+                .build();
+    }
+
+    public Question chapterQuestionResponseToQuestion(ChapterQuestionResponseEntity chapterQuestionResponse) {
+        return Question.builder()
+                .questionId(new QuestionId(UUID.fromString(chapterQuestionResponse.getId())))
+                .difficulty(QuestionDifficulty.valueOf(chapterQuestionResponse.getDifficulty().toString()))
+                .name(chapterQuestionResponse.getName())
+                .questionText(chapterQuestionResponse.getQuestionText())
+                .generalFeedback(chapterQuestionResponse.getGeneralFeedback())
+                .defaultMark(chapterQuestionResponse.getDefaultMark())
+                .pass(chapterQuestionResponse.getPass())
+                .createdBy(chapterQuestionResponse.getCreatedBy() != null
+                        ? userDataMapper.userResponseEntityToUser(chapterQuestionResponse.getCreatedBy())
+                        : null)
+                .updatedBy(chapterQuestionResponse.getUpdatedBy() != null
+                        ? userDataMapper.userResponseEntityToUser(chapterQuestionResponse.getUpdatedBy())
+                        : null)
+                .qtype(chapterQuestionResponse.getQtype())
+                .createdAt(chapterQuestionResponse.getCreatedAt())
+                .updatedAt(chapterQuestionResponse.getUpdatedAt())
                 .build();
     }
 }

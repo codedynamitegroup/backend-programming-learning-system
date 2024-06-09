@@ -370,6 +370,7 @@ DROP TABLE IF EXISTS "public".chapter_resource CASCADE;
 CREATE TABLE "public".chapter_resource
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
+    no int4,
     chapter_id uuid NOT NULL,
     resource_type resource_type NOT NULL,
     question_id uuid,

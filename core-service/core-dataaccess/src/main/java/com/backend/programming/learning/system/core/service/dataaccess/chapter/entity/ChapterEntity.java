@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.core.service.dataaccess.chapter.entity;
 
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.listener.CertificateCourseEntityListener;
+import com.backend.programming.learning.system.core.service.dataaccess.chapter.listener.ChapterEntityListener;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -16,6 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table(name = "chapter")
 @Entity
+@EntityListeners(ChapterEntityListener.class)
 public class ChapterEntity {
     @Id
     @Column(name = "id")

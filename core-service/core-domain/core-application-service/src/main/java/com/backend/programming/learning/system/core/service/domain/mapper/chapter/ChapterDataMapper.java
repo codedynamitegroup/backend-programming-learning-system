@@ -17,6 +17,7 @@ import com.backend.programming.learning.system.core.service.domain.mapper.chapte
 import com.backend.programming.learning.system.core.service.domain.mapper.organization.OrganizationDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
+import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
@@ -87,6 +88,32 @@ public class ChapterDataMapper {
                 .updatedBy(updatedByResponse)
                 .createdAt(chapter.getCreatedAt())
                 .updatedAt(chapter.getUpdatedAt())
+                .build();
+    }
+
+    public Chapter chapterResponseEntityToChapter(ChapterResponseEntity chapterResponseEntity) {
+        User createdBy = chapterResponseEntity.getCreatedBy() == null
+                ? null
+                : userDataMapper.userResponseEntityToUser(chapterResponseEntity.getCreatedBy());
+        User updatedBy = chapterResponseEntity.getUpdatedBy() == null
+                ? null
+                : userDataMapper.userResponseEntityToUser(chapterResponseEntity.getUpdatedBy());
+        List<ChapterResource> chapterResources = new ArrayList<>();
+        for (ChapterResourceResponseEntity chapterResourceResponseEntity : chapterResponseEntity.getResources()) {
+            chapterResources.add(
+                    chapterResourceDataMapper.chapterResourceResponseToChapterResource(chapterResourceResponseEntity));
+        }
+        return Chapter.builder()
+                .id(new ChapterId(chapterResponseEntity.getChapterId()))
+                .certificateCourseId(new CertificateCourseId(chapterResponseEntity.getCertificateCourseId()))
+                .no(chapterResponseEntity.getNo())
+                .title(chapterResponseEntity.getTitle())
+                .description(chapterResponseEntity.getDescription())
+                .chapterResources(chapterResources)
+                .createdBy(createdBy)
+                .updatedBy(updatedBy)
+                .createdAt(chapterResponseEntity.getCreatedAt())
+                .updatedAt(chapterResponseEntity.getUpdatedAt())
                 .build();
     }
 

@@ -21,26 +21,36 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @Builder
 @AllArgsConstructor
 @JsonInclude(NON_NULL)
+@NoArgsConstructor(force = true)
 public class ChapterResponseEntity {
     @NotNull
+    @JsonProperty("chapterId")
     private final UUID chapterId;
     @NotNull
+    @JsonProperty("certificateCourseId")
     private final UUID certificateCourseId;
     @NotNull
+    @JsonProperty("no")
     private final int no;
     @NotNull
+    @JsonProperty("title")
     private final String title;
     @NotNull
+    @JsonProperty("description")
     private final String description;
     @NotNull
+    @JsonProperty("resources")
     private final List<ChapterResourceResponseEntity> resources;
     @NotNull
+    @JsonProperty("createdBy")
     private final UserResponseEntity createdBy;
     @NotNull
+    @JsonProperty("updatedBy")
     private final UserResponseEntity updatedBy;
     @NotNull
+    @JsonProperty("createdAt")
     private final ZonedDateTime createdAt;
     @NotNull
+    @JsonProperty("updatedAt")
     private final ZonedDateTime updatedAt;
-
 }

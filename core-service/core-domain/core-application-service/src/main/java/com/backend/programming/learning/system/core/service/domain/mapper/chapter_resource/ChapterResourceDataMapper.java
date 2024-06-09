@@ -17,6 +17,8 @@ import com.backend.programming.learning.system.core.service.domain.mapper.organi
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterResourceId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.ResourceType;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
@@ -38,6 +40,8 @@ public class ChapterResourceDataMapper {
                 ? chapterQuestionDataMapper.questionToChapterQuestionResponse(chapterResource.getQuestion())
                 : null;
         return ChapterResourceResponseEntity.builder()
+                .chapterResourceId(chapterResource.getId().getValue())
+                .no(chapterResource.getNo())
                 .chapterId(chapterResource.getChapter().getId().getValue())
                 .question(question)
                 .resourceType(chapterResource.getResourceType().toString())
@@ -46,6 +50,23 @@ public class ChapterResourceDataMapper {
                 .videoTitle(chapterResource.getVideoTitle())
                 .youtubeVideoUrl(chapterResource.getYoutubeVideoUrl())
                 .isCompleted(chapterResource.getCompleted())
+                .build();
+    }
+
+    public  ChapterResource chapterResourceResponseToChapterResource(ChapterResourceResponseEntity chapterResourceResponse) {
+        return ChapterResource.builder()
+                .id(new ChapterResourceId(chapterResourceResponse.getChapterResourceId()))
+                .no(chapterResourceResponse.getNo())
+                .chapter(Chapter.builder().id(new ChapterId(chapterResourceResponse.getChapterId())).build())
+                .question(chapterResourceResponse.getQuestion() != null
+                        ? chapterQuestionDataMapper.chapterQuestionResponseToQuestion(chapterResourceResponse.getQuestion())
+                        : null)
+                .resourceType(ResourceType.valueOf(chapterResourceResponse.getResourceType()))
+                .lessonTitle(chapterResourceResponse.getLessonTitle())
+                .lessonHtml(chapterResourceResponse.getLessonHtml())
+                .videoTitle(chapterResourceResponse.getVideoTitle())
+                .youtubeVideoUrl(chapterResourceResponse.getYoutubeVideoUrl())
+                .isCompleted(chapterResourceResponse.getIsCompleted())
                 .build();
     }
 }

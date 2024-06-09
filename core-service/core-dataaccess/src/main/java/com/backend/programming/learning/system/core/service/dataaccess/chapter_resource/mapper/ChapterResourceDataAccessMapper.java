@@ -34,6 +34,7 @@ public class ChapterResourceDataAccessMapper {
 
         return ChapterResourceEntity.builder()
                 .id(chapterResource.getId().getValue())
+                .no(chapterResource.getNo())
                 .chapter(chapterEntity)
                 .resourceType(chapterResource.getResourceType())
                 .lessonTitle(chapterResource.getLessonTitle())
@@ -52,6 +53,7 @@ public class ChapterResourceDataAccessMapper {
 
         return ChapterResource.builder()
                 .id(new ChapterResourceId(chapterResourceEntity.getId()))
+                .no(chapterResourceEntity.getNo())
                 .chapter(chapter)
                 .question(question)
                 .resourceType(chapterResourceEntity.getResourceType())

@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.domain.entity.BaseEntity;
 
 public class ChapterResource extends BaseEntity<ChapterResourceId> {
     private Chapter chapter;
+    private Integer no;
     private ResourceType resourceType;
     private Question question;
     private String lessonTitle;
@@ -17,6 +18,7 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
     private ChapterResource(Builder builder) {
         super.setId(builder.chapterResourceId);
         setChapter(builder.chapter);
+        setNo(builder.no);
         setResourceType(builder.resourceType);
         setQuestion(builder.question);
         setLessonTitle(builder.lessonTitle);
@@ -30,13 +32,20 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
         return new Builder();
     }
 
-
     public Chapter getChapter() {
         return chapter;
     }
 
     public void setChapter(Chapter chapter) {
         this.chapter = chapter;
+    }
+
+    public Integer getNo() {
+        return no;
+    }
+
+    public void setNo(Integer no) {
+        this.no = no;
     }
 
     public ResourceType getResourceType() {
@@ -98,6 +107,7 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
     public static final class Builder {
         private ChapterResourceId chapterResourceId;
         private Chapter chapter;
+        private Integer no;
         private ResourceType resourceType;
         private Question question;
         private String lessonTitle;
@@ -116,6 +126,11 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
 
         public Builder chapter(Chapter val) {
             chapter = val;
+            return this;
+        }
+
+        public Builder no(Integer val) {
+            no = val;
             return this;
         }
 
