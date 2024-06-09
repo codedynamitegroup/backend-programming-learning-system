@@ -18,8 +18,5 @@ public class CreateChapterCommand {
     private final String title;
     @NotNull(message = "Description is required")
     private final String description;
-    @NotNull(message = "CreatedBy is required")
-    private final UUID createdBy;
-    @NotNull(message = "UpdatedBy is required")
-    private final UUID updatedBy;
+    private final String email;
 }

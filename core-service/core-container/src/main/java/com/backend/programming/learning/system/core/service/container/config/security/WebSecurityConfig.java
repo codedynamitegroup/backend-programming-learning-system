@@ -40,6 +40,7 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/core/chapters/create").hasAnyRole(ADMIN)
                         .requestMatchers(HttpMethod.PUT, "/core/chapters/{id}").hasAnyRole(ADMIN)
                         .requestMatchers(HttpMethod.DELETE, "/core/chapters/{id}").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.POST, "/core/chapters/chapter-resource-users/{id}").hasAnyRole(USER)
 
                         // Contest
                         .requestMatchers(HttpMethod.POST, "/core/contests/create").hasAnyRole(ADMIN)
