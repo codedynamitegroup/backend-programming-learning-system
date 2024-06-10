@@ -58,6 +58,7 @@ spring:
     redis:
       host: localhost
       port: 6379
+      password: ""
   datasource:
     url: jdbc:postgresql://localhost:5432/core-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: postgres
@@ -181,5 +182,13 @@ springdoc:
   swagger-ui:
     enabled: false
 
+
 security:
     paths-to-ignore: /actuator/**
+
+spring:
+  data:
+    redis:
+      host: redis-master
+      port: 6379
+      password: "admin"

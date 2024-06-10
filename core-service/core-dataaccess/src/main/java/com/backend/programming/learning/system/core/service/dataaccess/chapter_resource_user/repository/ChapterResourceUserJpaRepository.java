@@ -45,5 +45,14 @@ public interface ChapterResourceUserJpaRepository extends JpaRepository<ChapterR
             )
 """, nativeQuery = true)
     Boolean checkChapterResourceIsCompleted(UUID chapterResourceId, UUID userId);
+
+    @Query(value= """
+        select cru.*
+        from chapter_resource_user cru
+        where cru.chapter_resource_id = ?1
+        and cru.user_id = ?2
+        limit 1
+    """, nativeQuery = true)
+    Optional<ChapterResourceUserEntity> findChapterResourceUserByChapterResourceIdAndUserId(UUID chapterResourceId, UUID userId);
 }
 

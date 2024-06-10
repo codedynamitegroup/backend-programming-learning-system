@@ -109,12 +109,12 @@ public class CodeQuestionController {
         return  ResponseEntity.noContent().build();
     }
 
-    //get detail public code question
+    //get detail public code question, khong phan biet public private
     @GetMapping("/{code-question-id}")
     public ResponseEntity<CodeQuestionDto> getDetailCodeQuestion(
             @PathVariable("code-question-id") UUID codeQuestionId,
-            @RequestHeader(value = "Access-Token") String accessToken){
-        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
+            @RequestHeader(value = "Access-Token", required = false) String accessToken){
+        String email = accessToken != null? JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken): null;
 
         GetDetailCodeQuestionCommand command =  GetDetailCodeQuestionCommand.builder()
                 .codeQuestionId(codeQuestionId)

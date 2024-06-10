@@ -27,6 +27,7 @@ public class ChapterQueryHelper {
     private final UserRepository userRepository;
     private final ChapterDataMapper chapterDataMapper;
     private final ChapterRedisService chapterRedisService;
+    private final QtypeCodeQuestionRepository qtypeCodeQuestionRepository;
 
     public ChapterQueryHelper(ChapterRepository chapterRepository,
                               ChapterResourceRepository chapterResourceRepository,
@@ -34,7 +35,8 @@ public class ChapterQueryHelper {
                               CodeSubmissionRepository codeSubmissionRepository,
                               UserRepository userRepository,
                               ChapterDataMapper chapterDataMapper,
-                              ChapterRedisService chapterRedisService) {
+                              ChapterRedisService chapterRedisService,
+                              QtypeCodeQuestionRepository qtypeCodeQuestionRepository) {
         this.chapterRepository = chapterRepository;
         this.chapterResourceRepository = chapterResourceRepository;
         this.chapterResourceUserRepository = chapterResourceUserRepository;
@@ -42,6 +44,7 @@ public class ChapterQueryHelper {
         this.userRepository = userRepository;
         this.chapterDataMapper = chapterDataMapper;
         this.chapterRedisService = chapterRedisService;
+        this.qtypeCodeQuestionRepository = qtypeCodeQuestionRepository;
     }
 
     @Transactional(readOnly = true)
@@ -164,6 +167,15 @@ public class ChapterQueryHelper {
     private List<ChapterResource> getAllChapterResourcesForChapter(UUID chapterId) {
         List<ChapterResource> chapterResources = chapterResourceRepository
                 .findAllChapterResourcesByChapterId(chapterId);
+
+        for (ChapterResource chapterResource : chapterResources) {
+            if (chapterResource.getResourceType().equals(ResourceType.CODE)
+                    && chapterResource.getQuestion() != null) {
+                Optional<QtypeCodeQuestion> qtypeCodeQuestion = qtypeCodeQuestionRepository
+                        .findQtypeCodeQuestionByQuestionId(chapterResource.getQuestion().getId().getValue());
+                qtypeCodeQuestion.ifPresent(value -> chapterResource.setCodeQuestionId(value.getId().getValue()));
+            }
+        }
 
         log.info("All resources queried for chapter with id: {}", chapterId);
         return chapterResources;

@@ -4,14 +4,16 @@ import com.backend.programming.learning.system.core.service.domain.valueobject.C
 import com.backend.programming.learning.system.core.service.domain.valueobject.ResourceType;
 import com.backend.programming.learning.system.domain.entity.BaseEntity;
 
+import java.util.UUID;
+
 public class ChapterResource extends BaseEntity<ChapterResourceId> {
     private Chapter chapter;
     private Integer no;
     private ResourceType resourceType;
     private Question question;
-    private String lessonTitle;
+    private UUID codeQuestionId;
+    private String title;
     private String lessonHtml;
-    private String videoTitle;
     private String youtubeVideoUrl;
     private Boolean isCompleted;
 
@@ -21,9 +23,9 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
         setNo(builder.no);
         setResourceType(builder.resourceType);
         setQuestion(builder.question);
-        setLessonTitle(builder.lessonTitle);
+        setCodeQuestionId(builder.codeQuestionId);
+        setTitle(builder.title);
         setLessonHtml(builder.lessonHtml);
-        setVideoTitle(builder.videoTitle);
         setYoutubeVideoUrl(builder.youtubeVideoUrl);
         isCompleted = builder.isCompleted;
     }
@@ -31,6 +33,7 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
     public static Builder builder() {
         return new Builder();
     }
+
 
     public Chapter getChapter() {
         return chapter;
@@ -64,12 +67,20 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
         this.question = question;
     }
 
-    public String getLessonTitle() {
-        return lessonTitle;
+    public UUID getCodeQuestionId() {
+        return codeQuestionId;
     }
 
-    public void setLessonTitle(String lessonTitle) {
-        this.lessonTitle = lessonTitle;
+    public void setCodeQuestionId(UUID codeQuestionId) {
+        this.codeQuestionId = codeQuestionId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getLessonHtml() {
@@ -78,14 +89,6 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
 
     public void setLessonHtml(String lessonHtml) {
         this.lessonHtml = lessonHtml;
-    }
-
-    public String getVideoTitle() {
-        return videoTitle;
-    }
-
-    public void setVideoTitle(String videoTitle) {
-        this.videoTitle = videoTitle;
     }
 
     public String getYoutubeVideoUrl() {
@@ -110,9 +113,9 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
         private Integer no;
         private ResourceType resourceType;
         private Question question;
-        private String lessonTitle;
+        private UUID codeQuestionId;
+        private String title;
         private String lessonHtml;
-        private String videoTitle;
         private String youtubeVideoUrl;
         private Boolean isCompleted;
 
@@ -144,18 +147,18 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
             return this;
         }
 
-        public Builder lessonTitle(String val) {
-            lessonTitle = val;
+        public Builder codeQuestionId(UUID val) {
+            codeQuestionId = val;
+            return this;
+        }
+
+        public Builder title(String val) {
+            title = val;
             return this;
         }
 
         public Builder lessonHtml(String val) {
             lessonHtml = val;
-            return this;
-        }
-
-        public Builder videoTitle(String val) {
-            videoTitle = val;
             return this;
         }
 

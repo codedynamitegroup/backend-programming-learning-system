@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.core.service.dataaccess.chapter_resource.entity;
 
 import com.backend.programming.learning.system.core.service.dataaccess.chapter.entity.ChapterEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.chapter.listener.ChapterEntityListener;
+import com.backend.programming.learning.system.core.service.dataaccess.chapter_resource.listener.ChapterResourceListener;
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ResourceType;
 import jakarta.persistence.*;
@@ -16,6 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table(name = "chapter_resource")
 @Entity
+@EntityListeners(ChapterResourceListener.class)
 public class ChapterResourceEntity {
     @Id
     @Column(name = "id")
@@ -26,9 +29,8 @@ public class ChapterResourceEntity {
     ChapterEntity chapter;
     @Enumerated(EnumType.STRING)
     private ResourceType resourceType;
-    private String lessonTitle;
+    private String title;
     private String lessonHtml;
-    private String videoTitle;
     private String youtubeVideoUrl;
     @ManyToOne
     @JoinColumn(name = "question_id", referencedColumnName = "id")

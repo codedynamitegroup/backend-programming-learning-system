@@ -43,8 +43,8 @@ public class ChapterCreateHelper {
 
     @Transactional
     public Chapter persistChapter(CreateChapterCommand createChapterCommand) {
-        User createdBy = getUser(createChapterCommand.getCreatedBy());
-        User updatedBy = getUser(createChapterCommand.getUpdatedBy());
+        User createdBy = getUserByEmail(createChapterCommand.getEmail());
+        User updatedBy = getUserByEmail(createChapterCommand.getEmail());
         checkCertificateCourse(createChapterCommand.getCertificateCourseId());
         Integer topNo = findTopNoOfChapterByCertificateCourseId(createChapterCommand.getCertificateCourseId());
 
@@ -62,11 +62,11 @@ public class ChapterCreateHelper {
         return chapterResult;
     }
 
-    private User getUser(UUID userId) {
-        Optional<User> user = userRepository.findUser(userId);
+    private User getUserByEmail(String email) {
+        Optional<User> user = userRepository.findUserByEmail(email);
         if (user.isEmpty()) {
-            log.warn("User with id: {} not found", userId);
-            throw new UserNotFoundException("Could not find user with id: " + userId);
+            log.warn("User with email: {} not found", email);
+            throw new UserNotFoundException("Could not find user with email: " + email);
         }
         return user.get();
     }

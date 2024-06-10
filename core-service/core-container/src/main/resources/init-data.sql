@@ -307,35 +307,35 @@ VALUES
 
 -- resource_type: 'CODE', 'LESSON', 'VIDEO'
 -- Generate me 5 resources for each chapter with mixed resource types
-INSERT INTO public.chapter_resource(id, no, chapter_id, resource_type, question_id, lesson_title, lesson_html, video_title, youtube_video_url)
+INSERT INTO public.chapter_resource(id, no, chapter_id, resource_type, title, question_id, lesson_html, youtube_video_url)
 VALUES
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 1, 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'CODE', 'b6484e21-6937-489c-b031-b71767994736', NULL, NULL, NULL, NULL),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 2, 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'LESSON', NULL, 'This is a lesson on Python programming.', '<p>This is a lesson on Python programming.</p>', NULL, NULL),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 3, 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'VIDEO', NULL, NULL, NULL, 'Video on Python programming', 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', 1, 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 'CODE', 'b6484e21-6937-489c-b031-b71767994737', NULL, NULL, NULL, NULL),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', 2, 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 'LESSON', NULL, 'This is a lesson on Python programming.', '<p>This is a lesson on Python programming.</p>', NULL, NULL),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', 3, 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 'VIDEO', NULL, NULL, NULL, 'Video on Python programming', 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', 1, 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 'CODE', 'b6484e21-6937-489c-b031-b71767994738', NULL, NULL, NULL, NULL),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', 2, 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 'LESSON', NULL, 'This is a lesson on Python programming.', '<p>This is a lesson on Python programming.</p>', NULL, NULL),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', 3, 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 'VIDEO', NULL, NULL, NULL, 'Video on Python programming', 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb24', 1, 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 'CODE', 'b6484e21-6937-489c-b031-b71767994739', NULL, NULL, NULL, NULL),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb25', 2, 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 'LESSON', NULL, 'This is a lesson on Python programming.', '<p>This is a lesson on Python programming.</p>', NULL, NULL),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb26', 3, 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 'VIDEO', NULL, NULL, NULL, 'Video on Python programming', 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb27', 1, 'd215b5f8-0249-4dc5-89a3-51fd148cfb19', 'CODE', 'b6484e21-6937-489c-b031-b71767994740', NULL, NULL, NULL, NULL),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb28', 2, 'd215b5f8-0249-4dc5-89a3-51fd148cfb19', 'LESSON', NULL, 'This is a lesson on Python programming.', '<p>This is a lesson on Python programming.</p>', NULL, NULL),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb29', 3, 'd215b5f8-0249-4dc5-89a3-51fd148cfb19', 'VIDEO', NULL, NULL, NULL, 'Video on Python programming', 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb30', 1, 'd215b5f8-0249-4dc5-89a3-51fd148cfb20', 'CODE', 'b6484e21-6937-489c-b031-b71767994741', NULL, NULL, NULL, NULL),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb31', 2, 'd215b5f8-0249-4dc5-89a3-51fd148cfb20', 'LESSON', NULL, 'This is a lesson on Python programming.', '<p>This is a lesson on Python programming.</p>', NULL, NULL),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb32', 3, 'd215b5f8-0249-4dc5-89a3-51fd148cfb20', 'VIDEO', NULL, NULL, NULL, 'Video on Python programming', 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb33', 1, 'd215b5f8-0249-4dc5-89a3-51fd148cfb21', 'CODE', 'b6484e21-6937-489c-b031-b71767994742', NULL, NULL, NULL, NULL),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb34', 2, 'd215b5f8-0249-4dc5-89a3-51fd148cfb21', 'LESSON', NULL, 'This is a lesson on Python programming.', '<p>This is a lesson on Python programming.</p>', NULL, NULL),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb35', 3, 'd215b5f8-0249-4dc5-89a3-51fd148cfb21', 'VIDEO', NULL, NULL, NULL, 'Video on Python programming', 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb36', 1, 'd215b5f8-0249-4dc5-89a3-51fd148cfb22', 'CODE', 'b6484e21-6937-489c-b031-b71767994743', NULL, NULL, NULL, NULL),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb37', 2, 'd215b5f8-0249-4dc5-89a3-51fd148cfb22', 'LESSON', NULL, 'This is a lesson on Python programming.', '<p>This is a lesson on Python programming.</p>', NULL, NULL),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb38', 3, 'd215b5f8-0249-4dc5-89a3-51fd148cfb22', 'VIDEO', NULL, NULL, NULL, 'Video on Python programming', 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy'),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb39', 1, 'd215b5f8-0249-4dc5-89a3-51fd148cfb23', 'CODE', 'b6484e21-6937-489c-b031-b71767994744', NULL, NULL, NULL, NULL),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb40', 2, 'd215b5f8-0249-4dc5-89a3-51fd148cfb23', 'LESSON', NULL, 'This is a lesson on Python programming.', '<p>This is a lesson on Python programming.</p>', NULL, NULL),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb41', 3, 'd215b5f8-0249-4dc5-89a3-51fd148cfb23', 'VIDEO', NULL, NULL, NULL, 'Video on Python programming', 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy');
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 1, 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'CODE', 'Question 1', 'b6484e21-6937-489c-b031-b71767994736', NULL, NULL),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 2, 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'LESSON', 'This is a lesson on Python programming.', NULL, '<p>This is a lesson on Python programming.</p>', NULL),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 3, 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'VIDEO', 'Video on Python programming', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', 4, 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'CODE', 'Question 2', 'b6484e21-6937-489c-b031-b71767994737', NULL, NULL),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', 5, 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'LESSON', 'This is a lesson on Python programming.', NULL, '<p>This is a lesson on Python programming.</p>', NULL),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', 6, 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'VIDEO', 'Video on Python programming', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', 1, 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 'CODE', 'Question 1', 'b6484e21-6937-489c-b031-b71767994738', NULL, NULL),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', 2, 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 'LESSON', 'This is a lesson on Python programming.', NULL, '<p>This is a lesson on Python programming.</p>', NULL),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', 3, 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 'VIDEO', 'Video on Python programming', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb24', 4, 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 'CODE', 'Question 2', 'b6484e21-6937-489c-b031-b71767994739', NULL, NULL),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb25', 5, 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 'LESSON', 'This is a lesson on Python programming.', NULL, '<p>This is a lesson on Python programming.</p>', NULL),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb26', 6, 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 'VIDEO', 'Video on Python programming', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb27', 1, 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 'CODE', 'Question 1', 'b6484e21-6937-489c-b031-b71767994740', NULL, NULL),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb28', 2, 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 'LESSON', 'This is a lesson on Python programming.', NULL, '<p>This is a lesson on Python programming.</p>', NULL),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb29', 3, 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 'VIDEO', 'Video on Python programming', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb30', 4, 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 'CODE', 'Question 2', 'b6484e21-6937-489c-b031-b71767994741', NULL, NULL),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb31', 5, 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 'LESSON', 'This is a lesson on Python programming.', NULL, '<p>This is a lesson on Python programming.</p>', NULL),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb32', 6, 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 'VIDEO', 'Video on Python programming', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb33', 1, 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 'CODE', 'Question 1', 'b6484e21-6937-489c-b031-b71767994742', NULL, NULL),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb34', 2, 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 'LESSON', 'This is a lesson on Python programming.', NULL, '<p>This is a lesson on Python programming.</p>', NULL),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb35', 3, 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 'VIDEO', 'Video on Python programming', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb36', 4, 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 'CODE', 'Question 2', 'b6484e21-6937-489c-b031-b71767994743', NULL, NULL),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb37', 5, 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 'LESSON', 'This is a lesson on Python programming.', NULL, '<p>This is a lesson on Python programming.</p>', NULL),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb38', 6, 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 'VIDEO', 'Video on Python programming', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb39', 1, 'd215b5f8-0249-4dc5-89a3-51fd148cfb19', 'CODE', 'Question 1', 'b6484e21-6937-489c-b031-b71767994744', NULL, NULL),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb40', 2, 'd215b5f8-0249-4dc5-89a3-51fd148cfb19', 'LESSON', 'This is a lesson on Python programming.', NULL, '<p>This is a lesson on Python programming.</p>', NULL),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb41', 3, 'd215b5f8-0249-4dc5-89a3-51fd148cfb19', 'VIDEO', 'Video on Python programming', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy');
 
 
 --     ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'CODE', 'b6484e21-6937-489c-b031-b71767994736', NULL, NULL),
@@ -465,7 +465,7 @@ VALUES
             - A participant’s score depends on the number of test cases a participant’s code submission successfully passes.
             - If a participant submits more than one solution per challenge, then the participant’s score will reflect the highest score achieved.
             - Participants are ranked by score. If two or more participants achieve the same score, then the tie is broken by the total time taken to submit the last solution resulting in a higher score',
-        'https://assets.leetcode.com/contest/weekly-contest-291/card_img_1654267951.png', '2024-01-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', false),
+        'https://assets.leetcode.com/contest/weekly-contest-291/card_img_1654267951.png', '2024-01-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', true),
         ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', 'Python Contest',
         '<h3 style="text-align:start"><span style="font-size:24px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">Welcome to the Python Contest Batch the code #387</span></span></span></span></h3>',
         '<ol><li>1st Place: $1000</li><li>2nd Place: $500</li><li>3rd Place: $250</li></ol>',
@@ -499,7 +499,25 @@ VALUES
             - A participant’s score depends on the number of test cases a participant’s code submission successfully passes.
             - If a participant submits more than one solution per challenge, then the participant’s score will reflect the highest score achieved.
             - Participants are ranked by score. If two or more participants achieve the same score, then the tie is broken by the total time taken to submit the last solution resulting in a higher score',
-        'https://assets.leetcode.com/contest/weekly-contest-291/card_img_1654267951.png', '2024-01-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', false);
+        'https://assets.leetcode.com/contest/weekly-contest-291/card_img_1654267951.png', '2024-01-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', false),
+        ('d215b5f8-0249-4dc5-89a3-51fd148cfb27', 'Python Contest',
+        '<h3 style="text-align:start"><span style="font-size:24px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">Welcome to the Python Contest Batch the code #387</span></span></span></span></h3>',
+        '<ol><li>1st Place: $1000</li><li>2nd Place: $500</li><li>3rd Place: $250</li></ol>',
+        '<ol><li>1. Participants must submit their solutions before the end time.</li><li>2. Participants must follow the contest rules and guidelines.</li><li>3. Participants must not cheat or plagiarize.</li></ol>',
+        '- Each challenge has a pre-determined score.
+            - A participant’s score depends on the number of test cases a participant’s code submission successfully passes.
+            - If a participant submits more than one solution per challenge, then the participant’s score will reflect the highest score achieved.
+            - Participants are ranked by score. If two or more participants achieve the same score, then the tie is broken by the total time taken to submit the last solution resulting in a higher score',
+        'https://leetcode.com/_next/static/images/weekly-default-553ede7bcc8e1b4a44c28a9e4a32068c.png', '2024-05-20 18:09:29.488151+07', '2024-09-10 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', true),
+        ('d215b5f8-0249-4dc5-89a3-51fd148cfb28', 'Java Contest',
+        '<h3 style="text-align:start"><span style="font-size:24px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">Welcome to the Java Contest Batch the code #387</span></span></span></span></h3>',
+        '- Prizes are optional. You may add any prizes that you would like to offer here.',
+        '<ol><li>1. Participants must submit their solutions before the end time.</li><li>2. Participants must follow the contest rules and guidelines.</li><li>3. Participants must not cheat or plagiarize.</li></ol>',
+        '- Each challenge has a pre-determined score.
+            - A participant’s score depends on the number of test cases a participant’s code submission successfully passes.
+            - If a participant submits more than one solution per challenge, then the participant’s score will reflect the highest score achieved.
+            - Participants are ranked by score. If two or more participants achieve the same score, then the tie is broken by the total time taken to submit the last solution resulting in a higher score',
+        'https://leetcode.com/_next/static/images/biweekly-default-f5a8fc3be85b6c9175207fd8fd855d47.png', '2024-09-15 18:09:29.488151+07', '2024-10-15 18:09:29.488151+07', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', true);
 
 INSERT INTO public.contest_user(contest_id, user_id)
 VALUES

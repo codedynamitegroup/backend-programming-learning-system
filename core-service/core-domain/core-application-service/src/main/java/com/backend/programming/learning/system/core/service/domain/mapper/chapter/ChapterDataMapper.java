@@ -43,14 +43,6 @@ public class ChapterDataMapper {
                 .title(createChapterCommand.getTitle())
                 .description(createChapterCommand.getDescription())
                 .chapterResources(new ArrayList<>())
-                .createdBy(User
-                        .builder()
-                        .id(new UserId(createChapterCommand.getCreatedBy()))
-                        .build())
-                .updatedBy(User
-                        .builder()
-                        .id(new UserId(createChapterCommand.getUpdatedBy()))
-                        .build())
                 .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .updatedAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .build();

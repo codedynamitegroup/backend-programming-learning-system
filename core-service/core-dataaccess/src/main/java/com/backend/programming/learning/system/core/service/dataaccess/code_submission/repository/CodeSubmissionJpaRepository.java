@@ -68,23 +68,23 @@ public interface CodeSubmissionJpaRepository extends JpaRepository<CodeSubmissio
             join code_submission_contest csce 
             on cse.id = csce.code_submission_id
             WHERE cse.code_question_id = qcqe.id
-            AND cse.user_id = :userId
-            AND qcqe.id = :codeQuestionId
-            AND csce.contest_id = :contestId
+            AND cse.user_id = ?1
+            AND qcqe.id = ?2
+            AND csce.contest_id = ?3
             AND cse.pass = true
 """, nativeQuery = true)
     int countAllPassedCodeSubmissionsByUserIdAndCodeQuestionIdAndContestId(UUID userId, UUID codeQuestionId, UUID contestId);
 
     @Query(value = """
-            SELECT cse
+            SELECT cse.*
             FROM code_submission cse
             JOIN qtype_code_question qcqe
             ON qcqe.id = cse.code_question_id
             join code_submission_contest csce on cse.id = csce.code_submission_id
             WHERE cse.code_question_id = qcqe.id
-            AND cse.user_id = :userId
-            AND qcqe.id = :codeQuestionId
-            AND csce.contest_id = :contestId
+            AND cse.user_id = ?1
+            AND qcqe.id = ?2
+            AND csce.contest_id = ?3
             AND cse.pass = true
             ORDER BY cse.created_at DESC
             LIMIT 1
@@ -99,8 +99,8 @@ public interface CodeSubmissionJpaRepository extends JpaRepository<CodeSubmissio
             on qcqe.id = cse.code_question_id
             join code_submission_contest csce
             on cse.id = csce.code_submission_id
-            WHERE cse.code_question_id = :codeQuestionId
-            AND csce.contest_id = :contestId
+            WHERE cse.code_question_id = ?1
+            AND csce.contest_id = ?2
             AND cse.pass = true
 """, nativeQuery = true)
     int countAllPassedCodeSubmissionsByCodeQuestionIdAndContestId(UUID codeQuestionId, UUID contestId);
@@ -112,8 +112,8 @@ public interface CodeSubmissionJpaRepository extends JpaRepository<CodeSubmissio
             on qcqe.id = cse.code_question_id
             join code_submission_contest csce
             on cse.id = csce.code_submission_id
-            WHERE cse.code_question_id = :codeQuestionId
-            AND csce.contest_id = :contestId
+            WHERE cse.code_question_id = ?1
+            AND csce.contest_id = ?2
 """, nativeQuery = true)
     int countAllCodeSubmissionsByCodeQuestionIdAndContestId(UUID codeQuestionId, UUID contestId);
 }
