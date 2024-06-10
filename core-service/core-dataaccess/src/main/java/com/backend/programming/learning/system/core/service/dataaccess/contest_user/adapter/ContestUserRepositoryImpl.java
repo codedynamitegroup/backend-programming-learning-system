@@ -44,7 +44,6 @@ public class ContestUserRepositoryImpl implements ContestUserRepository {
 
     @Override
     public Optional<ContestUser> findByContestIdAndUserId(UUID contestId, UUID userId) {
-        log.info("Fetching contest user by contestId: {} and userId: {}", contestId, userId);
         return contestUserJpaRepository.findByContestIdAndUserId(contestId, userId)
                 .map(contestUserDataAccessMapper::contestUserEntityToContestUser);
     }
