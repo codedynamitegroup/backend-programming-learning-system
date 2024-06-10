@@ -4,11 +4,14 @@ import com.backend.programming.learning.system.core.service.domain.valueobject.C
 import com.backend.programming.learning.system.core.service.domain.valueobject.ResourceType;
 import com.backend.programming.learning.system.domain.entity.BaseEntity;
 
+import java.util.UUID;
+
 public class ChapterResource extends BaseEntity<ChapterResourceId> {
     private Chapter chapter;
     private Integer no;
     private ResourceType resourceType;
     private Question question;
+    private UUID codeQuestionId;
     private String title;
     private String lessonHtml;
     private String youtubeVideoUrl;
@@ -20,6 +23,7 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
         setNo(builder.no);
         setResourceType(builder.resourceType);
         setQuestion(builder.question);
+        setCodeQuestionId(builder.codeQuestionId);
         setTitle(builder.title);
         setLessonHtml(builder.lessonHtml);
         setYoutubeVideoUrl(builder.youtubeVideoUrl);
@@ -29,6 +33,7 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
     public static Builder builder() {
         return new Builder();
     }
+
 
     public Chapter getChapter() {
         return chapter;
@@ -60,6 +65,14 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
 
     public void setQuestion(Question question) {
         this.question = question;
+    }
+
+    public UUID getCodeQuestionId() {
+        return codeQuestionId;
+    }
+
+    public void setCodeQuestionId(UUID codeQuestionId) {
+        this.codeQuestionId = codeQuestionId;
     }
 
     public String getTitle() {
@@ -100,6 +113,7 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
         private Integer no;
         private ResourceType resourceType;
         private Question question;
+        private UUID codeQuestionId;
         private String title;
         private String lessonHtml;
         private String youtubeVideoUrl;
@@ -130,6 +144,11 @@ public class ChapterResource extends BaseEntity<ChapterResourceId> {
 
         public Builder question(Question val) {
             question = val;
+            return this;
+        }
+
+        public Builder codeQuestionId(UUID val) {
+            codeQuestionId = val;
             return this;
         }
 
