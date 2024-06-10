@@ -34,7 +34,8 @@ public class ChapterUpdateHelper {
 
     @Transactional
     public void persistChapter(UpdateChapterCommand updateChapterCommand) {
-        User updatedByUser = getUser(updateChapterCommand.getUpdatedBy());
+        User updatedByUser = getUserByEmail(updateChapterCommand.getEmail());
+
         Chapter chapter = getChapter(updateChapterCommand.getChapterId());
 
         chapter.setUpdatedBy(updatedByUser);
@@ -56,6 +57,15 @@ public class ChapterUpdateHelper {
         log.info("Chapter updated with id: {}", chapter.getId().getValue());
     }
 
+    private User getUserByEmail(String email) {
+        Optional<User> user = userRepository.findUserByEmail(email);
+        if (user.isEmpty()) {
+            log.warn("User with email: {} not found", email);
+            throw new UserNotFoundException("Could not find user with email: " + email);
+        }
+        return user.get();
+    }
+
     private Chapter getChapter(UUID chapterId) {
         Optional<Chapter> chapter = chapterRepository.findById(chapterId);
         if (chapter.isEmpty()) {
@@ -63,15 +73,6 @@ public class ChapterUpdateHelper {
             throw new CoreDomainException("Could not find chapter with id: " + chapterId);
         }
         return chapter.get();
-    }
-
-    private User getUser(UUID userId) {
-        Optional<User> user = userRepository.findUser(userId);
-        if (user.isEmpty()) {
-            log.warn("User with id: {} not found", userId);
-            throw new UserNotFoundException("Could not find user with id: " + userId);
-        }
-        return user.get();
     }
 
     private void updateChapter(Chapter chapter) {

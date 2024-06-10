@@ -187,7 +187,8 @@ public class CertificateCourseController {
                 queryAllCertificateCoursesCommand.getCourseName(),
                 queryAllCertificateCoursesCommand.getFilterTopicId());
         if (queryAllCertificateCoursesCommand.getCourseName() == null ||
-                        queryAllCertificateCoursesCommand.getCourseName().isEmpty()) {
+                        queryAllCertificateCoursesCommand.getCourseName().isEmpty()
+                            || queryAllCertificateCoursesCommand.getCourseName().isBlank()) {
             QueryAllCertificateCoursesResponse redisResponse = certificateCourseRedisService.getAllCertificateCourses(
                     queryAllCertificateCoursesCommand.getCourseName(),
                     queryAllCertificateCoursesCommand.getFilterTopicId()
