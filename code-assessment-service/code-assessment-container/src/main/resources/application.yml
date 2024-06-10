@@ -59,6 +59,7 @@ spring:
     redis:
       host: localhost
       port: 6379
+      password: ""
   datasource:
     url: jdbc:postgresql://localhost:5432/code-assessment-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: postgres

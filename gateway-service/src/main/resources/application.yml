@@ -45,8 +45,7 @@ spring:
     redis:
       host: ${REDIS_HOST:localhost}
       port: 6379
-      timeout: 15s
-      connect-timeout: 15s
+      password: ""
 
 security:
   paths-to-ignore: /actuator/**
