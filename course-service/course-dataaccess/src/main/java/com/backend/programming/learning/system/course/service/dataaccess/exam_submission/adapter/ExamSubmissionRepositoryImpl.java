@@ -13,6 +13,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
 import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.exception.ExamNotFoundException;
+import com.backend.programming.learning.system.course.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamSubmissionRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.Status;
@@ -70,9 +72,9 @@ public class ExamSubmissionRepositoryImpl implements ExamSubmissionRepository {
     @Override
     public ExamSubmission saveEnd(CreateExamSubmissionStartCommand createExamSubmissionStartCommand) {
         ExamEntity examEntity = examJpaRepository.findById(createExamSubmissionStartCommand.examId())
-                .orElseThrow(() -> new RuntimeException("Exam not found"));
+                .orElseThrow(() -> new ExamNotFoundException("Exam not found"));
         UserEntity userEntity = userJpaRepository.findById(createExamSubmissionStartCommand.userId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
 
         ExamSubmissionEntity examSubmissionEntity = Objects.requireNonNull(examSubmissionJpaRepository
                         .findByExamAndUser(examEntity, userEntity)

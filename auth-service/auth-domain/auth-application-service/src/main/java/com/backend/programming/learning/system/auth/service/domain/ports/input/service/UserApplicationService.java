@@ -39,4 +39,6 @@ public interface UserApplicationService {
     VerifyOTPResponse verifyOTP(@Valid VerifyOTPCommand verifyOTPCommand);
     ResetPasswordResponse forgotPasswordChangePassword(
             @Valid ResetPasswordCommand forgotPasswordChangePasswordCommand);
+
+    QueryGeneralStatisticUserResponse getStatisticUser();
 }
