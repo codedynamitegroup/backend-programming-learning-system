@@ -25,6 +25,7 @@ public class CodeSubmissionUpdateRequestHelper {
     }
 
     public void updateCodeSubmission(CodeSubmissionUpdateRequest request) {
+        log.info("cc i am here {}", request.toString());
         CodeSubmission codeSubmission = codeSubmissionDataMapper.CodeSubmissionUpdateRequestToCodeSubmission(request);
         codeSubmissionRepository.saveCodeSubmission(codeSubmission);
     }

@@ -27,9 +27,9 @@ public class QuestionBankCategoryRepositoryImpl implements QuestionBankCategoryR
     }
 
     @Override
-    public Page<QuestionBankCategory> findAll(String search, Integer pageNo, Integer pageSize) {
+    public Page<QuestionBankCategory> findAll(Boolean isOrgQuestionBank, String search, Integer pageNo, Integer pageSize) {
         PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
-        return questionBankCategoryJpaRepository.findAll(search, pageRequest)
+        return questionBankCategoryJpaRepository.findAll(isOrgQuestionBank, search, pageRequest)
                 .map(questionBankCategoryDataAccessMapper::questionBankCategoryEntityToQuestionBankCategory);
     }
 

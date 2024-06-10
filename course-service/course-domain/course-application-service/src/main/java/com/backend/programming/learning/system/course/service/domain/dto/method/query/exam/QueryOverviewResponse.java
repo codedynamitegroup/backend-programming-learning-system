@@ -1,6 +1,9 @@
 package com.backend.programming.learning.system.course.service.domain.dto.method.query.exam;
 
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.exam.ExamResponseEntity;
 import lombok.Builder;
+
+import java.util.List;
 
 /**
  * com.backend.programming.learning.system.course.service.domain.dto.method.query.exam
@@ -10,6 +13,7 @@ import lombok.Builder;
  */
 @Builder
 public record QueryOverviewResponse(
+        List<ExamSubmissionResponse> examSubmissionResponse,
         Integer numberOfStudents,
         Integer submitted,
         Integer needGrading

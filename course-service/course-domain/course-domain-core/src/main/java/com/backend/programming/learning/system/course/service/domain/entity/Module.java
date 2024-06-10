@@ -10,6 +10,7 @@ import java.util.UUID;
 
 public class Module extends AggregateRoot<ModuleId> {
     private Section section;
+    private Assignment assignment;
     private Integer cmid;
     private String name;
     private Integer visible;
@@ -22,6 +23,7 @@ public class Module extends AggregateRoot<ModuleId> {
 
     private Module(Builder builder) {
         super.setId(builder.id);
+        assignment = builder.assignment;
         cmid = builder.cmid;
         setContent(builder.content);
         setSection(builder.section);
@@ -30,6 +32,14 @@ public class Module extends AggregateRoot<ModuleId> {
         setVisible(builder.visible);
         setTimeOpen(builder.timeOpen);
         setTimeClose(builder.timeClose);
+    }
+
+    public Assignment getAssignment() {
+        return assignment;
+    }
+
+    public void setAssignment(Assignment assignment) {
+        this.assignment = assignment;
     }
 
     public String getContent() {
@@ -108,6 +118,7 @@ public class Module extends AggregateRoot<ModuleId> {
     public static final class Builder {
         private ModuleId id;
 
+        private Assignment assignment;
         private Integer cmid;
         private Section section;
         private String name;
@@ -127,6 +138,11 @@ public class Module extends AggregateRoot<ModuleId> {
 
         public Builder id(ModuleId val) {
             id = val;
+            return this;
+        }
+
+        public Builder assignment(Assignment val) {
+            assignment = val;
             return this;
         }
 

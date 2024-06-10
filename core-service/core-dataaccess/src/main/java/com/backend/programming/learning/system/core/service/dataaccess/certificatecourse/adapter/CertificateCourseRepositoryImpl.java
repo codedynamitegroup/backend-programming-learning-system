@@ -47,29 +47,11 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
     @Override
     public List<CertificateCourse> findAllCertificateCourses(
             String courseName,
-            List<UUID> filterTopicIds
+            UUID filterTopicId
     ) {
-        List<String> splitedSearch = certificateCourseDataAccessMapper.splitWords(courseName);
-
-        String searchFinalWord = splitedSearch != null && !splitedSearch.isEmpty()? splitedSearch.get(splitedSearch.size() - 1): null;
-
-        if(splitedSearch != null && !splitedSearch.isEmpty())
-            splitedSearch.remove(splitedSearch.size() - 1);
-
-        String searchExcludeFinalWord =  splitedSearch != null && !splitedSearch.isEmpty() ? String.join(" ", splitedSearch) : null;
-
-        // Get rid of empty string in filterTopicIds
-        List<UUID> finalFilterTopicIds = new ArrayList<>();
-        for (UUID topicId: filterTopicIds) {
-            if (topicId != null && !topicId.toString().isEmpty()) {
-                finalFilterTopicIds.add(topicId);
-            }
-        }
-        UUID firstTopicId = !finalFilterTopicIds.isEmpty() ? finalFilterTopicIds.get(0) : null;
         return certificateCourseJpaRepository.findAllByCourseNameAndByTopicId(
-                        searchExcludeFinalWord, searchFinalWord,
                         courseName,
-                        firstTopicId)
+                        filterTopicId)
                 .stream()
                 .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
                 .toList();
@@ -77,43 +59,21 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
 
     @Override
     public List<CertificateCourse> findAllCertificateCoursesByIsRegistered(String courseName,
-                                                                           List<UUID> filterTopicIds,
+                                                                           UUID filterTopicId,
                                                                            boolean isRegistered,
                                                                            UUID userId) {
-        List<String> splitedSearch = certificateCourseDataAccessMapper.splitWords(courseName);
-
-        String searchFinalWord = splitedSearch != null && !splitedSearch.isEmpty()? splitedSearch.get(splitedSearch.size() - 1): null;
-
-        if(splitedSearch != null && !splitedSearch.isEmpty())
-            splitedSearch.remove(splitedSearch.size() - 1);
-
-        String searchExcludeFinalWord =  splitedSearch != null && !splitedSearch.isEmpty() ? String.join(" ", splitedSearch) : null;
-
-        // Get rid of empty string in filterTopicIds
-        List<UUID> finalFilterTopicIds = new ArrayList<>();
-        for (UUID topicId: filterTopicIds) {
-            if (topicId != null && !topicId.toString().isEmpty()) {
-                finalFilterTopicIds.add(topicId);
-            }
-        }
-        UUID firstTopicId = !finalFilterTopicIds.isEmpty() ? finalFilterTopicIds.get(0) : null;
-
         if (isRegistered) {
             return certificateCourseJpaRepository.findAllByCourseNameAndByFilterTopicIdsAndRegisteredBy(
-                            searchExcludeFinalWord,
-                            searchFinalWord,
                             courseName,
-                            firstTopicId,
+                            filterTopicId,
                             userId)
                     .stream()
                     .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
                     .toList();
         } else {
             return certificateCourseJpaRepository.findAllByCourseNameAndByFilterTopicIdsAndNotRegisteredBy(
-                            searchExcludeFinalWord,
-                            searchFinalWord,
                             courseName,
-                            firstTopicId,
+                            filterTopicId,
                             userId)
                     .stream()
                     .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
@@ -135,13 +95,25 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
     }
 
     @Override
-    public int countNumOfCompletedQuestions(UUID certificateCourseId, UUID userId) {
-        return certificateCourseJpaRepository.countNumOfCompletedQuestions(certificateCourseId, userId);
+    public List<CertificateCourse> findMostEnrolledCertificateCoursesByTopicIds(List<UUID> topicIds) {
+        return certificateCourseJpaRepository.findMostEnrolledCertificateCoursesByTopicIds(
+                topicIds.isEmpty()
+                        ? null
+                        : topicIds
+                )
+                .stream()
+                .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
+                .toList();
     }
 
     @Override
-    public int countNumOfQuestionsByCertificateId(UUID certificateCourseId) {
-        return certificateCourseJpaRepository.countNumOfQuestionsByCertificateId(certificateCourseId);
+    public int countNumOfCompletedResources(UUID certificateCourseId, UUID userId) {
+        return certificateCourseJpaRepository.countNumOfCompletedResources(certificateCourseId, userId);
+    }
+
+    @Override
+    public int countNumOfResourcesByCertificateId(UUID certificateCourseId) {
+        return certificateCourseJpaRepository.countNumOfResourcesByCertificateId(certificateCourseId);
     }
 
     @Override

@@ -14,8 +14,6 @@ import com.backend.programming.learning.system.core.service.dataaccess.question.
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionClone;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
-import com.backend.programming.learning.system.core.service.domain.entity.QtypeCodeQuestion;
-import com.backend.programming.learning.system.core.service.domain.entity.QtypeEssayQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeCodeQuestionRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeEssayQuestionRepository;
@@ -31,11 +29,8 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Component
 public class QuestionRepositoryImpl implements QuestionRepository {
@@ -80,6 +75,36 @@ public class QuestionRepositoryImpl implements QuestionRepository {
 
     @Override
     public void deleteQuestion(UUID id) {
+        questionJpaRepository.findById(id)
+                .ifPresent(
+                        questionEntity -> {
+//                            questionJpaRepository.delete(questionEntity);
+                            switch (questionEntity.getQtype()) {
+                                case CODE:
+                                    qtypeCodeQuestionJpaRepository.findByQuestionId(id)
+                                            .ifPresent(qtypeCodeQuestionJpaRepository::delete);
+                                    break;
+                                case ESSAY:
+                                    qtypeEssayQuestionJpaRepository.findByQuestionId(id)
+                                            .ifPresent(qtypeEssayQuestionJpaRepository::delete);
+                                    break;
+                                case MULTIPLE_CHOICE:
+                                    qtypeMultichoiceQuestionJpaRepository.findByQuestionId(id)
+                                            .ifPresent(qtypeMultichoiceQuestionJpaRepository::delete);
+                                    break;
+                                case SHORT_ANSWER:
+                                    qtypeShortanswerQuestionJpaRepository.findByQuestionId(id)
+                                            .ifPresent(qtypeShortanswerQuestionJpaRepository::delete);
+                                    break;
+                                case TRUE_FALSE:
+                                    qtypeMultichoiceQuestionJpaRepository.findByQuestionId(id)
+                                            .ifPresent(qtypeMultichoiceQuestionJpaRepository::delete);
+                                    break;
+                                default:
+                                    throw new IllegalArgumentException("Invalid question type");
+                            }
+                        }
+                );
         questionJpaRepository.deleteById(id);
     }
 
@@ -101,7 +126,9 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     }
 
     @Override
-    public Page<QuestionResponseEntity> findAllQuestionByCategory(UUID categoryId, QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand) {
+    public Page<QuestionResponseEntity> findAllQuestionByCategory(
+            UUID categoryId,
+            QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand) {
         Pageable pageRequest = Pageable.ofSize(queryAllQuestionByCategoryIdCommand.getPageSize())
                 .withPage(queryAllQuestionByCategoryIdCommand.getPageNo());
         return questionJpaRepository

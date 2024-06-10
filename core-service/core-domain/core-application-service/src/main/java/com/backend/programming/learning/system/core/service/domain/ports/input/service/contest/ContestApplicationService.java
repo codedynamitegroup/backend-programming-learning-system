@@ -17,7 +17,9 @@ public interface ContestApplicationService {
 
     QueryAllContestsResponse queryAllContests(
             @Valid QueryAllContestsCommand queryAllContestsCommand);
-    QueryMostPopularContestsResponse queryMostPopularContests();
+    QueryMostPopularContestsResponse queryMostPopularContests(
+            @Valid QueryMostPopularContestsCommand queryMostPopularContestsCommand
+    );
 
     QueryAllContestsResponse queryAllContestsForAdmin(
             @Valid QueryAllContestsCommand queryAllContestsCommand);

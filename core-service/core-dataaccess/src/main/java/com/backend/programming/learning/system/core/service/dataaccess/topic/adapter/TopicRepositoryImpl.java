@@ -10,7 +10,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 public class TopicRepositoryImpl implements TopicRepository {
@@ -45,5 +47,13 @@ public class TopicRepositoryImpl implements TopicRepository {
     @Override
     public void deleteTopicById(TopicId topicId) {
         topicJpaRepository.deleteById(topicId.getValue());
+    }
+
+    @Override
+    public List<Topic> findAllTopicsOfRegisteredCertificateCoursesByUserId(UUID userId) {
+        return topicJpaRepository.findAllTopicsOfRegisteredCertificateCoursesByUserId(userId)
+                .stream()
+                .map(topicDataAccessMapper::topicEntityToTopic)
+                .toList();
     }
 }

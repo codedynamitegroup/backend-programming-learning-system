@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 import com.backend.programming.learning.system.code.assessment.service.config.CodeAssessmentServiceConfigData;
 import com.backend.programming.learning.system.code.assessment.service.domain.CodeAssessmentDomainService;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.ExecuteCodeWithTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetCodeSubmissionsByUserIdCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetDetailCodeSubmissionsByIdCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetMemoryAndTimeRankingCommand;
@@ -29,9 +30,12 @@ import com.backend.programming.learning.system.domain.valueobject.UserId;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -208,5 +212,22 @@ public class CodeSubmissionHelper {
     public void setUnavailable(CodeSubmission codeSubmission) {
         codeSubmission.setGradingStatus(GradingStatus.GRADING_SYSTEM_UNAVAILABLE);
         codeSubmissionRepository.save(codeSubmission);
+    }
+
+    public String executeCodeWithTestCase(ExecuteCodeWithTestCaseCommand command) {
+        WebClient client = WebClient.create("http://" + codeAssessmentServiceConfigData.getAssessmentExternalServiceIp() + ":" + codeAssessmentServiceConfigData.getAssessmentExternalServicePort());
+        String result = client.post()
+                .uri("/submissions?base64_encoded=true&wait=true")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(Mono.just(command), ExecuteCodeWithTestCaseCommand.class)
+                .retrieve()
+//                .onStatus(HttpStatus::is5xxServerError,
+//                        clientResponse ->
+//                                Mono.error(new CodeSubmissionJudgingServiceUnavailableException("Judgement services are unavailable now. Please, try again later")))
+                .bodyToMono(String.class)
+                .block();
+
+        return result;
     }
 }

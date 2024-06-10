@@ -25,14 +25,12 @@ public class CertificateCourseUserDataMapper {
     public CertificateCourseUserDataMapper(UserDataMapper userDataMapper) {
         this.userDataMapper = userDataMapper;
     }
+
     public CertificateCourseUser createCertificateCourseUserCommandToCertificateCourseUser(
             CreateCertificateCourseUserCommand createCertificateCourseUserCommand) {
         return CertificateCourseUser.builder()
                 .certificateCourse(CertificateCourse.builder()
                         .id(new CertificateCourseId(createCertificateCourseUserCommand.getCertificateCourseId()))
-                        .build())
-                .user(User.builder()
-                        .id(new UserId(createCertificateCourseUserCommand.getUserId()))
                         .build())
                 .isCompleted(false)
                 .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))

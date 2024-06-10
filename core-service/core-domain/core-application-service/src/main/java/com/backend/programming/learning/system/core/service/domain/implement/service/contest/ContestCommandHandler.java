@@ -124,7 +124,9 @@ public class ContestCommandHandler {
     }
 
     @Transactional(readOnly = true)
-    public QueryMostPopularContestsResponse queryMostPopularContestsResponse() {
+    public QueryMostPopularContestsResponse queryMostPopularContestsResponse(
+            QueryMostPopularContestsCommand queryMostPopularContestsCommand
+    ) {
         List<Contest> contests = contestQueryHelper
                 .findMostPopularContests();
         log.info("Returning most popular upcoming contests: {}", contests);

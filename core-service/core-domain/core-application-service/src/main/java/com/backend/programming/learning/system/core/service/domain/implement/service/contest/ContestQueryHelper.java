@@ -1,15 +1,26 @@
 package com.backend.programming.learning.system.core.service.domain.implement.service.contest;
 
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryStatisticsOfContestResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest_user.ContestUserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.exception.ContestNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.question.QtypeCodeQuestionNotFoundException;
+import com.backend.programming.learning.system.core.service.domain.mapper.contest.ContestDataMapper;
+import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest.ContestRedisService;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
+import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.ContestStartTimeFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,25 +33,31 @@ import java.util.UUID;
 @Slf4j
 @Component
 public class ContestQueryHelper {
+    private final ContestRedisService contestRedisService;
     private final ContestRepository contestRepository;
     private final ContestQuestionRepository contestQuestionRepository;
     private final ContestUserRepository contestUserRepository;
     private final QtypeCodeQuestionRepository qtypeCodeQuestionRepository;
     private final CodeSubmissionRepository codeSubmissionRepository;
     private final UserRepository userRepository;
+    private final ContestDataMapper contestDataMapper;
 
-    public ContestQueryHelper(ContestRepository contestRepository,
+    public ContestQueryHelper(ContestRedisService contestRedisService,
+                              ContestRepository contestRepository,
                               ContestQuestionRepository contestQuestionRepository,
                               ContestUserRepository contestUserRepository,
                               QtypeCodeQuestionRepository qtypeCodeQuestionRepository,
                               CodeSubmissionRepository codeSubmissionRepository,
-                              UserRepository userRepository) {
+                              UserRepository userRepository,
+                              ContestDataMapper contestDataMapper) {
+        this.contestRedisService = contestRedisService;
         this.contestRepository = contestRepository;
         this.contestQuestionRepository = contestQuestionRepository;
         this.contestUserRepository = contestUserRepository;
         this.qtypeCodeQuestionRepository = qtypeCodeQuestionRepository;
         this.codeSubmissionRepository = codeSubmissionRepository;
         this.userRepository = userRepository;
+        this.contestDataMapper = contestDataMapper;
     }
 
     @Transactional(readOnly = true)
@@ -126,31 +143,56 @@ public class ContestQueryHelper {
     ) {
         log.info("Querying all contests with searchName: {}, startTimeFilter: {}, pageNo: {}, pageSize: {}",
                 searchName, startTimeFilter, pageNo, pageSize);
-        Optional<User> userResult = userRepository.findByEmail(email);
-        Page<Contest> contests = contestRepository.findAll(searchName, startTimeFilter, pageNo, pageSize,isAdmin);
-        for (Contest contest : contests) {
-            contest.setQuestions(new ArrayList<>());
-            if (userResult.isPresent()) {
-                Optional<ContestUser> contestUserResult = contestUserRepository.findByContestIdAndUserId(
-                        contest.getId().getValue(),
-                        userResult.get().getId().getValue()
-                );
-                contestUserResult.ifPresent(contestUser -> contest.setRegistered(true));
-            }
 
-            User userCreatedBy = getUserHideSensitiveData(contest.getCreatedBy().getId().getValue());
-            contest.setCreatedBy(userCreatedBy);
-            User userUpdatedBy = getUserHideSensitiveData(contest.getUpdatedBy().getId().getValue());
-            contest.setUpdatedBy(userUpdatedBy);
+        Page<Contest> contests = null;
+        if (
+                searchName == null ||
+                        searchName.isEmpty() ||
+                        searchName.isBlank()
+        ) {
+            QueryAllContestsResponse redisResponse = contestRedisService.getAllContests(
+                    ContestStartTimeFilter.valueOf(startTimeFilter),
+                    pageNo,
+                    pageSize,
+                    isAdmin
+            );
+            if (redisResponse != null) {
+                log.info("Get all contests from redis");
+                List<ContestResponseEntity> contestResponseEntities = redisResponse.getContests();
+                Pageable pageable = PageRequest.of(redisResponse.getCurrentPage(), pageSize);
+                Page<ContestResponseEntity> contestResponseEntityPage =
+                        new PageImpl<>(contestResponseEntities, pageable, redisResponse.getTotalItems());
+                contests = contestDataMapper.contestResponseEntitiesToContests(contestResponseEntityPage);
+            } else {
+                log.info("Get all contests from database");
+                contests = contestRepository.findAll(searchName, startTimeFilter, pageNo, pageSize, isAdmin);
+                QueryAllContestsResponse response = contestDataMapper.contestsToQueryAllContestsResponse(contests);
+                contestRedisService.saveAllContests(response, ContestStartTimeFilter.valueOf(startTimeFilter), pageNo, pageSize, isAdmin);
+            }
+        } else {
+            log.info("Get all contests from database");
+            contests = contestRepository.findAll(searchName, startTimeFilter, pageNo, pageSize, isAdmin);
+        }
+
+        Optional<User> userResult = userRepository.findByEmail(email);
+        if (contests != null) {
+            for (Contest contest : contests) {
+                contest.setQuestions(new ArrayList<>());
+                if (userResult.isPresent()) {
+                    Optional<ContestUser> contestUserResult = contestUserRepository.findByContestIdAndUserId(
+                            contest.getId().getValue(),
+                            userResult.get().getId().getValue()
+                    );
+                    contestUserResult.ifPresent(contestUser -> contest.setRegistered(true));
+                }
+
+                User userCreatedBy = getUserHideSensitiveData(contest.getCreatedBy().getId().getValue());
+                contest.setCreatedBy(userCreatedBy);
+                User userUpdatedBy = getUserHideSensitiveData(contest.getUpdatedBy().getId().getValue());
+                contest.setUpdatedBy(userUpdatedBy);
+            }
         }
         return contests;
-    }
-
-    @Transactional(readOnly = true)
-    public QueryStatisticsOfContestResponse queryStatisticsOfContest(
-            UUID contestId
-    ) {
-        return null;
     }
 
     @Transactional(readOnly = true)

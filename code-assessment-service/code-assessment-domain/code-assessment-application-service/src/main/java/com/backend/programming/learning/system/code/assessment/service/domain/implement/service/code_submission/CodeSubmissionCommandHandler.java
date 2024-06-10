@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.ExecuteCodeWithTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_submission.UpdateCodeSubmissionTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
@@ -95,9 +96,10 @@ public class CodeSubmissionCommandHandler {
         Page<GetCodeSubmissionResponseItem> list = codeSubmissions.map(
                         codeSubmissionDataMapper::codeSubmissionToGetCodeSubmissionResponseItem);
         list.forEach(item -> {
-            item.setHeadCode(null);
-            item.setBodyCode(null);
-            item.setTailCode(null);
+            item.setSourceCode(null);
+//            item.setHeadCode(null);
+//            item.setBodyCode(null);
+//            item.setTailCode(null);
         });
         return codeSubmissionDataMapper.pagableToGetCodeSubmissionReponse(list);
     }
@@ -112,5 +114,9 @@ public class CodeSubmissionCommandHandler {
 
     public GetMemoryAndTimeRankingResponse getMemoryAndRunTimeRanking(GetMemoryAndTimeRankingCommand command) {
         return codeSubmissionHelper.getMemoryAndRunTimeRanking(command);
+    }
+
+    public String executeCodeWithTestCase(ExecuteCodeWithTestCaseCommand command) {
+        return codeSubmissionHelper.executeCodeWithTestCase(command);
     }
 }

@@ -104,7 +104,7 @@ public class AssessmentSourceCodeByTestCasesImpl_Judge0 implements AssessmentSou
 
         List<RequestBody> result = new ArrayList<>();
 
-        String base64SourceCode = getBase64SourceCode(codeSubmission.getHeadCode(), codeSubmission.getBodyCode(), codeSubmission.getTailCode());
+        String base64SourceCode = codeSubmission.getSourceCode();//getBase64SourceCode(codeSubmission.getHeadCode(), codeSubmission.getBodyCode(), codeSubmission.getTailCode());
 
         for(int i = 0;i < n; ++i){
             splitList.add(baseList.get(i));

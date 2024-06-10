@@ -66,9 +66,10 @@ public class DtoMapper {
         return CodeSubmissionDto.builder()
                 .id(codeSubmission.getId().getValue())
                 .languageId(codeSubmission.getLanguageId().getValue())
-                .bodyCode(decodeBase64ToString(codeSubmission.getBodyCode()))
-                .headCode(decodeBase64ToString(codeSubmission.getHeadCode()))
-                .tailCode(decodeBase64ToString(codeSubmission.getTailCode()))
+                .sourceCode(decodeBase64ToString(codeSubmission.getSourceCode()))
+//                .bodyCode(decodeBase64ToString(codeSubmission.getBodyCode()))
+//                .headCode(decodeBase64ToString(codeSubmission.getHeadCode()))
+//                .tailCode(decodeBase64ToString(codeSubmission.getTailCode()))
                 .build();
     }
 

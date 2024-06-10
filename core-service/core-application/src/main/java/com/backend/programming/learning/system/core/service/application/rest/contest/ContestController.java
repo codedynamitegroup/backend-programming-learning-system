@@ -93,16 +93,22 @@ public class ContestController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateContestUserResponse> registerContest(
-            @PathVariable UUID id,
-            @RequestBody CreateContestUserCommand createContestUserCommand) {
+            @PathVariable UUID id) {
+        String email = null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
         log.info("User registering for contest: {}", id);
         CreateContestUserResponse createContestUserResponse =
                 contestUserApplicationService.createContestUser(CreateContestUserCommand
                         .builder()
-                        .userId(createContestUserCommand.getUserId())
+                        .email(email)
                         .contestId(id)
                         .build());
-        log.info("Contest User created: {}", createContestUserCommand);
+        log.info("User registered for contest: {}", id);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createContestUserResponse);
     }
@@ -221,9 +227,18 @@ public class ContestController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<QueryMostPopularContestsResponse> getMostPopularContests() {
+    public ResponseEntity<QueryMostPopularContestsResponse> getMostPopularContests(
+            @RequestHeader(value = "Access-Token", required = false) String accessToken
+    ) {
+        String email = JwtUtils.getEmailFromJwtString(accessToken);
+
         QueryMostPopularContestsResponse queryMostPopularContestsResponse =
-                contestApplicationService.queryMostPopularContests();
+                contestApplicationService.queryMostPopularContests(
+                        QueryMostPopularContestsCommand
+                                .builder()
+                                .email(email)
+                                .build()
+                );
         log.info("Returning most popular upcoming contests: {}",
                 queryMostPopularContestsResponse.getMostPopularContests());
         return ResponseEntity.ok(queryMostPopularContestsResponse);

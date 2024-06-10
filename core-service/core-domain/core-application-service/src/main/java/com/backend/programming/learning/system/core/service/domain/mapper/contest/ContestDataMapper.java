@@ -64,8 +64,9 @@ public class ContestDataMapper {
         UserResponseEntity createdByResponse = userDataMapper.userToUserResponseEntity(contest.getCreatedBy());
         UserResponseEntity updatedByResponse = userDataMapper.userToUserResponseEntity(contest.getUpdatedBy());
         List<ContestQuestionResponseEntity> contestQuestionResponseEntities =
-                contestQuestionDataMapper.
-                        contestQuestionsToContestQuestionResponseEntities(contest.getQuestions());
+                contest.getQuestions() == null
+                        ? new ArrayList<>()
+                        : contestQuestionDataMapper.contestQuestionsToContestQuestionResponseEntities(contest.getQuestions());
 
         return ContestResponseEntity.builder()
                 .contestId(contest.getId().getValue())
@@ -87,6 +88,29 @@ public class ContestDataMapper {
                 .updatedBy(updatedByResponse)
                 .createdAt(contest.getCreatedAt())
                 .updatedAt(contest.getUpdatedAt())
+                .build();
+    }
+
+    public  Contest contestResponseEntityToContest(ContestResponseEntity contestResponseEntity) {
+        return Contest.builder()
+                .id(new ContestId(contestResponseEntity.getContestId()))
+                .name(contestResponseEntity.getName())
+                .description(contestResponseEntity.getDescription())
+                .prizes(contestResponseEntity.getPrizes())
+                .rules(contestResponseEntity.getRules())
+                .scoring(contestResponseEntity.getScoring())
+                .thumbnailUrl(contestResponseEntity.getThumbnailUrl())
+                .startTime(contestResponseEntity.getStartTime())
+                .endTime(contestResponseEntity.getEndTime())
+                .numOfParticipants(contestResponseEntity.getNumOfParticipants())
+                .isRegistered(contestResponseEntity.getIsRegistered())
+                .isPublic(contestResponseEntity.getIsPublic())
+                .isRestrictedForum(contestResponseEntity.getIsRestrictedForum())
+                .isDisabledForum(contestResponseEntity.getIsDisabledForum())
+                .createdBy(User.builder().id(new UserId(contestResponseEntity.getCreatedBy().getUserId())).build())
+                .updatedBy(User.builder().id(new UserId(contestResponseEntity.getUpdatedBy().getUserId())).build())
+                .createdAt(contestResponseEntity.getCreatedAt())
+                .updatedAt(contestResponseEntity.getUpdatedAt())
                 .build();
     }
 
@@ -123,23 +147,6 @@ public class ContestDataMapper {
 
     public ContestUserResponseEntity contestUserToContestUserResponseEntity(ContestUser contestUser) {
         UserResponseEntity userResponseEntity = userDataMapper.userToUserResponseEntity(contestUser.getUser());
-//        List<ContestQuestionResponseEntity> contestQuestionResponseEntities = new ArrayList<>();
-//        for (int i = 0; i < contestUser.getContestQuestions().size(); i++) {
-//            ContestQuestion contestQuestion = contestUser.getContestQuestions().get(i);
-//            ContestQuestionResponseEntity contestQuestionResponseEntity = ContestQuestionResponseEntity.builder()
-//                    .questionId(contestQuestion.getQuestion().getId().getValue())
-//                    .codeQuestionId(contestQuestion.getCodeQuestionId())
-//                    .difficulty(contestQuestion.getQuestion().getDifficulty())
-//                    .name(contestQuestion.getQuestion().getName())
-//                    .questionText(contestQuestion.getQuestion().getQuestionText())
-//                    .defaultMark(contestQuestion.getQuestion().getDefaultMark())
-//                    .maxGrade(contestQuestion.getMaxGrade())
-//                    .grade(contestQuestion.getGrade())
-//                    .doTime(contestQuestion.getDoTime())
-//                    .numOfSubmissions(contestQuestion.getNumOfSubmissions())
-//                    .build();
-//            contestQuestionResponseEntities.add(contestQuestionResponseEntity);
-//        }
         List<ContestQuestionResponseEntity> contestQuestionResponseEntities =
                 contestQuestionDataMapper.
                         contestQuestionsToContestQuestionResponseEntities(contestUser.getContestQuestions());
@@ -159,5 +166,7 @@ public class ContestDataMapper {
                 .build();
     }
 
-
+    public Page<Contest> contestResponseEntitiesToContests(Page<ContestResponseEntity> contestResponseEntityPage) {
+        return contestResponseEntityPage.map(this::contestResponseEntityToContest);
+    }
 }

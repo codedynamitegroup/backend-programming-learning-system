@@ -78,22 +78,30 @@ public class CertificateCourseCommandHandler {
     }
 
     @Transactional(readOnly = true)
+    public QueryAllCertificateCoursesResponse findAllMyCertificateCourses(
+            QueryAllCertificateCoursesCommand queryAllCertificateCoursesCommand) {
+        List<CertificateCourse> certificateCourses = certificateCourseQueryHelper
+                .queryAllCertificateCourses(
+                        queryAllCertificateCoursesCommand.getCourseName(),
+                        queryAllCertificateCoursesCommand.getFilterTopicId(),
+                        IsRegisteredFilter.valueOf(queryAllCertificateCoursesCommand.getIsRegisteredFilter()),
+                        queryAllCertificateCoursesCommand.getEmail()
+                );
+
+        return certificateCourseDataMapper
+                .certificateCoursesToQueryAllCertificateCoursesResponse(certificateCourses);
+    }
+
+    @Transactional(readOnly = true)
     public QueryAllCertificateCoursesResponse findAllCertificateCourses(
             QueryAllCertificateCoursesCommand queryAllCertificateCoursesCommand) {
         List<CertificateCourse> certificateCourses = certificateCourseQueryHelper
                 .queryAllCertificateCourses(
                         queryAllCertificateCoursesCommand.getCourseName(),
-                        queryAllCertificateCoursesCommand.getFilterTopicIds(),
+                        queryAllCertificateCoursesCommand.getFilterTopicId(),
                         IsRegisteredFilter.valueOf(queryAllCertificateCoursesCommand.getIsRegisteredFilter()),
                         queryAllCertificateCoursesCommand.getEmail()
                 );
-//        List<CertificateCourse> mostEnrolledCertificateCourses = certificateCourseQueryHelper
-//                .queryMostEnrolledCertificateCourses(
-//                        queryAllCertificateCoursesCommand.getCourseName(),
-//                        queryAllCertificateCoursesCommand.getFilterTopicIds(),
-//                        IsRegisteredFilter.valueOf(queryAllCertificateCoursesCommand.getIsRegisteredFilter()),
-//                        queryAllCertificateCoursesCommand.getEmail()
-//                );
 
         return certificateCourseDataMapper
                 .certificateCoursesToQueryAllCertificateCoursesResponse(certificateCourses);

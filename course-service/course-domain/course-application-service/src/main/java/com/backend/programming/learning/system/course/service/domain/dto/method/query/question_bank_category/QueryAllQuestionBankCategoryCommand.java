@@ -12,6 +12,7 @@ import jakarta.validation.constraints.NotNull;
  */
 @Builder
 public record QueryAllQuestionBankCategoryCommand(
+        Boolean isOrgQuestionBank,
         @NotNull
         Integer pageNo,
         @NotNull

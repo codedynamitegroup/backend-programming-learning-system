@@ -55,35 +55,26 @@ public class ContestRepositoryImpl implements ContestRepository {
     public Page<Contest> findAll(String searchName, String startTimeFilter, Integer page, Integer size, Boolean isAdmin) {
         Pageable paging = PageRequest.of(page, size);
 
-        List<String> splitedSearch = contestDataAccessMapper.splitWords(searchName);
-
-        String searchFinalWord = splitedSearch != null && !splitedSearch.isEmpty()? splitedSearch.get(splitedSearch.size() - 1): null;
-
-        if(splitedSearch != null && !splitedSearch.isEmpty())
-            splitedSearch.remove(splitedSearch.size() - 1);
-
-        String searchExcludeFinalWord =  splitedSearch != null && !splitedSearch.isEmpty() ? String.join(" ", splitedSearch) : null;
-
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UTC"));
         switch (ContestStartTimeFilter.valueOf(startTimeFilter)) {
             case UPCOMING -> {
                 return contestJpaRepository.findAllUpcomingContestsContainsSearchName(
-                                now, searchExcludeFinalWord, searchFinalWord, searchName, isAdmin, paging)
+                                now, searchName, isAdmin, paging)
                         .map(contestDataAccessMapper::contestProjectionToContest);
             }
             case HAPPENING -> {
                 return contestJpaRepository.findAllHappeningContestsContainsSearchName(
-                                now, searchExcludeFinalWord, searchFinalWord, searchName, isAdmin, paging)
+                                now, searchName, isAdmin, paging)
                         .map(contestDataAccessMapper::contestProjectionToContest);
             }
             case ENDED -> {
                 return contestJpaRepository.findAllEndedContestsContainsSearchName(
-                                now, searchExcludeFinalWord, searchFinalWord, searchName, isAdmin, paging)
+                                now, searchName, isAdmin, paging)
                         .map(contestDataAccessMapper::contestProjectionToContest);
             }
             default -> {
                 return contestJpaRepository.findAllContainsSearchName(
-                                searchExcludeFinalWord, searchFinalWord, searchName, isAdmin, paging)
+                               searchName, isAdmin, paging)
                         .map(contestDataAccessMapper::contestProjectionToContest);
 
             }

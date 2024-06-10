@@ -20,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -82,5 +83,19 @@ public class ExamSubmissionRepositoryImpl implements ExamSubmissionRepository {
         examSubmissionEntity.setSubmitTime(ZonedDateTime.now());
         examSubmissionEntity.setStatus(Status.SUBMITTED);
         return examSubmissionDataAccessMapper.examSubmissionEntityToExamSubmission(examSubmissionJpaRepository.save(examSubmissionEntity));
+    }
+
+    @Override
+    public List<ExamSubmission> findByExamId(ExamId examId) {
+        List<ExamSubmissionEntity> examSubmissions = examSubmissionJpaRepository
+                .findByExamId(examId.getValue())
+                .orElse(null);
+        return examSubmissionDataAccessMapper.examSubmissionEntitiesToExamSubmissions(examSubmissions);
+    }
+
+    @Override
+    public List<ExamSubmission> findAllByExamIdAndUserId(UUID examId, UUID userId) {
+        List<ExamSubmissionEntity> examSubmissionEntities = examSubmissionJpaRepository.findByExamIdAndUserId(examId, userId);
+        return examSubmissionDataAccessMapper.examSubmissionEntitiesToExamSubmissions(examSubmissionEntities);
     }
 }

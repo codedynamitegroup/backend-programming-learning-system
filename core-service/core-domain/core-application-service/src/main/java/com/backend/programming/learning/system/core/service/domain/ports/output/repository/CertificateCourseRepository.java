@@ -18,12 +18,12 @@ public interface CertificateCourseRepository {
 
     List<CertificateCourse> findAllCertificateCourses(
             String courseName,
-            List<UUID> filterTopicIds
+            UUID filterTopicId
     );
 
     List<CertificateCourse> findAllCertificateCoursesByIsRegistered(
             String courseName,
-            List<UUID> filterTopicIds,
+            UUID filterTopicId,
             boolean isRegistered,
             UUID userId
     );
@@ -31,8 +31,10 @@ public interface CertificateCourseRepository {
     void deleteCertificateCourse(UUID certificateCourseId);
     List<CertificateCourse> findMostEnrolledCertificateCourses();
 
-    int countNumOfCompletedQuestions(UUID certificateCourseId, UUID userId);
-    int countNumOfQuestionsByCertificateId(UUID certificateCourseId);
+    List<CertificateCourse> findMostEnrolledCertificateCoursesByTopicIds(List<UUID> topicIds);
+
+    int countNumOfCompletedResources(UUID certificateCourseId, UUID userId);
+    int countNumOfResourcesByCertificateId(UUID certificateCourseId);
     int countNumOfStudentsByCertificateId(UUID certificateCourseId);
     int countNumOfReviewsByCertificateId(UUID certificateCourseId);
 }

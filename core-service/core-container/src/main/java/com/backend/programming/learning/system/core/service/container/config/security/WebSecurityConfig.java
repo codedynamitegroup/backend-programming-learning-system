@@ -31,14 +31,16 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // Certificate Course
                         .requestMatchers(HttpMethod.POST, "/core/certificate-courses/create").hasAnyRole(ADMIN)
-                        .requestMatchers(HttpMethod.POST, "/core/certificate-courses/{id}/register").hasAnyRole(ADMIN, USER)
+                        .requestMatchers(HttpMethod.POST, "/core/certificate-courses/{id}/register").hasAnyRole(USER)
                         .requestMatchers(HttpMethod.PUT, "/core/certificate-courses/{id}").hasAnyRole(ADMIN)
                         .requestMatchers(HttpMethod.DELETE, "/core/certificate-courses/{id}").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.POST, "/core/certificate-courses/me").hasAnyRole(USER)
 
                         // Chapter
                         .requestMatchers(HttpMethod.POST, "/core/chapters/create").hasAnyRole(ADMIN)
                         .requestMatchers(HttpMethod.PUT, "/core/chapters/{id}").hasAnyRole(ADMIN)
                         .requestMatchers(HttpMethod.DELETE, "/core/chapters/{id}").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.POST, "/core/chapters/chapter-resource-users/{id}").hasAnyRole(USER)
 
                         // Contest
                         .requestMatchers(HttpMethod.POST, "/core/contests/create").hasAnyRole(ADMIN)
@@ -83,4 +85,18 @@ public class WebSecurityConfig {
                     .requestMatchers(HttpMethod.GET, "/core/certificate-courses/{id}");
         };
     }
+//    @Bean
+//    public WebMvcConfigurer corsConfigurer() {
+//        return new WebMvcConfigurer() {
+//
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                registry
+//                        .addMapping("/**")
+//                        .allowedOrigins("*")
+//                        .allowedHeaders("*")
+//                        .allowedMethods("*");
+//            }
+//        };
+//    }
 }

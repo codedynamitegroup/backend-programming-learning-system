@@ -11,7 +11,7 @@ INSERT INTO public."user" (id,user_id_moodle,role_moodle_id,org_id,username,emai
 	 ('8edbc0aa-0b91-480e-a428-23abf2109df9',0,NULL,NULL,NULL,'tgtien852@gmail.com','2002-03-29','Tien','Truong Gia','+8412365478',NULL,NULL,'2024-06-04 19:54:04.349854+07',false,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07'),
 	 ('05dbdfde-1eae-47ba-8ebb-6c4cdc4f6510',0,NULL,NULL,NULL,'dntien852@gmail.com','2002-03-29','Tien','Dang Ngoc','+8412365478',NULL,NULL,'2024-06-04 19:54:04.349854+07',false,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07'),
 	 ('c6bd2565-a6bd-4f98-af43-d974a6302f36',1,1,'08b65a39-394f-4977-a5fa-3fe145b620f8','guest','root@localhost',NULL,'Guest user',' ',NULL,NULL,NULL,'2024-06-04 19:54:23.474857+07',false,'2024-06-04 19:54:23.474857+07','2024-06-04 19:54:23.474857+07'),
-	 ('64412e27-169e-44ea-a101-74ebf8cb82d9',2,3,'08b65a39-394f-4977-a5fa-3fe145b620f8','admin','kayonkiu@gmail.com',NULL,'Admin','User',NULL,NULL,NULL,'2024-06-04 19:54:23.636865+07',false,'2024-06-04 19:54:23.636865+07','2024-06-04 19:54:23.637867+07'),
+	 ('64412e27-169e-44ea-a101-74ebf8cb82d9',2,3,'08b65a39-394f-4977-a5fa-3fe145b620f8','admin','kayonkiu@gmail.com',NULL,'Tien','Ngoc',NULL,NULL,NULL,'2024-06-04 19:54:23.636865+07',false,'2024-06-04 19:54:23.636865+07','2024-06-04 19:54:23.637867+07'),
 	 ('cb2c22ac-87de-44e4-9638-35979f6af667',3,5,'08b65a39-394f-4977-a5fa-3fe145b620f8','chithong2002','duongchithong2002@gmail.com',NULL,'Dương','Chí Thông',NULL,NULL,NULL,'2024-06-04 19:54:23.664571+07',false,'2024-06-04 19:54:23.664571+07','2024-06-04 19:54:23.664571+07'),
 	 ('2d7ed5a0-fb21-4927-9a25-647c17d29668',4,5,'08b65a39-394f-4977-a5fa-3fe145b620f8','tien','dntienes@gmail.com',NULL,'Tiến','Đặng Ngọc','0993331110',NULL,NULL,'2024-06-04 19:54:23.690581+07',false,'2024-06-04 19:54:23.690581+07','2024-06-04 19:54:23.690581+07');
 INSERT INTO public."user" (id,user_id_moodle,role_moodle_id,org_id,username,email,dob,first_name,last_name,phone,address,avatar_url,last_login,is_deleted,created_at,updated_at) VALUES
@@ -145,21 +145,21 @@ INSERT INTO public."section" (id,course_id,section_moodle_id,name,visible) VALUE
 	 ('fb02fb82-4ddb-4ef2-bf61-5ed1a9f37fd2','c31382b2-2fbd-43ae-89de-12b6614fc8ab',25,'Topic 3',1),
 	 ('33be7f98-01b8-4a9f-866b-2bc18f75acf8','c31382b2-2fbd-43ae-89de-12b6614fc8ab',26,'Topic 4',1);
 
-INSERT INTO public."module" (id,cmid,section_id,name,visible,"content",type_module,time_open,time_close) VALUES
-	 ('d21b508d-ddfb-4f0e-a49b-60597cb432b3',6,'d8814d8f-0202-4633-873a-bad722505a56','Đây là bài tập 11',1,NULL,'ASSIGNMENT','2024-05-06 00:00:00+07','2024-05-13 00:00:00+07'),
-	 ('ff221787-624f-40c6-b6c1-0a7ff2909bf6',5,'7e89a8d4-5137-4457-81aa-1828265fc5ef','bài tập 2',1,NULL,'ASSIGNMENT','2024-05-06 00:00:00+07','2024-05-13 00:00:00+07'),
-	 ('09c0bd11-468a-4c73-b5b2-4cfb01e25b74',7,'7e89a8d4-5137-4457-81aa-1828265fc5ef','baaif tạp cuối',1,NULL,'ASSIGNMENT','2024-05-08 17:16:00+07','2024-05-17 18:19:00+07'),
-	 ('d946a443-be55-495c-b545-9c5ef157064c',8,'7e89a8d4-5137-4457-81aa-1828265fc5ef','baafi online tẽt',1,NULL,'ASSIGNMENT','2024-05-06 00:00:00+07','2024-05-13 00:00:00+07'),
-	 ('846a625b-6d7d-4cda-bf4e-ef8ef9549af7',9,'7e89a8d4-5137-4457-81aa-1828265fc5ef','Bài taapj 1',1,NULL,'ASSIGNMENT','2024-05-06 00:00:00+07','2024-05-13 00:00:00+07'),
-	 ('ff57ea21-fa77-4fc5-8047-915391df5824',10,'7e89a8d4-5137-4457-81aa-1828265fc5ef','hehe',1,NULL,'ASSIGNMENT','2024-05-06 00:00:00+07','2024-05-13 00:00:00+07'),
-	 ('32f7e6b8-f4d0-46cf-b461-62d5328e2540',11,'7e89a8d4-5137-4457-81aa-1828265fc5ef','Baaif tập 10',0,NULL,'ASSIGNMENT','2024-05-06 00:00:00+07','2024-05-13 00:00:00+07'),
-	 ('0e843862-201b-4593-8e67-134790252295',18,'7e89a8d4-5137-4457-81aa-1828265fc5ef','Bài tập module',1,NULL,'ASSIGNMENT','2024-05-12 00:00:00+07','2024-05-19 00:00:00+07'),
-	 ('d9ee7356-3cc0-4780-b5f2-5b5e02570c38',14,'70bb8281-5c4a-44a6-a745-0d72dd1abe20','bài 1',1,NULL,'ASSIGNMENT','2024-05-07 00:00:00+07','2024-05-14 00:00:00+07'),
-	 ('8758ec8e-6322-4f6a-b68d-1c4a3c1e824a',20,'70bb8281-5c4a-44a6-a745-0d72dd1abe20','Bài tập 2',1,NULL,'ASSIGNMENT','2024-05-22 00:00:00+07','2024-05-29 00:00:00+07');
-INSERT INTO public."module" (id,cmid,section_id,name,visible,"content",type_module,time_open,time_close) VALUES
-	 ('caca48ad-21c5-414d-94c1-b324c25fe8c8',22,'70bb8281-5c4a-44a6-a745-0d72dd1abe20','Bài tập 3',1,NULL,'ASSIGNMENT','2024-05-22 00:00:00+07','2024-05-29 00:00:00+07'),
-	 ('2c8c1590-3e17-46bb-ac93-fb3d3b293544',23,'70bb8281-5c4a-44a6-a745-0d72dd1abe20','Bài tập 4',1,NULL,'ASSIGNMENT','2024-05-22 00:00:00+07','2024-05-29 00:00:00+07'),
-	 ('be09f62d-6d6f-4239-9b6b-08b784717788',24,'70bb8281-5c4a-44a6-a745-0d72dd1abe20','bt 5',1,NULL,'ASSIGNMENT','2024-05-28 00:00:00+07','2024-06-04 00:00:00+07');
+INSERT INTO public."module" (id, cmid, section_id, name, visible, content, type_module, time_open, time_close, assignment_id) VALUES
+    ('d21b508d-ddfb-4f0e-a49b-60597cb432b3', 6, 'd8814d8f-0202-4633-873a-bad722505a56', 'Đây là bài tập 11', 1, NULL, 'ASSIGNMENT', '2024-05-06 00:00:00+07', '2024-05-13 00:00:00+07', '577e118d-604b-450c-a02c-cf8e9f35f8ee'),
+    ('ff221787-624f-40c6-b6c1-0a7ff2909bf6', 5, '7e89a8d4-5137-4457-81aa-1828265fc5ef', 'bài tập 2', 1, NULL, 'ASSIGNMENT', '2024-05-06 00:00:00+07', '2024-05-13 00:00:00+07', 'b1b3e215-2450-4819-9aa6-3aea9f87e604'),
+    ('09c0bd11-468a-4c73-b5b2-4cfb01e25b74', 7, '7e89a8d4-5137-4457-81aa-1828265fc5ef', 'baaif tạp cuối', 1, NULL, 'ASSIGNMENT', '2024-05-08 17:16:00+07', '2024-05-17 18:19:00+07', 'f37edb09-e0f6-4e96-8469-d6eff5378c9d'),
+    ('d946a443-be55-495c-b545-9c5ef157064c', 8, '7e89a8d4-5137-4457-81aa-1828265fc5ef', 'baafi online tẽt', 1, NULL, 'ASSIGNMENT', '2024-05-06 00:00:00+07', '2024-05-13 00:00:00+07', '3926bcb3-6415-458d-b449-6e2b464732d7'),
+    ('846a625b-6d7d-4cda-bf4e-ef8ef9549af7', 9, '7e89a8d4-5137-4457-81aa-1828265fc5ef', 'Bài taapj 1', 1, NULL, 'ASSIGNMENT', '2024-05-06 00:00:00+07', '2024-05-13 00:00:00+07', '8c6d9aa1-f157-49ca-bfae-bc8a14570c81'),
+    ('ff57ea21-fa77-4fc5-8047-915391df5824', 10, '7e89a8d4-5137-4457-81aa-1828265fc5ef', 'hehe', 1, NULL, 'ASSIGNMENT', '2024-05-06 00:00:00+07', '2024-05-13 00:00:00+07', '124c9619-cd26-43fb-8ea4-610b164925ad'),
+    ('32f7e6b8-f4d0-46cf-b461-62d5328e2540', 11, '7e89a8d4-5137-4457-81aa-1828265fc5ef', 'Baaif tập 10', 0, NULL, 'ASSIGNMENT', '2024-05-06 00:00:00+07', '2024-05-13 00:00:00+07', 'fbe31ca6-ddc9-49ef-87f3-c472958a52c0'),
+    ('0e843862-201b-4593-8e67-134790252295', 18, '7e89a8d4-5137-4457-81aa-1828265fc5ef', 'Bài tập module', 1, NULL, 'ASSIGNMENT', '2024-05-12 00:00:00+07', '2024-05-19 00:00:00+07', '0ffc63bf-c1b9-4676-9612-65ab6a24ce5b'),
+    ('d9ee7356-3cc0-4780-b5f2-5b5e02570c38', 14, '70bb8281-5c4a-44a6-a745-0d72dd1abe20', 'bài 1', 1, NULL, 'ASSIGNMENT', '2024-05-07 00:00:00+07', '2024-05-14 00:00:00+07', '438413fa-ac31-496a-becb-709505ea990a'),
+    ('8758ec8e-6322-4f6a-b68d-1c4a3c1e824a', 20, '70bb8281-5c4a-44a6-a745-0d72dd1abe20', 'Bài tập 2', 1, NULL, 'ASSIGNMENT', '2024-05-22 00:00:00+07', '2024-05-29 00:00:00+07', '7055f5fd-29ce-48f9-b1d1-cd11a95ce931'),
+    ('caca48ad-21c5-414d-94c1-b324c25fe8c8', 22, '70bb8281-5c4a-44a6-a745-0d72dd1abe20', 'Bài tập 3', 1, NULL, 'ASSIGNMENT', '2024-05-22 00:00:00+07', '2024-05-29 00:00:00+07', 'b3108f5a-c769-42ab-84c9-80a6d80f5821'),
+    ('2c8c1590-3e17-46bb-ac93-fb3d3b293544', 23, '70bb8281-5c4a-44a6-a745-0d72dd1abe20', 'Bài tập 4', 1, NULL, 'ASSIGNMENT', '2024-05-22 00:00:00+07', '2024-05-29 00:00:00+07', '5b82b228-aef2-494f-8622-2be74966106d'),
+    ('be09f62d-6d6f-4239-9b6b-08b784717788', 24, '70bb8281-5c4a-44a6-a745-0d72dd1abe20', 'bt 5', 1, NULL, 'ASSIGNMENT', '2024-05-28 00:00:00+07', '2024-06-04 00:00:00+07', '56f0980c-3944-40b1-9cb6-1b9b46891de6');
+
 
 
 INSERT INTO public.question(id, org_id, difficulty, name, question_text, general_feedback, default_mark, qtype, created_by, updated_by)

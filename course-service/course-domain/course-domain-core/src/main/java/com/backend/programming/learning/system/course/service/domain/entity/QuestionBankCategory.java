@@ -16,6 +16,7 @@ import java.util.UUID;
 public class QuestionBankCategory extends AggregateRoot<QuestionBankCategoryId> {
     private String name;
     private String description;
+    private Boolean isOrgQuestionBank;
     private User createdBy;
     private User updatedBy;
     private ZonedDateTime createdAt;

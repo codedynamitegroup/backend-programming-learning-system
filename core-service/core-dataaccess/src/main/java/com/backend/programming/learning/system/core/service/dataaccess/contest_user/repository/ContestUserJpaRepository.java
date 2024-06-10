@@ -18,6 +18,10 @@ public interface ContestUserJpaRepository extends JpaRepository<ContestUserEntit
 
     Page<ContestUserEntity> findAllByContestId(UUID contestId, Pageable pageable);
 
+    @Query("""
+        select cu from ContestUserEntity cu
+        where cu.contest.id = ?1 and cu.user.id = ?2
+    """)
     Optional<ContestUserEntity> findByContestIdAndUserId(UUID contestId, UUID userId);
 
     List<ContestUserEntity> findByContestId(UUID contestId);
@@ -55,14 +59,15 @@ public interface ContestUserJpaRepository extends JpaRepository<ContestUserEntit
                     join code_submission_contest csc2
                     on cs2.id = csc2.code_submission_id
                     where csc2.contest_id = ?1
-                    where cs2.code_question_id = qcq.id
+                    and cs2.code_question_id = qcq.id
                     and cs2.user_id = cu.user_id
                     and cs2.pass = true
-                    and cs2.create_at >= c.start_time and (c.end_time is null or cs2.create_at <= c.end_time)
+                    and cs2.created_at >= c.start_time and (c.end_time is null or cs2.created_at <= c.end_time)
                     order by cs2.grade desc, cs2.created_at asc
                     limit 1
                 )) or cs.id is null)
-                group by cu.id, c.id) as cc
+                group by cu.id, c.id
+                ) as cc
     """, nativeQuery = true)
     Page<ContestUserLeaderboardProjection> findAllContestUsersOfLeaderboard(UUID contestId, Pageable pageable);
 
@@ -93,10 +98,10 @@ public interface ContestUserJpaRepository extends JpaRepository<ContestUserEntit
             join code_submission_contest csc2 
             on cs2.id = csc2.code_submission_id
             where csc2.contest_id = ?1
-            where cs2.code_question_id = qcq.id
+            and cs2.code_question_id = qcq.id
             and cs2.user_id = cu.user_id
             and cs2.pass = true
-            and cs2.create_at >= c.start_time and (c.end_time is null or cs2.create_at <= c.end_time)
+            and cs2.created_at >= c.start_time and (c.end_time is null or cs2.created_at <= c.end_time)
             order by cs2.grade desc, cs2.created_at asc
             limit 1
         )) or cs.id is null)

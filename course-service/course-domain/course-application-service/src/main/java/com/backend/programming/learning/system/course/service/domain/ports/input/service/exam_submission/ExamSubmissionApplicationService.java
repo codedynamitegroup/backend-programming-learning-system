@@ -4,7 +4,12 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionOverviewResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
 import jakarta.validation.Valid;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * com.backend.programming.learning.system.ports.input.service.exam_submission
@@ -20,4 +25,8 @@ public interface ExamSubmissionApplicationService {
             @Valid CreateExamSubmissionStartCommand createExamSubmissionStartCommand);
 
     CreateExamSubmissionResponse endExam(CreateExamSubmissionStartCommand createExamSubmissionStartCommand);
+
+    QueryExamSubmissionResponse submitExamDetail(UUID submissionId);
+
+    List<QueryExamSubmissionOverviewResponse> findByExamIdAndUserId(UUID examId, UUID userId);
 }

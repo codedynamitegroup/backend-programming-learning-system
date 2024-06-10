@@ -17,6 +17,7 @@
         <module>outbox</module>
         <module>kafka</module>
         <module>socket</module>
+        <module>redis</module>
     </modules>
 
 </project>

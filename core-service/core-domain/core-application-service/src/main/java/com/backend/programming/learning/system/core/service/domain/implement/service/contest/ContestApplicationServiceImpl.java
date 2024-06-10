@@ -26,7 +26,7 @@ class ContestApplicationServiceImpl implements ContestApplicationService {
     }
 
     @Override
-    public CreateContestResponse createContest(@Valid CreateContestCommand createContestCommand) {
+    public CreateContestResponse createContest(CreateContestCommand createContestCommand) {
         return contestCommandHandler.createContestResponse(createContestCommand);
     }
 
@@ -41,8 +41,12 @@ class ContestApplicationServiceImpl implements ContestApplicationService {
     }
 
     @Override
-    public QueryMostPopularContestsResponse queryMostPopularContests() {
-        return contestCommandHandler.queryMostPopularContestsResponse();
+    public QueryMostPopularContestsResponse queryMostPopularContests(
+            QueryMostPopularContestsCommand queryMostPopularContestsCommand
+    ) {
+        return contestCommandHandler.queryMostPopularContestsResponse(
+                queryMostPopularContestsCommand
+        );
     }
 
     @Override

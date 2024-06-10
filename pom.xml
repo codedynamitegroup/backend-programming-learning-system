@@ -31,6 +31,7 @@
 
 	<properties>
 		<spring-boot.version>3.2.3</spring-boot.version>
+		<spring-data.version>3.2.3</spring-data.version>
 		<maven-compiler-plugin.version>3.9.0</maven-compiler-plugin.version>
 		<mockito.version>4.3.1</mockito.version>
 		<spring-kafka.version>3.1.0</spring-kafka.version>
@@ -50,6 +51,8 @@
 		<micrometer-tracing-bridge-brave.version>1.12.5</micrometer-tracing-bridge-brave.version>
 		<swagger-annotations.version>2.2.20</swagger-annotations.version>
 		<otelVersion>1.32.0</otelVersion>
+		<lettuce-core.version>6.3.1.RELEASE</lettuce-core.version>
+		<jackson-databind.version>2.17.1</jackson-databind.version>
 	</properties>
 
 	<dependencyManagement>
@@ -61,6 +64,11 @@
 				<version>${project.version}</version>
 			</dependency>
 
+			<dependency>
+				<groupId>com.backend.programming.learning.system</groupId>
+				<artifactId>redis</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>com.backend.programming.learning.system</groupId>
 				<artifactId>saga</artifactId>
@@ -255,6 +263,22 @@
 				<artifactId>spring-boot-starter-data-redis-reactive</artifactId>
 				<version>${spring-boot.version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-redis</artifactId>
+				<version>${spring-data.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.lettuce</groupId>
+				<artifactId>lettuce-core</artifactId>
+				<version>${lettuce-core.version}</version>
+			</dependency>
+<!--			<dependency>-->
+<!--				<groupId>org.springframework.boot</groupId>-->
+<!--				<artifactId>spring-boot-starter-data-redis</artifactId>-->
+<!--				<version>${spring-boot.version}</version>-->
+<!--			</dependency>-->
 
 			<dependency>
 				<groupId>org.mockito</groupId>

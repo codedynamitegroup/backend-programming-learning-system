@@ -2,7 +2,6 @@ package com.backend.programming.learning.system.course.service.dataaccess.questi
 
 import com.backend.programming.learning.system.course.service.dataaccess.question_bank_category.entity.QuestionBankCategoryEntity;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,6 +14,11 @@ import java.util.UUID;
 public interface QuestionBankCategoryJpaRepository extends JpaRepository<QuestionBankCategoryEntity, UUID> {
     Optional<QuestionBankCategoryEntity> findById(UUID id);
 
-    @Query("SELECT q FROM QuestionBankCategoryEntity q WHERE q.name LIKE %:search%")
-    Page<QuestionBankCategoryEntity> findAll(String search, Pageable pageable);
+    @Query("""
+        SELECT q 
+        FROM QuestionBankCategoryEntity q 
+        WHERE (q.name LIKE %:search%) 
+            AND (q.isOrgQuestionBank = :isOrgQuestionBank OR :isOrgQuestionBank IS NULL)
+        """)
+    Page<QuestionBankCategoryEntity> findAll(Boolean isOrgQuestionBank, String search, Pageable pageable);
 }

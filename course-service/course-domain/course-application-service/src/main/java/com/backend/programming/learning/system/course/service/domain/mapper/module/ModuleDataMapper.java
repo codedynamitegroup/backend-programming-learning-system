@@ -70,6 +70,7 @@ public class ModuleDataMapper {
     public ModuleResponseEntity moduleToModuleResponseEntity(Module module) {
         return ModuleResponseEntity.builder()
                 .moduleId(module.getId().getValue())
+                .assignmentId(module.getAssignment().getId().getValue())
                 .name(module.getName())
                 .visible(module.getVisible())
                 .typeModule(module.getTypeModule().getLabel())
