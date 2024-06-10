@@ -38,27 +38,10 @@ public class UserCommandHandler {
 
         userOutboxHelper.saveUserOutboxMessage(
                         userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
-//                        ServiceName.CORE_SERVICE,
                         CopyState.CREATING,
                         OutboxStatus.STARTED,
-//                        userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
+                        userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
                                 UUID.randomUUID());
-
-//        userOutboxHelper.saveUserOutboxMessage(
-//                userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
-////                ServiceName.AUTH_SERVICE,
-//                CopyState.CREATING,
-//                OutboxStatus.STARTED,
-////                userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
-//                UUID.randomUUID());
-//
-//        userOutboxHelper.saveUserOutboxMessage(
-//                userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
-////                ServiceName.CODE_ASSESSMENT_SERVICE,
-//                CopyState.CREATING,
-//                OutboxStatus.STARTED,
-////                userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
-//                UUID.randomUUID());
 
         return createUserResponse;
     }
@@ -69,27 +52,10 @@ public class UserCommandHandler {
 
         userOutboxHelper.saveUserOutboxMessage(
                 userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
-//                ServiceName.CORE_SERVICE,
                 CopyState.UPDATING,
                 OutboxStatus.STARTED,
-//                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
+                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
                 UUID.randomUUID());
-
-//        userOutboxHelper.saveUserOutboxMessage(
-//                userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
-////                ServiceName.AUTH_SERVICE,
-//                CopyState.UPDATING,
-//                OutboxStatus.STARTED,
-////                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
-//                UUID.randomUUID());
-//
-//        userOutboxHelper.saveUserOutboxMessage(
-//                userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
-////                ServiceName.CODE_ASSESSMENT_SERVICE,
-//                CopyState.UPDATING,
-//                OutboxStatus.STARTED,
-////                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
-//                UUID.randomUUID());
 
         log.info("User is updated with id: {}", userUpdatedEvent.getUser().getId().getValue());
         return userDataMapper.userToUpdateUserResponse(userUpdatedEvent.getUser(), "User updated successfully");

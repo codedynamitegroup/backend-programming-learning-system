@@ -28,8 +28,8 @@ code-assessment-service:
   question-request-code-assessment-topic-name: core-question-request-code-assessment
   question-response-code-assessment-topic-name: core-question-response-code-assessment
 
-  code-assessment-user-request-topic-name: code-assessment-user-request
-  user-response-topic-name: user-response
+  auth-service-user-request-to-code-assessment-service-topic-name: auth-service-user-request-to-code-assessment-service
+  any-services-user-response-to-auth-service-topic-name: any-services-user-response-to-auth-service
 
   outbox-scheduler-fixed-rate: 2000
   outbox-scheduler-initial-delay: 2000
@@ -91,7 +91,7 @@ kafka-consumer-config:
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
   create-code-question-consumer-group-id: create-code-question-topic-consumer
   question-request-consumer-group-id: question-request-topic-consumer
-  code-assessment-service-user-request-group-id: code-assessment-service-user-request-topic
+  auth-service-to-code-assessment-service-user-request-group-id: auth-service-to-code-assessment-service-user-request-topic
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
   specific-avro-reader: true

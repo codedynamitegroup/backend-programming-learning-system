@@ -19,12 +19,12 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.up
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserDeletedEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedEvent;
-import com.backend.programming.learning.system.auth.service.domain.implement.saga.user.UserUpdateSagaHelper;
+import com.backend.programming.learning.system.auth.service.domain.event.user.auth_to_any_services.UserCreatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.auth_to_any_services.UserDeletedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.auth_to_any_services.UserUpdatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.implement.saga.user_auth_to_any_services.UserUpdateAuthToAnyServicesSagaHelper;
 import com.backend.programming.learning.system.auth.service.domain.mapper.UserDataMapper;
-import com.backend.programming.learning.system.auth.service.domain.outbox.scheduler.user.UserOutboxHelper;
+import com.backend.programming.learning.system.auth.service.domain.outbox.scheduler.user_auth_to_any_services.UserOutboxAuthToAnyServicesHelper;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
@@ -46,8 +46,8 @@ public class UserCommandHandler {
     private final UserDataMapper userDataMapper;
     private final UserQueryHelper userQueryHelper;
     private final UserUpdateHelper userUpdateHelper;
-    private final UserOutboxHelper userOutboxHelper;
-    private final UserUpdateSagaHelper userSagaHelper;
+    private final UserOutboxAuthToAnyServicesHelper userOutboxHelper;
+    private final UserUpdateAuthToAnyServicesSagaHelper userSagaHelper;
     private final UserLoginHelper userLoginHelper;
     private final UserRefreshTokenHelper userRefreshTokenHelper;
     private final UserSocialLoginHelper userSocialLoginHelper;

@@ -6,7 +6,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.cr
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.*;
 import com.backend.programming.learning.system.auth.service.domain.entity.Role;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.auth_to_any_services.UserCreatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.exception.UnAuthorizedServiceException;
 import com.backend.programming.learning.system.auth.service.domain.implement.service.role.RoleQueryHelper;

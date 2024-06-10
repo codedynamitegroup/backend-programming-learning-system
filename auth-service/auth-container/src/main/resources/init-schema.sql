@@ -102,9 +102,9 @@ CREATE TABLE "public".user_role (
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "public".user_outbox CASCADE;
+DROP TABLE IF EXISTS "public".user_outbox_auth_to_any_services CASCADE;
 
-CREATE TABLE "public".user_outbox
+CREATE TABLE "public".user_outbox_auth_to_any_services
 (
     id uuid NOT NULL,
     saga_id uuid NOT NULL,
@@ -117,16 +117,41 @@ CREATE TABLE "public".user_outbox
     service_name service_name NOT NULL,
     copy_state CopyState NOT NULL,
     version integer NOT NULL,
-    CONSTRAINT user_outbox_pkey PRIMARY KEY (id)
+    CONSTRAINT user_outbox_auth_to_any_services_pkey PRIMARY KEY (id)
 );
 
-CREATE INDEX "user_outbox_saga_status"
-    ON "public".user_outbox
+CREATE INDEX "user_outbox_auth_to_any_services_saga_status"
+    ON "public".user_outbox_auth_to_any_services
     (type, outbox_status, saga_status);
 
-CREATE UNIQUE INDEX "user_outbox_saga_id"
-    ON "public".user_outbox
+CREATE UNIQUE INDEX "user_outbox_auth_to_any_services_saga_id"
+    ON "public".user_outbox_auth_to_any_services
     (type, saga_id, saga_status, service_name);
+
+DROP TABLE IF EXISTS "public".user_outbox_course_to_auth_service CASCADE;
+
+CREATE TABLE "public".user_outbox_course_to_auth_service
+(
+    id uuid NOT NULL,
+    saga_id uuid NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    processed_at TIMESTAMP WITH TIME ZONE,
+    type character varying COLLATE pg_catalog."default" NOT NULL,
+    payload jsonb NOT NULL,
+    outbox_status outbox_status NOT NULL,
+    saga_status saga_status NOT NULL,
+    copy_state CopyState NOT NULL,
+    version integer NOT NULL,
+    CONSTRAINT user_outbox_course_to_auth_service_pkey PRIMARY KEY (id)
+);
+
+CREATE INDEX "user_outbox_course_to_auth_service_saga_status"
+    ON "public".user_outbox_course_to_auth_service
+    (type, outbox_status, saga_status);
+
+CREATE UNIQUE INDEX "user_outbox_course_to_auth_service_saga_id"
+    ON "public".user_outbox_course_to_auth_service
+    (type, saga_id, saga_status);
 
 DROP TABLE IF EXISTS "public".organization_outbox CASCADE;
 

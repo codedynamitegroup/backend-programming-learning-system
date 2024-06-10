@@ -11,11 +11,11 @@ import com.backend.programming.learning.system.auth.service.domain.dto.response_
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserDeletedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.auth_to_any_services.UserCreatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.auth_to_any_services.UserDeletedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedEvent;
-import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserEventPayload;
+import com.backend.programming.learning.system.auth.service.domain.event.user.auth_to_any_services.UserUpdatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.outbox.model.user_auth_to_any_services.UserEventAuthToAnyServicesPayload;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
@@ -69,9 +69,9 @@ public class UserDataMapper {
                 .build();
     }
 
-    public UserEventPayload userCreatedEventToUserEventPayload(UserCreatedEvent userCreatedEvent) {
+    public UserEventAuthToAnyServicesPayload userCreatedEventToUserEventPayload(UserCreatedEvent userCreatedEvent) {
         User user = userCreatedEvent.getUser();
-        return UserEventPayload.builder()
+        return UserEventAuthToAnyServicesPayload.builder()
                 .userId(user.getId().getValue().toString())
                 .email(user.getEmail())
                 .firstName(user.getFirstName())
@@ -84,9 +84,9 @@ public class UserDataMapper {
                 .build();
     }
 
-    public UserEventPayload userUpdatedEventToUserEventPayload(UserUpdatedEvent userUpdatedEvent) {
+    public UserEventAuthToAnyServicesPayload userUpdatedEventToUserEventPayload(UserUpdatedEvent userUpdatedEvent) {
         User user = userUpdatedEvent.getUser();
-        return UserEventPayload.builder()
+        return UserEventAuthToAnyServicesPayload.builder()
                 .userId(user.getId().getValue().toString())
                 .dob(user.getDob())
                 .firstName(user.getFirstName())
@@ -99,9 +99,9 @@ public class UserDataMapper {
                 .build();
     }
 
-    public UserEventPayload userDeletedEventToUserEventPayload(UserDeletedEvent userDeletedEvent) {
+    public UserEventAuthToAnyServicesPayload userDeletedEventToUserEventPayload(UserDeletedEvent userDeletedEvent) {
         User user = userDeletedEvent.getUser();
-        return UserEventPayload.builder()
+        return UserEventAuthToAnyServicesPayload.builder()
                 .userId(user.getId().getValue().toString())
                 .isDeleted(user.getDeleted())
                 .copyState(CopyState.DELETING.name())
@@ -144,7 +144,7 @@ public class UserDataMapper {
                 .isDeleted(user.getDeleted())
                 .isLinkedWithGoogle(user.getLinkedWithGoogle())
                 .isLinkedWithMicrosoft(user.getLinkedWithMicrosoft())
-                .roles(user.getRoles().stream().map(roleDataMapper::roleToRoleResponse).collect(Collectors.toSet()))
+                .roles(user.getRoles() == null ? null : user.getRoles().stream().map(roleDataMapper::roleToRoleResponse).collect(Collectors.toSet()))
                 .build();
     }
 
@@ -187,8 +187,8 @@ public class UserDataMapper {
                 .build();
     }
 
-    public  UserEventPayload userEventToUserEventPayload(UserEvent userEvent, CopyState copyState) {
-        return UserEventPayload.builder()
+    public UserEventAuthToAnyServicesPayload userEventToUserEventPayload(UserEvent userEvent, CopyState copyState) {
+        return UserEventAuthToAnyServicesPayload.builder()
                 .userId(userEvent.getUser().getId().getValue().toString())
                 .copyState(copyState.name())
                 .build();

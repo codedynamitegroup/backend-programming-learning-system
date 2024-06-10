@@ -55,6 +55,7 @@ public class UserOutboxHelper {
     public void saveUserOutboxMessage(UserEventPayload userEventPayload,
                                       CopyState copyState,
                                       OutboxStatus outboxStatus,
+                                      SagaStatus sagaStatus,
                                       UUID sagaId) {
         save(UserOutboxMessage.builder()
                 .id(UUID.randomUUID())
@@ -65,6 +66,7 @@ public class UserOutboxHelper {
                 .processedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)))
                 .payload(createdPayload(userEventPayload))
                 .copyState(copyState)
+                .sagaStatus(sagaStatus)
                 .outboxStatus(outboxStatus)
                 .build());
     }

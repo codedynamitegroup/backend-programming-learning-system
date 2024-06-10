@@ -15,6 +15,7 @@ import com.backend.programming.learning.system.course.service.domain.event.user.
 import com.backend.programming.learning.system.course.service.domain.outbox.model.user.UserEventPayload;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,8 +26,6 @@ import java.util.UUID;
 
 @Component
 public class UserDataMapper {
-    private static final Logger log = LoggerFactory.getLogger(UserDataMapper.class);
-
     public UserResponseEntity userToUserResponseEntity(User user) {
         return UserResponseEntity.builder()
                 .userId(user.getId().getValue())
@@ -39,6 +38,9 @@ public class UserDataMapper {
     public User userCreateRequestToUser(UserRequest userRequest) {
         return User.builder()
                 .id(new UserId(UUID.fromString(userRequest.getUserId())))
+                .organization(userRequest.getOrganizationId() == null ? null : Organization.builder()
+                        .id(new OrganizationId(UUID.fromString(userRequest.getOrganizationId())))
+                        .build())
                 .email(userRequest.getEmail())
                 .username(userRequest.getUserName())
                 .firstName(userRequest.getFirstName())

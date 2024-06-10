@@ -17,10 +17,12 @@ eureka:
     preferIpAddress: true
 
 auth-service:
-  core-user-request-topic-name: core-user-request
-  course-user-request-topic-name: course-user-request
-  code-assessment-user-request-topic-name: code-assessment-user-request
-  user-response-topic-name: user-response
+  auth-service-user-request-to-core-service-topic-name: auth-service-user-request-to-core-service
+  auth-service-user-request-to-course-service-topic-name: auth-service-user-request-to-course-service
+  auth-service-user-request-to-code-assessment-service-topic-name: auth-service-user-request-to-code-assessment-service
+  any-services-user-response-to-auth-service-topic-name: any-services-user-response-to-auth-service
+  auth-service-user-response-to-course-service-topic-name: auth-service-user-response-to-course-service
+  course-service-user-request-to-auth-service-topic-name: course-service-user-request-to-auth-service
 
   core-organization-request-topic-name: core-organization-request
   course-organization-request-topic-name: course-organization-request
@@ -89,7 +91,9 @@ kafka-consumer-config:
 
   course-service-user-request-group-id: course-service-user-request-topic
 
-  service-user-response-group-id: service-user-response-topic
+  any-services-user-response-to-auth-service-group-id: any-services-user-response-auth-service-topic
+  course-service-user-response-to-auth-service-group-id: course-service-user-response-auth-service-topic
+
   service-organization-response-group-id: service-organization-response-topic
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader

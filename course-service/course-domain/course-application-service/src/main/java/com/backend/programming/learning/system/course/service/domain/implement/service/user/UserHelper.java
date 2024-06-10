@@ -5,16 +5,18 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.entity.Organization;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.entity.WebhookMessage;
-import com.backend.programming.learning.system.course.service.domain.event.user.UserCreatedSuccessEvent;
+import com.backend.programming.learning.system.course.service.domain.event.user.UserCreatedEvent;
 import com.backend.programming.learning.system.course.service.domain.event.user.UserDeletedSuccessEvent;
-import com.backend.programming.learning.system.course.service.domain.event.user.UserUpdatedSuccessEvent;
+import com.backend.programming.learning.system.course.service.domain.event.user.UserUpdatedEvent;
 import com.backend.programming.learning.system.course.service.domain.exception.UserNotFoundException;
+import com.backend.programming.learning.system.course.service.domain.implement.saga.user.UserUpdateSagaHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.moodle.MoodleCommandHandler;
 import com.backend.programming.learning.system.course.service.domain.mapper.user.UserDataMapper;
 import com.backend.programming.learning.system.course.service.domain.outbox.scheduler.user.UserOutboxHelper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,68 +26,48 @@ import java.util.UUID;
 
 @Component
 @Slf4j
+@RequiredArgsConstructor
 public class UserHelper {
     private final UserDataMapper userDataMapper;
     private final UserRepository userRepository;
     private final CourseDomainService courseDomainService;
     private final MoodleCommandHandler moodleCommandHandler;
     private final UserOutboxHelper userOutboxHelper;
-
-    public UserHelper(
-            UserDataMapper userDataMapper,
-            UserRepository userRepository,
-            CourseDomainService courseDomainService, MoodleCommandHandler moodleCommandHandler,
-            UserOutboxHelper userOutboxHelper) {
-        this.userDataMapper = userDataMapper;
-        this.userRepository = userRepository;
-        this.courseDomainService = courseDomainService;
-        this.moodleCommandHandler = moodleCommandHandler;
-        this.userOutboxHelper = userOutboxHelper;
-    }
+    private final UserUpdateSagaHelper userSagaHelper;
 
     @Transactional
-    public User createUser(WebhookMessage webhookMessage, Organization organization) {
+    public void createUser(WebhookMessage webhookMessage, Organization organization) {
         UserModel userModel = moodleCommandHandler.getUser(webhookMessage.getRelatedUserId());
         User user = userDataMapper.userModelToUser(userModel, organization);
 
-        courseDomainService.createUser(user);
-
-        User result = userRepository.save(user);
-        log.info("User created with id: {} and moodle id: {}", result.getUserIdMoodle(), result.getId());
-        UserCreatedSuccessEvent userCreatedSuccessEvent = courseDomainService.createdUserSuccess(result);
+        UserCreatedEvent userCreatedEvent =  courseDomainService.createUser(user);
 
         userOutboxHelper.saveUserOutboxMessage(userDataMapper
-                        .userEventToUserEventPayloadWithTime(userCreatedSuccessEvent,
+                        .userEventToUserEventPayloadWithTime(userCreatedEvent,
                                 CopyState.CREATING,
                                 false),
                 CopyState.CREATING,
                 OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
                 UUID.randomUUID());
-        return result;
     }
 
     @Transactional
-    public User updateUser(WebhookMessage webhookMessage) {
+    public void updateUser(WebhookMessage webhookMessage) {
         UserModel userModel = moodleCommandHandler.getUser(webhookMessage.getRelatedUserId());
         User prevUser = getUser(Integer.valueOf(webhookMessage.getRelatedUserId()));
         User user = userDataMapper.setUserWithOtherPayload(userModel, prevUser);
 
-        courseDomainService.updateUser(user);
-
-        User result = userRepository.save(user);
-        log.info("User updated with id: {} and moodle id: {}", result.getUserIdMoodle(), result.getId());
-
-        UserUpdatedSuccessEvent userUpdatedSuccessEvent = courseDomainService.updatedUserSuccess(result);
+        UserUpdatedEvent userUpdatedEvent =courseDomainService.updateUser(user);
 
         userOutboxHelper.saveUserOutboxMessage(userDataMapper
-                        .userEventToUserEventPayloadWithTime(userUpdatedSuccessEvent,
+                        .userEventToUserEventPayloadWithTime(userUpdatedEvent,
                                 CopyState.UPDATING,
                                 false),
                 CopyState.UPDATING,
                 OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
                 UUID.randomUUID());
-
-        return result;
     }
 
     @Transactional
@@ -103,6 +85,7 @@ public class UserHelper {
                                 true),
                 CopyState.DELETING,
                 OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.DELETING),
                 UUID.randomUUID());
     }
 
@@ -112,15 +95,6 @@ public class UserHelper {
         if (user.isEmpty()) {
             log.info("User not found with moodle id: {}", moodleId);
             throw new UserNotFoundException("User not found with moodle id: " + moodleId);
-        }
-        return user.get();
-    }
-    private User getUser(UUID userId) {
-        Optional<User> user = userRepository.findUser(userId);
-
-        if (user.isEmpty()) {
-            log.info("User not found with id: {}", userId);
-            throw new UserNotFoundException("User not found with id: " + userId);
         }
         return user.get();
     }

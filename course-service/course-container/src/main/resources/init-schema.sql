@@ -756,17 +756,18 @@ CREATE TABLE "public".user_outbox
     payload jsonb NOT NULL,
     outbox_status outbox_status NOT NULL,
     copy_state CopyState NOT NULL,
+    saga_status saga_status NOT NULL,
     version integer NOT NULL,
     CONSTRAINT user_outbox_pkey PRIMARY KEY (id)
 );
 
 CREATE INDEX "user_outbox_saga_status"
     ON "public".user_outbox
-    (type, outbox_status);
+    (type, outbox_status, saga_status);
 
 CREATE UNIQUE INDEX "user_outbox_saga_id"
     ON "public".user_outbox
-    (type, saga_id, copy_state, outbox_status);
+    (type, saga_id, saga_status);
 
 CREATE TABLE "public".organization_outbox
 (

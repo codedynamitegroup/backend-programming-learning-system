@@ -2,7 +2,6 @@ package com.backend.programming.learning.system.course.service.domain.outbox.sch
 
 import com.backend.programming.learning.system.course.service.domain.outbox.model.user.UserOutboxMessage;
 import com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.user.UserRequestMessagePublisher;
-import com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.user.UserResponseMessagePublisher;
 import com.backend.programming.learning.system.outbox.OutboxScheduler;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.RequiredArgsConstructor;
