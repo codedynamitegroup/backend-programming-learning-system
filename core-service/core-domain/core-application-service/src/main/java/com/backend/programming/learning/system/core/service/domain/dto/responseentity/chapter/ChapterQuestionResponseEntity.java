@@ -25,7 +25,9 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @NoArgsConstructor(force = true)
 public class ChapterQuestionResponseEntity {
     @JsonProperty("id")
-    private final String id;
+    private final UUID id;
+    @JsonProperty("codeQuestionId")
+    private final UUID codeQuestionId;
     @JsonProperty("difficulty")
     private final QuestionDifficulty difficulty;
     @JsonProperty("name")

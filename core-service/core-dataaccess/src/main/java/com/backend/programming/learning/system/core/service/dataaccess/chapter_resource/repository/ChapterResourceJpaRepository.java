@@ -43,13 +43,7 @@ public interface ChapterResourceJpaRepository extends JpaRepository<ChapterResou
             or 
             (
                 cq.resourceType <> 'CODE'
-                and exists (
-                    select 1
-                    from ChapterResourceUserEntity cru
-                    where cru.chapterResourceId = cq.id
-                    and cru.isViewed = false
-                    and cru.userId = ?2
-                ) or not exists (
+                and not exists (
                     select 1
                     from ChapterResourceUserEntity cru
                     where cru.chapterResourceId = cq.id
@@ -64,5 +58,15 @@ public interface ChapterResourceJpaRepository extends JpaRepository<ChapterResou
     Optional<ChapterResourceEntity> findFirstUncompletedResourceByCertificateCourseIdAndUserId
             (UUID certificateCourseId, UUID userId);
 
+    @Query("""
+        select cq
+        from ChapterResourceEntity cq, 
+        ChapterEntity c
+        where c.id = cq.chapter.id
+        and c.certificateCourse.id = ?1
+        order by c.no desc, cq.no desc
+        limit 1
+""")
+    Optional<ChapterResourceEntity> findLastResourceByCertificateCourseId(UUID certificateCourseId);
 }
 

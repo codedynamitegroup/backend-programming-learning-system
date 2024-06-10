@@ -20,7 +20,8 @@ public class ChapterQuestionDataMapper {
         this.userDataMapper = userDataMapper;
     }
 
-    public ChapterQuestionResponseEntity questionToChapterQuestionResponse(Question question) {
+    public ChapterQuestionResponseEntity questionToChapterQuestionResponse(Question question,
+                                                                           UUID codeQuestionId) {
         UserResponseEntity createdBy = question.getCreatedBy() != null
                 ? userDataMapper.userToUserResponseEntity(question.getCreatedBy())
                 : null;
@@ -28,7 +29,8 @@ public class ChapterQuestionDataMapper {
                 ? userDataMapper.userToUserResponseEntity(question.getUpdatedBy())
                 : null;
         return ChapterQuestionResponseEntity.builder()
-                .id(question.getId().getValue().toString())
+                .id(question.getId().getValue())
+                .codeQuestionId(codeQuestionId)
                 .difficulty(QuestionDifficulty.valueOf(question.getDifficulty().toString()))
                 .name(question.getName())
                 .questionText(question.getQuestionText())
@@ -45,7 +47,7 @@ public class ChapterQuestionDataMapper {
 
     public Question chapterQuestionResponseToQuestion(ChapterQuestionResponseEntity chapterQuestionResponse) {
         return Question.builder()
-                .questionId(new QuestionId(UUID.fromString(chapterQuestionResponse.getId())))
+                .questionId(new QuestionId(chapterQuestionResponse.getId()))
                 .difficulty(QuestionDifficulty.valueOf(chapterQuestionResponse.getDifficulty().toString()))
                 .name(chapterQuestionResponse.getName())
                 .questionText(chapterQuestionResponse.getQuestionText())

@@ -159,7 +159,7 @@ public class ContestQueryHelper {
             if (redisResponse != null) {
                 log.info("Get all contests from redis");
                 List<ContestResponseEntity> contestResponseEntities = redisResponse.getContests();
-                Pageable pageable = PageRequest.of(redisResponse.getCurrentPage(), (int) redisResponse.getTotalItems());
+                Pageable pageable = PageRequest.of(redisResponse.getCurrentPage(), pageSize);
                 Page<ContestResponseEntity> contestResponseEntityPage =
                         new PageImpl<>(contestResponseEntities, pageable, redisResponse.getTotalItems());
                 contests = contestDataMapper.contestResponseEntitiesToContests(contestResponseEntityPage);

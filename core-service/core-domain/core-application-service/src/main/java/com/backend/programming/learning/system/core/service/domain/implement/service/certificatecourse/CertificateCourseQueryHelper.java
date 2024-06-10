@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.exception.Use
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.IsRegisteredFilter;
+import com.backend.programming.learning.system.core.service.domain.valueobject.ResourceType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,17 +25,20 @@ public class CertificateCourseQueryHelper {
     private final CertificateCourseUserRepository certificateCourseUserRepository;
     private final ChapterResourceRepository chapterResourceRepository;
     private final TopicRepository topicRepository;
+    private final QtypeCodeQuestionRepository qtypeCodeQuestionRepository;
 
     public CertificateCourseQueryHelper(CertificateCourseRepository certificateCourseRepository,
                                         UserRepository userRepository,
                                         CertificateCourseUserRepository certificateCourseUserRepository,
                                         ChapterResourceRepository chapterResourceRepository,
-                                        TopicRepository topicRepository) {
+                                        TopicRepository topicRepository,
+                                        QtypeCodeQuestionRepository qtypeCodeQuestionRepository) {
         this.certificateCourseRepository = certificateCourseRepository;
         this.userRepository = userRepository;
         this.certificateCourseUserRepository = certificateCourseUserRepository;
         this.chapterResourceRepository = chapterResourceRepository;
         this.topicRepository = topicRepository;
+        this.qtypeCodeQuestionRepository = qtypeCodeQuestionRepository;
     }
 
     @Transactional(readOnly = true)
@@ -59,6 +63,13 @@ public class CertificateCourseQueryHelper {
                                 certificateCourse.getId().getValue(),
                                 userOptional.get().getId().getValue()
                         );
+                if (currentChapterResource.isPresent()
+                        && currentChapterResource.get().getResourceType().equals(ResourceType.CODE)
+                        && currentChapterResource.get().getQuestion() != null) {
+                    Optional<QtypeCodeQuestion> qtypeCodeQuestion = qtypeCodeQuestionRepository
+                            .findQtypeCodeQuestionByQuestionId(currentChapterResource.get().getQuestion().getId().getValue());
+                    qtypeCodeQuestion.ifPresent(value -> currentChapterResource.get().setCodeQuestionId(value.getId().getValue()));
+                }
                 currentChapterResource.ifPresent(
                         certificateCourse::setCurrentResource
                 );
@@ -126,6 +137,14 @@ public class CertificateCourseQueryHelper {
                                         userOptional.get().getId().getValue()
                                 );
 
+                        if (currentChapterResource.isPresent()
+                                && currentChapterResource.get().getResourceType().equals(ResourceType.CODE)
+                                && currentChapterResource.get().getQuestion() != null) {
+                            Optional<QtypeCodeQuestion> qtypeCodeQuestion = qtypeCodeQuestionRepository
+                                    .findQtypeCodeQuestionByQuestionId(currentChapterResource.get().getQuestion().getId().getValue());
+                            qtypeCodeQuestion.ifPresent(value -> currentChapterResource.get().setCodeQuestionId(value.getId().getValue()));
+                        }
+
                         currentChapterResource.ifPresent(
                                 certificateCourse::setCurrentResource
                         );
@@ -173,7 +192,14 @@ public class CertificateCourseQueryHelper {
                                     certificateCourse.getId().getValue(),
                                     user.getId().getValue()
                             );
-                    log.info("Current chapter resource: {}", currentChapterResource);
+                    if (currentChapterResource.isPresent()
+                            && currentChapterResource.get().getResourceType().equals(ResourceType.CODE)
+                            && currentChapterResource.get().getQuestion() != null) {
+                        Optional<QtypeCodeQuestion> qtypeCodeQuestion = qtypeCodeQuestionRepository
+                                .findQtypeCodeQuestionByQuestionId(currentChapterResource.get().getQuestion().getId().getValue());
+                        qtypeCodeQuestion.ifPresent(value -> currentChapterResource.get().setCodeQuestionId(value.getId().getValue()));
+                    }
+
                     currentChapterResource.ifPresent(
                             certificateCourse::setCurrentResource
                     );
