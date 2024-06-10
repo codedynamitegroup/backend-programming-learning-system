@@ -1,5 +1,7 @@
 package com.backend.programming.learning.system.core.service.dataaccess.contest.entity;
 
+import com.backend.programming.learning.system.core.service.dataaccess.chapter_resource_user.listener.ChapterResourceUserListener;
+import com.backend.programming.learning.system.core.service.dataaccess.contest.listener.ContestListener;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -16,6 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table(name = "contest")
 @Entity
+@EntityListeners(ContestListener.class)
 public class ContestEntity {
     @Id
     @Column(name = "id")

@@ -465,7 +465,7 @@ VALUES
             - A participant’s score depends on the number of test cases a participant’s code submission successfully passes.
             - If a participant submits more than one solution per challenge, then the participant’s score will reflect the highest score achieved.
             - Participants are ranked by score. If two or more participants achieve the same score, then the tie is broken by the total time taken to submit the last solution resulting in a higher score',
-        'https://assets.leetcode.com/contest/weekly-contest-291/card_img_1654267951.png', '2024-01-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', false),
+        'https://assets.leetcode.com/contest/weekly-contest-291/card_img_1654267951.png', '2024-01-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', true),
         ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', 'Python Contest',
         '<h3 style="text-align:start"><span style="font-size:24px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">Welcome to the Python Contest Batch the code #387</span></span></span></span></h3>',
         '<ol><li>1st Place: $1000</li><li>2nd Place: $500</li><li>3rd Place: $250</li></ol>',
