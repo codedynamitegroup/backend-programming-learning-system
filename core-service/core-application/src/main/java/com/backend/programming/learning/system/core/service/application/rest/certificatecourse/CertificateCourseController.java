@@ -186,18 +186,18 @@ public class CertificateCourseController {
         log.info("Getting all certificate courses by searchName: {} and filterTopicId: {}",
                 queryAllCertificateCoursesCommand.getCourseName(),
                 queryAllCertificateCoursesCommand.getFilterTopicId());
-        if (queryAllCertificateCoursesCommand.getCourseName() == null ||
-                        queryAllCertificateCoursesCommand.getCourseName().isEmpty()
-                            || queryAllCertificateCoursesCommand.getCourseName().isBlank()) {
-            QueryAllCertificateCoursesResponse redisResponse = certificateCourseRedisService.getAllCertificateCourses(
-                    queryAllCertificateCoursesCommand.getCourseName(),
-                    queryAllCertificateCoursesCommand.getFilterTopicId()
-            );
-            if (redisResponse != null) {
-                log.info("Returning all certificate courses from cache");
-                return ResponseEntity.ok(redisResponse);
-            }
-        }
+//        if (queryAllCertificateCoursesCommand.getCourseName() == null ||
+//                        queryAllCertificateCoursesCommand.getCourseName().isEmpty()
+//                            || queryAllCertificateCoursesCommand.getCourseName().isBlank()) {
+//            QueryAllCertificateCoursesResponse redisResponse = certificateCourseRedisService.getAllCertificateCourses(
+//                    queryAllCertificateCoursesCommand.getCourseName(),
+//                    queryAllCertificateCoursesCommand.getFilterTopicId()
+//            );
+//            if (redisResponse != null) {
+//                log.info("Returning all certificate courses from cache");
+//                return ResponseEntity.ok(redisResponse);
+//            }
+//        }
         QueryAllCertificateCoursesResponse queryAllCertificateCoursesResponse =
                 certificateCourseApplicationService.queryAllCertificateCourses(QueryAllCertificateCoursesCommand
                         .builder()
@@ -206,14 +206,14 @@ public class CertificateCourseController {
                         .isRegisteredFilter(IsRegisteredFilter.ALL.toString())
                         .email(null)
                         .build());
-        if (queryAllCertificateCoursesCommand.getCourseName() == null ||
-                queryAllCertificateCoursesCommand.getCourseName().isEmpty()) {
-            certificateCourseRedisService.saveAllCertificateCourses(
-                    queryAllCertificateCoursesResponse,
-                    queryAllCertificateCoursesCommand.getCourseName(),
-                    queryAllCertificateCoursesCommand.getFilterTopicId()
-            );
-        }
+//        if (queryAllCertificateCoursesCommand.getCourseName() == null ||
+//                queryAllCertificateCoursesCommand.getCourseName().isEmpty()) {
+//            certificateCourseRedisService.saveAllCertificateCourses(
+//                    queryAllCertificateCoursesResponse,
+//                    queryAllCertificateCoursesCommand.getCourseName(),
+//                    queryAllCertificateCoursesCommand.getFilterTopicId()
+//            );
+//        }
         log.info("Returning all certificate courses");
         return ResponseEntity.ok(queryAllCertificateCoursesResponse);
     }

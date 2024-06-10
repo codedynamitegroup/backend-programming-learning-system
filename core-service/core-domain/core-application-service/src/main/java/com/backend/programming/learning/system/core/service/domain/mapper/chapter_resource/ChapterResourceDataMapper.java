@@ -37,7 +37,8 @@ public class ChapterResourceDataMapper {
 
     public ChapterResourceResponseEntity chapterResourceToChapterResourceResponse(ChapterResource chapterResource) {
         ChapterQuestionResponseEntity question = chapterResource.getQuestion() != null
-                ? chapterQuestionDataMapper.questionToChapterQuestionResponse(chapterResource.getQuestion())
+                ? chapterQuestionDataMapper.questionToChapterQuestionResponse(
+                        chapterResource.getQuestion(), chapterResource.getCodeQuestionId())
                 : null;
         return ChapterResourceResponseEntity.builder()
                 .chapterResourceId(chapterResource.getId().getValue())

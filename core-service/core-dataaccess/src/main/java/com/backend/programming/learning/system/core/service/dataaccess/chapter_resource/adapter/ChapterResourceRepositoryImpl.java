@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.dataaccess.chapter_resource.adapter;
 
+import com.backend.programming.learning.system.core.service.dataaccess.chapter_resource.entity.ChapterResourceEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter_resource.mapper.ChapterResourceDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter_resource.repository.ChapterResourceJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.entity.ChapterResource;
@@ -39,7 +40,14 @@ public class ChapterResourceRepositoryImpl implements ChapterResourceRepository 
 
     @Override
     public Optional<ChapterResource> findFirstUncompletedResourceByCertificateCourseIdAndUserId(UUID certificateCourseId, UUID userId) {
-        return chapterResourceJpaRepository.findFirstUncompletedResourceByCertificateCourseIdAndUserId(certificateCourseId, userId)
-                .map(chapterResourceDataAccessMapper::chapterResourceEntityToChapterResource);
+        Optional<ChapterResourceEntity> firstUncompletedResource = chapterResourceJpaRepository
+        .findFirstUncompletedResourceByCertificateCourseIdAndUserId(certificateCourseId, userId);
+        if (firstUncompletedResource.isPresent()) {
+            return Optional.of(chapterResourceDataAccessMapper.chapterResourceEntityToChapterResource(firstUncompletedResource.get()));
+        } else {
+            Optional<ChapterResourceEntity> lastResource = chapterResourceJpaRepository
+                    .findLastResourceByCertificateCourseId(certificateCourseId);
+            return lastResource.map(chapterResourceDataAccessMapper::chapterResourceEntityToChapterResource);
+        }
     }
 }
