@@ -9,7 +9,7 @@ public interface CertificateCourseRedisService {
     void clearAllCertificateCourses(); // clear cache
     QueryAllCertificateCoursesResponse getAllCertificateCourses(
             String courseName,
-            UUID filterTopicId) throws JsonProcessingException;
+            UUID filterTopicId);
     void saveAllCertificateCourses(QueryAllCertificateCoursesResponse queryAllCertificateCoursesResponse,
                                    String courseName,
                                    UUID filterTopicId);

@@ -221,4 +221,8 @@ public class UserCommandHandler {
             ResetPasswordCommand forgotPasswordChangePasswordCommand) {
         return userForgotPasswordHelper.changedPasswordUser(forgotPasswordChangePasswordCommand);
     }
+
+    public QueryGeneralStatisticUserResponse getStatisticUser() {
+        return userQueryHelper.getStatisticUser();
+    }
 }

@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.course.service.dataaccess.exam.en
 import com.backend.programming.learning.system.course.service.dataaccess.exam.mapper.ExamDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.exam.repository.ExamJpaRepository;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
+import com.backend.programming.learning.system.course.service.domain.exception.ExamNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
@@ -34,7 +35,7 @@ public class ExamRepositoryImpl implements ExamRepository {
     public Exam findBy(ExamId examId) {
         return examJpaRepository.findById(examId.getValue())
                 .map(examDataAccessMapper::examEntityToExam)
-                .orElseThrow(() -> new RuntimeException("Exam not found"));
+                .orElseThrow(() -> new ExamNotFoundException("Exam not found"));
     }
 
     @Override
@@ -46,7 +47,7 @@ public class ExamRepositoryImpl implements ExamRepository {
     @Override
     public void deleteById(ExamId examId) {
         ExamEntity examEntity = examJpaRepository.findById(examId.getValue())
-                .orElseThrow(() -> new RuntimeException("Exam not found"));
+                .orElseThrow(() -> new ExamNotFoundException("Exam not found"));
         examJpaRepository.delete(examEntity);
     }
 

@@ -361,4 +361,20 @@ public class UserController {
         log.info("User deleted with id: {}", id);
         return ResponseEntity.ok(deleteUserResponse);
     }
+
+    @GetMapping("/statistics")
+    @Operation(summary = "Get statistics of users.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryGeneralStatisticUserResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryGeneralStatisticUserResponse> getStatisticUser() {
+        QueryGeneralStatisticUserResponse queryStatisticUserResponse = userApplicationService.getStatisticUser();
+
+        log.info("Returning statistics of users");
+        return ResponseEntity.ok(queryStatisticUserResponse);
+    }
 }
