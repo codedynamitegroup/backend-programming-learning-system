@@ -54,10 +54,7 @@ public class UserUpdateHelper {
             user.setAvatarUrl(updateUserCommand.getAvatarUrl());
         }
 
-        UserUpdatedEvent userUpdatedEvent = courseDomainService.updateUser(user);
-
-        saveUser(user);
-        return userUpdatedEvent;
+        return courseDomainService.updateUser(user);
     }
 
     private User getUser(UUID userId) {
@@ -67,15 +64,5 @@ public class UserUpdateHelper {
             throw new AuthDomainException("User with id: " + userId + " could not be found!");
         }
         return user.get();
-    }
-
-    private User saveUser(User user) {
-        User userResult = userRepository.save(user);
-        if (userResult == null) {
-            log.error("Could not update user!");
-            throw new AuthDomainException("Could not update user!");
-        }
-        log.info("User is updated with id: {}", userResult.getId().getValue());
-        return userResult;
     }
 }

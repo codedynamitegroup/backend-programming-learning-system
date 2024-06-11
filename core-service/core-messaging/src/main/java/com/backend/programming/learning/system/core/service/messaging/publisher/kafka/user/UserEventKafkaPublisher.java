@@ -40,10 +40,10 @@ public class UserEventKafkaPublisher implements UserResponseMessagePublisher {
         try {
             UserResponseAvroModel userResponseAvroModel = userMessagingDataMapper
                     .userEventPayloadToUserResponseAvroModel(sagaId, userEventPayload);
-            kafkaProducer.send(coreServiceConfigData.getUserResponseTopicName(),
+            kafkaProducer.send(coreServiceConfigData.getAnyServicesUserResponseToAuthServiceTopicName(),
                     sagaId,
                     userResponseAvroModel,
-                    kafkaOutboxMessageHelper.getKafkaCallback(coreServiceConfigData.getUserResponseTopicName(),
+                    kafkaOutboxMessageHelper.getKafkaCallback(coreServiceConfigData.getAnyServicesUserResponseToAuthServiceTopicName(),
                             userResponseAvroModel,
                             userOutboxMessage,
                             outboxCallback,

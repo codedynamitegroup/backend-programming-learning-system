@@ -15,33 +15,6 @@ import java.util.UUID;
 @Slf4j
 @Component
 public class OrganizationUpdateSagaHelper {
-    private final OrganizationRepository organizationRepository;
-
-    public OrganizationUpdateSagaHelper(OrganizationRepository organizationRepository) {
-        this.organizationRepository = organizationRepository;
-    }
-
-    public Organization findOrganizationById(UUID organizationId) {
-        Optional<Organization> organizationResult =
-                organizationRepository.findById(new OrganizationId(organizationId));
-        if (organizationResult.isEmpty()) {
-            log.warn("Could not find organization with id: {}", organizationId);
-            throw new AuthNotFoundException("Could not find organization with organization id: " +
-                    organizationId);
-        }
-        return organizationResult.get();
-    }
-
-    public Organization findOrganizationByIdAndIsDeletedTrue(UUID organizationId) {
-        Optional<Organization> organizationResult =
-                organizationRepository.findByIdAndIsDeletedTrue(new OrganizationId(organizationId));
-        if (organizationResult.isEmpty()) {
-            log.warn("Could not find organization with id: {}", organizationId);
-            throw new AuthNotFoundException("Could not find organization with organization id: " +
-                    organizationId);
-        }
-        return organizationResult.get();
-    }
 
     public SagaStatus copyStatusToSagaStatus(CopyState copyState){
         return switch (copyState){
