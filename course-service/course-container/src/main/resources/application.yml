@@ -153,8 +153,8 @@ management:
     tags:
       application: ${spring.application.name}
 
-#log:
-#  appName: course-service
+log:
+  appName: course-service
 
 jwt:
   auth:
