@@ -21,9 +21,10 @@ public interface SharedSolutionJpaRepository extends JpaRepository<SharedSolutio
             on sse.id = sste.sharedSolution.id
             where sse.codeQuestion.id = ?1 
                     and ((?2 IS NULL) OR (sste.tag.id in ?2))
+                    and (cast(?3 as text) is null or  sse.title like concat('%', cast(?3 as text), '%'))
             group by sse.id
             """)
-    Page<SharedSolutionEntity> findByCodeQuestionId(UUID codeQuestionId, List<UUID> tagIds, Pageable pageable);
+    Page<SharedSolutionEntity> findByCodeQuestionId(UUID codeQuestionId, List<UUID> tagIds, String search, Pageable pageable);
 
 
 //    List<SharedSolutionEntity> cc(UUID codeQuestionId)

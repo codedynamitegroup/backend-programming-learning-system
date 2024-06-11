@@ -78,6 +78,7 @@ public class SharedSolutionHelper {
                 command.getPageSize(),
                 command.getSortBy(),
                 command.getOrderBy(),
+                command.getSearch(),
                 tagIds);
     }
     //hello
