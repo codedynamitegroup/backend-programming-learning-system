@@ -34,6 +34,7 @@ class ContestRedisServiceImpl implements ContestRedisService {
 
     @Override
     public void clearAllContests() {
+        log.info("Clearing all contests from redis");
         redisTemplate.getConnectionFactory().getConnection().flushAll();
     }
 
@@ -49,8 +50,6 @@ class ContestRedisServiceImpl implements ContestRedisService {
                 pageSize,
                 isAdmin);
         String json = (String) redisTemplate.opsForValue().get(key);
-        log.info("key: {}", key);
-        log.info("json: {}", json);
         try {
             return json != null ? objectMapper.readValue(json, QueryAllContestsResponse.class) : null;
         } catch (JsonProcessingException e) {
