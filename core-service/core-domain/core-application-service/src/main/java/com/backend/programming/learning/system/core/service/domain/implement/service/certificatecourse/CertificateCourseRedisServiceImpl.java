@@ -41,8 +41,6 @@ class CertificateCourseRedisServiceImpl implements CertificateCourseRedisService
             UUID filterTopicId) {
         String key = getKeyFrom(courseName, filterTopicId);
         String json = (String) redisTemplate.opsForValue().get(key);
-        log.info("key: {}", key);
-        log.info("json: {}", json);
         try {
             return json != null ? objectMapper.readValue(json, QueryAllCertificateCoursesResponse.class) : null;
         } catch (JsonProcessingException e) {
