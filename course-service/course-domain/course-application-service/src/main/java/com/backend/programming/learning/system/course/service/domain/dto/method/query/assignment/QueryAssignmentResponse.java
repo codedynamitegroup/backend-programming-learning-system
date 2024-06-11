@@ -39,19 +39,19 @@ public class QueryAssignmentResponse {
     private final List<ActivityAttachmentResponseEntity> activityAttachments;
 
     @NotNull
-    private final Float score;
-
-    @NotNull
     private final Float maxScore;
+
+    private final String wordLimit;
+
+    private final String maxUploadFiles;
+
+    private final String maxFileSize;
 
     @NotNull
     private final ZonedDateTime timeOpen;
 
     @NotNull
     private final ZonedDateTime timeClose;
-
-    @NotNull
-    private final ZonedDateTime timeLimit;
 
     @NotNull
     private final String type;

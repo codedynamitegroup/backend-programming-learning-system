@@ -157,7 +157,6 @@ public class MoodleDataMapper {
                 .intro(assignmentModel.getIntro())
                 .activity(activity)
                 .maxScores(assignmentModel.getGrade().floatValue())
-                .scores((float)0)
                 .type(type.get())
                 .time_open(Instant.ofEpochSecond(assignmentModel.getAllowsubmissionsfromdate()).atZone(ZoneId.of("UTC")))
                 .time_close(Instant.ofEpochSecond(assignmentModel.getDuedate()).atZone(ZoneId.of("UTC")))

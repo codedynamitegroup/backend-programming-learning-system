@@ -35,10 +35,7 @@ public class AssignmentUpdateHelper {
             assignment.setIntro(updateAssignmentCommand.getIntro());
         }
 
-        if(updateAssignmentCommand.getScore() != null)
-        {
-            assignment.setScores(updateAssignmentCommand.getScore());
-        }
+
 
         if(updateAssignmentCommand.getMaxScore() != null)
         {
