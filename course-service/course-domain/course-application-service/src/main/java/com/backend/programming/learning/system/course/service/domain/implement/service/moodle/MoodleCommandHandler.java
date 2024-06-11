@@ -27,8 +27,8 @@ import com.backend.programming.learning.system.course.service.domain.ports.input
 import com.backend.programming.learning.system.course.service.domain.mapper.moodle.MoodleDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.course.service.domain.valueobject.SubmissionGradeId;
-import com.backend.programming.learning.system.course.service.domain.valueobject.Type;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.user.UpdateUserCommand;
+import com.backend.programming.learning.system.domain.valueobject.UserId;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -49,6 +49,7 @@ import java.util.*;
 public class MoodleCommandHandler {
     private final MoodleDataMapper moodleDataMapper;
     private final UserApplicationService userApplicationService;
+    private final OrganizationRepository organizationRepository;
     private final CourseRepository courseRepository;
     private final UserRepository userRepository;
     private final CourseUserRepository courseUserRepository;
@@ -94,7 +95,7 @@ public class MoodleCommandHandler {
 
     String GET_MODULE="core_course_get_course_module";
     String GET_USERS = "core_user_get_users";
-    String MOODLE_URL = "http://62.171.185.208/webservice/rest/server.php";
+    String MOODLE_URL = "http://62.171.185.208:8081/webservice/rest/server.php";
     //    String MOODLE_URL = "http://localhost/moodle/webservice/rest/server.php";
     String MOODLE_URL_TOKEN = "http://62.171.185.208/login/token.php";
     String TOKEN = "cdf90b5bf53bcae577c60419702dbee7";
@@ -679,9 +680,14 @@ public class MoodleCommandHandler {
     }
 
     @Transactional
-    public String syncUser() {
+    public String syncUser(UUID organizationId) {
+        Optional<Organization> organization = organizationRepository.findOrganizationById(organizationId);
+
+        String moodleURL = organization.get().getMoodleUrl();
+        String token = organization.get().getApiKey();
+
         String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&courseid=1",
-                MOODLE_URL, TOKEN, GET_ENROLLED_USERS);
+                moodleURL, token, GET_ENROLLED_USERS);
         String model = restTemplate.getForObject(apiURL, String.class);
         List<UserModel> listUserModel = null;
         try {
@@ -698,11 +704,14 @@ public class MoodleCommandHandler {
 //        Map<String, Role> roleMap = roles.stream()
 //                .collect(Collectors.toMap(role -> role.getName().toLowerCase(), role -> role));
 
-        listUserModel.forEach(userModel -> {
+        listUserModel.stream()
+                .filter(userModel -> !userModel.getId().equals("1"))
+                .forEach(userModel -> {
             Optional<User> userResult = userRepository.findByEmail(userModel.getEmail());
             if (userResult.isPresent()) {
                 UpdateUserCommand userUpdate = moodleDataMapper.updateUser(userModel, userResult.get());
                 UpdateUserResponse updateUserResponse = userApplicationService.updateUser(userUpdate);
+                userRepository.save(userResult.get());
 //                List<Role> rolesMoodle = userModel.getRoles();
 //                rolesMoodle.forEach(role -> {
 //                    CreateUserRoleCommand createRole = moodleDataMapper.createRole(role, roleMap, updateUserResponse.getUserId());
@@ -711,6 +720,17 @@ public class MoodleCommandHandler {
             } else {
                 CreateUserCommand user = moodleDataMapper.createUser(userModel);
                 CreateUserResponse createUserResponse = userApplicationService.createUser(user);
+
+                userRepository.save(User.builder()
+                                .id(new UserId(UUID.randomUUID()))
+                                .organization(organization.get())
+                                .username(user.getUsername())
+                                .email(user.getEmail())
+                                .userIdMoodle(user.getUserIdMoodle())
+                                .firstName(user.getFirstName())
+                                .lastName(user.getLastName())
+                                .phone(user.getPhone())
+                        .build());
 //                List<Role> rolesMoodle = userModel.getRoles();
 //                rolesMoodle.forEach(role -> {
 //                    CreateUserRoleCommand createRole = moodleDataMapper.createRole(role, roleMap, createUserResponse.getUserId());
