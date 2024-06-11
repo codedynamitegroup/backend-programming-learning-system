@@ -245,6 +245,7 @@ CREATE TABLE "public".assignment
     time_limit TIMESTAMP WITH TIME ZONE,
     type       type             NOT null,
     visible    boolean          NOT NULL DEFAULT '0',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT assignment_pkey PRIMARY KEY (id),
     CONSTRAINT assignment_course_id_fkey FOREIGN KEY (course_id)
         REFERENCES "public".course (id) MATCH SIMPLE
@@ -328,6 +329,7 @@ CREATE TABLE "public".course_user
     user_id   uuid                           NOT NULL,
     course_id uuid                           NOT NULL,
     role_id   integer                        NOT NULL,
+    created_at    TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT course_user_pkey PRIMARY KEY (id),
     CONSTRAINT course_user_user_id_fkey FOREIGN KEY (user_id)
         REFERENCES "public".user (id) MATCH SIMPLE

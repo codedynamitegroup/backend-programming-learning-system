@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.course.service.domain.valueobject
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -21,4 +22,6 @@ public interface ExamRepository {
     Optional<Exam> findByName(String name);
 
     Integer countStudent(ExamId examId);
+
+    List<Exam> findRecentExam();
 }
