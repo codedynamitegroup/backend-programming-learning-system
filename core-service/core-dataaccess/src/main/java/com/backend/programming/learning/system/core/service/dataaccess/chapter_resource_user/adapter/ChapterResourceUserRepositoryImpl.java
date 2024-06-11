@@ -8,12 +8,14 @@ import com.backend.programming.learning.system.core.service.domain.entity.Chapte
 import com.backend.programming.learning.system.core.service.domain.entity.ChapterResourceUser;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ChapterResourceRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ChapterResourceUserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Slf4j
 @Component
 public class ChapterResourceUserRepositoryImpl implements ChapterResourceUserRepository {
     private final ChapterResourceUserDataAccessMapper chapterResourceUserDataAccessMapper;
