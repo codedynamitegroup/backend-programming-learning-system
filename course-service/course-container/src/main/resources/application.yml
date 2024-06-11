@@ -24,8 +24,9 @@ course-service:
   question-request-topic-name: core-question-request
   question-response-topic-name: core-question-response
 
-  course-user-request-topic-name: course-user-request
-  user-response-topic-name: user-response
+  auth-service-user-request-to-course-service-topic-name: auth-service-user-request-to-course-service
+  any-services-user-response-to-auth-service-topic-name: any-services-user-response-to-auth-service
+  auth-service-user-response-to-course-service-topic-name: auth-service-user-response-to-course-service
 
   course-organization-request-topic-name: course-organization-request
   organization-response-topic-name: organization-response
@@ -99,7 +100,8 @@ kafka-consumer-config:
   course-service-organization-update-request-group-id: course-service-organization-update-request-consumer
   course-service-organization-delete-request-group-id: course-service-organization-delete-request-consumer
 
-  course-service-user-request-group-id: course-service-user-request-topic
+  auth-service-to-course-service-user-request-group-id: auth-service-to-course-service-user-request-topic
+  auth-service-to-course-service-user-response-group-id: auth-service-to-course-service-user-response-topic
 
   course-service-organization-request-group-id: course-service-organization-request-topic
 

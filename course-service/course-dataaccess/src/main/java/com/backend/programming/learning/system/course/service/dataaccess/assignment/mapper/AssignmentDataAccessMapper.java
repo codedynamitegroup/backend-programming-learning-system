@@ -13,6 +13,9 @@ import java.util.List;
 @Component
 public class AssignmentDataAccessMapper {
     public AssignmentEntity assignmentToAssignmentEntity(Assignment assignment) {
+        if(assignment == null) {
+            return null;
+        }
         CourseEntity courseEntity = CourseEntity.builder().id(assignment.getCourseId().getValue()).build();
         return AssignmentEntity.builder()
                 .course(courseEntity)
@@ -21,18 +24,24 @@ public class AssignmentDataAccessMapper {
                 .title(assignment.getTitle())
                 .intro(assignment.getIntro())
                 .activity(assignment.getActivity())
-                .score(assignment.getScores())
+                .maxFileSize(assignment.getMaxFileSize())
+                .maxUploadFiles(assignment.getMaxUploadFiles())
+                .wordLimit(assignment.getWordLimit())
                 .maxScore(assignment.getMaxScores())
                 .timeOpen(assignment.getTime_open())
                 .timeClose(assignment.getTime_close())
                 .timeLimit(assignment.getTime_limit())
                 .type(assignment.getType())
+                .allowSubmitLate(assignment.getAllowSubmitLate())
                 .visible(assignment.getVisible())
                 .createdAt(assignment.getCreatedAt())
                 .build();
     }
 
     public Assignment assignmentEntityToAssignment(AssignmentEntity assignmentEntity) {
+        if(assignmentEntity == null) {
+            return null;
+        }
         return Assignment.builder()
                 .id(new AssignmentId(assignmentEntity.getId()))
                 .assignmentIdMoodle(assignmentEntity.getAssignmentIdMoodle())
@@ -40,8 +49,11 @@ public class AssignmentDataAccessMapper {
                 .title(assignmentEntity.getTitle())
                 .intro(assignmentEntity.getIntro())
                 .activity(assignmentEntity.getActivity())
-                .scores(assignmentEntity.getScore())
+                .maxFileSize(assignmentEntity.getMaxFileSize())
+                .maxUploadFiles(assignmentEntity.getMaxUploadFiles())
+                .wordLimit(assignmentEntity.getWordLimit())
                 .maxScores(assignmentEntity.getMaxScore())
+                .allowSubmitLate(assignmentEntity.getAllowSubmitLate())
                 .time_open(assignmentEntity.getTimeOpen())
                 .time_close(assignmentEntity.getTimeClose())
                 .time_limit(assignmentEntity.getTimeLimit())

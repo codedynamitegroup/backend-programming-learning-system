@@ -31,9 +31,7 @@ public class UserCreateHelper {
                 .orElseThrow(() -> new AuthDomainException("Organization not found!"));
         User user = authDataMapper.createUserCommandToUser(createUserCommand, organization);
         findUserWithEmail(user.getEmail());
-        UserCreatedEvent userCreatedEvent = courseDomainService.createUser(user);
-        saveUser(user);
-        return userCreatedEvent;
+        return courseDomainService.createUser(user);
     }
 
     private void findUserWithEmail(String email) {
@@ -42,15 +40,5 @@ public class UserCreateHelper {
             log.warn("Found user with email: {}", email);
             throw new AuthDomainException("Found user with email: " + email);
         }
-    }
-
-    private User saveUser(User user) {
-        User userResult = userRepository.save(user);
-        if (userResult == null) {
-            log.error("Could not create user!");
-            throw new AuthDomainException("Could not create user!");
-        }
-        log.info("User is created with id: {}", userResult.getId().getValue());
-        return userResult;
     }
 }

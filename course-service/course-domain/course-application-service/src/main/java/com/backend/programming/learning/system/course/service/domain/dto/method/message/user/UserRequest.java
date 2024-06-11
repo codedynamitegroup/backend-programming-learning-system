@@ -14,6 +14,7 @@ import java.time.Instant;
 public class UserRequest {
     private String id;
     private String sagaId;
+    private String organizationId;
     private String userId;
     private String email;
     private String userName;

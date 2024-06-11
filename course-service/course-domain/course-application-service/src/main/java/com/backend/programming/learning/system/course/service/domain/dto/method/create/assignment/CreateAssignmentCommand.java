@@ -20,11 +20,13 @@ public class CreateAssignmentCommand {
     @NotNull
     private final String title;
 
-    @NotNull
     private final String intro;
 
-    @NotNull
-    private final Float score;
+    private final String activity;
+
+    private final String wordLimit;
+    private final String maxUploadFiles;
+    private final String maxFileSize;
 
     @NotNull
     private final Float maxScore;
@@ -36,13 +38,13 @@ public class CreateAssignmentCommand {
     private final ZonedDateTime timeClose;
 
     @NotNull
-    private final ZonedDateTime timeLimit;
+    private final Boolean allowSubmitLate;
+
 
     @NotNull(message = "type is required")
     @EnumValidator(enumClass = Type.class, message = "Type is invalid")
     private final String type;
 
-    @NotNull
     private final Boolean visible;
 
 }

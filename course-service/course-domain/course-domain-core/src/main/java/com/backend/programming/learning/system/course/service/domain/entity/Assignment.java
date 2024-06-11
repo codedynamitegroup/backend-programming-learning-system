@@ -16,11 +16,16 @@ public class Assignment extends AggregateRoot<AssignmentId> {
     private String intro;
     private String activity;
 
-    private Float scores;
+    private String wordLimit;
+    private String maxUploadFiles;
+
+    private String maxFileSize;
 
     private Float maxScores;
     private final ZonedDateTime time_open;
     private ZonedDateTime time_close;
+
+    private Boolean allowSubmitLate;
     private ZonedDateTime time_limit;
     private ZonedDateTime createdAt;
     private Type type;
@@ -33,7 +38,10 @@ public class Assignment extends AggregateRoot<AssignmentId> {
         title = builder.title;
         intro = builder.intro;
         activity = builder.activity;
-        scores = builder.scores;
+        wordLimit = builder.wordLimit;
+        maxUploadFiles = builder.maxUploadFiles;
+        maxFileSize = builder.maxFileSize;
+        allowSubmitLate = builder.allowSubmitLate;
         maxScores = builder.maxScores;
         time_open = builder.time_open;
         time_close = builder.time_close;
@@ -41,6 +49,38 @@ public class Assignment extends AggregateRoot<AssignmentId> {
         type = builder.type;
         visible = builder.visible;
         createdAt = builder.createdAt;
+    }
+
+    public Boolean getAllowSubmitLate() {
+        return allowSubmitLate;
+    }
+
+    public void setAllowSubmitLate(Boolean allowSubmitLate) {
+        this.allowSubmitLate = allowSubmitLate;
+    }
+
+    public String getWordLimit() {
+        return wordLimit;
+    }
+
+    public void setWordLimit(String wordLimit) {
+        this.wordLimit = wordLimit;
+    }
+
+    public String getMaxUploadFiles() {
+        return maxUploadFiles;
+    }
+
+    public void setMaxUploadFiles(String maxUploadFiles) {
+        this.maxUploadFiles = maxUploadFiles;
+    }
+
+    public String getMaxFileSize() {
+        return maxFileSize;
+    }
+
+    public void setMaxFileSize(String maxFileSize) {
+        this.maxFileSize = maxFileSize;
     }
 
     public static Builder builder() {
@@ -79,10 +119,6 @@ public class Assignment extends AggregateRoot<AssignmentId> {
         return intro;
     }
 
-    public Float getScores() {
-        return scores;
-    }
-
     public Float getMaxScores() {
         return maxScores;
     }
@@ -117,10 +153,6 @@ public class Assignment extends AggregateRoot<AssignmentId> {
 
     public void setIntro(String intro) {
         this.intro = intro;
-    }
-
-    public void setScores(Float scores) {
-        this.scores = scores;
     }
 
     public void setMaxScores(Float maxScores) {
@@ -159,7 +191,12 @@ public class Assignment extends AggregateRoot<AssignmentId> {
 
         private String activity;
 
-        private Float scores;
+        private String wordLimit;
+        private String maxUploadFiles;
+
+        private String maxFileSize;
+
+        private Boolean allowSubmitLate;
         private Float maxScores;
         private ZonedDateTime time_open;
         private ZonedDateTime createdAt;
@@ -212,10 +249,26 @@ public class Assignment extends AggregateRoot<AssignmentId> {
         }
 
 
-        public Builder scores(Float val) {
-            scores = val;
+        public Builder wordLimit(String val) {
+            wordLimit = val;
             return this;
         }
+
+        public Builder maxUploadFiles(String val) {
+            maxUploadFiles = val;
+            return this;
+        }
+
+        public Builder maxFileSize(String val) {
+            maxFileSize = val;
+            return this;
+        }
+
+        public Builder allowSubmitLate(Boolean val) {
+            allowSubmitLate = val;
+            return this;
+        }
+
 
         public Builder maxScores(Float val) {
             maxScores = val;

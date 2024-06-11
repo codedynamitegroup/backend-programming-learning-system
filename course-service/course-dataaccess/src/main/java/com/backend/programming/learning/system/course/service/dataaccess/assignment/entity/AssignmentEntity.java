@@ -34,10 +34,13 @@ public class AssignmentEntity {
     private String title;
     private String intro;
     private String activity;
-    private Float score;
+    private String wordLimit;
+    private String maxUploadFiles;
+    private String maxFileSize;
     private Float maxScore;
     private ZonedDateTime timeOpen;
     private ZonedDateTime timeClose;
+    private Boolean allowSubmitLate;
     private ZonedDateTime timeLimit;
     private ZonedDateTime createdAt;
     @Enumerated(EnumType.STRING)

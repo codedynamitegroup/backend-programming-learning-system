@@ -17,15 +17,12 @@ import com.backend.programming.learning.system.code.assessment.service.domain.en
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.SharedSolutionRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.SharedSolutionId;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TagId;
-import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.Vote;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.shared_solution_vote.SharedSolutionVoteId;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.QueryOrderBy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Component;
-
-import javax.swing.text.html.Option;
 
 import java.util.*;
 
@@ -108,7 +105,7 @@ public class SharedSolutionRepositoryImpl implements SharedSolutionRepository {
                          Integer pageSize,
                          SharedSolution.SortedFields sortBy,
                          QueryOrderBy orderBy,
-                         List<TagId> tagIds) {
+                         String search, List<TagId> tagIds) {
 
         List<UUID> tagEntityId
                 = tagIds == null?
@@ -124,7 +121,7 @@ public class SharedSolutionRepositoryImpl implements SharedSolutionRepository {
                         Sort.by(generalMapper.QueryOrderByToSortDirection(orderBy),
                                 dataAccessMapper.sharedSolutionFieldToSharedSolutionEntityField(sortBy.name())));
         Page<SharedSolutionEntity> sharedSolutionEntities = sharedSolutionJpaRepository
-                .findByCodeQuestionId(codeQuestionId.getValue(),tagEntityId, pageable);
+                .findByCodeQuestionId(codeQuestionId.getValue(),tagEntityId, search, pageable);
 
         //get tag
         List<List<Tag>> eachTags = sharedSolutionEntities.getContent().stream().map(item->{

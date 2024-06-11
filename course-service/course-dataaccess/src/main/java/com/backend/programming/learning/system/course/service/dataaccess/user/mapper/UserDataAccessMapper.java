@@ -25,16 +25,12 @@ public class UserDataAccessMapper {
     }
 
     public UserEntity userToUserEntity(User user) {
-        OrganizationEntity organizationEntity = organizationDataAccessMapper.
-                organizationToOrganizationEntity(user.getOrganization());
-
-        RoleMoodleEntity roleMoodleEntity = roleMoodleDataAccessMapper.
-                roleMoodleToRoleMoodleEntity(user.getRoleMoodle());
-
         return UserEntity.builder()
                 .id(user.getId().getValue())
-                .roleMoodle(roleMoodleEntity)
-                .organization(organizationEntity)
+                .roleMoodle(user.getRoleMoodle() == null ? null : roleMoodleDataAccessMapper.
+                        roleMoodleToRoleMoodleEntity(user.getRoleMoodle()))
+                .organization(user.getOrganization() == null ? null : organizationDataAccessMapper.
+                        organizationToOrganizationEntity(user.getOrganization()))
                 .username(user.getUserName())
                 .userIdMoodle(user.getUserIdMoodle())
                 .email(user.getEmail())
@@ -52,17 +48,13 @@ public class UserDataAccessMapper {
     }
 
     public User userEntityToUser(UserEntity userEntity) {
-        Organization organization = organizationDataAccessMapper.
-                organizationEntityToOrganization(userEntity.getOrganization());
-
-        RoleMoodle roleMoodle = roleMoodleDataAccessMapper.
-                roleMoodleEntityToRoleMoodle(userEntity.getRoleMoodle());
-
         return User.builder()
                 .id(new UserId(userEntity.getId()))
-                .roleMoodle(roleMoodle)
+                .roleMoodle(userEntity.getRoleMoodle() == null ? null : roleMoodleDataAccessMapper.
+                        roleMoodleEntityToRoleMoodle(userEntity.getRoleMoodle()))
                 .userIdMoodle(userEntity.getUserIdMoodle())
-                .organization(organization)
+                .organization(userEntity.getOrganization() == null ? null : organizationDataAccessMapper.
+                        organizationEntityToOrganization(userEntity.getOrganization()))
                 .username(userEntity.getUsername())
                 .name(userEntity.getUsername())
                 .email(userEntity.getEmail())

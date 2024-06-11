@@ -11,4 +11,5 @@ public interface ChapterResourceRepository {
     List<ChapterResource> findAllChapterResourcesByChapterId(UUID chapterId);
     Optional<ChapterResource> findFirstUncompletedResourceByCertificateCourseIdAndUserId(
             UUID certificateCourseId, UUID userId);
+    Optional<ChapterResource> findChapterResourceById(UUID chapterResourceId);
 }

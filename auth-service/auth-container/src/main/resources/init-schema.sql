@@ -102,7 +102,7 @@ CREATE TABLE "public".user_role (
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "public".user_outbox CASCADE;
+DROP TABLE IF EXISTS "public".user_outbox_auth_to_any_services CASCADE;
 
 CREATE TABLE "public".user_outbox
 (
@@ -117,7 +117,7 @@ CREATE TABLE "public".user_outbox
     service_name service_name NOT NULL,
     copy_state CopyState NOT NULL,
     version integer NOT NULL,
-    CONSTRAINT user_outbox_pkey PRIMARY KEY (id)
+    CONSTRAINT user_outbox_auth_to_any_services_pkey PRIMARY KEY (id)
 );
 
 CREATE INDEX "user_outbox_saga_status"
@@ -127,6 +127,10 @@ CREATE INDEX "user_outbox_saga_status"
 CREATE UNIQUE INDEX "user_outbox_saga_id"
     ON "public".user_outbox
     (type, saga_id, saga_status, service_name);
+
+CREATE UNIQUE INDEX "user_outbox_saga_id_copy_state_type"
+    ON "public".user_outbox
+    (type, saga_id, copy_state, service_name);
 
 DROP TABLE IF EXISTS "public".organization_outbox CASCADE;
 
@@ -152,4 +156,4 @@ CREATE INDEX "organization_outbox_saga_status"
 
 CREATE UNIQUE INDEX "organization_outbox_saga_id"
     ON "public".organization_outbox
-    (type, saga_id, saga_status, service_name);
+    (type, saga_id, copy_state, outbox_status, service_name);

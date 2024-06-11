@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.dataaccess.outbox
 
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
+import com.backend.programming.learning.system.saga.SagaStatus;
 import lombok.*;
 
 import jakarta.persistence.*;
@@ -25,6 +26,8 @@ public class UserOutboxEntity {
     private ZonedDateTime processedAt;
     private String type;
     private String payload;
+    @Enumerated(EnumType.STRING)
+    private SagaStatus sagaStatus;
     @Enumerated(EnumType.STRING)
     private CopyState copyState;
     @Enumerated(EnumType.STRING)

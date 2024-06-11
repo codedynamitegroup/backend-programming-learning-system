@@ -25,6 +25,8 @@ public class GetSharedSolutionByCodeQuestionIdCommand {
 
     List<UUID> filterTagIds;
 
+    String search;
+
     @Setter
     SharedSolution.SortedFields sortBy;
 
@@ -32,13 +34,9 @@ public class GetSharedSolutionByCodeQuestionIdCommand {
     QueryOrderBy orderBy;
 
     @Positive(message = "pageSize must be positive")
-    @Setter
-    @JsonIgnore
     Integer pageSize;
 
     @PositiveOrZero(message = "pageNum must not be negative")
-    @Setter
-    @JsonIgnore
     Integer pageNum;
 
 }

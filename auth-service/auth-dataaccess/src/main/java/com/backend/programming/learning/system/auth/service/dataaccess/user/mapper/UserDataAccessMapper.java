@@ -75,7 +75,7 @@ public class UserDataAccessMapper {
                 .isDeleted(userEntity.getIsDeleted())
                 .otp(userEntity.getOtp())
                 .organization(userEntity.getOrganization() != null ? organizationEntityToOrganization(userEntity.getOrganization()) : null)
-                .roles(userEntity.getRoles().stream().map(roleDataAccessMapper::roleEntityToRole).collect(Collectors.toSet()))
+                .roles(userEntity.getRoles() == null ? null : userEntity.getRoles().stream().map(roleDataAccessMapper::roleEntityToRole).collect(Collectors.toSet()))
                 .otpExpireAt(userEntity.getOtpExpireAt())
                 .build();
     }
@@ -100,7 +100,7 @@ public class UserDataAccessMapper {
                 .isDeleted(user.getDeleted())
                 .otp(user.getOtp())
                 .organization(user.getOrganization() != null ? organizationToOrganizationEntity(user.getOrganization()) : null)
-                .roles(user.getRoles().stream().map(roleDataAccessMapper::roleToRoleEntity).collect(Collectors.toSet()))
+                .roles(user.getRoles() == null ? null : user.getRoles().stream().map(roleDataAccessMapper::roleToRoleEntity).collect(Collectors.toSet()))
                 .otpExpireAt(user.getOtpExpireAt())
                 .build();
     }
