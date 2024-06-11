@@ -12,4 +12,6 @@ public interface QuestionSubmissionJpaRepository extends JpaRepository<QuestionS
     Optional<QuestionSubmissionEntity> findById(UUID id);
 
     List<QuestionSubmissionEntity> findByExamSubmissionId(UUID submissionId);
+
+    Optional<QuestionSubmissionEntity> findByExamSubmissionIdAndQuestionId(UUID examSubmissionId, UUID questionId);
 }
