@@ -22,6 +22,9 @@ public class QuestionBankCategoryEntity {
 
     private String name;
     private String description;
+
+    private Boolean isOrgQuestionBank;
+
     @OneToOne
     @JoinColumn(name = "created_by", referencedColumnName = "id")
     private UserEntity createdBy;

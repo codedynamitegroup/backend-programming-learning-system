@@ -13,6 +13,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
 import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.exception.ExamNotFoundException;
+import com.backend.programming.learning.system.course.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamSubmissionRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.Status;
@@ -20,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -69,9 +72,9 @@ public class ExamSubmissionRepositoryImpl implements ExamSubmissionRepository {
     @Override
     public ExamSubmission saveEnd(CreateExamSubmissionStartCommand createExamSubmissionStartCommand) {
         ExamEntity examEntity = examJpaRepository.findById(createExamSubmissionStartCommand.examId())
-                .orElseThrow(() -> new RuntimeException("Exam not found"));
+                .orElseThrow(() -> new ExamNotFoundException("Exam not found"));
         UserEntity userEntity = userJpaRepository.findById(createExamSubmissionStartCommand.userId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
 
         ExamSubmissionEntity examSubmissionEntity = Objects.requireNonNull(examSubmissionJpaRepository
                         .findByExamAndUser(examEntity, userEntity)
@@ -82,5 +85,19 @@ public class ExamSubmissionRepositoryImpl implements ExamSubmissionRepository {
         examSubmissionEntity.setSubmitTime(ZonedDateTime.now());
         examSubmissionEntity.setStatus(Status.SUBMITTED);
         return examSubmissionDataAccessMapper.examSubmissionEntityToExamSubmission(examSubmissionJpaRepository.save(examSubmissionEntity));
+    }
+
+    @Override
+    public List<ExamSubmission> findByExamId(ExamId examId) {
+        List<ExamSubmissionEntity> examSubmissions = examSubmissionJpaRepository
+                .findByExamId(examId.getValue())
+                .orElse(null);
+        return examSubmissionDataAccessMapper.examSubmissionEntitiesToExamSubmissions(examSubmissions);
+    }
+
+    @Override
+    public List<ExamSubmission> findAllByExamIdAndUserId(UUID examId, UUID userId) {
+        List<ExamSubmissionEntity> examSubmissionEntities = examSubmissionJpaRepository.findByExamIdAndUserId(examId, userId);
+        return examSubmissionDataAccessMapper.examSubmissionEntitiesToExamSubmissions(examSubmissionEntities);
     }
 }

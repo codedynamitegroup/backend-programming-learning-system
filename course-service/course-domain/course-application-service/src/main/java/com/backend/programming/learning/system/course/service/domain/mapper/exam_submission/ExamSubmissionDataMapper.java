@@ -3,6 +3,8 @@ package com.backend.programming.learning.system.course.service.domain.mapper.exa
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.ExamSubmissionResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QuestionSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
@@ -87,4 +89,35 @@ public class ExamSubmissionDataMapper {
                         .build())
                 .toList();
     }
+
+    public QueryExamSubmissionOverviewResponse mapToQueryExamSubmissionResponseWithTotal(ExamSubmission examSubmission, Double markTotal) {
+        return QueryExamSubmissionOverviewResponse.builder()
+                .examSubmissionId(examSubmission.getId().getValue())
+                .examId(examSubmission.getExam().getId().getValue())
+                .userId(examSubmission.getUser().getId().getValue())
+                .startTime(examSubmission.getStartTime())
+                .submitTime(examSubmission.getSubmitTime())
+                .status(examSubmission.status())
+                .markTotal(markTotal)
+                .build();
+    }
+
+    public List<ExamSubmissionResponse> examSubmissionToQueryExamSubmission(List<ExamSubmission> examSubmission) {
+        return examSubmission.stream()
+                .map(this::examSubmissionToQueryExamSubmissionResponse)
+                .toList();
+    }
+
+    private ExamSubmissionResponse examSubmissionToQueryExamSubmissionResponse(ExamSubmission examSubmission) {
+        return ExamSubmissionResponse.builder()
+                .examSubmissionId(examSubmission.getId().getValue())
+                .studentId(examSubmission.getUser().getId().getValue())
+                .firstName(examSubmission.getUser().getFirstName())
+                .lastName(examSubmission.getUser().getLastName())
+                .startTime(examSubmission.getStartTime())
+                .submitTime(examSubmission.getSubmitTime())
+                .status(examSubmission.status())
+                .build();
+    }
+
 }

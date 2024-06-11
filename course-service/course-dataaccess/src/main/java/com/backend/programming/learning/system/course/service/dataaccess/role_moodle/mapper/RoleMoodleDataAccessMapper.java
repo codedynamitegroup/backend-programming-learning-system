@@ -1,21 +1,18 @@
 package com.backend.programming.learning.system.course.service.dataaccess.role_moodle.mapper;
 
-import com.backend.programming.learning.system.course.service.dataaccess.organization.entity.OrganizationEntity;
-import com.backend.programming.learning.system.course.service.dataaccess.organization.mapper.OrganizationDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.role_moodle.entity.RoleMoodleEntity;
-import com.backend.programming.learning.system.course.service.domain.entity.Organization;
 import com.backend.programming.learning.system.course.service.domain.entity.RoleMoodle;
-import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.valueobject.RoleMoodleId;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class RoleMoodleDataAccessMapper {
 
     public RoleMoodleEntity roleMoodleToRoleMoodleEntity(RoleMoodle roleMoodle) {
+        if(Objects.isNull(roleMoodle)) return null;
         return RoleMoodleEntity.builder()
                 .id(roleMoodle.getId().getValue())
                 .name(roleMoodle.getName())

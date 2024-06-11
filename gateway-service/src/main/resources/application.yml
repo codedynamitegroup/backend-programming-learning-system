@@ -18,7 +18,7 @@ eureka:
     preferIpAddress: true
 
 gateway-service:
-  timeout-ms: 60000
+  timeout-ms: 10000
   failure-rate-threshold: 50
   slow-call-rate-threshold: 50
   slow-call-duration-threshold: 50
@@ -45,8 +45,7 @@ spring:
     redis:
       host: ${REDIS_HOST:localhost}
       port: 6379
-      timeout: 15s
-      connect-timeout: 15s
+      password: ""
 
 security:
   paths-to-ignore: /actuator/**

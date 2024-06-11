@@ -33,8 +33,5 @@ public class CreateCertificateCourseCommand {
     private final ZonedDateTime startTime;
     private final ZonedDateTime endTime;
 
-    @NotNull(message = "CreatedBy is required")
-    private final UUID createdBy;
-    @NotNull(message = "UpdatedBy is required")
-    private final UUID updatedBy;
+    private final String email;
 }

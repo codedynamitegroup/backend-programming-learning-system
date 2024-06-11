@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.exception.Use
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.IsRegisteredFilter;
+import com.backend.programming.learning.system.core.service.domain.valueobject.ResourceType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,19 +23,22 @@ public class CertificateCourseQueryHelper {
     private final CertificateCourseRepository certificateCourseRepository;
     private final UserRepository userRepository;
     private final CertificateCourseUserRepository certificateCourseUserRepository;
-    private final ChapterQuestionRepository chapterQuestionRepository;
+    private final ChapterResourceRepository chapterResourceRepository;
     private final TopicRepository topicRepository;
+    private final QtypeCodeQuestionRepository qtypeCodeQuestionRepository;
 
     public CertificateCourseQueryHelper(CertificateCourseRepository certificateCourseRepository,
                                         UserRepository userRepository,
                                         CertificateCourseUserRepository certificateCourseUserRepository,
-                                        ChapterQuestionRepository chapterQuestionRepository,
-                                        TopicRepository topicRepository) {
+                                        ChapterResourceRepository chapterResourceRepository,
+                                        TopicRepository topicRepository,
+                                        QtypeCodeQuestionRepository qtypeCodeQuestionRepository) {
         this.certificateCourseRepository = certificateCourseRepository;
         this.userRepository = userRepository;
         this.certificateCourseUserRepository = certificateCourseUserRepository;
-        this.chapterQuestionRepository = chapterQuestionRepository;
+        this.chapterResourceRepository = chapterResourceRepository;
         this.topicRepository = topicRepository;
+        this.qtypeCodeQuestionRepository = qtypeCodeQuestionRepository;
     }
 
     @Transactional(readOnly = true)
@@ -54,13 +58,20 @@ public class CertificateCourseQueryHelper {
         if (email != null) {
             Optional<User> userOptional = userRepository.findByEmail(email);
             if (userOptional.isPresent()) {
-                Optional<ChapterQuestion> currentQuestion = chapterQuestionRepository
-                        .findFirstUncompletedQuestionByCertificateCourseIdAndUserId(
+                Optional<ChapterResource> currentChapterResource = chapterResourceRepository
+                        .findFirstUncompletedResourceByCertificateCourseIdAndUserId(
                                 certificateCourse.getId().getValue(),
                                 userOptional.get().getId().getValue()
                         );
-                currentQuestion.ifPresent(
-                        chapterQuestion -> certificateCourse.setCurrentQuestion(chapterQuestion.getQuestion())
+                if (currentChapterResource.isPresent()
+                        && currentChapterResource.get().getResourceType().equals(ResourceType.CODE)
+                        && currentChapterResource.get().getQuestion() != null) {
+                    Optional<QtypeCodeQuestion> qtypeCodeQuestion = qtypeCodeQuestionRepository
+                            .findQtypeCodeQuestionByQuestionId(currentChapterResource.get().getQuestion().getId().getValue());
+                    qtypeCodeQuestion.ifPresent(value -> currentChapterResource.get().setCodeQuestionId(value.getId().getValue()));
+                }
+                currentChapterResource.ifPresent(
+                        certificateCourse::setCurrentResource
                 );
 
                 Optional<CertificateCourseUser> certificateCourseUser =
@@ -70,17 +81,17 @@ public class CertificateCourseQueryHelper {
                         );
                 if (certificateCourseUser.isPresent()) {
                     certificateCourse.setRegistered(true);
-                    certificateCourse.setNumOfCompletedQuestions(
-                            countNumOfCompletedQuestions(certificateCourseId, userOptional.get().getId().getValue())
+                    certificateCourse.setNumOfCompletedResources(
+                            countNumOfCompletedResources(certificateCourseId, userOptional.get().getId().getValue())
                     );
                 } else {
                     certificateCourse.setRegistered(false);
-                    certificateCourse.setNumOfCompletedQuestions(0);
+                    certificateCourse.setNumOfCompletedResources(0);
                 }
             }
         }
 
-        certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourseId));
+        certificateCourse.setNumOfResources(countNumOfResources(certificateCourseId));
         certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourseId));
         certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourseId));
         log.info("Certificate course queried with id: {}", certificateCourse.getId().getValue());
@@ -90,7 +101,7 @@ public class CertificateCourseQueryHelper {
     @Transactional(readOnly = true)
     public List<CertificateCourse> queryAllCertificateCourses(
             String courseName,
-            List<UUID> filterTopicIds,
+            UUID filterTopicId,
             IsRegisteredFilter isRegisteredFilter,
             String email
     ) {
@@ -98,7 +109,7 @@ public class CertificateCourseQueryHelper {
             case ALL: {
                 List<CertificateCourse> certificateCourseList = certificateCourseRepository.findAllCertificateCourses(
                         courseName,
-                        filterTopicIds
+                        filterTopicId
                 );
                 Optional<User> userOptional = email != null ? userRepository.findByEmail(email): Optional.empty();
 
@@ -111,26 +122,35 @@ public class CertificateCourseQueryHelper {
                                 );
                         if (certificateCourseUser.isPresent()) {
                             certificateCourse.setRegistered(true);
-                            certificateCourse.setNumOfCompletedQuestions(
-                                    countNumOfCompletedQuestions(
+                            certificateCourse.setNumOfCompletedResources(
+                                    countNumOfCompletedResources(
                                             certificateCourse.getId().getValue(),
                                             userOptional.get().getId().getValue())
                             );
                         } else {
                             certificateCourse.setRegistered(false);
-                            certificateCourse.setNumOfCompletedQuestions(0);
+                            certificateCourse.setNumOfCompletedResources(0);
                         }
-                        Optional<ChapterQuestion> currentQuestion = chapterQuestionRepository
-                                .findFirstUncompletedQuestionByCertificateCourseIdAndUserId(
+                        Optional<ChapterResource> currentChapterResource = chapterResourceRepository
+                                .findFirstUncompletedResourceByCertificateCourseIdAndUserId(
                                         certificateCourse.getId().getValue(),
                                         userOptional.get().getId().getValue()
                                 );
-                        currentQuestion.ifPresent(
-                                chapterQuestion -> certificateCourse.setCurrentQuestion(chapterQuestion.getQuestion())
+
+                        if (currentChapterResource.isPresent()
+                                && currentChapterResource.get().getResourceType().equals(ResourceType.CODE)
+                                && currentChapterResource.get().getQuestion() != null) {
+                            Optional<QtypeCodeQuestion> qtypeCodeQuestion = qtypeCodeQuestionRepository
+                                    .findQtypeCodeQuestionByQuestionId(currentChapterResource.get().getQuestion().getId().getValue());
+                            qtypeCodeQuestion.ifPresent(value -> currentChapterResource.get().setCodeQuestionId(value.getId().getValue()));
+                        }
+
+                        currentChapterResource.ifPresent(
+                                certificateCourse::setCurrentResource
                         );
                     }
 
-                    certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourse.getId().getValue()));
+                    certificateCourse.setNumOfResources(countNumOfResources(certificateCourse.getId().getValue()));
                     certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourse.getId().getValue()));
                     certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourse.getId().getValue()));
 
@@ -142,7 +162,7 @@ public class CertificateCourseQueryHelper {
                 List<CertificateCourse> certificateCourseList =
                         certificateCourseRepository.findAllCertificateCoursesByIsRegistered(
                         courseName,
-                        filterTopicIds,
+                        filterTopicId,
                         true,
                         user.getId().getValue()
                 );
@@ -154,26 +174,34 @@ public class CertificateCourseQueryHelper {
                             );
                     if (certificateCourseUser.isPresent()) {
                         certificateCourse.setRegistered(true);
-                        certificateCourse.setNumOfCompletedQuestions(
-                                countNumOfCompletedQuestions(
+                        certificateCourse.setNumOfCompletedResources(
+                                countNumOfCompletedResources(
                                         certificateCourse.getId().getValue(),
                                         user.getId().getValue())
                         );
                     } else {
                         certificateCourse.setRegistered(false);
-                        certificateCourse.setNumOfCompletedQuestions(0);
+                        certificateCourse.setNumOfCompletedResources(0);
                     }
-                    certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourse.getId().getValue()));
+                    certificateCourse.setNumOfResources(countNumOfResources(certificateCourse.getId().getValue()));
                     certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourse.getId().getValue()));
                     certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourse.getId().getValue()));
 
-                    Optional<ChapterQuestion> currentQuestion = chapterQuestionRepository
-                            .findFirstUncompletedQuestionByCertificateCourseIdAndUserId(
+                    Optional<ChapterResource> currentChapterResource = chapterResourceRepository
+                            .findFirstUncompletedResourceByCertificateCourseIdAndUserId(
                                     certificateCourse.getId().getValue(),
                                     user.getId().getValue()
                             );
-                    currentQuestion.ifPresent(
-                            chapterQuestion -> certificateCourse.setCurrentQuestion(chapterQuestion.getQuestion())
+                    if (currentChapterResource.isPresent()
+                            && currentChapterResource.get().getResourceType().equals(ResourceType.CODE)
+                            && currentChapterResource.get().getQuestion() != null) {
+                        Optional<QtypeCodeQuestion> qtypeCodeQuestion = qtypeCodeQuestionRepository
+                                .findQtypeCodeQuestionByQuestionId(currentChapterResource.get().getQuestion().getId().getValue());
+                        qtypeCodeQuestion.ifPresent(value -> currentChapterResource.get().setCodeQuestionId(value.getId().getValue()));
+                    }
+
+                    currentChapterResource.ifPresent(
+                            certificateCourse::setCurrentResource
                     );
                 }
                 return certificateCourseList;
@@ -183,13 +211,13 @@ public class CertificateCourseQueryHelper {
                 List<CertificateCourse> certificateCourseList =
                         certificateCourseRepository.findAllCertificateCoursesByIsRegistered(
                         courseName,
-                        filterTopicIds,
+                        filterTopicId,
                         false,
                         user.getId().getValue()
                 );
                 for (CertificateCourse certificateCourse : certificateCourseList) {
                     certificateCourse.setRegistered(false);
-                    certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourse.getId().getValue()));
+                    certificateCourse.setNumOfResources(countNumOfResources(certificateCourse.getId().getValue()));
                     certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourse.getId().getValue()));
                     certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourse.getId().getValue()));
                 }
@@ -220,6 +248,7 @@ public class CertificateCourseQueryHelper {
             for (Topic topic : topicIds) {
                 topicIdsList.add(topic.getId().getValue());
             }
+            log.info("Topic ids of registered courses by user: {}", topicIdsList);
             certificateCourseList = certificateCourseRepository
                     .findMostEnrolledCertificateCoursesByTopicIds(topicIdsList);
         }
@@ -234,18 +263,18 @@ public class CertificateCourseQueryHelper {
                         );
                 if (certificateCourseUser.isPresent()) {
                     certificateCourse.setRegistered(true);
-                    certificateCourse.setNumOfCompletedQuestions(
-                            countNumOfCompletedQuestions(
+                    certificateCourse.setNumOfCompletedResources(
+                            countNumOfCompletedResources(
                                     certificateCourse.getId().getValue(),
                                     userOptional.get().getId().getValue())
                     );
                 } else {
                     certificateCourse.setRegistered(false);
-                    certificateCourse.setNumOfCompletedQuestions(0);
+                    certificateCourse.setNumOfCompletedResources(0);
                 }
             }
 
-            certificateCourse.setNumOfQuestions(countNumOfQuestions(certificateCourse.getId().getValue()));
+            certificateCourse.setNumOfResources(countNumOfResources(certificateCourse.getId().getValue()));
             certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourse.getId().getValue()));
             certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourse.getId().getValue()));
         }
@@ -265,12 +294,12 @@ public class CertificateCourseQueryHelper {
         return user.get();
     }
 
-    private int countNumOfCompletedQuestions(UUID certificateCourseId, UUID userId) {
-        return certificateCourseRepository.countNumOfCompletedQuestions(certificateCourseId, userId);
+    private int countNumOfCompletedResources(UUID certificateCourseId, UUID userId) {
+        return certificateCourseRepository.countNumOfCompletedResources(certificateCourseId, userId);
     }
 
-    private int countNumOfQuestions(UUID certificateCourseId) {
-        return certificateCourseRepository.countNumOfQuestionsByCertificateId(certificateCourseId);
+    private int countNumOfResources(UUID certificateCourseId) {
+        return certificateCourseRepository.countNumOfResourcesByCertificateId(certificateCourseId);
     }
 
     private int countNumOfStudents(UUID certificateCourseId) {

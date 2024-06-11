@@ -24,7 +24,7 @@ DROP TYPE IF EXISTS overdue_handling;
 CREATE TYPE overdue_handling AS ENUM ('AUTOSUBMIT', 'GRACEPERIOD', 'AUTOABANDON');
 
 DROP TYPE IF EXISTS status;
-CREATE TYPE status AS ENUM ('SUBMITTED', 'NOT_SUBMITTED');
+CREATE TYPE status AS ENUM ('SUBMITTED', 'NOT_SUBMITTED', 'GRADED');
 
 DROP TYPE IF EXISTS notification_event_type;
 CREATE TYPE notification_event_type AS ENUM ('USER', 'COURSE');
@@ -130,13 +130,14 @@ CREATE TABLE "public".user
 DROP TABLE IF EXISTS "public".question_bank_category CASCADE;
 CREATE TABLE "public".question_bank_category
 (
-    id            uuid                     DEFAULT gen_random_uuid() NOT NULL,
-    "name"        text                                               NOT NULL,
-    "description" text,
-    "created_by"  uuid                                               NOT NULL,
-    "updated_by"  uuid                                               NOT NULL,
-    "created_at"  TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    "updated_at"  TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    id                     uuid                     DEFAULT gen_random_uuid() NOT NULL,
+    "name"                 text                                               NOT NULL,
+    "description"          text,
+    "is_org_question_bank" bool                     DEFAULT FALSE,
+    "created_by"           uuid                                               NOT NULL,
+    "updated_by"           uuid                                               NOT NULL,
+    "created_at"           TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "updated_at"           TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT question_bank_category_pkey PRIMARY KEY (id),
     CONSTRAINT question_bank_category_created_by_fkey FOREIGN KEY (created_by)
         REFERENCES "public".user (id) MATCH SIMPLE
@@ -360,7 +361,7 @@ CREATE TABLE "public".exam
     overdue_handling   overdue_handling NOT NULL DEFAULT 'AUTOABANDON',
     can_redo_questions boolean          NOT NULL DEFAULT '0',
     max_attempts       bigint           NOT NULL DEFAULT '0',
-    shuffle_answers    boolean          NOT NULL DEFAULT '0',
+    shuffle_questions    boolean          NOT NULL DEFAULT '0',
     grade_method       grade_method     NOT NULL DEFAULT 'QUIZ_GRADEHIGHEST',
     "max_page"                  integer,
     created_at         TIMESTAMP WITH TIME ZONE  DEFAULT CURRENT_TIMESTAMP,
@@ -393,13 +394,14 @@ CREATE TABLE "public".exam_question
 DROP TABLE IF EXISTS "public".exam_submission CASCADE;
 CREATE TABLE "public".exam_submission
 (
-    id           uuid                     DEFAULT gen_random_uuid() NOT NULL,
-    exam_id      uuid NOT NULL,
-    user_id      uuid NOT NULL,
-    submit_count bigint                   DEFAULT '0',
-    start_time   TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    submit_time  TIMESTAMP WITH TIME ZONE DEFAULT NULL,
-    status status NOT NULL DEFAULT 'NOT_SUBMITTED',
+    id           uuid                      DEFAULT gen_random_uuid() NOT NULL,
+    exam_id      uuid             NOT NULL,
+    user_id      uuid             NOT NULL,
+    submit_count bigint                    DEFAULT '0',
+    start_time   TIMESTAMP WITH TIME ZONE  DEFAULT CURRENT_TIMESTAMP,
+    submit_time  TIMESTAMP WITH TIME ZONE  DEFAULT NULL,
+    status       status           NOT NULL DEFAULT 'NOT_SUBMITTED',
+    score        double precision DEFAULT '0',
     CONSTRAINT exam_submission_pkey PRIMARY KEY (id),
     CONSTRAINT exam_submission_exam_id_fkey FOREIGN KEY (exam_id)
         REFERENCES "public".exam (id) MATCH SIMPLE

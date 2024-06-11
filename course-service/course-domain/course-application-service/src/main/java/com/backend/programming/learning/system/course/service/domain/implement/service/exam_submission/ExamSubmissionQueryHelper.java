@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.exam_submission;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
 import com.backend.programming.learning.system.course.service.domain.entity.QuestionSubmission;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,5 +33,24 @@ public class ExamSubmissionQueryHelper {
         ExamSubmission examSubmission = examSubmissionRepository.findBy(submissionId);
         List<QuestionSubmission> questionSubmissions = questionSubmissionRepository.findAllByExamSubmissionId(submissionId);
         return examSubmissionDataMapper.mapToQueryExamSubmissionResponse(examSubmission, questionSubmissions);
+    }
+
+    public List<QueryExamSubmissionOverviewResponse> findByExamIdAndUserId(UUID examId, UUID userId) {
+        List<QueryExamSubmissionOverviewResponse> examSubmissionResponses = new ArrayList<>();
+        List<ExamSubmission> examSubmissions = examSubmissionRepository.findAllByExamIdAndUserId(examId, userId);
+
+        examSubmissions.forEach(examSubmission -> {
+            List<QuestionSubmission> questionSubmissions = questionSubmissionRepository
+                    .findAllByExamSubmissionId(examSubmission.getId().getValue());
+//            examSubmissionResponses.add(examSubmissionDataMapper.mapToQueryExamSubmissionResponse(examSubmissionResponse, questionSubmissions));
+
+            Double markTotal = questionSubmissions.stream()
+                    .filter(questionSubmission -> questionSubmission.getGrade() != null)
+                    .mapToDouble(QuestionSubmission::getGrade)
+                    .sum();
+            examSubmissionResponses.add(examSubmissionDataMapper.mapToQueryExamSubmissionResponseWithTotal(examSubmission, markTotal));
+        });
+
+        return examSubmissionResponses;
     }
 }

@@ -39,8 +39,8 @@ public class CertificateCourseCreateHelper {
 
     @Transactional
     public CertificateCourse persistCertificateCourse(CreateCertificateCourseCommand createCertificateCourseCommand) {
-        User createdBy = getUser(createCertificateCourseCommand.getCreatedBy());
-        User updatedBy = getUser(createCertificateCourseCommand.getUpdatedBy());
+        User createdBy = getUserByEmail(createCertificateCourseCommand.getEmail());
+        User updatedBy = getUserByEmail(createCertificateCourseCommand.getEmail());
         Topic topic = getTopic(createCertificateCourseCommand.getTopicId());
 
         checkCertificateCourseByNameExists(createCertificateCourseCommand.getName());
@@ -82,6 +82,15 @@ public class CertificateCourseCreateHelper {
             throw new TopicNotFoundException("Could not find topic with id: " + topicId);
         }
         return topic.get();
+    }
+
+    private User getUserByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isEmpty()) {
+            log.warn("User with email: {} not found", email);
+            throw new UserNotFoundException("Could not find user with email: " + email);
+        }
+        return user.get();
     }
 
     private CertificateCourse saveCertificateCourse(CertificateCourse certificateCourse) {

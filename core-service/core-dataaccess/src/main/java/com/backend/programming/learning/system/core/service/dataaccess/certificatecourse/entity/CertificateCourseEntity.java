@@ -1,18 +1,13 @@
 package com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity;
 
-import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse_user.entity.CertificateCourseUserEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.chapter.entity.ChapterEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.review.entity.ReviewEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.listener.CertificateCourseEntityListener;
 import com.backend.programming.learning.system.core.service.dataaccess.topic.entity.TopicEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Formula;
 
 import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -23,6 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table(name = "certificate_course", schema = "public")
 @Entity
+@EntityListeners(CertificateCourseEntityListener.class)
 public class CertificateCourseEntity {
     @Id
     @Column(name = "id")
@@ -35,18 +31,6 @@ public class CertificateCourseEntity {
 
     private ZonedDateTime startTime;
     private ZonedDateTime endTime;
-
-//    @Basic(fetch = FetchType.LAZY)
-//    @Formula("(select count(*) from certificate_course_user ccu where ccu.certificate_course_id = id)")
-//    private Integer numOfStudents;
-//
-//    @Basic(fetch = FetchType.LAZY)
-//    @Formula("(select count(*) from chapter c, chapter_question cq where c.certificate_course_id = id and c.id = cq.chapter_id)")
-//    private Integer numOfQuestions;
-//
-//    @Basic(fetch = FetchType.LAZY)
-//    @Formula("(select count(*) from review r where r.certificate_course_id = id)")
-//    private Integer numOfReviews;
 
     @ManyToOne
     @JoinColumn(name = "topic_id", referencedColumnName = "id")

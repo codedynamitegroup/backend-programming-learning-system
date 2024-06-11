@@ -60,7 +60,7 @@ public class ChapterDataAccessMapper {
                 .no(chapterEntity.getNo())
                 .title(chapterEntity.getTitle())
                 .description(chapterEntity.getDescription())
-                .questions(new ArrayList<>())
+                .chapterResources(new ArrayList<>())
                 .createdBy(createdBy)
                 .updatedBy(updatedBy)
                 .createdAt(chapterEntity.getCreatedAt())

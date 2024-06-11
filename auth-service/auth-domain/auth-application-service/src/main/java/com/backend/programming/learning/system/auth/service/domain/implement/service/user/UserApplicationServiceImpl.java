@@ -108,4 +108,9 @@ class UserApplicationServiceImpl implements UserApplicationService {
     public ResetPasswordResponse forgotPasswordChangePassword(ResetPasswordCommand forgotPasswordChangePasswordCommand) {
         return userCommandHandler.forgotPasswordChangePassword(forgotPasswordChangePasswordCommand);
     }
+
+    @Override
+    public QueryGeneralStatisticUserResponse getStatisticUser() {
+        return userCommandHandler.getStatisticUser();
+    }
 }

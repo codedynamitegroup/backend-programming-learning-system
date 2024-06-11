@@ -36,7 +36,7 @@ public class ExamEntity {
     private OverdueHandling overdueHandling;
     private Boolean canRedoQuestions;
     private Integer maxAttempts;
-//    private Boolean shuffleQuestions;
+    private Boolean shuffleQuestions;
     private String gradeMethod;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;

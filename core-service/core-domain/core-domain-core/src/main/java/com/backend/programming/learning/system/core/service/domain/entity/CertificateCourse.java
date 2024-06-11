@@ -1,15 +1,13 @@
 package com.backend.programming.learning.system.core.service.domain.entity;
 
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseTopicId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseUserId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
-import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
-import com.backend.programming.learning.system.domain.valueobject.*;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,10 +19,10 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
     private ZonedDateTime startTime;
     private ZonedDateTime endTime;
     private Integer numOfStudents;
-    private Integer numOfQuestions;
-    private Integer numOfCompletedQuestions;
+    private Integer numOfResources;
+    private Integer numOfCompletedResources;
+    private ChapterResource currentResource;
     private Integer numOfReviews;
-    private Question currentQuestion;
     private Boolean isRegistered;
     private Topic topic;
     private User createdBy;
@@ -42,10 +40,10 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         setStartTime(builder.startTime);
         setEndTime(builder.endTime);
         setNumOfStudents(builder.numOfStudents);
-        setNumOfQuestions(builder.numOfQuestions);
-        setNumOfCompletedQuestions(builder.numOfCompletedQuestions);
+        setNumOfResources(builder.numOfResources);
+        setNumOfCompletedResources(builder.numOfCompletedResources);
+        setCurrentResource(builder.currentResource);
         setNumOfReviews(builder.numOfReviews);
-        setCurrentQuestion(builder.currentQuestion);
         isRegistered = builder.isRegistered;
         setTopic(builder.topic);
         setCreatedBy(builder.createdBy);
@@ -55,15 +53,17 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         setCertificateCourseUsers(builder.certificateCourseUsers);
     }
 
+    public void initializeCertificateCourse() {
+        setId(new CertificateCourseId(UUID.randomUUID()));
+        certificateCourseUsers = new ArrayList<>();
+        setCreatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
+        setUpdatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
-    public void initializeCertificateCourse() {
-        setId(new CertificateCourseId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
-        updatedAt = ZonedDateTime.now(ZoneId.of("UTC"));
-    }
 
     public String getName() {
         return name;
@@ -121,20 +121,28 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         this.numOfStudents = numOfStudents;
     }
 
-    public Integer getNumOfQuestions() {
-        return numOfQuestions;
+    public Integer getNumOfResources() {
+        return numOfResources;
     }
 
-    public void setNumOfQuestions(Integer numOfQuestions) {
-        this.numOfQuestions = numOfQuestions;
+    public void setNumOfResources(Integer numOfResources) {
+        this.numOfResources = numOfResources;
     }
 
-    public Integer getNumOfCompletedQuestions() {
-        return numOfCompletedQuestions;
+    public Integer getNumOfCompletedResources() {
+        return numOfCompletedResources;
     }
 
-    public void setNumOfCompletedQuestions(Integer numOfCompletedQuestions) {
-        this.numOfCompletedQuestions = numOfCompletedQuestions;
+    public void setNumOfCompletedResources(Integer numOfCompletedResources) {
+        this.numOfCompletedResources = numOfCompletedResources;
+    }
+
+    public ChapterResource getCurrentResource() {
+        return currentResource;
+    }
+
+    public void setCurrentResource(ChapterResource currentResource) {
+        this.currentResource = currentResource;
     }
 
     public Integer getNumOfReviews() {
@@ -143,14 +151,6 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
 
     public void setNumOfReviews(Integer numOfReviews) {
         this.numOfReviews = numOfReviews;
-    }
-
-    public Question getCurrentQuestion() {
-        return currentQuestion;
-    }
-
-    public void setCurrentQuestion(Question currentQuestion) {
-        this.currentQuestion = currentQuestion;
     }
 
     public Boolean getRegistered() {
@@ -218,10 +218,10 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         private ZonedDateTime startTime;
         private ZonedDateTime endTime;
         private Integer numOfStudents;
-        private Integer numOfQuestions;
-        private Integer numOfCompletedQuestions;
+        private Integer numOfResources;
+        private Integer numOfCompletedResources;
+        private ChapterResource currentResource;
         private Integer numOfReviews;
-        private Question currentQuestion;
         private Boolean isRegistered;
         private Topic topic;
         private User createdBy;
@@ -273,23 +273,23 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
             return this;
         }
 
-        public Builder numOfQuestions(Integer val) {
-            numOfQuestions = val;
+        public Builder numOfResources(Integer val) {
+            numOfResources = val;
             return this;
         }
 
-        public Builder numOfCompletedQuestions(Integer val) {
-            numOfCompletedQuestions = val;
+        public Builder numOfCompletedResources(Integer val) {
+            numOfCompletedResources = val;
+            return this;
+        }
+
+        public Builder currentResource(ChapterResource val) {
+            currentResource = val;
             return this;
         }
 
         public Builder numOfReviews(Integer val) {
             numOfReviews = val;
-            return this;
-        }
-
-        public Builder currentQuestion(Question val) {
-            currentQuestion = val;
             return this;
         }
 

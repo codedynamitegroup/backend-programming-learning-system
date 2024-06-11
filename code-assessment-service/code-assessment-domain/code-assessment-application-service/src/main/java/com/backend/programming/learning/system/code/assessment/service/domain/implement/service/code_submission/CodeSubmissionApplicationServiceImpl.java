@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.ExecuteCodeWithTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_submission.UpdateCodeSubmissionTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.CodeSubmissionApplicationService;
@@ -45,5 +46,10 @@ public class CodeSubmissionApplicationServiceImpl implements CodeSubmissionAppli
     @Override
     public GetMemoryAndTimeRankingResponse getMemoryAndRunTimeRanking(GetMemoryAndTimeRankingCommand command) {
         return codeSubmissionCommandHandler.getMemoryAndRunTimeRanking(command);
+    }
+
+    @Override
+    public String executeCodeWithTestCase(ExecuteCodeWithTestCaseCommand command) {
+        return codeSubmissionCommandHandler.executeCodeWithTestCase(command);
     }
 }

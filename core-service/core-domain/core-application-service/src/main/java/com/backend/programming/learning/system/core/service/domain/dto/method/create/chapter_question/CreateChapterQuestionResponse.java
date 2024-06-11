@@ -1,7 +1,5 @@
 package com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter_question;
 
-import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
-import com.backend.programming.learning.system.core.service.domain.entity.ChapterQuestion;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.auth.service.application.rest.ex
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.exam_submission.ExamSubmissionApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,8 +21,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -33,11 +36,11 @@ import java.util.UUID;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/course/exam/question", produces = "application/vnd.api.v1+json")
+@RequestMapping(value = "/course/exam", produces = "application/vnd.api.v1+json")
 public class ExamSubmissionController {
     private final ExamSubmissionApplicationService examSubmissionApplicationService;
 
-    @GetMapping("/submit/{submissionId}")
+    @GetMapping("/question/submit/{submissionId}")
     @Operation(summary = "Submit exam detail.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Success.", content = {
@@ -54,7 +57,7 @@ public class ExamSubmissionController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PostMapping("/submit")
+    @PostMapping("/question/submit")
     @Operation(summary = "Submit exam.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Success.", content = {
@@ -71,7 +74,7 @@ public class ExamSubmissionController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PostMapping("/start-exam")
+    @PostMapping("/question/start-exam")
     @Operation(summary = "Start exam.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Success.", content = {
@@ -88,7 +91,7 @@ public class ExamSubmissionController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @PatchMapping("/end-exam")
+    @PatchMapping("/question/end-exam")
     @Operation(summary = "End exam.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Success.", content = {
@@ -103,5 +106,23 @@ public class ExamSubmissionController {
         CreateExamSubmissionResponse response = examSubmissionApplicationService.endExam(createExamSubmissionStartCommand);
         log.info("Exam ended: {}", response);
         return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping("/{examId}/submission")
+    @Operation(summary = "Get exam submission by exam id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryExamSubmissionOverviewResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<List<QueryExamSubmissionOverviewResponse>> findByExamId(
+            @PathVariable UUID examId,
+            @RequestParam(value = "userId", required = true) UUID userId
+            ) {
+        log.info("Getting exam submission with exam id: {}", examId);
+        List<QueryExamSubmissionOverviewResponse> response = examSubmissionApplicationService.findByExamIdAndUserId(examId, userId);
+        return ResponseEntity.ok(response);
     }
 }

@@ -292,7 +292,7 @@ public class UserController {
         return ResponseEntity.ok(changedPasswordUserResponse);
     }
 
-    @GetMapping("/forgot-password/{email}")
+    @PutMapping("/forgot-password")
     @Operation(summary = "Forgot password user.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
@@ -301,12 +301,9 @@ public class UserController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<ForgotPasswordEmailResponse> forgotPasswordUser(@PathVariable String email) throws MessagingException {
-        log.info("Forgot password with email: {}", email);
-        ForgotPasswordEmailResponse forgotPasswordEmailResponse = userApplicationService.forgotPasswordEmail(
-                ForgotPasswordEmailCommand.builder()
-                .email(email)
-                .build());
+    public ResponseEntity<ForgotPasswordEmailResponse> forgotPasswordUser(@RequestBody ForgotPasswordEmailCommand forgotPasswordEmailCommand) throws MessagingException {
+        log.info("Forgot password with email: {}", forgotPasswordEmailCommand.getEmail());
+        ForgotPasswordEmailResponse forgotPasswordEmailResponse = userApplicationService.forgotPasswordEmail(forgotPasswordEmailCommand);
 
         return ResponseEntity.ok(forgotPasswordEmailResponse);
     }
@@ -363,5 +360,21 @@ public class UserController {
                         .build());
         log.info("User deleted with id: {}", id);
         return ResponseEntity.ok(deleteUserResponse);
+    }
+
+    @GetMapping("/statistics")
+    @Operation(summary = "Get statistics of users.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryGeneralStatisticUserResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryGeneralStatisticUserResponse> getStatisticUser() {
+        QueryGeneralStatisticUserResponse queryStatisticUserResponse = userApplicationService.getStatisticUser();
+
+        log.info("Returning statistics of users");
+        return ResponseEntity.ok(queryStatisticUserResponse);
     }
 }

@@ -37,7 +37,7 @@ code-assessment-service:
   question-request-topic-name: core-question-request
 
   assessment-external-service-ip: 62.171.185.208
-  assessment-external-service-port: 2358
+  assessment-external-service-port: 80
 
   accepted-status-description: Accepted
 
@@ -55,6 +55,11 @@ spring:
     config:
       username: spring_cloud_user
       password: springCloud_Pwd!
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: ""
   datasource:
     url: jdbc:postgresql://localhost:5432/code-assessment-service?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: postgres

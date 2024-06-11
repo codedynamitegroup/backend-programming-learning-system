@@ -94,7 +94,9 @@ INSERT INTO public.qtype_code_questions(user_id, id, question_id ,dsl_template ,
 
 INSERT INTO test_cases(id, code_question_id  ,input_data  ,output_data  ,is_sample )
 VALUES
-    ('9b103259-1a04-4ae4-aaac-dbd8f2d37ec6', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', E'1\n2', '3', true);
+    ('9b103259-1a04-4ae4-aaac-dbd8f2d37ec6', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', E'1\n2', '3', true),
+    ('e1e4e8bc-1ebe-4973-9a76-197988fdd442', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', E'1\n1000', '1001', true),
+    ('d6c25df9-3194-43a8-a1eb-617fbcce058d', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', E'1\n222', '223', true);
 
 INSERT INTO tag(id, name, tag_type)
 VALUES

@@ -11,4 +11,7 @@ import lombok.Getter;
 public class ForgotPasswordEmailCommand {
     @NotNull
     private final String email;
+
+    @NotNull
+    private final String redirectUrl;
 }
