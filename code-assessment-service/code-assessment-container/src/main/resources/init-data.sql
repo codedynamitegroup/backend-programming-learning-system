@@ -96,6 +96,7 @@ INSERT INTO test_cases(id, code_question_id  ,input_data  ,output_data  ,is_samp
 VALUES
     ('9b103259-1a04-4ae4-aaac-dbd8f2d37ec6', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', E'1\n2', '3', true),
     ('e1e4e8bc-1ebe-4973-9a76-197988fdd442', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', E'1\n1000', '1001', true),
+    ('e1e4e8bc-1ebe-4973-9a76-197988fdd443', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', E'1\n1010', '1011', false),
     ('d6c25df9-3194-43a8-a1eb-617fbcce058d', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', E'1\n222', '223', true);
 
 INSERT INTO tag(id, name, tag_type)
@@ -116,6 +117,7 @@ VALUES
     ('9d752cc0-75b3-4dce-b92e-21375e2d61c5','String', 'ALGORITHM'),
     ('d4070634-15e1-4b20-8142-ac2b0d7d3b20','Matrix', 'ALGORITHM'),
     ('4276d92b-8752-476f-b127-cf1135772249','Iterator', 'ALGORITHM'),
+    ('2a11f923-7574-466f-a030-374ae5b18700', 'C++', 'OTHER'),
     ('5d49c893-5ab8-4b82-aea5-70ab95bdf89c', 'Java', 'OTHER');
 
 insert into shared_solution (id, code_question_id, user_id, title, content) values ('675b7db4-228a-4b75-8eac-aa4336241b63', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 'b029f559-52a8-4699-b595-71161498ed8c', 'Devil Commands, The', 'transition revolutionary platforms');
@@ -137,7 +139,11 @@ insert into code_submission (id, code_question_id, user_id, language_id, body_co
 
 INSERT INTO programming_language_code_question(programming_language_id,code_question_id,time_limit,memory_limit,active, head_code, body_code, tail_code)
 VALUES
-    ('c95d5c7d-cadf-42cc-afdc-968211ae3720', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 1, 204800, true, 'aW1wb3J0IGphdmEuaW8uKjs=', 'Y2xhc3MgUmVzdWx0IHsKICAgIHB1YmxpYyBzdGF0aWMgaW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKSB7CgogICAgfQp9', 'cHVibGljIGNsYXNzIE1haW4gewogICAgcHVibGljIHN0YXRpYyB2b2lkIG1haW4oU3RyaW5nW10gYXJncykgdGhyb3dzIElPRXhjZXB0aW9uIHsKICAgICAgICBCdWZmZXJlZFJlYWRlciBidWZmZXJlZFJlYWRlciA9IG5ldyBCdWZmZXJlZFJlYWRlcihuZXcgSW5wdXRTdHJlYW1SZWFkZXIoU3lzdGVtLmluKSk7CgogICAgICAgIGludCBhID0gSW50ZWdlci5wYXJzZUludChidWZmZXJlZFJlYWRlci5yZWFkTGluZSgpLnRyaW0oKSk7CgogICAgICAgIGludCBiID0gSW50ZWdlci5wYXJzZUludChidWZmZXJlZFJlYWRlci5yZWFkTGluZSgpLnRyaW0oKSk7CgogICAgICAgIGludCByZXN1bHQgPSBSZXN1bHQuc3VtT2ZUd29JbnRlZ2VycyhhLCBiKTsKCiAgICAgICAgICAgIFN5c3RlbS5vdXQucHJpbnQocmVzdWx0KTsKICAgICAgICAgICAgYnVmZmVyZWRSZWFkZXIuY2xvc2UoKTsKICAgIH0KfQ=='),
-    ('cba00cd8-8114-4bc4-84e6-499c27467978', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 1, 204800, true, 'I2luY2x1ZGUgPGlvc3RyZWFtPg==', 'aW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKXsKICAgIAp9', 'aW50IG1haW4oKQp7CiAgICBpbnQgYSwgYjsKICAgIHN0ZDo6Y2luID4+IGEgPj4gYjsKICAgIHN0ZDo6Y291dCA8PCBzdW1PZlR3b0ludGVnZXJzKGEsIGIpIDw8IHN0ZDo6ZW5kbDsKCiAgICByZXR1cm4gMDsKfQ==');
+    ('c95d5c7d-cadf-42cc-afdc-968211ae3720', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 1, 204800, true, 'aW1wb3J0IGphdmEuaW8uKjs=', 'Y2xhc3MgUmVzdWx0IHsKICAgIHB1YmxpYyBzdGF0aWMgaW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKSB7CgkvL3lvdXIgY29kZSBnb2VzIGhlcmUKICAgIH0KfQ==', 'cHVibGljIGNsYXNzIE1haW4gewogICAgcHVibGljIHN0YXRpYyB2b2lkIG1haW4oU3RyaW5nW10gYXJncykgdGhyb3dzIElPRXhjZXB0aW9uIHsKICAgICAgICBCdWZmZXJlZFJlYWRlciBidWZmZXJlZFJlYWRlciA9IG5ldyBCdWZmZXJlZFJlYWRlcihuZXcgSW5wdXRTdHJlYW1SZWFkZXIoU3lzdGVtLmluKSk7CgogICAgICAgIGludCBhID0gSW50ZWdlci5wYXJzZUludChidWZmZXJlZFJlYWRlci5yZWFkTGluZSgpLnRyaW0oKSk7CgogICAgICAgIGludCBiID0gSW50ZWdlci5wYXJzZUludChidWZmZXJlZFJlYWRlci5yZWFkTGluZSgpLnRyaW0oKSk7CgogICAgICAgIGludCByZXN1bHQgPSBSZXN1bHQuc3VtT2ZUd29JbnRlZ2VycyhhLCBiKTsKCiAgICAgICAgICAgIFN5c3RlbS5vdXQucHJpbnQocmVzdWx0KTsKICAgICAgICAgICAgYnVmZmVyZWRSZWFkZXIuY2xvc2UoKTsKICAgIH0KfQ=='),
+    ('cba00cd8-8114-4bc4-84e6-499c27467978', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 1, 204800, true, 'I2luY2x1ZGUgPGlvc3RyZWFtPg==', 'aW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKXsKICAgIC8veW91ciBjb2RlIGdvZXMgaGVyZQp9', 'aW50IG1haW4oKQp7CiAgICBpbnQgYSwgYjsKICAgIHN0ZDo6Y2luID4+IGEgPj4gYjsKICAgIHN0ZDo6Y291dCA8PCBzdW1PZlR3b0ludGVnZXJzKGEsIGIpIDw8IHN0ZDo6ZW5kbDsKCiAgICByZXR1cm4gMDsKfQ==');
 
-insert into tag_code_question values('3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 'cd55e806-5d20-4813-b2ce-f8a235fc9151');
+insert into tag_code_question
+values
+    ('3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 'cd55e806-5d20-4813-b2ce-f8a235fc9151'),
+    ('3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', '2a11f923-7574-466f-a030-374ae5b18700'),
+    ('3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', '5d49c893-5ab8-4b82-aea5-70ab95bdf89c');
