@@ -24,6 +24,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 import java.util.UUID;
 
+import static com.backend.programming.learning.system.saga.user.SagaConstants.COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME;
+
 @Component
 @Slf4j
 @RequiredArgsConstructor
@@ -42,7 +44,7 @@ public class UserHelper {
 
         UserCreatedEvent userCreatedEvent =  courseDomainService.createUser(user);
 
-        userOutboxHelper.saveUserOutboxMessage(userDataMapper
+        userOutboxHelper.saveUserOutboxMessage(COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME, userDataMapper
                         .userEventToUserEventPayloadWithTime(userCreatedEvent,
                                 CopyState.CREATING,
                                 false),
@@ -60,7 +62,7 @@ public class UserHelper {
 
         UserUpdatedEvent userUpdatedEvent =courseDomainService.updateUser(user);
 
-        userOutboxHelper.saveUserOutboxMessage(userDataMapper
+        userOutboxHelper.saveUserOutboxMessage(COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME, userDataMapper
                         .userEventToUserEventPayloadWithTime(userUpdatedEvent,
                                 CopyState.UPDATING,
                                 false),
@@ -79,7 +81,7 @@ public class UserHelper {
 
         UserDeletedSuccessEvent userDeletedSuccessEvent = courseDomainService.deletedUserSuccess(user);
 
-        userOutboxHelper.saveUserOutboxMessage(userDataMapper
+        userOutboxHelper.saveUserOutboxMessage(COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME, userDataMapper
                         .userEventToUserEventPayloadWithTime(userDeletedSuccessEvent,
                                 CopyState.DELETING,
                                 true),

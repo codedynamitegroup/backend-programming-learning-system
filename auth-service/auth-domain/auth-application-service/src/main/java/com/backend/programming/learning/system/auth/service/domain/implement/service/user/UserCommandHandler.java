@@ -22,11 +22,12 @@ import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.user.auth_to_any_services.UserCreatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.auth_to_any_services.UserDeletedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.auth_to_any_services.UserUpdatedEvent;
-import com.backend.programming.learning.system.auth.service.domain.implement.saga.user_auth_to_any_services.UserUpdateAuthToAnyServicesSagaHelper;
+import com.backend.programming.learning.system.auth.service.domain.implement.saga.user.UserUpdateSagaHelper;
 import com.backend.programming.learning.system.auth.service.domain.mapper.UserDataMapper;
-import com.backend.programming.learning.system.auth.service.domain.outbox.scheduler.user_auth_to_any_services.UserOutboxAuthToAnyServicesHelper;
+import com.backend.programming.learning.system.auth.service.domain.outbox.scheduler.user.UserOutboxHelper;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.ServiceName;
+import com.backend.programming.learning.system.domain.valueobject.UserOutboxServiceType;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +38,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
+import static com.backend.programming.learning.system.saga.user.SagaConstants.AUTH_TO_ANY_SERVICES_USER_SAGA_NAME;
+
 @Slf4j
 @Component
 @RequiredArgsConstructor
@@ -46,8 +49,8 @@ public class UserCommandHandler {
     private final UserDataMapper userDataMapper;
     private final UserQueryHelper userQueryHelper;
     private final UserUpdateHelper userUpdateHelper;
-    private final UserOutboxAuthToAnyServicesHelper userOutboxHelper;
-    private final UserUpdateAuthToAnyServicesSagaHelper userSagaHelper;
+    private final UserOutboxHelper userOutboxHelper;
+    private final UserUpdateSagaHelper userSagaHelper;
     private final UserLoginHelper userLoginHelper;
     private final UserRefreshTokenHelper userRefreshTokenHelper;
     private final UserSocialLoginHelper userSocialLoginHelper;
@@ -63,6 +66,7 @@ public class UserCommandHandler {
                 "User created successfully");
 
         userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
                 userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
                 ServiceName.CORE_SERVICE,
                 CopyState.CREATING,
@@ -71,6 +75,7 @@ public class UserCommandHandler {
                 UUID.randomUUID());
 
         userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
                 userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
                 ServiceName.COURSE_SERVICE,
                 CopyState.CREATING,
@@ -79,6 +84,7 @@ public class UserCommandHandler {
                 UUID.randomUUID());
 
         userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
                 userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
                 ServiceName.CODE_ASSESSMENT_SERVICE,
                 CopyState.CREATING,
@@ -125,6 +131,7 @@ public class UserCommandHandler {
         UserUpdatedEvent userUpdatedEvent = userUpdateHelper.persistUser(updateUserCommand);
 
         userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
                 userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
                 ServiceName.CORE_SERVICE,
                 CopyState.UPDATING,
@@ -133,6 +140,7 @@ public class UserCommandHandler {
                 UUID.randomUUID());
 
         userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
                 userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
                 ServiceName.COURSE_SERVICE,
                 CopyState.UPDATING,
@@ -141,6 +149,7 @@ public class UserCommandHandler {
                 UUID.randomUUID());
 
         userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
                 userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
                 ServiceName.CODE_ASSESSMENT_SERVICE,
                 CopyState.UPDATING,
@@ -159,6 +168,7 @@ public class UserCommandHandler {
         log.info("User is deleted with id: {}", deleteUserCommand.getUserId());
 
         userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
                 userDataMapper.userDeletedEventToUserEventPayload(userDeletedEvent),
                 ServiceName.CORE_SERVICE,
                 CopyState.DELETING,
@@ -167,6 +177,7 @@ public class UserCommandHandler {
                 UUID.randomUUID());
 
         userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
                 userDataMapper.userDeletedEventToUserEventPayload(userDeletedEvent),
                 ServiceName.COURSE_SERVICE,
                 CopyState.DELETING,
@@ -175,6 +186,7 @@ public class UserCommandHandler {
                 UUID.randomUUID());
 
         userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
                 userDataMapper.userDeletedEventToUserEventPayload(userDeletedEvent),
                 ServiceName.CODE_ASSESSMENT_SERVICE,
                 CopyState.DELETING,

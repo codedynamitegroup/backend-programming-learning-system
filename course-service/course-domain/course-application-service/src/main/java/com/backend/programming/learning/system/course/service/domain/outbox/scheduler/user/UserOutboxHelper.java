@@ -6,7 +6,6 @@ import com.backend.programming.learning.system.course.service.domain.outbox.mode
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserOutboxRepository;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
-import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -21,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.backend.programming.learning.system.saga.user.SagaConstants.USER_SAGA_NAME;
+import static com.backend.programming.learning.system.saga.user.SagaConstants.AUTH_TO_ANY_SERVICES_USER_SAGA_NAME;
 
 @Slf4j
 @Component
@@ -35,33 +34,33 @@ public class UserOutboxHelper {
     }
 
     @Transactional(readOnly = true)
-    public Optional<UserOutboxMessage> getUserOutboxMessageBySagaIdAndCopyState(UUID sagaId,
+    public Optional<UserOutboxMessage> getUserOutboxMessageBySagaIdAndCopyState(String type, UUID sagaId,
                                                                                 CopyState copyState) {
-        return userOutboxRepository.findByTypeAndSagaIdAndCopyStateAndOutboxStatus(USER_SAGA_NAME, sagaId,
+        return userOutboxRepository.findByTypeAndSagaIdAndCopyStateAndOutboxStatus(type, sagaId,
                 copyState, OutboxStatus.COMPLETED);
     }
 
     @Transactional(readOnly = true)
-    public Optional<List<UserOutboxMessage>> getUserOutboxMessageByOutboxStatus(OutboxStatus outboxStatus) {
-        return userOutboxRepository.findByTypeAndOutboxStatus(USER_SAGA_NAME, outboxStatus);
+    public Optional<List<UserOutboxMessage>> getUserOutboxMessageByOutboxStatus(String type, OutboxStatus outboxStatus) {
+        return userOutboxRepository.findByTypeAndOutboxStatus(type, outboxStatus);
     }
 
     @Transactional
-    public void deleteUserOutboxMessageByOutboxStatus(OutboxStatus outboxStatus) {
-        userOutboxRepository.deleteByTypeAndOutboxStatus(USER_SAGA_NAME, outboxStatus);
+    public void deleteUserOutboxMessageByOutboxStatus(String type, OutboxStatus outboxStatus) {
+        userOutboxRepository.deleteByTypeAndOutboxStatus(type, outboxStatus);
     }
 
     @Transactional
-    public void saveUserOutboxMessage(UserEventPayload userEventPayload,
+    public void saveUserOutboxMessage(String type,
+            UserEventPayload userEventPayload,
                                       CopyState copyState,
                                       OutboxStatus outboxStatus,
                                       SagaStatus sagaStatus,
                                       UUID sagaId) {
         save(UserOutboxMessage.builder()
                 .id(UUID.randomUUID())
-                .type(USER_SAGA_NAME)
+                .type(type)
                 .sagaId(sagaId)
-                .type(USER_SAGA_NAME)
                 .createdAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)))
                 .processedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)))
                 .payload(createdPayload(userEventPayload))

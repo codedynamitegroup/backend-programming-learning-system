@@ -1,8 +1,8 @@
 package com.backend.programming.learning.system.auth.service.messaging.publisher.kafka.user;
 
 import com.backend.programming.learning.system.auth.service.config.AuthServiceConfigData;
-import com.backend.programming.learning.system.auth.service.domain.outbox.model.user_course_to_auth_service.UserEventCourseToAuthServicePayload;
-import com.backend.programming.learning.system.auth.service.domain.outbox.model.user_course_to_auth_service.UserOutboxCourseToAuthServiceMessage;
+import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserEventPayload;
+import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserOutboxMessage;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.user.UserResponseCourseToAuthServiceMessagePublisher;
 import com.backend.programming.learning.system.auth.service.messaging.mapper.UserMessagingDataMapper;
 import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseAvroModel;
@@ -26,8 +26,8 @@ public class UserEventCourseToAuthKafkaPublisher implements UserResponseCourseTo
 
 
     @Override
-    public void publish(UserOutboxCourseToAuthServiceMessage userOutboxMessage, BiConsumer<UserOutboxCourseToAuthServiceMessage, OutboxStatus> outboxCallback) {
-        UserEventCourseToAuthServicePayload userEventPayload = kafkaOutboxMessageHelper.getEventPayload(userOutboxMessage.getPayload(), UserEventCourseToAuthServicePayload.class);
+    public void publish(UserOutboxMessage userOutboxMessage, BiConsumer<UserOutboxMessage, OutboxStatus> outboxCallback) {
+        UserEventPayload userEventPayload = kafkaOutboxMessageHelper.getEventPayload(userOutboxMessage.getPayload(), UserEventPayload.class);
 
         String sagaId = userOutboxMessage.getSagaId().toString();
 

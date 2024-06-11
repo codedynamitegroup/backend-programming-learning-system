@@ -15,7 +15,7 @@ import com.backend.programming.learning.system.auth.service.domain.event.user.au
 import com.backend.programming.learning.system.auth.service.domain.event.user.auth_to_any_services.UserDeletedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.auth_to_any_services.UserUpdatedEvent;
-import com.backend.programming.learning.system.auth.service.domain.outbox.model.user_auth_to_any_services.UserEventAuthToAnyServicesPayload;
+import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserEventPayload;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
@@ -69,9 +69,9 @@ public class UserDataMapper {
                 .build();
     }
 
-    public UserEventAuthToAnyServicesPayload userCreatedEventToUserEventPayload(UserCreatedEvent userCreatedEvent) {
+    public UserEventPayload userCreatedEventToUserEventPayload(UserCreatedEvent userCreatedEvent) {
         User user = userCreatedEvent.getUser();
-        return UserEventAuthToAnyServicesPayload.builder()
+        return UserEventPayload.builder()
                 .userId(user.getId().getValue().toString())
                 .email(user.getEmail())
                 .firstName(user.getFirstName())
@@ -84,9 +84,9 @@ public class UserDataMapper {
                 .build();
     }
 
-    public UserEventAuthToAnyServicesPayload userUpdatedEventToUserEventPayload(UserUpdatedEvent userUpdatedEvent) {
+    public UserEventPayload userUpdatedEventToUserEventPayload(UserUpdatedEvent userUpdatedEvent) {
         User user = userUpdatedEvent.getUser();
-        return UserEventAuthToAnyServicesPayload.builder()
+        return UserEventPayload.builder()
                 .userId(user.getId().getValue().toString())
                 .dob(user.getDob())
                 .firstName(user.getFirstName())
@@ -99,9 +99,9 @@ public class UserDataMapper {
                 .build();
     }
 
-    public UserEventAuthToAnyServicesPayload userDeletedEventToUserEventPayload(UserDeletedEvent userDeletedEvent) {
+    public UserEventPayload userDeletedEventToUserEventPayload(UserDeletedEvent userDeletedEvent) {
         User user = userDeletedEvent.getUser();
-        return UserEventAuthToAnyServicesPayload.builder()
+        return UserEventPayload.builder()
                 .userId(user.getId().getValue().toString())
                 .isDeleted(user.getDeleted())
                 .copyState(CopyState.DELETING.name())
@@ -187,8 +187,8 @@ public class UserDataMapper {
                 .build();
     }
 
-    public UserEventAuthToAnyServicesPayload userEventToUserEventPayload(UserEvent userEvent, CopyState copyState) {
-        return UserEventAuthToAnyServicesPayload.builder()
+    public UserEventPayload userEventToUserEventPayload(UserEvent userEvent, CopyState copyState) {
+        return UserEventPayload.builder()
                 .userId(userEvent.getUser().getId().getValue().toString())
                 .copyState(copyState.name())
                 .build();

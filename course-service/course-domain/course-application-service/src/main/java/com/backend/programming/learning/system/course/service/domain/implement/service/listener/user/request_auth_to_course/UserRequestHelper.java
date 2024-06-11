@@ -8,7 +8,7 @@ import com.backend.programming.learning.system.course.service.domain.implement.s
 import com.backend.programming.learning.system.course.service.domain.mapper.user.UserDataMapper;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.user.UserOutboxMessage;
 import com.backend.programming.learning.system.course.service.domain.outbox.scheduler.user.UserOutboxHelper;
-import com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.user.UserRequestMessagePublisher;
+import com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.user.UserRequestCourseToAuthMessagePublisher;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static com.backend.programming.learning.system.saga.user.SagaConstants.AUTH_TO_ANY_SERVICES_USER_SAGA_NAME;
+
 @Slf4j
 @Component
 @RequiredArgsConstructor
@@ -31,7 +33,7 @@ public class UserRequestHelper {
     private final UserRepository userRepository;
     private final CourseDomainService courseDomainService;
     private final UserOutboxHelper userOutboxHelper;
-    private final UserRequestMessagePublisher userRequestMessagePublisher;
+    private final UserRequestCourseToAuthMessagePublisher userRequestMessagePublisher;
     private final UserUpdateSagaHelper userSagaHelper;
 
     @Transactional
@@ -49,7 +51,10 @@ public class UserRequestHelper {
             log.error("Found user with email: {}", user.getEmail());
             failureMessages.add("Found user with email: " + user.getEmail());
             UserCreatedFailEvent userCreatedFailEvent = courseDomainService.createdUserFail(user, failureMessages);
-            userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userCreatedFailEvent, CopyState.CREATE_FAILED),
+            userOutboxHelper.saveUserOutboxMessage(
+                    AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                    userDataMapper.userEventToUserEventPayload(
+                    userCreatedFailEvent, CopyState.CREATE_FAILED),
                     CopyState.CREATE_FAILED,
                     OutboxStatus.STARTED,
                     userSagaHelper.copyStatusToSagaStatus(CopyState.CREATE_FAILED),
@@ -63,7 +68,9 @@ public class UserRequestHelper {
             log.error("Could not create user with id: {}", user.getId().getValue().toString());
             failureMessages.add("Could not create user with id: " + user.getId().getValue().toString());
             UserCreatedFailEvent userCreatedFailEvent = courseDomainService.createdUserFail(user, failureMessages);
-            userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userCreatedFailEvent, CopyState.CREATE_FAILED),
+            userOutboxHelper.saveUserOutboxMessage(
+                    AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                    userDataMapper.userEventToUserEventPayload(userCreatedFailEvent, CopyState.CREATE_FAILED),
                     CopyState.CREATE_FAILED,
                     OutboxStatus.STARTED,
                     userSagaHelper.copyStatusToSagaStatus(CopyState.CREATE_FAILED),
@@ -74,7 +81,9 @@ public class UserRequestHelper {
         log.info("User is created with id: {}", userSaved.getId().getValue());
         UserCreatedSuccessEvent userCreatedSuccessEvent = courseDomainService.createdUserSuccess(user);
 
-        userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userCreatedSuccessEvent, CopyState.CREATED),
+        userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                userDataMapper.userEventToUserEventPayload(userCreatedSuccessEvent, CopyState.CREATED),
                 CopyState.CREATED,
                 OutboxStatus.STARTED,
                 userSagaHelper.copyStatusToSagaStatus(CopyState.CREATED),
@@ -96,7 +105,9 @@ public class UserRequestHelper {
             log.error("Not found user with id: {}", user.getId().getValue());
             failureMessages.add("Not found user with id: " + user.getId().getValue());
             UserDeletedFailEvent userDeletedFailEvent = courseDomainService.deletedUserFail(user, failureMessages);
-            userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userDeletedFailEvent, CopyState.DELETE_FAILED),
+            userOutboxHelper.saveUserOutboxMessage(
+                    AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                    userDataMapper.userEventToUserEventPayload(userDeletedFailEvent, CopyState.DELETE_FAILED),
                     CopyState.DELETE_FAILED,
                     OutboxStatus.STARTED,
                     userSagaHelper.copyStatusToSagaStatus(CopyState.DELETE_FAILED),
@@ -119,7 +130,9 @@ public class UserRequestHelper {
 
         UserDeletedSuccessEvent userDeletedSuccessEvent = courseDomainService.deletedUserSuccess(user);
 
-        userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userDeletedSuccessEvent, CopyState.DELETED),
+        userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                userDataMapper.userEventToUserEventPayload(userDeletedSuccessEvent, CopyState.DELETED),
                 CopyState.DELETED,
                 OutboxStatus.STARTED,
                 userSagaHelper.copyStatusToSagaStatus(CopyState.DELETED),
@@ -142,7 +155,9 @@ public class UserRequestHelper {
             log.error("Not found user with id: {}", user.getId().getValue());
             failureMessages.add("Not found user with id: " + user.getId().getValue());
             UserUpdatedFailEvent userUpdatedFailEvent = courseDomainService.updatedUserFail(user, failureMessages);
-            userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userUpdatedFailEvent, CopyState.UPDATE_FAILED),
+            userOutboxHelper.saveUserOutboxMessage(
+                    AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                    userDataMapper.userEventToUserEventPayload(userUpdatedFailEvent, CopyState.UPDATE_FAILED),
                     CopyState.UPDATE_FAILED,
                     OutboxStatus.STARTED,
                     userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATE_FAILED),
@@ -180,7 +195,9 @@ public class UserRequestHelper {
             log.error("Could not update user with id: {}", user.getId().getValue());
             failureMessages.add("Could not update user with id: " + user.getId().getValue());
             UserUpdatedFailEvent userUpdatedFailEvent = courseDomainService.updatedUserFail(user, failureMessages);
-            userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userUpdatedFailEvent, CopyState.UPDATE_FAILED),
+            userOutboxHelper.saveUserOutboxMessage(
+                    AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                    userDataMapper.userEventToUserEventPayload(userUpdatedFailEvent, CopyState.UPDATE_FAILED),
                     CopyState.UPDATE_FAILED,
                     OutboxStatus.STARTED,
                     userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATE_FAILED),
@@ -191,7 +208,9 @@ public class UserRequestHelper {
         log.info("User is updated with id: {}", userSaved.getId().getValue());
         UserUpdatedSuccessEvent userUpdatedSuccessEvent = courseDomainService.updatedUserSuccess(user);
 
-        userOutboxHelper.saveUserOutboxMessage(userDataMapper.userEventToUserEventPayload(userUpdatedSuccessEvent, CopyState.UPDATED),
+        userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                userDataMapper.userEventToUserEventPayload(userUpdatedSuccessEvent, CopyState.UPDATED),
                 CopyState.UPDATED,
                 OutboxStatus.STARTED,
                 userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATED),
@@ -200,7 +219,7 @@ public class UserRequestHelper {
 
     private boolean publishOutboxMessageProcessedForUser(UserRequest userRequest, CopyState copyState) {
         Optional<UserOutboxMessage> userOutboxMessage =
-                userOutboxHelper.getUserOutboxMessageBySagaIdAndCopyState(
+                userOutboxHelper.getUserOutboxMessageBySagaIdAndCopyState(AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
                         UUID.fromString(userRequest.getSagaId()), copyState);
         if (userOutboxMessage.isPresent()) {
             userRequestMessagePublisher.publish(userOutboxMessage.get(), userOutboxHelper::updateOutboxMessage);

@@ -2,8 +2,7 @@ package com.backend.programming.learning.system.auth.service.messaging.mapper;
 
 import com.backend.programming.learning.system.auth.service.domain.dto.method.message.user.UserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.message.user.UserRequest;
-import com.backend.programming.learning.system.auth.service.domain.outbox.model.user_auth_to_any_services.UserEventAuthToAnyServicesPayload;
-import com.backend.programming.learning.system.auth.service.domain.outbox.model.user_course_to_auth_service.UserEventCourseToAuthServicePayload;
+import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserEventPayload;
 import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState;
 import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel;
@@ -17,7 +16,7 @@ import java.util.UUID;
 public class UserMessagingDataMapper {
     public UserRequestAvroModel userUpdatedToUserUpdateRequestAvroModel(String sagaId,
                                                                         ServiceName serviceName,
-                                                                        UserEventAuthToAnyServicesPayload userEventPayload) {
+                                                                        UserEventPayload userEventPayload) {
         Instant instantWithZeroNano = Instant.now().truncatedTo(java.time.temporal.ChronoUnit.SECONDS);
         Instant dob;
         if (userEventPayload.getDob() == null) {
@@ -44,7 +43,7 @@ public class UserMessagingDataMapper {
 
     public UserRequestAvroModel userDeletedToUserDeleteRequestAvroModel(String sagaId,
                                                                         ServiceName serviceName,
-                                                                        UserEventAuthToAnyServicesPayload userEventPayload) {
+                                                                        UserEventPayload userEventPayload) {
         return UserRequestAvroModel.newBuilder()
                 .setId(UUID.randomUUID().toString())
                 .setSagaId(sagaId)
@@ -58,7 +57,7 @@ public class UserMessagingDataMapper {
 
     public UserRequestAvroModel userCreatedEventPayloadToUserCreateRequestAvroModel(String sagaId,
                                                                                     ServiceName serviceName,
-                                                                                    UserEventAuthToAnyServicesPayload userEventPayload)
+                                                                                    UserEventPayload userEventPayload)
     {
         return UserRequestAvroModel.newBuilder()
                 .setId(UUID.randomUUID().toString())
@@ -148,7 +147,7 @@ public class UserMessagingDataMapper {
 //                .build();
 //    }
 
-    public UserResponseAvroModel userEventCourseToAuthServicePayloadToUserResponseAvroModel(String sagaId, UserEventCourseToAuthServicePayload userEventPayload) {
+    public UserResponseAvroModel userEventCourseToAuthServicePayloadToUserResponseAvroModel(String sagaId, UserEventPayload userEventPayload) {
         return UserResponseAvroModel.newBuilder()
                 .setId(UUID.randomUUID().toString())
                 .setSagaId(sagaId)

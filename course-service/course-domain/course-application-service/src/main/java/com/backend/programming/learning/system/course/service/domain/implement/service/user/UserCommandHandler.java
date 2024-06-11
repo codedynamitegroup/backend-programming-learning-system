@@ -18,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
+import static com.backend.programming.learning.system.saga.user.SagaConstants.COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME;
+
 @Slf4j
 @Component
 @RequiredArgsConstructor
@@ -36,7 +38,7 @@ public class UserCommandHandler {
         CreateUserResponse createUserResponse = userDataMapper.userToCreateUserResponse(userCreatedEvent.getUser(),
                 "User created successfully");
 
-        userOutboxHelper.saveUserOutboxMessage(
+        userOutboxHelper.saveUserOutboxMessage(COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME,
                         userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
                         CopyState.CREATING,
                         OutboxStatus.STARTED,
@@ -50,7 +52,7 @@ public class UserCommandHandler {
     public UpdateUserResponse updateUser(UpdateUserCommand updateUserCommand) {
         UserUpdatedEvent userUpdatedEvent = userUpdateHelper.persistUser(updateUserCommand);
 
-        userOutboxHelper.saveUserOutboxMessage(
+        userOutboxHelper.saveUserOutboxMessage(COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME,
                 userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
                 CopyState.UPDATING,
                 OutboxStatus.STARTED,

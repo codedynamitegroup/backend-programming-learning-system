@@ -11,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+import static com.backend.programming.learning.system.saga.user.SagaConstants.AUTH_TO_ANY_SERVICES_USER_SAGA_NAME;
+import static com.backend.programming.learning.system.saga.user.SagaConstants.COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME;
+
 @Slf4j
 @Component
 public class UserOutboxCleaner implements OutboxScheduler {
@@ -24,12 +27,21 @@ public class UserOutboxCleaner implements OutboxScheduler {
     @Scheduled(cron = "@midnight")
     @Transactional
     public void processOutboxMessage() {
-        Optional<List<UserOutboxMessage>> outboxMessagesResponse =
-                userOutboxHelper.getUserOutboxMessageByOutboxStatus(OutboxStatus.COMPLETED);
-        if (outboxMessagesResponse.isPresent() && outboxMessagesResponse.get().size() > 0) {
-            List<UserOutboxMessage> outboxMessages = outboxMessagesResponse.get();
+        Optional<List<UserOutboxMessage>> outboxMessagesResponseAuthToAnyServices =
+                userOutboxHelper.getUserOutboxMessageByOutboxStatus(AUTH_TO_ANY_SERVICES_USER_SAGA_NAME, OutboxStatus.COMPLETED);
+        if (outboxMessagesResponseAuthToAnyServices.isPresent() && outboxMessagesResponseAuthToAnyServices.get().size() > 0) {
+            List<UserOutboxMessage> outboxMessages = outboxMessagesResponseAuthToAnyServices.get();
             log.info("Received {} UserOutboxMessage for clean-up!", outboxMessages.size());
-            userOutboxHelper.deleteUserOutboxMessageByOutboxStatus(OutboxStatus.COMPLETED);
+            userOutboxHelper.deleteUserOutboxMessageByOutboxStatus(AUTH_TO_ANY_SERVICES_USER_SAGA_NAME, OutboxStatus.COMPLETED);
+            log.info("Deleted {} UserOutboxMessage!", outboxMessages.size());
+        }
+
+        Optional<List<UserOutboxMessage>> outboxMessagesResponseCourseToAuthService =
+                userOutboxHelper.getUserOutboxMessageByOutboxStatus(COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME, OutboxStatus.COMPLETED);
+        if (outboxMessagesResponseCourseToAuthService.isPresent() && outboxMessagesResponseCourseToAuthService.get().size() > 0) {
+            List<UserOutboxMessage> outboxMessages = outboxMessagesResponseCourseToAuthService.get();
+            log.info("Received {} UserOutboxMessage for clean-up!", outboxMessages.size());
+            userOutboxHelper.deleteUserOutboxMessageByOutboxStatus(COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME, OutboxStatus.COMPLETED);
             log.info("Deleted {} UserOutboxMessage!", outboxMessages.size());
         }
     }

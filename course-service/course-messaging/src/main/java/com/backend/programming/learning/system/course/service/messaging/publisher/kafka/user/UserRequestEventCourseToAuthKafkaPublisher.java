@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.course.service.messaging.publish
 import com.backend.programming.learning.system.course.service.config.CourseServiceConfigData;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.user.UserEventPayload;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.user.UserOutboxMessage;
-import com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.user.UserRequestMessagePublisher;
+import com.backend.programming.learning.system.course.service.domain.ports.output.message.publisher.user.UserRequestCourseToAuthMessagePublisher;
 import com.backend.programming.learning.system.course.service.messaging.mapper.UserMessagingDataMapper;
 import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserRequestAvroModel;
@@ -19,7 +19,7 @@ import java.util.function.BiConsumer;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class UserRequestEventCourseToAuthKafkaPublisher implements UserRequestMessagePublisher {
+public class UserRequestEventCourseToAuthKafkaPublisher implements UserRequestCourseToAuthMessagePublisher {
     private final UserMessagingDataMapper userMessagingDataMapper;
     private final KafkaProducer<String, UserRequestAvroModel> kafkaProducer;
     private final CourseServiceConfigData courseServiceConfigData;

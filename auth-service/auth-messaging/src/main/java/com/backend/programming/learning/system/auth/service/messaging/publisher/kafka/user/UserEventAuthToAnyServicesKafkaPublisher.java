@@ -1,8 +1,8 @@
 package com.backend.programming.learning.system.auth.service.messaging.publisher.kafka.user;
 
 import com.backend.programming.learning.system.auth.service.config.AuthServiceConfigData;
-import com.backend.programming.learning.system.auth.service.domain.outbox.model.user_auth_to_any_services.UserEventAuthToAnyServicesPayload;
-import com.backend.programming.learning.system.auth.service.domain.outbox.model.user_auth_to_any_services.UserOutboxAuthToAnyServicesMessage;
+import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserEventPayload;
+import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserOutboxMessage;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.message.publisher.user.UserRequestAuthToAnyServicesMessagePublisher;
 import com.backend.programming.learning.system.auth.service.messaging.mapper.UserMessagingDataMapper;
 import com.backend.programming.learning.system.domain.valueobject.ServiceName;
@@ -26,8 +26,8 @@ public class UserEventAuthToAnyServicesKafkaPublisher implements UserRequestAuth
     private final KafkaOutboxMessageHelper kafkaOutboxMessageHelper;
 
     @Override
-    public void publish(UserOutboxAuthToAnyServicesMessage userOutboxMessage, BiConsumer<UserOutboxAuthToAnyServicesMessage, OutboxStatus> outboxCallback) {
-        UserEventAuthToAnyServicesPayload userEventPayload = kafkaOutboxMessageHelper.getEventPayload(userOutboxMessage.getPayload(), UserEventAuthToAnyServicesPayload.class);
+    public void publish(UserOutboxMessage userOutboxMessage, BiConsumer<UserOutboxMessage, OutboxStatus> outboxCallback) {
+        UserEventPayload userEventPayload = kafkaOutboxMessageHelper.getEventPayload(userOutboxMessage.getPayload(), UserEventPayload.class);
 
         String sagaId = userOutboxMessage.getSagaId().toString();
         ServiceName serviceName = userOutboxMessage.getServiceName();

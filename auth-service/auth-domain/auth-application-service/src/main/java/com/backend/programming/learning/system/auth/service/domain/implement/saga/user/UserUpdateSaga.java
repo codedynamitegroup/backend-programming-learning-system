@@ -1,10 +1,12 @@
-package com.backend.programming.learning.system.course.service.domain.implement.saga.user;
+package com.backend.programming.learning.system.auth.service.domain.implement.saga.user;
 
-import com.backend.programming.learning.system.course.service.domain.dto.method.message.user.UserResponse;
-import com.backend.programming.learning.system.course.service.domain.outbox.model.user.UserOutboxMessage;
-import com.backend.programming.learning.system.course.service.domain.outbox.scheduler.user.UserOutboxHelper;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.message.user.UserResponse;
+import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserOutboxMessage;
+import com.backend.programming.learning.system.auth.service.domain.outbox.scheduler.user.UserOutboxHelper;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.UserOutboxServiceType;
+import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
 import com.backend.programming.learning.system.saga.SagaStep;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +18,8 @@ import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.backend.programming.learning.system.saga.user.SagaConstants.COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME;
+import static com.backend.programming.learning.system.saga.user.SagaConstants.AUTH_TO_ANY_SERVICES_USER_SAGA_NAME;
+
 
 @Slf4j
 @Component
@@ -33,8 +36,11 @@ public class UserUpdateSaga implements SagaStep<UserResponse> {
     @Transactional
     public void process(UserResponse userResponse) {
         Optional<UserOutboxMessage> userOutboxMessageResponse =
-                userOutboxHelper.getUserOutboxMessageBySagaIdAndCopyState(COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME,
-                        UUID.fromString(userResponse.getSagaId()), userResponse.getState());
+                userOutboxHelper.findByTypeAndSagaIdAndSagaStatusAndServiceName(
+                        AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                        UUID.fromString(userResponse.getSagaId()),
+                        SagaStatus.STARTED,
+                        userResponse.getServiceName());
         if (userOutboxMessageResponse.isEmpty()) {
             log.info("An outbox message with saga id: {} is already processed!", userResponse.getSagaId());
             return;
@@ -45,10 +51,7 @@ public class UserUpdateSaga implements SagaStep<UserResponse> {
         SagaStatus sagaStatus = userSagaHelper.copyStatusToSagaStatus(userResponse.getState());
 
         //update outbox
-        userOutboxHelper.save(updateOutboxMessage(userOutboxMessage, userResponse.getState(), sagaStatus
-        ));
-
-        log.info("User with id: {} is created successfully!", userResponse.getUserId());
+        userOutboxHelper.save(updateOutboxMessage(userOutboxMessage, userResponse.getState(), sagaStatus));
     }
 
 
@@ -56,8 +59,11 @@ public class UserUpdateSaga implements SagaStep<UserResponse> {
     @Transactional
     public void rollback(UserResponse userResponse) {
         Optional<UserOutboxMessage> userOutboxMessageResponse =
-                userOutboxHelper.getUserOutboxMessageBySagaIdAndCopyState(COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME,
-                        UUID.fromString(userResponse.getSagaId()), userResponse.getState());
+                userOutboxHelper.findByTypeAndSagaIdAndSagaStatusAndServiceName(
+                        AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                        UUID.fromString(userResponse.getSagaId()),
+                        SagaStatus.STARTED,
+                        userResponse.getServiceName());
         if (userOutboxMessageResponse.isEmpty()) {
             log.info("An outbox message with saga id: {} is already roll backed!", userResponse.getSagaId());
             return;
@@ -68,15 +74,14 @@ public class UserUpdateSaga implements SagaStep<UserResponse> {
         SagaStatus sagaStatus = userSagaHelper.copyStatusToSagaStatus(userResponse.getState());
 
         //update outbox
-        userOutboxHelper.save(updateOutboxMessage(userOutboxMessage, userResponse.getState(), sagaStatus
-        ));
+        userOutboxHelper.save(updateOutboxMessage(userOutboxMessage, userResponse.getState(), sagaStatus));
 
         log.info("User with id: {} is rollback!", userResponse.getUserId());
     }
 
     private UserOutboxMessage updateOutboxMessage(UserOutboxMessage userOutboxMessage,
-                                                                 CopyState copyState,
-                                                                 SagaStatus sagaStatus) {
+                                                                   CopyState copyState,
+                                                                   SagaStatus sagaStatus) {
         userOutboxMessage.setProcessedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
         userOutboxMessage.setCopyState(copyState);
         userOutboxMessage.setSagaStatus(sagaStatus);
