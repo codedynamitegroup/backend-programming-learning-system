@@ -73,4 +73,6 @@ public interface CourseDomainService {
     UserUpdatedEvent updateUser(User user);
 
     UserCreatedEvent createUser(User user);
+
+    void createIntroAttachment(IntroAttachment introAttachment);
 }

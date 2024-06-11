@@ -279,4 +279,10 @@ public class CourseDomainServiceImpl implements CourseDomainService {
         log.info("User with id: {} is initiated", user.getId().getValue());
         return new UserCreatedEvent(user, ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)), List.of());
     }
+
+    @Override
+    public void createIntroAttachment(IntroAttachment introAttachment) {
+        introAttachment.initializeIntroAttachment();
+        log.info("IntroAttachment with id: {} is initiated", introAttachment.getId().getValue());
+    }
 }
