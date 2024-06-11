@@ -3,7 +3,10 @@ package com.backend.programming.learning.system.course.service.domain.ports.inpu
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionResponse;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.MarkQuestionSubmissionCommand;
 import jakarta.validation.Valid;
+
+import java.util.List;
 
 /**
  * com.backend.programming.learning.system.ports.input.service.question_submission
@@ -14,4 +17,7 @@ import jakarta.validation.Valid;
 public interface QuestionSubmissionApplicationService {
     CreateQuestionSubmissionResponse submitQuestion(
             @Valid CreateQuestionSubmissionCommand createQuestionSubmissionCommand);
+
+    void markQuestion(
+            @Valid List<MarkQuestionSubmissionCommand> markQuestionSubmissionCommandList);
 }

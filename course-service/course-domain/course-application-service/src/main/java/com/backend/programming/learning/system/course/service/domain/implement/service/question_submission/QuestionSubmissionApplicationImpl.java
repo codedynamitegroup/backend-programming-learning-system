@@ -2,11 +2,14 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.MarkQuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.question_submission.QuestionSubmissionApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+
+import java.util.List;
 
 /**
  * com.backend.programming.learning.system.implement.question_submission
@@ -23,5 +26,10 @@ public class QuestionSubmissionApplicationImpl implements QuestionSubmissionAppl
     @Override
     public CreateQuestionSubmissionResponse submitQuestion(CreateQuestionSubmissionCommand createQuestionSubmissionCommand) {
         return questionSubmissionCommandHandler.submitQuestion(createQuestionSubmissionCommand);
+    }
+
+    @Override
+    public void markQuestion(List<MarkQuestionSubmissionCommand> markQuestionSubmissionCommandList) {
+        questionSubmissionCommandHandler.markQuestion(markQuestionSubmissionCommandList);
     }
 }
