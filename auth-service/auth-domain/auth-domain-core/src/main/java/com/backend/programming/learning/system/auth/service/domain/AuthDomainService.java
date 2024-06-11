@@ -7,14 +7,13 @@ import com.backend.programming.learning.system.auth.service.domain.entity.UserRo
 import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationCreatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationDeletedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.organization.OrganizationUpdatedEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedFailEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedSuccessEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserDeletedEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedFailEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedSuccessEvent;
-import com.backend.programming.learning.system.domain.event.publisher.DomainEventPublisher;
+import com.backend.programming.learning.system.auth.service.domain.event.user.auth_to_any_services.UserCreatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.course_to_auth.UserCreatedFailEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.course_to_auth.UserCreatedSuccessEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.auth_to_any_services.UserDeletedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.auth_to_any_services.UserUpdatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.course_to_auth.UserUpdatedFailEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.course_to_auth.UserUpdatedSuccessEvent;
 
 import java.util.List;
 

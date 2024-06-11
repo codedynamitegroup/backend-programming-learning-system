@@ -11,10 +11,10 @@ import com.backend.programming.learning.system.auth.service.domain.dto.response_
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserCreatedEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserDeletedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.auth_to_any_services.UserCreatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.auth_to_any_services.UserDeletedEvent;
 import com.backend.programming.learning.system.auth.service.domain.event.user.UserEvent;
-import com.backend.programming.learning.system.auth.service.domain.event.user.UserUpdatedEvent;
+import com.backend.programming.learning.system.auth.service.domain.event.user.auth_to_any_services.UserUpdatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserEventPayload;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
@@ -144,7 +144,7 @@ public class UserDataMapper {
                 .isDeleted(user.getDeleted())
                 .isLinkedWithGoogle(user.getLinkedWithGoogle())
                 .isLinkedWithMicrosoft(user.getLinkedWithMicrosoft())
-                .roles(user.getRoles().stream().map(roleDataMapper::roleToRoleResponse).collect(Collectors.toSet()))
+                .roles(user.getRoles() == null ? null : user.getRoles().stream().map(roleDataMapper::roleToRoleResponse).collect(Collectors.toSet()))
                 .build();
     }
 
@@ -187,7 +187,7 @@ public class UserDataMapper {
                 .build();
     }
 
-    public  UserEventPayload userEventToUserEventPayload(UserEvent userEvent, CopyState copyState) {
+    public UserEventPayload userEventToUserEventPayload(UserEvent userEvent, CopyState copyState) {
         return UserEventPayload.builder()
                 .userId(userEvent.getUser().getId().getValue().toString())
                 .copyState(copyState.name())

@@ -18,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
+import static com.backend.programming.learning.system.saga.user.SagaConstants.COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME;
+
 @Slf4j
 @Component
 @RequiredArgsConstructor
@@ -36,29 +38,12 @@ public class UserCommandHandler {
         CreateUserResponse createUserResponse = userDataMapper.userToCreateUserResponse(userCreatedEvent.getUser(),
                 "User created successfully");
 
-        userOutboxHelper.saveUserOutboxMessage(
+        userOutboxHelper.saveUserOutboxMessage(COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME,
                         userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
-//                        ServiceName.CORE_SERVICE,
                         CopyState.CREATING,
                         OutboxStatus.STARTED,
-//                        userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
+                        userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
                                 UUID.randomUUID());
-
-//        userOutboxHelper.saveUserOutboxMessage(
-//                userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
-////                ServiceName.AUTH_SERVICE,
-//                CopyState.CREATING,
-//                OutboxStatus.STARTED,
-////                userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
-//                UUID.randomUUID());
-//
-//        userOutboxHelper.saveUserOutboxMessage(
-//                userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
-////                ServiceName.CODE_ASSESSMENT_SERVICE,
-//                CopyState.CREATING,
-//                OutboxStatus.STARTED,
-////                userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
-//                UUID.randomUUID());
 
         return createUserResponse;
     }
@@ -67,29 +52,12 @@ public class UserCommandHandler {
     public UpdateUserResponse updateUser(UpdateUserCommand updateUserCommand) {
         UserUpdatedEvent userUpdatedEvent = userUpdateHelper.persistUser(updateUserCommand);
 
-        userOutboxHelper.saveUserOutboxMessage(
+        userOutboxHelper.saveUserOutboxMessage(COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME,
                 userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
-//                ServiceName.CORE_SERVICE,
                 CopyState.UPDATING,
                 OutboxStatus.STARTED,
-//                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
+                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
                 UUID.randomUUID());
-
-//        userOutboxHelper.saveUserOutboxMessage(
-//                userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
-////                ServiceName.AUTH_SERVICE,
-//                CopyState.UPDATING,
-//                OutboxStatus.STARTED,
-////                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
-//                UUID.randomUUID());
-//
-//        userOutboxHelper.saveUserOutboxMessage(
-//                userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
-////                ServiceName.CODE_ASSESSMENT_SERVICE,
-//                CopyState.UPDATING,
-//                OutboxStatus.STARTED,
-////                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
-//                UUID.randomUUID());
 
         log.info("User is updated with id: {}", userUpdatedEvent.getUser().getId().getValue());
         return userDataMapper.userToUpdateUserResponse(userUpdatedEvent.getUser(), "User updated successfully");

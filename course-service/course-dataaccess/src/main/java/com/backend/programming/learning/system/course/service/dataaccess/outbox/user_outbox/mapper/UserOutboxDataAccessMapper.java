@@ -7,8 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserOutboxDataAccessMapper {
 
-    public UserOutboxEntity userOutboxMessageToUserOutboxEntity(UserOutboxMessage
-                                                                               userOutboxMessage) {
+    public UserOutboxEntity userOutboxMessageToUserOutboxEntity(UserOutboxMessage userOutboxMessage) {
         return UserOutboxEntity.builder()
                 .id(userOutboxMessage.getId())
                 .sagaId(userOutboxMessage.getSagaId())
@@ -17,12 +16,12 @@ public class UserOutboxDataAccessMapper {
                 .payload(userOutboxMessage.getPayload())
                 .copyState(userOutboxMessage.getCopyState())
                 .outboxStatus(userOutboxMessage.getOutboxStatus())
+                .sagaStatus(userOutboxMessage.getSagaStatus())
                 .version(userOutboxMessage.getVersion())
                 .build();
     }
 
-    public UserOutboxMessage userOutboxEntityToUserOutboxMessage(UserOutboxEntity
-                                                                               userOutboxEntity) {
+    public UserOutboxMessage userOutboxEntityToUserOutboxMessage(UserOutboxEntity userOutboxEntity) {
         return UserOutboxMessage.builder()
                 .id(userOutboxEntity.getId())
                 .sagaId(userOutboxEntity.getSagaId())
@@ -31,6 +30,7 @@ public class UserOutboxDataAccessMapper {
                 .payload(userOutboxEntity.getPayload())
                 .copyState(userOutboxEntity.getCopyState())
                 .outboxStatus(userOutboxEntity.getOutboxStatus())
+                .sagaStatus(userOutboxEntity.getSagaStatus())
                 .version(userOutboxEntity.getVersion())
                 .build();
     }

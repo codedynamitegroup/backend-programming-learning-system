@@ -16,6 +16,5 @@ public class UserResponse {
     private String sagaId;
     private String userId;
     private CopyState state;
-    private ServiceName serviceName;
     private List<String> failureMessages;
 }

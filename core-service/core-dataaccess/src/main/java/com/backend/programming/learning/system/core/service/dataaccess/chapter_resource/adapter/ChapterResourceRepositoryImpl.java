@@ -50,4 +50,10 @@ public class ChapterResourceRepositoryImpl implements ChapterResourceRepository 
             return lastResource.map(chapterResourceDataAccessMapper::chapterResourceEntityToChapterResource);
         }
     }
+
+    @Override
+    public Optional<ChapterResource> findChapterResourceById(UUID chapterResourceId) {
+        return chapterResourceJpaRepository.findById(chapterResourceId)
+                .map(chapterResourceDataAccessMapper::chapterResourceEntityToChapterResource);
+    }
 }

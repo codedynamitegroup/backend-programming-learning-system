@@ -40,8 +40,6 @@ class ChapterRedisServiceImpl implements ChapterRedisService {
     public QueryAllChaptersResponse getAllChapters(UUID certificateCourseId) {
         String key = getKeyFrom(certificateCourseId.toString());
         String json = (String) redisTemplate.opsForValue().get(key);
-        log.info("key: {}", key);
-        log.info("json: {}", json);
         try {
             return json != null ? objectMapper.readValue(json, QueryAllChaptersResponse.class) : null;
         } catch (JsonProcessingException e) {

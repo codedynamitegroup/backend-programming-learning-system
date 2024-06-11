@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.implement.service.certificatecourse;
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.*;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse.CertificateCourseRedisService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,13 +38,15 @@ class CertificateCourseRedisServiceImpl implements CertificateCourseRedisService
     @Override
     public QueryAllCertificateCoursesResponse getAllCertificateCourses(
             String courseName,
-            UUID filterTopicId)
-            throws JsonProcessingException {
+            UUID filterTopicId) {
         String key = getKeyFrom(courseName, filterTopicId);
         String json = (String) redisTemplate.opsForValue().get(key);
-        log.info("key: {}", key);
-        log.info("json: {}", json);
-        return json != null ? objectMapper.readValue(json, QueryAllCertificateCoursesResponse.class) : null;
+        try {
+            return json != null ? objectMapper.readValue(json, QueryAllCertificateCoursesResponse.class) : null;
+        } catch (JsonProcessingException e) {
+            log.error("Error while getting chapters from redis", e);
+        }
+        return null;
     }
 
     @Override

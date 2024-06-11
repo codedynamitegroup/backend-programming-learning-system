@@ -7,8 +7,10 @@ import com.backend.programming.learning.system.auth.service.domain.outbox.model.
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserOutboxRepository;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.ServiceName;
+import com.backend.programming.learning.system.domain.valueobject.UserOutboxServiceType;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -18,15 +20,11 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class UserOutboxRepositoryImpl implements UserOutboxRepository {
 
     private final UserOutboxJpaRepository userOutboxJpaRepository;
     private final UserOutboxDataAccessMapper userOutboxDataAccessMapper;
-
-    public UserOutboxRepositoryImpl(UserOutboxJpaRepository userOutboxJpaRepository, UserOutboxDataAccessMapper userOutboxDataAccessMapper) {
-        this.userOutboxJpaRepository = userOutboxJpaRepository;
-        this.userOutboxDataAccessMapper = userOutboxDataAccessMapper;
-    }
 
     @Override
     public UserOutboxMessage save(UserOutboxMessage userOutboxMessage) {
@@ -38,8 +36,8 @@ public class UserOutboxRepositoryImpl implements UserOutboxRepository {
 
     @Override
     public Optional<List<UserOutboxMessage>> findByTypeAndOutboxStatusAndSagaStatus(String sagaType,
-                                                                                            OutboxStatus outboxStatus,
-                                                                                            SagaStatus... sagaStatus) {
+                                                                                                     OutboxStatus outboxStatus,
+                                                                                                     SagaStatus... sagaStatus) {
         return Optional.of(userOutboxJpaRepository.findByTypeAndOutboxStatusAndSagaStatusIn(sagaType,
                         outboxStatus,
                         Arrays.asList(sagaStatus))
@@ -51,28 +49,25 @@ public class UserOutboxRepositoryImpl implements UserOutboxRepository {
     }
 
     @Override
-    public Optional<UserOutboxMessage> findByTypeAndSagaIdAndServiceNameAndSagaStatus(String type,
-                                                                                UUID sagaId,
-                                                                                        ServiceName serviceName,
-                                                                                SagaStatus... sagaStatus) {
-        return userOutboxJpaRepository
-                .findByTypeAndSagaIdAndServiceNameAndSagaStatusIn(type, sagaId, serviceName, Arrays.asList(sagaStatus))
-                .map(userOutboxDataAccessMapper::userOutboxEntityToUserOutboxMessage);
-    }
-
-    @Override
     public void deleteByTypeAndOutboxStatusAndSagaStatus(String type, OutboxStatus outboxStatus, SagaStatus... sagaStatus) {
         userOutboxJpaRepository.deleteByTypeAndOutboxStatusAndSagaStatusIn(type, outboxStatus,
                 Arrays.asList(sagaStatus));
     }
 
     @Override
-    public Optional<UserOutboxMessage> findByTypeAndSagaIdAndCopyStateAndOutboxStatus(String sagaType,
-                                                                                      UUID sagaId,
-                                                                                      CopyState copyState,
-                                                                                      OutboxStatus outboxStatus) {
+    public Optional<UserOutboxMessage> findByTypeAndSagaIdAndSagaStatusAndServiceName(String sagaType,
+                                                                                                       UUID sagaId,
+                                                                                                       SagaStatus sagaStatus,
+                                                                                                                     ServiceName serviceName) {
         return userOutboxJpaRepository
-                .findByTypeAndSagaIdAndCopyStateAndOutboxStatus(sagaType, sagaId, copyState, outboxStatus)
+                .findByTypeAndSagaIdAndSagaStatusAndServiceName(sagaType, sagaId, sagaStatus, serviceName)
+                .map(userOutboxDataAccessMapper::userOutboxEntityToUserOutboxMessage);
+    }
+
+    @Override
+    public Optional<UserOutboxMessage> findByTypeAndSagaIdAndCopyStateAndServiceName(String sagaType, UUID sagaId, CopyState copyState, ServiceName serviceName) {
+        return userOutboxJpaRepository
+                .findByTypeAndSagaIdAndCopyStateAndServiceName(sagaType, sagaId, copyState, serviceName)
                 .map(userOutboxDataAccessMapper::userOutboxEntityToUserOutboxMessage);
     }
 }

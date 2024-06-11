@@ -24,8 +24,8 @@ public class CodeAssessmentServiceConfigData {
 
     private String acceptedStatusDescription;
 
-    private String codeAssessmentUserRequestTopicName;
-    private String userResponseTopicName;
+    private String authServiceUserRequestToCodeAssessmentServiceTopicName;
+    private String anyServicesUserResponseToAuthServiceTopicName;
 
     @Value("${server.port}")
     Integer serverPort;

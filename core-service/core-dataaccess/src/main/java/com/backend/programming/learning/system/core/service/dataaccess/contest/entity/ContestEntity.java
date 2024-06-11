@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.core.service.dataaccess.contest.entity;
 
-import com.backend.programming.learning.system.core.service.dataaccess.chapter_resource_user.listener.ChapterResourceUserListener;
 import com.backend.programming.learning.system.core.service.dataaccess.contest.listener.ContestListener;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import jakarta.persistence.*;

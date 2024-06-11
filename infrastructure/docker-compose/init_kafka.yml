@@ -19,10 +19,12 @@ services:
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic core-question-request-code-assessment --delete --if-exists
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic core-question-response-code-assessment --delete --if-exists
       
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic core-user-request --delete --if-exists
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic course-user-request --delete --if-exists
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic code-assessment-user-request --delete --if-exists
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic user-response --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic auth-service-user-request-to-core-service --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic auth-service-user-request-to-course-service --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic auth-service-user-request-to-code-assessment-service --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic course-service-user-request-to-auth-service --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic any-services-user-response-to-auth-service --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic auth-service-user-response-to-course-service --delete --if-exists
       
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic core-organization-request --delete --if-exists
       kafka-topics --bootstrap-server kafka-broker-1:9092 --topic course-organization-request --delete --if-exists
@@ -43,10 +45,13 @@ services:
       kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic  core-question-request-code-assessment --replication-factor 3 --partitions 3
       kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic  core-question-response-code-assessment --replication-factor 3 --partitions 3
 
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic core-user-request --replication-factor 3 --partitions 3
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic course-user-request --replication-factor 3 --partitions 3
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic code-assessment-user-request --replication-factor 3 --partitions 3
-      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic user-response --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic auth-service-user-request-to-core-service --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic auth-service-user-request-to-course-service --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic auth-service-user-request-to-code-assessment-service --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic course-service-user-request-to-auth-service --replication-factor 3 --partitions 3
+      
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic any-services-user-response-to-auth-service --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic auth-service-user-response-to-course-service --replication-factor 3 --partitions 3
       
       kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic core-organization-request --replication-factor 3 --partitions 3
       kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic course-organization-request --replication-factor 3 --partitions 3

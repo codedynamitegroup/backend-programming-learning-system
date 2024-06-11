@@ -77,6 +77,10 @@ public class IntroAttachment extends AggregateRoot<IntroAttachmentId> {
         this.mimetype = mimetype;
     }
 
+    public void initializeIntroAttachment() {
+        setId(new IntroAttachmentId(UUID.randomUUID()));
+    }
+
 
     public static final class Builder {
         private IntroAttachmentId id;
