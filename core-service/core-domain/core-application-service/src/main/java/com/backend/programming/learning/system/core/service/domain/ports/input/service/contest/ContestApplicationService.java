@@ -18,6 +18,10 @@ public interface ContestApplicationService {
 
     QueryAllContestsResponse queryAllContests(
             @Valid QueryAllContestsCommand queryAllContestsCommand);
+
+    QueryAllContestsResponse queryAllMyContests(
+            @Valid QueryAllMyContestsCommand queryAllMyContestsCommand);
+
     QueryMostPopularContestsResponse queryMostPopularContests(
             @Valid QueryMostPopularContestsCommand queryMostPopularContestsCommand
     );

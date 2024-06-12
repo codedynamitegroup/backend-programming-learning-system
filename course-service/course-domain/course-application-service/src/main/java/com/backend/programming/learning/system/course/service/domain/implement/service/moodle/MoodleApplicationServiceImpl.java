@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.UUID;
+
 @Service
 @Validated
 @Slf4j
@@ -18,8 +20,8 @@ public class MoodleApplicationServiceImpl implements MoodleApplicationService {
     }
 
     @Override
-    public String syncUser() {
-        return moodleCommandHandler.syncUser();
+    public String syncUser(UUID organizationId) {
+        return moodleCommandHandler.syncUser(organizationId);
     }
 
     @Override

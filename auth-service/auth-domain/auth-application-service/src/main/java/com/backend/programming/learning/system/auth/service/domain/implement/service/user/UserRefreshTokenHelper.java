@@ -37,14 +37,16 @@ public class UserRefreshTokenHelper {
 
     public RefreshTokenUserResponse refreshTokenUser(RefreshTokenUserEmailCommand refreshTokenUserCommand) {
         User user = findUserByEmail(refreshTokenUserCommand.getEmail());
+        log.info("User refresh token command: {}", refreshTokenUserCommand.getRefreshToken());
+        log.info("User refresh token: {}", user.getRefreshToken());
         if (Objects.isNull(user.getRefreshToken())) {
             log.error("User has logged out or does not have refresh token");
             throw new UnAuthorizedServiceException("User has logged out or does not have refresh token");
         }
-        if (!user.getRefreshToken().equals(refreshTokenUserCommand.getRefreshToken())) {
-            log.error("Refresh token is not matching with the user's refresh token");
-            throw new UnAuthorizedServiceException("Refresh token is not matching with the user's refresh token");
-        }
+//        if (!user.getRefreshToken().equals(refreshTokenUserCommand.getRefreshToken())) {
+//            log.error("Refresh token is not matching with the user's refresh token");
+//            throw new UnAuthorizedServiceException("Refresh token is not matching with the user's refresh token");
+//        }
 
         WebClient client = WebClient.create(keycloakConfigData.getUrls());
 

@@ -192,6 +192,38 @@ public class ContestQueryHelper {
     }
 
     @Transactional(readOnly = true)
+    public Page<Contest> queryAllMyContests(
+            String searchName,
+            Integer pageNo,
+            Integer pageSize,
+            String email
+    ) {
+        log.info("Querying all my contests with searchName: {}, pageNo: {}, pageSize: {}",
+                searchName, pageNo, pageSize);
+
+        User user = getUserByEmail(email);
+
+        Page<Contest> contests = contestRepository.findAllMyContests(searchName, user.getId().getValue(), pageNo, pageSize);
+
+        if (contests != null) {
+            for (Contest contest : contests) {
+                contest.setQuestions(new ArrayList<>());
+                Optional<ContestUser> contestUserResult = contestUserRepository.findByContestIdAndUserId(
+                        contest.getId().getValue(),
+                        user.getId().getValue()
+                );
+                contestUserResult.ifPresent(contestUser -> contest.setRegistered(true));
+
+                User userCreatedBy = getUserHideSensitiveData(contest.getCreatedBy().getId().getValue());
+                contest.setCreatedBy(userCreatedBy);
+                User userUpdatedBy = getUserHideSensitiveData(contest.getUpdatedBy().getId().getValue());
+                contest.setUpdatedBy(userUpdatedBy);
+            }
+        }
+        return contests;
+    }
+
+    @Transactional(readOnly = true)
     public List<Contest> findMostPopularContests() {
         log.info("Querying most popular upcoming contests");
         List<Contest> contestList = contestRepository.findMostPopularContests();
@@ -415,6 +447,15 @@ public class ContestQueryHelper {
         userWithGeneralInformation.setUpdatedAt(null);
         userWithGeneralInformation.setDeleted(null);
         return userWithGeneralInformation;
+    }
+
+    private User getUserByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isEmpty()) {
+            log.warn("User with email: {} not found", email);
+            throw new UserNotFoundException("Could not find user with email: " + email);
+        }
+        return user.get();
     }
 
     private Contest getContest(UUID contestId) {

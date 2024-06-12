@@ -25,6 +25,7 @@ course-service:
   question-response-topic-name: core-question-response
 
   auth-service-user-request-to-course-service-topic-name: auth-service-user-request-to-course-service
+  course-service-user-request-to-auth-service-topic-name: course-service-user-request-to-auth-service
   any-services-user-response-to-auth-service-topic-name: any-services-user-response-to-auth-service
   auth-service-user-response-to-course-service-topic-name: auth-service-user-response-to-course-service
 

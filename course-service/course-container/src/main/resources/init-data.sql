@@ -1,7 +1,12 @@
 INSERT INTO public.organization(id, description, name, created_at, updated_at, is_deleted, moodle_url)
 VALUES
-    ('9ba179ed-d26d-4828-a0f6-8836c2063992',NULL,'Code Dynamite','2024-04-15 18:37:44.08878+07','2024-04-15 18:37:44.08878+07',false, 'localhost'),
-    ('08b65a39-394f-4977-a5fa-3fe145b620f8',NULL,'Moodle','2024-04-15 18:09:29.488151+07','2024-04-15 18:09:29.488151+07',false, 'localhost');
+    ('9ba179ed-d26d-4828-a0f6-8836c2063992',NULL,'Code Dynamite','2024-04-15 18:37:44.08878+07','2024-04-15 18:37:44.08878+07',false, 'localhost');
+
+INSERT INTO public.organization
+(id, description, "name", api_key, moodle_url, created_at, updated_at, is_deleted)
+VALUES ('08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'moodle', 'Moodle', 'cdf90b5bf53bcae577c60419702dbee7',
+        'http://62.171.185.208:8081/webservice/rest/server.php', '2024-04-15 18:09:29.488', '2024-04-15 18:09:29.488',
+        false);
 
 INSERT INTO public.role_moodle(id, name) VALUES (1,'Quản lý'), (2,'Người tạo khóa học'), (3,'Giảng viên 1'), (4,'Giảng viên'), (5,'Học sinh'), (6,'Guest');
 INSERT INTO public."user" (id,user_id_moodle,role_moodle_id,org_id,username,email,dob,first_name,last_name,phone,address,avatar_url,last_login,is_deleted,created_at,updated_at) VALUES

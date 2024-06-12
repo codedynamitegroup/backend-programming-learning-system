@@ -184,6 +184,39 @@ public class ContestController {
         return ResponseEntity.ok(queryAllContestsResponse);
     }
 
+    @GetMapping("/me")
+    @Operation(summary = "Get all my registered contests.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllContestsResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllContestsResponse> getAllMyContests(
+            @RequestParam(defaultValue = "") String searchName,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize
+    ) {
+        String email = null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
+        QueryAllContestsResponse queryAllContestsResponse =
+                contestApplicationService.queryAllMyContests(QueryAllMyContestsCommand
+                        .builder()
+                        .pageNo(pageNo)
+                        .pageSize(pageSize)
+                        .searchName(searchName)
+                        .email(email)
+                        .build());
+        log.info("Returning all contests: {}", queryAllContestsResponse.getContests());
+        return ResponseEntity.ok(queryAllContestsResponse);
+    }
+
     @GetMapping("/admin")
     @Operation(summary = "Get all contests for admin.")
     @ApiResponses(value = {

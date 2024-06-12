@@ -78,6 +78,22 @@ public class ContestCommandHandler {
     }
 
     @Transactional(readOnly = true)
+    public QueryAllContestsResponse queryAllMyContestsResponse(
+            QueryAllMyContestsCommand queryAllMyContestsCommand
+    ) {
+        Page<Contest> contests = contestQueryHelper
+                .queryAllMyContests(
+                        queryAllMyContestsCommand.getSearchName(),
+                        queryAllMyContestsCommand.getPageNo(),
+                        queryAllMyContestsCommand.getPageSize(),
+                        queryAllMyContestsCommand.getEmail());
+
+        log.info("Returning all my contests: {}", contests);
+
+        return contestDataMapper.contestsToQueryAllContestsResponse(contests);
+    }
+
+    @Transactional(readOnly = true)
     public QueryStatisticsOfContestResponse queryStatisticsOfContestResponse(
             QueryStatisticsOfContestCommand queryStatisticsOfContestCommand
     ) {

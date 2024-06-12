@@ -194,6 +194,33 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
 """, nativeQuery = true)
     List<ContestProjection> findMostPopularContests(ZonedDateTime now);
 
+    @Query(value = """
+    select c.id as id,
+                c.name as name,
+                c.description as description,
+                c.prizes as prizes,
+                c.rules as rules,
+                c.scoring as scoring,
+                c.thumbnail_url as thumbnailUrl,
+                c.start_time as startTime,
+                c.end_time as endTime,
+                c.is_public as isPublic,
+                c.is_restricted_forum as isRestrictedForum,
+                c.is_disabled_forum as isDisabledForum,
+                c.created_by as createdById,
+                c.updated_by as updatedById,
+                c.created_at as createdAt,
+                c.updated_at as updatedAt,
+                count(cu.id) as numOfParticipants
+    from contest c
+    left join contest_user cu on cu.contest_id = c.id
+    where cu.user_id = ?1
+    and (cast(?2 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?2 as text), '%')))
+    group by c.id
+    order by c.start_time desc
+""", nativeQuery = true)
+    Page<ContestProjection> findAllMyContestsContainsSearchName(UUID userId, String searchValue, Pageable pageable);
+
     @Query("select count(c.id) from ContestEntity c")
     int countAllContests();
 

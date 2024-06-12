@@ -95,7 +95,7 @@ public class UserController {
     }
 
     @PostMapping("/social-login")
-    @Operation(summary = "Socal login user.")
+    @Operation(summary = "Social login user.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
@@ -203,7 +203,8 @@ public class UserController {
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllUsersResponse> getAllUsers(
             @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "10") Integer pageSize
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "") String searchName
     ) {
         QueryAllUsersResponse users = userApplicationService.findAllUsers(QueryAllUsersCommand.builder()
                 .pageNo(pageNo)
