@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 /**
  * com.backend.programming.learning.system.auth.service.application.rest.moodle
  * Create by Dang Ngoc Tien
@@ -22,7 +24,7 @@ public class AuthMoodleController {
     private final MoodleApplicationService moodleApplicationService;
 
     @PostMapping
-    public ResponseEntity<String> syncUser() {
-        return ResponseEntity.ok(moodleApplicationService.syncUser());
+    public ResponseEntity<String> syncUser(UUID organizationId) {
+        return ResponseEntity.ok(moodleApplicationService.syncUser(organizationId));
     }
 }

@@ -8,6 +8,7 @@ import java.util.UUID;
 
 public interface CourseUserRepository {
     CourseUser saveCourseUser(CourseUser courseUser);
+    List<CourseUser> findAll();
 
     void saveAll(List<CourseUser> courseUsers);
 

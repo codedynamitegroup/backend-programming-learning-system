@@ -34,6 +34,7 @@ public class AssignmentDataAccessMapper {
                 .type(assignment.getType())
                 .allowSubmitLate(assignment.getAllowSubmitLate())
                 .visible(assignment.getVisible())
+                .createdAt(assignment.getCreatedAt())
                 .build();
     }
 
@@ -58,6 +59,7 @@ public class AssignmentDataAccessMapper {
                 .time_limit(assignmentEntity.getTimeLimit())
                 .type(assignmentEntity.getType())
                 .visible(assignmentEntity.getVisible())
+                .createdAt(assignmentEntity.getCreatedAt())
                 .build();
     }
 

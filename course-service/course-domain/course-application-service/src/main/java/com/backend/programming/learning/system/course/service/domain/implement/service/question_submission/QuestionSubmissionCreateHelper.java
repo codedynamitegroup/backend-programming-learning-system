@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 
 import com.backend.programming.learning.system.course.service.domain.CourseDomainService;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.MarkQuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
 import com.backend.programming.learning.system.course.service.domain.entity.Question;
 import com.backend.programming.learning.system.course.service.domain.entity.QuestionSubmission;
@@ -14,6 +15,8 @@ import com.backend.programming.learning.system.course.service.domain.ports.outpu
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * com.backend.programming.learning.system.implement.question_submission
@@ -50,5 +53,9 @@ public class QuestionSubmissionCreateHelper {
         }
         log.info("Question submission saved successfully with id: {}", saveQuestionSubmission.getId().getValue());
         return saveQuestionSubmission;
+    }
+
+    public void markQuestion(List<MarkQuestionSubmissionCommand> markQuestionSubmissionCommandList) {
+        questionSubmissionRepository.markQuestion(markQuestionSubmissionCommandList);
     }
 }

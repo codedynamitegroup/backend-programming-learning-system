@@ -30,6 +30,15 @@ public class CourseUserRepositoryImpl implements CourseUserRepository {
     }
 
     @Override
+    public List<CourseUser> findAll() {
+        return courseUserJpaRepository
+                .findAll()
+                .stream()
+                .map(courseUserDataAccessMapper::courseUserEntityToCourseUser)
+                .toList();
+    }
+
+    @Override
     public void saveAll(List<CourseUser> courseUsers) {
         courseUserJpaRepository.saveAll(courseUserDataAccessMapper.courseUserListToCourseUserEntityList(courseUsers));
     }
