@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.ch
 import com.backend.programming.learning.system.auth.service.domain.dto.method.change_password.ChangedPasswordUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.RegisterUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.forgot_password.*;
@@ -17,7 +18,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.qu
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserEmailCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserProfileCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserApplicationService;
@@ -58,7 +59,7 @@ public class UserController {
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateUserResponse> createUser(@RequestBody CreateUserCommand createUserCommand) {
         log.info("Creating user with email: {}", createUserCommand.getEmail());
-        CreateUserResponse createUserResponse = userApplicationService.createUser(createUserCommand);
+        CreateUserResponse createUserResponse = userApplicationService.createUserByAdmin(createUserCommand);
         log.info("User created with email: {}", createUserResponse.getEmail());
         return ResponseEntity.status(HttpStatus.CREATED).body(createUserResponse);
     }
@@ -72,9 +73,9 @@ public class UserController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<CreateUserResponse> registeredUser(@RequestBody CreateUserCommand createUserCommand) {
-        log.info("Registering user with email: {}", createUserCommand.getEmail());
-        CreateUserResponse createUserResponse = userApplicationService.createUser(createUserCommand);
+    public ResponseEntity<CreateUserResponse> registeredUser(@RequestBody RegisterUserCommand registerUserCommand) {
+        log.info("Registering user with email: {}", registerUserCommand.getEmail());
+        CreateUserResponse createUserResponse = userApplicationService.registerUser(registerUserCommand);
         log.info("User Registered with email: {}", createUserResponse.getEmail());
         return ResponseEntity.status(HttpStatus.CREATED).body(createUserResponse);
     }
@@ -247,14 +248,14 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<?> updateUser(
-            @RequestBody UpdateUserCommand updateUserCommand,
+            @RequestBody UpdateUserProfileCommand updateUserCommand,
             @RequestHeader(value = "Access-Token", required = false) String accessToken) {
         String email = jwtUtils.getEmailFromJwtString(accessToken);
         if (email == null) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid access token");
         }
         log.info("Updating user with email: {}", email);
-        UpdateUserResponse updateUserResponse = userApplicationService.updateUser(UpdateUserCommand.builder()
+        UpdateUserResponse updateUserResponse = userApplicationService.updateUser(UpdateUserProfileCommand.builder()
                 .email(email)
                 .dob(updateUserCommand.getDob())
                 .firstName(updateUserCommand.getFirstName())

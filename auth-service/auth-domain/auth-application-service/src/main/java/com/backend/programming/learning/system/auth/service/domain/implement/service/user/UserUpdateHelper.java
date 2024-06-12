@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.service.user;
 
 import com.backend.programming.learning.system.auth.service.domain.AuthDomainService;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserProfileCommand;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.event.user.auth_to_any_services.UserUpdatedEvent;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
@@ -30,7 +30,7 @@ public class UserUpdateHelper {
     }
 
     @Transactional
-    public UserUpdatedEvent persistUser(UpdateUserCommand updateUserCommand) {
+    public UserUpdatedEvent persistUser(UpdateUserProfileCommand updateUserCommand) {
         User user = getUser(updateUserCommand.getEmail());
         user.setUpdatedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
 

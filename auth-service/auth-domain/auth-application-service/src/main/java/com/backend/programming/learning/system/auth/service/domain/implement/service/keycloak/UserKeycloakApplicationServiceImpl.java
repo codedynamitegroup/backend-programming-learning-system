@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.auth.service.domain.implement.se
 
 import com.backend.programming.learning.system.auth.service.config.KeycloakConfigData;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.RegisterUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserKeycloakApplicationService;
@@ -59,7 +60,7 @@ public class UserKeycloakApplicationServiceImpl implements UserKeycloakApplicati
     }
 
     @Override
-    public void createUser(CreateUserCommand createUserCommand) {
+    public void createUserByAdmin(CreateUserCommand createUserCommand) {
         UserRepresentation userRepresentation = new UserRepresentation();
         userRepresentation.setFirstName(createUserCommand.getFirstName());
         userRepresentation.setLastName(createUserCommand.getLastName());
@@ -90,6 +91,40 @@ public class UserKeycloakApplicationServiceImpl implements UserKeycloakApplicati
             throw new AuthDomainException("Error creating user, please contact with the administrator.");
         }
     }
+
+    @Override
+    public void registerUser(RegisterUserCommand registerUserCommand) {
+        UserRepresentation userRepresentation = new UserRepresentation();
+        userRepresentation.setFirstName(registerUserCommand.getFirstName());
+        userRepresentation.setLastName(registerUserCommand.getLastName());
+        userRepresentation.setEmail(registerUserCommand.getEmail());
+        userRepresentation.setUsername(registerUserCommand.getEmail());
+        userRepresentation.setEnabled(true);
+        userRepresentation.setEmailVerified(false);
+
+        CredentialRepresentation credentialRepresentation = new CredentialRepresentation();
+        credentialRepresentation.setValue(registerUserCommand.getPassword());
+        credentialRepresentation.setTemporary(false);
+        credentialRepresentation.setType(CredentialRepresentation.PASSWORD);
+
+        List<CredentialRepresentation> list = new ArrayList<>();
+        list.add(credentialRepresentation);
+        userRepresentation.setCredentials(list);
+
+        UsersResource usersResource = getUsersResource();
+        Response response = usersResource.create(userRepresentation);
+
+        if (Objects.equals(201, response.getStatus())) {
+            log.info("User created with username: {}", registerUserCommand.getEmail());
+        }  else if (Objects.equals(409, response.getStatus())) {
+            log.error("User exist already!");
+            throw new AuthDomainException("User exist already!");
+        } else {
+            log.error("Error creating user, please contact with the administrator.");
+            throw new AuthDomainException("Error creating user, please contact with the administrator.");
+        }
+    }
+
     @Override
     public void deleteUser(User user) {
         UsersResource usersResource = getUsersResource();

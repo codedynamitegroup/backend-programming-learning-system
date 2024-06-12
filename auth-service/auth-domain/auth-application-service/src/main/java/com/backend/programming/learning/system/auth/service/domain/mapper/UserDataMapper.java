@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.auth.service.domain.mapper;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateSocialLoginUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.RegisterUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.message.user.UserRequest;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryAllUsersResponse;
@@ -42,11 +43,18 @@ public class UserDataMapper {
                 .username(createUserCommand.getUsername())
                 .firstName(createUserCommand.getFirstName())
                 .lastName(createUserCommand.getLastName())
-                .phone(createUserCommand.getPhone())
                 .organization(createUserCommand.getOrganizationId() == null ? null :
                         Organization.builder()
                                 .id(new OrganizationId(createUserCommand.getOrganizationId()))
                                 .build())
+                .build();
+    }
+
+    public User registerUserCommandToUser(RegisterUserCommand registerUserCommand) {
+        return User.builder()
+                .email(registerUserCommand.getEmail())
+                .firstName(registerUserCommand.getFirstName())
+                .lastName(registerUserCommand.getLastName())
                 .build();
     }
 
