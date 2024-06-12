@@ -6,7 +6,7 @@ import lombok.Builder;
 @Builder
 public class QueryLineChartResponse {
     @JsonProperty("data")
-    private final float[] data;
+    private final double[] data;
 
     @JsonProperty("label")
     private final String label;

@@ -525,6 +525,8 @@ public class ContestQueryHelper {
                 .closedContest(closedContest)
                 .upcomingContest(upcomingContest)
                 .participantTrend(calculateParticipantTrend(allContest))
+                .popularContest(mapPopularContestWithChart(popularContests))
+                .popularContestName(popularContests.stream().map(PopularContestDTO::getContestName).toArray(String[]::new))
                 .build();
     }
 
@@ -539,9 +541,9 @@ public class ContestQueryHelper {
 
         List<QueryLineChartResponse> result = new ArrayList<>();
 
-        final float[] totalContestInMonth = new float[12];
-        final float[] totalTrendingRegisterData = new float[12];
-        float[] averageTrendingRegisterData;
+        final double[] totalContestInMonth = new double[12];
+        final double[] totalTrendingRegisterData = new double[12];
+        double[] averageTrendingRegisterData;
 
         // Total participant trend
         contestUsers.forEach(contestUser -> {
@@ -578,13 +580,31 @@ public class ContestQueryHelper {
                 averageTrendingRegisterData[i] = 0;
             else
             {
-                float temp = totalTrendingRegisterData[i] / totalContestInMonth[i];
+                double temp = totalTrendingRegisterData[i] / totalContestInMonth[i];
                 averageTrendingRegisterData[i] = temp;
             }
         }
         result.add(QueryLineChartResponse.builder()
                 .label("Average")
                 .data(averageTrendingRegisterData)
+                .build());
+
+        return result;
+    }
+
+    private List<QueryLineChartResponse> mapPopularContestWithChart( List<PopularContestDTO> popularContests) {
+        List<QueryLineChartResponse> result = new ArrayList<>();
+
+        double[] totalSubmission = popularContests.stream().mapToDouble(PopularContestDTO::getTotalSubmissions).toArray();
+        double[] totalParticipant = popularContests.stream().mapToDouble(PopularContestDTO::getTotalParticipants).toArray();
+
+        result.add(QueryLineChartResponse.builder()
+                .label("Participant")
+                .data(totalParticipant)
+                .build());
+        result.add(QueryLineChartResponse.builder()
+                .label("Submission")
+                .data(totalSubmission)
                 .build());
 
         return result;

@@ -13,7 +13,8 @@ public record QueryGeneralStatisticsContestResponse(
         long closedContest,
         long upcomingContest,
         List<QueryLineChartResponse> participantTrend,
-        List<QueryLineChartResponse> popularContest
+        List<QueryLineChartResponse> popularContest,
+        String[] popularContestName
 ) {
 
 }
