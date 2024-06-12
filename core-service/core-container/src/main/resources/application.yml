@@ -28,8 +28,8 @@ core-service:
   question-request-code-assessment-topic-name: core-question-request-code-assessment
   question-response-code-assessment-topic-name: core-question-response-code-assessment
 
-  core-user-request-topic-name: core-user-request
-  user-response-topic-name: user-response
+  auth-service-user-request-to-core-service-topic-name: auth-service-user-request-to-core-service
+  any-services-user-response-to-auth-service-topic-name: any-services-user-response-to-auth-service
 
   core-organization-request-topic-name: core-organization-request
   organization-response-topic-name: organization-response
@@ -101,7 +101,7 @@ kafka-consumer-config:
 
   core-service-calendar-event-consumer-group-id: core-service-calendar-event-topic-consumer
 
-  core-service-user-request-group-id: core-service-user-request-topic
+  auth-service-to-core-service-user-request-group-id: auth-service-to-core-service-user-request-topic
 
   code-question-update-consumer-group-id: code-question-update-topic-consumer
   code-submission-update-consumer-group-id: code-submission-update-topic-consumer

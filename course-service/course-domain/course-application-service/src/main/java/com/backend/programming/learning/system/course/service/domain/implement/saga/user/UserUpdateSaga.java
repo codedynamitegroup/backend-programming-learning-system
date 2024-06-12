@@ -16,6 +16,8 @@ import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
+import static com.backend.programming.learning.system.saga.user.SagaConstants.COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME;
+
 @Slf4j
 @Component
 public class UserUpdateSaga implements SagaStep<UserResponse> {
@@ -31,7 +33,7 @@ public class UserUpdateSaga implements SagaStep<UserResponse> {
     @Transactional
     public void process(UserResponse userResponse) {
         Optional<UserOutboxMessage> userOutboxMessageResponse =
-                userOutboxHelper.getUserOutboxMessageBySagaIdAndCopyState(
+                userOutboxHelper.getUserOutboxMessageBySagaIdAndCopyState(COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME,
                         UUID.fromString(userResponse.getSagaId()), userResponse.getState());
         if (userOutboxMessageResponse.isEmpty()) {
             log.info("An outbox message with saga id: {} is already processed!", userResponse.getSagaId());
@@ -54,7 +56,7 @@ public class UserUpdateSaga implements SagaStep<UserResponse> {
     @Transactional
     public void rollback(UserResponse userResponse) {
         Optional<UserOutboxMessage> userOutboxMessageResponse =
-                userOutboxHelper.getUserOutboxMessageBySagaIdAndCopyState(
+                userOutboxHelper.getUserOutboxMessageBySagaIdAndCopyState(COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME,
                         UUID.fromString(userResponse.getSagaId()), userResponse.getState());
         if (userOutboxMessageResponse.isEmpty()) {
             log.info("An outbox message with saga id: {} is already roll backed!", userResponse.getSagaId());

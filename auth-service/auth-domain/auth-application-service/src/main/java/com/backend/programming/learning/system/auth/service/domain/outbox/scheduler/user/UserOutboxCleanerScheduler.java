@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.backend.programming.learning.system.saga.user.SagaConstants.AUTH_TO_ANY_SERVICES_USER_SAGA_NAME;
+import static com.backend.programming.learning.system.saga.user.SagaConstants.COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME;
+
 @Slf4j
 @Component
 public class UserOutboxCleanerScheduler implements OutboxScheduler {
@@ -24,16 +27,30 @@ public class UserOutboxCleanerScheduler implements OutboxScheduler {
     @Override
     @Scheduled(cron = "@midnight")
     public void processOutboxMessage() {
-        Optional<List<UserOutboxMessage>> userOutboxMessagesResponse = userOutboxHelper
-                .getUserOutboxMessageByOutboxStatusAndSagaStatus(OutboxStatus.COMPLETED,
+        Optional<List<UserOutboxMessage>> userOutboxMessagesAuthToAnyServicesResponse = userOutboxHelper
+                .getUserOutboxMessageByOutboxStatusAndSagaStatus(AUTH_TO_ANY_SERVICES_USER_SAGA_NAME, OutboxStatus.COMPLETED,
                         SagaStatus.SUCCEEDED, SagaStatus.FAILED, SagaStatus.COMPENSATED);
-        if (userOutboxMessagesResponse.isPresent()) {
-            List<UserOutboxMessage> userOutboxMessages = userOutboxMessagesResponse.get();
+        if (userOutboxMessagesAuthToAnyServicesResponse.isPresent()) {
+            List<UserOutboxMessage> userOutboxMessages = userOutboxMessagesAuthToAnyServicesResponse.get();
             log.info("Received {} UserOutboxMessage for clean-up. The payloads: {}",
                     userOutboxMessages.size(),
                     userOutboxMessages.stream().map(UserOutboxMessage::getPayload)
                             .collect(Collectors.joining("\n")));
-            userOutboxHelper.deleteUserOutboxMessageByOutboxStatusAndSagaStatus(OutboxStatus.COMPLETED,
+            userOutboxHelper.deleteUserOutboxMessageByOutboxStatusAndSagaStatus(AUTH_TO_ANY_SERVICES_USER_SAGA_NAME, OutboxStatus.COMPLETED,
+                    SagaStatus.SUCCEEDED, SagaStatus.FAILED, SagaStatus.COMPENSATED);
+            log.info("{} UserOutboxMessage deleted!", userOutboxMessages.size());
+        }
+
+        Optional<List<UserOutboxMessage>> userOutboxMessagesCourseToAuthServiceResponse = userOutboxHelper
+                .getUserOutboxMessageByOutboxStatusAndSagaStatus(COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME, OutboxStatus.COMPLETED,
+                        SagaStatus.SUCCEEDED, SagaStatus.FAILED, SagaStatus.COMPENSATED);
+        if (userOutboxMessagesCourseToAuthServiceResponse.isPresent()) {
+            List<UserOutboxMessage> userOutboxMessages = userOutboxMessagesCourseToAuthServiceResponse.get();
+            log.info("Received {} UserOutboxMessage for clean-up. The payloads: {}",
+                    userOutboxMessages.size(),
+                    userOutboxMessages.stream().map(UserOutboxMessage::getPayload)
+                            .collect(Collectors.joining("\n")));
+            userOutboxHelper.deleteUserOutboxMessageByOutboxStatusAndSagaStatus(COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME, OutboxStatus.COMPLETED,
                     SagaStatus.SUCCEEDED, SagaStatus.FAILED, SagaStatus.COMPENSATED);
             log.info("{} UserOutboxMessage deleted!", userOutboxMessages.size());
         }

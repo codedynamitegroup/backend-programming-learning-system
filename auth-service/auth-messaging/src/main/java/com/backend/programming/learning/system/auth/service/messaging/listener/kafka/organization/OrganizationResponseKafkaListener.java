@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.auth.service.messaging.listener.kafka.organization;
 
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
-import com.backend.programming.learning.system.auth.service.domain.ports.input.message.listener.CoreServiceOrganizationResponseMessageListener;
+import com.backend.programming.learning.system.auth.service.domain.ports.input.message.listener.organization.OrganizationResponseMessageListener;
 import com.backend.programming.learning.system.auth.service.messaging.mapper.OrganizationMessagingDataMapper;
 import com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseAvroModel;
 import com.backend.programming.learning.system.kafka.consumer.KafkaConsumer;
@@ -18,10 +18,10 @@ import java.util.List;
 @Slf4j
 @Component
 public class OrganizationResponseKafkaListener implements KafkaConsumer<OrganizationResponseAvroModel> {
-    private final CoreServiceOrganizationResponseMessageListener organizationResponseMessageListener;
+    private final OrganizationResponseMessageListener organizationResponseMessageListener;
     private final OrganizationMessagingDataMapper organizationMessagingDataMapper;
 
-    public OrganizationResponseKafkaListener(CoreServiceOrganizationResponseMessageListener organizationResponseMessageListener, OrganizationMessagingDataMapper organizationMessagingDataMapper) {
+    public OrganizationResponseKafkaListener(OrganizationResponseMessageListener organizationResponseMessageListener, OrganizationMessagingDataMapper organizationMessagingDataMapper) {
         this.organizationResponseMessageListener = organizationResponseMessageListener;
         this.organizationMessagingDataMapper = organizationMessagingDataMapper;
     }

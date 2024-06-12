@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.ports.output.repository;
 
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.PopularContestDTO;
 import com.backend.programming.learning.system.core.service.domain.entity.Contest;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import org.springframework.data.domain.Page;
@@ -15,7 +16,10 @@ public interface ContestRepository {
 
     Page<Contest> findAll(String searchName, String startTimeFilter, Integer page, Integer size, Boolean isAdmin);
 
+    Page<Contest> findAllMyContests(String searchName, UUID userId, Integer page, Integer size);
+
     void deleteContestById(UUID contestId);
     List<Contest> findMostPopularContests();
     int countAllContests();
+    List<PopularContestDTO> findPopularContestsBySubmissionAndParticipant();
 }

@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest_user.CreateContestUserResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.DeleteContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.DeleteContestResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.QueryGeneralStatisticsContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.*;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestResponse;
@@ -177,6 +178,39 @@ public class ContestController {
                         .pageSize(pageSize)
                         .searchName(searchName)
                         .startTimeFilter(startTimeFilter)
+                        .email(email)
+                        .build());
+        log.info("Returning all contests: {}", queryAllContestsResponse.getContests());
+        return ResponseEntity.ok(queryAllContestsResponse);
+    }
+
+    @GetMapping("/me")
+    @Operation(summary = "Get all my registered contests.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllContestsResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllContestsResponse> getAllMyContests(
+            @RequestParam(defaultValue = "") String searchName,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize
+    ) {
+        String email = null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
+        QueryAllContestsResponse queryAllContestsResponse =
+                contestApplicationService.queryAllMyContests(QueryAllMyContestsCommand
+                        .builder()
+                        .pageNo(pageNo)
+                        .pageSize(pageSize)
+                        .searchName(searchName)
                         .email(email)
                         .build());
         log.info("Returning all contests: {}", queryAllContestsResponse.getContests());
@@ -364,4 +398,19 @@ public class ContestController {
         return ResponseEntity.ok(deleteContestResponse);
     }
 
+    @GetMapping("/contest/dashboard-statistics")
+    @Operation(summary = "Get statistics of contests for admin dashboard.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryGeneralStatisticsContestResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryGeneralStatisticsContestResponse> getStatisticsOfContests() {
+        QueryGeneralStatisticsContestResponse queryStatisticContestResponse = contestApplicationService.getStatisticContest();
+
+        log.info("Returning statistics of contests.");
+        return ResponseEntity.ok(queryStatisticContestResponse);
+    }
 }

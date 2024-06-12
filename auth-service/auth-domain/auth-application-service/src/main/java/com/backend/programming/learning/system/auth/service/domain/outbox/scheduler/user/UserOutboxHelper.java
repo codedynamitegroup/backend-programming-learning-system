@@ -1,12 +1,13 @@
 package com.backend.programming.learning.system.auth.service.domain.outbox.scheduler.user;
 
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthDomainException;
-import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserOutboxMessage;
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserEventPayload;
+import com.backend.programming.learning.system.auth.service.domain.outbox.model.user.UserOutboxMessage;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserOutboxRepository;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.ServiceName;
+import com.backend.programming.learning.system.domain.valueobject.UserOutboxServiceType;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -21,8 +22,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.backend.programming.learning.system.saga.user.SagaConstants.USER_SAGA_NAME;
-
 @Slf4j
 @Component
 public class UserOutboxHelper {
@@ -36,16 +35,10 @@ public class UserOutboxHelper {
 
     @Transactional(readOnly = true)
     public Optional<List<UserOutboxMessage>> getUserOutboxMessageByOutboxStatusAndSagaStatus(
+            String type,
             OutboxStatus outboxStatus, SagaStatus... sagaStatus) {
         return userOutboxRepository.findByTypeAndOutboxStatusAndSagaStatus(
-                USER_SAGA_NAME, outboxStatus, sagaStatus);
-    }
-
-    @Transactional(readOnly = true)
-    public Optional<UserOutboxMessage> getUserOutboxMessageBySagaIdAndServiceNameAndSagaStatus(
-            UUID sagaId, ServiceName serviceName, SagaStatus... sagaStatus) {
-        return userOutboxRepository.findByTypeAndSagaIdAndServiceNameAndSagaStatus(
-                USER_SAGA_NAME, sagaId, serviceName, sagaStatus);
+                type, outboxStatus, sagaStatus);
     }
 
     @Transactional
@@ -59,8 +52,9 @@ public class UserOutboxHelper {
     }
 
     @Transactional
-    public void saveUserOutboxMessage(UserEventPayload userEventPayload,
-                                           ServiceName serviceName,
+    public void saveUserOutboxMessage(String type,
+                                      UserEventPayload userEventPayload,
+                                      ServiceName serviceName,
                                       CopyState state,
                                       OutboxStatus outboxStatus,
                                       SagaStatus sagaStatus,
@@ -69,22 +63,13 @@ public class UserOutboxHelper {
                 .id(UUID.randomUUID())
                 .sagaId(sagaId)
                 .createdAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)))
-                .type(USER_SAGA_NAME)
+                .type(type)
                 .payload(createPayload(userEventPayload))
                 .copyState(state)
                 .outboxStatus(outboxStatus)
                 .sagaStatus(sagaStatus)
                 .serviceName(serviceName)
                 .build());
-    }
-
-    private String createdPayload(UserEventPayload userEventPayload) {
-        try {
-            return objectMapper.writeValueAsString(userEventPayload);
-        } catch (JsonProcessingException e) {
-            log.error("Could not create UserEventPayload json!", e);
-            throw new AuthDomainException("Could not create UserEventPayload json!", e);
-        }
     }
 
     private String createPayload(UserEventPayload userEventPayload) {
@@ -97,16 +82,18 @@ public class UserOutboxHelper {
     }
 
     @Transactional
-    public void deleteUserOutboxMessageByOutboxStatusAndSagaStatus(OutboxStatus outboxStatus,
+    public void deleteUserOutboxMessageByOutboxStatusAndSagaStatus(String type, OutboxStatus outboxStatus,
                                                                    SagaStatus... sagaStatus) {
-        userOutboxRepository.deleteByTypeAndOutboxStatusAndSagaStatus(USER_SAGA_NAME, outboxStatus, sagaStatus);
+        userOutboxRepository.deleteByTypeAndOutboxStatusAndSagaStatus(type, outboxStatus, sagaStatus);
     }
 
     @Transactional(readOnly = true)
-    public Optional<UserOutboxMessage> getUserOutboxMessageBySagaIdAndCopyState(UUID sagaId,
-                                                                                CopyState copyState) {
-        return userOutboxRepository.findByTypeAndSagaIdAndCopyStateAndOutboxStatus(USER_SAGA_NAME, sagaId,
-                copyState, OutboxStatus.COMPLETED);
+    public Optional<UserOutboxMessage> findByTypeAndSagaIdAndSagaStatusAndServiceName(String type,
+                                                                                                                UUID sagaId,
+                                                                                                 SagaStatus sagaStatus,
+                                                                                                 ServiceName serviceName) {
+        return userOutboxRepository.findByTypeAndSagaIdAndSagaStatusAndServiceName(type, sagaId,
+                sagaStatus, serviceName);
     }
 
     @Transactional
@@ -114,5 +101,13 @@ public class UserOutboxHelper {
         userOutboxMessage.setOutboxStatus(outboxStatus);
         save(userOutboxMessage);
         log.info("User outbox table status is updated as: {}", outboxStatus.name());
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<UserOutboxMessage> findByTypeAndSagaIdAndCopyStateAndServiceName(String type, UUID sagaId,
+                                                                                CopyState copyState,
+                                                                                ServiceName serviceName) {
+        return userOutboxRepository.findByTypeAndSagaIdAndCopyStateAndServiceName(type, sagaId,
+                 copyState, serviceName);
     }
 }

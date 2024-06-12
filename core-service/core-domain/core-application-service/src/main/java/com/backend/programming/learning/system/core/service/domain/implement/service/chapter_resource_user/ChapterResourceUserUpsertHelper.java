@@ -18,18 +18,23 @@ import java.util.UUID;
 public class ChapterResourceUserUpsertHelper {
     private final UserRepository userRepository;
     private final ChapterResourceUserRepository chapterResourceUserRepository;
+    private final ChapterResourceRepository chapterResourceRepository;
 
     public ChapterResourceUserUpsertHelper(UserRepository userRepository,
                                            ChapterResourceRepository chapterResourceRepository,
-                                           ChapterResourceUserRepository chapterResourceUserRepository) {
+                                           ChapterResourceUserRepository chapterResourceUserRepository,
+                                           ChapterResourceRepository chapterResourceRepository1) {
         this.userRepository = userRepository;
         this.chapterResourceUserRepository = chapterResourceUserRepository;
+        this.chapterResourceRepository = chapterResourceRepository1;
     }
 
     @Transactional
     public ChapterResourceUser persistChapterResourceUser(
             CreateChapterResourceUserCommand createChapterResourceUserCommand) {
         User user = getUserByEmail(createChapterResourceUserCommand.getEmail());
+        checkChapterResourceIdExists(createChapterResourceUserCommand.getChapterResourceId());
+
         checkChapterResourceByChapterResourceIdAndUserId(
                 createChapterResourceUserCommand.getChapterResourceId(),
                 user.getId().getValue());
@@ -53,6 +58,15 @@ public class ChapterResourceUserUpsertHelper {
         return user.get();
     }
 
+    private void checkChapterResourceIdExists(UUID chapterResourceId) {
+        Optional<ChapterResource> chapterResource = chapterResourceRepository
+                .findChapterResourceById(chapterResourceId);
+        if (chapterResource.isEmpty()) {
+            log.warn("ChapterResource with id: {} not found", chapterResourceId);
+            throw new CoreDomainException("Could not find chapterResource with id: " + chapterResourceId);
+        }
+    }
+
     private void checkChapterResourceByChapterResourceIdAndUserId(UUID chapterResourceId, UUID userId) {
         Optional<ChapterResourceUser> chapterResourceUser = chapterResourceUserRepository
                 .findChapterResourceUserByChapterResourceIdAndUserId(chapterResourceId, userId);
@@ -70,7 +84,6 @@ public class ChapterResourceUserUpsertHelper {
 
         if (savedChapterResourceUser == null) {
             log.error("Could not save chapterResourceUser");
-
             throw new CoreDomainException("Could not save chapterResourceUser");
         }
         log.info("Chapter Resource User saved with id: {}", chapterResourceUser.getId().getValue());

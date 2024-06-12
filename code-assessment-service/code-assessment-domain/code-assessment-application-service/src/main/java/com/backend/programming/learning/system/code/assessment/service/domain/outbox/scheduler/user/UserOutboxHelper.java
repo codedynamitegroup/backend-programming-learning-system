@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.backend.programming.learning.system.saga.user.SagaConstants.USER_SAGA_NAME;
+import static com.backend.programming.learning.system.saga.user.SagaConstants.AUTH_TO_ANY_SERVICES_USER_SAGA_NAME;
 
 @Slf4j
 @Component
@@ -35,18 +35,18 @@ public class UserOutboxHelper {
     @Transactional(readOnly = true)
     public Optional<UserOutboxMessage> getUserOutboxMessageBySagaIdAndCopyState(UUID sagaId,
                                                                                 CopyState copyState) {
-        return userOutboxRepository.findByTypeAndSagaIdAndCopyStateAndOutboxStatus(USER_SAGA_NAME, sagaId,
+        return userOutboxRepository.findByTypeAndSagaIdAndCopyStateAndOutboxStatus(AUTH_TO_ANY_SERVICES_USER_SAGA_NAME, sagaId,
                 copyState, OutboxStatus.COMPLETED);
     }
 
     @Transactional(readOnly = true)
     public Optional<List<UserOutboxMessage>> getUserOutboxMessageByOutboxStatus(OutboxStatus outboxStatus) {
-        return userOutboxRepository.findByTypeAndOutboxStatus(USER_SAGA_NAME, outboxStatus);
+        return userOutboxRepository.findByTypeAndOutboxStatus(AUTH_TO_ANY_SERVICES_USER_SAGA_NAME, outboxStatus);
     }
 
     @Transactional
     public void deleteUserOutboxMessageByOutboxStatus(OutboxStatus outboxStatus) {
-        userOutboxRepository.deleteByTypeAndOutboxStatus(USER_SAGA_NAME, outboxStatus);
+        userOutboxRepository.deleteByTypeAndOutboxStatus(AUTH_TO_ANY_SERVICES_USER_SAGA_NAME, outboxStatus);
     }
 
     @Transactional
@@ -56,9 +56,8 @@ public class UserOutboxHelper {
                                       UUID sagaId) {
         save(UserOutboxMessage.builder()
                 .id(UUID.randomUUID())
-                .type(USER_SAGA_NAME)
+                .type(AUTH_TO_ANY_SERVICES_USER_SAGA_NAME)
                 .sagaId(sagaId)
-                .type(USER_SAGA_NAME)
                 .createdAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)))
                 .processedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)))
                 .payload(createdPayload(userEventPayload))

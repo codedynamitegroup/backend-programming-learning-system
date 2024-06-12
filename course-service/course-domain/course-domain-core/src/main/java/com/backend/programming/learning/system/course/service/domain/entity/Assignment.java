@@ -5,8 +5,8 @@ import com.backend.programming.learning.system.course.service.domain.valueobject
 import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.Type;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.UUID;
 
 public class Assignment extends AggregateRoot<AssignmentId> {
@@ -27,6 +27,7 @@ public class Assignment extends AggregateRoot<AssignmentId> {
 
     private Boolean allowSubmitLate;
     private ZonedDateTime time_limit;
+    private ZonedDateTime createdAt;
     private Type type;
     private Boolean visible;
 
@@ -47,6 +48,7 @@ public class Assignment extends AggregateRoot<AssignmentId> {
         time_limit = builder.time_limit;
         type = builder.type;
         visible = builder.visible;
+        createdAt = builder.createdAt;
     }
 
     public void setTime_open(ZonedDateTime time_open) {
@@ -93,10 +95,13 @@ public class Assignment extends AggregateRoot<AssignmentId> {
         return activity;
     }
 
+    public ZonedDateTime getCreatedAt() {
+        return createdAt;
+    }
+
     public void setActivity(String activity) {
         this.activity = activity;
     }
-
 
     public Integer getAssignmentIdMoodle() {
         return assignmentIdMoodle;
@@ -176,6 +181,7 @@ public class Assignment extends AggregateRoot<AssignmentId> {
 
     public void initializeAssignment() {
         super.setId(new AssignmentId(UUID.randomUUID()));
+        createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
     }
 
 
@@ -197,6 +203,7 @@ public class Assignment extends AggregateRoot<AssignmentId> {
         private Boolean allowSubmitLate;
         private Float maxScores;
         private ZonedDateTime time_open;
+        private ZonedDateTime createdAt;
         private ZonedDateTime time_close;
         private ZonedDateTime time_limit;
         private Type type;
@@ -221,6 +228,11 @@ public class Assignment extends AggregateRoot<AssignmentId> {
 
         public Builder courseId(CourseId val) {
             courseId = val;
+            return this;
+        }
+
+        public Builder createdAt(ZonedDateTime val) {
+            createdAt = val;
             return this;
         }
 

@@ -1,19 +1,12 @@
 package com.backend.programming.learning.system.core.service.dataaccess.contest.adapter;
 
-import com.backend.programming.learning.system.core.service.dataaccess.chapter.mapper.ChapterDataAccessMapper;
-import com.backend.programming.learning.system.core.service.dataaccess.chapter.repository.ChapterJpaRepository;
 import com.backend.programming.learning.system.core.service.dataaccess.contest.mapper.ContestDataAccessMapper;
-import com.backend.programming.learning.system.core.service.dataaccess.contest.projection.ContestProjection;
 import com.backend.programming.learning.system.core.service.dataaccess.contest.repository.ContestJpaRepository;
-import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
-import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
-import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.PopularContestDTO;
 import com.backend.programming.learning.system.core.service.domain.entity.Contest;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ChapterRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ContestRepository;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestStartTimeFilter;
-import com.backend.programming.learning.system.domain.DomainConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -82,6 +75,14 @@ public class ContestRepositoryImpl implements ContestRepository {
     }
 
     @Override
+    public Page<Contest> findAllMyContests(String searchName, UUID userId, Integer page, Integer size) {
+        Pageable paging = PageRequest.of(page, size);
+        return contestJpaRepository.findAllMyContestsContainsSearchName(
+                        userId, searchName, paging)
+                .map(contestDataAccessMapper::contestProjectionToContest);
+    }
+
+    @Override
     public void deleteContestById(UUID contestId) {
         contestJpaRepository.deleteById(contestId);
     }
@@ -98,5 +99,13 @@ public class ContestRepositoryImpl implements ContestRepository {
     @Override
     public int countAllContests() {
         return contestJpaRepository.countAllContests();
+    }
+
+    @Override
+    public List<PopularContestDTO> findPopularContestsBySubmissionAndParticipant() {
+        return contestJpaRepository.findMostPopularContestsByParticipantAndSubmission()
+                .stream()
+                .map(contestDataAccessMapper::popularContestProjectionToPopularContestDTO)
+                .toList();
     }
 }

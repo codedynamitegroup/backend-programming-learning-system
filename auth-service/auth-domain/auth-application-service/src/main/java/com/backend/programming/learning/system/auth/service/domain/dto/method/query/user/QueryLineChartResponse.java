@@ -10,4 +10,7 @@ public class QueryLineChartResponse {
 
     @JsonProperty("label")
     private final String label;
+
+    @JsonProperty("area")
+    private final boolean area;
 }

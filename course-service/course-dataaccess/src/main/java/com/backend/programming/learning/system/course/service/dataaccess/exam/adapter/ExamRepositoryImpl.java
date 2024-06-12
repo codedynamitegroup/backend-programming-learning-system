@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -60,5 +61,13 @@ public class ExamRepositoryImpl implements ExamRepository {
     @Override
     public Integer countStudent(ExamId examId) {
         return examJpaRepository.countStudent(examId.getValue());
+    }
+
+    @Override
+    public List<Exam> findRecentExam() {
+        return examJpaRepository.findRecentExam()
+                .stream()
+                .map(examDataAccessMapper::examEntityToExam)
+                .toList();
     }
 }

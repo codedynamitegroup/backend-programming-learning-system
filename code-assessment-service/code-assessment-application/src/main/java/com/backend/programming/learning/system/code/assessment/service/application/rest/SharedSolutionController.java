@@ -58,20 +58,32 @@ public class SharedSolutionController {
     }
 
     //view
-    @PostMapping("/list")
+    @GetMapping
     public ResponseEntity<GetSharedSolutionsResponse>
     getSharedSolutions(
-            @RequestBody GetSharedSolutionByCodeQuestionIdCommand command,
-            @RequestParam(defaultValue = "${code-assessment-service.default-page-number}") Integer pageNo,
-            @RequestParam(defaultValue = "${code-assessment-service.default-page-size}") Integer pageSize
+            @RequestParam UUID codeQuestionId,
+            @RequestParam(required = false) List<UUID> filterTagIds,
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) QueryOrderBy orderBy,
+            @RequestParam(required = false) SharedSolution.SortedFields sortBy,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "5") Integer pageSize
     ){
-        command.setPageNum(pageNo);
-        command.setPageSize(pageSize);
+        GetSharedSolutionByCodeQuestionIdCommand command =
+                GetSharedSolutionByCodeQuestionIdCommand.builder()
+                        .codeQuestionId(codeQuestionId)
+                        .filterTagIds(filterTagIds)
+                        .search(search)
+                        .orderBy(orderBy)
+                        .sortBy(sortBy)
+                        .pageNum(pageNo)
+                        .pageSize(pageSize)
+                        .build();
 
         if(command.getOrderBy() == null)
             command.setOrderBy(QueryOrderBy.DESC);
         if(command.getSortBy() == null)
-            command.setSortBy(SharedSolution.SortedFields.totalVote);
+            command.setSortBy(SharedSolution.SortedFields.createdAt);
 
         GetSharedSolutionsResponse response =
                 service.getSharedSolutions(command);

@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.course.service.messaging.mapper;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.message.user.UserRequest;
+import com.backend.programming.learning.system.course.service.domain.dto.method.message.user.UserResponse;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.user.UserEventPayload;
 import com.backend.programming.learning.system.kafka.auth.avro.model.user.CopyState;
 import com.backend.programming.learning.system.kafka.auth.avro.model.user.ServiceName;
@@ -17,6 +18,7 @@ public class UserMessagingDataMapper {
     public UserRequest userCreateRequestAvroModelToUserCreateRequest(UserRequestAvroModel userCreateRequestAvroModel) {
         return UserRequest.builder()
                 .id(userCreateRequestAvroModel.getId())
+                .organizationId(userCreateRequestAvroModel.getOrganizationId())
                 .sagaId(userCreateRequestAvroModel.getSagaId())
                 .userId(userCreateRequestAvroModel.getUserId())
                 .email(userCreateRequestAvroModel.getEmail())
@@ -102,5 +104,17 @@ public class UserMessagingDataMapper {
                 .setPhone(userEventPayload.getPhone())
                 .setUpdatedAt(userEventPayload.getUpdatedAt().toInstant())
                 .build();
+    }
+
+    public UserResponse userResponseAvroModelToUserResponse(UserResponseAvroModel userResponseAvroModel) {
+        return UserResponse.builder()
+                .id(userResponseAvroModel.getId())
+                .sagaId(userResponseAvroModel.getSagaId())
+                .userId(userResponseAvroModel.getUserId())
+                .state(com.backend.programming.learning.system.domain.valueobject
+                        .CopyState.valueOf(userResponseAvroModel.getCopyState().name()))
+                .failureMessages(userResponseAvroModel.getFailureMessages())
+                .build();
+
     }
 }

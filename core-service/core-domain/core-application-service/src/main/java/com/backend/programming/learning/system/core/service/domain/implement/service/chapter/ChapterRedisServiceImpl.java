@@ -9,8 +9,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -33,15 +35,14 @@ class ChapterRedisServiceImpl implements ChapterRedisService {
 
     @Override
     public void clearAllChapters() {
-        redisTemplate.getConnectionFactory().getConnection().flushAll();
+        log.info("Clearing all chapters from redis");
+        Objects.requireNonNull(redisTemplate.getConnectionFactory()).getConnection().flushAll();
     }
 
     @Override
     public QueryAllChaptersResponse getAllChapters(UUID certificateCourseId) {
         String key = getKeyFrom(certificateCourseId.toString());
         String json = (String) redisTemplate.opsForValue().get(key);
-        log.info("key: {}", key);
-        log.info("json: {}", json);
         try {
             return json != null ? objectMapper.readValue(json, QueryAllChaptersResponse.class) : null;
         } catch (JsonProcessingException e) {

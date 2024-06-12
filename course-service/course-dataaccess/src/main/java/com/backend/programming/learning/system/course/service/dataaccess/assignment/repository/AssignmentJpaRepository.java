@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.dataaccess.assign
 
 import com.backend.programming.learning.system.course.service.dataaccess.assignment.entity.AssignmentEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,4 +18,11 @@ public interface AssignmentJpaRepository extends JpaRepository<AssignmentEntity,
 
     Optional<AssignmentEntity> findByAssignmentIdMoodle(Integer assignmentIdMoodle);
 
+    @Query("""
+            SELECT a
+            FROM AssignmentEntity a
+            ORDER BY createdAt DESC
+            LIMIT 5
+            """)
+    List<AssignmentEntity> findRecentAssignment();
 }

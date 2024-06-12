@@ -48,6 +48,7 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/core/contests/{id}").hasAnyRole(ADMIN)
                         .requestMatchers(HttpMethod.DELETE, "/core/contests/{id}").hasAnyRole(ADMIN)
                         .requestMatchers(HttpMethod.GET, "/core/contests/admin").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.GET, "/core/contests/me").hasAnyRole(USER)
                         .requestMatchers(HttpMethod.GET, "/core/contests/{id}/admin/statistics").hasAnyRole(ADMIN)
 
                         // Review

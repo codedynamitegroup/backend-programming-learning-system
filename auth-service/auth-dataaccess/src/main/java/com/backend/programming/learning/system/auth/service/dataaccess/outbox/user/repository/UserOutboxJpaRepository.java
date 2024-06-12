@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.auth.service.dataaccess.outbox.u
 import com.backend.programming.learning.system.auth.service.dataaccess.outbox.user.entity.UserOutboxEntity;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.ServiceName;
+import com.backend.programming.learning.system.domain.valueobject.UserOutboxServiceType;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.backend.programming.learning.system.saga.SagaStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,22 +17,21 @@ import java.util.UUID;
 public interface UserOutboxJpaRepository extends JpaRepository<UserOutboxEntity, UUID> {
 
     Optional<List<UserOutboxEntity>> findByTypeAndOutboxStatusAndSagaStatusIn(String type,
-                                                                                 OutboxStatus outboxStatus,
-                                                                                 List<SagaStatus> sagaStatus);
-
-    Optional<UserOutboxEntity> findByTypeAndSagaIdAndServiceNameAndSagaStatusIn(String type,
-                                                                     UUID sagaId,
-                                                                                ServiceName serviceName,
-                                                                     List<SagaStatus> sagaStatus);
-
+                                                                              OutboxStatus outboxStatus,
+                                                                              List<SagaStatus> sagaStatus);
     void deleteByTypeAndOutboxStatusAndSagaStatusIn(String type,
                                                     OutboxStatus outboxStatus,
                                                     List<SagaStatus> sagaStatus);
 
-    Optional<UserOutboxEntity> findByTypeAndSagaIdAndCopyStateAndOutboxStatus(String type,
+    Optional<UserOutboxEntity> findByTypeAndSagaIdAndCopyStateAndServiceName(String type,
+                                                                                                        UUID sagaId,
+                                                                                                        CopyState copyState,
+                                                                                                        ServiceName serviceName);
+
+    Optional<UserOutboxEntity> findByTypeAndSagaIdAndSagaStatusAndServiceName(String type,
                                                                               UUID sagaId,
-                                                                              CopyState copyState,
-                                                                              OutboxStatus outboxStatus);
+                                                                              SagaStatus sagaStatus,
+                                                                              ServiceName serviceName);
 
 
 }

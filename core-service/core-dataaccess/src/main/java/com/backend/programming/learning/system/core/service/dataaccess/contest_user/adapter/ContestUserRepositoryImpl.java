@@ -87,4 +87,12 @@ public class ContestUserRepositoryImpl implements ContestUserRepository {
         return contestUserJpaRepository.findMyRankOfLeaderboard(userId, contestId)
                 .map(contestUserDataAccessMapper::contestUserLeaderboardToContestUser);
     }
+
+    @Override
+    public List<ContestUser> findAllContestUser() {
+        return contestUserJpaRepository
+                .findAll()
+                .stream()
+                .map(contestUserDataAccessMapper::contestUserEntityToContestUser).toList();
+    }
 }

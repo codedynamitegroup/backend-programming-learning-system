@@ -3,22 +3,30 @@ package com.backend.programming.learning.system.course.service.domain.entity;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.course.service.domain.valueobject.CourseUserId;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 public class CourseUser extends AggregateRoot<CourseUserId> {
-    public User user;
-    public Course course;
-    public RoleMoodle roleMoodle;
+    private User user;
+    private Course course;
+    private RoleMoodle roleMoodle;
+    private ZonedDateTime createdAt;
 
     private CourseUser(Builder builder) {
         super.setId(builder.courseUserId);
         user = builder.user;
         course = builder.course;
         roleMoodle = builder.roleMoodle;
+        createdAt = builder.createdAt;
     }
 
     public User getUser() {
         return user;
+    }
+
+    public ZonedDateTime getCreatedAt() {
+        return createdAt;
     }
 
     public void setUser(User user) {
@@ -47,6 +55,7 @@ public class CourseUser extends AggregateRoot<CourseUserId> {
 
     public void initializeCourseUser() {
         setId(new CourseUserId(UUID.randomUUID()));
+        createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
     }
 
 
@@ -54,6 +63,7 @@ public class CourseUser extends AggregateRoot<CourseUserId> {
         private CourseUserId courseUserId;
         private User user;
         private Course course;
+        private ZonedDateTime createdAt;
 
         private RoleMoodle roleMoodle;
 
@@ -71,6 +81,11 @@ public class CourseUser extends AggregateRoot<CourseUserId> {
 
         public Builder user(User val) {
             user = val;
+            return this;
+        }
+
+        public Builder createdAt(ZonedDateTime val) {
+            createdAt = val;
             return this;
         }
 

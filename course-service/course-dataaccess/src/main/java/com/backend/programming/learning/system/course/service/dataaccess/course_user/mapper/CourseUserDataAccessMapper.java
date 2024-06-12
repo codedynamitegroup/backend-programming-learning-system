@@ -24,9 +24,10 @@ public class CourseUserDataAccessMapper {
     public CourseUserEntity courseUserToCourseUserEntity(CourseUser courseUser) {
         return CourseUserEntity.builder()
                 .id(courseUser.getId().getValue())
-                .user(userDataAccessMapper.userToUserEntity(courseUser.user))
-                .course(courseDataAccessMapper.courseToCourseEntity(courseUser.course))
-                .roleMoodle(roleMoodleDataAccessMapper.roleMoodleToRoleMoodleEntity(courseUser.roleMoodle))
+                .user(userDataAccessMapper.userToUserEntity(courseUser.getUser()))
+                .course(courseDataAccessMapper.courseToCourseEntity(courseUser.getCourse()))
+                .roleMoodle(roleMoodleDataAccessMapper.roleMoodleToRoleMoodleEntity(courseUser.getRoleMoodle()))
+                .createdAt(courseUser.getCreatedAt())
                 .build();
     }
 
@@ -36,6 +37,7 @@ public class CourseUserDataAccessMapper {
                 .user(userDataAccessMapper.userEntityToUser(courseUserEntity.getUser()))
                 .course(courseDataAccessMapper.courseEntityToCourse(courseUserEntity.getCourse()))
                 .roleMoodle(roleMoodleDataAccessMapper.roleMoodleEntityToRoleMoodle(courseUserEntity.getRoleMoodle()))
+                .createdAt(courseUserEntity.getCreatedAt())
                 .build();
     }
 
@@ -45,14 +47,16 @@ public class CourseUserDataAccessMapper {
                 .toList();
     }
     public CourseUserEntity ToCourseUserEntity(CourseUser courseUser) {
-        UserEntity userEntity = userDataAccessMapper.userToUserEntity(courseUser.user);
-        CourseEntity courseEntity = courseDataAccessMapper.courseToCourseEntity(courseUser.course);
-        RoleMoodleEntity roleMoodleEntity = roleMoodleDataAccessMapper.roleMoodleToRoleMoodleEntity(courseUser.roleMoodle);
+        UserEntity userEntity = userDataAccessMapper.userToUserEntity(courseUser.getUser());
+        CourseEntity courseEntity = courseDataAccessMapper.courseToCourseEntity(courseUser.getCourse());
+        RoleMoodleEntity roleMoodleEntity = roleMoodleDataAccessMapper.roleMoodleToRoleMoodleEntity(courseUser.getRoleMoodle());
+
         return CourseUserEntity.builder()
                 .id(courseUser.getId().getValue())
                 .user(userEntity)
                 .course(courseEntity)
                 .roleMoodle(roleMoodleEntity)
+                .createdAt(courseUser.getCreatedAt())
                 .build();
     }
 

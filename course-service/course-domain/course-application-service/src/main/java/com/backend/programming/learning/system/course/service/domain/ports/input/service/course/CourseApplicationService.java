@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.course.QueryAllCourseCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.course.QueryAllCourseResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.course.QueryCourseCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.course.QueryGeneralCourseStatisticsResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.course.UpdateCourseCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.course.UpdateCourseResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.CourseResponseEntity;
@@ -30,4 +31,6 @@ public interface CourseApplicationService {
     UpdateCourseResponse updateCourse(
             CourseId courseId,
             @Valid UpdateCourseCommand updateCourseCommand);
+
+    QueryGeneralCourseStatisticsResponse getCourseStatistics();
 }
