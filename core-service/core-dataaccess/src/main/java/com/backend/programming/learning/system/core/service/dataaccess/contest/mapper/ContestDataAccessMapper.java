@@ -2,9 +2,11 @@ package com.backend.programming.learning.system.core.service.dataaccess.contest.
 
 import com.backend.programming.learning.system.core.service.dataaccess.contest.entity.ContestEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.contest.projection.ContestProjection;
+import com.backend.programming.learning.system.core.service.dataaccess.contest.projection.PopularContestDataAccessDTO;
 import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.user.repository.UserJpaRepository;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.PopularContestDTO;
 import com.backend.programming.learning.system.core.service.domain.entity.Contest;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
@@ -119,5 +121,31 @@ public class ContestDataAccessMapper {
         ArrayList<String> words = Stream.of(search.split(" ")).filter(i-> !i.isEmpty()).collect(Collectors.toCollection(ArrayList::new));
 
         return words;
+    }
+
+    public PopularContestDTO popularContestProjectionToPopularContestDTO(PopularContestDataAccessDTO popularContestDataAccessDTO) {
+        ZonedDateTime createdAt = popularContestDataAccessDTO.getCreatedAt() == null
+                ? null
+                : ZonedDateTime.ofInstant(popularContestDataAccessDTO.getCreatedAt(), ZoneId.of("UTC"));
+        ZonedDateTime updatedAt = popularContestDataAccessDTO.getUpdatedAt() == null
+                ? null
+                : ZonedDateTime.ofInstant(popularContestDataAccessDTO.getUpdatedAt(), ZoneId.of("UTC"));
+        ZonedDateTime startTime = popularContestDataAccessDTO.getStartTime() == null
+                ? null
+                : ZonedDateTime.ofInstant(popularContestDataAccessDTO.getStartTime(), ZoneId.of("UTC"));
+        ZonedDateTime endTime = popularContestDataAccessDTO.getEndTime() == null
+                ? null
+                : ZonedDateTime.ofInstant(popularContestDataAccessDTO.getEndTime(), ZoneId.of("UTC"));
+
+        return PopularContestDTO.builder()
+                .id(popularContestDataAccessDTO.getId())
+                .contestName(popularContestDataAccessDTO.getContestName())
+                .totalParticipants(popularContestDataAccessDTO.getTotalParticipants())
+                .totalSubmissions(popularContestDataAccessDTO.getTotalSubmissions())
+                .createdAt(createdAt)
+                .updatedAt(updatedAt)
+                .startTime(startTime)
+                .endTime(endTime)
+                .build();
     }
 }

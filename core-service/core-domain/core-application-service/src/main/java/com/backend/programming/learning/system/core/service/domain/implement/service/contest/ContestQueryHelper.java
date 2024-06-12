@@ -1,11 +1,10 @@
 package com.backend.programming.learning.system.core.service.domain.implement.service.contest;
 
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.PopularContestDTO;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.QueryGeneralStatisticsContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryStatisticsOfContestResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestResponseEntity;
-import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest_user.ContestUserResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.QueryLineChartResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.exception.ContestNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
@@ -13,7 +12,6 @@ import com.backend.programming.learning.system.core.service.domain.exception.que
 import com.backend.programming.learning.system.core.service.domain.mapper.contest.ContestDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest.ContestRedisService;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestStartTimeFilter;
 import lombok.extern.slf4j.Slf4j;
@@ -25,10 +23,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.time.ZonedDateTime;
+import java.util.*;
 
 @Slf4j
 @Component
@@ -436,6 +432,121 @@ public class ContestQueryHelper {
 
         log.info("All questions queried for contest with id: {}", contestId);
         return contestQuestion;
+    }
+
+    public QueryGeneralStatisticsContestResponse getStatisticContestResponse() {
+       QueryAllContestsResponse redisAllContestResponse = contestRedisService
+                .getAllContests(ContestStartTimeFilter.valueOf("ALL"), 0, 999999999, true);
+
+
+        List<Contest> allContest;
+        if(redisAllContestResponse == null) {
+            allContest = contestRepository
+                    .findAll(null, "ALL", 0, 999999999, true)
+                    .getContent();
+            contestRedisService.saveAllContests(
+                    contestDataMapper.contestsToQueryAllContestsResponse(
+                            new PageImpl<>(allContest)
+                    ),
+                    ContestStartTimeFilter.valueOf("ALL"),
+                    0,
+                    999999999,
+                    true
+            );
+        }
+        else
+            allContest = contestDataMapper.contestResponseEntitiesToContests(
+                    new PageImpl<>(redisAllContestResponse.getContests())
+            ).getContent();
+
+        long totalContest = allContest.size();
+        long totalParticipants = contestUserRepository.countAllParticipants();
+        long activeContest = allContest.stream()
+                .filter(contest -> contest
+                        .getStartTime()
+                        .isBefore(ZonedDateTime.now()) && contest.getEndTime() != null  && contest.getEndTime().isAfter(ZonedDateTime.now()))
+                .count();
+        long closedContest = allContest.stream()
+                .filter(contest ->  contest.getEndTime() != null && contest.getEndTime().isBefore(ZonedDateTime.now()))
+                .count();
+        long upcomingContest = allContest.stream()
+                .filter(contest -> contest
+                        .getStartTime()
+                        .isAfter(ZonedDateTime.now()))
+                .count();
+
+        List<PopularContestDTO> popularContests = contestRepository.findPopularContestsBySubmissionAndParticipant();
+
+        return QueryGeneralStatisticsContestResponse.builder()
+                .totalContest(totalContest)
+                .totalParticipants(totalParticipants)
+                .activeContest(activeContest)
+                .closedContest(closedContest)
+                .upcomingContest(upcomingContest)
+                .participantTrend(calculateParticipantTrend(allContest))
+                .build();
+    }
+
+    private List<QueryLineChartResponse> calculateParticipantTrend(List<Contest> contests) {
+        if(contests.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        // Get contest end in current year
+        List<Contest> filteredContest = contests.stream().filter(contest -> contest.getEndTime().getYear() == ZonedDateTime.now().getYear()).toList();
+        List<ContestUser> contestUsers = contestUserRepository.findAllContestUser();
+
+        List<QueryLineChartResponse> result = new ArrayList<>();
+
+        final float[] totalContestInMonth = new float[12];
+        final float[] totalTrendingRegisterData = new float[12];
+        float[] averageTrendingRegisterData;
+
+        // Total participant trend
+        contestUsers.forEach(contestUser -> {
+            ZonedDateTime startTime = contestUser.getCreatedAt();
+            ZonedDateTime currentTime = ZonedDateTime.now();
+
+            if(startTime.getYear() != currentTime.getYear()) {
+                return;
+            }
+            totalTrendingRegisterData[startTime.getMonth().getValue() - 1]++;
+        });
+        result
+                .add(QueryLineChartResponse.builder()
+                        .label("Participant")
+                        .data(totalTrendingRegisterData)
+                        .build());
+
+        // average trending
+        // count contest per month
+        filteredContest.forEach(contest -> {
+            ZonedDateTime endTime = contest.getEndTime();
+            ZonedDateTime currentTime = ZonedDateTime.now();
+
+            if(endTime.getYear() != currentTime.getYear()) {
+                return;
+            }
+            totalContestInMonth[endTime.getMonth().getValue() - 1]++;
+        });
+
+        // Get total participant in each month from prev calculated array
+        averageTrendingRegisterData = totalTrendingRegisterData.clone();
+        for (int i = 0; i < 12; i++) {
+            if(totalContestInMonth[i] == 0)
+                averageTrendingRegisterData[i] = 0;
+            else
+            {
+                float temp = totalTrendingRegisterData[i] / totalContestInMonth[i];
+                averageTrendingRegisterData[i] = temp;
+            }
+        }
+        result.add(QueryLineChartResponse.builder()
+                .label("Average")
+                .data(averageTrendingRegisterData)
+                .build());
+
+        return result;
     }
 }
 

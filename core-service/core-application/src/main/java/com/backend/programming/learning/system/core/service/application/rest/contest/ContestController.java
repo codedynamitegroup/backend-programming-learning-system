@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest_user.CreateContestUserResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.DeleteContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.DeleteContestResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.QueryGeneralStatisticsContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.*;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestResponse;
@@ -364,4 +365,19 @@ public class ContestController {
         return ResponseEntity.ok(deleteContestResponse);
     }
 
+    @GetMapping("/contest/dashboard-statistics")
+    @Operation(summary = "Get statistics of contests for admin dashboard.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryGeneralStatisticsContestResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryGeneralStatisticsContestResponse> getStatisticsOfContests() {
+        QueryGeneralStatisticsContestResponse queryStatisticContestResponse = contestApplicationService.getStatisticContest();
+
+        log.info("Returning statistics of contests.");
+        return ResponseEntity.ok(queryStatisticContestResponse);
+    }
 }
