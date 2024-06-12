@@ -15,6 +15,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.UUID;
+
 @Service
 @Validated
 @Slf4j
@@ -41,8 +43,8 @@ public class AssignmentApplicationServiceImpl implements AssignmentApplicationSe
     }
 
     @Override
-    public UpdateAssignmentResponse updateAssignment(UpdateAssignmentCommand updateAssignmentCommand) {
-        return assignmentCommandHandler.updateAssignment(updateAssignmentCommand);
+    public UpdateAssignmentResponse updateAssignment(UpdateAssignmentCommand updateAssignmentCommand, UUID assignmentId) {
+        return assignmentCommandHandler.updateAssignment(updateAssignmentCommand,assignmentId);
     }
 
     @Override

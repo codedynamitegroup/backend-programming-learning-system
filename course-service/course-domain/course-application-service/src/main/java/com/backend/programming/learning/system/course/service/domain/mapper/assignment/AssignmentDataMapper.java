@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAllAssignmentsResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.activity_attachment.ActivityAttachmentResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.AssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.intro_attachment.IntroAttachmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.intro_file.IntroFileResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.ActivityAttachment;
@@ -74,14 +75,6 @@ public class AssignmentDataMapper {
     }
 
     public QueryAssignmentResponse assignmentToQueryAssignmentResponse(Assignment assignment) {
-        List<IntroFileResponseEntity> introFileResponseEntities = List.of();
-        List<IntroFile> introFile = introFileRepository.findAllByAssignmentId(assignment.getId().getValue());
-        if(introFile != null && !introFile.isEmpty())
-        {
-            introFileResponseEntities = introFile.stream()
-                    .map(introFileDataMapper::introFileToIntroFileResponseEntity)
-                    .toList();
-        }
 
         List<IntroAttachmentResponseEntity> introAttachmentResponseEntities = List.of();
         List<IntroAttachment> introAttachments = introAttachmentRepository.findAllByAssignmentId(assignment.getId().getValue());
@@ -91,24 +84,13 @@ public class AssignmentDataMapper {
                     .map(introAttachmentDataMapper::introAttachmentToIntroAttachmentResponseEntity)
                     .toList();
         }
-
-        List<ActivityAttachmentResponseEntity> activityAttachmentResponseEntities = List.of();
-        List<ActivityAttachment> activityAttachments = activityAttachmentRepository.findByAssignmentId(assignment.getId().getValue());
-        if(activityAttachments != null && !activityAttachments.isEmpty())
-        {
-            activityAttachmentResponseEntities = activityAttachments.stream()
-                    .map(activityAttachmentDataMapper::activityAttachmentToActivityAttachmentResponseEntity)
-                    .toList();
-        }
         return QueryAssignmentResponse.builder()
                 .id(assignment.getId().getValue())
                 .moodleId(assignment.getAssignmentIdMoodle())
                 .title(assignment.getTitle())
                 .intro(assignment.getIntro())
                 .activity(assignment.getActivity())
-                .introFiles(introFileResponseEntities)
                 .introAttachments(introAttachmentResponseEntities)
-                .activityAttachments(activityAttachmentResponseEntities)
                 .maxScore(assignment.getMaxScores())
                 .wordLimit(assignment.getWordLimit())
                 .maxFileSize(assignment.getMaxFileSize())
@@ -117,6 +99,7 @@ public class AssignmentDataMapper {
                 .timeClose(assignment.getTime_close())
                 .type(assignment.getType().name())
                 .visible(assignment.getVisible())
+                .allowSubmitLate(assignment.getAllowSubmitLate())
                 .build();
     }
 
@@ -134,6 +117,22 @@ public class AssignmentDataMapper {
                 .assignmentId(assignment.getId().getValue())
                 .message("Assignment deleted successfully")
                 .build();
+    }
+
+
+    public AssignmentResponseEntity assignmentToAssignmentResponseEntity(Assignment assignment) {
+        return AssignmentResponseEntity.builder()
+                .id(assignment.getId().getValue())
+                .title(assignment.getTitle())
+                .intro(assignment.getIntro())
+                .timeClose(assignment.getTime_close())
+                .build();
+    }
+
+    public List<AssignmentResponseEntity> assignmentsToAssignmentResponseEntities(List<Assignment> assignments) {
+        return assignments.stream()
+                .map(this::assignmentToAssignmentResponseEntity)
+                .collect(Collectors.toList());
     }
 
 }

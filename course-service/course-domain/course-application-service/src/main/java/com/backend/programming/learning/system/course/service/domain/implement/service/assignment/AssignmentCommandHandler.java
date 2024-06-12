@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Component
 @Slf4j
@@ -73,11 +74,11 @@ public class AssignmentCommandHandler {
     }
 
     @Transactional
-    public UpdateAssignmentResponse updateAssignment(UpdateAssignmentCommand updateAssignmentCommand) {
+    public UpdateAssignmentResponse updateAssignment(UpdateAssignmentCommand updateAssignmentCommand, UUID assignmentId) {
         log.info("Update assignment command received");
-        assignmentUpdateHelper.persistAssignment(updateAssignmentCommand);
+        assignmentUpdateHelper.persistAssignment(updateAssignmentCommand,assignmentId);
         return UpdateAssignmentResponse.builder()
-                .assignmentId(updateAssignmentCommand.getAssignmentId())
+                .assignmentId(assignmentId)
                 .message("Assignment updated successfully")
                 .build();
 

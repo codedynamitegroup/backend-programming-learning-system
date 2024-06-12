@@ -23,35 +23,48 @@ public class AssignmentUpdateHelper {
     }
 
     @Transactional(readOnly = true)
-    public void persistAssignment(UpdateAssignmentCommand updateAssignmentCommand) {
-        Assignment assignment = getAssignment(updateAssignmentCommand.getAssignmentId());
+    public void persistAssignment(UpdateAssignmentCommand updateAssignmentCommand,UUID assignmentId) {
+        Assignment assignment = getAssignment(assignmentId);
         if(updateAssignmentCommand.getTitle() != null)
         {
             assignment.setTitle(updateAssignmentCommand.getTitle());
         }
-
         if(updateAssignmentCommand.getIntro() != null)
         {
             assignment.setIntro(updateAssignmentCommand.getIntro());
         }
-
-
-
+        if(updateAssignmentCommand.getActivity() != null)
+        {
+            assignment.setActivity(updateAssignmentCommand.getActivity());
+        }
+        if(updateAssignmentCommand.getWordLimit()!=null)
+        {
+            assignment.setWordLimit(updateAssignmentCommand.getWordLimit());
+        }
+        if(updateAssignmentCommand.getMaxFileSize() != null)
+        {
+            assignment.setMaxFileSize(updateAssignmentCommand.getMaxFileSize());
+        }
+        if(updateAssignmentCommand.getMaxUploadFiles() != null)
+        {
+            assignment.setMaxUploadFiles(updateAssignmentCommand.getMaxUploadFiles());
+        }
         if(updateAssignmentCommand.getMaxScore() != null)
         {
             assignment.setMaxScores(updateAssignmentCommand.getMaxScore());
         }
-
+        if(updateAssignmentCommand.getTimeOpen()!=null)
+        {
+            assignment.setTime_open(updateAssignmentCommand.getTimeOpen());
+        }
         if(updateAssignmentCommand.getTimeClose() != null)
         {
             assignment.setTime_close(updateAssignmentCommand.getTimeClose());
         }
-
-        if(updateAssignmentCommand.getTimeLimit() != null)
+        if(updateAssignmentCommand.getAllowSubmitLate() != null)
         {
-            assignment.setTime_limit(updateAssignmentCommand.getTimeLimit());
+            assignment.setAllowSubmitLate(updateAssignmentCommand.getAllowSubmitLate());
         }
-
         if(updateAssignmentCommand.getType() != null)
         {
             assignment.setType(Type.valueOf(updateAssignmentCommand.getType().toUpperCase()));
