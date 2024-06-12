@@ -33,6 +33,7 @@ public class CourseUserDataMapper {
                 .map(user -> CourseUser.builder()
                         .course(course)
                         .user(user)
+                        .roleMoodle(user.getRoleMoodle())
                         .build())
                 .toList();
     }

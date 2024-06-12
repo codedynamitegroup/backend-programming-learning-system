@@ -27,7 +27,7 @@ public interface SharedSolutionRepository {
 
     void deleteById(SharedSolutionId id);
 
-    Page<SharedSolution> findByCodeQuestionId(CodeQuestionId codeQuestionId, Integer pageNo, Integer pageSize, SharedSolution.SortedFields sortBy, QueryOrderBy orderBy, List<TagId> tagIds);
+    Page<SharedSolution> findByCodeQuestionId(CodeQuestionId codeQuestionId, Integer pageNo, Integer pageSize, SharedSolution.SortedFields sortBy, QueryOrderBy orderBy, String search, List<TagId> tagIds);
 
 
 

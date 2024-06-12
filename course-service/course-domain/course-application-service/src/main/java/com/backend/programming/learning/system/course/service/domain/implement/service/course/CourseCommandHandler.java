@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.course.QueryAllCourseCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.course.QueryAllCourseResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.course.QueryCourseCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.course.QueryGeneralCourseStatisticsResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.QueryCourseUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.course.UpdateCourseCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.course.UpdateCourseResponse;
@@ -81,5 +82,9 @@ public class CourseCommandHandler {
         Course course = courseUpdateHelper.updateCourse(courseId, updateCourseCommand);
         log.info("Course is updated with id: {}", course.getId());
         return courseDataMapper.courseToUpdateCourseResponse(course, "Course is updated successfully");
+    }
+
+    public QueryGeneralCourseStatisticsResponse getCourseStatistics() {
+        return courseQueryHelper.getCourseStatistics();
     }
 }

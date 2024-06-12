@@ -83,7 +83,7 @@ public class SharedSolutionController {
         if(command.getOrderBy() == null)
             command.setOrderBy(QueryOrderBy.DESC);
         if(command.getSortBy() == null)
-            command.setSortBy(SharedSolution.SortedFields.totalVote);
+            command.setSortBy(SharedSolution.SortedFields.createdAt);
 
         GetSharedSolutionsResponse response =
                 service.getSharedSolutions(command);

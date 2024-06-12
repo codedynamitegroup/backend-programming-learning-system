@@ -82,6 +82,14 @@ public class ContestRepositoryImpl implements ContestRepository {
     }
 
     @Override
+    public Page<Contest> findAllMyContests(String searchName, UUID userId, Integer page, Integer size) {
+        Pageable paging = PageRequest.of(page, size);
+        return contestJpaRepository.findAllMyContestsContainsSearchName(
+                        userId, searchName, paging)
+                .map(contestDataAccessMapper::contestProjectionToContest);
+    }
+
+    @Override
     public void deleteContestById(UUID contestId) {
         contestJpaRepository.deleteById(contestId);
     }

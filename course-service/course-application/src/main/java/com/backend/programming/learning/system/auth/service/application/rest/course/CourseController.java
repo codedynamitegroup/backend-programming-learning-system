@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.auth.service.application.rest.course;
 
-import com.backend.programming.learning.system.course.service.domain.dto.method.create.call_moodle_api_function.CreateCallMoodleApiFunctionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.course.CreateCourseCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.course.CreateCourseResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.course.DeleteCourseCommand;
@@ -8,6 +7,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.course.QueryAllCourseCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.course.QueryAllCourseResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.course.QueryCourseCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.course.QueryGeneralCourseStatisticsResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.course.UpdateCourseCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.course.UpdateCourseResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course.CourseResponseEntity;
@@ -146,4 +146,21 @@ public class CourseController {
                 updateCourseCommand);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/statistics")
+    @Operation(summary = "Get statistics of courses.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryGeneralCourseStatisticsResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryGeneralCourseStatisticsResponse> getCourseStatistics() {
+        QueryGeneralCourseStatisticsResponse queryCourseStatisticsResponse = courseApplicationService.getCourseStatistics();
+
+        log.info("Returning statistics of course");
+        return ResponseEntity.ok(queryCourseStatisticsResponse);
+    }
+
 }

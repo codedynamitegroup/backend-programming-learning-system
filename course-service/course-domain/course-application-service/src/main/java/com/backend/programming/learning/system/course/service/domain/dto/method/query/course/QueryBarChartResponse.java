@@ -1,16 +1,13 @@
-package com.backend.programming.learning.system.auth.service.domain.dto.method.query.user;
+package com.backend.programming.learning.system.course.service.domain.dto.method.query.course;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 
 @Builder
-public class QueryLineChartResponse {
+public class QueryBarChartResponse {
     @JsonProperty("data")
     private final long[] data;
 
     @JsonProperty("label")
     private final String label;
-
-    @JsonProperty("area")
-    private final boolean area;
 }

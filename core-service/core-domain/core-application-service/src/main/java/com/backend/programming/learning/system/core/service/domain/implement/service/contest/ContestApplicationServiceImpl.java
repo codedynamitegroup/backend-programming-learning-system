@@ -36,6 +36,11 @@ class ContestApplicationServiceImpl implements ContestApplicationService {
     }
 
     @Override
+    public QueryAllContestsResponse queryAllMyContests(QueryAllMyContestsCommand queryAllMyContestsCommand) {
+        return contestCommandHandler.queryAllMyContestsResponse(queryAllMyContestsCommand);
+    }
+
+    @Override
     public QueryAllContestsResponse queryAllContestsForAdmin(QueryAllContestsCommand queryAllContestsCommand) {
         return contestCommandHandler.queryAllContestsResponseForAdmin(queryAllContestsCommand);
     }

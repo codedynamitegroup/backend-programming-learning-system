@@ -42,6 +42,7 @@ public class AssignmentEntity {
     private ZonedDateTime timeClose;
     private Boolean allowSubmitLate;
     private ZonedDateTime timeLimit;
+    private ZonedDateTime createdAt;
     @Enumerated(EnumType.STRING)
     private Type type;
     private Boolean visible;
