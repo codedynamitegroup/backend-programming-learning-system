@@ -1,24 +1,20 @@
 package com.backend.programming.learning.system.auth.service.domain.dto.method.create.user;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
-public class CreateUserCommand {
+public class RegisterUserCommand {
     @NotNull
     @Email
     private final String email;
-
-    private final String username;
-
-    private final UUID organizationId;
 
     @NotNull
     private final String password;
@@ -31,6 +27,4 @@ public class CreateUserCommand {
 
     @NotNull
     private final String phone;
-
-    private final String roleName;
 }

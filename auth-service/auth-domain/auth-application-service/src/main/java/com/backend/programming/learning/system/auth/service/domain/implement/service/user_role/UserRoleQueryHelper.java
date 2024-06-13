@@ -24,6 +24,16 @@ public class UserRoleQueryHelper {
     }
 
     @Transactional(readOnly = true)
+    public UserRole findByUserIdAndRoleIsNotUser(UUID userId) {
+        Optional<UserRole> userRoleResult =
+                userRoleRepository.findByUserIdAndRoleIsNotUser(new UserId(userId));
+        if (userRoleResult.isEmpty()) {
+            return null;
+        }
+        return userRoleResult.get();
+    }
+
+    @Transactional(readOnly = true)
     public UserRole queryUserRole(UUID roleId, UUID userId) {
         Optional<UserRole> userRoleResult =
                 userRoleRepository.findByRoleIdAndUserId(new RoleId(roleId), new UserId(userId));

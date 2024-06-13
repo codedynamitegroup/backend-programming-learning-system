@@ -52,4 +52,10 @@ public class UserRoleRepositoryImpl implements UserRoleRepository {
         return userRoleJpaRepository.findById(userRoleId.getValue())
                 .map(userRoleDataAccessMapper::userRoleEntityToUserRole);
     }
+
+    @Override
+    public Optional<UserRole> findByUserIdAndRoleIsNotUser(UserId userId) {
+        return userRoleJpaRepository.findByUserIdAndRoleIsNotUser(userId.getValue())
+                .map(userRoleDataAccessMapper::userRoleEntityToUserRole);
+    }
 }
