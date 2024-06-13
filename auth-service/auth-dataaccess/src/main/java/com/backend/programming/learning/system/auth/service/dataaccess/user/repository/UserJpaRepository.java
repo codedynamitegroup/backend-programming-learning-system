@@ -21,7 +21,14 @@ public interface UserJpaRepository extends JpaRepository<UserEntity, UUID> {
         where cast(?1 as text) IS NULL or UPPER(u.email) like UPPER(concat('%', cast(?1 as text), '%'))
         order by u.email
         """, nativeQuery = true)
-
     Page<UserEntity> findAll(Pageable pageable, String searchName);
-    Page<UserEntity> findAllByOrganizationIdAndIsDeletedFalse(UUID organizationId, Pageable pageable);
+
+    @Query(value = """
+        select u.*
+        from main_user u, main_organization g
+        where (u.organization_id = g.id and g.id = ?1)
+        and (cast(?2 as text) IS NULL or UPPER(u.email) like UPPER(concat('%', cast(?2 as text), '%')))
+        order by u.email
+        """, nativeQuery = true)
+    Page<UserEntity> findAllByOrganizationId(UUID organizationId, String searchName, Pageable pageable);
 }

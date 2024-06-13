@@ -20,5 +20,5 @@ public interface UserRepository {
     Optional<User> findUserByEmail(String email);
 
     Optional<User> findUser(UUID value);
-    Page<User> findAllUsersByOrganization(UUID organizationId, Integer page, Integer size);
+    Page<User> findAllUsersByOrganization(UUID organizationId, Integer page, Integer size, String searchName);
 }
