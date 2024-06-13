@@ -30,13 +30,9 @@ public class QueryAssignmentResponse {
 
     private final String intro;
 
-    private final List<IntroFileResponseEntity> introFiles;
-
     private final List<IntroAttachmentResponseEntity> introAttachments;
 
     private final String activity;
-
-    private final List<ActivityAttachmentResponseEntity> activityAttachments;
 
     @NotNull
     private final Float maxScore;
@@ -58,4 +54,8 @@ public class QueryAssignmentResponse {
 
     @NotNull
     private final Boolean visible;
+
+    @NotNull
+    private Boolean allowSubmitLate;
+
 }

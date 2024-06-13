@@ -3,16 +3,20 @@ package com.backend.programming.learning.system.core.service.dataaccess.chapter_
 import com.backend.programming.learning.system.core.service.dataaccess.chapter.entity.ChapterEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter.mapper.ChapterDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter_resource.entity.ChapterResourceEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.chapter_resource.projection.CourseTypeCountProjection;
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.question.mapper.QuestionDataAccessMapper;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapterResource.ChapterResourceCount;
 import com.backend.programming.learning.system.core.service.domain.entity.Chapter;
 import com.backend.programming.learning.system.core.service.domain.entity.ChapterResource;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterResourceId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.ResourceType;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class ChapterResourceDataAccessMapper {
@@ -69,5 +73,18 @@ public class ChapterResourceDataAccessMapper {
             chapterResources.add(chapterResourceEntityToChapterResource(chapterResourceEntity));
         }
         return chapterResources;
+    }
+
+    private ChapterResourceCount chapterResourceTypeCountProjectionToChapterResourceCount(CourseTypeCountProjection courseTypeCountProjection) {
+        return ChapterResourceCount.builder()
+                .resourceType(ResourceType.valueOf(courseTypeCountProjection.getResourceType()))
+                .count(courseTypeCountProjection.getCount())
+                .build();
+    }
+
+    public List<ChapterResourceCount> chapterResourceTypeCountProjectionListToChapterResourceCountList(List<CourseTypeCountProjection> courseTypeCountProjections) {
+        return courseTypeCountProjections.stream()
+                .map(this::chapterResourceTypeCountProjectionToChapterResourceCount)
+                .collect(Collectors.toList());
     }
 }

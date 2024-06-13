@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.core.service.dataaccess.contest.
 
 import com.backend.programming.learning.system.core.service.dataaccess.contest.entity.ContestEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.contest.projection.ContestProjection;
+import com.backend.programming.learning.system.core.service.dataaccess.contest.projection.PopularContestDataAccessDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -222,4 +223,20 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
 
     @Query("select count(c.id) from ContestEntity c")
     int countAllContests();
+
+    @Query(value = """
+        select c.id as id,
+                c.name as contestName,
+                c.start_time as startTime,
+                c.end_time as endTime,
+                c.created_at as createdAt,
+                c.updated_at as updatedAt,
+                (select count(*) from contest_user cu where cu.contest_id = c.id) as totalParticipants,
+                (select count(*) from code_submission_contest cs where cs.contest_id = c.id) as totalSubmissions
+        from contest c
+        group by c.id
+        order by totalParticipants desc, totalSubmissions desc
+        limit 5
+""", nativeQuery = true)
+    List<PopularContestDataAccessDTO> findMostPopularContestsByParticipantAndSubmission();
 }

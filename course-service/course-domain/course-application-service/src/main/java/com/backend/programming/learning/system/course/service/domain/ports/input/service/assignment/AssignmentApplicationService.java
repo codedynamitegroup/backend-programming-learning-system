@@ -13,6 +13,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 
 import jakarta.validation.Valid;
 
+import java.util.UUID;
+
 public interface AssignmentApplicationService {
     CreateAssignmentResponse createAssignment(
             @Valid CreateAssignmentCommand createAssignmentCommand);
@@ -24,7 +26,7 @@ public interface AssignmentApplicationService {
             @Valid QueryAssignmentCommand queryAssignmentCommand);
 
     UpdateAssignmentResponse updateAssignment(
-            @Valid UpdateAssignmentCommand updateAssignmentCommand);
+            @Valid UpdateAssignmentCommand updateAssignmentCommand, UUID assignmentId);
 
 
     DeleteAssignmentResponse deleteAssignment(

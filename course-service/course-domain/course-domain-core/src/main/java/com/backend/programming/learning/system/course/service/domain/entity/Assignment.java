@@ -22,7 +22,7 @@ public class Assignment extends AggregateRoot<AssignmentId> {
     private String maxFileSize;
 
     private Float maxScores;
-    private final ZonedDateTime time_open;
+    private ZonedDateTime time_open;
     private ZonedDateTime time_close;
 
     private Boolean allowSubmitLate;
@@ -49,6 +49,10 @@ public class Assignment extends AggregateRoot<AssignmentId> {
         type = builder.type;
         visible = builder.visible;
         createdAt = builder.createdAt;
+    }
+
+    public void setTime_open(ZonedDateTime time_open) {
+        this.time_open = time_open;
     }
 
     public Boolean getAllowSubmitLate() {

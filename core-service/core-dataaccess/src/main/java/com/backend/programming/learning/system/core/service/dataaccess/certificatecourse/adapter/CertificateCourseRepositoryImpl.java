@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.core.service.dataaccess.certific
 
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.mapper.CertificateCourseDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.repository.CertificateCourseJpaRepository;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.MostEnrolledWithStudentResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseRepository;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
@@ -124,5 +125,21 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
     @Override
     public int countNumOfReviewsByCertificateId(UUID certificateCourseId) {
         return certificateCourseJpaRepository.countNumOfReviewsByCertificateId(certificateCourseId);
+    }
+
+    @Override
+    public List<CertificateCourse> findAllCourse() {
+        return certificateCourseJpaRepository.findAll()
+                .stream()
+                .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse)
+                .toList();
+    }
+
+    @Override
+    public List<MostEnrolledWithStudentResponse> findMostEnrolledCertificateCourseWithStudentCount() {
+        return certificateCourseJpaRepository.findMostEnrolledCertificateCoursesWithNumStudentCount()
+                .stream()
+                .map(certificateCourseDataAccessMapper::MostEnrolledCertificateCourseProjectionToMostEnrolledWithStudentResponse)
+                .toList();
     }
 }

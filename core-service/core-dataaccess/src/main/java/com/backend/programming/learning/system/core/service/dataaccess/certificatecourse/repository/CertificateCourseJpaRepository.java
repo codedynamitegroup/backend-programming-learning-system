@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.repository;
 
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.projection.MostEnrolledCertificateCourseProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -65,6 +66,16 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
         limit 5
 """, nativeQuery = true)
     List<CertificateCourseEntity> findMostEnrolledCertificateCourses();
+
+    @Query(value="""
+    select cc.id as certificateCourseId, cc.name as certificateCourseName, count(ccu.user_id) as numOfStudents
+        from certificate_course cc
+        left join certificate_course_user ccu on cc.id = ccu.certificate_course_id
+        group by cc.id
+        order by cc.avg_rating desc, numOfStudents desc
+        limit 5
+""", nativeQuery = true)
+    List<MostEnrolledCertificateCourseProjection> findMostEnrolledCertificateCoursesWithNumStudentCount();
 
     @Query(value="""
     select cc.*

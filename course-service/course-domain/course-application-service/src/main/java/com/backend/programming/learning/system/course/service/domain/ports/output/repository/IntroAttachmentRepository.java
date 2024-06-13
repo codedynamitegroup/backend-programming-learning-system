@@ -14,4 +14,5 @@ public interface IntroAttachmentRepository {
     void deleteById(UUID introAttachmentId);
 
     List<IntroAttachment> findAllByAssignmentId(UUID assignmentId);
+
 }

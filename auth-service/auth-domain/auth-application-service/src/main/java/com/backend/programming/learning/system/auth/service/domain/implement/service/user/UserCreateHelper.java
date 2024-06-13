@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.auth.service.domain.implement.se
 import com.backend.programming.learning.system.auth.service.domain.AuthDomainService;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateSocialLoginUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.RegisterUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user_role.CreateUserRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.entity.Role;
@@ -38,7 +39,7 @@ public class UserCreateHelper {
     private final UserRoleCreateHelper userRoleCreateHelper;
 
     @Transactional
-    public UserCreatedEvent persistUser(CreateUserCommand createUserCommand) {
+    public UserCreatedEvent createUser(CreateUserCommand createUserCommand) {
         findUserWithEmail(createUserCommand.getEmail());
         findOrganization(createUserCommand.getOrganizationId());
 
@@ -49,15 +50,45 @@ public class UserCreateHelper {
         UserCreatedEvent userCreatedEvent = authDomainService.createUser(user);
         saveUser(user);
 
-        keycloakApplicationService.createUser(createUserCommand);
+        keycloakApplicationService.createUserByAdmin(createUserCommand);
+
+        Role roleUser = roleQueryHelper.queryRoleByName(ROLE_NAME_USER);
+        userRoleCreateHelper.persistUserRole(CreateUserRoleCommand.builder()
+                .userId(user.getId().getValue())
+                .roleId(roleUser.getId().getValue())
+                .build());
+        if (!createUserCommand.getRoleName().equals(ROLE_NAME_USER)) {
+            Role assignedRole = roleQueryHelper.queryRoleByName(createUserCommand.getRoleName());
+            userRoleCreateHelper.persistUserRole(CreateUserRoleCommand.builder()
+                    .userId(user.getId().getValue())
+                    .roleId(assignedRole.getId().getValue())
+                    .build());
+        }
+
+        return userCreatedEvent;
+    }
+
+    @Transactional
+    public UserCreatedEvent registerUser(RegisterUserCommand registerUserCommand) {
+        findUserWithEmail(registerUserCommand.getEmail());
+
+        User user = authDataMapper.registerUserCommandToUser(registerUserCommand);
+        user.setLinkedWithMicrosoft(false);
+        user.setLinkedWithGoogle(false);
+
+        UserCreatedEvent userCreatedEvent = authDomainService.createUser(user);
+        saveUser(user);
+
+        keycloakApplicationService.registerUser(registerUserCommand);
 
         Role role = roleQueryHelper.queryRoleByName(ROLE_NAME_USER);
         userRoleCreateHelper.persistUserRole(CreateUserRoleCommand.builder()
-                        .userId(user.getId().getValue())
-                        .roleId(role.getId().getValue())
+                .userId(user.getId().getValue())
+                .roleId(role.getId().getValue())
                 .build());
         return userCreatedEvent;
     }
+
 
     @Transactional
     public UserCreatedEvent persistUserSocialLogin(CreateSocialLoginUserCommand createSocialLoginUserCommand) {

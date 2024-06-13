@@ -1,5 +1,10 @@
 package com.backend.programming.learning.system.core.service.domain.implement.service.certificatecourse;
 
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryGeneralCertificateCourseStatisticsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.MostEnrolledWithStudentResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapterResource.ChapterResourceCount;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.QueryLineChartResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.QueryPieChartResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.exception.CertificateCourseNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
@@ -12,6 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -310,6 +317,126 @@ public class CertificateCourseQueryHelper {
         return certificateCourseRepository.countNumOfReviewsByCertificateId(certificateCourseId);
     }
 
+    public QueryGeneralCertificateCourseStatisticsResponse queryGeneralCertificateCourseStatistics() {
+        List<CertificateCourse> certificateCourseList = certificateCourseRepository.findAllCourse();
+        List<CertificateCourseUser> certificateCourseUserList = certificateCourseUserRepository.findAllCourseUser();
+
+        long completedCourses = certificateCourseUserList.stream().filter(CertificateCourseUser::getCompleted).count();
+        double averageRating = certificateCourseList.stream().mapToDouble(CertificateCourse::getAvgRating).average().orElse(0.0);
+
+        return QueryGeneralCertificateCourseStatisticsResponse.builder()
+                .totalCertificateCourse(certificateCourseList.size())
+                .totalEnrollments(certificateCourseUserList.size())
+                .totalParticipantCompletedCourse(completedCourses)
+                .averageRating(averageRating)
+                .enrollmentChart(calculateEnrollmentChart(certificateCourseUserList))
+                .topEnrolledCourse(getTopEnrolledCourse())
+                .chapterResourceType(calculateChapterResourceType())
+                .build();
+    }
+
+    private List<QueryLineChartResponse> calculateEnrollmentChart(List<CertificateCourseUser> certificateCourseUserList) {
+        if(certificateCourseUserList.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        List<QueryLineChartResponse> result = new ArrayList<>();
+        QueryLineChartResponse filterByDaysInWeek;
+        QueryLineChartResponse filterByDaysInMonth;
+        QueryLineChartResponse filterByDaysInYear;
+
+        final double[] daysInWeekRegisterData = new double[7];
+        final double[] daysInMonthRegisterData = new double[ZonedDateTime.now().getMonth().length(ZonedDateTime.now().toLocalDate().isLeapYear())];
+        final double[] daysInYearRegisterData = new double[12];
+
+        // Days in week
+        certificateCourseUserList.forEach(user -> {
+            ZonedDateTime registerDate = user.getCreatedAt();
+            ZonedDateTime currentDate = ZonedDateTime.now();
+
+            if(registerDate.getYear() != currentDate.getYear() ||
+                    registerDate.getMonth() != currentDate.getMonth()) {
+                return;
+            }
+
+            long differenceInDays = Duration.between(registerDate, currentDate).toDays();
+
+            if(differenceInDays <= 7) {
+                daysInWeekRegisterData[registerDate.getDayOfWeek().getValue() - 1]++;
+            }
+        });
+        filterByDaysInWeek = QueryLineChartResponse.builder()
+                .label("New enrollment(s)")
+                .data(daysInWeekRegisterData)
+                .build();
+
+        // Days in month
+        certificateCourseUserList.forEach(user -> {
+            ZonedDateTime registerDate = user.getCreatedAt();
+            ZonedDateTime currentDate = ZonedDateTime.now();
+
+            if(registerDate.getYear() != currentDate.getYear() || registerDate.getMonth() != currentDate.getMonth()) {
+                return;
+            }
+            daysInMonthRegisterData[registerDate.getDayOfMonth() - 1]++;
+        });
+        filterByDaysInMonth = QueryLineChartResponse.builder()
+                .label("New enrollment(s)")
+                .data(daysInMonthRegisterData)
+                .build();
+
+        // Days in year
+        certificateCourseUserList.forEach(user -> {
+            ZonedDateTime registerDate = user.getCreatedAt();
+            ZonedDateTime currentDate = ZonedDateTime.now();
+
+            if(registerDate.getYear() != currentDate.getYear()) {
+                return;
+            }
+            daysInYearRegisterData[registerDate.getMonth().getValue() - 1]++;
+        });
+        filterByDaysInYear = QueryLineChartResponse.builder()
+                .label("New enrollment(s)")
+                .data(daysInYearRegisterData)
+                .build();
+
+        result.add(filterByDaysInWeek);
+        result.add(filterByDaysInMonth);
+        result.add(filterByDaysInYear);
+
+        return result;
+    }
+
+    private List<QueryLineChartResponse> getTopEnrolledCourse() {
+        List<MostEnrolledWithStudentResponse> topEnrolledCourses = certificateCourseRepository.findMostEnrolledCertificateCourseWithStudentCount();
+        List<QueryLineChartResponse> result = new ArrayList<>();
+
+        topEnrolledCourses.forEach(certificateCourse -> {
+            QueryLineChartResponse queryLineChartResponse = QueryLineChartResponse.builder()
+                    .label(certificateCourse.getCertificateCourseName())
+                    .data(new double[]{certificateCourse.getNumOfStudents()})
+                    .build();
+            result.add(queryLineChartResponse);
+        });
+
+        return result;
+    }
+
+    private List<QueryPieChartResponse> calculateChapterResourceType() {
+        List<ChapterResourceCount> chapterResources = chapterResourceRepository.countResourceByType();
+        List<QueryPieChartResponse> result = new ArrayList<>();
+
+        for (int i = 0; i < ResourceType.values().length; i++) {
+            QueryPieChartResponse queryPieChartResponse = QueryPieChartResponse.builder()
+                    .index(i)
+                    .label(chapterResources.get(i).getResourceType().name())
+                    .value(chapterResources.get(i).getCount())
+                    .build();
+            result.add(queryPieChartResponse);
+        }
+
+        return result;
+    }
 }
 
 

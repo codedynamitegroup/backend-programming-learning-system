@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.auth.service.domain.implement.se
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user_role.DeleteUserRoleCommand;
 import com.backend.programming.learning.system.auth.service.domain.entity.UserRole;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
+import com.backend.programming.learning.system.auth.service.domain.ports.input.service.RoleKeycloakApplicationService;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRoleRepository;
 import com.backend.programming.learning.system.auth.service.domain.valueobject.RoleId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
@@ -16,9 +17,11 @@ import java.util.Optional;
 @Component
 public class UserRoleDeleteHelper {
     private final UserRoleRepository userRoleRepository;
+    private final RoleKeycloakApplicationService roleKeycloakApplicationService;
 
-    public UserRoleDeleteHelper(UserRoleRepository userRoleRepository) {
+    public UserRoleDeleteHelper(UserRoleRepository userRoleRepository, RoleKeycloakApplicationService roleKeycloakApplicationService) {
         this.userRoleRepository = userRoleRepository;
+        this.roleKeycloakApplicationService = roleKeycloakApplicationService;
     }
 
     @Transactional
@@ -34,5 +37,6 @@ public class UserRoleDeleteHelper {
 
         UserRole userRole = userRoleResult.get();
         userRoleRepository.deleteByRoleIdAndUserId(userRole.getRole().getId(), userRole.getUser().getId());
+        roleKeycloakApplicationService.removeRole(userRole.getUser().getEmail(), userRole.getRole().getName());
     }
 }

@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.ch
 import com.backend.programming.learning.system.auth.service.domain.dto.method.change_password.ChangedPasswordUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.RegisterUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.forgot_password.*;
@@ -15,7 +16,8 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.lo
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.*;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserEmailCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserResponse;
-import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserByAdminCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserProfileCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
@@ -27,7 +29,6 @@ import com.backend.programming.learning.system.auth.service.domain.mapper.UserDa
 import com.backend.programming.learning.system.auth.service.domain.outbox.scheduler.user.UserOutboxHelper;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.ServiceName;
-import com.backend.programming.learning.system.domain.valueobject.UserOutboxServiceType;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
@@ -59,8 +60,45 @@ public class UserCommandHandler {
     private final UserForgotPasswordHelper userForgotPasswordHelper;
 
     @Transactional
-    public CreateUserResponse createUser(CreateUserCommand createOrderCommand) {
-        UserCreatedEvent userCreatedEvent = userCreateHelper.persistUser(createOrderCommand);
+    public CreateUserResponse createUserByAdmin(CreateUserCommand createOrderCommand) {
+        UserCreatedEvent userCreatedEvent = userCreateHelper.createUser(createOrderCommand);
+        log.info("User is created with id: {}", userCreatedEvent.getUser().getId().getValue());
+        CreateUserResponse createUserResponse = userDataMapper.userToCreateUserResponse(userCreatedEvent.getUser(),
+                "User created successfully");
+
+        userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
+                ServiceName.CORE_SERVICE,
+                CopyState.CREATING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
+                UUID.randomUUID());
+
+        userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
+                ServiceName.COURSE_SERVICE,
+                CopyState.CREATING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
+                UUID.randomUUID());
+
+        userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
+                ServiceName.CODE_ASSESSMENT_SERVICE,
+                CopyState.CREATING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
+                UUID.randomUUID());
+
+        return createUserResponse;
+    }
+
+    @Transactional
+    public CreateUserResponse registerUser(RegisterUserCommand registerUserCommand) {
+        UserCreatedEvent userCreatedEvent = userCreateHelper.registerUser(registerUserCommand);
         log.info("User is created with id: {}", userCreatedEvent.getUser().getId().getValue());
         CreateUserResponse createUserResponse = userDataMapper.userToCreateUserResponse(userCreatedEvent.getUser(),
                 "User created successfully");
@@ -111,7 +149,7 @@ public class UserCommandHandler {
 
     @Transactional(readOnly = true)
     public QueryAllUsersResponse queryAllUsers(QueryAllUsersCommand queryAllUsersCommand) {
-        Page<User> users = userQueryHelper.queryAllUsers(queryAllUsersCommand.getPageNo(), queryAllUsersCommand.getPageSize());
+        Page<User> users = userQueryHelper.queryAllUsers(queryAllUsersCommand.getPageNo(), queryAllUsersCommand.getPageSize(), queryAllUsersCommand.getSearchName());
         log.info("All users are queried");
         return userDataMapper.usersToQueryAllUsers(users);
     }
@@ -127,8 +165,43 @@ public class UserCommandHandler {
     }
 
     @Transactional
-    public UpdateUserResponse updateUser(UpdateUserCommand updateUserCommand) {
-        UserUpdatedEvent userUpdatedEvent = userUpdateHelper.persistUser(updateUserCommand);
+    public UpdateUserResponse updateUserProfile(UpdateUserProfileCommand updateUserCommand) {
+        UserUpdatedEvent userUpdatedEvent = userUpdateHelper.updateUserProfile(updateUserCommand);
+
+        userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
+                ServiceName.CORE_SERVICE,
+                CopyState.UPDATING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
+                UUID.randomUUID());
+
+        userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
+                ServiceName.COURSE_SERVICE,
+                CopyState.UPDATING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
+                UUID.randomUUID());
+
+        userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
+                ServiceName.CODE_ASSESSMENT_SERVICE,
+                CopyState.UPDATING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
+                UUID.randomUUID());
+
+        log.info("User is updated with id: {}", userUpdatedEvent.getUser().getId().getValue());
+        return userDataMapper.userToUpdateUserResponse(userUpdatedEvent.getUser(), "User updated successfully");
+    }
+
+    @Transactional
+    public UpdateUserResponse updateUserByAdmin(UpdateUserByAdminCommand updateUserByAdminCommand) {
+        UserUpdatedEvent userUpdatedEvent = userUpdateHelper.updateUserByAdmin(updateUserByAdminCommand);
 
         userOutboxHelper.saveUserOutboxMessage(
                 AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,

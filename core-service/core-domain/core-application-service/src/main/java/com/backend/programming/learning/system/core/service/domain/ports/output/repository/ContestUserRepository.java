@@ -21,5 +21,6 @@ public interface ContestUserRepository {
     int countAllParticipantsHavingSubmissionsByContestId(UUID contestId);
     Page<ContestUser> findAllContestUsersOfLeaderboard(
             UUID contestId, Integer pageNo, Integer pageSize);
-    Optional<ContestUser> findMyRankOfContest(UUID userId, UUID contestId);
+    Optional<ContestUser> findMyRankOfContest(UUID contestId, UUID userId);
+    List<ContestUser> findAllContestUser();
 }

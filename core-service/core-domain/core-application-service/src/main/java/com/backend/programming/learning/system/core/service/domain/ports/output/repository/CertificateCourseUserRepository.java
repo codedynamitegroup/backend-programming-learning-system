@@ -14,4 +14,5 @@ public interface CertificateCourseUserRepository {
 
     Optional<CertificateCourseUser> findByCertificateCourseIdAndUserId(
             UUID certificateCourseId, UUID userId);
+    List<CertificateCourseUser> findAllCourseUser();
 }

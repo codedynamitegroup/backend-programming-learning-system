@@ -130,4 +130,8 @@ public class CertificateCourseCommandHandler {
                 .message("Certificate course deleted successfully")
                 .build();
     }
+
+    public QueryGeneralCertificateCourseStatisticsResponse queryGeneralCertificateCourseStatistics() {
+        return certificateCourseQueryHelper.queryGeneralCertificateCourseStatistics();
+    }
 }

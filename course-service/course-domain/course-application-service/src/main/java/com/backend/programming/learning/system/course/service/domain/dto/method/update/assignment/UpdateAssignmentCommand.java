@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment;
 
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.intro_attachment.IntroAttachmentResponseEntity;
 import com.backend.programming.learning.system.dataaccess.validator.EnumValidator;
 import com.backend.programming.learning.system.course.service.domain.valueobject.Type;
 import lombok.AllArgsConstructor;
@@ -8,35 +9,40 @@ import lombok.Getter;
 
 import jakarta.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
 public class UpdateAssignmentCommand {
-    private final UUID assignmentId;
     @NotNull
     private final String title;
 
-    @NotNull
     private final String intro;
 
-    @NotNull
-    private final Float score;
+    private final String activity;
+
+    private final String wordLimit;
+    private final String maxUploadFiles;
+    private final String maxFileSize;
 
     @NotNull
     private final Float maxScore;
 
     @NotNull
+    private final ZonedDateTime timeOpen;
+
+    @NotNull
     private final ZonedDateTime timeClose;
 
     @NotNull
-    private final ZonedDateTime timeLimit;
+    private final Boolean allowSubmitLate;
+
 
     @NotNull(message = "type is required")
     @EnumValidator(enumClass = Type.class, message = "Type is invalid")
     private final String type;
 
-    @NotNull
     private final Boolean visible;
 }
