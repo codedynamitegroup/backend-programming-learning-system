@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.auth.service.domain.implement.se
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryGeneralStatisticUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryLineChartResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.QueryPieChartResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
 import com.backend.programming.learning.system.auth.service.domain.entity.Role;
 import com.backend.programming.learning.system.auth.service.domain.entity.User;
 import com.backend.programming.learning.system.auth.service.domain.exception.AuthNotFoundException;
@@ -60,6 +61,26 @@ public class UserQueryHelper {
                     log.warn("Could not find user with email: {}", email);
                     return new AuthNotFoundException("Could not find user with email: " +
                             email);
+                });
+    }
+
+    @Transactional(readOnly = true)
+    public User queryUserByEmailAndIsDeletedTrueOrFalse(String email) {
+        return userRepository.findByEmailAndIsDeletedTrueOrFalse(email)
+                .orElseThrow(() -> {
+                    log.warn("Could not find user with email: {}", email);
+                    return new AuthNotFoundException("Could not find user with email: " +
+                            email);
+                });
+    }
+
+    @Transactional(readOnly = true)
+    public User queryUserByIdAndIsDeletedTrueOrFalse(UUID userId) {
+        return userRepository.findByIdAndIsDeletedTrueOrFalse(new UserId(userId))
+                .orElseThrow(() -> {
+                    log.warn("Could not find user with userId: {}", userId);
+                    return new AuthNotFoundException("Could not find user with userId: " +
+                            userId);
                 });
     }
 
@@ -202,6 +223,7 @@ public class UserQueryHelper {
 
         return result;
     }
+
 }
 
 

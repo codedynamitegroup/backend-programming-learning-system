@@ -148,6 +148,20 @@ public class UserCommandHandler {
     }
 
     @Transactional(readOnly = true)
+    public UserEntityResponse queryUserByEmailAndIsDeletedTrueOrFalse(QueryUserByEmailCommand queryUserByEmailCommand) {
+        User user = userQueryHelper.queryUserByEmailAndIsDeletedTrueOrFalse(queryUserByEmailCommand.getEmail());
+        log.info("User is queried with email: {}", queryUserByEmailCommand.getEmail());
+        return userDataMapper.userToUserResponse(user);
+    }
+
+    public UserEntityResponse queryUserByIdAndIsDeletedTrueOrFalse(QueryUserByIdCommand queryUserCommand) {
+        User user = userQueryHelper.queryUserByIdAndIsDeletedTrueOrFalse(queryUserCommand.getUserId());
+        log.info("User is queried with id: {}", queryUserCommand.getUserId());
+        return userDataMapper.userToUserResponse(user);
+    }
+
+
+    @Transactional(readOnly = true)
     public QueryAllUsersResponse queryAllUsers(QueryAllUsersCommand queryAllUsersCommand) {
         Page<User> users = userQueryHelper.queryAllUsers(queryAllUsersCommand.getPageNo(), queryAllUsersCommand.getPageSize(), queryAllUsersCommand.getSearchName());
         log.info("All users are queried");

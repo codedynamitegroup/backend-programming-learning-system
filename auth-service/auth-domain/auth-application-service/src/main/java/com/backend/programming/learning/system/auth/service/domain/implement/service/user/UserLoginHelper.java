@@ -28,8 +28,6 @@ import java.util.Optional;
 public class UserLoginHelper {
     private final KeycloakConfigData keycloakConfigData;
     private final UserRepository userRepository;
-
-
     public UserLoginHelper(KeycloakConfigData keycloakConfigData, UserRepository userRepository) {
         this.keycloakConfigData = keycloakConfigData;
         this.userRepository = userRepository;

@@ -13,11 +13,10 @@ import java.util.UUID;
 public interface UserRepository {
     User save(User user);
     Optional<User> findById(UserId userId);
-    Optional<User> findByIdAndIsDeletedTrue(UserId userId);
+    Optional<User> findByIdAndIsDeletedTrueOrFalse(UserId userId);
+    Optional<User> findByEmailAndIsDeletedTrueOrFalse(String email);
     Optional<User> findByEmail(String email);
     Page<User> findAll(Integer page, Integer size, String searchName);
-
-    Optional<User> findUserByEmail(String email);
 
     Optional<User> findUser(UUID value);
     Page<User> findAllUsersByOrganization(UUID organizationId, Integer page, Integer size, String searchName);

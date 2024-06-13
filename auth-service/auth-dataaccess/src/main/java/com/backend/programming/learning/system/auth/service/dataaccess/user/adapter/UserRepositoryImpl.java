@@ -39,8 +39,8 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Optional<User> findByIdAndIsDeletedTrue(UserId userId) {
-        return userJpaRepository.findByIdAndIsDeletedTrue(userId.getValue())
+    public Optional<User> findByIdAndIsDeletedTrueOrFalse(UserId userId) {
+        return userJpaRepository.findById(userId.getValue())
                 .map(userDataAccessMapper::userEntityToUser);
     }
 
@@ -51,15 +51,15 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Page<User> findAll(Integer page, Integer size, String searchName) {
-        Pageable paging = PageRequest.of(page, size);
-        return userJpaRepository.findAll(paging, searchName)
+    public Optional<User> findByEmailAndIsDeletedTrueOrFalse(String email) {
+        return userJpaRepository.findByEmail(email)
                 .map(userDataAccessMapper::userEntityToUser);
     }
 
     @Override
-    public Optional<User> findUserByEmail(String email) {
-        return userJpaRepository.findByEmailAndIsDeletedFalse(email)
+    public Page<User> findAll(Integer page, Integer size, String searchName) {
+        Pageable paging = PageRequest.of(page, size);
+        return userJpaRepository.findAll(paging, searchName)
                 .map(userDataAccessMapper::userEntityToUser);
     }
 

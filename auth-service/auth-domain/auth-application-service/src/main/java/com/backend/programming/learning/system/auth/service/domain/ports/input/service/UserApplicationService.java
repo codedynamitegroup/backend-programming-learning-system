@@ -28,7 +28,9 @@ public interface UserApplicationService {
     CreateUserResponse createUserByAdmin(@Valid CreateUserCommand createUserCommand);
     CreateUserResponse registerUser(@Valid RegisterUserCommand registerUserCommand);
     UserEntityResponse findUserById(@Valid QueryUserByIdCommand queryUserCommand);
+    UserEntityResponse findUserByIdAndIsDeletedTrueOrFalse(@Valid QueryUserByIdCommand queryUserCommand);
     UserEntityResponse findUserByEmail(@Valid QueryUserByEmailCommand queryUserByEmailCommand);
+    UserEntityResponse findUserByEmailAndIsDeletedTrueOrFalse(QueryUserByEmailCommand queryUserByEmailCommand);
     QueryAllUsersResponse findAllUsers(QueryAllUsersCommand queryAllUsersCommand);
     QueryAllUsersResponse findAllUsersByOrganization(QueryAllUsersByOrganizationCommand queryAllUsersByOrganizationCommand);
     UpdateUserResponse updateUserProfile(@Valid UpdateUserProfileCommand updateUserCommand);

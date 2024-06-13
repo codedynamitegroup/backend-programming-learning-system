@@ -13,8 +13,9 @@ import java.util.UUID;
 @Repository
 public interface UserJpaRepository extends JpaRepository<UserEntity, UUID> {
     Optional<UserEntity> findByEmailAndIsDeletedFalse(String email);
+    Optional<UserEntity> findByEmail(String email);
     Optional<UserEntity> findByIdAndIsDeletedFalse(UUID id);
-    Optional<UserEntity> findByIdAndIsDeletedTrue(UUID id);
+    Optional<UserEntity> findById(UUID id);
     @Query(value = """
         select u.*
         from main_user u

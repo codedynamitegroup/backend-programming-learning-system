@@ -52,9 +52,20 @@ class UserApplicationServiceImpl implements UserApplicationService {
     }
 
     @Override
+    public UserEntityResponse findUserByIdAndIsDeletedTrueOrFalse(QueryUserByIdCommand queryUserCommand) {
+        return userCommandHandler.queryUserByIdAndIsDeletedTrueOrFalse(queryUserCommand);
+    }
+
+    @Override
     public UserEntityResponse findUserByEmail(QueryUserByEmailCommand queryUserByEmailCommand) {
         return userCommandHandler.queryUserByEmail(queryUserByEmailCommand);
     }
+
+    @Override
+    public UserEntityResponse findUserByEmailAndIsDeletedTrueOrFalse(QueryUserByEmailCommand queryUserByEmailCommand) {
+        return userCommandHandler.queryUserByEmailAndIsDeletedTrueOrFalse(queryUserByEmailCommand);
+    }
+
 
     @Override
     public QueryAllUsersResponse findAllUsers(QueryAllUsersCommand queryAllUsersCommand) {
