@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest.CreateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.DeleteContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.DeleteContestResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryGeneralStatisticsContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.*;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestResponse;
@@ -19,7 +20,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -228,5 +228,9 @@ public class ContestCommandHandler {
         return contestDataMapper.contestToUpdateContestResponse(
                 new ContestId(updateContestCommand.getContestId()),
                 "Contest updated successfully");
+    }
+
+    public QueryGeneralStatisticsContestResponse getStatisticContestResponse() {
+        return contestQueryHelper.getStatisticContestResponse();
     }
 }

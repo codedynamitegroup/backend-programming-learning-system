@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.ports.output.repository;
 
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.MostEnrolledWithStudentResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourseUser;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
@@ -37,4 +38,7 @@ public interface CertificateCourseRepository {
     int countNumOfResourcesByCertificateId(UUID certificateCourseId);
     int countNumOfStudentsByCertificateId(UUID certificateCourseId);
     int countNumOfReviewsByCertificateId(UUID certificateCourseId);
+
+    List<CertificateCourse> findAllCourse();
+    List<MostEnrolledWithStudentResponse> findMostEnrolledCertificateCourseWithStudentCount();
 }

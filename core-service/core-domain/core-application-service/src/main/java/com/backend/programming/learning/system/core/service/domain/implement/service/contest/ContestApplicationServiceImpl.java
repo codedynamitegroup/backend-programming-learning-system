@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest.CreateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.DeleteContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.DeleteContestResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryGeneralStatisticsContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.*;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestResponse;
@@ -12,8 +13,6 @@ import com.backend.programming.learning.system.core.service.domain.ports.input.s
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-
-import jakarta.validation.Valid;
 
 @Service
 @Validated
@@ -82,5 +81,10 @@ class ContestApplicationServiceImpl implements ContestApplicationService {
         return contestCommandHandler
                 .queryStatisticsOfContestResponse(
                         queryStatisticsOfContestCommand);
+    }
+
+    @Override
+    public QueryGeneralStatisticsContestResponse getStatisticContest() {
+        return contestCommandHandler.getStatisticContestResponse();
     }
 }

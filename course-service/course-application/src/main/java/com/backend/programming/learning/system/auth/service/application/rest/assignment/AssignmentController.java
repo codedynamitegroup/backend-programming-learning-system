@@ -93,18 +93,7 @@ public class AssignmentController {
     {
         log.info("Updating assignment with id: {}", id);
         UpdateAssignmentResponse response = assignmentApplicationService
-                .updateAssignment(UpdateAssignmentCommand
-                        .builder()
-                        .assignmentId(id)
-                        .title(updateAssignmentCommand.getTitle())
-                        .intro(updateAssignmentCommand.getIntro())
-                        .score(updateAssignmentCommand.getScore())
-                        .maxScore(updateAssignmentCommand.getMaxScore())
-                        .timeClose(updateAssignmentCommand.getTimeClose())
-                        .timeLimit(updateAssignmentCommand.getTimeLimit())
-                        .type(updateAssignmentCommand.getType())
-                        .visible(updateAssignmentCommand.getVisible())
-                        .build());
+                .updateAssignment(updateAssignmentCommand, id);
         return ResponseEntity.ok(response);
     }
 

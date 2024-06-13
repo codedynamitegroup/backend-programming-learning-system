@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -49,7 +50,14 @@ public class CertificateCourseUserRepositoryImpl implements CertificateCourseUse
                 .map(certificateCourseUserDataAccessMapper::certificateCourseUserEntityToCertificateCourseUser);
     }
 
-
+    @Override
+    public List<CertificateCourseUser> findAllCourseUser() {
+        return certificateCourseUserJpaRepository
+                .findAll()
+                .stream()
+                .map(certificateCourseUserDataAccessMapper::certificateCourseUserEntityToCertificateCourseUser)
+                .toList();
+    }
 
 
 }

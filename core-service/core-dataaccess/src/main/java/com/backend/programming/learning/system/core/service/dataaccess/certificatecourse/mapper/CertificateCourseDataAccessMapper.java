@@ -1,9 +1,11 @@
 package com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.mapper;
 
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.projection.MostEnrolledCertificateCourseProjection;
 import com.backend.programming.learning.system.core.service.dataaccess.topic.entity.TopicEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.topic.mapper.TopicDataAccessMapper;
 import com.backend.programming.learning.system.core.service.dataaccess.user.mapper.UserDataAccessMapper;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.MostEnrolledWithStudentResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import lombok.extern.slf4j.Slf4j;
@@ -76,4 +78,13 @@ public class CertificateCourseDataAccessMapper {
         return words;
     }
 
+    public MostEnrolledWithStudentResponse MostEnrolledCertificateCourseProjectionToMostEnrolledWithStudentResponse(
+            MostEnrolledCertificateCourseProjection mostEnrolledCertificateCourseProjection) {
+
+        return MostEnrolledWithStudentResponse.builder()
+                .certificateCourseId(mostEnrolledCertificateCourseProjection.getCertificateCourseId())
+                .certificateCourseName(mostEnrolledCertificateCourseProjection.getCertificateCourseName())
+                .numOfStudents(mostEnrolledCertificateCourseProjection.getNumOfStudents())
+                .build();
+    }
 }

@@ -2,7 +2,9 @@ package com.backend.programming.learning.system.core.service.dataaccess.chapter_
 
 import com.backend.programming.learning.system.core.service.dataaccess.chapter_resource.entity.ChapterResourceEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter_resource.mapper.ChapterResourceDataAccessMapper;
+import com.backend.programming.learning.system.core.service.dataaccess.chapter_resource.projection.CourseTypeCountProjection;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter_resource.repository.ChapterResourceJpaRepository;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapterResource.ChapterResourceCount;
 import com.backend.programming.learning.system.core.service.domain.entity.ChapterResource;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ChapterResourceRepository;
 import org.springframework.stereotype.Component;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
 public class ChapterResourceRepositoryImpl implements ChapterResourceRepository {
@@ -55,5 +58,13 @@ public class ChapterResourceRepositoryImpl implements ChapterResourceRepository 
     public Optional<ChapterResource> findChapterResourceById(UUID chapterResourceId) {
         return chapterResourceJpaRepository.findById(chapterResourceId)
                 .map(chapterResourceDataAccessMapper::chapterResourceEntityToChapterResource);
+    }
+
+    @Override
+    public List<ChapterResourceCount> countResourceByType() {
+        List<CourseTypeCountProjection> courseTypeCountProjections = chapterResourceJpaRepository.countResourceByType();
+
+        return chapterResourceDataAccessMapper
+                .chapterResourceTypeCountProjectionListToChapterResourceCountList(courseTypeCountProjections);
     }
 }

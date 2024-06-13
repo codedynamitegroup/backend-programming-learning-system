@@ -83,8 +83,16 @@ public class ContestUserRepositoryImpl implements ContestUserRepository {
     }
 
     @Override
-    public Optional<ContestUser> findMyRankOfContest(UUID userId, UUID contestId) {
-        return contestUserJpaRepository.findMyRankOfLeaderboard(userId, contestId)
+    public Optional<ContestUser> findMyRankOfContest(UUID contestId, UUID userId) {
+        return contestUserJpaRepository.findMyRankOfLeaderboard(contestId, userId)
                 .map(contestUserDataAccessMapper::contestUserLeaderboardToContestUser);
+    }
+
+    @Override
+    public List<ContestUser> findAllContestUser() {
+        return contestUserJpaRepository
+                .findAll()
+                .stream()
+                .map(contestUserDataAccessMapper::contestUserEntityToContestUser).toList();
     }
 }

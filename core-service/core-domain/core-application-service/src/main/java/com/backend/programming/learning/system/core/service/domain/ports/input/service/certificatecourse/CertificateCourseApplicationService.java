@@ -33,4 +33,5 @@ public interface CertificateCourseApplicationService {
     DeleteCertificateCourseResponse deleteCertificateCourse(
             @Valid DeleteCertificateCourseCommand deleteCertificateCourseCommand);
 
+    QueryGeneralCertificateCourseStatisticsResponse queryGeneralCertificateCourseStatistics();
 }

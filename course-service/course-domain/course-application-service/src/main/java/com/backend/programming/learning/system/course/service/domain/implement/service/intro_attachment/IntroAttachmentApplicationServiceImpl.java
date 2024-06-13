@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.intro_attachment.CreateIntroAttachmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.intro_attachment.CreateIntroAttachmentResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.delete.intro_attachment.DeleteIntroAttachmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.intro_attachment.UpdateIntroAttachmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.intro_attachment.UpdateIntroAttachmentResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.IntroAttachment;
@@ -32,4 +33,10 @@ public class IntroAttachmentApplicationServiceImpl implements IntroAttachmentApp
     public UpdateIntroAttachmentResponse updateIntroAttachment(UpdateIntroAttachmentCommand updateIntroAttachmentCommand, UUID id) {
         return introAttachmentCommandHandler.updateIntroAttachment(updateIntroAttachmentCommand, id);
     }
+
+    @Override
+    public DeleteIntroAttachmentResponse deleteIntroAttachment(UUID id) {
+        return introAttachmentCommandHandler.deleteIntroAttachment(id);
+    }
+
 }
