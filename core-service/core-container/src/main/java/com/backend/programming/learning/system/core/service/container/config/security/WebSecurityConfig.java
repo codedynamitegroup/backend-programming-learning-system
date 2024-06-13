@@ -24,11 +24,35 @@ public class WebSecurityConfig {
     public static final String STUDENT_MOODLE = "student_moodle";
     public static final String ADMIN_MOODLE = "admin_moodle";
     private final JwtAuthConverter jwtAuthConverter;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
+                        // question
+                        .requestMatchers(HttpMethod.POST, "/core/questions/detail").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
+                        .requestMatchers(HttpMethod.POST, "/core/questions/clone").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
+                        .requestMatchers(HttpMethod.GET, "/core/questions").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
+                        .requestMatchers(HttpMethod.GET, "/core/questions/{id}").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
+                        .requestMatchers(HttpMethod.DELETE, "/core/questions/{id}").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
+                        .requestMatchers(HttpMethod.GET, "/core/questions/category/{categoryId}").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
+
+                        // qtype essay
+                        .requestMatchers(HttpMethod.PUT, "/core/questions/essay-question").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE)
+                        .requestMatchers(HttpMethod.POST, "/core/questions/essay-question/create").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE)
+                        .requestMatchers(HttpMethod.GET, "/core/questions/essay-question/{id}").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
+
+                        // qtype multichoice question
+                        .requestMatchers(HttpMethod.PUT, "/core/questions/multichoice-question").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE)
+                        .requestMatchers(HttpMethod.POST, "/core/questions/multichoice-question/create").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE)
+                        .requestMatchers(HttpMethod.GET, "/core/questions/multichoice-question/{id}").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
+
+                        // qtype shortanswer question
+                        .requestMatchers(HttpMethod.PUT, "/core/questions/shortanswer-question").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE)
+                        .requestMatchers(HttpMethod.POST, "/core/questions/shortanswer-question/create").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE)
+                        .requestMatchers(HttpMethod.GET, "/core/questions/shortanswer-question/{id}").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
+
                         // Certificate Course
                         .requestMatchers(HttpMethod.POST, "/core/certificate-courses/create").hasAnyRole(ADMIN)
                         .requestMatchers(HttpMethod.POST, "/core/certificate-courses/{id}/register").hasAnyRole(USER)
@@ -88,6 +112,7 @@ public class WebSecurityConfig {
                     .requestMatchers(HttpMethod.GET, "/core/certificate-courses/{id}");
         };
     }
+
 //    @Bean
 //    public WebMvcConfigurer corsConfigurer() {
 //        return new WebMvcConfigurer() {
