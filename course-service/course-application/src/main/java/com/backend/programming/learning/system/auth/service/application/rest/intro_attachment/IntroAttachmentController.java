@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.assignment.CreateAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.intro_attachment.CreateIntroAttachmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.intro_attachment.CreateIntroAttachmentResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.delete.intro_attachment.DeleteIntroAttachmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.intro_attachment.UpdateIntroAttachmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.intro_attachment.UpdateIntroAttachmentResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.IntroAttachment;
@@ -60,6 +61,23 @@ public class IntroAttachmentController {
     ) {
         log.info("Updating assignment");
         UpdateIntroAttachmentResponse response = introAttachmentApplicationService.updateIntroAttachment(createIntroAttachmentCommand, id);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete intro-attachment.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = DeleteIntroAttachmentResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<DeleteIntroAttachmentResponse> deleteIntroAttachment(
+            @PathVariable("id") UUID id
+    ) {
+        log.info("Deleting assignment");
+        DeleteIntroAttachmentResponse response = introAttachmentApplicationService.deleteIntroAttachment(id);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

@@ -73,17 +73,17 @@ public interface ContestUserJpaRepository extends JpaRepository<ContestUserEntit
 
     @Query(value = """
         select cu.id as id,
-        cu.user_id as userId,
-        cu.contest_id as contestId,
-        cu.calendar_event_id as calendarEventId,
-        cu.update_calendar_event_state as updateCalendarEventState,
-        cu.is_completed as isCompleted,
-        cu.completed_at as completedAt,
-        cu.created_at as createdAt,
-        cu.updated_at as updatedAt,
-        sum(cs.grade) as total_score,
-        EXTRACT(EPOCH FROM sum(cs.created_at - c.start_time)) as total_time,
-        DENSE_RANK() OVER (ORDER BY COALESCE(sum(cs.grade), 0) DESC, COALESCE(EXTRACT(EPOCH FROM sum(cs.created_at - c.start_time)), 0) DESC) AS rank
+            cu.user_id as userId,
+            cu.contest_id as contestId,
+            cu.calendar_event_id as calendarEventId,
+            cu.update_calendar_event_state as updateCalendarEventState,
+            cu.is_completed as isCompleted,
+            cu.completed_at as completedAt,
+            cu.created_at as createdAt,
+            cu.updated_at as updatedAt,
+            sum(cs.grade) as total_score,
+            EXTRACT(EPOCH FROM sum(cs.created_at - c.start_time)) as total_time,
+            DENSE_RANK() OVER (ORDER BY COALESCE(sum(cs.grade), 0) DESC, COALESCE(EXTRACT(EPOCH FROM sum(cs.created_at - c.start_time)), 0) DESC) AS rank
         from contest_user cu
             join contest c on cu.contest_id = c.id
             join contest_question cq on cu.contest_id = cq.contest_id

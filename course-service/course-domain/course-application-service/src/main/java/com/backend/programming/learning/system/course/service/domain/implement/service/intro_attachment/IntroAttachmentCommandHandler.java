@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.intro_attachment.CreateIntroAttachmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.intro_attachment.CreateIntroAttachmentResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.delete.intro_attachment.DeleteIntroAttachmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.intro_attachment.UpdateIntroAttachmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.intro_attachment.UpdateIntroAttachmentResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.IntroAttachment;
@@ -16,12 +17,14 @@ import java.util.UUID;
 public class IntroAttachmentCommandHandler {
     private final IntroAttachmentCreateHelper introAttachmentCreateHelper;
     private final IntroAttachmentUpdateHelper introAttachmentUpdateHelper;
+    private final IntroAttachmentDeleteHelper introAttachmentDeleteHelper;
 
     private final IntroAttachmentDataMapper introAttachmentDataMapper;
 
-    public IntroAttachmentCommandHandler(IntroAttachmentCreateHelper introAttachmentCreateHelper, IntroAttachmentUpdateHelper introAttachmentUpdateHelper, IntroAttachmentDataMapper introAttachmentDataMapper) {
+    public IntroAttachmentCommandHandler(IntroAttachmentCreateHelper introAttachmentCreateHelper, IntroAttachmentUpdateHelper introAttachmentUpdateHelper, IntroAttachmentDeleteHelper introAttachmentDeleteHelper, IntroAttachmentDataMapper introAttachmentDataMapper) {
         this.introAttachmentCreateHelper = introAttachmentCreateHelper;
         this.introAttachmentUpdateHelper = introAttachmentUpdateHelper;
+        this.introAttachmentDeleteHelper = introAttachmentDeleteHelper;
         this.introAttachmentDataMapper = introAttachmentDataMapper;
     }
 
@@ -38,5 +41,12 @@ public class IntroAttachmentCommandHandler {
                .id(id)
                .fileName(updateIntroAttachmentCommand.getFileName())
                .message("Intro attachment updated successfully").build();
+    }
+
+    public DeleteIntroAttachmentResponse deleteIntroAttachment(UUID assignmentId) {
+        log.info("Delete intro attachment by assignment id command received");
+        introAttachmentDeleteHelper.deleteIntroAttachment(assignmentId);
+        return DeleteIntroAttachmentResponse.builder()
+                .message("Intro attachment deleted successfully").build();
     }
 }

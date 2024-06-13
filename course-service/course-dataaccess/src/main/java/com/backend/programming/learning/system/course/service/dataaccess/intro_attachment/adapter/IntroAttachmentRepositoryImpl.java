@@ -36,7 +36,7 @@ public class IntroAttachmentRepositoryImpl implements IntroAttachmentRepository 
 
     @Override
     public void deleteById(UUID introAttachmentId) {
-
+        introAttachmentJpaRepository.deleteById(introAttachmentId);
     }
 
     @Override
@@ -46,4 +46,6 @@ public class IntroAttachmentRepositoryImpl implements IntroAttachmentRepository 
                 .map(introAttachmentDataAccessMapper::introAttachmentEntityToIntroAttachment)
                 .toList();
     }
+
+
 }
