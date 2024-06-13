@@ -35,6 +35,7 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/core/certificate-courses/{id}").hasAnyRole(ADMIN)
                         .requestMatchers(HttpMethod.DELETE, "/core/certificate-courses/{id}").hasAnyRole(ADMIN)
                         .requestMatchers(HttpMethod.POST, "/core/certificate-courses/me").hasAnyRole(USER)
+                        .requestMatchers(HttpMethod.GET, "/core/certificate-courses/certificate/dashboard-statistics").hasAnyRole(ADMIN)
 
                         // Chapter
                         .requestMatchers(HttpMethod.POST, "/core/chapters/create").hasAnyRole(ADMIN)
@@ -50,6 +51,7 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/core/contests/admin").hasAnyRole(ADMIN)
                         .requestMatchers(HttpMethod.GET, "/core/contests/me").hasAnyRole(USER)
                         .requestMatchers(HttpMethod.GET, "/core/contests/{id}/admin/statistics").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.GET, "/core/contests/contest/dashboard-statistics").hasAnyRole(ADMIN)
 
                         // Review
                         .requestMatchers(HttpMethod.POST, "/core/reviews/create").hasAnyRole(ADMIN, USER)
