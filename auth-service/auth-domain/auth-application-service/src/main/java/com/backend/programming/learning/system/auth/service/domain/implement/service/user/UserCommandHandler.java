@@ -159,7 +159,8 @@ public class UserCommandHandler {
         Page<User> users = userQueryHelper.queryAllUsersByOrganization(
                 queryAllUsersByOrganizationCommand.getOrganizationId(),
                 queryAllUsersByOrganizationCommand.getPageNo(),
-                queryAllUsersByOrganizationCommand.getPageSize());
+                queryAllUsersByOrganizationCommand.getPageSize(),
+                queryAllUsersByOrganizationCommand.getSearchName());
         log.info("All users by organizationId {} are queried", queryAllUsersByOrganizationCommand.getOrganizationId());
         return userDataMapper.usersToQueryAllUsers(users);
     }
