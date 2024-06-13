@@ -367,13 +367,14 @@ public class ContestQueryHelper {
             UUID contestId,
             String email
     ) {
+        log.info("Querying my rank of contest with id: {}", contestId);
         Optional<User> userResult = userRepository.findByEmail(email);
         if (userResult.isEmpty()) {
             return null;
         }
         Optional<ContestUser> contestUserResult = contestUserRepository.findMyRankOfContest(
-                userResult.get().getId().getValue(),
-                contestId
+                contestId,
+                userResult.get().getId().getValue()
         );
         if (contestUserResult.isEmpty()) {
             return null;
