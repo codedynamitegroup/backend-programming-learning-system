@@ -117,4 +117,13 @@ public class DtoMapper {
         }
 
     }
+
+    public CodeQuestionDto codeQuestionToDtoOnlyNameIdDifficultyAndPeople(CodeQuestion codeQuestion) {
+        return CodeQuestionDto.builder()
+                .id(codeQuestion.getId().getValue())
+                .name(codeQuestion.getName())
+                .difficulty(codeQuestion.getDifficulty())
+                .numOfPeopleAttend(codeQuestion.getNumberOfPeopleAttend())
+                .build();
+    }
 }

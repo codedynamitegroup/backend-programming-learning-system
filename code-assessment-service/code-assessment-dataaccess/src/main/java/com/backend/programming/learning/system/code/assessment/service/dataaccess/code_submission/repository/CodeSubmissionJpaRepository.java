@@ -110,4 +110,11 @@ public interface CodeSubmissionJpaRepository extends JpaRepository<CodeSubmissio
                                       group by cse2.programmingLanguage.id)
             """)
     List<CodeSubmissionEntity> findLatestSubmissionEachLanguageByCodeQuestionIdAndUserId(UUID codeQuestionId, UUID userId);
+
+    @Query(value = """
+    select count(distinct cse.user) 
+    from CodeSubmissionEntity cse
+    where cse.codeQuestion.id = ?1
+    """)
+    Integer countPeopleAttend(UUID id);
 }

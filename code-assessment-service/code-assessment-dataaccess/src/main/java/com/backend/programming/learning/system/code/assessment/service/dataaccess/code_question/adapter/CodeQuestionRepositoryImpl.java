@@ -23,9 +23,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Component
 @Slf4j
@@ -182,5 +180,17 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
     public void deleteCodeQuestionTag(List<CodeQuestionTag> tags) {
         List<CodeQuestionTagEntityId> cqteids = tags.stream().map(item->codeQuestionTagDataAccessMapper.idToEntityId(item.getId())).toList();
         codeQuestionTagJpaRepository.deleteAllById(cqteids);
+    }
+
+    @Override
+    public List<CodeQuestion> findTop3ByTop100RecentSubmitData() {
+        List<CodeQuestionEntity> entities = codeQuestionJpaRepository.findTop3ByTop100RecentSubmitData();
+//        List<UUID> ids = codeQuestionJpaRepository.findTop3ByTop100RecentSubmitData();
+//        List<CodeQuestionEntity> entities = ids.stream().map(id->{
+//            Optional<CodeQuestionEntity> entity = codeQuestionJpaRepository.findById(id);
+//            return entity.orElse(null);
+//        }).filter(Objects::nonNull)
+//                .toList();
+        return entities.stream().map(codeQuestionDataAccessMapper::codeQuestionEntityToCodeQuestion).toList();
     }
 }

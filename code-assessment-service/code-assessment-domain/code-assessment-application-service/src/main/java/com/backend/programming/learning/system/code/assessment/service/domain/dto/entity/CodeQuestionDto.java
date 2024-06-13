@@ -22,6 +22,7 @@ public class CodeQuestionDto {
     String outputFormat;
     String constraints;
     Boolean done;
+    Integer numOfPeopleAttend;
     QuestionDifficulty difficulty;
     List<CodeSubmissionDto> codeSubmissions;
     List<TestCaseDto> sampleTestCases;

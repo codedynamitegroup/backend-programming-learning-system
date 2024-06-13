@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.implement.service.code_question;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.CodeAssessmentDomainService;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.CodeQuestionDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.ProgrammingLanguageDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.langauge.AddLanguageToCodeQuestionCommand;
@@ -264,5 +265,15 @@ public class CodeQuestionsHelper {
         List<CodeQuestionTag> tags = validateHelper.validateCodeQuestionTagsById(cqts);
 
         codeQuestionRepository.deleteCodeQuestionTag(tags);
+    }
+
+    @Transactional
+    public List<CodeQuestion> getMostPracticingRecently() {
+        List<CodeQuestion> codeQuestions = codeQuestionRepository.findTop3ByTop100RecentSubmitData();
+        codeQuestions.stream().forEach(item->{
+            Integer countPeople = codeSubmissionRepository.countPeopleAttend(item.getId());
+            item.setNumberOfPeopleAttend(countPeople);
+        });
+        return codeQuestions;
     }
 }

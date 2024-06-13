@@ -14,6 +14,8 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_question.UpdateCodeQuestionCommand;
 import jakarta.validation.Valid;
 
+import java.util.List;
+
 public interface CodeQuestionApplicationService {
     CreateCodeQuestionResponse createCodeQuestion(@Valid CreateCodeQuestionCommand command);
 
@@ -30,4 +32,6 @@ public interface CodeQuestionApplicationService {
     void addTagToCodeQuestion(@Valid AddTagToCodeQuestionCommand command);
 
     void deleteCodeQuestionTag(@Valid DeleteCodeQuestionTagCommand command);
+
+    List<CodeQuestionDto> getMostPracticingRecently();
 }

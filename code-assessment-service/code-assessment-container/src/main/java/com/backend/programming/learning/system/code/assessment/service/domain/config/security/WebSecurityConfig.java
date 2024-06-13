@@ -32,8 +32,8 @@ public class WebSecurityConfig {
 //                        .requestMatchers(HttpMethod.GET, "/code-assessment/code-question/{code-question-id}").hasAnyRole(ADMIN, USER)
 //                        .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission").hasAnyRole(ADMIN, USER)
 //                        .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission/{code-submission-id}" ).hasAnyRole(ADMIN,USER)
-//                        .requestMatchers(HttpMethod.POST, "/code-assessment/code-submission" ).hasAnyRole(ADMIN,USER)
-
+                                .requestMatchers(HttpMethod.POST, "/code-assessment/code-submission" ).hasAnyRole(ADMIN,USER)
+                                .requestMatchers(HttpMethod.POST, "/code-assessment/shared-solution/{shared-solution-id}/comment" ).hasAnyRole(ADMIN, ADMIN_MOODLE, STUDENT_MOODLE, LECTURER_MOODLE, USER)
                         .anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2

@@ -92,4 +92,9 @@ public class CodeSubmissionRepositoryImpl implements CodeSubmissionRepository {
         List<CodeSubmissionEntity> codeSubmissionEntities = jpaRepository.findLatestSubmissionEachLanguageByCodeQuestionIdAndUserId(id.getValue(), id1.getValue());
         return codeSubmissionEntities.stream().map(dataAccessMapper::entityToCodeSubmission).toList();
     }
+
+    @Override
+    public Integer countPeopleAttend(CodeQuestionId id) {
+        return jpaRepository.countPeopleAttend(id.getValue());
+    }
 }

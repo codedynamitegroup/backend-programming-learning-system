@@ -24,6 +24,7 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     private QuestionDifficulty difficulty;
     private ZonedDateTime createdAt;
     private Boolean solved;
+    private Integer numberOfPeopleAttend;
     private List<String> failureMessages;
     private List<ProgrammingLanguageCodeQuestion> programmingLanguages;
     private List<CodeSubmission> codeSubmissions;
@@ -67,9 +68,16 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         }
     }
 
+    public void setNumberOfPeopleAttend(Integer numberOfPeopleAttend) {
+        this.numberOfPeopleAttend = numberOfPeopleAttend;
+    }
 
     public String getConstraints() {
         return constraints;
+    }
+
+    public Integer getNumberOfPeopleAttend() {
+        return numberOfPeopleAttend;
     }
 
     public String getName() {
