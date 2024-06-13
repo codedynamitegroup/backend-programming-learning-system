@@ -8,10 +8,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionByCodeQuestionIdCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionDetailCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.UpdateSharedSolutionCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
-import com.backend.programming.learning.system.code.assessment.service.domain.entity.SharedSolution;
-import com.backend.programming.learning.system.code.assessment.service.domain.entity.SharedSolutionVote;
-import com.backend.programming.learning.system.code.assessment.service.domain.entity.Tag;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.GenericHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.ValidateHelper;
@@ -59,7 +56,8 @@ public class SharedSolutionHelper {
 
     @Transactional
     public SharedSolution getDetailSharedSolution(GetSharedSolutionDetailCommand command) {
-        SharedSolution sharedSolution = validateHelper.validateSharedSolution(command.getSharedSolutionId(), command.getUserId());
+        User user = validateHelper.validateUserByEmail(command.getEmail());
+        SharedSolution sharedSolution = validateHelper.validateSharedSolution(command.getSharedSolutionId(), user.getId().getValue());
         sharedSolutionRepository.increaseViewByOne(sharedSolution.getId());
         return sharedSolution;
     }

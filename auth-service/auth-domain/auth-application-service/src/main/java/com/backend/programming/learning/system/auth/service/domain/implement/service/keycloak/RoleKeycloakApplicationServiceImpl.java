@@ -46,6 +46,20 @@ public class RoleKeycloakApplicationServiceImpl implements RoleKeycloakApplicati
         usersResource.get(user.getId()).roles().realmLevel().add(Collections.singletonList(representation));
     }
 
+    @Override
+    public void removeRole(String email, String roleName) {
+        UsersResource usersResource = keycloakUserService.getUsersResource();
+        List<UserRepresentation> userRepresentation = usersResource.searchByUsername(email, true);
+        if (userRepresentation.isEmpty()) {
+            log.error("User not found");
+            throw new AuthNotFoundException("User not found");
+        }
+        UserRepresentation user = userRepresentation.get(0);
+        RolesResource rolesResource = getRolesResource();
+        RoleRepresentation representation = rolesResource.get(roleName).toRepresentation();
+        usersResource.get(user.getId()).roles().realmLevel().remove(Collections.singletonList(representation));
+    }
+
     public RolesResource getRolesResource() {
         return keycloakProvider.getRealmResource().realm(keycloakConfigData.getRealm()).roles();
     }

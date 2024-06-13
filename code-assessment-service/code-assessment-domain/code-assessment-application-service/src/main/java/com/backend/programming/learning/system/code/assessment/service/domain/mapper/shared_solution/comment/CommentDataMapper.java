@@ -5,7 +5,6 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment.CreateCommentResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment.vote.VoteCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.comment.vote.UnvoteCommentCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.comment.GetSolutionCommentResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.shared_solution.comment.UpdateCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Comment;
@@ -52,7 +51,7 @@ public class CommentDataMapper {
                 .currentPage(comments.getNumber())
                 .totalItems(comments.getTotalElements())
                 .totalPages(comments.getTotalPages())
-                .sharedSolution(comments.stream().map(dtoMapper::commentToCommentDto).toList())
+                .comments(comments.stream().map(dtoMapper::commentToCommentDto).toList())
                 .build();
     }
 

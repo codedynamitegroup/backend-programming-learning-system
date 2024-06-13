@@ -14,8 +14,10 @@ import java.util.UUID;
 @Getter
 @AllArgsConstructor
 public class CreateCommentCommand {
-    @NotNull(message = "userId must not be null")
-    UUID userId;
+    @NotNull(message = "email must not be null")
+    @Setter
+    @JsonIgnore
+    String email;
 
     @Setter
     @NotNull(message = "sharedSolutionId must not be null")

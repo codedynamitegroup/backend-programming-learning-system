@@ -48,7 +48,7 @@ public class CommentHelper {
 
     @Transactional
     public Comment createComment(CreateCommentCommand command) {
-        User user = validateHelper.validateUser(command.getUserId());
+        User user = validateHelper.validateUserByEmail(command.getEmail());
 
         SharedSolution sharedSolution = validateHelper.validateSharedSolution(command.getSharedSolutionId());
 
@@ -99,7 +99,7 @@ public class CommentHelper {
 
     @Transactional
     public Page<Comment> getComments(GetSolutionCommentCommand command) {
-        User user = validateHelper.validateUser(command.getUserId());
+        User user = validateHelper.validateUserByEmail(command.getEmail());
         SharedSolution sharedSolution = validateHelper.validateSharedSolution(command.getSharedSolutionId());
 
         return commentRepository.findBySharedSolutionId(

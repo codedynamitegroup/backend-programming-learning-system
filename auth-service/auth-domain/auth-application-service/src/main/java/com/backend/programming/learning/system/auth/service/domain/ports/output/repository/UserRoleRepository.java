@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.auth.service.domain.valueobject.U
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
 import java.util.Optional;
+import java.util.UUID;
 
 public interface UserRoleRepository {
     UserRole save(UserRole userRole);
@@ -13,4 +14,5 @@ public interface UserRoleRepository {
     void deleteByRoleIdAndUserId(RoleId roleId, UserId userId);
     void deleteByRoleId(RoleId roleId);
     Optional<UserRole> findById(UserRoleId userRoleId);
+    Optional<UserRole> findByUserIdAndRoleIsNotUser(UserId userId);
 }

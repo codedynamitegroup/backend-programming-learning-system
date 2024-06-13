@@ -16,4 +16,7 @@ public class QueryAllUsersCommand {
 
     @NotNull
     private final int pageSize;
+
+    @NotNull
+    private final String searchName;
 }
