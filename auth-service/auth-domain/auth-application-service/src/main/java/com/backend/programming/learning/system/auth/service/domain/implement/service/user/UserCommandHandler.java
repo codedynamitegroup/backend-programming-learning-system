@@ -16,6 +16,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.lo
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.*;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserEmailCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserByAdminCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserProfileCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
@@ -164,8 +165,43 @@ public class UserCommandHandler {
     }
 
     @Transactional
-    public UpdateUserResponse updateUser(UpdateUserProfileCommand updateUserCommand) {
-        UserUpdatedEvent userUpdatedEvent = userUpdateHelper.persistUser(updateUserCommand);
+    public UpdateUserResponse updateUserProfile(UpdateUserProfileCommand updateUserCommand) {
+        UserUpdatedEvent userUpdatedEvent = userUpdateHelper.updateUserProfile(updateUserCommand);
+
+        userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
+                ServiceName.CORE_SERVICE,
+                CopyState.UPDATING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
+                UUID.randomUUID());
+
+        userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
+                ServiceName.COURSE_SERVICE,
+                CopyState.UPDATING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
+                UUID.randomUUID());
+
+        userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
+                ServiceName.CODE_ASSESSMENT_SERVICE,
+                CopyState.UPDATING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
+                UUID.randomUUID());
+
+        log.info("User is updated with id: {}", userUpdatedEvent.getUser().getId().getValue());
+        return userDataMapper.userToUpdateUserResponse(userUpdatedEvent.getUser(), "User updated successfully");
+    }
+
+    @Transactional
+    public UpdateUserResponse updateUserByAdmin(UpdateUserByAdminCommand updateUserByAdminCommand) {
+        UserUpdatedEvent userUpdatedEvent = userUpdateHelper.updateUserByAdmin(updateUserByAdminCommand);
 
         userOutboxHelper.saveUserOutboxMessage(
                 AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,

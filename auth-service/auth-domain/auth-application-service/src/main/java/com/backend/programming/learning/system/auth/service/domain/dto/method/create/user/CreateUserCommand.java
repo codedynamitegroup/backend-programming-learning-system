@@ -29,5 +29,8 @@ public class CreateUserCommand {
     @NotNull
     private final String lastName;
 
+    @NotNull
+    private final String phone;
+
     private final String roleName;
 }

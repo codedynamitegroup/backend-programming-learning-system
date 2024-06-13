@@ -6,13 +6,13 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
 public class UpdateUserByAdminCommand {
-    @NotNull
-    private final String email;
+    private final UUID userId;
 
     private ZonedDateTime dob;
 
@@ -22,9 +22,13 @@ public class UpdateUserByAdminCommand {
     @NotNull
     private String lastName;
 
+    @NotNull
     private String phone;
 
     private String address;
 
+    @NotNull
     private String roleName;
+
+    private String avatarUrl;
 }

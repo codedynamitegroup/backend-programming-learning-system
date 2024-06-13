@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.auth.service.domain.dto.method.update.user;
 
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,6 +13,7 @@ import java.time.ZonedDateTime;
 @AllArgsConstructor
 public class UpdateUserProfileCommand {
     @NotNull
+    @Email
     private final String email;
 
     private ZonedDateTime dob;
@@ -22,6 +24,7 @@ public class UpdateUserProfileCommand {
     @NotNull
     private String lastName;
 
+    @NotNull
     private String phone;
 
     private String address;

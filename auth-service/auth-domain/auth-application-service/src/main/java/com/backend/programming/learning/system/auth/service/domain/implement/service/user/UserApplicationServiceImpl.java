@@ -16,6 +16,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.lo
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.*;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserEmailCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserByAdminCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserProfileCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
@@ -66,8 +67,13 @@ class UserApplicationServiceImpl implements UserApplicationService {
     }
 
     @Override
-    public UpdateUserResponse updateUser(UpdateUserProfileCommand updateUserCommand) {
-        return userCommandHandler.updateUser(updateUserCommand);
+    public UpdateUserResponse updateUserByAdmin(UpdateUserByAdminCommand updateUserCommand) {
+        return userCommandHandler.updateUserByAdmin(updateUserCommand);
+    }
+
+    @Override
+    public UpdateUserResponse updateUserProfile(UpdateUserProfileCommand updateUserCommand) {
+        return userCommandHandler.updateUserProfile(updateUserCommand);
     }
 
     @Override

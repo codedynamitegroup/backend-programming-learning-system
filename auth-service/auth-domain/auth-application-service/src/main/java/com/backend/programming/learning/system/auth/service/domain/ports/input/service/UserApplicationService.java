@@ -16,6 +16,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.lo
 import com.backend.programming.learning.system.auth.service.domain.dto.method.query.user.*;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserEmailCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserByAdminCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserProfileCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
@@ -30,7 +31,8 @@ public interface UserApplicationService {
     UserEntityResponse findUserByEmail(@Valid QueryUserByEmailCommand queryUserByEmailCommand);
     QueryAllUsersResponse findAllUsers(QueryAllUsersCommand queryAllUsersCommand);
     QueryAllUsersResponse findAllUsersByOrganization(QueryAllUsersByOrganizationCommand queryAllUsersByOrganizationCommand);
-    UpdateUserResponse updateUser(@Valid UpdateUserProfileCommand updateUserCommand);
+    UpdateUserResponse updateUserProfile(@Valid UpdateUserProfileCommand updateUserCommand);
+    UpdateUserResponse updateUserByAdmin(@Valid UpdateUserByAdminCommand updateUserCommand);
     DeleteUserResponse deleteUserById(@Valid DeleteUserCommand deleteUserCommand);
     LoginUserResponse loginUser(@Valid LoginUserCommand loginUserCommand);
     LoginUserResponse socialLoginUser(@Valid SocialLoginUserCommand socialLoginUserCommand);

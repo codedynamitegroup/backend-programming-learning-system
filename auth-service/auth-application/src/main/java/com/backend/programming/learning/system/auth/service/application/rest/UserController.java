@@ -18,6 +18,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.qu
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserEmailCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.refresh_token.RefreshTokenUserResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserByAdminCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserProfileCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.response_entity.user.UserEntityResponse;
@@ -238,8 +239,8 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
-    @PutMapping
-    @Operation(summary = "Update user.")
+    @PutMapping("/update-profile")
+    @Operation(summary = "Update profile user client.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
@@ -247,22 +248,37 @@ public class UserController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<?> updateUser(
-            @RequestBody UpdateUserProfileCommand updateUserCommand,
-            @RequestHeader(value = "Access-Token", required = false) String accessToken) {
-        String email = jwtUtils.getEmailFromJwtString(accessToken);
-        if (email == null) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid access token");
-        }
-        log.info("Updating user with email: {}", email);
-        UpdateUserResponse updateUserResponse = userApplicationService.updateUser(UpdateUserProfileCommand.builder()
-                .email(email)
+    public ResponseEntity<?> updateUserProfile(
+            @RequestBody UpdateUserProfileCommand updateUserCommand) {
+        log.info("Updating user with email: {}", updateUserCommand.getEmail());
+        UpdateUserResponse updateUserResponse = userApplicationService.updateUserProfile(updateUserCommand);
+
+        return ResponseEntity.ok(updateUserResponse);
+    }
+
+    @PutMapping("/{userId}")
+    @Operation(summary = "Update profile user client.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = UpdateUserResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<?> updateUserByAdmin(
+            @PathVariable UUID userId,
+            @RequestBody UpdateUserByAdminCommand updateUserCommand) {
+        log.info("Updating user with userId: {}", userId);
+        UpdateUserResponse updateUserResponse = userApplicationService.updateUserByAdmin(UpdateUserByAdminCommand.builder()
+                .userId(userId)
                 .dob(updateUserCommand.getDob())
                 .firstName(updateUserCommand.getFirstName())
                 .lastName(updateUserCommand.getLastName())
                 .phone(updateUserCommand.getPhone())
                 .address(updateUserCommand.getAddress())
                 .avatarUrl(updateUserCommand.getAvatarUrl())
+                .phone(updateUserCommand.getPhone())
+                .roleName(updateUserCommand.getRoleName())
                 .build());
 
         return ResponseEntity.ok(updateUserResponse);

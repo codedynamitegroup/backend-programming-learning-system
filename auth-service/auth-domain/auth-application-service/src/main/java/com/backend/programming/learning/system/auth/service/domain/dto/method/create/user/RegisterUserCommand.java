@@ -24,4 +24,7 @@ public class RegisterUserCommand {
 
     @NotNull
     private final String lastName;
+
+    @NotNull
+    private final String phone;
 }
