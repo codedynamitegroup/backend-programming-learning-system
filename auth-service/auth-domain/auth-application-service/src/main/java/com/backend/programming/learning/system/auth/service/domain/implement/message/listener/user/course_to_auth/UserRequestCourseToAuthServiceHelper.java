@@ -48,7 +48,7 @@ public class UserRequestCourseToAuthServiceHelper {
         }
 
         User user = userDataMapper.userCreateRequestToUser(userRequest);
-        Optional<User> userResult = userRepository.findUserByEmail(user.getEmail());
+        Optional<User> userResult = userRepository.findByEmail(user.getEmail());
         List<String> failureMessages = new ArrayList<>();
         //Find user with email
         if (userResult.isPresent()) {

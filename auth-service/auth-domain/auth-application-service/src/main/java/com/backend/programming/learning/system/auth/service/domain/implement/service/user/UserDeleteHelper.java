@@ -9,6 +9,7 @@ import com.backend.programming.learning.system.auth.service.domain.exception.Aut
 import com.backend.programming.learning.system.auth.service.domain.ports.input.service.UserKeycloakApplicationService;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,16 +18,10 @@ import java.util.Optional;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class UserDeleteHelper {
     private final AuthDomainService authDomainService;
     private final UserRepository userRepository;
-    private final UserKeycloakApplicationService keycloakApplicationService;
-
-    public UserDeleteHelper(AuthDomainService authDomainService, UserRepository userRepository, UserKeycloakApplicationService keycloakApplicationService) {
-        this.authDomainService = authDomainService;
-        this.userRepository = userRepository;
-        this.keycloakApplicationService = keycloakApplicationService;
-    }
 
     @Transactional
     public UserDeletedEvent deleteUser(DeleteUserCommand deleteUserCommand) {
@@ -41,8 +36,8 @@ public class UserDeleteHelper {
         User user = userResult.get();
 
         UserDeletedEvent userDeletedEvent = authDomainService.deleteUser(user);
-        User userSaved = saveUser(user);
-        keycloakApplicationService.deleteUser(userSaved);
+        saveUser(user);
+//        keycloakApplicationService.deleteUser(userSaved);
         return userDeletedEvent;
     }
 

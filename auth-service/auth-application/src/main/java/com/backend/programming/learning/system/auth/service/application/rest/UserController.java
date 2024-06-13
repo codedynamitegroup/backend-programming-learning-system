@@ -168,7 +168,7 @@ public class UserController {
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<UserEntityResponse> getUserById(@PathVariable UUID id) {
         UserEntityResponse user =
-               userApplicationService.findUserById(QueryUserByIdCommand.builder().userId(id).build());
+               userApplicationService.findUserByIdAndIsDeletedTrueOrFalse(QueryUserByIdCommand.builder().userId(id).build());
        log.info("Returning user with id: {}", user.getUserId());
        return  ResponseEntity.ok(user);
     }
