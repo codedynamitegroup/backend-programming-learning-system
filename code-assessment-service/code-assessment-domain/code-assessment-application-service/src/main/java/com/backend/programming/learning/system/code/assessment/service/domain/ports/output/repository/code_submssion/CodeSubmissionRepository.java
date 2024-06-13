@@ -29,4 +29,6 @@ public interface CodeSubmissionRepository {
     Integer findYourScoreRank(CodeSubmissionId id);
 
     List<CodeSubmission> findLatestSubmissionEachLanguage(CodeQuestionId id, UserId id1);
+
+    Integer countPeopleAttend(CodeQuestionId id);
 }

@@ -96,6 +96,12 @@ public class CodeQuestionController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/most-practicing-recently")
+    public ResponseEntity<List<CodeQuestionDto>> getMostPracticingRecently(){
+        List<CodeQuestionDto> response = codeQuestionApplicationService.getMostPracticingRecently();
+        return ResponseEntity.ok(response);
+    }
+
     //no neeed to delete
 
     //update

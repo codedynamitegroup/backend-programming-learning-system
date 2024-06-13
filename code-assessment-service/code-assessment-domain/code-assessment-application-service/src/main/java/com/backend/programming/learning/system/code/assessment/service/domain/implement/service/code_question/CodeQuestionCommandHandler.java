@@ -25,6 +25,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -106,5 +107,11 @@ public class CodeQuestionCommandHandler {
 
     public void deleteCodeQuestionTag(DeleteCodeQuestionTagCommand command) {
         codeQuestionsHelper.deleteCodeQuestionTag(command);
+    }
+
+    public List<CodeQuestionDto> getMostPracticingRecently() {
+        return codeQuestionsHelper.getMostPracticingRecently()
+                .stream()
+                .map(dtoMapper::codeQuestionToDtoOnlyNameIdDifficultyAndPeople).toList();
     }
 }

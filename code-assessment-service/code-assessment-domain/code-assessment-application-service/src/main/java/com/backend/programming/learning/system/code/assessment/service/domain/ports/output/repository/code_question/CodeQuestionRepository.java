@@ -34,4 +34,6 @@ public interface CodeQuestionRepository {
     Optional<CodeQuestionTag> findCodeQuestionTagById(CodeQuestionTagId id);
 
     void deleteCodeQuestionTag(List<CodeQuestionTag> tags);
+
+    List<CodeQuestion> findTop3ByTop100RecentSubmitData();
 }

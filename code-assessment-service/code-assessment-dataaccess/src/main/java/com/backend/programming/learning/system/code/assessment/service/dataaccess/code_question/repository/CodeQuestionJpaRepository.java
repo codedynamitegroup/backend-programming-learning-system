@@ -17,6 +17,18 @@ import java.util.UUID;
 public interface CodeQuestionJpaRepository extends JpaRepository<CodeQuestionEntity, UUID> {
     Optional<CodeQuestionEntity> findByQuestionId(UUID questionId);
 
+    @Query(value= """
+            (select cqe.*
+                from (select cse.* from code_submission cse
+                order by cse.created_at
+                limit 100) as cseTemp join qtype_code_questions cqe on cqe.id = cseTemp.code_question_id
+            group by cqe.id
+            order by count(cseTemp) DESC
+            limit 3)
+            """, nativeQuery = true)
+
+    List<CodeQuestionEntity> findTop3ByTop100RecentSubmitData();
+
     @Query(value = """
             select cqe.* from qtype_code_questions cqe
             where 
