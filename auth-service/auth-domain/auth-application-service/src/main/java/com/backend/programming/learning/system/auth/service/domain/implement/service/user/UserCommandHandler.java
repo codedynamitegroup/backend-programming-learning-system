@@ -149,7 +149,7 @@ public class UserCommandHandler {
 
     @Transactional(readOnly = true)
     public QueryAllUsersResponse queryAllUsers(QueryAllUsersCommand queryAllUsersCommand) {
-        Page<User> users = userQueryHelper.queryAllUsers(queryAllUsersCommand.getPageNo(), queryAllUsersCommand.getPageSize());
+        Page<User> users = userQueryHelper.queryAllUsers(queryAllUsersCommand.getPageNo(), queryAllUsersCommand.getPageSize(), queryAllUsersCommand.getSearchName());
         log.info("All users are queried");
         return userDataMapper.usersToQueryAllUsers(users);
     }

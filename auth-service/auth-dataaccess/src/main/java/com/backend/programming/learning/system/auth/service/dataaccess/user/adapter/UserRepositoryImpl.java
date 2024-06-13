@@ -51,9 +51,9 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Page<User> findAll(Integer page, Integer size) {
+    public Page<User> findAll(Integer page, Integer size, String searchName) {
         Pageable paging = PageRequest.of(page, size);
-        return userJpaRepository.findAllByIsDeletedFalse(paging)
+        return userJpaRepository.findAll(paging, searchName)
                 .map(userDataAccessMapper::userEntityToUser);
     }
 

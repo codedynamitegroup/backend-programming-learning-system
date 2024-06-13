@@ -47,6 +47,7 @@ public class UserDataMapper {
                         Organization.builder()
                                 .id(new OrganizationId(createUserCommand.getOrganizationId()))
                                 .build())
+                .phone(createUserCommand.getPhone())
                 .build();
     }
 
@@ -55,6 +56,7 @@ public class UserDataMapper {
                 .email(registerUserCommand.getEmail())
                 .firstName(registerUserCommand.getFirstName())
                 .lastName(registerUserCommand.getLastName())
+                .phone(registerUserCommand.getPhone())
                 .build();
     }
 

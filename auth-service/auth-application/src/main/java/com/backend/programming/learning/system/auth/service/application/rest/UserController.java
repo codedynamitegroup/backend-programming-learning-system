@@ -211,6 +211,7 @@ public class UserController {
         QueryAllUsersResponse users = userApplicationService.findAllUsers(QueryAllUsersCommand.builder()
                 .pageNo(pageNo)
                 .pageSize(pageSize)
+                .searchName(searchName)
                 .build());
         log.info("Returning all users");
         return ResponseEntity.ok(users);
