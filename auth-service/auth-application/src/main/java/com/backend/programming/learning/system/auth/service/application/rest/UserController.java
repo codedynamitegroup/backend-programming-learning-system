@@ -229,12 +229,15 @@ public class UserController {
     public ResponseEntity<QueryAllUsersResponse> getAllUsersByOrganization(
             @PathVariable UUID organizationId,
             @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "10") Integer pageSize
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "") String searchName
+
     ) {
         QueryAllUsersResponse users = userApplicationService.findAllUsersByOrganization(QueryAllUsersByOrganizationCommand.builder()
                 .organizationId(organizationId)
                 .pageNo(pageNo)
                 .pageSize(pageSize)
+                .searchName(searchName)
                 .build());
         log.info("Returning all users from organization with id: {}.", organizationId);
         return ResponseEntity.ok(users);

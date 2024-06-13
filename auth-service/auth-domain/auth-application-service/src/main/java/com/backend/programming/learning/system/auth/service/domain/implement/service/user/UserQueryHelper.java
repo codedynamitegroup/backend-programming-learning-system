@@ -49,8 +49,8 @@ public class UserQueryHelper {
     }
 
     @Transactional(readOnly = true)
-    public Page<User> queryAllUsersByOrganization(UUID organizationId, Integer pageNo, Integer pageSize) {
-        return userRepository.findAllUsersByOrganization(organizationId, pageNo, pageSize);
+    public Page<User> queryAllUsersByOrganization(UUID organizationId, Integer pageNo, Integer pageSize, String searchName) {
+        return userRepository.findAllUsersByOrganization(organizationId, pageNo, pageSize, searchName);
     }
 
     @Transactional(readOnly = true)
