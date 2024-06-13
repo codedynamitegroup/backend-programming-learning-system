@@ -17,7 +17,7 @@ public class GetSharedSolutionDetailCommand {
     @NotNull(message = "sharedSolutionId must not be null")
     UUID sharedSolutionId;
 
-    @NotNull(message = "userId must not be null")
-    UUID userId;
+    @NotNull(message = "email must not be null")
+    String email;
 
 }

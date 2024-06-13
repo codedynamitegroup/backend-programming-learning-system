@@ -70,7 +70,7 @@ public class SharedSolutionDataMapper {
                         .build())
                 .sharedSolutionId(sharedSolution.getId().getValue())
                 .totalView(sharedSolution.getViewNumber())
-                .totalComment(0)
+                .totalComment(sharedSolution.getTotalComment())
                 .totalVote(sharedSolution.getTotalVote())
                 .createdAt(sharedSolution.getCreatedAt())
                 .title(sharedSolution.getTitle())

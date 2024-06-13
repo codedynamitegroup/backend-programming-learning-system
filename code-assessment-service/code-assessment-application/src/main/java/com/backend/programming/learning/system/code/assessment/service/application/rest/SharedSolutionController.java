@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.application.rest;
 
+import com.backend.programming.learning.system.application.handler.utils.JwtUtils;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.CommentDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment.CreateCommentCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.comment.CreateCommentResponse;
@@ -94,10 +95,11 @@ public class SharedSolutionController {
     @GetMapping("/{shared-solution-id}")
     public ResponseEntity<GetSharedSolutionResponseItem> getDetailSharedSolution
     (@PathVariable("shared-solution-id") UUID sharedSolutionId,
-     @RequestParam UUID userId){
+     @RequestHeader(value = "Access-Token") String accessToken){
+        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
 
         GetSharedSolutionDetailCommand command = GetSharedSolutionDetailCommand.builder()
-                .userId(userId)
+                .email(email)
                 .sharedSolutionId(sharedSolutionId)
                 .build();
 
@@ -133,7 +135,11 @@ public class SharedSolutionController {
     @PostMapping("/{shared-solution-id}/comment")
     public ResponseEntity<CreateCommentResponse> createComment(
             @PathVariable("shared-solution-id") UUID sharedSolutionId,
+            @RequestHeader(value = "Access-Token") String accessToken,
             @RequestBody CreateCommentCommand command){
+        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
+
+        command.setEmail(email);
         command.setSharedSolutionId(sharedSolutionId);
         CreateCommentResponse response = service.createComment(command);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -167,13 +173,14 @@ public class SharedSolutionController {
     @GetMapping("/{shared-solution-id}/comment")
     public ResponseEntity<GetSolutionCommentResponse> getSolutionComments(
             @PathVariable("shared-solution-id") UUID sharedSolutionId,
-            @RequestParam(defaultValue = "${code-assessment-service.default-page-number}") Integer pageNo,
-            @RequestParam(defaultValue = "${code-assessment-service.default-page-size}") Integer pageSize,
-            @RequestParam UUID userId,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestHeader(value = "Access-Token") String accessToken,
             @RequestParam(defaultValue = "DESC") QueryOrderBy orderBy){
+        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
 
         GetSolutionCommentCommand command = GetSolutionCommentCommand.builder()
-                .userId(userId)
+                .email(email)
                 .orderBy(orderBy)
                 .sharedSolutionId(sharedSolutionId)
                 .pageNum(pageNo)
