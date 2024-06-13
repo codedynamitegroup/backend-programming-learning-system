@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest;
+package com.backend.programming.learning.system.core.service.domain.dto.method.query.contest;
 
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.QueryLineChartResponse;
 import lombok.Builder;

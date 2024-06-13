@@ -7,7 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.contest_user.CreateContestUserResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.DeleteContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.DeleteContestResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.QueryGeneralStatisticsContestResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryGeneralStatisticsContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.*;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestResponse;
@@ -28,8 +28,6 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Base64;
-import java.util.Map;
 import java.util.UUID;
 
 @Slf4j

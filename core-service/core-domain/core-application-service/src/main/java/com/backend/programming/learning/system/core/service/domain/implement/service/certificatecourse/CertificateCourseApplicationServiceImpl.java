@@ -64,4 +64,9 @@ class CertificateCourseApplicationServiceImpl implements CertificateCourseApplic
     public DeleteCertificateCourseResponse deleteCertificateCourse(DeleteCertificateCourseCommand deleteCertificateCourseCommand) {
         return certificateCourseCommandHandler.deleteCertificateCourse(deleteCertificateCourseCommand);
     }
+
+    @Override
+    public QueryGeneralCertificateCourseStatisticsResponse queryGeneralCertificateCourseStatistics() {
+        return certificateCourseCommandHandler.queryGeneralCertificateCourseStatistics();
+    }
 }

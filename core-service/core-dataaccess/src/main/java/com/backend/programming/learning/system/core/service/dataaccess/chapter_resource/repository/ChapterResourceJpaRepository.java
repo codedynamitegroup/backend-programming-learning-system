@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.dataaccess.chapter_resource.repository;
 
 import com.backend.programming.learning.system.core.service.dataaccess.chapter_resource.entity.ChapterResourceEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.chapter_resource.projection.CourseTypeCountProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -68,5 +69,12 @@ public interface ChapterResourceJpaRepository extends JpaRepository<ChapterResou
         limit 1
 """)
     Optional<ChapterResourceEntity> findLastResourceByCertificateCourseId(UUID certificateCourseId);
+
+    @Query("""
+        select cq.resourceType as resourceType, count(cq.resourceType) as count
+        from ChapterResourceEntity cq
+        group by cq.resourceType
+        """)
+    List<CourseTypeCountProjection> countResourceByType();
 }
 

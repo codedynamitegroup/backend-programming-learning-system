@@ -291,4 +291,21 @@ public class CertificateCourseController {
         log.info("Certificate course deleted: {}", id);
         return ResponseEntity.ok(deleteCertificateCourseResponse);
     }
+
+    @GetMapping("/certificate/dashboard-statistics")
+    @Operation(summary = "Get statistics of contests for certificate dashboard.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryGeneralCertificateCourseStatisticsResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryGeneralCertificateCourseStatisticsResponse> getCertificateDashboardStatistics() {
+        QueryGeneralCertificateCourseStatisticsResponse queryGeneralCertificateCourseStatisticsResponse =
+                certificateCourseApplicationService.queryGeneralCertificateCourseStatistics();
+
+        log.info("Returning certificate dashboard statistics");
+        return ResponseEntity.ok(queryGeneralCertificateCourseStatisticsResponse);
+    }
 }

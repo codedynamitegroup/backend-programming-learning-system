@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.implement.service.contest;
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.PopularContestDTO;
-import com.backend.programming.learning.system.core.service.domain.dto.method.delete.contest.QueryGeneralStatisticsContestResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryGeneralStatisticsContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.QueryLineChartResponse;
