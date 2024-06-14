@@ -21,6 +21,8 @@ public class CodeSubmissionMessagingDataMapper {
                 .pass(avroModel.getPass())
                 .createdAt(avroModel.getCreatedAt().atZone(ZoneId.of("UTC")))
                 .copyState(avroModel.getCopyState().name())
+                .cerCourseId(avroModel.getCerCourseId())
+                .contestId(avroModel.getContestId())
                 .build();
     }
 }

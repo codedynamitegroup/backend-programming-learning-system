@@ -2,13 +2,14 @@ package com.backend.programming.learning.system.code.assessment.service.dataacce
 
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.tag.CodeQuestionTagEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.repository.CodeQuestionTagJpaRepository;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.entity.CodeSubmissionCerCourseEntity;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.entity.contest.CodeSubmissionContestEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.entity.CodeSubmissionEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.mapper.CodeSubmissionDataAccessMapper;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.repository.CodeSubmissionCerCourseJpaRepository;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.repository.CodeSubmissionContestJpaRepository;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.repository.CodeSubmissionJpaRepository;
-import com.backend.programming.learning.system.code.assessment.service.dataaccess.tag.entity.TagEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.tag.mapper.TagDataAccessMapper;
-import com.backend.programming.learning.system.code.assessment.service.dataaccess.tag.repository.TagJpaRepository;
-import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestionTag;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Tag;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_submssion.CodeSubmissionRepository;
@@ -32,12 +33,16 @@ public class CodeSubmissionRepositoryImpl implements CodeSubmissionRepository {
     private final CodeSubmissionDataAccessMapper dataAccessMapper;
     private final CodeQuestionTagJpaRepository codeQuestionTagJpaRepository;
     private final TagDataAccessMapper tagDataAccessMapper;
+    private final CodeSubmissionContestJpaRepository codeSubmissionContestJpaRepository;
+    private final CodeSubmissionCerCourseJpaRepository codeSubmissionCerCourseJpaRepository;
 
-    public CodeSubmissionRepositoryImpl(CodeSubmissionJpaRepository jpaRepository, CodeSubmissionDataAccessMapper dataAccessMapper, CodeQuestionTagJpaRepository codeQuestionTagJpaRepository, TagDataAccessMapper tagDataAccessMapper) {
+    public CodeSubmissionRepositoryImpl(CodeSubmissionJpaRepository jpaRepository, CodeSubmissionDataAccessMapper dataAccessMapper, CodeQuestionTagJpaRepository codeQuestionTagJpaRepository, TagDataAccessMapper tagDataAccessMapper, CodeSubmissionContestJpaRepository codeSubmissionContestJpaRepository, CodeSubmissionCerCourseJpaRepository codeSubmissionCerCourseJpaRepository) {
         this.jpaRepository = jpaRepository;
         this.dataAccessMapper = dataAccessMapper;
         this.codeQuestionTagJpaRepository = codeQuestionTagJpaRepository;
         this.tagDataAccessMapper = tagDataAccessMapper;
+        this.codeSubmissionContestJpaRepository = codeSubmissionContestJpaRepository;
+        this.codeSubmissionCerCourseJpaRepository = codeSubmissionCerCourseJpaRepository;
     }
 
     @Override
@@ -121,5 +126,21 @@ public class CodeSubmissionRepositoryImpl implements CodeSubmissionRepository {
                     .map(tagDataAccessMapper::entityToTag).toList();
         }
         return List.of();
+    }
+
+    @Override
+    public void saveCerCourse(CodeSubmissionId id, UUID certificateCourseId) {
+        codeSubmissionCerCourseJpaRepository.save(CodeSubmissionCerCourseEntity.builder()
+                        .cerCourseId(certificateCourseId)
+                        .codeSubmissionId(id.getValue())
+                .build());
+    }
+
+    @Override
+    public void saveContest(CodeSubmissionId id, UUID contestId) {
+        codeSubmissionContestJpaRepository.save(CodeSubmissionContestEntity.builder()
+                .contestId(contestId)
+                .codeSubmissionId(id.getValue())
+                .build());
     }
 }

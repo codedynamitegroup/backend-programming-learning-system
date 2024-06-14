@@ -16,6 +16,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.va
 import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -41,6 +42,7 @@ public class CodeSubmissionCommandHandler {
         this.generalSagaHelper = generalSagaHelper;
     }
 
+    @Transactional
     public CreateCodeSubmissionResponse createCodeSubmission(CreateCodeSubmissionCommand createCodeSubmissionCommand) {
         CodeSubmissionUpdatedEvent event = codeSubmissionHelper.createCodeSubmission(createCodeSubmissionCommand);
         CodeSubmission codeSubmission = event.getCodeSubmission();
@@ -68,7 +70,7 @@ public class CodeSubmissionCommandHandler {
 
         codeSubmissionUpdateOutboxHelper.saveCodeSubmissionUpdateOutboxMessage(
                 codeSubmissionDataMapper.codeSubmissionUpdatedEventToCodeSubmissionUpdatePayload(
-                        event, CopyState.CREATING
+                        event, createCodeSubmissionCommand.getCertificateCourseId(), createCodeSubmissionCommand.getContestId(), CopyState.CREATING
                 ),
                 event.getCodeSubmission().getCopyState(),
                 generalSagaHelper.copyStateToSagaStatus(CopyState.CREATING),

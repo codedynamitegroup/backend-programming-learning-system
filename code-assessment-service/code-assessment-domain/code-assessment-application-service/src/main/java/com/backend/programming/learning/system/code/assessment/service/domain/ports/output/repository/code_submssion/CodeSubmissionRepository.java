@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public interface CodeSubmissionRepository {
     CodeSubmission save(CodeSubmission codeSubmission);
@@ -34,4 +35,8 @@ public interface CodeSubmissionRepository {
     Integer countPeopleAttend(CodeQuestionId id);
 
     List<Tag> findTagByLastestSubmission(UserId id);
+
+    void saveCerCourse(CodeSubmissionId id, UUID certificateCourseId);
+
+    void saveContest(CodeSubmissionId id, UUID contestId);
 }

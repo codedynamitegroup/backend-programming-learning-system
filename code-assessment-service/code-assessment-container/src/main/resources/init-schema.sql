@@ -321,6 +321,27 @@ CREATE TABLE code_submission_test_case(
         ON DELETE CASCADE
         ON UPDATE NO ACTION
 );
+
+DROP TABLE IF EXISTS code_submission_cer_course CASCADE;
+CREATE TABLE code_submission_cer_course(
+    code_submission_id uuid NOT NULL,
+    cer_course_id uuid NOT NULL,
+    CONSTRAINT cs_cc_pk primary key (code_submission_id),
+    constraint cs_cc_cs_fk foreign key (code_submission_id)
+        references code_submission (id)MATCH SIMPLE
+                                               ON DELETE CASCADE
+                                               ON UPDATE NO ACTION
+);
+DROP TABLE IF EXISTS code_submission_contest CASCADE;
+CREATE TABLE code_submission_contest(
+    code_submission_id uuid NOT NULL,
+    contest_id uuid NOT NULL,
+    CONSTRAINT cs_c_pk primary key (code_submission_id),
+    constraint cs_c_cs_fk foreign key (code_submission_id)
+            references code_submission (id) MATCH SIMPLE
+                                                   ON DELETE CASCADE
+                                                   ON UPDATE NO ACTION
+);
 -- outbox
 
 DROP TABLE IF EXISTS code_questions_update_outbox CASCADE;

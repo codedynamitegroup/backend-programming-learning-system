@@ -13,13 +13,13 @@ import com.backend.programming.learning.system.code.assessment.service.domain.ev
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.code_submission_update_outbox.CodeSubmissionUpdatePayload;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.UUID;
 
 @Component
 @Slf4j
@@ -101,7 +101,7 @@ public class CodeSubmissionDataMapper {
 
     }
 
-    public CodeSubmissionUpdatePayload codeSubmissionUpdatedEventToCodeSubmissionUpdatePayload(CodeSubmissionUpdatedEvent event, CopyState copyState) {
+    public CodeSubmissionUpdatePayload codeSubmissionUpdatedEventToCodeSubmissionUpdatePayload(CodeSubmissionUpdatedEvent event, UUID certificateCourseId, UUID contestId, CopyState copyState) {
         CodeSubmission codeSubmission = event.getCodeSubmission();
         return CodeSubmissionUpdatePayload.builder()
                 .id(codeSubmission.getId().getValue().toString())
@@ -114,6 +114,8 @@ public class CodeSubmissionDataMapper {
                 .pass(codeSubmission.getGrade() == null? null: codeSubmission.getGrade().floatValue() == codeSubmission.getCodeQuestion().getMaxGrade())
                 .createdAt(codeSubmission.getCreatedAt())
                 .copyState(codeSubmission.getCopyState().name())
+                .cerCourseId(certificateCourseId)
+                .contestId(contestId)
                 .build();
     }
 

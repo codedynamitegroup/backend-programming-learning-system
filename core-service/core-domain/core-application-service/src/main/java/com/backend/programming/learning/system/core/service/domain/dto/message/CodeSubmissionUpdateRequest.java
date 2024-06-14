@@ -24,4 +24,6 @@ public class CodeSubmissionUpdateRequest {
     private final Boolean pass;
     private final ZonedDateTime createdAt;
     private String copyState;
+    private UUID cerCourseId;
+    private UUID contestId;
 }

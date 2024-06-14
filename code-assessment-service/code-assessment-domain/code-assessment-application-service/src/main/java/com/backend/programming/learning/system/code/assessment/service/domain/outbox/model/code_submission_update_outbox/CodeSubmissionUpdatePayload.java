@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 @Getter
 @AllArgsConstructor
@@ -31,4 +32,8 @@ public class CodeSubmissionUpdatePayload {
     private final ZonedDateTime createdAt;
     @JsonProperty
     private String copyState;
+    @JsonProperty
+    private final UUID cerCourseId;
+    @JsonProperty
+    private final UUID contestId;
 }

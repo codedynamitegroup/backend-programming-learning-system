@@ -26,6 +26,8 @@ public class CodeSubmissionMessagingDataMapper {
                 .setCopyState(CopyState.valueOf(payload.getCopyState()))
                 .setPass(payload.getPass())
                 .setCreatedAt(payload.getCreatedAt().toInstant())
+                .setContestId(payload.getContestId())
+                .setCerCourseId(payload.getCerCourseId())
                 .build();
     }
 }
