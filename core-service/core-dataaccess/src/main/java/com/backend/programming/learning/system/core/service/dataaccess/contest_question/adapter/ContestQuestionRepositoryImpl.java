@@ -34,4 +34,9 @@ public class ContestQuestionRepositoryImpl implements ContestQuestionRepository 
                 contestQuestionJpaRepository.findAllContestQuestionsByContestId(contestId)
         );
     }
+
+    @Override
+    public void deleteAllContestQuestionsByContestId(UUID contestId) {
+        contestQuestionJpaRepository.deleteAllContestQuestionsByContestId(contestId);
+    }
 }

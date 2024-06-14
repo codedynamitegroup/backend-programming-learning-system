@@ -18,7 +18,7 @@ public interface ChapterJpaRepository extends JpaRepository<ChapterEntity, UUID>
     Optional<ChapterEntity> findById(UUID id);
     List<ChapterEntity> findAllByCertificateCourseIdOrderByNoAsc(UUID certificateCourseId);
 
-    @Query(value = "SELECT COALESCE(MAX(no),0) FROM chapter WHERE certificate_course_id = :certificateCourseId",
+    @Query(value = "SELECT COALESCE(MAX(no),0) FROM chapter WHERE certificate_course_id = ?1",
             nativeQuery = true)
     Integer findTopNoByCertificateCourseId(UUID certificateCourseId);
 }

@@ -18,7 +18,6 @@ import com.backend.programming.learning.system.code.assessment.service.domain.im
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.ValidateHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.code_submission.CodeSubmissionDataMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.scheduler.code_submission_update_outbox.CodeSubmissionUpdateOutboxHelper;
-import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.assessment.AssessmentSourceCodeByTestCases;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_submssion.CodeSubmissionRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
@@ -26,7 +25,6 @@ import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -89,6 +87,10 @@ public class CodeSubmissionHelper {
         CodeSubmissionUpdatedEvent event = codeAssessmentDomainService.initiateCodeSubmission(codeSubmission, testCases, plcq, programmingLanguage);
 
         codeSubmissionRepository.save(codeSubmission);
+        if(command.getCertificateCourseId() != null)
+            codeSubmissionRepository.saveCerCourse(codeSubmission.getId(), command.getCertificateCourseId());
+        if(command.getContestId() != null)
+            codeSubmissionRepository.saveContest(codeSubmission.getId(), command.getContestId());
         codeSubmissionTestCaseRepository.save(codeSubmission.getCodeSubmissionTestCaseList());
 
         return event;
@@ -132,7 +134,7 @@ public class CodeSubmissionHelper {
 
             codeSubmissionUpdateOutboxHelper.saveCodeSubmissionUpdateOutboxMessage(
                     codeSubmissionDataMapper.codeSubmissionUpdatedEventToCodeSubmissionUpdatePayload(
-                            event, CopyState.UPDATING
+                            event, null, null, CopyState.UPDATING
                     ),
                     event.getCodeSubmission().getCopyState(),
                     generalSagaHelper.copyStateToSagaStatus(CopyState.UPDATING),

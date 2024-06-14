@@ -58,6 +58,20 @@
       "type": ["null", "boolean"]
     },
     {
+      "name": "cerCourseId",
+      "type": ["null", {
+        "type": "string",
+        "logicalType": "uuid"
+      }]
+    },
+    {
+      "name": "contestId",
+      "type": ["null", {
+        "type": "string",
+        "logicalType": "uuid"
+      }]
+    },
+    {
       "name": "createdAt",
       "type":  {
         "type": "long",
