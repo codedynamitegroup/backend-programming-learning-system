@@ -1,7 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.implement.service.code_question;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.CodeAssessmentDomainService;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.CodeQuestionDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.ProgrammingLanguageDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.langauge.AddLanguageToCodeQuestionCommand;
@@ -268,8 +267,23 @@ public class CodeQuestionsHelper {
     }
 
     @Transactional
-    public List<CodeQuestion> getMostPracticingRecently() {
-        List<CodeQuestion> codeQuestions = codeQuestionRepository.findTop3ByTop100RecentSubmitData();
+    public List<CodeQuestion> getRecommendedCodeQuestion(String email) {
+        List<CodeQuestion> codeQuestions = new ArrayList<>();
+        if(email == null)// not login
+            codeQuestions = codeQuestionRepository.findTop3ByTop100RecentSubmitData();
+        else{
+            User user = validateHelper.validateUserByEmail(email);
+            List<Tag> tags = codeSubmissionRepository.findTagByLastestSubmission(user.getId());
+            if(!tags.isEmpty()) {//find base on previous tag
+                codeQuestions = codeQuestionRepository.findByNotSolvedTagsAndUserId(tags, user.getId());
+                if(codeQuestions.isEmpty())//if not found
+                    codeQuestions = codeQuestionRepository.findTop3ByTop100RecentSubmitData();
+            }
+            else//if no tag found
+                codeQuestions = codeQuestionRepository.findTop3ByTop100RecentSubmitData();
+        }
+
+        //count people attend
         codeQuestions.stream().forEach(item->{
             Integer countPeople = codeSubmissionRepository.countPeopleAttend(item.getId());
             item.setNumberOfPeopleAttend(countPeople);

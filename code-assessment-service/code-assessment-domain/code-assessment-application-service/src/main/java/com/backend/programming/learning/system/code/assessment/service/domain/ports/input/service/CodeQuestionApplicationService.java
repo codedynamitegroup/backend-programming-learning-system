@@ -33,5 +33,5 @@ public interface CodeQuestionApplicationService {
 
     void deleteCodeQuestionTag(@Valid DeleteCodeQuestionTagCommand command);
 
-    List<CodeQuestionDto> getMostPracticingRecently();
+    List<CodeQuestionDto> getRecommendedCodeQuestion(String email);
 }

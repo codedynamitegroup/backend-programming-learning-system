@@ -69,7 +69,7 @@ class CodeQuestionApplicationServiceImpl implements CodeQuestionApplicationServi
     }
 
     @Override
-    public List<CodeQuestionDto> getMostPracticingRecently() {
-        return codeQuestionCommandHandler.getMostPracticingRecently();
+    public List<CodeQuestionDto> getRecommendedCodeQuestion(String email) {
+        return codeQuestionCommandHandler.getRecommendedCodeQuestion(email);
     }
 }

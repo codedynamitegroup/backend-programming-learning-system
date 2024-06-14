@@ -109,8 +109,8 @@ public class CodeQuestionCommandHandler {
         codeQuestionsHelper.deleteCodeQuestionTag(command);
     }
 
-    public List<CodeQuestionDto> getMostPracticingRecently() {
-        return codeQuestionsHelper.getMostPracticingRecently()
+    public List<CodeQuestionDto> getRecommendedCodeQuestion(String email) {
+        return codeQuestionsHelper.getRecommendedCodeQuestion(email)
                 .stream()
                 .map(dtoMapper::codeQuestionToDtoOnlyNameIdDifficultyAndPeople).toList();
     }

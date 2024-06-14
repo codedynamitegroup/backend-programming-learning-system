@@ -193,4 +193,11 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
 //                .toList();
         return entities.stream().map(codeQuestionDataAccessMapper::codeQuestionEntityToCodeQuestion).toList();
     }
+
+    @Override
+    public List<CodeQuestion> findByNotSolvedTagsAndUserId(List<Tag> tags, UserId id) {
+        List<UUID> tagIds = tags.stream().map(i->i.getId().getValue()).toList();
+        List<CodeQuestionEntity> codeQuestionEntities = codeQuestionJpaRepository.findByNotSolvedTagsAndUserId(tagIds, id.getValue());
+        return codeQuestionEntities.stream().map(codeQuestionDataAccessMapper::codeQuestionEntityToCodeQuestion).toList();
+    }
 }

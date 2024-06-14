@@ -84,5 +84,18 @@ public interface CodeQuestionJpaRepository extends JpaRepository<CodeQuestionEnt
                                                    boolean isPublic,
                                                    String search,
                                                    Pageable pageable);
-//    Page<CodeQuestionEntity> findAndFilterByTagIds(List<UUID> tagIs, String search, QuestionDifficulty difficulty, Boolean solved, UUID value, boolean isPublic, Pageable pageable);
+
+    @Query(value = """
+            select cqe.* from qtype_code_questions cqe 
+            join tag_code_question tcqe on tcqe.code_question_id = cqe.id
+            where COALESCE(?1,NULL) IS NOT NULL AND tcqe.tag_id in ?1
+                and cqe.id not in (
+                    select cqe2.id from qtype_code_questions cqe2
+                    join code_submission cse on cse.code_question_id = cqe2.id
+                    where cse.grade = cqe2.max_grade
+                )
+            group by cqe.id
+            limit 3
+            """, nativeQuery = true)
+    List<CodeQuestionEntity> findByNotSolvedTagsAndUserId(List<UUID> tagIds, UUID value);
 }
