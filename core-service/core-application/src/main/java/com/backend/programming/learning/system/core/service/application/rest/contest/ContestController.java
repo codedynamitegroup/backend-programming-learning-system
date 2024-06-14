@@ -145,6 +145,9 @@ public class ContestController {
                         .startTime(updateContestCommand.getStartTime())
                         .endTime(updateContestCommand.getEndTime())
                         .isPublic(updateContestCommand.getIsPublic())
+                        .isRestrictedForum(updateContestCommand.getIsRestrictedForum())
+                        .isDisabledForum(updateContestCommand.getIsDisabledForum())
+                        .questionIds(updateContestCommand.getQuestionIds())
                         .email(email)
                         .build());
         log.info("Contest updated: {}", updateContestResponse.getContestId());

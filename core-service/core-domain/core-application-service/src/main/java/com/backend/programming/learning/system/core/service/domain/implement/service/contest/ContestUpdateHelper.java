@@ -5,11 +5,10 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.up
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.exception.*;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
-import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
-import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
-import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
+import com.backend.programming.learning.system.core.service.domain.valueobject.*;
 import com.backend.programming.learning.system.domain.DomainConstants;
+import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
+import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,20 +23,25 @@ import java.util.UUID;
 @Component
 public class ContestUpdateHelper {
     private final ContestRepository contestRepository;
+    private final ContestQuestionRepository contestQuestionRepository;
     private final UserRepository userRepository;
     private final ContestUserRepository contestUserRepository;
+    private final QuestionRepository questionRepository;
 
     public ContestUpdateHelper(ContestRepository contestRepository,
+                               ContestQuestionRepository contestQuestionRepository,
                                UserRepository userRepository,
-                               ContestUserRepository contestUserRepository) {
+                               ContestUserRepository contestUserRepository,
+                               QuestionRepository questionRepository) {
         this.contestRepository = contestRepository;
+        this.contestQuestionRepository = contestQuestionRepository;
         this.userRepository = userRepository;
         this.contestUserRepository = contestUserRepository;
+        this.questionRepository = questionRepository;
     }
 
     @Transactional
     public void persistContest(UpdateContestCommand updateContestCommand) {
-//        checkContestUserExistsByContestId(updateContestCommand.getContestId());
         Contest contest = getContest(updateContestCommand.getContestId());
 
         User updatedBy = findUserByEmail(updateContestCommand.getEmail());
@@ -68,12 +72,40 @@ public class ContestUpdateHelper {
             contest.setScoring(updateContestCommand.getScoring());
         }
 
+        if (updateContestCommand.getIsPublic() != null) {
+            contest.setPublic(updateContestCommand.getIsPublic());
+        }
+
+        if (updateContestCommand.getIsRestrictedForum() != null) {
+            contest.setRestrictedForum(updateContestCommand.getIsRestrictedForum());
+        }
+
+        if (updateContestCommand.getIsDisabledForum() != null) {
+            contest.setDisabledForum(updateContestCommand.getIsDisabledForum());
+        }
+
         if (updateContestCommand.getStartTime() != null) {
             contest.setStartTime(updateContestCommand.getStartTime());
         }
 
         if (updateContestCommand.getEndTime() != null) {
             contest.setEndTime(updateContestCommand.getEndTime());
+        }
+
+        if (updateContestCommand.getQuestionIds() != null) {
+            contestQuestionRepository.deleteAllContestQuestionsByContestId(contest.getId().getValue());
+
+            for (UUID questionId : updateContestCommand.getQuestionIds()) {
+                Optional<Question> question = questionRepository.findQuestion(questionId);
+                if (question.isPresent()) {
+                    ContestQuestion contestQuestion = ContestQuestion.builder()
+                            .id(new ContestQuestionId(UUID.randomUUID()))
+                            .contest(contest)
+                            .question(question.get())
+                            .build();
+                    contestQuestionRepository.saveContestQuestion(contestQuestion);
+                }
+            }
         }
 
         updateContest(contest);
@@ -120,14 +152,6 @@ public class ContestUpdateHelper {
         log.info("Contest updated with id: {}", contest.getId().getValue());
     }
 
-//    private void checkContestUserExistsByContestId(UUID contestId) {
-//        List<ContestUser> contestUsers = contestUserRepository.findByContestId(contestId);
-//        if (!contestUsers.isEmpty()) {
-//            log.error("Cannot update contest with id: {} when there are users registered", contestId);
-//            throw new CoreDomainException("Cannot update contest with id: " +
-//                    contestId + " when there are users registered");
-//        }
-//    }
 }
 
 
