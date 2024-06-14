@@ -58,7 +58,7 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
             UUID topicId);
 
     @Query(value="""
-    select cc.*
+        select cc.*
         from certificate_course cc
         left join certificate_course_user ccu on cc.id = ccu.certificate_course_id
         group by cc.id
@@ -77,15 +77,15 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
 """, nativeQuery = true)
     List<MostEnrolledCertificateCourseProjection> findMostEnrolledCertificateCoursesWithNumStudentCount();
 
-    @Query(value="""
-    select cc.*
-        from certificate_course cc
-        left join certificate_course_user ccu on cc.id = ccu.certificate_course_id
-        where coalesce(?1, null) is null or cc.topic_id in ?1
+    @Query("""
+        select cc
+        from CertificateCourseEntity cc
+        left join CertificateCourseUserEntity ccu on cc.id = ccu.certificateCourse.id
+        where coalesce(?1, null) is null or cc.topic.id in ?1
         group by cc.id
-        order by cc.avg_rating desc, count(ccu.user_id) desc
+        order by cc.avgRating desc, count(ccu.user.id) desc
         limit 5
-""", nativeQuery = true)
+""")
     List<CertificateCourseEntity> findMostEnrolledCertificateCoursesByTopicIds(
             List<UUID> topicIds
     );

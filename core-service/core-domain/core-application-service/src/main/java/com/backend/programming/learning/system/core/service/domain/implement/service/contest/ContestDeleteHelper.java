@@ -33,7 +33,6 @@ public class ContestDeleteHelper {
     @Transactional(readOnly = true)
     public void deleteContestById(UUID contestId) {
         checkContestExists(contestId);
-        checkUserRegisteredExists(contestId);
         contestRepository.deleteContestById(contestId);
     }
 
