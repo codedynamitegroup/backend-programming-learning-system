@@ -4,12 +4,14 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QueryAllQuestionExamCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.Question;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.QuestionRepository;
+import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -34,7 +36,14 @@ public class QuestionQueryHelper {
 
     @Transactional(readOnly = true)
     public Question findById(UUID questionId) {
-        return questionRepository.findById(questionId);
+        Optional<Question> question = questionRepository.findById(questionId);
+
+        if (question.isEmpty()) {
+            log.error("Question not found with id: {}", questionId);
+            throw new QuestionNotFoundException("Question not found with id: " + questionId);
+        }
+
+        return question.get();
     }
 
     public Page<Question> findAllQuestionsByExamId(QueryAllQuestionExamCommand queryAllQuestionCommand) {

@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * com.backend.programming.learning.system.implement.question_submission
@@ -38,9 +39,15 @@ public class QuestionSubmissionCreateHelper {
         ExamSubmission examSubmission = examSubmissionRepository.findBy(createQuestionSubmissionCommand.examSubmissionId());
         User user = userRepository.findUser(createQuestionSubmissionCommand.userId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        Question question = questionRepository.findById(createQuestionSubmissionCommand.questionId());
+        Optional<Question> question = questionRepository.findById(createQuestionSubmissionCommand.questionId());
+
+        if (question.isEmpty()) {
+            log.error("Question not found with id: {}", createQuestionSubmissionCommand.questionId());
+            throw new RuntimeException("Question not found with id: " + createQuestionSubmissionCommand.questionId());
+        }
+
         QuestionSubmission questionSubmission = questionSubmissionDataMapper
-                .createQuestionSubmissionCommandToQuestionSubmission(examSubmission, user, question, createQuestionSubmissionCommand);
+                .createQuestionSubmissionCommandToQuestionSubmission(examSubmission, user, question.get(), createQuestionSubmissionCommand);
         courseDomainService.createQuestionSubmission(questionSubmission);
         return saveQuestionSubmission(questionSubmission);
     }
