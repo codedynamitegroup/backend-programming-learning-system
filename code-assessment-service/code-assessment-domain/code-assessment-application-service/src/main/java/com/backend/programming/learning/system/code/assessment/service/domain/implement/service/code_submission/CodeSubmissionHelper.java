@@ -134,7 +134,7 @@ public class CodeSubmissionHelper {
 
             codeSubmissionUpdateOutboxHelper.saveCodeSubmissionUpdateOutboxMessage(
                     codeSubmissionDataMapper.codeSubmissionUpdatedEventToCodeSubmissionUpdatePayload(
-                            event, createCodeSubmissionCommand.getCertificateCourseId(), createCodeSubmissionCommand.getContestId(), CopyState.UPDATING
+                            event, null, null, CopyState.UPDATING
                     ),
                     event.getCodeSubmission().getCopyState(),
                     generalSagaHelper.copyStateToSagaStatus(CopyState.UPDATING),
