@@ -97,8 +97,12 @@ public class CodeQuestionController {
     }
 
     @GetMapping("/most-practicing-recently")
-    public ResponseEntity<List<CodeQuestionDto>> getMostPracticingRecently(){
-        List<CodeQuestionDto> response = codeQuestionApplicationService.getMostPracticingRecently();
+    public ResponseEntity<List<CodeQuestionDto>> getRecommendedCodeQuestion(
+            @RequestHeader(value="Access-Token", required = false) String accessToken
+    ){
+        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
+
+        List<CodeQuestionDto> response = codeQuestionApplicationService.getRecommendedCodeQuestion(email);
         return ResponseEntity.ok(response);
     }
 

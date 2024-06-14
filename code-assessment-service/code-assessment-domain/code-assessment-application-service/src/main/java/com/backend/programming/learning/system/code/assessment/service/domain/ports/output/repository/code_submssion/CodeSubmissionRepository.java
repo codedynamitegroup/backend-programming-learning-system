@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_submssion;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.Tag;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
@@ -31,4 +32,6 @@ public interface CodeSubmissionRepository {
     List<CodeSubmission> findLatestSubmissionEachLanguage(CodeQuestionId id, UserId id1);
 
     Integer countPeopleAttend(CodeQuestionId id);
+
+    List<Tag> findTagByLastestSubmission(UserId id);
 }

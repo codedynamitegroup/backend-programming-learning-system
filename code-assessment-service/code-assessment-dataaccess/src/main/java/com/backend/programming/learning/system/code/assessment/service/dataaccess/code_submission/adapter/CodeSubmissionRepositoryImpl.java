@@ -1,9 +1,16 @@
 package com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.adapter;
 
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.tag.CodeQuestionTagEntity;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.repository.CodeQuestionTagJpaRepository;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.entity.CodeSubmissionEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.mapper.CodeSubmissionDataAccessMapper;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.repository.CodeSubmissionJpaRepository;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.tag.entity.TagEntity;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.tag.mapper.TagDataAccessMapper;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.tag.repository.TagJpaRepository;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestionTag;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.Tag;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_submssion.CodeSubmissionRepository;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
@@ -16,16 +23,21 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 @Slf4j
 public class CodeSubmissionRepositoryImpl implements CodeSubmissionRepository {
     private final CodeSubmissionJpaRepository jpaRepository;
     private final CodeSubmissionDataAccessMapper dataAccessMapper;
+    private final CodeQuestionTagJpaRepository codeQuestionTagJpaRepository;
+    private final TagDataAccessMapper tagDataAccessMapper;
 
-    public CodeSubmissionRepositoryImpl(CodeSubmissionJpaRepository jpaRepository, CodeSubmissionDataAccessMapper dataAccessMapper) {
+    public CodeSubmissionRepositoryImpl(CodeSubmissionJpaRepository jpaRepository, CodeSubmissionDataAccessMapper dataAccessMapper, CodeQuestionTagJpaRepository codeQuestionTagJpaRepository, TagDataAccessMapper tagDataAccessMapper) {
         this.jpaRepository = jpaRepository;
         this.dataAccessMapper = dataAccessMapper;
+        this.codeQuestionTagJpaRepository = codeQuestionTagJpaRepository;
+        this.tagDataAccessMapper = tagDataAccessMapper;
     }
 
     @Override
@@ -96,5 +108,18 @@ public class CodeSubmissionRepositoryImpl implements CodeSubmissionRepository {
     @Override
     public Integer countPeopleAttend(CodeQuestionId id) {
         return jpaRepository.countPeopleAttend(id.getValue());
+    }
+
+    @Override
+    public List<Tag> findTagByLastestSubmission(UserId id) {
+        Optional<CodeSubmissionEntity> codeSubmissionEntity = jpaRepository.findFirstByUserIdOrderByCreatedAtDesc(id.getValue());
+        if(codeSubmissionEntity.isPresent()){
+            UUID codeQuestionId = codeSubmissionEntity.get().getCodeQuestion().getId();
+            List<CodeQuestionTagEntity> codeQuestionTagEntities = codeQuestionTagJpaRepository.findAllByCodeQuestionId(codeQuestionId);
+            return codeQuestionTagEntities.stream()
+                    .map(CodeQuestionTagEntity::getTag)
+                    .map(tagDataAccessMapper::entityToTag).toList();
+        }
+        return List.of();
     }
 }

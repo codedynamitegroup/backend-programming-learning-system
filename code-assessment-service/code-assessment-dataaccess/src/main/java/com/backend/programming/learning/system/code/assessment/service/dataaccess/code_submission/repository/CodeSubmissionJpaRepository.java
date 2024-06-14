@@ -117,4 +117,6 @@ public interface CodeSubmissionJpaRepository extends JpaRepository<CodeSubmissio
     where cse.codeQuestion.id = ?1
     """)
     Integer countPeopleAttend(UUID id);
+
+    Optional<CodeSubmissionEntity> findFirstByUserIdOrderByCreatedAtDesc(UUID id);
 }
