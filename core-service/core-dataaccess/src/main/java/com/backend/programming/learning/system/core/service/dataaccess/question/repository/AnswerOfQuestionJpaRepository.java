@@ -15,6 +15,7 @@ import java.util.UUID;
 @Repository
 public interface AnswerOfQuestionJpaRepository extends JpaRepository<AnswerOfQuestionEntity, UUID> {
 //    @Transactional
+
     @Transactional
     @Modifying
     @Query(value = "DELETE FROM AnswerOfQuestionEntity a WHERE a.questionId = :questionId")

@@ -14,13 +14,16 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -7333659449412644531L;
+  private static final long serialVersionUID = 715331406742876150L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"QuestionRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.core.avro.model\",\"fields\":[{\"name\":\"createdBy\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"defaultMark\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\",\"java-class\":\"java.math.BigDecimal\"}},{\"name\":\"difficulty\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"generalFeedback\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"organizationId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"qType\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"questionText\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"updatedBy\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"logicalType\":\"UUID\"},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"CREATE_PROPAGATING\",\"UPDATE_PROPAGATING\",\"DELETE_PROPAGATING\",\"CREATE_ROLLBACKING\",\"UPDATE_ROLLBACKING\",\"DELETE_ROLLBACKING\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"QuestionRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.core.avro.model\",\"fields\":[{\"name\":\"createdBy\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"defaultMark\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\",\"java-class\":\"java.math.BigDecimal\"}},{\"name\":\"difficulty\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"generalFeedback\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"default\":null},{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"organizationId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"qType\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"questionText\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"updatedBy\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"CREATE_PROPAGATING\",\"UPDATE_PROPAGATING\",\"DELETE_PROPAGATING\",\"CREATE_ROLLBACKING\",\"UPDATE_ROLLBACKING\",\"DELETE_ROLLBACKING\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}},{\"name\":\"answers\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"AnswerOfQuestion\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"questionId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"feedback\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"answer\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"fraction\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\",\"java-class\":\"java.math.BigDecimal\"}}]}},\"default\":[]}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
+  static {
+    MODEL$.addLogicalTypeConversion(new org.apache.avro.Conversions.UUIDConversion());
+  }
 
   private static final BinaryMessageEncoder<QuestionRequestAvroModel> ENCODER =
       new BinaryMessageEncoder<>(MODEL$, SCHEMA$);
@@ -73,18 +76,19 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
     return DECODER.decode(b);
   }
 
-  private java.lang.String createdBy;
+  private java.util.UUID createdBy;
   private java.math.BigDecimal defaultMark;
   private java.lang.String difficulty;
   private java.lang.String generalFeedback;
-  private java.lang.String id;
+  private java.util.UUID id;
   private java.lang.String name;
-  private java.lang.String organizationId;
+  private java.util.UUID organizationId;
   private java.lang.String qType;
   private java.lang.String questionText;
   private java.lang.String sagaId;
-  private java.lang.String updatedBy;
+  private java.util.UUID updatedBy;
   private com.backend.programming.learning.system.kafka.core.avro.model.CopyState copyState;
+  private java.util.List<com.backend.programming.learning.system.kafka.core.avro.model.AnswerOfQuestion> answers;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -107,8 +111,9 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
    * @param sagaId The new value for sagaId
    * @param updatedBy The new value for updatedBy
    * @param copyState The new value for copyState
+   * @param answers The new value for answers
    */
-  public QuestionRequestAvroModel(java.lang.String createdBy, java.math.BigDecimal defaultMark, java.lang.String difficulty, java.lang.String generalFeedback, java.lang.String id, java.lang.String name, java.lang.String organizationId, java.lang.String qType, java.lang.String questionText, java.lang.String sagaId, java.lang.String updatedBy, com.backend.programming.learning.system.kafka.core.avro.model.CopyState copyState) {
+  public QuestionRequestAvroModel(java.util.UUID createdBy, java.math.BigDecimal defaultMark, java.lang.String difficulty, java.lang.String generalFeedback, java.util.UUID id, java.lang.String name, java.util.UUID organizationId, java.lang.String qType, java.lang.String questionText, java.lang.String sagaId, java.util.UUID updatedBy, com.backend.programming.learning.system.kafka.core.avro.model.CopyState copyState, java.util.List<com.backend.programming.learning.system.kafka.core.avro.model.AnswerOfQuestion> answers) {
     this.createdBy = createdBy;
     this.defaultMark = defaultMark;
     this.difficulty = difficulty;
@@ -121,6 +126,7 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
     this.sagaId = sagaId;
     this.updatedBy = updatedBy;
     this.copyState = copyState;
+    this.answers = answers;
   }
 
   @Override
@@ -145,8 +151,32 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
     case 9: return sagaId;
     case 10: return updatedBy;
     case 11: return copyState;
+    case 12: return answers;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
+  }
+
+  private static final org.apache.avro.Conversion<?>[] conversions =
+      new org.apache.avro.Conversion<?>[] {
+      new org.apache.avro.Conversions.UUIDConversion(),
+      null,
+      null,
+      null,
+      new org.apache.avro.Conversions.UUIDConversion(),
+      null,
+      new org.apache.avro.Conversions.UUIDConversion(),
+      null,
+      null,
+      null,
+      new org.apache.avro.Conversions.UUIDConversion(),
+      null,
+      null,
+      null
+  };
+
+  @Override
+  public org.apache.avro.Conversion<?> getConversion(int field) {
+    return conversions[field];
   }
 
   // Used by DatumReader.  Applications should not call.
@@ -154,18 +184,19 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: createdBy = value$ != null ? value$.toString() : null; break;
+    case 0: createdBy = (java.util.UUID)value$; break;
     case 1: defaultMark = (java.math.BigDecimal)value$; break;
     case 2: difficulty = value$ != null ? value$.toString() : null; break;
     case 3: generalFeedback = value$ != null ? value$.toString() : null; break;
-    case 4: id = value$ != null ? value$.toString() : null; break;
+    case 4: id = (java.util.UUID)value$; break;
     case 5: name = value$ != null ? value$.toString() : null; break;
-    case 6: organizationId = value$ != null ? value$.toString() : null; break;
+    case 6: organizationId = (java.util.UUID)value$; break;
     case 7: qType = value$ != null ? value$.toString() : null; break;
     case 8: questionText = value$ != null ? value$.toString() : null; break;
     case 9: sagaId = value$ != null ? value$.toString() : null; break;
-    case 10: updatedBy = value$ != null ? value$.toString() : null; break;
+    case 10: updatedBy = (java.util.UUID)value$; break;
     case 11: copyState = (com.backend.programming.learning.system.kafka.core.avro.model.CopyState)value$; break;
+    case 12: answers = (java.util.List<com.backend.programming.learning.system.kafka.core.avro.model.AnswerOfQuestion>)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -174,7 +205,7 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
    * Gets the value of the 'createdBy' field.
    * @return The value of the 'createdBy' field.
    */
-  public java.lang.String getCreatedBy() {
+  public java.util.UUID getCreatedBy() {
     return createdBy;
   }
 
@@ -183,7 +214,7 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
    * Sets the value of the 'createdBy' field.
    * @param value the value to set.
    */
-  public void setCreatedBy(java.lang.String value) {
+  public void setCreatedBy(java.util.UUID value) {
     this.createdBy = value;
   }
 
@@ -242,7 +273,7 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
    * Gets the value of the 'id' field.
    * @return The value of the 'id' field.
    */
-  public java.lang.String getId() {
+  public java.util.UUID getId() {
     return id;
   }
 
@@ -251,7 +282,7 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
    * Sets the value of the 'id' field.
    * @param value the value to set.
    */
-  public void setId(java.lang.String value) {
+  public void setId(java.util.UUID value) {
     this.id = value;
   }
 
@@ -276,7 +307,7 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
    * Gets the value of the 'organizationId' field.
    * @return The value of the 'organizationId' field.
    */
-  public java.lang.String getOrganizationId() {
+  public java.util.UUID getOrganizationId() {
     return organizationId;
   }
 
@@ -285,7 +316,7 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
    * Sets the value of the 'organizationId' field.
    * @param value the value to set.
    */
-  public void setOrganizationId(java.lang.String value) {
+  public void setOrganizationId(java.util.UUID value) {
     this.organizationId = value;
   }
 
@@ -344,7 +375,7 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
    * Gets the value of the 'updatedBy' field.
    * @return The value of the 'updatedBy' field.
    */
-  public java.lang.String getUpdatedBy() {
+  public java.util.UUID getUpdatedBy() {
     return updatedBy;
   }
 
@@ -353,7 +384,7 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
    * Sets the value of the 'updatedBy' field.
    * @param value the value to set.
    */
-  public void setUpdatedBy(java.lang.String value) {
+  public void setUpdatedBy(java.util.UUID value) {
     this.updatedBy = value;
   }
 
@@ -372,6 +403,23 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
    */
   public void setCopyState(com.backend.programming.learning.system.kafka.core.avro.model.CopyState value) {
     this.copyState = value;
+  }
+
+  /**
+   * Gets the value of the 'answers' field.
+   * @return The value of the 'answers' field.
+   */
+  public java.util.List<com.backend.programming.learning.system.kafka.core.avro.model.AnswerOfQuestion> getAnswers() {
+    return answers;
+  }
+
+
+  /**
+   * Sets the value of the 'answers' field.
+   * @param value the value to set.
+   */
+  public void setAnswers(java.util.List<com.backend.programming.learning.system.kafka.core.avro.model.AnswerOfQuestion> value) {
+    this.answers = value;
   }
 
   /**
@@ -415,18 +463,19 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<QuestionRequestAvroModel>
     implements org.apache.avro.data.RecordBuilder<QuestionRequestAvroModel> {
 
-    private java.lang.String createdBy;
+    private java.util.UUID createdBy;
     private java.math.BigDecimal defaultMark;
     private java.lang.String difficulty;
     private java.lang.String generalFeedback;
-    private java.lang.String id;
+    private java.util.UUID id;
     private java.lang.String name;
-    private java.lang.String organizationId;
+    private java.util.UUID organizationId;
     private java.lang.String qType;
     private java.lang.String questionText;
     private java.lang.String sagaId;
-    private java.lang.String updatedBy;
+    private java.util.UUID updatedBy;
     private com.backend.programming.learning.system.kafka.core.avro.model.CopyState copyState;
+    private java.util.List<com.backend.programming.learning.system.kafka.core.avro.model.AnswerOfQuestion> answers;
 
     /** Creates a new Builder */
     private Builder() {
@@ -487,6 +536,10 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
         this.copyState = data().deepCopy(fields()[11].schema(), other.copyState);
         fieldSetFlags()[11] = other.fieldSetFlags()[11];
       }
+      if (isValidValue(fields()[12], other.answers)) {
+        this.answers = data().deepCopy(fields()[12].schema(), other.answers);
+        fieldSetFlags()[12] = other.fieldSetFlags()[12];
+      }
     }
 
     /**
@@ -543,13 +596,17 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
         this.copyState = data().deepCopy(fields()[11].schema(), other.copyState);
         fieldSetFlags()[11] = true;
       }
+      if (isValidValue(fields()[12], other.answers)) {
+        this.answers = data().deepCopy(fields()[12].schema(), other.answers);
+        fieldSetFlags()[12] = true;
+      }
     }
 
     /**
       * Gets the value of the 'createdBy' field.
       * @return The value.
       */
-    public java.lang.String getCreatedBy() {
+    public java.util.UUID getCreatedBy() {
       return createdBy;
     }
 
@@ -559,7 +616,7 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
       * @param value The value of 'createdBy'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder setCreatedBy(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder setCreatedBy(java.util.UUID value) {
       validate(fields()[0], value);
       this.createdBy = value;
       fieldSetFlags()[0] = true;
@@ -709,7 +766,7 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
       * Gets the value of the 'id' field.
       * @return The value.
       */
-    public java.lang.String getId() {
+    public java.util.UUID getId() {
       return id;
     }
 
@@ -719,7 +776,7 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder setId(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder setId(java.util.UUID value) {
       validate(fields()[4], value);
       this.id = value;
       fieldSetFlags()[4] = true;
@@ -789,7 +846,7 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
       * Gets the value of the 'organizationId' field.
       * @return The value.
       */
-    public java.lang.String getOrganizationId() {
+    public java.util.UUID getOrganizationId() {
       return organizationId;
     }
 
@@ -799,7 +856,7 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
       * @param value The value of 'organizationId'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder setOrganizationId(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder setOrganizationId(java.util.UUID value) {
       validate(fields()[6], value);
       this.organizationId = value;
       fieldSetFlags()[6] = true;
@@ -949,7 +1006,7 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
       * Gets the value of the 'updatedBy' field.
       * @return The value.
       */
-    public java.lang.String getUpdatedBy() {
+    public java.util.UUID getUpdatedBy() {
       return updatedBy;
     }
 
@@ -959,7 +1016,7 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
       * @param value The value of 'updatedBy'.
       * @return This builder.
       */
-    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder setUpdatedBy(java.lang.String value) {
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder setUpdatedBy(java.util.UUID value) {
       validate(fields()[10], value);
       this.updatedBy = value;
       fieldSetFlags()[10] = true;
@@ -1025,23 +1082,64 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
       return this;
     }
 
+    /**
+      * Gets the value of the 'answers' field.
+      * @return The value.
+      */
+    public java.util.List<com.backend.programming.learning.system.kafka.core.avro.model.AnswerOfQuestion> getAnswers() {
+      return answers;
+    }
+
+
+    /**
+      * Sets the value of the 'answers' field.
+      * @param value The value of 'answers'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder setAnswers(java.util.List<com.backend.programming.learning.system.kafka.core.avro.model.AnswerOfQuestion> value) {
+      validate(fields()[12], value);
+      this.answers = value;
+      fieldSetFlags()[12] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'answers' field has been set.
+      * @return True if the 'answers' field has been set, false otherwise.
+      */
+    public boolean hasAnswers() {
+      return fieldSetFlags()[12];
+    }
+
+
+    /**
+      * Clears the value of the 'answers' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel.Builder clearAnswers() {
+      answers = null;
+      fieldSetFlags()[12] = false;
+      return this;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public QuestionRequestAvroModel build() {
       try {
         QuestionRequestAvroModel record = new QuestionRequestAvroModel();
-        record.createdBy = fieldSetFlags()[0] ? this.createdBy : (java.lang.String) defaultValue(fields()[0]);
+        record.createdBy = fieldSetFlags()[0] ? this.createdBy : (java.util.UUID) defaultValue(fields()[0]);
         record.defaultMark = fieldSetFlags()[1] ? this.defaultMark : (java.math.BigDecimal) defaultValue(fields()[1]);
         record.difficulty = fieldSetFlags()[2] ? this.difficulty : (java.lang.String) defaultValue(fields()[2]);
         record.generalFeedback = fieldSetFlags()[3] ? this.generalFeedback : (java.lang.String) defaultValue(fields()[3]);
-        record.id = fieldSetFlags()[4] ? this.id : (java.lang.String) defaultValue(fields()[4]);
+        record.id = fieldSetFlags()[4] ? this.id : (java.util.UUID) defaultValue(fields()[4]);
         record.name = fieldSetFlags()[5] ? this.name : (java.lang.String) defaultValue(fields()[5]);
-        record.organizationId = fieldSetFlags()[6] ? this.organizationId : (java.lang.String) defaultValue(fields()[6]);
+        record.organizationId = fieldSetFlags()[6] ? this.organizationId : (java.util.UUID) defaultValue(fields()[6]);
         record.qType = fieldSetFlags()[7] ? this.qType : (java.lang.String) defaultValue(fields()[7]);
         record.questionText = fieldSetFlags()[8] ? this.questionText : (java.lang.String) defaultValue(fields()[8]);
         record.sagaId = fieldSetFlags()[9] ? this.sagaId : (java.lang.String) defaultValue(fields()[9]);
-        record.updatedBy = fieldSetFlags()[10] ? this.updatedBy : (java.lang.String) defaultValue(fields()[10]);
+        record.updatedBy = fieldSetFlags()[10] ? this.updatedBy : (java.util.UUID) defaultValue(fields()[10]);
         record.copyState = fieldSetFlags()[11] ? this.copyState : (com.backend.programming.learning.system.kafka.core.avro.model.CopyState) defaultValue(fields()[11]);
+        record.answers = fieldSetFlags()[12] ? this.answers : (java.util.List<com.backend.programming.learning.system.kafka.core.avro.model.AnswerOfQuestion>) defaultValue(fields()[12]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -1069,123 +1167,6 @@ public class QuestionRequestAvroModel extends org.apache.avro.specific.SpecificR
     READER$.read(this, SpecificData.getDecoder(in));
   }
 
-  @Override protected boolean hasCustomCoders() { return true; }
-
-  @Override public void customEncode(org.apache.avro.io.Encoder out)
-    throws java.io.IOException
-  {
-    out.writeString(this.createdBy);
-
-    out.writeString(this.defaultMark.toString());
-
-    out.writeString(this.difficulty);
-
-    out.writeString(this.generalFeedback);
-
-    out.writeString(this.id);
-
-    out.writeString(this.name);
-
-    out.writeString(this.organizationId);
-
-    out.writeString(this.qType);
-
-    out.writeString(this.questionText);
-
-    out.writeString(this.sagaId);
-
-    out.writeString(this.updatedBy);
-
-    out.writeEnum(this.copyState.ordinal());
-
-  }
-
-  @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
-    throws java.io.IOException
-  {
-    org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
-    if (fieldOrder == null) {
-      this.createdBy = in.readString();
-
-      this.defaultMark = new java.math.BigDecimal(in.readString());
-
-      this.difficulty = in.readString();
-
-      this.generalFeedback = in.readString();
-
-      this.id = in.readString();
-
-      this.name = in.readString();
-
-      this.organizationId = in.readString();
-
-      this.qType = in.readString();
-
-      this.questionText = in.readString();
-
-      this.sagaId = in.readString();
-
-      this.updatedBy = in.readString();
-
-      this.copyState = com.backend.programming.learning.system.kafka.core.avro.model.CopyState.values()[in.readEnum()];
-
-    } else {
-      for (int i = 0; i < 12; i++) {
-        switch (fieldOrder[i].pos()) {
-        case 0:
-          this.createdBy = in.readString();
-          break;
-
-        case 1:
-          this.defaultMark = new java.math.BigDecimal(in.readString());
-          break;
-
-        case 2:
-          this.difficulty = in.readString();
-          break;
-
-        case 3:
-          this.generalFeedback = in.readString();
-          break;
-
-        case 4:
-          this.id = in.readString();
-          break;
-
-        case 5:
-          this.name = in.readString();
-          break;
-
-        case 6:
-          this.organizationId = in.readString();
-          break;
-
-        case 7:
-          this.qType = in.readString();
-          break;
-
-        case 8:
-          this.questionText = in.readString();
-          break;
-
-        case 9:
-          this.sagaId = in.readString();
-          break;
-
-        case 10:
-          this.updatedBy = in.readString();
-          break;
-
-        case 11:
-          this.copyState = com.backend.programming.learning.system.kafka.core.avro.model.CopyState.values()[in.readEnum()];
-          break;
-
-        default:
-          throw new java.io.IOException("Corrupt ResolvingDecoder.");
-        }
-      }
-    }
-  }
 }
 
 

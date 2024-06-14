@@ -31,9 +31,6 @@ public class QtypeShortanswerQuestionDataAccessMapper {
     }
 
     public QtypeShortanswerQuestionEntity setQtypeShortAnswerQuestionEntity(QtypeShortanswerQuestionEntity qtypeShortanswerQuestionEntity, QtypeShortAnswerQuestion qtypeShortAnswerQuestion) {
-//        qtypeShortanswerQuestionEntity.setId(qtypeShortAnswerQuestion.getId().getValue());
-        if (qtypeShortAnswerQuestion.getQuestion() != null)
-            qtypeShortanswerQuestionEntity.setQuestion(questionDataAccessMapper.setQuestionEntity(qtypeShortanswerQuestionEntity.getQuestion(), qtypeShortAnswerQuestion.getQuestion()));
         if (qtypeShortAnswerQuestion.getCaseSensitive() != null)
             qtypeShortanswerQuestionEntity.setCaseSensitive(qtypeShortAnswerQuestion.getCaseSensitive());
         return qtypeShortanswerQuestionEntity;

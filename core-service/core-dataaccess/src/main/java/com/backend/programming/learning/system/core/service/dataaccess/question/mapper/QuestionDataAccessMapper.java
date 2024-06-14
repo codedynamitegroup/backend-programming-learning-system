@@ -93,8 +93,6 @@ public class QuestionDataAccessMapper {
     public QuestionEntity setQuestionEntity(QuestionEntity questionEntity, Question question) {
         if (question.getId() != null)
             questionEntity.setId(question.getId().getValue());
-        if (question.getOrganization() != null)
-            questionEntity.setOrganization(organizationDataAccessMapper.organizationToOrganizationEntity(question.getOrganization()));
         if (question.getDifficulty() != null)
             questionEntity.setDifficulty(question.getDifficulty());
         if (question.getName() != null)
@@ -105,10 +103,6 @@ public class QuestionDataAccessMapper {
             questionEntity.setGeneralFeedback(question.getGeneralFeedback());
         if (question.getDefaultMark() != null)
             questionEntity.setDefaultMark(BigDecimal.valueOf(question.getDefaultMark()));
-        if (question.getCreatedBy() != null)
-            questionEntity.setCreatedBy(userDataAccessMapper.userToUserEntity(question.getCreatedBy()));
-        if (question.getUpdatedBy() != null)
-            questionEntity.setUpdatedBy(userDataAccessMapper.userToUserEntity(question.getUpdatedBy()));
         if (question.getqtype() != null)
             questionEntity.setQtype(question.getqtype());
         if (question.getAnswers() != null)

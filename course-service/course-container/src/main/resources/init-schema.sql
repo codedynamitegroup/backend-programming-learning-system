@@ -181,6 +181,21 @@ CREATE TABLE "public".question
 
 );
 
+DROP TABLE IF EXISTS "public".answer_of_question CASCADE;
+CREATE TABLE "public".answer_of_question
+(
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
+    question_id uuid NOT NULL,
+    feedback text,
+    answer text,
+    fraction numeric(5,2) DEFAULT 0.0 NOT NULL,
+    CONSTRAINT answer_of_question_pkey PRIMARY KEY (id),
+    CONSTRAINT answer_of_question_question_id_fkey FOREIGN KEY (question_id)
+        REFERENCES "public".question (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
 DROP TABLE IF EXISTS "public".course_type CASCADE;
 CREATE TABLE "public".course_type
 (

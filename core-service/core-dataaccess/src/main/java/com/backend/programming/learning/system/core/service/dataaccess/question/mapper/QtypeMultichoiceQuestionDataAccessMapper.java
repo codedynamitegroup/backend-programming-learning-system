@@ -46,8 +46,6 @@ public class QtypeMultichoiceQuestionDataAccessMapper {
 
     public QtypeMultichoiceQuestionEntity setQtypeMultichoiceQuestionEntity(QtypeMultichoiceQuestionEntity qtypeMultichoiceQuestionEntity,
                                                                             QtypeMultiChoiceQuestion qtypeMultichoiceQuestion) {
-        if(qtypeMultichoiceQuestion.getQuestion() != null)
-            qtypeMultichoiceQuestionEntity.setQuestion(questionDataAccessMapper.setQuestionEntity(qtypeMultichoiceQuestionEntity.getQuestion(), qtypeMultichoiceQuestion.getQuestion()));
         if(qtypeMultichoiceQuestion.getSingle() != null)
             qtypeMultichoiceQuestionEntity.setSingle(qtypeMultichoiceQuestion.getSingle());
         if(qtypeMultichoiceQuestion.getShuffleAnswers() != null)

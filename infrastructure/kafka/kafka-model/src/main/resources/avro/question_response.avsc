@@ -17,7 +17,8 @@
     "type" : "string"
   }, {
     "name" : "generalFeedback",
-    "type" : "string"
+    "type" : ["null", "string"],
+    "default": null
   }, {
     "name" : "id",
     "logicalType" : "UUID",
