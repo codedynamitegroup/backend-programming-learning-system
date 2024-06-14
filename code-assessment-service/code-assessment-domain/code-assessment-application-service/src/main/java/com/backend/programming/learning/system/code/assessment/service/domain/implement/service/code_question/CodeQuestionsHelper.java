@@ -275,9 +275,8 @@ public class CodeQuestionsHelper {
             User user = validateHelper.validateUserByEmail(email);
             List<Tag> tags = codeSubmissionRepository.findTagByLastestSubmission(user.getId());
             if(!tags.isEmpty()) {//find base on previous tag
-                codeQuestions = codeQuestionRepository.findByNotSolvedTagsAndUserId(tags, user.getId());
-                if(codeQuestions.isEmpty())//if not found
-                    codeQuestions = codeQuestionRepository.findTop3ByTop100RecentSubmitData();
+                codeQuestions.addAll(codeQuestionRepository.findByNotSolvedTagsAndUserId(tags, user.getId()));
+                codeQuestions.addAll(codeQuestionRepository.findTop3ByTop100RecentSubmitData());
             }
             else//if no tag found
                 codeQuestions = codeQuestionRepository.findTop3ByTop100RecentSubmitData();
