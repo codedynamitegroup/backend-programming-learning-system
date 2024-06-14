@@ -7,6 +7,6 @@ import java.util.UUID;
 
 public interface ContestQuestionRepository {
     ContestQuestion saveContestQuestion(ContestQuestion contestQuestion);
-
     List<ContestQuestion> findAllContestQuestionsByContestId(UUID contestId);
+    void deleteAllContestQuestionsByContestId(UUID contestId);
 }

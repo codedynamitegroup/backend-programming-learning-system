@@ -119,12 +119,13 @@ public interface ContestUserJpaRepository extends JpaRepository<ContestUserEntit
         from contest_user cu
         join contest_question cq on cu.contest_id = cq.contest_id
         join qtype_code_question qcq on cq.question_id = qcq.question_id
-        where not exists (
-            select 1
-            from code_submission cs
-            where cs.code_question_id = qcq.id
-            and cs.user_id = cu.user_id
-        )
+        where cu.contest_id = ?1
+            and not exists (
+                select 1
+                from code_submission cs
+                where cs.code_question_id = qcq.id
+                and cs.user_id = cu.user_id
+            )
     """, nativeQuery = true)
     int countAllParticipantsHavingSubmissionsByContestId(UUID contestId);
 }

@@ -255,9 +255,17 @@ public class CertificateCourseQueryHelper {
             for (Topic topic : topicIds) {
                 topicIdsList.add(topic.getId().getValue());
             }
-            log.info("Topic ids of registered courses by user: {}", topicIdsList);
             certificateCourseList = certificateCourseRepository
                     .findMostEnrolledCertificateCoursesByTopicIds(topicIdsList);
+            if (certificateCourseList.size() < 5) {
+                List<CertificateCourse> all = certificateCourseRepository
+                        .findMostEnrolledCertificateCourses();
+                for (CertificateCourse certificateCourse : all) {
+                    if (!certificateCourseList.contains(certificateCourse)) {
+                        certificateCourseList.add(certificateCourse);
+                    }
+                }
+            }
         }
 
 
