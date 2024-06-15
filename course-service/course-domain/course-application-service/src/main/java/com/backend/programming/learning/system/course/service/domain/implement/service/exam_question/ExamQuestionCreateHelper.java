@@ -3,7 +3,6 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 import com.backend.programming.learning.system.course.service.domain.CourseDomainService;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.CreateExamQuestionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_question.QueryAllQuestionByExamIdCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_question.QueryAllQuestionByExamIdResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_question.QueryAllQuestionByExamIdWithPageAttResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.question.QuestionExamDTO;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
@@ -22,6 +21,7 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * com.backend.programming.learning.system.implement.exam_question
@@ -45,8 +45,14 @@ public class ExamQuestionCreateHelper {
         Exam exam = examRepository.findBy(new ExamId(createExamQuestionCommand.examId()));
         Map<Question, Integer> questions = new HashMap<>();
         createExamQuestionCommand.questionIds().forEach(questionId -> {
-            Question question = questionRepository.findById(questionId.questionId());
-            questions.put(question, questionId.page());
+            Optional<Question> question = questionRepository.findById(questionId.questionId());
+
+            if (question.isEmpty()) {
+                log.error("Question not found with id: {}", questionId.questionId());
+                throw new RuntimeException("Question not found with id: " + questionId.questionId());
+            }
+
+            questions.put(question.get(), questionId.page());
         });
 
         List<ExamQuestion> examQuestions = examQuestionDataMapper.createExamQuestionCommandToExamQuestion(exam, questions);

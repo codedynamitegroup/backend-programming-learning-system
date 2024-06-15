@@ -6,22 +6,18 @@ import com.backend.programming.learning.system.core.service.dataaccess.question.
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QtypeShortanswerQuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.question.mapper.QuestionDataAccessMapper;
-import com.backend.programming.learning.system.core.service.dataaccess.question.repository.QtypeCodeQuestionJpaRepository;
-import com.backend.programming.learning.system.core.service.dataaccess.question.repository.QtypeEssayQuestionJpaRepository;
-import com.backend.programming.learning.system.core.service.dataaccess.question.repository.QtypeMultichoiceQuestionJpaRepository;
-import com.backend.programming.learning.system.core.service.dataaccess.question.repository.QtypeShortanswerQuestionJpaRepository;
-import com.backend.programming.learning.system.core.service.dataaccess.question.repository.QuestionJpaRepository;
+import com.backend.programming.learning.system.core.service.dataaccess.question.repository.*;
+import com.backend.programming.learning.system.core.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.core.service.dataaccess.user.repository.UserJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionClone;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeCodeQuestionRepository;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeEssayQuestionRepository;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeMultichoiceQuestionRepository;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeShortanswerQuestionRepository;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QuestionRepository;
+import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
 import com.backend.programming.learning.system.domain.valueobject.QuestionType;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
@@ -33,6 +29,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Component
+@Slf4j
 public class QuestionRepositoryImpl implements QuestionRepository {
     private final QuestionJpaRepository questionJpaRepository;
     private final QtypeCodeQuestionJpaRepository qtypeCodeQuestionJpaRepository;
@@ -40,15 +37,18 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     private final QtypeMultichoiceQuestionJpaRepository qtypeMultichoiceQuestionJpaRepository;
     private final QtypeShortanswerQuestionJpaRepository qtypeShortanswerQuestionJpaRepository;
     private final QuestionDataAccessMapper questionDataAccessMapper;
+    private final UserJpaRepository userJpaRepository;
 
     public QuestionRepositoryImpl(QuestionJpaRepository questionJpaRepository, QtypeCodeQuestionRepositoryImpl qtypeCodeQuestionRepository, QtypeEssayQuestionRepositoryImpl qtypeEssayQuestionRepository, QtypeCodeQuestionRepository qtypeCodeQuestionRepository1, QtypeEssayQuestionRepository qtypeEssayQuestionRepository1, QtypeMultichoiceQuestionRepository qtypeMultichoiceQuestionRepository, QtypeShortanswerQuestionRepository qtypeShortanswerQuestionRepository, QtypeCodeQuestionJpaRepository qtypeCodeQuestionJpaRepository, QtypeEssayQuestionJpaRepository qtypeEssayQuestionJpaRepository, QtypeMultichoiceQuestionJpaRepository qtypeMultichoiceQuestionJpaRepository, QtypeShortanswerQuestionJpaRepository qtypeShortanswerQuestionJpaRepository,
-                                  QuestionDataAccessMapper questionDataAccessMapper) {
+                                  QuestionDataAccessMapper questionDataAccessMapper,
+                                  UserJpaRepository userJpaRepository) {
         this.questionJpaRepository = questionJpaRepository;
         this.qtypeCodeQuestionJpaRepository = qtypeCodeQuestionJpaRepository;
         this.qtypeEssayQuestionJpaRepository = qtypeEssayQuestionJpaRepository;
         this.qtypeMultichoiceQuestionJpaRepository = qtypeMultichoiceQuestionJpaRepository;
         this.qtypeShortanswerQuestionJpaRepository = qtypeShortanswerQuestionJpaRepository;
         this.questionDataAccessMapper = questionDataAccessMapper;
+        this.userJpaRepository = userJpaRepository;
     }
 
     @Override
@@ -117,12 +117,21 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     @Override
     public void updateQuestion(Question question) {
         Optional<QuestionEntity> questionEntity = questionJpaRepository.findById(question.getId().getValue());
+        Optional<UserEntity> updatedByEntity = userJpaRepository.findById(question.getUpdatedBy().getId().getValue());
 
         if (questionEntity.isEmpty()) {
+            log.error("Question not found with id: {}", question.getId().getValue());
             throw new QuestionNotFoundException("Question not found with id: " + question.getId().getValue());
         }
+        if (updatedByEntity.isEmpty()) {
+            log.error("User not found with id: {}", question.getUpdatedBy().getId().getValue());
+            throw new UserNotFoundException("User not found with id: " + question.getUpdatedBy().getId().getValue());
+        }
 
-        questionJpaRepository.save(questionDataAccessMapper.setQuestionEntity(questionEntity.get(), question));
+        QuestionEntity updatingQuestionEntity = questionEntity.get();
+        updatingQuestionEntity.setUpdatedBy(updatedByEntity.get());
+
+        questionJpaRepository.save(questionDataAccessMapper.setQuestionEntity(updatingQuestionEntity, question));
     }
 
     @Override

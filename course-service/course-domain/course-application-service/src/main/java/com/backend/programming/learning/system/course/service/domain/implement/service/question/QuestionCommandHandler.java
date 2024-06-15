@@ -26,14 +26,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 @RequiredArgsConstructor
 public class QuestionCommandHandler {
-    private final QuestionCreateHelper questionCreateHelper;
+    private final QuestionCreateUpdateHelper questionCreateUpdateHelper;
     private final QuestionQueryHelper questionQueryHelper;
     private final QuestionDeleteHelper questionDeleteHelper;
     private final QuestionDataMapper questionDataMapper;
 
     @Transactional
     public CreateQuestionResponse createQuestion(CreateQuestionCommand createQuestionCommand) {
-        Question question = questionCreateHelper.createQuestion(createQuestionCommand);
+        Question question = questionCreateUpdateHelper.createQuestion(createQuestionCommand);
         log.info("Question is created with id: {}", question.getId());
         return questionDataMapper.questionToCreateQuestionResponse(question, "Question created successfully");
     }
@@ -57,7 +57,7 @@ public class QuestionCommandHandler {
 
     @Transactional
     public CreateQuestionResponse createQuestionBank(CreateQuestionCommand createQuestionCommand) {
-        Question question = questionCreateHelper.createQuestionBank(createQuestionCommand);
+        Question question = questionCreateUpdateHelper.createQuestionBank(createQuestionCommand);
         log.info("Question bank is created with id: {}", question.getId());
         return questionDataMapper.questionToCreateQuestionResponse(question, "Question bank created successfully");
     }

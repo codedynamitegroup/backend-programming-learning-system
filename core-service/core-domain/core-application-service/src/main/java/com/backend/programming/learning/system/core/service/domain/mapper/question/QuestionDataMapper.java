@@ -160,7 +160,7 @@ public class QuestionDataMapper {
         if (updateQuestionEntity.getAnswers() != null) {
             answers = updateQuestionEntity.getAnswers()
                     .stream()
-                    .map(answer -> answerOfQuestionUpdateEntityToAnswerOfQuestion(answer, new QuestionId(UUID.randomUUID())))
+                    .map(answer -> answerOfQuestionUpdateEntityToAnswerOfQuestion(answer, questionId))
                     .toList();
         }
 
@@ -169,7 +169,6 @@ public class QuestionDataMapper {
         String generalFeedback = updateQuestionEntity.getGeneralFeedback();
         Float defaultMark = updateQuestionEntity.getDefaultMark();
         QuestionDifficulty difficulty = updateQuestionEntity.getDifficulty();
-
 
         if (name == null)
             name = prevQuestion.getName();
@@ -204,7 +203,7 @@ public class QuestionDataMapper {
                                                                            QuestionId questionId) {
         return AnswerOfQuestion.builder()
                 .id(new AnswerId(answerOfQuestionUpdateEntity.getAnswerId()))
-//                .questionId(questionId)
+                .questionId(questionId)
                 .answer(answerOfQuestionUpdateEntity.getAnswer())
                 .fraction(answerOfQuestionUpdateEntity.getFraction())
                 .feedback(answerOfQuestionUpdateEntity.getFeedback())
@@ -282,6 +281,7 @@ public class QuestionDataMapper {
     private QuestionEventAnswer answerOfQuestionToQuestionEventAnswer(AnswerOfQuestion answerOfQuestion) {
         return QuestionEventAnswer.builder()
                 .id(answerOfQuestion.getId().getValue().toString())
+                .questionId(answerOfQuestion.getQuestionId().getValue().toString())
                 .answer(answerOfQuestion.getAnswer())
                 .fraction(answerOfQuestion.getFraction())
                 .feedback(answerOfQuestion.getFeedback())
@@ -447,6 +447,7 @@ public class QuestionDataMapper {
     private AnswerOfQuestionResponseEntity answerOfQuestionToAnswerOfQuestionResponseEntity(AnswerOfQuestion answerOfQuestion) {
         return AnswerOfQuestionResponseEntity.builder()
                 .id(answerOfQuestion.getId().getValue().toString())
+                .questionId(answerOfQuestion.getQuestionId().getValue().toString())
                 .answer(answerOfQuestion.getAnswer())
                 .fraction(answerOfQuestion.getFraction())
                 .feedback(answerOfQuestion.getFeedback())

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -40,11 +41,10 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     }
 
     @Override
-    public Question findById(UUID questionId) {
-        return questionDataAccessMapper
-                .questionEntityToQuestion(questionJpaRepository
-                        .findById(questionId)
-                        .orElseThrow(() -> new RuntimeException("Question not found")));
+    public Optional<Question> findById(UUID questionId) {
+        return questionJpaRepository
+                .findById(questionId)
+                .map(questionDataAccessMapper::questionEntityToQuestion);
     }
 
     @Override

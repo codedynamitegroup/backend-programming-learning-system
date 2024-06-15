@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.core.service.dataaccess.question.
 import com.backend.programming.learning.system.core.service.domain.entity.AnswerOfQuestion;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.AnswerOfQuestionRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -68,5 +69,19 @@ public class AnswerOfQuestionRepositoryImpl implements AnswerOfQuestionRepositor
                 .stream()
                 .map(answerOfQuestionDataAccessMapper::answerOfQuestionEntityToAnswerOfQuestion)
                 .toList();
+    }
+
+    @Override
+    public List<AnswerOfQuestion> getAllAnswerOfQuestionByQuestionId(UUID questionId) {
+        return answerOfQuestionJpaRepository.findAllByQuestionId(questionId)
+                .stream()
+                .map(answerOfQuestionDataAccessMapper::answerOfQuestionEntityToAnswerOfQuestion)
+                .toList();
+    }
+
+    @Transactional
+    @Override
+    public void deleteAllById(List<UUID> answerIds) {
+        answerOfQuestionJpaRepository.deleteAllByIdInQuery(answerIds);
     }
 }

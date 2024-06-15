@@ -42,13 +42,6 @@ public class QtypeEssayQuestionUpdateHelper {
 
     // Persist updated Qtype Essay Question entity in database
     public QuestionUpdatedEvent updateQtypeEssayQuestion(UpdateQtypeEssayQuestionCommand updateQtypeEssayQuestionCommand) {
-        // check answers if exist when updating answers
-        if (updateQtypeEssayQuestionCommand.getQuestion().getAnswers() != null)
-            updateQtypeEssayQuestionCommand
-                    .getQuestion()
-                    .getAnswers()
-                    .forEach(answer -> commonUpdateHelper.checkAnswerExist(answer.getAnswerId()));
-
         QtypeEssayQuestion qtypeEssayQuestion = getQtypeEssayQuestion(updateQtypeEssayQuestionCommand.getQtEssayQuestionId());
         Question prevQuestion = questionRepository.findQuestion(qtypeEssayQuestion.getQuestion().getId().getValue()).get();
         QtypeEssayQuestion mappedQtypeEssayQuestion = qtypeEssayQuestionDataMapper

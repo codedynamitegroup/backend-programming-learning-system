@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * com.backend.programming.learning.system.implement.exam_submission
@@ -58,11 +59,17 @@ public class ExamSubmissionCreateHelper {
                 .questions()
                 .stream()
                 .map(question -> {
-                    Question questionExam = questionRepository.findById(question.questionId());
+                    Optional<Question> questionExam = questionRepository.findById(question.questionId());
+
+                    if (questionExam.isEmpty()) {
+                        log.error("Question not found with id: {}", question.questionId());
+                        throw new RuntimeException("Question not found with id: " + question.questionId());
+                    }
+
                     QuestionSubmission questionSubmission = QuestionSubmission.builder()
                             .user(submission.getUser())
                             .examSubmission(submission)
-                            .question(questionExam)
+                            .question(questionExam.get())
                             .content(question.content())
                             .numFile(question.numFile())
                             .build();
@@ -101,7 +108,6 @@ public class ExamSubmissionCreateHelper {
     }
 
     public ExamSubmission createEndExamSubmission(CreateExamSubmissionStartCommand createExamSubmissionStartCommand) {
-        ExamSubmission saveExamSubmission = examSubmissionRepository.saveEnd(createExamSubmissionStartCommand);
-        return saveExamSubmission;
+        return examSubmissionRepository.saveEnd(createExamSubmissionStartCommand);
     }
 }

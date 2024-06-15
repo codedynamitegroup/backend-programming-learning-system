@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -19,6 +17,5 @@ public class AnswerOfQuestion {
     private String answer;
 
     @NotNull(message = "Fraction is required")
-    @Size(min = 0, message = "Fraction must be between 0 and 1")
     private float fraction;
 }

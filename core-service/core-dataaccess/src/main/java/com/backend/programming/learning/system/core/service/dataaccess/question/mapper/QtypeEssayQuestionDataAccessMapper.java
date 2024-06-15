@@ -53,11 +53,6 @@ public class QtypeEssayQuestionDataAccessMapper {
 
     public QtypeEssayQuestionEntity setQtypeEssayQuestionEntity(QtypeEssayQuestionEntity qtypeEssayQuestionEntity,
                                                                 QtypeEssayQuestion qtypeEssayQuestion) {
-//        // TODO: Check if should i set Id
-//        if(qtypeEssayQuestion.getId() != null)
-//            qtypeEssayQuestionEntity.setId(qtypeEssayQuestion.getId().getValue());
-        if(qtypeEssayQuestion.getQuestion() != null)
-            qtypeEssayQuestionEntity.setQuestion(questionDataAccessMapper.setQuestionEntity(qtypeEssayQuestionEntity.getQuestion(), qtypeEssayQuestion.getQuestion()));
         if(qtypeEssayQuestion.getResponseFormat() != null)
             qtypeEssayQuestionEntity.setResponseFormat(qtypeEssayQuestion.getResponseFormat());
         if(qtypeEssayQuestion.getResponseRequired() != null)

@@ -329,6 +329,7 @@ public class CertificateCourseQueryHelper {
         List<CertificateCourse> certificateCourseList = certificateCourseRepository.findAllCourse();
         List<CertificateCourseUser> certificateCourseUserList = certificateCourseUserRepository.findAllCourseUser();
 
+        // TODO: implement completed course (use 2 methods and calculate the average, if its > 85 --> pass)
         long completedCourses = certificateCourseUserList.stream().filter(CertificateCourseUser::getCompleted).count();
         double averageRating = certificateCourseList.stream().mapToDouble(CertificateCourse::getAvgRating).average().orElse(0.0);
 

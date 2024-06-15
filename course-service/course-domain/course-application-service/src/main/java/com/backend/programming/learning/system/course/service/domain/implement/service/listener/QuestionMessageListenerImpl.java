@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.course.service.domain.CourseDomai
 import com.backend.programming.learning.system.course.service.domain.dto.method.message.QuestionRequest;
 import com.backend.programming.learning.system.course.service.domain.entity.Question;
 import com.backend.programming.learning.system.course.service.domain.event.question.event.*;
-import com.backend.programming.learning.system.course.service.domain.implement.service.question.QuestionCreateHelper;
+import com.backend.programming.learning.system.course.service.domain.implement.service.question.QuestionCreateUpdateHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.question.QuestionDeleteHelper;
 import com.backend.programming.learning.system.course.service.domain.mapper.question.QuestionDataMapper;
 import com.backend.programming.learning.system.course.service.domain.outbox.scheduler.question.QuestionOutboxHelper;
@@ -23,25 +23,25 @@ public class QuestionMessageListenerImpl implements QuestionMessageListener {
     private final QuestionDataMapper questionDataMapper;
     private final CourseDomainService courseDomainService;
     private final QuestionOutboxHelper questionOutboxHelper;
-    private final QuestionCreateHelper questionCreateHelper;
+    private final QuestionCreateUpdateHelper questionCreateUpdateHelper;
     private final QuestionDeleteHelper questionDeleteHelper;
 
     public QuestionMessageListenerImpl(QuestionDataMapper questionDataMapper,
                                        CourseDomainService courseDomainService,
                                        QuestionOutboxHelper questionOutboxHelper,
-                                       QuestionCreateHelper questionCreateHelper,
+                                       QuestionCreateUpdateHelper questionCreateUpdateHelper,
                                        QuestionDeleteHelper questionDeleteHelper) {
         this.questionDataMapper = questionDataMapper;
         this.courseDomainService = courseDomainService;
         this.questionOutboxHelper = questionOutboxHelper;
-        this.questionCreateHelper = questionCreateHelper;
+        this.questionCreateUpdateHelper = questionCreateUpdateHelper;
         this.questionDeleteHelper = questionDeleteHelper;
     }
 
     @Override
     public void createQuestion(QuestionRequest questionCreateRequest) {
         try {
-            Question question =  questionCreateHelper.createQuestion(questionCreateRequest);
+            Question question =  questionCreateUpdateHelper.createQuestion(questionCreateRequest);
             QuestionCreatedEvent questionCreatedEvent = courseDomainService.createQuestionEvent(question, questionCreateRequest.getSagaId());
 
             questionOutboxHelper.saveNewQuestionOutboxMessage(questionDataMapper.questionEventToQuestionEventPayload(questionCreatedEvent),
@@ -66,8 +66,7 @@ public class QuestionMessageListenerImpl implements QuestionMessageListener {
     @Override
     public void updateQuestion(QuestionRequest questionUpdateRequest) {
         try {
-            Question question = questionDataMapper.questionUpdateRequestToQuestion(questionUpdateRequest);
-            questionCreateHelper.saveQuestion(question);
+            Question question = questionCreateUpdateHelper.saveQuestion(questionUpdateRequest);
 
             QuestionUpdatedEvent questionUpdatedEvent = courseDomainService.updateQuestionEvent(question, questionUpdateRequest.getSagaId());
 

@@ -108,18 +108,18 @@ public class GatewayServiceApplication {
 						.timeLimiterConfig(TimeLimiterConfig.custom()
 								.timeoutDuration(Duration.ofMillis(gatewayServiceConfigData.getTimeoutMs()))
 								.build())
-//						.circuitBreakerConfig(CircuitBreakerConfig.custom()
-//								.failureRateThreshold(gatewayServiceConfigData.getFailureRateThreshold())
-//								.slowCallRateThreshold(gatewayServiceConfigData.getSlowCallRateThreshold())
-//								.slowCallDurationThreshold(Duration.ofMillis(gatewayServiceConfigData
-//										.getSlowCallDurationThreshold()))
-//								.permittedNumberOfCallsInHalfOpenState(gatewayServiceConfigData
-//										.getPermittedNumOfCallsInHalfOpenState())
-//								.slidingWindowSize(gatewayServiceConfigData.getSlidingWindowSize())
-//								.minimumNumberOfCalls(gatewayServiceConfigData.getMinNumberOfCalls())
-//								.waitDurationInOpenState(Duration.ofMillis(gatewayServiceConfigData
-//										.getWaitDurationInOpenState()))
-//								.build())
+						.circuitBreakerConfig(CircuitBreakerConfig.custom()
+								.failureRateThreshold(gatewayServiceConfigData.getFailureRateThreshold())
+								.slowCallRateThreshold(gatewayServiceConfigData.getSlowCallRateThreshold())
+								.slowCallDurationThreshold(Duration.ofMillis(gatewayServiceConfigData
+										.getSlowCallDurationThreshold()))
+								.permittedNumberOfCallsInHalfOpenState(gatewayServiceConfigData
+										.getPermittedNumOfCallsInHalfOpenState())
+								.slidingWindowSize(gatewayServiceConfigData.getSlidingWindowSize())
+								.minimumNumberOfCalls(gatewayServiceConfigData.getMinNumberOfCalls())
+								.waitDurationInOpenState(Duration.ofMillis(gatewayServiceConfigData
+										.getWaitDurationInOpenState()))
+								.build())
 						.build());
 	}
 
