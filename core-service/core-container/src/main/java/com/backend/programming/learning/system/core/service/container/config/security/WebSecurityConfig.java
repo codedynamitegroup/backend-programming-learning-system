@@ -68,13 +68,13 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/core/chapters/chapter-resource-users/{id}").hasAnyRole(USER)
 
                         // Contest
-                        .requestMatchers(HttpMethod.POST, "/core/contests/create").hasAnyRole(ADMIN)
-                        .requestMatchers(HttpMethod.POST, "/core/contests/{id}/register").hasAnyRole(ADMIN, USER)
-                        .requestMatchers(HttpMethod.PUT, "/core/contests/{id}").hasAnyRole(ADMIN)
-                        .requestMatchers(HttpMethod.DELETE, "/core/contests/{id}").hasAnyRole(ADMIN)
-                        .requestMatchers(HttpMethod.GET, "/core/contests/admin").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.POST, "/core/contests/create").hasAnyRole(ADMIN, ADMIN_MOODLE)
+                        .requestMatchers(HttpMethod.POST, "/core/contests/{id}/register").hasAnyRole(USER)
+                        .requestMatchers(HttpMethod.PUT, "/core/contests/{id}").hasAnyRole(ADMIN, ADMIN_MOODLE)
+                        .requestMatchers(HttpMethod.DELETE, "/core/contests/{id}").hasAnyRole(ADMIN, ADMIN_MOODLE)
+                        .requestMatchers(HttpMethod.GET, "/core/contests/admin").hasAnyRole(ADMIN, ADMIN_MOODLE)
                         .requestMatchers(HttpMethod.GET, "/core/contests/me").hasAnyRole(USER)
-                        .requestMatchers(HttpMethod.GET, "/core/contests/{id}/admin/statistics").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.GET, "/core/contests/{id}/admin/statistics").hasAnyRole(ADMIN, ADMIN_MOODLE)
                         .requestMatchers(HttpMethod.GET, "/core/contests/contest/dashboard-statistics").hasAnyRole(ADMIN)
 
                         // Review
