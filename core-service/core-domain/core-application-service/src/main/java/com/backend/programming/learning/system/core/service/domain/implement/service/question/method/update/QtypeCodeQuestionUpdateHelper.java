@@ -42,13 +42,6 @@ public class QtypeCodeQuestionUpdateHelper {
 
     // Persist updated Qtype Code Question entity in database
     public QuestionUpdatedEvent updateQtypeCodeQuestionInDb(UpdateQtypeCodeQuestionCommand updateQtypeCodeQuestionCommand) {
-        // check answers if exist when updating answers
-        if (updateQtypeCodeQuestionCommand.getQuestion().getAnswers() != null)
-            updateQtypeCodeQuestionCommand
-                    .getQuestion()
-                    .getAnswers()
-                    .forEach(answer -> commonUpdateHelper.checkAnswerExist(answer.getAnswerId()));
-
         QtypeCodeQuestion qtypeCodeQuestion = getQtypeCodeQuestion(updateQtypeCodeQuestionCommand.getQtCodeQuestionId());
         Question prevQuestion = questionRepository.findQuestion(qtypeCodeQuestion.getQuestion().getId().getValue()).get();
         QtypeCodeQuestion mappedQtypeCodeQuestion = qtypeCodeQuestionDataMapper

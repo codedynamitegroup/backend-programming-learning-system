@@ -62,12 +62,15 @@ public class AnswerOfQuestionDataAccessMapper {
         // Map for easy lookup
         Map<UUID, AnswerOfQuestion> answerOfQuestionMap = answerOfQuestionList.stream()
                 .collect(Collectors.toMap(answer -> answer.getId().getValue(), Function.identity()));
+        Map<UUID, AnswerOfQuestionEntity> answerOfQuestionEntityMap = answerOfQuestionEntityList.stream()
+                .collect(Collectors.toMap(AnswerOfQuestionEntity::getId, Function.identity()));
 
         for(AnswerOfQuestionEntity entity : answerOfQuestionEntityList) {
             AnswerOfQuestion answerOfQuestion = answerOfQuestionMap.get(entity.getId());
 
-            if(answerOfQuestion == null)
+            if(answerOfQuestion == null) {
                 continue;
+            }
 
             if (answerOfQuestion.getFeedback() != null)
                 entity.setFeedback(answerOfQuestion.getFeedback());
@@ -76,6 +79,13 @@ public class AnswerOfQuestionDataAccessMapper {
             if (answerOfQuestion.getFraction() != null)
                 entity.setFraction(answerOfQuestion.getFraction());
         }
+
+        answerOfQuestionList.forEach(answer -> {
+            if(answerOfQuestionEntityMap.get(answer.getId().getValue()) == null) {
+                answerOfQuestionEntityList.add(answerOfQuestionToAnswerOfQuestionEntity(answer));
+            }
+        });
+
 
         return answerOfQuestionEntityList;
     }

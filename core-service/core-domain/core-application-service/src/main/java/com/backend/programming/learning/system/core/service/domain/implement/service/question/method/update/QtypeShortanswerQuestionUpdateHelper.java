@@ -43,13 +43,6 @@ public class QtypeShortanswerQuestionUpdateHelper {
 
     // Persist updated Qtype Shortanswer Question entity in database
     public QuestionUpdatedEvent updateQtypeShortanswerQuestionInDb(UpdateQtypeShortanswerQuestionCommand updateQtypeShortanswerQuestionCommand) {
-        // check answers if exist when updating answers
-        if (updateQtypeShortanswerQuestionCommand.getQuestion().getAnswers() != null)
-            updateQtypeShortanswerQuestionCommand
-                    .getQuestion()
-                    .getAnswers()
-                    .forEach(answer -> commonUpdateHelper.checkAnswerExist(answer.getAnswerId()));
-
         QtypeShortAnswerQuestion qtypeShortAnswerQuestion = getQtypeShortanswerQuestion(updateQtypeShortanswerQuestionCommand.getQtShortanswerQuestionId());
         Question prevQuestion = questionRepository.findQuestion(qtypeShortAnswerQuestion.getQuestion().getId().getValue()).get();
         QtypeShortAnswerQuestion mappedQtypeShortAnswerQuestion = qtypeShortanswerQuestionDataMapper

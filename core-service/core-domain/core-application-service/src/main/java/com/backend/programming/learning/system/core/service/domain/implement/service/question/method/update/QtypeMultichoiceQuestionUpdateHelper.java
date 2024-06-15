@@ -43,13 +43,6 @@ public class QtypeMultichoiceQuestionUpdateHelper {
 
     // Persist updated Qtype Multichoice Question entity in database
     public QuestionUpdatedEvent updateQtypeMultichoiceQuestionInDb(UpdateQtypeMultichoiceQuestionCommand updateQtypeMultichoiceQuestionCommand) {
-        // check answers if exist when updating answers
-        if (updateQtypeMultichoiceQuestionCommand.getQuestion().getAnswers() != null)
-            updateQtypeMultichoiceQuestionCommand
-                    .getQuestion()
-                    .getAnswers()
-                    .forEach(answer -> commonUpdateHelper.checkAnswerExist(answer.getAnswerId()));
-
         QtypeMultiChoiceQuestion qtypeMultichoiceQuestion = getQtypeMultichoiceQuestion(updateQtypeMultichoiceQuestionCommand.getQtMultichoiceQuestionId());
         Question prevQuestion = questionRepository.findQuestion(qtypeMultichoiceQuestion.getQuestion().getId().getValue()).get();
         QtypeMultiChoiceQuestion mappedQtypeMultichoiceQuestion = qtypeMultichoiceQuestionDataMapper
