@@ -11,11 +11,11 @@ import org.springframework.stereotype.Component;
 public class QuestionMessagingDataMapper {
     public QuestionRequest questionRequestAvroModelToQuestionDeleteRequest(QuestionRequestAvroModel questionDeleteRequestAvroModel) {
         return QuestionRequest.builder()
-                .id(questionDeleteRequestAvroModel.getId())
+                .id(questionDeleteRequestAvroModel.getId().toString())
                 .sagaId(questionDeleteRequestAvroModel.getSagaId())
-                .organizationId(questionDeleteRequestAvroModel.getOrganizationId())
-                .createdBy(questionDeleteRequestAvroModel.getCreatedBy())
-                .updatedBy(questionDeleteRequestAvroModel.getUpdatedBy())
+                .organizationId(questionDeleteRequestAvroModel.getOrganizationId().toString())
+                .createdBy(questionDeleteRequestAvroModel.getCreatedBy().toString())
+                .updatedBy(questionDeleteRequestAvroModel.getUpdatedBy().toString())
                 .difficulty(questionDeleteRequestAvroModel.getDifficulty())
                 .name(questionDeleteRequestAvroModel.getName())
                 .questionText(questionDeleteRequestAvroModel.getQuestionText())
