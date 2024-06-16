@@ -15,12 +15,10 @@ import com.backend.programming.learning.system.course.service.domain.entity.Subm
 import com.backend.programming.learning.system.course.service.domain.entity.SubmissionGrade;
 import com.backend.programming.learning.system.course.service.domain.mapper.submission_assignment_file.SubmissionAssignmentFileDataMapper;
 import com.backend.programming.learning.system.course.service.domain.mapper.submission_assignment_onlinetext.SubmissionAssignmentOnlineTextDataMapper;
-import com.backend.programming.learning.system.course.service.domain.mapper.submission_file.SubmissionFileDataMapper;
 import com.backend.programming.learning.system.course.service.domain.mapper.submission_grade.SubmissionGradeDataMapper;
 import com.backend.programming.learning.system.course.service.domain.mapper.user.UserDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionAssignmentFileRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionAssignmentOnlineTextRepository;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionFileRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionGradeRepository;
 import org.springframework.stereotype.Component;
 
@@ -40,10 +38,7 @@ public class SubmissionAssignmentDataMapper {
 
     private final SubmissionGradeRepository submissionGradeRepository;
 
-    private final SubmissionFileDataMapper submissionFileDataMapper;
-    private final SubmissionFileRepository submissionFileRepository;
-
-    public SubmissionAssignmentDataMapper(UserDataMapper userDataMapper, SubmissionAssignmentFileDataMapper submissionAssignmentFileDataMapper, SubmissionAssignmentFileRepository submissionAssignmentFileRepository, SubmissionAssignmentOnlineTextDataMapper submissionAssignmentOnlineTextDataMapper, SubmissionAssignmentOnlineTextRepository submissionAssignmentOnlineTextRepository, SubmissionGradeDataMapper submissionGradeDataMapper, SubmissionGradeRepository submissionGradeRepository, SubmissionFileDataMapper submissionFileDataMapper, SubmissionFileRepository submissionFileRepository) {
+    public SubmissionAssignmentDataMapper(UserDataMapper userDataMapper, SubmissionAssignmentFileDataMapper submissionAssignmentFileDataMapper, SubmissionAssignmentFileRepository submissionAssignmentFileRepository, SubmissionAssignmentOnlineTextDataMapper submissionAssignmentOnlineTextDataMapper, SubmissionAssignmentOnlineTextRepository submissionAssignmentOnlineTextRepository, SubmissionGradeDataMapper submissionGradeDataMapper, SubmissionGradeRepository submissionGradeRepository) {
         this.userDataMapper = userDataMapper;
         this.submissionAssignmentFileDataMapper = submissionAssignmentFileDataMapper;
         this.submissionAssignmentFileRepository = submissionAssignmentFileRepository;
@@ -51,8 +46,6 @@ public class SubmissionAssignmentDataMapper {
         this.submissionAssignmentOnlineTextRepository = submissionAssignmentOnlineTextRepository;
         this.submissionGradeDataMapper = submissionGradeDataMapper;
         this.submissionGradeRepository = submissionGradeRepository;
-        this.submissionFileDataMapper = submissionFileDataMapper;
-        this.submissionFileRepository = submissionFileRepository;
     }
     public SubmissionAssignment createSubmissionAssignmentCommandToSubmissionAssignment(CreateSubmissionAssignmentCommand createSubmissionAssignmentCommand) {
         return SubmissionAssignment.builder()
@@ -77,12 +70,12 @@ public class SubmissionAssignmentDataMapper {
         if(submissionAssignment == null){
             return null;
         }
-        SubmissionAssignmentFile submissionAssignmentFile = submissionAssignmentFileRepository
-                .findBySubmissionAssignmentId(submissionAssignment.getId().getValue()).orElse(null);
-        SubmissionAssignmentFileResponseEntity submissionAssignmentFileResponseEntity = null;
-        if(submissionAssignmentFile != null){
+       List<SubmissionAssignmentFile> submissionAssignmentFiles = submissionAssignmentFileRepository
+                .findBySubmissionAssignmentId(submissionAssignment.getId().getValue());
+        List<SubmissionAssignmentFileResponseEntity> submissionAssignmentFileResponseEntity = null;
+        if( submissionAssignmentFiles != null){
             submissionAssignmentFileResponseEntity = submissionAssignmentFileDataMapper
-                    .submissionAssignmentFileToSubmissionAssignmentFileResponseEntity(submissionAssignmentFile);
+                    .submissionAssignmentFilesToSubmissionAssignmentFileResponseEntities(submissionAssignmentFiles);
 
         }
         SubmissionAssignmentOnlineText submissionAssignmentOnlineText = submissionAssignmentOnlineTextRepository
@@ -110,10 +103,11 @@ public class SubmissionAssignmentDataMapper {
                 .user(userResponseEntity)
                 .isGraded(submissionAssignment.getGradedStatus())
                 .grade(submissionAssignment.getGrade())
-                .submissionAssignmentFile(submissionAssignmentFileResponseEntity)
+                .submissionAssignmentFiles(submissionAssignmentFileResponseEntity)
                 .submissionAssignmentOnlineText(submissionAssignmentOnlineTextResponseEntity)
                 .submissionGrade(submissionGradeResponseEntity)
                 .content(submissionAssignment.getContent())
+                .feedback(submissionAssignment.getFeedback())
                 .timemodefied(submissionAssignment.getTimemodified())
                 .submitTime(submissionAssignment.getSubmittedAt())
                 .build();

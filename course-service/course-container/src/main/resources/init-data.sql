@@ -76,42 +76,36 @@ INSERT INTO public.intro_attachment (id,assignment_id,file_name,file_size,file_u
 INSERT INTO public.activity_attachment (id,assignment_id,file_name,file_size,file_url,timemodified,mimetype) VALUES
 	 ('43eb677a-af62-4496-ae4e-b03f3de1663c','b3108f5a-c769-42ab-84c9-80a6d80f5821','2024-04-28T06-36 Giao dịch số 7503068499806565-14511976 (1).pdf',1059934,'http://62.171.185.208/webservice/pluginfile.php/67/mod_assign/activityattachment/0/2024-04-28T06-36%20Giao%20d%E1%BB%8Bch%20s%E1%BB%91%207503068499806565-14511976%20%281%29.pdf','2024-05-22 09:18:13+07','application/pdf');
 
-INSERT INTO public.submission_assignment (id,user_id,assignment_id,is_graded,grade,"content",submit_time,timemodified) VALUES
-	 ('8c6dd82d-7886-4378-ac13-d0781d6440a4','2d3c1e66-1835-457f-93e9-265fe483feee','577e118d-604b-450c-a02c-cf8e9f35f8ee',false,-1.0,'','2024-05-06 14:20:25','2024-05-06 21:20:25+07'),
-	 ('aa45447a-836f-40de-8737-b1478bc80a19','cb2c22ac-87de-44e4-9638-35979f6af667','577e118d-604b-450c-a02c-cf8e9f35f8ee',false,-1.0,'','2024-05-24 02:53:17','2024-05-28 14:10:04+07'),
-	 ('ad32ef95-b182-4935-8f0e-3b88d5896adc','2d7ed5a0-fb21-4927-9a25-647c17d29668','b1b3e215-2450-4819-9aa6-3aea9f87e604',false,-1.0,'','2024-05-07 08:43:42','2024-05-07 15:43:42+07'),
-	 ('9f011388-31b4-4630-ac11-975febff1948','cb2c22ac-87de-44e4-9638-35979f6af667','b1b3e215-2450-4819-9aa6-3aea9f87e604',true,100.0,'','2024-05-06 07:35:10','2024-05-06 14:39:26+07'),
-	 ('8478c536-e657-408c-acbb-55905eeead13','2d7ed5a0-fb21-4927-9a25-647c17d29668','3926bcb3-6415-458d-b449-6e2b464732d7',true,4.5,'<p dir="ltr" style="text-align:left;">Quá xuất sắc</p>','2024-05-27 05:11:08','2024-05-27 12:11:08+07'),
-	 ('b85df3d3-86ce-449f-8ed3-6ecafcad4cf9','cb2c22ac-87de-44e4-9638-35979f6af667','3926bcb3-6415-458d-b449-6e2b464732d7',true,85.0,'<p dir="ltr" style="text-align:left;">Qua xuất sắc<img src="http://62.171.185.208/webservice/pluginfile.php/41/assignfeedback_comments/feedback/6/242549690_4573384179372457_7212491116034148251_n.png" alt="hehe" width="600" height="600" class="img-fluid atto_image_button_text-bottom" /></p>','2024-05-06 07:31:38','2024-05-26 11:52:48+07'),
-	 ('29d83061-2aac-4bb4-9e41-6344dad72264','9ba179ed-d26d-4828-a0f6-8836c2063992','3926bcb3-6415-458d-b449-6e2b464732d7',true,100.0,'<p dir="ltr" style="text-align:left;">Quá giỏi</p>','2024-05-08 02:27:03','2024-05-08 09:27:37+07'),
-	 ('5dece352-1ce6-4159-a23e-80437d9f15ec','2d7ed5a0-fb21-4927-9a25-647c17d29668','8c6d9aa1-f157-49ca-bfae-bc8a14570c81',false,-1.0,'','2024-05-28 08:09:33','2024-05-28 15:09:33+07'),
-	 ('e8500189-218e-4420-95fd-0ba98b4fbddd','cb2c22ac-87de-44e4-9638-35979f6af667','8c6d9aa1-f157-49ca-bfae-bc8a14570c81',false,-1.0,'','2024-05-06 08:11:48','2024-05-07 17:25:05+07'),
-	 ('13bc8451-f836-455d-9a36-fc0e00596443','9ba179ed-d26d-4828-a0f6-8836c2063992','8c6d9aa1-f157-49ca-bfae-bc8a14570c81',false,-1.0,'','2024-05-08 02:08:36','2024-05-08 09:12:00+07');
-INSERT INTO public.submission_assignment (id,user_id,assignment_id,is_graded,grade,"content",submit_time,timemodified) VALUES
-	 ('40b37e96-5960-4484-97fe-a3d207c4f5c9','ca3040f2-e173-40a5-aab7-6ef15965ce43','438413fa-ac31-496a-becb-709505ea990a',true,65.0,'<p dir="ltr" style="text-align:left;">Tốt</p>','2024-05-13 03:32:09','2024-05-13 10:32:40+07');
+INSERT INTO public.submission_assignment (id, user_id, assignment_id, is_graded, grade, "content", feedback, submit_time, timemodified) VALUES
+('8c6dd82d-7886-4378-ac13-d0781d6440a4', '2d3c1e66-1835-457f-93e9-265fe483feee', '577e118d-604b-450c-a02c-cf8e9f35f8ee', false, -1.0, null, '', '2024-05-06 14:20:25', '2024-05-06 21:20:25+07'),
+('aa45447a-836f-40de-8737-b1478bc80a19', 'cb2c22ac-87de-44e4-9638-35979f6af667', '577e118d-604b-450c-a02c-cf8e9f35f8ee', false, -1.0, null, '', '2024-05-24 02:53:17', '2024-05-28 14:10:04+07'),
+('ad32ef95-b182-4935-8f0e-3b88d5896adc', '2d7ed5a0-fb21-4927-9a25-647c17d29668', 'b1b3e215-2450-4819-9aa6-3aea9f87e604', false, -1.0, null, '', '2024-05-07 08:43:42', '2024-05-07 15:43:42+07'),
+('9f011388-31b4-4630-ac11-975febff1948', 'cb2c22ac-87de-44e4-9638-35979f6af667', 'b1b3e215-2450-4819-9aa6-3aea9f87e604', true, 100.0, null, '', '2024-05-06 07:35:10', '2024-05-06 14:39:26+07'),
+('8478c536-e657-408c-acbb-55905eeead13', '2d7ed5a0-fb21-4927-9a25-647c17d29668', '3926bcb3-6415-458d-b449-6e2b464732d7', true, 4.5, null, '<p dir="ltr" style="text-align:left;">Quá xuất sắc</p>', '2024-05-27 05:11:08', '2024-05-27 12:11:08+07'),
+('b85df3d3-86ce-449f-8ed3-6ecafcad4cf9', 'cb2c22ac-87de-44e4-9638-35979f6af667', '3926bcb3-6415-458d-b449-6e2b464732d7', true, 85.0, null, '<p dir="ltr" style="text-align:left;">Qua xuất sắc<img src="http://62.171.185.208/webservice/pluginfile.php/41/assignfeedback_comments/feedback/6/242549690_4573384179372457_7212491116034148251_n.png" alt="hehe" width="600" height="600" class="img-fluid atto_image_button_text-bottom" /></p>', '2024-05-06 07:31:38', '2024-05-26 11:52:48+07'),
+('29d83061-2aac-4bb4-9e41-6344dad72264', '9ba179ed-d26d-4828-a0f6-8836c2063992', '3926bcb3-6415-458d-b449-6e2b464732d7', true, 100.0, '<p dir="ltr" style="text-align:left;">hehe</p>', '<p dir="ltr" style="text-align:left;">Quá giỏi</p>', '2024-05-08 02:27:03', '2024-05-08 09:27:37+07'),
+('5dece352-1ce6-4159-a23e-80437d9f15ec', '2d7ed5a0-fb21-4927-9a25-647c17d29668', '8c6d9aa1-f157-49ca-bfae-bc8a14570c81', false, -1.0, null, '', '2024-05-28 08:09:33', '2024-05-28 15:09:33+07'),
+('e8500189-218e-4420-95fd-0ba98b4fbddd', 'cb2c22ac-87de-44e4-9638-35979f6af667', '8c6d9aa1-f157-49ca-bfae-bc8a14570c81', false, -1.0, null, '', '2024-05-06 08:11:48', '2024-05-07 17:25:05+07'),
+('13bc8451-f836-455d-9a36-fc0e00596443', '9ba179ed-d26d-4828-a0f6-8836c2063992', '8c6d9aa1-f157-49ca-bfae-bc8a14570c81', false, -1.0, null, '', '2024-05-08 02:08:36', '2024-05-08 09:12:00+07');
 
-INSERT INTO public.submission_assignment_file (id,submission_assignment_id,num_file) VALUES
-	 ('70c12ca5-e76a-47a9-aefd-2117f0c9f8f0','aa45447a-836f-40de-8737-b1478bc80a19',1),
-	 ('2e81be32-b6b4-47e6-9659-dd4dad461ae5','9f011388-31b4-4630-ac11-975febff1948',1),
-	 ('f52878c4-ec12-4f2b-846c-fa8e3849da56','b85df3d3-86ce-449f-8ed3-6ecafcad4cf9',1),
-	 ('14a9db27-30d2-45b6-ac89-4ee45f0d2844','29d83061-2aac-4bb4-9e41-6344dad72264',1),
-	 ('779f5d26-82d7-4161-a2d6-83b145c7f6b8','e8500189-218e-4420-95fd-0ba98b4fbddd',2),
-	 ('d7da73d7-76d1-448f-9d7c-cfcdf2045deb','13bc8451-f836-455d-9a36-fc0e00596443',1),
-	 ('7c4727d4-ce7d-4659-9979-496219958a26','40b37e96-5960-4484-97fe-a3d207c4f5c9',1);
+INSERT INTO public.submission_assignment (id,user_id,assignment_id,is_graded,grade,"content",feedback,submit_time,timemodified) VALUES
+	 ('40b37e96-5960-4484-97fe-a3d207c4f5c9','ca3040f2-e173-40a5-aab7-6ef15965ce43','438413fa-ac31-496a-becb-709505ea990a',true,65.0,null,'<p dir="ltr" style="text-align:left;">Tốt</p>','2024-05-13 03:32:09','2024-05-13 10:32:40+07');
+
+INSERT INTO submission_assignment_file (id, submission_assignment_id, file_name, file_size, file_url, timemodified, mimetype) VALUES
+    ('70c12ca5-e76a-47a9-aefd-2117f0c9f8f0', 'aa45447a-836f-40de-8737-b1478bc80a19', 'DeCuongDeTaiTN (1).pdf', 227177, 'http://62.171.185.208/webservice/pluginfile.php/39/assignsubmission_file/submission_files/21/DeCuongDeTaiTN%20%281%29.pdf', '2024-05-28 14:10:04+07', 'application/pdf'),
+    ('2e81be32-b6b4-47e6-9659-dd4dad461ae5', '9f011388-31b4-4630-ac11-975febff1948', 'f662213566f63d19a90770676f0941ee.jpg', 44665, 'http://62.171.185.208/webservice/pluginfile.php/38/assignsubmission_file/submission_files/5/f662213566f63d19a90770676f0941ee.jpg', '2024-05-06 14:39:26+07', 'image/jpeg'),
+    ('f52878c4-ec12-4f2b-846c-fa8e3849da56', 'b85df3d3-86ce-449f-8ed3-6ecafcad4cf9', 'DeCuongDeTaiTN (1).pdf', 227177, 'http://62.171.185.208/webservice/pluginfile.php/41/assignsubmission_file/submission_files/4/DeCuongDeTaiTN%20%281%29.pdf', '2024-05-26 08:58:16+07', 'application/pdf'),
+    ('14a9db27-30d2-45b6-ac89-4ee45f0d2844', '29d83061-2aac-4bb4-9e41-6344dad72264', '65864c8f201a9b2b1b6ca4405906b6de.jpg', 6616, 'http://62.171.185.208/webservice/pluginfile.php/41/assignsubmission_file/submission_files/15/65864c8f201a9b2b1b6ca4405906b6de.jpg', '2024-05-08 09:27:37+07', 'image/jpeg'),
+    ('779f5d26-82d7-4161-a2d6-83b145c7f6b8', 'e8500189-218e-4420-95fd-0ba98b4fbddd', '1f449.png', 9852, 'http://62.171.185.208/webservice/pluginfile.php/42/assignsubmission_file/submission_files/6/1f449.png', '2024-05-06 15:13:42+07', 'image/png'),
+    ('779f5d26-82d7-4161-a2d6-83b145c7f6b2', 'e8500189-218e-4420-95fd-0ba98b4fbddd', 'test1.jpg', 60887, 'http://62.171.185.208/webservice/pluginfile.php/42/assignsubmission_file/submission_files/6/test1.jpg', '2024-05-07 17:25:05+07', 'image/jpeg'),
+    ('d7da73d7-76d1-448f-9d7c-cfcdf2045deb', '13bc8451-f836-455d-9a36-fc0e00596443', '438255262_122148182144103154_1065002638849796416_n.jpg', 59292, 'http://62.171.185.208/webservice/pluginfile.php/42/assignsubmission_file/submission_files/14/438255262_122148182144103154_1065002638849796416_n.jpg', '2024-05-08 09:12:00+07', 'image/jpeg'),
+    ('7c4727d4-ce7d-4659-9979-496219958a26', '40b37e96-5960-4484-97fe-a3d207c4f5c9', '2024-04-26T07-00 Giao dịch số 7331655503614525-14503349 (1).pdf', 1059932, 'http://62.171.185.208/webservice/pluginfile.php/48/assignsubmission_file/submission_files/16/2024-04-26T07-00%20Giao%20d%E1%BB%8Bch%20s%E1%BB%91%207331655503614525-14503349%20%281%29.pdf', '2024-05-13 10:32:40+07', 'application/pdf');
+
 
 INSERT INTO public.submission_assignment_onlinetext (id,submission_assignment_id,"content") VALUES
 	 ('ebd4b942-bf89-4a25-b297-4943fd8ed783','b85df3d3-86ce-449f-8ed3-6ecafcad4cf9','<p dir="ltr" style="text-align:left;">hello sieu nhan</p><p dir="ltr" style="text-align:left;"><br /></p><p dir="ltr" style="text-align:left;"></p><ol><li>hihi</li><li>huhu<img src="http://62.171.185.208/webservice/pluginfile.php/41/assignsubmission_onlinetext/submissions_onlinetext/4/b0f87d036752d9f959db778873df9d59.jpg" alt="huhu" width="736" height="737" class="img-fluid atto_image_button_text-bottom" /></li></ol>'),
 	 ('1db25399-7fb1-4e60-a73f-fb5370e8b719','29d83061-2aac-4bb4-9e41-6344dad72264','<p dir="ltr" style="text-align:left;">hehe</p>');
 
-INSERT INTO public.submission_file (id,submission_assignment_file_id,file_name,file_size,file_url,timemodified,mimetype) VALUES
-	 ('eae47673-ceda-43a1-bc70-62e5df8b2748','70c12ca5-e76a-47a9-aefd-2117f0c9f8f0','DeCuongDeTaiTN (1).pdf',227177,'http://62.171.185.208/webservice/pluginfile.php/39/assignsubmission_file/submission_files/21/DeCuongDeTaiTN%20%281%29.pdf','2024-05-28 14:10:04+07','application/pdf'),
-	 ('0a00a277-6705-4a71-89b6-2e691e7d3d8c','2e81be32-b6b4-47e6-9659-dd4dad461ae5','f662213566f63d19a90770676f0941ee.jpg',44665,'http://62.171.185.208/webservice/pluginfile.php/38/assignsubmission_file/submission_files/5/f662213566f63d19a90770676f0941ee.jpg','2024-05-06 14:39:26+07','image/jpeg'),
-	 ('37ca53e9-60c8-4917-88aa-da00358123d5','f52878c4-ec12-4f2b-846c-fa8e3849da56','DeCuongDeTaiTN (1).pdf',227177,'http://62.171.185.208/webservice/pluginfile.php/41/assignsubmission_file/submission_files/4/DeCuongDeTaiTN%20%281%29.pdf','2024-05-26 08:58:16+07','application/pdf'),
-	 ('4b594a09-0783-43f6-8087-8ec9e368e041','14a9db27-30d2-45b6-ac89-4ee45f0d2844','65864c8f201a9b2b1b6ca4405906b6de.jpg',6616,'http://62.171.185.208/webservice/pluginfile.php/41/assignsubmission_file/submission_files/15/65864c8f201a9b2b1b6ca4405906b6de.jpg','2024-05-08 09:27:37+07','image/jpeg'),
-	 ('fdafba35-49af-4312-8834-d9c111843a5e','779f5d26-82d7-4161-a2d6-83b145c7f6b8','1f449.png',9852,'http://62.171.185.208/webservice/pluginfile.php/42/assignsubmission_file/submission_files/6/1f449.png','2024-05-06 15:13:42+07','image/png'),
-	 ('db6d52fe-fbce-4500-9897-d39f672541ae','779f5d26-82d7-4161-a2d6-83b145c7f6b8','test1.jpg',60887,'http://62.171.185.208/webservice/pluginfile.php/42/assignsubmission_file/submission_files/6/test1.jpg','2024-05-07 17:25:05+07','image/jpeg'),
-	 ('afbfe7cf-8404-48d3-9c85-5d97548669b5','d7da73d7-76d1-448f-9d7c-cfcdf2045deb','438255262_122148182144103154_1065002638849796416_n.jpg',59292,'http://62.171.185.208/webservice/pluginfile.php/42/assignsubmission_file/submission_files/14/438255262_122148182144103154_1065002638849796416_n.jpg','2024-05-08 09:12:00+07','image/jpeg'),
-	 ('91d968a6-b3f8-46fe-978d-dc7759d211cd','7c4727d4-ce7d-4659-9979-496219958a26','2024-04-26T07-00 Giao dịch số 7331655503614525-14503349 (1).pdf',1059932,'http://62.171.185.208/webservice/pluginfile.php/48/assignsubmission_file/submission_files/16/2024-04-26T07-00%20Giao%20d%E1%BB%8Bch%20s%E1%BB%91%207331655503614525-14503349%20%281%29.pdf','2024-05-13 10:32:40+07','application/pdf');
 
 INSERT INTO public.submission_grade (id,submission_assignment_id,grade,time_created,time_modified) VALUES
 	 ('d393472f-51e7-44cc-ab66-b7924f06cc70','9f011388-31b4-4630-ac11-975febff1948',100.0,'2024-05-07 15:41:52+07','2024-05-07 15:43:41+07'),
