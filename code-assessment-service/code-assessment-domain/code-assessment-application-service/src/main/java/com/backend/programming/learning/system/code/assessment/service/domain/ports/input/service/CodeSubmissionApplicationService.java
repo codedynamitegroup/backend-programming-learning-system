@@ -21,4 +21,6 @@ public interface CodeSubmissionApplicationService {
     GetMemoryAndTimeRankingResponse getMemoryAndRunTimeRanking(@Valid GetMemoryAndTimeRankingCommand command);
 
     String executeCodeWithTestCase(@Valid ExecuteCodeWithTestCaseCommand command);
+
+    GetCodeSubmissionReponse getAdminCodeSubmissions(@Valid GetCodeSubmissionsByUserIdCommand command);
 }

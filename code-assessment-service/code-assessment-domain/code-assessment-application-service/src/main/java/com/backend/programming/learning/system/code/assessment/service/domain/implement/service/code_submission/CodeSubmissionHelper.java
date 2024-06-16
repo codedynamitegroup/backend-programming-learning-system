@@ -232,4 +232,12 @@ public class CodeSubmissionHelper {
 
         return result;
     }
+
+    public Page<CodeSubmission> getAdminCodeSubmissions(GetCodeSubmissionsByUserIdCommand command) {
+        User user = validateHelper.validateUserByEmail(command.getEmail());
+        Page<CodeSubmission> codeSubmissions = codeSubmissionRepository.findByQuestionId(new CodeQuestionId(command.getCodeQuestionId()), command.getContestId(), command.getCerCourseId(), command.getPageNum(), command.getPageSize());
+
+        findDescriptionStatus(codeSubmissions);
+        return codeSubmissions;
+    }
 }

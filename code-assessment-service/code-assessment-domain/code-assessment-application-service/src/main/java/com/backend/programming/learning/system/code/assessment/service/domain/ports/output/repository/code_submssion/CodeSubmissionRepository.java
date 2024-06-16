@@ -39,4 +39,6 @@ public interface CodeSubmissionRepository {
     void saveCerCourse(CodeSubmissionId id, UUID certificateCourseId);
 
     void saveContest(CodeSubmissionId id, UUID contestId);
+
+    Page<CodeSubmission> findByQuestionId(CodeQuestionId codeQuestionId, UUID contestId, UUID cerCourseId, Integer pageNum, Integer pageSize);
 }

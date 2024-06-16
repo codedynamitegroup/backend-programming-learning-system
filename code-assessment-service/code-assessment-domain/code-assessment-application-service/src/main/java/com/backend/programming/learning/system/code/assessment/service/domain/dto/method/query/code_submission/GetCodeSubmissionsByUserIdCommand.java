@@ -31,4 +31,7 @@ public class GetCodeSubmissionsByUserIdCommand {
     @Setter
     @JsonIgnore
     Integer pageNum;
+
+    UUID contestId;
+    UUID cerCourseId;
 }

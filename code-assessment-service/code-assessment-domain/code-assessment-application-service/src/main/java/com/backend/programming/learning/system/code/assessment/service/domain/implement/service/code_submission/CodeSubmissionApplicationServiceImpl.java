@@ -52,4 +52,9 @@ public class CodeSubmissionApplicationServiceImpl implements CodeSubmissionAppli
     public String executeCodeWithTestCase(ExecuteCodeWithTestCaseCommand command) {
         return codeSubmissionCommandHandler.executeCodeWithTestCase(command);
     }
+
+    @Override
+    public GetCodeSubmissionReponse getAdminCodeSubmissions(GetCodeSubmissionsByUserIdCommand command) {
+        return codeSubmissionCommandHandler.getAdminCodeSubmissions(command);
+    }
 }
