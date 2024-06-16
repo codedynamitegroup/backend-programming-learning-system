@@ -137,6 +137,12 @@ public class ChapterQueryHelper {
                     ));
                     chapterResource.setCompleted(q.getPass());
                 }
+//                chapterResource.setCompleted(
+//                        getCompletedStatusForChapterResource(
+//                                chapterResource.getId().getValue(),
+//                                user.get().getId().getValue()
+//                        )
+//                );
             }
 
             chapterWithResources.setChapterResources(chapterResources);
