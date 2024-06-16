@@ -115,7 +115,7 @@ public interface CodeQuestionJpaRepository extends JpaRepository<CodeQuestionEnt
                     )
                 AND (cast(?4 as text) is NULL OR cast(?4 as text) = cast(cqe.difficulty as text))
                 AND (?6 is null or cqe.is_public = ?6)
-                AND (?5 = cqe.user_id)
+                AND (?5 = cqe.user_id or cqe.is_public = true)
                 order by
                 ts_rank(cqe.fts_document, 
                     case
