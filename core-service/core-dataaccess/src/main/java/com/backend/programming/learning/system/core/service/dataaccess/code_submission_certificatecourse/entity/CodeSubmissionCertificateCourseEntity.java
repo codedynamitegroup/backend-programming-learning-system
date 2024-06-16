@@ -18,7 +18,6 @@ import java.util.UUID;
 @Entity
 public class CodeSubmissionCertificateCourseEntity {
     @Id
-    @Column(name = "id")
     private UUID codeSubmissionId;
     private UUID certificateCourseId;
 

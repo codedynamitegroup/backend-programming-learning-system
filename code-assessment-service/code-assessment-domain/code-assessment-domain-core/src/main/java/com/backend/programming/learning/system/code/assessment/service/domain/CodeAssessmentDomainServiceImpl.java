@@ -125,9 +125,9 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
                 .active(true)
                 .timeLimit(timeLimit)
                 .memoryLimit(memoryLimit)
-                .headCode(headCode)
-                .tailCode(tailCode)
-                .bodyCode(bodyCode)
+                .headCode(headCode == null? "":  headCode)
+                .tailCode(tailCode == null? "" : tailCode)
+                .bodyCode(bodyCode == null? "" : bodyCode)
                 .build();
     }
 

@@ -28,8 +28,8 @@ public class OrganizationOutboxScheduler implements OutboxScheduler {
 
     @Override
     @Transactional
-//    @Scheduled(fixedDelayString = "${auth-service.outbox-scheduler-fixed-rate}",
-//        initialDelayString = "${auth-service.outbox-scheduler-initial-delay}")
+    @Scheduled(fixedDelayString = "${auth-service.outbox-scheduler-fixed-rate}",
+        initialDelayString = "${auth-service.outbox-scheduler-initial-delay}")
     public void processOutboxMessage() {
         Optional<List<OrganizationOutboxMessage>> outboxMessagesResponse =
                 organizationOutboxHelper.getOrganizationOutboxMessageByOutboxStatusAndSagaStatus(
