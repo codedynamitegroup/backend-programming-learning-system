@@ -10,6 +10,7 @@ import java.util.UUID;
  * Description: ...
  */
 public record CreateQuestionBankCategoryCommand(
+        UUID organizationId,
         @NotNull(message = "Name is required")
         String name,
         @NotNull(message = "Description is required")
