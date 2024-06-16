@@ -197,11 +197,17 @@ public class MoodleDataMapper {
                 .build();
     }
 
-    public SubmissionAssignmentFile createSubmissionAssignmentFile(SubmissionAssignment submissionAssignment, SubmissionPlugin plugin) {
+    public SubmissionAssignmentFile createSubmissionAssignmentFile(SubmissionAssignment submissionAssignment, File file) {
         return SubmissionAssignmentFile.builder()
                 .id(new AssignmentSubmissionFileId(UUID.randomUUID()))
                 .assignmentSubmission(submissionAssignment)
-                .num_file(plugin.getFileareas().get(0).getFiles().size())
+                .fileName(file.getFilename())
+                .fileSize(file.getFilesize())
+                .fileUrl(file.getFileurl())
+                .timemodified(ZonedDateTime.ofInstant(
+                                Instant.ofEpochSecond(file.getTimemodified()),
+                                ZoneId.of("UTC")))
+                .mimetype(file.getMimetype())
                 .build();
     }
     public CourseResponseEntity courseToCourseResponseEntity(Course course) {
@@ -372,18 +378,6 @@ public class MoodleDataMapper {
                 .name(courseTypeModel.getName())
                 .moodleId(moodleId)
                 .organization(organization.get())
-                .build();
-    }
-
-    public SubmissionFile createSubmissionFile(SubmissionAssignmentFile submissionAssignmentFile, File file) {
-        return SubmissionFile.builder()
-                .id(new SubmissionFileId(UUID.randomUUID()))
-                .submissionAssignmentFile(submissionAssignmentFile)
-                .fileName(file.getFilename())
-                .fileSize(file.getFilesize())
-                .fileUrl(file.getFileurl())
-                .mimetype(file.getMimetype())
-                .timemodified(Instant.ofEpochSecond(file.getTimemodified()).atZone(ZoneId.of("UTC")))
                 .build();
     }
 }

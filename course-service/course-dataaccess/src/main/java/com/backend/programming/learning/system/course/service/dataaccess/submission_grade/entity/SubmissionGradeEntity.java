@@ -1,8 +1,6 @@
 package com.backend.programming.learning.system.course.service.dataaccess.submission_grade.entity;
 
 import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.entity.SubmissionAssignmentEntity;
-import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission_file.entity.AssignmentSubmissionFileEntity;
-import com.backend.programming.learning.system.course.service.domain.entity.SubmissionAssignment;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -64,7 +64,6 @@ public class MoodleCommandHandler {
     private final IntroFileRepository introFileRepository;
     private final IntroAttachmentRepository introAttachmentRepository;
     private final ActivityAttachmentRepository activityAttachmentRepository;
-    private final SubmissionFileRepository submissionFileRepository;
 
     private final  RoleMoodleRepository roleMoodleRepository;
 
@@ -281,16 +280,15 @@ public class MoodleCommandHandler {
 
                     for (SubmissionPlugin plugin : submissionAssignmentStatus.getLastattempt().getSubmission().getPlugins()) {
                         if (plugin.getType().equals("file")) {
-                            SubmissionAssignmentFile submissionAssignmentFile = moodleDataMapper.
-                                    createSubmissionAssignmentFile(submissionAssignment, plugin);
-                            submissionAssignmentFileRepository.saveSubmissionAssignmentFile(submissionAssignmentFile);
                             plugin.getFileareas().forEach(fileArea -> {
                                 fileArea.getFiles().forEach(file -> {
-                                    SubmissionFile submissionFile = moodleDataMapper.createSubmissionFile(submissionAssignmentFile, file);
-                                    submissionFileRepository.save(submissionFile);
+                                    SubmissionAssignmentFile submissionAssignmentFile = moodleDataMapper.
+                                            createSubmissionAssignmentFile(submissionAssignment, file);
+                                    submissionAssignmentFileRepository.saveSubmissionAssignmentFile(submissionAssignmentFile);
                                 });
                             });
                         } else if (plugin.getType().equals("onlinetext")) {
+                            submissionAssignment.setContent(plugin.getEditorfields().get(0).getText());
                             SubmissionAssignmentOnlineText submissionAssignmentOnlineText = moodleDataMapper.
                                     createSubmissionAssignmentOnlineText(submissionAssignment, plugin);
                             submissionAssignmentOnlineTextRepository.saveAssignmentSubmissionOnlineText(submissionAssignmentOnlineText);

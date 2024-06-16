@@ -2,20 +2,12 @@ package com.backend.programming.learning.system.course.service.dataaccess.submis
 
 import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.entity.SubmissionAssignmentEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.mapper.SubmissionAssignmentDataAccessMapper;
-import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission_file.entity.AssignmentSubmissionFileEntity;
-import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission_file.mapper.AssignmentSubmissionFileDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.submission_grade.entity.SubmissionGradeEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.SubmissionAssignment;
-import com.backend.programming.learning.system.course.service.domain.entity.SubmissionAssignmentFile;
-import com.backend.programming.learning.system.course.service.domain.entity.SubmissionFile;
 import com.backend.programming.learning.system.course.service.domain.entity.SubmissionGrade;
-import com.backend.programming.learning.system.course.service.domain.mapper.submission_assignment.SubmissionAssignmentDataMapper;
-import com.backend.programming.learning.system.course.service.domain.valueobject.SubmissionFileId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.SubmissionGradeId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 @RequiredArgsConstructor

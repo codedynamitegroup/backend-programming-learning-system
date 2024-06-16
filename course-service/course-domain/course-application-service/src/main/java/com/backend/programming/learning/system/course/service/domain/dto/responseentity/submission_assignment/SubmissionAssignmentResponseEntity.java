@@ -19,11 +19,12 @@ public class SubmissionAssignmentResponseEntity {
     private final String assignmentName;
     private final UserResponseEntity user;
     private final Boolean isGraded;
-    private final SubmissionAssignmentFileResponseEntity submissionAssignmentFile;
+    private final List<SubmissionAssignmentFileResponseEntity> submissionAssignmentFiles;
     private final SubmissionAssignmentOnlineTextResponseEntity submissionAssignmentOnlineText;
     private final SubmissionGradeResponseEntity submissionGrade;
     private final Float grade;
     private final String content;
+    private final String feedback;
     private final ZonedDateTime timemodefied;
     private final ZonedDateTime submitTime;
 }
