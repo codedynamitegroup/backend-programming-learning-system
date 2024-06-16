@@ -72,4 +72,9 @@ class CodeQuestionApplicationServiceImpl implements CodeQuestionApplicationServi
     public List<CodeQuestionDto> getRecommendedCodeQuestion(String email) {
         return codeQuestionCommandHandler.getRecommendedCodeQuestion(email);
     }
+
+    @Override
+    public GetCodeQuestionsResponse getAdminCodeQuestions(GetCodeQuestionsQuery query) {
+        return codeQuestionCommandHandler.getAdminCodeQuestions(query);
+    }
 }

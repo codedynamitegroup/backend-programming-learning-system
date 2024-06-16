@@ -200,4 +200,38 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
         List<CodeQuestionEntity> codeQuestionEntities = codeQuestionJpaRepository.findByNotSolvedTagsAndUserId(tagIds, id.getValue());
         return codeQuestionEntities.stream().map(codeQuestionDataAccessMapper::codeQuestionEntityToCodeQuestion).toList();
     }
+
+    @Override
+    public Page<CodeQuestion> adminFindAll(UserId userId, List<TagId> tagIds, QueryOrderBy orderBy, CodeQuestion.Fields sortBy, Integer pageNum, Integer pageSize, QuestionDifficulty difficulty, String search, Boolean isPublic) {
+        Pageable pageable
+                = PageRequest
+                .of(pageNum, pageSize);
+//                                codeQuestionDataAccessMapper.codeQuestionFieldToCodeQuestionEntityField(sortBy.name())));
+
+        List<UUID> tagEntityId = tagIds == null? List.of(): tagIds.stream().map(BaseId::getValue).toList();
+
+        List<String> splitedSearch = codeQuestionDataAccessMapper.splitWords(search);
+
+        String searchFinalWord = splitedSearch != null && !splitedSearch.isEmpty()? splitedSearch.get(splitedSearch.size() - 1): null;
+
+        if(splitedSearch != null && !splitedSearch.isEmpty())
+            splitedSearch.remove(splitedSearch.size() - 1);
+
+        String searchExcludeFinalWord =  splitedSearch != null && !splitedSearch.isEmpty()? String.join(" ", splitedSearch) : null;
+
+        Page<CodeQuestionEntity> codeQuestionEntityPageable =
+                codeQuestionJpaRepository.adminFindAndFilterByTagIds(
+                        tagEntityId,
+                        searchExcludeFinalWord,
+                        searchFinalWord,
+                        difficulty == null? null: difficulty.name(),
+                        userId.getValue(),
+                        isPublic,
+                        search,
+                        pageable);
+
+        Page<CodeQuestion> codeQuestions = codeQuestionEntityPageable.map(codeQuestionDataAccessMapper::codeQuestionEntityToCodeQuestion);
+
+        return codeQuestions;
+    }
 }

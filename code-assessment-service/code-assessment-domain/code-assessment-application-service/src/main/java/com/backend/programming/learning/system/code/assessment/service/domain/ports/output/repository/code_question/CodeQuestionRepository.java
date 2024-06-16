@@ -38,4 +38,6 @@ public interface CodeQuestionRepository {
     List<CodeQuestion> findTop3ByTop100RecentSubmitData();
 
     List<CodeQuestion> findByNotSolvedTagsAndUserId(List<Tag> tags, UserId id);
+
+    Page<CodeQuestion> adminFindAll(UserId id, List<TagId> tagIds, QueryOrderBy orderBy, CodeQuestion.Fields sortBy, Integer pageNum, Integer pageSize, QuestionDifficulty difficulty, String search, Boolean isPublic);
 }

@@ -289,4 +289,30 @@ public class CodeQuestionsHelper {
         });
         return codeQuestions;
     }
+
+    public Page<CodeQuestion> getAdminCodeQuestions(GetCodeQuestionsQuery query) {
+        User user = validateHelper.validateUserByEmail(query.getEmail());
+        List<TagId> tagIds = query.getTagIds() == null || query.getTagIds().isEmpty()? null:
+                query.getTagIds().stream().map(item->{
+                            try {
+                                return validateHelper.validateTagById(item).getId();
+                            } catch (Exception e) {
+                                return null;
+                            }
+                        })
+                        .filter(Objects::nonNull)
+                        .toList();
+
+        Page<CodeQuestion> codeQuestions = codeQuestionRepository
+                .adminFindAll(user.getId(),
+                        tagIds,
+                        query.getOrderBy(),
+                        query.getSortBy(),
+                        query.getPageNum(),
+                        query.getPageSize(),
+                        query.getDifficulty(),
+                        query.getSearch(),
+                        query.getIsPublic());
+        return codeQuestions;
+    }
 }
