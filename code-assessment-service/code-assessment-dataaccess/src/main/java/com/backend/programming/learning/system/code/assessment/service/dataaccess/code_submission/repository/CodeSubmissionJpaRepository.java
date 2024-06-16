@@ -24,8 +24,7 @@ public interface CodeSubmissionJpaRepository extends JpaRepository<CodeSubmissio
             left join code_submission_contest csce on csce.code_submission_id = cse.id
             left join code_submission_cer_course cscce on cscce.code_submission_id = cse.id
             where ((?1 is not null and csce.contest_id = ?1)
-            or (?2 is not null and cscce.cer_course_id = ?2)
-            or (?1 is null and ?2 is null and csce.contest_id = null and cscce.cer_course_id = null))
+            or (?2 is not null and cscce.cer_course_id = ?2))
             and ?3 is not null and cse.user_id = ?3
             and ?4 is not null and cse.code_question_id = ?4
             group by cse.id
@@ -37,8 +36,10 @@ public interface CodeSubmissionJpaRepository extends JpaRepository<CodeSubmissio
             UUID userId,
             UUID codeQuestionIdValue,
             Pageable pageable);
-    
-    
+    Page<CodeSubmissionEntity> findByUserIdAndCodeQuestionId(UUID userId, UUID codeQuestionId, Pageable pageable);
+
+
+
 
     @Query(value = """
             select count(*) from (

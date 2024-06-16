@@ -66,7 +66,14 @@ public class CodeSubmissionRepositoryImpl implements CodeSubmissionRepository {
     public Page<CodeSubmission> findByUserIdAndQuestionId(UserId userId, CodeQuestionId codeQuestionId, UUID contestId, UUID cerCourseId, Integer pageNum, Integer pageSize) {
         Pageable pageable
                 = PageRequest
-                .of(pageNum, pageSize, Sort.by("create_at").descending());
+                .of(pageNum, pageSize, Sort.by("created_at").descending());
+        if(contestId == null && cerCourseId == null)
+            return jpaRepository
+                    .findByUserIdAndCodeQuestionId(
+                            userId.getValue(),
+                            codeQuestionId.getValue(),
+                            pageable)
+                    .map(dataAccessMapper::entityToCodeSubmission);
         return jpaRepository
                 .findByUserIdAndCodeQuestionIdAndContestIdAndCerCourseId(
                         contestId,
