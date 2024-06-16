@@ -16,12 +16,14 @@ import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CodeQuestionDto {
     UUID id;
+    UUID questionId;
     String name;
     String problemStatement;
     String inputFormat;
     String outputFormat;
     String constraints;
     Boolean done;
+    Boolean isPublic;
     Integer numOfPeopleAttend;
     QuestionDifficulty difficulty;
     List<CodeSubmissionDto> codeSubmissions;
