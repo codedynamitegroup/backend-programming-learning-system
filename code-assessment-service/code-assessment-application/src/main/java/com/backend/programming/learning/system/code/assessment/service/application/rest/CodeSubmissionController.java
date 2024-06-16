@@ -50,6 +50,8 @@ public class CodeSubmissionController {
     public ResponseEntity<GetCodeSubmissionReponse> getCodeSubmissionsByUserId
             (@RequestHeader(value = "Access-Token") String accessToken,
              @RequestParam UUID codeQuestionId,
+             @RequestParam(required = false) UUID contestId,
+             @RequestParam(required = false) UUID cerCourseId,
              @RequestParam(defaultValue = "0") Integer pageNo,
              @RequestParam(defaultValue = "5") Integer pageSize){
         String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
@@ -59,6 +61,8 @@ public class CodeSubmissionController {
                 .email(email)
                 .pageNum(pageNo)
                 .pageSize(pageSize)
+                .contestId(contestId)
+                .cerCourseId(cerCourseId)
                 .build();
         GetCodeSubmissionReponse response =
                 codeSubmissionApplicationService.getCodeSubmissionsByUserId(command);

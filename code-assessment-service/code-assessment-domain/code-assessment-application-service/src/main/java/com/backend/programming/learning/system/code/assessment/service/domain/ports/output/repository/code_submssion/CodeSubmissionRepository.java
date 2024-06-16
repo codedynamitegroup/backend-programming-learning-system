@@ -16,7 +16,7 @@ public interface CodeSubmissionRepository {
     void updateOneTestCase(CodeSubmissionId id);
     Optional<CodeSubmission> findById(CodeSubmissionId id);
 
-    Page<CodeSubmission> findByUserIdAndQuestionId(UserId userId, CodeQuestionId codeQuestionId, Integer pageNum, Integer pageSize);
+    Page<CodeSubmission> findByUserIdAndQuestionId(UserId userId, CodeQuestionId codeQuestionId, UUID contestId, UUID cerCourseId, Integer pageNum, Integer pageSize);
 
     Integer findNumberOfSubmissionUnderMySubmissionByMemory(CodeSubmissionId id);
 

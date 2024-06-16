@@ -63,12 +63,14 @@ public class CodeSubmissionRepositoryImpl implements CodeSubmissionRepository {
     }
 
     @Override
-    public Page<CodeSubmission> findByUserIdAndQuestionId(UserId userId, CodeQuestionId codeQuestionId, Integer pageNum, Integer pageSize) {
+    public Page<CodeSubmission> findByUserIdAndQuestionId(UserId userId, CodeQuestionId codeQuestionId, UUID contestId, UUID cerCourseId, Integer pageNum, Integer pageSize) {
         Pageable pageable
                 = PageRequest
-                .of(pageNum, pageSize);
+                .of(pageNum, pageSize, Sort.by("create_at").descending());
         return jpaRepository
-                .findByUserIdAndCodeQuestionIdOrderByCreatedAtDesc(
+                .findByUserIdAndCodeQuestionIdAndContestIdAndCerCourseId(
+                        contestId,
+                        cerCourseId,
                         userId.getValue(),
                         codeQuestionId.getValue(),
                         pageable)
