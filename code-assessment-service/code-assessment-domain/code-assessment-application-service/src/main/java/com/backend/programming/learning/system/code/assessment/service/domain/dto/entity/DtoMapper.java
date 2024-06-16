@@ -86,9 +86,11 @@ public class DtoMapper {
     public CodeQuestionDto codeQuestionToDtoIgnoreProblemStatement(CodeQuestion codeQuestion) {
         return CodeQuestionDto.builder()
                 .name(codeQuestion.getName())
+                .questionId(codeQuestion.getQuestionId().getValue())
                 .done(codeQuestion.getSolved())
                 .id(codeQuestion.getId().getValue())
                 .difficulty(codeQuestion.getDifficulty())
+                .isPublic(codeQuestion.getPublic())
                 .build();
     }
 

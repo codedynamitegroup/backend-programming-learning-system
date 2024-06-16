@@ -16,15 +16,12 @@ public interface CodeSubmissionJpaRepository extends JpaRepository<CodeSubmissio
     @Query(value = """
             SELECT cse.*
             FROM code_submission cse
-            join question qe
-            on cse.code_question_id = qe.id
             join qtype_code_question qcqe
             on qcqe.id = cse.code_question_id
-            join code_submission_contest csce on cse.id = csce.code_submission_id
-            WHERE cse.code_question_id = qcqe.id
-            AND qcqe.question_id = qe.id
-            AND cse.user_id = ?1
-            AND qe.id = ?2
+            join code_submission_contest csce 
+            on cse.id = csce.code_submission_id
+            WHERE cse.user_id = ?1
+            AND qcqe.question_id = ?2
             AND csce.contest_id = ?3
 """,nativeQuery = true)
     List<CodeSubmissionEntity> findAllCodeSubmissionsByUserIdAndQuestionIdAndContestId(UUID userId, UUID questionId, UUID contestId);
@@ -32,15 +29,12 @@ public interface CodeSubmissionJpaRepository extends JpaRepository<CodeSubmissio
     @Query(value = """
             SELECT cse.*
             FROM code_submission cse
-            join question qe 
-            on cse.code_question_id = qe.id
             join qtype_code_question qcqe
             on qcqe.id = cse.code_question_id
-            join code_submission_certificate_course cscce on cse.id = cscce.code_submission_id
-            WHERE cse.code_question_id = qcqe.id
-            AND qcqe.question_id = qe.id
-            AND cse.user_id = ?1
-            AND qe.id = ?2
+            join code_submission_certificate_course cscce 
+            on cse.id = cscce.code_submission_id
+            WHERE cse.user_id = ?1
+            AND qcqe.question_id = ?2
             AND cscce.certificate_course_id = ?3
 """, nativeQuery = true)
     List<CodeSubmissionEntity> findAllCodeSubmissionsByUserIdAndQuestionIdAndCertificateCourseId(
