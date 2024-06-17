@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class Contest extends AggregateRoot<ContestId> {
+    private UUID orgId;
     private String name;
     private String description;
     private String prizes;
@@ -33,6 +34,7 @@ public class Contest extends AggregateRoot<ContestId> {
 
     private Contest(Builder builder) {
         super.setId(builder.contestId);
+        setOrgId(builder.orgId);
         setName(builder.name);
         setDescription(builder.description);
         setPrizes(builder.prizes);
@@ -57,10 +59,20 @@ public class Contest extends AggregateRoot<ContestId> {
         return new Builder();
     }
 
+
     public void initializeContest() {
         setId(new ContestId(UUID.randomUUID()));
         createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
         updatedAt = ZonedDateTime.now(ZoneId.of("UTC"));
+    }
+
+
+    public UUID getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(UUID orgId) {
+        this.orgId = orgId;
     }
 
     public String getName() {
@@ -209,6 +221,7 @@ public class Contest extends AggregateRoot<ContestId> {
 
     public static final class Builder {
         private ContestId contestId;
+        private UUID orgId;
         private String name;
         private String description;
         private String prizes;
@@ -233,6 +246,11 @@ public class Contest extends AggregateRoot<ContestId> {
 
         public Builder id(ContestId val) {
             contestId = val;
+            return this;
+        }
+
+        public Builder orgId(UUID val) {
+            orgId = val;
             return this;
         }
 

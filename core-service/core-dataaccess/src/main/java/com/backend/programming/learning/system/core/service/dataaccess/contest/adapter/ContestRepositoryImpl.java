@@ -45,29 +45,54 @@ public class ContestRepositoryImpl implements ContestRepository {
     }
 
     @Override
-    public Page<Contest> findAll(String searchName, String startTimeFilter, Integer page, Integer size, Boolean isAdmin) {
+    public Page<Contest> findAll(String searchName,
+                                 String startTimeFilter,
+                                 Integer page,
+                                 Integer size,
+                                 Boolean isAdmin,
+                                 UUID orgId,
+                                 Boolean isOrgAdmin) {
         Pageable paging = PageRequest.of(page, size);
 
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UTC"));
         switch (ContestStartTimeFilter.valueOf(startTimeFilter)) {
             case UPCOMING -> {
                 return contestJpaRepository.findAllUpcomingContestsContainsSearchName(
-                                now, searchName, isAdmin, paging)
+                                now,
+                                searchName,
+                                isAdmin,
+                                orgId,
+                                isOrgAdmin,
+                                paging)
                         .map(contestDataAccessMapper::contestProjectionToContest);
             }
             case HAPPENING -> {
                 return contestJpaRepository.findAllHappeningContestsContainsSearchName(
-                                now, searchName, isAdmin, paging)
+                                now,
+                                searchName,
+                                isAdmin,
+                                orgId,
+                                isOrgAdmin,
+                                paging)
                         .map(contestDataAccessMapper::contestProjectionToContest);
             }
             case ENDED -> {
                 return contestJpaRepository.findAllEndedContestsContainsSearchName(
-                                now, searchName, isAdmin, paging)
+                                now,
+                                searchName,
+                                isAdmin,
+                                orgId,
+                                isOrgAdmin,
+                                paging)
                         .map(contestDataAccessMapper::contestProjectionToContest);
             }
             default -> {
                 return contestJpaRepository.findAllContainsSearchName(
-                               searchName, isAdmin, paging)
+                               searchName,
+                                isAdmin,
+                                orgId,
+                                isOrgAdmin,
+                                paging)
                         .map(contestDataAccessMapper::contestProjectionToContest);
 
             }
