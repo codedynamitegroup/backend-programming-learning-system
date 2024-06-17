@@ -122,7 +122,7 @@ public class CodeSubmissionCommandHandler {
         return codeSubmissionHelper.executeCodeWithTestCase(command);
     }
 
-    public GetCodeSubmissionReponse getAdminCodeSubmissions(GetCodeSubmissionsByUserIdCommand command) {
+    public GetCodeSubmissionReponse getAdminCodeSubmissions(AdminCodeSubmissionQuery command) {
         Page<CodeSubmission> codeSubmissions = codeSubmissionHelper.getAdminCodeSubmissions(command);
 
         Page<GetCodeSubmissionResponseItem> list = codeSubmissions.map(

@@ -4,10 +4,7 @@ import com.backend.programming.learning.system.code.assessment.service.config.Co
 import com.backend.programming.learning.system.code.assessment.service.domain.CodeAssessmentDomainService;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.ExecuteCodeWithTestCaseCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetCodeSubmissionsByUserIdCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetDetailCodeSubmissionsByIdCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetMemoryAndTimeRankingCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.GetMemoryAndTimeRankingResponse;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_submission.UpdateCodeSubmissionTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.code_submission.CodeSubmissionUpdatedEvent;
@@ -241,9 +238,14 @@ public class CodeSubmissionHelper {
         return result;
     }
 
-    public Page<CodeSubmission> getAdminCodeSubmissions(GetCodeSubmissionsByUserIdCommand command) {
+    public Page<CodeSubmission> getAdminCodeSubmissions(AdminCodeSubmissionQuery command) {
         User user = validateHelper.validateUserByEmail(command.getEmail());
-        Page<CodeSubmission> codeSubmissions = codeSubmissionRepository.findByQuestionId(new CodeQuestionId(command.getCodeQuestionId()), command.getContestId(), command.getCerCourseId(), command.getPageNum(), command.getPageSize());
+        Page<CodeSubmission> codeSubmissions = codeSubmissionRepository.findByQuestionId(
+                command.getCodeQuestionIds() == null ? List.of(): command.getCodeQuestionIds(),
+                command.getContestId(),
+                command.getCerCourseId(),
+                command.getPageNum(),
+                command.getPageSize());
 
         findDescriptionStatus(codeSubmissions);
         return codeSubmissions;

@@ -160,15 +160,15 @@ public class CodeSubmissionRepositoryImpl implements CodeSubmissionRepository {
     }
 
     @Override
-    public Page<CodeSubmission> findByQuestionId(CodeQuestionId codeQuestionId, UUID contestId, UUID cerCourseId, Integer pageNum, Integer pageSize) {
+    public Page<CodeSubmission> findByQuestionId(List<UUID> codeQuestionIds, UUID contestId, UUID cerCourseId, Integer pageNum, Integer pageSize) {
         Pageable pageable
                 = PageRequest
                 .of(pageNum, pageSize, Sort.by("created_at").descending());
         return jpaRepository
-                .findByContestIdAndCerCourseIdCodeQuestionId(
+                .findByContestIdAndCerCourseIdCodeQuestionIds(
                         contestId,
                         cerCourseId,
-                        codeQuestionId.getValue(),
+                        codeQuestionIds,
                         pageable)
                 .map(dataAccessMapper::entityToCodeSubmission);
     }

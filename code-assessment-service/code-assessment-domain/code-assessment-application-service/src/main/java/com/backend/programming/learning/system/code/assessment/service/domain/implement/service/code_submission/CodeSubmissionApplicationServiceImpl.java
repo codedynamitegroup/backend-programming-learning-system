@@ -54,7 +54,7 @@ public class CodeSubmissionApplicationServiceImpl implements CodeSubmissionAppli
     }
 
     @Override
-    public GetCodeSubmissionReponse getAdminCodeSubmissions(GetCodeSubmissionsByUserIdCommand command) {
+    public GetCodeSubmissionReponse getAdminCodeSubmissions(AdminCodeSubmissionQuery command) {
         return codeSubmissionCommandHandler.getAdminCodeSubmissions(command);
     }
 }
