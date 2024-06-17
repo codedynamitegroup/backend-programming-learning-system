@@ -3,6 +3,8 @@ package com.backend.programming.learning.system.core.service.application.rest.ce
 import com.backend.programming.learning.system.core.service.application.utils.JwtUtils;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.QueryAllCertificateCourseWithPageCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.QueryAllCertificateCourseWithPageResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse_user.CreateCertificateCourseUserCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse_user.CreateCertificateCourseUserResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.certificatecourse.DeleteCertificateCourseCommand;
@@ -307,5 +309,32 @@ public class CertificateCourseController {
 
         log.info("Returning certificate dashboard statistics");
         return ResponseEntity.ok(queryGeneralCertificateCourseStatisticsResponse);
+    }
+
+    @GetMapping("/admin/certificate/all")
+    @Operation(summary = "Get all certificate courses for admin.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllCertificateCourseWithPageResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllCertificateCourseWithPageResponse> getAllCertificateCourseAdmin(
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "") String searchName
+    ) {
+        QueryAllCertificateCourseWithPageCommand queryAllCertificateCourseWithPageCommand =
+                QueryAllCertificateCourseWithPageCommand.builder()
+                        .pageNo(pageNo)
+                        .pageSize(pageSize)
+                        .searchName(searchName)
+                        .build();
+        QueryAllCertificateCourseWithPageResponse queryAllCertificateCourseAdminResponse =
+                certificateCourseApplicationService.queryAllCertificateCoursesAdmin(queryAllCertificateCourseWithPageCommand);
+
+        log.info("Returning certificate courses for admin");
+        return ResponseEntity.ok(queryAllCertificateCourseAdminResponse);
     }
 }

@@ -39,7 +39,6 @@ public class CommonUpdateHelper {
     }
 
     // Update Question entity in database
-    // TODO: Implement update (delete) answer of question
     @Transactional
     public void updateQuestion(Question question) {
         // Create new answer if null

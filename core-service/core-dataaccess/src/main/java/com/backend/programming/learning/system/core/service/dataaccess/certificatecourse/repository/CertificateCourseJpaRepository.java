@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.core.service.dataaccess.certific
 
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.projection.MostEnrolledCertificateCourseProjection;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -146,4 +148,12 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
     where re.certificateCourse.id = ?1
 """)
     int countNumOfReviewsByCertificateId(UUID certificateCourseId);
+
+    @Query(value = """
+        select cc.*
+        from certificate_course cc
+        where cast(?1 as text) IS NULL or UPPER(cc.name) like UPPER(concat('%', cast(?1 as text), '%'))
+        order by cc.name
+        """, nativeQuery = true)
+    Page<CertificateCourseEntity> findAllCertificateCourse(String searchName, Pageable pageable);
 }

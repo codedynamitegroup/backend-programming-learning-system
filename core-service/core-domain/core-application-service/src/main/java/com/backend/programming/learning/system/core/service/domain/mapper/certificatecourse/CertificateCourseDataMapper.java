@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.core.service.domain.mapper.certi
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.QueryAllCertificateCourseWithPageResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllMostEnrolledCertificateCoursesResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseCommand;
@@ -21,6 +22,7 @@ import com.backend.programming.learning.system.core.service.domain.valueobject.S
 import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.time.ZoneId;
@@ -147,6 +149,19 @@ public class CertificateCourseDataMapper {
                         .id(new UserId(updateCertificateCourseCommand.getUpdatedBy()))
                         .build())
                 .updatedAt(ZonedDateTime.now(ZoneId.of("UTC")))
+                .build();
+    }
+
+    public QueryAllCertificateCourseWithPageResponse certificateCoursesPageToQueryAllCertificateCourseWithPageResponse(
+            Page<CertificateCourse> certificateCourses) {
+        List<CertificateCourseResponseEntity> certificateCourseResponseEntities = certificateCourses
+                .map(this::certificateCourseToQueryCertificateCourseResponse).getContent();
+
+        return QueryAllCertificateCourseWithPageResponse.builder()
+                .certificateCourses(certificateCourseResponseEntities)
+                .currentPage(certificateCourses.getNumber())
+                .totalItems(certificateCourses.getTotalElements())
+                .totalPages(certificateCourses.getTotalPages())
                 .build();
     }
 }
