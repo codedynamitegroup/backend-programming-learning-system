@@ -66,6 +66,7 @@ public class ContestController {
                 contestApplicationService.createContest(
                         CreateContestCommand
                                 .builder()
+                                .orgId(createContestCommand.getOrgId())
                                 .name(createContestCommand.getName())
                                 .description(createContestCommand.getDescription())
                                 .prizes(createContestCommand.getPrizes())
@@ -243,6 +244,43 @@ public class ContestController {
         QueryAllContestsResponse queryAllContestsResponse =
                 contestApplicationService.queryAllContestsForAdmin(QueryAllContestsCommand
                         .builder()
+                        .pageNo(pageNo)
+                        .pageSize(pageSize)
+                        .searchName(searchName)
+                        .startTimeFilter(startTimeFilter)
+                        .email(email)
+                        .build());
+        log.info("Returning all contests: {}", queryAllContestsResponse.getContests());
+        return ResponseEntity.ok(queryAllContestsResponse);
+    }
+
+    @GetMapping("/org-admin")
+    @Operation(summary = "Get all contests for org admin.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllContestsResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllContestsResponse> getAllContestsForOrgAdmin(
+            @RequestParam(defaultValue = "") String searchName,
+            @RequestParam(defaultValue = "ALL") String startTimeFilter,
+            @RequestParam(required = true) UUID orgId,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize
+    ) {
+        String email = null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
+        QueryAllContestsResponse queryAllContestsResponse =
+                contestApplicationService.queryAllContestsForOrgAdmin(QueryAllContestsCommand
+                        .builder()
+                        .orgId(orgId)
                         .pageNo(pageNo)
                         .pageSize(pageSize)
                         .searchName(searchName)

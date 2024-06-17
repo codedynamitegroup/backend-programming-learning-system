@@ -14,7 +14,13 @@ public interface ContestRepository {
 
     Optional<Contest> findById(ContestId contestId);
 
-    Page<Contest> findAll(String searchName, String startTimeFilter, Integer page, Integer size, Boolean isAdmin);
+    Page<Contest> findAll(String searchName,
+                          String startTimeFilter,
+                          Integer page,
+                          Integer size,
+                          Boolean isAdmin,
+                          UUID orgId,
+                          Boolean isOrgAdmin);
 
     Page<Contest> findAllMyContests(String searchName, UUID userId, Integer page, Integer size);
 
