@@ -7,6 +7,9 @@ import com.backend.programming.learning.system.core.service.domain.entity.Certif
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CertificateCourseRepository;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -141,5 +144,12 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
                 .stream()
                 .map(certificateCourseDataAccessMapper::MostEnrolledCertificateCourseProjectionToMostEnrolledWithStudentResponse)
                 .toList();
+    }
+
+    @Override
+    public Page<CertificateCourse> findAllCertificateCourses(Integer page, Integer size, String searchName) {
+        Pageable paging = PageRequest.of(page, size);
+        return certificateCourseJpaRepository.findAllCertificateCourse(searchName, paging)
+                .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse);
     }
 }

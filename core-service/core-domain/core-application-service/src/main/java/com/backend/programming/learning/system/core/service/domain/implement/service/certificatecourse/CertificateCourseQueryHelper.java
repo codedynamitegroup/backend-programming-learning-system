@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.implement.service.certificatecourse;
 
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.QueryAllCertificateCourseWithPageResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryGeneralCertificateCourseStatisticsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.MostEnrolledWithStudentResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapterResource.ChapterResourceCount;
@@ -9,11 +10,13 @@ import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.exception.CertificateCourseNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
+import com.backend.programming.learning.system.core.service.domain.mapper.certificatecourse.CertificateCourseDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.IsRegisteredFilter;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ResourceType;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,19 +36,22 @@ public class CertificateCourseQueryHelper {
     private final ChapterResourceRepository chapterResourceRepository;
     private final TopicRepository topicRepository;
     private final QtypeCodeQuestionRepository qtypeCodeQuestionRepository;
+    private final CertificateCourseDataMapper certificateCourseDataMapper;
 
     public CertificateCourseQueryHelper(CertificateCourseRepository certificateCourseRepository,
                                         UserRepository userRepository,
                                         CertificateCourseUserRepository certificateCourseUserRepository,
                                         ChapterResourceRepository chapterResourceRepository,
                                         TopicRepository topicRepository,
-                                        QtypeCodeQuestionRepository qtypeCodeQuestionRepository) {
+                                        QtypeCodeQuestionRepository qtypeCodeQuestionRepository,
+                                        CertificateCourseDataMapper certificateCourseDataMapper) {
         this.certificateCourseRepository = certificateCourseRepository;
         this.userRepository = userRepository;
         this.certificateCourseUserRepository = certificateCourseUserRepository;
         this.chapterResourceRepository = chapterResourceRepository;
         this.topicRepository = topicRepository;
         this.qtypeCodeQuestionRepository = qtypeCodeQuestionRepository;
+        this.certificateCourseDataMapper = certificateCourseDataMapper;
     }
 
     @Transactional(readOnly = true)
@@ -445,6 +451,14 @@ public class CertificateCourseQueryHelper {
         }
 
         return result;
+    }
+
+    @Transactional(readOnly = true)
+    public QueryAllCertificateCourseWithPageResponse queryAllCertificateCourse(Integer pageNo, Integer pageSize, String searchName) {
+        Page<CertificateCourse> certificateCourses = certificateCourseRepository.findAllCertificateCourses(pageNo, pageSize, searchName);
+
+        log.info("All certificate courses queried: {}", certificateCourses);
+        return certificateCourseDataMapper.certificateCoursesPageToQueryAllCertificateCourseWithPageResponse(certificateCourses);
     }
 }
 
