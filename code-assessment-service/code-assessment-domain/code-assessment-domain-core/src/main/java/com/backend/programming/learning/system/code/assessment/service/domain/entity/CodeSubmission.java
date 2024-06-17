@@ -13,7 +13,7 @@ import java.util.UUID;
 
 public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
     private final CodeQuestion codeQuestion;
-    private final UserId userId;
+    private final User user;
     private final ProgrammingLanguageId languageId;
     private Double grade;
     private Double runTime;
@@ -43,7 +43,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
     public String toString() {
         return "CodeSubmission{" +
                 "codeQuestionId=" + codeQuestion +
-                ", userId=" + userId +
+                ", userId=" + user.getId().getValue() +
                 ", languageId=" + languageId +
                 ", grade=" + grade +
                 ", runTime=" + runTime +
@@ -61,7 +61,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
     private CodeSubmission(Builder builder) {
         super.setId(builder.id);
         codeQuestion = builder.codeQuestion;
-        userId = builder.userId;
+        user = builder.user;
         languageId = builder.languageId;
         grade = builder.grade;
         runTime = builder.runTime;
@@ -143,8 +143,8 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         this.statusDescription = statusDescription;
     }
 
-    public UserId getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
     public ProgrammingLanguageId getLanguageId() {
@@ -228,7 +228,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
 
     public static final class Builder {
         private CodeQuestion codeQuestion;
-        private UserId userId;
+        private User user;
         private ProgrammingLanguageId languageId;
         private Double grade;
         private Double runTime;
@@ -261,8 +261,8 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
             return this;
         }
 
-        public Builder userId(UserId val) {
-            userId = val;
+        public Builder user(User val) {
+            user = val;
             return this;
         }
 

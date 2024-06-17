@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.code.assessment.service.dataacces
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.entity.CodeSubmissionEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language.entity.ProgrammingLanguageEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
 import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
 import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
@@ -14,9 +15,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class CodeSubmissionDataAccessMapper {
     private final CodeQuestionDataAccessMapper codeQuestionDataAccessMapper;
+    private final UserDataAccessMapper userDataAccessMapper;
 
-    public CodeSubmissionDataAccessMapper(CodeQuestionDataAccessMapper codeQuestionDataAccessMapper) {
+    public CodeSubmissionDataAccessMapper(CodeQuestionDataAccessMapper codeQuestionDataAccessMapper, UserDataAccessMapper userDataAccessMapper) {
         this.codeQuestionDataAccessMapper = codeQuestionDataAccessMapper;
+        this.userDataAccessMapper = userDataAccessMapper;
     }
 
     public CodeSubmissionEntity codeSubmissionToEntity(CodeSubmission codeSubmission) {
@@ -26,7 +29,7 @@ public class CodeSubmissionDataAccessMapper {
                         .id(codeSubmission.getCodeQuestion().getId().getValue())
                         .build())
                 .user(UserEntity.builder()
-                        .id(codeSubmission.getUserId().getValue())
+                        .id(codeSubmission.getUser().getId().getValue())
                         .build())
                 .programmingLanguage(ProgrammingLanguageEntity.builder()
                         .id(codeSubmission.getLanguageId().getValue())
@@ -53,7 +56,7 @@ public class CodeSubmissionDataAccessMapper {
         return CodeSubmission.builder()
                 .id(new CodeSubmissionId(entity.getId()))
                 .codeQuestion(codeQuestionDataAccessMapper.codeQuestionEntityToCodeQuestion(entity.getCodeQuestion()))
-                .userId(new UserId(entity.getUser().getId()))
+                .user(userDataAccessMapper.userEntityToUser(entity.getUser()))
                 .languageId(new ProgrammingLanguageId(entity.getProgrammingLanguage().getId()))
                 .grade(entity.getGrade())
                 .runTime(entity.getAvgRuntime())
