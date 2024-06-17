@@ -18,9 +18,9 @@ import java.util.UUID;
 public class SubmissionAssignmentUpdateHelper {
     private final SubmissionAssignmentRepository submissionAssignmentRepository;
 
-    @Transactional(readOnly = true)
-    public void persistSubmissionAssignment(UpdateSubmissionAssignmentCommand updateSubmissionAssignmentCommand) {
-        SubmissionAssignment submissionAssignment = getSubmissionAssignment(updateSubmissionAssignmentCommand.getSubmissionAssignmentId());
+    @Transactional
+    public void persistSubmissionAssignment(UpdateSubmissionAssignmentCommand updateSubmissionAssignmentCommand,UUID id) {
+        SubmissionAssignment submissionAssignment = getSubmissionAssignment(id);
         if (updateSubmissionAssignmentCommand.getIsGraded() != null) {
             submissionAssignment.setIsGraded(updateSubmissionAssignmentCommand.getIsGraded());
         }

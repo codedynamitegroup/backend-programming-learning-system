@@ -65,11 +65,11 @@ public class SubmissionAssignmentCommandHandler {
     }
 
     @Transactional
-    public UpdateSubmissionAssignmentResponse updateSubmissionAssignment(UpdateSubmissionAssignmentCommand updateSubmissionAssignmentCommand) {
+    public UpdateSubmissionAssignmentResponse updateSubmissionAssignment(UpdateSubmissionAssignmentCommand updateSubmissionAssignmentCommand,UUID id) {
         log.info("Update submission assignment command received");
-        submissionAssignmentUpdateHelper.persistSubmissionAssignment(updateSubmissionAssignmentCommand);
+        submissionAssignmentUpdateHelper.persistSubmissionAssignment(updateSubmissionAssignmentCommand,id);
         return UpdateSubmissionAssignmentResponse.builder()
-                .submissionId(updateSubmissionAssignmentCommand.getSubmissionAssignmentId())
+                .id(id)
                 .message("Submission assignment updated successfully")
                 .build();
     }

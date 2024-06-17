@@ -26,7 +26,7 @@ public interface SubmissionAssignmentApplicationService {
 
     DeleteSubmissionAssignmentResponse deleteSubmissionAssignmentById(@Valid DeleteSubmissionAssignmentCommand deleteSubmissionAssignmentCommand);
 
-    UpdateSubmissionAssignmentResponse updateSubmissionAssignmentById(@Valid UpdateSubmissionAssignmentCommand updateSubmissionAssignmentCommand);
+    UpdateSubmissionAssignmentResponse updateSubmissionAssignmentById(@Valid UpdateSubmissionAssignmentCommand updateSubmissionAssignmentCommand,UUID id);
 
 
     SubmissionAssignmentResponseEntity queryByAssignmentIdAndUserId(QuerySubmissionAssignmentUserCommand querySubmissionAssignmentUserCommand);

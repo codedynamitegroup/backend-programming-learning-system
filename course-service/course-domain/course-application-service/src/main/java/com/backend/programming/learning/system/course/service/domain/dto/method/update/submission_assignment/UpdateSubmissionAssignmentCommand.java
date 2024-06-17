@@ -12,15 +12,10 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class UpdateSubmissionAssignmentCommand {
-    private final UUID submissionAssignmentId;
-
-    @NotNull
     private final Boolean isGraded;
 
-    @NotNull
     private final Float grade;
 
-    @NotNull
     private final String content;
 
     @NotNull

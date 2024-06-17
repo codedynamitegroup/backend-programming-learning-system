@@ -25,11 +25,9 @@ public class SubmissionAssignmentFileCreateHelper {
     private final SubmissionAssignmentFileDataMapper submissionAssignmentFileDataMapper;
 
     public SubmissionAssignmentFile persistSubmissionAssignmentFile(CreateSubmissionAssignmentFileCommand createSubmissionAssignmentFileCommand) {
-        SubmissionAssignment submissionAssignment = getSubmissionAssignment(createSubmissionAssignmentFileCommand.getSubmissionAssignmentId());
         SubmissionAssignmentFile submissionAssignmentFile = submissionAssignmentFileDataMapper
                 .createSubmissionAssignmentFileCommandToSubmissionAssignmentFile(createSubmissionAssignmentFileCommand);
         coureDomainService.createSubmissionAssignmentFile(submissionAssignmentFile);
-        submissionAssignmentFile.setSubmissionAssignment(submissionAssignment);
         SubmissionAssignmentFile submissionAssignmentFileResult = saveSubmissionAssignmentFile(submissionAssignmentFile);
         return submissionAssignmentFileResult;
     }

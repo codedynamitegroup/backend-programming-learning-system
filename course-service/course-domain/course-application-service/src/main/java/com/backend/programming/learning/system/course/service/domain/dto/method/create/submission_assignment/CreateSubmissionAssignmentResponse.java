@@ -12,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class CreateSubmissionAssignmentResponse {
     @NotNull
-    private final UUID submissionId;
+    private final UUID id;
 
     @NotNull
     private final UUID userId;
