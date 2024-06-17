@@ -15,4 +15,5 @@ public interface ChapterResourceRepository {
             UUID certificateCourseId, UUID userId);
     Optional<ChapterResource> findChapterResourceById(UUID chapterResourceId);
     List<ChapterResourceCount> countResourceByType();
+    Integer findTopNoOfChapterResourceByChapterId(UUID chapterId);
 }

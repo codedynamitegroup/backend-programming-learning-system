@@ -67,4 +67,9 @@ public class ChapterResourceRepositoryImpl implements ChapterResourceRepository 
         return chapterResourceDataAccessMapper
                 .chapterResourceTypeCountProjectionListToChapterResourceCountList(courseTypeCountProjections);
     }
+
+    @Override
+    public Integer findTopNoOfChapterResourceByChapterId(UUID chapterId) {
+        return chapterResourceJpaRepository.findTopNoOfChapterResourceByChapterId(chapterId);
+    }
 }

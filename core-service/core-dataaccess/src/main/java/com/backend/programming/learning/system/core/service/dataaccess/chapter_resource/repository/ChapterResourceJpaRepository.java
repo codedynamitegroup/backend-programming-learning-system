@@ -76,5 +76,12 @@ public interface ChapterResourceJpaRepository extends JpaRepository<ChapterResou
         group by cq.resourceType
         """)
     List<CourseTypeCountProjection> countResourceByType();
+
+    @Query("""
+        select max(cq.no)
+        from ChapterResourceEntity cq
+        where cq.chapter.id = ?1
+        """)
+    Integer findTopNoOfChapterResourceByChapterId(UUID chapterId);
 }
 

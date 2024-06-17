@@ -21,12 +21,11 @@ public class ChapterResourceUserUpsertHelper {
     private final ChapterResourceRepository chapterResourceRepository;
 
     public ChapterResourceUserUpsertHelper(UserRepository userRepository,
-                                           ChapterResourceRepository chapterResourceRepository,
                                            ChapterResourceUserRepository chapterResourceUserRepository,
-                                           ChapterResourceRepository chapterResourceRepository1) {
+                                           ChapterResourceRepository chapterResourceRepository) {
         this.userRepository = userRepository;
         this.chapterResourceUserRepository = chapterResourceUserRepository;
-        this.chapterResourceRepository = chapterResourceRepository1;
+        this.chapterResourceRepository = chapterResourceRepository;
     }
 
     @Transactional
