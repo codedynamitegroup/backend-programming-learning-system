@@ -22,5 +22,5 @@ public interface CodeSubmissionApplicationService {
 
     String executeCodeWithTestCase(@Valid ExecuteCodeWithTestCaseCommand command);
 
-    GetCodeSubmissionReponse getAdminCodeSubmissions(@Valid GetCodeSubmissionsByUserIdCommand command);
+    GetCodeSubmissionReponse getAdminCodeSubmissions(@Valid AdminCodeSubmissionQuery command);
 }

@@ -33,8 +33,13 @@ public class SubmissionAssignmentUpdateHelper {
             submissionAssignment.setContent(updateSubmissionAssignmentCommand.getContent());
         }
 
-        if (updateSubmissionAssignmentCommand.getTimeSubmit() != null) {
-            submissionAssignment.setSubmittedAt(updateSubmissionAssignmentCommand.getTimeSubmit());
+        if (updateSubmissionAssignmentCommand.getTimemodified() != null) {
+            submissionAssignment.setTimemodified(updateSubmissionAssignmentCommand.getTimemodified());
+        }
+
+        if(updateSubmissionAssignmentCommand.getFeedback()!=null)
+        {
+            submissionAssignment.setFeedback(updateSubmissionAssignmentCommand.getFeedback());
         }
 
         submissionAssignmentRepository.saveSubmissionAssignment(submissionAssignment);

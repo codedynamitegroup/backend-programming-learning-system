@@ -17,8 +17,9 @@ public class UpdateSubmissionAssignmentCommand {
     private final Float grade;
 
     private final String content;
+    private final String feedback;
 
     @NotNull
-    private final ZonedDateTime timeSubmit;
+    private final ZonedDateTime timemodified;
 
 }

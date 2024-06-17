@@ -40,5 +40,5 @@ public interface CodeSubmissionRepository {
 
     void saveContest(CodeSubmissionId id, UUID contestId);
 
-    Page<CodeSubmission> findByQuestionId(CodeQuestionId codeQuestionId, UUID contestId, UUID cerCourseId, Integer pageNum, Integer pageSize);
+    Page<CodeSubmission> findByQuestionId(List<UUID> codeQuestionIds, UUID contestId, UUID cerCourseId, Integer pageNum, Integer pageSize);
 }

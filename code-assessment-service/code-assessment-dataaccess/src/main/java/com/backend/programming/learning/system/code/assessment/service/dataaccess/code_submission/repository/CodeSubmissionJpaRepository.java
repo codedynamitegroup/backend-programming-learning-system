@@ -146,9 +146,9 @@ public interface CodeSubmissionJpaRepository extends JpaRepository<CodeSubmissio
             left join code_submission_cer_course cscce on cscce.code_submission_id = cse.id
             where ((?1 is not null and csce.contest_id = ?1)
             or (?2 is not null and cscce.cer_course_id = ?2))
-            and ?3 is not null and cse.code_question_id = ?3
+            and (coalesce(?3, null) is null or cse.code_question_id in ?3)
             group by cse.id
             """,
     nativeQuery = true)
-    Page<CodeSubmissionEntity> findByContestIdAndCerCourseIdCodeQuestionId(UUID contestId, UUID cerCourseId, UUID codeQuestionId, Pageable pageable);
+    Page<CodeSubmissionEntity> findByContestIdAndCerCourseIdCodeQuestionIds(UUID contestId, UUID cerCourseId, List<UUID> codeQuestionIds, Pageable pageable);
 }
