@@ -2,36 +2,43 @@ package com.backend.programming.learning.system.course.service.dataaccess.assign
 
 import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.entity.SubmissionAssignmentEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.mapper.SubmissionAssignmentDataAccessMapper;
-import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission_file.entity.AssignmentSubmissionFileEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission_file.entity.SubmissionAssignmentFileEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.SubmissionAssignment;
 import com.backend.programming.learning.system.course.service.domain.entity.SubmissionAssignmentFile;
 import com.backend.programming.learning.system.course.service.domain.valueobject.AssignmentSubmissionFileId;
-import com.backend.programming.learning.system.course.service.domain.valueobject.SubmissionAssignmentId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class AssignmentSubmissionFileDataAccessMapper {
+public class SubmissionAssignmentFileDataAccessMapper {
     private final SubmissionAssignmentDataAccessMapper submissionAssignmentDataAccessMapper;
 
-    public AssignmentSubmissionFileEntity assignmentSubmissionFileToAssignmentSubmissionFileEntity(SubmissionAssignmentFile submissionAssignmentFile) {
+    public SubmissionAssignmentFileEntity assignmentSubmissionFileToAssignmentSubmissionFileEntity(SubmissionAssignmentFile submissionAssignmentFile) {
         SubmissionAssignmentEntity submissionAssignment = submissionAssignmentDataAccessMapper
                 .assignmentSubmissionToAssignmentSubmissionEntity(submissionAssignmentFile.getAssignmentSubmission());
-        return AssignmentSubmissionFileEntity.builder()
+        return SubmissionAssignmentFileEntity.builder()
                 .id(submissionAssignmentFile.getId().getValue())
-                .assignmentSubmission(submissionAssignment)
-                .num_file(submissionAssignmentFile.getNum_file())
+                .submissionAssignment(submissionAssignment)
+                .fileName(submissionAssignmentFile.getFileName())
+                .fileSize(submissionAssignmentFile.getFileSize())
+                .fileUrl(submissionAssignmentFile.getFileUrl())
+                .mimetype(submissionAssignmentFile.getMimetype())
+                .timemodified(submissionAssignmentFile.getTimemodified())
                 .build();
     }
 
-    public SubmissionAssignmentFile assignmentSubmissionFileEntityToAssignmentSubmissionFile(AssignmentSubmissionFileEntity submissionAssignmentFileEntity) {
+    public SubmissionAssignmentFile assignmentSubmissionFileEntityToAssignmentSubmissionFile(SubmissionAssignmentFileEntity submissionAssignmentFileEntity) {
         SubmissionAssignment submissionAssignment = submissionAssignmentDataAccessMapper
-                .assignmentSubmissionEntityToAssignmentSubmission(submissionAssignmentFileEntity.getAssignmentSubmission());
+                .assignmentSubmissionEntityToAssignmentSubmission(submissionAssignmentFileEntity.getSubmissionAssignment());
         return SubmissionAssignmentFile.builder()
                 .id(new AssignmentSubmissionFileId(submissionAssignmentFileEntity.getId()))
                 .assignmentSubmission(submissionAssignment)
-                .num_file(submissionAssignmentFileEntity.getNum_file())
+                .fileUrl(submissionAssignmentFileEntity.getFileUrl())
+                .mimetype(submissionAssignmentFileEntity.getMimetype())
+                .fileName(submissionAssignmentFileEntity.getFileName())
+                .fileSize(submissionAssignmentFileEntity.getFileSize())
+                .timemodified(submissionAssignmentFileEntity.getTimemodified())
                 .build();
     }
 

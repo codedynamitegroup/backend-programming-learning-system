@@ -17,7 +17,6 @@ import java.util.UUID;
 @Entity
 public class CodeSubmissionContestEntity {
     @Id
-    @Column(name = "id")
     private UUID codeSubmissionId;
     private UUID contestId;
 

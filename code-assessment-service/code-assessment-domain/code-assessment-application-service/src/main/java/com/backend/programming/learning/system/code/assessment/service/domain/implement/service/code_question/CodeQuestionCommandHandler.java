@@ -114,4 +114,9 @@ public class CodeQuestionCommandHandler {
                 .stream()
                 .map(dtoMapper::codeQuestionToDtoOnlyNameIdDifficultyAndPeople).toList();
     }
+
+    public GetCodeQuestionsResponse getAdminCodeQuestions(GetCodeQuestionsQuery query) {
+        Page<CodeQuestion> codeQuestions = codeQuestionsHelper.getAdminCodeQuestions(query);
+        return codeQuestionDataMaper.pagableCodeQuestionsToGetCodeQuestionsResponse(codeQuestions);
+    }
 }

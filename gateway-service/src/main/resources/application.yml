@@ -19,13 +19,13 @@ eureka:
 
 gateway-service:
   timeout-ms: 15000
-  failure-rate-threshold: 50
-  slow-call-rate-threshold: 50
-  slow-call-duration-threshold: 50
-  permitted-num-of-calls-in-half-open-state: 100
-  sliding-window-size: 10
-  min-number-of-calls: 10
-  wait-duration-in-open-state: 30000
+  failure-rate-threshold: 100
+  slow-call-rate-threshold: 100
+  slow-call-duration-threshold: 15000
+  permitted-num-of-calls-in-half-open-state: 200
+  sliding-window-size: 200
+  min-number-of-calls: 200
+  wait-duration-in-open-state: 3600000
 
 spring:
   application:

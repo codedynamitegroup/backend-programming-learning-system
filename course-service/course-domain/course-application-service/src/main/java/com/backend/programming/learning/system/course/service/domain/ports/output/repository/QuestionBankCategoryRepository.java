@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface QuestionBankCategoryRepository {
     QuestionBankCategory save(QuestionBankCategory questionBankCategory);
 
-    Page<QuestionBankCategory> findAll(Boolean isOrgQuestionBank, String search, Integer pageNo, Integer pageSize);
+    Page<QuestionBankCategory> findAll(Boolean isOrgQuestionBank, UUID organizationId, String search, Integer pageNo, Integer pageSize);
 
     QuestionBankCategory findById(UUID id);
 

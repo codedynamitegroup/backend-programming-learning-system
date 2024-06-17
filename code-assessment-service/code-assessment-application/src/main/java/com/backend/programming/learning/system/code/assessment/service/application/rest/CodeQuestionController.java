@@ -95,6 +95,34 @@ public class CodeQuestionController {
         GetCodeQuestionsResponse response = codeQuestionApplicationService.getPublicCodeQuestions(query);
         return ResponseEntity.ok(response);
     }
+    @GetMapping("/admin-code-question")
+    public ResponseEntity<GetCodeQuestionsResponse> getAdminCodeQuestion(
+            @RequestParam Integer pageNo,
+            @RequestParam Integer pageSize,
+            @RequestParam(required = false) List<UUID> tagIds,
+//            @RequestParam(defaultValue = "ASC") QueryOrderBy orderBy,
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) QuestionDifficulty difficulty,
+            @RequestParam(required = false) Boolean isPublic,
+            @RequestHeader(value = "Access-Token") String accessToken){
+//        log.info("getPublicCodeQuestion");
+//        tagIds.forEach(i-> log.info("{}",i));
+        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
+        CodeQuestion.Fields sortBy = CodeQuestion.Fields.createdAt;
+        GetCodeQuestionsQuery query = GetCodeQuestionsQuery.builder()
+                .orderBy(QueryOrderBy.ASC)
+                .sortBy(sortBy)
+                .pageNum(pageNo)
+                .pageSize(pageSize)
+                .tagIds(tagIds)
+                .email(email)
+                .search(search)
+                .difficulty(difficulty)
+                .isPublic(isPublic)
+                .build();
+        GetCodeQuestionsResponse response = codeQuestionApplicationService.getAdminCodeQuestions(query);
+        return ResponseEntity.ok(response);
+    }
 
     @GetMapping("/most-practicing-recently")
     public ResponseEntity<List<CodeQuestionDto>> getRecommendedCodeQuestion(

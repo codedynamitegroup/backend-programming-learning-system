@@ -36,4 +36,5 @@ public class GetCodeQuestionsQuery {
     QueryOrderBy orderBy;
     CodeQuestion.Fields sortBy;
     String email;
+    Boolean isPublic;
 }

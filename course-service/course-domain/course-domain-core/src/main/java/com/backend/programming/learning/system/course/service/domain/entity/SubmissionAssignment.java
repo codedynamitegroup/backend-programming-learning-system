@@ -14,6 +14,8 @@ public class SubmissionAssignment extends AggregateRoot<SubmissionAssignmentId> 
     private Float grade;
     private String content;
 
+    private String feedback;
+
     private ZonedDateTime submittedAt;
     private ZonedDateTime timemodified;
 
@@ -22,10 +24,19 @@ public class SubmissionAssignment extends AggregateRoot<SubmissionAssignmentId> 
         user = builder.user;
         assignment = builder.assignment;
         isGraded = builder.isGraded;
+        feedback = builder.feedback;
         timemodified = builder.timemodified;
         grade = builder.grade;
         content = builder.content;
         submittedAt = builder.submittedAt;
+    }
+
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
     }
 
     public Boolean getGraded() {
@@ -107,6 +118,7 @@ public class SubmissionAssignment extends AggregateRoot<SubmissionAssignmentId> 
         private Boolean isGraded;
         private Float grade;
         private String content;
+        private String feedback;
         private ZonedDateTime submittedAt;
         private ZonedDateTime timemodified;
 
@@ -153,6 +165,12 @@ public class SubmissionAssignment extends AggregateRoot<SubmissionAssignmentId> 
             content = val;
             return this;
         }
+
+        public Builder feedback(String val) {
+            feedback = val;
+            return this;
+        }
+
 
         public Builder submittedAt(ZonedDateTime val) {
             submittedAt = val;

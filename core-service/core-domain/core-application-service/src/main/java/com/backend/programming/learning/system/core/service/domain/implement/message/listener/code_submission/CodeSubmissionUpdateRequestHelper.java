@@ -10,9 +10,12 @@ import com.backend.programming.learning.system.core.service.domain.ports.output.
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.CodeSubmissionRepository;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
+import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import java.util.UUID;
 
 @Slf4j
 @Component
@@ -31,33 +34,31 @@ public class CodeSubmissionUpdateRequestHelper {
 
     @Transactional
     public void persistCodeSubmission(CodeSubmissionUpdateRequest request) {
+//        log.info("damn u i am here {}", request.toString());
         CodeSubmission codeSubmission = codeSubmissionDataMapper.CodeSubmissionUpdateRequestToCodeSubmission(request);
         codeSubmissionRepository.saveCodeSubmission(codeSubmission);
-        if(request.getCerCourseId() != null)
-            codeSubmissionCertificateCourseRepository.saveCodeSubmissionCertificateCourse(CodeSubmissionCertificateCourse.builder()
-                            .id(codeSubmission.getId())
-                            .certificateCourseId(new CertificateCourseId(request.getCerCourseId()))
-                    .build());
-        if(request.getContestId() != null)
-            codeSubmissionContestRepository.saveCodeSubmissionContest(CodeSubmissionContest.builder()
-                            .id(codeSubmission.getId())
-                            .contestId(new ContestId(request.getContestId()))
-                    .build());
     }
 
     @Transactional
     public void updateCodeSubmission(CodeSubmissionUpdateRequest request) {
         CodeSubmission codeSubmission = codeSubmissionDataMapper.CodeSubmissionUpdateRequestToCodeSubmission(request);
         codeSubmissionRepository.saveCodeSubmission(codeSubmission);
-        if(request.getCerCourseId() != null)
-            codeSubmissionCertificateCourseRepository.saveCodeSubmissionCertificateCourse(CodeSubmissionCertificateCourse.builder()
-                    .id(codeSubmission.getId())
-                    .certificateCourseId(new CertificateCourseId(request.getCerCourseId()))
-                    .build());
-        if(request.getContestId() != null)
+    }
+
+    @Transactional
+    public void saveContest(UUID contestId, UUID codeSubmissionId){
+        if(contestId != null)
             codeSubmissionContestRepository.saveCodeSubmissionContest(CodeSubmissionContest.builder()
-                    .id(codeSubmission.getId())
-                    .contestId(new ContestId(request.getContestId()))
+                    .id(new CodeSubmissionId(codeSubmissionId))
+                    .contestId(new ContestId(contestId))
+                    .build());
+    }
+    @Transactional
+    public void saveCerCourse(UUID cerCourseId, UUID codeSubmissionId){
+        if(cerCourseId != null)
+            codeSubmissionCertificateCourseRepository.saveCodeSubmissionCertificateCourse(CodeSubmissionCertificateCourse.builder()
+                    .id(new CodeSubmissionId(codeSubmissionId))
+                    .certificateCourseId(new CertificateCourseId(cerCourseId))
                     .build());
     }
 }

@@ -2,14 +2,11 @@ package com.backend.programming.learning.system.course.service.dataaccess.submis
 
 import com.backend.programming.learning.system.course.service.dataaccess.submission_grade.mapper.SubmissionGradeDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.submission_grade.repository.SubmissionGradeJpaRepository;
-import com.backend.programming.learning.system.course.service.domain.entity.SubmissionFile;
 import com.backend.programming.learning.system.course.service.domain.entity.SubmissionGrade;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionFileRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionGradeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 

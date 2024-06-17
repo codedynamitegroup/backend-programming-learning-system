@@ -127,7 +127,7 @@ VALUES
 
 INSERT INTO public.question(id, org_id, difficulty, name, question_text, general_feedback, default_mark, qtype, created_by, updated_by, copy_state)
 VALUES
-    ('b6484e21-6937-489c-b031-b71767994221', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'HARD', 'Question Pants', 'Question Mouse Text', 'Question Tuna feedback', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
+    ('b6484e21-6937-489c-b031-b71767994221', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'HARD', 'Sum of two integer', 'Question Mouse Text', 'Question Tuna feedback', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
     ('b6484e21-6937-489c-b031-b71767994233', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'EASY', 'Question Handle', 'Question Wire Text', 'Question Gold feedback', 1, 'ESSAY', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
     ('b6484e21-6937-489c-b031-b71767994132', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'MEDIUM', 'Question hihi', 'Question Wow Text', 'Question Amazing feedback', 1, 'SHORT_ANSWER', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
     ('b6484e21-6937-489c-b031-b71767994735', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'HARD', 'Question haha', 'Question Speaker Text', 'Question Good Job feedback', 1, 'MULTIPLE_CHOICE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
@@ -368,11 +368,11 @@ VALUES
 
 
 
-insert into code_submission (id, code_question_id, user_id, programming_language_id, source_code, grade, created_at, pass) values ('a2e5afa6-f0c8-422e-8895-a706d1a1d6c1', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'c95d5c7d-cadf-42cc-afdc-968211ae3720', 'Y2xhc3MgUmVzdWx0IHsKICAgIHB1YmxpYyBzdGF0aWMgaW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKSB7CiAgICAgICAgcmV0dXJuIGEgKyBiOwogICAgfQp9', 10, CURRENT_TIMESTAMP, true);
-insert into code_submission (id, code_question_id, user_id, programming_language_id, source_code, grade, created_at, pass) values ('4a177c20-9487-48f6-b057-6d981e66b6cf', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'c95d5c7d-cadf-42cc-afdc-968211ae3720', 'Y2xhc3MgUmVzdWx0IHsKICAgIHB1YmxpYyBzdGF0aWMgaW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKSB7CiAgICAgICAgcmV0dXJuIGEgKyBiOwogICAgfQp9', 10, CURRENT_TIMESTAMP, true);
-insert into code_submission (id, code_question_id, user_id, programming_language_id, source_code, grade, created_at, pass) values ('df32ebfe-ec52-42c6-9447-cdc5280d5701', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'cba00cd8-8114-4bc4-84e6-499c27467978', 'aW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKXsKICAgIHJldHVybiBhICsgYjsKfQ==', 10, CURRENT_TIMESTAMP, true);
-insert into code_submission (id, code_question_id, user_id, programming_language_id, source_code, grade, created_at, pass) values ('0b4bccfc-411f-499d-b470-9574152269aa', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 'b029f559-52a8-4699-b595-71161498ed8c', 'c95d5c7d-cadf-42cc-afdc-968211ae3720', 'Y2xhc3MgUmVzdWx0IHsKICAgIHB1YmxpYyBzdGF0aWMgaW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKSB7CiAgICAgICAgcmV0dXJuIGEgKyBiOwogICAgfQp9', 0, CURRENT_TIMESTAMP, false);
-insert into code_submission (id, code_question_id, user_id, programming_language_id, source_code, grade, created_at, pass) values ('186c1fea-9706-4399-991a-8c9ff7d97b9a', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', 'c95d5c7d-cadf-42cc-afdc-968211ae3720', 'Y2xhc3MgUmVzdWx0IHsKICAgIHB1YmxpYyBzdGF0aWMgaW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKSB7CiAgICAgICAgcmV0dXJuIGEgKyBiOwogICAgfQp9', 10, CURRENT_TIMESTAMP, true);
+-- insert into code_submission (id, code_question_id, user_id, programming_language_id, source_code, grade, created_at, pass) values ('a2e5afa6-f0c8-422e-8895-a706d1a1d6c1', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'c95d5c7d-cadf-42cc-afdc-968211ae3720', 'Y2xhc3MgUmVzdWx0IHsKICAgIHB1YmxpYyBzdGF0aWMgaW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKSB7CiAgICAgICAgcmV0dXJuIGEgKyBiOwogICAgfQp9', 10, CURRENT_TIMESTAMP, true);
+-- insert into code_submission (id, code_question_id, user_id, programming_language_id, source_code, grade, created_at, pass) values ('4a177c20-9487-48f6-b057-6d981e66b6cf', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'c95d5c7d-cadf-42cc-afdc-968211ae3720', 'Y2xhc3MgUmVzdWx0IHsKICAgIHB1YmxpYyBzdGF0aWMgaW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKSB7CiAgICAgICAgcmV0dXJuIGEgKyBiOwogICAgfQp9', 10, CURRENT_TIMESTAMP, true);
+-- insert into code_submission (id, code_question_id, user_id, programming_language_id, source_code, grade, created_at, pass) values ('df32ebfe-ec52-42c6-9447-cdc5280d5701', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'cba00cd8-8114-4bc4-84e6-499c27467978', 'aW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKXsKICAgIHJldHVybiBhICsgYjsKfQ==', 10, CURRENT_TIMESTAMP, true);
+-- insert into code_submission (id, code_question_id, user_id, programming_language_id, source_code, grade, created_at, pass) values ('0b4bccfc-411f-499d-b470-9574152269aa', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 'b029f559-52a8-4699-b595-71161498ed8c', 'c95d5c7d-cadf-42cc-afdc-968211ae3720', 'Y2xhc3MgUmVzdWx0IHsKICAgIHB1YmxpYyBzdGF0aWMgaW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKSB7CiAgICAgICAgcmV0dXJuIGEgKyBiOwogICAgfQp9', 0, CURRENT_TIMESTAMP, false);
+-- insert into code_submission (id, code_question_id, user_id, programming_language_id, source_code, grade, created_at, pass) values ('186c1fea-9706-4399-991a-8c9ff7d97b9a', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', 'c95d5c7d-cadf-42cc-afdc-968211ae3720', 'Y2xhc3MgUmVzdWx0IHsKICAgIHB1YmxpYyBzdGF0aWMgaW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKSB7CiAgICAgICAgcmV0dXJuIGEgKyBiOwogICAgfQp9', 10, CURRENT_TIMESTAMP, true);
 
 -- INSERT INTO public.code_submission(id, user_id, code_question_id, programming_language_id, source_code, grade, pass)
 -- VALUES
@@ -388,13 +388,13 @@ insert into code_submission (id, code_question_id, user_id, programming_language
 --     ('27549d54-4a3a-4be4-9875-eab03f88ba6c', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
 --     ('27549d54-4a3a-4be4-9875-eab03f88ba6d', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false);
 
-INSERT INTO public.code_submission_certificate_course(code_submission_id, certificate_course_id)
-VALUES
-    ('a2e5afa6-f0c8-422e-8895-a706d1a1d6c1', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
-    ('4a177c20-9487-48f6-b057-6d981e66b6cf', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
-    ('df32ebfe-ec52-42c6-9447-cdc5280d5701', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
-    ('0b4bccfc-411f-499d-b470-9574152269aa', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
-    ('186c1fea-9706-4399-991a-8c9ff7d97b9a', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16');
+-- INSERT INTO public.code_submission_certificate_course(code_submission_id, certificate_course_id)
+-- VALUES
+--     ('a2e5afa6-f0c8-422e-8895-a706d1a1d6c1', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
+--     ('4a177c20-9487-48f6-b057-6d981e66b6cf', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
+--     ('df32ebfe-ec52-42c6-9447-cdc5280d5701', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
+--     ('0b4bccfc-411f-499d-b470-9574152269aa', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
+--     ('186c1fea-9706-4399-991a-8c9ff7d97b9a', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16');
 
 INSERT INTO public.contest(id, name, description, prizes, rules, scoring, thumbnail_url, start_time, end_time, created_by, updated_by, is_public)
 VALUES
@@ -537,7 +537,7 @@ VALUES
 
 INSERT INTO public.contest_question(contest_id, question_id)
 VALUES
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b6484e21-6937-489c-b031-b71767994750'),
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b6484e21-6937-489c-b031-b71767994221'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b6484e21-6937-489c-b031-b71767994751'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b6484e21-6937-489c-b031-b71767994752'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b6484e21-6937-489c-b031-b71767994753');
@@ -553,13 +553,13 @@ VALUES
 --     ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '27549d54-4a3a-4be4-9875-eab03f88ba7b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
 --     ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba8b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 4, true);
 
-INSERT INTO public.code_submission_contest(code_submission_id, contest_id)
-VALUES
-    ('a2e5afa6-f0c8-422e-8895-a706d1a1d6c1', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
-    ('4a177c20-9487-48f6-b057-6d981e66b6cf', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
-    ('df32ebfe-ec52-42c6-9447-cdc5280d5701', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
-    ('0b4bccfc-411f-499d-b470-9574152269aa', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
-    ('186c1fea-9706-4399-991a-8c9ff7d97b9a', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15');
+-- INSERT INTO public.code_submission_contest(code_submission_id, contest_id)
+-- VALUES
+--     ('a2e5afa6-f0c8-422e-8895-a706d1a1d6c1', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
+--     ('4a177c20-9487-48f6-b057-6d981e66b6cf', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
+--     ('df32ebfe-ec52-42c6-9447-cdc5280d5701', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
+--     ('0b4bccfc-411f-499d-b470-9574152269aa', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
+--     ('186c1fea-9706-4399-991a-8c9ff7d97b9a', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15');
 
 
 

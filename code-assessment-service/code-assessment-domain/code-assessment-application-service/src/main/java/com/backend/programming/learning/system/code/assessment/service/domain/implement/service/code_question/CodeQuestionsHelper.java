@@ -199,8 +199,8 @@ public class CodeQuestionsHelper {
         User user = validateHelper.validateUser(command.getUserId());
         CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(command.getCodeQuestionId());
 
-        if(!codeQuestion.getUserId().equals(user.getId()))
-            throw new CodeAssessmentDomainException("User " + codeQuestion.getUserId() + " does not possess code question " + command.getCodeQuestionId());
+//        if(!codeQuestion.getUserId().equals(user.getId()))
+//            throw new CodeAssessmentDomainException("User " + codeQuestion.getUserId() + " does not possess code question " + command.getCodeQuestionId());
 
         List<ProgrammingLanguage> programmingLanguages = validateHelper.validateProgrammingLanguage(command.getLanguages().stream().map(ProgrammingLanguageDto::getId).toList());
         List<ProgrammingLanguageCodeQuestion> plcqs = initLanguageCodeQuestion(command.getLanguages(), codeQuestion);
@@ -220,8 +220,8 @@ public class CodeQuestionsHelper {
         User user = validateHelper.validateUser(command.getUserId());
         CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(command.getCodeQuestionId());
 
-        if(!codeQuestion.getUserId().equals(user.getId()))
-            throw new CodeAssessmentDomainException("User " + codeQuestion.getUserId() + " does not possess code question " + command.getCodeQuestionId());
+//        if(!codeQuestion.getUserId().equals(user.getId()))
+//            throw new CodeAssessmentDomainException("User " + codeQuestion.getUserId() + " does not possess code question " + command.getCodeQuestionId());
 
         List<ProgrammingLanguage> programmingLanguages = validateHelper.validateProgrammingLanguage(command.getLanguageIds());
 
@@ -236,8 +236,8 @@ public class CodeQuestionsHelper {
         User user = validateHelper.validateUser(command.getUserId());
         CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(command.getCodeQuestionId());
 
-        if(!codeQuestion.getUserId().equals(user.getId()))
-            throw new CodeAssessmentDomainException("User " + codeQuestion.getUserId() + " does not possess code question " + command.getCodeQuestionId());
+//        if(!codeQuestion.getUserId().equals(user.getId()))
+//            throw new CodeAssessmentDomainException("User " + codeQuestion.getUserId() + " does not possess code question " + command.getCodeQuestionId());
 
         List<Tag> tags = validateHelper.validateTagsById(command.getTagIds());
 
@@ -251,8 +251,8 @@ public class CodeQuestionsHelper {
         User user = validateHelper.validateUser(command.getUserId());
         CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(command.getCodeQuestionId());
 
-        if(!codeQuestion.getUserId().equals(user.getId()))
-            throw new CodeAssessmentDomainException("User " + codeQuestion.getUserId() + " does not possess code question " + command.getCodeQuestionId());
+//        if(!codeQuestion.getUserId().equals(user.getId()))
+//            throw new CodeAssessmentDomainException("User " + codeQuestion.getUserId() + " does not possess code question " + command.getCodeQuestionId());
 
         List<CodeQuestionTagId> cqts = command
                 .getTagIds()
@@ -287,6 +287,32 @@ public class CodeQuestionsHelper {
             Integer countPeople = codeSubmissionRepository.countPeopleAttend(item.getId());
             item.setNumberOfPeopleAttend(countPeople);
         });
+        return codeQuestions;
+    }
+
+    public Page<CodeQuestion> getAdminCodeQuestions(GetCodeQuestionsQuery query) {
+        User user = validateHelper.validateUserByEmail(query.getEmail());
+        List<TagId> tagIds = query.getTagIds() == null || query.getTagIds().isEmpty()? null:
+                query.getTagIds().stream().map(item->{
+                            try {
+                                return validateHelper.validateTagById(item).getId();
+                            } catch (Exception e) {
+                                return null;
+                            }
+                        })
+                        .filter(Objects::nonNull)
+                        .toList();
+
+        Page<CodeQuestion> codeQuestions = codeQuestionRepository
+                .adminFindAll(user.getId(),
+                        tagIds,
+                        query.getOrderBy(),
+                        query.getSortBy(),
+                        query.getPageNum(),
+                        query.getPageSize(),
+                        query.getDifficulty(),
+                        query.getSearch(),
+                        query.getIsPublic());
         return codeQuestions;
     }
 }

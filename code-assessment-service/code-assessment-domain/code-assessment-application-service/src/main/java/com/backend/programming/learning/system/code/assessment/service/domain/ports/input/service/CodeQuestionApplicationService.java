@@ -34,4 +34,6 @@ public interface CodeQuestionApplicationService {
     void deleteCodeQuestionTag(@Valid DeleteCodeQuestionTagCommand command);
 
     List<CodeQuestionDto> getRecommendedCodeQuestion(String email);
+
+    GetCodeQuestionsResponse getAdminCodeQuestions(@Valid GetCodeQuestionsQuery query);
 }

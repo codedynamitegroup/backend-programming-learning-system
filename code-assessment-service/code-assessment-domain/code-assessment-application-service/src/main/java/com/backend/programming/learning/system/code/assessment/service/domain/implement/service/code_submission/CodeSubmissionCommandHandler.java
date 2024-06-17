@@ -121,4 +121,18 @@ public class CodeSubmissionCommandHandler {
     public String executeCodeWithTestCase(ExecuteCodeWithTestCaseCommand command) {
         return codeSubmissionHelper.executeCodeWithTestCase(command);
     }
+
+    public GetCodeSubmissionReponse getAdminCodeSubmissions(GetCodeSubmissionsByUserIdCommand command) {
+        Page<CodeSubmission> codeSubmissions = codeSubmissionHelper.getAdminCodeSubmissions(command);
+
+        Page<GetCodeSubmissionResponseItem> list = codeSubmissions.map(
+                codeSubmissionDataMapper::codeSubmissionToGetCodeSubmissionResponseItem);
+        list.forEach(item -> {
+            item.setSourceCode(null);
+//            item.setHeadCode(null);
+//            item.setBodyCode(null);
+//            item.setTailCode(null);
+        });
+        return codeSubmissionDataMapper.pagableToGetCodeSubmissionReponse(list);
+    }
 }

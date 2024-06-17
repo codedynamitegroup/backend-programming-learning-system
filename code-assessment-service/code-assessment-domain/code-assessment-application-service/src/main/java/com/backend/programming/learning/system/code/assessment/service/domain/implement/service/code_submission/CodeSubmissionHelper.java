@@ -151,7 +151,15 @@ public class CodeSubmissionHelper {
     @Transactional
     public Page<CodeSubmission> getCodeSubmissionsByUserId(GetCodeSubmissionsByUserIdCommand command) {
         User user = validateHelper.validateUserByEmail(command.getEmail());
-        Page<CodeSubmission> codeSubmissions = codeSubmissionRepository.findByUserIdAndQuestionId(user.getId(), new CodeQuestionId(command.getCodeQuestionId()), command.getPageNum(), command.getPageSize());
+        Page<CodeSubmission> codeSubmissions
+                = codeSubmissionRepository
+                .findByUserIdAndQuestionId(
+                        user.getId(),
+                        new CodeQuestionId(command.getCodeQuestionId()),
+                        command.getContestId(),
+                        command.getCerCourseId(),
+                        command.getPageNum(),
+                        command.getPageSize());
 
         findDescriptionStatus(codeSubmissions);
         return codeSubmissions;
@@ -231,5 +239,13 @@ public class CodeSubmissionHelper {
                 .block();
 
         return result;
+    }
+
+    public Page<CodeSubmission> getAdminCodeSubmissions(GetCodeSubmissionsByUserIdCommand command) {
+        User user = validateHelper.validateUserByEmail(command.getEmail());
+        Page<CodeSubmission> codeSubmissions = codeSubmissionRepository.findByQuestionId(new CodeQuestionId(command.getCodeQuestionId()), command.getContestId(), command.getCerCourseId(), command.getPageNum(), command.getPageSize());
+
+        findDescriptionStatus(codeSubmissions);
+        return codeSubmissions;
     }
 }

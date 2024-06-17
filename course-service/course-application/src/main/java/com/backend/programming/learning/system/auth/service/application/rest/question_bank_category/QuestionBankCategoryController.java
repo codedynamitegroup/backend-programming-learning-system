@@ -71,6 +71,7 @@ public class QuestionBankCategoryController {
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllQuestionBankCategoryResponse> queryAllQuestionBankCategory(
             @RequestParam(name = "isOrgQuestionBank", required = false) Boolean isOrgQuestionBank,
+            @RequestParam(name = "organizationId", required = false) UUID organizationId,
             @RequestParam(defaultValue = "") String search,
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize
@@ -79,6 +80,7 @@ public class QuestionBankCategoryController {
         QueryAllQuestionBankCategoryCommand queryAllQuestionBankCategoryCommand = QueryAllQuestionBankCategoryCommand.builder()
                 .search(search)
                 .isOrgQuestionBank(isOrgQuestionBank)
+                .organizationId(organizationId)
                 .pageNo(pageNo)
                 .pageSize(pageSize)
                 .build();

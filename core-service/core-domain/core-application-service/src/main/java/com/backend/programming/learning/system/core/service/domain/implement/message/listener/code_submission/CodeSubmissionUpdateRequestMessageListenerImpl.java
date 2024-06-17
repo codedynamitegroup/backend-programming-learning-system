@@ -18,6 +18,8 @@ public class CodeSubmissionUpdateRequestMessageListenerImpl implements CodeSubmi
     @Override
     public void persistCodeSubmission(CodeSubmissionUpdateRequest request) {
         helper.persistCodeSubmission(request);
+        helper.saveContest(request.getContestId(), request.getCodeSubmissionId());
+        helper.saveCerCourse(request.getCerCourseId(), request.getCodeSubmissionId());
     }
 
     @Override

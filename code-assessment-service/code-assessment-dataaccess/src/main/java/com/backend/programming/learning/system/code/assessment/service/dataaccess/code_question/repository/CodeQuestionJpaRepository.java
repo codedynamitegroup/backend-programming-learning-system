@@ -98,4 +98,46 @@ public interface CodeQuestionJpaRepository extends JpaRepository<CodeQuestionEnt
             limit 3
             """, nativeQuery = true)
     List<CodeQuestionEntity> findByNotSolvedTagsAndUserId(List<UUID> tagIds, UUID value);
+
+    @Query(value = """
+            select cqe.* from qtype_code_questions cqe
+            where 
+                cqe.id in ( select cqe2.id from qtype_code_questions cqe2 
+                                    LEFT JOIN tag_code_question cqte
+                                    on cqe2.id = cqte.code_question_id 
+                                    where (COALESCE(?1,NULL) IS NULL OR cqte.tag_id in ?1)
+                                    group by cqe2.id
+                                    )
+                AND (cast(?3 as text) IS NULL or 
+                    cqe.fts_document @@ (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'') ) ) or
+                    cqe.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) ) or
+                    (cast(?7 as text) is not null and cqe.name like concat('%', cast(?7 as text), '%'))
+                    )
+                AND (cast(?4 as text) is NULL OR cast(?4 as text) = cast(cqe.difficulty as text))
+                AND (?6 is null or cqe.is_public = ?6)
+                AND (?5 = cqe.user_id or cqe.is_public = true)
+                order by
+                ts_rank(cqe.fts_document, 
+                    case
+                        when cast(?3 as text) is null then to_tsquery('')
+                        else (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'')) )
+                    end
+                ) desc,
+                ts_rank(cqe.fts_document,
+                    case
+                        when cast(?3 as text) is null then to_tsquery('')
+                        else (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,''))))
+                    end
+                ) desc,
+                cqe.created_at asc
+                
+            """, nativeQuery = true)
+    Page<CodeQuestionEntity> adminFindAndFilterByTagIds(List<UUID> tagEntityId,
+                                                        String searchExcludeFinalWord,
+                                                        String searchFinalWord,
+                                                        String difficulty,
+                                                        UUID userId,
+                                                        Boolean isPublic,
+                                                        String search,
+                                                        Pageable pageable);
 }

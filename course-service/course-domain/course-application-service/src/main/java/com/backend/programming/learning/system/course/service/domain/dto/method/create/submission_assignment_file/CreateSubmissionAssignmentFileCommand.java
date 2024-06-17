@@ -5,15 +5,24 @@ import lombok.Builder;
 import lombok.Getter;
 
 import jakarta.validation.constraints.NotNull;
+
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
 public class CreateSubmissionAssignmentFileCommand {
-    @NotNull
     private final UUID submissionAssignmentId;
 
     @NotNull
-    private final int num_file;
+    private String fileName;
+    @NotNull
+    private Integer fileSize;
+    @NotNull
+    private ZonedDateTime timemodified;
+    @NotNull
+    private String mimetype;
+    @NotNull
+    private String fileUrl;
 }

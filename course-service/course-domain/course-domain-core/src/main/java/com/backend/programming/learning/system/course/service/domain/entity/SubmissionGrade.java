@@ -1,11 +1,9 @@
 package com.backend.programming.learning.system.course.service.domain.entity;
 
-import com.backend.programming.learning.system.course.service.domain.valueobject.SubmissionFileId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.SubmissionGradeId;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 
 import java.time.ZonedDateTime;
-import java.util.UUID;
 
 public class SubmissionGrade extends AggregateRoot<SubmissionGradeId> {
     private SubmissionAssignment submissionAssignment;

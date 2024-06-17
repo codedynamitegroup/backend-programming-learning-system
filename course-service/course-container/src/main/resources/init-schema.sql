@@ -133,6 +133,7 @@ CREATE TABLE "public".question_bank_category
     id                     uuid                     DEFAULT gen_random_uuid() NOT NULL,
     "name"                 text                                               NOT NULL,
     "description"          text,
+    "organization_id"      uuid,
     "is_org_question_bank" bool                     DEFAULT FALSE,
     "created_by"           uuid                                               NOT NULL,
     "updated_by"           uuid                                               NOT NULL,
@@ -152,20 +153,20 @@ CREATE TABLE "public".question_bank_category
 DROP TABLE IF EXISTS "public".question CASCADE;
 CREATE TABLE "public".question
 (
-    "id"                        uuid                      DEFAULT gen_random_uuid() NOT NULL,
-    "org_id"                    uuid             NOT NULL,
-    "name"                      text             NOT NULL,
-    "question_text"             text             NOT NULL,
-    "general_feedback"          text             NOT NULL,
-    "default_mark"              double precision NOT NULL,
-    "created_by"                uuid             NOT NULL,
-    "updated_by"                uuid             NOT NULL,
-    "created_at"                TIMESTAMP WITH TIME ZONE  DEFAULT CURRENT_TIMESTAMP,
-    "updated_at"                TIMESTAMP WITH TIME ZONE  DEFAULT CURRENT_TIMESTAMP,
-    question_bank_category_id   uuid,
-    is_org_question_bank        bool DEFAULT FALSE,
-    "qtype"                     qtype            NOT NULL,
-    "difficulty"                difficulty       NOT NULL,
+    "id"                      uuid                     DEFAULT gen_random_uuid() NOT NULL,
+    "org_id"                  uuid,
+    "name"                    text                                               NOT NULL,
+    "question_text"           text                                               NOT NULL,
+    "general_feedback"        text                                               NOT NULL,
+    "default_mark"            double precision                                   NOT NULL,
+    "created_by"              uuid                                               NOT NULL,
+    "updated_by"              uuid                                               NOT NULL,
+    "created_at"              TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "updated_at"              TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    question_bank_category_id uuid,
+    is_org_question_bank      bool                     DEFAULT FALSE,
+    "qtype"                   qtype                                              NOT NULL,
+    "difficulty"              difficulty                                         NOT NULL,
     PRIMARY KEY ("id"),
     CONSTRAINT question_created_by_fkey FOREIGN KEY (created_by)
         REFERENCES "public".user (id) MATCH SIMPLE
@@ -541,6 +542,7 @@ CREATE TABLE "public".submission_assignment
     is_graded   boolean                        NOT NULL,
     grade         double precision               ,
     content       text                          ,
+    feedback     text                          ,
     submit_time   timestamp without time zone,
     timemodified  TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT submission_assignment_pkey PRIMARY KEY (id),
@@ -574,27 +576,14 @@ CREATE TABLE "public".submission_assignment_file
 (
     id                       uuid DEFAULT gen_random_uuid() NOT NULL,
     submission_assignment_id uuid                           NOT NULL,
-    num_file                 bigint                         NOT NULL,
-    CONSTRAINT submission_assignment_file_pkey PRIMARY KEY (id),
-    CONSTRAINT submission_assignment_file_submission_assignment_id_fkey FOREIGN KEY (submission_assignment_id)
-        REFERENCES "public".submission_assignment (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
-
-DROP TABLE IF EXISTS "public".submission_file CASCADE;
-CREATE TABLE "public".submission_file
-(
-    id            uuid DEFAULT gen_random_uuid() NOT NULL,
-    submission_assignment_file_id uuid                           NOT NULL,
     file_name     text                           NOT NULL,
     file_size     integer                        NOT NULL,
     file_url      text                           NOT NULL,
     timemodified  TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     mimetype      text                           NOT NULL,
-    CONSTRAINT submission_file_pkey PRIMARY KEY (id),
-    CONSTRAINT submission_file_submission_assignment_id_fkey FOREIGN KEY (submission_assignment_file_id)
-        REFERENCES "public".submission_assignment_file (id) MATCH SIMPLE
+    CONSTRAINT submission_assignment_file_pkey PRIMARY KEY (id),
+    CONSTRAINT submission_assignment_file_submission_assignment_id_fkey FOREIGN KEY (submission_assignment_id)
+        REFERENCES "public".submission_assignment (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );

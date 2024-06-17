@@ -19,6 +19,7 @@ public interface QuestionBankCategoryJpaRepository extends JpaRepository<Questio
         FROM QuestionBankCategoryEntity q 
         WHERE (q.name LIKE %:search%) 
             AND (q.isOrgQuestionBank = :isOrgQuestionBank OR :isOrgQuestionBank IS NULL)
+            AND (q.organizationId = :organizationId OR :organizationId IS NULL)
         """)
-    Page<QuestionBankCategoryEntity> findAll(Boolean isOrgQuestionBank, String search, Pageable pageable);
+    Page<QuestionBankCategoryEntity> findAll(Boolean isOrgQuestionBank, UUID organizationId, String search, Pageable pageable);
 }
