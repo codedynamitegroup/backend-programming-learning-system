@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.core.service.domain.ports.input.
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQtypeCodeQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllAdminCodeQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllAdminQtypeCodeQuestionsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryQtypeCodeQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeCodeQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQuestionResponse;
@@ -15,4 +17,6 @@ public interface QtypeCodeQuestionApplicationService {
     QueryQtypeCodeQuestionResponse queryQtypeCodeQuestionById(UUID qtCodeQuestionId);
     List<QueryQtypeCodeQuestionResponse> queryAllQtypeCodeQuestions();
     UpdateQuestionResponse updateQtypeCodeQuestion(@Valid UpdateQtypeCodeQuestionCommand updateQtypeCodeQuestionCommand);
+    QueryAllAdminQtypeCodeQuestionsResponse queryAllQtypeCodeQuestionsForAdmin
+            (@Valid QueryAllAdminCodeQuestionCommand queryAllAdminCodeQuestionCommand);
 }

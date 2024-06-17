@@ -3,11 +3,14 @@ package com.backend.programming.learning.system.core.service.application.rest.qu
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQtypeCodeQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.question.AnswerOfQuestionDeleteResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllAdminCodeQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllAdminQtypeCodeQuestionsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQtypeCodeQuestionsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryQtypeCodeQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeCodeQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QtypeCodeQuestionApplicationService;
+import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -16,6 +19,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -87,6 +94,44 @@ public class QtypeCodeQuestionController {
         return ResponseEntity.ok(QueryAllQtypeCodeQuestionsResponse.builder()
                 .qtypeCodeQuestions(queryQuestionResponse)
                 .build());
+    }
+
+    @GetMapping("/admin")
+    @Operation(summary = "Get all code questions for admin.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllAdminQtypeCodeQuestionsResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllAdminQtypeCodeQuestionsResponse> getAllQtypeCodeQuestionsForAdmin(
+            @RequestParam Integer pageNo,
+            @RequestParam Integer pageSize,
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) QuestionDifficulty difficulty,
+            @RequestParam(required = false) Boolean isPublic
+    ) {
+        String email = null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
+        log.info("Getting all code questions for admin");
+        QueryAllAdminQtypeCodeQuestionsResponse queryAllAdminQtypeCodeQuestionsResponse = qtypeCodeQuestionApplicationService
+                .queryAllQtypeCodeQuestionsForAdmin(QueryAllAdminCodeQuestionCommand.builder()
+                        .pageNum(pageNo)
+                        .pageSize(pageSize)
+                        .search(search)
+                        .difficulty(difficulty)
+                        .isPublic(isPublic)
+                        .email(email)
+                        .build());
+        log.info("Code questions for admin retrieved: {}", queryAllAdminQtypeCodeQuestionsResponse);
+
+        return ResponseEntity.ok(queryAllAdminQtypeCodeQuestionsResponse);
     }
 
     //update code question in the code assessment service

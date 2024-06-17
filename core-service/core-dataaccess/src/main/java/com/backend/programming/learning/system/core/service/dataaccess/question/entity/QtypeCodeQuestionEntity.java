@@ -25,5 +25,6 @@ public class QtypeCodeQuestionEntity {
     private String dslTemplate;
     private String problemStatement;
     private String name;
+    private Boolean isPublic;
     private Float maxGrade;
 }

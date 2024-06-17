@@ -16,6 +16,7 @@ import java.util.UUID;
 public class CreateContestCommand {
     @NotNull(message = "Name is required")
     private final String name;
+    private final UUID orgId;
     private final String description;
     private final String prizes;
     private final String rules;
