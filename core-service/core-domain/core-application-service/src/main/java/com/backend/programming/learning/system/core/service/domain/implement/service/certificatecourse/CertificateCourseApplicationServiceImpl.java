@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.core.service.domain.implement.se
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.QueryAllCertificateCourseWithPageCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.QueryAllCertificateCourseWithPageResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.certificatecourse.DeleteCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.certificatecourse.DeleteCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.*;
@@ -68,5 +70,11 @@ class CertificateCourseApplicationServiceImpl implements CertificateCourseApplic
     @Override
     public QueryGeneralCertificateCourseStatisticsResponse queryGeneralCertificateCourseStatistics() {
         return certificateCourseCommandHandler.queryGeneralCertificateCourseStatistics();
+    }
+
+    @Override
+    public QueryAllCertificateCourseWithPageResponse queryAllCertificateCoursesAdmin(
+            QueryAllCertificateCourseWithPageCommand queryAllCertificateCourseWithPageCommand) {
+        return certificateCourseCommandHandler.queryAllCertificateCoursesAdmin(queryAllCertificateCourseWithPageCommand);
     }
 }

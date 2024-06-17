@@ -4,6 +4,8 @@ import lombok.Builder;
 
 import jakarta.validation.constraints.NotNull;
 
+import java.util.UUID;
+
 /**
  * com.backend.programming.learning.system.dto.method.query.question_bank_category
  * Create by Dang Ngoc Tien
@@ -13,6 +15,7 @@ import jakarta.validation.constraints.NotNull;
 @Builder
 public record QueryAllQuestionBankCategoryCommand(
         Boolean isOrgQuestionBank,
+        UUID organizationId,
         @NotNull
         Integer pageNo,
         @NotNull

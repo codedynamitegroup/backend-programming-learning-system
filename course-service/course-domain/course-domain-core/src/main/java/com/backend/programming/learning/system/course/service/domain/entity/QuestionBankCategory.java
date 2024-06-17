@@ -17,6 +17,7 @@ public class QuestionBankCategory extends AggregateRoot<QuestionBankCategoryId> 
     private String name;
     private String description;
     private Boolean isOrgQuestionBank;
+    private UUID organizationId;
     private User createdBy;
     private User updatedBy;
     private ZonedDateTime createdAt;

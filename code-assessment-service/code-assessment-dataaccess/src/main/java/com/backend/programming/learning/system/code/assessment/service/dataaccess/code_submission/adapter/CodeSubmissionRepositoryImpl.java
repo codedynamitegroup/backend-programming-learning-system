@@ -20,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -62,12 +63,26 @@ public class CodeSubmissionRepositoryImpl implements CodeSubmissionRepository {
     }
 
     @Override
-    public Page<CodeSubmission> findByUserIdAndQuestionId(UserId userId, CodeQuestionId codeQuestionId, Integer pageNum, Integer pageSize) {
+    public Page<CodeSubmission> findByUserIdAndQuestionId(UserId userId, CodeQuestionId codeQuestionId, UUID contestId, UUID cerCourseId, Integer pageNum, Integer pageSize) {
+
+        if(contestId == null && cerCourseId == null) {
+            Pageable pageable
+                    = PageRequest
+                    .of(pageNum, pageSize, Sort.by("createdAt").descending());
+            return jpaRepository
+                    .findByUserIdAndCodeQuestionId(
+                            userId.getValue(),
+                            codeQuestionId.getValue(),
+                            pageable)
+                    .map(dataAccessMapper::entityToCodeSubmission);
+        }
         Pageable pageable
                 = PageRequest
-                .of(pageNum, pageSize);
+                .of(pageNum, pageSize, Sort.by("created_at").descending());
         return jpaRepository
-                .findByUserIdAndCodeQuestionIdOrderByCreatedAtDesc(
+                .findByUserIdAndCodeQuestionIdAndContestIdAndCerCourseId(
+                        contestId,
+                        cerCourseId,
                         userId.getValue(),
                         codeQuestionId.getValue(),
                         pageable)
@@ -142,5 +157,19 @@ public class CodeSubmissionRepositoryImpl implements CodeSubmissionRepository {
                 .contestId(contestId)
                 .codeSubmissionId(id.getValue())
                 .build());
+    }
+
+    @Override
+    public Page<CodeSubmission> findByQuestionId(CodeQuestionId codeQuestionId, UUID contestId, UUID cerCourseId, Integer pageNum, Integer pageSize) {
+        Pageable pageable
+                = PageRequest
+                .of(pageNum, pageSize, Sort.by("created_at").descending());
+        return jpaRepository
+                .findByContestIdAndCerCourseIdCodeQuestionId(
+                        contestId,
+                        cerCourseId,
+                        codeQuestionId.getValue(),
+                        pageable)
+                .map(dataAccessMapper::entityToCodeSubmission);
     }
 }

@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.core.service.domain.ports.input.
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.CreateCertificateCourseResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.QueryAllCertificateCourseWithPageCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.QueryAllCertificateCourseWithPageResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.certificatecourse.DeleteCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.certificatecourse.DeleteCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.*;
@@ -34,4 +36,6 @@ public interface CertificateCourseApplicationService {
             @Valid DeleteCertificateCourseCommand deleteCertificateCourseCommand);
 
     QueryGeneralCertificateCourseStatisticsResponse queryGeneralCertificateCourseStatistics();
+
+    QueryAllCertificateCourseWithPageResponse queryAllCertificateCoursesAdmin(QueryAllCertificateCourseWithPageCommand queryAllCertificateCourseWithPageCommand);
 }

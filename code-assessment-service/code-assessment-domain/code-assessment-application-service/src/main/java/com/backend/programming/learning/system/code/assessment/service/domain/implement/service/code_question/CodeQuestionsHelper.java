@@ -199,8 +199,8 @@ public class CodeQuestionsHelper {
         User user = validateHelper.validateUser(command.getUserId());
         CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(command.getCodeQuestionId());
 
-        if(!codeQuestion.getUserId().equals(user.getId()))
-            throw new CodeAssessmentDomainException("User " + codeQuestion.getUserId() + " does not possess code question " + command.getCodeQuestionId());
+//        if(!codeQuestion.getUserId().equals(user.getId()))
+//            throw new CodeAssessmentDomainException("User " + codeQuestion.getUserId() + " does not possess code question " + command.getCodeQuestionId());
 
         List<ProgrammingLanguage> programmingLanguages = validateHelper.validateProgrammingLanguage(command.getLanguages().stream().map(ProgrammingLanguageDto::getId).toList());
         List<ProgrammingLanguageCodeQuestion> plcqs = initLanguageCodeQuestion(command.getLanguages(), codeQuestion);
@@ -220,8 +220,8 @@ public class CodeQuestionsHelper {
         User user = validateHelper.validateUser(command.getUserId());
         CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(command.getCodeQuestionId());
 
-        if(!codeQuestion.getUserId().equals(user.getId()))
-            throw new CodeAssessmentDomainException("User " + codeQuestion.getUserId() + " does not possess code question " + command.getCodeQuestionId());
+//        if(!codeQuestion.getUserId().equals(user.getId()))
+//            throw new CodeAssessmentDomainException("User " + codeQuestion.getUserId() + " does not possess code question " + command.getCodeQuestionId());
 
         List<ProgrammingLanguage> programmingLanguages = validateHelper.validateProgrammingLanguage(command.getLanguageIds());
 
@@ -236,8 +236,8 @@ public class CodeQuestionsHelper {
         User user = validateHelper.validateUser(command.getUserId());
         CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(command.getCodeQuestionId());
 
-        if(!codeQuestion.getUserId().equals(user.getId()))
-            throw new CodeAssessmentDomainException("User " + codeQuestion.getUserId() + " does not possess code question " + command.getCodeQuestionId());
+//        if(!codeQuestion.getUserId().equals(user.getId()))
+//            throw new CodeAssessmentDomainException("User " + codeQuestion.getUserId() + " does not possess code question " + command.getCodeQuestionId());
 
         List<Tag> tags = validateHelper.validateTagsById(command.getTagIds());
 
@@ -251,8 +251,8 @@ public class CodeQuestionsHelper {
         User user = validateHelper.validateUser(command.getUserId());
         CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(command.getCodeQuestionId());
 
-        if(!codeQuestion.getUserId().equals(user.getId()))
-            throw new CodeAssessmentDomainException("User " + codeQuestion.getUserId() + " does not possess code question " + command.getCodeQuestionId());
+//        if(!codeQuestion.getUserId().equals(user.getId()))
+//            throw new CodeAssessmentDomainException("User " + codeQuestion.getUserId() + " does not possess code question " + command.getCodeQuestionId());
 
         List<CodeQuestionTagId> cqts = command
                 .getTagIds()

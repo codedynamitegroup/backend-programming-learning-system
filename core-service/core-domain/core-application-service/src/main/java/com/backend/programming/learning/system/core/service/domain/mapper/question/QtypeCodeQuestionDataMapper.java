@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.core.service.domain.mapper.quest
 
 import com.backend.programming.learning.system.core.service.domain.dto.message.CodeQuestionsUpdateRequest;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQtypeCodeQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllAdminQtypeCodeQuestionsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryQtypeCodeQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeCodeQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QtypeCodeQuestionResponseEntity;
@@ -11,6 +12,7 @@ import com.backend.programming.learning.system.core.service.domain.outbox.model.
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.QtypeCodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.QuestionId;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -31,9 +33,10 @@ public class QtypeCodeQuestionDataMapper {
                         .questionId(new QuestionId(UUID.fromString(request.getQuestionId())))
                         .build())
                 .dslTemplate(null)
+                .isPublic(false)
                 .maxGrade(request.getMaxGrade())
                 .problemStatement(request.getProblemStatement())
-                .name(request.getName())
+                .codeQuestionName(request.getName())
                 .build();
     }
     public CodeQuestionsUpdatePayload codeQuestionsUpdateRequestToCodeQuestionsUpdatePayload(CodeQuestionsUpdateRequest request){
@@ -53,7 +56,7 @@ public class QtypeCodeQuestionDataMapper {
                                                                       Question question) {
         return QtypeCodeQuestion.builder()
                 .question(question)
-                .name(createQtypeCodeQuestionCommand.getName())
+                .codeQuestionName(createQtypeCodeQuestionCommand.getName())
                 .build();
     }
 
@@ -77,7 +80,7 @@ public class QtypeCodeQuestionDataMapper {
                 .id(new QtypeCodeQuestionId(updateQtypeCodeQuestionCommand.getQtCodeQuestionId()))
                 .dslTemplate(updateQtypeCodeQuestionCommand.getDslTemplate())
                 .problemStatement(updateQtypeCodeQuestionCommand.getProblemStatement())
-                .name(updateQtypeCodeQuestionCommand.getName())
+                .codeQuestionName(updateQtypeCodeQuestionCommand.getName())
                 .maxGrade(updateQtypeCodeQuestionCommand.getMaxGrade())
                 .question(questionDataMapper
                         .updateQuestionEntityToQuestion(updateQtypeCodeQuestionCommand.getQuestion(),
@@ -98,6 +101,19 @@ public class QtypeCodeQuestionDataMapper {
                 .problemStatement(qtypeCodeQuestion.getProblemStatement())
                 .codeQuestionName(qtypeCodeQuestion.getCodeQuestionName())
                 .maxGrade(qtypeCodeQuestion.getMaxGrade())
+                .isPublic(qtypeCodeQuestion.getPublic())
+                .build();
+    }
+
+    public QueryAllAdminQtypeCodeQuestionsResponse qtypeCodeQuestionsToQueryAllAdminQtypeCodeQuestionsResponse
+            (Page<QtypeCodeQuestion> qtypeCodeQuestions) {
+        return QueryAllAdminQtypeCodeQuestionsResponse.builder()
+                .qtypeCodeQuestions(qtypeCodeQuestions
+                        .map(this::qtypeCodeQuestionToQtypeCodeQuestionResponseEntity)
+                        .toList())
+                .currentPage(qtypeCodeQuestions.getNumber())
+                .totalPages(qtypeCodeQuestions.getTotalPages())
+                .totalItems(qtypeCodeQuestions.getTotalElements())
                 .build();
     }
 }
