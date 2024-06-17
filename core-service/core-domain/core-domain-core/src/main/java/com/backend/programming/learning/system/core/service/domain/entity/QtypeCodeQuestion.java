@@ -11,19 +11,22 @@ public class QtypeCodeQuestion extends BaseEntity<QtypeCodeQuestionId> {
     private String problemStatement;
     private String codeQuestionName;
     private Float maxGrade;
+    private Boolean isPublic;
 
     private QtypeCodeQuestion(Builder builder) {
-        super.setId(builder.id);
-        question = builder.question;
-        dslTemplate = builder.dslTemplate;
-        problemStatement = builder.problemStatement;
-        codeQuestionName = builder.name;
-        maxGrade = builder.maxGrade;
+        super.setId(builder.qtypeCodeQuestionId);
+        setQuestion(builder.question);
+        setDslTemplate(builder.dslTemplate);
+        setProblemStatement(builder.problemStatement);
+        setCodeQuestionName(builder.codeQuestionName);
+        setMaxGrade(builder.maxGrade);
+        isPublic = builder.isPublic;
     }
 
     public static Builder builder() {
         return new Builder();
     }
+
 
     public void initQtypeCodeQuestion() {
         setId(new QtypeCodeQuestionId(UUID.randomUUID()));
@@ -41,32 +44,56 @@ public class QtypeCodeQuestion extends BaseEntity<QtypeCodeQuestionId> {
         return dslTemplate;
     }
 
+    public void setDslTemplate(String dslTemplate) {
+        this.dslTemplate = dslTemplate;
+    }
+
     public String getProblemStatement() {
         return problemStatement;
+    }
+
+    public void setProblemStatement(String problemStatement) {
+        this.problemStatement = problemStatement;
     }
 
     public String getCodeQuestionName() {
         return codeQuestionName;
     }
 
+    public void setCodeQuestionName(String codeQuestionName) {
+        this.codeQuestionName = codeQuestionName;
+    }
+
     public Float getMaxGrade() {
         return maxGrade;
     }
 
+    public void setMaxGrade(Float maxGrade) {
+        this.maxGrade = maxGrade;
+    }
+
+    public Boolean getPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(Boolean aPublic) {
+        isPublic = aPublic;
+    }
 
     public static final class Builder {
-        private QtypeCodeQuestionId id;
+        private QtypeCodeQuestionId qtypeCodeQuestionId;
         private Question question;
         private String dslTemplate;
         private String problemStatement;
-        private String name;
+        private String codeQuestionName;
         private Float maxGrade;
+        private Boolean isPublic;
 
         private Builder() {
         }
 
         public Builder id(QtypeCodeQuestionId val) {
-            id = val;
+            qtypeCodeQuestionId = val;
             return this;
         }
 
@@ -85,13 +112,18 @@ public class QtypeCodeQuestion extends BaseEntity<QtypeCodeQuestionId> {
             return this;
         }
 
-        public Builder name(String val) {
-            name = val;
+        public Builder codeQuestionName(String val) {
+            codeQuestionName = val;
             return this;
         }
 
         public Builder maxGrade(Float val) {
             maxGrade = val;
+            return this;
+        }
+
+        public Builder isPublic(Boolean val) {
+            isPublic = val;
             return this;
         }
 

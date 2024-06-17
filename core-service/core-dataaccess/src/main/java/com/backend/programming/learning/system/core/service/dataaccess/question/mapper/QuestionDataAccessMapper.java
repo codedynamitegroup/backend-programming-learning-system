@@ -71,7 +71,11 @@ public class QuestionDataAccessMapper {
         // TODO: add failure messages
         return Question.builder()
                 .questionId(new QuestionId(questionEntity.getId()))
-                .organization(organizationDataAccessMapper.organizationEntityToOrganizationHideSensitiveData(questionEntity.getOrganization()))
+                .organization(
+                        questionEntity.getOrganization() != null ?
+                        organizationDataAccessMapper.organizationEntityToOrganizationHideSensitiveData(questionEntity.getOrganization())
+                        : null
+                )
                 .difficulty(questionEntity.getDifficulty())
                 .name(questionEntity.getName())
                 .questionText(questionEntity.getQuestionText())

@@ -5,7 +5,11 @@ import com.backend.programming.learning.system.core.service.dataaccess.question.
 import com.backend.programming.learning.system.core.service.dataaccess.question.repository.QtypeCodeQuestionJpaRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeCodeQuestionRepository;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeCodeQuestion;
+import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -74,5 +78,31 @@ public class QtypeCodeQuestionRepositoryImpl implements QtypeCodeQuestionReposit
     public Optional<QtypeCodeQuestion> findQuestionId(UUID questionId) {
         return qtypeCodeQuestionJpaRepository.findByQuestionId(questionId)
                 .map(qtypeCodeQuestionDataAccessMapper::qtypeCodeQuestionEntityToQtypeCodeQuestion);
+    }
+
+    @Override
+    public Page<QtypeCodeQuestion> findAllAdminQtypeCodeQuestions(
+            String search,
+            QuestionDifficulty difficulty,
+            Boolean isPublic,
+            UUID userId,
+            Integer pageNo,
+            Integer pageSize) {
+        Pageable pageable
+                = PageRequest
+                .of(pageNo, pageSize);
+
+        Page<QtypeCodeQuestionEntity> qtypeCodeQuestionEntities = qtypeCodeQuestionJpaRepository
+                .findAllAdminQtypeCodeQuestions(
+                        search,
+                        difficulty == null ? null: difficulty.name(),
+                        isPublic,
+                        userId,
+                        pageable);
+
+        Page<QtypeCodeQuestion> codeQuestions = qtypeCodeQuestionEntities
+                .map(qtypeCodeQuestionDataAccessMapper::qtypeCodeQuestionEntityToQtypeCodeQuestion);
+
+        return codeQuestions;
     }
 }

@@ -2,21 +2,28 @@ package com.backend.programming.learning.system.core.service.domain.implement.se
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQtypeCodeQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllAdminCodeQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllAdminQtypeCodeQuestionsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryQtypeCodeQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeCodeQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQuestionResponse;
+import com.backend.programming.learning.system.core.service.domain.entity.Contest;
+import com.backend.programming.learning.system.core.service.domain.entity.QtypeCodeQuestion;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionUpdatedEvent;
 import com.backend.programming.learning.system.core.service.domain.implement.service.question.method.create.QtypeCodeQuestionCreateHelper;
 import com.backend.programming.learning.system.core.service.domain.implement.service.question.method.query.QtypeCodeQuestionQueryHelper;
 import com.backend.programming.learning.system.core.service.domain.implement.service.question.method.update.QtypeCodeQuestionUpdateHelper;
 import com.backend.programming.learning.system.core.service.domain.implement.service.question.saga.QuestionSagaHelper;
+import com.backend.programming.learning.system.core.service.domain.mapper.question.QtypeCodeQuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.outbox.scheduler.question.QuestionOutboxHelper;
 import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -32,6 +39,7 @@ public class QtypeCodeQuestionCommandHandler {
     private final QuestionSagaHelper questionSagaHelper;
 
     private final QuestionDataMapper questionDataMapper;
+    private final QtypeCodeQuestionDataMapper qtypeCodeQuestionDataMapper;
 
 
     public QtypeCodeQuestionCommandHandler(QtypeCodeQuestionCreateHelper qtypeCodeQuestionCreateHelper,
@@ -39,13 +47,15 @@ public class QtypeCodeQuestionCommandHandler {
                                            QtypeCodeQuestionUpdateHelper qtypeCodeQuestionUpdateHelper,
                                            QuestionOutboxHelper questionOutboxHelper,
                                            QuestionSagaHelper questionSagaHelper,
-                                           QuestionDataMapper questionDataMapper) {
+                                           QuestionDataMapper questionDataMapper,
+                                           QtypeCodeQuestionDataMapper qtypeCodeQuestionDataMapper) {
         this.qtypeCodeQuestionCreateHelper = qtypeCodeQuestionCreateHelper;
         this.qtypeCodeQuestionQueryHelper = qtypeCodeQuestionQueryHelper;
         this.qtypeCodeQuestionUpdateHelper = qtypeCodeQuestionUpdateHelper;
         this.questionOutboxHelper = questionOutboxHelper;
         this.questionSagaHelper = questionSagaHelper;
         this.questionDataMapper = questionDataMapper;
+        this.qtypeCodeQuestionDataMapper = qtypeCodeQuestionDataMapper;
     }
 
     public CreateQuestionResponse createQtypeCodeQuestion(CreateQtypeCodeQuestionCommand createQtypeCodeQuestionCommand) {
@@ -67,6 +77,24 @@ public class QtypeCodeQuestionCommandHandler {
 
     public List<QueryQtypeCodeQuestionResponse> queryAllQtypeCodeQuestion() {
         return qtypeCodeQuestionQueryHelper.queryAllQtypeCodeQuestions();
+    }
+
+    @Transactional(readOnly = true)
+    public QueryAllAdminQtypeCodeQuestionsResponse queryAllQtypeCodeQuestionsForAdmin
+            (QueryAllAdminCodeQuestionCommand queryAllAdminCodeQuestionCommand) {
+        Page<QtypeCodeQuestion> qtypeCodeQuestions = qtypeCodeQuestionQueryHelper
+                .queryAllQtypeCodeQuestionsForAdmin(
+                        queryAllAdminCodeQuestionCommand.getSearch(),
+                        queryAllAdminCodeQuestionCommand.getDifficulty(),
+                        queryAllAdminCodeQuestionCommand.getIsPublic(),
+                        queryAllAdminCodeQuestionCommand.getPageNum(),
+                        queryAllAdminCodeQuestionCommand.getPageSize(),
+                        queryAllAdminCodeQuestionCommand.getEmail());
+
+        log.info("Returning all code questions for admin");
+
+        return qtypeCodeQuestionDataMapper
+                .qtypeCodeQuestionsToQueryAllAdminQtypeCodeQuestionsResponse(qtypeCodeQuestions);
     }
 
     public UpdateQuestionResponse updateQtypeCodeQuestion(UpdateQtypeCodeQuestionCommand updateQtypeCodeQuestionCommand) {
