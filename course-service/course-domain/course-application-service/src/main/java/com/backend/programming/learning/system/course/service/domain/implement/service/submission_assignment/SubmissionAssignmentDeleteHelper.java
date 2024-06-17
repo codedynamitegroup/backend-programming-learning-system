@@ -18,7 +18,7 @@ public class SubmissionAssignmentDeleteHelper {
 
     private final SubmissionAssignmentRepository submissionAssignmentRepository;
 
-    @Transactional(readOnly = true)
+    @Transactional
     public void deleteSubmissionAssignmentById(UUID submissionAssignmentId) {
         checkSubmissionAssignmentExists(submissionAssignmentId);
         submissionAssignmentRepository.deleteSubmissionAssignmentById(submissionAssignmentId);

@@ -10,6 +10,6 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class CreateSubmissionAssignmentFileResponse {
-    private final UUID submissionAssignmentFileId;
+    private final UUID id;
     private final String message;
 }

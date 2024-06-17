@@ -54,7 +54,8 @@ public class QtypeCodeQuestionDataAccessMapper {
                 .question(questionDataAccessMapper.questionEntityToQuestion(qtypeCodeQuestionEntity.getQuestion()))
                 .dslTemplate(qtypeCodeQuestionEntity.getDslTemplate())
                 .problemStatement(qtypeCodeQuestionEntity.getProblemStatement())
-                .name(qtypeCodeQuestionEntity.getName())
+                .codeQuestionName(qtypeCodeQuestionEntity.getName())
+                .isPublic(qtypeCodeQuestionEntity.getIsPublic())
                 .maxGrade(qtypeCodeQuestionEntity.getMaxGrade())
                 .build();
     }

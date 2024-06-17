@@ -10,4 +10,8 @@ public interface SubmissionAssignmentFileRepository {
     SubmissionAssignmentFile saveSubmissionAssignmentFile(SubmissionAssignmentFile submissionAssignmentFile);
 
     List<SubmissionAssignmentFile> findBySubmissionAssignmentId(UUID submissionAssignmentId);
+
+    Optional<SubmissionAssignmentFile> findById(UUID id);
+
+    void deleteById(UUID id);
 }

@@ -53,6 +53,9 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/core/questions/shortanswer-question/create").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE)
                         .requestMatchers(HttpMethod.GET, "/core/questions/shortanswer-question/{id}").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
 
+                        // qtype code question
+                        .requestMatchers(HttpMethod.GET, "/core/questions/code-question/admin").hasAnyRole(ADMIN)
+
                         // Certificate Course
                         .requestMatchers(HttpMethod.POST, "/core/certificate-courses/create").hasAnyRole(ADMIN)
                         .requestMatchers(HttpMethod.POST, "/core/certificate-courses/{id}/register").hasAnyRole(USER)
@@ -60,6 +63,7 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/core/certificate-courses/{id}").hasAnyRole(ADMIN)
                         .requestMatchers(HttpMethod.POST, "/core/certificate-courses/me").hasAnyRole(USER)
                         .requestMatchers(HttpMethod.GET, "/core/certificate-courses/certificate/dashboard-statistics").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.GET, "/core/certificate-courses/admin/certificate/all").hasAnyRole(ADMIN)
 
                         // Chapter
                         .requestMatchers(HttpMethod.POST, "/core/chapters/create").hasAnyRole(ADMIN)

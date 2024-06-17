@@ -25,6 +25,8 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 public class ContestResponseEntity {
     @JsonProperty("contestId")
     private final UUID contestId;
+    @JsonProperty("orgId")
+    private final UUID orgId;
     @JsonProperty("name")
     private final String name;
     @JsonProperty("description")

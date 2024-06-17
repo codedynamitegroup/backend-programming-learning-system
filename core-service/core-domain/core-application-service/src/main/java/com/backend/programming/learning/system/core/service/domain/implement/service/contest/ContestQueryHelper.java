@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.responsee
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.QueryLineChartResponse;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.exception.ContestNotFoundException;
+import com.backend.programming.learning.system.core.service.domain.exception.OrganizationNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.question.QtypeCodeQuestionNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.contest.ContestDataMapper;
@@ -37,6 +38,7 @@ public class ContestQueryHelper {
     private final CodeSubmissionRepository codeSubmissionRepository;
     private final UserRepository userRepository;
     private final ContestDataMapper contestDataMapper;
+    private final OrganizationRepository organizationRepository;
 
     public ContestQueryHelper(ContestRedisService contestRedisService,
                               ContestRepository contestRepository,
@@ -45,7 +47,8 @@ public class ContestQueryHelper {
                               QtypeCodeQuestionRepository qtypeCodeQuestionRepository,
                               CodeSubmissionRepository codeSubmissionRepository,
                               UserRepository userRepository,
-                              ContestDataMapper contestDataMapper) {
+                              ContestDataMapper contestDataMapper,
+                              OrganizationRepository organizationRepository) {
         this.contestRedisService = contestRedisService;
         this.contestRepository = contestRepository;
         this.contestQuestionRepository = contestQuestionRepository;
@@ -54,6 +57,7 @@ public class ContestQueryHelper {
         this.codeSubmissionRepository = codeSubmissionRepository;
         this.userRepository = userRepository;
         this.contestDataMapper = contestDataMapper;
+        this.organizationRepository = organizationRepository;
     }
 
     @Transactional(readOnly = true)
@@ -135,10 +139,22 @@ public class ContestQueryHelper {
             Integer pageNo,
             Integer pageSize,
             String email,
-            Boolean isAdmin
+            Boolean isAdmin,
+            UUID orgId,
+            Boolean isOrgAdmin
     ) {
         log.info("Querying all contests with searchName: {}, startTimeFilter: {}, pageNo: {}, pageSize: {}",
                 searchName, startTimeFilter, pageNo, pageSize);
+
+        if (isOrgAdmin) {
+            Optional<Organization> organization = organizationRepository.findOrganization(orgId);
+            if (organization.isEmpty()) {
+                log.warn("Could not find organization with id: {}",
+                        orgId);
+                throw new OrganizationNotFoundException("Could not find organization with id: " +
+                        orgId);
+            }
+        }
 
         Page<Contest> contests = null;
         if (
@@ -150,7 +166,9 @@ public class ContestQueryHelper {
                     ContestStartTimeFilter.valueOf(startTimeFilter),
                     pageNo,
                     pageSize,
-                    isAdmin
+                    isAdmin,
+                    orgId,
+                    isOrgAdmin
             );
             if (redisResponse != null) {
                 log.info("Get all contests from redis");
@@ -161,13 +179,34 @@ public class ContestQueryHelper {
                 contests = contestDataMapper.contestResponseEntitiesToContests(contestResponseEntityPage);
             } else {
                 log.info("Get all contests from database");
-                contests = contestRepository.findAll(searchName, startTimeFilter, pageNo, pageSize, isAdmin);
+                contests = contestRepository.findAll(
+                        searchName,
+                        startTimeFilter,
+                        pageNo,
+                        pageSize,
+                        isAdmin,
+                        orgId,
+                        isOrgAdmin);
                 QueryAllContestsResponse response = contestDataMapper.contestsToQueryAllContestsResponse(contests);
-                contestRedisService.saveAllContests(response, ContestStartTimeFilter.valueOf(startTimeFilter), pageNo, pageSize, isAdmin);
+                contestRedisService.saveAllContests(
+                        response,
+                        ContestStartTimeFilter.valueOf(startTimeFilter),
+                        pageNo,
+                        pageSize,
+                        isAdmin,
+                        orgId,
+                        isOrgAdmin);
             }
         } else {
             log.info("Get all contests from database");
-            contests = contestRepository.findAll(searchName, startTimeFilter, pageNo, pageSize, isAdmin);
+            contests = contestRepository.findAll(
+                    searchName,
+                    startTimeFilter,
+                    pageNo,
+                    pageSize,
+                    isAdmin,
+                    orgId,
+                    isOrgAdmin);
         }
 
         Optional<User> userResult = userRepository.findByEmail(email);
@@ -478,13 +517,13 @@ public class ContestQueryHelper {
 
     public QueryGeneralStatisticsContestResponse getStatisticContestResponse() {
        QueryAllContestsResponse redisAllContestResponse = contestRedisService
-                .getAllContests(ContestStartTimeFilter.valueOf("ALL"), 0, 999999999, true);
+                .getAllContests(ContestStartTimeFilter.valueOf("ALL"), 0, 999999999, true, null, false);
 
 
         List<Contest> allContest;
         if(redisAllContestResponse == null) {
             allContest = contestRepository
-                    .findAll(null, "ALL", 0, 999999999, true)
+                    .findAll(null, "ALL", 0, 999999999, true, null, false)
                     .getContent();
             contestRedisService.saveAllContests(
                     contestDataMapper.contestsToQueryAllContestsResponse(
@@ -493,7 +532,9 @@ public class ContestQueryHelper {
                     ContestStartTimeFilter.valueOf("ALL"),
                     0,
                     999999999,
-                    true
+                    true,
+                    null,
+                    false
             );
         }
         else

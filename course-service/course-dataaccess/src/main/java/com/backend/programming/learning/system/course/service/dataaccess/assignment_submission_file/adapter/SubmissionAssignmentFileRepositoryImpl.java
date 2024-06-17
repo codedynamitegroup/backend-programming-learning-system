@@ -38,4 +38,16 @@ public class SubmissionAssignmentFileRepositoryImpl implements SubmissionAssignm
                 .map(submissionAssignmentFileDataAccessMapper::assignmentSubmissionFileEntityToAssignmentSubmissionFile)
                 .toList();
     }
+
+    @Override
+    public Optional<SubmissionAssignmentFile> findById(UUID id) {
+        return submissionAssignmentFileJpaRepository.findById(id)
+                .map(submissionAssignmentFileDataAccessMapper::assignmentSubmissionFileEntityToAssignmentSubmissionFile);
+    }
+
+    @Override
+    public void deleteById(UUID id) {
+        submissionAssignmentFileJpaRepository.deleteById(id);
+
+    }
 }

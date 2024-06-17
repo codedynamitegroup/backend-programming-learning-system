@@ -21,6 +21,7 @@ public class SubmissionAssignmentDataAccessMapper {
     private final UserDataAccessMapper userDataAccessMapper;
     public SubmissionAssignmentEntity assignmentSubmissionToAssignmentSubmissionEntity(SubmissionAssignment submissionAssignment) {
 
+        if(submissionAssignment == null) return null;
         AssignmentEntity assignment = assignmentDataAccessMapper.assignmentToAssignmentEntity(submissionAssignment.getAssignment());
         UserEntity user = userDataAccessMapper.userToUserEntity(submissionAssignment.getUser());
         return SubmissionAssignmentEntity.builder()
@@ -56,6 +57,7 @@ public class SubmissionAssignmentDataAccessMapper {
     }
 
     public SubmissionAssignment submissionAssignmentEntityToSubmissionAssignment(SubmissionAssignmentEntity submissionAssignment) {
+        if(submissionAssignment == null) return null;
         return SubmissionAssignment.builder()
                 .id(new SubmissionAssignmentId(submissionAssignment.getId()))
                 .assignment(assignmentDataAccessMapper.assignmentEntityToAssignment(submissionAssignment.getAssignment()))

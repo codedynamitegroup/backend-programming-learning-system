@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.core.service.domain.implement.se
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQtypeCodeQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllAdminCodeQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllAdminQtypeCodeQuestionsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryQtypeCodeQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeCodeQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQuestionResponse;
@@ -42,5 +44,10 @@ public class QtypeCodeQuestionApplicationServiceImpl implements QtypeCodeQuestio
     @Override
     public UpdateQuestionResponse updateQtypeCodeQuestion(UpdateQtypeCodeQuestionCommand updateQtypeCodeQuestionCommand) {
         return qtypeCodeQuestionCommandHandler.updateQtypeCodeQuestion(updateQtypeCodeQuestionCommand);
+    }
+
+    @Override
+    public QueryAllAdminQtypeCodeQuestionsResponse queryAllQtypeCodeQuestionsForAdmin(QueryAllAdminCodeQuestionCommand queryAllAdminCodeQuestionCommand) {
+        return qtypeCodeQuestionCommandHandler.queryAllQtypeCodeQuestionsForAdmin(queryAllAdminCodeQuestionCommand);
     }
 }

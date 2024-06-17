@@ -22,7 +22,7 @@ public class ContestEntity {
     @Id
     @Column(name = "id")
     private UUID id;
-
+    private UUID orgId;
     private String name;
     private String description;
     private String prizes;

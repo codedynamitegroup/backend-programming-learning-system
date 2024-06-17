@@ -52,7 +52,9 @@ public class SubmissionAssignmentDataMapper {
                 .isGraded(false)
                 .grade(createSubmissionAssignmentCommand.getGrade())
                 .content(createSubmissionAssignmentCommand.getContent())
-                .submittedAt(createSubmissionAssignmentCommand.getTimeSubmit())
+                .submittedAt(createSubmissionAssignmentCommand.getSubmitTime())
+                .feedback(createSubmissionAssignmentCommand.getFeedback())
+                .timemodified(createSubmissionAssignmentCommand.getTimemodified())
                 .build();
     }
 
@@ -61,7 +63,7 @@ public class SubmissionAssignmentDataMapper {
         return CreateSubmissionAssignmentResponse.builder()
                 .assignmentId(submissionAssignment.getAssignment().getId().getValue())
                 .userId(submissionAssignment.getUser().getId().getValue())
-                .submissionId(submissionAssignment.getId().getValue())
+                .id(submissionAssignment.getId().getValue())
                 .message(message)
                 .build();
     }

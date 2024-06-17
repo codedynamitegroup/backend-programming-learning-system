@@ -16,6 +16,8 @@ public record QuestionBankCategoryEntity(
         UUID id,
         String name,
         String description,
+        UUID organizationId,
+        String organizationName,
         UUID createdBy,
         String createdByName,
         UUID updatedBy,

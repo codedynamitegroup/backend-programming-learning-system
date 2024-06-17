@@ -319,7 +319,7 @@ DROP TABLE IF EXISTS "public".question CASCADE;
 CREATE TABLE "public".question
 (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
-    org_id uuid NOT NULL,
+    org_id uuid,
     difficulty difficulty NOT NULL,
     name text NOT NULL,
     question_text text NOT NULL,
@@ -446,6 +446,7 @@ CREATE TABLE "public".qtype_code_question
     question_id uuid NOT NULL,
     dsl_template text,
     problem_statement text,
+    is_public boolean default true,
     name text,
     max_grade float default 10,
     CONSTRAINT qtype_code_question_pkey PRIMARY KEY (id),

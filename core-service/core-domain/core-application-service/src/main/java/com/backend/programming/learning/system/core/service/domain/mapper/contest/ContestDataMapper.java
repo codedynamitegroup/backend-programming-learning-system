@@ -40,6 +40,7 @@ public class ContestDataMapper {
 
     public Contest createContestCommandToContest(CreateContestCommand createContestCommand) {
         return Contest.builder()
+                .orgId(createContestCommand.getOrgId() == null ? null : createContestCommand.getOrgId())
                 .name(createContestCommand.getName())
                 .description(createContestCommand.getDescription())
                 .thumbnailUrl(createContestCommand.getThumbnailUrl())
@@ -70,6 +71,7 @@ public class ContestDataMapper {
 
         return ContestResponseEntity.builder()
                 .contestId(contest.getId().getValue())
+                .orgId(contest.getOrgId() == null ? null : contest.getOrgId())
                 .name(contest.getName())
                 .description(contest.getDescription())
                 .prizes(contest.getPrizes())
@@ -94,6 +96,7 @@ public class ContestDataMapper {
     public  Contest contestResponseEntityToContest(ContestResponseEntity contestResponseEntity) {
         return Contest.builder()
                 .id(new ContestId(contestResponseEntity.getContestId()))
+                .orgId(contestResponseEntity.getOrgId() == null ? null : contestResponseEntity.getOrgId())
                 .name(contestResponseEntity.getName())
                 .description(contestResponseEntity.getDescription())
                 .prizes(contestResponseEntity.getPrizes())

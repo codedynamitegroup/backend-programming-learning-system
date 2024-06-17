@@ -106,7 +106,10 @@ public class QuestionDataMapper {
     public QuestionResponseEntity questionToQuestionResponseEntity(Question question) {
         return QuestionResponseEntity.builder()
                 .id(question.getId().getValue().toString())
-                .organization(organizationDataMapper.organizationToOrganizationResponseEntity(question.getOrganization()))
+                .organization(
+                        question.getOrganization() != null
+                                ? organizationDataMapper.organizationToOrganizationResponseEntity(question.getOrganization())
+                                : null)
                 .name(question.getName())
                 .questionText(question.getQuestionText())
                 .generalFeedback(question.getGeneralFeedback())

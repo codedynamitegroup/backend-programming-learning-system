@@ -123,13 +123,7 @@ public class SubmissionAssignmentController {
     ) {
         log.info("Updating submission assignment by id");
         UpdateSubmissionAssignmentResponse response = submissionAssignmentApplicationService
-                .updateSubmissionAssignmentById(updateSubmissionAssignmentCommand.builder()
-                        .isGraded(updateSubmissionAssignmentCommand.getIsGraded())
-                        .submissionAssignmentId(submissionAssignmentId)
-                        .grade(updateSubmissionAssignmentCommand.getGrade())
-                        .content(updateSubmissionAssignmentCommand.getContent())
-                        .timeSubmit(updateSubmissionAssignmentCommand.getTimeSubmit())
-                        .build());
+                .updateSubmissionAssignmentById(updateSubmissionAssignmentCommand, submissionAssignmentId);
         return ResponseEntity.ok(response);
     }
 

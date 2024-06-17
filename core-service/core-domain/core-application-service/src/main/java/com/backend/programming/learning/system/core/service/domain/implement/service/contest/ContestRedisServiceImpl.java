@@ -28,8 +28,14 @@ class ContestRedisServiceImpl implements ContestRedisService {
         this.objectMapper = objectMapper;
     }
 
-    private String getKeyFrom(ContestStartTimeFilter startTimeFilter, Integer pageNo, Integer pageSize, Boolean isAdmin) {
-        return String.format("%s:%s:%d:%d:%b", "contests:", startTimeFilter.toString(), pageNo, pageSize, isAdmin);
+    private String getKeyFrom(ContestStartTimeFilter startTimeFilter,
+                              Integer pageNo,
+                              Integer pageSize,
+                              Boolean isAdmin,
+                              UUID orgId,
+                              Boolean isOrgAdmin) {
+        return String.format("%s:%s:%d:%d:%b:%s:%b", "contests:",
+                startTimeFilter.toString(), pageNo, pageSize, isAdmin, orgId, isOrgAdmin);
     }
 
     @Override
@@ -43,12 +49,16 @@ class ContestRedisServiceImpl implements ContestRedisService {
             ContestStartTimeFilter startTimeFilter,
             Integer pageNo,
             Integer pageSize,
-            Boolean isAdmin) {
+            Boolean isAdmin,
+            UUID orgId,
+            Boolean isOrgAdmin) {
         String key = getKeyFrom(
                 startTimeFilter,
                 pageNo,
                 pageSize,
-                isAdmin);
+                isAdmin,
+                orgId,
+                isOrgAdmin);
         String json = (String) redisTemplate.opsForValue().get(key);
         try {
             return json != null ? objectMapper.readValue(json, QueryAllContestsResponse.class) : null;
@@ -64,12 +74,16 @@ class ContestRedisServiceImpl implements ContestRedisService {
             ContestStartTimeFilter startTimeFilter,
             Integer pageNo,
             Integer pageSize,
-            Boolean isAdmin) {
+            Boolean isAdmin,
+            UUID orgId,
+            Boolean isOrgAdmin) {
         String key = getKeyFrom(
                 startTimeFilter,
                 pageNo,
                 pageSize,
-                isAdmin);
+                isAdmin,
+                orgId,
+                isOrgAdmin);
         try {
             String json = objectMapper.writeValueAsString(queryAllContestsResponse);
             redisTemplate.opsForValue().set(key, json);
