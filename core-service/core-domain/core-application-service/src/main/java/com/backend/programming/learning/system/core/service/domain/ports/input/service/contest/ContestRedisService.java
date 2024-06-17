@@ -13,10 +13,14 @@ public interface ContestRedisService {
             ContestStartTimeFilter startTimeFilter,
             Integer pageNo,
             Integer pageSize,
-            Boolean isAdmin);
+            Boolean isAdmin,
+            UUID orgId,
+            Boolean isOrgAdmin);
     void saveAllContests(QueryAllContestsResponse queryAllContestsResponse,
                          ContestStartTimeFilter startTimeFilter,
                          Integer pageNo,
                          Integer pageSize,
-                         Boolean isAdmin);
+                         Boolean isAdmin,
+                         UUID orgId,
+                         Boolean isOrgAdmin);
 }

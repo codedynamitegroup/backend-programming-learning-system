@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.UserDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,8 @@ public class GetCodeSubmissionResponseItem {
     Double avgRuntime;
     Double avgMemory;
     ZonedDateTime createdAt;
+
+    UserDto user;
 
     @NotNull
     GradingStatus gradingStatus;

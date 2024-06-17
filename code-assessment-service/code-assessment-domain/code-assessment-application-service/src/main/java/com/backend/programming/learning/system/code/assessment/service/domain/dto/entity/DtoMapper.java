@@ -28,6 +28,7 @@ public class DtoMapper {
                 .lastName(user.getLastName())
                 .firstName(user.getFirstName())
                 .avatarUrl(user.getAvatarUrl())
+                .email(user.getEmail())
                 .id(user.getId().getValue())
                 .build();
     }

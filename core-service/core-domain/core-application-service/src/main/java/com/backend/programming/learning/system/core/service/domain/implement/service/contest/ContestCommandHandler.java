@@ -69,6 +69,8 @@ public class ContestCommandHandler {
                         queryAllContestsCommand.getPageNo(),
                         queryAllContestsCommand.getPageSize(),
                         queryAllContestsCommand.getEmail(),
+                        false,
+                        null,
                         false);
 
         log.info("Returning all contests: {}", contests);
@@ -132,6 +134,28 @@ public class ContestCommandHandler {
                         queryAllContestsCommand.getPageNo(),
                         queryAllContestsCommand.getPageSize(),
                         queryAllContestsCommand.getEmail(),
+                        true,
+                        null,
+                        false);
+
+        log.info("Returning all contests: {}", contests);
+
+        return contestDataMapper.contestsToQueryAllContestsResponse(contests);
+    }
+
+    @Transactional(readOnly = true)
+    public QueryAllContestsResponse queryAllContestsResponseForOrgAdmin(
+            QueryAllContestsCommand queryAllContestsCommand
+    ) {
+        Page<Contest> contests = contestQueryHelper
+                .queryAllContests(
+                        queryAllContestsCommand.getSearchName(),
+                        queryAllContestsCommand.getStartTimeFilter(),
+                        queryAllContestsCommand.getPageNo(),
+                        queryAllContestsCommand.getPageSize(),
+                        queryAllContestsCommand.getEmail(),
+                        false,
+                        queryAllContestsCommand.getOrgId(),
                         true);
 
         log.info("Returning all contests: {}", contests);

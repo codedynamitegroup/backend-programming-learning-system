@@ -5,9 +5,11 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.entity.Contest;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
+import com.backend.programming.learning.system.core.service.domain.exception.OrganizationNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.contest.ContestDataMapper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ContestRepository;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.OrganizationRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -23,19 +25,23 @@ public class ContestCreateHelper {
     private final ContestRepository contestRepository;
     private final UserRepository userRepository;
     private final ContestDataMapper contestDataMapper;
+    private final OrganizationRepository organizationRepository;
 
     public ContestCreateHelper(CoreDomainService coreDomainService,
                                ContestRepository contestRepository,
                                UserRepository userRepository,
-                               ContestDataMapper contestDataMapper) {
+                               ContestDataMapper contestDataMapper,
+                               OrganizationRepository organizationRepository) {
         this.coreDomainService = coreDomainService;
         this.contestRepository = contestRepository;
         this.userRepository = userRepository;
         this.contestDataMapper = contestDataMapper;
+        this.organizationRepository = organizationRepository;
     }
 
     @Transactional
     public Contest persistContest(CreateContestCommand createContestCommand) {
+        checkOrganization(createContestCommand.getOrgId());
         User user = findUserByEmail(createContestCommand.getEmail());
 
         Contest contest = contestDataMapper.
@@ -49,13 +55,13 @@ public class ContestCreateHelper {
         return contestResult;
     }
 
-    private User getUser(UUID userId) {
-        Optional<User> user = userRepository.findUser(userId);
-        if (user.isEmpty()) {
-            log.warn("User with id: {} not found", userId);
-            throw new UserNotFoundException("Could not find user with id: " + userId);
+    private void checkOrganization(UUID orgId) {
+        if (orgId != null) {
+            if (organizationRepository.findOrganization(orgId).isEmpty()) {
+                log.warn("Organization with id: {} not found", orgId);
+                throw new OrganizationNotFoundException("Could not find organization with id: " + orgId);
+            }
         }
-        return user.get();
     }
 
     private User findUserByEmail(String email) {
