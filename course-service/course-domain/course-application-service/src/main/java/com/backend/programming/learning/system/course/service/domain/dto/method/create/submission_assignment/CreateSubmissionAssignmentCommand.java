@@ -18,14 +18,18 @@ public class CreateSubmissionAssignmentCommand {
     @NotNull
     private final UUID assignmentId;
 
+    private final Boolean isGraded;
 
-    @NotNull
     private final Float grade;
 
-    @NotNull
     private final String content;
 
+    private final String feedback;
+
     @NotNull
-    private final ZonedDateTime timeSubmit;
+    private final ZonedDateTime submitTime;
+
+    @NotNull
+    private final ZonedDateTime timemodified;
 
 }

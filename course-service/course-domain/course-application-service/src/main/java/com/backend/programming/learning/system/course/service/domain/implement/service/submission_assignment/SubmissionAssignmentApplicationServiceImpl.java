@@ -47,8 +47,8 @@ public class SubmissionAssignmentApplicationServiceImpl implements SubmissionAss
     }
 
     @Override
-    public UpdateSubmissionAssignmentResponse updateSubmissionAssignmentById(UpdateSubmissionAssignmentCommand updateSubmissionAssignmentCommand) {
-        return submissionAssignmentCommandHandler.updateSubmissionAssignment(updateSubmissionAssignmentCommand);
+    public UpdateSubmissionAssignmentResponse updateSubmissionAssignmentById(UpdateSubmissionAssignmentCommand updateSubmissionAssignmentCommand,UUID id) {
+        return submissionAssignmentCommandHandler.updateSubmissionAssignment(updateSubmissionAssignmentCommand,id);
     }
 
     @Override

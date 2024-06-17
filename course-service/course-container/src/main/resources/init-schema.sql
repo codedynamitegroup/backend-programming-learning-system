@@ -575,7 +575,7 @@ DROP TABLE IF EXISTS "public".submission_assignment_file CASCADE;
 CREATE TABLE "public".submission_assignment_file
 (
     id                       uuid DEFAULT gen_random_uuid() NOT NULL,
-    submission_assignment_id uuid                           NOT NULL,
+    submission_assignment_id uuid                           ,
     file_name     text                           NOT NULL,
     file_size     integer                        NOT NULL,
     file_url      text                           NOT NULL,
