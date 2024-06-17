@@ -81,8 +81,8 @@ public interface ContestUserJpaRepository extends JpaRepository<ContestUserEntit
             cu.completed_at as completedAt,
             cu.created_at as createdAt,
             cu.updated_at as updatedAt,
-            sum(cs.grade) as total_score,
-            EXTRACT(EPOCH FROM sum(cs.created_at - c.start_time)) as total_time,
+            sum(cs.grade) as totalScore,
+            EXTRACT(EPOCH FROM sum(cs.created_at - c.start_time)) as totalTime,
             DENSE_RANK() OVER (ORDER BY COALESCE(sum(cs.grade), 0) DESC, COALESCE(EXTRACT(EPOCH FROM sum(cs.created_at - c.start_time)), 0) DESC) AS rank
         from contest_user cu
             join contest c on cu.contest_id = c.id
