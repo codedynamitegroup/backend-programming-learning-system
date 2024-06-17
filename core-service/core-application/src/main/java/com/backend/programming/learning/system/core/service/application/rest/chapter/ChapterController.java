@@ -3,6 +3,8 @@ package com.backend.programming.learning.system.core.service.application.rest.ch
 import com.backend.programming.learning.system.core.service.application.utils.JwtUtils;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter.CreateChapterCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter.CreateChapterResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter_resource.CreateChapterResourceCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter_resource.CreateChapterResourceResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.chapter.DeleteChapterCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.chapter.DeleteChapterResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersCommand;
@@ -14,6 +16,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.up
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.chapter.UpdateChapterResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.chapter.ChapterApplicationService;
+import com.backend.programming.learning.system.core.service.domain.ports.input.service.chapter_resource.ChapterResourceApplicationService;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.chapter_resource_user.ChapterResourceUserApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -37,11 +40,14 @@ import java.util.UUID;
 public class ChapterController {
     private final ChapterApplicationService chapterApplicationService;
     private final ChapterResourceUserApplicationService chapterResourceUserApplicationService;
+    private final ChapterResourceApplicationService chapterResourceApplicationService;
 
     public ChapterController(ChapterApplicationService chapterApplicationService,
-                             ChapterResourceUserApplicationService chapterResourceUserApplicationService) {
+                             ChapterResourceUserApplicationService chapterResourceUserApplicationService,
+                             ChapterResourceApplicationService chapterResourceApplicationService) {
         this.chapterApplicationService = chapterApplicationService;
         this.chapterResourceUserApplicationService = chapterResourceUserApplicationService;
+        this.chapterResourceApplicationService = chapterResourceApplicationService;
     }
 
     @PostMapping("/create")
@@ -87,7 +93,9 @@ public class ChapterController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<CreateChapterResponse> createChapterResource() {
+    public ResponseEntity<CreateChapterResourceResponse> createChapterResource(
+            @RequestBody CreateChapterResourceCommand createChapterResourceCommand
+    ) {
         String email = null;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
@@ -95,7 +103,22 @@ public class ChapterController {
             email = token.getClaim("preferred_username");
         }
 
-        return null;
+        log.info("Creating chapter resource: {}", createChapterResourceCommand);
+        CreateChapterResourceResponse createChapterResourceResponse =
+                chapterResourceApplicationService.createChapterResource(
+                        CreateChapterResourceCommand.builder()
+                                .chapterId(createChapterResourceCommand.getChapterId())
+                                .resourceType(createChapterResourceCommand.getResourceType())
+                                .title(createChapterResourceCommand.getTitle())
+                                .questionId(createChapterResourceCommand.getQuestionId())
+                                .lessonHtml(createChapterResourceCommand.getLessonHtml())
+                                .lessonVideo(createChapterResourceCommand.getLessonVideo())
+                                .email(email)
+                                .build()
+                );
+        log.info("Chapter resource created: {}", createChapterResourceResponse);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(createChapterResourceResponse);
     }
 
     @PostMapping("/chapter-resource-users/{id}")

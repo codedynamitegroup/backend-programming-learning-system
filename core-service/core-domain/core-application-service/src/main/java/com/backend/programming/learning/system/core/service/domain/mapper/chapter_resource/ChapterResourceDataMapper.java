@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.core.service.domain.mapper.chapt
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter.CreateChapterCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter.CreateChapterResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter_resource.CreateChapterResourceResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.chapter.UpdateChapterResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterQuestionResponseEntity;
@@ -33,6 +34,21 @@ public class ChapterResourceDataMapper {
 
     public ChapterResourceDataMapper(ChapterQuestionDataMapper chapterQuestionDataMapper) {
         this.chapterQuestionDataMapper = chapterQuestionDataMapper;
+    }
+
+    public CreateChapterResourceResponse chapterResourceToCreateChapterResourceResponse(ChapterResource chapterResource) {
+        return CreateChapterResourceResponse.builder()
+                .chapterResourceId(chapterResource.getId().getValue())
+                .no(chapterResource.getNo())
+                .chapterId(chapterResource.getChapter().getId().getValue())
+                .title(chapterResource.getTitle())
+                .resourceType(chapterResource.getResourceType().toString())
+                .questionId(chapterResource.getQuestion() != null
+                        ? chapterResource.getQuestion().getId().getValue()
+                        : null)
+                .lessonHtml(chapterResource.getLessonHtml())
+                .lessonVideo(chapterResource.getYoutubeVideoUrl())
+                .build();
     }
 
     public ChapterResourceResponseEntity chapterResourceToChapterResourceResponse(ChapterResource chapterResource) {
