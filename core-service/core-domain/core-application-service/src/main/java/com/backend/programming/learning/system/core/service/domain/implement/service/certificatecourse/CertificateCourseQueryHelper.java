@@ -82,7 +82,6 @@ public class CertificateCourseQueryHelper {
                                 userOptional.get().getId().getValue()
                         );
 
-                log.info("currentChapterResource: {}",  currentChapterResource.get().getId());
                 if (currentChapterResource.isPresent()
                         && currentChapterResource.get().getResourceType().equals(ResourceType.CODE)
                         && currentChapterResource.get().getQuestion() != null) {

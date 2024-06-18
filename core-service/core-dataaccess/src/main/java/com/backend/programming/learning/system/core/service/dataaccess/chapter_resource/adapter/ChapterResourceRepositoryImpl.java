@@ -47,10 +47,8 @@ public class ChapterResourceRepositoryImpl implements ChapterResourceRepository 
         Optional<ChapterResourceEntity> firstUncompletedResource = chapterResourceJpaRepository
             .findFirstUncompletedResourceByCertificateCourseIdAndUserId(certificateCourseId, userId);
         if (firstUncompletedResource.isPresent()) {
-            log.info("Uncompleted resource found for certificate course id: {}", certificateCourseId);
             return Optional.of(chapterResourceDataAccessMapper.chapterResourceEntityToChapterResource(firstUncompletedResource.get()));
         } else {
-            log.info("No uncompleted resource found for certificate course id: {}", certificateCourseId);
             Optional<ChapterResourceEntity> lastResource = chapterResourceJpaRepository
                     .findLastResourceByCertificateCourseId(certificateCourseId);
             return lastResource.map(chapterResourceDataAccessMapper::chapterResourceEntityToChapterResource);
