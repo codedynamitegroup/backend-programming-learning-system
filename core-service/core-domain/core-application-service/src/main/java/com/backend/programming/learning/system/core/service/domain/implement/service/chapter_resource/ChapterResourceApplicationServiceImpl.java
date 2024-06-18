@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.core.service.domain.implement.se
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter_resource.CreateChapterResourceCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter_resource.CreateChapterResourceResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.chapter_resource.DeleteChapterResourceCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.chapter_resource.DeleteChapterResourceResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.chapter.CreateChapterResourceUserCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.chapter.CreateChapterResourceUserResponse;
 import com.backend.programming.learning.system.core.service.domain.implement.service.chapter_resource_user.ChapterResourceUserCommandHandler;
@@ -24,6 +26,11 @@ class ChapterResourceApplicationServiceImpl implements ChapterResourceApplicatio
     @Override
     public CreateChapterResourceResponse createChapterResource(CreateChapterResourceCommand createChapterResourceCommand) {
         return chapterResourceCommandHandler.createChapterResourceResponse(createChapterResourceCommand);
+    }
+
+    @Override
+    public DeleteChapterResourceResponse deleteChapterResource(DeleteChapterResourceCommand deleteChapterResourceCommand) {
+        return chapterResourceCommandHandler.deleteChapterResourceResponse(deleteChapterResourceCommand);
     }
 
 

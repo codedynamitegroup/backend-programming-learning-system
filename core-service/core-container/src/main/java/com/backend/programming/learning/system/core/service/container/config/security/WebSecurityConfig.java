@@ -58,8 +58,8 @@ public class WebSecurityConfig {
 
                         // Certificate Course
                         .requestMatchers(HttpMethod.POST, "/core/certificate-courses/create").hasAnyRole(ADMIN)
-                        .requestMatchers(HttpMethod.POST, "/core/certificate-courses/{id}/register").hasAnyRole(USER)
                         .requestMatchers(HttpMethod.PUT, "/core/certificate-courses/{id}").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.POST, "/core/certificate-courses/{id}/register").hasAnyRole(USER)
                         .requestMatchers(HttpMethod.DELETE, "/core/certificate-courses/{id}").hasAnyRole(ADMIN)
                         .requestMatchers(HttpMethod.POST, "/core/certificate-courses/me").hasAnyRole(USER)
                         .requestMatchers(HttpMethod.GET, "/core/certificate-courses/certificate/dashboard-statistics").hasAnyRole(ADMIN)
@@ -70,6 +70,9 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/core/chapters/{id}").hasAnyRole(ADMIN)
                         .requestMatchers(HttpMethod.DELETE, "/core/chapters/{id}").hasAnyRole(ADMIN)
                         .requestMatchers(HttpMethod.POST, "/core/chapters/chapter-resource-users/{id}").hasAnyRole(USER)
+
+                        // Chapter resource
+                        .requestMatchers(HttpMethod.DELETE, "/core/chapters/chapter-resources/{id}").hasAnyRole(ADMIN)
 
                         // Contest
                         .requestMatchers(HttpMethod.POST, "/core/contests/create").hasAnyRole(ADMIN, ADMIN_MOODLE)

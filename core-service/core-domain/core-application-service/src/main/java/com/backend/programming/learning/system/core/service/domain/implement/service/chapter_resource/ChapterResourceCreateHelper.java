@@ -36,39 +36,39 @@ public class ChapterResourceCreateHelper {
     public ChapterResource persistChapterResource(
             CreateChapterResourceCommand createChapterResourceCommand) {
 
-        Integer topNo = findTopNoOfChapterResourceByChapterId(createChapterResourceCommand.getChapterId());
-
-        ChapterResource chapterResource = ChapterResource.builder()
-                .id(new ChapterResourceId(UUID.randomUUID()))
-                .chapter(Chapter.builder()
-                        .id(new ChapterId(createChapterResourceCommand.getChapterId()))
-                        .build())
-                .no(topNo + 1)
-                .title(createChapterResourceCommand.getTitle())
-                .resourceType(ResourceType.valueOf(createChapterResourceCommand.getResourceType()))
-                .question(
-                        createChapterResourceCommand.getResourceType().equals(ResourceType.CODE.name())
-                                ? Question.builder()
-                                    .questionId(new QuestionId(UUID.randomUUID()))
-                                    .build()
-                                : null
-                )
-                .lessonHtml(
-                        createChapterResourceCommand.getResourceType().equals(ResourceType.LESSON.name())
-                                ? createChapterResourceCommand.getLessonHtml()
-                                : null
-                )
-                .youtubeVideoUrl(
-                        createChapterResourceCommand.getResourceType().equals(ResourceType.VIDEO.name())
-                                ? createChapterResourceCommand.getLessonVideo()
-                                : null
-                )
-                .build();
-
-        ChapterResource chapterResourceResult = saveChapterResource(chapterResource);
-
-        log.info("Chapter Resource saved with id: {}", chapterResourceResult.getId().getValue());
-        return chapterResourceResult;
+//        Integer topNo = findTopNoOfChapterResourceByChapterId(createChapterResourceCommand.getChapterId());
+//
+//        ChapterResource chapterResource = ChapterResource.builder()
+//                .id(new ChapterResourceId(UUID.randomUUID()))
+//                .chapter(Chapter.builder()
+//                        .id(new ChapterId(createChapterResourceCommand.getChapterId()))
+//                        .build())
+//                .no(topNo + 1)
+//                .title(createChapterResourceCommand.getTitle())
+//                .resourceType(ResourceType.valueOf(createChapterResourceCommand.getResourceType()))
+//                .question(
+//                        createChapterResourceCommand.getResourceType().equals(ResourceType.CODE.name())
+//                                ? Question.builder()
+//                                    .questionId(new QuestionId(UUID.randomUUID()))
+//                                    .build()
+//                                : null
+//                )
+//                .lessonHtml(
+//                        createChapterResourceCommand.getResourceType().equals(ResourceType.LESSON.name())
+//                                ? createChapterResourceCommand.getLessonHtml()
+//                                : null
+//                )
+//                .youtubeVideoUrl(
+//                        createChapterResourceCommand.getResourceType().equals(ResourceType.VIDEO.name())
+//                                ? createChapterResourceCommand.getLessonVideo()
+//                                : null
+//                )
+//                .build();
+//
+//        ChapterResource chapterResourceResult = saveChapterResource(chapterResource);
+//
+//        log.info("Chapter Resource saved with id: {}", chapterResourceResult.getId().getValue());
+        return null;
     }
 
     private Integer findTopNoOfChapterResourceByChapterId(UUID chapterId) {

@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.core.service.dataaccess.chapter_r
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapterResource.ChapterResourceCount;
 import com.backend.programming.learning.system.core.service.domain.entity.ChapterResource;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ChapterResourceRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Component
 public class ChapterResourceRepositoryImpl implements ChapterResourceRepository {
     private final ChapterResourceJpaRepository chapterResourceJpaRepository;
@@ -27,11 +29,10 @@ public class ChapterResourceRepositoryImpl implements ChapterResourceRepository 
 
     @Override
     public ChapterResource saveChapterResource(ChapterResource chapterResource) {
-        return chapterResourceDataAccessMapper.chapterResourceEntityToChapterResource(
-                chapterResourceJpaRepository.save(
-                        chapterResourceDataAccessMapper.chapterResourceToChapterResourceEntity(chapterResource)
-                )
-        );
+        ChapterResourceEntity chapterResourceEntity =
+                chapterResourceDataAccessMapper.chapterResourceToChapterResourceEntity(chapterResource);
+        ChapterResourceEntity savedChapterResourceEntity = chapterResourceJpaRepository.save(chapterResourceEntity);
+        return chapterResourceDataAccessMapper.chapterResourceEntityToChapterResource(savedChapterResourceEntity);
     }
 
     @Override
@@ -71,5 +72,10 @@ public class ChapterResourceRepositoryImpl implements ChapterResourceRepository 
     @Override
     public Integer findTopNoOfChapterResourceByChapterId(UUID chapterId) {
         return chapterResourceJpaRepository.findTopNoOfChapterResourceByChapterId(chapterId);
+    }
+
+    @Override
+    public void deleteChapterResource(UUID chapterResourceId) {
+        chapterResourceJpaRepository.deleteById(chapterResourceId);
     }
 }
