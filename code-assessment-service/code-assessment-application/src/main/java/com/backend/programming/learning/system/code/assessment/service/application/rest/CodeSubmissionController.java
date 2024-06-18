@@ -73,7 +73,6 @@ public class CodeSubmissionController {
     @GetMapping("/admin-code-submission")
     public ResponseEntity<GetCodeSubmissionReponse> getAdminCodeSubmissions
             (@RequestHeader(value = "Access-Token") String accessToken,
-             @RequestParam List<UUID> codeQuestionIds,
              @RequestParam(required = false) UUID contestId,
              @RequestParam(required = false) UUID cerCourseId,
              @RequestParam(defaultValue = "0") Integer pageNo,
@@ -81,7 +80,6 @@ public class CodeSubmissionController {
         String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
 
         AdminCodeSubmissionQuery command = AdminCodeSubmissionQuery.builder()
-                .codeQuestionIds(codeQuestionIds)
                 .email(email)
                 .pageNum(pageNo)
                 .pageSize(pageSize)

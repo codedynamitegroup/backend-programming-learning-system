@@ -19,8 +19,6 @@ public class AdminCodeSubmissionQuery {
     @NotNull(message = "email must not be null")
     String email;
 
-    List<UUID> codeQuestionIds;
-
     @Positive(message = "pageSize must be positive")
     @Setter
     @JsonIgnore
