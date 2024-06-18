@@ -54,7 +54,7 @@ public class CodeSubmissionCommandHandler {
             long startTime = System.currentTimeMillis();
             do{
                 try {
-                    Thread.sleep(2500);
+                    Thread.sleep(1500);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

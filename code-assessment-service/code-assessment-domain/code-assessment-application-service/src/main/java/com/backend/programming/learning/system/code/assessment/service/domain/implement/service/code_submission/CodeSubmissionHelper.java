@@ -120,7 +120,7 @@ public class CodeSubmissionHelper {
         CodeSubmission codeSubmission = validateHelper.validateCodeSubmission(id);
 //        log.info("ccccc {} {}", codeSubmission.getNumOfTestCase(), codeSubmission.getNumOfTestCaseGraded());
 
-        if(codeSubmission.getNumOfTestCaseGraded().equals(codeSubmission.getNumOfTestCase())){
+        if(codeSubmission.getNumOfTestCaseGraded()>=codeSubmission.getNumOfTestCase()){
             List<CodeSubmissionTestCase> cstc = codeSubmissionTestCaseRepository.findByCodeSubmissionId(codeSubmission.getId());
 
             codeAssessmentDomainService.calculateAvgTimeAndMemoryAndGrade(codeSubmission, cstc, codeAssessmentServiceConfigData.getAcceptedStatusDescription());
