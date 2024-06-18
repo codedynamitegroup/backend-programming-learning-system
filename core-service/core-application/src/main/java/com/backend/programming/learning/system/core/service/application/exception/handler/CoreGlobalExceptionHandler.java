@@ -158,5 +158,17 @@ public class CoreGlobalExceptionHandler extends GlobalExceptionHandler {
                 .message(plagiarismDetectionReportNotFoundException.getMessage())
                 .build();
     }
+
+    @ResponseBody
+    @ExceptionHandler(value = {ChapterResourceNotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorDTO handleException(ChapterResourceNotFoundException chapterResourceNotFoundException) {
+        log.error(chapterResourceNotFoundException.getMessage(), chapterResourceNotFoundException);
+        return ErrorDTO.builder()
+                .code(HttpStatus.NOT_FOUND.value())
+                .status(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .message(chapterResourceNotFoundException.getMessage())
+                .build();
+    }
 }
 

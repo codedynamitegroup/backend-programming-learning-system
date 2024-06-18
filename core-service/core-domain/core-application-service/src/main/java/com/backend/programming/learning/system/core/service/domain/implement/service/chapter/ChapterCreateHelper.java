@@ -43,23 +43,23 @@ public class ChapterCreateHelper {
 
     @Transactional
     public Chapter persistChapter(CreateChapterCommand createChapterCommand) {
-        User createdBy = getUserByEmail(createChapterCommand.getEmail());
-        User updatedBy = getUserByEmail(createChapterCommand.getEmail());
-        checkCertificateCourse(createChapterCommand.getCertificateCourseId());
-        Integer topNo = findTopNoOfChapterByCertificateCourseId(createChapterCommand.getCertificateCourseId());
-
-        Chapter chapter = chapterDataMapper.
-                createChapterCommandToChapter(createChapterCommand);
-        coreDomainService.createChapter(chapter);
-        chapter.setCreatedBy(createdBy);
-        chapter.setUpdatedBy(updatedBy);
-        chapter.setCertificateCourseId(new CertificateCourseId(createChapterCommand.getCertificateCourseId()));
-        chapter.setNo(topNo + 1);
-
-        Chapter chapterResult = saveChapter(chapter);
-
-        log.info("Chapter created with id: {}", chapterResult.getId().getValue());
-        return chapterResult;
+//        User createdBy = getUserByEmail(createChapterCommand.getEmail());
+//        User updatedBy = getUserByEmail(createChapterCommand.getEmail());
+//        checkCertificateCourse(createChapterCommand.getCertificateCourseId());
+//        Integer topNo = findTopNoOfChapterByCertificateCourseId(createChapterCommand.getCertificateCourseId());
+//
+//        Chapter chapter = chapterDataMapper.
+//                createChapterCommandToChapter(createChapterCommand);
+//        coreDomainService.createChapter(chapter);
+//        chapter.setCreatedBy(createdBy);
+//        chapter.setUpdatedBy(updatedBy);
+//        chapter.setCertificateCourseId(new CertificateCourseId(createChapterCommand.getCertificateCourseId()));
+//        chapter.setNo(topNo + 1);
+//
+//        Chapter chapterResult = saveChapter(chapter);
+//
+//        log.info("Chapter created with id: {}", chapterResult.getId().getValue());
+        return null;
     }
 
     private User getUserByEmail(String email) {

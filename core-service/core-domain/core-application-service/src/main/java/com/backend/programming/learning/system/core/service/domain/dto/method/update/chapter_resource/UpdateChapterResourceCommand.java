@@ -1,24 +1,20 @@
-package com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter_resource;
+package com.backend.programming.learning.system.core.service.domain.dto.method.update.chapter_resource;
 
 import com.backend.programming.learning.system.core.service.domain.valueobject.ResourceType;
-import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
 import com.backend.programming.learning.system.dataaccess.validator.EnumValidator;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
-public class CreateChapterResourceCommand {
-    @NotNull(message = "No is required")
+public class UpdateChapterResourceCommand {
     private final Integer no;
-    @NotNull(message = "Title is required")
     private final String title;
-    @NotNull(message = "resourceType is required")
     @EnumValidator(enumClass = ResourceType.class, message = "ResourceType is invalid")
     private final String resourceType;
     private final UUID questionId;

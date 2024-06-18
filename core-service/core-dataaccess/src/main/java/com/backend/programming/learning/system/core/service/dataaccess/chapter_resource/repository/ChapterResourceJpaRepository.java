@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.core.service.dataaccess.chapter_
 import com.backend.programming.learning.system.core.service.dataaccess.chapter_resource.entity.ChapterResourceEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter_resource.projection.CourseTypeCountProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -83,5 +84,6 @@ public interface ChapterResourceJpaRepository extends JpaRepository<ChapterResou
         where cq.chapter.id = ?1
         """)
     Integer findTopNoOfChapterResourceByChapterId(UUID chapterId);
+
 }
 

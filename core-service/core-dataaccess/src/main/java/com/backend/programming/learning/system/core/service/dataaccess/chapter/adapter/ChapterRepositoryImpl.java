@@ -58,4 +58,9 @@ public class ChapterRepositoryImpl implements ChapterRepository {
     public void deleteChapterById(UUID chapterId) {
         chapterJpaRepository.deleteById(chapterId);
     }
+
+    @Override
+    public void deleteChaptersByCertificateCourseId(UUID certificateCourseId) {
+        chapterJpaRepository.deleteChaptersByCertificateCourseId(certificateCourseId);
+    }
 }

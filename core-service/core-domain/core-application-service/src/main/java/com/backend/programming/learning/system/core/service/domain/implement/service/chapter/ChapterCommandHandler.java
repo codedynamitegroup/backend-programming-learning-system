@@ -95,13 +95,15 @@ public class ChapterCommandHandler {
     @Transactional
     public UpdateChapterResponse updateChapterResponse(
             UpdateChapterCommand updateChapterCommand) {
-        chapterUpdateHelper.persistChapter(updateChapterCommand);
+//        chapterUpdateHelper.persistChapter(updateChapterCommand);
+//
+//        log.info("Chapter updated with id: {}", updateChapterCommand.getChapterId());
+//
+//        return chapterDataMapper.chapterToUpdateChapterResponse(
+//                new ChapterId(updateChapterCommand.getChapterId()),
+//                "Chapter updated successfully");
+        return null;
 
-        log.info("Chapter updated with id: {}", updateChapterCommand.getChapterId());
-
-        return chapterDataMapper.chapterToUpdateChapterResponse(
-                new ChapterId(updateChapterCommand.getChapterId()),
-                "Chapter updated successfully");
     }
 
 }

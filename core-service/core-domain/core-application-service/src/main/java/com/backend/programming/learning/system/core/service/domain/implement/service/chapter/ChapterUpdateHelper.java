@@ -34,27 +34,28 @@ public class ChapterUpdateHelper {
 
     @Transactional
     public void persistChapter(UpdateChapterCommand updateChapterCommand) {
-        User updatedByUser = getUserByEmail(updateChapterCommand.getEmail());
-
-        Chapter chapter = getChapter(updateChapterCommand.getChapterId());
-
-        chapter.setUpdatedBy(updatedByUser);
-        chapter.setUpdatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
-
-        if (updateChapterCommand.getNo() != null) {
-            chapter.setNo(updateChapterCommand.getNo());
-        }
-
-        if (updateChapterCommand.getTitle() != null) {
-            chapter.setTitle(updateChapterCommand.getTitle());
-        }
-
-        if (updateChapterCommand.getDescription() != null) {
-            chapter.setDescription(updateChapterCommand.getDescription());
-        }
-
-        updateChapter(chapter);
-        log.info("Chapter updated with id: {}", chapter.getId().getValue());
+        return;
+//        User updatedByUser = getUserByEmail(updateChapterCommand.getEmail());
+//
+//        Chapter chapter = getChapter(updateChapterCommand.getChapterId());
+//
+//        chapter.setUpdatedBy(updatedByUser);
+//        chapter.setUpdatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
+//
+//        if (updateChapterCommand.getNo() != null) {
+//            chapter.setNo(updateChapterCommand.getNo());
+//        }
+//
+//        if (updateChapterCommand.getTitle() != null) {
+//            chapter.setTitle(updateChapterCommand.getTitle());
+//        }
+//
+//        if (updateChapterCommand.getDescription() != null) {
+//            chapter.setDescription(updateChapterCommand.getDescription());
+//        }
+//
+//        updateChapter(chapter);
+//        log.info("Chapter updated with id: {}", chapter.getId().getValue());
     }
 
     private User getUserByEmail(String email) {
