@@ -199,18 +199,6 @@ public class CertificateCourseController {
                 queryAllCertificateCoursesCommand.getCourseName(),
                 queryAllCertificateCoursesCommand.getFilterTopicId());
         String email = JwtUtils.getEmailFromJwtString(accessToken);
-//        if (queryAllCertificateCoursesCommand.getCourseName() == null ||
-//                        queryAllCertificateCoursesCommand.getCourseName().isEmpty()
-//                            || queryAllCertificateCoursesCommand.getCourseName().isBlank()) {
-//            QueryAllCertificateCoursesResponse redisResponse = certificateCourseRedisService.getAllCertificateCourses(
-//                    queryAllCertificateCoursesCommand.getCourseName(),
-//                    queryAllCertificateCoursesCommand.getFilterTopicId()
-//            );
-//            if (redisResponse != null) {
-//                log.info("Returning all certificate courses from cache");
-//                return ResponseEntity.ok(redisResponse);
-//            }
-//        }
         QueryAllCertificateCoursesResponse queryAllCertificateCoursesResponse =
                 certificateCourseApplicationService.queryAllCertificateCourses(QueryAllCertificateCoursesCommand
                         .builder()
@@ -219,14 +207,6 @@ public class CertificateCourseController {
                         .isRegisteredFilter(IsRegisteredFilter.ALL.toString())
                         .email(email)
                         .build());
-//        if (queryAllCertificateCoursesCommand.getCourseName() == null ||
-//                queryAllCertificateCoursesCommand.getCourseName().isEmpty()) {
-//            certificateCourseRedisService.saveAllCertificateCourses(
-//                    queryAllCertificateCoursesResponse,
-//                    queryAllCertificateCoursesCommand.getCourseName(),
-//                    queryAllCertificateCoursesCommand.getFilterTopicId()
-//            );
-//        }
         log.info("Returning all certificate courses");
         return ResponseEntity.ok(queryAllCertificateCoursesResponse);
     }
