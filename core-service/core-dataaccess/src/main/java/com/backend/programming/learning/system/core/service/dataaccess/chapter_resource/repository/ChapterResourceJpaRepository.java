@@ -24,7 +24,7 @@ public interface ChapterResourceJpaRepository extends JpaRepository<ChapterResou
         and c.certificateCourse.id = ?1
         and ((
                 cq.resourceType = 'CODE'
-                and not exists (
+                and (not exists (
                     select 1
                     from CodeSubmissionEntity cs
                     join QtypeCodeQuestionEntity qcq
@@ -40,7 +40,7 @@ public interface ChapterResourceJpaRepository extends JpaRepository<ChapterResou
                     on cs.codeQuestionId = qcq.id
                     where cq.question.id = qcq.question.id
                     and cs.userId = ?2
-                  )
+                  ))
             )
             or 
             (
@@ -50,6 +50,7 @@ public interface ChapterResourceJpaRepository extends JpaRepository<ChapterResou
                     from ChapterResourceUserEntity cru
                     where cru.chapterResourceId = cq.id
                     and cru.userId = ?2
+                    and cru.isViewed = true
                 )
             )
         )
