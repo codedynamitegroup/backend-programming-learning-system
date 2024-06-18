@@ -68,6 +68,7 @@ public class CodeSubmissionDataMapper {
     public GetCodeSubmissionResponseItem codeSubmissionToGetCodeSubmissionResponseItem(CodeSubmission codeSubmission) {
         return GetCodeSubmissionResponseItem.builder()
                 .programmingLanguageId(codeSubmission.getLanguageId().getValue())
+                .programmingLanguageName(codeSubmission.getProgrammingLanguageName())
                 .id(codeSubmission.getId().getValue())
                 .user(dtoMapper.userToUserDto(codeSubmission.getUser()))
                 .avgRuntime(codeSubmission.getRunTime())
