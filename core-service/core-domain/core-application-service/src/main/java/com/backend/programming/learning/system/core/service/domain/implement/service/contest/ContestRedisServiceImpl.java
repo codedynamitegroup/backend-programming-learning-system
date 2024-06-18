@@ -59,6 +59,7 @@ class ContestRedisServiceImpl implements ContestRedisService {
                 isAdmin,
                 orgId,
                 isOrgAdmin);
+        log.info("key: {}", key);
         String json = (String) redisTemplate.opsForValue().get(key);
         try {
             return json != null ? objectMapper.readValue(json, QueryAllContestsResponse.class) : null;
