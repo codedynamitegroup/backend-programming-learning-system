@@ -12,12 +12,14 @@ import com.backend.programming.learning.system.core.service.domain.entity.Chapte
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ChapterResourceId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ResourceType;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Component
 public class ChapterResourceDataAccessMapper {
     private final ChapterDataAccessMapper chapterDataAccessMapper;
@@ -31,10 +33,12 @@ public class ChapterResourceDataAccessMapper {
 
     public ChapterResourceEntity chapterResourceToChapterResourceEntity(
             ChapterResource chapterResource) {
+
         ChapterEntity chapterEntity = chapterDataAccessMapper.chapterToChapterEntity(chapterResource.getChapter());
         QuestionEntity questionEntity =
-                chapterResource.getQuestion() == null ? null :
-                questionDataAccessMapper.questionToQuestionEntity(chapterResource.getQuestion());
+                chapterResource.getQuestion() == null
+                        ? null
+                        : questionDataAccessMapper.questionToQuestionEntity(chapterResource.getQuestion());
 
         return ChapterResourceEntity.builder()
                 .id(chapterResource.getId().getValue())
@@ -51,8 +55,9 @@ public class ChapterResourceDataAccessMapper {
     public ChapterResource chapterResourceEntityToChapterResource(
             ChapterResourceEntity chapterResourceEntity) {
         Chapter chapter = chapterDataAccessMapper.chapterEntityToChapter(chapterResourceEntity.getChapter());
-        Question question = chapterResourceEntity.getQuestion() == null ? null :
-                questionDataAccessMapper.questionEntityToQuestion(chapterResourceEntity.getQuestion());
+        Question question = chapterResourceEntity.getQuestion() == null
+                ? null
+                : questionDataAccessMapper.questionEntityToQuestion(chapterResourceEntity.getQuestion());
 
         return ChapterResource.builder()
                 .id(new ChapterResourceId(chapterResourceEntity.getId()))

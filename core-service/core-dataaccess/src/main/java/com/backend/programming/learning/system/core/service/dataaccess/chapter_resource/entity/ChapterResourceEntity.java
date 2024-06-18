@@ -18,12 +18,11 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table(name = "chapter_resource")
 @Entity
-@EntityListeners(ChapterResourceListener.class)
 public class ChapterResourceEntity {
     @Id
     @Column(name = "id")
     private UUID id;
-    private int no;
+    private Integer no;
     @ManyToOne
     @JoinColumn(name = "chapter_id", referencedColumnName = "id")
     ChapterEntity chapter;

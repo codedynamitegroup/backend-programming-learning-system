@@ -1,5 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse;
 
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter.CreateChapterCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter_resource.CreateChapterResourceCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.validator.certificatecourse.CreateCertificateCourseCommandStartTimeAndEndTimeValidator;
 import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
 import com.backend.programming.learning.system.dataaccess.validator.EnumValidator;
@@ -9,6 +11,7 @@ import lombok.Getter;
 
 import jakarta.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -33,5 +36,6 @@ public class CreateCertificateCourseCommand {
     private final ZonedDateTime startTime;
     private final ZonedDateTime endTime;
 
+    private final List<CreateChapterCommand> chapters;
     private final String email;
 }

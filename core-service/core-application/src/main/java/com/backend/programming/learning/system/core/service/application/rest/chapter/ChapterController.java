@@ -7,6 +7,8 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.chapter_resource.CreateChapterResourceResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.chapter.DeleteChapterCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.chapter.DeleteChapterResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.chapter_resource.DeleteChapterResourceCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.delete.chapter_resource.DeleteChapterResourceResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryChapterCommand;
@@ -61,27 +63,28 @@ public class ChapterController {
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateChapterResponse> createChapter(
             @RequestBody CreateChapterCommand createChapterCommand) {
-        String email = null;
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
-            Jwt token = jwtAuthenticationToken.getToken();
-            email = token.getClaim("preferred_username");
-        }
+//        String email = null;
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+//            Jwt token = jwtAuthenticationToken.getToken();
+//            email = token.getClaim("preferred_username");
+//        }
+//
+//        log.info("Creating chapter: {}", createChapterCommand);
+//        CreateChapterResponse createChapterResponse =
+//                chapterApplicationService.createChapter(
+//                        CreateChapterCommand
+//                                .builder()
+//                                .certificateCourseId(createChapterCommand.getCertificateCourseId())
+//                                .title(createChapterCommand.getTitle())
+//                                .description(createChapterCommand.getDescription())
+//                                .email(email)
+//                                .build()
+//                );
+//        log.info("Chapter created: {}", createChapterResponse);
 
-        log.info("Creating chapter: {}", createChapterCommand);
-        CreateChapterResponse createChapterResponse =
-                chapterApplicationService.createChapter(
-                        CreateChapterCommand
-                                .builder()
-                                .certificateCourseId(createChapterCommand.getCertificateCourseId())
-                                .title(createChapterCommand.getTitle())
-                                .description(createChapterCommand.getDescription())
-                                .email(email)
-                                .build()
-                );
-        log.info("Chapter created: {}", createChapterResponse);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(createChapterResponse);
+//        return ResponseEntity.status(HttpStatus.CREATED).body(createChapterResponse);
+        return null;
     }
 
     @PostMapping("/chapter-resources/create")
@@ -96,29 +99,30 @@ public class ChapterController {
     public ResponseEntity<CreateChapterResourceResponse> createChapterResource(
             @RequestBody CreateChapterResourceCommand createChapterResourceCommand
     ) {
-        String email = null;
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
-            Jwt token = jwtAuthenticationToken.getToken();
-            email = token.getClaim("preferred_username");
-        }
-
-        log.info("Creating chapter resource: {}", createChapterResourceCommand);
-        CreateChapterResourceResponse createChapterResourceResponse =
-                chapterResourceApplicationService.createChapterResource(
-                        CreateChapterResourceCommand.builder()
-                                .chapterId(createChapterResourceCommand.getChapterId())
-                                .resourceType(createChapterResourceCommand.getResourceType())
-                                .title(createChapterResourceCommand.getTitle())
-                                .questionId(createChapterResourceCommand.getQuestionId())
-                                .lessonHtml(createChapterResourceCommand.getLessonHtml())
-                                .lessonVideo(createChapterResourceCommand.getLessonVideo())
-                                .email(email)
-                                .build()
-                );
-        log.info("Chapter resource created: {}", createChapterResourceResponse);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(createChapterResourceResponse);
+        return null;
+//        String email = null;
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+//            Jwt token = jwtAuthenticationToken.getToken();
+//            email = token.getClaim("preferred_username");
+//        }
+//
+//        log.info("Creating chapter resource: {}", createChapterResourceCommand);
+//        CreateChapterResourceResponse createChapterResourceResponse =
+//                chapterResourceApplicationService.createChapterResource(
+//                        CreateChapterResourceCommand.builder()
+//                                .chapterId(createChapterResourceCommand.getChapterId())
+//                                .resourceType(createChapterResourceCommand.getResourceType())
+//                                .title(createChapterResourceCommand.getTitle())
+//                                .questionId(createChapterResourceCommand.getQuestionId())
+//                                .lessonHtml(createChapterResourceCommand.getLessonHtml())
+//                                .lessonVideo(createChapterResourceCommand.getLessonVideo())
+//                                .email(email)
+//                                .build()
+//                );
+//        log.info("Chapter resource created: {}", createChapterResourceResponse);
+//
+//        return ResponseEntity.status(HttpStatus.CREATED).body(createChapterResourceResponse);
     }
 
     @PostMapping("/chapter-resource-users/{id}")
@@ -162,25 +166,26 @@ public class ChapterController {
     public ResponseEntity<UpdateChapterResponse> updateChapter(
             @PathVariable UUID id,
             @RequestBody UpdateChapterCommand updateChapterCommand) {
-        String email = null;
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
-            Jwt token = jwtAuthenticationToken.getToken();
-            email = token.getClaim("preferred_username");
-        }
-
-        log.info("Updating chapter: {}", id);
-        UpdateChapterResponse updateChapterResponse =
-                chapterApplicationService.updateChapter(UpdateChapterCommand
-                        .builder()
-                        .no(updateChapterCommand.getNo())
-                        .chapterId(id)
-                        .title(updateChapterCommand.getTitle())
-                        .description(updateChapterCommand.getDescription())
-                        .email(email)
-                        .build());
-        log.info("Chapter updated: {}", updateChapterResponse.getChapterId());
-        return ResponseEntity.ok(updateChapterResponse);
+        return null;
+//        String email = null;
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+//            Jwt token = jwtAuthenticationToken.getToken();
+//            email = token.getClaim("preferred_username");
+//        }
+//
+//        log.info("Updating chapter: {}", id);
+//        UpdateChapterResponse updateChapterResponse =
+//                chapterApplicationService.updateChapter(UpdateChapterCommand
+//                        .builder()
+//                        .no(updateChapterCommand.getNo())
+//                        .chapterId(id)
+//                        .title(updateChapterCommand.getTitle())
+//                        .description(updateChapterCommand.getDescription())
+//                        .email(email)
+//                        .build());
+//        log.info("Chapter updated: {}", updateChapterResponse.getChapterId());
+//        return ResponseEntity.ok(updateChapterResponse);
     }
 
     @GetMapping
@@ -248,5 +253,24 @@ public class ChapterController {
                         .build());
         log.info("Chapter deleted: {}", id);
         return ResponseEntity.ok(deleteChapterResponse);
+    }
+
+    @DeleteMapping("/chapter-resources/{id}")
+    @Operation(summary = "Delete chapter resource by id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = DeleteChapterResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<DeleteChapterResourceResponse> deleteChapterResource(@PathVariable UUID id) {
+        DeleteChapterResourceResponse deleteChapterResourceResponse =
+                chapterResourceApplicationService.deleteChapterResource(DeleteChapterResourceCommand
+                        .builder()
+                        .chapterResourceId(id)
+                        .build());
+        log.info("Chapter resource deleted: {}", id);
+        return ResponseEntity.ok(deleteChapterResourceResponse);
     }
 }

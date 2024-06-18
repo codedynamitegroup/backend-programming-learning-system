@@ -135,22 +135,22 @@ public class CertificateCourseDataMapper {
                 .build();
     }
 
-    public CertificateCourse updateCertificateCourseCommandToCertificateCourse(
-            UpdateCertificateCourseCommand updateCertificateCourseCommand) {
-        return CertificateCourse.builder()
-                .id(new CertificateCourseId(updateCertificateCourseCommand.getCertificateCourseId()))
-                .name(updateCertificateCourseCommand.getName())
-                .description(updateCertificateCourseCommand.getDescription())
-                .skillLevel(SkillLevel.valueOf(updateCertificateCourseCommand.getSkillLevel().toUpperCase()))
-                .startTime(updateCertificateCourseCommand.getStartTime())
-                .endTime(updateCertificateCourseCommand.getEndTime())
-                .updatedBy(User
-                        .builder()
-                        .id(new UserId(updateCertificateCourseCommand.getUpdatedBy()))
-                        .build())
-                .updatedAt(ZonedDateTime.now(ZoneId.of("UTC")))
-                .build();
-    }
+//    public CertificateCourse updateCertificateCourseCommandToCertificateCourse(
+//            UpdateCertificateCourseCommand updateCertificateCourseCommand) {
+//        return CertificateCourse.builder()
+//                .id(new CertificateCourseId(updateCertificateCourseCommand.getCertificateCourseId()))
+//                .name(updateCertificateCourseCommand.getName())
+//                .description(updateCertificateCourseCommand.getDescription())
+//                .skillLevel(SkillLevel.valueOf(updateCertificateCourseCommand.getSkillLevel().toUpperCase()))
+//                .startTime(updateCertificateCourseCommand.getStartTime())
+//                .endTime(updateCertificateCourseCommand.getEndTime())
+//                .updatedBy(User
+//                        .builder()
+//                        .id(new UserId(updateCertificateCourseCommand.getUpdatedBy()))
+//                        .build())
+//                .updatedAt(ZonedDateTime.now(ZoneId.of("UTC")))
+//                .build();
+//    }
 
     public QueryAllCertificateCourseWithPageResponse certificateCoursesPageToQueryAllCertificateCourseWithPageResponse(
             Page<CertificateCourse> certificateCourses) {

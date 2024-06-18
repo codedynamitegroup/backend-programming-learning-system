@@ -79,6 +79,7 @@ public class CertificateCourseController {
                                 .topicId(createCertificateCourseCommand.getTopicId())
                                 .startTime(createCertificateCourseCommand.getStartTime())
                                 .endTime(createCertificateCourseCommand.getEndTime())
+                                .chapters(createCertificateCourseCommand.getChapters())
                                 .email(email)
                                 .build()
                 );
@@ -133,6 +134,13 @@ public class CertificateCourseController {
             @PathVariable UUID id,
             @RequestBody UpdateCertificateCourseCommand updateCertificateCourseCommand) {
         log.info("Updating certificate course: {}", id);
+        String email = null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
         UpdateCertificateCourseResponse updateCertificateCourseResponse =
                 certificateCourseApplicationService.updateCertificateCourse(UpdateCertificateCourseCommand
                         .builder()
@@ -143,7 +151,8 @@ public class CertificateCourseController {
                         .topicId(updateCertificateCourseCommand.getTopicId())
                         .startTime(updateCertificateCourseCommand.getStartTime())
                         .endTime(updateCertificateCourseCommand.getEndTime())
-                        .updatedBy(updateCertificateCourseCommand.getUpdatedBy())
+                        .chapters(updateCertificateCourseCommand.getChapters())
+                        .email(email)
                         .build());
         log.info("Certificate course updated: {}", updateCertificateCourseResponse.getCertificateCourseId());
         return ResponseEntity.ok(updateCertificateCourseResponse);

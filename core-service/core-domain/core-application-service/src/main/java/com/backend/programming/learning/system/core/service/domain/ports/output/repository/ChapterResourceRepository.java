@@ -16,4 +16,6 @@ public interface ChapterResourceRepository {
     Optional<ChapterResource> findChapterResourceById(UUID chapterResourceId);
     List<ChapterResourceCount> countResourceByType();
     Integer findTopNoOfChapterResourceByChapterId(UUID chapterId);
+    void deleteChapterResource(UUID chapterResourceId);
+
 }

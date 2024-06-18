@@ -21,4 +21,10 @@ public interface ChapterJpaRepository extends JpaRepository<ChapterEntity, UUID>
     @Query(value = "SELECT COALESCE(MAX(no),0) FROM chapter WHERE certificate_course_id = ?1",
             nativeQuery = true)
     Integer findTopNoByCertificateCourseId(UUID certificateCourseId);
+
+    @Modifying
+    @Query(value = """
+     DELETE FROM chapter WHERE certificate_course_id = ?1
+""", nativeQuery = true)
+    void deleteChaptersByCertificateCourseId(UUID certificateCourseId);
 }
