@@ -15,6 +15,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
     private final CodeQuestion codeQuestion;
     private final User user;
     private final ProgrammingLanguageId languageId;
+    private String programmingLanguageName;
     private Double grade;
     private Double runTime;
     private Double memory;
@@ -63,6 +64,7 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         codeQuestion = builder.codeQuestion;
         user = builder.user;
         languageId = builder.languageId;
+        programmingLanguageName = builder.programmingLanguageName;
         grade = builder.grade;
         runTime = builder.runTime;
         memory = builder.memory;
@@ -226,10 +228,19 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
         grade = numOfPassedTestCase == numOfTestCase? codeQuestion.getMaxGrade().doubleValue() : codeQuestion.getMaxGrade().doubleValue() * (numOfPassedTestCase * 1.0 / numOfTestCase);
     }
 
+    public String getProgrammingLanguageName() {
+        return programmingLanguageName;
+    }
+
+    public void setProgrammingLanguageName(String programmingLanguageName) {
+        this.programmingLanguageName = programmingLanguageName;
+    }
+
     public static final class Builder {
         private CodeQuestion codeQuestion;
         private User user;
         private ProgrammingLanguageId languageId;
+        private String programmingLanguageName;
         private Double grade;
         private Double runTime;
         private Double memory;
@@ -288,6 +299,11 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
 
         public Builder languageId(ProgrammingLanguageId val) {
             languageId = val;
+            return this;
+        }
+
+        public Builder programmingLanguageName(String val) {
+            programmingLanguageName = val;
             return this;
         }
 

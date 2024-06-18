@@ -26,6 +26,7 @@ public class GetCodeSubmissionResponseItem {
 
     @NotNull
     UUID programmingLanguageId;
+    String programmingLanguageName;
     Double avgRuntime;
     Double avgMemory;
     ZonedDateTime createdAt;

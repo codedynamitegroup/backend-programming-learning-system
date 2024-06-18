@@ -10,8 +10,9 @@ import com.backend.programming.learning.system.code.assessment.service.domain.en
 import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
 import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
+@Slf4j
 @Component
 public class CodeSubmissionDataAccessMapper {
     private final CodeQuestionDataAccessMapper codeQuestionDataAccessMapper;
@@ -58,6 +59,7 @@ public class CodeSubmissionDataAccessMapper {
                 .codeQuestion(codeQuestionDataAccessMapper.codeQuestionEntityToCodeQuestion(entity.getCodeQuestion()))
                 .user(userDataAccessMapper.userEntityToUser(entity.getUser()))
                 .languageId(new ProgrammingLanguageId(entity.getProgrammingLanguage().getId()))
+                .programmingLanguageName(entity.getProgrammingLanguage().getName())
                 .grade(entity.getGrade())
                 .runTime(entity.getAvgRuntime())
                 .memory(entity.getAvgMemory())
