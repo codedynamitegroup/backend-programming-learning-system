@@ -79,7 +79,7 @@ public class OrganizationRequestKafkaListener implements KafkaConsumer<Organizat
                             sqlException.getSQLState(), organizationRequestAvroModel.getOrganizationId());
                 } else {
                     throw new CoreApplicationServiceException("Throwing DataAccessException in" +
-                            " UserRequestKafkaListener: " + e.getMessage(), e);
+                            " OrganizationRequestKafkaListener: " + e.getMessage(), e);
                 }
             } catch (OrganizationNotFoundException e) {
                 //NO-OP for OrderNotFoundException

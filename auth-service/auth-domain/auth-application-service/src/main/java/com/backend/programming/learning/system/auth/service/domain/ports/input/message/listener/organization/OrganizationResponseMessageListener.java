@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.auth.service.domain.ports.input.message.listener.organization;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.method.message.OrganizationResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.message.organization.OrganizationResponse;
 
 public interface OrganizationResponseMessageListener {
     void organizationCreatedUpdatedOrDeletedFail(OrganizationResponse organizationResponse);

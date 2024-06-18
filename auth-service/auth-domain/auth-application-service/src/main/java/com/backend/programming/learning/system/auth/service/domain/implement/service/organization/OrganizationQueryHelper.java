@@ -27,7 +27,7 @@ public class OrganizationQueryHelper {
     @Transactional(readOnly = true)
     public Organization queryOrganization(UUID organizationId) {
         Optional<Organization> organizationResult =
-                organizationRepository.findById(new OrganizationId(organizationId));
+                organizationRepository.findByIdAndIsDeletedTrueOrFalse(new OrganizationId(organizationId));
         if (organizationResult.isEmpty()) {
             log.warn("Could not find organization with id: {}", organizationId);
             throw new AuthNotFoundException("Could not find organization with id: " +
@@ -37,8 +37,8 @@ public class OrganizationQueryHelper {
     }
 
     @Transactional(readOnly = true)
-    public Page<Organization> queryAllOrganizations(Integer pageNo, Integer pageSize) {
-        return organizationRepository.findAll(pageNo, pageSize);
+    public Page<Organization> queryAllOrganizations(Integer pageNo, Integer pageSize, String searchName) {
+        return organizationRepository.findAll(pageNo, pageSize, searchName);
     }
 
 }

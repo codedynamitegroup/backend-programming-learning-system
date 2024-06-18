@@ -35,7 +35,7 @@ public class OrganizationCreateHelper {
 
     @Transactional
     public OrganizationCreatedEvent persistOrganization(CreateOrganizationCommand createOrganizationCommand) {
-        User createdBy = getUser(createOrganizationCommand.getCreatedBy());
+        User createdBy = getUserByEmail(createOrganizationCommand.getCreatedBy());
         Organization organization = organizationDataMapper.createOrganizationCommandToOrganization(createOrganizationCommand);
         organization.setCreatedBy(createdBy);
         organization.setUpdatedBy(createdBy);
@@ -44,11 +44,11 @@ public class OrganizationCreateHelper {
         return organizationCreatedEvent;
     }
 
-    private User getUser(UUID userId) {
-        Optional<User> user = userRepository.findById(new UserId(userId));
+    private User getUserByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
         if (user.isEmpty()) {
-            log.error("User with id: {} could not be found!", userId);
-            throw new AuthDomainException("User with id: " + userId + " could not be found!");
+            log.error("User with email: {} could not be found!", email);
+            throw new AuthDomainException("User with email: " + email + " could not be found!");
         }
         return user.get();
     }
