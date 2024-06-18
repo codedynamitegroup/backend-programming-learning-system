@@ -99,6 +99,7 @@ public class CodeSubmissionCommandHandler {
                         codeSubmissionDataMapper::codeSubmissionToGetCodeSubmissionResponseItem);
         list.forEach(item -> {
             item.setSourceCode(null);
+            item.setCodeQuestion(null);
 //            item.setHeadCode(null);
 //            item.setBodyCode(null);
 //            item.setTailCode(null);

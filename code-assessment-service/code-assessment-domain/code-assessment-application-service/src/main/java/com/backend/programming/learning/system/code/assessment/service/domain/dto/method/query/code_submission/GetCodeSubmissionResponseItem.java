@@ -57,6 +57,17 @@ public class GetCodeSubmissionResponseItem {
     @Setter
     FirstFailTestCase firstFailTestCase;
 
+    @Setter
+    CodeQuestion codeQuestion;
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class CodeQuestion{
+        UUID id;
+        String name;
+    }
+
     @Getter
     @Builder
     @AllArgsConstructor
