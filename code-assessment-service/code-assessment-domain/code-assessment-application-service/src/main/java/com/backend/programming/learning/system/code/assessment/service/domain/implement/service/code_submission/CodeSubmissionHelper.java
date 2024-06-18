@@ -114,15 +114,17 @@ public class CodeSubmissionHelper {
     public void increaseCodeSubmissionGradedTestCase(CodeSubmissionTestCase codeSubmissionTestCase) {
         codeSubmissionRepository.updateOneTestCase(codeSubmissionTestCase.getCodeSubmission().getId());
     }
+    private boolean checkGraded(List<CodeSubmissionTestCase> cstc){
+        return cstc.stream().noneMatch(item-> item.getStatusDescription() == null);
+    }
 
     @Transactional(isolation = Isolation.READ_COMMITTED)
     public boolean updateCodeSubmissionWhenAllTestCaseAssessed(CodeSubmissionId id) {
         CodeSubmission codeSubmission = validateHelper.validateCodeSubmission(id);
+        List<CodeSubmissionTestCase> cstc= codeSubmissionTestCaseRepository.findByCodeSubmissionId(id);
 //        log.info("ccccc {} {}", codeSubmission.getNumOfTestCase(), codeSubmission.getNumOfTestCaseGraded());
 
-        if(codeSubmission.getNumOfTestCaseGraded()>=codeSubmission.getNumOfTestCase()){
-            List<CodeSubmissionTestCase> cstc = codeSubmissionTestCaseRepository.findByCodeSubmissionId(codeSubmission.getId());
-
+        if(checkGraded(cstc)){
             codeAssessmentDomainService.calculateAvgTimeAndMemoryAndGrade(codeSubmission, cstc, codeAssessmentServiceConfigData.getAcceptedStatusDescription());
 
             codeSubmissionRepository.save(codeSubmission);
