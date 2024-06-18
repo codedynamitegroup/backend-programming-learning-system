@@ -241,7 +241,7 @@ public class CodeSubmissionHelper {
     public Page<CodeSubmission> getAdminCodeSubmissions(AdminCodeSubmissionQuery command) {
         User user = validateHelper.validateUserByEmail(command.getEmail());
         Page<CodeSubmission> codeSubmissions = codeSubmissionRepository.findByQuestionId(
-                command.getCodeQuestionIds() == null ? List.of(): command.getCodeQuestionIds(),
+                null,
                 command.getContestId(),
                 command.getCerCourseId(),
                 command.getPageNum(),

@@ -168,7 +168,6 @@ public class CodeSubmissionRepositoryImpl implements CodeSubmissionRepository {
                 .findByContestIdAndCerCourseIdCodeQuestionIds(
                         contestId,
                         cerCourseId,
-                        codeQuestionIds,
                         pageable)
                 .map(dataAccessMapper::entityToCodeSubmission);
     }
