@@ -10,8 +10,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.tag.AddTagsToSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionResponse;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.tag.DeleteCodeQuestionTagCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.DeleteSharedSolutionCommad;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.DeleteSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.tag.DeleteSharedSolutionTagCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.vote.DeleteSharedSolutionVoteCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.comment.DeleteCommentCommand;
@@ -52,7 +51,11 @@ public class SharedSolutionController {
     //create shared solution
     @PostMapping
     public ResponseEntity<CreateSharedSolutionResponse> createSharedSolution
-            (@RequestBody CreateSharedSolutionCommand command){
+            (@RequestHeader(value = "Access-Token") String accessToken,
+             @RequestBody CreateSharedSolutionCommand command){
+        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
+        command.setEmail(email);
+
         CreateSharedSolutionResponse response =
                 service.createSharedSolution(command);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -113,8 +116,12 @@ public class SharedSolutionController {
     @PutMapping("/{shared-solution-id}")
     public ResponseEntity updateSharedSolution(
             @PathVariable("shared-solution-id") UUID sharedSolutionId,
+            @RequestHeader(value = "Access-Token") String accessToken,
             @RequestBody UpdateSharedSolutionCommand command){
+        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
+
         command.setSharedSolutionId(sharedSolutionId);
+        command.setEmail(email);
         service.updateSharedSolution(command);
         return ResponseEntity.noContent().build();
     }
@@ -123,10 +130,15 @@ public class SharedSolutionController {
     @DeleteMapping("/{shared-solution-id}")
     public ResponseEntity deleteSharedSolution(
             @PathVariable("shared-solution-id") UUID sharedSolutionId,
-            @RequestBody DeleteSharedSolutionCommad command){
-        command.setSharedSolutionId(sharedSolutionId);
+            @RequestHeader(value = "Access-Token") String accessToken){
+        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
+
+        DeleteSharedSolutionCommand command = DeleteSharedSolutionCommand.builder()
+                .email(email)
+                .sharedSolutionId(sharedSolutionId)
+                .build();
         service.deleteSharedSolution(command);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 
 
@@ -260,10 +272,12 @@ public class SharedSolutionController {
     @PostMapping("/{solution-id}/tag")
     public ResponseEntity addTagToSolution(
             @PathVariable("solution-id") UUID sharedSolutionId,
-            @RequestParam UUID userId,
-            @RequestBody List<UUID> tagIds){
+            @RequestHeader(value = "Access-Token") String accessToken,
+            @RequestParam(value="tagIds") List<UUID> tagIds){
+        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
+
         AddTagsToSharedSolutionCommand command = AddTagsToSharedSolutionCommand.builder()
-                .userId(userId)
+                .email(email)
                 .sharedSolutionId(sharedSolutionId)
                 .tagIds(tagIds)
                 .build();
@@ -274,10 +288,12 @@ public class SharedSolutionController {
     @DeleteMapping("/{solution-id}/tag")
     public ResponseEntity deleteSharedSolutionTag(
             @PathVariable("solution-id") UUID sharedSolutionId,
-            @RequestParam UUID userId,
-            @RequestBody List<UUID> tagIds){
+            @RequestHeader(value = "Access-Token") String accessToken,
+            @RequestParam List<UUID> tagIds){
+        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
+
         DeleteSharedSolutionTagCommand command = DeleteSharedSolutionTagCommand.builder()
-                .userId(userId)
+                .email(email)
                 .sharedSolutionId(sharedSolutionId)
                 .tagIds(tagIds)
                 .build();

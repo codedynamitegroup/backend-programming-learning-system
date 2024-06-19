@@ -20,9 +20,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SharedSolutionDataMapper {
-    public SharedSolution createSharedSolutionCommandToSharedSolution(CreateSharedSolutionCommand command) {
+    public SharedSolution createSharedSolutionCommandToSharedSolution(CreateSharedSolutionCommand command, User user) {
         return SharedSolution.builder()
-                .user(User.builder().id(new UserId(command.getUserId())).build())
+                .user(user)
                 .codeQuestionId(new CodeQuestionId(command.getCodeQuestionId()))
                 .title(command.getTitle())
                 .content(command.getContent())

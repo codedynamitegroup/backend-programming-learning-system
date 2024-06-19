@@ -30,11 +30,11 @@ public class SharedSolutionTagHelper {
         if(command.getTagIds().isEmpty())
             return;
 
-        User user = validateHelper.validateUser(command.getUserId());
+        User user = validateHelper.validateUserByEmail(command.getEmail());
         SharedSolution sharedSolution = validateHelper.validateSharedSolution(command.getSharedSolutionId());
 
         if(!user.getId().equals(sharedSolution.getUser().getId())){
-            throw new CodeAssessmentDomainException("User " + command.getUserId() + "does not own solution " + command.getSharedSolutionId());
+            throw new CodeAssessmentDomainException("User " + user.getId().getValue() + "does not own solution " + command.getSharedSolutionId());
         }
 
         List<Tag> tags = validateHelper.validateTagsById(command.getTagIds());
@@ -48,11 +48,11 @@ public class SharedSolutionTagHelper {
         if(command.getTagIds().isEmpty())
             return;
 
-        User user = validateHelper.validateUser(command.getUserId());
+        User user = validateHelper.validateUserByEmail(command.getEmail());
         SharedSolution sharedSolution = validateHelper.validateSharedSolution(command.getSharedSolutionId());
 
         if(!user.getId().equals(sharedSolution.getUser().getId())){
-            throw new CodeAssessmentDomainException("User " + command.getUserId() + "does not own solution " + command.getSharedSolutionId());
+            throw new CodeAssessmentDomainException("User " + user.getId().getValue() + "does not own solution " + command.getSharedSolutionId());
         }
 
         List<Tag> tags = validateHelper.validateTagsById(command.getTagIds());
