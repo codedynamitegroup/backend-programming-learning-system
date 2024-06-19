@@ -128,25 +128,34 @@ public class CertificateCourseQueryHelper {
             case ALL: {
                 List<CertificateCourse> certificateCourseList = new ArrayList<>();
                 if (courseName == null || courseName.isEmpty() || courseName.isBlank()) {
-                    QueryAllCertificateCoursesResponse redisResponse = certificateCourseRedisService.getAllCertificateCourses(
-                            courseName,
-                            filterTopicId
-                    );
-                    if (redisResponse != null) {
-                        certificateCourseList = certificateCourseDataMapper
-                                .queryAllCertificateCoursesResponseToCertificateCourses(redisResponse);
-                    } else {
-                        log.info("Querying all certificate courses from database");
-                        certificateCourseList = certificateCourseRepository.findAllCertificateCourses(
+                    try {
+                        QueryAllCertificateCoursesResponse redisResponse = certificateCourseRedisService.getAllCertificateCourses(
                                 courseName,
                                 filterTopicId
                         );
-                        // save to redis
-                        log.info("Saving all certificate courses to redis");
-                        QueryAllCertificateCoursesResponse queryAllCertificateCoursesCommand = certificateCourseDataMapper
-                                .certificateCoursesToQueryAllCertificateCoursesResponse(certificateCourseList);
-                        certificateCourseRedisService.saveAllCertificateCourses(
-                                queryAllCertificateCoursesCommand,
+                        if (redisResponse != null) {
+                            certificateCourseList = certificateCourseDataMapper
+                                    .queryAllCertificateCoursesResponseToCertificateCourses(redisResponse);
+                        } else {
+                            log.info("Querying all certificate courses from database");
+                            certificateCourseList = certificateCourseRepository.findAllCertificateCourses(
+                                    courseName,
+                                    filterTopicId
+                            );
+                            // save to redis
+                            log.info("Saving all certificate courses to redis");
+                            QueryAllCertificateCoursesResponse queryAllCertificateCoursesCommand = certificateCourseDataMapper
+                                    .certificateCoursesToQueryAllCertificateCoursesResponse(certificateCourseList);
+                            certificateCourseRedisService.saveAllCertificateCourses(
+                                    queryAllCertificateCoursesCommand,
+                                    courseName,
+                                    filterTopicId
+                            );
+                        }
+                    } catch (Exception e) {
+                        log.error("Error querying all certificate courses from redis: {}", e.getMessage());
+                        log.info("Querying all certificate courses from database");
+                        certificateCourseList = certificateCourseRepository.findAllCertificateCourses(
                                 courseName,
                                 filterTopicId
                         );

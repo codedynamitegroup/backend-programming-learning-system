@@ -162,22 +162,44 @@ public class ContestQueryHelper {
                         searchName.isEmpty() ||
                         searchName.isBlank()
         ) {
-            QueryAllContestsResponse redisResponse = contestRedisService.getAllContests(
-                    ContestStartTimeFilter.valueOf(startTimeFilter),
-                    pageNo,
-                    pageSize,
-                    isAdmin,
-                    orgId,
-                    isOrgAdmin
-            );
-            if (redisResponse != null) {
-                log.info("Get all contests from redis");
-                List<ContestResponseEntity> contestResponseEntities = redisResponse.getContests();
-                Pageable pageable = PageRequest.of(redisResponse.getCurrentPage(), pageSize);
-                Page<ContestResponseEntity> contestResponseEntityPage =
-                        new PageImpl<>(contestResponseEntities, pageable, redisResponse.getTotalItems());
-                contests = contestDataMapper.contestResponseEntitiesToContests(contestResponseEntityPage);
-            } else {
+            try {
+                QueryAllContestsResponse redisResponse = contestRedisService.getAllContests(
+                        ContestStartTimeFilter.valueOf(startTimeFilter),
+                        pageNo,
+                        pageSize,
+                        isAdmin,
+                        orgId,
+                        isOrgAdmin
+                );
+                if (redisResponse != null) {
+                    log.info("Get all contests from redis");
+                    List<ContestResponseEntity> contestResponseEntities = redisResponse.getContests();
+                    Pageable pageable = PageRequest.of(redisResponse.getCurrentPage(), pageSize);
+                    Page<ContestResponseEntity> contestResponseEntityPage =
+                            new PageImpl<>(contestResponseEntities, pageable, redisResponse.getTotalItems());
+                    contests = contestDataMapper.contestResponseEntitiesToContests(contestResponseEntityPage);
+                } else {
+                    log.info("Get all contests from database");
+                    contests = contestRepository.findAll(
+                            searchName,
+                            startTimeFilter,
+                            pageNo,
+                            pageSize,
+                            isAdmin,
+                            orgId,
+                            isOrgAdmin);
+                    QueryAllContestsResponse response = contestDataMapper.contestsToQueryAllContestsResponse(contests);
+                    contestRedisService.saveAllContests(
+                            response,
+                            ContestStartTimeFilter.valueOf(startTimeFilter),
+                            pageNo,
+                            pageSize,
+                            isAdmin,
+                            orgId,
+                            isOrgAdmin);
+                }
+            } catch (Exception e) {
+                log.error("Error when querying all contests: {}", e.getMessage());
                 log.info("Get all contests from database");
                 contests = contestRepository.findAll(
                         searchName,
@@ -187,16 +209,8 @@ public class ContestQueryHelper {
                         isAdmin,
                         orgId,
                         isOrgAdmin);
-                QueryAllContestsResponse response = contestDataMapper.contestsToQueryAllContestsResponse(contests);
-                contestRedisService.saveAllContests(
-                        response,
-                        ContestStartTimeFilter.valueOf(startTimeFilter),
-                        pageNo,
-                        pageSize,
-                        isAdmin,
-                        orgId,
-                        isOrgAdmin);
             }
+
         } else {
             log.info("Get all contests from database");
             contests = contestRepository.findAll(
@@ -516,31 +530,38 @@ public class ContestQueryHelper {
     }
 
     public QueryGeneralStatisticsContestResponse getStatisticContestResponse() {
-       QueryAllContestsResponse redisAllContestResponse = contestRedisService
-                .getAllContests(ContestStartTimeFilter.valueOf("ALL"), 0, 999999999, true, null, false);
-
-
         List<Contest> allContest;
-        if(redisAllContestResponse == null) {
+        try {
+            QueryAllContestsResponse redisAllContestResponse = contestRedisService
+                    .getAllContests(ContestStartTimeFilter.valueOf("ALL"), 0, 999999999, true, null, false);
+
+            if(redisAllContestResponse == null) {
+                allContest = contestRepository
+                        .findAll(null, "ALL", 0, 999999999, true, null, false)
+                        .getContent();
+                contestRedisService.saveAllContests(
+                        contestDataMapper.contestsToQueryAllContestsResponse(
+                                new PageImpl<>(allContest)
+                        ),
+                        ContestStartTimeFilter.valueOf("ALL"),
+                        0,
+                        999999999,
+                        true,
+                        null,
+                        false
+                );
+            }
+            else
+                allContest = contestDataMapper.contestResponseEntitiesToContests(
+                        new PageImpl<>(redisAllContestResponse.getContests())
+                ).getContent();
+        } catch (Exception e) {
+            log.error("Error when querying all contests: {}", e.getMessage());
+            log.info("Get all contests from database");
             allContest = contestRepository
                     .findAll(null, "ALL", 0, 999999999, true, null, false)
                     .getContent();
-            contestRedisService.saveAllContests(
-                    contestDataMapper.contestsToQueryAllContestsResponse(
-                            new PageImpl<>(allContest)
-                    ),
-                    ContestStartTimeFilter.valueOf("ALL"),
-                    0,
-                    999999999,
-                    true,
-                    null,
-                    false
-            );
         }
-        else
-            allContest = contestDataMapper.contestResponseEntitiesToContests(
-                    new PageImpl<>(redisAllContestResponse.getContests())
-            ).getContent();
 
         long totalContest = allContest.size();
         long totalParticipants = contestUserRepository.countAllParticipants();
