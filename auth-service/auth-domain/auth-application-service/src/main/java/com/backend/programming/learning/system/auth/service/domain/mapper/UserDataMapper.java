@@ -83,6 +83,7 @@ public class UserDataMapper {
         User user = userCreatedEvent.getUser();
         return UserEventPayload.builder()
                 .userId(user.getId().getValue().toString())
+                .organizationId(user.getOrganization() == null ? null : user.getOrganization().getId().getValue().toString())
                 .email(user.getEmail())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
@@ -98,6 +99,7 @@ public class UserDataMapper {
         User user = userUpdatedEvent.getUser();
         return UserEventPayload.builder()
                 .userId(user.getId().getValue().toString())
+                .organizationId(user.getOrganization() == null ? null : user.getOrganization().getId().getValue().toString())
                 .dob(user.getDob())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
@@ -106,6 +108,7 @@ public class UserDataMapper {
                 .avatarUrl(user.getAvatarUrl())
                 .updatedAt(user.getUpdatedAt())
                 .copyState(CopyState.UPDATING.name())
+                .isDeleted(user.getDeleted())
                 .build();
     }
 
