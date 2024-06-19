@@ -29,6 +29,9 @@ public class UpdateOrganizationCommand {
 
     private String moodleUrl;
 
+    private Boolean isVerified;
+    private Boolean isDeleted;
+
     @NotNull
-    private final UUID updatedBy;
+    private final String updatedBy;
 }

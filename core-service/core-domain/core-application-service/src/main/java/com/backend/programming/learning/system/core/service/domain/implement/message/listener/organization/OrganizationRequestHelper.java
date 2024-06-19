@@ -164,6 +164,9 @@ public class OrganizationRequestHelper {
         if (organizationRequest.getMoodleUrl() != null) {
             organizationUpdated.setMoodleUrl(organization.getMoodleUrl());
         }
+        if (organizationRequest.getIsDeleted() != null) {
+            organizationUpdated.setDeleted(organization.getDeleted());
+        }
 
         //Save organization
         Organization organizationSaved = organizationRepository.save(organizationUpdated);

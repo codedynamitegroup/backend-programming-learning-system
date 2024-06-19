@@ -40,6 +40,7 @@ public class OrganizationEntityResponse {
     private ZonedDateTime createdAt;
 
     private ZonedDateTime updatedAt;
+    private Boolean isVerified;
 
     private Boolean isDeleted;
 }

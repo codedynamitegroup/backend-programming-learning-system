@@ -41,6 +41,7 @@ public class OrganizationEntity {
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
     private Boolean isDeleted;
+    private Boolean isVerified;
 
     @Override
     public boolean equals(Object o) {

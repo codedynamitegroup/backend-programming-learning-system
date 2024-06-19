@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.message.listener.organization;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.method.message.OrganizationResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.message.organization.OrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.implement.saga.organization.OrganizationUpdateSaga;
 import com.backend.programming.learning.system.auth.service.domain.ports.input.message.listener.organization.OrganizationResponseMessageListener;
 import lombok.extern.slf4j.Slf4j;

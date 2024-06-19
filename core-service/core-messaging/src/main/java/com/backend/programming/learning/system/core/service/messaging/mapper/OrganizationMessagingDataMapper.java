@@ -35,6 +35,7 @@ public class OrganizationMessagingDataMapper {
                 .apiKey(organizationRequestAvroModel.getApiKey())
                 .moodleUrl(organizationRequestAvroModel.getMoodleUrl())
                 .updatedAt(organizationRequestAvroModel.getUpdatedAt())
+                .isDeleted(organizationRequestAvroModel.getIsDeleted())
                 .build();
     }
 

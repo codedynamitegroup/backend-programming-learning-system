@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.saga.organization;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.method.message.OrganizationResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.message.organization.OrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.organization.OrganizationOutboxMessage;
 import com.backend.programming.learning.system.auth.service.domain.outbox.scheduler.organization.OrganizationOutboxHelper;
 import com.backend.programming.learning.system.domain.DomainConstants;
