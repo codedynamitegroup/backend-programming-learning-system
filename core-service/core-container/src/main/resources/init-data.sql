@@ -163,31 +163,6 @@ VALUES
     ('d215b5f8-0249-4dc5-89a3-51fd148cff62', 'b6484e21-6937-489c-b031-b71767994735', 'huhu', 'multi 2', 1),
     ('d215b5f8-0249-4dc5-89a3-51fd148cff20', 'b6484e21-6937-489c-b031-b71767994735', 'haha', 'multi 3', 1);
 
--- INSERT INTO public.qtype_code_question(id, question_id, dsl_template, name, max_grade)
--- values
---     ('3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 'b6484e21-6937-489c-b031-b71767994221', '', 'Tổng 2 số', '10');
-
--- INSERT INTO public.qtype_code_question(id, question_id, dsl_template)
--- VALUES
---     ('27549d54-4a3a-4be4-9875-eab03f88ba6d', 'b6484e21-6937-489c-b031-b71767994736', 'print(Hello World)'),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba7d', 'b6484e21-6937-489c-b031-b71767994737', 'print(Hello World)'),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba8d', 'b6484e21-6937-489c-b031-b71767994738', 'print(Hello World)'),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba9d', 'b6484e21-6937-489c-b031-b71767994739', 'print(Hello World)'),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba0d', 'b6484e21-6937-489c-b031-b71767994740', 'print(Hello World)'),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba1a', 'b6484e21-6937-489c-b031-b71767994741', 'print(Hello World)'),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba2a', 'b6484e21-6937-489c-b031-b71767994742', 'print(Hello World)'),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba3a', 'b6484e21-6937-489c-b031-b71767994743', 'print(Hello World)'),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba4a', 'b6484e21-6937-489c-b031-b71767994744', 'print(Hello World)'),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba5a', 'b6484e21-6937-489c-b031-b71767994745', 'print(Hello World)'),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba6a', 'b6484e21-6937-489c-b031-b71767994746', 'print(Hello World)'),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba7a', 'b6484e21-6937-489c-b031-b71767994747', 'print(Hello World)'),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba8a', 'b6484e21-6937-489c-b031-b71767994748', 'print(Hello World)'),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba9a', 'b6484e21-6937-489c-b031-b71767994749', 'print(Hello World)'),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba5b', 'b6484e21-6937-489c-b031-b71767994750', 'print(Hello World)'),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba6b', 'b6484e21-6937-489c-b031-b71767994751', 'print(Hello World)'),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba7b', 'b6484e21-6937-489c-b031-b71767994752', 'print(Hello World)'),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba8b', 'b6484e21-6937-489c-b031-b71767994753', 'print(Hello World)');
-
 INSERT INTO public.qtype_code_question(id, question_id, dsl_template)
 VALUES
     ('3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 'b6484e21-6937-489c-b031-b71767994221', 'template'),
@@ -288,22 +263,6 @@ VALUES
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb40', 'd215b5f8-0249-4dc5-89a3-51fd148cfb23', 2, 'Linked Lists', 'This chapter covers linked lists and their implementation, operations, and applications.', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb41', 'd215b5f8-0249-4dc5-89a3-51fd148cfb23', 3, 'Binary Trees', 'This chapter covers binary trees and their implementation, operations, and applications.', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7');
 
--- INSERT INTO public.chapter_question(id, chapter_id, question_id)
--- VALUES
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b6484e21-6937-489c-b031-b71767994736'),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b6484e21-6937-489c-b031-b71767994737'),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b6484e21-6937-489c-b031-b71767994738'),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 'b6484e21-6937-489c-b031-b71767994739'),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 'b6484e21-6937-489c-b031-b71767994740'),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 'b6484e21-6937-489c-b031-b71767994741'),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 'b6484e21-6937-489c-b031-b71767994742'),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 'b6484e21-6937-489c-b031-b71767994743'),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 'b6484e21-6937-489c-b031-b71767994744'),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb24', 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 'b6484e21-6937-489c-b031-b71767994745'),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb25', 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 'b6484e21-6937-489c-b031-b71767994746'),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb26', 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 'b6484e21-6937-489c-b031-b71767994747'),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb27', 'd215b5f8-0249-4dc5-89a3-51fd148cfb19', 'b6484e21-6937-489c-b031-b71767994748'),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb28', 'd215b5f8-0249-4dc5-89a3-51fd148cfb19', 'b6484e21-6937-489c-b031-b71767994749');
 
 -- resource_type: 'CODE', 'LESSON', 'VIDEO'
 -- Generate me 5 resources for each chapter with mixed resource types
@@ -338,77 +297,19 @@ VALUES
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb41', 3, 'd215b5f8-0249-4dc5-89a3-51fd148cfb19', 'VIDEO', 'Video on Python programming', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy');
 
 
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'CODE', 'b6484e21-6937-489c-b031-b71767994736', NULL, NULL),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'LESSON', NULL, 'This is a lesson on Python programming.', NULL),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'VIDEO', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy'),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'CODE', 'b6484e21-6937-489c-b031-b71767994737', NULL, NULL),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'LESSON', NULL, 'This is a lesson on Python programming.', NULL),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15', 'VIDEO', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy'),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 'CODE', 'b6484e21-6937-489c-b031-b71767994738', NULL, NULL),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 'LESSON', NULL, 'This is a lesson on Python programming.', NULL),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 'VIDEO', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy'),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb24', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 'CODE', 'b6484e21-6937-489c-b031-b71767994739', NULL, NULL),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb25', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 'LESSON', NULL, 'This is a lesson on Python programming.', NULL),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb26', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16', 'VIDEO', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy'),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb27', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 'CODE', 'b6484e21-6937-489c-b031-b71767994740', NULL, NULL),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb28', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 'LESSON', NULL, 'This is a lesson on Python programming.', NULL),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb29', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 'VIDEO', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy'),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb30', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 'CODE', 'b6484e21-6937-489c-b031-b71767994741', NULL, NULL),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb31', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 'LESSON', NULL, 'This is a lesson on Python programming.', NULL),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb32', 'd215b5f8-0249-4dc5-89a3-51fd148cfb17', 'VIDEO', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy'),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb33', 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 'CODE', 'b6484e21-6937-489c-b031-b71767994742', NULL, NULL),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb34', 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 'LESSON', NULL, 'This is a lesson on Python programming.', NULL),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb35', 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 'VIDEO', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy'),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb36', 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 'CODE', 'b6484e21-6937-489c-b031-b71767994743', NULL, NULL),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb37', 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 'LESSON', NULL, 'This is a lesson on Python programming.', NULL),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb38', 'd215b5f8-0249-4dc5-89a3-51fd148cfb18', 'VIDEO', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy'),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb39', 'd215b5f8-0249-4dc5-89a3-51fd148cfb19', 'CODE', 'b6484e21-6937-489c-b031-b71767994744', NULL, NULL),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb40', 'd215b5f8-0249-4dc5-89a3-51fd148cfb19', 'LESSON', NULL, 'This is a lesson on Python programming.', NULL),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb41', 'd215b5f8-0249-4dc5-89a3-51fd148cfb19', 'VIDEO', NULL, NULL, 'https://youtu.be/rfscVS0vtbw?si=nAn_wxmKoIdCMwGy');
-
-
-
--- insert into code_submission (id, code_question_id, user_id, programming_language_id, source_code, grade, created_at, pass) values ('a2e5afa6-f0c8-422e-8895-a706d1a1d6c1', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'c95d5c7d-cadf-42cc-afdc-968211ae3720', 'Y2xhc3MgUmVzdWx0IHsKICAgIHB1YmxpYyBzdGF0aWMgaW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKSB7CiAgICAgICAgcmV0dXJuIGEgKyBiOwogICAgfQp9', 10, CURRENT_TIMESTAMP, true);
--- insert into code_submission (id, code_question_id, user_id, programming_language_id, source_code, grade, created_at, pass) values ('4a177c20-9487-48f6-b057-6d981e66b6cf', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'c95d5c7d-cadf-42cc-afdc-968211ae3720', 'Y2xhc3MgUmVzdWx0IHsKICAgIHB1YmxpYyBzdGF0aWMgaW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKSB7CiAgICAgICAgcmV0dXJuIGEgKyBiOwogICAgfQp9', 10, CURRENT_TIMESTAMP, true);
--- insert into code_submission (id, code_question_id, user_id, programming_language_id, source_code, grade, created_at, pass) values ('df32ebfe-ec52-42c6-9447-cdc5280d5701', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'cba00cd8-8114-4bc4-84e6-499c27467978', 'aW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKXsKICAgIHJldHVybiBhICsgYjsKfQ==', 10, CURRENT_TIMESTAMP, true);
--- insert into code_submission (id, code_question_id, user_id, programming_language_id, source_code, grade, created_at, pass) values ('0b4bccfc-411f-499d-b470-9574152269aa', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', 'b029f559-52a8-4699-b595-71161498ed8c', 'c95d5c7d-cadf-42cc-afdc-968211ae3720', 'Y2xhc3MgUmVzdWx0IHsKICAgIHB1YmxpYyBzdGF0aWMgaW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKSB7CiAgICAgICAgcmV0dXJuIGEgKyBiOwogICAgfQp9', 0, CURRENT_TIMESTAMP, false);
--- insert into code_submission (id, code_question_id, user_id, programming_language_id, source_code, grade, created_at, pass) values ('186c1fea-9706-4399-991a-8c9ff7d97b9a', '3c5b1113-d267-4d21-bc6e-8cbd4cb57b69', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', 'c95d5c7d-cadf-42cc-afdc-968211ae3720', 'Y2xhc3MgUmVzdWx0IHsKICAgIHB1YmxpYyBzdGF0aWMgaW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKSB7CiAgICAgICAgcmV0dXJuIGEgKyBiOwogICAgfQp9', 10, CURRENT_TIMESTAMP, true);
-
--- INSERT INTO public.code_submission(id, user_id, code_question_id, programming_language_id, source_code, grade, pass)
--- VALUES
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba5a', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 1, true),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba5b', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 2, true),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba5c', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba5d', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 1, true),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba5e', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba5f', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba7a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba6a', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba8a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 1, false),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba6b', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba9a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba6c', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
---     ('27549d54-4a3a-4be4-9875-eab03f88ba6d', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba6a', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false);
-
--- INSERT INTO public.code_submission_certificate_course(code_submission_id, certificate_course_id)
--- VALUES
---     ('a2e5afa6-f0c8-422e-8895-a706d1a1d6c1', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
---     ('4a177c20-9487-48f6-b057-6d981e66b6cf', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
---     ('df32ebfe-ec52-42c6-9447-cdc5280d5701', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
---     ('0b4bccfc-411f-499d-b470-9574152269aa', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16'),
---     ('186c1fea-9706-4399-991a-8c9ff7d97b9a', 'd215b5f8-0249-4dc5-89a3-51fd148cfb16');
-
 INSERT INTO public.contest(id, name, description, prizes, rules, scoring, thumbnail_url, start_time, end_time, created_by, updated_by, is_public)
 VALUES
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'Python Contest',
-     '<h3 style="text-align:start"><span style="font-size:24px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">Welcome to the Python Contest Batch the code #387</span></span></span></span></h3>',
-     '<ol><li>1st Place: $1000</li><li>2nd Place: $500</li><li>3rd Place: $250</li></ol>',
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'Celebrate PRIDE 2021 Coding Contest',
+     '<p>Welcome to CodeDynamite''s Celebrate PRIDE 2021 Coding Challenge, a coding contest where your winnings help support a cause in need. Compete against top coders from around the world to give $500 to a U.S. charity that increases opportunities for members of the LGBTQIA+&nbsp;individuals.</p>',
+     '<p>1st place: Airpods Pro</p><br/><p>2nd place: Beats Solo3</p><br/><p>3rd place: Razer BlackWidow Gaming Keyboard</p><br/><br/><p>CodeDynamite will also donate $500 in the top competitor''s&nbsp;name to an organization of your choice from a curated list of U.S.-based charities.</p>',
      '<ol><li>Participants must submit their solutions before the end time.</li><li>Participants must follow the contest rules and guidelines.</li><li>Participants must not cheat or plagiarize.</li></ol>',
      '- Each challenge has a pre-determined score.<br/>
           - A participant’s score depends on the number of test cases a participant’s code submission successfully passes.<br/>
           - If a participant submits more than one solution per challenge, then the participant’s score will reflect the highest score achieved.<br/>
           - Participants are ranked by score. If two or more participants achieve the same score, then the tie is broken by the total time taken to submit the last solution resulting in a higher score',
      'https://leetcode.com/_next/static/images/weekly-default-553ede7bcc8e1b4a44c28a9e4a32068c.png', '2024-05-20 18:09:29.488151+07', '2024-09-10 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', true),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 'Java Contest',
-     '<h3 style="text-align:start"><span style="font-size:24px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">Welcome to the Java Contest Batch the code #387</span></span></span></span></h3>',
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', 'DTCC Code-A-Thon',
+     '<p>Welcome to the&nbsp;DTCC Code-A-Thon. Compete against developers from around the world&nbsp;to solve a series of coding questions, win prizes, and be considered for a job&nbsp;at DTCC.</p><br/><br/><p>With over 45 years of experience, DTCC is the premier post-trade market infrastructure for the global financial services industry. From 21 locations around the world, DTCC, through its subsidiaries, automates, centralizes and standardizes the processing of financial transactions, mitigating risk, increasing transparency and driving efficiency for thousands of broker/dealers, custodian banks and asset managers. Industry owned and governed, the firm simplifies the complexities of clearing, settlement, asset servicing, data management, data reporting and information services across asset classes, bringing increased security and soundness to financial markets.</p>',
      '- Prizes are optional. You may add any prizes that you would like to offer here.',
      '<ol><li>Participants must submit their solutions before the end time.</li><li>Participants must follow the contest rules and guidelines.</li><li>Participants must not cheat or plagiarize.</li></ol>',
      '- Each challenge has a pre-determined score.<br/>
@@ -416,27 +317,27 @@ VALUES
           - If a participant submits more than one solution per challenge, then the participant’s score will reflect the highest score achieved.<br/>
           - Participants are ranked by score. If two or more participants achieve the same score, then the tie is broken by the total time taken to submit the last solution resulting in a higher score',
      'https://leetcode.com/_next/static/images/biweekly-default-f5a8fc3be85b6c9175207fd8fd855d47.png', '2024-09-15 18:09:29.488151+07', '2024-10-15 18:09:29.488151+07', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', true),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'Data Structures Contest',
-     '<h3 style="text-align:start"><span style="font-size:24px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">Welcome to the Data Structures Contest Batch the code #387</span></span></span></span></h3>','<ol><li>1st Place: $1000</li><li>2nd Place: $500</li><li>3rd Place: $250</li></ol>',
-     '<ol><li>Participants must submit their solutions before the end time.</li><li>Participants must follow the contest rules and guidelines.</li><li>Participants must not cheat or plagiarize.</li></ol>',
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'National Disability Independence Day 2024 Coding Contest',
+     '<p>Welcome to HackerRank''s Celebrate National Disability Independence Day&nbsp;2021 Coding Challenge, a coding contest where your winnings help support a cause in need. Compete against top coders from around the world to give $500 to a U.S. charity that increases opportunities for people with disabilities.</p>',
+     '<ol><li>1st Place: $1000</li><li>2nd Place: $500</li><li>3rd Place: $250</li></ol>',
+     '<p>1st place: Airpods Pro</p><br/><p>2nd place: Beats Solo3</p><br/><p>3rd place: Razer BlackWidow Gaming Keyboard</p><br/><br/><p>CodeDynamite will also donate $500 in the top competitor''''s&nbsp;name to an organization of your choice from a curated list of U.S.-based charities.</p>',
      '- Each challenge has a pre-determined score.<br/>
           - A participant’s score depends on the number of test cases a participant’s code submission successfully passes.<br/>
           - If a participant submits more than one solution per challenge, then the participant’s score will reflect the highest score achieved.<br/>
           - Participants are ranked by score. If two or more participants achieve the same score, then the tie is broken by the total time taken to submit the last solution resulting in a higher score',
      'https://assets.leetcode.com/contest/weekly-contest-291/card_img_1654267951.png', '2024-01-15 18:09:29.488151+07', null, '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', true),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', 'Algorithms Contest',
-        '<h3 style="text-align:start"><span style="font-size:24px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">Welcome to the Algorithms Contest Batch the code #387</span></span></span></span></h3>','<ol><li>1st Place: $1000</li><li>2nd Place: $500</li><li>3rd Place: $250</li></ol>',
-
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', 'Celebrate Juneteenth 2021 Coding Contest',
+    '<p>Welcome to HackerRank''s Celebrate Juneteenth 2021 Coding Challenge, a coding contest where your winnings help support a cause in need. Compete against top coders from around the world to give $500 to a U.S. charity that increases opportunities for African-Americans/Black individuals.</p>',
+     '<ol><li>1st Place: $1000</li><li>2nd Place: $500</li><li>3rd Place: $250</li></ol>',
      '<ol><li>Participants must submit their solutions before the end time.</li><li>Participants must follow the contest rules and guidelines.</li><li>Participants must not cheat or plagiarize.</li></ol>',
      '- Each challenge has a pre-determined score.<br/>
           - A participant’s score depends on the number of test cases a participant’s code submission successfully passes.<br/>
           - If a participant submits more than one solution per challenge, then the participant’s score will reflect the highest score achieved.<br/>
           - Participants are ranked by score. If two or more participants achieve the same score, then the tie is broken by the total time taken to submit the last solution resulting in a higher score',
      'https://assets.leetcode.com/contest/weekly-contest-291/card_img_1654267951.png', '2024-01-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', false),
-    ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', 'Python Contest',
-        '<h3 style="text-align:start"><span style="font-size:24px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">Welcome to the Python Contest Batch the code #387</span></span></span></span></h3>',
-        '<ol><li>1st Place: $1000</li><li>2nd Place: $500</li><li>3rd Place: $250</li></ol>',
-
+    ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', 'Asian Pacific American Heritage Month 2021 Coding Contest',
+    '<p>Welcome to HackerRank''s Celebrate Asian Pacific Heritage Month 2021 Coding Challenge, a coding contest where your winnings help support a cause in need. Compete against top coders from around the world to give $500 to a U.S. charity that increases opportunities for Asian and Pacific Islander&nbsp;American&nbsp;individuals.</p>',
+    '<ol><li>1st Place: $1000</li><li>2nd Place: $500</li><li>3rd Place: $250</li></ol>',
      '<ol><li>Participants must submit their solutions before the end time.</li><li>Participants must follow the contest rules and guidelines.</li><li>Participants must not cheat or plagiarize.</li></ol>',
         '- Each challenge has a pre-determined score.<br/>
             - A participant’s score depends on the number of test cases a participant’s code submission successfully passes.<br/>
@@ -446,7 +347,6 @@ VALUES
         ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', 'Java Contest',
         '<h3 style="text-align:start"><span style="font-size:24px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">Welcome to the Java Contest Batch the code #387</span></span></span></span></h3>',
         '- Prizes are optional. You may add any prizes that you would like to offer here.',
-
          '<ol><li>Participants must submit their solutions before the end time.</li><li>Participants must follow the contest rules and guidelines.</li><li>Participants must not cheat or plagiarize.</li></ol>',
         '- Each challenge has a pre-determined score.<br/>
             - A participant’s score depends on the number of test cases a participant’s code submission successfully passes.<br/>
@@ -455,7 +355,6 @@ VALUES
         'https://leetcode.com/_next/static/images/biweekly-default-f5a8fc3be85b6c9175207fd8fd855d47.png', '2024-09-15 18:09:29.488151+07', '2024-10-15 18:09:29.488151+07', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', true),
         ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', 'Data Structures Contest',
         '<h3 style="text-align:start"><span style="font-size:24px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">Welcome to the Data Structures Contest Batch the code #387</span></span></span></span></h3>','<ol><li>1st Place: $1000</li><li>2nd Place: $500</li><li>3rd Place: $250</li></ol>',
-
          '<ol><li>Participants must submit their solutions before the end time.</li><li>Participants must follow the contest rules and guidelines.</li><li>Participants must not cheat or plagiarize.</li></ol>',
         '- Each challenge has a pre-determined score.<br/>
             - A participant’s score depends on the number of test cases a participant’s code submission successfully passes.<br/>
@@ -483,7 +382,6 @@ VALUES
         ('d215b5f8-0249-4dc5-89a3-51fd148cfb24', 'Java Contest',
         '<h3 style="text-align:start"><span style="font-size:24px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">Welcome to the Java Contest Batch the code #387</span></span></span></span></h3>',
         '- Prizes are optional. You may add any prizes that you would like to offer here.',
-
          '<ol><li>Participants must submit their solutions before the end time.</li><li>Participants must follow the contest rules and guidelines.</li><li>Participants must not cheat or plagiarize.</li></ol>',
         '- Each challenge has a pre-determined score.<br/>
             - A participant’s score depends on the number of test cases a participant’s code submission successfully passes.<br/>
@@ -492,7 +390,6 @@ VALUES
         'https://leetcode.com/_next/static/images/biweekly-default-f5a8fc3be85b6c9175207fd8fd855d47.png', '2024-09-15 18:09:29.488151+07', '2024-10-15 18:09:29.488151+07', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', false),
         ('d215b5f8-0249-4dc5-89a3-51fd148cfb25', 'Data Structures Contest',
         '<h3 style="text-align:start"><span style="font-size:24px"><span style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Hiragino Sans GB&quot;,&quot;Microsoft YaHei&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,&quot;Segoe UI Symbol&quot;"><span style="color:rgba(0, 0, 0, 0.85)"><span style="background-color:#fafafa">Welcome to the Data Structures Contest Batch the code #387</span></span></span></span></h3>','<ol><li>1st Place: $1000</li><li>2nd Place: $500</li><li>3rd Place: $250</li></ol>',
-
          '<ol><li>Participants must submit their solutions before the end time.</li><li>Participants must follow the contest rules and guidelines.</li><li>Participants must not cheat or plagiarize.</li></ol>',
         '- Each challenge has a pre-determined score.<br/>
             - A participant’s score depends on the number of test cases a participant’s code submission successfully passes.<br/>
@@ -542,24 +439,6 @@ VALUES
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b6484e21-6937-489c-b031-b71767994752'),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb15', 'b6484e21-6937-489c-b031-b71767994753');
 
--- INSERT INTO public.code_submission(id, user_id, code_question_id, programming_language_id, source_code, grade, pass)
--- VALUES
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb16', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'b029f559-52a8-4699-b595-71161498ed8c', '27549d54-4a3a-4be4-9875-eab03f88ba6b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '27549d54-4a3a-4be4-9875-eab03f88ba7b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 2, true),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb20', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba5b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 3, true),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb21', 'b029f559-52a8-4699-b595-71161498ed8c', '27549d54-4a3a-4be4-9875-eab03f88ba6b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 3, true),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb22', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '27549d54-4a3a-4be4-9875-eab03f88ba7b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 0, false),
---     ('d215b5f8-0249-4dc5-89a3-51fd148cfb23', '9ba179ed-d26d-4828-a0f6-8836c2063992', '27549d54-4a3a-4be4-9875-eab03f88ba8b', 'd27a8b36-83fd-450d-a7c3-bf3eef7b1468', 'print("Hello, World!")', 4, true);
-
--- INSERT INTO public.code_submission_contest(code_submission_id, contest_id)
--- VALUES
---     ('a2e5afa6-f0c8-422e-8895-a706d1a1d6c1', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
---     ('4a177c20-9487-48f6-b057-6d981e66b6cf', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
---     ('df32ebfe-ec52-42c6-9447-cdc5280d5701', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
---     ('0b4bccfc-411f-499d-b470-9574152269aa', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15'),
---     ('186c1fea-9706-4399-991a-8c9ff7d97b9a', 'd215b5f8-0249-4dc5-89a3-51fd148cfb15');
 
 
 
