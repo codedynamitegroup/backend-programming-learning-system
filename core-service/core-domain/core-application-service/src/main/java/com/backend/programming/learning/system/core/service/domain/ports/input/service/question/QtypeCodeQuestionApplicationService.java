@@ -19,4 +19,6 @@ public interface QtypeCodeQuestionApplicationService {
     UpdateQuestionResponse updateQtypeCodeQuestion(@Valid UpdateQtypeCodeQuestionCommand updateQtypeCodeQuestionCommand);
     QueryAllAdminQtypeCodeQuestionsResponse queryAllQtypeCodeQuestionsForAdmin
             (@Valid QueryAllAdminCodeQuestionCommand queryAllAdminCodeQuestionCommand);
+    QueryAllAdminQtypeCodeQuestionsResponse queryAllQtypeCodeQuestionsForOrgAdmin
+            (@Valid QueryAllAdminCodeQuestionCommand queryAllAdminCodeQuestionCommand);
 }
