@@ -6,6 +6,7 @@ import java.util.UUID;
 
 public interface ContestProjection {
     UUID getId();
+    UUID getOrgId();
     String getName();
     String getDescription();
     String getPrizes();

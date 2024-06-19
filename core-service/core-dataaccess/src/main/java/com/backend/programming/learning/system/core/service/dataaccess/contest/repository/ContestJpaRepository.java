@@ -18,6 +18,7 @@ import java.util.UUID;
 public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID> {
     @Query(value = """
     select c.id as id,
+           c.org_id as orgId,
                 c.name as name,
                 c.description as description,
                 c.prizes as prizes,
@@ -43,6 +44,7 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
 
     @Query(value = """
     select c.id as id,
+           c.org_id as orgId,
                 c.name as name,
                 c.description as description,
                 c.prizes as prizes,
@@ -63,7 +65,7 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
    left join contest_user cu on cu.contest_id = c.id
     where c.start_time >= ?1
     and (cast(?2 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?2 as text), '%')))
-    and ((?3 = TRUE and c.org_id is null) or (?3 = FALSE and c.is_public = true) or (?5 = TRUE and ?4 is not null and c.org_id = ?4))
+    and ((?3 = TRUE and c.org_id is null) or (?3 = FALSE and ?5 = FALSE and c.is_public = true) or (?5 = TRUE and ?4 is not null and c.org_id = ?4))
     group by c.id
     order by c.start_time desc
 """, nativeQuery = true)
@@ -77,6 +79,7 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
 
     @Query(value = """
             select c.id as id,
+                c.org_id as orgId,
                 c.name as name,
                 c.description as description,
                 c.prizes as prizes,
@@ -97,7 +100,7 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
             left join contest_user cu on cu.contest_id = c.id
             where c.start_time <= ?1 and (c.end_time is null or (c.end_time is not null and c.end_time >= ?1))
             and (cast(?2 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?2 as text), '%')))
-            and ((?3 = TRUE and c.org_id is null) or (?3 = FALSE and c.is_public = true) or (?5 = TRUE and ?4 is not null and c.org_id = ?4))
+            and ((?3 = TRUE and c.org_id is null) or (?3 = FALSE and ?5 = FALSE and c.is_public = true) or (?5 = TRUE and ?4 is not null and c.org_id = ?4))
             group by c.id
             order by c.start_time desc
             """, nativeQuery = true)
@@ -111,6 +114,7 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
 
     @Query(value = """
             select c.id as id,
+           c.org_id as orgId,
                 c.name as name,
                 c.description as description,
                 c.prizes as prizes,
@@ -131,7 +135,7 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
             left join contest_user cu on cu.contest_id = c.id
             where c.end_time is not null and c.end_time < ?1
             and (cast(?2 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?2 as text), '%')))
-            and ((?3 = TRUE and c.org_id is null) or (?3 = FALSE and c.is_public = true) or (?5 = TRUE and ?4 is not null and c.org_id = ?4))
+            and ((?3 = TRUE and c.org_id is null) or (?3 = FALSE and ?5 = FALSE and c.is_public = true) or (?5 = TRUE and ?4 is not null and c.org_id = ?4))
             group by c.id
             order by c.start_time desc
             """, nativeQuery = true)
@@ -145,6 +149,7 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
 
     @Query(value = """
     select c.id as id,
+           c.org_id as orgId,
                 c.name as name,
                 c.description as description,
                 c.prizes as prizes,
@@ -164,7 +169,7 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
     from contest c
     left join contest_user cu on cu.contest_id = c.id
     where (cast(?1 as text) IS NULL or UPPER(c.name) like UPPER(concat('%', cast(?1 as text), '%')))
-      and ((?2 = TRUE and c.org_id is null) or (?2 = FALSE and c.is_public = true) or (?4 = TRUE and ?3 is not null and c.org_id = ?3))
+      and ((?2 = TRUE and c.org_id is null) or (?2 = FALSE and ?4 = FALSE and c.is_public = true) or (?4 = TRUE and ?3 is not null and c.org_id = ?3))
     group by c.id
     order by c.start_time desc
 """, nativeQuery = true)
@@ -177,6 +182,7 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
 
     @Query(value = """
         select c.id as id,
+           c.org_id as orgId,
                 c.name as name,
                 c.description as description,
                 c.prizes as prizes,
@@ -204,6 +210,7 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
 
     @Query(value = """
     select c.id as id,
+                c.org_id as orgId,
                 c.name as name,
                 c.description as description,
                 c.prizes as prizes,

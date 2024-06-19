@@ -83,6 +83,32 @@ public class QtypeCodeQuestionQueryHelper {
         return qtypeCodeQuestions;
     }
 
+    @Transactional(readOnly = true)
+    public Page<QtypeCodeQuestion> queryAllQtypeCodeQuestionsForOrgAdmin(
+            UUID orgId,
+            String search,
+            QuestionDifficulty difficulty,
+            Boolean isPublic,
+            Integer pageNo,
+            Integer pageSize,
+            String email
+    ) {
+        User user = getUserByEmail(email);
+
+        Page<QtypeCodeQuestion> qtypeCodeQuestions =
+                qtypeCodeQuestionRepository.findAllOrgAdminQtypeCodeQuestions(
+                        orgId,
+                        search,
+                        difficulty,
+                        isPublic,
+                        user.getId().getValue(),
+                        pageNo,
+                        pageSize);
+        log.info("Query all Qtype Code Questions for Org Admin");
+
+        return qtypeCodeQuestions;
+    }
+
     public QueryQtypeCodeQuestionResponse queryQuestionById(UUID questionId) {
         Optional<QtypeCodeQuestion> qtypeCodeQuestion = qtypeCodeQuestionRepository.findQuestionId(questionId);
 

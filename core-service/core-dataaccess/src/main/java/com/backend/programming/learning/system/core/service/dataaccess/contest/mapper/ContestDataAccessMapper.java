@@ -35,6 +35,7 @@ public class ContestDataAccessMapper {
 
         return ContestEntity.builder()
                 .id(contest.getId().getValue())
+                .orgId(contest.getOrgId())
                 .name(contest.getName())
                 .description(contest.getDescription())
                 .prizes(contest.getPrizes())
@@ -58,6 +59,7 @@ public class ContestDataAccessMapper {
         User updatedBy = userDataAccessMapper.userEntityToUserHideSensitiveData(contestEntity.getUpdatedBy());
         return Contest.builder()
                 .id(new ContestId(contestEntity.getId()))
+                .orgId(contestEntity.getOrgId())
                 .name(contestEntity.getName())
                 .description(contestEntity.getDescription())
                 .prizes(contestEntity.getPrizes())
@@ -92,6 +94,7 @@ public class ContestDataAccessMapper {
 
         return Contest.builder()
                 .id(new ContestId(contestProjection.getId()))
+                .orgId(contestProjection.getOrgId())
                 .name(contestProjection.getName())
                 .description(contestProjection.getDescription())
                 .prizes(contestProjection.getPrizes())

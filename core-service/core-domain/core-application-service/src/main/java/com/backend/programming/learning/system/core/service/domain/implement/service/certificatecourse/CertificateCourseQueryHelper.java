@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.implement.service.certificatecourse;
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.QueryAllCertificateCourseWithPageResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryGeneralCertificateCourseStatisticsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.MostEnrolledWithStudentResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapterResource.ChapterResourceCount;
@@ -11,6 +12,7 @@ import com.backend.programming.learning.system.core.service.domain.exception.Cer
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.certificatecourse.CertificateCourseDataMapper;
+import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse.CertificateCourseRedisService;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.IsRegisteredFilter;
@@ -37,6 +39,7 @@ public class CertificateCourseQueryHelper {
     private final TopicRepository topicRepository;
     private final QtypeCodeQuestionRepository qtypeCodeQuestionRepository;
     private final CertificateCourseDataMapper certificateCourseDataMapper;
+    private final CertificateCourseRedisService certificateCourseRedisService;
 
     public CertificateCourseQueryHelper(CertificateCourseRepository certificateCourseRepository,
                                         UserRepository userRepository,
@@ -44,7 +47,8 @@ public class CertificateCourseQueryHelper {
                                         ChapterResourceRepository chapterResourceRepository,
                                         TopicRepository topicRepository,
                                         QtypeCodeQuestionRepository qtypeCodeQuestionRepository,
-                                        CertificateCourseDataMapper certificateCourseDataMapper) {
+                                        CertificateCourseDataMapper certificateCourseDataMapper,
+                                        CertificateCourseRedisService certificateCourseRedisService) {
         this.certificateCourseRepository = certificateCourseRepository;
         this.userRepository = userRepository;
         this.certificateCourseUserRepository = certificateCourseUserRepository;
@@ -52,6 +56,7 @@ public class CertificateCourseQueryHelper {
         this.topicRepository = topicRepository;
         this.qtypeCodeQuestionRepository = qtypeCodeQuestionRepository;
         this.certificateCourseDataMapper = certificateCourseDataMapper;
+        this.certificateCourseRedisService = certificateCourseRedisService;
     }
 
     @Transactional(readOnly = true)
@@ -76,6 +81,7 @@ public class CertificateCourseQueryHelper {
                                 certificateCourse.getId().getValue(),
                                 userOptional.get().getId().getValue()
                         );
+
                 if (currentChapterResource.isPresent()
                         && currentChapterResource.get().getResourceType().equals(ResourceType.CODE)
                         && currentChapterResource.get().getQuestion() != null) {
@@ -120,10 +126,39 @@ public class CertificateCourseQueryHelper {
     ) {
         switch (isRegisteredFilter) {
             case ALL: {
-                List<CertificateCourse> certificateCourseList = certificateCourseRepository.findAllCertificateCourses(
-                        courseName,
-                        filterTopicId
-                );
+                List<CertificateCourse> certificateCourseList = new ArrayList<>();
+                if (courseName == null || courseName.isEmpty() || courseName.isBlank()) {
+                    QueryAllCertificateCoursesResponse redisResponse = certificateCourseRedisService.getAllCertificateCourses(
+                            courseName,
+                            filterTopicId
+                    );
+                    if (redisResponse != null) {
+                        certificateCourseList = certificateCourseDataMapper
+                                .queryAllCertificateCoursesResponseToCertificateCourses(redisResponse);
+                    } else {
+                        log.info("Querying all certificate courses from database");
+                        certificateCourseList = certificateCourseRepository.findAllCertificateCourses(
+                                courseName,
+                                filterTopicId
+                        );
+                        // save to redis
+                        log.info("Saving all certificate courses to redis");
+                        QueryAllCertificateCoursesResponse queryAllCertificateCoursesCommand = certificateCourseDataMapper
+                                .certificateCoursesToQueryAllCertificateCoursesResponse(certificateCourseList);
+                        certificateCourseRedisService.saveAllCertificateCourses(
+                                queryAllCertificateCoursesCommand,
+                                courseName,
+                                filterTopicId
+                        );
+                    }
+                } else {
+                    log.info("Querying all certificate courses from database");
+                    certificateCourseList = certificateCourseRepository.findAllCertificateCourses(
+                            courseName,
+                            filterTopicId
+                    );
+                }
+
                 Optional<User> userOptional = email != null ? userRepository.findByEmail(email): Optional.empty();
 
                 for (CertificateCourse certificateCourse : certificateCourseList) {
@@ -220,21 +255,21 @@ public class CertificateCourseQueryHelper {
                 return certificateCourseList;
             }
             case NOT_REGISTERED: {
-                User user = getUserByEmail(email);
-                List<CertificateCourse> certificateCourseList =
-                        certificateCourseRepository.findAllCertificateCoursesByIsRegistered(
-                        courseName,
-                        filterTopicId,
-                        false,
-                        user.getId().getValue()
-                );
-                for (CertificateCourse certificateCourse : certificateCourseList) {
-                    certificateCourse.setRegistered(false);
-                    certificateCourse.setNumOfResources(countNumOfResources(certificateCourse.getId().getValue()));
-                    certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourse.getId().getValue()));
-                    certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourse.getId().getValue()));
-                }
-                return certificateCourseList;
+//                User user = getUserByEmail(email);
+//                List<CertificateCourse> certificateCourseList =
+//                        certificateCourseRepository.findAllCertificateCoursesByIsRegistered(
+//                        courseName,
+//                        filterTopicId,
+//                        false,
+//                        user.getId().getValue()
+//                );
+//                for (CertificateCourse certificateCourse : certificateCourseList) {
+//                    certificateCourse.setRegistered(false);
+//                    certificateCourse.setNumOfResources(countNumOfResources(certificateCourse.getId().getValue()));
+//                    certificateCourse.setNumOfStudents(countNumOfStudents(certificateCourse.getId().getValue()));
+//                    certificateCourse.setNumOfReviews(countNumOfReviews(certificateCourse.getId().getValue()));
+//                }
+                return new ArrayList<>();
             }
             default:
                 throw new CoreDomainException("Invalid isRegisteredFilter: " + isRegisteredFilter);

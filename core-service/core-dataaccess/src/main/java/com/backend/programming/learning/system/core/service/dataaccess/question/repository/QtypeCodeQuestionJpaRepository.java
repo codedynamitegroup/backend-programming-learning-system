@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.dataaccess.question.repository;
 
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QtypeCodeQuestionEntity;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeCodeQuestionRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -33,4 +34,23 @@ public interface QtypeCodeQuestionJpaRepository extends JpaRepository<QtypeCodeQ
                                                                  Boolean isPublic,
                                                                  UUID userId,
                                                                  Pageable pageable);
+
+    @Query(value="""
+        select cqe.*
+        from qtype_code_question cqe
+        join question qe
+        on cqe.question_id = qe.id
+        where qe.org_id = ?1
+                AND (cast(?2 as text) IS NULL or UPPER(qe.name) like UPPER(concat('%', cast(?2 as text), '%')))
+                AND (cast(?3 as text) is NULL OR cast(?3 as text) = cast(qe.difficulty as text))
+                AND (?4 is null or cqe.is_public = ?4)
+                AND (?5 = qe.created_by or cqe.is_public = true)
+         order by qe.created_at asc
+""", nativeQuery = true)
+    Page<QtypeCodeQuestionEntity> findAllOrgAdminQtypeCodeQuestions(UUID orgId,
+                                                                     String search,
+                                                                     String difficulty,
+                                                                     Boolean isPublic,
+                                                                     UUID userId,
+                                                                     Pageable pageable);
 }

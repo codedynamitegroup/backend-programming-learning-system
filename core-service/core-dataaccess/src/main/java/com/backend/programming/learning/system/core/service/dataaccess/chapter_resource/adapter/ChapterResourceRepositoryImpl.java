@@ -45,7 +45,7 @@ public class ChapterResourceRepositoryImpl implements ChapterResourceRepository 
     @Override
     public Optional<ChapterResource> findFirstUncompletedResourceByCertificateCourseIdAndUserId(UUID certificateCourseId, UUID userId) {
         Optional<ChapterResourceEntity> firstUncompletedResource = chapterResourceJpaRepository
-        .findFirstUncompletedResourceByCertificateCourseIdAndUserId(certificateCourseId, userId);
+            .findFirstUncompletedResourceByCertificateCourseIdAndUserId(certificateCourseId, userId);
         if (firstUncompletedResource.isPresent()) {
             return Optional.of(chapterResourceDataAccessMapper.chapterResourceEntityToChapterResource(firstUncompletedResource.get()));
         } else {

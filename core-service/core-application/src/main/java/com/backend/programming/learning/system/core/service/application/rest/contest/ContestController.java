@@ -12,6 +12,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.qu
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.contest.UpdateContestResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.contest.ContestResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest.ContestApplicationService;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest_user.ContestUserApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -275,6 +276,10 @@ public class ContestController {
         if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
             Jwt token = jwtAuthenticationToken.getToken();
             email = token.getClaim("preferred_username");
+        }
+
+        if (orgId == null) {
+            throw new CoreDomainException("Organization id is required.");
         }
 
         QueryAllContestsResponse queryAllContestsResponse =

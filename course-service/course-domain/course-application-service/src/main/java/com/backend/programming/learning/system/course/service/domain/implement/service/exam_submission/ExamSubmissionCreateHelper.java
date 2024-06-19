@@ -3,18 +3,21 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 import com.backend.programming.learning.system.course.service.domain.CourseDomainService;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
+import com.backend.programming.learning.system.course.service.domain.entity.AnswerOfQuestion;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
 import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
 import com.backend.programming.learning.system.course.service.domain.entity.Question;
 import com.backend.programming.learning.system.course.service.domain.entity.QuestionSubmission;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam_submission.ExamSubmissionDataMapper;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.AnswerOfQuestionRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamSubmissionRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.QuestionRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.QuestionSubmissionRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
+import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -22,6 +25,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * com.backend.programming.learning.system.implement.exam_submission
@@ -39,6 +43,7 @@ public class ExamSubmissionCreateHelper {
     private final QuestionRepository questionRepository;
     private final ExamRepository examRepository;
     private final UserRepository userRepository;
+    private final AnswerOfQuestionRepository answerOfQuestionRepository;
     private final ExamSubmissionDataMapper examSubmissionDataMapper;
 
     public ExamSubmission createExamSubmission(CreateExamSubmissionCommand createExamSubmissionCommand) {
@@ -66,12 +71,41 @@ public class ExamSubmissionCreateHelper {
                         throw new RuntimeException("Question not found with id: " + question.questionId());
                     }
 
+                    List<AnswerOfQuestion> answerOfQuestion = answerOfQuestionRepository.findAllByQuestionId(question.questionId());
+
+                    Float defaultMark = questionExam.get().getDefaultMark();
+                    AtomicReference<Float> grade = new AtomicReference<>(0F);
+                    String contentStudent = question.content();
+                    if (questionExam.get().getQtype().equals(QuestionType.SHORT_ANSWER)) {
+                        answerOfQuestion.forEach(answer -> {
+                            String answerText = answer.getAnswer().replaceAll("<p>|</p>", "");
+                            if (answerText.equals(contentStudent)) {
+                                grade.set(defaultMark * answer.getFraction());
+                            }
+                        });
+                    } else if (questionExam.get().getQtype().equals(QuestionType.MULTIPLE_CHOICE)) {
+                        answerOfQuestion.forEach(answer -> {
+                            String answerText = answer.getAnswer().replaceAll("<p>|</p>", "");
+                            if (answer.getId().getValue().toString().equals(contentStudent)) {
+                                grade.updateAndGet(v -> v + defaultMark * answer.getFraction());
+                            }
+                        });
+                    } else if (questionExam.get().getQtype().equals(QuestionType.TRUE_FALSE)) {
+                        answerOfQuestion.forEach(answer -> {
+                            String answerText = answer.getAnswer().replaceAll("<p>|</p>", "");
+                            if (answerText.equals(contentStudent)) {
+                                grade.set(defaultMark * answer.getFraction());
+                            }
+                        });
+                    }
+
                     QuestionSubmission questionSubmission = QuestionSubmission.builder()
                             .user(submission.getUser())
                             .examSubmission(submission)
                             .question(questionExam.get())
                             .content(question.content())
                             .numFile(question.numFile())
+                            .grade(grade.get())
                             .build();
                     questionSubmission.initializeQuestionSubmission();
                     return questionSubmission;

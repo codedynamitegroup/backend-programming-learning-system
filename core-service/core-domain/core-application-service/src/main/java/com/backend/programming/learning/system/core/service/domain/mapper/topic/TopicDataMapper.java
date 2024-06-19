@@ -66,9 +66,11 @@ public class TopicDataMapper {
         UserResponseEntity createdByResponse = userDataMapper.userToUserResponseEntity(topic.getCreatedBy());
         UserResponseEntity updatedByResponse = userDataMapper.userToUserResponseEntity(topic.getUpdatedBy());
         List<ProgrammingLanguageResponseEntity> programmingLanguages = new ArrayList<>();
-        for (ProgrammingLanguage programmingLanguage : topic.getProgrammingLanguages()) {
-            programmingLanguages.add(programmingLanguageDataMapper
-                    .programmingLanguageToQueryProgrammingLanguageResponse(programmingLanguage));
+        if (topic.getProgrammingLanguages() != null) {
+            for (ProgrammingLanguage programmingLanguage : topic.getProgrammingLanguages()) {
+                programmingLanguages.add(programmingLanguageDataMapper
+                        .programmingLanguageToQueryProgrammingLanguageResponse(programmingLanguage));
+            }
         }
 
         return TopicResponseEntity.builder()
@@ -101,6 +103,21 @@ public class TopicDataMapper {
         return UpdateTopicResponse.builder()
                 .topicId(topicId.getValue())
                 .message("Topic updated successfully")
+                .build();
+    }
+
+    public Topic queryTopicResponseToTopic(TopicResponseEntity topicResponseEntity) {
+        return Topic.builder()
+                .id(new TopicId(topicResponseEntity.getTopicId()))
+                .name(topicResponseEntity.getName())
+                .description(topicResponseEntity.getDescription())
+                .thumbnailUrl(topicResponseEntity.getThumbnailUrl())
+                .isSingleProgrammingLanguage(topicResponseEntity.getIsSingleProgrammingLanguage())
+                .numOfCertificateCourses(topicResponseEntity.getNumOfCertificateCourses())
+                .createdBy(userDataMapper.userResponseEntityToUser(topicResponseEntity.getCreatedBy()))
+                .updatedBy(userDataMapper.userResponseEntityToUser(topicResponseEntity.getUpdatedBy()))
+                .createdAt(topicResponseEntity.getCreatedAt())
+                .updatedAt(topicResponseEntity.getUpdatedAt())
                 .build();
     }
 
