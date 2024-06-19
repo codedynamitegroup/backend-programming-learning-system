@@ -21,6 +21,7 @@ public class Organization extends AggregateRoot<OrganizationId> {
     private User createdBy;
     private User updatedBy;
     private Boolean isDeleted;
+    private Boolean isVerified;
 
     private Organization(Builder builder) {
         super.setId(builder.organizationId);
@@ -36,16 +37,16 @@ public class Organization extends AggregateRoot<OrganizationId> {
         setCreatedBy(builder.createdBy);
         setUpdatedBy(builder.updatedBy);
         isDeleted = builder.isDeleted;
+        isVerified = builder.isVerified;
     }
 
     public void initializeOrganization() {
         setId(new OrganizationId(UUID.randomUUID()));
         createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
         updatedAt = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
+        isVerified = false;
         isDeleted = false;
     }
-
-
 
     public void deleteOrganization() {
         isDeleted = true;
@@ -147,6 +148,14 @@ public class Organization extends AggregateRoot<OrganizationId> {
         isDeleted = deleted;
     }
 
+    public Boolean getVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(Boolean verified) {
+        isVerified = verified;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -164,10 +173,12 @@ public class Organization extends AggregateRoot<OrganizationId> {
         private User createdBy;
         private User updatedBy;
         private Boolean isDeleted;
+        private Boolean isVerified;
         private OrganizationId organizationId;
 
         private Builder() {
         }
+
 
         public Builder description(String val) {
             description = val;
@@ -226,6 +237,11 @@ public class Organization extends AggregateRoot<OrganizationId> {
 
         public Builder isDeleted(Boolean val) {
             isDeleted = val;
+            return this;
+        }
+
+        public Builder isVerified(Boolean val) {
+            isVerified = val;
             return this;
         }
 

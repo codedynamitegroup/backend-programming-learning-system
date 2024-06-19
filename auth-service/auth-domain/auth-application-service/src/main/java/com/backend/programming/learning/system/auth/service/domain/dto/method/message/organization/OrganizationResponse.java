@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.auth.service.domain.dto.method.message;
+package com.backend.programming.learning.system.auth.service.domain.dto.method.message.organization;
 
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationResponseStatus;
