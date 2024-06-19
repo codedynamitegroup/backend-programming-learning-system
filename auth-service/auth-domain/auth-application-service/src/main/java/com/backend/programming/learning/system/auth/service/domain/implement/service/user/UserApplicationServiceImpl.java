@@ -1,5 +1,9 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.service.user;
 
+import com.backend.programming.learning.system.auth.service.domain.dto.method.assign_user_to_organization.AssignUserToOrganizationCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.assign_user_to_organization.AssignUserToOrganizationResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.assign_user_to_organization.UnassignedUserToOrganizationCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.assign_user_to_organization.UnassignedUserToOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.change_password.ChangedPasswordUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.change_password.ChangedPasswordUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
@@ -49,6 +53,16 @@ class UserApplicationServiceImpl implements UserApplicationService {
     @Override
     public UserEntityResponse findUserById(QueryUserByIdCommand queryUserCommand) {
         return userCommandHandler.queryUser(queryUserCommand);
+    }
+
+    @Override
+    public AssignUserToOrganizationResponse assignUserToOrganization(AssignUserToOrganizationCommand assignUserToOrganizationCommand) {
+        return userCommandHandler.assignUserToOrganization(assignUserToOrganizationCommand);
+    }
+
+    @Override
+    public UnassignedUserToOrganizationResponse unassignedUserToOrganization(UnassignedUserToOrganizationCommand unassignedUserToOrganizationCommand) {
+        return userCommandHandler.unassignedUserToOrganization(unassignedUserToOrganizationCommand);
     }
 
     @Override
