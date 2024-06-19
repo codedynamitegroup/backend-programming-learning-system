@@ -1,7 +1,6 @@
 INSERT INTO public.organization(id, description, name, created_at, updated_at, is_deleted, moodle_url)
 VALUES
-    ('9ba179ed-d26d-4828-a0f6-8836c2063992',NULL,'Code Dynamite','2024-04-15 18:37:44.08878+07','2024-04-15 18:37:44.08878+07',false, 'localhost');
-
+	 ('cb69c0bf-c454-4f15-be10-791f6749dac7','Moodle description','Moodle 2','2024-04-15 18:09:29.488151+07','2024-04-15 18:09:29.488151+07',false, 'http://localhost:3001');
 INSERT INTO public.organization
 (id, description, "name", api_key, moodle_url, created_at, updated_at, is_deleted)
 VALUES ('08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'moodle', 'Moodle', 'cdf90b5bf53bcae577c60419702dbee7',
@@ -161,10 +160,10 @@ INSERT INTO public."module" (id, cmid, section_id, name, visible, content, type_
 
 INSERT INTO public.question(id, org_id, difficulty, name, question_text, general_feedback, default_mark, qtype, created_by, updated_by)
 VALUES
-   ('b6484e21-6937-489c-b031-b71767994221', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'HARD', 'Question Pants', 'Question Mouse Text', 'Question Tuna feedback', 1, 'CODE', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c'),
-   ('b6484e21-6937-489c-b031-b71767994233', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'EASY', 'Question Handle', 'Question Wire Text', 'Question Gold feedback', 1, 'ESSAY', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c'),
-   ('b6484e21-6937-489c-b031-b71767994132', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'MEDIUM', 'Question hihi', 'Question Wow Text', 'Question Amazing feedback', 1, 'SHORT_ANSWER', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c'),
-   ('b6484e21-6937-489c-b031-b71767994735', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'HARD', 'Question haha', 'Question Speaker Text', 'Question Good Job feedback', 1, 'MULTIPLE_CHOICE', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c');
+   ('b6484e21-6937-489c-b031-b71767994221', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'HARD', 'Question Pants', 'Question Mouse Text', 'Question Tuna feedback', 1, 'CODE', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c'),
+   ('b6484e21-6937-489c-b031-b71767994233', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'EASY', 'Question Handle', 'Question Wire Text', 'Question Gold feedback', 1, 'ESSAY', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c'),
+   ('b6484e21-6937-489c-b031-b71767994132', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'MEDIUM', 'Question hihi', 'Question Wow Text', 'Question Amazing feedback', 1, 'SHORT_ANSWER', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c'),
+   ('b6484e21-6937-489c-b031-b71767994735', '08b65a39-394f-4977-a5fa-3fe145b620f8', 'HARD', 'Question haha', 'Question Speaker Text', 'Question Good Job feedback', 1, 'MULTIPLE_CHOICE', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c');
 
 --INSERT INTO public.course(id, name, course_type_id,org_id, created_by, updated_by, created_at, updated_at)
 --VALUES
@@ -202,9 +201,9 @@ VALUES
 
 INSERT INTO public.webhook_function_organization(id, webhook_api_function_id, org_id)
 VALUES
-    ('b6484e21-6937-489c-b031-b71767994744', 'b6484e21-6937-489c-b031-b71767991741', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
-    ('b6484e21-6937-489c-b031-b71767994745', 'b6484e21-6937-489c-b031-b71767992742', '9ba179ed-d26d-4828-a0f6-8836c2063992'),
-    ('b6484e21-6937-489c-b031-b71767994746', 'b6484e21-6937-489c-b031-b71767993743', '9ba179ed-d26d-4828-a0f6-8836c2063992');
+    ('b6484e21-6937-489c-b031-b71767994744', 'b6484e21-6937-489c-b031-b71767991741', '08b65a39-394f-4977-a5fa-3fe145b620f8'),
+    ('b6484e21-6937-489c-b031-b71767994745', 'b6484e21-6937-489c-b031-b71767992742', '08b65a39-394f-4977-a5fa-3fe145b620f8'),
+    ('b6484e21-6937-489c-b031-b71767994746', 'b6484e21-6937-489c-b031-b71767993743', '08b65a39-394f-4977-a5fa-3fe145b620f8');
 
 --INSERT INTO public.course_type(id, moodle_id, name)
 --VALUES

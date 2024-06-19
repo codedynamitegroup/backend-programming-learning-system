@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.auth.service.application.rest;
 
+import com.backend.programming.learning.system.auth.service.application.utils.JwtUtils;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.organization.CreateOrganizationCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.organization.CreateOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.organization.DeleteOrganizationCommand;
@@ -21,17 +22,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.UUID;
 
 @Slf4j
 @RestController
 @RequestMapping(value = "/auth/organizations", produces = "application/vnd.api.v1+json")
 public class OrganizationController {
-
     private final OrganizationApplicationService organizationApplicationService;
+    private final JwtUtils jwtUtils;
 
-    public OrganizationController(OrganizationApplicationService organizationApplicationService) {
+    public OrganizationController(OrganizationApplicationService organizationApplicationService, JwtUtils jwtUtils) {
         this.organizationApplicationService = organizationApplicationService;
+        this.jwtUtils = jwtUtils;
     }
 
     @PostMapping
@@ -43,9 +46,24 @@ public class OrganizationController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<CreateOrganizationResponse> createOrganization(@RequestBody CreateOrganizationCommand createOrganizationCommand) {
+    public ResponseEntity<?> createOrganization(
+            @RequestBody CreateOrganizationCommand createOrganizationCommand,
+            @RequestHeader(value = "Access-Token", required = false) String accessToken) {
+        String email = jwtUtils.getEmailFromJwtString(accessToken);
+        if (email == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Invalid access token"));
+        }
         log.info("Creating organization with email: {}", createOrganizationCommand.getEmail());
-        CreateOrganizationResponse createOrganizationResponse = organizationApplicationService.createOrganization(createOrganizationCommand);
+        CreateOrganizationResponse createOrganizationResponse = organizationApplicationService.createOrganization(
+                CreateOrganizationCommand.builder()
+                        .email(createOrganizationCommand.getEmail())
+                        .description(createOrganizationCommand.getDescription())
+                        .name(createOrganizationCommand.getName())
+                        .phone(createOrganizationCommand.getPhone())
+                        .address(createOrganizationCommand.getAddress())
+                        .createdBy(email)
+                        .build()
+        );
         log.info("Organization created with email: {}", createOrganizationResponse.getEmail());
         return ResponseEntity.status(HttpStatus.CREATED).body(createOrganizationResponse);
     }
@@ -60,12 +78,14 @@ public class OrganizationController {
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllOrganizationsResponse> getAllOrganizations(
             @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "10") Integer pageSize
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "") String searchName
     ) {
         QueryAllOrganizationsResponse allOrganizations = organizationApplicationService.findAllOrganizations(
                 QueryAllOrganizationsCommand.builder()
                         .pageNo(pageNo)
                         .pageSize(pageSize)
+                        .searchName(searchName)
                         .build()
         );
         log.info("Returning all organizations");
@@ -97,10 +117,15 @@ public class OrganizationController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<UpdateOrganizationResponse> updateOrganizationById(
+    public ResponseEntity<?> updateOrganizationById(
             @PathVariable UUID id,
-            @RequestBody UpdateOrganizationCommand updateOrganizationCommand
+            @RequestBody UpdateOrganizationCommand updateOrganizationCommand,
+            @RequestHeader(value = "Access-Token", required = false) String accessToken
     ) {
+        String email = jwtUtils.getEmailFromJwtString(accessToken);
+        if (email == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Invalid access token"));
+        }
         log.info("Updating organization with id: {}", id);
         UpdateOrganizationResponse updateOrganizationResponse = organizationApplicationService.updateOrganization(
                 UpdateOrganizationCommand.builder()
@@ -112,7 +137,9 @@ public class OrganizationController {
                         .address(updateOrganizationCommand.getAddress())
                         .apiKey(updateOrganizationCommand.getApiKey())
                         .moodleUrl(updateOrganizationCommand.getMoodleUrl())
-                        .updatedBy(updateOrganizationCommand.getUpdatedBy())
+                        .updatedBy(email)
+                        .isVerified(updateOrganizationCommand.getIsVerified())
+                        .isDeleted(updateOrganizationCommand.getIsDeleted())
                         .build()
         );
         log.info("Organization updated with id: {}", id);

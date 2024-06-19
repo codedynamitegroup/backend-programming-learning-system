@@ -21,9 +21,12 @@ public class CreateOrganizationCommand {
     @NotNull
     private final String name;
 
+    @NotNull
     private final String phone;
+
+    @NotNull
     private final String address;
 
     @NotNull
-    private final UUID createdBy;
+    private final String createdBy;
 }

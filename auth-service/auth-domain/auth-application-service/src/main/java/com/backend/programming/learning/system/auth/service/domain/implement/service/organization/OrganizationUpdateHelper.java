@@ -38,7 +38,7 @@ public class OrganizationUpdateHelper {
     @Transactional
     public OrganizationUpdatedEvent persistOrganization(UpdateOrganizationCommand updateOrganizationCommand) {
         Organization organization = getOrganization(updateOrganizationCommand.getOrganizationId());
-        User updateBy = getUser(updateOrganizationCommand.getUpdatedBy());
+        User updateBy = getUserByEmail(updateOrganizationCommand.getUpdatedBy());
 
         organization.setUpdatedBy(updateBy);
         organization.setUpdatedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
@@ -70,23 +70,29 @@ public class OrganizationUpdateHelper {
         if (updateOrganizationCommand.getMoodleUrl() != null) {
             organization.setMoodleUrl(updateOrganizationCommand.getMoodleUrl());
         }
+        if (updateOrganizationCommand.getIsVerified() != null) {
+            organization.setVerified(updateOrganizationCommand.getIsVerified());
+        }
+        if (updateOrganizationCommand.getIsDeleted() != null) {
+            organization.setDeleted(updateOrganizationCommand.getIsDeleted());
+        }
 
         OrganizationUpdatedEvent organizationUpdatedEvent = authDomainService.updateOrganization(organization);
         updateOrganization(organization);
         return organizationUpdatedEvent;
     }
 
-    private User getUser(UUID userId) {
-        Optional<User> user = userRepository.findById(new UserId(userId));
+    private User getUserByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
         if (user.isEmpty()) {
-            log.error("User with id: {} could not be found!", userId);
-            throw new AuthDomainException("User with id: " + userId + " could not be found!");
+            log.error("User with email: {} could not be found!", email);
+            throw new AuthDomainException("User with email: " + email + " could not be found!");
         }
         return user.get();
     }
 
     private Organization getOrganization(UUID organizationId) {
-        Optional<Organization> organization = organizationRepository.findById(new OrganizationId(organizationId));
+        Optional<Organization> organization = organizationRepository.findByIdAndIsDeletedTrueOrFalse(new OrganizationId(organizationId));
         if (organization.isEmpty()) {
             log.warn("Organization with id: {} not found", organizationId);
             throw new AuthNotFoundException("Could not find organization with id: " + organizationId);

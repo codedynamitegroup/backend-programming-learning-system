@@ -55,6 +55,7 @@ public class WebSecurityConfig {
 
                         // qtype code question
                         .requestMatchers(HttpMethod.GET, "/core/questions/code-question/admin").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.GET, "/core/questions/code-question//org-admin").hasAnyRole(ADMIN_MOODLE)
 
                         // Certificate Course
                         .requestMatchers(HttpMethod.POST, "/core/certificate-courses/create").hasAnyRole(ADMIN)
@@ -79,7 +80,8 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/core/contests/{id}/register").hasAnyRole(USER)
                         .requestMatchers(HttpMethod.PUT, "/core/contests/{id}").hasAnyRole(ADMIN, ADMIN_MOODLE)
                         .requestMatchers(HttpMethod.DELETE, "/core/contests/{id}").hasAnyRole(ADMIN, ADMIN_MOODLE)
-                        .requestMatchers(HttpMethod.GET, "/core/contests/admin").hasAnyRole(ADMIN, ADMIN_MOODLE)
+                        .requestMatchers(HttpMethod.GET, "/core/contests/admin").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.GET, "/core/contests/org-admin").hasAnyRole(ADMIN_MOODLE)
                         .requestMatchers(HttpMethod.GET, "/core/contests/me").hasAnyRole(USER)
                         .requestMatchers(HttpMethod.GET, "/core/contests/{id}/admin/statistics").hasAnyRole(ADMIN, ADMIN_MOODLE)
                         .requestMatchers(HttpMethod.GET, "/core/contests/contest/dashboard-statistics").hasAnyRole(ADMIN)

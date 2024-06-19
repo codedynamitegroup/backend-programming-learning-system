@@ -31,4 +31,6 @@ public class UpdateUserByAdminCommand {
     private String roleName;
 
     private String avatarUrl;
+
+    private Boolean isDeleted;
 }

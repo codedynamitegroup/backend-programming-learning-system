@@ -45,6 +45,39 @@ public class CertificateCourseDataMapper {
         this.chapterResourceDataMapper = chapterResourceDataMapper;
     }
 
+    public List<CertificateCourse> queryAllCertificateCoursesResponseToCertificateCourses(
+            QueryAllCertificateCoursesResponse queryAllCertificateCoursesResponse) {
+        List<CertificateCourse> certificateCourses = new ArrayList<>();
+        for (CertificateCourseResponseEntity certificateCourseResponseEntity : queryAllCertificateCoursesResponse.getCertificateCourses()) {
+            certificateCourses.add(certificateCourseResponseEntityToCertificateCourse(certificateCourseResponseEntity));
+        }
+
+        return certificateCourses;
+    }
+
+    public CertificateCourse certificateCourseResponseEntityToCertificateCourse(
+            CertificateCourseResponseEntity certificateCourseResponseEntity) {
+        return CertificateCourse.builder()
+                .id(new CertificateCourseId(certificateCourseResponseEntity.getCertificateCourseId()))
+                .name(certificateCourseResponseEntity.getName())
+                .description(certificateCourseResponseEntity.getDescription())
+                .skillLevel(SkillLevel.valueOf(certificateCourseResponseEntity.getSkillLevel().toUpperCase()))
+                .avgRating(certificateCourseResponseEntity.getAvgRating())
+                .startTime(certificateCourseResponseEntity.getStartTime())
+                .endTime(certificateCourseResponseEntity.getEndTime())
+                .topic(topicDataMapper.queryTopicResponseToTopic(certificateCourseResponseEntity.getTopic()))
+                .numOfStudents(certificateCourseResponseEntity.getNumOfStudents())
+                .numOfResources(certificateCourseResponseEntity.getNumOfResources())
+                .numOfCompletedResources(certificateCourseResponseEntity.getNumOfCompletedResources())
+                .numOfReviews(certificateCourseResponseEntity.getNumOfReviews())
+                .isRegistered(certificateCourseResponseEntity.getIsRegistered())
+                .createdBy(userDataMapper.userResponseEntityToUser(certificateCourseResponseEntity.getCreatedBy()))
+                .updatedBy(userDataMapper.userResponseEntityToUser(certificateCourseResponseEntity.getUpdatedBy()))
+                .createdAt(certificateCourseResponseEntity.getCreatedAt())
+                .updatedAt(certificateCourseResponseEntity.getUpdatedAt())
+                .build();
+    }
+
     public CertificateCourse createCertificateCourseCommandToCertificateCourse(
             CreateCertificateCourseCommand createCertificateCourseCommand) {
         return CertificateCourse.builder()
