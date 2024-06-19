@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 import com.backend.programming.learning.system.code.assessment.service.domain.CodeAssessmentDomainService;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.DeleteSharedSolutionCommad;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.DeleteSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.vote.DeleteSharedSolutionVoteCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionByCodeQuestionIdCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionDetailCommand;
@@ -45,10 +45,12 @@ public class SharedSolutionHelper {
 
     @Transactional
     public SharedSolution createSharedSolution(CreateSharedSolutionCommand command) {
-        SharedSolution sharedSolution = sharedSolutionDataMapper.createSharedSolutionCommandToSharedSolution(command);
-        validateHelper.validateUser(command.getUserId());
+        User user = validateHelper.validateUserByEmail(command.getEmail());
         validateHelper.validateCodeQuestion(command.getCodeQuestionId());
         List<Tag> tags = validateHelper.validateTagsById(command.getTagIds());
+
+        SharedSolution sharedSolution = sharedSolutionDataMapper.createSharedSolutionCommandToSharedSolution(command, user);
+
         codeAssessmentDomainService.initiateSharedSolution(sharedSolution, tags);
         return sharedSolutionRepository.save(sharedSolution);
 //        sharedSolutionRepository.saveTag(sharedSolution.getTags(), sharedSolution.getId().getValue());
@@ -107,11 +109,11 @@ public class SharedSolutionHelper {
 
     @Transactional
     public void updateSharedSolution(UpdateSharedSolutionCommand command) {
-        validateHelper.validateUser(command.getUserId());
+        User user = validateHelper.validateUserByEmail(command.getEmail());
         SharedSolution sharedSolutionRepo = validateHelper.validateSharedSolution(command.getSharedSolutionId());
 
-        if(!command.getUserId().equals(sharedSolutionRepo.getUser().getId().getValue())){
-            throw new CodeAssessmentDomainException("User " + command.getUserId() + "does not own solution " + command.getSharedSolutionId());
+        if(!user.getId().equals(sharedSolutionRepo.getUser().getId())){
+            throw new CodeAssessmentDomainException("User " + user.getId().getValue() + "does not own solution " + command.getSharedSolutionId());
         }
         SharedSolution sharedSolution = sharedSolutionDataMapper.updateSharedSolutionCommandToSharedSolution(command);
 
@@ -122,12 +124,12 @@ public class SharedSolutionHelper {
     }
 
     @Transactional
-    public void deleteSharedSolution(DeleteSharedSolutionCommad command) {
-        validateHelper.validateUser(command.getUserId());
+    public void deleteSharedSolution(DeleteSharedSolutionCommand command) {
+        User user = validateHelper.validateUserByEmail(command.getEmail());
         SharedSolution sharedSolutionRepo = validateHelper.validateSharedSolution(command.getSharedSolutionId());
 
-        if(!command.getUserId().equals(sharedSolutionRepo.getUser().getId().getValue())){
-            throw new CodeAssessmentDomainException("User " + command.getUserId() + "does not own solution " + command.getSharedSolutionId());
+        if(!user.getId().equals(sharedSolutionRepo.getUser().getId())){
+            throw new CodeAssessmentDomainException("User " + user.getId().getValue() + "does not own solution " + command.getSharedSolutionId());
         }
 
         sharedSolutionRepository.deleteById(sharedSolutionRepo.getId());

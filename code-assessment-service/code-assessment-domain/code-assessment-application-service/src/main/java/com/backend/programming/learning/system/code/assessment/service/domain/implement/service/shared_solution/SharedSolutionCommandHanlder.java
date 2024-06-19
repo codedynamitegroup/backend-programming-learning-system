@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.shared_solution.CreateSharedSolutionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.shared_solution.vote.VoteSharedSolutionResponse;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.DeleteSharedSolutionCommad;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.DeleteSharedSolutionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.shared_solution.vote.DeleteSharedSolutionVoteCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionByCodeQuestionIdCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.shared_solution.GetSharedSolutionDetailCommand;
@@ -30,7 +30,9 @@ public class SharedSolutionCommandHanlder {
     }
 
     public CreateSharedSolutionResponse createSharedSolution(CreateSharedSolutionCommand command) {
-        return sharedSolutionDataMapper.sharedSolutionToCreateSharedSolutionResponse(sharedSolutionHelper.createSharedSolution(command));
+        return sharedSolutionDataMapper
+                .sharedSolutionToCreateSharedSolutionResponse(
+                        sharedSolutionHelper.createSharedSolution(command));
     }
 
     @Transactional
@@ -64,7 +66,7 @@ public class SharedSolutionCommandHanlder {
         sharedSolutionHelper.updateSharedSolution(command);
     }
 
-    public void deleteSharedSolution(DeleteSharedSolutionCommad command) {
+    public void deleteSharedSolution(DeleteSharedSolutionCommand command) {
         sharedSolutionHelper.deleteSharedSolution(command);
     }
 

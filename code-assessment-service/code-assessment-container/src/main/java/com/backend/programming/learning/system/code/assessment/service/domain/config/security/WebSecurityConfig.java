@@ -32,10 +32,20 @@ public class WebSecurityConfig {
 //                        .requestMatchers(HttpMethod.GET, "/code-assessment/code-question/{code-question-id}").hasAnyRole(ADMIN, USER)
 //                        .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission").hasAnyRole(ADMIN, USER)
 //                        .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission/{code-submission-id}" ).hasAnyRole(ADMIN,USER)
-                            .requestMatchers(HttpMethod.POST, "/code-assessment/code-submission" ).hasAnyRole(ADMIN,USER)
-                            .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission/admin-code-question" ).hasAnyRole(ADMIN)
-                            .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission/admin-code-submission" ).hasAnyRole(ADMIN, ADMIN_MOODLE)
-                            .requestMatchers(HttpMethod.POST, "/code-assessment/shared-solution/{shared-solution-id}/comment" ).hasAnyRole(ADMIN, ADMIN_MOODLE, STUDENT_MOODLE, LECTURER_MOODLE, USER)
+                                .requestMatchers(HttpMethod.POST, "/code-assessment/code-submission" ).hasAnyRole(ADMIN,USER)
+                                .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission/admin-code-question" ).hasAnyRole(ADMIN)
+                                .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission/admin-code-submission" ).hasAnyRole(ADMIN)
+
+                                .requestMatchers(HttpMethod.POST, "/code-assessment/shared-solution/{shared-solution-id}/comment" ).hasAnyRole(USER)
+
+                                .requestMatchers(HttpMethod.POST, "/code-assessment/shared-solution").hasAnyRole(USER)
+                                .requestMatchers(HttpMethod.DELETE, "/code-assessment/shared-solution/{shared-solution-id}").hasAnyRole(USER)
+                                .requestMatchers(HttpMethod.PUT, "/code-assessment/shared-solution/{shared-solution-id}").hasAnyRole(USER)
+
+                                .requestMatchers(HttpMethod.POST, "/code-assessment/shared-solution/{shared-solution-id}/tag").hasAnyRole(USER)
+                                .requestMatchers(HttpMethod.DELETE, "/code-assessment/shared-solution/{shared-solution-id}/tag").hasAnyRole(USER)
+
+
                         .anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2

@@ -12,8 +12,8 @@ import java.util.UUID;
 @Builder
 @Getter
 public class DeleteSharedSolutionTagCommand {
-    @NotNull(message = "userId must not be null")
-    UUID userId;
+    @NotNull(message = "email must not be null")
+    String email;
 
     @NotNull(message = "sharedSolutionId must not be null")
     UUID sharedSolutionId;
