@@ -34,6 +34,7 @@ public class UserDataAccessMapper {
                 .createdBy(null)
                 .updatedBy(null)
                 .isDeleted(organizationEntity.getIsDeleted())
+                .isVerified(organizationEntity.getIsVerified())
                 .build();
     }
 
@@ -52,6 +53,7 @@ public class UserDataAccessMapper {
                 .createdBy(null)
                 .updatedBy(null)
                 .isDeleted(organization.getDeleted())
+                .isVerified(organization.getVerified())
                 .build();
     }
 
