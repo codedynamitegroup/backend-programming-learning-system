@@ -30,6 +30,11 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
     private List<CertificateCourseUser> certificateCourseUsers;
+    private Integer numOfOneStarReviews;
+    private Integer numOfTwoStarReviews;
+    private Integer numOfThreeStarReviews;
+    private Integer numOfFourStarReviews;
+    private Integer numOfFiveStarReviews;
 
     private CertificateCourse(Builder builder) {
         super.setId(builder.certificateCourseId);
@@ -51,6 +56,15 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         setCreatedAt(builder.createdAt);
         setUpdatedAt(builder.updatedAt);
         setCertificateCourseUsers(builder.certificateCourseUsers);
+        setNumOfOneStarReviews(builder.numOfOneStarReviews);
+        setNumOfTwoStarReviews(builder.numOfTwoStarReviews);
+        setNumOfThreeStarReviews(builder.numOfThreeStarReviews);
+        setNumOfFourStarReviews(builder.numOfFourStarReviews);
+        setNumOfFiveStarReviews(builder.numOfFiveStarReviews);
+    }
+
+    public static Builder builder() {
+        return new Builder();
     }
 
     public void initializeCertificateCourse() {
@@ -58,10 +72,6 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         certificateCourseUsers = new ArrayList<>();
         setCreatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
         setUpdatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
-    }
-
-    public static Builder builder() {
-        return new Builder();
     }
 
 
@@ -209,6 +219,46 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         this.certificateCourseUsers = certificateCourseUsers;
     }
 
+    public Integer getNumOfOneStarReviews() {
+        return numOfOneStarReviews;
+    }
+
+    public void setNumOfOneStarReviews(Integer numOfOneStarReviews) {
+        this.numOfOneStarReviews = numOfOneStarReviews;
+    }
+
+    public Integer getNumOfTwoStarReviews() {
+        return numOfTwoStarReviews;
+    }
+
+    public void setNumOfTwoStarReviews(Integer numOfTwoStarReviews) {
+        this.numOfTwoStarReviews = numOfTwoStarReviews;
+    }
+
+    public Integer getNumOfThreeStarReviews() {
+        return numOfThreeStarReviews;
+    }
+
+    public void setNumOfThreeStarReviews(Integer numOfThreeStarReviews) {
+        this.numOfThreeStarReviews = numOfThreeStarReviews;
+    }
+
+    public Integer getNumOfFourStarReviews() {
+        return numOfFourStarReviews;
+    }
+
+    public void setNumOfFourStarReviews(Integer numOfFourStarReviews) {
+        this.numOfFourStarReviews = numOfFourStarReviews;
+    }
+
+    public Integer getNumOfFiveStarReviews() {
+        return numOfFiveStarReviews;
+    }
+
+    public void setNumOfFiveStarReviews(Integer numOfFiveStarReviews) {
+        this.numOfFiveStarReviews = numOfFiveStarReviews;
+    }
+
     public static final class Builder {
         private CertificateCourseId certificateCourseId;
         private String name;
@@ -229,6 +279,11 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
         private List<CertificateCourseUser> certificateCourseUsers;
+        private Integer numOfOneStarReviews;
+        private Integer numOfTwoStarReviews;
+        private Integer numOfThreeStarReviews;
+        private Integer numOfFourStarReviews;
+        private Integer numOfFiveStarReviews;
 
         private Builder() {
         }
@@ -325,6 +380,31 @@ public class CertificateCourse extends AggregateRoot<CertificateCourseId> {
 
         public Builder certificateCourseUsers(List<CertificateCourseUser> val) {
             certificateCourseUsers = val;
+            return this;
+        }
+
+        public Builder numOfOneStarReviews(Integer val) {
+            numOfOneStarReviews = val;
+            return this;
+        }
+
+        public Builder numOfTwoStarReviews(Integer val) {
+            numOfTwoStarReviews = val;
+            return this;
+        }
+
+        public Builder numOfThreeStarReviews(Integer val) {
+            numOfThreeStarReviews = val;
+            return this;
+        }
+
+        public Builder numOfFourStarReviews(Integer val) {
+            numOfFourStarReviews = val;
+            return this;
+        }
+
+        public Builder numOfFiveStarReviews(Integer val) {
+            numOfFiveStarReviews = val;
             return this;
         }
 

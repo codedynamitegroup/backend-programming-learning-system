@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.core.service.dataaccess.user.enti
 import com.backend.programming.learning.system.core.service.domain.valueobject.SkillLevel;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Formula;
 
 import java.time.ZonedDateTime;
 import java.util.Objects;
@@ -46,6 +47,26 @@ public class CertificateCourseEntity {
 
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
+
+    @Basic(fetch = FetchType.LAZY)
+    @Formula("(select count(*) from review r where r.certificate_course_id = id and r.rating = 1)")
+    private Integer numOfOneStarReviews;
+
+    @Basic(fetch = FetchType.LAZY)
+    @Formula("(select count(*) from review r where r.certificate_course_id = id and r.rating = 2)")
+    private Integer numOfTwoStarReviews;
+
+    @Basic(fetch = FetchType.LAZY)
+    @Formula("(select count(*) from review r where r.certificate_course_id = id and r.rating = 3)")
+    private Integer numOfThreeStarReviews;
+
+    @Basic(fetch = FetchType.LAZY)
+    @Formula("(select count(*) from review r where r.certificate_course_id = id and r.rating = 4)")
+    private Integer numOfFourStarReviews;
+
+    @Basic(fetch = FetchType.LAZY)
+    @Formula("(select count(*) from review r where r.certificate_course_id = id and r.rating = 5)")
+    private Integer numOfFiveStarReviews;
 
     @Override
     public boolean equals(Object o) {
