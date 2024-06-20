@@ -75,6 +75,11 @@ public class CertificateCourseDataMapper {
                 .updatedBy(userDataMapper.userResponseEntityToUser(certificateCourseResponseEntity.getUpdatedBy()))
                 .createdAt(certificateCourseResponseEntity.getCreatedAt())
                 .updatedAt(certificateCourseResponseEntity.getUpdatedAt())
+                .numOfOneStarReviews(certificateCourseResponseEntity.getNumOfOneStarReviews())
+                .numOfTwoStarReviews(certificateCourseResponseEntity.getNumOfTwoStarReviews())
+                .numOfThreeStarReviews(certificateCourseResponseEntity.getNumOfThreeStarReviews())
+                .numOfFourStarReviews(certificateCourseResponseEntity.getNumOfFourStarReviews())
+                .numOfFiveStarReviews(certificateCourseResponseEntity.getNumOfFiveStarReviews())
                 .build();
     }
 
@@ -133,6 +138,11 @@ public class CertificateCourseDataMapper {
                 .updatedBy(updatedByResponse)
                 .createdAt(certificateCourse.getCreatedAt())
                 .updatedAt(certificateCourse.getUpdatedAt())
+                .numOfOneStarReviews(certificateCourse.getNumOfOneStarReviews())
+                .numOfTwoStarReviews(certificateCourse.getNumOfTwoStarReviews())
+                .numOfThreeStarReviews(certificateCourse.getNumOfThreeStarReviews())
+                .numOfFourStarReviews(certificateCourse.getNumOfFourStarReviews())
+                .numOfFiveStarReviews(certificateCourse.getNumOfFiveStarReviews())
                 .build();
     }
 

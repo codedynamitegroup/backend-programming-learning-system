@@ -13,7 +13,7 @@ INSERT INTO public.main_user (id,organization_id,is_linked_with_google,is_linked
 	 ('cb2c22ac-87de-44e4-9638-35979f6af667','08b65a39-394f-4977-a5fa-3fe145b620f8',false,false,'duongchithong2002@gmail.com','duongchithong2002@gmail.com','2002-03-29','Dương','Chí Thông','+8412365478',NULL,NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false),
 	 ('2d7ed5a0-fb21-4927-9a25-647c17d29668','08b65a39-394f-4977-a5fa-3fe145b620f8',false,false,'dntienes@gmail.com','dntienes@gmail.com','2002-03-29','Tiến','Đặng Ngọc','+8412365478',NULL,NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false),
 	 ('2d3c1e66-1835-457f-93e9-265fe483feee','08b65a39-394f-4977-a5fa-3fe145b620f8',false,false,'dt.ngocthw@gmail.com','dt.ngocthw@gmail.com','2002-03-29','Thư','Ngọc','+8412365478',NULL,NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false),
-	 ('a9f5487e-c0b1-4fa4-b93a-6f16bde90583','08b65a39-394f-4977-a5fa-3fe145b620f8',false,false,'ktpm4t@gmail.com','ktpm4t@gmail.com','2002-03-29','giáo','vien','+8412365478',NULL,NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false),
+	 ('a9f5487e-c0b1-4fa4-b93a-6f16bde90583','08b65a39-394f-4977-a5fa-3fe145b620f8',false,false,'ktpm4t@gmail.com','ktpm4t@gmail.com','2002-03-29','Viet','Nguyen','+8412365478',NULL,NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false),
 	 ('ca3040f2-e173-40a5-aab7-6ef15965ce43','08b65a39-394f-4977-a5fa-3fe145b620f8',false,false,'truonggiatien123@gmail.com','truonggiatien123@gmail.com','2002-03-29','Trương','Gia Tiến','+8412365478',NULL,NULL,NULL,'2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07','2024-04-15 18:07:41.151759+07',false);
 
 INSERT INTO public."role"
@@ -27,8 +27,6 @@ VALUES('350ab76e-5785-42b4-ac5c-1b9490f30038', NULL, 'admin'),
 INSERT INTO public.user_role (id,user_id,role_id) VALUES
 	 ('5991f22b-f530-4913-88f2-90319ee93a76','9ba179ed-d26d-4828-a0f6-8836c2063992','b04387d3-898f-402c-8f44-79611d6f3bee'),
 	 ('8afa567c-dd61-4ade-96b8-abc78d45875f','b029f559-52a8-4699-b595-71161498ed8c','350ab76e-5785-42b4-ac5c-1b9490f30038'),
-     ('d2a22212-5dba-44c1-9de0-b3849fe6d1d8','8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7','b04387d3-898f-402c-8f44-79611d6f3bee'),
-     ('b0ffd718-703b-4e56-8c7f-44159b8ec42c','39328bcf-8af6-44fc-9ae9-247f953ee2a2','f705404f-5971-455e-9c34-93a0ce5b90b5'),
      ('a2471ff5-508a-48c3-91d6-b109aa746099','8edbc0aa-0b91-480e-a428-23abf2109df9','3ead3b08-afdd-442f-b544-fdbd86eaa186'),
      ('13050987-00d6-42fc-870e-a90f06f7f627','9ba179ed-d26d-4828-a0f6-8836c2063992','9ba179ed-d26d-4828-a0f6-8836c2063992'),
      ('ffef89c5-2b73-4f9c-bb83-3fe99d980b8a','b029f559-52a8-4699-b595-71161498ed8c','9ba179ed-d26d-4828-a0f6-8836c2063992'),

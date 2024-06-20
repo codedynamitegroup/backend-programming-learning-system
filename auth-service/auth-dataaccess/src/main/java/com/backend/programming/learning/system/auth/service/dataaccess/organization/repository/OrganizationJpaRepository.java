@@ -23,4 +23,6 @@ public interface OrganizationJpaRepository extends JpaRepository<OrganizationEnt
         order by o.email
         """, nativeQuery = true)
     Page<OrganizationEntity> findAll(Pageable pageable, String searchName);
+
+    Optional<OrganizationEntity> findByIdAndIsVerifiedTrue(UUID id);
 }

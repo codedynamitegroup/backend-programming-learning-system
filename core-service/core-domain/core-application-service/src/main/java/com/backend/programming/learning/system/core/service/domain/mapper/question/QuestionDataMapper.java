@@ -4,10 +4,12 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.question.AnswerOfQuestionDeleteResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionWithPaginationResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.AnswerOfQuestionUpdateEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQuestionEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.AnswerOfQuestionResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.GetAllQuestionPaginationResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionCreatedEvent;
@@ -19,6 +21,7 @@ import com.backend.programming.learning.system.core.service.domain.outbox.model.
 import com.backend.programming.learning.system.core.service.domain.outbox.model.question.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.AnswerId;
 import com.backend.programming.learning.system.domain.valueobject.*;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.time.ZoneId;
@@ -468,6 +471,26 @@ public class QuestionDataMapper {
                 .questions(questions.stream()
                         .map(this::questionToQuestionResponseEntity)
                         .toList())
+                .build();
+    }
+
+    private GetAllQuestionPaginationResponseEntity questionToGetAllQuestionPaginationResponseEntity(Question question) {
+        return GetAllQuestionPaginationResponseEntity.builder()
+                .questionId(question.getId().getValue().toString())
+                .name(question.getName())
+                .difficulty(question.getDifficulty().name())
+                .questionText(question.getQuestionText())
+                .build();
+    }
+
+    public QueryAllQuestionWithPaginationResponse questionPageToQueryAllQuestionWithPaginationResponse(Page<Question> questions) {
+        return QueryAllQuestionWithPaginationResponse.builder()
+                .questions(questions.getContent().stream()
+                        .map(this::questionToGetAllQuestionPaginationResponseEntity)
+                        .toList())
+                .currentPage(questions.getNumber())
+                .totalItems(questions.getTotalElements())
+                .totalPages(questions.getTotalPages())
                 .build();
     }
 }

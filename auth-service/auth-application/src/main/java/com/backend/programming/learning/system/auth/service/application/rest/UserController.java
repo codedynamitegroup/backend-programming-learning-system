@@ -1,6 +1,10 @@
 package com.backend.programming.learning.system.auth.service.application.rest;
 
 import com.backend.programming.learning.system.auth.service.application.utils.JwtUtils;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.assign_user_to_organization.AssignUserToOrganizationCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.assign_user_to_organization.AssignUserToOrganizationResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.assign_user_to_organization.UnassignedUserToOrganizationCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.assign_user_to_organization.UnassignedUserToOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.change_password.ChangedPasswordUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.change_password.ChangedPasswordUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
@@ -206,12 +210,14 @@ public class UserController {
     public ResponseEntity<QueryAllUsersResponse> getAllUsers(
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize,
-            @RequestParam(defaultValue = "") String searchName
+            @RequestParam(defaultValue = "") String searchName,
+            @RequestParam(defaultValue = "ALL") String belongToOrg
     ) {
         QueryAllUsersResponse users = userApplicationService.findAllUsers(QueryAllUsersCommand.builder()
                 .pageNo(pageNo)
                 .pageSize(pageSize)
                 .searchName(searchName)
+                .belongToOrg(belongToOrg)
                 .build());
         log.info("Returning all users");
         return ResponseEntity.ok(users);
@@ -261,7 +267,7 @@ public class UserController {
     }
 
     @PutMapping("/{userId}")
-    @Operation(summary = "Update profile user client.")
+    @Operation(summary = "Update user by admin.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
@@ -283,9 +289,53 @@ public class UserController {
                 .avatarUrl(updateUserCommand.getAvatarUrl())
                 .phone(updateUserCommand.getPhone())
                 .roleName(updateUserCommand.getRoleName())
+                .isDeleted(updateUserCommand.getIsDeleted())
                 .build());
 
         return ResponseEntity.ok(updateUserResponse);
+    }
+
+    @PutMapping("/assign-user-to-org/{userId}")
+    @Operation(summary = "Update user by admin.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = UpdateUserResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<?> assignUserToOrganization(
+            @PathVariable UUID userId,
+            @RequestBody AssignUserToOrganizationCommand assignUserToOrganizationCommand) {
+        log.info("Updating user with userId: {}", userId);
+        AssignUserToOrganizationResponse assignUserToOrganizationResponse = userApplicationService
+                .assignUserToOrganization(AssignUserToOrganizationCommand.builder()
+                        .userId(userId)
+                        .organizationId(assignUserToOrganizationCommand.getOrganizationId())
+                        .roleName(assignUserToOrganizationCommand.getRoleName())
+                        .build());
+
+        return ResponseEntity.ok(assignUserToOrganizationResponse);
+    }
+
+    @PutMapping("/unassigned-user-to-org/{userId}")
+    @Operation(summary = "Update user by admin.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = UpdateUserResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<?> unassignedUserToOrganization(
+            @PathVariable UUID userId) {
+        log.info("Updating user with userId: {}", userId);
+        UnassignedUserToOrganizationResponse unassignedUserToOrganizationResponse = userApplicationService
+                .unassignedUserToOrganization(UnassignedUserToOrganizationCommand.builder()
+                        .userId(userId)
+                        .build());
+
+        return ResponseEntity.ok(unassignedUserToOrganizationResponse);
     }
 
     @PostMapping("/change-password")
@@ -351,7 +401,7 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
-                            schema = @Schema(implementation = UpdateUserResponse.class))
+                            schema = @Schema(implementation = ResetPasswordResponse.class))
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})

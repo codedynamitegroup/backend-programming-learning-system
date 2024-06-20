@@ -14,6 +14,8 @@ public class UserEventPayload {
     @JsonProperty
     private String userId;
     @JsonProperty
+    private String organizationId;
+    @JsonProperty
     private String email;
     @JsonProperty
     private String firstName;

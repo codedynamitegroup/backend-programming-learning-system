@@ -1,5 +1,9 @@
 package com.backend.programming.learning.system.auth.service.domain.implement.service.user;
 
+import com.backend.programming.learning.system.auth.service.domain.dto.method.assign_user_to_organization.AssignUserToOrganizationCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.assign_user_to_organization.AssignUserToOrganizationResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.assign_user_to_organization.UnassignedUserToOrganizationCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.assign_user_to_organization.UnassignedUserToOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.change_password.ChangedPasswordUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.change_password.ChangedPasswordUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
@@ -163,7 +167,11 @@ public class UserCommandHandler {
 
     @Transactional(readOnly = true)
     public QueryAllUsersResponse queryAllUsers(QueryAllUsersCommand queryAllUsersCommand) {
-        Page<User> users = userQueryHelper.queryAllUsers(queryAllUsersCommand.getPageNo(), queryAllUsersCommand.getPageSize(), queryAllUsersCommand.getSearchName());
+        Page<User> users = userQueryHelper.queryAllUsers(
+                queryAllUsersCommand.getPageNo(),
+                queryAllUsersCommand.getPageSize(),
+                queryAllUsersCommand.getSearchName(),
+                queryAllUsersCommand.getBelongToOrg());
         log.info("All users are queried");
         return userDataMapper.usersToQueryAllUsers(users);
     }
@@ -324,5 +332,79 @@ public class UserCommandHandler {
 
     public QueryGeneralStatisticUserResponse getStatisticUser() {
         return userQueryHelper.getStatisticUser();
+    }
+
+    public AssignUserToOrganizationResponse assignUserToOrganization(AssignUserToOrganizationCommand assignUserToOrganizationCommand) {
+        UserUpdatedEvent userUpdatedEvent = userUpdateHelper.assignUserToOrganization(assignUserToOrganizationCommand);
+
+        userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
+                ServiceName.CORE_SERVICE,
+                CopyState.UPDATING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
+                UUID.randomUUID());
+
+        userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
+                ServiceName.COURSE_SERVICE,
+                CopyState.UPDATING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
+                UUID.randomUUID());
+
+        userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
+                ServiceName.CODE_ASSESSMENT_SERVICE,
+                CopyState.UPDATING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
+                UUID.randomUUID());
+
+        log.info("User is updated with id: {}", userUpdatedEvent.getUser().getId().getValue());
+        return AssignUserToOrganizationResponse.builder()
+                .message("User is assigned to organization successfully")
+                .userId(userUpdatedEvent.getUser().getId().getValue())
+                .build();
+    }
+
+    public UnassignedUserToOrganizationResponse unassignedUserToOrganization(UnassignedUserToOrganizationCommand unassignedUserToOrganizationCommand) {
+        UserUpdatedEvent userUpdatedEvent = userUpdateHelper.unassignedUserToOrganization(unassignedUserToOrganizationCommand);
+
+        userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
+                ServiceName.CORE_SERVICE,
+                CopyState.UPDATING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
+                UUID.randomUUID());
+
+        userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
+                ServiceName.COURSE_SERVICE,
+                CopyState.UPDATING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
+                UUID.randomUUID());
+
+        userOutboxHelper.saveUserOutboxMessage(
+                AUTH_TO_ANY_SERVICES_USER_SAGA_NAME,
+                userDataMapper.userUpdatedEventToUserEventPayload(userUpdatedEvent),
+                ServiceName.CODE_ASSESSMENT_SERVICE,
+                CopyState.UPDATING,
+                OutboxStatus.STARTED,
+                userSagaHelper.copyStatusToSagaStatus(CopyState.UPDATING),
+                UUID.randomUUID());
+
+        log.info("User is updated with id: {}", userUpdatedEvent.getUser().getId().getValue());
+        return UnassignedUserToOrganizationResponse.builder()
+                .message("User is unassigned to organization successfully")
+                .userId(userUpdatedEvent.getUser().getId().getValue())
+                .build();
     }
 }

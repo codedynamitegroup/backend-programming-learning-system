@@ -26,4 +26,19 @@ public interface ReviewJpaRepository extends JpaRepository<ReviewEntity, UUID> {
     Float getAvgRatingOfAllReviewsByCertificateCourseId(UUID certificateCourseId);
 
     List<ReviewEntity> findByCertificateCourseIdAndCreatedById(UUID certificateCourseId, UUID createdBy);
+
+    @Query(value= """
+            SELECT * FROM review r
+            WHERE r.certificate_course_id = ?1
+            AND r.created_by = ?2
+            LIMIT 1
+""", nativeQuery = true)
+    Optional<ReviewEntity> findByCertificateCourseIdAndCreatedBy(UUID certificateCourseId, UUID createdBy);
+
+    @Query(value= """
+            SELECT COUNT(*) FROM review r
+            WHERE r.certificate_course_id = ?1
+            AND r.rating = ?2
+""", nativeQuery = true)
+    Integer countNumOfReviewsByCertificateCourseIdAndRating(UUID certificateCourseId, Integer rating);
 }

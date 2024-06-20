@@ -37,6 +37,7 @@ public class UserDataMapper {
                 .dob(userUpdateRequest.getDob().atZone(ZoneId.of(DomainConstants.UTC)))
                 .phone(userUpdateRequest.getPhone())
                 .updatedAt(userUpdateRequest.getUpdatedAt().atZone(ZoneId.of(DomainConstants.UTC)))
+                .isDeleted(userUpdateRequest.getIsDeleted())
                 .build();
     }
 
