@@ -19,6 +19,7 @@ import com.backend.programming.learning.system.domain.exception.question.Questio
 import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
@@ -218,5 +219,13 @@ public class QuestionRepositoryImpl implements QuestionRepository {
                 .stream()
                 .map(questionDataAccessMapper::questionEntityToQuestion)
                 .toList();
+    }
+
+    @Override
+    public Page<Question> findAllQuestionWithPagination(String qtype, String searchName, int pageNo, int pageSize) {
+        Pageable paging = PageRequest.of(pageNo, pageSize);
+
+        return questionJpaRepository.findAllQuestionWithPagination(qtype, searchName, paging)
+                .map(questionDataAccessMapper::questionEntityToQuestion);
     }
 }

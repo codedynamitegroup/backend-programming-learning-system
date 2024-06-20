@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.dataaccess.question.repository;
 
 import com.backend.programming.learning.system.core.service.dataaccess.question.entity.QuestionEntity;
+import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -27,4 +28,13 @@ public interface QuestionJpaRepository extends JpaRepository<QuestionEntity, UUI
     Page<QuestionEntity> findAllByQuestionBankCategoryId(UUID categoryId,
                                                          String search,
                                                          Pageable pageable);
+
+    @Query(value = """
+        select qs.*
+        from question qs
+        where cast(?2 as text) IS NULL or UPPER(qs.name) like UPPER(concat('%', cast(?2 as text), '%'))
+        and (?1 = '' or qs.qtype = ?1)
+        order by qs.name
+        """, nativeQuery = true)
+    Page<QuestionEntity> findAllQuestionWithPagination(String qtype, String searchName, Pageable paging);
 }

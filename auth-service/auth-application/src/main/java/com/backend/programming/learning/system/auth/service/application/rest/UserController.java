@@ -210,12 +210,14 @@ public class UserController {
     public ResponseEntity<QueryAllUsersResponse> getAllUsers(
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize,
-            @RequestParam(defaultValue = "") String searchName
+            @RequestParam(defaultValue = "") String searchName,
+            @RequestParam(defaultValue = "ALL") String belongToOrg
     ) {
         QueryAllUsersResponse users = userApplicationService.findAllUsers(QueryAllUsersCommand.builder()
                 .pageNo(pageNo)
                 .pageSize(pageSize)
                 .searchName(searchName)
+                .belongToOrg(belongToOrg)
                 .build());
         log.info("Returning all users");
         return ResponseEntity.ok(users);

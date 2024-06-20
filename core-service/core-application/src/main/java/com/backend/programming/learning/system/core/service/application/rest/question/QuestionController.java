@@ -1,13 +1,10 @@
 package com.backend.programming.learning.system.core.service.application.rest.question;
 
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.QueryAllCertificateCourseWithPageResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionCloneCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionCloneResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.question.QuestionDeleteResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionsResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryByIdsCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryByIdsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.*;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.question.QuestionApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -146,5 +143,34 @@ public class QuestionController {
         log.info("Question deleted");
 
         return ResponseEntity.ok(questionDeleteResponse);
+    }
+
+    @GetMapping("/admin/all")
+    @Operation(summary = "Get all  questions for admin with pagination")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllQuestionPaginationCommand.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllQuestionWithPaginationResponse> getAllQuestionsWithPagination(
+            @RequestParam(value = "qtype", defaultValue = "") String qtype,
+            @RequestParam(value = "search", defaultValue = "") String search,
+            @RequestParam(value = "pageNo", defaultValue = "0") int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = "10") int pageSize
+    ) {
+        log.info("Getting all questions with pagination");
+        QueryAllQuestionPaginationCommand queryAllQuestionPaginationCommand = QueryAllQuestionPaginationCommand.builder()
+                .qtype(qtype)
+                .pageNo(pageNo)
+                .pageSize(pageSize)
+                .searchName(search)
+                .build();
+        QueryAllQuestionWithPaginationResponse questionResponseEntity = questionApplicationService
+                .queryAllQuestionWithPagination(queryAllQuestionPaginationCommand);
+        log.info("Questions retrieved: {}", questionResponseEntity);
+
+        return ResponseEntity.ok(questionResponseEntity);
     }
 }

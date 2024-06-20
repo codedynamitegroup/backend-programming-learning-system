@@ -16,7 +16,7 @@ public interface UserRepository {
     Optional<User> findByIdAndIsDeletedTrueOrFalse(UserId userId);
     Optional<User> findByEmailAndIsDeletedTrueOrFalse(String email);
     Optional<User> findByEmail(String email);
-    Page<User> findAll(Integer page, Integer size, String searchName);
+    Page<User> findAll(Integer page, Integer size, String searchName, String belongToOrg);
 
     Optional<User> findUser(UUID value);
     Page<User> findAllUsersByOrganization(UUID organizationId, Integer page, Integer size, String searchName);
