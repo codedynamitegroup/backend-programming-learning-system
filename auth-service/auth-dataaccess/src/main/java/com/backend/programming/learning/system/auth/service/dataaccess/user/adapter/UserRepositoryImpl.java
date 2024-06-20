@@ -57,10 +57,19 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Page<User> findAll(Integer page, Integer size, String searchName) {
+    public Page<User> findAll(Integer page, Integer size, String searchName, String belongToOrg) {
         Pageable paging = PageRequest.of(page, size);
-        return userJpaRepository.findAll(paging, searchName)
-                .map(userDataAccessMapper::userEntityToUser);
+        switch (belongToOrg) {
+            case "BELONG_TO_ORGANIZATION":
+                return userJpaRepository.findAllByOrganizationIdNotNull(paging, searchName)
+                        .map(userDataAccessMapper::userEntityToUser);
+            case "NOT_BELONG_TO_ORGANIZATION":
+                return userJpaRepository.findAllByOrganizationIdNull(paging, searchName)
+                        .map(userDataAccessMapper::userEntityToUser);
+            default:
+                return userJpaRepository.findAll(paging, searchName)
+                        .map(userDataAccessMapper::userEntityToUser);
+        }
     }
 
     @Override

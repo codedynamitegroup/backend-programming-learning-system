@@ -19,4 +19,7 @@ public class QueryAllUsersCommand {
 
     @NotNull
     private final String searchName;
+
+    @NotNull
+    private final String belongToOrg;
 }

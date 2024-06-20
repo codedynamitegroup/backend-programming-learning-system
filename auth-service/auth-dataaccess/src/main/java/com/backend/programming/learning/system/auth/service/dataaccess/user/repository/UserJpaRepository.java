@@ -19,7 +19,7 @@ public interface UserJpaRepository extends JpaRepository<UserEntity, UUID> {
     @Query(value = """
         select u.*
         from main_user u
-        where cast(?1 as text) IS NULL or UPPER(u.email) like UPPER(concat('%', cast(?1 as text), '%'))
+        where (cast(?1 as text) IS NULL or UPPER(u.email) like UPPER(concat('%', cast(?1 as text), '%')))
         order by u.email
         """, nativeQuery = true)
     Page<UserEntity> findAll(Pageable pageable, String searchName);
@@ -32,4 +32,22 @@ public interface UserJpaRepository extends JpaRepository<UserEntity, UUID> {
         order by u.email
         """, nativeQuery = true)
     Page<UserEntity> findAllByOrganizationId(UUID organizationId, String searchName, Pageable pageable);
+
+    @Query(value = """
+        select u.*
+        from main_user u
+        where (u.organization_id is not null)
+        and (cast(?1 as text) IS NULL or UPPER(u.email) like UPPER(concat('%', cast(?1 as text), '%')))
+        order by u.email
+        """, nativeQuery = true)
+    Page<UserEntity> findAllByOrganizationIdNotNull(Pageable paging, String searchName);
+
+    @Query(value = """
+        select u.*
+        from main_user u
+        where (u.organization_id is null)
+        and (cast(?1 as text) IS NULL or UPPER(u.email) like UPPER(concat('%', cast(?1 as text), '%')))
+        order by u.email
+        """, nativeQuery = true)
+    Page<UserEntity> findAllByOrganizationIdNull(Pageable paging, String searchName);
 }
