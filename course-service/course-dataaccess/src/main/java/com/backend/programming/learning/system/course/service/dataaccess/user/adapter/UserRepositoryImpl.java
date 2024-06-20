@@ -51,6 +51,12 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public List<User> findAllUserByAssignmentId(UUID assignmentId) {
+        return userDataAccessMapper
+                .userEntityListToUserList(userJpaRepository.findAllByAssignmentId(assignmentId));
+    }
+
+    @Override
     public Optional<User> findByEmail(String email) {
         return userJpaRepository.findByEmailAndIsDeletedFalse(email)
                 .map(userDataAccessMapper::userEntityToUser);
