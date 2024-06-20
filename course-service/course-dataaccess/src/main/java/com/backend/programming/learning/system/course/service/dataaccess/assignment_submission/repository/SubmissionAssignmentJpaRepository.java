@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.UUID;
 @Repository
 
-public interface AssignmentSubmissionJpaRepository extends JpaRepository<SubmissionAssignmentEntity, UUID> {
+public interface SubmissionAssignmentJpaRepository extends JpaRepository<SubmissionAssignmentEntity, UUID> {
     Optional<SubmissionAssignmentEntity> findById(UUID id);
 
     List<SubmissionAssignmentEntity> findAllByAssignmentId(UUID assignmentId);
@@ -24,7 +24,8 @@ public interface AssignmentSubmissionJpaRepository extends JpaRepository<Submiss
 
 
     @Query("SELECT COUNT(s) FROM SubmissionAssignmentEntity s " +
-            "WHERE s.assignment.id = :assignmentId")
+            "WHERE s.assignment.id = :assignmentId "+
+            "AND s.submitTime IS NOT NULL")
     Integer countAllByAssignmentId(UUID assignmentId);
 
 }

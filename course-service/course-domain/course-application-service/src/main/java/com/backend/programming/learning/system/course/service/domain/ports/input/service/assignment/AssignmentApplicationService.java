@@ -11,6 +11,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentResponse;
 
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.ListSubmissionAssignmentResponseEntity;
 import jakarta.validation.Valid;
 
 import java.util.UUID;
@@ -31,4 +32,7 @@ public interface AssignmentApplicationService {
 
     DeleteAssignmentResponse deleteAssignment(
             @Valid DeleteAssignmentCommand deleteAssignmentCommand);
+
+    ListSubmissionAssignmentResponseEntity queryAssignmentDetail(
+            @Valid QueryAssignmentCommand queryAssignmentCommand);
 }

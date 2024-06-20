@@ -6,26 +6,39 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.user.UserModel;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment.SubmissionAssignmentUserResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.user.UserResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.user.UserSubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.Organization;
+import com.backend.programming.learning.system.course.service.domain.entity.SubmissionAssignment;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.event.user.UserCreatedEvent;
 import com.backend.programming.learning.system.course.service.domain.event.user.UserEvent;
 import com.backend.programming.learning.system.course.service.domain.event.user.UserUpdatedEvent;
+import com.backend.programming.learning.system.course.service.domain.mapper.submission_assignment.SubmissionAssignmentDataMapper;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.user.UserEventPayload;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionAssignmentRepository;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.time.ZoneId;
+import java.util.List;
 import java.util.UUID;
 
 @Component
 public class UserDataMapper {
+    private final SubmissionAssignmentRepository submissionAssignmentRepository;
+
+    private final SubmissionAssignmentDataMapper submissionAssignmentDataMapper;
+
+    public UserDataMapper(SubmissionAssignmentRepository submissionAssignmentRepository, SubmissionAssignmentDataMapper submissionAssignmentDataMapper) {
+        this.submissionAssignmentRepository = submissionAssignmentRepository;
+        this.submissionAssignmentDataMapper = submissionAssignmentDataMapper;
+    }
+
     public UserResponseEntity userToUserResponseEntity(User user) {
         return UserResponseEntity.builder()
                 .userId(user.getId().getValue())
@@ -213,5 +226,31 @@ public class UserDataMapper {
         prevUser.setAvatarUrl(userModel.getProfileimageurl());
 
         return prevUser;
+    }
+
+    public UserSubmissionAssignmentResponseEntity userToUserSubmissionAssignmentResponseEntity(User user,UUID assignment) {
+        SubmissionAssignment submissionAssignment = submissionAssignmentRepository.findByAssignmentIdAndUserId(assignment, user.getId().getValue());
+        if(submissionAssignment == null) {
+            return UserSubmissionAssignmentResponseEntity.builder()
+                    .id(user.getId().getValue())
+                    .fullName(user.getFirstName() + " " + user.getLastName())
+                    .email(user.getEmail())
+                    .build();
+        }
+        SubmissionAssignmentUserResponseEntity submissionAssignmentUserResponseEntity =
+                submissionAssignmentDataMapper.
+                        submissionAssignmentToSubmissionAssignmentUserResponseEntity(submissionAssignment);
+        return UserSubmissionAssignmentResponseEntity.builder()
+                .id(user.getId().getValue())
+                .fullName(user.getFirstName() + " " + user.getLastName())
+                .email(user.getEmail())
+                .submissionAssignmentUserResponseEntity(submissionAssignmentUserResponseEntity)
+                .build();
+    }
+
+    public List<UserSubmissionAssignmentResponseEntity> userToUserSubmissionAssignmentResponseEntityList(List<User> users, UUID assignment) {
+        return users.stream()
+                .map(user -> userToUserSubmissionAssignmentResponseEntity(user, assignment))
+                .toList();
     }
 }
