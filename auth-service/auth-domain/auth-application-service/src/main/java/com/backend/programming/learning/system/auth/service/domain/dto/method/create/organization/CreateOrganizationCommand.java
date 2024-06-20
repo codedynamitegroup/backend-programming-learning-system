@@ -27,6 +27,5 @@ public class CreateOrganizationCommand {
     @NotNull
     private final String address;
 
-    @NotNull
     private final String createdBy;
 }

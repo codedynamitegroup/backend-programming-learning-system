@@ -61,22 +61,19 @@ public class OrganizationDataMapper {
                 .phone(organization.getPhone())
                 .address(organization.getAddress())
                 .createdAt(organization.getCreatedAt())
-                .createdBy(organization.getCreatedBy().getId().getValue().toString())
+                .createdBy(organization.getCreatedBy() == null ? null : organization.getCreatedBy().getId().getValue().toString())
                 .updatedAt(organization.getUpdatedAt())
-                .updatedBy(organization.getUpdatedBy().getId().getValue().toString())
+                .updatedBy(organization.getUpdatedBy() == null ? null : organization.getUpdatedBy().getId().getValue().toString())
                 .isDeleted(organization.getDeleted())
                 .copyState(CopyState.CREATING.name())
                 .build();
     }
 
     public OrganizationEntityResponse organizationToOrganizationEntityResponse(Organization organization) {
-        UserEntityResponse createdBy = userDataMapper.userToUserResponse(organization.getCreatedBy());
-        UserEntityResponse updatedBy = userDataMapper.userToUserResponse(organization.getUpdatedBy());
-
         return OrganizationEntityResponse.builder()
                 .organizationId(organization.getId().getValue())
-                .createdBy(createdBy)
-                .updatedBy(updatedBy)
+                .createdBy(organization.getCreatedBy() == null ? null : userDataMapper.userToUserResponse(organization.getCreatedBy()))
+                .updatedBy(organization.getUpdatedBy() == null ? null : userDataMapper.userToUserResponse(organization.getUpdatedBy()))
                 .email(organization.getEmail())
                 .description(organization.getDescription())
                 .name(organization.getName())
