@@ -44,6 +44,11 @@ public class CertificateCourseDataAccessMapper {
                 .updatedBy(userDataAccessMapper.userToUserEntityHideSensitiveData(certificateCourse.getUpdatedBy()))
                 .createdAt(certificateCourse.getCreatedAt())
                 .updatedAt(certificateCourse.getUpdatedAt())
+                .numOfOneStarReviews(certificateCourse.getNumOfOneStarReviews())
+                .numOfTwoStarReviews(certificateCourse.getNumOfTwoStarReviews())
+                .numOfThreeStarReviews(certificateCourse.getNumOfThreeStarReviews())
+                .numOfFourStarReviews(certificateCourse.getNumOfFourStarReviews())
+                .numOfFiveStarReviews(certificateCourse.getNumOfFiveStarReviews())
                 .build();
     }
 
@@ -60,13 +65,15 @@ public class CertificateCourseDataAccessMapper {
                 .topic(topic)
                 .startTime(certificateCourseEntity.getStartTime())
                 .endTime(certificateCourseEntity.getEndTime())
-//                .numOfStudents(certificateCourseEntity.getNumOfStudents())
-//                .numOfQuestions(certificateCourseEntity.getNumOfQuestions())
-//                .numOfReviews(certificateCourseEntity.getNumOfReviews())
                 .createdBy(userDataAccessMapper.userEntityToUserHideSensitiveData(certificateCourseEntity.getCreatedBy()))
                 .updatedBy(userDataAccessMapper.userEntityToUserHideSensitiveData(certificateCourseEntity.getUpdatedBy()))
                 .createdAt(certificateCourseEntity.getCreatedAt())
                 .updatedAt(certificateCourseEntity.getUpdatedAt())
+                .numOfOneStarReviews(certificateCourseEntity.getNumOfOneStarReviews())
+                .numOfTwoStarReviews(certificateCourseEntity.getNumOfTwoStarReviews())
+                .numOfThreeStarReviews(certificateCourseEntity.getNumOfThreeStarReviews())
+                .numOfFourStarReviews(certificateCourseEntity.getNumOfFourStarReviews())
+                .numOfFiveStarReviews(certificateCourseEntity.getNumOfFiveStarReviews())
                 .build();
     }
 

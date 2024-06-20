@@ -78,4 +78,19 @@ public class CertificateCourseResponseEntity {
     @NotNull
     @JsonProperty("updatedAt")
     private final ZonedDateTime updatedAt;
+    @NotNull
+    @JsonProperty("numOfOneStarReviews")
+    private final Integer numOfOneStarReviews;
+    @NotNull
+    @JsonProperty("numOfTwoStarReviews")
+    private final Integer numOfTwoStarReviews;
+    @NotNull
+    @JsonProperty("numOfThreeStarReviews")
+    private final Integer numOfThreeStarReviews;
+    @NotNull
+    @JsonProperty("numOfFourStarReviews")
+    private final Integer numOfFourStarReviews;
+    @NotNull
+    @JsonProperty("numOfFiveStarReviews")
+    private final Integer numOfFiveStarReviews;
 }
