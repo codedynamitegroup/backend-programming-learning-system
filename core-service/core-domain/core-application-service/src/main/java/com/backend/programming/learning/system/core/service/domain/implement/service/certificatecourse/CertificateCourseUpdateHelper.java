@@ -64,7 +64,9 @@ public class CertificateCourseUpdateHelper {
         certificateCourse.setUpdatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
 
         if (updateCertificateCourseCommand.getName() != null) {
-            checkCertificateCourseByNameExists(updateCertificateCourseCommand.getName());
+            if (!certificateCourse.getName().equals(updateCertificateCourseCommand.getName())) {
+                checkCertificateCourseByNameExists(updateCertificateCourseCommand.getName());
+            }
             certificateCourse.setName(updateCertificateCourseCommand.getName());
         }
 
