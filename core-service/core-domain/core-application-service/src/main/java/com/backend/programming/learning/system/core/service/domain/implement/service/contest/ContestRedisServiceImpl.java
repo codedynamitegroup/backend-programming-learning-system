@@ -41,7 +41,11 @@ class ContestRedisServiceImpl implements ContestRedisService {
     @Override
     public void clearAllContests() {
         log.info("Clearing all contests from redis");
-        redisTemplate.getConnectionFactory().getConnection().flushAll();
+        try {
+            redisTemplate.getConnectionFactory().getConnection().flushAll();
+        } catch (Exception e) {
+            log.error("Error while clearing contests from redis", e);
+        }
     }
 
     @Override

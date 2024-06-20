@@ -21,8 +21,5 @@ public class CreateReviewCommand {
     private final Float rating;
     @NotNull(message = "content is required")
     private final String content;
-    @NotNull(message = "createdBy is required")
-    private final UUID createdBy;
-    @NotNull(message = "updatedBy is required")
-    private final UUID updatedBy;
+    private final String email;
 }
