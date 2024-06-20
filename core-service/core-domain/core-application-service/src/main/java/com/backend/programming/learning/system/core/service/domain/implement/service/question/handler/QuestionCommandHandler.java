@@ -3,10 +3,7 @@ package com.backend.programming.learning.system.core.service.domain.implement.se
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionCloneCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionCloneResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.question.QuestionDeleteResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryByIdsCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryByIdsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.*;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.core.service.domain.event.question.event.QuestionDeletedEvent;
@@ -133,5 +130,14 @@ public class QuestionCommandHandler {
     public CreateQuestionCloneResponse cloneQuestion(CreateQuestionCloneCommand createQuestionCloneCommand) {
         List<Question> questions = questionCreateHelper.cloneQuestion(createQuestionCloneCommand.questions());
        return questionDataMapper.questionListToCreateQuestionCloneResponse(questions);
+    }
+
+    public QueryAllQuestionWithPaginationResponse queryAllQuestionWithPagination(QueryAllQuestionPaginationCommand queryAllQuestionPaginationCommand) {
+        return questionQueryHelper.queryAllQuestionWithPagination(
+                queryAllQuestionPaginationCommand.qtype(),
+                queryAllQuestionPaginationCommand.searchName(),
+                queryAllQuestionPaginationCommand.pageNo(),
+                queryAllQuestionPaginationCommand.pageSize()
+        );
     }
 }

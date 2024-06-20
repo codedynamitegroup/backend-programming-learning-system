@@ -26,19 +26,15 @@ public class ReviewDataMapper {
         this.userDataMapper = userDataMapper;
     }
 
-    public Review createReviewCommandToReview(CreateReviewCommand createReviewCommand) {
+    public Review createReviewCommandToReview(CreateReviewCommand createReviewCommand,
+                                              User createdBy,
+                                              User updatedBy) {
         return Review.builder()
                 .certificateCourseId(new CertificateCourseId(createReviewCommand.getCertificateCourseId()))
                 .rating(createReviewCommand.getRating())
                 .content(createReviewCommand.getContent())
-                .createdBy(User
-                        .builder()
-                        .id(new UserId(createReviewCommand.getCreatedBy()))
-                        .build())
-                .updatedBy(User
-                        .builder()
-                        .id(new UserId(createReviewCommand.getUpdatedBy()))
-                        .build())
+                .createdBy(createdBy)
+                .updatedBy(updatedBy)
                 .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .updatedAt(ZonedDateTime.now(ZoneId.of("UTC")))
                 .build();

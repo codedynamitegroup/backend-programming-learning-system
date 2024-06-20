@@ -10,6 +10,7 @@ import java.util.UUID;
 
 public interface ReviewRepository {
     Review saveReview(Review review);
+    Optional<Review> findByCertificateCourseIdAndCreatedBy(UUID certificateCourseId, UUID createdBy);
 
     Page<Review> findAllByCertificateCourseId(
             UUID certificateCourseId, Integer pageNo, Integer pageSize);
@@ -20,5 +21,5 @@ public interface ReviewRepository {
 
     Float getAvgRatingOfAllReviewsByCertificateCourseId(UUID certificateCourseId);
 
-    List<Review> findByCertificateCourseIdAndCreatedById(UUID certificateCourseId, UUID createdBy);
+//    List<Review> findByCertificateCourseIdAndCreatedById(UUID certificateCourseId, UUID createdBy);
 }

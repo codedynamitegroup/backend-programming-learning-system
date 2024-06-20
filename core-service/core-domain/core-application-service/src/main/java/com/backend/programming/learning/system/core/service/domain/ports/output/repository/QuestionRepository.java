@@ -26,4 +26,6 @@ public interface QuestionRepository {
             QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand);
 
     List<Question> cloneQuestion(List<CreateQuestionClone> questionClones);
+
+    Page<Question> findAllQuestionWithPagination(String qtype, String searchName, int pageNo, int pageSize);
 }

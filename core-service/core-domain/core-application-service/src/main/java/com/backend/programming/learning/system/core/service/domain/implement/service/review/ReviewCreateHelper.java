@@ -19,6 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -31,52 +33,59 @@ public class ReviewCreateHelper {
     private final CertificateCourseRepository certificateCourseRepository;
     private final CertificateCourseUserRepository certificateCourseUserRepository;
     private final ReviewDataMapper reviewDataMapper;
+    private final UserRepository userRepository;
 
     public ReviewCreateHelper(CoreDomainService coreDomainService,
                               ReviewRepository reviewRepository,
                               CertificateCourseRepository certificateCourseRepository,
                               CertificateCourseUserRepository certificateCourseUserRepository,
-                              ReviewDataMapper reviewDataMapper) {
+                              ReviewDataMapper reviewDataMapper,
+                              UserRepository userRepository) {
         this.coreDomainService = coreDomainService;
         this.reviewRepository = reviewRepository;
         this.certificateCourseRepository = certificateCourseRepository;
         this.certificateCourseUserRepository = certificateCourseUserRepository;
         this.reviewDataMapper = reviewDataMapper;
+        this.userRepository = userRepository;
     }
 
     @Transactional
     public Review persistReview(CreateReviewCommand createReviewCommand) {
+        User user = getUserByEmail(createReviewCommand.getEmail());
         checkCertificateCourseUserByCertificateCourseIdAndUserId(
                 createReviewCommand.getCertificateCourseId(),
-                createReviewCommand.getCreatedBy());
-        checkUserAlreadyReviewedCertificateCourse(
-                createReviewCommand.getCertificateCourseId(),
-                createReviewCommand.getCreatedBy());
+                user.getId().getValue());
 
         CertificateCourse certificateCourse = getCertificateCourse(createReviewCommand.getCertificateCourseId());
 
-        Review review = reviewDataMapper.
-                createReviewCommandToReview(createReviewCommand);
+        Review review = reviewDataMapper.createReviewCommandToReview(createReviewCommand, user, user);
         coreDomainService.createReview(review);
-        Review reviewResult = saveReview(review);
+        Optional<Review> reviewOptional = reviewRepository.findByCertificateCourseIdAndCreatedBy(
+                createReviewCommand.getCertificateCourseId(), user.getId().getValue());
+        Review reviewResult = null;
+        if (reviewOptional.isEmpty()) {
+            reviewResult = saveReview(review);
+        } else {
+            review.setId(reviewOptional.get().getId());
+            review.setUpdatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
+            reviewResult = saveReview(review);
+        }
 
         Float avgRating = getAvgRatingOfAllReviewsByCertificateCourseId(
                 createReviewCommand.getCertificateCourseId());
-
         updateAvgRating(certificateCourse, avgRating);
 
         log.info("Review created with id: {}", reviewResult.getId().getValue());
         return reviewResult;
     }
 
-    private void checkUserAlreadyReviewedCertificateCourse(UUID certificateCourseId, UUID userId) {
-        List<Review> reviews = reviewRepository.findByCertificateCourseIdAndCreatedById(certificateCourseId, userId);
-        if (!reviews.isEmpty()) {
-            log.error("User with id: {} has already reviewed certificate course with id: {}",
-                    userId, certificateCourseId);
-            throw new CoreDomainException("User with id: " + userId +
-                    " has already reviewed certificate course with id: " + certificateCourseId);
+    private User getUserByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isEmpty()) {
+            log.error("User with email: {} not found", email);
+            throw new UserNotFoundException("Could not find user with email: " + email);
         }
+        return user.get();
     }
 
     private void checkCertificateCourseUserByCertificateCourseIdAndUserId(
