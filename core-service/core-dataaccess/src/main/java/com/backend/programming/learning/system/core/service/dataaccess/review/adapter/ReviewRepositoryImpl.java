@@ -41,7 +41,7 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 
     @Override
     public Page<Review> findAllByCertificateCourseId(UUID certificateCourseId, Integer pageNo, Integer pageSize) {
-        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by("updated_at").descending());
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by("updatedAt").descending());
         return reviewJpaRepository.findAllByCertificateCourseId(certificateCourseId, paging)
                 .map(reviewDataAccessMapper::reviewEntityToReview);
     }
