@@ -2,7 +2,6 @@ package com.backend.programming.learning.system.course.service.dataaccess.course
 
 import com.backend.programming.learning.system.course.service.dataaccess.course_user.entity.CourseUserEntity;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -51,4 +50,11 @@ public interface CourseUserJpaRepository extends JpaRepository<CourseUserEntity,
     """)
     Page<CourseUserEntity> findAllCourseByUserId(UUID userId, String search, String[] courseType, Pageable pageable);
 
+    @Query("""
+    SELECT cu 
+    FROM ExamEntity e
+    JOIN CourseUserEntity cu ON cu.course = e.course
+    WHERE e.id = :examId AND cu.user.roleMoodle.id = 5
+    """)
+    Page<CourseUserEntity> findByExamId(UUID examId, Pageable pageable);
 }

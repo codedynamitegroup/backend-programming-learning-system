@@ -1,9 +1,12 @@
 package com.backend.programming.learning.system.course.service.dataaccess.course_user.adapter;
 
+import com.backend.programming.learning.system.course.service.dataaccess.course_user.entity.CourseUserEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.course_user.mapper.CourseUserDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.course_user.repository.CourseUserJpaRepository;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryGradeCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.CourseUser;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseUserRepository;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
@@ -81,5 +84,14 @@ public class CourseUserRepositoryImpl implements CourseUserRepository {
     public Page<CourseUser> findAllCourseByUserId(UUID userId, int pageNo, int pageSize, String search, String[] courseType) {
         return courseUserDataAccessMapper
                 .courseUserPageToCourseUserPage(courseUserJpaRepository.findAllCourseByUserId(userId, search, courseType, PageRequest.of(pageNo, pageSize)));
+    }
+
+    @Override
+    public Page<CourseUser> findByExamId(ExamId examId, QueryGradeCommand queryGradeCommand) {
+        PageRequest pageRequest = PageRequest.of(queryGradeCommand.pageNo(), queryGradeCommand.pageSize());
+        Page<CourseUserEntity> page = courseUserJpaRepository
+                .findByExamId(examId.getValue(), pageRequest);
+        return courseUserDataAccessMapper
+                .courseUserPageToCourseUserPage(page);
     }
 }

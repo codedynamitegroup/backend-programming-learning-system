@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.course.service.dataaccess.exam_qu
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam.CreateQuestionExamCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.ExamQuestion;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamQuestionRepository;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -39,5 +40,12 @@ public class ExamQuestionRepositoryImpl implements ExamQuestionRepository {
     @Override
     public void deleteByExamId(UUID examId) {
         examQuestionJpaRepository.deleteAllByExamId(examId);
+    }
+
+    @Override
+    public List<ExamQuestion> findByExamId(ExamId examId) {
+        return examQuestionDataAccessMapper
+                .examQuestionEntityListToExamQuestionList(examQuestionJpaRepository
+                        .findAllByExamId(examId.getValue()));
     }
 }

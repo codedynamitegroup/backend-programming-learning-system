@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.course.service.domain.ports.outp
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.MarkQuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.QuestionSubmission;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
+import com.backend.programming.learning.system.domain.valueobject.UserId;
 
 import java.util.List;
 import java.util.UUID;
@@ -14,4 +16,6 @@ public interface QuestionSubmissionRepository {
     List<QuestionSubmission> findAllByExamSubmissionId(UUID submissionId);
 
     void markQuestion(List<MarkQuestionSubmissionCommand> markQuestionSubmissionCommandList);
+
+    List<QuestionSubmission> findByExamIdAndUserId(ExamId examId, UserId userId);
 }

@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.dataaccess.questi
 
 import com.backend.programming.learning.system.course.service.dataaccess.question_submission.entity.QuestionSubmissionEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,4 +15,12 @@ public interface QuestionSubmissionJpaRepository extends JpaRepository<QuestionS
     List<QuestionSubmissionEntity> findByExamSubmissionId(UUID submissionId);
 
     Optional<QuestionSubmissionEntity> findByExamSubmissionIdAndQuestionId(UUID examSubmissionId, UUID questionId);
+
+    @Query("""
+    SELECT qs
+    FROM QuestionSubmissionEntity qs
+    WHERE qs.user.id = :userId 
+        AND qs.examSubmission.exam.id = :examId    
+    """)
+    List<QuestionSubmissionEntity> findByExamIdAndUserId(UUID examId, UUID userId);
 }

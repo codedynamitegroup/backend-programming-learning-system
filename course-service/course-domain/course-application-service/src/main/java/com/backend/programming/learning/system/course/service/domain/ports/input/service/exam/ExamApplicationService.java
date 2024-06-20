@@ -6,7 +6,9 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.exam.DeleteExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryAllExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryAllExamResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryAllGradeResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryExamCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryGradeCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.exam.UpdateExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.exam.UpdateExamResponse;
@@ -42,4 +44,6 @@ public interface ExamApplicationService {
             @Valid UpdateExamCommand updateExamCommand);
 
     QueryOverviewResponse overviewExam(ExamId examId);
+
+    QueryAllGradeResponse gradeExam(ExamId examId, QueryGradeCommand queryGradeCommand);
 }
