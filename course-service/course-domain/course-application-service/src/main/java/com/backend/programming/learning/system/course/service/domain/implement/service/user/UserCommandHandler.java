@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.user.CreateUserResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.user.UpdateUserResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.user.UserSubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.event.user.UserCreatedEvent;
 import com.backend.programming.learning.system.course.service.domain.event.user.UserUpdatedEvent;
 import com.backend.programming.learning.system.course.service.domain.implement.saga.user.UserUpdateSagaHelper;
@@ -16,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 import static com.backend.programming.learning.system.saga.user.SagaConstants.COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME;
@@ -27,6 +29,7 @@ public class UserCommandHandler {
     private final UserCreateHelper userCreateHelper;
     private final UserDataMapper userDataMapper;
     private final UserUpdateHelper userUpdateHelper;
+    private final UserQueryHelper userQueryHelper;
     private final UserOutboxHelper userOutboxHelper;
     private final UserUpdateSagaHelper userSagaHelper;
 
@@ -61,5 +64,10 @@ public class UserCommandHandler {
 
         log.info("User is updated with id: {}", userUpdatedEvent.getUser().getId().getValue());
         return userDataMapper.userToUpdateUserResponse(userUpdatedEvent.getUser(), "User updated successfully");
+    }
+
+    @Transactional
+    public List<UserSubmissionAssignmentResponseEntity> queryAllUserByAssignmentId(UUID assignmentId) {
+        return userDataMapper.userToUserSubmissionAssignmentResponseEntityList(userQueryHelper.queryAllUserByAssignmentId(assignmentId),assignmentId);
     }
 }

@@ -33,6 +33,8 @@ public interface CourseUserJpaRepository extends JpaRepository<CourseUserEntity,
     """)
     Page<CourseUserEntity> findAllUserByCourseId(UUID id, String search, Pageable pageable);
 
+
+
     @Query("""
             SELECT COUNT(cu)
             FROM CourseUserEntity cu

@@ -10,6 +10,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.ListSubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.assignment.AssignmentApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -113,6 +114,22 @@ public class AssignmentController {
                         .builder()
                         .assignmentId(id)
                         .build());
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/list-submission/{id}")
+    @Operation(summary = "Get list submission assignment.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = ListSubmissionAssignmentResponseEntity.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<ListSubmissionAssignmentResponseEntity> listSubmissionAssignment(@PathVariable UUID id) {
+        log.info("Getting list submission assignment with id: {}", id);
+        ListSubmissionAssignmentResponseEntity response = assignmentApplicationService
+                .queryAssignmentDetail(new QueryAssignmentCommand(id));
         return ResponseEntity.ok(response);
     }
 

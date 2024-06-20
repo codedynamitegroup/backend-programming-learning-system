@@ -4,10 +4,14 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.user.CreateUserResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.user.UpdateUserResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.user.UserSubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.user.UserApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+
+import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @Validated
@@ -27,5 +31,10 @@ class UserApplicationServiceImpl implements UserApplicationService {
     @Override
     public UpdateUserResponse updateUser(UpdateUserCommand updateUserCommand) {
         return userCommandHandler.updateUser(updateUserCommand);
+    }
+
+    @Override
+    public List<UserSubmissionAssignmentResponseEntity> queryAllUserByAssignmentId(UUID assignmentId) {
+        return userCommandHandler.queryAllUserByAssignmentId(assignmentId);
     }
 }

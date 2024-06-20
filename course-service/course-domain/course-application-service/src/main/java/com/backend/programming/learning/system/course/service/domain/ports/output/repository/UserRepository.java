@@ -20,6 +20,8 @@ public interface UserRepository {
 
     List<User> findAll();
 
+    List<User> findAllUserByAssignmentId(UUID assignmentId);
+
     Optional<User> findByEmail(String email);
 
     Optional<User> findById(UserId userId);
