@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.adapter;
 
 import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.mapper.SubmissionAssignmentDataAccessMapper;
-import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.repository.AssignmentSubmissionJpaRepository;
+import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.repository.SubmissionAssignmentJpaRepository;
 import com.backend.programming.learning.system.course.service.domain.entity.SubmissionAssignment;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionAssignmentRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.AssignmentId;
@@ -14,60 +14,60 @@ import java.util.UUID;
 @Component
 public class SubmissionAssignmentRepositoryImpl implements SubmissionAssignmentRepository {
 
-    private final AssignmentSubmissionJpaRepository assignmentSubmissionJpaRepository;
+    private final SubmissionAssignmentJpaRepository submissionAssignmentJpaRepository;
 
     private final SubmissionAssignmentDataAccessMapper submissionAssignmentDataAccessMapper;
 
-    public SubmissionAssignmentRepositoryImpl(AssignmentSubmissionJpaRepository assignmentSubmissionJpaRepository, SubmissionAssignmentDataAccessMapper submissionAssignmentDataAccessMapper) {
-        this.assignmentSubmissionJpaRepository = assignmentSubmissionJpaRepository;
+    public SubmissionAssignmentRepositoryImpl(SubmissionAssignmentJpaRepository submissionAssignmentJpaRepository, SubmissionAssignmentDataAccessMapper submissionAssignmentDataAccessMapper) {
+        this.submissionAssignmentJpaRepository = submissionAssignmentJpaRepository;
         this.submissionAssignmentDataAccessMapper = submissionAssignmentDataAccessMapper;
     }
 
     @Override
     public SubmissionAssignment saveSubmissionAssignment(SubmissionAssignment submissionAssignment) {
-          return submissionAssignmentDataAccessMapper.assignmentSubmissionEntityToAssignmentSubmission(assignmentSubmissionJpaRepository
+          return submissionAssignmentDataAccessMapper.assignmentSubmissionEntityToAssignmentSubmission(submissionAssignmentJpaRepository
                 .save(submissionAssignmentDataAccessMapper
                         .assignmentSubmissionToAssignmentSubmissionEntity(submissionAssignment)));
     }
 
     @Override
     public Optional<SubmissionAssignment> findById(UUID submissionAssignmentId) {
-        return assignmentSubmissionJpaRepository.findById(submissionAssignmentId)
+        return submissionAssignmentJpaRepository.findById(submissionAssignmentId)
                 .map(submissionAssignmentDataAccessMapper::assignmentSubmissionEntityToAssignmentSubmission);
     }
 
     @Override
     public List<SubmissionAssignment> findAllByAssignmentId(AssignmentId assignmentId) {
-        return submissionAssignmentDataAccessMapper.assignmentSubmissionEntityListToAssignmentSubmissionList(assignmentSubmissionJpaRepository.findAllByAssignmentId(assignmentId.getValue()));
+        return submissionAssignmentDataAccessMapper.assignmentSubmissionEntityListToAssignmentSubmissionList(submissionAssignmentJpaRepository.findAllByAssignmentId(assignmentId.getValue()));
     }
 
     @Override
     public void deleteSubmissionAssignmentById(UUID submissionAssignmentId) {
-        assignmentSubmissionJpaRepository.deleteById(submissionAssignmentId);
+        submissionAssignmentJpaRepository.deleteById(submissionAssignmentId);
     }
 
     @Override
     public SubmissionAssignment findByAssignmentIdAndUserId(UUID assignmentId, UUID userId) {
         return submissionAssignmentDataAccessMapper.
-                assignmentSubmissionEntityToAssignmentSubmission(assignmentSubmissionJpaRepository.
+                assignmentSubmissionEntityToAssignmentSubmission(submissionAssignmentJpaRepository.
                         findByAssignmentIdAndUserId(assignmentId, userId).orElse(null));
     }
 
     @Override
     public SubmissionAssignment update(SubmissionAssignment submissionAssignment) {
         return submissionAssignmentDataAccessMapper.
-                assignmentSubmissionEntityToAssignmentSubmission(assignmentSubmissionJpaRepository.
+                assignmentSubmissionEntityToAssignmentSubmission(submissionAssignmentJpaRepository.
                         save(submissionAssignmentDataAccessMapper.
                                 assignmentSubmissionToAssignmentSubmissionEntity(submissionAssignment)));
     }
 
     @Override
     public Integer countSubmissionsToGradeByAssignmentId(UUID assignmentId) {
-        return assignmentSubmissionJpaRepository.countSubmissionsToGradeByAssignmentId(assignmentId);
+        return submissionAssignmentJpaRepository.countSubmissionsToGradeByAssignmentId(assignmentId);
     }
 
     @Override
     public Integer countAllByAssignmentId(UUID assignmentId) {
-        return assignmentSubmissionJpaRepository.countAllByAssignmentId(assignmentId);
+        return submissionAssignmentJpaRepository.countAllByAssignmentId(assignmentId);
     }
 }

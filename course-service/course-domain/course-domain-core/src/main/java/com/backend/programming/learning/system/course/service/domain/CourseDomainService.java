@@ -75,4 +75,6 @@ public interface CourseDomainService {
     UserCreatedEvent createUser(User user);
 
     void createIntroAttachment(IntroAttachment introAttachment);
+
+    void createSubmissionGrade(SubmissionGrade submissionGrade);
 }

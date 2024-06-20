@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.course.service.domain.valueobject
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 public class SubmissionGrade extends AggregateRoot<SubmissionGradeId> {
     private SubmissionAssignment submissionAssignment;
@@ -53,6 +54,10 @@ public class SubmissionGrade extends AggregateRoot<SubmissionGradeId> {
 
     public void setTimeModified(ZonedDateTime timeModified) {
         this.timeModified = timeModified;
+    }
+
+    public void initializeSubmissionGrade() {
+        setId(new SubmissionGradeId(UUID.randomUUID()));
     }
 
     public static final class Builder {
