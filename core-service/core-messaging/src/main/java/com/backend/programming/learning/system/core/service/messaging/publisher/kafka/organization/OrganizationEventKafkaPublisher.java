@@ -3,11 +3,9 @@ package com.backend.programming.learning.system.core.service.messaging.publisher
 import com.backend.programming.learning.system.core.service.config.CoreServiceConfigData;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.organization.OrganizationEventPayload;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.organization.OrganizationOutboxMessage;
-import com.backend.programming.learning.system.core.service.domain.outbox.model.user.UserEventPayload;
 import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.organization.OrganizationResponseMessagePublisher;
 import com.backend.programming.learning.system.core.service.messaging.mapper.OrganizationMessagingDataMapper;
 import com.backend.programming.learning.system.kafka.auth.avro.model.organization.OrganizationResponseAvroModel;
-import com.backend.programming.learning.system.kafka.auth.avro.model.user.UserResponseAvroModel;
 import com.backend.programming.learning.system.kafka.producer.KafkaOutboxMessageHelper;
 import com.backend.programming.learning.system.kafka.producer.service.KafkaProducer;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
@@ -51,12 +49,12 @@ public class OrganizationEventKafkaPublisher implements OrganizationResponseMess
                             organizationOutboxMessage,
                             outboxCallback,
                             organizationEventPayload.getOrganizationId(),
-                            "UserResponseAvroModel"));
+                            "OrganizationResponseAvroModel"));
             log.info("OrganizationResponseAvroModel sent to Kafka for organization id: {} and saga id: {}",
                     organizationEventPayload.getOrganizationId(), sagaId);
         } catch (Exception e) {
             log.error("Error while sending OrganizationResponseAvroModel message" +
-                    " to kafka with user id: {} and saga id: {}, error: {}", organizationEventPayload.getOrganizationId(), sagaId, e.getMessage());
+                    " to kafka with organization id: {} and saga id: {}, error: {}", organizationEventPayload.getOrganizationId(), sagaId, e.getMessage());
         }
 
     }

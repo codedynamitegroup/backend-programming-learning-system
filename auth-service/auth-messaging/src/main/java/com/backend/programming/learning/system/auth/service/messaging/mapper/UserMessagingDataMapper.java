@@ -132,20 +132,9 @@ public class UserMessagingDataMapper {
                 .dob(userUpdateRequestAvroModel.getDob())
                 .phone(userUpdateRequestAvroModel.getPhone())
                 .updatedAt(userUpdateRequestAvroModel.getUpdatedAt())
+                .isDeleted(userUpdateRequestAvroModel.getIsDeleted())
                 .build();
     }
-
-//    public UserResponseAvroModel userEventAuthToAnyServicesPayloadToUserResponseAvroModel(String sagaId, UserEventAuthToAnyServicesPayload userEventPayload) {
-//        return UserResponseAvroModel.newBuilder()
-//                .setId(UUID.randomUUID().toString())
-//                .setSagaId(sagaId)
-//                .setUserId(userEventPayload.getUserId())
-//                .setCopyState(CopyState.valueOf(userEventPayload.getCopyState()))
-//                .setServiceName(
-//                        com.backend.programming.learning.system.kafka.auth.avro.model.user.ServiceName.valueOf(com.backend.programming.learning.system.domain.valueobject.ServiceName.COURSE_SERVICE.name()))
-//                .setFailureMessages(List.of())
-//                .build();
-//    }
 
     public UserResponseAvroModel userEventCourseToAuthServicePayloadToUserResponseAvroModel(String sagaId, UserEventPayload userEventPayload) {
         return UserResponseAvroModel.newBuilder()

@@ -172,6 +172,9 @@ public class UserRequestHelper {
         if (userUpdateRequest.getAvatarUrl() != null) {
             userUpdated.setAvatarUrl(user.getAvatarUrl());
         }
+        if (userUpdateRequest.getIsDeleted() != null) {
+            userUpdated.setDeleted(user.getDeleted());
+        }
 
         //Save user
         User userSaved = userRepository.save(userUpdated);

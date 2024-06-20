@@ -5,7 +5,6 @@ import com.backend.programming.learning.system.auth.service.dataaccess.organizat
 import com.backend.programming.learning.system.auth.service.domain.entity.Organization;
 import com.backend.programming.learning.system.auth.service.domain.ports.output.repository.OrganizationRepository;
 import com.backend.programming.learning.system.domain.valueobject.OrganizationId;
-import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -38,15 +37,21 @@ public class OrganizationRepositoryImpl implements OrganizationRepository {
     }
 
     @Override
-    public Optional<Organization> findByIdAndIsDeletedTrue(OrganizationId organizationId) {
-        return organizationJpaRepository.findByIdAndIsDeletedTrue(organizationId.getValue())
+    public Optional<Organization> findByIdAndIsVerifiedTrue(OrganizationId organizationId) {
+        return organizationJpaRepository.findByIdAndIsVerifiedTrue(organizationId.getValue())
                 .map(organizationDataAccessMapper::organizationEntityToOrganization);
     }
 
     @Override
-    public Page<Organization> findAll(Integer page, Integer size) {
+    public Optional<Organization> findByIdAndIsDeletedTrueOrFalse(OrganizationId organizationId) {
+        return organizationJpaRepository.findById(organizationId.getValue())
+                .map(organizationDataAccessMapper::organizationEntityToOrganization);
+    }
+
+    @Override
+    public Page<Organization> findAll(Integer page, Integer size, String searchName) {
         Pageable paging = PageRequest.of(page, size);
-        return organizationJpaRepository.findAllByIsDeletedFalse(paging)
+        return organizationJpaRepository.findAll(paging, searchName)
                 .map(organizationDataAccessMapper::organizationEntityToOrganization);
     }
 }

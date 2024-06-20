@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.auth.service.messaging.mapper;
 
-import com.backend.programming.learning.system.auth.service.domain.dto.method.message.OrganizationResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.message.organization.OrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.outbox.model.organization.OrganizationEventPayload;
 import com.backend.programming.learning.system.domain.valueobject.ServiceName;
 import com.backend.programming.learning.system.kafka.auth.avro.model.organization.CopyState;
@@ -45,6 +45,7 @@ public class OrganizationMessagingDataMapper {
                 .setMoodleUrl(organizationEventPayload.getMoodleUrl())
                 .setUpdatedAt(organizationEventPayload.getUpdatedAt().toInstant())
                 .setCopyState(CopyState.UPDATING)
+                .setIsDeleted(organizationEventPayload.getIsDeleted())
                 .setServiceName(
                         com.backend.programming.learning.system.kafka.auth.avro.model.organization.ServiceName.valueOf(serviceName.name()))
                 .build();

@@ -32,5 +32,6 @@ public class QueryAllAdminCodeQuestionCommand {
     String search;
     QuestionDifficulty difficulty;
     Boolean isPublic;
+    UUID orgId;
     String email;
 }

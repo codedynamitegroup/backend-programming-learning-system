@@ -34,6 +34,7 @@ public class UserMessagingDataMapper {
     public UserRequest userUpdateRequestAvroModelToUserUpdateRequest(UserRequestAvroModel userUpdateRequestAvroModel) {
         return UserRequest.builder()
                 .id(userUpdateRequestAvroModel.getId())
+                .organizationId(userUpdateRequestAvroModel.getOrganizationId())
                 .sagaId(userUpdateRequestAvroModel.getSagaId())
                 .userId(userUpdateRequestAvroModel.getUserId())
                 .firstName(userUpdateRequestAvroModel.getFirstName())
@@ -43,6 +44,7 @@ public class UserMessagingDataMapper {
                 .dob(userUpdateRequestAvroModel.getDob())
                 .phone(userUpdateRequestAvroModel.getPhone())
                 .updatedAt(userUpdateRequestAvroModel.getUpdatedAt())
+                .isDeleted(userUpdateRequestAvroModel.getIsDeleted())
                 .build();
     }
 

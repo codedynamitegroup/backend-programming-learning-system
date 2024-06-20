@@ -77,7 +77,10 @@ public class OrganizationCommandHandler {
 
     @Transactional(readOnly = true)
     public QueryAllOrganizationsResponse queryAllOrganizations(QueryAllOrganizationsCommand queryAllOrganizationsCommand) {
-        Page<Organization> organizations = organizationQueryHelper.queryAllOrganizations(queryAllOrganizationsCommand.getPageNo(), queryAllOrganizationsCommand.getPageSize());
+        Page<Organization> organizations = organizationQueryHelper.queryAllOrganizations(
+                queryAllOrganizationsCommand.getPageNo(),
+                queryAllOrganizationsCommand.getPageSize(),
+                queryAllOrganizationsCommand.getSearchName());
         log.info("All organizations are queried");
         return organizationDataMapper.organizationsToQueryAllOrganizationsResponse(organizations);
     }

@@ -55,6 +55,9 @@ public class UserDataMapper {
     public User userUpdateRequestToUser(UserRequest userUpdateRequest) {
         return User.builder()
                 .id(new UserId(UUID.fromString(userUpdateRequest.getUserId())))
+                .organization(userUpdateRequest.getOrganizationId() == null ? null : Organization.builder()
+                        .id(new OrganizationId(UUID.fromString(userUpdateRequest.getOrganizationId())))
+                        .build())
                 .firstName(userUpdateRequest.getFirstName())
                 .lastName(userUpdateRequest.getLastName())
                 .address(userUpdateRequest.getAddress())
@@ -62,6 +65,7 @@ public class UserDataMapper {
                 .dob(userUpdateRequest.getDob().atZone(ZoneId.of(DomainConstants.UTC)))
                 .phone(userUpdateRequest.getPhone())
                 .updatedAt(userUpdateRequest.getUpdatedAt().atZone(ZoneId.of(DomainConstants.UTC)))
+                .isDeleted(userUpdateRequest.getIsDeleted())
                 .build();
     }
 

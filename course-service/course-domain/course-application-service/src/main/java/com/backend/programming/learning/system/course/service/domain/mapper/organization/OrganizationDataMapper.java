@@ -71,6 +71,7 @@ public class OrganizationDataMapper {
                 .moodleUrl(organizationRequest.getMoodleUrl())
                 .apiKey(organizationRequest.getApiKey())
                 .updatedAt(organizationRequest.getUpdatedAt().atZone(ZoneId.of(DomainConstants.UTC)))
+                .isDeleted(organizationRequest.getIsDeleted())
                 .build();
     }
 

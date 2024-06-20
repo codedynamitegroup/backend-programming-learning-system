@@ -105,4 +105,25 @@ public class QtypeCodeQuestionRepositoryImpl implements QtypeCodeQuestionReposit
 
         return codeQuestions;
     }
+
+    @Override
+    public Page<QtypeCodeQuestion> findAllOrgAdminQtypeCodeQuestions(UUID orgId, String search, QuestionDifficulty difficulty, Boolean isPublic, UUID userId, Integer pageNo, Integer pageSize) {
+        Pageable pageable
+                = PageRequest
+                .of(pageNo, pageSize);
+
+        Page<QtypeCodeQuestionEntity> qtypeCodeQuestionEntities = qtypeCodeQuestionJpaRepository
+                .findAllOrgAdminQtypeCodeQuestions(
+                        orgId,
+                        search,
+                        difficulty == null ? null: difficulty.name(),
+                        isPublic,
+                        userId,
+                        pageable);
+
+        Page<QtypeCodeQuestion> codeQuestions = qtypeCodeQuestionEntities
+                .map(qtypeCodeQuestionDataAccessMapper::qtypeCodeQuestionEntityToQtypeCodeQuestion);
+
+        return codeQuestions;
+    }
 }

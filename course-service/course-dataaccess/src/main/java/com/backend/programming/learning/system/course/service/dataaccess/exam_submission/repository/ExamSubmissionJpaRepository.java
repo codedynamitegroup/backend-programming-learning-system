@@ -18,9 +18,9 @@ public interface ExamSubmissionJpaRepository extends JpaRepository<ExamSubmissio
     Optional<List<ExamSubmissionEntity>> findByExamAndUser(ExamEntity examEntity, UserEntity userEntity);
 
     @Query("""
-            SELECT COUNT(es)
+            SELECT COUNT(DISTINCT es.user)
             FROM ExamSubmissionEntity es
-            WHERE es.exam.id = :examId
+            WHERE es.exam.id = :examId AND es.user.roleMoodle.id = 5
             """)
     Integer countSubmission(UUID examId);
 

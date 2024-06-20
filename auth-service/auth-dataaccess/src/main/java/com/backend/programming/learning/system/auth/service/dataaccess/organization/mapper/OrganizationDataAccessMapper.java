@@ -33,6 +33,7 @@ public class OrganizationDataAccessMapper {
                 .createdBy(userDataAccessMapper.userEntityToUser(organizationEntity.getCreatedBy()))
                 .updatedBy(userDataAccessMapper.userEntityToUser(organizationEntity.getUpdatedBy()))
                 .isDeleted(organizationEntity.getIsDeleted())
+                .isVerified(organizationEntity.getIsVerified())
                 .build();
     }
 
@@ -51,6 +52,7 @@ public class OrganizationDataAccessMapper {
                 .createdBy(userDataAccessMapper.userToUserEntity(organization.getCreatedBy()))
                 .updatedBy(userDataAccessMapper.userToUserEntity(organization.getUpdatedBy()))
                 .isDeleted(organization.getDeleted())
+                .isVerified(organization.getVerified())
                 .build();
     }
 }

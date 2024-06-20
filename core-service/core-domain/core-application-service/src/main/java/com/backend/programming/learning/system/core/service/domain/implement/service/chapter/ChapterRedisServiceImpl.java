@@ -36,7 +36,11 @@ class ChapterRedisServiceImpl implements ChapterRedisService {
     @Override
     public void clearAllChapters() {
         log.info("Clearing all chapters from redis");
-        Objects.requireNonNull(redisTemplate.getConnectionFactory()).getConnection().flushAll();
+        try {
+            Objects.requireNonNull(redisTemplate.getConnectionFactory()).getConnection().flushAll();
+        } catch (Exception e) {
+            log.error("Error while clearing chapters from redis", e);
+        }
     }
 
     @Override

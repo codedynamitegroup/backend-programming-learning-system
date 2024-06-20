@@ -87,6 +87,7 @@ public class OrganizationDataMapper {
                 .createdAt(organization.getCreatedAt())
                 .updatedAt(organization.getUpdatedAt())
                 .isDeleted(organization.getDeleted())
+                .isVerified(organization.getVerified())
                 .build();
     }
 
@@ -138,6 +139,7 @@ public class OrganizationDataMapper {
                 .moodleUrl(organization.getMoodleUrl())
                 .updatedAt(organization.getUpdatedAt())
                 .updatedBy(organization.getUpdatedBy().getId().getValue().toString())
+                .isDeleted(organization.getDeleted())
                 .copyState(CopyState.UPDATING.name())
                 .build();
     }

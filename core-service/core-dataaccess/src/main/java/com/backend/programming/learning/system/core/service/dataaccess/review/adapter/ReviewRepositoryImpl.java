@@ -8,6 +8,7 @@ import com.backend.programming.learning.system.core.service.domain.ports.output.
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -33,8 +34,14 @@ public class ReviewRepositoryImpl implements ReviewRepository {
     }
 
     @Override
+    public Optional<Review> findByCertificateCourseIdAndCreatedBy(UUID certificateCourseId, UUID createdBy) {
+        return reviewJpaRepository.findByCertificateCourseIdAndCreatedBy(certificateCourseId, createdBy)
+                .map(reviewDataAccessMapper::reviewEntityToReview);
+    }
+
+    @Override
     public Page<Review> findAllByCertificateCourseId(UUID certificateCourseId, Integer pageNo, Integer pageSize) {
-        Pageable paging = PageRequest.of(pageNo, pageSize);
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by("updatedAt").descending());
         return reviewJpaRepository.findAllByCertificateCourseId(certificateCourseId, paging)
                 .map(reviewDataAccessMapper::reviewEntityToReview);
     }
@@ -55,11 +62,11 @@ public class ReviewRepositoryImpl implements ReviewRepository {
         return reviewJpaRepository.getAvgRatingOfAllReviewsByCertificateCourseId(certificateCourseId);
     }
 
-    @Override
-    public List<Review> findByCertificateCourseIdAndCreatedById(UUID certificateCourseId, UUID createdBy) {
-        return reviewJpaRepository.findByCertificateCourseIdAndCreatedById(certificateCourseId, createdBy)
-                .stream()
-                .map(reviewDataAccessMapper::reviewEntityToReview)
-                .toList();
-    }
+//    @Override
+//    public List<Review> findByCertificateCourseIdAndCreatedById(UUID certificateCourseId, UUID createdBy) {
+//        return reviewJpaRepository.findByCertificateCourseIdAndCreatedById(certificateCourseId, createdBy)
+//                .stream()
+//                .map(reviewDataAccessMapper::reviewEntityToReview)
+//                .toList();
+//    }
 }

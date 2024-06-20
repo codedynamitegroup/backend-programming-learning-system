@@ -1,5 +1,9 @@
 package com.backend.programming.learning.system.auth.service.domain.ports.input.service;
 
+import com.backend.programming.learning.system.auth.service.domain.dto.method.assign_user_to_organization.AssignUserToOrganizationCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.assign_user_to_organization.AssignUserToOrganizationResponse;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.assign_user_to_organization.UnassignedUserToOrganizationCommand;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.assign_user_to_organization.UnassignedUserToOrganizationResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.change_password.ChangedPasswordUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.change_password.ChangedPasswordUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.create.user.CreateUserCommand;
@@ -28,6 +32,8 @@ public interface UserApplicationService {
     CreateUserResponse createUserByAdmin(@Valid CreateUserCommand createUserCommand);
     CreateUserResponse registerUser(@Valid RegisterUserCommand registerUserCommand);
     UserEntityResponse findUserById(@Valid QueryUserByIdCommand queryUserCommand);
+    AssignUserToOrganizationResponse assignUserToOrganization(@Valid AssignUserToOrganizationCommand assignUserToOrganizationCommand);
+    UnassignedUserToOrganizationResponse unassignedUserToOrganization(@Valid UnassignedUserToOrganizationCommand unassignedUserToOrganizationCommand);
     UserEntityResponse findUserByIdAndIsDeletedTrueOrFalse(@Valid QueryUserByIdCommand queryUserCommand);
     UserEntityResponse findUserByEmail(@Valid QueryUserByEmailCommand queryUserByEmailCommand);
     UserEntityResponse findUserByEmailAndIsDeletedTrueOrFalse(QueryUserByEmailCommand queryUserByEmailCommand);

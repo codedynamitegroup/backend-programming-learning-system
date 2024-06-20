@@ -51,22 +51,29 @@ public class ChapterQueryHelper {
     public List<Chapter> queryAllChapters(UUID certificateCourseId,
                                           String email) {
         List<Chapter> chapters = new ArrayList<>();
-        QueryAllChaptersResponse redisResponse = chapterRedisService.getAllChapters(
-                certificateCourseId
-        );
-        if (redisResponse != null) {
-            log.info("Get all chapters from redis");
-            List <ChapterResponseEntity> chapterResponseEntities = redisResponse.getChapters();
-            for (ChapterResponseEntity chapterResponseEntity : chapterResponseEntities) {
-                Chapter chapter = chapterDataMapper.chapterResponseEntityToChapter(chapterResponseEntity);
-                chapters.add(chapter);
+        try {
+            QueryAllChaptersResponse redisResponse = chapterRedisService.getAllChapters(
+                    certificateCourseId
+            );
+            if (redisResponse != null) {
+                log.info("Get all chapters from redis");
+                List <ChapterResponseEntity> chapterResponseEntities = redisResponse.getChapters();
+                for (ChapterResponseEntity chapterResponseEntity : chapterResponseEntities) {
+                    Chapter chapter = chapterDataMapper.chapterResponseEntityToChapter(chapterResponseEntity);
+                    chapters.add(chapter);
+                }
+            } else {
+                log.info("Get all chapters from database");
+                chapters = chapterRepository.findAllByCertificateCourseId(
+                        new CertificateCourseId(certificateCourseId));
+                QueryAllChaptersResponse response = chapterDataMapper.chaptersToQueryAllChaptersResponse(chapters);
+                chapterRedisService.saveAllChapters(response, certificateCourseId);
             }
-        } else {
+        } catch (Exception e) {
+            log.error("Error while getting all chapters from redis: {}", e.getMessage());
             log.info("Get all chapters from database");
             chapters = chapterRepository.findAllByCertificateCourseId(
                     new CertificateCourseId(certificateCourseId));
-            QueryAllChaptersResponse response = chapterDataMapper.chaptersToQueryAllChaptersResponse(chapters);
-            chapterRedisService.saveAllChapters(response, certificateCourseId);
         }
 
         Optional<User> user = userRepository.findByEmail(email);

@@ -205,6 +205,10 @@ public class User extends AggregateRoot<UserId> {
         this.otpExpireAt = otpExpireAt;
     }
 
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
+
     public static Builder builder() {
         return new Builder();
     }

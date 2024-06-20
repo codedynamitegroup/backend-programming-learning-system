@@ -9,6 +9,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -19,8 +20,10 @@ import java.util.UUID;
         message = "title or content must not be null"
 )
 public class UpdateSharedSolutionCommand {
-    @NotNull(message = "userId must not be null")
-    UUID userId;
+    @NotNull(message = "email must not be null")
+    @JsonIgnore
+    @Setter
+    String email;
 
     @Setter
     @NotNull(message = "sharedSolutionId must not be null")
@@ -29,5 +32,6 @@ public class UpdateSharedSolutionCommand {
 
     String title;
     String content;
+
 
 }
