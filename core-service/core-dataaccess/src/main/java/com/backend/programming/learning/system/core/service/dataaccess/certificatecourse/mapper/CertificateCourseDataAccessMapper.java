@@ -44,11 +44,11 @@ public class CertificateCourseDataAccessMapper {
                 .updatedBy(userDataAccessMapper.userToUserEntityHideSensitiveData(certificateCourse.getUpdatedBy()))
                 .createdAt(certificateCourse.getCreatedAt())
                 .updatedAt(certificateCourse.getUpdatedAt())
-                .numOfOneStarReviews(certificateCourse.getNumOfOneStarReviews())
-                .numOfTwoStarReviews(certificateCourse.getNumOfTwoStarReviews())
-                .numOfThreeStarReviews(certificateCourse.getNumOfThreeStarReviews())
-                .numOfFourStarReviews(certificateCourse.getNumOfFourStarReviews())
-                .numOfFiveStarReviews(certificateCourse.getNumOfFiveStarReviews())
+//                .numOfOneStarReviews(certificateCourse.getNumOfOneStarReviews())
+//                .numOfTwoStarReviews(certificateCourse.getNumOfTwoStarReviews())
+//                .numOfThreeStarReviews(certificateCourse.getNumOfThreeStarReviews())
+//                .numOfFourStarReviews(certificateCourse.getNumOfFourStarReviews())
+//                .numOfFiveStarReviews(certificateCourse.getNumOfFiveStarReviews())
                 .build();
     }
 
@@ -69,11 +69,11 @@ public class CertificateCourseDataAccessMapper {
                 .updatedBy(userDataAccessMapper.userEntityToUserHideSensitiveData(certificateCourseEntity.getUpdatedBy()))
                 .createdAt(certificateCourseEntity.getCreatedAt())
                 .updatedAt(certificateCourseEntity.getUpdatedAt())
-                .numOfOneStarReviews(certificateCourseEntity.getNumOfOneStarReviews())
-                .numOfTwoStarReviews(certificateCourseEntity.getNumOfTwoStarReviews())
-                .numOfThreeStarReviews(certificateCourseEntity.getNumOfThreeStarReviews())
-                .numOfFourStarReviews(certificateCourseEntity.getNumOfFourStarReviews())
-                .numOfFiveStarReviews(certificateCourseEntity.getNumOfFiveStarReviews())
+//                .numOfOneStarReviews(certificateCourseEntity.getNumOfOneStarReviews())
+//                .numOfTwoStarReviews(certificateCourseEntity.getNumOfTwoStarReviews())
+//                .numOfThreeStarReviews(certificateCourseEntity.getNumOfThreeStarReviews())
+//                .numOfFourStarReviews(certificateCourseEntity.getNumOfFourStarReviews())
+//                .numOfFiveStarReviews(certificateCourseEntity.getNumOfFiveStarReviews())
                 .build();
     }
 
