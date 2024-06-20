@@ -42,4 +42,10 @@ public class ExamQuestionDataAccessMapper {
                 .page(examQuestion.getPage())
                 .build();
     }
+
+    public List<ExamQuestion> examQuestionEntityListToExamQuestionList(List<ExamQuestionEntity> allByExamId) {
+        return allByExamId.stream()
+                .map(this::examQuestionEntityToExamQuestion)
+                .toList();
+    }
 }

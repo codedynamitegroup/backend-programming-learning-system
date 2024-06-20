@@ -40,6 +40,7 @@ public class CertificateCourseQueryHelper {
     private final QtypeCodeQuestionRepository qtypeCodeQuestionRepository;
     private final CertificateCourseDataMapper certificateCourseDataMapper;
     private final CertificateCourseRedisService certificateCourseRedisService;
+    private final ReviewRepository reviewRepository;
 
     public CertificateCourseQueryHelper(CertificateCourseRepository certificateCourseRepository,
                                         UserRepository userRepository,
@@ -48,7 +49,8 @@ public class CertificateCourseQueryHelper {
                                         TopicRepository topicRepository,
                                         QtypeCodeQuestionRepository qtypeCodeQuestionRepository,
                                         CertificateCourseDataMapper certificateCourseDataMapper,
-                                        CertificateCourseRedisService certificateCourseRedisService) {
+                                        CertificateCourseRedisService certificateCourseRedisService,
+                                        ReviewRepository reviewRepository) {
         this.certificateCourseRepository = certificateCourseRepository;
         this.userRepository = userRepository;
         this.certificateCourseUserRepository = certificateCourseUserRepository;
@@ -57,6 +59,7 @@ public class CertificateCourseQueryHelper {
         this.qtypeCodeQuestionRepository = qtypeCodeQuestionRepository;
         this.certificateCourseDataMapper = certificateCourseDataMapper;
         this.certificateCourseRedisService = certificateCourseRedisService;
+        this.reviewRepository = reviewRepository;
     }
 
     @Transactional(readOnly = true)
@@ -65,6 +68,7 @@ public class CertificateCourseQueryHelper {
             String email) {
         Optional<CertificateCourse> certificateCourseResult =
                 certificateCourseRepository.findById(new CertificateCourseId(certificateCourseId));
+
         if (certificateCourseResult.isEmpty()) {
             log.warn("Could not find certificate course with id: {}",
                     certificateCourseId);
@@ -72,6 +76,18 @@ public class CertificateCourseQueryHelper {
                     certificateCourseId);
         }
         CertificateCourse certificateCourse = certificateCourseResult.get();
+
+        Integer numOfOneStarReviews = reviewRepository.countNumOfReviewsByCertificateCourseIdAndRating(certificateCourseId, 1);
+        Integer numOfTwoStarReviews = reviewRepository.countNumOfReviewsByCertificateCourseIdAndRating(certificateCourseId, 2);
+        Integer numOfThreeStarReviews = reviewRepository.countNumOfReviewsByCertificateCourseIdAndRating(certificateCourseId, 3);
+        Integer numOfFourStarReviews = reviewRepository.countNumOfReviewsByCertificateCourseIdAndRating(certificateCourseId, 4);
+        Integer numOfFiveStarReviews = reviewRepository.countNumOfReviewsByCertificateCourseIdAndRating(certificateCourseId, 5);
+
+        certificateCourse.setNumOfOneStarReviews(numOfOneStarReviews);
+        certificateCourse.setNumOfTwoStarReviews(numOfTwoStarReviews);
+        certificateCourse.setNumOfThreeStarReviews(numOfThreeStarReviews);
+        certificateCourse.setNumOfFourStarReviews(numOfFourStarReviews);
+        certificateCourse.setNumOfFiveStarReviews(numOfFiveStarReviews);
 
         if (email != null) {
             Optional<User> userOptional = userRepository.findByEmail(email);

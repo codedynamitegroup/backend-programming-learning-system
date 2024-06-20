@@ -158,25 +158,30 @@ public class SharedSolutionController {
     }
 
     //edit comment
-    @PutMapping("/{shared-solution-id}/comment/{comment-id}")
+    @PutMapping("/comment/{comment-id}")
     public ResponseEntity updateComment(
-            @PathVariable("shared-solution-id") UUID sharedSolutionId,
             @PathVariable("comment-id") UUID commentId,
+            @RequestHeader(value = "Access-Token") String accessToken,
             @RequestBody UpdateCommentCommand command){
+        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
+
+        command.setEmail(email);
         command.setCommentId(commentId);
-        command.setSharedSolutionId(sharedSolutionId);
         service.updateComment(command);
         return ResponseEntity.noContent().build();
     }
 
     //delete comment
-    @DeleteMapping("/{shared-solution-id}/comment/{comment-id}")
+    @DeleteMapping("/comment/{comment-id}")
     public ResponseEntity deleteComment(
-            @PathVariable("shared-solution-id") UUID sharedSolutionId,
             @PathVariable("comment-id") UUID commentId,
-            @RequestBody DeleteCommentCommand command){
-        command.setCommentId(commentId);
-        command.setSharedSolutionId(sharedSolutionId);
+            @RequestHeader(value = "Access-Token") String accessToken){
+        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
+
+        DeleteCommentCommand command = DeleteCommentCommand.builder()
+                .email(email)
+                .commentId(commentId)
+                .build();
         service.deleteComment(command);
         return ResponseEntity.noContent().build();
     }

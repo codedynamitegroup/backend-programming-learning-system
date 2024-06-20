@@ -30,8 +30,8 @@ public class UserRequestKafkaListener implements KafkaConsumer<UserRequestAvroMo
     }
 
     @Override
-//    @KafkaListener(id = "${kafka-consumer-config.auth-service-to-code-assessment-service-user-request-group-id}",
-//            topics = "${code-assessment-service.auth-service-user-request-to-code-assessment-service-topic-name}")
+    @KafkaListener(id = "${kafka-consumer-config.auth-service-to-code-assessment-service-user-request-group-id}",
+            topics = "${code-assessment-service.auth-service-user-request-to-code-assessment-service-topic-name}")
     public void receive(@Payload List<UserRequestAvroModel> messages,
                         @Header(KafkaHeaders.RECEIVED_KEY) List<String> keys,
                         @Header(KafkaHeaders.RECEIVED_PARTITION) List<Integer> partitions,

@@ -14,13 +14,10 @@ import java.util.UUID;
 @Builder
 @Getter
 public class UpdateCommentCommand {
-    @NotNull(message = "userId must not be null")
-    UUID userId;
-
-    @NotNull(message = "sharedSolutionId must not be null")
-    @JsonIgnore
+    @NotNull(message = "email must not be null")
     @Setter
-    UUID sharedSolutionId;
+    @JsonIgnore
+    String email;
 
     @NotNull(message = "commentId must not be null")
     @Setter

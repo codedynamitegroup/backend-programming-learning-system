@@ -6,6 +6,8 @@ import com.backend.programming.learning.system.course.service.dataaccess.questio
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.MarkQuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.QuestionSubmission;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.QuestionSubmissionRepository;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
+import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -55,6 +57,14 @@ public class QuestionSubmissionRepositoryImpl implements QuestionSubmissionRepos
                     questionSubmissionEntities.add(entity);
                 });
         questionSubmissionJpaRepository.saveAll(questionSubmissionEntities);
+    }
+
+    @Override
+    public List<QuestionSubmission> findByExamIdAndUserId(ExamId examId, UserId userId) {
+        return questionSubmissionDataAccessMapper
+                .questionSubmissionEntityListToQuestionSubmissionList(
+                        questionSubmissionJpaRepository
+                                .findByExamIdAndUserId(examId.getValue(), userId.getValue()));
     }
 
 }

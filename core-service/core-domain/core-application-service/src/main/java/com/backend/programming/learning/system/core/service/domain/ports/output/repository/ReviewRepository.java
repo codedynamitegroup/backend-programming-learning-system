@@ -22,4 +22,5 @@ public interface ReviewRepository {
     Float getAvgRatingOfAllReviewsByCertificateCourseId(UUID certificateCourseId);
 
 //    List<Review> findByCertificateCourseIdAndCreatedById(UUID certificateCourseId, UUID createdBy);
+    Integer countNumOfReviewsByCertificateCourseIdAndRating(UUID certificateCourseId, Integer rating);
 }

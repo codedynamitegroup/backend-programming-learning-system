@@ -62,6 +62,11 @@ public class ReviewRepositoryImpl implements ReviewRepository {
         return reviewJpaRepository.getAvgRatingOfAllReviewsByCertificateCourseId(certificateCourseId);
     }
 
+    @Override
+    public Integer countNumOfReviewsByCertificateCourseIdAndRating(UUID certificateCourseId, Integer rating) {
+        return reviewJpaRepository.countNumOfReviewsByCertificateCourseIdAndRating(certificateCourseId, rating);
+    }
+
 //    @Override
 //    public List<Review> findByCertificateCourseIdAndCreatedById(UUID certificateCourseId, UUID createdBy) {
 //        return reviewJpaRepository.findByCertificateCourseIdAndCreatedById(certificateCourseId, createdBy)
