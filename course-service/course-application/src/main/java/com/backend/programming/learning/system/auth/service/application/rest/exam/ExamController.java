@@ -6,7 +6,9 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.exam.DeleteExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryAllExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryAllExamResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryAllGradeResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryExamCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryGradeCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.exam.UpdateExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.exam.UpdateExamResponse;
@@ -70,6 +72,31 @@ public class ExamController {
                 .pageSize(pageSize)
                 .build();
         QueryAllExamResponse response = examApplicationService.findAll(new CourseId(courseId),queryAllExamCommand);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/exam/{examId}/grade")
+    @Operation(summary = "Grade exam")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllGradeResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllGradeResponse> gradeExam(
+            @PathVariable(name = "examId") UUID examId,
+            @RequestParam(defaultValue = "") String search,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize
+    ) {
+        log.info("Grade exam");
+        QueryGradeCommand queryGradeCommand = QueryGradeCommand.builder()
+                .search(search)
+                .pageNo(pageNo)
+                .pageSize(pageSize)
+                .build();
+        QueryAllGradeResponse response = examApplicationService.gradeExam(new ExamId(examId),queryGradeCommand);
         return ResponseEntity.ok(response);
     }
 
