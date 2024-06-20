@@ -37,6 +37,7 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/core/questions/{id}").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
                         .requestMatchers(HttpMethod.DELETE, "/core/questions/{id}").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
                         .requestMatchers(HttpMethod.GET, "/core/questions/category/{categoryId}").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
+                        .requestMatchers(HttpMethod.GET, "/core/questions/admin/all").hasAnyRole(ADMIN)
 
                         // qtype essay
                         .requestMatchers(HttpMethod.PUT, "/core/questions/essay-question").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE)

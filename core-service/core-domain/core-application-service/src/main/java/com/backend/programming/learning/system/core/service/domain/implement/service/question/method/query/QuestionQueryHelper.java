@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.implement.service.question.method.query;
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionByCategoryIdCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionWithPaginationResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QuestionResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
 import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
@@ -9,6 +10,7 @@ import com.backend.programming.learning.system.core.service.domain.ports.output.
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -56,5 +58,13 @@ public class QuestionQueryHelper {
         log.info("Query all questions by category with id: {}", categoryId);
 
         return questions;
+    }
+
+    @Transactional(readOnly = true)
+    public QueryAllQuestionWithPaginationResponse queryAllQuestionWithPagination(String qtype, String searchName, int pageNo, int pageSize) {
+        Page<Question> questions = questionRepository.findAllQuestionWithPagination(qtype, searchName, pageNo, pageSize);
+
+        log.info("Query all questions with pagination");
+        return questionDataMapper.questionPageToQueryAllQuestionWithPaginationResponse(questions);
     }
 }
