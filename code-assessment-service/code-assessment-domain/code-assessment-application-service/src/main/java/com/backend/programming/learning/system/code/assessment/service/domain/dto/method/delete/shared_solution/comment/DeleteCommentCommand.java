@@ -13,15 +13,10 @@ import java.util.UUID;
 @Builder
 @Getter
 public class DeleteCommentCommand {
-    @NotNull(message = "userId must not be null")
-    UUID userId;
-
-    @NotNull(message = "sharedSolutionId must not be null")
-    @Setter
-    UUID sharedSolutionId;
+    @NotNull(message = "email must not be null")
+    String email;
 
     @NotNull(message = "commentId must not be null")
-    @Setter
     UUID commentId;
 
 }

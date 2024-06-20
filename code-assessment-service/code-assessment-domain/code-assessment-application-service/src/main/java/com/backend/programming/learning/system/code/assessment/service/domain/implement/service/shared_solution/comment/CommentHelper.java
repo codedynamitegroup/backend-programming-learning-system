@@ -67,17 +67,12 @@ public class CommentHelper {
 
     @Transactional
     public void updateComment(UpdateCommentCommand command) {
-        User user = validateHelper.validateUser(command.getUserId());
-
-        SharedSolution sharedSolution = validateHelper.validateSharedSolution(command.getSharedSolutionId());
+        User user = validateHelper.validateUserByEmail(command.getEmail());
 
         Comment comment = validateHelper.validateComment(command.getCommentId());
 
-        if(!comment.getSharedSolutionId().equals(sharedSolution.getId()))
-            throw new CodeAssessmentDomainException("Shared solution " + command.getSharedSolutionId() + "does not own comment " + command.getCommentId());
-
         if(!comment.getUser().equals(user))
-            throw new CodeAssessmentDomainException("User " + command.getUserId() + "does not own comment " + command.getCommentId());
+            throw new CodeAssessmentDomainException("User " + user.getId().getValue() + "does not own comment " + command.getCommentId());
 
         Comment updatedComment = commentDataMapper.updateCommentCommandToComment(command);
         genericHelper.mapRepositoryAttributeToUpdateAttribute(comment, updatedComment, Comment.class);
@@ -87,12 +82,11 @@ public class CommentHelper {
 
     @Transactional
     public void deleteComment(DeleteCommentCommand command) {
-        User user = validateHelper.validateUser(command.getUserId());
-        validateHelper.validateSharedSolution(command.getSharedSolutionId());
+        User user = validateHelper.validateUserByEmail(command.getEmail());
         Comment comment = validateHelper.validateComment(command.getCommentId());
 
         if(!comment.getUser().equals(user))
-            throw new CodeAssessmentDomainException("User " + command.getUserId() + "does not own comment " + command.getCommentId());
+            throw new CodeAssessmentDomainException("User " + user.getId().getValue() + "does not own comment " + command.getCommentId());
 
         commentRepository.deleteById(new CommentId(command.getCommentId()));
     }
