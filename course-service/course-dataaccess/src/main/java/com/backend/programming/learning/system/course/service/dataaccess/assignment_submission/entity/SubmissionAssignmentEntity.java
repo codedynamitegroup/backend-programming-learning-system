@@ -35,6 +35,7 @@ public class SubmissionAssignmentEntity {
 
 
     private String content;
+    private String feedback;
 
     private ZonedDateTime submitTime;
     private ZonedDateTime timemodified;

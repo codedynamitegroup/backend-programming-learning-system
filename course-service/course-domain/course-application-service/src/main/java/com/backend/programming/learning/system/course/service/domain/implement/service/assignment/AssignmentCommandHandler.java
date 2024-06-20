@@ -10,6 +10,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.ListSubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.Assignment;
 import com.backend.programming.learning.system.course.service.domain.mapper.assignment.AssignmentDataMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -82,5 +83,12 @@ public class AssignmentCommandHandler {
                 .message("Assignment updated successfully")
                 .build();
 
+    }
+
+    @Transactional
+    public ListSubmissionAssignmentResponseEntity queryAssignmentDetailById(UUID assignmentId) {
+        log.info("Query assignment detail by id command received");
+        Assignment assignment= assignmentQueryHelper.queryAssignmentById(assignmentId);
+        return assignmentDataMapper.assignmentToAssignmentDetailResponseEntity(assignment);
     }
 }

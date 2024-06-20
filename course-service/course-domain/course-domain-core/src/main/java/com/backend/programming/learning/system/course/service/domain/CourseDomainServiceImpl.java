@@ -285,4 +285,10 @@ public class CourseDomainServiceImpl implements CourseDomainService {
         introAttachment.initializeIntroAttachment();
         log.info("IntroAttachment with id: {} is initiated", introAttachment.getId().getValue());
     }
+
+    @Override
+    public void createSubmissionGrade(SubmissionGrade submissionGrade) {
+        submissionGrade.initializeSubmissionGrade();
+        log.info("SubmissionGrade with id: {} is initiated", submissionGrade.getId().getValue());
+    }
 }

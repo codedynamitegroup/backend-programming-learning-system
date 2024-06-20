@@ -31,6 +31,7 @@ public class SubmissionAssignmentDataAccessMapper {
                 .isGraded(submissionAssignment.getGradedStatus())
                 .timemodified(submissionAssignment.getTimemodified())
                 .grade(submissionAssignment.getGrade())
+                .feedback(submissionAssignment.getFeedback())
                 .content(submissionAssignment.getContent())
                 .submitTime(submissionAssignment.getSubmittedAt())
                 .build();
@@ -48,6 +49,7 @@ public class SubmissionAssignmentDataAccessMapper {
                 .grade(submissionAssignmentEntity.getGrade())
                 .content(submissionAssignmentEntity.getContent())
                 .timemodified(submissionAssignmentEntity.getTimemodified())
+                .feedback(submissionAssignmentEntity.getFeedback())
                 .submittedAt(submissionAssignmentEntity.getSubmitTime())
                 .build();
     }

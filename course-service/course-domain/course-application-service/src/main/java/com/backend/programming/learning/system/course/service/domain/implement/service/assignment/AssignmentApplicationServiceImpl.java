@@ -10,6 +10,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.ListSubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.assignment.AssignmentApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -50,5 +51,10 @@ public class AssignmentApplicationServiceImpl implements AssignmentApplicationSe
     @Override
     public DeleteAssignmentResponse deleteAssignment(DeleteAssignmentCommand deleteAssignmentCommand) {
         return assignmentCommandHandler.deleteAssignmentById(deleteAssignmentCommand);
+    }
+
+    @Override
+    public ListSubmissionAssignmentResponseEntity queryAssignmentDetail(QueryAssignmentCommand queryAssignmentCommand) {
+        return assignmentCommandHandler.queryAssignmentDetailById(queryAssignmentCommand.getAssignmentId());
     }
 }

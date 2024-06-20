@@ -6,25 +6,25 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.assignment.DeleteAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAllAssignmentsResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAssignmentResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.responseentity.activity_attachment.ActivityAttachmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.AssignmentResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.ListSubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.intro_attachment.IntroAttachmentResponseEntity;
-import com.backend.programming.learning.system.course.service.domain.dto.responseentity.intro_file.IntroFileResponseEntity;
-import com.backend.programming.learning.system.course.service.domain.entity.ActivityAttachment;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.user.UserSubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.Assignment;
+import com.backend.programming.learning.system.course.service.domain.entity.Course;
 import com.backend.programming.learning.system.course.service.domain.entity.IntroAttachment;
-import com.backend.programming.learning.system.course.service.domain.entity.IntroFile;
+import com.backend.programming.learning.system.course.service.domain.implement.service.user.UserCommandHandler;
 import com.backend.programming.learning.system.course.service.domain.mapper.activity_attachment.ActivityAttachmentDataMapper;
 import com.backend.programming.learning.system.course.service.domain.mapper.intro_attachment.IntroAttachmentDataMapper;
 import com.backend.programming.learning.system.course.service.domain.mapper.intro_file.IntroFileDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ActivityAttachmentRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.IntroAttachmentRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.IntroFileRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.Type;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
@@ -38,15 +38,22 @@ public class AssignmentDataMapper {
 
     private final ActivityAttachmentRepository activityAttachmentRepository;
 
+    private final UserCommandHandler userCommandHandler;
+
+    private final CourseRepository courseRepository;
+
+
     public AssignmentDataMapper(IntroAttachmentDataMapper introAttachmentDataMapper,
                                 IntroAttachmentRepository introAttachmentRepository, IntroFileDataMapper introFileDataMapper,
-                                IntroFileRepository introFileRepository, ActivityAttachmentDataMapper activityAttachmentDataMapper, ActivityAttachmentRepository activityAttachmentRepository) {
+                                IntroFileRepository introFileRepository, ActivityAttachmentDataMapper activityAttachmentDataMapper, ActivityAttachmentRepository activityAttachmentRepository, UserCommandHandler userCommandHandler, CourseRepository courseRepository) {
         this.introAttachmentDataMapper = introAttachmentDataMapper;
         this.introAttachmentRepository = introAttachmentRepository;
         this.introFileDataMapper = introFileDataMapper;
         this.introFileRepository = introFileRepository;
         this.activityAttachmentDataMapper = activityAttachmentDataMapper;
         this.activityAttachmentRepository = activityAttachmentRepository;
+        this.userCommandHandler = userCommandHandler;
+        this.courseRepository = courseRepository;
     }
 
     public Assignment createAssignmentCommandToAssignment(CreateAssignmentCommand createAssignmentCommand) {
@@ -135,4 +142,27 @@ public class AssignmentDataMapper {
                 .collect(Collectors.toList());
     }
 
+    public ListSubmissionAssignmentResponseEntity assignmentToAssignmentDetailResponseEntity(Assignment assignment) {
+
+        List<IntroAttachmentResponseEntity> introAttachmentResponseEntities = List.of();
+        List<IntroAttachment> introAttachments = introAttachmentRepository.findAllByAssignmentId(assignment.getId().getValue());
+        if(introAttachments != null && !introAttachments.isEmpty())
+        {
+            introAttachmentResponseEntities = introAttachments.stream()
+                    .map(introAttachmentDataMapper::introAttachmentToIntroAttachmentResponseEntity)
+                    .toList();
+        }
+
+        List<UserSubmissionAssignmentResponseEntity> userSubmissionAssignmentResponseEntities =
+                userCommandHandler.queryAllUserByAssignmentId(assignment.getId().getValue());
+
+
+        Course course = courseRepository.findById(assignment.getCourseId().getValue());
+        return ListSubmissionAssignmentResponseEntity.builder()
+                .id(assignment.getId().getValue())
+                .title(assignment.getTitle())
+                .courseName(course.getName())
+                .users(userSubmissionAssignmentResponseEntities)
+                .build();
+    }
 }
