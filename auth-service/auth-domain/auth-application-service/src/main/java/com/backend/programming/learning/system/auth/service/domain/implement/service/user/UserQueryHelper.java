@@ -45,8 +45,8 @@ public class UserQueryHelper {
     }
 
     @Transactional(readOnly = true)
-    public Page<User> queryAllUsers(Integer pageNo, Integer pageSize, String searchName) {
-        return userRepository.findAll(pageNo, pageSize, searchName);
+    public Page<User> queryAllUsers(Integer pageNo, Integer pageSize, String searchName, String belongToOrg) {
+        return userRepository.findAll(pageNo, pageSize, searchName, belongToOrg);
     }
 
     @Transactional(readOnly = true)
@@ -86,7 +86,7 @@ public class UserQueryHelper {
 
     @Transactional(readOnly = true)
     public QueryGeneralStatisticUserResponse getStatisticUser() {
-        List<User> users = userRepository.findAll(0, 100000, "").getContent();
+        List<User> users = userRepository.findAll(0, 100000, "", "ALL").getContent();
         List<Role> roles = roleRepository.findAll(0, 100000).getContent();
 
         long activeUser = calculateActiveUsers(users);
