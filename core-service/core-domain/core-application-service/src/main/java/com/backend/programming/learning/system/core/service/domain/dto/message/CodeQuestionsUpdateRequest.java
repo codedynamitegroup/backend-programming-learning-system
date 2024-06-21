@@ -18,6 +18,8 @@ public class CodeQuestionsUpdateRequest {
     private final String problemStatement;
     private final String name;
     private final Float maxGrade;
+    private final Boolean isPublic;
+    private final Boolean isAllowedToImport;
 //    private final String constraints;
     private String state;//copy state
 }

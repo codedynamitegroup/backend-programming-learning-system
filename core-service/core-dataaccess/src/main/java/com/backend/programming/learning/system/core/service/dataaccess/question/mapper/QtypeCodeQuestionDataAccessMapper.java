@@ -28,6 +28,10 @@ public class QtypeCodeQuestionDataAccessMapper {
             builder.name(qtypeCodeQuestion.getCodeQuestionName());
         if (qtypeCodeQuestion.getMaxGrade() != null)
             builder.maxGrade(qtypeCodeQuestion.getMaxGrade());
+        if (qtypeCodeQuestion.getPublic() != null)
+            builder.isPublic(qtypeCodeQuestion.getPublic());
+        if (qtypeCodeQuestion.getAllowedToImport() != null)
+            builder.isAllowedToImport(qtypeCodeQuestion.getAllowedToImport());
 
         return builder.build();
     }
@@ -56,6 +60,7 @@ public class QtypeCodeQuestionDataAccessMapper {
                 .problemStatement(qtypeCodeQuestionEntity.getProblemStatement())
                 .codeQuestionName(qtypeCodeQuestionEntity.getName())
                 .isPublic(qtypeCodeQuestionEntity.getIsPublic())
+                .isAllowedToImport(qtypeCodeQuestionEntity.getIsAllowedToImport())
                 .maxGrade(qtypeCodeQuestionEntity.getMaxGrade())
                 .build();
     }

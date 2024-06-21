@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.review.DeleteReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryEachStarReviewCountResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryReviewCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewResponse;
@@ -117,6 +118,25 @@ public class ReviewController {
                         .build());
         log.info("Returning all reviews: {}", queryAllReviewsResponse);
         return ResponseEntity.ok(queryAllReviewsResponse);
+    }
+
+
+    @GetMapping("/stars")
+    @Operation(summary = "Get each star rating count by certificate course id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllReviewsResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryEachStarReviewCountResponse> getEachStarRatingCountByCertificateCourseId(
+            @RequestParam(required = true) UUID certificateCourseId) {
+        QueryEachStarReviewCountResponse queryEachStarReviewCountResponse =
+                reviewApplicationService.queryEachStarReviewCountByCertificateCourseId(certificateCourseId);
+
+        log.info("Returning each star rating count: {}", queryEachStarReviewCountResponse);
+        return ResponseEntity.ok(queryEachStarReviewCountResponse);
     }
 
     @GetMapping("/{id}")
