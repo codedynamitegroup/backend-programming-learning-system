@@ -21,4 +21,6 @@ public interface QuestionSubmissionRepository {
     List<QuestionSubmission> findByExamIdAndUserId(ExamId examId, UserId userId);
 
     Optional<QuestionSubmission> findByExamSubmissionIdAndQuestionId(UUID examSubmissionId, UUID questionId);
+
+    List<QuestionSubmission> findAllByExamSubmissionIdAndQuestionIdList(UUID examSubmissionId, List<UUID> questionId);
 }

@@ -7,6 +7,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.MarkQuestionSubmissionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.question_submission.QueryQuestionSubmissionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.question_submission.QueryQuestionSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.question_submission.QuestionSubmissionApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,5 +47,10 @@ public class QuestionSubmissionApplicationImpl implements QuestionSubmissionAppl
     @Override
     public OneExamQuestionSubmissionResponse submitOneExamQuestion(OneExamQuestionSubmissionCommand oneExamQuestionSubmissionCommand) {
         return questionSubmissionCommandHandler.submitOneExamQuestion(oneExamQuestionSubmissionCommand);
+    }
+
+    @Override
+    public QueryQuestionSubmissionResponse getQuestionSubmissionByQuestionIdList(QueryQuestionSubmissionCommand queryQuestionSubmissionCommand) {
+        return questionSubmissionCommandHandler.getQuestionSubmissionByQuestionIdList(queryQuestionSubmissionCommand);
     }
 }

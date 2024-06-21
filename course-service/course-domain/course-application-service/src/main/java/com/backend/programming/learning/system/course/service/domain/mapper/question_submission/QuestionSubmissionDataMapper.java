@@ -6,11 +6,15 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.QuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.question_submission.QueryQuestionSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
 import com.backend.programming.learning.system.course.service.domain.entity.Question;
 import com.backend.programming.learning.system.course.service.domain.entity.QuestionSubmission;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.mapper.exam_submission.ExamSubmissionDataMapper;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * com.backend.programming.learning.system.mapper.question_submission
@@ -20,6 +24,12 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class QuestionSubmissionDataMapper {
+    private final ExamSubmissionDataMapper examSubmissionDataMapper;
+
+    public QuestionSubmissionDataMapper(ExamSubmissionDataMapper examSubmissionDataMapper) {
+        this.examSubmissionDataMapper = examSubmissionDataMapper;
+    }
+
     public QuestionSubmission createQuestionSubmissionCommandToQuestionSubmission(ExamSubmission examSubmission, User user, Question question, CreateQuestionSubmissionCommand createQuestionSubmissionCommand) {
         return QuestionSubmission.builder()
                 .examSubmission(examSubmission)
@@ -70,8 +80,18 @@ public class QuestionSubmissionDataMapper {
 
     public OneExamQuestionSubmissionResponse questionSubmissionToOneExamQuestionSubmissionResponse(QuestionSubmission questionSubmission) {
         return OneExamQuestionSubmissionResponse.builder()
-                .questionSubmission(questionSubmission)
+                .questionId(questionSubmission.getQuestion().getId().getValue())
+                .grade(questionSubmission.getGrade())
+                .answerStatus(questionSubmission.getAnswerStatus())
+                .flag(questionSubmission.getFlag())
+                .content(questionSubmission.getContent())
                 .message("Submit one exam question successfully")
+                .build();
+    }
+
+    public QueryQuestionSubmissionResponse questionSubmissionsToQueryQuestionSubmissionResponse(List<QuestionSubmission> questionSubmissionList) {
+        return QueryQuestionSubmissionResponse.builder()
+                .questionSubmissions(examSubmissionDataMapper.mapToQuestionSubmissions(questionSubmissionList))
                 .build();
     }
 }
