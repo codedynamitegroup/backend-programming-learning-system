@@ -24,6 +24,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -72,25 +73,21 @@ public class ExamSubmissionRepositoryImpl implements ExamSubmissionRepository {
 
     @Override
     public ExamSubmission saveEnd(CreateExamSubmissionEndCommand createExamSubmissionEndCommand) {
-        ExamEntity examEntity = examJpaRepository.findById(createExamSubmissionEndCommand.examId())
+        examJpaRepository.findById(createExamSubmissionEndCommand.examId())
                 .orElseThrow(() -> new ExamNotFoundException("Exam not found"));
-        UserEntity userEntity = userJpaRepository.findById(createExamSubmissionEndCommand.userId())
+        userJpaRepository.findById(createExamSubmissionEndCommand.userId())
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
 
-        ExamSubmissionEntity examSubmissionEntity = Objects.requireNonNull(examSubmissionJpaRepository
-                        .findByExamAndUser(examEntity, userEntity)
-                        .orElse(null))
-                .stream()
-                .min((e1, e2) -> e2.getSubmitCount().compareTo(e1.getSubmitCount()))
-                .orElse(null);
-
-        if(examSubmissionEntity == null) {
-            log.error("Exam submission not found with examId: {} and userId: {}", createExamSubmissionEndCommand.examId(), createExamSubmissionEndCommand.userId());
-            throw new RuntimeException("Exam submission not found");
-        }
+        ExamSubmissionEntity examSubmissionEntity = examSubmissionJpaRepository
+                .findLatestExamSubmission(createExamSubmissionEndCommand.examId(), createExamSubmissionEndCommand.userId())
+                .orElseThrow(() -> {
+                    log.error("Exam submission not found with examId: {} and userId: {}", createExamSubmissionEndCommand.examId(), createExamSubmissionEndCommand.userId());
+                    return new RuntimeException("Exam submission not found");
+                });
 
         examSubmissionEntity.setSubmitTime(createExamSubmissionEndCommand.examSubmissionTime());
         examSubmissionEntity.setStatus(Status.SUBMITTED);
+
         return examSubmissionDataAccessMapper.examSubmissionEntityToExamSubmission(examSubmissionJpaRepository.save(examSubmissionEntity));
     }
 
@@ -102,9 +99,16 @@ public class ExamSubmissionRepositoryImpl implements ExamSubmissionRepository {
         return examSubmissionDataAccessMapper.examSubmissionEntitiesToExamSubmissions(examSubmissions);
     }
 
+    // Get all exam submissions by examId and userId
     @Override
     public List<ExamSubmission> findAllByExamIdAndUserId(UUID examId, UUID userId) {
         List<ExamSubmissionEntity> examSubmissionEntities = examSubmissionJpaRepository.findByExamIdAndUserId(examId, userId);
         return examSubmissionDataAccessMapper.examSubmissionEntitiesToExamSubmissions(examSubmissionEntities);
+    }
+
+    @Override
+    public Optional<ExamSubmission> findLatestExamSubmissionByExamIdAndUserId(UUID examId, UUID userId) {
+        return examSubmissionJpaRepository.findLatestExamSubmission(examId, userId)
+                .map(examSubmissionDataAccessMapper::examSubmissionEntityToExamSubmission);
     }
 }

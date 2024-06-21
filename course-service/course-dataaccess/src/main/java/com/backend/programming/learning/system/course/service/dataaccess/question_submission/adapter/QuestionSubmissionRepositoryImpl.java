@@ -73,4 +73,14 @@ public class QuestionSubmissionRepositoryImpl implements QuestionSubmissionRepos
         return questionSubmissionJpaRepository.findByExamSubmissionIdAndQuestionId(examSubmissionId, questionId)
                 .map(questionSubmissionDataAccessMapper::questionSubmissionEntityToQuestionSubmission);
     }
+
+    @Override
+    public List<QuestionSubmission> findAllByExamSubmissionIdAndQuestionIdList(
+            UUID examSubmissionId,
+            List<UUID> questionId) {
+        return questionSubmissionJpaRepository.findAllByExamSubmissionIdAndQuestionIdList(examSubmissionId, questionId)
+                .stream()
+                .map(questionSubmissionDataAccessMapper::questionSubmissionEntityToQuestionSubmission)
+                .collect(Collectors.toList());
+    }
 }

@@ -26,13 +26,11 @@ public interface QtypeCodeQuestionJpaRepository extends JpaRepository<QtypeCodeQ
                 AND (cast(?1 as text) IS NULL or UPPER(qe.name) like UPPER(concat('%', cast(?1 as text), '%')))
                 AND (cast(?2 as text) is NULL OR cast(?2 as text) = cast(qe.difficulty as text))
                 AND (?3 is null or cqe.is_public = ?3)
-                AND (?4 = qe.created_by or cqe.is_public = true)
          order by qe.created_at asc
 """, nativeQuery = true)
     Page<QtypeCodeQuestionEntity> findAllAdminQtypeCodeQuestions(String search,
                                                                  String difficulty,
                                                                  Boolean isPublic,
-                                                                 UUID userId,
                                                                  Pageable pageable);
 
     @Query(value="""
@@ -44,13 +42,11 @@ public interface QtypeCodeQuestionJpaRepository extends JpaRepository<QtypeCodeQ
                 AND (cast(?2 as text) IS NULL or UPPER(qe.name) like UPPER(concat('%', cast(?2 as text), '%')))
                 AND (cast(?3 as text) is NULL OR cast(?3 as text) = cast(qe.difficulty as text))
                 AND (?4 is null or cqe.is_public = ?4)
-                AND (?5 = qe.created_by or cqe.is_public = true)
          order by qe.created_at asc
 """, nativeQuery = true)
     Page<QtypeCodeQuestionEntity> findAllOrgAdminQtypeCodeQuestions(UUID orgId,
                                                                      String search,
                                                                      String difficulty,
                                                                      Boolean isPublic,
-                                                                     UUID userId,
                                                                      Pageable pageable);
 }

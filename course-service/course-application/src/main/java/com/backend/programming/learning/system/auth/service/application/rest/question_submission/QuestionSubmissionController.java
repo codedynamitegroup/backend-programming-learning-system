@@ -7,6 +7,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.MarkQuestionSubmissionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.question_submission.QueryQuestionSubmissionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.question_submission.QueryQuestionSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.question_submission.QuestionSubmissionApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -17,11 +19,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -103,4 +101,22 @@ public class QuestionSubmissionController {
         log.info("One question submitted: {}", response);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    @PostMapping("/get-by-questionId")
+    @Operation(summary = "Get all questions by exam id and user id and questionId list.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryQuestionSubmissionCommand.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryQuestionSubmissionResponse> getQuestionSubmissionByQuestionId(
+           @RequestBody QueryQuestionSubmissionCommand queryQuestionSubmissionCommand) {
+        log.info("Getting question submission by question id list: {}", queryQuestionSubmissionCommand);
+        QueryQuestionSubmissionResponse response = questionSubmissionApplicationService.getQuestionSubmissionByQuestionIdList(queryQuestionSubmissionCommand);
+        log.info("Question submission by question id list: {}", response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
 }

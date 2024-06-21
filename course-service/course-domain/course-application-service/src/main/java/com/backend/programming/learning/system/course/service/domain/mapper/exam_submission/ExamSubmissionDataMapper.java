@@ -76,19 +76,23 @@ public class ExamSubmissionDataMapper {
                 .build();
     }
 
-    private List<QuestionSubmissionResponse> mapToQuestionSubmissions(List<QuestionSubmission> questionSubmissions) {
+    public List<QuestionSubmissionResponse> mapToQuestionSubmissions(List<QuestionSubmission> questionSubmissions) {
         return questionSubmissions.stream()
-                .map(questionSubmission -> QuestionSubmissionResponse.builder()
-                        .questionId(questionSubmission.getQuestion().getId().getValue())
-                        .examSubmissionId(questionSubmission.getExamSubmission().getId().getValue())
-                        .userId(questionSubmission.getUser().getId().getValue())
-                        .passStatus(questionSubmission.getPassStatus())
-                        .grade(questionSubmission.getGrade())
-                        .content(questionSubmission.getContent())
-                        .rightAnswer(questionSubmission.getRightAnswer())
-                        .numFile(questionSubmission.getNumFile())
-                        .build())
+                .map(this::questionSubmissionToQuestionSubmissionResponse)
                 .toList();
+    }
+
+    private QuestionSubmissionResponse questionSubmissionToQuestionSubmissionResponse(QuestionSubmission questionSubmission) {
+        return QuestionSubmissionResponse.builder()
+                .questionId(questionSubmission.getQuestion().getId().getValue())
+                .passStatus(questionSubmission.getPassStatus())
+                .grade(questionSubmission.getGrade())
+                .content(questionSubmission.getContent())
+                .rightAnswer(questionSubmission.getRightAnswer())
+                .numFile(questionSubmission.getNumFile())
+                .flag(questionSubmission.getFlag())
+                .answerStatus(questionSubmission.getAnswerStatus())
+                .build();
     }
 
     public QueryExamSubmissionOverviewResponse mapToQueryExamSubmissionResponseWithTotal(ExamSubmission examSubmission, Double markTotal) {
