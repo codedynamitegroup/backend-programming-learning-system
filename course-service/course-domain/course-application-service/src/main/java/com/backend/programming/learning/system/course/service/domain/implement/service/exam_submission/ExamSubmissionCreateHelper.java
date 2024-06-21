@@ -10,6 +10,7 @@ import com.backend.programming.learning.system.course.service.domain.entity.Exam
 import com.backend.programming.learning.system.course.service.domain.entity.Question;
 import com.backend.programming.learning.system.course.service.domain.entity.QuestionSubmission;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.exception.ExamClosedException;
 import com.backend.programming.learning.system.course.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam_submission.ExamSubmissionDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.AnswerOfQuestionRepository;
@@ -25,6 +26,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -131,6 +134,12 @@ public class ExamSubmissionCreateHelper {
     public ExamSubmission createStartExamSubmission(CreateExamSubmissionStartCommand createExamSubmissionCommand) {
         log.info("Create start exam submission");
         Exam exam = examRepository.findBy(new ExamId(createExamSubmissionCommand.examId()));
+
+        if(isExamClosed(exam)) {
+            log.error("Exam is closed");
+            throw new ExamClosedException("Exam is closed");
+        }
+
         User user = userRepository.findUser(createExamSubmissionCommand.userId())
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
         ExamSubmission examSubmissionLast = examSubmissionRepository.findByExamAndUser(exam, user);
@@ -144,5 +153,9 @@ public class ExamSubmissionCreateHelper {
 
     public ExamSubmission createEndExamSubmission(CreateExamSubmissionEndCommand createExamSubmissionStartCommand) {
         return examSubmissionRepository.saveEnd(createExamSubmissionStartCommand);
+    }
+
+    private Boolean isExamClosed(Exam exam) {
+        return exam.getTimeClose().isBefore(ZonedDateTime.now());
     }
 }
