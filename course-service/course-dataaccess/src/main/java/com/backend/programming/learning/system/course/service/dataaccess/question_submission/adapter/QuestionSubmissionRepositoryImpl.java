@@ -11,10 +11,8 @@ import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -32,7 +30,10 @@ public class QuestionSubmissionRepositoryImpl implements QuestionSubmissionRepos
 
     @Override
     public void saveAll(List<QuestionSubmission> questionSubmissions) {
-        questionSubmissions.forEach(this::save);
+        List<QuestionSubmissionEntity> entities = questionSubmissions.stream()
+                .map(questionSubmissionDataAccessMapper::questionSubmissionToQuestionSubmissionEntity)
+                .collect(Collectors.toList());
+        questionSubmissionJpaRepository.saveAll(entities);
     }
 
     @Override
@@ -67,4 +68,19 @@ public class QuestionSubmissionRepositoryImpl implements QuestionSubmissionRepos
                                 .findByExamIdAndUserId(examId.getValue(), userId.getValue()));
     }
 
+    @Override
+    public Optional<QuestionSubmission> findByExamSubmissionIdAndQuestionId(UUID examSubmissionId, UUID questionId) {
+        return questionSubmissionJpaRepository.findByExamSubmissionIdAndQuestionId(examSubmissionId, questionId)
+                .map(questionSubmissionDataAccessMapper::questionSubmissionEntityToQuestionSubmission);
+    }
+
+    @Override
+    public List<QuestionSubmission> findAllByExamSubmissionIdAndQuestionIdList(
+            UUID examSubmissionId,
+            List<UUID> questionId) {
+        return questionSubmissionJpaRepository.findAllByExamSubmissionIdAndQuestionIdList(examSubmissionId, questionId)
+                .stream()
+                .map(questionSubmissionDataAccessMapper::questionSubmissionEntityToQuestionSubmission)
+                .collect(Collectors.toList());
+    }
 }

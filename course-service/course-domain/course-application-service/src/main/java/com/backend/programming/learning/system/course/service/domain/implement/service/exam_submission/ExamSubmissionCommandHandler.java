@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.exam_submission;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionEndCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionOverviewResponse;
@@ -41,8 +42,8 @@ public class ExamSubmissionCommandHandler {
     }
 
     @Transactional
-    public CreateExamSubmissionResponse endExam(CreateExamSubmissionStartCommand createExamSubmissionStartCommand) {
-        ExamSubmission examSubmission = examSubmissionCreateHelper.createEndExamSubmission(createExamSubmissionStartCommand);
+    public CreateExamSubmissionResponse endExam(CreateExamSubmissionEndCommand createExamSubmissionEndCommand) {
+        ExamSubmission examSubmission = examSubmissionCreateHelper.createEndExamSubmission(createExamSubmissionEndCommand);
         return examSubmissionDataMapper.mapToCreateExamSubmissionResponse(examSubmission);
     }
 

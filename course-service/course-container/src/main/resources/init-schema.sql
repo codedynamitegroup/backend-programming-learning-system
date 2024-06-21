@@ -444,6 +444,7 @@ CREATE TABLE "public".exam_question_submission
     right_answer     text,
     num_file         bigint,
     status          integer,
+    flag boolean DEFAULT false,
     CONSTRAINT exam_question_submission_pkey PRIMARY KEY (id),
     CONSTRAINT exam_question_submission_user_id_fkey FOREIGN KEY (user_id)
         REFERENCES "public".USER (id) MATCH SIMPLE
@@ -518,7 +519,9 @@ CREATE TABLE "public".question_submission
     content            text,
     right_answer       text,
     num_file           bigint,
-    CONSTRAINT question_submission_pkey PRIMARY KEY (id),
+    flag boolean DEFAULT false,
+    answer_status boolean DEFAULT false,
+ CONSTRAINT question_submission_pkey PRIMARY KEY (id),
     CONSTRAINT question_submission_user_id_fkey FOREIGN KEY (user_id)
         REFERENCES "public".USER (id) MATCH SIMPLE
         ON UPDATE CASCADE

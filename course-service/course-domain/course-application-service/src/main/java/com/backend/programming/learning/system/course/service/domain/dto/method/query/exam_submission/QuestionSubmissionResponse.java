@@ -13,12 +13,11 @@ import java.util.UUID;
 @Builder
 public record QuestionSubmissionResponse(
         UUID questionId,
-        UUID examSubmissionId,
-        UUID userId,
         Integer passStatus,
         Float grade,
         String content,
         String rightAnswer,
-        Integer numFile
-) {
-}
+        Integer numFile,
+        Boolean flag,
+        Boolean answerStatus
+) { }

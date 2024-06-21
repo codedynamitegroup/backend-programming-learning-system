@@ -35,6 +35,8 @@ public class QuestionSubmissionEntity {
     private String content;
     private String rightAnswer;
     private Integer numFile;
+    private Boolean flag;
+    private Boolean answerStatus;
 
     @Override
     public boolean equals(Object o) {

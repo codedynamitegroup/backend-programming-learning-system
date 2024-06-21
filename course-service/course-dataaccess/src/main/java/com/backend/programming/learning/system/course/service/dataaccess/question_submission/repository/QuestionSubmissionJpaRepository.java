@@ -17,10 +17,18 @@ public interface QuestionSubmissionJpaRepository extends JpaRepository<QuestionS
     Optional<QuestionSubmissionEntity> findByExamSubmissionIdAndQuestionId(UUID examSubmissionId, UUID questionId);
 
     @Query("""
-    SELECT qs
-    FROM QuestionSubmissionEntity qs
-    WHERE qs.user.id = :userId 
-        AND qs.examSubmission.exam.id = :examId    
-    """)
+           SELECT qs
+           FROM QuestionSubmissionEntity qs
+           WHERE qs.user.id = :userId
+                AND qs.examSubmission.exam.id = :examId
+           """)
     List<QuestionSubmissionEntity> findByExamIdAndUserId(UUID examId, UUID userId);
+
+    @Query("""
+           SELECT qs
+           FROM QuestionSubmissionEntity qs
+           WHERE qs.examSubmission.id = :examSubmissionId
+                AND qs.question.id IN :questionIdList
+           """)
+    List<QuestionSubmissionEntity> findAllByExamSubmissionIdAndQuestionIdList(UUID examSubmissionId, List<UUID> questionIdList);
 }
