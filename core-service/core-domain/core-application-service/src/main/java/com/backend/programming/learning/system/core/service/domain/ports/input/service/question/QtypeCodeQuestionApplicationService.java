@@ -21,4 +21,6 @@ public interface QtypeCodeQuestionApplicationService {
             (@Valid QueryAllAdminCodeQuestionCommand queryAllAdminCodeQuestionCommand);
     QueryAllAdminQtypeCodeQuestionsResponse queryAllQtypeCodeQuestionsForOrgAdmin
             (@Valid QueryAllAdminCodeQuestionCommand queryAllAdminCodeQuestionCommand);
+    QueryAllAdminQtypeCodeQuestionsResponse queryAllAllowedToImportQtypeCodeQuestionsForOrgAdmin
+            (@Valid QueryAllAdminCodeQuestionCommand queryAllAdminCodeQuestionCommand);
 }

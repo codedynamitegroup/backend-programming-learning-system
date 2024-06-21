@@ -174,6 +174,46 @@ public class QtypeCodeQuestionController {
         return ResponseEntity.ok(queryAllAdminQtypeCodeQuestionsResponse);
     }
 
+    @GetMapping("/allowed-to-import-questions/org-admin")
+    @Operation(summary = "Get all code questions for org admin.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllAdminQtypeCodeQuestionsResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllAdminQtypeCodeQuestionsResponse> getAllAllowedToImportQtypeCodeQuestionsForOrgAdmin(
+            @RequestParam(required = true) UUID orgId,
+            @RequestParam Integer pageNo,
+            @RequestParam Integer pageSize,
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) QuestionDifficulty difficulty,
+            @RequestParam(required = false) Boolean isPublic
+    ) {
+        String email = null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
+        log.info("Getting all allowed to import code questions for org admin");
+        QueryAllAdminQtypeCodeQuestionsResponse queryAllAdminQtypeCodeQuestionsResponse = qtypeCodeQuestionApplicationService
+                .queryAllAllowedToImportQtypeCodeQuestionsForOrgAdmin(QueryAllAdminCodeQuestionCommand.builder()
+                        .pageNum(pageNo)
+                        .pageSize(pageSize)
+                        .search(search)
+                        .difficulty(difficulty)
+                        .isPublic(isPublic)
+                        .email(email)
+                        .orgId(orgId)
+                        .build());
+        log.info("Allowed to import code questions for org admin retrieved: {}", queryAllAdminQtypeCodeQuestionsResponse);
+
+        return ResponseEntity.ok(queryAllAdminQtypeCodeQuestionsResponse);
+    }
+
     //update code question in the code assessment service
 //    @PutMapping
 //    @Operation(summary = "Update code question.")
