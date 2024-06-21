@@ -56,7 +56,8 @@ public class WebSecurityConfig {
 
                         // qtype code question
                         .requestMatchers(HttpMethod.GET, "/core/questions/code-question/admin").hasAnyRole(ADMIN)
-                        .requestMatchers(HttpMethod.GET, "/core/questions/code-question//org-admin").hasAnyRole(ADMIN_MOODLE)
+                        .requestMatchers(HttpMethod.GET, "/core/questions/code-question/org-admin").hasAnyRole(ADMIN_MOODLE)
+                        .requestMatchers(HttpMethod.GET, "/core/questions/code-question/allowed-to-import-questions/org-admin").hasAnyRole(ADMIN_MOODLE)
 
                         // Certificate Course
                         .requestMatchers(HttpMethod.POST, "/core/certificate-courses/create").hasAnyRole(ADMIN)

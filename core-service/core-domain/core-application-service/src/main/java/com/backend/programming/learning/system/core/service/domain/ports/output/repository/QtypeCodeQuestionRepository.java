@@ -29,4 +29,10 @@ public interface QtypeCodeQuestionRepository {
                                                            Boolean isPublic,
                                                            Integer pageNo,
                                                            Integer pageSize);
+    Page<QtypeCodeQuestion> findAllAllowedToImportOrgAdminQtypeCodeQuestions(UUID orgId,
+                                                                           String search,
+                                                                           QuestionDifficulty difficulty,
+                                                                           Boolean isPublic,
+                                                                           Integer pageNo,
+                                                                           Integer pageSize);
 }
