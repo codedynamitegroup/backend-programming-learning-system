@@ -18,5 +18,6 @@ public class QtypeCodeQuestionResponseEntity {
     private final String problemStatement;
     private final String codeQuestionName;
     private final Boolean isPublic;
+    private final Boolean isAllowedToImport;
     private final Float maxGrade;
 }
