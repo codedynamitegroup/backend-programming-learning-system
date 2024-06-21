@@ -1,5 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.question_submission;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.ExamQuestionSubmissionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.ExamQuestionSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.MarkQuestionSubmissionCommand;
@@ -34,5 +36,11 @@ public class QuestionSubmissionCommandHandler {
     @Transactional
     public void markQuestion(List<MarkQuestionSubmissionCommand> markQuestionSubmissionCommandList) {
         questionSubmissionCreateHelper.markQuestion(markQuestionSubmissionCommandList);
+    }
+
+    @Transactional
+    public ExamQuestionSubmissionResponse submitExamQuestion(ExamQuestionSubmissionCommand examQuestionSubmissionCommand) {
+        questionSubmissionCreateHelper.submitExamQuestion(examQuestionSubmissionCommand);
+        return questionSubmissionDataMapper.questionSubmissionsToExamQuestionSubmissionResponse();
     }
 }

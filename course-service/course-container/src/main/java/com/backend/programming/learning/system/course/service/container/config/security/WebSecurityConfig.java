@@ -76,6 +76,7 @@ public class WebSecurityConfig {
                         // question submission
                         .requestMatchers(HttpMethod.POST, "/course/question/submit").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
                         .requestMatchers(HttpMethod.PATCH, "/course/question/mark").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE)
+                        .requestMatchers(HttpMethod.PATCH, "/course/question/submit-all").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
 
                         //question bank category
                         .requestMatchers(HttpMethod.GET, "/course/question/bank/category/{questionBankCategoryId}").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)

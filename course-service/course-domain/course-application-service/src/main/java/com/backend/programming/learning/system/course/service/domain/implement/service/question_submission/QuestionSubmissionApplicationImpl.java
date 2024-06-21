@@ -1,5 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.question_submission;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.ExamQuestionSubmissionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.ExamQuestionSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.MarkQuestionSubmissionCommand;
@@ -31,5 +33,10 @@ public class QuestionSubmissionApplicationImpl implements QuestionSubmissionAppl
     @Override
     public void markQuestion(List<MarkQuestionSubmissionCommand> markQuestionSubmissionCommandList) {
         questionSubmissionCommandHandler.markQuestion(markQuestionSubmissionCommandList);
+    }
+
+    @Override
+    public ExamQuestionSubmissionResponse submitExamQuestion(ExamQuestionSubmissionCommand examQuestionSubmissionCommand) {
+        return questionSubmissionCommandHandler.submitExamQuestion(examQuestionSubmissionCommand);
     }
 }

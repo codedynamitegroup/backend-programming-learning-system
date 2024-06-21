@@ -10,6 +10,7 @@ import com.backend.programming.learning.system.course.service.domain.entity.Exam
 import com.backend.programming.learning.system.course.service.domain.entity.Question;
 import com.backend.programming.learning.system.course.service.domain.entity.QuestionSubmission;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam_submission.ExamSubmissionDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.AnswerOfQuestionRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamRepository;
@@ -18,14 +19,13 @@ import com.backend.programming.learning.system.course.service.domain.ports.outpu
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.QuestionSubmissionRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
+import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
 import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -51,7 +51,7 @@ public class ExamSubmissionCreateHelper {
         log.info("Create exam submission");
         Exam exam = examRepository.findBy(new ExamId(createExamSubmissionCommand.examId()));
         User user = userRepository.findUser(createExamSubmissionCommand.userId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
         ExamSubmission examSubmissionLast = examSubmissionRepository.findByExamAndUser(exam, user);
         ExamSubmission examSubmission = examSubmissionDataMapper
                 .createExamSubmissionCommandToExamSubmission(exam, user,
@@ -69,7 +69,7 @@ public class ExamSubmissionCreateHelper {
 
                     if (questionExam.isEmpty()) {
                         log.error("Question not found with id: {}", question.questionId());
-                        throw new RuntimeException("Question not found with id: " + question.questionId());
+                        throw new QuestionNotFoundException("Question not found with id: " + question.questionId());
                     }
 
                     List<AnswerOfQuestion> answerOfQuestion = answerOfQuestionRepository.findAllByQuestionId(question.questionId());
@@ -132,7 +132,7 @@ public class ExamSubmissionCreateHelper {
         log.info("Create start exam submission");
         Exam exam = examRepository.findBy(new ExamId(createExamSubmissionCommand.examId()));
         User user = userRepository.findUser(createExamSubmissionCommand.userId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
         ExamSubmission examSubmissionLast = examSubmissionRepository.findByExamAndUser(exam, user);
         ExamSubmission examSubmission = examSubmissionDataMapper
                 .createStartExamSubmissionCommandToExamSubmission(exam, user,

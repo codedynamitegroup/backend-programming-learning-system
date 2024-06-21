@@ -1,5 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.ports.input.service.question_submission;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.ExamQuestionSubmissionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.ExamQuestionSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionResponse;
 
@@ -20,4 +22,6 @@ public interface QuestionSubmissionApplicationService {
 
     void markQuestion(
             @Valid List<MarkQuestionSubmissionCommand> markQuestionSubmissionCommandList);
+
+    ExamQuestionSubmissionResponse submitExamQuestion(ExamQuestionSubmissionCommand examQuestionSubmissionCommand);
 }

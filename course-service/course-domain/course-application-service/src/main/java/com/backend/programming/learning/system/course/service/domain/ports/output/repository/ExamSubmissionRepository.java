@@ -14,6 +14,7 @@ public interface ExamSubmissionRepository {
 
     ExamSubmission findBy(UUID examSubmissionId);
 
+    // Find latest submission of user for exam (min count)
     ExamSubmission findByExamAndUser(Exam exam, User user);
 
     Integer countSubmission(ExamId examId);

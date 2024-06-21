@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -32,7 +33,10 @@ public class QuestionSubmissionRepositoryImpl implements QuestionSubmissionRepos
 
     @Override
     public void saveAll(List<QuestionSubmission> questionSubmissions) {
-        questionSubmissions.forEach(this::save);
+        List<QuestionSubmissionEntity> entities = questionSubmissions.stream()
+                .map(questionSubmissionDataAccessMapper::questionSubmissionToQuestionSubmissionEntity)
+                .collect(Collectors.toList());
+        questionSubmissionJpaRepository.saveAll(entities);
     }
 
     @Override

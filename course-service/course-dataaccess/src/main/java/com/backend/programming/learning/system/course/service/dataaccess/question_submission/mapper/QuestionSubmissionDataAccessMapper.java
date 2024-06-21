@@ -28,6 +28,7 @@ public class QuestionSubmissionDataAccessMapper {
         UserEntity userEntity = userDataAccessMapper.userToUserEntity(questionSubmission.getUser());
         QuestionEntity questionEntity = questionDataAccessMapper.questionToQuestionEntity(questionSubmission.getQuestion());
         ExamSubmissionEntity examSubmissionEntity = examSubmissionDataAccessMapper.examSubmissionToExamSubmissionEntity(questionSubmission.getExamSubmission());
+
         return QuestionSubmissionEntity.builder()
                 .id(questionSubmission.getId().getValue())
                 .examSubmission(examSubmissionEntity)
@@ -38,6 +39,8 @@ public class QuestionSubmissionDataAccessMapper {
                 .content(questionSubmission.getContent())
                 .rightAnswer(questionSubmission.getRightAnswer())
                 .numFile(questionSubmission.getNumFile())
+                .answerStatus(questionSubmission.getAnswerStatus())
+                .flag(questionSubmission.getFlag())
                 .build();
     }
 
@@ -54,7 +57,10 @@ public class QuestionSubmissionDataAccessMapper {
                 .content(questionSubmissionEntity.getContent())
                 .rightAnswer(questionSubmissionEntity.getRightAnswer())
                 .numFile(questionSubmissionEntity.getNumFile())
+                .answerStatus(questionSubmissionEntity.getAnswerStatus())
+                .flag(questionSubmissionEntity.getFlag())
                 .build();
+
         response.setId(new QuestionSubmissionId(questionSubmissionEntity.getId()));
         return response;
     }
