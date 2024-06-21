@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.auth.service.application.rest.exam_submission;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionEndCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionOverviewResponse;
@@ -101,7 +102,7 @@ public class ExamSubmissionController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateExamSubmissionResponse> endExam(
-            @RequestBody CreateExamSubmissionStartCommand createExamSubmissionStartCommand) {
+            @RequestBody CreateExamSubmissionEndCommand createExamSubmissionStartCommand) {
         log.info("End exam");
         CreateExamSubmissionResponse response = examSubmissionApplicationService.endExam(createExamSubmissionStartCommand);
         log.info("Exam ended: {}", response);

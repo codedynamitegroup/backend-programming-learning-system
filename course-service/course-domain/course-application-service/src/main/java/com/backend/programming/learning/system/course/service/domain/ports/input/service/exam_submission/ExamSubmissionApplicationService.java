@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.ports.input.service.exam_submission;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionEndCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
 
@@ -24,7 +25,7 @@ public interface ExamSubmissionApplicationService {
     CreateExamSubmissionResponse startExam(
             @Valid CreateExamSubmissionStartCommand createExamSubmissionStartCommand);
 
-    CreateExamSubmissionResponse endExam(CreateExamSubmissionStartCommand createExamSubmissionStartCommand);
+    CreateExamSubmissionResponse endExam(CreateExamSubmissionEndCommand createExamSubmissionEndCommand);
 
     QueryExamSubmissionResponse submitExamDetail(UUID submissionId);
 

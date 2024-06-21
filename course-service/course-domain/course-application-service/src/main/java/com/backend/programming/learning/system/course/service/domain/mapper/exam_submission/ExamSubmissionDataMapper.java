@@ -57,6 +57,7 @@ public class ExamSubmissionDataMapper {
                 .exam(exam)
                 .user(user)
                 .submissionCount(submissionCount)
+                .startTime(createExamSubmissionStartCommand.examStartTime())
                 .status(Status.NOT_SUBMITTED)
                 .build();
     }

@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 
 import com.backend.programming.learning.system.course.service.domain.CourseDomainService;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionEndCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.AnswerOfQuestion;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
@@ -141,7 +142,7 @@ public class ExamSubmissionCreateHelper {
         return saveExamSubmission(examSubmission);
     }
 
-    public ExamSubmission createEndExamSubmission(CreateExamSubmissionStartCommand createExamSubmissionStartCommand) {
+    public ExamSubmission createEndExamSubmission(CreateExamSubmissionEndCommand createExamSubmissionStartCommand) {
         return examSubmissionRepository.saveEnd(createExamSubmissionStartCommand);
     }
 }

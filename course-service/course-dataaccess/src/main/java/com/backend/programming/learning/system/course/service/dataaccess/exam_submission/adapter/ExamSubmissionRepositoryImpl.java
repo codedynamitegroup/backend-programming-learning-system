@@ -9,7 +9,7 @@ import com.backend.programming.learning.system.course.service.dataaccess.exam_su
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.user.repository.UserJpaRepository;
-import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionEndCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
 import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
@@ -19,14 +19,15 @@ import com.backend.programming.learning.system.course.service.domain.ports.outpu
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.Status;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
 @Repository
+@Slf4j
 @RequiredArgsConstructor
 public class ExamSubmissionRepositoryImpl implements ExamSubmissionRepository {
     private final ExamSubmissionJpaRepository examSubmissionJpaRepository;
@@ -70,10 +71,10 @@ public class ExamSubmissionRepositoryImpl implements ExamSubmissionRepository {
     }
 
     @Override
-    public ExamSubmission saveEnd(CreateExamSubmissionStartCommand createExamSubmissionStartCommand) {
-        ExamEntity examEntity = examJpaRepository.findById(createExamSubmissionStartCommand.examId())
+    public ExamSubmission saveEnd(CreateExamSubmissionEndCommand createExamSubmissionEndCommand) {
+        ExamEntity examEntity = examJpaRepository.findById(createExamSubmissionEndCommand.examId())
                 .orElseThrow(() -> new ExamNotFoundException("Exam not found"));
-        UserEntity userEntity = userJpaRepository.findById(createExamSubmissionStartCommand.userId())
+        UserEntity userEntity = userJpaRepository.findById(createExamSubmissionEndCommand.userId())
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
 
         ExamSubmissionEntity examSubmissionEntity = Objects.requireNonNull(examSubmissionJpaRepository
@@ -82,7 +83,13 @@ public class ExamSubmissionRepositoryImpl implements ExamSubmissionRepository {
                 .stream()
                 .min((e1, e2) -> e2.getSubmitCount().compareTo(e1.getSubmitCount()))
                 .orElse(null);
-        examSubmissionEntity.setSubmitTime(ZonedDateTime.now());
+
+        if(examSubmissionEntity == null) {
+            log.error("Exam submission not found with examId: {} and userId: {}", createExamSubmissionEndCommand.examId(), createExamSubmissionEndCommand.userId());
+            throw new RuntimeException("Exam submission not found");
+        }
+
+        examSubmissionEntity.setSubmitTime(createExamSubmissionEndCommand.examSubmissionTime());
         examSubmissionEntity.setStatus(Status.SUBMITTED);
         return examSubmissionDataAccessMapper.examSubmissionEntityToExamSubmission(examSubmissionJpaRepository.save(examSubmissionEntity));
     }
