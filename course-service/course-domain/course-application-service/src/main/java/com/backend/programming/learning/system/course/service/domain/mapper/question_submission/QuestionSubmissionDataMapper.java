@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.course.service.domain.mapper.question_submission;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.ExamQuestionSubmissionResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.OneExamQuestionSubmissionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.OneExamQuestionSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.QuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionResponse;
@@ -63,6 +65,13 @@ public class QuestionSubmissionDataMapper {
     public ExamQuestionSubmissionResponse questionSubmissionsToExamQuestionSubmissionResponse() {
         return ExamQuestionSubmissionResponse.builder()
                 .message("Submit exam question successfully")
+                .build();
+    }
+
+    public OneExamQuestionSubmissionResponse questionSubmissionToOneExamQuestionSubmissionResponse(QuestionSubmission questionSubmission) {
+        return OneExamQuestionSubmissionResponse.builder()
+                .questionSubmission(questionSubmission)
+                .message("Submit one exam question successfully")
                 .build();
     }
 }

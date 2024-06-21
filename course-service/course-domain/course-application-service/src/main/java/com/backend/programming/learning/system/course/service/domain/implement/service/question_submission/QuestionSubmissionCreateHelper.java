@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 
 import com.backend.programming.learning.system.course.service.domain.CourseDomainService;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.ExamQuestionSubmissionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.OneExamQuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.MarkQuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.*;
@@ -104,7 +105,7 @@ public class QuestionSubmissionCreateHelper {
             else { // Create new question with new content
                 Question question = questionRepository.findById(questionSubmissionCommand.questionId())
                         .orElseThrow(() -> {
-                            log.error("Question not found with id: {} when creating", questionSubmissionCommand.questionId());
+                            log.error("Question not found with id: {} when creating question submission", questionSubmissionCommand.questionId());
                             return new QuestionNotFoundException("Question not found");
                         });
 
@@ -121,5 +122,40 @@ public class QuestionSubmissionCreateHelper {
 
         // Save all new question submission
         questionSubmissionRepository.saveAll(toCreate);
+    }
+
+    public QuestionSubmission submitOneExamQuestion(OneExamQuestionSubmissionCommand oneExamQuestionSubmissionCommand) {
+        Exam exam = examRepository.findBy(new ExamId(oneExamQuestionSubmissionCommand.examId()));
+        User user = userRepository.findUser(oneExamQuestionSubmissionCommand.userId())
+                .orElseThrow(() -> {
+                    log.info("User not found with id: {}", oneExamQuestionSubmissionCommand.userId());
+
+                    return new UserNotFoundException("User not found");
+                });
+        ExamSubmission examSubmission = examSubmissionRepository.findByExamAndUser(exam, user);
+        Question question = questionRepository.findById(oneExamQuestionSubmissionCommand.questionSubmissionCommand().questionId())
+                .orElseThrow(() -> {
+                    log.error("Question not found with id: {} when creating question submission ", oneExamQuestionSubmissionCommand.questionSubmissionCommand().questionId());
+                    return new QuestionNotFoundException("Question not found");
+                });
+        Optional<QuestionSubmission> questionSubmission = questionSubmissionRepository.findByExamSubmissionIdAndQuestionId(examSubmission.getId().getValue(), question.getId().getValue());
+
+        // Question is already created --> update
+        if(questionSubmission.isPresent()) {
+            QuestionSubmission updateQuestionSubmission = questionSubmission.get();
+            updateQuestionSubmission.setAnswerStatus(oneExamQuestionSubmissionCommand.questionSubmissionCommand().answerStatus());
+            updateQuestionSubmission.setContent(oneExamQuestionSubmissionCommand.questionSubmissionCommand().content());
+            updateQuestionSubmission.setNumFile(oneExamQuestionSubmissionCommand.questionSubmissionCommand().numFile());
+            updateQuestionSubmission.setFlag(oneExamQuestionSubmissionCommand.questionSubmissionCommand().flag());
+
+            return questionSubmissionRepository.save(updateQuestionSubmission);
+        }
+        else {
+            QuestionSubmission newQuestionSubmission = questionSubmissionDataMapper
+                    .questionSubmissionCommandToQuestionSubmission(examSubmission, user, question, oneExamQuestionSubmissionCommand.questionSubmissionCommand());
+            courseDomainService.createQuestionSubmission(newQuestionSubmission);
+
+            return questionSubmissionRepository.save(newQuestionSubmission);
+        }
     }
 }

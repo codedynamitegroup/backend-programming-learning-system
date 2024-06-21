@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.ExamQuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.ExamQuestionSubmissionResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.OneExamQuestionSubmissionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.OneExamQuestionSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.MarkQuestionSubmissionCommand;
@@ -42,5 +44,12 @@ public class QuestionSubmissionCommandHandler {
     public ExamQuestionSubmissionResponse submitExamQuestion(ExamQuestionSubmissionCommand examQuestionSubmissionCommand) {
         questionSubmissionCreateHelper.submitExamQuestion(examQuestionSubmissionCommand);
         return questionSubmissionDataMapper.questionSubmissionsToExamQuestionSubmissionResponse();
+    }
+
+    @Transactional
+    public OneExamQuestionSubmissionResponse submitOneExamQuestion(OneExamQuestionSubmissionCommand oneExamQuestionSubmissionCommand) {
+        QuestionSubmission questionSubmission = questionSubmissionCreateHelper.submitOneExamQuestion(oneExamQuestionSubmissionCommand);
+
+        return questionSubmissionDataMapper.questionSubmissionToOneExamQuestionSubmissionResponse(questionSubmission);
     }
 }

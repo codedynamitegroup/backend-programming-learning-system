@@ -2,6 +2,8 @@ package com.backend.programming.learning.system.auth.service.application.rest.qu
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.ExamQuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.ExamQuestionSubmissionResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.OneExamQuestionSubmissionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.OneExamQuestionSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.MarkQuestionSubmissionCommand;
@@ -82,7 +84,23 @@ public class QuestionSubmissionController {
             @RequestBody ExamQuestionSubmissionCommand examQuestionSubmissionCommand) {
         log.info("Submitting questions: {}", examQuestionSubmissionCommand);
         ExamQuestionSubmissionResponse response = questionSubmissionApplicationService.submitExamQuestion(examQuestionSubmissionCommand);
-        log.info("Exam submitted: {}", response);
+        log.info("Question list submitted: {}", response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @PostMapping("/submit-one")
+    @Operation(summary = "Submit one question.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = OneExamQuestionSubmissionCommand.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<OneExamQuestionSubmissionResponse> submitOneExam(@RequestBody OneExamQuestionSubmissionCommand oneExamQuestionSubmissionCommand) {
+        log.info("Submitting one question: {}", oneExamQuestionSubmissionCommand);
+        OneExamQuestionSubmissionResponse response = questionSubmissionApplicationService.submitOneExamQuestion(oneExamQuestionSubmissionCommand);
+        log.info("One question submitted: {}", response);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

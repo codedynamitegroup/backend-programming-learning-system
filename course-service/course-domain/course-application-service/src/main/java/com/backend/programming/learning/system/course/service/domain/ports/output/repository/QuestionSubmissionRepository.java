@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.course.service.domain.valueobject
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface QuestionSubmissionRepository {
@@ -18,4 +19,6 @@ public interface QuestionSubmissionRepository {
     void markQuestion(List<MarkQuestionSubmissionCommand> markQuestionSubmissionCommandList);
 
     List<QuestionSubmission> findByExamIdAndUserId(ExamId examId, UserId userId);
+
+    Optional<QuestionSubmission> findByExamSubmissionIdAndQuestionId(UUID examSubmissionId, UUID questionId);
 }
