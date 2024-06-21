@@ -68,6 +68,31 @@ public class OrganizationController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createOrganizationResponse);
     }
 
+    @PostMapping("/contact-us")
+    @Operation(summary = "Create organization by contact us.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateOrganizationResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<?> createOrganizationByContactUs(
+            @RequestBody CreateOrganizationCommand createOrganizationCommand) {
+        log.info("Creating organization by contact us with email: {}", createOrganizationCommand.getEmail());
+        CreateOrganizationResponse createOrganizationResponse = organizationApplicationService.createOrganization(
+                CreateOrganizationCommand.builder()
+                        .email(createOrganizationCommand.getEmail())
+                        .description(createOrganizationCommand.getDescription())
+                        .name(createOrganizationCommand.getName())
+                        .phone(createOrganizationCommand.getPhone())
+                        .address(createOrganizationCommand.getAddress())
+                        .build()
+        );
+        log.info("Organization created with email: {}", createOrganizationResponse.getEmail());
+        return ResponseEntity.status(HttpStatus.CREATED).body(createOrganizationResponse);
+    }
+
     @GetMapping
     @Operation(summary = "Get all organizations.")
     @ApiResponses(value = {

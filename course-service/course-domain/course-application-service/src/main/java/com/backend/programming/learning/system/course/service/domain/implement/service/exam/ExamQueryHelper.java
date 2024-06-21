@@ -1,12 +1,21 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.exam;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryAllGradeResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryGradeCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryGradeResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryOverviewResponse;
+import com.backend.programming.learning.system.course.service.domain.entity.CourseUser;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
+import com.backend.programming.learning.system.course.service.domain.entity.ExamQuestion;
 import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
+import com.backend.programming.learning.system.course.service.domain.entity.QuestionSubmission;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam.ExamDataMapper;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam_submission.ExamSubmissionDataMapper;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseUserRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamQuestionRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamSubmissionRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.QuestionSubmissionRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +23,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * com.backend.programming.learning.system.implement.exam
@@ -28,6 +39,9 @@ import java.util.List;
 public class ExamQueryHelper {
     private final ExamRepository examRepository;
     private final ExamSubmissionRepository examSubmissionRepository;
+    private final CourseUserRepository courseUserRepository;
+    private final QuestionSubmissionRepository questionSubmissionRepository;
+    private final ExamQuestionRepository examQuestionRepository;
     private final ExamDataMapper examDataMapper;
     private final ExamSubmissionDataMapper examSubmissionDataMapper;
 
@@ -57,6 +71,49 @@ public class ExamQueryHelper {
                 .numberOfStudents(numberOfStudent)
                 .submitted(numberOfSubmission)
                 .needGrading(numberOfStudent) // temp
+                .build();
+    }
+
+    public QueryAllGradeResponse gradeExam(ExamId examId, QueryGradeCommand queryGradeCommand) {
+        Page<CourseUser> courseUsers = courseUserRepository.findByExamId(examId, queryGradeCommand);
+        List<QueryGradeResponse> queryGradeResponses = new ArrayList<>();
+        courseUsers.forEach(courseUser -> {
+            List<QuestionSubmission> questionSubmissions = questionSubmissionRepository
+                    .findByExamIdAndUserId(examId, courseUser.getUser().getId());
+            List<ExamQuestion> examQuestions = examQuestionRepository
+                    .findByExamId(examId);
+            Exam exam = examRepository.findBy(examId);
+            ExamSubmission examSubmission = examSubmissionRepository.findByExamAndUser(exam,courseUser.getUser());
+
+            Float score = 0F;
+            for (QuestionSubmission questionSubmission : questionSubmissions) {
+                score += questionSubmission.getGrade();
+            }
+
+            Float totalScore = 0F;
+            for (ExamQuestion examQuestion : examQuestions) {
+                if(Objects.nonNull(examQuestion.getQuestion())){
+                    totalScore += examQuestion.getQuestion().getDefaultMark();
+                }
+            }
+
+            QueryGradeResponse queryGradeResponse = QueryGradeResponse.builder()
+                    .firstName(courseUser.getUser().getFirstName())
+                    .lastName(courseUser.getUser().getLastName())
+                    .email(courseUser.getUser().getEmail())
+                    .lastSubmitAt(examSubmission.getSubmitTime())
+                    .status(Objects.isNull(examSubmission.status()) ? "NOT_SUBMITTED" : "SUBMITTED")
+                    .score(score)
+                    .maxScore(totalScore)
+                    .build();
+            queryGradeResponses.add(queryGradeResponse);
+        });
+
+        return QueryAllGradeResponse.builder()
+                .grades(queryGradeResponses)
+                .currentPage(courseUsers.getNumber())
+                .totalItems(courseUsers.getTotalElements())
+                .totalPages(courseUsers.getTotalPages())
                 .build();
     }
 }

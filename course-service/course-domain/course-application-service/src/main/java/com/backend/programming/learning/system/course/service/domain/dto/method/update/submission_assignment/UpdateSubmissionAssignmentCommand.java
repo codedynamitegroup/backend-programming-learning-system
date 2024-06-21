@@ -19,7 +19,6 @@ public class UpdateSubmissionAssignmentCommand {
     private final String content;
     private final String feedback;
 
-    @NotNull
     private final ZonedDateTime timemodified;
 
 }

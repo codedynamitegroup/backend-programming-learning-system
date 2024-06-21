@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.exam_submission;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionEndCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionOverviewResponse;
@@ -37,8 +38,8 @@ public class ExamSubmissionApplicationImpl implements ExamSubmissionApplicationS
     }
 
     @Override
-    public CreateExamSubmissionResponse endExam(CreateExamSubmissionStartCommand createExamSubmissionStartCommand) {
-        return examSubmissionCommandHandler.endExam(createExamSubmissionStartCommand);
+    public CreateExamSubmissionResponse endExam(CreateExamSubmissionEndCommand createExamSubmissionEndCommand) {
+        return examSubmissionCommandHandler.endExam(createExamSubmissionEndCommand);
     }
 
     @Override

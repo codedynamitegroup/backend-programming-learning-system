@@ -91,6 +91,14 @@ public class CertificateCourseCreateHelper {
             Chapter savedChapter = saveChapter(newChapter);
             List<CreateChapterResourceCommand> chapterResources = createChapterCommand.getResources();
             for (CreateChapterResourceCommand createChapterResourceCommand : chapterResources) {
+                if (createChapterResourceCommand.getResourceType().equals(ResourceType.CODE.name())
+                     && createChapterResourceCommand.getQuestionId() == null) {
+                    log.warn("Question id is required for resource type CODE");
+                    throw new CoreDomainException("Question id is required for resource type CODE");
+                }
+            }
+
+            for (CreateChapterResourceCommand createChapterResourceCommand : chapterResources) {
                 if (createChapterResourceCommand.getResourceType().equals(ResourceType.CODE.name())) {
                     checkQuestionExists(createChapterResourceCommand.getQuestionId());
                 }

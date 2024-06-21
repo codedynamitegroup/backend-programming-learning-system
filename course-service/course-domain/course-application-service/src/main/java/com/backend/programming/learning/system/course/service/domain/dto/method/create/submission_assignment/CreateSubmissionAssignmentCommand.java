@@ -26,10 +26,8 @@ public class CreateSubmissionAssignmentCommand {
 
     private final String feedback;
 
-    @NotNull
     private final ZonedDateTime submitTime;
 
-    @NotNull
     private final ZonedDateTime timemodified;
 
 }

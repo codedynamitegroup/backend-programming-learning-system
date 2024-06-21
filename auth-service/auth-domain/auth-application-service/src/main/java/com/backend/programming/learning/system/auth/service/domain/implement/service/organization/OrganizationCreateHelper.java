@@ -45,6 +45,9 @@ public class OrganizationCreateHelper {
     }
 
     private User getUserByEmail(String email) {
+        if (email == null) {
+            return null;
+        }
         Optional<User> user = userRepository.findByEmail(email);
         if (user.isEmpty()) {
             log.error("User with email: {} could not be found!", email);

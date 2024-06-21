@@ -34,6 +34,10 @@ public class SubmissionAssignmentUpdateHelper {
         }
 
         if (updateSubmissionAssignmentCommand.getTimemodified() != null) {
+            if(submissionAssignment.getSubmittedAt()==null)
+            {
+                submissionAssignment.setSubmittedAt(updateSubmissionAssignmentCommand.getTimemodified());
+            }
             submissionAssignment.setTimemodified(updateSubmissionAssignmentCommand.getTimemodified());
         }
 

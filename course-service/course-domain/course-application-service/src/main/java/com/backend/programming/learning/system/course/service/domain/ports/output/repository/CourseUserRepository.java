@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.course.service.domain.ports.output.repository;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryGradeCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.CourseUser;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -25,4 +27,7 @@ public interface CourseUserRepository {
 
 
     Page<CourseUser> findAllCourseByUserId(UUID userId, int pageNo, int pageSize, String search, String[] courseType);
+
+
+    Page<CourseUser> findByExamId(ExamId examId, QueryGradeCommand queryGradeCommand);
 }

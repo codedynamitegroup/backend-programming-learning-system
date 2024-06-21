@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.ports.output.repository;
 
-import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionEndCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
 import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
@@ -14,11 +14,12 @@ public interface ExamSubmissionRepository {
 
     ExamSubmission findBy(UUID examSubmissionId);
 
+    // Find latest submission of user for exam (min count)
     ExamSubmission findByExamAndUser(Exam exam, User user);
 
     Integer countSubmission(ExamId examId);
 
-    ExamSubmission saveEnd(CreateExamSubmissionStartCommand createExamSubmissionStartCommand);
+    ExamSubmission saveEnd(CreateExamSubmissionEndCommand createExamSubmissionStartCommand);
 
     List<ExamSubmission> findByExamId(ExamId examId);
 

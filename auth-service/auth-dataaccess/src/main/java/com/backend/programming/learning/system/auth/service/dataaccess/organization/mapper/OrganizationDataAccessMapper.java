@@ -30,8 +30,8 @@ public class OrganizationDataAccessMapper {
                 .moodleUrl(organizationEntity.getMoodleUrl())
                 .createdAt(organizationEntity.getCreatedAt())
                 .updatedAt(organizationEntity.getUpdatedAt())
-                .createdBy(userDataAccessMapper.userEntityToUser(organizationEntity.getCreatedBy()))
-                .updatedBy(userDataAccessMapper.userEntityToUser(organizationEntity.getUpdatedBy()))
+                .createdBy(organizationEntity.getCreatedBy() == null ? null : userDataAccessMapper.userEntityToUser(organizationEntity.getCreatedBy()))
+                .updatedBy(organizationEntity.getUpdatedBy() == null ? null : userDataAccessMapper.userEntityToUser(organizationEntity.getUpdatedBy()))
                 .isDeleted(organizationEntity.getIsDeleted())
                 .isVerified(organizationEntity.getIsVerified())
                 .build();
@@ -49,8 +49,8 @@ public class OrganizationDataAccessMapper {
                 .moodleUrl(organization.getMoodleUrl())
                 .createdAt(organization.getCreatedAt())
                 .updatedAt(organization.getUpdatedAt())
-                .createdBy(userDataAccessMapper.userToUserEntity(organization.getCreatedBy()))
-                .updatedBy(userDataAccessMapper.userToUserEntity(organization.getUpdatedBy()))
+                .createdBy(organization.getCreatedBy() == null ? null : userDataAccessMapper.userToUserEntity(organization.getCreatedBy()))
+                .updatedBy(organization.getUpdatedBy() == null ? null : userDataAccessMapper.userToUserEntity(organization.getUpdatedBy()))
                 .isDeleted(organization.getDeleted())
                 .isVerified(organization.getVerified())
                 .build();
