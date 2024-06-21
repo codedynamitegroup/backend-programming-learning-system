@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.review.DeleteReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryEachStarReviewCountResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryReviewCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewResponse;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import jakarta.validation.Valid;
+
+import java.util.UUID;
 
 @Service
 @Validated
@@ -50,5 +53,10 @@ class ReviewApplicationServiceImpl implements ReviewApplicationService {
     @Override
     public UpdateReviewResponse updateReview(UpdateReviewCommand updateReviewCommand) {
         return reviewCommandHandler.updateReviewResponse(updateReviewCommand);
+    }
+
+    @Override
+    public QueryEachStarReviewCountResponse queryEachStarReviewCountByCertificateCourseId(UUID certificateCourseId) {
+        return reviewCommandHandler.findEachStarReviewCountResponse(certificateCourseId);
     }
 }

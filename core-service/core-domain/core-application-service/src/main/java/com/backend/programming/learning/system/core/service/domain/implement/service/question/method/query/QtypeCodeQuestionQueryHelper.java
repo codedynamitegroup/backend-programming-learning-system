@@ -68,14 +68,12 @@ public class QtypeCodeQuestionQueryHelper {
             Integer pageSize,
             String email
     ) {
-        User user = getUserByEmail(email);
 
         Page<QtypeCodeQuestion> qtypeCodeQuestions =
                 qtypeCodeQuestionRepository.findAllAdminQtypeCodeQuestions(
                         search,
                         difficulty,
                         isPublic,
-                        user.getId().getValue(),
                         pageNo,
                         pageSize);
         log.info("Query all Qtype Code Questions for Admin");
@@ -93,7 +91,6 @@ public class QtypeCodeQuestionQueryHelper {
             Integer pageSize,
             String email
     ) {
-        User user = getUserByEmail(email);
 
         Page<QtypeCodeQuestion> qtypeCodeQuestions =
                 qtypeCodeQuestionRepository.findAllOrgAdminQtypeCodeQuestions(
@@ -101,7 +98,31 @@ public class QtypeCodeQuestionQueryHelper {
                         search,
                         difficulty,
                         isPublic,
-                        user.getId().getValue(),
+                        pageNo,
+                        pageSize);
+        log.info("Query all Qtype Code Questions for Org Admin");
+
+        return qtypeCodeQuestions;
+    }
+
+
+    @Transactional(readOnly = true)
+    public Page<QtypeCodeQuestion> queryAllAllowedToImportQtypeCodeQuestionsForOrgAdmin(
+            UUID orgId,
+            String search,
+            QuestionDifficulty difficulty,
+            Boolean isPublic,
+            Integer pageNo,
+            Integer pageSize,
+            String email
+    ) {
+
+        Page<QtypeCodeQuestion> qtypeCodeQuestions =
+                qtypeCodeQuestionRepository.findAllAllowedToImportOrgAdminQtypeCodeQuestions(
+                        orgId,
+                        search,
+                        difficulty,
+                        isPublic,
                         pageNo,
                         pageSize);
         log.info("Query all Qtype Code Questions for Org Admin");

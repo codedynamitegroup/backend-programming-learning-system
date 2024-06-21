@@ -41,4 +41,10 @@ public interface ReviewJpaRepository extends JpaRepository<ReviewEntity, UUID> {
             AND r.rating = ?2
 """, nativeQuery = true)
     Integer countNumOfReviewsByCertificateCourseIdAndRating(UUID certificateCourseId, Integer rating);
+
+    @Query(value= """
+            SELECT COUNT(*) FROM review r
+            WHERE r.certificate_course_id = ?1
+""", nativeQuery = true)
+    Integer countNumOfReviewsByCertificateCourseId(UUID certificateCourseId);
 }

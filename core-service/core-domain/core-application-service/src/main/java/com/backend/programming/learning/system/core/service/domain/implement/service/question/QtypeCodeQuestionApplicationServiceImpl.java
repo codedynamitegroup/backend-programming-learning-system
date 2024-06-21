@@ -55,4 +55,9 @@ public class QtypeCodeQuestionApplicationServiceImpl implements QtypeCodeQuestio
     public QueryAllAdminQtypeCodeQuestionsResponse queryAllQtypeCodeQuestionsForOrgAdmin(QueryAllAdminCodeQuestionCommand queryAllAdminCodeQuestionCommand) {
         return qtypeCodeQuestionCommandHandler.queryAllQtypeCodeQuestionsForOrgAdmin(queryAllAdminCodeQuestionCommand);
     }
+
+    @Override
+    public QueryAllAdminQtypeCodeQuestionsResponse queryAllAllowedToImportQtypeCodeQuestionsForOrgAdmin(QueryAllAdminCodeQuestionCommand queryAllAdminCodeQuestionCommand) {
+        return qtypeCodeQuestionCommandHandler.queryAllAllowedToImportQtypeCodeQuestionsForOrgAdmin(queryAllAdminCodeQuestionCommand);
+    }
 }

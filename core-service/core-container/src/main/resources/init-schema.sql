@@ -333,6 +333,7 @@ CREATE TABLE "public".question
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     question_bank_category_id uuid,
     is_org_question_bank bool DEFAULT FALSE,
+    is_lecturer_private bool DEFAULT FALSE,
     CONSTRAINT question_pkey PRIMARY KEY (id),
     CONSTRAINT question_org_id_fkey FOREIGN KEY (org_id)
         REFERENCES "public".organization (id) MATCH SIMPLE
@@ -447,6 +448,7 @@ CREATE TABLE "public".qtype_code_question
     dsl_template text,
     problem_statement text,
     is_public boolean default true,
+    is_allowed_to_import boolean default true,
     name text,
     max_grade float default 10,
     CONSTRAINT qtype_code_question_pkey PRIMARY KEY (id),

@@ -116,6 +116,25 @@ public class QtypeCodeQuestionCommandHandler {
                 .qtypeCodeQuestionsToQueryAllAdminQtypeCodeQuestionsResponse(qtypeCodeQuestions);
     }
 
+    @Transactional(readOnly = true)
+    public QueryAllAdminQtypeCodeQuestionsResponse queryAllAllowedToImportQtypeCodeQuestionsForOrgAdmin
+            (QueryAllAdminCodeQuestionCommand queryAllAdminCodeQuestionCommand) {
+        Page<QtypeCodeQuestion> qtypeCodeQuestions = qtypeCodeQuestionQueryHelper
+                .queryAllAllowedToImportQtypeCodeQuestionsForOrgAdmin(
+                        queryAllAdminCodeQuestionCommand.getOrgId(),
+                        queryAllAdminCodeQuestionCommand.getSearch(),
+                        queryAllAdminCodeQuestionCommand.getDifficulty(),
+                        queryAllAdminCodeQuestionCommand.getIsPublic(),
+                        queryAllAdminCodeQuestionCommand.getPageNum(),
+                        queryAllAdminCodeQuestionCommand.getPageSize(),
+                        queryAllAdminCodeQuestionCommand.getEmail());
+
+        log.info("Returning all allowed to import code questions for org admin");
+
+        return qtypeCodeQuestionDataMapper
+                .qtypeCodeQuestionsToQueryAllAdminQtypeCodeQuestionsResponse(qtypeCodeQuestions);
+    }
+
     public UpdateQuestionResponse updateQtypeCodeQuestion(UpdateQtypeCodeQuestionCommand updateQtypeCodeQuestionCommand) {
         QuestionUpdatedEvent questionUpdatedEvent = qtypeCodeQuestionUpdateHelper.updateQtypeCodeQuestionInDb(updateQtypeCodeQuestionCommand);
 

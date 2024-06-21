@@ -33,7 +33,6 @@ public class QtypeCodeQuestionDataMapper {
                         .questionId(new QuestionId(UUID.fromString(request.getQuestionId())))
                         .build())
                 .dslTemplate(null)
-                .isPublic(false)
                 .maxGrade(request.getMaxGrade())
                 .problemStatement(request.getProblemStatement())
                 .codeQuestionName(request.getName())
@@ -102,6 +101,7 @@ public class QtypeCodeQuestionDataMapper {
                 .codeQuestionName(qtypeCodeQuestion.getCodeQuestionName())
                 .maxGrade(qtypeCodeQuestion.getMaxGrade())
                 .isPublic(qtypeCodeQuestion.getPublic())
+                .isAllowedToImport(qtypeCodeQuestion.getAllowedToImport())
                 .build();
     }
 
