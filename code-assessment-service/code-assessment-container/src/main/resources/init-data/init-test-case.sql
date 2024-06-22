@@ -144,3 +144,101 @@ VALUES ('affc734f-537c-4f8f-becd-c46406638953', '1374d22a-b27b-4d3d-9ad4-b613e1f
 INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
 VALUES ('5653b5c7-ae47-4a0c-95aa-000f5c3bfa28', '1374d22a-b27b-4d3d-9ad4-b613e1f1e253', '20002', 'true', false);
 
+--10
+-- Sample test case for n = 15
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655440010', '06d71d03-f5ba-4a89-9083-596ef649ade9', '15', '4', true);
+
+-- Additional test cases (non-sample cases)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655440011', '06d71d03-f5ba-4a89-9083-596ef649ade9', '1', '0', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655440012', '06d71d03-f5ba-4a89-9083-596ef649ade9', '10', '3', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655440013', '06d71d03-f5ba-4a89-9083-596ef649ade9', '20', '5', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655440014', '06d71d03-f5ba-4a89-9083-596ef649ade9', '50', '9', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655440015', '06d71d03-f5ba-4a89-9083-596ef649ade9', '100', '13', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655440016', '06d71d03-f5ba-4a89-9083-596ef649ade9', '500', '31', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655440017', '06d71d03-f5ba-4a89-9083-596ef649ade9', '1000', '44', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655440018', '06d71d03-f5ba-4a89-9083-596ef649ade9', '5050', '99', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655440019', '06d71d03-f5ba-4a89-9083-596ef649ade9', '101', '13', false);
+
+--11
+-- Sample test case for n = 8 (2^3)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655441000', 'b1ae32db-17e6-4fdb-991b-160e95721562', '8', 'true', true);
+
+-- Additional test cases (non-sample cases)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655441001', 'b1ae32db-17e6-4fdb-991b-160e95721562', '1', 'true', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655441002', 'b1ae32db-17e6-4fdb-991b-160e95721562', '4', 'true', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655441003', 'b1ae32db-17e6-4fdb-991b-160e95721562', '16', 'true', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655441004', 'b1ae32db-17e6-4fdb-991b-160e95721562', '10000', 'false', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655441005', 'b1ae32db-17e6-4fdb-991b-160e95721562', '1023', 'false', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655441006', 'b1ae32db-17e6-4fdb-991b-160e95721562', '4096', 'true', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655441007', 'b1ae32db-17e6-4fdb-991b-160e95721562', '5000', 'false', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655441008', 'b1ae32db-17e6-4fdb-991b-160e95721562', '8192', 'true', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655441009', 'b1ae32db-17e6-4fdb-991b-160e95721562', '9999', 'false', false);
+
+--12
+-- Sample test case for n = 27 (3^3)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655442000', '058cdf70-3cc5-4a99-9edd-edfa0325c207', '27', 'true', true);
+
+-- Additional test cases (non-sample cases)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655442001', '058cdf70-3cc5-4a99-9edd-edfa0325c207', '1', 'true', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655442002', '058cdf70-3cc5-4a99-9edd-edfa0325c207', '9', 'true', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655442003', '058cdf70-3cc5-4a99-9edd-edfa0325c207', '81', 'true', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655442004', '058cdf70-3cc5-4a99-9edd-edfa0325c207', '10000', 'false', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655442005', '058cdf70-3cc5-4a99-9edd-edfa0325c207', '1023', 'false', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655442006', '058cdf70-3cc5-4a99-9edd-edfa0325c207', '729', 'true', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655442007', '058cdf70-3cc5-4a99-9edd-edfa0325c207', '5000', 'false', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655442008', '058cdf70-3cc5-4a99-9edd-edfa0325c207', '6561', 'true', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('550e8400-e29b-41d4-a716-446655442009', '058cdf70-3cc5-4a99-9edd-edfa0325c207', '9999', 'false', false);
