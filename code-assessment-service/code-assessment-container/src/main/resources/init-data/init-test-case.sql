@@ -44,5 +44,103 @@ VALUES
     ('653f4454-4660-41ad-a44a-8344dcbf98a7', '07bf0b32-09ce-47d0-b4e1-c0ba35799b43', '81', '1 3 9 27 81', false),
     ('ac90b45d-2351-4025-8800-d22c3a9badb7', '07bf0b32-09ce-47d0-b4e1-c0ba35799b43', '21', '1 3 7 21', false),
     ('a873e123-5fa7-44a9-b421-e012ac998095', '07bf0b32-09ce-47d0-b4e1-c0ba35799b43', '99999', '1 3 9 11 33 101 303 909 1111 3333 9091 27273 99999', false)
-
     ;
+
+--7
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('123e4567-e89b-12d3-a456-426614174000', '2f3b15cc-219f-47eb-8d17-702e89afb86a', '9', '1, 3, 9', false);
+
+-- Additional test cases (non-sample cases)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('223e4567-e89b-12d3-a456-426614174002', '2f3b15cc-219f-47eb-8d17-702e89afb86a', '15', '1, 3, 5, 15', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('323e4567-e89b-12d3-a456-426614174003', '2f3b15cc-219f-47eb-8d17-702e89afb86a', '21', '1, 3, 7, 21', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('423e4567-e89b-12d3-a456-426614174004', '2f3b15cc-219f-47eb-8d17-702e89afb86a', '25', '1, 5, 25', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('523e4567-e89b-12d3-a456-426614174005', '2f3b15cc-219f-47eb-8d17-702e89afb86a', '30', '1, 3, 5, 15', true);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('623e4567-e89b-12d3-a456-426614174006', '2f3b15cc-219f-47eb-8d17-702e89afb86a', '50', '1, 5, 25', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('723e4567-e89b-12d3-a456-426614174007', '2f3b15cc-219f-47eb-8d17-702e89afb86a', '99', '1, 3, 9, 11, 33, 99', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('823e4567-e89b-12d3-a456-426614174008', '2f3b15cc-219f-47eb-8d17-702e89afb86a', '100', '1, 5, 25', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('923e4567-e89b-12d3-a456-426614174009', '2f3b15cc-219f-47eb-8d17-702e89afb86a', '225', '1, 3, 5, 9, 15, 25, 45, 75, 225', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('103e4567-e89b-12d3-a456-426614174010', '2f3b15cc-219f-47eb-8d17-702e89afb86a', '500', '1, 5, 25', false);
+
+--8
+-- Sample test case for n = 13579 (all odd digits, sample case)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('fced2739-3638-4f85-b984-a19961f35893', 'fe0a658d-7ce9-4524-b388-84539a34a521', '13579', 'true', true);
+
+-- Additional test cases (non-sample cases)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('400fa95a-7d09-4af4-b47c-31c2abe3c496', 'fe0a658d-7ce9-4524-b388-84539a34a521', '24680', 'false', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('521de40c-965d-4d8f-97af-e3c4296799ac', 'fe0a658d-7ce9-4524-b388-84539a34a521', '11111', 'true', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('a382bbca-b4ce-4bdf-923d-148148eb3513', 'fe0a658d-7ce9-4524-b388-84539a34a521', '12345', 'false', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('4c5ec63a-c9cc-4c40-9593-ed07cca593cd', 'fe0a658d-7ce9-4524-b388-84539a34a521', '97531', 'true', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('4636f78d-2388-4eae-9693-fe4bfe3f349f', 'fe0a658d-7ce9-4524-b388-84539a34a521', '86420', 'false', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('efb48cc6-987a-4e20-8095-5530fe8f475b', 'fe0a658d-7ce9-4524-b388-84539a34a521', '35791', 'true', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('995a60f6-509a-4252-a09c-09440d2f3740', 'fe0a658d-7ce9-4524-b388-84539a34a521', '10001', 'false', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('8bb5e9a4-1499-40ad-aa2f-e5ca9213548a', 'fe0a658d-7ce9-4524-b388-84539a34a521', '97531', 'true', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('648261e4-2d55-4308-a86b-a8ff746163b3', 'fe0a658d-7ce9-4524-b388-84539a34a521', '48260', 'false', false);
+
+--9
+-- Sample test case for n = 121 (palindromic number, sample case)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('f4a8a61b-8f4b-42d3-afe3-50a0efcb9d1e', '1374d22a-b27b-4d3d-9ad4-b613e1f1e253', '121', 'true', true);
+
+-- Additional test cases (non-sample cases)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('a8b8e72b-9b4b-4e7d-94fa-8b2e3cfa8d1f', '1374d22a-b27b-4d3d-9ad4-b613e1f1e253', '12321', 'true', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('274c4ac1-e015-405a-9862-74673dd6aa2c', '1374d22a-b27b-4d3d-9ad4-b613e1f1e253', '12345', 'false', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('5944e422-5f87-44b5-9c37-aa069ccbbd35', '1374d22a-b27b-4d3d-9ad4-b613e1f1e253', '67876', 'true', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('decbcf46-696a-4109-9222-8471cc6f4b60', '1374d22a-b27b-4d3d-9ad4-b613e1f1e253', '78987', 'true', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('21e25851-e820-425d-be2e-d4a30ef57e02', '1374d22a-b27b-4d3d-9ad4-b613e1f1e253', '45654', 'true', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('bcf0f9da-8625-479e-8267-558bf89cf147', '1374d22a-b27b-4d3d-9ad4-b613e1f1e253', '98765', 'false', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('a2b56da1-2aa9-45c7-8820-efcf32c2897f', '1374d22a-b27b-4d3d-9ad4-b613e1f1e253', '54321', 'false', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('affc734f-537c-4f8f-becd-c46406638953', '1374d22a-b27b-4d3d-9ad4-b613e1f1e253', '10001', 'true', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('5653b5c7-ae47-4a0c-95aa-000f5c3bfa28', '1374d22a-b27b-4d3d-9ad4-b613e1f1e253', '20002', 'true', false);
+
