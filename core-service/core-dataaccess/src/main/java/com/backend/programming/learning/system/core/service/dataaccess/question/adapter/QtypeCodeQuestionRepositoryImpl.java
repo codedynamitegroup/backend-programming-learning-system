@@ -129,4 +129,24 @@ public class QtypeCodeQuestionRepositoryImpl implements QtypeCodeQuestionReposit
         return codeQuestions;
     }
 
+    @Override
+    public Page<QtypeCodeQuestion> findAllAllowedToImportOrgAdminQtypeCodeQuestions(UUID orgId, String search, QuestionDifficulty difficulty, Boolean isPublic, Integer pageNo, Integer pageSize) {
+        Pageable pageable
+                = PageRequest
+                .of(pageNo, pageSize);
+
+        Page<QtypeCodeQuestionEntity> qtypeCodeQuestionEntities = qtypeCodeQuestionJpaRepository
+                .findAllAllowedToImportOrgAdminQtypeCodeQuestions(
+                        orgId,
+                        search,
+                        difficulty == null ? null: difficulty.name(),
+                        isPublic,
+                        pageable);
+
+        Page<QtypeCodeQuestion> codeQuestions = qtypeCodeQuestionEntities
+                .map(qtypeCodeQuestionDataAccessMapper::qtypeCodeQuestionEntityToQtypeCodeQuestion);
+
+        return codeQuestions;
+    }
+
 }

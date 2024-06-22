@@ -13,6 +13,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
 import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.exception.ExamClosedException;
 import com.backend.programming.learning.system.course.service.domain.exception.ExamNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamSubmissionRepository;
@@ -22,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -73,8 +75,13 @@ public class ExamSubmissionRepositoryImpl implements ExamSubmissionRepository {
 
     @Override
     public ExamSubmission saveEnd(CreateExamSubmissionEndCommand createExamSubmissionEndCommand) {
-        examJpaRepository.findById(createExamSubmissionEndCommand.examId())
+        ExamEntity exam = examJpaRepository.findById(createExamSubmissionEndCommand.examId())
                 .orElseThrow(() -> new ExamNotFoundException("Exam not found"));
+
+        if(exam.getTimeClose().isBefore(ZonedDateTime.now())) {
+            throw new ExamClosedException("Exam is closed");
+        }
+
         userJpaRepository.findById(createExamSubmissionEndCommand.userId())
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
 

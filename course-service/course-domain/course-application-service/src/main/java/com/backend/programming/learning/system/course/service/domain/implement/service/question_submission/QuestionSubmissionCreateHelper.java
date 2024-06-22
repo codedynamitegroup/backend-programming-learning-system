@@ -6,6 +6,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.MarkQuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.*;
+import com.backend.programming.learning.system.course.service.domain.exception.ExamClosedException;
+import com.backend.programming.learning.system.course.service.domain.exception.ExamSubmissionNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.mapper.question_submission.QuestionSubmissionDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.*;
@@ -15,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -40,12 +43,12 @@ public class QuestionSubmissionCreateHelper {
     public QuestionSubmission createQuestionSubmission(CreateQuestionSubmissionCommand createQuestionSubmissionCommand) {
         ExamSubmission examSubmission = examSubmissionRepository.findBy(createQuestionSubmissionCommand.examSubmissionId());
         User user = userRepository.findUser(createQuestionSubmissionCommand.userId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
         Optional<Question> question = questionRepository.findById(createQuestionSubmissionCommand.questionId());
 
         if (question.isEmpty()) {
             log.error("Question not found with id: {}", createQuestionSubmissionCommand.questionId());
-            throw new RuntimeException("Question not found with id: " + createQuestionSubmissionCommand.questionId());
+            throw new QuestionNotFoundException("Question not found with id: " + createQuestionSubmissionCommand.questionId());
         }
 
         QuestionSubmission questionSubmission = questionSubmissionDataMapper
@@ -68,8 +71,15 @@ public class QuestionSubmissionCreateHelper {
         questionSubmissionRepository.markQuestion(markQuestionSubmissionCommandList);
     }
 
+    // Submit many questions
     public void submitExamQuestion(ExamQuestionSubmissionCommand examQuestionSubmissionCommand) {
         Exam exam = examRepository.findBy(new ExamId(examQuestionSubmissionCommand.examId()));
+
+        if(isExamClosed(exam)) {
+            log.error("Exam is closed with id: {}", exam.getId().getValue());
+            throw new ExamClosedException("Exam is closed");
+        }
+
         User user = userRepository.findUser(examQuestionSubmissionCommand.userId())
                 .orElseThrow(() -> {
                     log.info("User not found with id: {}", examQuestionSubmissionCommand.userId());
@@ -80,7 +90,7 @@ public class QuestionSubmissionCreateHelper {
 
         if (examSubmission == null) {
             log.error("Exam submission not found with examId: {} and userId: {}", examQuestionSubmissionCommand.examId(), examQuestionSubmissionCommand.userId());
-            throw new RuntimeException("Exam submission not found");
+            throw new ExamSubmissionNotFoundException("Exam submission not found");
         }
 
         // Find all submitted question and convert to map
@@ -124,8 +134,15 @@ public class QuestionSubmissionCreateHelper {
         questionSubmissionRepository.saveAll(toCreate);
     }
 
+    // Submit one question
     public QuestionSubmission submitOneExamQuestion(OneExamQuestionSubmissionCommand oneExamQuestionSubmissionCommand) {
         Exam exam = examRepository.findBy(new ExamId(oneExamQuestionSubmissionCommand.examId()));
+
+        if (isExamClosed(exam)) {
+            log.error("Exam is closed with id: {}", exam.getId().getValue());
+            throw new ExamClosedException("Exam is closed");
+        }
+
         User user = userRepository.findUser(oneExamQuestionSubmissionCommand.userId())
                 .orElseThrow(() -> {
                     log.info("User not found with id: {}", oneExamQuestionSubmissionCommand.userId());
@@ -157,5 +174,9 @@ public class QuestionSubmissionCreateHelper {
 
             return questionSubmissionRepository.save(newQuestionSubmission);
         }
+    }
+
+    private Boolean isExamClosed(Exam exam) {
+        return exam.getTimeClose().isBefore(ZonedDateTime.now());
     }
 }

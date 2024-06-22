@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.question_submission.QueryQuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
 import com.backend.programming.learning.system.course.service.domain.entity.QuestionSubmission;
+import com.backend.programming.learning.system.course.service.domain.exception.ExamSubmissionNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.mapper.question_submission.QuestionSubmissionDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamSubmissionRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.QuestionSubmissionRepository;
@@ -26,7 +27,7 @@ public class QuestionSubmissionQueryHelper {
                 .orElseThrow(() -> {
                     log.error("Exam submission not found with examId: {} and userId: {}", queryQuestionSubmissionCommand.examId(), queryQuestionSubmissionCommand.userId());
 
-                    return new RuntimeException("Exam submission not found");
+                    return new ExamSubmissionNotFoundException("Exam submission not found");
                 });
         return questionSubmissionRepository.findAllByExamSubmissionIdAndQuestionIdList(examSubmission.getId().getValue(), queryQuestionSubmissionCommand.questionSubmissionIds());
     }
