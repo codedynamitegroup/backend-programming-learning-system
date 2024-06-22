@@ -98,10 +98,12 @@ public class ExamQueryHelper {
             }
 
             QueryGradeResponse queryGradeResponse = QueryGradeResponse.builder()
+                    .userId(courseUser.getUser().getId().getValue())
                     .firstName(courseUser.getUser().getFirstName())
                     .lastName(courseUser.getUser().getLastName())
                     .email(courseUser.getUser().getEmail())
                     .lastSubmitAt(examSubmission.getSubmitTime())
+                    .lastMarkAt(examSubmission.getSubmitTime())
                     .status(Objects.isNull(examSubmission.status()) ? "NOT_SUBMITTED" : "SUBMITTED")
                     .score(score)
                     .maxScore(totalScore)
