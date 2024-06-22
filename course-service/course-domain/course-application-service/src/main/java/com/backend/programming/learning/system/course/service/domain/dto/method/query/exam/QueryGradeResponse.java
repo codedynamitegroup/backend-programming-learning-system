@@ -14,6 +14,7 @@ import java.util.UUID;
 @Builder
 public record QueryGradeResponse(
         UUID userId,
+        UUID submissionId,
         String firstName,
         String lastName,
         String email,

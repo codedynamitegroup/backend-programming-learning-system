@@ -26,6 +26,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * com.backend.programming.learning.system.implement.exam
@@ -99,6 +100,7 @@ public class ExamQueryHelper {
 
             QueryGradeResponse queryGradeResponse = QueryGradeResponse.builder()
                     .userId(courseUser.getUser().getId().getValue())
+                    .submissionId(Objects.isNull(examSubmission.getId()) ? null : examSubmission.getId().getValue())
                     .firstName(courseUser.getUser().getFirstName())
                     .lastName(courseUser.getUser().getLastName())
                     .email(courseUser.getUser().getEmail())
