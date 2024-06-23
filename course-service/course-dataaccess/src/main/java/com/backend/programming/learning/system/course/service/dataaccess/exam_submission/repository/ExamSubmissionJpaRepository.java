@@ -36,7 +36,7 @@ public interface ExamSubmissionJpaRepository extends JpaRepository<ExamSubmissio
     @Query(value = """
             SELECT * FROM exam_submission
             WHERE exam_id = :examId AND user_id = :userId
-            ORDER BY submit_count ASC
+            ORDER BY submit_count DESC
             LIMIT 1
             """, nativeQuery = true)
     Optional<ExamSubmissionEntity> findLatestExamSubmission(UUID examId, UUID userId);

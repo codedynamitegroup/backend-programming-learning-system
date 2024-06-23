@@ -33,6 +33,7 @@ public class ExamSubmissionEntity {
 
     private Integer submitCount;
     private ZonedDateTime startTime;
+    private ZonedDateTime endTime;
     private ZonedDateTime submitTime;
 
     @Enumerated(EnumType.STRING)

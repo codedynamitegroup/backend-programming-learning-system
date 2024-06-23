@@ -30,4 +30,6 @@ public interface ExamSubmissionApplicationService {
     QueryExamSubmissionResponse submitExamDetail(UUID submissionId);
 
     List<QueryExamSubmissionOverviewResponse> findByExamIdAndUserId(UUID examId, UUID userId);
+
+    QueryExamSubmissionOverviewResponse findLatestOnGoingSubmission(UUID examId, UUID userId);
 }

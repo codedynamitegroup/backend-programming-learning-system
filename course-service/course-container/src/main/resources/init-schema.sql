@@ -417,6 +417,7 @@ CREATE TABLE "public".exam_submission
     user_id      uuid             NOT NULL,
     submit_count bigint                    DEFAULT '0',
     start_time   TIMESTAMP WITH TIME ZONE  DEFAULT CURRENT_TIMESTAMP,
+    end_time TIMESTAMP WITH TIME ZONE NOT NULL,
     submit_time  TIMESTAMP WITH TIME ZONE  DEFAULT NULL,
     status       status           NOT NULL DEFAULT 'NOT_SUBMITTED',
     score        double precision DEFAULT '0',

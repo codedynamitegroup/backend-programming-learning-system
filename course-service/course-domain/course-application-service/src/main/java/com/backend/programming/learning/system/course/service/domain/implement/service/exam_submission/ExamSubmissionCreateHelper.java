@@ -11,6 +11,7 @@ import com.backend.programming.learning.system.course.service.domain.entity.Ques
 import com.backend.programming.learning.system.course.service.domain.entity.QuestionSubmission;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.exception.ExamClosedException;
+import com.backend.programming.learning.system.course.service.domain.exception.ExamSubmissionConflictException;
 import com.backend.programming.learning.system.course.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam_submission.ExamSubmissionDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.AnswerOfQuestionRepository;
@@ -140,13 +141,35 @@ public class ExamSubmissionCreateHelper {
             throw new ExamClosedException("Exam is closed");
         }
 
+        // Calculate endtime
+        ZonedDateTime endTime = createExamSubmissionCommand.examStartTime().plusSeconds(exam.getTimeLimit());
+
         User user = userRepository.findUser(createExamSubmissionCommand.userId())
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
+
+        // Get the latest exam submission
         ExamSubmission examSubmissionLast = examSubmissionRepository.findByExamAndUser(exam, user);
+
+        // Max attempt check
+        if(exam.getMaxAttempts() > 0 && // Unlimited attempt
+                examSubmissionLast.getSubmissionCount() >= exam.getMaxAttempts() &&
+                isExamSubmissionSubmitted(examSubmissionLast)
+        ) {
+            log.error("Submission limit exceeded");
+            throw new ExamSubmissionConflictException("Submission limit exceeded");
+        }
+
+        //check there is other on-going exam submission being taken
+        if(!Objects.isNull(examSubmissionLast.getExam()) && // No last submission --> first submission
+               !isExamSubmissionSubmitted(examSubmissionLast)) { // Exam time is not over
+            log.error("There is an on-going exam submission");
+            throw new RuntimeException("There is an on-going exam submission");
+        }
+
         ExamSubmission examSubmission = examSubmissionDataMapper
                 .createStartExamSubmissionCommandToExamSubmission(exam, user,
-                        Objects.isNull(examSubmissionLast) ? 1 : examSubmissionLast.getSubmissionCount() + 1,
-                        createExamSubmissionCommand);
+                        Objects.isNull(examSubmissionLast.getExam()) ? 1 : examSubmissionLast.getSubmissionCount() + 1,
+                        createExamSubmissionCommand, endTime);
         courseDomainService.createStartExamSubmission(examSubmission);
         return saveExamSubmission(examSubmission);
     }
@@ -157,5 +180,11 @@ public class ExamSubmissionCreateHelper {
 
     private Boolean isExamClosed(Exam exam) {
         return exam.getTimeClose().isBefore(ZonedDateTime.now());
+    }
+
+    private Boolean isExamSubmissionSubmitted(ExamSubmission examSubmission) {
+        // Haven't submit and exam time is not over
+        return !Objects.isNull(examSubmission.getSubmitTime()) || !examSubmission.getEndTime()
+                .isAfter(ZonedDateTime.now());
     }
 }
