@@ -275,3 +275,36 @@ VALUES ('550e8400-e29b-41d4-a716-446655440008', '51981528-01ff-491a-bc7b-a24aedf
 
 INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
 VALUES ('550e8400-e29b-41d4-a716-446655440009', '51981528-01ff-491a-bc7b-a24aedfb0363', '11 0.9', '2.134', false);
+
+--14
+-- Sample test case for n = 4 (which is 2^2, so it is a perfect square)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('4c835055-1f31-444e-866d-4db138dd1f12', '6181a38b-2b06-4a60-ad5f-750780d79e3e', '4', 'true', true);
+
+-- Additional test cases (non-sample cases)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('8dbd6303-0794-4650-8b53-294e0e3102a8', '6181a38b-2b06-4a60-ad5f-750780d79e3e', '3', 'false', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('5ecb7724-5f76-4c3c-ad64-6b0be7ff630d', '6181a38b-2b06-4a60-ad5f-750780d79e3e', '16', 'true', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('c62592bb-92e6-49bb-abf2-de18ada29719', '6181a38b-2b06-4a60-ad5f-750780d79e3e', '25', 'true', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('1287f878-8820-43d8-9d83-b9fd79844852', '6181a38b-2b06-4a60-ad5f-750780d79e3e', '50', 'false', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('c3333875-f233-4ae7-9161-2afe375c53a5', '6181a38b-2b06-4a60-ad5f-750780d79e3e', '100', 'true', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('745ef3d2-f41e-45c4-af26-628350a5db93', '6181a38b-2b06-4a60-ad5f-750780d79e3e', '200', 'false', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('1677dfea-2f69-4a16-8a7a-b6ed5f06bda8', '6181a38b-2b06-4a60-ad5f-750780d79e3e', '256', 'true', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('1a8c5fec-18b7-4ef5-bd97-0cdae5e0546e', '6181a38b-2b06-4a60-ad5f-750780d79e3e', '10000', 'true', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('2e837260-43c9-43c7-8190-6d8fa3aca93b', '6181a38b-2b06-4a60-ad5f-750780d79e3e', '99999', 'false', false);
