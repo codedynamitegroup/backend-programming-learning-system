@@ -156,4 +156,54 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
         order by cc.name
         """, nativeQuery = true)
     Page<CertificateCourseEntity> findAllCertificateCourse(String searchName, Pageable pageable);
+
+
+//    Check the certificate course is completed by count the number of resources and the number of completed resources
+    // then divide them if > 0.85 then the course is completed else not completed
+    @Query(value = """
+        select cc.*
+        from certificate_course cc, certificate_course_user ccu
+        where cc.id = ccu.certificate_course_id
+         and ccu.user_id = ?1
+        and (select count(*)
+                from chapter c, chapter_resource cr
+                where c.id = cr.chapter_id
+                 and c.certificate_course_id = cc.id) > 0
+         and (
+            select CAST(count(*)  as numeric(10,1))
+            from chapter c, chapter_resource cr
+            where c.id = cr.chapter_id
+             and c.certificate_course_id = cc.id
+             and ((
+                     cr.resource_type = 'CODE'
+                    and exists (
+                    select 1
+                    from qtype_code_question qcq, code_submission cs
+                        where qcq.question_id = cr.question_id
+                             and qcq.id = cs.code_question_id
+                             and cs.user_id = ccu.user_id
+                             and cs.pass = true
+                        )
+                     ) 
+                     or 
+                     ( 
+                         cr.resource_type <> 'CODE'
+                        and exists(
+                            select 1
+                            from chapter_resource_user cru
+                            where cr.id = cru.chapter_resource_id
+                              and cru.user_id = ccu.user_id
+                              and cru.is_viewed = true
+                            )
+                         )
+                     )
+            ) / (
+                select count(*)
+                from chapter c, chapter_resource cr
+                where c.id = cr.chapter_id
+                 and c.certificate_course_id = cc.id
+            ) >= 0.85
+        order by cc.name
+        """, nativeQuery = true)
+    Page<CertificateCourseEntity> findAllMyCompletedCertificateCourses(UUID userId, Pageable pageable);
 }

@@ -67,6 +67,7 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/core/certificate-courses/me").hasAnyRole(USER)
                         .requestMatchers(HttpMethod.GET, "/core/certificate-courses/certificate/dashboard-statistics").hasAnyRole(ADMIN)
                         .requestMatchers(HttpMethod.GET, "/core/certificate-courses/admin/certificate/all").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.GET, "/core/certificate-courses/my-certifications").hasAnyRole(USER)
 
                         // Chapter
                         .requestMatchers(HttpMethod.POST, "/core/chapters/create").hasAnyRole(ADMIN)

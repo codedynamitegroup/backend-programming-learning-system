@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.code.assessment.service.applicat
 import com.backend.programming.learning.system.application.handler.AuthException;
 import com.backend.programming.learning.system.application.handler.ErrorDTO;
 import com.backend.programming.learning.system.application.handler.GlobalExceptionHandler;
+import com.backend.programming.learning.system.code.assessment.service.domain.exception.constraint_exception.UniqueConstraintException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_question.CodeQuestionNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_question.tag.CodeQuestionTagNotFoundException;
@@ -46,6 +47,17 @@ public class CodeAssessmentGlobalExceptionHandler extends GlobalExceptionHandler
                 .message(exception.getMessage())
                 .status(HttpStatus.FORBIDDEN.getReasonPhrase())
                 .code(HttpStatus.FORBIDDEN.value())
+                .build();
+    }
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(value = {UniqueConstraintException.class})
+    public ErrorDTO handleException(UniqueConstraintException exception){
+        log.error(exception.getMessage(), exception);
+        return ErrorDTO.builder()
+                .message(exception.getMessage())
+                .status(HttpStatus.CONFLICT.getReasonPhrase())
+                .code(HttpStatus.CONFLICT.value())
                 .build();
     }
     @ResponseBody
