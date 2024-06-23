@@ -152,4 +152,11 @@ public class CertificateCourseRepositoryImpl implements CertificateCourseReposit
         return certificateCourseJpaRepository.findAllCertificateCourse(searchName, paging)
                 .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse);
     }
+
+    @Override
+    public Page<CertificateCourse> findAllMyCompletedCertificateCourses(Integer page, Integer size, UUID userId) {
+        Pageable paging = PageRequest.of(page, size);
+        return certificateCourseJpaRepository.findAllMyCompletedCertificateCourses(userId, paging)
+                .map(certificateCourseDataAccessMapper::certificateCourseEntityToCertificateCourse);
+    }
 }

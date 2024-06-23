@@ -528,7 +528,7 @@ VALUES
           - Participants are ranked by score. If two or more participants achieve the same score, then the tie is broken by the total time taken to submit the last solution resulting in a higher score',
      'https://leetcode.com/_next/static/images/biweekly-default-f5a8fc3be85b6c9175207fd8fd855d47.png', '2024-09-15 18:09:29.488151+07', '2024-10-15 18:09:29.488151+07', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', true),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'National Disability Independence Day 2024 Coding Contest',
-     '<p>Welcome to HackerRank''s Celebrate National Disability Independence Day&nbsp;2021 Coding Challenge, a coding contest where your winnings help support a cause in need. Compete against top coders from around the world to give $500 to a U.S. charity that increases opportunities for people with disabilities.</p>',
+     '<p>Welcome to CodeDynamite''s Celebrate National Disability Independence Day&nbsp;2021 Coding Challenge, a coding contest where your winnings help support a cause in need. Compete against top coders from around the world to give $500 to a U.S. charity that increases opportunities for people with disabilities.</p>',
      '<ol><li>1st Place: $1000</li><li>2nd Place: $500</li><li>3rd Place: $250</li></ol>',
      '<p>1st place: Airpods Pro</p><br/><p>2nd place: Beats Solo3</p><br/><p>3rd place: Razer BlackWidow Gaming Keyboard</p><br/><br/><p>CodeDynamite will also donate $500 in the top competitor''''s&nbsp;name to an organization of your choice from a curated list of U.S.-based charities.</p>',
      '- Each challenge has a pre-determined score.<br/>
@@ -537,7 +537,7 @@ VALUES
           - Participants are ranked by score. If two or more participants achieve the same score, then the tie is broken by the total time taken to submit the last solution resulting in a higher score',
      'https://assets.leetcode.com/contest/weekly-contest-291/card_img_1654267951.png', '2024-01-15 18:09:29.488151+07', null, '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', true),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', 'Celebrate Juneteenth 2021 Coding Contest',
-    '<p>Welcome to HackerRank''s Celebrate Juneteenth 2021 Coding Challenge, a coding contest where your winnings help support a cause in need. Compete against top coders from around the world to give $500 to a U.S. charity that increases opportunities for African-Americans/Black individuals.</p>',
+    '<p>Welcome to CodeDynamite''s Celebrate Juneteenth 2021 Coding Challenge, a coding contest where your winnings help support a cause in need. Compete against top coders from around the world to give $500 to a U.S. charity that increases opportunities for African-Americans/Black individuals.</p>',
      '<ol><li>1st Place: $1000</li><li>2nd Place: $500</li><li>3rd Place: $250</li></ol>',
      '<ol><li>Participants must submit their solutions before the end time.</li><li>Participants must follow the contest rules and guidelines.</li><li>Participants must not cheat or plagiarize.</li></ol>',
      '- Each challenge has a pre-determined score.<br/>
@@ -546,7 +546,7 @@ VALUES
           - Participants are ranked by score. If two or more participants achieve the same score, then the tie is broken by the total time taken to submit the last solution resulting in a higher score',
      'https://assets.leetcode.com/contest/weekly-contest-291/card_img_1654267951.png', '2024-01-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', false),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', 'Asian Pacific American Heritage Month 2021 Coding Contest',
-    '<p>Welcome to HackerRank''s Celebrate Asian Pacific Heritage Month 2021 Coding Challenge, a coding contest where your winnings help support a cause in need. Compete against top coders from around the world to give $500 to a U.S. charity that increases opportunities for Asian and Pacific Islander&nbsp;American&nbsp;individuals.</p>',
+    '<p>Welcome to CodeDynamite''s Celebrate Asian Pacific Heritage Month 2021 Coding Challenge, a coding contest where your winnings help support a cause in need. Compete against top coders from around the world to give $500 to a U.S. charity that increases opportunities for Asian and Pacific Islander&nbsp;American&nbsp;individuals.</p>',
     '<ol><li>1st Place: $1000</li><li>2nd Place: $500</li><li>3rd Place: $250</li></ol>',
      '<ol><li>Participants must submit their solutions before the end time.</li><li>Participants must follow the contest rules and guidelines.</li><li>Participants must not cheat or plagiarize.</li></ol>',
         '- Each challenge has a pre-determined score.<br/>

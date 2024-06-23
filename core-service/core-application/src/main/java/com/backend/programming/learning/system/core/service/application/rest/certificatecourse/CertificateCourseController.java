@@ -266,6 +266,37 @@ public class CertificateCourseController {
         return ResponseEntity.ok(queryAllMostEnrolledCertificateCoursesResponse);
     }
 
+    @PostMapping("/my-certifications")
+    @Operation(summary = "Get all completed certificate courses of user.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllCertificateCoursesResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllMyCompletedCertificateCoursesResponse> getAllMyCompletedCertificateCourses(
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize
+    ) {
+        String email = null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
+        QueryAllMyCompletedCertificateCoursesResponse queryAllMyCompletedCertificateCoursesResponse =
+                certificateCourseApplicationService.queryAllMyCompletedCertificateCourses(
+                        QueryAllMyCompletedCertificateCoursesCommand.builder()
+                                .email(email)
+                                .pageNo(pageNo)
+                                .pageSize(pageSize)
+                                .build());
+        log.info("Returning all my completed certificate courses");
+        return ResponseEntity.ok(queryAllMyCompletedCertificateCoursesResponse);
+    }
+
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete Certificate course.")
     @ApiResponses(value = {
