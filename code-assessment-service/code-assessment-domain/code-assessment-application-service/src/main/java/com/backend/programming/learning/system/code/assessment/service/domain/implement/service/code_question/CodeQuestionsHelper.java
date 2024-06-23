@@ -62,7 +62,7 @@ public class CodeQuestionsHelper {
     @Transactional
     public CodeQuestionsUpdatedEvent persistCodeQuestion(CreateCodeQuestionCommand command){
 //        checkQuestion(command.getQuestionId());
-        validateHelper.validateCodeQuestionNotHaveName(command.getName());
+//        validateHelper.validateCodeQuestionNotHaveName(command.getName());
         CodeQuestion codeQuestion = codeQuestionDataMaper.createCodeQuestionCommandToCodeQuestion(command);
 
         CodeQuestionsUpdatedEvent codeQuestionCreatedEvent

@@ -26,7 +26,6 @@ public class CodeQuestionEntity {
     private UUID questionId;
     private UUID userId;
 
-    @Column(unique = true)
     private String name;
     private String dslTemplate;
     private String problemStatement;

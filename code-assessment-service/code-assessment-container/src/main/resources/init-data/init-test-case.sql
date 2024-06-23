@@ -308,3 +308,37 @@ VALUES ('1a8c5fec-18b7-4ef5-bd97-0cdae5e0546e', '6181a38b-2b06-4a60-ad5f-750780d
 
 INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
 VALUES ('2e837260-43c9-43c7-8190-6d8fa3aca93b', '6181a38b-2b06-4a60-ad5f-750780d79e3e', '99999', 'false', false);
+
+
+--15
+-- Sample test case for a = 3.5, b = 6.1, c = 2.4 (max is 6.1)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('6d36d139-42ca-4873-8f0b-d3d5cead9349', '22427527-053c-4602-a519-9e52cb5f2366', '3.5 6.1 2.4', '6.1', true);
+
+-- Additional test cases (non-sample cases)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('649d4026-388f-4b31-9475-50ba522c621c', '22427527-053c-4602-a519-9e52cb5f2366', '10.2 15.5 9.9', '15.5', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('94199462-d79d-43d2-875d-8fc238050437', '22427527-053c-4602-a519-9e52cb5f2366', '7.7 2.2 5.5', '7.7', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('773f661a-9b08-44ff-851d-5b90cb595226', '22427527-053c-4602-a519-9e52cb5f2366', '12.5 13.6 14.7', '14.7', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('5fcea8c0-a308-44e2-a8c9-7944217d330a', '22427527-053c-4602-a519-9e52cb5f2366', '25.1 24.9 25.2', '25.2', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('4003de43-6b13-4417-87d2-4823376d7c3f', '22427527-053c-4602-a519-9e52cb5f2366', '8.0 8.0 8.0', '8.0', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('4dabd6fa-1724-4166-897e-640e4eefabd5', '22427527-053c-4602-a519-9e52cb5f2366', '9.9 8.8 7.7', '9.9', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('edcf1fdc-f636-4f34-bad7-f85b908ac565', '22427527-053c-4602-a519-9e52cb5f2366', '55.5 44.4 66.6', '66.6', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('fdc304c0-3627-4e53-a673-346f87d473d9', '22427527-053c-4602-a519-9e52cb5f2366', '99.9 88.8 77.7', '99.9', false);
+
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('de64856f-53aa-4198-91e9-a1fd00761e4b', '22427527-053c-4602-a519-9e52cb5f2366', '14.14 15.15 16.16', '16.16', false);
