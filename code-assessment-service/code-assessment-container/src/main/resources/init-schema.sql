@@ -123,7 +123,7 @@ CREATE TABLE qtype_code_questions(
     question_id uuid NOT NULL,
     user_id uuid not null,
     dsl_template text,
-    name text NOT NULL,
+    name text NOT NULL unique,
     problem_statement text,
     input_format text,
     output_format text,

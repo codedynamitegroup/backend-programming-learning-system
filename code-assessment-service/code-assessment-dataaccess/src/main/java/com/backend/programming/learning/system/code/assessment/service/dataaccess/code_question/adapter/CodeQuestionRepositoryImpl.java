@@ -234,4 +234,9 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
 
         return codeQuestions;
     }
+
+    @Override
+    public Optional<CodeQuestion> findByName(String name) {
+        return codeQuestionJpaRepository.findByName(name).map(codeQuestionDataAccessMapper::codeQuestionEntityToCodeQuestion);
+    }
 }
