@@ -11,10 +11,13 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.up
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.CertificateCourse;
+import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.mapper.certificatecourse.CertificateCourseDataMapper;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.IsRegisteredFilter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -92,6 +95,17 @@ public class CertificateCourseCommandHandler {
 
         return certificateCourseDataMapper
                 .certificateCoursesToQueryAllCertificateCoursesResponse(certificateCourses);
+    }
+
+    @Transactional(readOnly = true)
+    public QueryAllMyCompletedCertificateCoursesResponse findAllMyCompletedCertificateCourses(
+       QueryAllMyCompletedCertificateCoursesCommand queryAllMyCompletedCertificateCoursesCommand) {
+        return certificateCourseQueryHelper
+                .queryAllMyCompletedCertificateCourses(
+                        queryAllMyCompletedCertificateCoursesCommand.getPageNo(),
+                        queryAllMyCompletedCertificateCoursesCommand.getPageSize(),
+                        queryAllMyCompletedCertificateCoursesCommand.getEmail()
+                );
     }
 
     @Transactional(readOnly = true)

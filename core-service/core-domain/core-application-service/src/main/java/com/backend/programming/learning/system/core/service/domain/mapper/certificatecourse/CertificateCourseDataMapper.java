@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.QueryAllCertificateCourseWithPageResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllMostEnrolledCertificateCoursesResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllMyCompletedCertificateCoursesResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
@@ -201,6 +202,19 @@ public class CertificateCourseDataMapper {
                 .map(this::certificateCourseToQueryCertificateCourseResponse).getContent();
 
         return QueryAllCertificateCourseWithPageResponse.builder()
+                .certificateCourses(certificateCourseResponseEntities)
+                .currentPage(certificateCourses.getNumber())
+                .totalItems(certificateCourses.getTotalElements())
+                .totalPages(certificateCourses.getTotalPages())
+                .build();
+    }
+
+    public QueryAllMyCompletedCertificateCoursesResponse certificateCoursesToQueryAllMyCompletedCertificateCoursesResponse(
+            Page<CertificateCourse> certificateCourses) {
+        List<CertificateCourseResponseEntity> certificateCourseResponseEntities = certificateCourses
+                .map(this::certificateCourseToQueryCertificateCourseResponse).getContent();
+
+        return QueryAllMyCompletedCertificateCoursesResponse.builder()
                 .certificateCourses(certificateCourseResponseEntities)
                 .currentPage(certificateCourses.getNumber())
                 .totalItems(certificateCourses.getTotalElements())
