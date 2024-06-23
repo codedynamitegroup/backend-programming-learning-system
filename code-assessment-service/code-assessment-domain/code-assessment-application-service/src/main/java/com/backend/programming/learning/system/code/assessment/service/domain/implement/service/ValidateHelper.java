@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.implement.service;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.*;
+import com.backend.programming.learning.system.code.assessment.service.domain.exception.constraint_exception.UniqueConstraintException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.CodeAssessmentDomainException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_question.CodeQuestionNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_question.tag.CodeQuestionTagNotFoundException;
@@ -244,5 +245,14 @@ public class ValidateHelper {
             throw new UserNotFoundException("Could not find user with email: " + email);
         }
         return user.get();
+    }
+
+    public void validateCodeQuestionNotHaveName(String name) {
+        Optional<CodeQuestion> codeQuestion = codeQuestionRepository.findByName(name);
+        if(codeQuestion.isPresent())
+        {
+            log.error("Unique name constraint {}", name);
+            throw new UniqueConstraintException("name is already exist");
+        }
     }
 }

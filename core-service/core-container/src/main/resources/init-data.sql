@@ -155,211 +155,109 @@ VALUES
     ('b6484e21-6937-489c-b031-b71767994740', NULL, 'EASY', 'List divisor', E'<p>List all divisor of number <code>n</code></p><p>Example:</p><pre class=\"ql-syntax\" spellcheck=\"false\">Input:\n10\nOutput:\n1 2 5 10\n</pre>', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
     --7
     ('b6484e21-6937-489c-b031-b71767994741', NULL, 'EASY', 'List odd divisor', E'<p>List all odd divisor of number <code>n</code></p><p>Example:</p><pre class=\"ql-syntax\" spellcheck=\"false\">Input: 9\nOutput:\n1, 3, 9\n</pre>', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --8
     ('b6484e21-6937-489c-b031-b71767994742', NULL, 'EASY', 'Entirely odd digit', E'<p>Check if the positive integer <code>n</code> consists entirely of odd digits.</p><p>Example:</p><pre class=\"ql-syntax\" spellcheck=\"false\">Input:\n11\nOutput:\ntrue\n</pre>', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --9
     ('b6484e21-6937-489c-b031-b71767994743', NULL, 'MEDIUM', 'Palindrome integer', E'<p>Check if the positive integer n is a palindrome or not</p><p>Example:</p><pre class=\"ql-syntax\" spellcheck=\"false\">Input:\n11\nOutput:\ntrue\n</pre>', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --10
     ('b6484e21-6937-489c-b031-b71767994744', NULL, 'MEDIUM', 'Finding maximum sum k less than n', E'<p>Given <code>n</code> is a positive integer. Find the largest positive integer <code>k</code> such that S(k)&lt;n, where S(k) is defined as follows: S(k)=1+2+3+…+k.</p><p>Example:</p><pre class=\"ql-syntax\" spellcheck=\"false\">Input:\n15\nOutput:\n4\n</pre>', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --11
     ('b6484e21-6937-489c-b031-b71767994745', NULL, 'MEDIUM', 'Check 2^k', E'<p>Check if a 4-byte integer is of the form 2^k</p><p>Example:</p><pre class=\"ql-syntax\" spellcheck=\"false\">Input:\n4\nOutput:\ntrue\n</pre>', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --12
     ('b6484e21-6937-489c-b031-b71767994746', NULL, 'MEDIUM', 'Check 3^k', E'<p>Check if a 4-byte integer is of the form 3^k</p><p>Example:</p><pre class=\"ql-syntax\" spellcheck=\"false\">Input:\n4\nOutput:\nfalse\n</pre>', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --13
     ('b6484e21-6937-489c-b031-b71767994747', NULL, 'EASY', 'STL', 'Learn how to use the Standard Template Library (STL) in C++.', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --14
     ('b6484e21-6937-489c-b031-b71767994748', NULL, 'MEDIUM', 'Concurrency', 'Learn how to write concurrent programs in C++ using threads and mutexes.', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --15
     ('b6484e21-6937-489c-b031-b71767994749', NULL, 'HARD', 'Networking', 'Learn how to write networked programs in C++ using sockets.', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --16
     ('b6484e21-6937-489c-b031-b71767994750', NULL, 'HARD', 'Remove Digit From Number to Maximize Result', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --17
     ('b6484e21-6937-489c-b031-b71767994754', NULL, 'HARD', 'Question 54', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --18
     ('b6484e21-6937-489c-b031-b71767994755', NULL, 'HARD', 'Question 55', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --19
     ('b6484e21-6937-489c-b031-b71767994756', NULL, 'HARD', 'Question 56', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --20
+
     ('b6484e21-6937-489c-b031-b71767994757', NULL, 'HARD', 'Question 57', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --21
     ('b6484e21-6937-489c-b031-b71767994758', NULL, 'HARD', 'Question 58', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --22
     ('b6484e21-6937-489c-b031-b71767994759', NULL, 'HARD', 'Question 59', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --23
     ('b6484e21-6937-489c-b031-b71767994760', NULL, 'HARD', 'Question 60', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --24
     ('b6484e21-6937-489c-b031-b71767994761', NULL, 'HARD', 'Question 61', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --25
     ('b6484e21-6937-489c-b031-b71767994762', NULL, 'HARD', 'Question 62', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --26
     ('b6484e21-6937-489c-b031-b71767994763', NULL, 'HARD', 'Question 63', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --27
     ('b6484e21-6937-489c-b031-b71767994764', NULL, 'HARD', 'Question 64', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --28
     ('b6484e21-6937-489c-b031-b71767994765', NULL, 'HARD', 'Question 65', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --29
     ('b6484e21-6937-489c-b031-b71767994766', NULL, 'HARD', 'Question 66', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --30
     ('b6484e21-6937-489c-b031-b71767994767', NULL, 'HARD', 'Question 67', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --31
     ('b6484e21-6937-489c-b031-b71767994768', NULL, 'HARD', 'Question 68', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --32
     ('b6484e21-6937-489c-b031-b71767994769', NULL, 'HARD', 'Question 69', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --33
     ('b6484e21-6937-489c-b031-b71767994770', NULL, 'HARD', 'Question 70', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --34
     ('b6484e21-6937-489c-b031-b71767994771', NULL, 'HARD', 'Question 71', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --35
     ('b6484e21-6937-489c-b031-b71767994772', NULL, 'HARD', 'Question 72', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --36
     ('b6484e21-6937-489c-b031-b71767994773', NULL, 'HARD', 'Question 73', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --37
     ('b6484e21-6937-489c-b031-b71767994774', NULL, 'HARD', 'Question 74', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --38
     ('b6484e21-6937-489c-b031-b71767994775', NULL, 'HARD', 'Question 75', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --39
     ('b6484e21-6937-489c-b031-b71767994776', NULL, 'HARD', 'Question 76', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --40
     ('b6484e21-6937-489c-b031-b71767994777', NULL, 'HARD', 'Question 77', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --41
     ('b6484e21-6937-489c-b031-b71767994778', NULL, 'HARD', 'Question 78', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --42
     ('b6484e21-6937-489c-b031-b71767994779', NULL, 'HARD', 'Question 79', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --43
     ('b6484e21-6937-489c-b031-b71767994780', NULL, 'HARD', 'Question 80', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --44
     ('b6484e21-6937-489c-b031-b71767994781', NULL, 'HARD', 'Question 81', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --45
     ('b6484e21-6937-489c-b031-b71767994782', NULL, 'HARD', 'Question 82', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --46
     ('b6484e21-6937-489c-b031-b71767994783', NULL, 'HARD', 'Question 83', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --47
     ('b6484e21-6937-489c-b031-b71767994784', NULL, 'HARD', 'Question 84', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --48
     ('b6484e21-6937-489c-b031-b71767994785', NULL, 'HARD', 'Question 85', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --49
     ('b6484e21-6937-489c-b031-b71767994786', NULL, 'HARD', 'Question 86', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --50
     ('b6484e21-6937-489c-b031-b71767994787', NULL, 'HARD', 'Question 87', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --51
     ('b6484e21-6937-489c-b031-b71767994788', NULL, 'HARD', 'Question 88', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --52
     ('b6484e21-6937-489c-b031-b71767994789', NULL, 'HARD', 'Question 89', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --53
     ('b6484e21-6937-489c-b031-b71767994790', NULL, 'HARD', 'Question 90', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --54
     ('b6484e21-6937-489c-b031-b71767994791', NULL, 'HARD', 'Question 91', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --55
     ('b6484e21-6937-489c-b031-b71767994792', NULL, 'HARD', 'Question 92', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --56
     ('b6484e21-6937-489c-b031-b71767994793', NULL, 'HARD', 'Question 93', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --57
     ('b6484e21-6937-489c-b031-b71767994794', NULL, 'HARD', 'Question 94', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --58
     ('b6484e21-6937-489c-b031-b71767994795', NULL, 'HARD', 'Question 95', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --59
     ('b6484e21-6937-489c-b031-b71767994796', NULL, 'HARD', 'Question 96', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --60
     ('b6484e21-6937-489c-b031-b71767994797', NULL, 'HARD', 'Question 97', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --61
     ('b6484e21-6937-489c-b031-b71767994798', NULL, 'HARD', 'Question 98', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --62
     ('b6484e21-6937-489c-b031-b71767994799', NULL, 'HARD', 'Question 99', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --63
     ('b6484e21-6937-489c-b031-b71767994800', NULL, 'HARD', 'Question 100', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --64
     ('b6484e21-6937-489c-b031-b71767994801', NULL, 'HARD', 'Question 101', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --65
     ('b6484e21-6937-489c-b031-b71767994802', NULL, 'HARD', 'Question 102', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --66
     ('b6484e21-6937-489c-b031-b71767994803', NULL, 'HARD', 'Question 103', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --67
     ('b6484e21-6937-489c-b031-b71767994804', NULL, 'HARD', 'Question 104', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --68
     ('b6484e21-6937-489c-b031-b71767994805', NULL, 'HARD', 'Question 105', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --69
     ('b6484e21-6937-489c-b031-b71767994806', NULL, 'HARD', 'Question 106', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --70
     ('b6484e21-6937-489c-b031-b71767994807', NULL, 'HARD', 'Question 107', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --71
     ('b6484e21-6937-489c-b031-b71767994808', NULL, 'HARD', 'Question 108', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --72
     ('b6484e21-6937-489c-b031-b71767994809', NULL, 'HARD', 'Question 109', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --73
     ('b6484e21-6937-489c-b031-b71767994810', NULL, 'HARD', 'Question 110', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --74
     ('b6484e21-6937-489c-b031-b71767994811', NULL, 'HARD', 'Question 111', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --75
     ('b6484e21-6937-489c-b031-b71767994812', NULL, 'HARD', 'Question 112', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --76
     ('b6484e21-6937-489c-b031-b71767994813', NULL, 'HARD', 'Question 113', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --77
     ('b6484e21-6937-489c-b031-b71767994814', NULL, 'HARD', 'Question 114', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --78
     ('b6484e21-6937-489c-b031-b71767994815', NULL, 'HARD', 'Question 115', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --79
     ('b6484e21-6937-489c-b031-b71767994816', NULL, 'HARD', 'Question 116', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --80
     ('b6484e21-6937-489c-b031-b71767994817', NULL, 'HARD', 'Question 117', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --81
     ('b6484e21-6937-489c-b031-b71767994818', NULL, 'HARD', 'Question 118', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --82
     ('b6484e21-6937-489c-b031-b71767994819', NULL, 'HARD', 'Question 119', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --83
     ('b6484e21-6937-489c-b031-b71767994820', NULL, 'HARD', 'Question 120', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --84
     ('b6484e21-6937-489c-b031-b71767994821', NULL, 'HARD', 'Question 121', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --85
     ('b6484e21-6937-489c-b031-b71767994822', NULL, 'HARD', 'Question 122', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --86
     ('b6484e21-6937-489c-b031-b71767994823', NULL, 'HARD', 'Question 123', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --87
     ('b6484e21-6937-489c-b031-b71767994824', NULL, 'HARD', 'Question 124', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --88
     ('b6484e21-6937-489c-b031-b71767994825', NULL, 'HARD', 'Question 125', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --89
     ('b6484e21-6937-489c-b031-b71767994826', NULL, 'HARD', 'Question 126', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --90
     ('b6484e21-6937-489c-b031-b71767994827', NULL, 'HARD', 'Question 127', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --91
     ('b6484e21-6937-489c-b031-b71767994828', NULL, 'HARD', 'Question 128', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --92
     ('b6484e21-6937-489c-b031-b71767994829', NULL, 'HARD', 'Question 129', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --93
     ('b6484e21-6937-489c-b031-b71767994830', NULL, 'HARD', 'Question 130', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --94
     ('b6484e21-6937-489c-b031-b71767994831', NULL, 'HARD', 'Question 131', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --95
     ('b6484e21-6937-489c-b031-b71767994832', NULL, 'HARD', 'Question 132', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --96
     ('b6484e21-6937-489c-b031-b71767994833', NULL, 'HARD', 'Question 133', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --97
     ('b6484e21-6937-489c-b031-b71767994834', NULL, 'HARD', 'Question 134', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --98
     ('b6484e21-6937-489c-b031-b71767994835', NULL, 'HARD', 'Question 135', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --99
     ('b6484e21-6937-489c-b031-b71767994836', NULL, 'HARD', 'Question 136', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --100
     ('b6484e21-6937-489c-b031-b71767994837', NULL, 'HARD', 'Question 137', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --101
     ('b6484e21-6937-489c-b031-b71767994838', NULL, 'HARD', 'Question 138', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --102
     ('b6484e21-6937-489c-b031-b71767994839', NULL, 'HARD', 'Question 139', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --103
     ('b6484e21-6937-489c-b031-b71767994840', NULL, 'HARD', 'Question 140', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --104
     ('b6484e21-6937-489c-b031-b71767994841', NULL, 'HARD', 'Question 141', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --105
     ('b6484e21-6937-489c-b031-b71767994842', NULL, 'HARD', 'Question 142', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --106
     ('b6484e21-6937-489c-b031-b71767994843', NULL, 'HARD', 'Question 143', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --107
     ('b6484e21-6937-489c-b031-b71767994844', NULL, 'HARD', 'Question 144', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --108
     ('b6484e21-6937-489c-b031-b71767994845', NULL, 'HARD', 'Question 145', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --109
     ('b6484e21-6937-489c-b031-b71767994846', NULL, 'HARD', 'Question 146', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED'),
-    --110
     ('b6484e21-6937-489c-b031-b71767994847', NULL, 'HARD', 'Question 147', 'Question Mouse Text', 'Good Job', 1, 'CODE', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', 'CREATED');
 
 INSERT INTO public.answer_of_question(id, question_id, feedback, answer, fraction)
@@ -528,7 +426,7 @@ VALUES
           - Participants are ranked by score. If two or more participants achieve the same score, then the tie is broken by the total time taken to submit the last solution resulting in a higher score',
      'https://leetcode.com/_next/static/images/biweekly-default-f5a8fc3be85b6c9175207fd8fd855d47.png', '2024-09-15 18:09:29.488151+07', '2024-10-15 18:09:29.488151+07', 'b029f559-52a8-4699-b595-71161498ed8c', 'b029f559-52a8-4699-b595-71161498ed8c', true),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb17', 'National Disability Independence Day 2024 Coding Contest',
-     '<p>Welcome to HackerRank''s Celebrate National Disability Independence Day&nbsp;2021 Coding Challenge, a coding contest where your winnings help support a cause in need. Compete against top coders from around the world to give $500 to a U.S. charity that increases opportunities for people with disabilities.</p>',
+     '<p>Welcome to CodeDynamite''s Celebrate National Disability Independence Day&nbsp;2021 Coding Challenge, a coding contest where your winnings help support a cause in need. Compete against top coders from around the world to give $500 to a U.S. charity that increases opportunities for people with disabilities.</p>',
      '<ol><li>1st Place: $1000</li><li>2nd Place: $500</li><li>3rd Place: $250</li></ol>',
      '<p>1st place: Airpods Pro</p><br/><p>2nd place: Beats Solo3</p><br/><p>3rd place: Razer BlackWidow Gaming Keyboard</p><br/><br/><p>CodeDynamite will also donate $500 in the top competitor''''s&nbsp;name to an organization of your choice from a curated list of U.S.-based charities.</p>',
      '- Each challenge has a pre-determined score.<br/>
@@ -537,7 +435,7 @@ VALUES
           - Participants are ranked by score. If two or more participants achieve the same score, then the tie is broken by the total time taken to submit the last solution resulting in a higher score',
      'https://assets.leetcode.com/contest/weekly-contest-291/card_img_1654267951.png', '2024-01-15 18:09:29.488151+07', null, '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', '8c98e9e1-a9e7-49ee-b9fd-0cb5bd7814f7', true),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb18', 'Celebrate Juneteenth 2021 Coding Contest',
-    '<p>Welcome to HackerRank''s Celebrate Juneteenth 2021 Coding Challenge, a coding contest where your winnings help support a cause in need. Compete against top coders from around the world to give $500 to a U.S. charity that increases opportunities for African-Americans/Black individuals.</p>',
+    '<p>Welcome to CodeDynamite''s Celebrate Juneteenth 2021 Coding Challenge, a coding contest where your winnings help support a cause in need. Compete against top coders from around the world to give $500 to a U.S. charity that increases opportunities for African-Americans/Black individuals.</p>',
      '<ol><li>1st Place: $1000</li><li>2nd Place: $500</li><li>3rd Place: $250</li></ol>',
      '<ol><li>Participants must submit their solutions before the end time.</li><li>Participants must follow the contest rules and guidelines.</li><li>Participants must not cheat or plagiarize.</li></ol>',
      '- Each challenge has a pre-determined score.<br/>
@@ -546,7 +444,7 @@ VALUES
           - Participants are ranked by score. If two or more participants achieve the same score, then the tie is broken by the total time taken to submit the last solution resulting in a higher score',
      'https://assets.leetcode.com/contest/weekly-contest-291/card_img_1654267951.png', '2024-01-15 18:09:29.488151+07', '2024-04-15 18:09:29.488151+07', '9ba179ed-d26d-4828-a0f6-8836c2063992', '9ba179ed-d26d-4828-a0f6-8836c2063992', false),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb19', 'Asian Pacific American Heritage Month 2021 Coding Contest',
-    '<p>Welcome to HackerRank''s Celebrate Asian Pacific Heritage Month 2021 Coding Challenge, a coding contest where your winnings help support a cause in need. Compete against top coders from around the world to give $500 to a U.S. charity that increases opportunities for Asian and Pacific Islander&nbsp;American&nbsp;individuals.</p>',
+    '<p>Welcome to CodeDynamite''s Celebrate Asian Pacific Heritage Month 2021 Coding Challenge, a coding contest where your winnings help support a cause in need. Compete against top coders from around the world to give $500 to a U.S. charity that increases opportunities for Asian and Pacific Islander&nbsp;American&nbsp;individuals.</p>',
     '<ol><li>1st Place: $1000</li><li>2nd Place: $500</li><li>3rd Place: $250</li></ol>',
      '<ol><li>Participants must submit their solutions before the end time.</li><li>Participants must follow the contest rules and guidelines.</li><li>Participants must not cheat or plagiarize.</li></ol>',
         '- Each challenge has a pre-determined score.<br/>

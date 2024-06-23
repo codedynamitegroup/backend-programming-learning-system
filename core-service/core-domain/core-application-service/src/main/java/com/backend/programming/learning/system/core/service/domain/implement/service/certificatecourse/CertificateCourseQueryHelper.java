@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.core.service.domain.implement.se
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.certificatecourse.QueryAllCertificateCourseWithPageResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllMyCompletedCertificateCoursesResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryGeneralCertificateCourseStatisticsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.MostEnrolledWithStudentResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapterResource.ChapterResourceCount;
@@ -362,19 +363,6 @@ public class CertificateCourseQueryHelper {
         return certificateCourseList;
     }
 
-    private User getUserByEmail(String email) {
-        if (email == null) {
-            log.warn("User not found with email: null");
-            throw new UserNotFoundException("Could not find user with email: null");
-        }
-        Optional<User> user = userRepository.findUserByEmail(email);
-        if (user.isEmpty()) {
-            log.warn("User not found with email: {}", email);
-            throw new UserNotFoundException("Could not find user with email: " + email);
-        }
-        return user.get();
-    }
-
     private int countNumOfCompletedResources(UUID certificateCourseId, UUID userId) {
         return certificateCourseRepository.countNumOfCompletedResources(certificateCourseId, userId);
     }
@@ -519,6 +507,35 @@ public class CertificateCourseQueryHelper {
 
         log.info("All certificate courses queried: {}", certificateCourses);
         return certificateCourseDataMapper.certificateCoursesPageToQueryAllCertificateCourseWithPageResponse(certificateCourses);
+    }
+
+    @Transactional(readOnly = true)
+    public QueryAllMyCompletedCertificateCoursesResponse queryAllMyCompletedCertificateCourses(
+            Integer pageNo,
+            Integer pageSize,
+            String email) {
+        User user = getUserByEmail(email);
+        Page<CertificateCourse> certificateCourses = certificateCourseRepository.findAllMyCompletedCertificateCourses(
+                pageNo,
+                pageSize,
+                user.getId().getValue()
+        );
+
+        return certificateCourseDataMapper
+                .certificateCoursesToQueryAllMyCompletedCertificateCoursesResponse(certificateCourses);
+    }
+
+    private User getUserByEmail(String email) {
+        if (email == null) {
+            log.warn("User not found with email: null");
+            throw new UserNotFoundException("Could not find user with email: null");
+        }
+        Optional<User> user = userRepository.findUserByEmail(email);
+        if (user.isEmpty()) {
+            log.warn("User not found with email: {}", email);
+            throw new UserNotFoundException("Could not find user with email: " + email);
+        }
+        return user.get();
     }
 }
 
