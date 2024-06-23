@@ -56,4 +56,8 @@ public class ExamSubmissionCommandHandler {
     public List<QueryExamSubmissionOverviewResponse> findByExamIdAndUserId(UUID examId, UUID userId) {
         return examSubmissionQueryHelper.findByExamIdAndUserId(examId, userId);
     }
+
+    public QueryExamSubmissionOverviewResponse findLatestOnGoingSubmission(UUID examId, UUID userId) {
+        return examSubmissionQueryHelper.findLatestOnGoingSubmission(examId, userId);
+    }
 }

@@ -19,6 +19,7 @@ public record QueryExamSubmissionResponse(
         UUID examId,
         UUID userId,
         ZonedDateTime startTime,
+        ZonedDateTime endTime,
         ZonedDateTime submitTime,
         Status status,
         List<QuestionSubmissionResponse> questionSubmissionResponses

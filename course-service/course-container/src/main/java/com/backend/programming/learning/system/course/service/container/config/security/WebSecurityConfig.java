@@ -61,6 +61,7 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.PATCH, "/course/exam/question/end-exam").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
                         .requestMatchers(HttpMethod.GET, "/course/exam/{examId}/submission").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
                         .requestMatchers(HttpMethod.GET, "/course/exam/question/submit/{submissionId}").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
+                        .requestMatchers(HttpMethod.GET, "/course/exam/latest-submission").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
 
                         // assignment
                         .requestMatchers(HttpMethod.GET, "/course/assignment").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)

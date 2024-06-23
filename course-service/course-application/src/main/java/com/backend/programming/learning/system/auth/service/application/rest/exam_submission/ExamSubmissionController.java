@@ -41,7 +41,7 @@ public class ExamSubmissionController {
     @GetMapping("/question/submit/{submissionId}")
     @Operation(summary = "Submit exam detail.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Success.", content = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
                             schema = @Schema(implementation = QueryExamSubmissionResponse.class))
             }),
@@ -58,7 +58,7 @@ public class ExamSubmissionController {
     @PostMapping("/question/submit")
     @Operation(summary = "Submit exam.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Success.", content = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
                             schema = @Schema(implementation = CreateExamSubmissionResponse.class))
             }),
@@ -75,7 +75,7 @@ public class ExamSubmissionController {
     @PostMapping("/question/start-exam")
     @Operation(summary = "Start exam.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Success.", content = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
                             schema = @Schema(implementation = CreateExamSubmissionResponse.class))
             }),
@@ -92,7 +92,7 @@ public class ExamSubmissionController {
     @PatchMapping("/question/end-exam")
     @Operation(summary = "End exam.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Success.", content = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
                             schema = @Schema(implementation = CreateExamSubmissionResponse.class))
             }),
@@ -121,6 +121,25 @@ public class ExamSubmissionController {
             ) {
         log.info("Getting exam submission with exam id: {}", examId);
         List<QueryExamSubmissionOverviewResponse> response = examSubmissionApplicationService.findByExamIdAndUserId(examId, userId);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/latest-submission")
+    @Operation(summary = "Get latest exam submission.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryExamSubmissionOverviewResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryExamSubmissionOverviewResponse> findLatestOnGoingSubmission(
+            @RequestParam(value = "examId", required = true, defaultValue = "86600cfb-7b48-4e81-8e05-8fa29d49d7a6") UUID examId,
+            @RequestParam(value = "userId", required = true, defaultValue = "9ba179ed-d26d-4828-a0f6-8836c2063992") UUID userId
+            ) {
+        log.info("Getting latest exam submission with exam id: {}", examId);
+        QueryExamSubmissionOverviewResponse response = examSubmissionApplicationService.findLatestOnGoingSubmission(examId, userId);
+        log.info("Latest exam submission: {}", response);
         return ResponseEntity.ok(response);
     }
 }

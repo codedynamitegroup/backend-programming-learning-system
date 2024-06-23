@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
 import com.backend.programming.learning.system.course.service.domain.entity.QuestionSubmission;
+import com.backend.programming.learning.system.course.service.domain.exception.ExamSubmissionNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam_submission.ExamSubmissionDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamSubmissionRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.QuestionSubmissionRepository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -52,5 +54,19 @@ public class ExamSubmissionQueryHelper {
         });
 
         return examSubmissionResponses;
+    }
+
+    public QueryExamSubmissionOverviewResponse findLatestOnGoingSubmission(UUID examId, UUID userId) {
+        ExamSubmission examSubmission = examSubmissionRepository.findLatestExamSubmissionByExamIdAndUserId(examId, userId).orElseThrow(() -> {
+            log.error("Exam submission not found");
+            return new ExamSubmissionNotFoundException("Exam submission not found");
+        });
+
+        if(!Objects.isNull(examSubmission.getSubmitTime())){
+            log.warn("There is no on going exam submission");
+            throw new ExamSubmissionNotFoundException("There is no on going exam submission");
+        }
+
+        return examSubmissionDataMapper.mapToQueryExamSubmissionResponseWithTotal(examSubmission, 0.0);
     }
 }

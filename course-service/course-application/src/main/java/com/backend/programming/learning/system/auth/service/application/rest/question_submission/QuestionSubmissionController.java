@@ -72,9 +72,9 @@ public class QuestionSubmissionController {
     @PostMapping("/submit-all")
     @Operation(summary = "Submit question.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Success.", content = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
-                            schema = @Schema(implementation = ExamQuestionSubmissionCommand.class))
+                            schema = @Schema(implementation = ExamQuestionSubmissionResponse.class))
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
@@ -89,9 +89,9 @@ public class QuestionSubmissionController {
     @PostMapping("/submit-one")
     @Operation(summary = "Submit one question.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Success.", content = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
-                            schema = @Schema(implementation = OneExamQuestionSubmissionCommand.class))
+                            schema = @Schema(implementation = OneExamQuestionSubmissionResponse.class))
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
@@ -105,9 +105,9 @@ public class QuestionSubmissionController {
     @PostMapping("/get-by-questionId")
     @Operation(summary = "Get all questions by exam id and user id and questionId list.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Success.", content = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
-                            schema = @Schema(implementation = QueryQuestionSubmissionCommand.class))
+                            schema = @Schema(implementation = QueryQuestionSubmissionResponse.class))
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})

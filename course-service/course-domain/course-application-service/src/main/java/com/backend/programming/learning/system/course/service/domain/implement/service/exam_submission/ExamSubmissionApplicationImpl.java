@@ -51,4 +51,9 @@ public class ExamSubmissionApplicationImpl implements ExamSubmissionApplicationS
     public List<QueryExamSubmissionOverviewResponse> findByExamIdAndUserId(UUID examId, UUID userId) {
         return examSubmissionCommandHandler.findByExamIdAndUserId(examId, userId);
     }
+
+    @Override
+    public QueryExamSubmissionOverviewResponse findLatestOnGoingSubmission(UUID examId, UUID userId) {
+        return examSubmissionCommandHandler.findLatestOnGoingSubmission(examId, userId);
+    }
 }

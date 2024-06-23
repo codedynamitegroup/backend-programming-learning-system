@@ -224,7 +224,7 @@ VALUES
 
 INSERT INTO public.exam
 (id, course_id, "name", intro, score, max_score, time_open, time_close, time_limit, "overdue_handling", can_redo_questions, max_attempts, shuffle_questions, "grade_method", max_page, created_at, updated_at)
-VALUES('86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, 'c061d55e-a8b0-433f-b6a3-ae9d5601422e'::uuid, 'Kiểm tra chương 1', '<p>bài kiểm tra chương 1</p>', 10.0, 10.0, '2024-06-20 20:12:27.031', '2024-06-21 20:12:27.000', 600, 'AUTOSUBMIT'::public."overdue_handling", true, 0, false, 'QUIZ_GRADEHIGHEST'::public."grade_method", 0, '2024-06-20 20:14:49.484', '2024-06-20 20:14:49.484');
+VALUES('86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, 'c061d55e-a8b0-433f-b6a3-ae9d5601422e'::uuid, 'Kiểm tra chương 1', '<p>bài kiểm tra chương 1</p>', 10.0, 10.0, '2024-06-20 20:12:27.031', '2024-06-30 20:12:27.000', 30, 'AUTOSUBMIT'::public."overdue_handling", true, 0, false, 'QUIZ_GRADEHIGHEST'::public."grade_method", 0, '2024-06-20 20:14:49.484', '2024-06-20 20:14:49.484');
 
 
 INSERT INTO public.question
@@ -265,19 +265,19 @@ INSERT INTO public.exam_question
 VALUES('c29ccb3f-2429-4d49-9cbb-ba348164be58'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, '82a72f33-69d1-417a-bc4a-54e4a3f42a06'::uuid, 0);
 INSERT INTO public.exam_question
 (id, exam_id, question_id, page)
-VALUES('291494a8-1527-4fa3-aff7-67c0406849a9'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, '53ce35a7-9dcf-4741-a4ed-872874daf829'::uuid, 0);
+VALUES('291494a8-1527-4fa3-aff7-67c0406849a9'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, '53ce35a7-9dcf-4741-a4ed-872874daf829'::uuid, 1);
 INSERT INTO public.exam_question
 (id, exam_id, question_id, page)
-VALUES('b8afcdb5-b8e4-4ee3-8708-48865787454c'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, '0fe5d2ee-6892-4f62-a6e6-83284f2430bc'::uuid, 0);
+VALUES('b8afcdb5-b8e4-4ee3-8708-48865787454c'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, '0fe5d2ee-6892-4f62-a6e6-83284f2430bc'::uuid, 1);
 INSERT INTO public.exam_question
 (id, exam_id, question_id, page)
 VALUES('0d043280-4256-48b8-8792-5aca115b7b14'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, '1ca8c89a-1bd0-41b2-adf0-4f7b55f8b256'::uuid, 0);
 INSERT INTO public.exam_question
 (id, exam_id, question_id, page)
-VALUES('72cb08d5-dfc7-40d5-910f-1b04eb9378ff'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, '513a7e58-00d0-450b-8f0d-78af23898b81'::uuid, 0);
+VALUES('72cb08d5-dfc7-40d5-910f-1b04eb9378ff'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, '513a7e58-00d0-450b-8f0d-78af23898b81'::uuid, 1);
 INSERT INTO public.exam_question
 (id, exam_id, question_id, page)
-VALUES('b4b22535-6990-4197-aa9f-5c8b917baf13'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, 'fe65d7df-69ac-4a17-805c-f1f2b65b9972'::uuid, 0);
+VALUES('b4b22535-6990-4197-aa9f-5c8b917baf13'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, 'fe65d7df-69ac-4a17-805c-f1f2b65b9972'::uuid, 2);
 INSERT INTO public.exam_question
 (id, exam_id, question_id, page)
 VALUES('d132fdaa-3435-43c4-9e98-1fe2117e89ad'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, 'c4b3219f-9d83-4497-ad15-d46772141bd5'::uuid, 0);
