@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.course.service.domain.entity;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.course.service.domain.valueobject.QuestionSubmissionId;
 
+import java.util.List;
 import java.util.UUID;
 
 public class QuestionSubmission extends AggregateRoot<QuestionSubmissionId> {
@@ -16,10 +17,7 @@ public class QuestionSubmission extends AggregateRoot<QuestionSubmissionId> {
     private Integer numFile;
     private Boolean flag;
     private Boolean answerStatus;
-
-    public void initializeQuestionSubmission() {
-        setId(new QuestionSubmissionId(UUID.randomUUID()));
-    }
+    private List<QuestionSubmissionFile> questionSubmissionFiles;
 
     private QuestionSubmission(Builder builder) {
         super.setId(builder.id);
@@ -33,11 +31,17 @@ public class QuestionSubmission extends AggregateRoot<QuestionSubmissionId> {
         setNumFile(builder.numFile);
         setFlag(builder.flag);
         setAnswerStatus(builder.answerStatus);
+        setQuestionSubmissionFiles(builder.questionSubmissionFiles);
     }
 
     public static Builder builder() {
         return new Builder();
     }
+
+    public void initializeQuestionSubmission() {
+        setId(new QuestionSubmissionId(UUID.randomUUID()));
+    }
+
 
 
     public void setPassStatus(Integer passStatus) {
@@ -66,6 +70,10 @@ public class QuestionSubmission extends AggregateRoot<QuestionSubmissionId> {
 
     public void setAnswerStatus(Boolean answerStatus) {
         this.answerStatus = answerStatus;
+    }
+
+    public void setQuestionSubmissionFiles(List<QuestionSubmissionFile> questionSubmissionFiles) {
+        this.questionSubmissionFiles = questionSubmissionFiles;
     }
 
     public User getUser() {
@@ -108,6 +116,10 @@ public class QuestionSubmission extends AggregateRoot<QuestionSubmissionId> {
         return answerStatus;
     }
 
+    public List<QuestionSubmissionFile> getQuestionSubmissionFiles() {
+        return questionSubmissionFiles;
+    }
+
     public static final class Builder {
         private QuestionSubmissionId id;
         private User user;
@@ -120,6 +132,7 @@ public class QuestionSubmission extends AggregateRoot<QuestionSubmissionId> {
         private Integer numFile;
         private Boolean flag;
         private Boolean answerStatus;
+        private List<QuestionSubmissionFile> questionSubmissionFiles;
 
         private Builder() {
         }
@@ -176,6 +189,11 @@ public class QuestionSubmission extends AggregateRoot<QuestionSubmissionId> {
 
         public Builder answerStatus(Boolean val) {
             answerStatus = val;
+            return this;
+        }
+
+        public Builder questionSubmissionFiles(List<QuestionSubmissionFile> val) {
+            questionSubmissionFiles = val;
             return this;
         }
 

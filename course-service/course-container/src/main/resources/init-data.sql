@@ -224,7 +224,7 @@ VALUES
 
 INSERT INTO public.exam
 (id, course_id, "name", intro, score, max_score, time_open, time_close, time_limit, "overdue_handling", can_redo_questions, max_attempts, shuffle_questions, "grade_method", max_page, created_at, updated_at)
-VALUES('86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, 'c061d55e-a8b0-433f-b6a3-ae9d5601422e'::uuid, 'Kiểm tra chương 1', '<p>bài kiểm tra chương 1</p>', 10.0, 10.0, '2024-06-20 20:12:27.031', '2024-06-30 20:12:27.000', 30, 'AUTOSUBMIT'::public."overdue_handling", true, 0, false, 'QUIZ_GRADEHIGHEST'::public."grade_method", 0, '2024-06-20 20:14:49.484', '2024-06-20 20:14:49.484');
+VALUES('86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, 'c061d55e-a8b0-433f-b6a3-ae9d5601422e'::uuid, 'Kiểm tra chương 1', '<p>bài kiểm tra chương 1</p>', 10.0, 10.0, '2024-06-20 20:12:27.031', '2024-06-30 20:12:27.000', 6000, 'AUTOSUBMIT'::public."overdue_handling", true, 0, false, 'QUIZ_GRADEHIGHEST'::public."grade_method", 0, '2024-06-20 20:14:49.484', '2024-06-20 20:14:49.484');
 
 
 INSERT INTO public.question
@@ -262,7 +262,9 @@ VALUES('1ca8c89a-1bd0-41b2-adf0-4f7b55f8b256'::uuid, '08b65a39-394f-4977-a5fa-3f
 
 INSERT INTO public.exam_question
 (id, exam_id, question_id, page)
-VALUES('c29ccb3f-2429-4d49-9cbb-ba348164be58'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, '82a72f33-69d1-417a-bc4a-54e4a3f42a06'::uuid, 0);
+VALUES('c29ccb3f-2429-4d49-9cbb-ba348164be58'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, '82a72f33-69d1-417a-bc4a-54e4a3f42a06'::uuid, 0),
+             ('c29ccb3f-2429-4d49-9cbb-ba348164be59'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, 'b6484e21-6937-489c-b031-b71767994233'::uuid, 0);
+
 INSERT INTO public.exam_question
 (id, exam_id, question_id, page)
 VALUES('291494a8-1527-4fa3-aff7-67c0406849a9'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, '53ce35a7-9dcf-4741-a4ed-872874daf829'::uuid, 1);
