@@ -4,10 +4,12 @@ import com.backend.programming.learning.system.application.handler.utils.JwtUtil
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.ExecuteCodeWithTestCaseCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_submission.UpdateCodeSubmissionTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.CodeSubmissionApplicationService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -68,6 +70,50 @@ public class CodeSubmissionController {
                 codeSubmissionApplicationService.getCodeSubmissionsByUserId(command);
 
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/heat-map")
+    public ResponseEntity<List<SubmissionHeadMapItem>> getHeadMap(
+            @RequestHeader(value = "Access-Token") String accessToken,
+            @RequestParam Integer year){
+        @NotNull(message = "email must not be null")
+        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
+        List<SubmissionHeadMapItem> items = codeSubmissionApplicationService.getHeatMap(email, year);
+        return ResponseEntity.ok(items);
+    }
+
+    @GetMapping("/recent-code-question")
+    public ResponseEntity<GetCodeQuestionsResponse> getUserRecentCodeQuestion(
+            @RequestHeader(value = "Access-Token") String accessToken,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "5") Integer pageSize
+    ){
+        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
+
+        UserRecentCodeQuestionQuery query = UserRecentCodeQuestionQuery.builder()
+                .email(email)
+                .pageNum(pageNo)
+                .pageSize(pageSize)
+                .build();
+        GetCodeQuestionsResponse response = codeSubmissionApplicationService.getUserRecentCodeQuestion(query);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/recent-code-submission")
+    public ResponseEntity<GetCodeSubmissionReponse> getUserRecentCodeSubmissions(
+            @RequestHeader(value = "Access-Token") String accessToken,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "5") Integer pageSize
+    ){
+        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
+
+        UserCodeSubmissionQuery query = UserCodeSubmissionQuery.builder()
+                .pageNum(pageNo)
+                .pageSize(pageSize)
+                .email(email)
+                .build();
+        GetCodeSubmissionReponse reponse = codeSubmissionApplicationService.getUserRecentCodeSubmissions(query);
+        return ResponseEntity.ok(reponse);
     }
 
     @GetMapping("/admin-code-submission")

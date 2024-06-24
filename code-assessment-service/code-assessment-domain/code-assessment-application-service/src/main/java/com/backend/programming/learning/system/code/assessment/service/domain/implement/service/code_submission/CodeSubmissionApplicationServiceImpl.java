@@ -3,9 +3,11 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.ExecuteCodeWithTestCaseCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_submission.UpdateCodeSubmissionTestCaseCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.CodeSubmissionApplicationService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -13,6 +15,7 @@ import java.util.List;
 
 @Service
 @Validated
+@Slf4j
 public class CodeSubmissionApplicationServiceImpl implements CodeSubmissionApplicationService {
     private final CodeSubmissionCommandHandler codeSubmissionCommandHandler;
 
@@ -56,5 +59,22 @@ public class CodeSubmissionApplicationServiceImpl implements CodeSubmissionAppli
     @Override
     public GetCodeSubmissionReponse getAdminCodeSubmissions(AdminCodeSubmissionQuery command) {
         return codeSubmissionCommandHandler.getAdminCodeSubmissions(command);
+    }
+
+    @Override
+    public GetCodeSubmissionReponse getUserRecentCodeSubmissions(UserCodeSubmissionQuery query) {
+        return codeSubmissionCommandHandler.getUserRecentCodeSubmissions(query);
+    }
+
+    @Override
+    public GetCodeQuestionsResponse getUserRecentCodeQuestion(UserRecentCodeQuestionQuery query) {
+        return codeSubmissionCommandHandler.getUserRecentCodeQuestion(query);
+    }
+
+    @Override
+    public List<SubmissionHeadMapItem> getHeatMap(String email, Integer year) {
+        List<SubmissionHeadMapItem> cc = codeSubmissionCommandHandler.getHeatMap(email, year);
+        cc.forEach(i->{log.info("cc i {}", i.getDate());});
+        return cc;
     }
 }
