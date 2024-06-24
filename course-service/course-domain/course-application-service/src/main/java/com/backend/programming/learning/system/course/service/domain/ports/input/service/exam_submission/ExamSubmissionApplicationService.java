@@ -5,8 +5,11 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryAllStudentExamSubmissionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryAllStudentExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import jakarta.validation.Valid;
 
 import java.util.List;
@@ -32,4 +35,8 @@ public interface ExamSubmissionApplicationService {
     List<QueryExamSubmissionOverviewResponse> findByExamIdAndUserId(UUID examId, UUID userId);
 
     QueryExamSubmissionOverviewResponse findLatestOnGoingSubmission(UUID examId, UUID userId);
+
+    QueryAllStudentExamSubmissionResponse findByExamId(
+            @Valid ExamId examId,
+            @Valid QueryAllStudentExamSubmissionCommand queryAllStudentExamSubmissionCommand);
 }

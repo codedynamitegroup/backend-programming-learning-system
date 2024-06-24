@@ -84,16 +84,18 @@ public class ExamQueryHelper {
             List<ExamQuestion> examQuestions = examQuestionRepository
                     .findByExamId(examId);
             Exam exam = examRepository.findBy(examId);
-            ExamSubmission examSubmission = examSubmissionRepository.findByExamAndUser(exam,courseUser.getUser());
+            ExamSubmission examSubmission = examSubmissionRepository.findByExamAndUser(exam, courseUser.getUser());
 
             Float score = 0F;
             for (QuestionSubmission questionSubmission : questionSubmissions) {
-                score += questionSubmission.getGrade();
+                if (Objects.nonNull(questionSubmission.getGrade())) {
+                    score += questionSubmission.getGrade();
+                }
             }
 
             Float totalScore = 0F;
             for (ExamQuestion examQuestion : examQuestions) {
-                if(Objects.nonNull(examQuestion.getQuestion())){
+                if (Objects.nonNull(examQuestion.getQuestion())) {
                     totalScore += examQuestion.getQuestion().getDefaultMark();
                 }
             }

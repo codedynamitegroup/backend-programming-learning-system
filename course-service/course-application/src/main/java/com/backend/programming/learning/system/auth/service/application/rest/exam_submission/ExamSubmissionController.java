@@ -1,9 +1,12 @@
 package com.backend.programming.learning.system.auth.service.application.rest.exam_submission;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.*;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryAllStudentExamSubmissionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryAllStudentExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.exam_submission.ExamSubmissionApplicationService;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -106,7 +109,33 @@ public class ExamSubmissionController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping("/{examId}/submission")
+    @GetMapping("{examId}/student/submission")
+    @Operation(summary = "Get student exam submission by exam id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllStudentExamSubmissionResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllStudentExamSubmissionResponse> findByExamId(
+            @PathVariable UUID examId,
+            @RequestParam(name = "search", required = false, defaultValue = "") String search,
+            @RequestParam(name = "pageNo", required = false, defaultValue = "0") Integer pageNo,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
+        log.info("Getting exam submission with exam id: {}", examId);
+        QueryAllStudentExamSubmissionCommand queryAllStudentExamSubmissionCommand = QueryAllStudentExamSubmissionCommand.builder()
+                .search(search)
+                .pageNo(pageNo)
+                .pageSize(pageSize)
+                .build();
+        QueryAllStudentExamSubmissionResponse response = examSubmissionApplicationService.findByExamId(
+                new ExamId(examId),
+                queryAllStudentExamSubmissionCommand);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/exam/{examId}/submission")
     @Operation(summary = "Get exam submission by exam id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
@@ -118,7 +147,7 @@ public class ExamSubmissionController {
     public ResponseEntity<List<QueryExamSubmissionOverviewResponse>> findByExamId(
             @PathVariable UUID examId,
             @RequestParam(value = "userId", required = true) UUID userId
-            ) {
+    ) {
         log.info("Getting exam submission with exam id: {}", examId);
         List<QueryExamSubmissionOverviewResponse> response = examSubmissionApplicationService.findByExamIdAndUserId(examId, userId);
         return ResponseEntity.ok(response);
@@ -136,7 +165,7 @@ public class ExamSubmissionController {
     public ResponseEntity<QueryExamSubmissionOverviewResponse> findLatestOnGoingSubmission(
             @RequestParam(value = "examId", required = true, defaultValue = "86600cfb-7b48-4e81-8e05-8fa29d49d7a6") UUID examId,
             @RequestParam(value = "userId", required = true, defaultValue = "9ba179ed-d26d-4828-a0f6-8836c2063992") UUID userId
-            ) {
+    ) {
         log.info("Getting latest exam submission with exam id: {}", examId);
         QueryExamSubmissionOverviewResponse response = examSubmissionApplicationService.findLatestOnGoingSubmission(examId, userId);
         log.info("Latest exam submission: {}", response);
