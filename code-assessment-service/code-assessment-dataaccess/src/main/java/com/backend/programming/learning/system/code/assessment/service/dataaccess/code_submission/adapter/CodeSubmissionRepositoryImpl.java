@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.adapter;
 
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.tag.CodeQuestionTagEntity;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.mapper.CodeQuestionDataAccessMapper;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.repository.CodeQuestionTagJpaRepository;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.entity.CodeSubmissionCerCourseEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.entity.contest.CodeSubmissionContestEntity;
@@ -10,7 +11,9 @@ import com.backend.programming.learning.system.code.assessment.service.dataacces
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.repository.CodeSubmissionContestJpaRepository;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.repository.CodeSubmissionJpaRepository;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.tag.mapper.TagDataAccessMapper;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.HeatMapItem;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Tag;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_submssion.CodeSubmissionRepository;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
@@ -36,14 +39,16 @@ public class CodeSubmissionRepositoryImpl implements CodeSubmissionRepository {
     private final TagDataAccessMapper tagDataAccessMapper;
     private final CodeSubmissionContestJpaRepository codeSubmissionContestJpaRepository;
     private final CodeSubmissionCerCourseJpaRepository codeSubmissionCerCourseJpaRepository;
+    private final CodeQuestionDataAccessMapper codeQuestionDataAccessMapper;
 
-    public CodeSubmissionRepositoryImpl(CodeSubmissionJpaRepository jpaRepository, CodeSubmissionDataAccessMapper dataAccessMapper, CodeQuestionTagJpaRepository codeQuestionTagJpaRepository, TagDataAccessMapper tagDataAccessMapper, CodeSubmissionContestJpaRepository codeSubmissionContestJpaRepository, CodeSubmissionCerCourseJpaRepository codeSubmissionCerCourseJpaRepository) {
+    public CodeSubmissionRepositoryImpl(CodeSubmissionJpaRepository jpaRepository, CodeSubmissionDataAccessMapper dataAccessMapper, CodeQuestionTagJpaRepository codeQuestionTagJpaRepository, TagDataAccessMapper tagDataAccessMapper, CodeSubmissionContestJpaRepository codeSubmissionContestJpaRepository, CodeSubmissionCerCourseJpaRepository codeSubmissionCerCourseJpaRepository, CodeQuestionDataAccessMapper codeQuestionDataAccessMapper) {
         this.jpaRepository = jpaRepository;
         this.dataAccessMapper = dataAccessMapper;
         this.codeQuestionTagJpaRepository = codeQuestionTagJpaRepository;
         this.tagDataAccessMapper = tagDataAccessMapper;
         this.codeSubmissionContestJpaRepository = codeSubmissionContestJpaRepository;
         this.codeSubmissionCerCourseJpaRepository = codeSubmissionCerCourseJpaRepository;
+        this.codeQuestionDataAccessMapper = codeQuestionDataAccessMapper;
     }
 
     @Override
@@ -170,5 +175,34 @@ public class CodeSubmissionRepositoryImpl implements CodeSubmissionRepository {
                         cerCourseId,
                         pageable)
                 .map(dataAccessMapper::entityToCodeSubmission);
+    }
+
+    @Override
+    public Page<CodeSubmission> findByUserId(UserId id, Integer pageNum, Integer pageSize) {
+        Pageable pageable
+                = PageRequest
+                .of(pageNum, pageSize);
+        return jpaRepository
+                .findByUserIdOrderByCreatedAtDesc(id.getValue(), pageable)
+                .map(dataAccessMapper::entityToCodeSubmission);
+    }
+
+    @Override
+    public Page<CodeQuestion> getUserRecentCodeQuestion(UserId id, Integer pageNum, Integer pageSize) {
+        Pageable pageable
+                = PageRequest
+                .of(pageNum, pageSize, Sort.by("created_at").descending());
+        return jpaRepository.findRecentCodeQuestionsByRecentCodeSubmission(id.getValue(), pageable)
+                .map(CodeSubmissionEntity::getCodeQuestion)
+                .map(codeQuestionDataAccessMapper::codeQuestionEntityToCodeQuestion);
+    }
+
+    @Override
+    public List<HeatMapItem> getHeatMap(UserId id, int year) {
+        return jpaRepository.getHeatMapItem(id.getValue(), year).stream().map(item->HeatMapItem.builder()
+                .numOfSubmission(item.getNumOfSubmission())
+                .date(item.getDate())
+                .build())
+                .toList();
     }
 }

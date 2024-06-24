@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_submssion;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.HeatMapItem;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.Tag;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
@@ -41,4 +43,10 @@ public interface CodeSubmissionRepository {
     void saveContest(CodeSubmissionId id, UUID contestId);
 
     Page<CodeSubmission> findByQuestionId(List<UUID> codeQuestionIds, UUID contestId, UUID cerCourseId, Integer pageNum, Integer pageSize);
+
+    Page<CodeSubmission> findByUserId(UserId id, Integer pageNum, Integer pageSize);
+
+    Page<CodeQuestion> getUserRecentCodeQuestion(UserId id, Integer pageNum, Integer pageSize);
+
+    List<HeatMapItem> getHeatMap(UserId id, int year);
 }

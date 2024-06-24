@@ -95,6 +95,7 @@ public class CodeQuestionController {
         GetCodeQuestionsResponse response = codeQuestionApplicationService.getPublicCodeQuestions(query);
         return ResponseEntity.ok(response);
     }
+
     @GetMapping("/admin-code-question")
     public ResponseEntity<GetCodeQuestionsResponse> getAdminCodeQuestion(
             @RequestParam Integer pageNo,

@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.repository;
 
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.data_interface.IHeatMapItem;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.entity.CodeSubmissionEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -150,4 +151,25 @@ public interface CodeSubmissionJpaRepository extends JpaRepository<CodeSubmissio
             """,
     nativeQuery = true)
     Page<CodeSubmissionEntity> findByContestIdAndCerCourseIdCodeQuestionIds(UUID contestId, UUID cerCourseId, Pageable pageable);
+
+    Page<CodeSubmissionEntity> findByUserIdOrderByCreatedAtDesc(UUID userId, Pageable pageable);
+
+    @Query(value = """
+            select cse.* from code_submission cse
+              join
+                  (select cse2.code_question_id, max(cse2.created_at) cse_created_at from code_submission cse2
+                  where cse2.user_id = ?1
+                  group by cse2.code_question_id) cseTemp on cseTemp.code_question_id = cse.code_question_id
+              where cse.user_id = ?1 and cse.created_at = cseTemp.cse_created_at
+            """, nativeQuery = true)
+    Page<CodeSubmissionEntity> findRecentCodeQuestionsByRecentCodeSubmission(UUID value, Pageable pageable);
+
+    @Query(value = """
+            SELECT DATE_TRUNC('day', cse.created_at at time zone 'utc') AS date, COUNT(*) AS numOfSubmission
+            FROM code_submission cse
+            WHERE EXTRACT(YEAR FROM cse.created_at at time zone 'utc') = ?2
+            and cse.user_id = ?1
+            GROUP BY DATE_TRUNC('day', cse.created_at at time zone 'utc')
+            """, nativeQuery = true)
+    List<IHeatMapItem> getHeatMapItem(UUID value, int year);
 }
