@@ -27,7 +27,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
@@ -186,5 +185,65 @@ public class ExamSubmissionCreateHelper {
         // Haven't submit and exam time is not over
         return !Objects.isNull(examSubmission.getSubmitTime()) || !examSubmission.getEndTime()
                 .isAfter(ZonedDateTime.now());
+    }
+
+    public void gradingExam(CreateExamSubmissionEndCommand createExamSubmissionEndCommand) {
+        Exam exam = examRepository.findBy(new ExamId(createExamSubmissionEndCommand.examId()));
+        User user = userRepository.findUser(createExamSubmissionEndCommand.userId())
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+        ExamSubmission examSubmissionLast = examSubmissionRepository.findByExamAndUser(exam, user);
+        List<QuestionSubmission> questionSubmissions = questionSubmissionRepository
+                .findAllByExamSubmissionId(examSubmissionLast.getId().getValue());
+
+        AtomicReference<Float> mark = new AtomicReference<>(0F);
+        AtomicReference<Float> totleMark = new AtomicReference<>(0F);
+
+        questionSubmissions.forEach(question -> {
+            Optional<Question> questionExam = questionRepository.findById(question.getQuestion().getId().getValue());
+
+            if (questionExam.isEmpty()) {
+                log.error("Question not found with id: {}", question.getQuestion().getId().getValue());
+                throw new QuestionNotFoundException("Question not found with id: " + question.getQuestion().getId().getValue());
+            }
+
+            List<AnswerOfQuestion> answerOfQuestion = answerOfQuestionRepository
+                    .findAllByQuestionId(question.getQuestion().getId().getValue());
+
+            Float defaultMark = questionExam.get().getDefaultMark();
+            AtomicReference<Float> grade = new AtomicReference<>(0F);
+            String contentStudent = question.getContent();
+
+            if (questionExam.get().getQtype().equals(QuestionType.SHORT_ANSWER)) {
+                answerOfQuestion.forEach(answer -> {
+                    String answerText = answer.getAnswer().replaceAll("<p>|</p>", "");
+                    if (answerText.equals(contentStudent)) {
+                        grade.set(defaultMark * answer.getFraction());
+                    }
+                });
+            } else if (questionExam.get().getQtype().equals(QuestionType.MULTIPLE_CHOICE)) {
+                answerOfQuestion.forEach(answer -> {
+                    String answerText = answer.getAnswer().replaceAll("<p>|</p>", "");
+                    if (answer.getId().getValue().toString().equals(contentStudent)) {
+                        grade.updateAndGet(v -> v + defaultMark * answer.getFraction());
+                    }
+                });
+            } else if (questionExam.get().getQtype().equals(QuestionType.TRUE_FALSE)) {
+                answerOfQuestion.forEach(answer -> {
+                    String answerText = answer.getAnswer().replaceAll("<p>|</p>", "");
+                    if (answerText.equals(contentStudent)) {
+                        grade.set(defaultMark * answer.getFraction());
+                    }
+                });
+            }
+
+            mark.updateAndGet(v -> v + grade.get());
+            totleMark.updateAndGet(v -> v + defaultMark);
+            question.setGrade(grade.get());
+            questionSubmissionRepository.save(question);
+        });
+
+        examSubmissionLast.setScore(mark.get());
+
+        examSubmissionRepository.save(examSubmissionLast);
     }
 }

@@ -39,6 +39,8 @@ public class ExamSubmissionEntity {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    private Float score;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
