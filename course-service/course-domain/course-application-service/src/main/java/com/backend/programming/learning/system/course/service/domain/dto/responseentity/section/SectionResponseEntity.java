@@ -15,5 +15,6 @@ public class SectionResponseEntity {
     private final UUID sectionId;
     private final String name;
     private final Integer visible;
+    private final Integer moodleId;
     private final List<ModuleResponseEntity> modules;
 }
