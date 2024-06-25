@@ -1,12 +1,16 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.exam_submission;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionEndCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryAllStudentExamSubmissionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryAllStudentExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam_submission.ExamSubmissionDataMapper;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -28,6 +32,7 @@ public class ExamSubmissionCommandHandler {
     private final ExamSubmissionCreateHelper examSubmissionCreateHelper;
     private final ExamSubmissionQueryHelper examSubmissionQueryHelper;
     private final ExamSubmissionDataMapper examSubmissionDataMapper;
+
     @Transactional
     public CreateExamSubmissionResponse submitExam(CreateExamSubmissionCommand createExamSubmissionCommand) {
         ExamSubmission examSubmission = examSubmissionCreateHelper.createExamSubmission(createExamSubmissionCommand);
@@ -41,8 +46,8 @@ public class ExamSubmissionCommandHandler {
     }
 
     @Transactional
-    public CreateExamSubmissionResponse endExam(CreateExamSubmissionStartCommand createExamSubmissionStartCommand) {
-        ExamSubmission examSubmission = examSubmissionCreateHelper.createEndExamSubmission(createExamSubmissionStartCommand);
+    public CreateExamSubmissionResponse endExam(CreateExamSubmissionEndCommand createExamSubmissionEndCommand) {
+        ExamSubmission examSubmission = examSubmissionCreateHelper.createEndExamSubmission(createExamSubmissionEndCommand);
         return examSubmissionDataMapper.mapToCreateExamSubmissionResponse(examSubmission);
     }
 
@@ -54,5 +59,17 @@ public class ExamSubmissionCommandHandler {
     @Transactional(readOnly = true)
     public List<QueryExamSubmissionOverviewResponse> findByExamIdAndUserId(UUID examId, UUID userId) {
         return examSubmissionQueryHelper.findByExamIdAndUserId(examId, userId);
+    }
+
+    @Transactional(readOnly = true)
+    public QueryExamSubmissionOverviewResponse findLatestOnGoingSubmission(UUID examId, UUID userId) {
+        return examSubmissionQueryHelper.findLatestOnGoingSubmission(examId, userId);
+    }
+
+    @Transactional(readOnly = true)
+    public QueryAllStudentExamSubmissionResponse findByExamId(
+            ExamId examId,
+            QueryAllStudentExamSubmissionCommand queryAllStudentExamSubmissionCommand) {
+        return examSubmissionQueryHelper.findByExamId(examId, queryAllStudentExamSubmissionCommand);
     }
 }

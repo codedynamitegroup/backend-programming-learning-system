@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.code.assessment.service.dataacce
 
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.CodeQuestionEntity;
 import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
+import org.aspectj.apache.bcel.classfile.Code;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,7 +17,7 @@ import java.util.UUID;
 @Repository
 public interface CodeQuestionJpaRepository extends JpaRepository<CodeQuestionEntity, UUID> {
     Optional<CodeQuestionEntity> findByQuestionId(UUID questionId);
-
+    Optional<CodeQuestionEntity> findByName(String name);
     @Query(value= """
             (select cqe.*
                 from (select cse.* from code_submission cse

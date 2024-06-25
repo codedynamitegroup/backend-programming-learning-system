@@ -6,12 +6,15 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.review.DeleteReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryEachStarReviewCountResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryReviewCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.review.ReviewResponseEntity;
 
 import jakarta.validation.Valid;
+
+import java.util.UUID;
 
 public interface ReviewApplicationService {
     CreateReviewResponse createReview(
@@ -28,5 +31,8 @@ public interface ReviewApplicationService {
 
     UpdateReviewResponse updateReview(
             @Valid UpdateReviewCommand updateReviewCommand);
+
+    QueryEachStarReviewCountResponse queryEachStarReviewCountByCertificateCourseId(
+            UUID certificateCourseId);
 
 }

@@ -240,16 +240,40 @@ public class CodeSubmissionHelper {
         return result;
     }
 
-    public Page<CodeSubmission> getAdminCodeSubmissions(AdminCodeSubmissionQuery command) {
-        User user = validateHelper.validateUserByEmail(command.getEmail());
+    public Page<CodeSubmission> getAdminCodeSubmissions(AdminCodeSubmissionQuery query) {
+        User user = validateHelper.validateUserByEmail(query.getEmail());
         Page<CodeSubmission> codeSubmissions = codeSubmissionRepository.findByQuestionId(
                 null,
-                command.getContestId(),
-                command.getCerCourseId(),
-                command.getPageNum(),
-                command.getPageSize());
+                query.getContestId(),
+                query.getCerCourseId(),
+                query.getPageNum(),
+                query.getPageSize());
 
         findDescriptionStatus(codeSubmissions);
         return codeSubmissions;
+    }
+
+    public Page<CodeSubmission> getUserRecentCodeSubmissions(UserCodeSubmissionQuery query) {
+        User user = validateHelper.validateUserByEmail(query.getEmail());
+        Page<CodeSubmission> codeSubmissions = codeSubmissionRepository.findByUserId(
+                user.getId(),
+                query.getPageNum(),
+                query.getPageSize());
+
+        findDescriptionStatus(codeSubmissions);
+        return codeSubmissions;
+    }
+
+    public Page<CodeQuestion> getUserRecentCodeQuestion(UserRecentCodeQuestionQuery query) {
+        User user = validateHelper.validateUserByEmail(query.getEmail());
+        return codeSubmissionRepository.getUserRecentCodeQuestion(
+                user.getId(),
+                query.getPageNum(),
+                query.getPageSize());
+    }
+
+    public List<HeatMapItem> getHeatMap(String email, Integer year) {
+        User user = validateHelper.validateUserByEmail(email);
+        return codeSubmissionRepository.getHeatMap(user.getId(), year);
     }
 }

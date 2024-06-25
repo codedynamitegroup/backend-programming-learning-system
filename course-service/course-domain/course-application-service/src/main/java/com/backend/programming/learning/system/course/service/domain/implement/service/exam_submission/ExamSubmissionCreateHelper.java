@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 
 import com.backend.programming.learning.system.course.service.domain.CourseDomainService;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionEndCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.AnswerOfQuestion;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
@@ -9,6 +10,9 @@ import com.backend.programming.learning.system.course.service.domain.entity.Exam
 import com.backend.programming.learning.system.course.service.domain.entity.Question;
 import com.backend.programming.learning.system.course.service.domain.entity.QuestionSubmission;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.exception.ExamClosedException;
+import com.backend.programming.learning.system.course.service.domain.exception.ExamSubmissionConflictException;
+import com.backend.programming.learning.system.course.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam_submission.ExamSubmissionDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.AnswerOfQuestionRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamRepository;
@@ -17,14 +21,15 @@ import com.backend.programming.learning.system.course.service.domain.ports.outpu
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.QuestionSubmissionRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
+import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
 import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -50,7 +55,7 @@ public class ExamSubmissionCreateHelper {
         log.info("Create exam submission");
         Exam exam = examRepository.findBy(new ExamId(createExamSubmissionCommand.examId()));
         User user = userRepository.findUser(createExamSubmissionCommand.userId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
         ExamSubmission examSubmissionLast = examSubmissionRepository.findByExamAndUser(exam, user);
         ExamSubmission examSubmission = examSubmissionDataMapper
                 .createExamSubmissionCommandToExamSubmission(exam, user,
@@ -68,7 +73,7 @@ public class ExamSubmissionCreateHelper {
 
                     if (questionExam.isEmpty()) {
                         log.error("Question not found with id: {}", question.questionId());
-                        throw new RuntimeException("Question not found with id: " + question.questionId());
+                        throw new QuestionNotFoundException("Question not found with id: " + question.questionId());
                     }
 
                     List<AnswerOfQuestion> answerOfQuestion = answerOfQuestionRepository.findAllByQuestionId(question.questionId());
@@ -130,18 +135,56 @@ public class ExamSubmissionCreateHelper {
     public ExamSubmission createStartExamSubmission(CreateExamSubmissionStartCommand createExamSubmissionCommand) {
         log.info("Create start exam submission");
         Exam exam = examRepository.findBy(new ExamId(createExamSubmissionCommand.examId()));
+
+        if(isExamClosed(exam)) {
+            log.error("Exam is closed");
+            throw new ExamClosedException("Exam is closed");
+        }
+
+        // Calculate endtime
+        ZonedDateTime endTime = createExamSubmissionCommand.examStartTime().plusSeconds(exam.getTimeLimit());
+
         User user = userRepository.findUser(createExamSubmissionCommand.userId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+
+        // Get the latest exam submission
         ExamSubmission examSubmissionLast = examSubmissionRepository.findByExamAndUser(exam, user);
+
+        // Max attempt check
+        if(exam.getMaxAttempts() > 0 && // Unlimited attempt
+                examSubmissionLast.getSubmissionCount() >= exam.getMaxAttempts() &&
+                isExamSubmissionSubmitted(examSubmissionLast)
+        ) {
+            log.error("Submission limit exceeded");
+            throw new ExamSubmissionConflictException("Submission limit exceeded");
+        }
+
+        //check there is other on-going exam submission being taken
+        if(!Objects.isNull(examSubmissionLast.getExam()) && // No last submission --> first submission
+               !isExamSubmissionSubmitted(examSubmissionLast)) { // Exam time is not over
+            log.error("There is an on-going exam submission");
+            throw new RuntimeException("There is an on-going exam submission");
+        }
+
         ExamSubmission examSubmission = examSubmissionDataMapper
                 .createStartExamSubmissionCommandToExamSubmission(exam, user,
-                        Objects.isNull(examSubmissionLast) ? 1 : examSubmissionLast.getSubmissionCount() + 1,
-                        createExamSubmissionCommand);
+                        Objects.isNull(examSubmissionLast.getExam()) ? 1 : examSubmissionLast.getSubmissionCount() + 1,
+                        createExamSubmissionCommand, endTime);
         courseDomainService.createStartExamSubmission(examSubmission);
         return saveExamSubmission(examSubmission);
     }
 
-    public ExamSubmission createEndExamSubmission(CreateExamSubmissionStartCommand createExamSubmissionStartCommand) {
+    public ExamSubmission createEndExamSubmission(CreateExamSubmissionEndCommand createExamSubmissionStartCommand) {
         return examSubmissionRepository.saveEnd(createExamSubmissionStartCommand);
+    }
+
+    private Boolean isExamClosed(Exam exam) {
+        return exam.getTimeClose().isBefore(ZonedDateTime.now());
+    }
+
+    private Boolean isExamSubmissionSubmitted(ExamSubmission examSubmission) {
+        // Haven't submit and exam time is not over
+        return !Objects.isNull(examSubmission.getSubmitTime()) || !examSubmission.getEndTime()
+                .isAfter(ZonedDateTime.now());
     }
 }

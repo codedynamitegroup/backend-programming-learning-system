@@ -21,14 +21,18 @@ public interface QtypeCodeQuestionRepository {
     Page<QtypeCodeQuestion> findAllAdminQtypeCodeQuestions(String search,
                                                            QuestionDifficulty difficulty,
                                                            Boolean isPublic,
-                                                           UUID userId,
                                                            Integer pageNo,
                                                            Integer pageSize);
     Page<QtypeCodeQuestion> findAllOrgAdminQtypeCodeQuestions(UUID orgId,
                                                             String search,
                                                            QuestionDifficulty difficulty,
                                                            Boolean isPublic,
-                                                           UUID userId,
                                                            Integer pageNo,
                                                            Integer pageSize);
+    Page<QtypeCodeQuestion> findAllAllowedToImportOrgAdminQtypeCodeQuestions(UUID orgId,
+                                                                           String search,
+                                                                           QuestionDifficulty difficulty,
+                                                                           Boolean isPublic,
+                                                                           Integer pageNo,
+                                                                           Integer pageSize);
 }

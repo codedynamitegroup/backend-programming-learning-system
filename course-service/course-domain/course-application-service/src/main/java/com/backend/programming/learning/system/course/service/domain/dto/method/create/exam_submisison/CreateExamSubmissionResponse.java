@@ -18,6 +18,7 @@ public record CreateExamSubmissionResponse(
         UUID examId,
         UUID userId,
         ZonedDateTime startTime,
+        ZonedDateTime endTime,
         ZonedDateTime submitTime,
         Status status
 ) {

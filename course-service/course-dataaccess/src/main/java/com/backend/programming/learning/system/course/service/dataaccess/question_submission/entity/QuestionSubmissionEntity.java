@@ -2,10 +2,13 @@ package com.backend.programming.learning.system.course.service.dataaccess.questi
 
 import com.backend.programming.learning.system.course.service.dataaccess.exam_submission.entity.ExamSubmissionEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.question.entity.QuestionEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.question_submission_file.entity.QuestionSubmissionFileEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import lombok.*;
 
 import jakarta.persistence.*;
+
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -35,6 +38,11 @@ public class QuestionSubmissionEntity {
     private String content;
     private String rightAnswer;
     private Integer numFile;
+    private Boolean flag;
+    private Boolean answerStatus;
+
+    @OneToMany(mappedBy = "questionSubmission", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<QuestionSubmissionFileEntity> questionSubmissionFiles;
 
     @Override
     public boolean equals(Object o) {

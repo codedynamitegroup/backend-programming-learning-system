@@ -5,17 +5,18 @@ import com.backend.programming.learning.system.course.service.dataaccess.exam_su
 import com.backend.programming.learning.system.course.service.dataaccess.question.entity.QuestionEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.question.mapper.QuestionDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.question_submission.entity.QuestionSubmissionEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.question_submission_file.entity.QuestionSubmissionFileEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.mapper.UserDataAccessMapper;
-import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
-import com.backend.programming.learning.system.course.service.domain.entity.Question;
-import com.backend.programming.learning.system.course.service.domain.entity.QuestionSubmission;
-import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.entity.*;
+import com.backend.programming.learning.system.course.service.domain.valueobject.QuestionSubmissionFileId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.QuestionSubmissionId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -28,7 +29,8 @@ public class QuestionSubmissionDataAccessMapper {
         UserEntity userEntity = userDataAccessMapper.userToUserEntity(questionSubmission.getUser());
         QuestionEntity questionEntity = questionDataAccessMapper.questionToQuestionEntity(questionSubmission.getQuestion());
         ExamSubmissionEntity examSubmissionEntity = examSubmissionDataAccessMapper.examSubmissionToExamSubmissionEntity(questionSubmission.getExamSubmission());
-        return QuestionSubmissionEntity.builder()
+
+        QuestionSubmissionEntity questionSubmissionEntity =  QuestionSubmissionEntity.builder()
                 .id(questionSubmission.getId().getValue())
                 .examSubmission(examSubmissionEntity)
                 .user(userEntity)
@@ -38,7 +40,28 @@ public class QuestionSubmissionDataAccessMapper {
                 .content(questionSubmission.getContent())
                 .rightAnswer(questionSubmission.getRightAnswer())
                 .numFile(questionSubmission.getNumFile())
+                .answerStatus(questionSubmission.getAnswerStatus())
+                .flag(questionSubmission.getFlag())
                 .build();
+
+        List<QuestionSubmissionFileEntity> questionSubmissionFiles = questionSubmissionFileListToQuestionSubmissionFileEntityList(questionSubmission.getQuestionSubmissionFiles(), questionSubmissionEntity);
+        questionSubmissionEntity.setQuestionSubmissionFiles(questionSubmissionFiles);
+
+        return questionSubmissionEntity;
+    }
+
+    private QuestionSubmissionFileEntity questionSubmissionFileToQuestionSubmissionFileEntity(QuestionSubmissionFile questionSubmissionFile, QuestionSubmissionEntity questionSubmissionEntity) {
+        return QuestionSubmissionFileEntity.builder()
+                .id(questionSubmissionFile.getId().getValue())
+                .questionSubmission(questionSubmissionEntity)
+                .url(questionSubmissionFile.getUrl())
+                .build();
+    }
+
+    private List<QuestionSubmissionFileEntity> questionSubmissionFileListToQuestionSubmissionFileEntityList(List<QuestionSubmissionFile> questionSubmissionFiles, QuestionSubmissionEntity questionSubmissionEntity) {
+        return questionSubmissionFiles.stream()
+                .map(questionSubmissionFile -> questionSubmissionFileToQuestionSubmissionFileEntity(questionSubmissionFile, questionSubmissionEntity))
+                .toList();
     }
 
     public QuestionSubmission questionSubmissionEntityToQuestionSubmission(QuestionSubmissionEntity questionSubmissionEntity) {
@@ -54,9 +77,28 @@ public class QuestionSubmissionDataAccessMapper {
                 .content(questionSubmissionEntity.getContent())
                 .rightAnswer(questionSubmissionEntity.getRightAnswer())
                 .numFile(questionSubmissionEntity.getNumFile())
+                .answerStatus(questionSubmissionEntity.getAnswerStatus())
+                .flag(questionSubmissionEntity.getFlag())
+                .questionSubmissionFiles(questionSubmissionFileEntityListToQuestionSubmissionFileList(questionSubmissionEntity.getQuestionSubmissionFiles()))
                 .build();
+
         response.setId(new QuestionSubmissionId(questionSubmissionEntity.getId()));
+
         return response;
+    }
+
+    private QuestionSubmissionFile questionSubmissionFileEntityToQuestionSubmissionFile(QuestionSubmissionFileEntity questionSubmissionFileEntity) {
+        return QuestionSubmissionFile.builder()
+                .id(new QuestionSubmissionFileId(questionSubmissionFileEntity.getId()))
+//                .questionSubmission(questionSubmissionEntityToQuestionSubmission(questionSubmissionFileEntity.getQuestionSubmission()))
+                .url(questionSubmissionFileEntity.getUrl())
+                .build();
+    }
+
+    private List<QuestionSubmissionFile> questionSubmissionFileEntityListToQuestionSubmissionFileList(List<QuestionSubmissionFileEntity> questionSubmissionFileEntities) {
+        return questionSubmissionFileEntities.stream()
+                .map(this::questionSubmissionFileEntityToQuestionSubmissionFile)
+                .toList();
     }
 
     public List<QuestionSubmission> questionSubmissionEntityListToQuestionSubmissionList(List<QuestionSubmissionEntity> questionSubmissionEntities) {

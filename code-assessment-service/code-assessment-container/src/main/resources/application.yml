@@ -70,7 +70,7 @@ spring:
     init:
       platform: postgres
       mode: always
-      data-locations: classpath:init-data.sql
+      data-locations: classpath:init-data/init-user.sql, classpath:init-data/init-programming-language.sql, classpath:init-data/init-code-question.sql, classpath:init-data/init-tag.sql, classpath:init-data/init-shared-solution.sql, classpath:init-data/init-data.sql, classpath:init-data/init-test-case.sql
       schema-locations: classpath:init-schema.sql
 
 kafka-config:

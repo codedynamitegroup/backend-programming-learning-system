@@ -12,6 +12,7 @@ public class QtypeCodeQuestion extends BaseEntity<QtypeCodeQuestionId> {
     private String codeQuestionName;
     private Float maxGrade;
     private Boolean isPublic;
+    private Boolean isAllowedToImport;
 
     private QtypeCodeQuestion(Builder builder) {
         super.setId(builder.qtypeCodeQuestionId);
@@ -21,6 +22,7 @@ public class QtypeCodeQuestion extends BaseEntity<QtypeCodeQuestionId> {
         setCodeQuestionName(builder.codeQuestionName);
         setMaxGrade(builder.maxGrade);
         isPublic = builder.isPublic;
+        isAllowedToImport = builder.isAllowedToImport;
     }
 
     public static Builder builder() {
@@ -80,6 +82,14 @@ public class QtypeCodeQuestion extends BaseEntity<QtypeCodeQuestionId> {
         isPublic = aPublic;
     }
 
+    public Boolean getAllowedToImport() {
+        return isAllowedToImport;
+    }
+
+    public void setAllowedToImport(Boolean allowedToImport) {
+        isAllowedToImport = allowedToImport;
+    }
+
     public static final class Builder {
         private QtypeCodeQuestionId qtypeCodeQuestionId;
         private Question question;
@@ -88,6 +98,7 @@ public class QtypeCodeQuestion extends BaseEntity<QtypeCodeQuestionId> {
         private String codeQuestionName;
         private Float maxGrade;
         private Boolean isPublic;
+        private Boolean isAllowedToImport;
 
         private Builder() {
         }
@@ -124,6 +135,11 @@ public class QtypeCodeQuestion extends BaseEntity<QtypeCodeQuestionId> {
 
         public Builder isPublic(Boolean val) {
             isPublic = val;
+            return this;
+        }
+
+        public Builder isAllowedToImport(Boolean val) {
+            isAllowedToImport = val;
             return this;
         }
 

@@ -6,17 +6,21 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.de
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.review.DeleteReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryAllReviewsResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryEachStarReviewCountResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.review.QueryReviewCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.review.ReviewResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.Review;
 import com.backend.programming.learning.system.core.service.domain.mapper.review.ReviewDataMapper;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ReviewRepository;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ReviewId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.UUID;
 
 @Component
 @Slf4j
@@ -26,17 +30,19 @@ public class ReviewCommandHandler {
     private final ReviewDeleteHelper reviewDeleteHelper;
     private final ReviewUpdateHelper reviewUpdateHelper;
     private final ReviewDataMapper reviewDataMapper;
+    private final ReviewRepository reviewRepository;
 
     public ReviewCommandHandler(ReviewCreateHelper reviewCreateHelper,
                                 ReviewQueryHelper reviewQueryHelper,
                                 ReviewDeleteHelper reviewDeleteHelper,
                                 ReviewUpdateHelper reviewUpdateHelper,
-                                ReviewDataMapper reviewDataMapper) {
+                                ReviewDataMapper reviewDataMapper, ReviewRepository reviewRepository) {
         this.reviewCreateHelper = reviewCreateHelper;
         this.reviewQueryHelper = reviewQueryHelper;
         this.reviewDeleteHelper = reviewDeleteHelper;
         this.reviewUpdateHelper = reviewUpdateHelper;
         this.reviewDataMapper = reviewDataMapper;
+        this.reviewRepository = reviewRepository;
     }
 
     @Transactional
@@ -62,6 +68,29 @@ public class ReviewCommandHandler {
                         queryAllReviewsCommand.getPageSize());
 
         return reviewDataMapper.reviewsToQueryAllReviewsResponse(reviews);
+    }
+
+    @Transactional(readOnly = true)
+    public QueryEachStarReviewCountResponse findEachStarReviewCountResponse(
+            UUID certificateCourseId
+    ) {
+        Integer eachStarReviewCount = reviewRepository.countNumOfReviewsByCertificateCourseIdAndRating(certificateCourseId, 1);
+        Integer twoStarReviewCount = reviewRepository.countNumOfReviewsByCertificateCourseIdAndRating(certificateCourseId, 2);
+        Integer threeStarReviewCount = reviewRepository.countNumOfReviewsByCertificateCourseIdAndRating(certificateCourseId, 3);
+        Integer fourStarReviewCount = reviewRepository.countNumOfReviewsByCertificateCourseIdAndRating(certificateCourseId, 4);
+        Integer fiveStarReviewCount = reviewRepository.countNumOfReviewsByCertificateCourseIdAndRating(certificateCourseId, 5);
+        Integer numOfReviews = reviewRepository.countNumOfReviewsByCertificateCourseId(certificateCourseId);
+        Float avgRating = reviewRepository.getAvgRatingOfAllReviewsByCertificateCourseId(certificateCourseId);
+
+        return QueryEachStarReviewCountResponse.builder()
+                .numOfOneStarReviews(eachStarReviewCount)
+                .numOfTwoStarReviews(twoStarReviewCount)
+                .numOfThreeStarReviews(threeStarReviewCount)
+                .numOfFourStarReviews(fourStarReviewCount)
+                .numOfFiveStarReviews(fiveStarReviewCount)
+                .numOfReviews(numOfReviews)
+                .avgRating(avgRating)
+                .build();
     }
 
     @Transactional(readOnly = true)

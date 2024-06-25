@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.ExamSubmissionResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionExamResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QuestionSubmissionResponse;
@@ -14,6 +15,7 @@ import com.backend.programming.learning.system.course.service.domain.entity.User
 import com.backend.programming.learning.system.course.service.domain.valueobject.Status;
 import org.springframework.stereotype.Component;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
@@ -43,6 +45,7 @@ public class ExamSubmissionDataMapper {
                 examSubmission.getExam().getId().getValue(),
                 examSubmission.getUser().getId().getValue(),
                 examSubmission.getStartTime(),
+                examSubmission.getEndTime(),
                 examSubmission.getSubmitTime(),
                 examSubmission.status()
         );
@@ -52,11 +55,14 @@ public class ExamSubmissionDataMapper {
             Exam exam,
             User user,
             Integer submissionCount,
-            CreateExamSubmissionStartCommand createExamSubmissionStartCommand) {
+            CreateExamSubmissionStartCommand createExamSubmissionStartCommand,
+            ZonedDateTime endTime) {
         return ExamSubmission.builder()
                 .exam(exam)
                 .user(user)
                 .submissionCount(submissionCount)
+                .startTime(createExamSubmissionStartCommand.examStartTime())
+                .endTime(endTime)
                 .status(Status.NOT_SUBMITTED)
                 .build();
     }
@@ -69,36 +75,57 @@ public class ExamSubmissionDataMapper {
                 .examId(examSubmission.getExam().getId().getValue())
                 .userId(examSubmission.getUser().getId().getValue())
                 .startTime(examSubmission.getStartTime())
+                .endTime(examSubmission.getEndTime())
                 .submitTime(examSubmission.getSubmitTime())
                 .status(examSubmission.status())
                 .questionSubmissionResponses(mapToQuestionSubmissions(questionSubmissions))
                 .build();
     }
 
-    private List<QuestionSubmissionResponse> mapToQuestionSubmissions(List<QuestionSubmission> questionSubmissions) {
+    public List<QuestionSubmissionResponse> mapToQuestionSubmissions(List<QuestionSubmission> questionSubmissions) {
         return questionSubmissions.stream()
-                .map(questionSubmission -> QuestionSubmissionResponse.builder()
-                        .questionId(questionSubmission.getQuestion().getId().getValue())
-                        .examSubmissionId(questionSubmission.getExamSubmission().getId().getValue())
-                        .userId(questionSubmission.getUser().getId().getValue())
-                        .passStatus(questionSubmission.getPassStatus())
-                        .grade(questionSubmission.getGrade())
-                        .content(questionSubmission.getContent())
-                        .rightAnswer(questionSubmission.getRightAnswer())
-                        .numFile(questionSubmission.getNumFile())
-                        .build())
+                .map(this::questionSubmissionToQuestionSubmissionResponse)
                 .toList();
+    }
+
+    private QuestionSubmissionResponse questionSubmissionToQuestionSubmissionResponse(QuestionSubmission questionSubmission) {
+        return QuestionSubmissionResponse.builder()
+                .questionId(questionSubmission.getQuestion().getId().getValue())
+                .passStatus(questionSubmission.getPassStatus())
+                .grade(questionSubmission.getGrade())
+                .content(questionSubmission.getContent())
+                .rightAnswer(questionSubmission.getRightAnswer())
+                .numFile(questionSubmission.getNumFile())
+                .flag(questionSubmission.getFlag())
+                .answerStatus(questionSubmission.getAnswerStatus())
+                .build();
     }
 
     public QueryExamSubmissionOverviewResponse mapToQueryExamSubmissionResponseWithTotal(ExamSubmission examSubmission, Double markTotal) {
         return QueryExamSubmissionOverviewResponse.builder()
                 .examSubmissionId(examSubmission.getId().getValue())
-                .examId(examSubmission.getExam().getId().getValue())
+                .examSubmissionExamResponse(examToQueryExamSubmissionExamResponse(examSubmission.getExam()))
                 .userId(examSubmission.getUser().getId().getValue())
                 .startTime(examSubmission.getStartTime())
+                .endTime(examSubmission.getEndTime())
                 .submitTime(examSubmission.getSubmitTime())
                 .status(examSubmission.status())
                 .markTotal(markTotal)
+                .build();
+    }
+
+    private QueryExamSubmissionExamResponse examToQueryExamSubmissionExamResponse(Exam exam) {
+        return QueryExamSubmissionExamResponse.builder()
+                .examId(exam.getId().getValue())
+                .courseId(exam.getCourse().getId().getValue())
+                .name(exam.getName())
+                .overdueHanding(exam.getOverdueHanding().name())
+                .shuffleAnswers(exam.getShuffleAnswers())
+                .canRedoQuestions(exam.getCanRedoQuestions())
+                .intro(exam.getIntro())
+                .timeLimit(exam.getTimeLimit())
+                .timeOpen(exam.getTimeOpen().toString())
+                .timeClose(exam.getTimeClose().toString())
                 .build();
     }
 

@@ -57,6 +57,12 @@ class CertificateCourseApplicationServiceImpl implements CertificateCourseApplic
     }
 
     @Override
+    public QueryAllMyCompletedCertificateCoursesResponse queryAllMyCompletedCertificateCourses(
+            QueryAllMyCompletedCertificateCoursesCommand queryAllMyCompletedCertificateCoursesCommand) {
+        return certificateCourseCommandHandler.findAllMyCompletedCertificateCourses(queryAllMyCompletedCertificateCoursesCommand);
+    }
+
+    @Override
     public QueryAllMostEnrolledCertificateCoursesResponse queryAllMostEnrolledCertificateCourses(
             QueryAllMostEnrolledCertificateCoursesCommand queryAllMostEnrolledCertificateCoursesCommand) {
         return certificateCourseCommandHandler.findAllMostEnrolledCertificateCourses(queryAllMostEnrolledCertificateCoursesCommand);

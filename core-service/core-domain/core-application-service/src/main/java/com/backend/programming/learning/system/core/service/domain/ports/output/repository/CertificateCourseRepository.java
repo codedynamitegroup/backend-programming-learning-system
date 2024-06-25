@@ -43,4 +43,5 @@ public interface CertificateCourseRepository {
     List<MostEnrolledWithStudentResponse> findMostEnrolledCertificateCourseWithStudentCount();
 
     Page<CertificateCourse> findAllCertificateCourses(Integer page, Integer size, String searchName);
+    Page<CertificateCourse> findAllMyCompletedCertificateCourses(Integer page, Integer size, UUID userId);
 }

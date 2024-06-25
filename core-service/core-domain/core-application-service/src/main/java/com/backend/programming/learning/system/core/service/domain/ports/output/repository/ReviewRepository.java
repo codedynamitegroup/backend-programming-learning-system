@@ -23,4 +23,5 @@ public interface ReviewRepository {
 
 //    List<Review> findByCertificateCourseIdAndCreatedById(UUID certificateCourseId, UUID createdBy);
     Integer countNumOfReviewsByCertificateCourseIdAndRating(UUID certificateCourseId, Integer rating);
+    Integer countNumOfReviewsByCertificateCourseId(UUID certificateCourseId);
 }

@@ -26,6 +26,18 @@ public class CourseGlobalExceptionHandler extends GlobalExceptionHandler {
     }
 
     @ResponseBody
+    @ExceptionHandler(value = {ExamSubmissionConflictException.class})
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorDTO handleException(ExamSubmissionConflictException examSubmissionConflictException) {
+        log.error(examSubmissionConflictException.getMessage(), examSubmissionConflictException);
+        return ErrorDTO.builder()
+                .code(HttpStatus.CONFLICT.value())
+                .status(HttpStatus.CONFLICT.getReasonPhrase())
+                .message(examSubmissionConflictException.getMessage())
+                .build();
+    }
+
+    @ResponseBody
     @ExceptionHandler(value = {AssignmentNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorDTO handleException(AssignmentNotFoundException assignmentNotFoundException) {
@@ -142,6 +154,42 @@ public class CourseGlobalExceptionHandler extends GlobalExceptionHandler {
                 .code(HttpStatus.NOT_FOUND.value())
                 .status(HttpStatus.NOT_FOUND.getReasonPhrase())
                 .message(userNotFoundException.getMessage())
+                .build();
+    }
+
+    @ResponseBody
+    @ExceptionHandler(value = {ExamClosedException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDTO handleException(ExamClosedException examClosedException) {
+        log.error(examClosedException.getMessage(), examClosedException);
+        return ErrorDTO.builder()
+                .code(HttpStatus.BAD_REQUEST.value())
+                .status(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                .message(examClosedException.getMessage())
+                .build();
+    }
+
+    @ResponseBody
+    @ExceptionHandler(value = {QuestionSubmissionNotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorDTO handleException(QuestionSubmissionNotFoundException questionSubmissionNotFoundException) {
+        log.error(questionSubmissionNotFoundException.getMessage(), questionSubmissionNotFoundException);
+        return ErrorDTO.builder()
+                .code(HttpStatus.NOT_FOUND.value())
+                .status(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .message(questionSubmissionNotFoundException.getMessage())
+                .build();
+    }
+
+    @ResponseBody
+    @ExceptionHandler(value = {ExamSubmissionNotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorDTO handleException(ExamSubmissionNotFoundException examSubmissionNotFoundException) {
+        log.error(examSubmissionNotFoundException.getMessage(), examSubmissionNotFoundException);
+        return ErrorDTO.builder()
+                .code(HttpStatus.NOT_FOUND.value())
+                .status(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .message(examSubmissionNotFoundException.getMessage())
                 .build();
     }
 }

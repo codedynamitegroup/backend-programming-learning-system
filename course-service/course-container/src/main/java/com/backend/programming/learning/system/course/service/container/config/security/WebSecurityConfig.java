@@ -61,6 +61,7 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.PATCH, "/course/exam/question/end-exam").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
                         .requestMatchers(HttpMethod.GET, "/course/exam/{examId}/submission").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
                         .requestMatchers(HttpMethod.GET, "/course/exam/question/submit/{submissionId}").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
+                        .requestMatchers(HttpMethod.GET, "/course/exam/latest-submission").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
 
                         // assignment
                         .requestMatchers(HttpMethod.GET, "/course/assignment").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
@@ -76,6 +77,9 @@ public class WebSecurityConfig {
                         // question submission
                         .requestMatchers(HttpMethod.POST, "/course/question/submit").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
                         .requestMatchers(HttpMethod.PATCH, "/course/question/mark").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE)
+                        .requestMatchers(HttpMethod.POST, "/course/question/submit-all").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
+                        .requestMatchers(HttpMethod.POST, "/course/question/submit-one").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
+                        .requestMatchers(HttpMethod.POST, "/course/question/get-by-questionId").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
 
                         //question bank category
                         .requestMatchers(HttpMethod.GET, "/course/question/bank/category/{questionBankCategoryId}").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)

@@ -30,6 +30,7 @@ public class ExamSubmissionDataAccessMapper {
                 .user(userEntity)
                 .startTime(examSubmission.getStartTime())
                 .submitTime(examSubmission.getSubmitTime())
+                .endTime(examSubmission.getEndTime())
                 .submitCount(examSubmission.getSubmissionCount())
                 .status(examSubmission.status())
                 .build();
@@ -49,6 +50,7 @@ public class ExamSubmissionDataAccessMapper {
                 .user(user)
                 .startTime(examSubmissionEntity.getStartTime())
                 .submitTime(examSubmissionEntity.getSubmitTime())
+                .endTime(examSubmissionEntity.getEndTime())
                 .submissionCount(examSubmissionEntity.getSubmitCount())
                 .status(examSubmissionEntity.getStatus())
                 .build();

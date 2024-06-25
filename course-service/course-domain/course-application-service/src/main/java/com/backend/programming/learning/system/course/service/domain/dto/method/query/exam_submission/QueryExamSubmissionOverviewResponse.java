@@ -15,9 +15,10 @@ import java.util.UUID;
 @Builder
 public record QueryExamSubmissionOverviewResponse(
         UUID examSubmissionId,
-        UUID examId,
+        QueryExamSubmissionExamResponse examSubmissionExamResponse,
         UUID userId,
         ZonedDateTime startTime,
+        ZonedDateTime endTime,
         ZonedDateTime submitTime,
         Status status,
         Double markTotal
