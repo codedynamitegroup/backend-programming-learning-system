@@ -22,6 +22,8 @@ public class CodeQuestionsMessagingDataMapper {
                 .setProblemStatement(payload.getProblemStatement())
                 .setMaxGrade(payload.getMaxGrade())
                 .setName(payload.getName())
+                .setIsPublic(payload.getIsPublic())
+                .setAllowImport(payload.getAllowImport())
 //                .setConstraints(payload.getConstraints())
                 .setCopyState(CopyState.valueOf(payload.getState()))
                 .setFailureMessages(payload.getFailureMessages()==null?new ArrayList<>():payload.getFailureMessages())
@@ -39,6 +41,8 @@ public class CodeQuestionsMessagingDataMapper {
                 .name(model.getName())
 //                .constraints(model.getConstraints())
                 .state(model.getCopyState().toString())
+                .isPublic(model.getIsPublic())
+                .isAllowedToImport(model.getAllowImport())
                 .build();
     }
 }

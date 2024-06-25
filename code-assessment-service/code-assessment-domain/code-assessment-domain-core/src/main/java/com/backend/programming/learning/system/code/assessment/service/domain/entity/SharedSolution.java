@@ -99,7 +99,7 @@ public class SharedSolution extends AggregateRoot<SharedSolutionId> {
         this.tags = tags;
     }
 
-    public enum SortedFields {createdAt, totalVote, viewNumber}
+    public enum SortedFields {createdAt, totalVote, viewNumber, totalComment}
 
     public static final class Builder {
         private CodeQuestionId codeQuestionId;

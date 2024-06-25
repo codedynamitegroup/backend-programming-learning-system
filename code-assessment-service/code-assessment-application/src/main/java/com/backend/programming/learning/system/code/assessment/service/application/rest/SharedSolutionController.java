@@ -65,7 +65,8 @@ public class SharedSolutionController {
     @GetMapping
     public ResponseEntity<GetSharedSolutionsResponse>
     getSharedSolutions(
-            @RequestParam UUID codeQuestionId,
+            @RequestParam(required = false) UUID codeQuestionId,
+            @RequestHeader(value = "Access-Token", required = false) String accessToken,
             @RequestParam(required = false) List<UUID> filterTagIds,
             @RequestParam(required = false) String search,
             @RequestParam(required = false) QueryOrderBy orderBy,
@@ -73,9 +74,12 @@ public class SharedSolutionController {
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "5") Integer pageSize
     ){
+        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
+
         GetSharedSolutionByCodeQuestionIdCommand command =
                 GetSharedSolutionByCodeQuestionIdCommand.builder()
                         .codeQuestionId(codeQuestionId)
+                        .email(email)
                         .filterTagIds(filterTagIds)
                         .search(search)
                         .orderBy(orderBy)
@@ -93,6 +97,7 @@ public class SharedSolutionController {
                 service.getSharedSolutions(command);
         return ResponseEntity.ok(response);
     }
+
 
     //view detail
     @GetMapping("/{shared-solution-id}")

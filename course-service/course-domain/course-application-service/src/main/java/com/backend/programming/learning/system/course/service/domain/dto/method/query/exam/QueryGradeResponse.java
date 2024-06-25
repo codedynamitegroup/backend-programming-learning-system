@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.course.service.domain.dto.method
 import lombok.Builder;
 
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 /**
  * com.backend.programming.learning.system.course.service.domain.dto.method.query.exam
@@ -12,6 +13,8 @@ import java.time.ZonedDateTime;
  */
 @Builder
 public record QueryGradeResponse(
+        UUID userId,
+        UUID submissionId,
         String firstName,
         String lastName,
         String email,

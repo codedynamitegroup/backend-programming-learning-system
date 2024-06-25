@@ -32,6 +32,7 @@ public class CodeQuestionDataAccessMapper {
                 .id(codeQuestion.getId().getValue())
                 .questionId(codeQuestion.getQuestionId().getValue())
                 .userId(codeQuestion.getUserId().getValue())
+                .orgId(codeQuestion.getOrgId())
 //                .question(questionDataAssessMapper.questionToQuestionEntity(new Question(codeQuestion.getQuestionId())))
                 .name(codeQuestion.getName())
                 .dslTemplate(codeQuestion.getDslTemplate())
@@ -42,6 +43,7 @@ public class CodeQuestionDataAccessMapper {
                 .copyState(codeQuestion.getCopyState())
                 .maxGrade(codeQuestion.getMaxGrade())
                 .isPublic(codeQuestion.getIsPublic())
+                .allowImport(codeQuestion.getAllowImport())
                 .difficulty(codeQuestion.getDifficulty())
                 .createdAt(codeQuestion.getCreatedAt())
                 .failureMessages(codeQuestion.getFailureMessages() != null ?

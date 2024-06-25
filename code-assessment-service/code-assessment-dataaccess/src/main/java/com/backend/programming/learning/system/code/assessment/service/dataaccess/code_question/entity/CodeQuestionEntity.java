@@ -25,6 +25,7 @@ public class CodeQuestionEntity {
     private UUID id;
     private UUID questionId;
     private UUID userId;
+    private UUID orgId;
 
     private String name;
     private String dslTemplate;
@@ -44,6 +45,7 @@ public class CodeQuestionEntity {
     private Float maxGrade;
     private ZonedDateTime createdAt;
     private Boolean isPublic;
+    private Boolean allowImport;
 
     @Override
     public boolean equals(Object object) {

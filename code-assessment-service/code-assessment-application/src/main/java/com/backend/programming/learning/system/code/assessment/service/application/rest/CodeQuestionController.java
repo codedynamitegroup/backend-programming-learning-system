@@ -61,6 +61,8 @@ public class CodeQuestionController {
 
         if(createCodeQuestionCommand.getIsPublic() == null)
             createCodeQuestionCommand.setIsPublic(true);
+        if(createCodeQuestionCommand.getAllowImport() == null)
+            createCodeQuestionCommand.setAllowImport(false);
 
         CreateCodeQuestionResponse createCodeQuestionResponse =
             codeQuestionApplicationService.createCodeQuestion(createCodeQuestionCommand);

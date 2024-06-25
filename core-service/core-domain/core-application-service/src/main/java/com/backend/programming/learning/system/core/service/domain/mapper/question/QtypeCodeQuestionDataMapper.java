@@ -36,6 +36,8 @@ public class QtypeCodeQuestionDataMapper {
                 .maxGrade(request.getMaxGrade())
                 .problemStatement(request.getProblemStatement())
                 .codeQuestionName(request.getName())
+                .isPublic(request.getIsPublic())
+                .isAllowedToImport(request.getIsAllowedToImport())
                 .build();
     }
     public CodeQuestionsUpdatePayload codeQuestionsUpdateRequestToCodeQuestionsUpdatePayload(CodeQuestionsUpdateRequest request){
@@ -47,6 +49,8 @@ public class QtypeCodeQuestionDataMapper {
                 .problemStatement(request.getProblemStatement())
                 .maxGrade(request.getMaxGrade())
                 .name(request.getName())
+                .allowImport(request.getIsAllowedToImport())
+                .isPublic(request.getIsPublic())
 //                .constraints(request.getConstraints())
                 .build();
     }

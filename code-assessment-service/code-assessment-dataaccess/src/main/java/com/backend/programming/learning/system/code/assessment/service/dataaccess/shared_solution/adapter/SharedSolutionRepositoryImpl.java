@@ -20,6 +20,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.va
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.shared_solution_vote.SharedSolutionVoteId;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.QueryOrderBy;
+import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Component;
@@ -105,7 +106,7 @@ public class SharedSolutionRepositoryImpl implements SharedSolutionRepository {
                          Integer pageSize,
                          SharedSolution.SortedFields sortBy,
                          QueryOrderBy orderBy,
-                         String search, List<TagId> tagIds) {
+                         String search, List<TagId> tagIds, UserId userId) {
 
         List<UUID> tagEntityId
                 = tagIds == null?
@@ -121,7 +122,12 @@ public class SharedSolutionRepositoryImpl implements SharedSolutionRepository {
                         Sort.by(generalMapper.QueryOrderByToSortDirection(orderBy),
                                 dataAccessMapper.sharedSolutionFieldToSharedSolutionEntityField(sortBy.name())));
         Page<SharedSolutionEntity> sharedSolutionEntities = sharedSolutionJpaRepository
-                .findByCodeQuestionId(codeQuestionId.getValue(),tagEntityId, search, pageable);
+                .findByCodeQuestionId(
+                        codeQuestionId == null? null: codeQuestionId.getValue(),
+                        tagEntityId,
+                        search,
+                        userId == null? null: userId.getValue(),
+                        pageable);
 
         //get tag
         List<List<Tag>> eachTags = sharedSolutionEntities.getContent().stream().map(item->{
