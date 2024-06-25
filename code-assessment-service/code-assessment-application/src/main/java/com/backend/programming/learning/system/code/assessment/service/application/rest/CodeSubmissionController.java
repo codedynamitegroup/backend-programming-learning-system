@@ -73,10 +73,10 @@ public class CodeSubmissionController {
     }
 
     @GetMapping("/heat-map")
-    public ResponseEntity<List<SubmissionHeadMapItem>> getHeadMap(
+    public ResponseEntity<List<SubmissionHeadMapItem>> getHeatMap(
             @RequestHeader(value = "Access-Token") String accessToken,
-            @RequestParam Integer year){
-        @NotNull(message = "email must not be null")
+            @RequestParam Integer year)
+    {
         String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
         List<SubmissionHeadMapItem> items = codeSubmissionApplicationService.getHeatMap(email, year);
         return ResponseEntity.ok(items);
