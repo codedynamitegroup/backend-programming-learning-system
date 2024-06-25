@@ -33,6 +33,7 @@ public class ExamSubmissionDataAccessMapper {
                 .endTime(examSubmission.getEndTime())
                 .submitCount(examSubmission.getSubmissionCount())
                 .status(examSubmission.status())
+                .score(examSubmission.getScore())
                 .build();
     }
 
@@ -53,6 +54,7 @@ public class ExamSubmissionDataAccessMapper {
                 .endTime(examSubmissionEntity.getEndTime())
                 .submissionCount(examSubmissionEntity.getSubmitCount())
                 .status(examSubmissionEntity.getStatus())
+                .score(examSubmissionEntity.getScore())
                 .build();
         examSubmission.setId(new ExamSubmissionId(examSubmissionEntity.getId()));
         return examSubmission;
