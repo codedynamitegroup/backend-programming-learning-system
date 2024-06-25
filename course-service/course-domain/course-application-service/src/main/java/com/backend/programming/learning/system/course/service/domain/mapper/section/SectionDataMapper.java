@@ -66,6 +66,7 @@ public class SectionDataMapper {
                     .sectionId(section.getId().getValue())
                     .name(section.getName())
                     .modules(List.of())
+                    .moodleId(section.getSectionMoodleId())
                     .visible(section.getVisible())
                     .build();
         }
@@ -75,6 +76,7 @@ public class SectionDataMapper {
                 .name(section.getName())
                 .modules(moduleResponseEntities)
                 .visible(section.getVisible())
+                .moodleId(section.getSectionMoodleId())
                 .build();
 
     }
