@@ -20,6 +20,9 @@ public class QuestionSubmissionFileEntity {
     private UUID id;
 
     private String url;
+    private String name;
+    private String type;
+    private Float fileSize;
 
     @ManyToOne
     @JoinColumn(name = "question_submission_id", referencedColumnName = "id")

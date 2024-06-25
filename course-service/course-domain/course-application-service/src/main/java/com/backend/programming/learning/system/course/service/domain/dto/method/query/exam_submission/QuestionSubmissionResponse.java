@@ -1,7 +1,9 @@
 package com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.QuestionSubmissionFileCommand;
 import lombok.Builder;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -17,7 +19,7 @@ public record QuestionSubmissionResponse(
         Float grade,
         String content,
         String rightAnswer,
-        Integer numFile,
+        List<QuestionSubmissionFileCommand> files,
         Boolean flag,
         Boolean answerStatus
 ) { }
