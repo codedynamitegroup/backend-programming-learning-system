@@ -7,10 +7,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.question_submission.CreateQuestionSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.question_submission.QueryQuestionSubmissionResponse;
-import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
-import com.backend.programming.learning.system.course.service.domain.entity.Question;
-import com.backend.programming.learning.system.course.service.domain.entity.QuestionSubmission;
-import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam_submission.ExamSubmissionDataMapper;
 import org.springframework.stereotype.Component;
 
@@ -57,7 +54,13 @@ public class QuestionSubmissionDataMapper {
                 .build();
     }
 
-    public QuestionSubmission questionSubmissionCommandToQuestionSubmission(ExamSubmission examSubmission, User user, Question question, QuestionSubmissionCommand questionSubmissionCommand) {
+    //
+    public QuestionSubmission questionSubmissionCommandToQuestionSubmission(
+            ExamSubmission examSubmission,
+            User user,
+            Question question,
+            List<QuestionSubmissionFile> questionSubmissionFiles,
+            QuestionSubmissionCommand questionSubmissionCommand) {
         return QuestionSubmission.builder()
                 .examSubmission(examSubmission)
                 .user(user)
@@ -66,9 +69,10 @@ public class QuestionSubmissionDataMapper {
 //                .passStatus(createQuestionSubmissionCommand.passStatus())
 //                .grade(createQuestionSubmissionCommand.grade())
                 .content(questionSubmissionCommand.content())
-                .numFile(questionSubmissionCommand.numFile())
+                .numFile(questionSubmissionCommand.fileUrls().size())
                 .flag(questionSubmissionCommand.flag())
                 .answerStatus(questionSubmissionCommand.answerStatus())
+                .questionSubmissionFiles(questionSubmissionFiles)
                 .build();
     }
 

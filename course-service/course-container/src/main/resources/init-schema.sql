@@ -537,6 +537,18 @@ CREATE TABLE "public".question_submission
         ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS "public".question_submission_file CASCADE;
+CREATE TABLE "public".question_submission_file (
+    id                 uuid DEFAULT gen_random_uuid() NOT NULL,
+    question_submission_id uuid                           NOT NULL,
+    url               text                           NOT NULL,
+    CONSTRAINT question_submission_file_pkey PRIMARY KEY (id),
+    CONSTRAINT question_submission_file_question_submission_id_fkey FOREIGN KEY (question_submission_id)
+            REFERENCES "public".question_submission (id) MATCH SIMPLE
+            ON UPDATE CASCADE
+            ON DELETE CASCADE
+);
+
 DROP TABLE IF EXISTS "public".submission_assignment CASCADE;
 CREATE TABLE "public".submission_assignment
 (

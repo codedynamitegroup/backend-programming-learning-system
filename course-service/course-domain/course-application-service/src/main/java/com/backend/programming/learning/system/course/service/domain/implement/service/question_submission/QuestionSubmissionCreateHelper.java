@@ -12,6 +12,7 @@ import com.backend.programming.learning.system.course.service.domain.exception.U
 import com.backend.programming.learning.system.course.service.domain.mapper.question_submission.QuestionSubmissionDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
+import com.backend.programming.learning.system.course.service.domain.valueobject.QuestionSubmissionFileId;
 import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -104,11 +105,28 @@ public class QuestionSubmissionCreateHelper {
             // Update question submission
             if(submittedQuestion.containsKey(questionSubmissionCommand.questionId())) {
                 QuestionSubmission questionSubmission = submittedQuestion.get(questionSubmissionCommand.questionId());
+                Map<String, QuestionSubmissionFile> submittedFiles = questionSubmission.getQuestionSubmissionFiles()
+                        .stream().collect(Collectors.toMap(QuestionSubmissionFile::getUrl, Function.identity()));
+                List<QuestionSubmissionFile> questionSubmissionFiles = questionSubmissionCommand
+                        .fileUrls()
+                        .stream()
+                        .map(fileUrl -> {
+                            if(submittedFiles.containsKey(fileUrl)) {
+                                return submittedFiles.get(fileUrl);
+                            }
+                            return QuestionSubmissionFile.builder()
+                                    .id(new QuestionSubmissionFileId(UUID.randomUUID()))
+                                    .url(fileUrl)
+                                    .questionSubmission(null)
+                                    .build();
+                        }).toList();
+
 
                 questionSubmission.setAnswerStatus(questionSubmissionCommand.answerStatus());
                 questionSubmission.setContent(questionSubmissionCommand.content());
-                questionSubmission.setNumFile(questionSubmissionCommand.numFile());
+                questionSubmission.setNumFile(questionSubmissionCommand.fileUrls().size());
                 questionSubmission.setFlag(questionSubmissionCommand.flag());
+                questionSubmission.setQuestionSubmissionFiles(questionSubmissionFiles);
 
                 toUpdate.add(questionSubmission);
             }
@@ -118,9 +136,15 @@ public class QuestionSubmissionCreateHelper {
                             log.error("Question not found with id: {} when creating question submission", questionSubmissionCommand.questionId());
                             return new QuestionNotFoundException("Question not found");
                         });
+                List<QuestionSubmissionFile> questionSubmissionFiles = questionSubmissionCommand
+                        .fileUrls().stream().map(fileUrl -> QuestionSubmissionFile.builder()
+                                .id(new QuestionSubmissionFileId(UUID.randomUUID()))
+                                .url(fileUrl)
+                                .questionSubmission(null)
+                                .build()).toList();
 
                 QuestionSubmission questionSubmission = questionSubmissionDataMapper
-                        .questionSubmissionCommandToQuestionSubmission(examSubmission, user, question, questionSubmissionCommand);
+                        .questionSubmissionCommandToQuestionSubmission(examSubmission, user, question, questionSubmissionFiles, questionSubmissionCommand);
                 courseDomainService.createQuestionSubmission(questionSubmission);
 
                 toCreate.add(questionSubmission);
@@ -162,14 +186,25 @@ public class QuestionSubmissionCreateHelper {
             QuestionSubmission updateQuestionSubmission = questionSubmission.get();
             updateQuestionSubmission.setAnswerStatus(oneExamQuestionSubmissionCommand.questionSubmissionCommand().answerStatus());
             updateQuestionSubmission.setContent(oneExamQuestionSubmissionCommand.questionSubmissionCommand().content());
-            updateQuestionSubmission.setNumFile(oneExamQuestionSubmissionCommand.questionSubmissionCommand().numFile());
+//            updateQuestionSubmission.setNumFile(oneExamQuestionSubmissionCommand.questionSubmissionCommand().numFile());
             updateQuestionSubmission.setFlag(oneExamQuestionSubmissionCommand.questionSubmissionCommand().flag());
 
             return questionSubmissionRepository.save(updateQuestionSubmission);
         }
         else {
+            List<QuestionSubmissionFile> questionSubmissionFiles = oneExamQuestionSubmissionCommand.questionSubmissionCommand()
+                    .fileUrls().stream().map(fileUrl -> QuestionSubmissionFile.builder()
+                            .id(new QuestionSubmissionFileId(UUID.randomUUID()))
+                            .url(fileUrl)
+                            .questionSubmission(null)
+                            .build()).toList();
+
             QuestionSubmission newQuestionSubmission = questionSubmissionDataMapper
-                    .questionSubmissionCommandToQuestionSubmission(examSubmission, user, question, oneExamQuestionSubmissionCommand.questionSubmissionCommand());
+                    .questionSubmissionCommandToQuestionSubmission(examSubmission,
+                            user,
+                            question,
+                            questionSubmissionFiles,
+                            oneExamQuestionSubmissionCommand.questionSubmissionCommand());
             courseDomainService.createQuestionSubmission(newQuestionSubmission);
 
             return questionSubmissionRepository.save(newQuestionSubmission);
