@@ -43,6 +43,14 @@
       "type": "string"
     },
     {
+      "name": "isPublic",
+      "type": ["null", "boolean"]
+    },
+    {
+      "name": "allowImport",
+      "type": ["null","boolean"]
+    },
+    {
       "name": "copyState",
       "type": {
         "type": "enum",

@@ -13,6 +13,7 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     private final QuestionId questionId;
     private String name;
     private UserId userId;
+    private UUID orgId;
     private final String dslTemplate;
     private String problemStatement;
     private String inputFormat;
@@ -21,6 +22,7 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     private CopyState copyState;
     private Float maxGrade;
     private Boolean isPublic;
+    private Boolean allowImport;
     private QuestionDifficulty difficulty;
     private ZonedDateTime createdAt;
     private Boolean solved;
@@ -30,8 +32,6 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     private List<CodeSubmission> codeSubmissions;
     private List<TestCase> tcs;
     private List<Tag> tags;
-
-
 
     public static final String FAILURE_MESSAGE_DELIMITER = ",";
 
@@ -116,6 +116,14 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         return inputFormat;
     }
 
+    public UUID getOrgId() {
+        return orgId;
+    }
+
+    public Boolean getAllowImport() {
+        return allowImport;
+    }
+
     public String getOutputFormat() {
         return outputFormat;
     }
@@ -161,6 +169,7 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         questionId = builder.questionId;
         name = builder.name;
         userId = builder.userId;
+        orgId = builder.orgId;
         dslTemplate = builder.dslTemplate;
         problemStatement = builder.problemStatement;
         inputFormat = builder.inputFormat;
@@ -169,9 +178,11 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         setCopyState(builder.copyState);
         maxGrade = builder.maxGrade;
         isPublic = builder.isPublic;
+        allowImport = builder.allowImport;
         difficulty = builder.difficulty;
         createdAt = builder.createdAt;
         solved = builder.solved;
+        setNumberOfPeopleAttend(builder.numberOfPeopleAttend);
         failureMessages = builder.failureMessages;
         programmingLanguages = builder.programmingLanguages;
         codeSubmissions = builder.codeSubmissions;
@@ -191,6 +202,7 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         private QuestionId questionId;
         private String name;
         private UserId userId;
+        private UUID orgId;
         private String dslTemplate;
         private String problemStatement;
         private String inputFormat;
@@ -199,9 +211,11 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         private CopyState copyState;
         private Float maxGrade;
         private Boolean isPublic;
+        private Boolean allowImport;
         private QuestionDifficulty difficulty;
         private ZonedDateTime createdAt;
         private Boolean solved;
+        private Integer numberOfPeopleAttend;
         private List<String> failureMessages;
         private List<ProgrammingLanguageCodeQuestion> programmingLanguages;
         private List<CodeSubmission> codeSubmissions;
@@ -224,6 +238,11 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
 
         public Builder userId(UserId val) {
             userId = val;
+            return this;
+        }
+
+        public Builder orgId(UUID val) {
+            orgId = val;
             return this;
         }
 
@@ -267,6 +286,11 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
             return this;
         }
 
+        public Builder allowImport(Boolean val) {
+            allowImport = val;
+            return this;
+        }
+
         public Builder difficulty(QuestionDifficulty val) {
             difficulty = val;
             return this;
@@ -279,6 +303,11 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
 
         public Builder solved(Boolean val) {
             solved = val;
+            return this;
+        }
+
+        public Builder numberOfPeopleAttend(Integer val) {
+            numberOfPeopleAttend = val;
             return this;
         }
 
@@ -315,6 +344,5 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         public CodeQuestion build() {
             return new CodeQuestion(this);
         }
-
     }
 }

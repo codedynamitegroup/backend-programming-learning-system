@@ -23,6 +23,8 @@ public class CreateCodeQuestionCommand {
     @NotNull(message = "userId must not be null")
     private final UUID userId;
 
+    private final UUID orgId;
+
     private final String dslTemplate;
     @NotNull(message = "name must not be null")
     private final String name;
@@ -41,6 +43,9 @@ public class CreateCodeQuestionCommand {
 
     @Setter
     private Boolean isPublic;
+
+    @Setter
+    private Boolean allowImport;
 
     private final List<@Valid ProgrammingLanguageDto> programmingLanuages;
 
