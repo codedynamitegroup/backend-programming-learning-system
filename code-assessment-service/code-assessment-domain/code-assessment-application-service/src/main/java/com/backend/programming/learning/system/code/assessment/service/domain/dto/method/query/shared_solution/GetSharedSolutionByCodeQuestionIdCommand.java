@@ -20,7 +20,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class GetSharedSolutionByCodeQuestionIdCommand {
-    @NotNull(message = "codeQuestionId must not be null")
+    String email;
+
     UUID codeQuestionId;
 
     List<UUID> filterTagIds;
