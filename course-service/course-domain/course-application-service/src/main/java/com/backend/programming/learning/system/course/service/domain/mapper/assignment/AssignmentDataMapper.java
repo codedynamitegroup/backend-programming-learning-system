@@ -6,25 +6,22 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.assignment.DeleteAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAllAssignmentsResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAssignmentResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.AssignmentGradeResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.AssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.ListSubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.intro_attachment.IntroAttachmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.user.UserSubmissionAssignmentResponseEntity;
-import com.backend.programming.learning.system.course.service.domain.entity.Assignment;
-import com.backend.programming.learning.system.course.service.domain.entity.Course;
-import com.backend.programming.learning.system.course.service.domain.entity.IntroAttachment;
+import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.implement.service.user.UserCommandHandler;
 import com.backend.programming.learning.system.course.service.domain.mapper.activity_attachment.ActivityAttachmentDataMapper;
 import com.backend.programming.learning.system.course.service.domain.mapper.intro_attachment.IntroAttachmentDataMapper;
 import com.backend.programming.learning.system.course.service.domain.mapper.intro_file.IntroFileDataMapper;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ActivityAttachmentRepository;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseRepository;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.IntroAttachmentRepository;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.IntroFileRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.course.service.domain.valueobject.Type;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -41,11 +38,13 @@ public class AssignmentDataMapper {
     private final UserCommandHandler userCommandHandler;
 
     private final CourseRepository courseRepository;
+    private final SubmissionAssignmentRepository submissionAssignmentRepository;
+    private final SubmissionGradeRepository submissionGradeRepository;
 
 
     public AssignmentDataMapper(IntroAttachmentDataMapper introAttachmentDataMapper,
                                 IntroAttachmentRepository introAttachmentRepository, IntroFileDataMapper introFileDataMapper,
-                                IntroFileRepository introFileRepository, ActivityAttachmentDataMapper activityAttachmentDataMapper, ActivityAttachmentRepository activityAttachmentRepository, UserCommandHandler userCommandHandler, CourseRepository courseRepository) {
+                                IntroFileRepository introFileRepository, ActivityAttachmentDataMapper activityAttachmentDataMapper, ActivityAttachmentRepository activityAttachmentRepository, UserCommandHandler userCommandHandler, CourseRepository courseRepository, SubmissionAssignmentRepository submissionAssignmentRepository, SubmissionGradeRepository submissionGradeRepository) {
         this.introAttachmentDataMapper = introAttachmentDataMapper;
         this.introAttachmentRepository = introAttachmentRepository;
         this.introFileDataMapper = introFileDataMapper;
@@ -54,6 +53,8 @@ public class AssignmentDataMapper {
         this.activityAttachmentRepository = activityAttachmentRepository;
         this.userCommandHandler = userCommandHandler;
         this.courseRepository = courseRepository;
+        this.submissionAssignmentRepository = submissionAssignmentRepository;
+        this.submissionGradeRepository = submissionGradeRepository;
     }
 
     public Assignment createAssignmentCommandToAssignment(CreateAssignmentCommand createAssignmentCommand) {
@@ -165,4 +166,47 @@ public class AssignmentDataMapper {
                 .users(userSubmissionAssignmentResponseEntities)
                 .build();
     }
+
+    public AssignmentGradeResponseEntity assignmentToAssignmentGradeResponseEntity(Assignment assignment, User user) {
+        SubmissionAssignment submissionAssignment = submissionAssignmentRepository.findByAssignmentIdAndUserId(assignment.getId().getValue(), user.getId().getValue());
+        if(submissionAssignment == null)
+        {
+            return AssignmentGradeResponseEntity.builder()
+                    .id(assignment.getId().getValue())
+                    .title(assignment.getTitle())
+                    .grade(null)
+                    .maxScore(assignment.getMaxScores())
+                    .feedback("")
+                    .type("ASSIGNMENT")
+                    .build();
+        }
+        Optional<SubmissionGrade> submissionGrade = submissionGradeRepository.findBySubmissionAssignmentId(submissionAssignment.getId().getValue());
+        if(submissionGrade.isEmpty())
+        {
+            return AssignmentGradeResponseEntity.builder()
+                    .id(assignment.getId().getValue())
+                    .title(assignment.getTitle())
+                    .grade(null)
+                    .maxScore(assignment.getMaxScores())
+                    .feedback("")
+                    .type("ASSIGNMENT")
+                    .build();
+        }
+        return AssignmentGradeResponseEntity.builder()
+                .id(assignment.getId().getValue())
+                .title(assignment.getTitle())
+                .type("ASSIGNMENT")
+                .grade(submissionGrade.get().getGrade())
+                .maxScore(assignment.getMaxScores())
+                .feedback(submissionAssignment.getFeedback())
+                .build();
+    }
+
+    public List<AssignmentGradeResponseEntity> assignmentsToAssignmentGradeResponseEntity(List<Assignment> assignments, User user) {
+        return assignments.stream()
+                .map(assignment -> assignmentToAssignmentGradeResponseEntity(assignment, user))
+                .collect(Collectors.toList());
+    }
+
+
 }

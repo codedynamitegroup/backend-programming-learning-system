@@ -19,4 +19,6 @@ public interface AssignmentRepository {
 
     List<Assignment> findAll();
     List<Assignment> findRecentAssignment();
+
+    List<Assignment> findListGradeAssignmentByCourseId(UUID courseId, UUID userId);
 }

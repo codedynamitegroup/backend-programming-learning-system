@@ -39,5 +39,10 @@ public class AssignmentQueryHelper {
         return assignment.get();
     }
 
+    @Transactional(readOnly = true)
+    public List<Assignment> queryAssignmentGrade(UUID courseId, UUID userId) {
+        return assignmentRepository.findListGradeAssignmentByCourseId(courseId, userId);
+    }
+
 
 }

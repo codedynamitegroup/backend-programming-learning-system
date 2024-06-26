@@ -10,12 +10,14 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.AssignmentGradeResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.ListSubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.assignment.AssignmentApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -56,5 +58,10 @@ public class AssignmentApplicationServiceImpl implements AssignmentApplicationSe
     @Override
     public ListSubmissionAssignmentResponseEntity queryAssignmentDetail(QueryAssignmentCommand queryAssignmentCommand) {
         return assignmentCommandHandler.queryAssignmentDetailById(queryAssignmentCommand.getAssignmentId());
+    }
+
+    @Override
+    public List<AssignmentGradeResponseEntity> queryAssignmentGrade(UUID courseId, UUID userId) {
+        return assignmentCommandHandler.queryAssignmentGrade(courseId, userId);
     }
 }

@@ -65,4 +65,10 @@ public class AssignmentRepositoryImpl implements AssignmentRepository {
                 .assignmentEntityListToAssignmentList(assignmentJpaRepository.findRecentAssignment());
     }
 
+    @Override
+    public List<Assignment> findListGradeAssignmentByCourseId(UUID courseId, UUID userId) {
+        return assignmentDataAccessMapper.assignmentEntityListToAssignmentList(
+                assignmentJpaRepository.findListGradeAssignmentByCourseId(courseId, userId));
+    }
+
 }
