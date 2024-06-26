@@ -82,4 +82,12 @@ public class CalendarEventRepositoryImpl implements CalendarEventRepository {
                 .map(calendarEventDataAccessMapper::calendarEventEntityToCalendarEvent)
                 .toList();
     }
+
+    @Override
+    public List<CalendarEvent> findAll(List<UUID> courseIds, ZonedDateTime fromTime, ZonedDateTime toTime, UUID userId) {
+        return calendarEventJpaRepository.findAllByCourseIds(courseIds, userId, fromTime, toTime)
+                .stream()
+                .map(calendarEventDataAccessMapper::calendarEventEntityToCalendarEvent)
+                .toList();
+    }
 }

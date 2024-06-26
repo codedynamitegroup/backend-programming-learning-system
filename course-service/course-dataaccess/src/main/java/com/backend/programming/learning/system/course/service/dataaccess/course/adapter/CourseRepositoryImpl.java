@@ -70,4 +70,10 @@ public class CourseRepositoryImpl implements CourseRepository {
         courseJpaRepository.findByCourseIdMoodle(courseMoodleId)
                 .ifPresent(courseJpaRepository::delete);
     }
+
+    @Override
+    public Optional<Course> findCourseById(UUID courseId) {
+        return courseJpaRepository.findById(courseId)
+                .map(courseDataAccessMapper::courseEntityToCourse);
+    }
 }

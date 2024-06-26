@@ -699,17 +699,25 @@ CREATE TABLE "public".calendar_event
     event_type notification_event_type NOT NULL,
     start_time TIMESTAMP WITH TIME ZONE NOT NULL,
     end_time TIMESTAMP WITH TIME ZONE,
-    user_id uuid NOT NULL,
+    user_id uuid,
     course_id uuid,
     contest_id uuid,
+    assignment_id uuid,
+    exam_id uuid,
     component notification_component_type DEFAULT 'REMINDER',
-    is_start_time_notified bool DEFAULT FALSE NOT NULL,
-    is_end_time_notified bool DEFAULT FALSE NOT NULL,
     notification_notify_time notification_notify_time,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT calendar_event_pkey PRIMARY KEY (id),
     CONSTRAINT calendar_event_created_by_fkey FOREIGN KEY (user_id)
         REFERENCES "public".user (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT calendar_event_course_id_fkey FOREIGN KEY (course_id)
+        REFERENCES "public".course (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT calendar_event_exam_id_fkey FOREIGN KEY (exam_id)
+        REFERENCES "public".exam (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT contest_user_id_no_key UNIQUE (user_id, contest_id)

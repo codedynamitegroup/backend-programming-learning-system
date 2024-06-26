@@ -6,13 +6,16 @@ import lombok.Getter;
 
 import jakarta.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
 public class QueryAllCalendarEventsCommand {
-    @NotNull
+    private final UUID courseId;
+    @NotNull(message = "From time cannot be null")
     private final ZonedDateTime fromTime;
-    @NotNull
+    @NotNull(message = "To time cannot be null")
     private final ZonedDateTime toTime;
+    private String email;
 }

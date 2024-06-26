@@ -87,6 +87,10 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/course/question/bank/category/create").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
                         .requestMatchers(HttpMethod.GET, "/course/question/bank/category").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
 
+                        // calendar events
+                        .requestMatchers(HttpMethod.POST, "/course/calendar-events/create").hasAnyRole(USER)
+                        .requestMatchers(HttpMethod.POST, "/course/calendar-events/query/my-calendar-events").hasAnyRole(USER)
+
                         .anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2

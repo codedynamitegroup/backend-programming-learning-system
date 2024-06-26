@@ -30,4 +30,22 @@ public interface CalendarEventJpaRepository extends JpaRepository<CalendarEventE
         where c.startTime > ?1
         """)
     List<CalendarEventEntity> findAllByStartTimeAfterTime(ZonedDateTime time);
+
+    @Query(value = """
+        select c.*
+        from calendar_event c
+        where c.contest_id is null
+        and c.component <> 'CONTEST'
+        and ((c.event_type = 'COURSE' and c.course_id in ?1)
+            or (c.event_type = 'USER' and c.user_id = ?2))
+        and ((c.start_time >= ?3 and c.start_time <= ?4)
+            or (c.end_time is not null 
+                    and (c.end_time >= ?3 and c.end_time <= ?4)))
+""", nativeQuery = true)
+    List<CalendarEventEntity> findAllByCourseIds(
+            List<UUID> courseIds,
+            UUID userId,
+            ZonedDateTime fromTime,
+            ZonedDateTime toTime
+    );
 }

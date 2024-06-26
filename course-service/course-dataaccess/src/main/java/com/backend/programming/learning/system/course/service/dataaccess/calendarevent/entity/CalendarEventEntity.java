@@ -1,5 +1,8 @@
 package com.backend.programming.learning.system.course.service.dataaccess.calendarevent.entity;
 
+import com.backend.programming.learning.system.course.service.dataaccess.assignment.entity.AssignmentEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.exam.entity.ExamEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.course.service.domain.valueobject.NotificationComponentType;
 import com.backend.programming.learning.system.course.service.domain.valueobject.NotificationEventType;
@@ -31,12 +34,18 @@ public class CalendarEventEntity {
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
-    private UUID courseId;
+    @ManyToOne
+    @JoinColumn(name = "course_id", referencedColumnName = "id")
+    private CourseEntity course;
     private UUID contestId;
+    @ManyToOne
+    @JoinColumn(name = "exam_id", referencedColumnName = "id")
+    private ExamEntity exam;
+    @ManyToOne
+    @JoinColumn(name = "assignment_id", referencedColumnName = "id")
+    private AssignmentEntity assignment;
     @Enumerated(EnumType.STRING)
     private NotificationComponentType component;
-    private Boolean isStartTimeNotified;
-    private Boolean isEndTimeNotified;
     @Enumerated(EnumType.STRING)
     private NotificationNotifyTime notificationNotifyTime;
     private ZonedDateTime createdAt;

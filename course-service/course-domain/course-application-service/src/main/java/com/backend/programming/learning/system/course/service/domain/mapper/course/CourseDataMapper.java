@@ -9,7 +9,9 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course_type.CourseTypeResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.CourseModel;
 import com.backend.programming.learning.system.course.service.domain.entity.*;
+import com.backend.programming.learning.system.course.service.domain.mapper.organization.OrganizationDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseUserRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.OrganizationRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
@@ -19,9 +21,12 @@ import java.util.List;
 public class CourseDataMapper {
 
     private final CourseUserRepository courseUserRepository;
+    private final OrganizationDataMapper organizationDataMapper;
 
-    public CourseDataMapper(CourseUserRepository courseUserRepository) {
+    public CourseDataMapper(CourseUserRepository courseUserRepository,
+                            OrganizationDataMapper organizationDataMapper) {
         this.courseUserRepository = courseUserRepository;
+        this.organizationDataMapper = organizationDataMapper;
     }
 
     public Course createCourseCommandToCourse(
@@ -86,7 +91,9 @@ public class CourseDataMapper {
                 .id(course.getId().getValue())
                 .courseIdMoodle(course.getCourseIdMoodle())
                 .teachers(teachersResponse)
-                .organization(course.getOrganization())
+                .organization(
+                        organizationDataMapper.organizationToOrganizationResponseEntity(course.getOrganization())
+                )
                 .name(course.getName())
                 .courseType(courseType)
                 .visible(course.getVisible())
