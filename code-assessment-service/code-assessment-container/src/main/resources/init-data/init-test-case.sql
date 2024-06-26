@@ -506,3 +506,50 @@ VALUES ('d7b950a4-7f5a-4924-a470-706d16fbd29a', '1f24ac22-737a-4074-9290-ec41bb1
 -- Case: n = 99991 (prime number)
 INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
 VALUES ('297ddc34-cef2-4bd7-9a1d-d156bb0e477c', '1f24ac22-737a-4074-9290-ec41bb15e2b0', '99991', 'true', false);
+
+--22
+-- Sample test case for input (-5.5, 10.2, -300.3)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('f27b9c3b-6f7d-4a5b-83c7-ef60a7b1fcfa', '7841c704-b8ae-4664-bb2c-d4a63fb80fd5', '-5.5 10.2 -300.3', '5.5 10.2 300.3', true);
+
+-- Additional test cases (non-sample cases)
+-- Case: input (0.5, -0.8, 99.9)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('8b19dca5-99b8-4bba-8d97-946cf4d7a0d5', '7841c704-b8ae-4664-bb2c-d4a63fb80fd5', '0.5 -0.8 99.9', '0.5 0.8 99.9', false);
+
+-- Case: input (-123.45, 678.9, -0.01)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('4e7a883e-c58c-42e5-9c8e-8a7f85a4b619', '7841c704-b8ae-4664-bb2c-d4a63fb80fd5', '-123.45 678.9 -0.01', '123.45 678.9 0.01', false);
+
+-- Case: input (400.0, 500.1, 600.2)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('9b31f6d6-4b75-4d91-922d-4f3835f9a8b8', '7841c704-b8ae-4664-bb2c-d4a63fb80fd5', '400 500.1 600.2', '400 500.1 600.2', false);
+
+-- Case: input (-999.99, -0.0001, 0.01)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('f18ec18c-f1b6-49a8-a49b-7bfb7eac6d13', '7841c704-b8ae-4664-bb2c-d4a63fb80fd5', '-999.99 -0.0001 0.01', '999.99 0.0001 0.01', false);
+
+--23
+-- Sample test case for input (3, 4, 5) - Tam giác vuông
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('a3f0d5be-bd1c-4f9e-bc8e-e4d9d1b0d1d8', '30a01889-fbc9-4eaf-9f4e-fa0341ea6ced', '3 4 5', 'Right triangle', true);
+
+-- Additional test cases (non-sample cases)
+-- Case: input (5, 5, 5) - Tam giác đều
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('b17c15ec-2a45-4b25-81f3-9d67f10a1f1c', '30a01889-fbc9-4eaf-9f4e-fa0341ea6ced', '5 5 5', 'Equilateral triangle', false);
+
+-- Case: input (5, 5, 8) - Tam giác cân
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('4b3e0bb4-7f8d-4e57-a3b1-4d7d5c8c5f0f', '30a01889-fbc9-4eaf-9f4e-fa0341ea6ced', '5 5 8', 'Isosceles triangle', false);
+-- Case: input (6, 8, 10) - Tam giác vuông
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('2e47d56d-3f5e-4d6e-94f5-3c9b2a8a1e7f', '30a01889-fbc9-4eaf-9f4e-fa0341ea6ced', '6 8 10', 'Right triangle', false);
+
+-- Case: input (3, 6, 8) - Tam giác thường
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('e75d2b99-774b-4f5d-918c-9a2b54d2b0e9', '30a01889-fbc9-4eaf-9f4e-fa0341ea6ced', '3 6 8', 'Triangle', false);
+
+-- Case: input (1, 2, 3) - Không phải tam giác
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('fa9c1e7c-7b2b-4976-a7b5-3fcd0c2e8e9a', '30a01889-fbc9-4eaf-9f4e-fa0341ea6ced', '1 2 3', 'Not a triangle', false);
