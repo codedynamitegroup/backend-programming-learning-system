@@ -74,7 +74,6 @@ public class CodeSubmissionApplicationServiceImpl implements CodeSubmissionAppli
     @Override
     public List<SubmissionHeadMapItem> getHeatMap(String email, Integer year) {
         List<SubmissionHeadMapItem> cc = codeSubmissionCommandHandler.getHeatMap(email, year);
-        cc.forEach(i->{log.info("cc i {}", i.getDate());});
         return cc;
     }
 }

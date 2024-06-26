@@ -69,7 +69,7 @@ public class QuestionSubmissionDataMapper {
 //                .passStatus(createQuestionSubmissionCommand.passStatus())
 //                .grade(createQuestionSubmissionCommand.grade())
                 .content(questionSubmissionCommand.content())
-                .numFile(questionSubmissionCommand.fileUrls().size())
+                .numFile(questionSubmissionCommand.files().size())
                 .flag(questionSubmissionCommand.flag())
                 .answerStatus(questionSubmissionCommand.answerStatus())
                 .questionSubmissionFiles(questionSubmissionFiles)

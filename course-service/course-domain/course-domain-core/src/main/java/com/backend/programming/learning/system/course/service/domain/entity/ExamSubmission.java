@@ -18,6 +18,7 @@ public class ExamSubmission extends AggregateRoot<ExamSubmissionId> {
     private ZonedDateTime submitTime;
     private Type type;
     private Status status;
+    private Float score;
 
     private ExamSubmission(Builder builder) {
         super.setId(builder.examSubmissionId);
@@ -81,6 +82,14 @@ public class ExamSubmission extends AggregateRoot<ExamSubmissionId> {
         status = Status.NOT_SUBMITTED;
     }
 
+    public void setScore(Float score) {
+        this.score = score;
+    }
+
+    public Float getScore() {
+        return score;
+    }
+
     public static final class Builder {
         private ExamSubmissionId examSubmissionId;
         private Exam exam;
@@ -91,6 +100,7 @@ public class ExamSubmission extends AggregateRoot<ExamSubmissionId> {
         private ZonedDateTime submitTime;
         private Type type;
         private Status status;
+        private Float score;
 
         private Builder() {
         }
@@ -141,6 +151,11 @@ public class ExamSubmission extends AggregateRoot<ExamSubmissionId> {
 
         public Builder status(Status val) {
             status = val;
+            return this;
+        }
+
+        public Builder score(Float val) {
+            score = val;
             return this;
         }
 

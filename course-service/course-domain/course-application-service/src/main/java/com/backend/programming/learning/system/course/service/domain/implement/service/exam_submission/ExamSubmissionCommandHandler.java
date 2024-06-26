@@ -72,4 +72,9 @@ public class ExamSubmissionCommandHandler {
             QueryAllStudentExamSubmissionCommand queryAllStudentExamSubmissionCommand) {
         return examSubmissionQueryHelper.findByExamId(examId, queryAllStudentExamSubmissionCommand);
     }
+
+    @Transactional
+    public void gradingExam(CreateExamSubmissionEndCommand createExamSubmissionEndCommand) {
+        examSubmissionCreateHelper.gradingExam(createExamSubmissionEndCommand);
+    }
 }

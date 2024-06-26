@@ -5,14 +5,15 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
 @Builder
 @Getter
 public class GetDetailCodeQuestionCommand {
-    @NotNull(message = "codeQuestionId must not be null")
-    UUID codeQuestionId;
+    @NotNull(message = "codeQuestionIds must not be null")
+    List<UUID> codeQuestionIds;
 
     String email;
 }

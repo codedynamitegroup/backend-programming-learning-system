@@ -33,9 +33,9 @@ public class WebSecurityConfig {
 //                        .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission").hasAnyRole(ADMIN, USER)
 //                        .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission/{code-submission-id}" ).hasAnyRole(ADMIN,USER)
                                 .requestMatchers(HttpMethod.POST, "/code-assessment/code-submission" ).hasAnyRole(ADMIN,USER)
-                                .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission/recent-code-question").hasAnyRole(USER)
-                                .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission/head-map").hasAnyRole(USER)
-                                .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission/recent-code-submission").hasAnyRole(USER)
+                                .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission/recent-code-question").hasRole(USER)
+                                .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission/heat-map").hasRole(USER)
+                                .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission/recent-code-submission").hasRole(USER)
                                 .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission/admin-code-question" ).hasAnyRole(ADMIN)
                                 .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission/admin-code-submission" ).hasAnyRole(ADMIN)
 
@@ -43,7 +43,7 @@ public class WebSecurityConfig {
                                 .requestMatchers(HttpMethod.PUT, "/code-assessment/shared-solution/comment/{comment-id}" ).hasAnyRole(USER)
                                 .requestMatchers(HttpMethod.DELETE, "/code-assessment/shared-solution/comment/{comment-id}" ).hasAnyRole(USER)
 
-                                .requestMatchers(HttpMethod.POST, "/code-assessment/shared-solution").hasAnyRole(USER)
+                                .requestMatchers(HttpMethod.POST, "/code-assessment/shared-solution").hasRole(USER)
                                 .requestMatchers(HttpMethod.DELETE, "/code-assessment/shared-solution/{shared-solution-id}").hasAnyRole(USER)
                                 .requestMatchers(HttpMethod.PUT, "/code-assessment/shared-solution/{shared-solution-id}").hasAnyRole(USER)
 

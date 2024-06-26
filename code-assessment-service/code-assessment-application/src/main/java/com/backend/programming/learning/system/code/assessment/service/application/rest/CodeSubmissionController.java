@@ -73,10 +73,10 @@ public class CodeSubmissionController {
     }
 
     @GetMapping("/heat-map")
-    public ResponseEntity<List<SubmissionHeadMapItem>> getHeadMap(
+    public ResponseEntity<List<SubmissionHeadMapItem>> getHeatMap(
             @RequestHeader(value = "Access-Token") String accessToken,
-            @RequestParam Integer year){
-        @NotNull(message = "email must not be null")
+            @RequestParam Integer year)
+    {
         String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
         List<SubmissionHeadMapItem> items = codeSubmissionApplicationService.getHeatMap(email, year);
         return ResponseEntity.ok(items);
@@ -99,22 +99,22 @@ public class CodeSubmissionController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/recent-code-submission")
-    public ResponseEntity<GetCodeSubmissionReponse> getUserRecentCodeSubmissions(
-            @RequestHeader(value = "Access-Token") String accessToken,
-            @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "5") Integer pageSize
-    ){
-        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
-
-        UserCodeSubmissionQuery query = UserCodeSubmissionQuery.builder()
-                .pageNum(pageNo)
-                .pageSize(pageSize)
-                .email(email)
-                .build();
-        GetCodeSubmissionReponse reponse = codeSubmissionApplicationService.getUserRecentCodeSubmissions(query);
-        return ResponseEntity.ok(reponse);
-    }
+//    @GetMapping("/recent-code-submission")
+//    public ResponseEntity<GetCodeSubmissionReponse> getUserRecentCodeSubmissions(
+//            @RequestHeader(value = "Access-Token") String accessToken,
+//            @RequestParam(defaultValue = "0") Integer pageNo,
+//            @RequestParam(defaultValue = "5") Integer pageSize
+//    ){
+//        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
+//
+//        UserCodeSubmissionQuery query = UserCodeSubmissionQuery.builder()
+//                .pageNum(pageNo)
+//                .pageSize(pageSize)
+//                .email(email)
+//                .build();
+//        GetCodeSubmissionReponse reponse = codeSubmissionApplicationService.getUserRecentCodeSubmissions(query);
+//        return ResponseEntity.ok(reponse);
+//    }
 
     @GetMapping("/admin-code-submission")
     public ResponseEntity<GetCodeSubmissionReponse> getAdminCodeSubmissions

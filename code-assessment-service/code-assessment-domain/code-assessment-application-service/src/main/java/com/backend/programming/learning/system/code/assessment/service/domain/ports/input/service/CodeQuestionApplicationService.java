@@ -23,7 +23,7 @@ public interface CodeQuestionApplicationService {
 
     void updateCodeQuestion(@Valid UpdateCodeQuestionCommand command);
 
-    CodeQuestionDto getDetailCodeQuestion(@Valid GetDetailCodeQuestionCommand command);
+    List<CodeQuestionDto> getDetailCodeQuestion(@Valid GetDetailCodeQuestionCommand command);
 
     void addLanguageToCodeQuestion(@Valid AddLanguageToCodeQuestionCommand command);
 

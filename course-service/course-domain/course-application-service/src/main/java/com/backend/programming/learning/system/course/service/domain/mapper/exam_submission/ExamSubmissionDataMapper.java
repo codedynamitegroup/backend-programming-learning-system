@@ -3,15 +3,13 @@ package com.backend.programming.learning.system.course.service.domain.mapper.exa
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.QuestionSubmissionFileCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.ExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionExamResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QuestionSubmissionResponse;
-import com.backend.programming.learning.system.course.service.domain.entity.Exam;
-import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
-import com.backend.programming.learning.system.course.service.domain.entity.QuestionSubmission;
-import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.valueobject.Status;
 import org.springframework.stereotype.Component;
 
@@ -74,6 +72,12 @@ public class ExamSubmissionDataMapper {
                 .examSubmissionId(examSubmission.getId().getValue())
                 .examId(examSubmission.getExam().getId().getValue())
                 .userId(examSubmission.getUser().getId().getValue())
+                .courseId(examSubmission.getExam().getCourse().getId().getValue())
+                .courseName(examSubmission.getExam().getCourse().getName())
+                .name(examSubmission.getExam().getName())
+                .intro(examSubmission.getExam().getIntro())
+                .attemptCount(examSubmission.getSubmissionCount())
+                .maxScores(examSubmission.getExam().getMaxScore())
                 .startTime(examSubmission.getStartTime())
                 .endTime(examSubmission.getEndTime())
                 .submitTime(examSubmission.getSubmitTime())
@@ -95,10 +99,25 @@ public class ExamSubmissionDataMapper {
                 .grade(questionSubmission.getGrade())
                 .content(questionSubmission.getContent())
                 .rightAnswer(questionSubmission.getRightAnswer())
-                .numFile(questionSubmission.getNumFile())
+                .files(questionSubmissionFileListToQuestionSubmissionFileCommandList(questionSubmission.getQuestionSubmissionFiles()))
                 .flag(questionSubmission.getFlag())
                 .answerStatus(questionSubmission.getAnswerStatus())
                 .build();
+    }
+
+    private QuestionSubmissionFileCommand questionSubmissionFileToQuestionSubmissionFileCommand(QuestionSubmissionFile questionSubmissionFile) {
+        return QuestionSubmissionFileCommand.builder()
+                .fileUrl(questionSubmissionFile.getUrl())
+                .fileName(questionSubmissionFile.getName())
+                .fileSize(questionSubmissionFile.getSize())
+                .fileType(questionSubmissionFile.getType())
+                .build();
+    }
+
+    private List<QuestionSubmissionFileCommand> questionSubmissionFileListToQuestionSubmissionFileCommandList(List<QuestionSubmissionFile> questionSubmissionFiles) {
+        return questionSubmissionFiles.stream()
+                .map(this::questionSubmissionFileToQuestionSubmissionFileCommand)
+                .toList();
     }
 
     public QueryExamSubmissionOverviewResponse mapToQueryExamSubmissionResponseWithTotal(ExamSubmission examSubmission, Double markTotal) {

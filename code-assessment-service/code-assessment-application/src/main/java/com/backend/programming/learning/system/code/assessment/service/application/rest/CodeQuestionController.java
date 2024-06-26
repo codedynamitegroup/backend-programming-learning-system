@@ -61,6 +61,8 @@ public class CodeQuestionController {
 
         if(createCodeQuestionCommand.getIsPublic() == null)
             createCodeQuestionCommand.setIsPublic(true);
+        if(createCodeQuestionCommand.getAllowImport() == null)
+            createCodeQuestionCommand.setAllowImport(false);
 
         CreateCodeQuestionResponse createCodeQuestionResponse =
             codeQuestionApplicationService.createCodeQuestion(createCodeQuestionCommand);
@@ -94,6 +96,21 @@ public class CodeQuestionController {
                 .build();
         GetCodeQuestionsResponse response = codeQuestionApplicationService.getPublicCodeQuestions(query);
         return ResponseEntity.ok(response);
+    }
+
+    //get detail public code question, khong phan biet public private
+    @GetMapping("/detail")
+    public ResponseEntity<List<CodeQuestionDto>> getDetailCodeQuestion(
+            @RequestParam(value = "codeQuestionIds") List<UUID> codeQuestionIds,
+            @RequestHeader(value = "Access-Token", required = false) String accessToken){
+        String email = accessToken != null? JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken): null;
+
+        GetDetailCodeQuestionCommand command =  GetDetailCodeQuestionCommand.builder()
+                .codeQuestionIds(codeQuestionIds)
+                .email(email)
+                .build();
+        List<CodeQuestionDto> codeQuestionDtos = codeQuestionApplicationService.getDetailCodeQuestion(command);
+        return ResponseEntity.ok(codeQuestionDtos);
     }
 
     @GetMapping("/admin-code-question")
@@ -148,20 +165,7 @@ public class CodeQuestionController {
         return  ResponseEntity.noContent().build();
     }
 
-    //get detail public code question, khong phan biet public private
-    @GetMapping("/{code-question-id}")
-    public ResponseEntity<CodeQuestionDto> getDetailCodeQuestion(
-            @PathVariable("code-question-id") UUID codeQuestionId,
-            @RequestHeader(value = "Access-Token", required = false) String accessToken){
-        String email = accessToken != null? JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken): null;
 
-        GetDetailCodeQuestionCommand command =  GetDetailCodeQuestionCommand.builder()
-                .codeQuestionId(codeQuestionId)
-                .email(email)
-                .build();
-        CodeQuestionDto codeQuestionDto = codeQuestionApplicationService.getDetailCodeQuestion(command);
-        return ResponseEntity.ok(codeQuestionDto);
-    }
 
     //edit code question tag
     @PostMapping("/{code-question-id}/tag")

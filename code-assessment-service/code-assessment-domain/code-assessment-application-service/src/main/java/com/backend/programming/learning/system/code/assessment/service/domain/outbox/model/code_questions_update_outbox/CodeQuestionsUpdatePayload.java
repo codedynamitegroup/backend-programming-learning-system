@@ -24,4 +24,8 @@ public class CodeQuestionsUpdatePayload {
     private final String constraints;
     @JsonProperty
     private String copyState;
+    @JsonProperty
+    private final Boolean allowImport;
+    @JsonProperty
+    private final Boolean isPublic;
 }
