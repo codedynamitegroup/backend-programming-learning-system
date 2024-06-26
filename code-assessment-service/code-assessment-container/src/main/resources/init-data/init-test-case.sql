@@ -444,3 +444,65 @@ VALUES ('8a1bcf4e-1f3a-11ee-be56-0242ac120006', '4be91526-365b-4e50-99ae-75ba2a8
 -- Case: month = 12 (Quarter 4)
 INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
 VALUES ('8a1bcf4e-1f3a-11ee-be56-0242ac120007', '4be91526-365b-4e50-99ae-75ba2a87ba08', '12', 'Quarter 4', false);
+
+--19
+-- Sample test case for n = 1 (S(1) = 1^3 = 1)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('d41d8cd9-4a3b-4f58-9fc1-a5d14c4c7f00', '4be91526-365b-4e50-99ae-75ba2a87ba09', '1', '1', true);
+
+-- Additional test cases (non-sample cases)
+-- Case: n = 2 (S(2) = 1^3 + 2^3 = 1 + 8 = 9)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('d41d8cd9-4a3b-4f58-9fc1-a5d14c4c7f01', '4be91526-365b-4e50-99ae-75ba2a87ba09', '2', '9', false);
+
+-- Case: n = 3 (S(3) = 1^3 + 2^3 + 3^3 = 1 + 8 + 27 = 36)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('d41d8cd9-4a3b-4f58-9fc1-a5d14c4c7f02', '4be91526-365b-4e50-99ae-75ba2a87ba09', '3', '36', false);
+
+-- Case: n = 10 (S(10) = 1^3 + 2^3 + ... + 10^3 = 3025)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('d41d8cd9-4a3b-4f58-9fc1-a5d14c4c7f03', '4be91526-365b-4e50-99ae-75ba2a87ba09', '10', '3025', false);
+
+-- Case: n = 100 (S(100) = 1^3 + 2^3 + ... + 100^3 = 25502500)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('d41d8cd9-4a3b-4f58-9fc1-a5d14c4c7f04', '4be91526-365b-4e50-99ae-75ba2a87ba09', '100', '25502500', false);
+
+--20
+-- Sample test case for n = 1 (A)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('ab3f10f4-f595-4b63-8ead-ed8d26973231', 'fa373da0-9d7d-4ced-bf8b-c06a0063cd4e', '2', 'AB', true);
+
+-- Additional test cases (non-sample cases)
+-- Case: n = 5 (ABCDE)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('e2141007-d713-44c5-a46e-9543b1959435', 'fa373da0-9d7d-4ced-bf8b-c06a0063cd4e', '5', 'ABCDE', false);
+
+-- Case: n = 10 (ABCDEFGHIJ)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('5144f19b-a4cf-44a2-bd61-8e27cc5f8152', 'fa373da0-9d7d-4ced-bf8b-c06a0063cd4e', '10', 'ABCDEFGHIJ', false);
+
+-- Case: n = 26 (ABCDEFGHIJKLMNOPQRSTUVWXYZ)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('5ecf4b1f-2b57-408b-a24e-f66effbcc242', 'fa373da0-9d7d-4ced-bf8b-c06a0063cd4e', '26', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', false);
+
+--21
+-- Sample test case for n = 2 (prime number)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('6fb4ea47-0dc9-4891-8ac2-a4d0152a07a9', '1f24ac22-737a-4074-9290-ec41bb15e2b0', '2', 'true', true);
+
+-- Additional test cases (non-sample cases)
+-- Case: n = 4 (not a prime number)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('0c46783c-60ae-4e8f-a205-f74d47b60fd7', '1f24ac22-737a-4074-9290-ec41bb15e2b0', '4', 'false', true);
+
+-- Case: n = 17 (prime number)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('53c14139-d991-45ff-91fa-e51a47198502', '1f24ac22-737a-4074-9290-ec41bb15e2b0', '17', 'true', false);
+
+-- Case: n = 100000 (not a prime number)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('d7b950a4-7f5a-4924-a470-706d16fbd29a', '1f24ac22-737a-4074-9290-ec41bb15e2b0', '100000', 'false', false);
+
+-- Case: n = 99991 (prime number)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('297ddc34-cef2-4bd7-9a1d-d156bb0e477c', '1f24ac22-737a-4074-9290-ec41bb15e2b0', '99991', 'true', false);
