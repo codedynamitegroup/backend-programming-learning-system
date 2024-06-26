@@ -135,7 +135,7 @@ public class ExamSubmissionController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/exam/{examId}/submission")
+    @GetMapping("/{examId}/submission")
     @Operation(summary = "Get exam submission by exam id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {

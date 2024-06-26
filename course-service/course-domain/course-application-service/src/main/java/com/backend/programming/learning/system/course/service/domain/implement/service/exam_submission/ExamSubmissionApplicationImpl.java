@@ -43,6 +43,7 @@ public class ExamSubmissionApplicationImpl implements ExamSubmissionApplicationS
 
     @Override
     public CreateExamSubmissionResponse endExam(CreateExamSubmissionEndCommand createExamSubmissionEndCommand) {
+        examSubmissionCommandHandler.gradingExam(createExamSubmissionEndCommand);
         return examSubmissionCommandHandler.endExam(createExamSubmissionEndCommand);
     }
 

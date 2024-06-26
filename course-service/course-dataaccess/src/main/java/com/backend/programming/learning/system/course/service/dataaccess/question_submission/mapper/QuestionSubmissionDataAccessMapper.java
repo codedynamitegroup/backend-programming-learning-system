@@ -55,6 +55,9 @@ public class QuestionSubmissionDataAccessMapper {
                 .id(questionSubmissionFile.getId().getValue())
                 .questionSubmission(questionSubmissionEntity)
                 .url(questionSubmissionFile.getUrl())
+                .name(questionSubmissionFile.getName())
+                .fileSize(questionSubmissionFile.getSize())
+                .type(questionSubmissionFile.getType())
                 .build();
     }
 
@@ -92,6 +95,9 @@ public class QuestionSubmissionDataAccessMapper {
                 .id(new QuestionSubmissionFileId(questionSubmissionFileEntity.getId()))
 //                .questionSubmission(questionSubmissionEntityToQuestionSubmission(questionSubmissionFileEntity.getQuestionSubmission()))
                 .url(questionSubmissionFileEntity.getUrl())
+                .name(questionSubmissionFileEntity.getName())
+                .size(questionSubmissionFileEntity.getFileSize())
+                .type(questionSubmissionFileEntity.getType())
                 .build();
     }
 

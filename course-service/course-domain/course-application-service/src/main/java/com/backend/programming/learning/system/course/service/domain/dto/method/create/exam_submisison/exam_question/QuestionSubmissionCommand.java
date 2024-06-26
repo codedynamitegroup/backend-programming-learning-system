@@ -11,6 +11,6 @@ public record QuestionSubmissionCommand(
         @Schema(example = "c4b3219f-9d83-4497-ad15-d46772141bd5")
         UUID questionId,
         String content,
-        List<String> fileUrls,
+        List<QuestionSubmissionFileCommand> files,
         Boolean answerStatus,
         Boolean flag) { }

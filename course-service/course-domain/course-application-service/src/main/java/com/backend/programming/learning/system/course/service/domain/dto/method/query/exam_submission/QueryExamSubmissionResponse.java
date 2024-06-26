@@ -18,10 +18,17 @@ public record QueryExamSubmissionResponse(
         UUID examSubmissionId,
         UUID examId,
         UUID userId,
+        UUID courseId,
+        String courseName,
+        String name,
+        String intro,
+        Integer attemptCount,
+        Float maxScores,
         ZonedDateTime startTime,
         ZonedDateTime endTime,
         ZonedDateTime submitTime,
         Status status,
+        Float grade,
         List<QuestionSubmissionResponse> questionSubmissionResponses
 ) {
 }

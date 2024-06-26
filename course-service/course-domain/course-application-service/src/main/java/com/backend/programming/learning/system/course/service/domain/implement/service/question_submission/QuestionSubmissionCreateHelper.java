@@ -108,15 +108,18 @@ public class QuestionSubmissionCreateHelper {
                 Map<String, QuestionSubmissionFile> submittedFiles = questionSubmission.getQuestionSubmissionFiles()
                         .stream().collect(Collectors.toMap(QuestionSubmissionFile::getUrl, Function.identity()));
                 List<QuestionSubmissionFile> questionSubmissionFiles = questionSubmissionCommand
-                        .fileUrls()
+                        .files()
                         .stream()
-                        .map(fileUrl -> {
-                            if(submittedFiles.containsKey(fileUrl)) {
-                                return submittedFiles.get(fileUrl);
+                        .map(file -> {
+                            if(submittedFiles.containsKey(file.fileUrl())) {
+                                return submittedFiles.get(file.fileUrl());
                             }
                             return QuestionSubmissionFile.builder()
                                     .id(new QuestionSubmissionFileId(UUID.randomUUID()))
-                                    .url(fileUrl)
+                                    .url(file.fileUrl())
+                                    .type(file.fileType())
+                                    .size(file.fileSize())
+                                    .name(file.fileName())
                                     .questionSubmission(null)
                                     .build();
                         }).toList();
@@ -124,7 +127,7 @@ public class QuestionSubmissionCreateHelper {
 
                 questionSubmission.setAnswerStatus(questionSubmissionCommand.answerStatus());
                 questionSubmission.setContent(questionSubmissionCommand.content());
-                questionSubmission.setNumFile(questionSubmissionCommand.fileUrls().size());
+                questionSubmission.setNumFile(questionSubmissionCommand.files().size());
                 questionSubmission.setFlag(questionSubmissionCommand.flag());
                 questionSubmission.setQuestionSubmissionFiles(questionSubmissionFiles);
 
@@ -137,9 +140,12 @@ public class QuestionSubmissionCreateHelper {
                             return new QuestionNotFoundException("Question not found");
                         });
                 List<QuestionSubmissionFile> questionSubmissionFiles = questionSubmissionCommand
-                        .fileUrls().stream().map(fileUrl -> QuestionSubmissionFile.builder()
+                        .files().stream().map(file -> QuestionSubmissionFile.builder()
                                 .id(new QuestionSubmissionFileId(UUID.randomUUID()))
-                                .url(fileUrl)
+                                .url(file.fileUrl())
+                                .name(file.fileName())
+                                .type(file.fileType())
+                                .size(file.fileSize())
                                 .questionSubmission(null)
                                 .build()).toList();
 
@@ -193,9 +199,12 @@ public class QuestionSubmissionCreateHelper {
         }
         else {
             List<QuestionSubmissionFile> questionSubmissionFiles = oneExamQuestionSubmissionCommand.questionSubmissionCommand()
-                    .fileUrls().stream().map(fileUrl -> QuestionSubmissionFile.builder()
+                    .files().stream().map(file -> QuestionSubmissionFile.builder()
                             .id(new QuestionSubmissionFileId(UUID.randomUUID()))
-                            .url(fileUrl)
+                            .url(file.fileUrl())
+                            .name(file.fileName())
+                            .type(file.fileType())
+                            .size(file.fileSize())
                             .questionSubmission(null)
                             .build()).toList();
 
