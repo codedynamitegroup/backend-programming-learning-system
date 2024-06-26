@@ -30,11 +30,14 @@ import com.backend.programming.learning.system.domain.valueobject.QueryOrderBy;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.UUID;
 
@@ -112,14 +115,17 @@ public class SharedSolutionController {
 
         boolean increaseView = false;
         if (!viewedArticles.contains(sharedSolutionId.toString())) {
+            ResponseCookie cookie = ResponseCookie.from("viewed_solution", sharedSolutionId.toString()) // key & value
+                    .httpOnly(true)
+                    .secure(false)
+                    //    .domain("localhost")  // host
+                    .path("/code-assessment/shared-solution/"+sharedSolutionId)
+                    .maxAge(Duration.ofMinutes(10))
+//                    .sameSite("Strict")  // sameSite
+                    .build()
+                    ;
 
-            Cookie cookie = new Cookie("viewed_solution", sharedSolutionId.toString());
-
-            cookie.setPath("/code-assessment/shared-solution/" + sharedSolutionId);
-            cookie.setMaxAge(600); // Cookie tồn tại trong 10 phút
-            cookie.setHttpOnly(true); // Đặt cookie là HttpOnly
-
-            response.addCookie(cookie);
+            response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
             increaseView = true;
         }
 
