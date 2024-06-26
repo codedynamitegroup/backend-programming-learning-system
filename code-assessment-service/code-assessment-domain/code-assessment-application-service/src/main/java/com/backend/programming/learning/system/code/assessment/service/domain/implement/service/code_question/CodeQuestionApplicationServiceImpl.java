@@ -44,7 +44,7 @@ class CodeQuestionApplicationServiceImpl implements CodeQuestionApplicationServi
     }
 
     @Override
-    public CodeQuestionDto getDetailCodeQuestion(GetDetailCodeQuestionCommand command) {
+    public List<CodeQuestionDto> getDetailCodeQuestion(GetDetailCodeQuestionCommand command) {
         return codeQuestionCommandHandler.getDetailCodeQuestion(command);
     }
 

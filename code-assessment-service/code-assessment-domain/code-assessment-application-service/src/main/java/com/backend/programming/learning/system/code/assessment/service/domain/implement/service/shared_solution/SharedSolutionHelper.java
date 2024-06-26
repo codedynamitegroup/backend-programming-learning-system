@@ -60,7 +60,8 @@ public class SharedSolutionHelper {
     public SharedSolution getDetailSharedSolution(GetSharedSolutionDetailCommand command) {
         User user = validateHelper.validateUserByEmail(command.getEmail());
         SharedSolution sharedSolution = validateHelper.validateSharedSolution(command.getSharedSolutionId(), user.getId().getValue());
-        sharedSolutionRepository.increaseViewByOne(sharedSolution.getId());
+        if(command.isIncreaseView())
+            sharedSolutionRepository.increaseViewByOne(sharedSolution.getId());
         return sharedSolution;
     }
 

@@ -20,4 +20,6 @@ public class GetSharedSolutionDetailCommand {
     @NotNull(message = "email must not be null")
     String email;
 
+    boolean increaseView;
+
 }

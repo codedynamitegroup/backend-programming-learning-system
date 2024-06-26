@@ -178,20 +178,20 @@ public class CodeQuestionsHelper {
     }
 
     @Transactional
-    public CodeQuestion getDetailCodeQuestion(GetDetailCodeQuestionCommand command) {
+    public List<CodeQuestion> getDetailCodeQuestion(GetDetailCodeQuestionCommand command) {
         User user = command.getEmail() != null? validateHelper.validateUserByEmail(command.getEmail()) : null;
 
-        CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(command.getCodeQuestionId());
+        return command.getCodeQuestionIds().stream().map(codeQuestionId-> {
+            CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(codeQuestionId);
 
-        List<TestCase> sampleTestCase = testCaseRepository.getSampleTestCase(codeQuestion.getId());
+            List<TestCase> sampleTestCase = testCaseRepository.getSampleTestCase(codeQuestion.getId());
 
-        List<CodeSubmission> codeSubmissions = user == null? List.of(): codeSubmissionRepository.findLatestSubmissionEachLanguage(codeQuestion.getId(), user.getId());
+            List<CodeSubmission> codeSubmissions = user == null ? List.of() : codeSubmissionRepository.findLatestSubmissionEachLanguage(codeQuestion.getId(), user.getId());
 
-        List<ProgrammingLanguageCodeQuestion> languages = programmingLanguageCodeQuestionRepository.findByCodeQuestionId(codeQuestion.getId());
+            List<ProgrammingLanguageCodeQuestion> languages = programmingLanguageCodeQuestionRepository.findByCodeQuestionId(codeQuestion.getId());
 
-        CodeQuestion result = codeAssessmentDomainService.getDetailCodeQuestion(codeQuestion, sampleTestCase, codeSubmissions, languages);
-
-        return result;
+            return codeAssessmentDomainService.getDetailCodeQuestion(codeQuestion, sampleTestCase, codeSubmissions, languages);
+        }).toList();
     }
 
     @Transactional

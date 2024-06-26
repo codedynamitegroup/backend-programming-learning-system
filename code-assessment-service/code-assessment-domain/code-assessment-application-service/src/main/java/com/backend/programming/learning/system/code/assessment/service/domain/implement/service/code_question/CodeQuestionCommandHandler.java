@@ -92,9 +92,9 @@ public class CodeQuestionCommandHandler {
         }
     }
 
-    public CodeQuestionDto getDetailCodeQuestion(GetDetailCodeQuestionCommand command) {
-        CodeQuestion codeQuestion = codeQuestionsHelper.getDetailCodeQuestion(command);
-        return dtoMapper.codeQuestionToDto(codeQuestion);
+    public List<CodeQuestionDto> getDetailCodeQuestion(GetDetailCodeQuestionCommand command) {
+        List<CodeQuestion> codeQuestions = codeQuestionsHelper.getDetailCodeQuestion(command);
+        return codeQuestions.stream().map(dtoMapper::codeQuestionToDto).toList();
     }
 
     public void addLanguageToCodeQuestion(AddLanguageToCodeQuestionCommand command) {
