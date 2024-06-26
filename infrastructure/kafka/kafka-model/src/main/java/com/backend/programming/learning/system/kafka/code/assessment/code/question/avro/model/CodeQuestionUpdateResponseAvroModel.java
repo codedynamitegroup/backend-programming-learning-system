@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 4288480981598275626L;
+  private static final long serialVersionUID = -2890315194149261098L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CodeQuestionUpdateResponseAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"codeQuestionId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"questionId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"problemStatement\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"maxGrade\",\"type\":\"float\"},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"CREATE_PROPAGATING\",\"UPDATE_PROPAGATING\",\"DELETE_PROPAGATING\",\"CREATE_ROLLBACKING\",\"UPDATE_ROLLBACKING\",\"DELETE_ROLLBACKING\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CodeQuestionUpdateResponseAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"codeQuestionId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"questionId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"problemStatement\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"maxGrade\",\"type\":\"float\"},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"isPublic\",\"type\":[\"null\",\"boolean\"]},{\"name\":\"allowImport\",\"type\":[\"null\",\"boolean\"]},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"CREATE_PROPAGATING\",\"UPDATE_PROPAGATING\",\"DELETE_PROPAGATING\",\"CREATE_ROLLBACKING\",\"UPDATE_ROLLBACKING\",\"DELETE_ROLLBACKING\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -83,6 +83,8 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
   private java.lang.String problemStatement;
   private float maxGrade;
   private java.lang.String name;
+  private java.lang.Boolean isPublic;
+  private java.lang.Boolean allowImport;
   private com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState copyState;
   private java.util.List<java.lang.String> failureMessages;
 
@@ -102,10 +104,12 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
    * @param problemStatement The new value for problemStatement
    * @param maxGrade The new value for maxGrade
    * @param name The new value for name
+   * @param isPublic The new value for isPublic
+   * @param allowImport The new value for allowImport
    * @param copyState The new value for copyState
    * @param failureMessages The new value for failureMessages
    */
-  public CodeQuestionUpdateResponseAvroModel(java.util.UUID id, java.util.UUID codeQuestionId, java.util.UUID sagaId, java.util.UUID questionId, java.lang.String problemStatement, java.lang.Float maxGrade, java.lang.String name, com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState copyState, java.util.List<java.lang.String> failureMessages) {
+  public CodeQuestionUpdateResponseAvroModel(java.util.UUID id, java.util.UUID codeQuestionId, java.util.UUID sagaId, java.util.UUID questionId, java.lang.String problemStatement, java.lang.Float maxGrade, java.lang.String name, java.lang.Boolean isPublic, java.lang.Boolean allowImport, com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState copyState, java.util.List<java.lang.String> failureMessages) {
     this.id = id;
     this.codeQuestionId = codeQuestionId;
     this.sagaId = sagaId;
@@ -113,6 +117,8 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
     this.problemStatement = problemStatement;
     this.maxGrade = maxGrade;
     this.name = name;
+    this.isPublic = isPublic;
+    this.allowImport = allowImport;
     this.copyState = copyState;
     this.failureMessages = failureMessages;
   }
@@ -134,8 +140,10 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
     case 4: return problemStatement;
     case 5: return maxGrade;
     case 6: return name;
-    case 7: return copyState;
-    case 8: return failureMessages;
+    case 7: return isPublic;
+    case 8: return allowImport;
+    case 9: return copyState;
+    case 10: return failureMessages;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -146,6 +154,8 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       new org.apache.avro.Conversions.UUIDConversion(),
       new org.apache.avro.Conversions.UUIDConversion(),
       new org.apache.avro.Conversions.UUIDConversion(),
+      null,
+      null,
       null,
       null,
       null,
@@ -171,8 +181,10 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
     case 4: problemStatement = value$ != null ? value$.toString() : null; break;
     case 5: maxGrade = (java.lang.Float)value$; break;
     case 6: name = value$ != null ? value$.toString() : null; break;
-    case 7: copyState = (com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState)value$; break;
-    case 8: failureMessages = (java.util.List<java.lang.String>)value$; break;
+    case 7: isPublic = (java.lang.Boolean)value$; break;
+    case 8: allowImport = (java.lang.Boolean)value$; break;
+    case 9: copyState = (com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState)value$; break;
+    case 10: failureMessages = (java.util.List<java.lang.String>)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -297,6 +309,40 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
   }
 
   /**
+   * Gets the value of the 'isPublic' field.
+   * @return The value of the 'isPublic' field.
+   */
+  public java.lang.Boolean getIsPublic() {
+    return isPublic;
+  }
+
+
+  /**
+   * Sets the value of the 'isPublic' field.
+   * @param value the value to set.
+   */
+  public void setIsPublic(java.lang.Boolean value) {
+    this.isPublic = value;
+  }
+
+  /**
+   * Gets the value of the 'allowImport' field.
+   * @return The value of the 'allowImport' field.
+   */
+  public java.lang.Boolean getAllowImport() {
+    return allowImport;
+  }
+
+
+  /**
+   * Sets the value of the 'allowImport' field.
+   * @param value the value to set.
+   */
+  public void setAllowImport(java.lang.Boolean value) {
+    this.allowImport = value;
+  }
+
+  /**
    * Gets the value of the 'copyState' field.
    * @return The value of the 'copyState' field.
    */
@@ -378,6 +424,8 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
     private java.lang.String problemStatement;
     private float maxGrade;
     private java.lang.String name;
+    private java.lang.Boolean isPublic;
+    private java.lang.Boolean allowImport;
     private com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState copyState;
     private java.util.List<java.lang.String> failureMessages;
 
@@ -420,13 +468,21 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
         this.name = data().deepCopy(fields()[6].schema(), other.name);
         fieldSetFlags()[6] = other.fieldSetFlags()[6];
       }
-      if (isValidValue(fields()[7], other.copyState)) {
-        this.copyState = data().deepCopy(fields()[7].schema(), other.copyState);
+      if (isValidValue(fields()[7], other.isPublic)) {
+        this.isPublic = data().deepCopy(fields()[7].schema(), other.isPublic);
         fieldSetFlags()[7] = other.fieldSetFlags()[7];
       }
-      if (isValidValue(fields()[8], other.failureMessages)) {
-        this.failureMessages = data().deepCopy(fields()[8].schema(), other.failureMessages);
+      if (isValidValue(fields()[8], other.allowImport)) {
+        this.allowImport = data().deepCopy(fields()[8].schema(), other.allowImport);
         fieldSetFlags()[8] = other.fieldSetFlags()[8];
+      }
+      if (isValidValue(fields()[9], other.copyState)) {
+        this.copyState = data().deepCopy(fields()[9].schema(), other.copyState);
+        fieldSetFlags()[9] = other.fieldSetFlags()[9];
+      }
+      if (isValidValue(fields()[10], other.failureMessages)) {
+        this.failureMessages = data().deepCopy(fields()[10].schema(), other.failureMessages);
+        fieldSetFlags()[10] = other.fieldSetFlags()[10];
       }
     }
 
@@ -464,13 +520,21 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
         this.name = data().deepCopy(fields()[6].schema(), other.name);
         fieldSetFlags()[6] = true;
       }
-      if (isValidValue(fields()[7], other.copyState)) {
-        this.copyState = data().deepCopy(fields()[7].schema(), other.copyState);
+      if (isValidValue(fields()[7], other.isPublic)) {
+        this.isPublic = data().deepCopy(fields()[7].schema(), other.isPublic);
         fieldSetFlags()[7] = true;
       }
-      if (isValidValue(fields()[8], other.failureMessages)) {
-        this.failureMessages = data().deepCopy(fields()[8].schema(), other.failureMessages);
+      if (isValidValue(fields()[8], other.allowImport)) {
+        this.allowImport = data().deepCopy(fields()[8].schema(), other.allowImport);
         fieldSetFlags()[8] = true;
+      }
+      if (isValidValue(fields()[9], other.copyState)) {
+        this.copyState = data().deepCopy(fields()[9].schema(), other.copyState);
+        fieldSetFlags()[9] = true;
+      }
+      if (isValidValue(fields()[10], other.failureMessages)) {
+        this.failureMessages = data().deepCopy(fields()[10].schema(), other.failureMessages);
+        fieldSetFlags()[10] = true;
       }
     }
 
@@ -754,6 +818,86 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
     }
 
     /**
+      * Gets the value of the 'isPublic' field.
+      * @return The value.
+      */
+    public java.lang.Boolean getIsPublic() {
+      return isPublic;
+    }
+
+
+    /**
+      * Sets the value of the 'isPublic' field.
+      * @param value The value of 'isPublic'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder setIsPublic(java.lang.Boolean value) {
+      validate(fields()[7], value);
+      this.isPublic = value;
+      fieldSetFlags()[7] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'isPublic' field has been set.
+      * @return True if the 'isPublic' field has been set, false otherwise.
+      */
+    public boolean hasIsPublic() {
+      return fieldSetFlags()[7];
+    }
+
+
+    /**
+      * Clears the value of the 'isPublic' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder clearIsPublic() {
+      isPublic = null;
+      fieldSetFlags()[7] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'allowImport' field.
+      * @return The value.
+      */
+    public java.lang.Boolean getAllowImport() {
+      return allowImport;
+    }
+
+
+    /**
+      * Sets the value of the 'allowImport' field.
+      * @param value The value of 'allowImport'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder setAllowImport(java.lang.Boolean value) {
+      validate(fields()[8], value);
+      this.allowImport = value;
+      fieldSetFlags()[8] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'allowImport' field has been set.
+      * @return True if the 'allowImport' field has been set, false otherwise.
+      */
+    public boolean hasAllowImport() {
+      return fieldSetFlags()[8];
+    }
+
+
+    /**
+      * Clears the value of the 'allowImport' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder clearAllowImport() {
+      allowImport = null;
+      fieldSetFlags()[8] = false;
+      return this;
+    }
+
+    /**
       * Gets the value of the 'copyState' field.
       * @return The value.
       */
@@ -768,9 +912,9 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder setCopyState(com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState value) {
-      validate(fields()[7], value);
+      validate(fields()[9], value);
       this.copyState = value;
-      fieldSetFlags()[7] = true;
+      fieldSetFlags()[9] = true;
       return this;
     }
 
@@ -779,7 +923,7 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       * @return True if the 'copyState' field has been set, false otherwise.
       */
     public boolean hasCopyState() {
-      return fieldSetFlags()[7];
+      return fieldSetFlags()[9];
     }
 
 
@@ -789,7 +933,7 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder clearCopyState() {
       copyState = null;
-      fieldSetFlags()[7] = false;
+      fieldSetFlags()[9] = false;
       return this;
     }
 
@@ -808,9 +952,9 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder setFailureMessages(java.util.List<java.lang.String> value) {
-      validate(fields()[8], value);
+      validate(fields()[10], value);
       this.failureMessages = value;
-      fieldSetFlags()[8] = true;
+      fieldSetFlags()[10] = true;
       return this;
     }
 
@@ -819,7 +963,7 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       * @return True if the 'failureMessages' field has been set, false otherwise.
       */
     public boolean hasFailureMessages() {
-      return fieldSetFlags()[8];
+      return fieldSetFlags()[10];
     }
 
 
@@ -829,7 +973,7 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateResponseAvroModel.Builder clearFailureMessages() {
       failureMessages = null;
-      fieldSetFlags()[8] = false;
+      fieldSetFlags()[10] = false;
       return this;
     }
 
@@ -845,8 +989,10 @@ public class CodeQuestionUpdateResponseAvroModel extends org.apache.avro.specifi
         record.problemStatement = fieldSetFlags()[4] ? this.problemStatement : (java.lang.String) defaultValue(fields()[4]);
         record.maxGrade = fieldSetFlags()[5] ? this.maxGrade : (java.lang.Float) defaultValue(fields()[5]);
         record.name = fieldSetFlags()[6] ? this.name : (java.lang.String) defaultValue(fields()[6]);
-        record.copyState = fieldSetFlags()[7] ? this.copyState : (com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState) defaultValue(fields()[7]);
-        record.failureMessages = fieldSetFlags()[8] ? this.failureMessages : (java.util.List<java.lang.String>) defaultValue(fields()[8]);
+        record.isPublic = fieldSetFlags()[7] ? this.isPublic : (java.lang.Boolean) defaultValue(fields()[7]);
+        record.allowImport = fieldSetFlags()[8] ? this.allowImport : (java.lang.Boolean) defaultValue(fields()[8]);
+        record.copyState = fieldSetFlags()[9] ? this.copyState : (com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState) defaultValue(fields()[9]);
+        record.failureMessages = fieldSetFlags()[10] ? this.failureMessages : (java.util.List<java.lang.String>) defaultValue(fields()[10]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;

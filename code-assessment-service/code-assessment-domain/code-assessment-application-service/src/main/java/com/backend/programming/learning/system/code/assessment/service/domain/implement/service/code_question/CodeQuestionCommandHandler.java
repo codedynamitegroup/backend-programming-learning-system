@@ -75,7 +75,11 @@ public class CodeQuestionCommandHandler {
 
     public void updateCodeQuestion(UpdateCodeQuestionCommand command) {
         CodeQuestionsUpdatedEvent event = codeQuestionsHelper.updateCodeQuestion(command);
-        if(command.getName() != null || command.getProblemStatement() != null || command.getMaxGrade() != null){
+        if(command.getName() != null
+                || command.getProblemStatement() != null
+                || command.getMaxGrade() != null
+                || command.getIsPublic() != null
+                || command.getAllowImport() != null){
             codeQuestionsUpdateOutboxHelper.saveCodeQuestionsUpdateOutboxMessage(
                     codeQuestionDataMaper.codeQuestionsUpdatedEventToCodeQuestionsUpdatePayload(
                             event, CopyState.UPDATING
@@ -88,9 +92,9 @@ public class CodeQuestionCommandHandler {
         }
     }
 
-    public CodeQuestionDto getDetailCodeQuestion(GetDetailCodeQuestionCommand command) {
-        CodeQuestion codeQuestion = codeQuestionsHelper.getDetailCodeQuestion(command);
-        return dtoMapper.codeQuestionToDto(codeQuestion);
+    public List<CodeQuestionDto> getDetailCodeQuestion(GetDetailCodeQuestionCommand command) {
+        List<CodeQuestion> codeQuestions = codeQuestionsHelper.getDetailCodeQuestion(command);
+        return codeQuestions.stream().map(dtoMapper::codeQuestionToDto).toList();
     }
 
     public void addLanguageToCodeQuestion(AddLanguageToCodeQuestionCommand command) {

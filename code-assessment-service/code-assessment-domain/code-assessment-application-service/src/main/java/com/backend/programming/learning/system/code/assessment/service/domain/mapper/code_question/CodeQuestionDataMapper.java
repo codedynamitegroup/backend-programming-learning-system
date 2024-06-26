@@ -42,6 +42,8 @@ public class CodeQuestionDataMapper {
                 .isPublic(command.getIsPublic())
                 .difficulty(command.getDifficulty())
                 .maxGrade(command.getMaxGrade())
+                .allowImport(command.getAllowImport())
+                .orgId(command.getOrgId())
                 .build();
     }
     public CreateCodeQuestionResponse codeQuestionToCreateCodeQuestionReponse(CodeQuestion codeQuestion, String message){
@@ -61,6 +63,8 @@ public class CodeQuestionDataMapper {
                 .maxGrade(codeQuestion.getMaxGrade())
                 .copyState(state.toString())
                 .name(codeQuestion.getName())
+                .allowImport(codeQuestion.getAllowImport())
+                .isPublic(codeQuestion.getIsPublic())
 //                .constraints(codeQuestion.getConstraints())
                 .build();
     }
@@ -90,6 +94,7 @@ public class CodeQuestionDataMapper {
                 .maxGrade(command.getMaxGrade())
                 .difficulty(command.getDifficulty())
                 .isPublic(command.getIsPublic())
+                .allowImport(command.getAllowImport())
                 .build();
     }
 

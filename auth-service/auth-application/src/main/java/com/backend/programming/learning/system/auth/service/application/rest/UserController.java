@@ -140,7 +140,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(refreshTokenUser);
     }
 
-    @PostMapping("/logout")
+    @PostMapping("/logout/{email}")
     @Operation(summary = "Logout user.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
@@ -149,11 +149,7 @@ public class UserController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<?> logoutUser(@RequestHeader(value = "Access-Token", required = false) String accessToken) {
-        String email = jwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
-        if (email == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Invalid access token"));
-        }
+    public ResponseEntity<?> logoutUser(@PathVariable String email) {
         LogoutUserResponse logoutUserResponse = userApplicationService.logoutUser(
                 LogoutUserEmailCommand.builder()
                         .email(email)

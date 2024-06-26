@@ -27,6 +27,8 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.SharedSolution;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.SharedSolutionApplicationService;
 import com.backend.programming.learning.system.domain.valueobject.QueryOrderBy;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -65,7 +67,8 @@ public class SharedSolutionController {
     @GetMapping
     public ResponseEntity<GetSharedSolutionsResponse>
     getSharedSolutions(
-            @RequestParam UUID codeQuestionId,
+            @RequestParam(required = false) UUID codeQuestionId,
+            @RequestHeader(value = "Access-Token", required = false) String accessToken,
             @RequestParam(required = false) List<UUID> filterTagIds,
             @RequestParam(required = false) String search,
             @RequestParam(required = false) QueryOrderBy orderBy,
@@ -73,9 +76,12 @@ public class SharedSolutionController {
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "5") Integer pageSize
     ){
+        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
+
         GetSharedSolutionByCodeQuestionIdCommand command =
                 GetSharedSolutionByCodeQuestionIdCommand.builder()
                         .codeQuestionId(codeQuestionId)
+                        .email(email)
                         .filterTagIds(filterTagIds)
                         .search(search)
                         .orderBy(orderBy)
@@ -94,20 +100,38 @@ public class SharedSolutionController {
         return ResponseEntity.ok(response);
     }
 
+
     //view detail
     @GetMapping("/{shared-solution-id}")
     public ResponseEntity<GetSharedSolutionResponseItem> getDetailSharedSolution
     (@PathVariable("shared-solution-id") UUID sharedSolutionId,
-     @RequestHeader(value = "Access-Token") String accessToken){
+     @CookieValue(value = "viewed_solution", defaultValue = "") String viewedArticles,
+     @RequestHeader(value = "Access-Token") String accessToken,
+     HttpServletResponse response){
         String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
+
+        boolean increaseView = false;
+        if (!viewedArticles.contains(sharedSolutionId.toString())) {
+
+            Cookie cookie = new Cookie("viewed_solution", sharedSolutionId.toString());
+
+            cookie.setPath("/code-assessment/shared-solution/" + sharedSolutionId);
+            cookie.setMaxAge(600); // Cookie tồn tại trong 10 phút
+            cookie.setHttpOnly(true); // Đặt cookie là HttpOnly
+
+            response.addCookie(cookie);
+            increaseView = true;
+        }
 
         GetSharedSolutionDetailCommand command = GetSharedSolutionDetailCommand.builder()
                 .email(email)
                 .sharedSolutionId(sharedSolutionId)
+                .increaseView(increaseView)
                 .build();
 
         GetSharedSolutionResponseItem item =
                 service.getDetailSharedSolution(command);
+
         return ResponseEntity.ok(item);
     }
 

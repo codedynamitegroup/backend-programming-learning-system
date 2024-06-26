@@ -30,5 +30,6 @@ public class UpdateCodeQuestionCommand {
     private final Float maxGrade;
     private final QuestionDifficulty difficulty;
     private Boolean isPublic;
+    private Boolean allowImport;
 
 }

@@ -417,6 +417,7 @@ CREATE TABLE "public".exam_submission
     user_id      uuid             NOT NULL,
     submit_count bigint                    DEFAULT '0',
     start_time   TIMESTAMP WITH TIME ZONE  DEFAULT CURRENT_TIMESTAMP,
+    end_time TIMESTAMP WITH TIME ZONE NOT NULL,
     submit_time  TIMESTAMP WITH TIME ZONE  DEFAULT NULL,
     status       status           NOT NULL DEFAULT 'NOT_SUBMITTED',
     score        double precision DEFAULT '0',
@@ -534,6 +535,21 @@ CREATE TABLE "public".question_submission
         REFERENCES "public".question (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS "public".question_submission_file CASCADE;
+CREATE TABLE "public".question_submission_file (
+    id                 uuid DEFAULT gen_random_uuid() NOT NULL,
+    question_submission_id uuid                           NOT NULL,
+    url               text                           NOT NULL,
+    name text NOT NULL,
+    file_size double precision DEFAULT '0',
+    type text DEFAULT  '',
+    CONSTRAINT question_submission_file_pkey PRIMARY KEY (id),
+    CONSTRAINT question_submission_file_question_submission_id_fkey FOREIGN KEY (question_submission_id)
+            REFERENCES "public".question_submission (id) MATCH SIMPLE
+            ON UPDATE CASCADE
+            ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS "public".submission_assignment CASCADE;

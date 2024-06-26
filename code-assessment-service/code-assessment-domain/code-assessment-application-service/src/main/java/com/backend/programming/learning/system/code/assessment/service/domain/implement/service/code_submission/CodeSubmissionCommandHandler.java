@@ -3,16 +3,18 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.CreateCodeSubmissionResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_submission.ExecuteCodeWithTestCaseCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_submission.*;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_submission.UpdateCodeSubmissionTestCaseCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmission;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeSubmissionTestCase;
 import com.backend.programming.learning.system.code.assessment.service.domain.event.code_submission.CodeSubmissionUpdatedEvent;
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.GeneralSagaHelper;
+import com.backend.programming.learning.system.code.assessment.service.domain.mapper.code_question.CodeQuestionDataMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.code_submission.CodeSubmissionDataMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.scheduler.code_submission_update_outbox.CodeSubmissionUpdateOutboxHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.assessment.AssessmentSourceCodeByTestCases;
-import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.GradingStatus;
 import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
@@ -21,9 +23,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -33,13 +35,15 @@ public class CodeSubmissionCommandHandler {
     private final CodeSubmissionHelper codeSubmissionHelper;
     private final CodeSubmissionUpdateOutboxHelper codeSubmissionUpdateOutboxHelper;
     private final GeneralSagaHelper generalSagaHelper;
+    private final CodeQuestionDataMapper codeQuestionDataMapper;
 
-    public CodeSubmissionCommandHandler(CodeSubmissionDataMapper codeSubmissionDataMapper, AssessmentSourceCodeByTestCases assessmentSourceCodeByTestCases, CodeSubmissionHelper codeSubmissionHelper, CodeSubmissionUpdateOutboxHelper codeSubmissionUpdateOutboxHelper, GeneralSagaHelper generalSagaHelper) {
+    public CodeSubmissionCommandHandler(CodeSubmissionDataMapper codeSubmissionDataMapper, AssessmentSourceCodeByTestCases assessmentSourceCodeByTestCases, CodeSubmissionHelper codeSubmissionHelper, CodeSubmissionUpdateOutboxHelper codeSubmissionUpdateOutboxHelper, GeneralSagaHelper generalSagaHelper, CodeQuestionDataMapper codeQuestionDataMapper) {
         this.codeSubmissionDataMapper = codeSubmissionDataMapper;
         this.assessmentSourceCodeByTestCases = assessmentSourceCodeByTestCases;
         this.codeSubmissionHelper = codeSubmissionHelper;
         this.codeSubmissionUpdateOutboxHelper = codeSubmissionUpdateOutboxHelper;
         this.generalSagaHelper = generalSagaHelper;
+        this.codeQuestionDataMapper = codeQuestionDataMapper;
     }
 
     @Transactional
@@ -123,8 +127,8 @@ public class CodeSubmissionCommandHandler {
         return codeSubmissionHelper.executeCodeWithTestCase(command);
     }
 
-    public GetCodeSubmissionReponse getAdminCodeSubmissions(AdminCodeSubmissionQuery command) {
-        Page<CodeSubmission> codeSubmissions = codeSubmissionHelper.getAdminCodeSubmissions(command);
+    public GetCodeSubmissionReponse getAdminCodeSubmissions(AdminCodeSubmissionQuery query) {
+        Page<CodeSubmission> codeSubmissions = codeSubmissionHelper.getAdminCodeSubmissions(query);
 
         Page<GetCodeSubmissionResponseItem> list = codeSubmissions.map(
                 codeSubmissionDataMapper::codeSubmissionToGetCodeSubmissionResponseItem);
@@ -135,5 +139,34 @@ public class CodeSubmissionCommandHandler {
 //            item.setTailCode(null);
         });
         return codeSubmissionDataMapper.pagableToGetCodeSubmissionReponse(list);
+    }
+
+    public GetCodeSubmissionReponse getUserRecentCodeSubmissions(UserCodeSubmissionQuery query) {
+        Page<CodeSubmission> codeSubmissions = codeSubmissionHelper.getUserRecentCodeSubmissions(query);
+
+        Page<GetCodeSubmissionResponseItem> list = codeSubmissions.map(
+                codeSubmissionDataMapper::codeSubmissionToGetCodeSubmissionResponseItem);
+        list.forEach(item -> {
+            item.setSourceCode(null);
+//            item.setHeadCode(null);
+//            item.setBodyCode(null);
+//            item.setTailCode(null);
+        });
+        return codeSubmissionDataMapper.pagableToGetCodeSubmissionReponse(list);
+    }
+
+    public GetCodeQuestionsResponse getUserRecentCodeQuestion(UserRecentCodeQuestionQuery query) {
+        Page<CodeQuestion> codeQuestions = codeSubmissionHelper.getUserRecentCodeQuestion(query);
+        return codeQuestionDataMapper.pagableCodeQuestionsToGetCodeQuestionsResponse(codeQuestions);
+    }
+
+    public List<SubmissionHeadMapItem> getHeatMap(String email, Integer year) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return codeSubmissionHelper.getHeatMap(email, year).stream()
+                .map(item->SubmissionHeadMapItem.builder()
+                        .date(sdf.format(item.getDate()))
+                        .numOfSubmission(item.getNumOfSubmission())
+                        .build())
+                .toList();
     }
 }

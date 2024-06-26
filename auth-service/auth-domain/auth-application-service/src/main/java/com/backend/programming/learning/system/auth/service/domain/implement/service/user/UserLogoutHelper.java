@@ -33,7 +33,6 @@ public class UserLogoutHelper {
     public LogoutUserResponse logoutUser(LogoutUserEmailCommand logoutUserEmailCommand) {
         User user = findUserByEmail(logoutUserEmailCommand.getEmail());
         user.setRefreshToken(null);
-
         saveUser(user);
 
         return LogoutUserResponse.builder()

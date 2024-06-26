@@ -13,5 +13,6 @@ public class SharedSolutionFieldToSharedSolutionEntityField {
         Map.ofEntries(
                 Map.entry(SharedSolution.SortedFields.totalVote.name(), SharedSolutionEntity.Fields.totalVoteCount),
                 Map.entry(SharedSolution.SortedFields.viewNumber.name(), SharedSolutionEntity.Fields.viewNumber),
+                Map.entry(SharedSolution.SortedFields.totalComment.name(), SharedSolutionEntity.Fields.totalComment),
                 Map.entry(SharedSolution.SortedFields.createdAt.name(), SharedSolutionEntity.Fields.createdAt));
 }

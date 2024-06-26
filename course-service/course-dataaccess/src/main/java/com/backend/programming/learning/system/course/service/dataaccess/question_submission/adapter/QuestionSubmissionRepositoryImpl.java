@@ -30,6 +30,10 @@ public class QuestionSubmissionRepositoryImpl implements QuestionSubmissionRepos
 
     @Override
     public void saveAll(List<QuestionSubmission> questionSubmissions) {
+        if(questionSubmissions.isEmpty()) {
+            return;
+        }
+
         List<QuestionSubmissionEntity> entities = questionSubmissions.stream()
                 .map(questionSubmissionDataAccessMapper::questionSubmissionToQuestionSubmissionEntity)
                 .collect(Collectors.toList());

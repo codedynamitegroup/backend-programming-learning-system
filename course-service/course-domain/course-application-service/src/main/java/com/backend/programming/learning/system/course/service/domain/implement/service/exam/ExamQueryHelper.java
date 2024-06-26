@@ -26,6 +26,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * com.backend.programming.learning.system.implement.exam
@@ -83,25 +84,30 @@ public class ExamQueryHelper {
             List<ExamQuestion> examQuestions = examQuestionRepository
                     .findByExamId(examId);
             Exam exam = examRepository.findBy(examId);
-            ExamSubmission examSubmission = examSubmissionRepository.findByExamAndUser(exam,courseUser.getUser());
+            ExamSubmission examSubmission = examSubmissionRepository.findByExamAndUser(exam, courseUser.getUser());
 
             Float score = 0F;
             for (QuestionSubmission questionSubmission : questionSubmissions) {
-                score += questionSubmission.getGrade();
+                if (Objects.nonNull(questionSubmission.getGrade())) {
+                    score += questionSubmission.getGrade();
+                }
             }
 
             Float totalScore = 0F;
             for (ExamQuestion examQuestion : examQuestions) {
-                if(Objects.nonNull(examQuestion.getQuestion())){
+                if (Objects.nonNull(examQuestion.getQuestion())) {
                     totalScore += examQuestion.getQuestion().getDefaultMark();
                 }
             }
 
             QueryGradeResponse queryGradeResponse = QueryGradeResponse.builder()
+                    .userId(courseUser.getUser().getId().getValue())
+                    .submissionId(Objects.isNull(examSubmission.getId()) ? null : examSubmission.getId().getValue())
                     .firstName(courseUser.getUser().getFirstName())
                     .lastName(courseUser.getUser().getLastName())
                     .email(courseUser.getUser().getEmail())
                     .lastSubmitAt(examSubmission.getSubmitTime())
+                    .lastMarkAt(examSubmission.getSubmitTime())
                     .status(Objects.isNull(examSubmission.status()) ? "NOT_SUBMITTED" : "SUBMITTED")
                     .score(score)
                     .maxScore(totalScore)

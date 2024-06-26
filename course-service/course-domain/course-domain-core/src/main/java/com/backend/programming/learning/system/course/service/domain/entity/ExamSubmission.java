@@ -14,9 +14,11 @@ public class ExamSubmission extends AggregateRoot<ExamSubmissionId> {
     private User user;
     private Integer submitCount;
     private ZonedDateTime startTime;
+    private ZonedDateTime endTime;
     private ZonedDateTime submitTime;
     private Type type;
     private Status status;
+    private Float score;
 
     private ExamSubmission(Builder builder) {
         super.setId(builder.examSubmissionId);
@@ -26,7 +28,16 @@ public class ExamSubmission extends AggregateRoot<ExamSubmissionId> {
         startTime = builder.startTime;
         submitTime = builder.submitTime;
         type = builder.type;
+        endTime = builder.endTime;
         status = builder.status;
+    }
+
+    public ZonedDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(ZonedDateTime endTime) {
+        this.endTime = endTime;
     }
 
     public static Builder builder() {
@@ -64,12 +75,19 @@ public class ExamSubmission extends AggregateRoot<ExamSubmissionId> {
     public void initializeExamSubmission() {
         setId(new ExamSubmissionId(UUID.randomUUID()));
         status = Status.SUBMITTED;
-//        submitTime = ZonedDateTime.now(ZoneId.of("UTC"));
     }
 
     public void initializeStartExamSubmission() {
         setId(new ExamSubmissionId(UUID.randomUUID()));
         status = Status.NOT_SUBMITTED;
+    }
+
+    public void setScore(Float score) {
+        this.score = score;
+    }
+
+    public Float getScore() {
+        return score;
     }
 
     public static final class Builder {
@@ -78,9 +96,11 @@ public class ExamSubmission extends AggregateRoot<ExamSubmissionId> {
         private User user;
         private Integer submissionCount;
         private ZonedDateTime startTime;
+        private ZonedDateTime endTime;
         private ZonedDateTime submitTime;
         private Type type;
         private Status status;
+        private Float score;
 
         private Builder() {
         }
@@ -96,6 +116,11 @@ public class ExamSubmission extends AggregateRoot<ExamSubmissionId> {
 
         public Builder exam(Exam val) {
             exam = val;
+            return this;
+        }
+
+        public Builder endTime(ZonedDateTime val) {
+            endTime = val;
             return this;
         }
 
@@ -126,6 +151,11 @@ public class ExamSubmission extends AggregateRoot<ExamSubmissionId> {
 
         public Builder status(Status val) {
             status = val;
+            return this;
+        }
+
+        public Builder score(Float val) {
+            score = val;
             return this;
         }
 

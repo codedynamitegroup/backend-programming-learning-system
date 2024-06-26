@@ -26,6 +26,18 @@ public class CourseGlobalExceptionHandler extends GlobalExceptionHandler {
     }
 
     @ResponseBody
+    @ExceptionHandler(value = {ExamSubmissionConflictException.class})
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorDTO handleException(ExamSubmissionConflictException examSubmissionConflictException) {
+        log.error(examSubmissionConflictException.getMessage(), examSubmissionConflictException);
+        return ErrorDTO.builder()
+                .code(HttpStatus.CONFLICT.value())
+                .status(HttpStatus.CONFLICT.getReasonPhrase())
+                .message(examSubmissionConflictException.getMessage())
+                .build();
+    }
+
+    @ResponseBody
     @ExceptionHandler(value = {AssignmentNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorDTO handleException(AssignmentNotFoundException assignmentNotFoundException) {

@@ -60,26 +60,30 @@ public class SharedSolutionHelper {
     public SharedSolution getDetailSharedSolution(GetSharedSolutionDetailCommand command) {
         User user = validateHelper.validateUserByEmail(command.getEmail());
         SharedSolution sharedSolution = validateHelper.validateSharedSolution(command.getSharedSolutionId(), user.getId().getValue());
-        sharedSolutionRepository.increaseViewByOne(sharedSolution.getId());
+        if(command.isIncreaseView())
+            sharedSolutionRepository.increaseViewByOne(sharedSolution.getId());
         return sharedSolution;
     }
 
     @Transactional
     public Page<SharedSolution> getSharedSolutionsByCodeQuestionId(GetSharedSolutionByCodeQuestionIdCommand command) {
-        CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(command.getCodeQuestionId());
+        User user = command.getEmail() == null? null: validateHelper.validateUserByEmail(command.getEmail());
+
+        CodeQuestion codeQuestion = command.getCodeQuestionId() != null? validateHelper.validateCodeQuestion(command.getCodeQuestionId()): null;
         
         List<TagId> tagIds = command.getFilterTagIds() == null || command.getFilterTagIds().isEmpty()?
                 null:
                 command.getFilterTagIds().stream().map(tagDataMapper::UUIDToTagId).toList();
 
         return sharedSolutionRepository.findByCodeQuestionId(
-                codeQuestion.getId(),
+                codeQuestion != null? codeQuestion.getId(): null,
                 command.getPageNum(),
                 command.getPageSize(),
                 command.getSortBy(),
                 command.getOrderBy(),
                 command.getSearch(),
-                tagIds);
+                tagIds,
+                user == null? null: user.getId());
     }
     //hello
 

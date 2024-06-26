@@ -28,6 +28,8 @@ public class CodeQuestionMessagingDataMapper {
 //                .constraints(model.getConstraints())
                 .failureMessages(model.getFailureMessages())
                 .sagaId(model.getSagaId())
+                .isPublic(model.getIsPublic())
+                .allowImport(model.getAllowImport())
                 .build();
     }
     public CodeQuestionUpdateRequestAvroModel
@@ -41,6 +43,8 @@ public class CodeQuestionMessagingDataMapper {
                 .setProblemStatement(payload.getProblemStatement())
                 .setMaxGrade(payload.getMaxGrade())
                 .setName(payload.getName())
+                .setIsPublic(payload.getIsPublic())
+                .setAllowImport(payload.getAllowImport())
                 .setCopyState(CopyState.valueOf(payload.getCopyState()))
 //                .setConstraints(payload.getConstraints())
                 .build();

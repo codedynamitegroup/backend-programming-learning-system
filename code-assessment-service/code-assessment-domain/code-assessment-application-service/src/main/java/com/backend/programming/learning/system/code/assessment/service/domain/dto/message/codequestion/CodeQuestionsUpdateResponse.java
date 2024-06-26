@@ -17,6 +17,8 @@ public class CodeQuestionsUpdateResponse {
     private String problemStatement;
     private Float maxGrade;
     private String name;
+    private Boolean isPublic;
+    private Boolean allowImport;
     private CopyState state;
     private String constraints;
     private UUID sagaId;

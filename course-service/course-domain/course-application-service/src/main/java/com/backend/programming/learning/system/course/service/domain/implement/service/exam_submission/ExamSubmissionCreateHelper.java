@@ -11,6 +11,7 @@ import com.backend.programming.learning.system.course.service.domain.entity.Ques
 import com.backend.programming.learning.system.course.service.domain.entity.QuestionSubmission;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.exception.ExamClosedException;
+import com.backend.programming.learning.system.course.service.domain.exception.ExamSubmissionConflictException;
 import com.backend.programming.learning.system.course.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam_submission.ExamSubmissionDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.AnswerOfQuestionRepository;
@@ -26,7 +27,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
@@ -140,13 +140,35 @@ public class ExamSubmissionCreateHelper {
             throw new ExamClosedException("Exam is closed");
         }
 
+        // Calculate endtime
+        ZonedDateTime endTime = createExamSubmissionCommand.examStartTime().plusSeconds(exam.getTimeLimit());
+
         User user = userRepository.findUser(createExamSubmissionCommand.userId())
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
+
+        // Get the latest exam submission
         ExamSubmission examSubmissionLast = examSubmissionRepository.findByExamAndUser(exam, user);
+
+        // Max attempt check
+        if(exam.getMaxAttempts() > 0 && // Unlimited attempt
+                examSubmissionLast.getSubmissionCount() >= exam.getMaxAttempts() &&
+                isExamSubmissionSubmitted(examSubmissionLast)
+        ) {
+            log.error("Submission limit exceeded");
+            throw new ExamSubmissionConflictException("Submission limit exceeded");
+        }
+
+        //check there is other on-going exam submission being taken
+        if(!Objects.isNull(examSubmissionLast.getExam()) && // No last submission --> first submission
+               !isExamSubmissionSubmitted(examSubmissionLast)) { // Exam time is not over
+            log.error("There is an on-going exam submission");
+            throw new RuntimeException("There is an on-going exam submission");
+        }
+
         ExamSubmission examSubmission = examSubmissionDataMapper
                 .createStartExamSubmissionCommandToExamSubmission(exam, user,
-                        Objects.isNull(examSubmissionLast) ? 1 : examSubmissionLast.getSubmissionCount() + 1,
-                        createExamSubmissionCommand);
+                        Objects.isNull(examSubmissionLast.getExam()) ? 1 : examSubmissionLast.getSubmissionCount() + 1,
+                        createExamSubmissionCommand, endTime);
         courseDomainService.createStartExamSubmission(examSubmission);
         return saveExamSubmission(examSubmission);
     }
@@ -157,5 +179,71 @@ public class ExamSubmissionCreateHelper {
 
     private Boolean isExamClosed(Exam exam) {
         return exam.getTimeClose().isBefore(ZonedDateTime.now());
+    }
+
+    private Boolean isExamSubmissionSubmitted(ExamSubmission examSubmission) {
+        // Haven't submit and exam time is not over
+        return !Objects.isNull(examSubmission.getSubmitTime()) || !examSubmission.getEndTime()
+                .isAfter(ZonedDateTime.now());
+    }
+
+    public void gradingExam(CreateExamSubmissionEndCommand createExamSubmissionEndCommand) {
+        Exam exam = examRepository.findBy(new ExamId(createExamSubmissionEndCommand.examId()));
+        User user = userRepository.findUser(createExamSubmissionEndCommand.userId())
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+        ExamSubmission examSubmissionLast = examSubmissionRepository.findByExamAndUser(exam, user);
+        List<QuestionSubmission> questionSubmissions = questionSubmissionRepository
+                .findAllByExamSubmissionId(examSubmissionLast.getId().getValue());
+
+        AtomicReference<Float> mark = new AtomicReference<>(0F);
+        AtomicReference<Float> totleMark = new AtomicReference<>(0F);
+
+        questionSubmissions.forEach(question -> {
+            Optional<Question> questionExam = questionRepository.findById(question.getQuestion().getId().getValue());
+
+            if (questionExam.isEmpty()) {
+                log.error("Question not found with id: {}", question.getQuestion().getId().getValue());
+                throw new QuestionNotFoundException("Question not found with id: " + question.getQuestion().getId().getValue());
+            }
+
+            List<AnswerOfQuestion> answerOfQuestion = answerOfQuestionRepository
+                    .findAllByQuestionId(question.getQuestion().getId().getValue());
+
+            Float defaultMark = questionExam.get().getDefaultMark();
+            AtomicReference<Float> grade = new AtomicReference<>(0F);
+            String contentStudent = question.getContent();
+
+            if (questionExam.get().getQtype().equals(QuestionType.SHORT_ANSWER)) {
+                answerOfQuestion.forEach(answer -> {
+                    String answerText = answer.getAnswer().replaceAll("<p>|</p>", "");
+                    if (answerText.equals(contentStudent)) {
+                        grade.set(defaultMark * answer.getFraction());
+                    }
+                });
+            } else if (questionExam.get().getQtype().equals(QuestionType.MULTIPLE_CHOICE)) {
+                answerOfQuestion.forEach(answer -> {
+                    String answerText = answer.getAnswer().replaceAll("<p>|</p>", "");
+                    if (answer.getId().getValue().toString().equals(contentStudent)) {
+                        grade.updateAndGet(v -> v + defaultMark * answer.getFraction());
+                    }
+                });
+            } else if (questionExam.get().getQtype().equals(QuestionType.TRUE_FALSE)) {
+                answerOfQuestion.forEach(answer -> {
+                    String answerText = answer.getAnswer().replaceAll("<p>|</p>", "");
+                    if (answerText.equals(contentStudent)) {
+                        grade.set(defaultMark * answer.getFraction());
+                    }
+                });
+            }
+
+            mark.updateAndGet(v -> v + grade.get());
+            totleMark.updateAndGet(v -> v + defaultMark);
+            question.setGrade(grade.get());
+            questionSubmissionRepository.save(question);
+        });
+
+        examSubmissionLast.setScore(mark.get());
+
+        examSubmissionRepository.save(examSubmissionLast);
     }
 }

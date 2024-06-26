@@ -15,6 +15,7 @@ import com.backend.programming.learning.system.course.service.domain.entity.Exam
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.exception.ExamClosedException;
 import com.backend.programming.learning.system.course.service.domain.exception.ExamNotFoundException;
+import com.backend.programming.learning.system.course.service.domain.exception.ExamSubmissionNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamSubmissionRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
@@ -89,7 +90,7 @@ public class ExamSubmissionRepositoryImpl implements ExamSubmissionRepository {
                 .findLatestExamSubmission(createExamSubmissionEndCommand.examId(), createExamSubmissionEndCommand.userId())
                 .orElseThrow(() -> {
                     log.error("Exam submission not found with examId: {} and userId: {}", createExamSubmissionEndCommand.examId(), createExamSubmissionEndCommand.userId());
-                    return new RuntimeException("Exam submission not found");
+                    return new ExamSubmissionNotFoundException("Exam submission not found");
                 });
 
         examSubmissionEntity.setSubmitTime(createExamSubmissionEndCommand.examSubmissionTime());
