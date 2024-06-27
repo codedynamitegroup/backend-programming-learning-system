@@ -6,6 +6,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.calendarevent.DeleteCalendarEventResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.calendarevent.QueryAllCalendarEventsCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.calendarevent.QueryAllCalendarEventsResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.calendarevent.UpdateCalendarEventCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.calendarevent.UpdateCalendarEventResponse;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.calendarevent.CalendarEventApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -16,6 +18,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.ZonedDateTime;
@@ -50,8 +56,28 @@ public class CalendarEventController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createCalendarEventResponse);
     }
 
-    @GetMapping
-    @Operation(summary = "Get all calendar events.")
+    @PutMapping("/{id}")
+    @Operation(summary = "Update calendar event.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreateCalendarEventResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<UpdateCalendarEventResponse> updateCalendarEvent(
+            @PathVariable UUID id,
+            @RequestBody UpdateCalendarEventCommand updateCalendarEventCommand) {
+        log.info("Updating calendar event: {}", updateCalendarEventCommand);
+        UpdateCalendarEventResponse updateCalendarEventResponse =
+                calendarEventApplicationService.updateCalendarEventResponse(id, updateCalendarEventCommand);
+        log.info("Calendar event created: {}", updateCalendarEventResponse);
+
+        return ResponseEntity.ok(updateCalendarEventResponse);
+    }
+
+    @PostMapping("/query/my-calendar-events")
+    @Operation(summary = "Get all calendar events of an user.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
@@ -60,13 +86,21 @@ public class CalendarEventController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllCalendarEventsResponse> getAllCalendarEvents(
-            @RequestParam ZonedDateTime fromTime,
-            @RequestParam ZonedDateTime toTime) {
+           @RequestBody QueryAllCalendarEventsCommand queryAllCalendarEventsCommand) {
+        String email = null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
         QueryAllCalendarEventsResponse queryAllCalendarEventsResponse =
                 calendarEventApplicationService.queryAllCalendarEventsResponse(QueryAllCalendarEventsCommand
                         .builder()
-                        .fromTime(fromTime)
-                        .toTime(toTime)
+                        .courseId(queryAllCalendarEventsCommand.getCourseId())
+                        .fromTime(queryAllCalendarEventsCommand.getFromTime())
+                        .toTime(queryAllCalendarEventsCommand.getToTime())
+                        .email(email)
                         .build());
         log.info("Returning all calendar events: {}", queryAllCalendarEventsResponse);
         return ResponseEntity.ok(queryAllCalendarEventsResponse);

@@ -21,4 +21,9 @@ public interface CalendarEventRepository {
 
     List<CalendarEvent> findAllByStartTimeAfterTime(ZonedDateTime time);
     List<CalendarEvent> saveAllCalendarEvents(List<CalendarEvent> calendarEvents);
+    List<CalendarEvent> findAll(
+            List<UUID> courseIds,
+            ZonedDateTime fromTime,
+            ZonedDateTime toTime,
+            UUID userId);
 }

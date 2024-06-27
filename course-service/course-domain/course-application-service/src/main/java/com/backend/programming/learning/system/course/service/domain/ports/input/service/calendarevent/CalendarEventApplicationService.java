@@ -7,7 +7,11 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.calendarevent.QueryAllCalendarEventsCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.calendarevent.QueryAllCalendarEventsResponse;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.calendarevent.UpdateCalendarEventCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.calendarevent.UpdateCalendarEventResponse;
 import jakarta.validation.Valid;
+
+import java.util.UUID;
 
 public interface CalendarEventApplicationService {
     CreateCalendarEventResponse createCalendarEventResponse(
@@ -18,5 +22,9 @@ public interface CalendarEventApplicationService {
 
     DeleteCalendarEventResponse deleteCalendarEventResponse(
             @Valid DeleteCalendarEventCommand deleteCalendarEventCommand);
+
+    UpdateCalendarEventResponse updateCalendarEventResponse(
+            UUID calendarEventId,
+            @Valid UpdateCalendarEventCommand updateCalendarEventCommand);
 
 }

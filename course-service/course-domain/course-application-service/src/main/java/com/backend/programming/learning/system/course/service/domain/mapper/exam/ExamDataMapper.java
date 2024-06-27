@@ -118,4 +118,28 @@ public class ExamDataMapper {
                 .message(message)
                 .build();
     }
+
+    public  ExamResponseEntity examToExamResponseEntity(Exam exam) {
+        return ExamResponseEntity.builder()
+                .id(exam.getId().getValue())
+                .courseId(exam.getCourse().getId().getValue())
+                .courseName(exam.getCourse().getName())
+                .shuffleAnswers(exam.getShuffleAnswers())
+                .name(exam.getName())
+                .scores(exam.getScore())
+                .maxScores(exam.getMaxScore())
+                .timeOpen(exam.getTimeOpen())
+                .timeClose(exam.getTimeClose())
+                .timeLimit(exam.getTimeLimit())
+                .intro(exam.getIntro())
+                .overdueHanding(exam.getOverdueHanding())
+                .canRedoQuestions(exam.getCanRedoQuestions())
+                .maxAttempts(exam.getMaxAttempts())
+                .shuffleAnswers(exam.getShuffleAnswers())
+                .gradeMethod(exam.getGradeMethod())
+                .createdAt(exam.getCreatedAt())
+                .updatedAt(exam.getUpdatedAt())
+                .maxPage(exam.getMaxPage())
+                .build();
+    }
 }

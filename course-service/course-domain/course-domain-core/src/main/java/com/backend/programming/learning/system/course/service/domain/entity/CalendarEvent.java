@@ -17,20 +17,13 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
     private ZonedDateTime startTime;
     private ZonedDateTime endTime;
     private User user;
-    private UUID courseId;
+    private Course course;
     private UUID contestId;
+    private Exam exam;
+    private Assignment assignment;
     private NotificationComponentType component;
-    private Boolean isStartTimeNotified;
-    private Boolean isEndTimeNotified;
     private NotificationNotifyTime notificationNotifyTime;
     private ZonedDateTime createdAt;
-
-    public void initializeCalendarEvent() {
-        setId(new CalendarEventId(UUID.randomUUID()));
-        isStartTimeNotified = false;
-        isEndTimeNotified = false;
-        createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
-    }
 
     private CalendarEvent(Builder builder) {
         super.setId(builder.calendarEventId);
@@ -40,11 +33,11 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
         setStartTime(builder.startTime);
         setEndTime(builder.endTime);
         setUser(builder.user);
-        setCourseId(builder.courseId);
+        setCourse(builder.course);
         setContestId(builder.contestId);
+        setExam(builder.exam);
+        setAssignment(builder.assignment);
         setComponent(builder.component);
-        isStartTimeNotified = builder.isStartTimeNotified;
-        isEndTimeNotified = builder.isEndTimeNotified;
         setNotificationNotifyTime(builder.notificationNotifyTime);
         setCreatedAt(builder.createdAt);
     }
@@ -53,6 +46,10 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
         return new Builder();
     }
 
+    public void initializeCalendarEvent() {
+        setId(new CalendarEventId(UUID.randomUUID()));
+        createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
+    }
 
     public String getName() {
         return name;
@@ -102,12 +99,12 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
         this.user = user;
     }
 
-    public UUID getCourseId() {
-        return courseId;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCourseId(UUID courseId) {
-        this.courseId = courseId;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public UUID getContestId() {
@@ -118,28 +115,28 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
         this.contestId = contestId;
     }
 
+    public Exam getExam() {
+        return exam;
+    }
+
+    public void setExam(Exam exam) {
+        this.exam = exam;
+    }
+
+    public Assignment getAssignment() {
+        return assignment;
+    }
+
+    public void setAssignment(Assignment assignment) {
+        this.assignment = assignment;
+    }
+
     public NotificationComponentType getComponent() {
         return component;
     }
 
     public void setComponent(NotificationComponentType component) {
         this.component = component;
-    }
-
-    public Boolean getStartTimeNotified() {
-        return isStartTimeNotified;
-    }
-
-    public void setStartTimeNotified(Boolean startTimeNotified) {
-        isStartTimeNotified = startTimeNotified;
-    }
-
-    public Boolean getEndTimeNotified() {
-        return isEndTimeNotified;
-    }
-
-    public void setEndTimeNotified(Boolean endTimeNotified) {
-        isEndTimeNotified = endTimeNotified;
     }
 
     public NotificationNotifyTime getNotificationNotifyTime() {
@@ -166,11 +163,11 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
         private ZonedDateTime startTime;
         private ZonedDateTime endTime;
         private User user;
-        private UUID courseId;
+        private Course course;
         private UUID contestId;
+        private Exam exam;
+        private Assignment assignment;
         private NotificationComponentType component;
-        private Boolean isStartTimeNotified;
-        private Boolean isEndTimeNotified;
         private NotificationNotifyTime notificationNotifyTime;
         private ZonedDateTime createdAt;
 
@@ -212,8 +209,8 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
             return this;
         }
 
-        public Builder courseId(UUID val) {
-            courseId = val;
+        public Builder course(Course val) {
+            course = val;
             return this;
         }
 
@@ -222,18 +219,18 @@ public class CalendarEvent extends AggregateRoot<CalendarEventId> {
             return this;
         }
 
+        public Builder exam(Exam val) {
+            exam = val;
+            return this;
+        }
+
+        public Builder assignment(Assignment val) {
+            assignment = val;
+            return this;
+        }
+
         public Builder component(NotificationComponentType val) {
             component = val;
-            return this;
-        }
-
-        public Builder isStartTimeNotified(Boolean val) {
-            isStartTimeNotified = val;
-            return this;
-        }
-
-        public Builder isEndTimeNotified(Boolean val) {
-            isEndTimeNotified = val;
             return this;
         }
 

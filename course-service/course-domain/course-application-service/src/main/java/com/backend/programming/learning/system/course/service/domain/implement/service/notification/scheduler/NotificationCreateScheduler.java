@@ -14,6 +14,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.*;
@@ -70,12 +71,12 @@ public class NotificationCreateScheduler {
                     calendarEvent.getNotificationNotifyTime());
             if (newNotificationNotifyTime != null) {
                 // TODO: DO FOR REMAINING COMPONENTS
+                // Get the minutes before the contest starts
+                long minutesBeforeContestStart = Duration.between(
+                        ZonedDateTime.now(ZoneId.of("UTC")),
+                        calendarEvent.getStartTime()).toMinutes();
                 switch (calendarEvent.getComponent()) {
                     case CONTEST: {
-                        // Get the minutes before the contest starts
-                        int minutesBeforeContestStart =
-                                calendarEvent.getStartTime().minusMinutes(
-                                        ZonedDateTime.now(ZoneId.of("UTC")).getMinute()).getMinute();
                         // Build full message for contest
                         String fullMessage = "Contest " + calendarEvent.getName() + " is about to start in "
                                 + minutesBeforeContestStart + " minutes";
@@ -92,7 +93,7 @@ public class NotificationCreateScheduler {
                                 .smallMessage(smallMessage)
                                 .component(calendarEvent.getComponent())
                                 .eventType(calendarEvent.getEventType())
-                                .contextUrl("contest/" + calendarEvent.getContestId())
+                                .contextUrl("/contest/" + calendarEvent.getContestId() + "/information")
                                 .contextUrlName("Contest")
                                 .isRead(false)
                                 .timeRead(null)
@@ -141,48 +142,32 @@ public class NotificationCreateScheduler {
     private NotificationNotifyTime isTimeValidToCreateNotification(ZonedDateTime time,
                                                                    NotificationNotifyTime notificationNotifyTime) {
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UTC"));
+        log.info("Time: {}, now: {}", time, now);
+        log.info("NotificationNotifyTime: {}", notificationNotifyTime);
         // Check multiple cases for notificationNotifyTime
-        if (notificationNotifyTime == null) {
-            // Check if the time is between now and 24 hours
-            if (time.isAfter(now)
-                    && time.isBefore(now.plusDays(1))) {
+        if (time.isAfter(now)) {
+            log.info("Time is after now");
+            if (time.isBefore(now.plusHours(1)) && notificationNotifyTime != NotificationNotifyTime.ONE_HOUR) {
+                log.info("Time is before now plus 1 hour");
+                return NotificationNotifyTime.ONE_HOUR;
+            } else if (time.isBefore(now.plusHours(3)) && notificationNotifyTime != NotificationNotifyTime.THREE_HOURS) {
+                log.info("Time is before now plus 3 hours");
+                return NotificationNotifyTime.THREE_HOURS;
+            } else if (time.isBefore(now.plusHours(6)) && notificationNotifyTime != NotificationNotifyTime.SIX_HOURS) {
+                log.info("Time is before now plus 6 hours");
+                return NotificationNotifyTime.SIX_HOURS;
+            } else if (time.isBefore(now.plusHours(12)) && notificationNotifyTime != NotificationNotifyTime.TWELVE_HOURS) {
+                log.info("Time is before now plus 12 hours");
+                return NotificationNotifyTime.TWELVE_HOURS;
+            } else if (time.isBefore(now.plusDays(1)) && notificationNotifyTime != NotificationNotifyTime.TWENTY_FOUR_HOURS) {
+                log.info("Time is before now plus 1 day");
                 return NotificationNotifyTime.TWENTY_FOUR_HOURS;
             } else {
-                return null;
-            }
-        } else if (notificationNotifyTime == NotificationNotifyTime.TWENTY_FOUR_HOURS) {
-            // Check if the time is between now and 12 hours
-            if (time.isAfter(now)
-                    && time.isBefore(now.plusHours(12))) {
-                return NotificationNotifyTime.TWELVE_HOURS;
-            } else {
-                return null;
-            }
-        } else if (notificationNotifyTime == NotificationNotifyTime.TWELVE_HOURS) {
-            // Check if the time is between now and 6 hours
-            if (time.isAfter(now)
-                    && time.isBefore(now.plusHours(6))) {
-                return NotificationNotifyTime.SIX_HOURS;
-            } else {
-                return null;
-            }
-        } else if (notificationNotifyTime == NotificationNotifyTime.SIX_HOURS) {
-            // Check if the time is between now and 3 hours
-            if (time.isAfter(now)
-                    && time.isBefore(now.plusHours(3))) {
-                return NotificationNotifyTime.THREE_HOURS;
-            } else {
-                return null;
-            }
-        } else if (notificationNotifyTime == NotificationNotifyTime.THREE_HOURS) {
-            // Check if the time is between now and 1 hour
-            if (time.isAfter(now)
-                    && time.isBefore(now.plusHours(1))) {
-                return NotificationNotifyTime.ONE_HOUR;
-            } else {
+                log.info("Time is not before now plus 1 day, 12 hours, 6 hours, 3 hours, 1 hour");
                 return null;
             }
         } else {
+            log.info("Time is not after now");
             return null;
         }
     }

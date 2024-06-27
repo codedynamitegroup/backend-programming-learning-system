@@ -22,10 +22,45 @@ public class CourseDataAccessMapper {
     private final OrganizationDataAccessMapper organizationDataAccessMapper;
 
     public CourseEntity courseToCourseEntity(Course course) {
-        UserEntity createdBy = userDataAccessMapper.userToUserEntity(course.getCreatedBy());
-        UserEntity updatedBy = userDataAccessMapper.userToUserEntity(course.getUpdatedBy());
-        CourseTypeEntity courseType = courseTypeDataAccessMapper.courseTypeToCourseTypeEntity(course.getCourseType());
-        OrganizationEntity organization = organizationDataAccessMapper.organizationToOrganizationEntity(course.getOrganization());
+        UserEntity createdBy =
+                course.getCreatedBy() == null ? null :
+                userDataAccessMapper.userToUserEntity(course.getCreatedBy());
+        UserEntity updatedBy =
+                course.getUpdatedBy() == null ? null :
+                userDataAccessMapper.userToUserEntity(course.getUpdatedBy());
+        CourseTypeEntity courseType =
+                course.getCourseType() == null ? null :
+                courseTypeDataAccessMapper.courseTypeToCourseTypeEntity(course.getCourseType());
+        OrganizationEntity organization =
+                course.getOrganization() == null ? null :
+                organizationDataAccessMapper.organizationToOrganizationEntity(course.getOrganization());
+        return CourseEntity.builder()
+                .id(course.getId().getValue())
+                .courseIdMoodle(course.getCourseIdMoodle())
+                .name(course.getName())
+                .courseType(courseType)
+                .visible(course.getVisible())
+                .createdBy(createdBy)
+                .updatedBy(updatedBy)
+                .createdAt(course.getCreatedAt())
+                .updatedAt(course.getUpdatedAt())
+                .organization(organization)
+                .build();
+    }
+
+    public CourseEntity courseToCourseEntityHideSensitiveData(Course course) {
+        UserEntity createdBy =
+                course.getCreatedBy() == null ? null :
+                        userDataAccessMapper.userToUserEntity(course.getCreatedBy());
+        UserEntity updatedBy =
+                course.getUpdatedBy() == null ? null :
+                        userDataAccessMapper.userToUserEntity(course.getUpdatedBy());
+        CourseTypeEntity courseType =
+                course.getCourseType() == null ? null :
+                        courseTypeDataAccessMapper.courseTypeToCourseTypeEntity(course.getCourseType());
+        OrganizationEntity organization =
+                course.getOrganization() == null ? null :
+                        organizationDataAccessMapper.organizationToOrganizationEntityHideSensitiveData(course.getOrganization());
         return CourseEntity.builder()
                 .id(course.getId().getValue())
                 .courseIdMoodle(course.getCourseIdMoodle())

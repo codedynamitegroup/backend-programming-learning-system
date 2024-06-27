@@ -38,6 +38,18 @@ public class OrganizationDataAccessMapper {
                 .build();
     }
 
+    public OrganizationEntity organizationToOrganizationEntityHideSensitiveData(Organization organization) {
+        return OrganizationEntity.builder()
+                .id(organization.getId().getValue())
+                .name(organization.getName())
+                .description(organization.getDescription())
+                .apiKey(null)
+                .moodleUrl(null)
+                .createdAt(organization.getCreatedAt())
+                .updatedAt(organization.getUpdatedAt())
+                .build();
+    }
+
     public Organization organizationEntityToOrganization(OrganizationEntity organization) {
         return Organization.builder()
                 .id(new OrganizationId(organization.getId()))

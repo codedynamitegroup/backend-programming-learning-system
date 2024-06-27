@@ -6,10 +6,14 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.calendarevent.DeleteCalendarEventResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.calendarevent.QueryAllCalendarEventsCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.calendarevent.QueryAllCalendarEventsResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.calendarevent.UpdateCalendarEventCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.calendarevent.UpdateCalendarEventResponse;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.calendarevent.CalendarEventApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+
+import java.util.UUID;
 
 @Service
 @Validated
@@ -34,5 +38,13 @@ class CalendarEventApplicationServiceImpl implements CalendarEventApplicationSer
     @Override
     public DeleteCalendarEventResponse deleteCalendarEventResponse(DeleteCalendarEventCommand deleteCalendarEventCommand) {
         return calendarEventCommandHandler.deleteCalendarEvent(deleteCalendarEventCommand);
+    }
+
+    @Override
+    public UpdateCalendarEventResponse updateCalendarEventResponse(
+            UUID calendarEventId,
+            UpdateCalendarEventCommand updateCalendarEventCommand) {
+        return calendarEventCommandHandler.updateCalendarEvent(
+                    calendarEventId, updateCalendarEventCommand);
     }
 }

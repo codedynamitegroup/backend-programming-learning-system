@@ -22,4 +22,6 @@ public interface CourseRepository {
     void deleteById(UUID courseId);
 
     void deleteByMoodleId(Integer courseMoodleId);
+
+    Optional<Course> findCourseById(UUID courseId);
 }
