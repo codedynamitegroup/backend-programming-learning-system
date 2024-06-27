@@ -10,6 +10,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionOverviewResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamSubmissionId;
 import jakarta.validation.Valid;
 
 import java.util.List;
@@ -39,4 +40,6 @@ public interface ExamSubmissionApplicationService {
     QueryAllStudentExamSubmissionResponse findByExamId(
             @Valid ExamId examId,
             @Valid QueryAllStudentExamSubmissionCommand queryAllStudentExamSubmissionCommand);
+
+    void updateStatusGrade(ExamSubmissionId examSubmissionId);
 }

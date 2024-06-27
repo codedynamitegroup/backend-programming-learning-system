@@ -10,6 +10,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.exam_submission.ExamSubmissionApplicationService;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamSubmissionId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -68,4 +69,10 @@ public class ExamSubmissionApplicationImpl implements ExamSubmissionApplicationS
             QueryAllStudentExamSubmissionCommand queryAllStudentExamSubmissionCommand) {
         return examSubmissionCommandHandler.findByExamId(examId, queryAllStudentExamSubmissionCommand);
     }
+
+    @Override
+    public void updateStatusGrade(ExamSubmissionId examSubmissionId) {
+        examSubmissionCommandHandler.updateStatusGrade(examSubmissionId);
+    }
+
 }

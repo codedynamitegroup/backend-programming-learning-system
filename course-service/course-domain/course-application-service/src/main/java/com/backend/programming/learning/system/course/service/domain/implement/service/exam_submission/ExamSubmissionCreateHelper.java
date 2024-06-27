@@ -12,6 +12,7 @@ import com.backend.programming.learning.system.course.service.domain.entity.Ques
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.exception.ExamClosedException;
 import com.backend.programming.learning.system.course.service.domain.exception.ExamSubmissionConflictException;
+import com.backend.programming.learning.system.course.service.domain.exception.ExamSubmissionNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam_submission.ExamSubmissionDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.AnswerOfQuestionRepository;
@@ -21,6 +22,8 @@ import com.backend.programming.learning.system.course.service.domain.ports.outpu
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.QuestionSubmissionRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamSubmissionId;
+import com.backend.programming.learning.system.course.service.domain.valueobject.Status;
 import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
 import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import lombok.RequiredArgsConstructor;
@@ -245,5 +248,11 @@ public class ExamSubmissionCreateHelper {
         examSubmissionLast.setScore(mark.get());
 
         examSubmissionRepository.save(examSubmissionLast);
+    }
+
+    public void updateStatusGrade(ExamSubmissionId examSubmissionId) {
+        ExamSubmission examSubmission = examSubmissionRepository.findBy(examSubmissionId.getValue());
+        examSubmission.setStatus(Status.GRADED);
+        examSubmissionRepository.save(examSubmission);
     }
 }

@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.exam_submission.ExamSubmissionApplicationService;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamSubmissionId;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -170,5 +171,22 @@ public class ExamSubmissionController {
         QueryExamSubmissionOverviewResponse response = examSubmissionApplicationService.findLatestOnGoingSubmission(examId, userId);
         log.info("Latest exam submission: {}", response);
         return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("/grading/submission/{submissionId}")
+    @Operation(summary = "Grading exam submission.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = String.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<Void> updateStatusGrade(
+            @PathVariable UUID submissionId)
+    {
+        log.info("Grading exam submission");
+        examSubmissionApplicationService.updateStatusGrade(new ExamSubmissionId(submissionId));
+        return ResponseEntity.ok().build();
     }
 }

@@ -32,6 +32,10 @@ public class ExamSubmission extends AggregateRoot<ExamSubmissionId> {
         status = builder.status;
     }
 
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     public ZonedDateTime getEndTime() {
         return endTime;
     }
