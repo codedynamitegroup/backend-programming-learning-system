@@ -591,7 +591,7 @@ INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample
 VALUES ('8004c1cc-8b12-4ced-8277-fd584bcbf9f3', 'e557b35c-715e-4d21-8aaf-8c86ad5690b1', '2024 2 29', '2024-02-28, 2024-03-01', false);
 
 -- Case: input '2024-12-31' - end of the year
-INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+INSERT INTO test_cases (id, code_question_i5a9a4559-23c6-4c7a-978c-ee5fcefced7ad, input_data, output_data, is_sample)
 VALUES ('51055fa5-1662-4e8a-9fdf-bd7359f41c2f', 'e557b35c-715e-4d21-8aaf-8c86ad5690b1', '2024 12 31', '2024-12-30, 2025-01-01', false);
 
 -- Case: input '2024-07-01'
@@ -601,17 +601,17 @@ VALUES ('c881861c-4ead-4cdd-a88a-db6ce0944779', 'e557b35c-715e-4d21-8aaf-8c86ad5
 --26
 -- Sample test case for input '2024-03-01' which is a Friday
 INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
-VALUES ('e1b7a1d6-3d7f-4a72-80d8-30d5e1c4e5a4', '219cafcd-d4fe-4fb0-81fd-be2da867f9d4', '2024-03-01', 'Friday', true);
+VALUES ('6bd949ed-26e0-4b62-b210-d67bbebd87a7', '219cafcd-d4fe-4fb0-81fd-be2da867f9d4', '2024-03-01', 'Friday', true);
 
 -- Additional test cases (non-sample cases)
 -- Case: input '2024-01-01' which is a Monday
 INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
-VALUES ('f2c8b2e7-4e8f-4f59-90a9-21c6e8d5f6a7', '219cafcd-d4fe-4fb0-81fd-be2da867f9d4', '2024-01-01', 'Monday', false);
+VALUES ('0ae61e21-ee29-47de-9288-f190d7fbfee4', '219cafcd-d4fe-4fb0-81fd-be2da867f9d4', '2024-01-01', 'Monday', false);
 
 -- Case: input '2024-12-31' which is a Tuesday
 INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
-VALUES ('g3d9c3fe-5e9f-4f6a-bfb0-9d3e7d4f6a7c', '219cafcd-d4fe-4fb0-81fd-be2da867f9d4', '2024-12-31', 'Tuesday', false);
+VALUES ('0668fbc4-85f0-4786-bb27-5a5df6543fb3', '219cafcd-d4fe-4fb0-81fd-be2da867f9d4', '2024-12-31', 'Tuesday', false);
 
 -- Case: input '2024-02-29' which is a Thursday (Leap year)
 INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
-VALUES ('h4e0d4gf-6fa0-5f7b-cg1d-0e4f8h5g7i9j', '219cafcd-d4fe-4fb0-81fd-be2da867f9d4', '2024-02-29', 'Thursday', false);
+VALUES ('3a645e59-063c-4e05-b2e8-b866b04abe9b', '219cafcd-d4fe-4fb0-81fd-be2da867f9d4', '2024-02-29', 'Thursday', false);
