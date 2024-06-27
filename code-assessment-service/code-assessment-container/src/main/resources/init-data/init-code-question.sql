@@ -183,16 +183,30 @@ INSERT INTO programming_language_code_question(programming_language_id,code_ques
 VALUES
     ('cba00cd8-8114-4bc4-84e6-499c27467978', '30a01889-fbc9-4eaf-9f4e-fa0341ea6ced', 1, 409600, true, 'I2luY2x1ZGUgPGlvc3RyZWFtPgojaW5jbHVkZSA8c3RyaW5nPg==', 'c3RkOjpzdHJpbmcgY2xhc3NpZnlUcmlhbmdsZShpbnQgYSwgaW50IGIsIGludCBjKSB7CiAgICAvL3lvdXIgY29kZSBnb2VzIGhlcmUKfQ==', 'CmludCBtYWluKCkgewogICAgaW50IGEsIGIsIGM7CiAgICBzdGQ6OmNpbiA+PiBhID4+IGIgPj4gYzsKCiAgICBzdGQ6OnN0cmluZyByZXN1bHQgPSBjbGFzc2lmeVRyaWFuZ2xlKGEsIGIsIGMpOwoKICAgIHN0ZDo6Y291dCA8PCByZXN1bHQ7CgogICAgcmV0dXJuIDA7Cn0K');
 
+--24
+INSERT INTO public.qtype_code_questions(user_id, id, question_id ,dsl_template , name ,problem_statement ,input_format ,output_format ,copy_state ,failure_messages ,constraints, max_grade, difficulty)
+VALUES
+    ('b029f559-52a8-4699-b595-71161498ed8c', '25315a21-41a1-464d-b9dc-d4ec978cd2ff', 'b6484e21-6937-489c-b031-b71767994761', 'template', 'Determine number of days in a month', E'<p>Write a program to input a month and a year. Determine the number of days in that month</p><p>Example:</p><pre class=\"ql-syntax\" spellcheck=\"false\">Input:\n1 2020\nOutput:\n31\n</pre>', 'A month as an integer and a year as an integer', 'Number of days', 'CREATED', '', '1<= month <= 12, 2000<= year <= 2024', 10, 'EASY');
+INSERT INTO programming_language_code_question(programming_language_id,code_question_id,time_limit,memory_limit,active, head_code, body_code, tail_code)
+VALUES
+    ('cba00cd8-8114-4bc4-84e6-499c27467978', '25315a21-41a1-464d-b9dc-d4ec978cd2ff', 1, 409600, true, 'I2luY2x1ZGUgPGlvc3RyZWFtPg==', 'aW50IGdldERheXNJbk1vbnRoKGludCBtb250aCwgaW50IHllYXIpIHsKICAgIC8veW91ciBjb2RlIGdvZXMgaGVyZQp9', 'aW50IG1haW4oKSB7CiAgICBpbnQgbW9udGgsIHllYXI7CiAgICBzdGQ6OmNpbiA+PiBtb250aCA+PiB5ZWFyOwoKICAgIGludCBkYXlzID0gZ2V0RGF5c0luTW9udGgobW9udGgsIHllYXIpOwoKICAgIHN0ZDo6Y291dCA8PCBkYXlzOwoKICAgIHJldHVybiAwOwp9Cg==');
 
+--25
 INSERT INTO public.qtype_code_questions(user_id, id, question_id ,dsl_template , name ,problem_statement ,input_format ,output_format ,copy_state ,failure_messages ,constraints, max_grade, difficulty)
 VALUES
-    ('b029f559-52a8-4699-b595-71161498ed8c', '25315a21-41a1-464d-b9dc-d4ec978cd2ff', 'b6484e21-6937-489c-b031-b71767994761', 'template', 'code question name 02e8ceaa', 'code question statement', 'input format', 'output format', 'CREATED', '', 'None', 10, 'HARD');
+    ('b029f559-52a8-4699-b595-71161498ed8c', 'e557b35c-715e-4d21-8aaf-8c86ad5690b1', 'b6484e21-6937-489c-b031-b71767994762', 'template', 'Previous and next day', E'<p>Write a program to input a date, find the previous day and the next day</p><p>Example:</p><pre class=\"ql-syntax\" spellcheck=\"false\">Input:\n2024 6 26\nOutput:\n2024-06-25, 2024-06-27\n</pre>', 'YYYY mm dd', E'<p>YYYY-mm-dd, YYYY-mm-dd</p><p>Note: The first day is the previous day</p>', 'CREATED', '', 'year = 2024', 10, 'MEDIUM');
+INSERT INTO programming_language_code_question(programming_language_id,code_question_id,time_limit,memory_limit,active, head_code, body_code, tail_code)
+VALUES
+    ('cba00cd8-8114-4bc4-84e6-499c27467978', 'e557b35c-715e-4d21-8aaf-8c86ad5690b1', 1, 819200, true, 'I2luY2x1ZGUgPGlvc3RyZWFtPg==', 'dm9pZCBnZXRQcmV2aW91c0RheShpbnQgJmRheSwgaW50ICZtb250aCwgaW50ICZ5ZWFyKSB7CiAgICAvL3lvdXIgY29kZSBnb2VzIGhlcmUKfQoKdm9pZCBnZXROZXh0RGF5KGludCAmZGF5LCBpbnQgJm1vbnRoLCBpbnQgJnllYXIpIHsKICAgIC8veW91ciBjb2RlIGdvZXMgaGVyZQp9', 'aW50IG1haW4oKSB7CiAgICBpbnQgZGF5LCBtb250aCwgeWVhcjsKCiAgICBzdGQ6OmNpbiA+PiBkYXkgPj4gbW9udGggPj4geWVhcjsKCiAgICBpbnQgcHJldkRheSA9IGRheSwgcHJldk1vbnRoID0gbW9udGgsIHByZXZZZWFyID0geWVhcjsKICAgIGdldFByZXZpb3VzRGF5KHByZXZEYXksIHByZXZNb250aCwgcHJldlllYXIpOwoKICAgIGludCBuZXh0RGF5ID0gZGF5LCBuZXh0TW9udGggPSBtb250aCwgbmV4dFllYXIgPSB5ZWFyOwogICAgZ2V0TmV4dERheShuZXh0RGF5LCBuZXh0TW9udGgsIG5leHRZZWFyKTsKCiAgICAvLyB5b3Ugd2lsbCBwcmludCB0aGUgcmVzdWx0IGhlcmUKCiAgICByZXR1cm4gMDsKfQ==');
+
+--26
 INSERT INTO public.qtype_code_questions(user_id, id, question_id ,dsl_template , name ,problem_statement ,input_format ,output_format ,copy_state ,failure_messages ,constraints, max_grade, difficulty)
 VALUES
-    ('b029f559-52a8-4699-b595-71161498ed8c', 'e557b35c-715e-4d21-8aaf-8c86ad5690b1', 'b6484e21-6937-489c-b031-b71767994762', 'template', 'code question name 9f4f3a63', 'code question statement', 'input format', 'output format', 'CREATED', '', 'None', 10, 'EASY');
-INSERT INTO public.qtype_code_questions(user_id, id, question_id ,dsl_template , name ,problem_statement ,input_format ,output_format ,copy_state ,failure_messages ,constraints, max_grade, difficulty)
+    ('b029f559-52a8-4699-b595-71161498ed8c', '219cafcd-d4fe-4fb0-81fd-be2da867f9d4', 'b6484e21-6937-489c-b031-b71767994763', 'template', 'Determine the Day of the Week from a Given Date', E'<p>Write a program to input a day, month, and year. Determine the day of the week for that date</p><p>Example:</p><pre class=\"ql-syntax\" spellcheck=\"false\">Input:\n2024-03-01\nOutput:\nFriday\n</pre>', 'YYYY-mm-dd', 'One of the day in Monday to Sunday', 'CREATED', '', '1<= year <= 2024', 10, 'HARD');
+INSERT INTO programming_language_code_question(programming_language_id,code_question_id,time_limit,memory_limit,active, head_code, body_code, tail_code)
 VALUES
-    ('b029f559-52a8-4699-b595-71161498ed8c', '219cafcd-d4fe-4fb0-81fd-be2da867f9d4', 'b6484e21-6937-489c-b031-b71767994763', 'template', 'code question name 6abcd7cb', 'code question statement', 'input format', 'output format', 'CREATED', '', 'None', 10, 'EASY');
+    ('cba00cd8-8114-4bc4-84e6-499c27467978', '219cafcd-d4fe-4fb0-81fd-be2da867f9d4', 1, 819200, true, 'I2luY2x1ZGUgPGlvc3RyZWFtPgojaW5jbHVkZSA8c3RyaW5nPg==', 'c3RkOjpzdHJpbmcgZ2V0RGF5T2ZXZWVrKHN0ZDo6c3RyaW5nIGRhdGUpIHsKICAgIC8veW91ciBjb2RlIGdvZXMgaGVyZQp9', 'aW50IG1haW4oKSB7CiAgICBzdGQ6OnN0cmluZyBkYXRhOwogICAgc3RkOjpjaW4gPj4gZGF0ZTsKICAgIAogICAgc3RkOjpzdHJpbmcgZGF5T2ZXZWVrID0gZ2V0RGF5T2ZXZWVrKGRhdGUpOwogICAgc3RkOjpjb3V0IDw8IGRheU9mV2VlazsKICAgIAogICAgcmV0dXJuIDA7Cn0=');
+
 INSERT INTO public.qtype_code_questions(user_id, id, question_id ,dsl_template , name ,problem_statement ,input_format ,output_format ,copy_state ,failure_messages ,constraints, max_grade, difficulty)
 VALUES
     ('b029f559-52a8-4699-b595-71161498ed8c', '9922c45b-fe25-4539-8c4b-4d247473b127', 'b6484e21-6937-489c-b031-b71767994764', 'template', 'code question name da9800a0', 'code question statement', 'input format', 'output format', 'CREATED', '', 'None', 10, 'EASY');
