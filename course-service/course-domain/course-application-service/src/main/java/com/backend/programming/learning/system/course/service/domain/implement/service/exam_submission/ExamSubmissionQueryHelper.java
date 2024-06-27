@@ -52,17 +52,28 @@ public class ExamSubmissionQueryHelper {
     public List<QueryExamSubmissionOverviewResponse> findByExamIdAndUserId(UUID examId, UUID userId) {
         List<QueryExamSubmissionOverviewResponse> examSubmissionResponses = new ArrayList<>();
         List<ExamSubmission> examSubmissions = examSubmissionRepository.findAllByExamIdAndUserId(examId, userId);
+        Exam exam = examRepository.findBy(new ExamId(examId));
+        Double maxGrade = Double.valueOf(exam.getMaxScore());
 
         examSubmissions.forEach(examSubmission -> {
             List<QuestionSubmission> questionSubmissions = questionSubmissionRepository
                     .findAllByExamSubmissionId(examSubmission.getId().getValue());
 //            examSubmissionResponses.add(examSubmissionDataMapper.mapToQueryExamSubmissionResponse(examSubmissionResponse, questionSubmissions));
 
-            Double markTotal = questionSubmissions.stream()
+            Double mark = questionSubmissions.stream()
                     .filter(questionSubmission -> questionSubmission.getGrade() != null)
                     .mapToDouble(QuestionSubmission::getGrade)
                     .sum();
-            examSubmissionResponses.add(examSubmissionDataMapper.mapToQueryExamSubmissionResponseWithTotal(examSubmission, markTotal));
+
+            Double markTotal = questionSubmissions.stream()
+                    .filter(questionSubmission -> questionSubmission.getQuestion() != null)
+                    .mapToDouble(value -> value.getQuestion().getDefaultMark())
+                    .sum();
+
+            Double grade = Math.round((mark / markTotal) * maxGrade * 100.0) / 100.0;
+
+            examSubmissionResponses.add(examSubmissionDataMapper
+                    .mapToQueryExamSubmissionResponse(examSubmission, mark, markTotal, grade, maxGrade));
         });
 
         return examSubmissionResponses;
@@ -118,6 +129,7 @@ public class ExamSubmissionQueryHelper {
                         .mapToDouble(QuestionSubmission::getGrade)
                         .sum();
                 Double totalMark = questionSubmissions.stream()
+                        .filter(questionSubmission -> questionSubmission.getQuestion() != null)
                         .mapToDouble(value -> value.getQuestion().getDefaultMark())
                         .sum();
 

@@ -21,6 +21,9 @@ public record QueryExamSubmissionOverviewResponse(
         ZonedDateTime endTime,
         ZonedDateTime submitTime,
         Status status,
-        Double markTotal
+        Double mark,
+        Double markTotal,
+        Double grade,
+        Double gradeTotal
 ) {
 }

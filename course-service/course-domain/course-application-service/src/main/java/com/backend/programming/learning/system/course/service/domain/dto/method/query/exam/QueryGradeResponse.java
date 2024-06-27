@@ -21,7 +21,7 @@ public record QueryGradeResponse(
         String status,
         ZonedDateTime lastSubmitAt,
         ZonedDateTime lastMarkAt,
-        Float score,
-        Float maxScore
+        Double score,
+        Double maxScore
 ) {
 }

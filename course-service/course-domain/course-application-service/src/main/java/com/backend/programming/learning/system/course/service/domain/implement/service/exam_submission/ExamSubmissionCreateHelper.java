@@ -260,6 +260,7 @@ public class ExamSubmissionCreateHelper {
                 .mapToDouble(QuestionSubmission::getGrade)
                 .sum();
         Double totalMark = questionSubmissions.stream()
+                .filter(value -> value.getQuestion() != null)
                 .mapToDouble(value -> value.getQuestion().getDefaultMark())
                 .sum();
         Double maxGrade = Double.valueOf(examSubmission.getExam().getMaxScore());

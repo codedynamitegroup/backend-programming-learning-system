@@ -25,6 +25,9 @@ public class ExamQuestionDataAccessMapper {
     public ExamQuestion examQuestionEntityToExamQuestion(ExamQuestionEntity examQuestionEntity) {
         return ExamQuestion.builder()
                 .id(new ExamQuestionId(examQuestionEntity.getId()))
+                .exam(examDataAccessMapper.examEntityToExam(examQuestionEntity.getExam()))
+                .question(questionDataAccessMapper.questionEntityToQuestion(examQuestionEntity.getQuestion()))
+                .page(examQuestionEntity.getPage())
                 .build();
     }
 

@@ -86,19 +86,17 @@ public class ExamQueryHelper {
             Exam exam = examRepository.findBy(examId);
             ExamSubmission examSubmission = examSubmissionRepository.findByExamAndUser(exam, courseUser.getUser());
 
-            Float score = 0F;
-            for (QuestionSubmission questionSubmission : questionSubmissions) {
-                if (Objects.nonNull(questionSubmission.getGrade())) {
-                    score += questionSubmission.getGrade();
-                }
-            }
+            Double totalGrade = Double.valueOf(exam.getMaxScore());
+            Double mark = questionSubmissions.stream()
+                    .filter(questionSubmission -> Objects.nonNull(questionSubmission.getGrade()))
+                    .mapToDouble(QuestionSubmission::getGrade)
+                    .sum();
+            Double totalMark = examQuestions.stream()
+                    .filter(examQuestion -> examQuestion.getQuestion() != null)
+                    .mapToDouble(examQuestion -> examQuestion.getQuestion().getDefaultMark())
+                    .sum();
 
-            Float totalScore = 0F;
-            for (ExamQuestion examQuestion : examQuestions) {
-                if (Objects.nonNull(examQuestion.getQuestion())) {
-                    totalScore += examQuestion.getQuestion().getDefaultMark();
-                }
-            }
+            Double grade = Math.round((mark / totalMark) * totalGrade * 100.0) / 100.0;
 
             QueryGradeResponse queryGradeResponse = QueryGradeResponse.builder()
                     .userId(courseUser.getUser().getId().getValue())
@@ -109,8 +107,8 @@ public class ExamQueryHelper {
                     .lastSubmitAt(examSubmission.getSubmitTime())
                     .lastMarkAt(examSubmission.getSubmitTime())
                     .status(Objects.isNull(examSubmission.status()) ? "NOT_SUBMITTED" : "SUBMITTED")
-                    .score(examSubmission.getScore())
-                    .maxScore(totalScore)
+                    .score(grade)
+                    .maxScore(totalGrade)
                     .build();
             queryGradeResponses.add(queryGradeResponse);
         });

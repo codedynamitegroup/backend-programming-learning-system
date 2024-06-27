@@ -133,6 +133,26 @@ public class ExamSubmissionDataMapper {
                 .build();
     }
 
+    public QueryExamSubmissionOverviewResponse mapToQueryExamSubmissionResponse(ExamSubmission examSubmission,
+                                                                                         Double mark,
+                                                                                         Double markTotal,
+                                                                                         Double grade,
+                                                                                         Double gradeTotal) {
+        return QueryExamSubmissionOverviewResponse.builder()
+                .examSubmissionId(examSubmission.getId().getValue())
+                .examSubmissionExamResponse(examToQueryExamSubmissionExamResponse(examSubmission.getExam()))
+                .userId(examSubmission.getUser().getId().getValue())
+                .startTime(examSubmission.getStartTime())
+                .endTime(examSubmission.getEndTime())
+                .submitTime(examSubmission.getSubmitTime())
+                .status(examSubmission.status())
+                .mark(mark)
+                .markTotal(markTotal)
+                .grade(grade)
+                .gradeTotal(gradeTotal)
+                .build();
+    }
+
     private QueryExamSubmissionExamResponse examToQueryExamSubmissionExamResponse(Exam exam) {
         return QueryExamSubmissionExamResponse.builder()
                 .examId(exam.getId().getValue())
