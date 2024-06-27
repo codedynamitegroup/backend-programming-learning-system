@@ -39,4 +39,11 @@ public interface ExamJpaRepository extends JpaRepository<ExamEntity, UUID> {
             LIMIT 5
             """)
     List<ExamEntity> findRecentExam();
+
+    @Query("""
+            SELECT e
+            FROM ExamEntity e
+            WHERE e.course.id = :courseId
+            """)
+    List<ExamEntity> findAllByCourseId(UUID courseId);
 }

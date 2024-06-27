@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 
 @Repository
@@ -66,6 +67,14 @@ public class ExamRepositoryImpl implements ExamRepository {
     @Override
     public List<Exam> findRecentExam() {
         return examJpaRepository.findRecentExam()
+                .stream()
+                .map(examDataAccessMapper::examEntityToExam)
+                .toList();
+    }
+
+    @Override
+    public List<Exam> findAllByCourseId(UUID courseId) {
+        return examJpaRepository.findAllByCourseId(courseId)
                 .stream()
                 .map(examDataAccessMapper::examEntityToExam)
                 .toList();

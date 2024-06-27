@@ -24,4 +24,6 @@ public interface ExamRepository {
     Integer countStudent(ExamId examId);
 
     List<Exam> findRecentExam();
+
+    List<Exam> findAllByCourseId(UUID courseId);
 }

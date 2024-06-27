@@ -12,11 +12,10 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.user.UserSubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.implement.service.user.UserCommandHandler;
-import com.backend.programming.learning.system.course.service.domain.mapper.activity_attachment.ActivityAttachmentDataMapper;
 import com.backend.programming.learning.system.course.service.domain.mapper.intro_attachment.IntroAttachmentDataMapper;
-import com.backend.programming.learning.system.course.service.domain.mapper.intro_file.IntroFileDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.course.service.domain.valueobject.Type;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -24,37 +23,15 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class AssignmentDataMapper {
     private final IntroAttachmentDataMapper introAttachmentDataMapper;
-    private final IntroAttachmentRepository introAttachmentRepository;
-    private final IntroFileDataMapper introFileDataMapper;
-    private final IntroFileRepository introFileRepository;
-
-    private final ActivityAttachmentDataMapper activityAttachmentDataMapper;
-
-    private final ActivityAttachmentRepository activityAttachmentRepository;
-
     private final UserCommandHandler userCommandHandler;
-
+    private final IntroAttachmentRepository introAttachmentRepository;
     private final CourseRepository courseRepository;
     private final SubmissionAssignmentRepository submissionAssignmentRepository;
     private final SubmissionGradeRepository submissionGradeRepository;
-
-
-    public AssignmentDataMapper(IntroAttachmentDataMapper introAttachmentDataMapper,
-                                IntroAttachmentRepository introAttachmentRepository, IntroFileDataMapper introFileDataMapper,
-                                IntroFileRepository introFileRepository, ActivityAttachmentDataMapper activityAttachmentDataMapper, ActivityAttachmentRepository activityAttachmentRepository, UserCommandHandler userCommandHandler, CourseRepository courseRepository, SubmissionAssignmentRepository submissionAssignmentRepository, SubmissionGradeRepository submissionGradeRepository) {
-        this.introAttachmentDataMapper = introAttachmentDataMapper;
-        this.introAttachmentRepository = introAttachmentRepository;
-        this.introFileDataMapper = introFileDataMapper;
-        this.introFileRepository = introFileRepository;
-        this.activityAttachmentDataMapper = activityAttachmentDataMapper;
-        this.activityAttachmentRepository = activityAttachmentRepository;
-        this.userCommandHandler = userCommandHandler;
-        this.courseRepository = courseRepository;
-        this.submissionAssignmentRepository = submissionAssignmentRepository;
-        this.submissionGradeRepository = submissionGradeRepository;
-    }
+    private final ExamSubmissionRepository examSubmissionRepository;
 
     public Assignment createAssignmentCommandToAssignment(CreateAssignmentCommand createAssignmentCommand) {
         return Assignment.builder()
@@ -228,15 +205,16 @@ public class AssignmentDataMapper {
                 .build();
     }
 
-    public StudentAssignmentList assignmentsToStudentAssignmentList(List<Assignment> assignments,List<User> users) {
-
+    public StudentAssignmentList assignmentsToStudentAssignmentList(List<Assignment> assignments,
+                                                                    List<Exam> exams, List<User> users) {
         List<StudentGrade> studentGrades = users.stream()
                 .map(user -> {
                     List<AssignmentGradeResponseEntity> assignmentGradeResponseEntities = assignments.stream()
                             .map(assignment -> assignmentToAssignmentGradeResponseEntity(assignment, user))
                             .collect(Collectors.toList());
                     return StudentGrade.builder()
-                            .fullName(user.getFirstName()+" "+user.getLastName())
+                            .studentId(user.getId().getValue())
+                            .fullName(user.getFirstName() + " " + user.getLastName())
                             .email(user.getEmail())
                             .grades(assignmentGradeResponseEntities.stream()
                                     .map(AssignmentGradeResponseEntity::getGrade)
@@ -244,22 +222,35 @@ public class AssignmentDataMapper {
                             .build();
                 })
                 .collect(Collectors.toList());
-        return StudentAssignmentList.builder()
-                .assignments(
-                        assignments.stream()
-                                .map(assignment -> AssignmentMaxGradeInfo.builder()
-                                        .name(assignment.getTitle())
-                                        .maxGrade(assignment.getMaxScores())
-                                        .build())
-                                .collect(Collectors.toList())
 
-                )
+        studentGrades.forEach(studentGrade -> {
+            exams.forEach(exam -> {
+                ExamSubmission examSubmission = examSubmissionRepository
+                        .findLatestExamSubmissionByExamIdAndUserId(exam.getId().getValue(), studentGrade.getStudentId())
+                        .orElse(null);
+                if (examSubmission != null) studentGrade.getGrades().add(examSubmission.getScore());
+                else studentGrade.getGrades().add(null);
+            });
+        });
+
+        StudentAssignmentList studentAssignmentList = StudentAssignmentList.builder()
+                .assignments(assignments.stream()
+                        .map(assignment -> AssignmentMaxGradeInfo.builder()
+                                .name(assignment.getTitle())
+                                .maxGrade(assignment.getMaxScores())
+                                .build())
+                        .collect(Collectors.toList()))
                 .students(studentGrades)
                 .build();
+
+        List<AssignmentMaxGradeInfo> examMaxGradeInfo = exams.stream()
+                .map(exam -> AssignmentMaxGradeInfo.builder()
+                        .name(exam.getName())
+                        .maxGrade(exam.getMaxScore())
+                        .build())
+                .toList();
+        studentAssignmentList.getAssignments().addAll(examMaxGradeInfo);
+
+        return studentAssignmentList;
     }
-
-
-
-
-
 }

@@ -7,14 +7,16 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.*;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.AssignmentGradeResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.ListSubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.StudentAssignmentList;
 import com.backend.programming.learning.system.course.service.domain.entity.Assignment;
+import com.backend.programming.learning.system.course.service.domain.entity.Exam;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.mapper.assignment.AssignmentDataMapper;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,29 +26,15 @@ import java.util.UUID;
 
 @Component
 @Slf4j
+@RequiredArgsConstructor
 public class AssignmentCommandHandler {
     private final AssignmentCreateHelper assignmentCreateHelper;
     private final AssignmentQueryHelper assignmentQueryHelper;
-
     private final AssignmentDeleteHelper assignmentDeleteHelper;
-
     private final AssignmentUpdateHelper assignmentUpdateHelper;
-
     private final AssignmentDataMapper assignmentDataMapper;
     private final UserRepository userRepository;
-
-    public AssignmentCommandHandler(AssignmentCreateHelper assignmentCreateHelper,
-                                    AssignmentQueryHelper assignmentQueryHelper,
-                                    AssignmentDeleteHelper assignmentDeleteHelper,
-                                    AssignmentUpdateHelper assignmentUpdateHelper,
-                                    AssignmentDataMapper assignmentDataMapper, UserRepository userRepository) {
-        this.assignmentCreateHelper = assignmentCreateHelper;
-        this.assignmentQueryHelper = assignmentQueryHelper;
-        this.assignmentDeleteHelper = assignmentDeleteHelper;
-        this.assignmentUpdateHelper = assignmentUpdateHelper;
-        this.assignmentDataMapper = assignmentDataMapper;
-        this.userRepository = userRepository;
-    }
+    private final ExamRepository examRepository;
 
     @Transactional
     public CreateAssignmentResponse createAssignment(CreateAssignmentCommand createAssignmentCommand) {
@@ -109,7 +97,8 @@ public class AssignmentCommandHandler {
         log.info("Query assignment grade command received");
         List<Assignment> assignments = assignmentQueryHelper.findAllGradeStudentAssignment(courseId);
         List<User> users = userRepository.findAllByCourseId(courseId);
-        return assignmentDataMapper.assignmentsToStudentAssignmentList(assignments, users);
+        List<Exam> exams = examRepository.findAllByCourseId(courseId);
+        return assignmentDataMapper.assignmentsToStudentAssignmentList(assignments, exams, users);
     }
 
 
