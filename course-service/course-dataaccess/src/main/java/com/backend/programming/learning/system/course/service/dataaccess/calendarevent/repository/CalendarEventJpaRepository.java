@@ -40,7 +40,8 @@ public interface CalendarEventJpaRepository extends JpaRepository<CalendarEventE
             or (c.event_type = 'USER' and c.user_id = ?2))
         and ((c.start_time >= ?3 and c.start_time <= ?4)
             or (c.end_time is not null 
-                    and (c.end_time >= ?3 and c.end_time <= ?4)))
+                    and (c.end_time >= ?3 and c.end_time <= ?4))
+            or (c.start_time < ?3 and c.end_time is not null and c.end_time > ?3))
 """, nativeQuery = true)
     List<CalendarEventEntity> findAllByCourseIds(
             List<UUID> courseIds,

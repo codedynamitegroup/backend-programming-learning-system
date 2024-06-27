@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.dto.method.update.calendarevent;
 
 import com.backend.programming.learning.system.course.service.domain.dto.validator.calendarevent.CreateCalendarEventCommandStartTimeAndEndTimeValidator;
+import com.backend.programming.learning.system.course.service.domain.dto.validator.calendarevent.UpdateCalendarEventCommandStartTimeAndEndTimeValidator;
 import com.backend.programming.learning.system.course.service.domain.valueobject.NotificationComponentType;
 import com.backend.programming.learning.system.course.service.domain.valueobject.NotificationEventType;
 import com.backend.programming.learning.system.dataaccess.validator.EnumValidator;
@@ -15,12 +16,13 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-@CreateCalendarEventCommandStartTimeAndEndTimeValidator
+@UpdateCalendarEventCommandStartTimeAndEndTimeValidator
 public class UpdateCalendarEventCommand {
     private final String name;
     private final String description;
     @EnumValidator(enumClass = NotificationEventType.class, message = "EventType is invalid")
     private final String eventType;
+    @NotNull(message = "StartTime is required")
     private final ZonedDateTime startTime;
     private final ZonedDateTime endTime;
     private final UUID userId;

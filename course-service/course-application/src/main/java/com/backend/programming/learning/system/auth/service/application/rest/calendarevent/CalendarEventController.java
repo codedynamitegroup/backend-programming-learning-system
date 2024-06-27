@@ -59,7 +59,7 @@ public class CalendarEventController {
     @PutMapping("/{id}")
     @Operation(summary = "Update calendar event.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Success.", content = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
                             schema = @Schema(implementation = CreateCalendarEventResponse.class))
             }),
