@@ -44,5 +44,10 @@ public class AssignmentQueryHelper {
         return assignmentRepository.findListGradeAssignmentByCourseId(courseId, userId);
     }
 
+    @Transactional(readOnly = true)
+    public List<Assignment> findAllGradeStudentAssignment(UUID courseId) {
+        return assignmentRepository.findAllGradeStudentAssignment(courseId);
+    }
+
 
 }

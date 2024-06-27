@@ -4,14 +4,12 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.assignment.CreateAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.assignment.DeleteAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.assignment.DeleteAssignmentResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAllAssignmentsCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAllAssignmentsResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAssignmentCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAssignmentResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.*;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.AssignmentGradeResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.ListSubmissionAssignmentResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.StudentAssignmentList;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.assignment.AssignmentApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -61,7 +59,13 @@ public class AssignmentApplicationServiceImpl implements AssignmentApplicationSe
     }
 
     @Override
-    public List<AssignmentGradeResponseEntity> queryAssignmentGrade(UUID courseId, UUID userId) {
+    public QueryAllAssignmentGradeResponse queryAssignmentGrade(UUID courseId, UUID userId) {
         return assignmentCommandHandler.queryAssignmentGrade(courseId, userId);
+    }
+
+    @Override
+    public StudentAssignmentList retrieveStudentAssignmentGrades(UUID courseId) {
+        return
+                assignmentCommandHandler.retrieveStudentAssignmentGrades(courseId);
     }
 }

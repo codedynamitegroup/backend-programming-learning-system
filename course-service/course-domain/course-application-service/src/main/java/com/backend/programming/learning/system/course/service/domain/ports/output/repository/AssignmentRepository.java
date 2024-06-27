@@ -21,4 +21,6 @@ public interface AssignmentRepository {
     List<Assignment> findRecentAssignment();
 
     List<Assignment> findListGradeAssignmentByCourseId(UUID courseId, UUID userId);
+
+    List<Assignment> findAllGradeStudentAssignment(UUID courseId);
 }

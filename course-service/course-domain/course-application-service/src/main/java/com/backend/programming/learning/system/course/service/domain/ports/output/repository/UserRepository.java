@@ -27,4 +27,6 @@ public interface UserRepository {
     Optional<User> findById(UserId userId);
 
     void deleteByUserMoodleId(Integer userIdMoodle);
+
+    List<User> findAllByCourseId(UUID courseId);
 }

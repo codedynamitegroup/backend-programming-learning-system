@@ -4,14 +4,12 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.assignment.CreateAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.assignment.DeleteAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.assignment.DeleteAssignmentResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAllAssignmentsCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAllAssignmentsResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAssignmentCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAssignmentResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.*;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.AssignmentGradeResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.ListSubmissionAssignmentResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.StudentAssignmentList;
 import com.backend.programming.learning.system.course.service.domain.entity.Assignment;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.mapper.assignment.AssignmentDataMapper;
@@ -99,10 +97,21 @@ public class AssignmentCommandHandler {
     }
 
     @Transactional(readOnly = true)
-    public List<AssignmentGradeResponseEntity> queryAssignmentGrade(UUID courseId, UUID userId) {
+    public QueryAllAssignmentGradeResponse queryAssignmentGrade(UUID courseId,UUID userId) {
         log.info("Query assignment grade command received");
-        List<Assignment> assignments= assignmentQueryHelper.queryAssignmentGrade(courseId, userId);
+        List<Assignment> assignments= assignmentQueryHelper.queryAssignmentGrade(courseId,userId);
         User user= userRepository.findById(new UserId(userId)).get();
-        return assignmentDataMapper.assignmentsToAssignmentGradeResponseEntity(assignments,user);
+        return assignmentDataMapper.assignmentsToQueryAllAssignmentGradeResponse(assignments,user);
     }
+
+    @Transactional(readOnly = true)
+    public StudentAssignmentList retrieveStudentAssignmentGrades(UUID courseId) {
+        log.info("Query assignment grade command received");
+        List<Assignment> assignments = assignmentQueryHelper.findAllGradeStudentAssignment(courseId);
+        List<User> users = userRepository.findAllByCourseId(courseId);
+        return assignmentDataMapper.assignmentsToStudentAssignmentList(assignments, users);
+    }
+
+
+
 }

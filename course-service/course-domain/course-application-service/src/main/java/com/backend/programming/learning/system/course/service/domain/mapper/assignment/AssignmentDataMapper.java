@@ -4,11 +4,10 @@ package com.backend.programming.learning.system.course.service.domain.mapper.ass
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.assignment.CreateAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.assignment.CreateAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.assignment.DeleteAssignmentResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAllAssignmentGradeResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAllAssignmentsResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAssignmentResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.AssignmentGradeResponseEntity;
-import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.AssignmentResponseEntity;
-import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.ListSubmissionAssignmentResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.*;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.intro_attachment.IntroAttachmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.user.UserSubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.*;
@@ -207,6 +206,60 @@ public class AssignmentDataMapper {
                 .map(assignment -> assignmentToAssignmentGradeResponseEntity(assignment, user))
                 .collect(Collectors.toList());
     }
+
+
+    public QueryAllAssignmentGradeResponse assignmentsToQueryAllAssignmentGradeResponse(List<Assignment> assignments, User user) {
+
+        Integer countSubmission=0;
+        for(Assignment assignment: assignments)
+        {
+            SubmissionAssignment submissionAssignment = submissionAssignmentRepository.findByAssignmentIdAndUserId(assignment.getId().getValue(), user.getId().getValue());
+            if(submissionAssignment.getSubmittedAt() != null)
+            {
+                countSubmission++;
+            }
+        }
+        List<AssignmentGradeResponseEntity> assignmentGradeResponseEntities = assignments.stream()
+                .map(assignment -> assignmentToAssignmentGradeResponseEntity(assignment, user))
+                .collect(Collectors.toList());
+        return QueryAllAssignmentGradeResponse.builder()
+                .assignments(assignmentGradeResponseEntities)
+                .countSubmission(countSubmission)
+                .build();
+    }
+
+    public StudentAssignmentList assignmentsToStudentAssignmentList(List<Assignment> assignments,List<User> users) {
+
+        List<StudentGrade> studentGrades = users.stream()
+                .map(user -> {
+                    List<AssignmentGradeResponseEntity> assignmentGradeResponseEntities = assignments.stream()
+                            .map(assignment -> assignmentToAssignmentGradeResponseEntity(assignment, user))
+                            .collect(Collectors.toList());
+                    return StudentGrade.builder()
+                            .fullName(user.getFirstName()+" "+user.getLastName())
+                            .email(user.getEmail())
+                            .grades(assignmentGradeResponseEntities.stream()
+                                    .map(AssignmentGradeResponseEntity::getGrade)
+                                    .collect(Collectors.toList()))
+                            .build();
+                })
+                .collect(Collectors.toList());
+        return StudentAssignmentList.builder()
+                .assignments(
+                        assignments.stream()
+                                .map(assignment -> AssignmentMaxGradeInfo.builder()
+                                        .name(assignment.getTitle())
+                                        .maxGrade(assignment.getMaxScores())
+                                        .build())
+                                .collect(Collectors.toList())
+
+                )
+                .students(studentGrades)
+                .build();
+    }
+
+
+
 
 
 }

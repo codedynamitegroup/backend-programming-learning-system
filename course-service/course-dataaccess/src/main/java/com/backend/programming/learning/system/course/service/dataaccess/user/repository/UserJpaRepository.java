@@ -27,4 +27,10 @@ public interface UserJpaRepository extends JpaRepository<UserEntity, UUID>{
             "JOIN CourseEntity c ON cu.course.id = c.id " +
             "JOIN AssignmentEntity a ON c.id = a.course.id WHERE a.id = :assignmentId")
     List<UserEntity> findAllByAssignmentId(UUID assignmentId);
+
+    @Query("SELECT u " +
+            "FROM UserEntity u " +
+            "JOIN CourseUserEntity cu ON u.id = cu.user.id " +
+            "JOIN CourseEntity c ON cu.course.id = c.id WHERE c.id = :courseId")
+    List<UserEntity> findAllByCourseId(UUID courseId);
 }

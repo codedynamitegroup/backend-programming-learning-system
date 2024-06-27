@@ -37,5 +37,14 @@ public interface AssignmentJpaRepository extends JpaRepository<AssignmentEntity,
     List<AssignmentEntity> findListGradeAssignmentByCourseId( UUID courseId, UUID userId);
 
 
+    @Query("""
+    SELECT a
+    FROM AssignmentEntity a
+    JOIN CourseEntity c ON a.course.id = c.id
+    AND a.course.id = :courseId
+    """)
+    List<AssignmentEntity> findAllGradeStudentAssignment(UUID courseId);
+
+
 
 }
