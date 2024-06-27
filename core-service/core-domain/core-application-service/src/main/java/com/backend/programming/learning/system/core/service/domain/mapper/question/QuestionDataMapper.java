@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.question.AnswerOfQuestionDeleteResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAllQuestionWithPaginationResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryAnswerOfQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.AnswerOfQuestionUpdateEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQuestionEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQuestionResponse;
@@ -492,5 +493,17 @@ public class QuestionDataMapper {
                 .totalItems(questions.getTotalElements())
                 .totalPages(questions.getTotalPages())
                 .build();
+    }
+
+    public List<QueryAnswerOfQuestionResponse> answerOfQuestionToQueryAnswerOfQuestionResponse(List<AnswerOfQuestion> answerOfQuestions) {
+        return List.of(answerOfQuestions.stream()
+                .map(answerOfQuestion -> QueryAnswerOfQuestionResponse.builder()
+                        .answerId(answerOfQuestion.getId().getValue())
+                        .questionId(answerOfQuestion.getQuestionId().getValue())
+                        .feedback(answerOfQuestion.getFeedback())
+                        .answer(answerOfQuestion.getAnswer())
+                        .fraction(answerOfQuestion.getFraction())
+                        .build())
+                .toArray(QueryAnswerOfQuestionResponse[]::new));
     }
 }
