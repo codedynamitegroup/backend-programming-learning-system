@@ -25,4 +25,26 @@ public interface AssignmentJpaRepository extends JpaRepository<AssignmentEntity,
             LIMIT 5
             """)
     List<AssignmentEntity> findRecentAssignment();
+
+    @Query("""
+    SELECT a
+    FROM AssignmentEntity a
+    JOIN CourseEntity c ON a.course.id = c.id
+    JOIN CourseUserEntity cu ON c.id = cu.course.id
+    WHERE cu.user.id = :userId
+    AND a.course.id = :courseId
+    """)
+    List<AssignmentEntity> findListGradeAssignmentByCourseId( UUID courseId, UUID userId);
+
+
+    @Query("""
+    SELECT a
+    FROM AssignmentEntity a
+    JOIN CourseEntity c ON a.course.id = c.id
+    AND a.course.id = :courseId
+    """)
+    List<AssignmentEntity> findAllGradeStudentAssignment(UUID courseId);
+
+
+
 }

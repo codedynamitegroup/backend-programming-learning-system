@@ -21,6 +21,8 @@ import com.backend.programming.learning.system.course.service.domain.ports.outpu
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.QuestionSubmissionRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamSubmissionId;
+import com.backend.programming.learning.system.course.service.domain.valueobject.Status;
 import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
 import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import lombok.RequiredArgsConstructor;
@@ -135,7 +137,7 @@ public class ExamSubmissionCreateHelper {
         log.info("Create start exam submission");
         Exam exam = examRepository.findBy(new ExamId(createExamSubmissionCommand.examId()));
 
-        if(isExamClosed(exam)) {
+        if (isExamClosed(exam)) {
             log.error("Exam is closed");
             throw new ExamClosedException("Exam is closed");
         }
@@ -150,7 +152,7 @@ public class ExamSubmissionCreateHelper {
         ExamSubmission examSubmissionLast = examSubmissionRepository.findByExamAndUser(exam, user);
 
         // Max attempt check
-        if(exam.getMaxAttempts() > 0 && // Unlimited attempt
+        if (exam.getMaxAttempts() > 0 && // Unlimited attempt
                 examSubmissionLast.getSubmissionCount() >= exam.getMaxAttempts() &&
                 isExamSubmissionSubmitted(examSubmissionLast)
         ) {
@@ -159,8 +161,8 @@ public class ExamSubmissionCreateHelper {
         }
 
         //check there is other on-going exam submission being taken
-        if(!Objects.isNull(examSubmissionLast.getExam()) && // No last submission --> first submission
-               !isExamSubmissionSubmitted(examSubmissionLast)) { // Exam time is not over
+        if (!Objects.isNull(examSubmissionLast.getExam()) && // No last submission --> first submission
+                !isExamSubmissionSubmitted(examSubmissionLast)) { // Exam time is not over
             log.error("There is an on-going exam submission");
             throw new RuntimeException("There is an on-going exam submission");
         }
@@ -243,7 +245,28 @@ public class ExamSubmissionCreateHelper {
         });
 
         examSubmissionLast.setScore(mark.get());
+//        examSubmissionLast.setScore(mark.get() / totleMark.get() * exam.getMaxScore());
 
         examSubmissionRepository.save(examSubmissionLast);
+    }
+
+    public void updateStatusGrade(ExamSubmissionId examSubmissionId) {
+        ExamSubmission examSubmission = examSubmissionRepository.findBy(examSubmissionId.getValue());
+        examSubmission.setStatus(Status.GRADED);
+        List<QuestionSubmission> questionSubmissions = questionSubmissionRepository
+                .findAllByExamSubmissionId(examSubmission.getId().getValue());
+        Double mark = questionSubmissions.stream()
+                .filter(questionSubmission -> questionSubmission.getGrade() != null)
+                .mapToDouble(QuestionSubmission::getGrade)
+                .sum();
+        Double totalMark = questionSubmissions.stream()
+                .mapToDouble(value -> value.getQuestion().getDefaultMark())
+                .sum();
+        Double maxGrade = Double.valueOf(examSubmission.getExam().getMaxScore());
+        Float grade = (float) (Math.round((mark / totalMark) * maxGrade * 100.0) / 100.0);
+
+        examSubmission.setScore(grade);
+
+        examSubmissionRepository.save(examSubmission);
     }
 }

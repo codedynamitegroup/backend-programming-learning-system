@@ -4,13 +4,12 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.assignment.CreateAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.assignment.DeleteAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.assignment.DeleteAssignmentResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAllAssignmentsCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAllAssignmentsResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAssignmentCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAssignmentResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.*;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.AssignmentGradeResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.ListSubmissionAssignmentResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.StudentAssignmentList;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.assignment.AssignmentApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -23,6 +22,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -130,6 +130,36 @@ public class AssignmentController {
         log.info("Getting list submission assignment with id: {}", id);
         ListSubmissionAssignmentResponseEntity response = assignmentApplicationService
                 .queryAssignmentDetail(new QueryAssignmentCommand(id));
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/grade")
+    @Operation(summary = "Get assignment grade.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllAssignmentGradeResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllAssignmentGradeResponse> getAssignmentGrade(@RequestParam UUID courseId, @RequestParam UUID userId) {
+        log.info("Getting assignment grade with courseId: {} and userId: {}", courseId, userId);
+        QueryAllAssignmentGradeResponse response = assignmentApplicationService.queryAssignmentGrade(courseId, userId);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/student-assignment")
+    @Operation(summary = "Get student assignment.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = StudentAssignmentList.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<StudentAssignmentList> getStudentAssignment(@RequestParam UUID courseId) {
+        log.info("Getting student assignment with courseId: {}", courseId);
+        StudentAssignmentList response = assignmentApplicationService.retrieveStudentAssignmentGrades(courseId);
         return ResponseEntity.ok(response);
     }
 

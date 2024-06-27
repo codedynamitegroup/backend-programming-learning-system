@@ -11,6 +11,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam_submission.ExamSubmissionDataMapper;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamSubmissionId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -76,5 +77,10 @@ public class ExamSubmissionCommandHandler {
     @Transactional
     public void gradingExam(CreateExamSubmissionEndCommand createExamSubmissionEndCommand) {
         examSubmissionCreateHelper.gradingExam(createExamSubmissionEndCommand);
+    }
+
+    @Transactional
+    public void updateStatusGrade(ExamSubmissionId examSubmissionId) {
+        examSubmissionCreateHelper.updateStatusGrade(examSubmissionId);
     }
 }

@@ -72,4 +72,10 @@ public class UserRepositoryImpl implements UserRepository {
     public void deleteByUserMoodleId(Integer userIdMoodle) {
         userJpaRepository.deleteByUserIdMoodle(userIdMoodle);
     }
+
+    @Override
+    public List<User> findAllByCourseId(UUID courseId) {
+        return userDataAccessMapper
+                .userEntityListToUserList(userJpaRepository.findAllByCourseId(courseId));
+    }
 }

@@ -444,3 +444,174 @@ VALUES ('8a1bcf4e-1f3a-11ee-be56-0242ac120006', '4be91526-365b-4e50-99ae-75ba2a8
 -- Case: month = 12 (Quarter 4)
 INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
 VALUES ('8a1bcf4e-1f3a-11ee-be56-0242ac120007', '4be91526-365b-4e50-99ae-75ba2a87ba08', '12', 'Quarter 4', false);
+
+--19
+-- Sample test case for n = 1 (S(1) = 1^3 = 1)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('d41d8cd9-4a3b-4f58-9fc1-a5d14c4c7f00', '4be91526-365b-4e50-99ae-75ba2a87ba09', '1', '1', true);
+
+-- Additional test cases (non-sample cases)
+-- Case: n = 2 (S(2) = 1^3 + 2^3 = 1 + 8 = 9)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('d41d8cd9-4a3b-4f58-9fc1-a5d14c4c7f01', '4be91526-365b-4e50-99ae-75ba2a87ba09', '2', '9', false);
+
+-- Case: n = 3 (S(3) = 1^3 + 2^3 + 3^3 = 1 + 8 + 27 = 36)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('d41d8cd9-4a3b-4f58-9fc1-a5d14c4c7f02', '4be91526-365b-4e50-99ae-75ba2a87ba09', '3', '36', false);
+
+-- Case: n = 10 (S(10) = 1^3 + 2^3 + ... + 10^3 = 3025)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('d41d8cd9-4a3b-4f58-9fc1-a5d14c4c7f03', '4be91526-365b-4e50-99ae-75ba2a87ba09', '10', '3025', false);
+
+-- Case: n = 100 (S(100) = 1^3 + 2^3 + ... + 100^3 = 25502500)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('d41d8cd9-4a3b-4f58-9fc1-a5d14c4c7f04', '4be91526-365b-4e50-99ae-75ba2a87ba09', '100', '25502500', false);
+
+--20
+-- Sample test case for n = 1 (A)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('ab3f10f4-f595-4b63-8ead-ed8d26973231', 'fa373da0-9d7d-4ced-bf8b-c06a0063cd4e', '2', 'AB', true);
+
+-- Additional test cases (non-sample cases)
+-- Case: n = 5 (ABCDE)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('e2141007-d713-44c5-a46e-9543b1959435', 'fa373da0-9d7d-4ced-bf8b-c06a0063cd4e', '5', 'ABCDE', false);
+
+-- Case: n = 10 (ABCDEFGHIJ)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('5144f19b-a4cf-44a2-bd61-8e27cc5f8152', 'fa373da0-9d7d-4ced-bf8b-c06a0063cd4e', '10', 'ABCDEFGHIJ', false);
+
+-- Case: n = 26 (ABCDEFGHIJKLMNOPQRSTUVWXYZ)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('5ecf4b1f-2b57-408b-a24e-f66effbcc242', 'fa373da0-9d7d-4ced-bf8b-c06a0063cd4e', '26', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', false);
+
+--21
+-- Sample test case for n = 2 (prime number)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('6fb4ea47-0dc9-4891-8ac2-a4d0152a07a9', '1f24ac22-737a-4074-9290-ec41bb15e2b0', '2', 'true', true);
+
+-- Additional test cases (non-sample cases)
+-- Case: n = 4 (not a prime number)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('0c46783c-60ae-4e8f-a205-f74d47b60fd7', '1f24ac22-737a-4074-9290-ec41bb15e2b0', '4', 'false', true);
+
+-- Case: n = 17 (prime number)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('53c14139-d991-45ff-91fa-e51a47198502', '1f24ac22-737a-4074-9290-ec41bb15e2b0', '17', 'true', false);
+
+-- Case: n = 100000 (not a prime number)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('d7b950a4-7f5a-4924-a470-706d16fbd29a', '1f24ac22-737a-4074-9290-ec41bb15e2b0', '100000', 'false', false);
+
+-- Case: n = 99991 (prime number)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('297ddc34-cef2-4bd7-9a1d-d156bb0e477c', '1f24ac22-737a-4074-9290-ec41bb15e2b0', '99991', 'true', false);
+
+--22
+-- Sample test case for input (-5.5, 10.2, -300.3)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('f27b9c3b-6f7d-4a5b-83c7-ef60a7b1fcfa', '7841c704-b8ae-4664-bb2c-d4a63fb80fd5', '-5.5 10.2 -300.3', '5.5 10.2 300.3', true);
+
+-- Additional test cases (non-sample cases)
+-- Case: input (0.5, -0.8, 99.9)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('8b19dca5-99b8-4bba-8d97-946cf4d7a0d5', '7841c704-b8ae-4664-bb2c-d4a63fb80fd5', '0.5 -0.8 99.9', '0.5 0.8 99.9', false);
+
+-- Case: input (-123.45, 678.9, -0.01)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('4e7a883e-c58c-42e5-9c8e-8a7f85a4b619', '7841c704-b8ae-4664-bb2c-d4a63fb80fd5', '-123.45 678.9 -0.01', '123.45 678.9 0.01', false);
+
+-- Case: input (400.0, 500.1, 600.2)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('9b31f6d6-4b75-4d91-922d-4f3835f9a8b8', '7841c704-b8ae-4664-bb2c-d4a63fb80fd5', '400 500.1 600.2', '400 500.1 600.2', false);
+
+-- Case: input (-999.99, -0.0001, 0.01)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('f18ec18c-f1b6-49a8-a49b-7bfb7eac6d13', '7841c704-b8ae-4664-bb2c-d4a63fb80fd5', '-999.99 -0.0001 0.01', '999.99 0.0001 0.01', false);
+
+--23
+-- Sample test case for input (3, 4, 5) - Tam giác vuông
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('a3f0d5be-bd1c-4f9e-bc8e-e4d9d1b0d1d8', '30a01889-fbc9-4eaf-9f4e-fa0341ea6ced', '3 4 5', 'Right triangle', true);
+
+-- Additional test cases (non-sample cases)
+-- Case: input (5, 5, 5) - Tam giác đều
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('b17c15ec-2a45-4b25-81f3-9d67f10a1f1c', '30a01889-fbc9-4eaf-9f4e-fa0341ea6ced', '5 5 5', 'Equilateral triangle', false);
+
+-- Case: input (5, 5, 8) - Tam giác cân
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('4b3e0bb4-7f8d-4e57-a3b1-4d7d5c8c5f0f', '30a01889-fbc9-4eaf-9f4e-fa0341ea6ced', '5 5 8', 'Isosceles triangle', false);
+-- Case: input (6, 8, 10) - Tam giác vuông
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('2e47d56d-3f5e-4d6e-94f5-3c9b2a8a1e7f', '30a01889-fbc9-4eaf-9f4e-fa0341ea6ced', '6 8 10', 'Right triangle', false);
+
+-- Case: input (3, 6, 8) - Tam giác thường
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('e75d2b99-774b-4f5d-918c-9a2b54d2b0e9', '30a01889-fbc9-4eaf-9f4e-fa0341ea6ced', '3 6 8', 'Triangle', false);
+
+-- Case: input (1, 2, 3) - Không phải tam giác
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('fa9c1e7c-7b2b-4976-a7b5-3fcd0c2e8e9a', '30a01889-fbc9-4eaf-9f4e-fa0341ea6ced', '1 2 3', 'Not a triangle', false);
+
+--24
+-- Sample test case for input (2, 2020) - February in a leap year
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d', '25315a21-41a1-464d-b9dc-d4ec978cd2ff', '2 2020', '29', true);
+
+-- Additional test cases (non-sample cases)
+-- Case: input (1, 2021) - January
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e', '25315a21-41a1-464d-b9dc-d4ec978cd2ff', '1 2021', '31', false);
+
+-- Case: input (2, 2021) - February in a non-leap year
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f', '25315a21-41a1-464d-b9dc-d4ec978cd2ff', '2 2021', '28', false);
+
+-- Case: input (4, 2021) - April
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('4d5e6f7a-8b9c-0d1e-2f3a-4b5c6d7e8f9a', '25315a21-41a1-464d-b9dc-d4ec978cd2ff', '4 2021', '30', false);
+
+-- Case: input (12, 2021) - December
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f9a0b', '25315a21-41a1-464d-b9dc-d4ec978cd2ff', '12 2021', '31', false);
+
+--25
+-- Sample test case for input '2024-06-26'
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('ab98c08f-0d0f-4631-bf98-cffde47abf41', 'e557b35c-715e-4d21-8aaf-8c86ad5690b1', '2024 6 26', '2024-06-25, 2024-06-27', true);
+
+-- Additional test cases (non-sample cases)
+-- Case: input '2024-01-01' - start of the year
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('cca7621a-235e-43f8-ba65-2f55040da2ed', 'e557b35c-715e-4d21-8aaf-8c86ad5690b1', '2024 1 1', '2023-12-31, 2024-01-02', false);
+
+-- Case: input '2024-02-29' - leap year
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('8004c1cc-8b12-4ced-8277-fd584bcbf9f3', 'e557b35c-715e-4d21-8aaf-8c86ad5690b1', '2024 2 29', '2024-02-28, 2024-03-01', false);
+
+-- Case: input '2024-12-31' - end of the year
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('51055fa5-1662-4e8a-9fdf-bd7359f41c2f', 'e557b35c-715e-4d21-8aaf-8c86ad5690b1', '2024 12 31', '2024-12-30, 2025-01-01', false);
+
+-- Case: input '2024-07-01'
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('c881861c-4ead-4cdd-a88a-db6ce0944779', 'e557b35c-715e-4d21-8aaf-8c86ad5690b1', '2024 7 1', '2024-06-30, 2024-07-02', false);
+
+--26
+-- Sample test case for input '2024-03-01' which is a Friday
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('6bd949ed-26e0-4b62-b210-d67bbebd87a7', '219cafcd-d4fe-4fb0-81fd-be2da867f9d4', '2024-03-01', 'Friday', true);
+
+-- Additional test cases (non-sample cases)
+-- Case: input '2024-01-01' which is a Monday
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('0ae61e21-ee29-47de-9288-f190d7fbfee4', '219cafcd-d4fe-4fb0-81fd-be2da867f9d4', '2024-01-01', 'Monday', false);
+
+-- Case: input '2024-12-31' which is a Tuesday
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('0668fbc4-85f0-4786-bb27-5a5df6543fb3', '219cafcd-d4fe-4fb0-81fd-be2da867f9d4', '2024-12-31', 'Tuesday', false);
+
+-- Case: input '2024-02-29' which is a Thursday (Leap year)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
+VALUES ('3a645e59-063c-4e05-b2e8-b866b04abe9b', '219cafcd-d4fe-4fb0-81fd-be2da867f9d4', '2024-02-29', 'Thursday', false);
