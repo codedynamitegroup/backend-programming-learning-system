@@ -591,7 +591,7 @@ INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample
 VALUES ('8004c1cc-8b12-4ced-8277-fd584bcbf9f3', 'e557b35c-715e-4d21-8aaf-8c86ad5690b1', '2024 2 29', '2024-02-28, 2024-03-01', false);
 
 -- Case: input '2024-12-31' - end of the year
-INSERT INTO test_cases (id, code_question_i5a9a4559-23c6-4c7a-978c-ee5fcefced7ad, input_data, output_data, is_sample)
+INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
 VALUES ('51055fa5-1662-4e8a-9fdf-bd7359f41c2f', 'e557b35c-715e-4d21-8aaf-8c86ad5690b1', '2024 12 31', '2024-12-30, 2025-01-01', false);
 
 -- Case: input '2024-07-01'
