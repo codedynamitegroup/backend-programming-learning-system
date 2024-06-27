@@ -30,6 +30,7 @@ public class ExamSubmission extends AggregateRoot<ExamSubmissionId> {
         type = builder.type;
         endTime = builder.endTime;
         status = builder.status;
+        score = builder.score;
     }
 
     public void setStatus(Status status) {
