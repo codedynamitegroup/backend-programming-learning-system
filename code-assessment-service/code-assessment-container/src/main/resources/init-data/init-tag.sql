@@ -136,7 +136,22 @@ values
 --23
     ('30a01889-fbc9-4eaf-9f4e-fa0341ea6ced', 'cd55e806-5d20-4813-b2ce-f8a235fc9151'),
     ('30a01889-fbc9-4eaf-9f4e-fa0341ea6ced', '2a11f923-7574-466f-a030-374ae5b18700'),
-    ('30a01889-fbc9-4eaf-9f4e-fa0341ea6ced', '5ef5d400-575b-4e85-82f2-d2cfe5d97378')
+    ('30a01889-fbc9-4eaf-9f4e-fa0341ea6ced', '5ef5d400-575b-4e85-82f2-d2cfe5d97378'),
+
+--24
+    ('25315a21-41a1-464d-b9dc-d4ec978cd2ff', 'cd55e806-5d20-4813-b2ce-f8a235fc9151'),
+    ('25315a21-41a1-464d-b9dc-d4ec978cd2ff', '2a11f923-7574-466f-a030-374ae5b18700'),
+    ('25315a21-41a1-464d-b9dc-d4ec978cd2ff', '5ef5d400-575b-4e85-82f2-d2cfe5d97378'),
+
+--25
+    ('e557b35c-715e-4d21-8aaf-8c86ad5690b1', 'cd55e806-5d20-4813-b2ce-f8a235fc9151'),
+    ('e557b35c-715e-4d21-8aaf-8c86ad5690b1', '2a11f923-7574-466f-a030-374ae5b18700'),
+    ('e557b35c-715e-4d21-8aaf-8c86ad5690b1', '5ef5d400-575b-4e85-82f2-d2cfe5d97378'),
+
+--26
+    ('219cafcd-d4fe-4fb0-81fd-be2da867f9d4', 'cd55e806-5d20-4813-b2ce-f8a235fc9151'),
+    ('219cafcd-d4fe-4fb0-81fd-be2da867f9d4', '2a11f923-7574-466f-a030-374ae5b18700'),
+    ('219cafcd-d4fe-4fb0-81fd-be2da867f9d4', '5ef5d400-575b-4e85-82f2-d2cfe5d97378')
     ;
 
 --        ('4d5d31cc-6386-4ef5-903d-625e64b122d7', 'Array', 'ALGORITHM'),
