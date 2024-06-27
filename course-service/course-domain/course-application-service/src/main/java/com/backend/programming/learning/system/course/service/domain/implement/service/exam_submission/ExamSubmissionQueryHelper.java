@@ -121,7 +121,7 @@ public class ExamSubmissionQueryHelper {
                         .mapToDouble(value -> value.getQuestion().getDefaultMark())
                         .sum();
 
-                Double grade = mark * maxGrade / totalMark * 100;
+                Double grade = Math.round((mark / totalMark) * maxGrade * 100.0) / 100.0;
 
                 queryStudentExamSubmissionResponses.add(QueryStudentExamSubmissionResponse.builder()
                         .examSubmissionId(examSubmission.getId().getValue())
@@ -135,7 +135,7 @@ public class ExamSubmissionQueryHelper {
                         .mark(mark)
                         .totalMark(totalMark)
                         .grade(grade)
-                        .totalGrade(grade)
+                        .totalGrade(maxGrade)
                         .build());
             }
         });

@@ -109,7 +109,7 @@ public class ExamQueryHelper {
                     .lastSubmitAt(examSubmission.getSubmitTime())
                     .lastMarkAt(examSubmission.getSubmitTime())
                     .status(Objects.isNull(examSubmission.status()) ? "NOT_SUBMITTED" : "SUBMITTED")
-                    .score(score)
+                    .score(examSubmission.getScore())
                     .maxScore(totalScore)
                     .build();
             queryGradeResponses.add(queryGradeResponse);
