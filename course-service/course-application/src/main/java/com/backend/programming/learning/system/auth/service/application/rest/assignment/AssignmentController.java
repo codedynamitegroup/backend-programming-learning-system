@@ -7,9 +7,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.*;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.AssignmentGradeResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.ListSubmissionAssignmentResponseEntity;
-import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.StudentAssignmentList;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.StudentAssignmentListResponse;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.assignment.AssignmentApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -22,7 +21,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -153,13 +151,24 @@ public class AssignmentController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
-                            schema = @Schema(implementation = StudentAssignmentList.class))
+                            schema = @Schema(implementation = StudentAssignmentListResponse.class))
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<StudentAssignmentList> getStudentAssignment(@RequestParam UUID courseId) {
+    public ResponseEntity<StudentAssignmentListResponse> getStudentAssignment(
+            @RequestParam UUID courseId,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "") String searchName) {
         log.info("Getting student assignment with courseId: {}", courseId);
-        StudentAssignmentList response = assignmentApplicationService.retrieveStudentAssignmentGrades(courseId);
+        StudentAssignmentListResponse response = assignmentApplicationService.retrieveStudentAssignmentGrades(
+                QueryStudentAssignmentListCommand.builder()
+                        .courseId(courseId)
+                        .pageNo(pageNo)
+                        .pageSize(pageSize)
+                        .searchName(searchName)
+                        .build()
+        );
         return ResponseEntity.ok(response);
     }
 
