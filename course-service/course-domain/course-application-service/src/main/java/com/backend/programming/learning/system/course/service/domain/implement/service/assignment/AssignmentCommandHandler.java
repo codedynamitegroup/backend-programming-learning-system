@@ -86,9 +86,15 @@ public class AssignmentCommandHandler {
     }
 
     @Transactional(readOnly = true)
-    public QueryAllAssignmentGradeResponse queryAssignmentGrade(UUID courseId,UUID userId) {
+    public QueryAllAssignmentGradeResponse queryAssignmentGrade(QueryAllAssignmentGradeByStudentCommand queryAllAssignmentGradeByStudentCommand) {
         log.info("Query assignment grade command received");
-        List<Assignment> assignments= assignmentQueryHelper.queryAssignmentGrade(courseId,userId);
+        Page<Assignment> assignments= assignmentQueryHelper.queryAssignmentGrade(
+                queryAllAssignmentGradeByStudentCommand.getCourseId(),
+                queryAllAssignmentGradeByStudentCommand.getUserId(),
+                queryAllAssignmentGradeByStudentCommand.getSearchName(),
+                queryAllAssignmentGradeByStudentCommand.getPageNo(),
+                queryAllAssignmentGradeByStudentCommand.getPageSize());
+        UUID userId= queryAllAssignmentGradeByStudentCommand.getUserId();
         User user= userRepository.findById(new UserId(userId)).get();
         return assignmentDataMapper.assignmentsToQueryAllAssignmentGradeResponse(assignments,user);
     }

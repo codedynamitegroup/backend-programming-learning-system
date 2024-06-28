@@ -186,23 +186,27 @@ public class AssignmentDataMapper {
     }
 
 
-    public QueryAllAssignmentGradeResponse assignmentsToQueryAllAssignmentGradeResponse(List<Assignment> assignments, User user) {
+    public QueryAllAssignmentGradeResponse assignmentsToQueryAllAssignmentGradeResponse(Page<Assignment> assignments, User user) {
 
+        List<Assignment> assignmentResponse = assignments.getContent();
         Integer countSubmission=0;
-        for(Assignment assignment: assignments)
+        for(Assignment assignment: assignmentResponse)
         {
             SubmissionAssignment submissionAssignment = submissionAssignmentRepository.findByAssignmentIdAndUserId(assignment.getId().getValue(), user.getId().getValue());
-            if(submissionAssignment.getSubmittedAt() != null)
+            if(submissionAssignment!=null&&submissionAssignment.getSubmittedAt() != null)
             {
                 countSubmission++;
             }
         }
-        List<AssignmentGradeResponseEntity> assignmentGradeResponseEntities = assignments.stream()
+        List<AssignmentGradeResponseEntity> assignmentGradeResponseEntities = assignmentResponse.stream()
                 .map(assignment -> assignmentToAssignmentGradeResponseEntity(assignment, user))
                 .collect(Collectors.toList());
         return QueryAllAssignmentGradeResponse.builder()
                 .assignments(assignmentGradeResponseEntities)
                 .countSubmission(countSubmission)
+                .currentPage(assignments.getNumber())
+                .totalItems(assignments.getTotalElements())
+                .totalPages(assignments.getTotalPages())
                 .build();
     }
 

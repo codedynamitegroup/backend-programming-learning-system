@@ -140,9 +140,23 @@ public class AssignmentController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<QueryAllAssignmentGradeResponse> getAssignmentGrade(@RequestParam UUID courseId, @RequestParam UUID userId) {
+    public ResponseEntity<QueryAllAssignmentGradeResponse> getAssignmentGrade(
+            @RequestParam UUID courseId,
+            @RequestParam UUID userId,
+            @RequestParam(defaultValue = "") String searchName,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize)
+    {
         log.info("Getting assignment grade with courseId: {} and userId: {}", courseId, userId);
-        QueryAllAssignmentGradeResponse response = assignmentApplicationService.queryAssignmentGrade(courseId, userId);
+        QueryAllAssignmentGradeResponse response = assignmentApplicationService.queryAssignmentGrade(
+                QueryAllAssignmentGradeByStudentCommand.builder()
+                        .courseId(courseId)
+                        .userId(userId)
+                        .searchName(searchName)
+                        .pageNo(pageNo)
+                        .pageSize(pageSize)
+                        .build()
+        );
         return ResponseEntity.ok(response);
     }
 

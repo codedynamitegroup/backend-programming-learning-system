@@ -57,8 +57,8 @@ public class AssignmentApplicationServiceImpl implements AssignmentApplicationSe
     }
 
     @Override
-    public QueryAllAssignmentGradeResponse queryAssignmentGrade(UUID courseId, UUID userId) {
-        return assignmentCommandHandler.queryAssignmentGrade(courseId, userId);
+    public QueryAllAssignmentGradeResponse queryAssignmentGrade(QueryAllAssignmentGradeByStudentCommand queryAllAssignmentGradeByStudentCommand) {
+        return assignmentCommandHandler.queryAssignmentGrade(queryAllAssignmentGradeByStudentCommand);
     }
 
     @Override

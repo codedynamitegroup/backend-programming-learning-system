@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.course.service.dataaccess.assignment.repository;
 
 import com.backend.programming.learning.system.course.service.dataaccess.assignment.entity.AssignmentEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -33,8 +35,9 @@ public interface AssignmentJpaRepository extends JpaRepository<AssignmentEntity,
     JOIN CourseUserEntity cu ON c.id = cu.course.id
     WHERE cu.user.id = :userId
     AND a.course.id = :courseId
+    AND (cast(:searchName as text) IS NULL or UPPER(a.title) like UPPER(concat('%', cast(:searchName as text), '%')))
     """)
-    List<AssignmentEntity> findListGradeAssignmentByCourseId( UUID courseId, UUID userId);
+    Page<AssignmentEntity> findListGradeAssignmentByCourseId(UUID courseId, UUID userId, String searchName, Pageable pageable);
 
 
     @Query("""
@@ -44,7 +47,5 @@ public interface AssignmentJpaRepository extends JpaRepository<AssignmentEntity,
     AND a.course.id = :courseId
     """)
     List<AssignmentEntity> findAllGradeStudentAssignment(UUID courseId);
-
-
 
 }

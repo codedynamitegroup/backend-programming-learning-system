@@ -5,6 +5,9 @@ import com.backend.programming.learning.system.course.service.dataaccess.assignm
 import com.backend.programming.learning.system.course.service.domain.entity.Assignment;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.AssignmentRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -66,9 +69,10 @@ public class AssignmentRepositoryImpl implements AssignmentRepository {
     }
 
     @Override
-    public List<Assignment> findListGradeAssignmentByCourseId(UUID courseId, UUID userId) {
-        return assignmentDataAccessMapper.assignmentEntityListToAssignmentList(
-                assignmentJpaRepository.findListGradeAssignmentByCourseId(courseId, userId));
+    public Page<Assignment> findListGradeAssignmentByCourseId(UUID courseId, UUID userId, String searchName, Integer page, Integer size) {
+        Pageable paging = PageRequest.of(page, size);
+        return assignmentJpaRepository.findListGradeAssignmentByCourseId(courseId, userId, searchName, paging)
+                .map(assignmentDataAccessMapper::assignmentEntityToAssignment);
     }
 
     @Override

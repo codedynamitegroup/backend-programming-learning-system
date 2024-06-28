@@ -36,6 +36,7 @@ public interface UserJpaRepository extends JpaRepository<UserEntity, UUID>{
             JOIN CourseUserEntity cu ON u.id = cu.user.id
             JOIN CourseEntity c ON cu.course.id = c.id
             WHERE c.id = :courseId
+            AND u.roleMoodle.id = 5
             AND (cast(:searchName as text) IS NULL or UPPER(u.email) like UPPER(concat('%', cast(:searchName as text), '%')))
            """)
     Page<UserEntity> findAllByCourseId(UUID courseId, String searchName, Pageable pageable);

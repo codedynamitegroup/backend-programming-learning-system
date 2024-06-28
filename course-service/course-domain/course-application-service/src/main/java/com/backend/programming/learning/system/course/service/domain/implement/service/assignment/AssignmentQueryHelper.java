@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.course.service.domain.exception.A
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.AssignmentRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,8 +41,8 @@ public class AssignmentQueryHelper {
     }
 
     @Transactional(readOnly = true)
-    public List<Assignment> queryAssignmentGrade(UUID courseId, UUID userId) {
-        return assignmentRepository.findListGradeAssignmentByCourseId(courseId, userId);
+    public Page<Assignment> queryAssignmentGrade(UUID courseId, UUID userId, String searchName, Integer page, Integer size) {
+        return assignmentRepository.findListGradeAssignmentByCourseId(courseId, userId, searchName, page, size);
     }
 
     @Transactional(readOnly = true)

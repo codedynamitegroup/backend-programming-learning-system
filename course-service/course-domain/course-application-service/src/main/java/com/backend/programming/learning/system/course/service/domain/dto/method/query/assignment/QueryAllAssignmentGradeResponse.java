@@ -13,4 +13,7 @@ import java.util.List;
 public class QueryAllAssignmentGradeResponse {
     List<AssignmentGradeResponseEntity> assignments;
     Integer countSubmission;
+    private final int currentPage;
+    private final long totalItems;
+    private final int totalPages;
 }

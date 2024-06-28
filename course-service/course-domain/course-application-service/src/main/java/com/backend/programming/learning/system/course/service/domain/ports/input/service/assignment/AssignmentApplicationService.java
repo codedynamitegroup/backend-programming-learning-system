@@ -34,7 +34,6 @@ public interface AssignmentApplicationService {
     ListSubmissionAssignmentResponseEntity queryAssignmentDetail(
             @Valid QueryAssignmentCommand queryAssignmentCommand);
 
-    QueryAllAssignmentGradeResponse queryAssignmentGrade(UUID courseId, UUID userId);
-
+    QueryAllAssignmentGradeResponse queryAssignmentGrade(QueryAllAssignmentGradeByStudentCommand queryAllAssignmentGradeByStudentCommand) ;
     StudentAssignmentListResponse retrieveStudentAssignmentGrades(QueryStudentAssignmentListCommand queryStudentAssignmentListCommand);
 }

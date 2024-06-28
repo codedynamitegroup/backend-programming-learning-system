@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.ports.outp
 
 import com.backend.programming.learning.system.course.service.domain.entity.Assignment;
 import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +21,6 @@ public interface AssignmentRepository {
     List<Assignment> findAll();
     List<Assignment> findRecentAssignment();
 
-    List<Assignment> findListGradeAssignmentByCourseId(UUID courseId, UUID userId);
-
+    Page<Assignment> findListGradeAssignmentByCourseId(UUID courseId, UUID userId, String searchName, Integer page, Integer size);
     List<Assignment> findAllGradeStudentAssignment(UUID courseId);
 }
