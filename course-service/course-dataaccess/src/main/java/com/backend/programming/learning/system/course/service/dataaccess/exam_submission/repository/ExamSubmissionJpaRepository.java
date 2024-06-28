@@ -40,4 +40,13 @@ public interface ExamSubmissionJpaRepository extends JpaRepository<ExamSubmissio
             LIMIT 1
             """, nativeQuery = true)
     Optional<ExamSubmissionEntity> findLatestExamSubmission(UUID examId, UUID userId);
+
+    @Query("""
+            SELECT es
+            FROM ExamSubmissionEntity es
+            WHERE es.exam.course.id = :courseId 
+                AND es.user.id = :userId 
+                AND UPPER(es.exam.name) LIKE %:searchName%
+            """)
+    List<ExamSubmissionEntity> findByCourseIdAndUserId(UUID courseId, UUID userId, String searchName);
 }

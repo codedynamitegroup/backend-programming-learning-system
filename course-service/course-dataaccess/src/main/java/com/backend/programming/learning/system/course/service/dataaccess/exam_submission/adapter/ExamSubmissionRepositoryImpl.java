@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.dataaccess.exam_submission.adapter;
 
+import com.backend.programming.learning.system.course.service.dataaccess.course.repository.CourseJpaRepository;
 import com.backend.programming.learning.system.course.service.dataaccess.exam.entity.ExamEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.exam.mapper.ExamDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.exam.repository.ExamJpaRepository;
@@ -25,6 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -37,6 +39,7 @@ public class ExamSubmissionRepositoryImpl implements ExamSubmissionRepository {
     private final ExamSubmissionJpaRepository examSubmissionJpaRepository;
     private final ExamJpaRepository examJpaRepository;
     private final UserJpaRepository userJpaRepository;
+    private final CourseJpaRepository courseJpaRepository;
     private final ExamSubmissionDataAccessMapper examSubmissionDataAccessMapper;
     private final ExamDataAccessMapper examDataAccessMapper;
     private final UserDataAccessMapper userDataAccessMapper;
@@ -118,5 +121,30 @@ public class ExamSubmissionRepositoryImpl implements ExamSubmissionRepository {
     public Optional<ExamSubmission> findLatestExamSubmissionByExamIdAndUserId(UUID examId, UUID userId) {
         return examSubmissionJpaRepository.findLatestExamSubmission(examId, userId)
                 .map(examSubmissionDataAccessMapper::examSubmissionEntityToExamSubmission);
+    }
+
+    @Override
+    public List<ExamSubmission> findByCourseIdAndUserId(UUID courseId, UUID userId, String searchName) {
+        List<ExamEntity> examEntities = examJpaRepository.findAllByCourseId(courseId);
+        List<ExamSubmissionEntity> examSubmissionEntities = examSubmissionJpaRepository
+                .findByCourseIdAndUserId(courseId, userId, searchName.toUpperCase());
+
+        List<ExamSubmission> response = new ArrayList<>();
+
+        examEntities.forEach(examEntity -> {
+            ExamSubmissionEntity examSubmissionEntity = examSubmissionEntities.stream()
+                    .filter(e -> e.getExam().getId().equals(examEntity.getId()))
+                    .findFirst()
+                    .orElse(null);
+            if(examSubmissionEntity != null) {
+                response.add(examSubmissionDataAccessMapper.examSubmissionEntityToExamSubmission(examSubmissionEntity));
+            } else {
+                response.add(ExamSubmission.builder()
+                        .exam(examDataAccessMapper.examEntityToExam(examEntity))
+                        .user(User.builder().build())
+                        .build());
+            }
+        });
+        return response;
     }
 }

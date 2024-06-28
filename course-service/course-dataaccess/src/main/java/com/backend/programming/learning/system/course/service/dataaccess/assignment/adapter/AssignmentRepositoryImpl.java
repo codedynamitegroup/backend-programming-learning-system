@@ -69,10 +69,11 @@ public class AssignmentRepositoryImpl implements AssignmentRepository {
     }
 
     @Override
-    public Page<Assignment> findListGradeAssignmentByCourseId(UUID courseId, UUID userId, String searchName, Integer page, Integer size) {
+    public List<Assignment> findListGradeAssignmentByCourseId(UUID courseId, UUID userId, String searchName, Integer page, Integer size) {
         Pageable paging = PageRequest.of(page, size);
-        return assignmentJpaRepository.findListGradeAssignmentByCourseId(courseId, userId, searchName, paging)
-                .map(assignmentDataAccessMapper::assignmentEntityToAssignment);
+        return assignmentJpaRepository.findListGradeAssignmentByCourseId(courseId, userId, searchName)
+                .stream()
+                .map(assignmentDataAccessMapper::assignmentEntityToAssignment).toList();
     }
 
     @Override

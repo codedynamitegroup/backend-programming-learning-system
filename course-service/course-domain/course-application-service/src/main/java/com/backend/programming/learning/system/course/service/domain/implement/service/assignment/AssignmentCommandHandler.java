@@ -11,9 +11,11 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.StudentAssignmentListResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.Assignment;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
+import com.backend.programming.learning.system.course.service.domain.entity.ExamSubmission;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.mapper.assignment.AssignmentDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamSubmissionRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +38,7 @@ public class AssignmentCommandHandler {
     private final AssignmentDataMapper assignmentDataMapper;
     private final UserRepository userRepository;
     private final ExamRepository examRepository;
+    private final ExamSubmissionRepository examSubmissionRepository;
 
     @Transactional
     public CreateAssignmentResponse createAssignment(CreateAssignmentCommand createAssignmentCommand) {
@@ -88,15 +91,21 @@ public class AssignmentCommandHandler {
     @Transactional(readOnly = true)
     public QueryAllAssignmentGradeResponse queryAssignmentGrade(QueryAllAssignmentGradeByStudentCommand queryAllAssignmentGradeByStudentCommand) {
         log.info("Query assignment grade command received");
-        Page<Assignment> assignments= assignmentQueryHelper.queryAssignmentGrade(
+        List<Assignment> assignments= assignmentQueryHelper.queryAssignmentGrade(
                 queryAllAssignmentGradeByStudentCommand.getCourseId(),
                 queryAllAssignmentGradeByStudentCommand.getUserId(),
                 queryAllAssignmentGradeByStudentCommand.getSearchName(),
                 queryAllAssignmentGradeByStudentCommand.getPageNo(),
                 queryAllAssignmentGradeByStudentCommand.getPageSize());
+        List<ExamSubmission> exams = examSubmissionRepository.findByCourseIdAndUserId(
+                queryAllAssignmentGradeByStudentCommand.getCourseId(),
+                queryAllAssignmentGradeByStudentCommand.getUserId(),
+                queryAllAssignmentGradeByStudentCommand.getSearchName());
+
         UUID userId= queryAllAssignmentGradeByStudentCommand.getUserId();
         User user= userRepository.findById(new UserId(userId)).get();
-        return assignmentDataMapper.assignmentsToQueryAllAssignmentGradeResponse(assignments,user);
+        return assignmentDataMapper.toQueryAllAssignmentGradeResponse(assignments, exams ,user,
+                queryAllAssignmentGradeByStudentCommand.getPageNo(), queryAllAssignmentGradeByStudentCommand.getPageSize());
     }
 
     @Transactional(readOnly = true)
