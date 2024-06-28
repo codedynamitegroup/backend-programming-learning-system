@@ -6,6 +6,9 @@ import com.backend.programming.learning.system.course.service.domain.entity.User
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -74,8 +77,9 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> findAllByCourseId(UUID courseId) {
-        return userDataAccessMapper
-                .userEntityListToUserList(userJpaRepository.findAllByCourseId(courseId));
+    public Page<User> findAllByCourseId(UUID courseId, Integer page, Integer size, String searchName) {
+        Pageable paging = PageRequest.of(page, size);
+        return userJpaRepository.findAllByCourseId(courseId, searchName, paging)
+                .map(userDataAccessMapper::userEntityToUser);
     }
 }

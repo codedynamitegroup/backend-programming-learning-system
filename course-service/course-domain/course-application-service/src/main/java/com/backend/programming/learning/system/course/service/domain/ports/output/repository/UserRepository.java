@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,5 +29,5 @@ public interface UserRepository {
 
     void deleteByUserMoodleId(Integer userIdMoodle);
 
-    List<User> findAllByCourseId(UUID courseId);
+    Page<User> findAllByCourseId(UUID courseId, Integer page, Integer size, String searchName);
 }

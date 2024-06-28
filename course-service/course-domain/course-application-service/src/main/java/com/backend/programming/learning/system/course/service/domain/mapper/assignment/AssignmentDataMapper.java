@@ -16,6 +16,7 @@ import com.backend.programming.learning.system.course.service.domain.mapper.intr
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.course.service.domain.valueobject.Type;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -205,9 +206,10 @@ public class AssignmentDataMapper {
                 .build();
     }
 
-    public StudentAssignmentList assignmentsToStudentAssignmentList(List<Assignment> assignments,
-                                                                    List<Exam> exams, List<User> users) {
-        List<StudentGrade> studentGrades = users.stream()
+    public StudentAssignmentListResponse assignmentsToStudentAssignmentList(List<Assignment> assignments,
+                                                                            List<Exam> exams, Page<User> users) {
+        List<User> userResponses = users.getContent();
+        List<StudentGrade> studentGrades = userResponses.stream()
                 .map(user -> {
                     List<AssignmentGradeResponseEntity> assignmentGradeResponseEntities = assignments.stream()
                             .map(assignment -> assignmentToAssignmentGradeResponseEntity(assignment, user))
@@ -233,7 +235,7 @@ public class AssignmentDataMapper {
             });
         });
 
-        StudentAssignmentList studentAssignmentList = StudentAssignmentList.builder()
+        StudentAssignmentListResponse studentAssignmentList = StudentAssignmentListResponse.builder()
                 .assignments(assignments.stream()
                         .map(assignment -> AssignmentMaxGradeInfo.builder()
                                 .name(assignment.getTitle())
@@ -241,6 +243,9 @@ public class AssignmentDataMapper {
                                 .build())
                         .collect(Collectors.toList()))
                 .students(studentGrades)
+                .currentPage(users.getNumber())
+                .totalItems(users.getTotalElements())
+                .totalPages(users.getTotalPages())
                 .build();
 
         List<AssignmentMaxGradeInfo> examMaxGradeInfo = exams.stream()
