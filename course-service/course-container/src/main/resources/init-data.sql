@@ -263,7 +263,9 @@ VALUES('1ca8c89a-1bd0-41b2-adf0-4f7b55f8b256'::uuid, '08b65a39-394f-4977-a5fa-3f
 INSERT INTO public.exam_question
 (id, exam_id, question_id, page)
 VALUES('c29ccb3f-2429-4d49-9cbb-ba348164be58'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, '82a72f33-69d1-417a-bc4a-54e4a3f42a06'::uuid, 0),
-             ('c29ccb3f-2429-4d49-9cbb-ba348164be59'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, 'b6484e21-6937-489c-b031-b71767994233'::uuid, 0);
+             ('c29ccb3f-2429-4d49-9cbb-ba348164be59'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, 'b6484e21-6937-489c-b031-b71767994233'::uuid, 0),
+             ('c29ccb3f-2429-4d49-9cbb-ba348164be60'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, 'b6484e21-6937-489c-b031-b71767994221'::uuid, 0);
+
 
 INSERT INTO public.exam_question
 (id, exam_id, question_id, page)
