@@ -57,6 +57,16 @@ public class CalendarEventQueryHelper {
                 user.getId().getValue());
     }
 
+    @Transactional(readOnly = true)
+    public List<CalendarEvent> findAllCalendarEventsByExamId(UUID examId) {
+        return calendarEventRepository.findAllByExamId(examId);
+    }
+
+    @Transactional(readOnly = true)
+    public List<CalendarEvent> findAllCalendarEventsByAssignmentId(UUID assignmentId) {
+        return calendarEventRepository.findAllByAssignmentId(assignmentId);
+    }
+
     private Page<CourseUser> getAllCoursesByUserId(UUID userId) {
         return courseUserRepository.findAllCourseByUserId(
                 userId, 0, 9999999, "", null);
@@ -70,6 +80,7 @@ public class CalendarEventQueryHelper {
         }
         return user.get();
     }
+
 }
 
 
