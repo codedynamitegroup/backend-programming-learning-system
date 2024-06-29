@@ -55,4 +55,10 @@ public interface CalendarEventJpaRepository extends JpaRepository<CalendarEventE
         where c.exam.id = ?1
     """)
     List<CalendarEventEntity> findAllByExamId(UUID examId);
+
+    @Query("""
+        select c from CalendarEventEntity c
+        where c.assignment.id = ?1
+    """)
+    List<CalendarEventEntity> findAllByAssignmentId(UUID assignmentId);
 }

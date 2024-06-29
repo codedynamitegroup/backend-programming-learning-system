@@ -101,4 +101,14 @@ public class CalendarEventCommandHandler {
         return calendarEvents.get(0);
     }
 
+    @Transactional(readOnly = true)
+    public CalendarEvent findByAssignmentId(UUID assignmentId) {
+        List<CalendarEvent> calendarEvents = calendarEventQueryHelper.findAllCalendarEventsByAssignmentId(assignmentId);
+        if (calendarEvents.isEmpty()) {
+            log.warn("No calendar event found for assignment id: {}", assignmentId);
+            return null;
+        }
+        return calendarEvents.get(0);
+    }
+
 }

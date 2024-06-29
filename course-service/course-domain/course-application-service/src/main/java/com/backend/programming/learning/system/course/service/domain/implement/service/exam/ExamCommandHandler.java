@@ -65,7 +65,7 @@ public class ExamCommandHandler {
 
         CreateCalendarEventCommand createCalendarEventCommand = CreateCalendarEventCommand.builder()
                 .name("Exam " + examCreated.getName())
-                .description("Exam " + examCreated.getName() + " start at " + examCreated.getTimeOpen() + " and end at " + examCreated.getTimeClose())
+                .description(examCreated.getIntro())
                 .eventType("COURSE")
                 .startTime(examCreated.getTimeOpen())
                 .endTime(examCreated.getTimeClose())
@@ -125,12 +125,18 @@ public class ExamCommandHandler {
         CalendarEvent calendarEvent = calendarEventCommandHandler.findByExamId(examId.getValue());
         if (calendarEvent != null) {
             UpdateCalendarEventCommand updateCalendarEventCommand = UpdateCalendarEventCommand.builder()
-                    .name("Exam " + exam.getName())
-                    .description("Exam " + exam.getName() + " start at " + exam.getTimeOpen() + " and end at " + exam.getTimeClose())
-                    .startTime(exam.getTimeOpen())
-                    .endTime(exam.getTimeClose())
-                    .courseId(exam.getCourse().getId().getValue())
-                    .examId(exam.getId().getValue())
+                    .name(exam.getName() == null
+                                    ? null
+                                    : "Exam " + exam.getName())
+                    .description(exam.getIntro() == null
+                                    ? null
+                                    : exam.getIntro())
+                    .startTime(exam.getTimeOpen() == null
+                                    ? null
+                                    : exam.getTimeOpen())
+                    .endTime(exam.getTimeClose() == null
+                                    ? null
+                                    : exam.getTimeClose())
                     .build();
             calendarEventCommandHandler.updateCalendarEvent(calendarEvent.getId().getValue(), updateCalendarEventCommand);
         }
