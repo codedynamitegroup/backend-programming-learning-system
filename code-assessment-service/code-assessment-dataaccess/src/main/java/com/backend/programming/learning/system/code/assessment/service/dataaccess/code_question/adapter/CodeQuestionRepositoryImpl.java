@@ -225,7 +225,6 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
                         searchExcludeFinalWord,
                         searchFinalWord,
                         difficulty == null? null: difficulty.name(),
-                        userId.getValue(),
                         isPublic,
                         search,
                         pageable);
