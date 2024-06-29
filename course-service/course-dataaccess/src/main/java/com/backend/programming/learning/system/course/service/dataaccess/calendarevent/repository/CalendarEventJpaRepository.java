@@ -49,4 +49,10 @@ public interface CalendarEventJpaRepository extends JpaRepository<CalendarEventE
             ZonedDateTime fromTime,
             ZonedDateTime toTime
     );
+
+    @Query("""
+        select c from CalendarEventEntity c
+        where c.exam.id = ?1
+    """)
+    List<CalendarEventEntity> findAllByExamId(UUID examId);
 }

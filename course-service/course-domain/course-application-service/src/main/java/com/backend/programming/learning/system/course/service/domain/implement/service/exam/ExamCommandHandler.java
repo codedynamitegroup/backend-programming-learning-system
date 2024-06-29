@@ -1,8 +1,10 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.exam;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.calendarevent.CreateCalendarEventCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam.CreateExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam.CreateExamResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.CreateExamQuestionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.delete.calendarevent.DeleteCalendarEventCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.course.DeleteCourseResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.exam.DeleteExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryAllExamCommand;
@@ -11,10 +13,13 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryGradeCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryOverviewResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.calendarevent.UpdateCalendarEventCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.exam.UpdateExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.exam.UpdateExamResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.exam.ExamResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.entity.CalendarEvent;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
+import com.backend.programming.learning.system.course.service.domain.implement.service.calendarevent.CalendarEventCommandHandler;
 import com.backend.programming.learning.system.course.service.domain.implement.service.exam_question.ExamQuestionCreateHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.exam_question.ExamQuestionDeleteHelper;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam.ExamDataMapper;
@@ -25,6 +30,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 
 /**
@@ -44,6 +52,7 @@ public class ExamCommandHandler {
     private final ExamDataMapper examDataMapper;
     private final ExamQuestionCreateHelper examQuestionCreateHelper;
     private final ExamQuestionDeleteHelper examQuestionDeleteHelper;
+    private final CalendarEventCommandHandler calendarEventCommandHandler;
 
     @Transactional
     public CreateExamResponse createExam(CreateExamCommand createExamCommand) {
@@ -53,6 +62,20 @@ public class ExamCommandHandler {
                         .examId(examCreated.getId().getValue())
                         .questionIds(createExamCommand.questionIds())
                         .build());
+
+        CreateCalendarEventCommand createCalendarEventCommand = CreateCalendarEventCommand.builder()
+                .name("Exam " + examCreated.getName())
+                .description("Exam " + examCreated.getName() + " start at " + examCreated.getTimeOpen() + " and end at " + examCreated.getTimeClose())
+                .eventType("COURSE")
+                .startTime(examCreated.getTimeOpen())
+                .endTime(examCreated.getTimeClose())
+                .courseId(createExamCommand.courseId())
+                .examId(examCreated.getId().getValue())
+                .component("EXAM")
+                .build();
+
+        calendarEventCommandHandler.createCalendarEvent(createCalendarEventCommand);
+
         log.info("Exam is created with id: {}", examCreated.getId());
         return examDataMapper.examToCreateExamResponse(examCreated, "Exam created successfully");
     }
@@ -77,6 +100,15 @@ public class ExamCommandHandler {
     @Transactional
     public DeleteCourseResponse deleteExam(DeleteExamCommand deleteExamCommand) {
         examDeleteHelper.deleteExam(new ExamId(deleteExamCommand.examId()));
+
+        CalendarEvent calendarEvent = calendarEventCommandHandler.findByExamId(deleteExamCommand.examId());
+        if (calendarEvent != null) {
+            DeleteCalendarEventCommand deleteCalendarEventCommand = DeleteCalendarEventCommand.builder()
+                    .calendarEventId(calendarEvent.getId().getValue())
+                    .build();
+            calendarEventCommandHandler.deleteCalendarEvent(deleteCalendarEventCommand);
+        }
+
         return new DeleteCourseResponse("Exam deleted successfully");
     }
 
@@ -89,6 +121,21 @@ public class ExamCommandHandler {
                         .examId(examId.getValue())
                         .questionIds(updateExamCommand.questionIds())
                         .build());
+
+        CalendarEvent calendarEvent = calendarEventCommandHandler.findByExamId(examId.getValue());
+        if (calendarEvent != null) {
+            UpdateCalendarEventCommand updateCalendarEventCommand = UpdateCalendarEventCommand.builder()
+                    .name("Exam " + exam.getName())
+                    .description("Exam " + exam.getName() + " start at " + exam.getTimeOpen() + " and end at " + exam.getTimeClose())
+                    .startTime(exam.getTimeOpen())
+                    .endTime(exam.getTimeClose())
+                    .courseId(exam.getCourse().getId().getValue())
+                    .examId(exam.getId().getValue())
+                    .build();
+            calendarEventCommandHandler.updateCalendarEvent(calendarEvent.getId().getValue(), updateCalendarEventCommand);
+        }
+
+        log.info("Exam updated with id: {}", exam.getId().getValue());
         return examDataMapper.examToUpdateExamResponse(exam, "Exam updated successfully");
     }
 

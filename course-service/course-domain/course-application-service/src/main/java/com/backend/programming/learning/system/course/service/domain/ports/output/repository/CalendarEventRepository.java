@@ -26,4 +26,6 @@ public interface CalendarEventRepository {
             ZonedDateTime fromTime,
             ZonedDateTime toTime,
             UUID userId);
+
+    List<CalendarEvent> findAllByExamId(UUID examId);
 }
