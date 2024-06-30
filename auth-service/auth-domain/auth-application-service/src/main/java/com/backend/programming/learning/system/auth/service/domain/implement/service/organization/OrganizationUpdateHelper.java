@@ -70,9 +70,6 @@ public class OrganizationUpdateHelper {
         if (updateOrganizationCommand.getMoodleUrl() != null) {
             organization.setMoodleUrl(updateOrganizationCommand.getMoodleUrl());
         }
-        if (updateOrganizationCommand.getIsVerified() != null) {
-            organization.setVerified(updateOrganizationCommand.getIsVerified());
-        }
         if (updateOrganizationCommand.getIsDeleted() != null) {
             organization.setDeleted(updateOrganizationCommand.getIsDeleted());
         }
