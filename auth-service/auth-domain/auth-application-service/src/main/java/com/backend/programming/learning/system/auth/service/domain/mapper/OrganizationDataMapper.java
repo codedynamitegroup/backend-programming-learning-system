@@ -84,7 +84,6 @@ public class OrganizationDataMapper {
                 .createdAt(organization.getCreatedAt())
                 .updatedAt(organization.getUpdatedAt())
                 .isDeleted(organization.getDeleted())
-                .isVerified(organization.getVerified())
                 .build();
     }
 

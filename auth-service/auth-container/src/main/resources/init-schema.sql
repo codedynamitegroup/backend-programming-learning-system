@@ -71,7 +71,6 @@ CREATE TABLE "public".main_organization (
 	updated_at TIMESTAMP WITH TIME ZONE,
 	updated_by uuid,
 	created_by uuid,
-	is_verified boolean NOT NULL DEFAULT false,
 	is_deleted boolean NOT NULL DEFAULT false,
 	PRIMARY KEY ("id")
 );

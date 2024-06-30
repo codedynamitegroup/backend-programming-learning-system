@@ -37,12 +37,6 @@ public class OrganizationRepositoryImpl implements OrganizationRepository {
     }
 
     @Override
-    public Optional<Organization> findByIdAndIsVerifiedTrue(OrganizationId organizationId) {
-        return organizationJpaRepository.findByIdAndIsVerifiedTrue(organizationId.getValue())
-                .map(organizationDataAccessMapper::organizationEntityToOrganization);
-    }
-
-    @Override
     public Optional<Organization> findByIdAndIsDeletedTrueOrFalse(OrganizationId organizationId) {
         return organizationJpaRepository.findById(organizationId.getValue())
                 .map(organizationDataAccessMapper::organizationEntityToOrganization);
