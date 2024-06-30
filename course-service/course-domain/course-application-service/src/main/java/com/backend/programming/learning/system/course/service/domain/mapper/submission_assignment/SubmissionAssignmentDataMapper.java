@@ -18,6 +18,7 @@ import com.backend.programming.learning.system.course.service.domain.mapper.user
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionAssignmentFileRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionAssignmentOnlineTextRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionGradeRepository;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -158,11 +159,12 @@ public class SubmissionAssignmentDataMapper {
                 .build();
     }
 
-    public QueryAllSubmissionAssignmentResponse submissionAssignmentsToQueryAllSubmissionAssignmentResponse(List<SubmissionAssignment> submissionAssignments) {
+    public QueryAllSubmissionAssignmentResponse submissionAssignmentsToQueryAllSubmissionAssignmentResponse(Page<SubmissionAssignment> submissionAssignments) {
         return QueryAllSubmissionAssignmentResponse.builder()
-                .submissionAssignments(submissionAssignments.stream()
-                        .map(this::submissionAssignmentToSubmissionAssignmentResponseEntity)
-                        .toList())
+                .submissionAssignments(submissionAssignments.map(this::submissionAssignmentToSubmissionAssignmentResponseEntity).getContent())
+                .currentPage(submissionAssignments.getNumber())
+                .totalItems(submissionAssignments.getTotalElements())
+                .totalPages(submissionAssignments.getTotalPages())
                 .build();
     }
 

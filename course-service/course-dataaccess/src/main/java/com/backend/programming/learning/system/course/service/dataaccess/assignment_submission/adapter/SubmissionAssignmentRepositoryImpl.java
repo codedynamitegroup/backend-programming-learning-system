@@ -5,6 +5,9 @@ import com.backend.programming.learning.system.course.service.dataaccess.assignm
 import com.backend.programming.learning.system.course.service.domain.entity.SubmissionAssignment;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionAssignmentRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.AssignmentId;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -37,9 +40,12 @@ public class SubmissionAssignmentRepositoryImpl implements SubmissionAssignmentR
     }
 
     @Override
-    public List<SubmissionAssignment> findAllByAssignmentId(AssignmentId assignmentId) {
-        return submissionAssignmentDataAccessMapper.assignmentSubmissionEntityListToAssignmentSubmissionList(submissionAssignmentJpaRepository.findAllByAssignmentId(assignmentId.getValue()));
+    public Page<SubmissionAssignment> findAllByAssignmentId(UUID assignmentId, String search, Boolean isGraded, Integer page, Integer size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return submissionAssignmentJpaRepository.findAllByAssignmentId(assignmentId, search, isGraded, pageRequest)
+                .map(submissionAssignmentDataAccessMapper::assignmentSubmissionEntityToAssignmentSubmission);
     }
+
 
     @Override
     public void deleteSubmissionAssignmentById(UUID submissionAssignmentId) {

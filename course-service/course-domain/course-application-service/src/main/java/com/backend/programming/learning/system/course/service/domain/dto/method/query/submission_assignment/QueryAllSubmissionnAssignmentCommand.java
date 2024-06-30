@@ -13,4 +13,15 @@ import java.util.UUID;
 public class QueryAllSubmissionnAssignmentCommand {
     @NotNull
     private final UUID assignmentId;
+
+    @NotNull
+    private final int pageNo;
+
+    @NotNull
+    private final int pageSize;
+
+
+    private final String searchName;
+
+    private final Boolean isGraded;
 }
