@@ -245,7 +245,6 @@ public class ExamSubmissionCreateHelper {
         });
 
         examSubmissionLast.setScore(mark.get());
-//        examSubmissionLast.setScore(mark.get() / totleMark.get() * exam.getMaxScore());
 
         examSubmissionRepository.save(examSubmissionLast);
     }

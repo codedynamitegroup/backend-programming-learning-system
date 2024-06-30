@@ -37,7 +37,7 @@ public interface AssignmentJpaRepository extends JpaRepository<AssignmentEntity,
     AND a.course.id = :courseId
     AND (cast(:searchName as text) IS NULL or UPPER(a.title) like UPPER(concat('%', cast(:searchName as text), '%')))
     """)
-    Page<AssignmentEntity> findListGradeAssignmentByCourseId(UUID courseId, UUID userId, String searchName, Pageable pageable);
+    List<AssignmentEntity> findListGradeAssignmentByCourseId(UUID courseId, UUID userId, String searchName);
 
 
     @Query("""

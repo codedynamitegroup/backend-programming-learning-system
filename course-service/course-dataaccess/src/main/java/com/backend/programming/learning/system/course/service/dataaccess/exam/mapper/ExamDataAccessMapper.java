@@ -14,7 +14,9 @@ import org.springframework.stereotype.Component;
 public class ExamDataAccessMapper{
     private final CourseDataAccessMapper courseDataAccessMapper;
     public ExamEntity examToExamEntity(Exam exam) {
-        CourseEntity courseEntity = courseDataAccessMapper.courseToCourseEntity(exam.getCourse());
+        CourseEntity courseEntity =
+                exam.getCourse() == null ? null :
+                courseDataAccessMapper.courseToCourseEntity(exam.getCourse());
         return ExamEntity.builder()
                 .id(exam.getId().getValue())
                 .course(courseEntity)

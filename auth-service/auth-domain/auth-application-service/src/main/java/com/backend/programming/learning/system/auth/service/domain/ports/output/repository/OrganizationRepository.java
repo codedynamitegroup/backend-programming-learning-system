@@ -12,7 +12,6 @@ import java.util.Optional;
 public interface OrganizationRepository {
     Organization save(Organization organization);
     Optional<Organization> findById(OrganizationId organizationId);
-    Optional<Organization> findByIdAndIsVerifiedTrue(OrganizationId organizationId);
     Optional<Organization> findByIdAndIsDeletedTrueOrFalse(OrganizationId organizationId);
     Page<Organization> findAll(Integer page, Integer size, String searchName);
 }

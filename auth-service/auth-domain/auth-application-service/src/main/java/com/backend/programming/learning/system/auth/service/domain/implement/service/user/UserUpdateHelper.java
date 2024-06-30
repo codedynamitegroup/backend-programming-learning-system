@@ -87,7 +87,7 @@ public class UserUpdateHelper {
             log.error("User is already assigned to an organization!");
             throw new AuthDomainException("User is already assigned to an organization!");
         }
-        Organization organization = findOrganizationAndIsVerifiedTrue(assignUserToOrganizationCommand.getOrganizationId());
+        Organization organization = findOrganizationAndIsDeletedFalse(assignUserToOrganizationCommand.getOrganizationId());
         String assignedRoleName = assignUserToOrganizationCommand.getRoleName();
         user.setUpdatedAt(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
         user.setOrganization(organization);
@@ -223,8 +223,8 @@ public class UserUpdateHelper {
         return userResult;
     }
 
-    private Organization findOrganizationAndIsVerifiedTrue(UUID organizationId) {
-        Optional<Organization> organizationResult = organizationRepository.findByIdAndIsVerifiedTrue(new OrganizationId(organizationId));
+    private Organization findOrganizationAndIsDeletedFalse(UUID organizationId) {
+        Optional<Organization> organizationResult = organizationRepository.findById(new OrganizationId(organizationId));
         if (organizationResult.isEmpty()) {
             log.warn("Organization with id: {} is not verified", organizationId);
             throw new AuthDomainException("Organization is not verified with id:" + organizationId);

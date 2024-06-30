@@ -27,4 +27,6 @@ public interface ExamSubmissionRepository {
     List<ExamSubmission> findAllByExamIdAndUserId(UUID examId, UUID userId);
 
     Optional<ExamSubmission> findLatestExamSubmissionByExamIdAndUserId(UUID examId, UUID userId);
+
+    List<ExamSubmission> findByCourseIdAndUserId(UUID courseId, UUID userId, String searchName);
 }

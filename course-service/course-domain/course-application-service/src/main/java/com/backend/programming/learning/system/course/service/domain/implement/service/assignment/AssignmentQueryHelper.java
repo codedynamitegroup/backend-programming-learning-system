@@ -41,7 +41,7 @@ public class AssignmentQueryHelper {
     }
 
     @Transactional(readOnly = true)
-    public Page<Assignment> queryAssignmentGrade(UUID courseId, UUID userId, String searchName, Integer page, Integer size) {
+    public List<Assignment> queryAssignmentGrade(UUID courseId, UUID userId, String searchName, Integer page, Integer size) {
         return assignmentRepository.findListGradeAssignmentByCourseId(courseId, userId, searchName, page, size);
     }
 

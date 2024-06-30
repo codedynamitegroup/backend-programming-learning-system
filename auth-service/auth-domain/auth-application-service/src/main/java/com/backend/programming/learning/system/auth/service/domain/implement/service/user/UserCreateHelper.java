@@ -41,7 +41,7 @@ public class UserCreateHelper {
     @Transactional
     public UserCreatedEvent createUser(CreateUserCommand createUserCommand) {
         findUserWithEmail(createUserCommand.getEmail());
-        findOrganizationAndIsVerifiedTrue(createUserCommand.getOrganizationId());
+        findOrganizationAndIsDeletedFalse(createUserCommand.getOrganizationId());
 
         User user = authDataMapper.createUserCommandToUser(createUserCommand);
         user.setLinkedWithMicrosoft(false);
@@ -107,11 +107,11 @@ public class UserCreateHelper {
         }
     }
 
-    private void findOrganizationAndIsVerifiedTrue(UUID organizationId) {
+    private void findOrganizationAndIsDeletedFalse(UUID organizationId) {
         if (organizationId == null) {
             return;
         }
-        Optional<Organization> organizationResult = organizationRepository.findByIdAndIsVerifiedTrue(new OrganizationId(organizationId));
+        Optional<Organization> organizationResult = organizationRepository.findById(new OrganizationId(organizationId));
         if (organizationResult.isEmpty()) {
             log.warn("Organization with id: {} is not verified", organizationId);
             throw new AuthDomainException("Organization is not verified with id:" + organizationId);

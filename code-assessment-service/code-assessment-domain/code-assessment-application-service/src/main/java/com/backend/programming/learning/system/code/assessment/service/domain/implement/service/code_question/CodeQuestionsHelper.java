@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.tag.AddTagToCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.language.DeleteLanguageToCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.tag.DeleteCodeQuestionTagCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.AdminDetailCodeQuestionQuery;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsQuery;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetDetailCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_question.UpdateCodeQuestionCommand;
@@ -158,6 +159,11 @@ public class CodeQuestionsHelper {
                         query.getSolved(),
                         query.getSearch(),
                         true);
+        codeQuestions.map(item->{
+            Integer countPeople = codeSubmissionRepository.countPeopleAttend(item.getId());
+            item.setNumberOfPeopleAttend(countPeople);
+            return item;
+        });
         return codeQuestions;
     }
 
@@ -314,5 +320,9 @@ public class CodeQuestionsHelper {
                         query.getSearch(),
                         query.getIsPublic());
         return codeQuestions;
+    }
+
+    public CodeQuestion getAdminDetailCodeQuestion(AdminDetailCodeQuestionQuery query) {
+        return null;
     }
 }

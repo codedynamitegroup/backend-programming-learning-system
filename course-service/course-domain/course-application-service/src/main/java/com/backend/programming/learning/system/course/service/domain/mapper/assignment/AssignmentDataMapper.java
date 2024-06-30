@@ -21,7 +21,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 @RequiredArgsConstructor
@@ -261,5 +263,57 @@ public class AssignmentDataMapper {
         studentAssignmentList.getAssignments().addAll(examMaxGradeInfo);
 
         return studentAssignmentList;
+    }
+
+    public QueryAllAssignmentGradeResponse toQueryAllAssignmentGradeResponse(List<Assignment> assignments,
+                                                                                         List<ExamSubmission> exams,
+                                                                                         User user, int pageNo, int pageSize) {
+        Integer countSubmission=0;
+        for(Assignment assignment: assignments)
+        {
+            SubmissionAssignment submissionAssignment = submissionAssignmentRepository
+                    .findByAssignmentIdAndUserId(assignment.getId().getValue(), user.getId().getValue());
+            if(submissionAssignment!=null&&submissionAssignment.getSubmittedAt() != null)
+            {
+                countSubmission++;
+            }
+        }
+
+        List<AssignmentGradeResponseEntity> assignmentGradeResponseEntities = assignments.stream()
+                .map(assignment -> assignmentToAssignmentGradeResponseEntity(assignment, user))
+                .toList();
+        AtomicReference<Integer> countSubmissionExam = new AtomicReference<>(0);
+        List<AssignmentGradeResponseEntity> examGradeResponseEntities = exams.stream()
+                .peek(examSubmission -> {
+                    if(examSubmission.getSubmitTime() != null)
+                        countSubmissionExam.getAndSet(countSubmissionExam.get() + 1);
+                })
+                .map(exam ->
+                    AssignmentGradeResponseEntity.builder()
+                            .id(exam.getExam().getId().getValue())
+                            .title(exam.getExam().getName())
+                            .type("EXAM")
+                            .grade(exam.getScore())
+                            .maxScore(exam.getExam().getMaxScore())
+                            .feedback("")
+                            .build()
+                )
+                .toList();
+
+        List<AssignmentGradeResponseEntity> responseEntities = Stream
+                .concat(assignmentGradeResponseEntities.stream(), examGradeResponseEntities.stream())
+                .toList()
+                .subList(pageNo * pageSize, Math.min((pageNo + 1) * pageSize, assignmentGradeResponseEntities.size() + examGradeResponseEntities.size()));
+
+        Integer totalItems = assignments.size() + exams.size();
+        Integer totalPages = totalItems / pageSize;
+
+        return QueryAllAssignmentGradeResponse.builder()
+                .assignments(responseEntities)
+                .countSubmission(countSubmission + countSubmissionExam.get())
+                .currentPage(pageNo)
+                .totalItems(totalItems)
+                .totalPages(totalPages)
+                .build();
     }
 }
