@@ -51,6 +51,7 @@ public class CodeQuestionDataAccessMapper {
                 .build();
         return codeQuestionEntity;
     }
+
     public CodeQuestion codeQuestionEntityToCodeQuestion(CodeQuestionEntity codeQuestionEntity){
         CodeQuestion codeQuestion = CodeQuestion.builder()
 //                .questionId(new QuestionId(codeQuestionEntity.getQuestion().getId()))

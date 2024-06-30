@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.implement.service.code_question;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.CodeQuestionAdminDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.CodeQuestionDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionResponse;
@@ -7,6 +8,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.tag.AddTagToCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.language.DeleteLanguageToCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.tag.DeleteCodeQuestionTagCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.AdminDetailCodeQuestionQuery;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsQuery;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetDetailCodeQuestionCommand;
@@ -76,5 +78,10 @@ class CodeQuestionApplicationServiceImpl implements CodeQuestionApplicationServi
     @Override
     public GetCodeQuestionsResponse getAdminCodeQuestions(GetCodeQuestionsQuery query) {
         return codeQuestionCommandHandler.getAdminCodeQuestions(query);
+    }
+
+    @Override
+    public CodeQuestionAdminDto getAdminDetailCodeQuestion(AdminDetailCodeQuestionQuery query) {
+        return codeQuestionCommandHandler.getAdminDetailCodeQuestion(query);
     }
 }
