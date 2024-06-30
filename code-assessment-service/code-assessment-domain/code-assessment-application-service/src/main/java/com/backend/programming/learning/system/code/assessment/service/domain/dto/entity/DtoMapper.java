@@ -88,6 +88,7 @@ public class DtoMapper {
         return CodeQuestionDto.builder()
                 .name(codeQuestion.getName())
                 .questionId(codeQuestion.getQuestionId().getValue())
+                .numOfPeopleAttend(codeQuestion.getNumberOfPeopleAttend())
                 .done(codeQuestion.getSolved())
                 .id(codeQuestion.getId().getValue())
                 .difficulty(codeQuestion.getDifficulty())

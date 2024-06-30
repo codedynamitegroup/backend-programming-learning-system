@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.application.rest;
 
 import com.backend.programming.learning.system.application.handler.utils.JwtUtils;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.CodeQuestionAdminDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.CodeQuestionDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.ProgrammingLanguageDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionCommand;
@@ -9,6 +10,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.tag.AddTagToCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.language.DeleteLanguageToCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.tag.DeleteCodeQuestionTagCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.AdminDetailCodeQuestionQuery;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsQuery;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetDetailCodeQuestionCommand;
@@ -111,6 +113,19 @@ public class CodeQuestionController {
                 .build();
         List<CodeQuestionDto> codeQuestionDtos = codeQuestionApplicationService.getDetailCodeQuestion(command);
         return ResponseEntity.ok(codeQuestionDtos);
+    }
+    @GetMapping("/admin-detail/{code-question-id}")
+    public ResponseEntity<CodeQuestionAdminDto> getAdminDetailCodeQuestion(
+            @RequestParam(value = "code-question-id") UUID codeQuestionId,
+            @RequestHeader(value = "Access-Token", required = false) String accessToken){
+        String email = accessToken != null? JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken): null;
+
+        AdminDetailCodeQuestionQuery query =  AdminDetailCodeQuestionQuery.builder()
+                .codeQuestionId(codeQuestionId)
+                .email(email)
+                .build();
+        CodeQuestionAdminDto result = codeQuestionApplicationService.getAdminDetailCodeQuestion(query);
+        return ResponseEntity.ok(result);
     }
 
     @GetMapping("/admin-code-question")

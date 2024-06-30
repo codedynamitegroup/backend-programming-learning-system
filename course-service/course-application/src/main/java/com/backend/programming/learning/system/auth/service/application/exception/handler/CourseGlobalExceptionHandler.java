@@ -163,8 +163,8 @@ public class CourseGlobalExceptionHandler extends GlobalExceptionHandler {
     public ErrorDTO handleException(ExamClosedException examClosedException) {
         log.error(examClosedException.getMessage(), examClosedException);
         return ErrorDTO.builder()
-                .code(HttpStatus.BAD_REQUEST.value())
-                .status(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                .code(HttpStatus.FORBIDDEN.value())
+                .status(HttpStatus.FORBIDDEN.getReasonPhrase())
                 .message(examClosedException.getMessage())
                 .build();
     }

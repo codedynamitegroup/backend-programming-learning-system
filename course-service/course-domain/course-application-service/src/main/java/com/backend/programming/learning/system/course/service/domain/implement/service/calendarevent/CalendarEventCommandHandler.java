@@ -10,6 +10,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.calendarevent.UpdateCalendarEventResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.CalendarEvent;
 import com.backend.programming.learning.system.course.service.domain.mapper.calendarevent.CalendarEventDataMapper;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -90,5 +91,24 @@ public class CalendarEventCommandHandler {
                 .build();
     }
 
+    @Transactional(readOnly = true)
+    public CalendarEvent findByExamId(UUID examId) {
+        List<CalendarEvent> calendarEvents = calendarEventQueryHelper.findAllCalendarEventsByExamId(examId);
+        if (calendarEvents.isEmpty()) {
+            log.warn("No calendar event found for exam id: {}", examId);
+            return null;
+        }
+        return calendarEvents.get(0);
+    }
+
+    @Transactional(readOnly = true)
+    public CalendarEvent findByAssignmentId(UUID assignmentId) {
+        List<CalendarEvent> calendarEvents = calendarEventQueryHelper.findAllCalendarEventsByAssignmentId(assignmentId);
+        if (calendarEvents.isEmpty()) {
+            log.warn("No calendar event found for assignment id: {}", assignmentId);
+            return null;
+        }
+        return calendarEvents.get(0);
+    }
 
 }

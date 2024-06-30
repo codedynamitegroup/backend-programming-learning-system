@@ -112,11 +112,11 @@ public interface CodeQuestionJpaRepository extends JpaRepository<CodeQuestionEnt
                 AND (cast(?3 as text) IS NULL or 
                     cqe.fts_document @@ (to_tsquery( concat(cast(?3 as text),':*') ) && plainto_tsquery( coalesce( cast(?2 as text) ,'') ) ) or
                     cqe.fts_document @@ (to_tsquery( concat(unaccent(cast(?3 as text)),':*') ) && plainto_tsquery( unaccent(coalesce( cast(?2 as text) ,'')) ) ) or
-                    (cast(?7 as text) is not null and cqe.name like concat('%', cast(?7 as text), '%'))
+                    (cast(?6 as text) is not null and cqe.name like concat('%', cast(?6 as text), '%'))
                     )
                 AND (cast(?4 as text) is NULL OR cast(?4 as text) = cast(cqe.difficulty as text))
-                AND (?6 is null or cqe.is_public = ?6)
-                AND (?5 = cqe.user_id or cqe.is_public = true)
+                AND (?5 is null or cqe.is_public = ?5)
+                AND (cqe.org_id is null)
                 order by
                 ts_rank(cqe.fts_document, 
                     case
@@ -137,7 +137,6 @@ public interface CodeQuestionJpaRepository extends JpaRepository<CodeQuestionEnt
                                                         String searchExcludeFinalWord,
                                                         String searchFinalWord,
                                                         String difficulty,
-                                                        UUID userId,
                                                         Boolean isPublic,
                                                         String search,
                                                         Pageable pageable);

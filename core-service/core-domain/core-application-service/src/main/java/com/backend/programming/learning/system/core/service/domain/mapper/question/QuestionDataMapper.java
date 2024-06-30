@@ -266,10 +266,14 @@ public class QuestionDataMapper {
    }
 
     public QuestionEventPayload questionUpdatedEventToQuestionEventPayload(QuestionUpdatedEvent questionUpdatedEvent) {
+        String orgId = null;
+        if(questionUpdatedEvent.getQuestion().getOrganization() != null)
+            orgId = questionUpdatedEvent.getQuestion().getOrganization().getId().getValue().toString();
+
           return QuestionEventPayload.builder()
                  .id(questionUpdatedEvent.getQuestion().getId().getValue().toString())
                  .sagaId(questionUpdatedEvent.getQtypeID().toString())
-                 .organizationId(questionUpdatedEvent.getQuestion().getOrganization().getId().getValue().toString())
+                 .organizationId(orgId)
                  .createdBy(questionUpdatedEvent.getQuestion().getCreatedBy().getId().getValue().toString())
                  .updatedBy(questionUpdatedEvent.getQuestion().getUpdatedBy().getId().getValue().toString())
                  .difficulty(questionUpdatedEvent.getQuestion().getDifficulty().name())
@@ -418,10 +422,14 @@ public class QuestionDataMapper {
                 break;
         }
 
+        String orgId = null;
+        if(questionUpdatedEvent.getQuestion().getOrganization() != null)
+            orgId = questionUpdatedEvent.getQuestion().getOrganization().getId().getValue().toString();
+
         return QuestionEventPreviousPayload.builder()
                 .id(questionUpdatedEvent.getQuestion().getId().getValue().toString())
                 .sagaId(questionUpdatedEvent.getQtypeID().toString())
-                .organizationId(questionUpdatedEvent.getQuestion().getOrganization().getId().getValue().toString())
+                .organizationId(orgId)
                 .createdBy(questionUpdatedEvent.getQuestion().getCreatedBy().getId().getValue().toString())
                 .updatedBy(questionUpdatedEvent.getQuestion().getUpdatedBy().getId().getValue().toString())
                 .difficulty(questionUpdatedEvent.getQuestion().getDifficulty().name())
