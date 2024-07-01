@@ -11,7 +11,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @Component
@@ -29,6 +31,15 @@ public class QuestionSubmissionQueryHelper {
 
                     return new ExamSubmissionNotFoundException("Exam submission not found");
                 });
+        if(isExamSubmissionSubmitted(examSubmission)) {
+            return List.of();
+        }
         return questionSubmissionRepository.findAllByExamSubmissionIdAndQuestionIdList(examSubmission.getId().getValue(), queryQuestionSubmissionCommand.questionSubmissionIds());
+    }
+
+    private Boolean isExamSubmissionSubmitted(ExamSubmission examSubmission) {
+        // Haven't submit and exam time is not over
+        return !Objects.isNull(examSubmission.getSubmitTime()) || !examSubmission.getEndTime()
+                .isAfter(ZonedDateTime.now());
     }
 }
