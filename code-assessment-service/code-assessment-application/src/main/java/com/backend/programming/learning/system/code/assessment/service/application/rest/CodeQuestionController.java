@@ -116,7 +116,7 @@ public class CodeQuestionController {
     }
     @GetMapping("/admin-detail/{code-question-id}")
     public ResponseEntity<CodeQuestionAdminDto> getAdminDetailCodeQuestion(
-            @RequestParam(value = "code-question-id") UUID codeQuestionId,
+            @PathVariable(value = "code-question-id") UUID codeQuestionId,
             @RequestHeader(value = "Access-Token", required = false) String accessToken){
         String email = accessToken != null? JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken): null;
 

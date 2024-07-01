@@ -78,11 +78,15 @@ public class SubmissionAssignmentController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllSubmissionAssignmentResponse> queryAllByAssignmentId(
-            @RequestParam UUID assignmentId
+            @RequestParam UUID assignmentId,
+            @RequestParam(defaultValue = "") String searchName,
+            @RequestParam(required = false) Boolean isGraded,
+            @RequestParam(defaultValue = "0") int pageNo,
+            @RequestParam(defaultValue = "10") int pageSize
     ) {
         log.info("Querying all submission assignment by assignment id");
         QueryAllSubmissionAssignmentResponse response = submissionAssignmentApplicationService
-                .queryAllByAssignmentId(new QueryAllSubmissionnAssignmentCommand(assignmentId));
+                .queryAllByAssignmentId(new QueryAllSubmissionnAssignmentCommand(assignmentId, pageNo, pageSize, searchName, isGraded));
         return ResponseEntity.ok(response);
     }
 

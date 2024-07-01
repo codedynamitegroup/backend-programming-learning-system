@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.course.service.domain.ports.outpu
 import com.backend.programming.learning.system.course.service.domain.valueobject.AssignmentId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,8 +32,12 @@ public class SubmissionAssignmentQueryHelper {
     }
 
    @Transactional(readOnly=true)
-    public List<SubmissionAssignment> queryAllByAssignmentId(QueryAllSubmissionnAssignmentCommand queryAllSubmissionnAssignmentCommand) {
-        List<SubmissionAssignment> submissionAssignments = submissionAssignmentRepository.findAllByAssignmentId(new AssignmentId(queryAllSubmissionnAssignmentCommand.getAssignmentId()));
+    public Page<SubmissionAssignment> queryAllByAssignmentId(QueryAllSubmissionnAssignmentCommand queryAllSubmissionnAssignmentCommand) {
+        Page<SubmissionAssignment> submissionAssignments = submissionAssignmentRepository.findAllByAssignmentId(queryAllSubmissionnAssignmentCommand.getAssignmentId(),
+                queryAllSubmissionnAssignmentCommand.getSearchName(),
+                queryAllSubmissionnAssignmentCommand.getIsGraded(),
+                queryAllSubmissionnAssignmentCommand.getPageNo(),
+                queryAllSubmissionnAssignmentCommand.getPageSize());
         log.info("SubmissionAssignment queried with assignment id: {}", queryAllSubmissionnAssignmentCommand.getAssignmentId());
         return submissionAssignments;
     }

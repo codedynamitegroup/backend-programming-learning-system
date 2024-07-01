@@ -323,6 +323,12 @@ public class CodeQuestionsHelper {
     }
 
     public CodeQuestion getAdminDetailCodeQuestion(AdminDetailCodeQuestionQuery query) {
-        return null;
+        CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(query.getCodeQuestionId());
+
+        List<TestCase> sampleTestCase = testCaseRepository.getTestCaseByCodeQuestionId(codeQuestion.getId());
+
+        List<ProgrammingLanguageCodeQuestion> languages = programmingLanguageCodeQuestionRepository.findByCodeQuestionId(codeQuestion.getId());
+
+        return codeAssessmentDomainService.getAdminDetailCodeQuestion(codeQuestion, sampleTestCase, languages);
     }
 }
