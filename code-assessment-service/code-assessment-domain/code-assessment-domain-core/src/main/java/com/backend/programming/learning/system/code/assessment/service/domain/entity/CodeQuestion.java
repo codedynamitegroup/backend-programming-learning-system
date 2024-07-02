@@ -190,9 +190,14 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         tags = builder.tags;
     }
 
-    public void getDetail(List<TestCase> sampleTestCase, List<CodeSubmission> codeSubmission, List<ProgrammingLanguageCodeQuestion> languages) {
+    public void setDetailInformation(List<TestCase> sampleTestCase, List<CodeSubmission> codeSubmission, List<ProgrammingLanguageCodeQuestion> languages) {
         tcs = sampleTestCase == null || sampleTestCase.isEmpty()? null: sampleTestCase;
         this.codeSubmissions = codeSubmission;
+        this.programmingLanguages = languages;
+    }
+
+    public void setAdminDetailInformation(List<TestCase> testcases, List<ProgrammingLanguageCodeQuestion> languages) {
+        tcs = testcases == null || testcases.isEmpty()? null: testcases;
         this.programmingLanguages = languages;
     }
 

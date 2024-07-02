@@ -128,6 +128,6 @@ public class CodeQuestionCommandHandler {
 
     public CodeQuestionAdminDto getAdminDetailCodeQuestion(AdminDetailCodeQuestionQuery query) {
         CodeQuestion codeQuestion = codeQuestionsHelper.getAdminDetailCodeQuestion(query);
-        return null;
+        return dtoMapper.codeQuestionToCodeQuestionAdminDto(codeQuestion);
     }
 }
