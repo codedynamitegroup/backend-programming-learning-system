@@ -51,6 +51,7 @@ public class CodeQuestionDataAccessMapper {
                 .build();
         return codeQuestionEntity;
     }
+
     public CodeQuestion codeQuestionEntityToCodeQuestion(CodeQuestionEntity codeQuestionEntity){
         CodeQuestion codeQuestion = CodeQuestion.builder()
 //                .questionId(new QuestionId(codeQuestionEntity.getQuestion().getId()))
@@ -58,6 +59,7 @@ public class CodeQuestionDataAccessMapper {
                 .codeQuestionId(new CodeQuestionId(codeQuestionEntity.getId()))
                 .userId(new UserId(codeQuestionEntity.getUserId()))
                 .name(codeQuestionEntity.getName())
+                .orgId(codeQuestionEntity.getOrgId())
                 .problemStatement(codeQuestionEntity.getProblemStatement())
                 .dslTemplate(codeQuestionEntity.getDslTemplate())
                 .constraints(codeQuestionEntity.getConstraints())
@@ -80,6 +82,7 @@ public class CodeQuestionDataAccessMapper {
                 .questionId(new QuestionId(codeQuestionEntity.getQuestionId()))
                 .codeQuestionId(new CodeQuestionId(codeQuestionEntity.getId()))
                 .userId(new UserId(codeQuestionEntity.getUserId()))
+                .orgId(codeQuestionEntity.getOrgId())
                 .name(codeQuestionEntity.getName())
                 .problemStatement(codeQuestionEntity.getProblemStatement())
                 .dslTemplate(codeQuestionEntity.getDslTemplate())

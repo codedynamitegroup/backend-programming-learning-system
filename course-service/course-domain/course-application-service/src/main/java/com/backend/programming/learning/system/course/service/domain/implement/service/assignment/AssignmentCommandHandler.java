@@ -55,7 +55,7 @@ public class AssignmentCommandHandler {
                 .eventType(NotificationEventType.COURSE.name())
                 .startTime(assignment.getTime_open())
                 .endTime(assignment.getTime_close())
-                .courseId(assignment.getCourseId().getValue())
+                .courseId(assignment.getCourse().getId().getValue())
                 .assignmentId(assignment.getId().getValue())
                 .component(NotificationComponentType.ASSIGNMENT.name())
                 .build();

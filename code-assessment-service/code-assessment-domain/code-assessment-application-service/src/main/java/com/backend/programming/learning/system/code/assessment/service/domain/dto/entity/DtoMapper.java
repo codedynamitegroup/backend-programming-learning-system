@@ -88,6 +88,7 @@ public class DtoMapper {
         return CodeQuestionDto.builder()
                 .name(codeQuestion.getName())
                 .questionId(codeQuestion.getQuestionId().getValue())
+                .numOfPeopleAttend(codeQuestion.getNumberOfPeopleAttend())
                 .done(codeQuestion.getSolved())
                 .id(codeQuestion.getId().getValue())
                 .difficulty(codeQuestion.getDifficulty())
@@ -127,6 +128,23 @@ public class DtoMapper {
                 .name(codeQuestion.getName())
                 .difficulty(codeQuestion.getDifficulty())
                 .numOfPeopleAttend(codeQuestion.getNumberOfPeopleAttend())
+                .build();
+    }
+
+    public CodeQuestionAdminDto codeQuestionToCodeQuestionAdminDto(CodeQuestion codeQuestion) {
+        return CodeQuestionAdminDto.builder()
+                .id(codeQuestion.getId().getValue())
+                .questionId(codeQuestion.getQuestionId().getValue())
+                .name(codeQuestion.getName())
+                .problemStatement(codeQuestion.getProblemStatement())
+                .inputFormat(codeQuestion.getInputFormat())
+                .outputFormat(codeQuestion.getOutputFormat())
+                .constraints(codeQuestion.getConstraints())
+                .isPublic(codeQuestion.getIsPublic())
+                .allowImport(codeQuestion.getAllowImport())
+                .difficulty(codeQuestion.getDifficulty())
+                .testCases(codeQuestion.getTcs() != null? codeQuestion.getTcs().stream().map(this::testCaseToDto).toList(): null)
+                .languages(codeQuestion.getProgrammingLanguages() != null? codeQuestion.getProgrammingLanguages().stream().map(this::programmingLanguageCodeQuestionToDto).toList(): null)
                 .build();
     }
 }

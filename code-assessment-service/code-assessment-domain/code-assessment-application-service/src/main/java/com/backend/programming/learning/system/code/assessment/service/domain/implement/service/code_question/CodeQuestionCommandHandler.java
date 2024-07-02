@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.implement.service.code_question;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.CodeQuestionAdminDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.CodeQuestionDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.DtoMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionCommand;
@@ -8,6 +9,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.tag.AddTagToCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.language.DeleteLanguageToCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.tag.DeleteCodeQuestionTagCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.AdminDetailCodeQuestionQuery;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsQuery;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsResponse;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetDetailCodeQuestionCommand;
@@ -122,5 +124,10 @@ public class CodeQuestionCommandHandler {
     public GetCodeQuestionsResponse getAdminCodeQuestions(GetCodeQuestionsQuery query) {
         Page<CodeQuestion> codeQuestions = codeQuestionsHelper.getAdminCodeQuestions(query);
         return codeQuestionDataMaper.pagableCodeQuestionsToGetCodeQuestionsResponse(codeQuestions);
+    }
+
+    public CodeQuestionAdminDto getAdminDetailCodeQuestion(AdminDetailCodeQuestionQuery query) {
+        CodeQuestion codeQuestion = codeQuestionsHelper.getAdminDetailCodeQuestion(query);
+        return dtoMapper.codeQuestionToCodeQuestionAdminDto(codeQuestion);
     }
 }

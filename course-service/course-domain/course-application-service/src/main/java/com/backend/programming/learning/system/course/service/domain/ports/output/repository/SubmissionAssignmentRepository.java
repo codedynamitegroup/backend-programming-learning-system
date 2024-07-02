@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.ports.outp
 
 import com.backend.programming.learning.system.course.service.domain.entity.SubmissionAssignment;
 import com.backend.programming.learning.system.course.service.domain.valueobject.AssignmentId;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,7 +13,7 @@ public interface SubmissionAssignmentRepository {
 
     Optional<SubmissionAssignment> findById(UUID submissionAssignmentId);
 
-    List<SubmissionAssignment> findAllByAssignmentId(AssignmentId assignmentId);
+    Page<SubmissionAssignment> findAllByAssignmentId(UUID assignmentId, String search, Boolean isGraded, Integer page, Integer size);
 
     void deleteSubmissionAssignmentById(UUID submissionAssignmentId);
 
@@ -24,4 +25,6 @@ public interface SubmissionAssignmentRepository {
     Integer countSubmissionsToGradeByAssignmentId(UUID assignmentId);
 
     Integer countAllByAssignmentId(UUID assignmentId);
+
+    List<SubmissionAssignment> findAllByAssignmentId(UUID assignmentId);
 }

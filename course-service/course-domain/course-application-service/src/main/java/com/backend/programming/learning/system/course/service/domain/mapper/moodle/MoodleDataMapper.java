@@ -153,7 +153,7 @@ public class MoodleDataMapper {
                 .id(new AssignmentId(UUID.randomUUID()))
                 .assignmentIdMoodle(Integer.valueOf(assignmentModel.getId()))
                 .title(assignmentModel.getName())
-                .courseId(course.getId())
+                .course(course)
                 .intro(assignmentModel.getIntro())
                 .activity(activity)
                 .maxScores(assignmentModel.getGrade().floatValue())

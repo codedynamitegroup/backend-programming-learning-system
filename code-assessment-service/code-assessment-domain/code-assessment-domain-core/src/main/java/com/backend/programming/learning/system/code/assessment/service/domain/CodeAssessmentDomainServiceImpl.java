@@ -104,7 +104,7 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
 
     @Override
     public CodeQuestion getDetailCodeQuestion(CodeQuestion codeQuestion, List<TestCase> sampleTestCase, List<CodeSubmission> codeSubmission, List<ProgrammingLanguageCodeQuestion> languages) {
-        codeQuestion.getDetail(sampleTestCase, codeSubmission, languages);
+        codeQuestion.setDetailInformation(sampleTestCase, codeSubmission, languages);
         return codeQuestion;
     }
 
@@ -135,6 +135,12 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
     public CodeQuestionsUpdatedEvent updateCodeQuestion(CodeQuestion codeQuestion) {
         codeQuestion.setCopyState(CopyState.UPDATING);
         return new CodeQuestionsUpdatedEvent(codeQuestion, ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
+    }
+
+    @Override
+    public CodeQuestion getAdminDetailCodeQuestion(CodeQuestion codeQuestion, List<TestCase> testcases, List<ProgrammingLanguageCodeQuestion> languages) {
+        codeQuestion.setAdminDetailInformation(testcases, languages);
+        return codeQuestion;
     }
 
 

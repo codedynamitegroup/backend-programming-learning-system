@@ -57,7 +57,6 @@ public class AssignmentCreateHelper {
         Assignment assignment = assignmentDataMapper.createAssignmentCommandToAssignment(createAssignmentCommand);
         coureDomainService.createAssignment(assignment);
 //        checkCourse(createAssignmentCommand.getCourseId());
-        assignment.setCourseId(new CourseId(createAssignmentCommand.getCourseId()));
         Assignment assignmentResult = saveAssignment(assignment);
         List<User> users = userRepository.findAllUserByAssignmentId(assignmentResult.getId().getValue());
         for(User user : users) {

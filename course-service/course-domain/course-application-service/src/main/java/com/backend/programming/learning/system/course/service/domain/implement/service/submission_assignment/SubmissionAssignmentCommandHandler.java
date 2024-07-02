@@ -48,9 +48,7 @@ public class SubmissionAssignmentCommandHandler {
     public QueryAllSubmissionAssignmentResponse queryAllByAssignmentId(QueryAllSubmissionnAssignmentCommand queryAllSubmissionnAssignmentCommand) {
         log.info("Query all submission assignment by assignment id command received");
         return submissionAssignmentDataMapper
-                .submissionAssignmentsToQueryAllSubmissionAssignmentResponse(submissionAssignmentQueryHelper
-                        .queryAllByAssignmentId(new QueryAllSubmissionnAssignmentCommand(queryAllSubmissionnAssignmentCommand
-                                .getAssignmentId())));
+                .submissionAssignmentsToQueryAllSubmissionAssignmentResponse(submissionAssignmentQueryHelper.queryAllByAssignmentId(queryAllSubmissionnAssignmentCommand));
     }
 
     @Transactional
@@ -92,6 +90,8 @@ public class SubmissionAssignmentCommandHandler {
         log.info("Count all submission by assignment id command received");
         return submissionAssignmentQueryHelper.countAllByAssignmentId(assignmentId);
     }
+
+
 
 
 

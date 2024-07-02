@@ -37,7 +37,9 @@ public class AssignmentDataMapper {
     private final ExamSubmissionRepository examSubmissionRepository;
 
     public Assignment createAssignmentCommandToAssignment(CreateAssignmentCommand createAssignmentCommand) {
+        Course course = courseRepository.findById(createAssignmentCommand.getCourseId());
         return Assignment.builder()
+                .course(course)
                 .title(createAssignmentCommand.getTitle())
                 .intro(createAssignmentCommand.getIntro())
                 .activity(createAssignmentCommand.getActivity())
@@ -137,11 +139,10 @@ public class AssignmentDataMapper {
                 userCommandHandler.queryAllUserByAssignmentId(assignment.getId().getValue());
 
 
-        Course course = courseRepository.findById(assignment.getCourseId().getValue());
         return ListSubmissionAssignmentResponseEntity.builder()
                 .id(assignment.getId().getValue())
                 .title(assignment.getTitle())
-                .courseName(course.getName())
+                .courseName(assignment.getCourse().getName())
                 .users(userSubmissionAssignmentResponseEntities)
                 .build();
     }

@@ -41,4 +41,6 @@ public interface CodeAssessmentDomainService {
     ProgrammingLanguageCodeQuestion initProgrammingLanguageCodeQuestion(Float timeLimit, Float memoryLimit, String headCode, String bodyCode, String tailCode ,CodeQuestionId codeQuestionId, UUID id);
 
     CodeQuestionsUpdatedEvent updateCodeQuestion(CodeQuestion codeQuestion);
+
+    CodeQuestion getAdminDetailCodeQuestion(CodeQuestion codeQuestion, List<TestCase> testcases, List<ProgrammingLanguageCodeQuestion> languages);
 }
