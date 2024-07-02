@@ -19,7 +19,7 @@ public interface CalendarEventRepository {
     void deleteCalendarEventByContestIdAndUserId(UUID contestId, UUID userId);
     Optional<CalendarEvent> findCalendarEventByContestIdAndUserId(UUID contestId, UUID userId);
 
-    List<CalendarEvent> findAllByStartTimeAfterTime(ZonedDateTime time);
+    List<CalendarEvent> findAllValidCalendarEventsToCreateNotification(ZonedDateTime time);
     List<CalendarEvent> saveAllCalendarEvents(List<CalendarEvent> calendarEvents);
     List<CalendarEvent> findAll(
             List<UUID> courseIds,

@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.exam;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.calendarevent.CreateCalendarEventCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.calendarevent.CreateCalendarEventResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam.CreateExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam.CreateExamResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.CreateExamQuestionCommand;
@@ -17,22 +18,26 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.exam.UpdateExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.exam.UpdateExamResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.exam.ExamResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.notification.NotificationResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.CalendarEvent;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
+import com.backend.programming.learning.system.course.service.domain.entity.Notification;
 import com.backend.programming.learning.system.course.service.domain.implement.service.calendarevent.CalendarEventCommandHandler;
 import com.backend.programming.learning.system.course.service.domain.implement.service.exam_question.ExamQuestionCreateHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.exam_question.ExamQuestionDeleteHelper;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam.ExamDataMapper;
-import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
-import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
+import com.backend.programming.learning.system.course.service.domain.valueobject.*;
+import com.backend.programming.learning.system.domain.valueobject.NotificationId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 
 /**
@@ -64,14 +69,14 @@ public class ExamCommandHandler {
                         .build());
 
         CreateCalendarEventCommand createCalendarEventCommand = CreateCalendarEventCommand.builder()
-                .name("Exam " + examCreated.getName())
+                .name(examCreated.getName())
                 .description(examCreated.getIntro())
-                .eventType("COURSE")
+                .eventType(NotificationEventType.COURSE.name())
                 .startTime(examCreated.getTimeOpen())
                 .endTime(examCreated.getTimeClose())
                 .courseId(createExamCommand.courseId())
                 .examId(examCreated.getId().getValue())
-                .component("EXAM")
+                .component(NotificationComponentType.EXAM.name())
                 .build();
 
         calendarEventCommandHandler.createCalendarEvent(createCalendarEventCommand);
@@ -127,7 +132,7 @@ public class ExamCommandHandler {
             UpdateCalendarEventCommand updateCalendarEventCommand = UpdateCalendarEventCommand.builder()
                     .name(exam.getName() == null
                                     ? null
-                                    : "Exam " + exam.getName())
+                                    : exam.getName())
                     .description(exam.getIntro() == null
                                     ? null
                                     : exam.getIntro())
