@@ -6,8 +6,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.notification.DeleteNotificationResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.notification.QueryAllNotificationsCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.notification.QueryAllNotificationsResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.update.notification.MarkReadNotificationCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.update.notification.MarkReadNotificationResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.notification.UpdateNotificationCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.notification.UdpateNotificationResponse;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.notification.NotificationApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -39,7 +39,7 @@ class NotificationApplicationServiceImpl implements NotificationApplicationServi
     }
 
     @Override
-    public MarkReadNotificationResponse markReadNotificationResponse(MarkReadNotificationCommand markReadNotificationCommand) {
-        return notificationCommandHandler.markReadNotification(markReadNotificationCommand);
+    public UdpateNotificationResponse updateNotificationResponse(UpdateNotificationCommand updateNotificationCommand) {
+        return notificationCommandHandler.updateNotification(updateNotificationCommand);
     }
 }

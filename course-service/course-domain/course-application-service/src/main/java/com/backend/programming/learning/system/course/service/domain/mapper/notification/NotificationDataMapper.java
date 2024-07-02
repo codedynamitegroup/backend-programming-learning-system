@@ -80,12 +80,15 @@ public class NotificationDataMapper {
                 .build();
     }
 
-    public QueryAllNotificationsResponse notificationsToQueryAllNotificationsResponse(Page<Notification> notifications) {
+    public QueryAllNotificationsResponse notificationsToQueryAllNotificationsResponse(
+            Page<Notification> notifications,
+            Integer numOfUnreadNotifications) {
         return QueryAllNotificationsResponse.builder()
                 .notifications(notifications.map(this::notificationToQueryNotificationResponse).getContent())
                 .currentPage(notifications.getNumber())
                 .totalItems(notifications.getTotalElements())
                 .totalPages(notifications.getTotalPages())
+                .numOfUnreadNotifications(numOfUnreadNotifications)
                 .build();
     }
 }

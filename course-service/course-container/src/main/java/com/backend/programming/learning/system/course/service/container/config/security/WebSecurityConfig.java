@@ -92,6 +92,10 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/course/calendar-events/create").hasAnyRole(USER)
                         .requestMatchers(HttpMethod.POST, "/course/calendar-events/query/my-calendar-events").hasAnyRole(USER)
 
+                        // notifications
+                        .requestMatchers(HttpMethod.GET, "/course/notifications/me").hasAnyRole(USER)
+                        .requestMatchers(HttpMethod.PUT, "/course/notifications/{id}").hasAnyRole(USER)
+
                         .anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2

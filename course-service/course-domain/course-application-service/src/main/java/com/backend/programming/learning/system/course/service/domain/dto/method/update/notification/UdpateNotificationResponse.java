@@ -10,7 +10,9 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class MarkReadNotificationCommand {
+public class UdpateNotificationResponse {
     @NotNull
-    private UUID notificationId;
+    private final UUID notificationId;
+    @NotNull
+    private final String message;
 }

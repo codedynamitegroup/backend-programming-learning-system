@@ -25,4 +25,7 @@ public interface NotificationJpaRepository extends JpaRepository<NotificationEnt
     @Modifying
     @Query("update NotificationEntity n set n.isRead = ?1, n.updatedAt = ?2 where n.id = ?3")
     int markReadNotificationById(Boolean isRead, ZonedDateTime updatedAt, UUID id);
+
+    @Query("select count(n) from NotificationEntity n where n.userTo.id = ?1 and n.isRead = ?2")
+    Integer countAllByUserIdToAndIsRead(UUID userIdTo, Boolean isRead);
 }

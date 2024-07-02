@@ -9,6 +9,7 @@ import com.backend.programming.learning.system.course.service.domain.ports.outpu
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.time.ZoneId;
@@ -39,7 +40,11 @@ public class NotificationRepositoryImpl implements NotificationRepository {
 
     @Override
     public Page<Notification> findAllByUserIdTo(UUID userIdTo, Integer pageNo, Integer pageSize) {
-        Pageable paging = PageRequest.of(pageNo, pageSize);
+        Pageable paging = PageRequest.of(
+                pageNo,
+                pageSize,
+                Sort.by("createdAt").descending()
+        );
         return notificationJpaRepository.findAllByUserTo(UserEntity.builder().id(userIdTo).build(), paging)
                 .map(notificationDataAccessMapper::notificationEntityToNotification);
     }
@@ -57,7 +62,18 @@ public class NotificationRepositoryImpl implements NotificationRepository {
 
     @Override
     public int markReadNotificationById(UUID notificationId) {
-        return notificationJpaRepository.markReadNotificationById(true, ZonedDateTime.now(ZoneId.of("UTC")), notificationId);
+        return notificationJpaRepository.markReadNotificationById(
+                true,
+                ZonedDateTime.now(ZoneId.of("UTC")),
+                notificationId);
+    }
+
+    @Override
+    public int updateNotificationById(UUID notificationId, Boolean read) {
+        return notificationJpaRepository.markReadNotificationById(
+                read,
+                ZonedDateTime.now(ZoneId.of("UTC")),
+                notificationId);
     }
 
     @Override
@@ -67,5 +83,10 @@ public class NotificationRepositoryImpl implements NotificationRepository {
                         notificationDataAccessMapper.notificationListToNotificationEntityList(notifications));
         notificationEntitiesIterable.forEach(notificationEntities::add);
         return notificationDataAccessMapper.notificationEntityListToNotificationList(notificationEntities);
+    }
+
+    @Override
+    public Integer countAllByUserIdToAndIsRead(UUID userIdTo, boolean isRead) {
+        return notificationJpaRepository.countAllByUserIdToAndIsRead(userIdTo, isRead);
     }
 }
