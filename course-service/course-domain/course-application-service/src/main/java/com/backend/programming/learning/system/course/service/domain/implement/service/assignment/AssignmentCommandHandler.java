@@ -53,7 +53,7 @@ public class AssignmentCommandHandler {
                 .eventType("COURSE")
                 .startTime(assignment.getTime_open())
                 .endTime(assignment.getTime_close())
-                .courseId(assignment.getCourseId().getValue())
+                .courseId(assignment.getCourse().getId().getValue())
                 .assignmentId(assignment.getId().getValue())
                 .component("ASSIGNMENT")
                 .build();

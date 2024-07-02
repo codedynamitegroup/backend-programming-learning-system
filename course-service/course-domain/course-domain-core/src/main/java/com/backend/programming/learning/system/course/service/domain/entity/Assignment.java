@@ -10,7 +10,7 @@ import java.time.ZonedDateTime;
 import java.util.UUID;
 
 public class Assignment extends AggregateRoot<AssignmentId> {
-    private CourseId courseId;
+    private Course course;
     private Integer assignmentIdMoodle;
     private String title;
     private String intro;
@@ -34,7 +34,7 @@ public class Assignment extends AggregateRoot<AssignmentId> {
     private Assignment(Builder builder) {
         super.setId(builder.assignmentId);
         assignmentIdMoodle = builder.assignmentIdMoodle;
-        courseId = builder.courseId;
+        course = builder.course;
         title = builder.title;
         intro = builder.intro;
         activity = builder.activity;
@@ -111,8 +111,8 @@ public class Assignment extends AggregateRoot<AssignmentId> {
         this.assignmentIdMoodle = assignmentIdMoodle;
     }
 
-    public CourseId getCourseId() {
-        return courseId;
+    public Course getCourse() {
+        return course;
     }
 
     public String getTitle() {
@@ -147,8 +147,8 @@ public class Assignment extends AggregateRoot<AssignmentId> {
         return visible;
     }
 
-    public void setCourseId(CourseId courseId) {
-        this.courseId = courseId;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public void setTitle(String title) {
@@ -189,7 +189,7 @@ public class Assignment extends AggregateRoot<AssignmentId> {
     public static final class Builder {
         private AssignmentId assignmentId;
         private Integer assignmentIdMoodle;
-        private CourseId courseId;
+        private Course course;
         private String title;
         private String intro;
 
@@ -226,8 +226,8 @@ public class Assignment extends AggregateRoot<AssignmentId> {
             return this;
         }
 
-        public Builder courseId(CourseId val) {
-            courseId = val;
+        public Builder course(Course val) {
+            course = val;
             return this;
         }
 

@@ -3,7 +3,9 @@ package com.backend.programming.learning.system.course.service.dataaccess.assign
 
 import com.backend.programming.learning.system.course.service.dataaccess.assignment.entity.AssignmentEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.course.mapper.CourseDataAccessMapper;
 import com.backend.programming.learning.system.course.service.domain.entity.Assignment;
+import com.backend.programming.learning.system.course.service.domain.entity.Course;
 import com.backend.programming.learning.system.course.service.domain.valueobject.AssignmentId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
 import org.springframework.stereotype.Component;
@@ -12,11 +14,17 @@ import java.util.List;
 
 @Component
 public class AssignmentDataAccessMapper {
+    private final CourseDataAccessMapper courseDataAccessMapper;
+
+    public AssignmentDataAccessMapper(CourseDataAccessMapper courseDataAccessMapper) {
+        this.courseDataAccessMapper = courseDataAccessMapper;
+    }
+
     public AssignmentEntity assignmentToAssignmentEntity(Assignment assignment) {
         if(assignment == null) {
             return null;
         }
-        CourseEntity courseEntity = CourseEntity.builder().id(assignment.getCourseId().getValue()).build();
+        CourseEntity courseEntity = courseDataAccessMapper.courseToCourseEntity(assignment.getCourse());
         return AssignmentEntity.builder()
                 .course(courseEntity)
                 .id(assignment.getId().getValue())
@@ -42,10 +50,11 @@ public class AssignmentDataAccessMapper {
         if(assignmentEntity == null) {
             return null;
         }
+        Course course = courseDataAccessMapper.courseEntityToCourse(assignmentEntity.getCourse());
         return Assignment.builder()
                 .id(new AssignmentId(assignmentEntity.getId()))
                 .assignmentIdMoodle(assignmentEntity.getAssignmentIdMoodle())
-                .courseId(new CourseId(assignmentEntity.getCourse().getId()))
+                .course(course)
                 .title(assignmentEntity.getTitle())
                 .intro(assignmentEntity.getIntro())
                 .activity(assignmentEntity.getActivity())

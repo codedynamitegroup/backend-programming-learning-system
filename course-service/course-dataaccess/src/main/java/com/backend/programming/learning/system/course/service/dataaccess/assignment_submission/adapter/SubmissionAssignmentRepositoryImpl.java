@@ -76,4 +76,9 @@ public class SubmissionAssignmentRepositoryImpl implements SubmissionAssignmentR
     public Integer countAllByAssignmentId(UUID assignmentId) {
         return submissionAssignmentJpaRepository.countAllByAssignmentId(assignmentId);
     }
+
+    @Override
+    public List<SubmissionAssignment> findAllByAssignmentId(UUID assignmentId) {
+        return submissionAssignmentDataAccessMapper.assignmentSubmissionEntityListToAssignmentSubmissionList(submissionAssignmentJpaRepository.findAllByAssignmentId(assignmentId));
+    }
 }

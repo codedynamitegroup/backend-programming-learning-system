@@ -25,4 +25,6 @@ public interface SubmissionAssignmentRepository {
     Integer countSubmissionsToGradeByAssignmentId(UUID assignmentId);
 
     Integer countAllByAssignmentId(UUID assignmentId);
+
+    List<SubmissionAssignment> findAllByAssignmentId(UUID assignmentId);
 }
