@@ -87,4 +87,9 @@ public class CourseCommandHandler {
     public QueryGeneralCourseStatisticsResponse getCourseStatistics() {
         return courseQueryHelper.getCourseStatistics();
     }
+
+    @Transactional(readOnly = true)
+    public QueryGeneralCourseStatisticsResponse getCourseStatisticsAdminOrg(String orgId) {
+        return courseQueryHelper.getCourseStatisticsAdminOrg(orgId);
+    }
 }

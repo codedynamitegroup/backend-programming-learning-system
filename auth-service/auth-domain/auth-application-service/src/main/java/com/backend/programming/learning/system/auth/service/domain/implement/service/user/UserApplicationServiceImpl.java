@@ -150,4 +150,9 @@ class UserApplicationServiceImpl implements UserApplicationService {
     public QueryGeneralStatisticUserResponse getStatisticUser() {
         return userCommandHandler.getStatisticUser();
     }
+
+    @Override
+    public QueryGeneralStatisticUserResponse getStatisticUserAdminOrg(String orgId) {
+        return userCommandHandler.getStatisticUserAdminOrg(orgId);
+    }
 }

@@ -36,6 +36,8 @@ public class WebSecurityConfig {
 
                         //course
                         .requestMatchers(HttpMethod.GET, "/course/course/statistics").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.GET, "/course/course/admin-org/statistics").hasAnyRole(ADMIN_MOODLE)
+
                         .requestMatchers(HttpMethod.GET, "/course/section/{courseId}").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
                         .requestMatchers(HttpMethod.GET, "/course/course/{courseId}").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE, STUDENT_MOODLE)
                         .requestMatchers(HttpMethod.PUT, "/course/course/{courseId}").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE)

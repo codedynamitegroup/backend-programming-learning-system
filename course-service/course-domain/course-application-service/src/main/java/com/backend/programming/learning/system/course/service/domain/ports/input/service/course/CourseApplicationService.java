@@ -33,4 +33,7 @@ public interface CourseApplicationService {
             @Valid UpdateCourseCommand updateCourseCommand);
 
     QueryGeneralCourseStatisticsResponse getCourseStatistics();
+
+    QueryGeneralCourseStatisticsResponse getCourseStatisticsAdminOrg(String orgId);
+
 }

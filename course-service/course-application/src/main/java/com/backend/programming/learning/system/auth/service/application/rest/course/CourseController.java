@@ -163,4 +163,22 @@ public class CourseController {
         return ResponseEntity.ok(queryCourseStatisticsResponse);
     }
 
+    @GetMapping("/admin-org/statistics")
+    @Operation(summary = "Get statistics of courses for admin of an organization.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryGeneralCourseStatisticsResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryGeneralCourseStatisticsResponse> getCourseStatisticsAdminOrg(
+            @RequestParam String orgId
+    ) {
+        log.info("Getting statistics of course for admin with orgId: {}", orgId);
+        QueryGeneralCourseStatisticsResponse queryCourseStatisticsResponse = courseApplicationService.getCourseStatisticsAdminOrg(orgId);
+
+        log.info("Returning statistics of course for admin with orgId: {}", orgId);
+        return ResponseEntity.ok(queryCourseStatisticsResponse);
+    }
 }
