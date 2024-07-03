@@ -29,8 +29,8 @@ public class ProgrammingLanguageHandler {
         programmingLanguageHelper.createProgrammingLanguage(command);
     }
 
-    public List<ProgrammingLanguageDto> getLanguage() {
-        List<ProgrammingLanguage> programmingLanguages = programmingLanguageHelper.getLanguage();
+    public List<ProgrammingLanguageDto> getLanguage(Boolean active) {
+        List<ProgrammingLanguage> programmingLanguages = programmingLanguageHelper.getLanguage(active);
         return programmingLanguages.stream().map(dtoMapper::programmingLanguageToDto).toList();
     }
 

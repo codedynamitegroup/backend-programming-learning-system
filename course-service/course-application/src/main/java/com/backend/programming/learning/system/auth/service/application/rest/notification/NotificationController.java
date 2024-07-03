@@ -61,6 +61,7 @@ public class NotificationController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllNotificationsResponse> getAllNotifications(
+            @RequestParam(required = false) Boolean isRead,
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize
     ) {
@@ -77,6 +78,7 @@ public class NotificationController {
                         .email(email)
                         .pageNo(pageNo)
                         .pageSize(pageSize)
+                        .isRead(isRead)
                         .build());
         log.info("Returning all notifications: {}", queryAllNotificationsResponse);
         return ResponseEntity.ok(queryAllNotificationsResponse);

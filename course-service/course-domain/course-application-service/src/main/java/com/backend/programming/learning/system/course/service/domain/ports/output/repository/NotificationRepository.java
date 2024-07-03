@@ -9,8 +9,8 @@ import java.util.UUID;
 
 public interface NotificationRepository {
     Notification saveNotification(Notification notification);
-    Page<Notification> findAllByUserIdTo(
-            UUID userIdTo, Integer pageNo, Integer pageSize);
+    Page<Notification> findAllByUserIdToAndIsRead(
+            UUID userIdTo, Boolean isRead, Integer pageNo, Integer pageSize);
     Optional<Notification> findById(UUID notificationId);
     void deleteNotificationById(UUID notificationId);
     int markReadNotificationById(UUID notificationId);

@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestionTag;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.ProgrammingLanguageCodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.programming_language_code_question.ProgrammingLanguageCodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
@@ -12,4 +13,5 @@ public interface ProgrammingLanguageCodeQuestionRepository {
     Optional<ProgrammingLanguageCodeQuestion> findById(ProgrammingLanguageCodeQuestionId id);
 
     List<ProgrammingLanguageCodeQuestion> findByCodeQuestionId(CodeQuestionId id);
+
 }

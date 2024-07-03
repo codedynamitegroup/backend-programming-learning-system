@@ -26,4 +26,5 @@ public class CodeQuestionAdminDto {
     QuestionDifficulty difficulty;
     List<TestCaseDto> testCases;
     List<ProgrammingLanguageDto> languages;
+    List<UUID> tags;
 }

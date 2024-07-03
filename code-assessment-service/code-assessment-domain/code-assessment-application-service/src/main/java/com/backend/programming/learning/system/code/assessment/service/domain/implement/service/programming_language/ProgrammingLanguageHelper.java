@@ -40,8 +40,8 @@ public class ProgrammingLanguageHelper {
         programmingLanguageRepository.save(programmingLanguage);
     }
 
-    public List<ProgrammingLanguage> getLanguage() {
-        return programmingLanguageRepository.findAll();
+    public List<ProgrammingLanguage> getLanguage(Boolean active) {
+        return programmingLanguageRepository.findAll(active);
     }
 
     @Transactional

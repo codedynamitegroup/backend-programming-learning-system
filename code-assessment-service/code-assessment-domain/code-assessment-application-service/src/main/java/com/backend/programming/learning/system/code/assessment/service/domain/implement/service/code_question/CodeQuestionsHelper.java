@@ -329,6 +329,8 @@ public class CodeQuestionsHelper {
 
         List<ProgrammingLanguageCodeQuestion> languages = programmingLanguageCodeQuestionRepository.findByCodeQuestionId(codeQuestion.getId());
 
-        return codeAssessmentDomainService.getAdminDetailCodeQuestion(codeQuestion, sampleTestCase, languages);
+        List<Tag> tags = codeQuestionRepository.findTagByCodeQuestionId(codeQuestion.getId());
+
+        return codeAssessmentDomainService.getAdminDetailCodeQuestion(codeQuestion, sampleTestCase, languages, tags);
     }
 }
