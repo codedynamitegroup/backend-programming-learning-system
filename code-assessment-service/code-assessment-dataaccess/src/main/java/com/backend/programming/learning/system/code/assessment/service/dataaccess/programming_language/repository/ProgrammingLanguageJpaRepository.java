@@ -10,4 +10,5 @@ import java.util.UUID;
 @Repository
 public interface ProgrammingLanguageJpaRepository extends JpaRepository<ProgrammingLanguageEntity, UUID> {
     List<ProgrammingLanguageEntity> findAllByOrderByNameAsc();
+    List<ProgrammingLanguageEntity> findAllByIsActivedOrderByNameAsc(Boolean active);
 }

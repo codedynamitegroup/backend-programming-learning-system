@@ -37,11 +37,12 @@ public class NotificationQueryHelper {
 
     @Transactional(readOnly = true)
     public Page<Notification> queryAllNotificationsByEmail(
-            String email, Integer pageNo, Integer pageSize
+            String email, Boolean isRead, Integer pageNo, Integer pageSize
     ) {
         User user = findUserByEmail(email);
-        Page<Notification> notifications = notificationRepository.findAllByUserIdTo(
+        Page<Notification> notifications = notificationRepository.findAllByUserIdToAndIsRead(
                 user.getId().getValue(),
+                isRead,
                 pageNo,
                 pageSize);
         for (Notification notification : notifications) {

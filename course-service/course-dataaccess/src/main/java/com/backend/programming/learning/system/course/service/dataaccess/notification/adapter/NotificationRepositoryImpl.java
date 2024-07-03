@@ -39,13 +39,15 @@ public class NotificationRepositoryImpl implements NotificationRepository {
     }
 
     @Override
-    public Page<Notification> findAllByUserIdTo(UUID userIdTo, Integer pageNo, Integer pageSize) {
+    public Page<Notification> findAllByUserIdToAndIsRead(UUID userIdTo, Boolean isRead, Integer pageNo, Integer pageSize) {
         Pageable paging = PageRequest.of(
                 pageNo,
-                pageSize,
-                Sort.by("createdAt").descending()
+                pageSize
         );
-        return notificationJpaRepository.findAllByUserTo(UserEntity.builder().id(userIdTo).build(), paging)
+        return notificationJpaRepository.findAllByUserIdToAndIsRead(
+                userIdTo,
+                        isRead,
+                        paging)
                 .map(notificationDataAccessMapper::notificationEntityToNotification);
     }
 

@@ -27,8 +27,8 @@ public class ProgrammingLanguageApplicationServiceImpl implements ProgrammingLan
     }
 
     @Override
-    public List<ProgrammingLanguageDto> getLanguage() {
-        return programmingLanguageHandler.getLanguage();
+    public List<ProgrammingLanguageDto> getLanguage(Boolean active) {
+        return programmingLanguageHandler.getLanguage(active);
     }
 
     @Override

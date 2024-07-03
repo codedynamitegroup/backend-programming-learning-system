@@ -18,4 +18,5 @@ public class QueryAllNotificationsCommand {
     private final int pageNo;
     @NotNull
     private final int pageSize;
+    private final Boolean isRead;
 }
