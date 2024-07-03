@@ -46,7 +46,6 @@ public class CalendarEventCommandHandler {
                 .persistCalendarEvent(createCalendarEventCommand);
 
         log.info("Calendar event created with id: {}", calendarEvent.getId().getValue());
-
         return calendarEventDataMapper.calendarEventToCreateCalendarEventResponse(calendarEvent,
                 "Calendar event created successfully");
     }

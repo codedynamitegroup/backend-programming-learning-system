@@ -6,8 +6,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.notification.DeleteNotificationResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.notification.QueryAllNotificationsCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.notification.QueryAllNotificationsResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.update.notification.MarkReadNotificationCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.update.notification.MarkReadNotificationResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.notification.UpdateNotificationCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.notification.UdpateNotificationResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.Notification;
 import com.backend.programming.learning.system.course.service.domain.mapper.notification.NotificationDataMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -51,15 +51,20 @@ public class NotificationCommandHandler {
     @Transactional(readOnly = true)
     public QueryAllNotificationsResponse queryAllNotificationsByUserIdTo(
             QueryAllNotificationsCommand queryAllNotificationsCommand) {
-        log.info("Querying all notifications by user id to: {}", queryAllNotificationsCommand.getUserIdTo());
         Page<Notification> notifications = notificationQueryHelper
-                .queryAllNotificationsByUserIdTo(
-                        queryAllNotificationsCommand.getUserIdTo(),
+                .queryAllNotificationsByEmail(
+                        queryAllNotificationsCommand.getEmail(),
+                        queryAllNotificationsCommand.getIsRead(),
                         queryAllNotificationsCommand.getPageNo(),
                         queryAllNotificationsCommand.getPageSize());
-        log.info("Returning all notifications: {}", notifications);
 
-        return notificationDataMapper.notificationsToQueryAllNotificationsResponse(notifications);
+        Integer unReadNotifications = notificationQueryHelper
+                .countAllUnreadNotificationsByEmail(queryAllNotificationsCommand.getEmail());
+
+        log.info("Returning all notifications: {}", notifications);
+        return notificationDataMapper.notificationsToQueryAllNotificationsResponse(
+                notifications,
+                unReadNotifications);
     }
 
     @Transactional
@@ -74,12 +79,14 @@ public class NotificationCommandHandler {
     }
 
     @Transactional
-    public MarkReadNotificationResponse markReadNotification(MarkReadNotificationCommand markReadNotificationCommand) {
-        notificationUpdateHelper.markReadNotificationById(
-                markReadNotificationCommand.getNotificationId());
+    public UdpateNotificationResponse updateNotification(UpdateNotificationCommand updateNotificationCommand) {
+        notificationUpdateHelper.updateNotificationById(
+                updateNotificationCommand.getNotificationId(),
+                updateNotificationCommand.getRead(),
+                updateNotificationCommand.getEmail());
 
-        return MarkReadNotificationResponse.builder()
-                .notificationId(markReadNotificationCommand.getNotificationId())
+        return UdpateNotificationResponse.builder()
+                .notificationId(updateNotificationCommand.getNotificationId())
                 .message("Notification marked as read successfully")
                 .build();
     }

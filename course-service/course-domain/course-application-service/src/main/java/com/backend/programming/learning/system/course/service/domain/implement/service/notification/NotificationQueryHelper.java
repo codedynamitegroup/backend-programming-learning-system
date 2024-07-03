@@ -36,16 +36,36 @@ public class NotificationQueryHelper {
 
 
     @Transactional(readOnly = true)
-    public Page<Notification> queryAllNotificationsByUserIdTo(
-            UUID userIdTo, Integer pageNo, Integer pageSize
+    public Page<Notification> queryAllNotificationsByEmail(
+            String email, Boolean isRead, Integer pageNo, Integer pageSize
     ) {
-        Page<Notification> notifications = notificationRepository.findAllByUserIdTo(userIdTo, pageNo, pageSize);
+        User user = findUserByEmail(email);
+        Page<Notification> notifications = notificationRepository.findAllByUserIdToAndIsRead(
+                user.getId().getValue(),
+                isRead,
+                pageNo,
+                pageSize);
         for (Notification notification : notifications) {
             notification.setUserFrom(getUser(notification.getUserFrom().getId().getValue()));
             notification.setUserTo(getUser(notification.getUserTo().getId().getValue()));
         }
 
         return notifications;
+    }
+
+    @Transactional(readOnly = true)
+    public Integer countAllUnreadNotificationsByEmail(String email) {
+        User user = findUserByEmail(email);
+        return notificationRepository.countAllByUserIdToAndIsRead(user.getId().getValue(), false);
+    }
+
+    private User findUserByEmail(String email) {
+        Optional<User> user = userRepository.findUserByEmail(email);
+        if (user.isEmpty()) {
+            log.warn("User with email: {} not found", email);
+            throw new UserNotFoundException("Could not find user with email: " + email);
+        }
+        return user.get();
     }
 }
 

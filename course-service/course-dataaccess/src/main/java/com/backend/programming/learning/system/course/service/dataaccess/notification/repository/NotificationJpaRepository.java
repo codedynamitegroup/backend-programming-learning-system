@@ -19,10 +19,21 @@ import java.util.UUID;
 public interface NotificationJpaRepository extends JpaRepository<NotificationEntity, UUID> {
     Optional<NotificationEntity> findById(UUID id);
 
-    Page<NotificationEntity> findAllByUserTo(UserEntity userTo, Pageable pageable);
+    @Query(value = """
+       select n.* from notification n
+       where n.user_id_to = ?1
+         and (?2 is null or n.is_read = ?2)
+       order by n.created_at desc
+""", nativeQuery = true)
+    Page<NotificationEntity> findAllByUserIdToAndIsRead(UUID userIdTo,
+                                                      Boolean isRead,
+                                                      Pageable pageable);
 
     @Transactional
     @Modifying
     @Query("update NotificationEntity n set n.isRead = ?1, n.updatedAt = ?2 where n.id = ?3")
     int markReadNotificationById(Boolean isRead, ZonedDateTime updatedAt, UUID id);
+
+    @Query("select count(n) from NotificationEntity n where n.userTo.id = ?1 and n.isRead = ?2")
+    Integer countAllByUserIdToAndIsRead(UUID userIdTo, Boolean isRead);
 }

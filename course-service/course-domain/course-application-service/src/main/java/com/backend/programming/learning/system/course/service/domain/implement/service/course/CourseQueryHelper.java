@@ -217,8 +217,8 @@ public class CourseQueryHelper {
         assignmentRepository.findRecentAssignment().forEach(assignment -> {
             recentAssignments.add(RecentAssignmentResponseEntity.builder()
                     .id(assignment.getId().getValue())
-                    .courseId(assignment.getCourseId().getValue())
-                    .courseName(courseNameMap.get(assignment.getCourseId()))
+                    .courseId(assignment.getCourse().getId().getValue())
+                    .courseName(courseNameMap.get(assignment.getCourse().getId().getValue()))
                     .title(assignment.getTitle())
                     .type(assignment.getType().name())
                     .createdAt(assignment.getCreatedAt())

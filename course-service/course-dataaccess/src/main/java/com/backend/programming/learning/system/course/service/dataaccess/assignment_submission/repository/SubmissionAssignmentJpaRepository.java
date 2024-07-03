@@ -37,4 +37,7 @@ public interface SubmissionAssignmentJpaRepository extends JpaRepository<Submiss
             "AND s.submitTime IS NOT NULL")
     Integer countAllByAssignmentId(UUID assignmentId);
 
+
+    List<SubmissionAssignmentEntity> findAllByAssignmentId(UUID assignmentId);
+
 }

@@ -58,4 +58,9 @@ public class SubmissionAssignmentQueryHelper {
     public Integer countAllByAssignmentId(UUID assignmentId) {
         return submissionAssignmentRepository.countAllByAssignmentId(assignmentId);
     }
+
+    @Transactional(readOnly=true)
+    public List<SubmissionAssignment> queryAllByAssignmentId(UUID assignmentId) {
+        return submissionAssignmentRepository.findAllByAssignmentId(assignmentId);
+    }
 }

@@ -18,6 +18,8 @@ import com.backend.programming.learning.system.course.service.domain.mapper.assi
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamSubmissionRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
+import com.backend.programming.learning.system.course.service.domain.valueobject.NotificationComponentType;
+import com.backend.programming.learning.system.course.service.domain.valueobject.NotificationEventType;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -48,14 +50,14 @@ public class AssignmentCommandHandler {
         Assignment assignment= assignmentCreateHelper.persistAssignment(createAssignmentCommand);
 
         CreateCalendarEventCommand createCalendarEventCommand = CreateCalendarEventCommand.builder()
-                .name("Assignment " + assignment.getTitle())
+                .name(assignment.getTitle())
                 .description(assignment.getIntro())
-                .eventType("COURSE")
+                .eventType(NotificationEventType.COURSE.name())
                 .startTime(assignment.getTime_open())
                 .endTime(assignment.getTime_close())
-                .courseId(assignment.getCourseId().getValue())
+                .courseId(assignment.getCourse().getId().getValue())
                 .assignmentId(assignment.getId().getValue())
-                .component("ASSIGNMENT")
+                .component(NotificationComponentType.ASSIGNMENT.name())
                 .build();
 
         calendarEventCommandHandler.createCalendarEvent(createCalendarEventCommand);
@@ -105,7 +107,7 @@ public class AssignmentCommandHandler {
             UpdateCalendarEventCommand updateCalendarEventCommand = UpdateCalendarEventCommand.builder()
                     .name(updateAssignmentCommand.getTitle() == null
                             ? null
-                            : "Assignment " + updateAssignmentCommand.getTitle())
+                            : updateAssignmentCommand.getTitle())
                     .description(updateAssignmentCommand.getIntro() == null
                             ? null
                             : updateAssignmentCommand.getIntro())
