@@ -138,8 +138,8 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
     }
 
     @Override
-    public CodeQuestion getAdminDetailCodeQuestion(CodeQuestion codeQuestion, List<TestCase> testcases, List<ProgrammingLanguageCodeQuestion> languages) {
-        codeQuestion.setAdminDetailInformation(testcases, languages);
+    public CodeQuestion getAdminDetailCodeQuestion(CodeQuestion codeQuestion, List<TestCase> testcases, List<ProgrammingLanguageCodeQuestion> languages, List<Tag> tags) {
+        codeQuestion.setAdminDetailInformation(testcases, languages, tags);
         return codeQuestion;
     }
 

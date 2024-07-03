@@ -196,9 +196,10 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         this.programmingLanguages = languages;
     }
 
-    public void setAdminDetailInformation(List<TestCase> testcases, List<ProgrammingLanguageCodeQuestion> languages) {
+    public void setAdminDetailInformation(List<TestCase> testcases, List<ProgrammingLanguageCodeQuestion> languages, List<Tag> tags) {
         tcs = testcases == null || testcases.isEmpty()? null: testcases;
         this.programmingLanguages = languages;
+        this.tags = tags;
     }
 
     public enum Fields { name, difficulty, createdAt}

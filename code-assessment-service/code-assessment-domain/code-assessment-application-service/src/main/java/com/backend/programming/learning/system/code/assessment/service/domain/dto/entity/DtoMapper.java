@@ -145,6 +145,16 @@ public class DtoMapper {
                 .difficulty(codeQuestion.getDifficulty())
                 .testCases(codeQuestion.getTcs() != null? codeQuestion.getTcs().stream().map(this::testCaseToDto).toList(): null)
                 .languages(codeQuestion.getProgrammingLanguages() != null? codeQuestion.getProgrammingLanguages().stream().map(this::programmingLanguageCodeQuestionToDto).toList(): null)
+                .tags(codeQuestion.getTags() != null?  codeQuestion.getTags().stream().map(item->item.getId().getValue()).toList(): null)
+                .build();
+    }
+
+    private TagDto tagToDto(Tag tag) {
+        return TagDto.builder()
+                .id(tag.getId().getValue())
+                .name(tag.getName())
+                .tagType(tag.getTagType())
+                .numOfCodeQuestion(tag.getNumOfCodeQuestion())
                 .build();
     }
 }

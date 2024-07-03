@@ -34,8 +34,10 @@ public class ProgrammingLanguageController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     @GetMapping
-    public ResponseEntity<List<ProgrammingLanguageDto>> getProgrammingLanguage(){
-        List<ProgrammingLanguageDto> response = service.getLanguage();
+    public ResponseEntity<List<ProgrammingLanguageDto>> getProgrammingLanguage(
+            @RequestParam(required = false) Boolean active
+    ){
+        List<ProgrammingLanguageDto> response = service.getLanguage(active);
         return ResponseEntity.ok(response);
     }
 
