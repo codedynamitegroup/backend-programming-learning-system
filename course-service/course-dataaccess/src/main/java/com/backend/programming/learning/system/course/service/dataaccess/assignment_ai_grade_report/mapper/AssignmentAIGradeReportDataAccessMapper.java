@@ -1,0 +1,44 @@
+package com.backend.programming.learning.system.course.service.dataaccess.assignment_ai_grade_report.mapper;
+
+import com.backend.programming.learning.system.course.service.dataaccess.assignment_ai_grade_report.entity.AssignmentAIGradeReportEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.rubric_user.mapper.RubricUserDataAccessMapper;
+import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
+import com.backend.programming.learning.system.course.service.domain.entity.AssignmentAIGradeReport;
+import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.valueobject.AssignmentAIGradeReportId;
+import com.backend.programming.learning.system.domain.valueobject.UserId;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+@Component
+@RequiredArgsConstructor
+public class AssignmentAIGradeReportDataAccessMapper {
+    private final RubricUserDataAccessMapper rubricUserDataAccessMapper;
+
+    public AssignmentAIGradeReportEntity assignmentAIGradeReportToAssignmentAIGradeReportEntity(AssignmentAIGradeReport assignmentAIGradeReport) {
+        return AssignmentAIGradeReportEntity.builder()
+                .id(assignmentAIGradeReport.getId().getValue())
+                .createdAt(assignmentAIGradeReport.getCreatedAt())
+                .feedbackSubmissions(assignmentAIGradeReport.getFeedbackSubmissions())
+                .question(assignmentAIGradeReport.getQuestion())
+                .rubricUser(rubricUserDataAccessMapper.rubricUserToRubricUserEntity(assignmentAIGradeReport.getRubricUser()))
+                .studentSubmissions(assignmentAIGradeReport.getStudentSubmissions())
+                .status(assignmentAIGradeReport.getStatus())
+                .build();
+    }
+
+    public AssignmentAIGradeReport assignmentAIGradeReportEntityToAssignmentAIGradeReport(AssignmentAIGradeReportEntity assignmentAIGradeReportEntity) {
+        return AssignmentAIGradeReport.builder()
+                .id(new AssignmentAIGradeReportId(assignmentAIGradeReportEntity.getId()))
+                .createdAt(assignmentAIGradeReportEntity.getCreatedAt())
+                .feedbackSubmissions(assignmentAIGradeReportEntity.getFeedbackSubmissions())
+                .question(assignmentAIGradeReportEntity.getQuestion())
+                .rubricUser(rubricUserDataAccessMapper.rubricUserEntityToRubricUser(assignmentAIGradeReportEntity.getRubricUser()))
+                .studentSubmissions(assignmentAIGradeReportEntity.getStudentSubmissions())
+                .status(assignmentAIGradeReportEntity.getStatus())
+                .build();
+
+    }
+}

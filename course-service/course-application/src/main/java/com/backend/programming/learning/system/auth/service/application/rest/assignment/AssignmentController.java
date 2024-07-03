@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.auth.service.application.rest.assignment;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.ai_grade_essay.AIGradeEssayCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.assignment.CreateAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.assignment.CreateAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.assignment.DeleteAssignmentCommand;
@@ -9,7 +10,9 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.ListSubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.StudentAssignmentListResponse;
+import com.backend.programming.learning.system.course.service.domain.ports.input.service.ai_grade_essay.AIGradeEssayApplicationService;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.assignment.AssignmentApplicationService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -29,6 +32,7 @@ import java.util.UUID;
 @RequestMapping(value = "/course/assignment", produces = "application/vnd.api.v1+json")
 public class AssignmentController {
     private final AssignmentApplicationService assignmentApplicationService;
+    private final AIGradeEssayApplicationService aiGradeEssayApplicationService;
 
     @PostMapping
     @Operation(summary = "Create assignment.")
@@ -184,6 +188,22 @@ public class AssignmentController {
                         .build()
         );
         return ResponseEntity.ok(response);
+    }
+    @PostMapping("/create-report")
+    @Operation(summary = "Create report AI grade essay.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = StudentAssignmentListResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<String> createReport(
+            @RequestParam UUID assignmentId,
+            @RequestParam UUID rubricId
+    ) throws JsonProcessingException {
+        aiGradeEssayApplicationService.createReportEssay(assignmentId, rubricId);
+        return ResponseEntity.status(HttpStatus.CREATED).body("OK");
     }
 
 }
