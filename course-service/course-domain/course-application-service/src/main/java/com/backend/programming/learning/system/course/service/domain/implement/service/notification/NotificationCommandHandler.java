@@ -54,6 +54,7 @@ public class NotificationCommandHandler {
         Page<Notification> notifications = notificationQueryHelper
                 .queryAllNotificationsByEmail(
                         queryAllNotificationsCommand.getEmail(),
+                        queryAllNotificationsCommand.getIsRead(),
                         queryAllNotificationsCommand.getPageNo(),
                         queryAllNotificationsCommand.getPageSize());
 
