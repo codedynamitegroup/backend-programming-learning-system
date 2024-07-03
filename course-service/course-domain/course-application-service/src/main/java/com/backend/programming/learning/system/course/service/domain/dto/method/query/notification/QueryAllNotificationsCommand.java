@@ -11,8 +11,9 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class QueryAllNotificationsCommand {
-    @NotNull
-    private final UUID userIdTo;
+//    @NotNull
+//    private final UUID userIdTo;
+    private final String email;
     @NotNull
     private final int pageNo;
     @NotNull

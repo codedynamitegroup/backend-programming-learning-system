@@ -1,13 +1,11 @@
 package com.backend.programming.learning.system.auth.service.application.rest.notification;
 
-import com.backend.programming.learning.system.course.service.domain.dto.method.create.notification.CreateNotificationCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.create.notification.CreateNotificationResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.notification.DeleteNotificationCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.notification.DeleteNotificationResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.notification.QueryAllNotificationsCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.notification.QueryAllNotificationsResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.update.notification.MarkReadNotificationCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.update.notification.MarkReadNotificationResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.notification.UpdateNotificationCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.notification.UdpateNotificationResponse;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.notification.NotificationApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -15,8 +13,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -31,27 +32,27 @@ public class NotificationController {
         this.notificationApplicationService = notificationApplicationService;
     }
 
-    @PostMapping("/create")
-    @Operation(summary = "Create notification.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Success.", content = {
-                    @Content(mediaType = "application/vnd.api.v1+json",
-                            schema = @Schema(implementation = CreateNotificationResponse.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "Not found."),
-            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<CreateNotificationResponse> createNotification(
-            @RequestBody CreateNotificationCommand createNotificationCommand) {
-        log.info("Creating notification: {}", createNotificationCommand);
-        CreateNotificationResponse createNotificationResponse =
-                notificationApplicationService.createNotificationResponse(createNotificationCommand);
-        log.info("Notification created: {}", createNotificationResponse);
+//    @PostMapping("/create")
+//    @Operation(summary = "Create notification.")
+//    @ApiResponses(value = {
+//            @ApiResponse(responseCode = "201", description = "Success.", content = {
+//                    @Content(mediaType = "application/vnd.api.v1+json",
+//                            schema = @Schema(implementation = CreateNotificationResponse.class))
+//            }),
+//            @ApiResponse(responseCode = "400", description = "Not found."),
+//            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+//    public ResponseEntity<CreateNotificationResponse> createNotification(
+//            @RequestBody CreateNotificationCommand createNotificationCommand) {
+//        log.info("Creating notification: {}", createNotificationCommand);
+//        CreateNotificationResponse createNotificationResponse =
+//                notificationApplicationService.createNotificationResponse(createNotificationCommand);
+//        log.info("Notification created: {}", createNotificationResponse);
+//
+//        return ResponseEntity.status(HttpStatus.CREATED).body(createNotificationResponse);
+//    }
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(createNotificationResponse);
-    }
-
-    @GetMapping
-    @Operation(summary = "Get all notifications.")
+    @GetMapping("/me")
+    @Operation(summary = "Get all notifications of an user.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
@@ -60,14 +61,20 @@ public class NotificationController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllNotificationsResponse> getAllNotifications(
-            @RequestParam UUID userIdTo,
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize
     ) {
+        String email = null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
         QueryAllNotificationsResponse queryAllNotificationsResponse =
                 notificationApplicationService.queryAllNotificationsResponse(QueryAllNotificationsCommand
                         .builder()
-                        .userIdTo(userIdTo)
+                        .email(email)
                         .pageNo(pageNo)
                         .pageSize(pageSize)
                         .build());
@@ -76,26 +83,38 @@ public class NotificationController {
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Mark notification as read.")
+    @Operation(summary = "Update notification.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
-                            schema = @Schema(implementation = MarkReadNotificationResponse.class))
+                            schema = @Schema(implementation = UdpateNotificationResponse.class))
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<MarkReadNotificationResponse> markReadNotification(
-            @PathVariable UUID id
+    public ResponseEntity<UdpateNotificationResponse> updateNotification(
+            @PathVariable UUID id,
+            @RequestParam(required = true) Boolean read
     ) {
-        log.info("Marking notification as read: {}", id);
-        MarkReadNotificationResponse markReadNotificationResponse =
-                notificationApplicationService.markReadNotificationResponse(MarkReadNotificationCommand
+        String email = null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt token = jwtAuthenticationToken.getToken();
+            email = token.getClaim("preferred_username");
+        }
+
+        log.info("read: {}", read);
+
+        log.info("Update notification: {}", id);
+        UdpateNotificationResponse updateNotificationResponse =
+                notificationApplicationService.updateNotificationResponse(UpdateNotificationCommand
                         .builder()
                         .notificationId(id)
+                        .read(read)
+                        .email(email)
                         .build());
-        log.info("Notification marked as read: {}", markReadNotificationResponse);
+        log.info("Notification updated: {}", updateNotificationResponse);
 
-        return ResponseEntity.ok(markReadNotificationResponse);
+        return ResponseEntity.ok(updateNotificationResponse);
     }
 
     @DeleteMapping("/{id}")

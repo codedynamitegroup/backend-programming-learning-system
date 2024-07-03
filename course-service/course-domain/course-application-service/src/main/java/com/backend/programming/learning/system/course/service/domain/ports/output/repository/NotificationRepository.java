@@ -14,5 +14,7 @@ public interface NotificationRepository {
     Optional<Notification> findById(UUID notificationId);
     void deleteNotificationById(UUID notificationId);
     int markReadNotificationById(UUID notificationId);
+    int updateNotificationById(UUID notificationId, Boolean read);
     List<Notification> saveAllNotifications(List<Notification> notifications);
+    Integer countAllByUserIdToAndIsRead(UUID userIdTo, boolean isRead);
 }

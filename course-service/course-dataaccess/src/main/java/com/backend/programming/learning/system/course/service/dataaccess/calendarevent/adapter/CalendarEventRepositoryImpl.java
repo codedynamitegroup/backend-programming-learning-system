@@ -64,8 +64,14 @@ public class CalendarEventRepositoryImpl implements CalendarEventRepository {
     }
 
     @Override
-    public List<CalendarEvent> findAllByStartTimeAfterTime(ZonedDateTime time) {
-        return calendarEventJpaRepository.findAllByStartTimeAfterTime(time)
+    public List<CalendarEvent> findAllValidCalendarEventsToCreateNotification(ZonedDateTime time) {
+        return calendarEventJpaRepository.findAllValidCalendarEventsToCreateNotification(
+                        time,
+                        time.plusHours(1),
+                        time.plusHours(3),
+                        time.plusHours(6),
+                        time.plusHours(12),
+                        time.plusDays(1))
                 .stream()
                 .map(calendarEventDataAccessMapper
                         ::calendarEventEntityToCalendarEvent)
