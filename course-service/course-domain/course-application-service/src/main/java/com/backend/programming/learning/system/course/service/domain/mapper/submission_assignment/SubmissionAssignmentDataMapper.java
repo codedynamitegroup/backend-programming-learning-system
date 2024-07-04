@@ -3,7 +3,9 @@ package com.backend.programming.learning.system.course.service.domain.mapper.sub
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.submission_assignment.CreateSubmissionAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.submission_assignment.CreateSubmissionAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.submission_assignment.DeleteSubmissionAssignmentResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QueryAllSubmissionAssignmentAIGradeEssayResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QueryAllSubmissionAssignmentResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment.AIGradeEssaySubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment.SubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment.SubmissionAssignmentUserResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment_file.SubmissionAssignmentFileResponseEntity;
@@ -18,6 +20,7 @@ import com.backend.programming.learning.system.course.service.domain.mapper.user
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionAssignmentFileRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionAssignmentOnlineTextRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SubmissionGradeRepository;
+import org.jsoup.Jsoup;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
@@ -172,6 +175,18 @@ public class SubmissionAssignmentDataMapper {
         return DeleteSubmissionAssignmentResponse.builder()
                 .submissionAssignmentId(submissionAssignment.getId().getValue())
                 .message("Submission assignment deleted successfully")
+                .build();
+    }
+
+    public QueryAllSubmissionAssignmentAIGradeEssayResponse queryAllSubmissionAssignmentResponseToQueryAllSubmissionAssignmentAIGradeEssayResponse(QueryAllSubmissionAssignmentResponse queryAllSubmissionAssignmentResponse) {
+        return QueryAllSubmissionAssignmentAIGradeEssayResponse.builder()
+                .submissionAssignments(queryAllSubmissionAssignmentResponse.getSubmissionAssignments().stream().map(
+                        submissionAssignmentResponseEntity -> AIGradeEssaySubmissionAssignmentResponseEntity.builder()
+                                .studentSubmissionId(submissionAssignmentResponseEntity.getId())
+                                .studentAnswer(Jsoup.parse(submissionAssignmentResponseEntity.getContent()).text())
+                                .build()
+                ).toList())
+                .totalItems(queryAllSubmissionAssignmentResponse.getTotalItems())
                 .build();
     }
 }

@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.assignment.DeleteAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAllAssignmentGradeResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAllAssignmentsResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAssignmentAIGradeResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.QueryAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.*;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.intro_attachment.IntroAttachmentResponseEntity;
@@ -16,6 +17,7 @@ import com.backend.programming.learning.system.course.service.domain.mapper.intr
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.course.service.domain.valueobject.Type;
 import lombok.RequiredArgsConstructor;
+import org.jsoup.Jsoup;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
@@ -89,6 +91,14 @@ public class AssignmentDataMapper {
                 .type(assignment.getType().name())
                 .visible(assignment.getVisible())
                 .allowSubmitLate(assignment.getAllowSubmitLate())
+                .build();
+    }
+
+    public QueryAssignmentAIGradeResponse queryAssignmentResponseToQueryAssignmentAIGradeResponse(QueryAssignmentResponse queryAssignmentResponse) {
+        return QueryAssignmentAIGradeResponse.builder()
+                .id(queryAssignmentResponse.getId())
+                .intro(Jsoup.parse(queryAssignmentResponse.getIntro()).text())
+                .maxScore(queryAssignmentResponse.getMaxScore())
                 .build();
     }
 

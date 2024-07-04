@@ -74,6 +74,9 @@ CREATE TYPE outbox_status AS ENUM ('STARTED', 'COMPLETED', 'FAILED');
 DROP TYPE IF EXISTS notification_notify_time;
 CREATE TYPE notification_notify_time AS ENUM ('TWENTY_FOUR_HOURS', 'TWELVE_HOURS', 'SIX_HOURS', 'THREE_HOURS', 'ONE_HOUR');
 
+DROP TYPE IF EXISTS assignment_ai_grade_report_status;
+CREATE TYPE assignment_ai_grade_report_status AS ENUM ('PENDING', 'SUCCESS', 'FAILED');
+
 DROP TABLE IF EXISTS "public".organization CASCADE;
 CREATE TABLE "public".organization
 (
@@ -835,3 +838,41 @@ CREATE INDEX "organization_outbox_saga_status"
 CREATE UNIQUE INDEX "organization_outbox_saga_id"
     ON "public".organization_outbox
     (type, saga_id, copy_state, outbox_status);
+
+DROP TABLE IF EXISTS "public".rubric_user CASCADE;
+CREATE TABLE "public".rubric_user
+(
+    id          uuid DEFAULT gen_random_uuid() NOT NULL,
+    name       text                           ,
+    description text                           ,
+    content  text                           ,
+    user_id uuid,
+    CONSTRAINT rubric_user_pkey PRIMARY KEY (id),
+    CONSTRAINT rubric_user_id_fkey FOREIGN KEY (user_id)
+        REFERENCES "public".user (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS "public".assignment_ai_grade_report CASCADE;
+CREATE TABLE "public".assignment_ai_grade_report
+(
+    id          uuid DEFAULT gen_random_uuid() NOT NULL,
+    status assignment_ai_grade_report_status,
+    question        text                           ,
+    student_submissions     text                           ,
+    feedback_submissions  text                           ,
+    rubric_id uuid,
+    feedback_language text,
+    assignment_id uuid,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT assignment_ai_grade_report_pkey PRIMARY KEY (id),
+    CONSTRAINT assignment_ai_grade_report_rubric_id_fkey FOREIGN KEY (rubric_id)
+        REFERENCES "public".rubric_user (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT assignment_ai_grade_report_rubric_id_fkey2 FOREIGN KEY (assignment_id)
+        REFERENCES "public".assignment (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
