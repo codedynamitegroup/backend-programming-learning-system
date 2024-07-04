@@ -181,4 +181,34 @@ public class CourseController {
         log.info("Returning statistics of course for admin with orgId: {}", orgId);
         return ResponseEntity.ok(queryCourseStatisticsResponse);
     }
+
+    @GetMapping("/organization/{organizationId}")
+    @Operation(summary = "Get all courses by organization id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllCourseResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllCourseResponse> findAllByOrganizationId(
+            @PathVariable UUID organizationId,
+            @RequestParam(defaultValue = "") String search,
+            @RequestParam(required = false) Optional<String[]> courseType,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize
+    ) {
+        log.info("Getting list course by organization id: {}", organizationId);
+
+        QueryAllCourseCommand queryAllCourseCommand = QueryAllCourseCommand.builder()
+                .search(search)
+                .pageNo(pageNo)
+                .pageSize(pageSize)
+                .courseType(courseType.orElse(null))
+                .build();
+
+        QueryAllCourseResponse response = courseApplicationService.findAllByOrganizationId(organizationId, queryAllCourseCommand);
+        log.info("Returning all courses by organization id: {}", response);
+        return ResponseEntity.ok(response);
+    }
 }

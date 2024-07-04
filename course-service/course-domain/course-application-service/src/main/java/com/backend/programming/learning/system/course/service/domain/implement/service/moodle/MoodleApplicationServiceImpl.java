@@ -15,13 +15,18 @@ import java.util.UUID;
 public class MoodleApplicationServiceImpl implements MoodleApplicationService {
     private final MoodleCommandHandler moodleCommandHandler;
     @Override
-    public String syncCourse() {
-        return moodleCommandHandler.syncCourse();
+    public String syncCourse(UUID organizationId) {
+        return moodleCommandHandler.syncCourse(organizationId);
     }
 
     @Override
     public String syncUser(UUID organizationId) {
         return moodleCommandHandler.syncUser(organizationId);
+    }
+
+    @Override
+    public String syncResource(UUID organizationId) {
+        return moodleCommandHandler.syncResource(organizationId);
     }
 
     @Override

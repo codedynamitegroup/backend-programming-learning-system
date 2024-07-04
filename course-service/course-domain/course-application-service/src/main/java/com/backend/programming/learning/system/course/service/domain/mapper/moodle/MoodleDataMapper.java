@@ -169,6 +169,7 @@ public class MoodleDataMapper {
         Boolean isGraded=false;
         float grade=(float)-1;
         String content="";
+        String feedbackContent="";
         ZonedDateTime submittedAt=null;
         ZonedDateTime timemodified=null;
 
@@ -183,7 +184,7 @@ public class MoodleDataMapper {
         if(feedback!=null)
         {
             grade= Float.parseFloat(feedback.getGrade().getGrade());
-            content=feedback.getPlugins().get(0).getEditorfields().get(0).getText();
+            feedbackContent=feedback.getPlugins().get(0).getEditorfields().get(0).getText();
         }
         return SubmissionAssignment.builder()
                 .id(new SubmissionAssignmentId(UUID.randomUUID()))
@@ -191,6 +192,7 @@ public class MoodleDataMapper {
                 .user(user)
                 .isGraded(isGraded)
                 .content(content)
+                .feedback(feedbackContent)
                 .grade(grade)
                 .timemodified(timemodified)
                 .submittedAt(submittedAt)

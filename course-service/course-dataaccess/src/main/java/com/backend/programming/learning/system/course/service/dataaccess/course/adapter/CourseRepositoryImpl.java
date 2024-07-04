@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -47,6 +48,13 @@ public class CourseRepositoryImpl implements CourseRepository {
     public Optional<Course> findByName(String courseName) {
         return courseJpaRepository.findByName(courseName)
                 .map(courseDataAccessMapper::courseEntityToCourse);
+    }
+
+    @Override
+    public Page<Course> findAllByOrganizationId(UUID organizationId, String search, String[] courseType, Integer page, Integer size) {
+        return
+                courseJpaRepository.findAllByOrganizationId(organizationId, search,courseType,PageRequest.of(page, size))
+                        .map(courseDataAccessMapper::courseEntityToCourse);
     }
 
     @Override

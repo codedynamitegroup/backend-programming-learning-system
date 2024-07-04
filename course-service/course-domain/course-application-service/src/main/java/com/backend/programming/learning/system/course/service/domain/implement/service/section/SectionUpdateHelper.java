@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.course.service.domain.CourseDomai
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.section.UpdateSectionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.section.SectionModel;
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
+import com.backend.programming.learning.system.course.service.domain.entity.Organization;
 import com.backend.programming.learning.system.course.service.domain.entity.Section;
 import com.backend.programming.learning.system.course.service.domain.entity.WebhookMessage;
 import com.backend.programming.learning.system.course.service.domain.implement.service.moodle.MoodleCommandHandler;
@@ -49,7 +50,10 @@ public class SectionUpdateHelper {
 
     @Transactional
     public Section updateSection(WebhookMessage webhookMessage, Course course) {
-        List<SectionModel> sectionModels = moodleCommandHandler.getAllSection(webhookMessage.getCourseId());
+        Organization organization = course.getOrganization();
+        String apiKey = organization.getApiKey();
+        String moodleUrl = organization.getMoodleUrl();
+        List<SectionModel> sectionModels = moodleCommandHandler.getAllSection(webhookMessage.getCourseId(),apiKey, moodleUrl);
         for (SectionModel sectionModel : sectionModels) {
             if (sectionModel.getId().equals(webhookMessage.getObjectId())) {
                 Optional<Section> previousSection = sectionRepository.
