@@ -709,6 +709,10 @@ public class MoodleCommandHandler {
             if (userResult.isPresent()) {
                 UpdateUserCommand userUpdate = moodleDataMapper.updateUser(userModel, userResult.get());
                 UpdateUserResponse updateUserResponse = userApplicationService.updateUser(userUpdate);
+
+                Integer roleId = userModel.getRoles().isEmpty() ? 5 : userModel.getRoles().get(0).getRoleid();
+                RoleMoodle roleMoodle = roleMoodleRepository.findById(roleId).orElse(null);
+                userResult.get().setRoleMoodle(roleMoodle);
                 userRepository.save(userResult.get());
 //                List<Role> rolesMoodle = userModel.getRoles();
 //                rolesMoodle.forEach(role -> {
@@ -719,9 +723,13 @@ public class MoodleCommandHandler {
                 CreateUserCommand user = moodleDataMapper.createUser(userModel);
                 CreateUserResponse createUserResponse = userApplicationService.createUser(user);
 
+
+                Integer roleId = userModel.getRoles().isEmpty() ? 5 : userModel.getRoles().get(0).getRoleid();
+                RoleMoodle roleMoodle = roleMoodleRepository.findById(roleId).orElse(null);
                 userRepository.save(User.builder()
                                 .id(new UserId(UUID.randomUUID()))
                                 .organization(organization.get())
+                                .roleMoodle(roleMoodle)
                                 .username(user.getUsername())
                                 .email(user.getEmail())
                                 .userIdMoodle(user.getUserIdMoodle())
