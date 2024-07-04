@@ -445,4 +445,23 @@ public class UserController {
         log.info("Returning statistics of users");
         return ResponseEntity.ok(queryStatisticUserResponse);
     }
+
+    @GetMapping("/admin-org/statistics")
+    @Operation(summary = "Get statistics of users.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryGeneralStatisticUserResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryGeneralStatisticUserResponse> getUserStatisticsAdminOrganization(
+            @RequestParam(defaultValue = "0") String orgId
+    ) {
+        log.info("Getting statistics of users for Admin org with org id: {}", orgId);
+        QueryGeneralStatisticUserResponse queryStatisticUserResponse = userApplicationService.getStatisticUserAdminOrg(orgId);
+
+        log.info("Returning statistics of users for Admin org with org id: {}", orgId);
+        return ResponseEntity.ok(queryStatisticUserResponse);
+    }
 }

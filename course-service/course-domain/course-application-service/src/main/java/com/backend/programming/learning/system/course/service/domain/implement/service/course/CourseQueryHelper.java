@@ -16,10 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -226,5 +223,39 @@ public class CourseQueryHelper {
         });
 
         return recentAssignments;
+    }
+
+    public QueryGeneralCourseStatisticsResponse getCourseStatisticsAdminOrg(String orgId) {
+        List <Course> courseList =  courseRepository
+                .findAll("", null, 0, 999999999)
+                .getContent()
+                .stream()
+                .filter(course -> Objects.nonNull(course.getOrganization()) && course.getOrganization().getId().getValue().toString().equals(orgId))
+                .collect(Collectors.toList());;
+        List<CourseUser> courseUserList = courseUserRepository
+                .findAll()
+                .stream()
+                .filter(courseUser -> courseList
+                        .stream()
+                        .anyMatch(course -> course.getId().getValue().equals(courseUser.getCourse().getId().getValue())))
+                .collect(Collectors.toList());
+        List<CourseType> courseTypeList =  courseTypeRepository.findAll();
+
+        long totalCourse = courseList.size();
+        long totalEnrollments = courseUserList.size();
+        long activeCourses = courseList.stream().filter(Course::getVisible).count();
+        long inactiveCourses = totalCourse - activeCourses;
+
+        return QueryGeneralCourseStatisticsResponse.builder()
+                .totalCourse(totalCourse)
+                .totalEnrollments(totalEnrollments)
+                .activeCourse(activeCourses)
+                .inactiveCourse(inactiveCourses)
+                .userEnrollments(calculateEnrollment(courseUserList))
+                .activeInactiveCourse(calculateActiveInactiveCourseChart(activeCourses, inactiveCourses))
+                .courseType(calculateCourseTypeChart(courseList, courseTypeList))
+                .recentExam(getRecentExams())
+                .recentAssignments(getRecentAssignments(courseList))
+                .build();
     }
 }

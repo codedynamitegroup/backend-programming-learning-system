@@ -40,9 +40,16 @@ public class ProgrammingLanguageRepositoryImpl implements ProgrammingLanguageRep
     }
 
     @Override
-    public List<ProgrammingLanguage> findAll() {
-
-        return programmingLanguageJpaRepository.findAllByOrderByNameAsc().stream().map(programmingLanguageDataAccessMapper::entityToProgramingLanguage).toList();
+    public List<ProgrammingLanguage> findAll(Boolean active) {
+        List<ProgrammingLanguageEntity> entities = List.of();
+        if(active == null)
+            entities = programmingLanguageJpaRepository
+                    .findAllByOrderByNameAsc();
+        else{
+            entities = programmingLanguageJpaRepository.findAllByIsActivedOrderByNameAsc(active);
+        }
+        return entities.stream()
+                .map(programmingLanguageDataAccessMapper::entityToProgramingLanguage).toList();
     }
 
     @Override

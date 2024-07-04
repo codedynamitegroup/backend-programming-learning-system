@@ -11,7 +11,7 @@ import java.util.List;
 public interface ProgrammingLanguageApplicationService {
     void createProgrammingLanguage(@Valid CreateProgammingLanguageCommand command);
 
-    List<ProgrammingLanguageDto> getLanguage();
+    List<ProgrammingLanguageDto> getLanguage(Boolean active);
 
     void deleteLanguage(@Valid DeleteProgrammingLanguageCommand command);
 

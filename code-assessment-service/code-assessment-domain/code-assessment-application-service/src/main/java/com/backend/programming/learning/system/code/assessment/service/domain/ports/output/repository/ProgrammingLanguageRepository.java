@@ -12,7 +12,7 @@ public interface ProgrammingLanguageRepository {
 
     void save(ProgrammingLanguage programmingLanguage);
 
-    List<ProgrammingLanguage> findAll();
+    List<ProgrammingLanguage> findAll(Boolean active);
 
     void deleteById(ProgrammingLanguageId id);
 
