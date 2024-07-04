@@ -334,6 +334,11 @@ public class UserCommandHandler {
         return userQueryHelper.getStatisticUser();
     }
 
+    @Transactional(readOnly = true)
+    public QueryGeneralStatisticUserResponse getStatisticUserAdminOrg(String orgId) {
+        return userQueryHelper.getStatisticUserAdminOrg(orgId);
+    }
+
     public AssignUserToOrganizationResponse assignUserToOrganization(AssignUserToOrganizationCommand assignUserToOrganizationCommand) {
         UserUpdatedEvent userUpdatedEvent = userUpdateHelper.assignUserToOrganization(assignUserToOrganizationCommand);
 
