@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 
 /**
@@ -91,5 +92,17 @@ public class CourseCommandHandler {
     @Transactional(readOnly = true)
     public QueryGeneralCourseStatisticsResponse getCourseStatisticsAdminOrg(String orgId) {
         return courseQueryHelper.getCourseStatisticsAdminOrg(orgId);
+    }
+
+    @Transactional(readOnly = true)
+    public QueryAllCourseResponse findAllByOrganizationId(UUID organizationId, QueryAllCourseCommand queryAllCourseCommand) {
+        Page<Course> courses = courseQueryHelper.findAllByOrganizationId(
+                organizationId,
+                queryAllCourseCommand.getSearch(),
+                queryAllCourseCommand.getCourseType(),
+                queryAllCourseCommand.getPageNo(),
+                queryAllCourseCommand.getPageSize());
+        log.info("Returning all courses: {}", courses);
+        return courseDataMapper.coursesToQueryAllCourseResponse(courses);
     }
 }

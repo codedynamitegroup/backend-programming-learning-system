@@ -258,4 +258,11 @@ public class CourseQueryHelper {
                 .recentAssignments(getRecentAssignments(courseList))
                 .build();
     }
+
+
+    public Page<Course> findAllByOrganizationId(UUID organizationId, String search, String[] courseType, Integer pageNo, Integer pageSize) {
+        Page<Course> courses = courseRepository.findAllByOrganizationId(organizationId, search, courseType, pageNo, pageSize);
+        log.info("Courses found successfully");
+        return courses;
+    }
 }

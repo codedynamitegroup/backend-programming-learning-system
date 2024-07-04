@@ -34,6 +34,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -103,19 +104,39 @@ public class MoodleCommandHandler {
 
 
     @Transactional
-    public String syncCourse() {
+    public String syncCourse(UUID organizationId){
 
-        createCourseType();
-        List<CourseResponseEntity> allCourse = getAllCourse();
+        Optional<Organization> organization = organizationRepository.findOrganizationById(organizationId);
+        if (organization.isEmpty()) {
+            throw new RuntimeException("Organization not found");
+        }
+        String apiKey = organization.get().getApiKey();
+        String moodleUrl = organization.get().getMoodleUrl();
+        createCourseType(apiKey, moodleUrl);
+        List<CourseResponseEntity> allCourse = getAllCourse(apiKey,moodleUrl);
         createCourseUser();
-        createCourseExam(allCourse);
-//        updateGradeSubmissionAssignment();
         return "Sync course success";
     }
 
-    private void createCourseExam(List<CourseResponseEntity> allCourse) {
+    @Transactional
+    public String syncResource(UUID organizationId){
+        Optional<Organization> organization = organizationRepository.findOrganizationById(organizationId);
+        if (organization.isEmpty()) {
+            throw new RuntimeException("Organization not found");
+        }
+        String apiKey = organization.get().getApiKey();
+        String moodleUrl = organization.get().getMoodleUrl();
+        Page<Course> courses = courseRepository.findAllByOrganizationId(organizationId,"",null,0,999);
+        List<Course> courseList = courses.getContent();
+        createSection(courseList,apiKey, moodleUrl);
+        createAssignment(courseList,apiKey, moodleUrl);
+        createCourseExam(courseList,apiKey, moodleUrl);
+        return "Sync resource success";
+    }
+
+    private void createCourseExam(List<Course> courseList, String apiKey, String moodleUrl) {
         String apiURLQuiz = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s",
-                MOODLE_URL, TOKEN, GET_QUIZZES);
+                moodleUrl,apiKey, GET_QUIZZES);
         String modelQuiz = restTemplate.getForObject(apiURLQuiz, String.class);
         ListQuizModel listQuizModel = null;
         try {
@@ -126,36 +147,40 @@ public class MoodleCommandHandler {
         }
 
         List<Exam> exams = new ArrayList<>();
-        listQuizModel.getQuizzes().forEach(quizModel -> {
-            Optional<Exam> examResult = examRepository.findByName(quizModel.getName());
-            if (examResult.isPresent()) {
-                Exam examUpdate = moodleDataMapper.updateExam(quizModel,
-                        examResult.get(),
-                        courseIdsMap.get(quizModel.getCourse().toString()));
-                Exam res = examRepository.save(examUpdate);
-                exams.add(res);
-            } else {
-                Exam exam = moodleDataMapper.createExam(quizModel,
-                        courseIdsMap.get(quizModel.getCourse().toString()));
-                Exam res = examRepository.save(exam);
-                exams.add(res);
-            }
-        });
+
+        ListQuizModel finalListQuizModel = listQuizModel;
+        courseList.forEach(course ->
+                finalListQuizModel.getQuizzes().forEach(quizModel -> {
+                Optional<Exam> examResult = examRepository.findByName(quizModel.getName());
+                if (examResult.isPresent()) {
+                    Exam examUpdate = moodleDataMapper.updateExam(quizModel,
+                            examResult.get(),
+                            courseIdsMap.get(quizModel.getCourse().toString()));
+                    Exam res = examRepository.save(examUpdate);
+                    exams.add(res);
+                } else {
+                    Exam exam = moodleDataMapper.createExam(quizModel,
+                            courseIdsMap.get(quizModel.getCourse().toString()));
+                    Exam res = examRepository.save(exam);
+                    exams.add(res);
+                }
+            })
+        );
     }
 
     @Transactional
-    public void createCourseType()
+    public void createCourseType(String apiKey, String moodleUrl)
     {
-        List<CourseTypeModel> courseTypeModels = getAllCourseType();
+        List<CourseTypeModel> courseTypeModels = getAllCourseType(apiKey, moodleUrl);
         courseTypeModels.forEach(courseTypeModel -> {
             CourseType courseType = moodleDataMapper.createCourseType(courseTypeModel);
             courseTypeRepository.save(courseType);
         });
     }
 
-    private List<CourseTypeModel> getAllCourseType() {
+    private List<CourseTypeModel> getAllCourseType(String apiKey, String moodleUrl) {
         String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s",
-                MOODLE_URL, TOKEN, GET_CATEGORY);
+                moodleUrl,apiKey, GET_CATEGORY);
         RestTemplate restTemplate = new RestTemplate();
         String model = restTemplate.getForObject(apiURL, String.class);
         ObjectMapper objectMapper = new ObjectMapper();
@@ -173,15 +198,11 @@ public class MoodleCommandHandler {
     }
 
     @Transactional
-    public void createSection() {
-        for (Map.Entry<String, Course> entry : courseIdsMap.entrySet()) {
-            String courseId = entry.getKey();
-            Course course = entry.getValue();
-            if (course.getCourseIdMoodle() == null || course.getName().equals("code dynamite"))
-                continue;
-            List<SectionModel> allSection = getAllSection(course.getCourseIdMoodle().toString());
+    public void createSection(List<Course>courseList,String apiKey, String moodleUrl){
+        courseList.forEach(course -> {
+            List<SectionModel> allSection = getAllSection(course.getCourseIdMoodle().toString(),apiKey,moodleUrl);
             if (allSection.isEmpty()) {
-                continue;
+                return;
             }
 
             allSection.forEach(sectionModel -> {
@@ -189,18 +210,18 @@ public class MoodleCommandHandler {
                 sectionRepository.save(section);
                 // create module
                 for (ModuleModel module : sectionModel.getModules()) {
-//                    if(module.getModplural().equals("Assignments")||
+                    if(module.getModplural().equals("Assignments"))
+//                            ||
 //                            module.getModplural().equals("Quizzes")||
 //                            module.getModplural().equals("URLs")||
 //                            module.getModplural().equals("Files"))
-                    if(module.getModplural().equals("Assignments"))
                     {
                         Module moduleCreate = moodleDataMapper.createModule(section, module);
                         moduleRepository.save(moduleCreate);
                     }
                 }
             });
-        }
+        });
     }
 
     @Transactional
@@ -307,9 +328,9 @@ public class MoodleCommandHandler {
     }
 
 
-    public List<SectionModel>  getAllSection(String courseId) {
+    public List<SectionModel>  getAllSection(String courseId,String apiKey, String moodleUrl) {
         String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&courseid=%s",
-                MOODLE_URL, TOKEN, GET_CONTENTS, courseId);
+                moodleUrl,apiKey, GET_CONTENTS, courseId);
         RestTemplate restTemplate = new RestTemplate();
         String model = restTemplate.getForObject(apiURL, String.class);
         ObjectMapper objectMapper = new ObjectMapper();
@@ -326,9 +347,9 @@ public class MoodleCommandHandler {
     }
 
     @Transactional
-    public List<AssignmentCourseModel> getAllAssignments(String courseId) {
+    public List<AssignmentCourseModel> getAllAssignments(String courseId,String apiKey, String moodleUrl) {
         String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&courseids[0]=%s",
-                MOODLE_URL, TOKEN, GET_ASSIGNMENTS, courseId);
+                moodleUrl,apiKey, GET_ASSIGNMENTS, courseId);
         RestTemplate restTemplate = new RestTemplate();
         String model = restTemplate.getForObject(apiURL, String.class);
         ObjectMapper objectMapper = new ObjectMapper();
@@ -346,9 +367,9 @@ public class MoodleCommandHandler {
     }
 
     @Transactional
-    public List<SubmissionAssignmentModel> getAllSubmissionAssignment(String assignmentId) {
+    public List<SubmissionAssignmentModel> getAllSubmissionAssignment(String assignmentId,String apiKey, String moodleUrl) {
         String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&assignmentids[0]=%s",
-                MOODLE_URL, TOKEN, GET_SUBMISSION_ASSIGNMENTS, assignmentId);
+                moodleUrl,apiKey, GET_SUBMISSION_ASSIGNMENTS, assignmentId);
         RestTemplate restTemplate = new RestTemplate();
         String model = restTemplate.getForObject(apiURL, String.class);
         ObjectMapper objectMapper = new ObjectMapper();
@@ -365,10 +386,10 @@ public class MoodleCommandHandler {
     }
 
     @Transactional
-    public List<GradeSubmissionAssignment> getGrade(String assignmentId)
+    public List<GradeSubmissionAssignment> getGrade(String assignmentId,String apiKey, String moodleUrl)
     {
         String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s&assignmentids[0]=%s",
-                MOODLE_URL, TOKEN, GET_GRADE, assignmentId);
+                moodleUrl,apiKey, GET_GRADE, assignmentId);
         RestTemplate restTemplate = new RestTemplate();
         String model = restTemplate.getForObject(apiURL, String.class);
         ObjectMapper objectMapper = new ObjectMapper();
@@ -385,51 +406,7 @@ public class MoodleCommandHandler {
     }
 
     @Transactional
-    public void updateGradeSubmissionAssignment()
-    {
-        List<Assignment> assignments = assignmentRepository.findAll();
-        assignments.forEach(assignment -> {
-            List<GradeSubmissionAssignment> gradeSubmissionAssignments = getGrade(assignment.getAssignmentIdMoodle().toString());
-            if(gradeSubmissionAssignments.size()==0)
-                return;
-           gradeSubmissionAssignments.get(0).getGrades().forEach(gradeSubmission -> {
-               Optional<User> user = userRepository.findByUserIdMoodle(gradeSubmission.getUserid());
-               UUID assignmentId = assignment.getId().getValue();
-               UUID userId = user.get().getId().getValue();
-               SubmissionAssignment submissionAssignment = submissionAssignmentRepository.findByAssignmentIdAndUserId(assignmentId, userId);
-                if(submissionAssignment!=null)
-                {
-                     submissionAssignment.setGrade(Float.valueOf(gradeSubmission.getGrade()));
-                     submissionAssignmentRepository.update(submissionAssignment);
-                }
-           });
-        });
-
-    }
-
-    @Transactional
     public void createCourseUser() {
-//        List<UserModel> allUser = getAllUser();
-//        for (UserModel userModel : allUser) {
-//            List<UserCourseModel> allCourse = getCoursesByUser(userModel.getId());
-//            if (allCourse.isEmpty()) {
-//                continue;
-//            }
-//
-//            Optional<User> userResult = userRepository.findUserByEmail(userModel.getEmail());
-//            if (userResult.isEmpty()) {
-//                continue;
-//            }
-//
-//            allCourse.parallelStream().forEach(userCourseModel -> {
-//                Optional<Course> courseResult = courseRepository.findByCourseIdMoodle(Integer.valueOf(userCourseModel.getId()));
-//                if (courseResult.isPresent()) {
-//                    RoleMoodle roleMoodle = roleMoodleRepository.findById(userModel.getRoles().get(0).getRoleid()).get();
-//                    CourseUser courseUser = moodleDataMapper.createCourseUser(courseResult.get(), userResult.get(), roleMoodle);
-//                    courseUserRepository.saveCourseUser(courseUser);
-//                }
-//            });
-//        }
         for (Map.Entry<String, Course> entry : courseIdsMap.entrySet()) {
             String courseId = entry.getKey();
             Course course = entry.getValue();
@@ -445,9 +422,6 @@ public class MoodleCommandHandler {
                 CourseUser courseUser = moodleDataMapper.createCourseUser(course, userResult.get(), roleMoodle);
                 courseUserRepository.saveCourseUser(courseUser);
             }
-
-
-
         }
     }
 
@@ -502,45 +476,43 @@ public class MoodleCommandHandler {
 //    }
 
     @Transactional
-    public void createAssignment() {
-        for (Map.Entry<String, Course> entry : courseIdsMap.entrySet()) {
-            String courseId = entry.getKey();
-            Course course = entry.getValue();
-            List<AssignmentCourseModel> listAssignmentCourseModel = getAllAssignments(courseId);
-            listAssignmentCourseModel.forEach(assignmentCourseModel -> {
-                assignmentCourseModel.getAssignments().forEach(assignmentModel -> {
-                    Assignment assignmentCreate = moodleDataMapper.createAssignment(course, assignmentModel);
-                    assignmentRepository.saveAssignment(assignmentCreate);
-//                    createSubmissionAssignment(assignmentCreate, assignmentModel);
-                    createSubmissionAssignmentUser(assignmentCreate);
-                    if(assignmentModel.getIntrofiles()!=null) {
-                        assignmentModel.getIntrofiles().forEach(introFileModel -> {
-                            IntroFile introFile = moodleDataMapper.createIntroFile(assignmentCreate, introFileModel);
-                            introFileRepository.save(introFile);
-                        });
-                    }
+    public void createAssignment(List<Course>courseList,String apiKey, String moodleUrl) {
+        courseList.forEach(course -> {
+                    List<AssignmentCourseModel> allAssignment = getAllAssignments(course.getCourseIdMoodle().toString(),apiKey,moodleUrl);
+                    allAssignment.forEach(assignmentCourseModel -> {
+                        assignmentCourseModel.getAssignments().forEach(assignmentModel -> {
+                            Assignment assignmentCreate = moodleDataMapper.createAssignment(course, assignmentModel);
+                            assignmentRepository.saveAssignment(assignmentCreate);
+                            createSubmissionAssignmentUser(assignmentCreate);
+                            if(assignmentModel.getIntrofiles()!=null) {
+                                assignmentModel.getIntrofiles().forEach(introFileModel -> {
+                                    IntroFile introFile = moodleDataMapper.createIntroFile(assignmentCreate, introFileModel);
+                                    introFileRepository.save(introFile);
+                                });
+                            }
 
-                    if(assignmentModel.getIntroattachments()!=null) {
-                        assignmentModel.getIntroattachments().forEach(introAttachmentModel -> {
-                            IntroAttachment introAttachment = moodleDataMapper.createIntroAttachment(assignmentCreate, introAttachmentModel);
-                            introAttachmentRepository.save(introAttachment);
+                            if(assignmentModel.getIntroattachments()!=null) {
+                                assignmentModel.getIntroattachments().forEach(introAttachmentModel -> {
+                                    IntroAttachment introAttachment = moodleDataMapper.createIntroAttachment(assignmentCreate, introAttachmentModel);
+                                    introAttachmentRepository.save(introAttachment);
+                                });
+                            }
+                            if(assignmentModel.getActivityattachments()!=null) {
+                                assignmentModel.getActivityattachments().forEach(activityAttachmentModel -> {
+                                    ActivityAttachment activityAttachment = moodleDataMapper.createActivityAttachment(assignmentCreate, activityAttachmentModel);
+                                    activityAttachmentRepository.save(activityAttachment);
+                                });
+                            }
                         });
-                    }
-                    if(assignmentModel.getActivityattachments()!=null) {
-                        assignmentModel.getActivityattachments().forEach(activityAttachmentModel -> {
-                            ActivityAttachment activityAttachment = moodleDataMapper.createActivityAttachment(assignmentCreate, activityAttachmentModel);
-                            activityAttachmentRepository.save(activityAttachment);
-                        });
-                    }
-                });
-            });
-        }
+                    });
+                }
+        );
     }
 
     @Transactional
-    public List<CourseResponseEntity> getAllCourse() {
+    public List<CourseResponseEntity> getAllCourse(String apiKey,String moodleUrl){
         String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s",
-                MOODLE_URL, TOKEN, GET_COURSES);
+                moodleUrl,apiKey, GET_COURSES);
         RestTemplate restTemplate = new RestTemplate();
         String model = restTemplate.getForObject(apiURL, String.class);
         model = "{\"courses\":" + model + "}";
@@ -555,7 +527,7 @@ public class MoodleCommandHandler {
             throw new RuntimeException(e);
         }
         List<CourseResponseEntity> result = new ArrayList<>();
-        Optional<User> userResult = userRepository.findUserByEmail("kayonkiu@gmail.com");
+        Optional<User> userResult = userRepository.findByEmail("kayonkiu@gmail.com");
         listCourseModel.getCourses().forEach(courseModel -> {
             if(courseModel.getCategoryid()!=0&&courseModel.getId()!="1") {
                 Course courseCreate = moodleDataMapper.createCourse(courseModel, userResult.get().getOrganization());
@@ -565,11 +537,6 @@ public class MoodleCommandHandler {
                 courseIdsMap.put(courseModel.getId(), res);
             }
         });
-
-        createAssignment();
-        createSection();
-
-
         courseIdsMap.values().forEach(course -> result.add(moodleDataMapper.courseToCourseResponseEntity(course)));
         return result;
     }

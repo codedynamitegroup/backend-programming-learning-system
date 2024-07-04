@@ -18,6 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.UUID;
+
 /**
  * com.backend.programming.learning.system.implemtent.course
  * Create by Dang Ngoc Tien
@@ -64,5 +66,10 @@ public class CourseApplicationServiceImpl implements CourseApplicationService {
     @Override
     public QueryGeneralCourseStatisticsResponse getCourseStatisticsAdminOrg(String orgId) {
         return  courseCommandHandler.getCourseStatisticsAdminOrg(orgId);
+    }
+
+    @Override
+    public QueryAllCourseResponse findAllByOrganizationId(UUID organizationId, QueryAllCourseCommand queryAllCourseCommand) {
+        return courseCommandHandler.findAllByOrganizationId(organizationId, queryAllCourseCommand);
     }
 }

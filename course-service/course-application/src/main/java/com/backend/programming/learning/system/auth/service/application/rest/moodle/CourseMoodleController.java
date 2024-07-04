@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.UUID;
+
 /**
  * com.backend.programming.learning.system.auth.service.application.rest.course
  * Create by Dang Ngoc Tien
@@ -21,9 +23,14 @@ import org.springframework.web.client.RestTemplate;
 public class CourseMoodleController {
     private final MoodleApplicationService moodleApplicationService;
 
-    @PostMapping
-    public ResponseEntity<String> syncCourse() {
-        return ResponseEntity.ok(moodleApplicationService.syncCourse());
+    @PostMapping("{organizationId}")
+    public ResponseEntity<String> syncCourse(@PathVariable UUID organizationId) {
+        return ResponseEntity.ok(moodleApplicationService.syncCourse(organizationId));
+    }
+
+    @PostMapping("resource/{organizationId}")
+    public ResponseEntity<String> syncResource(@PathVariable UUID organizationId) {
+        return ResponseEntity.ok(moodleApplicationService.syncResource(organizationId));
     }
     @PostMapping("exam/sync")
     public ResponseEntity<String> syncCourseExam() {

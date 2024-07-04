@@ -4,9 +4,11 @@ import java.util.UUID;
 
 public interface MoodleApplicationService {
 
-    String syncCourse();
+    String syncCourse(UUID organizationId);
 
     String syncUser(UUID organizationId);
+
+    String syncResource(UUID organizationId);
 
     String syncCourseExam();
 }

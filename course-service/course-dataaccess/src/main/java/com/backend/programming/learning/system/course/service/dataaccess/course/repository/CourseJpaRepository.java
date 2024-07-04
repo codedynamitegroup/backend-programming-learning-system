@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,6 +26,15 @@ public interface CourseJpaRepository extends JpaRepository<CourseEntity, UUID> {
     Page<CourseEntity> findAll(String search,String[] courseType, Pageable pageable);
 
     Optional<CourseEntity> findByCourseIdMoodle(Integer courseIdMoodle);
+
+    @Query("""
+    SELECT c
+    FROM CourseEntity c
+    WHERE c.organization.id = :organizationId
+    AND c.name LIKE %:search%
+    AND (:courseType IS NULL OR c.courseType.name IN :courseType)
+    """)
+    Page<CourseEntity> findAllByOrganizationId(UUID organizationId,String search,String[] courseType, Pageable pageable);
 
     void deleteByCourseIdMoodle(Integer courseIdMoodle);
 }
