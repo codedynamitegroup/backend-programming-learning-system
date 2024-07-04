@@ -28,7 +28,9 @@ public record UpdateExamCommand(
         Float maxScore,
         ZonedDateTime timeOpen,
         ZonedDateTime timeClose,
-        ZonedDateTime timeLimit,
+        Integer timeLimit,
+        Integer timeLimitUnit,
+        String unit,
         @NotNull(message = "Exam overdue handling is required")
         OverdueHandling overdueHandling,
         //    @NotNull(message = "Exam can redo questions is required")

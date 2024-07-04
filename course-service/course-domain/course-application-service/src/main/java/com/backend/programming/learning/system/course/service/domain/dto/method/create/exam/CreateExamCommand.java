@@ -28,6 +28,8 @@ public record CreateExamCommand(
         ZonedDateTime timeOpen,
         ZonedDateTime timeClose,
         Integer timeLimit,
+        Integer timeLimitUnit,
+        String unit,
         @NotNull(message = "Exam overdue handling is required")
         OverdueHandling overdueHandling,
         @NotNull(message = "Exam can redo questions is required")
