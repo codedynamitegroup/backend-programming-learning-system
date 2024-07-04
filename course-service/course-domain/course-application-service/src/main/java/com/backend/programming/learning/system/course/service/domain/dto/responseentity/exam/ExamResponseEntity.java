@@ -24,6 +24,8 @@ public record ExamResponseEntity(
         ZonedDateTime timeOpen,
         ZonedDateTime timeClose,
         Integer timeLimit,
+        Integer timeLimitUnit,
+        String unit,
         String intro,
         OverdueHandling overdueHanding,
         Boolean canRedoQuestions,

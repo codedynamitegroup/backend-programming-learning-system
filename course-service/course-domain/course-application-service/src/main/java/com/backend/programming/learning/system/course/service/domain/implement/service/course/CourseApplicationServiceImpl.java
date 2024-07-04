@@ -60,4 +60,9 @@ public class CourseApplicationServiceImpl implements CourseApplicationService {
     public QueryGeneralCourseStatisticsResponse getCourseStatistics() {
         return courseCommandHandler.getCourseStatistics();
     }
+
+    @Override
+    public QueryGeneralCourseStatisticsResponse getCourseStatisticsAdminOrg(String orgId) {
+        return  courseCommandHandler.getCourseStatisticsAdminOrg(orgId);
+    }
 }

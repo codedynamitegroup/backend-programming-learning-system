@@ -32,6 +32,8 @@ public class ExamEntity {
     private ZonedDateTime timeOpen;
     private ZonedDateTime timeClose;
     private Integer timeLimit;
+    private Integer timeLimitUnit;
+    private String unit;
     @Enumerated(EnumType.STRING)
     private OverdueHandling overdueHandling;
     private Boolean canRedoQuestions;

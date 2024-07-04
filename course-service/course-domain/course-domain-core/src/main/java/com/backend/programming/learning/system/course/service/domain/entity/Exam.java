@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.course.service.domain.entity;
 
-import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.OverdueHandling;
@@ -18,6 +17,8 @@ public class Exam extends AggregateRoot<ExamId> {
     private ZonedDateTime timeOpen;
     private ZonedDateTime timeClose;
     private Integer timeLimit;
+    private Integer timeLimitUnit;
+    private String unit;
 
     private String intro;
     private OverdueHandling overdueHandling;
@@ -32,7 +33,8 @@ public class Exam extends AggregateRoot<ExamId> {
     private Integer maxPage;
 
     private Exam(Builder builder) {
-        super.setId(builder.examId);;
+        super.setId(builder.examId);
+        ;
         course = builder.course;
         name = builder.name;
         score = builder.score;
@@ -40,6 +42,8 @@ public class Exam extends AggregateRoot<ExamId> {
         timeOpen = builder.timeOpen;
         timeClose = builder.timeClose;
         timeLimit = builder.timeLimit;
+        timeLimitUnit = builder.timeLimitUnit;
+        unit = builder.unit;
         intro = builder.intro;
         overdueHandling = builder.overdueHandling;
         canRedoQuestions = builder.canRedoQuestions;
@@ -54,6 +58,7 @@ public class Exam extends AggregateRoot<ExamId> {
     public static Builder builder() {
         return new Builder();
     }
+
     public Course getCourse() {
         return course;
     }
@@ -80,6 +85,14 @@ public class Exam extends AggregateRoot<ExamId> {
 
     public Integer getTimeLimit() {
         return timeLimit;
+    }
+
+    public Integer getTimeLimitUnit() {
+        return timeLimitUnit;
+    }
+
+    public String getUnit() {
+        return unit;
     }
 
     public String getIntro() {
@@ -161,6 +174,14 @@ public class Exam extends AggregateRoot<ExamId> {
         this.timeLimit = timeLimit;
     }
 
+    public void setTimeLimitUnit(Integer timeLimitUnit) {
+        this.timeLimitUnit = timeLimitUnit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
     public void setIntro(String intro) {
         this.intro = intro;
     }
@@ -202,6 +223,8 @@ public class Exam extends AggregateRoot<ExamId> {
         private ZonedDateTime timeOpen;
         private ZonedDateTime timeClose;
         private Integer timeLimit;
+        private Integer timeLimitUnit;
+        private String unit;
         private String intro;
         private OverdueHandling overdueHandling;
         private Boolean canRedoQuestions;
@@ -248,12 +271,24 @@ public class Exam extends AggregateRoot<ExamId> {
             timeOpen = val;
             return this;
         }
+
         public Builder timeClose(ZonedDateTime val) {
             timeClose = val;
             return this;
         }
+
         public Builder timeLimit(Integer val) {
             timeLimit = val;
+            return this;
+        }
+
+        public Builder timeLimitUnit(Integer val) {
+            timeLimitUnit = val;
+            return this;
+        }
+
+        public Builder unit(String val) {
+            unit = val;
             return this;
         }
 
@@ -271,6 +306,7 @@ public class Exam extends AggregateRoot<ExamId> {
             canRedoQuestions = val;
             return this;
         }
+
         public Builder maxAttempts(Integer val) {
             maxAttempts = val;
             return this;

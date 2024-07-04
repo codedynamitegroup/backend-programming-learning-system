@@ -247,8 +247,8 @@ VALUES
 
 
 INSERT INTO public.exam
-(id, course_id, "name", intro, score, max_score, time_open, time_close, time_limit, "overdue_handling", can_redo_questions, max_attempts, shuffle_questions, "grade_method", max_page, created_at, updated_at)
-VALUES('86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, 'c061d55e-a8b0-433f-b6a3-ae9d5601422e'::uuid, 'Kiểm tra chương 1', '<p>bài kiểm tra chương 1</p>', 10.0, 10.0, '2024-06-20 20:12:27.031', '2024-07-30 20:12:27.000', 6000, 'AUTOSUBMIT'::public."overdue_handling", true, 0, false, 'QUIZ_GRADEHIGHEST'::public."grade_method", 0, '2024-06-20 20:14:49.484', '2024-06-20 20:14:49.484');
+(id, course_id, "name", intro, score, max_score, time_open, time_close, time_limit, time_limit_unit, unit, "overdue_handling", can_redo_questions, max_attempts, shuffle_questions, "grade_method", max_page, created_at, updated_at)
+VALUES('86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, 'c061d55e-a8b0-433f-b6a3-ae9d5601422e'::uuid, 'Kiểm tra chương 1', '<p>bài kiểm tra chương 1</p>', 10.0, 10.0, '2024-06-20 20:12:27.031', '2024-07-30 20:12:27.000', 6000, 100, 'minutes', 'AUTOSUBMIT'::public."overdue_handling", true, 0, false, 'QUIZ_GRADEHIGHEST'::public."grade_method", 0, '2024-06-20 20:14:49.484', '2024-06-20 20:14:49.484');
 
 
 INSERT INTO public.question

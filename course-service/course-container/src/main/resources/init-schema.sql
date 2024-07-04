@@ -379,6 +379,8 @@ CREATE TABLE "public".exam
     time_open          TIMESTAMP WITH TIME ZONE,
     time_close         TIMESTAMP WITH TIME ZONE,
     time_limit         INTEGER,
+    time_limit_unit    INTEGER DEFAULT 0,
+    unit               text,
     overdue_handling   overdue_handling NOT NULL DEFAULT 'AUTOABANDON',
     can_redo_questions boolean          NOT NULL DEFAULT '0',
     max_attempts       bigint           NOT NULL DEFAULT '0',

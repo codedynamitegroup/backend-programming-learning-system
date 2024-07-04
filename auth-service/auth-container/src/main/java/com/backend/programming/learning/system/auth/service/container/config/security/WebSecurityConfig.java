@@ -48,6 +48,7 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/auth/users/change-password").hasAnyRole(USER)
                         .requestMatchers(HttpMethod.POST, "/auth/user-roles").hasRole(ADMIN)
                         .requestMatchers(HttpMethod.GET, "/auth/users/statistics").hasRole(ADMIN)
+                        .requestMatchers(HttpMethod.GET, "/auth/users/admin-org/statistics").hasRole(ADMIN_MOODLE)
 
                         .requestMatchers(HttpMethod.GET, "/auth/organizations").hasRole(ADMIN)
                         .requestMatchers(HttpMethod.DELETE, "/auth/organizations/:id").hasRole(ADMIN)

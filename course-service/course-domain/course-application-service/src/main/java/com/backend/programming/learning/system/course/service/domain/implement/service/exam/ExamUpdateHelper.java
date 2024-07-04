@@ -33,6 +33,9 @@ public class ExamUpdateHelper {
         exam.setMaxScore(updateExamCommand.maxScore());
         exam.setTimeOpen(updateExamCommand.timeOpen());
         exam.setTimeClose(updateExamCommand.timeClose());
+        exam.setTimeLimit(updateExamCommand.timeLimit());
+        exam.setTimeLimitUnit(updateExamCommand.timeLimitUnit());
+        exam.setUnit(updateExamCommand.unit());
         exam.setOverdueHanding(updateExamCommand.overdueHandling());
         return examRepository.save(exam);
     }

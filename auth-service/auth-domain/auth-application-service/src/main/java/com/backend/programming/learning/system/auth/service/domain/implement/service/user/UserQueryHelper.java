@@ -101,6 +101,28 @@ public class UserQueryHelper {
                 .build();
     }
 
+    public QueryGeneralStatisticUserResponse getStatisticUserAdminOrg(String orgId) {
+        List<User> users = userRepository
+                .findAll(0, 100000, "", "ALL")
+                .getContent()
+                .stream()
+                .filter(user -> Objects.nonNull(user.getOrganization()) && user.getOrganization().getId().getValue().toString().equals(orgId))
+                .collect(Collectors.toList());
+
+        List<Role> roles = roleRepository.findAll(0, 100000).getContent();
+
+        long activeUser = calculateActiveUsers(users);
+
+        return QueryGeneralStatisticUserResponse.builder()
+                .totalUsers(users.size())
+                .activeUsers(activeUser)
+                .offlineUsers(users.size() - activeUser)
+                .loginToday(calculateLoginToday(users))
+                .userByRole(calculateUserRole(users, roles))
+                .registerUser(calculateRegisterUser(users))
+                .build();
+    }
+
     private long calculateActiveUsers(List<User> users) {
         long accessTokenExpTimeInMinutes = 15; // replace with your actual value
 

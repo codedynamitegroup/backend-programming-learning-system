@@ -53,4 +53,6 @@ public interface UserApplicationService {
             @Valid ResetPasswordCommand forgotPasswordChangePasswordCommand);
 
     QueryGeneralStatisticUserResponse getStatisticUser();
+
+    QueryGeneralStatisticUserResponse getStatisticUserAdminOrg(String orgId);
 }
