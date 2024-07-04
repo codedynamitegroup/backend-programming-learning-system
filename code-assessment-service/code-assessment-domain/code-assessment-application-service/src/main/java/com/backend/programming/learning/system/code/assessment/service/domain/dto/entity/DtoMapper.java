@@ -144,7 +144,7 @@ public class DtoMapper {
                 .allowImport(codeQuestion.getAllowImport())
                 .difficulty(codeQuestion.getDifficulty())
                 .testCases(codeQuestion.getTcs() != null? codeQuestion.getTcs().stream().map(this::testCaseToDto).toList(): null)
-                .languages(codeQuestion.getProgrammingLanguages() != null? codeQuestion.getProgrammingLanguages().stream().map(this::programmingLanguageCodeQuestionToDto).toList(): null)
+                .programmingLanguages(codeQuestion.getProgrammingLanguages() != null? codeQuestion.getProgrammingLanguages().stream().map(this::programmingLanguageCodeQuestionToDto).toList(): null)
                 .tags(codeQuestion.getTags() != null?  codeQuestion.getTags().stream().map(item->item.getId().getValue()).toList(): null)
                 .build();
     }

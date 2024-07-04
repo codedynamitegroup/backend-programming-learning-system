@@ -25,6 +25,6 @@ public class CodeQuestionAdminDto {
     Boolean allowImport;
     QuestionDifficulty difficulty;
     List<TestCaseDto> testCases;
-    List<ProgrammingLanguageDto> languages;
+    List<ProgrammingLanguageDto> programmingLanguages;
     List<UUID> tags;
 }
