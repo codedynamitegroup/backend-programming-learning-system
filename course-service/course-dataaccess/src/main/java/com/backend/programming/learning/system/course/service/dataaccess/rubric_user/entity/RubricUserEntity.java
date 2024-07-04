@@ -24,6 +24,9 @@ public class RubricUserEntity {
     @Column(name = "id")
     private UUID id;
 
+    private String name;
+    private String description;
+
     private String content;
 
     @ManyToOne

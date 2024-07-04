@@ -21,4 +21,7 @@ public class CourseServiceConfigData {
 
     private String courseOrganizationRequestTopicName;
     private String organizationResponseTopicName;
+
+    private String geminiApiKey;
+    private String geminiApiUrl;
 }

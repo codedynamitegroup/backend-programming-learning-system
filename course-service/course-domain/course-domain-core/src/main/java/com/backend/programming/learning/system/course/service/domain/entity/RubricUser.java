@@ -11,13 +11,16 @@ import java.util.UUID;
 
 public class RubricUser extends AggregateRoot<RubricUserId> {
     private String content;
-
+    private String name;
+    private String description;
     private User user;
 
     private RubricUser(Builder builder) {
         super.setId(builder.rubricUserId);
         setContent(builder.content);
         setUser(builder.user);
+        name = builder.name;
+        description = builder.description;
     }
 
     public void initializeRubricUser() {
@@ -40,6 +43,14 @@ public class RubricUser extends AggregateRoot<RubricUserId> {
         this.user = user;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -48,12 +59,24 @@ public class RubricUser extends AggregateRoot<RubricUserId> {
         private RubricUserId rubricUserId;
         private String content;
         private User user;
+        private String name;
+        private String description;
 
         private Builder() {
         }
 
         public Builder id(RubricUserId val) {
             rubricUserId = val;
+            return this;
+        }
+
+        public Builder name(String val) {
+            name = val;
+            return this;
+        }
+
+        public Builder description(String val) {
+            description = val;
             return this;
         }
 

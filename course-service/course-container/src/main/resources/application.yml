@@ -24,6 +24,9 @@ course-service:
   question-request-topic-name: core-question-request
   question-response-topic-name: core-question-response
 
+  gemini-api-key: AIzaSyCzF7o3Z3RTO8Bqo6s18Yj18WyFeqZrvVM
+  gemini-api-url: https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=%s
+
   auth-service-user-request-to-course-service-topic-name: auth-service-user-request-to-course-service
   course-service-user-request-to-auth-service-topic-name: course-service-user-request-to-auth-service
   any-services-user-response-to-auth-service-topic-name: any-services-user-response-to-auth-service

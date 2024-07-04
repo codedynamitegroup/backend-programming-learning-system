@@ -841,6 +841,8 @@ DROP TABLE IF EXISTS "public".rubric_user CASCADE;
 CREATE TABLE "public".rubric_user
 (
     id          uuid DEFAULT gen_random_uuid() NOT NULL,
+    name       text                           ,
+    description text                           ,
     content  text                           ,
     user_id uuid,
     CONSTRAINT rubric_user_pkey PRIMARY KEY (id),
@@ -859,10 +861,16 @@ CREATE TABLE "public".assignment_ai_grade_report
     student_submissions     text                           ,
     feedback_submissions  text                           ,
     rubric_id uuid,
+    feedback_language text,
+    assignment_id uuid,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT assignment_ai_grade_report_pkey PRIMARY KEY (id),
     CONSTRAINT assignment_ai_grade_report_rubric_id_fkey FOREIGN KEY (rubric_id)
         REFERENCES "public".rubric_user (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT assignment_ai_grade_report_rubric_id_fkey2 FOREIGN KEY (assignment_id)
+        REFERENCES "public".assignment (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );

@@ -3,11 +3,17 @@ package com.backend.programming.learning.system.auth.service.application.rest.as
 import com.backend.programming.learning.system.course.service.domain.dto.method.ai_grade_essay.AIGradeEssayCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.assignment.CreateAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.assignment.CreateAssignmentResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.report_grade_essay_ai.ReportGradeEssayAICommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.assignment.DeleteAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.assignment.DeleteAssignmentResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.ai_grade_essay_report.QueryAllAIGradeEssayReportsByAssignmentIdCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.ai_grade_essay_report.QueryAllAIGradeEssayReportsByAssignmentIdResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment.*;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.rubric_user.QueryAllRubricsByUserIdCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.rubric_user.QueryAllRubricsByUserIdResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.assignment.UpdateAssignmentResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.ai_grade_essay_report.AssignmentAIGradeReportEntityResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.ListSubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.assignment.StudentAssignmentListResponse;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.ai_grade_essay.AIGradeEssayApplicationService;
@@ -189,7 +195,7 @@ public class AssignmentController {
         );
         return ResponseEntity.ok(response);
     }
-    @PostMapping("/create-report")
+    @PostMapping("/create-report-grade-essay-ai")
     @Operation(summary = "Create report AI grade essay.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
@@ -199,11 +205,54 @@ public class AssignmentController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<String> createReport(
-            @RequestParam UUID assignmentId,
-            @RequestParam UUID rubricId
+            @RequestBody ReportGradeEssayAICommand reportGradeEssayAICommand
     ) throws JsonProcessingException {
-        aiGradeEssayApplicationService.createReportEssay(assignmentId, rubricId);
+        aiGradeEssayApplicationService.createReportEssay(reportGradeEssayAICommand);
         return ResponseEntity.status(HttpStatus.CREATED).body("OK");
     }
 
+    @GetMapping("/get-reports-by-assignment/{assignmentId}")
+    @Operation(summary = "Get all reports ai by assignment.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllRubricsByUserIdResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllAIGradeEssayReportsByAssignmentIdResponse> queryAllRubricsByUserId(
+            @PathVariable UUID assignmentId,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "") String searchName
+
+    ) {
+        QueryAllAIGradeEssayReportsByAssignmentIdResponse queryAllAIGradeEssayReportsByAssignmentIdResponse =
+                aiGradeEssayApplicationService.queryAllAIGradeEssayReportsByAssignmentId (
+                QueryAllAIGradeEssayReportsByAssignmentIdCommand.builder()
+                        .assignmentId(assignmentId)
+                        .pageNo(pageNo)
+                        .pageSize(pageSize)
+                        .search(searchName)
+                        .build());
+        return ResponseEntity.ok(queryAllAIGradeEssayReportsByAssignmentIdResponse);
+    }
+
+    @GetMapping("/ai-reports/{reportId}")
+    @Operation(summary = "Get detail report ai")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllRubricsByUserIdResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<AssignmentAIGradeReportEntityResponse> queryAIReportById(
+            @PathVariable UUID reportId
+
+    ) {
+        AssignmentAIGradeReportEntityResponse assignmentAIGradeReportEntityResponse =
+                aiGradeEssayApplicationService.queryAIGradeEssayReportById(reportId);
+        return ResponseEntity.ok(assignmentAIGradeReportEntityResponse);
+    }
 }

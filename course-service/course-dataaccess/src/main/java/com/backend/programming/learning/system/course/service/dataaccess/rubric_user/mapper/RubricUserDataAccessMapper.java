@@ -22,6 +22,8 @@ public class RubricUserDataAccessMapper {
                 .id(rubricUser.getId().getValue())
                 .content(rubricUser.getContent())
                 .user(rubricUser.getUser() == null ? null : userDataAccessMapper.userToUserEntity(rubricUser.getUser()))
+                .name(rubricUser.getName())
+                .description(rubricUser.getDescription())
                 .build();
     }
 
@@ -30,6 +32,8 @@ public class RubricUserDataAccessMapper {
                 .id(new RubricUserId(rubricUserEntity.getId()))
                 .content(rubricUserEntity.getContent())
                 .user(rubricUserEntity.getUser() == null ? null : userDataAccessMapper.userEntityToUser(rubricUserEntity.getUser()))
+                .name(rubricUserEntity.getName())
+                .description(rubricUserEntity.getDescription())
                 .build();
 
     }

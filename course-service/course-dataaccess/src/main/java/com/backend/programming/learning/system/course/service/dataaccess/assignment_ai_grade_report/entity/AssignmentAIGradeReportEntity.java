@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.dataaccess.assignment_ai_grade_report.entity;
 
+import com.backend.programming.learning.system.course.service.dataaccess.assignment.entity.AssignmentEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.course.entity.CourseEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.organization.entity.OrganizationEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.question.entity.QuestionEntity;
@@ -32,10 +33,15 @@ public class AssignmentAIGradeReportEntity {
     private String question;
     private String studentSubmissions;
     private String feedbackSubmissions;
+    private String feedbackLanguage;
 
     @ManyToOne
     @JoinColumn(name = "rubric_id", referencedColumnName = "id")
     private RubricUserEntity rubricUser;
+
+    @ManyToOne
+    @JoinColumn(name = "assignment_id", referencedColumnName = "id")
+    private AssignmentEntity assignment;
 
     private ZonedDateTime createdAt;
 }

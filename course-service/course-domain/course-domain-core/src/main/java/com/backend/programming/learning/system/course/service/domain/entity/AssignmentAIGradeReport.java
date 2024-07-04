@@ -17,9 +17,10 @@ public class AssignmentAIGradeReport extends AggregateRoot<AssignmentAIGradeRepo
     private String question;
     private String studentSubmissions;
     private String feedbackSubmissions;
+    private String feedbackLanguage;
 
     private RubricUser rubricUser;
-
+    private Assignment assignment;
     private ZonedDateTime createdAt;
 
     public void initializeAssignmentAIGradeReport() {
@@ -36,6 +37,8 @@ public class AssignmentAIGradeReport extends AggregateRoot<AssignmentAIGradeRepo
         setFeedbackSubmissions(builder.feedbackSubmissions);
         setRubricUser(builder.rubricUser);
         setCreatedAt(builder.createdAt);
+        setFeedbackLanguage(builder.feedbackLanguage);
+        setAssignment(builder.assignment);
     }
 
     public AssignmentAIGradeReportStatus getStatus() {
@@ -86,6 +89,22 @@ public class AssignmentAIGradeReport extends AggregateRoot<AssignmentAIGradeRepo
         this.createdAt = createdAt;
     }
 
+    public String getFeedbackLanguage() {
+        return feedbackLanguage;
+    }
+
+    public void setFeedbackLanguage(String feedbackLanguage) {
+        this.feedbackLanguage = feedbackLanguage;
+    }
+
+    public Assignment getAssignment() {
+        return assignment;
+    }
+
+    public void setAssignment(Assignment assignment) {
+        this.assignment = assignment;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -95,7 +114,9 @@ public class AssignmentAIGradeReport extends AggregateRoot<AssignmentAIGradeRepo
         private String question;
         private String studentSubmissions;
         private String feedbackSubmissions;
+        private String feedbackLanguage;
         private RubricUser rubricUser;
+        private Assignment assignment;
         private ZonedDateTime createdAt;
 
         private Builder() {
@@ -126,8 +147,18 @@ public class AssignmentAIGradeReport extends AggregateRoot<AssignmentAIGradeRepo
             return this;
         }
 
+        public Builder feedbackLanguage(String val) {
+            feedbackLanguage = val;
+            return this;
+        }
+
         public Builder rubricUser(RubricUser val) {
             rubricUser = val;
+            return this;
+        }
+
+        public Builder assignment(Assignment val) {
+            assignment = val;
             return this;
         }
 

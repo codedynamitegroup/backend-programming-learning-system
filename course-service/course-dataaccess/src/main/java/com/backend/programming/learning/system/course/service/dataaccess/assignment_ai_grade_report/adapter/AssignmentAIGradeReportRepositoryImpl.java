@@ -6,6 +6,9 @@ import com.backend.programming.learning.system.course.service.domain.entity.Assi
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.AssignmentAIGradeReportRepository;
 import com.backend.programming.learning.system.domain.valueobject.AssignmentAIGradeReportStatus;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -40,5 +43,12 @@ public class AssignmentAIGradeReportRepositoryImpl implements AssignmentAIGradeR
                 .stream()
                 .map(assignmentAIGradeReportDataAccessMapper::assignmentAIGradeReportEntityToAssignmentAIGradeReport)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<AssignmentAIGradeReport> findAllByAssignmentId(UUID assignmentId, int pageNo, int pageSize, String search) {
+        Pageable paging = PageRequest.of(pageNo, pageSize);
+        return assignmentAIGradeReportJpaRepository.findAllByAssignmentId(assignmentId, search, paging)
+                .map(assignmentAIGradeReportDataAccessMapper::assignmentAIGradeReportEntityToAssignmentAIGradeReport);
     }
 }
