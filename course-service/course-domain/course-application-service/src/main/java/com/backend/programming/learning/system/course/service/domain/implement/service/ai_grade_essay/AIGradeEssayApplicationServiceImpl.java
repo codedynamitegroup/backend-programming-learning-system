@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.ai_grade_essay;
 
 import com.backend.programming.learning.system.course.service.config.CourseServiceConfigData;
+import com.backend.programming.learning.system.course.service.domain.dto.method.ai_grade_essay.rubric.Criteria;
+import com.backend.programming.learning.system.course.service.domain.dto.method.ai_grade_essay.gemini.GeminiRecord;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.report_grade_essay_ai.ReportGradeEssayAICommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.ai_grade_essay_report.QueryAllAIGradeEssayReportsByAssignmentIdCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.ai_grade_essay_report.QueryAllAIGradeEssayReportsByAssignmentIdResponse;
@@ -22,7 +24,6 @@ import com.backend.programming.learning.system.course.service.domain.ports.input
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.AssignmentAIGradeReportRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.AssignmentRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.RubricUserRepository;
-import com.backend.programming.learning.system.course.service.domain.valueobject.AssignmentId;
 import com.backend.programming.learning.system.domain.valueobject.AssignmentAIGradeReportStatus;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -31,8 +32,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.text.StrSubstitutor;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Page;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -60,17 +59,18 @@ public class AIGradeEssayApplicationServiceImpl implements AIGradeEssayApplicati
     private final AIGradeEssayReportDataMapper aiGradeEssayReportDataMapper;
 
     @Override
-    public String gradeEssay(AssignmentAIGradeReport assignmentAIGradeReport) throws JsonProcessingException {
-        String apiUrl = String.format(courseServiceConfigData.getGeminiApiUrl(), courseServiceConfigData.getGeminiApiKey());
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Content-Type", "application/json");
+    public void gradeEssay(AssignmentAIGradeReport assignmentAIGradeReport) {
+        try {
+            String apiUrl = String.format(courseServiceConfigData.getGeminiApiUrl(), courseServiceConfigData.getGeminiApiKey());
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Content-Type", "application/json");
 
-        ObjectMapper objectMapper = new ObjectMapper();
+            ObjectMapper objectMapper = new ObjectMapper();
 
-        ObjectNode contentNode = objectMapper.createObjectNode();
-        ObjectNode partsNode = objectMapper.createObjectNode();
+            ObjectNode contentNode = objectMapper.createObjectNode();
+            ObjectNode partsNode = objectMapper.createObjectNode();
 
-        String AI_ROLE = """
+            String AI_ROLE = """
 I. YOUR ROLE:
     A. You are an Automated Essay Grading AI, trained on a massive dataset of essays and feedback from human experts. Your primary function is to evaluate student essays in a fair and consistent manner, providing comprehensive feedback and assigning scores based on the provided criteria.
     
@@ -82,7 +82,7 @@ I. YOUR ROLE:
     C. Strive to emulate the qualities of a patient, knowledgeable, and supportive educator who guides students towards academic excellence.                
          """;
 
-        String AI_SYSTEM_INSTRUCTIONS = """
+            String AI_SYSTEM_INSTRUCTIONS = """
 II. SYSTEM_INSTRUCTIONS:
     A. Your Task:
         1. Evaluate student essays based on the provided criteria and rubrics.
@@ -165,20 +165,20 @@ II. SYSTEM_INSTRUCTIONS:
             }
                 """;
 
-        QueryAllSubmissionAssignmentAIGradeEssayResponse queryAllSubmissionAssignmentAIGradeEssayResponse =
-                objectMapper.readValue(assignmentAIGradeReport.getStudentSubmissions(), QueryAllSubmissionAssignmentAIGradeEssayResponse.class);
-        long totalSubmissions = queryAllSubmissionAssignmentAIGradeEssayResponse.getTotalItems();
-        QueryAssignmentAIGradeResponse queryAssignmentAIGradeResponse =
-                objectMapper.readValue(assignmentAIGradeReport.getQuestion(), QueryAssignmentAIGradeResponse.class);
-        String studentSubmissions = objectMapper.writeValueAsString(queryAllSubmissionAssignmentAIGradeEssayResponse.getSubmissionAssignments());
-        String questionContent = queryAssignmentAIGradeResponse.getIntro();
-        Float questionMaxScore = queryAssignmentAIGradeResponse.getMaxScore();
-        String language = assignmentAIGradeReport.getFeedbackLanguage();
+            QueryAllSubmissionAssignmentAIGradeEssayResponse queryAllSubmissionAssignmentAIGradeEssayResponse =
+                    objectMapper.readValue(assignmentAIGradeReport.getStudentSubmissions(), QueryAllSubmissionAssignmentAIGradeEssayResponse.class);
+            long totalSubmissions = queryAllSubmissionAssignmentAIGradeEssayResponse.getTotalItems();
+            QueryAssignmentAIGradeResponse queryAssignmentAIGradeResponse =
+                    objectMapper.readValue(assignmentAIGradeReport.getQuestion(), QueryAssignmentAIGradeResponse.class);
+            String studentSubmissions = objectMapper.writeValueAsString(queryAllSubmissionAssignmentAIGradeEssayResponse.getSubmissionAssignments());
+            String questionContent = queryAssignmentAIGradeResponse.getIntro();
+            Float questionMaxScore = queryAssignmentAIGradeResponse.getMaxScore();
+            String language = assignmentAIGradeReport.getFeedbackLanguage();
 
-        RubricUser rubricUser = assignmentAIGradeReport.getRubricUser();
-        String assignmentRubric;
-        if (rubricUser == null) {
-            assignmentRubric = """
+            RubricUser rubricUser = assignmentAIGradeReport.getRubricUser();
+            String assignmentRubric;
+            if (rubricUser == null) {
+                assignmentRubric = """
 - Criteria: Content (Total score: 80%)
   * Score 1/4: The essay is incomplete, inaccurate, illogical, and uses sources inappropriately
   * Score 2/4: The essay is complete, accurate, but lacks logic, and uses sources somewhat appropriately
@@ -195,49 +195,49 @@ II. SYSTEM_INSTRUCTIONS:
   * Score 3/4: The essay is relatively clear, engaging, and appropriate for the topic, purpose, and audience.
   * Score 4/4: The essay is clear, engaging, and appropriate for the topic, purpose, and audience.
                     """;
-        } else {
-            List<Criteria> criteria = objectMapper.readValue(rubricUser.getContent(), new TypeReference<List<Criteria>>() {});
-            assignmentRubric = formatRubric(criteria);
-        }
-        String INPUT_OUTPUT = interpolateInputOutput(studentSubmissions, totalSubmissions, questionContent, questionMaxScore, assignmentRubric, language);
+            } else {
+                List<Criteria> criteria = objectMapper.readValue(rubricUser.getContent(), new TypeReference<List<Criteria>>() {});
+                assignmentRubric = formatRubric(criteria);
+            }
+            String INPUT_OUTPUT = interpolateInputOutput(studentSubmissions, totalSubmissions, questionContent, questionMaxScore, assignmentRubric, language);
 
-        partsNode.put("text", AI_ROLE);
-        contentNode.set("parts", objectMapper.createArrayNode().add(partsNode));
-        contentNode.put("role", "user");
+            partsNode.put("text", AI_ROLE);
+            contentNode.set("parts", objectMapper.createArrayNode().add(partsNode));
+            contentNode.put("role", "user");
 
-        ObjectNode contentNode1 = objectMapper.createObjectNode();
-        ObjectNode partsNode1 = objectMapper.createObjectNode();
-        partsNode1.put("text", AI_SYSTEM_INSTRUCTIONS);
-        contentNode1.set("parts", objectMapper.createArrayNode().add(partsNode1));
-        contentNode1.put("role", "user");
+            ObjectNode contentNode1 = objectMapper.createObjectNode();
+            ObjectNode partsNode1 = objectMapper.createObjectNode();
+            partsNode1.put("text", AI_SYSTEM_INSTRUCTIONS);
+            contentNode1.set("parts", objectMapper.createArrayNode().add(partsNode1));
+            contentNode1.put("role", "user");
 
-        ObjectNode contentNode2 = objectMapper.createObjectNode();
-        ObjectNode partsNode2 = objectMapper.createObjectNode();
-        partsNode2.put("text", INPUT_OUTPUT);
-        contentNode2.set("parts", objectMapper.createArrayNode().add(partsNode2));
-        contentNode2.put("role", "user");
+            ObjectNode contentNode2 = objectMapper.createObjectNode();
+            ObjectNode partsNode2 = objectMapper.createObjectNode();
+            partsNode2.put("text", INPUT_OUTPUT);
+            contentNode2.set("parts", objectMapper.createArrayNode().add(partsNode2));
+            contentNode2.put("role", "user");
 
-        ObjectNode requestBodyNode = objectMapper.createObjectNode();
-        requestBodyNode.set("contents", objectMapper.createArrayNode().add(contentNode).add(contentNode1).add(contentNode2));
+            ObjectNode requestBodyNode = objectMapper.createObjectNode();
+            requestBodyNode.set("contents", objectMapper.createArrayNode().add(contentNode).add(contentNode1).add(contentNode2));
 
-        String requestBody;
-        try {
+            String requestBody;
             requestBody = objectMapper.writeValueAsString(requestBodyNode);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to construct JSON request body", e);
+
+            HttpEntity<String> request = new HttpEntity<>(requestBody, headers);
+
+            ResponseEntity<String> response = restTemplate.exchange(apiUrl, HttpMethod.POST, request, String.class);
+            GeminiRecord temp = objectMapper.readValue(response.getBody(), GeminiRecord.class);
+            String textResponse = temp.getCandidates().get(0).getContent().getParts().get(0).getText();
+            Object textResponseObjectValid = objectMapper.readValue(textResponse.replace("```", "").replace("json", ""), Object.class);
+            assignmentAIGradeReport.setFeedbackSubmissions(textResponse.replace("```", "").replace("json", ""));
+            assignmentAIGradeReport.setStatus(AssignmentAIGradeReportStatus.SUCCESS);
+
+            AssignmentAIGradeReport assignmentAIGradeReportCreated = assignmentAIGradeReportRepository.save(assignmentAIGradeReport);
+            log.info("AssignmentAIGradeReport saved: {}", assignmentAIGradeReportCreated.getId());
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
         }
-
-        HttpEntity<String> request = new HttpEntity<>(requestBody, headers);
-
-        ResponseEntity<String> response = restTemplate.exchange(apiUrl, HttpMethod.POST, request, String.class);
-        GeminiRecord temp = objectMapper.readValue(response.getBody(), GeminiRecord.class);
-        String text = temp.getCandidates().get(0).getContent().getParts().get(0).getText();
-
-        assignmentAIGradeReport.setFeedbackSubmissions(text.replace("```", "").replace("json", ""));
-        assignmentAIGradeReport.setStatus(AssignmentAIGradeReportStatus.SUCCESS);
-        AssignmentAIGradeReport assignmentAIGradeReportCreated = assignmentAIGradeReportRepository.save(assignmentAIGradeReport);
-        log.info("AssignmentAIGradeReport saved: {}", assignmentAIGradeReportCreated.getId());
-        return text.replace("```", "").replace("json", "");
     }
 
     @Override
@@ -407,11 +407,3 @@ III. INPUT AND OUTPUT:
     }
 }
 
-    @Configuration
-    class RestTemplateConfig {
-
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
-}
