@@ -17,6 +17,7 @@ public class QuestionSubmission extends AggregateRoot<QuestionSubmissionId> {
     private Integer numFile;
     private Boolean flag;
     private Boolean answerStatus;
+    private String feedback;
     private List<QuestionSubmissionFile> questionSubmissionFiles;
 
     private QuestionSubmission(Builder builder) {
@@ -76,6 +77,10 @@ public class QuestionSubmission extends AggregateRoot<QuestionSubmissionId> {
         this.questionSubmissionFiles = questionSubmissionFiles;
     }
 
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
+    }
+
     public User getUser() {
         return user;
     }
@@ -116,6 +121,10 @@ public class QuestionSubmission extends AggregateRoot<QuestionSubmissionId> {
         return answerStatus;
     }
 
+    public String getFeedback() {
+        return feedback;
+    }
+
     public List<QuestionSubmissionFile> getQuestionSubmissionFiles() {
         return questionSubmissionFiles;
     }
@@ -132,6 +141,7 @@ public class QuestionSubmission extends AggregateRoot<QuestionSubmissionId> {
         private Integer numFile;
         private Boolean flag;
         private Boolean answerStatus;
+        private String feedback;
         private List<QuestionSubmissionFile> questionSubmissionFiles;
 
         private Builder() {
@@ -194,6 +204,11 @@ public class QuestionSubmission extends AggregateRoot<QuestionSubmissionId> {
 
         public Builder questionSubmissionFiles(List<QuestionSubmissionFile> val) {
             questionSubmissionFiles = val;
+            return this;
+        }
+
+        public Builder feedback(String val) {
+            feedback = val;
             return this;
         }
 

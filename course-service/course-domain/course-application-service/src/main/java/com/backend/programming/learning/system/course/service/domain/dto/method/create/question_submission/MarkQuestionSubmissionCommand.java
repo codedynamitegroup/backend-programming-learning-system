@@ -17,6 +17,7 @@ public record MarkQuestionSubmissionCommand(
         UUID questionId,
 //        @NotNull(message = "Grade is required")
         Float grade,
-        String rightAnswer
+        String rightAnswer,
+        String feedback
 ) {
 }
