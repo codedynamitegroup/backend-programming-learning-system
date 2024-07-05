@@ -18,13 +18,10 @@ public class UpdateUserProfileCommand {
 
     private ZonedDateTime dob;
 
-    @NotNull
     private String firstName;
 
-    @NotNull
     private String lastName;
 
-    @NotNull
     private String phone;
 
     private String address;
