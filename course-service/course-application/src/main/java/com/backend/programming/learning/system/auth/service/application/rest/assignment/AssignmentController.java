@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.auth.service.application.rest.assignment;
 
-import com.backend.programming.learning.system.course.service.domain.dto.method.ai_grade_essay.AIGradeEssayCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.assignment.CreateAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.assignment.CreateAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.report_grade_essay_ai.ReportGradeEssayAICommand;

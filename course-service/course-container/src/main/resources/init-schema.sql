@@ -525,6 +525,7 @@ CREATE TABLE "public".question_submission
     content            text,
     right_answer       text,
     num_file           bigint,
+    feedback         text,
     flag boolean DEFAULT false,
     answer_status boolean DEFAULT false,
  CONSTRAINT question_submission_pkey PRIMARY KEY (id),

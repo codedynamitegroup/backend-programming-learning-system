@@ -58,6 +58,7 @@ public class QuestionSubmissionRepositoryImpl implements QuestionSubmissionRepos
                     if (Objects.nonNull(entity)) {
                         entity.setGrade(markQuestionSubmissionCommand.grade());
                         entity.setRightAnswer(markQuestionSubmissionCommand.rightAnswer());
+                        entity.setFeedback(markQuestionSubmissionCommand.feedback());
                     }
                     questionSubmissionEntities.add(entity);
                 });

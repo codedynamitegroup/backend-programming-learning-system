@@ -40,6 +40,7 @@ public class QuestionSubmissionEntity {
     private Integer numFile;
     private Boolean flag;
     private Boolean answerStatus;
+    private String feedback;
 
     @OneToMany(mappedBy = "questionSubmission", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<QuestionSubmissionFileEntity> questionSubmissionFiles;
