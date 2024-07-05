@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.ports.input.service.ai_grade_essay;
 
-import com.backend.programming.learning.system.course.service.domain.dto.method.ai_grade_essay.AIGradeEssayCommand;
+
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.report_grade_essay_ai.ReportGradeEssayAICommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.user.CreateUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.user.CreateUserResponse;
@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface AIGradeEssayApplicationService {
-    String gradeEssay(AssignmentAIGradeReport assignmentAIGradeReport) throws JsonProcessingException;
+    void gradeEssay(AssignmentAIGradeReport assignmentAIGradeReport) throws JsonProcessingException;
     void createReportEssay(ReportGradeEssayAICommand reportGradeEssayAICommand) throws JsonProcessingException;
 
     QueryAllAIGradeEssayReportsByAssignmentIdResponse queryAllAIGradeEssayReportsByAssignmentId(QueryAllAIGradeEssayReportsByAssignmentIdCommand queryAllAIGradeEssayReportsByAssignmentIdCommand);

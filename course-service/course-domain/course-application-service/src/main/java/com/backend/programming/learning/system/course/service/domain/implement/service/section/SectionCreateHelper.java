@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.course.service.domain.CourseDomai
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.section.CreateSectionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.section.SectionModel;
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
+import com.backend.programming.learning.system.course.service.domain.entity.Organization;
 import com.backend.programming.learning.system.course.service.domain.entity.Section;
 import com.backend.programming.learning.system.course.service.domain.entity.WebhookMessage;
 import com.backend.programming.learning.system.course.service.domain.implement.service.moodle.MoodleCommandHandler;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Component
 @Slf4j
@@ -46,7 +48,10 @@ public class SectionCreateHelper {
 
     @Transactional
     public void createSection(WebhookMessage webhookMessage, Course course) {
-        List<SectionModel> sectionModels = moodleCommandHandler.getAllSection(webhookMessage.getCourseId());
+        Organization organization = course.getOrganization();
+        String apiKey = organization.getApiKey();
+        String moodleUrl = organization.getMoodleUrl();
+        List<SectionModel> sectionModels = moodleCommandHandler.getAllSection(webhookMessage.getCourseId(),apiKey, moodleUrl);
         // lay phan tu cuoi cung
         SectionModel sectionModel = sectionModels.get(sectionModels.size() - 1);
         Integer topic = Integer.valueOf(sectionModel.getSection()) + 1;

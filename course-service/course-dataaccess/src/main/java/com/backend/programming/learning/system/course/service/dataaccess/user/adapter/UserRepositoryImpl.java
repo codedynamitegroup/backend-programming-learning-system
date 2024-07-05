@@ -37,7 +37,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public Optional<User> findUserByEmail(String email) {
-        return userJpaRepository.findByEmailAndIsDeletedFalse(email)
+        return userJpaRepository.findByEmail(email)
                 .map(userDataAccessMapper::userEntityToUser);
     }
 
@@ -61,7 +61,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public Optional<User> findByEmail(String email) {
-        return userJpaRepository.findByEmailAndIsDeletedFalse(email)
+        return userJpaRepository.findByEmail(email)
                 .map(userDataAccessMapper::userEntityToUser);
     }
 

@@ -15,6 +15,8 @@ import com.backend.programming.learning.system.course.service.domain.valueobject
 
 import jakarta.validation.Valid;
 
+import java.util.UUID;
+
 public interface CourseApplicationService {
     CreateCourseResponse createCourse(
             @Valid CreateCourseCommand createCourseCommand);
@@ -36,4 +38,7 @@ public interface CourseApplicationService {
 
     QueryGeneralCourseStatisticsResponse getCourseStatisticsAdminOrg(String orgId);
 
+    QueryAllCourseResponse findAllByOrganizationId(
+            UUID organizationId,
+            @Valid QueryAllCourseCommand queryAllCourseCommand);
 }
