@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.gateway.service;
 import com.backend.programming.learning.system.gateway.service.config.GatewayServiceConfigData;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig;
 import io.github.resilience4j.timelimiter.TimeLimiterConfig;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,18 +15,27 @@ import org.springframework.cloud.gateway.filter.ratelimit.KeyResolver;
 import org.springframework.cloud.gateway.filter.ratelimit.RedisRateLimiter;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
+import org.springframework.cloud.gateway.support.ipresolver.XForwardedRemoteAddressResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Component;
+import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.time.Duration;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Objects;
+import java.util.Optional;
 
 @EnableDiscoveryClient
 @SpringBootApplication
 @ComponentScan(basePackages = "com.backend.programming.learning.system")
+@Slf4j
 public class GatewayServiceApplication {
 	private final GatewayServiceConfigData gatewayServiceConfigData;
 
@@ -50,7 +60,8 @@ public class GatewayServiceApplication {
 								.circuitBreaker(c -> c.setName("coreCircuitBreaker")
 										.setFallbackUri("forward:/fallback/core-fallback"))
 								.requestRateLimiter(config -> config.setRateLimiter(redisRateLimiter())
-										.setKeyResolver(userKeyResolver()))
+										.setDenyEmptyKey(false)
+										.setKeyResolver(new ProxyClientAddressResolver()))
 								.retry(retryConfig -> retryConfig.setRetries(3)
 										.setMethods(HttpMethod.GET)
 										.setBackoff(Duration.ofMillis(100), Duration.ofMillis(1000), 2, true)))
@@ -61,7 +72,8 @@ public class GatewayServiceApplication {
 								.circuitBreaker(c -> c.setName("authCircuitBreaker")
 										.setFallbackUri("forward:/fallback/auth-fallback"))
 								.requestRateLimiter(config -> config.setRateLimiter(redisRateLimiter())
-										.setKeyResolver(userKeyResolver()))
+										.setDenyEmptyKey(false)
+										.setKeyResolver(new ProxyClientAddressResolver()))
 								.retry(retryConfig -> retryConfig.setRetries(3)
 										.setMethods(HttpMethod.GET)
 										.setBackoff(Duration.ofMillis(100), Duration.ofMillis(1000), 2, true)))
@@ -72,7 +84,8 @@ public class GatewayServiceApplication {
 								.circuitBreaker(c -> c.setName("courseCircuitBreaker")
 										.setFallbackUri("forward:/fallback/course-fallback"))
 								.requestRateLimiter(config -> config.setRateLimiter(redisRateLimiter())
-										.setKeyResolver(userKeyResolver()))
+										.setDenyEmptyKey(false)
+										.setKeyResolver(new ProxyClientAddressResolver()))
 								.retry(retryConfig -> retryConfig.setRetries(3)
 										.setMethods(HttpMethod.GET)
 										.setBackoff(Duration.ofMillis(100), Duration.ofMillis(1000), 2, true)))
@@ -83,7 +96,8 @@ public class GatewayServiceApplication {
 								.circuitBreaker(c -> c.setName("codeAssessmentCircuitBreaker")
 										.setFallbackUri("forward:/fallback/code-assessment-fallback"))
 								.requestRateLimiter(config -> config.setRateLimiter(redisRateLimiter())
-										.setKeyResolver(userKeyResolver()))
+										.setDenyEmptyKey(false)
+										.setKeyResolver(new ProxyClientAddressResolver()))
 								.retry(retryConfig -> retryConfig.setRetries(3)
 										.setMethods(HttpMethod.GET)
 										.setBackoff(Duration.ofMillis(100), Duration.ofMillis(1000), 2, true)))
@@ -129,10 +143,33 @@ public class GatewayServiceApplication {
 				300, 600, 1);
 	}
 
-	@Bean
-	KeyResolver userKeyResolver() {
-		return exchange -> Mono.justOrEmpty(exchange.getRequest().getHeaders().getFirst("user"))
-				.defaultIfEmpty("anonymous");
+	@Primary
+	@Component
+	public static class ProxyClientAddressResolver implements KeyResolver {
+		@Override
+		public Mono<String> resolve(ServerWebExchange exchange) {
+			// Check for HTTPS request
+			if (exchange.getRequest().getHeaders().getFirst("X-Forwarded-Proto") != null &&
+					Objects.equals(exchange.getRequest().getHeaders().getFirst("X-Forwarded-Proto"), "https")) {
+				log.info("Ignoring HTTPS request for IP address resolution: " + exchange.getRequest().getHeaders().getFirst("X-Forwarded-Proto"));
+				return Mono.empty(); // Return empty string for HTTPS requests
+			}
+
+			// Check for Authorization header
+			String authHeader = exchange.getRequest().getHeaders().getFirst("Authorization");
+
+			// If Authorization header exists, use it as the key
+			if (authHeader != null && !authHeader.isEmpty()) {
+				log.info("Authorization Header: " + authHeader);
+				return Mono.just(authHeader);
+			}
+
+			// Fallback to X-Forwarded-For (if trusted) and IP address
+			XForwardedRemoteAddressResolver resolver = XForwardedRemoteAddressResolver.maxTrustedIndex(1);
+			InetSocketAddress inetSocketAddress = resolver.resolve(exchange);
+			log.info("Client IP Address: " + inetSocketAddress.getAddress().getHostAddress());
+			return Mono.just(inetSocketAddress.getAddress().getHostAddress());
+		}
 	}
 
 }
