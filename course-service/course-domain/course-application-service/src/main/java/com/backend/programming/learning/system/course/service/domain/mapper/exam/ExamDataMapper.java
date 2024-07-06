@@ -146,4 +146,30 @@ public class ExamDataMapper {
                 .maxPage(exam.getMaxPage())
                 .build();
     }
+
+    public ExamResponseEntity examToQueryExamResponse(Exam exam, Float totalMark) {
+        return ExamResponseEntity.builder()
+                .id(exam.getId().getValue())
+                .courseId(exam.getCourse().getId().getValue())
+                .courseName(exam.getCourse().getName())
+                .shuffleAnswers(exam.getShuffleAnswers())
+                .name(exam.getName())
+                .scores(totalMark)
+                .maxScores(exam.getMaxScore())
+                .timeOpen(exam.getTimeOpen())
+                .timeClose(exam.getTimeClose())
+                .timeLimit(exam.getTimeLimit())
+                .timeLimitUnit(exam.getTimeLimitUnit())
+                .unit(exam.getUnit())
+                .intro(exam.getIntro())
+                .overdueHanding(exam.getOverdueHanding())
+                .canRedoQuestions(exam.getCanRedoQuestions())
+                .maxAttempts(exam.getMaxAttempts())
+                .shuffleAnswers(exam.getShuffleAnswers())
+                .gradeMethod(exam.getGradeMethod())
+                .createdAt(exam.getCreatedAt())
+                .updatedAt(exam.getUpdatedAt())
+                .maxPage(exam.getMaxPage())
+                .build();
+    }
 }
