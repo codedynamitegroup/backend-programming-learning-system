@@ -22,6 +22,5 @@ public record QuestionSubmissionResponse(
         String feedback,
         List<QuestionSubmissionFileCommand> files,
         Boolean flag,
-        Boolean answerStatus,
-        String feedback
+        Boolean answerStatus
 ) { }
