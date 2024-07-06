@@ -22,7 +22,7 @@ public interface ReviewJpaRepository extends JpaRepository<ReviewEntity, UUID> {
     Page<ReviewEntity> findAllByCertificateCourseId(UUID certificateCourseId, Pageable pageable);
 
     @Transactional(readOnly = true)
-    @Query("SELECT AVG(r.rating) FROM ReviewEntity r WHERE r.certificateCourse.id = :certificateCourseId")
+    @Query("SELECT COALESCE(AVG(r.rating), 0.0) FROM ReviewEntity r WHERE r.certificateCourse.id = ?1")
     Float getAvgRatingOfAllReviewsByCertificateCourseId(UUID certificateCourseId);
 
     List<ReviewEntity> findByCertificateCourseIdAndCreatedById(UUID certificateCourseId, UUID createdBy);

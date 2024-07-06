@@ -19,6 +19,7 @@ public record QuestionSubmissionResponse(
         Float grade,
         String content,
         String rightAnswer,
+        String feedback,
         List<QuestionSubmissionFileCommand> files,
         Boolean flag,
         Boolean answerStatus,

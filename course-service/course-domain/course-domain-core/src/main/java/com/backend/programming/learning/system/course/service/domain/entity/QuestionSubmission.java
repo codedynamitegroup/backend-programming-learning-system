@@ -32,6 +32,7 @@ public class QuestionSubmission extends AggregateRoot<QuestionSubmissionId> {
         setNumFile(builder.numFile);
         setFlag(builder.flag);
         setAnswerStatus(builder.answerStatus);
+        setFeedback(builder.feedback);
         setQuestionSubmissionFiles(builder.questionSubmissionFiles);
         setFeedback(builder.feedback);
     }
@@ -43,8 +44,6 @@ public class QuestionSubmission extends AggregateRoot<QuestionSubmissionId> {
     public void initializeQuestionSubmission() {
         setId(new QuestionSubmissionId(UUID.randomUUID()));
     }
-
-
 
     public void setPassStatus(Integer passStatus) {
         this.passStatus = passStatus;
