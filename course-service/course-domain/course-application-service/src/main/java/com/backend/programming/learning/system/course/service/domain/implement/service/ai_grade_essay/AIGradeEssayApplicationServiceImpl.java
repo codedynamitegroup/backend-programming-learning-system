@@ -406,8 +406,6 @@ III. INPUT AND OUTPUT:
 
         criterias.forEach(criteria -> {
             formattedData.append("- Criteria: ").append(criteria.getCriteriaName()).append("\n");
-            if (criteria.getCriteriaGrade() != null)
-                formattedData.append(" (Total score: ").append(criteria.getCriteriaGrade()).append("%)\n");
 
             criteria.getScale().forEach(scale -> {
                 formattedData.append("  * Score ").append(scale.getScore()).append("/" + criteria.getScale().size()).append(": ")

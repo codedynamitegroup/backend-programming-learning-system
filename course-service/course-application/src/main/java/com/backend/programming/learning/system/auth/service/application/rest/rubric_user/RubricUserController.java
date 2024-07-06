@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.auth.service.application.rest.ru
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.rubric_user.CreateRubricUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.rubric_user.QueryAllRubricsByUserIdCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.rubric_user.QueryAllRubricsByUserIdResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.rubric_user.UpdateRubricUserCommand;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.rubric_user.RubricUserApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -29,7 +30,7 @@ public class RubricUserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
-                            schema = @Schema(implementation = QueryAllRubricsByUserIdResponse.class))
+                            schema = @Schema(implementation = String.class))
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
@@ -55,7 +56,7 @@ public class RubricUserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
-                            schema = @Schema(implementation = QueryAllRubricsByUserIdResponse.class))
+                            schema = @Schema(implementation = String.class))
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
@@ -63,7 +64,48 @@ public class RubricUserController {
             @RequestBody CreateRubricUserCommand createRubricUserCommand
 
     ) {
-        rubricUserApplicationService.createReportEssay(createRubricUserCommand);
-        return ResponseEntity.status(HttpStatus.CREATED).body("OK");
+        rubricUserApplicationService.createRubricUser(createRubricUserCommand);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Create rubric user successfully.");
+    }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Update rubric user.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllRubricsByUserIdResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<String> updateRubricUser(
+            @PathVariable String id,
+            @RequestBody UpdateRubricUserCommand updateRubricUserCommand
+
+    ) {
+        rubricUserApplicationService.updateRubricUser(
+                UpdateRubricUserCommand.builder()
+                        .rubricUserId(id)
+                        .rubricContent(updateRubricUserCommand.getRubricContent())
+                        .rubricDescription(updateRubricUserCommand.getRubricDescription())
+                        .rubricName(updateRubricUserCommand.getRubricName())
+                        .build()
+        );
+        return ResponseEntity.status(HttpStatus.OK).body("Update rubric user successfully.");
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete rubric user.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllRubricsByUserIdResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<String> deleteRubricUser(
+            @PathVariable UUID id
+    ) {
+        rubricUserApplicationService.deleteRubricUser(id);
+        return ResponseEntity.status(HttpStatus.OK).body("Delete rubric user successfully.");
     }
 }
