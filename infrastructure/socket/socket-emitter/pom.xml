@@ -20,6 +20,14 @@
             <groupId>com.corundumstudio.socketio</groupId>
             <artifactId>netty-socketio</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.backend.programming.learning.system</groupId>
+            <artifactId>common-domain</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
