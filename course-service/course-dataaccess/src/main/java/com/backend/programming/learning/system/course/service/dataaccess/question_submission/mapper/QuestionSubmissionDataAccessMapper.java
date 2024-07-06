@@ -79,6 +79,7 @@ public class QuestionSubmissionDataAccessMapper {
                 .grade(questionSubmissionEntity.getGrade())
                 .content(questionSubmissionEntity.getContent())
                 .rightAnswer(questionSubmissionEntity.getRightAnswer())
+                .feedback(questionSubmissionEntity.getFeedback())
                 .numFile(questionSubmissionEntity.getNumFile())
                 .answerStatus(questionSubmissionEntity.getAnswerStatus())
                 .flag(questionSubmissionEntity.getFlag())
