@@ -306,6 +306,7 @@ public class CertificateCourseQueryHelper {
     public List<CertificateCourse> queryMostEnrolledCertificateCourses(
             String email
     ) {
+        log.info("Querying most enrolled certificate courses");
         Optional<User> userOptional = email != null ? userRepository.findByEmail(email): Optional.empty();
 
         List<CertificateCourse> certificateCourseList;
@@ -324,17 +325,7 @@ public class CertificateCourseQueryHelper {
             }
             certificateCourseList = certificateCourseRepository
                     .findMostEnrolledCertificateCoursesByTopicIds(topicIdsList);
-            if (certificateCourseList.size() < 5) {
-                List<CertificateCourse> all = certificateCourseRepository
-                        .findMostEnrolledCertificateCourses();
-                for (CertificateCourse certificateCourse : all) {
-                    if (!certificateCourseList.contains(certificateCourse)) {
-                        certificateCourseList.add(certificateCourse);
-                    }
-                }
-            }
         }
-
 
         for (CertificateCourse certificateCourse : certificateCourseList) {
             if (userOptional.isPresent()) {

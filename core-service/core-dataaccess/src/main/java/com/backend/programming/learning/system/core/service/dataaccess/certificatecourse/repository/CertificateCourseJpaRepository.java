@@ -86,6 +86,12 @@ public interface CertificateCourseJpaRepository extends JpaRepository<Certificat
         where coalesce(?1, null) is null or cc.topic.id in ?1
         group by cc.id
         order by cc.avgRating desc, count(ccu.user.id) desc
+        union 
+        select cc
+        from CertificateCourseEntity cc
+        left join CertificateCourseUserEntity ccu on cc.id = ccu.certificateCourse.id
+        group by cc.id
+        order by cc.avgRating desc, count(ccu.user.id) desc
         limit 5
 """)
     List<CertificateCourseEntity> findMostEnrolledCertificateCoursesByTopicIds(
