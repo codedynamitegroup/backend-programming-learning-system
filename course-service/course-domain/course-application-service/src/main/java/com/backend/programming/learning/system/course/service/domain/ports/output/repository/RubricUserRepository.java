@@ -13,4 +13,5 @@ public interface RubricUserRepository {
     RubricUser save(RubricUser rubricUser);
     Optional<RubricUser> findRubricUser(UUID rubricUserId);
     Page<RubricUser> findAllByUserId(UUID userId, Integer page, Integer size, String searchName);
+    void deleteById(UUID rubricUserId);
 }

@@ -41,4 +41,5 @@ public class RubricUserDataMapper {
                 .description(createRubricUserCommand.getRubricDescription())
                 .build();
     }
+
 }
