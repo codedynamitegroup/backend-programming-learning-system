@@ -8,6 +8,7 @@ import com.backend.programming.learning.system.course.service.domain.ports.outpu
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -108,6 +109,15 @@ public class CalendarEventRepositoryImpl implements CalendarEventRepository {
     @Override
     public List<CalendarEvent> findAllByAssignmentId(UUID assignmentId) {
         return calendarEventJpaRepository.findAllByAssignmentId(assignmentId)
+                .stream()
+                .map(calendarEventDataAccessMapper::calendarEventEntityToCalendarEvent)
+                .toList();
+    }
+
+    @Override
+    public List<CalendarEvent> findAllByCourseId(UUID courseId) {
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UTC"));
+        return calendarEventJpaRepository.findAllByCourseId(courseId, now)
                 .stream()
                 .map(calendarEventDataAccessMapper::calendarEventEntityToCalendarEvent)
                 .toList();

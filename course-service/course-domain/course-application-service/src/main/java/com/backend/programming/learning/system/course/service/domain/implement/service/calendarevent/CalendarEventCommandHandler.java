@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.calendarevent.DeleteCalendarEventResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.calendarevent.QueryAllCalendarEventsCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.calendarevent.QueryAllCalendarEventsResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.calendarevent.QueryAllToDoCalendarEventsCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.calendarevent.UpdateCalendarEventCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.calendarevent.UpdateCalendarEventResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.CalendarEvent;
@@ -72,6 +73,17 @@ public class CalendarEventCommandHandler {
             QueryAllCalendarEventsCommand queryAllCalendarEventsCommand) {
         List<CalendarEvent> calendarEvents = calendarEventQueryHelper
                 .findAllCalendarEvents(queryAllCalendarEventsCommand);
+
+        log.info("Returning all calendar events: {}", calendarEvents);
+
+        return calendarEventDataMapper.calendarEventsToQueryAllCalendarEventsResponse(calendarEvents);
+    }
+
+    @Transactional(readOnly = true)
+    public QueryAllCalendarEventsResponse queryAllToDoCalendarEvents(
+            QueryAllToDoCalendarEventsCommand queryAllToDoCalendarEventsCommand) {
+        List<CalendarEvent> calendarEvents = calendarEventQueryHelper
+                .findAllToDoCalendarEvents(queryAllToDoCalendarEventsCommand);
 
         log.info("Returning all calendar events: {}", calendarEvents);
 

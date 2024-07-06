@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.calendarevent.DeleteCalendarEventResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.calendarevent.QueryAllCalendarEventsCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.calendarevent.QueryAllCalendarEventsResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.calendarevent.QueryAllToDoCalendarEventsCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.calendarevent.UpdateCalendarEventCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.calendarevent.UpdateCalendarEventResponse;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.calendarevent.CalendarEventApplicationService;
@@ -33,6 +34,11 @@ class CalendarEventApplicationServiceImpl implements CalendarEventApplicationSer
     @Override
     public QueryAllCalendarEventsResponse queryAllCalendarEventsResponse(QueryAllCalendarEventsCommand queryAllCalendarEventsCommand) {
         return calendarEventCommandHandler.queryAllCalendarEvents(queryAllCalendarEventsCommand);
+    }
+
+    @Override
+    public QueryAllCalendarEventsResponse queryAllToDoCalendarEventsResponse(QueryAllToDoCalendarEventsCommand queryAllToDoCalendarEventsCommand) {
+        return calendarEventCommandHandler.queryAllToDoCalendarEvents(queryAllToDoCalendarEventsCommand);
     }
 
     @Override
