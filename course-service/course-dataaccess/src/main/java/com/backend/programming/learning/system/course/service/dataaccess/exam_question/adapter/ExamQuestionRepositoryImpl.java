@@ -48,4 +48,9 @@ public class ExamQuestionRepositoryImpl implements ExamQuestionRepository {
                 .examQuestionEntityListToExamQuestionList(examQuestionJpaRepository
                         .findAllByExamId(examId.getValue()));
     }
+
+    @Override
+    public Float countByExamId(ExamId examId) {
+        return examQuestionJpaRepository.countByExamId(examId.getValue());
+    }
 }

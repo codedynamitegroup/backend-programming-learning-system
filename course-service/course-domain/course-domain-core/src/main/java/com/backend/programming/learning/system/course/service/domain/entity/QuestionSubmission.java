@@ -33,6 +33,7 @@ public class QuestionSubmission extends AggregateRoot<QuestionSubmissionId> {
         setFlag(builder.flag);
         setAnswerStatus(builder.answerStatus);
         setQuestionSubmissionFiles(builder.questionSubmissionFiles);
+        setFeedback(builder.feedback);
     }
 
     public static Builder builder() {
