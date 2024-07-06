@@ -21,44 +21,9 @@ public interface CalendarEventJpaRepository extends JpaRepository<CalendarEventE
     """)
     List<CalendarEventEntity> findAllBetweenFromTimeAndToTime(ZonedDateTime startTime, ZonedDateTime endTime);
 
-//    CalendarEventEntity saveByContestIdAndUserId(UUID contestId, UUID userId, CalendarEventEntity calendarEventEntity);
     void deleteByContestIdAndUserId(UUID contestId, UUID userId);
 
     Optional<CalendarEventEntity> findByContestIdAndUserId(UUID contestId, UUID userId);
-//
-//     if (time.isAfter(now)) {
-//        log.info("Time is after now");
-//        if (time.isBefore(now.plusHours(1)) && notificationNotifyTime != NotificationNotifyTime.ONE_HOUR) {
-//            log.info("Time is before now plus 1 hour");
-//            return NotificationNotifyTime.ONE_HOUR;
-//        } else if (time.isBefore(now.plusHours(3))
-//                && time.isAfter(now.plusHours(1))
-//                && notificationNotifyTime != NotificationNotifyTime.THREE_HOURS) {
-//            log.info("Time is before now plus 3 hours and after now plus 1 hour");
-//            return NotificationNotifyTime.THREE_HOURS;
-//        } else if (time.isBefore(now.plusHours(6))
-//                && time.isAfter(now.plusHours(3))
-//                && notificationNotifyTime != NotificationNotifyTime.SIX_HOURS) {
-//            log.info("Time is before now plus 6 hours and after now plus 3 hours");
-//            return NotificationNotifyTime.SIX_HOURS;
-//        } else if (time.isBefore(now.plusHours(12))
-//                && time.isAfter(now.plusHours(6))
-//                && notificationNotifyTime != NotificationNotifyTime.TWELVE_HOURS) {
-//            log.info("Time is before now plus 12 hours and after now plus 6 hours");
-//            return NotificationNotifyTime.TWELVE_HOURS;
-//        } else if (time.isBefore(now.plusDays(1))
-//                && time.isAfter(now.plusHours(12))
-//                && notificationNotifyTime != NotificationNotifyTime.TWENTY_FOUR_HOURS) {
-//            log.info("Time is before now plus 1 day and after now plus 12 hours");
-//            return NotificationNotifyTime.TWENTY_FOUR_HOURS;
-//        } else {
-//            log.info("Time valid check is not in any case");
-//            return null;
-//        }
-//    } else {
-//        log.info("Time is not after now");
-//        return null;
-//    }
 
     @Query("""
         select c from CalendarEventEntity c
@@ -108,4 +73,14 @@ public interface CalendarEventJpaRepository extends JpaRepository<CalendarEventE
         where c.assignment.id = ?1
     """)
     List<CalendarEventEntity> findAllByAssignmentId(UUID assignmentId);
+
+    @Query("""
+        select c from CalendarEventEntity c
+        where c.course.id = ?1
+        and (c.component = 'EXAM' or c.component = 'ASSIGNMENT')
+        and (c.endTime is null or c.endTime > ?2)
+        order by c.endTime asc
+        limit 5
+    """)
+    List<CalendarEventEntity> findAllByCourseId(UUID courseId, ZonedDateTime now);
 }

@@ -29,4 +29,5 @@ public interface CalendarEventRepository {
 
     List<CalendarEvent> findAllByExamId(UUID examId);
     List<CalendarEvent> findAllByAssignmentId(UUID assignmentId);
+    List<CalendarEvent> findAllByCourseId(UUID courseId);
 }
