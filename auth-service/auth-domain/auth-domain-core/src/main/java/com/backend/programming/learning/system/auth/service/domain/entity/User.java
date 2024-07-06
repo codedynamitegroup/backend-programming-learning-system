@@ -24,6 +24,9 @@ public class User extends AggregateRoot<UserId> {
     private ZonedDateTime updatedAt;
     private Boolean isLinkedWithGoogle;
     private Boolean isLinkedWithMicrosoft;
+    private Boolean isLinkedWithSystemAccount;
+    private String emailLinkedGoogle;
+    private String emailLinkedMicrosoft;
     private Organization organization;
     private Boolean isDeleted;
     private Integer otp;
@@ -51,6 +54,9 @@ public class User extends AggregateRoot<UserId> {
         setOtp(builder.otp);
         setOtpExpireAt(builder.otpExpireAt);
         setRoles(builder.roles);
+        isLinkedWithSystemAccount = builder.isLinkedWithSystemAccount;
+        emailLinkedGoogle = builder.emailLinkedGoogle;
+        emailLinkedMicrosoft = builder.emailLinkedMicrosoft;
     }
 
     public Set<Role> getRoles() {
@@ -209,6 +215,30 @@ public class User extends AggregateRoot<UserId> {
         isDeleted = deleted;
     }
 
+    public Boolean getLinkedWithSystemAccount() {
+        return isLinkedWithSystemAccount;
+    }
+
+    public void setLinkedWithSystemAccount(Boolean linkedWithSystemAccount) {
+        isLinkedWithSystemAccount = linkedWithSystemAccount;
+    }
+
+    public String getEmailLinkedGoogle() {
+        return emailLinkedGoogle;
+    }
+
+    public void setEmailLinkedGoogle(String emailLinkedGoogle) {
+        this.emailLinkedGoogle = emailLinkedGoogle;
+    }
+
+    public String getEmailLinkedMicrosoft() {
+        return emailLinkedMicrosoft;
+    }
+
+    public void setEmailLinkedMicrosoft(String emailLinkedMicrosoft) {
+        this.emailLinkedMicrosoft = emailLinkedMicrosoft;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -228,6 +258,9 @@ public class User extends AggregateRoot<UserId> {
         private ZonedDateTime updatedAt;
         private Boolean isLinkedWithGoogle;
         private Boolean isLinkedWithMicrosoft;
+        private Boolean isLinkedWithSystemAccount;
+        private String emailLinkedGoogle;
+        private String emailLinkedMicrosoft;
         private Organization organization;
         private Boolean isDeleted;
         private Integer otp;
@@ -305,6 +338,20 @@ public class User extends AggregateRoot<UserId> {
 
         public Builder isLinkedWithMicrosoft(Boolean val) {
             isLinkedWithMicrosoft = val;
+            return this;
+        }
+        public Builder isLinkedWithSystemAccount(Boolean val) {
+            isLinkedWithSystemAccount = val;
+            return this;
+        }
+
+        public Builder emailLinkedGoogle(String val) {
+            emailLinkedGoogle = val;
+            return this;
+        }
+
+        public Builder emailLinkedMicrosoft(String val) {
+            emailLinkedMicrosoft = val;
             return this;
         }
 

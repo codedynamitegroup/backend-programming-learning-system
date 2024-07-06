@@ -33,6 +33,9 @@ public class UserEntityResponse {
     private ZonedDateTime updatedAt;
     private Boolean isLinkedWithGoogle;
     private Boolean isLinkedWithMicrosoft;
+    private Boolean isLinkedWithSystemAccount;
+    private String emailLinkedGoogle;
+    private String emailLinkedMicrosoft;
     private Boolean isDeleted;
     private Set<RoleEntityResponse> roles;
 }

@@ -12,6 +12,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.cr
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.forgot_password.*;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LinkSSOUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.SocialLoginUserCommand;
@@ -44,6 +45,7 @@ public interface UserApplicationService {
     DeleteUserResponse deleteUserById(@Valid DeleteUserCommand deleteUserCommand);
     LoginUserResponse loginUser(@Valid LoginUserCommand loginUserCommand);
     LoginUserResponse socialLoginUser(@Valid SocialLoginUserCommand socialLoginUserCommand);
+    void linkSSO(@Valid LinkSSOUserCommand linkSSOUserCommand);
     RefreshTokenUserResponse refreshTokenUser(@Valid RefreshTokenUserEmailCommand refreshTokenUserEmailCommand);
     LogoutUserResponse logoutUser(@Valid LogoutUserEmailCommand logoutUserEmailCommand);
     ChangedPasswordUserResponse changePasswordUser(@Valid ChangedPasswordUserCommand changedPasswordUserCommand);
