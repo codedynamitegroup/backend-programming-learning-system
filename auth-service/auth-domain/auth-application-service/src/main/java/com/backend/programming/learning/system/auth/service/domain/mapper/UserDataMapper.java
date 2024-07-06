@@ -69,6 +69,7 @@ public class UserDataMapper {
                 .avatarUrl(createSocialLoginUserCommand.getAvatarUrl())
                 .isLinkedWithGoogle(createSocialLoginUserCommand.getProvider().equals("google"))
                 .isLinkedWithMicrosoft(createSocialLoginUserCommand.getProvider().equals("microsoft"))
+                .isLinkedWithSystemAccount(false)
                 .build();
     }
     public CreateUserResponse userToCreateUserResponse(User user, String message) {
@@ -158,6 +159,9 @@ public class UserDataMapper {
                 .isLinkedWithGoogle(user.getLinkedWithGoogle())
                 .isLinkedWithMicrosoft(user.getLinkedWithMicrosoft())
                 .roles(user.getRoles() == null ? null : user.getRoles().stream().map(roleDataMapper::roleToRoleResponse).collect(Collectors.toSet()))
+                .isLinkedWithSystemAccount(user.getLinkedWithSystemAccount())
+                .emailLinkedGoogle(user.getEmailLinkedGoogle())
+                .emailLinkedMicrosoft(user.getEmailLinkedMicrosoft())
                 .build();
     }
 

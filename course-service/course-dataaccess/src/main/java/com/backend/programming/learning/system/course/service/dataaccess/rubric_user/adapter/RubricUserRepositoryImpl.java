@@ -39,4 +39,9 @@ public class RubricUserRepositoryImpl implements RubricUserRepository {
         return rubricUserJpaRepository.findAllByUserId(userId, searchName, paging)
                 .map(rubricUserDataAccessMapper::rubricUserEntityToRubricUser);
     }
+
+    @Override
+    public void deleteById(UUID rubricUserId) {
+        rubricUserJpaRepository.deleteById(rubricUserId);
+    }
 }

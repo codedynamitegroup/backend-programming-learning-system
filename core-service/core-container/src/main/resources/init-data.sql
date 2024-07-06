@@ -16,14 +16,6 @@ INSERT INTO public."user" (id,email,dob,first_name,last_name,phone,address,avata
 
 INSERT INTO public.topic(id, name, description, thumbnail_url, created_by, updated_by, is_single_programming_language)
 VALUES
-    ('9ba179ed-d26d-4828-a0f6-8836c2063992',
-     'Learn Python',
-     'Python is a versatile and user-friendly programming language known for its readability and efficiency. It''s widely used for web development, data analysis, artificial intelligence, and more.',
-     'https://cdn.codechef.com/images/self-learning/icons/python.svg',
-     '9ba179ed-d26d-4828-a0f6-8836c2063992',
-     '9ba179ed-d26d-4828-a0f6-8836c2063992',
-        true
-    ),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb92',
      'Learn C',
      'C is a fundamental programming language that''s ideal for beginners due to its simplicity and direct control over hardware. Learning C provides a strong foundation in computer science concepts and programming techniques.',
@@ -38,6 +30,14 @@ VALUES
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
      true),
+    ('9ba179ed-d26d-4828-a0f6-8836c2063992',
+     'Learn Python',
+     'Python is a versatile and user-friendly programming language known for its readability and efficiency. It''s widely used for web development, data analysis, artificial intelligence, and more.',
+     'https://cdn.codechef.com/images/self-learning/icons/python.svg',
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+     '9ba179ed-d26d-4828-a0f6-8836c2063992',
+        true
+    ),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb46',
      'Learn Java',
      'Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible. It is a general-purpose programming language intended to let application developers write once, run anywhere (WORA), meaning that compiled Java code can run on all platforms that support Java without the need for recompilation.',
@@ -53,9 +53,9 @@ VALUES
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
      true),
     ('d215b5f8-0249-4dc5-89a3-51fd148cfb49',
-     'Learn SQL',
-     'This sample SQL certification course equips you with the skills and knowledge to effectively query, manipulate, and manage data in relational databases using SQL.  The course prepares you for various entry-level database administrator or data analyst roles that heavily utilize SQL.',
-     'https://e7.pngegg.com/pngimages/170/924/png-clipart-microsoft-sql-server-microsoft-azure-sql-database-microsoft-text-logo.png',
+     'Learn GO',
+     'Go, also known as Golang, is a programming language created by Google, renowned for its simplicity and efficiency. It''s designed for building scalable and high-performance web applications and network servers. Go''s strong support for concurrency and its straightforward syntax make it popular for cloud computing and microservices.',
+     'https://cdn.codechef.com/images/self-learning/icons/go.svg',
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
      '9ba179ed-d26d-4828-a0f6-8836c2063992',
      true),

@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.socket.emitter.module;
 
+import com.backend.programming.learning.system.socket.emitter.utils.JwtUtils;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.ConnectListener;
 import com.corundumstudio.socketio.listener.DisconnectListener;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class SocketModule {
-
     public SocketModule(SocketIOServer server) {
         server.addConnectListener(onConnected());
         server.addDisconnectListener(onDisconnected());
@@ -17,9 +17,15 @@ public class SocketModule {
 
     private ConnectListener onConnected() {
         return (client) -> {
-            String room = client.getHandshakeData().getSingleUrlParam("room");
-            client.joinRoom(room);
-            log.info("Socket ID[{}]  Connected to socket", client.getSessionId().toString());
+            String token = client.getHandshakeData().getSingleUrlParam("token");
+            String email = JwtUtils.getEmailFromJwtString(token);
+            if (email == null) {
+                log.error("Client[{}] - Invalid token", client.getSessionId().toString());
+                client.disconnect();
+            } else {
+                log.info("Client[{}] - Connected to socket", client.getSessionId().toString());
+                client.joinRoom("email_" + email);
+            }
         };
     }
 

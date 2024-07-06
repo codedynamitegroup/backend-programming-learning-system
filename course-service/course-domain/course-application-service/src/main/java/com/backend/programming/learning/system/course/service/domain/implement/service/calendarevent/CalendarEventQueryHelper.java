@@ -1,12 +1,14 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.calendarevent;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.calendarevent.QueryAllCalendarEventsCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.calendarevent.QueryAllToDoCalendarEventsCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.CalendarEvent;
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
 import com.backend.programming.learning.system.course.service.domain.entity.CourseUser;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CalendarEventRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseUserRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -25,13 +27,16 @@ public class CalendarEventQueryHelper {
     private final CalendarEventRepository calendarEventRepository;
     private final UserRepository userRepository;
     private final CourseUserRepository courseUserRepository;
+    private final CourseRepository courseRepository;
 
     public CalendarEventQueryHelper(CalendarEventRepository calendarEventRepository,
                                     UserRepository userRepository,
-                                    CourseUserRepository courseUserRepository) {
+                                    CourseUserRepository courseUserRepository,
+                                    CourseRepository courseRepository) {
         this.calendarEventRepository = calendarEventRepository;
         this.userRepository = userRepository;
         this.courseUserRepository = courseUserRepository;
+        this.courseRepository = courseRepository;
     }
 
     @Transactional(readOnly = true)
@@ -58,6 +63,16 @@ public class CalendarEventQueryHelper {
     }
 
     @Transactional(readOnly = true)
+    public List<CalendarEvent> findAllToDoCalendarEvents(
+            QueryAllToDoCalendarEventsCommand queryAllToDoCalendarEventsCommand
+    ) {
+        checkCourseById(queryAllToDoCalendarEventsCommand.getCourseId());
+        return calendarEventRepository.findAllByCourseId(
+                queryAllToDoCalendarEventsCommand.getCourseId()
+        );
+    }
+
+    @Transactional(readOnly = true)
     public List<CalendarEvent> findAllCalendarEventsByExamId(UUID examId) {
         return calendarEventRepository.findAllByExamId(examId);
     }
@@ -70,6 +85,10 @@ public class CalendarEventQueryHelper {
     private Page<CourseUser> getAllCoursesByUserId(UUID userId) {
         return courseUserRepository.findAllCourseByUserId(
                 userId, 0, 9999999, "", null);
+    }
+
+    private void checkCourseById(UUID courseId) {
+        courseRepository.findById(courseId);
     }
 
     private User getUserByEmail(String email) {

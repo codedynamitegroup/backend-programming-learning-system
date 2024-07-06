@@ -75,6 +75,7 @@ public class UserCreateHelper {
         User user = authDataMapper.registerUserCommandToUser(registerUserCommand);
         user.setLinkedWithMicrosoft(false);
         user.setLinkedWithGoogle(false);
+        user.setLinkedWithSystemAccount(true);
 
         UserCreatedEvent userCreatedEvent = authDomainService.createUser(user);
         saveUser(user);

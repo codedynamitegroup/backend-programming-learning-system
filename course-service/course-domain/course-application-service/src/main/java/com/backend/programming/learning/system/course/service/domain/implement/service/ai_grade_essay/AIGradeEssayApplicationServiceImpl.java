@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.ai_grade_essay;
 
 import com.backend.programming.learning.system.course.service.config.CourseServiceConfigData;
+import com.backend.programming.learning.system.course.service.domain.dto.method.ai_grade_essay.ai_feedback.StudentSubmissionFeedback;
 import com.backend.programming.learning.system.course.service.domain.dto.method.ai_grade_essay.rubric.Criteria;
 import com.backend.programming.learning.system.course.service.domain.dto.method.ai_grade_essay.gemini.GeminiRecord;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.report_grade_essay_ai.ReportGradeEssayAICommand;
@@ -11,6 +12,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QueryAllSubmissionAssignmentAIGradeEssayResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.submission_assignment.QueryAllSubmissionnAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.ai_grade_essay_report.AssignmentAIGradeReportEntityResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.responseentity.submission_assignment.AIGradeEssaySubmissionAssignmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.Assignment;
 import com.backend.programming.learning.system.course.service.domain.entity.AssignmentAIGradeReport;
 import com.backend.programming.learning.system.course.service.domain.entity.RubricUser;
@@ -167,10 +169,10 @@ II. SYSTEM_INSTRUCTIONS:
 
             QueryAllSubmissionAssignmentAIGradeEssayResponse queryAllSubmissionAssignmentAIGradeEssayResponse =
                     objectMapper.readValue(assignmentAIGradeReport.getStudentSubmissions(), QueryAllSubmissionAssignmentAIGradeEssayResponse.class);
-            long totalSubmissions = queryAllSubmissionAssignmentAIGradeEssayResponse.getTotalItems();
             QueryAssignmentAIGradeResponse queryAssignmentAIGradeResponse =
                     objectMapper.readValue(assignmentAIGradeReport.getQuestion(), QueryAssignmentAIGradeResponse.class);
-            String studentSubmissions = objectMapper.writeValueAsString(queryAllSubmissionAssignmentAIGradeEssayResponse.getSubmissionAssignments());
+            List<AIGradeEssaySubmissionAssignmentResponseEntity> submissionAssignments = queryAllSubmissionAssignmentAIGradeEssayResponse.getSubmissionAssignments();
+
             String questionContent = queryAssignmentAIGradeResponse.getIntro();
             Float questionMaxScore = queryAssignmentAIGradeResponse.getMaxScore();
             String language = assignmentAIGradeReport.getFeedbackLanguage();
@@ -179,27 +181,41 @@ II. SYSTEM_INSTRUCTIONS:
             String assignmentRubric;
             if (rubricUser == null) {
                 assignmentRubric = """
-- Criteria: Content (Total score: 80%)
-  * Score 1/4: The essay is incomplete, inaccurate, illogical, and uses sources inappropriately
-  * Score 2/4: The essay is complete, accurate, but lacks logic, and uses sources somewhat appropriately
-  * Score 3/4: The essay is complete, accurate, and logical, and uses sources appropriately
-  * Score 4/4: The essay is complete, accurate, logical, creative, and uses sources appropriately
-- Criteria: Form (Total score: 10%)
-  * Score 1/4: The essay has many errors in grammar, spelling, or punctuation, uses limited vocabulary, and has an unclear layout.
-  * Score 2/4: The essay has several errors in grammar, spelling, or punctuation, uses somewhat varied and rich vocabulary, and has a somewhat clear layout.
-  * Score 3/4: The essay has few errors in grammar, spelling, or punctuation, uses varied, rich, and appropriate vocabulary, and has a relatively clear layout.
-  * Score 4/4: The essay has no errors in grammar, spelling, or punctuation, and uses varied, rich, and appropriate vocabulary with a clear layout
-- Criteria: Style (Total score: 10%)
-  * Score 1/4: The essay is unclear, not engaging, and not appropriate for the topic, purpose, and audience.
-  * Score 2/4: The essay is unclear, lacks engagement, and is somewhat appropriate for the topic, purpose, and audience.
-  * Score 3/4: The essay is relatively clear, engaging, and appropriate for the topic, purpose, and audience.
-  * Score 4/4: The essay is clear, engaging, and appropriate for the topic, purpose, and audience.
+- Criteria: Ideas and content
+  * Score 1/4: The opinion and support for it is buried, confused and/or undear.
+  * Score 2/4: An opinion is given. The reasons given tend to be weak or inaccurate. May get off topic.
+  * Score 3/4: An opinion is given. One reason may be unclear or lack detail.
+  * Score 4/4: The paper clearly states an opinion and gives 3 clear, detailed reasons in support of it
+- Criteria: Organization
+  * Score 1/4: There is no real beginning or ending. The ideas seem loosely strung together. No paragraph formatting
+  * Score 2/4: The paper has an attempt at a beginning &/or ending. Some ideas may seem out of order. Some problems with paragraphs.
+  * Score 3/4: The paper has a beginning, middle and end. The order makes sense. Paragraphs are indented; some have topic and closing sentences
+  * Score 4/4: The paper has a beginning with an interesting lead, a middle, and an ending. It is in an order that makes sense. Paragraphs are indented and have topic and closing sentences and main ideas.
+- Criteria: Voice & tone
+  * Score 1/4: The writing is bland and sounds like the writer doesn`t like the topic. No thoughts or feelings.
+  * Score 2/4: The paper could have been written by anyone. It shows very little about what the writer thought and felt.
+  * Score 3/4: The writing seems sincere but not enthusiastic. The writer`s voice fades in and out.
+  * Score 4/4: The writing shows what the writer thinks and feels. It sounds like the writer cares about the topic.
+- Criteria: Word choice
+  * Score 1/4: The same words are used over and over. Some words are used incorrectly.
+  * Score 2/4: The words are ordinary but generally correct.
+  * Score 3/4: The words are mostly ordinary, with a few attempts at descriptive words.
+  * Score 4/4: Descriptive words are used (`helpful`) instead of `good` or `destructive` instead of `bad`.
+- Criteria: Sentence fluency
+  * Score 1/4: The essay is hard to read because of incomplete and run-on sentences.
+  * Score 2/4: There are many incomplete sentences and run-ons.
+  * Score 3/4: The sentences are usually correct.
+  * Score 4/4: The sentences are complete, clear, and begin in different ways.
+- Criteria: Conventions
+  * Score 1/4: The writing is almost impossible to read because of errors.
+  * Score 2/4: There are enough errors to make the writing hard to read and understand.
+  * Score 3/4: Spelling, punctuation and caps are usually correct_ Some problems with grammar.
+  * Score 4/4: Spelling, punctuation, capitalization, and grammar are correct. Only minor edits are needed.
                     """;
             } else {
                 List<Criteria> criteria = objectMapper.readValue(rubricUser.getContent(), new TypeReference<List<Criteria>>() {});
                 assignmentRubric = formatRubric(criteria);
             }
-            String INPUT_OUTPUT = interpolateInputOutput(studentSubmissions, totalSubmissions, questionContent, questionMaxScore, assignmentRubric, language);
 
             partsNode.put("text", AI_ROLE);
             contentNode.set("parts", objectMapper.createArrayNode().add(partsNode));
@@ -211,33 +227,50 @@ II. SYSTEM_INSTRUCTIONS:
             contentNode1.set("parts", objectMapper.createArrayNode().add(partsNode1));
             contentNode1.put("role", "user");
 
-            ObjectNode contentNode2 = objectMapper.createObjectNode();
-            ObjectNode partsNode2 = objectMapper.createObjectNode();
-            partsNode2.put("text", INPUT_OUTPUT);
-            contentNode2.set("parts", objectMapper.createArrayNode().add(partsNode2));
-            contentNode2.put("role", "user");
+            int chunkSize = 5;
+            List<List<AIGradeEssaySubmissionAssignmentResponseEntity>> chunks = partition(submissionAssignments, chunkSize);
+            List<StudentSubmissionFeedback> studentSubmissionFeedbacks = new ArrayList<>();
+            for (List<AIGradeEssaySubmissionAssignmentResponseEntity> chunk : chunks) {
+                String studentSubmissions = objectMapper.writeValueAsString(chunk);
+                long totalSubmissions = chunk.size();
+                String chunkInputOutput = interpolateInputOutput(studentSubmissions, totalSubmissions, questionContent, questionMaxScore, assignmentRubric, language);
 
-            ObjectNode requestBodyNode = objectMapper.createObjectNode();
-            requestBodyNode.set("contents", objectMapper.createArrayNode().add(contentNode).add(contentNode1).add(contentNode2));
+                ObjectNode contentNode2 = objectMapper.createObjectNode();
+                ObjectNode partsNode2 = objectMapper.createObjectNode();
+                partsNode2.put("text", chunkInputOutput);
+                contentNode2.set("parts", objectMapper.createArrayNode().add(partsNode2));
+                contentNode2.put("role", "user");
 
-            String requestBody;
-            requestBody = objectMapper.writeValueAsString(requestBodyNode);
+                ObjectNode requestBodyNode = objectMapper.createObjectNode();
+                requestBodyNode.set("contents", objectMapper.createArrayNode().add(contentNode).add(contentNode1).add(contentNode2));
 
-            HttpEntity<String> request = new HttpEntity<>(requestBody, headers);
+                String requestBody = objectMapper.writeValueAsString(requestBodyNode);
 
-            ResponseEntity<String> response = restTemplate.exchange(apiUrl, HttpMethod.POST, request, String.class);
-            GeminiRecord temp = objectMapper.readValue(response.getBody(), GeminiRecord.class);
-            String textResponse = temp.getCandidates().get(0).getContent().getParts().get(0).getText();
-            Object textResponseObjectValid = objectMapper.readValue(textResponse.replace("```", "").replace("json", ""), Object.class);
-            assignmentAIGradeReport.setFeedbackSubmissions(textResponse.replace("```", "").replace("json", ""));
+                HttpEntity<String> request = new HttpEntity<>(requestBody, headers);
+
+                ResponseEntity<String> response = restTemplate.exchange(apiUrl, HttpMethod.POST, request, String.class);
+                GeminiRecord temp = objectMapper.readValue(response.getBody(), GeminiRecord.class);
+                String textResponse = temp.getCandidates().get(0).getContent().getParts().get(0).getText();
+                List<StudentSubmissionFeedback> textResponseObjectValid = objectMapper.readValue(textResponse.replace("```", "").replace("json", ""), new TypeReference<List<StudentSubmissionFeedback>>() {});
+                studentSubmissionFeedbacks.addAll(textResponseObjectValid);
+            }
+
+            assignmentAIGradeReport.setFeedbackSubmissions(objectMapper.writeValueAsString(studentSubmissionFeedbacks));
             assignmentAIGradeReport.setStatus(AssignmentAIGradeReportStatus.SUCCESS);
-
             AssignmentAIGradeReport assignmentAIGradeReportCreated = assignmentAIGradeReportRepository.save(assignmentAIGradeReport);
             log.info("AssignmentAIGradeReport saved: {}", assignmentAIGradeReportCreated.getId());
 
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+    }
+
+    private <T> List<List<T>> partition(List<T> list, int size) {
+        List<List<T>> partitions = new ArrayList<>();
+        for (int i = 0; i < list.size(); i += size) {
+            partitions.add(list.subList(i, Math.min(i + size, list.size())));
+        }
+        return partitions;
     }
 
     @Override
@@ -373,8 +406,6 @@ III. INPUT AND OUTPUT:
 
         criterias.forEach(criteria -> {
             formattedData.append("- Criteria: ").append(criteria.getCriteriaName()).append("\n");
-            if (criteria.getCriteriaGrade() != null)
-                formattedData.append(" (Total score: ").append(criteria.getCriteriaGrade()).append("%)\n");
 
             criteria.getScale().forEach(scale -> {
                 formattedData.append("  * Score ").append(scale.getScore()).append("/" + criteria.getScale().size()).append(": ")

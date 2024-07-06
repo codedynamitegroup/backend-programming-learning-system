@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.user.CreateUserResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.rubric_user.QueryAllRubricsByUserIdCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.rubric_user.QueryAllRubricsByUserIdResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.rubric_user.UpdateRubricUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.user.UpdateUserCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.user.UpdateUserResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.user.UserSubmissionAssignmentResponseEntity;
@@ -45,7 +46,7 @@ class RubricUserApplicationServiceImpl implements RubricUserApplicationService {
 
     @Override
     @Transactional
-    public void createReportEssay(CreateRubricUserCommand createRubricUserCommand) {
+    public void createRubricUser(CreateRubricUserCommand createRubricUserCommand) {
         RubricUser rubricUser = rubricUserDataMapper.createRubricUserCommandToRubricUser(createRubricUserCommand);
         User user = findUserById(UUID.fromString(createRubricUserCommand.getUserId()));
         rubricUser.setUser(user);
@@ -54,7 +55,34 @@ class RubricUserApplicationServiceImpl implements RubricUserApplicationService {
         rubricUserRepository.save(rubricUser);
     }
 
+    @Override
+    @Transactional
+    public void updateRubricUser(UpdateRubricUserCommand updateRubricUserCommand) {
+        RubricUser rubricUser = findRubricUserById(UUID.fromString(updateRubricUserCommand.getRubricUserId()));
+        if (updateRubricUserCommand.getRubricContent() != null) {
+            rubricUser.setContent(updateRubricUserCommand.getRubricContent());
+        }
+        if (updateRubricUserCommand.getRubricName() != null) {
+            rubricUser.setName(updateRubricUserCommand.getRubricName());
+        }
+        if (updateRubricUserCommand.getRubricDescription() != null) {
+            rubricUser.setDescription(updateRubricUserCommand.getRubricDescription());
+        }
+        rubricUserRepository.save(rubricUser);
+    }
+
+    @Override
+    @Transactional
+    public void deleteRubricUser(UUID rubricUserId) {
+        RubricUser rubricUser = findRubricUserById(rubricUserId);
+        rubricUserRepository.deleteById(rubricUser.getId().getValue());
+    }
+
     public User findUserById(UUID userId) {
         return userRepository.findById(new UserId(userId)).orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    public RubricUser findRubricUserById(UUID rubricUserId) {
+        return rubricUserRepository.findRubricUser(rubricUserId).orElseThrow(() -> new RuntimeException("Rubric user not found"));
     }
 }

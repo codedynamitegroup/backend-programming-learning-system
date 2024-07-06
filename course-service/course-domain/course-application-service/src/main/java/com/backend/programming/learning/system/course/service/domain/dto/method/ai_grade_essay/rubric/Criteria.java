@@ -7,7 +7,6 @@ import java.util.List;
 @NoArgsConstructor
 public class Criteria {
     private String criteriaName;
-    private Integer criteriaGrade;
     private String criteriaDescription;
     private List<Scale> scale;
 
@@ -19,14 +18,6 @@ public class Criteria {
 
     public void setCriteriaName(String criteriaName) {
         this.criteriaName = criteriaName;
-    }
-
-    public Integer getCriteriaGrade() {
-        return criteriaGrade;
-    }
-
-    public void setCriteriaGrade(Integer criteriaGrade) {
-        this.criteriaGrade = criteriaGrade;
     }
 
     public String getCriteriaDescription() {

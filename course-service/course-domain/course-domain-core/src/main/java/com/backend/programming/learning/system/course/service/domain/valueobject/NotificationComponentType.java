@@ -6,4 +6,5 @@ public enum NotificationComponentType {
     POST,
     CONTEST,
     REMINDER,
+    SYNC
 }

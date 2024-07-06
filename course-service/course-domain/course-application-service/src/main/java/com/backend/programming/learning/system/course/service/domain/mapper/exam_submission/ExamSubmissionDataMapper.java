@@ -99,9 +99,11 @@ public class ExamSubmissionDataMapper {
                 .grade(questionSubmission.getGrade())
                 .content(questionSubmission.getContent())
                 .rightAnswer(questionSubmission.getRightAnswer())
+                .feedback(questionSubmission.getFeedback())
                 .files(questionSubmissionFileListToQuestionSubmissionFileCommandList(questionSubmission.getQuestionSubmissionFiles()))
                 .flag(questionSubmission.getFlag())
                 .answerStatus(questionSubmission.getAnswerStatus())
+                .feedback(questionSubmission.getFeedback())
                 .build();
     }
 
