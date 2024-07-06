@@ -82,7 +82,6 @@ public class UserSocialLoginHelper {
 
                 ResponseLoginAndRefreshUser keycloakLoggedResult = keycloakLogged(socialLoginUserCommand);
 
-                userFound.setLinkedWithGoogle(Boolean.TRUE);
                 userFound.setRefreshToken(keycloakLoggedResult.getRefresh_token());
                 userFound.setLastLogin(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
                 userRepository.save(userFound);
@@ -142,7 +141,6 @@ public class UserSocialLoginHelper {
 
                 ResponseLoginAndRefreshUser keycloakLoggedResult = keycloakLogged(socialLoginUserCommand);
 
-                userFound.setLinkedWithMicrosoft(Boolean.TRUE);
                 userFound.setRefreshToken(keycloakLoggedResult.getRefresh_token());
                 userFound.setLastLogin(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
                 userRepository.save(userFound);
@@ -167,6 +165,75 @@ public class UserSocialLoginHelper {
             throw new AuthDomainException("Provider not supported");
         }
     }
+
+    @Transactional
+    public void linkSSOProvider(LinkSSOUserCommand linkSSOUserCommand) {
+        if (linkSSOUserCommand.getProvider().equals("google")) {
+            SSOGoogleUserProfileResponse userProfileResult = getGoogleUserProfile(linkSSOUserCommand.getAccessToken());
+
+            Optional<User> userResult = userRepository.findByEmail(linkSSOUserCommand.getEmail());
+
+            if (userResult.isEmpty()) {
+                throw new AuthDomainException("User not found");
+            }
+            else if (userResult.get().getLinkedWithGoogle().equals(Boolean.TRUE)) {
+                throw new AuthDomainException("User already linked with google");
+            }
+           else if (userResult.get().getEmail().equals(userProfileResult.getEmail())) {
+                throw new AuthDomainException("User already linked with google");
+            }
+            User userFound = userResult.get();
+            if (userFound.getLinkedWithGoogle().equals(Boolean.FALSE)) {
+                userKeycloakApplicationService.addFederationLink(linkSSOUserCommand.getProvider(),
+                        userFound.getEmail(),
+                        userProfileResult.getSub(),
+                        userProfileResult.getEmail());
+
+                userFound.setLinkedWithGoogle(Boolean.TRUE);
+                userFound.setEmailLinkedGoogle(userProfileResult.getEmail());
+                userFound.setLastLogin(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
+                userRepository.save(userFound);
+
+                return;
+            } else {
+                throw new AuthDomainException("User already linked with google");
+            }
+        } else if (linkSSOUserCommand.getProvider().equals("microsoft")) {
+            SSOMicrosoftUserProfileResponse userProfileResult = getMicrosoftUserProfile(linkSSOUserCommand.getAccessToken());
+
+            Optional<User> userResult = userRepository.findByEmail(linkSSOUserCommand.getEmail());
+
+            if (userResult.isEmpty()) {
+                throw new AuthDomainException("User not found");
+            }
+            else if (userResult.get().getLinkedWithMicrosoft().equals(Boolean.TRUE)) {
+                throw new AuthDomainException("User already linked with google");
+            }
+            else if (userResult.get().getEmail().equals(userProfileResult.getMail())) {
+                throw new AuthDomainException("User already linked with google");
+            }
+            User userFound = userResult.get();
+            if (userFound.getLinkedWithMicrosoft().equals(Boolean.FALSE)) {
+                userKeycloakApplicationService.addFederationLink(linkSSOUserCommand.getProvider(),
+                        userFound.getEmail(),
+                        userProfileResult.getId(),
+                        userProfileResult.getMail());
+
+                userFound.setLastLogin(ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
+                userFound.setLinkedWithMicrosoft(Boolean.TRUE);
+                userFound.setEmailLinkedMicrosoft(userProfileResult.getMail());
+                userRepository.save(userFound);
+
+                return;
+            } else {
+                throw new AuthDomainException("User already linked with google");
+            }
+        } else {
+            log.error("Provider not supported");
+            throw new AuthDomainException("Provider not supported");
+        }
+    }
+
 
     private ResponseLoginAndRefreshUser keycloakLogged(SocialLoginUserCommand socialLoginUserCommand) {
         WebClient keycloakClient = WebClient.create(keycloakConfigData.getUrls());

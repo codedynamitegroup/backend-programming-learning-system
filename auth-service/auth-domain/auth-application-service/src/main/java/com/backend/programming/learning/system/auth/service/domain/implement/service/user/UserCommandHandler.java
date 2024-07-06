@@ -12,6 +12,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.cr
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.forgot_password.*;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LinkSSOUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.SocialLoginUserCommand;
@@ -411,5 +412,9 @@ public class UserCommandHandler {
                 .message("User is unassigned to organization successfully")
                 .userId(userUpdatedEvent.getUser().getId().getValue())
                 .build();
+    }
+
+    public void linkSSO(LinkSSOUserCommand linkSSOUserCommand) {
+        userSocialLoginHelper.linkSSOProvider(linkSSOUserCommand);
     }
 }

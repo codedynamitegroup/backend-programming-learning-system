@@ -103,6 +103,7 @@ public class ExamSubmissionDataMapper {
                 .files(questionSubmissionFileListToQuestionSubmissionFileCommandList(questionSubmission.getQuestionSubmissionFiles()))
                 .flag(questionSubmission.getFlag())
                 .answerStatus(questionSubmission.getAnswerStatus())
+                .feedback(questionSubmission.getFeedback())
                 .build();
     }
 

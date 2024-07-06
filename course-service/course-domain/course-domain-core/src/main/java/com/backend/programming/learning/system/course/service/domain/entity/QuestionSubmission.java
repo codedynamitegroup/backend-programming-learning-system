@@ -34,6 +34,7 @@ public class QuestionSubmission extends AggregateRoot<QuestionSubmissionId> {
         setAnswerStatus(builder.answerStatus);
         setFeedback(builder.feedback);
         setQuestionSubmissionFiles(builder.questionSubmissionFiles);
+        setFeedback(builder.feedback);
     }
 
     public static Builder builder() {

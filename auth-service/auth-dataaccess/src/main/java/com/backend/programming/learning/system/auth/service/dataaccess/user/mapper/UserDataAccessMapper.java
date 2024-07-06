@@ -77,6 +77,9 @@ public class UserDataAccessMapper {
                 .organization(userEntity.getOrganization() != null ? organizationEntityToOrganization(userEntity.getOrganization()) : null)
                 .roles(userEntity.getRoles() == null ? null : userEntity.getRoles().stream().map(roleDataAccessMapper::roleEntityToRole).collect(Collectors.toSet()))
                 .otpExpireAt(userEntity.getOtpExpireAt())
+                .isLinkedWithSystemAccount(userEntity.getIsLinkedWithSystemAccount())
+                .emailLinkedGoogle(userEntity.getEmailLinkedGoogle())
+                .emailLinkedMicrosoft(userEntity.getEmailLinkedMicrosoft())
                 .build();
     }
 
@@ -102,6 +105,9 @@ public class UserDataAccessMapper {
                 .organization(user.getOrganization() != null ? organizationToOrganizationEntity(user.getOrganization()) : null)
                 .roles(user.getRoles() == null ? null : user.getRoles().stream().map(roleDataAccessMapper::roleToRoleEntity).collect(Collectors.toSet()))
                 .otpExpireAt(user.getOtpExpireAt())
+                .isLinkedWithSystemAccount(user.getLinkedWithSystemAccount())
+                .emailLinkedGoogle(user.getEmailLinkedGoogle())
+                .emailLinkedMicrosoft(user.getEmailLinkedMicrosoft())
                 .build();
     }
 }

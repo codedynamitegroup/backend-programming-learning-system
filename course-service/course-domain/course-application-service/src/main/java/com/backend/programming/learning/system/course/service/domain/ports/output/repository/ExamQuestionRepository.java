@@ -17,4 +17,6 @@ public interface ExamQuestionRepository {
     void deleteByExamId(UUID value);
 
     List<ExamQuestion> findByExamId(ExamId examId);
+
+    Float countByExamId(ExamId examId);
 }
