@@ -77,6 +77,7 @@ public class AssignmentDataMapper {
         }
         return QueryAssignmentResponse.builder()
                 .id(assignment.getId().getValue())
+                .courseName(assignment.getCourse().getName())
                 .moodleId(assignment.getAssignmentIdMoodle())
                 .title(assignment.getTitle())
                 .intro(assignment.getIntro())
