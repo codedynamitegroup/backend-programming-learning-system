@@ -148,8 +148,8 @@ public class CalendarEventRequestHelper {
             NotificationResponseEntity queryNotificationResponse = notificationDataMapper
                     .notificationToQueryNotificationResponse(savedNotification);
             log.info("Emitting notification to user: {}", queryNotificationResponse);
-            String room = "user_" + savedNotification.getUserTo().getId().getValue();
-            notificationMessageEmitter.emit(room, "get_message", queryNotificationResponse);
+            String room = "email_" + calendarEvent.getUser().getEmail();
+            notificationMessageEmitter.emit(room, "get_notification", queryNotificationResponse);
             log.info("Notification emitted to user: {}", queryNotificationResponse);
         }
 

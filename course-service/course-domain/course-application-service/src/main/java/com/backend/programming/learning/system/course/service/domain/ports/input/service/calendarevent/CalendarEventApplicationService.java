@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.calendarevent.QueryAllCalendarEventsCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.calendarevent.QueryAllCalendarEventsResponse;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.calendarevent.QueryAllToDoCalendarEventsCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.calendarevent.UpdateCalendarEventCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.calendarevent.UpdateCalendarEventResponse;
 import jakarta.validation.Valid;
@@ -19,6 +20,9 @@ public interface CalendarEventApplicationService {
 
     QueryAllCalendarEventsResponse queryAllCalendarEventsResponse(
             @Valid QueryAllCalendarEventsCommand queryAllCalendarEventsCommand);
+
+    QueryAllCalendarEventsResponse queryAllToDoCalendarEventsResponse(
+            @Valid QueryAllToDoCalendarEventsCommand queryAllToDoCalendarEventsCommand);
 
     DeleteCalendarEventResponse deleteCalendarEventResponse(
             @Valid DeleteCalendarEventCommand deleteCalendarEventCommand);

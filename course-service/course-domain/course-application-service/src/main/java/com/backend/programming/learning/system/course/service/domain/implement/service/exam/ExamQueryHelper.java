@@ -48,6 +48,9 @@ public class ExamQueryHelper {
 
     public Exam findBy(ExamId examId) {
         Exam exam = examRepository.findBy(examId);
+
+
+        exam.setScore(examQuestionRepository.countByExamId(examId));
         log.info("Exam found successfully");
         return exam;
     }

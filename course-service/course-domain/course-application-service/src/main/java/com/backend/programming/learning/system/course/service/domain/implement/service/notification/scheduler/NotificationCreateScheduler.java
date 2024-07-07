@@ -201,8 +201,8 @@ public class NotificationCreateScheduler {
             NotificationResponseEntity queryNotificationResponse = notificationDataMapper
                     .notificationToQueryNotificationResponse(notificationResult);
             log.info("Emitting notification to user: {}", queryNotificationResponse);
-            String room = "user_" + notificationResult.getUserTo().getId().getValue();
-            notificationMessageEmitter.emit(room, "get_message", queryNotificationResponse);
+            String room = "email_" + notificationResult.getUserTo().getEmail();
+            notificationMessageEmitter.emit(room, "get_notification", queryNotificationResponse);
             log.info("Notification emitted to user: {}", queryNotificationResponse);
         }
         log.info("End emitting notifications at {}", ZonedDateTime.now(ZoneId.of("UTC")));

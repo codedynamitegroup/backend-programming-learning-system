@@ -42,6 +42,7 @@ public class QuestionSubmissionDataAccessMapper {
                 .numFile(questionSubmission.getNumFile())
                 .answerStatus(questionSubmission.getAnswerStatus())
                 .flag(questionSubmission.getFlag())
+                .feedback(questionSubmission.getFeedback())
                 .build();
 
         List<QuestionSubmissionFileEntity> questionSubmissionFiles = questionSubmissionFileListToQuestionSubmissionFileEntityList(questionSubmission.getQuestionSubmissionFiles(), questionSubmissionEntity);
@@ -71,6 +72,7 @@ public class QuestionSubmissionDataAccessMapper {
         ExamSubmission examSubmission = examSubmissionDataAccessMapper.examSubmissionEntityToExamSubmission(questionSubmissionEntity.getExamSubmission());
         Question question = questionDataAccessMapper.questionEntityToQuestion(questionSubmissionEntity.getQuestion());
         User user = userDataAccessMapper.userEntityToUser(questionSubmissionEntity.getUser());
+
         QuestionSubmission response = QuestionSubmission.builder()
                 .user(user)
                 .question(question)
@@ -79,10 +81,12 @@ public class QuestionSubmissionDataAccessMapper {
                 .grade(questionSubmissionEntity.getGrade())
                 .content(questionSubmissionEntity.getContent())
                 .rightAnswer(questionSubmissionEntity.getRightAnswer())
+                .feedback(questionSubmissionEntity.getFeedback())
                 .numFile(questionSubmissionEntity.getNumFile())
                 .answerStatus(questionSubmissionEntity.getAnswerStatus())
                 .flag(questionSubmissionEntity.getFlag())
                 .questionSubmissionFiles(questionSubmissionFileEntityListToQuestionSubmissionFileList(questionSubmissionEntity.getQuestionSubmissionFiles()))
+                .feedback(questionSubmissionEntity.getFeedback())
                 .build();
 
         response.setId(new QuestionSubmissionId(questionSubmissionEntity.getId()));

@@ -42,9 +42,9 @@ public class NotificationCreateHelper {
     @Transactional
     public Notification persistNotification(CreateNotificationCommand createNotificationCommand) {
         if(createNotificationCommand.getUserIdFrom() != null) {
-            checkUser(createNotificationCommand.getUserIdFrom());
+            getUser(createNotificationCommand.getUserIdFrom());
         }
-        checkUser(createNotificationCommand.getUserIdTo());
+        User user = getUser(createNotificationCommand.getUserIdTo());
 
         Notification notification = notificationDataMapper.
                 createNotificationCommandToNotification(createNotificationCommand);
@@ -56,19 +56,20 @@ public class NotificationCreateHelper {
         NotificationResponseEntity queryNotificationResponse =
                 notificationDataMapper.notificationToQueryNotificationResponse(notificationResult);
         log.info("Emitting notification to user: {}", queryNotificationResponse);
-        String room = "user_" + createNotificationCommand.getUserIdTo();
-        notificationMessageEmitter.emit(room, "get_message", queryNotificationResponse);
+        String room = "email_" + user.getEmail();
+        notificationMessageEmitter.emit(room, "get_notification", queryNotificationResponse);
         log.info("Notification emitted to user: {}", queryNotificationResponse);
 
         return notificationResult;
     }
 
-    private void checkUser(UUID userId) {
+    private User getUser(UUID userId) {
         Optional<User> user = userRepository.findUser(userId);
         if (user.isEmpty()) {
             log.warn("User with id: {} not found", userId);
             throw new UserNotFoundException("Could not find user with id: " + userId);
         }
+        return user.get();
     }
 
     private Notification saveNotification(Notification notification) {

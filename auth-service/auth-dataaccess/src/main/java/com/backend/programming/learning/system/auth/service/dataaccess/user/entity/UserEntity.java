@@ -33,6 +33,9 @@ public class UserEntity {
     private String refreshToken;
     private Boolean isLinkedWithGoogle;
     private Boolean isLinkedWithMicrosoft;
+    private Boolean isLinkedWithSystemAccount;
+    private String emailLinkedGoogle;
+    private String emailLinkedMicrosoft;
     private ZonedDateTime lastLogin;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;

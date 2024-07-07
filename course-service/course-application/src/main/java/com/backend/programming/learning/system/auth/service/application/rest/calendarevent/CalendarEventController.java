@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.calendarevent.DeleteCalendarEventResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.calendarevent.QueryAllCalendarEventsCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.calendarevent.QueryAllCalendarEventsResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.calendarevent.QueryAllToDoCalendarEventsCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.calendarevent.UpdateCalendarEventCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.calendarevent.UpdateCalendarEventResponse;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.calendarevent.CalendarEventApplicationService;
@@ -103,6 +104,27 @@ public class CalendarEventController {
                         .email(email)
                         .build());
         log.info("Returning all calendar events: {}", queryAllCalendarEventsResponse);
+        return ResponseEntity.ok(queryAllCalendarEventsResponse);
+    }
+
+    @GetMapping("/query/to-do-calendar-events")
+    @Operation(summary = "Get all todo calendar events.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllCalendarEventsResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllCalendarEventsResponse> getAllToDoCalendarEvents(
+            @RequestParam(required = true) UUID courseId
+    ) {
+        QueryAllCalendarEventsResponse queryAllCalendarEventsResponse =
+                calendarEventApplicationService.queryAllToDoCalendarEventsResponse(QueryAllToDoCalendarEventsCommand
+                        .builder()
+                        .courseId(courseId)
+                        .build());
+        log.info("Returning all my to do calendar events: {}", queryAllCalendarEventsResponse);
         return ResponseEntity.ok(queryAllCalendarEventsResponse);
     }
 

@@ -306,12 +306,13 @@ public class CertificateCourseQueryHelper {
     public List<CertificateCourse> queryMostEnrolledCertificateCourses(
             String email
     ) {
+        log.info("Querying most enrolled certificate courses");
         Optional<User> userOptional = email != null ? userRepository.findByEmail(email): Optional.empty();
 
-        List<CertificateCourse> certificateCourseList;
+        List<CertificateCourse> certificateCourseList = new ArrayList<>();
         if (userOptional.isEmpty()) {
-            certificateCourseList = certificateCourseRepository
-                            .findMostEnrolledCertificateCourses();
+            certificateCourseList.addAll(certificateCourseRepository
+                            .findMostEnrolledCertificateCourses());
         } else {
             // Get all topic ids of registered courses by user
             List<Topic> topicIds = topicRepository
@@ -322,19 +323,31 @@ public class CertificateCourseQueryHelper {
             for (Topic topic : topicIds) {
                 topicIdsList.add(topic.getId().getValue());
             }
-            certificateCourseList = certificateCourseRepository
+            List<CertificateCourse> certificateCourseList2 = certificateCourseRepository
                     .findMostEnrolledCertificateCoursesByTopicIds(topicIdsList);
-            if (certificateCourseList.size() < 5) {
-                List<CertificateCourse> all = certificateCourseRepository
-                        .findMostEnrolledCertificateCourses();
-                for (CertificateCourse certificateCourse : all) {
-                    if (!certificateCourseList.contains(certificateCourse)) {
+            List<CertificateCourse> certificateCourseList3 = certificateCourseRepository
+                    .findMostEnrolledCertificateCourses();
+            if (certificateCourseList2.size() >= 5) {
+                certificateCourseList.addAll(certificateCourseList2);
+            } else {
+                certificateCourseList.addAll(certificateCourseList2);
+                for (CertificateCourse certificateCourse : certificateCourseList3) {
+                    if (certificateCourseList.size() >= 5) {
+                        break;
+                    }
+                    boolean isExist = false;
+                    for (CertificateCourse course : certificateCourseList) {
+                        if (course.getId().getValue().toString().equals(certificateCourse.getId().getValue().toString())) {
+                            isExist = true;
+                            break;
+                        }
+                    }
+                    if (!isExist) {
                         certificateCourseList.add(certificateCourse);
                     }
                 }
             }
         }
-
 
         for (CertificateCourse certificateCourse : certificateCourseList) {
             if (userOptional.isPresent()) {
