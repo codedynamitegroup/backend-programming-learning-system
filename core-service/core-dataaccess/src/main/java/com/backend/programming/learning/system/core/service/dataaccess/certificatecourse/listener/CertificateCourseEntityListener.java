@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.listener;
 
 import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse.CertificateCourseRedisService;
+import com.backend.programming.learning.system.core.service.domain.ports.output.redis.CertificateCourseRedisService;
 import jakarta.persistence.*;
 import lombok.extern.slf4j.Slf4j;
 

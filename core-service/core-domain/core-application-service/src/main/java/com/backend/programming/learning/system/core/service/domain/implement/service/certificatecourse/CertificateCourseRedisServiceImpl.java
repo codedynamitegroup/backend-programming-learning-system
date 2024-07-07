@@ -1,14 +1,12 @@
 package com.backend.programming.learning.system.core.service.domain.implement.service.certificatecourse;
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.*;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsResponse;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse.CertificateCourseRedisService;
+import com.backend.programming.learning.system.core.service.domain.ports.output.redis.CertificateCourseRedisService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.Objects;

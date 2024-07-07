@@ -1,8 +1,7 @@
 package com.backend.programming.learning.system.core.service.dataaccess.chapter_resource.listener;
 
-import com.backend.programming.learning.system.core.service.dataaccess.chapter.entity.ChapterEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResponseEntity;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.chapter.ChapterRedisService;
+import com.backend.programming.learning.system.core.service.domain.ports.output.redis.ChapterRedisService;
 import jakarta.persistence.*;
 import lombok.extern.slf4j.Slf4j;
 
