@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.tag;
 
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.CodeQuestionEntity;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.listener.CodeQuestionEntityListener;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.listener.tag.CodeQuestionTagEntityListener;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.shared_solution.entity.SharedSolutionEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.shared_solution.entity.tag.SharedSolutionTagEntityId;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.tag.entity.TagEntity;
@@ -17,6 +19,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @Table(name="tag_code_question")
 @IdClass(CodeQuestionTagEntityId.class)
+@EntityListeners(CodeQuestionTagEntityListener.class)
 public class CodeQuestionTagEntity {
     @Id
     @ManyToOne
