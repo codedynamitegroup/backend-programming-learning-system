@@ -1,8 +1,6 @@
-package com.backend.programming.learning.system.core.service.domain.ports.input.service.chapter;
+package com.backend.programming.learning.system.core.service.domain.ports.output.redis;
 
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.util.UUID;
 

@@ -1,9 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.implement.service.contest;
 
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsResponse;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.chapter.ChapterRedisService;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest.ContestRedisService;
+import com.backend.programming.learning.system.core.service.domain.ports.output.redis.ContestRedisService;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestStartTimeFilter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

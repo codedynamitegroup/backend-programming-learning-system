@@ -17,7 +17,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_question.UpdateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.CodeQuestionApplicationService;
-import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.CodeQuestionRedisService;
+import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.redis.CodeQuestionRedisService;
 import com.backend.programming.learning.system.domain.valueobject.QueryOrderBy;
 import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
 import io.swagger.v3.oas.annotations.Operation;

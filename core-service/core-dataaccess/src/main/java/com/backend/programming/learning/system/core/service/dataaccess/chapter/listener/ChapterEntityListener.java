@@ -1,9 +1,7 @@
 package com.backend.programming.learning.system.core.service.dataaccess.chapter.listener;
 
-import com.backend.programming.learning.system.core.service.dataaccess.certificatecourse.entity.CertificateCourseEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.chapter.entity.ChapterEntity;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse.CertificateCourseRedisService;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.chapter.ChapterRedisService;
+import com.backend.programming.learning.system.core.service.domain.ports.output.redis.ChapterRedisService;
 import jakarta.persistence.*;
 import lombok.extern.slf4j.Slf4j;
 

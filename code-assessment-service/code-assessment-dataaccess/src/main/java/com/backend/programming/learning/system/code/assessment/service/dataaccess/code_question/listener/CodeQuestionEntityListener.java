@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.listener;
 
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.CodeQuestionEntity;
-import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.CodeQuestionRedisService;
+import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.redis.CodeQuestionRedisService;
 import jakarta.persistence.*;
 import lombok.extern.slf4j.Slf4j;
 

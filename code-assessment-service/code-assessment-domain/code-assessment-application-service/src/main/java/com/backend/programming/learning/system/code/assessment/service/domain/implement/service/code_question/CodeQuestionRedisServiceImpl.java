@@ -1,7 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.implement.service.code_question;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsResponse;
-import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service.CodeQuestionRedisService;
+import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.redis.CodeQuestionRedisService;
 import com.backend.programming.learning.system.domain.valueobject.QueryOrderBy;
 import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -11,9 +11,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 @Service
 @Validated

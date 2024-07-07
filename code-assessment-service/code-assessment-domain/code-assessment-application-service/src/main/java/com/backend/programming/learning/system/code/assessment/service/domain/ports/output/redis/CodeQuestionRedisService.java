@@ -1,12 +1,8 @@
-package com.backend.programming.learning.system.code.assessment.service.domain.ports.input.service;
+package com.backend.programming.learning.system.code.assessment.service.domain.ports.output.redis;
 
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.code_question.GetCodeQuestionsResponse;
 import com.backend.programming.learning.system.domain.valueobject.QueryOrderBy;
 import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
-import java.util.UUID;
 
 public interface CodeQuestionRedisService {
     void clearAllCodeQuestions();

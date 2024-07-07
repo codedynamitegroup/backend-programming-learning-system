@@ -11,7 +11,7 @@ import com.backend.programming.learning.system.core.service.domain.exception.Org
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.question.QtypeCodeQuestionNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.contest.ContestDataMapper;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest.ContestRedisService;
+import com.backend.programming.learning.system.core.service.domain.ports.output.redis.ContestRedisService;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestStartTimeFilter;

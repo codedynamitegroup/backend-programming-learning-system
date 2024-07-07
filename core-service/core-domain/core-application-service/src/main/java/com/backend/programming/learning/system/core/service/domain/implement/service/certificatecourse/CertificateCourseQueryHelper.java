@@ -13,7 +13,7 @@ import com.backend.programming.learning.system.core.service.domain.exception.Cer
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.certificatecourse.CertificateCourseDataMapper;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse.CertificateCourseRedisService;
+import com.backend.programming.learning.system.core.service.domain.ports.output.redis.CertificateCourseRedisService;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.IsRegisteredFilter;
