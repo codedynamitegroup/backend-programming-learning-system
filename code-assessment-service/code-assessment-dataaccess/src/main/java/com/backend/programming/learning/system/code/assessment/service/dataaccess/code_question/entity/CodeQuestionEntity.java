@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity;
 
 
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.listener.CodeQuestionEntityListener;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
 import lombok.*;
@@ -20,6 +21,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldNameConstants
+@EntityListeners(CodeQuestionEntityListener.class)
 public class CodeQuestionEntity {
     @Id
     private UUID id;
