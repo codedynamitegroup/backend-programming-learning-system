@@ -21,6 +21,7 @@ public class CodeQuestionAdminDto {
     String inputFormat;
     String outputFormat;
     String constraints;
+    Float maxGrade;
     Boolean isPublic;
     Boolean allowImport;
     QuestionDifficulty difficulty;

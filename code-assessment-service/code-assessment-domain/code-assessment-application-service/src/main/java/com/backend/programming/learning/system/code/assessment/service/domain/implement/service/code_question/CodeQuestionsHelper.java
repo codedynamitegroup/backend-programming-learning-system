@@ -169,12 +169,12 @@ public class CodeQuestionsHelper {
 
     @Transactional
     public CodeQuestionsUpdatedEvent updateCodeQuestion(UpdateCodeQuestionCommand command) {
-        User user = validateHelper.validateUser(command.getUserId());
+        User user = validateHelper.validateUserByEmail(command.getEmail());
         CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(command.getCodeQuestionId());
-        if(!user.getId().equals(codeQuestion.getUserId()))
-            throw new CodeAssessmentDomainException("User " + user.getId().getValue() + " does not possess code question " + codeQuestion.getId().getValue());
+//        if(!user.getId().equals(codeQuestion.getUserId()))
+//            throw new CodeAssessmentDomainException("User " + user.getId().getValue() + " does not possess code question " + codeQuestion.getId().getValue());
 
-        CodeQuestion codeQuestionUpdate = codeQuestionDataMaper.updateCodeQuestionCommandToCodeQuestion(command);
+        CodeQuestion codeQuestionUpdate = codeQuestionDataMaper.updateCodeQuestionCommandToCodeQuestion(command, user);
         genericHelper.mapRepositoryAttributeToUpdateAttribute(codeQuestion, codeQuestionUpdate, CodeQuestion.class);
         CodeQuestionsUpdatedEvent event = codeAssessmentDomainService.updateCodeQuestion(codeQuestion);
         codeQuestionRepository.save(codeQuestion);
