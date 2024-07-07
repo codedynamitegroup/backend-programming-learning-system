@@ -23,6 +23,8 @@ public class QueryAssignmentResponse {
     @NotNull
     private final UUID id;
 
+    private final String courseName;
+
     private final Integer moodleId;
 
     @NotNull
