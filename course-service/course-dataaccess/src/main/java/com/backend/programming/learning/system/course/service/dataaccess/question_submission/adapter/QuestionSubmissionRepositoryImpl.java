@@ -88,4 +88,11 @@ public class QuestionSubmissionRepositoryImpl implements QuestionSubmissionRepos
                 .map(questionSubmissionDataAccessMapper::questionSubmissionEntityToQuestionSubmission)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public Optional<QuestionSubmission> findById(UUID value) {
+        return questionSubmissionJpaRepository
+                .findById(value)
+                .map(questionSubmissionDataAccessMapper::questionSubmissionEntityToQuestionSubmission);
+    }
 }
