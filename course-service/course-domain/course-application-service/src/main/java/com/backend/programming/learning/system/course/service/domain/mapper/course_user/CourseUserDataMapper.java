@@ -68,6 +68,7 @@ public class CourseUserDataMapper {
                         .firstName(courseUser.getUser().getFirstName())
                         .lastName(courseUser.getUser().getLastName())
                         .email(courseUser.getUser().getEmail())
+                        .roleMoodleId(courseUser.getRoleMoodle().getId().getValue())
                         .role(courseUser.getRoleMoodle().getName())
                         .build())
                 .toList();

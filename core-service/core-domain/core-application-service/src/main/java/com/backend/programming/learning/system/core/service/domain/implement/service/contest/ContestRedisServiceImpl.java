@@ -1,9 +1,7 @@
 package com.backend.programming.learning.system.core.service.domain.implement.service.contest;
 
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.contest.QueryAllContestsResponse;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.chapter.ChapterRedisService;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest.ContestRedisService;
+import com.backend.programming.learning.system.core.service.domain.ports.output.redis.ContestRedisService;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestStartTimeFilter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -63,12 +61,15 @@ class ContestRedisServiceImpl implements ContestRedisService {
                 isAdmin,
                 orgId,
                 isOrgAdmin);
-        log.info("key: {}", key);
-        String json = (String) redisTemplate.opsForValue().get(key);
         try {
-            return json != null ? objectMapper.readValue(json, QueryAllContestsResponse.class) : null;
-        } catch (JsonProcessingException e) {
-            log.error("Error while getting chapters from redis", e);
+            String json = (String) redisTemplate.opsForValue().get(key);
+            try {
+                return json != null ? objectMapper.readValue(json, QueryAllContestsResponse.class) : null;
+            } catch (JsonProcessingException e) {
+                log.error("Error while getting chapters from redis", e);
+            }
+        } catch (Exception e) {
+            log.error("Error while getting contests from redis", e);
         }
         return null;
     }
@@ -92,7 +93,7 @@ class ContestRedisServiceImpl implements ContestRedisService {
         try {
             String json = objectMapper.writeValueAsString(queryAllContestsResponse);
             redisTemplate.opsForValue().set(key, json);
-        } catch (JsonProcessingException e) {
+        } catch (Exception e) {
             log.error("Error while saving contests to redis", e);
         }
     }

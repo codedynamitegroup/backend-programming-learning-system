@@ -1,15 +1,12 @@
 package com.backend.programming.learning.system.core.service.domain.implement.service.chapter;
 
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse.CertificateCourseRedisService;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.chapter.ChapterRedisService;
+import com.backend.programming.learning.system.core.service.domain.ports.output.redis.ChapterRedisService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.Objects;
@@ -46,10 +43,14 @@ class ChapterRedisServiceImpl implements ChapterRedisService {
     @Override
     public QueryAllChaptersResponse getAllChapters(UUID certificateCourseId) {
         String key = getKeyFrom(certificateCourseId.toString());
-        String json = (String) redisTemplate.opsForValue().get(key);
         try {
-            return json != null ? objectMapper.readValue(json, QueryAllChaptersResponse.class) : null;
-        } catch (JsonProcessingException e) {
+            String json = (String) redisTemplate.opsForValue().get(key);
+            try {
+                return json != null ? objectMapper.readValue(json, QueryAllChaptersResponse.class) : null;
+            } catch (JsonProcessingException e) {
+                log.error("Error while getting chapters from redis", e);
+            }
+        } catch (Exception e) {
             log.error("Error while getting chapters from redis", e);
         }
         return null;
@@ -61,7 +62,7 @@ class ChapterRedisServiceImpl implements ChapterRedisService {
         try {
             String json = objectMapper.writeValueAsString(queryAllChaptersResponse);
             redisTemplate.opsForValue().set(key, json);
-        } catch (JsonProcessingException e) {
+        } catch (Exception e) {
             log.error("Error while saving chapters to redis", e);
         }
     }

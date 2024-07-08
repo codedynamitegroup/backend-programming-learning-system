@@ -1,9 +1,7 @@
 package com.backend.programming.learning.system.core.service.dataaccess.contest.listener;
 
-import com.backend.programming.learning.system.core.service.dataaccess.chapter_resource_user.entity.ChapterResourceUserEntity;
 import com.backend.programming.learning.system.core.service.dataaccess.contest.entity.ContestEntity;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.chapter.ChapterRedisService;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.contest.ContestRedisService;
+import com.backend.programming.learning.system.core.service.domain.ports.output.redis.ContestRedisService;
 import jakarta.persistence.*;
 import lombok.extern.slf4j.Slf4j;
 

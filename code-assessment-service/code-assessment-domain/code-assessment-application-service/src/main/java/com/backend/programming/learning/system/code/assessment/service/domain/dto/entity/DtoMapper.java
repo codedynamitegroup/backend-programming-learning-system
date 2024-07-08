@@ -92,6 +92,7 @@ public class DtoMapper {
                 .done(codeQuestion.getSolved())
                 .id(codeQuestion.getId().getValue())
                 .difficulty(codeQuestion.getDifficulty())
+                .allowImport(codeQuestion.getAllowImport())
                 .isPublic(codeQuestion.getPublic())
                 .build();
     }
@@ -140,6 +141,7 @@ public class DtoMapper {
                 .inputFormat(codeQuestion.getInputFormat())
                 .outputFormat(codeQuestion.getOutputFormat())
                 .constraints(codeQuestion.getConstraints())
+                .maxGrade(codeQuestion.getMaxGrade())
                 .isPublic(codeQuestion.getIsPublic())
                 .allowImport(codeQuestion.getAllowImport())
                 .difficulty(codeQuestion.getDifficulty())

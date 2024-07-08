@@ -14,10 +14,9 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.up
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.certificatecourse.UpdateCertificateCourseResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.certificatecourse.CertificateCourseResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse.CertificateCourseApplicationService;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse.CertificateCourseRedisService;
+import com.backend.programming.learning.system.core.service.domain.ports.output.redis.CertificateCourseRedisService;
 import com.backend.programming.learning.system.core.service.domain.ports.input.service.certificatecourse_user.CertificateCourseUserApplicationService;
 import com.backend.programming.learning.system.core.service.domain.valueobject.IsRegisteredFilter;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -40,14 +39,11 @@ import java.util.UUID;
 public class CertificateCourseController {
     private final CertificateCourseApplicationService certificateCourseApplicationService;
     private final CertificateCourseUserApplicationService certificateCourseUserApplicationService;
-    private final CertificateCourseRedisService certificateCourseRedisService;
 
     public CertificateCourseController(CertificateCourseApplicationService certificateCourseApplicationService,
-                                       CertificateCourseUserApplicationService certificateCourseUserApplicationService,
-                                       CertificateCourseRedisService certificateCourseRedisService) {
+                                       CertificateCourseUserApplicationService certificateCourseUserApplicationService) {
         this.certificateCourseApplicationService = certificateCourseApplicationService;
         this.certificateCourseUserApplicationService = certificateCourseUserApplicationService;
-        this.certificateCourseRedisService = certificateCourseRedisService;
     }
 
     @PostMapping("/create")
