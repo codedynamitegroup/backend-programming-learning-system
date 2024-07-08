@@ -130,7 +130,7 @@ public class CodeQuestionController {
         return ResponseEntity.ok(response);
     }
 
-    //get detail public code question, khong phan biet public private
+    //get detail code question, khong phan biet public private
     @GetMapping("/detail")
     public ResponseEntity<List<CodeQuestionDto>> getDetailCodeQuestion(
             @RequestParam(value = "codeQuestionIds") List<UUID> codeQuestionIds,
@@ -203,9 +203,13 @@ public class CodeQuestionController {
     @PutMapping("/{code-question-id}")
     public ResponseEntity updateCodeQuestion(
             @PathVariable(value = "code-question-id") UUID codeQuestionId,
+            @RequestHeader(value = "Access-Token") String accessToken,
             @RequestBody UpdateCodeQuestionCommand command)
     {
+        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
+
         command.setCodeQuestionId(codeQuestionId);
+        command.setEmail(email);
         codeQuestionApplicationService.updateCodeQuestion(command);
         return  ResponseEntity.noContent().build();
     }
