@@ -74,6 +74,30 @@ public class CourseGlobalExceptionHandler extends GlobalExceptionHandler {
     }
 
     @ResponseBody
+    @ExceptionHandler(value = {QuestionSubmissionFileNotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorDTO handleException(QuestionSubmissionFileNotFoundException questionSubmissionFileNotFoundException) {
+        log.error(questionSubmissionFileNotFoundException.getMessage(), questionSubmissionFileNotFoundException);
+        return ErrorDTO.builder()
+                .code(HttpStatus.NOT_FOUND.value())
+                .status(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .message(questionSubmissionFileNotFoundException.getMessage())
+                .build();
+    }
+
+    @ResponseBody
+    @ExceptionHandler(value = {NotAuthorizedException.class})
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ErrorDTO handleException(NotAuthorizedException notAuthorizedException) {
+        log.error(notAuthorizedException.getMessage(), notAuthorizedException);
+        return ErrorDTO.builder()
+                .code(HttpStatus.UNAUTHORIZED.value())
+                .status(HttpStatus.UNAUTHORIZED.getReasonPhrase())
+                .message(notAuthorizedException.getMessage())
+                .build();
+    }
+
+    @ResponseBody
     @ExceptionHandler(value = {ExamNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorDTO handleException(ExamNotFoundException examNotFoundException) {
