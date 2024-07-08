@@ -45,10 +45,14 @@ class CertificateCourseRedisServiceImpl implements CertificateCourseRedisService
             String courseName,
             UUID filterTopicId) {
         String key = getKeyFrom(courseName, filterTopicId);
-        String json = (String) redisTemplate.opsForValue().get(key);
         try {
-            return json != null ? objectMapper.readValue(json, QueryAllCertificateCoursesResponse.class) : null;
-        } catch (JsonProcessingException e) {
+            String json = (String) redisTemplate.opsForValue().get(key);
+            try {
+                return json != null ? objectMapper.readValue(json, QueryAllCertificateCoursesResponse.class) : null;
+            } catch (JsonProcessingException e) {
+                log.error("Error while getting chapters from redis", e);
+            }
+        } catch (Exception e) {
             log.error("Error while getting chapters from redis", e);
         }
         return null;
@@ -62,9 +66,8 @@ class CertificateCourseRedisServiceImpl implements CertificateCourseRedisService
         String key = getKeyFrom(courseName, filterTopicId);
         try {
             String json = objectMapper.writeValueAsString(queryAllCertificateCoursesResponse);
-//            Object test = objectMapper.readValue(json, QueryAllCertificateCoursesResponse.class);
             redisTemplate.opsForValue().set(key, json);
-        } catch (JsonProcessingException e) {
+        } catch (Exception e) {
             log.error("Error while saving certificate courses to redis", e);
         }
     }

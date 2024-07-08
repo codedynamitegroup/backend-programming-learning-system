@@ -61,12 +61,15 @@ class ContestRedisServiceImpl implements ContestRedisService {
                 isAdmin,
                 orgId,
                 isOrgAdmin);
-        log.info("key: {}", key);
-        String json = (String) redisTemplate.opsForValue().get(key);
         try {
-            return json != null ? objectMapper.readValue(json, QueryAllContestsResponse.class) : null;
-        } catch (JsonProcessingException e) {
-            log.error("Error while getting chapters from redis", e);
+            String json = (String) redisTemplate.opsForValue().get(key);
+            try {
+                return json != null ? objectMapper.readValue(json, QueryAllContestsResponse.class) : null;
+            } catch (JsonProcessingException e) {
+                log.error("Error while getting chapters from redis", e);
+            }
+        } catch (Exception e) {
+            log.error("Error while getting contests from redis", e);
         }
         return null;
     }
@@ -90,7 +93,7 @@ class ContestRedisServiceImpl implements ContestRedisService {
         try {
             String json = objectMapper.writeValueAsString(queryAllContestsResponse);
             redisTemplate.opsForValue().set(key, json);
-        } catch (JsonProcessingException e) {
+        } catch (Exception e) {
             log.error("Error while saving contests to redis", e);
         }
     }

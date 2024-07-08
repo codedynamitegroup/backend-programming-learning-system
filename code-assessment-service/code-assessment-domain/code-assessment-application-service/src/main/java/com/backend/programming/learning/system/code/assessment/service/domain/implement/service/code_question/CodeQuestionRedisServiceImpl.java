@@ -55,10 +55,14 @@ class CodeQuestionRedisServiceImpl implements CodeQuestionRedisService {
             QueryOrderBy orderBy,
             QuestionDifficulty difficulty) {
         String key = getKeyFrom(pageNo, pageSize, orderBy, difficulty);
-        String json = (String) redisTemplate.opsForValue().get(key);
         try {
-            return json != null ? objectMapper.readValue(json, GetCodeQuestionsResponse.class) : null;
-        } catch (JsonProcessingException e) {
+            String json = (String) redisTemplate.opsForValue().get(key);
+            try {
+                return json != null ? objectMapper.readValue(json, GetCodeQuestionsResponse.class) : null;
+            } catch (JsonProcessingException e) {
+                log.error("Error while getting code questions from redis", e);
+            }
+        } catch (Exception e) {
             log.error("Error while getting code questions from redis", e);
         }
         return null;
@@ -75,7 +79,7 @@ class CodeQuestionRedisServiceImpl implements CodeQuestionRedisService {
         try {
             String json = objectMapper.writeValueAsString(getCodeQuestionsResponse);
             redisTemplate.opsForValue().set(key, json);
-        } catch (JsonProcessingException e) {
+        } catch (Exception e) {
             log.error("Error while saving code questions to redis", e);
         }
     }

@@ -39,14 +39,11 @@ import java.util.UUID;
 public class CertificateCourseController {
     private final CertificateCourseApplicationService certificateCourseApplicationService;
     private final CertificateCourseUserApplicationService certificateCourseUserApplicationService;
-    private final CertificateCourseRedisService certificateCourseRedisService;
 
     public CertificateCourseController(CertificateCourseApplicationService certificateCourseApplicationService,
-                                       CertificateCourseUserApplicationService certificateCourseUserApplicationService,
-                                       CertificateCourseRedisService certificateCourseRedisService) {
+                                       CertificateCourseUserApplicationService certificateCourseUserApplicationService) {
         this.certificateCourseApplicationService = certificateCourseApplicationService;
         this.certificateCourseUserApplicationService = certificateCourseUserApplicationService;
-        this.certificateCourseRedisService = certificateCourseRedisService;
     }
 
     @PostMapping("/create")
