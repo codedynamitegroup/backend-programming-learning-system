@@ -92,6 +92,7 @@ public class DtoMapper {
                 .done(codeQuestion.getSolved())
                 .id(codeQuestion.getId().getValue())
                 .difficulty(codeQuestion.getDifficulty())
+                .allowImport(codeQuestion.getAllowImport())
                 .isPublic(codeQuestion.getPublic())
                 .build();
     }

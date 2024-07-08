@@ -36,6 +36,8 @@ public class CodeQuestionDto {
     Boolean done;
     @JsonProperty("isPublic")
     Boolean isPublic;
+    @JsonProperty("allowImport")
+    Boolean allowImport;
     @JsonProperty("numOfPeopleAttend")
     Integer numOfPeopleAttend;
     @JsonProperty("difficulty")

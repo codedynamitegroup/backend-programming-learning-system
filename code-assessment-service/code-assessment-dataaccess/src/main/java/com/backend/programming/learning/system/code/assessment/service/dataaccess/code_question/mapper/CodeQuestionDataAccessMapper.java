@@ -68,6 +68,7 @@ public class CodeQuestionDataAccessMapper {
                 .copyState(codeQuestionEntity.getCopyState())
                 .maxGrade(codeQuestionEntity.getMaxGrade())
                 .isPublic(codeQuestionEntity.getIsPublic())
+                .allowImport(codeQuestionEntity.getAllowImport())
                 .difficulty(codeQuestionEntity.getDifficulty())
                 .createdAt(codeQuestionEntity.getCreatedAt())
                 .failureMessages(codeQuestionEntity.getFailureMessages()==null || codeQuestionEntity.getFailureMessages().isEmpty() ? new ArrayList<>() :
