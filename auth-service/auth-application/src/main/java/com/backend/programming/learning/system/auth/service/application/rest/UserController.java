@@ -13,6 +13,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.cr
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.forgot_password.*;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LinkSSOUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.SocialLoginUserCommand;
@@ -116,6 +117,20 @@ public class UserController {
                         .accessToken(socialLoginUserCommand.getAccessToken())
                         .build());
         return ResponseEntity.status(HttpStatus.OK).body(loginUserResponse);
+    }
+
+    @PostMapping("/link-sso")
+    @Operation(summary = "Link with SSO.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = LoginUserResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<String> linkSSO(@RequestBody LinkSSOUserCommand linkSSOUserCommand) {
+        userApplicationService.linkSSO(linkSSOUserCommand);
+        return ResponseEntity.status(HttpStatus.OK).body("Link SSO success");
     }
 
     @PostMapping("/refresh-token")

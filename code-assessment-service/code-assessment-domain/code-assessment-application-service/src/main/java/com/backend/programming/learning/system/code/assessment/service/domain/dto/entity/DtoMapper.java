@@ -140,6 +140,7 @@ public class DtoMapper {
                 .inputFormat(codeQuestion.getInputFormat())
                 .outputFormat(codeQuestion.getOutputFormat())
                 .constraints(codeQuestion.getConstraints())
+                .maxGrade(codeQuestion.getMaxGrade())
                 .isPublic(codeQuestion.getIsPublic())
                 .allowImport(codeQuestion.getAllowImport())
                 .difficulty(codeQuestion.getDifficulty())

@@ -1,17 +1,15 @@
 package com.backend.programming.learning.system.core.service.domain.implement.service.chapter;
 
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.certificatecourse.QueryAllCertificateCoursesResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.chapter.QueryAllChaptersResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.chapter.ChapterResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.exception.ChapterNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.chapter.ChapterDataMapper;
-import com.backend.programming.learning.system.core.service.domain.ports.input.service.chapter.ChapterRedisService;
+import com.backend.programming.learning.system.core.service.domain.ports.output.redis.ChapterRedisService;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.CertificateCourseId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ResourceType;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

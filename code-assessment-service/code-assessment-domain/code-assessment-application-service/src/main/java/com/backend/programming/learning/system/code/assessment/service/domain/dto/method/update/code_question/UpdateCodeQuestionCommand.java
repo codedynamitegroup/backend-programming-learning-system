@@ -20,8 +20,11 @@ public class UpdateCodeQuestionCommand {
     @JsonIgnore
     private UUID codeQuestionId;
 
-    @NotNull(message = "userId must not be null")
-    private UUID userId;
+    @NotNull(message = "email must not be null")
+    @JsonIgnore
+    @Setter
+    private String email;
+
     private final String name;
     private final String problemStatement;
     private final String inputFormat;

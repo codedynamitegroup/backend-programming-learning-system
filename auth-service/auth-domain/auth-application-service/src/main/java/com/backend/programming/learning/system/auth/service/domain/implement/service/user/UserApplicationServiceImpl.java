@@ -12,6 +12,7 @@ import com.backend.programming.learning.system.auth.service.domain.dto.method.cr
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.delete.user.DeleteUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.forgot_password.*;
+import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LinkSSOUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserCommand;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.LoginUserResponse;
 import com.backend.programming.learning.system.auth.service.domain.dto.method.login.SocialLoginUserCommand;
@@ -114,6 +115,11 @@ class UserApplicationServiceImpl implements UserApplicationService {
     @Override
     public LoginUserResponse socialLoginUser(SocialLoginUserCommand socialLoginUserCommand) {
         return userCommandHandler.socialLoginUser(socialLoginUserCommand);
+    }
+
+    @Override
+    public void linkSSO(LinkSSOUserCommand linkSSOUserCommand) {
+         userCommandHandler.linkSSO(linkSSOUserCommand);
     }
 
     @Override
