@@ -43,10 +43,14 @@ class ChapterRedisServiceImpl implements ChapterRedisService {
     @Override
     public QueryAllChaptersResponse getAllChapters(UUID certificateCourseId) {
         String key = getKeyFrom(certificateCourseId.toString());
-        String json = (String) redisTemplate.opsForValue().get(key);
         try {
-            return json != null ? objectMapper.readValue(json, QueryAllChaptersResponse.class) : null;
-        } catch (JsonProcessingException e) {
+            String json = (String) redisTemplate.opsForValue().get(key);
+            try {
+                return json != null ? objectMapper.readValue(json, QueryAllChaptersResponse.class) : null;
+            } catch (JsonProcessingException e) {
+                log.error("Error while getting chapters from redis", e);
+            }
+        } catch (Exception e) {
             log.error("Error while getting chapters from redis", e);
         }
         return null;
@@ -58,7 +62,7 @@ class ChapterRedisServiceImpl implements ChapterRedisService {
         try {
             String json = objectMapper.writeValueAsString(queryAllChaptersResponse);
             redisTemplate.opsForValue().set(key, json);
-        } catch (JsonProcessingException e) {
+        } catch (Exception e) {
             log.error("Error while saving chapters to redis", e);
         }
     }
