@@ -6,14 +6,24 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.organization.DeleteOrganizationResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.organization.QueryAllOrganizationResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.organization.QueryOrganizationCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.organization.SyncOrganizationCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.organization.UpdateOrganizationCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.organization.UpdateOrganizationResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.organization.OrganizationResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.entity.Organization;
+import com.backend.programming.learning.system.course.service.domain.entity.SynchronizeState;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.organization.OrganizationApplicationService;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.OrganizationRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SynchronizeStateRepository;
+import com.backend.programming.learning.system.domain.valueobject.SynchronizeStatus;
+import com.backend.programming.learning.system.domain.valueobject.SynchronizeStep;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+
+import java.time.ZonedDateTime;
+import java.util.UUID;
 
 @Service
 @Validated
@@ -22,6 +32,9 @@ import org.springframework.validation.annotation.Validated;
 public class OrganizationApplicationServiceImpl implements OrganizationApplicationService {
 
     private final OrganizationCommandHandler organizationCommandHandler;
+
+    private final OrganizationRepository organizationRepository;
+    private final SynchronizeStateRepository synchronizeStateRepository;
     @Override
     public CreateOrganizationResponse createOrganization(CreateOrganizationCommand createOrganizationCommand) {
         return organizationCommandHandler.createOrganization(createOrganizationCommand);
@@ -45,5 +58,36 @@ public class OrganizationApplicationServiceImpl implements OrganizationApplicati
     @Override
     public UpdateOrganizationResponse updateOrganization(UpdateOrganizationCommand updateOrganizationCommand) {
         return organizationCommandHandler.updateOrganization(updateOrganizationCommand);
+    }
+
+    @Override
+    public UpdateOrganizationResponse syncDataMoodle(UUID organizationId, SyncOrganizationCommand syncOrganizationCommand) {
+        Organization organization = getOrganization(organizationId);
+        for(SynchronizeStep synchronizeStep : SynchronizeStep.values()){
+            SynchronizeState synchronizeState = SynchronizeState.builder().build();
+            synchronizeState.initializeSynchronizeState();
+            if(synchronizeStep.equals(SynchronizeStep.USER)) {
+                synchronizeState.setStatus(SynchronizeStatus.PROCESSING);
+            }
+            else {
+                synchronizeState.setStatus(SynchronizeStatus.PENDING);
+            }
+            synchronizeState.setOrganization(organization);
+            synchronizeState.setStep(synchronizeStep);
+            synchronizeStateRepository.save(synchronizeState);
+        }
+
+        return organizationCommandHandler.synchronizeDataMoodle(organizationId, syncOrganizationCommand);
+    }
+
+    public Organization getOrganization(UUID organizationId) {
+        if(organizationId == null) {
+            log.error("Organization is not found");
+            throw new RuntimeException("Organization is not found");
+        }
+        return organizationRepository.findOrganizationById(organizationId).orElseThrow(() -> {
+            log.error("Organization is not found");
+            return new RuntimeException("Organization is not found");
+        });
     }
 }

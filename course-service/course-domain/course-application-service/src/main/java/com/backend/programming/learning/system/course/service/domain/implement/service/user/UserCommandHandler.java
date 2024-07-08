@@ -41,12 +41,12 @@ public class UserCommandHandler {
         CreateUserResponse createUserResponse = userDataMapper.userToCreateUserResponse(userCreatedEvent.getUser(),
                 "User created successfully");
 
-        userOutboxHelper.saveUserOutboxMessage(COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME,
-                        userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
-                        CopyState.CREATING,
-                        OutboxStatus.STARTED,
-                        userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
-                                UUID.randomUUID());
+//        userOutboxHelper.saveUserOutboxMessage(COURSE_TO_AUTH_SERVICE_USER_SAGA_NAME,
+//                        userDataMapper.userCreatedEventToUserEventPayload(userCreatedEvent),
+//                        CopyState.CREATING,
+//                        OutboxStatus.STARTED,
+//                        userSagaHelper.copyStatusToSagaStatus(CopyState.CREATING),
+//                                UUID.randomUUID());
 
         return createUserResponse;
     }

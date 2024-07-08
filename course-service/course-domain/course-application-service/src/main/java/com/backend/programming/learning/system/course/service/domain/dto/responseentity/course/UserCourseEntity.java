@@ -16,6 +16,7 @@ public record UserCourseEntity(
         String firstName,
         String lastName,
         String email,
+        Integer roleMoodleId,
         String role
 ) {
 }

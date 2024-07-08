@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.organization.DeleteOrganizationResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.organization.QueryAllOrganizationResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.organization.QueryOrganizationCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.organization.SyncOrganizationCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.organization.UpdateOrganizationCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.organization.UpdateOrganizationResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.organization.OrganizationResponseEntity;
@@ -119,6 +120,25 @@ public class OrganizationController {
                         .apiKey(updateOrganizationCommand.getApiKey())
                         .moodleUrl(updateOrganizationCommand.getMoodleUrl())
                         .build());
+        return  ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/{organizationId}/sync")
+    @Operation(summary = "Sync organization.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = UpdateOrganizationResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<UpdateOrganizationResponse> syncDataMoodle(
+            @PathVariable UUID organizationId,
+            @RequestBody SyncOrganizationCommand syncOrganizationCommand
+    ) {
+        log.info("Syncing organization");
+        UpdateOrganizationResponse response = organizationApplicationService.
+                syncDataMoodle(organizationId, syncOrganizationCommand);
         return  ResponseEntity.ok(response);
     }
 }
