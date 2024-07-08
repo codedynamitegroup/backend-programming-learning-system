@@ -77,6 +77,11 @@ CREATE TYPE notification_notify_time AS ENUM ('TWENTY_FOUR_HOURS', 'TWELVE_HOURS
 DROP TYPE IF EXISTS assignment_ai_grade_report_status;
 CREATE TYPE assignment_ai_grade_report_status AS ENUM ('PENDING', 'SUCCESS', 'FAILED');
 
+DROP TYPE IF EXISTS synchronize_status;
+CREATE TYPE synchronize_status AS ENUM ('PENDING','PROCESSING', 'SUCCESS', 'FAILED');
+
+DROP TYPE IF EXISTS STEP;
+CREATE TYPE step AS ENUM ('USER','COURSE','RESOURCE');
 DROP TABLE IF EXISTS "public".organization CASCADE;
 CREATE TABLE "public".organization
 (
@@ -874,6 +879,22 @@ CREATE TABLE "public".assignment_ai_grade_report
         ON DELETE CASCADE,
     CONSTRAINT assignment_ai_grade_report_rubric_id_fkey2 FOREIGN KEY (assignment_id)
         REFERENCES "public".assignment (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS "public".synchronize_state CASCADE;
+CREATE TABLE "public".synchronize_state
+(
+    id          uuid DEFAULT gen_random_uuid() NOT NULL,
+    status synchronize_status,
+    org_id uuid NOT NULL,
+    step step,
+    sync_count integer DEFAULT 0,
+    time_created TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT synchronize_state_pkey PRIMARY KEY (id),
+    CONSTRAINT synchronize_state_org_id_fkey FOREIGN KEY (org_id)
+        REFERENCES "public".organization (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );

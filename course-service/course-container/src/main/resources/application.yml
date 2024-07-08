@@ -41,6 +41,9 @@ course-service:
   outbox-scheduler-fixed-rate: 2000
   outbox-scheduler-initial-delay: 2000
 
+  synchronize-scheduler-fixed-rate: 12000
+  synchronize-scheduler-initial-delay: 12000
+
   create-notification-scheduler-fixed-rate: 1800000
 
 spring:
