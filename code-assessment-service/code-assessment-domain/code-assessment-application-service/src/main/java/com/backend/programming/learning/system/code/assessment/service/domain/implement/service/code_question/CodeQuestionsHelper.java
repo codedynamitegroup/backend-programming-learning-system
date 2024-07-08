@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.i
 import com.backend.programming.learning.system.code.assessment.service.domain.CodeAssessmentDomainService;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.ProgrammingLanguageDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionCommand;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.langauge.AddLanguageToCodeQuestionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.langauge.UpdateLanguageOfCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.tag.AddTagToCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.language.DeleteLanguageToCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.tag.DeleteCodeQuestionTagCommand;
@@ -201,22 +201,32 @@ public class CodeQuestionsHelper {
     }
 
     @Transactional
-    public void addLanguageToCodeQuestion(AddLanguageToCodeQuestionCommand command) {
-        User user = validateHelper.validateUser(command.getUserId());
+    public void updateLanguageOfCodeQuestion(UpdateLanguageOfCodeQuestionCommand command) {
+        validateHelper.validateUserByEmail(command.getEmail());
         CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(command.getCodeQuestionId());
 
 //        if(!codeQuestion.getUserId().equals(user.getId()))
 //            throw new CodeAssessmentDomainException("User " + codeQuestion.getUserId() + " does not possess code question " + command.getCodeQuestionId());
 
-        List<ProgrammingLanguage> programmingLanguages = validateHelper.validateProgrammingLanguage(command.getLanguages().stream().map(ProgrammingLanguageDto::getId).toList());
-        List<ProgrammingLanguageCodeQuestion> plcqs = initLanguageCodeQuestion(command.getLanguages(), codeQuestion);
+        validateHelper.validateProgrammingLanguage(command.getUpdatedLanguages().stream().map(ProgrammingLanguageDto::getId).toList());
+        validateHelper.validateProgrammingLanguage(command.getDeletedLangaugeIds());
+
+        List<ProgrammingLanguageCodeQuestion> plcqs = initLanguageCodeQuestion(command.getUpdatedLanguages(), codeQuestion);
+
         codeQuestionRepository.saveNewLanguage(plcqs);
+
+        codeQuestionRepository.deleteLanguages(command.getDeletedLangaugeIds().stream().map(ProgrammingLanguageId::new).toList(), codeQuestion.getId());
     }
 
     private List<ProgrammingLanguageCodeQuestion> initLanguageCodeQuestion(List<ProgrammingLanguageDto> languages, CodeQuestion codeQuestion) {
         List<ProgrammingLanguageCodeQuestion> result = new ArrayList<>();
         for(int i = 0; i<languages.size(); ++i){
-            result.add(codeAssessmentDomainService.initProgrammingLanguageCodeQuestion(languages.get(i).getTimeLimit(), languages.get(i).getMemoryLimit(), codeQuestion.getId(), languages.get(i).getId()));
+            result.add(codeAssessmentDomainService.initProgrammingLanguageCodeQuestion(
+                    languages.get(i).getTimeLimit(),
+                    languages.get(i).getMemoryLimit(),
+                    languages.get(i).getBodyCode(),
+                    codeQuestion.getId(),
+                    languages.get(i).getId()));
         }
         return result;
     }
@@ -231,7 +241,7 @@ public class CodeQuestionsHelper {
 
         List<ProgrammingLanguage> programmingLanguages = validateHelper.validateProgrammingLanguage(command.getLanguageIds());
 
-        codeQuestionRepository.deleteLanguage(programmingLanguages.stream().map(BaseEntity::getId).toList());
+        codeQuestionRepository.deleteLanguages(programmingLanguages.stream().map(BaseEntity::getId).toList(), codeQuestion.getId());
     }
 
     @Transactional

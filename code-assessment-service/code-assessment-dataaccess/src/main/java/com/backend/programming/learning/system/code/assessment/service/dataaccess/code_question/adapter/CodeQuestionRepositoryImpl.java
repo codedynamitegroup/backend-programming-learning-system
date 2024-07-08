@@ -161,8 +161,12 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
     }
 
     @Override
-    public void deleteLanguage(List<ProgrammingLanguageId> list) {
-        programmingLanguageCodeQuestionJpaRepository.deleteByProgrammingLanguageIdIn(list.stream().map(BaseId::getValue).toList());
+    public void deleteLanguages(List<ProgrammingLanguageId> list, CodeQuestionId id) {
+        programmingLanguageCodeQuestionJpaRepository
+                .deleteAllById(list.stream()
+                        .map(item->
+                                programmingLanguageCodeQuestionDataAccessMapper.programmingLanguageIdAndCodeQuesitonIdToEntityId(item, id))
+                        .toList());
     }
 
     @Override

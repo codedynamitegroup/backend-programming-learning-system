@@ -13,6 +13,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.en
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.code_question.CodeQuestionNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.exeption.test_case.TestCaseNotFoundException;
 import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.GenericHelper;
+import com.backend.programming.learning.system.code.assessment.service.domain.implement.service.ValidateHelper;
 import com.backend.programming.learning.system.code.assessment.service.domain.mapper.test_case.TestCaseDataMapper;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.code_question.CodeQuestionRepository;
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.output.repository.TestCaseRepository;
@@ -34,13 +35,15 @@ public class TestCaseHelper {
     private final TestCaseRepository testCaseRepository;
     private final TestCaseDataMapper testCaseDataMapper;
     private final CodeQuestionRepository codeQuestionRepository;
+    private final ValidateHelper validateHelper;
     private final GenericHelper genericHelper;
 
-    public TestCaseHelper(CodeAssessmentDomainService codeAssessmentDomainService, TestCaseRepository testCaseRepository, TestCaseDataMapper testCaseDataMapper, CodeQuestionRepository codeQuestionRepository, GenericHelper genericHelper) {
+    public TestCaseHelper(CodeAssessmentDomainService codeAssessmentDomainService, TestCaseRepository testCaseRepository, TestCaseDataMapper testCaseDataMapper, CodeQuestionRepository codeQuestionRepository, ValidateHelper validateHelper, GenericHelper genericHelper) {
         this.codeAssessmentDomainService = codeAssessmentDomainService;
         this.testCaseRepository = testCaseRepository;
         this.testCaseDataMapper = testCaseDataMapper;
         this.codeQuestionRepository = codeQuestionRepository;
+        this.validateHelper = validateHelper;
         this.genericHelper = genericHelper;
     }
 
@@ -81,17 +84,30 @@ public class TestCaseHelper {
     }
 
     @Transactional
-    public UpdateTestCaseResponse updateTestCase(UpdateTestCaseCommand command) {
-        TestCase testCase = testCaseDataMapper.updateTestCaseCommandToTestCase(command);
-        TestCase testCaseExist = checkIfTestCaseExist(command.getId());
-        genericHelper.mapRepositoryAttributeToUpdateAttribute(testCaseExist, testCase, TestCase.class);
+    public UpdateTestCaseResponse  updateTestCase(UpdateTestCaseCommand command) {
+        CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(command.getCodeQuestionId());
+        List<TestCase> updatedTestCases = testCaseDataMapper.updateTestCaseCommandToTestCases(command.getUpdatedTestCases(), codeQuestion);
+        List<TestCase> newTestCases = testCaseDataMapper.updateTestCaseCommandToTestCases(command.getNewTestCases(), codeQuestion);
+        //update
+        saveTestCases(updatedTestCases);
+        //create
+        newTestCases = codeAssessmentDomainService.initiateTestCases(newTestCases);
+        saveTestCases(newTestCases);
+        //delete
+        command.getDeletedTestCasesId().forEach (item->{
+            try {
+                testCaseRepository.delete(new TestCaseId(item));
+            } catch (Exception e) {
+//                throw new RuntimeException(e);
+                log.error("Can not delete testcase with id {}, message {}", item, e.getMessage());
+            }
+        });
 
-        testCaseRepository.save(testCaseExist);
         return UpdateTestCaseResponse.builder().message("update successfully").build();
     }
 
-    private TestCase checkIfTestCaseExist(UUID id) {
-        Optional<TestCase> testCase = testCaseRepository.findById(new TestCaseId(id));
+    private TestCase checkIfTestCaseExist(TestCaseId id) {
+        Optional<TestCase> testCase = testCaseRepository.findById(id);
 
         if (testCase.isEmpty()) {
             log.warn("Could not find test case with id: {}", id);

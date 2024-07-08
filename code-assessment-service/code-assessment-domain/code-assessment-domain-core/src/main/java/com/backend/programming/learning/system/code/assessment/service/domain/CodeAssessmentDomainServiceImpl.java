@@ -109,12 +109,13 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
     }
 
     @Override
-    public ProgrammingLanguageCodeQuestion initProgrammingLanguageCodeQuestion(Float timeLimit, Float memoryLimit, CodeQuestionId codeQuestionId, UUID languageId) {
+    public ProgrammingLanguageCodeQuestion initProgrammingLanguageCodeQuestion(Float timeLimit, Float memoryLimit, String bodyCode, CodeQuestionId codeQuestionId, UUID languageId) {
         return ProgrammingLanguageCodeQuestion.builder()
                 .id(new ProgrammingLanguageCodeQuestionId(new ProgrammingLanguageId(languageId), codeQuestionId))
                 .active(true)
                 .timeLimit(timeLimit)
                 .memoryLimit(memoryLimit)
+                .bodyCode(bodyCode)
                 .build();
     }
 

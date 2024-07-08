@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.code.assessment.service.dataacces
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language.mapper.ProgrammingLanguageDataAccessMapper;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language_code_question.entity.ProgrammingLanguageCodeQuestionEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.programming_language_code_question.entity.ProgrammingLanguageCodeQuestionEntityId;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.ProgrammingLanguageCodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.programming_language_code_question.ProgrammingLanguageCodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
@@ -23,6 +24,12 @@ public class ProgrammingLanguageCodeQuestionDataAccessMapper {
         return ProgrammingLanguageCodeQuestionEntityId.builder()
                 .programmingLanguage(id.getValue().getProgrammingLanguageId().getValue())
                 .codeQuestion(id.getValue().getCodeQuestionId().getValue())
+                .build();
+    }
+    public ProgrammingLanguageCodeQuestionEntityId programmingLanguageIdAndCodeQuesitonIdToEntityId(ProgrammingLanguageId programmingLanguageId, CodeQuestionId codeQuestionId) {
+        return ProgrammingLanguageCodeQuestionEntityId.builder()
+                .programmingLanguage(programmingLanguageId.getValue())
+                .codeQuestion(codeQuestionId.getValue())
                 .build();
     }
 

@@ -38,7 +38,11 @@ public class WebSecurityConfig {
                                 .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission/recent-code-submission").hasRole(USER)
                                 .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission/admin-code-question" ).hasAnyRole(ADMIN)
                                 .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission/admin-code-submission" ).hasAnyRole(ADMIN)
-                                .requestMatchers(HttpMethod.PUT, "/code-assessment/code-submission/{code-question-id}").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE)
+
+                                .requestMatchers(HttpMethod.PUT, "/code-assessment/code-question/{code-question-id}").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE)
+                                .requestMatchers(HttpMethod.PUT, "/code-assessment/code-question/{code-question-id}/language").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE)
+
+                                .requestMatchers(HttpMethod.PUT, "code-assessment/test-case").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE)
 
                                 .requestMatchers(HttpMethod.POST, "/code-assessment/shared-solution/{shared-solution-id}/comment" ).hasAnyRole(USER)
                                 .requestMatchers(HttpMethod.PUT, "/code-assessment/shared-solution/comment/{comment-id}" ).hasAnyRole(USER)
