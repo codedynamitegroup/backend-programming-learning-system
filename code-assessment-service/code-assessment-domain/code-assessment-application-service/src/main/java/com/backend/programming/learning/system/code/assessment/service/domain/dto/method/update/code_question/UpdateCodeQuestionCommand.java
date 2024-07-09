@@ -9,6 +9,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -34,5 +35,7 @@ public class UpdateCodeQuestionCommand {
     private final QuestionDifficulty difficulty;
     private Boolean isPublic;
     private Boolean allowImport;
+    private List<UUID> newTagIds;
+    private List<UUID> deletedTagIds;
 
 }
