@@ -4,7 +4,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.CodeQuestionDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionResponse;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.langauge.AddLanguageToCodeQuestionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.langauge.UpdateLanguageOfCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.tag.AddTagToCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.language.DeleteLanguageToCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.tag.DeleteCodeQuestionTagCommand;
@@ -51,8 +51,8 @@ class CodeQuestionApplicationServiceImpl implements CodeQuestionApplicationServi
     }
 
     @Override
-    public void addLanguageToCodeQuestion(AddLanguageToCodeQuestionCommand command) {
-        codeQuestionCommandHandler.addLanguageToCodeQuestion(command);
+    public void updateLanguageOfCodeQuestion(UpdateLanguageOfCodeQuestionCommand command) {
+        codeQuestionCommandHandler.updateLanguageOfCodeQuestion(command);
     }
 
     @Override

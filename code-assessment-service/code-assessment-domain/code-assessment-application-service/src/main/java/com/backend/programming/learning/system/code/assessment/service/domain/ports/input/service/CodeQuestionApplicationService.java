@@ -5,7 +5,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.CreateCodeQuestionResponse;
 
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.langauge.AddLanguageToCodeQuestionCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.langauge.UpdateLanguageOfCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.code_question.tag.AddTagToCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.language.DeleteLanguageToCodeQuestionCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.delete.code_question.tag.DeleteCodeQuestionTagCommand;
@@ -27,7 +27,7 @@ public interface CodeQuestionApplicationService {
 
     List<CodeQuestionDto> getDetailCodeQuestion(@Valid GetDetailCodeQuestionCommand command);
 
-    void addLanguageToCodeQuestion(@Valid AddLanguageToCodeQuestionCommand command);
+    void updateLanguageOfCodeQuestion(@Valid UpdateLanguageOfCodeQuestionCommand command);
 
     void deleteProgrammingLanguageCodeQuestion(@Valid DeleteLanguageToCodeQuestionCommand command);
 

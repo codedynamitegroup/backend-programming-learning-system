@@ -28,7 +28,7 @@ public class TestCaseDto {
 
     @NotNull(message = "isSample must not be null")
     @JsonProperty("isSample")
-    private final boolean isSample;
+    private final Boolean isSample;
 
 //    @Positive(message = "score must be positive")
     @JsonProperty("score")

@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.m
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.TestCaseDto;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.create.test_case.CreateTestCasesCommand;
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.query.testcase.GetTestCasesByQuestionIdResponse;
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.testcase.UpdateTestCaseCommand;
+import com.backend.programming.learning.system.code.assessment.service.domain.entity.CodeQuestion;
 import com.backend.programming.learning.system.code.assessment.service.domain.entity.TestCase;
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.TestCaseId;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
@@ -29,19 +29,22 @@ public class TestCaseDataMapper {
                 .codeQuestionId(codeQuestionId)
                 .id(testCaseDto.getId()!=null?new TestCaseId(testCaseDto.getId()):null)
                 .score(testCaseDto.getScore() != null? testCaseDto.getScore() : null)
-                .isSample(testCaseDto.isSample())
+                .isSample(testCaseDto.getIsSample())
                 .inputData(testCaseDto.getInputData())
                 .outputData(testCaseDto.getOutputData())
                 .build();
     }
-    public TestCase updateTestCaseCommandToTestCase(UpdateTestCaseCommand command) {
-        return TestCase.builder()
-                .id(new TestCaseId(command.getId()))
-                .score(command.getScore())
-                .isSample(command.getIsSample())
-                .inputData(command.getInputData())
-                .outputData(command.getOutputData())
-                .build();
+    public List<TestCase> updateTestCaseCommandToTestCases(List<TestCaseDto> testCases, CodeQuestion codeQuestion) {
+        return testCases.stream().map(item->TestCase.builder()
+                .id(item.getId() != null? new TestCaseId(item.getId()): null)
+                .codeQuestionId(codeQuestion.getId())
+                .score(item.getScore() != null? item.getScore(): 1)
+                .isSample(item.getIsSample())
+                .inputData(item.getInputData())
+                .outputData(item.getOutputData())
+                .build()).toList();
+
+
     }
 
     public GetTestCasesByQuestionIdResponse testCasesPageQueryToTestCasesReponse(Page<TestCase> testCases) {

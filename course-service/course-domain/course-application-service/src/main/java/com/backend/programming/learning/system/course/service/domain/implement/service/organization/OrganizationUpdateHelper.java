@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.organization;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.organization.SyncOrganizationCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.organization.UpdateOrganizationCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.Organization;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.OrganizationRepository;
@@ -17,7 +18,7 @@ import java.util.UUID;
 public class OrganizationUpdateHelper {
     private final OrganizationRepository organizationRepository;
 
-    @Transactional(readOnly = true)
+    @Transactional
     public void persistOrganization(UpdateOrganizationCommand updateOrganizationCommand) {
         Organization organization = getOrganization(updateOrganizationCommand.getOrganizationId());
         {
@@ -38,7 +39,17 @@ public class OrganizationUpdateHelper {
         {
             organization.setMoodleUrl(updateOrganizationCommand.getMoodleUrl());
         }
+        organizationRepository.saveOrganization(organization);
+    }
 
+
+    @Transactional
+    public void synchronizeDataMoodle(UUID organizationId,SyncOrganizationCommand syncOrganizationCommand) {
+        Organization organization = getOrganization(organizationId);
+        {
+            organization.setApiKey(syncOrganizationCommand.getApiKey());
+            organization.setMoodleUrl(syncOrganizationCommand.getMoodleUrl());
+        }
         organizationRepository.saveOrganization(organization);
     }
 

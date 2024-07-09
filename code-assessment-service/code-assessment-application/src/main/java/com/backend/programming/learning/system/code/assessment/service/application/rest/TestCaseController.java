@@ -39,9 +39,8 @@ public class TestCaseController {
     }
 
     @PutMapping
-    public ResponseEntity<UpdateTestCaseResponse> updateTestCase
+    public ResponseEntity<UpdateTestCaseResponse> updateTestCaseList
             (@RequestBody UpdateTestCaseCommand command){
-        log.info("update test case with id {}", command.getId());
         UpdateTestCaseResponse response =
                 service.updateTestCase(command);
         return ResponseEntity.ok(response);

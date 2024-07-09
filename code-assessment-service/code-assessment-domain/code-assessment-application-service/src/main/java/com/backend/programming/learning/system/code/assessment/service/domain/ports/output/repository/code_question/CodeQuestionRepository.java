@@ -27,7 +27,7 @@ public interface CodeQuestionRepository {
 
     void saveNewLanguage(List<ProgrammingLanguageCodeQuestion> plcqs);
 
-    void deleteLanguage(List<ProgrammingLanguageId> list);
+    void deleteLanguages(List<ProgrammingLanguageId> list, CodeQuestionId id);
 
     void addTag(CodeQuestionId id, List<Tag> tags);
 

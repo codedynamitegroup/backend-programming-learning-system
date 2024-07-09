@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.organization.DeleteOrganizationResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.organization.QueryAllOrganizationResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.organization.QueryOrganizationCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.organization.SyncOrganizationCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.organization.UpdateOrganizationCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.organization.UpdateOrganizationResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.organization.OrganizationResponseEntity;
@@ -15,6 +16,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.UUID;
 
 @Component
 @Slf4j
@@ -60,6 +63,15 @@ public class OrganizationCommandHandler {
         return UpdateOrganizationResponse.builder()
                 .organizationId(updateOrganizationCommand.getOrganizationId())
                 .message("Organization updated successfully")
+                .build();
+    }
+
+    @Transactional
+    public UpdateOrganizationResponse synchronizeDataMoodle(UUID organizationId, SyncOrganizationCommand syncOrganizationCommand) {
+        organizationUpdateHelper.synchronizeDataMoodle(organizationId, syncOrganizationCommand);
+        return UpdateOrganizationResponse.builder()
+                .organizationId(organizationId)
+                .message("Organization synchronized successfully")
                 .build();
     }
 }

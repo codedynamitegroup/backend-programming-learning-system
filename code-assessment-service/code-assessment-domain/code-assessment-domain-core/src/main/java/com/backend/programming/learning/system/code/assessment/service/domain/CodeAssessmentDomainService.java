@@ -36,7 +36,7 @@ public interface CodeAssessmentDomainService {
 
     CodeQuestion getDetailCodeQuestion(CodeQuestion codeQuestion, List<TestCase> sampleTestCase, List<CodeSubmission> codeSubmission, List<ProgrammingLanguageCodeQuestion> languages);
 
-    ProgrammingLanguageCodeQuestion initProgrammingLanguageCodeQuestion(Float timeLimit, Float memoryLimit, CodeQuestionId codeQuestionId, UUID id);
+    ProgrammingLanguageCodeQuestion initProgrammingLanguageCodeQuestion(Float timeLimit, Float memoryLimit, String bodyCode, CodeQuestionId codeQuestionId, UUID id);
 
     ProgrammingLanguageCodeQuestion initProgrammingLanguageCodeQuestion(Float timeLimit, Float memoryLimit, String headCode, String bodyCode, String tailCode ,CodeQuestionId codeQuestionId, UUID id);
 

@@ -668,49 +668,54 @@ public class MoodleCommandHandler {
 //
 //        Map<String, Role> roleMap = roles.stream()
 //                .collect(Collectors.toMap(role -> role.getName().toLowerCase(), role -> role));
+    try {
+    listUserModel.stream()
+            .forEach(userModel -> {
+                if(userModel.getId().equals("1"))
+                    return;
+                Optional<User> userResult = userRepository.findByEmail(userModel.getEmail());
+                if (userResult.isPresent()) {
+                    UpdateUserCommand userUpdate = moodleDataMapper.updateUser(userModel, userResult.get());
+                    UpdateUserResponse updateUserResponse = userApplicationService.updateUser(userUpdate);
 
-        listUserModel.stream()
-                .filter(userModel -> !userModel.getId().equals("1"))
-                .forEach(userModel -> {
-            Optional<User> userResult = userRepository.findByEmail(userModel.getEmail());
-            if (userResult.isPresent()) {
-                UpdateUserCommand userUpdate = moodleDataMapper.updateUser(userModel, userResult.get());
-                UpdateUserResponse updateUserResponse = userApplicationService.updateUser(userUpdate);
-
-                Integer roleId = userModel.getRoles().isEmpty() ? 5 : userModel.getRoles().get(0).getRoleid();
-                RoleMoodle roleMoodle = roleMoodleRepository.findById(roleId).orElse(null);
-                userResult.get().setRoleMoodle(roleMoodle);
-                userRepository.save(userResult.get());
+                    Integer roleId = userModel.getRoles().isEmpty() ? 5 : userModel.getRoles().get(0).getRoleid();
+                    RoleMoodle roleMoodle = roleMoodleRepository.findById(roleId).orElse(null);
+                    userResult.get().setRoleMoodle(roleMoodle);
+                    userRepository.save(userResult.get());
 //                List<Role> rolesMoodle = userModel.getRoles();
 //                rolesMoodle.forEach(role -> {
 //                    CreateUserRoleCommand createRole = moodleDataMapper.createRole(role, roleMap, updateUserResponse.getUserId());
 //                    userRoleApplicationService.createUserRole(createRole);
 //                });
-            } else {
-                CreateUserCommand user = moodleDataMapper.createUser(userModel);
-                CreateUserResponse createUserResponse = userApplicationService.createUser(user);
+                } else {
+                    CreateUserCommand user = moodleDataMapper.createUser(userModel);
+                    CreateUserResponse createUserResponse = userApplicationService.createUser(user);
 
 
-                Integer roleId = userModel.getRoles().isEmpty() ? 5 : userModel.getRoles().get(0).getRoleid();
-                RoleMoodle roleMoodle = roleMoodleRepository.findById(roleId).orElse(null);
-                userRepository.save(User.builder()
-                                .id(new UserId(UUID.randomUUID()))
-                                .organization(organization.get())
-                                .roleMoodle(roleMoodle)
-                                .username(user.getUsername())
-                                .email(user.getEmail())
-                                .userIdMoodle(user.getUserIdMoodle())
-                                .firstName(user.getFirstName())
-                                .lastName(user.getLastName())
-                                .phone(user.getPhone())
-                        .build());
+                    Integer roleId = userModel.getRoles().isEmpty() ? 5 : userModel.getRoles().get(0).getRoleid();
+                    RoleMoodle roleMoodle = roleMoodleRepository.findById(roleId).orElse(null);
+                    userRepository.save(User.builder()
+                            .id(new UserId(UUID.randomUUID()))
+                            .organization(organization.get())
+                            .roleMoodle(roleMoodle)
+                            .username(user.getUsername())
+                            .email(user.getEmail())
+                            .userIdMoodle(user.getUserIdMoodle())
+                            .firstName(user.getFirstName())
+                            .lastName(user.getLastName())
+                            .phone(user.getPhone())
+                            .build());
 //                List<Role> rolesMoodle = userModel.getRoles();
 //                rolesMoodle.forEach(role -> {
 //                    CreateUserRoleCommand createRole = moodleDataMapper.createRole(role, roleMap, createUserResponse.getUserId());
 //                    userRoleApplicationService.createUserRole(createRole);
 //                });
-            }
-        });
+                }
+            });
+}catch (Exception e){
+        log.info("Error: {}", e);
+
+}
         log.info("Sync user successfully");
         return "Sync user successfully";
     }
