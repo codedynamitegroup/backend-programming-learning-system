@@ -442,31 +442,6 @@ CREATE TABLE "public".exam_submission
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "public".exam_question_submission CASCADE;
-CREATE TABLE "public".exam_question_submission
-(
-    id               uuid DEFAULT gen_random_uuid() NOT NULL,
-    user_id          uuid NOT NULL,
-    exam_question_id uuid NOT NULL,
-    AI_assessment    text,
-    pass_status      bigint,
-    grade            double precision,
-    content          text,
-    right_answer     text,
-    num_file         bigint,
-    status          integer,
-    flag boolean DEFAULT false,
-    CONSTRAINT exam_question_submission_pkey PRIMARY KEY (id),
-    CONSTRAINT exam_question_submission_user_id_fkey FOREIGN KEY (user_id)
-        REFERENCES "public".USER (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    CONSTRAINT exam_question_submission_exam_submission_id_fkey FOREIGN KEY (exam_question_id)
-        REFERENCES "public".exam_question (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
-
 DROP TABLE IF EXISTS "public".intro_file CASCADE;
 CREATE TABLE "public".intro_file
 (
