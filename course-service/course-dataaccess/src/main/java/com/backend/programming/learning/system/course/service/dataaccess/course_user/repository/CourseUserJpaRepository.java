@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 @Repository
 public interface CourseUserJpaRepository extends JpaRepository<CourseUserEntity, UUID> {
@@ -59,4 +60,6 @@ public interface CourseUserJpaRepository extends JpaRepository<CourseUserEntity,
     WHERE e.id = :examId AND cu.user.roleMoodle.id = 5
     """)
     Page<CourseUserEntity> findByExamId(UUID examId, Pageable pageable);
+
+    Optional<CourseUserEntity> findByCourseIdAndUserId(UUID courseId, UUID userId);
 }

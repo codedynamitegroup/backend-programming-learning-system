@@ -57,7 +57,6 @@ public class MoodleCommandHandler {
     private final AssignmentRepository assignmentRepository;
     private final SubmissionAssignmentRepository submissionAssignmentRepository;
     private final SubmissionAssignmentFileRepository submissionAssignmentFileRepository;
-    private final SubmissionAssignmentOnlineTextRepository submissionAssignmentOnlineTextRepository;
     private final ExamRepository examRepository;
     private final SectionRepository sectionRepository;
     private final ModuleRepository moduleRepository;
@@ -110,10 +109,8 @@ public class MoodleCommandHandler {
         if (organization.isEmpty()) {
             throw new RuntimeException("Organization not found");
         }
-        String apiKey = organization.get().getApiKey();
-        String moodleUrl = organization.get().getMoodleUrl();
-        createCourseType(apiKey, moodleUrl);
-        List<CourseResponseEntity> allCourse = getAllCourse(apiKey,moodleUrl);
+        createCourseType(organization.get());
+        List<CourseResponseEntity> allCourse = getAllCourse(organization.get());
         createCourseUser();
         return "Sync course success";
     }
@@ -169,12 +166,21 @@ public class MoodleCommandHandler {
     }
 
     @Transactional
-    public void createCourseType(String apiKey, String moodleUrl)
+    public void createCourseType(Organization organization)
     {
+        String apiKey = organization.getApiKey();
+        String moodleUrl = organization.getMoodleUrl();
         List<CourseTypeModel> courseTypeModels = getAllCourseType(apiKey, moodleUrl);
+        List<CourseType> courseTypes = courseTypeRepository.findAllByOrganizationId(organization.getId().getValue());
         courseTypeModels.forEach(courseTypeModel -> {
-            CourseType courseType = moodleDataMapper.createCourseType(courseTypeModel);
-            courseTypeRepository.save(courseType);
+            Optional<CourseType> courseTypeResult = courseTypes.stream().filter(courseType -> courseType.getMoodleId().equals(courseTypeModel.getId())).findFirst();
+            if (courseTypeResult.isPresent()) {
+                CourseType courseTypeUpdate = moodleDataMapper.updateCourseType(courseTypeModel, courseTypeResult.get(), organization);
+                courseTypeRepository.save(courseTypeUpdate);
+            } else {
+                CourseType courseType = moodleDataMapper.createCourseType(courseTypeModel, organization);
+                courseTypeRepository.save(courseType);
+            }
         });
     }
 
@@ -206,18 +212,42 @@ public class MoodleCommandHandler {
             }
 
             allSection.forEach(sectionModel -> {
-                Section section = moodleDataMapper.createSection(course, sectionModel);
-                sectionRepository.save(section);
-                // create module
-                for (ModuleModel module : sectionModel.getModules()) {
-                    if(module.getModplural().equals("Assignments"))
+                Optional<Section> checkSection = sectionRepository.findBySectionMoodleId(Integer.valueOf(sectionModel.getId()));
+                if(checkSection.isPresent())
+                {
+                    Section sectionUpdate = moodleDataMapper.updateSection(course, sectionModel, checkSection.get());
+                    sectionRepository.save(sectionUpdate);
+                    // create module
+                    for (ModuleModel module : sectionModel.getModules()) {
+                        if (module.getModplural().equals("Assignments")) {
+                            Optional<Module> checkModule = moduleRepository.findByCmid(Integer.valueOf(module.getId()));
+                            if(checkModule.isPresent())
+                            {
+                                Module moduleUpdate = moodleDataMapper.updateModule(sectionUpdate, module, checkModule.get());
+                                moduleRepository.save(moduleUpdate);
+                            }
+                            else {
+                                Module moduleCreate = moodleDataMapper.createModule(sectionUpdate, module);
+                                moduleRepository.save(moduleCreate);
+                            }
+
+                        }
+                    }
+                }
+                else {
+                    Section section = moodleDataMapper.createSection(course, sectionModel);
+                    sectionRepository.save(section);
+                    // create module
+                    for (ModuleModel module : sectionModel.getModules()) {
+                        if (module.getModplural().equals("Assignments"))
 //                            ||
 //                            module.getModplural().equals("Quizzes")||
 //                            module.getModplural().equals("URLs")||
 //                            module.getModplural().equals("Files"))
-                    {
-                        Module moduleCreate = moodleDataMapper.createModule(section, module);
-                        moduleRepository.save(moduleCreate);
+                        {
+                            Module moduleCreate = moodleDataMapper.createModule(section, module);
+                            moduleRepository.save(moduleCreate);
+                        }
                     }
                 }
             });
@@ -278,43 +308,92 @@ public class MoodleCommandHandler {
                 if(submissionAssignmentStatus.getLastattempt().getSubmission().getStatus().equals("submitted"))
                 {
                     submissionAssignmentStatus.getLastattempt().getSubmission().setGradingstatus(submissionAssignmentStatus.getLastattempt().getGradingstatus());
-                    SubmissionAssignment submissionAssignment =
-                           moodleDataMapper.createSubmissionAssignment(assignment,user.get(),
-                                   submissionAssignmentStatus.getLastattempt(),submissionAssignmentStatus.getFeedback());
+                    SubmissionAssignment checkSubmissionAssignment = submissionAssignmentRepository.findByAssignmentIdAndUserId(assignment.getId().getValue(),user.get().getId().getValue());
+                    if(checkSubmissionAssignment==null) {
+                        SubmissionAssignment submissionAssignment =
+                                moodleDataMapper.createSubmissionAssignment(assignment, user.get(),
+                                        submissionAssignmentStatus.getLastattempt(), submissionAssignmentStatus.getFeedback());
 
-                    submissionAssignmentRepository.saveSubmissionAssignment(submissionAssignment);
+                        submissionAssignmentRepository.saveSubmissionAssignment(submissionAssignment);
 
-                    if(submissionAssignment.getGradedStatus())
-                    {
-                        ZonedDateTime timeCreated = Instant.ofEpochSecond(submissionAssignmentStatus.getFeedback().getGrade().getTimecreated()).atZone(ZoneId.of("UTC"));
-                        ZonedDateTime timeModified = Instant.ofEpochSecond(submissionAssignmentStatus.getFeedback().getGrade().getTimemodified()).atZone(ZoneId.of("UTC"));
-                        SubmissionGrade submissionGrade = SubmissionGrade.builder()
-                                .id(new SubmissionGradeId(UUID.randomUUID()))
-                                .grade(submissionAssignment.getGrade())
-                                .submissionAssignment(submissionAssignment)
-                                .timeCreated(timeCreated)
-                                .timeModified(timeModified)
-                                .build();
+                        if(submissionAssignment.getGradedStatus())
+                        {
+                            ZonedDateTime timeCreated = Instant.ofEpochSecond(submissionAssignmentStatus.getFeedback().getGrade().getTimecreated()).atZone(ZoneId.of("UTC"));
+                            ZonedDateTime timeModified = Instant.ofEpochSecond(submissionAssignmentStatus.getFeedback().getGrade().getTimemodified()).atZone(ZoneId.of("UTC"));
+                            SubmissionGrade submissionGrade = SubmissionGrade.builder()
+                                    .id(new SubmissionGradeId(UUID.randomUUID()))
+                                    .grade(submissionAssignment.getGrade())
+                                    .submissionAssignment(submissionAssignment)
+                                    .timeCreated(timeCreated)
+                                    .timeModified(timeModified)
+                                    .build();
 
-                        submissionGradeRepository.save(submissionGrade);
-                    }
+                            submissionGradeRepository.save(submissionGrade);
+                        }
 
-                    for (SubmissionPlugin plugin : submissionAssignmentStatus.getLastattempt().getSubmission().getPlugins()) {
-                        if (plugin.getType().equals("file")) {
-                            plugin.getFileareas().forEach(fileArea -> {
-                                fileArea.getFiles().forEach(file -> {
-                                    SubmissionAssignmentFile submissionAssignmentFile = moodleDataMapper.
-                                            createSubmissionAssignmentFile(submissionAssignment, file);
-                                    submissionAssignmentFileRepository.saveSubmissionAssignmentFile(submissionAssignmentFile);
+                        for (SubmissionPlugin plugin : submissionAssignmentStatus.getLastattempt().getSubmission().getPlugins()) {
+                            if (plugin.getType().equals("file")) {
+                                plugin.getFileareas().forEach(fileArea -> {
+                                    fileArea.getFiles().forEach(file -> {
+                                        SubmissionAssignmentFile submissionAssignmentFile = moodleDataMapper.
+                                                createSubmissionAssignmentFile(submissionAssignment, file);
+                                        submissionAssignmentFileRepository.saveSubmissionAssignmentFile(submissionAssignmentFile);
+                                    });
                                 });
-                            });
-                        } else if (plugin.getType().equals("onlinetext")) {
-                            submissionAssignment.setContent(plugin.getEditorfields().get(0).getText());
-                            SubmissionAssignmentOnlineText submissionAssignmentOnlineText = moodleDataMapper.
-                                    createSubmissionAssignmentOnlineText(submissionAssignment, plugin);
-                            submissionAssignmentOnlineTextRepository.saveAssignmentSubmissionOnlineText(submissionAssignmentOnlineText);
+                            } else if (plugin.getType().equals("onlinetext")) {
+                                submissionAssignment.setContent(plugin.getEditorfields().get(0).getText());
+                            }
                         }
                     }
+                    else
+                    {
+                        SubmissionAssignment submissionAssignment = moodleDataMapper.updateSubmissionAssignment(assignment, user.get(),
+                                submissionAssignmentStatus.getLastattempt(), submissionAssignmentStatus.getFeedback(),checkSubmissionAssignment);
+                        submissionAssignmentRepository.saveSubmissionAssignment(submissionAssignment);
+                        Optional<SubmissionGrade> checkSubmissionGrade = submissionGradeRepository.findBySubmissionAssignmentId(checkSubmissionAssignment.getId().getValue());
+                        if(checkSubmissionGrade.isPresent())
+                        {
+                            SubmissionGrade submissionGradeUpdate = moodleDataMapper.updateSubmissionGrade(submissionAssignment,checkSubmissionGrade.get());
+                            submissionGradeRepository.save(submissionGradeUpdate);
+                        }
+                        else {
+                            ZonedDateTime timeCreated = Instant.ofEpochSecond(submissionAssignmentStatus.getFeedback().getGrade().getTimecreated()).atZone(ZoneId.of("UTC"));
+                            ZonedDateTime timeModified = Instant.ofEpochSecond(submissionAssignmentStatus.getFeedback().getGrade().getTimemodified()).atZone(ZoneId.of("UTC"));
+                            SubmissionGrade submissionGrade = SubmissionGrade.builder()
+                                    .id(new SubmissionGradeId(UUID.randomUUID()))
+                                    .grade(submissionAssignment.getGrade())
+                                    .submissionAssignment(submissionAssignment)
+                                    .timeCreated(timeCreated)
+                                    .timeModified(timeModified)
+                                    .build();
+
+                            submissionGradeRepository.save(submissionGrade);
+                        }
+
+                        for (SubmissionPlugin plugin : submissionAssignmentStatus.getLastattempt().getSubmission().getPlugins()) {
+                            if (plugin.getType().equals("file")) {
+                                plugin.getFileareas().forEach(fileArea -> {
+                                    fileArea.getFiles().forEach(file -> {
+                                        Optional<SubmissionAssignmentFile> checkSubmissionAssignmentFile = submissionAssignmentFileRepository.
+                                                findBySubmissionAssignmentIdAndFileName(submissionAssignment.getId().getValue(),file.getFilename());
+                                        if(checkSubmissionAssignmentFile.isPresent())
+                                        {
+                                            log.info("Submission assignment file is already exist");
+                                        }
+                                        else {
+                                            SubmissionAssignmentFile submissionAssignmentFile = moodleDataMapper.
+                                                    createSubmissionAssignmentFile(submissionAssignment, file);
+                                            submissionAssignmentFileRepository.saveSubmissionAssignmentFile(submissionAssignmentFile);
+                                        }
+                                    });
+                                });
+                            } else if (plugin.getType().equals("onlinetext")) {
+                                submissionAssignment.setContent(plugin.getEditorfields().get(0).getText());
+                            }
+                        }
+
+                    }
+
                 }
                 else {
                     SubmissionAssignment submissionAssignment =
@@ -419,6 +498,11 @@ public class MoodleCommandHandler {
                     continue;
                 }
                 RoleMoodle roleMoodle = roleMoodleRepository.findById(userModel.getRoles().get(0).getRoleid()).get();
+                Optional<CourseUser> checkCourseUser =courseUserRepository.findByCourseIdAndUserId(course.getId().getValue(), userResult.get().getId().getValue());
+                if(checkCourseUser.isPresent())
+                {
+                    continue;
+                }
                 CourseUser courseUser = moodleDataMapper.createCourseUser(course, userResult.get(), roleMoodle);
                 courseUserRepository.saveCourseUser(courseUser);
             }
@@ -480,37 +564,70 @@ public class MoodleCommandHandler {
         courseList.forEach(course -> {
                     List<AssignmentCourseModel> allAssignment = getAllAssignments(course.getCourseIdMoodle().toString(),apiKey,moodleUrl);
                     allAssignment.forEach(assignmentCourseModel -> {
+                        Optional<Assignment> assignment = assignmentRepository.findByAssignmentIdMoodle(Integer.valueOf(assignmentCourseModel.getId()));
                         assignmentCourseModel.getAssignments().forEach(assignmentModel -> {
-                            Assignment assignmentCreate = moodleDataMapper.createAssignment(course, assignmentModel);
-                            assignmentRepository.saveAssignment(assignmentCreate);
-                            createSubmissionAssignmentUser(assignmentCreate);
-                            if(assignmentModel.getIntrofiles()!=null) {
-                                assignmentModel.getIntrofiles().forEach(introFileModel -> {
-                                    IntroFile introFile = moodleDataMapper.createIntroFile(assignmentCreate, introFileModel);
-                                    introFileRepository.save(introFile);
-                                });
-                            }
+                            if(assignment.isPresent())
+                            {
+                                Assignment assignmentUpdate = moodleDataMapper.updateAssignment(course, assignmentModel, assignment.get());
+                                assignmentRepository.saveAssignment(assignmentUpdate);
+                                createSubmissionAssignmentUser(assignmentUpdate);
 
-                            if(assignmentModel.getIntroattachments()!=null) {
-                                assignmentModel.getIntroattachments().forEach(introAttachmentModel -> {
-                                    IntroAttachment introAttachment = moodleDataMapper.createIntroAttachment(assignmentCreate, introAttachmentModel);
-                                    introAttachmentRepository.save(introAttachment);
-                                });
+                                if(assignmentModel.getIntroattachments()!=null) {
+                                    assignmentModel.getIntroattachments().forEach(introAttachmentModel -> {
+                                        Optional<IntroAttachment> checkIntroAttachment = introAttachmentRepository.findByFileName(introAttachmentModel.getFilename());
+                                        if(checkIntroAttachment.isPresent())
+                                        {
+                                            log.info("Intro attachment is already exist");
+                                        }
+                                        else {
+                                            IntroAttachment introAttachment = moodleDataMapper.createIntroAttachment(assignmentUpdate, introAttachmentModel);
+                                            introAttachmentRepository.save(introAttachment);
+                                        }
+                                    });
+                                }
+                                if(assignmentModel.getActivityattachments()!=null) {
+                                    assignmentModel.getActivityattachments().forEach(activityAttachmentModel -> {
+                                        Optional<ActivityAttachment> checkActivityAttachment = activityAttachmentRepository.findByFileName(activityAttachmentModel.getFilename());
+                                        if(checkActivityAttachment.isPresent())
+                                        {
+                                            log.info("Activity attachment is already exist");
+                                        }
+                                        else {
+                                            ActivityAttachment activityAttachment = moodleDataMapper.createActivityAttachment(assignmentUpdate, activityAttachmentModel);
+                                            activityAttachmentRepository.save(activityAttachment);
+                                        }
+                                    });
+                                }
                             }
-                            if(assignmentModel.getActivityattachments()!=null) {
-                                assignmentModel.getActivityattachments().forEach(activityAttachmentModel -> {
-                                    ActivityAttachment activityAttachment = moodleDataMapper.createActivityAttachment(assignmentCreate, activityAttachmentModel);
-                                    activityAttachmentRepository.save(activityAttachment);
-                                });
+                            else {
+                                Assignment assignmentCreate = moodleDataMapper.createAssignment(course, assignmentModel);
+                                assignmentRepository.saveAssignment(assignmentCreate);
+                                createSubmissionAssignmentUser(assignmentCreate);
+
+                                if (assignmentModel.getIntroattachments() != null) {
+                                    assignmentModel.getIntroattachments().forEach(introAttachmentModel -> {
+                                        IntroAttachment introAttachment = moodleDataMapper.createIntroAttachment(assignmentCreate, introAttachmentModel);
+                                        introAttachmentRepository.save(introAttachment);
+                                    });
+                                }
+                                if (assignmentModel.getActivityattachments() != null) {
+                                    assignmentModel.getActivityattachments().forEach(activityAttachmentModel -> {
+                                        ActivityAttachment activityAttachment = moodleDataMapper.createActivityAttachment(assignmentCreate, activityAttachmentModel);
+                                        activityAttachmentRepository.save(activityAttachment);
+                                    });
+                                }
                             }
                         });
+
                     });
                 }
         );
     }
 
     @Transactional
-    public List<CourseResponseEntity> getAllCourse(String apiKey,String moodleUrl){
+    public List<CourseResponseEntity> getAllCourse(Organization organization){
+        String apiKey = organization.getApiKey();
+        String moodleUrl = organization.getMoodleUrl();
         String apiURL = String.format("%s?wstoken=%s&moodlewsrestformat=json&wsfunction=%s",
                 moodleUrl,apiKey, GET_COURSES);
         RestTemplate restTemplate = new RestTemplate();
@@ -527,14 +644,21 @@ public class MoodleCommandHandler {
             throw new RuntimeException(e);
         }
         List<CourseResponseEntity> result = new ArrayList<>();
-        Optional<User> userResult = userRepository.findByEmail("kayonkiu@gmail.com");
+
         listCourseModel.getCourses().forEach(courseModel -> {
             if(courseModel.getCategoryid()!=0&&courseModel.getId()!="1") {
-                Course courseCreate = moodleDataMapper.createCourse(courseModel, userResult.get().getOrganization());
-                courseCreate.setCreatedBy(userResult.get());
-                courseCreate.setUpdatedBy(userResult.get());
-                Course res = courseRepository.save(courseCreate);
-                courseIdsMap.put(courseModel.getId(), res);
+                Optional<Course> course = courseRepository.findByCourseIdMoodle(Integer.valueOf(courseModel.getId()));
+                if(course.isPresent())
+                {
+                    Course courseUpdate = moodleDataMapper.updateCourse(courseModel, course.get(), organization);
+                    Course res = courseRepository.save(courseUpdate);
+                    courseIdsMap.put(courseModel.getId(), res);
+                }
+                else {
+                    Course courseCreate = moodleDataMapper.createCourse(courseModel, organization);
+                    Course res = courseRepository.save(courseCreate);
+                    courseIdsMap.put(courseModel.getId(), res);
+                }
             }
         });
         courseIdsMap.values().forEach(course -> result.add(moodleDataMapper.courseToCourseResponseEntity(course)));

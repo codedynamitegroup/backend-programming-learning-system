@@ -28,6 +28,12 @@ public class IntroAttachmentRepositoryImpl implements IntroAttachmentRepository 
     }
 
     @Override
+    public Optional<IntroAttachment> findByFileName(String fileName) {
+        return introAttachmentJpaRepository.findByFileName(fileName)
+                .map(introAttachmentDataAccessMapper::introAttachmentEntityToIntroAttachment);
+    }
+
+    @Override
     public IntroAttachment save(IntroAttachment introAttachment) {
         return introAttachmentDataAccessMapper.introAttachmentEntityToIntroAttachment(introAttachmentJpaRepository
                 .saveAndFlush(introAttachmentDataAccessMapper

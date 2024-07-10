@@ -2,7 +2,6 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.assignment.CreateAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.assignment.CreateAssignmentResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.create.calendarevent.CreateCalendarEventCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.assignment.DeleteAssignmentCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.assignment.DeleteAssignmentResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.calendarevent.DeleteCalendarEventCommand;
@@ -18,8 +17,6 @@ import com.backend.programming.learning.system.course.service.domain.mapper.assi
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamSubmissionRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
-import com.backend.programming.learning.system.course.service.domain.valueobject.NotificationComponentType;
-import com.backend.programming.learning.system.course.service.domain.valueobject.NotificationEventType;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -49,18 +46,18 @@ public class AssignmentCommandHandler {
         log.info("Create assignment command received");
         Assignment assignment= assignmentCreateHelper.persistAssignment(createAssignmentCommand);
 
-        CreateCalendarEventCommand createCalendarEventCommand = CreateCalendarEventCommand.builder()
-                .name(assignment.getTitle())
-                .description(assignment.getIntro())
-                .eventType(NotificationEventType.COURSE.name())
-                .startTime(assignment.getTime_open())
-                .endTime(assignment.getTime_close())
-                .courseId(assignment.getCourse().getId().getValue())
-                .assignmentId(assignment.getId().getValue())
-                .component(NotificationComponentType.ASSIGNMENT.name())
-                .build();
-
-        calendarEventCommandHandler.createCalendarEvent(createCalendarEventCommand);
+//        CreateCalendarEventCommand createCalendarEventCommand = CreateCalendarEventCommand.builder()
+//                .name(assignment.getTitle())
+//                .description(assignment.getIntro())
+//                .eventType(NotificationEventType.COURSE.name())
+//                .startTime(assignment.getTime_open())
+//                .endTime(assignment.getTime_close())
+//                .courseId(assignment.getCourse().getId().getValue())
+//                .assignmentId(assignment.getId().getValue())
+//                .component(NotificationComponentType.ASSIGNMENT.name())
+//                .build();
+//
+//        calendarEventCommandHandler.createCalendarEvent(createCalendarEventCommand);
 
         return assignmentDataMapper.assignmentToCreateAssignmentResponse(assignment, "Assignment created successfully");
     }

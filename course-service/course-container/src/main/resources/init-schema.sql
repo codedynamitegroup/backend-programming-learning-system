@@ -229,19 +229,9 @@ CREATE TABLE "public".course
     org_id uuid,
     name        text UNIQUE,
     visible     boolean DEFAULT '1',
-    created_by  uuid,
-    updated_by  uuid,
     created_at  TIMESTAMP WITH TIME ZONE,
     updated_at  TIMESTAMP WITH TIME ZONE,
     CONSTRAINT course_pkey PRIMARY KEY (id),
-    CONSTRAINT course_created_by_fkey FOREIGN KEY (created_by)
-        REFERENCES "public".user (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    CONSTRAINT course_updated_by_fkey FOREIGN KEY (updated_by)
-        REFERENCES "public".user (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE cascade,
     CONSTRAINT org_id_fkey FOREIGN KEY (org_id)
 	    REFERENCES "public".organization (id) MATCH SIMPLE
 	    ON UPDATE CASCADE
@@ -401,24 +391,6 @@ CREATE TABLE "public".exam
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "public".exam_question CASCADE;
-CREATE TABLE "public".exam_question
-(
-    id          uuid DEFAULT gen_random_uuid() NOT NULL,
-    exam_id     uuid                           NOT NULL,
-    question_id uuid                           NOT NULL,
-    page        integer                        ,
-    CONSTRAINT exam_question_pkey PRIMARY KEY (id),
-    CONSTRAINT exam_question_exam_id_fkey FOREIGN KEY (exam_id)
-        REFERENCES "public".exam (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    CONSTRAINT exam_question_question_id_fkey FOREIGN KEY (question_id)
-        REFERENCES "public".question (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
-
 DROP TABLE IF EXISTS "public".exam_submission CASCADE;
 CREATE TABLE "public".exam_submission
 (
@@ -438,6 +410,24 @@ CREATE TABLE "public".exam_submission
         ON DELETE CASCADE,
     CONSTRAINT exam_submission_user_id_fkey FOREIGN KEY (user_id)
         REFERENCES "public".user (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS "public".exam_question CASCADE;
+CREATE TABLE "public".exam_question
+(
+    id          uuid DEFAULT gen_random_uuid() NOT NULL,
+    exam_id     uuid                           NOT NULL,
+    question_id uuid                           NOT NULL,
+    page        integer                        ,
+    CONSTRAINT exam_question_pkey PRIMARY KEY (id),
+    CONSTRAINT exam_question_exam_id_fkey FOREIGN KEY (exam_id)
+        REFERENCES "public".exam (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT exam_question_question_id_fkey FOREIGN KEY (question_id)
+        REFERENCES "public".question (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
@@ -466,7 +456,6 @@ CREATE TABLE "public".exam_question_submission
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
-
 DROP TABLE IF EXISTS "public".intro_file CASCADE;
 CREATE TABLE "public".intro_file
 (
@@ -618,7 +607,6 @@ CREATE TABLE "public".submission_assignment_file
         ON DELETE CASCADE
 );
 
-
 DROP TABLE IF EXISTS "public".submission_assignment_onlinetext CASCADE;
 CREATE TABLE "public".submission_assignment_onlinetext
 (
@@ -660,6 +648,7 @@ CREATE TABLE "public".webhook_function_organization
         ON DELETE CASCADE
 
 );
+
 DROP TABLE IF EXISTS "public".call_moodle_api_function CASCADE;
 CREATE TABLE "public".call_moodle_api_function
 (

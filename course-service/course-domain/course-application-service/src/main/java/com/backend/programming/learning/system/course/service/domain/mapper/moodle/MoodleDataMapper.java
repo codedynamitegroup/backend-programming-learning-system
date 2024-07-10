@@ -222,13 +222,6 @@ public class MoodleDataMapper {
                 .build();
     }
 
-    public SubmissionAssignmentOnlineText createSubmissionAssignmentOnlineText(SubmissionAssignment submissionCreate, SubmissionPlugin submissionPlugin) {
-        return SubmissionAssignmentOnlineText.builder()
-                .id(new SubmissionAssignmentOnlineTextId(UUID.randomUUID()))
-                .content(submissionPlugin.getEditorfields().get(0).getText())
-                .assignmentSubmission(submissionCreate)
-                .build();
-    }
 
     public Section createSection(Course course, SectionModel sectionModel) {
         return Section.builder()
@@ -301,11 +294,9 @@ public class MoodleDataMapper {
                 .organization(course.getOrganization())
 //                .courseType("MOODLE")
                 .visible(courseModel.getVisible().equals("1"))
-                .createdBy(course.getCreatedBy())
                 .posts(course.getPosts())
                 .exams(course.getExams())
                 .assignments(course.getAssignments())
-                .updatedBy(course.getUpdatedBy())
                 .createdAt(course.getCreatedAt())
                 .updatedAt(course.getUpdatedAt())
                 .build();
@@ -319,8 +310,6 @@ public class MoodleDataMapper {
                 .organization(user.getOrganization())
 
                 .visible(courseModel.getVisible().equals("1"))
-                .createdBy(user)
-                .updatedBy(user)
                 .build();
     }
 
@@ -372,14 +361,135 @@ public class MoodleDataMapper {
                 .build();
     }
 
-    public CourseType createCourseType(CourseTypeModel courseTypeModel) {
+    public CourseType createCourseType(CourseTypeModel courseTypeModel,Organization organization) {
         Integer moodleId = Integer.valueOf(courseTypeModel.getId());
-        Optional<Organization> organization = organizationRepository.findOrganizationById(UUID.fromString("08b65a39-394f-4977-a5fa-3fe145b620f8"));
         return CourseType.builder()
                 .id(new CourseTypeId(UUID.randomUUID()))
                 .name(courseTypeModel.getName())
                 .moodleId(moodleId)
-                .organization(organization.get())
+                .organization(organization)
+                .build();
+    }
+
+    public CourseType updateCourseType(CourseTypeModel courseTypeModel, CourseType courseType, Organization organization) {
+        return CourseType.builder()
+                .id(courseType.getId())
+                .name(courseTypeModel.getName())
+                .moodleId(Integer.valueOf(courseTypeModel.getId()))
+                .organization(organization)
+                .build();
+    }
+
+    public Course updateCourse(CourseModel courseModel, Course course, Organization organization) {
+        return Course.builder()
+                .id(course.getId())
+                .name(courseModel.getFullname())
+                .organization(organization)
+                .visible(courseModel.getVisible().equals("1"))
+                .createdAt(course.getCreatedAt())
+                .updatedAt(course.getUpdatedAt())
+                .build();
+    }
+
+    public Assignment updateAssignment(Course course, AssignmentModel assignmentModel, Assignment assignment) {
+        return Assignment.builder()
+                .id(assignment.getId())
+                .course(course)
+                .title(assignmentModel.getName())
+                .intro(assignmentModel.getIntro())
+                .activity(assignmentModel.getActivity())
+                .maxScores(assignmentModel.getGrade().floatValue())
+                .type(Type.FILE)
+                .time_open(ZonedDateTime.ofInstant(
+                        Instant.ofEpochSecond(assignmentModel.getAllowsubmissionsfromdate()),
+                        ZoneId.of("UTC")))
+                .time_close(ZonedDateTime.ofInstant(
+                        Instant.ofEpochSecond(assignmentModel.getDuedate()),
+                        ZoneId.of("UTC")))
+                .time_limit(ZonedDateTime.ofInstant(
+                        Instant.ofEpochSecond(assignmentModel.getTimelimit()),
+                        ZoneId.of("UTC")))
+                .visible(false)
+                .build();
+    }
+
+    public Section updateSection(Course course, SectionModel sectionModel, Section section) {
+        return Section.builder()
+                .id(section.getId())
+                .sectionMoodleId(Integer.valueOf(sectionModel.getId()))
+                .name(sectionModel.getName())
+                .visible(sectionModel.getVisible())
+                .courseId(course.getId())
+                .build();
+    }
+
+    public Module updateModule(Section sectionUpdate, ModuleModel module, Module module1) {
+        ZonedDateTime timeOpen=null;
+        ZonedDateTime timeClose=null;
+        if(module.getDates().size()!=0)
+        {
+            timeOpen=Instant.ofEpochSecond(module.getDates().get(0).getTimestamp()).atZone(ZoneId.of("UTC"));
+            timeClose=Instant.ofEpochSecond(module.getDates().get(1).getTimestamp()).atZone(ZoneId.of("UTC"));
+        }
+        String content=null;
+        if (module.getContents() != null && !module.getContents().isEmpty()) { // Sửa lỗi ở đây
+            content = module.getContents().get(0).getFileurl();
+            content=content.replace("/webservice","");
+        }
+
+        return Module.builder()
+                .id(module1.getId())
+                .cmid(Integer.valueOf(module.getId()))
+                .section(sectionUpdate)
+                .name(module.getName())
+                .visible(module.getVisible())
+                .typeModule(TypeModule.fromLabel(module.getModplural()))
+                .content(content)
+                .timeOpen(timeOpen)
+                .timeClose(timeClose)
+                .build();
+    }
+
+    public SubmissionAssignment updateSubmissionAssignment(Assignment assignment, User user, LastAttempt lastattempt, Feedback feedback, SubmissionAssignment checkSubmissionAssignment) {
+        Boolean isGraded=false;
+        float grade=(float)-1;
+        String content="";
+        String feedbackContent="";
+        ZonedDateTime submittedAt=null;
+        ZonedDateTime timemodified=null;
+
+        submittedAt=Instant.ofEpochSecond(lastattempt.getSubmission().getTimecreated()).atZone(ZoneId.of("UTC"));
+        timemodified=Instant.ofEpochSecond(lastattempt.getSubmission().getTimemodified()).atZone(ZoneId.of("UTC"));
+
+        if(lastattempt.getGradingstatus().equals("graded"))
+        {
+            isGraded=true;
+        }
+
+        if(feedback!=null)
+        {
+            grade= Float.parseFloat(feedback.getGrade().getGrade());
+            feedbackContent=feedback.getPlugins().get(0).getEditorfields().get(0).getText();
+        }
+
+        return SubmissionAssignment.builder()
+                .id(checkSubmissionAssignment.getId())
+                .assignment(assignment)
+                .user(user)
+                .isGraded(isGraded)
+                .content(content)
+                .feedback(feedbackContent)
+                .grade(grade)
+                .timemodified(timemodified)
+                .submittedAt(submittedAt)
+                .build();
+    }
+
+    public SubmissionGrade updateSubmissionGrade(SubmissionAssignment submissionAssignment, SubmissionGrade submissionGrade) {
+        return SubmissionGrade.builder()
+                .id(submissionGrade.getId())
+                .submissionAssignment(submissionAssignment)
+                .grade(submissionGrade.getGrade())
                 .build();
     }
 }

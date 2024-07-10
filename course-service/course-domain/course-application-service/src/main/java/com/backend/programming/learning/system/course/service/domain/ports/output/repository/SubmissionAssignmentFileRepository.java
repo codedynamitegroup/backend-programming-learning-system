@@ -13,5 +13,6 @@ public interface SubmissionAssignmentFileRepository {
 
     Optional<SubmissionAssignmentFile> findById(UUID id);
 
+    Optional<SubmissionAssignmentFile> findBySubmissionAssignmentIdAndFileName(UUID submissionAssignmentId, String fileName);
     void deleteById(UUID id);
 }

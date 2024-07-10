@@ -14,6 +14,5 @@ public interface ActivityAttachmentJpaRepository extends JpaRepository<ActivityA
 
     List<ActivityAttachmentEntity> findAllByAssignmentId(UUID assignmentId);
 
-
-
+    Optional<ActivityAttachmentEntity> findByFileName(String fileName);
 }

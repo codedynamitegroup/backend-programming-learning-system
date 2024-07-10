@@ -28,12 +28,12 @@ INSERT INTO public.course_type (id,moodle_id,name,org_id) VALUES
 	 ('56b844c6-b59a-4135-b028-f8b1a7b68eea',3,'Tiên Tiến','08b65a39-394f-4977-a5fa-3fe145b620f8'),
 	 ('c18999a8-df4b-4690-8342-a254c66a5929',4,'CLC','08b65a39-394f-4977-a5fa-3fe145b620f8');
 
-INSERT INTO public.course (id,course_id_moodle,course_type_id,org_id,name,visible,created_by,updated_by,created_at,updated_at) VALUES
-	 ('983942d9-3366-4004-9f9a-c4e7e7760cc0',2,'c18999a8-df4b-4690-8342-a254c66a5929','08b65a39-394f-4977-a5fa-3fe145b620f8','Nhập môn lập trình',true,'64412e27-169e-44ea-a101-74ebf8cb82d9','64412e27-169e-44ea-a101-74ebf8cb82d9','2024-06-04 19:54:28.102871+07','2024-06-04 19:54:28.102871+07'),
-	 ('c061d55e-a8b0-433f-b6a3-ae9d5601422e',3,'56b844c6-b59a-4135-b028-f8b1a7b68eea','08b65a39-394f-4977-a5fa-3fe145b620f8','Cấu trúc dữ liệu và giải thuật',true,'64412e27-169e-44ea-a101-74ebf8cb82d9','64412e27-169e-44ea-a101-74ebf8cb82d9','2024-06-04 19:54:28.123993+07','2024-06-04 19:54:28.12405+07'),
-	 ('62943cbb-5bc5-4cef-b9a9-e33c82ecf984',4,'c18999a8-df4b-4690-8342-a254c66a5929','08b65a39-394f-4977-a5fa-3fe145b620f8','Khóa học lập trình Python',true,'64412e27-169e-44ea-a101-74ebf8cb82d9','64412e27-169e-44ea-a101-74ebf8cb82d9','2024-06-04 19:54:28.136606+07','2024-06-04 19:54:28.136606+07'),
-	 ('0888fabf-acd7-4ffa-9978-51558e5a0ee1',5,'56b844c6-b59a-4135-b028-f8b1a7b68eea','08b65a39-394f-4977-a5fa-3fe145b620f8','Kỹ thuật lập trình',true,'64412e27-169e-44ea-a101-74ebf8cb82d9','64412e27-169e-44ea-a101-74ebf8cb82d9','2024-06-04 19:54:28.148098+07','2024-06-04 19:54:28.148098+07'),
-	 ('c31382b2-2fbd-43ae-89de-12b6614fc8ab',6,'56b844c6-b59a-4135-b028-f8b1a7b68eea','08b65a39-394f-4977-a5fa-3fe145b620f8','HEHE',true,'64412e27-169e-44ea-a101-74ebf8cb82d9','64412e27-169e-44ea-a101-74ebf8cb82d9','2024-06-04 19:54:28.161833+07','2024-06-04 19:54:28.161833+07');
+INSERT INTO public.course (id,course_id_moodle,course_type_id,org_id,name,visible,created_at,updated_at) VALUES
+	 ('983942d9-3366-4004-9f9a-c4e7e7760cc0',2,'c18999a8-df4b-4690-8342-a254c66a5929','08b65a39-394f-4977-a5fa-3fe145b620f8','Nhập môn lập trình',true,'2024-06-04 19:54:28.102871+07','2024-06-04 19:54:28.102871+07'),
+	 ('c061d55e-a8b0-433f-b6a3-ae9d5601422e',3,'56b844c6-b59a-4135-b028-f8b1a7b68eea','08b65a39-394f-4977-a5fa-3fe145b620f8','Cấu trúc dữ liệu và giải thuật',true,'2024-06-04 19:54:28.123993+07','2024-06-04 19:54:28.12405+07'),
+	 ('62943cbb-5bc5-4cef-b9a9-e33c82ecf984',4,'c18999a8-df4b-4690-8342-a254c66a5929','08b65a39-394f-4977-a5fa-3fe145b620f8','Khóa học lập trình Python',true,'2024-06-04 19:54:28.136606+07','2024-06-04 19:54:28.136606+07'),
+	 ('0888fabf-acd7-4ffa-9978-51558e5a0ee1',5,'56b844c6-b59a-4135-b028-f8b1a7b68eea','08b65a39-394f-4977-a5fa-3fe145b620f8','Kỹ thuật lập trình',true,'2024-06-04 19:54:28.148098+07','2024-06-04 19:54:28.148098+07'),
+	 ('c31382b2-2fbd-43ae-89de-12b6614fc8ab',6,'56b844c6-b59a-4135-b028-f8b1a7b68eea','08b65a39-394f-4977-a5fa-3fe145b620f8','HEHE',true,'2024-06-04 19:54:28.161833+07','2024-06-04 19:54:28.161833+07');
 
 INSERT INTO public.course_user (id,user_id,course_id,role_id) VALUES
 	 ('cb0ed88c-2026-4326-a696-d0f9537c2040','64412e27-169e-44ea-a101-74ebf8cb82d9','983942d9-3366-4004-9f9a-c4e7e7760cc0',3),

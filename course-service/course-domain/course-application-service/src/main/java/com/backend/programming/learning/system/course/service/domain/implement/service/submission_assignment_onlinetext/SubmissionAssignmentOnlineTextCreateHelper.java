@@ -30,7 +30,6 @@ public class SubmissionAssignmentOnlineTextCreateHelper {
         SubmissionAssignment submissionAssignment = getSubmissionAssignment(createSubmissionAssignmentOnlineTextCommand.getSubmissionAssignmentId());
         SubmissionAssignmentOnlineText submissionAssignmentOnlineText = submissionAssignmentOnlineTextDataMapper
                 .createSubmissionAssignmentOnlineTextCommandToSubmissionAssignmentOnlineText(createSubmissionAssignmentOnlineTextCommand);
-        coureDomainService.createSubmissionAssignmentOnlineText(submissionAssignmentOnlineText);
         submissionAssignmentOnlineText.setSubmissionAssignment(submissionAssignment);
         SubmissionAssignmentOnlineText submissionAssignmentOnlineTextResult = saveSubmissionAssignmentOnlineText(submissionAssignmentOnlineText);
         return submissionAssignmentOnlineTextResult;

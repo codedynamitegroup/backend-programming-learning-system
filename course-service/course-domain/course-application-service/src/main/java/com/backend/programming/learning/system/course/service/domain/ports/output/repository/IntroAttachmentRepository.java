@@ -9,6 +9,8 @@ import java.util.UUID;
 public interface IntroAttachmentRepository {
     Optional<IntroAttachment> findById(UUID introAttachmentId);
 
+    Optional<IntroAttachment>findByFileName(String fileName);
+
     IntroAttachment save(IntroAttachment introAttachment);
 
     void deleteById(UUID introAttachmentId);

@@ -50,7 +50,6 @@ public class CourseUpdateHelper {
         User updatedBy = getUser(updateCourseCommand.getUpdatedBy());
         course.setName(updateCourseCommand.getName());
         course.setVisible(updateCourseCommand.getVisible());
-        course.setUpdatedBy(updatedBy);
         Course response = courseRepository.save(course);
         log.info("Course is updated with id: {}", course.getId());
         return response;

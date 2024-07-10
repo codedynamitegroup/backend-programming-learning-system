@@ -34,7 +34,6 @@ public class CallMoodleApiFunctionCreateHelper {
     @Transactional
     public CallMoodleApiFunction persistCallMoodleApiFunction(CreateCallMoodleApiFunctionCommand createCallMoodleApiFunctionCommand) {
         CallMoodleApiFunction callMoodleApiFunction = callMoodleApiFunctionDataMapper.createCallMoodleApiFunctionCommandToCallMoodleApiFunction(createCallMoodleApiFunctionCommand);
-        coureDomainService.createCallMoodleApiFunction(callMoodleApiFunction);
         CallMoodleApiFunction callMoodleApiFunctionResult = saveCallMoodleApiFunction(callMoodleApiFunction);
         return callMoodleApiFunctionResult;
     }
