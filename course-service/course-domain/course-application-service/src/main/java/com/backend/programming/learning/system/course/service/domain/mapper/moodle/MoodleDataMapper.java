@@ -27,7 +27,6 @@ import java.util.concurrent.atomic.AtomicReference;
 @Component
 public class MoodleDataMapper {
     private final CourseTypeRepository courseTypeRepository;
-    private final IntroFileRepository introFileRepository;
 
     private final IntroAttachmentRepository introAttachmentRepository;
 
@@ -35,9 +34,8 @@ public class MoodleDataMapper {
 
     private final OrganizationRepository organizationRepository;
 
-    public MoodleDataMapper(CourseTypeRepository courseTypeRepository, IntroFileRepository introFileRepository, IntroAttachmentRepository introAttachmentRepository, ActivityAttachmentRepository activityAttachmentRepository, OrganizationRepository organizationRepository) {
+    public MoodleDataMapper(CourseTypeRepository courseTypeRepository, IntroAttachmentRepository introAttachmentRepository, ActivityAttachmentRepository activityAttachmentRepository, OrganizationRepository organizationRepository) {
         this.courseTypeRepository = courseTypeRepository;
-        this.introFileRepository = introFileRepository;
         this.introAttachmentRepository = introAttachmentRepository;
         this.activityAttachmentRepository = activityAttachmentRepository;
         this.organizationRepository = organizationRepository;
@@ -65,18 +63,6 @@ public class MoodleDataMapper {
                 .course(course)
                 .user(user)
                 .roleMoodle(roleMoodle)
-                .build();
-    }
-    public IntroFile createIntroFile(Assignment assignment, AssignmentResourseModel assignmentResourseModel)
-    {
-        return IntroFile.builder()
-                .id(new IntroFileId(UUID.randomUUID()))
-                .assignment(assignment)
-                .fileName(assignmentResourseModel.getFilename())
-                .fileSize(assignmentResourseModel.getFilesize())
-                .fileUrl(assignmentResourseModel.getFileurl())
-                .mimetype(assignmentResourseModel.getMimetype())
-                .timemodified(Instant.ofEpochSecond(assignmentResourseModel.getTimemodified()).atZone(ZoneId.of("UTC")))
                 .build();
     }
 

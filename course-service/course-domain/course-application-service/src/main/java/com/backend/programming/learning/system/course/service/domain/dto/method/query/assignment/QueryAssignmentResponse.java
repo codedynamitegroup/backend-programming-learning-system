@@ -1,11 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.dto.method.query.assignment;
 
-import com.backend.programming.learning.system.course.service.domain.dto.responseentity.activity_attachment.ActivityAttachmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.intro_attachment.IntroAttachmentResponseEntity;
-import com.backend.programming.learning.system.course.service.domain.dto.responseentity.intro_file.IntroFileResponseEntity;
-import com.backend.programming.learning.system.course.service.domain.entity.ActivityAttachment;
-import com.backend.programming.learning.system.course.service.domain.entity.IntroAttachment;
-import com.backend.programming.learning.system.course.service.domain.entity.IntroFile;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

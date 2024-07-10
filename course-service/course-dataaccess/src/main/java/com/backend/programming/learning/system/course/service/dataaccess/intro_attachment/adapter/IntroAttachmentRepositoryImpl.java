@@ -3,9 +3,7 @@ package com.backend.programming.learning.system.course.service.dataaccess.intro_
 import com.backend.programming.learning.system.course.service.dataaccess.intro_attachment.mapper.IntroAttachmentDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.intro_attachment.repository.IntroAttachmentJpaRepository;
 import com.backend.programming.learning.system.course.service.domain.entity.IntroAttachment;
-import com.backend.programming.learning.system.course.service.domain.entity.IntroFile;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.IntroAttachmentRepository;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.IntroFileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

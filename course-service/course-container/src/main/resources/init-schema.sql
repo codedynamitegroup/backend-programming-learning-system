@@ -457,23 +457,6 @@ CREATE TABLE "public".exam_question_submission
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS "public".intro_file CASCADE;
-CREATE TABLE "public".intro_file
-(
-    id          uuid DEFAULT gen_random_uuid() NOT NULL,
-    assignment_id uuid,
-    file_name        text                           NOT NULL,
-    file_size integer NOT NULL,
-    file_url         text                           NOT NULL,
-    timemodified TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    mimetype text NOT NULL,
-    CONSTRAINT intro_file_pkey PRIMARY KEY (id),
-    CONSTRAINT intro_file_assignment_id_fkey FOREIGN KEY (assignment_id)
-        REFERENCES "public".assignment (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
-
 DROP TABLE IF EXISTS "public".intro_attachment CASCADE;
 CREATE TABLE "public".intro_attachment
 (
@@ -609,20 +592,6 @@ CREATE TABLE "public".submission_assignment_file
 );
 
 
-DROP TABLE IF EXISTS "public".submission_assignment_onlinetext CASCADE;
-CREATE TABLE "public".submission_assignment_onlinetext
-(
-    id                       uuid DEFAULT gen_random_uuid() NOT NULL,
-    submission_assignment_id uuid                           NOT NULL,
-    content                  text                           NOT NULL,
-    CONSTRAINT submission_assignment_onlinetext_pkey PRIMARY KEY (id),
-    CONSTRAINT submission_assignment_onlinetext_submission_assignment_id_fkey FOREIGN KEY (submission_assignment_id)
-        REFERENCES "public".submission_assignment (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
-
-
 DROP TABLE IF EXISTS "public".webhook_api_function CASCADE;
 CREATE TABLE "public".webhook_api_function
 (
@@ -650,32 +619,7 @@ CREATE TABLE "public".webhook_function_organization
         ON DELETE CASCADE
 
 );
-DROP TABLE IF EXISTS "public".call_moodle_api_function CASCADE;
-CREATE TABLE "public".call_moodle_api_function
-(
-    "id"         uuid DEFAULT gen_random_uuid() NOT NULL,
-    "area"       text                           NOT NULL,
-    "name"       text                           NOT NULL,
-    "decription" text                           NOT NULL,
-    CONSTRAINT call_moodle_api_function_pkey PRIMARY KEY (id)
-);
 
-DROP TABLE IF EXISTS "public".call_organization CASCADE;
-CREATE TABLE "public".call_organization
-(
-    "id"                   uuid DEFAULT gen_random_uuid() NOT NULL,
-    "org_id"               uuid                           NOT NULL,
-    "call_api_function_id" uuid                           NOT NULL,
-    CONSTRAINT call_organization_pkey PRIMARY KEY (id),
-    CONSTRAINT call_organization_organizationn_id_fkey FOREIGN KEY (org_id)
-        REFERENCES "public".organization (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    CONSTRAINT call_organization_call_api_function_id_fkey FOREIGN KEY (call_api_function_id)
-        REFERENCES "public".call_moodle_api_function (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
 
 DROP TABLE IF EXISTS "public".notification CASCADE;
 

@@ -61,7 +61,6 @@ public class MoodleCommandHandler {
     private final SectionRepository sectionRepository;
     private final ModuleRepository moduleRepository;
     private final CourseTypeRepository courseTypeRepository;
-    private final IntroFileRepository introFileRepository;
     private final IntroAttachmentRepository introAttachmentRepository;
     private final ActivityAttachmentRepository activityAttachmentRepository;
 

@@ -70,8 +70,6 @@ INSERT INTO public.assignment (id, assignment_id_moodle, course_id, title, intro
     ('c12f49db-074f-4e5c-9c19-9dffcdf9a6b4', 19, 'c061d55e-a8b0-433f-b6a3-ae9d5601422e', 'Câu hỏi lập trình 4', '<p dir="ltr" style="text-align: left;">Nêu các nguyên lý lập trình hướng đối tượng và giải thích từng nguyên lý.</p>', NULL, 100.0, '2024-07-01 00:00:00+07', '2024-07-08 00:00:00+07', '1970-01-01 08:00:00+08', 'TEXT_ONLINE', false, NULL, '40', '40000', true);
 
 
-INSERT INTO public.intro_file (id,assignment_id,file_name,file_size,file_url,timemodified,mimetype) VALUES
-	 ('db904e87-f1b7-423b-81cf-a822724d0392','b3108f5a-c769-42ab-84c9-80a6d80f5821','assignment.svg',1130,'http://62.171.185.208/webservice/pluginfile.php/67/mod_assign/intro/assignment.svg','2024-05-22 09:18:13+07','image/svg+xml');
 
 INSERT INTO public.intro_attachment (id,assignment_id,file_name,file_size,file_url,timemodified,mimetype) VALUES
 	 ('d2ae79dd-ff69-435a-b487-840c0841da07','b3108f5a-c769-42ab-84c9-80a6d80f5821','DeCuongDeTaiTN (1).pdf',227177,'http://62.171.185.208/webservice/pluginfile.php/67/mod_assign/introattachment/0/DeCuongDeTaiTN%20%281%29.pdf','2024-05-22 09:18:13+07','application/pdf'),
@@ -124,10 +122,6 @@ INSERT INTO submission_assignment_file (id, submission_assignment_id, file_name,
     ('779f5d26-82d7-4161-a2d6-83b145c7f6b2', 'e8500189-218e-4420-95fd-0ba98b4fbddd', 'test1.jpg', 60887, 'http://62.171.185.208/webservice/pluginfile.php/42/assignsubmission_file/submission_files/6/test1.jpg', '2024-05-07 17:25:05+07', 'image/jpeg'),
     ('d7da73d7-76d1-448f-9d7c-cfcdf2045deb', '13bc8451-f836-455d-9a36-fc0e00596443', '438255262_122148182144103154_1065002638849796416_n.jpg', 59292, 'http://62.171.185.208/webservice/pluginfile.php/42/assignsubmission_file/submission_files/14/438255262_122148182144103154_1065002638849796416_n.jpg', '2024-05-08 09:12:00+07', 'image/jpeg'),
     ('7c4727d4-ce7d-4659-9979-496219958a26', '40b37e96-5960-4484-97fe-a3d207c4f5c9', '2024-04-26T07-00 Giao dịch số 7331655503614525-14503349 (1).pdf', 1059932, 'http://62.171.185.208/webservice/pluginfile.php/48/assignsubmission_file/submission_files/16/2024-04-26T07-00%20Giao%20d%E1%BB%8Bch%20s%E1%BB%91%207331655503614525-14503349%20%281%29.pdf', '2024-05-13 10:32:40+07', 'application/pdf');
-
-INSERT INTO public.submission_assignment_onlinetext (id,submission_assignment_id,"content") VALUES
-	 ('ebd4b942-bf89-4a25-b297-4943fd8ed783','b85df3d3-86ce-449f-8ed3-6ecafcad4cf9','<p dir="ltr" style="text-align:left;">hello sieu nhan</p><p dir="ltr" style="text-align:left;"><br /></p><p dir="ltr" style="text-align:left;"></p><ol><li>hihi</li><li>huhu<img src="http://62.171.185.208/webservice/pluginfile.php/41/assignsubmission_onlinetext/submissions_onlinetext/4/b0f87d036752d9f959db778873df9d59.jpg" alt="huhu" width="736" height="737" class="img-fluid atto_image_button_text-bottom" /></li></ol>'),
-	 ('1db25399-7fb1-4e60-a73f-fb5370e8b719','29d83061-2aac-4bb4-9e41-6344dad72264','<p dir="ltr" style="text-align:left;">hehe</p>');
 
 
 INSERT INTO public.submission_grade (id,submission_assignment_id,grade,time_created,time_modified) VALUES
