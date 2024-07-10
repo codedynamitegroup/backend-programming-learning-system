@@ -90,7 +90,7 @@ public class NotificationCreateScheduler {
                 
                 switch (calendarEvent.getComponent()) {
                     case CONTEST: {
-                        String contextUrl = "/contest/" + calendarEvent.getContestId() + "/information";
+                        String contextUrl = "/contests/" + calendarEvent.getContestId() + "/information";
                         String contextUrlName = "Contest";
                         User userFrom = calendarEvent.getUser();
                         User userTo = calendarEvent.getUser();
@@ -117,8 +117,8 @@ public class NotificationCreateScheduler {
                         List<CourseUser> courseUserList = courseUsers.getContent();
                         log.info("CourseUserList size: {}", courseUserList.size());
                         for (CourseUser courseUser : courseUserList) {
-                            boolean isTeacher = courseUser.getRoleMoodle().getName().equals("Giảng viên") ||
-                                            courseUser.getRoleMoodle().getName().equals("Giảng viên 1");
+                            boolean isTeacher = courseUser.getRoleMoodle().getId().getValue().equals(3) ||
+                                    courseUser.getRoleMoodle().getId().getValue().equals(5);
                             String contextUrl = isTeacher
                                     ? "/lecturer/courses/" + calendarEvent.getCourse().getId().getValue() +
                                             "/assignments/" + calendarEvent.getAssignment().getId().getValue() :
@@ -152,8 +152,8 @@ public class NotificationCreateScheduler {
                         List<CourseUser> courseUserList = courseUsers.getContent();
                         log.info("CourseUserList size: {}", courseUserList.size());
                         for (CourseUser courseUser : courseUserList) {
-                            boolean isTeacher = courseUser.getRoleMoodle().getName().equals("Giảng viên") ||
-                                    courseUser.getRoleMoodle().getName().equals("Giảng viên 1");
+                            boolean isTeacher = courseUser.getRoleMoodle().getId().getValue().equals(3) ||
+                                    courseUser.getRoleMoodle().getId().getValue().equals(5);
                             String contextUrl = isTeacher
                                     ? "/lecturer/courses/" + calendarEvent.getCourse().getId().getValue() +
                                     "/assignments/exams/" + calendarEvent.getExam().getId().getValue() :

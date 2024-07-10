@@ -179,6 +179,27 @@ public class CodeQuestionsHelper {
         CodeQuestionsUpdatedEvent event = codeAssessmentDomainService.updateCodeQuestion(codeQuestion);
         codeQuestionRepository.save(codeQuestion);
 
+        if(command.getNewTagIds() !=null && !command.getNewTagIds().isEmpty()) {
+            List<Tag> tags = validateHelper.validateTagsById(command.getNewTagIds());
+            codeQuestionRepository.addTag(codeQuestion.getId(), tags);
+        }
+        if(command.getDeletedTagIds() != null && !command.getDeletedTagIds().isEmpty())
+        {
+            List<CodeQuestionTagId> cqts = command
+                    .getDeletedTagIds()
+                    .stream()
+                    .map(TagId::new)
+                    .map(item->codeQuestionDataMaper
+                            .codeQuestionIdAndTagIdToCodeQuestionTagId(codeQuestion.getId(), item))
+                    .toList();
+            List<CodeQuestionTag> tags = validateHelper.validateCodeQuestionTagsById(cqts);
+            codeQuestionRepository.deleteCodeQuestionTag(tags);
+
+        }
+
+
+
+
         return event;
 
     }
