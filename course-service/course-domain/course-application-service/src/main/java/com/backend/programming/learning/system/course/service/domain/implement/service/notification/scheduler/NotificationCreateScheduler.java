@@ -90,7 +90,7 @@ public class NotificationCreateScheduler {
                 
                 switch (calendarEvent.getComponent()) {
                     case CONTEST: {
-                        String contextUrl = "/contest/" + calendarEvent.getContestId() + "/information";
+                        String contextUrl = "/contests/" + calendarEvent.getContestId() + "/information";
                         String contextUrlName = "Contest";
                         User userFrom = calendarEvent.getUser();
                         User userTo = calendarEvent.getUser();

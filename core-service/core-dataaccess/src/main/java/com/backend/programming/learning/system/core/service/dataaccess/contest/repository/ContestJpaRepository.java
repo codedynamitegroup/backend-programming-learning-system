@@ -203,7 +203,7 @@ public interface ContestJpaRepository extends JpaRepository<ContestEntity, UUID>
         left join contest_user cu on c.id = cu.contest_id
         where c.start_time > ?1 and c.is_public = true
         group by c.id
-        order by count(cu.user_id) desc, c.created_at desc
+        order by c.start_time asc, count(cu.user_id) desc, c.created_at desc
         limit 10
 """, nativeQuery = true)
     List<ContestProjection> findMostPopularContests(ZonedDateTime now);
