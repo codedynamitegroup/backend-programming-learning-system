@@ -37,7 +37,7 @@ public class WebSecurityConfig {
                                 .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission/heat-map").hasRole(USER)
                                 .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission/recent-code-submission").hasRole(USER)
                                 .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission/admin-code-question" ).hasAnyRole(ADMIN)
-                                .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission/admin-code-submission" ).hasAnyRole(ADMIN)
+                                .requestMatchers(HttpMethod.GET, "/code-assessment/code-submission/admin-code-submission" ).hasAnyRole(ADMIN, ADMIN_MOODLE)
 
                                 .requestMatchers(HttpMethod.PUT, "/code-assessment/code-question/{code-question-id}").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE)
                                 .requestMatchers(HttpMethod.PUT, "/code-assessment/code-question/{code-question-id}/language").hasAnyRole(ADMIN, ADMIN_MOODLE, LECTURER_MOODLE)
