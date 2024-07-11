@@ -31,6 +31,25 @@ DROP TYPE IF EXISTS outbox_status;
 CREATE TYPE outbox_status AS ENUM ('STARTED', 'COMPLETED', 'FAILED');
 
 
+DROP TABLE IF EXISTS "public".main_organization CASCADE;
+
+CREATE TABLE "public".main_organization (
+	id uuid NOT NULL,
+	description text,
+	name character varying COLLATE pg_catalog."default" NOT NULL,
+	email character varying COLLATE pg_catalog."default" NOT NULL,
+	phone character varying,
+	address character varying,
+	api_key character varying,
+	moodle_url text,
+	created_at TIMESTAMP WITH TIME ZONE,
+	updated_at TIMESTAMP WITH TIME ZONE,
+	updated_by uuid,
+	created_by uuid,
+	is_deleted boolean NOT NULL DEFAULT false,
+	PRIMARY KEY ("id")
+);
+
 DROP TABLE IF EXISTS "public".main_user CASCADE;
 
 CREATE TABLE "public".main_user (
@@ -56,26 +75,11 @@ CREATE TABLE "public".main_user (
 	is_deleted boolean NOT NULL DEFAULT false,
 	otp INTEGER DEFAULT NULL,
 	otp_expire_at TIMESTAMP WITH TIME ZONE DEFAULT NULL,
-	PRIMARY KEY ("id")
-);
-
-DROP TABLE IF EXISTS "public".main_organization CASCADE;
-
-CREATE TABLE "public".main_organization (
-	id uuid NOT NULL,
-	description text,
-	name character varying COLLATE pg_catalog."default" NOT NULL,
-	email character varying COLLATE pg_catalog."default" NOT NULL,
-	phone character varying,
-	address character varying,
-	api_key character varying,
-	moodle_url text,
-	created_at TIMESTAMP WITH TIME ZONE,
-	updated_at TIMESTAMP WITH TIME ZONE,
-	updated_by uuid,
-	created_by uuid,
-	is_deleted boolean NOT NULL DEFAULT false,
-	PRIMARY KEY ("id")
+	PRIMARY KEY ("id"),
+    CONSTRAINT user_fk1 FOREIGN KEY (organization_id)
+        REFERENCES "public".main_organization (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS "public".role CASCADE;
