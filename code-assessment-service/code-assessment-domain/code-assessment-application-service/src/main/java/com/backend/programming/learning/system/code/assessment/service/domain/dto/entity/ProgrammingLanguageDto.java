@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.d
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -35,6 +36,7 @@ public class ProgrammingLanguageDto {
 
     @NotNull(message = "memoryLimit must not be null")
     @Min(value = 204800, message = "memoryLimit must at least 204800 kB")
+    @Max(value = 512000, message = "memoryLimit must be less than or equal 512000 kB")
     @JsonProperty("memoryLimit")
     Float memoryLimit;
 
