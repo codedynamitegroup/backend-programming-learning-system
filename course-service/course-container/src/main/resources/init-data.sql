@@ -322,27 +322,6 @@ VALUES
 --    ('b6484e21-6937-489c-b031-b71767994743', 'b6484e21-6937-489c-b031-b71767994740', 'b6484e21-6937-489c-b031-b71767994233'),
 --    ('b6484e21-6937-489c-b031-b71767994744', 'b6484e21-6937-489c-b031-b71767994741', 'b6484e21-6937-489c-b031-b71767994132');
 
-INSERT INTO public.webhook_api_function(id, name, description)
-VALUES
-    ('b6484e21-6937-489c-b031-b71767991741', '\\core\\event\\course_created', 'Course created'),
-    ('b6484e21-6937-489c-b031-b71767992742', '\\core\\event\\course_deleted', 'Course deleted'),
-    ('b6484e21-6937-489c-b031-b71767993743', '\\core\\event\\course_updated', 'Course updated'),
-    ('b6484e21-6937-489c-b031-b71767994735', '\\core\\event\\course_section_created', 'Course section created'),
-    ('b6484e21-6937-489c-b031-b71767994736', '\\core\\event\\course_section_deleted', 'Course section deleted'),
-    ('b6484e21-6937-489c-b031-b71767994737', '\\core\\event\\course_section_updated', 'Course section updated'),
-    ('b6484e21-6937-489c-b031-b71767994738', '\\core\\event\\course_module_created', 'Course module created'),
-    ('b6484e21-6937-489c-b031-b71767994739', '\\core\\event\\course_module_deleted', 'Course module deleted'),
-    ('b6484e21-6937-489c-b031-b71767994740', '\\core\\event\\course_module_updated', 'Course module updated'),
-    ('b6484e21-6937-489c-b031-b71767994741', '\\core\\event\\user_created', 'User created'),
-    ('b6484e21-6937-489c-b031-b71767994742', '\\core\\event\\user_deleted', 'User deleted'),
-    ('b6484e21-6937-489c-b031-b71767994743', '\\core\\event\\user_updated', 'User updated');
-
-
-INSERT INTO public.webhook_function_organization(id, webhook_api_function_id, org_id)
-VALUES
-    ('b6484e21-6937-489c-b031-b71767994744', 'b6484e21-6937-489c-b031-b71767991741', '08b65a39-394f-4977-a5fa-3fe145b620f8'),
-    ('b6484e21-6937-489c-b031-b71767994745', 'b6484e21-6937-489c-b031-b71767992742', '08b65a39-394f-4977-a5fa-3fe145b620f8'),
-    ('b6484e21-6937-489c-b031-b71767994746', 'b6484e21-6937-489c-b031-b71767993743', '08b65a39-394f-4977-a5fa-3fe145b620f8');
 
 --INSERT INTO public.course_type(id, moodle_id, name)
 --VALUES

@@ -13,7 +13,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "webhook_function_organization")
 public class WebhookFunctionOrganizationEntity {
     @Id
     @Column(name = "id")

@@ -592,35 +592,6 @@ CREATE TABLE "public".submission_assignment_file
 );
 
 
-DROP TABLE IF EXISTS "public".webhook_api_function CASCADE;
-CREATE TABLE "public".webhook_api_function
-(
-    "id"          uuid DEFAULT gen_random_uuid() NOT NULL,
-    "area"        text                           NULL,
-    "name"        text                           NOT NULL,
-    "description" text                           NOT NULL,
-    CONSTRAINT webhook_api_function_pkey PRIMARY KEY (id)
-);
-
-DROP TABLE IF EXISTS "public".webhook_function_organization CASCADE;
-CREATE TABLE "public".webhook_function_organization
-(
-    "id"                      uuid DEFAULT gen_random_uuid() NOT NULL,
-    "org_id"                  uuid                           NOT NULL,
-    "webhook_api_function_id" uuid                           NOT NULL,
-    CONSTRAINT webhook_function_organization_pkey PRIMARY KEY (id),
-    CONSTRAINT webhook_function_organization_organizationn_id_fkey FOREIGN KEY (org_id)
-        REFERENCES "public".organization (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    CONSTRAINT webhook_function_organization_webhook_api_function_id_fkey FOREIGN KEY (webhook_api_function_id)
-        REFERENCES "public".webhook_api_function (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-
-);
-
-
 DROP TABLE IF EXISTS "public".notification CASCADE;
 
 CREATE TABLE "public".notification

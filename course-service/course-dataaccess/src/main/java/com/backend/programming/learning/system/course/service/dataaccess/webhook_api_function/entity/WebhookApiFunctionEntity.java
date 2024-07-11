@@ -12,7 +12,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "webhook_api_function")
 public class WebhookApiFunctionEntity {
 
     @Id
