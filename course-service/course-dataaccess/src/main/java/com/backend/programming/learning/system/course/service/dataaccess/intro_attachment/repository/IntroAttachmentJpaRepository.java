@@ -15,4 +15,7 @@ public interface IntroAttachmentJpaRepository extends JpaRepository<IntroAttachm
     List<IntroAttachmentEntity> findAllByAssignmentId(UUID assignmentId);
 
     void deleteByAssignmentId(UUID assignmentId);
+
+    Optional<IntroAttachmentEntity> findByFileName(String fileName);
+
 }

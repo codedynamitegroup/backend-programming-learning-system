@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.CreateExamSubmissionStartCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.QuestionSubmissionFileCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.QuestionSubmissionFileResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.ExamSubmissionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionExamResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam_submission.QueryExamSubmissionOverviewResponse;
@@ -100,7 +101,7 @@ public class ExamSubmissionDataMapper {
                 .content(questionSubmission.getContent())
                 .rightAnswer(questionSubmission.getRightAnswer())
                 .feedback(questionSubmission.getFeedback())
-                .files(questionSubmissionFileListToQuestionSubmissionFileCommandList(questionSubmission.getQuestionSubmissionFiles()))
+                .files(questionSubmissionFileListToQuestionSubmissionFileResponseList(questionSubmission.getQuestionSubmissionFiles()))
                 .flag(questionSubmission.getFlag())
                 .answerStatus(questionSubmission.getAnswerStatus())
                 .feedback(questionSubmission.getFeedback())
@@ -116,9 +117,23 @@ public class ExamSubmissionDataMapper {
                 .build();
     }
 
+    private QuestionSubmissionFileResponse questionSubmissionFileToQuestionSubmissionFileResponse(QuestionSubmissionFile questionSubmissionFile) {
+        return QuestionSubmissionFileResponse.builder()
+                .id(questionSubmissionFile.getId().getValue().toString())
+                .fileName(questionSubmissionFile.getName())
+                .fileSize(questionSubmissionFile.getSize())
+                .fileType(questionSubmissionFile.getType())
+                .build();
+    }
     private List<QuestionSubmissionFileCommand> questionSubmissionFileListToQuestionSubmissionFileCommandList(List<QuestionSubmissionFile> questionSubmissionFiles) {
         return questionSubmissionFiles.stream()
                 .map(this::questionSubmissionFileToQuestionSubmissionFileCommand)
+                .toList();
+    }
+
+    private List<QuestionSubmissionFileResponse> questionSubmissionFileListToQuestionSubmissionFileResponseList(List<QuestionSubmissionFile> questionSubmissionFiles) {
+        return questionSubmissionFiles.stream()
+                .map(this::questionSubmissionFileToQuestionSubmissionFileResponse)
                 .toList();
     }
 

@@ -53,11 +53,6 @@ public class CourseDomainServiceImpl implements CourseDomainService {
         log.info("AssignmentSubmission with id: {} is initiated", submissionAssignment.getId().getValue());
     }
 
-    @Override
-    public void createSubmissionAssignmentOnlineText(SubmissionAssignmentOnlineText submissionAssignmentOnlineText) {
-        submissionAssignmentOnlineText.initializeSubmissionAssignmentOnlineText();
-        log.info("SubmissionAssignmentOnlineText with id: {} is initiated", submissionAssignmentOnlineText.getId().getValue());
-    }
 
     @Override
     public void createSubmissionAssignmentFile(SubmissionAssignmentFile submissionAssignmentFile) {
@@ -101,12 +96,6 @@ public class CourseDomainServiceImpl implements CourseDomainService {
         module.initializeModule();
         log.info("Module with id: {} is initiated", module.getId().getValue());
 
-    }
-
-    @Override
-    public void createCallMoodleApiFunction(CallMoodleApiFunction callMoodleApiFunction) {
-        callMoodleApiFunction.initializeCallMoodleApiFunction();
-        log.info("CallMoodleApiFunction with id: {} is initiated", callMoodleApiFunction.getId().getValue());
     }
 
     @Override

@@ -44,4 +44,11 @@ public class ActivityAttachmentRepositoryImpl implements ActivityAttachmentRepos
                 .saveAndFlush(activityAttachmentDataAccessMapper
                         .activityAttachmentToActivityAttachmentEntity(activityAttachment)));
     }
+
+    @Override
+    public Optional<ActivityAttachment> findByFileName(String fileName) {
+        return
+                activityAttachmentJpaRepository.findByFileName(fileName)
+                        .map(activityAttachmentDataAccessMapper::activityAttachmentEntityToActivityAttachment);
+    }
 }

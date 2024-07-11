@@ -14,4 +14,6 @@ public interface ActivityAttachmentRepository {
     List<ActivityAttachment> findByAssignmentId(UUID assignmentId);
 
     ActivityAttachment save(ActivityAttachment activityAttachment);
+
+   Optional<ActivityAttachment> findByFileName(String fileName);
 }

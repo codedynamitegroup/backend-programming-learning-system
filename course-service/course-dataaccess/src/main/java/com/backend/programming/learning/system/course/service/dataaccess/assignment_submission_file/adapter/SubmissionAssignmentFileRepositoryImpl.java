@@ -46,6 +46,13 @@ public class SubmissionAssignmentFileRepositoryImpl implements SubmissionAssignm
     }
 
     @Override
+    public Optional<SubmissionAssignmentFile> findBySubmissionAssignmentIdAndFileName(UUID submissionAssignmentId, String fileName) {
+        return
+                submissionAssignmentFileJpaRepository.findBySubmissionAssignmentIdAndFileName(submissionAssignmentId, fileName)
+                        .map(submissionAssignmentFileDataAccessMapper::assignmentSubmissionFileEntityToAssignmentSubmissionFile);
+    }
+
+    @Override
     public void deleteById(UUID id) {
         submissionAssignmentFileJpaRepository.deleteById(id);
 

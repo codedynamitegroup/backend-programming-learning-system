@@ -17,11 +17,9 @@ public class Course extends AggregateRoot<CourseId> {
     private CourseType courseType;
     private String key;
     private Boolean visible;
-    private User createdBy;
     private List<Post> posts;
     private List<Exam> exams;
     private List<Assignment> assignments;
-    private User updatedBy;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
@@ -34,11 +32,9 @@ public class Course extends AggregateRoot<CourseId> {
         courseType = builder.courseType;
         key = builder.key;
         visible = builder.visible;
-        createdBy = builder.createdBy;
         posts = builder.posts;
         exams = builder.exams;
         assignments = builder.assignments;
-        updatedBy = builder.updatedBy;
         createdAt = builder.createdAt;
         updatedAt = builder.updatedAt;
     }
@@ -103,14 +99,6 @@ public class Course extends AggregateRoot<CourseId> {
         this.visible = visible;
     }
 
-    public User getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(User createdBy) {
-        this.createdBy = createdBy;
-    }
-
     public List<Post> getPosts() {
         return posts;
     }
@@ -135,13 +123,6 @@ public class Course extends AggregateRoot<CourseId> {
         this.assignments = assignments;
     }
 
-    public User getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(User updatedBy) {
-        this.updatedBy = updatedBy;
-    }
 
     public ZonedDateTime getCreatedAt() {
         return createdAt;
@@ -173,11 +154,9 @@ public class Course extends AggregateRoot<CourseId> {
         private CourseType courseType;
         private String key;
         private Boolean visible;
-        private User createdBy;
         private List<Post> posts;
         private List<Exam> exams;
         private List<Assignment> assignments;
-        private User updatedBy;
         private ZonedDateTime createdAt;
         private ZonedDateTime updatedAt;
 
@@ -228,10 +207,6 @@ public class Course extends AggregateRoot<CourseId> {
             return this;
         }
 
-        public Builder createdBy(User val) {
-            createdBy = val;
-            return this;
-        }
 
         public Builder posts(List<Post> val) {
             posts = val;
@@ -248,10 +223,6 @@ public class Course extends AggregateRoot<CourseId> {
             return this;
         }
 
-        public Builder updatedBy(User val) {
-            updatedBy = val;
-            return this;
-        }
 
         public Builder createdAt(ZonedDateTime val) {
             createdAt = val;

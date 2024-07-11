@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -30,6 +31,12 @@ public class CourseUserRepositoryImpl implements CourseUserRepository {
         return courseUserDataAccessMapper.courseUserEntityToCourseUser(courseUserJpaRepository
                 .save(courseUserDataAccessMapper
                         .courseUserToCourseUserEntity(courseUser)));
+    }
+
+    @Override
+    public Optional<CourseUser> findByCourseIdAndUserId(UUID courseId, UUID userId) {
+        return courseUserJpaRepository.findByCourseIdAndUserId(courseId, userId)
+                .map(courseUserDataAccessMapper::courseUserEntityToCourseUser);
     }
 
     @Override

@@ -158,9 +158,9 @@ public class ContestQueryHelper {
 
         Page<Contest> contests = null;
         if (
-                searchName == null ||
+                (searchName == null ||
                         searchName.isEmpty() ||
-                        searchName.isBlank()
+                        searchName.isBlank()) && startTimeFilter.equals("ALL")
         ) {
             try {
                 QueryAllContestsResponse redisResponse = contestRedisService.getAllContests(

@@ -135,7 +135,7 @@ public class CalendarEventRequestHelper {
                     .smallMessage(smallMessage)
                     .component(calendarEvent.getComponent())
                     .eventType(calendarEvent.getEventType())
-                    .contextUrl("/contest/" + calendarEvent.getContestId() + "/information")
+                    .contextUrl("/contests/" + calendarEvent.getContestId() + "/information")
                     .contextUrlName("Contest")
                     .isRead(false)
                     .timeRead(null)

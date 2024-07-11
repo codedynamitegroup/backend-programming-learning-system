@@ -46,11 +46,6 @@ public class UserEntity {
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
-    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.REMOVE)
-    private List<CourseEntity> courseCreatedBy;
-
-    @OneToMany(mappedBy = "updatedBy", cascade = CascadeType.REMOVE)
-    private List<CourseEntity> courseUpdatedBy;
 
     @OneToMany(mappedBy = "createdBy", cascade = CascadeType.REMOVE)
     private List<QuestionEntity> questionsCreatedBy;

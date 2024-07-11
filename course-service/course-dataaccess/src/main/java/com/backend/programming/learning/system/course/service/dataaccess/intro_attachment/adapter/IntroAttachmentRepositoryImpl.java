@@ -3,9 +3,7 @@ package com.backend.programming.learning.system.course.service.dataaccess.intro_
 import com.backend.programming.learning.system.course.service.dataaccess.intro_attachment.mapper.IntroAttachmentDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.intro_attachment.repository.IntroAttachmentJpaRepository;
 import com.backend.programming.learning.system.course.service.domain.entity.IntroAttachment;
-import com.backend.programming.learning.system.course.service.domain.entity.IntroFile;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.IntroAttachmentRepository;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.IntroFileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -24,6 +22,12 @@ public class IntroAttachmentRepositoryImpl implements IntroAttachmentRepository 
     @Override
     public Optional<IntroAttachment> findById(UUID introAttachmentId) {
         return introAttachmentJpaRepository.findById(introAttachmentId)
+                .map(introAttachmentDataAccessMapper::introAttachmentEntityToIntroAttachment);
+    }
+
+    @Override
+    public Optional<IntroAttachment> findByFileName(String fileName) {
+        return introAttachmentJpaRepository.findByFileName(fileName)
                 .map(introAttachmentDataAccessMapper::introAttachmentEntityToIntroAttachment);
     }
 

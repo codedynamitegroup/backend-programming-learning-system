@@ -38,8 +38,6 @@ public class CourseDataMapper {
                 .courseType(createCourseCommand.courseType())
                 .key(createCourseCommand.key())
                 .visible(createCourseCommand.visible())
-                .createdBy(user)
-                .updatedBy(user)
                 .build();
     }
 
@@ -54,8 +52,6 @@ public class CourseDataMapper {
                 .courseType(courseType)
                 .key(courseModel.getIdnumber())
                 .visible(courseModel.getVisible().equals(1))
-                .createdBy(user)
-                .updatedBy(user)
                 .build();
     }
 
@@ -65,8 +61,6 @@ public class CourseDataMapper {
                 .name(course.getName())
                 .courseType(course.getCourseType())
                 .visible(course.getVisible())
-                .createdBy(course.getCreatedBy().getId())
-                .createdAt(course.getCreatedAt())
                 .message(message)
                 .build();
     }
@@ -130,7 +124,6 @@ public class CourseDataMapper {
                           CourseType courseType) {
         previousCourse.setName(courseModel.getFullname());
         previousCourse.setCourseType(courseType);
-        previousCourse.setUpdatedBy(user);
         previousCourse.setName(courseModel.getFullname());
         previousCourse.setVisible(courseModel.getVisible().equals(1));
     }
