@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.backend.programming.learning.system.course.service.domain.entity.Module;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -30,6 +31,13 @@ public class ModuleRepositoryImpl implements ModuleRepository {
         return moduleDataAccessMapper.moduleEntityToModule(moduleJpaRepository
                 .findById(moduleId)
                 .orElseThrow(() -> new RuntimeException("Module not found")));
+    }
+
+    @Override
+    public Optional<Module> findByCmid(Integer cmid) {
+        return
+            moduleJpaRepository.findByCmid(cmid)
+                .map(moduleDataAccessMapper::moduleEntityToModule);
     }
 
     @Override

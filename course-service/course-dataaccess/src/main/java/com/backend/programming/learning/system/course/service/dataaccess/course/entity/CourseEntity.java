@@ -42,13 +42,6 @@ public class CourseEntity {
     private String name;
     private Boolean visible;
 
-    @ManyToOne
-    @JoinColumn(name = "created_by", referencedColumnName = "id")
-    private UserEntity createdBy;
-
-    @ManyToOne
-    @JoinColumn(name = "updated_by", referencedColumnName = "id")
-    private UserEntity updatedBy;
 
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;

@@ -6,9 +6,7 @@ import com.backend.programming.learning.system.course.service.dataaccess.intro_a
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.intro_attachment.IntroAttachmentResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.Assignment;
 import com.backend.programming.learning.system.course.service.domain.entity.IntroAttachment;
-import com.backend.programming.learning.system.course.service.domain.entity.IntroFile;
 import com.backend.programming.learning.system.course.service.domain.valueobject.IntroAttachmentId;
-import com.backend.programming.learning.system.course.service.domain.valueobject.IntroFileId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

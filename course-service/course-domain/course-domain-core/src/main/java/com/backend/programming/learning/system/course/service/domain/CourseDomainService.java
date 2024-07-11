@@ -23,8 +23,6 @@ public interface CourseDomainService {
 
     void createSubmissionAssignment(SubmissionAssignment submissionAssignment);
 
-    void createSubmissionAssignmentOnlineText(SubmissionAssignmentOnlineText submissionAssignmentOnlineText);
-
     void createSubmissionAssignmentFile(SubmissionAssignmentFile submissionAssignmentFile);
     void createCourseUsers(List<CourseUser> courseUsers);
     void createCourseUser(CourseUser courseUser);
@@ -36,8 +34,6 @@ public interface CourseDomainService {
     void createSection(Section section);
 
     void createModule(Module module);
-
-    void createCallMoodleApiFunction(CallMoodleApiFunction callMoodleApiFunction);
 
     void createQuestionBankCategory(QuestionBankCategory questionBankCategory);
 

@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.ports.outp
 import com.backend.programming.learning.system.course.service.domain.entity.Module;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface ModuleRepository {
@@ -9,6 +10,8 @@ public interface ModuleRepository {
     Module save(Module module);
 
     Module findById(UUID moduleId);
+
+    Optional<Module> findByCmid(Integer cmid);
 
     List<Module> findBySectionId(UUID sectionId);
 

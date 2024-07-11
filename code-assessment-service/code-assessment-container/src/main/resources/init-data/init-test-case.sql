@@ -76,7 +76,7 @@ INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample
 VALUES ('923e4567-e89b-12d3-a456-426614174009', '2f3b15cc-219f-47eb-8d17-702e89afb86a', '225', '1, 3, 5, 9, 15, 25, 45, 75, 225', false);
 
 INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
-VALUES ('103e4567-e89b-12d3-a456-426614174010', '2f3b15cc-219f-47eb-8d17-702e89afb86a', '500', '1, 5, 25', false);
+VALUES ('103e4567-e89b-12d3-a456-426614174010', '2f3b15cc-219f-47eb-8d17-702e89afb86a', '500', '1, 5, 25, 125', false);
 
 --8
 -- Sample test case for n = 13579 (all odd digits, sample case)
@@ -409,7 +409,7 @@ VALUES ('4988b8e3-3df1-41b3-b20a-c8b5b3f33698', 'd49496bb-87a5-483f-9597-564ad6e
 
 -- Case: a is negative and b is positive
 INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)
-VALUES ('8c6f0bd5-a9ba-4f89-a4c8-82e8958d0795', 'd49496bb-87a5-483f-9597-564ad6ee0305', '-4 8', '-2.000', false);
+VALUES ('8c6f0bd5-a9ba-4f89-a4c8-82e8958d0795', 'd49496bb-87a5-483f-9597-564ad6ee0305', '-4 8', '2.000', false);
 
 -- Case: a = -100, b = 100
 INSERT INTO test_cases (id, code_question_id, input_data, output_data, is_sample)

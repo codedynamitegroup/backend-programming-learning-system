@@ -12,4 +12,7 @@ import java.util.UUID;
 public interface SubmissionAssignmentFileJpaRepository extends JpaRepository<SubmissionAssignmentFileEntity, UUID> {
     Optional<SubmissionAssignmentFileEntity> findById(UUID id);
 
-    List<SubmissionAssignmentFileEntity> findBySubmissionAssignmentId(UUID submissionAssignmentId);}
+    List<SubmissionAssignmentFileEntity> findBySubmissionAssignmentId(UUID submissionAssignmentId);
+
+    Optional<SubmissionAssignmentFileEntity> findBySubmissionAssignmentIdAndFileName(UUID submissionAssignmentId, String fileName);
+}
