@@ -179,7 +179,6 @@ public class MoodleDataMapper {
                 .isGraded(isGraded)
                 .content(content)
                 .feedback(feedbackContent)
-                .grade(grade)
                 .timemodified(timemodified)
                 .submittedAt(submittedAt)
                 .build();
@@ -370,6 +369,7 @@ public class MoodleDataMapper {
         return Course.builder()
                 .id(course.getId())
                 .name(courseModel.getFullname())
+                .courseType(course.getCourseType())
                 .organization(organization)
                 .visible(courseModel.getVisible().equals("1"))
                 .createdAt(course.getCreatedAt())
@@ -381,6 +381,7 @@ public class MoodleDataMapper {
         return Assignment.builder()
                 .id(assignment.getId())
                 .course(course)
+                .assignmentIdMoodle(Integer.valueOf(assignmentModel.getId()))
                 .title(assignmentModel.getName())
                 .intro(assignmentModel.getIntro())
                 .activity(assignmentModel.getActivity())

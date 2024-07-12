@@ -124,8 +124,8 @@ public class MoodleCommandHandler {
         String moodleUrl = organization.get().getMoodleUrl();
         Page<Course> courses = courseRepository.findAllByOrganizationId(organizationId,"",null,0,999);
         List<Course> courseList = courses.getContent();
-        createSection(courseList,apiKey, moodleUrl);
-        createAssignment(courseList,apiKey, moodleUrl);
+//        createSection(courseList,apiKey, moodleUrl);
+//        createAssignment(courseList,apiKey, moodleUrl);
         createCourseExam(courseList,apiKey, moodleUrl);
         return "Sync resource success";
     }
@@ -151,12 +151,12 @@ public class MoodleCommandHandler {
                 if (examResult.isPresent()) {
                     Exam examUpdate = moodleDataMapper.updateExam(quizModel,
                             examResult.get(),
-                            courseIdsMap.get(quizModel.getCourse().toString()));
+                          course);
                     Exam res = examRepository.save(examUpdate);
                     exams.add(res);
                 } else {
                     Exam exam = moodleDataMapper.createExam(quizModel,
-                            courseIdsMap.get(quizModel.getCourse().toString()));
+                            course);
                     Exam res = examRepository.save(exam);
                     exams.add(res);
                 }
@@ -170,9 +170,8 @@ public class MoodleCommandHandler {
         String apiKey = organization.getApiKey();
         String moodleUrl = organization.getMoodleUrl();
         List<CourseTypeModel> courseTypeModels = getAllCourseType(apiKey, moodleUrl);
-        List<CourseType> courseTypes = courseTypeRepository.findAllByOrganizationId(organization.getId().getValue());
         courseTypeModels.forEach(courseTypeModel -> {
-            Optional<CourseType> courseTypeResult = courseTypes.stream().filter(courseType -> courseType.getMoodleId().equals(courseTypeModel.getId())).findFirst();
+            Optional<CourseType> courseTypeResult = courseTypeRepository.findByMoodleId(Integer.valueOf(courseTypeModel.getId()));
             if (courseTypeResult.isPresent()) {
                 CourseType courseTypeUpdate = moodleDataMapper.updateCourseType(courseTypeModel, courseTypeResult.get(), organization);
                 courseTypeRepository.save(courseTypeUpdate);
@@ -349,13 +348,13 @@ public class MoodleCommandHandler {
                         SubmissionAssignment submissionAssignment = moodleDataMapper.updateSubmissionAssignment(assignment, user.get(),
                                 submissionAssignmentStatus.getLastattempt(), submissionAssignmentStatus.getFeedback(),checkSubmissionAssignment);
                         submissionAssignmentRepository.saveSubmissionAssignment(submissionAssignment);
-                        Optional<SubmissionGrade> checkSubmissionGrade = submissionGradeRepository.findBySubmissionAssignmentId(checkSubmissionAssignment.getId().getValue());
+                        Optional<SubmissionGrade> checkSubmissionGrade = submissionGradeRepository.findBySubmissionAssignmentId(submissionAssignment .getId().getValue());
                         if(checkSubmissionGrade.isPresent())
                         {
                             SubmissionGrade submissionGradeUpdate = moodleDataMapper.updateSubmissionGrade(submissionAssignment,checkSubmissionGrade.get());
                             submissionGradeRepository.save(submissionGradeUpdate);
                         }
-                        else {
+                        else if(submissionAssignmentStatus!=null&&submissionAssignmentStatus.getFeedback()!=null&&submissionAssignmentStatus.getFeedback().getGrade()!=null) {
                             ZonedDateTime timeCreated = Instant.ofEpochSecond(submissionAssignmentStatus.getFeedback().getGrade().getTimecreated()).atZone(ZoneId.of("UTC"));
                             ZonedDateTime timeModified = Instant.ofEpochSecond(submissionAssignmentStatus.getFeedback().getGrade().getTimemodified()).atZone(ZoneId.of("UTC"));
                             SubmissionGrade submissionGrade = SubmissionGrade.builder()
@@ -397,7 +396,7 @@ public class MoodleCommandHandler {
                 else {
                     SubmissionAssignment submissionAssignment =
                             moodleDataMapper.createSubmissionAssignment(assignment,user.get(),
-                                    submissionAssignmentStatus.getLastattempt(),submissionAssignmentStatus.getFeedback());
+                                    submissionAssignmentStatus.getLastattempt(),null);
                     submissionAssignmentRepository.saveSubmissionAssignment(submissionAssignment);
                 }
 
@@ -563,15 +562,15 @@ public class MoodleCommandHandler {
         courseList.forEach(course -> {
                     List<AssignmentCourseModel> allAssignment = getAllAssignments(course.getCourseIdMoodle().toString(),apiKey,moodleUrl);
                     allAssignment.forEach(assignmentCourseModel -> {
-                        Optional<Assignment> assignment = assignmentRepository.findByAssignmentIdMoodle(Integer.valueOf(assignmentCourseModel.getId()));
                         assignmentCourseModel.getAssignments().forEach(assignmentModel -> {
+                            Optional<Assignment> assignment = assignmentRepository.findByAssignmentIdMoodle(Integer.valueOf(assignmentModel.getId()));
                             if(assignment.isPresent())
                             {
                                 Assignment assignmentUpdate = moodleDataMapper.updateAssignment(course, assignmentModel, assignment.get());
                                 assignmentRepository.saveAssignment(assignmentUpdate);
                                 createSubmissionAssignmentUser(assignmentUpdate);
 
-                                if(assignmentModel.getIntroattachments()!=null) {
+                                if(assignmentModel.getIntroattachments()!=null&&assignmentModel.getIntroattachments().size()!=0) {
                                     assignmentModel.getIntroattachments().forEach(introAttachmentModel -> {
                                         Optional<IntroAttachment> checkIntroAttachment = introAttachmentRepository.findByFileName(introAttachmentModel.getFilename());
                                         if(checkIntroAttachment.isPresent())
@@ -584,7 +583,7 @@ public class MoodleCommandHandler {
                                         }
                                     });
                                 }
-                                if(assignmentModel.getActivityattachments()!=null) {
+                                if(assignmentModel.getActivityattachments()!=null && assignmentModel.getActivityattachments().size()!=0) {
                                     assignmentModel.getActivityattachments().forEach(activityAttachmentModel -> {
                                         Optional<ActivityAttachment> checkActivityAttachment = activityAttachmentRepository.findByFileName(activityAttachmentModel.getFilename());
                                         if(checkActivityAttachment.isPresent())
@@ -603,13 +602,13 @@ public class MoodleCommandHandler {
                                 assignmentRepository.saveAssignment(assignmentCreate);
                                 createSubmissionAssignmentUser(assignmentCreate);
 
-                                if (assignmentModel.getIntroattachments() != null) {
+                                if (assignmentModel.getIntroattachments() != null && assignmentModel.getIntroattachments().size() != 0) {
                                     assignmentModel.getIntroattachments().forEach(introAttachmentModel -> {
                                         IntroAttachment introAttachment = moodleDataMapper.createIntroAttachment(assignmentCreate, introAttachmentModel);
                                         introAttachmentRepository.save(introAttachment);
                                     });
                                 }
-                                if (assignmentModel.getActivityattachments() != null) {
+                                if (assignmentModel.getActivityattachments() != null && assignmentModel.getActivityattachments().size() != 0) {
                                     assignmentModel.getActivityattachments().forEach(activityAttachmentModel -> {
                                         ActivityAttachment activityAttachment = moodleDataMapper.createActivityAttachment(assignmentCreate, activityAttachmentModel);
                                         activityAttachmentRepository.save(activityAttachment);
