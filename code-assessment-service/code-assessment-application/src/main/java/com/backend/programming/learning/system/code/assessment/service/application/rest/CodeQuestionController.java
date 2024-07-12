@@ -59,14 +59,14 @@ public class CodeQuestionController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateCodeQuestionResponse> createCodeQuestion
-            (@RequestBody CreateCodeQuestionCommand createCodeQuestionCommand){
-        log.info("Create code question for question id {}", createCodeQuestionCommand.getQuestionId());
+            (@RequestBody CreateCodeQuestionCommand createCodeQuestionCommand,
+            @RequestHeader(value = "Access-Token", required = false) String accessToken
+            ){
+        String email = accessToken != null? JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken): null;
 
-        if(createCodeQuestionCommand.getIsPublic() == null)
-            createCodeQuestionCommand.setIsPublic(true);
-        if(createCodeQuestionCommand.getAllowImport() == null)
-            createCodeQuestionCommand.setAllowImport(false);
-
+        createCodeQuestionCommand.setEmail(email);
+        if(createCodeQuestionCommand.getIsQuestionBank() == null)
+            createCodeQuestionCommand.setIsQuestionBank(false);
         CreateCodeQuestionResponse createCodeQuestionResponse =
             codeQuestionApplicationService.createCodeQuestion(createCodeQuestionCommand);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(createCodeQuestionResponse);
@@ -208,6 +208,15 @@ public class CodeQuestionController {
         command.setCodeQuestionId(codeQuestionId);
         command.setEmail(email);
         codeQuestionApplicationService.updateCodeQuestion(command);
+        return  ResponseEntity.noContent().build();
+    }
+
+    //delete
+    @DeleteMapping("/{code-question-id}")
+    public ResponseEntity deleteCodeQuestion(
+            @PathVariable(value = "code-question-id") UUID codeQuestionId)
+    {
+        codeQuestionApplicationService.deleteCodeQuestion(codeQuestionId);
         return  ResponseEntity.noContent().build();
     }
 

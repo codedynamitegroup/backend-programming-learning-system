@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
-    private final QuestionId questionId;
+    private QuestionId questionId;
     private String name;
     private UserId userId;
     private UUID orgId;
@@ -23,6 +23,7 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
     private Float maxGrade;
     private Boolean isPublic;
     private Boolean allowImport;
+    private Boolean isQuestionBank;
     private QuestionDifficulty difficulty;
     private ZonedDateTime createdAt;
     private Boolean solved;
@@ -41,19 +42,16 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
 
     public void initializeCodeQuestion(){
         setId(new CodeQuestionId(UUID.randomUUID()));
+        this.questionId = new QuestionId(UUID.randomUUID());
         createdAt = ZonedDateTime.now(ZoneId.of(DomainConstants.UTC));
         copyState = CopyState.CREATING;
     }
-    public void validateCodeQuestion(){
-        validateInitialCodeQuestion();
-        //code later
-    }
+
     public void setCopyState(CopyState state){
         copyState = state;
     }
 
-    private void validateInitialCodeQuestion() {
-    }
+
     public void initCancelCopy(CopyState state, List<String> failureMessages){
         this.copyState = state;
         updateFailureMessages(failureMessages);
@@ -160,6 +158,10 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         return maxGrade;
     }
 
+    public Boolean getQuestionBank() {
+        return isQuestionBank;
+    }
+
     public List<Tag> getTags() {
         return tags;
     }
@@ -179,6 +181,7 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         maxGrade = builder.maxGrade;
         isPublic = builder.isPublic;
         allowImport = builder.allowImport;
+        isQuestionBank = builder.isQuestionBank;
         difficulty = builder.difficulty;
         createdAt = builder.createdAt;
         solved = builder.solved;
@@ -218,6 +221,7 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         private Float maxGrade;
         private Boolean isPublic;
         private Boolean allowImport;
+        private Boolean isQuestionBank;
         private QuestionDifficulty difficulty;
         private ZonedDateTime createdAt;
         private Boolean solved;
@@ -297,6 +301,11 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
             return this;
         }
 
+        public Builder isQuestionBank(Boolean val) {
+            isQuestionBank = val;
+            return this;
+        }
+
         public Builder difficulty(QuestionDifficulty val) {
             difficulty = val;
             return this;
@@ -350,5 +359,6 @@ public class CodeQuestion extends AggregateRoot<CodeQuestionId> {
         public CodeQuestion build() {
             return new CodeQuestion(this);
         }
+
     }
 }

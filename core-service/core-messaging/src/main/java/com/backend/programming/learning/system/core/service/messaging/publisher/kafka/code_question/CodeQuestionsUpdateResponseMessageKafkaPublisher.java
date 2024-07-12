@@ -55,7 +55,7 @@ public class CodeQuestionsUpdateResponseMessageKafkaPublisher
                             avroModel,
                             outboxMessage,
                             outboxCallback,
-                            payload.getCodeQuestionId(),
+                            payload.getCodeQuestionId().toString(),
                             "CodeQuestionUpdateResponseAvroModel"));
 
             log.info("CodeQuestionUpdateResponseAvroModel sent to kafka for code question id: {} and saga id: {}",

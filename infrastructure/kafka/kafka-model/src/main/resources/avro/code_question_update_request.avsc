@@ -44,12 +44,42 @@
       "type": "string"
     },
     {
+      "name": "email",
+      "type": "string"
+    },
+    {
+      "name": "categoryBankId",
+      "type": [
+        {
+        "type": "string",
+        "logicalType": "uuid"
+        },
+        "null"]
+    },
+    {
+      "name": "orgId",
+      "type": [
+        {
+          "type": "string",
+          "logicalType": "uuid"
+        },
+        "null"]
+    },
+    {
+      "name": "isQuestionBank",
+      "type": ["null", "boolean"]
+    },
+    {
       "name": "isPublic",
       "type": ["null", "boolean"]
     },
     {
       "name": "allowImport",
       "type": ["null","boolean"]
+    },
+    {
+      "name" : "difficulty",
+      "type" : "string"
     },
     {
       "name": "copyState",

@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Validated
@@ -83,5 +84,10 @@ class CodeQuestionApplicationServiceImpl implements CodeQuestionApplicationServi
     @Override
     public CodeQuestionAdminDto getAdminDetailCodeQuestion(AdminDetailCodeQuestionQuery query) {
         return codeQuestionCommandHandler.getAdminDetailCodeQuestion(query);
+    }
+
+    @Override
+    public void deleteCodeQuestion(UUID codeQuestionId) {
+        codeQuestionCommandHandler.deleteCodeQuestion(codeQuestionId);
     }
 }

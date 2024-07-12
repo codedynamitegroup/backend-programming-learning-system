@@ -1,6 +1,5 @@
 package com.backend.programming.learning.system.code.assessment.service.domain.dto.method.update.code_question;
 
-import com.backend.programming.learning.system.code.assessment.service.domain.dto.validator.OneNotNull.OneNotNull;
 import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotNull;
@@ -35,6 +34,8 @@ public class UpdateCodeQuestionCommand {
     private final QuestionDifficulty difficulty;
     private Boolean isPublic;
     private Boolean allowImport;
+    private Boolean isQuestionBank;
+    private UUID categoryBankId;
     private List<UUID> newTagIds;
     private List<UUID> deletedTagIds;
 

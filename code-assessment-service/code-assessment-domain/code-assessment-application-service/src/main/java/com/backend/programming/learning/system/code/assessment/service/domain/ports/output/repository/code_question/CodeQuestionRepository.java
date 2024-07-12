@@ -44,4 +44,10 @@ public interface CodeQuestionRepository {
     Optional<CodeQuestion> findByName(String name);
 
     List<Tag> findTagByCodeQuestionId(CodeQuestionId id);
+
+    void saveCategory(CodeQuestionId id, UUID categoryBankId);
+
+    void deleteCategory(CodeQuestionId id);
+
+    void deleteById(CodeQuestionId id);
 }

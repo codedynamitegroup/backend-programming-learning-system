@@ -6,17 +6,19 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.qu
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QueryQtypeCodeQuestionResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.question.UpdateQtypeCodeQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.question.QtypeCodeQuestionResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.entity.Organization;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeCodeQuestion;
 import com.backend.programming.learning.system.core.service.domain.entity.Question;
+import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.code_questions.CodeQuestionsUpdatePayload;
-import com.backend.programming.learning.system.domain.valueobject.CopyState;
+import com.backend.programming.learning.system.domain.valueobject.*;
 import com.backend.programming.learning.system.domain.valueobject.QtypeCodeQuestionId;
-import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Component
 public class QtypeCodeQuestionDataMapper {
@@ -28,9 +30,9 @@ public class QtypeCodeQuestionDataMapper {
 
     public QtypeCodeQuestion codeQuestionsUpdateRequestToQtypeCodeQuestion(CodeQuestionsUpdateRequest request){
         return QtypeCodeQuestion.builder()
-                .id(new QtypeCodeQuestionId(UUID.fromString(request.getCodeQuestionId())))
+                .id(new QtypeCodeQuestionId(request.getCodeQuestionId()))
                 .question(Question.builder()
-                        .questionId(new QuestionId(UUID.fromString(request.getQuestionId())))
+                        .questionId(new QuestionId(request.getQuestionId()))
                         .build())
                 .dslTemplate(null)
                 .maxGrade(request.getMaxGrade())
@@ -118,6 +120,26 @@ public class QtypeCodeQuestionDataMapper {
                 .currentPage(qtypeCodeQuestions.getNumber())
                 .totalPages(qtypeCodeQuestions.getTotalPages())
                 .totalItems(qtypeCodeQuestions.getTotalElements())
+                .build();
+    }
+
+    public Question codeQuestionsUpdateRequestToQuestion(CodeQuestionsUpdateRequest request, Organization organization, User createdBy, User updatedBy, CopyState state) {
+        return Question.builder()
+                .questionId(new QuestionId(request.getQuestionId()))
+                .name(request.getName())
+                .defaultMark(request.getMaxGrade())
+                .questionText("")
+                .generalFeedback("")
+                .organization(organization)
+                .difficulty(QuestionDifficulty.valueOf(request.getDifficulty()))
+                .updatedBy(updatedBy)
+                .createdBy(createdBy)
+                .createdAt(ZonedDateTime.now(ZoneId.of("UTC")))
+                .updatedAt(ZonedDateTime.now(ZoneId.of("UTC")))
+                .questionBankCategoryId(request.getCategoryBank())
+                .isOrgQuestionBank(request.getIsQuestionBank())
+                .qtype(QuestionType.CODE)
+                .copyState(state)
                 .build();
     }
 }

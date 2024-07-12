@@ -46,6 +46,11 @@ public class CodeQuestionMessagingDataMapper {
                 .setIsPublic(payload.getIsPublic())
                 .setAllowImport(payload.getAllowImport())
                 .setCopyState(CopyState.valueOf(payload.getCopyState()))
+                .setIsQuestionBank(payload.getIsQuestionBank())
+                .setCategoryBankId(payload.getCategoryBankId() != null?UUID.fromString(payload.getCategoryBankId()):null)
+                .setEmail(payload.getEmail())
+                .setOrgId(payload.getOrgId() != null? UUID.fromString(payload.getOrgId()):null)
+                .setDifficulty(payload.getDifficulty())
 //                .setConstraints(payload.getConstraints())
                 .build();
     }

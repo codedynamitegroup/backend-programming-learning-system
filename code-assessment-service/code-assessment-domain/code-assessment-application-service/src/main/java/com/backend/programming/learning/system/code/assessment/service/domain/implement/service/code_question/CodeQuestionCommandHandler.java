@@ -52,11 +52,11 @@ public class CodeQuestionCommandHandler {
 
     @Transactional
     public CreateCodeQuestionResponse createCodeQuestion(CreateCodeQuestionCommand command){
-        CodeQuestionsUpdatedEvent codeQuestionsUpdatedEvent
-                = codeQuestionsHelper.persistCodeQuestion(command);
+        CodeQuestionsUpdatedEvent codeQuestionsUpdatedEvent = codeQuestionsHelper.persistCodeQuestion(command);
+
         codeQuestionsUpdateOutboxHelper.saveCodeQuestionsUpdateOutboxMessage(
                 codeQuestionDataMaper.codeQuestionsUpdatedEventToCodeQuestionsUpdatePayload(
-                        codeQuestionsUpdatedEvent, CopyState.CREATING
+                        codeQuestionsUpdatedEvent, CopyState.CREATING, command.getCategoryBankId(), command.getEmail()
                 ),
                 codeQuestionsUpdatedEvent.getCodeQuestion().getCopyState(),
                 generalSagaHelper.copyStateToSagaStatus(CopyState.CREATING),
@@ -75,16 +75,19 @@ public class CodeQuestionCommandHandler {
         return codeQuestionDataMaper.pagableCodeQuestionsToGetCodeQuestionsResponse(codeQuestions);
     }
 
+    @Transactional
     public void updateCodeQuestion(UpdateCodeQuestionCommand command) {
         CodeQuestionsUpdatedEvent event = codeQuestionsHelper.updateCodeQuestion(command);
         if(command.getName() != null
                 || command.getProblemStatement() != null
                 || command.getMaxGrade() != null
                 || command.getIsPublic() != null
-                || command.getAllowImport() != null){
+                || command.getAllowImport() != null
+                || command.getIsQuestionBank() != null
+                || command.getCategoryBankId() != null){
             codeQuestionsUpdateOutboxHelper.saveCodeQuestionsUpdateOutboxMessage(
                     codeQuestionDataMaper.codeQuestionsUpdatedEventToCodeQuestionsUpdatePayload(
-                            event, CopyState.UPDATING
+                            event, CopyState.UPDATING, command.getCategoryBankId(), command.getEmail()
                     ),
                     event.getCodeQuestion().getCopyState(),
                     generalSagaHelper.copyStateToSagaStatus(CopyState.UPDATING),
@@ -129,5 +132,21 @@ public class CodeQuestionCommandHandler {
     public CodeQuestionAdminDto getAdminDetailCodeQuestion(AdminDetailCodeQuestionQuery query) {
         CodeQuestion codeQuestion = codeQuestionsHelper.getAdminDetailCodeQuestion(query);
         return dtoMapper.codeQuestionToCodeQuestionAdminDto(codeQuestion);
+    }
+
+    @Transactional
+    public void deleteCodeQuestion(UUID codeQuestionId) {
+        CodeQuestionsUpdatedEvent event = codeQuestionsHelper.deleteCodeQuestion(codeQuestionId);
+
+            codeQuestionsUpdateOutboxHelper.saveCodeQuestionsUpdateOutboxMessage(
+                    codeQuestionDataMaper.codeQuestionsUpdatedEventToCodeQuestionsUpdatePayload(
+                            event, CopyState.DELETING, null, "null"
+                    ),
+                    event.getCodeQuestion().getCopyState(),
+                    generalSagaHelper.copyStateToSagaStatus(CopyState.DELETING),
+                    OutboxStatus.STARTED,
+                    UUID.randomUUID()
+            );
+
     }
 }

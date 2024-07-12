@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.d
 
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.entity.ProgrammingLanguageDto;
 import com.backend.programming.learning.system.domain.valueobject.QuestionDifficulty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,11 +18,13 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class CreateCodeQuestionCommand {
-    @NotNull(message = "questionId must not be null")
-    private final UUID questionId;
+//    @NotNull(message = "questionId must not be null")
+//    private final UUID questionId;
 
-    @NotNull(message = "userId must not be null")
-    private final UUID userId;
+    @NotNull(message = "email must not be null")
+    @Setter
+    @JsonIgnore
+    private String email;
 
     private final UUID orgId;
 
@@ -41,11 +44,16 @@ public class CreateCodeQuestionCommand {
     @NotNull(message = "difficulty must not be null")
     private final QuestionDifficulty difficulty;
 
-    @Setter
+    @NotNull(message = "isPublic must not be null")
     private Boolean isPublic;
 
-    @Setter
+    @NotNull(message = "allowImport must not be null")
     private Boolean allowImport;
+
+    private UUID categoryBankId;
+
+    @Setter
+    private Boolean isQuestionBank;
 
     private final List<@Valid ProgrammingLanguageDto> programmingLanuages;
 

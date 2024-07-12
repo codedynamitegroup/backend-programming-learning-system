@@ -17,6 +17,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.dt
 import jakarta.validation.Valid;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface CodeQuestionApplicationService {
     CreateCodeQuestionResponse createCodeQuestion(@Valid CreateCodeQuestionCommand command);
@@ -40,4 +41,6 @@ public interface CodeQuestionApplicationService {
     GetCodeQuestionsResponse getAdminCodeQuestions(@Valid GetCodeQuestionsQuery query);
 
     CodeQuestionAdminDto getAdminDetailCodeQuestion(@Valid AdminDetailCodeQuestionQuery query);
+
+    void deleteCodeQuestion(UUID codeQuestionId);
 }
