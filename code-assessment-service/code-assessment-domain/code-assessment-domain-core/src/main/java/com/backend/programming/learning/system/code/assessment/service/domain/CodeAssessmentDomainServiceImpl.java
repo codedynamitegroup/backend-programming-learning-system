@@ -24,7 +24,6 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
     public CodeQuestionsUpdatedEvent
     validateAndInitiateCodeQuestion(CodeQuestion codeQuestion) {
 
-        codeQuestion.validateCodeQuestion();
         codeQuestion.initializeCodeQuestion();
         log.info("Code question with id: {} is initiated", codeQuestion.getId().getValue());
         return new CodeQuestionsUpdatedEvent(codeQuestion, ZonedDateTime.now(ZoneId.of("UTC")));
@@ -142,6 +141,13 @@ public class CodeAssessmentDomainServiceImpl implements CodeAssessmentDomainServ
     public CodeQuestion getAdminDetailCodeQuestion(CodeQuestion codeQuestion, List<TestCase> testcases, List<ProgrammingLanguageCodeQuestion> languages, List<Tag> tags) {
         codeQuestion.setAdminDetailInformation(testcases, languages, tags);
         return codeQuestion;
+    }
+
+    @Override
+    public CodeQuestionsUpdatedEvent deleteCodeQuestion(CodeQuestion codeQuestion) {
+        codeQuestion.setCopyState(CopyState.DELETING);
+        return new CodeQuestionsUpdatedEvent(codeQuestion, ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
+
     }
 
 

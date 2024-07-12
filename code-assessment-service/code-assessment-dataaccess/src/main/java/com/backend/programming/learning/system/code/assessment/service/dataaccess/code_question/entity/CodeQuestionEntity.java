@@ -48,6 +48,7 @@ public class CodeQuestionEntity {
     private ZonedDateTime createdAt;
     private Boolean isPublic;
     private Boolean allowImport;
+    private Boolean isQuestionBank;
 
     @Override
     public boolean equals(Object object) {

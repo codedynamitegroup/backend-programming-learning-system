@@ -64,12 +64,17 @@ public class CodeQuestionsHelper {
     public CodeQuestionsUpdatedEvent persistCodeQuestion(CreateCodeQuestionCommand command){
 //        checkQuestion(command.getQuestionId());
 //        validateHelper.validateCodeQuestionNotHaveName(command.getName());
-        CodeQuestion codeQuestion = codeQuestionDataMaper.createCodeQuestionCommandToCodeQuestion(command);
+        User user = validateHelper.validateUserByEmail(command.getEmail());
+        CodeQuestion codeQuestion = codeQuestionDataMaper.createCodeQuestionCommandToCodeQuestion(command, user);
 
         CodeQuestionsUpdatedEvent codeQuestionCreatedEvent
                 = codeAssessmentDomainService.validateAndInitiateCodeQuestion(codeQuestion);
         CodeQuestion codeQuestionRes = saveCodeQuestion(codeQuestion);
         log.info("Code question is created, id: {}", codeQuestionCreatedEvent.getCodeQuestion().getId().getValue());
+
+        if(command.getCategoryBankId() != null){
+            codeQuestionRepository.saveCategory(codeQuestionRes.getId(), command.getCategoryBankId());
+        }
 
         //save tag;
         if(command.getTagIds() != null && !command.getTagIds().isEmpty()){
@@ -179,6 +184,12 @@ public class CodeQuestionsHelper {
         CodeQuestionsUpdatedEvent event = codeAssessmentDomainService.updateCodeQuestion(codeQuestion);
         codeQuestionRepository.save(codeQuestion);
 
+        if(command.getCategoryBankId() != null){
+            codeQuestionRepository.saveCategory(codeQuestion.getId(), command.getCategoryBankId());
+        }else {
+            codeQuestionRepository.deleteCategory(codeQuestion.getId());
+        }
+
         if(command.getNewTagIds() !=null && !command.getNewTagIds().isEmpty()) {
             List<Tag> tags = validateHelper.validateTagsById(command.getNewTagIds());
             codeQuestionRepository.addTag(codeQuestion.getId(), tags);
@@ -196,10 +207,6 @@ public class CodeQuestionsHelper {
             codeQuestionRepository.deleteCodeQuestionTag(tags);
 
         }
-
-
-
-
         return event;
 
     }
@@ -363,5 +370,13 @@ public class CodeQuestionsHelper {
         List<Tag> tags = codeQuestionRepository.findTagByCodeQuestionId(codeQuestion.getId());
 
         return codeAssessmentDomainService.getAdminDetailCodeQuestion(codeQuestion, sampleTestCase, languages, tags);
+    }
+
+    @Transactional
+    public CodeQuestionsUpdatedEvent deleteCodeQuestion(UUID codeQuestionId) {
+        CodeQuestion codeQuestion = validateHelper.validateCodeQuestion(codeQuestionId);
+        CodeQuestionsUpdatedEvent event = codeAssessmentDomainService.deleteCodeQuestion(codeQuestion);
+        codeQuestionRepository.deleteById(codeQuestion.getId());
+        return event;
     }
 }

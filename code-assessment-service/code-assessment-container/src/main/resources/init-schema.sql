@@ -133,6 +133,7 @@ CREATE TABLE qtype_code_questions(
     difficulty difficulty not null,
     is_public boolean default true,
     allow_import boolean default false,
+    is_question_bank boolean default false,
     constraints text,
     created_at TIMESTAMP WITH TIME ZONE default CURRENT_TIMESTAMP,
     max_grade float default 10,
@@ -343,6 +344,17 @@ CREATE TABLE code_submission_contest(
             references code_submission (id) MATCH SIMPLE
                                                    ON DELETE CASCADE
                                                    ON UPDATE NO ACTION
+);
+
+DROP TABLE IF EXISTS code_question_category_bank CASCADE;
+CREATE TABLE code_question_category_bank(
+    code_question_id uuid not null,
+    category_bank_id uuid not null,
+    constraint cq_cb_pk primary key (code_question_id),
+    constraint cq_cb_fk foreign key (code_question_id)
+        references qtype_code_questions (id) MATCH SIMPLE
+                                                       ON DELETE CASCADE
+                                                       ON UPDATE NO ACTION
 );
 -- outbox
 

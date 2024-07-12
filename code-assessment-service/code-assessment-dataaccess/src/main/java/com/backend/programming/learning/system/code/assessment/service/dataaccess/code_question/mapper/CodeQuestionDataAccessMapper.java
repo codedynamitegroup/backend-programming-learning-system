@@ -44,6 +44,7 @@ public class CodeQuestionDataAccessMapper {
                 .maxGrade(codeQuestion.getMaxGrade())
                 .isPublic(codeQuestion.getIsPublic())
                 .allowImport(codeQuestion.getAllowImport())
+                .isQuestionBank(codeQuestion.getQuestionBank())
                 .difficulty(codeQuestion.getDifficulty())
                 .createdAt(codeQuestion.getCreatedAt())
                 .failureMessages(codeQuestion.getFailureMessages() != null ?
@@ -69,6 +70,7 @@ public class CodeQuestionDataAccessMapper {
                 .maxGrade(codeQuestionEntity.getMaxGrade())
                 .isPublic(codeQuestionEntity.getIsPublic())
                 .allowImport(codeQuestionEntity.getAllowImport())
+                .isQuestionBank(codeQuestionEntity.getIsQuestionBank())
                 .difficulty(codeQuestionEntity.getDifficulty())
                 .createdAt(codeQuestionEntity.getCreatedAt())
                 .failureMessages(codeQuestionEntity.getFailureMessages()==null || codeQuestionEntity.getFailureMessages().isEmpty() ? new ArrayList<>() :

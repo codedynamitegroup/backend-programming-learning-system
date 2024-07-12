@@ -13,13 +13,13 @@ import java.util.UUID;
 @Builder
 public class CodeQuestionsUpdatePayload {
     @JsonProperty
-    private final String id;
+    private final UUID id;
     @JsonProperty
-    private final String codeQuestionId;
+    private final UUID codeQuestionId;
     @JsonProperty
-    private final String sagaId;
+    private final UUID sagaId;
     @JsonProperty
-    private final String questionId;
+    private final UUID questionId;
     @JsonProperty
     private final String problemStatement;
     @JsonProperty

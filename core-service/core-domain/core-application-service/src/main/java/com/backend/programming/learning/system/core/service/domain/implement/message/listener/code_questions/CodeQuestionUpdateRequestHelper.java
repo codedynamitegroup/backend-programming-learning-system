@@ -1,13 +1,21 @@
 package com.backend.programming.learning.system.core.service.domain.implement.message.listener.code_questions;
 
 import com.backend.programming.learning.system.core.service.domain.dto.message.CodeQuestionsUpdateRequest;
+import com.backend.programming.learning.system.core.service.domain.entity.Organization;
 import com.backend.programming.learning.system.core.service.domain.entity.QtypeCodeQuestion;
+import com.backend.programming.learning.system.core.service.domain.entity.Question;
+import com.backend.programming.learning.system.core.service.domain.entity.User;
+import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
+import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.mapper.question.QtypeCodeQuestionDataMapper;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.code_questions.CodeQuestionsUpdateOutboxMessage;
 import com.backend.programming.learning.system.core.service.domain.outbox.model.code_questions.CodeQuestionsUpdatePayload;
 import com.backend.programming.learning.system.core.service.domain.outbox.scheduler.code_questions.CodeQuestionsUpdateOutboxHelper;
 import com.backend.programming.learning.system.core.service.domain.ports.output.message.publisher.code_questions.CodeQuestionsUpdateResponseMessagePublisher;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.OrganizationRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QtypeCodeQuestionRepository;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.QuestionRepository;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.UserRepository;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import lombok.extern.slf4j.Slf4j;
@@ -22,12 +30,19 @@ public class CodeQuestionUpdateRequestHelper {
     private final CodeQuestionsUpdateOutboxHelper codeQuestionsUpdateOutboxHelper;
     private final QtypeCodeQuestionRepository codeQuestionRepository;
     private final QtypeCodeQuestionDataMapper codeQuestionDataMapper;
+    private final OrganizationRepository organizationRepository;
+    private final UserRepository userRepository;
+    private final QuestionRepository questionRepository;
     private final CodeQuestionsUpdateResponseMessagePublisher codeQuestionsUpdateResponseMessagePublisher;
 
-    public CodeQuestionUpdateRequestHelper(CodeQuestionsUpdateOutboxHelper codeQuestionsUpdateOutboxHelper, QtypeCodeQuestionRepository codeQuestionRepository, QtypeCodeQuestionDataMapper codeQuestionDataMapper, CodeQuestionsUpdateResponseMessagePublisher codeQuestionsUpdateResponseMessagePublisher) {
+
+    public CodeQuestionUpdateRequestHelper(CodeQuestionsUpdateOutboxHelper codeQuestionsUpdateOutboxHelper, QtypeCodeQuestionRepository codeQuestionRepository, QtypeCodeQuestionDataMapper codeQuestionDataMapper, OrganizationRepository organizationRepository, UserRepository userRepository, QuestionRepository questionRepository, CodeQuestionsUpdateResponseMessagePublisher codeQuestionsUpdateResponseMessagePublisher) {
         this.codeQuestionsUpdateOutboxHelper = codeQuestionsUpdateOutboxHelper;
         this.codeQuestionRepository = codeQuestionRepository;
         this.codeQuestionDataMapper = codeQuestionDataMapper;
+        this.organizationRepository = organizationRepository;
+        this.userRepository = userRepository;
+        this.questionRepository = questionRepository;
         this.codeQuestionsUpdateResponseMessagePublisher = codeQuestionsUpdateResponseMessagePublisher;
     }
 
@@ -35,13 +50,21 @@ public class CodeQuestionUpdateRequestHelper {
                                                                   CopyState copyState) {
         Optional<CodeQuestionsUpdateOutboxMessage> outboxMessage =
                 codeQuestionsUpdateOutboxHelper.getCompletedCodeQuestionsUpdateOutboxMessageBySagaIdAndCopyState(
-                        UUID.fromString(request.getSagaId()),
+                        request.getSagaId(),
                         copyState);
         if (outboxMessage.isPresent()) {
             codeQuestionsUpdateResponseMessagePublisher.publish(outboxMessage.get(), codeQuestionsUpdateOutboxHelper::updateOutboxMessage);
             return true;
         }
         return false;
+    }
+    private User getUser(String email) {
+        Optional<User> user = userRepository.findUserByEmail(email);
+        if (user.isEmpty()) {
+            log.warn("User with email: {} not found", email);
+            throw new UserNotFoundException("Could not find user with email: " + email);
+        }
+        return user.get();
     }
     @Transactional
     public void persistCodeQuestion(CodeQuestionsUpdateRequest codeQuestionsUpdateRequest){
@@ -67,8 +90,13 @@ public class CodeQuestionUpdateRequestHelper {
 //        if(!saveSucceed)
 //            copyState = CopyState.CREATE_FAILED;
 //        payload.setState(copyState.name());
-
+        User createdBy =  getUser(codeQuestionsUpdateRequest.getEmail());
+        User updatedBy = getUser(codeQuestionsUpdateRequest.getEmail());
+        Optional<Organization> organization = codeQuestionsUpdateRequest.getOrgId() == null?Optional.empty() :organizationRepository.findOrganization(codeQuestionsUpdateRequest.getOrgId());
+        Question question = codeQuestionDataMapper.codeQuestionsUpdateRequestToQuestion(codeQuestionsUpdateRequest, organization.orElse(null), createdBy, updatedBy, CopyState.CREATED);
         QtypeCodeQuestion codeQuestion = codeQuestionDataMapper.codeQuestionsUpdateRequestToQtypeCodeQuestion(codeQuestionsUpdateRequest);
+
+        questionRepository.saveQuestion(question);
         codeQuestionRepository.saveQtypeCodeQuestion(codeQuestion);
         payload.setState(CopyState.CREATED.name());
 
@@ -76,7 +104,7 @@ public class CodeQuestionUpdateRequestHelper {
                 payload,
                 CopyState.CREATED,
                 OutboxStatus.STARTED,
-                UUID.fromString(codeQuestionsUpdateRequest.getSagaId())
+                codeQuestionsUpdateRequest.getSagaId()
         );
         log.info("Received CodeQuestionsUpdateRequest for code question id: {}", codeQuestionsUpdateRequest.getCodeQuestionId());
 
@@ -106,7 +134,15 @@ public class CodeQuestionUpdateRequestHelper {
 //            copyState = CopyState.UPDATE_FAILED;
 //        payload.setState(copyState.name());
 
+        Optional<Question> oldQuestion = questionRepository.findQuestion(codeQuestionsUpdateRequest.getQuestionId());
+        User updatedBy = getUser(codeQuestionsUpdateRequest.getEmail());
+        User createdBy =  oldQuestion.isPresent()? oldQuestion.get().getCreatedBy() : updatedBy;
+
+        Optional<Organization> organization = codeQuestionsUpdateRequest.getOrgId() == null?Optional.empty() :organizationRepository.findOrganization(codeQuestionsUpdateRequest.getOrgId());
+        Question question = codeQuestionDataMapper.codeQuestionsUpdateRequestToQuestion(codeQuestionsUpdateRequest, organization.orElse(null), createdBy, updatedBy, CopyState.UPDATED);
         QtypeCodeQuestion codeQuestion = codeQuestionDataMapper.codeQuestionsUpdateRequestToQtypeCodeQuestion(codeQuestionsUpdateRequest);
+
+        questionRepository.saveQuestion(question);
         codeQuestionRepository.saveQtypeCodeQuestion(codeQuestion);
         payload.setState(CopyState.UPDATED.name());
 
@@ -115,7 +151,7 @@ public class CodeQuestionUpdateRequestHelper {
                 payload,
                 CopyState.UPDATED,
                 OutboxStatus.STARTED,
-                UUID.fromString(codeQuestionsUpdateRequest.getSagaId())
+                codeQuestionsUpdateRequest.getSagaId()
         );
         log.info("Received CodeQuestionsUpdateRequest for code question id: {}", codeQuestionsUpdateRequest.getCodeQuestionId());
 
@@ -144,14 +180,14 @@ public class CodeQuestionUpdateRequestHelper {
 //            copyState = CopyState.DELETE_FAILED;
 //        payload.setState(copyState.name());
 
-        codeQuestionRepository.deleteById(UUID.fromString(payload.getCodeQuestionId()));
+        questionRepository.deleteQuestion(codeQuestionsUpdateRequest.getQuestionId());
         payload.setState(CopyState.DELETED.name());
 
         codeQuestionsUpdateOutboxHelper.saveCodeQuestionsUpdateOutboxMessage(
                 payload,
                 CopyState.DELETED,
                 OutboxStatus.STARTED,
-                UUID.fromString(codeQuestionsUpdateRequest.getSagaId())
+                codeQuestionsUpdateRequest.getSagaId()
         );
         log.info("Received CodeQuestionsUpdateRequest for code question id: {}", codeQuestionsUpdateRequest.getCodeQuestionId());
 

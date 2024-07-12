@@ -1,10 +1,12 @@
 package com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.adapter;
 
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.CodeQuestionEntity;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.category_bank.CodeQuestionCategoryBankEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.tag.CodeQuestionTagEntity;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.entity.tag.CodeQuestionTagEntityId;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.mapper.CodeQuestionDataAccessMapper;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.mapper.CodeQuestionTagDataAccessMapper;
+import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.repository.CodeQuestionCategoryBankJpaRepository;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.repository.CodeQuestionJpaRepository;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_question.repository.CodeQuestionTagJpaRepository;
 import com.backend.programming.learning.system.code.assessment.service.dataaccess.code_submission.entity.CodeSubmissionEntity;
@@ -38,8 +40,9 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
     private final ProgrammingLanguageCodeQuestionJpaRepository programmingLanguageCodeQuestionJpaRepository;
     private final ProgrammingLanguageCodeQuestionDataAccessMapper programmingLanguageCodeQuestionDataAccessMapper;
     private final TagDataAccessMapper tagDataAccessMapper;
+    private final CodeQuestionCategoryBankJpaRepository codeQuestionCategoryBankJpaRepository;
 
-    public CodeQuestionRepositoryImpl(CodeQuestionJpaRepository codeQuestionJpaRepository, CodeQuestionDataAccessMapper codeQuestionDataAccessMapper, CodeQuestionTagJpaRepository codeQuestionTagJpaRepository, CodeQuestionTagDataAccessMapper codeQuestionTagDataAccessMapper, GeneralMapper generalMapper, CodeSubmissionJpaRepository codeSubmissionJpaRepository, ProgrammingLanguageCodeQuestionJpaRepository programmingLanguageCodeQuestionJpaRepository, ProgrammingLanguageCodeQuestionDataAccessMapper programmingLanguageCodeQuestionDataAccessMapper, TagDataAccessMapper tagDataAccessMapper) {
+    public CodeQuestionRepositoryImpl(CodeQuestionJpaRepository codeQuestionJpaRepository, CodeQuestionDataAccessMapper codeQuestionDataAccessMapper, CodeQuestionTagJpaRepository codeQuestionTagJpaRepository, CodeQuestionTagDataAccessMapper codeQuestionTagDataAccessMapper, GeneralMapper generalMapper, CodeSubmissionJpaRepository codeSubmissionJpaRepository, ProgrammingLanguageCodeQuestionJpaRepository programmingLanguageCodeQuestionJpaRepository, ProgrammingLanguageCodeQuestionDataAccessMapper programmingLanguageCodeQuestionDataAccessMapper, TagDataAccessMapper tagDataAccessMapper, CodeQuestionCategoryBankJpaRepository codeQuestionCategoryBankJpaRepository) {
         this.codeQuestionJpaRepository = codeQuestionJpaRepository;
         this.codeQuestionDataAccessMapper = codeQuestionDataAccessMapper;
         this.codeQuestionTagJpaRepository = codeQuestionTagJpaRepository;
@@ -49,6 +52,7 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
         this.programmingLanguageCodeQuestionJpaRepository = programmingLanguageCodeQuestionJpaRepository;
         this.programmingLanguageCodeQuestionDataAccessMapper = programmingLanguageCodeQuestionDataAccessMapper;
         this.tagDataAccessMapper = tagDataAccessMapper;
+        this.codeQuestionCategoryBankJpaRepository = codeQuestionCategoryBankJpaRepository;
     }
 
     @Override
@@ -251,5 +255,23 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
         List<CodeQuestionTagEntity> entities = codeQuestionTagJpaRepository.findAllByCodeQuestionId(id.getValue());
 
         return entities.stream().map(CodeQuestionTagEntity::getTag).map(tagDataAccessMapper::entityToTagIgnoreLazy).toList();
+    }
+
+    @Override
+    public void saveCategory(CodeQuestionId id, UUID categoryBankId) {
+        codeQuestionCategoryBankJpaRepository.save(CodeQuestionCategoryBankEntity.builder()
+                        .categoryBankId(categoryBankId)
+                        .codeQuestionId(id.getValue())
+                .build());
+    }
+
+    @Override
+    public void deleteCategory(CodeQuestionId id) {
+        codeQuestionCategoryBankJpaRepository.deleteById(id.getValue());
+    }
+
+    @Override
+    public void deleteById(CodeQuestionId id) {
+        codeQuestionJpaRepository.deleteById(id.getValue());
     }
 }

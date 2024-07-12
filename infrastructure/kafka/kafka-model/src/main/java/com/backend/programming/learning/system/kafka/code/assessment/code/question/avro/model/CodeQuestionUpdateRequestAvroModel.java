@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 5952677563055594681L;
+  private static final long serialVersionUID = 1041666057770604789L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CodeQuestionUpdateRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"codeQuestionId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"questionId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"problemStatement\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"maxGrade\",\"type\":\"float\"},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"isPublic\",\"type\":[\"null\",\"boolean\"]},{\"name\":\"allowImport\",\"type\":[\"null\",\"boolean\"]},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"CREATE_PROPAGATING\",\"UPDATE_PROPAGATING\",\"DELETE_PROPAGATING\",\"CREATE_ROLLBACKING\",\"UPDATE_ROLLBACKING\",\"DELETE_ROLLBACKING\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CodeQuestionUpdateRequestAvroModel\",\"namespace\":\"com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"codeQuestionId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"sagaId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"questionId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"problemStatement\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"maxGrade\",\"type\":\"float\"},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"email\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"categoryBankId\",\"type\":[{\"type\":\"string\",\"logicalType\":\"uuid\"},\"null\"]},{\"name\":\"orgId\",\"type\":[{\"type\":\"string\",\"logicalType\":\"uuid\"},\"null\"]},{\"name\":\"isQuestionBank\",\"type\":[\"null\",\"boolean\"]},{\"name\":\"isPublic\",\"type\":[\"null\",\"boolean\"]},{\"name\":\"allowImport\",\"type\":[\"null\",\"boolean\"]},{\"name\":\"difficulty\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"copyState\",\"type\":{\"type\":\"enum\",\"name\":\"CopyState\",\"symbols\":[\"CREATING\",\"CREATED\",\"UPDATING\",\"UPDATED\",\"DELETING\",\"DELETED\",\"CREATE_PROPAGATING\",\"UPDATE_PROPAGATING\",\"DELETE_PROPAGATING\",\"CREATE_ROLLBACKING\",\"UPDATE_ROLLBACKING\",\"DELETE_ROLLBACKING\",\"DELETE_FAILED\",\"UPDATE_FAILED\",\"CREATE_FAILED\"]}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -83,8 +83,13 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
   private java.lang.String problemStatement;
   private float maxGrade;
   private java.lang.String name;
+  private java.lang.String email;
+  private java.util.UUID categoryBankId;
+  private java.util.UUID orgId;
+  private java.lang.Boolean isQuestionBank;
   private java.lang.Boolean isPublic;
   private java.lang.Boolean allowImport;
+  private java.lang.String difficulty;
   private com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState copyState;
 
   /**
@@ -103,11 +108,16 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
    * @param problemStatement The new value for problemStatement
    * @param maxGrade The new value for maxGrade
    * @param name The new value for name
+   * @param email The new value for email
+   * @param categoryBankId The new value for categoryBankId
+   * @param orgId The new value for orgId
+   * @param isQuestionBank The new value for isQuestionBank
    * @param isPublic The new value for isPublic
    * @param allowImport The new value for allowImport
+   * @param difficulty The new value for difficulty
    * @param copyState The new value for copyState
    */
-  public CodeQuestionUpdateRequestAvroModel(java.util.UUID id, java.util.UUID codeQuestionId, java.util.UUID sagaId, java.util.UUID questionId, java.lang.String problemStatement, java.lang.Float maxGrade, java.lang.String name, java.lang.Boolean isPublic, java.lang.Boolean allowImport, com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState copyState) {
+  public CodeQuestionUpdateRequestAvroModel(java.util.UUID id, java.util.UUID codeQuestionId, java.util.UUID sagaId, java.util.UUID questionId, java.lang.String problemStatement, java.lang.Float maxGrade, java.lang.String name, java.lang.String email, java.util.UUID categoryBankId, java.util.UUID orgId, java.lang.Boolean isQuestionBank, java.lang.Boolean isPublic, java.lang.Boolean allowImport, java.lang.String difficulty, com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState copyState) {
     this.id = id;
     this.codeQuestionId = codeQuestionId;
     this.sagaId = sagaId;
@@ -115,8 +125,13 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
     this.problemStatement = problemStatement;
     this.maxGrade = maxGrade;
     this.name = name;
+    this.email = email;
+    this.categoryBankId = categoryBankId;
+    this.orgId = orgId;
+    this.isQuestionBank = isQuestionBank;
     this.isPublic = isPublic;
     this.allowImport = allowImport;
+    this.difficulty = difficulty;
     this.copyState = copyState;
   }
 
@@ -137,9 +152,14 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
     case 4: return problemStatement;
     case 5: return maxGrade;
     case 6: return name;
-    case 7: return isPublic;
-    case 8: return allowImport;
-    case 9: return copyState;
+    case 7: return email;
+    case 8: return categoryBankId;
+    case 9: return orgId;
+    case 10: return isQuestionBank;
+    case 11: return isPublic;
+    case 12: return allowImport;
+    case 13: return difficulty;
+    case 14: return copyState;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -150,6 +170,11 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
       new org.apache.avro.Conversions.UUIDConversion(),
       new org.apache.avro.Conversions.UUIDConversion(),
       new org.apache.avro.Conversions.UUIDConversion(),
+      null,
+      null,
+      null,
+      null,
+      null,
       null,
       null,
       null,
@@ -176,9 +201,14 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
     case 4: problemStatement = value$ != null ? value$.toString() : null; break;
     case 5: maxGrade = (java.lang.Float)value$; break;
     case 6: name = value$ != null ? value$.toString() : null; break;
-    case 7: isPublic = (java.lang.Boolean)value$; break;
-    case 8: allowImport = (java.lang.Boolean)value$; break;
-    case 9: copyState = (com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState)value$; break;
+    case 7: email = value$ != null ? value$.toString() : null; break;
+    case 8: categoryBankId = (java.util.UUID)value$; break;
+    case 9: orgId = (java.util.UUID)value$; break;
+    case 10: isQuestionBank = (java.lang.Boolean)value$; break;
+    case 11: isPublic = (java.lang.Boolean)value$; break;
+    case 12: allowImport = (java.lang.Boolean)value$; break;
+    case 13: difficulty = value$ != null ? value$.toString() : null; break;
+    case 14: copyState = (com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -303,6 +333,74 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
   }
 
   /**
+   * Gets the value of the 'email' field.
+   * @return The value of the 'email' field.
+   */
+  public java.lang.String getEmail() {
+    return email;
+  }
+
+
+  /**
+   * Sets the value of the 'email' field.
+   * @param value the value to set.
+   */
+  public void setEmail(java.lang.String value) {
+    this.email = value;
+  }
+
+  /**
+   * Gets the value of the 'categoryBankId' field.
+   * @return The value of the 'categoryBankId' field.
+   */
+  public java.util.UUID getCategoryBankId() {
+    return categoryBankId;
+  }
+
+
+  /**
+   * Sets the value of the 'categoryBankId' field.
+   * @param value the value to set.
+   */
+  public void setCategoryBankId(java.util.UUID value) {
+    this.categoryBankId = value;
+  }
+
+  /**
+   * Gets the value of the 'orgId' field.
+   * @return The value of the 'orgId' field.
+   */
+  public java.util.UUID getOrgId() {
+    return orgId;
+  }
+
+
+  /**
+   * Sets the value of the 'orgId' field.
+   * @param value the value to set.
+   */
+  public void setOrgId(java.util.UUID value) {
+    this.orgId = value;
+  }
+
+  /**
+   * Gets the value of the 'isQuestionBank' field.
+   * @return The value of the 'isQuestionBank' field.
+   */
+  public java.lang.Boolean getIsQuestionBank() {
+    return isQuestionBank;
+  }
+
+
+  /**
+   * Sets the value of the 'isQuestionBank' field.
+   * @param value the value to set.
+   */
+  public void setIsQuestionBank(java.lang.Boolean value) {
+    this.isQuestionBank = value;
+  }
+
+  /**
    * Gets the value of the 'isPublic' field.
    * @return The value of the 'isPublic' field.
    */
@@ -334,6 +432,23 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
    */
   public void setAllowImport(java.lang.Boolean value) {
     this.allowImport = value;
+  }
+
+  /**
+   * Gets the value of the 'difficulty' field.
+   * @return The value of the 'difficulty' field.
+   */
+  public java.lang.String getDifficulty() {
+    return difficulty;
+  }
+
+
+  /**
+   * Sets the value of the 'difficulty' field.
+   * @param value the value to set.
+   */
+  public void setDifficulty(java.lang.String value) {
+    this.difficulty = value;
   }
 
   /**
@@ -401,8 +516,13 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
     private java.lang.String problemStatement;
     private float maxGrade;
     private java.lang.String name;
+    private java.lang.String email;
+    private java.util.UUID categoryBankId;
+    private java.util.UUID orgId;
+    private java.lang.Boolean isQuestionBank;
     private java.lang.Boolean isPublic;
     private java.lang.Boolean allowImport;
+    private java.lang.String difficulty;
     private com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState copyState;
 
     /** Creates a new Builder */
@@ -444,17 +564,37 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
         this.name = data().deepCopy(fields()[6].schema(), other.name);
         fieldSetFlags()[6] = other.fieldSetFlags()[6];
       }
-      if (isValidValue(fields()[7], other.isPublic)) {
-        this.isPublic = data().deepCopy(fields()[7].schema(), other.isPublic);
+      if (isValidValue(fields()[7], other.email)) {
+        this.email = data().deepCopy(fields()[7].schema(), other.email);
         fieldSetFlags()[7] = other.fieldSetFlags()[7];
       }
-      if (isValidValue(fields()[8], other.allowImport)) {
-        this.allowImport = data().deepCopy(fields()[8].schema(), other.allowImport);
+      if (isValidValue(fields()[8], other.categoryBankId)) {
+        this.categoryBankId = data().deepCopy(fields()[8].schema(), other.categoryBankId);
         fieldSetFlags()[8] = other.fieldSetFlags()[8];
       }
-      if (isValidValue(fields()[9], other.copyState)) {
-        this.copyState = data().deepCopy(fields()[9].schema(), other.copyState);
+      if (isValidValue(fields()[9], other.orgId)) {
+        this.orgId = data().deepCopy(fields()[9].schema(), other.orgId);
         fieldSetFlags()[9] = other.fieldSetFlags()[9];
+      }
+      if (isValidValue(fields()[10], other.isQuestionBank)) {
+        this.isQuestionBank = data().deepCopy(fields()[10].schema(), other.isQuestionBank);
+        fieldSetFlags()[10] = other.fieldSetFlags()[10];
+      }
+      if (isValidValue(fields()[11], other.isPublic)) {
+        this.isPublic = data().deepCopy(fields()[11].schema(), other.isPublic);
+        fieldSetFlags()[11] = other.fieldSetFlags()[11];
+      }
+      if (isValidValue(fields()[12], other.allowImport)) {
+        this.allowImport = data().deepCopy(fields()[12].schema(), other.allowImport);
+        fieldSetFlags()[12] = other.fieldSetFlags()[12];
+      }
+      if (isValidValue(fields()[13], other.difficulty)) {
+        this.difficulty = data().deepCopy(fields()[13].schema(), other.difficulty);
+        fieldSetFlags()[13] = other.fieldSetFlags()[13];
+      }
+      if (isValidValue(fields()[14], other.copyState)) {
+        this.copyState = data().deepCopy(fields()[14].schema(), other.copyState);
+        fieldSetFlags()[14] = other.fieldSetFlags()[14];
       }
     }
 
@@ -492,17 +632,37 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
         this.name = data().deepCopy(fields()[6].schema(), other.name);
         fieldSetFlags()[6] = true;
       }
-      if (isValidValue(fields()[7], other.isPublic)) {
-        this.isPublic = data().deepCopy(fields()[7].schema(), other.isPublic);
+      if (isValidValue(fields()[7], other.email)) {
+        this.email = data().deepCopy(fields()[7].schema(), other.email);
         fieldSetFlags()[7] = true;
       }
-      if (isValidValue(fields()[8], other.allowImport)) {
-        this.allowImport = data().deepCopy(fields()[8].schema(), other.allowImport);
+      if (isValidValue(fields()[8], other.categoryBankId)) {
+        this.categoryBankId = data().deepCopy(fields()[8].schema(), other.categoryBankId);
         fieldSetFlags()[8] = true;
       }
-      if (isValidValue(fields()[9], other.copyState)) {
-        this.copyState = data().deepCopy(fields()[9].schema(), other.copyState);
+      if (isValidValue(fields()[9], other.orgId)) {
+        this.orgId = data().deepCopy(fields()[9].schema(), other.orgId);
         fieldSetFlags()[9] = true;
+      }
+      if (isValidValue(fields()[10], other.isQuestionBank)) {
+        this.isQuestionBank = data().deepCopy(fields()[10].schema(), other.isQuestionBank);
+        fieldSetFlags()[10] = true;
+      }
+      if (isValidValue(fields()[11], other.isPublic)) {
+        this.isPublic = data().deepCopy(fields()[11].schema(), other.isPublic);
+        fieldSetFlags()[11] = true;
+      }
+      if (isValidValue(fields()[12], other.allowImport)) {
+        this.allowImport = data().deepCopy(fields()[12].schema(), other.allowImport);
+        fieldSetFlags()[12] = true;
+      }
+      if (isValidValue(fields()[13], other.difficulty)) {
+        this.difficulty = data().deepCopy(fields()[13].schema(), other.difficulty);
+        fieldSetFlags()[13] = true;
+      }
+      if (isValidValue(fields()[14], other.copyState)) {
+        this.copyState = data().deepCopy(fields()[14].schema(), other.copyState);
+        fieldSetFlags()[14] = true;
       }
     }
 
@@ -786,6 +946,166 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
     }
 
     /**
+      * Gets the value of the 'email' field.
+      * @return The value.
+      */
+    public java.lang.String getEmail() {
+      return email;
+    }
+
+
+    /**
+      * Sets the value of the 'email' field.
+      * @param value The value of 'email'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel.Builder setEmail(java.lang.String value) {
+      validate(fields()[7], value);
+      this.email = value;
+      fieldSetFlags()[7] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'email' field has been set.
+      * @return True if the 'email' field has been set, false otherwise.
+      */
+    public boolean hasEmail() {
+      return fieldSetFlags()[7];
+    }
+
+
+    /**
+      * Clears the value of the 'email' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel.Builder clearEmail() {
+      email = null;
+      fieldSetFlags()[7] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'categoryBankId' field.
+      * @return The value.
+      */
+    public java.util.UUID getCategoryBankId() {
+      return categoryBankId;
+    }
+
+
+    /**
+      * Sets the value of the 'categoryBankId' field.
+      * @param value The value of 'categoryBankId'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel.Builder setCategoryBankId(java.util.UUID value) {
+      validate(fields()[8], value);
+      this.categoryBankId = value;
+      fieldSetFlags()[8] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'categoryBankId' field has been set.
+      * @return True if the 'categoryBankId' field has been set, false otherwise.
+      */
+    public boolean hasCategoryBankId() {
+      return fieldSetFlags()[8];
+    }
+
+
+    /**
+      * Clears the value of the 'categoryBankId' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel.Builder clearCategoryBankId() {
+      categoryBankId = null;
+      fieldSetFlags()[8] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'orgId' field.
+      * @return The value.
+      */
+    public java.util.UUID getOrgId() {
+      return orgId;
+    }
+
+
+    /**
+      * Sets the value of the 'orgId' field.
+      * @param value The value of 'orgId'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel.Builder setOrgId(java.util.UUID value) {
+      validate(fields()[9], value);
+      this.orgId = value;
+      fieldSetFlags()[9] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'orgId' field has been set.
+      * @return True if the 'orgId' field has been set, false otherwise.
+      */
+    public boolean hasOrgId() {
+      return fieldSetFlags()[9];
+    }
+
+
+    /**
+      * Clears the value of the 'orgId' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel.Builder clearOrgId() {
+      orgId = null;
+      fieldSetFlags()[9] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'isQuestionBank' field.
+      * @return The value.
+      */
+    public java.lang.Boolean getIsQuestionBank() {
+      return isQuestionBank;
+    }
+
+
+    /**
+      * Sets the value of the 'isQuestionBank' field.
+      * @param value The value of 'isQuestionBank'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel.Builder setIsQuestionBank(java.lang.Boolean value) {
+      validate(fields()[10], value);
+      this.isQuestionBank = value;
+      fieldSetFlags()[10] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'isQuestionBank' field has been set.
+      * @return True if the 'isQuestionBank' field has been set, false otherwise.
+      */
+    public boolean hasIsQuestionBank() {
+      return fieldSetFlags()[10];
+    }
+
+
+    /**
+      * Clears the value of the 'isQuestionBank' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel.Builder clearIsQuestionBank() {
+      isQuestionBank = null;
+      fieldSetFlags()[10] = false;
+      return this;
+    }
+
+    /**
       * Gets the value of the 'isPublic' field.
       * @return The value.
       */
@@ -800,9 +1120,9 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel.Builder setIsPublic(java.lang.Boolean value) {
-      validate(fields()[7], value);
+      validate(fields()[11], value);
       this.isPublic = value;
-      fieldSetFlags()[7] = true;
+      fieldSetFlags()[11] = true;
       return this;
     }
 
@@ -811,7 +1131,7 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
       * @return True if the 'isPublic' field has been set, false otherwise.
       */
     public boolean hasIsPublic() {
-      return fieldSetFlags()[7];
+      return fieldSetFlags()[11];
     }
 
 
@@ -821,7 +1141,7 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel.Builder clearIsPublic() {
       isPublic = null;
-      fieldSetFlags()[7] = false;
+      fieldSetFlags()[11] = false;
       return this;
     }
 
@@ -840,9 +1160,9 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel.Builder setAllowImport(java.lang.Boolean value) {
-      validate(fields()[8], value);
+      validate(fields()[12], value);
       this.allowImport = value;
-      fieldSetFlags()[8] = true;
+      fieldSetFlags()[12] = true;
       return this;
     }
 
@@ -851,7 +1171,7 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
       * @return True if the 'allowImport' field has been set, false otherwise.
       */
     public boolean hasAllowImport() {
-      return fieldSetFlags()[8];
+      return fieldSetFlags()[12];
     }
 
 
@@ -861,7 +1181,47 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel.Builder clearAllowImport() {
       allowImport = null;
-      fieldSetFlags()[8] = false;
+      fieldSetFlags()[12] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'difficulty' field.
+      * @return The value.
+      */
+    public java.lang.String getDifficulty() {
+      return difficulty;
+    }
+
+
+    /**
+      * Sets the value of the 'difficulty' field.
+      * @param value The value of 'difficulty'.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel.Builder setDifficulty(java.lang.String value) {
+      validate(fields()[13], value);
+      this.difficulty = value;
+      fieldSetFlags()[13] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'difficulty' field has been set.
+      * @return True if the 'difficulty' field has been set, false otherwise.
+      */
+    public boolean hasDifficulty() {
+      return fieldSetFlags()[13];
+    }
+
+
+    /**
+      * Clears the value of the 'difficulty' field.
+      * @return This builder.
+      */
+    public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel.Builder clearDifficulty() {
+      difficulty = null;
+      fieldSetFlags()[13] = false;
       return this;
     }
 
@@ -880,9 +1240,9 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
       * @return This builder.
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel.Builder setCopyState(com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState value) {
-      validate(fields()[9], value);
+      validate(fields()[14], value);
       this.copyState = value;
-      fieldSetFlags()[9] = true;
+      fieldSetFlags()[14] = true;
       return this;
     }
 
@@ -891,7 +1251,7 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
       * @return True if the 'copyState' field has been set, false otherwise.
       */
     public boolean hasCopyState() {
-      return fieldSetFlags()[9];
+      return fieldSetFlags()[14];
     }
 
 
@@ -901,7 +1261,7 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
       */
     public com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel.Builder clearCopyState() {
       copyState = null;
-      fieldSetFlags()[9] = false;
+      fieldSetFlags()[14] = false;
       return this;
     }
 
@@ -917,9 +1277,14 @@ public class CodeQuestionUpdateRequestAvroModel extends org.apache.avro.specific
         record.problemStatement = fieldSetFlags()[4] ? this.problemStatement : (java.lang.String) defaultValue(fields()[4]);
         record.maxGrade = fieldSetFlags()[5] ? this.maxGrade : (java.lang.Float) defaultValue(fields()[5]);
         record.name = fieldSetFlags()[6] ? this.name : (java.lang.String) defaultValue(fields()[6]);
-        record.isPublic = fieldSetFlags()[7] ? this.isPublic : (java.lang.Boolean) defaultValue(fields()[7]);
-        record.allowImport = fieldSetFlags()[8] ? this.allowImport : (java.lang.Boolean) defaultValue(fields()[8]);
-        record.copyState = fieldSetFlags()[9] ? this.copyState : (com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState) defaultValue(fields()[9]);
+        record.email = fieldSetFlags()[7] ? this.email : (java.lang.String) defaultValue(fields()[7]);
+        record.categoryBankId = fieldSetFlags()[8] ? this.categoryBankId : (java.util.UUID) defaultValue(fields()[8]);
+        record.orgId = fieldSetFlags()[9] ? this.orgId : (java.util.UUID) defaultValue(fields()[9]);
+        record.isQuestionBank = fieldSetFlags()[10] ? this.isQuestionBank : (java.lang.Boolean) defaultValue(fields()[10]);
+        record.isPublic = fieldSetFlags()[11] ? this.isPublic : (java.lang.Boolean) defaultValue(fields()[11]);
+        record.allowImport = fieldSetFlags()[12] ? this.allowImport : (java.lang.Boolean) defaultValue(fields()[12]);
+        record.difficulty = fieldSetFlags()[13] ? this.difficulty : (java.lang.String) defaultValue(fields()[13]);
+        record.copyState = fieldSetFlags()[14] ? this.copyState : (com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CopyState) defaultValue(fields()[14]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;

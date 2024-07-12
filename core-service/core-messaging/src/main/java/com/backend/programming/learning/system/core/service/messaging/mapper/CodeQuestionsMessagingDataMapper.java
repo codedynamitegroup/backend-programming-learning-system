@@ -15,10 +15,10 @@ public class CodeQuestionsMessagingDataMapper {
     public CodeQuestionUpdateResponseAvroModel
             codeQuestionsUpdatePayloadToCodeQuestionUpdateResponseAvroModel(CodeQuestionsUpdatePayload payload){
         return CodeQuestionUpdateResponseAvroModel.newBuilder()
-                .setId(UUID.fromString(payload.getId()))
-                .setCodeQuestionId(UUID.fromString(payload.getCodeQuestionId()))
-                .setSagaId(UUID.fromString(payload.getSagaId()))
-                .setQuestionId(UUID.fromString(payload.getQuestionId()))
+                .setId(payload.getId())
+                .setCodeQuestionId(payload.getCodeQuestionId())
+                .setSagaId(payload.getSagaId())
+                .setQuestionId(payload.getQuestionId())
                 .setProblemStatement(payload.getProblemStatement())
                 .setMaxGrade(payload.getMaxGrade())
                 .setName(payload.getName())
@@ -32,17 +32,22 @@ public class CodeQuestionsMessagingDataMapper {
     public CodeQuestionsUpdateRequest
         codeQuestionUpdateRequestAvroModelToCodeQuestionsUpdateRequest(CodeQuestionUpdateRequestAvroModel model){
         return CodeQuestionsUpdateRequest.builder()
-                .id(model.getId().toString())
-                .codeQuestionId(model.getCodeQuestionId().toString())
-                .sagaId(model.getSagaId().toString())
-                .questionId(model.getQuestionId().toString())
+                .id(model.getId())
+                .codeQuestionId(model.getCodeQuestionId())
+                .sagaId(model.getSagaId())
+                .questionId(model.getQuestionId())
                 .problemStatement(model.getProblemStatement())
                 .maxGrade(model.getMaxGrade())
                 .name(model.getName())
 //                .constraints(model.getConstraints())
                 .state(model.getCopyState().toString())
+                .orgId(model.getOrgId())
                 .isPublic(model.getIsPublic())
                 .isAllowedToImport(model.getAllowImport())
+                .difficulty(model.getDifficulty())
+                .categoryBank(model.getCategoryBankId())
+                .email(model.getEmail())
+                .isQuestionBank(model.getIsQuestionBank())
                 .build();
     }
 }

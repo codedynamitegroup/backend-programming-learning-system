@@ -43,4 +43,6 @@ public interface CodeAssessmentDomainService {
     CodeQuestionsUpdatedEvent updateCodeQuestion(CodeQuestion codeQuestion);
 
     CodeQuestion getAdminDetailCodeQuestion(CodeQuestion codeQuestion, List<TestCase> testcases, List<ProgrammingLanguageCodeQuestion> languages, List<Tag> tags);
+
+    CodeQuestionsUpdatedEvent deleteCodeQuestion(CodeQuestion codeQuestion);
 }

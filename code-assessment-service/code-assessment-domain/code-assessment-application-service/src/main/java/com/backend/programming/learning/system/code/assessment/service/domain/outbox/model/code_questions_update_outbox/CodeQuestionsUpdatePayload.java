@@ -15,6 +15,8 @@ public class CodeQuestionsUpdatePayload {
     @JsonProperty
     private final String questionId;
     @JsonProperty
+    private final String orgId;
+    @JsonProperty
     private final String problemStatement;
     @JsonProperty
     private final Float maxGrade;
@@ -28,4 +30,12 @@ public class CodeQuestionsUpdatePayload {
     private final Boolean allowImport;
     @JsonProperty
     private final Boolean isPublic;
+    @JsonProperty
+    private final Boolean isQuestionBank;
+    @JsonProperty
+    private final String categoryBankId;
+    @JsonProperty
+    private final String email;
+    @JsonProperty
+    private final String difficulty;
 }

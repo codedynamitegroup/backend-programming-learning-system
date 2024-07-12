@@ -13,10 +13,11 @@ import com.backend.programming.learning.system.code.assessment.service.domain.va
 import com.backend.programming.learning.system.code.assessment.service.domain.valueobject.code_question_tag.CodeQuestionTagId;
 import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
-import com.backend.programming.learning.system.domain.valueobject.QuestionId;
 import com.backend.programming.learning.system.domain.valueobject.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
+
+import java.util.UUID;
 
 @Component
 public class CodeQuestionDataMapper {
@@ -26,11 +27,11 @@ public class CodeQuestionDataMapper {
         this.dtoMapper = dtoMapper;
     }
 
-    public CodeQuestion createCodeQuestionCommandToCodeQuestion(CreateCodeQuestionCommand command){
+    public CodeQuestion createCodeQuestionCommandToCodeQuestion(CreateCodeQuestionCommand command, User user){
         return CodeQuestion.builder()
-                .questionId(new QuestionId(command.getQuestionId()))
                 .name(command.getName())
-                .userId(new UserId(command.getUserId()))
+                .userId(user.getId())
+                .orgId(command.getOrgId())
                 .dslTemplate(command.getDslTemplate())
                 .problemStatement(command.getProblemStatement())
                 .inputFormat(command.getInputFormat())
@@ -42,6 +43,7 @@ public class CodeQuestionDataMapper {
                 .maxGrade(command.getMaxGrade())
                 .allowImport(command.getAllowImport())
                 .orgId(command.getOrgId())
+                .isQuestionBank(command.getIsQuestionBank())
                 .build();
     }
     public CreateCodeQuestionResponse codeQuestionToCreateCodeQuestionReponse(CodeQuestion codeQuestion, String message){
@@ -52,7 +54,7 @@ public class CodeQuestionDataMapper {
                 .build();
     }
 
-    public CodeQuestionsUpdatePayload codeQuestionsUpdatedEventToCodeQuestionsUpdatePayload(CodeQuestionsUpdatedEvent event, CopyState state){
+    public CodeQuestionsUpdatePayload codeQuestionsUpdatedEventToCodeQuestionsUpdatePayload(CodeQuestionsUpdatedEvent event, CopyState state, UUID categoryBankId, String email){
         CodeQuestion codeQuestion = event.getCodeQuestion();
         return CodeQuestionsUpdatePayload.builder()
                 .id(codeQuestion.getId().getValue().toString())
@@ -63,6 +65,11 @@ public class CodeQuestionDataMapper {
                 .name(codeQuestion.getName())
                 .allowImport(codeQuestion.getAllowImport())
                 .isPublic(codeQuestion.getIsPublic())
+                .isQuestionBank(codeQuestion.getQuestionBank())
+                .categoryBankId(categoryBankId != null? categoryBankId.toString(): null)
+                .orgId(codeQuestion.getOrgId() != null? codeQuestion.getOrgId().toString(): null)
+                .email(email)
+                .difficulty(codeQuestion.getDifficulty().name())
 //                .constraints(codeQuestion.getConstraints())
                 .build();
     }
@@ -93,6 +100,7 @@ public class CodeQuestionDataMapper {
                 .difficulty(command.getDifficulty())
                 .isPublic(command.getIsPublic())
                 .allowImport(command.getAllowImport())
+                .isQuestionBank(command.getIsQuestionBank())
                 .build();
     }
 
