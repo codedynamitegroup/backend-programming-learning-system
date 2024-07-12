@@ -24,7 +24,7 @@ public class AssignmentDataAccessMapper {
         if(assignment == null) {
             return null;
         }
-        CourseEntity courseEntity = courseDataAccessMapper.courseToCourseEntity(assignment.getCourse());
+        CourseEntity courseEntity = assignment.getCourse() == null ? null : courseDataAccessMapper.courseToCourseEntity(assignment.getCourse());
         return AssignmentEntity.builder()
                 .course(courseEntity)
                 .id(assignment.getId().getValue())

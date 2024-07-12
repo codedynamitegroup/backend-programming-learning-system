@@ -47,7 +47,7 @@ public class CalendarEventCreateHelper {
                 log.warn("Course id is required for course event");
                 throw new CourseDomainException("Course id is required for course event");
             }
-            checkCourse(createCalendarEventCommand.getCourseId());
+//            checkCourse(createCalendarEventCommand.getCourseId());
         } else if (createCalendarEventCommand.getEventType().equals(NotificationEventType.USER.name())) {
             if (createCalendarEventCommand.getUserId() == null) {
                 log.warn("User id is required for user event");
@@ -59,8 +59,10 @@ public class CalendarEventCreateHelper {
             throw new CourseDomainException("Invalid event type: " + createCalendarEventCommand.getEventType());
         }
 
+        Course course = courseRepository.findCourseById(createCalendarEventCommand.getCourseId()).get();
         CalendarEvent calendarEvent = calendarEventDataMapper
                 .createCalendarEventCommandToCalendarEvent(createCalendarEventCommand);
+        calendarEvent.setCourse(course);
         courseDomainService.createCalendarEvent(calendarEvent);
         CalendarEvent calendarEventResult = saveCalendarEvent(calendarEvent);
 
@@ -68,12 +70,13 @@ public class CalendarEventCreateHelper {
         return calendarEventResult;
     }
 
-    private void checkCourse(UUID courseId) {
+    private Course getCourse(UUID courseId) {
         Optional<Course> course = courseRepository.findCourseById(courseId);
         if (course.isEmpty()) {
             log.warn("Course with id: {} not found", courseId);
             throw new CourseDomainException("Could not find course with id: " + courseId);
         }
+        return course.get();
     }
 
     private void checkUser(UUID userId) {
