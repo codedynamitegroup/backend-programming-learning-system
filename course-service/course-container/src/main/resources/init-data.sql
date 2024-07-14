@@ -163,7 +163,8 @@ INSERT INTO public."section" (id,course_id,section_moodle_id,name,visible) VALUE
 
 INSERT INTO public.exam
 (id, course_id, "name", intro, score, max_score, time_open, time_close, time_limit, time_limit_unit, unit, "overdue_handling", can_redo_questions, max_attempts, shuffle_questions, "grade_method", max_page, created_at, updated_at)
-VALUES('86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, 'c061d55e-a8b0-433f-b6a3-ae9d5601422e'::uuid, 'Kiểm tra chương 1', '<p>bài kiểm tra chương 1</p>', 10.0, 10.0, '2024-06-20 20:12:27.031', '2024-07-30 20:12:27.000', 6000, 100, 'minutes', 'AUTOSUBMIT'::public."overdue_handling", true, 0, false, 'QUIZ_GRADEHIGHEST'::public."grade_method", 0, '2024-06-20 20:14:49.484', '2024-06-20 20:14:49.484');
+VALUES ('86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, 'c061d55e-a8b0-433f-b6a3-ae9d5601422e'::uuid, 'Kiểm tra chương 1', '<p>bài kiểm tra chương 1</p>', 10.0, 10.0, '2024-06-20 20:12:27.031', '2024-07-30 20:12:27.000', 6000, 100, 'minutes', 'AUTOSUBMIT'::public."overdue_handling", true, 0, false, 'QUIZ_GRADEHIGHEST'::public."grade_method", 0, '2024-06-20 20:14:49.484', '2024-06-20 20:14:49.484'),
+              ('86600cfb-7b48-4e81-8e05-8fa29d49d7a9'::uuid, 'c061d55e-a8b0-433f-b6a3-ae9d5601422e'::uuid, 'Programming exam', '<p>Programming exam for chapter 1</p>', 10.0, 10.0, '2024-06-20 20:12:27.031', '2024-07-30 20:12:27.000', 6000, 100, 'minutes', 'AUTOSUBMIT'::public."overdue_handling", true, 0, false, 'QUIZ_GRADEHIGHEST'::public."grade_method", 0, '2024-06-20 20:14:49.484', '2024-06-20 20:14:49.484');
 
 INSERT INTO public."module" (id, cmid, section_id, type_module, assignment_id, exam_id) VALUES
     ('d21b508d-ddfb-4f0e-a49b-60597cb432b3', 6, 'd8814d8f-0202-4633-873a-bad722505a56', 'ASSIGNMENT', '577e118d-604b-450c-a02c-cf8e9f35f8ee', null),
@@ -381,7 +382,13 @@ VALUES('1ca8c89a-1bd0-41b2-adf0-4f7b55f8b256'::uuid, '08b65a39-394f-4977-a5fa-3f
 
 INSERT INTO public.exam_question
 (id, exam_id, question_id, page)
-VALUES('c29ccb3f-2429-4d49-9cbb-ba348164be58'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, '82a72f33-69d1-417a-bc4a-54e4a3f42a06'::uuid, 0),
+VALUES
+--             Code Question
+             ('c29ccb3f-2429-4d49-9cbb-ba348164be00'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a9'::uuid, 'b6484e21-6937-489c-b031-b71767994221'::uuid, 0),
+             ('c29ccb3f-2429-4d49-9cbb-ba348164be01'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a9'::uuid, 'b6484e21-6937-489c-b031-b71767994736'::uuid, 0),
+
+--             Default
+             ('c29ccb3f-2429-4d49-9cbb-ba348164be58'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, '82a72f33-69d1-417a-bc4a-54e4a3f42a06'::uuid, 0),
              ('c29ccb3f-2429-4d49-9cbb-ba348164be59'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, 'b6484e21-6937-489c-b031-b71767994233'::uuid, 0),
              ('c29ccb3f-2429-4d49-9cbb-ba348164be60'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a6'::uuid, 'b6484e21-6937-489c-b031-b71767994221'::uuid, 0);
 
@@ -598,3 +605,12 @@ VALUES('e249606a-eb66-4d09-9aee-fecfe1d934f6'::uuid, '08b65a39-394f-4977-a5fa-3f
 INSERT INTO public.question
 (id, org_id, "difficulty", "name", question_text, general_feedback, default_mark, "qtype", created_by, created_at, updated_by, updated_at, question_bank_category_id, is_org_question_bank)
 VALUES('037c100f-da95-4ef0-bd20-5d7a6926097a'::uuid, '08b65a39-394f-4977-a5fa-3fe145b620f8'::uuid, 'EASY'::public."difficulty", 'Từ khóa const trong C/C++ có thể được sử dụng để khai báo các biến có giá trị không thể thay đổi sau khi khởi tạo.', '<p>Từ khóa <code>const</code> trong C/C++ có thể được sử dụng để khai báo các biến có giá trị không thể thay đổi sau khi khởi tạo.</p>', '', 1.00, 'TRUE_FALSE'::public."qtype", '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid,  '2024-07-13 21:53:49.758', '64412e27-169e-44ea-a101-74ebf8cb82d9'::uuid, '2024-07-13 21:53:49.758', 'a54cf2f7-294c-4b1a-a8c7-6e8c34fb5f51'::uuid, false);
+
+INSERT INTO public.exam_submission(id, exam_id, user_id, submit_count, start_time, end_time, submit_time, status, score)
+VALUES
+    ('ea4fb476-5590-4b22-b526-7e9e142d6b61'::uuid, '86600cfb-7b48-4e81-8e05-8fa29d49d7a9'::uuid, '9ba179ed-d26d-4828-a0f6-8836c2063992'::uuid, 1, '2024-07-14 19:31:55.477 +0700', '2024-07-14 21:11:55.477 +0700', '2024-07-14 19:42:37.000 +0700', 'SUBMITTED'::public."status", 0);
+
+INSERT INTO public.question_submission(id, user_id, exam_submission_id, question_id, pass_status, grade, content, right_answer, num_file, feedback, flag, answer_status)
+VALUES
+    ('9ae732a5-110c-49c4-baf2-ec3af6722682'::uuid, '9ba179ed-d26d-4828-a0f6-8836c2063992'::uuid, 'ea4fb476-5590-4b22-b526-7e9e142d6b61'::uuid, 'b6484e21-6937-489c-b031-b71767994221'::uuid, null, 0, '{"languageId":"c95d5c7d-cadf-42cc-afdc-968211ae3720","codeQuestionId":"3c5b1113-d267-4d21-bc6e-8cbd4cb57b69","code":"CgppbXBvcnQgamF2YS5pby4qOwoKY2xhc3MgUmVzdWx0IHsKICAgIHB1YmxpYyBzdGF0aWMgaW50IHN1bU9mVHdvSW50ZWdlcnMoaW50IGEsIGludCBiKSB7CiAgICAgICAgcmV0dXJuIGEgKyBiOwogICAgfQp9CgpwdWJsaWMgY2xhc3MgTWFpbiB7CiAgICBwdWJsaWMgc3RhdGljIHZvaWQgbWFpbihTdHJpbmdbXSBhcmdzKSB0aHJvd3MgSU9FeGNlcHRpb24gewogICAgICAgIEJ1ZmZlcmVkUmVhZGVyIGJ1ZmZlcmVkUmVhZGVyID0gbmV3IEJ1ZmZlcmVkUmVhZGVyKG5ldyBJbnB1dFN0cmVhbVJlYWRlcihTeXN0ZW0uaW4pKTsKCiAgICAgICAgaW50IGEgPSBJbnRlZ2VyLnBhcnNlSW50KGJ1ZmZlcmVkUmVhZGVyLnJlYWRMaW5lKCkudHJpbSgpKTsKCiAgICAgICAgaW50IGIgPSBJbnRlZ2VyLnBhcnNlSW50KGJ1ZmZlcmVkUmVhZGVyLnJlYWRMaW5lKCkudHJpbSgpKTsKCiAgICAgICAgaW50IHJlc3VsdCA9IFJlc3VsdC5zdW1PZlR3b0ludGVnZXJzKGEsIGIpOwoKICAgICAgICAgICAgU3lzdGVtLm91dC5wcmludChyZXN1bHQpOwogICAgICAgICAgICBidWZmZXJlZFJlYWRlci5jbG9zZSgpOwogICAgfQp9Cgo="}', null, 0, null, false, true),
+    ('6640f804-9930-4435-9cc5-f00b24412064'::uuid, '9ba179ed-d26d-4828-a0f6-8836c2063992'::uuid, 'ea4fb476-5590-4b22-b526-7e9e142d6b61'::uuid, 'b6484e21-6937-489c-b031-b71767994736'::uuid, null, 0, '{"languageId":"c95d5c7d-cadf-42cc-afdc-968211ae3720","codeQuestionId":"f6d7b882-9399-4bc3-baad-6350285bfa78","code":"CgppbXBvcnQgamF2YS51dGlsLlNjYW5uZXI7CgpjbGFzcyBTdW1DYWxjdWxhdG9yIHsKICAgIHB1YmxpYyBpbnQgY2FsY3VsYXRlU3VtKGludFtdIGFycikgewogICAgICAgIC8veW91ciBjb2RlIGdvZXMgaGVyZQogICAgfQp9CnB1YmxpYyBjbGFzcyBNYWluIHsKICAgIHB1YmxpYyBzdGF0aWMgdm9pZCBtYWluKFN0cmluZ1tdIGFyZ3MpIHsKICAgICAgICBTY2FubmVyIHNjYW5uZXIgPSBuZXcgU2Nhbm5lcihTeXN0ZW0uaW4pOwoKICAgICAgICAvLyBSZWFkIG51bWJlciBvZiBlbGVtZW50cyAobikKICAgICAgICBpbnQgbiA9IHNjYW5uZXIubmV4dEludCgpOwoKICAgICAgICAvLyBJbml0aWFsaXplIGFycmF5CiAgICAgICAgaW50W10gYXJyID0gbmV3IGludFtuXTsKCiAgICAgICAgLy8gUmVhZCBlbGVtZW50cyBpbnRvIHRoZSBhcnJheQogICAgICAgIGZvciAoaW50IGkgPSAwOyBpIDwgbjsgaSsrKSB7CiAgICAgICAgICAgIGFycltpXSA9IHNjYW5uZXIubmV4dEludCgpOwogICAgICAgIH0KCiAgICAgICAgLy8gQ3JlYXRlIGFuIGluc3RhbmNlIG9mIFN1bUNhbGN1bGF0b3IgY2xhc3MKICAgICAgICBTdW1DYWxjdWxhdG9yIGNhbGN1bGF0b3IgPSBuZXcgU3VtQ2FsY3VsYXRvcigpOwoKICAgICAgICAvLyBDYWxjdWxhdGUgc3VtIHVzaW5nIHRoZSBjbGFzcyBtZXRob2QKICAgICAgICBpbnQgc3VtID0gY2FsY3VsYXRvci5jYWxjdWxhdGVTdW0oYXJyKTsKCiAgICAgICAgLy8gT3V0cHV0IHRoZSBzdW0KICAgICAgICBTeXN0ZW0ub3V0LnByaW50bG4oc3VtKTsKCiAgICAgICAgc2Nhbm5lci5jbG9zZSgpOwogICAgfQp9Cgo="}', null, 0, null, false, true);
