@@ -11,27 +11,18 @@ import java.util.UUID;
 public class Module extends AggregateRoot<ModuleId> {
     private Section section;
     private Assignment assignment;
+    private Exam exam;
     private Integer cmid;
-    private String name;
-    private Integer visible;
-    private String content;
 
     private TypeModule typeModule;
-
-    private ZonedDateTime timeOpen;
-    private ZonedDateTime timeClose;
 
     private Module(Builder builder) {
         super.setId(builder.id);
         assignment = builder.assignment;
         cmid = builder.cmid;
-        setContent(builder.content);
         setSection(builder.section);
         setTypeModule(builder.typeModule);
-        setName(builder.name);
-        setVisible(builder.visible);
-        setTimeOpen(builder.timeOpen);
-        setTimeClose(builder.timeClose);
+        setExam(builder.exam);
     }
 
     public Assignment getAssignment() {
@@ -40,14 +31,6 @@ public class Module extends AggregateRoot<ModuleId> {
 
     public void setAssignment(Assignment assignment) {
         this.assignment = assignment;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
     public TypeModule getTypeModule() {
@@ -66,44 +49,20 @@ public class Module extends AggregateRoot<ModuleId> {
         this.section = section;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getVisible() {
-        return visible;
-    }
-
-    public void setVisible(Integer visible) {
-        this.visible = visible;
-    }
-
-    public ZonedDateTime getTimeOpen() {
-        return timeOpen;
-    }
-
-    public void setTimeOpen(ZonedDateTime timeOpen) {
-        this.timeOpen = timeOpen;
-    }
-
-    public ZonedDateTime getTimeClose() {
-        return timeClose;
-    }
-
-    public void setTimeClose(ZonedDateTime timeClose) {
-        this.timeClose = timeClose;
-    }
-
     public Integer getCmid() {
         return cmid;
     }
 
     public void setCmid(Integer cmid) {
         this.cmid = cmid;
+    }
+
+    public Exam getExam() {
+        return exam;
+    }
+
+    public void setExam(Exam exam) {
+        this.exam = exam;
     }
 
     public static Builder builder() {
@@ -119,15 +78,10 @@ public class Module extends AggregateRoot<ModuleId> {
         private ModuleId id;
 
         private Assignment assignment;
+        private Exam exam;
         private Integer cmid;
         private Section section;
-        private String name;
-        private Integer visible;
-
-        private String content;
         private TypeModule typeModule;
-        private ZonedDateTime timeOpen;
-        private ZonedDateTime timeClose;
 
         private Builder() {
         }
@@ -146,6 +100,11 @@ public class Module extends AggregateRoot<ModuleId> {
             return this;
         }
 
+        public Builder exam(Exam val) {
+            exam = val;
+            return this;
+        }
+
         public Builder cmid(Integer val) {
             cmid = val;
             return this;
@@ -156,35 +115,11 @@ public class Module extends AggregateRoot<ModuleId> {
             return this;
         }
 
-        public Builder name(String val) {
-            name = val;
-            return this;
-        }
-
-        public Builder visible(Integer val) {
-            visible = val;
-            return this;
-        }
-
-        public Builder content(String val) {
-            content = val;
-            return this;
-        }
-
         public Builder typeModule(TypeModule val) {
             typeModule = val;
             return this;
         }
 
-        public Builder timeOpen(ZonedDateTime val) {
-            timeOpen = val;
-            return this;
-        }
-
-        public Builder timeClose(ZonedDateTime val) {
-            timeClose = val;
-            return this;
-        }
 
         public Module build() {
             return new Module(this);

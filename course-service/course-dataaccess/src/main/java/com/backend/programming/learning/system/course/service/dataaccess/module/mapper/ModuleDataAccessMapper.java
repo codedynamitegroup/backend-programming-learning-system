@@ -2,15 +2,15 @@ package com.backend.programming.learning.system.course.service.dataaccess.module
 
 import com.backend.programming.learning.system.course.service.dataaccess.assignment.entity.AssignmentEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.assignment.mapper.AssignmentDataAccessMapper;
+import com.backend.programming.learning.system.course.service.dataaccess.exam.entity.ExamEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.exam.mapper.ExamDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.module.entity.ModuleEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.section.entity.SectionEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.section.mapper.SectionDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.mapper.UserDataAccessMapper;
-import com.backend.programming.learning.system.course.service.domain.entity.Assignment;
-import com.backend.programming.learning.system.course.service.domain.entity.Course;
+import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.entity.Module;
-import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.valueobject.CourseId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ModuleId;
 import lombok.RequiredArgsConstructor;
@@ -24,38 +24,27 @@ public class ModuleDataAccessMapper {
 
     private final SectionDataAccessMapper sectionDataAccessMapper;
     private final AssignmentDataAccessMapper assignmentDataAccessMapper;
+    private final ExamDataAccessMapper examDataAccessMapper;
 
     public ModuleEntity moduleToModuleEntity(Module module) {
         SectionEntity section = sectionDataAccessMapper.sectionToSectionEntity(module.getSection());
-        AssignmentEntity assignment = assignmentDataAccessMapper.assignmentToAssignmentEntity(module.getAssignment());
 
         return ModuleEntity.builder()
                 .id(module.getId().getValue())
-                .assignment(assignment)
+                .assignment(module.getAssignment() == null ? null : assignmentDataAccessMapper.assignmentToAssignmentEntity(module.getAssignment()))
+                .exam(module.getExam() == null ? null : examDataAccessMapper.examToExamEntity(module.getExam()))
                 .cmid(module.getCmid())
-                .name(module.getName())
-                .visible(module.getVisible())
-                .section(section)
-                .content(module.getContent())
-                .typeModule(module.getTypeModule())
-                .timeOpen(module.getTimeOpen())
-                .timeClose(module.getTimeClose())
                 .build();
     }
 
     public Module moduleEntityToModule(ModuleEntity moduleEntity) {
-        Assignment assignment = assignmentDataAccessMapper.assignmentEntityToAssignment(moduleEntity.getAssignment());
         return Module.builder()
                 .id(new ModuleId(moduleEntity.getId()))
-                .assignment(assignment)
+                .assignment(moduleEntity.getAssignment() == null ? null : assignmentDataAccessMapper.assignmentEntityToAssignment(moduleEntity.getAssignment()))
                 .cmid(moduleEntity.getCmid())
-                .name(moduleEntity.getName())
-                .visible(moduleEntity.getVisible())
-                .content(moduleEntity.getContent())
                 .typeModule(moduleEntity.getTypeModule())
+                .exam(moduleEntity.getExam() == null ? null : examDataAccessMapper.examEntityToExam(moduleEntity.getExam()))
                 .section(sectionDataAccessMapper.sectionEntityToSection(moduleEntity.getSection()))
-                .timeOpen(moduleEntity.getTimeOpen())
-                .timeClose(moduleEntity.getTimeClose())
                 .build();
 
     }

@@ -270,6 +270,36 @@ CREATE TABLE "public".assignment
         ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS "public".exam CASCADE;
+
+CREATE TABLE "public".exam
+(
+    id                 uuid                      DEFAULT gen_random_uuid() NOT NULL,
+    course_id          uuid             NOT NULL,
+    name               text             NOT NULL,
+    intro              text,
+    score              double precision NOT NULL DEFAULT '0',
+    max_score          double precision NOT NULL DEFAULT '0',
+    time_open          TIMESTAMP WITH TIME ZONE,
+    time_close         TIMESTAMP WITH TIME ZONE,
+    time_limit         INTEGER,
+    time_limit_unit    INTEGER DEFAULT 0,
+    unit               text,
+    overdue_handling   overdue_handling NOT NULL DEFAULT 'AUTOABANDON',
+    can_redo_questions boolean          NOT NULL DEFAULT '0',
+    max_attempts       bigint           NOT NULL DEFAULT '0',
+    shuffle_questions    boolean          NOT NULL DEFAULT '0',
+    grade_method       grade_method     NOT NULL DEFAULT 'QUIZ_GRADEHIGHEST',
+    "max_page"                  integer,
+    created_at         TIMESTAMP WITH TIME ZONE  DEFAULT CURRENT_TIMESTAMP,
+    updated_at         TIMESTAMP WITH TIME ZONE  DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT exam_pkey PRIMARY KEY (id),
+    CONSTRAINT exam_course_id_fkey FOREIGN KEY (course_id)
+        REFERENCES "public".course (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
 DROP TABLE IF EXISTS "public".section CASCADE;
 CREATE TABLE "public".section
 (
@@ -290,14 +320,10 @@ CREATE TABLE "public".module
 (
     id          uuid    DEFAULT gen_random_uuid() NOT NULL,
     assignment_id uuid,
+    exam_id uuid,
     cmid integer,
     section_id uuid,
-    name        text,
-    visible integer,
-    content text,
     type_module type_module,
-    time_open TIMESTAMP WITH TIME zone,
-    time_close TIMESTAMP WITH TIME zone,
     CONSTRAINT module_pkey PRIMARY KEY (id),
 	CONSTRAINT module_section_id_fkey FOREIGN KEY (section_id)
 	    REFERENCES "public".section (id) MATCH SIMPLE
@@ -305,6 +331,10 @@ CREATE TABLE "public".module
 	    ON DELETE CASCADE,
 	CONSTRAINT module_assignment_id_fkey FOREIGN KEY (assignment_id)
 	    REFERENCES "public".assignment (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT module_assignment_id_fkey2 FOREIGN KEY (exam_id)
+        REFERENCES "public".exam (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
@@ -358,35 +388,6 @@ CREATE TABLE "public".course_user
         ON DELETE CASCADE,
     CONSTRAINT course_user_role_id_fkey FOREIGN KEY (role_id)
         REFERENCES "public".role_moodle (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
-DROP TABLE IF EXISTS "public".exam CASCADE;
-
-CREATE TABLE "public".exam
-(
-    id                 uuid                      DEFAULT gen_random_uuid() NOT NULL,
-    course_id          uuid             NOT NULL,
-    name               text             NOT NULL,
-    intro              text,
-    score              double precision NOT NULL DEFAULT '0',
-    max_score          double precision NOT NULL DEFAULT '0',
-    time_open          TIMESTAMP WITH TIME ZONE,
-    time_close         TIMESTAMP WITH TIME ZONE,
-    time_limit         INTEGER,
-    time_limit_unit    INTEGER DEFAULT 0,
-    unit               text,
-    overdue_handling   overdue_handling NOT NULL DEFAULT 'AUTOABANDON',
-    can_redo_questions boolean          NOT NULL DEFAULT '0',
-    max_attempts       bigint           NOT NULL DEFAULT '0',
-    shuffle_questions    boolean          NOT NULL DEFAULT '0',
-    grade_method       grade_method     NOT NULL DEFAULT 'QUIZ_GRADEHIGHEST',
-    "max_page"                  integer,
-    created_at         TIMESTAMP WITH TIME ZONE  DEFAULT CURRENT_TIMESTAMP,
-    updated_at         TIMESTAMP WITH TIME ZONE  DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT exam_pkey PRIMARY KEY (id),
-    CONSTRAINT exam_course_id_fkey FOREIGN KEY (course_id)
-        REFERENCES "public".course (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );

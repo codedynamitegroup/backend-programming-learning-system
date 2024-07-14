@@ -38,8 +38,6 @@ public class ModuleUpdateHelper {
     @Transactional
     public Module updateModule(UUID moduleId, UpdateModuleCommand updateModuleCommand) {
        Module module =moduleRepository.findById(moduleId);
-       module.setName(updateModuleCommand.getName());
-       module.setVisible(updateModuleCommand.getVisible());
        Module response = moduleRepository.save(module);
         log.info("Module is updated with id: {}", module.getId());
         return response;
