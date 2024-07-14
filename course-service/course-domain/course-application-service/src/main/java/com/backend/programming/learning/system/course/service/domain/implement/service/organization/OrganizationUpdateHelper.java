@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -19,12 +20,13 @@ public class OrganizationUpdateHelper {
     private final OrganizationRepository organizationRepository;
 
     @Transactional
-    public void persistOrganization(UpdateOrganizationCommand updateOrganizationCommand) {
-        Organization organization = getOrganization(updateOrganizationCommand.getOrganizationId());
+    public void persistOrganization(UUID organizationId,UpdateOrganizationCommand updateOrganizationCommand) {
+        Organization organization = getOrganization(organizationId);
+        organization.setUpdatedAt(ZonedDateTime.now());
+        if(updateOrganizationCommand.getDescription()!=null)
         {
             organization.setDescription(updateOrganizationCommand.getDescription());
         }
-
         if(updateOrganizationCommand.getName() != null)
         {
             organization.setName(updateOrganizationCommand.getName());
@@ -37,18 +39,8 @@ public class OrganizationUpdateHelper {
 
         if(updateOrganizationCommand.getMoodleUrl() != null)
         {
-            organization.setMoodleUrl(updateOrganizationCommand.getMoodleUrl());
-        }
-        organizationRepository.saveOrganization(organization);
-    }
-
-
-    @Transactional
-    public void synchronizeDataMoodle(UUID organizationId,SyncOrganizationCommand syncOrganizationCommand) {
-        Organization organization = getOrganization(organizationId);
-        {
-            organization.setApiKey(syncOrganizationCommand.getApiKey());
-            organization.setMoodleUrl(syncOrganizationCommand.getMoodleUrl());
+            String moodleUrl = updateOrganizationCommand.getMoodleUrl() + ":8081/webservice/rest/server.php";
+            organization.setMoodleUrl(moodleUrl);
         }
         organizationRepository.saveOrganization(organization);
     }
@@ -62,4 +54,5 @@ public class OrganizationUpdateHelper {
         log.info("Organization is found");
         return organization.get();
     }
+
 }
