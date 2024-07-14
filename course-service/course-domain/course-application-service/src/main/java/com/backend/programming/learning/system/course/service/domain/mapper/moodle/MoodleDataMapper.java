@@ -236,12 +236,7 @@ public class MoodleDataMapper {
                 .id(new ModuleId(UUID.randomUUID()))
                 .cmid(Integer.valueOf(module.getId()))
                 .section(section)
-                .name(module.getName())
-                .visible(module.getVisible())
                 .typeModule(TypeModule.fromLabel(module.getModplural()))
-                .content(content)
-                .timeOpen(timeOpen)
-                .timeClose(timeClose)
                 .build();
 
     }
@@ -428,12 +423,7 @@ public class MoodleDataMapper {
                 .id(module1.getId())
                 .cmid(Integer.valueOf(module.getId()))
                 .section(sectionUpdate)
-                .name(module.getName())
-                .visible(module.getVisible())
                 .typeModule(TypeModule.fromLabel(module.getModplural()))
-                .content(content)
-                .timeOpen(timeOpen)
-                .timeClose(timeClose)
                 .build();
     }
 

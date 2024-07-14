@@ -14,6 +14,7 @@ import com.backend.programming.learning.system.course.service.domain.ports.outpu
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.QuestionRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
+import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -48,8 +49,31 @@ public class ExamQuestionCreateHelper {
             Optional<Question> question = questionRepository.findById(questionId.questionId());
 
             if (question.isEmpty()) {
-                log.error("Question not found with id: {}", questionId.questionId());
-                throw new RuntimeException("Question not found with id: " + questionId.questionId());
+                int maxRetries = 5;
+                int retryCount = 0;
+                int delay = 2000; // initial delay in milliseconds (2 seconds)
+
+                while (question.isEmpty() && retryCount < maxRetries) {
+                    try {
+                        question = questionRepository.findById(questionId.questionId());
+                        if (question.isEmpty()) {
+                            retryCount++;
+                            Thread.sleep(delay);
+                        }
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        throw new QuestionNotFoundException("Question not found with id: " + questionId.questionId());
+                    } catch (Exception e) {
+                        // Log exception and retry
+                        log.error("Error while checking question existence", e);
+                        throw new QuestionNotFoundException("Question not found with id: " + questionId.questionId());
+                    }
+                }
+
+                if(question.isEmpty()) {
+                    log.error("Question not found with id: {}", questionId.questionId());
+                    throw new QuestionNotFoundException("Question not found with id: " + questionId.questionId());
+                }
             }
 
             questions.put(question.get(), questionId.page());
