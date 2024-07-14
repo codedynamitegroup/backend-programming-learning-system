@@ -17,7 +17,4 @@ public interface SynchronizeStateJpaRepostiory extends JpaRepository<Synchronize
     SynchronizeStateEntity findByOrganizationIdAndStep(UUID organizationId, SynchronizeStep step);
 
     List<SynchronizeStateEntity> findByStatus(SynchronizeStatus status);
-
-    SynchronizeStateEntity findSynchronizeStateByOrganizationIdAndStep(UUID organizationId, String step);
-
 }

@@ -58,12 +58,20 @@ public class OrganizationCommandHandler {
     }
 
     @Transactional
-    public UpdateOrganizationResponse updateOrganization(UUID organizationId,UpdateOrganizationCommand updateOrganizationCommand) {
-        organizationUpdateHelper.persistOrganization(organizationId,updateOrganizationCommand);
+    public UpdateOrganizationResponse updateOrganization(UpdateOrganizationCommand updateOrganizationCommand) {
+        organizationUpdateHelper.persistOrganization(updateOrganizationCommand);
         return UpdateOrganizationResponse.builder()
-                .organizationId(organizationId)
+                .organizationId(updateOrganizationCommand.getOrganizationId())
                 .message("Organization updated successfully")
                 .build();
     }
 
+    @Transactional
+    public UpdateOrganizationResponse synchronizeDataMoodle(UUID organizationId, SyncOrganizationCommand syncOrganizationCommand) {
+        organizationUpdateHelper.synchronizeDataMoodle(organizationId, syncOrganizationCommand);
+        return UpdateOrganizationResponse.builder()
+                .organizationId(organizationId)
+                .message("Organization synchronized successfully")
+                .build();
+    }
 }

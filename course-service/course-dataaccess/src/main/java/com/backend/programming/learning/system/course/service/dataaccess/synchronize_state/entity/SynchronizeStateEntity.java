@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.course.service.dataaccess.synchronize_state.entity;
 
+import com.backend.programming.learning.system.course.service.dataaccess.assignment_submission.entity.SubmissionAssignmentEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.organization.entity.OrganizationEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.submission_grade.entity.SubmissionGradeEntity;
 import com.backend.programming.learning.system.domain.valueobject.SynchronizeStatus;
 import com.backend.programming.learning.system.domain.valueobject.SynchronizeStep;
 import jakarta.persistence.*;

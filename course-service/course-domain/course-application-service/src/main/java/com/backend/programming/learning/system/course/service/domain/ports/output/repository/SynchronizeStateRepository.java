@@ -16,6 +16,4 @@ public interface SynchronizeStateRepository {
 
     List<SynchronizeState> findByStatus(SynchronizeStatus status);
 
-    SynchronizeState findSynchronizeStateByOrganizationIdAndStep(UUID organizationId, String step);
-
 }

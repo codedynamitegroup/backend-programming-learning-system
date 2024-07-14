@@ -25,6 +25,7 @@ public interface OrganizationApplicationService {
 
     DeleteOrganizationResponse deleteOrganization(@Valid DeleteOrganizationCommand deleteOrganizationCommand);
 
-    UpdateOrganizationResponse updateOrganization(UUID organizationId,@Valid UpdateOrganizationCommand updateOrganizationCommand);
+    UpdateOrganizationResponse updateOrganization(@Valid UpdateOrganizationCommand updateOrganizationCommand);
 
+    UpdateOrganizationResponse syncDataMoodle(UUID organizationId, @Valid SyncOrganizationCommand syncOrganizationCommand);
 }

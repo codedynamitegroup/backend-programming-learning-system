@@ -28,7 +28,7 @@ import java.util.UUID;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/course/organization", produces = "application/vnd.api.v1+json")
+@RequestMapping(value = "/organization/organization", produces = "application/vnd.api.v1+json")
 public class OrganizationController {
     private final OrganizationApplicationService organizationApplicationService;
 
@@ -112,8 +112,33 @@ public class OrganizationController {
     ) {
         log.info("Updating organization");
         UpdateOrganizationResponse response = organizationApplicationService.
-                updateOrganization(organizationId, updateOrganizationCommand);
+                updateOrganization(UpdateOrganizationCommand
+                        .builder()
+                        .organizationId(organizationId)
+                        .name(updateOrganizationCommand.getName())
+                        .description(updateOrganizationCommand.getDescription())
+                        .apiKey(updateOrganizationCommand.getApiKey())
+                        .moodleUrl(updateOrganizationCommand.getMoodleUrl())
+                        .build());
         return  ResponseEntity.ok(response);
     }
 
+    @PutMapping("/{organizationId}/sync")
+    @Operation(summary = "Sync organization.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = UpdateOrganizationResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<UpdateOrganizationResponse> syncDataMoodle(
+            @PathVariable UUID organizationId,
+            @RequestBody SyncOrganizationCommand syncOrganizationCommand
+    ) {
+        log.info("Syncing organization");
+        UpdateOrganizationResponse response = organizationApplicationService.
+                syncDataMoodle(organizationId, syncOrganizationCommand);
+        return  ResponseEntity.ok(response);
+    }
 }
