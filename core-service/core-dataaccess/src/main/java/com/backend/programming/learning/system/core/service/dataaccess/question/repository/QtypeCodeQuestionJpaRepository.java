@@ -66,4 +66,20 @@ public interface QtypeCodeQuestionJpaRepository extends JpaRepository<QtypeCodeQ
                                                                                    String difficulty,
                                                                                    Boolean isPublic,
                                                                                    Pageable pageable);
+
+    @Query(value = """
+         select cqe.*
+        from qtype_code_question cqe
+        join question qe
+        on cqe.question_id = qe.id
+        where (qe.org_id is null and cqe.is_allowed_to_import = true)
+                AND (cast(?2 as text) IS NULL or UPPER(qe.name) like UPPER(concat('%', cast(?2 as text), '%')))
+                AND (cast(?3 as text) is NULL OR cast(?3 as text) = cast(qe.difficulty as text))
+                AND (?4 is null or cqe.is_public = ?4)
+         order by qe.created_at asc
+""", nativeQuery = true)
+    Page<QtypeCodeQuestionEntity> findAllAllowedToImportTeacherQtypeCodeQuestions(String search,
+                                                                                   String difficulty,
+                                                                                   Boolean isPublic,
+                                                                                   Pageable pageable);
 }
