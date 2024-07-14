@@ -11,9 +11,10 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class UpdateSectionCommand {
+    @NotNull(message = "Section id is required")
     private UUID sectionId;
     @NotNull(message = "Section name is required")
     private String name;
-    @NotNull(message = "Visible is required")
+//    @NotNull(message = "Visible is required")
     private Integer visible;
 }

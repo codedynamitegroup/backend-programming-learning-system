@@ -44,7 +44,11 @@ public class SectionController {
 
     @PutMapping("/{sectionId}")
     public ResponseEntity<UpdateSectionResponse> updateSection(@PathVariable UUID sectionId, @RequestBody UpdateSectionCommand updateSectionCommand) {
-       UpdateSectionResponse response = sectionApplicationService.updateSection(sectionId,updateSectionCommand);
+       UpdateSectionResponse response = sectionApplicationService.updateSection(sectionId, UpdateSectionCommand.builder()
+                .name(updateSectionCommand.getName())
+                .visible(updateSectionCommand.getVisible())
+                .sectionId(sectionId)
+               .build());
          return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
