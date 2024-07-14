@@ -51,4 +51,11 @@ public class SynchronizeStateRepositoryImpl implements SynchronizeStateRepositor
                         .map(synchronizeStateDataAccessMapper::synchronizeStateEntityToSynchronizeState)
                         .toList();
     }
+
+    @Override
+    public SynchronizeState findSynchronizeStateByOrganizationIdAndStep(UUID organizationId, String step) {
+        return synchronizeStateDataAccessMapper
+                .synchronizeStateEntityToSynchronizeState(synchronizeStateJpaRepostiory
+                        .findSynchronizeStateByOrganizationIdAndStep(organizationId, step));
+    }
 }

@@ -56,28 +56,8 @@ public class OrganizationApplicationServiceImpl implements OrganizationApplicati
     }
 
     @Override
-    public UpdateOrganizationResponse updateOrganization(UpdateOrganizationCommand updateOrganizationCommand) {
-        return organizationCommandHandler.updateOrganization(updateOrganizationCommand);
-    }
-
-    @Override
-    public UpdateOrganizationResponse syncDataMoodle(UUID organizationId, SyncOrganizationCommand syncOrganizationCommand) {
-        Organization organization = getOrganization(organizationId);
-        for(SynchronizeStep synchronizeStep : SynchronizeStep.values()){
-            SynchronizeState synchronizeState = SynchronizeState.builder().build();
-            synchronizeState.initializeSynchronizeState();
-            if(synchronizeStep.equals(SynchronizeStep.USER)) {
-                synchronizeState.setStatus(SynchronizeStatus.PROCESSING);
-            }
-            else {
-                synchronizeState.setStatus(SynchronizeStatus.PENDING);
-            }
-            synchronizeState.setOrganization(organization);
-            synchronizeState.setStep(synchronizeStep);
-            synchronizeStateRepository.save(synchronizeState);
-        }
-
-        return organizationCommandHandler.synchronizeDataMoodle(organizationId, syncOrganizationCommand);
+    public UpdateOrganizationResponse updateOrganization(UUID organizationId,UpdateOrganizationCommand updateOrganizationCommand) {
+        return organizationCommandHandler.updateOrganization(organizationId,updateOrganizationCommand);
     }
 
     public Organization getOrganization(UUID organizationId) {
