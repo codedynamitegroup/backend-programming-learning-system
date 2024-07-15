@@ -15,9 +15,14 @@ public class UserResponseEntity {
     @NotNull
     private final UUID userId;
 
-    private final RoleMoodle roleMoodle;
+    private final String roleMoodleId;
+    private final String avatarUrl;
     @NotNull
     private final String fullName;
+    @NotNull
+    private final String firstName;
+    @NotNull
+    private final String lastName;
     @NotNull
     private final String email;
 }

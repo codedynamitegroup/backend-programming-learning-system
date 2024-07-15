@@ -2,11 +2,12 @@ package com.backend.programming.learning.system.course.service.domain.mapper.pos
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.post.CreatePostCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.post.CreatePostResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryAllPostResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryAllPostByCourseIdResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.post.PostResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
 import com.backend.programming.learning.system.course.service.domain.entity.Post;
 import com.backend.programming.learning.system.course.service.domain.entity.User;
+import com.backend.programming.learning.system.course.service.domain.mapper.user.UserDataMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,12 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class PostDataMapper {
+    private final UserDataMapper userDataMapper;
+
+    public PostDataMapper(UserDataMapper userDataMapper) {
+        this.userDataMapper = userDataMapper;
+    }
+
     public Post createPostCommandToPost(CreatePostCommand createPostCommand, Course course, User createdBy) {
         return Post.builder()
                 .course(course)
@@ -43,17 +50,18 @@ public class PostDataMapper {
 
     public PostResponseEntity postToPostResponseEntity(Post post) {
         return PostResponseEntity.builder()
-                .postId(post.getId())
+                .postId(post.getId().getValue().toString())
                 .title(post.getTitle())
                 .content(post.getContent())
                 .summary(post.getSummary())
                 .isPublished(post.getPublished())
-                .createdBy(post.getCreatedBy().getId())
+                .createdBy(post.getCreatedBy() != null ? userDataMapper.userToUserResponseEntity(post.getCreatedBy()) : null)
+                .createdAt(post.getCreatedAt())
                 .build();
     }
 
-    public QueryAllPostResponse postPageToQueryAllPostResponse(Page<Post> posts) {
-        return QueryAllPostResponse.builder()
+    public QueryAllPostByCourseIdResponse postPageToQueryAllPostResponse(Page<Post> posts) {
+        return QueryAllPostByCourseIdResponse.builder()
                 .posts(posts.map(this::postToPostResponseEntity).getContent())
                 .currentPage(posts.getNumber())
                 .totalItems(posts.getTotalElements())
