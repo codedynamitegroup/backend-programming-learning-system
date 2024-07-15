@@ -5,9 +5,11 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.post.CreatePostResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.post.DeletePostCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.post.DeletePostResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryAllPostCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryAllPostResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryAllPostByCourseIdCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryAllPostByCourseIdResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryPostCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.post.UpdatePostCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.post.UpdatePostResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.post.PostResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.post.PostApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,14 +21,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -43,7 +38,7 @@ import java.util.UUID;
 public class PostController {
     private final PostApplicationService postApplicationService;
 
-    @PostMapping("/create")
+    @PostMapping
     @Operation(summary = "Create post.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Success.", content = {
@@ -59,27 +54,28 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @GetMapping
-    @Operation(summary = "Query all post.")
+    @GetMapping("/course/{courseId}")
+    @Operation(summary = "Query all post by courseId.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
-                            schema = @Schema(implementation = QueryAllPostResponse.class))
+                            schema = @Schema(implementation = QueryAllPostByCourseIdResponse.class))
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public ResponseEntity<QueryAllPostResponse> findAll(
-            @RequestParam(defaultValue = "") String search,
+    public ResponseEntity<QueryAllPostByCourseIdResponse> findAll(
             @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "10") Integer pageSize
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @PathVariable UUID courseId
     ) {
         log.info("Getting list post");
-        QueryAllPostCommand queryAllPostCommand = QueryAllPostCommand.builder()
-                .search(search)
-                .pageNo(pageNo)
-                .pageSize(pageSize)
-                .build();
-        QueryAllPostResponse response = postApplicationService.findAll(queryAllPostCommand);
+        QueryAllPostByCourseIdResponse response = postApplicationService.findAllByCourseId(
+                QueryAllPostByCourseIdCommand.builder()
+                        .courseId(courseId)
+                        .pageNo(pageNo)
+                        .pageSize(pageSize)
+                        .build()
+        );
         return ResponseEntity.ok(response);
     }
 
@@ -99,6 +95,28 @@ public class PostController {
                 .build();
         PostResponseEntity response = postApplicationService.findById(createPostCommand);
         return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/{postId}")
+    @Operation(summary = "Update post.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = CreatePostResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<UpdatePostResponse> updatePost(
+            @PathVariable UUID postId,
+            @RequestBody UpdatePostCommand updatePostCommand) {
+        log.info("Updating post: {}", updatePostCommand);
+        UpdatePostResponse response = postApplicationService.updatePost(UpdatePostCommand.builder()
+                .postId(postId)
+                .title(updatePostCommand.title())
+                .content(updatePostCommand.content())
+                .build());
+        log.info("Created post: {}", response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @DeleteMapping("/{postId}")

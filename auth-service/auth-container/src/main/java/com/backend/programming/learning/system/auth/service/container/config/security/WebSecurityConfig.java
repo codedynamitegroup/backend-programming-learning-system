@@ -37,7 +37,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET, "/auth/users").hasAnyRole(ADMIN)
                         .requestMatchers(HttpMethod.GET, "/auth/users/organizations/:id").hasAnyRole(ADMIN_MOODLE)
-                        .requestMatchers(HttpMethod.GET, "/auth/users/:id").hasAnyRole(ADMIN, ADMIN_MOODLE)
+                        .requestMatchers(HttpMethod.GET, "/auth/users/:id").hasAnyRole(USER)
                         .requestMatchers(HttpMethod.GET, "/auth/users/get-by-email").hasRole(USER)
                         .requestMatchers(HttpMethod.DELETE, "/auth/users/:id").hasRole(ADMIN)
                         .requestMatchers(HttpMethod.PUT, "/auth/users/update-profile").hasRole(USER)

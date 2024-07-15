@@ -24,9 +24,15 @@ import java.util.UUID;
 public class SectionController {
     private final SectionApplicationService sectionApplicationService;
 
-    @PostMapping("/create")
-    public ResponseEntity<CreateSectionResponse> createSection(@RequestBody CreateSectionCommand createSectionCommand) {
-        CreateSectionResponse response = sectionApplicationService.createSection(createSectionCommand);
+    @PostMapping("/course/{courseId}")
+    public ResponseEntity<CreateSectionResponse> createSection(
+            @PathVariable UUID courseId,
+            @RequestBody CreateSectionCommand createSectionCommand) {
+        CreateSectionResponse response = sectionApplicationService.createSection(CreateSectionCommand.builder()
+                .courseId(courseId)
+                .name(createSectionCommand.getName())
+                .visible(createSectionCommand.getVisible())
+                .build());
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
@@ -44,7 +50,11 @@ public class SectionController {
 
     @PutMapping("/{sectionId}")
     public ResponseEntity<UpdateSectionResponse> updateSection(@PathVariable UUID sectionId, @RequestBody UpdateSectionCommand updateSectionCommand) {
-       UpdateSectionResponse response = sectionApplicationService.updateSection(sectionId,updateSectionCommand);
+       UpdateSectionResponse response = sectionApplicationService.updateSection(sectionId, UpdateSectionCommand.builder()
+                .name(updateSectionCommand.getName())
+                .visible(updateSectionCommand.getVisible())
+                .sectionId(sectionId)
+               .build());
          return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

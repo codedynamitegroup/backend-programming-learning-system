@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.course.service.dataaccess.module.entity;
 
 import com.backend.programming.learning.system.course.service.dataaccess.assignment.entity.AssignmentEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.exam.entity.ExamEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.organization.entity.OrganizationEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.section.entity.SectionEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
@@ -28,18 +29,18 @@ public class ModuleEntity {
     @JoinColumn(name="assignment_id", referencedColumnName = "id")
     private AssignmentEntity assignment;
 
+    @OneToOne
+    @JoinColumn(name="exam_id", referencedColumnName = "id")
+    private ExamEntity exam;
+
     private Integer cmid;
 
     @ManyToOne
     @JoinColumn(name = "section_id", referencedColumnName = "id")
       private SectionEntity section;
-    private String name;
-    private Integer visible;
-    private String content;
+
     @Enumerated(EnumType.STRING)
     private TypeModule typeModule;
-    private ZonedDateTime timeOpen;
-    private ZonedDateTime timeClose;
 
     @Override
     public boolean equals(Object o) {

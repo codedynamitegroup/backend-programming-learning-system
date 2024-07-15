@@ -84,8 +84,10 @@ public class SubmissionAssignmentDataMapper {
 
         UserResponseEntity userResponseEntity = UserResponseEntity.builder()
                 .userId(user.getId().getValue())
-                .roleMoodle(user.getRoleMoodle())
+                .roleMoodleId(user.getRoleMoodle().getId().getValue().toString())
                 .fullName(user.getFirstName() + " " + user.getLastName())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
                 .email(user.getEmail())
                 .build();
         return SubmissionAssignmentResponseEntity.builder()
