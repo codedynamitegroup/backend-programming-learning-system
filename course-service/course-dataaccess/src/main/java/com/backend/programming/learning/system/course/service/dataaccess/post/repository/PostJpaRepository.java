@@ -20,6 +20,7 @@ public interface PostJpaRepository extends JpaRepository<PostEntity, UUID> {
             SELECT p
             FROM PostEntity p
             WHERE (p.course.id = :courseId)
+            ORDER BY p.createdAt DESC
             """)
     Page<PostEntity> findAllByCourseId(UUID courseId, Pageable pageable);
 }

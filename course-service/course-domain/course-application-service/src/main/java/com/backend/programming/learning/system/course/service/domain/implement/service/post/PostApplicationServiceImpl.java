@@ -7,6 +7,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryAllPostByCourseIdCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryAllPostByCourseIdResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryPostCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.post.UpdatePostCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.post.UpdatePostResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.post.PostResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.post.PostApplicationService;
 import lombok.RequiredArgsConstructor;
@@ -14,26 +16,21 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-/**
- * com.backend.programming.learning.system.implemtent.post
- * Create by Dang Ngoc Tien
- * Date 4/17/2024 - 10:57 PM
- * Description: ...
- */
 @Slf4j
 @Validated
 @Service
 @RequiredArgsConstructor
 public class PostApplicationServiceImpl implements PostApplicationService {
     private final PostCommandHandler postCommandHandler;
+
     @Override
     public CreatePostResponse createPost(CreatePostCommand createPostCommand) {
         return postCommandHandler.createPost(createPostCommand);
     }
 
     @Override
-    public QueryAllPostByCourseIdResponse findAll(QueryAllPostByCourseIdCommand queryAllPostCommand) {
-        return postCommandHandler.findAll(queryAllPostCommand);
+    public QueryAllPostByCourseIdResponse findAllByCourseId(QueryAllPostByCourseIdCommand queryAllPostCommand) {
+        return postCommandHandler.findAllByCourseId(queryAllPostCommand);
     }
 
     @Override
@@ -44,5 +41,10 @@ public class PostApplicationServiceImpl implements PostApplicationService {
     @Override
     public DeletePostResponse deleteById(DeletePostCommand deletePostCommand) {
         return postCommandHandler.deleteById(deletePostCommand);
+    }
+
+    @Override
+    public UpdatePostResponse updatePost(UpdatePostCommand updatePostCommand) {
+        return postCommandHandler.updatePost(updatePostCommand);
     }
 }

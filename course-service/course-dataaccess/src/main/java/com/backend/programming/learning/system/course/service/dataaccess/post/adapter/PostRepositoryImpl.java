@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -35,11 +36,9 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
-    public Post findById(UUID postId) {
-        return postDataAccessMapper
-                .postEntityToPost(postJpaRepository
-                        .findById(postId)
-                        .orElseThrow(() -> new RuntimeException("Post not found")));
+    public Optional<Post> findById(UUID postId) {
+        return postJpaRepository.findById(postId)
+                .map(postDataAccessMapper::postEntityToPost);
     }
 
     @Override
