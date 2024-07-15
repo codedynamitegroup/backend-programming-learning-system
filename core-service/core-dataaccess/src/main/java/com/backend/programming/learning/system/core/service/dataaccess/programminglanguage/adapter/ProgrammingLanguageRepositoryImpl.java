@@ -9,6 +9,9 @@ import com.backend.programming.learning.system.core.service.domain.entity.Review
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ProgrammingLanguageRepository;
 import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ReviewRepository;
 import com.backend.programming.learning.system.domain.valueobject.ProgrammingLanguageId;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -37,6 +40,13 @@ public class ProgrammingLanguageRepositoryImpl implements ProgrammingLanguageRep
     @Override
     public Optional<ProgrammingLanguage> findById(ProgrammingLanguageId programmingLanguageId) {
         return programmingLanguageJpaRepository.findById(programmingLanguageId.getValue())
+                .map(programmingLanguageDataAccessMapper::programmingLanguageEntityToProgrammingLanguage);
+    }
+
+    @Override
+    public Page<ProgrammingLanguage> findAllWithSearch(String search, Integer pageNo, Integer pageSize) {
+        Pageable paging = PageRequest.of(pageNo, pageSize);
+        return programmingLanguageJpaRepository.findAllWithSearch(search, paging)
                 .map(programmingLanguageDataAccessMapper::programmingLanguageEntityToProgrammingLanguage);
     }
 }

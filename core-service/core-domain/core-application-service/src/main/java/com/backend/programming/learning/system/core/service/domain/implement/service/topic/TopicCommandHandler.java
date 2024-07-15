@@ -4,12 +4,14 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.topic.CreateTopicResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.topic.DeleteTopicCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.topic.DeleteTopicResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllProgrammingLanguageResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryTopicCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.topic.UpdateTopicCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.topic.UpdateTopicResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
+import com.backend.programming.learning.system.core.service.domain.entity.ProgrammingLanguage;
 import com.backend.programming.learning.system.core.service.domain.entity.Topic;
 import com.backend.programming.learning.system.core.service.domain.mapper.topic.TopicDataMapper;
 import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
@@ -96,4 +98,10 @@ public class TopicCommandHandler {
                 "Topic updated successfully");
     }
 
+    @Transactional(readOnly = true)
+    public QueryAllProgrammingLanguageResponse queryAllProgrammingLanguage(String search, Integer pageNo, Integer pageSize) {
+        Page<ProgrammingLanguage> programmingLanguages = topicQueryHelper.queryAllProgrammingLanguage(search, pageNo, pageSize);
+
+        return topicDataMapper.programmingLanguagePageToQueryAllProgrammingLanguageResponse(programmingLanguages);
+    }
 }
