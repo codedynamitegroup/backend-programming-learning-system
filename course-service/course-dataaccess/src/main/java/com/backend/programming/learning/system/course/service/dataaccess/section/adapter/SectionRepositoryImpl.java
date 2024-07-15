@@ -30,11 +30,9 @@ public class SectionRepositoryImpl implements SectionRepository {
     }
 
     @Override
-    public Section findById(UUID sectionId) {
-        return
-            sectionDataAccessMapper.sectionEntityToSection(sectionJpaRepository
-                .findById(sectionId)
-                .orElseThrow(() -> new RuntimeException("Section not found")));
+    public Optional<Section> findById(UUID sectionId) {
+        return sectionJpaRepository.findById(sectionId)
+                .map(sectionDataAccessMapper::sectionEntityToSection);
     }
 
     @Override

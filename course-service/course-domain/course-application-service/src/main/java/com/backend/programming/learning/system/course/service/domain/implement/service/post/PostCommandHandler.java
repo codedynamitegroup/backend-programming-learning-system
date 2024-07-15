@@ -4,9 +4,11 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.post.CreatePostResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.post.DeletePostCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.post.DeletePostResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryAllPostCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryAllPostResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryAllPostByCourseIdCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryAllPostByCourseIdResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryPostCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.post.UpdatePostCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.post.UpdatePostResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.post.PostResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.Post;
 import com.backend.programming.learning.system.course.service.domain.mapper.post.PostDataMapper;
@@ -29,6 +31,7 @@ public class PostCommandHandler {
     private final PostCreateHelper postCreateHelper;
     private final PostQueryHelper postQueryHelper;
     private final PostDeleteHelper postDeleteHelper;
+    private final PostUpdateHelper postUpdateHelper;
 
     private final PostDataMapper postDataMapper;
 
@@ -39,9 +42,18 @@ public class PostCommandHandler {
         return postDataMapper.postToCreatePostResponse(post, "Post created successfully");
     }
 
+    @Transactional
+    public UpdatePostResponse updatePost(UpdatePostCommand updatePostCommand) {
+        Post post = postUpdateHelper.updatePost(updatePostCommand);
+        return UpdatePostResponse.builder()
+                .id(post.getId().getValue())
+                .message("Post updated successfully")
+                .build();
+    }
+
     @Transactional(readOnly = true)
-    public QueryAllPostResponse findAll(QueryAllPostCommand queryAllPostCommand) {
-        Page<Post> posts = postQueryHelper.findAll(queryAllPostCommand);
+    public QueryAllPostByCourseIdResponse findAllByCourseId(QueryAllPostByCourseIdCommand queryAllPostCommand) {
+        Page<Post> posts = postQueryHelper.findAllByCourseId(queryAllPostCommand);
         log.info("Found {} posts", posts.getTotalElements());
         return postDataMapper.postPageToQueryAllPostResponse(posts);
     }

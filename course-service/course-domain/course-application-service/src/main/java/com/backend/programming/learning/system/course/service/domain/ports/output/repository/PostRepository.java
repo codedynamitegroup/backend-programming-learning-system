@@ -3,14 +3,15 @@ package com.backend.programming.learning.system.course.service.domain.ports.outp
 import com.backend.programming.learning.system.course.service.domain.entity.Post;
 import org.springframework.data.domain.Page;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public interface PostRepository {
     Post save(Post post);
 
-    Page<Post> findAll(String search, Integer pageNo, Integer pageSize);
+    Page<Post> findAllByCourseId(UUID courseId, Integer pageNo, Integer pageSize);
 
-    Post findById(UUID postId);
+    Optional<Post> findById(UUID postId);
 
     void deleteById(UUID postId);
 }

@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.dataaccess.question.adapter;
 
+import com.backend.programming.learning.system.course.service.dataaccess.question.entity.QuestionEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.question.entity.QuestionExamDataAccessDTO;
 import com.backend.programming.learning.system.course.service.dataaccess.question.mapper.QuestionDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.question.repository.QuestionJpaRepository;
@@ -24,10 +25,8 @@ public class QuestionRepositoryImpl implements QuestionRepository {
 
     @Override
     public Question saveQuestion(Question question) {
-        return questionDataAccessMapper
-                .questionEntityToQuestion(questionJpaRepository
-                        .save(questionDataAccessMapper
-                                .questionToQuestionEntity(question)));
+        QuestionEntity entity = questionDataAccessMapper.questionToQuestionEntity(question);
+        return questionDataAccessMapper.questionEntityToQuestion(questionJpaRepository.save(entity));
     }
 
     @Override
