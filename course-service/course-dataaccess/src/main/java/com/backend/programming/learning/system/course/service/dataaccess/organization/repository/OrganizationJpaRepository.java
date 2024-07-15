@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.dataaccess.organi
 
 import com.backend.programming.learning.system.course.service.dataaccess.organization.entity.OrganizationEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,5 +16,7 @@ public interface OrganizationJpaRepository extends JpaRepository<OrganizationEnt
     List<OrganizationEntity> findAll();
 
     Optional<OrganizationEntity> findOrganizationByName(String name);
+
+    @Query("SELECT o FROM OrganizationEntity o WHERE o.moodleUrl like %:moodleUrl%")
     Optional<OrganizationEntity> findByMoodleUrl(String moodleUrl);
 }

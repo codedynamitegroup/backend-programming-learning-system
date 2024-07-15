@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/webhook", produces = "application/vnd.api.v1+json")
+@RequestMapping(value = "course/webhook", produces = "application/vnd.api.v1+json")
 public class WebhookController {
     private final WebhookApplicationService webhookApplicationService;
 

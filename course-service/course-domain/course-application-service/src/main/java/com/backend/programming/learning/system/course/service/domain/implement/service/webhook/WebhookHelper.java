@@ -96,6 +96,7 @@ public class WebhookHelper {
                 deleteSection(webhookMessage);
                 break;
             case COURSE_MODULE_CREATED:
+                log.info("Event not found: {}", webhookMessage);
                 break;
             case COURSE_MODULE_UPDATED:
                 break;
