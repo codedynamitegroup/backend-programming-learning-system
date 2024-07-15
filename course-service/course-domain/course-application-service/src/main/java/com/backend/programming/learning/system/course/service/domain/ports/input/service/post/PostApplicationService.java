@@ -7,6 +7,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryAllPostByCourseIdCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryAllPostByCourseIdResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryPostCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.post.UpdatePostCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.update.post.UpdatePostResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.post.PostResponseEntity;
 
 import jakarta.validation.Valid;
@@ -21,7 +23,7 @@ public interface PostApplicationService {
     CreatePostResponse createPost(
             @Valid CreatePostCommand createPostCommand);
 
-    QueryAllPostByCourseIdResponse findAll(
+    QueryAllPostByCourseIdResponse findAllByCourseId(
             @Valid QueryAllPostByCourseIdCommand queryAllPostByCourseIdCommand);
 
     PostResponseEntity findById(
@@ -29,4 +31,6 @@ public interface PostApplicationService {
 
     DeletePostResponse deleteById(
             @Valid DeletePostCommand deletePostCommand);
+
+    UpdatePostResponse updatePost(UpdatePostCommand updatePostCommand);
 }

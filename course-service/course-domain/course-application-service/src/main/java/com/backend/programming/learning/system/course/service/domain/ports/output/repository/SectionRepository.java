@@ -10,7 +10,7 @@ import java.util.UUID;
 public interface SectionRepository {
     Section save(Section section);
 
-    Section findById(UUID sectionId);
+    Optional<Section> findById(UUID sectionId);
 
     Optional<Section> findBySectionMoodleId(Integer sectionMoodleId);
 
