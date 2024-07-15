@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.module.ModuleResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.module.ModuleModel;
 import com.backend.programming.learning.system.course.service.domain.entity.Section;
+import com.backend.programming.learning.system.course.service.domain.exception.CourseDomainException;
 import com.backend.programming.learning.system.course.service.domain.mapper.assignment.AssignmentDataMapper;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam.ExamDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SectionRepository;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 import com.backend.programming.learning.system.course.service.domain.entity.Module;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 
@@ -37,9 +39,12 @@ public class ModuleDataMapper {
     }
 
     public Module createModuleCommandToModule(CreateModuleCommand createModuleCommand) {
-        Section section = sectionRepository.findById(createModuleCommand.getSectionId());
+        Optional<Section> section = sectionRepository.findById(createModuleCommand.getSectionId());
+        if (section.isEmpty()) {
+            throw new CourseDomainException("Section is not found with id: " + createModuleCommand.getSectionId());
+        }
         return Module.builder()
-                .section(section)
+                .section(section.get())
                 .build();
     }
 

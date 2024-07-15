@@ -7,6 +7,7 @@ import com.backend.programming.learning.system.course.service.domain.entity.Cour
 import com.backend.programming.learning.system.course.service.domain.entity.Organization;
 import com.backend.programming.learning.system.course.service.domain.entity.Section;
 import com.backend.programming.learning.system.course.service.domain.entity.WebhookMessage;
+import com.backend.programming.learning.system.course.service.domain.exception.CourseDomainException;
 import com.backend.programming.learning.system.course.service.domain.implement.service.moodle.MoodleCommandHandler;
 import com.backend.programming.learning.system.course.service.domain.mapper.section.SectionDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SectionRepository;
@@ -40,11 +41,16 @@ public class SectionUpdateHelper {
 
     @Transactional
     public Section updateSection(UUID sectionId, UpdateSectionCommand updateSectionCommand) {
-        Section section = sectionRepository.findById(sectionId);
-        section.setName(updateSectionCommand.getName());
-        section.setVisible(updateSectionCommand.getVisible());
-        Section response = sectionRepository.save(section);
-        log.info("Section is updated with id: {}", section.getId());
+        Optional<Section> section = sectionRepository.findById(sectionId);
+        if (section.isEmpty()) {
+            log.error("Section is not found with id: {}", sectionId);
+            throw new CourseDomainException("Section is not found with id: " + sectionId);
+        }
+        Section sectionFound = section.get();
+        sectionFound.setName(updateSectionCommand.getName());
+        sectionFound.setVisible(updateSectionCommand.getVisible());
+        Section response = sectionRepository.save(sectionFound);
+        log.info("Section is updated with id: {}", sectionFound.getId());
         return response;
     }
 

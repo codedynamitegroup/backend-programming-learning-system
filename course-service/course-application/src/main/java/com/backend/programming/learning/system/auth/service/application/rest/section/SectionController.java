@@ -24,9 +24,15 @@ import java.util.UUID;
 public class SectionController {
     private final SectionApplicationService sectionApplicationService;
 
-    @PostMapping("/create")
-    public ResponseEntity<CreateSectionResponse> createSection(@RequestBody CreateSectionCommand createSectionCommand) {
-        CreateSectionResponse response = sectionApplicationService.createSection(createSectionCommand);
+    @PostMapping("/course/{courseId}")
+    public ResponseEntity<CreateSectionResponse> createSection(
+            @PathVariable UUID courseId,
+            @RequestBody CreateSectionCommand createSectionCommand) {
+        CreateSectionResponse response = sectionApplicationService.createSection(CreateSectionCommand.builder()
+                .courseId(courseId)
+                .name(createSectionCommand.getName())
+                .visible(createSectionCommand.getVisible())
+                .build());
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
