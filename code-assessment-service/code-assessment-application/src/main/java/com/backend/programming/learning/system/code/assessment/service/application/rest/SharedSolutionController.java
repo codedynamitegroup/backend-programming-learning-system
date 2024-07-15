@@ -103,6 +103,39 @@ public class SharedSolutionController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/recent-shared-solutions")
+    public ResponseEntity<GetSharedSolutionsResponse> getRecentSharedSolutions(
+            @RequestParam(required = false) UUID codeQuestionId,
+            @RequestParam(required = false) List<UUID> filterTagIds,
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) QueryOrderBy orderBy,
+            @RequestParam(required = false) SharedSolution.SortedFields sortBy,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "5") Integer pageSize,
+            @RequestParam String email
+    ){
+        GetSharedSolutionByCodeQuestionIdCommand command =
+                GetSharedSolutionByCodeQuestionIdCommand.builder()
+                        .codeQuestionId(codeQuestionId)
+                        .email(email)
+                        .filterTagIds(filterTagIds)
+                        .search(search)
+                        .orderBy(orderBy)
+                        .sortBy(sortBy)
+                        .pageNum(pageNo)
+                        .pageSize(pageSize)
+                        .build();
+
+        if(command.getOrderBy() == null)
+            command.setOrderBy(QueryOrderBy.DESC);
+        if(command.getSortBy() == null)
+            command.setSortBy(SharedSolution.SortedFields.createdAt);
+
+        GetSharedSolutionsResponse response =
+                service.getSharedSolutions(command);
+        return ResponseEntity.ok(response);
+    }
+
 
     //view detail
     @GetMapping("/{shared-solution-id}")
