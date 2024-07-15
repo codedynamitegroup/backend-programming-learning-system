@@ -4,8 +4,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.post.CreatePostResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.post.DeletePostCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.post.DeletePostResponse;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryAllPostCommand;
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryAllPostResponse;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryAllPostByCourseIdCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryAllPostByCourseIdResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryPostCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.post.PostResponseEntity;
 
@@ -21,8 +21,8 @@ public interface PostApplicationService {
     CreatePostResponse createPost(
             @Valid CreatePostCommand createPostCommand);
 
-    QueryAllPostResponse findAll(
-            @Valid QueryAllPostCommand queryAllPostCommand);
+    QueryAllPostByCourseIdResponse findAll(
+            @Valid QueryAllPostByCourseIdCommand queryAllPostByCourseIdCommand);
 
     PostResponseEntity findById(
             @Valid QueryPostCommand createPostCommand);

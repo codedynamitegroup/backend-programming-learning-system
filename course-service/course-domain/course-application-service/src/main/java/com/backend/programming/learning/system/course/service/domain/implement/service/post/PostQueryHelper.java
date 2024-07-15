@@ -1,6 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.post;
 
-import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryAllPostCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryAllPostByCourseIdCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.post.QueryPostCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.Post;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.PostRepository;
@@ -20,9 +20,9 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class PostQueryHelper {
     private final PostRepository postRepository;
-    public Page<Post> findAll(QueryAllPostCommand queryAllPostCommand) {
-        return postRepository.findAll(
-                queryAllPostCommand.getSearch(),
+    public Page<Post> findAllByCourseId(QueryAllPostByCourseIdCommand queryAllPostCommand) {
+        return postRepository.findAllByCourseId(
+                queryAllPostCommand.getCourseId(),
                 queryAllPostCommand.getPageNo(),
                 queryAllPostCommand.getPageSize());
     }
