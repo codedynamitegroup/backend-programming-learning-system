@@ -8,8 +8,10 @@ import com.backend.programming.learning.system.course.service.domain.ports.outpu
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -27,18 +29,16 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
-    public Page<Post> findAll(String search, Integer pageNo, Integer pageSize) {
-        PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
-        return postJpaRepository.findAll(search, pageRequest)
+    public Page<Post> findAllByCourseId(UUID courseId, Integer pageNo, Integer pageSize) {
+        Pageable pageRequest = PageRequest.of(pageNo, pageSize);
+        return postJpaRepository.findAllByCourseId(courseId, pageRequest)
                 .map(postDataAccessMapper::postEntityToPost);
     }
 
     @Override
-    public Post findById(UUID postId) {
-        return postDataAccessMapper
-                .postEntityToPost(postJpaRepository
-                        .findById(postId)
-                        .orElseThrow(() -> new RuntimeException("Post not found")));
+    public Optional<Post> findById(UUID postId) {
+        return postJpaRepository.findById(postId)
+                .map(postDataAccessMapper::postEntityToPost);
     }
 
     @Override

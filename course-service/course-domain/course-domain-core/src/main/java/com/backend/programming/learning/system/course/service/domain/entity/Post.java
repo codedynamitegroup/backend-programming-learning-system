@@ -83,6 +83,22 @@ public class Post extends AggregateRoot<PostId> {
         return updatedAt;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public void setUpdatedAt(ZonedDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     public static final class Builder {
         private PostId postId;
         private Course course;

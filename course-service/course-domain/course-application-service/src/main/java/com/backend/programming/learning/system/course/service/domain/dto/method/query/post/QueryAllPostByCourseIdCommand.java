@@ -6,6 +6,8 @@ import lombok.Getter;
 
 import jakarta.validation.constraints.NotNull;
 
+import java.util.UUID;
+
 /**
  * com.backend.programming.learning.system.dto.method.query.post
  * Create by Dang Ngoc Tien
@@ -15,11 +17,12 @@ import jakarta.validation.constraints.NotNull;
 @Getter
 @Builder
 @AllArgsConstructor
-public class QueryAllPostCommand {
+public class QueryAllPostByCourseIdCommand {
     @NotNull
     private final int pageNo;
     @NotNull
     private final int pageSize;
+
     @NotNull
-    private final String search;
+    private final UUID courseId;
 }

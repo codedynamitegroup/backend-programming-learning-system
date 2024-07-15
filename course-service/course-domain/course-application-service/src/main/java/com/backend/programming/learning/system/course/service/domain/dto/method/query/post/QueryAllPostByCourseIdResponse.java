@@ -16,7 +16,7 @@ import java.util.List;
 @Getter
 @Builder
 @AllArgsConstructor
-public class QueryAllPostResponse {
+public class QueryAllPostByCourseIdResponse {
     private List<PostResponseEntity> posts;
     private final int currentPage;
     private final long totalItems;
