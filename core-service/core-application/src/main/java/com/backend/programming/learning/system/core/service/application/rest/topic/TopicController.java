@@ -1,16 +1,10 @@
 package com.backend.programming.learning.system.core.service.application.rest.topic;
 
-import com.backend.programming.learning.system.core.service.domain.dto.method.create.review.CreateReviewResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.topic.CreateTopicCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.topic.CreateTopicResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.topic.DeleteTopicCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.topic.DeleteTopicResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllProgrammingLanguageResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsResponse;
-import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryTopicCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewCommand;
-import com.backend.programming.learning.system.core.service.domain.dto.method.update.review.UpdateReviewResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.*;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.topic.UpdateTopicCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.topic.UpdateTopicResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
@@ -144,25 +138,52 @@ public class TopicController {
         return ResponseEntity.ok(deleteTopicResponse);
     }
 
-    @GetMapping("/language")
+    @PostMapping("/language")
     @Operation(summary = "Get programming languages.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
-                            schema = @Schema(implementation = DeleteTopicResponse.class))
+                            schema = @Schema(implementation = QueryAllProgrammingLanguageResponse.class))
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<QueryAllProgrammingLanguageResponse> getProgrammingLanguages(
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize,
-            @RequestParam(defaultValue = "") String search
+            @RequestParam(defaultValue = "") String search,
+            @RequestBody QueryAllProgrammingLanguageCommand selectedProgrammingLanguageIds
     ) {
-        log.info("Getting all programming languages with search: {}, page: {}, page size: {}", search, pageNo, pageSize);
+        log.info("Getting all programming languages with search: {}, page: {}, page size: {} except for languages with these ids: {}", search, pageNo, pageSize, selectedProgrammingLanguageIds);
 
         QueryAllProgrammingLanguageResponse queryAllProgrammingLanguageResponse =
                 topicApplicationService.queryAllProgrammingLanguages(
-                        search, pageNo, pageSize
+                        search, pageNo, pageSize, selectedProgrammingLanguageIds.selectedProgrammingLanguageIds()
+                );
+
+        log.info("Returning all programming languages: {}", queryAllProgrammingLanguageResponse.programmingLanguages());
+        return ResponseEntity.ok(queryAllProgrammingLanguageResponse);
+    }
+
+    @PostMapping("/language/get-by-id")
+    @Operation(summary = "Get programming languages.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllProgrammingLanguageResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllProgrammingLanguageResponse> getProgrammingLanguagesById(
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "") String search,
+            @RequestBody QueryAllProgrammingLanguageCommand selectedProgrammingLanguageIds
+    ) {
+        log.info("Getting all programming languages with search: {}, page: {}, page size: {} except for languages with these ids: {}", search, pageNo, pageSize, selectedProgrammingLanguageIds);
+
+        QueryAllProgrammingLanguageResponse queryAllProgrammingLanguageResponse =
+                topicApplicationService.queryAllProgrammingLanguagesById(
+                        search, pageNo, pageSize, selectedProgrammingLanguageIds.selectedProgrammingLanguageIds()
                 );
 
         log.info("Returning all programming languages: {}", queryAllProgrammingLanguageResponse.programmingLanguages());

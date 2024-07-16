@@ -4,13 +4,13 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.topic.CreateTopicResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllProgrammingLanguageResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.topic.UpdateTopicResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.responseentity.programminglanguage.ProgrammingLanguageIdResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.programminglanguage.ProgrammingLanguageResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.topic.TopicResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.user.UserResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.entity.ProgrammingLanguage;
 import com.backend.programming.learning.system.core.service.domain.entity.Topic;
-import com.backend.programming.learning.system.core.service.domain.entity.TopicProgrammingLanguage;
 import com.backend.programming.learning.system.core.service.domain.entity.User;
 import com.backend.programming.learning.system.core.service.domain.mapper.programminglanguage.ProgrammingLanguageDataMapper;
 import com.backend.programming.learning.system.core.service.domain.mapper.user.UserDataMapper;
@@ -122,9 +122,25 @@ public class TopicDataMapper {
                 .build();
     }
 
+    private ProgrammingLanguageIdResponseEntity programmingLanguageToQueryProgrammingLanguageIdResponseEntity(ProgrammingLanguage programmingLanguage) {
+        return ProgrammingLanguageIdResponseEntity.builder()
+                .id(programmingLanguage.getId().getValue())
+                .name(programmingLanguage.getName())
+                .compilerApiId(programmingLanguage.getCompilerApiId())
+                .timeLimit(programmingLanguage.getTimeLimit())
+                .memoryLimit(programmingLanguage.getMemoryLimit())
+                .build();
+    }
+
+    private List<ProgrammingLanguageIdResponseEntity> programmingLanguageListToQueryProgrammingLanguageIdListResponseEntity(List<ProgrammingLanguage> programmingLanguages) {
+        return programmingLanguages.stream()
+                .map(this::programmingLanguageToQueryProgrammingLanguageIdResponseEntity)
+                .collect(Collectors.toList());
+    }
+
     public QueryAllProgrammingLanguageResponse programmingLanguagePageToQueryAllProgrammingLanguageResponse(Page<ProgrammingLanguage> programmingLanguages) {
         return QueryAllProgrammingLanguageResponse.builder()
-                .programmingLanguages(programmingLanguages.getContent())
+                .programmingLanguages(programmingLanguageListToQueryProgrammingLanguageIdListResponseEntity(programmingLanguages.getContent()))
                 .currentPage(programmingLanguages.getNumber())
                 .totalItems(programmingLanguages.getTotalElements())
                 .totalPages(programmingLanguages.getTotalPages())
