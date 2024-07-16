@@ -275,8 +275,10 @@ public class CodeQuestionRepositoryImpl implements CodeQuestionRepository {
         codeQuestionJpaRepository.deleteById(id.getValue());
     }
 
+
     @Override
-    public void deleteCodeQuestionByQuestionId(UUID id) {
-        codeQuestionJpaRepository.deleteByQuestionId(id);
+    public Optional<CodeQuestion> findQuestionId(UUID id) {
+        return codeQuestionJpaRepository.findByQuestionId(id)
+                .map(codeQuestionDataAccessMapper::codeQuestionEntityToCodeQuestion);
     }
 }

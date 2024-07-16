@@ -38,9 +38,9 @@ public class QuestionRequestMessageListenerImpl implements QuestionRequestMessag
     @Override
     public void deleteQuestion(QuestionRequest questionRequest) {
 //        try {
-            log.info("Question deleted with id: {}", questionRequest.getId());
-
-            codeQuestionRepository.deleteCodeQuestionByQuestionId(UUID.fromString(questionRequest.getId()));
+        CodeQuestion codeQuestion = validateHelper.validateCodeQuestionByQuestionId(UUID.fromString(questionRequest.getId()));
+        codeQuestionRepository.deleteCodeQuestionById(codeQuestion.getId().getValue());
+        log.info("Question deleted with id: {}", codeQuestion.getId());
 
 //            QuestionEventPayload questionEventPayload = questionDataMapper.questionRequestToQuestionEventPayload(questionRequest, CopyState.DELETED);
 
