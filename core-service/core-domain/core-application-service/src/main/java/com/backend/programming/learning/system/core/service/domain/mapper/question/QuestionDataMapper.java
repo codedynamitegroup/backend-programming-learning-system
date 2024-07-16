@@ -328,7 +328,7 @@ public class QuestionDataMapper {
     }
 
     private List<QuestionEventAnswer> answerOfQuestionListToQuestionEventAnswerList(List<AnswerOfQuestion> answerOfQuestions) {
-        if (answerOfQuestions == null) return null;
+        if (answerOfQuestions == null) return List.of();
 
         return List.of(answerOfQuestions.stream()
                 .map(this::answerOfQuestionToQuestionEventAnswer)

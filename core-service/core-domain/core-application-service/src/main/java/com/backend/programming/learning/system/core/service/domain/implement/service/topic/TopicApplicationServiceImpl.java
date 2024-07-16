@@ -18,6 +18,9 @@ import org.springframework.validation.annotation.Validated;
 
 import jakarta.validation.Valid;
 
+import java.util.List;
+import java.util.UUID;
+
 @Service
 @Validated
 @Slf4j
@@ -54,7 +57,16 @@ class TopicApplicationServiceImpl implements TopicApplicationService {
     }
 
     @Override
-    public QueryAllProgrammingLanguageResponse queryAllProgrammingLanguages(String search, Integer pageNo, Integer pageSize) {
-        return topicCommandHandler.queryAllProgrammingLanguage(search, pageNo, pageSize);
+    public QueryAllProgrammingLanguageResponse queryAllProgrammingLanguages(String search, Integer pageNo, Integer pageSize, List<UUID> selectedProgrammingLanguages) {
+        return topicCommandHandler.queryAllProgrammingLanguage(search, pageNo, pageSize, selectedProgrammingLanguages);
+    }
+
+    @Override
+    public QueryAllProgrammingLanguageResponse queryAllProgrammingLanguagesById(
+            String search,
+            Integer pageNo,
+            Integer pageSize,
+            List<UUID> selectedProgrammingLanguageIds) {
+        return topicCommandHandler.queryAllProgrammingLanguageById(search, pageNo, pageSize, selectedProgrammingLanguageIds);
     }
 }

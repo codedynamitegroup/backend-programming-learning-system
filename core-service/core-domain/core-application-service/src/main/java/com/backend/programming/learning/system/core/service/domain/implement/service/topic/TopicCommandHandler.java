@@ -20,6 +20,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.UUID;
+
 @Component
 @Slf4j
 public class TopicCommandHandler {
@@ -99,8 +102,14 @@ public class TopicCommandHandler {
     }
 
     @Transactional(readOnly = true)
-    public QueryAllProgrammingLanguageResponse queryAllProgrammingLanguage(String search, Integer pageNo, Integer pageSize) {
-        Page<ProgrammingLanguage> programmingLanguages = topicQueryHelper.queryAllProgrammingLanguage(search, pageNo, pageSize);
+    public QueryAllProgrammingLanguageResponse queryAllProgrammingLanguage(String search, Integer pageNo, Integer pageSize, List<UUID> selectedProgrammingLanguages) {
+        Page<ProgrammingLanguage> programmingLanguages = topicQueryHelper.queryAllProgrammingLanguage(search, pageNo, pageSize, selectedProgrammingLanguages);
+
+        return topicDataMapper.programmingLanguagePageToQueryAllProgrammingLanguageResponse(programmingLanguages);
+    }
+
+    public QueryAllProgrammingLanguageResponse queryAllProgrammingLanguageById(String search, Integer pageNo, Integer pageSize, List<UUID> selectedProgrammingLanguageIds) {
+        Page<ProgrammingLanguage> programmingLanguages = topicQueryHelper.queryAllProgrammingLanguageById(search, pageNo, pageSize, selectedProgrammingLanguageIds);
 
         return topicDataMapper.programmingLanguagePageToQueryAllProgrammingLanguageResponse(programmingLanguages);
     }

@@ -14,6 +14,9 @@ import com.backend.programming.learning.system.core.service.domain.dto.responsee
 
 import jakarta.validation.Valid;
 
+import java.util.List;
+import java.util.UUID;
+
 public interface TopicApplicationService {
     CreateTopicResponse createTopic(
             @Valid CreateTopicCommand createTopicCommand);
@@ -30,5 +33,7 @@ public interface TopicApplicationService {
     UpdateTopicResponse updateTopic(
             @Valid UpdateTopicCommand updateTopicCommand);
 
-    QueryAllProgrammingLanguageResponse queryAllProgrammingLanguages(String search, Integer pageNo, Integer pageSize);
+    QueryAllProgrammingLanguageResponse queryAllProgrammingLanguages(String search, Integer pageNo, Integer pageSize, List<UUID> selectedProgrammingLanguages);
+
+    QueryAllProgrammingLanguageResponse queryAllProgrammingLanguagesById(String search, Integer pageNo, Integer pageSize, List<UUID> selectedProgrammingLanguageIds);
 }

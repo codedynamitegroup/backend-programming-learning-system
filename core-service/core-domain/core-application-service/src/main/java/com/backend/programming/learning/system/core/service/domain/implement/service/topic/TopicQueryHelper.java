@@ -51,8 +51,12 @@ public class TopicQueryHelper {
         return topicRepository.findAll(pageNo, pageSize, fetchAll);
     }
 
-    public Page<ProgrammingLanguage> queryAllProgrammingLanguage(String search, Integer pageNo, Integer pageSize) {
-        return programmingLanguageRepository.findAllWithSearch(search, pageNo, pageSize);
+    public Page<ProgrammingLanguage> queryAllProgrammingLanguage(String search, Integer pageNo, Integer pageSize, List<UUID> selectedProgrammingLanguages) {
+        return programmingLanguageRepository.findAllWithSearch(search, pageNo, pageSize, selectedProgrammingLanguages);
+    }
+
+    public Page<ProgrammingLanguage> queryAllProgrammingLanguageById(String search, Integer pageNo, Integer pageSize, List<UUID> selectedProgrammingLanguageIds) {
+        return programmingLanguageRepository.findAllWithSearchById(search, pageNo, pageSize, selectedProgrammingLanguageIds);
     }
 }
 

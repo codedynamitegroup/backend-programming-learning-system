@@ -76,15 +76,6 @@ public class QuestionCommandHandler {
                 UUID.randomUUID(),
                 previousPayload);
 
-        if (questionDeletedEvent.getQuestion().getqtype() == QuestionType.CODE)
-            questionOutboxHelper.saveNewQuestionOutboxMessage(questionEventPayload,
-                    questionDeletedEvent.getQuestion().getCopyState(),
-                    OutboxStatus.STARTED,
-                    questionSagaHelper.questionStatusToSagaStatus(questionDeletedEvent.getQuestion().getCopyState()),
-                    ServiceName.CODE_ASSESSMENT_SERVICE,
-                    UUID.randomUUID(),
-                    previousPayload);
-
         QuestionDeleteResponse response = QuestionDeleteResponse.builder()
                 .questionId(questionId)
                 .qtypeId(questionDeletedEvent.getQtypeID())
