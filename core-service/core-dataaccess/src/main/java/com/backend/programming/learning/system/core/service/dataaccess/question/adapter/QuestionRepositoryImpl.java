@@ -149,6 +149,22 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     }
 
     @Override
+    public Page<QuestionResponseEntity> findAllQuestionByCategoryAndIsBasicType(
+            UUID categoryId,
+            QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand,
+            boolean isBasicType) {
+        Pageable pageRequest = Pageable.ofSize(queryAllQuestionByCategoryIdCommand.getPageSize())
+                .withPage(queryAllQuestionByCategoryIdCommand.getPageNo());
+        return questionJpaRepository
+                .findAllByQuestionBankCategoryIdAndIsBasicType(
+                        categoryId,
+                        queryAllQuestionByCategoryIdCommand.getSearch(),
+                        isBasicType,
+                        pageRequest)
+                .map(questionDataAccessMapper::questionEntityToQuestionResponseEntity);
+    }
+
+    @Override
     public List<Question> cloneQuestion(List<CreateQuestionClone> questionClones) {
         Map<UUID, QuestionEntity> questionMap = new HashMap<>();
         List<QuestionEntity> questionEntities = questionJpaRepository.findAllById(questionClones

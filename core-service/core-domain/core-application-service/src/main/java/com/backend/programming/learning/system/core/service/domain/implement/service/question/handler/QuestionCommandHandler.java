@@ -97,6 +97,24 @@ public class QuestionCommandHandler {
                 .build();
     }
 
+    public QueryAllQuestionByCategoryIdResponse queryAllQuestionByCategoryAndIsBasicType(
+            UUID categoryId,
+            QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand,
+            boolean isBasicType) {
+        Page<QuestionResponseEntity> questionResponseEntities = questionQueryHelper
+                .queryAllQuestionByCategoryAndIsBasicType(
+                        categoryId,
+                        queryAllQuestionByCategoryIdCommand,
+                        isBasicType);
+
+        return QueryAllQuestionByCategoryIdResponse.builder()
+                .questionResponses(questionResponseEntities.getContent())
+                .currentPage(questionResponseEntities.getNumber())
+                .totalItems(questionResponseEntities.getTotalElements())
+                .totalPages(questionResponseEntities.getTotalPages())
+                .build();
+    }
+
     public QueryByIdsResponse queryAllQuestionDetail(QueryByIdsCommand ids) {
         List<Object> responses = new ArrayList<>();
         ids.questionCommands().forEach(questionCommand -> {

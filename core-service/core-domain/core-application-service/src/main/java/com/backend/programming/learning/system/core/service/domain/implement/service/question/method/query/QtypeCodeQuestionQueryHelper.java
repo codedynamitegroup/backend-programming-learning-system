@@ -130,6 +130,26 @@ public class QtypeCodeQuestionQueryHelper {
         return qtypeCodeQuestions;
     }
 
+    @Transactional(readOnly = true)
+    public Page<QtypeCodeQuestion> queryAllAllowedToImportQtypeCodeQuestionsForTeacher(
+            String search,
+            QuestionDifficulty difficulty,
+            Boolean isPublic,
+            Integer pageNo,
+            Integer pageSize
+    ) {
+        Page<QtypeCodeQuestion> qtypeCodeQuestions =
+                qtypeCodeQuestionRepository.findAllAllowedToImportTeacherQtypeCodeQuestions(
+                        search,
+                        difficulty,
+                        isPublic,
+                        pageNo,
+                        pageSize);
+        log.info("Query all is allowed to import qtype Code Questions for teacher");
+
+        return qtypeCodeQuestions;
+    }
+
     public QueryQtypeCodeQuestionResponse queryQuestionById(UUID questionId) {
         Optional<QtypeCodeQuestion> qtypeCodeQuestion = qtypeCodeQuestionRepository.findQuestionId(questionId);
 

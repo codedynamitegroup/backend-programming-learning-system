@@ -149,4 +149,21 @@ public class QtypeCodeQuestionRepositoryImpl implements QtypeCodeQuestionReposit
         return codeQuestions;
     }
 
+    @Override
+    public Page<QtypeCodeQuestion> findAllAllowedToImportTeacherQtypeCodeQuestions(String search, QuestionDifficulty difficulty, Boolean isPublic, Integer pageNo, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+
+        Page<QtypeCodeQuestionEntity> qtypeCodeQuestionEntities = qtypeCodeQuestionJpaRepository
+                .findAllAllowedToImportTeacherQtypeCodeQuestions(
+                        search,
+                        difficulty == null ? null: difficulty.name(),
+                        isPublic,
+                        pageable);
+
+        Page<QtypeCodeQuestion> codeQuestions = qtypeCodeQuestionEntities
+                .map(qtypeCodeQuestionDataAccessMapper::qtypeCodeQuestionEntityToQtypeCodeQuestion);
+
+        return codeQuestions;
+    }
+
 }

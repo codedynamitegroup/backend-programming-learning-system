@@ -23,4 +23,10 @@ public class NotificationMessageEmitterImpl<T> implements NotificationMessageEmi
         log.info("Emitting message to room: {} with event name: {} and message: {}", room, eventName, message);
         socketEmitterHelper.emitMessage(room, eventName, message);
     }
+
+    @Override
+    public void broadcast(String eventName, T message) {
+        log.info("Broadcasting message with event name: {} and message: {}", eventName, message);
+        socketEmitterHelper.broadcastMessage(eventName, message);
+    }
 }
