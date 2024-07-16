@@ -58,15 +58,16 @@ public class QtypeCodeQuestionCommandHandler {
         this.qtypeCodeQuestionDataMapper = qtypeCodeQuestionDataMapper;
     }
 
-    public CreateQuestionResponse createQtypeCodeQuestion(CreateQtypeCodeQuestionCommand createQtypeCodeQuestionCommand) {
-        QuestionCreatedEvent questionCreatedEvent = qtypeCodeQuestionCreateHelper.persistQtypeCodeQuestion(createQtypeCodeQuestionCommand);
+    public CreateQuestionResponse createQtypeCodeQuestion(CreateQtypeCodeQuestionCommand command) {
+        QuestionCreatedEvent questionCreatedEvent = qtypeCodeQuestionCreateHelper.persistQtypeCodeQuestion(command);
 
-//        questionOutboxHelper.saveNewQuestionOutboxMessage(questionDataMapper.questionCreatedEventToQuestionEventPayload(questionCreatedEvent),
-//                questionCreatedEvent.getQuestion().getCopyState(),
-//                OutboxStatus.STARTED,
-//                questionSagaHelper.questionStatusToSagaStatus(questionCreatedEvent.getQuestion().getCopyState()),
-//                ServiceName.COURSE_SERVICE,
-//                UUID.randomUUID(), null);
+        questionOutboxHelper.saveNewQuestionOutboxMessage(
+                questionDataMapper.codeQuestionCreatedEventToQuestionEventPayload(questionCreatedEvent, command),
+                questionCreatedEvent.getQuestion().getCopyState(),
+                OutboxStatus.STARTED,
+                questionSagaHelper.questionStatusToSagaStatus(questionCreatedEvent.getQuestion().getCopyState()),
+                ServiceName.COURSE_SERVICE,
+                UUID.randomUUID(), null);
 
         return questionDataMapper.questionCreatedEventToCreateQuestionResponse(questionCreatedEvent, "Qtype Code Question created successfully");
     }

@@ -61,7 +61,13 @@ public class QtypeCodeQuestionDataMapper {
                                                                       Question question) {
         return QtypeCodeQuestion.builder()
                 .question(question)
+                .dslTemplate("")
                 .codeQuestionName(createQtypeCodeQuestionCommand.getName())
+                .isAllowedToImport(createQtypeCodeQuestionCommand.getAllowImport())
+                .isPublic(createQtypeCodeQuestionCommand.getIsPublic())
+                .problemStatement(question.getQuestionText())
+                .codeQuestionName(question.getName())
+                .maxGrade(question.getDefaultMark())
                 .build();
     }
 

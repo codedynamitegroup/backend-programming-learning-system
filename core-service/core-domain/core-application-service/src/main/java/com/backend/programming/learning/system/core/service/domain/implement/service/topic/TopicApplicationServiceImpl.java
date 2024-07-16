@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.topic.CreateTopicResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.topic.DeleteTopicCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.topic.DeleteTopicResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllProgrammingLanguageResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryTopicCommand;
@@ -50,5 +51,10 @@ class TopicApplicationServiceImpl implements TopicApplicationService {
     @Override
     public UpdateTopicResponse updateTopic(UpdateTopicCommand updateTopicCommand) {
         return topicCommandHandler.updateTopicResponse(updateTopicCommand);
+    }
+
+    @Override
+    public QueryAllProgrammingLanguageResponse queryAllProgrammingLanguages(String search, Integer pageNo, Integer pageSize) {
+        return topicCommandHandler.queryAllProgrammingLanguage(search, pageNo, pageSize);
     }
 }

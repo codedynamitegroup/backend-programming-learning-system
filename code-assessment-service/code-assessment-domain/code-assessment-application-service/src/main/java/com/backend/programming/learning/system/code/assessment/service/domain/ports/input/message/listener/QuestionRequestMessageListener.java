@@ -3,5 +3,7 @@ package com.backend.programming.learning.system.code.assessment.service.domain.p
 import com.backend.programming.learning.system.code.assessment.service.domain.dto.message.QuestionRequest;
 
 public interface QuestionRequestMessageListener {
-    void deleteQuestion(QuestionRequest questionRequest);
+    void deleteQuestion(QuestionRequest request);
+    void createQuestion(QuestionRequest request);
+    void updateQuestion(QuestionRequest request);
 }

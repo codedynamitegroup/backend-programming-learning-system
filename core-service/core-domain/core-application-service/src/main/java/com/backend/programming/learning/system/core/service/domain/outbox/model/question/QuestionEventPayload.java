@@ -15,10 +15,28 @@ import java.util.List;
 @AllArgsConstructor
 public class QuestionEventPayload {
     @JsonProperty
+    private String inputFormat;
+
+    @JsonProperty
+    private String outputFormat;
+
+    @JsonProperty
+    private String constraint;
+
+    @JsonProperty
+    private Boolean allowImport;
+
+    @JsonProperty
+    private Boolean isPublic;
+
+    @JsonProperty
     private String id;
 
     @JsonProperty
-    private String sagaId;
+    private String qtypeId;
+
+    @JsonProperty
+    private String categoryId;
 
     @JsonProperty
     private String organizationId;

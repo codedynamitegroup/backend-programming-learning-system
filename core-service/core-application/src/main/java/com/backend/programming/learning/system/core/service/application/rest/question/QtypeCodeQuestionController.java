@@ -38,7 +38,6 @@ public class QtypeCodeQuestionController {
         this.qtypeCodeQuestionApplicationService = qtypeCodeQuestionApplicationService;
     }
 
-    //meh, still need this shit
     @PostMapping("/create")
     @Operation(summary = "Create code question.")
     @ApiResponses(value = {
@@ -49,6 +48,7 @@ public class QtypeCodeQuestionController {
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
     public ResponseEntity<CreateQuestionResponse> createQtypeCodeQuestion(
+
             @RequestBody CreateQtypeCodeQuestionCommand createQtypeCodeQuestionCommand) {
         log.info("Creating code question: {}", createQtypeCodeQuestionCommand);
         CreateQuestionResponse createQuestionResponse = qtypeCodeQuestionApplicationService

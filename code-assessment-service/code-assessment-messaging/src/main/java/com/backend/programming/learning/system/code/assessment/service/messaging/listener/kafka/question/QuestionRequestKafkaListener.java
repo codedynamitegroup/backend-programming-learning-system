@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.code.assessment.service.domain.ex
 import com.backend.programming.learning.system.code.assessment.service.domain.ports.input.message.listener.QuestionRequestMessageListener;
 import com.backend.programming.learning.system.code.assessment.service.messaging.mapper.QuestionMessagingDataMapper;
 import com.backend.programming.learning.system.domain.exception.question.QuestionNotFoundException;
+import com.backend.programming.learning.system.domain.valueobject.QuestionType;
 import com.backend.programming.learning.system.kafka.consumer.KafkaConsumer;
 import com.backend.programming.learning.system.kafka.core.avro.model.QuestionRequestAvroModel;
 import lombok.extern.slf4j.Slf4j;
@@ -47,17 +48,23 @@ public class QuestionRequestKafkaListener implements KafkaConsumer<QuestionReque
                 offsets.toString());
 
         messages.forEach(questionRequestAvroModel -> {
+            if(questionRequestAvroModel.getQType().equals(QuestionType.CODE.name())){
             try {
                 switch (questionRequestAvroModel.getCopyState()) {
+                    case CREATING:
+                        log.info("Creating question with id {}", questionRequestAvroModel.getId());
+                        questionMessageListener.createQuestion(questionMessagingDataMapper
+                                .questionRequestAvroModelToQuestionRequest(questionRequestAvroModel));
+                        break;
+                    case UPDATING:
+                        log.info("Updating question with id {}", questionRequestAvroModel.getId());
+                        questionMessageListener.updateQuestion(questionMessagingDataMapper
+                                .questionRequestAvroModelToQuestionRequest(questionRequestAvroModel));
+                        break;
                     case DELETING:
                         log.info("Deleting question with id {}", questionRequestAvroModel.getId());
                         questionMessageListener.deleteQuestion(questionMessagingDataMapper
-                                .questionRequestAvroModelToQuestionDeleteRequest(questionRequestAvroModel));
-                        break;
-                    case DELETE_ROLLBACKING:
-                        log.info("Rollbacking delete question with id {}", questionRequestAvroModel.getId());
-//                        questionMessageListener.rollbackDeleteQuestion(questionMessagingDataMapper
-//                                .questionRequestAvroModelToQuestionDeleteRequest(questionRequestAvroModel));
+                                .questionRequestAvroModelToQuestionRequest(questionRequestAvroModel));
                         break;
                 }
             }
@@ -79,6 +86,7 @@ public class QuestionRequestKafkaListener implements KafkaConsumer<QuestionReque
                 //NO-OP for OrderNotFoundException
                 log.error("No question found for question id: {}", questionRequestAvroModel.getId());
             }
+        }
         });
     }
 }

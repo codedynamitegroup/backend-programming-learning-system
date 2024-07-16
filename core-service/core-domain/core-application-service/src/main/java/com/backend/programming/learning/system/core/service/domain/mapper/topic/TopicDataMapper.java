@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.core.service.domain.mapper.topic
 
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.topic.CreateTopicCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.topic.CreateTopicResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllProgrammingLanguageResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.update.topic.UpdateTopicResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.responseentity.programminglanguage.ProgrammingLanguageResponseEntity;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsResponse;
@@ -121,4 +122,12 @@ public class TopicDataMapper {
                 .build();
     }
 
+    public QueryAllProgrammingLanguageResponse programmingLanguagePageToQueryAllProgrammingLanguageResponse(Page<ProgrammingLanguage> programmingLanguages) {
+        return QueryAllProgrammingLanguageResponse.builder()
+                .programmingLanguages(programmingLanguages.getContent())
+                .currentPage(programmingLanguages.getNumber())
+                .totalItems(programmingLanguages.getTotalElements())
+                .totalPages(programmingLanguages.getTotalPages())
+                .build();
+    }
 }

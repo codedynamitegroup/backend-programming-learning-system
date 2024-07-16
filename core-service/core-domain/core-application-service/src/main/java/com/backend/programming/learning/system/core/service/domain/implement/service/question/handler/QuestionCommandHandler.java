@@ -27,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +62,7 @@ public class QuestionCommandHandler {
                 .queryAllQuestion();
     }
 
+    @Transactional
     public QuestionDeleteResponse deleteQuestionById(UUID questionId) {
         QuestionDeletedEvent questionDeletedEvent = questionDeleteHelper.deleteQuestionById(questionId);
         QuestionEventPayload questionEventPayload = questionDataMapper.questionDeletedEventToQuestionEventPayload(questionDeletedEvent);
@@ -83,11 +85,13 @@ public class QuestionCommandHandler {
                     UUID.randomUUID(),
                     previousPayload);
 
-        return QuestionDeleteResponse.builder()
+        QuestionDeleteResponse response = QuestionDeleteResponse.builder()
                 .questionId(questionId)
                 .qtypeId(questionDeletedEvent.getQtypeID())
                 .message("Question deleted successfully")
                 .build();
+
+        return response;
     }
 
     public QueryAllQuestionByCategoryIdResponse queryAllQuestionByCategory(UUID categoryId, QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand) {

@@ -9,19 +9,27 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class QuestionMessagingDataMapper {
-    public QuestionRequest questionRequestAvroModelToQuestionDeleteRequest(QuestionRequestAvroModel questionDeleteRequestAvroModel) {
+    public QuestionRequest questionRequestAvroModelToQuestionRequest(QuestionRequestAvroModel model) {
         return QuestionRequest.builder()
-                .id(questionDeleteRequestAvroModel.getId().toString())
-                .sagaId(questionDeleteRequestAvroModel.getSagaId())
-                .organizationId(questionDeleteRequestAvroModel.getOrganizationId().toString())
-                .createdBy(questionDeleteRequestAvroModel.getCreatedBy().toString())
-                .updatedBy(questionDeleteRequestAvroModel.getUpdatedBy().toString())
-                .difficulty(questionDeleteRequestAvroModel.getDifficulty())
-                .name(questionDeleteRequestAvroModel.getName())
-                .questionText(questionDeleteRequestAvroModel.getQuestionText())
-                .generalFeedback(questionDeleteRequestAvroModel.getGeneralFeedback())
-                .defaultMark(questionDeleteRequestAvroModel.getDefaultMark())
-                .qType(questionDeleteRequestAvroModel.getQType())
+                .id(model.getId().toString())
+                .sagaId(model.getSagaId())
+                .organizationId(model.getOrganizationId().toString())
+                .createdBy(model.getCreatedBy().toString())
+                .updatedBy(model.getUpdatedBy().toString())
+                .difficulty(model.getDifficulty())
+                .name(model.getName())
+                .questionText(model.getQuestionText())
+                .generalFeedback(model.getGeneralFeedback())
+                .defaultMark(model.getDefaultMark())
+                .qType(model.getQType())
+                .qtypeId(model.getQtypeId())
+                .allowImport(model.getAllowImport())
+                .inputFormat(model.getInputFormat())
+                .isPublic(model.getIsPublic())
+                .constraint(model.getConstraint())
+                .outputFormat(model.getOutputFormat())
+                .categoryId(model.getCategoryId() == null? null: model.getCategoryId())
+                .isQuestionBank(false)
                 .build();
     }
 

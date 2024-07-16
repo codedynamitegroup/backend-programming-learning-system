@@ -28,9 +28,44 @@
       "logicalType": "uuid"
     }
   }, {
+    "name" : "qtypeId",
+    "type" :  [{
+      "type": "string",
+      "logicalType": "uuid"
+    }, "null"]
+  },
+    {
+      "name" : "categoryId",
+      "type" :  [{
+        "type": "string",
+        "logicalType": "uuid"
+      }, "null"]
+    },
+    {
     "name" : "name",
     "type" : "string"
-  }, {
+  },
+  {
+    "name" : "inputFormat",
+    "type" : ["null", "string"]
+  },
+    {
+      "name" : "outputFormat",
+      "type" : ["null", "string"]
+    },
+    {
+      "name" : "constraint",
+      "type" : ["null", "string"]
+    },
+    {
+      "name" : "isPublic",
+      "type" : ["null", "boolean"]
+    },
+    {
+      "name" : "allowImport",
+      "type" : ["null", "boolean"]
+    },
+    {
     "name" : "organizationId",
     "type" : {
       "type": "string",

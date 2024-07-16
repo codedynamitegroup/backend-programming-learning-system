@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.core.service.domain.dto.method.cr
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.topic.CreateTopicResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.topic.DeleteTopicCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.delete.topic.DeleteTopicResponse;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllProgrammingLanguageResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryAllTopicsResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.query.topic.QueryTopicCommand;
@@ -141,5 +142,30 @@ public class TopicController {
                         .build());
         log.info("Topic deleted: {}", id);
         return ResponseEntity.ok(deleteTopicResponse);
+    }
+
+    @GetMapping("/language")
+    @Operation(summary = "Get programming languages.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = DeleteTopicResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllProgrammingLanguageResponse> getProgrammingLanguages(
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "") String search
+    ) {
+        log.info("Getting all programming languages with search: {}, page: {}, page size: {}", search, pageNo, pageSize);
+
+        QueryAllProgrammingLanguageResponse queryAllProgrammingLanguageResponse =
+                topicApplicationService.queryAllProgrammingLanguages(
+                        search, pageNo, pageSize
+                );
+
+        log.info("Returning all programming languages: {}", queryAllProgrammingLanguageResponse.programmingLanguages());
+        return ResponseEntity.ok(queryAllProgrammingLanguageResponse);
     }
 }

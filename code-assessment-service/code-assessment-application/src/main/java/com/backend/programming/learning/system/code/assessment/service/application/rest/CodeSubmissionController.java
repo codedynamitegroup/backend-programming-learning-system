@@ -74,22 +74,19 @@ public class CodeSubmissionController {
 
     @GetMapping("/heat-map")
     public ResponseEntity<List<SubmissionHeadMapItem>> getHeatMap(
-            @RequestHeader(value = "Access-Token") String accessToken,
+            @RequestParam String email,
             @RequestParam Integer year)
     {
-        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
         List<SubmissionHeadMapItem> items = codeSubmissionApplicationService.getHeatMap(email, year);
         return ResponseEntity.ok(items);
     }
 
     @GetMapping("/recent-code-question")
     public ResponseEntity<GetCodeQuestionsResponse> getUserRecentCodeQuestion(
-            @RequestHeader(value = "Access-Token") String accessToken,
+            @RequestParam String email,
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "5") Integer pageSize
     ){
-        String email = JwtUtils.getEmailFromJwtStringWithoutCheckExp(accessToken);
-
         UserRecentCodeQuestionQuery query = UserRecentCodeQuestionQuery.builder()
                 .email(email)
                 .pageNum(pageNo)

@@ -4,10 +4,7 @@ import com.backend.programming.learning.system.core.service.domain.entity.*;
 import com.backend.programming.learning.system.core.service.domain.exception.ContestNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.TopicNotFoundException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.ContestRepository;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.TopicProgrammingLanguageRepository;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.TopicRepository;
-import com.backend.programming.learning.system.core.service.domain.ports.output.repository.UserRepository;
+import com.backend.programming.learning.system.core.service.domain.ports.output.repository.*;
 import com.backend.programming.learning.system.core.service.domain.valueobject.ContestId;
 import com.backend.programming.learning.system.core.service.domain.valueobject.TopicId;
 import lombok.extern.slf4j.Slf4j;
@@ -23,9 +20,12 @@ import java.util.UUID;
 @Component
 public class TopicQueryHelper {
     private final TopicRepository topicRepository;
+    private final ProgrammingLanguageRepository programmingLanguageRepository;
 
-    public TopicQueryHelper(TopicRepository topicRepository) {
+    public TopicQueryHelper(TopicRepository topicRepository,
+                            ProgrammingLanguageRepository programmingLanguageRepository) {
         this.topicRepository = topicRepository;
+        this.programmingLanguageRepository = programmingLanguageRepository;
     }
 
     @Transactional(readOnly = true)
@@ -51,6 +51,9 @@ public class TopicQueryHelper {
         return topicRepository.findAll(pageNo, pageSize, fetchAll);
     }
 
+    public Page<ProgrammingLanguage> queryAllProgrammingLanguage(String search, Integer pageNo, Integer pageSize) {
+        return programmingLanguageRepository.findAllWithSearch(search, pageNo, pageSize);
+    }
 }
 
 
