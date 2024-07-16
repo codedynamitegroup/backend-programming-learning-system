@@ -99,7 +99,8 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/core/topics/create").hasAnyRole(ADMIN)
                         .requestMatchers(HttpMethod.PUT, "/core/topics/{id}").hasAnyRole(ADMIN)
                         .requestMatchers(HttpMethod.DELETE, "/core/topics/{id}").hasAnyRole(ADMIN)
-                        .requestMatchers(HttpMethod.GET, "/core/topics/language").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.POST, "/core/topics/language").hasAnyRole(ADMIN)
+                        .requestMatchers(HttpMethod.POST, "/core/topics/language/get-by-id").hasAnyRole(ADMIN)
 
                         .anyRequest().permitAll()
                 )
