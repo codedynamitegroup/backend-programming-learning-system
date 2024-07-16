@@ -65,7 +65,7 @@ public class QuestionQueryHelper {
             QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand,
             boolean isBasicType) {
         Page<QuestionResponseEntity> questions = questionRepository
-                .findAllQuestionByCategoryAnyIsBasicType(
+                .findAllQuestionByCategoryAndIsBasicType(
                         categoryId,
                         queryAllQuestionByCategoryIdCommand,
                         isBasicType

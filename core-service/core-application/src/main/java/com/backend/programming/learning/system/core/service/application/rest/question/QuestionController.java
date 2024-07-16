@@ -97,7 +97,7 @@ public class QuestionController {
             @RequestParam(value = "search", defaultValue = "") String search,
             @RequestParam(value = "pageNo", defaultValue = "0") int pageNo,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
-            @RequestParam(value = "isBasicType") Boolean isBasicType
+            @RequestParam(value = "isBasicType", required = false) Boolean isBasicType
             ) {
         log.info("Getting all questions by category id: {}", categoryId);
         QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand = QueryAllQuestionByCategoryIdCommand.builder()
