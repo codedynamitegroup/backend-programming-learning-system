@@ -42,7 +42,6 @@ public class CodeQuestionDataMapper {
                 .difficulty(command.getDifficulty())
                 .maxGrade(command.getMaxGrade())
                 .allowImport(command.getAllowImport())
-                .orgId(command.getOrgId())
                 .isQuestionBank(command.getIsQuestionBank())
                 .build();
     }

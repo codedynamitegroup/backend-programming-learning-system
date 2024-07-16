@@ -39,6 +39,7 @@ public class QuestionMessagingDataMapper {
                                                                                    QuestionEventPayload questionEventPayload) {
         return QuestionRequestAvroModel.newBuilder()
                 .setId(UUID.fromString(questionEventPayload.getId()))
+                .setQtypeId(UUID.fromString(questionEventPayload.getQtypeId()))
                 .setSagaId(sagaId)
                 .setOrganizationId(UUID.fromString(questionEventPayload.getOrganizationId()))
                 .setCreatedBy(UUID.fromString(questionEventPayload.getCreatedBy()))
@@ -51,6 +52,12 @@ public class QuestionMessagingDataMapper {
                 .setQType(questionEventPayload.getQType())
                 .setCopyState(com.backend.programming.learning.system.kafka.core.avro.model.CopyState.valueOf(questionEventPayload.getCopyState().name()))
                 .setAnswers(questionEventAnswersToAnswerOfQuestions(questionEventPayload.getAnswers()))
+                .setInputFormat(questionEventPayload.getInputFormat())
+                .setOutputFormat(questionEventPayload.getOutputFormat())
+                .setConstraint(questionEventPayload.getConstraint())
+                .setAllowImport(questionEventPayload.getAllowImport())
+                .setIsPublic(questionEventPayload.getIsPublic())
+                .setCategoryId(questionEventPayload.getCategoryId() == null? null: UUID.fromString(questionEventPayload.getCategoryId()))
                 .build();
 
 

@@ -52,9 +52,9 @@ public class QuestionKafkaMessagePublisher implements QuestionRequestMessagePubl
                 questionEventPayload.getId(),
                 sagaId);
 
-        if (questionOutboxMessage.getServiceName() == ServiceName.CODE_ASSESSMENT_SERVICE)
-            topicName = coreServiceConfigData.getQuestionRequestCodeAssessmentTopicName();
-        else
+//        if (questionOutboxMessage.getServiceName() == ServiceName.CODE_ASSESSMENT_SERVICE)
+//            topicName = coreServiceConfigData.getQuestionRequestCodeAssessmentTopicName();
+//        else
             topicName = coreServiceConfigData.getQuestionRequestTopicName();
 
         try {
