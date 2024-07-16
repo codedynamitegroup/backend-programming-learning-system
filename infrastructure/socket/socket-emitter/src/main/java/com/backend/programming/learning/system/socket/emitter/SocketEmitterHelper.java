@@ -18,4 +18,9 @@ public class SocketEmitterHelper<K> {
         log.info("Emitting message to room: {} with event name: {} and message: {}", room, eventName, message);
         socketEmitterService.sendMessage(room, eventName, message);
     }
+
+    public void broadcastMessage(String eventName, K message) {
+        log.info("Broadcasting message with event name: {} and message: {}", eventName, message);
+        socketEmitterService.broadcastMessage(eventName, message);
+    }
 }

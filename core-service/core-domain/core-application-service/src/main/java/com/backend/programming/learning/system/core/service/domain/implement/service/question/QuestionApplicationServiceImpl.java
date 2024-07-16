@@ -48,6 +48,18 @@ public class QuestionApplicationServiceImpl implements QuestionApplicationServic
     }
 
     @Override
+    public QueryAllQuestionByCategoryIdResponse queryAllQuestionByCategoryAndIsBasicType(
+            UUID categoryId,
+            QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand,
+            boolean isBasicType
+    ) {
+        return questionQueryCommandHandler.queryAllQuestionByCategoryAndIsBasicType(
+                categoryId,
+                queryAllQuestionByCategoryIdCommand,
+                isBasicType);
+    }
+
+    @Override
     public QueryByIdsResponse queryAllQuestionDetail(QueryByIdsCommand ids) {
         return questionQueryCommandHandler.queryAllQuestionDetail(ids);
     }

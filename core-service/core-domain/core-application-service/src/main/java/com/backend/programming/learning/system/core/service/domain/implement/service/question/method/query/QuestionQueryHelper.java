@@ -60,6 +60,22 @@ public class QuestionQueryHelper {
         return questions;
     }
 
+    public Page<QuestionResponseEntity> queryAllQuestionByCategoryAndIsBasicType(
+            UUID categoryId,
+            QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand,
+            boolean isBasicType) {
+        Page<QuestionResponseEntity> questions = questionRepository
+                .findAllQuestionByCategoryAnyIsBasicType(
+                        categoryId,
+                        queryAllQuestionByCategoryIdCommand,
+                        isBasicType
+                );
+
+        log.info("Query all questions by category with id: {}", categoryId);
+
+        return questions;
+    }
+
     @Transactional(readOnly = true)
     public QueryAllQuestionWithPaginationResponse queryAllQuestionWithPagination(String qtype, String searchName, int pageNo, int pageSize) {
         Page<Question> questions = questionRepository.findAllQuestionWithPagination(qtype, searchName, pageNo, pageSize);

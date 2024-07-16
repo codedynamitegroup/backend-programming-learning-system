@@ -21,6 +21,11 @@ public interface QuestionApplicationService {
             UUID categoryId,
             @Valid QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand);
 
+    QueryAllQuestionByCategoryIdResponse queryAllQuestionByCategoryAndIsBasicType(
+            UUID categoryId,
+            @Valid QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand,
+            boolean isBasicType);
+
     QueryByIdsResponse queryAllQuestionDetail(
              QueryByIdsCommand ids);
 

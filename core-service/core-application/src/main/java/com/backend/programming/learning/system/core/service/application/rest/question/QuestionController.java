@@ -96,7 +96,8 @@ public class QuestionController {
             @PathVariable UUID categoryId,
             @RequestParam(value = "search", defaultValue = "") String search,
             @RequestParam(value = "pageNo", defaultValue = "0") int pageNo,
-            @RequestParam(value = "pageSize", defaultValue = "10") int pageSize
+            @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
+            @RequestParam(value = "isBasicType") Boolean isBasicType
             ) {
         log.info("Getting all questions by category id: {}", categoryId);
         QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand = QueryAllQuestionByCategoryIdCommand.builder()
@@ -104,11 +105,19 @@ public class QuestionController {
                 .pageSize(pageSize)
                 .search(search)
                 .build();
-        QueryAllQuestionByCategoryIdResponse questionResponseEntity = questionApplicationService
-                .queryAllQuestionByCategory(categoryId, queryAllQuestionByCategoryIdCommand);
-        log.info("Questions retrieved: {}", questionResponseEntity);
+        if (isBasicType == null) {
+            QueryAllQuestionByCategoryIdResponse questionResponseEntity = questionApplicationService
+                    .queryAllQuestionByCategory(categoryId, queryAllQuestionByCategoryIdCommand);
+            log.info("Questions retrieved: {}", questionResponseEntity);
 
-        return ResponseEntity.ok(questionResponseEntity);
+            return ResponseEntity.ok(questionResponseEntity);
+        } else {
+            QueryAllQuestionByCategoryIdResponse questionResponseEntity = questionApplicationService
+                    .queryAllQuestionByCategoryAndIsBasicType(categoryId, queryAllQuestionByCategoryIdCommand, isBasicType);
+            log.info("Questions retrieved: {}", questionResponseEntity);
+
+            return ResponseEntity.ok(questionResponseEntity);
+        }
     }
 
     @GetMapping("/{id}")
