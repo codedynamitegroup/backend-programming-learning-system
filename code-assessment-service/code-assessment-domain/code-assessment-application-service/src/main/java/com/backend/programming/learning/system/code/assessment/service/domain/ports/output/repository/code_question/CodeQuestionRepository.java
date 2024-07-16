@@ -50,4 +50,6 @@ public interface CodeQuestionRepository {
     void deleteCategory(CodeQuestionId id);
 
     void deleteById(CodeQuestionId id);
+
+    void deleteCodeQuestionByQuestionId(UUID id);
 }

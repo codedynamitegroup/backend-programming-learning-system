@@ -39,6 +39,7 @@ public class QuestionDeleteHelper {
         this.coreDomainService = coreDomainService;
     }
 
+    @Transactional
     public QuestionDeletedEvent deleteQuestionById(UUID questionId) {
         Question deletingQuestion = getQuestion(questionId);
         UUID qtypeQuestionId = getQtypeQuestionId(deletingQuestion);
@@ -63,9 +64,11 @@ public class QuestionDeleteHelper {
         }
 
         // delete answer of question
-        log.info("Deleting answers of question with id: {}", questionId);
-        answerOfQuestionRepository.deleteAllAnswerOfQuestionByQuestionId(questionId);
-        log.info("Answers of question deleted with id: {}", questionId);
+        if(deletingQuestion.getqtype() != QuestionType.CODE){
+            log.info("Deleting answers of question with id: {}", questionId);
+            answerOfQuestionRepository.deleteAllAnswerOfQuestionByQuestionId(questionId);
+            log.info("Answers of question deleted with id: {}", questionId);
+        }
 
         deleteQuestion(questionId);
 

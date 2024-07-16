@@ -25,7 +25,7 @@ code-assessment-service:
 
   code-submission-update-request-to-core-service-topic-name: code-submission-update-request-to-core-service
 
-  question-request-code-assessment-topic-name: core-question-request-code-assessment
+  question-request-code-assessment-topic-name: core-question-request
   question-response-code-assessment-topic-name: core-question-response-code-assessment
 
   auth-service-user-request-to-code-assessment-service-topic-name: auth-service-user-request-to-code-assessment-service
@@ -95,7 +95,7 @@ kafka-consumer-config:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
   create-code-question-consumer-group-id: create-code-question-topic-consumer
-  question-request-consumer-group-id: question-request-topic-consumer
+  question-request-consumer-group-id: question-request-topic-consumer-2
   auth-service-to-code-assessment-service-user-request-group-id: auth-service-to-code-assessment-service-user-request-topic
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader

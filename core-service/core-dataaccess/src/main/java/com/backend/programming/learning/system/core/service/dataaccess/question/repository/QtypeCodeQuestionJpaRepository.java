@@ -17,6 +17,7 @@ public interface QtypeCodeQuestionJpaRepository extends JpaRepository<QtypeCodeQ
     UUID getId(UUID questionId);
     Optional<QtypeCodeQuestionEntity> findByQuestionId(UUID questionId);
 
+    void deleteByQuestionId(UUID id);
     @Query(value="""
         select cqe.*
         from qtype_code_question cqe

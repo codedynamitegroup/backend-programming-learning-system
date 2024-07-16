@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.core.service.domain.mapper.question;
 
+import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQtypeCodeQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionCloneResponse;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionCommand;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionResponse;
@@ -228,7 +229,7 @@ public class QuestionDataMapper {
     public QuestionEventPayload questionDeletedEventToQuestionEventPayload(QuestionDeletedEvent questionDeletedEvent) {
         return QuestionEventPayload.builder()
                 .id(questionDeletedEvent.getQuestion().getId().getValue().toString())
-                .sagaId(questionDeletedEvent.getQtypeID().toString())
+                .qtypeId(questionDeletedEvent.getQtypeID().toString())
                 .organizationId(questionDeletedEvent.getQuestion().getOrganization().getId().getValue().toString())
                 .createdBy(questionDeletedEvent.getQuestion().getCreatedBy().getId().getValue().toString())
                 .updatedBy(questionDeletedEvent.getQuestion().getUpdatedBy().getId().getValue().toString())
@@ -245,10 +246,37 @@ public class QuestionDataMapper {
                 .build();
     }
 
+    public QuestionEventPayload codeQuestionCreatedEventToQuestionEventPayload(QuestionCreatedEvent questionCreatedEvent, CreateQtypeCodeQuestionCommand command) {
+        return QuestionEventPayload.builder()
+                .id(questionCreatedEvent.getQuestion().getId().getValue().toString())
+                .qtypeId(questionCreatedEvent.getQtypeID().toString())
+                .organizationId(questionCreatedEvent.getQuestion().getOrganization().getId().getValue().toString())
+                .createdBy(questionCreatedEvent.getQuestion().getCreatedBy().getId().getValue().toString())
+                .updatedBy(questionCreatedEvent.getQuestion().getUpdatedBy().getId().getValue().toString())
+                .difficulty(questionCreatedEvent.getQuestion().getDifficulty().name())
+                .name(questionCreatedEvent.getQuestion().getName())
+                .questionText(questionCreatedEvent.getQuestion().getQuestionText())
+                .generalFeedback(questionCreatedEvent.getQuestion().getGeneralFeedback())
+                .defaultMark(BigDecimal.valueOf(questionCreatedEvent.getQuestion().getDefaultMark()))
+                .qType(questionCreatedEvent.getQuestion().getqtype().name())
+                .answers(answerOfQuestionListToQuestionEventAnswerList(questionCreatedEvent.getQuestion().getAnswers()))
+                .copyState(CopyState.CREATING)
+                .createdAt(questionCreatedEvent.getQuestion().getCreatedAt())
+                .updatedAt(questionCreatedEvent.getQuestion().getUpdatedAt())
+                .allowImport(command.getAllowImport())
+                .isPublic(command.getIsPublic())
+                .constraint(command.getConstraint())
+                .inputFormat(command.getInputFormat())
+                .outputFormat(command.getOutputFormat())
+                .categoryId(command.getQuestionBankCategoryId() == null? null: command.getQuestionBankCategoryId().toString())
+                .build();
+    }
+
+
     public QuestionEventPayload questionCreatedEventToQuestionEventPayload(QuestionCreatedEvent questionCreatedEvent) {
         return QuestionEventPayload.builder()
                 .id(questionCreatedEvent.getQuestion().getId().getValue().toString())
-                .sagaId(questionCreatedEvent.getQtypeID().toString())
+                .qtypeId(questionCreatedEvent.getQtypeID().toString())
                 .organizationId(questionCreatedEvent.getQuestion().getOrganization().getId().getValue().toString())
                 .createdBy(questionCreatedEvent.getQuestion().getCreatedBy().getId().getValue().toString())
                 .updatedBy(questionCreatedEvent.getQuestion().getUpdatedBy().getId().getValue().toString())
@@ -272,7 +300,7 @@ public class QuestionDataMapper {
 
           return QuestionEventPayload.builder()
                  .id(questionUpdatedEvent.getQuestion().getId().getValue().toString())
-                 .sagaId(questionUpdatedEvent.getQtypeID().toString())
+                 .qtypeId(questionUpdatedEvent.getQtypeID().toString())
                  .organizationId(orgId)
                  .createdBy(questionUpdatedEvent.getQuestion().getCreatedBy().getId().getValue().toString())
                  .updatedBy(questionUpdatedEvent.getQuestion().getUpdatedBy().getId().getValue().toString())

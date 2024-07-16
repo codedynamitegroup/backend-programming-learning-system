@@ -13,6 +13,21 @@ import java.util.UUID;
 @Setter
 @Getter
 public class CreateQtypeCodeQuestionCommand extends CreateQuestionCommand {
+    @NotNull(message = "inputFormat must not be null")
+    private String inputFormat;
+
+    @NotNull(message = "outputFormat must not be null")
+    private String outputFormat;
+
+    @NotNull(message = "constraint must not be null")
+    private String constraint;
+
+    @NotNull(message = "isPublic must not be null")
+    private Boolean isPublic;
+
+    @NotNull(message = "allowImport must not be null")
+    private Boolean allowImport;
+
     public CreateQtypeCodeQuestionCommand(
             @NotNull(message = "Organization ID is required") UUID organizationId,
             @NotNull(message = "Created by is required") UUID createdBy,
@@ -25,7 +40,12 @@ public class CreateQtypeCodeQuestionCommand extends CreateQuestionCommand {
             @NotNull(message = "Question type is required") String qType,
             @NotNull(message = "Answers is required") List<AnswerOfQuestion> answers,
             UUID questionBankCategoryId,
-            Boolean isOrgQuestionBank
+            Boolean isOrgQuestionBank,
+            String inputFormat,
+            String outputFormat,
+            String constraint,
+            Boolean allowImport,
+            Boolean isPublic
             ) {
         super(organizationId,
                 createdBy,
@@ -39,5 +59,10 @@ public class CreateQtypeCodeQuestionCommand extends CreateQuestionCommand {
                 answers,
                 questionBankCategoryId,
                 isOrgQuestionBank);
+        this.inputFormat = inputFormat;
+        this.outputFormat = outputFormat;
+        this.constraint = constraint;
+        this.allowImport = allowImport;
+        this.isPublic = isPublic;
     }
 }

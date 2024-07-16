@@ -17,6 +17,8 @@ import java.util.UUID;
 @Repository
 public interface CodeQuestionJpaRepository extends JpaRepository<CodeQuestionEntity, UUID> {
     Optional<CodeQuestionEntity> findByQuestionId(UUID questionId);
+
+    void deleteByQuestionId(UUID questionId);
     Optional<CodeQuestionEntity> findByName(String name);
     @Query(value= """
             (select cqe.*
