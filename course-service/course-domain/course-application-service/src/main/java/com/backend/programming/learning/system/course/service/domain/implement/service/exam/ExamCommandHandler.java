@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam.CreateExamCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam.CreateExamResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.exam_submisison.exam_question.CreateExamQuestionCommand;
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.module.CreateExamModuleCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.calendarevent.DeleteCalendarEventCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.course.DeleteCourseResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.exam.DeleteExamCommand;
@@ -25,6 +26,8 @@ import com.backend.programming.learning.system.course.service.domain.entity.Ques
 import com.backend.programming.learning.system.course.service.domain.implement.service.calendarevent.CalendarEventCommandHandler;
 import com.backend.programming.learning.system.course.service.domain.implement.service.exam_question.ExamQuestionCreateHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.exam_question.ExamQuestionDeleteHelper;
+import com.backend.programming.learning.system.course.service.domain.implement.service.module.ModuleCreateHelper;
+import com.backend.programming.learning.system.course.service.domain.implement.service.section.SectionCreateHelper;
 import com.backend.programming.learning.system.course.service.domain.mapper.exam.ExamDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamQuestionRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.*;
@@ -54,6 +57,7 @@ public class ExamCommandHandler {
     private final ExamQuestionCreateHelper examQuestionCreateHelper;
     private final ExamQuestionDeleteHelper examQuestionDeleteHelper;
     private final CalendarEventCommandHandler calendarEventCommandHandler;
+    private final ModuleCreateHelper moduleCreateHelper;
     private final ExamQuestionRepository examQuestionRepository;
 
     @Transactional
@@ -64,6 +68,12 @@ public class ExamCommandHandler {
                         .examId(examCreated.getId().getValue())
                         .questionIds(createExamCommand.questionIds())
                         .build());
+        CreateExamModuleCommand createExamModuleCommand = CreateExamModuleCommand.builder()
+                .sectionId(createExamCommand.sectionId())
+                .examId(examCreated.getId().getValue())
+                .build();
+
+        moduleCreateHelper.createExamModule(createExamModuleCommand);
 
         CreateCalendarEventCommand createCalendarEventCommand = CreateCalendarEventCommand.builder()
                 .name(examCreated.getName())
