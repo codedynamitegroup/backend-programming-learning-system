@@ -163,7 +163,6 @@ public class OrganizationController {
                         .apiKey(updateOrganizationCommand.getApiKey())
                         .moodleUrl(updateOrganizationCommand.getMoodleUrl())
                         .updatedBy(email)
-                        .isVerified(updateOrganizationCommand.getIsVerified())
                         .isDeleted(updateOrganizationCommand.getIsDeleted())
                         .build()
         );

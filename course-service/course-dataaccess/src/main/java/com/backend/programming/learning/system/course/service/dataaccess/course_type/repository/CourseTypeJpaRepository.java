@@ -18,12 +18,18 @@ public interface CourseTypeJpaRepository extends JpaRepository<CourseTypeEntity,
      Optional<CourseTypeEntity> findByName(String courseName);
 
      @Query("""
-             SELECT c
-             FROM CourseEntity c
-             WHERE c.name LIKE %:search%
+             SELECT cte
+             FROM CourseTypeEntity cte
+             WHERE cte.name LIKE %:search%
              """)
     Page<CourseTypeEntity> findAll(String search, Pageable pageable);
     Optional<CourseTypeEntity> findByMoodleId(Integer moodleId);
 
-    List<CourseTypeEntity> findAllByOrganizationId(UUID organizationId);
+    @Query("""
+             SELECT cte
+             FROM CourseTypeEntity cte
+             WHERE cte.organization.id = :organizationId
+             AND cte.name LIKE %:searchName%
+             """)
+    Page<CourseTypeEntity> findAllByOrganizationId(UUID organizationId, Pageable pageable, String searchName);
 }

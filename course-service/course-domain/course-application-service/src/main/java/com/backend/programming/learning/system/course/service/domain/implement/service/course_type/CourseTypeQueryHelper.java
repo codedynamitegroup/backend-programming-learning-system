@@ -5,6 +5,7 @@ import com.backend.programming.learning.system.course.service.domain.entity.Cour
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseTypeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -22,8 +23,12 @@ public class CourseTypeQueryHelper {
         return courseTypes;
     }
 
-    public List<CourseType> findAllByOrganizationId(UUID organizationId) {
-        List<CourseType> courseTypes = courseTypeRepository.findAllByOrganizationId(organizationId);
+    public Page<CourseType> findAllByOrganizationId(QueryCourseTypeCommand queryCourseTypeCommand) {
+        Page<CourseType> courseTypes = courseTypeRepository.findAllByOrganizationId(
+                queryCourseTypeCommand.getOrganizationId(),
+                queryCourseTypeCommand.getPageNo(),
+                queryCourseTypeCommand.getPageSize(),
+                queryCourseTypeCommand.getSearchName());
         log.info("Course types found successfully");
         return courseTypes;
     }
