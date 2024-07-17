@@ -11,6 +11,9 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class QueryAllCourseTypeResponse {
+    private final List<CourseTypeResponseEntity> courseTypes;
 
-    List<CourseTypeResponseEntity> courseTypes;
+    private final int currentPage;
+    private final long totalItems;
+    private final int totalPages;
 }

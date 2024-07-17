@@ -4,6 +4,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_type.QueryCourseTypeCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course_type.CourseTypeResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.CourseType;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -22,11 +23,14 @@ public class CourseTypeDataMapper {
                 .build();
     }
 
-    public QueryAllCourseTypeResponse mapToQueryAllCourseTypeResponse(List<CourseType> courseTypes) {
+    public QueryAllCourseTypeResponse mapToQueryAllCourseTypeResponse(Page<CourseType> courseTypes) {
+        List<CourseTypeResponseEntity> courseTypeResponseEntities = courseTypes
+                .map(this::mapToCourseTypeResponseEntity).getContent();
         return QueryAllCourseTypeResponse.builder()
-                .courseTypes(courseTypes.stream()
-                        .map(this::mapToCourseTypeResponseEntity)
-                        .toList())
+                .courseTypes(courseTypeResponseEntities)
+                .currentPage(courseTypes.getNumber())
+                .totalPages(courseTypes.getTotalPages())
+                .totalItems(courseTypes.getTotalElements())
                 .build();
     }
 

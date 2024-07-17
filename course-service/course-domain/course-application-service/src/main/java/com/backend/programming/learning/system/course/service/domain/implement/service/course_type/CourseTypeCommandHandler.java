@@ -20,7 +20,7 @@ public class CourseTypeCommandHandler {
     @Transactional(readOnly = true)
     public QueryAllCourseTypeResponse findAll()
     {
-        return courseTypeDataMapper.mapToQueryAllCourseTypeResponse(courseTypeQueryHelper.findAll());
+        return null;
     }
 
     @Transactional(readOnly = true)
@@ -28,9 +28,6 @@ public class CourseTypeCommandHandler {
     {
         return courseTypeDataMapper.
                 mapToQueryAllCourseTypeResponse(courseTypeQueryHelper.
-                        findAllByOrganizationId(queryCourseTypeCommand.getOrganizationId()));
+                        findAllByOrganizationId(queryCourseTypeCommand));
     }
-
-
-
 }
