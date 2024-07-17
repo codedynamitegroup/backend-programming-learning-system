@@ -59,6 +59,10 @@ public class Topic extends AggregateRoot<TopicId> {
         this.name = name;
     }
 
+    public void setIsSingleProgrammingLanguage(Boolean isSingleProgrammingLanguage) {
+        this.isSingleProgrammingLanguage = isSingleProgrammingLanguage;
+    }
+
     public String getDescription() {
         return description;
     }

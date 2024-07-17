@@ -89,17 +89,13 @@ public class QuestionRepositoryImpl implements QuestionRepository {
                                     qtypeEssayQuestionJpaRepository.findByQuestionId(id)
                                             .ifPresent(qtypeEssayQuestionJpaRepository::delete);
                                     break;
-                                case MULTIPLE_CHOICE:
+                                case MULTIPLE_CHOICE, TRUE_FALSE:
                                     qtypeMultichoiceQuestionJpaRepository.findByQuestionId(id)
                                             .ifPresent(qtypeMultichoiceQuestionJpaRepository::delete);
                                     break;
                                 case SHORT_ANSWER:
                                     qtypeShortanswerQuestionJpaRepository.findByQuestionId(id)
                                             .ifPresent(qtypeShortanswerQuestionJpaRepository::delete);
-                                    break;
-                                case TRUE_FALSE:
-                                    qtypeMultichoiceQuestionJpaRepository.findByQuestionId(id)
-                                            .ifPresent(qtypeMultichoiceQuestionJpaRepository::delete);
                                     break;
                                 default:
                                     throw new IllegalArgumentException("Invalid question type");

@@ -46,6 +46,12 @@ public class TopicUpdateHelper {
         if (updateTopicCommand.getDescription() != null) {
             topic.setDescription(updateTopicCommand.getDescription());
         }
+        if(Objects.nonNull(updateTopicCommand.getIsSingleProgrammingLanguage())){
+            topic.setIsSingleProgrammingLanguage(updateTopicCommand.getIsSingleProgrammingLanguage());
+        }
+        if(Objects.nonNull(updateTopicCommand.getThumbnailUrl())){
+            topic.setThumbnailUrl(updateTopicCommand.getThumbnailUrl());
+        }
         topic.setUpdatedBy(updatedBy);
         topic.setUpdatedAt(ZonedDateTime.now(ZoneId.of("UTC")));
 

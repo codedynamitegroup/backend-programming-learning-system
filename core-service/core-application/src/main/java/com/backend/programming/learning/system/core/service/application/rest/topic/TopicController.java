@@ -66,6 +66,8 @@ public class TopicController {
                 topicApplicationService.updateTopic(UpdateTopicCommand
                         .builder()
                         .topicId(id)
+                        .thumbnailUrl(updateTopicCommand.getThumbnailUrl())
+                        .isSingleProgrammingLanguage(updateTopicCommand.getIsSingleProgrammingLanguage())
                         .name(updateTopicCommand.getName())
                         .description(updateTopicCommand.getDescription())
                         .programmingLanguageIds(updateTopicCommand.getProgrammingLanguageIds())
