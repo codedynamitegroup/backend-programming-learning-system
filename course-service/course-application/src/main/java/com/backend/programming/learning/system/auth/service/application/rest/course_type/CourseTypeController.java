@@ -11,10 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -48,8 +45,17 @@ public class CourseTypeController {
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
             @ApiResponse(responseCode = "500", description = "Unexpected error.")})
-    public QueryAllCourseTypeResponse getAllCourseTypesByOrganizationId(@PathVariable UUID organizationId) {
-        return courseTypeApplicationService.findAllByOrganizationId(new QueryCourseTypeCommand(organizationId));
+    public QueryAllCourseTypeResponse getAllCourseTypesByOrganizationId(
+            @PathVariable UUID organizationId,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "") String searchName) {
+        return courseTypeApplicationService.findAllByOrganizationId(QueryCourseTypeCommand.builder()
+                .organizationId(organizationId)
+                .pageNo(pageNo)
+                .pageSize(pageSize)
+                .searchName(searchName)
+                .build());
     }
 
 }

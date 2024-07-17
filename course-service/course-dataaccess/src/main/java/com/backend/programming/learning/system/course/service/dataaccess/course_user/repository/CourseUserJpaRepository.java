@@ -49,7 +49,7 @@ public interface CourseUserJpaRepository extends JpaRepository<CourseUserEntity,
         FROM CourseUserEntity cu
         WHERE cu.user.id = :userId
         AND (cu.course.name LIKE CONCAT('%', :search, '%'))
-        AND (:courseType IS NULL OR cu.course.courseType.name IN :courseType)
+        AND (:courseType IS NULL OR cu.course.courseType.id IN :courseType)
     """)
     Page<CourseUserEntity> findAllCourseByUserId(UUID userId, String search, String[] courseType, Pageable pageable);
 

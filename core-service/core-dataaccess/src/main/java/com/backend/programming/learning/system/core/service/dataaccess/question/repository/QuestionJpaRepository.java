@@ -29,6 +29,19 @@ public interface QuestionJpaRepository extends JpaRepository<QuestionEntity, UUI
                                                          String search,
                                                          Pageable pageable);
 
+    @Query("""
+        SELECT q
+        FROM QuestionEntity q
+        WHERE q.questionBankCategoryId = :categoryId
+        and ((:isBasicType = false and q.qtype = 'CODE') or (:isBasicType = true and q.qtype != 'CODE'))
+        AND (q.name LIKE %:search%)
+        ORDER BY q.updatedAt
+    """)
+    Page<QuestionEntity> findAllByQuestionBankCategoryIdAndIsBasicType(UUID categoryId,
+                                                         String search,
+                                                         boolean isBasicType,
+                                                         Pageable pageable);
+
     @Query(value = """
         select qs.*
         from question qs

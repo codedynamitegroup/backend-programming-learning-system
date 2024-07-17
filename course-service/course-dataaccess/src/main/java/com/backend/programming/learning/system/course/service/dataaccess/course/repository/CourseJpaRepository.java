@@ -21,7 +21,7 @@ public interface CourseJpaRepository extends JpaRepository<CourseEntity, UUID> {
     SELECT c
     FROM CourseEntity c
     WHERE c.name LIKE %:search%
-    AND (:courseType IS NULL OR c.courseType.name IN :courseType)
+    AND (:courseType IS NULL OR c.courseType.id IN :courseType)
     """)
     Page<CourseEntity> findAll(String search,String[] courseType, Pageable pageable);
 
@@ -32,7 +32,7 @@ public interface CourseJpaRepository extends JpaRepository<CourseEntity, UUID> {
     FROM CourseEntity c
     WHERE c.organization.id = :organizationId
     AND c.name LIKE %:search%
-    AND (:courseType IS NULL OR c.courseType.name IN :courseType)
+    AND (:courseType IS NULL OR c.courseType.id IN :courseType)
     """)
     Page<CourseEntity> findAllByOrganizationId(UUID organizationId,String search,String[] courseType, Pageable pageable);
 

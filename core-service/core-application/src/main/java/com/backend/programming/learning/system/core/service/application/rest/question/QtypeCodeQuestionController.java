@@ -214,6 +214,37 @@ public class QtypeCodeQuestionController {
         return ResponseEntity.ok(queryAllAdminQtypeCodeQuestionsResponse);
     }
 
+    @GetMapping("/allowed-to-import-questions/lecturer")
+    @Operation(summary = "Get all code questions for lecturer")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllAdminQtypeCodeQuestionsResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllAdminQtypeCodeQuestionsResponse> getAllAllowedToImportQtypeCodeQuestionsForTeacher(
+            @RequestParam Integer pageNo,
+            @RequestParam Integer pageSize,
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) QuestionDifficulty difficulty,
+            @RequestParam(required = false) Boolean isPublic
+    ) {
+
+        log.info("Getting all allowed to import code questions for lecturer");
+        QueryAllAdminQtypeCodeQuestionsResponse queryAllAdminQtypeCodeQuestionsResponse = qtypeCodeQuestionApplicationService
+                .queryAllAllowedToImportQtypeCodeQuestionsForTeacher(QueryAllAdminCodeQuestionCommand.builder()
+                        .pageNum(pageNo)
+                        .pageSize(pageSize)
+                        .search(search)
+                        .difficulty(difficulty)
+                        .isPublic(isPublic)
+                        .build());
+        log.info("Allowed to import code questions for lecturer retrieved: {}", queryAllAdminQtypeCodeQuestionsResponse);
+
+        return ResponseEntity.ok(queryAllAdminQtypeCodeQuestionsResponse);
+    }
+
     //update code question in the code assessment service
 //    @PutMapping
 //    @Operation(summary = "Update code question.")

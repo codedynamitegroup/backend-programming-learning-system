@@ -61,7 +61,9 @@ public class CourseTypeRepositoryImpl implements CourseTypeRepository {
     }
 
     @Override
-    public List<CourseType> findAllByOrganizationId(UUID organizationId) {
-        return courseTypeDataAccessMapper.courseTypeEntityListToCourseTypeList(courseJpaRepository.findAllByOrganizationId(organizationId));
+    public Page<CourseType> findAllByOrganizationId(UUID organizationId, Integer page, Integer size, String searchName) {
+        Pageable paging = PageRequest.of(page, size);
+        return courseJpaRepository.findAllByOrganizationId(organizationId, paging, searchName)
+                .map(courseTypeDataAccessMapper::courseTypeEntityToCourseType);
     }
 }

@@ -25,6 +25,11 @@ public interface QuestionRepository {
             UUID categoryId,
             QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand);
 
+    Page<QuestionResponseEntity> findAllQuestionByCategoryAndIsBasicType(
+            UUID categoryId,
+            QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand,
+            boolean isBasicType);
+
     List<Question> cloneQuestion(List<CreateQuestionClone> questionClones);
 
     Page<Question> findAllQuestionWithPagination(String qtype, String searchName, int pageNo, int pageSize);

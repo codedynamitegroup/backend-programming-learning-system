@@ -20,4 +20,8 @@ public class SocketEmitterServiceImpl<K> implements SocketEmitterService<K> {
     public void sendMessage(String room, String eventName, K message) {
         server.getRoomOperations(room).sendEvent(eventName, new Message<K>(MessageType.SERVER, message));
     }
+
+    public void broadcastMessage(String eventName, K message) {
+        server.getBroadcastOperations().sendEvent(eventName, new Message<K>(MessageType.SERVER, message));
+    }
 }
