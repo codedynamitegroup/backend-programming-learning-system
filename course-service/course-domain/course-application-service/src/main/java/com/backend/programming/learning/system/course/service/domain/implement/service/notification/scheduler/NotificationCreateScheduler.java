@@ -78,7 +78,6 @@ public class NotificationCreateScheduler {
             NotificationNotifyTime newNotificationNotifyTime = isTimeValidToCreateNotification(
                     calendarEvent.getStartTime(),
                     calendarEvent.getNotificationNotifyTime());
-            log.info("New NotificationNotifyTime: {}", newNotificationNotifyTime);
             if (newNotificationNotifyTime != null) {
                 // Get the hours and minutes before the contest starts
                 long hoursBeforeStart = Duration.between(
@@ -115,7 +114,6 @@ public class NotificationCreateScheduler {
                                         0,
                                         9999999);
                         List<CourseUser> courseUserList = courseUsers.getContent();
-                        log.info("CourseUserList size: {}", courseUserList.size());
                         for (CourseUser courseUser : courseUserList) {
                             boolean isTeacher = courseUser.getRoleMoodle().getId().getValue().equals(3);
 
@@ -150,7 +148,6 @@ public class NotificationCreateScheduler {
                                         0,
                                         9999999);
                         List<CourseUser> courseUserList = courseUsers.getContent();
-                        log.info("CourseUserList size: {}", courseUserList.size());
                         for (CourseUser courseUser : courseUserList) {
                             boolean isTeacher = courseUser.getRoleMoodle().getId().getValue().equals(3);
                             String contextUrl = isTeacher
@@ -176,6 +173,36 @@ public class NotificationCreateScheduler {
                         }
                         break;
                     }
+                    case POST:
+                        Page<CourseUser> courseUsers = courseUserRepository
+                                .findAllUserByCourseId(
+                                        calendarEvent.getCourse().getId().getValue(),
+                                        "",
+                                        0,
+                                        9999999);
+                        List<CourseUser> courseUserList = courseUsers.getContent();
+                        for (CourseUser courseUser : courseUserList) {
+                            boolean isTeacher = courseUser.getRoleMoodle().getId().getValue().equals(3);
+                            String contextUrl = isTeacher
+                                    ? "/lecturer/courses/" + calendarEvent.getCourse().getId().getValue() + "/information" :
+                                    "/student/courses/" + calendarEvent.getCourse().getId().getValue() + "/information";
+                            String contextUrlName = "Post";
+                            User userFrom = courseUser.getUser();
+                            User userTo = courseUser.getUser();
+
+                            handleComponentType(
+                                    notifications,
+                                    NotificationComponentType.POST,
+                                    newNotificationNotifyTime,
+                                    calendarEvent,
+                                    hoursBeforeStart,
+                                    minutesBeforeStart,
+                                    contextUrl,
+                                    contextUrlName,
+                                    userFrom,
+                                    userTo);
+                        }
+                        break;
                     default:
                         log.error("Invalid component: {}", calendarEvent.getComponent());
                         break;
@@ -225,6 +252,7 @@ public class NotificationCreateScheduler {
         // Build full message for contest
         String fullMessage = "";
         String smallMessage = "";
+        String subject = "";
 
         String prefix = notificationComponentType.name().charAt(0)
                 + notificationComponentType.name().substring(1).toLowerCase();
@@ -257,13 +285,20 @@ public class NotificationCreateScheduler {
             smallMessage = prefix + " \"" + calendarEvent.getName() + "\"" + " is about to start in "
                     + hoursBeforeStart + " hours and " + minutesBeforeStart + " minutes";
         }
+        subject = prefix + " \"" + calendarEvent.getName() + "\"" + " is about to start";
+
+        if (notificationComponentType.equals(NotificationComponentType.POST)) {
+            fullMessage = "There is a new post" + " \"" + calendarEvent.getName() + " \"" + " in course " + calendarEvent.getCourse().getName();
+            smallMessage = "There is a new post" + " \"" + calendarEvent.getName() + " \"" + " in course " + calendarEvent.getCourse().getName();
+            subject = "New post" + " \"" + calendarEvent.getName() + " \"" + " in course " + calendarEvent.getCourse().getName();
+        }
 
         // Create notification for contest
         Notification newNotification = Notification.builder()
                 .id(new NotificationId(UUID.randomUUID()))
                 .userFrom(userFrom)
                 .userTo(userTo)
-                .subject(prefix + " \"" + calendarEvent.getName() + "\"" + " is about to start")
+                .subject(subject)
                 .fullMessage(fullMessage)
                 .smallMessage(smallMessage)
                 .component(calendarEvent.getComponent())
