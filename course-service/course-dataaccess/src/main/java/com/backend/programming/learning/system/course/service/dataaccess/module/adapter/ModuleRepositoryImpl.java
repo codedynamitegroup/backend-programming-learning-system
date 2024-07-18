@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.course.service.dataaccess.module
 import com.backend.programming.learning.system.course.service.dataaccess.module.mapper.ModuleDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.module.repository.ModuleJpaRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ModuleRepository;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import com.backend.programming.learning.system.course.service.domain.entity.Module;
@@ -48,5 +49,11 @@ public class ModuleRepositoryImpl implements ModuleRepository {
     @Override
     public void deleteById(UUID moduleId) {
         moduleJpaRepository.deleteById(moduleId);
+    }
+
+    @Override
+    public Optional<Module> findByExamId(ExamId examId) {
+        return moduleJpaRepository.findByExamId(examId.getValue())
+                .map(moduleDataAccessMapper::moduleEntityToModule);
     }
 }

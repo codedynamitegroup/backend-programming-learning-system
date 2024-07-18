@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 
 import com.backend.programming.learning.system.course.service.domain.entity.Module;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ModuleRepository;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,4 +25,8 @@ public class ModuleQueryHelper {
         return moduleRepository.findBySectionId(sectionId);
     }
 
+    @Transactional(readOnly = true)
+    public Module findByExamId(UUID examId) {
+        return moduleRepository.findByExamId(new ExamId(examId)).orElse(null);
+    }
 }

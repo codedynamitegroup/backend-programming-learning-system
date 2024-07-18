@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.dataaccess.module
 
 import com.backend.programming.learning.system.course.service.dataaccess.module.entity.ModuleEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.section.entity.SectionEntity;
+import io.micrometer.observation.ObservationFilter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +17,6 @@ public interface ModuleJpaRepository extends JpaRepository<ModuleEntity, UUID>{
     List<ModuleEntity> findBySectionId(UUID sectionId);
 
     Optional<ModuleEntity> findByCmid(Integer cmid);
+
+    Optional<ModuleEntity> findByExamId(UUID examId);
 }

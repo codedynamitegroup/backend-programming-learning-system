@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.ports.output.repository;
 import com.backend.programming.learning.system.course.service.domain.entity.Module;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,4 +19,5 @@ public interface ModuleRepository {
     void deleteById(UUID moduleId);
 
 
+    Optional<Module> findByExamId(ExamId examId);
 }
