@@ -17,9 +17,12 @@ public record CreateCourseCommand(
         @NotNull(message = "Name is required")
         String name,
         String key,
-        CourseType courseType,
+
+        @NotNull(message = "Organization id is required")
+        UUID organizationId,
+
+        @NotNull(message = "Course type is required")
+        UUID courseTypeId,
         @NotNull(message = "Visible is required")
-        Boolean visible,
-        @NotNull(message = "Created by is required")
-        UUID createdBy) {
+        Boolean visible) {
 }

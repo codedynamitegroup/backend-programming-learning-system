@@ -13,11 +13,7 @@ import java.util.UUID;
 @Builder
 public record CreateCourseResponse(
         UUID id,
-        String name,
-        CourseType courseType,
-        Boolean visible,
-        UserId createdBy,
-        ZonedDateTime createdAt,
+
         @NotNull
         String message
 ) {
