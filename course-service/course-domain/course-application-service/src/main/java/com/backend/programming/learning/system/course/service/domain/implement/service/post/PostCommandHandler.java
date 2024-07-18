@@ -1,5 +1,6 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.post;
 
+import com.backend.programming.learning.system.course.service.domain.dto.method.create.calendarevent.CreateCalendarEventCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.post.CreatePostCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.post.CreatePostResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.method.delete.post.DeletePostCommand;
@@ -11,7 +12,10 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.post.UpdatePostResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.post.PostResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.Post;
+import com.backend.programming.learning.system.course.service.domain.implement.service.calendarevent.CalendarEventCommandHandler;
 import com.backend.programming.learning.system.course.service.domain.mapper.post.PostDataMapper;
+import com.backend.programming.learning.system.course.service.domain.valueobject.NotificationComponentType;
+import com.backend.programming.learning.system.course.service.domain.valueobject.NotificationEventType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -32,12 +36,25 @@ public class PostCommandHandler {
     private final PostQueryHelper postQueryHelper;
     private final PostDeleteHelper postDeleteHelper;
     private final PostUpdateHelper postUpdateHelper;
-
+    private final CalendarEventCommandHandler calendarEventCommandHandler;
     private final PostDataMapper postDataMapper;
 
     @Transactional
     public CreatePostResponse createPost(CreatePostCommand createPostCommand) {
         Post post = postCreateHelper.createPost(createPostCommand);
+
+        CreateCalendarEventCommand createCalendarEventCommand = CreateCalendarEventCommand.builder()
+                .name(post.getTitle())
+                .description(post.getContent())
+                .eventType(NotificationEventType.COURSE.name())
+                .startTime(post.getCreatedAt().plusMinutes(15))
+                .endTime(null)
+                .courseId(post.getCourse().getId().getValue())
+                .component(NotificationComponentType.POST.name())
+                .build();
+
+        calendarEventCommandHandler.createCalendarEvent(createCalendarEventCommand);
+
         log.info("Post is created with id: {}", post.getId());
         return postDataMapper.postToCreatePostResponse(post, "Post created successfully");
     }
