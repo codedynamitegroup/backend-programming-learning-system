@@ -19,13 +19,15 @@ public class QuestionExamDataAccessDTO {
     private String questionText;
     private QuestionType qtype;
     private Integer page;
+    private Float defaultMark;
 
-    public QuestionExamDataAccessDTO(UUID id, QuestionDifficulty difficulty, String name, String questionText, QuestionType qtype, Integer page) {
+    public QuestionExamDataAccessDTO(UUID id, QuestionDifficulty difficulty, String name, String questionText, QuestionType qtype, Integer page, Float defaultMark) {
         this.id = id;
         this.difficulty = difficulty;
         this.name = name;
         this.questionText = questionText;
         this.qtype = qtype;
         this.page = page;
+        this.defaultMark = defaultMark;
     }
 }

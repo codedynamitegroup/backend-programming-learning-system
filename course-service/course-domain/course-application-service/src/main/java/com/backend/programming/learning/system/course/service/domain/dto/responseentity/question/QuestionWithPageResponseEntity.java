@@ -10,6 +10,7 @@ import java.util.UUID;
 public record QuestionWithPageResponseEntity(
         UUID id,
         QuestionDifficulty difficulty,
+        Float defaultMark,
         String name,
         String questionText,
         Integer page,

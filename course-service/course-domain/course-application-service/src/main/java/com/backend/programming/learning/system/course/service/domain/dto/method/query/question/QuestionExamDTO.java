@@ -18,4 +18,5 @@ public class QuestionExamDTO {
     private String questionText;
     private QuestionType qtype;
     private Integer page;
+    private Float defaultMark;
 }
