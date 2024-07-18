@@ -4,13 +4,14 @@ import com.backend.programming.learning.system.course.service.domain.CourseDomai
 import com.backend.programming.learning.system.course.service.domain.dto.method.create.course.CreateCourseCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.CourseModel;
 import com.backend.programming.learning.system.course.service.domain.entity.*;
+import com.backend.programming.learning.system.course.service.domain.exception.CourseDomainException;
 import com.backend.programming.learning.system.course.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.implement.service.moodle.MoodleCommandHandler;
 import com.backend.programming.learning.system.course.service.domain.mapper.course.CourseDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseTypeRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.OrganizationRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +35,7 @@ public class CourseCreateHelper {
     private final UserRepository userRepository;
     private final MoodleCommandHandler moodleCommandHandler;
     private final CourseTypeRepository courseTypeRepository;
+    private final OrganizationRepository organizationRepository;
 
     public CourseCreateHelper(
             CourseDomainService courseDomainService,
@@ -41,19 +43,23 @@ public class CourseCreateHelper {
             CourseRepository courseRepository,
             UserRepository userRepository,
             MoodleCommandHandler moodleCommandHandler,
-            CourseTypeRepository courseTypeRepository) {
+            CourseTypeRepository courseTypeRepository, OrganizationRepository organizationRepository) {
         this.courseDomainService = courseDomainService;
         this.courseDataMapper = courseDataMapper;
         this.courseRepository = courseRepository;
         this.userRepository = userRepository;
         this.moodleCommandHandler = moodleCommandHandler;
         this.courseTypeRepository = courseTypeRepository;
+        this.organizationRepository = organizationRepository;
     }
 
     @Transactional
     public Course createCourse(CreateCourseCommand createCourseCommand) {
-        User user = getUser(createCourseCommand.createdBy());
-        Course course = courseDataMapper.createCourseCommandToCourse(user, createCourseCommand);
+        Organization organization = getOrganization(createCourseCommand.organizationId());
+        CourseType courseType = findCourseTypeById(createCourseCommand.courseTypeId());
+        Course course = courseDataMapper.createCourseCommandToCourse(createCourseCommand);
+        course.setOrganization(organization);
+        course.setCourseType(courseType);
 
         courseDomainService.createCourse(course);
 
@@ -89,6 +95,15 @@ public class CourseCreateHelper {
         return saveCourse;
     }
 
+    private Organization getOrganization(UUID organizationId) {
+        Optional<Organization> organization = organizationRepository.findOrganizationById(organizationId);
+        if (organization.isEmpty()) {
+            log.warn("Organization with id: {} not found", organizationId);
+            throw new CourseDomainException("Organization not found");
+        }
+        return organization.get();
+    }
+
     private User getUser(UUID userId) {
         Optional<User> user = userRepository.findUser(userId);
         if (user.isEmpty()) {
@@ -114,7 +129,17 @@ public class CourseCreateHelper {
 
         if (courseType.isEmpty()) {
             log.warn("Course type not found with moodle id: {}", courseTypeMoodleId);
-            throw new RuntimeException("Course type not found");
+            throw new CourseDomainException("Course type not found");
+        }
+        return courseType.get();
+    }
+
+    private CourseType findCourseTypeById(UUID courseTypeId) {
+        Optional<CourseType> courseType = courseTypeRepository.findById(courseTypeId);
+
+        if (courseType.isEmpty()) {
+            log.warn("Course type not found with id: {}", courseTypeId);
+            throw new CourseDomainException("Course type not found");
         }
         return courseType.get();
     }

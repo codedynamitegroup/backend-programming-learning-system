@@ -23,7 +23,8 @@ public class CourseTypeDataAccessMapper {
     private final OrganizationDataAccessMapper organizationDataAccessMapper;
 
     public CourseTypeEntity courseTypeToCourseTypeEntity(CourseType courseType) {
-        OrganizationEntity organizationEntity = organizationDataAccessMapper.organizationToOrganizationEntity(courseType.getOrganization());
+        OrganizationEntity organizationEntity = courseType.getOrganization() == null ? null :
+                organizationDataAccessMapper.organizationToOrganizationEntity(courseType.getOrganization());
         return CourseTypeEntity.builder()
                 .id(courseType.getId().getValue())
                 .moodleId(courseType.getMoodleId())
@@ -32,7 +33,8 @@ public class CourseTypeDataAccessMapper {
                 .build();
     }
     public CourseType courseTypeEntityToCourseType(CourseTypeEntity courseTypeEntity) {
-        Organization organization = organizationDataAccessMapper.organizationEntityToOrganization(courseTypeEntity.getOrganization());
+        Organization organization = courseTypeEntity.getOrganization() == null ? null :
+                organizationDataAccessMapper.organizationEntityToOrganization(courseTypeEntity.getOrganization());
        CourseType response = CourseType.builder()
                 .name(courseTypeEntity.getName())
                 .moodleId(courseTypeEntity.getMoodleId())

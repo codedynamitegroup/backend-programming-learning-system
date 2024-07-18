@@ -12,6 +12,7 @@ import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.mapper.organization.OrganizationDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseUserRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.OrganizationRepository;
+import com.backend.programming.learning.system.course.service.domain.valueobject.CourseTypeId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
@@ -30,12 +31,10 @@ public class CourseDataMapper {
     }
 
     public Course createCourseCommandToCourse(
-            User user,
             CreateCourseCommand createCourseCommand) {
         return Course.builder()
                 .name(createCourseCommand.name())
                 .courseIdMoodle(createCourseCommand.courseIdMoodle())
-                .courseType(createCourseCommand.courseType())
                 .key(createCourseCommand.key())
                 .visible(createCourseCommand.visible())
                 .build();
@@ -58,9 +57,6 @@ public class CourseDataMapper {
     public CreateCourseResponse courseToCreateCourseResponse(Course course, String message) {
         return CreateCourseResponse.builder()
                 .id(course.getId().getValue())
-                .name(course.getName())
-                .courseType(course.getCourseType())
-                .visible(course.getVisible())
                 .message(message)
                 .build();
     }

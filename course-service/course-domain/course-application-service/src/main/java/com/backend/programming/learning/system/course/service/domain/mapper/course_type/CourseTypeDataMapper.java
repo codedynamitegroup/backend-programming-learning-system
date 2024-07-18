@@ -17,7 +17,7 @@ public class CourseTypeDataMapper {
     public CourseTypeResponseEntity mapToCourseTypeResponseEntity(CourseType courseType) {
         return CourseTypeResponseEntity.builder()
                 .courseTypeId(courseType.getId().getValue())
-                .organizationId(courseType.getOrganization().getId().getValue())
+                .organizationId(courseType.getOrganization() == null ? null : courseType.getOrganization().getId().getValue())
                 .moodleId(courseType.getMoodleId())
                 .name(courseType.getName())
                 .build();
