@@ -179,8 +179,11 @@ INSERT INTO public."module" (id, cmid, section_id, type_module, assignment_id, e
     ('8758ec8e-6322-4f6a-b68d-1c4a3c1e824a', 20, '70bb8281-5c4a-44a6-a745-0d72dd1abe20', 'ASSIGNMENT', '7055f5fd-29ce-48f9-b1d1-cd11a95ce931', null),
     ('caca48ad-21c5-414d-94c1-b324c25fe8c8', 22, '70bb8281-5c4a-44a6-a745-0d72dd1abe20', 'ASSIGNMENT', 'b3108f5a-c769-42ab-84c9-80a6d80f5821', null),
     ('2c8c1590-3e17-46bb-ac93-fb3d3b293544', 23, '70bb8281-5c4a-44a6-a745-0d72dd1abe20', 'ASSIGNMENT', '5b82b228-aef2-494f-8622-2be74966106d', null),
-    ('be09f62d-6d6f-4239-9b6b-08b784717788', 24, '7e89a8d4-5137-4457-81aa-1828265fc5ef', 'QUIZ', null, '86600cfb-7b48-4e81-8e05-8fa29d49d7a9');
-
+    ('be09f62d-6d6f-4239-9b6b-08b784717788', 24, '7e89a8d4-5137-4457-81aa-1828265fc5ef', 'QUIZ', null, '86600cfb-7b48-4e81-8e05-8fa29d49d7a9'),
+    ('10658ec1-f997-4ef7-b361-ef2122afc071', null, '7e89a8d4-5137-4457-81aa-1828265fc5ef',  'ASSIGNMENT', 'e1a6c218-1a45-4d2e-9020-1f3e8d5f098c', null),
+    ('1f546ca5-f220-4bc4-a5be-8f221d968732', null, '7e89a8d4-5137-4457-81aa-1828265fc5ef', 'ASSIGNMENT', 'b24d3df4-3f8e-4d23-b18f-8d82ff37cda9', null),
+    ('54316111-eb21-4660-a23c-358c605c9fd1', null, '7e89a8d4-5137-4457-81aa-1828265fc5ef', 'ASSIGNMENT', 'f58e95a8-799c-4d2e-b5f3-d9b9d5566eec', null),
+    ('aef3efed-dc13-4242-8c55-1d43fb192d95', null, '7e89a8d4-5137-4457-81aa-1828265fc5ef', 'ASSIGNMENT', 'c12f49db-074f-4e5c-9c19-9dffcdf9a6b4', null);
 
 INSERT INTO public.question(id, org_id, difficulty, name, question_text, general_feedback, default_mark, qtype, created_by, updated_by)
 VALUES
