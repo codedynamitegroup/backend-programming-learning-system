@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.course.service.dataaccess.course_user.repository;
 
 import com.backend.programming.learning.system.course.service.dataaccess.course_user.entity.CourseUserEntity;
+import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -62,4 +63,19 @@ public interface CourseUserJpaRepository extends JpaRepository<CourseUserEntity,
     Page<CourseUserEntity> findByExamId(UUID examId, Pageable pageable);
 
     Optional<CourseUserEntity> findByCourseIdAndUserId(UUID courseId, UUID userId);
+
+    @Query("""
+    SELECT u
+    FROM UserEntity u
+    WHERE u.organization.id = :organizationId
+    AND u.roleMoodle.id != 1
+    AND (u.firstName LIKE %:search% OR u.lastName LIKE %:search% OR u.email LIKE %:search%)
+    AND NOT EXISTS (
+        SELECT cu
+        FROM CourseUserEntity cu
+        WHERE cu.user.id = u.id
+        AND cu.course.id = :courseId
+    )
+                """)
+    Page<UserEntity> findAllUsersAreAbleToAssign(UUID courseId, UUID organizationId, String search, Pageable pageable);
 }

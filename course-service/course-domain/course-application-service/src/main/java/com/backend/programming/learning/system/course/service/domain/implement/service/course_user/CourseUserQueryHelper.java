@@ -1,6 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.course_user;
 
 import com.backend.programming.learning.system.course.service.domain.entity.CourseUser;
+import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseUserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -49,4 +50,7 @@ public class CourseUserQueryHelper {
         return courseUser;
     }
 
+    public Page<User> findAllUsersAreAbleToAssign(UUID courseId, UUID organizationId, String search, int pageNo, int pageSize) {
+        return courseUserRepository.findAllUsersAreAbleToAssign(courseId, organizationId, search, pageNo, pageSize);
+    }
 }
