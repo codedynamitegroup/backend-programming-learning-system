@@ -1,13 +1,22 @@
 package com.backend.programming.learning.system.course.service.domain.entity;
 
 import com.backend.programming.learning.system.course.service.domain.valueobject.CourseTypeId;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import com.backend.programming.learning.system.domain.entity.AggregateRoot;
+
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.UUID;
 
 public class CourseType extends AggregateRoot<CourseTypeId>{
     private Integer moodleId;
     private String name;
 
     private Organization organization;
+
+    public void initializeCourseType() {
+        setId(new CourseTypeId(UUID.randomUUID()));
+    }
 
     public Organization getOrganization() {
         return organization;

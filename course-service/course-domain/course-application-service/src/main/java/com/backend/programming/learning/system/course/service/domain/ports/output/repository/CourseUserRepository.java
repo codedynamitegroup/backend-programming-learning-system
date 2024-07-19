@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.ports.outp
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryGradeCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.CourseUser;
+import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import org.springframework.data.domain.Page;
 
@@ -33,4 +34,5 @@ public interface CourseUserRepository {
 
 
     Page<CourseUser> findByExamId(ExamId examId, QueryGradeCommand queryGradeCommand);
+    Page<User> findAllUsersAreAbleToAssign(UUID courseId, UUID organizationId, String search, int pageNo, int pageSize);
 }

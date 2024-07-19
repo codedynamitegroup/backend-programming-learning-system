@@ -55,4 +55,9 @@ public class CourseUserApplicationServiceImpl implements CourseUserApplicationSe
     public QueryAllCourseByUserResponse queryAllCourseByUser(QueryAllCourseByUserCommand queryAllCourseByUserCommand) {
         return courseUserCommandHandler.queryAllCourseByUserId(queryAllCourseByUserCommand);
     }
+    @Override
+    public QueryAllUsersAreAbleToAssignToCourseResponse findAllUsersAreAbleToAssign(
+            QueryAllUsersAreAbleToAssignToCourseCommand queryAllUsersAreAbleToAssignToCourseCommand) {
+        return courseUserCommandHandler.findAllUsersAreAbleToAssign(queryAllUsersAreAbleToAssignToCourseCommand);
+    }
 }

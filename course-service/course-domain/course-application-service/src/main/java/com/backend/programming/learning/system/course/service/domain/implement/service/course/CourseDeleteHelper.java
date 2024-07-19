@@ -1,5 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.course;
 
+import com.backend.programming.learning.system.course.service.domain.entity.Course;
+import com.backend.programming.learning.system.course.service.domain.exception.CourseDomainException;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +21,11 @@ import java.util.UUID;
 public class CourseDeleteHelper {
     private final CourseRepository courseRepository;
     public void deleteCourse(UUID courseId) {
+        Course course = courseRepository.findById(courseId);
+        if (course.getCourseIdMoodle() != null) {
+            log.error("Course is associated with moodle course id: {}", course.getCourseIdMoodle());
+            throw new CourseDomainException("Course is associated with moodle course id!! Cannot delete course.");
+        }
         log.info("Course deleted with id: {}", courseId);
         courseRepository.deleteById(courseId);
     }

@@ -3,8 +3,10 @@ package com.backend.programming.learning.system.course.service.dataaccess.course
 import com.backend.programming.learning.system.course.service.dataaccess.course_user.entity.CourseUserEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.course_user.mapper.CourseUserDataAccessMapper;
 import com.backend.programming.learning.system.course.service.dataaccess.course_user.repository.CourseUserJpaRepository;
+import com.backend.programming.learning.system.course.service.dataaccess.user.mapper.UserDataAccessMapper;
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.exam.QueryGradeCommand;
 import com.backend.programming.learning.system.course.service.domain.entity.CourseUser;
+import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseUserRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import org.springframework.data.domain.Page;
@@ -19,10 +21,12 @@ import java.util.UUID;
 public class CourseUserRepositoryImpl implements CourseUserRepository {
     private final CourseUserJpaRepository courseUserJpaRepository;
     private final CourseUserDataAccessMapper courseUserDataAccessMapper;
+    private final UserDataAccessMapper userDataAccessMapper;
 
-    public CourseUserRepositoryImpl(CourseUserJpaRepository courseUserJpaRepository, CourseUserDataAccessMapper courseUserDataAccessMapper) {
+    public CourseUserRepositoryImpl(CourseUserJpaRepository courseUserJpaRepository, CourseUserDataAccessMapper courseUserDataAccessMapper, UserDataAccessMapper userDataAccessMapper) {
         this.courseUserJpaRepository = courseUserJpaRepository;
         this.courseUserDataAccessMapper = courseUserDataAccessMapper;
+        this.userDataAccessMapper = userDataAccessMapper;
     }
 
 
@@ -100,5 +104,12 @@ public class CourseUserRepositoryImpl implements CourseUserRepository {
                 .findByExamId(examId.getValue(), pageRequest);
         return courseUserDataAccessMapper
                 .courseUserPageToCourseUserPage(page);
+    }
+
+    @Override
+    public Page<User> findAllUsersAreAbleToAssign(UUID courseId, UUID organizationId, String search, int pageNo, int pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
+        return courseUserJpaRepository.findAllUsersAreAbleToAssign(courseId, organizationId, search, pageRequest)
+                .map(userDataAccessMapper::userEntityToUser);
     }
 }
