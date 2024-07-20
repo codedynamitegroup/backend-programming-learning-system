@@ -10,7 +10,6 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.module.ModuleModel;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
 import com.backend.programming.learning.system.course.service.domain.entity.Assignment;
-import com.backend.programming.learning.system.course.service.domain.entity.Exam;
 import com.backend.programming.learning.system.course.service.domain.entity.Section;
 import com.backend.programming.learning.system.course.service.domain.exception.CourseDomainException;
 import com.backend.programming.learning.system.course.service.domain.mapper.assignment.AssignmentDataMapper;
@@ -19,12 +18,10 @@ import com.backend.programming.learning.system.course.service.domain.ports.outpu
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.AssignmentRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SectionRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
-import com.backend.programming.learning.system.course.service.domain.valueobject.ModuleId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.TypeModule;
 import org.springframework.stereotype.Component;
 import com.backend.programming.learning.system.course.service.domain.entity.Module;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,9 +34,10 @@ public class ModuleDataMapper {
    private final ExamDataMapper examDataMapper;
    private final AssignmentDataMapper assignmentDataMapper;
 
-    public ModuleDataMapper(SectionRepository sectionRepository, ExamRepository examRepository, ExamDataMapper examDataMapper, AssignmentDataMapper assignmentDataMapper) {
+    public ModuleDataMapper(SectionRepository sectionRepository, ExamRepository examRepository, AssignmentRepository assignmentRepository, ExamDataMapper examDataMapper, AssignmentDataMapper assignmentDataMapper) {
         this.sectionRepository = sectionRepository;
         this.examRepository = examRepository;
+        this.assignmentRepository = assignmentRepository;
         this.examDataMapper = examDataMapper;
         this.assignmentDataMapper = assignmentDataMapper;
     }
