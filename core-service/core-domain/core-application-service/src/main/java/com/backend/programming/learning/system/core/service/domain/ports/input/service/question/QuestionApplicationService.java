@@ -33,4 +33,6 @@ public interface QuestionApplicationService {
             @Valid CreateQuestionCloneCommand createQuestionCloneCommand);
 
     QueryAllQuestionWithPaginationResponse queryAllQuestionWithPagination(QueryAllQuestionPaginationCommand queryAllQuestionPaginationCommand);
+
+    void updateCategoryOfQuestions(QuestionBankCommand questionBankCommand);
 }

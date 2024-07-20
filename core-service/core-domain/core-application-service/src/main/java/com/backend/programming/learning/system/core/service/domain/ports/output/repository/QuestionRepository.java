@@ -33,4 +33,6 @@ public interface QuestionRepository {
     List<Question> cloneQuestion(List<CreateQuestionClone> questionClones);
 
     Page<Question> findAllQuestionWithPagination(String qtype, String searchName, int pageNo, int pageSize);
+
+    List<Question> findQuestionsByIds(List<UUID> uuids);
 }

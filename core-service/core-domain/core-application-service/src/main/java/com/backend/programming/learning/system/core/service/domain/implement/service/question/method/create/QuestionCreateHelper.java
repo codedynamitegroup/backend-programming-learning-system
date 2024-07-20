@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.core.service.domain.implement.se
 import com.backend.programming.learning.system.core.service.domain.CoreDomainService;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionClone;
 import com.backend.programming.learning.system.core.service.domain.dto.method.create.question.CreateQuestionCommand;
+import com.backend.programming.learning.system.core.service.domain.dto.method.query.question.QuestionBankCommand;
 import com.backend.programming.learning.system.core.service.domain.entity.AnswerOfQuestion;
 import com.backend.programming.learning.system.core.service.domain.exception.CoreDomainException;
 import com.backend.programming.learning.system.core.service.domain.exception.UserNotFoundException;
@@ -105,6 +106,14 @@ public class QuestionCreateHelper {
         List<Question> questions = questionRepository.cloneQuestion(questionClones);
 
         return questions;
+    }
+
+    public void updateCategoryOfQuestions(QuestionBankCommand questionBankCommand) {
+        List<Question> questions = questionRepository.findQuestionsByIds(questionBankCommand.questionIds());
+        questions.forEach(question -> {
+            question.setQuestionBankCategoryId(questionBankCommand.categoryId());
+            questionRepository.saveQuestion(question);
+        });
     }
 }
 
