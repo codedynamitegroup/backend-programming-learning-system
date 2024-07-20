@@ -20,7 +20,7 @@ public interface SectionJpaRepository extends JpaRepository<SectionEntity, UUID>
             """)
     List<SectionEntity> findByCourseId(UUID courseId);
 
-    Optional<SectionEntity> findBySectionMoodleId(Integer sectionMoodleId);
+    Optional<SectionEntity> findBySectionMoodleIdAndCourseId(Integer sectionMoodleId,UUID courseId);
 
     void deleteBySectionMoodleId(Integer sectionMoodleId);
 }

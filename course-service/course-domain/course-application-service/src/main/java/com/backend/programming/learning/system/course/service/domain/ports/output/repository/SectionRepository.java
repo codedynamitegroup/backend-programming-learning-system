@@ -12,11 +12,11 @@ public interface SectionRepository {
 
     Optional<Section> findById(UUID sectionId);
 
-    Optional<Section> findBySectionMoodleId(Integer sectionMoodleId);
+    Optional<Section> findBySectionMoodleIdAndCourseId(Integer sectionMoodleId,UUID courseId);
 
     void deleteById(UUID sectionId);
 
-    void deleteBySectionMoodleId(Integer sectionMoodleId);
+    void deleteBySectionMoodleIdAndCourseId(Integer sectionMoodleId,UUID courseId);
 
     List<Section> findByCourseId(CourseId courseId);
 

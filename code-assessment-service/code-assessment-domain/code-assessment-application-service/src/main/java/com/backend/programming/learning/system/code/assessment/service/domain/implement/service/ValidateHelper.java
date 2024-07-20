@@ -255,4 +255,14 @@ public class ValidateHelper {
             throw new UniqueConstraintException("name is already exist");
         }
     }
+
+    public CodeQuestion validateCodeQuestionByQuestionId(UUID id) {
+        Optional<CodeQuestion> codeQuestion = codeQuestionRepository.findQuestionId(id);
+        if(codeQuestion.isEmpty())
+        {
+            log.error("Could not find code question with question id: {}", id);
+            throw new CodeQuestionNotFoundException("Could not find code question with question id: " + id.toString());
+        }
+        return codeQuestion.get();
+    }
 }

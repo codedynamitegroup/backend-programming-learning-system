@@ -38,4 +38,6 @@ public interface CourseUserApplicationService {
 
     QueryAllCourseByUserResponse queryAllCourseByUser(
             @Valid QueryAllCourseByUserCommand queryAllCourseByUserCommand);
+    QueryAllUsersAreAbleToAssignToCourseResponse findAllUsersAreAbleToAssign(
+            @Valid QueryAllUsersAreAbleToAssignToCourseCommand queryAllUsersAreAbleToAssignToCourseCommand);
 }

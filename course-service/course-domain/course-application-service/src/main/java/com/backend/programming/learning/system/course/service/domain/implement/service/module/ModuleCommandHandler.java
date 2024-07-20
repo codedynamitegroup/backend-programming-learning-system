@@ -7,6 +7,8 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.module.UpdateModuleCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.module.UpdateModuleResponse;
 import com.backend.programming.learning.system.course.service.domain.entity.Module;
+import com.backend.programming.learning.system.course.service.domain.entity.Organization;
+import com.backend.programming.learning.system.course.service.domain.entity.WebhookMessage;
 import com.backend.programming.learning.system.course.service.domain.mapper.module.ModuleDataMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,5 +52,17 @@ public class ModuleCommandHandler {
     public QueryAllModuleResponse queryAllBySectionId(UUID sectionId) {
         List<Module> modules = moduleQueryHelper.queryAllBySectionId(sectionId);
         return moduleDataMapper.modulesToQueryAllModuleResponse(modules);
+    }
+
+    @Transactional
+    public Boolean createModule(WebhookMessage webhookMessage, Organization organization)
+    {
+        return moduleCreateHelper.createModule(webhookMessage, organization);
+    }
+
+    @Transactional
+    public Boolean updateModule(WebhookMessage webhookMessage, Organization organization)
+    {
+        return moduleUpdateHelper.updateModule(webhookMessage, organization);
     }
 }

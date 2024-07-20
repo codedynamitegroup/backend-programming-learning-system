@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.query.course_user.*;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.course_user.CourseUserResponseEntity;
 import com.backend.programming.learning.system.course.service.domain.entity.CourseUser;
+import com.backend.programming.learning.system.course.service.domain.entity.User;
 import com.backend.programming.learning.system.course.service.domain.mapper.course_user.CourseUserDataMapper;
 import com.backend.programming.learning.system.course.service.domain.valueobject.CourseUserId;
 import lombok.RequiredArgsConstructor;
@@ -81,5 +82,19 @@ public class CourseUserCommandHandler {
                 queryAllCourseByUserCommand.getSearch(),
                 queryAllCourseByUserCommand.getCourseType());
         return courseUserDataMapper.courseUsersToQueryAllCourseByUserResponse(courseUsers);
+    }
+
+    @Transactional(readOnly = true)
+    public QueryAllUsersAreAbleToAssignToCourseResponse findAllUsersAreAbleToAssign(
+            QueryAllUsersAreAbleToAssignToCourseCommand queryAllUsersAreAbleToAssignToCourseCommand) {
+        return courseUserDataMapper.usersToQueryAllUsersAreAbleToAssignToCourseResponse(
+                courseUserQueryHelper.findAllUsersAreAbleToAssign(
+                        queryAllUsersAreAbleToAssignToCourseCommand.getCourseId(),
+                        queryAllUsersAreAbleToAssignToCourseCommand.getOrganizationId(),
+                        queryAllUsersAreAbleToAssignToCourseCommand.getSearch(),
+                        queryAllUsersAreAbleToAssignToCourseCommand.getPageNo(),
+                        queryAllUsersAreAbleToAssignToCourseCommand.getPageSize()
+                )
+        );
     }
 }

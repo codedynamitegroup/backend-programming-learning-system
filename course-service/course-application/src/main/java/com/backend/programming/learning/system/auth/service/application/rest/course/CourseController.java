@@ -48,7 +48,7 @@ import java.util.UUID;
 public class CourseController {
     private final CourseApplicationService courseApplicationService;
 
-    @PostMapping("/create")
+    @PostMapping
     @Operation(summary = "Create course.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Success.", content = {

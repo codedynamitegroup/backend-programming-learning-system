@@ -220,7 +220,7 @@ public class CodeQuestionsHelper {
 
             List<TestCase> sampleTestCase = testCaseRepository.getSampleTestCase(codeQuestion.getId());
 
-            List<CodeSubmission> codeSubmissions = user == null ? List.of() : codeSubmissionRepository.findLatestSubmissionEachLanguage(codeQuestion.getId(), user.getId());
+            List<CodeSubmission> codeSubmissions = List.of();//user == null ? List.of() : codeSubmissionRepository.findLatestSubmissionEachLanguage(codeQuestion.getId(), user.getId());
 
             List<ProgrammingLanguageCodeQuestion> languages = programmingLanguageCodeQuestionRepository.findByCodeQuestionId(codeQuestion.getId());
 

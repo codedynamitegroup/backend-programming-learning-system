@@ -76,15 +76,6 @@ public class QuestionCommandHandler {
                 UUID.randomUUID(),
                 previousPayload);
 
-        if (questionDeletedEvent.getQuestion().getqtype() == QuestionType.CODE)
-            questionOutboxHelper.saveNewQuestionOutboxMessage(questionEventPayload,
-                    questionDeletedEvent.getQuestion().getCopyState(),
-                    OutboxStatus.STARTED,
-                    questionSagaHelper.questionStatusToSagaStatus(questionDeletedEvent.getQuestion().getCopyState()),
-                    ServiceName.CODE_ASSESSMENT_SERVICE,
-                    UUID.randomUUID(),
-                    previousPayload);
-
         QuestionDeleteResponse response = QuestionDeleteResponse.builder()
                 .questionId(questionId)
                 .qtypeId(questionDeletedEvent.getQtypeID())
@@ -97,6 +88,24 @@ public class QuestionCommandHandler {
     public QueryAllQuestionByCategoryIdResponse queryAllQuestionByCategory(UUID categoryId, QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand) {
         Page<QuestionResponseEntity> questionResponseEntities = questionQueryHelper
                 .queryAllQuestionByCategory(categoryId, queryAllQuestionByCategoryIdCommand);
+
+        return QueryAllQuestionByCategoryIdResponse.builder()
+                .questionResponses(questionResponseEntities.getContent())
+                .currentPage(questionResponseEntities.getNumber())
+                .totalItems(questionResponseEntities.getTotalElements())
+                .totalPages(questionResponseEntities.getTotalPages())
+                .build();
+    }
+
+    public QueryAllQuestionByCategoryIdResponse queryAllQuestionByCategoryAndIsBasicType(
+            UUID categoryId,
+            QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand,
+            boolean isBasicType) {
+        Page<QuestionResponseEntity> questionResponseEntities = questionQueryHelper
+                .queryAllQuestionByCategoryAndIsBasicType(
+                        categoryId,
+                        queryAllQuestionByCategoryIdCommand,
+                        isBasicType);
 
         return QueryAllQuestionByCategoryIdResponse.builder()
                 .questionResponses(questionResponseEntities.getContent())

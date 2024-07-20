@@ -40,7 +40,14 @@ public interface QuestionJpaRepository extends JpaRepository<QuestionEntity, UUI
     Page<QuestionEntity> findAllByExamId(UUID examId, String search, Pageable pageable);
 
     @Query("""
-    SELECT new com.backend.programming.learning.system.course.service.dataaccess.question.entity.QuestionExamDataAccessDTO(q.id AS id, q.difficulty AS difficulty, q.name AS name, q.questionText AS questionText, q.qtype AS qtype, eq.page AS page)
+    SELECT new com.backend.programming.learning.system.course.service.dataaccess.question.entity.QuestionExamDataAccessDTO
+    (q.id AS id, 
+    q.difficulty AS difficulty, 
+    q.name AS name, 
+    q.questionText AS questionText, 
+    q.qtype AS qtype, 
+    eq.page AS page, 
+    q.defaultMark AS defaultMark)
     FROM QuestionEntity q 
     JOIN ExamQuestionEntity eq ON eq.question.id = q.id
     WHERE LOWER(q.name) LIKE %:search%

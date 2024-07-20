@@ -18,6 +18,8 @@ public class UpdateTopicCommand {
     private final UUID topicId;
     private final String name;
     private final String description;
+    private final String thumbnailUrl;
+    private final Boolean isSingleProgrammingLanguage;
     private final List<UUID> programmingLanguageIds;
     @NotNull
     private final UUID updatedBy;

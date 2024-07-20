@@ -25,7 +25,7 @@ public class CourseRepositoryImpl implements CourseRepository {
     @Override
     public Course save(Course course) {
         return courseDataAccessMapper.courseEntityToCourse(courseJpaRepository
-                .saveAndFlush(courseDataAccessMapper
+                .save(courseDataAccessMapper
                         .courseToCourseEntity(course)));
     }
 

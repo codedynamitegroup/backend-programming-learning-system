@@ -51,5 +51,5 @@ public interface CodeQuestionRepository {
 
     void deleteById(CodeQuestionId id);
 
-    void deleteCodeQuestionByQuestionId(UUID id);
+    Optional<CodeQuestion> findQuestionId(UUID id);
 }

@@ -89,17 +89,13 @@ public class QuestionRepositoryImpl implements QuestionRepository {
                                     qtypeEssayQuestionJpaRepository.findByQuestionId(id)
                                             .ifPresent(qtypeEssayQuestionJpaRepository::delete);
                                     break;
-                                case MULTIPLE_CHOICE:
+                                case MULTIPLE_CHOICE, TRUE_FALSE:
                                     qtypeMultichoiceQuestionJpaRepository.findByQuestionId(id)
                                             .ifPresent(qtypeMultichoiceQuestionJpaRepository::delete);
                                     break;
                                 case SHORT_ANSWER:
                                     qtypeShortanswerQuestionJpaRepository.findByQuestionId(id)
                                             .ifPresent(qtypeShortanswerQuestionJpaRepository::delete);
-                                    break;
-                                case TRUE_FALSE:
-                                    qtypeMultichoiceQuestionJpaRepository.findByQuestionId(id)
-                                            .ifPresent(qtypeMultichoiceQuestionJpaRepository::delete);
                                     break;
                                 default:
                                     throw new IllegalArgumentException("Invalid question type");
@@ -144,6 +140,22 @@ public class QuestionRepositoryImpl implements QuestionRepository {
         return questionJpaRepository
                 .findAllByQuestionBankCategoryId(categoryId,
                         queryAllQuestionByCategoryIdCommand.getSearch(),
+                        pageRequest)
+                .map(questionDataAccessMapper::questionEntityToQuestionResponseEntity);
+    }
+
+    @Override
+    public Page<QuestionResponseEntity> findAllQuestionByCategoryAndIsBasicType(
+            UUID categoryId,
+            QueryAllQuestionByCategoryIdCommand queryAllQuestionByCategoryIdCommand,
+            boolean isBasicType) {
+        Pageable pageRequest = Pageable.ofSize(queryAllQuestionByCategoryIdCommand.getPageSize())
+                .withPage(queryAllQuestionByCategoryIdCommand.getPageNo());
+        return questionJpaRepository
+                .findAllByQuestionBankCategoryIdAndIsBasicType(
+                        categoryId,
+                        queryAllQuestionByCategoryIdCommand.getSearch(),
+                        isBasicType,
                         pageRequest)
                 .map(questionDataAccessMapper::questionEntityToQuestionResponseEntity);
     }

@@ -66,7 +66,8 @@ public class CourseDataAccessMapper {
                 .visible(courseEntity.getVisible())
                 .createdAt(courseEntity.getCreatedAt())
                 .updatedAt(courseEntity.getUpdatedAt())
-                .organization(organizationDataAccessMapper.organizationEntityToOrganization(courseEntity.getOrganization()))
+                .organization(courseEntity.getOrganization() == null ? null :
+                        organizationDataAccessMapper.organizationEntityToOrganization(courseEntity.getOrganization()))
                 .build();
         response.setId(new CourseId(courseEntity.getId()));
         return response;

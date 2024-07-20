@@ -79,6 +79,7 @@ public class QuestionDataAccessMapper {
                 .questionText(questionEntity.getQuestionText())
                 .qtype(questionEntity.getQtype())
                 .page(questionEntity.getPage())
+                .defaultMark(questionEntity.getDefaultMark())
                 .build();
     }
 

@@ -51,7 +51,7 @@ public class CourseUserController {
         log.info("Course assigned to user: {}", response);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
-    @DeleteMapping("/un-assign")
+        @PatchMapping("/un-assign")
     @Operation(summary = "Delete course user.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success.", content = {
@@ -157,5 +157,32 @@ public class CourseUserController {
         return ResponseEntity.ok(response);
     }
 
-
+    @GetMapping("/query-all-users-able-to-assign")
+    @Operation(summary = "Query all users are able to assign to course.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success.", content = {
+                    @Content(mediaType = "application/vnd.api.v1+json",
+                            schema = @Schema(implementation = QueryAllCourseByUserResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Unexpected error.")})
+    public ResponseEntity<QueryAllUsersAreAbleToAssignToCourseResponse> queryAllUsersAbleToAssign(
+            @RequestParam(defaultValue = "") String search,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam UUID courseId,
+            @RequestParam UUID organizationId
+            ) {
+        QueryAllUsersAreAbleToAssignToCourseResponse response = courseUserApplicationService.findAllUsersAreAbleToAssign(
+                QueryAllUsersAreAbleToAssignToCourseCommand.builder()
+                        .search(search)
+                        .pageNo(pageNo)
+                        .pageSize(pageSize)
+                        .courseId(courseId)
+                        .organizationId(organizationId)
+                        .build()
+        );
+        log.info("Users are able to assign to course: {}", response);
+        return ResponseEntity.ok(response);
+    }
 }

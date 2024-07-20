@@ -63,7 +63,7 @@ public class SectionUpdateHelper {
         for (SectionModel sectionModel : sectionModels) {
             if (sectionModel.getId().equals(webhookMessage.getObjectId())) {
                 Optional<Section> previousSection = sectionRepository.
-                        findBySectionMoodleId(Integer.valueOf(sectionModel.getId()));
+                        findBySectionMoodleIdAndCourseId(Integer.valueOf(sectionModel.getId()),course.getId().getValue());
                 sectionDataMapper.setSection(previousSection.get(), sectionModel);
                 Section result = sectionRepository.save(previousSection.get());
                 return  result;

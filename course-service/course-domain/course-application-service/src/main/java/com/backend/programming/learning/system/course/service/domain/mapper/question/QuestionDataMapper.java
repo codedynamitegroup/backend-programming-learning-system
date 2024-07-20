@@ -228,6 +228,7 @@ public class QuestionDataMapper {
                 .questionText(question.getQuestionText())
                 .page(question.getPage())
                 .qtype(question.getQtype())
+                .defaultMark(question.getDefaultMark())
                 .build();
     }
 

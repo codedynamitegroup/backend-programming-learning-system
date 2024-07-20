@@ -17,11 +17,11 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class UpdateCourseCommand {
-    private UUID courseId;
+
     @NotNull(message = "Course name is required")
     private String name;
     @NotNull(message = "Course description is required")
     private Boolean visible;
-    @NotNull(message = "Course updated by is required")
-    private UUID updatedBy;
+
+    private final UUID courseTypeId;
 }

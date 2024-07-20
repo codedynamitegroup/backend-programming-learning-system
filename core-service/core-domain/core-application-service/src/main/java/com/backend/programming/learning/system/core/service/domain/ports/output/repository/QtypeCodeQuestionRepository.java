@@ -35,4 +35,9 @@ public interface QtypeCodeQuestionRepository {
                                                                            Boolean isPublic,
                                                                            Integer pageNo,
                                                                            Integer pageSize);
+    Page<QtypeCodeQuestion> findAllAllowedToImportTeacherQtypeCodeQuestions(String search,
+                                                                           QuestionDifficulty difficulty,
+                                                                           Boolean isPublic,
+                                                                           Integer pageNo,
+                                                                           Integer pageSize);
 }

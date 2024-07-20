@@ -41,6 +41,8 @@ public record CreateExamCommand(
         @NotNull(message = "Exam grade method is required")
         String gradeMethod,
         @NotNull(message = "Question ids are required")
-        List<CreateQuestionExamCommand> questionIds
+        List<CreateQuestionExamCommand> questionIds,
+        @NotNull(message = "SectionId are required")
+        UUID sectionId
 ) {
 }

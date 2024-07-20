@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.course.UpdateCourseCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.moodle.course.CourseModel;
 import com.backend.programming.learning.system.course.service.domain.entity.*;
+import com.backend.programming.learning.system.course.service.domain.exception.CourseDomainException;
 import com.backend.programming.learning.system.course.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.implement.service.moodle.MoodleCommandHandler;
 import com.backend.programming.learning.system.course.service.domain.mapper.course.CourseDataMapper;
@@ -47,9 +48,14 @@ public class CourseUpdateHelper {
 
     public Course updateCourse(CourseId courseId, UpdateCourseCommand updateCourseCommand) {
         Course course = courseRepository.findById(courseId.getValue());
-        User updatedBy = getUser(updateCourseCommand.getUpdatedBy());
         course.setName(updateCourseCommand.getName());
         course.setVisible(updateCourseCommand.getVisible());
+
+        if (updateCourseCommand.getCourseTypeId() != null) {
+            CourseType courseType = findCourseTypeById(updateCourseCommand.getCourseTypeId());
+            course.setCourseType(courseType);
+        }
+
         Course response = courseRepository.save(course);
         log.info("Course is updated with id: {}", course.getId());
         return response;
@@ -74,7 +80,7 @@ public class CourseUpdateHelper {
         Optional<User> user = userRepository.findUser(userId);
         if (user.isEmpty()) {
             log.warn("User with id: {} not found", userId);
-            throw new RuntimeException("User not found");
+            throw new CourseDomainException("User not found");
         }
         return user.get();
     }
@@ -94,7 +100,17 @@ public class CourseUpdateHelper {
 
         if (courseType.isEmpty()) {
             log.warn("Course type not found with moodle id: {}", courseTypeMoodleId);
-            throw new RuntimeException("Course type not found");
+            throw new CourseDomainException("Course type not found");
+        }
+        return courseType.get();
+    }
+
+    private CourseType findCourseTypeById(UUID courseTypeId) {
+        Optional<CourseType> courseType = courseTypeRepository.findById(courseTypeId);
+
+        if (courseType.isEmpty()) {
+            log.warn("Course type not found with id: {}", courseTypeId);
+            throw new CourseDomainException("Course type not found");
         }
         return courseType.get();
     }
@@ -104,7 +120,7 @@ public class CourseUpdateHelper {
 
         if (course.isEmpty()) {
             log.warn("Course not found with courseIdMoodle: {}", courseIdMoodle);
-            throw new RuntimeException("Course not found");
+            throw new CourseDomainException("Course not found");
         }
 
         return course.get();

@@ -38,6 +38,7 @@ public class SectionDataMapper {
 
     public void setSection(Section previousSection, SectionModel sectionModel) {
         previousSection.setName(sectionModel.getName());
+        previousSection.setSectionMoodleId(Integer.valueOf(sectionModel.getId()));
         previousSection.setVisible(sectionModel.getVisible());
     }
 

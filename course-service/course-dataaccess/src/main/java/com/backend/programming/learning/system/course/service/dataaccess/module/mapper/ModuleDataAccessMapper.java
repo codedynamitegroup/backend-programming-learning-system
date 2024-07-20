@@ -34,6 +34,8 @@ public class ModuleDataAccessMapper {
                 .assignment(module.getAssignment() == null ? null : assignmentDataAccessMapper.assignmentToAssignmentEntity(module.getAssignment()))
                 .exam(module.getExam() == null ? null : examDataAccessMapper.examToExamEntity(module.getExam()))
                 .cmid(module.getCmid())
+                .typeModule(module.getTypeModule())
+                .section(section)
                 .build();
     }
 

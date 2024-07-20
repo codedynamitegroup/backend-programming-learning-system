@@ -1,9 +1,7 @@
 package com.backend.programming.learning.system.course.service.domain.implement.service.webhook;
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.webhook.WebhookCommand;
-import com.backend.programming.learning.system.course.service.domain.entity.Course;
-import com.backend.programming.learning.system.course.service.domain.entity.Organization;
-import com.backend.programming.learning.system.course.service.domain.entity.WebhookMessage;
+import com.backend.programming.learning.system.course.service.domain.entity.*;
 import com.backend.programming.learning.system.course.service.domain.exception.CourseNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.exception.OrganizationNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.implement.service.course.CourseCreateHelper;
@@ -11,6 +9,8 @@ import com.backend.programming.learning.system.course.service.domain.implement.s
 import com.backend.programming.learning.system.course.service.domain.implement.service.course.CourseUpdateHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.course_user.CourseUserCreateHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.course_user.CourseUserDeleteHelper;
+import com.backend.programming.learning.system.course.service.domain.implement.service.module.ModuleCreateHelper;
+import com.backend.programming.learning.system.course.service.domain.implement.service.module.ModuleUpdateHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.section.SectionDeleteHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.section.SectionCreateHelper;
 import com.backend.programming.learning.system.course.service.domain.implement.service.section.SectionUpdateHelper;
@@ -18,16 +18,25 @@ import com.backend.programming.learning.system.course.service.domain.implement.s
 import com.backend.programming.learning.system.course.service.domain.mapper.webhook.WebhookDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CourseRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.OrganizationRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SynchronizeStateDetailRepository;
+import com.backend.programming.learning.system.course.service.domain.valueobject.SynchronizeStateDetailId;
+import com.backend.programming.learning.system.domain.valueobject.TypeSynchronize;
+import com.backend.programming.learning.system.domain.valueobject.TypeSynchronizeStatus;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 @Slf4j
 public class WebhookHelper {
     private final WebhookDataMapper webhookDataMapper;
     private final OrganizationRepository organizationRepository;
+    private final SynchronizeStateDetailRepository synchronizeStateDetailRepository;
     private final CourseRepository courseRepository;
     private final CourseCreateHelper courseCreateHelper;
     private final CourseUpdateHelper courseUpdateHelper;
@@ -39,16 +48,19 @@ public class WebhookHelper {
     private final SectionCreateHelper sectionCreateHelper;
     private final SectionUpdateHelper sectionUpdateHelper;
     private final SectionDeleteHelper sectionDeleteHelper;
+    private final ModuleCreateHelper moduleCreateHelper;
+    private final ModuleUpdateHelper moduleUpdateHelper;
 
     public WebhookHelper(
             WebhookDataMapper webhookDataMapper,
             OrganizationRepository organizationRepository,
-            CourseRepository courseRepository, CourseCreateHelper courseCreateHelper,
+            SynchronizeStateDetailRepository synchronizeStateDetailRepository, CourseRepository courseRepository, CourseCreateHelper courseCreateHelper,
             CourseUpdateHelper courseUpdateHelper, CourseDeleteHelper courseDeleteHelper,
             CourseUserCreateHelper courseUserCreateHelper, CourseUserDeleteHelper courseUserDeleteHelper,
-            UserHelper userHelper, SectionCreateHelper sectionCreateHelper, SectionUpdateHelper sectionUpdateHelper, SectionDeleteHelper sectionDeleteHelper) {
+            UserHelper userHelper, SectionCreateHelper sectionCreateHelper, SectionUpdateHelper sectionUpdateHelper, SectionDeleteHelper sectionDeleteHelper, ModuleCreateHelper moduleCreateHelper, ModuleUpdateHelper moduleUpdateHelper) {
         this.webhookDataMapper = webhookDataMapper;
         this.organizationRepository = organizationRepository;
+        this.synchronizeStateDetailRepository = synchronizeStateDetailRepository;
         this.courseRepository = courseRepository;
         this.courseCreateHelper = courseCreateHelper;
         this.courseUpdateHelper = courseUpdateHelper;
@@ -59,9 +71,11 @@ public class WebhookHelper {
         this.sectionCreateHelper = sectionCreateHelper;
         this.sectionUpdateHelper = sectionUpdateHelper;
         this.sectionDeleteHelper = sectionDeleteHelper;
+        this.moduleCreateHelper = moduleCreateHelper;
+        this.moduleUpdateHelper = moduleUpdateHelper;
     }
 
-    public void processWebhook(WebhookCommand webhookCommand) {
+    public void processWebhook(WebhookCommand webhookCommand) throws JsonProcessingException {
         WebhookMessage webhookMessage = webhookDataMapper.webhookCommandToWebhookMessage(webhookCommand);
         Organization organization = findOrganization(webhookCommand.getHost());
 
@@ -85,20 +99,21 @@ public class WebhookHelper {
                 deleteUser(webhookMessage);
                 break;
             case COURSE_SECTION_CREATED:
-                Course course=findCourse(Integer.valueOf(webhookMessage.getCourseId()));
-                createSection(webhookMessage, course);
+                createSynchronizeStateDetail(webhookMessage, organization, TypeSynchronize.SECTION);
                 break;
             case COURSE_SECTION_UPDATED:
                 Course course_section=findCourse(Integer.valueOf(webhookMessage.getCourseId()));
                 updateSection(webhookMessage, course_section);
                 break;
             case COURSE_SECTION_DELETED:
-                deleteSection(webhookMessage);
+                UUID courseId=courseRepository.findByCourseIdMoodle(Integer.valueOf(webhookMessage.getCourseId())).get().getId().getValue();
+                deleteSection(webhookMessage,courseId);
                 break;
             case COURSE_MODULE_CREATED:
-                log.info("Event not found: {}", webhookMessage);
+               createSynchronizeStateDetail(webhookMessage, organization, TypeSynchronize.MODULE);
                 break;
             case COURSE_MODULE_UPDATED:
+                updateModule(webhookMessage,organization);
                 break;
             case COURSE_MODULE_DELETED:
                 break;
@@ -135,8 +150,16 @@ public class WebhookHelper {
         sectionUpdateHelper.updateSection(webhookMessage, course);
     }
 
-    private void deleteSection(WebhookMessage webhookMessage) {
-        sectionDeleteHelper.deleteSection(webhookMessage.getObjectId());
+    private void createModule(WebhookMessage webhookMessage,Organization organization) {
+        moduleCreateHelper.createModule(webhookMessage, organization);
+    }
+
+    private void updateModule(WebhookMessage webhookMessage,Organization organization) {
+        moduleUpdateHelper.updateModule(webhookMessage,organization);
+    }
+
+    private void deleteSection(WebhookMessage webhookMessage,UUID courseId) {
+        sectionDeleteHelper.deleteSection(webhookMessage.getObjectId(),courseId);
     }
     private void enrollUserToCourse(WebhookMessage webhookMessage) {
         courseUserCreateHelper.enrollUserToCourse(webhookMessage);
@@ -173,4 +196,27 @@ public class WebhookHelper {
         }
         return course.get();
     }
+
+    private void createSynchronizeStateDetail(WebhookMessage webhookMessage, Organization organization, TypeSynchronize typeSynchronize) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.registerModule(new JavaTimeModule());
+            String webhookMessageJson = objectMapper.writeValueAsString(webhookMessage);
+            SynchronizeStateDetail synchronizeStateDetail = SynchronizeStateDetail.builder()
+                    .id(new SynchronizeStateDetailId(UUID.randomUUID()))
+                    .organization(organization)
+                    .typeSynchronize(typeSynchronize)
+                    .webhookMessage(webhookMessageJson)
+                    .status(TypeSynchronizeStatus.PENDING)
+                    .timeCreated(webhookMessage.getTimeCreated())
+                    .build();
+            // Save or process the synchronizeStateDetail as needed
+            synchronizeStateDetailRepository.save(synchronizeStateDetail);
+
+        } catch (JsonProcessingException e) {
+            log.error("Error serializing webhookMessage: {}", webhookMessage, e);
+            // Handle the exception appropriately
+        }
+    }
+
 }

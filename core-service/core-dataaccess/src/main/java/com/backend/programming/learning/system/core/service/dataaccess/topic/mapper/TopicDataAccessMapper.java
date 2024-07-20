@@ -63,7 +63,7 @@ public class TopicDataAccessMapper {
         for (TopicProgrammingLanguageEntity topicProgrammingLanguageEntity : topicEntity.getTopicProgrammingLanguages()) {
             programmingLanguages.add(
                     ProgrammingLanguage.builder()
-                            .id(new ProgrammingLanguageId(topicProgrammingLanguageEntity.getId()))
+                            .id(new ProgrammingLanguageId(topicProgrammingLanguageEntity.getProgrammingLanguage().getId()))
                             .name(topicProgrammingLanguageEntity.getProgrammingLanguage().getName())
                             .compilerApiId(topicProgrammingLanguageEntity.getProgrammingLanguage().getCompilerApiId())
                             .timeLimit(topicProgrammingLanguageEntity.getProgrammingLanguage().getTimeLimit())
