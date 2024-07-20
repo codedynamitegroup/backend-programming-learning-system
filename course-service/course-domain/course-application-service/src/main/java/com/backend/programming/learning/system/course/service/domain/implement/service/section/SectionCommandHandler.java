@@ -8,8 +8,10 @@ import com.backend.programming.learning.system.course.service.domain.dto.method.
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.section.UpdateSectionCommand;
 import com.backend.programming.learning.system.course.service.domain.dto.method.update.section.UpdateSectionResponse;
 import com.backend.programming.learning.system.course.service.domain.dto.responseentity.module.ModuleResponseEntity;
+import com.backend.programming.learning.system.course.service.domain.entity.Course;
 import com.backend.programming.learning.system.course.service.domain.entity.Module;
 import com.backend.programming.learning.system.course.service.domain.entity.Section;
+import com.backend.programming.learning.system.course.service.domain.entity.WebhookMessage;
 import com.backend.programming.learning.system.course.service.domain.implement.service.module.ModuleCommandHandler;
 import com.backend.programming.learning.system.course.service.domain.mapper.section.SectionDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SectionRepository;
@@ -57,5 +59,10 @@ public class SectionCommandHandler {
     public UpdateSectionResponse updateSection(UUID sectionId,UpdateSectionCommand updateSectionCommand) {
         Section updatedSection=sectionUpdateHelper.updateSection(sectionId,updateSectionCommand);
         return sectionDataMapper.sectionToUpdateSectionResponse(updatedSection,"Section is updated successfully");
+    }
+
+    @Transactional
+    public Boolean createSection(WebhookMessage webhookMessage, Course course) {
+        return sectionCreateHelper.createSection(webhookMessage, course);
     }
 }

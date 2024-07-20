@@ -12,7 +12,7 @@ public interface ModuleRepository {
 
     Module findById(UUID moduleId);
 
-    Optional<Module> findByCmid(Integer cmid);
+    Optional<Module> findByCmidAndSectionId(Integer cmid,UUID sectionId);
 
     List<Module> findBySectionId(UUID sectionId);
 

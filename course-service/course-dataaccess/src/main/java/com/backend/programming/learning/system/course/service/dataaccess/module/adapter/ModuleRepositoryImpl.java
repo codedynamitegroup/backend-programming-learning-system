@@ -35,11 +35,12 @@ public class ModuleRepositoryImpl implements ModuleRepository {
     }
 
     @Override
-    public Optional<Module> findByCmid(Integer cmid) {
-        return
-            moduleJpaRepository.findByCmid(cmid)
+    public Optional<Module> findByCmidAndSectionId(Integer cmid, UUID sectionId) {
+        return moduleJpaRepository.findByCmidAndSectionId(cmid, sectionId)
                 .map(moduleDataAccessMapper::moduleEntityToModule);
     }
+
+
 
     @Override
     public List<Module> findBySectionId(UUID sectionId) {

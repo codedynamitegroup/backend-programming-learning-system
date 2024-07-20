@@ -23,8 +23,13 @@ public class SectionDeleteHelper {
         this.moduleRepository = moduleRepository;
     }
 
-    public void deleteSection(String sectionId) {
-        sectionRepository.deleteBySectionMoodleId(Integer.valueOf(sectionId));
+    public void deleteSection(String sectionId,UUID courseId) {
+        Optional<Section> section = sectionRepository.findBySectionMoodleIdAndCourseId(Integer.valueOf(sectionId),courseId);
+        if (section.isEmpty()) {
+            log.error("Section is not found with id: {}", sectionId);
+            return;
+        }
+        sectionRepository.deleteBySectionMoodleIdAndCourseId(Integer.valueOf(sectionId),courseId);
         log.info("Section is deleted with id: {}", sectionId);
     }
 

@@ -2,6 +2,7 @@ package com.backend.programming.learning.system.course.service.domain.implement.
 
 import com.backend.programming.learning.system.course.service.domain.dto.method.webhook.WebhookCommand;
 import com.backend.programming.learning.system.course.service.domain.ports.input.service.webhook.WebhookApplicationService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -17,7 +18,7 @@ public class WebhookApplicationServiceImpl implements WebhookApplicationService 
     }
 
     @Override
-    public void receiveWebhook(WebhookCommand webhookCommand) {
+    public void receiveWebhook(WebhookCommand webhookCommand) throws JsonProcessingException {
         webhookCommandHandler.receiveWebhook(webhookCommand);
     }
 }

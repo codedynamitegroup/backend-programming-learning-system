@@ -2,6 +2,9 @@ package com.backend.programming.learning.system.course.service.domain.entity;
 
 import com.backend.programming.learning.system.domain.valueobject.WebhookEventName;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.ZonedDateTime;
 import java.util.Map;
 
@@ -15,7 +18,7 @@ public class WebhookMessage {
     private final String crud; // 'c'reate, 'r'ead, 'u'pdate or 'd'elete
     private final String eduLevel;
     private final String contextId;
-    private final String contextLevel; //  if it was a course, activity, course category, etc.
+    private final String contextLevel; // if it was a course, activity, course category, etc.
     private final String contextInstanceId; // Based on context level this may be course id , course module id, course category, etc.
     private final String userId; // User ID, or 0 when not logged in, or -1 when other
     private final String courseId; // This is used only for contexts at and bellow course level - this can be used to filter events by course
@@ -26,6 +29,51 @@ public class WebhookMessage {
     private final String host;
     private final String token;
     private final String extra;
+
+    @JsonCreator
+    public WebhookMessage(
+            @JsonProperty("eventName") WebhookEventName eventName,
+            @JsonProperty("component") String component,
+            @JsonProperty("action") String action,
+            @JsonProperty("target") String target,
+            @JsonProperty("objectId") String objectId,
+            @JsonProperty("objectTable") String objectTable,
+            @JsonProperty("crud") String crud,
+            @JsonProperty("eduLevel") String eduLevel,
+            @JsonProperty("contextId") String contextId,
+            @JsonProperty("contextLevel") String contextLevel,
+            @JsonProperty("contextInstanceId") String contextInstanceId,
+            @JsonProperty("userId") String userId,
+            @JsonProperty("courseId") String courseId,
+            @JsonProperty("relatedUserId") String relatedUserId,
+            @JsonProperty("anonymous") String anonymous,
+            @JsonProperty("other") Map<String, Object> other,
+            @JsonProperty("timeCreated") ZonedDateTime timeCreated,
+            @JsonProperty("host") String host,
+            @JsonProperty("token") String token,
+            @JsonProperty("extra") String extra
+    ) {
+        this.eventName = eventName;
+        this.component = component;
+        this.action = action;
+        this.target = target;
+        this.objectId = objectId;
+        this.objectTable = objectTable;
+        this.crud = crud;
+        this.eduLevel = eduLevel;
+        this.contextId = contextId;
+        this.contextLevel = contextLevel;
+        this.contextInstanceId = contextInstanceId;
+        this.userId = userId;
+        this.courseId = courseId;
+        this.relatedUserId = relatedUserId;
+        this.anonymous = anonymous;
+        this.other = other;
+        this.timeCreated = timeCreated;
+        this.host = host;
+        this.token = token;
+        this.extra = extra;
+    }
 
     private WebhookMessage(Builder builder) {
         eventName = builder.eventName;
@@ -133,7 +181,6 @@ public class WebhookMessage {
     public String getExtra() {
         return extra;
     }
-
 
     public static final class Builder {
         private WebhookEventName eventName;

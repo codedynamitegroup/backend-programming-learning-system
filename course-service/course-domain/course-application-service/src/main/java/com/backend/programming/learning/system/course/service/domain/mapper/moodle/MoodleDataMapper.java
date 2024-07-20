@@ -148,6 +148,7 @@ public class MoodleDataMapper {
                 .time_close(Instant.ofEpochSecond(assignmentModel.getDuedate()).atZone(ZoneId.of("UTC")))
                 .time_limit(Instant.ofEpochSecond(assignmentModel.getTimelimit()).atZone(ZoneId.of("UTC")))
                 .visible(false)
+                .createdAt(ZonedDateTime.now())
                 .build();
     }
 
@@ -218,7 +219,7 @@ public class MoodleDataMapper {
                 .build();
     }
 
-    public Module createModule(Section section, ModuleModel module) {
+    public Module createModule(Section section, ModuleModel module,Assignment assignment) {
         ZonedDateTime timeOpen=null;
         ZonedDateTime timeClose=null;
         if(module.getDates().size()!=0)
@@ -236,6 +237,7 @@ public class MoodleDataMapper {
                 .id(new ModuleId(UUID.randomUUID()))
                 .cmid(Integer.valueOf(module.getId()))
                 .section(section)
+                .assignment(assignment)
                 .typeModule(TypeModule.fromLabel(module.getModplural()))
                 .build();
 
@@ -364,6 +366,7 @@ public class MoodleDataMapper {
         return Course.builder()
                 .id(course.getId())
                 .name(courseModel.getFullname())
+                .courseIdMoodle(Integer.valueOf(courseModel.getId()))
                 .courseType(course.getCourseType())
                 .organization(organization)
                 .visible(courseModel.getVisible().equals("1"))

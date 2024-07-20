@@ -82,6 +82,13 @@ CREATE TYPE synchronize_status AS ENUM ('PENDING','PROCESSING', 'SUCCESS', 'FAIL
 
 DROP TYPE IF EXISTS STEP;
 CREATE TYPE step AS ENUM ('USER','COURSE','RESOURCE');
+
+DROP TYPE IF EXISTS type_sync;
+CREATE TYPE type_sync AS ENUM ('SECTION','MODULE');
+
+DROP TYPE IF EXISTS type_sync_status;
+CREATE TYPE type_sync_status AS ENUM ('PENDING', 'SUCCESS', 'FAILED');
+
 DROP TABLE IF EXISTS "public".organization CASCADE;
 CREATE TABLE "public".organization
 (
@@ -800,6 +807,22 @@ CREATE TABLE "public".synchronize_state
     time_created TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT synchronize_state_pkey PRIMARY KEY (id),
     CONSTRAINT synchronize_state_org_id_fkey FOREIGN KEY (org_id)
+        REFERENCES "public".organization (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS "public".synchronize_state_detail CASCADE;
+CREATE TABLE "public".synchronize_state_detail
+(
+    id          uuid DEFAULT gen_random_uuid() NOT NULL,
+    webhook_message text,
+    org_id uuid NOT NULL,
+    type type_sync,
+    status type_sync_status,
+    time_created TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT synchronize_state_detail_pkey PRIMARY KEY (id),
+    CONSTRAINT synchronize_state_detail_org_id_fkey FOREIGN KEY (org_id)
         REFERENCES "public".organization (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE

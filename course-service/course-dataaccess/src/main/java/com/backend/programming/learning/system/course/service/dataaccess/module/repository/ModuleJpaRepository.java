@@ -16,7 +16,7 @@ public interface ModuleJpaRepository extends JpaRepository<ModuleEntity, UUID>{
 
     List<ModuleEntity> findBySectionId(UUID sectionId);
 
-    Optional<ModuleEntity> findByCmid(Integer cmid);
+    Optional<ModuleEntity> findByCmidAndSectionId(Integer cmid,UUID sectionId);
 
     Optional<ModuleEntity> findByExamId(UUID examId);
 }

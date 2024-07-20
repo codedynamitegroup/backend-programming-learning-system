@@ -36,11 +36,13 @@ public class SectionRepositoryImpl implements SectionRepository {
     }
 
     @Override
-    public Optional<Section> findBySectionMoodleId(Integer sectionMoodleId) {
+    public Optional<Section> findBySectionMoodleIdAndCourseId(Integer sectionMoodleId, UUID courseId) {
         return
-            sectionJpaRepository.findBySectionMoodleId(sectionMoodleId)
+            sectionJpaRepository.findBySectionMoodleIdAndCourseId(sectionMoodleId,courseId)
                 .map(sectionDataAccessMapper::sectionEntityToSection);
     }
+
+
 
 
     @Override
@@ -55,8 +57,10 @@ public class SectionRepositoryImpl implements SectionRepository {
     }
 
     @Override
-    public void deleteBySectionMoodleId(Integer sectionMoodleId) {
-        sectionJpaRepository.findBySectionMoodleId(sectionMoodleId)
+    public void deleteBySectionMoodleIdAndCourseId(Integer sectionMoodleId, UUID courseId) {
+
+        sectionJpaRepository.findBySectionMoodleIdAndCourseId(sectionMoodleId,courseId)
             .ifPresent(sectionJpaRepository::delete);
     }
+
 }
