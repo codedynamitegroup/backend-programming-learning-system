@@ -17,9 +17,7 @@ import com.backend.programming.learning.system.course.service.domain.mapper.assi
 import com.backend.programming.learning.system.course.service.domain.mapper.exam.ExamDataMapper;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.AssignmentRepository;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamRepository;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.SectionRepository;
-import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ModuleId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.TypeModule;
@@ -35,14 +33,12 @@ import java.util.Optional;
 public class ModuleDataMapper {
    private final SectionRepository sectionRepository;
    private final ExamRepository examRepository;
-
    private final AssignmentRepository assignmentRepository;
    private final ExamDataMapper examDataMapper;
    private final AssignmentDataMapper assignmentDataMapper;
 
-    public ModuleDataMapper(SectionRepository sectionRepository, AssignmentRepository assignmentRepository, ExamRepository examRepository, ExamDataMapper examDataMapper, AssignmentDataMapper assignmentDataMapper) {
+    public ModuleDataMapper(SectionRepository sectionRepository, ExamRepository examRepository, ExamDataMapper examDataMapper, AssignmentDataMapper assignmentDataMapper) {
         this.sectionRepository = sectionRepository;
-        this.assignmentRepository = assignmentRepository;
         this.examRepository = examRepository;
         this.examDataMapper = examDataMapper;
         this.assignmentDataMapper = assignmentDataMapper;
