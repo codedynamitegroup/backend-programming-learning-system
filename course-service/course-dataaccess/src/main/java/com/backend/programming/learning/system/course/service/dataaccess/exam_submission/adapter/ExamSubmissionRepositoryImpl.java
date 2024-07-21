@@ -20,6 +20,7 @@ import com.backend.programming.learning.system.course.service.domain.exception.E
 import com.backend.programming.learning.system.course.service.domain.exception.UserNotFoundException;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.ExamSubmissionRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.ExamId;
+import com.backend.programming.learning.system.course.service.domain.valueobject.ExamSubmissionId;
 import com.backend.programming.learning.system.course.service.domain.valueobject.Status;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -146,5 +147,10 @@ public class ExamSubmissionRepositoryImpl implements ExamSubmissionRepository {
             }
         });
         return response;
+    }
+
+    @Override
+    public void updateExamSubmissionScore(ExamSubmissionId id, Float grade) {
+        examSubmissionJpaRepository.updateExamSubmissionScore(id.getValue(), grade);
     }
 }

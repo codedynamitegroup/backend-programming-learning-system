@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.course.service.domain.outbox.sch
 import com.backend.programming.learning.system.course.service.domain.exception.CourseDomainException;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.organization.OrganizationEventPayload;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.organization.OrganizationOutboxMessage;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.OrganizationOutboxRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.outbox.OrganizationOutboxRepository;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;

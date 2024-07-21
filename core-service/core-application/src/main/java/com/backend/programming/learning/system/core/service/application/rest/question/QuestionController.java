@@ -182,4 +182,17 @@ public class QuestionController {
 
         return ResponseEntity.ok(questionResponseEntity);
     }
+
+    @PatchMapping("/update/category")
+    @Operation(summary = "Update category of questions.")
+    public ResponseEntity<Void> updateCategoryOfQuestions(
+            @RequestBody QuestionBankCommand questionBankCommand
+    ) {
+        log.info("Updating category of questions");
+        questionApplicationService.updateCategoryOfQuestions(questionBankCommand);
+        log.info("Category of questions updated");
+
+        return ResponseEntity.ok().build();
+    }
+
 }

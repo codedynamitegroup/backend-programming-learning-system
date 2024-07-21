@@ -13,4 +13,6 @@ public interface CodeSubmissionTestCaseJpaRepository extends JpaRepository<CodeS
     Optional<CodeSubmissionTestCaseEntity> findFirstByJudgeToken(String judgeToken);
     List<CodeSubmissionTestCaseEntity> findByCodeSubmissionId(UUID codeSubmission_id);
     Optional<CodeSubmissionTestCaseEntity> findFirstByCodeSubmissionIdAndStatusDescriptionNot(UUID codeSubmission, String accepted);
+
+    List<CodeSubmissionTestCaseEntity> findAllByCodeSubmissionIdAndStatusDescriptionNot(UUID value, String acceptedStatusDescription);
 }

@@ -6,7 +6,7 @@ import com.backend.programming.learning.system.course.service.domain.exception.C
 import com.backend.programming.learning.system.course.service.domain.outbox.model.calendarevent.CalendarEventUpdateEventPayload;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.calendarevent.CalendarEventUpdateOutboxMessage;
 import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CalendarEventRepository;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.CalendarEventUpdateOutboxRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.outbox.CalendarEventUpdateOutboxRepository;
 import com.backend.programming.learning.system.course.service.domain.valueobject.UpdateState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.fasterxml.jackson.core.JsonProcessingException;

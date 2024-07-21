@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.messaging.listener.kafka;
+package com.backend.programming.learning.system.course.service.messaging.listener.kafka.question;
 
 import com.backend.programming.learning.system.course.service.domain.exception.CourseApplicationServiceException;
 import com.backend.programming.learning.system.course.service.domain.ports.input.message.listener.question.QuestionMessageListener;

@@ -6,6 +6,7 @@ import com.backend.programming.learning.system.course.service.domain.ports.input
 import com.backend.programming.learning.system.course.service.messaging.mapper.CodeQuestionsMessagingDataMapper;
 import com.backend.programming.learning.system.kafka.code.assessment.code.question.avro.model.CodeQuestionUpdateRequestAvroModel;
 import com.backend.programming.learning.system.kafka.consumer.KafkaConsumer;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.postgresql.util.PSQLState;
 import org.springframework.dao.DataAccessException;
@@ -20,15 +21,12 @@ import java.util.List;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class CodeQuestionsUpdateRequestMessageKafkaListener
     implements KafkaConsumer<CodeQuestionUpdateRequestAvroModel>
 {
     private final CodeQuestionsMessagingDataMapper dataMapper;
     private final CodeQuestionUpdateRequestMessageListener listener;
-    public CodeQuestionsUpdateRequestMessageKafkaListener(CodeQuestionsMessagingDataMapper dataMapper, CodeQuestionUpdateRequestMessageListener listener) {
-        this.dataMapper = dataMapper;
-        this.listener = listener;
-    }
 
     @Override
     @KafkaListener(id = "${kafka-consumer-config.code-question-update-consumer-group-id}",

@@ -44,6 +44,10 @@ public class GetCodeSubmissionResponseItem {
 
     String description;
 
+    Integer numOfTestCase;
+    @Setter
+    Integer numOfTestCaseFailed;
+
 //    @Setter
 //    String headCode;
 //

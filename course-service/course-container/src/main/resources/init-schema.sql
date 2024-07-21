@@ -758,6 +758,35 @@ CREATE UNIQUE INDEX "organization_outbox_saga_id"
     ON "public".organization_outbox
     (type, saga_id, copy_state, outbox_status);
 
+CREATE TABLE "public".code_submission_sender_outbox
+(
+    id uuid NOT NULL,
+    saga_id uuid NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    processed_at TIMESTAMP WITH TIME ZONE,
+    payload jsonb NOT NULL,
+    outbox_status outbox_status NOT NULL,
+    send_status boolean NOT NULL,
+    version integer NOT NULL,
+    CONSTRAINT csso_pk PRIMARY KEY (id)
+);
+
+CREATE INDEX "code_submission_sender_outbox_status"
+    ON "public".code_submission_sender_outbox
+    (outbox_status);
+
+CREATE UNIQUE INDEX "code_submission_sender_saga_id"
+    ON "public".code_submission_sender_outbox
+    (saga_id, send_status, outbox_status);
+
+CREATE TABLE "public".code_submission_result_outbox
+(
+    id uuid NOT NULL,
+    saga_id uuid NOT NULL,
+    version integer NOT NULL,
+    CONSTRAINT csro_pk PRIMARY KEY (id)
+);
+
 DROP TABLE IF EXISTS "public".rubric_user CASCADE;
 CREATE TABLE "public".rubric_user
 (

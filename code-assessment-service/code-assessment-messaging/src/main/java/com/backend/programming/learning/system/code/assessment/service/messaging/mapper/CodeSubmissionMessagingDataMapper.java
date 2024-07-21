@@ -1,8 +1,10 @@
 package com.backend.programming.learning.system.code.assessment.service.messaging.mapper;
 
+import com.backend.programming.learning.system.code.assessment.service.domain.dto.message.code_submission.CodeSubmissionReceiver;
 import com.backend.programming.learning.system.code.assessment.service.domain.outbox.model.code_submission_update_outbox.CodeSubmissionUpdatePayload;
 import com.backend.programming.learning.system.kafka.code.assessment.code.submission.avro.model.CodeSubmissionUpdateRequestAvroModel;
 import com.backend.programming.learning.system.kafka.code.assessment.code.submission.avro.model.CopyState;
+import com.backend.programming.learning.system.kafka.course.code_submission_sender.avro_model.CodeSubmissionSenderRequestAvroModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +30,16 @@ public class CodeSubmissionMessagingDataMapper {
                 .setCreatedAt(payload.getCreatedAt().toInstant())
                 .setContestId(payload.getContestId())
                 .setCerCourseId(payload.getCerCourseId())
+                .setResult(payload.getResult())
+                .build();
+    }
+
+    public CodeSubmissionReceiver codeSubmissionSenderRequestAvroModelToCodeSubmissionReceiver(CodeSubmissionSenderRequestAvroModel avroModel) {
+        return CodeSubmissionReceiver.builder()
+                .submissionId(avroModel.getSubmissionId())
+                .userId(avroModel.getUserId())
+                .sagaId(avroModel.getSagaId())
+                .content(avroModel.getContent())
                 .build();
     }
 }

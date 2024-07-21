@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.course.service.domain.outbox.sch
 import com.backend.programming.learning.system.course.service.domain.exception.CourseDomainException;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.question.QuestionEventPayload;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.question.QuestionOutboxMessage;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.QuestionOutboxRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.outbox.QuestionOutboxRepository;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
 import com.fasterxml.jackson.databind.ObjectMapper;

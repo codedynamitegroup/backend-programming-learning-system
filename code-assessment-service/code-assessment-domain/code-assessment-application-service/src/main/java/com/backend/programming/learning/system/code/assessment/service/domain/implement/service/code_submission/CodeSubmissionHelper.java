@@ -23,6 +23,9 @@ import com.backend.programming.learning.system.domain.valueobject.CodeQuestionId
 import com.backend.programming.learning.system.domain.valueobject.CodeSubmissionId;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
@@ -40,6 +43,7 @@ import java.util.UUID;
 
 @Component
 @Slf4j
+@RequiredArgsConstructor
 public class CodeSubmissionHelper {
     private final CodeAssessmentDomainService codeAssessmentDomainService;
     private final CodeSubmissionDataMapper codeSubmissionDataMapper;
@@ -51,18 +55,7 @@ public class CodeSubmissionHelper {
     private final ValidateHelper validateHelper;
     private final CodeSubmissionUpdateOutboxHelper codeSubmissionUpdateOutboxHelper;
     private final GeneralSagaHelper generalSagaHelper;
-
-    public CodeSubmissionHelper(CodeAssessmentDomainService codeAssessmentDomainService, CodeSubmissionDataMapper codeSubmissionDataMapper, CodeSubmissionRepository codeSubmissionRepository, CodeSubmissionTestCaseRepository codeSubmissionTestCaseRepository, GenericHelper genericHelper, CodeAssessmentServiceConfigData codeAssessmentServiceConfigData, ValidateHelper validateHelper, CodeSubmissionUpdateOutboxHelper codeSubmissionUpdateOutboxHelper, GeneralSagaHelper generalSagaHelper) {
-        this.codeAssessmentDomainService = codeAssessmentDomainService;
-        this.codeSubmissionDataMapper = codeSubmissionDataMapper;
-        this.codeSubmissionRepository = codeSubmissionRepository;
-        this.codeSubmissionTestCaseRepository = codeSubmissionTestCaseRepository;
-        this.genericHelper = genericHelper;
-        this.codeAssessmentServiceConfigData = codeAssessmentServiceConfigData;
-        this.validateHelper = validateHelper;
-        this.codeSubmissionUpdateOutboxHelper = codeSubmissionUpdateOutboxHelper;
-        this.generalSagaHelper = generalSagaHelper;
-    }
+    private final ObjectMapper objectMapper;
 
     @Transactional
     public CodeSubmissionUpdatedEvent createCodeSubmission(CreateCodeSubmissionCommand command){
@@ -118,6 +111,7 @@ public class CodeSubmissionHelper {
         return cstc.stream().noneMatch(item-> item.getStatusDescription() == null);
     }
 
+
     @Transactional(isolation = Isolation.READ_COMMITTED)
     public boolean updateCodeSubmissionWhenAllTestCaseAssessed(CodeSubmissionId id) {
         CodeSubmission codeSubmission = validateHelper.validateCodeSubmission(id);
@@ -131,9 +125,23 @@ public class CodeSubmissionHelper {
 
             CodeSubmissionUpdatedEvent event = new CodeSubmissionUpdatedEvent(codeSubmission, ZonedDateTime.now(ZoneId.of(DomainConstants.UTC)));
 
+            GetCodeSubmissionResponseItem item = codeSubmissionDataMapper.codeSubmissionToGetCodeSubmissionResponseItem(codeSubmission);
+            CodeSubmissionTestCase cstcFailed = findFirstNonAcceptedTestCase(codeSubmission.getId());
+            Integer countNonAcceptedTestCase = countNonAcceptedTestCase(codeSubmission.getId());
+            item.setNumOfTestCaseFailed(countNonAcceptedTestCase);
+            item.setFirstFailTestCase(codeSubmissionDataMapper.codeSubmissionTestCaseToFirstFailTestCase(cstcFailed));
+            item.setSourceCode(null);
+
+            String resultContent = null;
+            try {
+                resultContent = objectMapper.writeValueAsString(item);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+
             codeSubmissionUpdateOutboxHelper.saveCodeSubmissionUpdateOutboxMessage(
                     codeSubmissionDataMapper.codeSubmissionUpdatedEventToCodeSubmissionUpdatePayload(
-                            event, null, null, CopyState.UPDATING
+                            event, null, null, CopyState.UPDATING, resultContent
                     ),
                     event.getCodeSubmission().getCopyState(),
                     generalSagaHelper.copyStateToSagaStatus(CopyState.UPDATING),
@@ -193,6 +201,12 @@ public class CodeSubmissionHelper {
         Optional<CodeSubmissionTestCase> cstcOpt = codeSubmissionTestCaseRepository.findFirstNonAcceptedByCodeSubmissionId(codeSubmissionId);
         return cstcOpt.orElse(null);
     }
+    @Transactional
+    public Integer countNonAcceptedTestCase(CodeSubmissionId codeSubmissionId) {
+        Integer cstcOpt = codeSubmissionTestCaseRepository.countNonAcceptedByCodeSubmissionId(codeSubmissionId);
+        if(cstcOpt == null) cstcOpt = 0;
+        return cstcOpt;
+    }
 
     @Transactional
     public GetMemoryAndTimeRankingResponse getMemoryAndRunTimeRanking(GetMemoryAndTimeRankingCommand command) {
@@ -218,9 +232,19 @@ public class CodeSubmissionHelper {
 
     }
 
+    @Transactional
     public void setUnavailable(CodeSubmission codeSubmission) {
         codeSubmission.setGradingStatus(GradingStatus.GRADING_SYSTEM_UNAVAILABLE);
         codeSubmissionRepository.save(codeSubmission);
+        codeSubmissionUpdateOutboxHelper.saveCodeSubmissionUpdateOutboxMessage(
+                codeSubmissionDataMapper.codeSubmissionUpdatedEventToCodeSubmissionUpdatePayload(
+                        codeSubmission, null, null, CopyState.UPDATING, null
+                ),
+                CopyState.UPDATING,
+                generalSagaHelper.copyStateToSagaStatus(CopyState.UPDATING),
+                OutboxStatus.STARTED,
+                UUID.randomUUID()
+        );
     }
 
     public String executeCodeWithTestCase(ExecuteCodeWithTestCaseCommand command) {

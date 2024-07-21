@@ -79,6 +79,10 @@
       }
     },
     {
+      "name": "result",
+      "type": ["string", "null"]
+    },
+    {
       "name": "copyState",
       "type": {
         "type": "enum",

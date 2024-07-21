@@ -1,6 +1,8 @@
 package com.backend.programming.learning.system.course.service.domain.dto.method.create.question_bank_category;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
+
 import java.util.UUID;
 
 /**
@@ -9,6 +11,7 @@ import java.util.UUID;
  * Date 4/22/2024 - 1:15 AM
  * Description: ...
  */
+@Builder
 public record CreateQuestionBankCategoryCommand(
         UUID organizationId,
         @NotNull(message = "Name is required")

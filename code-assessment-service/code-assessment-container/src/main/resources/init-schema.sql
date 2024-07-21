@@ -451,6 +451,15 @@ CREATE INDEX "question_outbox_saga_id"
     ON "public".question_outbox
     (type, saga_id);
 
+DROP TABLE IF EXISTS "public".code_submission_sender_outbox CASCADE;
+CREATE TABLE  "public".code_submission_sender_outbox
+(
+    id uuid NOT NULL,
+    saga_id uuid NOT NULL,
+    version integer NOT NULL,
+    CONSTRAINT csso_fk PRIMARY KEY (id)
+);
+
 --postgres function sucks
 CREATE OR REPLACE FUNCTION update_code_question_fts_document()
 RETURNS TRIGGER AS '

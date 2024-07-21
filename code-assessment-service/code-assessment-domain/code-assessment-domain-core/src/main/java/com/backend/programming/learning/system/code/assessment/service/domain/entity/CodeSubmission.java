@@ -198,7 +198,8 @@ public class CodeSubmission extends AggregateRoot<CodeSubmissionId> {
                 testCases.stream().map(this::initiateCodeSubmissionTestCase)
                         .toList();
 
-        setId(new CodeSubmissionId(UUID.randomUUID()));
+        if(getId() == null)
+            setId(new CodeSubmissionId(UUID.randomUUID()));
         gradingStatus = GradingStatus.GRADING;
         numOfTestCase = codeSubmissionTestCaseList.size();
         numOfTestCaseGraded = 0;

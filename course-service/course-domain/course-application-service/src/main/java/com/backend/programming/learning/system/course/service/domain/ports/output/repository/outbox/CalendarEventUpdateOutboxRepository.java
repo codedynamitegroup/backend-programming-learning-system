@@ -1,4 +1,4 @@
-package com.backend.programming.learning.system.course.service.domain.ports.output.repository;
+package com.backend.programming.learning.system.course.service.domain.ports.output.repository.outbox;
 
 import com.backend.programming.learning.system.course.service.domain.outbox.model.calendarevent.CalendarEventUpdateOutboxMessage;
 import com.backend.programming.learning.system.course.service.domain.valueobject.UpdateState;

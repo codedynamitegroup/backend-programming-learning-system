@@ -36,4 +36,6 @@ public class CodeSubmissionUpdatePayload {
     private final UUID cerCourseId;
     @JsonProperty
     private final UUID contestId;
+    @JsonProperty
+    private final String result;
 }

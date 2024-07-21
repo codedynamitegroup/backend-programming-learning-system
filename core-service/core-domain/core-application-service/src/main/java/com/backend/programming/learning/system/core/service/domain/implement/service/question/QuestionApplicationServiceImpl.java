@@ -73,4 +73,9 @@ public class QuestionApplicationServiceImpl implements QuestionApplicationServic
     public QueryAllQuestionWithPaginationResponse queryAllQuestionWithPagination(QueryAllQuestionPaginationCommand queryAllQuestionPaginationCommand) {
         return questionQueryCommandHandler.queryAllQuestionWithPagination(queryAllQuestionPaginationCommand);
     }
+
+    @Override
+    public void updateCategoryOfQuestions(QuestionBankCommand questionBankCommand) {
+        questionQueryCommandHandler.updateCategoryOfQuestions(questionBankCommand);
+    }
 }

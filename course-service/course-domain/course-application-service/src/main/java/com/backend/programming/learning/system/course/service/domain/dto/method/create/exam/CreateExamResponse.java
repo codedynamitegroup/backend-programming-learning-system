@@ -32,6 +32,7 @@ public record CreateExamResponse(
         ZonedDateTime createdAt,
         ZonedDateTime updatedAt,
         Integer maxPage,
+        UUID categoryId,
         String message
 ) {
 }

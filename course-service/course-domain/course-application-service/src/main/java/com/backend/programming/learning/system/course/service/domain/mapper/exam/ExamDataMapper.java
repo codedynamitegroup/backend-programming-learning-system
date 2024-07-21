@@ -8,6 +8,7 @@ import com.backend.programming.learning.system.course.service.domain.dto.respons
 import com.backend.programming.learning.system.course.service.domain.entity.Course;
 import com.backend.programming.learning.system.course.service.domain.entity.Exam;
 import com.backend.programming.learning.system.course.service.domain.entity.Module;
+import com.backend.programming.learning.system.course.service.domain.entity.QuestionBankCategory;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
@@ -43,7 +44,7 @@ public class ExamDataMapper {
                 .build();
     }
 
-    public CreateExamResponse examToCreateExamResponse(Exam examCreated, String message) {
+    public CreateExamResponse examToCreateExamResponse(Exam examCreated, QuestionBankCategory category, String message) {
         return CreateExamResponse.builder()
                 .id(examCreated.getId().getValue())
                 .courseId(examCreated.getCourse().getId())
@@ -62,6 +63,7 @@ public class ExamDataMapper {
                 .createdAt(examCreated.getCreatedAt())
                 .updatedAt(examCreated.getUpdatedAt())
                 .maxPage(examCreated.getMaxPage())
+                .categoryId(category.getId().getValue())
                 .message(message)
                 .build();
     }

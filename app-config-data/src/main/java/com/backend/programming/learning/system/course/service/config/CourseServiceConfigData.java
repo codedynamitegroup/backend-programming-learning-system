@@ -24,4 +24,6 @@ public class CourseServiceConfigData {
 
     private String geminiApiKey;
     private String geminiApiUrl;
+
+    private String codeSubmissionSenderRequestTopicName;
 }

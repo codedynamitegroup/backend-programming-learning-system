@@ -3,7 +3,7 @@ package com.backend.programming.learning.system.course.service.domain.outbox.sch
 import com.backend.programming.learning.system.course.service.domain.exception.CourseDomainException;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.user.UserEventPayload;
 import com.backend.programming.learning.system.course.service.domain.outbox.model.user.UserOutboxMessage;
-import com.backend.programming.learning.system.course.service.domain.ports.output.repository.UserOutboxRepository;
+import com.backend.programming.learning.system.course.service.domain.ports.output.repository.outbox.UserOutboxRepository;
 import com.backend.programming.learning.system.domain.DomainConstants;
 import com.backend.programming.learning.system.domain.valueobject.CopyState;
 import com.backend.programming.learning.system.outbox.OutboxStatus;
@@ -19,8 +19,6 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
-import static com.backend.programming.learning.system.saga.user.SagaConstants.AUTH_TO_ANY_SERVICES_USER_SAGA_NAME;
 
 @Slf4j
 @Component

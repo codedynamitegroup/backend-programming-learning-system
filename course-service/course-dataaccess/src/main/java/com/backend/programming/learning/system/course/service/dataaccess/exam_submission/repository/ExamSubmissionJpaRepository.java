@@ -4,7 +4,9 @@ import com.backend.programming.learning.system.course.service.dataaccess.exam.en
 import com.backend.programming.learning.system.course.service.dataaccess.exam_submission.entity.ExamSubmissionEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -49,4 +51,8 @@ public interface ExamSubmissionJpaRepository extends JpaRepository<ExamSubmissio
                 AND UPPER(es.exam.name) LIKE %:searchName%
             """)
     List<ExamSubmissionEntity> findByCourseIdAndUserId(UUID courseId, UUID userId, String searchName);
+
+    @Modifying
+    @Query("update ExamSubmissionEntity ese set ese.score = ese.score + :grade where ese.id = :id")
+    void updateExamSubmissionScore(@Param("id") UUID examSubmissionId,@Param("grade") Float grade);
 }

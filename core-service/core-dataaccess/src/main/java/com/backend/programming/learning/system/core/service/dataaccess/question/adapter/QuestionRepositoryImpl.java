@@ -240,4 +240,12 @@ public class QuestionRepositoryImpl implements QuestionRepository {
         return questionJpaRepository.findAllQuestionWithPagination(qtype, searchName, paging)
                 .map(questionDataAccessMapper::questionEntityToQuestion);
     }
+
+    @Override
+    public List<Question> findQuestionsByIds(List<UUID> uuids) {
+        return questionJpaRepository.findAllById(uuids)
+                .stream()
+                .map(questionDataAccessMapper::questionEntityToQuestion)
+                .toList();
+    }
 }
