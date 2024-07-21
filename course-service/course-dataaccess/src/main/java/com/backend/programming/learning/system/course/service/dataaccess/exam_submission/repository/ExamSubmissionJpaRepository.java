@@ -3,6 +3,7 @@ package com.backend.programming.learning.system.course.service.dataaccess.exam_s
 import com.backend.programming.learning.system.course.service.dataaccess.exam.entity.ExamEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.exam_submission.entity.ExamSubmissionEntity;
 import com.backend.programming.learning.system.course.service.dataaccess.user.entity.UserEntity;
+import io.micrometer.observation.ObservationFilter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -32,6 +33,7 @@ public interface ExamSubmissionJpaRepository extends JpaRepository<ExamSubmissio
             SELECT es
             FROM ExamSubmissionEntity es
             WHERE es.exam.id = :examId AND es.user.id = :userId
+            ORDER BY es.submitCount
             """)
     List<ExamSubmissionEntity> findByExamIdAndUserId(UUID examId, UUID userId);
 
@@ -55,4 +57,12 @@ public interface ExamSubmissionJpaRepository extends JpaRepository<ExamSubmissio
     @Modifying
     @Query("update ExamSubmissionEntity ese set ese.score = ese.score + :grade where ese.id = :id")
     void updateExamSubmissionScore(@Param("id") UUID examSubmissionId,@Param("grade") Float grade);
+
+    @Query(value = """
+            SELECT * FROM exam_submission
+            WHERE exam_id = :examId AND user_id = :userId
+            ORDER BY submit_count
+            LIMIT 1
+            """, nativeQuery = true)
+    Optional<ExamSubmissionEntity> findFirstExamSubmission(UUID examId, UUID userId);
 }

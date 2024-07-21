@@ -124,6 +124,8 @@ public class ExamSubmissionRepositoryImpl implements ExamSubmissionRepository {
                 .map(examSubmissionDataAccessMapper::examSubmissionEntityToExamSubmission);
     }
 
+
+
     @Override
     public List<ExamSubmission> findByCourseIdAndUserId(UUID courseId, UUID userId, String searchName) {
         List<ExamEntity> examEntities = examJpaRepository.findAllByCourseId(courseId);
@@ -152,5 +154,11 @@ public class ExamSubmissionRepositoryImpl implements ExamSubmissionRepository {
     @Override
     public void updateExamSubmissionScore(ExamSubmissionId id, Float grade) {
         examSubmissionJpaRepository.updateExamSubmissionScore(id.getValue(), grade);
+    }
+
+    @Override
+    public Optional<ExamSubmission> findFirstExamSubmissionByExamIdAndUserId(UUID examId, UUID userId) {
+        return examSubmissionJpaRepository.findFirstExamSubmission(examId, userId)
+                .map(examSubmissionDataAccessMapper::examSubmissionEntityToExamSubmission);
     }
 }

@@ -23,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -82,35 +83,51 @@ public class ExamQueryHelper {
         Page<CourseUser> courseUsers = courseUserRepository.findByExamId(examId, queryGradeCommand);
         List<QueryGradeResponse> queryGradeResponses = new ArrayList<>();
         courseUsers.forEach(courseUser -> {
-            List<QuestionSubmission> questionSubmissions = questionSubmissionRepository
-                    .findByExamIdAndUserId(examId, courseUser.getUser().getId());
-            List<ExamQuestion> examQuestions = examQuestionRepository
-                    .findByExamId(examId);
             Exam exam = examRepository.findBy(examId);
-            ExamSubmission examSubmission = examSubmissionRepository.findByExamAndUser(exam, courseUser.getUser());
-
             Double totalGrade = Double.valueOf(exam.getMaxScore());
-            Double mark = questionSubmissions.stream()
-                    .filter(questionSubmission -> Objects.nonNull(questionSubmission.getGrade()))
-                    .mapToDouble(QuestionSubmission::getGrade)
-                    .sum();
-            Double totalMark = examQuestions.stream()
-                    .filter(examQuestion -> examQuestion.getQuestion() != null)
-                    .mapToDouble(examQuestion -> examQuestion.getQuestion().getDefaultMark())
-                    .sum();
+            Double grade = 0.0;
+            List<ExamSubmission> examSubmissions = examSubmissionRepository
+                    .findAllByExamIdAndUserId(examId.getValue(), courseUser.getUser().getId().getValue());
+            if (exam.getGradeMethod().equals("QUIZ_GRADEHIGHEST")){
+                grade = examSubmissions.stream()
+                        .mapToDouble(ExamSubmission::getScore)
+                        .max()
+                        .orElse(0.0);
+            }
+            if (exam.getGradeMethod().equals("QUIZ_GRADEAVERAGE")){
+                grade = examSubmissions.stream()
+                        .mapToDouble(ExamSubmission::getScore)
+                        .average()
+                        .orElse(0.0);
+            }
+            if (exam.getGradeMethod().equals("QUIZ_ATTEMPTFIRST")){
+                grade = examSubmissions.stream()
+                        .mapToDouble(ExamSubmission::getScore)
+                        .findFirst()
+                        .orElse(0.0);
+            }
+            if (exam.getGradeMethod().equals("QUIZ_ATTEMPTLAST")){
+                grade = examSubmissions.stream()
+                        .mapToDouble(ExamSubmission::getScore)
+                        .reduce((first, second) -> second)
+                        .orElse(0.0);
+            }
 
-            Double grade = Math.round((mark / totalMark) * totalGrade * 100.0) / 100.0;
+            ZonedDateTime lastSubmitAt = examSubmissions.stream()
+                    .map(ExamSubmission::getSubmitTime)
+                    .reduce((first, second) -> second)
+                    .orElse(null);
 
             QueryGradeResponse queryGradeResponse = QueryGradeResponse.builder()
                     .userId(courseUser.getUser().getId().getValue())
-                    .submissionId(Objects.isNull(examSubmission.getId()) ? null : examSubmission.getId().getValue())
+                    .submissionId(examSubmissions.isEmpty() ? null : examSubmissions.get(0).getId().getValue())
                     .firstName(courseUser.getUser().getFirstName())
                     .lastName(courseUser.getUser().getLastName())
                     .email(courseUser.getUser().getEmail())
-                    .lastSubmitAt(examSubmission.getSubmitTime())
-                    .lastMarkAt(examSubmission.getSubmitTime())
-                    .status(Objects.isNull(examSubmission.status()) ? "NOT_SUBMITTED" : "SUBMITTED")
-                    .score(grade)
+                    .lastSubmitAt(lastSubmitAt)
+                    .lastMarkAt(null)
+                    .status(examSubmissions.isEmpty() ? "NOT_SUBMITTED" : "SUBMITTED")
+                    .score(Math.round(grade * 100.0) / 100.0)
                     .maxScore(totalGrade)
                     .build();
             queryGradeResponses.add(queryGradeResponse);
